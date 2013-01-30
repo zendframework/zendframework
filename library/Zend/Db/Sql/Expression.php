@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql;
@@ -122,6 +121,13 @@ class Expression implements ExpressionInterface
 
         $types = array();
         $parametersCount = count($parameters);
+
+        if ($parametersCount == 0 && strpos($this->expression, self::PLACEHOLDER) !== false) {
+            // if there are no parameters, but there is a placeholder
+            $parametersCount = substr_count($this->expression, self::PLACEHOLDER);
+            $parameters = array_fill(0, $parametersCount, null);
+        }
+
         for ($i = 0; $i < $parametersCount; $i++) {
             $types[$i] = (isset($this->types[$i]) && ($this->types[$i] == self::TYPE_IDENTIFIER || $this->types[$i] == self::TYPE_LITERAL))
                 ? $this->types[$i] : self::TYPE_VALUE;
@@ -144,5 +150,4 @@ class Expression implements ExpressionInterface
             $types
         ));
     }
-
 }

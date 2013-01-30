@@ -5,15 +5,13 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
+use Zend\Stdlib\StringUtils;
+use Zend\Stdlib\StringWrapper\StringWrapperInterface as StringWrapper;
+
 class StringLength extends AbstractValidator
 {
     const INVALID   = 'stringLengthInvalid';
@@ -38,10 +36,12 @@ class StringLength extends AbstractValidator
     );
 
     protected $options = array(
-        'min'      => 0, // Minimum length
-        'max'      => null, // Maximum length, null if there is no length limitation
-        'encoding' => null, // Encoding to use
+        'min'      => 0,       // Minimum length
+        'max'      => null,    // Maximum length, null if there is no length limitation
+        'encoding' => 'UTF-8', // Encoding to use
     );
+
+    protected $stringWrapper;
 
     /**
      * Sets validator options
@@ -127,6 +127,31 @@ class StringLength extends AbstractValidator
     }
 
     /**
+     * Get the string wrapper to detect the string length
+     *
+     * @return StringWrapper
+     */
+    public function getStringWrapper()
+    {
+        if (!$this->stringWrapper) {
+            $this->stringWrapper = StringUtils::getWrapper($this->getEncoding());
+        }
+        return $this->stringWrapper;
+    }
+
+    /**
+     * Set the string wrapper to detect the string length
+     *
+     * @param StringWrapper
+     * @return StringLength
+     */
+    public function setStringWrapper(StringWrapper $stringWrapper)
+    {
+        $stringWrapper->setEncoding($this->getEncoding());
+        $this->stringWrapper = $stringWrapper;
+    }
+
+    /**
      * Returns the actual encoding
      *
      * @return string
@@ -143,18 +168,9 @@ class StringLength extends AbstractValidator
      * @return StringLength
      * @throws Exception\InvalidArgumentException
      */
-    public function setEncoding($encoding = null)
+    public function setEncoding($encoding)
     {
-        if ($encoding !== null) {
-            $orig   = iconv_get_encoding('internal_encoding');
-            $result = iconv_set_encoding('internal_encoding', $encoding);
-            if (!$result) {
-                throw new Exception\InvalidArgumentException('Given encoding not supported on this OS!');
-            }
-
-            iconv_set_encoding('internal_encoding', $orig);
-        }
-
+        $this->stringWrapper = StringUtils::getWrapper($encoding);
         $this->options['encoding'] = $encoding;
         return $this;
     }
@@ -174,12 +190,8 @@ class StringLength extends AbstractValidator
         }
 
         $this->setValue($value);
-        if ($this->getEncoding() !== null) {
-            $length = iconv_strlen($value, $this->getEncoding());
-        } else {
-            $length = iconv_strlen($value);
-        }
 
+        $length = $this->getStringWrapper()->strlen($value);
         if ($length < $this->getMin()) {
             $this->error(self::TOO_SHORT);
         }

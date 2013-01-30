@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc;
@@ -16,10 +15,6 @@ use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Model\ViewModel;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- */
 class MvcEvent extends Event
 {
     /**#@+
@@ -30,6 +25,7 @@ class MvcEvent extends Event
     const EVENT_DISPATCH_ERROR = 'dispatch.error';
     const EVENT_FINISH         = 'finish';
     const EVENT_RENDER         = 'render';
+    const EVENT_RENDER_ERROR   = 'render.error';
     const EVENT_ROUTE          = 'route';
     /**#@-*/
 

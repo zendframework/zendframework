@@ -322,6 +322,26 @@ class FormSelectTest extends CommonTestCase
         $this->assertNotContains('<option value=""></option>', $markup);
     }
 
+    public function testCanMarkOptionsAsSelectedWhenEmptyOptionOrZeroValueSelected()
+    {
+        $element = new SelectElement('foo');
+        $element->setEmptyOption('empty');
+        $element->setValueOptions(array(
+            0 => 'label0',
+            1 => 'label1',
+        ));
+
+        $element->setValue('');
+        $markup = $this->helper->render($element);
+        $this->assertContains('<option value="" selected="selected">empty</option>', $markup);
+        $this->assertContains('<option value="0">label0</option>', $markup);
+
+        $element->setValue('0');
+        $markup = $this->helper->render($element);
+        $this->assertContains('<option value="">empty</option>', $markup);
+        $this->assertContains('<option value="0" selected="selected">label0</option>', $markup);
+    }
+
     public function testRenderInputNotSelectElementRaisesException()
     {
         $element = new Element\Text('foo');

@@ -157,7 +157,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
     {
         $this->connection->connect();
         unset($this->transport);
-        $this->assertFalse($this->connection->isConnected());
+        $this->assertFalse($this->connection->hasSession());
     }
 
     public function testAutoDisconnectFalse()
@@ -174,5 +174,17 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->connection->isConnected());
         $this->transport->disconnect();
         $this->assertFalse($this->connection->isConnected());
+    }
+
+    public function testDisconnectSendReconnects()
+    {
+        $this->assertFalse($this->connection->hasSession());
+        $this->transport->send($this->getMessage());
+        $this->assertTrue($this->connection->hasSession());
+        $this->connection->disconnect();
+
+        $this->assertFalse($this->connection->hasSession());
+        $this->transport->send($this->getMessage());
+        $this->assertTrue($this->connection->hasSession());
     }
 }

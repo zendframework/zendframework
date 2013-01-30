@@ -54,6 +54,20 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that the encryption works fine
+     */
+    public function testEncryptBlockCipher()
+    {
+        if (!extension_loaded('mcrypt')) {
+            $this->markTestSkipped('Mcrypt extension not installed');
+        }
+        $encrypt = new EncryptFilter(array('adapter' => 'BlockCipher', 'key' => 'testkey'));
+        $encrypt->setVector('1234567890123456890');
+        $encrypted = $encrypt->filter('test');
+        $this->assertEquals($encrypted, 'ec133eb7460682b0020b736ad6d2ef14c35de0f1e5976330ae1dd096ef3b4cb7MTIzNDU2Nzg5MDEyMzQ1NoZvxY1JkeL6TnQP3ug5F0k=');
+    }
+
+    /**
      * Ensures that the filter follows expected behavior
      *
      * @return void

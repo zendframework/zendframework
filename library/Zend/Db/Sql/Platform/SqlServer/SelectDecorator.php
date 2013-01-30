@@ -5,12 +5,12 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql\Platform\SqlServer;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterInterface;
+use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
@@ -33,10 +33,10 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
     }
 
     /**
-     * @param Adapter $adapter
+     * @param AdapterInterface $adapter
      * @param StatementContainerInterface $statementContainer
      */
-    public function prepareStatement(Adapter $adapter, StatementContainerInterface $statementContainer)
+    public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer)
     {
         // localize variables
         foreach (get_object_vars($this->select) as $name => $value) {
@@ -72,13 +72,13 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
     /**
      * @param PlatformInterface $platform
-     * @param Adapter $adapter
+     * @param DriverInterface $driver
      * @param ParameterContainer $parameterContainer
      * @param $sqls
      * @param $parameters
      * @return null
      */
-    protected function processLimitOffset(PlatformInterface $platform, Adapter $adapter = null, ParameterContainer $parameterContainer = null, &$sqls, &$parameters)
+    protected function processLimitOffset(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null, &$sqls, &$parameters)
     {
         if ($this->limit === null && $this->offset === null) {
             return null;
@@ -133,5 +133,4 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         );
 
     }
-
 }

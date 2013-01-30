@@ -46,11 +46,24 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
         );
 
         $enc = $filter->getEncryption();
-        $filter->setVector('1234567890123456');
-        $this->assertEquals('ZendFramework', $enc['key']);
+        $filter->setKey('1234567890123456');
         foreach ($valuesExpected as $input => $output) {
             $this->assertNotEquals($output, $filter($input));
         }
+    }
+
+    /**
+     * Ensures that the encryption works fine
+     */
+    public function testDecryptBlockCipher()
+    {
+        if (!extension_loaded('mcrypt')) {
+            $this->markTestSkipped('Mcrypt extension not installed');
+        }
+        $decrypt = new DecryptFilter(array('adapter' => 'BlockCipher', 'key' => 'testkey'));
+        $decrypt->setVector('1234567890123456890');
+        $decrypted = $decrypt->filter('ec133eb7460682b0020b736ad6d2ef14c35de0f1e5976330ae1dd096ef3b4cb7MTIzNDU2Nzg5MDEyMzQ1NoZvxY1JkeL6TnQP3ug5F0k=');
+        $this->assertEquals($decrypted, 'test');
     }
 
     /**

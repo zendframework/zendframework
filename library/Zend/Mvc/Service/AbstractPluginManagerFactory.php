@@ -5,22 +5,15 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Service;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
-use Zend\ServiceManager\Di\DiServiceInitializer;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Service
- */
 abstract class AbstractPluginManagerFactory implements FactoryInterface
 {
     const PLUGIN_MANAGER_CLASS = 'AbstractPluginManager';
@@ -31,23 +24,20 @@ abstract class AbstractPluginManagerFactory implements FactoryInterface
      * the PLUGIN_MANGER_CLASS constant.
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return AbstractPluginManager
+     * @return \Zend\ServiceManager\AbstractPluginManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $pluginManagerClass = static::PLUGIN_MANAGER_CLASS;
+        /* @var $plugins \Zend\ServiceManager\AbstractPluginManager */
         $plugins = new $pluginManagerClass;
         $plugins->setServiceLocator($serviceLocator);
-        $configuration    = $serviceLocator->get('Config');
+        $configuration = $serviceLocator->get('Config');
+
         if (isset($configuration['di']) && $serviceLocator->has('Di')) {
-            $di = $serviceLocator->get('Di');
-            $plugins->addAbstractFactory(
-                new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI)
-            );
-            $plugins->addInitializer(
-                new DiServiceInitializer($di, $serviceLocator)
-            );
+            $plugins->addAbstractFactory($serviceLocator->get('DiAbstractServiceFactory'));
         }
+
         return $plugins;
     }
 }

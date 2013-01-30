@@ -100,7 +100,7 @@ class PropertyGeneratorTest extends \PHPUnit_Framework_TestCase
             'null' => null,
             'true' => true,
             "bar's" => "bar's",
-            );
+        );
 
         $expectedSource = <<<EOS
     public \$myFoo = array(
@@ -148,7 +148,9 @@ EOS;
      */
     public function testPropertyWillLoadFromReflection()
     {
-        $reflectionClass = new \Zend\Code\Reflection\ClassReflection('\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties');
+        $reflectionClass = new \Zend\Code\Reflection\ClassReflection(
+            '\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties'
+        );
 
         // test property 1
         $reflProp = $reflectionClass->getProperty('_bazProperty');
@@ -160,7 +162,6 @@ EOS;
         $this->assertEquals('private', $cgProp->getVisibility());
 
         $reflProp = $reflectionClass->getProperty('_bazStaticProperty');
-
 
         // test property 2
         $cgProp = PropertyGenerator::fromReflection($reflProp);
@@ -212,10 +213,57 @@ EOS;
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\RuntimeException',
-            'Type \'stdClass\' is unknown or cannot be used as property default value'
-            );
+            'Type "stdClass" is unknown or cannot be used as property default value'
+        );
 
         $codeGenProperty->generate();
+    }
+
+    public function testCreateFromArray()
+    {
+        $propertyGenerator = PropertyGenerator::fromArray(array(
+            'name'         => 'SampleProperty',
+            'const'        => true,
+            'defaultvalue' => 'foo',
+            'docblock'     => array(
+                'shortdescription' => 'foo',
+            ),
+            'abstract'     => true,
+            'final'        => true,
+            'static'       => true,
+            'visibility'   => PropertyGenerator::VISIBILITY_PROTECTED,
+        ));
+
+        $this->assertEquals('SampleProperty', $propertyGenerator->getName());
+        $this->assertTrue($propertyGenerator->isConst());
+        $this->assertInstanceOf('Zend\Code\Generator\ValueGenerator', $propertyGenerator->getDefaultValue());
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlockGenerator', $propertyGenerator->getDocBlock());
+        $this->assertTrue($propertyGenerator->isAbstract());
+        $this->assertTrue($propertyGenerator->isFinal());
+        $this->assertTrue($propertyGenerator->isStatic());
+        $this->assertEquals(PropertyGenerator::VISIBILITY_PROTECTED, $propertyGenerator->getVisibility());
+    }
+
+    /**
+     * @3491
+     */
+    public function testPropertyDocBlockWillLoadFromReflection()
+    {
+        $reflectionClass = new \Zend\Code\Reflection\ClassReflection('\ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties');
+
+        $reflProp = $reflectionClass->getProperty('fooProperty');
+        $cgProp   = PropertyGenerator::fromReflection($reflProp);
+
+        $this->assertEquals('fooProperty', $cgProp->getName());
+
+        $docBlock = $cgProp->getDocBlock();
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlockGenerator', $docBlock);
+        $tags     = $docBlock->getTags();
+        $this->assertInternalType('array', $tags);
+        $this->assertEquals(1, count($tags));
+        $tag = array_shift($tags);
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag', $tag);
+        $this->assertEquals('var', $tag->getName());
     }
 
 }

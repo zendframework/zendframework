@@ -5,18 +5,14 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace Zend\Feed\PubSubHubbub\Subscriber;
 
 use Zend\Feed\PubSubHubbub;
+use Zend\Feed\PubSubHubbub\Exception;
 use Zend\Uri;
 
-/**
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- */
 class Callback extends PubSubHubbub\AbstractCallback
 {
     /**
@@ -93,19 +89,34 @@ class Callback extends PubSubHubbub\AbstractCallback
          * Handle any (un)subscribe confirmation requests
          */
         } elseif ($this->isValidHubVerification($httpGetData)) {
-            $data = $this->currentSubscriptionData;
             $this->getHttpResponse()->setContent($httpGetData['hub_challenge']);
-            $data['subscription_state'] = PubSubHubbub\PubSubHubbub::SUBSCRIPTION_VERIFIED;
-            if (isset($httpGetData['hub_lease_seconds'])) {
-                $data['lease_seconds'] = $httpGetData['hub_lease_seconds'];
+
+            switch (strtolower($httpGetData['hub_mode'])) {
+                case 'subscribe':
+                    $data = $this->currentSubscriptionData;
+                    $data['subscription_state'] = PubSubHubbub\PubSubHubbub::SUBSCRIPTION_VERIFIED;
+                    if (isset($httpGetData['hub_lease_seconds'])) {
+                        $data['lease_seconds'] = $httpGetData['hub_lease_seconds'];
+                    }
+                    $this->getStorage()->setSubscription($data);
+                    break;
+                case 'unsubscribe':
+                    $verifyTokenKey = $this->_detectVerifyTokenKey($httpGetData);
+                    $this->getStorage()->deleteSubscription($verifyTokenKey);
+                    break;
+                default:
+                    throw new Exception\RuntimeException(sprintf(
+                        'Invalid hub_mode ("%s") provided',
+                        $httpGetData['hub_mode']
+                    ));
             }
-            $this->getStorage()->setSubscription($data);
         /**
          * Hey, C'mon! We tried everything else!
          */
         } else {
             $this->getHttpResponse()->setStatusCode(404);
         }
+
         if ($sendResponseNow) {
             $this->sendResponse();
         }

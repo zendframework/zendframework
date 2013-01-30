@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Dom
  */
 
 namespace Zend\Dom;
@@ -15,14 +14,12 @@ use DOMDocument;
 use DOMNodeList;
 use DOMNode;
 use Iterator;
+use ArrayAccess;
 
 /**
  * Nodelist for DOM XPath query
- *
- * @package    Zend_Dom
- * @subpackage Query
  */
-class NodeList implements Iterator, Countable
+class NodeList implements Iterator, Countable, ArrayAccess
 {
     /**
      * CSS Selector query
@@ -165,5 +162,50 @@ class NodeList implements Iterator, Countable
     public function count()
     {
         return $this->nodeList->length;
+    }
+
+    /**
+     * ArrayAccess: offset exists
+     *
+     * @return bool
+     */
+    public function offsetExists($key)
+    {
+        if (in_array($key, range(0, $this->nodeList->length - 1)) && $this->nodeList->length > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * ArrayAccess: get offset
+     *
+     * @return mixed
+     */
+    public function offsetGet($key)
+    {
+        return $this->nodeList->item($key);
+    }
+
+    /**
+     * ArrayAccess: set offset
+     *
+     * @return void
+     * @throws Exception\BadMethodCallException when attemptingn to write to a read-only item
+     */
+    public function offsetSet($key, $value)
+    {
+        throw new Exception\BadMethodCallException('Attempting to write to a read-only list');
+    }
+
+    /**
+     * ArrayAccess: unset offset
+     *
+     * @return void
+     * @throws Exception\BadMethodCallException when attemptingn to unset a read-only item
+     */
+    public function offsetUnset($key)
+    {
+        throw new Exception\BadMethodCallException('Attempting to unset on a read-only list');
     }
 }

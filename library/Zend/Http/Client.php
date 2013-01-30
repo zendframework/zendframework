@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http;
@@ -19,9 +18,6 @@ use Zend\Uri\Http;
 
 /**
  * Http client
- *
- * @category   Zend
- * @package    Zend\Http
  */
 class Client implements Stdlib\DispatchableInterface
 {
@@ -113,6 +109,7 @@ class Client implements Stdlib\DispatchableInterface
         'keepalive'       => false,
         'outputstream'    => false,
         'encodecookies'   => true,
+        'argseparator'    => null,
         'rfc3986strict'   => false
     );
 
@@ -356,6 +353,33 @@ class Client implements Stdlib\DispatchableInterface
     }
 
     /**
+     * Set the query string argument separator
+     *
+     * @param string $argSeparator
+     * @return Client
+     */
+    public function setArgSeparator($argSeparator)
+    {
+        $this->setOptions(array("argseparator" => $argSeparator));
+        return $this;
+    }
+
+    /**
+     * Get the query string argument separator
+     *
+     * @return string
+     */
+    public function getArgSeparator()
+    {
+        $argSeparator = $this->config['argseparator'];
+        if (empty($argSeparator)) {
+            $argSeparator = ini_get('arg_separator.output');
+            $this->setArgSeparator($argSeparator);
+        }
+        return $argSeparator;
+    }
+
+    /**
      * Set the encoding type and the boundary (if any)
      *
      * @param string $encType
@@ -469,11 +493,11 @@ class Client implements Stdlib\DispatchableInterface
                     throw new Exception\InvalidArgumentException('The cookie parameter is not a valid Set-Cookie type');
                 }
             }
-        } elseif ($cookie instanceof Header\SetCookie) {
-            $this->cookies[$this->getCookieId($cookie)] = $cookie;
         } elseif (is_string($cookie) && $value !== null) {
             $setCookie = new Header\SetCookie($cookie, $value, $expire, $path, $domain, $secure, $httponly, $maxAge, $version);
             $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
+        } elseif ($cookie instanceof Header\SetCookie) {
+            $this->cookies[$this->getCookieId($cookie)] = $cookie;
         } else {
             throw new Exception\InvalidArgumentException('Invalid parameter type passed as Cookie');
         }
@@ -582,7 +606,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getStream()
     {
-        if (!is_null($this->streamName)) {
+        if (null !== $this->streamName) {
             return $this->streamName;
         }
 
@@ -777,14 +801,14 @@ class Client implements Stdlib\DispatchableInterface
 
                 if (!empty($queryArray)) {
                     $newUri = $uri->toString();
-                    $queryString = http_build_query($query);
+                    $queryString = http_build_query($query, null, $this->getArgSeparator());
 
                     if ($this->config['rfc3986strict']) {
                         $queryString = str_replace('+', '%20', $queryString);
                     }
 
                     if (strpos($newUri, '?') !== false) {
-                        $newUri .= '&' . $queryString;
+                        $newUri .= $this->getArgSeparator() . $queryString;
                     } else {
                         $newUri .= '?' . $queryString;
                     }
@@ -855,9 +879,9 @@ class Client implements Stdlib\DispatchableInterface
             }
 
             // Get the cookies from response (if any)
-            $setCookie = $response->getCookie();
-            if (!empty($setCookie)) {
-                $this->addCookie($setCookie);
+            $setCookies = $response->getCookie();
+            if (!empty($setCookies)) {
+                $this->addCookie($setCookies);
             }
 
             // If we got redirected, look for the Location header
@@ -1294,7 +1318,6 @@ class Client implements Stdlib\DispatchableInterface
                 throw new Exception\RuntimeException('Adapter does not support streaming');
             }
         }
-
         // HTTP connection
         $this->lastRawRequest = $this->adapter->write($method,
             $uri, $this->config['httpversion'], $headers, $body);

@@ -30,4 +30,11 @@ class SubjectTest extends \PHPUnit_Framework_TestCase
         $test     = $subject->getFieldValue(Header\HeaderInterface::FORMAT_ENCODED);
         $this->assertEquals($expected, $test);
     }
+
+    public function testAllowsEmptyValueWhenParsing()
+    {
+        $headerString = 'Subject:';
+        $subject      = Header\Subject::fromString($headerString);
+        $this->assertEquals('', $subject->getFieldValue());
+    }
 }

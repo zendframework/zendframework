@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace Zend\Feed\PubSubHubbub;
@@ -18,10 +17,6 @@ use Zend\Stdlib\ArrayUtils;
 use Zend\Uri;
 use Zend\Version\Version;
 
-/**
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- */
 class Subscriber
 {
     /**
@@ -744,7 +739,7 @@ class Subscriber
             'verify_token'       => hash('sha256', $params['hub.verify_token']),
             'secret'             => null,
             'expiration_time'    => $expires,
-            'subscription_state' => PubSubHubbub::SUBSCRIPTION_NOTVERIFIED,
+            'subscription_state' => ($mode == 'unsubscribe')? PubSubHubbub::SUBSCRIPTION_TODELETE : PubSubHubbub::SUBSCRIPTION_NOTVERIFIED,
         );
         $this->getStorage()->setSubscription($data);
 

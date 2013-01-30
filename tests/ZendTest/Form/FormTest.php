@@ -813,6 +813,33 @@ class FormTest extends TestCase
         $this->assertEquals('foo', $input->getName());
     }
 
+    public function testWillUseFormInputFilterOverrideOverInputSpecificationFromElement()
+    {
+        $element = new TestAsset\ElementWithFilter('foo');
+        $filter  = new InputFilter();
+        $filterFactory = new InputFilterFactory();
+        $filter = $filterFactory->createInputFilter(array(
+            'foo' => array(
+                'name'       => 'foo',
+                'required'   => false,
+            ),
+        ));
+        $this->form->setPreferFormInputFilter(true);
+        $this->form->setInputFilter($filter);
+        $this->form->add($element);
+
+        $test = $this->form->getInputFilter();
+        $this->assertSame($filter, $test);
+        $this->assertTrue($filter->has('foo'));
+        $input = $filter->get('foo');
+        $filters = $input->getFilterChain();
+        $this->assertEquals(0, count($filters));
+        $validators = $input->getValidatorChain();
+        $this->assertEquals(0, count($validators));
+        $this->assertFalse($input->isRequired());
+        $this->assertEquals('foo', $input->getName());
+    }
+
     public function testDisablingUseInputFilterDefaultsFlagDisablesInputFilterScanning()
     {
         $element        = new TestAsset\ElementWithFilter('foo');

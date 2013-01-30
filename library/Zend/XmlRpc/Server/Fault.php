@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc\Server;
@@ -24,10 +23,6 @@ namespace Zend\XmlRpc\Server;
  *
  * To allow method chaining, you may use the {@link getInstance()} factory
  * to instantiate a Zend_XmlRpc_Server_Fault.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Server
  */
 class Fault extends \Zend\XmlRpc\Fault
 {

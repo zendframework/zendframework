@@ -9,6 +9,9 @@ class TestClassWithManyProperties
 
     public static $fooStaticProperty = null;
 
+    /**
+     * @var bool
+     */
     public $fooProperty = true;
 
     protected static $_barStaticProperty = 1;
@@ -27,7 +30,7 @@ class TestClassWithManyProperties
             'bar',
             'baz',
             //PHP_EOL
-            )
-        );
+        )
+    );
 
 }

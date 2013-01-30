@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_InputFilter
  */
 
 namespace Zend\InputFilter;
@@ -16,10 +15,6 @@ use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\ValidatorChain;
 use Zend\Validator\ValidatorInterface;
 
-/**
- * @category   Zend
- * @package    Zend_InputFilter
- */
 class Factory
 {
     protected $defaultFilterChain;
@@ -287,7 +282,7 @@ class Factory
     {
         foreach ($validators as $validator) {
             if ($validator instanceof ValidatorInterface) {
-                $chain->addValidator($validator);
+                $chain->attach($validator);
                 continue;
             }
 
@@ -306,7 +301,7 @@ class Factory
                 if (isset($validator['break_chain_on_failure'])) {
                     $breakChainOnFailure = $validator['break_chain_on_failure'];
                 }
-                $chain->addByName($name, $options, $breakChainOnFailure);
+                $chain->attachByName($name, $options, $breakChainOnFailure);
                 continue;
             }
 

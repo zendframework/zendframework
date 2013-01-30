@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form\Element;
@@ -19,11 +18,6 @@ use Zend\Validator\DateStep as DateStepValidator;
 use Zend\Validator\GreaterThan as GreaterThanValidator;
 use Zend\Validator\LessThan as LessThanValidator;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Element
- */
 class DateTime extends Element implements InputProviderInterface
 {
     const DATETIME_FORMAT = 'Y-m-d\TH:iP';
@@ -50,6 +44,24 @@ class DateTime extends Element implements InputProviderInterface
      * @var array
      */
     protected $validators;
+
+    /**
+     * Accepted options for DateTime:
+     * - format: A \DateTime compatible string
+     *
+     * @param array|\Traversable $options
+     * @return DateTime
+     */
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        if (isset($this->options['format'])) {
+            $this->setFormat($this->options['format']);
+        }
+
+        return $this;
+    }
 
     /**
      * Retrieve the element value

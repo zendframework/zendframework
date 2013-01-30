@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\View\Http;
@@ -18,11 +17,6 @@ use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\ViewModel;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage View
- */
 class ExceptionStrategy implements ListenerAggregateInterface
 {
     /**
@@ -51,6 +45,7 @@ class ExceptionStrategy implements ListenerAggregateInterface
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'prepareExceptionViewModel'));
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER_ERROR, array($this, 'prepareExceptionViewModel'));
     }
 
     /**
@@ -157,9 +152,15 @@ class ExceptionStrategy implements ListenerAggregateInterface
                 $response = $e->getResponse();
                 if (!$response) {
                     $response = new HttpResponse();
+                    $response->setStatusCode(500);
                     $e->setResponse($response);
+                } else {
+                    $statusCode = $response->getStatusCode();
+                    if ($statusCode === 200) {
+                        $response->setStatusCode(500);
+                    }
                 }
-                $response->setStatusCode(500);
+
                 break;
         }
     }

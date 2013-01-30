@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Renderer;
@@ -20,9 +19,6 @@ use Zend\View\Resolver\ResolverInterface;
  * Note: all private variables in this class are prefixed with "__". This is to
  * mark them as part of the internal implementation, and thus prevent conflict
  * with variables injected into the renderer.
- *
- * @category   Zend
- * @package    Zend_View
  */
 class ConsoleRenderer implements RendererInterface, TreeRendererInterface
 {
@@ -151,5 +147,4 @@ class ConsoleRenderer implements RendererInterface, TreeRendererInterface
     {
         return true;
     }
-
 }

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\View\Http;
@@ -18,11 +17,6 @@ use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\ViewModel;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage View
- */
 class RouteNotFoundStrategy implements ListenerAggregateInterface
 {
     /**
@@ -275,6 +269,8 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         if (!$this->displayExceptions()) {
             return;
         }
+
+        $model->setVariable('display_exceptions', true);
 
         $exception = $e->getParam('exception', false);
         if (!$exception instanceof \Exception) {

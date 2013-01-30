@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter;
@@ -13,14 +12,10 @@ namespace Zend\Db\Adapter;
 use Zend\Db\ResultSet;
 
 /**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- *
  * @property Driver\DriverInterface $driver
  * @property Platform\PlatformInterface $platform
  */
-class Adapter
+class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
 {
     /**
      * Query Mode Constants
@@ -51,6 +46,11 @@ class Adapter
     protected $platform = null;
 
     /**
+     * @var Profiler\ProfilerInterface
+     */
+    protected $profiler = null;
+
+    /**
      * @var ResultSet\ResultSetInterface
      */
     protected $queryResultSetPrototype = null;
@@ -64,12 +64,20 @@ class Adapter
      * @param Driver\DriverInterface|array $driver
      * @param Platform\PlatformInterface $platform
      * @param ResultSet\ResultSetInterface $queryResultPrototype
+     * @param Profiler\ProfilerInterface $profiler
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSetInterface $queryResultPrototype = null)
+    public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSetInterface $queryResultPrototype = null, Profiler\ProfilerInterface $profiler = null)
     {
+        // first argument can be an array of parameters
+        $parameters = array();
+
         if (is_array($driver)) {
-            $driver = $this->createDriverFromParameters($driver);
+            $parameters = $driver;
+            if ($profiler === null && isset($parameters['profiler'])) {
+                $profiler = $this->createProfiler($parameters);
+            }
+            $driver = $this->createDriver($parameters);
         } elseif (!$driver instanceof Driver\DriverInterface) {
             throw new Exception\InvalidArgumentException(
                 'The supplied or instantiated driver object does not implement Zend\Db\Adapter\Driver\DriverInterface'
@@ -80,11 +88,36 @@ class Adapter
         $this->driver = $driver;
 
         if ($platform == null) {
-            $platform = $this->createPlatformFromDriver($driver);
+            $platform = $this->createPlatform($parameters);
         }
 
         $this->platform = $platform;
         $this->queryResultSetPrototype = ($queryResultPrototype) ?: new ResultSet\ResultSet();
+
+        if ($profiler) {
+            $this->setProfiler($profiler);
+        }
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return Adapter
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        if ($this->driver instanceof Profiler\ProfilerAwareInterface) {
+            $this->driver->setProfiler($profiler);
+        }
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**
@@ -223,10 +256,18 @@ class Adapter
      * @throws \InvalidArgumentException
      * @throws Exception\InvalidArgumentException
      */
-    protected function createDriverFromParameters(array $parameters)
+    protected function createDriver($parameters)
     {
-        if (!isset($parameters['driver']) || !is_string($parameters['driver'])) {
-            throw new Exception\InvalidArgumentException('createDriverFromParameters() expects a "driver" key to be present inside the parameters');
+        if (!isset($parameters['driver'])) {
+            throw new Exception\InvalidArgumentException(__FUNCTION__ . ' expects a "driver" key to be present inside the parameters');
+        }
+
+        if ($parameters['driver'] instanceof Driver\DriverInterface) {
+            return $parameters['driver'];
+        }
+
+        if (!is_string($parameters['driver'])) {
+            throw new Exception\InvalidArgumentException(__FUNCTION__ . ' expects a "driver" to be a string or instance of DriverInterface');
         }
 
         $options = array();
@@ -243,8 +284,14 @@ class Adapter
             case 'sqlsrv':
                 $driver = new Driver\Sqlsrv\Sqlsrv($parameters);
                 break;
+            case 'oci8':
+                $driver = new Driver\Oci8\Oci8($parameters);
+                break;
             case 'pgsql':
                 $driver = new Driver\Pgsql\Pgsql($parameters);
+                break;
+            case 'ibmdb2':
+                $driver = new Driver\IbmDb2\IbmDb2($parameters);
                 break;
             case 'pdo':
             default:
@@ -264,22 +311,69 @@ class Adapter
      * @param Driver\DriverInterface $driver
      * @return Platform\PlatformInterface
      */
-    protected function createPlatformFromDriver(Driver\DriverInterface $driver)
+    protected function createPlatform($parameters)
     {
-        // consult driver for platform implementation
-        $platformName = $driver->getDatabasePlatformName(Driver\DriverInterface::NAME_FORMAT_CAMELCASE);
+        if (isset($parameters['platform'])) {
+            $platformName = $parameters['platform'];
+        } elseif ($this->driver instanceof Driver\DriverInterface) {
+            $platformName = $this->driver->getDatabasePlatformName(Driver\DriverInterface::NAME_FORMAT_CAMELCASE);
+        } else {
+            throw new Exception\InvalidArgumentException('A platform could not be determined from the provided configuration');
+        }
+
+        $options = (isset($parameters['platform_options'])) ? $parameters['platform_options'] : array();
+
         switch ($platformName) {
             case 'Mysql':
-                return new Platform\Mysql();
+                return new Platform\Mysql($options);
             case 'SqlServer':
-                return new Platform\SqlServer();
+                return new Platform\SqlServer($options);
+            case 'Oracle':
+                return new Platform\Oracle($options);
             case 'Sqlite':
-                return new Platform\Sqlite();
+                return new Platform\Sqlite($options);
             case 'Postgresql':
-                return new Platform\Postgresql();
+                return new Platform\Postgresql($options);
+            case 'IbmDb2':
+                return new Platform\IbmDb2($options);
             default:
-                return new Platform\Sql92();
+                return new Platform\Sql92($options);
         }
     }
 
+    protected function createProfiler($parameters)
+    {
+        if ($parameters['profiler'] instanceof Profiler\ProfilerInterface) {
+            $profiler = $parameters['profiler'];
+        } elseif (is_bool($parameters['profiler'])) {
+            $profiler = ($parameters['profiler'] == true) ? new Profiler\Profiler : null;
+        } else {
+            throw new Exception\InvalidArgumentException(
+                '"profiler" parameter must be an instance of ProfilerInterface or a boolean'
+            );
+        }
+        return $profiler;
+    }
+
+    /**
+     * @param array $parameters
+     * @return Driver\DriverInterface
+     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
+     * @deprecated
+     */
+    protected function createDriverFromParameters(array $parameters)
+    {
+        return $this->createDriver($parameters);
+    }
+
+    /**
+     * @param Driver\DriverInterface $driver
+     * @return Platform\PlatformInterface
+     * @deprecated
+     */
+    protected function createPlatformFromDriver(Driver\DriverInterface $driver)
+    {
+        return $this->createPlatform($driver);
+    }
 }

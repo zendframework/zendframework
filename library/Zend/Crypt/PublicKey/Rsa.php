@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Crypt
  */
 
 namespace Zend\Crypt\PublicKey;
@@ -17,13 +16,13 @@ use Zend\Stdlib\ArrayUtils;
 
 /**
  * Implementation of the RSA public key encryption algorithm.
- *
- * @category   Zend
- * @package    Zend_Crypt
- * @subpackage PublicKey
  */
 class Rsa
 {
+    const MODE_AUTO   = 1;
+    const MODE_BASE64 = 2;
+    const MODE_RAW    = 3;
+
     /**
      * @var RsaOptions
      */
@@ -173,22 +172,45 @@ class Rsa
     /**
      * Verify signature with public key
      *
+     * $signature can be encoded in base64 or not. $mode sets how the input must be processed:
+     *  - MODE_AUTO: Check if the $signature is encoded in base64. Not recommended for performance.
+     *  - MODE_BASE64: Decode $signature using base64 algorithm.
+     *  - MODE_RAW: $signature is not encoded.
+     *
      * @param  string $data
      * @param  string $signature
      * @param  null|Rsa\PublicKey $publicKey
+     * @param  int                $mode Input encoding
      * @return bool
      * @throws Rsa\Exception\RuntimeException
+     * @see Rsa::MODE_AUTO
+     * @see Rsa::MODE_BASE64
+     * @see Rsa::MODE_RAW
      */
-    public function verify($data, $signature, Rsa\PublicKey $publicKey = null)
-    {
+    public function verify(
+        $data,
+        $signature,
+        Rsa\PublicKey $publicKey = null,
+        $mode = self::MODE_AUTO
+    ) {
         if (null === $publicKey) {
             $publicKey = $this->options->getPublicKey();
         }
 
-        // check if signature is encoded in Base64
-        $output = base64_decode($signature, true);
-        if (false !== $output) {
-            $signature = $output;
+        switch ($mode) {
+            case self::MODE_AUTO:
+                // check if data is encoded in Base64
+                $output = base64_decode($signature, true);
+                if ((false !== $output) && ($signature === base64_encode($output))) {
+                    $signature = $output;
+                }
+                break;
+            case self::MODE_BASE64:
+                $signature = base64_decode($signature);
+                break;
+            case self::MODE_RAW:
+            default:
+                break;
         }
 
         $result = openssl_verify(
@@ -236,13 +258,25 @@ class Rsa
     /**
      * Decrypt with private/public key
      *
+     * $data can be encoded in base64 or not. $mode sets how the input must be processed:
+     *  - MODE_AUTO: Check if the $signature is encoded in base64. Not recommended for performance.
+     *  - MODE_BASE64: Decode $data using base64 algorithm.
+     *  - MODE_RAW: $data is not encoded.
+     *
      * @param  string          $data
      * @param  Rsa\AbstractKey $key
+     * @param  int             $mode Input encoding
      * @return string
      * @throws Rsa\Exception\InvalidArgumentException
+     * @see Rsa::MODE_AUTO
+     * @see Rsa::MODE_BASE64
+     * @see Rsa::MODE_RAW
      */
-    public function decrypt($data, Rsa\AbstractKey $key = null)
-    {
+    public function decrypt(
+        $data,
+        Rsa\AbstractKey $key = null,
+        $mode = self::MODE_AUTO
+    ) {
         if (null === $key) {
             $key = $this->options->getPrivateKey();
         }
@@ -251,10 +285,20 @@ class Rsa
             throw new Exception\InvalidArgumentException('No key specified for the decryption');
         }
 
-        // check if data is encoded in Base64
-        $output = base64_decode($data, true);
-        if (false !== $output) {
-            $data = $output;
+        switch ($mode) {
+            case self::MODE_AUTO:
+                // check if data is encoded in Base64
+                $output = base64_decode($data, true);
+                if ((false !== $output) && ($data === base64_encode($output))) {
+                    $data = $output;
+                }
+                break;
+            case self::MODE_BASE64:
+                $data = base64_decode($data);
+                break;
+            case self::MODE_RAW:
+            default:
+                break;
         }
 
         return $key->decrypt($data);

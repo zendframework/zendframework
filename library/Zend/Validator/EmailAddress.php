@@ -5,15 +5,10 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
 class EmailAddress extends AbstractValidator
 {
     const INVALID            = 'emailAddressInvalid';
@@ -104,10 +99,6 @@ class EmailAddress extends AbstractValidator
             $options = $temp;
         }
 
-        if (!array_key_exists('hostnameValidator', $options)) {
-            $options['hostnameValidator'] = null;
-        }
-
         parent::__construct($options);
     }
 
@@ -139,14 +130,14 @@ class EmailAddress extends AbstractValidator
     /**
      * Returns the set hostname validator
      *
+     * If was not previously set then lazy load a new one
+     *
      * @return Hostname
      */
     public function getHostnameValidator()
     {
-        if (!isset($this->options['hostnameValidator'])
-            || !$this->options['hostnameValidator'] instanceof Hostname
-        ) {
-            $this->setHostnameValidator();
+        if (!isset($this->options['hostnameValidator'])) {
+            $this->options['hostnameValidator'] = new Hostname($this->getAllow());
         }
 
         return $this->options['hostnameValidator'];
@@ -158,10 +149,6 @@ class EmailAddress extends AbstractValidator
      */
     public function setHostnameValidator(Hostname $hostnameValidator = null)
     {
-        if (!$hostnameValidator) {
-            $hostnameValidator = new Hostname($this->getAllow());
-        }
-
         $this->options['hostnameValidator'] = $hostnameValidator;
 
         return $this;
@@ -186,7 +173,7 @@ class EmailAddress extends AbstractValidator
     public function setAllow($allow)
     {
         $this->options['allow'] = $allow;
-        if ($this->options['hostnameValidator'] !== null) {
+        if (isset($this->options['hostnameValidator'])) {
             $this->options['hostnameValidator']->setAllow($allow);
         }
 

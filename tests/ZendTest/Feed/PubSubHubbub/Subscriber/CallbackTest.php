@@ -280,17 +280,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(1));
 
         $this->_tableGateway->expects($this->once())
-            ->method('update')
-            ->with(
-            $this->equalTo(array('id'                => 'verifytokenkey',
-                                 'verify_token'      => hash('sha256', 'cba'),
-                                 'created_time'      => $t->getTimestamp(),
-                                 'lease_seconds'     => 1234567,
-                                 'subscription_state'=> 'verified',
-                                 'expiration_time'   => $t->add(new DateInterval('PT1234567S'))
-                                     ->format('Y-m-d H:i:s'))),
-            $this->equalTo(array('id' => 'verifytokenkey'))
-        );
+            ->method('delete')
+            ->with($this->equalTo(array('id' => 'verifytokenkey')))
+            ->will($this->returnValue(true));
 
         $this->_callback->handle($this->_get);
         $this->assertTrue($this->_callback->getHttpResponse()->getStatusCode() == 200);

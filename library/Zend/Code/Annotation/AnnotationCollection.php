@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Annotation;
@@ -17,7 +16,7 @@ class AnnotationCollection extends ArrayObject
     /**
      * Checks if the collection has annotations for a class
      *
-     * @param $class
+     * @param  string $class
      * @return bool
      */
     public function hasAnnotation($class)
@@ -27,6 +26,7 @@ class AnnotationCollection extends ArrayObject
                 return true;
             }
         }
+
         return false;
     }
 }

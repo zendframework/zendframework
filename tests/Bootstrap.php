@@ -16,7 +16,7 @@ error_reporting( E_ALL | E_STRICT );
 
 if (class_exists('PHPUnit_Runner_Version', true)) {
     $phpUnitVersion = PHPUnit_Runner_Version::id();
-    if ('@package_version@' !== $phpUnitVersion && version_compare($phpUnitVersion, '3.6.0', '<')) {
+    if ('@package_version@' !== $phpUnitVersion && version_compare($phpUnitVersion, '3.7.0', '<')) {
         echo 'This version of PHPUnit (' . PHPUnit_Runner_Version::id() . ') is not supported in Zend Framework 2.x unit tests.' . PHP_EOL;
         exit(1);
     }
@@ -93,3 +93,12 @@ if (defined('TESTS_ZEND_OB_ENABLED') && constant('TESTS_ZEND_OB_ENABLED')) {
  * Unset global variables that are no longer needed.
  */
 unset($zfRoot, $zfCoreLibrary, $zfCoreTests, $path);
+
+/**
+ * Internal PHP function mocks
+ * To be used with runkit_function_rename()
+ */
+function move_uploaded_file_mock($source, $dest)
+{
+    return rename($source, $dest);
+}

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Node\Schema;
@@ -15,10 +14,6 @@ use Zend\Ldap\Exception;
 /**
  * This class provides a base implementation for managing schema
  * items like objectClass and attributeType.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Schema
  */
 abstract class AbstractItem implements \ArrayAccess, \Countable
 {

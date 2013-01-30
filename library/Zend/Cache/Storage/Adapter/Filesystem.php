@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
@@ -27,11 +26,6 @@ use Zend\Cache\Storage\TaggableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
 use Zend\Stdlib\ErrorHandler;
 
-/**
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- */
 class Filesystem extends AbstractAdapter implements
     AvailableSpaceCapableInterface,
     ClearByNamespaceInterface,
@@ -140,8 +134,9 @@ class Filesystem extends AbstractAdapter implements
      */
     public function clearExpired()
     {
-        $options = $this->getOptions();
-        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
+        $options   = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
 
         $flags = GlobIterator::SKIP_DOTS | GlobIterator::CURRENT_AS_FILEINFO;
         $path  = $options->getCacheDir()
@@ -183,13 +178,18 @@ class Filesystem extends AbstractAdapter implements
      */
     public function clearByNamespace($namespace)
     {
-        $options  = $this->getOptions();
-        $nsPrefix = $namespace . $options->getNamespaceSeparator();
+        $namespace = (string) $namespace;
+        if ($namespace === '') {
+            throw new Exception\InvalidArgumentException('No namespace given');
+        }
+
+        $options = $this->getOptions();
+        $prefix  = $namespace . $options->getNamespaceSeparator();
 
         $flags = GlobIterator::SKIP_DOTS | GlobIterator::CURRENT_AS_PATHNAME;
         $path = $options->getCacheDir()
-        . str_repeat(\DIRECTORY_SEPARATOR . $nsPrefix . '*', $options->getDirLevel())
-        . \DIRECTORY_SEPARATOR . $nsPrefix . '*';
+            . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options->getDirLevel())
+            . \DIRECTORY_SEPARATOR . $prefix . '*';
         $glob = new GlobIterator($path, $flags);
 
         ErrorHandler::start();
@@ -198,7 +198,7 @@ class Filesystem extends AbstractAdapter implements
         }
         $error = ErrorHandler::stop();
         if ($error) {
-            throw new Exception\RuntimeException("Failed to remove file '{$pathname}'", 0, $error);
+            throw new Exception\RuntimeException("Failed to remove files of '{$path}'", 0, $error);
         }
 
         return true;
@@ -215,8 +215,14 @@ class Filesystem extends AbstractAdapter implements
      */
     public function clearByPrefix($prefix)
     {
-        $options  = $this->getOptions();
-        $nsPrefix = $options->getNamespace() . $options->getNamespaceSeparator();
+        $prefix = (string) $prefix;
+        if ($prefix === '') {
+            throw new Exception\InvalidArgumentException('No prefix given');
+        }
+
+        $options   = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $nsPrefix  = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
 
         $flags = GlobIterator::SKIP_DOTS | GlobIterator::CURRENT_AS_PATHNAME;
         $path = $options->getCacheDir()
@@ -230,7 +236,7 @@ class Filesystem extends AbstractAdapter implements
         }
         $error = ErrorHandler::stop();
         if ($error) {
-            throw new Exception\RuntimeException("Failed to remove file '{$pathname}'", 0, $error);
+            throw new Exception\RuntimeException("Failed to remove files of '{$path}'", 0, $error);
         }
 
         return true;
@@ -302,9 +308,10 @@ class Filesystem extends AbstractAdapter implements
             return true;
         }
 
-        $tagCount = count($tags);
-        $options  = $this->getOptions();
-        $prefix   = $options->getNamespace() . $options->getNamespaceSeparator();
+        $tagCount  = count($tags);
+        $options   = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
 
         $flags = GlobIterator::SKIP_DOTS | GlobIterator::CURRENT_AS_PATHNAME;
         $path  = $options->getCacheDir()
@@ -344,9 +351,10 @@ class Filesystem extends AbstractAdapter implements
      */
     public function getIterator()
     {
-        $options = $this->getOptions();
-        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
-        $path    = $options->getCacheDir()
+        $options   = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $path      = $options->getCacheDir()
             . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options->getDirLevel())
             . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
         return new FilesystemIterator($this, $path, $prefix);
@@ -362,13 +370,13 @@ class Filesystem extends AbstractAdapter implements
      */
     public function optimize()
     {
-        $baseOptions = $this->getOptions();
-        if ($baseOptions->getDirLevel()) {
+        $options = $this->getOptions();
+        if ($options->getDirLevel()) {
+            $namespace = $options->getNamespace();
+            $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+
             // removes only empty directories
-            $this->rmDir(
-                $baseOptions->getCacheDir(),
-                $baseOptions->getNamespace() . $baseOptions->getNamespaceSeparator()
-            );
+            $this->rmDir($options->getCacheDir(), $prefix);
         }
         return true;
     }
@@ -1243,10 +1251,11 @@ class Filesystem extends AbstractAdapter implements
      */
     protected function getFileSpec($normalizedKey)
     {
-        $options = $this->getOptions();
-        $prefix  = $options->getNamespace() . $options->getNamespaceSeparator();
-        $path    = $options->getCacheDir() . \DIRECTORY_SEPARATOR;
-        $level   = $options->getDirLevel();
+        $options   = $this->getOptions();
+        $namespace = $options->getNamespace();
+        $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
+        $path      = $options->getCacheDir() . \DIRECTORY_SEPARATOR;
+        $level     = $options->getDirLevel();
 
         $fileSpecId = $path . $prefix . $normalizedKey . '/' . $level;
         if ($this->lastFileSpecId !== $fileSpecId) {

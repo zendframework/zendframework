@@ -413,4 +413,66 @@ CERT;
             'private_key' => $rsaOptions->getPrivateKey()->toString(),
         ));
     }
+
+    public function testZf3492Base64DetectDecrypt()
+    {
+        $data = 'vNKINbWV6qUKGsmawN8ii0mak7PPNoVQPC7fwXJOgMNfCgdT+9W4PUte4fic6U4A6fMra4gv7NCTESxap2qpBQ==';
+        $this->assertEquals('1234567890', $this->rsa->decrypt($data));
+    }
+
+    public function testZf3492Base64DetectVerify()
+    {
+        $data = 'sMHpp3u6DNecIm5RIkDD3xyKaH6qqP8roUWDs215iOGHehfK1ypqwoETKNP7NaksGS2C1Up813ixlGXkipPVbQ==';
+        $this->assertTrue($this->rsa->verify('1234567890', $data));
+    }
+
+    public function testDecryptBase64()
+    {
+        $data = 'vNKINbWV6qUKGsmawN8ii0mak7PPNoVQPC7fwXJOgMNfCgdT+9W4PUte4fic6U4A6fMra4gv7NCTESxap2qpBQ==';
+        $this->assertEquals('1234567890', $this->rsa->decrypt($data, null, Rsa::MODE_BASE64));
+    }
+
+    public function testDecryptCorruptBase64()
+    {
+        $data = 'vNKINbWV6qUKGsmawN8ii0mak7PPNoVQPC7fwXJOgMNfCgdT+9W4PUte4fic6U4A6fMra4gv7NCTESxap2qpBQ==';
+        $this->setExpectedException('Zend\Crypt\PublicKey\Rsa\Exception\RuntimeException');
+        $this->rsa->decrypt(base64_decode($data), null, Rsa::MODE_BASE64);
+    }
+
+    public function testDecryptRaw()
+    {
+        $data = 'vNKINbWV6qUKGsmawN8ii0mak7PPNoVQPC7fwXJOgMNfCgdT+9W4PUte4fic6U4A6fMra4gv7NCTESxap2qpBQ==';
+        $this->assertEquals('1234567890', $this->rsa->decrypt(base64_decode($data), null, Rsa::MODE_RAW));
+    }
+
+    public function testDecryptCorruptRaw()
+    {
+        $data = 'vNKINbWV6qUKGsmawN8ii0mak7PPNoVQPC7fwXJOgMNfCgdT+9W4PUte4fic6U4A6fMra4gv7NCTESxap2qpBQ==';
+        $this->setExpectedException('Zend\Crypt\PublicKey\Rsa\Exception\RuntimeException');
+        $this->rsa->decrypt($data, null, Rsa::MODE_RAW);
+    }
+
+    public function testVerifyBase64()
+    {
+        $data = 'sMHpp3u6DNecIm5RIkDD3xyKaH6qqP8roUWDs215iOGHehfK1ypqwoETKNP7NaksGS2C1Up813ixlGXkipPVbQ==';
+        $this->assertTrue($this->rsa->verify('1234567890', $data, null, Rsa::MODE_BASE64));
+    }
+
+    public function testVerifyCorruptBase64()
+    {
+        $data = 'sMHpp3u6DNecIm5RIkDD3xyKaH6qqP8roUWDs215iOGHehfK1ypqwoETKNP7NaksGS2C1Up813ixlGXkipPVbQ==';
+        $this->assertFalse($this->rsa->verify('1234567890', base64_decode($data), null, Rsa::MODE_BASE64));
+    }
+
+    public function testVerifyRaw()
+    {
+        $data = 'sMHpp3u6DNecIm5RIkDD3xyKaH6qqP8roUWDs215iOGHehfK1ypqwoETKNP7NaksGS2C1Up813ixlGXkipPVbQ==';
+        $this->assertTrue($this->rsa->verify('1234567890', base64_decode($data), null, Rsa::MODE_RAW));
+    }
+
+    public function testVerifyCorruptRaw()
+    {
+        $data = 'sMHpp3u6DNecIm5RIkDD3xyKaH6qqP8roUWDs215iOGHehfK1ypqwoETKNP7NaksGS2C1Up813ixlGXkipPVbQ==';
+        $this->assertFalse($this->rsa->verify('1234567890', $data, null, Rsa::MODE_RAW));
+    }
 }

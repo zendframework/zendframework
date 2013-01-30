@@ -10,6 +10,7 @@
 
 namespace ZendTest\View;
 
+use Zend\ServiceManager\ServiceManager;
 use Zend\View\HelperPluginManager;
 use Zend\View\Renderer\PhpRenderer;
 
@@ -63,5 +64,20 @@ class HelperPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->helpers->setInvokableClass('test', get_class($this));
         $this->setExpectedException('Zend\View\Exception\InvalidHelperException');
         $this->helpers->get('test');
+    }
+
+    public function testDefinesFactoryForIdentityPlugin()
+    {
+        $this->assertTrue($this->helpers->has('identity'));
+    }
+
+    public function testIdentityFactoryCanInjectAuthenticationServiceIfInParentServiceManager()
+    {
+        $services = new ServiceManager();
+        $services->setInvokableClass('Zend\Authentication\AuthenticationService', 'Zend\Authentication\AuthenticationService');
+        $this->helpers->setServiceLocator($services);
+        $identity = $this->helpers->get('identity');
+        $expected = $services->get('Zend\Authentication\AuthenticationService');
+        $this->assertSame($expected, $identity->getAuthenticationService());
     }
 }

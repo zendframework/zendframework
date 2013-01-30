@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 namespace Zend\Soap;
@@ -18,10 +17,6 @@ use Zend\Stdlib\ArrayUtils;
 
 /**
  * \Zend\Soap\Client
- *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage Client
  */
 class Client implements ServerClient
 {
@@ -318,7 +313,7 @@ class Client implements ServerClient
      *
      * @param  int $version One of the SOAP_1_1 or SOAP_1_2 constants
      * @return Client
-     * @throws Exception\ExceptionInterface with invalid soap version argument
+     * @throws Exception\InvalidArgumentException with invalid soap version argument
      */
     public function setSoapVersion($version)
     {
@@ -347,7 +342,7 @@ class Client implements ServerClient
      *
      * @param  array $classmap
      * @return Client
-     * @throws Exception\ExceptionInterface for any invalid class in the class map
+     * @throws Exception\InvalidArgumentException for any invalid class in the class map
      */
     public function setClassmap(array $classmap)
     {
@@ -378,7 +373,7 @@ class Client implements ServerClient
      *
      * @param  string $encoding
      * @return Client
-     * @throws Exception\ExceptionInterface with invalid encoding argument
+     * @throws Exception\InvalidArgumentException with invalid encoding argument
      */
     public function setEncoding($encoding)
     {
@@ -408,7 +403,7 @@ class Client implements ServerClient
      *
      * @param  string $urn
      * @return bool
-     * @throws Exception\ExceptionInterface on invalid URN
+     * @throws Exception\InvalidArgumentException on invalid URN
      */
     public function validateUrn($urn)
     {
@@ -484,7 +479,7 @@ class Client implements ServerClient
      *
      * @param  int $style One of the SOAP_RPC or SOAP_DOCUMENT constants
      * @return Client
-     * @throws Exception\ExceptionInterface with invalid style argument
+     * @throws Exception\InvalidArgumentException with invalid style argument
      */
     public function setStyle($style)
     {
@@ -514,7 +509,7 @@ class Client implements ServerClient
      *
      * @param  int $use One of the SOAP_ENCODED or SOAP_LITERAL constants
      * @return Client
-     * @throws Exception\ExceptionInterface with invalid message encoding method argument
+     * @throws Exception\InvalidArgumentException with invalid message encoding method argument
      */
     public function setEncodingMethod($use)
     {
@@ -684,7 +679,7 @@ class Client implements ServerClient
      *
      * @param  string $localCert local certificate path
      * @return Client
-     * @throws Exception\ExceptionInterface with invalid local certificate path argument
+     * @throws Exception\InvalidArgumentException with invalid local certificate path argument
      */
     public function setHttpsCertificate($localCert)
     {
@@ -777,6 +772,7 @@ class Client implements ServerClient
      *
      * @param  resource $context
      * @return Client
+     * @throws Exception\InvalidArgumentException if $context is not a valid stream resource
      */
     public function setStreamContext($context)
     {
@@ -1108,7 +1104,7 @@ class Client implements ServerClient
      * Return a list of available functions
      *
      * @return array
-     * @throws Exception\ExceptionInterface
+     * @throws Exception\UnexpectedValueException
      */
     public function getFunctions()
     {
@@ -1131,7 +1127,7 @@ class Client implements ServerClient
      * Return a list of SOAP types
      *
      * @return array
-     * @throws Exception\ExceptionInterface
+     * @throws Exception\UnexpectedValueException
      */
     public function getTypes()
     {

@@ -5,14 +5,15 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http\Client;
 
 use ArrayIterator;
-use Zend\Http\Header\Cookie;
+use Traversable;
+use Zend\Http\Header\SetCookie;
 use Zend\Http\Response;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Uri;
 
 /**
@@ -32,9 +33,6 @@ use Zend\Uri;
  * (by passing Zend\Http\Client\Cookies::COOKIE_STRING_CONCAT).
  *
  * @link       http://wp.netscape.com/newsref/std/cookie_spec.html for some specs.
- *
- * @category   Zend
- * @package    Zend\Http\Client
  */
 class Cookies
 {
@@ -83,27 +81,20 @@ class Cookies
     protected $rawCookies = array();
 
     /**
-     * Construct
-     *
-     */
-    public function __construct()
-    { }
-
-    /**
      * Add a cookie to the class. Cookie should be passed either as a Zend\Http\Header\Cookie object
      * or as a string - in which case an object is created from the string.
      *
-     * @param Cookie|string $cookie
+     * @param SetCookie|string $cookie
      * @param Uri\Uri|string    $refUri Optional reference URI (for domain, path, secure)
      * @throws Exception\InvalidArgumentException if invalid $cookie value
      */
     public function addCookie($cookie, $refUri = null)
     {
         if (is_string($cookie)) {
-            $cookie = Cookie::fromString($cookie, $refUri);
+            $cookie = SetCookie::fromString($cookie, $refUri);
         }
 
-        if ($cookie instanceof Cookie) {
+        if ($cookie instanceof SetCookie) {
             $domain = $cookie->getDomain();
             $path   = $cookie->getPath();
             if (!isset($this->cookies[$domain])) {
@@ -128,6 +119,9 @@ class Cookies
     public function addCookiesFromResponse(Response $response, $refUri)
     {
         $cookieHdrs = $response->getHeaders()->get('Set-Cookie');
+        if ($cookieHdrs instanceof Traversable) {
+            $cookieHdrs = ArrayUtils::iteratorToArray($cookieHdrs);
+        }
 
         if (is_array($cookieHdrs)) {
             foreach ($cookieHdrs as $cookie) {
@@ -262,7 +256,7 @@ class Cookies
                 }
             }
             return $ret;
-        } elseif ($ptr instanceof Cookie) {
+        } elseif ($ptr instanceof SetCookie) {
             switch ($retAs) {
                 case self::COOKIE_STRING_ARRAY:
                     return array($ptr->__toString());
@@ -293,7 +287,7 @@ class Cookies
         $ret = array();
 
         foreach (array_keys($this->cookies) as $cdom) {
-            if (Cookie::matchCookieDomain($cdom, $domain)) {
+            if (SetCookie::matchCookieDomain($cdom, $domain)) {
                 $ret[$cdom] = $this->cookies[$cdom];
             }
         }
@@ -314,7 +308,7 @@ class Cookies
 
         foreach ($domains as $dom => $pathsArray) {
             foreach (array_keys($pathsArray) as $cpath) {
-                if (Cookie::matchCookiePath($cpath, $path)) {
+                if (SetCookie::matchCookiePath($cpath, $path)) {
                     if (! isset($ret[$dom])) {
                         $ret[$dom] = array();
                     }

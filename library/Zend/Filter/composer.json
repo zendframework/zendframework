@@ -13,14 +13,17 @@
     },
     "target-dir": "Zend/Filter",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {
         "zendframework/zend-crypt": "self.version"
     },
     "suggest": {
         "zendframework/zend-i18n": "Zend\\I18n component",
+        "zendframework/zend-uri": "Zend\\Uri component for UriNormalize filter",
         "zendframework/zend-validator": "Zend\\Validator component",
-        "zendframework/zend-crypt": "Zend\\Crypt component"
+        "zendframework/zend-crypt": "Zend\\Crypt component",
+        "zendframework/zend-stdlib": "Zend\\Stdlib component"
     }
 }

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Crypt
  */
 
 namespace Zend\Crypt;
@@ -18,9 +17,6 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Enforces that symmetric adapters retrieved are instances of
  * Symmetric\SymmetricInterface. Additionally, it registers a number of default
  * symmetric adapters available.
- *
- * @category   Zend
- * @package    Zend_Crypt
  */
 class SymmetricPluginManager extends AbstractPluginManager
 {

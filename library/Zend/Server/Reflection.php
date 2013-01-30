@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Server
  */
 
 namespace Zend\Server;
@@ -15,9 +14,6 @@ use Zend\Server\Reflection\ReflectionFunction;
 
 /**
  * Reflection for determining method signatures to use with server classes
- *
- * @category   Zend
- * @package    Zend_Server
  */
 class Reflection
 {
@@ -36,7 +32,7 @@ class Reflection
      * method name (used for the signature key). Primarily to avoid collisions,
      * also for XmlRpc namespacing
      * @return \Zend\Server\Reflection\ReflectionClass
-     * @throws \Zend\Server\Reflection\Exception\ExceptionInterface
+     * @throws \Zend\Server\Reflection\Exception\InvalidArgumentException
      */
     public static function reflectClass($class, $argv = false, $namespace = '')
     {
@@ -70,7 +66,7 @@ class Reflection
      * function name (used for the signature key). Primarily to avoid
      * collisions, also for XmlRpc namespacing
      * @return \Zend\Server\Reflection\ReflectionFunction
-     * @throws \Zend\Server\Reflection\Exception\ExceptionInterface
+     * @throws \Zend\Server\Reflection\Exception\InvalidArgumentException
      */
     public static function reflectFunction($function, $argv = false, $namespace = '')
     {

@@ -46,7 +46,7 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
             ->setBody('testSendMailWithoutMinimalHeaders')
             ->addTo('zf-devteam@zend.com', 'ZF DevTeam')
         ;
-        $expectedMessage = "RSET\r\n"
+        $expectedMessage = "EHLO localhost\r\n"
                            . "MAIL FROM:<ralph.schindler@zend.com>\r\n"
                            . "DATA\r\n"
                            . "Date: Sun, 10 Jun 2012 20:07:24 +0200\r\n"

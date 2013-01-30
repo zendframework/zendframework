@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router;
@@ -19,10 +18,6 @@ use Zend\ServiceManager\AbstractPluginManager;
  * createFromInvokable() to call the route's factory method in order to get an
  * instance. The manager is marked to not share by default, in order to allow
  * multiple route instances of the same type.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Router
  */
 class RoutePluginManager extends AbstractPluginManager
 {
@@ -75,7 +70,7 @@ class RoutePluginManager extends AbstractPluginManager
                 __METHOD__,
                 $canonicalName,
                 ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
-                $canonicalName
+                $invokable
             ));
         }
 
@@ -85,7 +80,7 @@ class RoutePluginManager extends AbstractPluginManager
                 __METHOD__,
                 $canonicalName,
                 ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
-                $canonicalName,
+                $invokable,
                 __NAMESPACE__
             ));
         }

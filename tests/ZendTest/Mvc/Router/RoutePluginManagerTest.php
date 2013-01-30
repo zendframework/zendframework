@@ -27,4 +27,13 @@ class RoutePluginManagerTest extends TestCase
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $routes->get('foo');
     }
+
+    public function testCanLoadAnyRoute()
+    {
+        $routes = new RoutePluginManager();
+        $routes->setInvokableClass('DummyRoute', 'ZendTest\Mvc\Router\TestAsset\DummyRoute');
+        $route = $routes->get('DummyRoute');
+
+        $this->assertInstanceOf('ZendTest\Mvc\Router\TestAsset\DummyRoute', $route);
+    }
 }

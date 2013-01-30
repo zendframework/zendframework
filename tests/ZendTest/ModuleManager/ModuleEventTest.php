@@ -47,7 +47,7 @@ class ModuleEventTest extends TestCase
     public function testPassingNonStringToSetModuleNameRaisesException()
     {
         $this->setExpectedException('Zend\ModuleManager\Exception\InvalidArgumentException');
-        $this->event->setModuleName(new StdClass);
+        $this->event->setModuleName(new stdClass);
     }
 
     public function testSettingConfigListenerProxiesToParameters()

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
  */
 
 namespace Zend\Json;
@@ -16,9 +15,6 @@ use Zend\Json\Exception\RuntimeException;
 
 /**
  * Decode JSON encoded string to PHP variable constructs
- *
- * @category   Zend
- * @package    Zend_Json
  */
 class Decoder
 {
@@ -119,12 +115,12 @@ class Decoder
      *        - float
      *        - boolean
      *        - null
-     *      - StdClass
+     *      - stdClass
      *      - array
      *         - array of one or more of the above types
      *
      * By default, decoded objects will be returned as associative arrays; to
-     * return a StdClass object instead, pass {@link Zend_Json::TYPE_OBJECT} to
+     * return a stdClass object instead, pass {@link Zend_Json::TYPE_OBJECT} to
      * the $objectDecodeType parameter.
      *
      * @static
@@ -174,7 +170,7 @@ class Decoder
      * a special attribute called __className which specifies a class
      * name that should wrap the data contained within the encoded source.
      *
-     * Decodes to either an array or StdClass object, based on the value of
+     * Decodes to either an array or stdClass object, based on the value of
      * {@link $decodeType}. If invalid $decodeType present, returns as an
      * array.
      *
@@ -215,7 +211,7 @@ class Decoder
 
         switch ($this->decodeType) {
             case Json::TYPE_OBJECT:
-                // Create new StdClass and populate with $members
+                // Create new stdClass and populate with $members
                 $result = new stdClass();
                 foreach ($members as $key => $value) {
                     if ($key === '') {

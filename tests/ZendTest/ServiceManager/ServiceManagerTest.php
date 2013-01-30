@@ -211,6 +211,23 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\ServiceManager\ServiceManager::get
      */
+    public function testGetUsesIndivualSharedSettingWhenSetAndDeviatesFromShareByDefaultSetting()
+    {
+        $this->serviceManager->setAllowOverride(true);
+        $this->serviceManager->setShareByDefault(false);
+        $this->serviceManager->setInvokableClass('foo', 'ZendTest\ServiceManager\TestAsset\Foo');
+        $this->serviceManager->setShared('foo', true);
+        $this->assertSame($this->serviceManager->get('foo'), $this->serviceManager->get('foo'));
+
+        $this->serviceManager->setShareByDefault(true);
+        $this->serviceManager->setInvokableClass('foo', 'ZendTest\ServiceManager\TestAsset\Foo');
+        $this->serviceManager->setShared('foo', false);
+        $this->assertNotSame($this->serviceManager->get('foo'), $this->serviceManager->get('foo'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::get
+     */
     public function testGetWithAlias()
     {
         $this->serviceManager->setService('foo', 'bar');
@@ -666,5 +683,37 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $this->serviceManager->get('bar'));
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $this->serviceManager->get('bar'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::setService
+     * @covers Zend\ServiceManager\ServiceManager::get
+     * @covers Zend\ServiceManager\ServiceManager::retrieveFromPeeringManagerFirst
+     * @covers Zend\ServiceManager\ServiceManager::setRetrieveFromPeeringManagerFirst
+     * @covers Zend\ServiceManager\ServiceManager::addPeeringServiceManager
+     */
+    public function testRetrieveServiceFromPeeringServiceManagerIfretrieveFromPeeringManagerFirstSetToTrueAndServiceNamesAreSame()
+    {
+        $foo1 = "foo1";
+        $boo1 = "boo1";
+        $boo2 = "boo2";
+
+        $this->serviceManager->setService($foo1, $boo1);
+        $this->assertEquals($this->serviceManager->get($foo1), $boo1);
+
+        $serviceManagerChild = new ServiceManager();
+        $serviceManagerChild->setService($foo1, $boo2);
+        $this->assertEquals($serviceManagerChild->get($foo1), $boo2);
+
+        $this->assertFalse($this->serviceManager->retrieveFromPeeringManagerFirst());
+        $this->serviceManager->setRetrieveFromPeeringManagerFirst(true);
+        $this->assertTrue($this->serviceManager->retrieveFromPeeringManagerFirst());
+
+        $this->serviceManager->addPeeringServiceManager($serviceManagerChild);
+
+        $this->assertContains($serviceManagerChild, $this->readAttribute($this->serviceManager, 'peeringServiceManagers'));
+
+        $this->assertEquals($serviceManagerChild->get($foo1), $boo2);
+        $this->assertEquals($this->serviceManager->get($foo1), $boo2);
     }
 }

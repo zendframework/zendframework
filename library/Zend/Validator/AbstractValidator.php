@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
@@ -16,10 +15,6 @@ use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\Exception\InvalidArgumentException;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
 abstract class AbstractValidator implements
     TranslatorAwareInterface,
     ValidatorInterface
@@ -303,7 +298,7 @@ abstract class AbstractValidator implements
         ) {
             $value = get_class($value) . ' object';
         } elseif (is_array($value)) {
-            $value = '[' . implode(', ', $value) . ']';
+            $value = var_export($value, 1);
         } else {
             $value = (string) $value;
         }

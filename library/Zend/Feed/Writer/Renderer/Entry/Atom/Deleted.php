@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Writer\Renderer\Entry\Atom;
@@ -14,10 +13,6 @@ use DateTime;
 use DOMDocument;
 use DOMElement;
 
-/**
- * @category   Zend
- * @package    Zend_Feed_Writer
- */
 class Deleted
     extends \Zend\Feed\Writer\Renderer\AbstractRenderer
     implements \Zend\Feed\Writer\Renderer\RendererInterface
@@ -104,5 +99,4 @@ class Deleted
             $uri->appendChild($text);
         }
     }
-
 }

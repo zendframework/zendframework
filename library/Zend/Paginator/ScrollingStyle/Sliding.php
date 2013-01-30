@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Paginator
  */
 
 namespace Zend\Paginator\ScrollingStyle;
@@ -19,8 +18,6 @@ use Zend\Paginator\Paginator;
  * the end of the range and the last page in the set.
  *
  * @link       http://search.yahoo.com/search?p=Zend+Framework
- * @category   Zend
- * @package    Zend_Paginator
  */
 class Sliding implements ScrollingStyleInterface
 {

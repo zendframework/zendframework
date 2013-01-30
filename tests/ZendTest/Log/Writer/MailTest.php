@@ -97,16 +97,20 @@ class MailTest extends \PHPUnit_Framework_TestCase
         $transport->setOptions($options);
 
         $formatter = new \Zend\Log\Formatter\Simple();
+        $filter    = new \Zend\Log\Filter\Mock();
         $writer = new MailWriter(array(
+                'filters'   => $filter,
                 'formatter' => $formatter,
                 'mail'      => $message,
                 'transport' => $transport,
-                'subject_prepend_text' => 'subject prepend',
         ));
 
         $this->assertAttributeEquals($message, 'mail', $writer);
         $this->assertAttributeEquals($transport, 'transport', $writer);
         $this->assertAttributeEquals($formatter, 'formatter', $writer);
-        $this->assertAttributeEquals('subject prepend', 'subjectPrependText', $writer);
+
+        $filters = self::readAttribute($writer, 'filters');
+        $this->assertCount(1, $filters);
+        $this->assertEquals($filter, $filters[0]);
     }
 }

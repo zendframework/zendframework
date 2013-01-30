@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc\Client;
@@ -14,10 +13,6 @@ use Zend\XmlRpc\Client as XMLRPCClient;
 
 /**
  * Wraps the XML-RPC system.* introspection methods
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Client
  */
 class ServerIntrospection
 {
@@ -48,7 +43,7 @@ class ServerIntrospection
 
         try {
             $signatures = $this->getSignatureForEachMethodByMulticall($methods);
-        } catch (FaultException $e) {
+        } catch (Exception\FaultException $e) {
             // degrade to looping
         }
 
@@ -149,5 +144,4 @@ class ServerIntrospection
     {
         return $this->system->listMethods();
     }
-
 }

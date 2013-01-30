@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 namespace Zend\Soap;
@@ -20,10 +19,6 @@ use Zend\Stdlib\ArrayUtils;
 
 /**
  * Zend_Soap_Server
- *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage Server
  */
 class Server implements \Zend\Server\Server
 {
@@ -198,8 +193,6 @@ class Server implements \Zend\Server\Server
                 case 'wsdl':
                     $this->setWSDL($value);
                     break;
-                case 'featues':
-                    trigger_error(__METHOD__ . ': the option "featues" is deprecated as of 1.10.x and will be removed with 2.0.0; use "features" instead', E_USER_NOTICE);
                 case 'features':
                     $this->setSoapFeatures($value);
                     break;
@@ -630,7 +623,7 @@ class Server implements \Zend\Server\Server
     /**
      * Get server persistence
      *
-     * @return Server
+     * @return int
      */
     public function getPersistence()
     {

@@ -5,23 +5,41 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Log
  */
 
 namespace Zend\Log\Filter;
 
+use Zend\Log\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Filter
- */
 class SuppressFilter implements FilterInterface
 {
     /**
      * @var bool
      */
     protected $accept = true;
+
+    /**
+     * This is a simple boolean filter.
+     *
+     * @param int|array|Traversable $suppress
+     * @throws Exception\InvalidArgumentException
+     */
+    public function __construct($suppress = false)
+    {
+        if ($suppress instanceof Traversable) {
+            $suppress = iterator_to_array($suppress);
+        }
+        if (is_array($suppress)) {
+            $suppress = isset($suppress['suppress']) ? $suppress['suppress'] : false;
+        }
+        if (!is_bool($suppress)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                    'Suppress must be an boolean; received "%s"', gettype($suppress)
+            ));
+        }
+
+        $this->suppress($suppress);
+    }
 
     /**
      * This is a simple boolean filter.

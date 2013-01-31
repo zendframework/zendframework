@@ -157,7 +157,7 @@ class Bcrypt implements PasswordInterface
     {
         if (strlen($salt) < self::MIN_SALT_SIZE) {
             throw new Exception\InvalidArgumentException(
-                'The length of the salt must be at lest ' . self::MIN_SALT_SIZE . ' bytes'
+                'The length of the salt must be at least ' . self::MIN_SALT_SIZE . ' bytes'
             );
         }
         $this->salt = $salt;

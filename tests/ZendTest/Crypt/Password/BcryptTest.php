@@ -98,7 +98,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
     public function testSetSmallSalt()
     {
         $this->setExpectedException('Zend\Crypt\Password\Exception\InvalidArgumentException',
-                                    'The length of the salt must be at lest ' . Bcrypt::MIN_SALT_SIZE . ' bytes');
+                                    'The length of the salt must be at least ' . Bcrypt::MIN_SALT_SIZE . ' bytes');
         $this->bcrypt->setSalt('small salt');
     }
 

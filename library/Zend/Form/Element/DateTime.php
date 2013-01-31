@@ -20,6 +20,8 @@ use Zend\Validator\LessThan as LessThanValidator;
 
 class DateTime extends Element implements InputProviderInterface
 {
+    const DATETIME_FORMAT = 'Y-m-d\TH:iP';
+    
     /**
      * Seed attributes
      *
@@ -186,7 +188,7 @@ class DateTime extends Element implements InputProviderInterface
             'filters' => array(
                 array('name' => 'Zend\Filter\StringTrim'),
                 array(
-                    'name' => 'Zend\Filter\DateTimeNormalize',
+                    'name' => 'Zend\Filter\DateTimeFormatter',
                     'options' => array(
                         'format' => $this->getFormat(),
                     )

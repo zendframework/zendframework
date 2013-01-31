@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -13,7 +13,7 @@ use DateTime;
 use Exception;
 use Zend\Filter\AbstractFilter;
 
-class DateTimeNormalize extends AbstractFilter
+class DateTimeFormatter extends AbstractFilter
 {
     /**
      * A valid format string accepted by date()
@@ -75,16 +75,11 @@ class DateTimeNormalize extends AbstractFilter
     protected function normalizeDateTime($value)
     {
         if (is_int($value)) {
-            $dateTime = new DateTime();
-            $dateTime = $dateTime->setTimestamp($value);
+            $dateTime = new DateTime('@' . $value);
         } else {
             $dateTime = new DateTime($value);
         }
 
-        if ($dateTime) {
-            return $dateTime->format($this->format);
-        }
-
-        return $value;
+        return $dateTime->format($this->format);
     }
 }

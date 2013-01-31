@@ -10,7 +10,9 @@
 
 namespace ZendTest\Mvc\Router;
 
+use Zend\Di\Di;
 use Zend\Mvc\Router\RoutePluginManager;
+use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use PHPUnit_Framework_TestCase as TestCase;
 
 /**
@@ -35,5 +37,49 @@ class RoutePluginManagerTest extends TestCase
         $route = $routes->get('DummyRoute');
 
         $this->assertInstanceOf('ZendTest\Mvc\Router\TestAsset\DummyRoute', $route);
+    }
+
+    public function shippedRoutes()
+    {
+        return array(
+            'hostname' => array('Zend\Mvc\Router\Http\Hostname', array('route' => 'example.com')),
+            'literal'  => array('Zend\Mvc\Router\Http\Literal', array('route' => '/example')),
+            'regex'    => array('Zend\Mvc\Router\Http\Regex', array('regex' => '[a-z]+', 'spec' => '%s')),
+            'scheme'   => array('Zend\Mvc\Router\Http\Scheme', array('scheme' => 'http')),
+            'segment'  => array('Zend\Mvc\Router\Http\Segment', array('route' => '/:segment')),
+            'wildcard' => array('Zend\Mvc\Router\Http\Wildcard', array()),
+            'query'    => array('Zend\Mvc\Router\Http\Query', array()),
+            'method'   => array('Zend\Mvc\Router\Http\Method', array('verb' => 'GET')),
+        );
+    }
+
+    /**
+     * @dataProvider shippedRoutes
+     */
+    public function testDoesNotInvokeDiForShippedRoutes($routeName, $options)
+    {
+        // Setup route plugin manager
+        $routes = new RoutePluginManager();
+        foreach ($this->shippedRoutes() as $name => $info) {
+            $routes->setInvokableClass($name, $info[0]);
+        }
+
+        // Add DI abstract factory
+        $di                = new Di;
+        $diAbstractFactory = new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI);
+        $routes->addAbstractFactory($diAbstractFactory);
+
+        $this->assertTrue($routes->has($routeName));
+
+        try {
+            $route = $routes->get($routeName, $options);
+            $this->assertInstanceOf($routeName, $route);
+        } catch (\Exception $e) {
+            $messages = array();
+            do {
+                $messages[] = $e->getMessage() . "\n" . $e->getTraceAsString();
+            } while ($e = $e->getPrevious());
+            $this->fail(implode("\n\n", $messages));
+        }
     }
 }

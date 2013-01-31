@@ -11,7 +11,6 @@ namespace Zend\Filter;
 
 use DateTime;
 use Exception;
-use Zend\Filter\AbstractFilter;
 
 class DateTimeFormatter extends AbstractFilter
 {
@@ -26,7 +25,6 @@ class DateTimeFormatter extends AbstractFilter
      * Sets filter options
      *
      * @param  string|array|\Zend\Config\Config $options
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -36,10 +34,10 @@ class DateTimeFormatter extends AbstractFilter
     }
 
     /**
-     * Set the format string accepted by date() to use when normalizing a string
+     * Set the format string accepted by date() to use when formatting a string
      *
      * @param  string $format
-     * @return \Zend\Filter\DateTimeNormalize
+     * @return \Zend\Filter\DateTimeFormatter
      */
     public function setFormat($format)
     {

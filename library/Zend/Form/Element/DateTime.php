@@ -21,7 +21,7 @@ use Zend\Validator\LessThan as LessThanValidator;
 class DateTime extends Element implements InputProviderInterface
 {
     const DATETIME_FORMAT = 'Y-m-d\TH:iP';
-    
+
     /**
      * Seed attributes
      *
@@ -36,7 +36,7 @@ class DateTime extends Element implements InputProviderInterface
      *
      * @var string
      */
-    protected $format = PhpDateTime::W3C;
+    protected $format = self::DATETIME_FORMAT;
 
     /**
      * @var array

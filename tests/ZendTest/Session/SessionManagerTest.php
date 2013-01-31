@@ -525,4 +525,18 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'failed');
         $this->manager->start();
     }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testSessionWriteCloseStoresMetadata()
+    {
+        $this->manager->start();
+        $storage = $this->manager->getStorage();
+        $storage->setMetadata('foo', 'bar');
+        $metaData = $storage->getMetadata();
+        $this->manager->writeClose();
+        $this->assertSame($_SESSION['__ZF'], $metaData);
+    }
+
 }

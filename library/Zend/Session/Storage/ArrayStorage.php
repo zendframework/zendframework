@@ -337,9 +337,12 @@ class ArrayStorage extends ArrayObject implements StorageInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($metaData = false)
     {
         $values = $this->getArrayCopy();
+        if ($metaData) {
+            return $values;
+        }
         if (isset($values['__ZF'])) {
             unset($values['__ZF']);
         }

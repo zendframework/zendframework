@@ -9,7 +9,7 @@
 
 namespace Zend\Session;
 
-use ArrayObject;
+use Zend\Stdlib\ArrayObject;
 use Iterator;
 use Zend\Session\ManagerInterface as Manager;
 use Zend\Session\Storage\StorageInterface as Storage;
@@ -55,8 +55,8 @@ class Container extends ArrayObject
      *
      * Provide a name ('Default' if none provided) and a ManagerInterface instance.
      *
-     * @param  null|string $name
-     * @param  Manager $manager
+     * @param  null|string                        $name
+     * @param  Manager                            $manager
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($name = 'Default', Manager $manager = null)
@@ -106,6 +106,7 @@ class Container extends ArrayObject
             }
             static::$defaultManager = $manager;
         }
+
         return static::$defaultManager;
     }
 
@@ -122,7 +123,7 @@ class Container extends ArrayObject
     /**
      * Set session manager
      *
-     * @param  null|Manager $manager
+     * @param  null|Manager                       $manager
      * @return Container
      * @throws Exception\InvalidArgumentException
      */
@@ -137,6 +138,7 @@ class Container extends ArrayObject
             }
         }
         $this->manager = $manager;
+
         return $this;
     }
 
@@ -180,8 +182,8 @@ class Container extends ArrayObject
      * If not, it raises an exception; otherwise, it returns the Storage
      * object.
      *
-     * @param  bool $createContainer Whether or not to create the container for the namespace
-     * @return Storage|null Returns null only if $createContainer is false
+     * @param  bool                       $createContainer Whether or not to create the container for the namespace
+     * @return Storage|null               Returns null only if $createContainer is false
      * @throws Exception\RuntimeException
      */
     protected function verifyNamespace($createContainer = true)
@@ -197,6 +199,7 @@ class Container extends ArrayObject
         if (!is_array($storage[$name]) && !$storage[$name] instanceof ArrayObject) {
             throw new Exception\RuntimeException('Container cannot write to storage due to type mismatch');
         }
+
         return $storage;
     }
 
@@ -236,8 +239,8 @@ class Container extends ArrayObject
      * or the individual key.
      *
      * @param  Storage $storage
-     * @param  string $name Container name
-     * @param  string $key Key in container to check
+     * @param  string  $name    Container name
+     * @param  string  $key     Key in container to check
      * @return bool
      */
     protected function expireByExpiryTime(Storage $storage, $name, $key)
@@ -252,6 +255,7 @@ class Container extends ArrayObject
             unset($metadata['EXPIRE']);
             $storage->setMetadata($name, $metadata, true);
             $storage[$name] = $this->createContainer();
+
             return true;
         }
 
@@ -265,6 +269,7 @@ class Container extends ArrayObject
             unset($metadata['EXPIRE_KEYS'][$key]);
             $storage->setMetadata($name, $metadata, true);
             unset($storage[$name][$key]);
+
             return true;
         }
 
@@ -282,6 +287,7 @@ class Container extends ArrayObject
                 }
             }
             $storage->setMetadata($name, $metadata, true);
+
             return true;
         }
 
@@ -295,8 +301,8 @@ class Container extends ArrayObject
      * expired based on session hops
      *
      * @param  Storage $storage
-     * @param  string $name
-     * @param  string $key
+     * @param  string  $name
+     * @param  string  $key
      * @return bool
      */
     protected function expireByHops(Storage $storage, $name, $key)
@@ -314,10 +320,12 @@ class Container extends ArrayObject
                 unset($metadata['EXPIRE_HOPS']);
                 $storage->setMetadata($name, $metadata, true);
                 $storage[$name] = $this->createContainer();
+
                 return true;
             }
             $metadata['EXPIRE_HOPS']['ts'] = $ts;
             $storage->setMetadata($name, $metadata, true);
+
             return false;
         }
 
@@ -333,10 +341,12 @@ class Container extends ArrayObject
                 unset($metadata['EXPIRE_HOPS_KEYS'][$key]);
                 $storage->setMetadata($name, $metadata, true);
                 unset($storage[$name][$key]);
+
                 return true;
             }
             $metadata['EXPIRE_HOPS_KEYS'][$key]['ts'] = $ts;
             $storage->setMetadata($name, $metadata, true);
+
             return false;
         }
 
@@ -358,6 +368,7 @@ class Container extends ArrayObject
                 }
             }
             $storage->setMetadata($name, $metadata, true);
+
             return false;
         }
 
@@ -368,7 +379,7 @@ class Container extends ArrayObject
      * Store a value within the container
      *
      * @param  string $key
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return void
      */
     public function offsetSet($key, $value)
@@ -399,6 +410,7 @@ class Container extends ArrayObject
         }
 
         $expired = $this->expireKeys($key);
+
         return !$expired;
     }
 
@@ -408,14 +420,17 @@ class Container extends ArrayObject
      * @param  string $key
      * @return mixed
      */
-    public function offsetGet($key)
+    public function &offsetGet($key)
     {
+        $ret = null;
         if (!$this->offsetExists($key)) {
-            return null;
+            return $ret;
         }
         $storage = $this->getStorage();
         $name    = $this->getName();
-        return $storage[$name][$key];
+        $ret =& $storage[$name][$key];
+
+        return $ret;
     }
 
     /**
@@ -437,18 +452,22 @@ class Container extends ArrayObject
     /**
      * Exchange the current array with another array or object.
      *
-     * @param array|object $input
-     * @return array Returns the old array
+     * @param  array|object $input
+     * @return array        Returns the old array
      * @see ArrayObject::exchangeArray()
      */
-    public function exchangeArray($input)
+    public function exchangeArray(array $input)
     {
         $storage = $this->verifyNamespace();
         $name    = $this->getName();
 
         $old = $storage[$name];
         $storage[$name] = $input;
-        return (array) $old;
+        if ($old instanceof ArrayObject) {
+            return $old->getArrayCopy();
+        }
+
+        return $old;
     }
 
     /**
@@ -461,6 +480,7 @@ class Container extends ArrayObject
         $this->expireKeys();
         $storage   = $this->getStorage();
         $container = $storage[$this->getName()];
+
         return $container->getIterator();
     }
 
@@ -469,8 +489,8 @@ class Container extends ArrayObject
      *
      * Set the TTL for the entire container, a single key, or a set of keys.
      *
-     * @param  int $ttl TTL in seconds
-     * @param  string|array|null $vars
+     * @param  int                                $ttl  TTL in seconds
+     * @param  string|array|null                  $vars
      * @return Container
      * @throws Exception\InvalidArgumentException
      */
@@ -512,14 +532,15 @@ class Container extends ArrayObject
             $this->getName(),
             $data
         );
+
         return $this;
     }
 
     /**
      * Set expiration hops for the container, a single key, or set of keys
      *
-     * @param  int $hops
-     * @param  null|string|array $vars
+     * @param  int                                $hops
+     * @param  null|string|array                  $vars
      * @throws Exception\InvalidArgumentException
      * @return Container
      */
@@ -562,6 +583,7 @@ class Container extends ArrayObject
             $this->getName(),
             $data
         );
+
         return $this;
     }
 }

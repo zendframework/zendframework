@@ -9,7 +9,6 @@
 
 namespace Zend\Session\Storage;
 
-use ArrayAccess;
 use ArrayIterator;
 use IteratorAggregate;
 use Zend\Session\Exception;
@@ -25,9 +24,9 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
     /**
      * Constructor
      *
-     * @param  array|null $input
-     * @param  int $flags
-     * @param  string $iteratorClass
+     * @param array|null $input
+     * @param int        $flags
+     * @param string     $iteratorClass
      */
     public function __construct($input = null)
     {
@@ -49,7 +48,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
      * @param  mixed $key
      * @return mixed
      */
-    public function __get($key)
+    public function &__get($key)
     {
         return $this->offsetGet($key);
     }
@@ -69,7 +68,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
     /**
      * Isset Offset
      *
-     * @param  mixed $key
+     * @param  mixed   $key
      * @return boolean
      */
     public function __isset($key)
@@ -101,7 +100,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
     /**
      * Offset Exists
      *
-     * @param  mixed $key
+     * @param  mixed   $key
      * @return boolean
      */
     public function offsetExists($key)
@@ -115,11 +114,12 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
      * @param  mixed $key
      * @return mixed
      */
-    public function offsetGet($key)
+    public function &offsetGet($key)
     {
         if (isset($_SESSION[$key])) {
             return $_SESSION[$key];
         }
+
         return null;
     }
 
@@ -191,7 +191,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
      *
      * Ensures $_SESSION is set to an instance of the object when complete.
      *
-     * @param  array $array
+     * @param  array          $array
      * @return SessionStorage
      */
     public function fromArray(array $array)
@@ -199,6 +199,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
         $ts = $this->getRequestAccessTime();
         $_SESSION = $array;
         $this->setRequestAccessTime($ts);
+
         return $this;
     }
 
@@ -210,6 +211,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
     public function markImmutable()
     {
         $_SESSION['_IMMUTABLE'] = true;
+
         return $this;
     }
 
@@ -233,6 +235,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
     {
         if (null === $key) {
             $this->setMetadata('_READONLY', true);
+
             return $this;
         }
         if (isset($_SESSION[$key])) {
@@ -275,6 +278,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
         if (!$locks) {
             return false;
         }
+
         return array_key_exists($key, $locks);
     }
 
@@ -290,6 +294,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
             // Unlock everything
             $this->setMetadata('_READONLY', false);
             $this->setMetadata('_LOCKS', false);
+
             return $this;
         }
 
@@ -308,6 +313,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
             unset($locks[$key]);
             $this->setMetadata('_LOCKS', $locks, true);
         }
+
         return $this;
     }
 
@@ -321,9 +327,9 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
      * - localizing session storage
      * - etc.
      *
-     * @param  string $key
-     * @param  mixed $value
-     * @param  bool $overwriteArray Whether to overwrite or merge array values; by default, merges
+     * @param  string                     $key
+     * @param  mixed                      $value
+     * @param  bool                       $overwriteArray Whether to overwrite or merge array values; by default, merges
      * @return ArrayStorage
      * @throws Exception\RuntimeException
      */
@@ -387,7 +393,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
     /**
      * Clear the storage object or a subkey of the object
      *
-     * @param  null|int|string $key
+     * @param  null|int|string            $key
      * @return ArrayStorage
      * @throws Exception\RuntimeException
      */
@@ -398,6 +404,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
         }
         if (null === $key) {
             $this->fromArray(array());
+
             return $this;
         }
 
@@ -428,12 +435,13 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
     /**
      * Set the request access time
      *
-     * @param  float $time
+     * @param  float        $time
      * @return ArrayStorage
      */
     protected function setRequestAccessTime($time)
     {
         $this->setMetadata('_REQUEST_ACCESS_TIME', $time);
+
         return $this;
     }
 
@@ -454,6 +462,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
         if (isset($values['__ZF'])) {
             unset($values['__ZF']);
         }
+
         return $values;
     }
 }

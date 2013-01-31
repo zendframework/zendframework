@@ -526,4 +526,11 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->container->offsetExists('old'), "'exchangeArray' doesn't remove old items");
         $this->assertTrue($this->container->offsetExists('new'), "'exchangeArray' doesn't add the new array items");
     }
+
+    public function testMultiDimensionalUnset()
+    {
+        $this->container->foo = array('bar' => 'baz');
+        unset($this->container['foo']['bar']);
+        $this->assertSame(array(), $this->container->foo);
+    }
 }

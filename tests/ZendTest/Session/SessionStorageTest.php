@@ -57,7 +57,7 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
                 '_REQUEST_ACCESS_TIME' => $storage->getRequestAccessTime(),
             ),
         );
-        $this->assertSame($expected, (array) $_SESSION);
+        $this->assertSame($expected, $_SESSION->getArrayCopy());
     }
 
     public function testModifyingSessionSuperglobalDirectlyUpdatesStorage()

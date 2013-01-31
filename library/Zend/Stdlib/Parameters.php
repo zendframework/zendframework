@@ -9,9 +9,9 @@
 
 namespace Zend\Stdlib;
 
-use ArrayObject;
+use ArrayObject as PhpArrayObject;
 
-class Parameters extends ArrayObject implements ParametersInterface
+class Parameters extends PhpArrayObject implements ParametersInterface
 {
     /**
      * Constructor

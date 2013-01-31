@@ -9,7 +9,7 @@
 
 namespace Zend\Session\Storage;
 
-use ArrayObject;
+use Zend\Stdlib\ArrayObject;
 
 /**
  * Session storage in $_SESSION
@@ -25,23 +25,24 @@ class SessionStorage extends ArrayStorage
      * Sets the $_SESSION superglobal to an ArrayObject, maintaining previous
      * values if any discovered.
      *
-     * @param  array|null $input
-     * @param  int $flags
-     * @param  string $iteratorClass
+     * @param array|null $input
+     * @param int        $flags
+     * @param string     $iteratorClass
      */
     public function __construct($input = null, $flags = ArrayObject::ARRAY_AS_PROPS, $iteratorClass = '\\ArrayIterator')
     {
         $resetSession = true;
         if ((null === $input) && isset($_SESSION)) {
             $input = $_SESSION;
-            if (is_object($input) && $_SESSION instanceof \ArrayObject) {
+            if (is_object($input) && $_SESSION instanceof ArrayObject) {
                 $resetSession = false;
-            } elseif (is_object($input) && !$_SESSION instanceof \ArrayObject) {
+            } elseif (is_object($input) && !$_SESSION instanceof ArrayObject) {
                 $input = (array) $input;
             }
         } elseif (null === $input) {
             $input = array();
         }
+
         parent::__construct($input, $flags, $iteratorClass);
         if ($resetSession) {
             $_SESSION = $this;
@@ -66,7 +67,7 @@ class SessionStorage extends ArrayStorage
      *
      * Ensures $_SESSION is set to an instance of the object when complete.
      *
-     * @param  array $array
+     * @param  array          $array
      * @return SessionStorage
      */
     public function fromArray(array $array)
@@ -75,6 +76,7 @@ class SessionStorage extends ArrayStorage
         if ($_SESSION !== $this) {
             $_SESSION = $this;
         }
+
         return $this;
     }
 
@@ -86,6 +88,7 @@ class SessionStorage extends ArrayStorage
     public function markImmutable()
     {
         $this['_IMMUTABLE'] = true;
+
         return $this;
     }
 

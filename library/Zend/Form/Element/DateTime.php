@@ -20,8 +20,6 @@ use Zend\Validator\LessThan as LessThanValidator;
 
 class DateTime extends Element implements InputProviderInterface
 {
-    const DATETIME_FORMAT = 'Y-m-d\TH:iP';
-
     /**
      * Seed attributes
      *
@@ -32,13 +30,11 @@ class DateTime extends Element implements InputProviderInterface
     );
 
     /**
-     *
-     * Opera and mobile browsers support datetime input, and display a datepicker control
-     * But the submitted value does not include seconds.
+     * A valid format string accepted by date()
      *
      * @var string
      */
-    protected $format = self::DATETIME_FORMAT;
+    protected $format = PhpDateTime::W3C;
 
     /**
      * @var array
@@ -189,6 +185,12 @@ class DateTime extends Element implements InputProviderInterface
             'required' => true,
             'filters' => array(
                 array('name' => 'Zend\Filter\StringTrim'),
+                array(
+                    'name' => 'Zend\Filter\DateTimeNormalize',
+                    'options' => array(
+                        'format' => $this->getFormat(),
+                    )
+                )
             ),
             'validators' => $this->getValidators(),
         );

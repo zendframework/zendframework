@@ -233,4 +233,25 @@ class MemcachedResourceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->resourceManager, $this->resourceManager->removeResource($resourceId));
         $this->assertFalse($this->resourceManager->hasResource($resourceId));
     }
+
+    public function testSetLibOptionsOnExistingResource()
+    {
+        $memcachedInstalled = class_exists('Memcached', false);
+
+        $libOptions = array('compression' => false);
+        $resourceId = 'testResourceId';
+        $resourceMock = $this->getMock('Memcached', array('setOptions'));
+
+        if (!$memcachedInstalled) {
+            $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
+        } else {
+            $resourceMock
+                ->expects($this->once())
+                ->method('setOptions')
+                ->with($this->isType('array'));
+        }
+
+        $this->resourceManager->setResource($resourceId, $resourceMock);
+        $this->resourceManager->setLibOptions($resourceId, $libOptions);
+    }
 }

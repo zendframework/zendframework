@@ -213,7 +213,7 @@ class MemcachedResourceManager
         $resource = & $this->resources[$id];
         if ($resource instanceof MemcachedResource) {
             if (method_exists($resource, 'setOptions')) {
-                $resource->setOptions($resource);
+                $resource->setOptions($libOptions);
             } else {
                 foreach ($libOptions as $key => $value) {
                     $resource->setOption($key, $value);

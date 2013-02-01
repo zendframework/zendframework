@@ -13,8 +13,9 @@ use stdClass;
 use Zend\Authentication\Result as AuthenticationResult;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Select as DbSelect;
+use Zend\Db\Sql;
+use Zend\Db\Sql\Expression as SqlExpr;
+use Zend\Db\Sql\Predicate\Operator as SqlOp;
 
 class DbTable extends AbstractAdapter
 {
@@ -27,7 +28,7 @@ class DbTable extends AbstractAdapter
     protected $zendDb = null;
 
     /**
-     * @var DbSelect
+     * @var Sql\Select
      */
     protected $dbSelect = null;
 
@@ -205,12 +206,12 @@ class DbTable extends AbstractAdapter
     /**
      * getDbSelect() - Return the preauthentication Db Select object for userland select query modification
      *
-     * @return DbSelect
+     * @return Sql\Select
      */
     public function getDbSelect()
     {
         if ($this->dbSelect == null) {
-            $this->dbSelect = new DbSelect();
+            $this->dbSelect = new Sql\Select();
         }
         return $this->dbSelect;
     }
@@ -338,19 +339,17 @@ class DbTable extends AbstractAdapter
             $this->credentialTreatment = '?';
         }
 
-        $credentialExpression = new Expression(
-            '(CASE WHEN '
-            . $this->zendDb->getPlatform()->quoteIdentifier($this->credentialColumn)
-            . ' = ' . $this->credentialTreatment
-            . ' THEN 1 ELSE 0 END) AS '
-            . $this->zendDb->getPlatform()->quoteIdentifier('zend_auth_credential_match')
+        $credentialExpression = new SqlExpr(
+            '(CASE WHEN ?' . ' = ' . $this->credentialTreatment . ' THEN 1 ELSE 0 END) AS ?',
+            array($this->credentialColumn, $this->credential, 'zend_auth_credential_match'),
+            array(SqlExpr::TYPE_IDENTIFIER, SqlExpr::TYPE_VALUE, SqlExpr::TYPE_IDENTIFIER)
         );
 
         // get select
         $dbSelect = clone $this->getDbSelect();
         $dbSelect->from($this->tableName)
-                 ->columns(array('*', $credentialExpression))
-                 ->where($this->zendDb->getPlatform()->quoteIdentifier($this->identityColumn) . ' = ?');
+            ->columns(array('*', $credentialExpression))
+            ->where(new SqlOp($this->identityColumn, '=', $this->identity));
 
         return $dbSelect;
     }
@@ -363,14 +362,17 @@ class DbTable extends AbstractAdapter
      * @throws Exception\RuntimeException when an invalid select object is encountered
      * @return array
      */
-    protected function _authenticateQuerySelect(DbSelect $dbSelect)
+    protected function _authenticateQuerySelect(Sql\Select $dbSelect)
     {
-        $statement = $this->zendDb->createStatement();
-        $dbSelect->prepareStatement($this->zendDb, $statement);
-        $resultSet = new ResultSet();
+        $sql = new Sql\Sql($this->zendDb);
+        $statement = $sql->prepareStatementForSqlObject($dbSelect);
         try {
-            $resultSet->initialize($statement->execute(array($this->credential, $this->identity)));
-            $resultIdentities = $resultSet->toArray();
+            $result = $statement->execute();
+            $resultIdentities = array();
+            // iterate result, most cross platform way
+            foreach ($result as $row) {
+                $resultIdentities[] = $row;
+            }
         } catch (\Exception $e) {
             throw new Exception\RuntimeException(
                 'The supplied parameters to DbTable failed to '

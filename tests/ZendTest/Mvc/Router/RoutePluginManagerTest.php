@@ -82,4 +82,36 @@ class RoutePluginManagerTest extends TestCase
             $this->fail(implode("\n\n", $messages));
         }
     }
+
+    /**
+     * @dataProvider shippedRoutes
+     */
+    public function testDoesNotInvokeDiForShippedRoutesUsingShortName($routeName, $options)
+    {
+        // Setup route plugin manager
+        $routes = new RoutePluginManager();
+        foreach ($this->shippedRoutes() as $name => $info) {
+            $routes->setInvokableClass($name, $info[0]);
+        }
+
+        // Add DI abstract factory
+        $di                = new Di;
+        $diAbstractFactory = new DiAbstractServiceFactory($di, DiAbstractServiceFactory::USE_SL_BEFORE_DI);
+        $routes->addAbstractFactory($diAbstractFactory);
+
+        $shortName = substr($routeName, strrpos($routeName, '\\') + 1);
+
+        $this->assertTrue($routes->has($shortName));
+
+        try {
+            $route = $routes->get($shortName, $options);
+            $this->assertInstanceOf($routeName, $route);
+        } catch (\Exception $e) {
+            $messages = array();
+            do {
+                $messages[] = $e->getMessage() . "\n" . $e->getTraceAsString();
+            } while ($e = $e->getPrevious());
+            $this->fail(implode("\n\n", $messages));
+        }
+    }
 }

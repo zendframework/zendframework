@@ -16,10 +16,7 @@ before_install:
  - wget http://cs.sensiolabs.org/get/php-cs-fixer.phar
 
 script:
- - php ./tests/run-tests.php
- - output=$(php php-cs-fixer.phar fix -v --dry-run --level=psr2 library); if [[ $output ]]; then while read -r line; do echo -e "\e[00;31m$line\e[00m"; done <<< "$output"; false; fi;
- - output=$(php php-cs-fixer.phar fix -v --dry-run --level=psr2 tests); if [[ $output ]]; then while read -r line; do echo -e "\e[00;31m$line\e[00m"; done <<< "$output"; false; fi;
- - output=$(php php-cs-fixer.phar fix -v --dry-run --level=psr2 bin); if [[ $output ]]; then while read -r line; do echo -e "\e[00;31m$line\e[00m"; done <<< "$output"; false; fi;
+ - ./bin/travis-build.sh
 
 notifications:
   irc: "irc.freenode.org#zftalk.dev"

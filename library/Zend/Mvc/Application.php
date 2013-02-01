@@ -324,7 +324,7 @@ class Application implements
      * event object.
      *
      * @param  MvcEvent $event
-     * @return ResponseInterface
+     * @return Application
      */
     protected function completeRequest(MvcEvent $event)
     {
@@ -332,6 +332,6 @@ class Application implements
         $event->setTarget($this);
         $events->trigger(MvcEvent::EVENT_RENDER, $event);
         $events->trigger(MvcEvent::EVENT_FINISH, $event);
-        return $event->getResponse();
+        return $this;
     }
 }

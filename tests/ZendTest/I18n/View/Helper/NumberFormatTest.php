@@ -59,20 +59,39 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 'de_DE',
                 NumberFormatter::DECIMAL,
                 NumberFormatter::TYPE_DOUBLE,
+                null,
                 1234567.891234567890000,
                 '1.234.567,891'
             ),
             array(
                 'de_DE',
+                NumberFormatter::DECIMAL,
+                NumberFormatter::TYPE_DOUBLE,
+                6,
+                1234567.891234567890000,
+                '1.234.567,891235',
+            ),
+            array(
+                'de_DE',
                 NumberFormatter::PERCENT,
                 NumberFormatter::TYPE_DOUBLE,
+                null,
                 1234567.891234567890000,
                 '123.456.789 %'
             ),
             array(
                 'de_DE',
+                NumberFormatter::PERCENT,
+                NumberFormatter::TYPE_DOUBLE,
+                1,
+                1234567.891234567890000,
+                '123.456.789,1 %'
+            ),
+            array(
+                'de_DE',
                 NumberFormatter::SCIENTIFIC,
                 NumberFormatter::TYPE_DOUBLE,
+                null,
                 1234567.891234567890000,
                 '1,23456789123457E6'
             ),
@@ -80,6 +99,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 'ru_RU',
                 NumberFormatter::DECIMAL,
                 NumberFormatter::TYPE_DOUBLE,
+                null,
                 1234567.891234567890000,
                 '1 234 567,891'
             ),
@@ -87,6 +107,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 'ru_RU',
                 NumberFormatter::PERCENT,
                 NumberFormatter::TYPE_DOUBLE,
+                null,
                 1234567.891234567890000,
                 '123 456 789 %'
             ),
@@ -94,6 +115,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 'ru_RU',
                 NumberFormatter::SCIENTIFIC,
                 NumberFormatter::TYPE_DOUBLE,
+                null,
                 1234567.891234567890000,
                 '1,23456789123457E6'
             ),
@@ -101,6 +123,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 'en_US',
                 NumberFormatter::DECIMAL,
                 NumberFormatter::TYPE_DOUBLE,
+                null,
                 1234567.891234567890000,
                 '1,234,567.891'
             ),
@@ -108,6 +131,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 'en_US',
                 NumberFormatter::PERCENT,
                 NumberFormatter::TYPE_DOUBLE,
+                null,
                 1234567.891234567890000,
                 '123,456,789%'
             ),
@@ -115,6 +139,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
                 'en_US',
                 NumberFormatter::SCIENTIFIC,
                 NumberFormatter::TYPE_DOUBLE,
+                null,
                 1234567.891234567890000,
                 '1.23456789123457E6'
             ),
@@ -124,21 +149,22 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider currencyTestsDataProvider
      */
-    public function testBasic($locale, $formatStyle, $formatType, $number, $expected)
+    public function testBasic($locale, $formatStyle, $formatType, $decimals, $number, $expected)
     {
         $this->assertMbStringEquals($expected, $this->helper->__invoke(
-            $number, $formatStyle, $formatType, $locale
+            $number, $formatStyle, $formatType, $locale, $decimals
         ));
     }
 
     /**
      * @dataProvider currencyTestsDataProvider
      */
-    public function testSettersProvideDefaults($locale, $formatStyle, $formatType, $number, $expected)
+    public function testSettersProvideDefaults($locale, $formatStyle, $formatType, $decimals, $number, $expected)
     {
         $this->helper
              ->setLocale($locale)
              ->setFormatStyle($formatStyle)
+             ->setDecimals($decimals)
              ->setFormatType($formatType);
 
         $this->assertMbStringEquals($expected, $this->helper->__invoke($number));

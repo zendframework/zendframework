@@ -40,6 +40,13 @@ class NumberFormat extends AbstractHelper
     protected $formatType;
 
     /**
+     * number of decimals to use.
+     *
+     * @var integer
+     */
+    protected $decimals;
+
+    /**
      * Formatter instances.
      *
      * @var array
@@ -97,6 +104,28 @@ class NumberFormat extends AbstractHelper
     }
 
     /**
+     * Set number of decimals to use instead of the default.
+     *
+     * @param  integer $decimals
+     * @return NumberFormat
+     */
+    public function setDecimals($decimals)
+    {
+        $this->decimals = $decimals;
+        return $this;
+    }
+
+    /**
+     * Get number of decimals.
+     *
+     * @return integer
+     */
+    public function getDecimals()
+    {
+        return $this->decimals;
+    }
+
+    /**
      * Set locale to use instead of the default.
      *
      * @param string $locale
@@ -129,13 +158,15 @@ class NumberFormat extends AbstractHelper
      * @param  integer       $formatStyle
      * @param  integer       $formatType
      * @param  string        $locale
+     * @param  integer       $decimals
      * @return string
      */
     public function __invoke(
         $number,
         $formatStyle = null,
         $formatType  = null,
-        $locale      = null
+        $locale      = null,
+        $decimals    = null
     ) {
         if (null === $locale) {
             $locale = $this->getLocale();
@@ -146,14 +177,22 @@ class NumberFormat extends AbstractHelper
         if (null === $formatType) {
             $formatType = $this->getFormatType();
         }
+        if (!is_int($decimals) || $decimals < 0) {
+            $decimals = $this->getDecimals();
+        }
 
-        $formatterId = md5($formatStyle . "\0" . $locale);
+        $formatterId = md5($formatStyle . "\0" . $locale . "\0" . $decimals);
 
         if (!isset($this->formatters[$formatterId])) {
             $this->formatters[$formatterId] = new NumberFormatter(
                 $locale,
                 $formatStyle
             );
+
+            if ($decimals !== null) {
+                $this->formatters[$formatterId]->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $decimals);
+                $this->formatters[$formatterId]->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $decimals);
+            }
         }
 
         return $this->formatters[$formatterId]->format($number, $formatType);

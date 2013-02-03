@@ -156,12 +156,12 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      * Connect
      *
      * @throws Exception\RuntimeException
-     * @return void
+     * @return Connection
      */
     public function connect()
     {
         if ($this->resource instanceof \mysqli) {
-            return;
+            return $this;
         }
 
         // localize
@@ -214,6 +214,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             $this->resource->set_charset($p['charset']);
         }
 
+        return $this;
     }
 
     /**

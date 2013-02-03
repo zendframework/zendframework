@@ -182,9 +182,9 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             return null;
         };
 
+        $hostname = $findParameterValue(array('hostname'));
         $username = $findParameterValue(array('username'));
         $password = $findParameterValue(array('password'));
-        $instance = $findParameterValue(array('instance'));
         $encoding = $findParameterValue(array('encoding'));
 
         $isUnique = $findParameterValue(array('unique'));
@@ -196,7 +196,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         else if ($isPersistent === true)
             $connectionFuncName = 'oci_pconnect';
 
-        $this->resource = call_user_func($connectionFuncName, $username, $password, $instance, $encoding);
+        $this->resource = call_user_func($connectionFuncName, $username, $password, $hostname, $encoding);
         if (!$this->resource) {
             $e = oci_error();
             throw new Exception\RuntimeException(

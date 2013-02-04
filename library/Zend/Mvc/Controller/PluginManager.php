@@ -60,7 +60,7 @@ class PluginManager extends AbstractPluginManager
      * After invoking parent constructor, add an initializer to inject the
      * attached controller, if any, to the currently requested plugin.
      *
-     * @param  null|ConfigInterface $configuration
+     * @param null|ConfigInterface $configuration
      */
     public function __construct(ConfigInterface $configuration = null)
     {
@@ -73,32 +73,11 @@ class PluginManager extends AbstractPluginManager
                 return $plugin;
             }
             $plugin->setAuthenticationService($services->get('Zend\Authentication\AuthenticationService'));
+
             return $plugin;
         });
 
         $this->addInitializer(array($this, 'injectController'));
-    }
-
-    /**
-     * Retrieve a registered instance
-     *
-     * After the plugin is retrieved from the service locator, inject the
-     * controller in the plugin every time it is requested. This is required
-     * because a controller can use a plugin and another controller can be
-     * dispatched afterwards. If this second controller uses the same plugin
-     * as the first controller, the reference to the controller inside the
-     * plugin is lost.
-     *
-     * @param  string $name
-     * @param  mixed  $options
-     * @param  bool   $usePeeringServiceManagers
-     * @return mixed
-     */
-    public function get($name, $options = array(), $usePeeringServiceManagers = true)
-    {
-        $plugin = parent::get($name, $options, $usePeeringServiceManagers);
-        $this->injectController($plugin);
-        return $plugin;
     }
 
     /**
@@ -110,6 +89,7 @@ class PluginManager extends AbstractPluginManager
     public function setController(DispatchableInterface $controller)
     {
         $this->controller = $controller;
+
         return $this;
     }
 
@@ -151,7 +131,7 @@ class PluginManager extends AbstractPluginManager
      *
      * Any plugin is considered valid in this context.
      *
-     * @param  mixed $plugin
+     * @param  mixed                            $plugin
      * @return void
      * @throws Exception\InvalidPluginException
      */

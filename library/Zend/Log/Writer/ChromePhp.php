@@ -34,7 +34,7 @@ class ChromePhp extends AbstractWriter
     public function __construct($instance = null)
     {
         if ($instance instanceof Traversable) {
-            $inatce = iterator_to_array($instance);
+            $instance = iterator_to_array($instance);
         }
 
         if (is_array($instance)) {

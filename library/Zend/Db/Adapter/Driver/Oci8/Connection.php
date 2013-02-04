@@ -191,10 +191,11 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $isPersistent = $findParameterValue(array('persistent'));
 
         $connectionFuncName = 'oci_connect';
-        if ($isUnique === true)
+        if ($isUnique === true) {
             $connectionFuncName = 'oci_new_connect';
-        else if ($isPersistent === true)
+        } elseif ($isPersistent === true) {
             $connectionFuncName = 'oci_pconnect';
+        }
 
         $this->resource = call_user_func($connectionFuncName, $username, $password, $hostname, $encoding);
         if (!$this->resource) {

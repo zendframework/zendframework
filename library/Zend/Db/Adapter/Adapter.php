@@ -329,6 +329,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
             case 'SqlServer':
                 return new Platform\SqlServer($options);
             case 'Oracle':
+            case 'Oci':    
                 return new Platform\Oracle($options);
             case 'Sqlite':
                 return new Platform\Sqlite($options);

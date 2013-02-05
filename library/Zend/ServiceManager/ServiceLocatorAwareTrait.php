@@ -14,7 +14,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 trait ServiceLocatorAwareTrait
 {
     /**
-     * @var ServiceLocator
+     * @var ServiceLocatorInterface
      */
     protected $serviceLocator = null;
 
@@ -34,7 +34,7 @@ trait ServiceLocatorAwareTrait
     /**
      * Get service locator
      *
-     * @return ServiceLocator
+     * @return ServiceLocatorInterface
      */
     public function getServiceLocator()
     {

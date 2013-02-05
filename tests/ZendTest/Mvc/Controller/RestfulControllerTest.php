@@ -193,6 +193,11 @@ class RestfulControllerTest extends TestCase
         $content = $result->getContent();
         $this->assertEquals('', $content);
         $this->assertEquals('head', $this->routeMatch->getParam('action'));
+
+        $headers = $this->controller->getResponse()->getHeaders();
+        $this->assertTrue($headers->has('X-ZF2-Id'));
+        $header  = $headers->get('X-ZF2-Id');
+        $this->assertEquals(1, $header->getFieldValue());
     }
 
     public function testAllowsRegisteringCustomHttpMethodsWithHandlers()

@@ -315,6 +315,50 @@
   #2884
   (https://github.com/zendframework/zf2/issues/3606)
 
+### Potential Breakage
+
+Includes a fix to the classes `Zend\Filter\Encrypt`
+and `Zend\Filter\Decrypt` which may pose a small break for end-users. Each
+requires an encryption key be passed to either the constructor or the
+setKey() method now; this was done to improve the security of each
+class.
+
+`Zend\Session` includes a new `Zend\Session\Storage\SessionArrayStorage`
+class, which acts as a direct proxy to the $_SESSION superglobal. The
+SessionManager class now uses this new storage class by default, in
+order to fix an error that occurs when directly manipulating nested
+arrays of $_SESSION in third-party code. For most users, the change will
+be seamless. Those affected will be those (a) directly accessing the
+storage instance, and (b) using object notation to access session
+members:
+
+    $foo = null;
+    /** @var $storage Zend\Session\Storage\SessionStorage */
+    if (isset($storage->foo)) {
+        $foo = $storage->foo;
+    }
+
+If you are using array notation, as in the following example, your code
+remains forwards compatible:
+
+    $foo = null;
+
+    /** @var $storage Zend\Session\Storage\SessionStorage */
+    if (isset($storage['foo'])) {
+        $foo = $storage['foo'];
+    }
+
+If you are not working directly with the storage instance, you will be
+unaffected.
+
+For those affected, the following courses of action are possible:
+
+ * Update your code to replace object property notation with array
+   notation, OR
+ * Initialize and register a Zend\Session\Storage\SessionStorage object
+   explicitly with the session manager instance.
+
+
 ## 2.0.7 (29 Jan 2013):
 
 - 1992: [2.1] Adding simple Zend/I18n/Loader/Tmx
@@ -639,6 +683,14 @@
 - 3604: fixed Zend\Log\Logger::registerErrorHandler() doesn't log previous
   exceptions 
   (https://github.com/zendframework/zf2/issues/3604)
+
+### Potential Breakage
+
+Includes a fix to the classes `Zend\Filter\Encrypt`
+and `Zend\Filter\Decrypt` which may pose a small break for end-users. Each
+requires an encryption key be passed to either the constructor or the
+setKey() method now; this was done to improve the security of each
+class.
 
 ## 2.0.6 (19 Dec 2012):
 

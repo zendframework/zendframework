@@ -48,7 +48,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
      * @param  mixed $key
      * @return mixed
      */
-    public function &__get($key)
+    public function __get($key)
     {
         return $this->offsetGet($key);
     }
@@ -114,7 +114,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
      * @param  mixed $key
      * @return mixed
      */
-    public function &offsetGet($key)
+    public function offsetGet($key)
     {
         if (isset($_SESSION[$key])) {
             return $_SESSION[$key];

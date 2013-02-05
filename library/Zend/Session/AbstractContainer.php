@@ -22,7 +22,7 @@ use Zend\Session\Storage\StorageInterface as Storage;
  * Additionally, expiries may be absolute TTLs or measured in "hops", which
  * are based on how many times the key or container were accessed.
  */
-class Container extends ArrayObject
+abstract class AbstractContainer extends ArrayObject
 {
     /**
      * Container name
@@ -427,6 +427,7 @@ class Container extends ArrayObject
         }
         $storage = $this->getStorage();
         $name = $this->getName();
+
         return $storage[$name][$key];
     }
 

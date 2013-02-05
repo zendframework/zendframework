@@ -422,6 +422,17 @@ if (version_compare(PHP_VERSION, '5.3.3') > 0) {
 } else {
     class ArrayObject extends PhpArrayObject
     {
-
+        /**
+         * Constructor
+         *
+         * @param  array       $input
+         * @param  int         $flags
+         * @param  string      $iteratorClass
+         * @return ArrayObject
+         */
+        public function __construct($input = array(), $flags = self::STD_PROP_LIST, $iteratorClass = 'ArrayIterator')
+        {
+            parent::__construct($input, $flags, $iteratorClass);
+        }
     }
 }

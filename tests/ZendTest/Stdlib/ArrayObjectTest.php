@@ -45,8 +45,8 @@ class ArrayObjectTest extends TestCase
         $ar->bar = 'baz';
         $this->assertSame('bar', $ar->foo);
         $this->assertSame('baz', $ar->bar);
-        $this->assertNull($ar['foo']);
-        $this->assertNull($ar['bar']);
+        $this->assertFalse(isset($ar['foo']));
+        $this->assertFalse(isset($ar['bar']));
         $this->assertEquals(0, $ar->count());
         $this->assertSame(array(), $ar->getArrayCopy());
     }
@@ -225,8 +225,8 @@ class ArrayObjectTest extends TestCase
 
         $this->assertSame('bar', $ar['foo']);
         $this->assertSame('baz', $ar->bar);
-        $this->assertNull($ar->unknown);
-        $this->assertNull($ar['unknown']);
+        $this->assertFalse(isset($ar->unknown));
+        $this->assertFalse(isset($ar['unknown']));
     }
 
     public function testOffsetGetThrowsExceptionOnProtectedProperty()
@@ -256,7 +256,7 @@ class ArrayObjectTest extends TestCase
         $ar->bar = 'foo';
         unset($ar['foo']);
         unset($ar->bar);
-        $this->assertNull($ar['foo']);
+        $this->assertFalse(isset($ar['foo']));
         $this->assertNull($ar->bar);
         $this->assertSame(array(), $ar->getArrayCopy());
     }

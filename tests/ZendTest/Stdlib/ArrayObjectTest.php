@@ -142,7 +142,7 @@ class ArrayObjectTest extends TestCase
 
     public function testIterator()
     {
-        $ar = new ArrayObject(array('one', 'two', 'three'));
+        $ar = new ArrayObject(array('1' => 'one', '2' => 'two', '3' => 'three'));
         $iterator = $ar->getIterator();
         $this->assertEquals(new \ArrayIterator($ar->getArrayCopy()), $iterator);
     }
@@ -257,7 +257,7 @@ class ArrayObjectTest extends TestCase
         unset($ar['foo']);
         unset($ar->bar);
         $this->assertFalse(isset($ar['foo']));
-        $this->assertNull($ar->bar);
+        $this->assertFalse(isset($ar->bar));
         $this->assertSame(array(), $ar->getArrayCopy());
     }
 

@@ -252,7 +252,10 @@ class ArrayStorage extends ArrayObject implements StorageInterface
                 // unset($this['__ZF'][$key]) led to "indirect modification...
                 // has no effect" errors, so explicitly pulling array and
                 // unsetting key.
-                unset($this['__ZF'][$key]);
+                $array = $this['__ZF'];
+                unset($array[$key]);
+                $this['__ZF'] = $array;
+                unset($array);
             } elseif (null !== $value) {
                 $this['__ZF'][$key] = $value;
             }

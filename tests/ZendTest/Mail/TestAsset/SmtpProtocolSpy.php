@@ -21,6 +21,7 @@ use Zend\Mail\Protocol\Smtp;
  */
 class SmtpProtocolSpy extends Smtp
 {
+    public $calledQuit = false;
     protected $connect = false;
     protected $mail;
     protected $rcptTest = array();
@@ -44,6 +45,7 @@ class SmtpProtocolSpy extends Smtp
 
     public function quit()
     {
+        $this->calledQuit = true;
         parent::quit();
     }
 

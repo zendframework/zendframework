@@ -243,4 +243,14 @@ class StorageTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertSame($expected, $this->storage->toArray(true));
     }
+
+    public function testUnsetMultidimensional()
+    {
+        if (version_compare(PHP_VERSION, '5.3.3') <= 0) {
+            $this->markTestSkipped('Known issue on versions of PHP 5.3.3 or less');
+        }
+        $this->storage['foo'] = array('bar' => array('baz' => 'boo'));
+        unset($this->storage['foo']['bar']['baz']);
+        unset($this->storage['foo']['bar']);
+    }
 }

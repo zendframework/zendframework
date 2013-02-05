@@ -57,7 +57,7 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
                 '_REQUEST_ACCESS_TIME' => $storage->getRequestAccessTime(),
             ),
         );
-        $this->assertSame($expected, (array) $_SESSION);
+        $this->assertSame($expected, $_SESSION->getArrayCopy());
     }
 
     public function testModifyingSessionSuperglobalDirectlyUpdatesStorage()
@@ -94,5 +94,17 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $storage['foo']);
         $this->storage->markImmutable();
         $this->assertTrue($storage->isImmutable(), var_export($_SESSION, 1));
+    }
+
+    public function testMultiDimensionalUnset()
+    {
+        if (version_compare(PHP_VERSION, '5.3.3') <= 0) {
+            $this->markTestSkipped('Known issue on versions of PHP 5.3.3 or less');
+        }
+        $this->storage['foo'] = array('bar' => array('baz' => 'boo'));
+        unset($this->storage['foo']['bar']['baz']);
+        $this->assertFalse(isset($this->storage['foo']['bar']['baz']));
+        unset($this->storage['foo']['bar']);
+        $this->assertFalse(isset($this->storage['foo']['bar']));
     }
 }

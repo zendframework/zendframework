@@ -607,7 +607,12 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                     $jColumns[] = $jColumnParts->getSql();
                 } else {
                     $name = (is_array($join['name'])) ? key($join['name']) : $name = $join['name'];
-                    $jColumns[] = $platform->quoteIdentifier($name) . $separator . $platform->quoteIdentifierInFragment($jColumn);
+                    if ($name instanceof TableIdentifier) {
+                        $name = $platform->quoteIdentifier($name->getSchema()) . $separator . $platform->quoteIdentifier($name->getTable());
+                    } else {
+                        $name = $platform->quoteIdentifier($name);
+                    }
+                    $jColumns[] = $name . $separator . $platform->quoteIdentifierInFragment($jColumn);
                 }
                 if (is_string($jKey)) {
                     $jColumns[] = $platform->quoteIdentifier($jKey);
@@ -631,6 +636,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $joinSpecArgArray = array();
         foreach ($this->joins as $j => $join) {
             $joinSpecArgArray[$j] = array();
+            $joinName = null;
+            $joinAs = null;
 
             // type
             $joinSpecArgArray[$j][] = strtoupper($join['type']);

@@ -106,9 +106,9 @@ class Message
      */
     public function generateMessage($EOL = Mime::LINEEND)
     {
-        if (! $this->isMultiPart()) {
-            $body = array_shift($this->parts);
-            $body = $body->getContent($EOL);
+        if (!$this->isMultiPart()) {
+            $part = current($this->parts);
+            $body = $part->getContent($EOL);
         } else {
             $mime = $this->getMime();
 
@@ -176,8 +176,8 @@ class Message
      */
     protected static function _disassembleMime($body, $boundary)
     {
-        $start = 0;
-        $res = array();
+        $start  = 0;
+        $res    = array();
         // find every mime part limiter and cut out the
         // string before it.
         // the part before the first boundary string is discarded:
@@ -260,6 +260,7 @@ class Message
             }
             $res->addPart($newPart);
         }
+
         return $res;
     }
 }

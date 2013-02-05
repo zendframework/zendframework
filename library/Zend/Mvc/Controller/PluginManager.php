@@ -60,7 +60,7 @@ class PluginManager extends AbstractPluginManager
      * After invoking parent constructor, add an initializer to inject the
      * attached controller, if any, to the currently requested plugin.
      *
-     * @param  null|ConfigInterface $configuration
+     * @param null|ConfigInterface $configuration
      */
     public function __construct(ConfigInterface $configuration = null)
     {
@@ -73,10 +73,9 @@ class PluginManager extends AbstractPluginManager
                 return $plugin;
             }
             $plugin->setAuthenticationService($services->get('Zend\Authentication\AuthenticationService'));
+
             return $plugin;
         });
-
-        $this->addInitializer(array($this, 'injectController'));
     }
 
     /**
@@ -98,6 +97,7 @@ class PluginManager extends AbstractPluginManager
     {
         $plugin = parent::get($name, $options, $usePeeringServiceManagers);
         $this->injectController($plugin);
+
         return $plugin;
     }
 
@@ -110,6 +110,7 @@ class PluginManager extends AbstractPluginManager
     public function setController(DispatchableInterface $controller)
     {
         $this->controller = $controller;
+
         return $this;
     }
 
@@ -151,7 +152,7 @@ class PluginManager extends AbstractPluginManager
      *
      * Any plugin is considered valid in this context.
      *
-     * @param  mixed $plugin
+     * @param  mixed                            $plugin
      * @return void
      * @throws Exception\InvalidPluginException
      */

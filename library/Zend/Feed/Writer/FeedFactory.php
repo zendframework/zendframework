@@ -16,7 +16,7 @@ abstract class FeedFactory
     /**
      * Create and return a Feed based on data provided.
      *
-     * @param  array|\Traversable $data
+     * @param  array|Traversable $data
      * @throws Exception\InvalidArgumentException
      * @return Feed
      */

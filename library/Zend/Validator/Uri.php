@@ -45,7 +45,7 @@ class Uri extends AbstractValidator
     /**
      * Sets default option values for this instance
      *
-     * @param array|\Traversable $options
+     * @param array|Traversable $options
      */
     public function __construct($options = array())
     {

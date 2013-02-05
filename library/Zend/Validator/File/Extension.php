@@ -52,7 +52,7 @@ class Extension extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  string|array|\Traversable $options
+     * @param  string|array|Traversable $options
      */
     public function __construct($options = null)
     {

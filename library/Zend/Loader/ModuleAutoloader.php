@@ -326,7 +326,7 @@ class ModuleAutoloader implements SplAutoloader
             throw new Exception\InvalidArgumentException(
                 'Parameter to \\Zend\\Loader\\ModuleAutoloader\'s '
                 . 'registerPaths method must be an array or '
-                . 'implement the \\Traversable interface'
+                . 'implement the Traversable interface'
             );
         }
 

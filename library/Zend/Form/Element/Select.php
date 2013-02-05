@@ -99,7 +99,7 @@ class Select extends Element implements InputProviderInterface
      * - value_options: list of values and labels for the select options
      * _ empty_option: should an empty option be prepended to the options ?
      *
-     * @param  array|\Traversable $options
+     * @param  array|Traversable $options
      * @return Select|ElementInterface
      * @throws InvalidArgumentException
      */

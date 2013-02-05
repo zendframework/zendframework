@@ -134,7 +134,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Constructor.
      *
-     * @param  array|\Traversable|PythonPickleOptions $options Optional
+     * @param  array|Traversable|PythonPickleOptions $options Optional
      */
     public function __construct($options = null)
     {
@@ -151,7 +151,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Set options
      *
-     * @param  array|\Traversable|PythonPickleOptions $options
+     * @param  array|Traversable|PythonPickleOptions $options
      * @return PythonPickle
      */
     public function setOptions($options)

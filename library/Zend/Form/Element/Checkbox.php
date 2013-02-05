@@ -64,7 +64,7 @@ class Checkbox extends Element implements InputProviderInterface
      * - unchecked_value: value for checkbox when unchecked
      * - checked_value: value for checkbox when checked
      *
-     * @param  array|\Traversable $options
+     * @param  array|Traversable $options
      * @return Checkbox
      */
     public function setOptions($options)

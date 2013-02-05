@@ -961,6 +961,24 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processJoins' => array(array(array('INNER', '(SELECT "bar".* FROM "bar" WHERE "y" LIKE ?) AS "z"', '"z"."foo" = "bar"."id"')))
         );
 
+        // @link https://github.com/zendframework/zf2/issues/3294
+        // Test TableIdentifier In Joins, with multiple joins
+        $select40 = new Select;
+        $select40->from('foo')
+            ->join(array('a' => new TableIdentifier('another_foo', 'another_schema')), 'a.x = foo.foo_column')
+            ->join('bar', 'foo.colx = bar.colx');
+        $sqlPrep40 = // same
+        $sqlStr40 = 'SELECT "foo".*, "a".*, "bar".* FROM "foo"'
+            . ' INNER JOIN "another_schema"."another_foo" AS "a" ON "a"."x" = "foo"."foo_column"'
+            . ' INNER JOIN "bar" ON "foo"."colx" = "bar"."colx"';
+        $internalTests40 = array(
+            'processSelect' => array(array(array('"foo".*'), array('"a".*'), array('"bar".*')), '"foo"'),
+            'processJoins'  => array(array(
+                array('INNER', '"another_schema"."another_foo" AS "a"', '"a"."x" = "foo"."foo_column"'),
+                array('INNER', '"bar"', '"foo"."colx" = "bar"."colx"')
+            ))
+        );
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -1011,6 +1029,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select37, $sqlPrep37, array(),    $sqlStr37, $internalTests37),
             array($select38, $sqlPrep38, array(),    $sqlStr38, $internalTests38),
             array($select39, $sqlPrep39, array(),    $sqlStr39, $internalTests39),
+            array($select40, $sqlPrep40, array(),    $sqlStr40, $internalTests40),
         );
     }
 }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Cache
  */
@@ -232,5 +232,26 @@ class MemcachedResourceManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($this->resourceManager, $this->resourceManager->removeResource($resourceId));
         $this->assertFalse($this->resourceManager->hasResource($resourceId));
+    }
+
+    public function testSetLibOptionsOnExistingResource()
+    {
+        $memcachedInstalled = class_exists('Memcached', false);
+
+        $libOptions = array('compression' => false);
+        $resourceId = 'testResourceId';
+        $resourceMock = $this->getMock('Memcached', array('setOptions'));
+
+        if (!$memcachedInstalled) {
+            $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
+        } else {
+            $resourceMock
+                ->expects($this->once())
+                ->method('setOptions')
+                ->with($this->isType('array'));
+        }
+
+        $this->resourceManager->setResource($resourceId, $resourceMock);
+        $this->resourceManager->setLibOptions($resourceId, $libOptions);
     }
 }

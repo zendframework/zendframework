@@ -12,6 +12,7 @@ namespace ZendTest\Mvc;
 
 use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
+use ReflectionObject;
 use stdClass;
 use Zend\Config\Config;
 use Zend\Http\Request;
@@ -643,5 +644,17 @@ class ApplicationTest extends TestCase
 
         $this->application->run();
         $this->assertTrue($triggered);
+    }
+
+    public function testCompleteRequestShouldReturnApplicationInstance()
+    {
+        $r      = new ReflectionObject($this->application);
+        $method = $r->getMethod('completeRequest');
+        $method->setAccessible(true);
+
+        $this->application->bootstrap();
+        $event  = $this->application->getMvcEvent();
+        $result = $method->invoke($this->application, $event);
+        $this->assertSame($this->application, $result);
     }
 }

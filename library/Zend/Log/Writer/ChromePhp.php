@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -34,7 +34,7 @@ class ChromePhp extends AbstractWriter
     public function __construct($instance = null)
     {
         if ($instance instanceof Traversable) {
-            $inatce = iterator_to_array($instance);
+            $instance = iterator_to_array($instance);
         }
 
         if (is_array($instance)) {

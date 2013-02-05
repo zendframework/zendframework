@@ -8,7 +8,7 @@ read/subscribe to the following resources:
  -  Coding Standards:
     http://framework.zend.com/wiki/display/ZFDEV2/Coding+Standards
  -  ZF Git Guide:
-    README-GIT.md
+    [README-GIT.md](README-GIT.md)
  -  Contributor's Guide:
     http://framework.zend.com/participate/contributor-guide
  -  ZF Contributor's mailing list:

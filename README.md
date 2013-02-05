@@ -13,7 +13,7 @@ DD MMM YYYY
 
 ### UPDATES IN 2.1.1
 
-Please see CHANGELOG.md.
+Please see [CHANGELOG.md](CHANGELOG.md).
 
 ### SYSTEM REQUIREMENTS
 
@@ -22,12 +22,12 @@ latest PHP version whenever possible.
 
 ### INSTALLATION
 
-Please see INSTALL.md.
+Please see [INSTALL.md](INSTALL.md).
 
 ### CONTRIBUTING
 
 If you wish to contribute to Zend Framework, please read both the
-CONTRIBUTING.md and README-GIT.md file.
+[CONTRIBUTING.md](CONTRIBUTING.md) and [README-GIT.md](README-GIT.md) file.
 
 ### QUESTIONS AND FEEDBACK
 
@@ -50,7 +50,7 @@ the fw-announce mailing list by sending a blank message to
 ### LICENSE
 
 The files in this archive are released under the Zend Framework license.
-You can find a copy of this license in LICENSE.txt.
+You can find a copy of this license in [LICENSE.txt](LICENSE.txt).
 
 ### ACKNOWLEDGEMENTS
 

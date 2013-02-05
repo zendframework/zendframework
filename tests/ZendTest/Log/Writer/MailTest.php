@@ -52,7 +52,9 @@ class MailTest extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
-        @unlink(__DIR__. '/' . self::FILENAME);
+        if (file_exists(__DIR__. '/' . self::FILENAME)) {
+            unlink(__DIR__. '/' . self::FILENAME);
+        }
     }
 
     /**

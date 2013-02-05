@@ -351,11 +351,10 @@ class ServiceManager implements ServiceLocatorInterface
      *
      * @param  string  $name
      * @param  mixed   $service
-     * @param  bool    $shared
      * @return ServiceManager
      * @throws Exception\InvalidServiceNameException
      */
-    public function setService($name, $service, $shared = null)
+    public function setService($name, $service)
     {
         $cName = $this->canonicalizeName($name);
 
@@ -370,12 +369,8 @@ class ServiceManager implements ServiceLocatorInterface
             $this->unregisterService($cName);
         }
 
-        if ($shared === null) {
-            $shared = $this->shareByDefault();
-        }
-
         $this->instances[$cName] = $service;
-        $this->shared[$cName]    = (bool) $shared;
+
         return $this;
     }
 

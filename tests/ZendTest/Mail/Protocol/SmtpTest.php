@@ -60,4 +60,10 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expectedMessage, $this->connection->getLog());
     }
+
+    public function testDisconnectCallsQuit()
+    {
+        $this->connection->disconnect();
+        $this->assertTrue($this->connection->calledQuit);
+    }
 }

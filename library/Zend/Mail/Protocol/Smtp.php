@@ -376,10 +376,18 @@ class Smtp extends AbstractProtocol
      */
     public function disconnect()
     {
-        $this->quit();
         $this->_disconnect();
     }
 
+    /**
+     * Disconnect from remote host and free resource
+     */
+    protected function _disconnect()
+    {
+        // Make sure the session gets closed
+        $this->quit();
+        parent::_disconnect();
+    }
 
     /**
      * Start mail session

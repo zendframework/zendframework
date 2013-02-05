@@ -125,4 +125,20 @@ class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testToArrayWithMetaData()
+    {
+        $this->storage->foo = 'bar';
+        $this->storage->bar = 'baz';
+        $this->storage->setMetadata('foo', 'bar');
+        $expected = array(
+            '__ZF' => array(
+                '_REQUEST_ACCESS_TIME' => $this->storage->getRequestAccessTime(),
+                'foo' => 'bar',
+            ),
+            'foo' => 'bar',
+            'bar' => 'baz',
+        );
+        $this->assertSame($expected, $this->storage->toArray(true));
+    }
+
 }

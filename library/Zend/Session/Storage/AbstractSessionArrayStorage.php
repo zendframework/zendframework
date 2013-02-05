@@ -452,13 +452,18 @@ abstract class AbstractSessionArrayStorage implements IteratorAggregate, Storage
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($metaData = false)
     {
         if (isset($_SESSION)) {
             $values = $_SESSION;
         } else {
             $values = array();
         }
+
+        if ($metaData) {
+            return $values;
+        }
+
         if (isset($values['__ZF'])) {
             unset($values['__ZF']);
         }

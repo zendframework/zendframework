@@ -281,7 +281,7 @@ abstract class AbstractRestfulController extends AbstractController
             // HEAD
             case 'head':
                 $id = $this->getIdentifier($routeMatch, $request);
-                if ($id !== false) {
+                if ($id === false) {
                     $id = null;
                 }
                 $action = 'head';

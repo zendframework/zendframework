@@ -85,7 +85,7 @@ class Factory
     public function getFormElementManager()
     {
         if ($this->formElementManager === null) {
-            $this->formElementManager = new FormElementManager();
+            $this->setFormElementManager(new FormElementManager());
         }
 
         return $this->formElementManager;

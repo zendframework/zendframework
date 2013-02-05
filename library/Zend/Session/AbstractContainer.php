@@ -10,7 +10,9 @@
 namespace Zend\Session;
 
 use Zend\Stdlib\ArrayObject;
+use ArrayIterator;
 use Iterator;
+use Traversable;
 use Zend\Session\ManagerInterface as Manager;
 use Zend\Session\Storage\StorageInterface as Storage;
 
@@ -479,7 +481,10 @@ abstract class AbstractContainer extends ArrayObject
         $storage   = $this->getStorage();
         $container = $storage[$this->getName()];
 
-        return $container->getIterator();
+        if ($container instanceof Traversable) {
+            return $container;
+        }
+        return new ArrayIterator($container);
     }
 
     /**

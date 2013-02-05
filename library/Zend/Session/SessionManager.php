@@ -103,7 +103,10 @@ class SessionManager extends AbstractManager
                 $storage->fromArray($_SESSION);
             }
             $_SESSION = $storage;
+        } elseif ($storage instanceof Storage\SessionArrayStorage) {
+            $storage->fromArray($_SESSION);
         }
+
         if (!$this->isValid()) {
             throw new Exception\RuntimeException('Session validation failed');
         }
@@ -159,7 +162,7 @@ class SessionManager extends AbstractManager
         // object isImmutable.
         $storage  = $this->getStorage();
         if (!$storage->isImmutable()) {
-            $_SESSION = $storage->toArray();
+            $_SESSION = $storage->toArray(true);
             session_write_close();
             $storage->fromArray($_SESSION);
             $storage->markImmutable();

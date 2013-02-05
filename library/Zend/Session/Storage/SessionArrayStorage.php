@@ -197,6 +197,9 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
     public function fromArray(array $array)
     {
         $ts = $this->getRequestAccessTime();
+        if (!$ts) {
+            $ts = microtime(true);
+        }
         $_SESSION = $array;
         $this->setRequestAccessTime($ts);
         return $this;
@@ -346,10 +349,7 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
             }
         } else {
             if ((null === $value) && isset($_SESSION['__ZF'][$key])) {
-                $array = $_SESSION['__ZF'];
-                unset($array[$key]);
-                $_SESSION['__ZF'] = $array;
-                unset($array);
+                unset($_SESSION['__ZF'][$key]);
             } elseif (null !== $value) {
                 $_SESSION['__ZF'][$key] = $value;
             }
@@ -444,13 +444,18 @@ class SessionArrayStorage implements IteratorAggregate, StorageInterface
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($metaData = false)
     {
         if (isset($_SESSION)) {
             $values = $_SESSION;
         } else {
             $values = array();
         }
+
+        if ($metaData) {
+            return $values;
+        }
+
         if (isset($values['__ZF'])) {
             unset($values['__ZF']);
         }

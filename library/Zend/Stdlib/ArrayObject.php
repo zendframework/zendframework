@@ -220,7 +220,7 @@ if (version_compare(PHP_VERSION, '5.3.3') > 0) {
         public function getIterator()
         {
             $class = $this->iteratorClass;
-            
+
             return new $class($this->storage);
         }
 

@@ -81,6 +81,9 @@ class RestfulTestController extends AbstractRestfulController
      */
     public function head($id = null)
     {
+        if ($id) {
+            $this->getResponse()->getHeaders()->addHeaderLine('X-ZF2-Id', $id);
+        }
     }
 
     /**

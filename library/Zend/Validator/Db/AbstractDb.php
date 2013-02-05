@@ -12,7 +12,8 @@ namespace Zend\Validator\Db;
 use Traversable;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\Adapter\Driver\DriverInterface as DbDriverInterface;
-use Zend\Db\Sql\Select as DbSelect;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Select;
 use Zend\Db\Sql\TableIdentifier;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
@@ -40,7 +41,7 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * Select object to use. can be set, or will be auto-generated
      *
-     * @var DbSelect
+     * @var Select
      */
     protected $select;
 
@@ -85,14 +86,14 @@ abstract class AbstractDb extends AbstractValidator
      * 'exclude' => An optional where clause or field/value pair to exclude from the query
      * 'adapter' => An optional database adapter to use
      *
-     * @param array|Traversable|DbSelect $options Options to use for this validator
+     * @param array|Traversable|Select $options Options to use for this validator
      * @throws \Zend\Validator\Exception\InvalidArgumentException
      */
     public function __construct($options = null)
     {
         parent::__construct($options);
 
-        if ($options instanceof DbSelect) {
+        if ($options instanceof Select) {
             $this->setSelect($options);
             return;
         }
@@ -261,10 +262,10 @@ abstract class AbstractDb extends AbstractValidator
     /**
      * Sets the select object to be used by the validator
      *
-     * @param  DbSelect $select
+     * @param  Select $select
      * @return self Provides a fluent interface
      */
-    public function setSelect(DbSelect $select)
+    public function setSelect(Select $select)
     {
         $this->select = $select;
         return $this;
@@ -276,37 +277,19 @@ abstract class AbstractDb extends AbstractValidator
      * then it will auto-generate one from the given table,
      * schema, field, and adapter options.
      *
-     * @return DbSelect The Select object which will be used
+     * @return Select The Select object which will be used
      */
     public function getSelect()
     {
-        if ($this->select instanceof DbSelect) {
+        if ($this->select instanceof Select) {
             return $this->select;
         }
 
-        $adapter  = $this->getAdapter();
-        $driver   = $adapter->getDriver();
-        $platform = $adapter->getPlatform();
-
-        /*
-         * Build select object
-         */
-        $select          = new DbSelect();
+        // Build select object
+        $select          = new Select();
         $tableIdentifier = new TableIdentifier($this->table, $this->schema);
-        $select->from($tableIdentifier)->columns(
-            array($this->field)
-        );
-
-        // Support both named and positional parameters
-        if (DbDriverInterface::PARAMETERIZATION_NAMED == $driver->getPrepareType()) {
-            $select->where(
-                $platform->quoteIdentifier($this->field, true) . ' = :value'
-            );
-        } else {
-            $select->where(
-                $platform->quoteIdentifier($this->field, true) . ' = ?'
-            );
-        }
+        $select->from($tableIdentifier)->columns(array($this->field));
+        $select->where->equalTo($this->field, null);
 
         if ($this->exclude !== null) {
             if (is_array($this->exclude)) {
@@ -332,10 +315,13 @@ abstract class AbstractDb extends AbstractValidator
      */
     protected function query($value)
     {
-        $adapter  = $this->getAdapter();
-        $statement = $adapter->createStatement();
-        $this->getSelect()->prepareStatement($adapter, $statement);
+        $sql = new Sql($this->getAdapter());
+        $select = $this->getSelect();
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $parameters = $statement->getParameterContainer();
+        $parameters['where1'] = $value;
+        $result = $statement->execute();
 
-        return $statement->execute(array('value' => $value))->current();
+        return $result->current();
     }
 }

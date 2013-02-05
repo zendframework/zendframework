@@ -95,4 +95,16 @@ class SessionStorageTest extends \PHPUnit_Framework_TestCase
         $this->storage->markImmutable();
         $this->assertTrue($storage->isImmutable(), var_export($_SESSION, 1));
     }
+
+    public function testMultiDimensionalUnset()
+    {
+        if (version_compare(PHP_VERSION, '5.3.3') <= 0) {
+            $this->markTestSkipped('Known issue on versions of PHP 5.3.3 or less');
+        }
+        $this->storage['foo'] = array('bar' => array('baz' => 'boo'));
+        unset($this->storage['foo']['bar']['baz']);
+        $this->assertFalse(isset($this->storage['foo']['bar']['baz']));
+        unset($this->storage['foo']['bar']);
+        $this->assertFalse(isset($this->storage['foo']['bar']));
+    }
 }

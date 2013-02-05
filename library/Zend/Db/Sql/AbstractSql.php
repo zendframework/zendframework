@@ -112,19 +112,30 @@ abstract class AbstractSql
     }
 
     /**
-     * @param $specification
+     * @param $specifications
      * @param $parameters
      * @return string
      * @throws Exception\RuntimeException
      */
-    protected function createSqlFromSpecificationAndParameters($specification, $parameters)
+    protected function createSqlFromSpecificationAndParameters($specifications, $parameters)
     {
-        if (is_string($specification)) {
-            return vsprintf($specification, $parameters);
+        if (is_string($specifications)) {
+            return vsprintf($specifications, $parameters);
         }
 
-        $topSpec = key($specification);
-        $paramSpecs = $specification[$topSpec];
+        $parametersCount = count($parameters);
+        foreach ($specifications as $specificationString => $paramSpecs) {
+            if ($parametersCount == count($paramSpecs)) {
+                break;
+            }
+            unset($specificationString, $paramSpecs);
+        }
+
+        if (!isset($specificationString)) {
+            throw new Exception\RuntimeException(
+                'A number of parameters was found that is not supported by this specification'
+            );
+        }
 
         $topParameters = array();
         foreach ($parameters as $position => $paramsForPosition) {
@@ -148,7 +159,7 @@ abstract class AbstractSql
                 $topParameters[] = $paramsForPosition;
             }
         }
-        return vsprintf($topSpec, $topParameters);
+        return vsprintf($specificationString, $topParameters);
     }
 
     protected function processSubSelect(Select $subselect, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)

@@ -144,7 +144,8 @@ class ArrayObjectTest extends TestCase
     {
         $ar = new ArrayObject(array('1' => 'one', '2' => 'two', '3' => 'three'));
         $iterator = $ar->getIterator();
-        $this->assertEquals(new \ArrayIterator($ar->getArrayCopy()), $iterator);
+        $iterator2 = new \ArrayIterator($ar->getArrayCopy());
+        $this->assertEquals($iterator2->getArrayCopy(), $iterator->getArrayCopy());
     }
 
     public function testIteratorClass()

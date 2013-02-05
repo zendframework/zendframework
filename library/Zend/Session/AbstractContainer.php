@@ -454,7 +454,7 @@ abstract class AbstractContainer extends ArrayObject
      * @return array        Returns the old array
      * @see ArrayObject::exchangeArray()
      */
-    public function exchangeArray(array $input)
+    protected function exchangeArrayCompat($input)
     {
         $storage = $this->verifyNamespace();
         $name    = $this->getName();

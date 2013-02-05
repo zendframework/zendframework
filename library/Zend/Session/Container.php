@@ -21,6 +21,18 @@ if (version_compare(PHP_VERSION, '5.3.3') > 0) {
     class Container extends AbstractContainer
     {
         /**
+         * Exchange the current array with another array or object.
+         *
+         * @param  array|object $input
+         * @return array        Returns the old array
+         * @see ArrayObject::exchangeArray()
+         */
+        public function exchangeArray(array $input)
+        {
+            return parent::exchangeArrayCompat($input);
+        }
+
+        /**
          * Retrieve a specific key in the container
          *
          * @param  string $key
@@ -45,5 +57,16 @@ if (version_compare(PHP_VERSION, '5.3.3') > 0) {
      */
     class Container extends AbstractContainer
     {
+        /**
+         * Exchange the current array with another array or object.
+         *
+         * @param  array|object $input
+         * @return array        Returns the old array
+         * @see ArrayObject::exchangeArray()
+         */
+        public function exchangeArray($input)
+        {
+            return parent::exchangeArrayCompat($input);
+        }
     }
 }

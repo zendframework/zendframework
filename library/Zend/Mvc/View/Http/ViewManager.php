@@ -190,7 +190,7 @@ class ViewManager implements ListenerAggregateInterface
         }
 
         $this->renderer = new ViewPhpRenderer;
-        $this->renderer->setHelperPluginManager($this->getHelpermanager());
+        $this->renderer->setHelperPluginManager($this->getHelperManager());
         $this->renderer->setResolver($this->getResolver());
 
         $model       = $this->getViewModel();

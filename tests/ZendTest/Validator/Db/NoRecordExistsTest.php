@@ -11,6 +11,7 @@
 namespace ZendTest\Validator\Db;
 
 use Zend\Validator\Db\NoRecordExists;
+use Zend\Db\Adapter\ParameterContainer;
 use ArrayObject;
 
 /**
@@ -37,21 +38,25 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
 
         $mockHasResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $mockHasResult->expects($this->any())
-                      ->method('current')
-                      ->will($this->returnValue($mockHasResultRow));
+            ->method('current')
+            ->will($this->returnValue($mockHasResultRow));
 
         $mockHasResultStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockHasResultStatement->expects($this->any())
-                               ->method('execute')
-                               ->will($this->returnValue($mockHasResult));
+            ->method('execute')
+            ->will($this->returnValue($mockHasResult));
+
+        $mockHasResultStatement->expects($this->any())
+            ->method('getParameterContainer')
+            ->will($this->returnValue(new ParameterContainer()));
 
         $mockHasResultDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockHasResultDriver->expects($this->any())
-                            ->method('createStatement')
-                            ->will($this->returnValue($mockHasResultStatement));
+            ->method('createStatement')
+            ->will($this->returnValue($mockHasResultStatement));
         $mockHasResultDriver->expects($this->any())
-                            ->method('getConnection')
-                            ->will($this->returnValue($mockConnection));
+            ->method('getConnection')
+            ->will($this->returnValue($mockConnection));
 
         return $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockHasResultDriver));
     }
@@ -68,21 +73,25 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
 
         $mockNoResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $mockNoResult->expects($this->any())
-                     ->method('current')
-                     ->will($this->returnValue(null));
+            ->method('current')
+            ->will($this->returnValue(null));
 
         $mockNoResultStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockNoResultStatement->expects($this->any())
-                              ->method('execute')
-                              ->will($this->returnValue($mockNoResult));
+            ->method('execute')
+            ->will($this->returnValue($mockNoResult));
+
+        $mockNoResultStatement->expects($this->any())
+            ->method('getParameterContainer')
+            ->will($this->returnValue(new ParameterContainer()));
 
         $mockNoResultDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockNoResultDriver->expects($this->any())
-                           ->method('createStatement')
-                           ->will($this->returnValue($mockNoResultStatement));
+            ->method('createStatement')
+            ->will($this->returnValue($mockNoResultStatement));
         $mockNoResultDriver->expects($this->any())
-                           ->method('getConnection')
-                           ->will($this->returnValue($mockConnection));
+            ->method('getConnection')
+            ->will($this->returnValue($mockConnection));
 
         return $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockNoResultDriver));
     }

@@ -26,8 +26,6 @@ abstract class AbstractResponseSender implements ResponseSenderInterface
         }
 
         $response = $event->getResponse();
-        $status   = $response->renderStatusLine();
-        header($status);
 
         foreach ($response->getHeaders() as $header) {
             if ($header instanceof MultipleHeaderInterface) {
@@ -36,6 +34,9 @@ abstract class AbstractResponseSender implements ResponseSenderInterface
             }
             header($header->toString());
         }
+
+        $status = $response->renderStatusLine();
+        header($status);
 
         $event->setHeadersSent();
         return $this;

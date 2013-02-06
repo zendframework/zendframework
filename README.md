@@ -5,11 +5,11 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.1.1dev*
+*Zend Framework 2.1.1*
 
 This is the first maintenance release for the version 2.1 series.
 
-DD MMM YYYY
+06 Feb 2013
 
 ### UPDATES IN 2.1.1
 

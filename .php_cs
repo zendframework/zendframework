@@ -12,17 +12,6 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->in(__DIR__ . '/tests')
     ->in(__DIR__ . '/bin');
 $config = Symfony\CS\Config\Config::create();
-$config->fixers(array(
-    'indentation',
-    'linefeed',
-    'trailing_spaces',
-    'php_closing_tag',
-    'short_tag',
-    'visibility',
-    'braces',
-    'eof_ending',
-    'psr0',
-    'elseif',
-));
+$config->fixers(Symfony\CS\FixerInterface::PSR2_LEVEL);
 $config->finder($finder);
 return $config;

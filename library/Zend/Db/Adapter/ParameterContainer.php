@@ -91,10 +91,27 @@ class ParameterContainer implements \Iterator, \ArrayAccess, \Countable
      */
     public function offsetSet($name, $value, $errata = null)
     {
-        $this->data[$name] = $value;
+        $position = false;
 
-        $names = array_keys($this->data);
-        $this->positions[array_search($name, $names)] = $name;
+        // if integer, get name for this position
+        if (is_int($name)) {
+            if (isset($this->positions[$name])) {
+                $position = $name;
+                $name = $this->positions[$name];
+            } else {
+                $name = (string) $name;
+            }
+        } else {
+            // is a string:
+            $currentNames = array_keys($this->data);
+            $position = array_search($name, $currentNames, true);
+        }
+
+        if ($position === false) {
+            $this->positions[] = $name;
+        }
+
+        $this->data[$name] = $value;
 
         if ($errata) {
             $this->offsetSetErrata($name, $errata);
@@ -109,7 +126,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess, \Countable
      */
     public function offsetUnset($name)
     {
-        if (is_int($name)) {
+        if (is_int($name) && isset($this->positions[$name])) {
             $name = $this->positions[$name];
         }
         unset($this->data[$name]);

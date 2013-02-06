@@ -101,10 +101,14 @@ class ParameterContainer implements \Iterator, \ArrayAccess, \Countable
             } else {
                 $name = (string) $name;
             }
-        } else {
+        } elseif (is_string($name)) {
             // is a string:
             $currentNames = array_keys($this->data);
             $position = array_search($name, $currentNames, true);
+        } elseif ($name === null) {
+            $name = (string) count($this->data);
+        } else {
+            throw new Exception\InvalidArgumentException('Keys must be string, integer or null');
         }
 
         if ($position === false) {

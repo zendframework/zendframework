@@ -9,48 +9,38 @@
 
 namespace Zend\Session\Storage;
 
-use ArrayIterator;
-use IteratorAggregate;
-use Zend\Session\Exception;
-
-if (version_compare(PHP_VERSION, '5.3.3') > 0) {
+/**
+ * Session storage in $_SESSION
+ */
+class SessionArrayStorage extends AbstractSessionArrayStorage
+{
     /**
-     * Session storage in $_SESSION
+     * Get Offset
+     *
+     * @param  mixed $key
+     * @return mixed
      */
-    class SessionArrayStorage extends AbstractSessionArrayStorage
+    public function &__get($key)
     {
-        /**
-         * Get Offset
-         *
-         * @param  mixed $key
-         * @return mixed
-         */
-        public function &__get($key)
-        {
-            if (isset($_SESSION[$key])) {
-                return $_SESSION[$key];
-            }
-
-            return null;
+        if (isset($_SESSION[$key])) {
+            return $_SESSION[$key];
         }
 
-        /**
-         * Offset Get
-         *
-         * @param  mixed $key
-         * @return mixed
-         */
-        public function &offsetGet($key)
-        {
-            if (isset($_SESSION[$key])) {
-                return $_SESSION[$key];
-            }
-
-            return null;
-        }
+        return null;
     }
-} else {
-    class SessionArrayStorage extends AbstractSessionArrayStorage
+
+    /**
+     * Offset Get
+     *
+     * @param  mixed $key
+     * @return mixed
+     */
+    public function &offsetGet($key)
     {
+        if (isset($_SESSION[$key])) {
+            return $_SESSION[$key];
+        }
+
+        return null;
     }
 }

@@ -282,6 +282,9 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
                             $value = (int) $value;
                         }
                         break;
+                    case ParameterContainer::TYPE_BINARY:
+                        $type = SQLT_BIN;
+                        break;
                     case ParameterContainer::TYPE_STRING:
                     default:
                         $type = SQLT_CHR;

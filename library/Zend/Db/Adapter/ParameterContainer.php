@@ -16,6 +16,7 @@ class ParameterContainer implements \Iterator, \ArrayAccess, \Countable
     const TYPE_NULL    = 'null';
     const TYPE_DOUBLE  = 'double';
     const TYPE_INTEGER = 'integer';
+    const TYPE_BINARY  = 'binary';
     const TYPE_STRING  = 'string';
     const TYPE_LOB     = 'lob';
 

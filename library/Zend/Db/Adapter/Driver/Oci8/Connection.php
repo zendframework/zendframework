@@ -122,11 +122,11 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             $this->connect();
         }
 
-        $query = "SELECT sys_context('USERENV', 'DB_NAME') as \"database_name\" FROM DUAL";
+        $query = "SELECT sys_context('USERENV', 'CURRENT_SCHEMA') as \"current_schema\" FROM DUAL";
         $stmt = oci_parse($this->resource, $query);
         oci_execute($stmt);
         $dbNameArray = oci_fetch_array($stmt, OCI_ASSOC);
-        return $dbNameArray['database_name'];
+        return $dbNameArray['current_schema'];
     }
 
     /**
@@ -158,15 +158,12 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Connect
      *
-     * @return null
+     * @return Connection
      */
     public function connect()
     {
-        // @todo
-
-
         if (is_resource($this->resource)) {
-            return;
+            return $this;
         }
 
         // localize
@@ -182,15 +179,24 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             return null;
         };
 
-        // $hostname = $findParameterValue(array('hostname', 'host_name', ';host'));
-        $username = $findParameterValue(array('username', 'user'));
+        // http://www.php.net/manual/en/function.oci-connect.php
+        $username = $findParameterValue(array('username'));
         $password = $findParameterValue(array('password'));
-        $connectString = $findParameterValue(array('connection_string', 'connectionstring', 'connection', 'instance'));
-        //$service = $findParameterValue(array('service_name', 'service', 'db', 'schema'));
-        //$port     = (isset($p['port'])) ? (int) $p['port'] : null;
-        //$socket   = (isset($p['socket'])) ? $p['socket'] : null;
+        $connectionString = $findParameterValue(array('connection_string', 'connectionstring', 'connection', 'hostname', 'instance'));
+        $characterSet = $findParameterValue(array('character_set', 'charset', 'encoding'));
 
-        $this->resource = oci_connect($username, $password, $connectString);
+        // connection modifiers
+        $isUnique = $findParameterValue(array('unique'));
+        $isPersistent = $findParameterValue(array('persistent'));
+
+        if ($isUnique == true) {
+            $this->resource = oci_new_connect($username, $password, $connectionString, $characterSet);
+        } elseif ($isPersistent == true) {
+            $this->resource = oci_pconnect($username, $password, $connectionString, $characterSet);
+        } else {
+            $this->resource = oci_connect($username, $password, $connectionString, $characterSet);
+        }
+
         if (!$this->resource) {
             $e = oci_error();
             throw new Exception\RuntimeException(
@@ -199,6 +205,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                 new Exception\ErrorException($e['message'], $e['code'])
             );
         }
+
         return $this;
     }
 

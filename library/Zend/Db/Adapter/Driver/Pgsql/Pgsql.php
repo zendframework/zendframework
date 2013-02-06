@@ -181,6 +181,10 @@ class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
         }
         */
 
+        if (!$this->connection->isConnected()) {
+                $this->connection->connect();
+        }
+
         $statement->initialize($this->connection->getResource());
         return $statement;
     }

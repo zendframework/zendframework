@@ -158,15 +158,12 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Connect
      *
-     * @return null
+     * @return Connection
      */
     public function connect()
     {
-        // @todo
-
-
         if (is_resource($this->resource)) {
-            return;
+            return $this;
         }
 
         // localize
@@ -182,22 +179,24 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             return null;
         };
 
-        $hostname = $findParameterValue(array('hostname'));
+        // http://www.php.net/manual/en/function.oci-connect.php
         $username = $findParameterValue(array('username'));
         $password = $findParameterValue(array('password'));
-        $encoding = $findParameterValue(array('encoding'));
+        $connectionString = $findParameterValue(array('connection_string', 'connectionstring', 'connection', 'hostname', 'instance'));
+        $characterSet = $findParameterValue(array('character_set', 'charset', 'encoding'));
 
+        // connection modifiers
         $isUnique = $findParameterValue(array('unique'));
         $isPersistent = $findParameterValue(array('persistent'));
 
-        $connectionFuncName = 'oci_connect';
-        if ($isUnique === true) {
-            $connectionFuncName = 'oci_new_connect';
-        } elseif ($isPersistent === true) {
-            $connectionFuncName = 'oci_pconnect';
+        if ($isUnique == true) {
+            $this->resource = oci_new_connect($username, $password, $connectionString, $characterSet);
+        } elseif ($isPersistent == true) {
+            $this->resource = oci_pconnect($username, $password, $connectionString, $characterSet);
+        } else {
+            $this->resource = oci_connect($username, $password, $connectionString, $characterSet);
         }
 
-        $this->resource = call_user_func($connectionFuncName, $username, $password, $hostname, $encoding);
         if (!$this->resource) {
             $e = oci_error();
             throw new Exception\RuntimeException(

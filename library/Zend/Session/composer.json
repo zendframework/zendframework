@@ -9,7 +9,10 @@
     "autoload": {
         "psr-0": {
             "Zend\\Session\\": ""
-        }
+        },
+        "files": [
+            "compatibility/autoload.php"
+        ]
     },
     "target-dir": "Zend/Session",
     "require": {

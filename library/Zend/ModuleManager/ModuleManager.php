@@ -203,7 +203,7 @@ class ModuleManager implements ModuleManagerInterface
             $this->modules = $modules;
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Parameter to %s\'s %s method must be an array or implement the \\Traversable interface',
+                'Parameter to %s\'s %s method must be an array or implement the Traversable interface',
                 __CLASS__, __METHOD__
             ));
         }

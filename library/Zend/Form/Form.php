@@ -191,7 +191,7 @@ class Form extends Fieldset implements FormInterface
      *
      * Typically, also passes data on to the composed input filter.
      *
-     * @param  array|\ArrayAccess|\Traversable $data
+     * @param  array|\ArrayAccess|Traversable $data
      * @return Form|FormInterface
      * @throws Exception\InvalidArgumentException
      */

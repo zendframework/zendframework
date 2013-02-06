@@ -56,7 +56,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
     /**
      * Class constructor
      *
-     * @param  string|array|\Traversable $options Encryption Options
+     * @param  string|array|Traversable $options Encryption Options
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */

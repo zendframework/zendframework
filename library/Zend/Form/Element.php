@@ -101,7 +101,7 @@ class Element implements
      * - label: label to associate with the element
      * - label_attributes: attributes to use when the label is rendered
      *
-     * @param  array|\Traversable $options
+     * @param  array|Traversable $options
      * @return Element|ElementInterface
      * @throws Exception\InvalidArgumentException
      */

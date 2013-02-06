@@ -31,7 +31,7 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
     protected $progressAdapter;
 
     /**
-     * @param  array|\Traversable $options Optional options
+     * @param  array|Traversable $options Optional options
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
@@ -46,7 +46,7 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
      * - session_namespace: session namespace for upload progress
      * - progress_adapter: progressbar adapter to use for updating progress
      *
-     * @param  array|\Traversable $options
+     * @param  array|Traversable $options
      * @return AbstractUploadHandler
      * @throws Exception\InvalidArgumentException
      */

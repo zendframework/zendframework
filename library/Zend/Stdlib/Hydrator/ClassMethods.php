@@ -45,7 +45,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     }
 
     /**
-     * @param  array|\Traversable                 $options
+     * @param  array|Traversable                 $options
      * @return ClassMethods
      * @throws Exception\InvalidArgumentException
      */

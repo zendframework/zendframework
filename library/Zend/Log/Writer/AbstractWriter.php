@@ -66,7 +66,7 @@ abstract class AbstractWriter implements WriterInterface
      * - filters: array of filters to add to this filter
      * - formatter: formatter for this writer
      *
-     * @param  array|\Traversable $options
+     * @param  array|Traversable $options
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */

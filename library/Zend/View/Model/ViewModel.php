@@ -170,7 +170,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface
     /**
      * Set renderer options/hints en masse
      *
-     * @param array|\Traversable $options
+     * @param array|Traversable $options
      * @throws \Zend\View\Exception\InvalidArgumentException
      * @return ViewModel
      */

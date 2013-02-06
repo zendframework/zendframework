@@ -58,7 +58,7 @@ class FormMultiCheckbox extends FormInput
      *
      * @param  mixed $labelPosition
      * @throws Exception\InvalidArgumentException
-     * @return $this
+     * @return FormMultiCheckbox
      */
     public function setLabelPosition($labelPosition)
     {

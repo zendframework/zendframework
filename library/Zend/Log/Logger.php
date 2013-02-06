@@ -119,7 +119,7 @@ class Logger implements LoggerInterface
      * - exceptionhandler: if true register this logger as exceptionhandler
      * - errorhandler: if true register this logger as errorhandler
      *
-     * @param  array|\Traversable $options
+     * @param  array|Traversable $options
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */

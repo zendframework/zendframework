@@ -58,7 +58,7 @@ class SimpleRouteStack extends BaseSimpleRouteStack
      * routeFromArray(): defined by SimpleRouteStack.
      *
      * @see    SimpleRouteStack::routeFromArray()
-     * @param  array|\Traversable $specs
+     * @param  array|Traversable $specs
      * @return RouteInterface
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException

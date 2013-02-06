@@ -64,7 +64,7 @@ class PluginClassLoader implements PluginClassLocator
             return;
         }
 
-        if (!is_array($map) && !$map instanceof \Traversable) {
+        if (!is_array($map) && !$map instanceof Traversable) {
             throw new Exception\InvalidArgumentException('Expects an array or Traversable object');
         }
         foreach ($map as $key => $value) {

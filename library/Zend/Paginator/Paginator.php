@@ -155,7 +155,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Set a global config
      *
-     * @param array|\Traversable $config
+     * @param array|Traversable $config
      * @throws Exception\InvalidArgumentException
      */
     public static function setGlobalConfig($config)

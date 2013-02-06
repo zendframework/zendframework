@@ -277,7 +277,7 @@ class ConfigListener extends AbstractListener implements
         if (!is_array($paths)) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Argument passed to %::%s() must be an array, '
-                . 'implement the \Traversable interface, or be an '
+                . 'implement the Traversable interface, or be an '
                 . 'instance of Zend\Config\Config. %s given.',
                 __CLASS__, __METHOD__, gettype($paths))
             );
@@ -323,7 +323,7 @@ class ConfigListener extends AbstractListener implements
         if (!is_array($config)) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Config being merged must be an array, '
-                . 'implement the \Traversable interface, or be an '
+                . 'implement the Traversable interface, or be an '
                 . 'instance of Zend\Config\Config. %s given.', gettype($config))
             );
         }

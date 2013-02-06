@@ -84,7 +84,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
      * - should_create_template: if set to true, a template is generated (inside a <span>)
      * - template_placeholder: placeholder used in the data template
      *
-     * @param array|\Traversable $options
+     * @param array|Traversable $options
      * @return Collection
      */
     public function setOptions($options)
@@ -133,7 +133,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
      * Set the object used by the hydrator
      * In this case the "object" is a collection of objects
      *
-     * @param  array|\Traversable $object
+     * @param  array|Traversable $object
      * @return Fieldset|FieldsetInterface
      * @throws Exception\InvalidArgumentException
      */
@@ -156,7 +156,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
     /**
      * Populate values
      *
-     * @param array|\Traversable $data
+     * @param array|Traversable $data
      * @throws \Zend\Form\Exception\InvalidArgumentException
      * @throws \Zend\Form\Exception\DomainException
      * @return void

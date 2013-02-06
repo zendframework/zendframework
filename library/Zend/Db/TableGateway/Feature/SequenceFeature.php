@@ -40,7 +40,9 @@ class SequenceFeature extends AbstractFeature
         $this->sequenceName    = $sequenceName;
     }
 
-
+    /**
+     * @param  Insert $insert 
+     */
     public function preInsert(Insert $insert)
     {
         $columns = $insert->getRawState('columns');

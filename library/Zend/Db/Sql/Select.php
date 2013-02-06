@@ -28,6 +28,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @const
      */
     const SELECT = 'select';
+    const QUANTIFIER = 'quantifier';
     const COLUMNS = 'columns';
     const TABLE = 'table';
     const JOINS = 'joins';
@@ -37,6 +38,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     const ORDER = 'order';
     const LIMIT = 'limit';
     const OFFSET = 'offset';
+    const QUANTIFIER_DISTINCT = 'DISTINCT';
+    const QUANTIFIER_ALL = 'ALL';
     const JOIN_INNER = 'inner';
     const JOIN_OUTER = 'outer';
     const JOIN_LEFT = 'left';
@@ -54,7 +57,12 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             'SELECT %1$s FROM %2$s' => array(
                 array(1 => '%1$s', 2 => '%1$s AS %2$s', 'combinedby' => ', '),
                 null
-            )
+            ),
+            'SELECT %1$s %2$s FROM %3$s' => array(
+                null,
+                array(1 => '%1$s', 2 => '%1$s AS %2$s', 'combinedby' => ', '),
+                null
+            ),
         ),
         self::JOINS  => array(
             '%1$s' => array(
@@ -91,6 +99,11 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @var string|TableIdentifier
      */
     protected $table = null;
+
+    /**
+     * @var null|string|Expression
+     */
+    protected $quantifier = null;
 
     /**
      * @var array
@@ -170,6 +183,21 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
 
         $this->table = $table;
+        return $this;
+    }
+
+    /**
+     * @param string|Expression $quantifier DISTINCT|ALL
+     * @return Select
+     */
+    public function quantifier($quantifier)
+    {
+        if (!is_string($quantifier) && !$quantifier instanceof Expression) {
+            throw new Exception\InvalidArgumentException(
+                'Quantifier must be one of DISTINCT, ALL, or some platform specific Expression object'
+            );
+        }
+        $this->quantifier = $quantifier;
         return $this;
     }
 
@@ -392,6 +420,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 }
                 $this->table = null;
                 break;
+            case self::QUANTIFIER:
+                $this->quantifier = null;
+                break;
             case self::COLUMNS:
                 $this->columns = array();
                 break;
@@ -432,15 +463,16 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function getRawState($key = null)
     {
         $rawState = array(
-            self::TABLE   => $this->table,
-            self::COLUMNS => $this->columns,
-            self::JOINS   => $this->joins,
-            self::WHERE   => $this->where,
-            self::ORDER   => $this->order,
-            self::GROUP   => $this->group,
-            self::HAVING  => $this->having,
-            self::LIMIT   => $this->limit,
-            self::OFFSET  => $this->offset
+            self::TABLE      => $this->table,
+            self::QUANTIFIER => $this->quantifier,
+            self::COLUMNS    => $this->columns,
+            self::JOINS      => $this->joins,
+            self::WHERE      => $this->where,
+            self::ORDER      => $this->order,
+            self::GROUP      => $this->group,
+            self::HAVING     => $this->having,
+            self::LIMIT      => $this->limit,
+            self::OFFSET     => $this->offset
         );
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
@@ -623,7 +655,23 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             }
         }
 
-        return array($columns, $table);
+        if ($this->quantifier) {
+            if ($this->quantifier instanceof Expression) {
+                $quantifierParts = $this->processExpression($this->quantifier, $platform, $driver, 'quantifier');
+                if ($parameterContainer) {
+                    $parameterContainer->merge($quantifierParts->getParameterContainer());
+                }
+                $quantifier = $quantifierParts->getSql();
+            } else {
+                $quantifier = $this->quantifier;
+            }
+        }
+
+        if (isset($quantifier)) {
+            return array($quantifier, $columns, $table);
+        } else {
+            return array($columns, $table);
+        }
     }
 
     protected function processJoins(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)

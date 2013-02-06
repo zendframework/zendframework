@@ -244,7 +244,11 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             $this->profiler->profilerStart($this);
         }
 
-        $ret = @oci_execute($this->resource);
+        if ($this->driver->getConnection()->inTransaction()) {
+            $ret = @oci_execute($this->resource, OCI_NO_AUTO_COMMIT);
+        } else {
+            $ret = @oci_execute($this->resource, OCI_COMMIT_ON_SUCCESS);
+        }
 
         if ($this->profiler) {
             $this->profiler->profilerFinish();

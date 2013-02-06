@@ -237,7 +237,19 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if (!$this->isConnected()) {
             $this->connect();
         }
-        // @todo
+
+        // A transaction begins when the first SQL statement that changes data is executed with oci_execute() using the OCI_NO_AUTO_COMMIT flag. 
+        $this->inTransaction = true;
+    }
+
+    /**
+     * In transaction
+     *
+     * @return boolean
+     */
+    public function inTransaction()
+    {
+        return $this->inTransaction;
     }
 
     /**
@@ -249,7 +261,13 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             $this->connect();
         }
 
-        // @todo
+        if ($this->inTransaction) {
+            $valid = oci_commit($this->resource);
+            if ($valid === false) {
+                $e = oci_error($this->resource);
+                throw new Exception\InvalidQueryException($e['message'], $e['code']);
+            }
+        }
     }
 
     /**
@@ -267,7 +285,12 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             throw new Exception\RuntimeException('Must call commit() before you can rollback.');
         }
 
-        // @todo
+        $valid = oci_rollback($this->resource);
+        if ($valid === false) {
+            $e = oci_error($this->resource);
+            throw new Exception\InvalidQueryException($e['message'], $e['code']);
+        }
+
         return $this;
     }
 
@@ -288,7 +311,12 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $ociStmt = oci_parse($this->resource, $sql);
-        $valid = @oci_execute($ociStmt);
+
+        if ($this->inTransaction) {
+            $valid = @oci_execute($ociStmt, OCI_NO_AUTO_COMMIT);
+        } else {
+            $valid = @oci_execute($ociStmt, OCI_COMMIT_ON_SUCCESS);
+        }
 
         if ($this->profiler) {
             $this->profiler->profilerFinish($sql);

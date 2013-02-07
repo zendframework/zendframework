@@ -380,7 +380,7 @@ abstract class AbstractSource implements MetadataInterface
             $schema = $this->defaultSchema;
         }
 
-        $this->loadConstraintData($table, $schema);
+        $this->loadConstraintReferences($table, $schema);
 
         // organize references first
         $references = array();
@@ -389,6 +389,8 @@ abstract class AbstractSource implements MetadataInterface
                 $references[$refKeyInfo['constraint_name']] = $refKeyInfo;
             }
         }
+
+        $this->loadConstraintDataKeys($schema);
 
         $keys = array();
         foreach ($this->data['constraint_keys'][$schema] as $constraintKeyInfo) {

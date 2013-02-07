@@ -149,22 +149,34 @@ class RenameUpload extends AbstractFilter
         }
 
         $this->checkFileExists($targetFile);
-
-        ErrorHandler::start();
-        $result = move_uploaded_file($sourceFile, $targetFile);
-        $warningException = ErrorHandler::stop();
-        if (!$result || null !== $warningException) {
-            throw new Exception\RuntimeException(
-                sprintf("File '%s' could not be renamed. An error occurred while processing the file.", $value),
-                0, $warningException
-            );
-        }
+        $this->moveUploadedFile($sourceFile, $targetFile);
 
         if ($isFileUpload) {
             $uploadData['tmp_name'] = $targetFile;
             return $uploadData;
         }
         return $targetFile;
+    }
+
+    /**
+     * @param  string $sourceFile Source file path
+     * @param  string $targetFile Target file path
+     * @throws \Zend\Filter\Exception\RuntimeException
+     * @return boolean
+     */
+    protected function moveUploadedFile($sourceFile, $targetFile)
+    {
+        ErrorHandler::start();
+        $result = move_uploaded_file($sourceFile, $targetFile);
+        $warningException = ErrorHandler::stop();
+        if (!$result || null !== $warningException) {
+            throw new Exception\RuntimeException(
+                sprintf("File '%s' could not be renamed. An error occurred while processing the file.", $sourceFile),
+                0, $warningException
+            );
+        }
+
+        return $result;
     }
 
     /**

@@ -28,13 +28,6 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
     protected $_filesPath;
 
     /**
-     * Original testfile
-     *
-     * @var string
-     */
-    protected $_origFile;
-
-    /**
      * Testfile
      *
      * @var string
@@ -69,26 +62,19 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_filesPath  = dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR;
-        $this->_origFile   = $this->_filesPath . 'original.file';
-        $this->_oldFile    = $this->_filesPath . 'testfile.txt';
-        $this->_newFile    = $this->_filesPath . 'newfile.xml';
-        $this->_newDir     = $this->_filesPath . DIRECTORY_SEPARATOR . '_testDir2';
-        $this->_newDirFile = $this->_newDir . DIRECTORY_SEPARATOR . 'testfile.txt';
+        $this->_filesPath  = dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'RenameUploadTest';
+        $this->_newDir = $this->_filesPath . DIRECTORY_SEPARATOR . '_testDir2';
 
-        if (file_exists($this->_origFile)) {
-            unlink($this->_origFile);
-        }
+        $this->tearDown();
 
-        if (file_exists($this->_newFile)) {
-            unlink($this->_newFile);
-        }
+        mkdir($this->_filesPath);
+        mkdir($this->_newDir);
 
-        if (file_exists($this->_newDirFile)) {
-            unlink($this->_newDirFile);
-        }
+        $this->_oldFile    = $this->_filesPath . '/testfile.txt';
+        $this->_newFile    = $this->_filesPath . '/newfile.xml';
+        $this->_newDirFile = $this->_newDir . '/testfile.txt';
 
-        copy($this->_oldFile, $this->_origFile);
+        touch($this->_oldFile);
     }
 
     /**
@@ -98,28 +84,23 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        if (!file_exists($this->_oldFile)) {
-            copy($this->_origFile, $this->_oldFile);
+        $this->removeDir($this->_newDir);
+        $this->removeDir($this->_filesPath);
+    }
+
+    protected function removeDir($dir)
+    {
+        if (! is_dir($dir)) {
+            return;
         }
 
-        if (file_exists($this->_origFile)) {
-            unlink($this->_origFile);
+        foreach (glob($dir . DIRECTORY_SEPARATOR . '*') as $file) {
+            if (is_file($file)) {
+                unlink($file);
+            }
         }
 
-        if (file_exists($this->_newFile)) {
-            unlink($this->_newFile);
-        }
-
-        if (file_exists($this->_newDirFile)) {
-            unlink($this->_newDirFile);
-        }
-
-        if (function_exists("runkit_function_rename")
-            && function_exists('move_uploaded_file_orig')
-        ) {
-            runkit_function_rename('move_uploaded_file',      'move_uploaded_file_mock');
-            runkit_function_rename('move_uploaded_file_orig', 'move_uploaded_file');
-        }
+        rmdir($dir);
     }
 
     /**
@@ -136,25 +117,6 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
             'Zend\Filter\Exception\RuntimeException', 'could not be renamed'
         );
         $this->assertEquals($this->_newFile, $filter($this->_oldFile));
-    }
-
-    /**
-     * Mock the move_uploaded_file() function with rename() functionality
-     *
-     * @return void
-     */
-    protected function setUpMockMoveUploadedFile()
-    {
-        if (!function_exists("runkit_function_rename")
-            || !ini_get('runkit.internal_override')
-        ) {
-            $this->markTestSkipped(
-                'move_uploaded_file cannot be unit tested without runkit module'
-            );
-            return;
-        }
-        runkit_function_rename('move_uploaded_file',      'move_uploaded_file_orig');
-        runkit_function_rename('move_uploaded_file_mock', 'move_uploaded_file');
     }
 
     /**
@@ -185,9 +147,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringConstructorParam()
     {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload($this->_newFile);
+        $filter = new RenameUploadMock($this->_newFile);
         $this->assertEquals($this->_newFile, $filter->getTarget());
         $this->assertEquals($this->_newFile, $filter($this->_oldFile));
         $this->assertEquals('falsefile', $filter('falsefile'));
@@ -198,9 +158,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringConstructorWithFilesArray()
     {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload($this->_newFile);
+        $filter = new RenameUploadMock($this->_newFile);
         $this->assertEquals($this->_newFile, $filter->getTarget());
         $this->assertEquals(
             array(
@@ -220,9 +178,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testArrayConstructorParam()
     {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload(array(
+        $filter = new RenameUploadMock(array(
             'target' => $this->_newFile,
         ));
         $this->assertEquals($this->_newFile, $filter->getTarget());
@@ -246,9 +202,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testTargetDirectory()
     {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload($this->_newDir);
+        $filter = new RenameUploadMock($this->_newDir);
         $this->assertEquals($this->_newDir, $filter->getTarget());
         $this->assertEquals($this->_newDirFile, $filter($this->_oldFile));
         $this->assertEquals('falsefile', $filter('falsefile'));
@@ -259,9 +213,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testOverwriteWithExistingFile()
     {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload(array(
+        $filter = new RenameUploadMock(array(
             'target'          => $this->_newFile,
             'overwrite'       => true,
         ));
@@ -269,7 +221,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         copy($this->_oldFile, $this->_newFile);
 
         $this->assertEquals($this->_newFile, $filter->getTarget());
-        $this->assertEquals($this->_newFile, $filter->filter($this->_oldFile));
+        $this->assertEquals($this->_newFile, $filter($this->_oldFile));
     }
 
     /**
@@ -277,9 +229,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testCannotOverwriteExistingFile()
     {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload(array(
+        $filter = new RenameUploadMock(array(
             'target'          => $this->_newFile,
             'overwrite'       => false,
         ));
@@ -291,7 +241,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(
             'Zend\Filter\Exception\InvalidArgumentException', 'already exists'
         );
-        $this->assertEquals($this->_newFile, $filter->filter($this->_oldFile));
+        $this->assertEquals($this->_newFile, $filter($this->_oldFile));
     }
 
     /**
@@ -299,17 +249,15 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRandomizedFile()
     {
-        $this->setUpMockMoveUploadedFile();
-
-        $filter = new FileRenameUpload(array(
+        $filter = new RenameUploadMock(array(
             'target'          => $this->_newFile,
             'randomize'       => true,
         ));
 
         $this->assertEquals($this->_newFile, $filter->getTarget());
         $this->assertTrue($filter->getRandomize());
-        $fileNoExt = $this->_filesPath . 'newfile';
-        $this->assertRegExp('#' . $fileNoExt . '_.{13}\.xml#', $filter->getNewName($this->_oldFile));
+        $fileNoExt = $this->_filesPath . '/newfile';
+        $this->assertRegExp('#' . $fileNoExt . '_.{13}\.xml#', $filter($this->_oldFile));
     }
 
     /**
@@ -317,17 +265,15 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRandomizedFileWithoutExtension()
     {
-        $this->setUpMockMoveUploadedFile();
-
-        $fileNoExt = $this->_filesPath . 'newfile';
-        $filter = new FileRenameUpload(array(
+        $fileNoExt = $this->_filesPath . '/newfile';
+        $filter = new RenameUploadMock(array(
             'target'          => $fileNoExt,
             'randomize'       => true,
         ));
 
         $this->assertEquals($fileNoExt, $filter->getTarget());
         $this->assertTrue($filter->getRandomize());
-        $this->assertRegExp('#' . $fileNoExt . '_.{13}#', $filter->getNewName($this->_oldFile));
+        $this->assertRegExp('#' . $fileNoExt . '_.{13}#', $filter($this->_oldFile));
     }
 
     /**

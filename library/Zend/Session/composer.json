@@ -11,7 +11,7 @@
             "Zend\\Session\\": ""
         },
         "files": [
-            "compatibility/autoload.php"
+            "Zend/Session/compatibility/autoload.php"
         ]
     },
     "target-dir": "Zend/Session",

@@ -198,7 +198,7 @@ abstract class AbstractContainer extends ArrayObject
             }
             $storage[$name] = $this->createContainer();
         }
-        if (!is_array($storage[$name]) && !$storage[$name] instanceof ArrayObject) {
+        if (!is_array($storage[$name]) && !$storage[$name] instanceof Traversable) {
             throw new Exception\RuntimeException('Container cannot write to storage due to type mismatch');
         }
 

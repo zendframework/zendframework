@@ -11,7 +11,7 @@
             "Zend\\Stdlib\\": ""
         },
         "files": [
-            "compatibility/autoload.php"
+            "Zend/Stdlib/compatibility/autoload.php"
         ]
     },
     "target-dir": "Zend/Stdlib",

@@ -120,6 +120,10 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
             $this->setShouldCreateEmptyOption($options['create_empty_option']);
         }
 
+        if (isset($options['render_delimiters'])) {
+            $this->setShouldRenderDelimiters($options['render_delimiters']);
+        }
+
         return $this;
     }
 

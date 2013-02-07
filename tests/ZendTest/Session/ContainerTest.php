@@ -71,6 +71,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function run(\PHPUnit_Framework_TestResult $result = NULL)
     {
         $this->setPreserveGlobalState(false);
+
         return parent::run($result);
     }
 
@@ -529,11 +530,22 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testMultiDimensionalUnset()
     {
-        if (version_compare(PHP_VERSION, '5.3.3') <= 0) {
-            $this->markTestSkipped('Known issue on versions of PHP 5.3.3 or less');
+        if (version_compare(PHP_VERSION, '5.3.4') < 0) {
+            $this->markTestSkipped('Known issue on versions of PHP less than 5.3.4');
         }
         $this->container->foo = array('bar' => 'baz');
         unset($this->container['foo']['bar']);
         $this->assertSame(array(), $this->container->foo);
+    }
+
+    public function testUpgradeBehaviors()
+    {
+        $storage = $this->manager->getStorage();
+        $storage['foo'] = new \ArrayObject(array('bar' => 'baz'));
+
+        $container = new Container('foo', $this->manager);
+        $this->assertEquals('baz', $container->bar);
+        $container->baz = 'boo';
+        $this->assertEquals('boo', $storage['foo']['baz']);
     }
 }

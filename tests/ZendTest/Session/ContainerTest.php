@@ -71,6 +71,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function run(\PHPUnit_Framework_TestResult $result = NULL)
     {
         $this->setPreserveGlobalState(false);
+
         return parent::run($result);
     }
 
@@ -541,7 +542,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $storage = $this->manager->getStorage();
         $storage['foo'] = new \ArrayObject(array('bar' => 'baz'));
-        
+
         $container = new Container('foo', $this->manager);
         $this->assertEquals('baz', $container->bar);
         $container->baz = 'boo';

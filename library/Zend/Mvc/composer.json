@@ -17,13 +17,13 @@
         "zendframework/zend-console": "self.version",
         "zendframework/zend-di": "self.version",
         "zendframework/zend-eventmanager": "self.version",
+        "zendframework/zend-form": "self.version",
         "zendframework/zend-modulemanager": "self.version",
         "zendframework/zend-http": "self.version",
         "zendframework/zend-uri": "self.version",
         "zendframework/zend-servicemanager": "self.version",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-text": "self.version",
-        "zendframework/zend-view": "self.version",
-        "zendframework/zend-form": "self.version"
+        "zendframework/zend-view": "self.version"
     }
 }

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ZF2" default="build">
+    <target name="travis" depends="tests-parallel,show-test-results" />
+
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${basedir}/build"/>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <mkdir dir="${basedir}/build/test-results"/>
+        <mkdir dir="${basedir}/build/cs-results"/>
+    </target>
+
+    <target name="get-cs-fixer" depends="clean" description="Get coding standards fixer">
+        <get src="http://cs.sensiolabs.org/get/php-cs-fixer.phar" dest="${basedir}/php-cs-fixer.phar"/>
+    </target>
+
+    <target name="composer-install" description="Installs dependencies via composer install">
+        <exec executable="composer" failonerror="true">
+            <arg value="install" />
+            <arg value="--dev" />
+            <arg value="--prefer-source" />
+        </exec>
+    </target>
+
+    <target
+        name="tests-parallel"
+        depends="prepare,composer-install"
+        description="Run tests for the various components in parallel"
+    >
+        <parallel threadCount="8">
+            <!--
+                If there's a way of having this without the explicit component
+                list, please PR
+            -->
+            <component-test component="Authentication"/>
+            <component-test component="Barcode"/>
+            <component-test component="Cache"/>
+            <component-test component="Captcha"/>
+            <component-test component="Code"/>
+            <component-test component="Config"/>
+            <component-test component="Console"/>
+            <component-test component="Crypt"/>
+            <component-test component="Db"/>
+            <component-test component="Debug"/>
+            <component-test component="Di"/>
+            <component-test component="Dom"/>
+            <component-test component="Escaper"/>
+            <component-test component="EventManager"/>
+            <component-test component="Feed"/>
+            <component-test component="File"/>
+            <component-test component="Filter"/>
+            <component-test component="Form"/>
+            <component-test component="Http"/>
+            <component-test component="I18n"/>
+            <component-test component="InputFilter"/>
+            <component-test component="Json"/>
+            <component-test component="Ldap"/>
+            <component-test component="Loader"/>
+            <component-test component="Log"/>
+            <component-test component="Mail"/>
+            <component-test component="Math"/>
+            <component-test component="Memory"/>
+            <component-test component="Mime"/>
+            <component-test component="ModuleManager"/>
+            <component-test component="Mvc"/>
+            <component-test component="Navigation"/>
+            <component-test component="Paginator"/>
+            <component-test component="Permissions"/>
+            <component-test component="ProgressBar"/>
+            <component-test component="Serializer"/>
+            <component-test component="Server"/>
+            <component-test component="ServiceManager"/>
+            <component-test component="Session"/>
+            <component-test component="Soap"/>
+            <component-test component="Stdlib"/>
+            <component-test component="Tag"/>
+            <component-test component="Test"/>
+            <component-test component="Text"/>
+            <component-test component="Uri"/>
+            <component-test component="Validator"/>
+            <component-test component="Version"/>
+            <component-test component="View"/>
+            <component-test component="XmlRpc"/>
+            <check-cs/>
+        </parallel>
+    </target>
+
+    <target name="show-test-results" description="Display logged test results">
+        <concat>
+            <fileset dir="${basedir}/build/cs-results/"/>
+            <fileset dir="${basedir}/build/test-results/"/>
+        </concat>
+    </target>
+
+    <macrodef name="component-test">
+        <attribute name="component"/>
+        <sequential>
+            <echo output="${basedir}/build/test-results/@{component}.log" level="debug">
+
+                ZendTest/@{component}
+
+            </echo>
+            <exec
+                    executable="${basedir}/vendor/bin/phpunit"
+                    output="${basedir}/build/test-results/@{component}.log"
+                    error="${basedir}/build/test-results/@{component}.log"
+                    failonerror="true"
+                    append="true"
+                    >
+                <arg value="-c" />
+                <arg value="${basedir}/tests/phpunit.xml.dist" />
+                <arg value="${basedir}/tests/ZendTest/@{component}" />
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="check-cs">
+        <sequential>
+            <echo output="${basedir}/build/cs-results/check-cs.log" level="debug">
+
+                Coding standards
+
+            </echo>
+            <exec
+                executable="${basedir}/bin/check-cs.sh"
+                output="${basedir}/build/cs-results/check-cs.log"
+                error="${basedir}/build/cs-results/check-cs.log"
+                failonerror="true"
+                append="true"
+            >
+                <arg value="-c" />
+                <arg value="${basedir}/tests/phpunit.xml.dist" />
+                <arg value="${basedir}/tests/ZendTest/@{component}" />
+            </exec>
+        </sequential>
+    </macrodef>
+</project>

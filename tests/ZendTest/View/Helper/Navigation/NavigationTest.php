@@ -441,6 +441,28 @@ class NavigationTest extends AbstractTest
         $this->assertTrue(strpos($render, 'p2') !== false);
     }
 
+    public function testMultipleNavigations()
+    {
+        $sm   = new ServiceManager();
+        $nav1 = new Container();
+        $nav2 = new Container();
+        $sm->setService('nav1', $nav1);
+        $sm->setService('nav2', $nav2);
+
+        $helper = new Navigation();
+        $helper->setServiceLocator($sm);
+
+        $menu     = $helper('nav1')->menu();
+        $actual   = spl_object_hash($nav1);
+        $expected = spl_object_hash($menu->getContainer());
+        $this->assertEquals($expected, $actual);
+
+        $menu     = $helper('nav2')->menu();
+        $actual   = spl_object_hash($nav2);
+        $expected = spl_object_hash($menu->getContainer());
+        $this->assertEquals($expected, $actual);
+    }
+
     /**
      * Returns the contens of the expected $file, normalizes newlines
      * @param  string $file

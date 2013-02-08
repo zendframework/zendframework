@@ -179,6 +179,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $barcode = Barcode\Barcode::makeBarcode('code25');
         $this->assertTrue($barcode instanceof Object\Code25);
+
+        // ensure makeBarcode creates unique instances
+        $this->assertNotSame($barcode, Barcode\Barcode::makeBarcode('code25'));
     }
 
     public function testBarcodeObjectFactoryWithBarcodeAsStringAndConfigAsArray()
@@ -263,6 +266,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->checkGDRequirement();
         $renderer = Barcode\Barcode::makeRenderer('image');
         $this->assertTrue($renderer instanceof Renderer\Image);
+
+        // ensure unique instance is created
+        $this->assertNotSame($renderer, Barcode\Barcode::makeRenderer('image'));
     }
 
     public function testBarcodeRendererFactoryWithBarcodeAsStringAndConfigAsArray()

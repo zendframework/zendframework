@@ -21,6 +21,11 @@ use Zend\ServiceManager\AbstractPluginManager;
 class RendererPluginManager extends AbstractPluginManager
 {
     /**
+     * @var bool Ensure services are not shared
+     */
+    protected $shareByDefault = false;
+
+    /**
      * Default set of barcode renderers
      *
      * @var array

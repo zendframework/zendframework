@@ -334,7 +334,16 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                 ),
                 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT; Domain=docs.foo.com; Path=/accounts; Secure; HttpOnly'
             ),
+            array(
+                'Set-Cookie:',
+                array(),
+                ''
+            ),
+            array(
+                'Set-Cookie: ',
+                array(),
+                ''
+            ),
         );
     }
-
 }

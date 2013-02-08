@@ -154,12 +154,12 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      * Connect
      *
      * @throws Exception\RuntimeException
-     * @return null
+     * @return Connection
      */
     public function connect()
     {
         if ($this->resource) {
-            return;
+            return $this;
         }
 
         $serverName = '.';

@@ -77,37 +77,37 @@ class UploadFile extends AbstractValidator
         }
 
         switch ($error) {
-            case 0:
+            case UPLOAD_ERR_OK:
                 if (!is_uploaded_file($file)) {
                     $this->error(self::ATTACK);
                 }
                 break;
 
-            case 1:
+            case UPLOAD_ERR_INI_SIZE:
                 $this->error(self::INI_SIZE);
                 break;
 
-            case 2:
+            case UPLOAD_ERR_FORM_SIZE:
                 $this->error(self::FORM_SIZE);
                 break;
 
-            case 3:
+            case UPLOAD_ERR_PARTIAL:
                 $this->error(self::PARTIAL);
                 break;
 
-            case 4:
+            case UPLOAD_ERR_NO_FILE:
                 $this->error(self::NO_FILE);
                 break;
 
-            case 6:
+            case UPLOAD_ERR_NO_TMP_DIR:
                 $this->error(self::NO_TMP_DIR);
                 break;
 
-            case 7:
+            case UPLOAD_ERR_CANT_WRITE:
                 $this->error(self::CANT_WRITE);
                 break;
 
-            case 8:
+            case UPLOAD_ERR_EXTENSION:
                 $this->error(self::EXTENSION);
                 break;
 

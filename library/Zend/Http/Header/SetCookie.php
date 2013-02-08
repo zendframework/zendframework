@@ -228,7 +228,7 @@ class SetCookie implements MultipleHeaderInterface
     public function getFieldValue()
     {
         if ($this->getName() == '') {
-            throw new Exception\RuntimeException('A cookie name is required to generate a field value for this cookie');
+            return '';
         }
 
         $value = $this->getValue();

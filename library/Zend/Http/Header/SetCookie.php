@@ -132,7 +132,8 @@ class SetCookie implements MultipleHeaderInterface
             };
         }
 
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = explode(':', $headerLine, 2);
+        $value = ltrim($value);
 
         // some sites return set-cookie::value, this is to get rid of the second :
         $name = (strtolower($name) =='set-cookie:') ? 'set-cookie' : $name;
@@ -227,7 +228,7 @@ class SetCookie implements MultipleHeaderInterface
     public function getFieldValue()
     {
         if ($this->getName() == '') {
-            throw new Exception\RuntimeException('A cookie name is required to generate a field value for this cookie');
+            return '';
         }
 
         $value = $this->getValue();

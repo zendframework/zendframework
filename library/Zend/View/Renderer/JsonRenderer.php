@@ -130,6 +130,8 @@ class JsonRenderer implements Renderer, TreeRendererInterface
         // Serialize variables in view model
         if ($nameOrModel instanceof Model) {
             if ($nameOrModel instanceof JsonModel) {
+                $children = $this->recurseModel($nameOrModel, false);
+                $this->injectChildren($nameOrModel, $children);
                 $values = $nameOrModel->serialize();
             } else {
                 $values = $this->recurseModel($nameOrModel);
@@ -185,9 +187,13 @@ class JsonRenderer implements Renderer, TreeRendererInterface
      * @param  Model $model
      * @return array
      */
-    protected function recurseModel(Model $model)
+    protected function recurseModel(Model $model, $mergeWithVariables = true)
     {
-        $values = $model->getVariables();
+        $values = array();
+        if ($mergeWithVariables) {
+            $values = $model->getVariables();
+        }
+
         if ($values instanceof Traversable) {
             $values = ArrayUtils::iteratorToArray($values);
         }
@@ -207,7 +213,8 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             $childValues = $this->recurseModel($child);
             if ($captureTo) {
                 // Capturing to a specific key
-                //TODO please complete if append is true. must change old value to array and append to array?
+                // TODO please complete if append is true. must change old
+                // value to array and append to array?
                 $values[$captureTo] = $childValues;
             } elseif ($mergeChildren) {
                 // Merging values with parent
@@ -215,5 +222,20 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             }
         }
         return $values;
+    }
+
+    /**
+     * Inject discovered child model values into parent model
+     *
+     * @todo   detect collisions and decide whether to append and/or aggregate?
+     * @param  Model $model
+     * @param  array $children
+     */
+    protected function injectChildren(Model $model, array $children)
+    {
+        foreach ($children as $child => $value) {
+            // TODO detect collisions and decide whether to append and/or aggregate?
+            $model->setVariable($child, $value);
+        }
     }
 }

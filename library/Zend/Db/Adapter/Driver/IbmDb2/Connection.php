@@ -146,7 +146,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function connect()
     {
         if (is_resource($this->resource)) {
-            return;
+            return $this;
         }
 
         // localize

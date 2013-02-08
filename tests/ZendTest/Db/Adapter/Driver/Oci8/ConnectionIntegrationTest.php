@@ -144,4 +144,21 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         $connection = new Connection($this->variables);
         $connection->getLastGeneratedValue();
     }
+
+    /**
+     * @group zf3469
+     */
+    public function testConnectReturnsConnectionWhenResourceSet()
+    {
+        $this->markTestIncomplete('edit this');
+        $resource = oci_connect($this->variables['username'], $this->variables['password']);
+
+        $connection = new Connection(array());
+        $connection->setResource($resource);
+        $this->assertSame($connection, $connection->connect());
+
+        $connection->disconnect();
+        unset($connection);
+        unset($resource);
+    }
 }

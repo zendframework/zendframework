@@ -143,13 +143,13 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Connect to the database
      *
-     * @return void
+     * @return Connection
      * @throws Exception\RuntimeException on failure
      */
     public function connect()
     {
         if (is_resource($this->resource)) {
-            return;
+            return $this;
         }
 
         // localize
@@ -184,6 +184,8 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                 __METHOD__
             ));
         }
+
+        return $this;
     }
 
     /**

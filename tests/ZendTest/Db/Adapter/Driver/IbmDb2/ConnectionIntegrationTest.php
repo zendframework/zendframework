@@ -154,4 +154,23 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         $connection = new Connection($this->variables);
         $connection->getLastGeneratedValue();
     }
+
+    /**
+     * @group zf3469
+     */
+    public function testConnectReturnsConnectionWhenResourceSet()
+    {
+        $resource = db2_connect(
+            $this->variables['database'],
+            $this->variables['username'],
+            $this->variables['password']
+        );
+        $connection = new Connection(array());
+        $connection->setResource($resource);
+        $this->assertSame($connection, $connection->connect());
+
+        $connection->disconnect();
+        unset($connection);
+        unset($resource);
+    }
 }

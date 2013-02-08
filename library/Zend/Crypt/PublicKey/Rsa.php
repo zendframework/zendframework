@@ -137,15 +137,16 @@ class Rsa
 
     /**
      * Return last openssl error(s)
-     * 
+     *
      * @return string
      */
     public function getOpensslErrorString()
     {
-        $msg='';
-        while ($msg .= openssl_error_string())
-            $msg .= "\n";
-        return $msg;
+        $message = '';
+        while (false !== ($error = openssl_error_string())) {
+            $message .= $error . "\n";
+        }
+        return trim($message);
     }
 
     /**

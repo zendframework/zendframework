@@ -53,6 +53,18 @@ class FormDateSelectTest extends CommonTestCase
         $this->assertContains('<option value=""></option>', $markup);
     }
 
+    public function testCanDisableDelimiters()
+    {
+        $element = new DateSelect('foo');
+        $element->setShouldCreateEmptyOption(true);
+        $element->setShouldRenderDelimiters(false);
+        $markup = $this->helper->render($element);
+
+        // If it contains wo consecutive selects this means that no delimiters
+        // are inserted
+        $this->assertContains('</select><select', $markup);
+    }
+
     public function testInvokeProxiesToRender()
     {
         $element = new DateSelect('foo');

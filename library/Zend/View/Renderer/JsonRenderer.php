@@ -185,6 +185,8 @@ class JsonRenderer implements Renderer, TreeRendererInterface
      * Retrieve values from a model and recurse its children to build a data structure
      *
      * @param  Model $model
+     * @param  bool $mergeWithVariables Whether or not to merge children with
+     *         the variables of the $model
      * @return array
      */
     protected function recurseModel(Model $model, $mergeWithVariables = true)

@@ -51,6 +51,7 @@ abstract class Barcode
     {
         if (!static::$objectPlugins instanceof ObjectPluginManager) {
             static::$objectPlugins = new ObjectPluginManager();
+            static::$objectPlugins->setShareByDefault(false);
         }
 
         return static::$objectPlugins;
@@ -65,6 +66,7 @@ abstract class Barcode
     {
         if (!static::$rendererPlugins instanceof RendererPluginManager) {
             static::$rendererPlugins = new RendererPluginManager();
+            static::$rendererPlugins->setShareByDefault(false);
         }
 
         return static::$rendererPlugins;

@@ -52,7 +52,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
         }
 
         $selectHelper = $this->getSelectElementHelper();
-        $pattern      = $this->parsePattern();
+        $pattern      = $this->parsePattern($element->shouldRenderDelimiters());
 
         $daysOptions   = $this->getDaysOptions($pattern['day']);
         $monthsOptions = $this->getMonthsOptions($pattern['month']);
@@ -77,43 +77,27 @@ class FormDateTimeSelect extends FormDateSelectHelper
             $secondElement->setEmptyOption('');
         }
 
-        $markup = array();
-        $markup[$pattern['day']]   = $selectHelper->render($dayElement);
-        $markup[$pattern['month']] = $selectHelper->render($monthElement);
-        $markup[$pattern['year']]  = $selectHelper->render($yearElement);
-        $markup[$pattern['hour']]  = $selectHelper->render($hourElement);
-        $markup[$pattern['minute']]  = $selectHelper->render($minuteElement);
+        $data = array();
+        $data[$pattern['day']]   = $selectHelper->render($dayElement);
+        $data[$pattern['month']] = $selectHelper->render($monthElement);
+        $data[$pattern['year']]  = $selectHelper->render($yearElement);
+        $data[$pattern['hour']]  = $selectHelper->render($hourElement);
+        $data[$pattern['minute']]  = $selectHelper->render($minuteElement);
 
         if ($element->shouldShowSeconds()) {
-            $markup[$pattern['second']]  = $selectHelper->render($secondElement);
-
-            $markup = sprintf(
-                '%s %s %s %s %s %s %s %s %s %s %s',
-                $markup[array_shift($pattern)],
-                array_shift($pattern), // Delimiter
-                $markup[array_shift($pattern)],
-                array_shift($pattern), // Delimiter
-                $markup[array_shift($pattern)],
-                array_shift($pattern), // Delimiter
-                $markup[array_shift($pattern)],
-                array_shift($pattern), // Delimiter
-                $markup[array_shift($pattern)],
-                array_shift($pattern), // Delimiter
-                $markup[array_shift($pattern)]
-            );
+            $data[$pattern['second']]  = $selectHelper->render($secondElement);
         } else {
-            $markup = sprintf(
-                '%s %s %s %s %s %s %s %s %s',
-                $markup[array_shift($pattern)],
-                array_shift($pattern), // Delimiter
-                $markup[array_shift($pattern)],
-                array_shift($pattern), // Delimiter
-                $markup[array_shift($pattern)],
-                array_shift($pattern), // Delimiter
-                $markup[array_shift($pattern)],
-                array_shift($pattern), // Delimiter
-                $markup[array_shift($pattern)]
-            );
+            unset($pattern['second']);
+        }
+
+        $markup = '';
+        foreach ($pattern as $key => $value) {
+            // Delimiter
+            if (is_numeric($key)) {
+                $markup .= $value;
+            } else {
+                $markup .= $data[$value];
+            }
         }
 
         return $markup;
@@ -192,9 +176,10 @@ class FormDateTimeSelect extends FormDateSelectHelper
     /**
      * Parse the pattern
      *
+     * @param  bool $renderDelimiters
      * @return array
      */
-    protected function parsePattern()
+    protected function parsePattern($renderDelimiters = true)
     {
         $pattern    = $this->getPattern();
         $pregResult = preg_split('/([ -,.:\/]+)/', $pattern, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
@@ -213,7 +198,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
                 $result['minute'] = $value;
             } elseif (strpos($value, 's') !== false) {
                 $result['second'] = $value;
-            } else {
+            } elseif ($renderDelimiters) {
                 $result[] = $value;
             }
         }

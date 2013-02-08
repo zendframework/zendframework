@@ -240,4 +240,25 @@ class InputTest extends TestCase
         $filters = $filterChain->getFilters()->toArray();
         $this->assertInstanceOf('Zend\Filter\StringTrim', $filters[0]);
     }
+
+    public function testDoNotInjectNotEmptyValidatorIfAnywhereInChain()
+    {
+        $input = new Input('foo');
+        $this->assertTrue($input->isRequired());
+        $input->setValue('');
+
+        $notEmptyMock = $this->getMock('Zend\Validator\NotEmpty', array('isValid'));
+        $notEmptyMock->expects($this->exactly(1))
+                     ->method('isValid')
+                     ->will($this->returnValue(false));
+
+        $validatorChain = $input->getValidatorChain();
+        $validatorChain->addValidator(new Validator\Digits());
+        $validatorChain->addValidator($notEmptyMock);
+        $this->assertFalse($input->isValid());
+
+        $validators = $validatorChain->getValidators();
+        $this->assertEquals(2, count($validators));
+        $this->assertEquals($notEmptyMock, $validators[1]['instance']);
+    }
 }

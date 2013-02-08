@@ -234,7 +234,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
         $date           = new DateTime('1970-01-01 00:00:00');
 
         $result = array();
-        for ($hour = 1; $hour <= 31; $hour++) {
+        for ($hour = 1; $hour <= 24; $hour++) {
             $key   = $keyFormatter->format($date);
             $value = $valueFormatter->format($date);
             $result[$key] = $value;
@@ -258,7 +258,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
         $date           = new DateTime('1970-01-01 00:00:00');
 
         $result = array();
-        for ($hour = 1; $hour <= 31; $hour++) {
+        for ($min = 1; $min <= 60; $min++) {
             $key   = $keyFormatter->format($date);
             $value = $valueFormatter->format($date);
             $result[$key] = $value;
@@ -282,7 +282,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
         $date           = new DateTime('1970-01-01 00:00:00');
 
         $result = array();
-        for ($hour = 1; $hour <= 31; $hour++) {
+        for ($sec = 1; $sec <= 60; $sec++) {
             $key   = $keyFormatter->format($date);
             $value = $valueFormatter->format($date);
             $result[$key] = $value;

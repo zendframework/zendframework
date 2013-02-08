@@ -15,6 +15,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\DateTimeSelect as DateTimeSelectElement;
 use Zend\Form\Factory;
 use Zend\Form\Exception;
+use Zend\InputFilter\Factory as InputFilterFactory;
 
 class DateTimeSelectTest extends TestCase
 {
@@ -40,6 +41,25 @@ class DateTimeSelectTest extends TestCase
                     break;
             }
         }
+    }
+
+    public function testInputSpecificationFilterIfSecondNotProvided()
+    {
+        $element = new DateTimeSelectElement('test');
+        $factory = new InputFilterFactory();
+        $inputFilter = $factory->createInputFilter(array(
+            'test' => $element->getInputSpecification(),
+        ));
+        $inputFilter->setData(array(
+            'test' => array(
+                'year' => '2013',
+                'month' => '02',
+                'day' => '07',
+                'hour' => '03',
+                'minute' => '14'
+            ),
+        ));
+        $this->assertTrue($inputFilter->isValid());
     }
 
     public function testCanSetDateFromDateTime()

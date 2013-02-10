@@ -11,9 +11,46 @@ namespace Zend\Cache\Pattern;
 
 use Zend\Cache\Exception;
 use Zend\Stdlib\ErrorHandler;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerInterface;
 
-class CaptureCache extends AbstractPattern
+class CaptureCache extends AbstractPattern implements EventManagerAwareInterface
 {
+    /**
+     * @var EventManagerInterface
+     */
+    protected $events;
+    
+    /**
+     * Set event manager instance
+     *
+     * @param  EventManagerInterface $events
+     * @return CaptureCache
+     */
+    public function setEventManager(EventManagerInterface $events)
+    {
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_class($this),
+        ));
+        $this->events = $events;
+        return $this;
+    }
+
+    /**
+     * Get event manager
+     *
+     * @return EventManagerInterface
+     */
+    public function getEventManager()
+    {
+        if (null === $this->events) {
+            $this->setEventManager(new EventManager());
+        }
+        return $this->events;
+    }
+    
     /**
      * Start the cache
      *
@@ -43,6 +80,7 @@ class CaptureCache extends AbstractPattern
      *
      * @param string      $content
      * @param null|string $pageId
+     * @triggers set.post
      * @throws Exception\LogicException
      */
     public function set($content, $pageId = null)
@@ -61,6 +99,8 @@ class CaptureCache extends AbstractPattern
 
         $this->createDirectoryStructure($publicDir . \DIRECTORY_SEPARATOR . $path);
         $this->putFileContent($publicDir . \DIRECTORY_SEPARATOR . $file, $content);
+        
+        $this->getEventManager()->trigger(__FUNCTION__ . '.post', $this, array('file' => $file));
     }
 
     /**

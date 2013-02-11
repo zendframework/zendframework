@@ -249,14 +249,12 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRandomizedFile()
     {
+        $fileNoExt = $this->_filesPath . '/newfile';
         $filter = new RenameUploadMock(array(
             'target'          => $this->_newFile,
             'randomize'       => true,
         ));
 
-        $this->assertEquals($this->_newFile, $filter->getTarget());
-        $this->assertTrue($filter->getRandomize());
-        $fileNoExt = $this->_filesPath . '/newfile';
         $this->assertRegExp('#' . $fileNoExt . '_.{13}\.xml#', $filter($this->_oldFile));
     }
 
@@ -271,8 +269,6 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
             'randomize'       => true,
         ));
 
-        $this->assertEquals($fileNoExt, $filter->getTarget());
-        $this->assertTrue($filter->getRandomize());
         $this->assertRegExp('#' . $fileNoExt . '_.{13}#', $filter($this->_oldFile));
     }
 
@@ -283,5 +279,24 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid target');
         $filter = new FileRenameUpload(1234);
+    }
+
+    /**
+     * @return void
+     */
+    public function testCanFilterMultipleTimesWithsameResult()
+    {
+        $filter = new RenameUploadMock(array(
+            'target'          => $this->_newFile,
+            'randomize'       => true,
+        ));
+
+        $firstResult = $filter($this->_oldFile);
+
+        $this->assertContains('newfile', $firstResult);
+
+        $secondResult = $filter($this->_oldFile);
+
+        $this->assertSame($firstResult, $secondResult);
     }
 }

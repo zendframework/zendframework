@@ -7,35 +7,81 @@ use Zend\Cache;
 class RedisTest extends CommonAdapterTest
 {
 
-    protected $redisOptions;
+    /**
+     *
+     * @var Cache\Storage\Adapter\RedisOptions
+     */
+    protected $_options;
 
-    protected $redis;
+    /**
+     *
+     * @var Cache\Storage\Adapter\Redis
+     */
+    protected $_storage;
 
     public function setUp()
     {
-        $this->redisOptions = new Cache\Storage\Adapter\RedisOptions(
-            array(
-                'host' => 'ftdb',
-                'port' => 6379,
-                'timeout' => 1,
-                'database' => 4,
-                'password' => 'Iireew8aiphuNg7jeebu',
-            )
-        );
+        if (!defined('TESTS_ZEND_CACHE_REDIS_ENABLED') || !TESTS_ZEND_CACHE_REDIS_ENABLED) {
+            $this->markTestSkipped("Skipped by TestConfiguration (TESTS_ZEND_CACHE_REDIS_ENABLED)");
+        }
 
-        $this->redisStorage = new Cache\Storage\Adapter\Redis($this->redisOptions);
+        if (!extension_loaded('redis')) {
+            $this->markTestSkipped("Redis extension is not loaded");
+        }
+
+        $this->_options  = new Cache\Storage\Adapter\RedisOptions(array(
+            'resource_id' => __CLASS__
+        ));
+
+        if (defined('TESTS_ZEND_CACHE_REDIS_HOST') && defined('TESTS_ZEND_CACHE_REDIS_PORT')) {
+            $this->_options->getResourceManager()->setServer(__CLASS__, array(
+                TESTS_ZEND_CACHE_REDIS_HOST, TESTS_ZEND_CACHE_REDIS_PORT, 1
+            ));
+        } elseif (defined('TESTS_ZEND_CACHE_REDIS_HOST')) {
+            $this->_options->getResourceManager()->setServer(__CLASS__, array(
+                TESTS_ZEND_CACHE_REDIS_HOST
+            ));
+        }
+
+        $this->_storage = new Cache\Storage\Adapter\Redis();
+
+        $this->_storage->setOptions($this->_options);
+        $this->_storage->flush();
         parent::setUp();
+    }
+
+    public function testDbFlush()
+    {
+        $key = 'newKey';
+        $redisResource = $this->_storage->getRedisResource();
+
+        $this->_storage->setItem($key, 'test val');
+        $this->assertEquals('test val', $this->_storage->getItem($key), 'Value wasn\'t saved into cache');
+
+        $this->_storage->flush();
+
+        $this->assertNull($this->_storage->getItem($key), 'Database wasn\'t flushed');
+    }
+
+    public function testSocketConnection()
+    {
+        $socket = '/tmp/redis.sock';
+        $this->_options->getResourceManager()->setServer($this->_options->getResourceId(), $socket);
+        $normalized = $this->_options->getResourceManager()->getServer($this->_options->getResourceId());
+        $this->assertEquals($socket, $normalized['host'], 'Host should equal to socket {$socket}');
+
+        $this->_storage = null;
     }
 
     public function testRedisCacheStore()
     {
         $key = 'singleKey';
         //assure that there's nothing under key
-        $this->redisStorage->removeItem($key);
-        $this->assertFalse($this->redisStorage->getItem($key));
-        $this->redisStorage->setItem($key, serialize(array('test', array('one', 'two'))));
+        $this->_storage->removeItem($key);
+        $this->assertNull($this->_storage->getItem($key));
+        $this->_storage->setItem($key, serialize(array('test', array('one', 'two'))));
 
-        $this->assertCount(2, unserialize($this->redisStorage->getItem($key)), 'Get item should return array of two elements');
+        $this->assertCount(2, unserialize($this->_storage->getItem($key)), 'Get item should return array of two elements');
 
         $expectedVals = array(
             'key1' => 'val1',
@@ -43,11 +89,11 @@ class RedisTest extends CommonAdapterTest
             'key3' => array('val3', 'val4'),
         );
 
-        $this->redisStorage->setItems($expectedVals);
+        $this->_storage->setItems($expectedVals);
 
         $this->assertCount(
             3,
-            $this->redisStorage->getItems(array_keys($expectedVals)),
+            $this->_storage->getItems(array_keys($expectedVals)),
                 'Multiple set/get items didnt save correct amount of rows'
         );
     }
@@ -55,21 +101,21 @@ class RedisTest extends CommonAdapterTest
     public function testRedisRemoveItem()
     {
         $key = 'newKey';
-        $this->redisStorage->setItem($key, 'test value');
+        $this->_storage->setItem($key, 'test value');
 
-        $this->assertEquals('test value', $this->redisStorage->getItem($key), 'Value should be stored in redis');
+        $this->assertEquals('test value', $this->_storage->getItem($key), 'Value should be stored in redis');
 
-        $this->redisStorage->removeItem($key);
+        $this->_storage->removeItem($key);
 
-        $this->assertFalse($this->redisStorage->getItem($key), 'Item should be deleted from redis but its still available');
+        $this->assertNull($this->_storage->getItem($key), 'Item should be deleted from redis but its still available');
     }
 
     public function testRedisHasItem()
     {
         $key = 'newKey';
-        $this->redisStorage->setItem($key, 'test val');
+        $this->_storage->setItem($key, 'test val');
 
-        $this->assertTrue($this->redisStorage->hasItem($key), 'Item should be saved into redis, but check item doesnt detect it');
+        $this->assertTrue($this->_storage->hasItem($key), 'Item should be saved into redis, but check item doesnt detect it');
     }
 
     public function testMultiGetAndMultiSet()
@@ -80,37 +126,38 @@ class RedisTest extends CommonAdapterTest
             'key3' => 'ccc',
         );
 
-        $this->redisStorage->setItems($save);
+        $this->_storage->setItems($save);
 
         foreach ($save as $key => $value) {
-            $this->assertEquals($value, $this->redisStorage->getItem($key), 'Multi save didn\'t work, one of the keys wasnt found in redis');
+            $this->assertEquals($value, $this->_storage->getItem($key), 'Multi save didn\'t work, one of the keys wasnt found in redis');
         }
     }
 
     public function testRedisSerializer()
     {
-        $this->redisStorage->addPlugin(new \Zend\Cache\Storage\Plugin\Serializer());
+        $this->_storage->addPlugin(new \Zend\Cache\Storage\Plugin\Serializer());
         $value = array('test', 'of', 'array');
-        $this->redisStorage->setItem('key', $value);
+        $this->_storage->setItem('key', $value);
 
-        $this->assertCount(count($value), $this->redisStorage->getItem('key'), 'Redis didn\'t save correctly array value');
+        $this->assertCount(count($value), $this->_storage->getItem('key'), 'Problem with Redis serialization');
     }
 
-    public function testFlushingOfDatabase()
+
+    public function testSetDatabase()
     {
-        $key = 'newKey';
-        $this->redisStorage->setItem($key, 'test val');
+        $this->assertTrue($this->_storage->setItem('key', 'val'));
 
-        $this->assertEquals('test val', $this->redisStorage->getItem($key), 'Value wasn\'t saved into cache');
-
-        $this->redisStorage->flush();
-
-        $this->assertFalse($this->redisStorage->getItem($key), 'Database wasn\'t flushed');
+        $this->_options->getResourceManager()->setDatabase($this->_options->getResourceId(), 1);
+        $this->assertNull($this->_storage->getItem('key'));
     }
 
     public function tearDown()
     {
-        $this->redisStorage->flush();
+        if ($this->_storage) {
+            $this->_storage->flush();
+        }
+
+        parent::tearDown();
     }
 
 }

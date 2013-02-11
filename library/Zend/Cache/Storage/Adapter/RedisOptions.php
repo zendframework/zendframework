@@ -16,43 +16,24 @@ use Redis as RedisResource;
 class RedisOptions extends AdapterOptions
 {
     /**
-     * Redis resource
-     *
-     * @var \Redis
+     * The namespace separator
+     * @var string
      */
-    protected $redisResource;
+    protected $namespaceSeparator = ':';
 
     /**
-     * Optional password to Redis
+     * The memcached resource manager
+     *
+     * @var null|RedisResourceManager
+     */
+    protected $resourceManager;
+
+    /**
+     * The resource id of the resource manager
      *
      * @var string
      */
-    protected $password;
-
-    /**
-     * Database number
-     *
-     * @var int
-     */
-    protected $database = 0;
-
-    /**
-     * Redis server connection settings
-     *
-     * @var string
-     */
-    protected $server = array(
-        'host'   => '127.0.0.1',
-        'port'   => 6379,
-        'timeout' => 0,
-    );
-
-    /**
-     * List of Libmemcached options to set on initialize
-     *
-     * @var array
-     */
-    protected $libOptions = array();
+    protected $resourceId = 'default';
 
     /**
      * Set namespace.
@@ -83,220 +64,82 @@ class RedisOptions extends AdapterOptions
     }
 
     /**
-     * Sets optional password to redis server
+     * Get the redis resource id
      *
-     * @param string $password Password to redis
+     * @return string
+     */
+    public function getResourceId()
+    {
+        return $this->resourceId;
+    }
+
+    /**
+     * Set the redis resource id
+     *
+     * @param string $resourceId
      * @return RedisOptions
      */
-    public function setPassword($password)
+    public function setResourceId($resourceId)
     {
-        $this->password = $password;
-        return $this;
-    }
-
-    /**
-     * Gets password to Redis
-     *
-     * @return string Redis password
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Sets database number to use with redis
-     *
-     * @param string $database Redis database number
-     * @return RedisOptions
-     */
-    public function setDatabase($database)
-    {
-        $this->database = (int)$database;
-        return $this;
-    }
-
-    /**
-     * Gets currently selected database number
-     *
-     * @return string Redis database
-     */
-    public function getDatabase()
-    {
-        return $this->database;
-    }
-
-    /**
-     * Sets host for server
-     *
-     * @param string $host Redis server host
-     * @return RedisOptions
-     */
-    public function setHost($host)
-    {
-        $this->server['host'] = $host;
-        return $this;
-    }
-
-    /**
-     * Sets port for redis server
-     *
-     * @param int $port Redis server port
-     * @return RedisOptions
-     */
-    public function setPort($port)
-    {
-        $this->server['port'] = (int)$port;
-        return $this;
-    }
-
-    /**
-     * Sets Timeout for connection estabilisment
-     *
-     * @param int $timeout Connection timeout
-     * @return RedisOptions
-     */
-    public function setTimeout($timeout)
-    {
-        $this->server['timeout'] = (int)$timeout;
-        return $this;
-    }
-
-    /**
-     * A redis resource to share
-     *
-     * @param null|RedisResource $redisResource Redis resource object
-     * @return RedisOptions
-     */
-    public function setRedisResource(RedisResource $redisResource = null)
-    {
-        if ($this->redisResource !== $redisResource) {
-            $this->triggerOptionEvent('redis_resource', $redisResource);
-            $this->redisResource = $redisResource;
+        $resourceId = (string) $resourceId;
+        if ($this->resourceId !== $resourceId) {
+            $this->triggerOptionEvent('resource_id', $resourceId);
+            $this->resourceId = $resourceId;
         }
         return $this;
     }
 
     /**
-     * Get memcached resource to share
+     * Set the redis resource manager to use
      *
-     * @return null|RedisResource
-     */
-    public function getRedisResource()
-    {
-        return $this->redisResource;
-    }
-
-    /**
-     * Add a server to the list
-     *
-     * @param string $host    Redis host
-     * @param int    $port    Redis port
-     * @param int    $timeout Timout for connection
-     *
+     * @param null|RedisResourceManager $resourceManager
      * @return RedisOptions
      */
-    public function setServer($host, $port = 6379, $timeout = 0)
+    public function setResourceManager(RedisResourceManager $resourceManager = null)
     {
-        $this->server = array('host' => $host, 'port' => $port, 'timeout' => $timeout);
+        if ($this->resourceManager !== $resourceManager) {
+            $this->triggerOptionEvent('resource_manager', $resourceManager);
+            $this->resourceManager = $resourceManager;
+        }
         return $this;
     }
 
     /**
-     * Get Server info in array
+     * Get the redis resource manager
      *
-     * @return array
+     * @return RedisResourceManager
      */
-    public function getServer()
+    public function getResourceManager()
     {
-        return $this->server;
+        if (!$this->resourceManager) {
+            $this->resourceManager = new RedisResourceManager();
+        }
+        return $this->resourceManager;
     }
 
     /**
-     * Set phpredis options
+     * Set namespace separator
      *
-     * @param array $libOptions Array of options
+     * @param  string $namespaceSeparator
      * @return RedisOptions
-     * @link https://github.com/nicolasff/phpredis
      */
-    public function setLibOptions(array $libOptions)
+    public function setNamespaceSeparator($namespaceSeparator)
     {
-        $normalizedOptions = array();
-        foreach ($libOptions as $key => $value) {
-            $this->normalizeLibOptionKey($key);
-            $normalizedOptions[$key] = $value;
+        $namespaceSeparator = (string) $namespaceSeparator;
+        if ($this->namespaceSeparator !== $namespaceSeparator) {
+            $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
+            $this->namespaceSeparator = $namespaceSeparator;
         }
-
-        $this->triggerOptionEvent('lib_options', $normalizedOptions);
-        $this->libOptions = array_diff_key($this->libOptions, $normalizedOptions) + $normalizedOptions;
-
         return $this;
     }
 
     /**
-     * Set phpredis option
+     * Get namespace separator
      *
-     * @param string|int $key   Option key
-     * @param mixed      $value Option value
-     *
-     * @return RedisOptions
-     * @link https://github.com/nicolasff/phpredis
+     * @return string
      */
-    public function setLibOption($key, $value)
+    public function getNamespaceSeparator()
     {
-        $this->normalizeLibOptionKey($key);
-        $this->triggerOptionEvent('lib_options', array($key, $value));
-        $this->libOptions[$key] = $value;
-
-        return $this;
-    }
-
-    /**
-     * Get phpredis options
-     *
-     * @return array
-     * @link https://github.com/nicolasff/phpredis
-     */
-    public function getLibOptions()
-    {
-        return $this->libOptions;
-    }
-
-    /**
-     * Get phpredis option
-     *
-     * @param string|int $key Option key
-     *
-     * @return mixed
-     * @link https://github.com/nicolasff/phpredis
-     */
-    public function getLibOption($key)
-    {
-        $this->normalizeLibOptionKey($key);
-        if (isset($this->libOptions[$key])) {
-            return $this->libOptions[$key];
-        }
-        return null;
-    }
-
-    /**
-     * Normalize Redis option name into it's constant value
-     *
-     * @param string|int &$key Performs Normalization of a key provided
-     * @return null
-     *
-     * @throws Exception\InvalidArgumentException
-     */
-    protected function normalizeLibOptionKey(& $key)
-    {
-        if (is_string($key)) {
-            $const = 'Redis::OPT_' . str_replace(array(' ', '-'), '_', strtoupper($key));
-            if (!defined($const)) {
-                throw new Exception\InvalidArgumentException("Unknown redis option '{$key}' ({$const})");
-            }
-            $key = constant($const);
-        } else {
-            $key = (int) $key;
-        }
+        return $this->namespaceSeparator;
     }
 }

@@ -10,6 +10,7 @@
 namespace Zend\Cache\Storage\Adapter;
 
 use Redis as RedisResource;
+use RedisException as RedisResourceException;
 
 use stdClass;
 use Zend\Cache\Storage\Adapter\AbstractAdapter;
@@ -20,15 +21,58 @@ use Zend\Cache\Storage\FlushableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
 
 class Redis extends AbstractAdapter implements
-    FlushableInterface
+    FlushableInterface,
+    TotalSpaceCapableInterface
 {
 
     /**
-     * Connection to redis
+     * Has this instance be initialized
      *
-     * @var Redis
+     * @var boolean
      */
-    protected $redisResource;
+    protected $initialized = false;
+
+    /**
+     * The redis resource manager
+     *
+     * @var null|RedisResourceManager
+     */
+    protected $resourceManager;
+
+    /**
+     * The redis resource id
+     *
+     * @var null|string
+     */
+    protected $resourceId;
+
+    /**
+     * The namespace prefix
+     *
+     * @var string
+     */
+    protected $namespacePrefix = '';
+
+    /**
+     * Create new Adapter for redis storage
+     *
+     * @param null|array|Traversable|RedisOptions $options
+     * @see \Zend\Cache\Storage\Adapter\Abstract
+     */
+    public function __construct($options = null)
+    {
+        if (!extension_loaded('redis')) {
+            throw new Exception\ExtensionNotLoadedException("Redis extension is not loaded");
+        }
+
+        parent::__construct($options);
+
+        // reset initialized flag on update option(s)
+        $initialized = & $this->initialized;
+        $this->getEventManager()->attach('option', function ($event) use (& $initialized) {
+            $initialized = false;
+        });
+    }
 
     /**
      * Get Redis resource
@@ -37,63 +81,58 @@ class Redis extends AbstractAdapter implements
      */
     public function getRedisResource()
     {
-        if ($this->redisResource) {
-            return $this->redisResource;
-        }
 
-        $options = $this->getOptions();
-        $redis = $options->getRedisResource() ?: new RedisResource();
+        if (!$this->initialized) {
+            $options = $this->getOptions();
 
-        foreach ($options->getLibOptions() as $key => $value) {
-            $redis->setOption($key, $value);
-        }
+            // get resource manager and resource id
+            $this->resourceManager = $options->getResourceManager();
+            $this->resourceId      = $options->getResourceId();
 
-        // Allow updating namespace
-        $this->getEventManager()->attach(
-            'option',
-            function ($event) use ($redis) {
-                $allowed = array('namespace', 'database');
-                $params = $event->getParams();
-                foreach ($params as $key => $value) {
-                    if (!in_array($key, $allowed)) {
-                        // Cannot set lib options after initialization
-                        continue;
-                    }
-                    $redis->setOption(RedisResource::OPT_PREFIX, $value);
-                }
+            // init namespace prefix
+            $namespace = $options->getNamespace();
+            if ($namespace !== '') {
+                $this->namespacePrefix = $namespace . $options->getNamespaceSeparator();
+            } else {
+                $this->namespacePrefix = '';
             }
-        );
 
-        $server = $options->getServer();
-
-        $redis->connect($server['host'], $server['port'], $server['timeout']);
-
-        $redis->select($options->getDatabase());
-        $redis->setOption(RedisResource::OPT_PREFIX, $options->getNamespace());
-        $password = $this->getOptions()->getPassword();
-
-        if ($password) {
-            $redis->auth($password);
+            // update initialized flag
+            $this->initialized = true;
         }
 
-        $this->redisResource = $redis;
+        return $this->resourceManager->getResource($this->resourceId);
+    }
 
-        return $this->redisResource;
+    /* options */
+
+    /**
+     * Set options.
+     *
+     * @param  array|Traversable|MemcachedOptions $options
+     * @return Memcached
+     * @see    getOptions()
+     */
+    public function setOptions($options)
+    {
+        if (!$options instanceof RedisOptions) {
+            $options = new RedisOptions($options);
+        }
+        return parent::setOptions($options);
     }
 
     /**
-     * Create new Adapter for redis storage
+     * Get options.
      *
-     * @param \Zend\Cache\Storage\Adapter\RedisOptions $options
-     * @see \Zend\Cache\Storage\Adapter\Abstract
+     * @return MemcachedOptions
+     * @see setOptions()
      */
-    public function __construct(RedisOptions $options = null)
+    public function getOptions()
     {
-        if (!extension_loaded('redis')) {
-            throw new Exception\ExtensionNotLoadedException("Redis extension is not loaded");
+        if (!$this->options) {
+            $this->setOptions(new RedisOptions());
         }
-
-        parent::__construct($options ?: new RedisOptions());
+        return $this->options;
     }
 
     /**
@@ -103,11 +142,25 @@ class Redis extends AbstractAdapter implements
      * @param boolean &$success       If the operation was successfull
      * @param mixed   &$casToken      Token
      * @return mixed Data on success, false on key not found
+     * @throws Exception\RuntimeException
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
+        $redis = $this->getRedisResource();
+        try {
+            $value = $redis->get($this->namespacePrefix . $normalizedKey);
+        } catch (RedisResourceException $e) {
+            throw new Exception\RuntimeException($redis->getLastError());
+        }
+
+        if ($value === false) {
+            $success = false;
+            return null;
+        }
+
         $success = true;
-        return $this->getRedisResource()->get($normalizedKey);
+        $casToken = $value;
+        return $value;
     }
 
      /**
@@ -116,10 +169,29 @@ class Redis extends AbstractAdapter implements
      * @param array &$normalizedKeys Array of keys to be obtained
      *
      * @return array Associative array of keys and values
+     * @throws Exception\RuntimeException
      */
     protected function internalGetItems(array & $normalizedKeys)
     {
-        return $this->getRedisResource()->mGet($normalizedKeys);
+        $redis = $this->getRedisResource();
+
+        $namespacedKeys = array();
+        foreach ($normalizedKeys as & $normalizedKey) {
+            $namespacedKeys[] = $this->namespacePrefix . $normalizedKey;
+        }
+
+        try {
+            $results = $redis->mGet($namespacedKeys);
+        } catch (RedisResourceException $e) {
+            throw new Exception\RuntimeException($redis->getLastError());
+        }
+        //combine the key => value pairs and remove all missing values
+        return array_filter(
+            array_combine($normalizedKeys, $results),
+            function($value) {
+                return $value !== false;
+            }
+        );
     }
 
     /**
@@ -128,10 +200,16 @@ class Redis extends AbstractAdapter implements
      * @param string &$normalizedKey Normalized key which will be checked
      *
      * @return boolean
+     * @throws Exception\RuntimeException
      */
     protected function internalHasItem(& $normalizedKey)
     {
-        return $this->getRedisResource()->exists($normalizedKey);
+        $redis = $this->getRedisResource();
+        try {
+            return $redis->exists($this->namespacePrefix . $normalizedKey);
+        } catch (RedisResourceException $e) {
+            throw new Exception\RuntimeException($redis->getLastError());
+        }
     }
 
     /**
@@ -141,16 +219,26 @@ class Redis extends AbstractAdapter implements
      * @param mixed  &$value         Value to store under cache key
      *
      * @return boolean
+     * @throws Exception\RuntimeException
      */
     protected function internalSetItem(& $normalizedKey, & $value)
     {
-
-        $ttl = $this->getOptions()->getTtl();
-        if ($ttl) {
-            return $this->getRedisResource()->setex($normalizedKey, $ttl, $value);
-        } else {
-            return $this->getRedisResource()->set($normalizedKey, $value);
+        try {
+            $redis = $this->getRedisResource();
+            $ttl = $this->getOptions()->getTtl();
+            if ($ttl) {
+                if ($this->resourceManager->getMayorVersion($this->resourceId) < 2) {
+                    throw new Exception\UnsupportedMethodCallException("To use ttl you need version >= 2.0.0");
+                }
+                $success = $redis->setex($this->namespacePrefix . $normalizedKey, $ttl, $value);
+            } else {
+                $success = $redis->set($this->namespacePrefix . $normalizedKey, $value);
+            }
+        } catch (RedisResourceException $e) {
+            throw new Exception\RuntimeException($redis->getLastError());
         }
+
+        return $success;
     }
 
      /**
@@ -159,10 +247,55 @@ class Redis extends AbstractAdapter implements
      * @param array &$normalizedKeyValuePairs An array of normalized key/value pairs
      *
      * @return array Array of not stored keys
+     * @throws Exception\RuntimeException
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs)
     {
-        return $this->getRedisResource()->mSet($normalizedKeyValuePairs);
+        $redis = $this->getRedisResource();
+        $ttl   = $this->getOptions()->getTtl();
+
+        $namespacedKeyValuePairs = array();
+        foreach ($normalizedKeyValuePairs as $normalizedKey => & $value) {
+            $namespacedKeyValuePairs[ $this->namespacePrefix . $normalizedKey ] = & $value;
+        }
+        try {
+            if ($ttl > 0) {
+                //mSet does not allow ttl, so use transaction
+                $transaction = $redis->multi();
+                foreach($namespacedKeyValuePairs as $key => $value) {
+                    $transaction->setex($key, $ttl, $value);
+                }
+                $success = $transaction->exec();
+            } else {
+                $success = $redis->mSet($namespacedKeyValuePairs);
+            }
+
+        } catch (RedisResourceException $e) {
+            $success = false;
+        }
+        if (!$success) {
+            throw new Exception\RuntimeException($redis->getLastError());
+        }
+
+        return array();
+    }
+
+    /**
+     * Add an item.
+     *
+     * @param  string $normalizedKey
+     * @param  mixed  $value
+     * @return bool
+     * @throws Exception\RuntimeException
+     */
+    protected function internalAddItem(& $normalizedKey, & $value)
+    {
+        $redis = $this->getRedisResource();
+        try {
+            return $redis->setnx($this->namespacePrefix . $normalizedKey, $value);
+        } catch (RedisResourceException $e) {
+            throw new Exception\RuntimeException($redis->getLastError());
+        }
     }
 
     /**
@@ -171,19 +304,130 @@ class Redis extends AbstractAdapter implements
      * @param string &$normalizedKey Key which will be removed
      *
      * @return boolean
+     * @throws Exception\RuntimeException
      */
     protected function internalRemoveItem(& $normalizedKey)
     {
-        return $this->getRedisResource()->delete($normalizedKey);
+        $redis = $this->getRedisResource();
+        try {
+            return (bool) $redis->delete($this->namespacePrefix . $normalizedKey);
+        } catch (RedisResourceException $e) {
+            throw new Exception\RuntimeException($redis->getLastError());
+        }
+    }
+
+    /**
+     * Internal method to increment an item.
+     *
+     * @param  string $normalizedKey
+     * @param  int    $value
+     * @return int|bool The new value on success, false on failure
+     * @throws Exception\RuntimeException
+     */
+    protected function internalIncrementItem(& $normalizedKey, & $value)
+    {
+        $redis = $this->getRedisResource();
+        try {
+            return $redis->incrBy($this->namespacePrefix . $normalizedKey, $value);
+        } catch (RedisResourceException $e) {
+            throw new Exception\RuntimeException($redis->getLastError());
+        }
+    }
+
+    /**
+     * Internal method to decrement an item.
+     *
+     * @param  string $normalizedKey
+     * @param  int    $value
+     * @return int|bool The new value on success, false on failure
+     * @throws Exception\RuntimeException
+     */
+    protected function internalDecrementItem(& $normalizedKey, & $value)
+    {
+        $redis = $this->getRedisResource();
+        try {
+            return $redis->decrBy($this->namespacePrefix . $normalizedKey, $value);
+        } catch (RedisResourceException $e) {
+            throw new Exception\RuntimeException($redis->getLastError());
+        }
     }
 
     /**
      * Flushes all contents of current database
      *
      * @return bool Always true
+     * @throws Exception\RuntimeException
      */
     public function flush()
     {
-        return $this->getRedisResource()->flushDB();
+        $redis = $this->getRedisResource();
+        try {
+            return $redis->flushDB();
+        } catch (RedisResourceException $e) {
+            throw new Exception\RuntimeException($redis->getLastError());
+        }
+    }
+
+    /* TotalSpaceCapableInterface */
+
+    /**
+     * Get total space in bytes
+     *
+     * @return int|float
+     */
+    public function getTotalSpace()
+    {
+        $redis  = $this->getRedisResource();
+        try {
+            $info = $redis->info();
+        } catch (RedisResourceException $e) {
+            throw new Exception\RuntimeException($redis->getLastError());
+        }
+
+        return $info['used_memory'];
+
+    }
+
+    /* status */
+
+    /**
+     * Internal method to get capabilities of this adapter
+     *
+     * @return Capabilities
+     */
+    protected function internalGetCapabilities()
+    {
+        if ($this->capabilities === null) {
+            $this->capabilityMarker = new stdClass();
+            //without serialization redis supports only strings for simple
+            //get/set methods
+            $this->capabilities     = new Capabilities(
+                $this,
+                $this->capabilityMarker,
+                array(
+                    'supportedDatatypes' => array(
+                        'NULL'     => false,
+                        'boolean'  => false,
+                        'integer'  => false,
+                        'double'   => false,
+                        'string'   => true,
+                        'array'    => false,
+                        'object'   => false,
+                        'resource' => false,
+                    ),
+                    'supportedMetadata'  => array(),
+                    'minTtl'             => 1,
+                    'maxTtl'             => 0,
+                    'staticTtl'          => true,
+                    'ttlPrecision'       => 1,
+                    'useRequestTime'     => false,
+                    'expiredRead'        => false,
+                    'maxKeyLength'       => 255,
+                    'namespaceIsPrefix'  => true,
+                )
+            );
+        }
+
+        return $this->capabilities;
     }
 }

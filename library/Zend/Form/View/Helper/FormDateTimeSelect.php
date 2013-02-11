@@ -167,7 +167,9 @@ class FormDateTimeSelect extends FormDateSelectHelper
     {
         if ($this->pattern === null) {
             $intl           = new IntlDateFormatter($this->getLocale(), $this->dateType, $this->timeType);
-            $this->pattern  = $intl->getPattern();
+            // remove time zone format character
+            $pattern = rtrim($intl->getPattern(), ' z');
+            $this->pattern  = $pattern;
         }
 
         return $this->pattern;
@@ -182,24 +184,24 @@ class FormDateTimeSelect extends FormDateSelectHelper
     protected function parsePattern($renderDelimiters = true)
     {
         $pattern    = $this->getPattern();
-        $pregResult = preg_split('/([ -,.:\/]+)/', $pattern, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        $pregResult = preg_split("/([ -,.:\/]*'.*?'[ -,.:\/]*)|([ -,.:\/]+)/", $pattern, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
         $result = array();
         foreach ($pregResult as $value) {
-            if (stripos($value, 'd') !== false) {
+            if (stripos($value, "'") === false && stripos($value, 'd') !== false) {
                 $result['day'] = $value;
-            } elseif (strpos($value, 'M') !== false) {
+            } elseif (stripos($value, "'") === false && strpos($value, 'M') !== false) {
                 $result['month'] = $value;
-            } elseif (stripos($value, 'y') !== false) {
+            } elseif (stripos($value, "'") === false && stripos($value, 'y') !== false) {
                 $result['year'] = $value;
-            } elseif (stripos($value, 'h') !==  false) {
+            } elseif (stripos($value, "'") === false && stripos($value, 'h') !==  false) {
                 $result['hour'] = $value;
-            } elseif (stripos($value, 'm') !== false) {
+            } elseif (stripos($value, "'") === false && stripos($value, 'm') !== false) {
                 $result['minute'] = $value;
-            } elseif (strpos($value, 's') !== false) {
+            } elseif (stripos($value, "'") === false && strpos($value, 's') !== false) {
                 $result['second'] = $value;
             } elseif ($renderDelimiters) {
-                $result[] = $value;
+                $result[] = str_replace("'", '', $value);
             }
         }
 

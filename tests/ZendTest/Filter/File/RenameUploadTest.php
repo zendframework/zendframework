@@ -284,7 +284,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-    public function testCanFilterMultipleTimesWithsameResult()
+    public function testCanFilterMultipleTimesWithSameResult()
     {
         $filter = new RenameUploadMock(array(
             'target'          => $this->_newFile,

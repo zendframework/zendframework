@@ -772,6 +772,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      * - If helper has ACL and role:
      *  - Page is accepted if it has no resource or privilege
      *  - Page is accepted if ACL allows page's resource or privilege
+     * - If ACL disabled, "isAllowed" event listener is triggered. 
      * - If page is accepted by the rules above and $recursive is true, the page
      *   will not be accepted if it is the descendant of a non-accepted page.
      *
@@ -787,17 +788,14 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
         $accept = true;
 
         if (!$page->isVisible(false) && !$this->getRenderInvisible()) {
-            // don't accept invisible pages
+            // Don't accept invisible pages
             $accept = false;
         } elseif ($this->getUseAcl() && !$this->acceptAcl($page)) {
-            // acl is not amused
+            // Acl is not amused
             $accept = false;
         } else {
             $params = array('page' => $page);
-            
-            // Trigger listener 
             $trigger = $this->getEventManager()->trigger('isAllowed', $this, $params);
-            
             $accept = $trigger->last();
         }
 

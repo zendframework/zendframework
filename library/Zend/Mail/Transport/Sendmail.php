@@ -190,8 +190,9 @@ class Sendmail implements TransportInterface
     protected function prepareBody(Mail\Message $message)
     {
         if (!$this->isWindowsOs()) {
-            // *nix platforms can simply return the body text
-            return $message->getBodyText();
+            // On *nix platforms, we should replace \r\n with \n
+            // sendmail is not an SMTP server, it is a unix command - it expects LF
+            return str_replace("\r\n", "\n", $message->getBodyText());
         }
 
         // On windows, lines beginning with a full stop need to be fixed
@@ -217,7 +218,10 @@ class Sendmail implements TransportInterface
         $headers = clone $message->getHeaders();
         $headers->removeHeader('To');
         $headers->removeHeader('Subject');
-        return $headers->toString();
+
+        // On *nix platforms, we should replace \r\n with \n
+        // sendmail is not an SMTP server, it is a unix command - it expects LF
+        return str_replace("\r\n", "\n", $headers->toString());
     }
 
     /**

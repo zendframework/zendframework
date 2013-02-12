@@ -131,7 +131,7 @@ class Catchall implements RouteInterface
     /**
      * getAssembledParams(): defined by Route interface.
      *
-     * @see    \Zend\Mvc\Router\RouteInterface::getAssembledParams
+     * @see    RouteInterface::getAssembledParams
      * @return array
      */
     public function getAssembledParams()

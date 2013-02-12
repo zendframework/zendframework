@@ -62,7 +62,7 @@ class TreeRouteStack extends SimpleRouteStack
     /**
      * addRoute(): defined by RouteStackInterface interface.
      *
-     * @see    RouteStack::addRoute()
+     * @see    RouteStackInterface::addRoute()
      * @param  string  $name
      * @param  mixed   $route
      * @param  integer $priority

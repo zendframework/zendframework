@@ -50,7 +50,7 @@ class Scheme implements RouteInterface
     /**
      * factory(): defined by RouteInterface interface.
      *
-     * @see    Route::factory()
+     * @see    \Zend\Mvc\Router\RouteInterface::factory()
      * @param  array|Traversable $options
      * @return Scheme
      * @throws Exception\InvalidArgumentException
@@ -77,7 +77,7 @@ class Scheme implements RouteInterface
     /**
      * match(): defined by RouteInterface interface.
      *
-     * @see    Route::match()
+     * @see    \Zend\Mvc\Router\RouteInterface::match()
      * @param  Request $request
      * @return RouteMatch
      */
@@ -100,7 +100,7 @@ class Scheme implements RouteInterface
     /**
      * assemble(): Defined by RouteInterface interface.
      *
-     * @see    Route::assemble()
+     * @see    \Zend\Mvc\Router\RouteInterface::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed
@@ -118,7 +118,7 @@ class Scheme implements RouteInterface
     /**
      * getAssembledParams(): defined by RouteInterface interface.
      *
-     * @see    Route::getAssembledParams
+     * @see    \Zend\Mvc\Router\RouteInterface::getAssembledParams
      * @return array
      */
     public function getAssembledParams()

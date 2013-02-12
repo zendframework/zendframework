@@ -74,7 +74,7 @@ class Part extends TreeRouteStack implements RouteInterface
     /**
      * factory(): defined by RouteInterface interface.
      *
-     * @see    Route::factory()
+     * @see    \Zend\Mvc\Router\RouteInterface::factory()
      * @param  mixed $options
      * @throws Exception\InvalidArgumentException
      * @return Part
@@ -112,7 +112,7 @@ class Part extends TreeRouteStack implements RouteInterface
     /**
      * match(): defined by RouteInterface interface.
      *
-     * @see    Route::match()
+     * @see    \Zend\Mvc\Router\RouteInterface::match()
      * @param  Request  $request
      * @param  int|null $pathOffset
      * @return RouteMatch|null
@@ -155,7 +155,7 @@ class Part extends TreeRouteStack implements RouteInterface
     /**
      * assemble(): Defined by RouteInterface interface.
      *
-     * @see    Route::assemble()
+     * @see    \Zend\Mvc\Router\RouteInterface::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed
@@ -191,7 +191,7 @@ class Part extends TreeRouteStack implements RouteInterface
     /**
      * getAssembledParams(): defined by RouteInterface interface.
      *
-     * @see    Route::getAssembledParams
+     * @see    \Zend\Mvc\Router\RouteInterface::getAssembledParams
      * @return array
      */
     public function getAssembledParams()

@@ -66,7 +66,7 @@ class Hostname implements RouteInterface
     /**
      * factory(): defined by RouteInterface interface.
      *
-     * @see    Route::factory()
+     * @see    \Zend\Mvc\Router\RouteInterface::factory()
      * @param  array|Traversable $options
      * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
      * @return Hostname
@@ -97,7 +97,7 @@ class Hostname implements RouteInterface
     /**
      * match(): defined by RouteInterface interface.
      *
-     * @see    Route::match()
+     * @see    \Zend\Mvc\Router\RouteInterface::match()
      * @param  Request $request
      * @return RouteMatch
      */
@@ -133,7 +133,7 @@ class Hostname implements RouteInterface
     /**
      * assemble(): Defined by RouteInterface interface.
      *
-     * @see    Route::assemble()
+     * @see    \Zend\Mvc\Router\RouteInterface::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed
@@ -171,7 +171,7 @@ class Hostname implements RouteInterface
     /**
      * getAssembledParams(): defined by RouteInterface interface.
      *
-     * @see    Route::getAssembledParams
+     * @see    \Zend\Mvc\Router\RouteInterface::getAssembledParams
      * @return array
      */
     public function getAssembledParams()

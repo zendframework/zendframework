@@ -110,7 +110,7 @@ class Segment implements RouteInterface
     /**
      * factory(): defined by RouteInterface interface.
      *
-     * @see    Route::factory()
+     * @see    \Zend\Mvc\Router\RouteInterface::factory()
      * @param  array|Traversable $options
      * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
      * @return Segment
@@ -335,7 +335,7 @@ class Segment implements RouteInterface
     /**
      * match(): defined by RouteInterface interface.
      *
-     * @see    Route::match()
+     * @see    \Zend\Mvc\Router\RouteInterface::match()
      * @param  Request $request
      * @param  string|null $pathOffset
      * @return RouteMatch
@@ -374,7 +374,7 @@ class Segment implements RouteInterface
     /**
      * assemble(): Defined by RouteInterface interface.
      *
-     * @see    Route::assemble()
+     * @see    \Zend\Mvc\Router\RouteInterface::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed
@@ -394,7 +394,7 @@ class Segment implements RouteInterface
     /**
      * getAssembledParams(): defined by RouteInterface interface.
      *
-     * @see    Route::getAssembledParams
+     * @see    \Zend\Mvc\Router\RouteInterface::getAssembledParams
      * @return array
      */
     public function getAssembledParams()

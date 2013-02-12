@@ -85,21 +85,6 @@ interface HelperInterface extends BaseHelperInterface
      * @return bool  whether ACL should be used
      */
     public function getUseAcl();
-    
-    /**
-     * Sets whether RBAC should be used
-     *
-     * @param  bool $useRbac [optional] whether RBAC should be used. Default is true.
-     * @return HelperInterface  fluent interface, returns self
-     */
-    public function setUseRBAC($useRbac = false);
-
-    /**
-     * Returns whether RBAC should be used
-     *
-     * @return bool  whether RBAC should be used
-     */
-    public function getUseRBAC();
 
     /**
      * Return renderInvisible flag

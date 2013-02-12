@@ -107,13 +107,6 @@ abstract class AbstractPage extends AbstractContainer
      * @var string|null
      */
     protected $privilege;
-    
-    /**
-     * RBAC permission associated with this page
-     *
-     * @var string|null
-     */
-    protected $permission;
 
     /**
      * Whether this page should be considered active
@@ -706,31 +699,6 @@ abstract class AbstractPage extends AbstractContainer
     {
         return $this->privilege;
     }
-    
-    /**
-     * Sets RBAC permission associated with this page
-     *
-     * @param  string|null $permission  [optional] RBAC permission to associate
-     *                                  with this page. Default is null, which
-     *                                  sets no permission.
-     *
-     * @return AbstractPage fluent interface, returns self
-     */
-    public function setPermission($permission = null)
-    {
-        $this->permission = is_string($permission) ? $permission : null;
-        return $this;
-    }
-
-    /**
-     * Returns RBAC permission associated with this page
-     *
-     * @return string|null  RBAC permission or null
-     */
-    public function getPermission()
-    {
-        return $this->permission;
-    }
 
     /**
      * Sets whether page should be considered active or not
@@ -1148,22 +1116,21 @@ abstract class AbstractPage extends AbstractContainer
     public function toArray()
     {
         return array_merge($this->getCustomProperties(), array(
-            'label'         => $this->getLabel(),
-            'fragment'      => $this->getFragment(),
-            'id'            => $this->getId(),
-            'class'         => $this->getClass(),
-            'title'         => $this->getTitle(),
-            'target'        => $this->getTarget(),
-            'rel'           => $this->getRel(),
-            'rev'           => $this->getRev(),
-            'order'         => $this->getOrder(),
-            'resource'      => $this->getResource(),
-            'privilege'     => $this->getPrivilege(),
-            'permission'    => $this->getPermission(),
-            'active'        => $this->isActive(),
-            'visible'       => $this->isVisible(),
-            'type'          => get_called_class(),
-            'pages'         => parent::toArray(),
+            'label'     => $this->getLabel(),
+            'fragment'  => $this->getFragment(),
+            'id'        => $this->getId(),
+            'class'     => $this->getClass(),
+            'title'     => $this->getTitle(),
+            'target'    => $this->getTarget(),
+            'rel'       => $this->getRel(),
+            'rev'       => $this->getRev(),
+            'order'     => $this->getOrder(),
+            'resource'  => $this->getResource(),
+            'privilege' => $this->getPrivilege(),
+            'active'    => $this->isActive(),
+            'visible'   => $this->isVisible(),
+            'type'      => get_called_class(),
+            'pages'     => parent::toArray(),
         ));
     }
 

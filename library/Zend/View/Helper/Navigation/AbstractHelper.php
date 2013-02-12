@@ -10,12 +10,14 @@
 namespace Zend\View\Helper\Navigation;
 
 use RecursiveIteratorIterator;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerInterface;
 use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Navigation;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\Permissions\Acl;
-use Zend\Permissions\Rbac;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View;
@@ -25,10 +27,16 @@ use Zend\View\Exception;
  * Base class for navigational helpers
  */
 abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
+    EventManagerAwareInterface,
     HelperInterface,
     ServiceLocatorAwareInterface,
     TranslatorAwareInterface
 {
+    /**
+     * @var EventManagerInterface 
+     */
+    protected $events;
+    
     /**
      * @var ServiceLocatorInterface
      */
@@ -68,13 +76,6 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      * @var Acl\AclInterface
      */
     protected $acl;
-    
-    /**
-     * RBAC to use when iterating pages
-     *
-     * @var Rbac
-     */
-    protected $rbac;
 
     /**
      * Whether invisible items should be rendered by this helper
@@ -84,25 +85,18 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     protected $renderInvisible = false;
 
     /**
-     * ACL / RBAC role(s) to use when iterating pages
+     * ACL role to use when iterating pages
      *
-     * @var string|array|Acl\Role\RoleInterface
+     * @var string|Acl\Role\RoleInterface
      */
     protected $role;
-    
+
     /**
      * Whether ACL should be used for filtering out pages
      *
      * @var bool
      */
     protected $useAcl = true;
-    
-    /**
-     * Whether RBAC should be used for filtering out pages
-     *
-     * @var bool
-     */
-    protected $useRbac = false;
 
     /**
      * Translator (optional)
@@ -134,10 +128,10 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     protected static $defaultAcl;
 
     /**
-     * Default ACL/RBAC role(s) to use when iterating pages if not explicitly set in the
+     * Default ACL role to use when iterating pages if not explicitly set in the
      * instance by calling {@link setRole()}
      *
-     * @var string|array|Acl\Role\RoleInterface
+     * @var string|Acl\Role\RoleInterface
      */
     protected static $defaultRole;
 
@@ -163,6 +157,38 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
         return $this->serviceLocator;
     }
 
+    /**
+     * Set the event manager.
+     * 
+     * @param   EventManagerInterface $events
+     * @return  AbstractHelper
+     */
+    public function setEventManager(EventManagerInterface $events)
+    {
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_called_class(),
+        ));
+        
+        $this->events = $events;
+        
+        return $this;
+    }
+
+    /**
+     * Get the event manager.
+     * 
+     * @return  EventManagerInterface
+     */
+    public function getEventManager()
+    {
+        if (null === $this->events) {
+            $this->setEventManager(new EventManager());
+        }
+        
+        return $this->events;
+    }
+    
     /**
      * Sets navigation container the helper operates on by default
      *
@@ -351,27 +377,6 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
 
         return $this->acl;
     }
-    
-    /**
-     * Sets RBAC to use when iterating pages
-     *
-     * @return AbstractHelper  fluent interface, returns self
-     */
-    public function setRbac(Rbac\Rbac $rbac = null)
-    {
-        $this->rbac = $rbac;
-        return $this;
-    }
-    
-    /**
-     * Returns RBAC or null if it isn't set using {@link setRbac()}
-     *
-     * @return Rbac|null  RBAC object or null
-     */
-    public function getRbac()
-    {
-        return $this->rbac;
-    }
 
     /**
      * Sets ACL role(s) to use when iterating pages
@@ -386,15 +391,14 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      */
     public function setRole($role = null)
     {
-        if (null === $role 
-            || is_string($role) 
-            || is_array($role) 
-            || $role instanceof Acl\Role\RoleInterface
+        if (null === $role || is_string($role) ||
+            $role instanceof Acl\Role\RoleInterface
         ) {
             $this->role = $role;
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
-                '$role must be null|string|array|Zend\Permissions\Role\RoleInterface; %s given',
+                '$role must be a string, null, or an instance of '
+                .  'Zend\Permissions\Role\RoleInterface; %s given',
                 (is_object($role) ? get_class($role) : gettype($role))
             ));
         }
@@ -403,12 +407,12 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     }
 
     /**
-     * Returns ACL/RBAC role(s) to use when iterating pages, or null if it isn't set
+     * Returns ACL role to use when iterating pages, or null if it isn't set
      * using {@link setRole()} or {@link setDefaultRole()}
      *
      * Implements {@link HelperInterface::getRole()}.
      *
-     * @return string|array|Acl\Role\RoleInterface|null  role or null
+     * @return string|Acl\Role\RoleInterface|null  role or null
      */
     public function getRole()
     {
@@ -418,7 +422,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
 
         return $this->role;
     }
-    
+
     /**
      * Sets whether ACL should be used
      *
@@ -443,32 +447,6 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     public function getUseAcl()
     {
         return $this->useAcl;
-    }
-    
-    /**
-     * Sets whether RBAC should be used
-     *
-     * Implements {@link HelperInterface::setUseRbac()}.
-     *
-     * @param  bool $useRbac [optional] whether RBAC should be used.  Default is true.
-     * @return AbstractHelper  fluent interface, returns self
-     */
-    public function setUseRbac($useRbac = true)
-    {
-        $this->useRbac = (bool) $useRbac;
-        return $this;
-    }
-
-    /**
-     * Returns whether RBAC should be used
-     *
-     * Implements {@link HelperInterface::getUseRbac()}.
-     *
-     * @return bool  whether RBAC should be used
-     */
-    public function getUseRbac()
-    {
-        return $this->useRbac;
     }
 
     /**
@@ -635,17 +613,16 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     }
 
     /**
-     * Checks if the helper has an ACL/RBAC role
+     * Checks if the helper has an ACL role
      *
      * Implements {@link HelperInterface::hasRole()}.
      *
-     * @return bool  whether the helper has a an ACL/RBAC role or not
+     * @return bool  whether the helper has a an ACL role or not
      */
     public function hasRole()
     {
         if ($this->role instanceof Acl\Role\RoleInterface
             || is_string($this->role)
-            || is_array($this->role)
             || static::$defaultRole instanceof Acl\Role\RoleInterface
             || is_string(static::$defaultRole)
         ) {
@@ -790,40 +767,40 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      * Rules:
      * - If a page is not visible it is not accepted, unless RenderInvisible has
      *   been set to true.
-     * - If helper has no ACL/RBAC, page is accepted.
-     * - If helper has ACL/RBAC, but no role, page is not accepted.
+     * - If helper has no ACL, page is accepted
+     * - If helper has ACL, but no role, page is not accepted
      * - If helper has ACL and role:
-     *      - Page is accepted if ACL set and it has no resource or privilege.
-     *      - Page is accepted if ACL set and allows page's resource or privilege.
-     * - If helper has RBAC and role:
-     *      - Page accepted if RBAC set and has no permission.
-     *      - Page is accepted if RBAC set and allows page's permission.
+     *  - Page is accepted if it has no resource or privilege
+     *  - Page is accepted if ACL allows page's resource or privilege
      * - If page is accepted by the rules above and $recursive is true, the page
-     *        will not be accepted if it is the descendant of a non-accepted page.
+     *   will not be accepted if it is the descendant of a non-accepted page.
      *
-     * @param   AbstractPage    $page       Page to check
-     * @param   bool            $recursive  [optional] 
-     *                                      If true, page will not be
-     *                                      accepted if it is the descendant of a
-     *                                      page that is not accepted. Default is true.
-     *                                      whether page should be accepted
-     * @return  bool
+     * @param  AbstractPage $page      page to check
+     * @param  bool         $recursive [optional] if true, page will not be
+     *                                 accepted if it is the descendant of a
+     *                                 page that is not accepted. Default is true.
+     * @return bool                    whether page should be accepted
      */
     public function accept(AbstractPage $page, $recursive = true)
     {
         // accept by default
         $accept = true;
-        
+
         if (!$page->isVisible(false) && !$this->getRenderInvisible()) {
             // don't accept invisible pages
             $accept = false;
         } elseif ($this->getUseAcl() && !$this->acceptAcl($page)) {
             // acl is not amused
             $accept = false;
-        } elseif ($this->getUseRbac() && !$this->acceptRbac($page)) {
-            $accept = false;
+        } else {
+            $params = array('page' => $page);
+            
+            // Trigger listener 
+            $trigger = $this->getEventManager()->trigger('isAllowed', $this, $params);
+            
+            $accept = $trigger->last();
         }
-        
+
         if ($accept && $recursive) {
             $parent = $page->getParent();
             if ($parent instanceof AbstractPage) {
@@ -843,8 +820,8 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      *   if the ACL allows access to it using the helper's role
      * - If page has no resource or privilege, page is accepted
      *
-     * @param   AbstractPage    $page   Page to check
-     * @return  bool                    Whether page is accepted by ACL
+     * @param  AbstractPage $page  page to check
+     * @return bool                whether page is accepted by ACL
      */
     protected function acceptAcl(AbstractPage $page)
     {
@@ -853,55 +830,13 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
             return true;
         }
 
-        $roles = (array) $this->getRole();
+        $role = $this->getRole();
         $resource = $page->getResource();
         $privilege = $page->getPrivilege();
 
         if ($resource || $privilege) {
             // determine using helper role and page resource/privilege
-            foreach ($roles as $role) {
-                
-                if ($acl->hasResource($resource) && $acl->isAllowed($role, $resource, $privilege)) {
-                    return true;
-                }
-            }
-            
-            return false;
-        }
-
-        return true;
-    }
-    
-    /**
-     * Determines whether a page should be accepted by RBAC when iterating.
-     *
-     * Rules:
-     * - If helper has no RBAC, page is accepted.
-     * - If page has a permission defined, page is accepted.
-     * - If page has no permission, page is accepted.
-     *
-     * @param   AbstractPage    $page   Page to check
-     * @return  bool                    Whether page is accepted by RBAC
-     */
-    protected function acceptRbac(AbstractPage $page)
-    {
-        if (!$rbac = $this->getRbac()) {
-            return true;
-        }
-        
-        $roles = (array) $this->getRole();
-        $permission = $page->getPermission();
-        
-        if ($roles && $permission) {
-            
-            foreach ($roles as $role) {
-
-                if ($rbac->isGranted($role, $permission)) {
-                    return true;
-                }
-            }
-            
-            return false;
+            return $acl->hasResource($resource) && $acl->isAllowed($role, $resource, $privilege);
         }
 
         return true;
@@ -989,13 +924,12 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     {
         if (null === $role
             || is_string($role)
-            || is_array($role) 
             || $role instanceof Acl\Role\RoleInterface
         ) {
             static::$defaultRole = $role;
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
-                '$role must be null|string|array|Zend\Permissions\Role\RoleInterface; %s given',
+                '$role must be null|string|Zend\Permissions\Role\RoleInterface; received "%s"',
                 (is_object($role) ? get_class($role) : gettype($role))
             ));
         }

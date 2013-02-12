@@ -103,6 +103,7 @@ class IsImage extends MimeType
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }
+
         if ($options === null) {
             $options = array();
         }

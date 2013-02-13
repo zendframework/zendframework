@@ -109,4 +109,33 @@ EOS;
         $this->assertCount(1, $docBlock->getTags());
     }
 
+    /**
+     * @group #3753
+     */
+    public function testGenerateWordWrapIsEnabledByDefault()
+    {
+        $largeStr = '@var This is a very large string that will be wrapped if it contains more than 80 characters';
+        $this->docBlockGenerator->setLongDescription($largeStr);
+
+        $expected = '/**' . DocBlockGenerator::LINE_FEED
+            . ' * @var This is a very large string that will be wrapped if it contains more than'
+            . DocBlockGenerator::LINE_FEED.' * 80 characters'. DocBlockGenerator::LINE_FEED
+            . ' */' . DocBlockGenerator::LINE_FEED;
+        $this->assertEquals($expected, $this->docBlockGenerator->generate());
+    }
+
+    /**
+     * @group #3753
+     */
+    public function testGenerateWithWordWrapDisabled()
+    {
+        $largeStr = '@var This is a very large string that will not be wrapped if it contains more than 80 characters';
+        $this->docBlockGenerator->setLongDescription($largeStr);
+        $this->docBlockGenerator->setWordWrap(false);
+
+        $expected = '/**' . DocBlockGenerator::LINE_FEED
+            . ' * @var This is a very large string that will not be wrapped if it contains more than'
+            . ' 80 characters'. DocBlockGenerator::LINE_FEED . ' */' . DocBlockGenerator::LINE_FEED;
+        $this->assertEquals($expected, $this->docBlockGenerator->generate());
+    }
 }

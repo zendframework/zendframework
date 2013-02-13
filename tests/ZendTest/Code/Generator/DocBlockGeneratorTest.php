@@ -110,7 +110,7 @@ EOS;
     }
 
     /**
-     * @group dev
+     * @group #3753
      */
     public function testGenerateWordWrapIsEnabledByDefault()
     {
@@ -124,6 +124,9 @@ EOS;
         $this->assertEquals($expected, $this->docBlockGenerator->generate());
     }
 
+    /**
+     * @group #3753
+     */
     public function testGenerateWithWordWrapDisabled()
     {
         $largeStr = '@var This is a very large string that will not be wrapped if it contains more than 80 characters';

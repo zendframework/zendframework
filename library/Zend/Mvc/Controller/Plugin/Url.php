@@ -39,7 +39,7 @@ class Url extends AbstractPlugin
 
         $event   = $controller->getEvent();
         $router  = null;
-        $matches =null;
+        $matches = null;
         if ($event instanceof MvcEvent) {
             $router  = $event->getRouter();
             $matches = $event->getRouteMatch();

@@ -177,7 +177,7 @@ class Entry
     /**
      * Set the feed creation date
      *
-     * @param string|null|DateTime $date
+     * @param null|integer|DateTime $date
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -198,7 +198,7 @@ class Entry
     /**
      * Set the feed modification date
      *
-     * @param string|null|DateTime $date
+     * @param null|integer|DateTime $date
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */

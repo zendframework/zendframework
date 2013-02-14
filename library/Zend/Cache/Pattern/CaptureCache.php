@@ -377,4 +377,20 @@ class CaptureCache extends AbstractPattern
 
         ErrorHandler::stop();
     }
+
+    /**
+     * Returns the generated file name.
+     *
+     * @param null|string $pageId
+     * @return string
+     */
+    public function getFilename($pageId = null)
+    {
+        if ($pageId === null) {
+            $pageId = $this->detectPageId();
+        }
+
+        $path = $this->pageId2Path($pageId);
+        return $path . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+    }
 }

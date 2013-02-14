@@ -129,4 +129,14 @@ class CaptureCacheTest extends CommonPatternTest
         $this->setExpectedException('Zend\Cache\Exception\LogicException');
         $captureCache->remove('/pageId');
     }
+
+    public function testGetFilename()
+    {
+        $captureCache = new Cache\Pattern\CaptureCache();
+
+        $this->assertEquals('/index.html', $captureCache->getFilename('/'));
+        $this->assertEquals('/dir1/test', $captureCache->getFilename('/dir1/test'));
+        $this->assertEquals('/dir1/test.html', $captureCache->getFilename('/dir1/test.html'));
+        $this->assertEquals('/dir1/dir2/test.html', $captureCache->getFilename('/dir1/dir2/test.html'));
+    }
 }

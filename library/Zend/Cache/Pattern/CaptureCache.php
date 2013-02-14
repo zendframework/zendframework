@@ -390,7 +390,10 @@ class CaptureCache extends AbstractPattern
             $pageId = $this->detectPageId();
         }
 
-        $path = $this->pageId2Path($pageId);
-        return $path . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+        $publicDir = $this->getOptions()->getPublicDir();
+        $path      = $this->pageId2Path($pageId);
+        $file      = $path . \DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
+
+        return $publicDir . $file;
     }
 }

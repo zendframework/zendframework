@@ -14,5 +14,11 @@
     "target-dir": "Zend/Version",
     "require": {
         "php": ">=5.3.3"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev",
+            "dev-develop": "2.2-dev"
+        }
     }
 }

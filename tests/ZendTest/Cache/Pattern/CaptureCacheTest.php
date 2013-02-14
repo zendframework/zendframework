@@ -23,9 +23,11 @@ class CaptureCacheTest extends CommonPatternTest
 
     protected $_tmpCacheDir;
     protected $_umask;
+    protected $_bufferedServerSuperGlobal;
 
     public function setUp()
     {
+        $this->_bufferedServerSuperGlobal = $_SERVER;
         $this->_umask = umask();
 
         $this->_tmpCacheDir = @tempnam(sys_get_temp_dir(), 'zend_cache_test_');
@@ -51,6 +53,8 @@ class CaptureCacheTest extends CommonPatternTest
 
     public function tearDown()
     {
+        $_SERVER = $this->_bufferedServerSuperGlobal;
+
         $this->_removeRecursive($this->_tmpCacheDir);
 
         if ($this->_umask != umask()) {
@@ -145,7 +149,6 @@ class CaptureCacheTest extends CommonPatternTest
         $_SERVER['REQUEST_URI'] = '/dir1/test.html';
         $captureCache = new Cache\Pattern\CaptureCache();
         $this->assertEquals('/dir1/test.html', $captureCache->getFilename());
-        unset($_SERVER['REQUEST_URI']);
     }
 
     public function testGetFilenameWithPublicDir()
@@ -174,7 +177,5 @@ class CaptureCacheTest extends CommonPatternTest
         $captureCache->setOptions($options);
 
         $this->assertEquals($this->_tmpCacheDir . '/dir1/test.html', $captureCache->getFilename());
-
-        unset($_SERVER['REQUEST_URI']);
     }
 }

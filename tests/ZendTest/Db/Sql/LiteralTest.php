@@ -31,4 +31,17 @@ class LiteralTest extends \PHPUnit_Framework_TestCase
         $literal = new Literal('bar');
         $this->assertEquals(array(array('bar', array(), array())), $literal->getExpressionData());
     }
+
+    public function testGetExpressionDataWillEscapePercent()
+    {
+        $expression = new Literal('X LIKE "foo%"');
+        $this->assertEquals(array(array(
+                'X LIKE "foo%%"',
+                array(),
+                array()
+            )),
+            $expression->getExpressionData()
+        );
+    }
+
 }

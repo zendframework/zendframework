@@ -41,7 +41,7 @@ class Literal implements ExpressionInterface
     public function getExpressionData()
     {
         return array(array(
-            $this->literal,
+            str_replace('%', '%%', $this->literal),
             array(),
             array()
         ));

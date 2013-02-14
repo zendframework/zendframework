@@ -9,7 +9,7 @@
 
 namespace Zend\Mvc\ResponseSender;
 
-use Zend\Mvc\ResponseSender\SendResponseEvent;;
+use Zend\Mvc\ResponseSender\SendResponseEvent;
 
 interface ResponseSenderInterface
 {

@@ -62,7 +62,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
     {
         $this->mockSelect->expects($this->once())->method('columns')->with($this->equalTo(array('c' => new Expression('COUNT(1)'))));
         $this->mockResult->expects($this->any())->method('current')->will($this->returnValue(array('c' => 5)));
-        $this->mockSelect->expects($this->exactly(4))->method('reset'); // called for columns, limit, offset, order
+        $this->mockSelect->expects($this->exactly(5))->method('reset'); // called for columns, limit, offset, order
         $count = $this->dbSelect->count();
         $this->assertEquals(5, $count);
     }

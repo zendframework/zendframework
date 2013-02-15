@@ -64,7 +64,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
             //     IntlDateFormatter::FULL,
             //     IntlDateFormatter::FULL,
             //     $date,
-            //     'Dienstag, 3. Juli 2012 00:44:03 Deutschland',
             // ),
             array(
                 'de_DE',
@@ -72,7 +71,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 IntlDateFormatter::LONG,
                 IntlDateFormatter::LONG,
                 $date,
-                '3. Juli 2012 00:44:03 MESZ',
             ),
             array(
                 'de_DE',
@@ -80,7 +78,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 IntlDateFormatter::MEDIUM,
                 IntlDateFormatter::MEDIUM,
                 $date,
-                '03.07.2012 00:44:03',
             ),
             array(
                 'de_DE',
@@ -88,7 +85,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 IntlDateFormatter::SHORT,
                 IntlDateFormatter::SHORT,
                 $date,
-                '03.07.12 00:44',
             ),
             // FULL format varies based on OS
             // array(
@@ -97,7 +93,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
             //     IntlDateFormatter::FULL,
             //     IntlDateFormatter::FULL,
             //     $date,
-            //     '3 июля 2012 г. 2:44:03 Россия (Москва)',
             // ),
             // LONG format varies based on OS for ru_RU locale
             // array(
@@ -106,7 +101,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
             //     IntlDateFormatter::LONG,
             //     IntlDateFormatter::LONG,
             //     $date,
-            //     '3 июля 2012 г. 2:44:03 GMT+04:00',
             // ),
             array(
                 'ru_RU',
@@ -114,7 +108,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 IntlDateFormatter::MEDIUM,
                 IntlDateFormatter::MEDIUM,
                 $date,
-                '03.07.2012 2:44:03',
             ),
             array(
                 'ru_RU',
@@ -122,7 +115,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 IntlDateFormatter::SHORT,
                 IntlDateFormatter::SHORT,
                 $date,
-                '03.07.12 2:44',
             ),
             // FULL format varies based on OS
             // array(
@@ -131,7 +123,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
             //     IntlDateFormatter::FULL,
             //     IntlDateFormatter::FULL,
             //     $date,
-            //     'Monday, July 2, 2012 6:44:03 PM ET',
             // ),
             array(
                 'en_US',
@@ -139,7 +130,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 IntlDateFormatter::LONG,
                 IntlDateFormatter::LONG,
                 $date,
-                'July 2, 2012 6:44:03 PM EDT',
             ),
             array(
                 'en_US',
@@ -147,7 +137,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 IntlDateFormatter::MEDIUM,
                 IntlDateFormatter::MEDIUM,
                 $date,
-                'Jul 2, 2012 6:44:03 PM',
             ),
             array(
                 'en_US',
@@ -155,7 +144,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 IntlDateFormatter::SHORT,
                 IntlDateFormatter::SHORT,
                 $date,
-                '7/2/12 6:44 PM',
             ),
         );
     }
@@ -171,7 +159,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
             //     IntlDateFormatter::FULL,
             //     IntlDateFormatter::FULL,
             //     $date,
-            //     'Dienstag, 3. Juli 2012 00:44:03 Deutschland',
             // ),
             array(
                 'de_DE',
@@ -180,7 +167,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 null,
                 'MMMM',
                 $date,
-                'Juli',
             ),
             array(
                 'de_DE',
@@ -189,7 +175,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 null,
                 'MMMM.Y',
                 $date,
-                'Juli.2012',
             ),
             array(
                 'de_DE',
@@ -198,7 +183,6 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
                 null,
                 'dd/Y',
                 $date,
-                '03/2012',
             ),
         );
     }
@@ -206,9 +190,10 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dateTestsDataProvider
      */
-    public function testBasic($locale, $timezone, $timeType, $dateType, $date, $expected)
+    public function testBasic($locale, $timezone, $timeType, $dateType, $date)
     {
         $this->helper->setTimezone($timezone);
+        $expected = $this->getIntlDateFormatter($locale, $dateType, $timeType, $timezone)->format($date);
         $this->assertMbStringEquals($expected, $this->helper->__invoke(
             $date, $dateType, $timeType, $locale, null
         ));
@@ -217,11 +202,13 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dateTestsDataProvider
      */
-    public function testSettersProvideDefaults($locale, $timezone, $timeType, $dateType, $date, $expected)
+    public function testSettersProvideDefaults($locale, $timezone, $timeType, $dateType, $date)
     {
         $this->helper
             ->setTimezone($timezone)
             ->setLocale($locale);
+
+        $expected = $this->getIntlDateFormatter($locale, $dateType, $timeType, $timezone)->format($date);
 
         $this->assertMbStringEquals($expected, $this->helper->__invoke(
             $date, $dateType, $timeType
@@ -231,9 +218,10 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dateTestsDataProviderWithPattern
      */
-    public function testUseCustomPattern($locale, $timezone, $timeType, $dateType, $pattern, $date, $expected)
+    public function testUseCustomPattern($locale, $timezone, $timeType, $dateType, $pattern, $date)
     {
         $this->helper->setTimezone($timezone);
+        $expected = $this->getIntlDateFormatter($locale, $dateType, $timeType, $timezone, $pattern)->format($date);
         $this->assertMbStringEquals($expected, $this->helper->__invoke(
             $date, $dateType, $timeType, $locale, $pattern
         ));
@@ -259,5 +247,10 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
         $expected = str_replace(array("\xC2\xA0", ' '), '', $expected);
         $test     = str_replace(array("\xC2\xA0", ' '), '', $test);
         $this->assertEquals($expected, $test, $message);
+    }
+
+    public function getIntlDateFormatter($locale, $dateType, $timeType, $timezone, $pattern=null)
+    {
+        return new IntlDateFormatter($locale, $dateType, $timeType, $timezone, null, $pattern);
     }
 }

@@ -26,6 +26,15 @@ class RenameUpload extends AbstractFilter
     );
 
     /**
+     * Store already filtered values, so we can filter multiple
+     * times the same file without being block by move_uploaded_file
+     * internal checks
+     * 
+     * @var array
+     */
+    protected $alreadyFiltered = array();
+
+    /**
      * Constructor
      *
      * @param array|string $targetOrOptions The target file path or an options array
@@ -143,6 +152,10 @@ class RenameUpload extends AbstractFilter
             $sourceFile = $value;
         }
 
+        if (isset($this->alreadyFiltered[$sourceFile])) {
+            return $this->alreadyFiltered[$sourceFile];
+        }
+
         $targetFile = $this->getFinalTarget($uploadData);
         if (!file_exists($sourceFile) || $sourceFile == $targetFile) {
             return $value;
@@ -151,11 +164,15 @@ class RenameUpload extends AbstractFilter
         $this->checkFileExists($targetFile);
         $this->moveUploadedFile($sourceFile, $targetFile);
 
+        $return = $targetFile;
         if ($isFileUpload) {
-            $uploadData['tmp_name'] = $targetFile;
-            return $uploadData;
+            $return = $uploadData;
+            $return['tmp_name'] = $targetFile;
         }
-        return $targetFile;
+
+        $this->alreadyFiltered[$sourceFile] = $return;
+
+        return $return;
     }
 
     /**

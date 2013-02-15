@@ -227,7 +227,7 @@ return array(
     "'%value%' is not less than '%max%'" => "'%value%' er ikke mindre enn '%max%'",
 
     // Zend_Validate_NotEmpty
-    "Invalid type given. String, integer, float, boolean or array expected" => "Ugyldig type gitt. Forventet streng, heltall, flyt-tall, boolean eller matrise", 
+    "Invalid type given. String, integer, float, boolean or array expected" => "Ugyldig type gitt. Forventet streng, heltall, flyt-tall, boolean eller matrise",
     "Value is required and can't be empty" => "Verdi er påkrevd, og kan ikke være tomt",
 
     // Zend_Validate_PostCode

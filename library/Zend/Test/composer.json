@@ -23,5 +23,11 @@
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-uri": "self.version",
         "zendframework/zend-view": "self.version"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev",
+            "dev-develop": "2.2-dev"
+        }
     }
 }

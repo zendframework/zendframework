@@ -28,5 +28,11 @@
         "ext-dba": "DBA, to use the DBA storage adapter",
         "ext-memcached": "Memcached >= 1.0.0 to use the Memcached storage adapter",
         "ext-wincache": "WinCache, to use the WinCache storage adapter"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev",
+            "dev-develop": "2.2-dev"
+        }
     }
 }

@@ -21,5 +21,11 @@
     },
     "suggest": {
         "doctrine/common": "Doctrine\\Common >=2.1 for annotation features"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev",
+            "dev-develop": "2.2-dev"
+        }
     }
 }

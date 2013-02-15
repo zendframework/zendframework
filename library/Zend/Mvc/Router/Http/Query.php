@@ -27,6 +27,7 @@ trigger_error('Query route deprecated as of ZF 2.1.4; use the "query" option of 
  * @package    Zend_Mvc_Router
  * @subpackage Http
  * @see        http://guides.rubyonrails.org/routing.html
+ * @deprecated
  */
 class Query implements RouteInterface
 {

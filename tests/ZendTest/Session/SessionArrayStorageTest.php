@@ -145,4 +145,21 @@ class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $this->storage->toArray(true));
     }
 
+    public function testUndefinedSessionManipulation()
+    {
+        $this->storage['foo'] = 'bar';
+        $this->storage['bar'][] = 'bar';
+        $this->storage['baz']['foo'] = 'bar';
+
+        $expected = array(
+            '__ZF' => array(
+                '_REQUEST_ACCESS_TIME' => $this->storage->getRequestAccessTime(),
+            ),
+            'foo' => 'bar',
+            'bar' => array('bar'),
+            'baz' => array('foo' => 'bar'),
+        );
+        $this->assertSame($expected, $this->storage->toArray(true));
+    }
+
 }

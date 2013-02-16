@@ -260,6 +260,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      *
      * @param  Where|\Closure|string|array|Predicate\PredicateInterface $predicate
      * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
+     * @throws Exception\InvalidArgumentException
      * @return Select
      */
     public function where($predicate, $combination = Predicate\PredicateSet::OP_AND)
@@ -286,10 +287,6 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                         // as an Expression predicate
                         $predicate = new Predicate\Expression($pkey, $pvalue);
 
-                    } elseif ($pvalue instanceof Predicate\PredicateInterface) {
-                        // Predicate type is ok
-                        $predicate = $pvalue;
-                            
                     } elseif (is_string($pkey)) {
                         // Otherwise, if still a string, do something intelligent with the PHP type provided
 
@@ -299,10 +296,18 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                         } elseif (is_array($pvalue)) {
                             // if the value is an array, assume IN() is desired
                             $predicate = new Predicate\In($pkey, $pvalue);
+                        } elseif ($pvalue instanceof Predicate\PredicateInterface) {
+                            // 
+                            throw new Exception\InvalidArgumentException(
+                                'Using Predicate must not use string keys'
+                            ); 
                         } else {
                             // otherwise assume that array('foo' => 'bar') means "foo" = 'bar'
                             $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
                         }
+                    } elseif ($pvalue instanceof Predicate\PredicateInterface) {
+                        // Predicate type is ok
+                        $predicate = $pvalue;
                     } else {
                         // must be an array of expressions (with int-indexed array)
                         $predicate = (strpos($pvalue, Expression::PLACEHOLDER) !== false)

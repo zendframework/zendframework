@@ -241,8 +241,9 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @testdox unit test: Test where() will accept any array with string key (without ?) with Predicate object as-is
+     * @testdox unit test: Test where() will accept any array with string key (without ?) with Predicate throw Exception
      * @covers Zend\Db\Sql\Select::where
+     * @expectedException Zend\Db\Sql\Exception\InvalidArgumentException
      */
     public function testWhereArgument1IsAssociativeArrayIsPredicate()
     {
@@ -252,20 +253,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'age' => new Predicate\Expression('age = ?', 33),
         );
         $select->where($where);
-        
-        /** @var $where Where */
-        $where = $select->getRawState('where');
-        $predicates = $where->getPredicates();
-        $this->assertEquals(2, count($predicates));
-        
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
-        $this->assertEquals(Where::OP_AND, $predicates[0][0]);
-        $this->assertEquals("name = 'Ralph'", $predicates[0][1]->getLiteral());
-        
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[1][1]);
-        $this->assertEquals(Where::OP_AND, $predicates[1][0]);
-        $this->assertEquals('age = ?', $predicates[1][1]->getExpression());
-        $this->assertEquals(array(33), $predicates[1][1]->getParameters());
     }
     
     /**

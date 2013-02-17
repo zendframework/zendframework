@@ -295,7 +295,7 @@ class Predicate extends PredicateSet
      * Utilizes In predicate
      *
      * @param  string $identifier
-     * @param  array|Select $valueSet
+     * @param  array|\Zend\Db\Sql\Select $valueSet
      * @return Predicate
      */
     public function in($identifier, $valueSet = null)

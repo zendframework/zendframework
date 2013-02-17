@@ -87,7 +87,7 @@ class DateSelect extends MonthSelect
     }
 
     /**
-     * @param  string|array|ArrayAccess|PhpDateTime $value
+     * @param  string|array|\ArrayAccess|PhpDateTime $value
      * @throws \Zend\Form\Exception\InvalidArgumentException
      * @return void|\Zend\Form\Element
      */

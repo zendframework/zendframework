@@ -65,7 +65,7 @@ class SerializableStrategy implements StrategyInterface
      * Set serializer
      *
      * @param  string|SerializerAdapter $serializer
-     * @return Serializer
+     * @return SerializableStrategy
      */
     public function setSerializer($serializer)
     {

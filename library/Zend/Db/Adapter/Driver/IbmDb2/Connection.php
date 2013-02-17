@@ -242,7 +242,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      * Execute
      *
      * @param  string $sql
-     * @return ResultInterface
+     * @return Result
      */
     public function execute($sql)
     {

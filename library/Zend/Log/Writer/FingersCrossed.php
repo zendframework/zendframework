@@ -166,7 +166,7 @@ class FingersCrossed extends AbstractWriter
      *
      * @param string $name
      * @param array|null $options
-     * @return Writer\WriterInterface
+     * @return WriterInterface
      */
     public function writerPlugin($name, array $options = null)
     {
@@ -243,7 +243,7 @@ class FingersCrossed extends AbstractWriter
      * Stub in accordance to parent method signature.
      * Fomatters must be set on the wrapped writer.
      *
-     * @param string|Formatter\FormatterInterface $formatter
+     * @param string|FormatterInterface $formatter
      * @return WriterInterface
      */
     public function setFormatter($formatter)

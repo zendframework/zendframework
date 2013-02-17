@@ -192,7 +192,7 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
 
         $this->validator->isValid(
             'john@doe.com',
-            array('name' => 'john') // There's no 'email' key here
+            array('name' => 'john') // There's no 'email' key here, must throw an exception
         );
     }
 
@@ -207,8 +207,8 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
         $this->validator->isValid(
             'john@doe.com',
             array(
-                'user' => array(
-                    'name' => 'john' // There's no 'email' key here
+                'admin' => array( // Here is 'admin' instead of 'user', must throw an exception
+                    'email' => 'john@doe.com'
                 )
             )
         );

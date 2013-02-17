@@ -131,17 +131,19 @@ class Identical extends AbstractValidator
 
         if ($context !== null) {
             if (is_array($token)) {
-                do {
-                    $context = $context[key($token)];
-                    $token   = $token[key($token)];
-                    $key     = is_array($token) ? key($token) : $token;
+                while (is_array($token)){
+                    $key = key($token);
                     if (!isset($context[$key])) {
                         break;
                     }
-                } while (is_array($token));
+                    $context = $context[$key];
+                    $token   = $token[$key];
+                }
             }
 
-            if (!isset($context[$token])) {
+            // if $token is an array it means the above loop didn't went all the way down to the leaf,
+            // so the $token structure doesn't match the $context structure
+            if (is_array($token) || !isset($context[$token])) {
                 throw new Exception\RuntimeException("The token doesn't exist in the context");
             } else {
                 $token = $context[$token];

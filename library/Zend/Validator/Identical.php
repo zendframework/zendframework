@@ -87,7 +87,7 @@ class Identical extends AbstractValidator
      */
     public function setToken($token)
     {
-        $this->tokenString = (is_array($token) ? implode($token) : (string) $token);
+        $this->tokenString = (is_array($token) ? var_export($token, true) : (string) $token);
         $this->token       = $token;
         return $this;
     }
@@ -121,15 +121,31 @@ class Identical extends AbstractValidator
      * @param  mixed $value
      * @param  array $context
      * @return bool
+     * @throws Exception\RuntimeException if the token doesn't exist in the context array
      */
-    public function isValid($value, $context = null)
+    public function isValid($value, array $context = null)
     {
         $this->setValue($value);
 
-        if (($context !== null) && isset($context) && array_key_exists($this->getToken(), $context)) {
-            $token = $context[$this->getToken()];
-        } else {
-            $token = $this->getToken();
+        $token = $this->getToken();
+
+        if ($context !== null) {
+            if (is_array($token)) {
+                do {
+                    $context = $context[key($token)];
+                    $token   = $token[key($token)];
+                    $key     = is_array($token) ? key($token) : $token;
+                    if (!isset($context[$key])) {
+                        break;
+                    }
+                } while (is_array($token));
+            }
+
+            if (!isset($context[$token])) {
+                throw new Exception\RuntimeException("The token doesn't exist in the context");
+            } else {
+                $token = $context[$token];
+            }
         }
 
         if ($token === null) {

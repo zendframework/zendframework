@@ -105,6 +105,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     /**
      * Set the application config
      * @param  array $applicationConfig
+     * @return AbstractControllerTestCase
      * @throws LogicException
      */
     public function setApplicationConfig($applicationConfig)

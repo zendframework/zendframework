@@ -143,12 +143,12 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
             }
             
             
-            if(property_exists($object, $attribute)) {
-    			$attributes[$attribute] = $this->extractValue($attribute, $object->$method());
-			} else {
-				$attribute = lcfirst($attribute);
-				$attributes[$attribute] = $this->extractValue($attribute, $object->$method());
-			}
+            if(property_exists($object, $attribute)) {    
+            	$attributes[$attribute] = $this->extractValue($attribute, $object->$method());
+	    } else {
+		$attribute = lcfirst($attribute);
+		$attributes[$attribute] = $this->extractValue($attribute, $object->$method());
+	    }
         }
 
         return $attributes;

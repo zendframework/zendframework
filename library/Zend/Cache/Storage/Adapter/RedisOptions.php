@@ -52,41 +52,39 @@ class RedisOptions extends AdapterOptions
         $namespace = (string) $namespace;
 
         if (128 < strlen($namespace)) {
-            throw new Exception\InvalidArgumentException(
-                sprintf(
-                    '%s expects a prefix key of no longer than 128 characters',
-                    __METHOD__
-                )
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects a prefix key of no longer than 128 characters',
+                __METHOD__
+            ));
         }
 
         return parent::setNamespace($namespace);
     }
 
     /**
-     * Get the redis resource id
+     * Set namespace separator
      *
-     * @return string
+     * @param  string $namespaceSeparator
+     * @return RedisOptions
      */
-    public function getResourceId()
+    public function setNamespaceSeparator($namespaceSeparator)
     {
-        return $this->resourceId;
+        $namespaceSeparator = (string) $namespaceSeparator;
+        if ($this->namespaceSeparator !== $namespaceSeparator) {
+            $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
+            $this->namespaceSeparator = $namespaceSeparator;
+        }
+        return $this;
     }
 
     /**
-     * Set the redis resource id
+     * Get namespace separator
      *
-     * @param string $resourceId
-     * @return RedisOptions
+     * @return string
      */
-    public function setResourceId($resourceId)
+    public function getNamespaceSeparator()
     {
-        $resourceId = (string) $resourceId;
-        if ($this->resourceId !== $resourceId) {
-            $this->triggerOptionEvent('resource_id', $resourceId);
-            $this->resourceId = $resourceId;
-        }
-        return $this;
+        return $this->namespaceSeparator;
     }
 
     /**
@@ -118,28 +116,101 @@ class RedisOptions extends AdapterOptions
     }
 
     /**
-     * Set namespace separator
+     * Get the redis resource id
      *
-     * @param  string $namespaceSeparator
+     * @return string
+     */
+    public function getResourceId()
+    {
+        return $this->resourceId;
+    }
+
+    /**
+     * Set the redis resource id
+     *
+     * @param string $resourceId
      * @return RedisOptions
      */
-    public function setNamespaceSeparator($namespaceSeparator)
+    public function setResourceId($resourceId)
     {
-        $namespaceSeparator = (string) $namespaceSeparator;
-        if ($this->namespaceSeparator !== $namespaceSeparator) {
-            $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
-            $this->namespaceSeparator = $namespaceSeparator;
+        $resourceId = (string) $resourceId;
+        if ($this->resourceId !== $resourceId) {
+            $this->triggerOptionEvent('resource_id', $resourceId);
+            $this->resourceId = $resourceId;
         }
         return $this;
     }
 
     /**
-     * Get namespace separator
+     * Get the persistent id
      *
      * @return string
      */
-    public function getNamespaceSeparator()
+    public function getPersistentId()
     {
-        return $this->namespaceSeparator;
+        return $this->getResourceManager()->getPersistentId($this->getResourceId());
+    }
+
+    /**
+     * Set the persistent id
+     *
+     * @param string $persistentId
+     * @return RedisOptions
+     */
+    public function setPersistentId($persistentId)
+    {
+        $this->triggerOptionEvent('persistent_id', $persistentId);
+        $this->getResourceManager()->setPersistentId($this->getPersistentId(), $persistentId);
+        return $this;
+    }
+
+     /**
+    * Set redis options
+    *
+    * @param array $libOptions
+    * @return RedisOptions
+    * @link http://github.com/nicolasff/phpredis#setoption
+    */
+    public function setLibOptions(array $libOptions)
+    {
+        $this->getResourceManager()->setLibOptions($this->getResourceId(), $libOptions);
+        return $this;
+    }
+
+    /**
+     * Get redis options
+     *
+     * @return array
+     * @link http://github.com/nicolasff/phpredis#setoption
+     */
+    public function getLibOptions()
+    {
+        return $this->getResourceManager()->getLibOptions($this->getResourceId());
+    }
+
+    /**
+     * Set server
+     *
+     * Server can be described as follows:
+     * - URI:   /path/to/sock.sock
+     * - Assoc: array('host' => <host>[, 'port' => <port>[, 'timeout' => <timeout>]])
+     * - List:  array(<host>[, <port>, [, <timeout>]])
+     *
+     * @param string|array $server
+     */
+    public function setServer($server)
+    {
+        $this->getResourceManager()->setServer($this->getResourceId(), $server);
+        return $this;
+    }
+
+    /**
+     * Get server
+     *
+     * @return array array('host' => <host>[, 'port' => <port>[, 'timeout' => <timeout>]])
+     */
+    public function getServer()
+    {
+        return $this->getResourceManager()->getServer($this->getResourceId());
     }
 }

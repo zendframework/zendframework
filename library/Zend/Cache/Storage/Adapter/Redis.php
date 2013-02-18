@@ -109,8 +109,8 @@ class Redis extends AbstractAdapter implements
     /**
      * Set options.
      *
-     * @param  array|Traversable|MemcachedOptions $options
-     * @return Memcached
+     * @param  array|Traversable|RedisOptions $options
+     * @return Redis
      * @see    getOptions()
      */
     public function setOptions($options)
@@ -124,7 +124,7 @@ class Redis extends AbstractAdapter implements
     /**
      * Get options.
      *
-     * @return MemcachedOptions
+     * @return RedisOptions
      * @see setOptions()
      */
     public function getOptions()
@@ -150,7 +150,7 @@ class Redis extends AbstractAdapter implements
         try {
             $value = $redis->get($this->namespacePrefix . $normalizedKey);
         } catch (RedisResourceException $e) {
-            throw new Exception\RuntimeException($redis->getLastError());
+            throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
 
         if ($value === false) {
@@ -183,7 +183,7 @@ class Redis extends AbstractAdapter implements
         try {
             $results = $redis->mGet($namespacedKeys);
         } catch (RedisResourceException $e) {
-            throw new Exception\RuntimeException($redis->getLastError());
+            throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
         //combine the key => value pairs and remove all missing values
         return array_filter(
@@ -208,7 +208,7 @@ class Redis extends AbstractAdapter implements
         try {
             return $redis->exists($this->namespacePrefix . $normalizedKey);
         } catch (RedisResourceException $e) {
-            throw new Exception\RuntimeException($redis->getLastError());
+            throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
     }
 
@@ -235,7 +235,7 @@ class Redis extends AbstractAdapter implements
                 $success = $redis->set($this->namespacePrefix . $normalizedKey, $value);
             }
         } catch (RedisResourceException $e) {
-            throw new Exception\RuntimeException($redis->getLastError());
+            throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
 
         return $success;
@@ -260,6 +260,10 @@ class Redis extends AbstractAdapter implements
         }
         try {
             if ($ttl > 0) {
+                //check if ttl is supported
+                if ($this->resourceManager->getMayorVersion($this->resourceId) < 2) {
+                    throw new Exception\UnsupportedMethodCallException("To use ttl you need version >= 2.0.0");
+                }
                 //mSet does not allow ttl, so use transaction
                 $transaction = $redis->multi();
                 foreach($namespacedKeyValuePairs as $key => $value) {
@@ -271,7 +275,7 @@ class Redis extends AbstractAdapter implements
             }
 
         } catch (RedisResourceException $e) {
-            $success = false;
+            throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
         if (!$success) {
             throw new Exception\RuntimeException($redis->getLastError());
@@ -294,7 +298,7 @@ class Redis extends AbstractAdapter implements
         try {
             return $redis->setnx($this->namespacePrefix . $normalizedKey, $value);
         } catch (RedisResourceException $e) {
-            throw new Exception\RuntimeException($redis->getLastError());
+            throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
     }
 
@@ -312,7 +316,7 @@ class Redis extends AbstractAdapter implements
         try {
             return (bool) $redis->delete($this->namespacePrefix . $normalizedKey);
         } catch (RedisResourceException $e) {
-            throw new Exception\RuntimeException($redis->getLastError());
+            throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
     }
 
@@ -330,7 +334,7 @@ class Redis extends AbstractAdapter implements
         try {
             return $redis->incrBy($this->namespacePrefix . $normalizedKey, $value);
         } catch (RedisResourceException $e) {
-            throw new Exception\RuntimeException($redis->getLastError());
+            throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
     }
 
@@ -348,7 +352,7 @@ class Redis extends AbstractAdapter implements
         try {
             return $redis->decrBy($this->namespacePrefix . $normalizedKey, $value);
         } catch (RedisResourceException $e) {
-            throw new Exception\RuntimeException($redis->getLastError());
+            throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
     }
 
@@ -364,7 +368,7 @@ class Redis extends AbstractAdapter implements
         try {
             return $redis->flushDB();
         } catch (RedisResourceException $e) {
-            throw new Exception\RuntimeException($redis->getLastError());
+            throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
     }
 
@@ -381,7 +385,7 @@ class Redis extends AbstractAdapter implements
         try {
             $info = $redis->info();
         } catch (RedisResourceException $e) {
-            throw new Exception\RuntimeException($redis->getLastError());
+            throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
 
         return $info['used_memory'];
@@ -399,6 +403,7 @@ class Redis extends AbstractAdapter implements
     {
         if ($this->capabilities === null) {
             $this->capabilityMarker = new stdClass();
+            $minTtl = $this->resourceManager->getMayorVersion($this->resourceId) < 2 ? 0 : 1;
             //without serialization redis supports only strings for simple
             //get/set methods
             $this->capabilities     = new Capabilities(
@@ -416,7 +421,7 @@ class Redis extends AbstractAdapter implements
                         'resource' => false,
                     ),
                     'supportedMetadata'  => array(),
-                    'minTtl'             => 1,
+                    'minTtl'             => $minTtl,
                     'maxTtl'             => 0,
                     'staticTtl'          => true,
                     'ttlPrecision'       => 1,

@@ -3,6 +3,7 @@
 namespace ZendTest\Cache\Storage\Adapter;
 
 use Zend\Cache;
+use Redis as RedisResource;
 
 class RedisTest extends CommonAdapterTest
 {
@@ -146,9 +147,47 @@ class RedisTest extends CommonAdapterTest
     public function testSetDatabase()
     {
         $this->assertTrue($this->_storage->setItem('key', 'val'));
+        $this->assertEquals('val', $this->_storage->getItem('key'));
 
         $this->_options->getResourceManager()->setDatabase($this->_options->getResourceId(), 1);
         $this->assertNull($this->_storage->getItem('key'));
+    }
+
+    public function testOptionsGetSetLibOptions()
+    {
+        $options = array('serializer', RedisResource::SERIALIZER_PHP);
+        $this->_options->setLibOptions($options);
+        $this->assertEquals($options, $this->_options->getLibOptions(), 'Lib Options were not set correctly through RedisOptions');
+    }
+
+    public function testGetSetServer()
+    {
+        $server = array(
+            'host' => '127.0.0.1',
+            'port' => 6379,
+            'timeout' => 0,
+        );
+        $this->_options->setServer($server);
+        $this->assertEquals($server, $this->_options->getServer(), 'Server was not set correctly through RedisOptions');
+    }
+
+    public function testGetCapabilitiesTtl()
+    {
+        $host = defined('TESTS_ZEND_CACHE_REDIS_HOST') ? TESTS_ZEND_CACHE_REDIS_HOST : '127.0.0.1';
+        $port = defined('TESTS_ZEND_CACHE_REDIS_PORT') ? TESTS_ZEND_CACHE_REDIS_PORT : 6379;
+        $redisResource = new RedisResource();
+        $redisResource->connect($host, $port);
+        $info = $redisResource->info();
+        $mayorVersion = (int)$info['redis_version'];
+
+        $this->assertEquals($mayorVersion, $this->_options->getResourceManager()->getMayorVersion($this->_options->getResourceId()));
+
+        $capabilities = $this->_storage->getCapabilities();
+        if ($mayorVersion < 2) {
+            $this->assertEquals(0, $capabilities->getMinTtl(), 'Redis version < 2.0.0 does not support key expiration');
+        } else {
+            $this->assertEquals(1, $capabilities->getMinTtl(), 'Redis version > 2.0.0 supports key expiration');
+        }
     }
 
     public function tearDown()

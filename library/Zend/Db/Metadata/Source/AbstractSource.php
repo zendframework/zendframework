@@ -537,6 +537,24 @@ abstract class AbstractSource implements MetadataInterface
         $this->prepareDataHierarchy('constraints', $schema);
     }
 
+    protected function loadConstraintDataKeys($schema)
+    {
+        if (isset($this->data['constraint_keys'][$schema])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('constraint_keys', $schema);
+    }
+
+    protected function loadConstraintReferences($table, $schema)
+    {
+        if (isset($this->data['constraint_references'][$schema])) {
+            return;
+        }
+
+        $this->prepareDataHierarchy('constraint_references', $schema);
+    }
+
     protected function loadTriggerData($schema)
     {
         if (isset($this->data['triggers'][$schema])) {

@@ -77,8 +77,8 @@ class ModuleManager implements ModuleManagerInterface
             return $this;
         }
 
-        foreach ($this->getModules() as $moduleName) {
-            $this->loadModule($moduleName);
+        foreach ($this->getModules() as $module) {
+            $this->loadModule($module);
         }
 
         $this->modulesAreLoaded = true;
@@ -113,34 +113,41 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Load a specific module by name.
      *
-     * @param    string $moduleName
+     * @param    string|object $module
      * @throws   Exception\RuntimeException
      * @triggers loadModule.resolve
      * @triggers loadModule
      * @return   mixed Module's Module class
      */
-    public function loadModule($moduleName)
+    public function loadModule($module)
     {
+        $moduleName = $module;
+        if(is_object($module)) {
+            $moduleName = substr(get_class($module), 0, strpos(get_class($module), '\\'));
+        }
+        
         if (isset($this->loadedModules[$moduleName])) {
             return $this->loadedModules[$moduleName];
         }
-
+        
         $event = ($this->loadFinished === false) ? clone $this->getEvent() : $this->getEvent();
         $event->setModuleName($moduleName);
+        
+        if(!is_object($module)) {
+            $this->loadFinished = false;
 
-        $this->loadFinished = false;
+            $result = $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, $this, $event, function ($r) {
+                return (is_object($r));
+            });
 
-        $result = $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, $this, $event, function ($r) {
-            return (is_object($r));
-        });
+            $module = $result->last();
 
-        $module = $result->last();
-
-        if (!is_object($module)) {
-            throw new Exception\RuntimeException(sprintf(
-                'Module (%s) could not be initialized.',
-                $moduleName
-            ));
+            if (!is_object($module)) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Module (%s) could not be initialized.',
+                    $moduleName
+                ));
+            }
         }
         $event->setModule($module);
 

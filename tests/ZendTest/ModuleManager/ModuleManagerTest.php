@@ -161,4 +161,30 @@ class ModuleManagerTest extends TestCase
         $this->assertArrayHasKey('BarModule', $test->modules);
         $this->assertInstanceOf('BarModule\Module', $test->modules['BarModule']);
     }
+
+    public function testCanLoadSomeObjectModule()
+    {
+        require_once __DIR__ . '/TestAsset/SomeModule/Module.php';
+        $configListener = $this->defaultListeners->getConfigListener();
+        $moduleManager  = new ModuleManager(array(new \SomeModule\Module()), new EventManager);
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
+        $moduleManager->loadModules();
+        $loadedModules = $moduleManager->getLoadedModules();
+        $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
+        $config = $configListener->getMergedConfig();
+        $this->assertSame($config->some, 'thing');
+    }
+
+    public function testCanLoadMultipleModulesObjectWithString()
+    {
+        require_once __DIR__ . '/TestAsset/SomeModule/Module.php';
+        $configListener = $this->defaultListeners->getConfigListener();
+        $moduleManager  = new ModuleManager(array(new \SomeModule\Module(), 'BarModule'), new EventManager);
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
+        $moduleManager->loadModules();
+        $loadedModules = $moduleManager->getLoadedModules();
+        $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
+        $config = $configListener->getMergedConfig();
+        $this->assertSame($config->some, 'thing');
+    }
 }

@@ -520,7 +520,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
      */
     public function testNotClosedHtmlCommentAtEndOfString()
     {
-        $input    = 'text<!-- not closed comment at the end';;
+        $input    = 'text<!-- not closed comment at the end';
         $expected =  'text';
         $this->assertEquals($expected, $this->_filter->filter($input));
     }

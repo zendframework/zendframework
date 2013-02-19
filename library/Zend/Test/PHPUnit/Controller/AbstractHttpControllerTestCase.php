@@ -125,7 +125,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      */
     public function assertResponseHeaderRegex($header, $pattern)
     {
-        $responseHeader = $this->getResponseHeader($header);;
+        $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting response header, header "%s" do not exists', $header

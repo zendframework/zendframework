@@ -162,21 +162,17 @@ class PropertyGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param  PropertyValueGenerator|string|array $defaultValue
+     * @param PropertyValueGenerator|mixed $defaultValue
+     * @param string                       $defaultValueType
+     * @param string                       $defaultValueOutputMode
+     *
      * @return PropertyGenerator
      */
-    public function setDefaultValue($defaultValue)
+    public function setDefaultValue($defaultValue, $defaultValueType = PropertyValueGenerator::TYPE_AUTO, $defaultValueOutputMode = PropertyValueGenerator::OUTPUT_MULTIPLE_LINE)
     {
-        // if it looks like
-        if (is_array($defaultValue)
-            && isset($defaultValue['value'])
-            && isset($defaultValue['type'])
-        ) {
-            $defaultValue = new PropertyValueGenerator($defaultValue);
-        }
-
         if (!($defaultValue instanceof PropertyValueGenerator)) {
-            $defaultValue = new PropertyValueGenerator($defaultValue);
+
+            $defaultValue = new PropertyValueGenerator($defaultValue, $defaultValueType, $defaultValueOutputMode);
         }
 
         $this->defaultValue = $defaultValue;

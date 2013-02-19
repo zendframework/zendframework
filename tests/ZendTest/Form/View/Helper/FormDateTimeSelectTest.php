@@ -78,9 +78,21 @@ class FormDateTimeSelectTest extends CommonTestCase
         $element->setShouldRenderDelimiters(false);
         $markup = $this->helper->render($element);
 
-        // If it contains wo consecutive selects this means that no delimiters
+        // If it contains two consecutive selects this means that no delimiters
         // are inserted
         $this->assertContains('</select><select', $markup);
+    }
+
+    public function testCanRenderTextDelimiters()
+    {
+        $element = new DateTimeSelect('foo');
+        $element->setShouldCreateEmptyOption(true);
+        $element->setShouldRenderDelimiters(true);
+        $element->setShouldShowSeconds(true);
+        $markup = $this->helper->__invoke($element, \IntlDateFormatter::LONG, \IntlDateFormatter::LONG, 'pt_BR');
+
+        // pattern === "d 'de' MMMM 'de' y HH'h'mm'min'ss's'"
+        $this->assertStringMatchesFormat('%a de %a de %a %ah%amin%as', $markup);
     }
 
     public function testInvokeProxiesToRender()

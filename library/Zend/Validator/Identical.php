@@ -123,13 +123,21 @@ class Identical extends AbstractValidator
      * @return bool
      * @throws Exception\RuntimeException if the token doesn't exist in the context array
      */
-    public function isValid($value, array $context = null)
+    public function isValid($value, $context = null)
     {
         $this->setValue($value);
 
         $token = $this->getToken();
 
         if ($context !== null) {
+            if (!is_array($context)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Context passed to %s must be an array or null; received "%s"',
+                    __METHOD__,
+                    (is_object($context) ? get_class($context) : gettype($context))
+                ));
+            }
+
             if (is_array($token)) {
                 while (is_array($token)){
                     $key = key($token);

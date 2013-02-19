@@ -21,19 +21,25 @@ use Zend\Stdlib\RequestInterface as Request;
  */
 class Hostname implements RouteInterface
 {
-    /**
-     * RouteInterface to match.
+    /* Parts of the route.
      *
      * @var array
      */
-    protected $route;
+    protected $parts;
 
     /**
-     * Constraints for parameters.
+     * Regex used for matching the route.
+     *
+     * @var string
+     */
+    protected $regex;
+
+    /**
+     * Map from regex groups to parameter names.
      *
      * @var array
      */
-    protected $constraints;
+    protected $paramMap = array();
 
     /**
      * Default values.
@@ -58,9 +64,9 @@ class Hostname implements RouteInterface
      */
     public function __construct($route, array $constraints = array(), array $defaults = array())
     {
-        $this->route       = explode('.', $route);
-        $this->constraints = $constraints;
-        $this->defaults    = $defaults;
+        $this->defaults = $defaults;
+        $this->parts    = $this->parseRouteDefinition($route);
+        $this->regex    = $this->buildRegex($this->parts, $constraints);
     }
 
     /**
@@ -95,6 +101,165 @@ class Hostname implements RouteInterface
     }
 
     /**
+     * Parse a route definition.
+     *
+     * @param  string $def
+     * @return array
+     * @throws Exception\RuntimeException
+     */
+    protected function parseRouteDefinition($def)
+    {
+        $currentPos = 0;
+        $length     = strlen($def);
+        $parts      = array();
+        $levelParts = array(&$parts);
+        $level      = 0;
+
+        while ($currentPos < $length) {
+            preg_match('(\G(?P<literal>[a-z0-9-.]*)(?P<token>[:{\[\]]|$))', $def, $matches, 0, $currentPos);
+
+            $currentPos += strlen($matches[0]);
+
+            if (!empty($matches['literal'])) {
+                $levelParts[$level][] = array('literal', $matches['literal']);
+            }
+
+            if ($matches['token'] === ':') {
+                if (!preg_match('(\G(?P<name>[^:.{\[\]]+)(?:{(?P<delimiters>[^}]+)})?:?)', $def, $matches, 0, $currentPos)) {
+                    throw new Exception\RuntimeException('Found empty parameter name');
+                }
+
+                $levelParts[$level][] = array('parameter', $matches['name'], isset($matches['delimiters']) ? $matches['delimiters'] : null);
+
+                $currentPos += strlen($matches[0]);
+            } elseif ($matches['token'] === '[') {
+                $levelParts[$level][] = array('optional', array());
+                $levelParts[$level + 1] = &$levelParts[$level][count($levelParts[$level]) - 1][1];
+
+                $level++;
+            } elseif ($matches['token'] === ']') {
+                unset($levelParts[$level]);
+                $level--;
+
+                if ($level < 0) {
+                    throw new Exception\RuntimeException('Found closing bracket without matching opening bracket');
+                }
+            } else {
+                break;
+            }
+        }
+
+        if ($level > 0) {
+            throw new Exception\RuntimeException('Found unbalanced brackets');
+        }
+
+        return $parts;
+    }
+
+    /**
+     * Build the matching regex from parsed parts.
+     *
+     * @param  array   $parts
+     * @param  array   $constraints
+     * @param  integer $groupIndex
+     * @return string
+     * @throws Exception\RuntimeException
+     */
+    protected function buildRegex(array $parts, array $constraints, &$groupIndex = 1)
+    {
+        $regex = '';
+
+        // Reverse the parts to build the regex in reverse
+        foreach (array_reverse($parts) as $part) {
+            switch ($part[0]) {
+                case 'literal':
+                    $regex .= preg_quote(strrev($part[1]));
+                    break;
+
+                case 'parameter':
+                    $groupName = '?P<param' . $groupIndex . '>';
+
+                    if (isset($constraints[$part[1]])) {
+                        $regex .= '(' . $groupName . $constraints[$part[1]] . ')';
+                    } elseif ($part[2] === null) {
+                        $regex .= '(' . $groupName . '[^.]+)';
+                    } else {
+                        $regex .= '(' . $groupName . '[^' . $part[2] . ']+)';
+                    }
+
+                    $this->paramMap['param' . $groupIndex++] = $part[1];
+                    break;
+
+                case 'optional':
+                    $regex .= '(?:' . $this->buildRegex($part[1], $constraints, $groupIndex) . ')?';
+                    break;
+            }
+        }
+
+        return $regex;
+    }
+
+    /**
+     * Build host.
+     *
+     * @param  array   $parts
+     * @param  array   $mergedParams
+     * @param  bool $isOptional
+     * @param  bool $hasChild
+     * @return string
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
+     */
+    protected function buildHost(array $parts, array $mergedParams, $isOptional, $hasChild)
+    {
+        $host      = '';
+        $skip      = true;
+        $skippable = false;
+
+        foreach ($parts as $part) {
+            switch ($part[0]) {
+                case 'literal':
+                    $host .= $part[1];
+                    break;
+
+                case 'parameter':
+                    $skippable = true;
+
+                    if (!isset($mergedParams[$part[1]])) {
+                        if (!$isOptional || $hasChild) {
+                            throw new Exception\InvalidArgumentException(sprintf('Missing parameter "%s"', $part[1]));
+                        }
+
+                        return '';
+                    } elseif (!$isOptional || $hasChild || !isset($this->defaults[$part[1]]) || $this->defaults[$part[1]] !== $mergedParams[$part[1]]) {
+                        $skip = false;
+                    }
+
+                    $host .= $mergedParams[$part[1]];
+
+                    $this->assembledParams[] = $part[1];
+                    break;
+
+                case 'optional':
+                    $skippable    = true;
+                    $optionalPart = $this->buildHost($part[1], $mergedParams, true, $hasChild);
+
+                    if ($optionalPart !== '') {
+                        $host .= $optionalPart;
+                        $skip  = false;
+                    }
+                    break;
+            }
+        }
+
+        if ($isOptional && $skippable && $skip) {
+            return '';
+        }
+
+        return $host;
+    }
+
+    /**
      * match(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
@@ -107,27 +272,27 @@ class Hostname implements RouteInterface
             return null;
         }
 
-        $uri      = $request->getUri();
-        $hostname = explode('.', $uri->getHost());
-        $params   = array();
+        $uri  = $request->getUri();
+        $host = $uri->getHost();
 
-        if (count($hostname) !== count($this->route)) {
+        // reverse the host as the regex was built backwards
+        $result = preg_match('(^' . $this->regex . '$)', strrev($host), $matches);
+
+        if (!$result) {
             return null;
         }
 
-        foreach ($this->route as $index => $routePart) {
-            if (preg_match('(^:(?P<name>.+)$)', $routePart, $matches)) {
-                if (isset($this->constraints[$matches['name']]) && !preg_match('(^' . $this->constraints[$matches['name']] . '$)', $hostname[$index])) {
-                    return null;
-                }
+        $matchedLength = strlen($matches[0]);
+        $params        = array();
 
-                $params[$matches['name']] = $hostname[$index];
-            } elseif ($hostname[$index] !== $routePart) {
-                return null;
+        foreach ($this->paramMap as $index => $name) {
+            if (isset($matches[$index]) && $matches[$index] !== '') {
+                // reverse the param as the preg_match was done on reverse host
+                $params[$name] = strrev($matches[$index]);
             }
         }
 
-        return new RouteMatch(array_merge($this->defaults, $params));
+        return new RouteMatch(array_merge($this->defaults, $params), $matchedLength);
     }
 
     /**
@@ -137,31 +302,20 @@ class Hostname implements RouteInterface
      * @param  array $params
      * @param  array $options
      * @return mixed
-     * @throws Exception\InvalidArgumentException
      */
     public function assemble(array $params = array(), array $options = array())
     {
-        $mergedParams          = array_merge($this->defaults, $params);
         $this->assembledParams = array();
 
         if (isset($options['uri'])) {
-            $parts = array();
+            $host = $this->buildHost(
+                $this->parts,
+                array_merge($this->defaults, $params),
+                false,
+                (isset($options['has_child']) ? $options['has_child'] : false)
+            );
 
-            foreach ($this->route as $routePart) {
-                if (preg_match('(^:(?P<name>.+)$)', $routePart, $matches)) {
-                    if (!isset($mergedParams[$matches['name']])) {
-                        throw new Exception\InvalidArgumentException(sprintf('Missing parameter "%s"', $matches['name']));
-                    }
-
-                    $parts[] = $mergedParams[$matches['name']];
-
-                    $this->assembledParams[] = $matches['name'];
-                } else {
-                    $parts[] = $routePart;
-                }
-            }
-
-            $options['uri']->setHost(implode('.', $parts));
+            $options['uri']->setHost($host);
         }
 
         // A hostname does not contribute to the path, thus nothing is returned.

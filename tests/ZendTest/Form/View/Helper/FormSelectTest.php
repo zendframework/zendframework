@@ -37,6 +37,9 @@ class FormSelectTest extends CommonTestCase
             array(
                 'label' => 'This is the third label',
                 'value' => 'value3',
+                'attributes' => array(
+                    'class' => 'test-class',
+                ),
             ),
         );
         $element->setValueOptions($options);
@@ -58,6 +61,9 @@ class FormSelectTest extends CommonTestCase
         $this->assertContains('value="value1"', $markup);
         $this->assertContains('value="value2"', $markup);
         $this->assertContains('value="value3"', $markup);
+
+        //Test class attribute on third option
+        $this->assertRegexp('#option .*?value="value3" class="test-class"#', $markup);
     }
 
     public function testCanMarkSingleOptionAsSelected()

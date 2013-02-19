@@ -132,9 +132,10 @@ class SimpleTestTest extends TestCase
             ),
             'literal-optional-long-flag' => array(
                 'foo [--bar]',
-                array('--bar'),
+                array('foo', '--bar'),
                 array(
-                    'bar' => true
+                    'foo' => true,
+                    'bar' => true,
                 )
             ),
             'optional-long-flag-partial-mismatch' => array(
@@ -176,9 +177,10 @@ class SimpleTestTest extends TestCase
             ),
             'literal-optional-long-value-flag' => array(
                 'foo [--bar=]',
-                array('--bar=4'),
+                array('foo', '--bar=4'),
                 array(
-                    'bar' => 4
+                    'foo' => true,
+                    'bar' => 4,
                 )
             ),
             'optional-long-flag-mixed-order-match' => array(
@@ -565,8 +567,9 @@ class SimpleTestTest extends TestCase
             // other (combination)
             'combined-1' => array(
                 'literal <bar> [--foo=] --baz',
-                array('oneBar', '--foo=4', '--baz'),
+                array('literal', 'oneBar', '--foo=4', '--baz'),
                 array(
+                    'literal' => true,
                     'bar' => 'oneBar',
                     'foo' => 4,
                     'baz' => true

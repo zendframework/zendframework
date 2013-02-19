@@ -214,6 +214,22 @@ class Simple implements RouteInterface
                 );
             }
             /**
+             * Optional long flag
+             *    [--param]
+             */
+            elseif (preg_match(
+                '/\G\[ *?--(?<name>[a-zA-Z0-9][a-zA-Z0-9\_\-]+) *?\](?: +|$)/s', $def, $m, 0, $pos
+            )) {
+                $item = array(
+                    'name'       => strtolower($m['name']),
+                    'short'      => false,
+                    'literal'    => false,
+                    'required'   => false,
+                    'positional' => false,
+                    'hasValue'   => false,
+                );
+            }
+            /**
              * Optional long param
              *    [--param=]
              *    [--param=whatever]

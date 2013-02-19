@@ -130,10 +130,14 @@ class ServiceManagerConfig implements ConfigInterface
         }
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
-            if ($instance instanceof EventManagerAwareInterface
-                && !$instance->getEventManager() instanceof EventManagerInterface
-            ) {
-                $instance->setEventManager($serviceManager->get('EventManager'));
+            if ($instance instanceof EventManagerAwareInterface) {
+                if ($instance->getEventManager() instanceof EventManagerInterface) {
+                    $instance->getEventManager()->setSharedManager(
+                        $serviceManager->get('SharedEventManager')
+                    );
+                } else {
+                    $instance->setEventManager($serviceManager->get('EventManager'));
+                }
             }
         });
 

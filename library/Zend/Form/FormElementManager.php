@@ -85,7 +85,7 @@ class FormElementManager extends AbstractPluginManager
     public function injectFactory($element)
     {
         if ($element instanceof FormFactoryAwareInterface) {
-            $element->setFormFactory(new Factory($this));
+            $element->getFormFactory()->setFormElementManager($this);
         }
     }
 

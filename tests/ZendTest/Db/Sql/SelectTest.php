@@ -44,7 +44,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test getRawState() returns infromation populated via from()
+     * @testdox unit test: Test getRawState() returns information populated via from()
      * @covers Zend\Db\Sql\Select::getRawState
      * @depends testFrom
      */
@@ -66,7 +66,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test getRawState() returns infromation populated via from()
+     * @testdox unit test: Test getRawState() returns information populated via from()
      * @covers Zend\Db\Sql\Select::getRawState
      * @depends testQuantifier
      */
@@ -239,7 +239,22 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $predicates = $where->getPredicates();
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
     }
-
+    
+    /**
+     * @testdox unit test: Test where() will accept any array with string key (without ?) with Predicate throw Exception
+     * @covers Zend\Db\Sql\Select::where
+     */
+    public function testWhereArgument1IsAssociativeArrayIsPredicate()
+    {
+        $select = new Select;
+            $where = array(
+            'name' => new Predicate\Literal("name = 'Ralph'"),
+            'age' => new Predicate\Expression('age = ?', 33),
+        );
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Using Predicate must not use string keys');
+        $select->where($where);
+    }
+    
     /**
      * @testdox unit test: Test where() will accept an indexed array to be used by joining string expressions
      * @covers Zend\Db\Sql\Select::where

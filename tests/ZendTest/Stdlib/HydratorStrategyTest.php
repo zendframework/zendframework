@@ -144,4 +144,28 @@ class HydratorStrategyTest extends \PHPUnit_Framework_TestCase
             array(false, 'fooBar'),
         );
     }
+
+    public function testContextAwarenessExtract()
+    {
+        $strategy = new TestAsset\HydratorStrategyContextAware();
+        $this->hydrator->addStrategy('field2', $strategy);
+
+        $entityB = new TestAsset\HydratorStrategyEntityB('X', 'Y');
+        $attributes = $this->hydrator->extract($entityB);
+
+        $this->assertEquals($entityB, $strategy->object);
+    }
+
+    public function testContextAwarenessHydrate()
+    {
+        $strategy = new TestAsset\HydratorStrategyContextAware();
+        $this->hydrator->addStrategy('field2', $strategy);
+
+        $entityB = new TestAsset\HydratorStrategyEntityB('X', 'Y');
+        $data = array('field1' => 'A', 'field2' => 'B');
+        $attributes = $this->hydrator->hydrate($data, $entityB);
+
+        $this->assertEquals($data, $strategy->data);
+    }
+
 }

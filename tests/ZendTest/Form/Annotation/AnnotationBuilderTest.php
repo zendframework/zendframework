@@ -218,4 +218,19 @@ class AnnotationBuilderTest extends TestCase
         $sampleinput = $inputFilter->get('sampleinput');
         $this->assertTrue($sampleinput->allowEmpty());
     }
+    
+    public function testObjectElementAnnotation()
+    {
+        $entity = new TestAsset\Annotation\EntityUsingObjectProperty();
+        $builder = new Annotation\AnnotationBuilder();
+        $form = $builder->createForm($entity);
+
+        $fieldset = $form->get('object');
+        /* @var $fieldset Zend\Form\Fieldset */
+
+        $this->assertInstanceOf('Zend\Form\Fieldset',$fieldset);
+        $this->assertInstanceOf('ZendTest\Form\TestAsset\Annotation\Entity',$fieldset->getObject());
+        $this->assertInstanceOf("Zend\Stdlib\Hydrator\ClassMethods",$fieldset->getHydrator());
+        $this->assertFalse($fieldset->getHydrator()->getUnderscoreSeparatedKeys());
+    }
 }

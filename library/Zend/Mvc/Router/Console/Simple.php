@@ -136,7 +136,7 @@ class Simple implements RouteInterface
     /**
      * factory(): defined by Route interface.
      *
-     * @see    Route::factory()
+     * @see    \Zend\Mvc\Router\RouteInterface::factory()
      * @param  array|Traversable $options
      * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
      * @return Simple
@@ -788,7 +788,7 @@ class Simple implements RouteInterface
     /**
      * assemble(): Defined by Route interface.
      *
-     * @see    Route::assemble()
+     * @see    \Zend\Mvc\Router\RouteInterface::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed
@@ -801,7 +801,7 @@ class Simple implements RouteInterface
     /**
      * getAssembledParams(): defined by Route interface.
      *
-     * @see    Route::getAssembledParams
+     * @see    RouteInterface::getAssembledParams
      * @return array
      */
     public function getAssembledParams()

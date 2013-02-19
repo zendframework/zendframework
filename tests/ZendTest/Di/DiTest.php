@@ -779,4 +779,33 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('defaultConstruct', $optionalParams->b);
         $this->assertSame(array(), $optionalParams->c);
     }
+
+    /**
+     * @group SharedInstance
+     */
+    public function testGetWithParamsWillUseSharedInstance()
+    {
+        $di = new Di;
+
+        $sharedInstanceClass = 'ZendTest\Di\TestAsset\ConstructorInjection\A';
+        $retrievedInstanceClass = 'ZendTest\Di\TestAsset\ConstructorInjection\C';
+
+        // Provide definitions for $retrievedInstanceClass, but not for $sharedInstanceClass.
+        $arrayDefinition = array($retrievedInstanceClass => array (
+            'supertypes' => array ( ),
+            'instantiator' => '__construct',
+            'methods' => array ('__construct' => true),
+            'parameters' => array ( '__construct' => array (
+                "$retrievedInstanceClass::__construct:0" => array ('a', $sharedInstanceClass, true, NULL),
+                "$retrievedInstanceClass::__construct:1" => array ('params', NULL, false, array()),
+            )),
+        ));
+
+        // This also disables scanning of class A.
+        $di->setDefinitionList(new DefinitionList(new Definition\ArrayDefinition($arrayDefinition)));
+
+        $di->instanceManager()->addSharedInstance(new $sharedInstanceClass, $sharedInstanceClass);
+        $returnedC = $di->get($retrievedInstanceClass, array('params' => array('test')));
+        $this->assertInstanceOf($retrievedInstanceClass, $returnedC);
+    }
 }

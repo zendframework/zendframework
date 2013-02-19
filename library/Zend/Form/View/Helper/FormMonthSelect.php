@@ -154,18 +154,18 @@ class FormMonthSelect extends AbstractHelper
     protected function parsePattern($renderDelimiters = true)
     {
         $pattern    = $this->getPattern();
-        $pregResult = preg_split('/([ -,.\/]+)/', $pattern, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        $pregResult = preg_split("/([ -,.\/]*(?:'[a-zA-Z]+')*[ -,.\/]+)/", $pattern, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
         $result = array();
         foreach ($pregResult as $value) {
-            if (stripos($value, 'd') !== false) {
+            if (stripos($value, "'") === false && stripos($value, 'd') !== false) {
                 $result['day'] = $value;
-            } elseif (stripos($value, 'm') !== false) {
+            } elseif (stripos($value, "'") === false && stripos($value, 'm') !== false) {
                 $result['month'] = $value;
-            } elseif (stripos($value, 'y') !== false) {
+            } elseif (stripos($value, "'") === false && stripos($value, 'y') !== false) {
                 $result['year'] = $value;
             } elseif ($renderDelimiters) {
-                $result[] = $value;
+                $result[] = str_replace("'", '', $value);
             }
         }
 

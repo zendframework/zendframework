@@ -445,7 +445,7 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         // Still no instance? raise an exception
-        if (!$instance && !is_array($instance)) {
+        if ($instance === null && !is_array($instance)) {
             if ($isAlias) {
                 throw new Exception\ServiceNotFoundException(sprintf(
                     'An alias "%s" was requested but no service could be found.',
@@ -494,11 +494,11 @@ class ServiceManager implements ServiceLocatorInterface
             $instance = $this->createFromFactory($cName, $rName);
         }
 
-        if (!$instance && isset($this->invokableClasses[$cName])) {
+        if ($instance === false && isset($this->invokableClasses[$cName])) {
             $instance = $this->createFromInvokable($cName, $rName);
         }
 
-        if (!$instance && $this->canCreateFromAbstractFactory($cName, $rName)) {
+        if ($instance === false && $this->canCreateFromAbstractFactory($cName, $rName)) {
             $instance = $this->createFromAbstractFactory($cName, $rName);
         }
 

@@ -182,6 +182,15 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
     }
 
+    public function testNonMimeOptionsAtConstructorStillSetsDefaults()
+    {
+        $validator = new File\IsCompressed(array(
+            'enableHeaderCheck' => true,
+        ));
+
+        $this->assertNotEmpty($validator->getMimeType());
+    }
+
     /**
      * @group ZF-11258
      */

@@ -29,7 +29,7 @@ class RenameUpload extends AbstractFilter
      * Store already filtered values, so we can filter multiple
      * times the same file without being block by move_uploaded_file
      * internal checks
-     * 
+     *
      * @var array
      */
     protected $alreadyFiltered = array();

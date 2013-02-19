@@ -203,7 +203,7 @@ class Simple implements RouteInterface
              *    --param=
              *    --param=whatever
              */
-            if (preg_match( '/\G--(?<name>[a-zA-Z0-9][a-zA-Z0-9\_\-]+)(?<hasValue>=\S*?)?(?: +|$)/s', $def, $m, 0, $pos )) {
+            if (preg_match('/\G--(?<name>[a-zA-Z0-9][a-zA-Z0-9\_\-]+)(?<hasValue>=\S*?)?(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => strtolower( $m['name'] ),
                     'short'      => false,
@@ -237,9 +237,9 @@ class Simple implements RouteInterface
              *    -a=s
              *    -a=w
              */
-            elseif (preg_match( '/\G-(?<name>[a-zA-Z0-9])(?:=(?<type>[ns]))?(?: +|$)/s', $def, $m, 0, $pos )) {
+            elseif (preg_match('/\G-(?<name>[a-zA-Z0-9])(?:=(?<type>[ns]))?(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
-                    'name'       => strtolower( $m['name'] ),
+                    'name'       => strtolower($m['name']),
                     'short'      => true,
                     'literal'    => false,
                     'required'   => true,
@@ -268,7 +268,7 @@ class Simple implements RouteInterface
              *    [ something | somethingElse | anotherOne ]
              *    [ something | somethingElse | anotherOne ]:namedGroup
              */
-            elseif (preg_match( '/
+            elseif (preg_match('/
                 \G
                 \[
                     (?<options>
@@ -308,7 +308,7 @@ class Simple implements RouteInterface
              *    ( something | somethingElse | anotherOne )
              *    ( something | somethingElse | anotherOne ):namedGroup
              */
-            elseif (preg_match( '/
+            elseif (preg_match('/
                 \G
                 \(
                     (?<options>
@@ -346,7 +346,7 @@ class Simple implements RouteInterface
              *    ( --something | --somethingElse | --anotherOne | -s | -a )
              *    ( --something | --somethingElse | --anotherOne | -s | -a ):namedGroup
              */
-            elseif (preg_match( '/
+            elseif (preg_match('/
                 \G
                 \(
                     (?<options>
@@ -389,7 +389,7 @@ class Simple implements RouteInterface
              *    [ --something | --somethingElse | --anotherOne | -s | -a ]
              *    [ --something | --somethingElse | --anotherOne | -s | -a ]:namedGroup
              */
-            elseif (preg_match( '/
+            elseif (preg_match('/
                 \G
                 \[
                     (?<options>
@@ -431,7 +431,7 @@ class Simple implements RouteInterface
              * Optional literal param, i.e.
              *    [something]
              */
-            elseif (preg_match( '/\G\[ *?(?<name>[a-z0-9][a-zA-Z0-9\_]*?) *?\](?: +|$)/s', $def, $m, 0, $pos )) {
+            elseif (preg_match('/\G\[ *?(?<name>[a-z0-9][a-zA-Z0-9\_]*?) *?\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'literal'    => true,
@@ -444,7 +444,7 @@ class Simple implements RouteInterface
              * Optional value param, i.e.
              *    [SOMETHING]
              */
-            elseif (preg_match( '/\G\[(?<name>[A-Z0-9\_]+)\](?: +|$)/s', $def, $m, 0, $pos )) {
+            elseif (preg_match('/\G\[(?<name>[A-Z0-9\_]+)\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => strtolower( $m['name'] ),
                     'literal'    => false,
@@ -457,7 +457,7 @@ class Simple implements RouteInterface
              * Optional value param, syntax 2, i.e.
              *    [<SOMETHING>]
              */
-            elseif (preg_match( '/\G\[ *\<(?<name>[a-zA-Z0-9\_]+)\> *\](?: +|$)/s', $def, $m, 0, $pos )) {
+            elseif (preg_match('/\G\[ *\<(?<name>[a-zA-Z0-9\_]+)\> *\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => strtolower( $m['name'] ),
                     'literal'    => false,
@@ -470,7 +470,7 @@ class Simple implements RouteInterface
              * Mandatory value param, i.e.
              *    <something>
              */
-            elseif (preg_match( '/\G\< *(?<name>[a-zA-Z0-9\_]+) *\>(?: +|$)/s', $def, $m, 0, $pos )) {
+            elseif (preg_match('/\G\< *(?<name>[a-zA-Z0-9\_]+) *\>(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'literal'    => false,
@@ -483,7 +483,7 @@ class Simple implements RouteInterface
              * Mandatory value param, i.e.
              *   SOMETHING
              */
-            elseif (preg_match( '/\G(?<name>[A-Z0-9\_]*?)(?: +|$)/s', $def, $m, 0, $pos )) {
+            elseif (preg_match('/\G(?<name>[A-Z0-9\_]*?)(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => strtolower( $m['name'] ),
                     'literal'    => false,
@@ -496,7 +496,7 @@ class Simple implements RouteInterface
              * Mandatory literal param, i.e.
              *   something
              */
-            elseif (preg_match( '/\G(?<name>[a-z0-9][a-zA-Z0-9\_]*?)(?: +|$)/s', $def, $m, 0, $pos )) {
+            elseif (preg_match('/\G(?<name>[a-z0-9][a-zA-Z0-9\_]*?)(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'literal'    => true,
@@ -510,7 +510,7 @@ class Simple implements RouteInterface
                 );
             }
 
-            $pos += strlen( $m[0] );
+            $pos += strlen($m[0]);
             $parts[] = $item;
         }
 
@@ -613,7 +613,7 @@ class Simple implements RouteInterface
                  * Drop out if that was a mandatory param
                  */
                 if ($part['required']) {
-                    return;
+                    return null;
                 }
 
                 /**
@@ -644,7 +644,7 @@ class Simple implements RouteInterface
                     array_splice($params, $x, 1);
                 } else {
                     // there are no more params available
-                    return;
+                    return null;
                 }
             }
 
@@ -656,7 +656,7 @@ class Simple implements RouteInterface
                     !preg_match($this->constraints[$part['name']], $value)
                 ) {
                     // constraint failed
-                    return;
+                    return null;
                 }
             }
 
@@ -698,7 +698,7 @@ class Simple implements RouteInterface
          */
         foreach ($params as $param) {
             if (preg_match('#^\-+#', $param)) {
-                return; // there is an unrecognized flag
+                return null; // there is an unrecognized flag
             }
         }
 
@@ -713,7 +713,7 @@ class Simple implements RouteInterface
             if (!isset($params[$argPos])) {
                 if ($part['required']) {
                     // cannot find required positional param
-                    return;
+                    return null;
                 } else {
                     // stop matching
                     break;
@@ -730,7 +730,7 @@ class Simple implements RouteInterface
                     (isset($part['alternatives']) && !in_array($value, $part['alternatives'])) ||
                     (!isset($part['alternatives']) && $value != $part['name'])
                 ) {
-                    return;
+                    return null;
                 }
             }
 
@@ -742,7 +742,7 @@ class Simple implements RouteInterface
                     !preg_match($this->constraints[$part['name']], $value)
                 ) {
                     // constraint failed
-                    return;
+                    return null;
                 }
             }
 
@@ -777,10 +777,8 @@ class Simple implements RouteInterface
          * Check if we have consumed all positional parameters
          */
         if ($argPos < count($params)) {
-            return; // there are extraneous params that were not consumed
+            return null; // there are extraneous params that were not consumed
         }
-
-
 
         return new RouteMatch(array_merge($this->defaults, $matches));
     }

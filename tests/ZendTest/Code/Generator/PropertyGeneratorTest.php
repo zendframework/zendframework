@@ -266,4 +266,20 @@ EOS;
         $this->assertEquals('var', $tag->getName());
     }
 
+
+    /**
+     * @dataProvider dataSetTypeSetValueGenerate
+     * @param string $type
+     * @param mixed $value
+     * @param string $code
+     */
+    public function testSetDefaultValue($type, $value, $code)
+    {
+        $property = new PropertyGenerator();
+        $property->setDefaultValue($value, $type);
+
+        $this->assertEquals($type, $property->getDefaultValue()->getType());
+        $this->assertEquals($value, $property->getDefaultValue()->getValue());
+    }
+
 }

@@ -11,6 +11,8 @@
 namespace ZendTest\Form;
 
 use Zend\ServiceManager\ServiceManager;
+use Zend\Form\Factory;
+use Zend\Form\Form;
 use Zend\Form\FormElementManager;
 
 /**
@@ -34,6 +36,22 @@ class FormElementManagerTest extends \PHPUnit_Framework_TestCase
     public function testInjectToFormFactoryAware()
     {
         $form = $this->manager->get('Form');
+        $this->assertSame($this->manager, $form->getFormFactory()->getFormElementManager());
+    }
+
+    /**
+     * @group 3735
+     */
+    public function testInjectsFormElementManagerToFormComposedByFormFactoryAwareElement()
+    {
+        $factory = new Factory();
+        $this->manager->setFactory('my-form', function ($elements) use ($factory) {
+            $form = new Form();
+            $form->setFormFactory($factory);
+            return $form;
+        });
+        $form = $this->manager->get('my-Form');
+        $this->assertSame($factory, $form->getFormFactory());
         $this->assertSame($this->manager, $form->getFormFactory()->getFormElementManager());
     }
 

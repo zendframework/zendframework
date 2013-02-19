@@ -32,7 +32,7 @@ class ObjectProperty extends AbstractHydrator
 
         $self = $this;
         $data = get_object_vars($object);
-        array_walk($data, function (&$value, $name) use ($self, &$data) {
+        array_walk($data, function (&$value, $name) use ($self, &$data, $object) {
             if (!$self->getFilter()->filter($name)) {
                 unset($data[$name]);
             } else {

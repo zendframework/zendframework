@@ -30,8 +30,9 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      * Check if the given character encoding is supported by this wrapper
      * and the character encoding to convert to is also supported.
      *
-     * @param string      $encoding
-     * @param string|null $convertEncoding
+     * @param  string      $encoding
+     * @param  string|null $convertEncoding
+     * @return bool
      */
     public static function isSupported($encoding, $convertEncoding = null)
     {

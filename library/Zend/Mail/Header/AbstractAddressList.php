@@ -44,8 +44,8 @@ abstract class AbstractAddressList implements HeaderInterface
         $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
         // split into name/value
         list($fieldName, $fieldValue) = explode(':', $decodedLine, 2);
-        $fieldName = \trim($fieldName);
-        $fieldValue = \trim($fieldValue);
+        $fieldName  = trim($fieldName);
+        $fieldValue = trim($fieldValue);
 
         if (strtolower($fieldName) !== static::$type) {
             throw new Exception\InvalidArgumentException(sprintf(

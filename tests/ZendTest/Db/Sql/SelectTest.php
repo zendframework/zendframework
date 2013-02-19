@@ -239,7 +239,22 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $predicates = $where->getPredicates();
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
     }
-
+    
+    /**
+     * @testdox unit test: Test where() will accept any array with string key (without ?) with Predicate throw Exception
+     * @covers Zend\Db\Sql\Select::where
+     * @expectedException Zend\Db\Sql\Exception\InvalidArgumentException
+     */
+    public function testWhereArgument1IsAssociativeArrayIsPredicate()
+    {
+        $select = new Select;
+            $where = array(
+            'name' => new Predicate\Literal("name = 'Ralph'"),
+            'age' => new Predicate\Expression('age = ?', 33),
+        );
+        $select->where($where);
+    }
+    
     /**
      * @testdox unit test: Test where() will accept an indexed array to be used by joining string expressions
      * @covers Zend\Db\Sql\Select::where

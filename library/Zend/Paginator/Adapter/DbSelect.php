@@ -109,12 +109,10 @@ class DbSelect implements AdapterInterface
         $select->reset(Select::ORDER);
         $select->reset(Select::GROUP);
 
-        //get Joins
+        // get join information, clear, and repopulate without columns
         $joins = $select->getRawState(Select::JOINS);
-        //clear Joins
         $select->reset(Select::JOINS);
         foreach ($joins as $join) {
-            // Creates join without columns            
             $select->join($join['name'], $join['on'], array(), $join['type']);
         }
         

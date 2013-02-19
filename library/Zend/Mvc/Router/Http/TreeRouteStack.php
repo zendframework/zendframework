@@ -217,6 +217,14 @@ class TreeRouteStack extends SimpleRouteStack
 
         $path = $this->baseUrl . $route->assemble(array_merge($this->defaultParams, $params), $options);
 
+        if (isset($options['query'])) {
+            $uri->setQuery($options['query']);
+        }
+
+        if (isset($options['fragment'])) {
+            $uri->setFragment($options['fragment']);
+        }
+
         if ((isset($options['force_canonical']) && $options['force_canonical']) || $uri->getHost() !== null) {
             if ($uri->getScheme() === null) {
                 if ($this->requestUri === null) {

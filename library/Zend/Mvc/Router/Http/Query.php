@@ -19,6 +19,7 @@ use Zend\Stdlib\RequestInterface as Request;
  * Query route.
  *
  * @see        http://guides.rubyonrails.org/routing.html
+ * @deprecated
  */
 class Query implements RouteInterface
 {

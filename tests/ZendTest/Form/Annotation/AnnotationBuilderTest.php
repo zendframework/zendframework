@@ -218,7 +218,7 @@ class AnnotationBuilderTest extends TestCase
         $sampleinput = $inputFilter->get('sampleinput');
         $this->assertTrue($sampleinput->allowEmpty());
     }
-    
+
     public function testObjectElementAnnotation()
     {
         $entity = new TestAsset\Annotation\EntityUsingObjectProperty();

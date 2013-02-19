@@ -56,7 +56,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Returns the flash messenger plugin controller
      *
-     * @return FlashMessenger|FlashMessenger\Controller\Plugin\FlashMessenger
+     * @return FlashMessenger|PluginFlashMessenger
      */
     public function __invoke($namespace = null)
     {

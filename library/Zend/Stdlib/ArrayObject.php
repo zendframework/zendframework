@@ -213,7 +213,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
     /**
      * Create a new iterator from an ArrayObject instance
      *
-     * @return Iterator
+     * @return \Iterator
      */
     public function getIterator()
     {

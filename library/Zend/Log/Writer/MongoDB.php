@@ -87,7 +87,7 @@ class MongoDB extends AbstractWriter
     /**
      * This writer does not support formatting.
      *
-     * @param string|Zend\Log\Formatter\FormatterInterface $formatter
+     * @param string|FormatterInterface $formatter
      * @return WriterInterface
      */
     public function setFormatter($formatter)
@@ -100,7 +100,7 @@ class MongoDB extends AbstractWriter
      *
      * @param array $event Event data
      * @return void
-     * @throws Zend\Log\Exception\RuntimeException
+     * @throws Exception\RuntimeException
      */
     protected function doWrite(array $event)
     {

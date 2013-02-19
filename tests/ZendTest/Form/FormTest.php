@@ -1292,4 +1292,25 @@ class FormTest extends TestCase
         // Make sure the object was not hydrated at the "form level"
         $this->assertFalse(isset($object->submit));
     }
+
+    public function testPrepareBindDataAllowsFilterToConvertStringToArray()
+    {
+        $data = array(
+            'foo' => '1,2',
+        );
+
+        $filteredData = array(
+            'foo' => array(1, 2)
+        );
+
+        $element = new TestAsset\ElementWithStringToArrayFilter('foo');
+        $hydrator = $this->getMock('Zend\Stdlib\Hydrator\ArraySerializable');
+        $hydrator->expects($this->any())->method('hydrate')->with($filteredData, $this->anything());
+
+        $this->form->add($element);
+        $this->form->setHydrator($hydrator);
+        $this->form->setObject(new stdClass());
+        $this->form->setData($data);
+        $this->form->bindValues($data);
+    }
 }

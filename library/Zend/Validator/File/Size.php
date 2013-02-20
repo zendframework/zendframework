@@ -229,11 +229,16 @@ class Size extends AbstractValidator
      * not bigger than max (when max is not null).
      *
      * @param  string|array $value File to check for size
+     * @param  array        $file  File data from \Zend\File\Transfer\Transfer (optional)
      * @return bool
      */
-    public function isValid($value)
+    public function isValid($value, $file = null)
     {
-        if (is_array($value)) {
+        if (is_string($value) && is_array($file)) {
+            // Legacy Zend\Transfer API support
+            $filename = $file['name'];
+            $file     = $file['tmp_name'];
+        } elseif (is_array($value)) {
             if (!isset($value['tmp_name']) || !isset($value['name'])) {
                 throw new Exception\InvalidArgumentException(
                     'Value array must be in $_FILES format'

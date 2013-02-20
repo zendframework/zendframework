@@ -179,8 +179,6 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
 
     /**
      * Assert that response is NOT a redirect
-     *
-     * @param  string $message
      */
     public function assertNotRedirect()
     {
@@ -220,7 +218,6 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * Assert that response does not redirect to given URL
      *
      * @param  string $url
-     * @param  string $message
      */
     public function assertNotRedirectTo($url)
     {

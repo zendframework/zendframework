@@ -153,8 +153,10 @@ class Json
      * NOTE: This method is used internally by the encode method.
      *
      * @see encode
-     * @param mixed $valueToCheck a string - object property to be encoded
-     * @return void
+     * @param mixed $value a string - object property to be encoded
+     * @param array $javascriptExpressions
+     * @param null|string|int $currentKey
+     * @return mixed
      */
     protected static function _recursiveJsonExprFinder(
         &$value, array &$javascriptExpressions, $currentKey = null

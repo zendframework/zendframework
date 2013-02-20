@@ -25,8 +25,6 @@ abstract class AbstractSessionArrayStorage implements IteratorAggregate, Storage
      * Constructor
      *
      * @param array|null $input
-     * @param int        $flags
-     * @param string     $iteratorClass
      */
     public function __construct($input = null)
     {
@@ -169,6 +167,7 @@ abstract class AbstractSessionArrayStorage implements IteratorAggregate, Storage
     /**
      * Unserialize
      *
+     * @param  string $session
      * @return mixed
      */
     public function unserialize($session)
@@ -448,8 +447,7 @@ abstract class AbstractSessionArrayStorage implements IteratorAggregate, Storage
     /**
      * Cast the object to an array
      *
-     * Returns data only, no metadata.
-     *
+     * @param  bool $metaData Whether to include metadata
      * @return array
      */
     public function toArray($metaData = false)

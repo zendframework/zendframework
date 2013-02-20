@@ -59,7 +59,6 @@ class MbString extends AbstractStringWrapper
      * Returns the length of the given string
      *
      * @param string $str
-     * @param string $encoding
      * @return int|false
      */
     public function strlen($str)
@@ -73,7 +72,6 @@ class MbString extends AbstractStringWrapper
      * @param string   $str
      * @param int      $offset
      * @param int|null $length
-     * @param string   $encoding
      * @return string|false
      */
     public function substr($str, $offset = 0, $length = null)
@@ -87,7 +85,6 @@ class MbString extends AbstractStringWrapper
      * @param string $haystack
      * @param string $needle
      * @param int    $offset
-     * @param string $encoding
      * @return int|false
      */
     public function strpos($haystack, $needle, $offset = 0)

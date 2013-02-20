@@ -1124,6 +1124,38 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->isValid());
     }
 
+    public function testFormValidationCanHandleNonConsecutiveKeysOfCollectionInData()
+    {
+        $dataWithCollection = array(
+            'foo' => 'bar',
+            'categories' => array(
+                0 => array('name' => 'cat1'),
+                1 => array('name' => 'cat2'),
+                3 => array('name' => 'cat3'),
+            ),
+        );
+        $this->populateForm();
+        $this->form->add(array(
+            'type' => 'Zend\Form\Element\Collection',
+            'name' => 'categories',
+            'options' => array(
+                'count' => 1,
+                'allow_add' => true,
+                'target_element' => array(
+                    'type' => 'ZendTest\Form\TestAsset\CategoryFieldset'
+                )
+            )
+        ));
+        $this->form->setValidationGroup(array(
+            'foo',
+            'categories' => array(
+                'name'
+            )
+        ));
+        $this->form->setData($dataWithCollection);
+        $this->assertTrue($this->form->isValid());
+    }
+
     public function testAddNonBaseFieldsetObjectInputFilterToFormInputFilter()
     {
         $fieldset = new Fieldset('foobar');

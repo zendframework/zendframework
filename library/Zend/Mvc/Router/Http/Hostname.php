@@ -206,12 +206,11 @@ class Hostname implements RouteInterface
      * @param  array   $parts
      * @param  array   $mergedParams
      * @param  bool $isOptional
-     * @param  bool $hasChild
      * @return string
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */
-    protected function buildHost(array $parts, array $mergedParams, $isOptional, $hasChild)
+    protected function buildHost(array $parts, array $mergedParams, $isOptional)
     {
         $host      = '';
         $skip      = true;
@@ -227,12 +226,12 @@ class Hostname implements RouteInterface
                     $skippable = true;
 
                     if (!isset($mergedParams[$part[1]])) {
-                        if (!$isOptional || $hasChild) {
+                        if (!$isOptional) {
                             throw new Exception\InvalidArgumentException(sprintf('Missing parameter "%s"', $part[1]));
                         }
 
                         return '';
-                    } elseif (!$isOptional || $hasChild || !isset($this->defaults[$part[1]]) || $this->defaults[$part[1]] !== $mergedParams[$part[1]]) {
+                    } elseif (!$isOptional || !isset($this->defaults[$part[1]]) || $this->defaults[$part[1]] !== $mergedParams[$part[1]]) {
                         $skip = false;
                     }
 
@@ -243,7 +242,7 @@ class Hostname implements RouteInterface
 
                 case 'optional':
                     $skippable    = true;
-                    $optionalPart = $this->buildHost($part[1], $mergedParams, true, $hasChild);
+                    $optionalPart = $this->buildHost($part[1], $mergedParams, true);
 
                     if ($optionalPart !== '') {
                         $host .= $optionalPart;
@@ -312,8 +311,7 @@ class Hostname implements RouteInterface
             $host = $this->buildHost(
                 $this->parts,
                 array_merge($this->defaults, $params),
-                false,
-                (isset($options['has_child']) ? $options['has_child'] : false)
+                false
             );
 
             $options['uri']->setHost($host);

@@ -215,6 +215,13 @@ class Predicate extends PredicateSet
         return $this;
     }
 
+    /**
+     * Create an expression, with parameter placeholders
+     *
+     * @param $expression
+     * @param $parameters
+     * @return $this
+     */
     public function expression($expression, $parameters)
     {
         $this->addPredicate(
@@ -229,19 +236,24 @@ class Predicate extends PredicateSet
     /**
      * Create "Literal" predicate
      *
-     * Utilizes Like predicate
+     * Literal predicate, for parameters, use expression()
      *
      * @param  string $literal
-     * @param  int|float|bool|string|array $parameter
      * @return Predicate
      */
-    public function literal($literal, $expressionParameters = null)
+    public function literal($literal)
     {
-        if ($expressionParameters) {
-            $predicate = new Expression($literal, $expressionParameters);
-        } else {
+        // process deprecated parameters from previous literal($literal, $parameters = null) signature
+        if (func_num_args() >= 2) {
+            $parameters = func_get_arg(1);
+            $predicate = new Expression($literal, $parameters);
+        }
+
+        // normal workflow for "Literals" here
+        if (!isset($predicate)) {
             $predicate = new Literal($literal);
         }
+
         $this->addPredicate(
             $predicate,
             ($this->nextPredicateCombineOperator) ?: $this->defaultCombination

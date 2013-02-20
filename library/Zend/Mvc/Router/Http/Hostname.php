@@ -21,7 +21,8 @@ use Zend\Stdlib\RequestInterface as Request;
  */
 class Hostname implements RouteInterface
 {
-    /* Parts of the route.
+    /**
+     * Parts of the route.
      *
      * @var array
      */

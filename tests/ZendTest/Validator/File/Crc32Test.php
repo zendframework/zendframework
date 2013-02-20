@@ -75,6 +75,23 @@ class Crc32Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that the validator follows expected behavior for legacy Zend\Transfer API
+     *
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
+     */
+    public function testLegacy($options, $isValidParam, $expected, $messageKey)
+    {
+        if (is_array($isValidParam)) {
+            $validator = new File\Crc32($options);
+            $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
+            if (!$expected) {
+                $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+            }
+        }
+    }
+
+    /**
      * Ensures that getCrc32() returns expected value
      *
      * @return void

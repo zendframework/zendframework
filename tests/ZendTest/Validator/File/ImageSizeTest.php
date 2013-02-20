@@ -113,6 +113,29 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that the validator follows expected behavior for legacy Zend\Transfer API
+     *
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
+     */
+    public function testLegacy($options, $isValidParam, $expected, $messageKeys)
+    {
+        // Test legacy Zend\Transfer API
+        if (is_array($isValidParam)) {
+            $validator = new File\ImageSize($options);
+            $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
+            if (!$expected) {
+                if (!is_array($messageKeys)) {
+                    $messageKeys = array($messageKeys);
+                }
+                foreach ($messageKeys as $messageKey) {
+                    $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+                }
+            }
+        }
+    }
+
+    /**
      * Ensures that getImageMin() returns expected value
      *
      * @return void

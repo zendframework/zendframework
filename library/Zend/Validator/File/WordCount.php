@@ -166,12 +166,17 @@ class WordCount extends AbstractValidator
      * Returns true if and only if the counted words are at least min and
      * not bigger than max (when max is not null).
      *
-     * @param  string $value|array Filename to check for word count
+     * @param  string|array $value Filename to check for word count
+     * @param  array        $file  File data from \Zend\File\Transfer\Transfer (optional)
      * @return bool
      */
-    public function isValid($value)
+    public function isValid($value, $file = null)
     {
-        if (is_array($value)) {
+        if (is_string($value) && is_array($file)) {
+            // Legacy Zend\Transfer API support
+            $filename = $file['name'];
+            $file     = $file['tmp_name'];
+        } elseif (is_array($value)) {
             if (!isset($value['tmp_name']) || !isset($value['name'])) {
                 throw new Exception\InvalidArgumentException(
                     'Value array must be in $_FILES format'

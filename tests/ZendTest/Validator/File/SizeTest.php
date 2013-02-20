@@ -64,6 +64,20 @@ class SizeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that the validator follows expected behavior for legacy Zend\Transfer API
+     *
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
+     */
+    public function testLegacy($options, $isValidParam, $expected)
+    {
+        if (is_array($isValidParam)) {
+            $validator = new File\Size($options);
+            $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
+        }
+    }
+
+    /**
      * Ensures that getMin() returns expected value
      *
      * @return void

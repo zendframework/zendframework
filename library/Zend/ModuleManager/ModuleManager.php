@@ -77,7 +77,16 @@ class ModuleManager implements ModuleManagerInterface
             return $this;
         }
 
-        foreach ($this->getModules() as $module) {
+        foreach ($this->getModules() as $moduleName => $module) {
+            if (is_object($module)) {
+                if (!is_string($moduleName)) {
+                    throw new Exception\RuntimeException(sprintf(
+                        'Module (%s) must have a key identifier.',
+                        get_class($module)
+                    ));
+                }
+                $module = array($moduleName => $module);
+            }
             $this->loadModule($module);
         }
 
@@ -113,7 +122,7 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Load a specific module by name.
      *
-     * @param    string|object $module
+     * @param    string|array $module
      * @throws   Exception\RuntimeException
      * @triggers loadModule.resolve
      * @triggers loadModule
@@ -122,8 +131,9 @@ class ModuleManager implements ModuleManagerInterface
     public function loadModule($module)
     {
         $moduleName = $module;
-        if(is_object($module)) {
-            $moduleName = substr(get_class($module), 0, strpos(get_class($module), '\\'));
+        if (is_array($module)) {
+            $moduleName = key($module);
+            $module = current($module);
         }
         
         if (isset($this->loadedModules[$moduleName])) {
@@ -133,7 +143,7 @@ class ModuleManager implements ModuleManagerInterface
         $event = ($this->loadFinished === false) ? clone $this->getEvent() : $this->getEvent();
         $event->setModuleName($moduleName);
         
-        if(!is_object($module)) {
+        if (!is_object($module)) {
             $this->loadFinished = false;
 
             $result = $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, $this, $event, function ($r) {

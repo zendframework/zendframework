@@ -10,6 +10,7 @@ namespace Zend\Test\PHPUnit\Controller;
 
 use PHPUnit_Framework_TestCase;
 use PHPUnit_Framework_ExpectationFailedException;
+use Zend\Console\Console;
 use Zend\EventManager\StaticEventManager;
 use Zend\Http\Request as HttpRequest;
 use Zend\Mvc\Application;
@@ -133,16 +134,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             return $this->application;
         }
         $appConfig = $this->applicationConfig;
-        if (!$this->useConsoleRequest) {
-            $consoleServiceConfig = array(
-                'service_manager' => array(
-                    'factories' => array(
-                        'ServiceListener' => 'Zend\Test\PHPUnit\Mvc\Service\ServiceListenerFactory',
-                    ),
-                ),
-            );
-            $appConfig = array_replace_recursive($appConfig, $consoleServiceConfig);
-        }
+        Console::overrideIsConsole($this->getUseConsoleRequest());
         $this->application = Application::init($appConfig);
 
         $events = $this->application->getEventManager();

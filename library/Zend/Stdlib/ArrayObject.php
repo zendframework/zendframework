@@ -178,11 +178,22 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
     /**
      * Exchange the array for another one.
      *
-     * @param  array $data
+     * @param  array|ArrayObject $data
      * @return array
      */
-    public function exchangeArray(array $data)
+    public function exchangeArray($data)
     {
+        if (!is_array($data) && !is_object($data)) {
+            throw new Exception\InvalidArgumentException('Passed variable is not an array or object, using empty array instead');
+        }
+
+        if (is_object($data) && ($data instanceof ArrayObject || $data instanceof \ArrayObject)) {
+            $data = $data->getArrayCopy();
+        }
+        if (!is_array($data)) {
+            $data = (array) $data;
+        }
+
         $storage = $this->storage;
 
         $this->storage = $data;

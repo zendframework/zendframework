@@ -528,6 +528,17 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->container->offsetExists('new'), "'exchangeArray' doesn't add the new array items");
     }
 
+    public function testExchangeArrayObject()
+    {
+        $this->container->offsetSet('old', 'old');
+        $this->assertTrue($this->container->offsetExists('old'));
+
+        $old = $this->container->exchangeArray(new \Zend\Stdlib\ArrayObject(array('new' => 'new')));
+        $this->assertArrayHasKey('old', $old, "'exchangeArray' doesn't return an array of old items");
+        $this->assertFalse($this->container->offsetExists('old'), "'exchangeArray' doesn't remove old items");
+        $this->assertTrue($this->container->offsetExists('new'), "'exchangeArray' doesn't add the new array items");
+    }
+
     public function testMultiDimensionalUnset()
     {
         if (version_compare(PHP_VERSION, '5.3.4') < 0) {

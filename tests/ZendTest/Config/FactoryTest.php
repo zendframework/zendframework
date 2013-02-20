@@ -32,7 +32,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        foreach($this->tmpFiles as $file) {
+        foreach ($this->tmpFiles as $file) {
             if (file_exists($file)) {
                 if (!is_writable($file)) {
                     chmod($file, 0777);

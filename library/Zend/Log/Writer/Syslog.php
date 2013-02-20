@@ -108,7 +108,7 @@ class Syslog extends AbstractWriter
             $this->initializeSyslog();
         }
 
-        if($this->formatter === null) {
+        if ($this->formatter === null) {
             $this->setFormatter(new SimpleFormatter('%message%'));
         }
     }

@@ -109,7 +109,7 @@ class Mail extends AbstractWriter
         }
         $this->setTransport($transport);
 
-        if($this->formatter === null) {
+        if ($this->formatter === null) {
             $this->formatter = new SimpleFormatter();
         }
     }

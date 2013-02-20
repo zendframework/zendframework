@@ -47,7 +47,7 @@ abstract class AbstractSql
         // initialize variables
         $parts = $expression->getExpressionData();
 
-        if(!isset($this->instanceParameterIndex[$namedParameterPrefix])) {
+        if (!isset($this->instanceParameterIndex[$namedParameterPrefix])) {
             $this->instanceParameterIndex[$namedParameterPrefix] = 1;
         }
 

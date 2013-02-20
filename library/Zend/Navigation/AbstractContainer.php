@@ -159,6 +159,9 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
         }
 
         foreach ($pages as $page) {
+            if (null === $page) {
+                continue;
+            }
             $this->addPage($page);
         }
 

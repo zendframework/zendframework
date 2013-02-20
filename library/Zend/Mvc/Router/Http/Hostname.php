@@ -282,7 +282,6 @@ class Hostname implements RouteInterface
             return null;
         }
 
-        $matchedLength = strlen($matches[0]);
         $params        = array();
 
         foreach ($this->paramMap as $index => $name) {
@@ -292,7 +291,7 @@ class Hostname implements RouteInterface
             }
         }
 
-        return new RouteMatch(array_merge($this->defaults, $params), $matchedLength);
+        return new RouteMatch(array_merge($this->defaults, $params));
     }
 
     /**

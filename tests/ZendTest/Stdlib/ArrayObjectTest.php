@@ -121,6 +121,51 @@ class ArrayObjectTest extends TestCase
         $this->assertSame(array('bar' => 'baz'), $ar->getArrayCopy());
     }
 
+    public function testExchangeArrayPhpArrayObject()
+    {
+        $ar = new ArrayObject(array('foo' => 'bar'));
+        $old = $ar->exchangeArray(new \ArrayObject(array('bar' => 'baz')));
+
+        $this->assertSame(array('foo' => 'bar'), $old);
+        $this->assertSame(array('bar' => 'baz'), $ar->getArrayCopy());
+    }
+
+    public function testExchangeArrayStdlibArrayObject()
+    {
+        $ar = new ArrayObject(array('foo' => 'bar'));
+        $old = $ar->exchangeArray(new ArrayObject(array('bar' => 'baz')));
+
+        $this->assertSame(array('foo' => 'bar'), $old);
+        $this->assertSame(array('bar' => 'baz'), $ar->getArrayCopy());
+    }
+
+    public function testExchangeArrayTestAssetIterator()
+    {
+        $ar = new ArrayObject();
+        $ar->exchangeArray(new TestAsset\ArrayObjectIterator(array('foo' => 'bar')));
+
+        // make sure it does what php array object does:
+        $ar2 = new \ArrayObject();
+        $ar2->exchangeArray(new TestAsset\ArrayObjectIterator(array('foo' => 'bar')));
+
+        $this->assertEquals($ar2->getArrayCopy(), $ar->getArrayCopy());
+    }
+
+    public function testExchangeArrayArrayIterator()
+    {
+        $ar = new ArrayObject();
+        $ar->exchangeArray(new \ArrayIterator(array('foo' => 'bar')));
+
+        $this->assertEquals(array('foo' => 'bar'), $ar->getArrayCopy());
+    }
+
+    public function testExchangeArrayStringArgumentFail()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $ar     = new ArrayObject(array('foo' => 'bar'));
+        $old    = $ar->exchangeArray('Bacon');
+    }
+
     public function testGetArrayCopy()
     {
         $ar = new ArrayObject(array('foo' => 'bar'));
@@ -302,6 +347,7 @@ class ArrayObjectTest extends TestCase
             if ($a == $b) {
                 return 0;
             }
+
             return ($a < $b) ? -1 : 1;
         };
         $ar = new ArrayObject(array('a' => 4, 'b' => 8, 'c' => -1, 'd' => -9, 'e' => 2, 'f' => 5, 'g' => 3, 'h' => -4));
@@ -316,6 +362,7 @@ class ArrayObjectTest extends TestCase
         $function = function ($a, $b) {
             $a = preg_replace('@^(a|an|the) @', '', $a);
             $b = preg_replace('@^(a|an|the) @', '', $b);
+
             return strcasecmp($a, $b);
         };
 

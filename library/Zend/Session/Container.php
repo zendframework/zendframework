@@ -20,18 +20,6 @@ namespace Zend\Session;
 class Container extends AbstractContainer
 {
     /**
-     * Exchange the current array with another array or object.
-     *
-     * @param  array|object $input
-     * @return array        Returns the old array
-     * @see ArrayObject::exchangeArray()
-     */
-    public function exchangeArray(array $input)
-    {
-        return parent::exchangeArrayCompat($input);
-    }
-
-    /**
      * Retrieve a specific key in the container
      *
      * @param  string $key

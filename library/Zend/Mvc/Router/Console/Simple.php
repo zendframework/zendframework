@@ -205,7 +205,7 @@ class Simple implements RouteInterface
              */
             if (preg_match('/\G--(?<name>[a-zA-Z0-9][a-zA-Z0-9\_\-]+)(?<hasValue>=\S*?)?(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
-                    'name'       => strtolower( $m['name'] ),
+                    'name'       => $m['name'],
                     'short'      => false,
                     'literal'    => false,
                     'required'   => true,
@@ -221,7 +221,7 @@ class Simple implements RouteInterface
                 '/\G\[ *?--(?<name>[a-zA-Z0-9][a-zA-Z0-9\_\-]+) *?\](?: +|$)/s', $def, $m, 0, $pos
             )) {
                 $item = array(
-                    'name'       => strtolower($m['name']),
+                    'name'       => $m['name'],
                     'short'      => false,
                     'literal'    => false,
                     'required'   => false,
@@ -238,7 +238,7 @@ class Simple implements RouteInterface
                 '/\G\[ *?--(?<name>[a-zA-Z0-9][a-zA-Z0-9\_\-]+)(?<hasValue>=\S*?)? *?\](?: +|$)/s', $def, $m, 0, $pos
             )) {
                 $item = array(
-                    'name'       => strtolower( $m['name'] ),
+                    'name'       => $m['name'],
                     'short'      => false,
                     'literal'    => false,
                     'required'   => false,
@@ -255,7 +255,7 @@ class Simple implements RouteInterface
              */
             elseif (preg_match('/\G-(?<name>[a-zA-Z0-9])(?:=(?<type>[ns]))?(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
-                    'name'       => strtolower($m['name']),
+                    'name'       => $m['name'],
                     'short'      => true,
                     'literal'    => false,
                     'required'   => true,
@@ -271,7 +271,7 @@ class Simple implements RouteInterface
              */
             elseif (preg_match('/\G\[ *?-(?<name>[a-zA-Z0-9])(?:=(?<type>[ns]))? *?\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
-                    'name'       => strtolower( $m['name'] ),
+                    'name'       => $m['name'],
                     'short'      => true,
                     'literal'    => false,
                     'required'   => false,
@@ -578,23 +578,23 @@ class Simple implements RouteInterface
                 if ($part['hasValue']) {
                     $regex .= ')(?:\=(?<value>.*?)$)?$/';
                 } else {
-                    $regex .= ')$/';
+                    $regex .= ')$/i';
                 }
             } else {
                 // a single named flag
                 if ($part['short'] === true) {
                     // short variant
                     if ($part['hasValue']) {
-                        $regex = '/^\-' . $part['name'] . '(?:\=(?<value>.*?)$)?$/';
+                        $regex = '/^\-' . $part['name'] . '(?:\=(?<value>.*?)$)?$/i';
                     } else {
-                        $regex = '/^\-' . $part['name'] . '$/';
+                        $regex = '/^\-' . $part['name'] . '$/i';
                     }
                 } elseif ($part['short'] === false) {
                     // long variant
                     if ($part['hasValue']) {
-                        $regex = '/^\-{2,}' . $part['name'] . '(?:\=(?<value>.*?)$)?$/';
+                        $regex = '/^\-{2,}' . $part['name'] . '(?:\=(?<value>.*?)$)?$/i';
                     } else {
-                        $regex = '/^\-{2,}' . $part['name'] . '$/';
+                        $regex = '/^\-{2,}' . $part['name'] . '$/i';
                     }
                 }
             }
@@ -604,7 +604,7 @@ class Simple implements RouteInterface
              */
             $value = $param = null;
             for ($x = 0, $count = count($params); $x < $count; $x++) {
-                if (preg_match($regex, strtolower($params[$x]), $m)) {
+                if (preg_match($regex, $params[$x], $m)) {
                     // found param
                     $param = $params[$x];
 

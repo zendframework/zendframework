@@ -43,7 +43,8 @@ class Identical extends AbstractValidator
      */
     protected $tokenString;
     protected $token;
-    protected $strict = true;
+    protected $strict  = true;
+    protected $literal = false;
 
     /**
      * Sets validator options
@@ -59,6 +60,10 @@ class Identical extends AbstractValidator
         if (is_array($token) && array_key_exists('token', $token)) {
             if (array_key_exists('strict', $token)) {
                 $this->setStrict($token['strict']);
+            }
+
+            if (array_key_exists('literal', $token)) {
+                $this->setLiteral($token['literal']);
             }
 
             $this->setToken($token['token']);
@@ -115,6 +120,28 @@ class Identical extends AbstractValidator
     }
 
     /**
+     * Returns the literal parameter
+     *
+     * @return bool
+     */
+    public function getLiteral()
+    {
+        return $this->literal;
+    }
+
+    /**
+     * Sets the literal parameter
+     *
+     * @param Zend\Validator\Identical
+     * @return Identical
+     */
+    public function setLiteral($literal)
+    {
+        $this->literal = (bool) $literal;
+        return $this;
+    }
+
+    /**
      * Returns true if and only if a token has been set and the provided value
      * matches that token.
      *
@@ -129,7 +156,7 @@ class Identical extends AbstractValidator
 
         $token = $this->getToken();
 
-        if ($context !== null) {
+        if (!$this->getLiteral() && $context !== null) {
             if (!is_array($context)) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'Context passed to %s must be an array or null; received "%s"',

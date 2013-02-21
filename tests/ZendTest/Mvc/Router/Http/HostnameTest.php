@@ -57,6 +57,15 @@ class HostnameTest extends TestCase
                 '123.example.com',
                 array('foo' => '123')
             ),
+            'constraints-allow-match-2' => array(
+                new Hostname(
+                    'www.:domain.com',
+                    array('domain' => '(mydomain|myaltdomain1|myaltdomain2)'),
+                    array('domain'    => 'mydomain')
+                ),
+                'www.mydomain.com',
+                array('domain' => 'mydomain')
+            ),
             'optional-subdomain' => array(
                 new Hostname('[:foo.]example.com'),
                 'bar.example.com',
@@ -75,10 +84,25 @@ class HostnameTest extends TestCase
             'one-of-two-missing-optional-subdomain' => array(
                 new Hostname('[:foo.][:bar.]example.com'),
                 'bat.example.com',
-                array('foo' => null, 'bar' => 'bat'),
+                array('foo' => null, 'foo' => 'bat'),
             ),
             'two-missing-optional-subdomain' => array(
                 new Hostname('[:foo.][:bar.]example.com'),
+                'example.com',
+                array('foo' => null, 'bar' => null),
+            ),
+            'two-optional-subdomain-nested' => array(
+                new Hostname('[[:foo.]:bar.]example.com'),
+                'baz.bat.example.com',
+                array('foo' => 'baz', 'bar' => 'bat'),
+            ),
+            'one-of-two-missing-optional-subdomain-nested' => array(
+                new Hostname('[[:foo.]:bar.]example.com'),
+                'bat.example.com',
+                array('foo' => null, 'bar' => 'bat'),
+            ),
+            'two-missing-optional-subdomain-nested' => array(
+                new Hostname('[[:foo.]:bar.]example.com'),
                 'example.com',
                 array('foo' => null, 'bar' => null),
             ),

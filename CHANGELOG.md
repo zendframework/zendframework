@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2.1.3 (21 Feb 2013):
+
+- 3714: Zend\Stdlib\ArrayObject::offsetExists() returning by reference
+  (https://github.com/zendframework/zf2/issues/3714)
+- 3855: Fix #3852
+  (https://github.com/zendframework/zf2/issues/3855)
+- 3856: Simple route case insensitive
+  (https://github.com/zendframework/zf2/issues/3856)
+
 ## 2.1.2 (20 Feb 2013):
 
 - 3085: create controller via Zend\Mvc\Controller\ControllerManager

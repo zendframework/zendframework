@@ -170,7 +170,6 @@ class Hostname implements RouteInterface
     {
         $regex = '';
 
-        // Reverse the parts to build the regex in reverse
         foreach ($parts as $part) {
             switch ($part[0]) {
                 case 'literal':
@@ -275,7 +274,6 @@ class Hostname implements RouteInterface
         $uri  = $request->getUri();
         $host = $uri->getHost();
 
-        // reverse the host as the regex was built backwards
         $result = preg_match('(^' . $this->regex . '$)', $host, $matches);
 
         if (!$result) {
@@ -286,7 +284,6 @@ class Hostname implements RouteInterface
 
         foreach ($this->paramMap as $index => $name) {
             if (isset($matches[$index]) && $matches[$index] !== '') {
-                // reverse the param as the preg_match was done on reverse host
                 $params[$name] = $matches[$index];
             }
         }

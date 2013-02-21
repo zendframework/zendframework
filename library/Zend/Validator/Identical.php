@@ -77,7 +77,7 @@ class Identical extends AbstractValidator
     /**
      * Retrieve token
      *
-     * @return string
+     * @return mixed
      */
     public function getToken()
     {
@@ -110,7 +110,7 @@ class Identical extends AbstractValidator
     /**
      * Sets the strict parameter
      *
-     * @param Zend\Validator\Identical
+     * @param  bool $strict
      * @return Identical
      */
     public function setStrict($strict)
@@ -132,7 +132,7 @@ class Identical extends AbstractValidator
     /**
      * Sets the literal parameter
      *
-     * @param Zend\Validator\Identical
+     * @param  bool $literal
      * @return Identical
      */
     public function setLiteral($literal)

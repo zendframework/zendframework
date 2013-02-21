@@ -604,7 +604,7 @@ class Simple implements RouteInterface
              */
             $value = $param = null;
             for ($x = 0, $count = count($params); $x < $count; $x++) {
-                if (preg_match($regex, $params[$x], $m)) {
+                if (preg_match($regex, strtolower($params[$x]), $m)) {
                     // found param
                     $param = $params[$x];
 

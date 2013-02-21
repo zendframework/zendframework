@@ -171,10 +171,10 @@ class Hostname implements RouteInterface
         $regex = '';
 
         // Reverse the parts to build the regex in reverse
-        foreach (array_reverse($parts) as $part) {
+        foreach ($parts as $part) {
             switch ($part[0]) {
                 case 'literal':
-                    $regex .= preg_quote(strrev($part[1]));
+                    $regex .= preg_quote($part[1]);
                     break;
 
                 case 'parameter':
@@ -276,7 +276,7 @@ class Hostname implements RouteInterface
         $host = $uri->getHost();
 
         // reverse the host as the regex was built backwards
-        $result = preg_match('(^' . $this->regex . '$)', strrev($host), $matches);
+        $result = preg_match('(^' . $this->regex . '$)', $host, $matches);
 
         if (!$result) {
             return null;
@@ -287,7 +287,7 @@ class Hostname implements RouteInterface
         foreach ($this->paramMap as $index => $name) {
             if (isset($matches[$index]) && $matches[$index] !== '') {
                 // reverse the param as the preg_match was done on reverse host
-                $params[$name] = strrev($matches[$index]);
+                $params[$name] = $matches[$index];
             }
         }
 

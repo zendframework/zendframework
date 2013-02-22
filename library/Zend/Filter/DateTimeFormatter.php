@@ -24,7 +24,7 @@ class DateTimeFormatter extends AbstractFilter
     /**
      * Sets filter options
      *
-     * @param  string|array|\Zend\Config\Config $options
+     * @param array|Traversable $options
      */
     public function __construct($options = null)
     {

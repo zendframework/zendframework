@@ -152,7 +152,7 @@ class Identical extends AbstractValidator
             // if $token is an array it means the above loop didn't went all the way down to the leaf,
             // so the $token structure doesn't match the $context structure
             if (is_array($token) || !isset($context[$token])) {
-                throw new Exception\RuntimeException("The token doesn't exist in the context");
+                $token = $this->getToken();
             } else {
                 $token = $context[$token];
             }

@@ -24,87 +24,40 @@ class Serializer extends AbstractPlugin
     protected $capabilities = array();
 
     /**
-     * Handles
-     *
-     * @var array
-     */
-    protected $handles = array();
-
-    /**
-     * Attach
-     *
-     * @param  EventManagerInterface $events
-     * @param  int                   $priority
-     * @return Serializer
-     * @throws Exception\LogicException
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $index = spl_object_hash($events);
-        if (isset($this->handles[$index])) {
-            throw new Exception\LogicException('Plugin already attached');
-        }
-
-        $handles = array();
-        $this->handles[$index] = & $handles;
-
         // The higher the priority the sooner the plugin will be called on pre events
         // but the later it will be called on post events.
         $prePriority  = $priority;
         $postPriority = -$priority;
 
         // read
-        $handles[] = $events->attach('getItem.post',  array($this, 'onReadItemPost'), $postPriority);
-        $handles[] = $events->attach('getItems.post', array($this, 'onReadItemsPost'), $postPriority);
+        $this->callbacks[] = $events->attach('getItem.post',  array($this, 'onReadItemPost'), $postPriority);
+        $this->callbacks[] = $events->attach('getItems.post', array($this, 'onReadItemsPost'), $postPriority);
 
         // write
-        $handles[] = $events->attach('setItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
-        $handles[] = $events->attach('setItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
+        $this->callbacks[] = $events->attach('setItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
+        $this->callbacks[] = $events->attach('setItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
 
-        $handles[] = $events->attach('addItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
-        $handles[] = $events->attach('addItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
+        $this->callbacks[] = $events->attach('addItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
+        $this->callbacks[] = $events->attach('addItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
 
-        $handles[] = $events->attach('replaceItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
-        $handles[] = $events->attach('replaceItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
+        $this->callbacks[] = $events->attach('replaceItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
+        $this->callbacks[] = $events->attach('replaceItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
 
-        $handles[] = $events->attach('checkAndSetItem.pre', array($this, 'onWriteItemPre'), $prePriority);
+        $this->callbacks[] = $events->attach('checkAndSetItem.pre', array($this, 'onWriteItemPre'), $prePriority);
 
         // increment / decrement item(s)
-        $handles[] = $events->attach('incrementItem.pre', array($this, 'onIncrementItemPre'), $prePriority);
-        $handles[] = $events->attach('incrementItems.pre', array($this, 'onIncrementItemsPre'), $prePriority);
+        $this->callbacks[] = $events->attach('incrementItem.pre', array($this, 'onIncrementItemPre'), $prePriority);
+        $this->callbacks[] = $events->attach('incrementItems.pre', array($this, 'onIncrementItemsPre'), $prePriority);
 
-        $handles[] = $events->attach('decrementItem.pre', array($this, 'onDecrementItemPre'), $prePriority);
-        $handles[] = $events->attach('decrementItems.pre', array($this, 'onDecrementItemsPre'), $prePriority);
+        $this->callbacks[] = $events->attach('decrementItem.pre', array($this, 'onDecrementItemPre'), $prePriority);
+        $this->callbacks[] = $events->attach('decrementItems.pre', array($this, 'onDecrementItemsPre'), $prePriority);
 
         // overwrite capabilities
-        $handles[] = $events->attach('getCapabilities.post',  array($this, 'onGetCapabilitiesPost'), $postPriority);
-
-        return $this;
-    }
-
-    /**
-     * Detach
-     *
-     * @param  EventManagerInterface $events
-     * @return Serializer
-     * @throws Exception\LogicException
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        $index = spl_object_hash($events);
-        if (!isset($this->handles[$index])) {
-            throw new Exception\LogicException('Plugin not attached');
-        }
-
-        // detach all handles of this index
-        foreach ($this->handles[$index] as $handle) {
-            $events->detach($handle);
-        }
-
-        // remove all detached handles
-        unset($this->handles[$index]);
-
-        return $this;
+        $this->callbacks[] = $events->attach('getCapabilities.post',  array($this, 'onGetCapabilitiesPost'), $postPriority);
     }
 
     /**

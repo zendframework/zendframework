@@ -49,24 +49,8 @@ class MockPlugin extends AbstractPlugin
 
     public function attach(EventManagerInterface $eventCollection)
     {
-        $handles = array();
         foreach ($this->eventCallbacks as $eventName => $method) {
-            $handles[] = $eventCollection->attach($eventName, array($this, $method));
-        }
-        $this->handles[ \spl_object_hash($eventCollection) ] = $handles;
-    }
-
-    public function detach(EventManagerInterface $eventCollection)
-    {
-        $index = \spl_object_hash($eventCollection);
-        foreach ($this->handles[$index] as $i => $handle) {
-            $eventCollection->detach($handle);
-            unset($this->handles[$index][$i]);
-        }
-
-        // remove empty handles of event collection
-        if (!$this->handles[$index]) {
-            unset($this->handles[$index]);
+            $this->callbacks[] = $eventCollection->attach($eventName, array($this, $method));
         }
     }
 
@@ -82,7 +66,7 @@ class MockPlugin extends AbstractPlugin
 
     public function getHandles()
     {
-        return $this->handles;
+        return $this->callbacks;
     }
 
     public function getEventCallbacks()

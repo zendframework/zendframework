@@ -9,46 +9,21 @@
 
 namespace Zend\Mvc\View\Http;
 
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface as Events;
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View\Model\ViewModel;
 
-class CreateViewModelListener implements ListenerAggregateInterface
+class CreateViewModelListener extends AbstractListenerAggregate
 {
     /**
-     * Listeners we've registered
-     *
-     * @var array
-     */
-    protected $listeners = array();
-
-    /**
-     * Attach listeners
-     *
-     * @param  Events $events
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(Events $events)
     {
-        $this->listeners[] = $events->attach('dispatch', array($this, 'createViewModelFromArray'),  -80);
-        $this->listeners[] = $events->attach('dispatch', array($this, 'createViewModelFromNull'),   -80);
-    }
-
-    /**
-     * Detach listeners
-     *
-     * @param  Events $events
-     * @return void
-     */
-    public function detach(Events $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
+        $this->callbacks[] = $events->attach('dispatch', array($this, 'createViewModelFromArray'),  -80);
+        $this->callbacks[] = $events->attach('dispatch', array($this, 'createViewModelFromNull'),   -80);
     }
 
     /**

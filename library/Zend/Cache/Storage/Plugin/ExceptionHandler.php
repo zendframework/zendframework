@@ -16,92 +16,46 @@ use Zend\EventManager\EventManagerInterface;
 class ExceptionHandler extends AbstractPlugin
 {
     /**
-     * Handles
-     *
-     * @var array
-     */
-    protected $handles = array();
-
-    /**
-     * Attach
-     *
-     * @param  EventManagerInterface $events
-     * @param  int                   $priority
-     * @return ExceptionHandler
-     * @throws Exception\LogicException
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $index = spl_object_hash($events);
-        if (isset($this->handles[$index])) {
-            throw new Exception\LogicException('Plugin already attached');
-        }
-
         $callback = array($this, 'onException');
-        $handles  = array();
-        $this->handles[$index] = & $handles;
 
         // read
-        $handles[] = $events->attach('getItem.exception', $callback, $priority);
-        $handles[] = $events->attach('getItems.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('getItem.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('getItems.exception', $callback, $priority);
 
-        $handles[] = $events->attach('hasItem.exception', $callback, $priority);
-        $handles[] = $events->attach('hasItems.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('hasItem.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('hasItems.exception', $callback, $priority);
 
-        $handles[] = $events->attach('getMetadata.exception', $callback, $priority);
-        $handles[] = $events->attach('getMetadatas.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('getMetadata.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('getMetadatas.exception', $callback, $priority);
 
         // write
-        $handles[] = $events->attach('setItem.exception', $callback, $priority);
-        $handles[] = $events->attach('setItems.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('setItem.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('setItems.exception', $callback, $priority);
 
-        $handles[] = $events->attach('addItem.exception', $callback, $priority);
-        $handles[] = $events->attach('addItems.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('addItem.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('addItems.exception', $callback, $priority);
 
-        $handles[] = $events->attach('replaceItem.exception', $callback, $priority);
-        $handles[] = $events->attach('replaceItems.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('replaceItem.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('replaceItems.exception', $callback, $priority);
 
-        $handles[] = $events->attach('touchItem.exception', $callback, $priority);
-        $handles[] = $events->attach('touchItems.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('touchItem.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('touchItems.exception', $callback, $priority);
 
-        $handles[] = $events->attach('removeItem.exception', $callback, $priority);
-        $handles[] = $events->attach('removeItems.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('removeItem.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('removeItems.exception', $callback, $priority);
 
-        $handles[] = $events->attach('checkAndSetItem.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('checkAndSetItem.exception', $callback, $priority);
 
         // increment / decrement item(s)
-        $handles[] = $events->attach('incrementItem.exception', $callback, $priority);
-        $handles[] = $events->attach('incrementItems.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('incrementItem.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('incrementItems.exception', $callback, $priority);
 
-        $handles[] = $events->attach('decrementItem.exception', $callback, $priority);
-        $handles[] = $events->attach('decrementItems.exception', $callback, $priority);
-
-        return $this;
-    }
-
-    /**
-     * Detach
-     *
-     * @param  EventManagerInterface $events
-     * @return ExceptionHandler
-     * @throws Exception\LogicException
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        $index = spl_object_hash($events);
-        if (!isset($this->handles[$index])) {
-            throw new Exception\LogicException('Plugin not attached');
-        }
-
-        // detach all handles of this index
-        foreach ($this->handles[$index] as $handle) {
-            $events->detach($handle);
-        }
-
-        // remove all detached handles
-        unset($this->handles[$index]);
-
-        return $this;
+        $this->callbacks[] = $events->attach('decrementItem.exception', $callback, $priority);
+        $this->callbacks[] = $events->attach('decrementItems.exception', $callback, $priority);
     }
 
     /**

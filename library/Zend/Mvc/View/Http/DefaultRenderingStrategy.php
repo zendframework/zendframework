@@ -9,21 +9,16 @@
 
 namespace Zend\Mvc\View\Http;
 
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\ModelInterface as ViewModel;
 use Zend\View\View;
 
-class DefaultRenderingStrategy implements ListenerAggregateInterface
+class DefaultRenderingStrategy extends AbstractListenerAggregate
 {
-    /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
     /**
      * Layout template - template used in root ViewModel of MVC event.
      *
@@ -45,34 +40,15 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
     public function __construct(View $view)
     {
         $this->view = $view;
-        return $this;
     }
 
     /**
-     * Attach the aggregate to the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER, array($this, 'render'), -10000);
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER_ERROR, array($this, 'render'), -10000);
-    }
-
-    /**
-     * Detach aggregate listeners from the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
+        $this->callbacks[] = $events->attach(MvcEvent::EVENT_RENDER, array($this, 'render'), -10000);
+        $this->callbacks[] = $events->attach(MvcEvent::EVENT_RENDER_ERROR, array($this, 'render'), -10000);
     }
 
     /**

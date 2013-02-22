@@ -10,26 +10,15 @@
 
 namespace ZendTest\Mvc\TestAsset;
 
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 
-class MockSendResponseListener implements ListenerAggregateInterface
+class MockSendResponseListener extends AbstractListenerAggregate
 {
-    protected $listeners = array();
-
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_FINISH, array($this, 'sendResponse'), -10000);
-    }
-
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
+        $this->callbacks[] = $events->attach(MvcEvent::EVENT_FINISH, array($this, 'sendResponse'), -10000);
     }
 
     public function sendResponse($e)

@@ -13,6 +13,7 @@ use Zend\Console\Adapter\AdapterInterface as ConsoleAdapter;
 use Zend\Console\ColorInterface;
 use Zend\Console\Response as ConsoleResponse;
 use Zend\Console\Request as ConsoleRequest;
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\ModuleManager\ModuleManagerInterface;
@@ -29,13 +30,8 @@ use Zend\Text\Table;
 use Zend\Version\Version;
 use Zend\View\Model\ConsoleModel;
 
-class RouteNotFoundStrategy implements ListenerAggregateInterface
+class RouteNotFoundStrategy extends AbstractListenerAggregate
 {
-    /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
     /**
      * Whether or not to display the reason for routing failure
      *
@@ -51,29 +47,11 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
     protected $reason = false;
 
     /**
-     * Attach the aggregate to the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'handleRouteNotFoundError'));
-    }
-
-    /**
-     * Detach aggregate listeners from the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
+        $this->callbacks[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'handleRouteNotFoundError'));
     }
 
     /**

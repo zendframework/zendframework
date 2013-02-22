@@ -9,45 +9,22 @@
 
 namespace Zend\Mvc\View\Console;
 
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Console\Response as ConsoleResponse;
 use Zend\View\Model\ConsoleModel as ConsoleViewModel;
-use Zend\View\Model\ModelInterface as ViewModel;
 
-class DefaultRenderingStrategy implements ListenerAggregateInterface
+class DefaultRenderingStrategy extends AbstractListenerAggregate
 {
     /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
-    /**
-     * Attach the aggregate to the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER, array($this, 'render'), -10000);
-    }
-
-    /**
-     * Detach aggregate listeners from the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
+        $this->callbacks[] = $events->attach(MvcEvent::EVENT_RENDER, array($this, 'render'), -10000);
     }
 
     /**

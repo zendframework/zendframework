@@ -17,62 +17,16 @@ use Zend\EventManager\EventManagerInterface;
 class ClearExpiredByFactor extends AbstractPlugin
 {
     /**
-     * Handles
-     *
-     * @var array
-     */
-    protected $handles = array();
-
-    /**
-     * Attach
-     *
-     * @param  EventManagerInterface $events
-     * @param  int                   $priority
-     * @return ClearExpiredByFactor
-     * @throws Exception\LogicException
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $index = spl_object_hash($events);
-        if (isset($this->handles[$index])) {
-            throw new Exception\LogicException('Plugin already attached');
-        }
-
-        $handles = array();
-        $this->handles[$index] = & $handles;
-
         $callback = array($this, 'clearExpiredByFactor');
-        $handles[] = $events->attach('setItem.post',  $callback, $priority);
-        $handles[] = $events->attach('setItems.post', $callback, $priority);
-        $handles[] = $events->attach('addItem.post',  $callback, $priority);
-        $handles[] = $events->attach('addItems.post', $callback, $priority);
 
-        return $this;
-    }
-
-    /**
-     * Detach
-     *
-     * @param  EventManagerInterface $events
-     * @return ClearExpiredByFactor
-     * @throws Exception\LogicException
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        $index = spl_object_hash($events);
-        if (!isset($this->handles[$index])) {
-            throw new Exception\LogicException('Plugin not attached');
-        }
-
-        // detach all handles of this index
-        foreach ($this->handles[$index] as $handle) {
-            $events->detach($handle);
-        }
-
-        // remove all detached handles
-        unset($this->handles[$index]);
-
-        return $this;
+        $this->callbacks[] = $events->attach('setItem.post',  $callback, $priority);
+        $this->callbacks[] = $events->attach('setItems.post', $callback, $priority);
+        $this->callbacks[] = $events->attach('addItem.post',  $callback, $priority);
+        $this->callbacks[] = $events->attach('addItems.post', $callback, $priority);
     }
 
     /**

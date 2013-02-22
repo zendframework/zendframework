@@ -32,7 +32,7 @@ class SerializableStrategy implements StrategyInterface
     public function __construct($serializer, $serializerOptions = null)
     {
         $this->setSerializer($serializer);
-        if($serializerOptions) {
+        if ($serializerOptions) {
             $this->setSerializerOptions($serializerOptions);
         }
     }

@@ -132,11 +132,10 @@ class Logger implements LoggerInterface
         }
 
         if (is_array($options)) {
+            if (isset($options['writers']) && is_array($options['writers'])) {
+                foreach ($options['writers'] as $writer) {
 
-            if(isset($options['writers']) && is_array($options['writers'])) {
-                foreach($options['writers'] as $writer) {
-
-                    if(!isset($writer['name'])) {
+                    if (!isset($writer['name'])) {
                         throw new Exception\InvalidArgumentException('Options must contain a name for the writer');
                     }
 
@@ -147,11 +146,11 @@ class Logger implements LoggerInterface
                 }
             }
 
-            if(isset($options['exceptionhandler']) && $options['exceptionhandler'] === true) {
+            if (isset($options['exceptionhandler']) && $options['exceptionhandler'] === true) {
                 self::registerExceptionHandler($this);
             }
 
-            if(isset($options['errorhandler']) && $options['errorhandler'] === true) {
+            if (isset($options['errorhandler']) && $options['errorhandler'] === true) {
                 self::registerErrorHandler($this);
             }
 
@@ -410,7 +409,7 @@ class Logger implements LoggerInterface
             'extra'        => $extra
         );
 
-        foreach($this->processors->toArray() as $processor) {
+        foreach ($this->processors->toArray() as $processor) {
             $event = $processor->process($event);
         }
 

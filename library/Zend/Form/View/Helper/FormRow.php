@@ -164,7 +164,7 @@ class FormRow extends AbstractHelper
             $this->setLabelPosition($labelPosition);
         }
 
-        if($renderErrors !== null){
+        if ($renderErrors !== null){
             $this->setRenderErrors($renderErrors);
         }
 

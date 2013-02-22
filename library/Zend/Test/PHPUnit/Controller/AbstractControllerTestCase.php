@@ -147,7 +147,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $this->application = Application::init($appConfig);
 
         $events = $this->application->getEventManager();
-        foreach($events->getListeners(MvcEvent::EVENT_FINISH) as $listener) {
+        foreach ($events->getListeners(MvcEvent::EVENT_FINISH) as $listener) {
             $callback = $listener->getCallback();
             if (is_array($callback) && $callback[0] instanceof SendResponseListener) {
                 $events->detach($listener);

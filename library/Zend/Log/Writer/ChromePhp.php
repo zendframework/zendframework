@@ -42,7 +42,7 @@ class ChromePhp extends AbstractWriter
             $instance = isset($instance['instance']) ? $instance['instance'] : null;
         }
 
-        if(!($instance instanceof ChromePhpInterface || $instance === null)) {
+        if (!($instance instanceof ChromePhpInterface || $instance === null)) {
             throw new Exception\InvalidArgumentException('You must pass a valid Zend\Log\Writer\ChromePhp\ChromePhpInterface');
         }
 

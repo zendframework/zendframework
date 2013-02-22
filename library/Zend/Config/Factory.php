@@ -157,7 +157,7 @@ class Factory
             );
         }
 
-        if(!isset(self::$writerExtensions[$extension])) {
+        if (!isset(self::$writerExtensions[$extension])) {
             throw new Exception\RuntimeException(
                 "Unsupported config file extension: '.{$extension}' for writing."
             );

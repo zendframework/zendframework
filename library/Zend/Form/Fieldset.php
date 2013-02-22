@@ -520,7 +520,7 @@ class Fieldset extends Element implements FieldsetInterface
 
             $element = $this->byName[$name];
 
-            if($element instanceof FieldsetInterface && $element->allowValueBinding()) {
+            if ($element instanceof FieldsetInterface && $element->allowValueBinding()) {
                 $value = $element->bindValues($value);
             }
 

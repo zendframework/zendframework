@@ -91,7 +91,7 @@ class Stream extends AbstractWriter
             $this->setLogSeparator($logSeparator);
         }
 
-        if($this->formatter === null) {
+        if ($this->formatter === null) {
             $this->formatter = new SimpleFormatter();
         }
     }

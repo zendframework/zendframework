@@ -1068,7 +1068,7 @@ class Client implements ServerClient
      */
     public function __call($name, $arguments)
     {
-        if(!is_array($arguments)) {
+        if (!is_array($arguments)) {
             $arguments = array($arguments);
         }
         $soapClient = $this->getSoapClient();

@@ -515,7 +515,7 @@ class Form extends Fieldset implements FormInterface
         $this->hasValidated = false;
 
         if ($argc > 1) {
-            $this->getValidationGroup = $argv;
+            $this->validationGroup = $argv;
             return $this;
         }
 

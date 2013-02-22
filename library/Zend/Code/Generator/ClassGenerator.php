@@ -110,7 +110,7 @@ class ClassGenerator extends AbstractGenerator
 
         $properties = array();
         foreach ($classReflection->getProperties() as $reflectionProperty) {
-            if ($reflectionProperty->getDeclaringClass()->getName() == $cg->getName()) {
+            if ($reflectionProperty->getDeclaringClass()->getName() == $classReflection->getName()) {
                 $properties[] = PropertyGenerator::fromReflection($reflectionProperty);
             }
         }

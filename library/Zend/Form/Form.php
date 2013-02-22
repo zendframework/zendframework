@@ -441,9 +441,10 @@ class Form extends Fieldset implements FormInterface
         $filter->setData($this->data);
         $filter->setValidationGroup(InputFilterInterface::VALIDATE_ALL);
 
-        if ($this->validationGroup !== null) {
-            $this->prepareValidationGroup($this, $this->data, $this->validationGroup);
-            $filter->setValidationGroup($this->validationGroup);
+        if ($this->getValidationGroup() !== null) {
+            $validationGroup = $this->getValidationGroup();
+            $this->prepareValidationGroup($this, $this->data, $validationGroup);
+            $filter->setValidationGroup($validationGroup);
         }
 
         $this->isValid = $result = $filter->isValid();
@@ -514,7 +515,7 @@ class Form extends Fieldset implements FormInterface
         $this->hasValidated = false;
 
         if ($argc > 1) {
-            $this->validationGroup = $argv;
+            $this->getValidationGroup = $argv;
             return $this;
         }
 
@@ -530,6 +531,16 @@ class Form extends Fieldset implements FormInterface
 
         $this->validationGroup = $arg;
         return $this;
+    }
+
+    /**
+     * Retrieve the current validation group, if any
+     *
+     * @return null|array
+     */
+    public function getValidationGroup()
+    {
+        return $this->validationGroup;
     }
 
     /**

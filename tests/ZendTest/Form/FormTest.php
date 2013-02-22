@@ -1345,4 +1345,16 @@ class FormTest extends TestCase
         $this->form->setData($data);
         $this->form->bindValues($data);
     }
+
+    public function testGetValidationGroup()
+    {
+        $group = array('foo');
+        $this->form->setValidationGroup($group);
+        $this->assertEquals($group, $this->form->getValidationGroup());
+    }
+
+    public function testGetValidationGroupReturnsNullWhenNoneSet()
+    {
+        $this->assertNull($this->form->getValidationGroup());
+    }
 }

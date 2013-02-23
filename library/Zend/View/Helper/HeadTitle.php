@@ -84,7 +84,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     }
 
     /**
-     * Turn helper into string
+     * Render title (wrapped by title tag)
      *
      * @param  string|null $indent
      * @return string
@@ -100,6 +100,11 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
         return $indent . '<title>' . $output . '</title>';
     }
     
+    /**
+     * Render title string
+     *
+     * @return string
+     */
     public function renderTitle()
     {
         $items = array();

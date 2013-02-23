@@ -95,6 +95,13 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
                 ? $this->getWhitespace($indent)
                 : $this->getIndent();
 
+        $output = $this->renderTitle();
+
+        return $indent . '<title>' . $output . '</title>';
+    }
+    
+    public function renderTitle()
+    {
         $items = array();
 
         if (null !== ($translator = $this->getTranslator())) {
@@ -126,7 +133,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
 
         $output = ($this->autoEscape) ? $this->escape($output) : $output;
 
-        return $indent . '<title>' . $output . '</title>';
+        return $output;
     }
 
     /**

@@ -6,16 +6,12 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Paginator\Adapter;
 
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Db\TableGateway\TableGateway;
 
-/**
- * @category   Zend
- * @package    Zend_Paginator
- * @subpackage Adapter
- */
 class DbTableGateway extends DbSelect
 {
     /**

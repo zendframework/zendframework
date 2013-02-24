@@ -15,10 +15,7 @@ use Zend\Paginator\Adapter\DbSelect;
 use Zend\Db\ResultSet\ResultSet;
 
 /**
- * @category   Zend
- * @package    Zend_Paginator
- * @subpackage UnitTests
- * @group      Zend_Paginator
+ * @group Zend_Paginator
  */
 class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 {

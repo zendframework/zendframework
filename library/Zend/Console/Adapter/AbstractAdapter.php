@@ -601,7 +601,7 @@ abstract class AbstractAdapter implements AdapterInterface
         $f = fopen('php://stdin','r');
         do {
             $char = fread($f,1);
-        } while ($mask === null || stristr($mask, $char));
+        } while ($mask !== null && "" !== $char && false === stristr($mask, $char));
         fclose($f);
         return $char;
     }

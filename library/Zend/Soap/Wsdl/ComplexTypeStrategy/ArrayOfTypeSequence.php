@@ -10,6 +10,8 @@
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
+use Zend\Soap\Wsdl;
+
 /**
  * Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence
  *
@@ -20,7 +22,8 @@ namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 class ArrayOfTypeSequence extends DefaultComplexType
 {
     /**
-     * Add an unbounded ArrayOfType based on the xsd:sequence syntax if type[] is detected in return value doc comment.
+     * Add an unbounded ArrayOfType based on the xsd:sequence syntax if
+     * type[] is detected in return value doc comment.
      *
      * @param string $type
      * @return string tns:xsd-type
@@ -31,6 +34,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
 
         if ($nestedCounter > 0) {
             $singularType = $this->_getSingularType($type);
+            $complexType = '';
 
             for ($i = 1; $i <= $nestedCounter; $i++) {
                 $complexType    = $this->_getTypeBasedOnNestingLevel($singularType, $i);
@@ -51,7 +55,8 @@ class ArrayOfTypeSequence extends DefaultComplexType
     }
 
     /**
-     * Return the ArrayOf or simple type name based on the singular xsdtype and the nesting level
+     * Return the ArrayOf or simple type name based on the singular xsdtype
+     * and the nesting level
      *
      * @param  string $singularType
      * @param  int    $level
@@ -111,19 +116,19 @@ class ArrayOfTypeSequence extends DefaultComplexType
 
         $arrayTypeName = substr($arrayType, strpos($arrayType, ':') + 1);
 
-        $complexType = $dom->createElement('xsd:complexType');
+        $complexType = $dom->createElementNS(Wsdl::NS_SCHEMA, 'complexType');
         $complexType->setAttribute('name', $arrayTypeName);
 
-        $sequence = $dom->createElement('xsd:sequence');
+        $sequence = $dom->createElementNS(Wsdl::NS_SCHEMA, 'sequence');
+        $complexType->appendChild($sequence);
 
-        $element = $dom->createElement('xsd:element');
+        $element = $dom->createElementNS(Wsdl::NS_SCHEMA, 'element');
+        $sequence->appendChild($element);
+
         $element->setAttribute('name', 'item');
         $element->setAttribute('type', $childType);
         $element->setAttribute('minOccurs', 0);
         $element->setAttribute('maxOccurs', 'unbounded');
-        $sequence->appendChild($element);
-
-        $complexType->appendChild($sequence);
 
         $this->getContext()->getSchema()->appendChild($complexType);
     }

@@ -25,9 +25,7 @@ class AnyType implements ComplexTypeStrategyInterface
      * @param \Zend\Soap\Wsdl $context
      */
     public function setContext(\Zend\Soap\Wsdl $context)
-    {
-
-    }
+    {}
 
     /**
      * Returns xsd:anyType regardless of the input.

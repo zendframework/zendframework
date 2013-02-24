@@ -10,6 +10,13 @@
 
 namespace Zend\Soap\Exception;
 
+/**
+ * Exception thrown when arguments to method are invalid
+ *
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage Client
+ */
 class InvalidArgumentException
     extends \InvalidArgumentException
     implements ExceptionInterface

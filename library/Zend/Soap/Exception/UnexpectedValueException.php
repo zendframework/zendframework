@@ -10,6 +10,13 @@
 
 namespace Zend\Soap\Exception;
 
+/**
+ * Exception thrown when provided arguments are invalid
+ *
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage Client
+ */
 class UnexpectedValueException
     extends \UnexpectedValueException
     implements ExceptionInterface

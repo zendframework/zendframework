@@ -10,5 +10,12 @@
 
 namespace Zend\Soap\Exception;
 
+/**
+ * Exception thrown when soap php extension is not loaded
+ *
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage Exception
+ */
 class ExtensionNotLoadedException extends RuntimeException
 {}

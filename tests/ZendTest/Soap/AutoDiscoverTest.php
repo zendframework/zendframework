@@ -13,7 +13,10 @@ namespace ZendTest\Soap;
 /** Include Common TestTypes */
 require_once 'TestAsset/commontypes.php';
 
+use Zend\Di\Exception\RuntimeException;
 use Zend\Soap\AutoDiscover;
+use Zend\Soap\Wsdl;
+use Zend\Uri\Uri;
 
 /** PHPUnit Test Case */
 
@@ -27,19 +30,59 @@ use Zend\Soap\AutoDiscover;
  */
 class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 {
-    protected function createAutodiscoverService()
+
+    /**
+     * @var AutoDiscover
+     */
+    protected $server;
+
+    /**
+     * @var string
+     */
+    protected $defaultServiceName = 'MyService';
+
+    /**
+     * @var string
+     */
+    protected $defaultServiceUri = 'http://localhost/MyService.php';
+
+    /**
+     * @var \DOMDocument
+     */
+    protected $dom;
+
+    /**
+     * @var \DOMXPath
+     */
+    protected $xpath;
+
+    public function setUp()
     {
-        $server = new AutoDiscover();
-        $server->setUri('http://localhost/my_script.php');
-        $server->setServiceName('TestService');
-        return $server;
+        $this->server = new AutoDiscover();
+        $this->server->setUri($this->defaultServiceUri);
+        $this->server->setServiceName($this->defaultServiceName);
     }
 
-    protected function sanitizeWsdlXmlOutputForOsCompability($xmlstring)
+    public function bindWsdl(Wsdl $wsdl, $documentNamespace = null)
     {
-        $xmlstring = str_replace(array("\r", "\n"), "", $xmlstring);
-        $xmlstring = preg_replace('/(>[\s]{1,}<)/', '', $xmlstring);
-        return $xmlstring;
+        $this->dom = new \DOMDocument();
+        $this->dom->formatOutput = true;
+        $this->dom->preserveWhiteSpace = false;
+        $this->dom->loadXML($wsdl->toXML());
+
+        if (empty($documentNamespace)) {
+            $documentNamespace = $this->defaultServiceUri;
+        }
+
+        $this->xpath = new \DOMXPath($this->dom);
+
+        $this->xpath->registerNamespace('unittest',     Wsdl::NS_WSDL);
+
+        $this->xpath->registerNamespace('tns',          $documentNamespace);
+        $this->xpath->registerNamespace('soap',         Wsdl::NS_SOAP);
+        $this->xpath->registerNamespace('xsd',          Wsdl::NS_SCHEMA);
+        $this->xpath->registerNamespace('soap-enc',     Wsdl::NS_S_ENC);
+        $this->xpath->registerNamespace('wsdl',         Wsdl::NS_WSDL);
     }
 
     /**
@@ -50,6 +93,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     protected function assertValidWSDL(\DOMDocument $dom)
     {
         // this code is necessary to support some libxml stupidities.
+        // @todo memory streams ?
         $file = __DIR__.'/TestAsset/validate.wsdl';
         if (file_exists($file)) {
             unlink($file);
@@ -63,238 +107,326 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         unlink($file);
     }
 
+    /**
+     * @param \DOMElement $element
+     */
+    public function testDocumentNodes($element = null)
+    {
+        if (!($this->dom instanceof \DOMDocument)) {
+            return;
+        }
+
+        if (is_null($element)) {
+            $element = $this->dom->documentElement;
+        }
+
+        /** @var $node \DOMElement */
+        foreach ($element->childNodes as $node) {
+            if (in_array($node->nodeType, array(XML_ELEMENT_NODE))) {
+                $this->assertNotEmpty($node->namespaceURI, 'Document element: ' . $node->nodeName . ' has no valid namespace. Line: ' . $node->getLineNo());
+                $this->testDocumentNodes($node);
+            }
+        }
+    }
+
+    /**
+     * @dataProvider dataProviderValidUris
+     */
+    public function testAutoDiscoverConstructorUri($uri) {
+        $server = new AutoDiscover(null, $uri);
+
+        //@todo Uri::toString returns encoded uri
+        $uri = htmlspecialchars($uri, ENT_QUOTES, 'UTF-8', false);
+        $this->assertEquals($uri, $server->getUri()->toString());
+    }
+
+    /**
+     * @dataProvider dataProviderForAutoDiscoverConstructorStrategy
+     */
+    public function testAutoDiscoverConstructorStrategy($strategy) {
+        $server = new AutoDiscover($strategy);
+
+        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
+        $server->setServiceName('TestService');
+        $server->setUri('http://example.com');
+        $wsdl = $server->generate();
+
+        $this->assertEquals(get_class($strategy), get_class($wsdl->getComplexTypeStrategy()));
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderForAutoDiscoverConstructorStrategy() {
+        return array(
+            array(new Wsdl\ComplexTypeStrategy\AnyType()),
+            array(new Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex()),
+            array(new Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence()),
+            array(new Wsdl\ComplexTypeStrategy\Composite()),
+            array(new Wsdl\ComplexTypeStrategy\DefaultComplexType()),
+        );
+    }
+
+    /**
+     */
+    public function testGetDiscoveryStrategy() {
+        $server = new AutoDiscover();
+
+        $this->assertEquals('Zend\Soap\AutoDiscover\DiscoveryStrategy\ReflectionDiscovery',
+            get_class($server->getDiscoveryStrategy())
+        );
+    }
+
+    /**
+     */
+    public function testAutoDiscoverConstructorWsdlClass() {
+        $server = new AutoDiscover(null, null, '\Zend\Soap\Wsdl');
+
+        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
+        $server->setServiceName('TestService');
+        $server->setUri('http://example.com');
+        $wsdl = $server->generate();
+
+        $this->assertEquals('Zend\Soap\Wsdl', trim(get_class($wsdl), '\\'));
+        $this->assertEquals('Zend\Soap\Wsdl', trim($server->getWsdlClass(), '\\'));
+    }
+
+    /**
+     * @expectedException \Zend\Soap\Exception\InvalidArgumentException
+     */
+    public function testAutoDiscoverConstructorWsdlClassException() {
+        $server = new AutoDiscover();
+        $server->setWsdlClass(new \stdClass());
+    }
+
+    /**
+     * @dataProvider dataProviderForSetServiceName
+     */
+    public function testSetServiceName($newName, $shouldBeValid) {
+
+        if ($shouldBeValid == false) {
+            $this->setExpectedException('InvalidArgumentException');
+        }
+
+        $this->server->setServiceName($newName);
+        $this->bindWsdl($this->server->generate());
+        $this->assertSpecificNodeNumberInXPath(1, '/wsdl:definitions[@name="'.$newName.'"]');
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderForSetServiceName() {
+        return array(
+            array('MyServiceName123', true),
+            array('1MyServiceName123', false),
+            array('$MyServiceName123', false),
+            array('!MyServiceName123', false),
+            array('&MyServiceName123', false),
+            array('(MyServiceName123', false),
+            array('\MyServiceName123', false),
+        );
+    }
+
+    public function testGetServiceName() {
+        $server = new AutoDiscover();
+
+        $server->setClass('\ZendTest\Soap\TestAsset\Test');
+
+        $this->assertEquals('Test', $server->getServiceName());
+    }
+
+    /**
+     * @expectedException \Zend\Soap\Exception\RuntimeException
+     */
+    public function testGetServiceNameException() {
+        $server = new AutoDiscover();
+
+        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
+
+        $this->assertEquals('Test', $server->getServiceName());
+    }
+
+    /**
+     * @expectedException \Zend\Soap\Exception\InvalidArgumentException
+     */
+    public function testSetUriException() {
+        $server = new AutoDiscover();
+
+        $server->setUri(' ');
+    }
+
+    /**
+     * @expectedException \Zend\Soap\Exception\RuntimeException
+     */
+    public function testGetUriException() {
+        $server = new AutoDiscover();
+        $server->getUri();
+    }
+
+    public function testClassMap() {
+
+        $classMap = array(
+            'TestClass' => 'test_class'
+        );
+
+        $this->server->setClassMap($classMap);
+
+        $this->assertEquals($classMap, $this->server->getClassMap());
+    }
+
     public function testSetClass()
     {
-        $scriptUri = 'http://localhost/my_script.php';
+        $this->server->setClass('\ZendTest\Soap\TestAsset\Test');
 
-        $server = $this->createAutodiscoverService();
-        $server->setClass('\ZendTest\Soap\TestAsset\Test');
-        $dom = $server->generate()->toDomDocument();
+        $this->bindWsdl($this->server->generate());
 
-        $wsdl = '<?xml version="1.0"?>'
-              . '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
-              .              'xmlns:tns="' . $scriptUri . '" '
-              .              'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
-              .              'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-              .              'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
-              .              'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
-              .              'name="TestService" '
-              .              'targetNamespace="' . $scriptUri . '">'
-              .     '<types>'
-              .         '<xsd:schema targetNamespace="' . $scriptUri . '"/>'
-              .     '</types>'
-              .     '<portType name="TestServicePort">'
-              .         '<operation name="testFunc1">'
-              .             '<documentation>Test Function 1</documentation>'
-              .             '<input message="tns:testFunc1In"/>'
-              .             '<output message="tns:testFunc1Out"/>'
-              .         '</operation>'
-              .         '<operation name="testFunc2">'
-              .             '<documentation>Test Function 2</documentation>'
-              .             '<input message="tns:testFunc2In"/>'
-              .             '<output message="tns:testFunc2Out"/>'
-              .         '</operation>'
-              .         '<operation name="testFunc3">'
-              .             '<documentation>Test Function 3</documentation>'
-              .             '<input message="tns:testFunc3In"/>'
-              .             '<output message="tns:testFunc3Out"/>'
-              .         '</operation><operation name="testFunc4">'
-              .             '<documentation>Test Function 4</documentation>'
-              .             '<input message="tns:testFunc4In"/>'
-              .             '<output message="tns:testFunc4Out"/>'
-              .         '</operation>'
-              .     '</portType>'
-              .     '<binding name="TestServiceBinding" type="tns:TestServicePort">'
-              .         '<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>'
-              .         '<operation name="testFunc1">'
-              .             '<soap:operation soapAction="' . $scriptUri . '#testFunc1"/>'
-              .             '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'
-              .             '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'
-              .         '</operation>'
-              .         '<operation name="testFunc2">'
-              .             '<soap:operation soapAction="' . $scriptUri . '#testFunc2"/>'
-              .             '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'
-              .             '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'
-              .         '</operation>'
-              .         '<operation name="testFunc3">'
-              .             '<soap:operation soapAction="' . $scriptUri . '#testFunc3"/>'
-              .             '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'
-              .             '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'
-              .         '</operation>'
-              .         '<operation name="testFunc4">'
-              .             '<soap:operation soapAction="' . $scriptUri . '#testFunc4"/>'
-              .             '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'
-              .             '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'
-              .         '</operation>'
-              .     '</binding>'
-              .     '<service name="TestServiceService">'
-              .         '<port name="TestServicePort" binding="tns:TestServiceBinding">'
-              .             '<soap:address location="' . $scriptUri . '"/>'
-              .         '</port>'
-              .     '</service>'
-              .     '<message name="testFunc1In"/>'
-              .     '<message name="testFunc1Out"><part name="return" type="xsd:string"/></message>'
-              .     '<message name="testFunc2In"><part name="who" type="xsd:string"/></message>'
-              .     '<message name="testFunc2Out"><part name="return" type="xsd:string"/></message>'
-              .     '<message name="testFunc3In"><part name="who" type="xsd:string"/><part name="when" type="xsd:int"/></message>'
-              .     '<message name="testFunc3Out"><part name="return" type="xsd:string"/></message>'
-              .     '<message name="testFunc4In"/>'
-              .     '<message name="testFunc4Out"><part name="return" type="xsd:string"/></message>'
-              . '</definitions>';
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema[@targetNamespace="'.$this->defaultServiceUri.'"]', 'Invalid schema definition');
 
-        $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
-        $this->assertValidWSDL($dom);
+        for($i = 1; $i <= 4; $i++) {
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'.$i.'"]', 'Invalid func'.$i.' operation definition');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'.$i.'"]/wsdl:documentation', 'Invalid func'.$i.' port definition - documentation node');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'.$i.'"]/wsdl:input[@message="tns:testFunc'.$i.'In"]', 'Invalid func'.$i.' port definition - input node');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'.$i.'"]/wsdl:output[@message="tns:testFunc'.$i.'Out"]', 'Invalid func'.$i.' port definition - output node');
+        }
+
+        $nodes = $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding"]', 'Invalid service binding definition');
+        $this->assertEquals('tns:MyServicePort', $nodes->item(0)->getAttribute('type'), 'Invalid type attribute value in service binding definition');
+
+        $nodes = $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding"]/soap:binding', 'Invalid service binding definition');
+        $this->assertEquals('rpc', $nodes->item(0)->getAttribute('style'), 'Invalid style attribute value in service binding definition');
+        $this->assertEquals('http://schemas.xmlsoap.org/soap/http', $nodes->item(0)->getAttribute('transport'), 'Invalid transport attribute value in service binding definition');
+
+        for($i = 1; $i <= 4; $i++) {
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc'.$i.'"]', 'Invalid func'.$i.' operation binding definition');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc'.$i.'"]/soap:operation[@soapAction="'.$this->defaultServiceUri.'#testFunc'.$i.'"]', 'Invalid func'.$i.' operation action binding definition');
+        }
+
+        $xpath = '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[wsdl:input or wsdl:output]/*/soap:body';
+        $this->assertSpecificNodeNumberInXPath(8, $xpath);
+        $nodes = $this->xpath->query($xpath);
+        $this->assertAttributesOfNodes(array(
+            "use"               => "encoded",
+            "encodingStyle"     => "http://schemas.xmlsoap.org/soap/encoding/",
+            "namespace"         => "http://localhost/MyService.php"
+        ), $nodes);
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:service[@name="MyServiceService"]', 'Invalid service definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:service[@name="MyServiceService"]/wsdl:port[@name="MyServicePort" and @binding="tns:MyServiceBinding"]', 'Invalid service port definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:service[@name="MyServiceService"]/wsdl:port[@name="MyServicePort" and @binding="tns:MyServiceBinding"]/soap:address[@location="'.$this->defaultServiceUri.'"]', 'Invalid service address definition');
+
+
+        $nodes = $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc1In"]', 'Invalid message definition');
+        $this->assertFalse($nodes->item(0)->hasChildNodes());
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc2In"]', 'Invalid message definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc2In"]/wsdl:part[@name="who" and @type="xsd:string"]', 'Invalid message definition');
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc2Out"]', 'Invalid message definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc2Out"]/wsdl:part[@name="return" and @type="xsd:string"]', 'Invalid message definition');
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc3In"]', 'Invalid message definition');
+        $this->assertSpecificNodeNumberInXPath(2, '//wsdl:message[@name="testFunc3In"][(wsdl:part[@name="who" and @type="xsd:string"]) or (wsdl:part[@name="when" and @type="xsd:int"])]/wsdl:part', 'Invalid message definition');
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc3Out"]', 'Invalid message definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc3Out"]/wsdl:part[@name="return" and @type="xsd:string"]', 'Invalid message definition');
+
+
+        $nodes = $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc4In"]', 'Invalid message definition');
+        $this->assertFalse($nodes->item(0)->hasChildNodes());
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc4Out"]/wsdl:part[@name="return" and @type="xsd:string"]', 'Invalid message definition');
+
+
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     public function testSetClassWithDifferentStyles()
     {
-        $scriptUri = 'http://localhost/my_script.php';
+        $this->server->setBindingStyle(array('style' => 'document', 'transport' => $this->defaultServiceUri));
+        $this->server->setOperationBodyStyle(array('use' => 'literal', 'namespace' => $this->defaultServiceUri));
+        $this->server->setClass('\ZendTest\Soap\TestAsset\Test');
 
-        $server = $this->createAutodiscoverService();
-        $server->setBindingStyle(array('style' => 'document', 'transport' => 'http://framework.zend.com'));
-        $server->setOperationBodyStyle(array('use' => 'literal', 'namespace' => 'http://framework.zend.com'));
-        $server->setClass('\ZendTest\Soap\TestAsset\Test');
-        $dom = $server->generate()->toDomDocument();
+        $this->bindWsdl($this->server->generate());
 
-        $wsdl = '<?xml version="1.0"?>'
-              . '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
-              .              'xmlns:tns="' . $scriptUri . '" '
-              .              'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
-              .              'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
-              .              'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
-              .              'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
-              .              'name="TestService" '
-              .              'targetNamespace="' . $scriptUri . '">'
-              .     '<types>'
-              .         '<xsd:schema targetNamespace="' . $scriptUri . '">'
-              .           '<xsd:element name="testFunc1">'
-              .             '<xsd:complexType/>'
-              .           '</xsd:element>'
-              .           '<xsd:element name="testFunc1Response">'
-              .             '<xsd:complexType>'
-              .               '<xsd:sequence>'
-              .                 '<xsd:element name="testFunc1Result" type="xsd:string"/>'
-              .               '</xsd:sequence>'
-              .             '</xsd:complexType>'
-              .           '</xsd:element>'
-              .           '<xsd:element name="testFunc2">'
-              .             '<xsd:complexType>'
-              .               '<xsd:sequence>'
-              .                 '<xsd:element name="who" type="xsd:string"/>'
-              .               '</xsd:sequence>'
-              .             '</xsd:complexType>'
-              .           '</xsd:element>'
-              .           '<xsd:element name="testFunc2Response">'
-              .             '<xsd:complexType>'
-              .               '<xsd:sequence>'
-              .                 '<xsd:element name="testFunc2Result" type="xsd:string"/>'
-              .               '</xsd:sequence>'
-              .             '</xsd:complexType>'
-              .           '</xsd:element>'
-              .           '<xsd:element name="testFunc3">'
-              .             '<xsd:complexType>'
-              .               '<xsd:sequence>'
-              .                 '<xsd:element name="who" type="xsd:string"/>'
-              .                 '<xsd:element name="when" type="xsd:int"/>'
-              .               '</xsd:sequence>'
-              .             '</xsd:complexType>'
-              .           '</xsd:element>'
-              .           '<xsd:element name="testFunc3Response">'
-              .             '<xsd:complexType>'
-              .               '<xsd:sequence>'
-              .                 '<xsd:element name="testFunc3Result" type="xsd:string"/>'
-              .               '</xsd:sequence>'
-              .             '</xsd:complexType>'
-              .           '</xsd:element>'
-              .           '<xsd:element name="testFunc4">'
-              .             '<xsd:complexType/>'
-              .           '</xsd:element>'
-              .           '<xsd:element name="testFunc4Response">'
-              .             '<xsd:complexType>'
-              .               '<xsd:sequence>'
-              .                 '<xsd:element name="testFunc4Result" type="xsd:string"/>'
-              .               '</xsd:sequence>'
-              .             '</xsd:complexType>'
-              .           '</xsd:element>'
-              .         '</xsd:schema>'
-              .     '</types>'
-              .     '<portType name="TestServicePort">'
-              .         '<operation name="testFunc1">'
-              .             '<documentation>Test Function 1</documentation>'
-              .             '<input message="tns:testFunc1In"/>'
-              .             '<output message="tns:testFunc1Out"/>'
-              .         '</operation>'
-              .         '<operation name="testFunc2">'
-              .             '<documentation>Test Function 2</documentation>'
-              .             '<input message="tns:testFunc2In"/>'
-              .             '<output message="tns:testFunc2Out"/>'
-              .         '</operation>'
-              .         '<operation name="testFunc3">'
-              .             '<documentation>Test Function 3</documentation>'
-              .             '<input message="tns:testFunc3In"/>'
-              .             '<output message="tns:testFunc3Out"/>'
-              .         '</operation><operation name="testFunc4">'
-              .             '<documentation>Test Function 4</documentation>'
-              .             '<input message="tns:testFunc4In"/>'
-              .             '<output message="tns:testFunc4Out"/>'
-              .         '</operation>'
-              .     '</portType>'
-              .     '<binding name="TestServiceBinding" type="tns:TestServicePort">'
-              .         '<soap:binding style="document" transport="http://framework.zend.com"/>'
-              .         '<operation name="testFunc1">'
-              .             '<soap:operation soapAction="' . $scriptUri . '#testFunc1"/>'
-              .             '<input><soap:body use="literal" namespace="http://framework.zend.com"/></input>'
-              .             '<output><soap:body use="literal" namespace="http://framework.zend.com"/></output>'
-              .         '</operation>'
-              .         '<operation name="testFunc2">'
-              .             '<soap:operation soapAction="' . $scriptUri . '#testFunc2"/>'
-              .             '<input><soap:body use="literal" namespace="http://framework.zend.com"/></input>'
-              .             '<output><soap:body use="literal" namespace="http://framework.zend.com"/></output>'
-              .         '</operation>'
-              .         '<operation name="testFunc3">'
-              .             '<soap:operation soapAction="' . $scriptUri . '#testFunc3"/>'
-              .             '<input><soap:body use="literal" namespace="http://framework.zend.com"/></input>'
-              .             '<output><soap:body use="literal" namespace="http://framework.zend.com"/></output>'
-              .         '</operation>'
-              .         '<operation name="testFunc4">'
-              .             '<soap:operation soapAction="' . $scriptUri . '#testFunc4"/>'
-              .             '<input><soap:body use="literal" namespace="http://framework.zend.com"/></input>'
-              .             '<output><soap:body use="literal" namespace="http://framework.zend.com"/></output>'
-              .         '</operation>'
-              .     '</binding>'
-              .     '<service name="TestServiceService">'
-              .         '<port name="TestServicePort" binding="tns:TestServiceBinding">'
-              .             '<soap:address location="' . $scriptUri . '"/>'
-              .         '</port>'
-              .     '</service>'
-              .     '<message name="testFunc1In">'
-              .       '<part name="parameters" element="tns:testFunc1"/>'
-              .     '</message>'
-              .     '<message name="testFunc1Out">'
-              .       '<part name="parameters" element="tns:testFunc1Response"/>'
-              .     '</message>'
-              .     '<message name="testFunc2In">'
-              .       '<part name="parameters" element="tns:testFunc2"/>'
-              .     '</message>'
-              .     '<message name="testFunc2Out">'
-              .       '<part name="parameters" element="tns:testFunc2Response"/>'
-              .     '</message>'
-              .     '<message name="testFunc3In">'
-              .       '<part name="parameters" element="tns:testFunc3"/>'
-              .     '</message>'
-              .     '<message name="testFunc3Out">'
-              .       '<part name="parameters" element="tns:testFunc3Response"/>'
-              .     '</message>'
-              .     '<message name="testFunc4In">'
-              .       '<part name="parameters" element="tns:testFunc4"/>'
-              .     '</message>'
-              .     '<message name="testFunc4Out">'
-              .       '<part name="parameters" element="tns:testFunc4Response"/>'
-              .     '</message>'
-              . '</definitions>';
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc1"]', 'Missing test func1 definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc1"]/xsd:complexType', 'Missing test func1 type definition');
+        $this->assertSpecificNodeNumberInXPath(0, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc1"]/xsd:complexType/*', 'Test func1 does not have children');
 
-        $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
-        $this->assertValidWSDL($dom);
+        $nodes = $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc1Response"]/xsd:complexType/xsd:sequence/xsd:element', 'Test func1 return element is invalid');
+        $this->assertAttributesOfNodes(array(
+            'name'  =>  "testFunc1Result",
+            'type'  =>  "xsd:string",
+        ), $nodes);
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc2"]', 'Missing test func2 definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc2"]/xsd:complexType', 'Missing test func2 type definition');
+        $nodes = $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc2"]/xsd:complexType/xsd:sequence/xsd:element', 'Test func2 does not have children');
+        $this->assertAttributesOfNodes(array(
+            'name'  =>  "who",
+            'type'  =>  "xsd:string",
+        ), $nodes);
+
+        $nodes = $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc2Response"]/xsd:complexType/xsd:sequence/xsd:element', 'Test func2 return element is invalid');
+        $this->assertAttributesOfNodes(array(
+            'name'  =>  "testFunc2Result",
+            'type'  =>  "xsd:string",
+        ), $nodes);
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc3"]', 'Missing test func3 definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc3"]/xsd:complexType', 'Missing test func3 type definition');
+        $this->assertSpecificNodeNumberInXPath(2, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc3"]/xsd:complexType/xsd:sequence/xsd:element', 'Test func3 does not have children');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc3"]/xsd:complexType/xsd:sequence/xsd:element[@name="who" and @type="xsd:string"]', 'Test func3 does not have children');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc3"]/xsd:complexType/xsd:sequence/xsd:element[@name="when" and @type="xsd:int"]', 'Test func3 does not have children');
+
+        $nodes = $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc3Response"]/xsd:complexType/xsd:sequence/xsd:element', 'Test func3 return element is invalid');
+        $this->assertAttributesOfNodes(array(
+            'name'  =>  "testFunc3Result",
+            'type'  =>  "xsd:string",
+        ), $nodes);
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc4"]', 'Missing test func1 definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc4"]/xsd:complexType', 'Missing test func1 type definition');
+        $this->assertSpecificNodeNumberInXPath(0, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc4"]/xsd:complexType/*', 'Test func1 does not have children');
+
+        $nodes = $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:element[@name="testFunc4Response"]/xsd:complexType/xsd:sequence/xsd:element', 'Test func1 return element is invalid');
+        $this->assertAttributesOfNodes(array(
+            'name'  =>  "testFunc4Result",
+            'type'  =>  "xsd:string",
+        ), $nodes);
+
+
+        for ($i = 1; $i <= 4; $i++) {
+            $this->assertSpecificNodeNumberInXPath(3, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'.$i.'"]/*', 'Missing test func'.$i.' port definition');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'.$i.'"]/wsdl:documentation', 'Missing test func'.$i.' port documentation');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'.$i.'"]/wsdl:input[@message="tns:testFunc'.$i.'In"]', 'Missing test func'.$i.' port input message');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="testFunc'.$i.'"]/wsdl:output[@message="tns:testFunc'.$i.'Out"]', 'Missing test func'.$i.' port output message');
+        }
+
+
+        for ($i = 1; $i <= 4; $i++) {
+            $this->assertSpecificNodeNumberInXPath(3, '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc'.$i.'"]/*', 'Missing test func'.$i.' binding definition');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc'.$i.'"]/soap:operation[@soapAction="'.$this->defaultServiceUri.'#testFunc'.$i.'"]', 'Missing test func'.$i.' binding operation definition');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc'.$i.'"]/wsdl:input/soap:body[@use="literal" and @namespace="'.$this->defaultServiceUri.'"]', 'Missing test func'.$i.' binding input message');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding"]/wsdl:operation[@name="testFunc'.$i.'"]/wsdl:output/soap:body[@use="literal" and @namespace="'.$this->defaultServiceUri.'"]', 'Missing test func'.$i.' binding input message');
+        }
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:service[@name="MyServiceService"]/wsdl:port[@name="MyServicePort" and @binding="tns:MyServiceBinding"]/soap:address[@location="'.$this->defaultServiceUri.'"]');
+
+
+        for ($i = 1; $i <= 4; $i++) {
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc'.$i.'In"]/wsdl:part[@name="parameters" and @element="tns:testFunc'.$i.'"]', 'Missing test testFunc'.$i.' input message definition');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc'.$i.'Out"]/wsdl:part[@name="parameters" and @element="tns:testFunc'.$i.'Response"]', 'Missing test testFunc'.$i.' output message definition');
+        }
+
+
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     /**
@@ -302,99 +434,103 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetClassWithResponseReturnPartCompabilityMode()
     {
-        $scriptUri = 'http://localhost/my_script.php';
+        $this->server->setClass('\ZendTest\Soap\TestAsset\Test');
+        $this->bindWsdl($this->server->generate());
 
-        $server = $this->createAutodiscoverService();
-        $server->setClass('\ZendTest\Soap\TestAsset\Test');
-        $dom = $server->generate()->toDomDocument();
 
-        $dom->save(__DIR__.'/TestAsset/setclass.wsdl');
-        $this->assertContains('<message name="testFunc1Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
-        $this->assertContains('<message name="testFunc2Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
-        $this->assertContains('<message name="testFunc3Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
-        $this->assertContains('<message name="testFunc4Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
+        for ($i = 1; $i <= 4; $i++) {
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFunc'.$i.'Out"]/wsdl:part[@name="return"]');
+        }
 
-        unlink(__DIR__.'/TestAsset/setclass.wsdl');
+
+        $this->assertValidWSDL($this->dom);
+    }
+
+    /**
+     * @expectedException \Zend\Soap\Exception\InvalidArgumentException
+     * @dataProvider dataProviderForAddFunctionException
+     */
+    public function testAddFunctionException($function){
+        $this->server->addFunction($function);
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderForAddFunctionException(){
+        return array(
+            array('InvalidFunction'),
+            array(1),
+            array(array(1,2)),
+        );
     }
 
     public function testAddFunctionSimple()
     {
-        $scriptUri = 'http://localhost/my_script.php';
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
+        $this->bindWsdl($this->server->generate());
 
-        $server = $this->createAutodiscoverService();
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
-        $dom = $server->generate()->toDomDocument();
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]', 'Missing service port definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:documentation', 'Missing service port definition documentation');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:input', 'Missing service port definition input message');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:output', 'Missing service port definition input message');
 
-        $name = "TestService";
 
-        $wsdl = '<?xml version="1.0"?>'.
-                '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="' . $scriptUri . '" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="' .$name. '" targetNamespace="' . $scriptUri . '">'.
-                '<types><xsd:schema targetNamespace="' . $scriptUri . '"/></types>'.
-                '<portType name="' .$name. 'Port">'.
-                '<operation name="TestFunc"><documentation>Test Function</documentation><input message="tns:TestFuncIn"/><output message="tns:TestFuncOut"/></operation>'.
-                '</portType>'.
-                '<binding name="' .$name. 'Binding" type="tns:' .$name. 'Port">'.
-                '<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>'.
-                '<operation name="TestFunc">'.
-                '<soap:operation soapAction="' . $scriptUri . '#TestFunc"/>'.
-                '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/my_script.php"/></input>'.
-                '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/my_script.php"/></output>'.
-                '</operation>'.
-                '</binding>'.
-                '<service name="' .$name. 'Service">'.
-                '<port name="' .$name. 'Port" binding="tns:' .$name. 'Binding">'.
-                '<soap:address location="' . $scriptUri . '"/>'.
-                '</port>'.
-                '</service>'.
-                '<message name="TestFuncIn"><part name="who" type="xsd:string"/></message>'.
-                '<message name="TestFuncOut"><part name="return" type="xsd:string"/></message>'.
-                '</definitions>';
-        $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Bad WSDL generated");
-        $this->assertValidWSDL($dom);
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc"]', 'Missing service binding definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/soap:binding[@style="rpc" and @transport="http://schemas.xmlsoap.org/soap/http"]', 'Missing service binding transport definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc"]/soap:operation[@soapAction="'.$this->defaultServiceUri.'#TestFunc"]', 'Missing service operation action definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:input/soap:body[@use="encoded" and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" and @namespace="'.$this->defaultServiceUri.'"]', 'Missing operation input body definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:output/soap:body[@use="encoded" and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" and @namespace="'.$this->defaultServiceUri.'"]', 'Missing operation input body definition');
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:service[@name="MyServiceService"]/wsdl:port[@name="MyServicePort" and @binding="tns:MyServiceBinding"]/soap:address[@location="'.$this->defaultServiceUri.'"]', 'Missing service port definition');
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="TestFuncIn"]/wsdl:part[@name="who" and @type="xsd:string"]', 'Missing test testFunc input message definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="TestFuncOut"]/wsdl:part[@name="return" and @type="xsd:string"]', 'Missing test testFunc input message definition');
+
+
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     public function testAddFunctionSimpleWithDifferentStyle()
     {
-        $scriptUri = 'http://localhost/my_script.php';
+        $this->server->setBindingStyle(array('style' => 'document', 'transport' => $this->defaultServiceUri));
+        $this->server->setOperationBodyStyle(array('use' => 'literal', 'namespace' => $this->defaultServiceUri));
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
+        $this->bindWsdl($this->server->generate());
 
-        $server = $this->createAutodiscoverService();
-        $server->setBindingStyle(array('style' => 'document', 'transport' => 'http://framework.zend.com'));
-        $server->setOperationBodyStyle(array('use' => 'literal', 'namespace' => 'http://framework.zend.com'));
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
-        $dom = $server->generate()->toDomDocument();
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema[@targetNamespace="'.$this->defaultServiceUri.'"]', 'Missing service port definition');
 
-        $name = "TestService";
-        $wsdl = '<?xml version="1.0"?>'.
-                '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="' . $scriptUri . '" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="' .$name. '" targetNamespace="' . $scriptUri . '">'.
-                '<types>'.
-                '<xsd:schema targetNamespace="' . $scriptUri . '">'.
-                '<xsd:element name="TestFunc"><xsd:complexType><xsd:sequence><xsd:element name="who" type="xsd:string"/></xsd:sequence></xsd:complexType></xsd:element>'.
-                '<xsd:element name="TestFuncResponse"><xsd:complexType><xsd:sequence><xsd:element name="TestFuncResult" type="xsd:string"/></xsd:sequence></xsd:complexType></xsd:element>'.
-                '</xsd:schema>'.
-                '</types>'.
-                '<portType name="' .$name. 'Port">'.
-                '<operation name="TestFunc"><documentation>Test Function</documentation><input message="tns:TestFuncIn"/><output message="tns:TestFuncOut"/></operation>'.
-                '</portType>'.
-                '<binding name="' .$name. 'Binding" type="tns:' .$name. 'Port">'.
-                '<soap:binding style="document" transport="http://framework.zend.com"/>'.
-                '<operation name="TestFunc">'.
-                '<soap:operation soapAction="' . $scriptUri . '#TestFunc"/>'.
-                '<input><soap:body use="literal" namespace="http://framework.zend.com"/></input>'.
-                '<output><soap:body use="literal" namespace="http://framework.zend.com"/></output>'.
-                '</operation>'.
-                '</binding>'.
-                '<service name="' .$name. 'Service">'.
-                '<port name="' .$name. 'Port" binding="tns:' .$name. 'Binding">'.
-                '<soap:address location="' . $scriptUri . '"/>'.
-                '</port>'.
-                '</service>'.
-                '<message name="TestFuncIn"><part name="parameters" element="tns:TestFunc"/></message>'.
-                '<message name="TestFuncOut"><part name="parameters" element="tns:TestFuncResponse"/></message>'.
-                '</definitions>';
-        $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Bad WSDL generated");
-        $this->assertValidWSDL($dom);
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema[@targetNamespace="'.$this->defaultServiceUri.'"]/xsd:element[@name="TestFunc"]/xsd:complexType/xsd:sequence/xsd:element[@name="who" and @type="xsd:string"]', 'Missing complex type definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema[@targetNamespace="'.$this->defaultServiceUri.'"]/xsd:element[@name="TestFuncResponse"]/xsd:complexType/xsd:sequence/xsd:element[@name="TestFuncResult" and @type="xsd:string"]', 'Missing complex type definition');
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]', 'Missing service port definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:documentation', 'Missing service port definition documentation');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:input', 'Missing service port definition input message');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:output', 'Missing service port definition input message');
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc"]', 'Missing service binding definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/soap:binding[@style="document" and @transport="'.$this->defaultServiceUri.'"]', 'Missing service binding transport definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc"]/soap:operation[@soapAction="'.$this->defaultServiceUri.'#TestFunc"]', 'Missing service operation action definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:input/soap:body[@use="literal" and @namespace="'.$this->defaultServiceUri.'"]', 'Missing operation input body definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:output/soap:body[@use="literal" and @namespace="'.$this->defaultServiceUri.'"]', 'Missing operation input body definition');
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:service[@name="MyServiceService"]/wsdl:port[@name="MyServicePort" and @binding="tns:MyServiceBinding"]/soap:address[@location="'.$this->defaultServiceUri.'"]', 'Missing service port definition');
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="TestFuncIn"]/wsdl:part[@name="parameters" and @element="tns:TestFunc"]', 'Missing test testFunc input message definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="TestFuncOut"]/wsdl:part[@name="parameters" and @element="tns:TestFuncResponse"]', 'Missing test testFunc input message definition');
+
+
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     /**
@@ -402,184 +538,150 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddFunctionSimpleInReturnNameCompabilityMode()
     {
-        $scriptUri = 'http://localhost/my_script.php';
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
+        $this->bindWsdl($this->server->generate());
 
-        $server = $this->createAutodiscoverService();
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema[@targetNamespace="'.$this->defaultServiceUri.'"]', 'Missing service port definition');
 
-        $dom = $server->generate()->toDomDocument();
 
-        $name = "TestService";
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]', 'Missing service port definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:documentation', 'Missing service port definition documentation');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:input', 'Missing service port definition input message');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:output', 'Missing service port definition input message');
 
-        $wsdl = $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML());
-        $this->assertContains('<message name="TestFuncOut"><part name="return" type="xsd:string"/>', $wsdl);
-        $this->assertNotContains('<message name="TestFuncOut"><part name="TestFuncReturn"', $wsdl);
-        $this->assertValidWSDL($dom);
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc"]', 'Missing service binding definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/soap:binding[@style="rpc" and @transport="http://schemas.xmlsoap.org/soap/http"]', 'Missing service binding transport definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc"]/soap:operation[@soapAction="'.$this->defaultServiceUri.'#TestFunc"]', 'Missing service operation action definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:input/soap:body[@use="encoded" and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" and @namespace="http://localhost/MyService.php"]', 'Missing operation input body definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc"]/wsdl:output/soap:body[@use="encoded" and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" and @namespace="http://localhost/MyService.php"]', 'Missing operation input body definition');
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:service[@name="MyServiceService"]/wsdl:port[@name="MyServicePort" and @binding="tns:MyServiceBinding"]/soap:address[@location="'.$this->defaultServiceUri.'"]', 'Missing service port definition');
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="TestFuncIn"]/wsdl:part[@name="who" and @type="xsd:string"]', 'Missing test testFunc input message definition');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="TestFuncOut"]/wsdl:part[@name="return" and @type="xsd:string"]', 'Missing test testFunc input message definition');
+
+
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     public function testAddFunctionMultiple()
     {
-        $scriptUri = 'http://localhost/my_script.php';
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc2');
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc3');
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc4');
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc5');
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc6');
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc7');
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc9');
 
-        $server = $this->createAutodiscoverService();
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc2');
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc3');
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc4');
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc5');
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc6');
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc7');
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc9');
+        $this->bindWsdl($this->server->generate());
 
-        $dom = $server->generate()->toDomDocument();
 
-        $name = "TestService";
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema[@targetNamespace="'.$this->defaultServiceUri.'"]', 'Missing service port definition');
 
-        $wsdl = '<?xml version="1.0"?>'.
-                '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="' . $scriptUri . '" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="' .$name. '" targetNamespace="' . $scriptUri . '">'.
-                '<types><xsd:schema targetNamespace="' . $scriptUri . '"/></types>'.
-                '<portType name="' .$name. 'Port">'.
-                '<operation name="TestFunc"><documentation>Test Function</documentation><input message="tns:TestFuncIn"/><output message="tns:TestFuncOut"/></operation>'.
-                '<operation name="TestFunc2"><documentation>Test Function 2</documentation><input message="tns:TestFunc2In"/></operation>'.
-                '<operation name="TestFunc3"><documentation>Return false</documentation><input message="tns:TestFunc3In"/><output message="tns:TestFunc3Out"/></operation>'.
-                '<operation name="TestFunc4"><documentation>Return true</documentation><input message="tns:TestFunc4In"/><output message="tns:TestFunc4Out"/></operation>'.
-                '<operation name="TestFunc5"><documentation>Return integer</documentation><input message="tns:TestFunc5In"/><output message="tns:TestFunc5Out"/></operation>'.
-                '<operation name="TestFunc6"><documentation>Return string</documentation><input message="tns:TestFunc6In"/><output message="tns:TestFunc6Out"/></operation>'.
-                '<operation name="TestFunc7"><documentation>Return array</documentation><input message="tns:TestFunc7In"/><output message="tns:TestFunc7Out"/></operation>'.
-                '<operation name="TestFunc9"><documentation>Multiple Args</documentation><input message="tns:TestFunc9In"/><output message="tns:TestFunc9Out"/></operation>'.
-                '</portType>'.
-                '<binding name="' .$name. 'Binding" type="tns:' .$name. 'Port">'.
-                '<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>'.
-                '<operation name="TestFunc">'.
-                '<soap:operation soapAction="' . $scriptUri . '#TestFunc"/>'.
-                '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'.
-                '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'.
-                '</operation>'.
-                '<operation name="TestFunc2">'.
-                '<soap:operation soapAction="' . $scriptUri . '#TestFunc2"/>'.
-                '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'.
-                '</operation>'.
-                '<operation name="TestFunc3">'.
-                '<soap:operation soapAction="' . $scriptUri . '#TestFunc3"/>'.
-                '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'.
-                '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'.
-                '</operation>'.
-                '<operation name="TestFunc4">'.
-                '<soap:operation soapAction="' . $scriptUri . '#TestFunc4"/>'.
-                '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'.
-                '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'.
-                '</operation>'.
-                '<operation name="TestFunc5">'.
-                '<soap:operation soapAction="' . $scriptUri . '#TestFunc5"/>'.
-                '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'.
-                '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'.
-                '</operation>'.
-                '<operation name="TestFunc6">'.
-                '<soap:operation soapAction="' . $scriptUri . '#TestFunc6"/>'.
-                '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'.
-                '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'.
-                '</operation>'.
-                '<operation name="TestFunc7">'.
-                '<soap:operation soapAction="' . $scriptUri . '#TestFunc7"/>'.
-                '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'.
-                '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'.
-                '</operation>'.
-                '<operation name="TestFunc9">'.
-                '<soap:operation soapAction="' . $scriptUri . '#TestFunc9"/>'.
-                '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'.
-                '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'.
-                '</operation>'.
-                '</binding>'.
-                '<service name="' .$name. 'Service">'.
-                '<port name="' .$name. 'Port" binding="tns:' .$name. 'Binding">'.
-                '<soap:address location="' . $scriptUri . '"/>'.
-                '</port>'.
-                '</service>'.
-                '<message name="TestFuncIn"><part name="who" type="xsd:string"/></message>'.
-                '<message name="TestFuncOut"><part name="return" type="xsd:string"/></message>'.
-                '<message name="TestFunc2In"/>'.
-                '<message name="TestFunc3In"/>'.
-                '<message name="TestFunc3Out"><part name="return" type="xsd:boolean"/></message>'.
-                '<message name="TestFunc4In"/>'.
-                '<message name="TestFunc4Out"><part name="return" type="xsd:boolean"/></message>'.
-                '<message name="TestFunc5In"/>'.
-                '<message name="TestFunc5Out"><part name="return" type="xsd:int"/></message>'.
-                '<message name="TestFunc6In"/>'.
-                '<message name="TestFunc6Out"><part name="return" type="xsd:string"/></message>'.
-                '<message name="TestFunc7In"/>'.
-                '<message name="TestFunc7Out"><part name="return" type="soap-enc:Array"/></message>'.
-                '<message name="TestFunc9In"><part name="foo" type="xsd:string"/><part name="bar" type="xsd:string"/></message>'.
-                '<message name="TestFunc9Out"><part name="return" type="xsd:string"/></message>'.
-                '</definitions>';
-        $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Generated WSDL did not match expected XML");
-        $this->assertValidWSDL($dom);
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/soap:binding[@style="rpc" and @transport="http://schemas.xmlsoap.org/soap/http"]', 'Missing service port definition');
+
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:service[@name="MyServiceService"]/wsdl:port[@name="MyServicePort" and @binding="tns:MyServiceBinding"]/soap:address[@location="'.$this->defaultServiceUri.'"]', 'Missing service port definition');
+
+        foreach(array('', 2,3, 4, 5, 6, 7, 9) as $i) {
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc'.$i.'"]', 'Missing service port definition for TestFunc'.$i.'');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc'.$i.'"]/wsdl:documentation', 'Missing service port definition documentation for TestFunc'.$i.'');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc'.$i.'"]/wsdl:input[@message="tns:TestFunc'.$i.'In"]', 'Missing service port definition input message for TestFunc'.$i.'');
+
+
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc'.$i.'"]/soap:operation[@soapAction="'.$this->defaultServiceUri.'#TestFunc'.$i.'"]', 'Missing service operation action definition');
+            $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc'.$i.'"]/wsdl:input/soap:body[@use="encoded" and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" and @namespace="'.$this->defaultServiceUri.'"]', 'Missing operation input for TestFunc'.$i.' body definition');
+
+
+            if ($i != 2) {
+                $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType[@name="MyServicePort"]/wsdl:operation[@name="TestFunc'.$i.'"]/wsdl:output[@message="tns:TestFunc'.$i.'Out"]', 'Missing service port definition input message for TestFunc'.$i.'');
+
+
+                $this->assertSpecificNodeNumberInXPath(1, '//wsdl:binding[@name="MyServiceBinding" and @type="tns:MyServicePort"]/wsdl:operation[@name="TestFunc'.$i.'"]/wsdl:output/soap:body[@use="encoded" and @encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" and @namespace="'.$this->defaultServiceUri.'"]', 'Missing operation input for TestFunc'.$i.' body definition');
+
+
+                $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="TestFunc'.$i.'In"]', 'Missing test testFunc'.$i.' input message definition');
+                $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="TestFunc'.$i.'Out"]', 'Missing test testFunc'.$i.' input message definition');
+            }
+        }
+
+
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     /**
      * @group ZF-4117
+     *
+     * @dataProvider dataProviderValidUris
      */
-    public function testChangeWsdlUriInConstructor()
+    public function testChangeWsdlUriInConstructor($uri)
     {
-        $scriptUri = 'http://localhost/my_script.php';
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
+        $this->server->setUri($uri);
+        $this->bindWsdl($this->server->generate());
 
-        $server = new AutoDiscover(null, "http://example.com/service.php");
-        $server->setServiceName("TestService");
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
-        $wsdlOutput = $server->toXml();
+        $uri = htmlspecialchars($uri, ENT_QUOTES, 'UTF-8', false);
+        $this->assertEquals($uri, $this->dom->documentElement->getAttribute('targetNamespace'));
+        $this->assertNotContains($this->defaultServiceUri, $this->dom->saveXML());
 
-        $this->assertNotContains($scriptUri, $wsdlOutput);
-        $this->assertContains("http://example.com/service.php", $wsdlOutput);
-    }
 
-    /**
-     * @group ZF-4117
-     */
-    public function testChangeWsdlUriViaSetUri()
-    {
-        $scriptUri = 'http://localhost/my_script.php';
-
-        $server = $this->createAutodiscoverService();
-        $server->setUri("http://example.com/service.php");
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
-
-        $wsdlOutput = $server->toXml();
-
-        $this->assertNotContains($scriptUri, $wsdlOutput);
-        $this->assertContains("http://example.com/service.php", $wsdlOutput);
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     public function testSetNonStringNonZendUriUriThrowsException()
     {
-        $server = $this->createAutodiscoverService();
 
-        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'No uri given to');
+        $server = new AutoDiscover();
+
+        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException',
+            'Argument to \Zend\Soap\AutoDiscover::setUri should be string '
+            .'or \Zend\Uri\Uri instance.'
+        );
         $server->setUri(array("bogus"));
     }
 
     /**
      * @group ZF-4117
+     * @dataProvider dataProviderValidUris
      */
-    public function testChangingWsdlUriAfterGenerationIsPossible()
+    public function testChangingWsdlUriAfterGenerationIsPossible($uri)
     {
-        $scriptUri = 'http://localhost/my_script.php';
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
+        $wsdl = $this->server->generate();
+        $wsdl->setUri($uri);
 
-        $server = $this->createAutodiscoverService();
-        $server->setUri("http://example.com/service.php");
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
+        //@todo string retrieved this way contains decoded entities
+//        $this->assertEquals($uri, $wsdl->toDomDocument()->documentElement->getAttribute('targetNamespace'));
+        $uri = htmlspecialchars($uri, ENT_QUOTES, 'UTF-8', false);
+        $this->assertContains($uri, $wsdl->toXML());
+        $this->assertNotContains($this->defaultServiceUri, $wsdl->toXML());
 
-        $wsdlOutput = $server->toXml();
+        $this->assertValidWSDL($wsdl->toDomDocument());
+        $this->testDocumentNodes();
+    }
 
-        $this->assertNotContains($scriptUri, $wsdlOutput);
-        $this->assertContains("http://example.com/service.php", $wsdlOutput);
-
-        $server->setUri("http://example2.com/service2.php");
-
-        $wsdlOutput = $server->toXml();
-
-        $this->assertNotContains($scriptUri, $wsdlOutput);
-        $this->assertNotContains("http://example.com/service.php", $wsdlOutput);
-        $this->assertContains("http://example2.com/service2.php", $wsdlOutput);
+    /**
+     * @return array
+     */
+    public function dataProviderValidUris() {
+        return array(
+            array('http://example.com/service.php'),
+            array('http://example.com/?a=b&amp;b=c'),
+            array('http://example.com/?a=b&b=c'),
+            array('urn:uuid:550e8400-e29b-41d4-a716-446655440000'),
+            array('urn:acme:servicenamespace'),
+            array(new Uri('http://example.com/service.php'))
+        );
     }
 
     /**
@@ -587,17 +689,18 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      * @group ZF-4125
      *
      */
-    public function testUsingClassWithMultipleMethodPrototypesProducesValidWsdl()
+    public function testUsingClassWithMethodsWithMultipleDefaultParameterValues()
     {
-        $scriptUri = 'http://localhost/my_script.php';
+        $this->server->setClass('\ZendTest\Soap\TestAsset\TestFixingMultiplePrototypes');
+        $this->bindWsdl($this->server->generate());
 
-        $server = $this->createAutodiscoverService();
-        $server->setClass('\ZendTest\Soap\TestAsset\TestFixingMultiplePrototypes');
 
-        $wsdlOutput = $server->toXml();
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFuncIn"]');
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:message[@name="testFuncOut"]');
 
-        $this->assertEquals(1, substr_count($wsdlOutput, '<message name="testFuncIn">'));
-        $this->assertEquals(1, substr_count($wsdlOutput, '<message name="testFuncOut">'));
+
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     /**
@@ -605,28 +708,20 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testComplexTypesThatAreUsedMultipleTimesAreRecoginzedOnce()
     {
-        $server = $this->createAutodiscoverService();
-        $server->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
-        $server->setClass('\ZendTest\Soap\TestAsset\AutoDiscoverTestClass2');
+        $this->server->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
+        $this->server->setClass('\ZendTest\Soap\TestAsset\AutoDiscoverTestClass2');
+        $this->bindWsdl($this->server->generate());
 
-        $wsdlOutput = $server->toXml();
 
-        $this->assertEquals(1,
-            substr_count($wsdlOutput, 'wsdl:arrayType="tns:AutoDiscoverTestClass1[]"'),
-            'wsdl:arrayType definition of TestClass1 has to occour once.'
-        );
-        $this->assertEquals(1,
-            substr_count($wsdlOutput, '<xsd:complexType name="AutoDiscoverTestClass1">'),
-            '\ZendTest\Soap\TestAsset\AutoDiscoverTestClass1 has to be defined once.'
-        );
-        $this->assertEquals(1,
-            substr_count($wsdlOutput, '<xsd:complexType name="ArrayOfAutoDiscoverTestClass1">'),
-            '\ZendTest\Soap\TestAsset\AutoDiscoverTestClass1 should be defined once.'
-        );
-        $this->assertTrue(
-            substr_count($wsdlOutput, '<part name="test" type="tns:AutoDiscoverTestClass1"/>') >= 1,
-            '\ZendTest\Soap\TestAsset\AutoDiscoverTestClass1 appears once or more than once in the message parts section.'
-        );
+        $this->assertSpecificNodeNumberInXPath(1, '//xsd:attribute[@wsdl:arrayType="tns:AutoDiscoverTestClass1[]"]', 'Definition of TestClass1 has to occour once.');
+        $this->assertSpecificNodeNumberInXPath(1, '//xsd:complexType[@name="AutoDiscoverTestClass1"]', 'AutoDiscoverTestClass1 has to be defined once.');
+        $this->assertSpecificNodeNumberInXPath(1, '//xsd:complexType[@name="ArrayOfAutoDiscoverTestClass1"]', 'AutoDiscoverTestClass1 should be defined once.');
+        $nodes = $this->assertSpecificNodeNumberInXPath(1, '//wsdl:part[@name="test" and @type="tns:AutoDiscoverTestClass1"]', 'AutoDiscoverTestClass1 appears once or more than once in the message parts section.');
+        $this->assertTrue($nodes->length >= 1, 'AutoDiscoverTestClass1 appears once or more than once in the message parts section.');
+
+
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     /**
@@ -634,14 +729,17 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnSameArrayOfObjectsResponseOnDifferentMethodsWhenArrayComplex()
     {
-        $autodiscover = $this->createAutodiscoverService();
-        $autodiscover->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
-        $autodiscover->setClass('\ZendTest\Soap\TestAsset\MyService');
-        $wsdl = $autodiscover->toXml();
+        $this->server->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
+        $this->server->setClass('\ZendTest\Soap\TestAsset\MyService');
+        $this->bindWsdl($this->server->generate());
 
-        $this->assertEquals(1, substr_count($wsdl, '<xsd:complexType name="ArrayOfMyResponse">'));
 
-        $this->assertEquals(0, substr_count($wsdl, 'tns:My_Response[]'));
+        $this->assertSpecificNodeNumberInXPath(1, '//xsd:complexType[@name="ArrayOfMyResponse"]');
+        $this->assertSpecificNodeNumberInXPath(0, '//wsdl:part[@type="tns:My_Response[]"]');
+
+
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     /**
@@ -649,30 +747,21 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnSameArrayOfObjectsResponseOnDifferentMethodsWhenArraySequence()
     {
-        $autodiscover = $this->createAutodiscoverService();
-        $autodiscover->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence);
-        $autodiscover->setClass('\ZendTest\Soap\TestAsset\MyServiceSequence');
-        $wsdl = $autodiscover->toXml();
+        $this->server->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence);
+        $this->server->setClass('\ZendTest\Soap\TestAsset\MyServiceSequence');
+        $this->bindWsdl($this->server->generate());
 
-        $this->assertEquals(1, substr_count($wsdl, '<xsd:complexType name="ArrayOfString">'));
-        $this->assertEquals(1, substr_count($wsdl, '<xsd:complexType name="ArrayOfArrayOfString">'));
-        $this->assertEquals(1, substr_count($wsdl, '<xsd:complexType name="ArrayOfArrayOfArrayOfString">'));
 
-        $this->assertEquals(0, substr_count($wsdl, 'tns:string[]'));
-    }
+        $this->assertSpecificNodeNumberInXPath(1, '//xsd:complexType[@name="ArrayOfString"]');
+        $this->assertSpecificNodeNumberInXPath(1, '//xsd:complexType[@name="ArrayOfArrayOfString"]');
+        $this->assertSpecificNodeNumberInXPath(1, '//xsd:complexType[@name="ArrayOfArrayOfArrayOfString"]');
 
-    /**
-     * @group ZF-5736
-     */
-    public function testAmpersandInUrlIsCorrectlyEncoded()
-    {
-        $autodiscover = new AutoDiscover();
-        $autodiscover->setUri("http://example.com/?a=b&amp;b=c");
 
-        $autodiscover->setClass('\ZendTest\Soap\TestAsset\Test');
-        $wsdl = $autodiscover->toXml();
+        $this->assertNotContains('tns:string[]', $this->dom->saveXML());
 
-        $this->assertContains("http://example.com/?a=b&amp;b=c", $wsdl);
+
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     /**
@@ -680,14 +769,16 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testNoReturnIsOneWayCallInSetClass()
     {
-        $autodiscover = $this->createAutodiscoverService();
-        $autodiscover->setClass('\ZendTest\Soap\TestAsset\NoReturnType');
-        $wsdl = $autodiscover->toXml();
+        $this->server->setClass('\ZendTest\Soap\TestAsset\NoReturnType');
+        $this->bindWsdl($this->server->generate());
 
-        $this->assertContains(
-            '<operation name="pushOneWay"><documentation>@param string $message</documentation><input message="tns:pushOneWayIn"/></operation>',
-            $wsdl
-        );
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType/wsdl:operation[@name="pushOneWay"]/wsdl:input');
+        $this->assertSpecificNodeNumberInXPath(0, '//wsdl:portType/wsdl:operation[@name="pushOneWay"]/wsdl:output');
+
+
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     /**
@@ -695,15 +786,16 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testNoReturnIsOneWayCallInAddFunction()
     {
-        $autodiscover = $this->createAutodiscoverService();
-        $autodiscover->setServiceName('TestService');
-        $autodiscover->addFunction('\ZendTest\Soap\TestAsset\OneWay');
-        $wsdl = $autodiscover->toXml();
+        $this->server->addFunction('\ZendTest\Soap\TestAsset\OneWay');
+        $this->bindWsdl($this->server->generate());
 
-        $this->assertContains(
-            '<operation name="OneWay"><documentation>@param string $message</documentation><input message="tns:OneWayIn"/></operation>',
-            $wsdl
-        );
+
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:portType/wsdl:operation[@name="OneWay"]/wsdl:input');
+        $this->assertSpecificNodeNumberInXPath(0, '//wsdl:portType/wsdl:operation[@name="OneWay"]/wsdl:output');
+
+
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
     /**
@@ -712,32 +804,53 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testRecursiveWsdlDependencies()
     {
-        $autodiscover = $this->createAutodiscoverService();
-        $autodiscover->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence);
-        $autodiscover->setClass('\ZendTest\Soap\TestAsset\Recursion');
-        $wsdl = $autodiscover->toXml();
+        $this->server->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence);
+        $this->server->setClass('\ZendTest\Soap\TestAsset\Recursion');
+
+        $this->bindWsdl($this->server->generate());
+
 
         //  <types>
         //      <xsd:schema targetNamespace="http://localhost/my_script.php">
         //          <xsd:complexType name="Zend_Soap_AutoDiscover_Recursion">
         //              <xsd:all>
         //                  <xsd:element name="recursion" type="tns:Zend_Soap_AutoDiscover_Recursion"/>
+        $this->assertSpecificNodeNumberInXPath(1, '//wsdl:types/xsd:schema/xsd:complexType[@name="Recursion"]/xsd:all/xsd:element[@name="recursion" and @type="tns:Recursion"]');
 
 
-        $path = '//wsdl:types/xsd:schema/xsd:complexType[@name="Recursion"]/xsd:all/xsd:element[@name="recursion" and @type="tns:Recursion"]';
-        $this->assertWsdlPathExists($wsdl, $path);
+        $this->assertValidWSDL($this->dom);
+        $this->testDocumentNodes();
     }
 
-    public function assertWsdlPathExists($xml, $path)
+    /**
+     * @param int $n
+     * @param string $xpath
+     * @param string $msg
+     * @return \DOMNodeList
+     */
+    public function assertSpecificNodeNumberInXPath($n, $xpath, $msg = null)
     {
-        $doc = new \DOMDocument('UTF-8');
-        $doc->loadXML($xml);
 
-        $xpath = new \DOMXPath($doc);
-        $xpath->registerNamespace('wsdl', 'http://schemas.xmlsoap.org/wsdl/');
+        $nodes = $this->xpath->query($xpath);
+        if (!($nodes instanceof \DOMNodeList)) {
+            $this->fail('Nodes not found. Invalid XPath expression ?');
+        }
+        $this->assertEquals($n, $nodes->length, $msg);
 
-        $nodes = $xpath->query($path);
+        return $nodes;
+    }
 
-        $this->assertTrue($nodes->length >= 1, "Could not assert that XML Document contains a node that matches the XPath Expression: " . $path);
+    public function assertAttributesOfNodes($attributes, $nodeList)
+    {
+
+        $c = count($attributes);
+
+        $keys = array_keys($attributes);
+
+        foreach($nodeList as $node) {
+            for($i = 0; $i < $c; $i++) {
+                $this->assertEquals($attributes[$keys[$i]], $node->getAttribute($keys[$i]), 'Invalid attribute value.');
+            }
+        }
     }
 }

@@ -42,7 +42,8 @@ class Common extends \SoapClient
 
     /**
      * Performs SOAP request over HTTP.
-     * Overridden to implement different transport layers, perform additional XML processing or other purpose.
+     * Overridden to implement different transport layers, perform additional
+     * XML processing or other purpose.
      *
      * @param string $request
      * @param string $location
@@ -54,10 +55,12 @@ class Common extends \SoapClient
     public function __doRequest($request, $location, $action, $version, $oneWay = null)
     {
         if ($oneWay === null) {
-            return call_user_func($this->doRequestCallback, $this, $request, $location, $action, $version);
+            return call_user_func($this->doRequestCallback, $this, $request,
+                $location, $action, $version);
         }
 
-        return call_user_func($this->doRequestCallback, $this, $request, $location, $action, $version, $oneWay);
+        return call_user_func($this->doRequestCallback, $this, $request,
+            $location, $action, $version, $oneWay);
     }
 }
 

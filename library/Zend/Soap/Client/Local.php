@@ -63,8 +63,9 @@ class Local extends SOAPClient
      * @param int    $oneWay
      * @return mixed
      */
-    public function _doRequest(Common $client, $request, $location, $action, $version, $oneWay = null)
-    {
+    public function _doRequest(Common $client, $request, $location, $action,
+           $version, $oneWay = null
+    ) {
         // Perform request as is
         ob_start();
         $this->server->handle($request);

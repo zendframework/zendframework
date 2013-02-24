@@ -634,3 +634,61 @@ class TestLocalSoapClient extends \SoapClient
 }
 
 }
+
+class SequenceTest
+{
+    /**
+     * @var int
+     */
+    public $var = 5;
+}
+
+
+
+class Book
+{
+    /**
+     * @var int
+     */
+    public $somevar;
+}
+class Cookie
+{
+    /**
+     * @var int
+     */
+    public $othervar;
+}
+class Anything
+{
+}
+
+
+
+class PublicPrivateProtected
+{
+    const PROTECTED_VAR_NAME = 'bar';
+    const PRIVATE_VAR_NAME = 'baz';
+
+    /**
+     * @var string
+     */
+    public $foo;
+
+    /**
+     * @var string
+     */
+    protected $bar;
+
+    /**
+     * @var string
+     */
+    private $baz;
+}
+
+class errorClass {
+
+    public function triggerError() {
+   trigger_error('TestError', E_USER_ERROR);
+    }
+}

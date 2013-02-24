@@ -15,7 +15,8 @@ use Zend\Server\Reflection\Prototype;
 use Zend\Server\Reflection\ReflectionParameter;
 
 /**
- * Describes how types, return values and method details are detected during AutoDiscovery of a WSDL.
+ * Describes how types, return values and method details are detected during
+ * AutoDiscovery of a WSDL.
  *
  * @category   Zend
  * @package    Zend_Soap

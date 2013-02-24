@@ -11,6 +11,7 @@
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 use Zend\Soap\Exception;
+use Zend\Soap\Wsdl;
 
 /**
  * Zend_Soap_Wsdl_Strategy_DefaultComplexType
@@ -33,7 +34,8 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
         if (!class_exists($type)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Cannot add a complex type %s that is not an object or where '
-              . 'class could not be found in \'DefaultComplexType\' strategy.', $type
+                . 'class could not be found in \'DefaultComplexType\' strategy.',
+                $type
             ));
         }
 
@@ -53,19 +55,22 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
 
         $defaultProperties = $class->getDefaultProperties();
 
-        $complexType = $dom->createElement('xsd:complexType');
+        $complexType = $dom->createElementNS(Wsdl::NS_SCHEMA, 'complexType');
         $complexType->setAttribute('name', $soapTypeName);
 
-        $all = $dom->createElement('xsd:all');
+        $all = $dom->createElementNS(Wsdl::NS_SCHEMA, 'all');
 
         foreach ($class->getProperties() as $property) {
-            if ($property->isPublic() && preg_match_all('/@var\s+([^\s]+)/m', $property->getDocComment(), $matches)) {
+            if ($property->isPublic()
+                && preg_match_all('/@var\s+([^\s]+)/m', $property->getDocComment(), $matches)
+            ) {
 
                 /**
-                 * @todo check if 'xsd:element' must be used here (it may not be compatible with using 'complexType'
-                 * node for describing other classes used as attribute types for current class
+                 * @todo check if 'xsd:element' must be used here (it may not be
+                 * compatible with using 'complexType' node for describing other
+                 * classes used as attribute types for current class
                  */
-                $element = $dom->createElement('xsd:element');
+                $element = $dom->createElementNS(Wsdl::NS_SCHEMA, 'element');
                 $element->setAttribute('name', $propertyName = $property->getName());
                 $element->setAttribute('type', $this->getContext()->getType(trim($matches[1][0])));
 

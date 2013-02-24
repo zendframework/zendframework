@@ -161,7 +161,8 @@ class DocumentLiteralWrapper
         if (count($args) != 1) {
             throw new UnexpectedValueException(sprintf(
                 "Expecting exactly one argument that is the document/literal wrapper, got %d",
-                count($args)));
+                count($args))
+            );
         }
     }
 }

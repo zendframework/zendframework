@@ -10,6 +10,8 @@
 
 namespace ZendTest\Soap\Wsdl;
 
+use ZendTest\Soap\WsdlTestHelper;
+
 require_once __DIR__ . '/../TestAsset/commontypes.php';
 
 /**
@@ -19,118 +21,196 @@ require_once __DIR__ . '/../TestAsset/commontypes.php';
  * @group      Zend_Soap
  * @group      Zend_Soap_Wsdl
  */
-class ArrayOfTypeSequenceStrategyTest extends \PHPUnit_Framework_TestCase
+class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
 {
-    private $wsdl;
-    private $strategy;
-
     public function setUp()
     {
         $this->strategy = new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence();
-        $this->wsdl = new \Zend\Soap\Wsdl('MyService', 'http://localhost/MyService.php', $this->strategy);
+
+        parent::setUp();
     }
 
-    public function testFunctionReturningSimpleArrayOfInts()
+    /**
+     * @dataProvider dataProviderForFunctionReturningSimpleArrayOfBasicTypes
+     *
+     * @param $type
+     * @param $arrayTypeName
+     */
+    public function testFunctionReturningSimpleArrayOfBasicTypes($type, $arrayTypeName)
     {
-        $this->wsdl->addComplexType('int[]');
+        $this->wsdl->addComplexType($type.'[]');
+        // test duplicates also
+        $this->wsdl->addComplexType($type.'[]');
 
-        $this->assertContains(
-            '<xsd:complexType name="ArrayOfInt">'.
-                '<xsd:sequence><xsd:element name="item" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence>'.
-            '</xsd:complexType>',
-            $this->wsdl->toXML()
+        $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:complexType[@name="'.$arrayTypeName.'"]');
+        $this->assertEquals(1, $nodes->length, 'Missing complex type declaration');
+
+        $nodes = $this->xpath->query('xsd:sequence/xsd:element', $nodes->item(0));
+        $this->assertEquals(1, $nodes->length, 'Missing complex type element declaration');
+
+        $this->assertEquals('item',         $nodes->item(0)->getAttribute('name'),      'Wrong complex type element name attribute');
+        $this->assertEquals('xsd:'.$type,   $nodes->item(0)->getAttribute('type'),      'Wrong complex type type attribute value');
+        $this->assertEquals('0',            $nodes->item(0)->getAttribute('minOccurs'), 'Wrong complex type minOccurs attribute value');
+        $this->assertEquals('unbounded',    $nodes->item(0)->getAttribute('maxOccurs'), 'Wrong complex type maxOccurs attribute value');
+
+        $this->testDocumentNodes();
+    }
+
+    public function dataProviderForFunctionReturningSimpleArrayOfBasicTypes(){
+        return array(
+            array('int', 'ArrayOfInt'),
+            array('string', 'ArrayOfString'),
+            array('boolean', 'ArrayOfBoolean'),
+            array('float', 'ArrayOfFloat'),
+            array('double', 'ArrayOfDouble'),
         );
     }
 
-    public function testFunctionReturningSimpleArrayOfString()
+    /**
+     * @dataProvider dataProviderForNestedTypesDefinitions
+     *
+     * @param $stringDefinition
+     * @param $nestedTypeNames
+     */
+    public function testNestedTypesDefinitions($stringDefinition, $definedTypeName, $nestedTypeNames)
     {
-        $this->wsdl->addComplexType('string[]');
+        $return = $this->wsdl->addComplexType($stringDefinition);
+        $this->assertEquals('tns:'.$definedTypeName, $return);
 
-        $this->assertContains(
-            '<xsd:complexType name="ArrayOfString">'.
-                '<xsd:sequence><xsd:element name="item" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence>'.
-            '</xsd:complexType>',
-            $this->wsdl->toXML()
-        );
+        foreach ($nestedTypeNames as $nestedTypeName => $typeName) {
+
+            $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:complexType[@name="'.$nestedTypeName.'"]');
+            $this->assertEquals(1, $nodes->length, 'Invalid first level of nested element definition');
+
+            $nodes = $this->xpath->query('xsd:sequence/xsd:element', $nodes->item(0));
+            $this->assertEquals(1, $nodes->length, 'Invalid element in first level of nested element definition');
+
+            $this->assertEquals('item',         $nodes->item(0)->getAttribute('name'),      'Wrong complex type element name attribute');
+            $this->assertEquals('0',            $nodes->item(0)->getAttribute('minOccurs'), 'Wrong complex type minOccurs attribute value');
+            $this->assertEquals('unbounded',    $nodes->item(0)->getAttribute('maxOccurs'), 'Wrong complex type maxOccurs attribute value');
+            $this->assertEquals($typeName,      $nodes->item(0)->getAttribute('type'),      'Wrong complex type type attribute value');
+        }
+
+        $this->testDocumentNodes();
     }
 
-    public function testFunctionReturningNestedArrayOfString()
-    {
-        $return = $this->wsdl->addComplexType('string[][]');
-        $this->assertEquals('tns:ArrayOfArrayOfString', $return);
+    /**
+     * @return array
+     */
+    public function dataProviderForNestedTypesDefinitions() {
+        return array(
+            array(
+                'string[][]',
+                'ArrayOfArrayOfString',
+                array(
+                    'ArrayOfString'                             =>'xsd:string',
+                    'ArrayOfArrayOfString'                      =>'tns:ArrayOfString'
+                )
+            ),
 
-        $wsdl = $this->wsdl->toXML();
+            array(
+                'string[][][]',
+                'ArrayOfArrayOfArrayOfString',
+                array(
+                    'ArrayOfString'                             =>'xsd:string',
+                    'ArrayOfArrayOfString'                      =>'tns:ArrayOfString',
+                    'ArrayOfArrayOfArrayOfString'               =>'tns:ArrayOfArrayOfString'
+                )
+            ),
 
-        // Check for ArrayOfArrayOfString
-        $this->assertContains(
-            '<xsd:complexType name="ArrayOfArrayOfString"><xsd:sequence><xsd:element name="item" type="tns:ArrayOfString" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence></xsd:complexType>',
-            $wsdl
-        );
-        // Check for ArrayOfString
-        $this->assertContains(
-            '<xsd:complexType name="ArrayOfString"><xsd:sequence><xsd:element name="item" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence></xsd:complexType>',
-            $wsdl
+            array(
+                'string[][][][]',
+                'ArrayOfArrayOfArrayOfArrayOfString',
+                array(
+                    'ArrayOfString'                             =>'xsd:string',
+                    'ArrayOfArrayOfString'                      =>'tns:ArrayOfString',
+                    'ArrayOfArrayOfArrayOfString'               =>'tns:ArrayOfArrayOfString',
+                    'ArrayOfArrayOfArrayOfArrayOfString'        =>'tns:ArrayOfArrayOfArrayOfString'
+                )
+            ),
+
+            array(
+                'int[][]',
+                'ArrayOfArrayOfInt',
+                array(
+                    'ArrayOfInt'                                =>'xsd:int',
+                    'ArrayOfArrayOfInt'                         =>'tns:ArrayOfInt'
+                )
+            ),
         );
     }
-
-    public function testFunctionReturningMultipleNestedArrayOfType()
-    {
-        $return = $this->wsdl->addComplexType('string[][][]');
-        $this->assertEquals('tns:ArrayOfArrayOfArrayOfString', $return);
-
-        $wsdl = $this->wsdl->toXML();
-
-        // Check for ArrayOfArrayOfArrayOfString
-        $this->assertContains(
-            '<xsd:complexType name="ArrayOfArrayOfArrayOfString"><xsd:sequence><xsd:element name="item" type="tns:ArrayOfArrayOfString" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence></xsd:complexType>',
-            $wsdl
-        );
-        // Check for ArrayOfArrayOfString
-        $this->assertContains(
-            '<xsd:complexType name="ArrayOfArrayOfString"><xsd:sequence><xsd:element name="item" type="tns:ArrayOfString" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence></xsd:complexType>',
-            $wsdl
-        );
-        // Check for ArrayOfString
-        $this->assertContains(
-            '<xsd:complexType name="ArrayOfString"><xsd:sequence><xsd:element name="item" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence></xsd:complexType>',
-            $wsdl
-        );
-    }
-
 
     public function testAddComplexTypeObject()
     {
-        $return = $this->wsdl->addComplexType('\ZendTest\Soap\Wsdl\SequenceTest');
+        $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\SequenceTest');
 
         $this->assertEquals('tns:SequenceTest', $return);
 
-        $wsdl = $this->wsdl->toXML();
+        $nodes = $this->xpath->query('//xsd:complexType[@name="SequenceTest"]');
+        $this->assertEquals(1, $nodes->length, 'Missing complex type: SequenceTest');
 
-        $this->assertContains(
-            '<xsd:complexType name="SequenceTest"><xsd:all><xsd:element name="var" type="xsd:int"/></xsd:all></xsd:complexType>',
-            $wsdl
-        );
+        $nodes = $this->xpath->query('xsd:all/xsd:element', $nodes->item(0));
+        $this->assertEquals(1, $nodes->length, 'Missing element definition in complex type: SequenceTest');
+
+        $this->assertEquals('var', $nodes->item(0)->getAttribute('name'), 'Invalid name attribute value');
+        $this->assertEquals('xsd:int', $nodes->item(0)->getAttribute('type'), 'Invalid type attribute value');
+
+        $this->testDocumentNodes();
     }
 
     public function testAddComplexTypeArrayOfObject()
     {
+        $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexTypeA[]');
+        $this->assertEquals('tns:ArrayOfComplexTypeA', $return);
 
-         $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexTypeA[]');
 
-         $this->assertEquals('tns:ArrayOfComplexTypeA', $return);
+        // class a
+        $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:complexType[@name="ComplexTypeA"]');
+        $this->assertEquals(1, $nodes->length, 'Missing complex type definition.');
 
-         $wsdl = $this->wsdl->toXML();
+        $nodes = $this->xpath->query('xsd:all/xsd:element', $nodes->item(0));
 
-         $this->assertContains(
-            '<xsd:complexType name="ComplexTypeA"><xsd:all><xsd:element name="baz" type="tns:ArrayOfComplexTypeB"/></xsd:all></xsd:complexType>',
-            $wsdl,
-            $wsdl
-         );
+        $this->assertEquals(1, $nodes->length, 'Missing complex type element declaration');
 
-         $this->assertContains(
-            '<xsd:complexType name="ArrayOfComplexTypeA"><xsd:sequence><xsd:element name="item" type="tns:ComplexTypeA" minOccurs="0" maxOccurs="unbounded"/></xsd:sequence></xsd:complexType>',
-            $wsdl
-         );
+        $this->assertEquals('baz',                          $nodes->item(0)->getAttribute('name'),      'Wrong complex type element name attribute');
+        $this->assertEquals('tns:ArrayOfComplexTypeB',      $nodes->item(0)->getAttribute('type'),      'Wrong complex type type attribute value');
+
+
+        // class b
+        $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:complexType[@name="ComplexTypeB"]');
+        $this->assertEquals(1, $nodes->length, 'Missing complex type definition.');
+
+        foreach (array(
+                     'bar'          => 'xsd:string',
+                     'foo'          => 'xsd:string',
+                 ) as $name => $type) {
+            $node = $this->xpath->query('xsd:all/xsd:element[@name="'.$name.'"]', $nodes->item(0));
+
+            $this->assertEquals($name,      $node->item(0)->getAttribute('name'), 'Invalid name attribute value in complex object definition');
+            $this->assertEquals($type,      $node->item(0)->getAttribute('type'), 'Invalid type name in complex object definition');
+            $this->assertEquals('true',     $node->item(0)->getAttribute('nillable'),  'Invalid nillable attribute value');
+        }
+
+
+        // array of class a and class b
+        foreach(array(
+            'ArrayOfComplexTypeB'       =>      'ComplexTypeB',
+            'ArrayOfComplexTypeA'       =>      'ComplexTypeA'
+                ) as $arrayTypeName => $typeName) {
+
+                    $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:complexType[@name="'.$arrayTypeName.'"]');
+                    $this->assertEquals(1, $nodes->length, 'Missing complex type definition.');
+
+                    $nodes = $this->xpath->query('xsd:sequence/xsd:element', $nodes->item(0));
+                    $this->assertEquals(1, $nodes->length, 'Missing complex type element declaration');
+
+                    $this->assertEquals('item',                 $nodes->item(0)->getAttribute('name'),      'Wrong complex type element name attribute');
+                    $this->assertEquals('tns:'.$typeName,       $nodes->item(0)->getAttribute('type'),      'Wrong complex type type attribute value');
+                    $this->assertEquals('0',                    $nodes->item(0)->getAttribute('minOccurs'), 'Wrong complex type minOccurs attribute value');
+                    $this->assertEquals('unbounded',            $nodes->item(0)->getAttribute('maxOccurs'), 'Wrong complex type maxOccurs attribute value');
+        }
+
+        $this->testDocumentNodes();
     }
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
@@ -138,12 +218,4 @@ class ArrayOfTypeSequenceStrategyTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\Zend\Soap\Exception\InvalidArgumentException', 'Cannot add a complex type');
         $this->wsdl->addComplexType('ZendTest\Soap\Wsdl\UnknownClass[]');
     }
-}
-
-class SequenceTest
-{
-    /**
-     * @var int
-     */
-    public $var = 5;
 }

@@ -11,6 +11,7 @@
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 use Zend\Soap\Exception;
+use Zend\Soap\Wsdl;
 
 /**
  * ArrayOfTypeComplex strategy
@@ -22,7 +23,8 @@ use Zend\Soap\Exception;
 class ArrayOfTypeComplex extends DefaultComplexType
 {
     /**
-     * Add an ArrayOfType based on the xsd:complexType syntax if type[] is detected in return value doc comment.
+     * Add an ArrayOfType based on the xsd:complexType syntax if type[] is
+     * detected in return value doc comment.
      *
      * @param string $type
      * @throws Exception\InvalidArgumentException
@@ -51,7 +53,8 @@ class ArrayOfTypeComplex extends DefaultComplexType
     }
 
     /**
-     * Add an ArrayOfType based on the xsd:complexType syntax if type[] is detected in return value doc comment.
+     * Add an ArrayOfType based on the xsd:complexType syntax if type[] is
+     * detected in return value doc comment.
      *
      * @param string $singularType   e.g. '\MyNamespace\MyClassname'
      * @param string $type           e.g. '\MyNamespace\MyClassname[]'
@@ -76,23 +79,24 @@ class ArrayOfTypeComplex extends DefaultComplexType
         // Add array type structure to WSDL document
         $dom = $this->getContext()->toDomDocument();
 
-        $complexType = $dom->createElement('xsd:complexType');
+        $complexType = $dom->createElementNS(Wsdl::NS_SCHEMA, 'complexType');
+        $this->getContext()->getSchema()->appendChild($complexType);
+
         $complexType->setAttribute('name', $xsdComplexTypeName);
 
-        $complexContent = $dom->createElement('xsd:complexContent');
+        $complexContent = $dom->createElementNS(Wsdl::NS_SCHEMA, 'complexContent');
         $complexType->appendChild($complexContent);
 
-        $xsdRestriction = $dom->createElement('xsd:restriction');
+        $xsdRestriction = $dom->createElementNS(Wsdl::NS_SCHEMA, 'restriction');
         $xsdRestriction->setAttribute('base', 'soap-enc:Array');
         $complexContent->appendChild($xsdRestriction);
 
-        $xsdAttribute = $dom->createElement('xsd:attribute');
-        $xsdAttribute->setAttribute('ref', 'soap-enc:arrayType');
-        $xsdAttribute->setAttribute('wsdl:arrayType',
-                                    'tns:' . $this->getContext()->translateType($singularType) . '[]');
+        $xsdAttribute = $dom->createElementNS(Wsdl::NS_SCHEMA, 'attribute');
         $xsdRestriction->appendChild($xsdAttribute);
 
-        $this->getContext()->getSchema()->appendChild($complexType);
+        $xsdAttribute->setAttribute('ref', 'soap-enc:arrayType');
+        $xsdAttribute->setAttributeNS(Wsdl::NS_WSDL, 'arrayType',
+            'tns:' . $this->getContext()->translateType($singularType) . '[]');
 
         return $xsdComplexType;
     }

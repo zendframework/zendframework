@@ -57,6 +57,12 @@ class Server implements \Zend\Server\Server
     protected $classmap;
 
     /**
+     * Array of type mappings
+     * @var array
+     */
+    protected $typemap;
+
+    /**
      * Encoding
      * @var string
      */
@@ -75,7 +81,6 @@ class Server implements \Zend\Server\Server
      * @var mixed
      */
     protected $wsdlCache;
-
 
     /**
      * Registered fault exceptions
@@ -177,14 +182,20 @@ class Server implements \Zend\Server\Server
         }
 
         foreach ($options as $key => $value) {
-            switch ($key) {
+            switch (strtolower($key)) {
                 case 'actor':
                     $this->setActor($value);
                     break;
                 case 'classmap':
-                case 'classMap':
+                case 'class_map':
                     $this->setClassmap($value);
                     break;
+
+                case 'typemap':
+                case 'type_map':
+                    $this->setTypemap($value);
+                    break;
+
                 case 'encoding':
                     $this->setEncoding($value);
                     break;
@@ -198,13 +209,14 @@ class Server implements \Zend\Server\Server
                 case 'wsdl':
                     $this->setWSDL($value);
                     break;
+                case 'cache_wsdl':
+                    $this->setWSDLCache($value);
+                    break;
+                // @todo is missing break really necessary ?
                 case 'featues':
                     trigger_error(__METHOD__ . ': the option "featues" is deprecated as of 1.10.x and will be removed with 2.0.0; use "features" instead', E_USER_NOTICE);
                 case 'features':
                     $this->setSoapFeatures($value);
-                    break;
-                case 'cache_wsdl':
-                    $this->setWSDLCache($value);
                     break;
                 default:
                     break;
@@ -223,31 +235,35 @@ class Server implements \Zend\Server\Server
     {
         $options = array();
         if (null !== $this->actor) {
-            $options['actor'] = $this->actor;
+            $options['actor'] = $this->getActor();
         }
 
         if (null !== $this->classmap) {
-            $options['classmap'] = $this->classmap;
+            $options['classmap'] = $this->getClassmap();
+        }
+
+        if (null !== $this->typemap) {
+            $options['typemap'] = $this->getTypemap();
         }
 
         if (null !== $this->encoding) {
-            $options['encoding'] = $this->encoding;
+            $options['encoding'] = $this->getEncoding();
         }
 
         if (null !== $this->soapVersion) {
-            $options['soap_version'] = $this->soapVersion;
+            $options['soap_version'] = $this->getSoapVersion();
         }
 
         if (null !== $this->uri) {
-            $options['uri'] = $this->uri;
+            $options['uri'] = $this->getUri();
         }
 
         if (null !== $this->features) {
-            $options['features'] = $this->features;
+            $options['features'] = $this->getSoapFeatures();
         }
 
         if (null !== $this->wsdlCache) {
-            $options['cache_wsdl'] = $this->wsdlCache;
+            $options['cache_wsdl'] = $this->getWSDLCache();
         }
 
         return $options;
@@ -257,8 +273,9 @@ class Server implements \Zend\Server\Server
      * Set encoding
      *
      * @param  string $encoding
-     * @return Server
      * @throws Exception\InvalidArgumentException with invalid encoding argument
+     *
+     * @return Server
      */
     public function setEncoding($encoding)
     {
@@ -284,8 +301,9 @@ class Server implements \Zend\Server\Server
      * Set SOAP version
      *
      * @param  int $version One of the SOAP_1_1 or SOAP_1_2 constants
-     * @return Server
      * @throws Exception\InvalidArgumentException with invalid soap version argument
+     *
+     * @return Server
      */
     public function setSoapVersion($version)
     {
@@ -311,8 +329,9 @@ class Server implements \Zend\Server\Server
      * Check for valid URN
      *
      * @param  string $urn
-     * @return true
      * @throws Exception\InvalidArgumentException on invalid URN
+     *
+     * @return bool
      */
     public function validateUrn($urn)
     {
@@ -336,6 +355,7 @@ class Server implements \Zend\Server\Server
     {
         $this->validateUrn($actor);
         $this->actor = $actor;
+
         return $this;
     }
 
@@ -355,12 +375,14 @@ class Server implements \Zend\Server\Server
      * URI in SoapServer is actually the target namespace, not a URI; $uri must begin with 'urn:'.
      *
      * @param  string $uri
+     *
      * @return Server
      */
     public function setUri($uri)
     {
         $this->validateUrn($uri);
         $this->uri = $uri;
+
         return $this;
     }
 
@@ -378,8 +400,9 @@ class Server implements \Zend\Server\Server
      * Set classmap
      *
      * @param  array $classmap
-     * @return Server
      * @throws Exception\InvalidArgumentException for any invalid class in the class map
+     *
+     * @return Server
      */
     public function setClassmap($classmap)
     {
@@ -393,6 +416,7 @@ class Server implements \Zend\Server\Server
         }
 
         $this->classmap = $classmap;
+
         return $this;
     }
 
@@ -404,6 +428,41 @@ class Server implements \Zend\Server\Server
     public function getClassmap()
     {
         return $this->classmap;
+    }
+
+    /**
+     * @param array $typeMap
+     * @throws Exception\InvalidArgumentException
+     *
+     * @return Server
+     */
+    public function setTypemap($typeMap)
+    {
+
+        if (!is_array($typeMap)) {
+            throw new Exception\InvalidArgumentException('Typemap must be an array');
+        }
+
+        foreach ($typeMap as $type) {
+            if (!is_callable($type['from_xml'])) {
+                throw new Exception\InvalidArgumentException('Invalid from_xml callback for type: '.$type['type_name']);
+            }
+            if (!is_callable($type['to_xml'])) {
+                throw new Exception\InvalidArgumentException('Invalid to_xml callback for type: '.$type['type_name']);
+            }
+        }
+
+        $this->typemap   = $typeMap;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTypemap()
+    {
+        return $this->typemap;
     }
 
     /**
@@ -494,11 +553,13 @@ class Server implements \Zend\Server\Server
                     throw new Exception\InvalidArgumentException('One or more invalid functions specified in array');
                 }
             }
-            $this->functions = array_merge($this->functions, $function);
+
         } elseif (is_string($function) && function_exists($function)) {
             $this->functions[] = $function;
+
         } elseif ($function == SOAP_FUNCTIONS_ALL) {
             $this->functions = SOAP_FUNCTIONS_ALL;
+
         } else {
             throw new Exception\InvalidArgumentException('Invalid function specified');
         }
@@ -528,7 +589,9 @@ class Server implements \Zend\Server\Server
     public function setClass($class, $namespace = '', $argv = null)
     {
         if (isset($this->class)) {
-            throw new Exception\InvalidArgumentException('A class has already been registered with this soap server instance');
+            throw new Exception\InvalidArgumentException(
+                'A class has already been registered with this soap server instance'
+            );
         }
 
         if (is_object($class)) {
@@ -536,11 +599,15 @@ class Server implements \Zend\Server\Server
         }
 
         if (!is_string($class)) {
-            throw new Exception\InvalidArgumentException('Invalid class argument (' . gettype($class) . ')');
+            throw new Exception\InvalidArgumentException(
+                'Invalid class argument (' . gettype($class) . ')'
+            );
         }
 
         if (!class_exists($class)) {
-            throw new Exception\InvalidArgumentException('Class "' . $class . '" does not exist');
+            throw new Exception\InvalidArgumentException(
+                'Class "' . $class . '" does not exist'
+            );
         }
 
         $this->class = $class;
@@ -555,20 +622,25 @@ class Server implements \Zend\Server\Server
     /**
      * Attach an object to a server
      *
-     * Accepts an instanciated object to use when handling requests.
+     * Accepts an instantiated object to use when handling requests.
      *
      * @param object $object
      * @throws Exception\InvalidArgumentException
+     *
      * @return Server
      */
     public function setObject($object)
     {
         if (!is_object($object)) {
-            throw new Exception\InvalidArgumentException('Invalid object argument ('.gettype($object).')');
+            throw new Exception\InvalidArgumentException(
+                'Invalid object argument ('.gettype($object).')'
+            );
         }
 
         if (isset($this->object)) {
-            throw new Exception\InvalidArgumentException('An object has already been registered with this soap server instance');
+            throw new Exception\InvalidArgumentException(
+                'An object has already been registered with this soap server instance'
+            );
         }
 
         $this->object = $object;
@@ -583,7 +655,6 @@ class Server implements \Zend\Server\Server
      * merged with all public methods of the class set with {@link setClass()}
      * (if any).
      *
-     * @access public
      * @return array
      */
     public function getFunctions()
@@ -602,8 +673,9 @@ class Server implements \Zend\Server\Server
      * Unimplemented: Load server definition
      *
      * @param array $definition
-     * @return void
      * @throws Exception\RuntimeException Unimplemented
+     *
+     * @return void
      */
     public function loadFunctions($definition)
     {
@@ -613,8 +685,9 @@ class Server implements \Zend\Server\Server
     /**
      * Set server persistence
      *
-     * @param int $mode
+     * @param int $mode SOAP_PERSISTENCE_SESSION or SOAP_PERSISTENCE_REQUEST constants
      * @throws Exception\InvalidArgumentException
+     *
      * @return Server
      */
     public function setPersistence($mode)
@@ -624,6 +697,7 @@ class Server implements \Zend\Server\Server
         }
 
         $this->persistence = $mode;
+
         return $this;
     }
 
@@ -653,23 +727,35 @@ class Server implements \Zend\Server\Server
      */
     protected function _setRequest($request)
     {
+        $xml = null;
+
         if ($request instanceof DOMDocument) {
             $xml = $request->saveXML();
+
         } elseif ($request instanceof DOMNode) {
             $xml = $request->ownerDocument->saveXML();
+
         } elseif ($request instanceof SimpleXMLElement) {
             $xml = $request->asXML();
+
         } elseif (is_object($request) || is_string($request)) {
             if (is_object($request)) {
                 $xml = $request->__toString();
             } else {
                 $xml = $request;
             }
+            $xml = trim($xml);
+
             libxml_disable_entity_loader(true);
+
             $dom = new DOMDocument();
-            if (strlen($xml) == 0 || !$dom->loadXML($xml)) {
+            $loadStatus = $dom->loadXML($xml);
+
+            //@todo check libxml errors ? validate document ?
+            if (strlen($xml) == 0 || !$loadStatus) {
                 throw new Exception\InvalidArgumentException('Invalid XML');
             }
+
             foreach ($dom->childNodes as $child) {
                 if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
                     throw new Exception\InvalidArgumentException(
@@ -679,7 +765,9 @@ class Server implements \Zend\Server\Server
             }
             libxml_disable_entity_loader(false);
         }
+
         $this->request = $xml;
+
         return $this;
     }
 
@@ -865,8 +953,38 @@ class Server implements \Zend\Server\Server
      */
     public function registerFaultException($class)
     {
-        $this->faultExceptions = array_merge($this->faultExceptions, (array) $class);
+
+        if (is_array($class)) {
+            foreach($class as $row) {
+                $this->registerFaultException($row);
+            }
+
+        } elseif (is_string($class) && class_exists($class)
+            && is_subclass_of($class, 'Exception')
+        ) {
+            $ref = new \ReflectionClass($class);
+
+            $this->faultExceptions[] = $ref->getName();
+            $this->faultExceptions = array_unique($this->faultExceptions);
+        } else {
+            throw new Exception\InvalidArgumentException('Argument for'
+                .' \Zend\Soap\Server::registerFaultException should be string or '
+                . 'array of strings with valid exception names'
+            );
+        }
+
         return $this;
+    }
+
+    /**
+     * @param $fault
+     */
+    public function isRegisteredAsFaultException($fault){
+        $ref = new \ReflectionClass($fault);
+
+        $classNames = $ref->getName();
+
+        return in_array($classNames, $this->faultExceptions);
     }
 
     /**
@@ -913,8 +1031,7 @@ class Server implements \Zend\Server\Server
     public function fault($fault = null, $code = "Receiver")
     {
         if ($fault instanceof \Exception) {
-            $class = get_class($fault);
-            if (in_array($class, $this->faultExceptions)) {
+            if ($this->isRegisteredAsFaultException($fault)) {
                 $message = $fault->getMessage();
                 $eCode   = $fault->getCode();
                 $code    = empty($eCode) ? $code : $eCode;

@@ -10,6 +10,13 @@
 
 namespace Zend\Soap\Exception;
 
+/**
+ * Exception thrown when there is an error during program execution
+ *
+ * @category   Zend
+ * @package    Zend_Soap
+ * @subpackage Client
+ */
 class RuntimeException
     extends \RuntimeException
     implements ExceptionInterface

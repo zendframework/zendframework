@@ -14,6 +14,7 @@ use Zend\Server\Reflection;
 use Zend\Server\Reflection\AbstractFunction;
 use Zend\Soap\AutoDiscover\DiscoveryStrategy\DiscoveryStrategyInterface as DiscoveryStrategy;
 use Zend\Soap\AutoDiscover\DiscoveryStrategy\ReflectionDiscovery;
+use Zend\Soap\Exception\InvalidArgumentException;
 use Zend\Soap\Wsdl;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
 use Zend\Uri;
@@ -68,14 +69,20 @@ class AutoDiscover
      *
      * @var array
      */
-    protected $operationBodyStyle = array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/");
+    protected $operationBodyStyle = array(
+        'use' => 'encoded',
+        'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/"
+    );
 
     /**
      * soap:operation style
      *
      * @var array
      */
-    protected $bindingStyle = array('style' => 'rpc', 'transport' => 'http://schemas.xmlsoap.org/soap/http');
+    protected $bindingStyle = array(
+        'style' => 'rpc',
+        'transport' => 'http://schemas.xmlsoap.org/soap/http'
+    );
 
     /**
      * Name of the class to handle the WSDL creation.
@@ -106,10 +113,11 @@ class AutoDiscover
      * @param string $wsdlClass
      * @param array $classMap
      */
-    public function __construct(ComplexTypeStrategy $strategy = null, $endpointUri=null, $wsdlClass=null, array $classMap = array())
-    {
+    public function __construct(ComplexTypeStrategy $strategy = null,
+        $endpointUri=null, $wsdlClass=null, array $classMap = array()
+    ) {
         $this->reflection = new Reflection();
-        $this->discoveryStrategy = new ReflectionDiscovery();
+        $this->setDiscoveryStrategy(new ReflectionDiscovery());
 
         if ($strategy !== null) {
             $this->setComplexTypeStrategy($strategy);
@@ -167,10 +175,19 @@ class AutoDiscover
      * Set service name
      *
      * @param string $serviceName
+     * @throws Exception\InvalidArgumentException
      * @return AutoDiscover
      */
     public function setServiceName($serviceName)
     {
+        $matches = array();
+        $i = preg_match('/^[a-z\_]/ims', $serviceName, $matches);
+        if ($i != 1) {
+            throw new InvalidArgumentException(
+                'XML NCName and Service Name must start with letter or _'
+            );
+        }
+
         $this->serviceName = $serviceName;
         return $this;
     }
@@ -209,9 +226,18 @@ class AutoDiscover
     {
         if (!is_string($uri) && !($uri instanceof Uri\Uri)) {
             throw new Exception\InvalidArgumentException(
-                'No uri given to \Zend\Soap\AutoDiscover::setUri as string or \Zend\Uri\Uri instance.'
+                'Argument to \Zend\Soap\AutoDiscover::setUri should be string '
+                .'or \Zend\Uri\Uri instance.'
             );
         }
+
+        $uri = trim($uri);
+        $uri = htmlspecialchars($uri, ENT_QUOTES, 'UTF-8', false);
+
+        if (empty($uri)) {
+            throw new InvalidArgumentException('Uri contains invalid characters or is empty');
+        }
+
         $this->uri = $uri;
 
         return $this;
@@ -226,7 +252,9 @@ class AutoDiscover
     public function getUri()
     {
         if ($this->uri === null) {
-            throw new Exception\RuntimeException("Missing uri. You have to explicitly configure the Endpoint Uri by calling AutoDiscover::setUri().");
+            throw new Exception\RuntimeException("Missing uri. You have to '
+                .'explicitly configure the Endpoint Uri by calling AutoDiscover::setUri()."
+            );
         }
         if (is_string($this->uri)) {
             $this->uri = Uri\UriFactory::factory($this->uri);
@@ -244,11 +272,12 @@ class AutoDiscover
      */
     public function setWsdlClass($wsdlClass)
     {
-        if (!is_string($wsdlClass) && !is_subclass_of($wsdlClass, 'Zend\Soap\Wsdl')) {
+        if (!is_string($wsdlClass) && !is_subclass_of($wsdlClass, '\Zend\Soap\Wsdl')) {
             throw new Exception\InvalidArgumentException(
                 'No \Zend\Soap\Wsdl subclass given to Zend\Soap\AutoDiscover::setWsdlClass as string.'
             );
         }
+
         $this->wsdlClass = $wsdlClass;
 
         return $this;
@@ -277,7 +306,9 @@ class AutoDiscover
     public function setOperationBodyStyle(array $operationStyle=array())
     {
         if (!isset($operationStyle['use'])) {
-            throw new Exception\InvalidArgumentException("Key 'use' is required in Operation soap:body style.");
+            throw new Exception\InvalidArgumentException(
+                "Key 'use' is required in Operation soap:body style."
+            );
         }
         $this->operationBodyStyle = $operationStyle;
         return $this;
@@ -324,6 +355,7 @@ class AutoDiscover
     public function setClass($class)
     {
         $this->class = $class;
+
         return $this;
     }
 
@@ -331,11 +363,30 @@ class AutoDiscover
      * Add a Single or Multiple Functions to the WSDL
      *
      * @param string $function Function Name
+     * @throws Exception\InvalidArgumentException
      * @return AutoDiscover
      */
     public function addFunction($function)
     {
-        $this->functions[] = $function;
+        if (is_array($function)) {
+            foreach($function as $row){
+                $this->addFunction($row);
+            }
+        } elseif (is_string($function)) {
+            if (function_exists($function)) {
+                $this->functions[] = $function;
+            } else {
+                throw new Exception\InvalidArgumentException('Argument to '
+                    . '\Zend\Soap\AutoDiscover::addFunction should be a valid function name.'
+                );
+            }
+
+        } else {
+            throw new Exception\InvalidArgumentException('Argument to '
+                . '\Zend\Soap\AutoDiscover::addFunction should be string or array of strings.'
+            );
+        }
+
         return $this;
     }
 
@@ -375,6 +426,8 @@ class AutoDiscover
         $uri = $this->getUri();
 
         $serviceName = $this->getServiceName();
+
+        /** @var $wsdl \Zend\Soap\Wsdl */
         $wsdl = new $this->wsdlClass($serviceName, $uri, $this->strategy, $this->classMap);
 
         // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
@@ -383,8 +436,12 @@ class AutoDiscover
         $port = $wsdl->addPortType($serviceName . 'Port');
         $binding = $wsdl->addBinding($serviceName . 'Binding', 'tns:' . $serviceName . 'Port');
 
-        $wsdl->addSoapBinding($binding, $this->bindingStyle['style'], $this->bindingStyle['transport']);
-        $wsdl->addService($serviceName . 'Service', $serviceName . 'Port', 'tns:' . $serviceName . 'Binding', $uri);
+        $wsdl->addSoapBinding($binding, $this->bindingStyle['style'],
+            $this->bindingStyle['transport']
+        );
+        $wsdl->addService($serviceName . 'Service', $serviceName . 'Port',
+            'tns:' . $serviceName . 'Binding', $uri
+        );
 
         foreach ($reflectionMethods as $method) {
             $this->_addFunctionToWsdl($method, $wsdl, $port, $binding);
@@ -410,6 +467,7 @@ class AutoDiscover
         // We only support one prototype: the one with the maximum number of arguments
         $prototype = null;
         $maxNumArgumentsOfPrototype = -1;
+        /** @var $tmpPrototype \Zend\Server\Reflection\Prototype */
         foreach ($function->getPrototypes() as $tmpPrototype) {
             $numParams = count($tmpPrototype->getParameters());
             if ($numParams > $maxNumArgumentsOfPrototype) {
@@ -418,7 +476,9 @@ class AutoDiscover
             }
         }
         if ($prototype === null) {
-            throw new Exception\InvalidArgumentException("No prototypes could be found for the '" . $function->getName() . "' function");
+            throw new Exception\InvalidArgumentException(
+                'No prototypes could be found for the "' . $function->getName() . '" function'
+            );
         }
 
         $functionName = $wsdl->translateType($function->getName());
@@ -438,16 +498,22 @@ class AutoDiscover
                 }
                 $sequence[] = $sequenceElement;
             }
+
             $element = array(
-                'name' => $functionName,
-                'sequence' => $sequence
+                'name'      => $functionName,
+                'sequence'  => $sequence
             );
+
             // Add the wrapper element part, which must be named 'parameters'
             $args['parameters'] = array('element' => $wsdl->addElement($element));
+
         } else {
             // RPC style: add each parameter as a typed part
+            /** @var $param \Zend\Server\Reflection\ReflectionParameter */
             foreach ($prototype->getParameters() as $param) {
-                $args[$param->getName()] = array('type' => $wsdl->getType($this->discoveryStrategy->getFunctionParameterType($param)));
+                $args[$param->getName()] = array(
+                    'type' => $wsdl->getType($this->discoveryStrategy->getFunctionParameterType($param))
+                );
             }
         }
         $wsdl->addMessage($functionName . 'In', $args);
@@ -463,34 +529,48 @@ class AutoDiscover
                 if ($prototype->getReturnType() != "void") {
                     $sequence[] = array(
                         'name' => $functionName . 'Result',
-                        'type' => $wsdl->getType($this->discoveryStrategy->getFunctionReturnType($function, $prototype))
+                        'type' => $wsdl->getType(
+                            $this->discoveryStrategy->getFunctionReturnType($function, $prototype)
+                        )
                     );
                 }
+
                 $element = array(
-                    'name' => $functionName . 'Response',
-                    'sequence' => $sequence
+                    'name'      => $functionName . 'Response',
+                    'sequence'  => $sequence
                 );
+
                 // Add the wrapper element part, which must be named 'parameters'
                 $args['parameters'] = array('element' => $wsdl->addElement($element));
+
             } elseif ($prototype->getReturnType() != "void") {
                 // RPC style: add the return value as a typed part
-                $args['return'] = array('type' => $wsdl->getType($this->discoveryStrategy->getFunctionReturnType($function, $prototype)));
+                $args['return'] = array(
+                    'type' => $wsdl->getType($this->discoveryStrategy->getFunctionReturnType($function, $prototype))
+                );
             }
+
             $wsdl->addMessage($functionName . 'Out', $args);
         }
 
         // Add the portType operation
         if ($isOneWayMessage == false) {
-            $portOperation = $wsdl->addPortOperation($port, $functionName, 'tns:' . $functionName . 'In', 'tns:' . $functionName . 'Out');
+            $portOperation = $wsdl->addPortOperation($port, $functionName,
+                'tns:' . $functionName . 'In', 'tns:' . $functionName . 'Out'
+            );
         } else {
-            $portOperation = $wsdl->addPortOperation($port, $functionName, 'tns:' . $functionName . 'In', false);
+            $portOperation = $wsdl->addPortOperation($port, $functionName,
+                'tns:' . $functionName . 'In', false
+            );
         }
         $desc = $this->discoveryStrategy->getFunctionDocumentation($function);
+
         if (strlen($desc) > 0) {
             $wsdl->addDocumentation($portOperation, $desc);
         }
 
-        // When using the RPC style, make sure the operation style includes a 'namespace' attribute (WS-I Basic Profile 1.1 R2717)
+        // When using the RPC style, make sure the operation style includes a 'namespace'
+        // attribute (WS-I Basic Profile 1.1 R2717)
         $operationBodyStyle = $this->operationBodyStyle;
         if ($this->bindingStyle['style'] == 'rpc' && !isset($operationBodyStyle['namespace'])) {
             $operationBodyStyle['namespace'] = '' . $uri;

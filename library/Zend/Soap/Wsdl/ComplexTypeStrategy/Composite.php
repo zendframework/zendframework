@@ -50,8 +50,9 @@ class Composite implements ComplexTypeStrategy
      * @param array $typeMap
      * @param string|ComplexTypeStrategy $defaultStrategy
      */
-    public function __construct(array $typeMap=array(), $defaultStrategy='\Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType')
-    {
+    public function __construct(array $typeMap=array(),
+        $defaultStrategy='\Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType'
+    ) {
         foreach ($typeMap AS $type => $strategy) {
             $this->connectTypeToStrategy($type, $strategy);
         }

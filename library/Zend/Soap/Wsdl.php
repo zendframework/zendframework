@@ -12,6 +12,7 @@ namespace Zend\Soap;
 
 use DOMDocument;
 use DOMElement;
+use Zend\Soap\Exception\InvalidArgumentException;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
 use Zend\Uri\Uri;
 
@@ -62,12 +63,12 @@ class Wsdl
      */
     protected $classMap = array();
 
-
     const NS_WSDL           = 'http://schemas.xmlsoap.org/wsdl/';
     const NS_XMLNS          = 'http://www.w3.org/2000/xmlns/';
     const NS_SOAP           = 'http://schemas.xmlsoap.org/wsdl/soap/';
     const NS_SCHEMA         = 'http://www.w3.org/2001/XMLSchema';
     const NS_S_ENC          = 'http://schemas.xmlsoap.org/soap/encoding/';
+
     /**
      * Constructor
      *
@@ -82,10 +83,11 @@ class Wsdl
         if ($uri instanceof Uri) {
             $uri = $uri->toString();
         }
-        $this->uri = $uri;
+
+        $this->setUri($uri);
         $this->classMap = $classMap;
 
-        $this->dom = $this->getDOMDocument($uri, $name);
+        $this->dom = $this->getDOMDocument($name, $this->getUri());
 
         $this->wsdl = $this->dom->documentElement;
 
@@ -99,24 +101,27 @@ class Wsdl
      * @param string $name
      * @return \DOMDocument
      */
-    protected function getDOMDocument($uri, $name)
+    protected function getDOMDocument($name, $uri = null)
     {
         $dom = new \DOMDocument();
         $dom->preserveWhiteSpace = true;
         $dom->formatOutput = true;
+        $dom->encoding = 'UTF-8';
 
         $definitions = $dom->createElementNS(Wsdl::NS_WSDL,             'definitions');
 
+        $dom->appendChild($definitions);
+
+        $uri = $this->sanitizeUri($uri);
+
+        $definitions->setAttribute('name',             $name);
+        $definitions->setAttribute('targetNamespace',  $uri);
+
+        $definitions->setAttributeNS(Wsdl::NS_XMLNS, 'xmlns:wsdl',      Wsdl::NS_WSDL);
         $definitions->setAttributeNS(Wsdl::NS_XMLNS, 'xmlns:tns',       $uri);
         $definitions->setAttributeNS(Wsdl::NS_XMLNS, 'xmlns:soap',      Wsdl::NS_SOAP);
         $definitions->setAttributeNS(Wsdl::NS_XMLNS, 'xmlns:xsd',       Wsdl::NS_SCHEMA);
         $definitions->setAttributeNS(Wsdl::NS_XMLNS, 'xmlns:soap-enc',  Wsdl::NS_S_ENC);
-        $definitions->setAttributeNS(Wsdl::NS_XMLNS, 'xmlns:wsdl',      Wsdl::NS_WSDL);
-
-        $definitions->setAttributeNS(Wsdl::NS_WSDL, 'name',             $name);
-        $definitions->setAttributeNS(Wsdl::NS_WSDL, 'targetNamespace',  $uri);
-
-        $dom->appendChild($definitions);
 
         return $dom;
     }
@@ -147,17 +152,68 @@ class Wsdl
      */
     public function setUri($uri)
     {
-        if ($uri instanceof Uri) {
-            $uri = $uri->toString();
-        }
+        $uri = $this->sanitizeUri($uri);
+
+        $oldUri = $this->uri;
         $this->uri = $uri;
 
         if($this->dom instanceof \DOMDocument ) {
+            // namespace declarations are NOT true attributes
             $this->dom->documentElement->setAttributeNS(Wsdl::NS_XMLNS,     'xmlns:tns',        $uri);
-            $this->dom->documentElement->setAttributeNS(Wsdl::NS_WSDL,      'targetNamespace',  $uri);
+
+
+            $xpath = new \DOMXPath($this->dom);
+            $xpath->registerNamespace('unittest',     Wsdl::NS_WSDL);
+
+            $xpath->registerNamespace('tns',          $uri);
+            $xpath->registerNamespace('soap',         Wsdl::NS_SOAP);
+            $xpath->registerNamespace('xsd',          Wsdl::NS_SCHEMA);
+            $xpath->registerNamespace('soap-enc',     Wsdl::NS_S_ENC);
+            $xpath->registerNamespace('wsdl',         Wsdl::NS_WSDL);
+
+            // select only attribute nodes. Data nodes does not contain uri except for documentation node but
+            // this is for the user to decide
+            $attributeNodes = $xpath->query('//attribute::*[contains(., "'.$oldUri.'")]');
+
+            /** @var $node \DOMAttr */
+            foreach ($attributeNodes as $node) {
+//                var_dump(array($oldUri, $uri, $node->nodeValue, str_replace($oldUri, $uri, $node->nodeValue)));
+                $node->nodeValue = str_replace($oldUri, $uri, $node->nodeValue);
+            }
         }
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUri() {
+        return $this->uri;
+    }
+
+    /**
+     * Function for sanitizing uri
+     *
+     * @param $uri
+     *
+     * @throws Exception\InvalidArgumentException
+     * @return string
+     */
+    public function sanitizeUri($uri) {
+
+        if ($uri instanceof Uri) {
+            $uri = $uri->toString();
+        }
+
+        $uri = trim($uri);
+        $uri = htmlspecialchars($uri, ENT_QUOTES, 'UTF-8', false);
+
+        if (empty($uri)) {
+            throw new InvalidArgumentException('Uri contains invalid characters or is empty');
+        }
+
+        return $uri;
     }
 
     /**
@@ -281,11 +337,11 @@ class Wsdl
         $binding = $this->dom->createElementNS(Wsdl::NS_WSDL, 'binding');
         $this->wsdl->appendChild($binding);
 
-        $attr = $this->dom->createAttributeNS(Wsdl::NS_WSDL, 'name');
+        $attr = $this->dom->createAttribute('name');
         $attr->value = $name;
         $binding->appendChild($attr);
 
-        $attr = $this->dom->createAttributeNS(Wsdl::NS_WSDL, 'type');
+        $attr = $this->dom->createAttribute('type');
         $attr->value = $portType;
         $binding->appendChild($attr);
 
@@ -306,7 +362,7 @@ class Wsdl
         $operation = $this->dom->createElementNS(Wsdl::NS_WSDL, 'operation');
         $binding->appendChild($operation);
 
-        $attr = $this->dom->createAttributeNS(Wsdl::NS_WSDL, 'name');
+        $attr = $this->dom->createAttribute('name');
         $attr->value = $name;
         $operation->appendChild($attr);
 
@@ -318,7 +374,7 @@ class Wsdl
             $node->appendChild($soapNode);
 
             foreach ($input as $name => $value) {
-                $attr = $this->dom->createAttributeNS(Wsdl::NS_WSDL, $name);
+                $attr = $this->dom->createAttribute($name);
                 $attr->value = $value;
                 $soapNode->appendChild($attr);
             }
@@ -333,7 +389,7 @@ class Wsdl
             $node->appendChild($soapNode);
 
             foreach ($output as $name => $value) {
-                $attr = $this->dom->createAttributeNS(Wsdl::NS_WSDL, $name);
+                $attr = $this->dom->createAttribute($name);
                 $attr->value = $value;
                 $soapNode->appendChild($attr);
             }
@@ -344,13 +400,11 @@ class Wsdl
             $operation->appendChild($node);
 
             foreach ($fault as $name => $value) {
-                $attr = $this->dom->createAttributeNS(Wsdl::NS_WSDL, $name);
+                $attr = $this->dom->createAttribute($name);
                 $attr->value = $value;
 
                 $node->appendChild($attr);
             }
-//            $node->appendChild($soapNode);
-//            $operation->appendChild($node);
         }
 
         return $operation;
@@ -366,7 +420,8 @@ class Wsdl
      */
     public function addSoapBinding($binding, $style = 'document', $transport = 'http://schemas.xmlsoap.org/soap/http')
     {
-        $soapBinding = $this->dom->createElement('soap:binding');
+
+        $soapBinding = $this->dom->createElementNS(WSDL::NS_SOAP, 'binding');
         $soapBinding->setAttribute('style', $style);
         $soapBinding->setAttribute('transport', $transport);
 
@@ -387,7 +442,7 @@ class Wsdl
         if ($soapAction instanceof Uri) {
             $soapAction = $soapAction->toString();
         }
-        $soapOperation = $this->dom->createElement('soap:operation');
+        $soapOperation = $this->dom->createElementNS(WSDL::NS_SOAP, 'operation');
         $soapOperation->setAttribute('soapAction', $soapAction);
 
         $binding->insertBefore($soapOperation, $binding->firstChild);
@@ -409,20 +464,21 @@ class Wsdl
         if ($location instanceof Uri) {
             $location = $location->toString();
         }
-        $service = $this->dom->createElement('service');
+        $service = $this->dom->createElementNS(WSDL::NS_WSDL, 'service');
         $service->setAttribute('name', $name);
 
-        $port = $this->dom->createElement('port');
+        $this->wsdl->appendChild($service);
+
+        $port = $this->dom->createElementNS(WSDL::NS_WSDL, 'port');
         $port->setAttribute('name', $portName);
         $port->setAttribute('binding', $binding);
 
-        $soapAddress = $this->dom->createElement('soap:address');
+        $service->appendChild($port);
+
+        $soapAddress = $this->dom->createElementNS(WSDL::NS_SOAP, 'address');
         $soapAddress->setAttribute('location', $location);
 
         $port->appendChild($soapAddress);
-        $service->appendChild($port);
-
-        $this->wsdl->appendChild($service);
 
         return $service;
     }
@@ -446,15 +502,15 @@ class Wsdl
             $node = $inputNode;
         }
 
-        $doc = $this->dom->createElement('documentation');
-        $docCData = $this->dom->createTextNode(str_replace(array("\r\n", "\r"), "\n", $documentation));
-        $doc->appendChild($docCData);
-
+        $doc = $this->dom->createElementNS(WSDL::NS_WSDL, 'documentation');
         if ($node->hasChildNodes()) {
             $node->insertBefore($doc, $node->firstChild);
         } else {
             $node->appendChild($doc);
         }
+
+        $docCData = $this->dom->createTextNode(str_replace(array("\r\n", "\r"), "\n", $documentation));
+        $doc->appendChild($docCData);
 
         return $doc;
     }
@@ -469,8 +525,8 @@ class Wsdl
     public function addTypes($types)
     {
         if ($types instanceof \DomDocument) {
-            $this->dom->importNode($types->documentElement);
-            $this->wsdl->appendChild($types->documentElement);
+            $dom = $this->dom->importNode($types->documentElement);
+            $this->wsdl->appendChild($dom);
         } elseif ($types instanceof \DomNode || $types instanceof \DomElement || $types instanceof \DomDocumentFragment ) {
             $dom = $this->dom->importNode($types);
             $this->wsdl->appendChild($dom);
@@ -529,7 +585,7 @@ class Wsdl
     /**
      * Return DOM Document
      *
-     * @return object DomDocument
+     * @return \DOMDocument
      */
     public function toDomDocument()
     {
@@ -543,11 +599,15 @@ class Wsdl
      */
     public function dump($filename = false)
     {
+
         if (!$filename) {
             echo $this->toXML();
             return true;
         }
-        return file_put_contents($filename, $this->toXML());
+
+        $i = file_put_contents($filename, $this->toXML());
+
+        return $i > 0;
     }
 
     /**
@@ -596,12 +656,16 @@ class Wsdl
     public function addSchemaTypeSection()
     {
         if ($this->schema === null) {
-            $this->schema = $this->dom->createElement('xsd:schema');
-            $this->schema->setAttribute('targetNamespace', $this->uri);
-            $types = $this->dom->createElement('types');
-            $types->appendChild($this->schema);
+
+            $types = $this->dom->createElementNS(Wsdl::NS_WSDL, 'types');
             $this->wsdl->appendChild($types);
+
+            $this->schema = $this->dom->createElementNS(WSDL::NS_SCHEMA, 'schema');
+            $types->appendChild($this->schema);
+
+            $this->schema->setAttribute('targetNamespace', $this->getUri());
         }
+
         return $this;
     }
 
@@ -617,16 +681,15 @@ class Wsdl
             return $this->classMap[$type];
         }
 
-        if ($type[0] == '\\') {
-            $type = substr($type, 1);
-        }
+        $type = trim($type,'\\');
 
+        // remove namespace,
         $pos = strrpos($type, '\\');
         if ($pos) {
             $type = substr($type, $pos+1);
         }
 
-        return str_replace('\\', '.', $type);
+        return $type;
     }
 
     /**
@@ -661,26 +724,26 @@ class Wsdl
             throw new Exception\RuntimeException("The 'element' parameter needs to be an associative array.");
         }
 
-        $elementXml = $this->dom->createElement('xsd:element');
+        $elementXML = $this->dom->createElementNS(Wsdl::NS_SCHEMA, 'element');
         foreach ($element as $key => $value) {
             if (in_array($key, array('sequence', 'all', 'choice'))) {
                 if (is_array($value)) {
-                    $complexType = $this->dom->createElement('xsd:complexType');
+                    $complexType = $this->dom->createElementNS(Wsdl::NS_SCHEMA, 'complexType');
                     if (count($value) > 0) {
-                        $container = $this->dom->createElement('xsd:' . $key);
-                        foreach ($value as $subelement) {
-                            $subelementXml = $this->_parseElement($subelement);
-                            $container->appendChild($subelementXml);
+                        $container = $this->dom->createElementNS(Wsdl::NS_SCHEMA, $key);
+                        foreach ($value as $subElement) {
+                            $subElementXML = $this->_parseElement($subElement);
+                            $container->appendChild($subElementXML);
                         }
                         $complexType->appendChild($container);
                     }
-                    $elementXml->appendChild($complexType);
+                    $elementXML->appendChild($complexType);
                 }
             } else {
-                $elementXml->setAttribute($key, $value);
+                $elementXML->setAttribute($key, $value);
             }
         }
-        return $elementXml;
+        return $elementXML;
     }
 
     /**

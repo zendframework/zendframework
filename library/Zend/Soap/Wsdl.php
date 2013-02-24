@@ -243,9 +243,11 @@ class Wsdl
      *
      * @param string $messageName Name for the {@link http://www.w3.org/TR/wsdl#_messages message}
      * @param array $parts An array of {@link http://www.w3.org/TR/wsdl#_message parts}
-     *                     The array is constructed like: 'name of part' => 'part xml schema data type'
-     *                     or 'name of part' => array('type' => 'part xml schema type')
-     *                     or 'name of part' => array('element' => 'part xml element name')
+     *                     The array is constructed like:
+	 * 						'name of part' => 'part xml schema data type' or
+	 * 						'name of part' => array('type' => 'part xml schema type')  or
+	 * 						'name of part' => array('element' => 'part xml element name')
+	 *
      * @return object The new message's XML_Tree_Node for use in {@link function addDocumentation}
      */
     public function addMessage($messageName, $parts)
@@ -329,7 +331,8 @@ class Wsdl
      * Add a {@link http://www.w3.org/TR/wsdl#_bindings binding} element to WSDL
      *
      * @param string $name Name of the Binding
-     * @param string $portType name of the portType to bind
+	 * @param string $portType name of the portType to bind
+	 *
      * @return object The new binding's XML_Tree_Node for use with {@link function addBindingOperation} and {@link function addDocumentation}
      */
     public function addBinding($name, $portType)
@@ -352,9 +355,11 @@ class Wsdl
      * Add an operation to a binding element
      *
      * @param object $binding A binding XML_Tree_Node returned by {@link function addBinding}
-     * @param array $input An array of attributes for the input element, allowed keys are: 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
-     * @param array $output An array of attributes for the output element, allowed keys are: 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
-     * @param array $fault An array of attributes for the fault element, allowed keys are: 'name', 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
+	 * @param string $name
+	 * @param array|bool $input An array of attributes for the input element, allowed keys are: 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
+	 * @param array|bool $output An array of attributes for the output element, allowed keys are: 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
+	 * @param array|bool $fault An array with attributes for the fault element, allowed keys are: 'name', 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
+	 *
      * @return object The new Operation's XML_Tree_Node for use with {@link function addSoapOperation} and {@link function addDocumentation}
      */
     public function addBindingOperation($binding, $name, $input = false, $output = false, $fault = false)

@@ -495,8 +495,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
         $request =
-            '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-          . '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
+          '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
                              . 'xmlns:ns1="http://framework.zend.com" '
                              . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                              . 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
@@ -507,7 +506,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
           .             '<param0 xsi:type="xsd:string">World</param0>'
           .         '</ns1:testFunc2>'
           .     '</SOAP-ENV:Body>'
-          . '</SOAP-ENV:Envelope>' . "\n";
+          . '</SOAP-ENV:Envelope>';
 
         $response = $server->handle($request);
 
@@ -773,7 +772,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedExcepti on \SoapFault
+     * @expectedException \SoapFault
      */
     public function testHandlePhpErrors()
     {

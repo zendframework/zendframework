@@ -53,6 +53,7 @@ $rules = array(
     'output|o-s'  => 'Where to write autoload file; if not provided, assumes "autoload_classmap.php" in library directory',
     'append|a'    => 'Append to autoload file if it exists',
     'overwrite|w' => 'Whether or not to overwrite existing autoload file',
+    'ignore|i-s'    => 'Comma-separated namespaces to ignore',
 );
 
 try {
@@ -66,6 +67,11 @@ try {
 if ($opts->getOption('h')) {
     echo $opts->getUsageMessage();
     exit(0);
+}
+
+$ignoreNamespaces = array();
+if (isset($opts->i)) {
+    $ignoreNamespaces = explode(',', $opts->i);
 }
 
 $relativePathForClassmap = '';
@@ -157,6 +163,12 @@ foreach ($l as $file) {
     $filename  = $relativePathForClassmap . $filename;
 
     foreach ($file->getClasses() as $class) {
+        foreach ($ignoreNamespaces as $ignoreNs) {
+            if ($ignoreNs == substr($class, 0, strlen($ignoreNs))) {
+                continue 2;
+            }
+        }
+
         $map->{$class} = $filename;
     }
 }

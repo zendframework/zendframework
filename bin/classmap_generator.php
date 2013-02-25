@@ -24,6 +24,7 @@ use Zend\Loader\StandardAutoloader;
  * --append|-a                  Append to autoload file if it exists
  * --overwrite|-w               Whether or not to overwrite existing autoload
  *                              file
+ * --ignore|-i [ <string> ]     Comma-separated namespaces to ignore
  */
 
 $zfLibraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
@@ -53,7 +54,7 @@ $rules = array(
     'output|o-s'  => 'Where to write autoload file; if not provided, assumes "autoload_classmap.php" in library directory',
     'append|a'    => 'Append to autoload file if it exists',
     'overwrite|w' => 'Whether or not to overwrite existing autoload file',
-    'ignore|i-s'    => 'Comma-separated namespaces to ignore',
+    'ignore|i-s'  => 'Comma-separated namespaces to ignore',
 );
 
 try {

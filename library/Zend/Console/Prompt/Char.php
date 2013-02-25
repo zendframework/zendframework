@@ -39,33 +39,25 @@ class Char extends AbstractPrompt
     /**
      * Ask the user for a single key stroke
      *
-     * @param string  $promptText     The prompt text to display in console
-     * @param string  $allowedChars   A list of allowed chars (i.e. "abc12345")
-     * @param bool    $ignoreCase     If true, case will be ignored and prompt will always return lower-cased response
-     * @param bool    $allowEmpty     Is empty response allowed?
-     * @param bool    $echo           Display the selection after user presses key
+     * @param string $promptText   The prompt text to display in console
+     * @param string $allowedChars A list of allowed chars (i.e. "abc12345")
+     * @param bool   $ignoreCase   If true, case will be ignored and prompt will always return lower-cased response
+     * @param bool   $allowEmpty   Is empty response allowed?
+     * @param bool   $echo         Display the selection after user presses key
      */
     public function __construct(
         $promptText = 'Please hit a key',
-        $allowedChars = 'abc',
+        $allowedChars = '0123456789abcdefghijklmnopqrstuvwxyz',
         $ignoreCase = true,
         $allowEmpty = false,
         $echo = true
     ) {
 
-        if ($promptText !== null) {
-            $this->setPromptText($promptText);
-        }
+        $this->setPromptText($promptText);
+        $this->setAllowEmpty($allowEmpty);
+        $this->setIgnoreCase($ignoreCase);
 
-        if ($allowEmpty !== null) {
-            $this->setAllowEmpty($allowEmpty);
-        }
-
-        if ($ignoreCase !== null) {
-            $this->setIgnoreCase($ignoreCase);
-        }
-
-        if ($allowedChars !== null) {
+        if (null != $allowedChars) {
             if ($this->ignoreCase) {
                 $this->setAllowedChars(strtolower($allowedChars));
             } else {
@@ -73,9 +65,7 @@ class Char extends AbstractPrompt
             }
         }
 
-        if ($echo !== null) {
-            $this->setEcho($echo);
-        }
+        $this->setEcho($echo);
     }
 
     /**
@@ -131,11 +121,11 @@ class Char extends AbstractPrompt
     }
 
     /**
-     * @param  bool $allowEmpty
+     * @param bool $allowEmpty
      */
     public function setAllowEmpty($allowEmpty)
     {
-        $this->allowEmpty = $allowEmpty;
+        $this->allowEmpty = (bool) $allowEmpty;
     }
 
     /**
@@ -179,11 +169,11 @@ class Char extends AbstractPrompt
     }
 
     /**
-     * @param  bool $ignoreCase
+     * @param bool $ignoreCase
      */
     public function setIgnoreCase($ignoreCase)
     {
-        $this->ignoreCase = $ignoreCase;
+        $this->ignoreCase = (bool) $ignoreCase;
     }
 
     /**
@@ -195,11 +185,11 @@ class Char extends AbstractPrompt
     }
 
     /**
-     * @param  bool $echo
+     * @param bool $echo
      */
     public function setEcho($echo)
     {
-        $this->echo = $echo;
+        $this->echo = (bool) $echo;
     }
 
     /**

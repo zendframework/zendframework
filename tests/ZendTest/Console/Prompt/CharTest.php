@@ -19,7 +19,7 @@ use ZendTest\Console\TestAssets\ConsoleAdapter;
  * @subpackage UnitTests
  * @group      Zend_Console
  */
-class GetoptTest extends \PHPUnit_Framework_TestCase
+class CharTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var ConsoleAdapter

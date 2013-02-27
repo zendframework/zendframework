@@ -58,7 +58,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         ob_start();
         $this->adapter->writeLine("foo\nbar");
-        $this->assertEquals("foo\nbar\n", ob_get_clean());
+        $this->assertEquals("foo bar\n", ob_get_clean());
 
         ob_start();
         $this->adapter->writeLine("\rfoo\r");

@@ -85,7 +85,7 @@ abstract class AbstractAdapter implements AdapterInterface
         $text = trim($text, "\r\n");
 
         // Replace newline characters with spaces
-        $test = str_replace("\n", " ", $text);
+        $text = str_replace("\n", " ", $text);
 
         // Trim the line if it's too long and output text
         $consoleWidth = $this->getWidth();

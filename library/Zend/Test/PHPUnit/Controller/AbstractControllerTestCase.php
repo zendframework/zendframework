@@ -209,10 +209,16 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 
         if ($method == HttpRequest::METHOD_POST) {
             $post = $params;
-        }
-
-        if ($method == HttpRequest::METHOD_GET) {
+        } elseif ($method == HttpRequest::METHOD_GET) {
             $query = array_merge($query, $params);
+        } elseif ($method == HttpRequest::METHOD_PUT) {
+            array_walk($params,
+                function(&$item, $key) { $item = $key . '=' . $item ; }
+            );
+            $content = implode('&', $params);
+            $request->setContent($content);
+        } elseif ($params) {
+            trigger_error('Params is only supported by GET, POST and PUT HTTP method', E_USER_NOTICE);
         }
 
         $request->setMethod($method);

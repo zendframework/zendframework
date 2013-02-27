@@ -19,7 +19,7 @@ use Zend\Console\Request;
  * @group      Zend_Console
  */
 class RequestTest extends \PHPUnit_Framework_TestCase
-{    
+{
     public function setUp()
     {
         if (ini_get('register_argc_argv') == false) {
@@ -31,10 +31,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $_SERVER['argv'] = array('foo.php', 'foo' => 'baz', 'bar');
         $_ENV["FOO_VAR"] = "bar";
-        
+
         $request = new Request();
         $params = $request->getParams();
-        
+
         $this->assertEquals(2, count($params));
         $this->assertEquals($params->toArray(), array('foo' => 'baz', 'bar'));
         $this->assertEquals($request->getParam('foo'), 'baz');

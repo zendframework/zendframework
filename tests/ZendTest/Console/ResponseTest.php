@@ -19,12 +19,12 @@ use Zend\Console\Response;
  * @group      Zend_Console
  */
 class ResponseTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
-     * @var Response 
+     * @var Response
      */
     protected $response;
-    
+
     public function setUp()
     {
         $this->response = new Response();
@@ -35,7 +35,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $this->response->contentSent());
         $this->assertEquals(0, $this->response->getErrorLevel());
     }
-    
+
     public function testSetContent()
     {
         $this->response->setContent('foo, bar');
@@ -47,21 +47,21 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $this->response->contentSent());
         $this->assertEquals($this->response, $this->response->sendContent());
     }
-    
+
     /*
     public function testSetContentWithExit()
     {
-        if(!function_exists('set_exit_overload')) {
+        if (!function_exists('set_exit_overload')) {
             $this->markTestSkipped("Install ext/test_helpers to test method with exit : https://github.com/sebastianbergmann/php-test-helpers.");
         }
-        
+
         $self = $this;
         set_exit_overload(
-            function($param = null) use ($self)
-            {
-                if($param) {
+            function($param = null) use ($self) {
+                if ($param) {
                     $self->assertEquals($param, 1);
                 }
+
                 return false;
             }
         );
@@ -71,7 +71,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->response->send();
         $content = ob_get_clean();
         $this->assertEquals('foo, bar', $content);
-        
+
         unset_exit_overload();
     }
     */

@@ -259,15 +259,6 @@ class Posix extends AbstractAdapter
     }
 
     /**
-     * Return current console window title.
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-    }
-
-    /**
      * Set Console charset to use.
      *
      * @param Charset\CharsetInterface $charset

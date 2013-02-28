@@ -217,7 +217,7 @@ class AutoDiscover
     {
         if (!is_string($uri) && !($uri instanceof Uri\Uri)) {
             throw new Exception\InvalidArgumentException(
-                'Argument to \Zend\Soap\AutoDiscover::setUri should be string  or \Zend\Uri\Uri instance.'
+                'Argument to \Zend\Soap\AutoDiscover::setUri should be string or \Zend\Uri\Uri instance.'
             );
         }
 

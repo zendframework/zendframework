@@ -1209,9 +1209,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server = new AutoDiscover();
 
         $this->setExpectedException(
-            'Zend\Soap\Exception\InvalidArgumentException',
-            'Argument to \Zend\Soap\AutoDiscover::setUri should be string '
-                . 'or \Zend\Uri\Uri instance.'
+            '\Zend\Soap\Exception\InvalidArgumentException',
+            'Argument to \Zend\Soap\AutoDiscover::setUri should be string or \Zend\Uri\Uri instance.'
         );
         $server->setUri(array("bogus"));
     }

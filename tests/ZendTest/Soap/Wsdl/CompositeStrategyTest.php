@@ -83,7 +83,7 @@ class CompositeStrategyTest extends WsdlTestHelper
         $strategy->connectTypeToStrategy('Book', 'strategy');
 
         $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException',
-            'Strategy for Complex Type \'Book\' is not a valid strategy'
+            'Strategy for Complex Type "Book" is not a valid strategy'
         );
         $strategy->getStrategyOfType('Book');
     }
@@ -122,7 +122,7 @@ class CompositeStrategyTest extends WsdlTestHelper
     {
         $strategy = new ComplexTypeStrategy\Composite();
 
-        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Cannot add complex type \'Test\'');
+        $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Cannot add complex type "Test"');
         $strategy->addComplexType('Test');
     }
 

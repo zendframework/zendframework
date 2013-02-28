@@ -112,7 +112,7 @@ class Composite implements ComplexTypeStrategy
 
             if ( !($strategy instanceof ComplexTypeStrategy) ) {
                 throw new Exception\InvalidArgumentException(
-                    'Strategy for Complex Type ' . $type . ' is not a valid strategy object.'
+                    'Strategy for Complex Type "' . $type . '" is not a valid strategy object.'
                 );
             }
             $this->typeMap[$type] = $strategy;
@@ -145,7 +145,7 @@ class Composite implements ComplexTypeStrategy
     {
         if (!($this->context instanceof Wsdl) ) {
             throw new Exception\InvalidArgumentException(
-                'Cannot add complex type ' . $type . ', no context is set for this composite strategy.'
+                'Cannot add complex type "' . $type . '", no context is set for this composite strategy.'
             );
         }
 

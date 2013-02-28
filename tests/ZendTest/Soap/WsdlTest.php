@@ -793,7 +793,7 @@ class WsdlTest extends WsdlTestHelper
      */
     public function testMultipleSequenceDefinitionsOfSameTypeWillBeRecognizedOnceBySequenceStrategy()
     {
-        $this->wsdl->setComplexTypeStrategy(new ComplexTypeStrategy\ArrayOfTypeSequence());
+        $this->wsdl->setComplexTypeStrategy(new Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence());
 
         $this->wsdl->addComplexType("string[]");
         $this->wsdl->addComplexType("int[]");

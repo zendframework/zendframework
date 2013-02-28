@@ -65,7 +65,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
             return $this->getContext()->getType($singularType);
         }
 
-        return 'tns:' . str_repeat('ArrayOf', $level) . ucfirst($this->getContext()->translateType($singularType));
+        return Wsdl::TYPES_NS . ':' . str_repeat('ArrayOf', $level) . ucfirst($this->getContext()->translateType($singularType));
     }
 
     /**
@@ -112,13 +112,13 @@ class ArrayOfTypeSequence extends DefaultComplexType
 
         $arrayTypeName = substr($arrayType, strpos($arrayType, ':') + 1);
 
-        $complexType = $dom->createElementNS(Wsdl::NS_SCHEMA, 'complexType');
+        $complexType = $dom->createElementNS(Wsdl::XSD_NS_URI, 'complexType');
         $complexType->setAttribute('name', $arrayTypeName);
 
-        $sequence = $dom->createElementNS(Wsdl::NS_SCHEMA, 'sequence');
+        $sequence = $dom->createElementNS(Wsdl::XSD_NS_URI, 'sequence');
         $complexType->appendChild($sequence);
 
-        $element = $dom->createElementNS(Wsdl::NS_SCHEMA, 'element');
+        $element = $dom->createElementNS(Wsdl::XSD_NS_URI, 'element');
         $sequence->appendChild($element);
 
         $element->setAttribute('name', 'item');

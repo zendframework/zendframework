@@ -82,14 +82,14 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
         $this->xpath = new \DOMXPath($this->dom);
 
-        $this->xpath->registerNamespace('unittest', Wsdl::NS_WSDL);
+        $this->xpath->registerNamespace('unittest', Wsdl::WSDL_NS_URI);
 
         $this->xpath->registerNamespace('tns', $documentNamespace);
-        $this->xpath->registerNamespace('soap', Wsdl::NS_SOAP);
-        $this->xpath->registerNamespace('soap12', Wsdl::NS_SOAP12);
-        $this->xpath->registerNamespace('xsd', Wsdl::NS_SCHEMA);
-        $this->xpath->registerNamespace('soap-enc', Wsdl::NS_S_ENC);
-        $this->xpath->registerNamespace('wsdl', Wsdl::NS_WSDL);
+        $this->xpath->registerNamespace('soap', Wsdl::SOAP_11_NS_URI);
+        $this->xpath->registerNamespace('soap12', Wsdl::SOAP_12_NS_URI);
+        $this->xpath->registerNamespace('xsd', Wsdl::XSD_NS_URI);
+        $this->xpath->registerNamespace('soap-enc', Wsdl::SOAP_ENC_URI);
+        $this->xpath->registerNamespace('wsdl', Wsdl::WSDL_NS_URI);
     }
 
     /**
@@ -1454,6 +1454,22 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
         $this->assertValidWSDL($this->dom);
         $this->testDocumentNodes();
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testHandle()
+    {
+        $scriptUri = 'http://localhost/MyService.php';
+
+        $this->server->setClass('\ZendTest\Soap\TestAsset\Test');
+
+        ob_start();
+        $this->server->handle();
+        $actualWsdl = ob_get_clean();
+        $this->assertNotEmpty($actualWsdl, "WSDL content was not outputted.");
+        $this->assertContains($scriptUri, $actualWsdl, "Script URL was not found in WSDL content.");
     }
 
     /**

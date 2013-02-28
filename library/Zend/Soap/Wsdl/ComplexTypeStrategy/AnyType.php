@@ -13,6 +13,8 @@ namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
  * Zend_Soap_Wsdl_Strategy_AnyType
  *
  */
+use Zend\Soap\Wsdl;
+
 class AnyType implements ComplexTypeStrategyInterface
 {
     /**
@@ -31,6 +33,6 @@ class AnyType implements ComplexTypeStrategyInterface
      */
     public function addComplexType($type)
     {
-        return 'xsd:anyType';
+        return Wsdl::XSD_NS . ':anyType';
     }
 }

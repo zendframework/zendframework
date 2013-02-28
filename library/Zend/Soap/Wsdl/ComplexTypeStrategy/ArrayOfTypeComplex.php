@@ -62,7 +62,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
         }
 
         $xsdComplexTypeName = 'ArrayOf' . $this->getContext()->translateType($singularType);
-        $xsdComplexType     = 'tns:' . $xsdComplexTypeName;
+        $xsdComplexType     = Wsdl::TYPES_NS . ':' . $xsdComplexTypeName;
 
         // Register type here to avoid recursion
         $this->getContext()->addType($type, $xsdComplexType);
@@ -74,26 +74,26 @@ class ArrayOfTypeComplex extends DefaultComplexType
         // Add array type structure to WSDL document
         $dom = $this->getContext()->toDomDocument();
 
-        $complexType = $dom->createElementNS(Wsdl::NS_SCHEMA, 'complexType');
+        $complexType = $dom->createElementNS(Wsdl::XSD_NS_URI, 'complexType');
         $this->getContext()->getSchema()->appendChild($complexType);
 
         $complexType->setAttribute('name', $xsdComplexTypeName);
 
-        $complexContent = $dom->createElementNS(Wsdl::NS_SCHEMA, 'complexContent');
+        $complexContent = $dom->createElementNS(Wsdl::XSD_NS_URI, 'complexContent');
         $complexType->appendChild($complexContent);
 
-        $xsdRestriction = $dom->createElementNS(Wsdl::NS_SCHEMA, 'restriction');
-        $xsdRestriction->setAttribute('base', 'soap-enc:Array');
+        $xsdRestriction = $dom->createElementNS(Wsdl::XSD_NS_URI, 'restriction');
+        $xsdRestriction->setAttribute('base', Wsdl::SOAP_ENC_NS . ':Array');
         $complexContent->appendChild($xsdRestriction);
 
-        $xsdAttribute = $dom->createElementNS(Wsdl::NS_SCHEMA, 'attribute');
+        $xsdAttribute = $dom->createElementNS(Wsdl::XSD_NS_URI, 'attribute');
         $xsdRestriction->appendChild($xsdAttribute);
 
-        $xsdAttribute->setAttribute('ref', 'soap-enc:arrayType');
+        $xsdAttribute->setAttribute('ref', Wsdl::SOAP_ENC_NS . ':arrayType');
         $xsdAttribute->setAttributeNS(
-            Wsdl::NS_WSDL,
+            Wsdl::WSDL_NS_URI,
             'arrayType',
-            'tns:' . $this->getContext()->translateType($singularType) . '[]'
+            Wsdl::TYPES_NS . ':' . $this->getContext()->translateType($singularType) . '[]'
         );
 
         return $xsdComplexType;

@@ -42,7 +42,7 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
         $class = new \ReflectionClass($type);
 
         $soapTypeName = $this->getContext()->translateType($type);
-        $soapType     = 'tns:' . $soapTypeName;
+        $soapType     = Wsdl::TYPES_NS . ':' . $soapTypeName;
 
         // Register type here to avoid recursion
         $this->getContext()->addType($type, $soapType);
@@ -50,10 +50,10 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
 
         $defaultProperties = $class->getDefaultProperties();
 
-        $complexType = $dom->createElementNS(Wsdl::NS_SCHEMA, 'complexType');
+        $complexType = $dom->createElementNS(Wsdl::XSD_NS_URI, 'complexType');
         $complexType->setAttribute('name', $soapTypeName);
 
-        $all = $dom->createElementNS(Wsdl::NS_SCHEMA, 'all');
+        $all = $dom->createElementNS(Wsdl::XSD_NS_URI, 'all');
 
         foreach ($class->getProperties() as $property) {
             if ($property->isPublic()
@@ -65,7 +65,7 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
                  * compatible with using 'complexType' node for describing other
                  * classes used as attribute types for current class
                  */
-                $element = $dom->createElementNS(Wsdl::NS_SCHEMA, 'element');
+                $element = $dom->createElementNS(Wsdl::XSD_NS_URI, 'element');
                 $element->setAttribute('name', $propertyName = $property->getName());
                 $element->setAttribute('type', $this->getContext()->getType(trim($matches[1][0])));
 

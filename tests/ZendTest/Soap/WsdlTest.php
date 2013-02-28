@@ -27,16 +27,16 @@ class WsdlTest extends WsdlTestHelper
 
     function testConstructor()
     {
-        $this->assertEquals(Wsdl::NS_WSDL,              $this->dom->lookupNamespaceUri(null));
-        $this->assertEquals(Wsdl::NS_SOAP,              $this->dom->lookupNamespaceUri('soap'));
-        $this->assertEquals(Wsdl::NS_SOAP12,            $this->dom->lookupNamespaceUri('soap12'));
+        $this->assertEquals(Wsdl::WSDL_NS_URI,              $this->dom->lookupNamespaceUri(null));
+        $this->assertEquals(Wsdl::SOAP_11_NS_URI,              $this->dom->lookupNamespaceUri('soap'));
+        $this->assertEquals(Wsdl::SOAP_12_NS_URI,            $this->dom->lookupNamespaceUri('soap12'));
         $this->assertEquals($this->defaultServiceUri,   $this->dom->lookupNamespaceUri('tns'));
-        $this->assertEquals(Wsdl::NS_SOAP,              $this->dom->lookupNamespaceUri('soap'));
-        $this->assertEquals(Wsdl::NS_SCHEMA,            $this->dom->lookupNamespaceUri('xsd'));
-        $this->assertEquals(Wsdl::NS_S_ENC,             $this->dom->lookupNamespaceUri('soap-enc'));
-        $this->assertEquals(Wsdl::NS_WSDL,              $this->dom->lookupNamespaceUri('wsdl'));
+        $this->assertEquals(Wsdl::SOAP_11_NS_URI,              $this->dom->lookupNamespaceUri('soap'));
+        $this->assertEquals(Wsdl::XSD_NS_URI,            $this->dom->lookupNamespaceUri('xsd'));
+        $this->assertEquals(Wsdl::SOAP_ENC_URI,             $this->dom->lookupNamespaceUri('soap-enc'));
+        $this->assertEquals(Wsdl::WSDL_NS_URI,              $this->dom->lookupNamespaceUri('wsdl'));
 
-        $this->assertEquals(Wsdl::NS_WSDL,              $this->dom->documentElement->namespaceURI);
+        $this->assertEquals(Wsdl::WSDL_NS_URI,              $this->dom->documentElement->namespaceURI);
 
         $this->assertEquals($this->defaultServiceName,  $this->dom->documentElement->getAttribute('name'));
         $this->assertEquals($this->defaultServiceUri,   $this->dom->documentElement->getAttribute('targetNamespace'));
@@ -719,7 +719,7 @@ class WsdlTest extends WsdlTestHelper
     public function testAddTypesFromDocument()
     {
         $dom = new \DOMDocument();
-        $types = $dom->createElementNS(WSDL::NS_WSDL, 'types');
+        $types = $dom->createElementNS(WSDL::WSDL_NS_URI, 'types');
         $dom->appendChild($types);
 
         $this->wsdl->addTypes($dom);
@@ -732,7 +732,7 @@ class WsdlTest extends WsdlTestHelper
 
     public function testAddTypesFromNode()
     {
-        $dom = $this->dom->createElementNS(WSDL::NS_WSDL, 'types');
+        $dom = $this->dom->createElementNS(WSDL::WSDL_NS_URI, 'types');
 
         $this->wsdl->addTypes($dom);
 

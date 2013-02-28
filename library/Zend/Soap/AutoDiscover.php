@@ -422,13 +422,13 @@ class AutoDiscover
         $wsdl->addSchemaTypeSection();
 
         $port = $wsdl->addPortType($serviceName . 'Port');
-        $binding = $wsdl->addBinding($serviceName . 'Binding', 'tns:' . $serviceName . 'Port');
+        $binding = $wsdl->addBinding($serviceName . 'Binding', Wsdl::TYPES_NS . ':' . $serviceName . 'Port');
 
         $wsdl->addSoapBinding($binding, $this->bindingStyle['style'],
             $this->bindingStyle['transport']
         );
         $wsdl->addService($serviceName . 'Service', $serviceName . 'Port',
-            'tns:' . $serviceName . 'Binding', $uri
+            Wsdl::TYPES_NS . ':' . $serviceName . 'Binding', $uri
         );
 
         foreach ($reflectionMethods as $method) {
@@ -543,12 +543,16 @@ class AutoDiscover
 
         // Add the portType operation
         if ($isOneWayMessage == false) {
-            $portOperation = $wsdl->addPortOperation($port, $functionName,
-                'tns:' . $functionName . 'In', 'tns:' . $functionName . 'Out'
+            $portOperation = $wsdl->addPortOperation(
+                $port,
+                $functionName,
+                Wsdl::TYPES_NS . ':' . $functionName . 'In', Wsdl::TYPES_NS . ':' . $functionName . 'Out'
             );
         } else {
-            $portOperation = $wsdl->addPortOperation($port, $functionName,
-                'tns:' . $functionName . 'In', false
+            $portOperation = $wsdl->addPortOperation(
+                $port,
+                $functionName,
+                Wsdl::TYPES_NS . ':' . $functionName . 'In', false
             );
         }
         $desc = $this->discoveryStrategy->getFunctionDocumentation($function);
@@ -617,5 +621,16 @@ class AutoDiscover
     public function toXml()
     {
         return $this->generate()->toXml();
+    }
+
+    /**
+     * Handle WSDL document.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        header('Content-Type: text/xml');
+        echo $this->toXml();
     }
 }

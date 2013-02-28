@@ -405,7 +405,7 @@ class Client implements ServerClient
         $this->soapClient = null;
 
         return $this;
-}
+    }
 
     /**
      * Retrieve typemap

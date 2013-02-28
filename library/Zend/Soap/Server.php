@@ -210,13 +210,6 @@ class Server implements \Zend\Server\Server
                     $this->setWSDLCache($value);
                     break;
 
-                // @todo is missing break really necessary ?
-                case 'featues':
-                    trigger_error(
-                        __METHOD__ . ': the option "featues" is deprecated as of 1.10.x and will be removed with 2.0.0; use "features" instead',
-                        E_USER_NOTICE
-                    );
-
                 case 'features':
                     $this->setSoapFeatures($value);
                     break;
@@ -333,7 +326,7 @@ class Server implements \Zend\Server\Server
      * @param  string $urn
      * @throws Exception\InvalidArgumentException on invalid URN
      *
-     * @return bool
+     * @return true
      */
     public function validateUrn($urn)
     {
@@ -447,10 +440,10 @@ class Server implements \Zend\Server\Server
 
         foreach ($typeMap as $type) {
             if (!is_callable($type['from_xml'])) {
-                throw new Exception\InvalidArgumentException('Invalid from_xml callback for type: '.$type['type_name']);
+                throw new Exception\InvalidArgumentException('Invalid from_xml callback for type: ' . $type['type_name']);
             }
             if (!is_callable($type['to_xml'])) {
-                throw new Exception\InvalidArgumentException('Invalid to_xml callback for type: '.$type['type_name']);
+                throw new Exception\InvalidArgumentException('Invalid to_xml callback for type: ' . $type['type_name']);
             }
         }
 
@@ -630,7 +623,7 @@ class Server implements \Zend\Server\Server
     public function setObject($object)
     {
         if (!is_object($object)) {
-            throw new Exception\InvalidArgumentException('Invalid object argument ('.gettype($object).')');
+            throw new Exception\InvalidArgumentException('Invalid object argument (' . gettype($object) . ')');
         }
 
         if (isset($this->object)) {
@@ -700,7 +693,7 @@ class Server implements \Zend\Server\Server
     /**
      * Get server persistence
      *
-     * @return Server
+     * @return int
      */
     public function getPersistence()
     {

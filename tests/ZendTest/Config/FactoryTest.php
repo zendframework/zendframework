@@ -20,6 +20,28 @@ use Zend\Config\Factory;
  */
 class FactoryTest extends \PHPUnit_Framework_TestCase
 {
+    protected $tmpFiles = array();
+
+    protected function getTestAssetFileName($ext)
+    {
+        if (empty($this->tmpfiles[$ext])) {
+            $this->tmpfiles[$ext] = tempnam(sys_get_temp_dir(), 'zend-config-writer').'.'.$ext;
+        }
+        return $this->tmpfiles[$ext];
+    }
+
+    public function tearDown()
+    {
+        foreach ($this->tmpFiles as $file) {
+            if (file_exists($file)) {
+                if (!is_writable($file)) {
+                    chmod($file, 0777);
+                }
+                @unlink($file);
+            }
+        }
+    }
+
     public function testFromIni()
     {
         $config = Factory::fromFile(__DIR__ . '/TestAssets/Ini/include-base.ini');
@@ -125,7 +147,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($configObject['one'], 1);
     }
 
-    public function testFactoryCanRegisterCustomReaderPlugn()
+    public function testFactoryCanRegisterCustomReaderPlugin()
     {
         $dummyReader = new Reader\TestAssets\DummyReader();
         Factory::getReaderPluginManager()->setService('DummyReader', $dummyReader);
@@ -138,5 +160,73 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($configObject['one'], 1);
     }
 
+    public function testFactoryToFileInvalidFileExtension()
+    {
+        $this->setExpectedException('RuntimeException');
+        $result = Factory::toFile(__DIR__.'/TestAssets/bad.ext', array());
+    }
 
+    public function testFactoryToFileNoDirInHere()
+    {
+        $this->setExpectedException('RuntimeException');
+        $result = Factory::toFile(__DIR__.'/TestAssets/NoDirInHere/nonExisiting/dummy.php', array());
+    }
+
+    public function testFactoryWriteToFile()
+    {
+        $config = array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo'));
+
+        $file = $this->getTestAssetFileName('php');
+        $result = Factory::toFile($file, $config);
+
+        // build string line by line as we are trailing-whitespace sensitive.
+        $expected = "<?php\n";
+        $expected .= "return array (\n";
+        $expected .= "  'test' => 'foo',\n";
+        $expected .= "  'bar' => \n";
+        $expected .= "  array (\n";
+        $expected .= "    0 => 'baz',\n";
+        $expected .= "    1 => 'foo',\n";
+        $expected .= "  ),\n";
+        $expected .= ");\n";
+
+        $this->assertEquals(true, $result);
+        $this->assertEquals($expected, file_get_contents($file));
+    }
+
+    public function testFactoryToFileWrongConfig()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $result = Factory::toFile('test.ini', 'Im wrong');
+    }
+
+    public function testFactoryRegisterInvalidWriter()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        Factory::registerWriter('dum', new Reader\TestAssets\DummyReader());
+    }
+
+    public function testFactoryCanRegisterCustomWriterInstance()
+    {
+        Factory::registerWriter('dum', new Writer\TestAssets\DummyWriter());
+
+        $file = $this->getTestAssetFileName('dum');
+
+        $res = Factory::toFile($file, array('one' => 1));
+
+        $this->assertEquals($res, true);
+    }
+
+    public function testFactoryCanRegisterCustomWriterPlugin()
+    {
+        $dummyWriter = new Writer\TestAssets\DummyWriter();
+        Factory::getWriterPluginManager()->setService('DummyWriter', $dummyWriter);
+
+        Factory::registerWriter('dum', 'DummyWriter');
+
+        $file = $this->getTestAssetFileName('dum');
+
+        $res = Factory::toFile($file, array('one' => 1));
+        $this->assertEquals($res, true);
+    }
 }

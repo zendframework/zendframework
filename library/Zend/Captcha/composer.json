@@ -14,12 +14,19 @@
     "target-dir": "Zend/Captcha",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-math": "self.version"
+        "zendframework/zend-math": "self.version",
+        "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {
         "zendframework/zendservice-recaptcha": "*"
     },
     "suggest": {
         "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha component"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev",
+            "dev-develop": "2.2-dev"
+        }
     }
 }

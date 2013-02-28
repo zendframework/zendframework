@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Session
  */
 
 namespace Zend\Session\SaveHandler;
@@ -13,8 +12,6 @@ namespace Zend\Session\SaveHandler;
 /**
  * SaveHandler Interface
  *
- * @category   Zend
- * @package    Zend_Session
  * @see        http://php.net/session_set_save_handler
  */
 interface SaveHandlerInterface

@@ -5,17 +5,12 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib;
 
 use Traversable;
 
-/**
- * @category   Zend
- * @package    Zend_Stdlib
- */
 abstract class AbstractOptions implements ParameterObjectInterface
 {
     /**
@@ -28,8 +23,6 @@ abstract class AbstractOptions implements ParameterObjectInterface
 
     /**
      * @param  array|Traversable|null $options
-     * @return AbstractOptions
-     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)
     {
@@ -41,7 +34,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
     /**
      * @param  array|Traversable $options
      * @throws Exception\InvalidArgumentException
-     * @return void
+     * @return AbstractOptions Provides fluent interface
      */
     public function setFromArray($options)
     {
@@ -55,6 +48,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
         foreach ($options as $key => $value) {
             $this->__set($key, $value);
         }
+        return $this;
     }
 
     /**
@@ -115,6 +109,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
                 . 'which must be defined'
             );
         }
+
         return $this->{$getter}();
     }
 
@@ -131,14 +126,14 @@ abstract class AbstractOptions implements ParameterObjectInterface
     /**
      * @see ParameterObject::__unset()
      * @param string $key
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function __unset($key)
     {
         try {
             $this->__set($key, null);
-        } catch (\InvalidArgumentException $e) {
+        } catch (Exception\BadMethodCallException $e) {
             throw new Exception\InvalidArgumentException(
                 'The class property $' . $key . ' cannot be unset as'
                     . ' NULL is an invalid value for it',

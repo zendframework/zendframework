@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form;
@@ -21,10 +20,6 @@ use Zend\InputFilter\InputProviderInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- */
 class Form extends Fieldset implements FormInterface
 {
     /**
@@ -104,6 +99,13 @@ class Form extends Fieldset implements FormInterface
      * @var bool
      */
     protected $isPrepared = false;
+
+    /**
+     * Prefer form input filter over input filter defaults
+     *
+     * @var bool
+     */
+    protected $preferFormInputFilter = false;
 
     /**
      * Are the form elements/fieldsets wrapped by the form name ?
@@ -189,7 +191,7 @@ class Form extends Fieldset implements FormInterface
      *
      * Typically, also passes data on to the composed input filter.
      *
-     * @param  array|\ArrayAccess|\Traversable $data
+     * @param  array|\ArrayAccess|Traversable $data
      * @return Form|FormInterface
      * @throws Exception\InvalidArgumentException
      */
@@ -319,7 +321,7 @@ class Form extends Fieldset implements FormInterface
                 continue;
             }
 
-            if (is_array($value)) {
+            if (is_array($value) && is_array($match[$name])) {
                 $data[$name] = $this->prepareBindData($value, $match[$name]);
             } else {
                 $data[$name] = $value;
@@ -404,6 +406,10 @@ class Form extends Fieldset implements FormInterface
      */
     public function isValid()
     {
+        if ($this->hasValidated) {
+            return $this->isValid;
+        }
+
         $this->isValid = false;
 
         if (!is_array($this->data) && !is_object($this->object)) {
@@ -435,9 +441,10 @@ class Form extends Fieldset implements FormInterface
         $filter->setData($this->data);
         $filter->setValidationGroup(InputFilterInterface::VALIDATE_ALL);
 
-        if ($this->validationGroup !== null) {
-            $this->prepareValidationGroup($this, $this->data, $this->validationGroup);
-            $filter->setValidationGroup($this->validationGroup);
+        $validationGroup = $this->getValidationGroup();
+        if ($validationGroup !== null) {
+            $this->prepareValidationGroup($this, $this->data, $validationGroup);
+            $filter->setValidationGroup($validationGroup);
         }
 
         $this->isValid = $result = $filter->isValid();
@@ -527,6 +534,16 @@ class Form extends Fieldset implements FormInterface
     }
 
     /**
+     * Retrieve the current validation group, if any
+     *
+     * @return null|array
+     */
+    public function getValidationGroup()
+    {
+        return $this->validationGroup;
+    }
+
+    /**
      * Prepare the validation group in case Collection elements were used (this function also handle the case where elements
      * could have been dynamically added or removed from a collection using JavaScript)
      *
@@ -552,10 +569,8 @@ class Form extends Fieldset implements FormInterface
                 $values = array();
 
                 if (isset($data[$key])) {
-                    $count = count($data[$key]);
-
-                    for ($i = 0; $i != $count; ++$i) {
-                        $values[] = $value;
+                    foreach(array_keys($data[$key]) as $cKey) {
+                        $values[$cKey] = $value;
                     }
                 }
 
@@ -641,6 +656,28 @@ class Form extends Fieldset implements FormInterface
     }
 
     /**
+     * Set flag indicating whether or not to prefer the form input filter over element and fieldset defaults
+     *
+     * @param  bool $preferFormInputFilter
+     * @return Form
+     */
+    public function setPreferFormInputFilter($preferFormInputFilter)
+    {
+        $this->preferFormInputFilter = (bool) $preferFormInputFilter;
+        return $this;
+    }
+
+    /**
+     * Should we use form input filter over element input filter defaults from elements and fieldsets?
+     *
+     * @return bool
+     */
+    public function getPreferFormInputFilter()
+    {
+        return $this->preferFormInputFilter;
+    }
+
+    /**
      * Attach defaults provided by the elements to the input filter
      *
      * @param  InputFilterInterface $inputFilter
@@ -661,6 +698,10 @@ class Form extends Fieldset implements FormInterface
 
         foreach ($fieldset->getElements() as $element) {
             $name = $element->getName();
+
+            if ($this->preferFormInputFilter && $inputFilter->has($name)) {
+                continue;
+            }
 
             if (!$element instanceof InputProviderInterface) {
                 if ($inputFilter->has($name)) {

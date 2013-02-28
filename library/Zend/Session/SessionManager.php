@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Session
  */
 
 namespace Zend\Session;
@@ -14,9 +13,6 @@ use Zend\EventManager\EventManagerInterface;
 
 /**
  * Session ManagerInterface implementation utilizing ext/session
- *
- * @category   Zend
- * @package    Zend_Session
  */
 class SessionManager extends AbstractManager
 {
@@ -107,7 +103,10 @@ class SessionManager extends AbstractManager
                 $storage->fromArray($_SESSION);
             }
             $_SESSION = $storage;
+        } elseif ($storage instanceof Storage\SessionArrayStorage) {
+            $storage->fromArray($_SESSION);
         }
+
         if (!$this->isValid()) {
             throw new Exception\RuntimeException('Session validation failed');
         }
@@ -163,7 +162,7 @@ class SessionManager extends AbstractManager
         // object isImmutable.
         $storage  = $this->getStorage();
         if (!$storage->isImmutable()) {
-            $_SESSION = $storage->toArray();
+            $_SESSION = $storage->toArray(true);
             session_write_close();
             $storage->fromArray($_SESSION);
             $storage->markImmutable();
@@ -228,13 +227,10 @@ class SessionManager extends AbstractManager
      */
     public function setId($id)
     {
-        if (!$this->sessionExists()) {
-            session_id($id);
-            return $this;
+        if ($this->sessionExists()) {
+            throw new Exception\RuntimeException('Session has already been started, to change the session ID call regenerateId()');
         }
-        $this->destroy();
         session_id($id);
-        $this->start();
         return $this;
     }
 

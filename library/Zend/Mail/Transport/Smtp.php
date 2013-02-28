@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Transport;
@@ -20,10 +19,6 @@ use Zend\Mail\Protocol\Exception as ProtocolException;
  * SMTP connection object
  *
  * Loads an instance of Zend\Mail\Protocol\Smtp and forwards smtp transactions
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Transport
  */
 class Smtp implements TransportInterface
 {
@@ -206,9 +201,8 @@ class Smtp implements TransportInterface
         // If sending multiple messages per session use existing adapter
         $connection = $this->getConnection();
 
-        if (!($connection instanceof Protocol\Smtp)) {
-            // First time connecting
-            $connection = $this->lazyLoadConnection();
+        if (!($connection instanceof Protocol\Smtp) || !$connection->hasSession()) {
+            $connection = $this->connect();
         } else {
             // Reset connection to ensure reliable transaction
             $connection->rset();
@@ -314,21 +308,37 @@ class Smtp implements TransportInterface
     }
 
     /**
-     * Lazy load the connection, and pass it helo
+     * Lazy load the connection
      *
      * @return Protocol\Smtp
      */
     protected function lazyLoadConnection()
     {
         // Check if authentication is required and determine required class
-        $options        = $this->getOptions();
-        $config         = $options->getConnectionConfig();
-        $config['host'] = $options->getHost();
-        $config['port'] = $options->getPort();
-        $connection = $this->plugin($options->getConnectionClass(), $config);
+        $options          = $this->getOptions();
+        $config           = $options->getConnectionConfig();
+        $config['host']   = $options->getHost();
+        $config['port']   = $options->getPort();
+        $connection       = $this->plugin($options->getConnectionClass(), $config);
         $this->connection = $connection;
+
+        return $this->connect();
+    }
+
+    /**
+     * Connect the connection, and pass it helo
+     *
+     * @return Protocol\Smtp
+     */
+    protected function connect()
+    {
+        if (!$this->connection instanceof Protocol\Smtp) {
+            return $this->lazyLoadConnection();
+        }
+
         $this->connection->connect();
-        $this->connection->helo($options->getName());
+        $this->connection->helo($this->getOptions()->getName());
+
         return $this->connection;
     }
 }

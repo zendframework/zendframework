@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
@@ -16,10 +15,6 @@ use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\Exception\InvalidArgumentException;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
 abstract class AbstractValidator implements
     TranslatorAwareInterface,
     ValidatorInterface
@@ -145,7 +140,7 @@ abstract class AbstractValidator implements
                 $this->{$name}($option);
             } elseif (($fname != 'setOptions') && method_exists($this, $fname)) {
                 $this->{$fname}($option);
-            } elseif (($fname2 != 'setOptions') && method_exists($this, $fname2)) {
+            } elseif (method_exists($this, $fname2)) {
                 $this->{$fname2}($option);
             } elseif (isset($this->options)) {
                 $this->options[$name] = $option;

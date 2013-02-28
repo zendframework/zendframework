@@ -21,15 +21,21 @@ use Zend\Mail\Protocol\Smtp;
  */
 class SmtpProtocolSpy extends Smtp
 {
+    public $calledQuit = false;
     protected $connect = false;
     protected $mail;
     protected $rcptTest = array();
-    protected $sess = true;
 
     public function connect()
     {
         $this->connect = true;
         return true;
+    }
+
+    public function disconnect()
+    {
+        $this->connect = false;
+        parent::disconnect();
     }
 
     public function helo($serverName = '127.0.0.1')
@@ -39,13 +45,8 @@ class SmtpProtocolSpy extends Smtp
 
     public function quit()
     {
-        $this->rset();
-    }
-
-    public function disconnect()
-    {
-        $this->connect = false;
-        $this->rset();
+        $this->calledQuit = true;
+        parent::quit();
     }
 
     public function rset()

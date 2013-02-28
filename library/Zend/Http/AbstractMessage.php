@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http;
@@ -15,8 +14,6 @@ use Zend\Stdlib\Message;
 /**
  * HTTP standard message (Request/Response)
  *
- * @category  Zend
- * @package   Zend_Http
  * @link      http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4
  */
 abstract class AbstractMessage extends Message

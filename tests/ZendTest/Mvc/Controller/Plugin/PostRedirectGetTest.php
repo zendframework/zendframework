@@ -67,7 +67,6 @@ class PostRedirectGetTest extends TestCase
         $this->controller->setEvent($this->event);
         $plugins = $this->controller->getPluginManager();
         $plugins->get('flashmessenger')->setSessionManager($this->sessionManager);
-        $plugins->get('prg')->setSessionManager($this->sessionManager);
     }
 
     public function testReturnsFalseOnIntialGet()
@@ -108,6 +107,37 @@ class PostRedirectGetTest extends TestCase
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
         $this->assertEquals('/', $prgResultRoute->getHeaders()->get('Location')->getUri());
         $this->assertEquals(303, $prgResultRoute->getStatusCode());
+    }
+
+    public function testReturnsPostOnRedirectGet()
+    {
+        $params = array(
+            'postval1' => 'value1'
+        );
+        $this->request->setMethod('POST');
+        $this->request->setPost(new Parameters($params));
+
+        $result         = $this->controller->dispatch($this->request, $this->response);
+        $prgResultRoute = $this->controller->prg('home');
+
+        $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
+        $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
+        $this->assertEquals('/', $prgResultRoute->getHeaders()->get('Location')->getUri());
+        $this->assertEquals(303, $prgResultRoute->getStatusCode());
+
+        // Do GET
+        $this->request = new Request();
+        $this->controller->dispatch($this->request, $this->response);
+        $prgResult = $this->controller->prg('home');
+
+        $this->assertEquals($params, $prgResult);
+
+        // Do GET again to make sure data is empty
+        $this->request = new Request();
+        $this->controller->dispatch($this->request, $this->response);
+        $prgResult = $this->controller->prg('home');
+
+        $this->assertFalse($prgResult);
     }
 
     /**

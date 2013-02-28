@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form\Element;
@@ -16,11 +15,6 @@ use Zend\Form\Element;
 use Zend\Form\Exception;
 use Zend\InputFilter\InputProviderInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Element
- */
 class Captcha extends Element implements InputProviderInterface
 {
     /**
@@ -32,7 +26,7 @@ class Captcha extends Element implements InputProviderInterface
      * Accepted options for Captcha:
      * - captcha: a valid Zend\Captcha\AdapterInterface
      *
-     * @param array|\Traversable $options
+     * @param array|Traversable $options
      * @return Captcha
      */
     public function setOptions($options)

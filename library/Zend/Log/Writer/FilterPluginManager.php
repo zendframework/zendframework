@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Log
  */
 
 namespace Zend\Log\Writer;
@@ -14,10 +13,6 @@ use Zend\ServiceManager\AbstractPluginManager;
 use Zend\Log\Filter;
 use Zend\Log\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Log
- */
 class FilterPluginManager extends AbstractPluginManager
 {
     /**
@@ -29,8 +24,8 @@ class FilterPluginManager extends AbstractPluginManager
         'mock'           => 'Zend\Log\Filter\Mock',
         'priority'       => 'Zend\Log\Filter\Priority',
         'regex'          => 'Zend\Log\Filter\Regex',
-        'suppress'       => 'Zend\Log\Filter\suppressFilter',
-        'suppressfilter' => 'Zend\Log\Filter\suppressFilter',
+        'suppress'       => 'Zend\Log\Filter\SuppressFilter',
+        'suppressfilter' => 'Zend\Log\Filter\SuppressFilter',
         'validator'      => 'Zend\Log\Filter\Validator',
     );
 
@@ -44,7 +39,7 @@ class FilterPluginManager extends AbstractPluginManager
     /**
      * Validate the plugin
      *
-     * Checks that the writer loaded is an instance of Filter\FilterInterface.
+     * Checks that the filter loaded is an instance of Filter\FilterInterface.
      *
      * @param  mixed $plugin
      * @return void

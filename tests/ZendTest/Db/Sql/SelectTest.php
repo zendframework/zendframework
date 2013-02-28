@@ -39,17 +39,40 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->from('foo', 'bar');
         $this->assertSame($select, $return);
+
         return $return;
     }
 
     /**
-     * @testdox unit test: Test getRawState() returns infromation populated via from()
+     * @testdox unit test: Test getRawState() returns information populated via from()
      * @covers Zend\Db\Sql\Select::getRawState
      * @depends testFrom
      */
     public function testGetRawStateViaFrom(Select $select)
     {
         $this->assertEquals('foo', $select->getRawState('table'));
+    }
+
+    /**
+     * @testdox unit test: Test quantifier() returns Select object (is chainable)
+     * @covers Zend\Db\Sql\Select::quantifier
+     */
+    public function testQuantifier()
+    {
+        $select = new Select;
+        $return = $select->quantifier($select::QUANTIFIER_DISTINCT);
+        $this->assertSame($select, $return);
+        return $return;
+    }
+
+    /**
+     * @testdox unit test: Test getRawState() returns information populated via from()
+     * @covers Zend\Db\Sql\Select::getRawState
+     * @depends testQuantifier
+     */
+    public function testGetRawStateViaQuantifier(Select $select)
+    {
+        $this->assertEquals(Select::QUANTIFIER_DISTINCT, $select->getRawState('quantifier'));
     }
 
     /**
@@ -61,7 +84,21 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->columns(array('foo', 'bar'));
         $this->assertSame($select, $return);
+
         return $select;
+    }
+
+    /**
+     * @testdox unit test: Test isTableReadOnly() returns correct state for read only
+     * @covers Zend\Db\Sql\Select::isTableReadOnly
+     */
+    public function testIsTableReadOnly()
+    {
+        $select = new Select('foo');
+        $this->assertTrue($select->isTableReadOnly());
+
+        $select = new Select;
+        $this->assertFalse($select->isTableReadOnly());
     }
 
     /**
@@ -83,6 +120,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->join('foo', 'x = y', Select::SQL_STAR, Select::JOIN_INNER);
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -132,7 +170,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     public function testWhereArgument1IsString()
     {
         $select = new Select;
-        $select->where('x = y');
+        $select->where('x = ?');
 
         /** @var $where Where */
         $where = $select->getRawState('where');
@@ -140,7 +178,15 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($predicates));
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
         $this->assertEquals(Where::OP_AND, $predicates[0][0]);
-        $this->assertEquals('x = y', $predicates[0][1]->getExpression());
+        $this->assertEquals('x = ?', $predicates[0][1]->getExpression());
+
+        $select = new Select;
+        $select->where('x = y');
+
+        /** @var $where Where */
+        $where = $select->getRawState('where');
+        $predicates = $where->getPredicates();
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
     }
 
     /**
@@ -185,8 +231,30 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Where::OP_AND, $predicates[1][0]);
         $this->assertEquals('age', $predicates[1][1]->getLeft());
         $this->assertEquals(33, $predicates[1][1]->getRight());
-    }
 
+        $select = new Select;
+        $select->where(array('x = y'));
+
+        $where = $select->getRawState('where');
+        $predicates = $where->getPredicates();
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
+    }
+    
+    /**
+     * @testdox unit test: Test where() will accept any array with string key (without ?) with Predicate throw Exception
+     * @covers Zend\Db\Sql\Select::where
+     */
+    public function testWhereArgument1IsAssociativeArrayIsPredicate()
+    {
+        $select = new Select;
+            $where = array(
+            'name' => new Predicate\Literal("name = 'Ralph'"),
+            'age' => new Predicate\Expression('age = ?', 33),
+        );
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Using Predicate must not use string keys');
+        $select->where($where);
+    }
+    
     /**
      * @testdox unit test: Test where() will accept an indexed array to be used by joining string expressions
      * @covers Zend\Db\Sql\Select::where
@@ -201,9 +269,9 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $predicates = $where->getPredicates();
         $this->assertEquals(1, count($predicates));
 
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
         $this->assertEquals(Where::OP_AND, $predicates[0][0]);
-        $this->assertEquals('name = "Ralph"', $predicates[0][1]->getExpression());
+        $this->assertEquals('name = "Ralph"', $predicates[0][1]->getLiteral());
     }
 
     /**
@@ -220,9 +288,9 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $predicates = $where->getPredicates();
         $this->assertEquals(1, count($predicates));
 
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
         $this->assertEquals(Where::OP_OR, $predicates[0][0]);
-        $this->assertEquals('name = "Ralph"', $predicates[0][1]->getExpression());
+        $this->assertEquals('name = "Ralph"', $predicates[0][1]->getLiteral());
     }
 
     /**
@@ -238,6 +306,25 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select->where(function ($what) use ($test, $where) {
             $test->assertSame($where, $what);
         });
+    }
+
+    /**
+     * @testdox unit test: Test where() will accept any Predicate object as-is
+     * @covers Zend\Db\Sql\Select::where
+     */
+    public function testWhereArgument1IsPredicate()
+    {
+        $select = new Select;
+        $predicate = new Predicate\Predicate(array(
+            new Predicate\Expression('name = ?', 'Ralph'),
+            new Predicate\Expression('age = ?', 33),
+        ));
+        $select->where($predicate);
+
+        /** @var $where Where */
+        $where = $select->getRawState('where');
+        $predicates = $where->getPredicates();
+        $this->assertSame($predicate, $predicates[0][1]);
     }
 
     /**
@@ -271,6 +358,10 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $select->order(array('name ASC', 'age DESC'));
         $this->assertEquals(array('name ASC', 'age DESC'), $select->getRawState('order'));
+
+        $select = new Select;
+        $select->order(new Expression('RAND()'));
+        $this->assertEquals('RAND()', current($select->getRawState('order'))->getExpression());
     }
 
     /**
@@ -282,6 +373,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->group(array('col1', 'col2'));
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -307,6 +399,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->having(array('x = ?' => 5));
         $this->assertSame($select, $return);
+
         return $return;
     }
 
@@ -473,7 +566,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
 
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
-        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
         $parameterContainer = new ParameterContainer();
 
         $sr = new \ReflectionObject($select);
@@ -481,7 +573,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         foreach ($internalTests as $method => $expected) {
             $mr = $sr->getMethod($method);
             $mr->setAccessible(true);
-            $return = $mr->invokeArgs($select, array(new Sql92, $mockAdapter, $parameterContainer));
+            $return = $mr->invokeArgs($select, array(new Sql92, $mockDriver, $parameterContainer));
             $this->assertEquals($expected, $return);
         }
     }
@@ -884,6 +976,62 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processSelect' => array(array(array('"bar"', '"bar"')), '"foo"')
         );
 
+        // @link https://github.com/zendframework/zf2/issues/3294
+        // Test TableIdentifier In Joins
+        $select38 = new Select;
+        $select38->from('foo')->columns(array())->join(new TableIdentifier('bar', 'baz'), 'm = n', array('thecount' => new Expression("COUNT(*)")));
+        $sqlPrep38 = // same
+        $sqlStr38 = 'SELECT COUNT(*) AS "thecount" FROM "foo" INNER JOIN "baz"."bar" ON "m" = "n"';
+        $internalTests38 = array(
+            'processSelect' => array(array(array('COUNT(*)', '"thecount"')), '"foo"'),
+            'processJoins'   => array(array(array('INNER', '"baz"."bar"', '"m" = "n"')))
+        );
+
+        // subselect in join
+        $select39subselect = new Select;
+        $select39subselect->from('bar')->where->like('y', '%Foo%');
+        $select39 = new Select;
+        $select39->from('foo')->join(array('z' => $select39subselect), 'z.foo = bar.id');
+        $sqlPrep39 = 'SELECT "foo".*, "z".* FROM "foo" INNER JOIN (SELECT "bar".* FROM "bar" WHERE "y" LIKE ?) AS "z" ON "z"."foo" = "bar"."id"';
+        $sqlStr39 = 'SELECT "foo".*, "z".* FROM "foo" INNER JOIN (SELECT "bar".* FROM "bar" WHERE "y" LIKE \'%Foo%\') AS "z" ON "z"."foo" = "bar"."id"';
+        $internalTests39 = array(
+            'processJoins' => array(array(array('INNER', '(SELECT "bar".* FROM "bar" WHERE "y" LIKE ?) AS "z"', '"z"."foo" = "bar"."id"')))
+        );
+
+        // @link https://github.com/zendframework/zf2/issues/3294
+        // Test TableIdentifier In Joins, with multiple joins
+        $select40 = new Select;
+        $select40->from('foo')
+            ->join(array('a' => new TableIdentifier('another_foo', 'another_schema')), 'a.x = foo.foo_column')
+            ->join('bar', 'foo.colx = bar.colx');
+        $sqlPrep40 = // same
+        $sqlStr40 = 'SELECT "foo".*, "a".*, "bar".* FROM "foo"'
+            . ' INNER JOIN "another_schema"."another_foo" AS "a" ON "a"."x" = "foo"."foo_column"'
+            . ' INNER JOIN "bar" ON "foo"."colx" = "bar"."colx"';
+        $internalTests40 = array(
+            'processSelect' => array(array(array('"foo".*'), array('"a".*'), array('"bar".*')), '"foo"'),
+            'processJoins'  => array(array(
+                array('INNER', '"another_schema"."another_foo" AS "a"', '"a"."x" = "foo"."foo_column"'),
+                array('INNER', '"bar"', '"foo"."colx" = "bar"."colx"')
+            ))
+        );
+
+        $select41 = new Select;
+        $select41->from('foo')->quantifier(Select::QUANTIFIER_DISTINCT);
+        $sqlPrep41 = // same
+        $sqlStr41 = 'SELECT DISTINCT "foo".* FROM "foo"';
+        $internalTests41 = array(
+            'processSelect' => array(SELECT::QUANTIFIER_DISTINCT, array(array('"foo".*')), '"foo"'),
+        );
+
+        $select42 = new Select;
+        $select42->from('foo')->quantifier(new Expression('TOP ?', array(10)));
+        $sqlPrep42 = 'SELECT TOP ? "foo".* FROM "foo"';
+        $sqlStr42 = 'SELECT TOP \'10\' "foo".* FROM "foo"';
+        $internalTests42 = array(
+            'processSelect' => array('TOP ?', array(array('"foo".*')), '"foo"'),
+        );
+
 
         /**
          * $select = the select object
@@ -892,6 +1040,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
          * $sqlStr = the sql as a result of getting a string back
          * $internalTests what the internal functions should return (safe-guarding extension)
          */
+
         return array(
             //    $select    $sqlPrep    $params     $sqlStr    $internalTests    // use named param
             array($select0,  $sqlPrep0,  array(),    $sqlStr0,  $internalTests0),
@@ -932,7 +1081,11 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select35, $sqlPrep35, array(),    $sqlStr35, $internalTests35),
             array($select36, $sqlPrep36, array(),    $sqlStr36, $internalTests36,  $useNamedParams36),
             array($select37, $sqlPrep37, array(),    $sqlStr37, $internalTests37),
+            array($select38, $sqlPrep38, array(),    $sqlStr38, $internalTests38),
+            array($select39, $sqlPrep39, array(),    $sqlStr39, $internalTests39),
+            array($select40, $sqlPrep40, array(),    $sqlStr40, $internalTests40),
+            array($select41, $sqlPrep41, array(),    $sqlStr41, $internalTests41),
+            array($select42, $sqlPrep42, array(),    $sqlStr42, $internalTests42),
         );
     }
-
 }

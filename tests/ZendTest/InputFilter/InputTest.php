@@ -117,7 +117,7 @@ class InputTest extends TestCase
         $input  = new Input('foo');
         $input->setValue('bar');
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
         $this->assertFalse($input->isValid());
     }
 
@@ -126,7 +126,7 @@ class InputTest extends TestCase
         $input  = new Input('foo');
         $input->setValue('123');
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
         $this->assertTrue($input->isValid());
     }
 
@@ -137,7 +137,7 @@ class InputTest extends TestCase
         $filter = new Filter\StringTrim();
         $input->getFilterChain()->attach($filter);
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
         $this->assertTrue($input->isValid());
     }
 
@@ -146,7 +146,7 @@ class InputTest extends TestCase
         $input  = new Input('foo');
         $input->setValue('bar');
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
         $this->assertFalse($input->isValid());
         $messages = $input->getMessages();
         $this->assertArrayHasKey(Validator\Digits::NOT_DIGITS, $messages);
@@ -157,7 +157,7 @@ class InputTest extends TestCase
         $input = new Input('foo');
         $input->setValue('bar');
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
         $input->setErrorMessage('Please enter only digits');
         $this->assertFalse($input->isValid());
         $messages = $input->getMessages();
@@ -223,7 +223,7 @@ class InputTest extends TestCase
         $filter = new Filter\StringTrim();
         $input->getFilterChain()->attach($filter);
         $validator = new Validator\Digits();
-        $input->getValidatorChain()->addValidator($validator);
+        $input->getValidatorChain()->attach($validator);
 
         $input2 = new Input('bar');
         $input2->merge($input);
@@ -239,5 +239,26 @@ class InputTest extends TestCase
 
         $filters = $filterChain->getFilters()->toArray();
         $this->assertInstanceOf('Zend\Filter\StringTrim', $filters[0]);
+    }
+
+    public function testDoNotInjectNotEmptyValidatorIfAnywhereInChain()
+    {
+        $input = new Input('foo');
+        $this->assertTrue($input->isRequired());
+        $input->setValue('');
+
+        $notEmptyMock = $this->getMock('Zend\Validator\NotEmpty', array('isValid'));
+        $notEmptyMock->expects($this->exactly(1))
+                     ->method('isValid')
+                     ->will($this->returnValue(false));
+
+        $validatorChain = $input->getValidatorChain();
+        $validatorChain->addValidator(new Validator\Digits());
+        $validatorChain->addValidator($notEmptyMock);
+        $this->assertFalse($input->isValid());
+
+        $validators = $validatorChain->getValidators();
+        $this->assertEquals(2, count($validators));
+        $this->assertEquals($notEmptyMock, $validators[1]['instance']);
     }
 }

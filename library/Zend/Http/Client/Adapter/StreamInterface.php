@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http\Client\Adapter;
@@ -14,10 +13,6 @@ namespace Zend\Http\Client\Adapter;
  * An interface description for Zend_Http_Client_Adapter_Stream classes.
  *
  * This interface describes Zend_Http_Client_Adapter which supports streaming.
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Client_Adapter
  */
 interface StreamInterface
 {

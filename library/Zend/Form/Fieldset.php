@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form;
@@ -15,10 +14,6 @@ use Zend\Stdlib\Hydrator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\Stdlib\PriorityQueue;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- */
 class Fieldset extends Element implements FieldsetInterface
 {
     /**
@@ -86,7 +81,7 @@ class Fieldset extends Element implements FieldsetInterface
      * Set options for a fieldset. Accepted options are:
      * - use_as_base_fieldset: is this fieldset use as the base fieldset?
      *
-     * @param  array|\Traversable $options
+     * @param  array|Traversable $options
      * @return Element|ElementInterface
      * @throws Exception\InvalidArgumentException
      */
@@ -358,10 +353,10 @@ class Fieldset extends Element implements FieldsetInterface
      * Ensures state is ready for use. Here, we append the name of the fieldsets to every elements in order to avoid
      * name clashes if the same fieldset is used multiple times
      *
-     * @param  Form $form
+     * @param  FormInterface $form
      * @return mixed|void
      */
-    public function prepareElement(Form $form)
+    public function prepareElement(FormInterface $form)
     {
         $name = $this->getName();
 
@@ -525,7 +520,7 @@ class Fieldset extends Element implements FieldsetInterface
 
             $element = $this->byName[$name];
 
-            if($element instanceof FieldsetInterface && $element->allowValueBinding()) {
+            if ($element instanceof FieldsetInterface && $element->allowValueBinding()) {
                 $value = $element->bindValues($value);
             }
 

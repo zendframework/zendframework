@@ -10,6 +10,12 @@
 
 namespace ZendTest\Code\Annotation\TestAsset;
 
+/**
+ * @Foo(first)
+ * @Bar(second)
+ * @Bar(third)
+ * @Bogus(does not exist)
+ */
 class EntityWithAnnotations
 {
     /**

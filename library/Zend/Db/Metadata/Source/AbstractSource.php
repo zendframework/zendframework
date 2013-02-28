@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Metadata\Source;
@@ -14,11 +13,6 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\Metadata\MetadataInterface;
 use Zend\Db\Metadata\Object;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Metadata
- */
 abstract class AbstractSource implements MetadataInterface
 {
     const DEFAULT_SCHEMA = '__DEFAULT_SCHEMA__';

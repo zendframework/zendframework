@@ -83,6 +83,17 @@ class UpperCaseTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      */
+    public function testNormalWorkflowWithFilesArray()
+    {
+        $this->assertContains('This is a File', file_get_contents($this->_newFile));
+        $filter = new FileUpperCase();
+        $filter(array('tmp_name' => $this->_newFile));
+        $this->assertContains('THIS IS A FILE', file_get_contents($this->_newFile));
+    }
+
+    /**
+     * @return void
+     */
     public function testFileNotFoundException()
     {
         $filter = new FileUpperCase();

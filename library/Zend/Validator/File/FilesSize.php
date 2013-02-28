@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
@@ -18,8 +17,6 @@ use Zend\Validator\Exception;
 /**
  * Validator for the size of all files which will be validated in sum
  *
- * @category  Zend
- * @package   Zend_Validator
  */
 class FilesSize extends Size
 {
@@ -147,5 +144,28 @@ class FilesSize extends Size
         }
 
         return true;
+    }
+
+    /**
+     * Throws an error of the given type
+     *
+     * @param  string $file
+     * @param  string $errorType
+     * @return false
+     */
+    protected function throwError($file, $errorType)
+    {
+        if ($file !== null) {
+            if (is_array($file)) {
+                if (array_key_exists('name', $file)) {
+                    $this->value = $file['name'];
+                }
+            } elseif (is_string($file)) {
+                $this->value = $file;
+            }
+        }
+
+        $this->error($errorType);
+        return false;
     }
 }

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ModuleManager
  */
 
 namespace Zend\ModuleManager\Listener;
@@ -15,10 +14,6 @@ use Zend\Stdlib\AbstractOptions;
 
 /**
  * Listener options
- *
- * @category   Zend
- * @package    Zend_ModuleManager
- * @subpackage Listener
  */
 class ListenerOptions extends AbstractOptions
 {
@@ -58,6 +53,21 @@ class ListenerOptions extends AbstractOptions
     protected $cacheDir;
 
     /**
+     * @var bool
+     */
+    protected $checkDependencies = true;
+
+    /**
+     * @var string
+     */
+    protected $moduleMapCacheEnabled = false;
+
+    /**
+     * @var string
+     */
+    protected $moduleMapCacheKey;
+
+    /**
      * Get an array of paths where modules reside
      *
      * @return array
@@ -72,18 +82,19 @@ class ListenerOptions extends AbstractOptions
      *
      * @param  array|Traversable $modulePaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions
+     * @return ListenerOptions Provides fluent interface
      */
     public function setModulePaths($modulePaths)
     {
         if (!is_array($modulePaths) && !$modulePaths instanceof Traversable) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Argument passed to %s::%s() must be an array, '
-                . 'implement the \Traversable interface, or be an '
+                . 'implement the Traversable interface, or be an '
                 . 'instance of Zend\Config\Config. %s given.',
                 __CLASS__, __METHOD__, gettype($modulePaths))
             );
         }
+
         $this->modulePaths = $modulePaths;
         return $this;
     }
@@ -113,18 +124,19 @@ class ListenerOptions extends AbstractOptions
      *
      * @param array|Traversable $configGlobPaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions
+     * @return ListenerOptions Provides fluent interface
      */
     public function setConfigGlobPaths($configGlobPaths)
     {
         if (!is_array($configGlobPaths) && !$configGlobPaths instanceof Traversable) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Argument passed to %s::%s() must be an array, '
-                . 'implement the \Traversable interface, or be an '
+                . 'implement the Traversable interface, or be an '
                 . 'instance of Zend\Config\Config. %s given.',
                 __CLASS__, __METHOD__, gettype($configGlobPaths))
             );
         }
+
         $this->configGlobPaths = $configGlobPaths;
         return $this;
     }
@@ -134,18 +146,19 @@ class ListenerOptions extends AbstractOptions
      *
      * @param array|Traversable $configStaticPaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions
+     * @return ListenerOptions Provides fluent interface
      */
     public function setConfigStaticPaths($configStaticPaths)
     {
         if (!is_array($configStaticPaths) && !$configStaticPaths instanceof Traversable) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Argument passed to %s::%s() must be an array, '
-                . 'implement the \Traversable interface, or be an '
+                . 'implement the Traversable interface, or be an '
                 . 'instance of Zend\Config\Config. %s given.',
                 __CLASS__, __METHOD__, gettype($configStaticPaths))
             );
         }
+
         $this->configStaticPaths = $configStaticPaths;
         return $this;
     }
@@ -166,18 +179,19 @@ class ListenerOptions extends AbstractOptions
      *
      * @param array|Traversable $extraConfig
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions
+     * @return ListenerOptions Provides fluent interface
      */
     public function setExtraConfig($extraConfig)
     {
         if (!is_array($extraConfig) && !$extraConfig instanceof Traversable) {
             throw new Exception\InvalidArgumentException(
                 sprintf('Argument passed to %s::%s() must be an array, '
-                . 'implement the \Traversable interface, or be an '
+                . 'implement the Traversable interface, or be an '
                 . 'instance of Zend\Config\Config. %s given.',
                 __CLASS__, __METHOD__, gettype($extraConfig))
             );
         }
+
         $this->extraConfig = $extraConfig;
         return $this;
     }
@@ -262,6 +276,84 @@ class ListenerOptions extends AbstractOptions
         } else {
             $this->cacheDir = static::normalizePath($cacheDir);
         }
+        return $this;
+    }
+
+    /**
+     * Check if the module class map cache is enabled
+     *
+     * @return bool
+     */
+    public function getModuleMapCacheEnabled()
+    {
+        return $this->moduleMapCacheEnabled;
+    }
+
+    /**
+     * Set if the module class map cache should be enabled or not
+     *
+     * @param  bool $enabled
+     * @return ListenerOptions
+     */
+    public function setModuleMapCacheEnabled($enabled)
+    {
+        $this->moduleMapCacheEnabled = (bool) $enabled;
+        return $this;
+    }
+
+    /**
+     * Get key used to create the cache file name
+     *
+     * @return string
+     */
+    public function getModuleMapCacheKey()
+    {
+        return (string) $this->moduleMapCacheKey;
+    }
+
+    /**
+     * Set key used to create the cache file name
+     *
+     * @param  string $moduleMapCacheKey the value to be set
+     * @return ListenerOptions
+     */
+    public function setModuleMapCacheKey($moduleMapCacheKey)
+    {
+        $this->moduleMapCacheKey = $moduleMapCacheKey;
+        return $this;
+    }
+
+    /**
+     * Get the path to the module class map cache
+     *
+     * @return string
+     */
+    public function getModuleMapCacheFile()
+    {
+        return $this->getCacheDir() . '/module-classmap-cache.'.$this->getModuleMapCacheKey().'.php';
+    }
+
+    /**
+     * Set whether to check dependencies during module loading or not
+     *
+     * @return string
+     */
+    public function getCheckDependencies()
+    {
+        return $this->checkDependencies;
+    }
+
+    /**
+     * Set whether to check dependencies during module loading or not
+     *
+     * @param  bool $checkDependencies the value to be set
+     *
+     * @return ListenerOptions
+     */
+    public function setCheckDependencies($checkDependencies)
+    {
+        $this->checkDependencies = (bool) $checkDependencies;
+
         return $this;
     }
 

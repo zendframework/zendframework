@@ -24,45 +24,55 @@ use Zend\Validator;
 class MimeTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @return array
+     */
+    public function basicBehaviorDataProvider()
+    {
+        $testFile = __DIR__ . '/_files/picture.jpg';
+        $fileUpload = array(
+            'tmp_name' => $testFile, 'name' => basename($testFile),
+            'size' => 200, 'error' => 0, 'type' => 'image/jpg'
+        );
+        return array(
+            //    Options, isValid Param, Expected value
+            array(array('image/jpg', 'image/jpeg'),               $fileUpload, true),
+            array('image',                                        $fileUpload, true),
+            array('test/notype',                                  $fileUpload, false),
+            array('image/gif, image/jpg, image/jpeg',             $fileUpload, true),
+            array(array('image/vasa', 'image/jpg', 'image/jpeg'), $fileUpload, true),
+            array(array('image/jpg', 'image/jpeg', 'gif'),        $fileUpload, true),
+            array(array('image/gif', 'gif'),                      $fileUpload, false),
+            array('image/jp',                                     $fileUpload, false),
+            array('image/jpg2000',                                $fileUpload, false),
+            array('image/jpeg2000',                               $fileUpload, false),
+        );
+    }
+
+    /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider basicBehaviorDataProvider
      * @return void
      */
-    public function testBasic()
+    public function testBasic($options, $isValidParam, $expected)
     {
-        $valuesExpected = array(
-            array(array('image/jpg', 'image/jpeg'), true),
-            array('image', true),
-            array('test/notype', false),
-            array('image/gif, image/jpg, image/jpeg', true),
-            array(array('image/vasa', 'image/jpg', 'image/jpeg'), true),
-            array(array('image/jpg', 'image/jpeg', 'gif'), true),
-            array(array('image/gif', 'gif'), false),
-            array('image/jp', false),
-            array('image/jpg2000', false),
-            array('image/jpeg2000', false),
-        );
+        $validator = new File\MimeType($options);
+        $validator->enableHeaderCheck();
+        $this->assertEquals($expected, $validator->isValid($isValidParam));
+    }
 
-        $filetest = __DIR__ . '/_files/picture.jpg';
-        $files = array(
-            'name'     => 'picture.jpg',
-            'type'     => 'image/jpg',
-            'size'     => 200,
-            'tmp_name' => $filetest,
-            'error'    => 0
-        );
-
-        foreach ($valuesExpected as $element) {
-            $options   = array_shift($element);
-            $expected  = array_shift($element);
+    /**
+     * Ensures that the validator follows expected behavior for legacy Zend\Transfer API
+     *
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
+     */
+    public function testLegacy($options, $isValidParam, $expected)
+    {
+        if (is_array($isValidParam)) {
             $validator = new File\MimeType($options);
             $validator->enableHeaderCheck();
-            $this->assertEquals(
-                $expected,
-                $validator->isValid($filetest, $files),
-                "Test expected " . var_export($expected, 1) . " with " . var_export($options, 1)
-                . "\nMessages: " . var_export($validator->getMessages(), 1)
-            );
+            $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
         }
     }
 
@@ -168,47 +178,6 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-9686
-     */
-    public function testDualValidation()
-    {
-        $valuesExpected = array(
-            array('image', true),
-        );
-
-        $filetest = __DIR__ . '/_files/picture.jpg';
-        $files = array(
-            'name'     => 'picture.jpg',
-            'type'     => 'image/jpg',
-            'size'     => 200,
-            'tmp_name' => $filetest,
-            'error'    => 0
-        );
-
-        foreach ($valuesExpected as $element) {
-            $options   = array_shift($element);
-            $expected  = array_shift($element);
-            $validator = new File\MimeType($options);
-            $validator->enableHeaderCheck();
-            $this->assertEquals(
-                $expected,
-                $validator->isValid($filetest, $files),
-                "Test expected " . var_export($expected, 1) . " with " . var_export($options, 1)
-                . "\nMessages: " . var_export($validator->getMessages(), 1)
-            );
-
-            $validator = new File\MimeType($options);
-            $validator->enableHeaderCheck();
-            $this->assertEquals(
-                $expected,
-                $validator->isValid($filetest, $files),
-                "Test expected " . var_export($expected, 1) . " with " . var_export($options, 1)
-                . "\nMessages: " . var_export($validator->getMessages(), 1)
-            );
-        }
-    }
-
-    /**
      * @group ZF-11258
      */
     public function testZF11258()
@@ -219,7 +188,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             'headerCheck' => true));
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileMimeTypeNotReadable', $validator->getMessages()));
-        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+        $this->assertContains("does not exist", current($validator->getMessages()));
     }
 
     public function testDisableMagicFile()

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
@@ -13,10 +12,6 @@ namespace Zend\Validator;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
 class CreditCard extends AbstractValidator
 {
     /**
@@ -56,7 +51,7 @@ class CreditCard extends AbstractValidator
         self::INVALID        => "Invalid type given. String expected",
         self::LENGTH         => "The input contains an invalid amount of digits",
         self::PREFIX         => "The input is not from an allowed institute",
-        self::SERVICE        => "The input seems to be an invalid creditcard number",
+        self::SERVICE        => "The input seems to be an invalid credit card number.",
         self::SERVICEFAILURE => "An exception has been raised while validating the input",
     );
 

@@ -4,17 +4,17 @@ php:
   - 5.3.3
   - 5.3
   - 5.4
+  - 5.5
+
+matrix:
+  allow_failures:
+    - php: 5.5
 
 before_install:
  - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
- - composer install --dev --prefer-source
- - wget http://cs.sensiolabs.org/get/php-cs-fixer.phar
 
 script:
- - php ./tests/run-tests.php
- - output=$(php php-cs-fixer.phar fix -v --dry-run --level=psr2 library); if [[ $output ]]; then while read -r line; do echo -e "\e[00;31m$line\e[00m"; done <<< "$output"; false; fi;
- - output=$(php php-cs-fixer.phar fix -v --dry-run --level=psr2 tests); if [[ $output ]]; then while read -r line; do echo -e "\e[00;31m$line\e[00m"; done <<< "$output"; false; fi;
- - output=$(php php-cs-fixer.phar fix -v --dry-run --level=psr2 bin); if [[ $output ]]; then while read -r line; do echo -e "\e[00;31m$line\e[00m"; done <<< "$output"; false; fi;
+ - ant travis -keep-going
 
 notifications:
   irc: "irc.freenode.org#zftalk.dev"

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router\Console;
@@ -17,16 +16,13 @@ use Zend\Stdlib\ArrayUtils;
 
 /**
  * Tree search implementation.
- *
- * @package    Zend_Mvc_Router
- * @subpackage Http
  */
 class SimpleRouteStack extends BaseSimpleRouteStack
 {
     /**
      * init(): defined by SimpleRouteStack.
      *
-     * @see    SimpleRouteStack::init()
+     * @see    BaseSimpleRouteStack::init()
      */
     protected function init()
     {
@@ -43,7 +39,7 @@ class SimpleRouteStack extends BaseSimpleRouteStack
     /**
      * addRoute(): defined by RouteStackInterface interface.
      *
-     * @see    RouteStack::addRoute()
+     * @see    RouteStackInterface::addRoute()
      * @param  string  $name
      * @param  mixed   $route
      * @param  integer $priority
@@ -61,8 +57,8 @@ class SimpleRouteStack extends BaseSimpleRouteStack
     /**
      * routeFromArray(): defined by SimpleRouteStack.
      *
-     * @see    SimpleRouteStack::routeFromArray()
-     * @param  array|\Traversable $specs
+     * @see    BaseSimpleRouteStack::routeFromArray()
+     * @param  array|Traversable $specs
      * @return RouteInterface
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException

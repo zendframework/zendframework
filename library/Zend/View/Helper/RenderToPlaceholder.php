@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -15,9 +14,6 @@ use Zend\View\Model\ModelInterface;
 /**
  * Renders a template and stores the rendered output as a placeholder
  * variable for later use.
- *
- * @package    Zend_View
- * @subpackage Helper
  */
 class RenderToPlaceholder extends AbstractHelper
 {

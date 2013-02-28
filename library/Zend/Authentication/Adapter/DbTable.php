@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Authentication
  */
 
 namespace Zend\Authentication\Adapter;
@@ -14,15 +13,11 @@ use stdClass;
 use Zend\Authentication\Result as AuthenticationResult;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\Sql\Expression;
-use Zend\Db\Sql\Select as DbSelect;
+use Zend\Db\Sql;
+use Zend\Db\Sql\Expression as SqlExpr;
+use Zend\Db\Sql\Predicate\Operator as SqlOp;
 
-/**
- * @category   Zend
- * @package    Zend_Authentication
- * @subpackage Adapter
- */
-class DbTable implements AdapterInterface
+class DbTable extends AbstractAdapter
 {
 
     /**
@@ -33,7 +28,7 @@ class DbTable implements AdapterInterface
     protected $zendDb = null;
 
     /**
-     * @var DbSelect
+     * @var Sql\Select
      */
     protected $dbSelect = null;
 
@@ -57,20 +52,6 @@ class DbTable implements AdapterInterface
      * @var string
      */
     protected $credentialColumn = null;
-
-    /**
-     * $identity - Identity value
-     *
-     * @var string
-     */
-    protected $identity = null;
-
-    /**
-     * $credential - Credential values
-     *
-     * @var string
-     */
-    protected $credential = null;
 
     /**
      * $credentialTreatment - Treatment applied to the credential, such as MD5() or PASSWORD()
@@ -194,31 +175,6 @@ class DbTable implements AdapterInterface
     }
 
     /**
-     * setIdentity() - set the value to be used as the identity
-     *
-     * @param  string $value
-     * @return DbTable Provides a fluent interface
-     */
-    public function setIdentity($value)
-    {
-        $this->identity = $value;
-        return $this;
-    }
-
-    /**
-     * setCredential() - set the credential value to be used, optionally can specify a treatment
-     * to be used, should be supplied in parametrized form, such as 'MD5(?)' or 'PASSWORD(?)'
-     *
-     * @param  string $credential
-     * @return DbTable Provides a fluent interface
-     */
-    public function setCredential($credential)
-    {
-        $this->credential = $credential;
-        return $this;
-    }
-
-    /**
      * setAmbiguityIdentity() - sets a flag for usage of identical identities
      * with unique credentials. It accepts integers (0, 1) or boolean (true,
      * false) parameters. Default is false.
@@ -250,12 +206,12 @@ class DbTable implements AdapterInterface
     /**
      * getDbSelect() - Return the preauthentication Db Select object for userland select query modification
      *
-     * @return DbSelect
+     * @return Sql\Select
      */
     public function getDbSelect()
     {
         if ($this->dbSelect == null) {
-            $this->dbSelect = new DbSelect();
+            $this->dbSelect = new Sql\Select();
         }
         return $this->dbSelect;
     }
@@ -374,7 +330,7 @@ class DbTable implements AdapterInterface
      * _authenticateCreateSelect() - This method creates a Zend\Db\Sql\Select object that
      * is completely configured to be queried against the database.
      *
-     * @return DbSelect
+     * @return Sql\Select
      */
     protected function _authenticateCreateSelect()
     {
@@ -383,19 +339,17 @@ class DbTable implements AdapterInterface
             $this->credentialTreatment = '?';
         }
 
-        $credentialExpression = new Expression(
-            '(CASE WHEN '
-            . $this->zendDb->getPlatform()->quoteIdentifier($this->credentialColumn)
-            . ' = ' . $this->credentialTreatment
-            . ' THEN 1 ELSE 0 END) AS '
-            . $this->zendDb->getPlatform()->quoteIdentifier('zend_auth_credential_match')
+        $credentialExpression = new SqlExpr(
+            '(CASE WHEN ?' . ' = ' . $this->credentialTreatment . ' THEN 1 ELSE 0 END) AS ?',
+            array($this->credentialColumn, $this->credential, 'zend_auth_credential_match'),
+            array(SqlExpr::TYPE_IDENTIFIER, SqlExpr::TYPE_VALUE, SqlExpr::TYPE_IDENTIFIER)
         );
 
         // get select
         $dbSelect = clone $this->getDbSelect();
         $dbSelect->from($this->tableName)
-                 ->columns(array('*', $credentialExpression))
-                 ->where($this->zendDb->getPlatform()->quoteIdentifier($this->identityColumn) . ' = ?');
+            ->columns(array('*', $credentialExpression))
+            ->where(new SqlOp($this->identityColumn, '=', $this->identity));
 
         return $dbSelect;
     }
@@ -404,18 +358,21 @@ class DbTable implements AdapterInterface
      * _authenticateQuerySelect() - This method accepts a Zend\Db\Sql\Select object and
      * performs a query against the database with that object.
      *
-     * @param  DbSelect $dbSelect
+     * @param  Sql\Select $dbSelect
      * @throws Exception\RuntimeException when an invalid select object is encountered
      * @return array
      */
-    protected function _authenticateQuerySelect(DbSelect $dbSelect)
+    protected function _authenticateQuerySelect(Sql\Select $dbSelect)
     {
-        $statement = $this->zendDb->createStatement();
-        $dbSelect->prepareStatement($this->zendDb, $statement);
-        $resultSet = new ResultSet();
+        $sql = new Sql\Sql($this->zendDb);
+        $statement = $sql->prepareStatementForSqlObject($dbSelect);
         try {
-            $resultSet->initialize($statement->execute(array($this->credential, $this->identity)));
-            $resultIdentities = $resultSet->toArray();
+            $result = $statement->execute();
+            $resultIdentities = array();
+            // iterate result, most cross platform way
+            foreach ($result as $row) {
+                $resultIdentities[] = $row;
+            }
         } catch (\Exception $e) {
             throw new Exception\RuntimeException(
                 'The supplied parameters to DbTable failed to '

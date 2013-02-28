@@ -21,47 +21,118 @@ use Zend\Validator\File;
 class ImageSizeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Ensures that the validator follows expected behavior
-     *
-     * @return void
+     * @return array
      */
-    public function testBasic()
+    public function basicBehaviorDataProvider()
     {
-        $valuesExpected = array(
-            array(array('minWidth' => 0,   'minHeight' => 10,  'maxWidth' => 1000, 'maxHeight' => 2000), true),
-            array(array('minWidth' => 0,   'minHeight' => 0,   'maxWidth' => 200,  'maxHeight' => 200), true),
-            array(array('minWidth' => 150, 'minHeight' => 150, 'maxWidth' => 200,  'maxHeight' => 200), false),
-            array(array('minWidth' => 80,  'minHeight' => 0,   'maxWidth' => 80,   'maxHeight' => 200), true),
-            array(array('minWidth' => 0,   'minHeight' => 0,   'maxWidth' => 60,   'maxHeight' => 200), false),
-            array(array('minWidth' => 90,  'minHeight' => 0,   'maxWidth' => 200,  'maxHeight' => 200), false),
-            array(array('minWidth' => 0,   'minHeight' => 0,   'maxWidth' => 200,  'maxHeight' => 80), false),
-            array(array('minWidth' => 0,   'minHeight' => 110, 'maxWidth' => 200,  'maxHeight' => 140), false)
+        $testFile = __DIR__ . '/_files/picture.jpg';
+        $pictureTests = array(
+            //    Options, isValid Param, Expected value, Expected message
+            array(
+                array('minWidth' => 0,   'minHeight' => 10,  'maxWidth' => 1000, 'maxHeight' => 2000),
+                $testFile, true, ''
+            ),
+            array(
+                array('minWidth' => 0,   'minHeight' => 0,   'maxWidth' => 200,  'maxHeight' => 200),
+                $testFile, true, ''
+            ),
+            array(
+                array('minWidth' => 150, 'minHeight' => 150, 'maxWidth' => 200,  'maxHeight' => 200),
+                $testFile, false, array('fileImageSizeWidthTooSmall', 'fileImageSizeHeightTooSmall')
+            ),
+            array(
+                array('minWidth' => 80,  'minHeight' => 0,   'maxWidth' => 80,   'maxHeight' => 200),
+                $testFile, true, ''
+            ),
+            array(
+                array('minWidth' => 0,   'minHeight' => 0,   'maxWidth' => 60,   'maxHeight' => 200),
+                $testFile, false, 'fileImageSizeWidthTooBig'
+            ),
+            array(
+                array('minWidth' => 90,  'minHeight' => 0,   'maxWidth' => 200,  'maxHeight' => 200),
+                $testFile, false, 'fileImageSizeWidthTooSmall'
+            ),
+            array(
+                array('minWidth' => 0,   'minHeight' => 0,   'maxWidth' => 200,  'maxHeight' => 80),
+                $testFile, false, 'fileImageSizeHeightTooBig'
+            ),
+            array(
+                array('minWidth' => 0,   'minHeight' => 110, 'maxWidth' => 200,  'maxHeight' => 140),
+                $testFile, false, 'fileImageSizeHeightTooSmall'
+            ),
         );
 
-        foreach ($valuesExpected as $element) {
-            $validator = new File\ImageSize($element[0]);
-            $this->assertEquals(
-                $element[1],
-                $validator->isValid(__DIR__ . '/_files/picture.jpg'),
-                "Tested with " . var_export($element, 1)
+        $testFile = __DIR__ . '/_files/nofile.mo';
+        $noFileTests = array(
+            //    Options, isValid Param, Expected value, message
+            array(
+                array('minWidth' => 0, 'minHeight' => 10, 'maxWidth' => 1000, 'maxHeight' => 2000),
+                $testFile, false, 'fileImageSizeNotReadable'
+            ),
+        );
+
+        $testFile = __DIR__ . '/_files/badpicture.jpg';
+        $badPicTests = array(
+            //    Options, isValid Param, Expected value, message
+            array(
+                array('minWidth' => 0, 'minHeight' => 10, 'maxWidth' => 1000, 'maxHeight' => 2000),
+                $testFile, false,  'fileImageSizeNotDetected'
+            ),
+        );
+
+        // Dupe data in File Upload format
+        $testData = array_merge($pictureTests, $noFileTests, $badPicTests);
+        foreach ($testData as $data) {
+            $fileUpload = array(
+                'tmp_name' => $data[1], 'name' => basename($data[1]),
+                'size' => 200, 'error' => 0, 'type' => 'text'
             );
+            $testData[] = array($data[0], $fileUpload, $data[2], $data[3]);
         }
+        return $testData;
+    }
 
-        $validator = new File\ImageSize(array('minWidth' => 0, 'minHeight' => 10, 'maxWidth' => 1000, 'maxHeight' => 2000));
-        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.jpg'));
-        $failures = $validator->getMessages();
-        $this->assertContains('is not readable', $failures['fileImageSizeNotReadable']);
+    /**
+     * Ensures that the validator follows expected behavior
+     *
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
+     */
+    public function testBasic($options, $isValidParam, $expected, $messageKeys)
+    {
+        $validator = new File\ImageSize($options);
+        $this->assertEquals($expected, $validator->isValid($isValidParam));
+        if (!$expected) {
+            if (!is_array($messageKeys)) {
+                $messageKeys = array($messageKeys);
+            }
+            foreach ($messageKeys as $messageKey) {
+                $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+            }
+        }
+    }
 
-        $file['name'] = 'TestName';
-        $validator = new File\ImageSize(array('minWidth' => 0, 'minHeight' => 10, 'maxWidth' => 1000, 'maxHeight' => 2000));
-        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.jpg', $file));
-        $failures = $validator->getMessages();
-        $this->assertContains('TestName', $failures['fileImageSizeNotReadable']);
-
-        $validator = new File\ImageSize(array('minWidth' => 0, 'minHeight' => 10, 'maxWidth' => 1000, 'maxHeight' => 2000));
-        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/badpicture.jpg'));
-        $failures = $validator->getMessages();
-        $this->assertContains('could not be detected', $failures['fileImageSizeNotDetected']);
+    /**
+     * Ensures that the validator follows expected behavior for legacy Zend\Transfer API
+     *
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
+     */
+    public function testLegacy($options, $isValidParam, $expected, $messageKeys)
+    {
+        // Test legacy Zend\Transfer API
+        if (is_array($isValidParam)) {
+            $validator = new File\ImageSize($options);
+            $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
+            if (!$expected) {
+                if (!is_array($messageKeys)) {
+                    $messageKeys = array($messageKeys);
+                }
+                foreach ($messageKeys as $messageKey) {
+                    $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+                }
+            }
+        }
     }
 
     /**
@@ -194,6 +265,6 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
         $validator = new File\ImageSize(array('minWidth' => 100, 'minHeight' => 1000, 'maxWidth' => 10000, 'maxHeight' => 100000));
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileImageSizeNotReadable', $validator->getMessages()));
-        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+        $this->assertContains("does not exist", current($validator->getMessages()));
     }
 }

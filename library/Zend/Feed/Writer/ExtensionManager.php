@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed_Writer
  */
 
 namespace Zend\Feed\Writer;
@@ -16,9 +15,6 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Plugin manager implementation for feed writer extensions
  *
  * Validation checks that we have an Entry, Feed, or Extension\AbstractRenderer.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
  */
 class ExtensionManager extends AbstractPluginManager
 {

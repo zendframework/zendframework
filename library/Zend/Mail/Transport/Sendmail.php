@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Transport;
@@ -18,10 +17,6 @@ use Zend\Mail\Header\HeaderInterface;
 
 /**
  * Class for sending email via the PHP internal mail() function
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Transport
  */
 class Sendmail implements TransportInterface
 {
@@ -131,6 +126,15 @@ class Sendmail implements TransportInterface
         $body    = $this->prepareBody($message);
         $headers = $this->prepareHeaders($message);
         $params  = $this->prepareParameters($message);
+
+        // On *nix platforms, we need to replace \r\n with \n
+        // sendmail is not an SMTP server, it is a unix command - it expects LF
+        if (!$this->isWindowsOs()) {
+            $to      = str_replace("\r\n", "\n", $to);
+            $subject = str_replace("\r\n", "\n", $subject);
+            $body    = str_replace("\r\n", "\n", $body);
+            $headers = str_replace("\r\n", "\n", $headers);
+        }
 
         call_user_func($this->callable, $to, $subject, $body, $headers, $params);
     }

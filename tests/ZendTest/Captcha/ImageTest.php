@@ -131,6 +131,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testCaptchaImageCleanupOnlyCaptchaFilesIdentifiedByTheirSuffix()
     {
+        if (!defined('TESTS_ZEND_CAPTCHA_GC')
+            || !constant('TESTS_ZEND_CAPTCHA_GC')
+        ) {
+            $this->markTestSkipped('Enable TESTS_ZEND_CAPTCHA_GC to run this test');
+        }
         $this->captcha->generate();
         $filename = $this->testDir . "/" . $this->captcha->getId() . ".png";
         $this->assertTrue(file_exists($filename));

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib;
@@ -20,9 +19,6 @@ use WeakRef;
  * A handler for a event, event, filterchain, etc. Abstracts PHP callbacks,
  * primarily to allow for lazy-loading and ensuring availability of default
  * arguments (currying).
- *
- * @category   Zend
- * @package    Zend_Stdlib
  */
 class CallbackHandler
 {

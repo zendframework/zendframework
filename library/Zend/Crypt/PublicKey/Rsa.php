@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Crypt
  */
 
 namespace Zend\Crypt\PublicKey;
@@ -17,10 +16,6 @@ use Zend\Stdlib\ArrayUtils;
 
 /**
  * Implementation of the RSA public key encryption algorithm.
- *
- * @category   Zend
- * @package    Zend_Crypt
- * @subpackage PublicKey
  */
 class Rsa
 {
@@ -141,6 +136,20 @@ class Rsa
     }
 
     /**
+     * Return last openssl error(s)
+     *
+     * @return string
+     */
+    public function getOpensslErrorString()
+    {
+        $message = '';
+        while (false !== ($error = openssl_error_string())) {
+            $message .= $error . "\n";
+        }
+        return trim($message);
+    }
+
+    /**
      * Sign with private key
      *
      * @param  string     $data
@@ -163,7 +172,7 @@ class Rsa
         );
         if (false === $result) {
             throw new Exception\RuntimeException(
-                'Can not generate signature; openssl ' . openssl_error_string()
+                'Can not generate signature; openssl ' . $this->getOpensslErrorString()
             );
         }
 
@@ -226,7 +235,7 @@ class Rsa
         );
         if (-1 === $result) {
             throw new Exception\RuntimeException(
-                'Can not verify signature; openssl ' . openssl_error_string()
+                'Can not verify signature; openssl ' . $this->getOpensslErrorString()
             );
         }
 

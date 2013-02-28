@@ -12,17 +12,15 @@ namespace ZendTest\Mvc;
 
 use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
+use ReflectionObject;
 use stdClass;
 use Zend\Config\Config;
-use Zend\EventManager\EventManager;
 use Zend\Http\Request;
 use Zend\Http\PhpEnvironment\Response;
-use Zend\Modulemanager\ModuleManager;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router;
 use Zend\Mvc\Service\ServiceManagerConfig;
-use Zend\Mvc\View\Http\ViewManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Uri\UriFactory;
 
@@ -37,6 +35,11 @@ class ApplicationTest extends TestCase
      * @var ServiceManager
      */
     protected $serviceManager;
+
+    /**
+     * @var Application
+     */
+    protected $application;
 
     public function setUp()
     {
@@ -68,11 +71,13 @@ class ApplicationTest extends TestCase
                     'Request'          => 'Zend\Http\PhpEnvironment\Request',
                     'Response'         => 'Zend\Http\PhpEnvironment\Response',
                     'RouteListener'    => 'Zend\Mvc\RouteListener',
-                    'ViewManager'      => 'ZendTest\Mvc\TestAsset\MockViewManager'
+                    'ViewManager'      => 'ZendTest\Mvc\TestAsset\MockViewManager',
+                    'SendResponseListener' => 'ZendTest\Mvc\TestAsset\MockSendResponseListener'
                 ),
                 'factories' => array(
                     'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
                     'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
+                    'RoutePluginManager'      => 'Zend\Mvc\Service\RoutePluginManagerFactory',
                     'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
                     'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
                     'Config'                  => $config,
@@ -183,6 +188,18 @@ class ApplicationTest extends TestCase
         $this->assertSame(array($dispatchListener, 'onDispatch'), $callback);
     }
 
+    public function testBootstrapRegistersSendResponseListener()
+    {
+        $sendResponseListener = $this->serviceManager->get('SendResponseListener');
+        $this->application->bootstrap();
+        $events = $this->application->getEventManager();
+        $listeners = $events->getListeners(MvcEvent::EVENT_FINISH);
+        $this->assertEquals(1, count($listeners));
+        $listener = $listeners->top();
+        $callback = $listener->getCallback();
+        $this->assertSame(array($sendResponseListener, 'sendResponse'), $callback);
+    }
+
     public function testBootstrapRegistersViewManagerAsBootstrapListener()
     {
         $viewManager = $this->serviceManager->get('ViewManager');
@@ -228,7 +245,6 @@ class ApplicationTest extends TestCase
             ),
         ));
         $router->addRoute('path', $route);
-
         if ($addService) {
             $controllerLoader = $this->serviceManager->get('ControllerLoader');
             $controllerLoader->setFactory('path', function () {
@@ -353,7 +369,8 @@ class ApplicationTest extends TestCase
         $this->application->getEventManager()->attach(MvcEvent::EVENT_FINISH, function ($e) {
             return $e->getResponse()->setContent($e->getResponse()->getBody() . 'foobar');
         });
-        $this->assertContains('foobar', $this->application->run()->getBody(), 'The "finish" event was not triggered ("foobar" not in response)');
+        $this->application->run();
+        $this->assertContains('foobar', $this->application->getResponse()->getBody(), 'The "finish" event was not triggered ("foobar" not in response)');
     }
 
     /**
@@ -627,5 +644,17 @@ class ApplicationTest extends TestCase
 
         $this->application->run();
         $this->assertTrue($triggered);
+    }
+
+    public function testCompleteRequestShouldReturnApplicationInstance()
+    {
+        $r      = new ReflectionObject($this->application);
+        $method = $r->getMethod('completeRequest');
+        $method->setAccessible(true);
+
+        $this->application->bootstrap();
+        $event  = $this->application->getMvcEvent();
+        $result = $method->invoke($this->application, $event);
+        $this->assertSame($this->application, $result);
     }
 }

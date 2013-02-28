@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http\Header;
@@ -34,8 +33,6 @@ use stdClass;
  *                        |---|                                priority
  *
  *
- * @category   Zend
- * @package    Zend\Http\Header
  * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
  * @author     Dolf Schimmel - Freeaqingme
  */
@@ -171,7 +168,7 @@ abstract class AbstractAccept implements HeaderInterface
                 $explode = explode('=', $param, 2);
 
                 $value = trim($explode[1]);
-                if ($value[0] == '"' && substr($value, -1) == '"') {
+                if (isset($value[0]) && $value[0] == '"' && substr($value, -1) == '"') {
                     $value = substr(substr($value, 1), 0, -1);
                 }
 
@@ -344,10 +341,17 @@ abstract class AbstractAccept implements HeaderInterface
         foreach ($match2->params as $key => $value) {
             if (isset($match1->params[$key])) {
                 if (strpos($value, '-')) {
-                    $values = explode('-', $value, 2);
-                    if ($values[0] > $match1->params[$key] ||
-                            $values[1] < $match1->params[$key])
-                    {
+                    preg_match(
+                        '/^(?|([^"-]*)|"([^"]*)")-(?|([^"-]*)|"([^"]*)")\z/',
+                        $value,
+                        $pieces
+                    );
+
+                    if (count($pieces) == 3 &&
+                        (version_compare($pieces[1], $match1->params[$key], '<=')  xor
+                         version_compare($pieces[2], $match1->params[$key], '>=')
+                        )
+                    ) {
                         return false;
                     }
                 } elseif (strpos($value, '|')) {

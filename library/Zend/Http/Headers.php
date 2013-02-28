@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http;
@@ -21,8 +20,6 @@ use Zend\Loader\PluginClassLocator;
  * Basic HTTP headers collection functionality
  * Handles aggregation of headers
  *
- * @category   Zend
- * @package    Zend_Http
  * @see        http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
  */
 class Headers implements Countable, Iterator
@@ -129,7 +126,7 @@ class Headers implements Countable, Iterator
      */
     public function addHeaders($headers)
     {
-        if (!is_array($headers) && !$headers instanceof \Traversable) {
+        if (!is_array($headers) && !$headers instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Expected array or Traversable; received "%s"',
                 (is_object($headers) ? get_class($headers) : gettype($headers))

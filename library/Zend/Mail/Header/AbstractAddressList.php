@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Header;
@@ -15,10 +14,6 @@ use Zend\Mail\Headers;
 
 /**
  * Base class for headers composing address lists (to, from, cc, bcc, reply-to)
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Header
  */
 abstract class AbstractAddressList implements HeaderInterface
 {
@@ -48,7 +43,9 @@ abstract class AbstractAddressList implements HeaderInterface
     {
         $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
         // split into name/value
-        list($fieldName, $fieldValue) = explode(': ', $decodedLine, 2);
+        list($fieldName, $fieldValue) = explode(':', $decodedLine, 2);
+        $fieldName  = trim($fieldName);
+        $fieldValue = trim($fieldValue);
 
         if (strtolower($fieldName) !== static::$type) {
             throw new Exception\InvalidArgumentException(sprintf(

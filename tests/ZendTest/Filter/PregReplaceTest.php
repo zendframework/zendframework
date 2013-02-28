@@ -97,4 +97,11 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
                                     'does not have a valid pattern set');
         $filtered = $filter($string);
     }
+
+    public function testPassingPatternWithExecModifierRaisesException()
+    {
+        $filter = new PregReplaceFilter();
+        $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', '"e" pattern modifier');
+        $filter->setPattern('/foo/e');
+    }
 }

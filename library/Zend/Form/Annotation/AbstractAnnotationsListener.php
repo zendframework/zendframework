@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form\Annotation;
@@ -23,10 +22,6 @@ use Zend\EventManager\ListenerAggregateInterface;
  * on the "discoverName" event and will use the class or property name, as
  * discovered via reflection, if no other annotation has provided the name
  * already.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Annotation
  */
 abstract class AbstractAnnotationsListener implements ListenerAggregateInterface
 {

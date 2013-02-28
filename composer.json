@@ -26,7 +26,11 @@
         "psr-0": {
             "Zend\\": "library/",
             "ZendTest\\": "tests/"
-        }
+        },
+        "files": [
+            "library/Zend/Stdlib/compatibility/autoload.php",
+            "library/Zend/Session/compatibility/autoload.php"
+        ]
     },
     "bin": [
         "bin/classmap_generator.php"
@@ -66,6 +70,7 @@
         "zendframework/zend-navigation": "self.version",
         "zendframework/zend-paginator": "self.version",
         "zendframework/zend-permissions-acl": "self.version",
+        "zendframework/zend-permissions-rbac": "self.version",
         "zendframework/zend-progressbar": "self.version",
         "zendframework/zend-serializer": "self.version",
         "zendframework/zend-server": "self.version",
@@ -74,6 +79,7 @@
         "zendframework/zend-soap": "self.version",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-tag": "self.version",
+        "zendframework/zend-test": "self.version",
         "zendframework/zend-text": "self.version",
         "zendframework/zend-uri": "self.version",
         "zendframework/zend-validator": "self.version",
@@ -83,8 +89,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0-dev",
-            "dev-develop": "2.1-dev"
+            "dev-master": "2.1-dev",
+            "dev-develop": "2.2-dev"
         }
     }
 }

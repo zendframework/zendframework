@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Service;
@@ -17,11 +16,6 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Service
- */
 class ServiceManagerConfig implements ConfigInterface
 {
     /**
@@ -136,10 +130,14 @@ class ServiceManagerConfig implements ConfigInterface
         }
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
-            if ($instance instanceof EventManagerAwareInterface
-                && !$instance->getEventManager() instanceof EventManagerInterface
-            ) {
-                $instance->setEventManager($serviceManager->get('EventManager'));
+            if ($instance instanceof EventManagerAwareInterface) {
+                if ($instance->getEventManager() instanceof EventManagerInterface) {
+                    $instance->getEventManager()->setSharedManager(
+                        $serviceManager->get('SharedEventManager')
+                    );
+                } else {
+                    $instance->setEventManager($serviceManager->get('EventManager'));
+                }
             }
         });
 

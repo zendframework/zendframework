@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
@@ -13,12 +12,8 @@ namespace Zend\Form\View\Helper;
 use Zend\Form\ElementInterface;
 use Zend\Form\Element\Select as SelectElement;
 use Zend\Form\Exception;
+use Zend\Stdlib\ArrayUtils;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- */
 class FormSelect extends AbstractHelper
 {
     /**
@@ -154,7 +149,7 @@ class FormSelect extends AbstractHelper
                 $disabled = $optionSpec['disabled'];
             }
 
-            if (in_array($value, $selectedOptions)) {
+            if (ArrayUtils::inArray($value, $selectedOptions)) {
                 $selected = true;
             }
 

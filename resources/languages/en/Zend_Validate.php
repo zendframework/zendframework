@@ -12,9 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Translator
- * @subpackage Resource
  * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -187,6 +184,18 @@ return array(
     "File '%value%' was illegally uploaded. This could be a possible attack" => "File '%value%' was illegally uploaded. This could be a possible attack",
     "File '%value%' was not found" => "File '%value%' was not found",
     "Unknown error while uploading file '%value%'" => "Unknown error while uploading file '%value%'",
+
+    // Zend_Validator_File_UploadFile
+    "File exceeds the defined ini size" => "File exceeds the defined ini size",
+    "File exceeds the defined form size" => "File exceeds the defined form size",
+    "File was only partially uploaded" => "File was only partially uploaded",
+    "File was not uploaded" => "File was not uploaded",
+    "No temporary directory was found for file" => "No temporary directory was found for file",
+    "File can't be written" => "File can't be written",
+    "A PHP extension returned an error while uploading the file" => "A PHP extension returned an error while uploading the file",
+    "File was illegally uploaded. This could be a possible attack" => "File was illegally uploaded. This could be a possible attack",
+    "File was not found" => "File was not found",
+    "Unknown error while uploading file" => "Unknown error while uploading file",
 
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Too much words, maximum '%max%' are allowed but '%count%' were counted",

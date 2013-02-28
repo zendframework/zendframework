@@ -21,67 +21,74 @@ use Zend\Validator\File;
 class ExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Ensures that the validator follows expected behavior
-     *
-     * @return void
+     * @return array
      */
-    public function testBasic()
+    public function basicBehaviorDataProvider()
     {
-        $valuesExpected = array(
-            array('mo', true),
-            array('gif', false),
-            array(array('mo'), true),
-            array(array('gif'), false),
-            array(array('gif', 'pdf', 'mo', 'pict'), true),
-            array(array('gif', 'gz', 'hint'), false),
+        $testFile   = __DIR__ . '/_files/testsize.mo';
+        $pictureTests = array(
+            //    Options, isValid Param, Expected value, Expected message
+            array('mo',                       $testFile, true,  ''),
+            array('gif',                      $testFile, false, 'fileExtensionFalse'),
+            array(array('mo'),                $testFile, true,  ''),
+            array(array('gif'),               $testFile, false, 'fileExtensionFalse'),
+            array(array('gif', 'mo', 'pict'), $testFile, true,  ''),
+            array(array('gif', 'gz', 'hint'), $testFile, false, 'fileExtensionFalse'),
         );
 
-        foreach ($valuesExpected as $element) {
-            $validator = new File\Extension($element[0]);
-            $this->assertEquals(
-                $element[1],
-                $validator->isValid(__DIR__ . '/_files/testsize.mo'),
-                "Tested with " . var_export($element, 1)
+        $testFile   = __DIR__ . '/_files/nofile.mo';
+        $noFileTests = array(
+            //    Options, isValid Param, Expected value, message
+            array('mo', $testFile, false, 'fileExtensionNotFound'),
+        );
+
+        // Dupe data in File Upload format
+        $testData = array_merge($pictureTests, $noFileTests);
+        foreach ($testData as $data) {
+            $fileUpload = array(
+                'tmp_name' => $data[1], 'name' => basename($data[1]),
+                'size' => 200, 'error' => 0, 'type' => 'text'
             );
+            $testData[] = array($data[0], $fileUpload, $data[2], $data[3]);
         }
-
-        $validator = new File\Extension('mo');
-        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.mo'));
-        $this->assertTrue(array_key_exists('fileExtensionNotFound', $validator->getMessages()));
-
-        $files = array(
-            'name'     => 'test1',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => 'tmp_test1',
-            'error'    => 0
-        );
-        $validator = new File\Extension('mo');
-        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.mo', $files));
-        $this->assertTrue(array_key_exists('fileExtensionNotFound', $validator->getMessages()));
-
-        $files = array(
-            'name'     => 'testsize.mo',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/testsize.mo',
-            'error'    => 0
-        );
-        $validator = new File\Extension('mo');
-        $this->assertEquals(true, $validator->isValid(__DIR__ . '/_files/testsize.mo', $files));
-
-        $files = array(
-            'name'     => 'testsize.mo',
-            'type'     => 'text',
-            'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/testsize.mo',
-            'error'    => 0
-        );
-        $validator = new File\Extension('gif');
-        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/testsize.mo', $files));
-        $this->assertTrue(array_key_exists('fileExtensionFalse', $validator->getMessages()));
+        return $testData;
     }
 
+    /**
+     * Ensures that the validator follows expected behavior
+     *
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
+     */
+    public function testBasic($options, $isValidParam, $expected, $messageKey)
+    {
+        $validator = new File\Extension($options);
+        $this->assertEquals($expected, $validator->isValid($isValidParam));
+        if (!$expected) {
+            $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+        }
+    }
+
+    /**
+     * Ensures that the validator follows expected behavior for legacy Zend\Transfer API
+     *
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
+     */
+    public function testLegacy($options, $isValidParam, $expected, $messageKey)
+    {
+        if (is_array($isValidParam)) {
+            $validator = new File\Extension($options);
+            $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
+            if (!$expected) {
+                $this->assertTrue(array_key_exists($messageKey, $validator->getMessages()));
+            }
+        }
+    }
+
+    /**
+     * @return void
+     */
     public function testZF3891()
     {
         $files = array(
@@ -159,6 +166,6 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         $validator = new File\Extension('gif');
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileExtensionNotFound', $validator->getMessages()));
-        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+        $this->assertContains("does not exist", current($validator->getMessages()));
     }
 }

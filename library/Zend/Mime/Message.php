@@ -5,15 +5,10 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mime
  */
 
 namespace Zend\Mime;
 
-/**
- * @category   Zend
- * @package    Zend_Mime
- */
 class Message
 {
 
@@ -111,9 +106,9 @@ class Message
      */
     public function generateMessage($EOL = Mime::LINEEND)
     {
-        if (! $this->isMultiPart()) {
-            $body = array_shift($this->parts);
-            $body = $body->getContent($EOL);
+        if (!$this->isMultiPart()) {
+            $part = current($this->parts);
+            $body = $part->getContent($EOL);
         } else {
             $mime = $this->getMime();
 
@@ -181,8 +176,8 @@ class Message
      */
     protected static function _disassembleMime($body, $boundary)
     {
-        $start = 0;
-        $res = array();
+        $start  = 0;
+        $res    = array();
         // find every mime part limiter and cut out the
         // string before it.
         // the part before the first boundary string is discarded:
@@ -265,6 +260,7 @@ class Message
             }
             $res->addPart($newPart);
         }
+
         return $res;
     }
 }

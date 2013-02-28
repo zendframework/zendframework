@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -18,10 +17,6 @@ use Zend\View\Helper\Navigation\HelperInterface as NavigationHelper;
 
 /**
  * Proxy helper for retrieving navigational helpers and forwarding calls
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
  */
 class Navigation extends AbstractNavigationHelper
 {
@@ -187,12 +182,14 @@ class Navigation extends AbstractNavigationHelper
             return false;
         }
 
-        $helper = $plugins->get($proxy);
-        $class  = get_class($helper);
+        $helper    = $plugins->get($proxy);
+        $container = $this->getContainer();
+        $hash      = spl_object_hash($container);
 
-        if (!isset($this->injected[$class])) {
+        if (!isset($this->injected[$hash])) {
+            $helper->setContainer();
             $this->inject($helper);
-            $this->injected[$class] = true;
+            $this->injected[$hash] = true;
         }
 
         return $helper;

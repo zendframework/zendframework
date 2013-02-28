@@ -146,4 +146,30 @@ class StreamWriterTest extends \PHPUnit_Framework_TestCase
         $writer = new StreamWriter($options);
         $this->assertEquals('::', $writer->getLogSeparator());
     }
+
+    public function testConstructWithOptions()
+    {
+        $formatter = new \Zend\Log\Formatter\Simple();
+        $filter    = new \Zend\Log\Filter\Mock();
+        $writer = new StreamWriter(array(
+                'filters'   => $filter,
+                'formatter' => $formatter,
+                'stream'        => 'php://memory',
+                'mode'          => 'w+',
+                'log_separator' => '::',
+
+        ));
+        $this->assertEquals('::', $writer->getLogSeparator());
+        $this->assertAttributeEquals($formatter, 'formatter', $writer);
+
+        $filters = self::readAttribute($writer, 'filters');
+        $this->assertCount(1, $filters);
+        $this->assertEquals($filter, $filters[0]);
+    }
+
+    public function testDefaultFormatter()
+    {
+        $writer = new StreamWriter('php://memory');
+        $this->assertAttributeInstanceOf('Zend\Log\Formatter\Simple', 'formatter', $writer);
+    }
 }

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router\Http;
@@ -19,9 +18,6 @@ use Zend\Uri\Http as HttpUri;
 
 /**
  * Tree search implementation.
- *
- * @package    Zend_Mvc_Router
- * @subpackage Http
  */
 class TreeRouteStack extends SimpleRouteStack
 {
@@ -66,7 +62,7 @@ class TreeRouteStack extends SimpleRouteStack
     /**
      * addRoute(): defined by RouteStackInterface interface.
      *
-     * @see    RouteStack::addRoute()
+     * @see    RouteStackInterface::addRoute()
      * @param  string  $name
      * @param  mixed   $route
      * @param  integer $priority
@@ -85,7 +81,7 @@ class TreeRouteStack extends SimpleRouteStack
      * routeFromArray(): defined by SimpleRouteStack.
      *
      * @see    SimpleRouteStack::routeFromArray()
-     * @param  array|\Traversable $specs
+     * @param  array|Traversable $specs
      * @return RouteInterface
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
@@ -220,6 +216,14 @@ class TreeRouteStack extends SimpleRouteStack
         }
 
         $path = $this->baseUrl . $route->assemble(array_merge($this->defaultParams, $params), $options);
+
+        if (isset($options['query'])) {
+            $uri->setQuery($options['query']);
+        }
+
+        if (isset($options['fragment'])) {
+            $uri->setFragment($options['fragment']);
+        }
 
         if ((isset($options['force_canonical']) && $options['force_canonical']) || $uri->getHost() !== null) {
             if ($uri->getScheme() === null) {

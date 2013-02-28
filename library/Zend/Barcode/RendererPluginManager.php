@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode;
@@ -18,12 +17,14 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Enforces that barcode parsers retrieved are instances of
  * Renderer\AbstractRenderer. Additionally, it registers a number of default
  * barcode renderers.
- *
- * @category   Zend
- * @package    Zend_Barcode
  */
 class RendererPluginManager extends AbstractPluginManager
 {
+    /**
+     * @var bool Ensure services are not shared
+     */
+    protected $shareByDefault = false;
+
     /**
      * Default set of barcode renderers
      *

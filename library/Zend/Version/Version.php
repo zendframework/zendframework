@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Version.php
  */
 
 namespace Zend\Version;
@@ -14,16 +13,13 @@ use Zend\Json\Json;
 
 /**
  * Class to store and retrieve the version of Zend Framework.
- *
- * @category   Zend
- * @package    Zend_Version
  */
 final class Version
 {
     /**
      * Zend Framework version identification - see compareVersion()
      */
-    const VERSION = '2.0.6';
+    const VERSION = '2.1.4dev';
 
     /**
      * Github Service Identifier for version information is retreived from
@@ -95,7 +91,7 @@ final class Version
                 static::$latestVersion = array_reduce($tags, function ($a, $b) {
                     return version_compare($a, $b, '>') ? $a : $b;
                 });
-            } elseif($service == self::VERSION_SERVICE_ZEND) {
+            } elseif ($service == self::VERSION_SERVICE_ZEND) {
                 $handle = fopen('http://framework.zend.com/api/zf-version?v=2', 'r');
                 if (false !== $handle) {
                     static::$latestVersion = stream_get_contents($handle);

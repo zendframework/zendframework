@@ -5,12 +5,12 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
 use Zend\Stdlib\ErrorHandler;
+use Zend\Stdlib\StringUtils;
 
 /**
  * Please note there are two standalone test scripts for testing IDN characters due to problems
@@ -21,9 +21,6 @@ use Zend\Stdlib\ErrorHandler;
  *
  * The second is tests/Zend/Validator/HostnameTestForm.php which is designed to be run via HTML
  * to allow users to test entering UTF-8 characters in a form.
- *
- * @category   Zend
- * @package    Zend_Validator
  */
 class Hostname extends AbstractValidator
 {
@@ -485,10 +482,9 @@ class Hostname extends AbstractValidator
 
         // Check input against DNS hostname schema
         if ((count($domainParts) > 1) && (strlen($value) >= 4) && (strlen($value) <= 254)) {
-            $status = false;
+            $utf8StrWrapper = StringUtils::getWrapper('UTF-8');
+            $status         = false;
 
-            $origenc = iconv_get_encoding('internal_encoding');
-            iconv_set_encoding('internal_encoding', 'UTF-8');
             do {
                 // First check TLD
                 $matches = array();
@@ -519,7 +515,7 @@ class Hostname extends AbstractValidator
                     $regexChars = array(0 => '/^[a-z0-9\x2d]{1,63}$/i');
                     if ($this->getIdnCheck() &&  isset($this->validIdns[strtoupper($this->tld)])) {
                         if (is_string($this->validIdns[strtoupper($this->tld)])) {
-                            $regexChars += include ($this->validIdns[strtoupper($this->tld)]);
+                            $regexChars += include __DIR__ .'/'. $this->validIdns[strtoupper($this->tld)];
                         } else {
                             $regexChars += $this->validIdns[strtoupper($this->tld)];
                         }
@@ -558,7 +554,7 @@ class Hostname extends AbstractValidator
                                     $length = $this->idnLength[strtoupper($this->tld)];
                                 }
 
-                                if (iconv_strlen($domainPart, 'UTF-8') > $length) {
+                                if ($utf8StrWrapper->strlen($domainPart) > $length) {
                                     $this->error(self::INVALID_HOSTNAME);
                                 } else {
                                     $checked = true;
@@ -584,7 +580,6 @@ class Hostname extends AbstractValidator
                 }
             } while (false);
 
-            iconv_set_encoding('internal_encoding', $origenc);
             // If the input passes as an Internet domain name, and domain names are allowed, then the hostname
             // passes validation
             if ($status && ($this->getAllow() & self::ALLOW_DNS)) {

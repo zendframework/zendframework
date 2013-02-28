@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
@@ -18,9 +17,6 @@ use Zend\Validator\Exception;
 
 /**
  * Validator for the mime type of a file
- *
- * @category  Zend
- * @package   Zend_Validator
  */
 class MimeType extends AbstractValidator
 {
@@ -36,9 +32,9 @@ class MimeType extends AbstractValidator
      * @var array Error message templates
      */
     protected $messageTemplates = array(
-        self::FALSE_TYPE   => "File '%value%' has a false mimetype of '%type%'",
-        self::NOT_DETECTED => "The mimetype of file '%value%' could not be detected",
-        self::NOT_READABLE => "File '%value%' is not readable or does not exist",
+        self::FALSE_TYPE   => "File has an incorrect mimetype of '%type%'",
+        self::NOT_DETECTED => "The mimetype could not be detected from the file",
+        self::NOT_READABLE => "File is not readable or does not exist",
     );
 
     /**
@@ -345,22 +341,37 @@ class MimeType extends AbstractValidator
      * of mimetypes can be checked. If you give for example "image" all image
      * mime types will be accepted like "image/gif", "image/jpeg" and so on.
      *
-     * @param  string $value Real file to check for mimetype
-     * @param  array  $file  File data from \Zend\File\Transfer\Transfer
+     * @param  string|array $value Real file to check for mimetype
+     * @param  array        $file  File data from \Zend\File\Transfer\Transfer (optional)
      * @return bool
      */
     public function isValid($value, $file = null)
     {
-        if ($file === null) {
-            $file = array(
-                'type' => null,
-                'name' => $value,
-            );
+        if (is_string($value) && is_array($file)) {
+            // Legacy Zend\Transfer API support
+            $filename = $file['name'];
+            $filetype = $file['type'];
+            $file     = $file['tmp_name'];
+        } elseif (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name']) || !isset($value['type'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = $value['name'];
+            $filetype = $value['type'];
+        } else {
+            $file     = $value;
+            $filename = basename($file);
+            $filetype = null;
         }
+        $this->setValue($filename);
 
         // Is file readable ?
-        if (false === stream_resolve_include_path($value)) {
-            return $this->createError($file, self::NOT_READABLE);
+        if (false === stream_resolve_include_path($file)) {
+            $this->error(static::NOT_READABLE);
+            return false;
         }
 
         $mimefile = $this->getMagicFile();
@@ -380,21 +391,22 @@ class MimeType extends AbstractValidator
 
             $this->type = null;
             if (!empty($this->finfo)) {
-                $this->type = finfo_file($this->finfo, $value);
+                $this->type = finfo_file($this->finfo, $file);
             }
         }
 
         if (empty($this->type) &&
             (function_exists('mime_content_type') && ini_get('mime_magic.magicfile'))) {
-                $this->type = mime_content_type($value);
+                $this->type = mime_content_type($file);
         }
 
         if (empty($this->type) && $this->getHeaderCheck()) {
-            $this->type = $file['type'];
+            $this->type = $filetype;
         }
 
         if (empty($this->type)) {
-            return $this->createError($file, self::NOT_DETECTED);
+            $this->error(static::NOT_DETECTED);
+            return false;
         }
 
         $mimetype = $this->getMimeType(true);
@@ -411,31 +423,7 @@ class MimeType extends AbstractValidator
             }
         }
 
-        return $this->createError($file, self::FALSE_TYPE);
-    }
-
-    /**
-     * Throws an error of the given type
-     *
-     * @param  string $file
-     * @param  string $errorType
-     * @return false
-     */
-    protected function createError($file, $errorType)
-    {
-        if ($file !== null) {
-            if (is_array($file)) {
-                if (array_key_exists('name', $file)) {
-                    $file = $file['name'];
-                }
-            }
-
-            if (is_string($file)) {
-                $this->value = basename($file);
-            }
-        }
-
-        $this->error($errorType);
+        $this->error(static::FALSE_TYPE);
         return false;
     }
 }

@@ -12,27 +12,22 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Element
  * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Form\Element;
 
+use Zend\Form\FormInterface;
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
-use Zend\Form\Form;
+use Zend\InputFilter\InputProviderInterface;
 
 /**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Element
  * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class File extends Element implements ElementPrepareAwareInterface
+class File extends Element implements InputProviderInterface, ElementPrepareAwareInterface
 {
     /**
      * Seed attributes
@@ -46,12 +41,27 @@ class File extends Element implements ElementPrepareAwareInterface
     /**
      * Prepare the form element (mostly used for rendering purposes)
      *
-     * @param  Form $form
+     * @param  FormInterface $form
      * @return mixed
      */
-    public function prepareElement(Form $form)
+    public function prepareElement(FormInterface $form)
     {
         // Ensure the form is using correct enctype
         $form->setAttribute('enctype', 'multipart/form-data');
+    }
+
+    /**
+     * Should return an array specification compatible with
+     * {@link Zend\InputFilter\Factory::createInput()}.
+     *
+     * @return array
+     */
+    public function getInputSpecification()
+    {
+        return array(
+            'type'     => 'Zend\InputFilter\FileInput',
+            'name'     => $this->getName(),
+            'required' => false,
+        );
     }
 }

@@ -5,17 +5,11 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Permissions
  */
 
 namespace Zend\Permissions\Acl;
 
-/**
- * @category   Zend
- * @package    Zend_Permissions
- * @subpackage Acl
- */
-class Acl
+class Acl implements AclInterface
 {
     /**
      * Rule type: allow
@@ -675,7 +669,7 @@ class Acl
         $id = $resource->getResourceId();
 
         $children = $this->resources[$id]['children'];
-        foreach($children as $child) {
+        foreach ($children as $child) {
             $child_return = $this->getChildResources($child);
             $child_return[$child->getResourceId()] = $child;
 

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Renderer;
@@ -22,10 +21,6 @@ use Zend\View\Resolver\ResolverInterface as Resolver;
 
 /**
  * JSON renderer
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Renderer
  */
 class JsonRenderer implements Renderer, TreeRendererInterface
 {
@@ -89,7 +84,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
      * Set the JSONP callback function name
      *
      * @param  string $callback
-     * @return JsonpModel
+     * @return JsonRenderer
      */
     public function setJsonpCallback($callback)
     {
@@ -107,7 +102,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
      */
     public function hasJsonpCallback()
     {
-        return !is_null($this->jsonpCallback);
+        return (null !== $this->jsonpCallback);
     }
 
     /**
@@ -135,6 +130,8 @@ class JsonRenderer implements Renderer, TreeRendererInterface
         // Serialize variables in view model
         if ($nameOrModel instanceof Model) {
             if ($nameOrModel instanceof JsonModel) {
+                $children = $this->recurseModel($nameOrModel, false);
+                $this->injectChildren($nameOrModel, $children);
                 $values = $nameOrModel->serialize();
             } else {
                 $values = $this->recurseModel($nameOrModel);
@@ -188,11 +185,17 @@ class JsonRenderer implements Renderer, TreeRendererInterface
      * Retrieve values from a model and recurse its children to build a data structure
      *
      * @param  Model $model
+     * @param  bool $mergeWithVariables Whether or not to merge children with
+     *         the variables of the $model
      * @return array
      */
-    protected function recurseModel(Model $model)
+    protected function recurseModel(Model $model, $mergeWithVariables = true)
     {
-        $values = $model->getVariables();
+        $values = array();
+        if ($mergeWithVariables) {
+            $values = $model->getVariables();
+        }
+
         if ($values instanceof Traversable) {
             $values = ArrayUtils::iteratorToArray($values);
         }
@@ -212,7 +215,8 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             $childValues = $this->recurseModel($child);
             if ($captureTo) {
                 // Capturing to a specific key
-                //TODO please complete if append is true. must change old value to array and append to array?
+                // TODO please complete if append is true. must change old
+                // value to array and append to array?
                 $values[$captureTo] = $childValues;
             } elseif ($mergeChildren) {
                 // Merging values with parent
@@ -220,5 +224,20 @@ class JsonRenderer implements Renderer, TreeRendererInterface
             }
         }
         return $values;
+    }
+
+    /**
+     * Inject discovered child model values into parent model
+     *
+     * @todo   detect collisions and decide whether to append and/or aggregate?
+     * @param  Model $model
+     * @param  array $children
+     */
+    protected function injectChildren(Model $model, array $children)
+    {
+        foreach ($children as $child => $value) {
+            // TODO detect collisions and decide whether to append and/or aggregate?
+            $model->setVariable($child, $value);
+        }
     }
 }

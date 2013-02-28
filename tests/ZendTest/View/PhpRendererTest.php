@@ -330,6 +330,24 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($model, $helper->getCurrent());
     }
 
+    public function testRendererRaisesExceptionInCaseOfExceptionInView()
+    {
+        $resolver = new TemplateMapResolver(array(
+            'exception' => __DIR__ . '../../Mvc/View/_files/exception.phtml',
+        ));
+        $this->renderer->setResolver($resolver);
+
+        $model = new ViewModel();
+        $model->setTemplate('exception');
+
+        try {
+            $this->renderer->render($model);
+            $this->fail('Exception from renderer should propagate');
+        } catch (\Exception $e) {
+            $this->assertInstanceOf('Exception', $e);
+        }
+    }
+
     public function testRendererRaisesExceptionIfResolverCannotResolveTemplate()
     {
         $expected = '10 &gt; 9';

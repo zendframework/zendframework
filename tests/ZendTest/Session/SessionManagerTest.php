@@ -73,7 +73,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function testManagerUsesSessionStorageByDefault()
     {
         $storage = $this->manager->getStorage();
-        $this->assertTrue($storage instanceof Session\Storage\SessionStorage);
+        $this->assertTrue($storage instanceof Session\Storage\SessionArrayStorage);
     }
 
     public function testCanPassStorageToConstructor()
@@ -369,39 +369,13 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testIdShouldBeMutablePriorAfterSessionStarted()
+    public function testIdShouldNotBeMutableAfterSessionStarted()
     {
+        $this->setExpectedException('RuntimeException',
+            'Session has already been started, to change the session ID call regenerateId()');
         $this->manager->start();
         $origId = $this->manager->getId();
         $this->manager->setId(__METHOD__);
-        $this->assertNotSame($origId, $this->manager->getId());
-        $this->assertSame(__METHOD__, $this->manager->getId());
-        $this->assertSame(__METHOD__, session_id());
-    }
-
-    /**
-     * @runInSeparateProcess
-     */
-    public function testSettingIdAfterSessionStartedShouldSendExpireCookie()
-    {
-        if (!extension_loaded('xdebug')) {
-            $this->markTestSkipped('Xdebug required for this test');
-        }
-
-        $config = $this->manager->getConfig();
-        $config->setUseCookies(true);
-        $this->manager->start();
-        $origId = $this->manager->getId();
-        $this->manager->setId(__METHOD__);
-        $headers = xdebug_get_headers();
-        $found  = false;
-        $sName  = $this->manager->getName();
-        foreach ($headers as $header) {
-            if (stristr($header, 'Set-Cookie:') && stristr($header, $sName)) {
-                $found  = true;
-            }
-        }
-        $this->assertTrue($found, 'No session cookie found: ' . var_export($headers, true));
     }
 
     /**
@@ -551,4 +525,18 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'failed');
         $this->manager->start();
     }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testSessionWriteCloseStoresMetadata()
+    {
+        $this->manager->start();
+        $storage = $this->manager->getStorage();
+        $storage->setMetadata('foo', 'bar');
+        $metaData = $storage->getMetadata();
+        $this->manager->writeClose();
+        $this->assertSame($_SESSION['__ZF'], $metaData);
+    }
+
 }

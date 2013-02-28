@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Paginator
  */
 
 namespace Zend\Paginator;
@@ -24,10 +23,6 @@ use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View;
 
-/**
- * @category   Zend
- * @package    Zend_Paginator
- */
 class Paginator implements Countable, IteratorAggregate
 {
 
@@ -160,7 +155,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Set a global config
      *
-     * @param array|\Traversable $config
+     * @param array|Traversable $config
      * @throws Exception\InvalidArgumentException
      */
     public static function setGlobalConfig($config)
@@ -286,7 +281,7 @@ class Paginator implements Countable, IteratorAggregate
             $this->adapter = $adapter->getPaginatorAdapter();
         } else {
             throw new Exception\InvalidArgumentException(
-                'Zend_Paginator only accepts instances of the type ' .
+                'Zend\Paginator only accepts instances of the type ' .
                 'Zend\Paginator\Adapter\AdapterInterface or Zend\Paginator\AdapterAggregateInterface.'
             );
         }

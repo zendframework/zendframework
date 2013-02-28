@@ -6,7 +6,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Log
  */
 
 namespace Zend\Log\Writer;
@@ -16,17 +15,12 @@ use Mongo;
 use MongoClient;
 use MongoDate;
 use Traversable;
-use Zend\Log\Exception\InvalidArgumentException;
-use Zend\Log\Exception\RuntimeException;
+use Zend\Log\Exception;
 use Zend\Log\Formatter\FormatterInterface;
 use Zend\Stdlib\ArrayUtils;
 
 /**
  * MongoDB log writer.
- *
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Writer
  */
 class MongoDB extends AbstractWriter
 {
@@ -53,27 +47,30 @@ class MongoDB extends AbstractWriter
      * @param array $saveOptions
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($mongo, $database, $collection, array $saveOptions = array())
+    public function __construct($mongo, $database = null, $collection = null, array $saveOptions = array())
     {
         if ($mongo instanceof Traversable) {
             // Configuration may be multi-dimensional due to save options
             $mongo = ArrayUtils::iteratorToArray($mongo);
         }
         if (is_array($mongo)) {
+            parent::__construct($mongo);
             $saveOptions = isset($mongo['save_options']) ? $mongo['save_options'] : null;
             $collection  = isset($mongo['collection']) ? $mongo['collection'] : null;
-            if (null === $collection) {
-                throw new Exception\InvalidArgumentException(
+            $database    = isset($mongo['database']) ? $mongo['database'] : null;
+            $mongo       = isset($mongo['mongo']) ? $mongo['mongo'] : null;
+        }
+
+        if (null === $collection) {
+            throw new Exception\InvalidArgumentException(
                     'The collection parameter cannot be empty'
-                );
-            }
-            $database = isset($mongo['database']) ? $mongo['database'] : null;
-            if (null === $database) {
-                throw new Exception\InvalidArgumentException(
+            );
+        }
+
+        if (null === $database) {
+            throw new Exception\InvalidArgumentException(
                     'The database parameter cannot be empty'
-                );
-            }
-            $mongo = isset($mongo['mongo']) ? $mongo['mongo'] : null;
+            );
         }
 
         if (!($mongo instanceof MongoClient || $mongo instanceof Mongo)) {
@@ -90,13 +87,12 @@ class MongoDB extends AbstractWriter
     /**
      * This writer does not support formatting.
      *
-     * @param Zend\Log\Formatter\FormatterInterface $formatter
-     * @return void
-     * @throws Zend\Log\Exception\InvalidArgumentException
+     * @param string|FormatterInterface $formatter
+     * @return WriterInterface
      */
-    public function setFormatter(FormatterInterface $formatter)
+    public function setFormatter($formatter)
     {
-        throw new InvalidArgumentException(get_class() . ' does not support formatting');
+        return $this;
     }
 
     /**
@@ -104,12 +100,12 @@ class MongoDB extends AbstractWriter
      *
      * @param array $event Event data
      * @return void
-     * @throws Zend\Log\Exception\RuntimeException
+     * @throws Exception\RuntimeException
      */
     protected function doWrite(array $event)
     {
         if (null === $this->mongoCollection) {
-            throw new RuntimeException('MongoCollection must be defined');
+            throw new Exception\RuntimeException('MongoCollection must be defined');
         }
 
         if (isset($event['timestamp']) && $event['timestamp'] instanceof DateTime) {

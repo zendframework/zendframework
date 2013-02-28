@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_InputFilter
  */
 
 namespace Zend\InputFilter;
@@ -14,10 +13,6 @@ use Zend\Filter\FilterChain;
 use Zend\Validator\ValidatorChain;
 use Zend\Validator\NotEmpty;
 
-/**
- * @category   Zend
- * @package    Zend_InputFilter
- */
 class Input implements InputInterface
 {
     /**
@@ -308,6 +303,9 @@ class Input implements InputInterface
         return $validator->getMessages();
     }
 
+    /**
+     * @return void
+     */
     protected function injectNotEmptyValidator()
     {
         if ((!$this->isRequired() && $this->allowEmpty()) || $this->notEmptyValidator) {
@@ -315,13 +313,13 @@ class Input implements InputInterface
         }
         $chain = $this->getValidatorChain();
 
-        // Check if NotEmpty validator is already first in chain
+        // Check if NotEmpty validator is already in chain
         $validators = $chain->getValidators();
-        if (isset($validators[0]['instance'])
-            && $validators[0]['instance'] instanceof NotEmpty
-        ) {
-            $this->notEmptyValidator = true;
-            return;
+        foreach ($validators as $validator) {
+            if ($validator['instance'] instanceof NotEmpty) {
+                $this->notEmptyValidator = true;
+                return;
+            }
         }
 
         $chain->prependByName('NotEmpty', array(), true);

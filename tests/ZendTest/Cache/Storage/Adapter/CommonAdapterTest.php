@@ -10,6 +10,7 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\IterableInterface;
 use Zend\Cache\Storage\IteratorInterface;
 use Zend\Cache\Storage\StorageInterface;
@@ -19,8 +20,8 @@ use Zend\Cache\Storage\ClearByPrefixInterface;
 use Zend\Cache\Storage\FlushableInterface;
 use Zend\Cache\Storage\OptimizableInterface;
 use Zend\Cache\Storage\TaggableInterface;
-use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
+use Zend\Http\Header\Expires;
 use Zend\Stdlib\ErrorHandler;
 
 /**
@@ -235,7 +236,11 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $wait = $ttl + $capabilities->getTtlPrecision();
         usleep($wait * 2000000);
 
-        $this->assertFalse($this->_storage->hasItem('key'));
+        if (!$capabilities->getUseRequestTime()) {
+            $this->assertFalse($this->_storage->hasItem('key'));
+        } else {
+            $this->assertTrue($this->_storage->hasItem('key'));
+        }
     }
 
     public function testHasItemNonReadable()
@@ -397,8 +402,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $this->_storage->getMetadatas(array('key')));
     }
 
-    public function testSetGetHasAndRemoveItem()
+    public function testSetGetHasAndRemoveItemWithoutNamespace()
     {
+        $this->_storage->getOptions()->setNamespace('');
+
         $this->assertTrue($this->_storage->setItem('key', 'value'));
         $this->assertEquals('value', $this->_storage->getItem('key'));
         $this->assertTrue($this->_storage->hasItem('key'));
@@ -408,8 +415,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->_storage->getItem('key'));
     }
 
-    public function testSetGetHasAndRemoveItems()
+    public function testSetGetHasAndRemoveItemsWithoutNamespace()
     {
+        $this->_storage->getOptions()->setNamespace('');
+
         $items = array(
             'key1' => 'value1',
             'key2' => 'value2',
@@ -545,11 +554,13 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $wait = $ttl + $capabilities->getTtlPrecision();
         usleep($wait * 2000000);
 
-        if (!$capabilities->getUseRequestTime()) {
-            $this->assertNull($this->_storage->getItem('key'));
-        } else {
+        if ($capabilities->getUseRequestTime()) {
+            // Can't test much more if the request time will be used
             $this->assertEquals('value', $this->_storage->getItem('key'));
+            return;
         }
+
+        $this->assertNull($this->_storage->getItem('key'));
 
         $this->_options->setTtl(0);
         if ($capabilities->getExpiredRead()) {
@@ -930,6 +941,16 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->hasItem('test'));
     }
 
+    public function testClearByPrefixThrowsInvalidArgumentExceptionOnEmptyPrefix()
+    {
+        if (!($this->_storage instanceof ClearByPrefixInterface)) {
+            $this->markTestSkipped("Storage doesn't implement ClearByPrefixInterface");
+        }
+
+        $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
+        $this->_storage->clearByPrefix('');
+    }
+
     public function testClearByNamespace()
     {
         if (!($this->_storage instanceof ClearByNamespaceInterface)) {
@@ -964,6 +985,16 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_storage->hasItem('key2'));
     }
 
+    public function testClearByNamespaceThrowsInvalidArgumentExceptionOnEmptyNamespace()
+    {
+        if (!($this->_storage instanceof ClearByNamespaceInterface)) {
+            $this->markTestSkipped("Storage doesn't implement ClearByNamespaceInterface");
+        }
+
+        $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
+        $this->_storage->clearByNamespace('');
+    }
+
     public function testClearExpired()
     {
         if (!($this->_storage instanceof ClearExpiredInterface)) {
@@ -993,7 +1024,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->hasItem('key2'));
     }
 
-    public function testTagable()
+    public function testTaggable()
     {
         if (!($this->_storage instanceof TaggableInterface)) {
             $this->markTestSkipped("Storage doesn't implement TaggableInterface");

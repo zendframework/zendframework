@@ -116,4 +116,16 @@ EOD;
         $this->assertEquals('base64', $part2->encoding);
         $this->assertEquals('12', $part2->id);
     }
+
+    public function testNonMultipartMessageShouldNotRemovePartFromMessage()
+    {
+        $message = new Mime\Message();  // No Parts
+        $part    = new Mime\Part('This is a test');
+        $message->addPart($part);
+        $message->generateMessage();
+
+        $parts = $message->getParts();
+        $test  = current($parts);
+        $this->assertSame($part, $test);
+    }
 }

@@ -12,9 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Translator
- * @subpackage Resource
  * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -187,6 +184,18 @@ return array(
     "File '%value%' was illegally uploaded. This could be a possible attack" => "Il file '%value%' è stato caricato irregolarmente. Potrebbe trattarsi di un attacco",
     "File '%value%' was not found" => "Il file '%value%' non è stato trovato",
     "Unknown error while uploading file '%value%'" => "Errore sconosciuto durante il caricamento del file '%value%'",
+
+    // Zend_Validator_File_UploadFile
+    "File exceeds the defined ini size" => "Il file eccede la dimensione definita nell'ini",
+    "File exceeds the defined form size" => "Il file eccede la dimensione definita nella form",
+    "File was only partially uploaded" => "Il file è stato caricato solo parzialmente",
+    "File was not uploaded" => "Il file non è stato caricato",
+    "No temporary directory was found for file" => "Non è stata trovata una directory temporanea per il file",
+    "File can't be written" => "Il file non può essere scritto",
+    "A PHP extension returned an error while uploading the file" => "Un'estensione di PHP ha generato un errore durante il caricamento del file",
+    "File was illegally uploaded. This could be a possible attack" => "Il file è stato caricato irregolarmente. Potrebbe trattarsi di un attacco",
+    "File was not found" => "Il file non è stato trovato",
+    "Unknown error while uploading file" => "Errore sconosciuto durante il caricamento del file",
 
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Il file contiene troppe parole, ne sono consentite massimo '%max%' ma ne sono state contate '%count%'",

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
  */
 
 namespace Zend\Json;
@@ -16,9 +15,6 @@ use Zend\Json\Exception\RuntimeException;
 
 /**
  * Class for encoding to and decoding from JSON.
- *
- * @category   Zend
- * @package    Zend_Json
  */
 class Json
 {
@@ -310,7 +306,7 @@ class Json
      * @return mixed - JSON formatted string on success
      * @throws \Zend\Json\Exception\RuntimeException if the input not a XML formatted string
      */
-    public static function fromXml ($xmlStringContents, $ignoreXmlAttributes=true)
+    public static function fromXml($xmlStringContents, $ignoreXmlAttributes = true)
     {
         // Load the XML formatted string into a Simple XML Element object.
         $simpleXmlElementObject = simplexml_load_string($xmlStringContents);

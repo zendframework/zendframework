@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Session
  */
 
 namespace Zend\Session\Storage;
@@ -20,9 +19,6 @@ use Countable;
  *
  * Defines the minimum requirements for handling userland, in-script session
  * storage (e.g., the $_SESSION superglobal array).
- *
- * @category   Zend
- * @package    Zend_Session
  */
 interface StorageInterface extends Traversable, ArrayAccess, Serializable, Countable
 {
@@ -41,5 +37,5 @@ interface StorageInterface extends Traversable, ArrayAccess, Serializable, Count
     public function clear($key = null);
 
     public function fromArray(array $array);
-    public function toArray();
+    public function toArray($metaData = false);
 }

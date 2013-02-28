@@ -71,6 +71,16 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('test', $this->blockCipher->getKey());
     }
 
+    public function testSetSalt()
+    {
+        $salt = str_repeat('a', $this->blockCipher->getCipher()->getSaltSize() + 2);
+        $result = $this->blockCipher->setSalt($salt);
+        $this->assertEquals($result, $this->blockCipher);
+        $this->assertEquals(substr($salt, 0,  $this->blockCipher->getCipher()->getSaltSize()),
+                            $this->blockCipher->getSalt());
+        $this->assertEquals($salt, $this->blockCipher->getOriginalSalt());
+    }
+
     public function testSetAlgorithm()
     {
         $result = $this->blockCipher->setCipherAlgorithm('blowfish');

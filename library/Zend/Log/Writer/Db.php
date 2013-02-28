@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Log
  */
 
 namespace Zend\Log\Writer;
@@ -16,11 +15,6 @@ use Zend\Log\Exception;
 use Zend\Log\Formatter;
 use Zend\Log\Formatter\Db as DbFormatter;
 
-/**
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Writer
- */
 class Db extends AbstractWriter
 {
     /**
@@ -69,6 +63,7 @@ class Db extends AbstractWriter
         }
 
         if (is_array($db)) {
+            parent::__construct($db);
             $separator = isset($db['separator']) ? $db['separator'] : null;
             $columnMap = isset($db['column']) ? $db['column'] : null;
             $tableName = isset($db['table']) ? $db['table'] : null;

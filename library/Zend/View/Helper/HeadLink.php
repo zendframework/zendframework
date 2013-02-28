@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -18,8 +17,6 @@ use Zend\View\Exception;
  * Zend_Layout_View_Helper_HeadLink
  *
  * @see        http://www.w3.org/TR/xhtml1/dtds.html
- * @package    Zend_View
- * @subpackage Helper
  */
 class HeadLink extends Placeholder\Container\AbstractStandalone
 {
@@ -115,7 +112,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      */
     public function __call($method, $args)
     {
-        if (preg_match('/^(?P<action>set|(ap|pre)pend|offsetSet)(?P<type>Stylesheet|Alternate)$/', $method, $matches)) {
+        if (preg_match('/^(?P<action>set|(ap|pre)pend|offsetSet)(?P<type>Stylesheet|Alternate|Prev|Next)$/', $method, $matches)) {
             $argc   = count($args);
             $action = $matches['action'];
             $type   = $matches['type'];
@@ -423,6 +420,36 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         $title = (string) $title;
 
         $attributes = compact('rel', 'href', 'type', 'title', 'extras');
+        return $this->createData($attributes);
+    }
+
+    /**
+     * Create item for a prev relationship (mainly used for pagination)
+     *
+     * @param array $args
+     * @return stdClass
+     */
+    public function createDataPrev(array $args)
+    {
+        $rel  = 'prev';
+        $href = (string) array_shift($args);
+
+        $attributes = compact('rel', 'href');
+        return $this->createData($attributes);
+    }
+
+    /**
+     * Create item for a prev relationship (mainly used for pagination)
+     *
+     * @param array $args
+     * @return stdClass
+     */
+    public function createDataNext(array $args)
+    {
+        $rel  = 'next';
+        $href = (string) array_shift($args);
+
+        $attributes = compact('rel', 'href');
         return $this->createData($attributes);
     }
 }

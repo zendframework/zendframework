@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Generator\DocBlock\Tag;
@@ -13,39 +12,30 @@ namespace Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
 
-/**
- * @category   Zend
- * @package    Zend_Code_Generator
- */
 class ReturnTag extends Tag
 {
-
     /**
      * @var string
      */
     protected $datatype = null;
 
     /**
-     * fromReflection()
-     *
-     * @param ReflectionDocBlockTag $reflectionTagReturn
+     * @param  ReflectionDocBlockTag $reflectionTagReturn
      * @return ReturnTag
      */
     public static function fromReflection(ReflectionDocBlockTag $reflectionTagReturn)
     {
         $returnTag = new static();
-
-        $returnTag->setName('return');
-        $returnTag->setDatatype($reflectionTagReturn->getType()); // @todo rename
-        $returnTag->setDescription($reflectionTagReturn->getDescription());
+        $returnTag
+            ->setName('return')
+            ->setDatatype($reflectionTagReturn->getType()) // @todo rename
+            ->setDescription($reflectionTagReturn->getDescription());
 
         return $returnTag;
     }
 
     /**
-     * setDatatype()
-     *
-     * @param string $datatype
+     * @param  string $datatype
      * @return ReturnTag
      */
     public function setDatatype($datatype)
@@ -55,8 +45,6 @@ class ReturnTag extends Tag
     }
 
     /**
-     * getDatatype()
-     *
      * @return string
      */
     public function getDatatype()
@@ -64,15 +52,11 @@ class ReturnTag extends Tag
         return $this->datatype;
     }
 
-
     /**
-     * generate()
-     *
      * @return string
      */
     public function generate()
     {
-        $output = '@return ' . $this->datatype . ' ' . $this->description;
-        return $output;
+        return '@return ' . $this->datatype . ' ' . $this->description;
     }
 }

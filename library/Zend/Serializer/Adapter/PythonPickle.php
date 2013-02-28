@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Serializer
  */
 
 namespace Zend\Serializer\Adapter;
@@ -21,9 +20,6 @@ use Zend\Math\BigInteger;
  * @see        Phython3.1/Lib/pickle.py
  * @see        Phython3.1/Modules/_pickle.c
  * @link       http://pickle-js.googlecode.com
- * @category   Zend
- * @package    Zend_Serializer
- * @subpackage Adapter
  */
 class PythonPickle extends AbstractAdapter
 {
@@ -138,7 +134,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Constructor.
      *
-     * @param  array|\Traversable|PythonPickleOptions $options Optional
+     * @param  array|Traversable|PythonPickleOptions $options Optional
      */
     public function __construct($options = null)
     {
@@ -155,7 +151,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Set options
      *
-     * @param  array|\Traversable|PythonPickleOptions $options
+     * @param  array|Traversable|PythonPickleOptions $options
      * @return PythonPickle
      */
     public function setOptions($options)

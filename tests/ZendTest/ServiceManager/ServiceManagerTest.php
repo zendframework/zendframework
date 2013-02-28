@@ -560,6 +560,18 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $result = $this->serviceManager->addInitializer(get_class($this));
     }
 
+    public function testGetGlobIteratorServiceWorksProperly()
+    {
+        $config = new Config(array(
+            'invokables' => array(
+                'foo' => 'ZendTest\ServiceManager\TestAsset\GlobIteratorService',
+            ),
+        ));
+        $serviceManager = new ServiceManager($config);
+        $foo = $serviceManager->get('foo');
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\GlobIteratorService', $foo);
+    }
+
     public function duplicateService()
     {
         $self = $this;
@@ -715,95 +727,5 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($serviceManagerChild->get($foo1), $boo2);
         $this->assertEquals($this->serviceManager->get($foo1), $boo2);
-    }
-
-    /**
-     * @covers Zend\ServiceManager\ServiceManager::setService
-     * @covers Zend\ServiceManager\ServiceManager::get
-     * @covers Zend\ServiceManager\ServiceManager::createScopedServiceManager
-     */
-    public function testParentServiceManagerCanCreateServiceWithSameNameThatAlreadyUsedByChildServiceManager()
-    {
-        $foo1 = "foo1";
-        $boo1 = "boo1";
-        $boo2 = "boo2";
-
-        $this->serviceManager->setService($foo1, $boo1);
-        $this->assertEquals($this->serviceManager->get($foo1), $boo1);
-
-        $serviceManagerParent = $this->serviceManager->createScopedServiceManager();
-
-        $this->assertContains($this->serviceManager, $this->readAttribute($serviceManagerParent, 'peeringServiceManagers'));
-
-        $serviceManagerParent->setService($foo1, $boo2);
-        $this->assertEquals($serviceManagerParent->get($foo1), $boo2);
-    }
-
-    /**
-     * @covers Zend\ServiceManager\ServiceManager::setInvokableClass
-     * @covers Zend\ServiceManager\ServiceManager::get
-     * @covers Zend\ServiceManager\ServiceManager::createScopedServiceManager
-     */
-    public function testParentServiceManagerCanCreateInvokableServiceWithSameNameThatAlreadyUsedByChildServiceManager()
-    {
-        $foo1 = "foo1";
-        $boo1 = "ZendTest\ServiceManager\TestAsset\Foo";
-        $boo2 = "\stdClass";
-
-        $this->serviceManager->setInvokableClass($foo1, $boo1);
-        $this->assertInstanceOf($boo1, $this->serviceManager->get($foo1));
-
-        $serviceManagerParent = $this->serviceManager->createScopedServiceManager();
-
-        $this->assertContains($this->serviceManager, $this->readAttribute($serviceManagerParent, 'peeringServiceManagers'));
-
-        $serviceManagerParent->setInvokableClass($foo1, $boo2);
-        $this->assertInstanceOf($boo2, $serviceManagerParent->get($foo1));
-    }
-
-    /**
-     * @covers Zend\ServiceManager\ServiceManager::setFactory
-     * @covers Zend\ServiceManager\ServiceManager::get
-     * @covers Zend\ServiceManager\ServiceManager::createScopedServiceManager
-     */
-    public function testParentServiceManagerCanCreateFactoryServiceWithSameNameThatAlreadyUsedByChildServiceManager()
-    {
-        $foo1 = "foo1";
-        $boo1 = "ZendTest\ServiceManager\TestAsset\FooFactory";
-        $boo1_returns = "ZendTest\ServiceManager\TestAsset\Foo";
-        $boo2 = function() { return new \stdClass(); };
-
-        $this->serviceManager->setFactory($foo1, $boo1);
-        $this->assertInstanceOf($boo1_returns, $this->serviceManager->get($foo1));
-
-        $serviceManagerParent = $this->serviceManager->createScopedServiceManager();
-
-        $this->assertContains($this->serviceManager, $this->readAttribute($serviceManagerParent, 'peeringServiceManagers'));
-
-        $serviceManagerParent->setFactory($foo1, $boo2);
-        $this->assertTrue($serviceManagerParent->get($foo1) instanceof \stdClass);
-    }
-
-    /**
-     * @covers Zend\ServiceManager\ServiceManager::setAlias
-     * @covers Zend\ServiceManager\ServiceManager::hasAlias
-     * @covers Zend\ServiceManager\ServiceManager::createScopedServiceManager
-     */
-    public function testParentServiceManagerCanCreateAliasWithSameNameThatAlreadyUsedByChildServiceManager()
-    {
-        $foo1 = "foo1";
-        $boo1 = "boo1";
-        $boo2 = "boo2";
-
-        $this->serviceManager->setAlias($foo1, $boo1);
-        $this->assertTrue($this->serviceManager->hasAlias($foo1));
-
-        $serviceManagerParent = $this->serviceManager->createScopedServiceManager();
-
-        $this->assertFalse($serviceManagerParent->hasAlias($foo1));
-        $this->assertContains($this->serviceManager, $this->readAttribute($serviceManagerParent, 'peeringServiceManagers'));
-
-        $serviceManagerParent->setAlias($foo1, $boo2);
-        $this->assertTrue($serviceManagerParent->hasAlias($foo1));
     }
 }

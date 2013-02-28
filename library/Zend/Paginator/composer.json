@@ -13,6 +13,13 @@
     },
     "target-dir": "Zend/Paginator",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev",
+            "dev-develop": "2.2-dev"
+        }
     }
 }

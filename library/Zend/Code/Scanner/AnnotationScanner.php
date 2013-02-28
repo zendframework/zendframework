@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Scanner;
@@ -37,16 +36,15 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
     protected $annotationManager = null;
 
     /**
-     * @var AnnotationCollection[]
+     * @var array
      */
     protected $annotations = array();
 
     /**
-     * @param AnnotationManager $annotationManager
-     * @param string            $docComment
-     * @param NameInformation   $nameInformation
+     * @param  AnnotationManager $annotationManager
+     * @param  string $docComment
+     * @param  NameInformation $nameInformation
      * @return AnnotationScanner
-     *
      */
     public function __construct(AnnotationManager $annotationManager, $docComment,
                                 NameInformation $nameInformation = null)
@@ -57,12 +55,17 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
         $this->scan($this->tokenize());
     }
 
+    /**
+     * @param NameInformation $nameInformation
+     */
     public function setNameInformation(NameInformation $nameInformation)
     {
         $this->nameInformation = $nameInformation;
     }
 
-
+    /**
+     * @param  array $tokens
+     */
     protected function scan(array $tokens)
     {
         $annotations     = array();
@@ -122,6 +125,9 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
         }
     }
 
+    /**
+     * @return array
+     */
     protected function tokenize()
     {
         static $CONTEXT_DOCBLOCK = 0x01;
@@ -140,12 +146,12 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
 
         $annotationParentCount = 0;
 
-
-        $MACRO_STREAM_ADVANCE_CHAR = function ($positionsForward = 1) use (&$stream, &$streamIndex, &$currentChar, &$currentWord, &$currentLine, &$annotationMode) {
+        $MACRO_STREAM_ADVANCE_CHAR = function ($positionsForward = 1) use (&$stream, &$streamIndex, &$currentChar, &$currentWord, &$currentLine) {
             $positionsForward = ($positionsForward > 0) ? $positionsForward : 1;
             $streamIndex      = ($streamIndex === null) ? 0 : $streamIndex + $positionsForward;
             if (!isset($stream[$streamIndex])) {
                 $currentChar = false;
+
                 return false;
             }
             $currentChar = $stream[$streamIndex];
@@ -158,6 +164,7 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
                 $currentWord = (($matches = strpos($currentLine, ' ')) !== false) ? substr($currentLine, 0,
                                                                                            $matches) : $currentLine;
             }
+
             return $currentChar;
         };
         $MACRO_STREAM_ADVANCE_WORD = function () use (&$currentWord, &$MACRO_STREAM_ADVANCE_CHAR) {
@@ -303,7 +310,6 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
             }
             goto TOKENIZER_TOP;
         }
-
 
         TOKENIZER_CONTINUE:
 

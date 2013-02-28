@@ -5,15 +5,13 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
+
 class Explode extends AbstractValidator
 {
     const INVALID = 'explodeInvalid';
@@ -22,7 +20,7 @@ class Explode extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID => "Invalid type given. String expected",
+        self::INVALID => "Invalid type given.",
     );
 
     /**
@@ -116,20 +114,21 @@ class Explode extends AbstractValidator
      *
      * Returns true if all values validate true
      *
-     * @param  string|array $value
+     * @param  mixed $value
      * @return bool
      * @throws Exception\RuntimeException
      */
     public function isValid($value)
     {
-        if (!is_string($value) && !is_array($value)) {
-            $this->error(self::INVALID);
-            return false;
-        }
-
         $this->setValue($value);
 
-        if (!is_array($value)) {
+        if ($value instanceof Traversable) {
+            $value = ArrayUtils::iteratorToArray($value);
+        }
+
+        if (is_array($value)) {
+            $values = $value;
+        } elseif (is_string($value)) {
             $delimiter = $this->getValueDelimiter();
             // Skip explode if delimiter is null,
             // used when value is expected to be either an
@@ -139,7 +138,7 @@ class Explode extends AbstractValidator
                       ? explode($this->valueDelimiter, $value)
                       : array($value);
         } else {
-            $values = $value;
+            $values = array($value);
         }
 
         $retval    = true;

@@ -24,6 +24,18 @@ use ZendTest\View\Model\TestAsset\Variable;
  */
 class ViewModelTest extends TestCase
 {
+    public function testImplementsModelInterface()
+    {
+        $model = new ViewModel();
+        $this->assertInstanceOf('Zend\View\Model\ModelInterface', $model);
+    }
+
+    public function testImplementsClearableModelInterface()
+    {
+        $model = new ViewModel();
+        $this->assertInstanceOf('Zend\View\Model\ClearableModelInterface', $model);
+    }
+
     public function testAllowsEmptyConstructor()
     {
         $model = new ViewModel();
@@ -80,6 +92,7 @@ class ViewModelTest extends TestCase
         $model = new ViewModel(array('foo' => 'bar', 'bar' => 'baz'));
         $model->setVariables(array('bar' => 'BAZBAT'));
         $this->assertEquals(array('foo' => 'bar', 'bar' => 'BAZBAT'), $model->getVariables());
+        return $model;
     }
 
     public function testCanUnsetVariable()
@@ -87,6 +100,16 @@ class ViewModelTest extends TestCase
         $model = new ViewModel(array('foo' => 'bar'));
         $model->__unset('foo');
         $this->assertEquals(array(), $model->getVariables());
+    }
+
+    /**
+     * @depends testSetVariablesMergesWithPreviouslyStoredVariables
+     */
+    public function testCanClearAllVariables(ViewModel $model)
+    {
+        $model->clearVariables();
+        $vars = $model->getVariables();
+        $this->assertEquals(0, count($vars));
     }
 
     public function testCanSetOptionsSingly()
@@ -108,6 +131,7 @@ class ViewModelTest extends TestCase
         $model = new ViewModel(array(), array('foo' => 'bar', 'bar' => 'baz'));
         $model->setOptions(array('bar' => 'BAZBAT'));
         $this->assertEquals(array('bar' => 'BAZBAT'), $model->getOptions());
+        return $model;
     }
 
     public function testOptionsAreInternallyConvertedToAnArrayFromTraversables()
@@ -116,6 +140,15 @@ class ViewModelTest extends TestCase
         $model = new ViewModel();
         $model->setOptions($options);
         $this->assertEquals($options->getArrayCopy(), $model->getOptions());
+    }
+
+    /**
+     * @depends testSetOptionsOverwritesAllPreviouslyStored
+     */
+    public function testCanClearOptions(ViewModel $model)
+    {
+        $model->clearOptions();
+        $this->assertEquals(array(), $model->getOptions());
     }
 
     public function testPassingAnInvalidArgumentToSetVariablesRaisesAnException()
@@ -173,6 +206,7 @@ class ViewModelTest extends TestCase
         $this->assertEquals(1, count($model));
         $model->addChild($child);
         $this->assertEquals(2, count($model));
+        return $model;
     }
 
     public function testCanIterateChildren()
@@ -189,6 +223,15 @@ class ViewModelTest extends TestCase
             $count++;
         }
         $this->assertEquals(3, $count);
+    }
+
+    /**
+     * @depends testCanCountChildren
+     */
+    public function testCanClearChildren(ViewModel $model)
+    {
+        $model->clearChildren();
+        $this->assertEquals(0, count($model));
     }
 
     public function testTemplateIsEmptyByDefault()

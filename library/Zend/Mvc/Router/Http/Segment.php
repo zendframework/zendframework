@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router\Http;
@@ -18,8 +17,6 @@ use Zend\Stdlib\RequestInterface as Request;
 /**
  * Segment route.
  *
- * @package    Zend_Mvc_Router
- * @subpackage Http
  * @see        http://guides.rubyonrails.org/routing.html
  */
 class Segment implements RouteInterface
@@ -113,7 +110,7 @@ class Segment implements RouteInterface
     /**
      * factory(): defined by RouteInterface interface.
      *
-     * @see    Route::factory()
+     * @see    \Zend\Mvc\Router\RouteInterface::factory()
      * @param  array|Traversable $options
      * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
      * @return Segment
@@ -338,7 +335,7 @@ class Segment implements RouteInterface
     /**
      * match(): defined by RouteInterface interface.
      *
-     * @see    Route::match()
+     * @see    \Zend\Mvc\Router\RouteInterface::match()
      * @param  Request $request
      * @param  string|null $pathOffset
      * @return RouteMatch
@@ -377,7 +374,7 @@ class Segment implements RouteInterface
     /**
      * assemble(): Defined by RouteInterface interface.
      *
-     * @see    Route::assemble()
+     * @see    \Zend\Mvc\Router\RouteInterface::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed
@@ -397,7 +394,7 @@ class Segment implements RouteInterface
     /**
      * getAssembledParams(): defined by RouteInterface interface.
      *
-     * @see    Route::getAssembledParams
+     * @see    RouteInterface::getAssembledParams
      * @return array
      */
     public function getAssembledParams()

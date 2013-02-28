@@ -11,6 +11,7 @@
 namespace ZendTest\Db\Adapter;
 
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\Profiler;
 
 class AdapterTest extends \PHPUnit_Framework_TestCase
 {
@@ -53,10 +54,33 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test createDriverFromParameters() will create proper driver type
-     * @covers Zend\Db\Adapter\Adapter::createDriverFromParameters
+     * @testdox unit test: Test setProfiler() will store profiler
+     * @covers Zend\Db\Adapter\Adapter::setProfiler
      */
-    public function testCreateDriverFromParameters()
+    public function testSetProfiler()
+    {
+        $ret = $this->adapter->setProfiler(new Profiler\Profiler());
+        $this->assertSame($this->adapter, $ret);
+    }
+
+    /**
+     * @testdox unit test: Test getProfiler() will store profiler
+     * @covers Zend\Db\Adapter\Adapter::getProfiler
+     */
+    public function testGetProfiler()
+    {
+        $this->adapter->setProfiler($profiler = new Profiler\Profiler());
+        $this->assertSame($profiler, $this->adapter->getProfiler());
+
+        $adapter = new Adapter(array('driver' => $this->mockDriver, 'profiler' => true), $this->mockPlatform);
+        $this->assertInstanceOf('Zend\Db\Adapter\Profiler\Profiler', $adapter->getProfiler());
+    }
+
+    /**
+     * @testdox unit test: Test createDriverFromParameters() will create proper driver type
+     * @covers Zend\Db\Adapter\Adapter::createDriver
+     */
+    public function testCreateDriver()
     {
         if (extension_loaded('mysqli')) {
             $adapter = new Adapter(array('driver' => 'mysqli'), $this->mockPlatform);
@@ -85,9 +109,9 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @testdox unit test: Test createPlatformFromDriver() will create proper platform from driver
-     * @covers Zend\Db\Adapter\Adapter::createPlatformFromDriver
+     * @covers Zend\Db\Adapter\Adapter::createPlatform
      */
-    public function testCreatePlatformFromDriver()
+    public function testCreatePlatform()
     {
         $driver = clone $this->mockDriver;
         $driver->expects($this->any())->method('getDatabasePlatformName')->will($this->returnValue('Mysql'));
@@ -114,11 +138,29 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
         unset($adapter, $driver);
 
         $driver = clone $this->mockDriver;
+        $driver->expects($this->any())->method('getDatabasePlatformName')->will($this->returnValue('IbmDb2'));
+        $adapter = new Adapter($driver);
+        $this->assertInstanceOf('Zend\Db\Adapter\Platform\IbmDb2', $adapter->platform);
+        unset($adapter, $driver);
+
+        $driver = clone $this->mockDriver;
+        $driver->expects($this->any())->method('getDatabasePlatformName')->will($this->returnValue('Oracle'));
+        $adapter = new Adapter($driver);
+        $this->assertInstanceOf('Zend\Db\Adapter\Platform\Oracle', $adapter->platform);
+        unset($adapter, $driver);
+
+        $driver = clone $this->mockDriver;
         $driver->expects($this->any())->method('getDatabasePlatformName')->will($this->returnValue('Foo'));
         $adapter = new Adapter($driver);
         $this->assertInstanceOf('Zend\Db\Adapter\Platform\Sql92', $adapter->platform);
         unset($adapter, $driver);
 
+        // ensure platform can created via string, and also that it passed in options to platform object
+        $driver = array('driver' => 'pdo_sqlite', 'platform' => 'Oracle', 'platform_options' => array('quote_identifiers' => false));
+        $adapter = new Adapter($driver);
+        $this->assertInstanceOf('Zend\Db\Adapter\Platform\Oracle', $adapter->platform);
+        $this->assertEquals('foo', $adapter->getPlatform()->quoteIdentifier('foo'));
+        unset($adapter, $driver);
     }
 
 
@@ -167,6 +209,40 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     {
         $s = $this->adapter->query('SELECT foo');
         $this->assertSame($this->mockStatement, $s);
+    }
+
+    /**
+     * @testdox unit test: Test query() in prepare mode, with array of parameters, produces a result object
+     * @covers Zend\Db\Adapter\Adapter::query
+     */
+    public function testQueryWhenPreparedWithParameterArrayProducesResult()
+    {
+        $parray = array('bar'=>'foo');
+        $sql = 'SELECT foo, :bar';
+        $statement = $this->getMock('\Zend\Db\Adapter\Driver\StatementInterface');
+        $result = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $this->mockDriver->expects($this->any())->method('createStatement')->with($sql)->will($this->returnValue($statement));
+        $this->mockStatement->expects($this->any())->method('execute')->will($this->returnValue($result));
+
+        $r = $this->adapter->query($sql, $parray);
+        $this->assertSame($result, $r);
+    }
+
+    /**
+     * @testdox unit test: Test query() in prepare mode, with ParameterContainer, produces a result object
+     * @covers Zend\Db\Adapter\Adapter::query
+     */
+    public function testQueryWhenPreparedWithParameterContainerProducesResult()
+    {
+        $sql = 'SELECT foo';
+        $parameterContainer = $this->getMock('Zend\Db\Adapter\ParameterContainer');
+        $result = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $this->mockDriver->expects($this->any())->method('createStatement')->with($sql)->will($this->returnValue($this->mockStatement));
+        $this->mockStatement->expects($this->any())->method('execute')->will($this->returnValue($result));
+        $result->expects($this->any())->method('isQueryResult')->will($this->returnValue(true));
+
+        $r = $this->adapter->query($sql, $parameterContainer);
+        $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $r);
     }
 
     /**

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Paginator
  */
 
 namespace Zend\Paginator\Adapter;
@@ -17,10 +16,6 @@ use Zend\Db\Sql\Select;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Db\ResultSet\ResultSet;
 
-/**
- * @category   Zend
- * @package    Zend_Paginator
- */
 class DbSelect implements AdapterInterface
 {
 
@@ -112,7 +107,15 @@ class DbSelect implements AdapterInterface
         $select->reset(Select::LIMIT);
         $select->reset(Select::OFFSET);
         $select->reset(Select::ORDER);
+        $select->reset(Select::GROUP);
 
+        // get join information, clear, and repopulate without columns
+        $joins = $select->getRawState(Select::JOINS);
+        $select->reset(Select::JOINS);
+        foreach ($joins as $join) {
+            $select->join($join['name'], $join['on'], array(), $join['type']);
+        }
+        
         $select->columns(array('c' => new Expression('COUNT(1)')));
 
         $statement = $this->sql->prepareStatementForSqlObject($select);

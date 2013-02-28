@@ -23,85 +23,50 @@ use Zend\Validator\File;
 class NotExistsTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @return array
+     */
+    public function basicBehaviorDataProvider()
+    {
+        $testFile = __DIR__ . '/_files/testsize.mo';
+        $baseDir  = dirname($testFile);
+        $baseName = basename($testFile);
+        $fileUpload = array(
+            'tmp_name' => $testFile, 'name' => basename($testFile),
+            'size' => 200, 'error' => 0, 'type' => 'text'
+        );
+        return array(
+            //    Options, isValid Param, Expected value
+            array(dirname($baseDir), $baseName,   true),
+            array($baseDir,          $baseName,   false),
+            array($baseDir,          $testFile,   false),
+            array(dirname($baseDir), $fileUpload, true),
+            array($baseDir,          $fileUpload, false),
+        );
+    }
+
+    /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider basicBehaviorDataProvider
      * @return void
      */
-    public function testBasic()
+    public function testBasic($options, $isValidParam, $expected)
     {
-        $baseDir = __DIR__;
-        $valuesExpected = array(
-            array($baseDir, 'testsize.mo', true),
-            array($baseDir . '/_files', 'testsize.mo', false)
-        );
+        $validator = new File\NotExists($options);
+        $this->assertEquals($expected, $validator->isValid($isValidParam));
+    }
 
-        $files = array(
-            'name'        => 'testsize.mo',
-            'type'        => 'text',
-            'size'        => 200,
-            'tmp_name'    => __DIR__ . '/_files/testsize.mo',
-            'error'       => 0
-        );
-
-        foreach ($valuesExpected as $element) {
-            $validator = new File\NotExists($element[0]);
-            $this->assertEquals(
-                $element[2],
-                $validator->isValid($element[1]),
-                "Tested with " . var_export($element, 1)
-            );
-            $this->assertEquals(
-                $element[2],
-                $validator->isValid($element[1], $files),
-                "Tested with " . var_export($element, 1)
-                );
-        }
-
-        $valuesExpected = array(
-            array($baseDir, 'testsize.mo', true, false),
-            array($baseDir . '/_files', 'testsize.mo', false, false)
-        );
-
-        $files = array(
-            'name'        => 'testsize.mo',
-            'type'        => 'text',
-            'size'        => 200,
-            'tmp_name'    => __DIR__ . '/_files/testsize.mo',
-            'error'       => 0,
-            'destination' => __DIR__ . '/_files'
-        );
-
-        foreach ($valuesExpected as $element) {
-            $validator = new File\NotExists($element[0]);
-            $this->assertEquals(
-                $element[2],
-                $validator->isValid($element[1]),
-                "Tested with " . var_export($element, 1)
-            );
-            $this->assertEquals(
-                $element[3],
-                $validator->isValid($element[1], $files),
-                "Tested with " . var_export($element, 1)
-            );
-        }
-
-        $valuesExpected = array(
-            array($baseDir, 'testsize.mo', false, false),
-            array($baseDir . '/_files', 'testsize.mo', false, false)
-        );
-
-        foreach ($valuesExpected as $element) {
-            $validator = new File\NotExists();
-            $this->assertEquals(
-                $element[2],
-                $validator->isValid($element[1]),
-                "Tested with " . var_export($element, 1)
-            );
-            $this->assertEquals(
-                $element[3],
-                $validator->isValid($element[1], $files),
-                "Tested with " . var_export($element, 1)
-            );
+    /**
+     * Ensures that the validator follows expected behavior for legacy Zend\Transfer API
+     *
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
+     */
+    public function testLegacy($options, $isValidParam, $expected)
+    {
+        if (is_array($isValidParam)) {
+            $validator = new File\NotExists($options);
+            $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
         }
     }
 
@@ -176,6 +141,6 @@ class NotExistsTest extends \PHPUnit_Framework_TestCase
         $validator = new File\NotExists();
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/testsize.mo'));
         $this->assertTrue(array_key_exists('fileNotExistsDoesExist', $validator->getMessages()));
-        $this->assertContains("'testsize.mo'", current($validator->getMessages()));
+        $this->assertContains("File exists", current($validator->getMessages()));
     }
 }

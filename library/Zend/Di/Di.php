@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Di
  */
 
 namespace Zend\Di;
@@ -15,9 +14,6 @@ use ReflectionClass;
 
 /**
  * Dependency injector that can generate instances using class definitions and configured instance parameters
- *
- * @category   Zend
- * @package    Zend_Di
  */
 class Di implements DependencyInjectionInterface
 {
@@ -167,12 +163,13 @@ class Di implements DependencyInjectionInterface
                 array_pop($this->instanceContext);
                 return $im->getSharedInstanceWithParameters(null, array(), $fastHash);
             }
-        } else {
-            if ($im->hasSharedInstance($name, $callParameters)) {
-                array_pop($this->instanceContext);
-                return $im->getSharedInstance($name, $callParameters);
-            }
         }
+
+        if ($im->hasSharedInstance($name, $callParameters)) {
+            array_pop($this->instanceContext);
+            return $im->getSharedInstance($name, $callParameters);
+        }
+
 
         $config   = $im->getConfig($name);
         $instance = $this->newInstance($name, $params, $config['shared']);

@@ -216,16 +216,7 @@ class SelectTest extends TestCase
         $element->setDisableInArrayValidator(true);
 
         $inputSpec = $element->getInputSpecification();
-        $this->assertArrayHasKey('validators', $inputSpec);
-        $this->assertInternalType('array', $inputSpec['validators']);
-
-        $unexpectedClasses = array(
-            'Zend\Validator\InArray'
-        );
-        foreach ($inputSpec['validators'] as $validator) {
-            $class = get_class($validator);
-            $this->assertFalse(in_array($class, $unexpectedClasses), $class);
-        }
+        $this->assertArrayNotHasKey('validators', $inputSpec);
     }
 
 }

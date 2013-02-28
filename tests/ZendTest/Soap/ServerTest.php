@@ -692,7 +692,8 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      *
      * @param string|array $exception
      */
-    public function testIsRegisteredAsFaultException($exception) {
+    public function testIsRegisteredAsFaultException($exception)
+    {
 
         $server = new Server();
         $server->registerFaultException($exception);
@@ -808,6 +809,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $client = new \Zend\Soap\Client\Local($server, $wsdlFilename);
         $client->triggerError();
+        unlink($wsdlFilename);
     }
 
     public function testLoadFunctionsIsNotImplemented()

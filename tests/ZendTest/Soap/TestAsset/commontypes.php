@@ -688,7 +688,8 @@ class PublicPrivateProtected
 
 class errorClass {
 
-    public function triggerError() {
-   trigger_error('TestError', E_USER_ERROR);
+    public function triggerError()
+    {
+        trigger_error('TestError', E_USER_ERROR);
     }
 }

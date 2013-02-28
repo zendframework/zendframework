@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 namespace Zend\Soap;
@@ -19,8 +18,6 @@ use Zend\Uri\Uri;
 /**
  * \Zend\Soap\Wsdl
  *
- * @category   Zend
- * @package    Zend_Soap
  */
 class Wsdl
 {
@@ -66,6 +63,7 @@ class Wsdl
     const NS_WSDL           = 'http://schemas.xmlsoap.org/wsdl/';
     const NS_XMLNS          = 'http://www.w3.org/2000/xmlns/';
     const NS_SOAP           = 'http://schemas.xmlsoap.org/wsdl/soap/';
+    const NS_SOAP12         = 'http://schemas.xmlsoap.org/wsdl/soap12/';
     const NS_SCHEMA         = 'http://www.w3.org/2001/XMLSchema';
     const NS_S_ENC          = 'http://schemas.xmlsoap.org/soap/encoding/';
 
@@ -106,22 +104,23 @@ class Wsdl
         $dom = new \DOMDocument();
         $dom->preserveWhiteSpace = true;
         $dom->formatOutput = true;
+        $dom->resolveExternals = false;
         $dom->encoding = 'UTF-8';
+        $dom->substituteEntities = false;
 
         $definitions = $dom->createElementNS(Wsdl::NS_WSDL,             'definitions');
-
         $dom->appendChild($definitions);
 
         $uri = $this->sanitizeUri($uri);
-
-        $definitions->setAttribute('name',             $name);
-        $definitions->setAttribute('targetNamespace',  $uri);
+        $this->setAttributeWithSanitization($definitions, 'name',               $name);
+        $this->setAttributeWithSanitization($definitions, 'targetNamespace',    $uri);
 
         $definitions->setAttributeNS(Wsdl::NS_XMLNS, 'xmlns:wsdl',      Wsdl::NS_WSDL);
         $definitions->setAttributeNS(Wsdl::NS_XMLNS, 'xmlns:tns',       $uri);
         $definitions->setAttributeNS(Wsdl::NS_XMLNS, 'xmlns:soap',      Wsdl::NS_SOAP);
         $definitions->setAttributeNS(Wsdl::NS_XMLNS, 'xmlns:xsd',       Wsdl::NS_SCHEMA);
         $definitions->setAttributeNS(Wsdl::NS_XMLNS, 'xmlns:soap-enc',  Wsdl::NS_S_ENC);
+        $definitions->setAttributeNS(Wsdl::NS_XMLNS, 'xmlns:soap12',    Wsdl::NS_SOAP12);
 
         return $dom;
     }
@@ -157,7 +156,7 @@ class Wsdl
         $oldUri = $this->uri;
         $this->uri = $uri;
 
-        if($this->dom instanceof \DOMDocument ) {
+        if ($this->dom instanceof \DOMDocument ) {
             // namespace declarations are NOT true attributes
             $this->dom->documentElement->setAttributeNS(Wsdl::NS_XMLNS,     'xmlns:tns',        $uri);
 
@@ -167,6 +166,7 @@ class Wsdl
 
             $xpath->registerNamespace('tns',          $uri);
             $xpath->registerNamespace('soap',         Wsdl::NS_SOAP);
+            $xpath->registerNamespace('soap12',       Wsdl::NS_SOAP12);
             $xpath->registerNamespace('xsd',          Wsdl::NS_SCHEMA);
             $xpath->registerNamespace('soap-enc',     Wsdl::NS_S_ENC);
             $xpath->registerNamespace('wsdl',         Wsdl::NS_WSDL);
@@ -177,8 +177,8 @@ class Wsdl
 
             /** @var $node \DOMAttr */
             foreach ($attributeNodes as $node) {
-//                var_dump(array($oldUri, $uri, $node->nodeValue, str_replace($oldUri, $uri, $node->nodeValue)));
-                $node->nodeValue = str_replace($oldUri, $uri, $node->nodeValue);
+                $attributeValue = $this->dom->createTextNode(str_replace($oldUri, $uri, $node->nodeValue));
+                $node->replaceChild($attributeValue, $node->childNodes->item(0));
             }
         }
 
@@ -261,11 +261,9 @@ class Wsdl
                 $part = $this->dom->createElementNS(Wsdl::NS_WSDL, 'part');
                 $part->setAttribute('name', $name);
                 if (is_array($type)) {
-                    foreach ($type as $key => $value) {
-                        $part->setAttribute($key, $value);
-                    }
+                    $this->arrayToAttributes($part, $type);
                 } else {
-                    $part->setAttribute('type', $type);
+                    $this->setAttributeWithSanitization($part, 'type', $type);
                 }
                 $message->appendChild($part);
             }
@@ -308,18 +306,18 @@ class Wsdl
 
         if (is_string($input) && (strlen(trim($input)) >= 1)) {
             $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'input');
-            $node->setAttribute('message', $input);
             $operation->appendChild($node);
+            $node->setAttribute('message', $input);
         }
         if (is_string($output) && (strlen(trim($output)) >= 1)) {
             $node= $this->dom->createElementNS(Wsdl::NS_WSDL, 'output');
-            $node->setAttribute('message', $output);
             $operation->appendChild($node);
+            $node->setAttribute('message', $output);
         }
         if (is_string($fault) && (strlen(trim($fault)) >= 1)) {
             $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'fault');
-            $node->setAttribute('message', $fault);
             $operation->appendChild($node);
+            $node->setAttribute('message', $fault);
         }
 
         $portType->appendChild($operation);
@@ -368,8 +366,8 @@ class Wsdl
         $binding->appendChild($operation);
 
         $attr = $this->dom->createAttribute('name');
-        $attr->value = $name;
         $operation->appendChild($attr);
+        $attr->value = $name;
 
         if (is_array($input) AND !empty($input)) {
             $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'input');
@@ -378,12 +376,7 @@ class Wsdl
             $soapNode = $this->dom->createElementNS(Wsdl::NS_SOAP, 'body');
             $node->appendChild($soapNode);
 
-            foreach ($input as $name => $value) {
-                $attr = $this->dom->createAttribute($name);
-                $attr->value = $value;
-                $soapNode->appendChild($attr);
-            }
-
+            $this->arrayToAttributes($soapNode, $input);
         }
 
         if (is_array($output) AND !empty($output)) {
@@ -393,23 +386,14 @@ class Wsdl
             $soapNode = $this->dom->createElementNS(Wsdl::NS_SOAP, 'body');
             $node->appendChild($soapNode);
 
-            foreach ($output as $name => $value) {
-                $attr = $this->dom->createAttribute($name);
-                $attr->value = $value;
-                $soapNode->appendChild($attr);
-            }
+            $this->arrayToAttributes($soapNode, $output);
         }
 
         if (is_array($fault) AND !empty($fault)) {
             $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'fault');
             $operation->appendChild($node);
 
-            foreach ($fault as $name => $value) {
-                $attr = $this->dom->createAttribute($name);
-                $attr->value = $value;
-
-                $node->appendChild($attr);
-            }
+            $this->arrayToAttributes($node, $fault);
         }
 
         return $operation;
@@ -448,7 +432,7 @@ class Wsdl
             $soapAction = $soapAction->toString();
         }
         $soapOperation = $this->dom->createElementNS(WSDL::NS_SOAP, 'operation');
-        $soapOperation->setAttribute('soapAction', $soapAction);
+        $this->setAttributeWithSanitization($soapOperation, 'soapAction', $soapAction);
 
         $binding->insertBefore($soapOperation, $binding->firstChild);
 
@@ -481,7 +465,7 @@ class Wsdl
         $service->appendChild($port);
 
         $soapAddress = $this->dom->createElementNS(WSDL::NS_SOAP, 'address');
-        $soapAddress->setAttribute('location', $location);
+        $this->setAttributeWithSanitization($soapAddress, 'location', $location);
 
         $port->appendChild($soapAddress);
 
@@ -584,7 +568,9 @@ class Wsdl
      */
     public function toXML()
     {
-           return $this->dom->saveXML();
+        $this->dom->normalizeDocument();
+
+        return $this->dom->saveXML();
     }
 
     /**
@@ -594,6 +580,8 @@ class Wsdl
      */
     public function toDomDocument()
     {
+        $this->dom->normalizeDocument();
+
         return $this->dom;
     }
 
@@ -604,6 +592,7 @@ class Wsdl
      */
     public function dump($filename = false)
     {
+        $this->dom->normalizeDocument();
 
         if (!$filename) {
             echo $this->toXML();
@@ -749,6 +738,69 @@ class Wsdl
             }
         }
         return $elementXML;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     * @return string safe value or original $value
+     */
+    private function sanitizeAttributeValueByName($name, $value)
+    {
+        switch (strtolower($name)) {
+            case 'targetnamespace':
+            case 'encodingstyle':
+            case 'soapaction':
+            case 'location':
+                return trim(htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false));
+                break;
+
+            default:
+                return $value;
+                break;
+        }
+    }
+
+    /**
+     *
+     * @param \DOMNode $node
+     * @param array $attributes
+     * @param bool $withSanitizer
+     */
+    private function arrayToAttributes(\DOMNode $node, array $attributes, $withSanitizer = true)
+    {
+        foreach($attributes as $attributeName => $attributeValue) {
+            if ($withSanitizer) {
+                $this->setAttributeWithSanitization($node, $attributeName, $attributeValue);
+            } else {
+                $this->setAttribute($node, $attributeName, $attributeValue);
+            }
+        }
+    }
+
+    /**
+     * @param \DOMNode $node
+     * @param $attributeName
+     * @param $attributeValue
+     */
+    private function setAttributeWithSanitization(\DOMNode $node, $attributeName, $attributeValue)
+    {
+        $attributeValue = $this->sanitizeAttributeValueByName($attributeName, $attributeValue);
+        $this->setAttribute($node, $attributeName, $attributeValue);
+    }
+
+    /**
+     * @param \DOMNode $node
+     * @param $attributeName
+     * @param $attributeValue
+     */
+    private function setAttribute(\DOMNode $node, $attributeName, $attributeValue)
+    {
+        $attributeNode = $node->ownerDocument->createAttribute($attributeName);
+        $node->appendChild($attributeNode);
+
+        $attributeNodeValue = $node->ownerDocument->createTextNode($attributeValue);
+        $attributeNode->appendChild($attributeNodeValue);
     }
 
     /**

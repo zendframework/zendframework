@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 namespace Zend\Soap;
@@ -19,9 +18,6 @@ use Zend\Stdlib\ArrayUtils;
 /**
  * \Zend\Soap\Client
  *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage Client
  */
 class Client implements ServerClient
 {
@@ -390,7 +386,8 @@ class Client implements ServerClient
      *
      * @return Client
      */
-    public function setTypemap(array $typeMap) {
+    public function setTypemap(array $typeMap)
+    {
         foreach ($typeMap as $type) {
             if (!is_callable($type['from_xml'])) {
                 throw new Exception\InvalidArgumentException(
@@ -415,7 +412,8 @@ class Client implements ServerClient
      *
      * @return array
      */
-    public function getTypemap() {
+    public function getTypemap()
+    {
         return $this->typemap;
     }
 
@@ -1145,7 +1143,7 @@ class Client implements ServerClient
      */
     public function __call($name, $arguments)
     {
-        if(!is_array($arguments)) {
+        if (!is_array($arguments)) {
             $arguments = array($arguments);
         }
         $soapClient = $this->getSoapClient();

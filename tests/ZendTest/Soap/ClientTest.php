@@ -589,7 +589,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      * @expectedException \Zend\Soap\Exception\UnexpectedValueException
      * @dataProvider dataProviderForInitSoapClientObjectException
      */
-    public function testInitSoapClientObjectException($wsdl, $options){
+    public function testInitSoapClientObjectException($wsdl, $options)
+    {
         $client = new Client($wsdl, $options);
         $client->getSoapClient();
     }
@@ -597,7 +598,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function dataProviderForInitSoapClientObjectException() {
+    public function dataProviderForInitSoapClientObjectException()
+    {
         return array(
             array(null,                             array()),
             array(null,                             array('location'=>'http://example.com')),

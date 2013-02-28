@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 namespace Zend\Soap;
@@ -21,9 +20,6 @@ use Zend\Stdlib\ArrayUtils;
 /**
  * Zend_Soap_Server
  *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage Server
  */
 class Server implements \Zend\Server\Server
 {
@@ -173,6 +169,7 @@ class Server implements \Zend\Server\Server
      * Allows setting options as an associative array of option => value pairs.
      *
      * @param  array|Traversable $options
+     *
      * @return \Zend\Soap\Server
      */
     public function setOptions($options)
@@ -199,7 +196,7 @@ class Server implements \Zend\Server\Server
                 case 'encoding':
                     $this->setEncoding($value);
                     break;
-                case 'soapVersion':
+                case 'soapversion':
                 case 'soap_version':
                     $this->setSoapVersion($value);
                     break;
@@ -212,9 +209,14 @@ class Server implements \Zend\Server\Server
                 case 'cache_wsdl':
                     $this->setWSDLCache($value);
                     break;
+
                 // @todo is missing break really necessary ?
                 case 'featues':
-                    trigger_error(__METHOD__ . ': the option "featues" is deprecated as of 1.10.x and will be removed with 2.0.0; use "features" instead', E_USER_NOTICE);
+                    trigger_error(__METHOD__ . ': the option "featues" is deprecated'.
+                        ' as of 1.10.x and will be removed with 2.0.0; use "features" instead',
+                        E_USER_NOTICE
+                    );
+
                 case 'features':
                     $this->setSoapFeatures($value);
                     break;
@@ -979,7 +981,8 @@ class Server implements \Zend\Server\Server
     /**
      * @param $fault
      */
-    public function isRegisteredAsFaultException($fault){
+    public function isRegisteredAsFaultException($fault)
+    {
         $ref = new \ReflectionClass($fault);
 
         $classNames = $ref->getName();

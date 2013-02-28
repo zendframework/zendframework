@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 namespace Zend\Soap;
@@ -22,9 +21,6 @@ use Zend\Uri;
 /**
  * \Zend\Soap\AutoDiscover
  *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage AutoDiscover
  */
 class AutoDiscover
 {
@@ -195,8 +191,8 @@ class AutoDiscover
     /**
      * Get service name
      *
-     * @return string
      * @throws Exception\RuntimeException
+     * @return string
      */
     public function getServiceName()
     {
@@ -219,8 +215,8 @@ class AutoDiscover
      * Set the location at which the WSDL file will be availabe.
      *
      * @param  Uri\Uri|string $uri
-     * @return AutoDiscover
      * @throws Exception\InvalidArgumentException
+     * @return AutoDiscover
      */
     public function setUri($uri)
     {
@@ -246,8 +242,8 @@ class AutoDiscover
     /**
      * Return the current Uri that the SOAP WSDL Service will be located at.
      *
-     * @return Uri\Uri
      * @throws Exception\RuntimeException
+     * @return Uri\Uri
      */
     public function getUri()
     {
@@ -267,8 +263,8 @@ class AutoDiscover
      * Set the name of the WSDL handling class.
      *
      * @param  string $wsdlClass
-     * @return AutoDiscover
      * @throws Exception\InvalidArgumentException
+     * @return AutoDiscover
      */
     public function setWsdlClass($wsdlClass)
     {
@@ -300,8 +296,8 @@ class AutoDiscover
      * 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/".
      *
      * @param  array $operationStyle
-     * @return AutoDiscover
      * @throws Exception\InvalidArgumentException
+     * @return AutoDiscover
      */
     public function setOperationBodyStyle(array $operationStyle=array())
     {
@@ -578,7 +574,9 @@ class AutoDiscover
 
         // Add the binding operation
         if ($isOneWayMessage == false) {
-            $operation = $wsdl->addBindingOperation($binding, $functionName, $operationBodyStyle, $operationBodyStyle);
+            $operation = $wsdl->addBindingOperation($binding, $functionName,
+                $operationBodyStyle, $operationBodyStyle
+            );
         } else {
             $operation = $wsdl->addBindingOperation($binding, $functionName, $operationBodyStyle);
         }
@@ -594,7 +592,9 @@ class AutoDiscover
     public function generate()
     {
         if ($this->class && $this->functions) {
-            throw new Exception\RuntimeException("Can either dump functions or a class as a service, not both.");
+            throw new Exception\RuntimeException(
+                "Can either dump functions or a class as a service, not both."
+            );
         }
 
         if ($this->class) {

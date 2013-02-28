@@ -259,7 +259,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response->isError());
     }
 
-	public function testHandleValidMethodWithNULLParamValueShouldWork()
+    public function testHandleValidMethodWithNULLParamValueShouldWork()
     {
         $this->server->setClass('ZendTest\\Json\\Foo')
                      ->addFunction('ZendTest\\Json\\FooFunc')

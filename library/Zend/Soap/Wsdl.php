@@ -354,9 +354,15 @@ class Wsdl
      *
      * @param object $binding A binding XML_Tree_Node returned by {@link function addBinding}
 	 * @param string $name
-	 * @param array|bool $input An array of attributes for the input element, allowed keys are: 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
-	 * @param array|bool $output An array of attributes for the output element, allowed keys are: 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
-	 * @param array|bool $fault An array with attributes for the fault element, allowed keys are: 'name', 'use', 'namespace', 'encodingStyle'. {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
+	 * @param array|bool $input  An array of attributes for the input element,
+     *                           allowed keys are: 'use', 'namespace', 'encodingStyle'.
+     *                          {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
+	 * @param array|bool $output An array of attributes for the output element,
+     *                           allowed keys are: 'use', 'namespace', 'encodingStyle'.
+     *                           {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
+	 * @param array|bool $fault  An array with attributes for the fault element,
+     *                           allowed keys are: 'name', 'use', 'namespace', 'encodingStyle'.
+     *                           {@link http://www.w3.org/TR/wsdl#_soap:body More Information}
 	 *
      * @return object The new Operation's XML_Tree_Node for use with {@link function addSoapOperation} and {@link function addDocumentation}
      */
@@ -369,7 +375,7 @@ class Wsdl
         $operation->appendChild($attr);
         $attr->value = $name;
 
-        if (is_array($input) AND !empty($input)) {
+        if (is_array($input) && !empty($input)) {
             $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'input');
             $operation->appendChild($node);
 
@@ -379,7 +385,7 @@ class Wsdl
             $this->arrayToAttributes($soapNode, $input);
         }
 
-        if (is_array($output) AND !empty($output)) {
+        if (is_array($output) && !empty($output)) {
             $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'output');
             $operation->appendChild($node);
 
@@ -389,7 +395,7 @@ class Wsdl
             $this->arrayToAttributes($soapNode, $output);
         }
 
-        if (is_array($fault) AND !empty($fault)) {
+        if (is_array($fault) && !empty($fault)) {
             $node = $this->dom->createElementNS(Wsdl::NS_WSDL, 'fault');
             $operation->appendChild($node);
 

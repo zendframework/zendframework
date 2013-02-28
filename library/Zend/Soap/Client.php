@@ -360,7 +360,7 @@ class Client implements ServerClient
     {
         foreach ($classmap as $class) {
             if (!class_exists($class)) {
-                throw new Exception\InvalidArgumentException('Invalid class in class map: '.$class);
+                throw new Exception\InvalidArgumentException('Invalid class in class map: ' . $class);
             }
         }
 

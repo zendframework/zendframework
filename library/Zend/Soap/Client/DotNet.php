@@ -199,8 +199,8 @@ class DotNet extends SOAPClient
         if (count($arguments) > 1  ||
             (count($arguments) == 1  &&  !is_array(reset($arguments)))
            ) {
-            throw new Exception\RuntimeException('.Net webservice arguments have'
-                ." to be grouped into array: array('a' => \$a, 'b' => \$b, ...)."
+            throw new Exception\RuntimeException(
+                '.Net webservice arguments have to be grouped into array: array("a" => $a, "b" => $b, ...).'
             );
         }
 

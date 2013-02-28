@@ -179,9 +179,7 @@ class AutoDiscover
         $matches = array();
         $i = preg_match('/^[a-z\_]/ims', $serviceName, $matches);
         if ($i != 1) {
-            throw new InvalidArgumentException(
-                'XML NCName and Service Name must start with letter or _'
-            );
+            throw new InvalidArgumentException('XML NCName and Service Name must start with letter or _');
         }
 
         $this->serviceName = $serviceName;
@@ -198,12 +196,9 @@ class AutoDiscover
     {
         if (!$this->serviceName) {
             if ($this->class) {
-                return $this->reflection->reflectClass($this->class)
-                                         ->getShortName();
+                return $this->reflection->reflectClass($this->class)->getShortName();
             } else {
-                throw new Exception\RuntimeException(
-                    "No service name given. Call Autodiscover::setServiceName()."
-                );
+                throw new Exception\RuntimeException('No service name given. Call Autodiscover::setServiceName().');
             }
         }
 
@@ -222,8 +217,7 @@ class AutoDiscover
     {
         if (!is_string($uri) && !($uri instanceof Uri\Uri)) {
             throw new Exception\InvalidArgumentException(
-                'Argument to \Zend\Soap\AutoDiscover::setUri should be string '
-                .'or \Zend\Uri\Uri instance.'
+                'Argument to \Zend\Soap\AutoDiscover::setUri should be string  or \Zend\Uri\Uri instance.'
             );
         }
 
@@ -248,8 +242,8 @@ class AutoDiscover
     public function getUri()
     {
         if ($this->uri === null) {
-            throw new Exception\RuntimeException("Missing uri. You have to '
-                .'explicitly configure the Endpoint Uri by calling AutoDiscover::setUri()."
+            throw new Exception\RuntimeException(
+                'Missing uri. You have to explicitly configure the Endpoint Uri by calling AutoDiscover::setUri().'
             );
         }
         if (is_string($this->uri)) {
@@ -302,9 +296,7 @@ class AutoDiscover
     public function setOperationBodyStyle(array $operationStyle=array())
     {
         if (!isset($operationStyle['use'])) {
-            throw new Exception\InvalidArgumentException(
-                "Key 'use' is required in Operation soap:body style."
-            );
+            throw new Exception\InvalidArgumentException('Key "use" is required in Operation soap:body style.');
         }
         $this->operationBodyStyle = $operationStyle;
         return $this;
@@ -372,14 +364,14 @@ class AutoDiscover
             if (function_exists($function)) {
                 $this->functions[] = $function;
             } else {
-                throw new Exception\InvalidArgumentException('Argument to '
-                    . '\Zend\Soap\AutoDiscover::addFunction should be a valid function name.'
+                throw new Exception\InvalidArgumentException(
+                    'Argument to Zend\Soap\AutoDiscover::addFunction should be a valid function name.'
                 );
             }
 
         } else {
-            throw new Exception\InvalidArgumentException('Argument to '
-                . '\Zend\Soap\AutoDiscover::addFunction should be string or array of strings.'
+            throw new Exception\InvalidArgumentException(
+                'Argument to Zend\Soap\AutoDiscover::addFunction should be string or array of strings.'
             );
         }
 
@@ -592,9 +584,7 @@ class AutoDiscover
     public function generate()
     {
         if ($this->class && $this->functions) {
-            throw new Exception\RuntimeException(
-                "Can either dump functions or a class as a service, not both."
-            );
+            throw new Exception\RuntimeException('Can either dump functions or a class as a service, not both.');
         }
 
         if ($this->class) {

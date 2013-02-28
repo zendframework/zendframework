@@ -721,7 +721,7 @@ class Wsdl
     private function _parseElement($element)
     {
         if (!is_array($element)) {
-            throw new Exception\RuntimeException("The 'element' parameter needs to be an associative array.");
+            throw new Exception\RuntimeException('The "element" parameter needs to be an associative array.');
         }
 
         $elementXML = $this->dom->createElementNS(Wsdl::NS_SCHEMA, 'element');

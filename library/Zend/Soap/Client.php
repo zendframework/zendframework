@@ -327,8 +327,8 @@ class Client implements ServerClient
     public function setSoapVersion($version)
     {
         if (!in_array($version, array(SOAP_1_1, SOAP_1_2))) {
-            throw new Exception\InvalidArgumentException('Invalid soap version'
-                .' specified. Use SOAP_1_1 or SOAP_1_2 constants.'
+            throw new Exception\InvalidArgumentException(
+                'Invalid soap version specified. Use SOAP_1_1 or SOAP_1_2 constants.'
             );
         }
         $this->soapVersion = $version;
@@ -391,12 +391,12 @@ class Client implements ServerClient
         foreach ($typeMap as $type) {
             if (!is_callable($type['from_xml'])) {
                 throw new Exception\InvalidArgumentException(
-                    'Invalid from_xml callback for type: '.$type['type_name']
+                    'Invalid from_xml callback for type: ' . $type['type_name']
                 );
             }
             if (!is_callable($type['to_xml'])) {
                 throw new Exception\InvalidArgumentException(
-                    'Invalid to_xml callback for type: '.$type['type_name']
+                    'Invalid to_xml callback for type: ' . $type['type_name']
                 );
             }
         }
@@ -537,8 +537,8 @@ class Client implements ServerClient
     public function setStyle($style)
     {
         if (!in_array($style, array(SOAP_RPC, SOAP_DOCUMENT))) {
-            throw new Exception\InvalidArgumentException('Invalid request style'
-                . ' specified. Use SOAP_RPC or SOAP_DOCUMENT constants.'
+            throw new Exception\InvalidArgumentException(
+                'Invalid request style specified. Use SOAP_RPC or SOAP_DOCUMENT constants.'
             );
         }
 
@@ -570,8 +570,8 @@ class Client implements ServerClient
     public function setEncodingMethod($use)
     {
         if (!in_array($use, array(SOAP_ENCODED, SOAP_LITERAL))) {
-            throw new Exception\InvalidArgumentException('Invalid message'
-                .' encoding method. Use SOAP_ENCODED or SOAP_LITERAL constants.'
+            throw new Exception\InvalidArgumentException(
+                'Invalid message encoding method. Use SOAP_ENCODED or SOAP_LITERAL constants.'
             );
         }
 
@@ -1017,12 +1017,21 @@ class Client implements ServerClient
     ) {
         // Perform request as is
         if ($oneWay === null) {
-            return call_user_func(array($client,'SoapClient::__doRequest'),
-                $request, $location, $action, $version
+            return call_user_func(
+                array($client, 'SoapClient::__doRequest'),
+                $request,
+                $location,
+                $action,
+                $version
             );
         }
-        return call_user_func(array($client, 'SoapClient::__doRequest'), $request,
-            $location, $action, $version, $oneWay
+        return call_user_func(
+            array($client, 'SoapClient::__doRequest'),
+            $request,
+            $location,
+            $action,
+            $version,
+            $oneWay
         );
     }
 
@@ -1038,25 +1047,17 @@ class Client implements ServerClient
 
         if ($wsdl == null) {
             if (!isset($options['location'])) {
-                throw new Exception\UnexpectedValueException(
-                    '\'location\' parameter is required in non-WSDL mode.'
-                );
+                throw new Exception\UnexpectedValueException('"location" parameter is required in non-WSDL mode.');
             }
             if (!isset($options['uri'])) {
-                throw new Exception\UnexpectedValueException(
-                    '\'uri\' parameter is required in non-WSDL mode.'
-                );
+                throw new Exception\UnexpectedValueException('"uri" parameter is required in non-WSDL mode.');
             }
         } else {
             if (isset($options['use'])) {
-                throw new Exception\UnexpectedValueException(
-                    '\'use\' parameter only works in non-WSDL mode.'
-                );
+                throw new Exception\UnexpectedValueException('"use" parameter only works in non-WSDL mode.');
             }
             if (isset($options['style'])) {
-                throw new Exception\UnexpectedValueException(
-                    '\'style\' parameter only works in non-WSDL mode.'
-                );
+                throw new Exception\UnexpectedValueException('"style" parameter only works in non-WSDL mode.');
             }
         }
         unset($options['wsdl']);
@@ -1151,11 +1152,13 @@ class Client implements ServerClient
         $this->lastMethod = $name;
 
         $soapHeaders = array_merge($this->permanentSoapInputHeaders, $this->soapInputHeaders);
-        $result = $soapClient->__soapCall($name,
-                                          $this->_preProcessArguments($arguments),
-                                          null, /* Options are already set to the SOAP client object */
-                                          (count($soapHeaders) > 0)? $soapHeaders : null,
-                                          $this->soapOutputHeaders);
+        $result = $soapClient->__soapCall(
+            $name,
+            $this->_preProcessArguments($arguments),
+            null, /* Options are already set to the SOAP client object */
+            (count($soapHeaders) > 0)? $soapHeaders : null,
+            $this->soapOutputHeaders
+        );
 
         // Reset non-permanent input headers
         $this->soapInputHeaders = array();
@@ -1184,9 +1187,7 @@ class Client implements ServerClient
     public function getFunctions()
     {
         if ($this->getWSDL() == null) {
-            throw new Exception\UnexpectedValueException(
-                __METHOD__ . ' is available only in WSDL mode.'
-            );
+            throw new Exception\UnexpectedValueException(__METHOD__ . ' is available only in WSDL mode.');
         }
 
         $soapClient = $this->getSoapClient();
@@ -1209,9 +1210,7 @@ class Client implements ServerClient
     public function getTypes()
     {
         if ($this->getWSDL() == null) {
-            throw new Exception\UnexpectedValueException(
-                __METHOD__ . ' method is available only in WSDL mode.'
-            );
+            throw new Exception\UnexpectedValueException(__METHOD__ . ' method is available only in WSDL mode.');
         }
 
         $soapClient = $this->getSoapClient();

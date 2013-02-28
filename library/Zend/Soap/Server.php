@@ -212,8 +212,8 @@ class Server implements \Zend\Server\Server
 
                 // @todo is missing break really necessary ?
                 case 'featues':
-                    trigger_error(__METHOD__ . ': the option "featues" is deprecated'.
-                        ' as of 1.10.x and will be removed with 2.0.0; use "features" instead',
+                    trigger_error(
+                        __METHOD__ . ': the option "featues" is deprecated as of 1.10.x and will be removed with 2.0.0; use "features" instead',
                         E_USER_NOTICE
                     );
 
@@ -601,15 +601,11 @@ class Server implements \Zend\Server\Server
         }
 
         if (!is_string($class)) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid class argument (' . gettype($class) . ')'
-            );
+            throw new Exception\InvalidArgumentException('Invalid class argument (' . gettype($class) . ')');
         }
 
         if (!class_exists($class)) {
-            throw new Exception\InvalidArgumentException(
-                'Class "' . $class . '" does not exist'
-            );
+            throw new Exception\InvalidArgumentException('Class "' . $class . '" does not exist');
         }
 
         $this->class = $class;
@@ -634,9 +630,7 @@ class Server implements \Zend\Server\Server
     public function setObject($object)
     {
         if (!is_object($object)) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid object argument ('.gettype($object).')'
-            );
+            throw new Exception\InvalidArgumentException('Invalid object argument ('.gettype($object).')');
         }
 
         if (isset($this->object)) {
@@ -760,9 +754,7 @@ class Server implements \Zend\Server\Server
 
             foreach ($dom->childNodes as $child) {
                 if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
-                    throw new Exception\InvalidArgumentException(
-                        'Invalid XML: Detected use of illegal DOCTYPE'
-                    );
+                    throw new Exception\InvalidArgumentException('Invalid XML: Detected use of illegal DOCTYPE');
                 }
             }
             libxml_disable_entity_loader(false);
@@ -969,9 +961,8 @@ class Server implements \Zend\Server\Server
             $this->faultExceptions[] = $ref->getName();
             $this->faultExceptions = array_unique($this->faultExceptions);
         } else {
-            throw new Exception\InvalidArgumentException('Argument for'
-                .' \Zend\Soap\Server::registerFaultException should be string or '
-                . 'array of strings with valid exception names'
+            throw new Exception\InvalidArgumentException(
+                'Argument for Zend\Soap\Server::registerFaultException should be string or array of strings with valid exception names'
             );
         }
 

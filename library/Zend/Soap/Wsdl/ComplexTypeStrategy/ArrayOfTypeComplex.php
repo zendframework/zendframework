@@ -42,8 +42,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
             return $this->_addArrayOfComplexType($singularType, $type);
         } else {
             throw new Exception\InvalidArgumentException(
-                'ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than '
-              . 'one level. Use array object properties to return deep nested data.'
+                'ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than one level. Use array object properties to return deep nested data.'
             );
         }
     }
@@ -91,8 +90,11 @@ class ArrayOfTypeComplex extends DefaultComplexType
         $xsdRestriction->appendChild($xsdAttribute);
 
         $xsdAttribute->setAttribute('ref', 'soap-enc:arrayType');
-        $xsdAttribute->setAttributeNS(Wsdl::NS_WSDL, 'arrayType',
-            'tns:' . $this->getContext()->translateType($singularType) . '[]');
+        $xsdAttribute->setAttributeNS(
+            Wsdl::NS_WSDL,
+            'arrayType',
+            'tns:' . $this->getContext()->translateType($singularType) . '[]'
+        );
 
         return $xsdComplexType;
     }

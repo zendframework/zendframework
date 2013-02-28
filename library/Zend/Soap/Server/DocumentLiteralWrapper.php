@@ -129,7 +129,9 @@ class DocumentLiteralWrapper
             if (!isset($params[$argName])) {
                 throw new UnexpectedValueException(sprintf(
                     "Received unknown argument %s which is not an argument to %s::%s",
-                    $argName, get_class($this->object), $method
+                    $argName,
+                    get_class($this->object),
+                    $method
                 ));
             }
             $delegateArgs[$params[$argName]->getPosition()] = $argValue;
@@ -147,7 +149,8 @@ class DocumentLiteralWrapper
         if (!$this->reflection->hasMethod($method)) {
             throw new BadMethodCallException(sprintf(
                 "Method %s does not exist on delegate object %s",
-                $method, get_class($this->object)
+                $method,
+                get_class($this->object)
             ));
         }
     }

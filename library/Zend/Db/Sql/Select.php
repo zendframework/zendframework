@@ -297,10 +297,10 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                             // if the value is an array, assume IN() is desired
                             $predicate = new Predicate\In($pkey, $pvalue);
                         } elseif ($pvalue instanceof Predicate\PredicateInterface) {
-                            // 
+                            //
                             throw new Exception\InvalidArgumentException(
                                 'Using Predicate must not use string keys'
-                            ); 
+                            );
                         } else {
                             // otherwise assume that array('foo' => 'bar') means "foo" = 'bar'
                             $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
@@ -587,10 +587,14 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $fromTable = $platform->quoteIdentifier($alias);
             $table .= ' AS ' . $fromTable;
         } else {
-            $fromTable = ($this->prefixColumnsWithTable) ? $table : '';
+            $fromTable = $table;
         }
 
-        $fromTable .= ($this->prefixColumnsWithTable) ? $platform->getIdentifierSeparator() : '';
+        if ($this->prefixColumnsWithTable) {
+            $fromTable .= $platform->getIdentifierSeparator();
+        } else {
+            $fromTable = '';
+        }
 
         // process table columns
         $columns = array();

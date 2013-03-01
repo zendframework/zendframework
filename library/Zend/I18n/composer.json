@@ -16,7 +16,9 @@
         "php": ">=5.3.3",
         "ext-intl": "*",
         "zendframework/zend-filter": "self.version",
-        "zendframework/zend-stdlib": "self.version"
+        "zendframework/zend-stdlib": "self.version",
+        "zendframework/zend-validator": "self.version",
+        "zendframework/zend-view": "self.version"
     },
     "extra": {
         "branch-alias": {

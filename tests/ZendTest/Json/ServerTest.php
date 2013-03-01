@@ -272,7 +272,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response instanceof Response);
         $this->assertFalse($response->isError());
     }
-	
+
     public function testHandleValidMethodWithTooFewParamsShouldPassDefaultsOrNullsForMissingParams()
     {
         $this->server->setClass('ZendTest\Json\Foo')

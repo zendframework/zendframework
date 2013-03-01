@@ -11,7 +11,6 @@ namespace Zend\Soap\Exception;
 
 /**
  * Exception thrown when method is badly called
- *
  */
 class BadMethodCallException
     extends \BadMethodCallException

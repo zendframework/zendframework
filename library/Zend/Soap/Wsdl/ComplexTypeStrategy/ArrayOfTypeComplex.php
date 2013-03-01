@@ -24,6 +24,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
      *
      * @param string $type
      * @throws Exception\InvalidArgumentException
+     *
      * @return string tns:xsd-type
      */
     public function addComplexType($type)
@@ -36,8 +37,10 @@ class ArrayOfTypeComplex extends DefaultComplexType
         $nestingLevel = $this->_getNestedCount($type);
 
         if ($nestingLevel == 0) {
+
             return parent::addComplexType($singularType);
         } elseif ($nestingLevel == 1) {
+
             // The following blocks define the Array of Object structure
             return $this->_addArrayOfComplexType($singularType, $type);
         } else {
@@ -53,6 +56,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
      *
      * @param string $singularType   e.g. '\MyNamespace\MyClassname'
      * @param string $type           e.g. '\MyNamespace\MyClassname[]'
+     *
      * @return string tns:xsd-type   e.g. 'tns:ArrayOfMyNamespace.MyClassname'
      */
     protected function _addArrayOfComplexType($singularType, $type)
@@ -83,8 +87,8 @@ class ArrayOfTypeComplex extends DefaultComplexType
         $complexType->appendChild($complexContent);
 
         $xsdRestriction = $dom->createElementNS(Wsdl::XSD_NS_URI, 'restriction');
-        $xsdRestriction->setAttribute('base', Wsdl::SOAP_ENC_NS . ':Array');
         $complexContent->appendChild($xsdRestriction);
+        $xsdRestriction->setAttribute('base', Wsdl::SOAP_ENC_NS . ':Array');
 
         $xsdAttribute = $dom->createElementNS(Wsdl::XSD_NS_URI, 'attribute');
         $xsdRestriction->appendChild($xsdAttribute);
@@ -103,6 +107,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
      * From a nested definition with type[], get the singular PHP Type
      *
      * @param  string $type
+     *
      * @return string
      */
     protected function _getSingularPhpType($type)
@@ -114,6 +119,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
      * Return the array nesting level based on the type name
      *
      * @param  string $type
+     *
      * @return integer
      */
     protected function _getNestedCount($type)

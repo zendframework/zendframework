@@ -118,17 +118,17 @@ class WsdlTest extends WsdlTestHelper
         );
     }
 
-	/**
-	 * @dataProvider dataProviderForAddMessage
-	 *
-	 * @param array $parameters message parameters
-	 */
-	function testAddMessage($parameters)
+    /**
+     * @dataProvider dataProviderForAddMessage
+     *
+     * @param array $parameters message parameters
+     */
+    function testAddMessage($parameters)
     {
-		$messageParts = array();
-		foreach($parameters as $i => $parameter) {
-			$messageParts['parameter'.$i] = $this->wsdl->getType($parameter);
-		}
+        $messageParts = array();
+        foreach($parameters as $i => $parameter) {
+            $messageParts['parameter'.$i] = $this->wsdl->getType($parameter);
+        }
 
         $messageName = 'myMessage';
 
@@ -180,19 +180,19 @@ class WsdlTest extends WsdlTestHelper
 
     }
 
-	/**
-	 * @return array
-	 */
-	public function dataProviderForAddMessage()
+    /**
+     * @return array
+     */
+    public function dataProviderForAddMessage()
     {
-		return array(
-			array(array('int', 'int', 'int')),
-			array(array('string', 'string', 'string', 'string')),
-			array(array('mixed')),
-			array(array('int', 'int', 'string', 'string')),
-			array(array('int', 'string', 'int', 'string')),
-		);
-	}
+        return array(
+            array(array('int', 'int', 'int')),
+            array(array('string', 'string', 'string', 'string')),
+            array(array('mixed')),
+            array(array('int', 'int', 'string', 'string')),
+            array(array('int', 'string', 'int', 'string')),
+        );
+    }
 
     function testAddPortType()
     {
@@ -229,26 +229,26 @@ class WsdlTest extends WsdlTestHelper
         $operationNodes = $this->xpath->query('wsdl:operation[@name="'.$operationName.'"]', $portTypeNodes->item(0));
         $this->assertGreaterThan(0, $operationNodes->length);
 
-		if (empty($inputRequest) AND empty($outputResponse) AND empty($fail)) {
+        if (empty($inputRequest) AND empty($outputResponse) AND empty($fail)) {
             $this->assertFalse($operationNodes->item(0)->hasChildNodes());
         } else {
             $this->assertTrue($operationNodes->item(0)->hasChildNodes());
-		}
+        }
 
-		if (!empty($inputRequest)) {
+        if (!empty($inputRequest)) {
             $inputNodes = $operationNodes->item(0)->getElementsByTagName('input');
             $this->assertEquals($inputRequest, $inputNodes->item(0)->getAttribute('message'));
         }
 
-		if (!empty($outputResponse)) {
-			$outputNodes = $operationNodes->item(0)->getElementsByTagName('output');
-    	    $this->assertEquals($outputResponse, $outputNodes->item(0)->getAttribute('message'));
-		}
+        if (!empty($outputResponse)) {
+            $outputNodes = $operationNodes->item(0)->getElementsByTagName('output');
+            $this->assertEquals($outputResponse, $outputNodes->item(0)->getAttribute('message'));
+        }
 
-		if (!empty($fail)) {
-        	$faultNodes = $operationNodes->item(0)->getElementsByTagName('fault');
-        	$this->assertEquals($fail, $faultNodes->item(0)->getAttribute('message'));
-		}
+        if (!empty($fail)) {
+            $faultNodes = $operationNodes->item(0)->getElementsByTagName('fault');
+            $this->assertEquals($fail, $faultNodes->item(0)->getAttribute('message'));
+        }
     }
 
     /**
@@ -263,8 +263,8 @@ class WsdlTest extends WsdlTestHelper
             array('operation', 'tns:operationRequest', null, 'tns:operationFault'),
             array('operation', null, null, 'tns:operationFault'),
             array('operation', null, 'tns:operationResponse', 'tns:operationFault'),
-			array('operation', null, 'tns:operationResponse'),
-		);
+            array('operation', null, 'tns:operationResponse'),
+        );
     }
 
     function testAddBinding()
@@ -284,62 +284,62 @@ class WsdlTest extends WsdlTestHelper
 
     }
 
-	/**
-	 * @dataProvider dataProviderForAddBindingOperation
-	 *
-	 * @param $operationName
-	 * @param null $input
-	 * @param null $inputEncoding
-	 * @param null $output
-	 * @param null $outputEncoding
-	 * @param null $fault
-	 * @param null $faultEncoding
-	 * @param null $faultName
-	 */
-	function testAddBindingOperation($operationName,
-		$input = null, $inputEncoding = null,
-		$output = null, $outputEncoding = null,
-		$fault = null, $faultEncoding = null, $faultName = null)
+    /**
+     * @dataProvider dataProviderForAddBindingOperation
+     *
+     * @param $operationName
+     * @param null $input
+     * @param null $inputEncoding
+     * @param null $output
+     * @param null $outputEncoding
+     * @param null $fault
+     * @param null $faultEncoding
+     * @param null $faultName
+     */
+    function testAddBindingOperation($operationName,
+        $input = null, $inputEncoding = null,
+        $output = null, $outputEncoding = null,
+        $fault = null, $faultEncoding = null, $faultName = null)
     {
         $binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
 
-		$inputArray = array();
-		if (!empty($input) AND !empty($inputEncoding)) {
-			$inputArray = array('use' => $input, 	'encodingStyle' => $inputEncoding);
-		}
+        $inputArray = array();
+        if (!empty($input) AND !empty($inputEncoding)) {
+            $inputArray = array('use' => $input,     'encodingStyle' => $inputEncoding);
+        }
 
-		$outputArray = array();
-		if (!empty($output) AND !empty($outputEncoding)) {
-			$outputArray = array('use' => $output, 'encodingStyle' => $outputEncoding);
-		}
+        $outputArray = array();
+        if (!empty($output) AND !empty($outputEncoding)) {
+            $outputArray = array('use' => $output, 'encodingStyle' => $outputEncoding);
+        }
 
-		$faultArray = array();
-		if (!empty($fault) AND !empty($faultEncoding) AND !empty($faultName)) {
-			$faultArray = array('use' => $fault, 	'encodingStyle' => $faultEncoding, 	'name'=>$faultName);
-		}
+        $faultArray = array();
+        if (!empty($fault) AND !empty($faultEncoding) AND !empty($faultName)) {
+            $faultArray = array('use' => $fault,     'encodingStyle' => $faultEncoding,     'name'=>$faultName);
+        }
 
-		$this->wsdl->addBindingOperation($binding,
-			$operationName,
-			$inputArray,
-			$outputArray,
-			$faultArray
-		);
+        $this->wsdl->addBindingOperation($binding,
+            $operationName,
+            $inputArray,
+            $outputArray,
+            $faultArray
+        );
 
         $this->testDocumentNodes();
 
         $bindingNodes = $this->xpath->query('//wsdl:binding');
 
-		$this->assertGreaterThan(0, $bindingNodes->length, 'Missing binding node in definition.');
+        $this->assertGreaterThan(0, $bindingNodes->length, 'Missing binding node in definition.');
 
         $this->assertEquals('MyServiceBinding',     $bindingNodes->item(0)->getAttribute('name'));
         $this->assertEquals('myPortType',           $bindingNodes->item(0)->getAttribute('type'));
 
-		$operationNodes = $this->xpath->query('wsdl:operation[@name="'.$operationName.'"]', $bindingNodes->item(0));
-		$this->assertEquals(1, $operationNodes->length, 'Missing operation node in definition.');
+        $operationNodes = $this->xpath->query('wsdl:operation[@name="'.$operationName.'"]', $bindingNodes->item(0));
+        $this->assertEquals(1, $operationNodes->length, 'Missing operation node in definition.');
 
-		if (empty($inputArray) AND empty($outputArray) AND empty($faultArray)) {
-			$this->assertFalse($operationNodes->item(0)->hasChildNodes());
-		}
+        if (empty($inputArray) AND empty($outputArray) AND empty($faultArray)) {
+            $this->assertFalse($operationNodes->item(0)->hasChildNodes());
+        }
 
         foreach (array(
             '//wsdl:input/soap:body'    => $inputArray,
@@ -360,30 +360,30 @@ class WsdlTest extends WsdlTestHelper
         }
     }
 
-	/**
-	 *
-	 */
-	public function dataProviderForAddBindingOperation()
+    /**
+     *
+     */
+    public function dataProviderForAddBindingOperation()
     {
 
-		$enc = 'http://schemas.xmlsoap.org/soap/encoding/';
+        $enc = 'http://schemas.xmlsoap.org/soap/encoding/';
 
-		return array(
-			array('operation'),
-			array('operation', 'encoded', $enc, 'encoded', $enc, 'encoded', $enc, 'myFaultName'),
-			array('operation', null, null, 'encoded', $enc, 'encoded', $enc, 'myFaultName'),
-			array('operation', null, null, 'encoded', $enc, 'encoded'),
-			array('operation', 'encoded', $enc),
-			array('operation', null, null, null, null, 'encoded', $enc, 'myFaultName'),
-			array('operation', 'encoded1', $enc.'1', 'encoded2', $enc.'2', 'encoded3', $enc.'3', 'myFaultName'),
+        return array(
+            array('operation'),
+            array('operation', 'encoded', $enc, 'encoded', $enc, 'encoded', $enc, 'myFaultName'),
+            array('operation', null, null, 'encoded', $enc, 'encoded', $enc, 'myFaultName'),
+            array('operation', null, null, 'encoded', $enc, 'encoded'),
+            array('operation', 'encoded', $enc),
+            array('operation', null, null, null, null, 'encoded', $enc, 'myFaultName'),
+            array('operation', 'encoded1', $enc.'1', 'encoded2', $enc.'2', 'encoded3', $enc.'3', 'myFaultName'),
 
-		);
-	}
+        );
+    }
 
-	/**
-	 * @dataProvider dataProviderForSoapBindingStyle
-	 */
-	function testAddSoapBinding($style)
+    /**
+     * @dataProvider dataProviderForSoapBindingStyle
+     */
+    function testAddSoapBinding($style)
     {
         $this->wsdl->addPortType('myPortType');
         $binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
@@ -394,17 +394,17 @@ class WsdlTest extends WsdlTestHelper
 
         $nodes = $this->xpath->query('//soap:binding');
 
-		$this->assertGreaterThan(0, $nodes->length);
-		$this->assertEquals($style, $nodes->item(0)->getAttribute('style'));
+        $this->assertGreaterThan(0, $nodes->length);
+        $this->assertEquals($style, $nodes->item(0)->getAttribute('style'));
     }
 
-	public function dataProviderForSoapBindingStyle()
+    public function dataProviderForSoapBindingStyle()
     {
-		return array(
-			array('document'),
-			array('rpc'),
-		);
-	}
+        return array(
+            array('document'),
+            array('rpc'),
+        );
+    }
 
     /**
      * @dataProvider dataProviderForAddSoapOperation

@@ -26,35 +26,30 @@ class DotNet extends SOAPClient
 {
     /**
      * Curl HTTP client adapter.
-     *
      * @var \Zend\Http\Client\Adapter\Curl
      */
     private $curlClient = null;
 
     /**
      * The last request headers.
-     *
      * @var string
      */
     private $lastRequestHeaders = '';
 
     /**
      * The last response headers.
-     *
      * @var string
      */
     private $lastResponseHeaders = '';
 
     /**
      * SOAP client options.
-     *
      * @var array
      */
     private $options = array();
 
     /**
      * Should NTLM authentication be used?
-     *
      * @var boolean
      */
     private $useNtlm = false;
@@ -81,13 +76,14 @@ class DotNet extends SOAPClient
      * @param  string       $location The SOAP URI.
      * @param  string       $action   The SOAP action to call.
      * @param  integer      $version  The SOAP version to use.
-     * @param  integer      $one_way  (Optional) The number 1 if a response is not expected.
+     * @param  integer      $oneWay  (Optional) The number 1 if a response is not expected.
+     *
      * @return string The XML SOAP response.
      */
-    public function _doRequest(CommonClient $client, $request, $location, $action, $version, $one_way = null)
+    public function _doRequest(CommonClient $client, $request, $location, $action, $version, $oneWay = null)
     {
         if (!$this->useNtlm) {
-            return parent::_doRequest($client, $request, $location, $action, $version, $one_way);
+            return parent::_doRequest($client, $request, $location, $action, $version, $oneWay);
         }
 
         $curlClient = $this->getCurlClient();
@@ -98,7 +94,7 @@ class DotNet extends SOAPClient
                             'User-Agent'   => 'PHP-SOAP-CURL');
         $uri        = new HttpUri($location);
 
-        //@todo use parent set options for ssl certificate authorization
+        //@todo use parent set* options for ssl certificate authorization
         $curlClient->setCurlOption(CURLOPT_HTTPAUTH, CURLAUTH_NTLM)
                    ->setCurlOption(CURLOPT_SSL_VERIFYHOST, false)
                    ->setCurlOption(CURLOPT_SSL_VERIFYPEER, false)
@@ -157,11 +153,13 @@ class DotNet extends SOAPClient
      * Sets the cURL client to use.
      *
      * @param  CurlClient $curlClient The cURL client.
-     * @return self Fluent interface.
+     *
+     * @return DotNet Fluent interface.
      */
     public function setCurlClient(CurlClient $curlClient)
     {
         $this->curlClient = $curlClient;
+
         return $this;
     }
 
@@ -172,7 +170,8 @@ class DotNet extends SOAPClient
      *
      * @param  array|\Traversable $options Options.
      * @throws \InvalidArgumentException If an unsupported option is passed.
-     * @return self Fluent interface.
+     *
+     * @return \Zend\Soap\Client Fluent interface.
      */
     public function setOptions($options)
     {
@@ -182,6 +181,7 @@ class DotNet extends SOAPClient
         }
 
         $this->options = $options;
+
         return parent::setOptions($options);
     }
 
@@ -192,6 +192,7 @@ class DotNet extends SOAPClient
      *
      * @param array $arguments
      * @throws Exception\RuntimeException
+     *
      * @return array
      */
     protected function _preProcessArguments($arguments)
@@ -214,6 +215,7 @@ class DotNet extends SOAPClient
      * My be overridden in descendant classes
      *
      * @param object $result
+     *
      * @return mixed
      */
     protected function _preProcessResult($result)
@@ -227,6 +229,7 @@ class DotNet extends SOAPClient
      * Flattens an HTTP headers array into a string.
      *
      * @param  array $headers The headers to flatten.
+     *
      * @return string The headers string.
      */
     private function flattenHeaders(array $headers)

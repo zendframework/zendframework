@@ -19,10 +19,11 @@ use Zend\Soap\Wsdl;
 class DefaultComplexType extends AbstractComplexTypeStrategy
 {
     /**
-     * Add a complex type by recursivly using all the class properties fetched via Reflection.
+     * Add a complex type by recursively using all the class properties fetched via Reflection.
      *
      * @param  string $type Name of the class to be specified
      * @throws Exception\InvalidArgumentException if class does not exist
+     *
      * @return string XSD Type for the given PHP type
      */
     public function addComplexType($type)
@@ -56,9 +57,7 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
         $all = $dom->createElementNS(Wsdl::XSD_NS_URI, 'all');
 
         foreach ($class->getProperties() as $property) {
-            if ($property->isPublic()
-                && preg_match_all('/@var\s+([^\s]+)/m', $property->getDocComment(), $matches)
-            ) {
+            if ($property->isPublic() && preg_match_all('/@var\s+([^\s]+)/m', $property->getDocComment(), $matches)) {
 
                 /**
                  * @todo check if 'xsd:element' must be used here (it may not be

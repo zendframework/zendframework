@@ -10,8 +10,7 @@
 namespace Zend\Soap\Server;
 
 use ReflectionObject;
-use Zend\Soap\Exception\BadMethodCallException;
-use Zend\Soap\Exception\UnexpectedValueException;
+use Zend\Soap\Exception;
 
 /**
  * Wraps WSDL Document/Literal Style service objects to hide SOAP request
@@ -94,6 +93,7 @@ class DocumentLiteralWrapper
      *
      * @param string $method
      * @param array $args
+     *
      * @return mixed
      */
     public function __call($method, $args)
@@ -103,6 +103,7 @@ class DocumentLiteralWrapper
 
         $delegateArgs = $this->_parseArguments($method, $args[0]);
         $ret = call_user_func_array(array($this->object, $method), $delegateArgs);
+
         return $this->_getResultMessage($method, $ret);
     }
 
@@ -112,7 +113,8 @@ class DocumentLiteralWrapper
      *
      * @param string $method
      * @param object $document
-     * @throws UnexpectedValueException
+     * @throws \Zend\Soap\Exception\UnexpectedValueException
+     *
      * @return array
      */
     protected function _parseArguments($method, $document)
@@ -127,7 +129,7 @@ class DocumentLiteralWrapper
         $delegateArgs = array();
         foreach (get_object_vars($document) as $argName => $argValue) {
             if (!isset($params[$argName])) {
-                throw new UnexpectedValueException(sprintf(
+                throw new Exception\UnexpectedValueException(sprintf(
                     "Received unknown argument %s which is not an argument to %s::%s",
                     $argName,
                     get_class($this->object),
@@ -136,18 +138,33 @@ class DocumentLiteralWrapper
             }
             $delegateArgs[$params[$argName]->getPosition()] = $argValue;
         }
+
         return $delegateArgs;
     }
 
+    /**
+     * Returns result message content
+     *
+     * @param $method
+     * @param $ret
+     *
+     * @return array
+     */
     protected function _getResultMessage($method, $ret)
     {
         return array($method . 'Result' => $ret);
     }
 
+    /**
+     * @param $method
+     * @throws \Zend\Soap\Exception\BadMethodCallException
+     *
+     * @return void
+     */
     protected function _assertServiceDelegateHasMethod($method)
     {
         if (!$this->reflection->hasMethod($method)) {
-            throw new BadMethodCallException(sprintf(
+            throw new Exception\BadMethodCallException(sprintf(
                 "Method %s does not exist on delegate object %s",
                 $method,
                 get_class($this->object)
@@ -155,10 +172,16 @@ class DocumentLiteralWrapper
         }
     }
 
+    /**
+     * @param $args
+     * @throws \Zend\Soap\Exception\UnexpectedValueException
+     *
+     * @return void
+     */
     protected function _assertOnlyOneArgument($args)
     {
         if (count($args) != 1) {
-            throw new UnexpectedValueException(sprintf(
+            throw new Exception\UnexpectedValueException(sprintf(
                 "Expecting exactly one argument that is the document/literal wrapper, got %d",
                 count($args))
             );

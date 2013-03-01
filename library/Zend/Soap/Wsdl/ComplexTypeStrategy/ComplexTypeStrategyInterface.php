@@ -28,6 +28,7 @@ interface ComplexTypeStrategyInterface
      * Create a complex type based on a strategy
      *
      * @param  string $type
+     *
      * @return string XSD type
      */
     public function addComplexType($type);

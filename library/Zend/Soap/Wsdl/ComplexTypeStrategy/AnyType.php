@@ -15,6 +15,10 @@ namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
  */
 use Zend\Soap\Wsdl;
 
+/**
+ * Class AnyType
+ *
+ */
 class AnyType implements ComplexTypeStrategyInterface
 {
     /**
@@ -22,13 +26,14 @@ class AnyType implements ComplexTypeStrategyInterface
      *
      * @param \Zend\Soap\Wsdl $context
      */
-    public function setContext(\Zend\Soap\Wsdl $context)
+    public function setContext(Wsdl $context)
     {}
 
     /**
      * Returns xsd:anyType regardless of the input.
      *
      * @param string $type
+     *
      * @return string
      */
     public function addComplexType($type)

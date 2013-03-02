@@ -11,7 +11,7 @@ namespace Zend\Form;
 
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Config\Factory;
+use Zend\Form\Factory;
 
 /**
  * Abstract form factory.
@@ -51,20 +51,19 @@ class FormAbstractServiceFactory implements AbstractFactoryInterface
         $config = $serviceLocator->get('Config');
 
         if (isset($config['form'][$name])) {
-            return $this->createForm($config['form'][$name]);
-
+            return $this->createForm($serviceLocator, $config['form'][$name]);
         }
 
-        return $this->createForm($config['form'][$requestedName]);
+        return $this->createForm($serviceLocator, $config['form'][$requestedName]);
     }
 
     /**
      * @param array $spec
      * @return \Zend\Form\FormInterface
      */
-    public function createForm($spec = array())
+    public function createForm(ServiceLocatorInterface $serviceLocator, $spec = array())
     {
-        $factory = $this->getFormFactory();
+        $factory = $this->getFormFactory($serviceLocator);
         $form = $factory->create($spec);
         $form->setFormFactory($factory);
 
@@ -82,10 +81,13 @@ class FormAbstractServiceFactory implements AbstractFactoryInterface
     /**
      * @return \Zend\Form\Factory
      */
-    public function getFormFactory()
+    public function getFormFactory(ServiceLocatorInterface $serviceLocator)
     {
         if (null === $this->formFactory) {
-            $this->setFormFactory(new Factory());
+            $formElementManager = $serviceLocator->has('Zend\Form\FormElementManager')
+                ? $serviceLocator->get('Zend\Form\FormElementManager') : null;
+
+            $this->setFormFactory(new Factory($formElementManager));
         }
         return $this->formFactory;
     }

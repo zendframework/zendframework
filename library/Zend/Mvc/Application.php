@@ -129,11 +129,7 @@ class Application implements
         $defaultListeners = array(
             'RouteListener', 'DispatchListener', 'ViewManager', 'SendResponseListener');
 
-        foreach ($defaultListeners as $listener) {
-            if (!in_array($listener, $listeners)) {
-                $listeners[] = $listener;
-            }
-        }
+        $listeners = array_unique(array_merge($defaultListeners, $listeners));
 
         foreach ($listeners as $listener) {
             $events->attach($serviceManager->get($listener));

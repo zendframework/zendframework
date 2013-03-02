@@ -126,9 +126,13 @@ class Application implements
         $serviceManager = $this->serviceManager;
         $events         = $this->getEventManager();
 
-        if (empty($listeners)) {
-            $listeners = array(
-                    'RouteListener', 'DispatchListener', 'ViewManager', 'SendReponseListener');
+        $defaultListeners = array(
+            'RouteListener', 'DispatchListener', 'ViewManager', 'SendReponseListener');
+
+        foreach ($defaultListeners as $listener) {
+            if (!in_array($listener, $listeners)) {
+                $listeners[] = $listener;
+            }
         }
 
         foreach ($listeners as $listener) {

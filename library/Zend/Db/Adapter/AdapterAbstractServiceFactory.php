@@ -31,10 +31,9 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
 
         } else if (isset($config['db'][$requestedName])) {
             return true;
-
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -46,9 +45,8 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
 
         if (isset($config['db'][$name])) {
             return new Adapter($config['db'][$name]);
-
-        } else if (isset($config['db'][$requestedName])) {
-            return new Adapter($config['db'][$requestedName]);
         }
+
+        return new Adapter($config['db'][$requestedName]);
     }
 }

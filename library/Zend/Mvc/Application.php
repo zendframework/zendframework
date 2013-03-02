@@ -127,7 +127,7 @@ class Application implements
         $events         = $this->getEventManager();
 
         $defaultListeners = array(
-            'RouteListener', 'DispatchListener', 'ViewManager', 'SendReponseListener');
+            'RouteListener', 'DispatchListener', 'ViewManager', 'SendResponseListener');
 
         foreach ($defaultListeners as $listener) {
             if (!in_array($listener, $listeners)) {

@@ -38,10 +38,9 @@ class FormAbstractServiceFactory implements AbstractFactoryInterface
 
         } else if (isset($config['form'][$requestedName])) {
             return true;
-
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -54,12 +53,9 @@ class FormAbstractServiceFactory implements AbstractFactoryInterface
         if (isset($config['form'][$name])) {
             return $this->createForm($config['form'][$name]);
 
-        } else if (isset($config['form'][$requestedName])) {
-            return $this->createForm($config['form'][$requestedName]);
-
-        } else {
-            return $this->createForm();
         }
+
+        return $this->createForm($config['form'][$requestedName]);
     }
 
     /**

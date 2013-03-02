@@ -27,32 +27,21 @@ class FormAbstractServiceFactory implements AbstractFactoryInterface
     private $formFactory;
 
     /**
-     * @see \Zend\ServiceManager\AbstractFactoryInterface::canCreateServiceWithName()
+     * {@inheritDoc}
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $config = $serviceLocator->get('Config');
 
-        if (isset($config['form'][$name])) {
-            return true;
-
-        } else if (isset($config['form'][$requestedName])) {
-            return true;
-        }
-
-        return false;
+        return isset($config['form'][$requestedName]);
     }
 
     /**
-     * @see \Zend\ServiceManager\AbstractFactoryInterface::createServiceWithName()
+     * {@inheritDoc}
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $config = $serviceLocator->get('Config');
-
-        if (isset($config['form'][$name])) {
-            return $this->createForm($serviceLocator, $config['form'][$name]);
-        }
 
         return $this->createForm($serviceLocator, $config['form'][$requestedName]);
     }

@@ -34,10 +34,9 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
 
         } else if (isset($config['log'][$requestedName])) {
             return true;
-
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -52,12 +51,8 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
 
         if (isset($config['log'][$name])) {
             return new Logger($config['log'][$name]);
-
-        } else if (isset($config['log'][$requestedName])) {
-            return new Logger($config['log'][$requestedName]);
-
-        } else {
-            return new Logger();
         }
+
+        return new Logger($config['log'][$requestedName]);
     }
 }

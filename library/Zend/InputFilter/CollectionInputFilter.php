@@ -31,7 +31,7 @@ class CollectionInputFilter extends InputFilter
     /*
      * @var int
      */
-    protected $count;
+    protected $count = null;
 
     /*
      * @var array

@@ -237,6 +237,9 @@ class Factory
             if (isset($inputFilterSpecification['inputfilter'])) {
                 $inputFilter->setInputFilter($inputFilterSpecification['inputfilter']);
             }
+            if (isset($inputFilterSpecification['count'])) {
+                $inputFilter->setCount($inputFilterSpecification['count']);
+            }
             return $inputFilter;
         }
 

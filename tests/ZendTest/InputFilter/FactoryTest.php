@@ -413,4 +413,19 @@ class FactoryTest extends TestCase
         $test = $input->getFilterChain();
         $this->assertSame($chain, $test);
     }
+
+    public function testFactoryAcceptsCollectionInputFilter()
+    {
+        $factory = new Factory();
+
+        $inputFilter = $factory->createInputFilter(array(
+            'type'        => 'Zend\InputFilter\CollectionInputFilter',
+            'inputfilter' => new InputFilter(),
+            'count'       => 3
+        ));
+
+        $this->assertInstanceOf('Zend\InputFilter\CollectionInputFilter', $inputFilter);
+        $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter->getInputFilter());
+        $this->assertEquals(3, $inputFilter->getCount());
+    }
 }

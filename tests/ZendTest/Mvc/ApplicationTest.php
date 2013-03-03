@@ -663,18 +663,21 @@ class ApplicationTest extends TestCase
     public function testCustomListener()
     {
         $this->application->bootstrap(array('BootstrapListener'));
+
+        // must contains custom bootstrap listeners
         $bootstrapListener = $this->serviceManager->get('BootstrapListener');
         $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_BOOTSTRAP);
+        $bootstrapListeners = $bootstrapListener->getListeners();
+        $this->assertTrue($listeners->contains($bootstrapListeners[0]));
 
-        foreach ($listeners as $listener) {
-            $callback = $listener->getCallback();
+        // must contains default listeners
+        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_DISPATCH);
+        $this->assertEquals(1, count($listeners));
 
-            if ($callback[0] instanceof StubBootstrapListener) {
-                $this->assertSame($bootstrapListener, $callback[0]);
-                return;
-            }
-        }
+        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_ROUTE);
+        $this->assertEquals(1, count($listeners));
 
-        $this->fail('"BootstrapListener" not found in event manager');
+        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_FINISH);
+        $this->assertEquals(1, count($listeners));
     }
 }

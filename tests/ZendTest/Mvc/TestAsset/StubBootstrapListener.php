@@ -38,6 +38,11 @@ class StubBootstrapListener implements ListenerAggregateInterface
         }
     }
 
+    public function getListeners()
+    {
+        return $this->listeners;
+    }
+
     public function onBootstrap($e)
     {
     }

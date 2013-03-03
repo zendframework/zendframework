@@ -8,23 +8,25 @@
  */
 namespace ZendTest\Test\PHPUnit\Util;
 
-use Zend\Test\PHPUnit\Util\ModuleLoader;
+use PHPUnit_Framework_TestCase;
+use Zend\Test\Util\ModuleLoader;
 
-class ModuleLoaderTest extends ModuleLoader
+class ModuleLoaderTest extends PHPUnit_Framework_TestCase
 {
     public function testCanLoadModule()
     {
         require_once __DIR__ . '/../../_files/Baz/Module.php';
 
-        $this->loadModule('Baz');
-
-        $baz = $this->getModule('Baz');
+        $loader = new ModuleLoader(array('Baz'));
+        $baz = $loader->getModule('Baz');
         $this->assertTrue($baz instanceof \Baz\Module);
     }
 
     public function testCanLoadModuleWithPath()
     {
-        $this->loadModule(array('Baz' => __DIR__ . '/../../_files/Baz'));
+        $loader = new ModuleLoader(array('Baz' => __DIR__ . '/../../_files/Baz'));
+        $baz = $loader->getModule('Baz');
+        $this->assertTrue($baz instanceof \Baz\Module);
     }
 
     public function testCanLoadModules()
@@ -32,23 +34,29 @@ class ModuleLoaderTest extends ModuleLoader
         require_once __DIR__ . '/../../_files/Baz/Module.php';
         require_once __DIR__ . '/../../_files/modules-path/with-subdir/Foo/Module.php';
 
-        $this->loadModules(array('Baz', 'Foo'));
+        $loader = new ModuleLoader(array('Baz', 'Foo'));
+        $baz = $loader->getModule('Baz');
+        $this->assertTrue($baz instanceof \Baz\Module);
+        $foo = $loader->getModule('Foo');
+        $this->assertTrue($foo instanceof \Foo\Module);
     }
 
     public function testCanLoadModulesWithPath()
     {
-        $this->loadModules(array(
+        $loader = new ModuleLoader(array(
             'Baz' => __DIR__ . '/../../_files/Baz',
             'Foo' => __DIR__ . '/../../_files/modules-path/with-subdir/Foo',
         ));
 
-        $fooObject = $this->getServiceManager()->get('FooObject');
+        $fooObject = $loader->getServiceManager()->get('FooObject');
         $this->assertTrue($fooObject instanceof \stdClass);
     }
 
     public function testCanLoadModulesFromConfig()
     {
         $config = include __DIR__ . '/../../_files/application.config.php';
-        $this->loadModulesFromConfig($config);
+        $loader = new ModuleLoader($config);
+        $baz = $loader->getModule('Baz');
+        $this->assertTrue($baz instanceof \Baz\Module);
     }
 }

@@ -9,6 +9,11 @@
 
 namespace Zend\Soap;
 
+use DOMNode;
+use DOMDocument;
+use DOMDocumentFragment;
+use DOMElement;
+use DOMXPath;
 use Zend\Soap\Exception\InvalidArgumentException;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
 use Zend\Uri\Uri;
@@ -112,7 +117,7 @@ class Wsdl
      */
     protected function getDOMDocument($name, $uri = null)
     {
-        $dom = new \DOMDocument();
+        $dom = new DOMDocument();
         //@todo new option for debug mode ?
         $dom->preserveWhiteSpace    = false;
         $dom->formatOutput          = false;
@@ -164,11 +169,14 @@ class Wsdl
 
     /**
      * Set the class map of php to wsdl mappings..
+     *
+     * @return \Zend\Soap\Wsdl
      */
     public function setClassMap($classMap)
     {
         $this->classMap = $classMap;
-        //@todo return Wsdl?
+
+        return $this;
     }
 
     /**
@@ -189,12 +197,12 @@ class Wsdl
         $oldUri = $this->uri;
         $this->uri = $uri;
 
-        if ($this->dom instanceof \DOMDocument ) {
+        if ($this->dom instanceof DOMDocument ) {
             // namespace declarations are NOT true attributes so one must explicitly set on root element
             //                                                                  xmlns:tns = $uri
             $this->dom->documentElement->setAttributeNS(Wsdl::XML_NS_URI, Wsdl::XML_NS . ':' . Wsdl::TYPES_NS, $uri);
 
-            $xpath = new \DOMXPath($this->dom);
+            $xpath = new DOMXPath($this->dom);
             $xpath->registerNamespace('default',            Wsdl::WSDL_NS_URI);
 
             $xpath->registerNamespace(Wsdl::TYPES_NS,       $uri);
@@ -564,13 +572,13 @@ class Wsdl
      *
      * @return void
      */
-    public function addTypes($types)
+    public function addTypes(DOMNode $types)
     {
-        if ($types instanceof \DOMDocument) {
+        if ($types instanceof DOMDocument) {
             $dom = $this->dom->importNode($types->documentElement);
             $this->wsdl->appendChild($dom);
 
-        } elseif ($types instanceof \DOMNode || $types instanceof \DOMElement || $types instanceof \DOMDocumentFragment ) {
+        } elseif ($types instanceof DOMNode || $types instanceof DOMElement || $types instanceof DOMDocumentFragment ) {
             $dom = $this->dom->importNode($types);
             $this->wsdl->appendChild($dom);
         }

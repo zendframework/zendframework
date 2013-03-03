@@ -768,6 +768,8 @@ class WsdlTest extends WsdlTestHelper
             array('SomeType\\','SomeType'),
             array('\\SomeType\\','SomeType'),
             array('\\SomeNamespace\SomeType\\','SomeType'),
+            array('\\SomeNamespace\SomeType\\SomeOtherType','SomeOtherType'),
+            array('\\SomeNamespace\SomeType\\SomeOtherType\\YetAnotherType','YetAnotherType'),
         );
     }
 

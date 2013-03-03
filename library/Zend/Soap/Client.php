@@ -11,6 +11,7 @@ namespace Zend\Soap;
 
 use SoapClient;
 use SoapHeader;
+use Traversable;
 use Zend\Server\Client as ServerClient;
 use Zend\Stdlib\ArrayUtils;
 
@@ -98,7 +99,7 @@ class Client implements ServerClient
 
     /**
      * Array of SoapHeader objects
-     * @var array
+     * @var SoapHeader[]
      */
     protected $soapInputHeaders = array();
 
@@ -172,7 +173,7 @@ class Client implements ServerClient
      */
     public function setOptions($options)
     {
-        if ($options instanceof \Traversable) {
+        if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }
 

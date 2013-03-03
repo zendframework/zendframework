@@ -9,11 +9,13 @@
 
 namespace Zend\Soap\Exception;
 
+use InvalidArgumentException as SPLInvalidArgumentException;
+
 /**
  * Exception thrown when arguments to method are invalid
  *
  */
 class InvalidArgumentException
-    extends \InvalidArgumentException
+    extends SPLInvalidArgumentException
     implements ExceptionInterface
 {}

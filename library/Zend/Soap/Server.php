@@ -9,14 +9,22 @@
 
 namespace Zend\Soap;
 
+use SoapServer;
 use SoapFault;
+use Traversable;
+use DOMDocument;
+use DOMNode;
+use SimpleXMLElement;
+use ReflectionClass;
+use Zend\Soap\Exception;
+use Zend\Server\Server as ZendServerServer;
 use Zend\Stdlib\ArrayUtils;
 
 /**
  * Zend_Soap_Server
  *
  */
-class Server implements \Zend\Server\Server
+class Server implements ZendServerServer
 {
     /**
      * Actor URI
@@ -165,7 +173,7 @@ class Server implements \Zend\Server\Server
      */
     public function setOptions($options)
     {
-        if ($options instanceof \Traversable) {
+        if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }
 
@@ -726,13 +734,13 @@ class Server implements \Zend\Server\Server
     {
         $xml = null;
 
-        if ($request instanceof \DOMDocument) {
+        if ($request instanceof DOMDocument) {
             $xml = $request->saveXML();
 
-        } elseif ($request instanceof \DOMNode) {
+        } elseif ($request instanceof DOMNode) {
             $xml = $request->ownerDocument->saveXML();
 
-        } elseif ($request instanceof \SimpleXMLElement) {
+        } elseif ($request instanceof SimpleXMLElement) {
             $xml = $request->asXML();
 
         } elseif (is_object($request) || is_string($request)) {
@@ -745,7 +753,7 @@ class Server implements \Zend\Server\Server
 
             libxml_disable_entity_loader(true);
 
-            $dom = new \DOMDocument();
+            $dom = new DOMDocument();
             $loadStatus = $dom->loadXML($xml);
 
             //@todo check libxml errors ? validate document ?
@@ -827,7 +835,7 @@ class Server implements \Zend\Server\Server
     protected function _getSoap()
     {
         $options = $this->getOptions();
-        $server  = new \SoapServer($this->wsdl, $options);
+        $server  = new SoapServer($this->wsdl, $options);
 
         if (!empty($this->functions)) {
             $server->addFunction($this->functions);
@@ -891,11 +899,10 @@ class Server implements \Zend\Server\Server
         $fault          = false;
         $this->response = '';
 
-        if ($setRequestException instanceof \Exception) {
+        if (is_object($setRequestException) && is_subclass_of($setRequestException, 'Exception')) {
             // Create SOAP fault message if we've caught a request exception
             $fault = $this->fault($setRequestException->getMessage(), 'Sender');
-        }
-        if (!$setRequestException instanceof \Exception) {
+        } else {
             ob_start();
             try {
                 $soap->handle($this->request);
@@ -960,10 +967,8 @@ class Server implements \Zend\Server\Server
                 $this->registerFaultException($row);
             }
 
-        } elseif (is_string($class) && class_exists($class)
-            && is_subclass_of($class, 'Exception')
-        ) {
-            $ref = new \ReflectionClass($class);
+        } elseif (is_string($class) && class_exists($class) && is_subclass_of($class, 'Exception')) {
+            $ref = new ReflectionClass($class);
 
             $this->faultExceptions[] = $ref->getName();
             $this->faultExceptions = array_unique($this->faultExceptions);
@@ -985,7 +990,7 @@ class Server implements \Zend\Server\Server
      */
     public function isRegisteredAsFaultException($fault)
     {
-        $ref = new \ReflectionClass($fault);
+        $ref = new ReflectionClass($fault);
 
         $classNames = $ref->getName();
 
@@ -1037,7 +1042,7 @@ class Server implements \Zend\Server\Server
      */
     public function fault($fault = null, $code = 'Receiver')
     {
-        if ($fault instanceof \Exception) {
+        if (is_object($fault) && is_subclass_of($fault, 'Exception')) {
             if ($this->isRegisteredAsFaultException($fault)) {
                 $message = $fault->getMessage();
                 $eCode   = $fault->getCode();

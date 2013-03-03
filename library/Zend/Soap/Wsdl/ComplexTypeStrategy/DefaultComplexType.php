@@ -9,6 +9,7 @@
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
+use ReflectionClass;
 use Zend\Soap\Exception;
 use Zend\Soap\Wsdl;
 
@@ -40,7 +41,7 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
         }
 
         $dom = $this->getContext()->toDomDocument();
-        $class = new \ReflectionClass($type);
+        $class = new ReflectionClass($type);
 
         $soapTypeName = $this->getContext()->translateType($type);
         $soapType     = Wsdl::TYPES_NS . ':' . $soapTypeName;

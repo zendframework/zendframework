@@ -747,7 +747,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server->registerFaultException('\Zend\Soap\Exception\RuntimeException');
         $server->registerFaultException('\Zend\Soap\Exception\InvalidArgumentException');
         $fault = $server->fault(new \Zend\Soap\Exception\RuntimeException('MyException'));
-
         $this->assertTrue($fault instanceof \SoapFault);
         $this->assertNotContains('Unknown error', $fault->getMessage());
         $this->assertContains('MyException', $fault->getMessage());
@@ -937,6 +936,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
           .     '</SOAP-ENV:Body>'
           . '</SOAP-ENV:Envelope>' . "\n";
         $response = $server->handle($request);
+        var_dump($response->getMessage());
         $this->assertContains('Invalid XML', $response->getMessage());
     }
 

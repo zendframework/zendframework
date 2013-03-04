@@ -58,7 +58,7 @@ class ModuleLoader
      */
     public function getApplication()
     {
-        return $this->serviceManager->get('ModuleManager');
+        return $this->getServiceManager()->get('Application');
     }
 
     /**
@@ -67,7 +67,7 @@ class ModuleLoader
      */
     public function getModuleManager()
     {
-        return $this->serviceManager->get('ModuleManager');
+        return $this->getServiceManager()->get('ModuleManager');
     }
 
     /**
@@ -76,7 +76,7 @@ class ModuleLoader
      */
     public function getModule($moduleName)
     {
-        return $this->serviceManager->get('ModuleManager')->getModule($moduleName);
+        return $this->getModuleManager()->getModule($moduleName);
     }
 
     /**

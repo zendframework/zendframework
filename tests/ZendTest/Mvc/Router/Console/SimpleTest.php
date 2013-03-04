@@ -2,7 +2,6 @@
 namespace ZendTest\Mvc\Router\Console;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Http\Request;
 use Zend\Console\Request as ConsoleRequest;
 use Zend\Mvc\Router\Console\Simple;
 use ZendTest\Mvc\Router\FactoryTester;
@@ -27,6 +26,11 @@ class SimpleTestTest extends TestCase
                 '--foo --bar',
                 array('--foo','--bar'),
                 array('foo' => true, 'bar' => true)
+            ),
+            'mandatory-long-flag-match-with-zero-value' => array(
+                '--foo=',
+                array('--foo=0'),
+                array('foo' => 0)
             ),
             'mandatory-long-flag-mixed-order-match' => array(
                 '--foo --bar',
@@ -583,7 +587,6 @@ class SimpleTestTest extends TestCase
                     'baz' => true
                 )
             ),
-
             /*'combined-2' => array(
                 '--foo --bar',
                 array('a','b', 'c', '--foo', '--bar'),

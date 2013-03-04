@@ -21,7 +21,7 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
         $baz = $loader->getModule('Baz');
         $this->assertTrue($baz instanceof \Baz\Module);
     }
-    
+
     public function testCanNotLoadModule()
     {
         $this->setExpectedException('Zend\ModuleManager\Exception\RuntimeException', 'could not be initialized');
@@ -65,11 +65,11 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
         $baz = $loader->getModule('Baz');
         $this->assertTrue($baz instanceof \Baz\Module);
     }
-    
+
     public function testCanGetService()
     {
         $loader = new ModuleLoader(array('Baz' => __DIR__ . '/../../_files/Baz'));
-        
+
         $this->assertInstanceOf(
             'Zend\ServiceManager\ServiceLocatorInterface',
             $loader->getServiceManager()

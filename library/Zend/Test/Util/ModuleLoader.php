@@ -22,28 +22,24 @@ class ModuleLoader
      * Load list of modules or application configuration
      * @param array $modules
      */
-    public function __construct(array $modules)
+    public function __construct(array $configuration)
     {
-        if (!isset($modules['modules'])) {
-            $modulesPath = array();
-            $modulesList = array();
-
-            foreach ($modules as $key => $module) {
-                if (is_numeric($key)) {
-                    $modulesList[] = $module;
-                    continue;
-                }
-                $modulesList[] = $key;
-                $modulesPath[$key] = $module;
-            }
+        if (!isset($configuration['modules'])) {
+            $modules = $configuration;
             $configuration = array(
                 'module_listener_options' => array(
-                    'module_paths' => $modulesPath,
+                    'module_paths' => array(),
                 ),
-                'modules' => $modulesList,
+                'modules' => array(),
             );
-        } else {
-            $configuration = $modules;
+            foreach ($modules as $key => $module) {
+                if (is_numeric($key)) {
+                    $configuration['modules'][] = $module;
+                    continue;
+                }
+                $configuration['modules'][] = $key;
+                $configuration['module_listener_options']['module_paths'][$key] = $module;
+            }
         }
 
         $smConfig = isset($configuration['service_manager']) ? $configuration['service_manager'] : array();

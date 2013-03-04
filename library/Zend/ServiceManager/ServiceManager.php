@@ -226,7 +226,7 @@ class ServiceManager implements ServiceLocatorInterface
             if ($this->allowOverride === false) {
                 throw new Exception\InvalidServiceNameException(sprintf(
                     'A service by the name or alias "%s" already exists and cannot be overridden; please use an alternate name',
-                    $cName
+                    $name
                 ));
             }
             $this->unregisterService($cName);
@@ -266,7 +266,7 @@ class ServiceManager implements ServiceLocatorInterface
             if ($this->allowOverride === false) {
                 throw new Exception\InvalidServiceNameException(sprintf(
                     'A service by the name or alias "%s" already exists and cannot be overridden, please use an alternate name',
-                    $cName
+                    $name
                 ));
             }
             $this->unregisterService($cName);

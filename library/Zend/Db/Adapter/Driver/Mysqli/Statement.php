@@ -220,7 +220,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     /**
      * Execute
      *
-     * @param  ParameterContainer $parameters
+     * @param  ParameterContainer|array $parameters
      * @throws Exception\RuntimeException
      * @return mixed
      */

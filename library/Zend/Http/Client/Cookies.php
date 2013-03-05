@@ -328,7 +328,7 @@ class Cookies
      * of the cookie.
      *
      * @param Response $response HTTP Response object
-     * @param Uri\Uri|string $uri The requested URI
+     * @param Uri\Uri|string $refUri The requested URI
      * @return Cookies
      * @todo Add the $uri functionality.
      */

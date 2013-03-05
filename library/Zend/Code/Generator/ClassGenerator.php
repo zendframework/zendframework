@@ -486,7 +486,8 @@ class ClassGenerator extends AbstractGenerator
     /**
      * Add a class to "use" classes
      *
-     * @param  string $useClass
+     * @param string $use
+     * @param string|null $useAlias
      */
     public function addUse($use, $useAlias = null)
     {

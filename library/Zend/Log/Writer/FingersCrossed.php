@@ -100,9 +100,10 @@ class FingersCrossed extends AbstractWriter
     }
 
     /**
-     * Set a new formatter for this writer
+     * Set a new writer
      *
-     * @param  string|Formatter\FormatterInterface $formatter
+     * @param  string|WriterInterface $writer
+     * @param  array|null $options
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -114,7 +115,7 @@ class FingersCrossed extends AbstractWriter
 
         if (!$writer instanceof WriterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                    'Formatter must implement %s\Formatter\FormatterInterface; received "%s"',
+                    'Writer must implement %s\WriterInterface; received "%s"',
                     __NAMESPACE__,
                     is_object($writer) ? get_class($writer) : gettype($writer)
             ));
@@ -141,7 +142,7 @@ class FingersCrossed extends AbstractWriter
      * Set writer plugin manager
      *
      * @param  string|WriterPluginManager $plugins
-     * @return Logger
+     * @return FingersCrossed
      * @throws Exception\InvalidArgumentException
      */
     public function setWriterPluginManager($plugins)

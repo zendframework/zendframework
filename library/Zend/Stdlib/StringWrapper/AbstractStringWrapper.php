@@ -139,7 +139,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
     /**
      * Wraps a string to a given number of characters
      *
-     * @param  string  $str
+     * @param  string  $string
      * @param  integer $width
      * @param  string  $break
      * @param  boolean $cut

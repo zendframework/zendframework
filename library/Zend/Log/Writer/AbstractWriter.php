@@ -284,6 +284,7 @@ abstract class AbstractWriter implements WriterInterface
      * Set a new formatter for this writer
      *
      * @param  string|Formatter\FormatterInterface $formatter
+     * @param  array|null $options
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -308,7 +309,7 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Set convert write errors to exception flag
      *
-     * @param bool $ignoreWriteErrors
+     * @param bool $convertErrors
      */
     public function setConvertWriteErrorsToExceptions($convertErrors)
     {

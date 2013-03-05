@@ -9,7 +9,7 @@
 
 namespace Zend\Session\Storage\SessionArrayStorage;
 
-namespace Zend\Session\Storage\AbstractSessionArrayStorage;
+use Zend\Session\Storage\AbstractSessionArrayStorage;
 
 /**
  * PHP 5.3.3 variant of SessionArrayStorage

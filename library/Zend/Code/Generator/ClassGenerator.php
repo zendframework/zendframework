@@ -486,15 +486,18 @@ class ClassGenerator extends AbstractGenerator
     /**
      * Add a class to "use" classes
      *
-     * @param string $use
-     * @param string|null $useAlias
+     * @param  string $use
+     * @param  string|null $useAlias
+     * @return ClassGenerator
      */
     public function addUse($use, $useAlias = null)
     {
         if (!empty($useAlias)) {
             $use .= ' as ' . $useAlias;
         }
+        
         $this->uses[] = $use;
+        return $this;
     }
 
     /**

@@ -7,9 +7,19 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
+namespace Zend\Session\Storage;
+
 if (version_compare(PHP_VERSION, '5.3.4', 'lt')) {
     class_alias('Zend\Session\Storage\SessionArrayStorage\PhpLegacyCompatibility', 'Zend\Session\Storage\SessionArrayStorage');
 } else {
     class_alias('Zend\Session\Storage\SessionArrayStorage\PhpReferenceCompatibility', 'Zend\Session\Storage\SessionArrayStorage');
 }
 
+__halt_compiler();
+
+/**
+ * Class stub to force classmap generation
+ */
+class SessionArrayStorage extends AbstractSessionArrayStorage
+{
+}

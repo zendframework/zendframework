@@ -7,8 +7,19 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
+namespace Zend\Session;
+
 if (version_compare(PHP_VERSION, '5.3.4', 'lt')) {
     class_alias('Zend\Session\Container\PhpLegacyCompatibility', 'Zend\Session\Container');
 } else {
     class_alias('Zend\Session\Container\PhpReferenceCompatibility', 'Zend\Session\Container');
+}
+
+__halt_compiler();
+
+/**
+ * Class stub to force classmap generation
+ */
+class Container extends AbstractContainer
+{
 }

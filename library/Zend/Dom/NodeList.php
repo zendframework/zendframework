@@ -167,6 +167,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
     /**
      * ArrayAccess: offset exists
      *
+     * @param int $key
      * @return bool
      */
     public function offsetExists($key)
@@ -180,6 +181,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
     /**
      * ArrayAccess: get offset
      *
+     * @param int $key
      * @return mixed
      */
     public function offsetGet($key)

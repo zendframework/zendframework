@@ -9,7 +9,7 @@
 
 /**
  * If the version is less than 5.3.4, we'll use Zend\Stdlib\ArrayObject\PhpLegacyCompatibility
- * which extend sthe native PHP ArrayObject implementation. For versions greater than or equal
+ * which extends the native PHP ArrayObject implementation. For versions greater than or equal
  * to 5.3.4, we'll use Zend\Stdlib\ArrayObject\PhpReferenceCompatibility, which corrects
  * issues with how PHP handles references inside ArrayObject.
  * 

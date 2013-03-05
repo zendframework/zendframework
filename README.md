@@ -13,6 +13,27 @@ DD MMM YYYY
 
 ### UPDATES IN 2.1.4
 
+Better polyfill support in `Zend\Session` and `Zend\Stdlib`. Polyfills
+(version-specific class replacements) have caused some issues in the 2.1 series.
+In particular, users who were not using Composer were unaware/uncertain about
+what extra files needed to be included to load polyfills, and those users who
+were generating classmaps were running into issues since the same class was
+being generated twice.
+
+New polyfill support was created which does the following:
+
+- A stub class file was created for each class needing polyfill support. A
+  conditional is present in each that uses `class_alias` to alias an appropriate
+  version-specific class to the class requested. A stub class is created in each
+  stub following a `__halt_compiler()` directive to ensure that classmap
+  generators will pick up the "class" and put it in the map.
+- New, uniquely named classes were created for each polyfill.
+- `Zend\File\ClassFileLocator` was altered to look for class definitions
+  following a `halt_compiler()` directive.
+
+The only issue discovered so far is that you cannot use PHPUnit's mock object
+generator to mock a class that only exists via `class_alias`.
+
 Please see [CHANGELOG.md](CHANGELOG.md).
 
 ### SYSTEM REQUIREMENTS

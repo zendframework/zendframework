@@ -224,7 +224,6 @@ class FileGenerator extends AbstractGenerator
         }
 
         $this->docBlock = $docBlock;
-
         return $this;
     }
 

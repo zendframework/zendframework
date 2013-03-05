@@ -239,7 +239,6 @@ class ClassGenerator extends AbstractGenerator
         }
 
         $this->name = $name;
-
         return $this;
     }
 
@@ -331,7 +330,6 @@ class ClassGenerator extends AbstractGenerator
     public function addFlag($flag)
     {
         $this->setFlags($this->flags | $flag);
-
         return $this;
     }
 
@@ -342,7 +340,6 @@ class ClassGenerator extends AbstractGenerator
     public function removeFlag($flag)
     {
         $this->setFlags($this->flags & ~$flag);
-
         return $this;
     }
 
@@ -387,7 +384,6 @@ class ClassGenerator extends AbstractGenerator
     public function setExtendedClass($extendedClass)
     {
         $this->extendedClass = $extendedClass;
-
         return $this;
     }
 
@@ -406,7 +402,6 @@ class ClassGenerator extends AbstractGenerator
     public function setImplementedInterfaces(array $implementedInterfaces)
     {
         $this->implementedInterfaces = $implementedInterfaces;
-
         return $this;
     }
 
@@ -479,7 +474,6 @@ class ClassGenerator extends AbstractGenerator
         }
 
         $this->properties[$propertyName] = $property;
-
         return $this;
     }
 
@@ -606,7 +600,6 @@ class ClassGenerator extends AbstractGenerator
         }
 
         $this->methods[$methodName] = $method;
-
         return $this;
     }
 

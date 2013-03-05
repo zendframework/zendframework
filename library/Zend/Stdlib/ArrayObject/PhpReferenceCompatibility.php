@@ -189,7 +189,7 @@ class PhpReferenceCompatibility implements IteratorAggregate, ArrayAccess, Seria
             throw new Exception\InvalidArgumentException('Passed variable is not an array or object, using empty array instead');
         }
 
-        if (is_object($data) && ($data instanceof ArrayObject || $data instanceof \ArrayObject)) {
+        if (is_object($data) && ($data instanceof self || $data instanceof \ArrayObject)) {
             $data = $data->getArrayCopy();
         }
         if (!is_array($data)) {

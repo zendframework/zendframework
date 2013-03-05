@@ -115,7 +115,7 @@ class DateFormat extends AbstractHelper
         $pattern  = null
     ) {
         if ($locale === null) {
-            $locale = $this->getlocale();
+            $locale = $this->getLocale();
         }
 
         $timezone    = $this->getTimezone();

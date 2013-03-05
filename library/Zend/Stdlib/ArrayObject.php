@@ -74,6 +74,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
     /**
      * Returns whether the requested key exists
      *
+     * @param  mixed $key
      * @return boolean
      */
     public function __isset($key)
@@ -276,6 +277,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
     /**
      * Returns whether the requested key exists
      *
+     * @param  mixed $key
      * @return boolean
      */
     public function offsetExists($key)
@@ -315,6 +317,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
     /**
      * Unsets the value at the specified key
      *
+     * @param  mixed $key
      * @return void
      */
     public function offsetUnset($key)

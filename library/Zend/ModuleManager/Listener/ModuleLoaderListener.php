@@ -122,7 +122,7 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
      *
      * Unregisters the ModuleLoader and generates the module class map cache.
      *
-     * @param  ModuleEvent $e
+     * @param  ModuleEvent $event
      */
     public function onLoadModulesPost(ModuleEvent $event)
     {

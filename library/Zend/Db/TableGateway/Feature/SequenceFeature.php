@@ -32,7 +32,8 @@ class SequenceFeature extends AbstractFeature
 
 
     /**
-     * @param null $sequence
+     * @param string $primaryKeyField
+     * @param string $sequenceName
      */
     public function __construct($primaryKeyField, $sequenceName)
     {

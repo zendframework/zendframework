@@ -34,7 +34,7 @@ class UriNormalize extends AbstractFilter
     /**
      * Sets filter options
      *
-     * @param  string|array|\Zend\Config\Config $options
+     * @param  array|\Traversable|null $options
      * @return void
      */
     public function __construct($options = null)

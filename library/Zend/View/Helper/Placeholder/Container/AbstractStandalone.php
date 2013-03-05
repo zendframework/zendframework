@@ -99,6 +99,7 @@ abstract class AbstractStandalone
      *
      * Lazy-loads one if none available
      *
+     * @param  string|null $enc Encoding to use
      * @return mixed
      */
     public function getEscaper($enc = 'UTF-8')

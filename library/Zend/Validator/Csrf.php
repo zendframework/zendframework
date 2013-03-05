@@ -11,7 +11,8 @@ namespace Zend\Validator;
 
 use Traversable;
 use Zend\Math\Rand;
-use Zend\Session\AbstractContainer as SessionContainer;
+use Zend\Session\AbstractContainer;
+use Zend\Session\Container as SessionContainer;
 use Zend\Stdlib\ArrayUtils;
 
 class Csrf extends AbstractValidator
@@ -58,7 +59,7 @@ class Csrf extends AbstractValidator
     protected $salt = 'salt';
 
     /**
-     * @var SessionContainer
+     * @var AbstractContainer
      */
     protected $session;
 
@@ -152,10 +153,10 @@ class Csrf extends AbstractValidator
     /**
      * Set session container
      *
-     * @param  SessionContainer $session
+     * @param  AbstractContainer $session
      * @return Csrf
      */
-    public function setSession(SessionContainer $session)
+    public function setSession(AbstractContainer $session)
     {
         $this->session = $session;
         if ($this->hash) {
@@ -169,13 +170,13 @@ class Csrf extends AbstractValidator
      *
      * Instantiate session container if none currently exists
      *
-     * @return SessionContainer
+     * @return AbstractContainer
      */
     public function getSession()
     {
         if (null === $this->session) {
             // Using fully qualified name, to ensure polyfill class alias is used
-            $this->session = new \Zend\Session\Container($this->getSessionName());
+            $this->session = new SessionContainer($this->getSessionName());
         }
         return $this->session;
     }

@@ -7,11 +7,13 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Session\Storage;
+namespace Zend\Session\Storage\SessionArrayStorage;
+
+namespace Zend\Session\Storage\AbstractSessionArrayStorage;
 
 /**
  * PHP 5.3.3 variant of SessionArrayStorage
  */
-class SessionArrayStorage extends AbstractSessionArrayStorage
+class PhpLegacyCompatibility extends AbstractSessionArrayStorage
 {
 }

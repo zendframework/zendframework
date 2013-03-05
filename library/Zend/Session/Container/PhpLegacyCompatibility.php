@@ -7,11 +7,13 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Session;
+namespace Zend\Session\Container;
+
+use Zend\Session\AbstractContainer;
 
 /**
  * Session storage container for PHP 5.3.3 and less
  */
-class Container extends AbstractContainer
+class PhpLegacyCompatibility extends AbstractContainer
 {
 }

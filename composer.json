@@ -27,10 +27,7 @@
         "psr-0": {
             "Zend\\": "library/",
             "ZendTest\\": "tests/"
-        },
-        "files": [
-            "library/Zend/Session/compatibility/autoload.php"
-        ]
+        }
     },
     "bin": [
         "bin/classmap_generator.php"

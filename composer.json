@@ -29,7 +29,6 @@
             "ZendTest\\": "tests/"
         },
         "files": [
-            "library/Zend/Stdlib/compatibility/autoload.php",
             "library/Zend/Session/compatibility/autoload.php"
         ]
     },

@@ -652,8 +652,8 @@ class Simple implements RouteInterface
             /**
              * Try to retrieve value if it is expected
              */
-            if (null === $value && $part['hasValue']) {
-                if ($x < count($params)+1) {
+            if ((null === $value || "" === $value) && $part['hasValue']) {
+                if ($x < count($params)+1 && isset($params[$x])) {
                     // retrieve value from adjacent param
                     $value = $params[$x];
 

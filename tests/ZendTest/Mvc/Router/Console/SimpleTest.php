@@ -602,8 +602,7 @@ class SimpleTestTest extends TestCase
 
         );
     }
-
-
+    
     /**
      * @dataProvider routeProvider
      * @param        string         $routeDefinition
@@ -630,6 +629,16 @@ class SimpleTestTest extends TestCase
                 );
             }
         }
+    }
+    
+    public function testCanNotMatchingWithEmtpyMandatoryParam()
+    {
+        $arguments = array('--foo=');
+        array_unshift($arguments,'scriptname.php');
+        $request = new ConsoleRequest($arguments);
+        $route = new Simple('--foo=');
+        $match = $route->match($request);
+        $this->assertEquals(null, $match);
     }
 
     /**
@@ -666,8 +675,7 @@ class SimpleTestTest extends TestCase
         $this->setExpectedException($exceptionName, $exceptionMessage);
         new Simple($route);
     }
-
-
+    
     public function testFactory()
     {
         $tester = new FactoryTester($this);

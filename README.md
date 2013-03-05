@@ -32,6 +32,9 @@ New polyfill support was created which does the following:
   following a `halt_compiler()` directive. This ensures that
   `bin/classmap_generator.php` will discover the stub class files and use them
   in the generated classmaps.
+- The `compatibility/autoload.php` files in each component affected was altered
+  to trigger an `E_USER_DEPRECATED` error asking the user to remove the require
+  statement for the file.
 
 The only issue discovered so far is that mock objects generated via PHPUnit that
 have typehinted arguments referencing the aliased class may not work. In most

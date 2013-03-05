@@ -508,7 +508,7 @@ class Response extends AbstractMessage implements ResponseInterface
          * Some servers (IIS ?) send a broken deflate response, without the
          * RFC-required zlib header.
          *
-         * We try to detect the zlib header, and if it does not exsit we
+         * We try to detect the zlib header, and if it does not exist we
          * teat the body is plain DEFLATE content.
          *
          * This method was adapted from PEAR HTTP_Request2 by (c) Alexey Borzov

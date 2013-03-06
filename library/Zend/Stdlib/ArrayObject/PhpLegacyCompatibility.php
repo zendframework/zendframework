@@ -19,7 +19,7 @@ use ArrayObject as PhpArrayObject;
  * simply extends the PHP ArrayObject implementation, and provides default
  * behavior in the constructor.
  */
-class PhpLegacyCompatibility extends PhpArrayObject
+abstract class PhpLegacyCompatibility extends PhpArrayObject
 {
     /**
      * Constructor

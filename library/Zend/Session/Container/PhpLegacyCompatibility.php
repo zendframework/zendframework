@@ -14,6 +14,6 @@ use Zend\Session\AbstractContainer;
 /**
  * Session storage container for PHP 5.3.3 and less
  */
-class PhpLegacyCompatibility extends AbstractContainer
+abstract class PhpLegacyCompatibility extends AbstractContainer
 {
 }

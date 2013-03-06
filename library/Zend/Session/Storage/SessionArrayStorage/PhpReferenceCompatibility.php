@@ -14,7 +14,7 @@ use Zend\Session\Storage\AbstractSessionArrayStorage;
 /**
  * PHP 5.3.4 and greater variant of SessionArrayStorage
  */
-class PhpReferenceCompatibility extends AbstractSessionArrayStorage
+abstract class PhpReferenceCompatibility extends AbstractSessionArrayStorage
 {
     /**
      * Get Offset

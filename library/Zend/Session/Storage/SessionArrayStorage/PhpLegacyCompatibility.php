@@ -14,6 +14,6 @@ use Zend\Session\Storage\AbstractSessionArrayStorage;
 /**
  * PHP 5.3.3 variant of SessionArrayStorage
  */
-class PhpLegacyCompatibility extends AbstractSessionArrayStorage
+abstract class PhpLegacyCompatibility extends AbstractSessionArrayStorage
 {
 }

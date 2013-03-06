@@ -14,7 +14,7 @@ use Zend\Session\AbstractContainer;
 /**
  * Session storage container for PHP 5.3.4 and above.
  */
-class PhpReferenceCompatibility extends AbstractContainer
+abstract class PhpReferenceCompatibility extends AbstractContainer
 {
     /**
      * Retrieve a specific key in the container

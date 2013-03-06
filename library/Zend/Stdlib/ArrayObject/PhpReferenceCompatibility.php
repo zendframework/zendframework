@@ -23,7 +23,7 @@ use Zend\Stdlib\Exception;
  * are unable to unset multi-dimensional arrays because you
  * need to fetch the properties / lists as references.
  */
-class PhpReferenceCompatibility implements IteratorAggregate, ArrayAccess, Serializable, Countable
+abstract class PhpReferenceCompatibility implements IteratorAggregate, ArrayAccess, Serializable, Countable
 {
     /**
      * Properties of the object have their normal functionality

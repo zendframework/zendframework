@@ -22,27 +22,16 @@ being generated twice.
 
 New polyfill support was created which does the following:
 
+- New, uniquely named classes were created for each polyfill base.
 - A stub class file was created for each class needing polyfill support. A
-  conditional is present in each that uses `class_alias` to alias an appropriate
-  version-specific class to the class requested. A stub class was created in each
-  stub file following a `__halt_compiler()` directive to ensure that classmap
-  generators will pick up the "class" and put it in the map.
-- New, uniquely named classes were created for each polyfill.
-- `Zend\File\ClassFileLocator` was altered to look for class definitions
-  following a `halt_compiler()` directive. This ensures that
-  `bin/classmap_generator.php` will discover the stub class files and use them
-  in the generated classmaps.
+  conditional is present in each that uses `class_alias` to alias the appropriate
+  polyfill base as an import. The stub class then extends the base.
 - The `compatibility/autoload.php` files in each component affected was altered
   to trigger an `E_USER_DEPRECATED` error asking the user to remove the require
   statement for the file.
 
-The only issue discovered so far is that mock objects generated via PHPUnit that
-have typehinted arguments referencing the aliased class may not work. In most
-situations, typehinting on the common abstract class or interface was done to
-ensure functionality is preserved.
-
 The functionality works with both Composer and ZF2's autoloading support, using
-either PSR-0 or classmaps.
+either PSR-0 or classmaps. All typehinting is preserved.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

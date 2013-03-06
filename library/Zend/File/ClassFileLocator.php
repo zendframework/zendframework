@@ -144,24 +144,6 @@ class ClassFileLocator extends FilterIterator
                         }
                     }
                     break;
-                case T_HALT_COMPILER:
-                    for ($i++; $i < $count; $i++) {
-                        $token = $tokens[$i];
-                        if (is_string($token)) {
-                            continue;
-                        }
-                        list($type, $content, $line) = $token;
-                        if (T_INLINE_HTML == $type) {
-                            $matches = array();
-                            if (!preg_match('/^class (?P<class>[a-z][a-z0-9_]*)(?>(?> extends \\?[a-zA-Z][a-zA-Z0-9\_]*)?(?: implements (\\?[a-zA-Z][a-zA-Z0-9\_]*(,\s*)?)?)?)\s*{?/mi', $content, $matches)) {;
-                                break;
-                            }
-                            $class = (null === $namespace) ? $matches['class'] : $namespace . '\\' . $matches['class'];
-                            $file->addClass($class);
-                            $namespace = null;
-                        }
-                    }
-                    break;
                 default:
                     break;
             }

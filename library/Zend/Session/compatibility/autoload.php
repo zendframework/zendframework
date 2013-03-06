@@ -1,11 +1,14 @@
 <?php
-if (version_compare(PHP_VERSION, '5.3.4', 'lt')) {
-    if (!class_exists('Zend\Stdlib\ArrayObject', false)
-        && file_exists(__DIR__ . '/../../Stdlib/compatibility/autoload.php')
-    ) {
-        require __DIR__ . '/../../Stdlib/compatibility/autoload.php';
-    }
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @deprecated
+ */
 
-    require_once __DIR__ . '/Container.php';
-    require_once __DIR__ . '/Storage/SessionArrayStorage.php';
-}
+/**
+ * Legacy purposes only, to prevent code that references it from breaking.
+ */
+trigger_error('Polyfill autoload support (file library/Zend/Session/compatibility/autoload.php) is no longer necessary; please remove your require statement referencing this file', E_USER_DEPRECATED);

@@ -12,7 +12,7 @@ namespace Zend\Session\Storage\SessionArrayStorage;
 use Zend\Session\Storage\AbstractSessionArrayStorage;
 
 /**
- * Session storage in $_SESSION
+ * PHP 5.3.4 and greater variant of SessionArrayStorage
  */
 class PhpReferenceCompatibility extends AbstractSessionArrayStorage
 {

@@ -10,16 +10,19 @@
 namespace Zend\Session;
 
 if (version_compare(PHP_VERSION, '5.3.4', 'lt')) {
-    class_alias('Zend\Session\Container\PhpLegacyCompatibility', 'Zend\Session\Container');
+    class_alias('Zend\Session\Container\PhpLegacyCompatibility', 'Zend\Session\AbstractBaseContainer');
 } else {
-    class_alias('Zend\Session\Container\PhpReferenceCompatibility', 'Zend\Session\Container');
+    class_alias('Zend\Session\Container\PhpReferenceCompatibility', 'Zend\Session\AbstractBaseContainer');
 }
 
-__halt_compiler();
-
 /**
- * Class stub to force classmap generation
+ * Session storage container
+ *
+ * Allows for interacting with session storage in isolated containers, which
+ * may have their own expiries, or even expiries per key in the container.
+ * Additionally, expiries may be absolute TTLs or measured in "hops", which
+ * are based on how many times the key or container were accessed.
  */
-class Container extends AbstractContainer
+class Container extends AbstractBaseContainer
 {
 }

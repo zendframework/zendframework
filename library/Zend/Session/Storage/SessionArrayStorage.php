@@ -10,16 +10,14 @@
 namespace Zend\Session\Storage;
 
 if (version_compare(PHP_VERSION, '5.3.4', 'lt')) {
-    class_alias('Zend\Session\Storage\SessionArrayStorage\PhpLegacyCompatibility', 'Zend\Session\Storage\SessionArrayStorage');
+    class_alias('Zend\Session\Storage\SessionArrayStorage\PhpLegacyCompatibility', 'Zend\Session\Storage\AbstractBaseSessionArrayStorage');
 } else {
-    class_alias('Zend\Session\Storage\SessionArrayStorage\PhpReferenceCompatibility', 'Zend\Session\Storage\SessionArrayStorage');
+    class_alias('Zend\Session\Storage\SessionArrayStorage\PhpReferenceCompatibility', 'Zend\Session\Storage\AbstractBaseSessionArrayStorage');
 }
 
-__halt_compiler();
-
 /**
- * Class stub to force classmap generation
+ * Session storage in $_SESSION
  */
-class SessionArrayStorage extends AbstractSessionArrayStorage
+class SessionArrayStorage extends AbstractBaseSessionArrayStorage
 {
 }

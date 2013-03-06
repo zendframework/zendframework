@@ -12,12 +12,7 @@ namespace Zend\Session\Container;
 use Zend\Session\AbstractContainer;
 
 /**
- * Session storage container
- *
- * Allows for interacting with session storage in isolated containers, which
- * may have their own expiries, or even expiries per key in the container.
- * Additionally, expiries may be absolute TTLs or measured in "hops", which
- * are based on how many times the key or container were accessed.
+ * Session storage container for PHP 5.3.4 and above.
  */
 class PhpReferenceCompatibility extends AbstractContainer
 {

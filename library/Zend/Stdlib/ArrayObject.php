@@ -19,16 +19,16 @@ namespace Zend\Stdlib;
  * and from this point forward, that alias will be used.
  */
 if (version_compare(PHP_VERSION, '5.3.4', 'lt')) {
-    class_alias('Zend\Stdlib\ArrayObject\PhpLegacyCompatibility', 'Zend\Stdlib\ArrayObject');
+    class_alias('Zend\Stdlib\ArrayObject\PhpLegacyCompatibility', 'Zend\Stdlib\AbstractArrayObject');
 } else {
-    class_alias('Zend\Stdlib\ArrayObject\PhpReferenceCompatibility', 'Zend\Stdlib\ArrayObject');
+    class_alias('Zend\Stdlib\ArrayObject\PhpReferenceCompatibility', 'Zend\Stdlib\AbstractArrayObject');
 }
 
-__halt_compiler();
-
 /**
- * Class stub to force classmap generation
+ * Custom framework ArrayObject implementation
+ *
+ * Extends version-specific "abstract" implementation.
  */
-class ArrayObject extends \ArrayObject
+class ArrayObject extends AbstractArrayObject
 {
 }

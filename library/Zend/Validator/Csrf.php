@@ -11,7 +11,6 @@ namespace Zend\Validator;
 
 use Traversable;
 use Zend\Math\Rand;
-use Zend\Session\AbstractContainer;
 use Zend\Session\Container as SessionContainer;
 use Zend\Stdlib\ArrayUtils;
 
@@ -59,7 +58,7 @@ class Csrf extends AbstractValidator
     protected $salt = 'salt';
 
     /**
-     * @var AbstractContainer
+     * @var SessionContainer
      */
     protected $session;
 
@@ -153,10 +152,10 @@ class Csrf extends AbstractValidator
     /**
      * Set session container
      *
-     * @param  AbstractContainer $session
+     * @param  SessionContainer $session
      * @return Csrf
      */
-    public function setSession(AbstractContainer $session)
+    public function setSession(SessionContainer $session)
     {
         $this->session = $session;
         if ($this->hash) {
@@ -170,7 +169,7 @@ class Csrf extends AbstractValidator
      *
      * Instantiate session container if none currently exists
      *
-     * @return AbstractContainer
+     * @return SessionContainer
      */
     public function getSession()
     {

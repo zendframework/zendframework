@@ -100,7 +100,7 @@ class Oracle implements PlatformInterface
      */
     public function quoteValue($value)
     {
-        return '\'' . str_replace('\'', '\\' . '\'', $value) . '\'';
+        return '\'' . addcslashes($value, '\\\'') . '\'';
     }
 
     /**
@@ -111,11 +111,15 @@ class Oracle implements PlatformInterface
      */
     public function quoteValueList($valueList)
     {
-        $valueList = str_replace('\'', '\\' . '\'', $valueList);
         if (is_array($valueList)) {
-            $valueList = implode('\', \'', $valueList);
+            $value = reset($valueList);
+            do {
+                $valueList[key($valueList)] = addcslashes($value, '\\\'');
+            } while ($value = next($valueList));
+            return '\'' . implode('\', \'', $valueList) . '\'';
+        } else {
+            return '\'' . addcslashes($valueList, '\\\'') . '\'';
         }
-        return '\'' . $valueList . '\'';
     }
 
     /**

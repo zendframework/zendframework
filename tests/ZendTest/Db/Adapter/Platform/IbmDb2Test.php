@@ -87,6 +87,11 @@ class IbmDb2Test extends \PHPUnit_Framework_TestCase
     public function testQuoteValue()
     {
         $this->assertEquals("'value'", $this->platform->quoteValue('value'));
+        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValue("Foo O'Bar"));
+        $this->assertEquals('\'\\\'; DELETE FROM some_table; -- \'', $this->platform->quoteValue('\'; DELETE FROM some_table; -- '));
+
+        //                   '\\\'; DELETE FROM some_table; -- '  <- actual below
+        $this->assertEquals("'\\\\\\'; DELETE FROM some_table; -- '", $this->platform->quoteValue('\\\'; DELETE FROM some_table; -- '));
     }
 
     /**
@@ -97,6 +102,10 @@ class IbmDb2Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
         $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList(array("Foo O'Bar")));
         $this->assertEquals("'value', 'Foo O\\'Bar'", $this->platform->quoteValueList(array('value',"Foo O'Bar")));
+        $this->assertEquals(
+            "'value', 'Foo O\\'Bar', '\\\\\\'; DELETE FROM some_table; -- '",
+            $this->platform->quoteValueList(array('value',"Foo O'Bar",'\\\'; DELETE FROM some_table; -- '))
+        );
     }
 
     /**

@@ -139,10 +139,9 @@ class PhpRendererStrategy implements ListenerAggregateInterface
         // populated, and set the content from them.
         if (empty($result)) {
             $placeholders = $renderer->plugin('placeholder');
-            $registry     = $placeholders->getRegistry();
             foreach ($this->contentPlaceholders as $placeholder) {
-                if ($registry->containerExists($placeholder)) {
-                    $result = (string) $registry->getContainer($placeholder);
+                if ($placeholders->containerExists($placeholder)) {
+                    $result = (string) $placeholders->getContainer($placeholder);
                     break;
                 }
             }

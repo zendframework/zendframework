@@ -45,7 +45,6 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->error = false;
-        PlaceholderRegistry::unsetRegistry();
         Helper\Doctype::unsetDoctypeRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
         $this->view     = new View();
@@ -68,17 +67,6 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     public function handleErrors($errno, $errstr)
     {
         $this->error = $errstr;
-    }
-
-    public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
-    {
-        $registry = PlaceholderRegistry::getRegistry();
-        if ($registry->containerExists('Zend_View_Helper_HeadMeta')) {
-            $registry->deleteContainer('Zend_View_Helper_HeadMeta');
-        }
-        $this->assertFalse($registry->containerExists('Zend_View_Helper_HeadMeta'));
-        $helper = new Helper\HeadMeta();
-        $this->assertTrue($registry->containerExists('Zend_View_Helper_HeadMeta'));
     }
 
     public function testHeadMetaReturnsObjectInstance()

@@ -27,7 +27,7 @@ class Stream
     /**
      * Current stream position.
      *
-     * @var integer
+     * @var int
      */
     protected $pos = 0;
 
@@ -108,7 +108,7 @@ class Stream
     /**
      * Tells the current position in the stream.
      * 
-     * @return integer
+     * @return int
      */
     public function stream_tell()
     {

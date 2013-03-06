@@ -936,7 +936,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
           .     '</SOAP-ENV:Body>'
           . '</SOAP-ENV:Envelope>' . "\n";
         $response = $server->handle($request);
-        var_dump($response->getMessage());
+
         $this->assertContains('Invalid XML', $response->getMessage());
     }
 

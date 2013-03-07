@@ -128,8 +128,10 @@ class DocumentLiteralWrapper
         foreach (get_object_vars($document) as $argName => $argValue) {
             if (!isset($params[$argName])) {
                 throw new UnexpectedValueException(sprintf(
-                    "Received unknown argument %s which is not an argument to %s::%s",
-                    $argName, get_class($this->object), $method
+                    "Received unknown argument %s which is not an argument to %s::%s()",
+                    $argName,
+                    get_class($this->object),
+                    $method
                 ));
             }
             $delegateArgs[$params[$argName]->getPosition()] = $argValue;
@@ -147,7 +149,8 @@ class DocumentLiteralWrapper
         if (!$this->reflection->hasMethod($method)) {
             throw new BadMethodCallException(sprintf(
                 "Method %s does not exist on delegate object %s",
-                $method, get_class($this->object)
+                $method,
+                get_class($this->object)
             ));
         }
     }
@@ -157,7 +160,8 @@ class DocumentLiteralWrapper
         if (count($args) != 1) {
             throw new UnexpectedValueException(sprintf(
                 "Expecting exactly one argument that is the document/literal wrapper, got %d",
-                count($args)));
+                count($args)
+            ));
         }
     }
 }

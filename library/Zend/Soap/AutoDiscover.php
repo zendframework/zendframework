@@ -10,7 +10,6 @@
 namespace Zend\Soap;
 
 use Zend\Server\Reflection;
-use Zend\Server\Reflection\AbstractFunction;
 use Zend\Soap\AutoDiscover\DiscoveryStrategy\DiscoveryStrategyInterface as DiscoveryStrategy;
 use Zend\Soap\AutoDiscover\DiscoveryStrategy\ReflectionDiscovery;
 use Zend\Soap\Wsdl;
@@ -183,9 +182,10 @@ class AutoDiscover
                 return $this->reflection->reflectClass($this->class)
                                          ->getShortName();
             } else {
-                throw new Exception\RuntimeException(
-                    "No service name given. Call Autodiscover::setServiceName()."
-                );
+                throw new Exception\RuntimeException(sprintf(
+                    "No service name given. Call %s::setServiceName().",
+                    __CLASS__
+                ));
             }
         }
 
@@ -203,9 +203,11 @@ class AutoDiscover
     public function setUri($uri)
     {
         if (!is_string($uri) && !($uri instanceof Uri\Uri)) {
-            throw new Exception\InvalidArgumentException(
-                'No uri given to \Zend\Soap\AutoDiscover::setUri as string or \Zend\Uri\Uri instance.'
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                'No uri given to %s::%s() as string or \Zend\Uri\Uri instance.',
+                __CLASS__,
+                __METHOD__
+            ));
         }
         $this->uri = $uri;
 
@@ -221,7 +223,10 @@ class AutoDiscover
     public function getUri()
     {
         if ($this->uri === null) {
-            throw new Exception\RuntimeException("Missing uri. You have to explicitly configure the Endpoint Uri by calling AutoDiscover::setUri().");
+            throw new Exception\RuntimeException(sprintf(
+                "Missing uri. You have to explicitly configure the Endpoint Uri by calling %s::setUri().",
+                __CLASS__
+            ));
         }
         if (is_string($this->uri)) {
             $this->uri = Uri\UriFactory::factory($this->uri);
@@ -240,9 +245,12 @@ class AutoDiscover
     public function setWsdlClass($wsdlClass)
     {
         if (!is_string($wsdlClass) && !is_subclass_of($wsdlClass, 'Zend\Soap\Wsdl')) {
-            throw new Exception\InvalidArgumentException(
-                'No \Zend\Soap\Wsdl subclass given to Zend\Soap\AutoDiscover::setWsdlClass as string.'
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                'No %s\Wsdl subclass given to %s::%s() as string.',
+                __NAMESPACE__,
+                __CLASS__,
+                __METHOD__
+            ));
         }
         $this->wsdlClass = $wsdlClass;
 
@@ -414,7 +422,10 @@ class AutoDiscover
             }
         }
         if ($prototype === null) {
-            throw new Exception\InvalidArgumentException("No prototypes could be found for the '" . $function->getName() . "' function");
+            throw new Exception\InvalidArgumentException(sprintf(
+                'No prototypes could be found for the "%s" function',
+                $function->getName()
+            ));
         }
 
         $functionName = $wsdl->translateType($function->getName());
@@ -443,7 +454,9 @@ class AutoDiscover
         } else {
             // RPC style: add each parameter as a typed part
             foreach ($prototype->getParameters() as $param) {
-                $args[$param->getName()] = array('type' => $wsdl->getType($this->discoveryStrategy->getFunctionParameterType($param)));
+                $args[$param->getName()] = array(
+                    'type' => $wsdl->getType($this->discoveryStrategy->getFunctionParameterType($param))
+                );
             }
         }
         $wsdl->addMessage($functionName . 'In', $args);
@@ -470,7 +483,9 @@ class AutoDiscover
                 $args['parameters'] = array('element' => $wsdl->addElement($element));
             } elseif ($prototype->getReturnType() != "void") {
                 // RPC style: add the return value as a typed part
-                $args['return'] = array('type' => $wsdl->getType($this->discoveryStrategy->getFunctionReturnType($function, $prototype)));
+                $args['return'] = array(
+                    'type' => $wsdl->getType($this->discoveryStrategy->getFunctionReturnType($function, $prototype))
+                );
             }
             $wsdl->addMessage($functionName . 'Out', $args);
         }

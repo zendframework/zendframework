@@ -9,25 +9,23 @@
 
 namespace Zend\I18n\Validator;
 
-use IntlDateFormatter;
 use Traversable;
 use Zend\I18n\Exception\InvalidArgumentException;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
 
-class Date extends DateTime
+class Time extends DateTime
 {
+    const INVALID_TIME  = 'dateInvalidTime';
 
-    const INVALID_DATE  = 'dateInvalidDate';
-
-    protected $dateFormat = IntlDateFormatter::SHORT;
-    protected $timeFormat = IntlDateFormatter::NONE;
+    protected $dateFormat = \IntlDateFormatter::NONE;
+    protected $timeFormat = \IntlDateFormatter::SHORT;
 
     /**
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID_DATE   => "The input does not appear to be a valid date",
+        self::INVALID_TIME   => "The input does not appear to be a valid time",
     );
 
     /**
@@ -45,17 +43,17 @@ class Date extends DateTime
     }
 
     /**
-     * @param int $timeFormat
-     *
-     * @return Date provides fluent interface
+     * @param int $dateFormat
+     * @return void
+     * @throws \Zend\I18n\Exception\InvalidArgumentException
      */
-    public function setTimeFormat($timeFormat)
+    public function setDateFormat($dateFormat)
     {
-        throw new InvalidArgumentException(sprintf("'%s' is immutable for '%s'", 'timeFormat', __CLASS__));
+        throw new InvalidArgumentException(sprintf("'%s' is immutable for '%s'", 'dateFormat', __CLASS__));
     }
 
     /**
-     * Returns true if and only if $value is a valid localized date string
+     * Returns true if and only if $value is a valid localized time string
      *
      * @param  string $value
      * @return bool
@@ -64,10 +62,10 @@ class Date extends DateTime
     public function isValid($value)
     {
         if (!$result = parent::isValid($value)) {
-            // clear INVALID_DATETIME message and set INVALID_DATE
+            // clear INVALID_DATETIME message and set INVALID_TIME
             if (array_key_exists(self::INVALID_DATETIME, $this->getMessages())) {
                 $this->setValue($value);
-                $this->error(self::INVALID_DATE);
+                $this->error(self::INVALID_TIME);
                 return false;
             }
         }

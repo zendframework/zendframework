@@ -67,7 +67,7 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
             'message' => 'my msg',
             'priority' => Logger::DEBUG
         ));
-        $this->assertEquals('my msg', $this->chromephp->calls['trace'][0]);
+        $this->assertEquals('my msg', $this->chromephp->calls['log'][0]);
     }
 
     public function testWriteDisabled()
@@ -78,7 +78,7 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
             'message' => 'my msg',
             'priority' => Logger::DEBUG
         ));
-        $this->assertTrue(empty($this->chromephp->calls));
+        $this->assertEmpty($this->chromephp->calls);
     }
 
     public function testConstructWithOptions()

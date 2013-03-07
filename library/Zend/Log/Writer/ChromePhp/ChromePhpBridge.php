@@ -14,6 +14,26 @@ use ChromePhp;
 class ChromePhpBridge implements ChromePhpInterface
 {
     /**
+     * Log a message
+     *
+     * @param string $line
+     */
+    public function log($line)
+    {
+        ChromePhp::log($line);
+    }
+
+    /**
+     * Log a warning message
+     *
+     * @param string $line
+     */
+    public function warn($line)
+    {
+        ChromePhp::warn($line);
+    }
+
+    /**
      * Log an error message
      *
      * @param string $line
@@ -24,17 +44,7 @@ class ChromePhpBridge implements ChromePhpInterface
     }
 
     /**
-     * Log a warning
-     *
-     * @param string $line
-     */
-    public function warn($line)
-    {
-        ChromePhp::warn($line);
-    }
-
-    /**
-     * Log informational message
+     * Log an info message
      *
      * @param string $line
      */
@@ -44,22 +54,32 @@ class ChromePhpBridge implements ChromePhpInterface
     }
 
     /**
-     * Log a trace
+     * Sends a group log
      *
      * @param string $line
      */
-    public function trace($line)
+    public function group($line)
     {
-        ChromePhp::error($line);
+        ChromePhp::group($line);
     }
 
     /**
-     * Log a message
+     * Sends a collapsed group log
      *
      * @param string $line
      */
-    public function log($line)
+    public function groupCollapsed($line)
     {
-        ChromePhp::log($line);
+        ChromePhp::groupCollapsed($line);
+    }
+
+    /**
+     * Ends a group log
+     *
+     * @param string $line
+     */
+    public function groupEnd($line)
+    {
+        ChromePhp::groupEnd($line);
     }
 }

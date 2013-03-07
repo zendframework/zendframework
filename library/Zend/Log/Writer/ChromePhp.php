@@ -74,9 +74,6 @@ class ChromePhp extends AbstractWriter
             case Logger::INFO:
                 $this->chromephp->info($line);
                 break;
-            case Logger::DEBUG:
-                $this->chromephp->trace($line);
-                break;
             default:
                 $this->chromephp->log($line);
                 break;

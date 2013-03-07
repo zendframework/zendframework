@@ -82,6 +82,9 @@ class SqliteMetadataTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @group ZF2-3719
+     */
     public function testGetConstraintKeys()
     {
         $keys = $this->metadata->getConstraintKeys(

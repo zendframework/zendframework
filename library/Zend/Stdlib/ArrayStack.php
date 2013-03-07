@@ -10,7 +10,7 @@
 namespace Zend\Stdlib;
 
 use ArrayIterator;
-use ArrayObject;
+use Zend\Stdlib\ArrayObject;
 
 /**
  * ArrayObject that acts as a stack with regards to iteration

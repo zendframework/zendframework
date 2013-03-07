@@ -269,7 +269,6 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 
         // reset singleton
         StaticEventManager::resetInstance();
-        Placeholder\Registry::unsetRegistry();
 
         return $this;
     }

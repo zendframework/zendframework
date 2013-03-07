@@ -9,8 +9,45 @@
 
 namespace Zend\Db\Adapter\Platform;
 
+use Zend\Db\Adapter\Driver\Mysqli;
+use Zend\Db\Adapter\Driver\Pdo;
+use Zend\Db\Adapter\Exception;
+
 class Mysql implements PlatformInterface
 {
+    /** @var \mysqli|\PDO */
+    protected $resource = null;
+
+    public function __construct($driver = null)
+    {
+        if ($driver) {
+            $this->setDriver($driver);
+        }
+    }
+
+    /**
+     * @param \Zend\Db\Adapter\Driver\Mysqli\Mysqli|\Zend\Db\Adapter\Driver\Pdo\Pdo||\mysqli|\PDO $driver
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
+     * @return $this
+     */
+    public function setDriver($driver)
+    {
+        if ($driver instanceof Mysqli\Mysqli
+            || ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'MySQL')
+        ) {
+            $this->resource = $driver->getConnection()->getResource();
+            return $this;
+        }
+
+        if ($driver instanceof \mysqli
+            || ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'mysql')
+        ) {
+            $this->resource = $driver;
+            return $this;
+        }
+
+        throw new Exception\InvalidArgumentException('$driver must be a Mysqli or Mysql PDO Zend\Db\Adapter\Driver, Mysqli instance or MySQL PDO instance');
+    }
 
     /**
      * Get name
@@ -76,6 +113,16 @@ class Mysql implements PlatformInterface
      */
     public function quoteValue($value)
     {
+        if ($this->resource instanceof \mysqli) {
+            return $this->resource->real_escape_string($value);
+        }
+        if ($this->resource instanceof \PDO) {
+            return $this->resource->quote($value);
+        }
+        trigger_error(
+            'Attempting to quote a value in ' . __CLASS__
+            . ' without providing a driver/resource is not a practice you should rely on in production systems'
+        );
         return '\'' . addcslashes($value, '\\\'') . '\'';
     }
 
@@ -90,11 +137,11 @@ class Mysql implements PlatformInterface
         if (is_array($valueList)) {
             $value = reset($valueList);
             do {
-                $valueList[key($valueList)] = addcslashes($value, '\\\'');
+                $valueList[key($valueList)] = $this->quoteValue($value);
             } while ($value = next($valueList));
             return '\'' . implode('\', \'', $valueList) . '\'';
         } else {
-            return '\'' . addcslashes($valueList, '\\\'') . '\'';
+            return '\'' . $this->quoteValue($valueList) . '\'';
         }
     }
 

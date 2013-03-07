@@ -9,8 +9,46 @@
 
 namespace Zend\Db\Adapter\Platform;
 
+use Zend\Db\Adapter\Driver\Pgsql;
+use Zend\Db\Adapter\Driver\Pdo;
+use Zend\Db\Adapter\Exception;
+
 class Postgresql implements PlatformInterface
 {
+    /** @var resource|\PDO */
+    protected $resource = null;
+
+    public function __construct($driver = null)
+    {
+        if ($driver) {
+            $this->setDriver($driver);
+        }
+    }
+
+    /**
+     * @param \Zend\Db\Adapter\Driver\Pgsql\Pgsql|\Zend\Db\Adapter\Driver\Pdo\Pdo|resource|\PDO $driver
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
+     * @return $this
+     */
+    public function setDriver($driver)
+    {
+        if ($driver instanceof Pgsql
+            || ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'Postgresql')
+        ) {
+            $this->resource = $driver->getConnection()->getResource();
+            return $this;
+        }
+
+        if ((is_resource($driver) && (in_array(get_resource_type($driver), array('pgsql link', 'pgsql link persistent'))))
+            || ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'pgsql')
+        ) {
+            $this->resource = $driver;
+            return $this;
+        }
+
+        throw new Exception\InvalidArgumentException('$driver must be a Pgsql or Postgresql PDO Zend\Db\Adapter\Driver, pgsql link resource or Postgresql PDO instance');
+    }
+
     /**
      * Get name
      *
@@ -75,6 +113,16 @@ class Postgresql implements PlatformInterface
      */
     public function quoteValue($value)
     {
+        if (is_resource($this->resource)) {
+            return '\'' . pg_escape_string($this->resource, $value) . '\'';
+        }
+        if ($this->resource instanceof \PDO) {
+            return $this->resource->quote($value);
+        }
+        trigger_error(
+            'Attempting to quote a value in ' . __CLASS__
+                . ' without providing a driver/resource is not a practice you should rely on in production systems'
+        );
         return '\'' . addcslashes($value, '\\\'') . '\'';
     }
 
@@ -89,11 +137,11 @@ class Postgresql implements PlatformInterface
         if (is_array($valueList)) {
             $value = reset($valueList);
             do {
-                $valueList[key($valueList)] = addcslashes($value, '\\\'');
+                $valueList[key($valueList)] = $this->quoteValue($value);
             } while ($value = next($valueList));
             return '\'' . implode('\', \'', $valueList) . '\'';
         } else {
-            return '\'' . addcslashes($valueList, '\\\'') . '\'';
+            return '\'' .  $this->quoteValue($valueList) . '\'';
         }
     }
 

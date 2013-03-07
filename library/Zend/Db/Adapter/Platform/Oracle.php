@@ -100,6 +100,9 @@ class Oracle implements PlatformInterface
      */
     public function quoteValue($value)
     {
+        trigger_error(
+            'Attempting to quote a value with ' . __CLASS__ . ' is not a practice you should rely on in production systems'
+        );
         return '\'' . addcslashes($value, '\\\'') . '\'';
     }
 
@@ -114,11 +117,11 @@ class Oracle implements PlatformInterface
         if (is_array($valueList)) {
             $value = reset($valueList);
             do {
-                $valueList[key($valueList)] = addcslashes($value, '\\\'');
+                $valueList[key($valueList)] = $this->quoteValue($value);
             } while ($value = next($valueList));
             return '\'' . implode('\', \'', $valueList) . '\'';
         } else {
-            return '\'' . addcslashes($valueList, '\\\'') . '\'';
+            return '\'' . $this->quoteValue($valueList) . '\'';
         }
     }
 

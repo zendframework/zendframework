@@ -321,23 +321,27 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
             throw new Exception\InvalidArgumentException('A platform could not be determined from the provided configuration');
         }
 
+        // currently only supported by the IbmDb2 & Oracle concrete implementations
         $options = (isset($parameters['platform_options'])) ? $parameters['platform_options'] : array();
 
         switch ($platformName) {
             case 'Mysql':
-                return new Platform\Mysql($options);
+                // mysqli or pdo_mysql driver
+                return new Platform\Mysql($this->driver);
             case 'SqlServer':
-                return new Platform\SqlServer($options);
+                // PDO is only supported driver for quoting values in this platform
+                return new Platform\SqlServer(($this->driver instanceof Driver\Pdo\Pdo) ? $this->driver : null);
             case 'Oracle':
-                return new Platform\Oracle($options);
+                return new Platform\Oracle($options, $this->driver);
             case 'Sqlite':
-                return new Platform\Sqlite($options);
+                return new Platform\Sqlite($this->driver);
             case 'Postgresql':
-                return new Platform\Postgresql($options);
+                // pgsql or pdo postgres driver
+                return new Platform\Postgresql($this->driver);
             case 'IbmDb2':
-                return new Platform\IbmDb2($options);
+                return new Platform\IbmDb2($options, $this->driver);
             default:
-                return new Platform\Sql92($options);
+                return new Platform\Sql92();
         }
     }
 

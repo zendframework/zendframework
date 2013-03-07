@@ -75,6 +75,9 @@ class Sql92 implements PlatformInterface
      */
     public function quoteValue($value)
     {
+        trigger_error(
+            'Attempting to quote a value with ' . __CLASS__ . ' is not a practice you should rely on in production systems'
+        );
         return '\'' . addcslashes($value, '\\\'') . '\'';
     }
 

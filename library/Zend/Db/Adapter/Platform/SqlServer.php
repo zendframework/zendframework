@@ -9,8 +9,42 @@
 
 namespace Zend\Db\Adapter\Platform;
 
+use Zend\Db\Adapter\Driver\Sqlsrv;
+use Zend\Db\Adapter\Driver\Pdo;
+use Zend\Db\Adapter\Exception;
+
 class SqlServer implements PlatformInterface
 {
+
+    /** @var resource|\PDO */
+    protected $resource = null;
+
+    public function __construct($driver = null)
+    {
+        if ($driver) {
+            $this->setDriver($driver);
+        }
+    }
+
+    /**
+     * @param \Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv|\Zend\Db\Adapter\Driver\Pdo\Pdo||\mysqli|\PDO $driver
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
+     * @return $this
+     */
+    public function setDriver($driver)
+    {
+        if ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'SqlServer') {
+            $this->resource = $driver->getConnection()->getResource();
+            return $this;
+        }
+
+        if ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'sqlsrv') {
+            $this->resource = $driver;
+            return $this;
+        }
+
+        throw new Exception\InvalidArgumentException('$driver must be a Sqlsrv PDO Zend\Db\Adapter\Driver or Sqlsrv PDO instance');
+    }
 
     /**
      * Get name
@@ -75,6 +109,13 @@ class SqlServer implements PlatformInterface
      */
     public function quoteValue($value)
     {
+        if ($this->resource instanceof \PDO) {
+            return $this->resource->quote($value);
+        }
+        trigger_error(
+            'Attempting to quote a value in ' . __CLASS__
+                . ' without providing a driver/resource is not a practice you should rely on in production systems'
+        );
         return '\'' . str_replace('\'', '\'\'', $value) . '\'';
     }
 
@@ -86,11 +127,15 @@ class SqlServer implements PlatformInterface
      */
     public function quoteValueList($valueList)
     {
-        $valueList = str_replace('\'', '\'\'', $valueList);
         if (is_array($valueList)) {
-            $valueList = implode('\', \'', $valueList);
+            $value = reset($valueList);
+            do {
+                $valueList[key($valueList)] = $this->quoteValue($value);
+            } while ($value = next($valueList));
+            return '\'' . implode('\', \'', $valueList) . '\'';
+        } else {
+            return '\'' . $this->quoteValue($valueList) . '\'';
         }
-        return '\'' . $valueList . '\'';
     }
 
     /**

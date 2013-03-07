@@ -96,26 +96,27 @@ class AutoDiscover
     /**
      * Constructor
      *
-     * @param ComplexTypeStrategy $strategy
-     * @param string|Uri\Uri $endpointUri
-     * @param string $wsdlClass
-     * @param array $classMap
+     * @param null|ComplexTypeStrategy $strategy
+     * @param null|string|Uri\Uri $endpointUri
+     * @param null|string $wsdlClass
+     * @param null|array $classMap
      */
-    public function __construct(ComplexTypeStrategy $strategy = null, $endpointUri=null, $wsdlClass=null, array $classMap = array())
+    public function __construct(ComplexTypeStrategy $strategy = null, $endpointUri = null, $wsdlClass = null, array $classMap = null)
     {
         $this->reflection = new Reflection();
         $this->discoveryStrategy = new ReflectionDiscovery();
 
-        if ($strategy !== null) {
+        if (null !== $strategy) {
             $this->setComplexTypeStrategy($strategy);
         }
-
-        if ($endpointUri !== null) {
+        if (null !== $endpointUri) {
             $this->setUri($endpointUri);
         }
-
-        if ($wsdlClass !== null) {
+        if (null !== $wsdlClass) {
             $this->setWsdlClass($wsdlClass);
+        }
+        if (null !== $classMap) {
+            $this->setClassMap($classMap);
         }
     }
 
@@ -151,8 +152,11 @@ class AutoDiscover
 
     /**
      * Set the class map of php to wsdl qname types.
+     *
+     * @param array $classmap
+     * @return AutoDiscover
      */
-    public function setClassMap($classMap)
+    public function setClassMap(array $classMap)
     {
         $this->classMap = $classMap;
         return $this;
@@ -269,7 +273,7 @@ class AutoDiscover
      * @return AutoDiscover
      * @throws Exception\InvalidArgumentException
      */
-    public function setOperationBodyStyle(array $operationStyle=array())
+    public function setOperationBodyStyle(array $operationStyle = array())
     {
         if (!isset($operationStyle['use'])) {
             throw new Exception\InvalidArgumentException("Key 'use' is required in Operation soap:body style.");
@@ -286,7 +290,7 @@ class AutoDiscover
      * @param  array $bindingStyle
      * @return AutoDiscover
      */
-    public function setBindingStyle(array $bindingStyle=array())
+    public function setBindingStyle(array $bindingStyle = array())
     {
         if (isset($bindingStyle['style'])) {
             $this->bindingStyle['style'] = $bindingStyle['style'];

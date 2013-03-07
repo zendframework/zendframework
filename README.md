@@ -5,13 +5,33 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.1.3dev*
+*Zend Framework 2.1.4dev*
 
-This is the third maintenance release for the version 2.1 series.
+This is the fourth maintenance release for the version 2.1 series.
 
 DD MMM YYYY
 
-### UPDATES IN 2.1.3
+### UPDATES IN 2.1.4
+
+Better polyfill support in `Zend\Session` and `Zend\Stdlib`. Polyfills
+(version-specific class replacements) have caused some issues in the 2.1 series.
+In particular, users who were not using Composer were unaware/uncertain about
+what extra files needed to be included to load polyfills, and those users who
+were generating classmaps were running into issues since the same class was
+being generated twice.
+
+New polyfill support was created which does the following:
+
+- New, uniquely named classes were created for each polyfill base.
+- A stub class file was created for each class needing polyfill support. A
+  conditional is present in each that uses `class_alias` to alias the appropriate
+  polyfill base as an import. The stub class then extends the base.
+- The `compatibility/autoload.php` files in each component affected was altered
+  to trigger an `E_USER_DEPRECATED` error asking the user to remove the require
+  statement for the file.
+
+The functionality works with both Composer and ZF2's autoloading support, using
+either PSR-0 or classmaps. All typehinting is preserved.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

@@ -174,6 +174,7 @@ class Csrf extends AbstractValidator
     public function getSession()
     {
         if (null === $this->session) {
+            // Using fully qualified name, to ensure polyfill class alias is used
             $this->session = new SessionContainer($this->getSessionName());
         }
         return $this->session;

@@ -77,17 +77,16 @@ abstract class AbstractWriter implements WriterInterface
         }
 
         if (is_array($options)) {
-
-            if(isset($options['filters'])) {
+            if (isset($options['filters'])) {
                 $filters = $options['filters'];
-                if(is_string($filters) || $filters instanceof Filter\FilterInterface) {
+                if (is_string($filters) || $filters instanceof Filter\FilterInterface) {
                     $this->addFilter($filters);
-                } elseif(is_array($filters)) {
-                    foreach($filters as $filter) {
-                        if(is_string($filter) || $filter instanceof Filter\FilterInterface) {
+                } elseif (is_array($filters)) {
+                    foreach ($filters as $filter) {
+                        if (is_string($filter) || $filter instanceof Filter\FilterInterface) {
                             $this->addFilter($filter);
-                        } elseif(is_array($filter)) {
-                            if(!isset($filter['name'])) {
+                        } elseif (is_array($filter)) {
+                            if (!isset($filter['name'])) {
                                 throw new Exception\InvalidArgumentException('Options must contain a name for the filter');
                             }
                             $filterOptions = (isset($filter['options'])) ? $filter['options'] : null;
@@ -97,12 +96,12 @@ abstract class AbstractWriter implements WriterInterface
                 }
             }
 
-            if(isset($options['formatter'])) {
+            if (isset($options['formatter'])) {
                 $formatter = $options['formatter'];
-                if(is_string($formatter) || $formatter instanceof Formatter\FormatterInterface) {
+                if (is_string($formatter) || $formatter instanceof Formatter\FormatterInterface) {
                     $this->setFormatter($formatter);
-                } elseif(is_array($formatter)) {
-                    if(!isset($formatter['name'])) {
+                } else if(is_array($formatter)) {
+                    if (!isset($formatter['name'])) {
                         throw new Exception\InvalidArgumentException('Options must contain a name for the formatter');
                     }
                     $formatterOptions = (isset($formatter['options'])) ? $formatter['options'] : null;
@@ -285,6 +284,7 @@ abstract class AbstractWriter implements WriterInterface
      * Set a new formatter for this writer
      *
      * @param  string|Formatter\FormatterInterface $formatter
+     * @param  array|null $options
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -309,7 +309,7 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Set convert write errors to exception flag
      *
-     * @param bool $ignoreWriteErrors
+     * @param bool $convertErrors
      */
     public function setConvertWriteErrorsToExceptions($convertErrors)
     {

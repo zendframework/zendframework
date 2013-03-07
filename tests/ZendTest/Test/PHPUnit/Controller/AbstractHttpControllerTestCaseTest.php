@@ -199,6 +199,14 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertXpathQuery('//form[@id="id"]');
     }
 
+    public function testAssertXpathQueryWithBadXpathUsage()
+    {
+        $this->dispatch('/tests');
+
+        $this->setExpectedException('ErrorException');
+        $this->assertXpathQuery('form#myform');
+    }
+
     public function testAssertNotQuery()
     {
         $this->dispatch('/tests');
@@ -239,6 +247,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
             'actually occurs 3 times' // check actual occurs is display
         );
         $this->assertXpathQueryCount('//div[@class="top"]', 2);
+    }
+
+    public function testAssertXpathQueryCountWithBadXpathUsage()
+    {
+        $this->dispatch('/tests');
+        $this->assertXpathQueryCount('div.top', 0);
     }
 
     public function testAssertNotQueryCount()

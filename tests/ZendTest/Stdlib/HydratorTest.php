@@ -297,7 +297,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
             function($property) {
                 list($class, $method) = explode('::', $property);
 
-                if($method == 'getHasFoo') {
+                if ($method == 'getHasFoo') {
                     return false;
                 }
 

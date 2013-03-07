@@ -147,7 +147,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $this->application = Application::init($appConfig);
 
         $events = $this->application->getEventManager();
-        foreach($events->getListeners(MvcEvent::EVENT_FINISH) as $listener) {
+        foreach ($events->getListeners(MvcEvent::EVENT_FINISH) as $listener) {
             $callback = $listener->getCallback();
             if (is_array($callback) && $callback[0] instanceof SendResponseListener) {
                 $events->detach($listener);
@@ -187,6 +187,8 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * Set the request URL
      *
      * @param  string $url
+     * @param  string|null $method
+     * @param  array|null $params
      * @return AbstractControllerTestCase
      */
     public function url($url, $method = HttpRequest::METHOD_GET, $params = array())
@@ -230,6 +232,8 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * The URL provided set the request URI in the request object.
      *
      * @param  string $url
+     * @param  string|null $method
+     * @param  array|null $params
      * @throws \Exception
      */
     public function dispatch($url, $method = HttpRequest::METHOD_GET, $params = array())

@@ -167,6 +167,14 @@ class SimpleTestTest extends TestCase
                     'bar' => 4
                 )
             ),
+            'optional-long-value-flag-non-existent-mixed-case' => array(
+                '--foo [--barBaz=]',
+                array('--foo', '--barBaz=4'),
+                array(
+                    'foo'    => true,
+                    'barBaz' => 4
+                )
+            ),
             'value-optional-long-value-flag' => array(
                 '<foo> [--bar=]',
                 array('value', '--bar=4'),

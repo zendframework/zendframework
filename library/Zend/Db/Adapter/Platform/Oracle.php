@@ -101,9 +101,23 @@ class Oracle implements PlatformInterface
     public function quoteValue($value)
     {
         trigger_error(
-            'Attempting to quote a value with ' . __CLASS__ . ' is not a practice you should rely on in production systems'
+            'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
+                . 'can introduce security vulnerabilities in a production environment.'
         );
-        return '\'' . addcslashes($value, '\\\'') . '\'';
+        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+    }
+
+    /**
+     * Quote Trusted Value
+     *
+     * The ability to quote values without notices
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function quoteTrustedValue($value)
+    {
+        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
     /**
@@ -119,9 +133,9 @@ class Oracle implements PlatformInterface
             do {
                 $valueList[key($valueList)] = $this->quoteValue($value);
             } while ($value = next($valueList));
-            return '\'' . implode('\', \'', $valueList) . '\'';
+            return implode(', ', $valueList);
         } else {
-            return '\'' . $this->quoteValue($valueList) . '\'';
+            return $this->quoteValue($valueList);
         }
     }
 

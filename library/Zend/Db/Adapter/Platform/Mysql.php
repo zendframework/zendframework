@@ -120,10 +120,29 @@ class Mysql implements PlatformInterface
             return $this->resource->quote($value);
         }
         trigger_error(
-            'Attempting to quote a value in ' . __CLASS__
-            . ' without providing a driver/resource is not a practice you should rely on in production systems'
+            'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
+                . 'can introduce security vulnerabilities in a production environment.'
         );
-        return '\'' . addcslashes($value, '\\\'') . '\'';
+        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+    }
+
+    /**
+     * Quote Trusted Value
+     *
+     * The ability to quote values without notices
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function quoteTrustedValue($value)
+    {
+        if ($this->resource instanceof \mysqli) {
+            return $this->resource->real_escape_string($value);
+        }
+        if ($this->resource instanceof \PDO) {
+            return $this->resource->quote($value);
+        }
+        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
     /**
@@ -139,9 +158,9 @@ class Mysql implements PlatformInterface
             do {
                 $valueList[key($valueList)] = $this->quoteValue($value);
             } while ($value = next($valueList));
-            return '\'' . implode('\', \'', $valueList) . '\'';
+            return implode(', ', $valueList);
         } else {
-            return '\'' . $this->quoteValue($valueList) . '\'';
+            return $this->quoteValue($valueList);
         }
     }
 

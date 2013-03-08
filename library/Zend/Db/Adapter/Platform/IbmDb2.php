@@ -111,7 +111,27 @@ class IbmDb2 implements PlatformInterface
      */
     public function quoteValue($value)
     {
-        return '\'' . addcslashes($value, '\\\'') . '\'';
+        if (function_exists('db2_escape_string')) {
+            return db2_escape_string($value);
+        }
+        trigger_error(
+            'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
+            . 'can introduce security vulnerabilities in a production environment.'
+        );
+        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+    }
+
+    /**
+     * Quote Trusted Value
+     *
+     * The ability to quote values without notices
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function quoteTrustedValue($value)
+    {
+        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
     /**
@@ -125,11 +145,11 @@ class IbmDb2 implements PlatformInterface
         if (is_array($valueList)) {
             $value = reset($valueList);
             do {
-                $valueList[key($valueList)] = addcslashes($value, '\\\'');
+                $valueList[key($valueList)] = $this->quoteValue($value);
             } while ($value = next($valueList));
-            return '\'' . implode('\', \'', $valueList) . '\'';
+            return implode(', ', $valueList);
         } else {
-            return '\'' . addcslashes($valueList, '\\\'') . '\'';
+            return $this->quoteValue($valueList);
         }
     }
 
@@ -182,4 +202,5 @@ class IbmDb2 implements PlatformInterface
 
         return implode('', $parts);
     }
+
 }

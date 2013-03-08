@@ -122,11 +122,11 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Load a specific module by name.
      *
-     * @param    string|array $module
-     * @throws   Exception\RuntimeException
+     * @param  string|array               $module
+     * @throws Exception\RuntimeException
      * @triggers loadModule.resolve
      * @triggers loadModule
-     * @return   mixed Module's Module class
+     * @return mixed Module's Module class
      */
     public function loadModule($module)
     {
@@ -135,29 +135,18 @@ class ModuleManager implements ModuleManagerInterface
             $moduleName = key($module);
             $module = current($module);
         }
-        
+
         if (isset($this->loadedModules[$moduleName])) {
             return $this->loadedModules[$moduleName];
         }
-        
+
         $event = ($this->loadFinished === false) ? clone $this->getEvent() : $this->getEvent();
         $event->setModuleName($moduleName);
-        
+
+        $this->loadFinished = false;
+
         if (!is_object($module)) {
-            $this->loadFinished = false;
-
-            $result = $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, $this, $event, function ($r) {
-                return (is_object($r));
-            });
-
-            $module = $result->last();
-
-            if (!is_object($module)) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Module (%s) could not be initialized.',
-                    $moduleName
-                ));
-            }
+            $module = $this->loadModuleByName($event);
         }
         $event->setModule($module);
 
@@ -170,9 +159,32 @@ class ModuleManager implements ModuleManagerInterface
     }
 
     /**
+     * Load a module with the name
+     * @param  Zend\EventManager\EventInterface $event
+     * @return mixed                            module instance
+     * @throws Exception\RuntimeException
+     */
+    protected function loadModuleByName($event)
+    {
+        $result = $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, $this, $event, function ($r) {
+            return (is_object($r));
+        });
+
+        $module = $result->last();
+        if (!is_object($module)) {
+            throw new Exception\RuntimeException(sprintf(
+                'Module (%s) could not be initialized.',
+                $event->getModuleName()
+            ));
+        }
+
+        return $module;
+    }
+
+    /**
      * Get an array of the loaded modules.
      *
-     * @param  bool $loadModules If true, load modules if they're not already
+     * @param  bool  $loadModules If true, load modules if they're not already
      * @return array An array of Module objects, keyed by module name
      */
     public function getLoadedModules($loadModules = false)
@@ -180,6 +192,7 @@ class ModuleManager implements ModuleManagerInterface
         if (true === $loadModules) {
             $this->loadModules();
         }
+
         return $this->loadedModules;
     }
 

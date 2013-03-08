@@ -39,6 +39,12 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * @var boolean
      */
     protected $useConsoleRequest = false;
+    
+    /**
+     * Flag console used before tests
+     * @var boolean
+     */
+    private $usedConsoleBackup;
 
     /**
      * Trace error when exception is throwed in application
@@ -51,9 +57,18 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        $this->usedConsoleBackup = Console::isConsole();
         $this->reset();
     }
 
+    /**
+     * Restore params
+     */
+    public function tearDown()
+    {
+        Console::overrideIsConsole($this->usedConsoleBackup);
+    }
+    
     /**
      * Get the trace error flag
      * @return boolean

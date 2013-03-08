@@ -103,8 +103,8 @@ class SessionManager extends AbstractManager
                 $storage->fromArray($_SESSION);
             }
             $_SESSION = $storage;
-        } elseif ($storage instanceof Storage\SessionArrayStorage) {
-            $storage->fromArray($_SESSION);
+        } elseif ($storage instanceof Storage\StorageInitializationInterface) {
+            $storage->init($_SESSION);
         }
 
         if (!$this->isValid()) {

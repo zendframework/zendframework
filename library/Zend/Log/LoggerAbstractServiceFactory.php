@@ -28,15 +28,7 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $config = $serviceLocator->get('Config');
-
-        if (isset($config['log'][$name])) {
-            return true;
-
-        } else if (isset($config['log'][$requestedName])) {
-            return true;
-        }
-
-        return false;
+        return isset($config['log'][$requestedName]);
     }
 
     /**
@@ -48,11 +40,6 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $config = $serviceLocator->get('Config');
-
-        if (isset($config['log'][$name])) {
-            return new Logger($config['log'][$name]);
-        }
-
         return new Logger($config['log'][$requestedName]);
     }
 }

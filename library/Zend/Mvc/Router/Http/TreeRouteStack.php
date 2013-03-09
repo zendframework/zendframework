@@ -225,15 +225,19 @@ class TreeRouteStack extends SimpleRouteStack
             $uri->setFragment($options['fragment']);
         }
 
-        if ((isset($options['force_canonical']) && $options['force_canonical']) || $uri->getHost() !== null) {
+        if ((isset($options['force_canonical']) && $options['force_canonical']) || $uri->getHost() !== null || $uri->getScheme() !== null) {
+            if (($uri->getHost() === null || $uri->getScheme() === null) && $this->requestUri === null) {
+                throw new Exception\RuntimeException('Request URI has not been set');
+            }
+ 
+            if ($uri->getHost() === null) {
+                $uri->setHost($this->requestUri->getHost());
+            }
+ 
             if ($uri->getScheme() === null) {
-                if ($this->requestUri === null) {
-                    throw new Exception\RuntimeException('Request URI has not been set');
-                }
-
                 $uri->setScheme($this->requestUri->getScheme());
             }
-
+ 
             return $uri->setPath($path)->normalize()->toString();
         } elseif (!$uri->isAbsolute() && $uri->isValidRelative()) {
             return $uri->setPath($path)->normalize()->toString();

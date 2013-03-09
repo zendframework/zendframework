@@ -186,6 +186,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $options = array(
             'lfi_protection'     => false,
             'use_stream_wrapper' => true,
+            'default_suffix'     => 'php',
         );
         return array(
             array($options),
@@ -204,6 +205,8 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
         $expected = (bool) ini_get('short_open_tag');
         $this->assertSame($expected, $this->stack->useStreamWrapper());
+
+        $this->assertSame($arg['default_suffix'], $this->stack->getDefaultSuffix());
 
         $this->assertEquals(array_reverse($this->paths), $this->stack->getPaths()->toArray());
     }

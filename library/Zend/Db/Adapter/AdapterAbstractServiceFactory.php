@@ -25,15 +25,7 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $config = $serviceLocator->get('Config');
-
-        if (isset($config['db'][$name])) {
-            return true;
-
-        } else if (isset($config['db'][$requestedName])) {
-            return true;
-        }
-
-        return false;
+        return isset($config['db']['adapters'][$requestedName]);
     }
 
     /**
@@ -42,11 +34,6 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $config = $serviceLocator->get('Config');
-
-        if (isset($config['db'][$name])) {
-            return new Adapter($config['db'][$name]);
-        }
-
-        return new Adapter($config['db'][$requestedName]);
+        return new Adapter($config['db']['adapters'][$requestedName]);
     }
 }

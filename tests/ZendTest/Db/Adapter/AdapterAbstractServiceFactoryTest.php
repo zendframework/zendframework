@@ -33,11 +33,13 @@ class AdapterAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->serviceManager->setService('Config', array(
             'db' => array(
-                'Zend\Db\Adapter\Writer' => array(
-                    'driver' => 'mysqli',
-                ),
-                'Zend\Db\Adapter\Reader' => array(
-                    'driver' => 'mysqli',
+                'adapters' => array(
+                    'Zend\Db\Adapter\Writer' => array(
+                        'driver' => 'mysqli',
+                    ),
+                    'Zend\Db\Adapter\Reader' => array(
+                        'driver' => 'mysqli',
+                    ),
                 ),
             ),
         ));

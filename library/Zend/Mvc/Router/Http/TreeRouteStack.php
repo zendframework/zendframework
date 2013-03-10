@@ -229,15 +229,15 @@ class TreeRouteStack extends SimpleRouteStack
             if (($uri->getHost() === null || $uri->getScheme() === null) && $this->requestUri === null) {
                 throw new Exception\RuntimeException('Request URI has not been set');
             }
- 
+
             if ($uri->getHost() === null) {
                 $uri->setHost($this->requestUri->getHost());
             }
- 
+
             if ($uri->getScheme() === null) {
                 $uri->setScheme($this->requestUri->getScheme());
             }
- 
+
             return $uri->setPath($path)->normalize()->toString();
         } elseif (!$uri->isAbsolute() && $uri->isValidRelative()) {
             return $uri->setPath($path)->normalize()->toString();

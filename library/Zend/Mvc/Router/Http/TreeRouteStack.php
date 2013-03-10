@@ -47,6 +47,7 @@ class TreeRouteStack extends SimpleRouteStack
                 'hostname' => __NAMESPACE__ . '\Hostname',
                 'literal'  => __NAMESPACE__ . '\Literal',
                 'part'     => __NAMESPACE__ . '\Part',
+                'chain'    => __NAMESPACE__ . '\Chain',
                 'regex'    => __NAMESPACE__ . '\Regex',
                 'scheme'   => __NAMESPACE__ . '\Scheme',
                 'segment'  => __NAMESPACE__ . '\Segment',
@@ -83,8 +84,9 @@ class TreeRouteStack extends SimpleRouteStack
      * @see    SimpleRouteStack::routeFromArray()
      * @param  array|Traversable $specs
      * @return RouteInterface
-     * @throws Exception\InvalidArgumentException
-     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException When route definition is not an array nor traversable
+     * @throws Exception\InvalidArgumentException When chain routes are not an array nor traversable
+     * @throws Exception\RuntimeException         When a generated routes does not implement the HTTP route interface
      */
     protected function routeFromArray($specs)
     {
@@ -94,7 +96,23 @@ class TreeRouteStack extends SimpleRouteStack
             throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
         }
 
-        $route = parent::routeFromArray($specs);
+        if (isset($specs['chain_routes'])) {
+            if (!is_array($specs['chain_routes'])) {
+                throw new Exception\InvalidArgumentException('Chain routes must be an array or Traversable object');
+            }
+
+            $chainRoutes = array($specs) + $specs['chain_routes'];
+            unset($chainRoutes[0]['chain_routes']);
+
+            $options = array(
+                'routes'        => $chainRoutes,
+                'route_plugins' => $this->routePluginManager
+            );
+
+            $route = $this->routePluginManager->get('chain', $options);
+        } else {
+            $route = parent::routeFromArray($specs);
+        }
 
         if (!$route instanceof RouteInterface) {
             throw new Exception\RuntimeException('Given route does not implement HTTP route interface');

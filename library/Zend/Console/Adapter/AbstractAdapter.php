@@ -12,6 +12,9 @@ namespace Zend\Console\Adapter;
 use Zend\Console\Charset;
 use Zend\Console\Exception;
 
+/**
+ * Common console adapter codebase
+ */
 abstract class AbstractAdapter implements AdapterInterface
 {
     /**
@@ -85,7 +88,7 @@ abstract class AbstractAdapter implements AdapterInterface
         $text = trim($text, "\r\n");
 
         // Replace newline characters with spaces
-        $test = str_replace("\n", " ", $text);
+        $text = str_replace("\n", " ", $text);
 
         // Trim the line if it's too long and output text
         $consoleWidth = $this->getWidth();
@@ -601,7 +604,7 @@ abstract class AbstractAdapter implements AdapterInterface
         $f = fopen('php://stdin','r');
         do {
             $char = fread($f,1);
-        } while ($mask === null || stristr($mask, $char));
+        } while ($mask !== null && "" !== $char && false === stristr($mask, $char));
         fclose($f);
         return $char;
     }

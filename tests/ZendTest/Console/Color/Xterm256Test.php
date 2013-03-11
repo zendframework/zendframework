@@ -8,7 +8,7 @@
  * @package   Zend_Console
  */
 
-namespace ZendTest\Console;
+namespace ZendTest\Console\Color;
 
 use ReflectionClass;
 use Zend\Console\Color\Xterm256;

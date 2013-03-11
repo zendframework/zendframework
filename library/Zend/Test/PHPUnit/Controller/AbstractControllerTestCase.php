@@ -15,7 +15,6 @@ use Zend\EventManager\StaticEventManager;
 use Zend\Http\Request as HttpRequest;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\SendResponseListener;
 use Zend\Stdlib\Exception\LogicException;
 use Zend\Stdlib\Parameters;
 use Zend\Stdlib\ResponseInterface;
@@ -154,12 +153,8 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $this->application = Application::init($appConfig);
 
         $events = $this->application->getEventManager();
-        foreach ($events->getListeners(MvcEvent::EVENT_FINISH) as $listener) {
-            $callback = $listener->getCallback();
-            if (is_array($callback) && $callback[0] instanceof SendResponseListener) {
-                $events->detach($listener);
-            }
-        }
+        $events->detach($this->application->getServiceManager()->get('SendResponseListener'));
+        
         return $this->application;
     }
 

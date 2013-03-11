@@ -49,14 +49,14 @@ class CharTest extends \PHPUnit_Framework_TestCase
 
     public function testCanPromptCharWithCharNotInDefaultMask()
     {
-        fwrite($this->adapter->stream, 'zywa');
+        fwrite($this->adapter->stream, '*zywa');
 
         $char = new Char();
         $char->setEcho(false);
         $char->setConsole($this->adapter);
         ob_start();
         $response = $char->show();
-        $text = ob_get_clean();
+        ob_get_clean();
         $this->assertEquals('z', $response);
     }
 
@@ -72,5 +72,32 @@ class CharTest extends \PHPUnit_Framework_TestCase
         $text = ob_get_clean();
         $this->assertEquals($text, "Give a number\n");
         $this->assertEquals('1', $response);
+    }
+    
+    public function testCanPromptCharWithIgnoreCaseByDefault()
+    {
+        fwrite($this->adapter->stream, 'FOObar');
+        
+        $char = new Char();
+        $char->setEcho(false);
+        $char->setConsole($this->adapter);
+        ob_start();
+        $response = $char->show();
+        ob_get_clean();
+        $this->assertEquals('F', $response);
+    }
+    
+    public function testCanPromptCharWithoutIgnoreCase()
+    {
+        fwrite($this->adapter->stream, 'FOObar');
+        
+        $char = new Char();
+        $char->setEcho(false);
+        $char->setConsole($this->adapter);
+        $char->setIgnoreCase(false);
+        ob_start();
+        $response = $char->show();
+        ob_get_clean();
+        $this->assertEquals('b', $response);
     }
 }

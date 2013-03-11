@@ -143,7 +143,7 @@ class Windows extends Virtual
 
         return false;
     }
-    
+
     /**
      * Return current console window title.
      *

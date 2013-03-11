@@ -358,7 +358,7 @@ abstract class AbstractAdapter implements AdapterInterface
     {
         return true;
     }
-    
+
     /**
      * Set cursor position
      *
@@ -392,7 +392,7 @@ abstract class AbstractAdapter implements AdapterInterface
     {
         return '';
     }
-    
+
     /**
      * Prepare a string that will be rendered in color.
      *

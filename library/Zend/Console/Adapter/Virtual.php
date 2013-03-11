@@ -115,7 +115,7 @@ class Virtual extends AbstractAdapter
 
         return false;
     }
-    
+
     /**
      * Return current console window title.
      *

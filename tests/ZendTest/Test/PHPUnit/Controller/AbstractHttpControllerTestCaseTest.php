@@ -31,7 +31,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         );
         parent::setUp();
     }
-    
+
     public function testUseOfRouter()
     {
        $this->assertEquals(false, $this->useConsoleRequest);
@@ -453,7 +453,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertQueryCount('div.post', 5);
         $this->assertXpathQueryCount('//div[@class="post"]', 5);
     }
-    
+
     public function testAssertQueryWithDynamicPostParams()
     {
         $this->getRequest()
@@ -476,7 +476,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertQueryCount('div.get', 0);
         $this->assertXpathQueryCount('//div[@class="get"]', 0);
     }
-    
+
     public function testAssertQueryWithDynamicPutParamsInDispatchMethod()
     {
         $this->dispatch('/tests', 'PUT', array('num_post' => 5, 'foo' => 'bar'));
@@ -556,7 +556,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertResponseStatusCode(500);
         $this->assertApplicationException('RuntimeException');
     }
-    
+
     /**
      * Sample tests on MvcEvent
      */

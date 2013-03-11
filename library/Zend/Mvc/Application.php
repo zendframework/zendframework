@@ -60,7 +60,7 @@ class Application implements
 
     /**
      * Default application event listeners
-     * 
+     *
      * @var array
      */
     protected $defaultListeners = array(

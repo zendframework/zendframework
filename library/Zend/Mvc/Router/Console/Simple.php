@@ -557,10 +557,11 @@ class Simple implements RouteInterface
          */
         $positional = $named = array();
         foreach ($this->parts as &$part) {
-            if ($part['positional'])
+            if ($part['positional']) {
                 $positional[] = &$part;
-            else
+            } else {
                 $named[] = &$part;
+            }
         }
 
         /**
@@ -651,8 +652,8 @@ class Simple implements RouteInterface
             /**
              * Try to retrieve value if it is expected
              */
-            if (!$value && $part['hasValue']) {
-                if ($x < count($params)+1) {
+            if ((null === $value || "" === $value) && $part['hasValue']) {
+                if ($x < count($params)+1 && isset($params[$x])) {
                     // retrieve value from adjacent param
                     $value = $params[$x];
 

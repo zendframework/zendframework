@@ -143,16 +143,7 @@ class Windows extends Virtual
 
         return false;
     }
-
-    /**
-     * Set cursor position
-     * @param int $x
-     * @param int $y
-     */
-    public function setPos($x, $y)
-    {
-    }
-
+    
     /**
      * Return current console window title.
      *

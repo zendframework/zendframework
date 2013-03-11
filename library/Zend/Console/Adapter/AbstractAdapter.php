@@ -358,33 +358,7 @@ abstract class AbstractAdapter implements AdapterInterface
     {
         return true;
     }
-
-    /**
-     * Return current cursor position - array($x, $y)
-     *
-     *
-     * @return array array($x, $y);
-     */
-    public function getPos()
-    {
-    }
-
-//    /**
-//     * Return current cursor X coordinate (column)
-//     *
-//     *
-//     * @return  false|int       Integer or false if failed to determine.
-//     */
-//    public function getX();
-//
-//    /**
-//     * Return current cursor Y coordinate (row)
-//     *
-//     *
-//     * @return  false|int       Integer or false if failed to determine.
-//     */
-//    public function getY();
-
+    
     /**
      * Set cursor position
      *
@@ -418,23 +392,7 @@ abstract class AbstractAdapter implements AdapterInterface
     {
         return '';
     }
-
-    /**
-     * Set console window title
-     *
-     * @param $title
-     */
-    public function setTitle($title)
-    {
-    }
-
-    /**
-     * Reset console window title to previous value.
-     */
-    public function resetTitle()
-    {
-    }
-
+    
     /**
      * Prepare a string that will be rendered in color.
      *

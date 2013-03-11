@@ -88,34 +88,19 @@ class Char extends AbstractPrompt
             $mask = array_unique($mask); // remove duplicates
             $mask = implode("", $mask);   // convert back to string
         }
+        
+        /**
+         * Read char from console
+         */
+        $char = $this->getConsole()->readChar($mask);
 
-        do {
-            /**
-             * Read char from console
-             */
-            $char = $this->getConsole()->readChar($mask);
-
-            /**
-             * Lowercase the response if case is irrelevant
-             */
-            if ($this->ignoreCase) {
-                $char = strtolower($char);
+        if ($this->echo) {
+            echo trim($char)."\n";
+        } else {
+            if ($this->promptText) {
+                echo "\n";  // skip to next line but only if we had any prompt text
             }
-
-            /**
-             * Check if it is an allowed char
-             */
-            if (stristr($this->allowedChars, $char) !== false) {
-                if ($this->echo) {
-                    echo trim($char)."\n";
-                } else {
-                    if ($this->promptText) {
-                        echo "\n";  // skip to next line but only if we had any prompt text
-                    }
-                }
-                break;
-            }
-        } while (true);
+        }
 
         return $this->lastResponse = $char;
     }

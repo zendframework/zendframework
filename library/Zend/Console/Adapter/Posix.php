@@ -306,7 +306,7 @@ class Posix extends AbstractAdapter
         $stream = fopen('php://stdin', 'rb');
         do {
             $char = fgetc($stream);
-        } while (strlen($char) !== 1 || ($mask !== null && stristr($mask, $char) === false));
+        } while (strlen($char) !== 1 || ($mask !== null && false === strstr($mask, $char)));
         fclose($stream);
 
         $this->restoreTTYMode();

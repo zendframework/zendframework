@@ -21,10 +21,10 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 {
     /** @var \PHPUnit_Framework_MockObject_MockObject */
     protected $mockStatement;
-    
+
     /** @var DbTableGateway */
     protected $dbTableGateway;
-        
+
     public function setup()
     {
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
@@ -37,20 +37,20 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
                      ->method('getName')
                      ->will($this->returnValue('platform'));
         $mockAdapter = $this->getMockForAbstractClass(
-            'Zend\Db\Adapter\Adapter', 
+            'Zend\Db\Adapter\Adapter',
             array($mockDriver, $mockPlatform)
         );
-        
+
         $tableName = 'foobar';
         $mockTableGateway = $this->getMockForAbstractClass(
             'Zend\Db\TableGateway\TableGateway',
             array($tableName, $mockAdapter)
         );
-        
+
         $this->mockStatement = $mockStatement;
         $this->dbTableGateway = new DbTableGateway($mockTableGateway);
     }
-    
+
     public function testGetItems()
     {
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
@@ -58,22 +58,22 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
              ->expects($this->any())
              ->method('execute')
              ->will($this->returnValue($mockResult));
-        
+
         $items = $this->dbTableGateway->getItems(2, 10);
         $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);
     }
-    
+
     public function testCount()
     {
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $mockResult->expects($this->any())
                    ->method('current')
                    ->will($this->returnValue(array('c' => 10)));
-        
+
         $this->mockStatement->expects($this->any())
              ->method('execute')
              ->will($this->returnValue($mockResult));
-        
+
         $count = $this->dbTableGateway->count();
         $this->assertEquals(10, $count);
     }

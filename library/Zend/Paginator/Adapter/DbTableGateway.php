@@ -16,7 +16,7 @@ class DbTableGateway extends DbSelect
 {
     /**
      * Construnct
-     * 
+     *
      * @param TableGateway                $tableGateway
      * @param Where|\Closure|string|array $where
      */
@@ -25,7 +25,7 @@ class DbTableGateway extends DbSelect
         $select             = $tableGateway->getSql()->select($where);
         $dbAdapter          = $tableGateway->getAdapter();
         $resultSetPrototype = $tableGateway->getResultSetPrototype();
-        
+
         parent::__construct($select, $dbAdapter, $resultSetPrototype);
     }
 }

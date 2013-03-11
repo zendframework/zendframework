@@ -202,7 +202,7 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
 
         /** @var $definition Definition\DefinitionInterface */
         foreach ($this as $definition) {
-            if ($definition->hasMethod($class, $method)) {
+            if ($definition->hasClass($class) && $definition->hasMethod($class, $method)) {
                 return true;
             }
         }

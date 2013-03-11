@@ -233,13 +233,13 @@ class Select extends Element implements InputProviderInterface
         $spec = array(
             'name' => $this->getName(),
             'required' => true,
-        );  
+        );
 
         if ($validator = $this->getValidator()) {
             $spec['validators'] = array(
                 $validator,
-            );  
-        }   
+            );
+        }
 
         return $spec;
     }

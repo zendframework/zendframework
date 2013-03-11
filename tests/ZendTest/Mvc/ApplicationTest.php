@@ -23,6 +23,7 @@ use Zend\Mvc\Router;
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Uri\UriFactory;
+use ZendTest\Mvc\TestAsset\StubBootstrapListener;
 
 /**
  * @category   Zend
@@ -72,7 +73,8 @@ class ApplicationTest extends TestCase
                     'Response'         => 'Zend\Http\PhpEnvironment\Response',
                     'RouteListener'    => 'Zend\Mvc\RouteListener',
                     'ViewManager'      => 'ZendTest\Mvc\TestAsset\MockViewManager',
-                    'SendResponseListener' => 'ZendTest\Mvc\TestAsset\MockSendResponseListener'
+                    'SendResponseListener' => 'ZendTest\Mvc\TestAsset\MockSendResponseListener',
+                    'BootstrapListener' => 'ZendTest\Mvc\TestAsset\StubBootstrapListener',
                 ),
                 'factories' => array(
                     'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
@@ -656,5 +658,26 @@ class ApplicationTest extends TestCase
         $event  = $this->application->getMvcEvent();
         $result = $method->invoke($this->application, $event);
         $this->assertSame($this->application, $result);
+    }
+
+    public function testCustomListener()
+    {
+        $this->application->bootstrap(array('BootstrapListener'));
+
+        // must contains custom bootstrap listeners
+        $bootstrapListener = $this->serviceManager->get('BootstrapListener');
+        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_BOOTSTRAP);
+        $bootstrapListeners = $bootstrapListener->getListeners();
+        $this->assertTrue($listeners->contains($bootstrapListeners[0]));
+
+        // must contains default listeners
+        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_DISPATCH);
+        $this->assertEquals(1, count($listeners));
+
+        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_ROUTE);
+        $this->assertEquals(1, count($listeners));
+
+        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_FINISH);
+        $this->assertEquals(1, count($listeners));
     }
 }

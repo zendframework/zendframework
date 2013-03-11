@@ -154,7 +154,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 
         $events = $this->application->getEventManager();
         $events->detach($this->application->getServiceManager()->get('SendResponseListener'));
-        
+
         return $this->application;
     }
 

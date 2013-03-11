@@ -12,6 +12,7 @@ namespace ZendTest\Di;
 
 use Zend\Di\DefinitionList;
 use Zend\Di\Definition\ClassDefinition;
+use Zend\Di\Definition\BuilderDefinition;
 
 use PHPUnit_Framework_TestCase as TestCase;
 
@@ -43,5 +44,17 @@ class DefinitionListTest extends TestCase
         $definitionClass->addMethod('doBar');
 
         $this->assertTrue($definitionList->hasMethod('foo', 'doBar'));
+    }
+
+    public function testHasMethodAvoidAskingFromDefinitionsWhichDoNotIncludeClass()
+    {
+        $builderDefinition = new BuilderDefinition();
+
+        $definitionClass = new ClassDefinition('foo');
+        $definitionClass->addMethod('doFoo');
+
+        $definitionList = new DefinitionList(array($builderDefinition, $definitionClass));
+
+        $this->assertTrue($definitionList->hasMethod('foo', 'doFoo'));
     }
 }

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Console
  */
 
 namespace ZendTest\Console\TestAssets;
@@ -13,9 +12,6 @@ namespace ZendTest\Console\TestAssets;
 use Zend\Console\Adapter\AbstractAdapter;
 
 /**
- * @category   Zend
- * @package    Zend_Console
- * @subpackage UnitTests
  * @group      Zend_Console
  */
 class ConsoleAdapter extends AbstractAdapter

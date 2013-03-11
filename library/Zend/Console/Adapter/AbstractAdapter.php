@@ -12,6 +12,9 @@ namespace Zend\Console\Adapter;
 use Zend\Console\Charset;
 use Zend\Console\Exception;
 
+/**
+ * Common console adapter codebase
+ */
 abstract class AbstractAdapter implements AdapterInterface
 {
     /**

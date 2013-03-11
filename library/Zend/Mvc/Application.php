@@ -59,6 +59,18 @@ class Application implements
     protected $configuration = null;
 
     /**
+     * Default application event listeners
+     * 
+     * @var array
+     */
+    protected $defaultListeners = array(
+        'RouteListener',
+        'DispatchListener',
+        'ViewManager',
+        'SendResponseListener',
+    );
+
+    /**
      * MVC event token
      * @var MvcEvent
      */
@@ -126,10 +138,7 @@ class Application implements
         $serviceManager = $this->serviceManager;
         $events         = $this->getEventManager();
 
-        $defaultListeners = array(
-            'RouteListener', 'DispatchListener', 'ViewManager', 'SendResponseListener');
-
-        $listeners = array_unique(array_merge($defaultListeners, $listeners));
+        $listeners = array_unique(array_merge($this->defaultListeners, $listeners));
 
         foreach ($listeners as $listener) {
             $events->attach($serviceManager->get($listener));

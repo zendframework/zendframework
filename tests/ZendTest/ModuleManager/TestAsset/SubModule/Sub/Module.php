@@ -12,5 +12,5 @@ namespace SubModule\Sub;
 
 class Module
 {
-    
+
 }

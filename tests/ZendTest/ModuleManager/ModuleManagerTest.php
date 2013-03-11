@@ -191,7 +191,7 @@ class ModuleManagerTest extends TestCase
         $config = $configListener->getMergedConfig();
         $this->assertSame($config->some, 'thing');
     }
-    
+
     public function testCanNotLoadSomeObjectModuleWithoutIdentifier()
     {
         require_once __DIR__ . '/TestAsset/SomeModule/Module.php';

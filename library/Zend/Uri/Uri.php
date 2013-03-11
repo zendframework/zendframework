@@ -359,17 +359,17 @@ class Uri implements UriInterface
         }
 
         if ($this->path) {
-            $uri .= self::encodePath($this->path);
+            $uri .= static::encodePath($this->path);
         } elseif ($this->host && ($this->query || $this->fragment)) {
             $uri .= '/';
         }
 
         if ($this->query) {
-            $uri .= "?" . self::encodeQueryFragment($this->query);
+            $uri .= "?" . static::encodeQueryFragment($this->query);
         }
 
         if ($this->fragment) {
-            $uri .= "#" . self::encodeQueryFragment($this->fragment);
+            $uri .= "#" . static::encodeQueryFragment($this->fragment);
         }
 
         return $uri;

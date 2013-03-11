@@ -18,6 +18,8 @@ class ConsoleAdapter extends AbstractAdapter
 {
     public $stream;
 
+    public $autoRewind = true;
+    
     /**
      * Read a single line from the console input
      *
@@ -26,7 +28,9 @@ class ConsoleAdapter extends AbstractAdapter
      */
     public function readLine($maxLength = 2048)
     {
-        rewind($this->stream);
+        if($this->autoRewind) {
+            rewind($this->stream);
+        }
         $line = stream_get_line($this->stream, $maxLength, PHP_EOL);
         return rtrim($line,"\n\r");
     }
@@ -39,7 +43,9 @@ class ConsoleAdapter extends AbstractAdapter
      */
     public function readChar($mask = null)
     {
-        rewind($this->stream);
+        if($this->autoRewind) {
+            rewind($this->stream);
+        }
         do {
             $char = fread($this->stream, 1);
         } while ($mask !== null && "" !== $char && false === stristr($mask, $char));

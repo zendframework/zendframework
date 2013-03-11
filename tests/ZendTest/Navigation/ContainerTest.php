@@ -114,6 +114,23 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @group 3823
+     * @group 3840
+     */
+    public function testAddPagesWithNullValueSkipsPage()
+    {
+        $nav = new Navigation\Navigation(array(
+            array(
+                'label' => 'Page 1',
+                'uri' => '#'
+            ),
+            null
+        ));
+        $count = count($nav->getPages());
+        $this->assertEquals(1, $count);
+    }
+
     public function testIterationShouldBeOrderAware()
     {
         $nav = new Navigation\Navigation(array(

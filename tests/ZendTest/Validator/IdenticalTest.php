@@ -181,36 +181,4 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
             )
         ));
     }
-
-    public function testSetStringTokenNonExistentInContext()
-    {
-        $this->validator->setToken('email');
-        $this->setExpectedException(
-            'Zend\Validator\Exception\RuntimeException',
-            "The token doesn't exist in the context"
-        );
-
-        $this->validator->isValid(
-            'john@doe.com',
-            array('name' => 'john') // There's no 'email' key here, must throw an exception
-        );
-    }
-
-    public function testSetArrayTokenNonExistentInContext()
-    {
-        $this->validator->setToken(array('user' => 'email'));
-        $this->setExpectedException(
-            'Zend\Validator\Exception\RuntimeException',
-            "The token doesn't exist in the context"
-        );
-
-        $this->validator->isValid(
-            'john@doe.com',
-            array(
-                'admin' => array( // Here is 'admin' instead of 'user', must throw an exception
-                    'email' => 'john@doe.com'
-                )
-            )
-        );
-    }
 }

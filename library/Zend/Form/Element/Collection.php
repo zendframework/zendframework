@@ -477,6 +477,12 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
                 $targetElement = clone $this->targetElement;
                 $targetElement->object = $value;
                 $values[$key] = $targetElement->extract();
+                if ($this->has($key)) {
+                    $fieldset = $this->get($key);
+                    if ($fieldset instanceof Fieldset && $fieldset->allowObjectBinding($value)) {
+                        $fieldset->setObject($value);
+                    }
+                }
             }
         }
 

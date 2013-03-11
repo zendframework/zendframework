@@ -108,7 +108,7 @@ abstract class Console
     {
         static::$instance = null;
     }
-    
+
     /**
      * Check if currently running under MS Windows
      *

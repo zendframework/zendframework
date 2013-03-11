@@ -134,7 +134,7 @@ class Request extends Message implements RequestInterface
         $this->envParams = $env;
         return $this;
     }
-    
+
     /**
      * Return a single parameter container responsible for env parameters
      *

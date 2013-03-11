@@ -19,7 +19,7 @@ class ConsoleAdapter extends AbstractAdapter
     public $stream;
 
     public $autoRewind = true;
-    
+
     /**
      * Read a single line from the console input
      *

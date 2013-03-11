@@ -77,8 +77,17 @@ class ModuleManager implements ModuleManagerInterface
             return $this;
         }
 
-        foreach ($this->getModules() as $moduleName) {
-            $this->loadModule($moduleName);
+        foreach ($this->getModules() as $moduleName => $module) {
+            if (is_object($module)) {
+                if (!is_string($moduleName)) {
+                    throw new Exception\RuntimeException(sprintf(
+                        'Module (%s) must have a key identifier.',
+                        get_class($module)
+                    ));
+                }
+                $module = array($moduleName => $module);
+            }
+            $this->loadModule($module);
         }
 
         $this->modulesAreLoaded = true;
@@ -113,14 +122,20 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Load a specific module by name.
      *
-     * @param    string $moduleName
-     * @throws   Exception\RuntimeException
+     * @param  string|array               $module
+     * @throws Exception\RuntimeException
      * @triggers loadModule.resolve
      * @triggers loadModule
-     * @return   mixed Module's Module class
+     * @return mixed Module's Module class
      */
-    public function loadModule($moduleName)
+    public function loadModule($module)
     {
+        $moduleName = $module;
+        if (is_array($module)) {
+            $moduleName = key($module);
+            $module = current($module);
+        }
+
         if (isset($this->loadedModules[$moduleName])) {
             return $this->loadedModules[$moduleName];
         }
@@ -130,17 +145,8 @@ class ModuleManager implements ModuleManagerInterface
 
         $this->loadFinished = false;
 
-        $result = $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, $this, $event, function ($r) {
-            return (is_object($r));
-        });
-
-        $module = $result->last();
-
         if (!is_object($module)) {
-            throw new Exception\RuntimeException(sprintf(
-                'Module (%s) could not be initialized.',
-                $moduleName
-            ));
+            $module = $this->loadModuleByName($event);
         }
         $event->setModule($module);
 
@@ -153,9 +159,32 @@ class ModuleManager implements ModuleManagerInterface
     }
 
     /**
+     * Load a module with the name
+     * @param  Zend\EventManager\EventInterface $event
+     * @return mixed                            module instance
+     * @throws Exception\RuntimeException
+     */
+    protected function loadModuleByName($event)
+    {
+        $result = $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, $this, $event, function ($r) {
+            return (is_object($r));
+        });
+
+        $module = $result->last();
+        if (!is_object($module)) {
+            throw new Exception\RuntimeException(sprintf(
+                'Module (%s) could not be initialized.',
+                $event->getModuleName()
+            ));
+        }
+
+        return $module;
+    }
+
+    /**
      * Get an array of the loaded modules.
      *
-     * @param  bool $loadModules If true, load modules if they're not already
+     * @param  bool  $loadModules If true, load modules if they're not already
      * @return array An array of Module objects, keyed by module name
      */
     public function getLoadedModules($loadModules = false)
@@ -163,6 +192,7 @@ class ModuleManager implements ModuleManagerInterface
         if (true === $loadModules) {
             $this->loadModules();
         }
+
         return $this->loadedModules;
     }
 

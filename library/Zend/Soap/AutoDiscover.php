@@ -204,8 +204,7 @@ class AutoDiscover
     {
         if (!is_string($uri) && !($uri instanceof Uri\Uri)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'No uri given to %s::%s() as string or \Zend\Uri\Uri instance.',
-                __CLASS__,
+                'No uri given to %s() as string or \Zend\Uri\Uri instance.',
                 __METHOD__
             ));
         }
@@ -246,9 +245,8 @@ class AutoDiscover
     {
         if (!is_string($wsdlClass) && !is_subclass_of($wsdlClass, 'Zend\Soap\Wsdl')) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'No %s\Wsdl subclass given to %s::%s() as string.',
+                'No %s\Wsdl subclass given to %s() as string.',
                 __NAMESPACE__,
-                __CLASS__,
                 __METHOD__
             ));
         }

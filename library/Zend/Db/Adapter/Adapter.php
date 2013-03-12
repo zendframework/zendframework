@@ -20,7 +20,7 @@ use Zend\Db\ResultSet;
  * @property Driver\DriverInterface $driver
  * @property Platform\PlatformInterface $platform
  */
-class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
+class Adapter implements AdapterInterface
 {
     /**
      * Query Mode Constants

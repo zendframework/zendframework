@@ -13,6 +13,7 @@ namespace ZendTest\Db\Sql;
 use Zend\Db\Sql\Update;
 use Zend\Db\Sql\Where;
 use Zend\Db\Sql\Expression;
+use ZendTest\Db\TestAsset\TrustingSql92Platform;
 
 class UpdateTest extends \PHPUnit_Framework_TestCase
 {
@@ -125,7 +126,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $update->table('table');
         $update->set(array('fld1' => 'val1'));
         $update->where(array('id1' => 'val1', 'id2' => 'val2'));
-        $this->assertEquals('UPDATE "table" SET "fld1" = \'val1\' WHERE "id1" = \'val1\' AND "id2" = \'val2\'', $update->getSqlString());
+        $this->assertEquals('UPDATE "table" SET "fld1" = \'val1\' WHERE "id1" = \'val1\' AND "id2" = \'val2\'', $update->getSqlString(new TrustingSql92Platform()));
     }
 
     /**
@@ -177,7 +178,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
             ->set(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null))
             ->where('x = y');
 
-        $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\', "boo" = NOW(), "bam" = NULL WHERE x = y', $this->update->getSqlString());
+        $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\', "boo" = NOW(), "bam" = NULL WHERE x = y', $this->update->getSqlString(new TrustingSql92Platform()));
     }
 
     /**
@@ -214,7 +215,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
             ->where(array(
                 'id = ?'=>1
             ));
-        $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\' WHERE id = \'1\'', $update2->getSqlString());
+        $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\' WHERE id = \'1\'', $update2->getSqlString(new TrustingSql92Platform));
     }
 
 }

@@ -11,18 +11,35 @@
         <exclude>
             <group>disable</group>
             <group>integration</group>
+            <group>integration-mysql</group>
+            <group>integration-postgres</group>
             <group>integration-sqlserver</group>
         </exclude>
     </groups>
 
+    <listeners>
+        <listener class="ZendTest\Db\IntegrationTestListener" file="./ZendTest/Db/IntegrationTestListener.php" />
+    </listeners>
+
     <php>
 
         <!-- Integration Test Variables -->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_MYSQL_HOSTNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_MYSQL_USERNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_MYSQL_PASSWORD" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_MYSQL_DATABASE" value="" />-->
+
         <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_HOSTNAME" value="" />-->
         <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_USERNAME" value="" />-->
         <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_PASSWORD" value="" />-->
         <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE" value="" />-->
 
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_PGSQL_HOSTNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_PGSQL_USERNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_PGSQL_PASSWORD" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_PGSQL_DATABASE" value="" />-->
+
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLITE_MEMORY" value="true" />-->
     </php>
 
 

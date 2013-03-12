@@ -399,6 +399,10 @@ class Translator
             $this->loadMessages($textDomain, $locale);
         }
 
+        if (!isset($this->messages[$textDomain][$locale])) {
+            return null;
+        }
+
         if (is_array($this->messages[$textDomain][$locale])) {
             foreach ($this->messages[$textDomain][$locale] as $textDomain) {
                 if (isset($textDomain[$message])) {

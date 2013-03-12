@@ -24,12 +24,37 @@ use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
  */
 class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 {
+    public function tearDownCacheDir()
+    {
+        $cacheDir = sys_get_temp_dir() . '/zf2-module-test';
+        if (is_dir($cacheDir)) {
+            static::rmdir($cacheDir);
+        }
+    }
+
+    public static function rmdir($dir)
+    {
+        $files = array_diff(scandir($dir), array('.','..'));
+        foreach ($files as $file) {
+            (is_dir("$dir/$file")) ? static::rmdir("$dir/$file") : unlink("$dir/$file");
+        }
+        return rmdir($dir);
+    }
+
     public function setUp()
     {
+        $this->tearDownCacheDir();
+        Console::overrideIsConsole(null);
         $this->setApplicationConfig(
             include __DIR__ . '/../../_files/application.config.php'
         );
         parent::setUp();
+    }
+
+    public function tearDown()
+    {
+        $this->tearDownCacheDir();
+        parent::tearDown();
     }
 
     public function testModuleCacheIsDisabled()
@@ -64,22 +89,22 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public function testApplicationClassAndTestRestoredConsoleFlag()
     {
-        $this->assertTrue(Console::isConsole());
+        $this->assertTrue(Console::isConsole(), '1. Console::isConsole returned false in initial test');
         $this->getApplication();
-        $this->assertFalse(Console::isConsole());
+        $this->assertFalse(Console::isConsole(), '2. Console::isConsole returned true after retrieving application');
         $this->tearDown();
-        $this->assertTrue(Console::isConsole());
+        $this->assertTrue(Console::isConsole(), '3. Console::isConsole returned false after tearDown');
 
         Console::overrideIsConsole(false);
         parent::setUp();
 
-        $this->assertFalse(Console::isConsole());
+        $this->assertFalse(Console::isConsole(), '4. Console::isConsole returned true after parent::setUp');
         $this->getApplication();
-        $this->assertFalse(Console::isConsole());
+        $this->assertFalse(Console::isConsole(), '5. Console::isConsole returned true after retrieving application');
 
         parent::tearDown();
 
-        $this->assertFalse(Console::isConsole());
+        $this->assertFalse(Console::isConsole(), '6. Console.isConsole returned true after parent::tearDown');
     }
 
     public function testApplicationServiceLocatorClass()

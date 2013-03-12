@@ -151,10 +151,10 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
      */
     public function setupDefaultFeatures()
     {
-        if ($this->connection->getDriverName() == 'sqlite') {
+        $driverName = $this->connection->getDriverName();
+        if ($driverName == 'sqlite') {
             $this->addFeature(null, new Feature\SqliteRowCounter);
-        }
-        else if ($this->connection->getDriverName() == 'oci') {
+        } elseif ($driverName == 'oci') {
             $this->addFeature(null, new Feature\OracleRowCounter);
         }
         return $this;

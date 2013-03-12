@@ -489,7 +489,7 @@ class ClassGenerator extends AbstractGenerator
         if (!empty($useAlias)) {
             $use .= ' as ' . $useAlias;
         }
-        
+
         $this->uses[] = $use;
         return $this;
     }

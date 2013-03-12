@@ -86,10 +86,12 @@ class IbmDb2Test extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteValue()
     {
-        $this->setExpectedException(
-            'PHPUnit_Framework_Error',
-            'Attempting to quote a value in Zend\Db\Adapter\Platform\IbmDb2 without extension/driver support can introduce security vulnerabilities in a production environment'
-        );
+        if (!function_exists('db2_escape_string')) {
+            $this->setExpectedException(
+                'PHPUnit_Framework_Error',
+                'Attempting to quote a value in Zend\Db\Adapter\Platform\IbmDb2 without extension/driver support can introduce security vulnerabilities in a production environment'
+            );
+        }
         $this->assertEquals("'value'", $this->platform->quoteValue('value'));
     }
 
@@ -99,11 +101,11 @@ class IbmDb2Test extends \PHPUnit_Framework_TestCase
     public function testQuoteTrustedValue()
     {
         $this->assertEquals("'value'", $this->platform->quoteTrustedValue('value'));
-        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteTrustedValue("Foo O'Bar"));
-        $this->assertEquals('\'\\\'; DELETE FROM some_table; -- \'', $this->platform->quoteTrustedValue('\'; DELETE FROM some_table; -- '));
+        $this->assertEquals("'Foo O''Bar'", $this->platform->quoteTrustedValue("Foo O'Bar"));
+        $this->assertEquals('\'\'\'; DELETE FROM some_table; -- \'', $this->platform->quoteTrustedValue('\'; DELETE FROM some_table; -- '));
 
         //                   '\\\'; DELETE FROM some_table; -- '  <- actual below
-        $this->assertEquals("'\\\\\\'; DELETE FROM some_table; -- '", $this->platform->quoteTrustedValue('\\\'; DELETE FROM some_table; -- '));
+        $this->assertEquals('\'\\\'\'; DELETE FROM some_table; -- \'', $this->platform->quoteTrustedValue('\\\'; DELETE FROM some_table; -- '));
     }
 
     /**
@@ -111,11 +113,13 @@ class IbmDb2Test extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteValueList()
     {
-        $this->setExpectedException(
-            'PHPUnit_Framework_Error',
-            'Attempting to quote a value in Zend\Db\Adapter\Platform\IbmDb2 without extension/driver support can introduce security vulnerabilities in a production environment'
-        );
-        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
+        if (!function_exists('db2_escape_string')) {
+            $this->setExpectedException(
+                'PHPUnit_Framework_Error',
+                'Attempting to quote a value in Zend\Db\Adapter\Platform\IbmDb2 without extension/driver support can introduce security vulnerabilities in a production environment'
+            );
+        }
+        $this->assertEquals("'Foo O''Bar'", $this->platform->quoteValueList("Foo O'Bar"));
     }
 
     /**

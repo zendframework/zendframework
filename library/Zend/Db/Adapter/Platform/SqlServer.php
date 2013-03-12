@@ -27,18 +27,21 @@ class SqlServer implements PlatformInterface
     }
 
     /**
-     * @param \Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv|\Zend\Db\Adapter\Driver\Pdo\Pdo||\mysqli|\PDO $driver
+     * @param \Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv|\Zend\Db\Adapter\Driver\Pdo\Pdo||resource|\PDO $driver
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      * @return $this
      */
     public function setDriver($driver)
     {
-        if ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'SqlServer') {
+        // handle Zend_Db drivers
+        if ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'Sqlsrv') {
+            /** @var $driver \Zend\Db\Adapter\Driver\DriverInterface */
             $this->resource = $driver->getConnection()->getResource();
             return $this;
         }
 
-        if ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'sqlsrv') {
+        // handle
+        if (($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'sqlsrv')) {
             $this->resource = $driver;
             return $this;
         }

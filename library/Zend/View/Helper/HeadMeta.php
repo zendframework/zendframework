@@ -205,7 +205,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
         ) {
             return false;
         }
-        
+
         // <meta itemprop= ... /> is only supported with doctype html
         if (! $this->view->plugin('doctype')->isHtml5()
             && $item->type === 'itemprop'

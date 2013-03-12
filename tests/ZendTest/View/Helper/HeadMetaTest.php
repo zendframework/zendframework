@@ -463,8 +463,8 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $this->view->doctype('XHTML1_RDFA');
         $this->_testOverloadSet('property');
     }
-	
-	 /**
+
+     /**
      * @issue 3751
      */
     public function testItempropIsSupportedWithHtml5Doctype()

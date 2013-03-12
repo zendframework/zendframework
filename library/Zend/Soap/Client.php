@@ -1109,7 +1109,10 @@ class Client implements ServerClient
     public function getFunctions()
     {
         if ($this->getWSDL() == null) {
-            throw new Exception\UnexpectedValueException(__METHOD__ . ' is available only in WSDL mode.');
+            throw new Exception\UnexpectedValueException(sprintf(
+                '%s method is available only in WSDL mode.',
+                __METHOD__
+            ));
         }
 
         $soapClient = $this->getSoapClient();
@@ -1132,7 +1135,10 @@ class Client implements ServerClient
     public function getTypes()
     {
         if ($this->getWSDL() == null) {
-            throw new Exception\UnexpectedValueException(__METHOD__ . ' method is available only in WSDL mode.');
+            throw new Exception\UnexpectedValueException(sprintf(
+                '%s method is available only in WSDL mode.',
+                __METHOD__
+            ));
         }
 
         $soapClient = $this->getSoapClient();

@@ -197,6 +197,41 @@ class FlashMessengerTest extends TestCase
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
 
+    public function testCanDisplayListOfMessagesCustomisedByConfigSeparator()
+    {
+        $this->seedMessages();
+
+        $config = array(
+            'view_helper_config' => array(
+                'flashmessenger' => array(
+                    'message_open_format' => '<div><ul><li%s>',
+                    'message_separator_string' => '</li><li%s>',
+                    'message_close_string' => '</li></ul></div>',
+                ),
+            ),
+        );
+        $sm = new ServiceManager();
+        $sm->setService('Config', $config);
+        $helperPluginManager = new HelperPluginManager(new Config(array(
+            'factories' => array(
+                'flashmessenger' => 'Zend\View\Helper\Service\FlashMessengerFactory',
+            ),
+        )));
+        $controllerPluginManager = new PluginManager(new Config(array(
+            'invokables' => array(
+                'flashmessenger' => 'Zend\Mvc\Controller\Plugin\FlashMessenger',
+            ),
+        )));
+        $helperPluginManager->setServiceLocator($sm);
+        $controllerPluginManager->setServiceLocator($sm);
+        $sm->setService('ControllerPluginManager', $controllerPluginManager);
+        $helper = $helperPluginManager->get('flashmessenger');
+
+        $displayInfoAssertion = '<div><ul><li class="foo-baz foo-bar">foo</li><li class="foo-baz foo-bar">bar</li></ul></div>';
+        $displayInfo = $helper->render(PluginFlashMessenger::NAMESPACE_DEFAULT, array('foo-baz', 'foo-bar'));
+        $this->assertEquals($displayInfoAssertion, $displayInfo);
+    }
+
     public function testCanTranslateMessages()
     {
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');

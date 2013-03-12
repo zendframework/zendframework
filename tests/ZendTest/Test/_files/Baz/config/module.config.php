@@ -13,6 +13,16 @@ return array(
                         ),
                     ),
                 ),
+                'arguments' => array(
+                    'type' => 'simple',
+                    'options' => array(
+                        'route'    => 'filter --date= --id= --text=',
+                        'defaults' => array(
+                            'controller' => 'baz_index',
+                            'action'     => 'console',
+                        ),
+                    ),
+                ),
             ),
         ),
     ),

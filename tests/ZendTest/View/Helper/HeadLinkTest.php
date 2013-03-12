@@ -44,7 +44,6 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        PlaceholderRegistry::unsetRegistry();
         Helper\Doctype::unsetDoctypeRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
         $this->view     = new View();
@@ -61,17 +60,6 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->helper);
-    }
-
-    public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
-    {
-        $registry = PlaceholderRegistry::getRegistry();
-        if ($registry->containerExists('Zend_View_Helper_HeadLink')) {
-            $registry->deleteContainer('Zend_View_Helper_HeadLink');
-        }
-        $this->assertFalse($registry->containerExists('Zend_View_Helper_HeadLink'));
-        $helper = new Helper\HeadLink();
-        $this->assertTrue($registry->containerExists('Zend_View_Helper_HeadLink'));
     }
 
     public function testHeadLinkReturnsObjectInstance()

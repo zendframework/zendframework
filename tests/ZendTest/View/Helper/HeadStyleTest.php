@@ -43,7 +43,6 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Registry::unsetRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new Helper\HeadStyle();
     }
@@ -57,17 +56,6 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->helper);
-    }
-
-    public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
-    {
-        $registry = Registry::getRegistry();
-        if ($registry->containerExists('Zend_View_Helper_HeadStyle')) {
-            $registry->deleteContainer('Zend_View_Helper_HeadStyle');
-        }
-        $this->assertFalse($registry->containerExists('Zend_View_Helper_HeadStyle'));
-        $helper = new Helper\HeadStyle();
-        $this->assertTrue($registry->containerExists('Zend_View_Helper_HeadStyle'));
     }
 
     public function testHeadStyleReturnsObjectInstance()

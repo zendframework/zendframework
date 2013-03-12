@@ -11,7 +11,6 @@ namespace Zend\View\Helper\Placeholder\Container;
 
 use Zend\Escaper\Escaper;
 use Zend\View\Exception;
-use Zend\View\Helper\Placeholder\Registry;
 use Zend\View\Renderer\RendererInterface;
 
 /**
@@ -32,17 +31,6 @@ abstract class AbstractStandalone
     protected $escapers = array();
 
     /**
-     * @var \Zend\View\Helper\Placeholder\Registry
-     */
-    protected $registry;
-
-    /**
-     * Registry key under which container registers itself
-     * @var string
-     */
-    protected $regKey;
-
-    /**
      * Flag whether to automatically escape output, must also be
      * enforced in the child class if __toString/toString is overridden
      * @var bool
@@ -50,35 +38,18 @@ abstract class AbstractStandalone
     protected $autoEscape = true;
 
     /**
+     * Default container class
+     * @var string
+     */
+    protected $containerClass = 'Zend\View\Helper\Placeholder\Container';
+
+    /**
      * Constructor
      *
      */
     public function __construct()
     {
-        $this->setRegistry(Registry::getRegistry());
-        $this->setContainer($this->getRegistry()->getContainer($this->regKey));
-    }
-
-    /**
-     * Retrieve registry
-     *
-     * @return \Zend\View\Helper\Placeholder\Registry
-     */
-    public function getRegistry()
-    {
-        return $this->registry;
-    }
-
-    /**
-     * Set registry object
-     *
-     * @param  \Zend\View\Helper\Placeholder\Registry $registry
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractStandalone
-     */
-    public function setRegistry(Registry $registry)
-    {
-        $this->registry = $registry;
-        return $this;
+        $this->setContainer($this->getContainer());
     }
 
     /**
@@ -172,7 +143,61 @@ abstract class AbstractStandalone
      */
     public function getContainer()
     {
+        if (!$this->container instanceof AbstractContainer) {
+            $this->container = new $this->containerClass();
+        }
         return $this->container;
+    }
+
+    /**
+     * Delete a container
+     *
+     * @return bool
+     */
+    public function deleteContainer()
+    {
+        if (null != $this->container) {
+            $this->container = null;
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Set the container class to use
+     *
+     * @param  string $name
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\DomainException
+     * @return \Zend\View\Helper\Placeholder\Container\AbstractStandalone
+     */
+    public function setContainerClass($name)
+    {
+        if (!class_exists($name)) {
+            throw new Exception\DomainException(
+                sprintf('%s expects a valid container class name; received "%s", which did not resolve',
+                    __METHOD__,
+                    $name
+                ));
+        }
+
+        if (!in_array('Zend\View\Helper\Placeholder\Container\AbstractContainer', class_parents($name))) {
+            throw new Exception\InvalidArgumentException('Invalid Container class specified');
+        }
+
+        $this->containerClass = $name;
+        return $this;
+    }
+
+    /**
+     * Retrieve the container class
+     *
+     * @return string
+     */
+    public function getContainerClass()
+    {
+        return $this->containerClass;
     }
 
     /**

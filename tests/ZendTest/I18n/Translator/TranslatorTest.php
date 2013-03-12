@@ -191,4 +191,23 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Message 5 (en) Plural 1', $pl1);
         $this->assertEquals('Message 5 (en) Plural 2', $pl2);
     }
+
+    public function testTranslateNonExistantLocale()
+    {
+        $translator = Translator::factory(array(
+            'locale' => 'es_ES',
+            'translation_file_patterns' => array(
+                array(
+                    'type' => 'phparray',
+                    'base_dir' => $this->testFilesDir . '/testarray',
+                    'pattern' => 'translation-%s.php'
+                )
+            )
+        ));
+
+        $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator);
+
+        $this->assertEquals('Message 1', $translator->translate('Message 1'));
+        $this->assertEquals('Message 9', $translator->translate('Message 9'));
+    }
 }

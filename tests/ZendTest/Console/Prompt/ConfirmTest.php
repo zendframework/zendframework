@@ -37,13 +37,13 @@ class ConfirmTest extends \PHPUnit_Framework_TestCase
     {
         fwrite($this->adapter->stream, 'y');
 
-        $confirm = new Confirm("ZF2 is the better framework ?");
+        $confirm = new Confirm("Is ZF2 the best framework ?");
         $confirm->setEcho(false);
         $confirm->setConsole($this->adapter);
         ob_start();
         $response = $confirm->show();
         $text = ob_get_clean();
-        $this->assertEquals($text, "ZF2 is the better framework ?\n");
+        $this->assertEquals($text, "Is ZF2 the best framework ?\n");
         $this->assertTrue($response);
     }
     
@@ -51,13 +51,13 @@ class ConfirmTest extends \PHPUnit_Framework_TestCase
     {
         fwrite($this->adapter->stream, 'Y');
 
-        $confirm = new Confirm("ZF2 is the better framework ?");
+        $confirm = new Confirm("Is ZF2 the best framework ?");
         $confirm->setEcho(false);
         $confirm->setConsole($this->adapter);
         ob_start();
         $response = $confirm->show();
         $text = ob_get_clean();
-        $this->assertEquals($text, "ZF2 is the better framework ?\n");
+        $this->assertEquals($text, "Is ZF2 the best framework ?\n");
         $this->assertTrue($response);
     }
     
@@ -65,14 +65,14 @@ class ConfirmTest extends \PHPUnit_Framework_TestCase
     {
         fwrite($this->adapter->stream, 'Yn');
 
-        $confirm = new Confirm("ZF2 is the better framework ?");
+        $confirm = new Confirm("Is ZF2 the best framework ?");
         $confirm->setEcho(false);
         $confirm->setConsole($this->adapter);
         $confirm->setIgnoreCase(false);
         ob_start();
         $response = $confirm->show();
         $text = ob_get_clean();
-        $this->assertEquals($text, "ZF2 is the better framework ?\n");
+        $this->assertEquals($text, "Is ZF2 the best framework ?\n");
         $this->assertFalse($response);
     }
     
@@ -80,13 +80,13 @@ class ConfirmTest extends \PHPUnit_Framework_TestCase
     {
         fwrite($this->adapter->stream, 'on0');
 
-        $confirm = new Confirm("ZF2 is the better framework ?", "1", "0");
+        $confirm = new Confirm("Is ZF2 the best framework ?", "1", "0");
         $confirm->setEcho(false);
         $confirm->setConsole($this->adapter);
         ob_start();
         $response = $confirm->show();
         $text = ob_get_clean();
-        $this->assertEquals($text, "ZF2 is the better framework ?\n");
+        $this->assertEquals($text, "Is ZF2 the best framework ?\n");
         $this->assertFalse($response);
     }
     
@@ -94,7 +94,7 @@ class ConfirmTest extends \PHPUnit_Framework_TestCase
     {
         fwrite($this->adapter->stream, 'oaB');
 
-        $confirm = new Confirm("ZF2 is the better framework ?", "1", "0");
+        $confirm = new Confirm("Is ZF2 the best framework ?", "1", "0");
         $confirm->setYesChar("A");
         $confirm->setNoChar("B");
         $confirm->setEcho(false);
@@ -102,7 +102,7 @@ class ConfirmTest extends \PHPUnit_Framework_TestCase
         ob_start();
         $response = $confirm->show();
         $text = ob_get_clean();
-        $this->assertEquals($text, "ZF2 is the better framework ?\n");
+        $this->assertEquals($text, "Is ZF2 the best framework ?\n");
         $this->assertTrue($response);
     }
 }

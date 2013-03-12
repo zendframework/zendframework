@@ -197,7 +197,17 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     {
         $request = $this->getRequest();
         if ($this->useConsoleRequest) {
-            $params = preg_split('#\s+#', $url);
+            // split on space to get console argument
+            // but don't split on space between quote
+            $_url = $url;
+            preg_match_all('/"([^"]+)"/', $url, $matches);
+            array_walk($matches, function($v) use (&$_url) { $_url = str_replace($v, "%s", $_url); });
+            $params = preg_split('#\s+#', $_url);
+            foreach($params as &$v) {
+                if(preg_match('/%s/', $v)) {
+                    $v = sprintf($v, array_shift($matches[1]));
+                }
+            }
             $request->params()->exchangeArray($params);
             return $this;
         }

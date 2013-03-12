@@ -250,4 +250,10 @@ class HttpTest extends TestCase
         $uri->getPort();
         $this->assertEquals($origUri, $uri->toString());
     }
+
+    public function testValidHostTypesWithUnderScore()
+    {
+        $uri = new HttpUri('http://zf2_app.local');
+        $this->assertTrue($uri->isValid());
+    }
 }

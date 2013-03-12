@@ -67,7 +67,7 @@ class Confirm extends Char
      * @return bool
      */
     public function show()
-    {   
+    {
         $char = parent::show();
         if($this->ignoreCase) {
             $response = strtolower($char) === strtolower($this->yesChar);

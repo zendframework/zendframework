@@ -32,7 +32,7 @@ class ConfirmTest extends \PHPUnit_Framework_TestCase
     {
         fclose($this->adapter->stream);
     }
-    
+
     public function testCanPromptConfirm()
     {
         fwrite($this->adapter->stream, 'y');
@@ -46,7 +46,7 @@ class ConfirmTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($text, "Is ZF2 the best framework ?\n");
         $this->assertTrue($response);
     }
-    
+
     public function testCanPromptConfirmWithDefaultIgnoreCase()
     {
         fwrite($this->adapter->stream, 'Y');
@@ -60,7 +60,7 @@ class ConfirmTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($text, "Is ZF2 the best framework ?\n");
         $this->assertTrue($response);
     }
-    
+
     public function testCanPromptConfirmWithoutIgnoreCase()
     {
         fwrite($this->adapter->stream, 'Yn');
@@ -75,7 +75,7 @@ class ConfirmTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($text, "Is ZF2 the best framework ?\n");
         $this->assertFalse($response);
     }
-    
+
     public function testCanPromptConfirmWithYesNoCharChanged()
     {
         fwrite($this->adapter->stream, 'on0');
@@ -89,7 +89,7 @@ class ConfirmTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($text, "Is ZF2 the best framework ?\n");
         $this->assertFalse($response);
     }
-    
+
     public function testCanPromptConfirmWithYesNoCharChangedWithSetter()
     {
         fwrite($this->adapter->stream, 'oaB');

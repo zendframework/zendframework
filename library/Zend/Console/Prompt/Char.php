@@ -88,7 +88,7 @@ class Char extends AbstractPrompt
             $mask = array_unique($mask); // remove duplicates
             $mask = implode("", $mask);   // convert back to string
         }
-        
+
         /**
          * Read char from console
          */

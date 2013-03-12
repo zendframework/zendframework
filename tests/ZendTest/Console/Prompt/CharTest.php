@@ -73,11 +73,11 @@ class CharTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($text, "Give a number\n");
         $this->assertEquals('1', $response);
     }
-    
+
     public function testCanPromptCharWithIgnoreCaseByDefault()
     {
         fwrite($this->adapter->stream, 'FOObar');
-        
+
         $char = new Char();
         $char->setEcho(false);
         $char->setConsole($this->adapter);
@@ -86,11 +86,11 @@ class CharTest extends \PHPUnit_Framework_TestCase
         ob_get_clean();
         $this->assertEquals('F', $response);
     }
-    
+
     public function testCanPromptCharWithoutIgnoreCase()
     {
         fwrite($this->adapter->stream, 'FOObar');
-        
+
         $char = new Char();
         $char->setEcho(false);
         $char->setConsole($this->adapter);

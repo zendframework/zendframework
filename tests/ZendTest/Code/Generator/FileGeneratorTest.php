@@ -277,4 +277,25 @@ EOS;
         $this->assertContains('use Another\\Baz as Baz2;', $generated);
     }
 
+    public function testCreateFromArrayWithClassInstance()
+    {
+        $fileGenerator = FileGenerator::fromArray(array(
+            'filename'  => 'foo.php',
+            'class'     => new ClassGenerator('bar'),
+        ));
+        $class = $fileGenerator->getClass('bar');
+        $this->assertInstanceOf('Zend\Code\Generator\ClassGenerator', $class);
+    }
+
+    public function testCreateFromArrayWithClassFromArray()
+    {
+        $fileGenerator = FileGenerator::fromArray(array(
+            'filename'  => 'foo.php',
+            'class'     => array(
+                'name' => 'bar',
+            ),
+        ));
+        $class = $fileGenerator->getClass('bar');
+        $this->assertInstanceOf('Zend\Code\Generator\ClassGenerator', $class);
+    }
 }

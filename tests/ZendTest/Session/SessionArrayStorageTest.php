@@ -11,6 +11,7 @@
 namespace ZendTest\Session;
 
 use Zend\Session\Storage\SessionArrayStorage;
+use Zend\Session\SessionManager;
 use Zend\Session\Container;
 
 /**
@@ -164,6 +165,43 @@ class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
             'baz' => array('foo' => 'bar'),
         );
         $this->assertSame($expected, $this->storage->toArray(true));
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testExpirationHops()
+    {
+        // since we cannot explicitly test reinitalizing the session
+        // we will act in how session manager would in this case.
+        $storage = new SessionArrayStorage();
+        $manager = new SessionManager(null, $storage);
+        $manager->start();
+
+        $container = new Container('test');
+        $container->foo = 'bar';
+        $container->setExpirationHops(1);
+
+        $copy = $_SESSION;
+        $_SESSION = null;
+        $storage->init($copy);
+        $this->assertEquals('bar', $container->foo);
+
+        $copy = $_SESSION;
+        $_SESSION = null;
+        $storage->init($copy);
+        $this->assertNull($container->foo);
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testPreserveRequestAccessTimeAfterStart()
+    {
+        $manager = new SessionManager(null, $this->storage);
+        $this->assertGreaterThan(0, $this->storage->getRequestAccessTime());
+        $manager->start();
+        $this->assertGreaterThan(0, $this->storage->getRequestAccessTime());
     }
 
 }

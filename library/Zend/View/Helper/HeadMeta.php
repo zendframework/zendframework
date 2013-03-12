@@ -5,6 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -17,6 +18,8 @@ use Zend\View\Exception;
  * Zend_Layout_View_Helper_HeadMeta
  *
  * @see        http://www.w3.org/TR/xhtml1/dtds.html
+ * @package    Zend_View
+ * @subpackage Helper
  */
 class HeadMeta extends Placeholder\Container\AbstractStandalone
 {
@@ -24,7 +27,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * Types of attributes
      * @var array
      */
-    protected $typeKeys     = array('name', 'http-equiv', 'charset', 'property');
+    protected $typeKeys     = array('name', 'http-equiv', 'charset', 'property', 'itemprop');
     protected $requiredKeys = array('content');
     protected $modifierKeys = array('lang', 'scheme');
 
@@ -91,6 +94,8 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
                 return 'http-equiv';
             case 'Property':
                 return 'property';
+			case 'Itemprop':
+				return 'itemprop';
             default:
                 throw new Exception\DomainException(sprintf(
                     'Invalid type "%s" passed to normalizeType',
@@ -123,7 +128,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      */
     public function __call($method, $args)
     {
-        if (preg_match('/^(?P<action>set|(pre|ap)pend|offsetSet)(?P<type>Name|HttpEquiv|Property)$/', $method, $matches)) {
+        if (preg_match('/^(?P<action>set|(pre|ap)pend|offsetSet)(?P<type>Name|HttpEquiv|Property|Itemprop)$/', $method, $matches)) {
             $action = $matches['action'];
             $type   = $this->normalizeType($matches['type']);
             $argc   = count($args);
@@ -198,6 +203,13 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
         || (! $this->view->plugin('doctype')->isHtml5() && $item->type !== 'charset'))) {
             return false;
         }
+		
+		// <meta itemprop= ... /> is only supported with doctype html
+		if (! $this->view->plugin('doctype')->isHtml5()
+		&& $item->type === 'itemprop'){
+			
+			return false;
+		}
 
         // <meta property= ... /> is only supported with doctype RDFa
         if (!$this->view->plugin('doctype')->isRdfa()

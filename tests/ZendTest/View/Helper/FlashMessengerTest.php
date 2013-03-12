@@ -149,6 +149,19 @@ class FlashMessengerTest extends TestCase
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
 
+    public function testCanDisplayListOfMessagesCustomisedSeparator()
+    {
+        $this->seedMessages();
+
+        $displayInfoAssertion = '<div><p class="foo-baz foo-bar">foo</p><p class="foo-baz foo-bar">bar</p></div>';
+        $displayInfo = $this->helper
+                ->setMessageOpenFormat('<div><p%s>')
+                ->setMessageSeparatorString('</p><p%s>')
+                ->setMessageCloseString('</p></div>')
+                ->render(PluginFlashMessenger::NAMESPACE_DEFAULT, array('foo-baz', 'foo-bar'));
+        $this->assertEquals($displayInfoAssertion, $displayInfo);
+    }
+
     public function testCanDisplayListOfMessagesCustomisedByConfig()
     {
         $this->seedMessages();

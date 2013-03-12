@@ -18,6 +18,8 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
         'pgsql' => null,
         'pdo_pgsql' => null,
         'pdo_sqlite' => null,
+        'sqlsrv' => null,
+        'pdo_sqlsrv' => null,
     );
 
     public function __construct()
@@ -60,6 +62,32 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
             if (extension_loaded('pdo')) {
                 $this->adapters['pdo_sqlite'] = new \Pdo(
                     'sqlite::memory:'
+                );
+            }
+        }
+        if (isset($GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_HOSTNAME'])) {
+            if (extension_loaded('sqlsrv')) {
+                $this->adapters['sqlsrv'] = sqlsrv_connect(
+                    $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_HOSTNAME'],
+                    array(
+                        'UID' => $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_USERNAME'],
+                        'PWD' => $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_PASSWORD'],
+                        'Database' => (isset($GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'])
+                            ? $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'] : null)
+                    )
+                );
+                if (!$this->adapters['sqlsrv']) {
+                    var_dump(sqlsrv_errors());
+                    exit;
+                }
+            }
+            if (extension_loaded('pdo')) {
+                $this->adapters['pdo_sqlsrv'] = new \Pdo(
+                    'sqlsrv:Server=' . $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_HOSTNAME']
+                        . ';Database=' . (isset($GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'])
+                            ? $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE'] : null),
+                    $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_USERNAME'],
+                    $GLOBALS['ZEND_DB_ADAPTER_DRIVER_SQLSRV_PASSWORD']
                 );
             }
         }

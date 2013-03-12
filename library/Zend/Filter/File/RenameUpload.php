@@ -294,7 +294,7 @@ class RenameUpload extends AbstractFilter
         $extension = '';
         if ($this->getUseUploadExtension() === true && isset($sourceinfo['extension'])) {
             $extension .= '.' . $sourceinfo['extension'];
-        } else if (isset($info['extension'])) {
+        } elseif (isset($info['extension'])) {
             $extension .= '.' . $info['extension'];
         }
 

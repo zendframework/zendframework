@@ -184,7 +184,7 @@ class Navigation extends AbstractNavigationHelper
 
         $helper    = $plugins->get($proxy);
         $container = $this->getContainer();
-        $hash      = spl_object_hash($container);
+        $hash      = spl_object_hash($container) . spl_object_hash($helper);
 
         if (!isset($this->injected[$hash])) {
             $helper->setContainer();

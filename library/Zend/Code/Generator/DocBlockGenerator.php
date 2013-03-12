@@ -119,7 +119,6 @@ class DocBlockGenerator extends AbstractGenerator
     public function setShortDescription($shortDescription)
     {
         $this->shortDescription = $shortDescription;
-
         return $this;
     }
 
@@ -138,7 +137,6 @@ class DocBlockGenerator extends AbstractGenerator
     public function setLongDescription($longDescription)
     {
         $this->longDescription = $longDescription;
-
         return $this;
     }
 
@@ -181,7 +179,6 @@ class DocBlockGenerator extends AbstractGenerator
         }
 
         $this->tags[] = $tag;
-
         return $this;
     }
 
@@ -202,7 +199,6 @@ class DocBlockGenerator extends AbstractGenerator
     public function setWordWrap($value)
     {
         $this->wordwrap = (boolean) $value;
-
         return $this;
     }
 

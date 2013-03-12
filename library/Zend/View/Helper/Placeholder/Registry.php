@@ -40,6 +40,7 @@ class Registry
      */
     public static function getRegistry()
     {
+        trigger_error('Placeholder view helpers should no longer use a singleton registry', E_USER_DEPRECATED);
         if (null === static::$instance) {
             static::$instance = new static();
         }
@@ -56,6 +57,7 @@ class Registry
      */
     public static function unsetRegistry()
     {
+        trigger_error('Placeholder view helpers should no longer use a singleton registry', E_USER_DEPRECATED);
         static::$instance = null;
     }
 

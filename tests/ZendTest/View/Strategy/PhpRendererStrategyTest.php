@@ -27,9 +27,6 @@ class PhpRendererStrategyTest extends TestCase
 {
     public function setUp()
     {
-        // Necessary to ensure placeholders do not persist between individual tests
-        PlaceholderRegistry::unsetRegistry();
-
         $this->renderer = new PhpRenderer;
         $this->strategy = new PhpRendererStrategy($this->renderer);
         $this->event    = new ViewEvent();

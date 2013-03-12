@@ -19,9 +19,9 @@ class MockChromePhp implements ChromePhpInterface
         return $this->enabled;
     }
 
-    public function log($line)
+    public function error($line)
     {
-        $this->calls['log'][] = $line;
+        $this->calls['error'][] = $line;
     }
 
     public function warn($line)
@@ -29,28 +29,18 @@ class MockChromePhp implements ChromePhpInterface
         $this->calls['warn'][] = $line;
     }
 
-    public function error($line)
-    {
-        $this->calls['error'][] = $line;
-    }
-
     public function info($line)
     {
         $this->calls['info'][] = $line;
     }
 
-    public function group($line)
+    public function trace($line)
     {
-        $this->calls['group'][] = $line;
+        $this->calls['trace'][] = $line;
     }
 
-    public function groupCollapsed($line)
+    public function log($line)
     {
-        $this->calls['groupCollapsed'][] = $line;
-    }
-
-    public function groupEnd($line)
-    {
-        $this->calls['groupEnd'][] = $line;
+        $this->calls['log'][] = $line;
     }
 }

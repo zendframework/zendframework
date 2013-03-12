@@ -12,20 +12,6 @@ namespace Zend\Log\Writer\ChromePhp;
 interface ChromePhpInterface
 {
     /**
-     * Log a message
-     *
-     * @param string $line
-     */
-    public function log($line);
-
-    /**
-     * Log a warning message
-     *
-     * @param string $line
-     */
-    public function warn($line);
-
-    /**
      * Log an error message
      *
      * @param string $line
@@ -33,30 +19,30 @@ interface ChromePhpInterface
     public function error($line);
 
     /**
-     * Log an info message
+     * Log a warning
+     *
+     * @param string $line
+     */
+    public function warn($line);
+
+    /**
+     * Log informational message
      *
      * @param string $line
      */
     public function info($line);
 
     /**
-     * Sends a group log
+     * Log a trace
      *
      * @param string $line
      */
-    public function group($line);
+    public function trace($line);
 
     /**
-     * Sends a collapsed group log
+     * Log a message
      *
      * @param string $line
      */
-    public function groupCollapsed($line);
-
-    /**
-     * Ends a group log
-     *
-     * @param string $line
-     */
-    public function groupEnd($line);
+    public function log($line);
 }

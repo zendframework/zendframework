@@ -94,7 +94,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertNotConsoleOutputContains('foo');
     }
-    
+
     public function testAssertMatchedArgumentsWithValue()
     {
         $this->dispatch('filter --date="2013-03-07 00:00:00" --id=10 --text="custom text"');

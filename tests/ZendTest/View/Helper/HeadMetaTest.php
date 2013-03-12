@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_View
  */
@@ -474,6 +474,61 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     {
         $this->view->doctype('XHTML1_RDFA');
         $this->_testOverloadSet('property');
+    }
+	
+	 /**
+     * @issue 3751
+     */
+    public function testItempropIsSupportedWithHtml5Doctype()
+    {
+        $this->view->doctype('HTML5');
+        $this->helper->__invoke('HeadMeta with Microdata', 'description', 'itemprop');
+        $this->assertEquals('<meta itemprop="description" content="HeadMeta with Microdata">',
+                            $this->helper->toString()
+                           );
+    }
+
+    /**
+     * @issue 3751
+     */
+    public function testItempropIsNotSupportedByDefaultDoctype()
+    {
+        try {
+            $this->helper->__invoke('HeadMeta with Microdata', 'description', 'itemprop');
+            $this->fail('meta itemprop attribute should not be supported on default doctype');
+        } catch (ViewException $e) {
+            $this->assertContains('Invalid value passed', $e->getMessage());
+        }
+    }
+
+    /**
+     * @issue 3751
+     * @depends testItempropIsSupportedWithHtml5Doctype
+     */
+    public function testOverloadingAppendItempropAppendsMetaTagToStack()
+    {
+        $this->view->doctype('HTML5');
+        $this->_testOverloadAppend('itemprop');
+    }
+
+    /**
+     * @issue 3751
+     * @depends testItempropIsSupportedWithHtml5Doctype
+     */
+    public function testOverloadingPrependItempropPrependsMetaTagToStack()
+    {
+        $this->view->doctype('HTML5');
+        $this->_testOverloadPrepend('itemprop');
+    }
+
+    /**
+     * @issue 3751
+     * @depends testItempropIsSupportedWithHtml5Doctype
+     */
+    public function testOverloadingSetItempropOverwritesMetaTagStack()
+    {
+        $this->view->doctype('HTML5');
+        $this->_testOverloadSet('itemprop');
     }
 
     /**

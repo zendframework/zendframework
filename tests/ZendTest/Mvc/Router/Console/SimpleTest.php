@@ -607,7 +607,7 @@ class SimpleTestTest extends TestCase
 
         );
     }
-    
+
     /**
      * @dataProvider routeProvider
      * @param        string         $routeDefinition
@@ -635,7 +635,7 @@ class SimpleTestTest extends TestCase
             }
         }
     }
-    
+
     public function testCanNotMatchingWithEmtpyMandatoryParam()
     {
         $arguments = array('--foo=');
@@ -680,7 +680,7 @@ class SimpleTestTest extends TestCase
         $this->setExpectedException($exceptionName, $exceptionMessage);
         new Simple($route);
     }
-    
+
     public function testFactory()
     {
         $tester = new FactoryTester($this);

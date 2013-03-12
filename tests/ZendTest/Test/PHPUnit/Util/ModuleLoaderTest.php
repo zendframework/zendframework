@@ -13,6 +13,32 @@ use Zend\Test\Util\ModuleLoader;
 
 class ModuleLoaderTest extends PHPUnit_Framework_TestCase
 {
+    public function tearDownCacheDir()
+    {
+        $cacheDir = sys_get_temp_dir() . '/zf2-module-test';
+        if (is_dir($cacheDir)) {
+            static::rmdir($cacheDir);
+        }
+    }
+
+    public static function rmdir($dir) {
+        $files = array_diff(scandir($dir), array('.','..'));
+        foreach ($files as $file) {
+            (is_dir("$dir/$file")) ? static::rmdir("$dir/$file") : unlink("$dir/$file");
+        }
+        return rmdir($dir); 
+    } 
+
+    public function setUp()
+    {
+        $this->tearDownCacheDir();
+    }
+
+    public function tearDown()
+    {
+        $this->tearDownCacheDir();
+    }
+
     public function testCanLoadModule()
     {
         require_once __DIR__ . '/../../_files/Baz/Module.php';

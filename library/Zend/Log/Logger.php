@@ -237,7 +237,8 @@ class Logger implements LoggerInterface
             $writer = $this->writerPlugin($writer, $options);
         } elseif (!$writer instanceof Writer\WriterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Writer must implement Zend\Log\Writer; received "%s"',
+                'Writer must implement %s\Writer\WriterInterface; received "%s"',
+                __NAMESPACE__,
                 is_object($writer) ? get_class($writer) : gettype($writer)
             ));
         }

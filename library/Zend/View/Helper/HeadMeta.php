@@ -24,7 +24,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * Types of attributes
      * @var array
      */
-    protected $typeKeys     = array('name', 'http-equiv', 'charset', 'property');
+    protected $typeKeys     = array('name', 'http-equiv', 'charset', 'property', 'itemprop');
     protected $requiredKeys = array('content');
     protected $modifierKeys = array('lang', 'scheme');
 
@@ -91,6 +91,8 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
                 return 'http-equiv';
             case 'Property':
                 return 'property';
+            case 'Itemprop':
+                return 'itemprop';
             default:
                 throw new Exception\DomainException(sprintf(
                     'Invalid type "%s" passed to normalizeType',
@@ -123,7 +125,11 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      */
     public function __call($method, $args)
     {
-        if (preg_match('/^(?P<action>set|(pre|ap)pend|offsetSet)(?P<type>Name|HttpEquiv|Property)$/', $method, $matches)) {
+        if (preg_match(
+            '/^(?P<action>set|(pre|ap)pend|offsetSet)(?P<type>Name|HttpEquiv|Property|Itemprop)$/',
+            $method,
+            $matches)
+        ) {
             $action = $matches['action'];
             $type   = $this->normalizeType($matches['type']);
             $argc   = count($args);
@@ -169,10 +175,10 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      */
     public function setCharset($charset)
     {
-        $item = new stdClass;
-        $item->type = 'charset';
-        $item->charset = $charset;
-        $item->content = null;
+        $item            = new stdClass;
+        $item->type      = 'charset';
+        $item->charset   = $charset;
+        $item->content   = null;
         $item->modifiers = array();
         $this->set($item);
         return $this;
@@ -188,20 +194,29 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
     {
         if ((!$item instanceof stdClass)
             || !isset($item->type)
-            || !isset($item->modifiers))
-        {
+            || !isset($item->modifiers)
+        ) {
             return false;
         }
 
         if (!isset($item->content)
-        && (! $this->view->plugin('doctype')->isHtml5()
-        || (! $this->view->plugin('doctype')->isHtml5() && $item->type !== 'charset'))) {
+            && (! $this->view->plugin('doctype')->isHtml5()
+            || (! $this->view->plugin('doctype')->isHtml5() && $item->type !== 'charset'))
+        ) {
+            return false;
+        }
+
+        // <meta itemprop= ... /> is only supported with doctype html
+        if (! $this->view->plugin('doctype')->isHtml5()
+            && $item->type === 'itemprop'
+        ) {
             return false;
         }
 
         // <meta property= ... /> is only supported with doctype RDFa
         if (!$this->view->plugin('doctype')->isRdfa()
-            && $item->type === 'property') {
+            && $item->type === 'property'
+        ) {
             return false;
         }
 

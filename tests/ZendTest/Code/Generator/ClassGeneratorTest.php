@@ -173,6 +173,16 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($classGenerator->hasMethod('methodOne'));
     }
 
+    public function testRemoveMethod()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addMethod('methodOne');
+        $this->assertTrue($classGenerator->hasMethod('methodOne'));
+
+        $classGenerator->removeMethod('methodOne');
+        $this->assertFalse($classGenerator->hasMethod('methodOne'));
+    }
+
     /**
      * @group ZF-7361
      */

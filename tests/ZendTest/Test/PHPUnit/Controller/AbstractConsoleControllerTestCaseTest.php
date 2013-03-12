@@ -95,9 +95,18 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->assertNotConsoleOutputContains('foo');
     }
     
-    public function testAssertMatchedArguments()
+    public function testAssertMatchedArgumentsWithValue()
     {
         $this->dispatch('filter --date="2013-03-07 00:00:00" --id=10 --text="custom text"');
+        $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        $this->assertEquals("2013-03-07 00:00:00", $routeMatch->getParam('date'));
+        $this->assertEquals("10", $routeMatch->getParam('id'));
+        $this->assertEquals("custom text", $routeMatch->getParam('text'));
+    }
+
+    public function testAssertMatchedArgumentsWithValueWithoutEqualsSign()
+    {
+        $this->dispatch('filter --date "2013-03-07 00:00:00" --id=10 --text="custom text"');
         $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
         $this->assertEquals("2013-03-07 00:00:00", $routeMatch->getParam('date'));
         $this->assertEquals("10", $routeMatch->getParam('id'));

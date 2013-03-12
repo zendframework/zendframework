@@ -15,7 +15,7 @@ use Zend\Db\Adapter\Exception;
 class Sqlite implements PlatformInterface
 {
 
-    /** @var \mysqli|\PDO */
+    /** @var \PDO */
     protected $resource = null;
 
     public function __construct($driver = null)
@@ -26,16 +26,19 @@ class Sqlite implements PlatformInterface
     }
 
     /**
-     * @param \Zend\Db\Adapter\Driver\Pdo\Pdo||\mysqli|\PDO $driver
+     * @param \Zend\Db\Adapter\Driver\Pdo\Pdo||\PDO $driver
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      * @return $this
      */
     public function setDriver($driver)
     {
-        if ($driver instanceof \mysqli
-            || ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'sqlite')
-        ) {
+        if ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'sqlite') {
             $this->resource = $driver;
+            return $this;
+        }
+
+        if ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'Sqlite') {
+            $this->resource = $driver->getConnection()->getResource();
             return $this;
         }
 

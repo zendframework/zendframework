@@ -327,19 +327,24 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
         switch ($platformName) {
             case 'Mysql':
                 // mysqli or pdo_mysql driver
-                return new Platform\Mysql($this->driver);
+                $driver = ($this->driver instanceof Driver\Mysqli\Mysqli || $this->driver instanceof Driver\Pdo\Pdo) ? $this->driver : null;
+                return new Platform\Mysql($driver);
             case 'SqlServer':
                 // PDO is only supported driver for quoting values in this platform
                 return new Platform\SqlServer(($this->driver instanceof Driver\Pdo\Pdo) ? $this->driver : null);
             case 'Oracle':
-                return new Platform\Oracle($options, $this->driver);
+                // oracle does not accept a driver as an option, no driver specific quoting available
+                return new Platform\Oracle($options);
             case 'Sqlite':
-                return new Platform\Sqlite($this->driver);
+                // PDO is only supported driver for quoting values in this platform
+                return new Platform\Sqlite(($this->driver instanceof Driver\Pdo\Pdo) ? $this->driver : null);
             case 'Postgresql':
                 // pgsql or pdo postgres driver
-                return new Platform\Postgresql($this->driver);
+                $driver = ($this->driver instanceof Driver\Pgsql\Pgsql || $this->driver instanceof Driver\Pdo\Pdo) ? $this->driver : null;
+                return new Platform\Postgresql($driver);
             case 'IbmDb2':
-                return new Platform\IbmDb2($options, $this->driver);
+                // ibm_db2 driver escaping does not need an action connection
+                return new Platform\IbmDb2($options);
             default:
                 return new Platform\Sql92();
         }

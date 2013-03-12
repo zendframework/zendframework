@@ -5,7 +5,7 @@ use Zend\Db\Adapter\Driver\Oci8\Result;
 
 /**
  * @group integration
- * @group integration-oci8
+ * @group integration-oracle
  */
 class ResultIntegrationTest extends \PHPUnit_Framework_TestCase
 {

@@ -5,7 +5,7 @@ use Zend\Db\Adapter\Driver\Oci8\Oci8;
 
 /**
  * @group integration
- * @group integration-oci8
+ * @group integration-oracle
  */
 class Oci8IntegrationTest extends AbstractIntegrationTest
 {

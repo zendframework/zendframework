@@ -13,9 +13,9 @@ namespace ZendTest\Db\Sql;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\ExpressionInterface;
 use Zend\Db\Adapter\Driver\DriverInterface;
-use Zend\Db\Adapter\Platform\Sql92;
 use Zend\Db\Sql\Predicate;
 use Zend\Db\Sql\Select;
+use ZendTest\Db\TestAsset\TrustingSql92Platform;
 
 class AbstractSqlTest extends \PHPUnit_Framework_TestCase
 {
@@ -135,7 +135,7 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
     {
         $method = new \ReflectionMethod($this->abstractSql, 'processExpression');
         $method->setAccessible(true);
-        return $method->invoke($this->abstractSql, $expression, new Sql92, $driver);
+        return $method->invoke($this->abstractSql, $expression, new TrustingSql92Platform, $driver);
     }
 
 }

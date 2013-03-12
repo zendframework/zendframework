@@ -32,13 +32,16 @@ class Mysql implements PlatformInterface
      */
     public function setDriver($driver)
     {
+        // handle Zend_Db drivers
         if ($driver instanceof Mysqli\Mysqli
-            || ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'MySQL')
+            || ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'Mysql')
         ) {
+            /** @var $driver \Zend\Db\Adapter\Driver\DriverInterface */
             $this->resource = $driver->getConnection()->getResource();
             return $this;
         }
 
+        // handle
         if ($driver instanceof \mysqli
             || ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'mysql')
         ) {
@@ -114,7 +117,7 @@ class Mysql implements PlatformInterface
     public function quoteValue($value)
     {
         if ($this->resource instanceof \mysqli) {
-            return $this->resource->real_escape_string($value);
+            return '\'' . $this->resource->real_escape_string($value) . '\'';
         }
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
@@ -137,7 +140,7 @@ class Mysql implements PlatformInterface
     public function quoteTrustedValue($value)
     {
         if ($this->resource instanceof \mysqli) {
-            return $this->resource->real_escape_string($value);
+            return '\'' . $this->resource->real_escape_string($value) . '\'';
         }
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);

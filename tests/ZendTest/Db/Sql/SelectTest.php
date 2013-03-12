@@ -17,6 +17,7 @@ use Zend\Db\Sql\Predicate;
 use Zend\Db\Sql\TableIdentifier;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\Sql92;
+use ZendTest\Db\TestAsset\TrustingSql92Platform;
 
 class SelectTest extends \PHPUnit_Framework_TestCase
 {
@@ -515,7 +516,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSqlString(Select $select, $unused, $unused2, $expectedSqlString)
     {
-        $this->assertEquals($expectedSqlString, $select->getSqlString());
+        $this->assertEquals($expectedSqlString, $select->getSqlString(new TrustingSql92Platform()));
     }
 
     /**

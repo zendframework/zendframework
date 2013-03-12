@@ -80,12 +80,24 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteValue()
     {
+        $this->setExpectedException(
+            'PHPUnit_Framework_Error',
+            'Attempting to quote a value in Zend\Db\Adapter\Platform\Mysql without extension/driver support can introduce security vulnerabilities in a production environment'
+        );
         $this->assertEquals("'value'", $this->platform->quoteValue('value'));
-        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValue("Foo O'Bar"));
-        $this->assertEquals('\'\\\'; DELETE FROM some_table; -- \'', $this->platform->quoteValue('\'; DELETE FROM some_table; -- '));
+    }
+
+    /**
+     * @covers Zend\Db\Adapter\Platform\Mysql::quoteTrustedValue
+     */
+    public function testQuoteTrustedValue()
+    {
+        $this->assertEquals("'value'", $this->platform->quoteTrustedValue('value'));
+        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteTrustedValue("Foo O'Bar"));
+        $this->assertEquals('\'\\\'; DELETE FROM some_table; -- \'', $this->platform->quoteTrustedValue('\'; DELETE FROM some_table; -- '));
 
         //                   '\\\'; DELETE FROM some_table; -- '  <- actual below
-        $this->assertEquals("'\\\\\\'; DELETE FROM some_table; -- '", $this->platform->quoteValue('\\\'; DELETE FROM some_table; -- '));
+        $this->assertEquals("'\\\\\\'; DELETE FROM some_table; -- '", $this->platform->quoteTrustedValue('\\\'; DELETE FROM some_table; -- '));
     }
 
     /**
@@ -93,13 +105,11 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteValueList()
     {
-        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
-        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList(array("Foo O'Bar")));
-        $this->assertEquals("'value', 'Foo O\\'Bar'", $this->platform->quoteValueList(array('value',"Foo O'Bar")));
-        $this->assertEquals(
-            "'value', 'Foo O\\'Bar', '\\\\\\'; DELETE FROM some_table; -- '",
-            $this->platform->quoteValueList(array('value',"Foo O'Bar",'\\\'; DELETE FROM some_table; -- '))
+        $this->setExpectedException(
+            'PHPUnit_Framework_Error',
+            'Attempting to quote a value in Zend\Db\Adapter\Platform\Mysql without extension/driver support can introduce security vulnerabilities in a production environment'
         );
+        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
     }
 
     /**

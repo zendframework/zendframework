@@ -112,7 +112,7 @@ class IbmDb2 implements PlatformInterface
     public function quoteValue($value)
     {
         if (function_exists('db2_escape_string')) {
-            return db2_escape_string($value);
+            return '\'' . db2_escape_string($value) . '\'';;
         }
         trigger_error(
             'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
@@ -131,6 +131,9 @@ class IbmDb2 implements PlatformInterface
      */
     public function quoteTrustedValue($value)
     {
+        if (function_exists('db2_escape_string')) {
+            return '\'' . db2_escape_string($value) . '\'';;
+        }
         return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 

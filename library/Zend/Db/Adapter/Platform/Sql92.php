@@ -75,12 +75,9 @@ class Sql92 implements PlatformInterface
      */
     public function quoteValue($value)
     {
-        /*
         trigger_error(
-            'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
-                . 'can introduce security vulnerabilities in a production environment.'
+            'Attempting to quote a value without specific driver level support can introduce security vulnerabilities in a production environment.'
         );
-        */
         return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 

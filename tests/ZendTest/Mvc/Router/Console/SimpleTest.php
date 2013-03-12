@@ -2,7 +2,6 @@
 namespace ZendTest\Mvc\Router\Console;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Http\Request;
 use Zend\Console\Request as ConsoleRequest;
 use Zend\Mvc\Router\Console\Simple;
 use ZendTest\Mvc\Router\FactoryTester;
@@ -27,6 +26,11 @@ class SimpleTestTest extends TestCase
                 '--foo --bar',
                 array('--foo','--bar'),
                 array('foo' => true, 'bar' => true)
+            ),
+            'mandatory-long-flag-match-with-zero-value' => array(
+                '--foo=',
+                array('--foo=0'),
+                array('foo' => 0)
             ),
             'mandatory-long-flag-mixed-order-match' => array(
                 '--foo --bar',
@@ -158,6 +162,11 @@ class SimpleTestTest extends TestCase
                     'foo' => true,
                     'bar' => false
                 )
+            ),
+            'optional-long-flag-match-with-zero-value' => array(
+                '[--foo=]',
+                array('--foo=0'),
+                array('foo' => 0)
             ),
             'optional-long-value-flag' => array(
                 '--foo [--bar=]',
@@ -583,7 +592,6 @@ class SimpleTestTest extends TestCase
                     'baz' => true
                 )
             ),
-
             /*'combined-2' => array(
                 '--foo --bar',
                 array('a','b', 'c', '--foo', '--bar'),
@@ -599,7 +607,6 @@ class SimpleTestTest extends TestCase
 
         );
     }
-
 
     /**
      * @dataProvider routeProvider
@@ -627,6 +634,16 @@ class SimpleTestTest extends TestCase
                 );
             }
         }
+    }
+
+    public function testCanNotMatchingWithEmtpyMandatoryParam()
+    {
+        $arguments = array('--foo=');
+        array_unshift($arguments,'scriptname.php');
+        $request = new ConsoleRequest($arguments);
+        $route = new Simple('--foo=');
+        $match = $route->match($request);
+        $this->assertEquals(null, $match);
     }
 
     /**
@@ -663,7 +680,6 @@ class SimpleTestTest extends TestCase
         $this->setExpectedException($exceptionName, $exceptionMessage);
         new Simple($route);
     }
-
 
     public function testFactory()
     {

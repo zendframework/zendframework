@@ -163,6 +163,11 @@ class SimpleTestTest extends TestCase
                     'bar' => false
                 )
             ),
+            'optional-long-flag-match-with-zero-value' => array(
+                '[--foo=]',
+                array('--foo=0'),
+                array('foo' => 0)
+            ),
             'optional-long-value-flag' => array(
                 '--foo [--bar=]',
                 array('--foo', '--bar=4'),

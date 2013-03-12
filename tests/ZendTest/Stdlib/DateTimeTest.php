@@ -22,6 +22,16 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 {
     public $dateTime;
 
+    public function setUp()
+    {
+        set_error_handler(function ($errno, $errstr) {
+            if (!stristr($errstr, 'datetime extension deprecated')) {
+                return false;
+            }
+            return true;
+        }, E_USER_DEPRECATED);
+    }
+
     public function testCreatesIS08601WithoutFractionalSeconds()
     {
         $time = '2009-03-07T08:03:50Z';

@@ -9,13 +9,13 @@
 
 namespace Zend\Feed\Reader\Extension\Atom;
 
+use DateTime;
 use DOMDocument;
 use DOMElement;
 use stdClass;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Collection;
 use Zend\Feed\Reader\Extension;
-use Zend\Stdlib\DateTime;
 use Zend\Uri;
 
 class Entry extends Extension\AbstractEntry
@@ -170,7 +170,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($dateCreated) {
-            $date = DateTime::createFromISO8601($dateCreated);
+            $date = new DateTime($dateCreated);
         }
 
         $this->data['datecreated'] = $date;
@@ -198,7 +198,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         if ($dateModified) {
-            $date = DateTime::createFromISO8601($dateModified);
+            $date = new DateTime($dateModified);
         }
 
         $this->data['datemodified'] = $date;

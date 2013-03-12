@@ -533,10 +533,8 @@ class Translator
 
         if (!$messagesLoaded) {
             $this->messages[$textDomain][$locale] = null;
-        } else {
-            if ($cache !== null) {
-                $cache->setItem($cacheId, $this->messages[$textDomain][$locale]);
-            }
+        } elseif ($cache !== null) {
+            $cache->setItem($cacheId, $this->messages[$textDomain][$locale]);
         }
     }
 

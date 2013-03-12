@@ -92,20 +92,12 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $char = $this->adapter->readChar('ar');
         $this->assertEquals($char, 'a');
     }
-
+    
     public function testReadCharWithMaskInsensitiveCase()
     {
         fwrite($this->adapter->stream, 'bAr');
 
         $char = $this->adapter->readChar('ar');
-        $this->assertEquals($char, 'A');
-    }
-
-    public function testReadCharWithNoReturn()
-    {
-        fwrite($this->adapter->stream, 'bar');
-
-        $char = $this->adapter->readChar('foo');
-        $this->assertEquals($char, '');
+        $this->assertEquals($char, 'r');
     }
 }

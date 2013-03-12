@@ -100,7 +100,7 @@ class AutoDiscover
      * @param null|string $wsdlClass
      * @param null|array $classMap
      */
-    public function __construct(ComplexTypeStrategy $strategy = null, $endpointUri = null, $wsdlClass = null, array $classMap = null)
+    public function __construct(ComplexTypeStrategy $strategy = null, $endpointUri = null, $wsdlClass = null, array $classMap = array())
     {
         $this->reflection = new Reflection();
         $this->discoveryStrategy = new ReflectionDiscovery();
@@ -114,9 +114,7 @@ class AutoDiscover
         if (null !== $wsdlClass) {
             $this->setWsdlClass($wsdlClass);
         }
-        if (null !== $classMap) {
-            $this->setClassMap($classMap);
-        }
+        $this->setClassMap($classMap);
     }
 
     /**
@@ -155,8 +153,15 @@ class AutoDiscover
      * @param array $classmap
      * @return AutoDiscover
      */
-    public function setClassMap(array $classMap)
+    public function setClassMap($classMap)
     {
+        if (!is_array($classMap)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array; received "%s"',
+                __METHOD__,
+                (is_object($classMap) ? get_class($classMap) : gettype($classMap))
+            ));
+        }
         $this->classMap = $classMap;
         return $this;
     }

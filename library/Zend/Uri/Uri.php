@@ -42,6 +42,7 @@ class Uri implements UriInterface
     const HOST_DNS_OR_IPV4_OR_IPV6  = 0x0B; //01011
     const HOST_DNS_OR_IPVANY        = 0x0F; //01111
     const HOST_REGNAME              = 0x10; //10000
+    const HOST_DNS_OR_IPV4_OR_IPV6_OR_REGNAME = 0x13; //10011
     const HOST_ALL                  = 0x1F; //11111
 
     /**

@@ -194,20 +194,22 @@ class TranslatorTest extends TestCase
 
     public function testTranslateNonExistantLocale()
     {
-        $translator = Translator::factory(array(
-            'locale' => 'es_ES',
-            'translation_file_patterns' => array(
-                array(
-                    'type' => 'phparray',
-                    'base_dir' => $this->testFilesDir . '/testarray',
-                    'pattern' => 'translation-%s.php'
-                )
-            )
-        ));
+        $this->translator->addTranslationFilePattern(
+            'phparray',
+            $this->testFilesDir . '/testarray',
+            'translation-%s.php'
+        );
 
-        $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator);
+        // Test that a locale without translations does not cause warnings
 
-        $this->assertEquals('Message 1', $translator->translate('Message 1'));
-        $this->assertEquals('Message 9', $translator->translate('Message 9'));
+        $this->translator->setLocale('es_ES');
+
+        $this->assertEquals('Message 1', $this->translator->translate('Message 1'));
+        $this->assertEquals('Message 9', $this->translator->translate('Message 9'));
+
+        $this->translator->setLocale('fr_FR');
+
+        $this->assertEquals('Message 1', $this->translator->translate('Message 1'));
+        $this->assertEquals('Message 9', $this->translator->translate('Message 9'));
     }
 }

@@ -399,10 +399,6 @@ class Translator
             $this->loadMessages($textDomain, $locale);
         }
 
-        if (!isset($this->messages[$textDomain][$locale])) {
-            return null;
-        }
-
         if (is_array($this->messages[$textDomain][$locale])) {
             foreach ($this->messages[$textDomain][$locale] as $textDomain) {
                 if (isset($textDomain[$message])) {
@@ -535,8 +531,12 @@ class Translator
             || $this->loadMessagesFromFiles($textDomain, $locale)
         );
 
-        if ($messagesLoaded && $cache !== null) {
-            $cache->setItem($cacheId, $this->messages[$textDomain][$locale]);
+        if (!$messagesLoaded) {
+            $this->messages[$textDomain][$locale] = null;
+        } else {
+            if ($cache !== null) {
+                $cache->setItem($cacheId, $this->messages[$textDomain][$locale]);
+            }
         }
     }
 

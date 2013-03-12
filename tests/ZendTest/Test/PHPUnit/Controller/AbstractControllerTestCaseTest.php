@@ -32,13 +32,14 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         }
     }
 
-    public static function rmdir($dir) {
+    public static function rmdir($dir)
+    {
         $files = array_diff(scandir($dir), array('.','..'));
         foreach ($files as $file) {
             (is_dir("$dir/$file")) ? static::rmdir("$dir/$file") : unlink("$dir/$file");
         }
-        return rmdir($dir); 
-    } 
+        return rmdir($dir);
+    }
 
     public function setUp()
     {

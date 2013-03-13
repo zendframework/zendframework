@@ -172,6 +172,8 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
         
         $this->events = $events;
         
+        $this->setDefaultListeners();
+        
         return $this;
     }
 
@@ -763,44 +765,43 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
 
     /**
      * Determines whether a page should be accepted when iterating
+     * 
+     * Default listener may be 'overridden' by attaching listener to 'isAllowed' 
+     * method. Listener must be 'short circuited' if overriding default ACL 
+     * listener.   
      *
      * Rules:
      * - If a page is not visible it is not accepted, unless RenderInvisible has
-     *   been set to true.
-     * - If helper has no ACL, page is accepted
-     * - If helper has ACL, but no role, page is not accepted
-     * - If helper has ACL and role:
-     *  - Page is accepted if it has no resource or privilege
-     *  - Page is accepted if ACL allows page's resource or privilege
-     * - If ACL disabled, "isAllowed" event listener is triggered. 
-     * - If page is accepted by the rules above and $recursive is true, the page
-     *   will not be accepted if it is the descendant of a non-accepted page.
+     *   been set to true
+     * - If $useAcl is true (default is true):
+     *      - Page is accepted if listener returns true, otherwise false 
+     * - If page is accepted and $recursive is true, the page
+     *   will not be accepted if it is the descendant of a non-accepted page
      *
-     * @param  AbstractPage $page      page to check
-     * @param  bool         $recursive [optional] if true, page will not be
-     *                                 accepted if it is the descendant of a
-     *                                 page that is not accepted. Default is true.
-     * @return bool                    whether page should be accepted
+     * @param   AbstractPage    $page       page to check
+     * @param   bool            $recursive  [optional] if true, page will not be
+     *                                      accepted if it is the descendant of 
+     *                                      a page that is not accepted. Default
+     *                                      is true
+     * 
+     * @return  bool                        Whether page should be accepted
      */
     public function accept(AbstractPage $page, $recursive = true)
     {
-        // accept by default
         $accept = true;
-
+        
         if (!$page->isVisible(false) && !$this->getRenderInvisible()) {
-            // Don't accept invisible pages
             $accept = false;
-        } elseif ($this->getUseAcl() && !$this->acceptAcl($page)) {
-            // Acl is not amused
-            $accept = false;
-        } else {
-            $params = array('page' => $page);
-            $trigger = $this->getEventManager()->trigger('isAllowed', $this, $params);
-            $accept = $trigger->last();
-        }
-
+        } elseif ($this->getUseAcl()) {
+            $acl = $this->getAcl();
+            $role = $this->getRole();
+            $params = array('acl' => $acl, 'page' => $page, 'role' => $role);
+            $accept = $this->isAllowed($params);
+        } 
+        
         if ($accept && $recursive) {
             $parent = $page->getParent();
+            
             if ($parent instanceof AbstractPage) {
                 $accept = $this->accept($parent, true);
             }
@@ -810,34 +811,17 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     }
 
     /**
-     * Determines whether a page should be accepted by ACL when iterating
+     * Determines whether a page should be allowed given certain parameters
      *
-     * Rules:
-     * - If helper has no ACL, page is accepted
-     * - If page has a resource or privilege defined, page is accepted
-     *   if the ACL allows access to it using the helper's role
-     * - If page has no resource or privilege, page is accepted
-     *
-     * @param  AbstractPage $page  page to check
-     * @return bool                whether page is accepted by ACL
+     * @param   array   $params
+     * 
+     * @return  boolean 
      */
-    protected function acceptAcl(AbstractPage $page)
+    protected function isAllowed($params)
     {
-        if (!$acl = $this->getAcl()) {
-            // no acl registered means don't use acl
-            return true;
-        }
-
-        $role = $this->getRole();
-        $resource = $page->getResource();
-        $privilege = $page->getPrivilege();
-
-        if ($resource || $privilege) {
-            // determine using helper role and page resource/privilege
-            return $acl->hasResource($resource) && $acl->isAllowed($role, $resource, $privilege);
-        }
-
-        return true;
+        $results = $this->getEventManager()->trigger(__FUNCTION__, $this, $params);
+        
+        return $results->last();
     }
 
     // Util methods:
@@ -932,4 +916,18 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
             ));
         }
     }
+    
+    protected function setDefaultListeners()
+    {
+        if ($this->getUseAcl()) {
+            
+            $this->getEventManager()->getSharedManager()->attach(
+                'Zend\View\Helper\Navigation\AbstractHelper', 
+                'isAllowed', 
+                array('Zend\View\Helper\Navigation\Listener\AcListener', 'accept'),
+                -1
+            );
+        }
+    }
+    
 }

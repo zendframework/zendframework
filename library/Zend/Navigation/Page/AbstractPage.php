@@ -107,6 +107,13 @@ abstract class AbstractPage extends AbstractContainer
      * @var string|null
      */
     protected $privilege;
+    
+    /**
+     * Permission associated with this page
+     *
+     * @var string|null
+     */
+    protected $permission;
 
     /**
      * Whether this page should be considered active
@@ -699,6 +706,31 @@ abstract class AbstractPage extends AbstractContainer
     {
         return $this->privilege;
     }
+    
+    /**
+     * Sets permission associated with this page
+     *
+     * @param  string|null $permission  [optional] permission to associate
+     *                                  with this page. Default is null, which
+     *                                  sets no permission.
+     *
+     * @return AbstractPage fluent interface, returns self
+     */
+    public function setPermission($permission = null)
+    {
+        $this->permission = is_string($permission) ? $permission : null;
+        return $this;
+    }
+
+    /**
+     * Returns permission associated with this page
+     *
+     * @return string|null  permission or null
+     */
+    public function getPermission()
+    {
+        return $this->permission;
+    }
 
     /**
      * Sets whether page should be considered active or not
@@ -1127,6 +1159,7 @@ abstract class AbstractPage extends AbstractContainer
             'order'     => $this->getOrder(),
             'resource'  => $this->getResource(),
             'privilege' => $this->getPrivilege(),
+            'permission' => $this->getPermission(),
             'active'    => $this->isActive(),
             'visible'   => $this->isVisible(),
             'type'      => get_called_class(),

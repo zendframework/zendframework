@@ -10,7 +10,9 @@
 
 namespace ZendTest\Math;
 
+use Zend\Math;
 use Zend\Math\Rand;
+use RandomLib;
 
 /**
  * @category   Zend
@@ -126,5 +128,28 @@ class RandTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals(strlen($rand), $length);
             $this->assertTrue(preg_match('#^[0-9a-zA-Z+/]+$#', $rand) === 1);
         }
+    }
+
+    public function testHashTimingSourceStrengthIsVeryLow()
+    {
+        $this->assertEquals(1, (string) Math\Source\HashTiming::getStrength());
+    }
+
+    public function testHashTimingSourceStrengthIsRandomWithCorrectLength()
+    {
+        $source = new Math\Source\HashTiming;
+        $rand = $source->generate(32);
+        $this->assertTrue(32 === strlen($rand));
+        $rand2 = $source->generate(32);
+        $this->assertNotEquals($rand, $rand2);
+    }
+
+    public function testAltGeneratorIsRandomWithCorrectLength()
+    {
+        $source = Math\Rand::getAlternativeGenerator();
+        $rand = $source->generate(32);
+        $this->assertTrue(32 === strlen($rand));
+        $rand2 = $source->generate(32);
+        $this->assertNotEquals($rand, $rand2);
     }
 }

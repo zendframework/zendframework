@@ -14,6 +14,14 @@ namespace Zend\Math;
  */
 abstract class Rand
 {
+
+    /**
+     * Alternative random byte generator using RandomLib
+     *
+     * @var \RandomLib\Generator
+     */
+    protected static $generator = null;
+
     /**
      * Generate random bytes using OpenSSL or Mcrypt and mt_rand() as fallback
      *
@@ -27,34 +35,52 @@ abstract class Rand
         if ($length <= 0) {
             return false;
         }
-        if (extension_loaded('openssl')) {
-            $rand = openssl_random_pseudo_bytes($length, $secure);
-            if ($secure === true) {
-                return $rand;
+        $bytes = '';
+        if (function_exists('openssl_random_pseudo_bytes')
+        && (version_compare(PHP_VERSION, '5.3.4') >= 0
+        || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')) {
+            $bytes = openssl_random_pseudo_bytes($length, $usable);
+            if (true === $usable) {
+                return $bytes;
+            }
+        } elseif (function_exists('mcrypt_create_iv')
+        && (version_compare(PHP_VERSION, '5.3.7') >= 0
+        || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')) {
+            $bytes = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
+            if ($bytes !== false && strlen($bytes) === $length) {
+                return $bytes;
             }
         }
-        if (extension_loaded('mcrypt')) {
-            // PHP bug #55169
-            // @see https://bugs.php.net/bug.php?id=55169
-            if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN' ||
-                version_compare(PHP_VERSION, '5.3.7') >= 0) {
-                $rand = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
-                if ($rand !== false && strlen($rand) === $length) {
-                    return $rand;
-                }
-            }
-        }
-        if ($strong) {
-            throw new Exception\RuntimeException(
-                'This PHP environment doesn\'t support secure random number generation. ' .
-                'Please consider to install the OpenSSL and/or Mcrypt extensions'
+        $checkAlternatives = (file_exists('/dev/urandom') && is_readable('/dev/urandom'))
+            || class_exists('\\COM', false);
+        if (true === $strong && false === $checkAlternatives) {
+            throw new Exception\RuntimeException (
+                'Unable to generate sufficiently strong random bytes'
             );
         }
-        $rand = '';
-        for ($i = 0; $i < $length; $i++) {
-            $rand .= chr(mt_rand(0, 255));
+        $generator = self::getAlternativeGenerator();
+        return $generator->generate($length);
+    }
+
+    public static function getAlternativeGenerator()
+    {
+        if (!is_null(self::$generator)) {
+            return self::$generator;
         }
-        return $rand;
+        if (!class_exists('\\RandomLib\\Factory')) {
+            throw new Exception\RuntimeException(
+                'The RandomLib fallback pseudorandom number generator (PRNG) '
+                . ' must be installed in the absence of the OpenSSL and '
+                . 'Mcrypt extensions'
+            );
+        }
+        $factory = new \RandomLib\Factory;
+        $factory->registerSource(
+            'HashTiming',
+            '\Zend\Math\Source\HashTiming'
+        );
+        self::$generator = $factory->getMediumStrengthGenerator();
+        return self::$generator;
     }
 
     /**

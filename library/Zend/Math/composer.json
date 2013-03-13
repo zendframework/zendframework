@@ -2,6 +2,7 @@
     "name": "zendframework/zend-math",
     "description": " ",
     "license": "BSD-3-Clause",
+    "minimum-stability": "dev",
     "keywords": [
         "zf2",
         "math"
@@ -15,6 +16,9 @@
     "require": {
         "php": ">=5.3.3"
     },
+    "suggest": {
+        "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable"
+    }
     "extra": {
         "branch-alias": {
             "dev-master": "2.1-dev",

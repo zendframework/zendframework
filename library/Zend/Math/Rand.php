@@ -50,7 +50,7 @@ abstract class Rand
             if (true === $usable) {
                 return $bytes;
             }
-        } 
+        }
         if (function_exists('mcrypt_create_iv')
             && (version_compare(PHP_VERSION, '5.3.7') >= 0
             || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
@@ -74,7 +74,7 @@ abstract class Rand
 
     /**
      * Retrieve a fallback/alternative RNG generator
-     * 
+     *
      * @return Randomlib\Generator
      */
     public static function getAlternativeGenerator()

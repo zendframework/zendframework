@@ -67,7 +67,7 @@ class HashTiming implements RandomLib\Source
      * @param int $size The size of the requested random string
      * @return string A string of the requested size
      */
-    public function generate($size) 
+    public function generate($size)
     {
         $result         = '';
         $entropy        = '';

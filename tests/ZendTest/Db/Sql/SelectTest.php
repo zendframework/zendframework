@@ -239,7 +239,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $predicates = $where->getPredicates();
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
     }
-    
+
     /**
      * @testdox unit test: Test where() will accept any array with string key (without ?) with Predicate throw Exception
      * @covers Zend\Db\Sql\Select::where
@@ -254,7 +254,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Using Predicate must not use string keys');
         $select->where($where);
     }
-    
+
     /**
      * @testdox unit test: Test where() will accept an indexed array to be used by joining string expressions
      * @covers Zend\Db\Sql\Select::where
@@ -1032,6 +1032,13 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processSelect' => array('TOP ?', array(array('"foo".*')), '"foo"'),
         );
 
+        $select43 = new Select();
+        $select43->from(array('x' => 'foo'))->columns(array('bar'), false);
+        $sqlPrep43 = 'SELECT "bar" AS "bar" FROM "foo" AS "x"';
+        $sqlStr43 = 'SELECT "bar" AS "bar" FROM "foo" AS "x"';
+        $internalTests43 = array(
+            'processSelect' => array(array(array('"bar"', '"bar"')), '"foo" AS "x"')
+        );
 
         /**
          * $select = the select object
@@ -1086,6 +1093,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select40, $sqlPrep40, array(),    $sqlStr40, $internalTests40),
             array($select41, $sqlPrep41, array(),    $sqlStr41, $internalTests41),
             array($select42, $sqlPrep42, array(),    $sqlStr42, $internalTests42),
+            array($select43, $sqlPrep43, array(),    $sqlStr43, $internalTests43),
         );
     }
 }

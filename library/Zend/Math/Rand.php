@@ -9,6 +9,8 @@
 
 namespace Zend\Math;
 
+use RandomLib;
+
 /**
  * Pseudorandom number generator (PRNG)
  */
@@ -18,7 +20,7 @@ abstract class Rand
     /**
      * Alternative random byte generator using RandomLib
      *
-     * @var \RandomLib\Generator
+     * @var RandomLib\Generator
      */
     protected static $generator = null;
 
@@ -37,15 +39,18 @@ abstract class Rand
         }
         $bytes = '';
         if (function_exists('openssl_random_pseudo_bytes')
-        && (version_compare(PHP_VERSION, '5.3.4') >= 0
-        || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')) {
+            && (version_compare(PHP_VERSION, '5.3.4') >= 0
+            || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
+        ) {
             $bytes = openssl_random_pseudo_bytes($length, $usable);
             if (true === $usable) {
                 return $bytes;
             }
-        } elseif (function_exists('mcrypt_create_iv')
-        && (version_compare(PHP_VERSION, '5.3.7') >= 0
-        || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')) {
+        }
+        if (function_exists('mcrypt_create_iv')
+            && (version_compare(PHP_VERSION, '5.3.7') >= 0
+            || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
+        ) {
             $bytes = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
             if ($bytes !== false && strlen($bytes) === $length) {
                 return $bytes;
@@ -63,22 +68,27 @@ abstract class Rand
         return $generator->generate($length);
     }
 
+    /**
+     * Retrieve a fallback/alternative RNG generator
+     * 
+     * @return RandomLib\Generator
+     */
     public static function getAlternativeGenerator()
     {
         if (!is_null(self::$generator)) {
             return self::$generator;
         }
-        if (!class_exists('\\RandomLib\\Factory')) {
+        if (!class_exists('RandomLib\\Factory')) {
             throw new Exception\RuntimeException(
                 'The RandomLib fallback pseudorandom number generator (PRNG) '
                 . ' must be installed in the absence of the OpenSSL and '
                 . 'Mcrypt extensions'
             );
         }
-        $factory = new \RandomLib\Factory;
+        $factory = new RandomLib\Factory;
         $factory->registerSource(
             'HashTiming',
-            '\Zend\Math\Source\HashTiming'
+            'Zend\Math\Source\HashTiming'
         );
         self::$generator = $factory->getMediumStrengthGenerator();
         return self::$generator;

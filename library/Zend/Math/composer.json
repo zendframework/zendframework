@@ -2,7 +2,6 @@
     "name": "zendframework/zend-math",
     "description": " ",
     "license": "BSD-3-Clause",
-    "minimum-stability": "dev",
     "keywords": [
         "zf2",
         "math"

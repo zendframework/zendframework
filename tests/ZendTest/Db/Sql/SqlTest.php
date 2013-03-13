@@ -19,7 +19,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     
     /**
      * Sql object
-     * @var Zend\Db\Sql\Sql
+     * @var Sql
      */
     protected $sql = null;
 
@@ -119,7 +119,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\Db\Sql\Sql::prepareStatementForSqlObject
      */
-    public function testprepareStatementForSqlObject()
+    public function testPrepareStatementForSqlObject()
     {        
         $insert = $this->sql->insert()->columns(array('foo'));
         $stmt = $this->sql->prepareStatementForSqlObject($insert);        

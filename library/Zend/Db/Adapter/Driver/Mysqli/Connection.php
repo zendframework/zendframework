@@ -267,7 +267,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->resource->commit();
-
+        $this->resource->autocommit(true);
         $this->inTransaction = false;
     }
 

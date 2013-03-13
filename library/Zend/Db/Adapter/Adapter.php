@@ -321,23 +321,32 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
             throw new Exception\InvalidArgumentException('A platform could not be determined from the provided configuration');
         }
 
+        // currently only supported by the IbmDb2 & Oracle concrete implementations
         $options = (isset($parameters['platform_options'])) ? $parameters['platform_options'] : array();
 
         switch ($platformName) {
             case 'Mysql':
-                return new Platform\Mysql($options);
+                // mysqli or pdo_mysql driver
+                $driver = ($this->driver instanceof Driver\Mysqli\Mysqli || $this->driver instanceof Driver\Pdo\Pdo) ? $this->driver : null;
+                return new Platform\Mysql($driver);
             case 'SqlServer':
-                return new Platform\SqlServer($options);
+                // PDO is only supported driver for quoting values in this platform
+                return new Platform\SqlServer(($this->driver instanceof Driver\Pdo\Pdo) ? $this->driver : null);
             case 'Oracle':
+                // oracle does not accept a driver as an option, no driver specific quoting available
                 return new Platform\Oracle($options);
             case 'Sqlite':
-                return new Platform\Sqlite($options);
+                // PDO is only supported driver for quoting values in this platform
+                return new Platform\Sqlite(($this->driver instanceof Driver\Pdo\Pdo) ? $this->driver : null);
             case 'Postgresql':
-                return new Platform\Postgresql($options);
+                // pgsql or pdo postgres driver
+                $driver = ($this->driver instanceof Driver\Pgsql\Pgsql || $this->driver instanceof Driver\Pdo\Pdo) ? $this->driver : null;
+                return new Platform\Postgresql($driver);
             case 'IbmDb2':
+                // ibm_db2 driver escaping does not need an action connection
                 return new Platform\IbmDb2($options);
             default:
-                return new Platform\Sql92($options);
+                return new Platform\Sql92();
         }
     }
 

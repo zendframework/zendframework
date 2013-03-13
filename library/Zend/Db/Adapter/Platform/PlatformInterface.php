@@ -65,16 +65,6 @@ interface PlatformInterface
     public function quoteValue($value);
 
     /**
-     * Quote Trusted Value
-     *
-     * The ability to quote values without notices
-     *
-     * @param $value
-     * @return mixed
-     */
-    public function quoteTrustedValue($value);
-
-    /**
      * Quote value list
      *
      * @param string|string[] $valueList

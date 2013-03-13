@@ -97,6 +97,11 @@ class PartTest extends TestCase
 
     public static function getRouteAlternative()
     {
+        // Ensure that query route handling doesn't trigger errors
+        set_error_handler(function ($errno, $errstr) {
+            return stristr($errstr, 'query route deprecated');
+        }, E_USER_DEPRECATED);
+
         $routePlugins = new RoutePluginManager();
         $routePlugins->setInvokableClass('part', 'Zend\Mvc\Router\Http\Part');
 

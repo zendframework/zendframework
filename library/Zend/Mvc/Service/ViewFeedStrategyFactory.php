@@ -16,7 +16,7 @@ use Zend\View\Strategy\FeedStrategy;
 class ViewFeedStrategyFactory implements FactoryInterface
 {
     /**
-     * Create and return the JSON view strategy
+     * Create and return the Feed view strategy
      *
      * Retrieves the ViewFeedRenderer service from the service locator, and
      * injects it into the constructor for the feed strategy.

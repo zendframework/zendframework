@@ -261,4 +261,41 @@ EOS;
         $this->assertContains('use Another\\Baz as Baz2;', $generated);
     }
 
+    public function testSetUsesWithGetUses()
+    {
+        $file = new FileGenerator();
+        $uses = array(
+            'Your\\Bar',
+            'My\\Baz',
+            array('use' => 'Another\\Baz', 'as' => 'Baz2')
+        );
+        $file->setUses($uses);
+        $file->setUses($file->getUses());
+        $generated = $file->generate();
+        $this->assertContains('use My\\Baz;', $generated);
+        $this->assertContains('use Your\\Bar;', $generated);
+        $this->assertContains('use Another\\Baz as Baz2;', $generated);
+    }
+
+    public function testCreateFromArrayWithClassInstance()
+    {
+        $fileGenerator = FileGenerator::fromArray(array(
+            'filename'  => 'foo.php',
+            'class'     => new ClassGenerator('bar'),
+        ));
+        $class = $fileGenerator->getClass('bar');
+        $this->assertInstanceOf('Zend\Code\Generator\ClassGenerator', $class);
+    }
+
+    public function testCreateFromArrayWithClassFromArray()
+    {
+        $fileGenerator = FileGenerator::fromArray(array(
+            'filename'  => 'foo.php',
+            'class'     => array(
+                'name' => 'bar',
+            ),
+        ));
+        $class = $fileGenerator->getClass('bar');
+        $this->assertInstanceOf('Zend\Code\Generator\ClassGenerator', $class);
+    }
 }

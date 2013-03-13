@@ -91,7 +91,6 @@ class Tag extends AbstractGenerator
     public function setName($name)
     {
         $this->name = ltrim($name, '@');
-
         return $this;
     }
 
@@ -110,7 +109,6 @@ class Tag extends AbstractGenerator
     public function setDescription($description)
     {
         $this->description = $description;
-
         return $this;
     }
 

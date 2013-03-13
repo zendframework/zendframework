@@ -131,7 +131,7 @@ abstract class AbstractWriter implements WriterInterface
 
         if (!$filter instanceof Filter\FilterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Writer must implement %s\Filter\FilterInterface; received "%s"',
+                'Filter must implement %s\Filter\FilterInterface; received "%s"',
                 __NAMESPACE__,
                 is_object($filter) ? get_class($filter) : gettype($filter)
             ));

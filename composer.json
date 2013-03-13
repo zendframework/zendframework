@@ -13,8 +13,7 @@
     },
     "require-dev": {
         "doctrine/common": ">=2.1",
-        "phpunit/PHPUnit": "3.7.*",
-        "symfony/yaml": "2.1.*"
+        "phpunit/PHPUnit": "3.7.*"
     },
     "suggest": {
         "doctrine/common": "Doctrine\\Common >=2.1 for annotation features",

@@ -28,7 +28,8 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
         if (!class_exists($type)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Cannot add a complex type %s that is not an object or where '
-              . 'class could not be found in \'DefaultComplexType\' strategy.', $type
+                . 'class could not be found in "DefaultComplexType" strategy.',
+                $type
             ));
         }
 

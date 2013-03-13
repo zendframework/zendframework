@@ -55,7 +55,8 @@ abstract class Rand
             || class_exists('\\COM', false);
         if (true === $strong && false === $checkAlternatives) {
             throw new Exception\RuntimeException (
-                'Unable to generate sufficiently strong random bytes'
+                'This PHP environment doesn\'t support secure random number generation. ' .
+                'Please consider installing the OpenSSL and/or Mcrypt extensions'
             );
         }
         $generator = self::getAlternativeGenerator();

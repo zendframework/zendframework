@@ -51,10 +51,22 @@ interface PlatformInterface
     /**
      * Quote value
      *
+     * Will throw a notice when used in a workflow that can be considered "unsafe"
+     *
      * @param  string $value
      * @return string
      */
     public function quoteValue($value);
+
+    /**
+     * Quote Trusted Value
+     *
+     * The ability to quote values without notices
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function quoteTrustedValue($value);
 
     /**
      * Quote value list

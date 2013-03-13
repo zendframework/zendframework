@@ -9,6 +9,12 @@
 
 namespace Zend\Session;
 
+if (version_compare(PHP_VERSION, '5.3.4', 'lt')) {
+    class_alias('Zend\Session\AbstractContainer', 'Zend\Session\AbstractBaseContainer');
+} else {
+    class_alias('Zend\Session\Container\PhpReferenceCompatibility', 'Zend\Session\AbstractBaseContainer');
+}
+
 /**
  * Session storage container
  *
@@ -17,36 +23,6 @@ namespace Zend\Session;
  * Additionally, expiries may be absolute TTLs or measured in "hops", which
  * are based on how many times the key or container were accessed.
  */
-class Container extends AbstractContainer
+class Container extends AbstractBaseContainer
 {
-    /**
-     * Exchange the current array with another array or object.
-     *
-     * @param  array|object $input
-     * @return array        Returns the old array
-     * @see ArrayObject::exchangeArray()
-     */
-    public function exchangeArray(array $input)
-    {
-        return parent::exchangeArrayCompat($input);
-    }
-
-    /**
-     * Retrieve a specific key in the container
-     *
-     * @param  string $key
-     * @return mixed
-     */
-    public function &offsetGet($key)
-    {
-        $ret = null;
-        if (!$this->offsetExists($key)) {
-            return $ret;
-        }
-        $storage = $this->getStorage();
-        $name    = $this->getName();
-        $ret =& $storage[$name][$key];
-
-        return $ret;
-    }
 }

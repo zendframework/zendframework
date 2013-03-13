@@ -560,6 +560,18 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $result = $this->serviceManager->addInitializer(get_class($this));
     }
 
+    public function testGetGlobIteratorServiceWorksProperly()
+    {
+        $config = new Config(array(
+            'invokables' => array(
+                'foo' => 'ZendTest\ServiceManager\TestAsset\GlobIteratorService',
+            ),
+        ));
+        $serviceManager = new ServiceManager($config);
+        $foo = $serviceManager->get('foo');
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\GlobIteratorService', $foo);
+    }
+
     public function duplicateService()
     {
         $self = $this;

@@ -22,7 +22,7 @@ class TableGateway extends AbstractTableGateway
      * Constructor
      *
      * @param string $table
-     * @param Adapter $adapter
+     * @param AdapterInterface $adapter
      * @param Feature\AbstractFeature|Feature\FeatureSet|Feature\AbstractFeature[] $features
      * @param ResultSetInterface $resultSetPrototype
      * @param Sql $sql

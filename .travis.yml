@@ -12,11 +12,9 @@ matrix:
 
 before_install:
  - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
- - composer install --dev --prefer-source
- - wget http://cs.sensiolabs.org/get/php-cs-fixer.phar
 
 script:
- - ./bin/travis-build.sh
+ - ant travis -keep-going
 
 notifications:
   irc: "irc.freenode.org#zftalk.dev"

@@ -280,6 +280,59 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('21', $res->getParams()->version);
     }
 
+    /**
+     * @group 3739
+     * @covers Accept::matchAcceptParams()
+     */
+    public function testParamRangesWithDecimals()
+    {
+        $acceptHeader = Accept::fromString('Accept: application/vnd.com.example+xml; version=10');
+        $this->assertFalse($acceptHeader->match('application/vnd.com.example+xml; version="\"3.1\"-\"3.1.1-DEV\""'));
+    }
+
+    /**
+     * @group 3740
+     * @dataProvider provideParamRanges
+     * @covers Accept::matchAcceptParams()
+     * @covers Accept::getParametersFromFieldValuePart()
+     */
+    public function testParamRangesSupportDevStage($range, $input, $success)
+    {
+        $acceptHeader = Accept::fromString(
+            'Accept: application/vnd.com.example+xml; version="' . addslashes($input) . '"'
+        );
+
+        $res = $acceptHeader->match(
+            'application/vnd.com.example+xml; version="' . addslashes($range) . '"'
+        );
+
+        if ($success) {
+            $this->assertInstanceOf('Zend\Http\Header\Accept\FieldValuePart\AcceptFieldValuePart', $res);
+        } else {
+            $this->assertFalse($res);
+        }
+    }
+
+    /**
+     * @group 3740
+     * @return array
+     */
+    public function provideParamRanges()
+    {
+        return array(
+            array('"3.1.1-DEV"-3.1.1', '3.1.1', true),
+            array('3.1.0-"3.1.1-DEV"', '3.1.1', false),
+            array('3.1.0-"3.1.1-DEV"', '3.1.1-DEV', true),
+            array('3.1.0-"3.1.1-DEV"', '3.1.2-DEV', false),
+            array('3.1.0-"3.1.1"', '3.1.2-DEV', false),
+            array('3.1.0-"3.1.1"', '3.1.0-DEV', false),
+            array('"3.1.0-DEV"-"3.1.1-BETA"', '3.1.0', true),
+            array('"3.1.0-DEV"-"3.1.1-BETA"', '3.1.1', false),
+            array('"3.1.0-DEV"-"3.1.1-BETA"', '3.1.1-BETA', true),
+            array('"3.1.0-DEV"-"3.1.1-BETA"', '3.1.0-DEV', true),
+        );
+    }
+
     public function testVersioningAndPriorization()
     {
         $acceptStr = 'Accept: text/html; version=23, text/json; version=15.3; q=0.9,' .
@@ -301,14 +354,16 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($value, $res->$key);
         }
 
-        $expected = (object) array('typeString' => 'text/html',
-                'type' => 'text',
-                'subtype' => 'html',
-                'subtypeRaw' => 'html',
-                'format' => 'html',
-                'priority' => 0.4,
-                'params' => array('q' => 0.4, 'level' => 2),
-                'raw' => 'text/html;level=2;q=0.4');
+        $expected = (object) array(
+            'typeString' => 'text/html',
+            'type' => 'text',
+            'subtype' => 'html',
+            'subtypeRaw' => 'html',
+            'format' => 'html',
+            'priority' => 0.4,
+            'params' => array('q' => 0.4, 'level' => 2),
+            'raw' => 'text/html;level=2;q=0.4'
+        );
 
         $str = 'text/html; version=17,text/json; version=15-16; q=0.5';
         $res = $acceptHeader->match($str);

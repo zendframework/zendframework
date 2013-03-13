@@ -226,7 +226,7 @@ class ServiceManager implements ServiceLocatorInterface
             if ($this->allowOverride === false) {
                 throw new Exception\InvalidServiceNameException(sprintf(
                     'A service by the name or alias "%s" already exists and cannot be overridden; please use an alternate name',
-                    $cName
+                    $name
                 ));
             }
             $this->unregisterService($cName);
@@ -266,7 +266,7 @@ class ServiceManager implements ServiceLocatorInterface
             if ($this->allowOverride === false) {
                 throw new Exception\InvalidServiceNameException(sprintf(
                     'A service by the name or alias "%s" already exists and cannot be overridden, please use an alternate name',
-                    $cName
+                    $name
                 ));
             }
             $this->unregisterService($cName);
@@ -427,7 +427,7 @@ class ServiceManager implements ServiceLocatorInterface
         if ($usePeeringServiceManagers && $retrieveFromPeeringManagerFirst) {
             $instance = $this->retrieveFromPeeringManager($name);
 
-            if(null !== $instance) {
+            if (null !== $instance) {
                 return $instance;
             }
         }
@@ -445,7 +445,7 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         // Still no instance? raise an exception
-        if (!$instance && !is_array($instance)) {
+        if ($instance === null && !is_array($instance)) {
             if ($isAlias) {
                 throw new Exception\ServiceNotFoundException(sprintf(
                     'An alias "%s" was requested but no service could be found.',
@@ -494,11 +494,11 @@ class ServiceManager implements ServiceLocatorInterface
             $instance = $this->createFromFactory($cName, $rName);
         }
 
-        if (!$instance && isset($this->invokableClasses[$cName])) {
+        if ($instance === false && isset($this->invokableClasses[$cName])) {
             $instance = $this->createFromInvokable($cName, $rName);
         }
 
-        if (!$instance && $this->canCreateFromAbstractFactory($cName, $rName)) {
+        if ($instance === false && $this->canCreateFromAbstractFactory($cName, $rName)) {
             $instance = $this->createFromAbstractFactory($cName, $rName);
         }
 

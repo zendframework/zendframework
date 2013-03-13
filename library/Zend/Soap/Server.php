@@ -529,11 +529,17 @@ class Server implements \Zend\Server\Server
         }
 
         if (!is_string($class)) {
-            throw new Exception\InvalidArgumentException('Invalid class argument (' . gettype($class) . ')');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid class argument (%s)',
+                gettype($class)
+            ));
         }
 
         if (!class_exists($class)) {
-            throw new Exception\InvalidArgumentException('Class "' . $class . '" does not exist');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Class "%s" does not exist',
+                $class
+            ));
         }
 
         $this->class = $class;
@@ -557,11 +563,16 @@ class Server implements \Zend\Server\Server
     public function setObject($object)
     {
         if (!is_object($object)) {
-            throw new Exception\InvalidArgumentException('Invalid object argument ('.gettype($object).')');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid object argument (%s)',
+                gettype($object)
+            ));
         }
 
         if (isset($this->object)) {
-            throw new Exception\InvalidArgumentException('An object has already been registered with this soap server instance');
+            throw new Exception\InvalidArgumentException(
+                'An object has already been registered with this soap server instance'
+            );
         }
 
         $this->object = $object;

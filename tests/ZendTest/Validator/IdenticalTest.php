@@ -129,4 +129,56 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals($validator->getOption('messageVariables'),
                                      'messageVariables', $validator);
     }
+
+    public function testValidatingStringTokenInContext()
+    {
+        $this->validator->setToken('email');
+
+        $this->assertTrue($this->validator->isValid(
+            'john@doe.com',
+            array('email' => 'john@doe.com')
+        ));
+
+        $this->assertFalse($this->validator->isValid(
+            'john@doe.com',
+            array('email' => 'harry@hoe.com')
+        ));
+
+        $this->assertFalse($this->validator->isValid(
+            'harry@hoe.com',
+            array('email' => 'john@doe.com')
+        ));
+    }
+
+    public function testValidatingArrayTokenInContext()
+    {
+        $this->validator->setToken(array('user' => 'email'));
+
+        $this->assertTrue($this->validator->isValid(
+            'john@doe.com',
+            array(
+                'user' => array(
+                    'email' => 'john@doe.com'
+                )
+            )
+        ));
+
+        $this->assertFalse($this->validator->isValid(
+            'john@doe.com',
+            array(
+                'user' => array(
+                    'email' => 'harry@hoe.com'
+                )
+            )
+        ));
+
+        $this->assertFalse($this->validator->isValid(
+            'harry@hoe.com',
+            array(
+                'user' => array(
+                    'email' => 'john@doe.com'
+                )
+            )
+        ));
+    }
 }

@@ -18,7 +18,7 @@ class Code128 extends AbstractAdapter
     /**
      * The used string wrapper used for basic UTF-8 string functions
      *
-     * @var SrtringWrapperInterface
+     * @var StringWrapperInterface
      */
     protected $utf8StringWrapper;
 

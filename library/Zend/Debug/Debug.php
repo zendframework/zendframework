@@ -87,7 +87,7 @@ class Debug
      * @param  bool   $echo  OPTIONAL Echo output if true.
      * @return string
      */
-    public static function dump($var, $label=null, $echo=true)
+    public static function dump($var, $label = null, $echo = true)
     {
         // format the label
         $label = ($label===null) ? '' : rtrim($label) . ' ';

@@ -72,6 +72,31 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals('string', $this->parameterContainer->offsetGetErrata('1'));
+
+        // test that setting an index applies to correct named parameter
+        $this->parameterContainer[0] = 'Zero';
+        $this->parameterContainer[1] = 'One';
+        $this->assertEquals(
+            array('foo' => 'Zero', 'boo' => 'One', '1' => 'book'),
+            $this->parameterContainer->getNamedArray()
+        );
+        $this->assertEquals(
+            array(0 => 'Zero', 1 => 'One', 2 => 'book'),
+            $this->parameterContainer->getPositionalArray()
+        );
+
+        // test no-index applies
+        $this->parameterContainer['buffer'] = 'A buffer Element';
+        $this->parameterContainer[] = 'Second To Last';
+        $this->parameterContainer[] = 'Last';
+        $this->assertEquals(
+            array('foo' => 'Zero', 'boo' => 'One', '1' => 'book', 'buffer' => 'A buffer Element', '4' => 'Second To Last', '5' => 'Last'),
+            $this->parameterContainer->getNamedArray()
+        );
+        $this->assertEquals(
+            array(0 => 'Zero', 1 => 'One', 2 => 'book', 3 => 'A buffer Element', 4 => 'Second To Last', 5 => 'Last'),
+            $this->parameterContainer->getPositionalArray()
+        );
     }
 
     /**

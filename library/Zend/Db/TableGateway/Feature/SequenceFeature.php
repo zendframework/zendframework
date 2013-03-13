@@ -32,7 +32,8 @@ class SequenceFeature extends AbstractFeature
 
 
     /**
-     * @param null $sequence
+     * @param string $primaryKeyField
+     * @param string $sequenceName
      */
     public function __construct($primaryKeyField, $sequenceName)
     {
@@ -83,7 +84,7 @@ class SequenceFeature extends AbstractFeature
                 $sql = 'SELECT ' . $platform->quoteIdentifier($this->sequenceName) . '.NEXTVAL FROM dual';
                 break;
             case 'PostgreSQL':
-                $sql = 'SELECT NEXTVAL(' . $platform->quoteIdentifier($this->sequenceName) . ')';
+                $sql = 'SELECT NEXTVAL(\'' . $this->sequenceName . '\')';
                 break;
             default :
                 return null;
@@ -112,7 +113,7 @@ class SequenceFeature extends AbstractFeature
                 $sql = 'SELECT ' . $platform->quoteIdentifier($this->sequenceName) . '.CURRVAL FROM dual';
                 break;
             case 'PostgreSQL':
-                $sql = 'SELECT CURRVAL(' . $platform->quoteIdentifier($this->sequenceName) . ')';
+                $sql = 'SELECT CURRVAL(\'' . $this->sequenceName . '\')';
                 break;
             default :
                 return null;

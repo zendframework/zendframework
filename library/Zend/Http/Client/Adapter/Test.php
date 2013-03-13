@@ -98,10 +98,9 @@ class Test implements AdapterInterface
     /**
      * Connect to the remote server
      *
-     * @param string  $host
-     * @param int     $port
-     * @param  bool $secure
-     * @param int     $timeout
+     * @param  string $host
+     * @param  int    $port
+     * @param  bool   $secure
      * @throws Exception\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)

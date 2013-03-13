@@ -441,6 +441,111 @@ class NavigationTest extends AbstractTest
         $this->assertTrue(strpos($render, 'p2') !== false);
     }
 
+    public function testMultipleNavigations()
+    {
+        $sm   = new ServiceManager();
+        $nav1 = new Container();
+        $nav2 = new Container();
+        $sm->setService('nav1', $nav1);
+        $sm->setService('nav2', $nav2);
+
+        $helper = new Navigation();
+        $helper->setServiceLocator($sm);
+
+        $menu     = $helper('nav1')->menu();
+        $actual   = spl_object_hash($nav1);
+        $expected = spl_object_hash($menu->getContainer());
+        $this->assertEquals($expected, $actual);
+
+        $menu     = $helper('nav2')->menu();
+        $actual   = spl_object_hash($nav2);
+        $expected = spl_object_hash($menu->getContainer());
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @group #3859
+     */
+    public function testMultipleNavigationsWithDifferentHelpersAndDifferentContainers()
+    {
+        $sm   = new ServiceManager();
+        $nav1 = new Container();
+        $nav2 = new Container();
+        $sm->setService('nav1', $nav1);
+        $sm->setService('nav2', $nav2);
+
+        $helper = new Navigation();
+        $helper->setServiceLocator($sm);
+
+        $menu     = $helper('nav1')->menu();
+        $actual   = spl_object_hash($nav1);
+        $expected = spl_object_hash($menu->getContainer());
+        $this->assertEquals($expected, $actual);
+
+        $breadcrumbs = $helper('nav2')->breadcrumbs();
+        $actual      = spl_object_hash($nav2);
+        $expected    = spl_object_hash($breadcrumbs->getContainer());
+        $this->assertEquals($expected, $actual);
+
+        $links    = $helper()->links();
+        $expected = spl_object_hash($links->getContainer());
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @group #3859
+     */
+    public function testMultipleNavigationsWithDifferentHelpersAndSameContainer()
+    {
+        $sm   = new ServiceManager();
+        $nav1 = new Container();
+        $sm->setService('nav1', $nav1);
+
+        $helper = new Navigation();
+        $helper->setServiceLocator($sm);
+
+        // Tests
+        $menu     = $helper('nav1')->menu();
+        $actual   = spl_object_hash($nav1);
+        $expected = spl_object_hash($menu->getContainer());
+        $this->assertEquals($expected, $actual);
+
+        $breadcrumbs = $helper('nav1')->breadcrumbs();
+        $expected    = spl_object_hash($breadcrumbs->getContainer());
+        $this->assertEquals($expected, $actual);
+
+        $links    = $helper()->links();
+        $expected = spl_object_hash($links->getContainer());
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @group #3859
+     */
+    public function testMultipleNavigationsWithSameHelperAndSameContainer()
+    {
+        $sm   = new ServiceManager();
+        $nav1 = new Container();
+        $sm->setService('nav1', $nav1);
+
+        $helper = new Navigation();
+        $helper->setServiceLocator($sm);
+
+        // Test
+        $menu     = $helper('nav1')->menu();
+        $actual   = spl_object_hash($nav1);
+        $expected = spl_object_hash($menu->getContainer());
+        $this->assertEquals($expected, $actual);
+
+        $menu     = $helper('nav1')->menu();
+        $expected = spl_object_hash($menu->getContainer());
+        $this->assertEquals($expected, $actual);
+
+        $menu    = $helper()->menu();
+        $expected = spl_object_hash($menu->getContainer());
+        $this->assertEquals($expected, $actual);
+    }
+
     /**
      * Returns the contens of the expected $file, normalizes newlines
      * @param  string $file

@@ -1,5 +1,215 @@
 # CHANGELOG
 
+## 2.1.3 (21 Feb 2013):
+
+- 3714: Zend\Stdlib\ArrayObject::offsetExists() returning by reference
+  (https://github.com/zendframework/zf2/issues/3714)
+- 3855: Fix #3852
+  (https://github.com/zendframework/zf2/issues/3855)
+- 3856: Simple route case insensitive
+  (https://github.com/zendframework/zf2/issues/3856)
+
+## 2.1.2 (20 Feb 2013):
+
+- 3085: create controller via Zend\Mvc\Controller\ControllerManager
+  (https://github.com/zendframework/zf2/issues/3085)
+- 3469: ConnectionInterface docblock is wrong or implementation is wrong..
+  (https://github.com/zendframework/zf2/issues/3469)
+- 3506: [WIP] [#3113] Fix spelling in error validation messages
+  (https://github.com/zendframework/zf2/issues/3506)
+- 3636: If route has child routes and in URL has arbitrary query like "?lang=de"
+  it does not work
+  (https://github.com/zendframework/zf2/issues/3636)
+- 3652: Query parameter ?action=somevalue will get 404 error
+  (https://github.com/zendframework/zf2/issues/3652)
+- 3683: Fix to make sure NotEmpty validator is not already set
+  (https://github.com/zendframework/zf2/issues/3683)
+- 3691: Fix for GitHub issue 3469
+  (https://github.com/zendframework/zf2/issues/3691)
+- 3698: Openssl error string
+  (https://github.com/zendframework/zf2/issues/3698)
+- 3699: Certain servers may not set a whitespace after a colon 
+  (Set-Cookie: header)
+  (https://github.com/zendframework/zf2/issues/3699)
+- 3701: Synced pt\_BR\Zend\_Validate.php with en\Zend\_Validate.php
+  (https://github.com/zendframework/zf2/issues/3701)
+- 3702: added new file: resources\languages\pt\_BR\Zend\_Captcha.php
+  (https://github.com/zendframework/zf2/issues/3702)
+- 3703: [WIP] Adding parallel testing ANT build configuration and related files
+  (https://github.com/zendframework/zf2/issues/3703)
+- 3705: Recent composer.json update of stdlib package
+  (https://github.com/zendframework/zf2/issues/3705)
+- 3706: clear joins and create without columns
+  (https://github.com/zendframework/zf2/issues/3706)
+- 3707: quoteIdentifier problem in sequence
+  (https://github.com/zendframework/zf2/issues/3707)
+- 3708: Filter\File\RenameUpload: wrap move\_uploaded\_file to be easly mocked
+  (https://github.com/zendframework/zf2/issues/3708)
+- 3712: Fix for URIs with a query string not matching
+  (https://github.com/zendframework/zf2/issues/3712)
+- 3713: Session Container Mismatch & Version Compare fixes for 5.3.3
+  (https://github.com/zendframework/zf2/issues/3713)
+- 3715: [#3705] Fix autoload.files setting in composer.json
+  (https://github.com/zendframework/zf2/issues/3715)
+- 3716: Added the Zend\Form decepence in composer.json for Zend\Mvc
+  (https://github.com/zendframework/zf2/issues/3716)
+- 3721: Created README.md files for each component
+  (https://github.com/zendframework/zf2/issues/3721)
+- 3722: [Form] [DateTimeSelect] Filter, manager, and view helper fixes
+  (https://github.com/zendframework/zf2/issues/3722)
+- 3725: Use built-in php constants
+  (https://github.com/zendframework/zf2/issues/3725)
+- 3729: Zend\Barcode (Fixes #2862)
+  (https://github.com/zendframework/zf2/issues/3729)
+- 3732: Fix for #2531 - Multiplie navigation don't work
+  (https://github.com/zendframework/zf2/issues/3732)
+- 3733: Fix/select where
+  (https://github.com/zendframework/zf2/issues/3733)
+- 3735: [Form] [FormElementManager] don't overwrite form factory if already set
+  (https://github.com/zendframework/zf2/issues/3735)
+- 3742: Object+hydrator element annotation fix
+  (https://github.com/zendframework/zf2/issues/3742)
+- 3743: [#3739 & #3740] Using version-compare in accept header handler params.
+  (https://github.com/zendframework/zf2/issues/3743)
+- 3746: Fix bugs for some locales!
+  (https://github.com/zendframework/zf2/issues/3746)
+- 3757: Fixed a bug where mail messages were malformed when using the Sendmail
+  (https://github.com/zendframework/zf2/issues/3757)
+- 3764: Validator File MimeType (IsImage & IsCompressed)
+  (https://github.com/zendframework/zf2/issues/3764)
+- 3771: Zend\File\Transfer\Adapter\Http on receive : error "File was not found"  in ZF 2.1
+  (https://github.com/zendframework/zf2/issues/3771)
+- 3778: [#3711] Fix regression in query string matching
+  (https://github.com/zendframework/zf2/issues/3778)
+- 3782: [WIP] Zend\Di\Di::get() with call parameters ignored shared instances.
+  (https://github.com/zendframework/zf2/issues/3782)
+- 3783: Provide branch-alias entries for each component composer.json
+  (https://github.com/zendframework/zf2/issues/3783)
+- 3785: Zend\Db\Sql\Literal Fix when % is used in string
+  (https://github.com/zendframework/zf2/issues/3785)
+- 3786: Inject shared event manager in initializer
+  (https://github.com/zendframework/zf2/issues/3786)
+- 3789: Update library/Zend/Mail/Header/AbstractAddressList.php
+  (https://github.com/zendframework/zf2/issues/3789)
+- 3793: Resolved Issue: #3748 - offsetGet and __get should do a direct proxy to
+  $_SESSION
+  (https://github.com/zendframework/zf2/issues/3793)
+- 3794: Implement query and fragment assembling into the HTTP router itself
+  (https://github.com/zendframework/zf2/issues/3794)
+- 3797: remove @category, @package, and @subpackage docblocks
+  (https://github.com/zendframework/zf2/issues/3797)
+- 3798: Remove extra semicolons
+  (https://github.com/zendframework/zf2/issues/3798)
+- 3803: Fix identical validator
+  (https://github.com/zendframework/zf2/issues/3803)
+- 3806: Remove obsolete catch statement
+  (https://github.com/zendframework/zf2/issues/3806)
+- 3807: Resolve undefined classes in phpDoc
+  (https://github.com/zendframework/zf2/issues/3807)
+- 3808: Add missing @return annotations
+  (https://github.com/zendframework/zf2/issues/3808)
+- 3813: Bug fix for GlobIterator extending service
+  (https://github.com/zendframework/zf2/issues/3813)
+- 3817: Add failing tests for Simple console route
+  (https://github.com/zendframework/zf2/issues/3817)
+- 3819: Allow form element filter to convert a string to array
+  (https://github.com/zendframework/zf2/issues/3819)
+- 3828: Cannot validate form when keys of collection in data are non consecutive
+  (https://github.com/zendframework/zf2/issues/3828)
+- 3831: Non-matching argument type for ArrayObject
+  (https://github.com/zendframework/zf2/issues/3831)
+- 3832: Zend\Db\Sql\Predicate\Predicate->literal() does not work with integer 0
+  as $expressionParameters
+  (https://github.com/zendframework/zf2/issues/3832)
+- 3836: Zend\Db\Sql\Predicate\Predicate Fix for literal() usage
+  (https://github.com/zendframework/zf2/issues/3836)
+- 3837: Fix for legacy Transfer usage of File Validators
+  (https://github.com/zendframework/zf2/issues/3837)
+- 3838: Stdlib\ArrayObject & Zend\Session\Container Compatibility with ArrayObject
+  (https://github.com/zendframework/zf2/issues/3838)
+- 3839: Fixes #2477 - Implemented optional subdomains using regex
+  (https://github.com/zendframework/zf2/issues/3839)
+
+## 2.1.1 (06 Feb 2013):
+
+- 2510: Zend\Session\Container does not allow modification by reference
+  (https://github.com/zendframework/zf2/issues/2510)
+- 2899: Can't inherit abstract function
+  Zend\Console\Prompt\PromptInterface::show()
+  (https://github.com/zendframework/zf2/issues/2899)
+- 3455: Added DISTINCT on Zend\Db\Sql\Select
+  (https://github.com/zendframework/zf2/issues/3455)
+- 3456: Connection creation added in Pgsql.php createStatement method
+  (https://github.com/zendframework/zf2/issues/3456)
+- 3608: Fix validate data contains arrays as values
+  (https://github.com/zendframework/zf2/issues/3608)
+- 3610: Form: rely on specific setter
+  (https://github.com/zendframework/zf2/issues/3610)
+- 3618: Fix bug when $indent have some string
+  (https://github.com/zendframework/zf2/issues/3618)
+- 3622: Updated Changelog with BC notes for 2.1 and 2.0.7
+  (https://github.com/zendframework/zf2/issues/3622)
+- 3623: Authentication using DbTable Adapter doesn't work for 2.1.0
+  (https://github.com/zendframework/zf2/issues/3623)
+- 3625: Missing instance/object for parameter route upgrading to 2.1.\*
+  (https://github.com/zendframework/zf2/issues/3625)
+- 3627: Making relative links in Markdown files
+  (https://github.com/zendframework/zf2/issues/3627)
+- 3629: Zend\Db\Select using alias in joins can results in wrong SQL
+  (https://github.com/zendframework/zf2/issues/3629)
+- 3638: Fixed method that removed part from parts in Mime\Message
+  (https://github.com/zendframework/zf2/issues/3638)
+- 3639: Session Metadata and SessionArrayStorage requestaccesstime fixes.
+  (https://github.com/zendframework/zf2/issues/3639)
+- 3640: [#3625] Do not query abstract factories for registered invokables
+  (https://github.com/zendframework/zf2/issues/3640)
+- 3641: Zend\Db\Sql\Select Fix for #3629
+  (https://github.com/zendframework/zf2/issues/3641)
+- 3645: Exception on destructing the SMTP Transport instance
+  (https://github.com/zendframework/zf2/issues/3645)
+- 3648: Ensure run() always returns Application instance
+  (https://github.com/zendframework/zf2/issues/3648)
+- 3649: Created script to aggregate return status
+  (https://github.com/zendframework/zf2/issues/3649)
+- 3650: InjectControllerDependencies initializer overriding an previously
+  defined EventManager
+  (https://github.com/zendframework/zf2/issues/3650)
+- 3651: Hotfix/3650
+  (https://github.com/zendframework/zf2/issues/3651)
+- 3656: Zend\Validator\Db\AbstractDb.php and mysqli
+  (https://github.com/zendframework/zf2/issues/3656)
+- 3658: Zend\Validator\Db\AbstractDb.php and mysqli (issue: 3656)
+  (https://github.com/zendframework/zf2/issues/3658)
+- 3661: ZF HTTP Status Code overwritten
+  (https://github.com/zendframework/zf2/issues/3661)
+- 3662: Remove double injection in Plugin Controller Manager
+  (https://github.com/zendframework/zf2/issues/3662)
+- 3663: Remove useless shared in ServiceManager
+  (https://github.com/zendframework/zf2/issues/3663)
+- 3671: Hotfix/restful head identifier
+  (https://github.com/zendframework/zf2/issues/3671)
+- 3673: Add translations for Zend\Validator\File\UploadFile
+  (https://github.com/zendframework/zf2/issues/3673)
+- 3679: remove '\' character from Traversable 
+  (https://github.com/zendframework/zf2/issues/3679)
+- 3680: Zend\Validator\Db Hotfix (supersedes #3658)
+  (https://github.com/zendframework/zf2/issues/3680)
+- 3681: [#2899] Remove redundant method declaration
+  (https://github.com/zendframework/zf2/issues/3681)
+- 3682: Zend\Db\Sql\Select Quantifier (DISTINCT, ALL, + Expression) support -
+  supersedes #3455
+  (https://github.com/zendframework/zf2/issues/3682)
+- 3684: Remove the conditional class declaration of ArrayObject
+  (https://github.com/zendframework/zf2/issues/3684)
+- 3687: fix invalid docblock
+  (https://github.com/zendframework/zf2/issues/3687)
+- 3689: [#3684] Polyfill support for version-dependent classes
+  (https://github.com/zendframework/zf2/issues/3689)
+- 3690: oracle transaction support
+  (https://github.com/zendframework/zf2/issues/3690)
+- 3692: Hotfix/db parametercontainer mixed use
+  (https://github.com/zendframework/zf2/issues/3692)
+
 ## 2.1.0 (29 Jan 2013):
 
 - 2378: ZF2-417 Form Annotation Hydrator options support

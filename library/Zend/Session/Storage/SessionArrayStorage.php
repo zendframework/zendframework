@@ -9,38 +9,15 @@
 
 namespace Zend\Session\Storage;
 
+if (version_compare(PHP_VERSION, '5.3.4', 'lt')) {
+    class_alias('Zend\Session\Storage\AbstractSessionArrayStorage', 'Zend\Session\Storage\AbstractBaseSessionArrayStorage');
+} else {
+    class_alias('Zend\Session\Storage\SessionArrayStorage\PhpReferenceCompatibility', 'Zend\Session\Storage\AbstractBaseSessionArrayStorage');
+}
+
 /**
  * Session storage in $_SESSION
  */
-class SessionArrayStorage extends AbstractSessionArrayStorage
+class SessionArrayStorage extends AbstractBaseSessionArrayStorage
 {
-    /**
-     * Get Offset
-     *
-     * @param  mixed $key
-     * @return mixed
-     */
-    public function &__get($key)
-    {
-        if (isset($_SESSION[$key])) {
-            return $_SESSION[$key];
-        }
-
-        return null;
-    }
-
-    /**
-     * Offset Get
-     *
-     * @param  mixed $key
-     * @return mixed
-     */
-    public function &offsetGet($key)
-    {
-        if (isset($_SESSION[$key])) {
-            return $_SESSION[$key];
-        }
-
-        return null;
-    }
 }

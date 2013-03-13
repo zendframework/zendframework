@@ -1124,6 +1124,38 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->isValid());
     }
 
+    public function testFormValidationCanHandleNonConsecutiveKeysOfCollectionInData()
+    {
+        $dataWithCollection = array(
+            'foo' => 'bar',
+            'categories' => array(
+                0 => array('name' => 'cat1'),
+                1 => array('name' => 'cat2'),
+                3 => array('name' => 'cat3'),
+            ),
+        );
+        $this->populateForm();
+        $this->form->add(array(
+            'type' => 'Zend\Form\Element\Collection',
+            'name' => 'categories',
+            'options' => array(
+                'count' => 1,
+                'allow_add' => true,
+                'target_element' => array(
+                    'type' => 'ZendTest\Form\TestAsset\CategoryFieldset'
+                )
+            )
+        ));
+        $this->form->setValidationGroup(array(
+            'foo',
+            'categories' => array(
+                'name'
+            )
+        ));
+        $this->form->setData($dataWithCollection);
+        $this->assertTrue($this->form->isValid());
+    }
+
     public function testAddNonBaseFieldsetObjectInputFilterToFormInputFilter()
     {
         $fieldset = new Fieldset('foobar');
@@ -1291,5 +1323,38 @@ class FormTest extends TestCase
 
         // Make sure the object was not hydrated at the "form level"
         $this->assertFalse(isset($object->submit));
+    }
+
+    public function testPrepareBindDataAllowsFilterToConvertStringToArray()
+    {
+        $data = array(
+            'foo' => '1,2',
+        );
+
+        $filteredData = array(
+            'foo' => array(1, 2)
+        );
+
+        $element = new TestAsset\ElementWithStringToArrayFilter('foo');
+        $hydrator = $this->getMock('Zend\Stdlib\Hydrator\ArraySerializable');
+        $hydrator->expects($this->any())->method('hydrate')->with($filteredData, $this->anything());
+
+        $this->form->add($element);
+        $this->form->setHydrator($hydrator);
+        $this->form->setObject(new stdClass());
+        $this->form->setData($data);
+        $this->form->bindValues($data);
+    }
+
+    public function testGetValidationGroup()
+    {
+        $group = array('foo');
+        $this->form->setValidationGroup($group);
+        $this->assertEquals($group, $this->form->getValidationGroup());
+    }
+
+    public function testGetValidationGroupReturnsNullWhenNoneSet()
+    {
+        $this->assertNull($this->form->getValidationGroup());
     }
 }

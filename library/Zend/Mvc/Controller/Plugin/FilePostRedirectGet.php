@@ -178,7 +178,7 @@ class FilePostRedirectGet extends AbstractPlugin
      */
     public function setSessionContainer(Container $container)
     {
-        $this->sessionContainer = container;
+        $this->sessionContainer = $container;
         return $this;
     }
 

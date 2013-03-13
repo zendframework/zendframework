@@ -255,6 +255,7 @@ abstract class AbstractController implements
             $this->setPluginManager(new PluginManager());
         }
 
+        $this->plugins->setController($this);
         return $this->plugins;
     }
 

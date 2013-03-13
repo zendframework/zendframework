@@ -53,6 +53,29 @@ class FormMonthSelectTest extends CommonTestCase
         $this->assertContains('<option value=""></option>', $markup);
     }
 
+    public function testCanDisableDelimiters()
+    {
+        $element = new MonthSelect('foo');
+        $element->setShouldCreateEmptyOption(true);
+        $element->setShouldRenderDelimiters(false);
+        $markup = $this->helper->render($element);
+
+        // If it contains two consecutive selects this means that no delimiters
+        // are inserted
+        $this->assertContains('</select><select', $markup);
+    }
+
+    public function testCanRenderTextDelimiters()
+    {
+        $element = new MonthSelect('foo');
+        $element->setShouldCreateEmptyOption(true);
+        $element->setShouldRenderDelimiters(true);
+        $markup = $this->helper->__invoke($element, \IntlDateFormatter::LONG, 'pt_BR');
+
+        // pattern === "MMMM 'de' y"
+        $this->assertStringMatchesFormat('%a de %a', $markup);
+    }
+
     public function testInvokeProxiesToRender()
     {
         $element = new MonthSelect('foo');

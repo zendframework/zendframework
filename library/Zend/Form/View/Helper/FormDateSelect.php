@@ -44,7 +44,7 @@ class FormDateSelect extends FormMonthSelectHelper
         }
 
         $selectHelper = $this->getSelectElementHelper();
-        $pattern      = $this->parsePattern();
+        $pattern      = $this->parsePattern($element->shouldRenderDelimiters());
 
         $daysOptions   = $this->getDaysOptions($pattern['day']);
         $monthsOptions = $this->getMonthsOptions($pattern['month']);
@@ -60,19 +60,20 @@ class FormDateSelect extends FormMonthSelectHelper
             $monthElement->setEmptyOption('');
         }
 
-        $markup = array();
-        $markup[$pattern['day']]   = $selectHelper->render($dayElement);
-        $markup[$pattern['month']] = $selectHelper->render($monthElement);
-        $markup[$pattern['year']]  = $selectHelper->render($yearElement);
+        $data = array();
+        $data[$pattern['day']]   = $selectHelper->render($dayElement);
+        $data[$pattern['month']] = $selectHelper->render($monthElement);
+        $data[$pattern['year']]  = $selectHelper->render($yearElement);
 
-        $markup = sprintf(
-            '%s %s %s %s %s',
-            $markup[array_shift($pattern)],
-            array_shift($pattern), // Delimiter
-            $markup[array_shift($pattern)],
-            array_shift($pattern), // Delimiter
-            $markup[array_shift($pattern)]
-        );
+        $markup = '';
+        foreach ($pattern as $key => $value) {
+            // Delimiter
+            if (is_numeric($key)) {
+                $markup .= $value;
+            } else {
+                $markup .= $data[$value];
+            }
+        }
 
         return $markup;
     }

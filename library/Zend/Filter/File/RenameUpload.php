@@ -26,6 +26,15 @@ class RenameUpload extends AbstractFilter
     );
 
     /**
+     * Store already filtered values, so we can filter multiple
+     * times the same file without being block by move_uploaded_file
+     * internal checks
+     *
+     * @var array
+     */
+    protected $alreadyFiltered = array();
+
+    /**
      * Constructor
      *
      * @param array|string $targetOrOptions The target file path or an options array
@@ -143,28 +152,48 @@ class RenameUpload extends AbstractFilter
             $sourceFile = $value;
         }
 
+        if (isset($this->alreadyFiltered[$sourceFile])) {
+            return $this->alreadyFiltered[$sourceFile];
+        }
+
         $targetFile = $this->getFinalTarget($uploadData);
         if (!file_exists($sourceFile) || $sourceFile == $targetFile) {
             return $value;
         }
 
         $this->checkFileExists($targetFile);
+        $this->moveUploadedFile($sourceFile, $targetFile);
 
+        $return = $targetFile;
+        if ($isFileUpload) {
+            $return = $uploadData;
+            $return['tmp_name'] = $targetFile;
+        }
+
+        $this->alreadyFiltered[$sourceFile] = $return;
+
+        return $return;
+    }
+
+    /**
+     * @param  string $sourceFile Source file path
+     * @param  string $targetFile Target file path
+     * @throws \Zend\Filter\Exception\RuntimeException
+     * @return boolean
+     */
+    protected function moveUploadedFile($sourceFile, $targetFile)
+    {
         ErrorHandler::start();
         $result = move_uploaded_file($sourceFile, $targetFile);
         $warningException = ErrorHandler::stop();
         if (!$result || null !== $warningException) {
             throw new Exception\RuntimeException(
-                sprintf("File '%s' could not be renamed. An error occurred while processing the file.", $value),
+                sprintf("File '%s' could not be renamed. An error occurred while processing the file.", $sourceFile),
                 0, $warningException
             );
         }
 
-        if ($isFileUpload) {
-            $uploadData['tmp_name'] = $targetFile;
-            return $uploadData;
-        }
-        return $targetFile;
+        return $result;
     }
 
     /**

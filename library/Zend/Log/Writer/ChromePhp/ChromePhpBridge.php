@@ -50,7 +50,7 @@ class ChromePhpBridge implements ChromePhpInterface
      */
     public function trace($line)
     {
-        ChromePhp::error($line);
+        ChromePhp::log($line);
     }
 
     /**

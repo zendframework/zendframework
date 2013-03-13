@@ -205,7 +205,7 @@ class RsaOptions extends AbstractOptions
 
          // export key
          $passPhrase = $this->getPassPhrase();
-         $result     = openssl_pkey_export($resource, $private, $passPhrase);
+         $result     = openssl_pkey_export($resource, $private, $passPhrase, $opensslConfig);
          if (false === $result) {
              throw new Exception\RuntimeException(
                  'Can not export key; openssl ' . openssl_error_string()

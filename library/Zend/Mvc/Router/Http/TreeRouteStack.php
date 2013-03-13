@@ -62,7 +62,7 @@ class TreeRouteStack extends SimpleRouteStack
     /**
      * addRoute(): defined by RouteStackInterface interface.
      *
-     * @see    RouteStack::addRoute()
+     * @see    RouteStackInterface::addRoute()
      * @param  string  $name
      * @param  mixed   $route
      * @param  integer $priority
@@ -217,12 +217,24 @@ class TreeRouteStack extends SimpleRouteStack
 
         $path = $this->baseUrl . $route->assemble(array_merge($this->defaultParams, $params), $options);
 
-        if ((isset($options['force_canonical']) && $options['force_canonical']) || $uri->getHost() !== null) {
-            if ($uri->getScheme() === null) {
-                if ($this->requestUri === null) {
-                    throw new Exception\RuntimeException('Request URI has not been set');
-                }
+        if (isset($options['query'])) {
+            $uri->setQuery($options['query']);
+        }
 
+        if (isset($options['fragment'])) {
+            $uri->setFragment($options['fragment']);
+        }
+
+        if ((isset($options['force_canonical']) && $options['force_canonical']) || $uri->getHost() !== null || $uri->getScheme() !== null) {
+            if (($uri->getHost() === null || $uri->getScheme() === null) && $this->requestUri === null) {
+                throw new Exception\RuntimeException('Request URI has not been set');
+            }
+
+            if ($uri->getHost() === null) {
+                $uri->setHost($this->requestUri->getHost());
+            }
+
+            if ($uri->getScheme() === null) {
                 $uri->setScheme($this->requestUri->getScheme());
             }
 

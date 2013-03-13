@@ -105,11 +105,11 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
     {
         $value = $this->getExpectedFieldValue();
         return array(
-            array('Cc: ' . $value, 'Zend\Mail\Header\Cc'),
-            array('Bcc: ' . $value, 'Zend\Mail\Header\Bcc'),
-            array('From: ' . $value, 'Zend\Mail\Header\From'),
-            array('Reply-To: ' . $value, 'Zend\Mail\Header\ReplyTo'),
-            array('To: ' . $value, 'Zend\Mail\Header\To'),
+            'cc'       => array('Cc: ' . $value, 'Zend\Mail\Header\Cc'),
+            'bcc'      => array('Bcc: ' . $value, 'Zend\Mail\Header\Bcc'),
+            'from'     => array('From: ' . $value, 'Zend\Mail\Header\From'),
+            'reply-to' => array('Reply-To: ' . $value, 'Zend\Mail\Header\ReplyTo'),
+            'to'       => array('To: ' . $value, 'Zend\Mail\Header\To'),
         );
     }
 
@@ -117,6 +117,40 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
      * @dataProvider getStringHeaders
      */
     public function testDeserializationFromString($headerLine, $class)
+    {
+        $callback = sprintf('%s::fromString', $class);
+        $header   = call_user_func($callback, $headerLine);
+        $this->assertInstanceOf($class, $header);
+        $list = $header->getAddressList();
+        $this->assertEquals(3, count($list));
+        $this->assertTrue($list->has('zf-devteam@zend.com'));
+        $this->assertTrue($list->has('zf-contributors@lists.zend.com'));
+        $this->assertTrue($list->has('fw-announce@lists.zend.com'));
+        $address = $list->get('zf-devteam@zend.com');
+        $this->assertEquals('ZF DevTeam', $address->getName());
+        $address = $list->get('zf-contributors@lists.zend.com');
+        $this->assertNull($address->getName());
+        $address = $list->get('fw-announce@lists.zend.com');
+        $this->assertEquals('ZF Announce List', $address->getName());
+    }
+
+    public function getStringHeadersWithNoWhitespaceSeparator()
+    {
+        $value = $this->getExpectedFieldValue();
+        return array(
+            'cc'       => array('Cc:' . $value, 'Zend\Mail\Header\Cc'),
+            'bcc'      => array('Bcc:' . $value, 'Zend\Mail\Header\Bcc'),
+            'from'     => array('From:' . $value, 'Zend\Mail\Header\From'),
+            'reply-to' => array('Reply-To:' . $value, 'Zend\Mail\Header\ReplyTo'),
+            'to'       => array('To:' . $value, 'Zend\Mail\Header\To'),
+        );
+    }
+
+    /**
+     * @group 3789
+     * @dataProvider getStringHeadersWithNoWhitespaceSeparator
+     */
+    public function testAllowsNoWhitespaceBetweenHeaderAndValue($headerLine, $class)
     {
         $callback = sprintf('%s::fromString', $class);
         $header   = call_user_func($callback, $headerLine);

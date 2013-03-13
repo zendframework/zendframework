@@ -59,12 +59,9 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the validator follows expected behavior
-     *
-     * @dataProvider basicBehaviorDataProvider
      * @return void
      */
-    public function testBasic($options, $isValidParam, $expected)
+    protected function skipIfNoFileInfoExtension()
     {
         if (!extension_loaded('fileinfo') &&
             function_exists('mime_content_type') && ini_get('mime_magic.magicfile') &&
@@ -75,10 +72,38 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
                     ' but mime_content_type exhibits buggy behavior on this system.'
             );
         }
+    }
+
+    /**
+     * Ensures that the validator follows expected behavior
+     *
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
+     */
+    public function testBasic($options, $isValidParam, $expected)
+    {
+        $this->skipIfNoFileInfoExtension();
 
         $validator = new File\IsCompressed($options);
         $validator->enableHeaderCheck();
         $this->assertEquals($expected, $validator->isValid($isValidParam));
+    }
+
+    /**
+     * Ensures that the validator follows expected behavior for legacy Zend\Transfer API
+     *
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
+     */
+    public function testLegacy($options, $isValidParam, $expected)
+    {
+        if (is_array($isValidParam)) {
+            $this->skipIfNoFileInfoExtension();
+
+            $validator = new File\IsCompressed($options);
+            $validator->enableHeaderCheck();
+            $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
+        }
     }
 
     /**
@@ -180,6 +205,15 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($magicFile, $validator->getMagicFile());
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
+    }
+
+    public function testNonMimeOptionsAtConstructorStillSetsDefaults()
+    {
+        $validator = new File\IsCompressed(array(
+            'enableHeaderCheck' => true,
+        ));
+
+        $this->assertNotEmpty($validator->getMimeType());
     }
 
     /**

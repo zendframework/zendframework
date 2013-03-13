@@ -136,6 +136,20 @@ class Rsa
     }
 
     /**
+     * Return last openssl error(s)
+     *
+     * @return string
+     */
+    public function getOpensslErrorString()
+    {
+        $message = '';
+        while (false !== ($error = openssl_error_string())) {
+            $message .= $error . "\n";
+        }
+        return trim($message);
+    }
+
+    /**
      * Sign with private key
      *
      * @param  string     $data
@@ -158,7 +172,7 @@ class Rsa
         );
         if (false === $result) {
             throw new Exception\RuntimeException(
-                'Can not generate signature; openssl ' . openssl_error_string()
+                'Can not generate signature; openssl ' . $this->getOpensslErrorString()
             );
         }
 
@@ -221,7 +235,7 @@ class Rsa
         );
         if (-1 === $result) {
             throw new Exception\RuntimeException(
-                'Can not verify signature; openssl ' . openssl_error_string()
+                'Can not verify signature; openssl ' . $this->getOpensslErrorString()
             );
         }
 

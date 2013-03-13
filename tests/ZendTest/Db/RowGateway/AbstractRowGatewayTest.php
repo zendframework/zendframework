@@ -208,6 +208,7 @@ class AbstractRowGatewayTest extends \PHPUnit_Framework_TestCase
         $this->rowGateway->foo = 'bar';
         $affectedRows = $this->rowGateway->delete();
         $this->assertFalse($this->rowGateway->rowExistsInDatabase());
+        $this->assertEquals(1, $affectedRows);
     }
 
     /**

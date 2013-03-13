@@ -145,7 +145,7 @@ abstract class AbstractValidator implements
             } elseif (isset($this->options)) {
                 $this->options[$name] = $option;
             } else {
-                $this->abstractOptions[$name] = $options;
+                $this->abstractOptions[$name] = $option;
             }
         }
 

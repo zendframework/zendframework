@@ -5,7 +5,7 @@ use Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv;
 
 /**
  * @group integration
- * @group integration-sqlsrv
+ * @group integration-sqlserver
  */
 class SqlsrvIntegrationTest extends AbstractIntegrationTest
 {

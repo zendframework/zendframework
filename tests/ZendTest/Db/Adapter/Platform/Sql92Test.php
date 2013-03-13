@@ -75,7 +75,24 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteValue()
     {
+        $this->setExpectedException(
+            'PHPUnit_Framework_Error',
+            'Attempting to quote a value without specific driver level support can introduce security vulnerabilities in a production environment.'
+        );
         $this->assertEquals("'value'", $this->platform->quoteValue('value'));
+    }
+
+    /**
+     * @covers Zend\Db\Adapter\Platform\Sql92::quoteTrustedValue
+     */
+    public function testQuoteTrustedValue()
+    {
+        $this->assertEquals("'value'", $this->platform->quoteTrustedValue('value'));
+        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteTrustedValue("Foo O'Bar"));
+        $this->assertEquals('\'\\\'; DELETE FROM some_table; -- \'', $this->platform->quoteTrustedValue('\'; DELETE FROM some_table; -- '));
+
+        //                   '\\\'; DELETE FROM some_table; -- '  <- actual below
+        $this->assertEquals("'\\\\\\'; DELETE FROM some_table; -- '", $this->platform->quoteTrustedValue('\\\'; DELETE FROM some_table; -- '));
     }
 
     /**
@@ -83,9 +100,11 @@ class Sql92Test extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteValueList()
     {
+        $this->setExpectedException(
+            'PHPUnit_Framework_Error',
+            'Attempting to quote a value without specific driver level support can introduce security vulnerabilities in a production environment.'
+        );
         $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
-        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList(array("Foo O'Bar")));
-        $this->assertEquals("'value', 'Foo O\\'Bar'", $this->platform->quoteValueList(array('value',"Foo O'Bar")));
     }
 
     /**

@@ -467,6 +467,5 @@ class PartTest extends TestCase
         $match = $route->match($request);
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $match);
         $this->assertEquals('string', $match->getParam('query'));
-        $this->assertEquals('bar', $match->getParam('foo'));
     }
 }

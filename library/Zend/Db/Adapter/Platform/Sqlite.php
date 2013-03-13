@@ -9,8 +9,41 @@
 
 namespace Zend\Db\Adapter\Platform;
 
+use Zend\Db\Adapter\Driver\Pdo;
+use Zend\Db\Adapter\Exception;
+
 class Sqlite implements PlatformInterface
 {
+
+    /** @var \PDO */
+    protected $resource = null;
+
+    public function __construct($driver = null)
+    {
+        if ($driver) {
+            $this->setDriver($driver);
+        }
+    }
+
+    /**
+     * @param \Zend\Db\Adapter\Driver\Pdo\Pdo||\PDO $driver
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
+     * @return $this
+     */
+    public function setDriver($driver)
+    {
+        if ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'sqlite') {
+            $this->resource = $driver;
+            return $this;
+        }
+
+        if ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'Sqlite') {
+            $this->resource = $driver->getConnection()->getResource();
+            return $this;
+        }
+
+        throw new Exception\InvalidArgumentException('$driver must be a Sqlite PDO Zend\Db\Adapter\Driver, Sqlite PDO instance');
+    }
 
     /**
      * Get name
@@ -76,7 +109,30 @@ class Sqlite implements PlatformInterface
      */
     public function quoteValue($value)
     {
-        return '\'' . str_replace('\'', '\\' . '\'', $value) . '\'';
+        if ($this->resource instanceof \PDO) {
+            return $this->resource->quote($value);
+        }
+        trigger_error(
+            'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
+                . 'can introduce security vulnerabilities in a production environment.'
+        );
+        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+    }
+
+    /**
+     * Quote Trusted Value
+     *
+     * The ability to quote values without notices
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function quoteTrustedValue($value)
+    {
+        if ($this->resource instanceof \PDO) {
+            return $this->resource->quote($value);
+        }
+        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
     /**
@@ -87,11 +143,14 @@ class Sqlite implements PlatformInterface
      */
     public function quoteValueList($valueList)
     {
-        $valueList = str_replace('\'', '\\' . '\'', $valueList);
-        if (is_array($valueList)) {
-            $valueList = implode('\', \'', $valueList);
+        if (!is_array($valueList)) {
+            return $this->quoteValue($valueList);
         }
-        return '\'' . $valueList . '\'';
+        $value = reset($valueList);
+        do {
+            $valueList[key($valueList)] = $this->quoteValue($value);
+        } while ($value = next($valueList));
+        return implode(', ', $valueList);
     }
 
     /**
@@ -137,4 +196,5 @@ class Sqlite implements PlatformInterface
         }
         return implode('', $parts);
     }
+
 }

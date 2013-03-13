@@ -86,7 +86,24 @@ class IbmDb2Test extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteValue()
     {
+        if (!function_exists('db2_escape_string')) {
+            $this->setExpectedException(
+                'PHPUnit_Framework_Error',
+                'Attempting to quote a value in Zend\Db\Adapter\Platform\IbmDb2 without extension/driver support can introduce security vulnerabilities in a production environment'
+            );
+        }
         $this->assertEquals("'value'", $this->platform->quoteValue('value'));
+    }
+
+    /**
+     * @covers Zend\Db\Adapter\Platform\IbmDb2::quoteTrustedValue
+     */
+    public function testQuoteTrustedValue()
+    {
+        $this->assertEquals("'value'", $this->platform->quoteTrustedValue('value'));
+        $this->assertEquals("'Foo O''Bar'", $this->platform->quoteTrustedValue("Foo O'Bar"));
+        $this->assertEquals("'''; DELETE FROM some_table; -- '", $this->platform->quoteTrustedValue("'; DELETE FROM some_table; -- "));
+        $this->assertEquals("'\\''; \nDELETE FROM some_table; -- '", $this->platform->quoteTrustedValue("\\'; \nDELETE FROM some_table; -- "));
     }
 
     /**
@@ -94,9 +111,13 @@ class IbmDb2Test extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteValueList()
     {
-        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList("Foo O'Bar"));
-        $this->assertEquals("'Foo O\\'Bar'", $this->platform->quoteValueList(array("Foo O'Bar")));
-        $this->assertEquals("'value', 'Foo O\\'Bar'", $this->platform->quoteValueList(array('value',"Foo O'Bar")));
+        if (!function_exists('db2_escape_string')) {
+            $this->setExpectedException(
+                'PHPUnit_Framework_Error',
+                'Attempting to quote a value in Zend\Db\Adapter\Platform\IbmDb2 without extension/driver support can introduce security vulnerabilities in a production environment'
+            );
+        }
+        $this->assertEquals("'Foo O''Bar'", $this->platform->quoteValueList("Foo O'Bar"));
     }
 
     /**

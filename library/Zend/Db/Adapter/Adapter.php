@@ -255,14 +255,8 @@ class Adapter implements AdapterInterface
             case 'sqlsrv':
                 $driver = new Driver\Sqlsrv\Sqlsrv($parameters);
                 break;
-            case 'oci8':
-                $driver = new Driver\Oci8\Oci8($parameters);
-                break;
             case 'pgsql':
                 $driver = new Driver\Pgsql\Pgsql($parameters);
-                break;
-            case 'ibmdb2':
-                $driver = new Driver\IbmDb2\IbmDb2($parameters);
                 break;
             case 'pdo':
             default:

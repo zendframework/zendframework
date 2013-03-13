@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.0.8 (13 Mar 2013):
+
+- ZF2013-01: Query route (http://framework.zend.com/security/ZF2013-01)
+- ZF2013-02: RNG support (http://framework.zend.com/security/ZF2013-02)
+- ZF2013-03: DB platform quoting (http://framework.zend.com/security/ZF2013-03)
+
 ## 2.0.7 (29 Jan 2013):
 
 - 1992: [2.1] Adding simple Zend/I18n/Loader/Tmx

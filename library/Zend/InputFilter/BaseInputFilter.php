@@ -161,6 +161,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
             $input = $this->inputs[$name];
             if ((!array_key_exists($name, $this->data)
                     || (null === $this->data[$name]))
+                && $input instanceof InputInterface
                 && !$input->isRequired()
             ) {
                 $this->validInputs[$name] = $input;

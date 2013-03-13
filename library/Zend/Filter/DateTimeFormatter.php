@@ -10,7 +10,6 @@
 namespace Zend\Filter;
 
 use DateTime;
-use Exception;
 
 class DateTimeFormatter extends AbstractFilter
 {
@@ -55,7 +54,7 @@ class DateTimeFormatter extends AbstractFilter
     {
         try {
             $result = $this->normalizeDateTime($value);
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             // DateTime threw an exception, an invalid date string was provided
             return $value;
         }

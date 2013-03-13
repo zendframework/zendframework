@@ -289,6 +289,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->resource->rollback();
+        $this->resource->autocommit(true);
         return $this;
     }
 

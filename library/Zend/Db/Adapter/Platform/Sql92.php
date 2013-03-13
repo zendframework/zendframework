@@ -102,15 +102,15 @@ class Sql92 implements PlatformInterface
      */
     public function quoteValueList($valueList)
     {
-        if (is_array($valueList)) {
-            $value = reset($valueList);
-            do {
-                $valueList[key($valueList)] = $this->quoteValue($value);
-            } while ($value = next($valueList));
-            return implode(', ', $valueList);
-        } else {
+        if (!is_array($valueList)) {
             return $this->quoteValue($valueList);
         }
+
+        $value = reset($valueList);
+        do {
+            $valueList[key($valueList)] = $this->quoteValue($value);
+        } while ($value = next($valueList));
+        return implode(', ', $valueList);
     }
 
     /**

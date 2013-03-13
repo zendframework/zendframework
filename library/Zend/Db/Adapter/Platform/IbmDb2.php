@@ -118,7 +118,7 @@ class IbmDb2 implements PlatformInterface
             'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
             . 'can introduce security vulnerabilities in a production environment.'
         );
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+        return '\'' . str_replace("'", "''", $value) . '\'';
     }
 
     /**
@@ -134,7 +134,7 @@ class IbmDb2 implements PlatformInterface
         if (function_exists('db2_escape_string')) {
             return '\'' . db2_escape_string($value) . '\'';
         }
-        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+        return '\'' . str_replace("'", "''", $value) . '\'';
     }
 
     /**
@@ -145,15 +145,15 @@ class IbmDb2 implements PlatformInterface
      */
     public function quoteValueList($valueList)
     {
-        if (is_array($valueList)) {
-            $value = reset($valueList);
-            do {
-                $valueList[key($valueList)] = $this->quoteValue($value);
-            } while ($value = next($valueList));
-            return implode(', ', $valueList);
-        } else {
+        if (!is_array($valueList)) {
             return $this->quoteValue($valueList);
         }
+
+        $value = reset($valueList);
+        do {
+            $valueList[key($valueList)] = $this->quoteValue($value);
+        } while ($value = next($valueList));
+        return implode(', ', $valueList);
     }
 
     /**

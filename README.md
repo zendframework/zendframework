@@ -9,7 +9,7 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 This is the eigth maintenance release for the 2.0 series.
 
-DD MMM YYYY
+13 Mar 2013
 
 ### UPDATES IN 2.0.8
 

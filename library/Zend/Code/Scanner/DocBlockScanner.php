@@ -165,8 +165,8 @@ class DocBlockScanner implements ScannerInterface
 
         SCANNER_END:
 
-        $this->shortDescription = rtrim($this->shortDescription);
-        $this->longDescription  = rtrim($this->longDescription);
+        $this->shortDescription = trim($this->shortDescription);
+        $this->longDescription  = trim($this->longDescription);
         $this->isScanned        = true;
     }
 

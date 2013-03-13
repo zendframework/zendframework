@@ -19,8 +19,20 @@ use Zend\Uri\Http;
 
 class QueryTest extends TestCase
 {
-    public static function routeProvider()
+    public function setUp()
     {
+        set_error_handler(function ($errno, $errstr) {
+            return stristr($errstr, 'query route deprecated');
+        }, E_USER_DEPRECATED);
+    }
+
+    public function routeProvider()
+    {
+        // Have to setup error handler here as well, as PHPUnit calls on 
+        // provider methods outside the scope of setUp().
+        set_error_handler(function ($errno, $errstr) {
+            return stristr($errstr, 'query route deprecated');
+        }, E_USER_DEPRECATED);
         return array(
             'simple-match' => array(
                 new Query(),
@@ -94,7 +106,8 @@ class QueryTest extends TestCase
         $route   = new Query();
         $request = new BaseRequest();
         $match   = $route->match($request);
-        $this->assertNull($match);
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $match);
+        $this->assertEquals(array(), $match->getParams());
     }
 
     public function testGetAssembledParams()

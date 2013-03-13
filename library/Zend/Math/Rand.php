@@ -70,7 +70,7 @@ abstract class Rand
 
     /**
      * Retrieve a fallback/alternative RNG generator
-     * 
+     *
      * @return RandomLib\Generator
      */
     public static function getAlternativeGenerator()

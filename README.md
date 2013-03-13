@@ -41,6 +41,22 @@ request object instead.
 For more information on the security vector, please see
 [ZF2013-01](http://framework.zend.com/security/ZF2013-01).
 
+#### Security fix: DB platform quoting
+
+Altered `Zend\Db` to throw notices when insecure usage of the following methods
+is called: 
+
+- `Zend\Db\Adapter\Platform\*::quoteValue*()`
+- `Zend\Db\Sql\*::getSqlString*()`
+
+Fixed `Zend\Db` Platform objects to use driver level quoting when provided, and
+throw `E_USER_NOTICE` when not provided.  Added `quoteTrustedValue()` API for
+notice-free value quoting.  Fixed all userland quoting in Platform objects to
+handle a wider array of escapable characters.
+
+For more information on this security vector, please see
+[ZF2013-03](http://framework.zend.com/security/ZF2013-03).
+
 #### Better polyfill support
 
 Better polyfill support in `Zend\Session` and `Zend\Stdlib`. Polyfills

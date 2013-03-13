@@ -6,7 +6,7 @@ use Zend\Db\Adapter\Driver\Oci8\Connection;
 
 /**
  * @group integration
- * @group integration-sqlserver
+ * @group integration-oracle
  */
 class ConnectionIntegrationTest extends AbstractIntegrationTest
 {

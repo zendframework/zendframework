@@ -13,6 +13,7 @@ namespace ZendTest\Db\Sql;
 use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\TableIdentifier;
+use ZendTest\Db\TestAsset\TrustingSql92Platform;
 
 class InsertTest extends \PHPUnit_Framework_TestCase
 {
@@ -123,14 +124,14 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->insert->into('foo')
             ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null));
 
-        $this->assertEquals('INSERT INTO "foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $this->insert->getSqlString());
+        $this->assertEquals('INSERT INTO "foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $this->insert->getSqlString(new TrustingSql92Platform()));
 
         // with TableIdentifier
         $this->insert = new Insert;
         $this->insert->into(new TableIdentifier('foo', 'sch'))
             ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null));
 
-        $this->assertEquals('INSERT INTO "sch"."foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $this->insert->getSqlString());
+        $this->assertEquals('INSERT INTO "sch"."foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $this->insert->getSqlString(new TrustingSql92Platform()));
     }
 
     /**
@@ -184,7 +185,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->insert->into('foo')
             ->values(array('qux' => 100), Insert::VALUES_MERGE);
 
-        $this->assertEquals('INSERT INTO "foo" ("bar", "boo", "bam", "qux") VALUES (\'baz\', NOW(), NULL, \'100\')', $this->insert->getSqlString());
+        $this->assertEquals('INSERT INTO "foo" ("bar", "boo", "bam", "qux") VALUES (\'baz\', NOW(), NULL, \'100\')', $this->insert->getSqlString(new TrustingSql92Platform()));
 
     }
 

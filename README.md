@@ -13,6 +13,36 @@ DD MMM YYYY
 
 ### UPDATES IN 2.1.4
 
+#### Security fix: Query route
+
+The query route was deprecated, as a replacement exists within the HTTP router
+itself. You can pass a "query" option to the assemble method containing either
+the query string or an array of key-value pairs:
+
+```php
+$url = $router->assemble(array(
+    'name' => 'foo',
+), array(
+    'query' => array(
+        'page' => 3,
+        'sort' => 'DESC',
+    ), 
+    // or: 'query' => 'page=3&sort=DESC'
+));
+
+// via URL helper/plugin:
+$rendererOrController->url('foo', array(), array('query' => $request->getQuery()));
+```
+
+Additionally, the merging of query parameters into the route match was removed
+to avoid potential security issues. Please use the query container of the
+request object instead.
+
+For more information on the security vector, please see
+[ZF2013-01](http://framework.zend.com/security/ZF2013-01).
+
+#### Better polyfill support
+
 Better polyfill support in `Zend\Session` and `Zend\Stdlib`. Polyfills
 (version-specific class replacements) have caused some issues in the 2.1 series.
 In particular, users who were not using Composer were unaware/uncertain about

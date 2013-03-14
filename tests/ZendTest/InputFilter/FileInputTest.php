@@ -10,7 +10,6 @@
 
 namespace ZendTest\InputFilter;
 
-use PHPUnit_Framework_TestCase as TestCase;
 use Zend\InputFilter\FileInput;
 use Zend\Filter;
 use Zend\Validator;
@@ -124,7 +123,7 @@ class FileInputTest extends InputTest
 
     public function testValidationOperatesOnFilteredValue()
     {
-        $this->markTestSkipped('Test are not enabled in FileInputTest');
+        $this->markTestSkipped('Test is not enabled in FileInputTest');
     }
 
     public function testValidationOperatesBeforeFiltering()
@@ -305,12 +304,12 @@ class FileInputTest extends InputTest
 
     public function testNotEmptyValidatorAddedWhenIsValidIsCalled()
     {
-        $this->markTestSkipped('Test are not enabled in FileInputTest');
+        $this->markTestSkipped('Test is not enabled in FileInputTest');
     }
 
     public function testRequiredNotEmptyValidatorNotAddedWhenOneExists()
     {
-        $this->markTestSkipped('Test are not enabled in FileInputTest');
+        $this->markTestSkipped('Test is not enabled in FileInputTest');
     }
 
     public function testMerge()

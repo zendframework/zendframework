@@ -15,7 +15,7 @@ use Zend\InputFilter\FileInput;
 use Zend\Filter;
 use Zend\Validator;
 
-class FileInputTest extends TestCase
+class FileInputTest extends InputTest
 {
     public function setUp()
     {
@@ -24,71 +24,16 @@ class FileInputTest extends TestCase
         $this->input->setAutoPrependUploadValidator(false);
     }
 
-    public function testConstructorRequiresAName()
-    {
-        $this->assertEquals('foo', $this->input->getName());
-    }
-
-    public function testInputHasEmptyFilterChainByDefault()
-    {
-        $filters = $this->input->getFilterChain();
-        $this->assertInstanceOf('Zend\Filter\FilterChain', $filters);
-        $this->assertEquals(0, count($filters));
-    }
-
-    public function testInputHasEmptyValidatorChainByDefault()
-    {
-        $validators = $this->input->getValidatorChain();
-        $this->assertInstanceOf('Zend\Validator\ValidatorChain', $validators);
-        $this->assertEquals(0, count($validators));
-    }
-
-    public function testCanInjectFilterChain()
-    {
-        $chain = new Filter\FilterChain();
-        $this->input->setFilterChain($chain);
-        $this->assertSame($chain, $this->input->getFilterChain());
-    }
-
-    public function testCanInjectValidatorChain()
-    {
-        $chain = new Validator\ValidatorChain();
-        $this->input->setValidatorChain($chain);
-        $this->assertSame($chain, $this->input->getValidatorChain());
-    }
-
-    public function testInputIsMarkedAsRequiredByDefault()
-    {
-        $this->assertTrue($this->input->isRequired());
-    }
-
-    public function testRequiredFlagIsMutable()
-    {
-        $this->input->setRequired(false);
-        $this->assertFalse($this->input->isRequired());
-    }
-
-    public function testInputDoesNotAllowEmptyValuesByDefault()
-    {
-        $this->assertFalse($this->input->allowEmpty());
-    }
-
-    public function testAllowEmptyFlagIsMutable()
-    {
-        $this->input->setAllowEmpty(true);
-        $this->assertTrue($this->input->allowEmpty());
-    }
-
-    public function testValueIsNullByDefault()
-    {
-        $this->assertNull($this->input->getValue());
-    }
-
     public function testValueMayBeInjected()
     {
         $value = array('tmp_name' => 'bar');
         $this->input->setValue($value);
         $this->assertEquals($value, $this->input->getValue());
+    }
+
+    public function testRetrievingValueFiltersTheValue()
+    {
+        $this->markTestSkipped('Test are not enabled in FileInputTest');
     }
 
     public function testRetrievingValueFiltersTheValueOnlyAfterValidating()
@@ -175,6 +120,11 @@ class FileInputTest extends TestCase
         $validator = new Validator\NotEmpty();
         $this->input->getValidatorChain()->attach($validator);
         $this->assertTrue($this->input->isValid());
+    }
+
+    public function testValidationOperatesOnFilteredValue()
+    {
+        $this->markTestSkipped('Test are not enabled in FileInputTest');
     }
 
     public function testValidationOperatesBeforeFiltering()
@@ -273,17 +223,6 @@ class FileInputTest extends TestCase
         $this->assertContains('Please enter only digits', $messages);
     }
 
-    public function testBreakOnFailureFlagIsOffByDefault()
-    {
-        $this->assertFalse($this->input->breakOnFailure());
-    }
-
-    public function testBreakOnFailureFlagIsMutable()
-    {
-        $this->input->setBreakOnFailure(true);
-        $this->assertTrue($this->input->breakOnFailure());
-    }
-
     public function testAutoPrependUploadValidatorIsOnByDefault()
     {
         $input = new FileInput('foo');
@@ -362,6 +301,16 @@ class FileInputTest extends TestCase
         $validators = $validatorChain->getValidators();
         $this->assertEquals(1, count($validators));
         $this->assertEquals($uploadMock, $validators[0]['instance']);
+    }
+
+    public function testNotEmptyValidatorAddedWhenIsValidIsCalled()
+    {
+        $this->markTestSkipped('Test are not enabled in FileInputTest');
+    }
+
+    public function testRequiredNotEmptyValidatorNotAddedWhenOneExists()
+    {
+        $this->markTestSkipped('Test are not enabled in FileInputTest');
     }
 
     public function testMerge()

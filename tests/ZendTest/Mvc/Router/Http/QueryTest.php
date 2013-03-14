@@ -21,18 +21,13 @@ class QueryTest extends TestCase
 {
     public function setUp()
     {
-        set_error_handler(function ($errno, $errstr) {
-            return stristr($errstr, 'query route deprecated');
-        }, E_USER_DEPRECATED);
+        $this->markTestSkipped('Query route part has been deprecated in ZF as of 2.1.4');
     }
 
     public function routeProvider()
     {
-        // Have to setup error handler here as well, as PHPUnit calls on 
+        // Have to setup error handler here as well, as PHPUnit calls on
         // provider methods outside the scope of setUp().
-        set_error_handler(function ($errno, $errstr) {
-            return stristr($errstr, 'query route deprecated');
-        }, E_USER_DEPRECATED);
         return array(
             'simple-match' => array(
                 new Query(),
@@ -62,7 +57,6 @@ class QueryTest extends TestCase
     }
 
     /**
-     * @dataProvider routeProvider
      * @param        Query $route
      * @param        string   $path
      * @param        integer  $offset
@@ -77,7 +71,6 @@ class QueryTest extends TestCase
     }
 
     /**
-     * @dataProvider routeProvider
      * @param        Query $route
      * @param        string   $path
      * @param        integer  $offset

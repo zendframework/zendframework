@@ -158,6 +158,7 @@ class TreeRouteStackTest extends TestCase
 
     public function testAssembleCanonicalUriWithHostnameRouteAndQueryRoute()
     {
+        $this->markTestSkipped('Query route part has been deprecated in ZF as of 2.1.4');
         $uri   = new HttpUri();
         $uri->setScheme('http');
         $stack = new TreeRouteStack();
@@ -190,6 +191,7 @@ class TreeRouteStackTest extends TestCase
 
     public function testAssembleWithQueryRoute()
     {
+        $this->markTestSkipped('Query route part has been deprecated in ZF as of 2.1.4');
         $uri   = new HttpUri();
         $uri->setScheme('http');
         $stack = new TreeRouteStack();

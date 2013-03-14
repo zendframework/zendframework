@@ -287,6 +287,22 @@ class TreeRouteStackTest extends TestCase
         $stack->assemble(array(), array('name' => 'foo'));
     }
 
+    public function testAssembleNonExistentChildRoute()
+    {
+        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Route with name "index" does not have child routes');
+        $stack = new TreeRouteStack();
+        $stack->addRoute(
+            'index',
+            array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/',
+                ),
+            )
+        );
+        $stack->assemble(array(), array('name' => 'index/foo'));
+    }
+
     public function testDefaultParamIsAddedToMatch()
     {
         $stack = new TreeRouteStack();

@@ -15,11 +15,6 @@ use Zend\Mvc\Router\Http\RouteMatch;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;
 
- /**
- * Legacy purposes only, to prevent code that uses it from breaking.
- */
-trigger_error('Query route deprecated as of ZF 2.1.4; use the "query" option of the HTTP router\'s assembling method instead', E_USER_DEPRECATED);
-
 /**
  * Query route.
  *
@@ -50,6 +45,10 @@ class Query implements RouteInterface
      */
     public function __construct(array $defaults = array())
     {
+        /**
+         * Legacy purposes only, to prevent code that uses it from breaking.
+         */
+        trigger_error('Query route deprecated as of ZF 2.1.4; use the "query" option of the HTTP router\'s assembling method instead', E_USER_DEPRECATED);
         $this->defaults = $defaults;
     }
 

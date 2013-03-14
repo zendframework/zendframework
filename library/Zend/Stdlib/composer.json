@@ -9,10 +9,7 @@
     "autoload": {
         "psr-0": {
             "Zend\\Stdlib\\": ""
-        },
-        "files": [
-            "Zend/Stdlib/compatibility/autoload.php"
-        ]
+        }
     },
     "target-dir": "Zend/Stdlib",
     "suggest": {

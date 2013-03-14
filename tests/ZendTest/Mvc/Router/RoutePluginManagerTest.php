@@ -48,7 +48,7 @@ class RoutePluginManagerTest extends TestCase
             'scheme'   => array('Zend\Mvc\Router\Http\Scheme', array('scheme' => 'http')),
             'segment'  => array('Zend\Mvc\Router\Http\Segment', array('route' => '/:segment')),
             'wildcard' => array('Zend\Mvc\Router\Http\Wildcard', array()),
-            'query'    => array('Zend\Mvc\Router\Http\Query', array()),
+            //'query'    => array('Zend\Mvc\Router\Http\Query', array()),
             'method'   => array('Zend\Mvc\Router\Http\Method', array('verb' => 'GET')),
         );
     }

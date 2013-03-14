@@ -13,16 +13,6 @@
  */
 error_reporting( E_ALL | E_STRICT );
 
-/*
- * When tests are run in separate processes, class files that trigger 
- * deprecation notices will be re-included, and re-trigger the notice.
- * Since we know about these notices already and expect them, handle them up 
- * front.
- */
-set_error_handler(function ($errno, $errstr) {
-    return stristr($errstr, 'query route deprecated');
-}, E_USER_DEPRECATED);
-
 if (class_exists('PHPUnit_Runner_Version', true)) {
     $phpUnitVersion = PHPUnit_Runner_Version::id();
     if ('@package_version@' !== $phpUnitVersion && version_compare($phpUnitVersion, '3.7.0', '<')) {

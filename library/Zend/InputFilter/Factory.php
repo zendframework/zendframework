@@ -153,6 +153,9 @@ class Factory
                         $input->setRequired(!$value);
                     }
                     break;
+                case 'continue_if_empty':
+                    $input->setContinueIfEmpty($inputSpecification['continue_if_empty']);
+                    break;
                 case 'fallback_value':
                     $input->setFallbackValue($value);
                     break;

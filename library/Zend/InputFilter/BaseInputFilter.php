@@ -187,8 +187,10 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
                 && $input->isRequired()
                 && $input->allowEmpty()
             ) {
-                $this->validInputs[$name] = $input;
-                continue;
+                if (!$input->allowEmpty()) {
+                    $this->validInputs[$name] = $input;
+                    continue;
+                }
             }
 
             // key exists, is null, input is not required; valid

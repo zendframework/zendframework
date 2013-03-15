@@ -14,8 +14,10 @@
     "target-dir": "Zend/I18n",
     "require": {
         "php": ">=5.3.3",
-        "ext-intl": "*",
         "zendframework/zend-filter": "self.version",
         "zendframework/zend-stdlib": "self.version"
+    },
+    "suggest": {
+        "ext-intl": "ext/intl for i18n features"
     }
 }

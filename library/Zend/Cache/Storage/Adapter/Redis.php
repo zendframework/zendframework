@@ -77,9 +77,9 @@ class Redis extends AbstractAdapter implements
     /**
      * Get Redis resource
      *
-     * @return Redis
+     * @return RedisResource
      */
-    public function getRedisResource()
+    protected function getRedisResource()
     {
 
         if (!$this->initialized) {
@@ -357,9 +357,9 @@ class Redis extends AbstractAdapter implements
     }
 
     /**
-     * Flushes all contents of current database
+     * Flush currently set DB
      *
-     * @return bool Always true
+     * @return bool
      * @throws Exception\RuntimeException
      */
     public function flush()
@@ -411,13 +411,13 @@ class Redis extends AbstractAdapter implements
                 $this->capabilityMarker,
                 array(
                     'supportedDatatypes' => array(
-                        'NULL'     => false,
-                        'boolean'  => false,
-                        'integer'  => false,
-                        'double'   => false,
+                        'NULL'     => 'string',
+                        'boolean'  => 'string',
+                        'integer'  => 'string',
+                        'double'   => 'string',
                         'string'   => true,
-                        'array'    => false,
-                        'object'   => false,
+                        'array'    => 'string',
+                        'object'   => 'string',
                         'resource' => false,
                     ),
                     'supportedMetadata'  => array(),

@@ -51,10 +51,18 @@ class RedisTest extends CommonAdapterTest
         parent::setUp();
     }
 
+    public function tearDown()
+    {
+        if ($this->_storage) {
+            $this->_storage->flush();
+        }
+
+        parent::tearDown();
+    }
+
     public function testDbFlush()
     {
         $key = 'newKey';
-        $redisResource = $this->_storage->getRedisResource();
 
         $this->_storage->setItem($key, 'test val');
         $this->assertEquals('test val', $this->_storage->getItem($key), 'Value wasn\'t saved into cache');
@@ -64,15 +72,7 @@ class RedisTest extends CommonAdapterTest
         $this->assertNull($this->_storage->getItem($key), 'Database wasn\'t flushed');
     }
 
-    public function testSocketConnection()
-    {
-        $socket = '/tmp/redis.sock';
-        $this->_options->getResourceManager()->setServer($this->_options->getResourceId(), $socket);
-        $normalized = $this->_options->getResourceManager()->getServer($this->_options->getResourceId());
-        $this->assertEquals($socket, $normalized['host'], 'Host should equal to socket {$socket}');
-
-        $this->_storage = null;
-    }
+    /* Redis */
 
     public function testRedisCacheStore()
     {
@@ -143,32 +143,48 @@ class RedisTest extends CommonAdapterTest
         $this->assertCount(count($value), $this->_storage->getItem('key'), 'Problem with Redis serialization');
     }
 
-
-    public function testSetDatabase()
+    public function testRedisSetInt()
     {
-        $this->assertTrue($this->_storage->setItem('key', 'val'));
-        $this->assertEquals('val', $this->_storage->getItem('key'));
-
-        $this->_options->getResourceManager()->setDatabase($this->_options->getResourceId(), 1);
-        $this->assertNull($this->_storage->getItem('key'));
+        $key = 'key';
+        $this->assertTrue($this->_storage->setItem($key, 123));
+        $this->assertEquals('123', $this->_storage->getItem($key), 'Integer should be cast to string');
     }
 
-    public function testOptionsGetSetLibOptions()
+    public function testRedisSetDouble()
     {
-        $options = array('serializer', RedisResource::SERIALIZER_PHP);
-        $this->_options->setLibOptions($options);
-        $this->assertEquals($options, $this->_options->getLibOptions(), 'Lib Options were not set correctly through RedisOptions');
+        $key = 'key';
+        $this->assertTrue($this->_storage->setItem($key, 123.12));
+        $this->assertEquals('123.12', $this->_storage->getItem($key), 'Integer should be cast to string');
     }
 
-    public function testGetSetServer()
+    public function testRedisSetNull()
     {
-        $server = array(
-            'host' => '127.0.0.1',
-            'port' => 6379,
-            'timeout' => 0,
-        );
-        $this->_options->setServer($server);
-        $this->assertEquals($server, $this->_options->getServer(), 'Server was not set correctly through RedisOptions');
+        $key = 'key';
+        $this->assertTrue($this->_storage->setItem($key, null));
+        $this->assertEquals('', $this->_storage->getItem($key), 'Null should be cast to string');
+    }
+
+    public function testRedisSetBoolean()
+    {
+        $key = 'key';
+        $this->assertTrue($this->_storage->setItem($key, true));
+        $this->assertEquals('1', $this->_storage->getItem($key), 'Boolean should be cast to string');
+        $this->assertTrue($this->_storage->setItem($key, false));
+        $this->assertEquals('', $this->_storage->getItem($key), 'Boolean should be cast to string');
+    }
+
+    public function testRedisSetArray()
+    {
+        $key = 'key';
+        $this->assertTrue($this->_storage->setItem($key, array(1, 2, '3')));
+        $this->assertEquals('Array', $this->_storage->getItem($key), 'Array should be cast to string');
+    }
+
+    public function testRedisSetObject()
+    {
+        $key = 'key';
+        $this->assertTrue($this->_storage->setItem($key, new \stdClass()));
+        $this->assertEquals('Object', $this->_storage->getItem($key), 'Object should be cast to string');
     }
 
     public function testGetCapabilitiesTtl()
@@ -190,13 +206,48 @@ class RedisTest extends CommonAdapterTest
         }
     }
 
-    public function tearDown()
-    {
-        if ($this->_storage) {
-            $this->_storage->flush();
-        }
+    /* ResourceManager */
 
-        parent::tearDown();
+    public function testSocketConnection()
+    {
+        $socket = '/tmp/redis.sock';
+        $this->_options->getResourceManager()->setServer($this->_options->getResourceId(), $socket);
+        $normalized = $this->_options->getResourceManager()->getServer($this->_options->getResourceId());
+        $this->assertEquals($socket, $normalized['host'], 'Host should equal to socket {$socket}');
+
+        $this->_storage = null;
+    }
+
+    public function testGetSetDatabase()
+    {
+        $this->assertTrue($this->_storage->setItem('key', 'val'));
+        $this->assertEquals('val', $this->_storage->getItem('key'));
+
+        $databaseNumber = 1;
+        $resourceManager = $this->_options->getResourceManager();
+        $resourceManager->setDatabase($this->_options->getResourceId(), $databaseNumber);
+        $this->assertNull($this->_storage->getItem('key'), 'No value should be found because set was done on different database than get');
+        $this->assertEquals($databaseNumber, $resourceManager->getDatabase($this->_options->getResourceId()), 'Incorrect database was returned');
+    }
+
+    /* RedisOptions */
+
+    public function testOptionsGetSetLibOptions()
+    {
+        $options = array('serializer', RedisResource::SERIALIZER_PHP);
+        $this->_options->setLibOptions($options);
+        $this->assertEquals($options, $this->_options->getLibOptions(), 'Lib Options were not set correctly through RedisOptions');
+    }
+
+    public function testGetSetServer()
+    {
+        $server = array(
+            'host' => '127.0.0.1',
+            'port' => 6379,
+            'timeout' => 0,
+        );
+        $this->_options->setServer($server);
+        $this->assertEquals($server, $this->_options->getServer(), 'Server was not set correctly through RedisOptions');
     }
 
 }

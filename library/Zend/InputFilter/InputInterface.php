@@ -16,6 +16,7 @@ interface InputInterface
 {
     public function setAllowEmpty($allowEmpty);
     public function setBreakOnFailure($breakOnFailure);
+    public function setContinueIfEmpty($continueIfEmpty);
     public function setErrorMessage($errorMessage);
     public function setFilterChain(FilterChain $filterChain);
     public function setName($name);
@@ -26,6 +27,7 @@ interface InputInterface
 
     public function allowEmpty();
     public function breakOnFailure();
+    public function continueIfEmpty();
     public function getErrorMessage();
     public function getFilterChain();
     public function getName();

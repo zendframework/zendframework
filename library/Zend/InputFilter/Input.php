@@ -19,6 +19,11 @@ class Input implements InputInterface
      * @var bool
      */
     protected $allowEmpty = false;
+    
+    /**
+     * @var bool
+     */
+    protected $continueIfEmpty = false;
 
     /**
      * @var bool
@@ -87,6 +92,16 @@ class Input implements InputInterface
     public function setBreakOnFailure($breakOnFailure)
     {
         $this->breakOnFailure = (bool) $breakOnFailure;
+        return $this;
+    }
+    
+    /**
+     * @param bool $continueIfEmpty
+     * @return \Zend\InputFilter\Input
+     */
+    public function setContinueIfEmpty($continueIfEmpty)
+    {
+        $this->continueIfEmpty = (bool) $continueIfEmpty;
         return $this;
     }
 
@@ -174,6 +189,14 @@ class Input implements InputInterface
     public function breakOnFailure()
     {
         return $this->breakOnFailure;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function continueIfEmpty()
+    {
+        return $this->continueIfEmpty;
     }
 
     /**

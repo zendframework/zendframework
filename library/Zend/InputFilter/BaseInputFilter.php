@@ -176,9 +176,13 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
                         continue;
                     }
                     // - test if input allows empty
+                    // - continueIfEmpty allows for context validation
+                    // for empty values
                     if ($input->allowEmpty()) {
-                        $this->validInputs[$name] = $input;
-                        continue;
+                         if (!$input->continueIfEmpty()) {
+                            $this->validInputs[$name] = $input;
+                            continue;
+                        }
                     }
                 }
                 // make sure we have a value (empty) for validation

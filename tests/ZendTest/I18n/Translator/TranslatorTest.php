@@ -191,4 +191,25 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Message 5 (en) Plural 1', $pl1);
         $this->assertEquals('Message 5 (en) Plural 2', $pl2);
     }
+
+    public function testTranslateNonExistantLocale()
+    {
+        $this->translator->addTranslationFilePattern(
+            'phparray',
+            $this->testFilesDir . '/testarray',
+            'translation-%s.php'
+        );
+
+        // Test that a locale without translations does not cause warnings
+
+        $this->translator->setLocale('es_ES');
+
+        $this->assertEquals('Message 1', $this->translator->translate('Message 1'));
+        $this->assertEquals('Message 9', $this->translator->translate('Message 9'));
+
+        $this->translator->setLocale('fr_FR');
+
+        $this->assertEquals('Message 1', $this->translator->translate('Message 1'));
+        $this->assertEquals('Message 9', $this->translator->translate('Message 9'));
+    }
 }

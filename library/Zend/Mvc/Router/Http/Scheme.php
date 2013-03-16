@@ -79,7 +79,7 @@ class Scheme implements RouteInterface
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
      * @param  Request $request
-     * @return RouteMatch
+     * @return RouteMatch|null
      */
     public function match(Request $request)
     {

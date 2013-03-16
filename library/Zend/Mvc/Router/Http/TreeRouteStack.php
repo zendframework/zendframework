@@ -10,6 +10,7 @@
 namespace Zend\Mvc\Router\Http;
 
 use Traversable;
+use Zend\I18n\Translator;
 use Zend\Mvc\Router\Exception;
 use Zend\Mvc\Router\SimpleRouteStack;
 use Zend\Stdlib\ArrayUtils;
@@ -19,7 +20,7 @@ use Zend\Uri\Http as HttpUri;
 /**
  * Tree search implementation.
  */
-class TreeRouteStack extends SimpleRouteStack
+class TreeRouteStack extends SimpleRouteStack implements Translator\TranslatorAwareInterface
 {
     /**
      * Base URL.
@@ -34,6 +35,27 @@ class TreeRouteStack extends SimpleRouteStack
      * @var HttpUri
      */
     protected $requestUri;
+
+    /**
+     * Translator used for translatable segments.
+     *
+     * @var Translator\Translator
+     */
+    protected $translator;
+
+    /**
+     * Whether the translator is enabled.
+     *
+     * @var boolean
+     */
+    protected $translatorEnabled = true;
+
+    /**
+     * Translator text domain to use.
+     *
+     * @var string
+     */
+    protected $translatorTextDomain = 'default';
 
     /**
      * init(): defined by SimpleRouteStack.
@@ -121,10 +143,12 @@ class TreeRouteStack extends SimpleRouteStack
      * match(): defined by \Zend\Mvc\Router\RouteInterface
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
-     * @param  Request $request
-     * @return RouteMatch
+     * @param  Request      $request
+     * @param  integer|null $pathOffset
+     * @param  array        $options
+     * @return RouteMatch|null
      */
-    public function match(Request $request)
+    public function match(Request $request, $pathOffset = null, array $options = array())
     {
         if (!method_exists($request, 'getUri')) {
             return null;
@@ -137,15 +161,27 @@ class TreeRouteStack extends SimpleRouteStack
         $uri           = $request->getUri();
         $baseUrlLength = strlen($this->baseUrl) ?: null;
 
+        if ($pathOffset !== null) {
+            $baseUrlLength += $pathOffset;
+        }
+
         if ($this->requestUri === null) {
             $this->setRequestUri($uri);
+        }
+
+        if ($this->hasTranslator() && $this->isTranslatorEnabled() && !isset($options['translator'])) {
+            $options['translator'] = $this->getTranslator();
+        }
+
+        if (!isset($options['text_domain'])) {
+            $options['text_domain'] = $this->getTranslatorTextDomain();
         }
 
         if ($baseUrlLength !== null) {
             $pathLength = strlen($uri->getPath()) - $baseUrlLength;
 
             foreach ($this->routes as $name => $route) {
-                if (($match = $route->match($request, $baseUrlLength)) instanceof RouteMatch && $match->getLength() === $pathLength) {
+                if (($match = $route->match($request, $baseUrlLength, $options)) instanceof RouteMatch && $match->getLength() === $pathLength) {
                     $match->setMatchedRouteName($name);
 
                     foreach ($this->defaultParams as $paramName => $value) {
@@ -213,6 +249,14 @@ class TreeRouteStack extends SimpleRouteStack
             $options['uri'] = $uri;
         } else {
             $uri = $options['uri'];
+        }
+
+        if ($this->hasTranslator() && $this->isTranslatorEnabled() && !isset($options['translator'])) {
+            $options['translator'] = $this->getTranslator();
+        }
+
+        if (!isset($options['text_domain'])) {
+            $options['text_domain'] = $this->getTranslatorTextDomain();
         }
 
         $path = $this->baseUrl . $route->assemble(array_merge($this->defaultParams, $params), $options);
@@ -288,5 +332,95 @@ class TreeRouteStack extends SimpleRouteStack
     public function getRequestUri()
     {
         return $this->requestUri;
+    }
+
+    /**
+     * setTranslator(): defined by Translator\TranslatorAwareInterface.
+     *
+     * @see    Translator\TranslatorAwareInterface::setTranslator()
+     * @param  Translator\Translator $translator
+     * @param  string                $textDomain
+     * @return TreeRouteStack
+     */
+    public function setTranslator(Translator\Translator $translator = null, $textDomain = null)
+    {
+        $this->translator = $translator;
+
+        if ($textDomain !== null) {
+            $this->setTranslatorTextDomain($textDomain);
+        }
+
+        return $this;
+    }
+
+    /**
+     * getTranslator(): defined by Translator\TranslatorAwareInterface.
+     *
+     * @see    Translator\TranslatorAwareInterface::getTranslator()
+     * @return Translator\Translator
+     */
+    public function getTranslator()
+    {
+        return $this->translator;
+    }
+
+    /**
+     * hasTranslator(): defined by Translator\TranslatorAwareInterface.
+     *
+     * @see    Translator\TranslatorAwareInterface::hasTranslator()
+     * @return boolean
+     */
+    public function hasTranslator()
+    {
+        return $this->translator !== null;
+    }
+
+    /**
+     * setTranslatorEnabled(): defined by Translator\TranslatorAwareInterface.
+     *
+     * @see    Translator\TranslatorAwareInterface::setTranslatorEnabled()
+     * @param  boolean $enabled
+     * @return TreeRouteStack
+     */
+    public function setTranslatorEnabled($enabled = true)
+    {
+        $this->translatorEnabled = $enabled;
+        return $this;
+    }
+
+    /**
+     * isTranslatorEnabled(): defined by Translator\TranslatorAwareInterface.
+     *
+     * @see    Translator\TranslatorAwareInterface::isTranslatorEnabled()
+     * @return boolean
+     */
+    public function isTranslatorEnabled()
+    {
+        return $this->translatorEnabled;
+    }
+
+    /**
+     * setTranslatorTextDomain(): defined by Translator\TranslatorAwareInterface.
+     *
+     * @see    Translator\TranslatorAwareInterface::setTranslatorTextDomain()
+     * @param string $textDomain
+     * @return mixed
+     */
+    public function setTranslatorTextDomain($textDomain = 'default')
+    {
+        $this->translatorTextDomain = $textDomain;
+
+        return $this;
+    }
+
+    /**
+     * getTranslatorTextDomain(): defined by Translator\TranslatorAwareInterface.
+     *
+     * @see    Translator\TranslatorAwareInterface::getTranslatorTextDomain()
+     * @return string
+     */
+    public function getTranslatorTextDomain()
+    {
+        return $this->translatorTextDomain;
     }
 }

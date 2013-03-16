@@ -50,8 +50,8 @@ class Method implements RouteInterface
      *
      * @see    \Zend\Mvc\Router\RouteInterface::factory()
      * @param  array|Traversable $options
-     * @throws Exception\InvalidArgumentException
      * @return Method
+     * @throws Exception\InvalidArgumentException
      */
     public static function factory($options = array())
     {

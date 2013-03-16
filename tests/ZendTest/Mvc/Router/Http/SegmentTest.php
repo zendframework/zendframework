@@ -191,11 +191,6 @@ class SegmentTest extends TestCase
                 'Zend\Mvc\Router\Exception\RuntimeException',
                 'Translated literal missing closing bracket'
             ),
-            'translated-parameter-without-closing-backet' => array(
-                ':{test',
-                'Zend\Mvc\Router\Exception\RuntimeException',
-                'Translated parameter missing closing bracket'
-            ),
         );
     }
 
@@ -267,18 +262,6 @@ class SegmentTest extends TestCase
         $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Missing parameter "foo"');
         $route = new Segment('/:foo');
         $route->assemble();
-    }
-
-    public function testBuildTranslatedLiteral()
-    {
-        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Translated literals are not implemented yet');
-        $route = new Segment('/{foo}');
-    }
-
-    public function testBuildTranslatedParameter()
-    {
-        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Translated parameters are not implemented yet');
-        $route = new Segment('/:{foo}');
     }
 
     public function testNoMatchWithoutUriMethod()

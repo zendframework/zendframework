@@ -504,7 +504,7 @@ abstract class AbstractAdapter implements AdapterInterface
 
         $width = (static::$hasMBString)
                ? mb_strlen($string, 'UTF-8' )
-               : strlen(utf8_decode($string));
+               : iconv_strlen($string);
 
         return $width;
     }
@@ -527,7 +527,7 @@ abstract class AbstractAdapter implements AdapterInterface
                 return mb_strcut($string, 0, $length, 'UTF-8');
             }
 
-            return substr(utf8_decode($string), 0, $length);
+            return iconv_substr($string, 0, $length);
         }
 
         return substr($string, 0, $length);

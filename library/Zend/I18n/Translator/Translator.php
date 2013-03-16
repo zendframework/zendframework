@@ -347,9 +347,9 @@ class Translator
         $locale = null
     ) {
         $locale      = $locale ?: $this->getLocale();
-        $translation = $this->getTranslatedMessage($singular, $locale, $textDomain, true);
+        $translation = $this->getTranslatedMessage($singular, $locale, $textDomain);
 
-        if ($translation === null || $translation['message'] === '') {
+        if ($translation === null || $translation === '') {
             if (null !== ($fallbackLocale = $this->getFallbackLocale())
                 && $locale !== $fallbackLocale
             ) {
@@ -365,31 +365,31 @@ class Translator
             return ($number == 1 ? $singular : $plural);
         }
 
-        $index = $translation['plural_rule']->evaluate($number);
+        $index = $this->messages[$textDomain][$locale]
+                      ->getPluralRule()
+                      ->evaluate($number);
 
-        if (!isset($translation['message'][$index])) {
+        if (!isset($translation[$index])) {
             throw new Exception\OutOfBoundsException(sprintf(
                 'Provided index %d does not exist in plural array', $index
             ));
         }
 
-        return $translation['message'][$index];
+        return $translation[$index];
     }
 
     /**
      * Get a translated message.
      *
-     * @param  string      $message
-     * @param  string      $locale
-     * @param  string      $textDomain
-     * @param  boolean     $returnPluralRule
+     * @param  string $message
+     * @param  string $locale
+     * @param  string $textDomain
      * @return string|null
      */
     protected function getTranslatedMessage(
         $message,
         $locale = null,
-        $textDomain = 'default',
-        $returnPluralRule = false
+        $textDomain = 'default'
     ) {
         if ($message === '') {
             return '';
@@ -399,28 +399,8 @@ class Translator
             $this->loadMessages($textDomain, $locale);
         }
 
-        if (is_array($this->messages[$textDomain][$locale])) {
-            foreach ($this->messages[$textDomain][$locale] as $textDomain) {
-                if (isset($textDomain[$message])) {
-                    if ($returnPluralRule) {
-                        return array(
-                            'message'    => $textDomain[$message],
-                            'plural_rule' => $textDomain->getPluralRule()
-                        );
-                    } else {
-                        return $textDomain[$message];
-                    }
-                }
-            }
-        } elseif (isset($this->messages[$textDomain][$locale][$message])) {
-            if ($returnPluralRule) {
-                return array(
-                    'message'     => $this->messages[$textDomain][$locale][$message],
-                    'plural_rule' => $this->messages[$textDomain][$locale]->getPluralRule()
-                );
-            } else {
-                return $this->messages[$textDomain][$locale][$message];
-            }
+        if (isset($this->messages[$textDomain][$locale][$message])) {
+            return $this->messages[$textDomain][$locale][$message];
         }
 
         return null;
@@ -559,13 +539,7 @@ class Translator
                 }
 
                 if (isset($this->messages[$textDomain][$locale])) {
-                    if (!is_array($this->messages[$textDomain][$locale])) {
-                        $this->messages[$textDomain][$locale] = array(
-                            $this->messages[$textDomain][$locale]
-                        );
-                    }
-
-                    $this->messages[$textDomain][$locale][] = $loader->load($locale, $textDomain);
+                    $this->messages[$textDomain][$locale]->merge($loader->load($locale, $textDomain));
                 } else {
                     $this->messages[$textDomain][$locale] = $loader->load($locale, $textDomain);
                 }
@@ -601,13 +575,7 @@ class Translator
                     }
 
                     if (isset($this->messages[$textDomain][$locale])) {
-                        if (!is_array($this->messages[$textDomain][$locale])) {
-                            $this->messages[$textDomain][$locale] = array(
-                                $this->messages[$textDomain][$locale]
-                            );
-                        }
-
-                        $this->messages[$textDomain][$locale][] = $loader->load($locale, $filename);
+                        $this->messages[$textDomain][$locale]->merge($loader->load($locale, $filename));
                     } else {
                         $this->messages[$textDomain][$locale] = $loader->load($locale, $filename);
                     }
@@ -645,13 +613,7 @@ class Translator
                 }
 
                 if (isset($this->messages[$textDomain][$locale])) {
-                    if (!is_array($this->messages[$textDomain][$locale])) {
-                        $this->messages[$textDomain][$locale] = array(
-                            $this->messages[$textDomain][$locale]
-                        );
-                    }
-
-                    $this->messages[$textDomain][$locale][] = $loader->load($locale, $file['filename']);
+                    $this->messages[$textDomain][$locale]->merge($loader->load($locale, $file['filename']));
                 } else {
                     $this->messages[$textDomain][$locale] = $loader->load($locale, $file['filename']);
                 }

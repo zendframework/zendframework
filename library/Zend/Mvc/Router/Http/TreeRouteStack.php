@@ -10,7 +10,8 @@
 namespace Zend\Mvc\Router\Http;
 
 use Traversable;
-use Zend\I18n\Translator;
+use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Mvc\Router\Exception;
 use Zend\Mvc\Router\SimpleRouteStack;
 use Zend\Stdlib\ArrayUtils;
@@ -20,7 +21,7 @@ use Zend\Uri\Http as HttpUri;
 /**
  * Tree search implementation.
  */
-class TreeRouteStack extends SimpleRouteStack implements Translator\TranslatorAwareInterface
+class TreeRouteStack extends SimpleRouteStack implements TranslatorAwareInterface
 {
     /**
      * Base URL.
@@ -39,7 +40,7 @@ class TreeRouteStack extends SimpleRouteStack implements Translator\TranslatorAw
     /**
      * Translator used for translatable segments.
      *
-     * @var Translator\Translator
+     * @var Translator
      */
     protected $translator;
 
@@ -65,7 +66,8 @@ class TreeRouteStack extends SimpleRouteStack implements Translator\TranslatorAw
     protected function init()
     {
         $routes = $this->routePluginManager;
-        foreach (array(
+        foreach (
+            array(
                 'hostname' => __NAMESPACE__ . '\Hostname',
                 'literal'  => __NAMESPACE__ . '\Literal',
                 'part'     => __NAMESPACE__ . '\Part',
@@ -335,11 +337,11 @@ class TreeRouteStack extends SimpleRouteStack implements Translator\TranslatorAw
     }
 
     /**
-     * setTranslator(): defined by Translator\TranslatorAwareInterface.
+     * setTranslator(): defined by TranslatorAwareInterface.
      *
-     * @see    Translator\TranslatorAwareInterface::setTranslator()
-     * @param  Translator\Translator $translator
-     * @param  string                $textDomain
+     * @see    TranslatorAwareInterface::setTranslator()
+     * @param  Translator $translator
+     * @param  string     $textDomain
      * @return TreeRouteStack
      */
     public function setTranslator(Translator\Translator $translator = null, $textDomain = null)
@@ -354,10 +356,10 @@ class TreeRouteStack extends SimpleRouteStack implements Translator\TranslatorAw
     }
 
     /**
-     * getTranslator(): defined by Translator\TranslatorAwareInterface.
+     * getTranslator(): defined by TranslatorAwareInterface.
      *
-     * @see    Translator\TranslatorAwareInterface::getTranslator()
-     * @return Translator\Translator
+     * @see    TranslatorAwareInterface::getTranslator()
+     * @return Translator
      */
     public function getTranslator()
     {
@@ -365,9 +367,9 @@ class TreeRouteStack extends SimpleRouteStack implements Translator\TranslatorAw
     }
 
     /**
-     * hasTranslator(): defined by Translator\TranslatorAwareInterface.
+     * hasTranslator(): defined by TranslatorAwareInterface.
      *
-     * @see    Translator\TranslatorAwareInterface::hasTranslator()
+     * @see    TranslatorAwareInterface::hasTranslator()
      * @return boolean
      */
     public function hasTranslator()
@@ -376,9 +378,9 @@ class TreeRouteStack extends SimpleRouteStack implements Translator\TranslatorAw
     }
 
     /**
-     * setTranslatorEnabled(): defined by Translator\TranslatorAwareInterface.
+     * setTranslatorEnabled(): defined by TranslatorAwareInterface.
      *
-     * @see    Translator\TranslatorAwareInterface::setTranslatorEnabled()
+     * @see    TranslatorAwareInterface::setTranslatorEnabled()
      * @param  boolean $enabled
      * @return TreeRouteStack
      */
@@ -389,9 +391,9 @@ class TreeRouteStack extends SimpleRouteStack implements Translator\TranslatorAw
     }
 
     /**
-     * isTranslatorEnabled(): defined by Translator\TranslatorAwareInterface.
+     * isTranslatorEnabled(): defined by TranslatorAwareInterface.
      *
-     * @see    Translator\TranslatorAwareInterface::isTranslatorEnabled()
+     * @see    TranslatorAwareInterface::isTranslatorEnabled()
      * @return boolean
      */
     public function isTranslatorEnabled()
@@ -400,10 +402,10 @@ class TreeRouteStack extends SimpleRouteStack implements Translator\TranslatorAw
     }
 
     /**
-     * setTranslatorTextDomain(): defined by Translator\TranslatorAwareInterface.
+     * setTranslatorTextDomain(): defined by TranslatorAwareInterface.
      *
-     * @see    Translator\TranslatorAwareInterface::setTranslatorTextDomain()
-     * @param string $textDomain
+     * @see    TranslatorAwareInterface::setTranslatorTextDomain()
+     * @param  string $textDomain
      * @return mixed
      */
     public function setTranslatorTextDomain($textDomain = 'default')
@@ -414,9 +416,9 @@ class TreeRouteStack extends SimpleRouteStack implements Translator\TranslatorAw
     }
 
     /**
-     * getTranslatorTextDomain(): defined by Translator\TranslatorAwareInterface.
+     * getTranslatorTextDomain(): defined by TranslatorAwareInterface.
      *
-     * @see    Translator\TranslatorAwareInterface::getTranslatorTextDomain()
+     * @see    TranslatorAwareInterface::getTranslatorTextDomain()
      * @return string
      */
     public function getTranslatorTextDomain()

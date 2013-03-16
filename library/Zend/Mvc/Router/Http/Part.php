@@ -17,7 +17,7 @@ use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;
 
 /**
- * RouteInterface part.
+ * Part route.
  */
 class Part extends TreeRouteStack implements RouteInterface
 {

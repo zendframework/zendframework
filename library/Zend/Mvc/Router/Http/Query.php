@@ -66,7 +66,6 @@ class Query implements RouteInterface
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
 
-
         if (!isset($options['defaults'])) {
             $options['defaults'] = array();
         }
@@ -98,6 +97,7 @@ class Query implements RouteInterface
     protected function recursiveUrldecode(array $array)
     {
         $matches = array();
+
         foreach ($array as $key => $value) {
             if (is_array($value)) {
                 $matches[urldecode($key)] = $this->recursiveUrldecode($value);
@@ -105,6 +105,7 @@ class Query implements RouteInterface
                 $matches[urldecode($key)] = urldecode($value);
             }
         }
+        
         return $matches;
     }
 

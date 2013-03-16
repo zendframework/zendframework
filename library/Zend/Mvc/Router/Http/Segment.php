@@ -423,7 +423,7 @@ class Segment implements RouteInterface
     /**
      * Encode a path segment.
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     protected function encode($value)
@@ -438,7 +438,7 @@ class Segment implements RouteInterface
     /**
      * Decode a path segment.
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     protected function decode($value)

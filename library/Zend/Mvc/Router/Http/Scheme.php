@@ -16,8 +16,6 @@ use Zend\Stdlib\RequestInterface as Request;
 
 /**
  * Scheme route.
- *
- * @see        http://guides.rubyonrails.org/routing.html
  */
 class Scheme implements RouteInterface
 {

@@ -170,7 +170,7 @@ class SimpleRouteStack implements RouteStackInterface
      * removeRoute(): defined by RouteStackInterface interface.
      *
      * @see    RouteStackInterface::removeRoute()
-     * @param  string  $name
+     * @param  string $name
      * @return SimpleRouteStack
      */
     public function removeRoute($name)
@@ -205,7 +205,7 @@ class SimpleRouteStack implements RouteStackInterface
     /**
      * Check if a route with a specific name exists
      *
-     * @param string $name
+     * @param  string $name
      * @return boolean true if route exists
      */
     public function hasRoute($name)

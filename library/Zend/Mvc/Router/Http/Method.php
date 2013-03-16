@@ -86,8 +86,8 @@ class Method implements RouteInterface
         }
 
         $requestVerb = strtoupper($request->getMethod());
-        $matchVerbs = explode(',', strtoupper($this->verb));
-        $matchVerbs = array_map('trim', $matchVerbs);
+        $matchVerbs  = explode(',', strtoupper($this->verb));
+        $matchVerbs  = array_map('trim', $matchVerbs);
 
         if (in_array($requestVerb, $matchVerbs)) {
             return new RouteMatch($this->defaults);

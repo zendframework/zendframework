@@ -11,6 +11,7 @@ namespace Zend\Console\Adapter;
 
 use Zend\Console\Charset;
 use Zend\Console\Exception;
+use Zend\Stdlib\StringUtils;
 
 /**
  * Common console adapter codebase
@@ -82,7 +83,7 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function writeLine($text = "", $color = null, $bgColor = null)
     {
-        $width = $this->getStringWidth($text);
+        $width = StringUtils::getWrapper()->strlen($text);
 
         // Remove newline characters from the end of string
         $text = trim($text, "\r\n");
@@ -224,7 +225,7 @@ abstract class AbstractAdapter implements AdapterInterface
             }
 
         } elseif ($fillStyle) {
-            $fillChar = $this->stringTrim($fillStyle, 1);
+            $fillChar = StringUtils::getWrapper()->substr($fillStyle, 0, 1);
         } else {
             $fillChar = ' ';
         }
@@ -481,56 +482,6 @@ abstract class AbstractAdapter implements AdapterInterface
     public function clearScreen()
     {
         return $this->clear();
-    }
-
-    /**
-     * Helper function that return string length as rendered in console.
-     *
-     * @static
-     * @param $string
-     * @return int
-     */
-    protected function getStringWidth($string)
-    {
-        $width = strlen($string);
-
-        if (!$this->isUtf8()) {
-            return $width;
-        }
-
-        if (static::$hasMBString === null) {
-            static::$hasMBString = extension_loaded( 'mbstring' );
-        }
-
-        $width = (static::$hasMBString)
-               ? mb_strlen($string, 'UTF-8' )
-               : iconv_strlen($string);
-
-        return $width;
-    }
-
-    /**
-     * Trim a string in an encoding-safe way
-     *
-     * @param  mixed $string
-     * @param  mixed $length
-     * @return int
-     */
-    protected function stringTrim($string, $length)
-    {
-        if ($this->isUtf8()) {
-            if (static::$hasMBString === null) {
-                static::$hasMBString = extension_loaded('mbstring');
-            }
-
-            if (static::$hasMBString) {
-                return mb_strcut($string, 0, $length, 'UTF-8');
-            }
-
-            return iconv_substr($string, 0, $length);
-        }
-
-        return substr($string, 0, $length);
     }
 
     /**

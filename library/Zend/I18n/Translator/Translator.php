@@ -531,7 +531,9 @@ class Translator
             || $this->loadMessagesFromFiles($textDomain, $locale)
         );
 
-        if ($messagesLoaded && $cache !== null) {
+        if (!$messagesLoaded) {
+            $this->messages[$textDomain][$locale] = null;
+        } elseif ($cache !== null) {
             $cache->setItem($cacheId, $this->messages[$textDomain][$locale]);
         }
     }

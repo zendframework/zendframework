@@ -91,7 +91,7 @@ abstract class AbstractAdapter implements AdapterInterface
         $text = str_replace("\n", " ", $text);
 
         // Write the line but refuse to add EOL if the text fits the window
-        if ($width == $this->getWidth()) {
+        if ($width % $this->getWidth() === 0) {
             $this->write($text, $color, $bgColor);
         } else {
             $this->write($text, $color, $bgColor);

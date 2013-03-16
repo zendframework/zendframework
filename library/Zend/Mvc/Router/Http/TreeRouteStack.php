@@ -344,7 +344,7 @@ class TreeRouteStack extends SimpleRouteStack implements TranslatorAwareInterfac
      * @param  string     $textDomain
      * @return TreeRouteStack
      */
-    public function setTranslator(Translator\Translator $translator = null, $textDomain = null)
+    public function setTranslator(Translator $translator = null, $textDomain = null)
     {
         $this->translator = $translator;
 

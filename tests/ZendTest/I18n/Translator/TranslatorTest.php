@@ -97,9 +97,8 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Nachricht 9', $translator->translate('Message 9')); //translation-more-de_DE.php
         $this->assertEquals('Nachricht 10 - 0', $translator->translatePlural('Message 10', 'Message 10', 1)); //translation-de_DE.php
         $this->assertEquals('Nachricht 10 - 1', $translator->translatePlural('Message 10', 'Message 10', 2)); //translation-de_DE.php
-        $this->assertEquals('Nachricht 11 - 0', $translator->translatePlural('Message 11', 'Message 11', 0)); //translation-more-de_DE.php
-        $this->assertEquals('Nachricht 11 - 1', $translator->translatePlural('Message 11', 'Message 11', 1)); //translation-more-de_DE.php
-        $this->assertEquals('Nachricht 11 - 2', $translator->translatePlural('Message 11', 'Message 11', 2)); //translation-more-de_DE.php
+        $this->assertEquals('Nachricht 11 - 0', $translator->translatePlural('Message 11', 'Message 11', 1)); //translation-more-de_DE.php
+        $this->assertEquals('Nachricht 11 - 1', $translator->translatePlural('Message 11', 'Message 11', 2)); //translation-more-de_DE.php
     }
 
     public function testFactoryCreatesTranslatorWithCache()

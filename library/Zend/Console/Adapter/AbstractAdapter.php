@@ -73,8 +73,8 @@ abstract class AbstractAdapter implements AdapterInterface
 
     /**
      * Write a single line of text to console and advance cursor to the next line.
-     * If the text is longer than console width it will be truncated.
-     *
+     * If the text length matches console window width no newline character will be added,
+     * which prevents double empty lines.
      *
      * @param string   $text
      * @param null|int $color
@@ -90,16 +90,12 @@ abstract class AbstractAdapter implements AdapterInterface
         // Replace newline characters with spaces
         $text = str_replace("\n", " ", $text);
 
-        // Trim the line if it's too long and output text
-        $consoleWidth = $this->getWidth();
-        if ($width > $consoleWidth) {
-            $text = $this->stringTrim($text, $consoleWidth);
-            $this->write($text, $color, $bgColor);
-        } elseif ($width == $consoleWidth) {
+        // Write the line but refuse to add EOL if the text fits the window
+        if ($width == $this->getWidth()) {
             $this->write($text, $color, $bgColor);
         } else {
             $this->write($text, $color, $bgColor);
-            $this->write("\n");
+            $this->write(PHP_EOL);
         }
     }
 
@@ -528,13 +524,13 @@ abstract class AbstractAdapter implements AdapterInterface
             }
 
             if (static::$hasMBString) {
-                return mb_strlen($string, 'UTF-8');
+                return mb_strcut($string, 0, $length, 'UTF-8');
             }
 
-            return strlen(utf8_decode($string));
+            return substr(utf8_decode($string), 0, $length);
         }
 
-        return strlen($string);
+        return substr($string, 0, $length);
     }
 
     /**

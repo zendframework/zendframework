@@ -62,16 +62,19 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
     public function basicProvider()
     {
         return array(
-            array('5-10-04',     false, array()),
-//            array('20150303 01:01',   true, array('locale'=>'nl', 'timeFormat' => \IntlDateFormatter::SHORT)),
-//            array('2/34/2015',   false, array()),
-//            array('2/15/2015',   true, array()),
-//            array('5/10/04',     true, array()),
-//            array('January 12, 1952',     true,
-//                array('locale'=>'en_UK', 'dateFormat' => \IntlDateFormatter::LONG, 'timeFormat' => \IntlDateFormatter::NONE, 'calender' => \IntlDateFormatter::TRADITIONAL)),
-//
-//            array('5 October 2004',     true, array()),
-//
+            array('May 30, 2013',   true, array('locale'=>'en', 'dateFormat' => \IntlDateFormatter::MEDIUM, 'timeFormat' => \IntlDateFormatter::NONE)),
+            array('30.Mai.2013',   true, array('locale'=>'de', 'dateFormat' => \IntlDateFormatter::MEDIUM, 'timeFormat' => \IntlDateFormatter::NONE)),
+            array('30 Mei 2013',   true, array('locale'=>'nl', 'dateFormat' => \IntlDateFormatter::MEDIUM, 'timeFormat' => \IntlDateFormatter::NONE)),
+
+            array('May 38, 2013',   false, array('locale'=>'en', 'dateFormat' => \IntlDateFormatter::FULL, 'timeFormat' => \IntlDateFormatter::NONE)),
+            array('Dienstag, 28. Mai 2013',   true, array('locale'=>'de', 'dateFormat' => \IntlDateFormatter::FULL, 'timeFormat' => \IntlDateFormatter::NONE)),
+            array('Maandag 28 Mei 2013',   true, array('locale'=>'nl', 'dateFormat' => \IntlDateFormatter::FULL, 'timeFormat' => \IntlDateFormatter::NONE)),
+
+            array('0:00',   true, array('locale'=>'nl', 'dateFormat' => \IntlDateFormatter::NONE, 'timeFormat' => \IntlDateFormatter::SHORT)),
+            array('01:01',   true, array('locale'=>'nl', 'dateFormat' => \IntlDateFormatter::NONE, 'timeFormat' => \IntlDateFormatter::SHORT)),
+            array('01:01:01',   true, array('locale'=>'nl', 'dateFormat' => \IntlDateFormatter::NONE, 'timeFormat' => \IntlDateFormatter::MEDIUM)),
+            array('01:01:01 +2',   true, array('locale'=>'nl', 'dateFormat' => \IntlDateFormatter::NONE, 'timeFormat' => \IntlDateFormatter::LONG)),
+            array('03:30:42 am +2',   true, array('locale'=>'en', 'dateFormat' => \IntlDateFormatter::NONE, 'timeFormat' => \IntlDateFormatter::LONG)),
         );
     }
 

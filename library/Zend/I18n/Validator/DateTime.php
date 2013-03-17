@@ -62,6 +62,22 @@ class DateTime extends AbstractValidator
     protected $calender;
 
     /**
+     * DateFormatter instance
+     *
+     * @var IntlDateFormatter
+     */
+    protected $formatter;
+
+    /**
+     * The formatter invalidated
+     *
+     * because properties where changed
+     *
+     * @var bool
+     */
+    protected $invalidateFormatter = true;
+
+    /**
      * Constructor for the Date validator
      *
      * @param array|Traversable $options
@@ -91,7 +107,8 @@ class DateTime extends AbstractValidator
         if (null === $this->calender) {
             $this->calender = IntlDateFormatter::GREGORIAN;
         }
-        return $this->calender;
+
+        return (!$this->invalidateFormatter) ? $this->getIntlDateFormatter()->getCalender() : $this->calender;
     }
 
     /**
@@ -102,6 +119,8 @@ class DateTime extends AbstractValidator
     public function setDateFormat($dateFormat)
     {
         $this->dateFormat = $dateFormat;
+        $this->invalidateFormatter = true;
+
         return $this;
     }
 
@@ -129,7 +148,7 @@ class DateTime extends AbstractValidator
 
     public function getPattern()
     {
-        return $this->pattern;
+        return (!$this->invalidateFormatter) ? $this->getIntlDateFormatter()->getPattern() : $this->pattern;
     }
 
     /**
@@ -151,6 +170,8 @@ class DateTime extends AbstractValidator
         if (null === $this->timeFormat) {
             $this->timeFormat = IntlDateFormatter::NONE;
         }
+        $this->invalidateFormatter = true;
+
         return $this->timeFormat;
     }
 
@@ -176,7 +197,7 @@ class DateTime extends AbstractValidator
         if (null === $this->timezone) {
             $this->timezone = date_default_timezone_get();
         }
-        return $this->timezone;
+        return (!$this->invalidateFormatter) ? $this->getIntlDateFormatter()->getTimeZoneId() : $this->timezone;
     }
 
     /**
@@ -201,6 +222,8 @@ class DateTime extends AbstractValidator
     public function setLocale($locale)
     {
         $this->locale = $locale;
+        $this->invalidateFormatter = true;
+
         return $this;
     }
 
@@ -221,16 +244,16 @@ class DateTime extends AbstractValidator
 
         $this->setValue($value);
 
-        $format = $this->getIntlDateFormatter();
+        $formatter = $this->getIntlDateFormatter();
 
-        if (intl_is_failure($format->getErrorCode())) {
+        if (intl_is_failure($formatter->getErrorCode())) {
             throw new Exception\InvalidArgumentException("Invalid locale string given");
         }
 
         $position = 0;
-        $parsedDate = $format->parse($value, $position);
+        $parsedDate = $formatter->parse($value, $position);
 
-        if (intl_is_failure($format->getErrorCode())) {
+        if (intl_is_failure($formatter->getErrorCode())) {
             $this->error(self::INVALID_DATETIME);
             return false;
         }
@@ -244,27 +267,22 @@ class DateTime extends AbstractValidator
     }
 
     /**
-     * DateFormatter instance
-     *
-     * @var IntlDateFormatter
-     */
-    protected $formatter;
-
-    /**
      * Returns a non lenient configured DateFormatter
      *
      * @return \IntlDateFormatter
      */
     protected function getIntlDateFormatter()
     {
-        $formatter = new \IntlDateFormatter($this->getLocale(), $this->getDateFormat(), $this->getTimeFormat(), $this->getTimezone(), $this->getCalender(), $this->getPattern());
+        if ($this->formatter == null || $this->invalidateFormatter) {
+            $this->formatter = new \IntlDateFormatter($this->getLocale(), $this->getDateFormat(), $this->getTimeFormat(),
+                $this->getTimezone(), $this->getCalender(), $this->getPattern());
 
-        // non lenient behavior
-        $formatter->setLenient(false);
+            // non lenient behavior
+            $this->formatter->setLenient(false);
 
-        // store the pattern that will be used for parsing
-        $this->setPattern($formatter->getPattern());
+            $this->invalidateFormatter = false;
+        }
 
-        return $formatter;
+        return $this->formatter;
     }
 }

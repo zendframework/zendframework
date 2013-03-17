@@ -59,25 +59,26 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $this->validator->isValid($value),
             'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') .
-                sprintf(" (locale:%s, dateFormat: %s, timeFormat: %s, pattern:%s)", $this->validator->getLocale(), $this->validator->getDateFormat(), $this->validator->getTimeFormat(), $this->validator->getPattern()));
+                sprintf(" (locale:%s, dateType: %s, timeType: %s, pattern:%s)", $this->validator->getLocale(),
+                    $this->validator->getDateType(), $this->validator->getTimeType(), $this->validator->getPattern()));
     }
 
     public function basicProvider()
     {
         return array(
-            array('May 30, 2013',   true, array('locale'=>'en', 'dateFormat' => \IntlDateFormatter::MEDIUM, 'timeFormat' => \IntlDateFormatter::NONE)),
-            array('30.Mai.2013',   true, array('locale'=>'de', 'dateFormat' => \IntlDateFormatter::MEDIUM, 'timeFormat' => \IntlDateFormatter::NONE)),
-            array('30 Mei 2013',   true, array('locale'=>'nl', 'dateFormat' => \IntlDateFormatter::MEDIUM, 'timeFormat' => \IntlDateFormatter::NONE)),
+            array('May 30, 2013',   true, array('locale'=>'en', 'dateType' => \IntlDateFormatter::MEDIUM, 'timeType' => \IntlDateFormatter::NONE)),
+            array('30.Mai.2013',   true, array('locale'=>'de', 'dateType' => \IntlDateFormatter::MEDIUM, 'timeType' => \IntlDateFormatter::NONE)),
+            array('30 Mei 2013',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::MEDIUM, 'timeType' => \IntlDateFormatter::NONE)),
 
-            array('May 38, 2013',   false, array('locale'=>'en', 'dateFormat' => \IntlDateFormatter::FULL, 'timeFormat' => \IntlDateFormatter::NONE)),
-            array('Dienstag, 28. Mai 2013',   true, array('locale'=>'de', 'dateFormat' => \IntlDateFormatter::FULL, 'timeFormat' => \IntlDateFormatter::NONE)),
-            array('Maandag 28 Mei 2013',   true, array('locale'=>'nl', 'dateFormat' => \IntlDateFormatter::FULL, 'timeFormat' => \IntlDateFormatter::NONE)),
+            array('May 38, 2013',   false, array('locale'=>'en', 'dateType' => \IntlDateFormatter::FULL, 'timeType' => \IntlDateFormatter::NONE)),
+            array('Dienstag, 28. Mai 2013',   true, array('locale'=>'de', 'dateType' => \IntlDateFormatter::FULL, 'timeType' => \IntlDateFormatter::NONE)),
+            array('Maandag 28 Mei 2013',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::FULL, 'timeType' => \IntlDateFormatter::NONE)),
 
-            array('0:00',   true, array('locale'=>'nl', 'dateFormat' => \IntlDateFormatter::NONE, 'timeFormat' => \IntlDateFormatter::SHORT)),
-            array('01:01',   true, array('locale'=>'nl', 'dateFormat' => \IntlDateFormatter::NONE, 'timeFormat' => \IntlDateFormatter::SHORT)),
-            array('01:01:01',   true, array('locale'=>'nl', 'dateFormat' => \IntlDateFormatter::NONE, 'timeFormat' => \IntlDateFormatter::MEDIUM)),
-            array('01:01:01 +2',   true, array('locale'=>'nl', 'dateFormat' => \IntlDateFormatter::NONE, 'timeFormat' => \IntlDateFormatter::LONG)),
-            array('03:30:42 am +2',   true, array('locale'=>'en', 'dateFormat' => \IntlDateFormatter::NONE, 'timeFormat' => \IntlDateFormatter::LONG)),
+            array('0:00',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::SHORT)),
+            array('01:01',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::SHORT)),
+            array('01:01:01',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::MEDIUM)),
+            array('01:01:01 +2',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::LONG)),
+            array('03:30:42 am +2',   true, array('locale'=>'en', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::LONG)),
         );
     }
 

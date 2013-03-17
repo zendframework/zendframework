@@ -35,7 +35,7 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
         $this->locale = Locale::getDefault();
         $this->timezone = date_default_timezone_get();
 
-        $this->validator = new DateTimeValidator(array('locale' => 'en'));
+        $this->validator = new DateTimeValidator(array('locale' => 'en', 'timezone'=>'Europe/Amsterdam'));
     }
 
     public function tearDown()
@@ -47,7 +47,10 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
-     * @dataProvider basicProvider
+     * @param string  $value    that will be tested
+     * @param boolean $expected expected result of assertion
+     * @param array   $options  fed into the validator before validation
+     * @dataProvider basicProvider name of method that provide the above parameters
      * @return void
      */
     public function testBasic($value, $expected, $options = array())
@@ -105,12 +108,32 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that ommited pattern results in pattern being set (after isValid)
+     * Ensures that set/getTimezone() works
      */
-    public function testOptionPatternOmmited()
+    public function testOptionTimezone()
     {
+        $this->validator->setLocale('Europe/Berlin');
+        $this->assertEquals('Europe/Berlin', $this->validator->getLocale());
+    }
+
+    public function testApplicationOptionTimezone()
+    {
+        date_default_timezone_set('Europe/Berlin');
+        $valid = new DateTimeValidator();
+        $this->assertEquals(date_default_timezone_get(), $valid->getTimezone());
+    }
+
+    /**
+     * Ensures that an omitted pattern results in a calculated pattern by IntlDateFormatter
+     */
+    public function testOptionPatternOmitted()
+    {
+        // null before validation
+        $this->assertNull($this->validator->getPattern());
+
         $this->validator->isValid('does not matter');
 
+        // set after
         $this->assertEquals('yyyyMMdd hh:mm a', $this->validator->getPattern());
     }
 

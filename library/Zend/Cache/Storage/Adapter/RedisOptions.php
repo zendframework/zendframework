@@ -160,7 +160,7 @@ class RedisOptions extends AdapterOptions
     public function setPersistentId($persistentId)
     {
         $this->triggerOptionEvent('persistent_id', $persistentId);
-        $this->getResourceManager()->setPersistentId($this->getPersistentId(), $persistentId);
+        $this->getResourceManager()->setPersistentId($this->getResourceId(), $persistentId);
         return $this;
     }
 
@@ -197,6 +197,8 @@ class RedisOptions extends AdapterOptions
      * - List:  array(<host>[, <port>, [, <timeout>]])
      *
      * @param string|array $server
+     *
+     * @return RedisOptions
      */
     public function setServer($server)
     {
@@ -212,5 +214,28 @@ class RedisOptions extends AdapterOptions
     public function getServer()
     {
         return $this->getResourceManager()->getServer($this->getResourceId());
+    }
+
+    /**
+     * Set resource database number
+     *
+     * @param int $database Database number
+     *
+     * @return RedisOptions
+     */
+    public function setDatabase($database)
+    {
+        $this->getResourceManager()->setDatabase($this->getResourceId(), $database);
+        return $this;
+    }
+
+    /**
+     * Get resource database number
+     *
+     * @return int Database number
+     */
+    public function getDatabase()
+    {
+        return $this->getResourceManager()->getDatabase($this->getResourceId());
     }
 }

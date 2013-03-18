@@ -31,7 +31,7 @@ class RedisTest extends CommonAdapterTest
         }
 
         $this->_options  = new Cache\Storage\Adapter\RedisOptions(array(
-            'resource_id' => __CLASS__
+            'resource_id' => __CLASS__,
         ));
 
         if (defined('TESTS_ZEND_CACHE_REDIS_HOST') && defined('TESTS_ZEND_CACHE_REDIS_PORT')) {
@@ -44,6 +44,17 @@ class RedisTest extends CommonAdapterTest
             ));
         }
 
+        if (defined('TESTS_ZEND_CACHE_REDIS_DATABASE')) {
+            $this->_options->getResourceManager()->setDatabase(__CLASS__,
+                TESTS_ZEND_CACHE_REDIS_DATABASE
+            );
+        }
+
+        if (defined('TESTS_ZEND_CACHE_REDIS_PASSWORD')) {
+            $this->_options->getResourceManager()->setPassword(__CLASS__,
+                TESTS_ZEND_CACHE_REDIS_PASSWORD
+            );
+        }
         $this->_storage = new Cache\Storage\Adapter\Redis();
 
         $this->_storage->setOptions($this->_options);
@@ -58,18 +69,6 @@ class RedisTest extends CommonAdapterTest
         }
 
         parent::tearDown();
-    }
-
-    public function testDbFlush()
-    {
-        $key = 'newKey';
-
-        $this->_storage->setItem($key, 'test val');
-        $this->assertEquals('test val', $this->_storage->getItem($key), 'Value wasn\'t saved into cache');
-
-        $this->_storage->flush();
-
-        $this->assertNull($this->_storage->getItem($key), 'Database wasn\'t flushed');
     }
 
     /* Redis */
@@ -97,41 +96,6 @@ class RedisTest extends CommonAdapterTest
             $this->_storage->getItems(array_keys($expectedVals)),
                 'Multiple set/get items didnt save correct amount of rows'
         );
-    }
-
-    public function testRedisRemoveItem()
-    {
-        $key = 'newKey';
-        $this->_storage->setItem($key, 'test value');
-
-        $this->assertEquals('test value', $this->_storage->getItem($key), 'Value should be stored in redis');
-
-        $this->_storage->removeItem($key);
-
-        $this->assertNull($this->_storage->getItem($key), 'Item should be deleted from redis but its still available');
-    }
-
-    public function testRedisHasItem()
-    {
-        $key = 'newKey';
-        $this->_storage->setItem($key, 'test val');
-
-        $this->assertTrue($this->_storage->hasItem($key), 'Item should be saved into redis, but check item doesnt detect it');
-    }
-
-    public function testMultiGetAndMultiSet()
-    {
-        $save = array(
-            'key1' => 'aaa',
-            'key2' => 'bbb',
-            'key3' => 'ccc',
-        );
-
-        $this->_storage->setItems($save);
-
-        foreach ($save as $key => $value) {
-            $this->assertEquals($value, $this->_storage->getItem($key), 'Multi save didn\'t work, one of the keys wasnt found in redis');
-        }
     }
 
     public function testRedisSerializer()
@@ -171,20 +135,6 @@ class RedisTest extends CommonAdapterTest
         $this->assertEquals('1', $this->_storage->getItem($key), 'Boolean should be cast to string');
         $this->assertTrue($this->_storage->setItem($key, false));
         $this->assertEquals('', $this->_storage->getItem($key), 'Boolean should be cast to string');
-    }
-
-    public function testRedisSetArray()
-    {
-        $key = 'key';
-        $this->assertTrue($this->_storage->setItem($key, array(1, 2, '3')));
-        $this->assertEquals('Array', $this->_storage->getItem($key), 'Array should be cast to string');
-    }
-
-    public function testRedisSetObject()
-    {
-        $key = 'key';
-        $this->assertTrue($this->_storage->setItem($key, new \stdClass()));
-        $this->assertEquals('Object', $this->_storage->getItem($key), 'Object should be cast to string');
     }
 
     public function testGetCapabilitiesTtl()
@@ -230,7 +180,61 @@ class RedisTest extends CommonAdapterTest
         $this->assertEquals($databaseNumber, $resourceManager->getDatabase($this->_options->getResourceId()), 'Incorrect database was returned');
     }
 
+    public function testGetSetPassword()
+    {
+        $pass = 'super secret';
+        $this->_options->getResourceManager()->setPassword($this->_options->getResourceId(), $pass);
+        $this->assertEquals(
+            $pass,
+            $this->_options->getResourceManager()->getPassword($this->_options->getResourceId()),
+            'Password was not correctly set'
+        );
+    }
+
     /* RedisOptions */
+
+    public function testGetSetNamespace()
+    {
+        $namespace = 'testNamespace';
+        $this->_options->setNamespace($namespace);
+        $this->assertEquals($namespace, $this->_options->getNamespace(), 'Namespace was not set correctly');
+    }
+
+    public function testGetSetNamespaceSeparator()
+    {
+        $separator = '/';
+        $this->_options->setNamespaceSeparator($separator);
+        $this->assertEquals($separator, $this->_options->getNamespaceSeparator(), 'Separator was not set correctly');
+    }
+
+    public function testGetSetResourceManager()
+    {
+        $resourceManager = new \Zend\Cache\Storage\Adapter\RedisResourceManager();
+        $options = new \Zend\Cache\Storage\Adapter\RedisOptions();
+        $options->setResourceManager($resourceManager);
+        $this->assertInstanceOf(
+            'Zend\\Cache\\Storage\\Adapter\\RedisResourceManager',
+            $options->getResourceManager(),
+            'Wrong resource manager retuned, it should of type RedisResourceManager'
+        );
+
+        $this->assertEquals($resourceManager, $options->getResourceManager());
+    }
+
+    public function testGetSetResourceId()
+    {
+        $resourceId = '1';
+        $options = new \Zend\Cache\Storage\Adapter\RedisOptions();
+        $options->setResourceId($resourceId);
+        $this->assertEquals($resourceId, $options->getResourceId(), 'Resource id was not set correctly');
+    }
+
+    public function testGetSetPersistentId()
+    {
+        $persistentId = '1';
+        $this->_options->setPersistentId($persistentId);
+        $this->assertEquals($persistentId, $this->_options->getPersistentId(), 'Persistent id was not set correctly');
+    }
 
     public function testOptionsGetSetLibOptions()
     {

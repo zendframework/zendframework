@@ -297,7 +297,12 @@ class Input implements InputInterface
      */
     public function isValid($context = null)
     {
-        $this->injectNotEmptyValidator();
+        // Empty value needs further validation if continueIfEmpty is set
+        // so don't inject NotEmpty validator which would always
+        // mark that as false
+        if (!$this->continueIfEmpty()) {
+            $this->injectNotEmptyValidator();
+        }
         $validator = $this->getValidatorChain();
         $value     = $this->getValue();
         $result    = $validator->isValid($value, $context);

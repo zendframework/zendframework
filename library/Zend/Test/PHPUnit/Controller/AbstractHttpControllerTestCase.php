@@ -171,7 +171,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $responseHeader = $this->getResponseHeader('Location');
         if (false === $responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(
-                'Failed asserting response is NOT a redirect'
+                'Failed asserting response is a redirect'
             );
         }
         $this->assertNotEquals(false, $responseHeader);
@@ -185,7 +185,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $responseHeader = $this->getResponseHeader('Location');
         if (false !== $responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response is a redirect, actual redirection is "%s"',
+                'Failed asserting response is NOT a redirect, actual redirection is "%s"',
                 $responseHeader->getFieldValue()
             ));
         }

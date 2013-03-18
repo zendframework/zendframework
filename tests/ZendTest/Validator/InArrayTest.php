@@ -54,11 +54,11 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testSetEmptyHaystack()
     {
-        $this->validator->setHaystack(null);
         $this->setExpectedException(
             'Zend\Validator\Exception\RuntimeException',
             'haystack option is mandatory'
         );
+        $this->validator->setHaystack(null);
         $this->validator->getHaystack();
     }
 

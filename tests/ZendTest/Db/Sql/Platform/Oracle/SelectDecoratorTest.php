@@ -19,9 +19,7 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @testdox integration test: Testing SelectDecorator will use Select an internal state to prepare a proper from alias sql statement
-     * @covers Zend\Db\Sql\Platform\Mysql\SelectDecorator::getSqlString
-     * @covers Zend\Db\Sql\Platform\Mysql\SelectDecorator::processLimit
-     * @covers Zend\Db\Sql\Platform\Mysql\SelectDecorator::processOffset
+     * @covers Zend\Db\Sql\Platform\Oracle\SelectDecorator::getSqlString
      * @dataProvider dataProvider
      */
     public function testGetSqlString(Select $select, $expectedSql)

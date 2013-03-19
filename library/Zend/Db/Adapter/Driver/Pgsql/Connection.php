@@ -137,6 +137,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      */
     public function getResource()
     {
+        $this->connect();
         return $this->resource;
     }
 

@@ -205,13 +205,18 @@ class Mvc extends AbstractPage
         }
 
         $options = array('name' => $name);
-        $url = $router->assemble($params, $options);
 
         // Add the fragment identifier if it is set
         $fragment = $this->getFragment();
         if (null !== $fragment) {
-            $url .= '#' . $fragment;
+            $options['fragment'] = $fragment;
         }
+
+        if (isset($params['query'])) {
+            $options['query'] = $params['query'];
+        }
+
+        $url = $router->assemble($params, $options);
 
         return $this->hrefCache = $url;
     }

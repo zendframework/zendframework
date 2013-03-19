@@ -13,6 +13,11 @@ namespace ZendTest\Form\TestAsset\Entity;
 class Category
 {
     /**
+     * @var int
+     */
+    protected $id;
+
+    /**
      * @var string
      */
     protected $name;
@@ -33,5 +38,22 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param int $id
+     * @return Product
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId() {
+        return $this->id;
     }
 }

@@ -69,6 +69,13 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
     protected $templatePlaceholder = self::DEFAULT_TEMPLATE_PLACEHOLDER;
 
     /**
+     * Whether or not to create new objects during modify
+     *
+     * @var bool
+     */
+    protected $createNewObjects = false;
+
+    /**
      * Element used as a template
      *
      * @var ElementInterface|FieldsetInterface
@@ -113,6 +120,10 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
 
         if (isset($options['template_placeholder'])) {
             $this->setTemplatePlaceholder($options['template_placeholder']);
+        }
+
+        if (isset($options['create_new_objects'])) {
+            $this->setCreateNewObjects($options['create_new_objects']);
         }
 
         return $this;
@@ -420,6 +431,24 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
     }
 
     /**
+     * @param bool $createNewObjects
+     * @return Collection
+     */
+    public function setCreateNewObjects($createNewObjects)
+    {
+        $this->createNewObjects = (bool) $createNewObjects;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function createNewObjects()
+    {
+        return $this->createNewObjects;
+    }
+
+    /**
      * Get a template element used for rendering purposes only
      *
      * @return null|ElementInterface|FieldsetInterface
@@ -479,7 +508,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
                 $targetElement = clone $this->targetElement;
                 $targetElement->object = $value;
                 $values[$key] = $targetElement->extract();
-                if ($this->has($key)) {
+                if (! $this->createNewObjects() && $this->has($key)) {
                     $fieldset = $this->get($key);
                     if ($fieldset instanceof Fieldset && $fieldset->allowObjectBinding($value)) {
                         $fieldset->setObject($value);

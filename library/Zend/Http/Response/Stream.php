@@ -26,7 +26,7 @@ class Stream extends Response
     protected $contentLength = null;
 
     /**
-     * The portion of the body that has alredy been streamed
+     * The portion of the body that has already been streamed
      *
      * @var int
      */

@@ -236,7 +236,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test rewind() resets the interators pointer
+     * @testdox unit test: Test rewind() resets the iterators pointer
      * @covers Zend\Db\Adapter\ParameterContainer::rewind
      */
     public function testRewind()

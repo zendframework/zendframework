@@ -219,7 +219,7 @@ class Mvc extends AbstractPage
             $options['fragment'] = $fragment;
         }
 
-        if (($query = $this->getQuery()) != null) {
+        if (null !== ($query = $this->getQuery())) {
             $options['query'] = $query;
         }
 
@@ -300,13 +300,12 @@ class Mvc extends AbstractPage
      * Sets URL query part to use when assembling URL
      *
      * @see getHref()
-     *
      * @param  array|string|null $query    URL query part
      * @return self   fluent interface, returns self
      */
     public function setQuery($query)
     {
-        $this->query = $query;
+        $this->query      = $query;
         $this->hrefCache  = null;
         return $this;
     }

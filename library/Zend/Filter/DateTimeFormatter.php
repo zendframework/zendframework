@@ -48,6 +48,7 @@ class DateTimeFormatter extends AbstractFilter
      * Filter a datetime string by normalizing it to the filters specified format
      *
      * @param  string $value
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public function filter($value)
@@ -56,24 +57,23 @@ class DateTimeFormatter extends AbstractFilter
             $result = $this->normalizeDateTime($value);
         } catch (\Exception $ex) {
             // DateTime threw an exception, an invalid date string was provided
-            return $value;
+            throw new Exception\InvalidArgumentException($ex);
         }
 
         return $result;
     }
 
     /**
-     * Attempt to convert a string into a valid DateTime object
+     * Normalize the provided value to a formatted string
      *
-     * @param string $value
-     * @returns DateTime
-     * @throws Exception
+     * @param string|int|DateTime $value
+     * @returns string
      */
     protected function normalizeDateTime($value)
     {
         if (is_int($value)) {
             $dateTime = new DateTime('@' . $value);
-        } else {
+        } elseif (!$value instanceof DateTime) {
             $dateTime = new DateTime($value);
         }
 

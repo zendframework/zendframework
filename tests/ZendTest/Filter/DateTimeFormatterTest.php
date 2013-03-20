@@ -76,10 +76,11 @@ class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2013-02-01T17:30:01+0000', $result);
     }
 
-    public function testOriginalValueReturnedOnInvalidInput()
+    public function testInvalidArgumentExceptionThrownOnInvalidInput()
     {
+        $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException');
+
         $filter = new DateTimeFormatter();
         $result = $filter->filter('2013-31-31');
-        $this->assertEquals('2013-31-31', $result);
     }
 }

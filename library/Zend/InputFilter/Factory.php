@@ -234,8 +234,8 @@ class Factory
         }
 
         if ($inputFilter instanceof CollectionInputFilter) {
-            if (isset($inputFilterSpecification['inputfilter'])) {
-                $inputFilter->setInputFilter($inputFilterSpecification['inputfilter']);
+            if (isset($inputFilterSpecification['input_filter'])) {
+                $inputFilter->setInputFilter($inputFilterSpecification['input_filter']);
             }
             if (isset($inputFilterSpecification['count'])) {
                 $inputFilter->setCount($inputFilterSpecification['count']);

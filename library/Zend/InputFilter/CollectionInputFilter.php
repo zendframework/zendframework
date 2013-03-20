@@ -125,14 +125,9 @@ class CollectionInputFilter extends InputFilter
      */
     public function isValid()
     {
-        $inputCollection = array();
         $valid = true;
 
-        $i = 0;
-        while ($i <= $this->getCount() - 1) {
-            $inputCollection[] = $this->validationGroup ?: array_keys($this->inputs);
-            $i++;
-        }
+        $inputCollection = array_fill(0, $this->getCount(), $this->validationGroup ?: array_keys($this->inputs));
 
         foreach ($inputCollection as $key => $inputs) {
             $this->data = array();

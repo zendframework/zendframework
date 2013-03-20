@@ -1137,8 +1137,8 @@ class FormTest extends TestCase
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'items' => array(
-                'type'        => 'Zend\InputFilter\CollectionInputFilter',
-                'inputfilter' => new InputFilter(),
+                'type'         => 'Zend\InputFilter\CollectionInputFilter',
+                'input_filter' => new InputFilter(),
             ),
         ));
 

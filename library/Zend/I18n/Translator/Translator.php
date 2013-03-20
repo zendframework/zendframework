@@ -505,11 +505,10 @@ class Translator
             }
         }
 
-        $messagesLoaded = (
-            $this->loadMessagesFromRemote($textDomain, $locale)
-            || $this->loadMessagesFromPatterns($textDomain, $locale)
-            || $this->loadMessagesFromFiles($textDomain, $locale)
-        );
+        $messagesLoaded  = false;
+        $messagesLoaded |= $this->loadMessagesFromRemote($textDomain, $locale);
+        $messagesLoaded |= $this->loadMessagesFromPatterns($textDomain, $locale);
+        $messagesLoaded |= $this->loadMessagesFromFiles($textDomain, $locale);
 
         if (!$messagesLoaded) {
             $this->messages[$textDomain][$locale] = null;

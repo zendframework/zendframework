@@ -37,7 +37,7 @@ class Mvc extends AbstractPage
     /**
      * URL query part to use when assembling URL
      *
-     * @var string
+     * @var array|string
      */
     protected $query;
 

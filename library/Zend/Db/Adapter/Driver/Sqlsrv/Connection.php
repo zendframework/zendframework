@@ -44,7 +44,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Constructor
      *
-     * @param array|resource $connectionInfo
+g     * @param array|resource $connectionInfo
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      */
     public function __construct($connectionInfo)
@@ -147,7 +147,9 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      */
     public function getResource()
     {
-        $this->connect();
+        if (!$this->isConnected()) {
+            $this->connect();
+        }
         return $this->resource;
     }
 

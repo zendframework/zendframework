@@ -14,6 +14,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\Http\Regex as RegexRoute;
 use Zend\Mvc\Router\Http\Literal as LiteralRoute;
+use Zend\Mvc\Router\Http\Segment as SegmentRoute;
 use Zend\Mvc\Router\Http\TreeRouteStack;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -498,4 +499,29 @@ class MvcTest extends TestCase
         $page->getHref();
         $page->setDefaultRouter(null);
     }
+
+    public function testMvcPageParamsInheritRouteMatchParams()
+    {
+        $page = new Page\Mvc(array(
+            'label' => 'lollerblades',
+            'route' => 'lollerblades'
+        ));
+
+        $route = new SegmentRoute('/lollerblades/view/:serialNumber');
+
+        $router = new TreeRouteStack;
+        $router->addRoute('lollerblades', $route);
+
+        $routeMatch = new RouteMatch(array(
+            'serialNumber' => 23,
+        ));
+        $routeMatch->setMatchedRouteName('lollerblades');
+
+        $page->setRouter($router);
+        $page->setRouteMatch($routeMatch);
+
+        $this->assertEquals('/lollerblades/view/23', $page->getHref());
+    }
+
+
 }

@@ -10,8 +10,6 @@
 namespace Zend\Mvc\Router\Http;
 
 use Traversable;
-use Zend\I18n\Translator\Translator;
-use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Mvc\Router\Exception;
 use Zend\Mvc\Router\SimpleRouteStack;
 use Zend\Stdlib\ArrayUtils;
@@ -21,7 +19,7 @@ use Zend\Uri\Http as HttpUri;
 /**
  * Tree search implementation.
  */
-class TreeRouteStack extends SimpleRouteStack implements TranslatorAwareInterface
+class TreeRouteStack extends SimpleRouteStack
 {
     /**
      * Base URL.
@@ -36,27 +34,6 @@ class TreeRouteStack extends SimpleRouteStack implements TranslatorAwareInterfac
      * @var HttpUri
      */
     protected $requestUri;
-
-    /**
-     * Translator used for translatable segments.
-     *
-     * @var Translator
-     */
-    protected $translator;
-
-    /**
-     * Whether the translator is enabled.
-     *
-     * @var boolean
-     */
-    protected $translatorEnabled = true;
-
-    /**
-     * Translator text domain to use.
-     *
-     * @var string
-     */
-    protected $translatorTextDomain = 'default';
 
     /**
      * init(): defined by SimpleRouteStack.
@@ -171,14 +148,6 @@ class TreeRouteStack extends SimpleRouteStack implements TranslatorAwareInterfac
             $this->setRequestUri($uri);
         }
 
-        if ($this->hasTranslator() && $this->isTranslatorEnabled() && !isset($options['translator'])) {
-            $options['translator'] = $this->getTranslator();
-        }
-
-        if (!isset($options['text_domain'])) {
-            $options['text_domain'] = $this->getTranslatorTextDomain();
-        }
-
         if ($baseUrlLength !== null) {
             $pathLength = strlen($uri->getPath()) - $baseUrlLength;
 
@@ -251,14 +220,6 @@ class TreeRouteStack extends SimpleRouteStack implements TranslatorAwareInterfac
             $options['uri'] = $uri;
         } else {
             $uri = $options['uri'];
-        }
-
-        if ($this->hasTranslator() && $this->isTranslatorEnabled() && !isset($options['translator'])) {
-            $options['translator'] = $this->getTranslator();
-        }
-
-        if (!isset($options['text_domain'])) {
-            $options['text_domain'] = $this->getTranslatorTextDomain();
         }
 
         $path = $this->baseUrl . $route->assemble(array_merge($this->defaultParams, $params), $options);
@@ -334,95 +295,5 @@ class TreeRouteStack extends SimpleRouteStack implements TranslatorAwareInterfac
     public function getRequestUri()
     {
         return $this->requestUri;
-    }
-
-    /**
-     * setTranslator(): defined by TranslatorAwareInterface.
-     *
-     * @see    TranslatorAwareInterface::setTranslator()
-     * @param  Translator $translator
-     * @param  string     $textDomain
-     * @return TreeRouteStack
-     */
-    public function setTranslator(Translator $translator = null, $textDomain = null)
-    {
-        $this->translator = $translator;
-
-        if ($textDomain !== null) {
-            $this->setTranslatorTextDomain($textDomain);
-        }
-
-        return $this;
-    }
-
-    /**
-     * getTranslator(): defined by TranslatorAwareInterface.
-     *
-     * @see    TranslatorAwareInterface::getTranslator()
-     * @return Translator
-     */
-    public function getTranslator()
-    {
-        return $this->translator;
-    }
-
-    /**
-     * hasTranslator(): defined by TranslatorAwareInterface.
-     *
-     * @see    TranslatorAwareInterface::hasTranslator()
-     * @return boolean
-     */
-    public function hasTranslator()
-    {
-        return $this->translator !== null;
-    }
-
-    /**
-     * setTranslatorEnabled(): defined by TranslatorAwareInterface.
-     *
-     * @see    TranslatorAwareInterface::setTranslatorEnabled()
-     * @param  boolean $enabled
-     * @return TreeRouteStack
-     */
-    public function setTranslatorEnabled($enabled = true)
-    {
-        $this->translatorEnabled = $enabled;
-        return $this;
-    }
-
-    /**
-     * isTranslatorEnabled(): defined by TranslatorAwareInterface.
-     *
-     * @see    TranslatorAwareInterface::isTranslatorEnabled()
-     * @return boolean
-     */
-    public function isTranslatorEnabled()
-    {
-        return $this->translatorEnabled;
-    }
-
-    /**
-     * setTranslatorTextDomain(): defined by TranslatorAwareInterface.
-     *
-     * @see    TranslatorAwareInterface::setTranslatorTextDomain()
-     * @param  string $textDomain
-     * @return mixed
-     */
-    public function setTranslatorTextDomain($textDomain = 'default')
-    {
-        $this->translatorTextDomain = $textDomain;
-
-        return $this;
-    }
-
-    /**
-     * getTranslatorTextDomain(): defined by TranslatorAwareInterface.
-     *
-     * @see    TranslatorAwareInterface::getTranslatorTextDomain()
-     * @return string
-     */
-    public function getTranslatorTextDomain()
-    {
-        return $this->translatorTextDomain;
     }
 }

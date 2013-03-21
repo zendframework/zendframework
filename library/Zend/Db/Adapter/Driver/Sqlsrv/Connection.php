@@ -44,7 +44,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Constructor
      *
-g     * @param array|resource $connectionInfo
+     * @param array|resource $connectionInfo
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      */
     public function __construct($connectionInfo)

@@ -72,6 +72,16 @@ class Rule
     }
 
     /**
+     * Get number of possible plural forms.
+     *
+     * @return integer
+     */
+    public function getNumPlurals()
+    {
+        return $this->numPlurals;
+    }
+
+    /**
      * Evaluate a part of an ast.
      *
      * @param  array   $ast

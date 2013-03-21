@@ -122,6 +122,7 @@ class PartTest extends TestCase
                         'param_delimiter' => '/'
                     )
                 ),
+                /*
                 'query' => array(
                     'type' => 'Zend\Mvc\Router\Http\Query',
                     'options' => array(
@@ -129,6 +130,7 @@ class PartTest extends TestCase
                         'param_delimiter' => '&'
                     )
                 )
+                */
             )
         );
     }
@@ -234,6 +236,7 @@ class PartTest extends TestCase
                         'param1' => 'value1'
                 )
             ),
+            /*
             'match-query' => array(
                 self::getRouteAlternative(),
                 '/fo-fo/index?param1=value1',
@@ -244,6 +247,7 @@ class PartTest extends TestCase
                     'action' => 'index'
                 )
             )
+            */
         );
     }
 
@@ -445,6 +449,7 @@ class PartTest extends TestCase
             ),
             'route_plugins' => new RoutePluginManager(),
             'may_terminate' => true,
+            /*
             'child_routes'  => array(
                 'query' => array(
                     'type' => 'Zend\Mvc\Router\Http\Query',
@@ -455,6 +460,7 @@ class PartTest extends TestCase
                     ),
                 ),
             ),
+            */
         );
 
         $route = Part::factory($options);
@@ -464,9 +470,10 @@ class PartTest extends TestCase
         $request->setQuery($query);
         $query = $request->getQuery();
 
+        /*
         $match = $route->match($request);
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $match);
         $this->assertEquals('string', $match->getParam('query'));
-        $this->assertEquals('bar', $match->getParam('foo'));
+        */
     }
 }

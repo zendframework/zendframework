@@ -19,8 +19,15 @@ use Zend\Uri\Http;
 
 class QueryTest extends TestCase
 {
-    public static function routeProvider()
+    public function setUp()
     {
+        $this->markTestSkipped('Query route part has been deprecated in ZF as of 2.1.4');
+    }
+
+    public function routeProvider()
+    {
+        // Have to setup error handler here as well, as PHPUnit calls on
+        // provider methods outside the scope of setUp().
         return array(
             'simple-match' => array(
                 new Query(),
@@ -50,7 +57,6 @@ class QueryTest extends TestCase
     }
 
     /**
-     * @dataProvider routeProvider
      * @param        Query $route
      * @param        string   $path
      * @param        integer  $offset
@@ -65,7 +71,6 @@ class QueryTest extends TestCase
     }
 
     /**
-     * @dataProvider routeProvider
      * @param        Query $route
      * @param        string   $path
      * @param        integer  $offset
@@ -94,7 +99,8 @@ class QueryTest extends TestCase
         $route   = new Query();
         $request = new BaseRequest();
         $match   = $route->match($request);
-        $this->assertNull($match);
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $match);
+        $this->assertEquals(array(), $match->getParams());
     }
 
     public function testGetAssembledParams()

@@ -15,6 +15,7 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Sql\Sql;
 use Zend\Validator\Db\RecordExists;
+use ZendTest\Db\TestAsset\TrustingSql92Platform;
 
 /**
  * @category   Zend
@@ -268,7 +269,7 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
         );
         $select = $validator->getSelect();
         $this->assertInstanceOf('Zend\Db\Sql\Select', $select);
-        $this->assertEquals('SELECT "my"."users"."field1" AS "field1" FROM "my"."users" WHERE "field1" = \'\' AND "foo" != \'bar\'', $select->getSqlString());
+        $this->assertEquals('SELECT "my"."users"."field1" AS "field1" FROM "my"."users" WHERE "field1" = \'\' AND "foo" != \'bar\'', $select->getSqlString(new TrustingSql92Platform()));
 
         $sql = new Sql($this->getMockHasResult());
         $statement = $sql->prepareStatementForSqlObject($select);

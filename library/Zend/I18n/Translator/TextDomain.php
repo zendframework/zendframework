@@ -10,6 +10,7 @@
 namespace Zend\I18n\Translator;
 
 use ArrayObject;
+use Zend\I18n\Exception;
 use Zend\I18n\Translator\Plural\Rule as PluralRule;
 
 /**
@@ -50,5 +51,32 @@ class TextDomain extends ArrayObject
         }
 
         return $this->pluralRule;
+    }
+
+    /**
+     * Merge another text domain with the current one.
+     *
+     * The plural rule of both text domains must be compatible for a successful
+     * merge. We are only validating the number of plural forms though, as the
+     * same rule could be made up with different expression.
+     *
+     * @param  TextDomain $textDomain
+     * @return TextDomain
+     * @throws Exception\RuntimeException
+     */
+    public function merge(TextDomain $textDomain)
+    {
+        if ($this->getPluralRule()->getNumPlurals() !== $textDomain->getPluralRule()->getNumPlurals()) {
+            throw new Exception\RuntimeException('Plural rule of merging text domain is not compatible with the current one');
+        }
+
+        $this->exchangeArray(
+            array_replace(
+                $this->getArrayCopy(),
+                $textDomain->getArrayCopy()
+            )
+        );
+
+        return $this;
     }
 }

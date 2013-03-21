@@ -75,7 +75,22 @@ class SqlServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteValue()
     {
+        $this->setExpectedException(
+            'PHPUnit_Framework_Error',
+            'Attempting to quote a value in Zend\Db\Adapter\Platform\SqlServer without extension/driver support can introduce security vulnerabilities in a production environment'
+        );
         $this->assertEquals("'value'", $this->platform->quoteValue('value'));
+    }
+
+    /**
+     * @covers Zend\Db\Adapter\Platform\SqlServer::quoteTrustedValue
+     */
+    public function testQuoteTrustedValue()
+    {
+        $this->assertEquals("'value'", $this->platform->quoteTrustedValue('value'));
+        $this->assertEquals("'Foo O''Bar'", $this->platform->quoteTrustedValue("Foo O'Bar"));
+        $this->assertEquals("'''; DELETE FROM some_table; -- '", $this->platform->quoteTrustedValue('\'; DELETE FROM some_table; -- '));
+        $this->assertEquals("'\\''; DELETE FROM some_table; -- '", $this->platform->quoteTrustedValue('\\\'; DELETE FROM some_table; -- '));
     }
 
     /**
@@ -83,9 +98,11 @@ class SqlServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testQuoteValueList()
     {
+        $this->setExpectedException(
+            'PHPUnit_Framework_Error',
+            'Attempting to quote a value in Zend\Db\Adapter\Platform\SqlServer without extension/driver support can introduce security vulnerabilities in a production environment'
+        );
         $this->assertEquals("'Foo O''Bar'", $this->platform->quoteValueList("Foo O'Bar"));
-        $this->assertEquals("'Foo O''Bar'", $this->platform->quoteValueList(array("Foo O'Bar")));
-        $this->assertEquals("'value', 'Foo O''Bar'", $this->platform->quoteValueList(array('value',"Foo O'Bar")));
     }
 
     /**

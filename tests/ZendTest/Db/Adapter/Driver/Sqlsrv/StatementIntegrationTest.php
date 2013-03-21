@@ -6,7 +6,7 @@ use Zend\Db\Adapter\Driver\Sqlsrv\Statement;
 
 /**
  * @group integration
- * @group integration-sqlsrv
+ * @group integration-sqlserver
  */
 class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
 {

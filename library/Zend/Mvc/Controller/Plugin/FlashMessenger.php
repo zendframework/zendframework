@@ -533,7 +533,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Clear messages from the current request and current namespace
      *
-     * @return bool
+     * @return bool True if current messages were cleared, false if none existed.
      */
     public function clearCurrentMessages()
     {
@@ -552,7 +552,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
      * Clear messages from the current namespace
      *
      * @param  string $namespaceToClear
-     * @return boolean
+     * @return boolean True if current messages were cleared from the given namespace, false if none existed.
      */
     public function clearCurrentMessagesFromNamespace($namespaceToClear)
     {
@@ -567,7 +567,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Clear messages from the container
      *
-     * @return boolean
+     * @return boolean True if current messages were cleared from the container, false if none existed.
      */
     public function clearCurrentMessagesFromContainer()
     {

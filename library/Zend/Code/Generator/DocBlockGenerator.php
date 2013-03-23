@@ -198,7 +198,7 @@ class DocBlockGenerator extends AbstractGenerator
      */
     public function setWordWrap($value)
     {
-        $this->wordwrap = (boolean) $value;
+        $this->wordwrap = (bool) $value;
         return $this;
     }
 

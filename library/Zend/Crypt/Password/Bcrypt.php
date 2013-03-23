@@ -182,7 +182,7 @@ class Bcrypt implements PasswordInterface
      */
     public function setBackwardCompatibility($value)
     {
-        $this->backwardCompatibility = (boolean) $value;
+        $this->backwardCompatibility = (bool) $value;
         return $this;
     }
 

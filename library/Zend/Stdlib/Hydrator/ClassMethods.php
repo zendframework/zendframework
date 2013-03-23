@@ -66,7 +66,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     }
 
     /**
-     * @param  boolean      $underscoreSeparatedKeys
+     * @param  bool      $underscoreSeparatedKeys
      * @return ClassMethods
      */
     public function setUnderscoreSeparatedKeys($underscoreSeparatedKeys)
@@ -77,7 +77,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getUnderscoreSeparatedKeys()
     {

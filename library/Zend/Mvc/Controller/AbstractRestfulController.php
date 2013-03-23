@@ -361,7 +361,7 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @param  Request $request
      * @param  string|null $contentType
-     * @return boolean
+     * @return bool
      */
     public function requestHasContentType(Request $request, $contentType = '')
     {

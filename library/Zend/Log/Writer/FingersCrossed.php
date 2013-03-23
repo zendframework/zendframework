@@ -44,7 +44,7 @@ class FingersCrossed extends AbstractWriter
     /**
      * Flag if buffering is enabled
      *
-     * @var boolean
+     * @var bool
      */
     protected $buffering = true;
 
@@ -189,7 +189,7 @@ class FingersCrossed extends AbstractWriter
      * Check if buffered data should be flushed
      *
      * @param array $event event data
-     * @return boolean true if buffered data should be flushed
+     * @return bool true if buffered data should be flushed
      */
     protected function isActivated(array $event)
     {

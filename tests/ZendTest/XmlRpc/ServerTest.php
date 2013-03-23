@@ -273,7 +273,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      * Expects:
      * - class:
      *
-     * Returns: boolean
+     * Returns: bool
      */
     public function testSetResponseClass()
     {

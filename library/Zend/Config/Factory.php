@@ -127,7 +127,7 @@ class Factory
      *
      * @param string $filename
      * @param array|Config $config
-     * @return boolean TRUE on success | FALSE on failure
+     * @return bool TRUE on success | FALSE on failure
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */

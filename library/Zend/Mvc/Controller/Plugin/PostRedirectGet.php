@@ -87,7 +87,7 @@ class PostRedirectGet extends AbstractPlugin
      * TODO: Good candidate for traits method in PHP 5.4 with FilePostRedirectGet plugin
      *
      * @param  string  $redirect
-     * @param  boolean $redirectToUrl
+     * @param  bool $redirectToUrl
      * @return \Zend\Http\Response
      * @throws \Zend\Mvc\Exception\RuntimeException
      */

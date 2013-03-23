@@ -83,7 +83,7 @@ class TagManager
 
     /**
      * @param  string $tagName
-     * @return boolean
+     * @return bool
      */
     public function hasTag($tagName)
     {

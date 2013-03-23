@@ -18,7 +18,7 @@ class MockCallUserFunc
     /**
      * Whether to mock the call_user_func function.
      *
-     * @var boolean
+     * @var bool
      */
     public static $mock = false;
 

@@ -230,7 +230,7 @@ class DotNet extends SOAPClient
     /**
      * Should NTLM authentication be used?
      *
-     * @var boolean
+     * @var bool
      */
     private $useNtlm = false;
 }

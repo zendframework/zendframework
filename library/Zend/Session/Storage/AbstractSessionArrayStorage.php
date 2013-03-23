@@ -80,7 +80,7 @@ abstract class AbstractSessionArrayStorage implements IteratorAggregate, Storage
      * Isset Offset
      *
      * @param  mixed   $key
-     * @return boolean
+     * @return bool
      */
     public function __isset($key)
     {
@@ -112,7 +112,7 @@ abstract class AbstractSessionArrayStorage implements IteratorAggregate, Storage
      * Offset Exists
      *
      * @param  mixed   $key
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($key)
     {

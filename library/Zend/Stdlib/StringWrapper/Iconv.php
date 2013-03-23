@@ -262,7 +262,7 @@ class Iconv extends AbstractStringWrapper
      * Convert a string from defined encoding to the defined convert encoding
      *
      * @param string  $str
-     * @param boolean $reverse
+     * @param bool $reverse
      * @return string|false
      */
     public function convert($str, $reverse = false)

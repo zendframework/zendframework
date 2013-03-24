@@ -188,9 +188,15 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
      */
     protected function createFromFactory($canonicalName, $requestedName)
     {
-        $factory = $this->factories[$canonicalName];
+        $factory            = $this->factories[$canonicalName];
+        $hasCreationOptions = true;
+
+        if (null === $this->creationOptions || (is_array($this->creationOptions) && empty($this->creationOptions))) {
+            $hasCreationOptions = false;
+        }
+
         if (is_string($factory) && class_exists($factory, true)) {
-            if (null === $this->creationOptions || (is_array($this->creationOptions) && empty($this->creationOptions))) {
+            if (!$hasCreationOptions) {
                 $factory = new $factory();
             } else {
                 $factory = new $factory($this->creationOptions);
@@ -200,6 +206,10 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
         }
 
         if ($factory instanceof FactoryInterface) {
+            if ($hasCreationOptions && method_exists($factory, 'setCreationOptions')) {
+                $factory->setCreationOptions($this->creationOptions);
+            }
+
             $instance = $this->createServiceViaCallback(array($factory, 'createService'), $canonicalName, $requestedName);
         } elseif (is_callable($factory)) {
             $instance = $this->createServiceViaCallback($factory, $canonicalName, $requestedName);

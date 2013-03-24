@@ -66,7 +66,7 @@ class ExcludeMimeType extends MimeType
             }
 
             if (empty($this->finfo)) {
-                $this->finfo = finfo_open($const);
+                $this->finfo = finfo_open(FILEINFO_MIME_TYPE);
             }
 
             $this->type = null;

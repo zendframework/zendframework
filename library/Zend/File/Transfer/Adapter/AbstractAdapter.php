@@ -1232,7 +1232,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
 
             if (empty($mime)) {
                 ErrorHandler::start();
-                $mime = finfo_open($const);
+                $mime = finfo_open(FILEINFO_MIME_TYPE);
                 ErrorHandler::stop();
             }
 

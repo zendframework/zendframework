@@ -383,7 +383,7 @@ class MimeType extends AbstractValidator
 
             if (empty($this->finfo)) {
                 ErrorHandler::start(E_NOTICE|E_WARNING);
-                $this->finfo = finfo_open($const);
+                $this->finfo = finfo_open(FILEINFO_MIME_TYPE);
                 ErrorHandler::stop();
             }
 

@@ -18,15 +18,15 @@ class AclListener
 {
     /**
      * Determines whether a page should be accepted by ACL when iterating
-     * 
+     *
      * - If helper has no ACL, page is accepted
-     * - If page has a resource or privilege defined, page is accepted if the 
+     * - If page has a resource or privilege defined, page is accepted if the
      *   ACL allows access to it using the helper's role
      * - If page has no resource or privilege, page is accepted
      * - If helper has ACL and role:
      *      - Page is accepted if it has no resource or privilege.
      *      - Page is accepted if ACL allows page's resource or privilege.
-     * 
+     *
      * @param   MvcEvent    $event
      * @return  boolean
      */
@@ -37,7 +37,7 @@ class AclListener
         $acl      = $params['acl'];
         $page     = $params['page'];
         $role     = $params['role'];
-        
+
         if (!$acl) {
             return $accepted;
         }
@@ -46,9 +46,9 @@ class AclListener
         $privilege = $page->getPrivilege();
 
         if ($resource || $privilege) {
-            $accepted = $acl->hasResource($resource) 
-                        && $acl->isAllowed($role, $resource, $privilege); 
-        }  
+            $accepted = $acl->hasResource($resource)
+                        && $acl->isAllowed($role, $resource, $privilege);
+        }
 
         return $accepted;
     }

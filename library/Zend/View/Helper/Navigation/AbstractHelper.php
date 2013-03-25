@@ -33,10 +33,10 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     TranslatorAwareInterface
 {
     /**
-     * @var EventManagerInterface 
+     * @var EventManagerInterface
      */
     protected $events;
-    
+
     /**
      * @var ServiceLocatorInterface
      */
@@ -159,7 +159,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
 
     /**
      * Set the event manager.
-     * 
+     *
      * @param   EventManagerInterface $events
      * @return  AbstractHelper
      */
@@ -169,17 +169,17 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
             __CLASS__,
             get_called_class(),
         ));
-        
+
         $this->events = $events;
-        
+
         $this->setDefaultListeners();
-        
+
         return $this;
     }
 
     /**
      * Get the event manager.
-     * 
+     *
      * @return  EventManagerInterface
      */
     public function getEventManager()
@@ -187,10 +187,10 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
         if (null === $this->events) {
             $this->setEventManager(new EventManager());
         }
-        
+
         return $this->events;
     }
-    
+
     /**
      * Sets navigation container the helper operates on by default
      *
@@ -765,31 +765,31 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
 
     /**
      * Determines whether a page should be accepted when iterating
-     * 
-     * Default listener may be 'overridden' by attaching listener to 'isAllowed' 
-     * method. Listener must be 'short circuited' if overriding default ACL 
-     * listener.   
+     *
+     * Default listener may be 'overridden' by attaching listener to 'isAllowed'
+     * method. Listener must be 'short circuited' if overriding default ACL
+     * listener.
      *
      * Rules:
      * - If a page is not visible it is not accepted, unless RenderInvisible has
      *   been set to true
      * - If $useAcl is true (default is true):
-     *      - Page is accepted if listener returns true, otherwise false 
+     *      - Page is accepted if listener returns true, otherwise false
      * - If page is accepted and $recursive is true, the page
      *   will not be accepted if it is the descendant of a non-accepted page
      *
      * @param   AbstractPage    $page       page to check
      * @param   bool            $recursive  [optional] if true, page will not be
-     *                                      accepted if it is the descendant of 
+     *                                      accepted if it is the descendant of
      *                                      a page that is not accepted. Default
      *                                      is true
-     * 
+     *
      * @return  bool                        Whether page should be accepted
      */
     public function accept(AbstractPage $page, $recursive = true)
     {
         $accept = true;
-        
+
         if (!$page->isVisible(false) && !$this->getRenderInvisible()) {
             $accept = false;
         } elseif ($this->getUseAcl()) {
@@ -797,11 +797,11 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
             $role = $this->getRole();
             $params = array('acl' => $acl, 'page' => $page, 'role' => $role);
             $accept = $this->isAllowed($params);
-        } 
-        
+        }
+
         if ($accept && $recursive) {
             $parent = $page->getParent();
-            
+
             if ($parent instanceof AbstractPage) {
                 $accept = $this->accept($parent, true);
             }
@@ -814,7 +814,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      * Determines whether a page should be allowed given certain parameters
      *
      * @param   array   $params
-     * @return  boolean 
+     * @return  boolean
      */
     protected function isAllowed($params)
     {
@@ -914,7 +914,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
             ));
         }
     }
-    
+
     /**
      * Attaches default ACL listeners, if ACLs are in use
      */
@@ -923,10 +923,10 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
         if (!$this->getUseAcl()) {
             return;
         }
-            
+
         $this->getEventManager()->getSharedManager()->attach(
-            'Zend\View\Helper\Navigation\AbstractHelper', 
-            'isAllowed', 
+            'Zend\View\Helper\Navigation\AbstractHelper',
+            'isAllowed',
             array('Zend\View\Helper\Navigation\Listener\AclListener', 'accept')
         );
     }

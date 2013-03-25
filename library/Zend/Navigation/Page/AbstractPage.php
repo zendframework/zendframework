@@ -107,7 +107,7 @@ abstract class AbstractPage extends AbstractContainer
      * @var string|null
      */
     protected $privilege;
-    
+
     /**
      * Permission associated with this page
      *
@@ -706,7 +706,7 @@ abstract class AbstractPage extends AbstractContainer
     {
         return $this->privilege;
     }
-    
+
     /**
      * Sets permission associated with this page
      *

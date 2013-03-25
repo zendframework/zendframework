@@ -233,6 +233,16 @@ class Factory
                 'Zend\InputFilter\InputFilterInterface', $class));
         }
 
+        if ($inputFilter instanceof CollectionInputFilter) {
+            if (isset($inputFilterSpecification['input_filter'])) {
+                $inputFilter->setInputFilter($inputFilterSpecification['input_filter']);
+            }
+            if (isset($inputFilterSpecification['count'])) {
+                $inputFilter->setCount($inputFilterSpecification['count']);
+            }
+            return $inputFilter;
+        }
+
         foreach ($inputFilterSpecification as $key => $value) {
 
             if (($value instanceof InputInterface)

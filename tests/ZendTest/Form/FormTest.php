@@ -1124,6 +1124,30 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->isValid());
     }
 
+    public function testDonNotApplyEmptyInputFiltersToSubFieldsetOfCollectionElementsWithCollectionInputFilters()
+    {
+        $collectionFieldset = new Fieldset('item');
+        $collectionFieldset->add(new Element('foo'));
+
+        $collection = new Element\Collection('items');
+        $collection->setCount(3);
+        $collection->setTargetElement($collectionFieldset);
+        $this->form->add($collection);
+
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter = $inputFilterFactory->createInputFilter(array(
+            'items' => array(
+                'type'         => 'Zend\InputFilter\CollectionInputFilter',
+                'input_filter' => new InputFilter(),
+            ),
+        ));
+
+        $this->form->setInputFilter($inputFilter);
+
+        $this->assertInstanceOf('Zend\InputFilter\CollectionInputFilter', $this->form->getInputFilter()->get('items'));
+        $this->assertCount(0, $this->form->getInputFilter()->get('items')->getInputs());
+    }
+
     public function testFormValidationCanHandleNonConsecutiveKeysOfCollectionInData()
     {
         $dataWithCollection = array(

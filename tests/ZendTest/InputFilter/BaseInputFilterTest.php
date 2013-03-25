@@ -640,6 +640,22 @@ class BaseInputFilterTest extends TestCase
 
         $filter->setData($data);
         $this->assertTrue($filter->isValid());
+    }
 
+    public function testGetInputs()
+    {
+        $filter = new InputFilter();
+
+        $foo = new Input('foo');
+        $bar = new Input('bar');
+
+        $filter->add($foo);
+        $filter->add($bar);
+
+        $filters = $filter->getInputs();
+
+        $this->assertCount(2, $filters);
+        $this->assertEquals('foo', $filters['foo']->getName());
+        $this->assertEquals('bar', $filters['bar']->getName());
     }
 }

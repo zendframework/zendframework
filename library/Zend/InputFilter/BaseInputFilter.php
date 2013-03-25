@@ -152,11 +152,22 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
             ));
         }
 
+        $inputs = $this->validationGroup ?: array_keys($this->inputs);
+        return $this->validateInputs($inputs);
+    }
+
+    /**
+     * Validate a set of inputs against the current data
+     *
+     * @param array $inputs
+     * @return boolean
+     */
+    protected function validateInputs(array $inputs)
+    {
         $this->validInputs   = array();
         $this->invalidInputs = array();
         $valid               = true;
 
-        $inputs = $this->validationGroup ?: array_keys($this->inputs);
         foreach ($inputs as $name) {
             $input = $this->inputs[$name];
             if (!array_key_exists($name, $this->data)
@@ -494,5 +505,15 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
         }
 
         return $unknownInputs;
+    }
+
+    /**
+     * Get an array of all inputs
+     *
+     * @return array
+     */
+    public function getInputs()
+    {
+        return $this->inputs;
     }
 }

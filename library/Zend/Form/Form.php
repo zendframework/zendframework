@@ -12,6 +12,7 @@ namespace Zend\Form;
 use Traversable;
 use Zend\Form\Element\Collection;
 use Zend\Form\Exception;
+use Zend\InputFilter\CollectionInputFilter;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
@@ -718,17 +719,21 @@ class Form extends Fieldset implements FormInterface
             $inputFilter->add($input, $name);
         }
 
-        foreach ($fieldset->getFieldsets() as $fieldset) {
-            $name = $fieldset->getName();
+        foreach ($fieldset->getFieldsets() as $childFieldset) {
+            $name = $childFieldset->getName();
 
-            if (!$fieldset instanceof InputFilterProviderInterface) {
+            if (!$childFieldset instanceof InputFilterProviderInterface) {
                 if (!$inputFilter->has($name)) {
                     // Add a new empty input filter if it does not exist (or the fieldset's object input filter),
                     // so that elements of nested fieldsets can be recursively added
-                    if ($fieldset->getObject() instanceof InputFilterAwareInterface) {
-                        $inputFilter->add($fieldset->getObject()->getInputFilter(), $name);
+                    if ($childFieldset->getObject() instanceof InputFilterAwareInterface) {
+                        $inputFilter->add($childFieldset->getObject()->getInputFilter(), $name);
                     } else {
-                        $inputFilter->add(new InputFilter(), $name);
+                        if ($fieldset instanceof Collection && $inputFilter instanceof CollectionInputFilter) {
+                            continue;
+                        } else {
+                            $inputFilter->add(new InputFilter(), $name);
+                        }
                     }
                 }
 
@@ -741,7 +746,7 @@ class Form extends Fieldset implements FormInterface
 
                 // Traverse the elements of the fieldset, and attach any
                 // defaults to the fieldset's input filter
-                $this->attachInputFilterDefaults($fieldsetFilter, $fieldset);
+                $this->attachInputFilterDefaults($fieldsetFilter, $childFieldset);
                 continue;
             }
 
@@ -751,12 +756,12 @@ class Form extends Fieldset implements FormInterface
             }
 
             // Create an input filter based on the specification returned from the fieldset
-            $spec   = $fieldset->getInputFilterSpecification();
+            $spec   = $childFieldset->getInputFilterSpecification();
             $filter = $inputFactory->createInputFilter($spec);
             $inputFilter->add($filter, $name);
 
             // Recursively attach sub filters
-            $this->attachInputFilterDefaults($filter, $fieldset);
+            $this->attachInputFilterDefaults($filter, $childFieldset);
         }
     }
 

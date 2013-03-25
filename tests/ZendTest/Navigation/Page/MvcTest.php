@@ -434,6 +434,7 @@ class MvcTest extends TestCase
 
         $options['privilege'] = null;
         $options['resource']  = null;
+        $options['permission']  = null;
         $options['pages']     = array();
         $options['type']      = 'Zend\Navigation\Page\Mvc';
 

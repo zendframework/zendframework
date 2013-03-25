@@ -75,7 +75,7 @@ class CredentialTreatmentAdapter extends AbstractAdapter
      *
      * @return Sql\Select
      */
-    protected function _authenticateCreateSelect()
+    protected function authenticateCreateSelect()
     {
         // build credential expression
         if (empty($this->credentialTreatment) || (strpos($this->credentialTreatment, '?') === false)) {
@@ -105,12 +105,12 @@ class CredentialTreatmentAdapter extends AbstractAdapter
      * @param  array $resultIdentity
      * @return AuthenticationResult
      */
-    protected function _authenticateValidateResult($resultIdentity)
+    protected function authenticateValidateResult($resultIdentity)
     {
         if ($resultIdentity['zend_auth_credential_match'] != '1') {
             $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
             $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
-            return $this->_authenticateCreateAuthResult();
+            return $this->authenticateCreateAuthResult();
         }
 
         unset($resultIdentity['zend_auth_credential_match']);
@@ -118,6 +118,6 @@ class CredentialTreatmentAdapter extends AbstractAdapter
 
         $this->authenticateResultInfo['code']       = AuthenticationResult::SUCCESS;
         $this->authenticateResultInfo['messages'][] = 'Authentication successful.';
-        return $this->_authenticateCreateAuthResult();
+        return $this->authenticateCreateAuthResult();
     }
 }

@@ -17,7 +17,7 @@ use Zend\Db\Sql\Predicate\Operator as SqlOp;
 
 class CallbackCheckAdapter extends AbstractAdapter
 {
-    
+
     /**
      * $credentialValidationCallback - This overrides the Treatment usage to provide a callback
      * that allows for validation to happen in code
@@ -26,7 +26,7 @@ class CallbackCheckAdapter extends AbstractAdapter
      */
     protected $credentialValidationCallback = null;
 
-    
+
     /**
      * __construct() - Sets configuration options
      *
@@ -68,7 +68,7 @@ class CallbackCheckAdapter extends AbstractAdapter
         return $this;
     }
 
-   
+
 
     /**
      * _authenticateCreateSelect() - This method creates a Zend\Db\Sql\Select object that
@@ -76,7 +76,7 @@ class CallbackCheckAdapter extends AbstractAdapter
      *
      * @return Sql\Select
      */
-    protected function _authenticateCreateSelect()
+    protected function authenticateCreateSelect()
     {
         // get select
         $dbSelect = clone $this->getDbSelect();
@@ -87,7 +87,7 @@ class CallbackCheckAdapter extends AbstractAdapter
         return $dbSelect;
     }
 
-    
+
 
     /**
      * _authenticateValidateResult() - This method attempts to validate that
@@ -97,25 +97,25 @@ class CallbackCheckAdapter extends AbstractAdapter
      * @param  array $resultIdentity
      * @return AuthenticationResult
      */
-    protected function _authenticateValidateResult($resultIdentity)
+    protected function authenticateValidateResult($resultIdentity)
     {
         try {
             $callbackResult = call_user_func($this->credentialValidationCallback, $resultIdentity[$this->credentialColumn], $this->credential);
         } catch (\Exception $e) {
             $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_UNCATEGORIZED;
             $this->authenticateResultInfo['messages'][] = $e->getMessage();
-            return $this->_authenticateCreateAuthResult();
+            return $this->authenticateCreateAuthResult();
         }
         if ($callbackResult !== true) {
             $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
             $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
-            return $this->_authenticateCreateAuthResult();
+            return $this->authenticateCreateAuthResult();
         }
 
         $this->resultRow = $resultIdentity;
 
         $this->authenticateResultInfo['code']       = AuthenticationResult::SUCCESS;
         $this->authenticateResultInfo['messages'][] = 'Authentication successful.';
-        return $this->_authenticateCreateAuthResult();
+        return $this->authenticateCreateAuthResult();
     }
 }

@@ -237,17 +237,17 @@ abstract class AbstractAdapter extends BaseAdapter
      */
     public function authenticate()
     {
-        $this->_authenticateSetup();
-        $dbSelect         = $this->_authenticateCreateSelect();
-        $resultIdentities = $this->_authenticateQuerySelect($dbSelect);
+        $this->authenticateSetup();
+        $dbSelect         = $this->authenticateCreateSelect();
+        $resultIdentities = $this->authenticateQuerySelect($dbSelect);
 
-        if (($authResult = $this->_authenticateValidateResultSet($resultIdentities)) instanceof AuthenticationResult) {
+        if (($authResult = $this->authenticateValidateResultSet($resultIdentities)) instanceof AuthenticationResult) {
             return $authResult;
         }
 
         // At this point, ambiguity is already done. Loop, check and break on success.
         foreach ($resultIdentities as $identity) {
-            $authResult = $this->_authenticateValidateResult($identity);
+            $authResult = $this->authenticateValidateResult($identity);
             if ($authResult->isValid()) {
                 break;
             }
@@ -264,7 +264,7 @@ abstract class AbstractAdapter extends BaseAdapter
      * @param  array $resultIdentity
      * @return AuthenticationResult
      */
-    abstract protected function _authenticateValidateResult($resultIdentity);
+    abstract protected function authenticateValidateResult($resultIdentity);
 
     /**
      * _authenticateCreateSelect() - This method creates a Zend\Db\Sql\Select object that
@@ -272,7 +272,7 @@ abstract class AbstractAdapter extends BaseAdapter
      *
      * @return Sql\Select
      */
-    abstract protected function _authenticateCreateSelect();
+    abstract protected function authenticateCreateSelect();
 
     /**
      * _authenticateSetup() - This method abstracts the steps involved with
@@ -282,7 +282,7 @@ abstract class AbstractAdapter extends BaseAdapter
      * @throws Exception\RuntimeException in the event that setup was not done properly
      * @return bool
      */
-    protected function _authenticateSetup()
+    protected function authenticateSetup()
     {
         $exception = null;
 
@@ -319,7 +319,7 @@ abstract class AbstractAdapter extends BaseAdapter
      * @throws Exception\RuntimeException when an invalid select object is encountered
      * @return array
      */
-    protected function _authenticateQuerySelect(Sql\Select $dbSelect)
+    protected function authenticateQuerySelect(Sql\Select $dbSelect)
     {
         $sql = new Sql\Sql($this->zendDb);
         $statement = $sql->prepareStatementForSqlObject($dbSelect);
@@ -347,29 +347,29 @@ abstract class AbstractAdapter extends BaseAdapter
      * @param  array $resultIdentities
      * @return bool|\Zend\Authentication\Result
      */
-    protected function _authenticateValidateResultSet(array $resultIdentities)
+    protected function authenticateValidateResultSet(array $resultIdentities)
     {
 
         if (count($resultIdentities) < 1) {
             $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
             $this->authenticateResultInfo['messages'][] = 'A record with the supplied identity could not be found.';
-            return $this->_authenticateCreateAuthResult();
+            return $this->authenticateCreateAuthResult();
         } elseif (count($resultIdentities) > 1 && false === $this->getAmbiguityIdentity()) {
             $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_IDENTITY_AMBIGUOUS;
             $this->authenticateResultInfo['messages'][] = 'More than one record matches the supplied identity.';
-            return $this->_authenticateCreateAuthResult();
+            return $this->authenticateCreateAuthResult();
         }
 
         return true;
     }
-    
+
     /**
      * Creates a Zend\Authentication\Result object from the information that
      * has been collected during the authenticate() attempt.
      *
      * @return AuthenticationResult
      */
-    protected function _authenticateCreateAuthResult()
+    protected function authenticateCreateAuthResult()
     {
         return new AuthenticationResult(
             $this->authenticateResultInfo['code'],
@@ -379,5 +379,5 @@ abstract class AbstractAdapter extends BaseAdapter
     }
 
 
-   
+
 }

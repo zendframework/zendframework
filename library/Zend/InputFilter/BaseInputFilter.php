@@ -170,6 +170,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
 
         foreach ($inputs as $name) {
             $input = $this->inputs[$name];
+            // Check for missing data on non-required input
             if ((!array_key_exists($name, $this->data)
                     || (null === $this->data[$name]))
                 && $input instanceof InputInterface

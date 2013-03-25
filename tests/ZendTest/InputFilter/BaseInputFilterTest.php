@@ -123,62 +123,73 @@ class BaseInputFilterTest extends TestCase
         return $filter;
     }
 
-    public function testCanValidateEntireDataset()
+    public function dataSets()
+    {
+        return array(
+            'valid-with-empty-and-null' => array(
+                array(
+                    'foo' => ' bazbat ',
+                    'bar' => '12345',
+                    'baz' => null,
+                    'qux' => '',
+                    'nest' => array(
+                        'foo' => ' bazbat ',
+                        'bar' => '12345',
+                        'baz' => null,
+                    ),
+                ),
+                true,
+            ),
+            'valid-with-empty' => array(
+                array(
+                    'foo' => ' bazbat ',
+                    'bar' => '12345',
+                    'qux' => '',
+                    'nest' => array(
+                        'foo' => ' bazbat ',
+                        'bar' => '12345',
+                    ),
+                ),
+                true,
+            ),
+            'invalid-with-empty-and-missing' => array(
+                array(
+                    'foo' => ' bazbat ',
+                    'bar' => '12345',
+                    'baz' => '',
+                    'nest' => array(
+                        'foo' => ' bazbat ',
+                        'bar' => '12345',
+                        'baz' => '',
+                    ),
+                ),
+                false,
+            ),
+            'invalid-with-empty' => array(
+                array(
+                    'foo' => ' baz bat ',
+                    'bar' => 'abc45',
+                    'baz' => ' ',
+                    'qux' => ' ',
+                    'nest' => array(
+                        'foo' => ' baz bat ',
+                        'bar' => '123ab',
+                        'baz' => ' ',
+                    ),
+                ),
+                false,
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider dataSets
+     */
+    public function testCanValidateEntireDataset($dataset, $expected)
     {
         $filter = $this->getInputFilter();
-        $validData = array(
-            'foo' => ' bazbat ',
-            'bar' => '12345',
-            'baz' => null,
-            'qux' => '',
-            'nest' => array(
-                'foo' => ' bazbat ',
-                'bar' => '12345',
-                'baz' => null,
-            ),
-        );
-        $filter->setData($validData);
-        $this->assertTrue($filter->isValid());
-
-        $filter = $this->getInputFilter();
-        $validData = array(
-            'foo' => ' bazbat ',
-            'bar' => '12345',
-            'qux' => '',
-            'nest' => array(
-                'foo' => ' bazbat ',
-                'bar' => '12345',
-            ),
-        );
-        $filter->setData($validData);
-        $this->assertTrue($filter->isValid());
-
-        $invalidData = array(
-            'foo' => ' bazbat ',
-            'bar' => '12345',
-            'baz' => '',
-            'nest' => array(
-                'foo' => ' bazbat ',
-                'bar' => '12345',
-                'baz' => '',
-            ),
-        );
-        $filter->setData($invalidData);
-        $this->assertFalse($filter->isValid());
-
-        $invalidData = array(
-            'foo' => ' baz bat ',
-            'bar' => 'abc45',
-            'baz' => ' ',
-            'qux' => ' ',
-            'nest' => array(
-                'foo' => ' baz bat ',
-                'bar' => '123ab',
-                'baz' => ' ',
-            ),
-        );
-        $filter->setData($invalidData);
-        $this->assertFalse($filter->isValid());
+        $filter->setData($dataset);
+        $this->assertSame($expected, $filter->isValid());
     }
 
     public function testCanValidatePartialDataset()

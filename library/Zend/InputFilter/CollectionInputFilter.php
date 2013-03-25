@@ -131,7 +131,7 @@ class CollectionInputFilter extends InputFilter
             return $valid;
         }
 
-        $inputCollection = array_fill(0, $this->getCount() , $this->validationGroup ?: array_keys($this->inputs));
+        $inputCollection = array_fill(0, $this->getCount(), $this->validationGroup ?: array_keys($this->inputs));
 
         foreach ($inputCollection as $key => $inputs) {
             $this->data = array();

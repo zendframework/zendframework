@@ -283,7 +283,7 @@ class DateTime extends AbstractValidator
     protected function getIntlDateFormatter()
     {
         if ($this->formatter == null || $this->invalidateFormatter) {
-            $this->formatter = new \IntlDateFormatter($this->getLocale(), $this->getDateType(), $this->getTimeType(),
+            $this->formatter = new IntlDateFormatter($this->getLocale(), $this->getDateType(), $this->getTimeType(),
                 $this->getTimezone(), $this->getCalendar(), $this->getPattern());
 
             $this->formatter->setLenient(false);

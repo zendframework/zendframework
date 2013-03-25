@@ -254,4 +254,11 @@ class RedisTest extends CommonAdapterTest
         $this->assertEquals($server, $this->_options->getServer(), 'Server was not set correctly through RedisOptions');
     }
 
+    public function testOptionsGetSetDatabase()
+    {
+        $database = 1;
+        $this->_options->setDatabase($database);
+        $this->assertEquals($database, $this->_options->getDatabase(), 'Database not set correctly using RedisOptions');
+    }
+
 }

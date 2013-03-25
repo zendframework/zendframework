@@ -10,34 +10,19 @@
 
 namespace ZendTest\EventManager;
 
-use ZendTest\EventManager\TestAsset\MockAbstractListenerAggregate;
+use ZendTest\EventManager\TestAsset\MockListenerAggregateTrait;
 
 /**
- * @category   Zend
- * @package    Zend_EventManager
- * @subpackage UnitTests
- * @group      Zend_EventManager
+ * @requires PHP 5.4
  */
-class AbstractListenerAggregateTest extends \PHPUnit_Framework_TestCase
+class ListenerAggregateTraitTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \ZendTest\EventManager\TestAsset\MockAbstractListenerAggregate
-     */
-    protected $listener;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setUp()
-    {
-        $this->listener = new MockAbstractListenerAggregate();
-    }
-
-    /**
-     * @covers \Zend\EventManager\AbstractListenerAggregate::detach
+     * @covers \Zend\EventManager\ListenerAggregateTrait::detach
      */
     public function testDetach()
     {
+        $listener              = new MockListenerAggregateTrait();
         $eventManager          = $this->getMock('Zend\\EventManager\\EventManagerInterface');
         $unrelatedEventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
         $callbackHandlers      = array();
@@ -50,12 +35,12 @@ class AbstractListenerAggregateTest extends \PHPUnit_Framework_TestCase
                 return $callbackHandlers[] = $test->getMock('Zend\\Stdlib\\CallbackHandler', array(), array(), '', false);
             }));
 
-        $this->listener->attach($eventManager);
-        $this->assertSame($callbackHandlers, $this->listener->getCallbacks());
+        $listener->attach($eventManager);
+        $this->assertSame($callbackHandlers, $listener->getCallbacks());
 
-        $this->listener->detach($unrelatedEventManager);
+        $listener->detach($unrelatedEventManager);
 
-        $this->assertSame($callbackHandlers, $this->listener->getCallbacks());
+        $this->assertSame($callbackHandlers, $listener->getCallbacks());
 
         $eventManager
             ->expects($this->exactly(2))
@@ -65,7 +50,7 @@ class AbstractListenerAggregateTest extends \PHPUnit_Framework_TestCase
             }))
             ->will($this->returnValue(true));
 
-        $this->listener->detach($eventManager);
-        $this->assertEmpty($this->listener->getCallbacks());
+        $listener->detach($eventManager);
+        $this->assertEmpty($listener->getCallbacks());
     }
 }

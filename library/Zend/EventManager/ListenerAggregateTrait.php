@@ -9,11 +9,11 @@
 
 namespace Zend\EventManager;
 
-
 /**
- * Abstract aggregate listener
+ * Provides logic to easily create aggregate listeners, without worrying about
+ * manually detaching events
  */
-abstract class AbstractListenerAggregate implements ListenerAggregateInterface
+trait ListenerAggregateTrait
 {
     /**
      * @var \Zend\Stdlib\CallbackHandler[]

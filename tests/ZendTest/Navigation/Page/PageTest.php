@@ -1099,6 +1099,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
             'resource' => 'joker',
             'privilege' => null,
+            'permission' => null,
 
             'foo'      => 'bar',
             'meaning'  => 42,
@@ -1117,6 +1118,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
                     'order'     => null,
                     'resource'  => null,
                     'privilege' => null,
+                    'permission' => null,
                     'active'    => null,
                     'visible'   => 1,
                     'pages'     => array(),
@@ -1136,6 +1138,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
                     'order'     => null,
                     'resource'  => null,
                     'privilege' => null,
+                    'permission' => null,
                     'active'    => null,
                     'visible'   => 1,
                     'pages'     => array(),

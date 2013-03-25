@@ -9,7 +9,9 @@
 
 namespace Zend\Cache\Storage\Plugin;
 
-abstract class AbstractPlugin implements PluginInterface
+use Zend\EventManager\AbstractListenerAggregate;
+
+abstract class AbstractPlugin extends AbstractListenerAggregate implements PluginInterface
 {
     /**
      * @var PluginOptions

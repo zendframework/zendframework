@@ -26,6 +26,8 @@ interface ListenerAggregateInterface
      * implementation will pass this to the aggregate.
      *
      * @param EventManagerInterface $events
+     *
+     * @return void
      */
     public function attach(EventManagerInterface $events);
 
@@ -33,6 +35,8 @@ interface ListenerAggregateInterface
      * Detach all previously attached listeners
      *
      * @param EventManagerInterface $events
+     *
+     * @return void
      */
     public function detach(EventManagerInterface $events);
 }

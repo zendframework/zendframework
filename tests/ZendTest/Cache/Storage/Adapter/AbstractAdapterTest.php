@@ -25,7 +25,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * Mock of the abstract storage adapter
      *
-     * @var Zend\Cache\Storage\Adapter\AbstractAdapter
+     * @var \Zend\Cache\Storage\Adapter\AbstractAdapter
      */
     protected $_storage;
 
@@ -131,8 +131,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         // test registered callback handles
         $handles = $plugin->getHandles();
-        $this->assertEquals(1, count($handles));
-        $this->assertEquals(count($plugin->getEventCallbacks()), count(current($handles)));
+        $this->assertCount(2, $handles);
 
         // test unregister a plugin
         $this->assertSame($this->_storage, $this->_storage->removePlugin($plugin));

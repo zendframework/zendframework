@@ -18,26 +18,16 @@
 
 namespace Zend\Mvc\View\Console;
 
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface as Events;
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View\Model\ConsoleModel;
 
-class CreateViewModelListener implements ListenerAggregateInterface
+class CreateViewModelListener extends AbstractListenerAggregate
 {
     /**
-     * Listeners we've registered
-     *
-     * @var array
-     */
-    protected $listeners = array();
-
-    /**
-     * Attach listeners
-     *
-     * @param  Events $events
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(Events $events)
     {
@@ -45,22 +35,6 @@ class CreateViewModelListener implements ListenerAggregateInterface
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'createViewModelFromArray'),  -80);
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'createViewModelFromNull'),   -80);
     }
-
-    /**
-     * Detach listeners
-     *
-     * @param  Events $events
-     * @return void
-     */
-    public function detach(Events $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
-    }
-
 
     /**
      * Inspect the result, and cast it to a ViewModel if a string is detected

@@ -9,21 +9,16 @@
 
 namespace Zend\Mvc\View\Http;
 
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Http\Response as HttpResponse;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\ViewModel;
 
-class RouteNotFoundStrategy implements ListenerAggregateInterface
+class RouteNotFoundStrategy extends AbstractListenerAggregate
 {
-    /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
     /**
      * Whether or not to display exceptions related to the 404 condition
      *
@@ -53,10 +48,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
     protected $reason = false;
 
     /**
-     * Attach the aggregate to the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
@@ -85,21 +77,6 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
     public function displayExceptions()
     {
         return $this->displayExceptions;
-    }
-
-    /**
-     * Detach aggregate listeners from the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
     }
 
     /**

@@ -32,7 +32,7 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
     /**
      * @var array
      */
-    protected $listeners = array();
+    protected $callbacks = array();
 
     /**
      * Constructor.
@@ -56,40 +56,32 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
     }
 
     /**
-     * Attach one or more listeners
-     *
-     * @param  EventManagerInterface $events
-     * @return LocatorRegistrationListener
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(
+        $this->callbacks[] = $events->attach(
             ModuleEvent::EVENT_LOAD_MODULES,
             array($this->moduleLoader, 'register'),
             9000
         );
 
         if ($this->generateCache) {
-            $this->listeners[] = $events->attach(
+            $this->callbacks[] = $events->attach(
                 ModuleEvent::EVENT_LOAD_MODULES_POST,
                 array($this, 'onLoadModulesPost')
             );
         }
-
-        return $this;
     }
 
     /**
-     * Detach all previously attached listeners
-     *
-     * @param  EventManagerInterface $events
-     * @return void
+     * {@inheritDoc}
      */
     public function detach(EventManagerInterface $events)
     {
-        foreach ($this->listeners as $key => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$key]);
+        foreach ($this->callbacks as $index => $callback) {
+            if ($events->detach($callback)) {
+                unset($this->callbacks[$index]);
             }
         }
     }

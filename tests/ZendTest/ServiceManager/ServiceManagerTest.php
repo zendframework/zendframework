@@ -728,4 +728,38 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($serviceManagerChild->get($foo1), $boo2);
         $this->assertEquals($this->serviceManager->get($foo1), $boo2);
     }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::create
+     * @covers Zend\ServiceManager\ServiceManager::setDelegate
+     */
+    public function testUsesDelegateWhenAvailable()
+    {
+        $delegate = $this->getMock('Zend\\ServiceManager\\DelegateFactoryInterface');
+
+        $this->serviceManager->setService('foo-delegate', $delegate);
+        $this->serviceManager->setDelegate('foo-service', 'foo-delegate');
+        $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
+
+        $delegate
+            ->expects($this->once())
+            ->method('createDelegateWithName')
+            ->with(
+                $this->serviceManager,
+                'fooservice',
+                'foo-service',
+                $this->callback(function ($callback) {
+                    if (!is_callable($callback)) {
+                        return false;
+                    }
+
+                    $service = call_user_func($callback);
+
+                    return $service instanceof \stdClass;
+                })
+            )
+            ->will($this->returnValue($delegate));
+
+        $this->assertSame($delegate, $this->serviceManager->create('foo-service'));
+    }
 }

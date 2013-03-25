@@ -814,13 +814,11 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      * Determines whether a page should be allowed given certain parameters
      *
      * @param   array   $params
-     * 
      * @return  boolean 
      */
     protected function isAllowed($params)
     {
         $results = $this->getEventManager()->trigger(__FUNCTION__, $this, $params);
-        
         return $results->last();
     }
 
@@ -917,17 +915,19 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
         }
     }
     
+    /**
+     * Attaches default ACL listeners, if ACLs are in use
+     */
     protected function setDefaultListeners()
     {
-        if ($this->getUseAcl()) {
-            
-            $this->getEventManager()->getSharedManager()->attach(
-                'Zend\View\Helper\Navigation\AbstractHelper', 
-                'isAllowed', 
-                array('Zend\View\Helper\Navigation\Listener\AcListener', 'accept'),
-                -1
-            );
+        if (!$this->getUseAcl()) {
+            return;
         }
+            
+        $this->getEventManager()->getSharedManager()->attach(
+            'Zend\View\Helper\Navigation\AbstractHelper', 
+            'isAllowed', 
+            array('Zend\View\Helper\Navigation\Listener\AclListener', 'accept')
+        );
     }
-    
 }

@@ -14,9 +14,8 @@ use Zend\EventManager\Event;
 /**
  * Default Access Control Listener
  */
-class AcListener
+class AclListener
 {
-    
     /**
      * Determines whether a page should be accepted by ACL when iterating
      * 
@@ -34,26 +33,23 @@ class AcListener
     public static function accept(Event $event)
     {
         $accepted = true;
+        $params   = $event->getParams();
+        $acl      = $params['acl'];
+        $page     = $params['page'];
+        $role     = $params['role'];
         
-        $params= $event->getParams();
-        
-        $acl = $params['acl'];
-        $page = $params['page'];
-        $role = $params['role'];
-        
-        if ($acl) {
-            
-            $resource = $page->getResource();
-            $privilege = $page->getPrivilege();
+        if (!$acl) {
+            return $accepted;
+        }
 
-            if ($resource || $privilege) {
-                $accepted = $acl->hasResource($resource) && $acl->isAllowed($role, $resource, $privilege); 
-            } else {
-                $accepted = true;
-            }  
-        } 
-        
+        $resource  = $page->getResource();
+        $privilege = $page->getPrivilege();
+
+        if ($resource || $privilege) {
+            $accepted = $acl->hasResource($resource) 
+                        && $acl->isAllowed($role, $resource, $privilege); 
+        }  
+
         return $accepted;
     }
-    
 }

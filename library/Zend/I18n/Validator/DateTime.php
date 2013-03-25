@@ -47,7 +47,7 @@ class DateTime extends AbstractValidator
 
     /**
      * Optional timezone
-     * 
+     *
      * @var string
      */
     protected $timezone;

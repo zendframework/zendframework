@@ -29,7 +29,7 @@ class InjectRoutematchParamsListener extends AbstractListenerAggregate
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->callbacks[] = $events->attach('dispatch', array($this, 'injectParams'), 90);
+        $this->listeners[] = $events->attach('dispatch', array($this, 'injectParams'), 90);
     }
 
     /**

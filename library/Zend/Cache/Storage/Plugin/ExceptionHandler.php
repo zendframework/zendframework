@@ -23,39 +23,39 @@ class ExceptionHandler extends AbstractPlugin
         $callback = array($this, 'onException');
 
         // read
-        $this->callbacks[] = $events->attach('getItem.exception', $callback, $priority);
-        $this->callbacks[] = $events->attach('getItems.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('getItem.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('getItems.exception', $callback, $priority);
 
-        $this->callbacks[] = $events->attach('hasItem.exception', $callback, $priority);
-        $this->callbacks[] = $events->attach('hasItems.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('hasItem.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('hasItems.exception', $callback, $priority);
 
-        $this->callbacks[] = $events->attach('getMetadata.exception', $callback, $priority);
-        $this->callbacks[] = $events->attach('getMetadatas.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('getMetadata.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('getMetadatas.exception', $callback, $priority);
 
         // write
-        $this->callbacks[] = $events->attach('setItem.exception', $callback, $priority);
-        $this->callbacks[] = $events->attach('setItems.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('setItem.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('setItems.exception', $callback, $priority);
 
-        $this->callbacks[] = $events->attach('addItem.exception', $callback, $priority);
-        $this->callbacks[] = $events->attach('addItems.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('addItem.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('addItems.exception', $callback, $priority);
 
-        $this->callbacks[] = $events->attach('replaceItem.exception', $callback, $priority);
-        $this->callbacks[] = $events->attach('replaceItems.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('replaceItem.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('replaceItems.exception', $callback, $priority);
 
-        $this->callbacks[] = $events->attach('touchItem.exception', $callback, $priority);
-        $this->callbacks[] = $events->attach('touchItems.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('touchItem.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('touchItems.exception', $callback, $priority);
 
-        $this->callbacks[] = $events->attach('removeItem.exception', $callback, $priority);
-        $this->callbacks[] = $events->attach('removeItems.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('removeItem.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('removeItems.exception', $callback, $priority);
 
-        $this->callbacks[] = $events->attach('checkAndSetItem.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('checkAndSetItem.exception', $callback, $priority);
 
         // increment / decrement item(s)
-        $this->callbacks[] = $events->attach('incrementItem.exception', $callback, $priority);
-        $this->callbacks[] = $events->attach('incrementItems.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('incrementItem.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('incrementItems.exception', $callback, $priority);
 
-        $this->callbacks[] = $events->attach('decrementItem.exception', $callback, $priority);
-        $this->callbacks[] = $events->attach('decrementItems.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('decrementItem.exception', $callback, $priority);
+        $this->listeners[] = $events->attach('decrementItems.exception', $callback, $priority);
     }
 
     /**

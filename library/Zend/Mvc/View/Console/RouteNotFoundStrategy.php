@@ -51,7 +51,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->callbacks[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'handleRouteNotFoundError'));
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'handleRouteNotFoundError'));
     }
 
     /**

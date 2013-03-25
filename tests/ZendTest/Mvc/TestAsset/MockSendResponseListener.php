@@ -18,7 +18,7 @@ class MockSendResponseListener extends AbstractListenerAggregate
 {
     public function attach(EventManagerInterface $events)
     {
-        $this->callbacks[] = $events->attach(MvcEvent::EVENT_FINISH, array($this, 'sendResponse'), -10000);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_FINISH, array($this, 'sendResponse'), -10000);
     }
 
     public function sendResponse($e)

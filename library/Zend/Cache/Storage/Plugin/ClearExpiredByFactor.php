@@ -23,10 +23,10 @@ class ClearExpiredByFactor extends AbstractPlugin
     {
         $callback = array($this, 'clearExpiredByFactor');
 
-        $this->callbacks[] = $events->attach('setItem.post',  $callback, $priority);
-        $this->callbacks[] = $events->attach('setItems.post', $callback, $priority);
-        $this->callbacks[] = $events->attach('addItem.post',  $callback, $priority);
-        $this->callbacks[] = $events->attach('addItems.post', $callback, $priority);
+        $this->listeners[] = $events->attach('setItem.post',  $callback, $priority);
+        $this->listeners[] = $events->attach('setItems.post', $callback, $priority);
+        $this->listeners[] = $events->attach('addItem.post',  $callback, $priority);
+        $this->listeners[] = $events->attach('addItems.post', $callback, $priority);
     }
 
     /**

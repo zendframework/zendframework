@@ -50,7 +50,7 @@ class MockPlugin extends AbstractPlugin
     public function attach(EventManagerInterface $eventCollection)
     {
         foreach ($this->eventCallbacks as $eventName => $method) {
-            $this->callbacks[] = $eventCollection->attach($eventName, array($this, $method));
+            $this->listeners[] = $eventCollection->attach($eventName, array($this, $method));
         }
     }
 
@@ -66,7 +66,7 @@ class MockPlugin extends AbstractPlugin
 
     public function getHandles()
     {
-        return $this->callbacks;
+        return $this->listeners;
     }
 
     public function getEventCallbacks()

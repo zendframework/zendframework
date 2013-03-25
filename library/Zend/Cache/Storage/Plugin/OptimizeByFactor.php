@@ -22,8 +22,8 @@ class OptimizeByFactor extends AbstractPlugin
     public function attach(EventManagerInterface $events, $priority = 1)
     {
         $callback          = array($this, 'optimizeByFactor');
-        $this->callbacks[] = $events->attach('removeItem.post',  $callback, $priority);
-        $this->callbacks[] = $events->attach('removeItems.post', $callback, $priority);
+        $this->listeners[] = $events->attach('removeItem.post',  $callback, $priority);
+        $this->listeners[] = $events->attach('removeItems.post', $callback, $priority);
     }
 
     /**

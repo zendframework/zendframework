@@ -30,50 +30,50 @@ class IgnoreUserAbort extends AbstractPlugin
         $cbOnBefore = array($this, 'onBefore');
         $cbOnAfter  = array($this, 'onAfter');
 
-        $this->callbacks[] = $events->attach('setItem.pre',       $cbOnBefore, $priority);
-        $this->callbacks[] = $events->attach('setItem.post',      $cbOnAfter, $priority);
-        $this->callbacks[] = $events->attach('setItem.exception', $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('setItem.pre',       $cbOnBefore, $priority);
+        $this->listeners[] = $events->attach('setItem.post',      $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('setItem.exception', $cbOnAfter, $priority);
 
-        $this->callbacks[] = $events->attach('setItems.pre',       $cbOnBefore, $priority);
-        $this->callbacks[] = $events->attach('setItems.post',      $cbOnAfter, $priority);
-        $this->callbacks[] = $events->attach('setItems.exception', $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('setItems.pre',       $cbOnBefore, $priority);
+        $this->listeners[] = $events->attach('setItems.post',      $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('setItems.exception', $cbOnAfter, $priority);
 
-        $this->callbacks[] = $events->attach('addItem.pre',       $cbOnBefore, $priority);
-        $this->callbacks[] = $events->attach('addItem.post',      $cbOnAfter, $priority);
-        $this->callbacks[] = $events->attach('addItem.exception', $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('addItem.pre',       $cbOnBefore, $priority);
+        $this->listeners[] = $events->attach('addItem.post',      $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('addItem.exception', $cbOnAfter, $priority);
 
-        $this->callbacks[] = $events->attach('addItems.pre',       $cbOnBefore, $priority);
-        $this->callbacks[] = $events->attach('addItems.post',      $cbOnAfter, $priority);
-        $this->callbacks[] = $events->attach('addItems.exception', $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('addItems.pre',       $cbOnBefore, $priority);
+        $this->listeners[] = $events->attach('addItems.post',      $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('addItems.exception', $cbOnAfter, $priority);
 
-        $this->callbacks[] = $events->attach('replaceItem.pre',       $cbOnBefore, $priority);
-        $this->callbacks[] = $events->attach('replaceItem.post',      $cbOnAfter, $priority);
-        $this->callbacks[] = $events->attach('replaceItem.exception', $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('replaceItem.pre',       $cbOnBefore, $priority);
+        $this->listeners[] = $events->attach('replaceItem.post',      $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('replaceItem.exception', $cbOnAfter, $priority);
 
-        $this->callbacks[] = $events->attach('replaceItems.pre',       $cbOnBefore, $priority);
-        $this->callbacks[] = $events->attach('replaceItems.post',      $cbOnAfter, $priority);
-        $this->callbacks[] = $events->attach('replaceItems.exception', $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('replaceItems.pre',       $cbOnBefore, $priority);
+        $this->listeners[] = $events->attach('replaceItems.post',      $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('replaceItems.exception', $cbOnAfter, $priority);
 
-        $this->callbacks[] = $events->attach('checkAndSetItem.pre',       $cbOnBefore, $priority);
-        $this->callbacks[] = $events->attach('checkAndSetItem.post',      $cbOnAfter, $priority);
-        $this->callbacks[] = $events->attach('checkAndSetItem.exception', $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('checkAndSetItem.pre',       $cbOnBefore, $priority);
+        $this->listeners[] = $events->attach('checkAndSetItem.post',      $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('checkAndSetItem.exception', $cbOnAfter, $priority);
 
         // increment / decrement item(s)
-        $this->callbacks[] = $events->attach('incrementItem.pre',       $cbOnBefore, $priority);
-        $this->callbacks[] = $events->attach('incrementItem.post',      $cbOnAfter, $priority);
-        $this->callbacks[] = $events->attach('incrementItem.exception', $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('incrementItem.pre',       $cbOnBefore, $priority);
+        $this->listeners[] = $events->attach('incrementItem.post',      $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('incrementItem.exception', $cbOnAfter, $priority);
 
-        $this->callbacks[] = $events->attach('incrementItems.pre',       $cbOnBefore, $priority);
-        $this->callbacks[] = $events->attach('incrementItems.post',      $cbOnAfter, $priority);
-        $this->callbacks[] = $events->attach('incrementItems.exception', $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('incrementItems.pre',       $cbOnBefore, $priority);
+        $this->listeners[] = $events->attach('incrementItems.post',      $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('incrementItems.exception', $cbOnAfter, $priority);
 
-        $this->callbacks[] = $events->attach('decrementItem.pre',       $cbOnBefore, $priority);
-        $this->callbacks[] = $events->attach('decrementItem.post',      $cbOnAfter, $priority);
-        $this->callbacks[] = $events->attach('decrementItem.exception', $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('decrementItem.pre',       $cbOnBefore, $priority);
+        $this->listeners[] = $events->attach('decrementItem.post',      $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('decrementItem.exception', $cbOnAfter, $priority);
 
-        $this->callbacks[] = $events->attach('decrementItems.pre',       $cbOnBefore, $priority);
-        $this->callbacks[] = $events->attach('decrementItems.post',      $cbOnAfter, $priority);
-        $this->callbacks[] = $events->attach('decrementItems.exception', $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('decrementItems.pre',       $cbOnBefore, $priority);
+        $this->listeners[] = $events->attach('decrementItems.post',      $cbOnAfter, $priority);
+        $this->listeners[] = $events->attach('decrementItems.exception', $cbOnAfter, $priority);
     }
 
     /**

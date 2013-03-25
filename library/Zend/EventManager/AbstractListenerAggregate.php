@@ -18,16 +18,16 @@ abstract class AbstractListenerAggregate implements ListenerAggregateInterface
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
      */
-    protected $callbacks = array();
+    protected $listeners = array();
 
     /**
      * {@inheritDoc}
      */
     public function detach(EventManagerInterface $events)
     {
-        foreach ($this->callbacks as $index => $callback) {
+        foreach ($this->listeners as $index => $callback) {
             if ($events->detach($callback)) {
-                unset($this->callbacks[$index]);
+                unset($this->listeners[$index]);
             }
         }
     }

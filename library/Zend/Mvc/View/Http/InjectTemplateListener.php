@@ -30,7 +30,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
      */
     public function attach(Events $events)
     {
-        $this->callbacks[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectTemplate'), -90);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectTemplate'), -90);
     }
 
     /**

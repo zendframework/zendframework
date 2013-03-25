@@ -29,9 +29,9 @@ class InjectViewModelListener extends AbstractListenerAggregate
      */
     public function attach(Events $events)
     {
-        $this->callbacks[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectViewModel'), -100);
-        $this->callbacks[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'injectViewModel'), -100);
-        $this->callbacks[] = $events->attach(MvcEvent::EVENT_RENDER_ERROR, array($this, 'injectViewModel'), -100);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectViewModel'), -100);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'injectViewModel'), -100);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER_ERROR, array($this, 'injectViewModel'), -100);
     }
 
     /**

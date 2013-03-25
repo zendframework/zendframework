@@ -25,13 +25,13 @@ class MockListenerAggregateTrait
 
     public function attach(EventManagerInterface $events)
     {
-        $this->callbacks[] = $events->attach('foo.bar', array($this, 'doFoo'));
-        $this->callbacks[] = $events->attach('foo.baz', array($this, 'doFoo'));
+        $this->listeners[] = $events->attach('foo.bar', array($this, 'doFoo'));
+        $this->listeners[] = $events->attach('foo.baz', array($this, 'doFoo'));
     }
 
     public function getCallbacks()
     {
-        return $this->callbacks;
+        return $this->listeners;
     }
 
     public function doFoo()

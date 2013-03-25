@@ -170,6 +170,14 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
 
         foreach ($inputs as $name) {
             $input = $this->inputs[$name];
+            if ((!array_key_exists($name, $this->data)
+                    || (null === $this->data[$name]))
+                && $input instanceof InputInterface
+                && !$input->isRequired()
+            ) {
+                $this->validInputs[$name] = $input;
+                continue;
+            }
             if (!array_key_exists($name, $this->data)
                 || (null === $this->data[$name])
                 || (is_string($this->data[$name]) && strlen($this->data[$name]) === 0)
@@ -181,11 +189,6 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
                     && isset($this->data[$name][0]['error']) && $this->data[$name][0]['error'] === UPLOAD_ERR_NO_FILE)
             ) {
                 if ($input instanceof InputInterface) {
-                    // - test if input is required
-                    if (!$input->isRequired()) {
-                        $this->validInputs[$name] = $input;
-                        continue;
-                    }
                     // - test if input allows empty
                     if ($input->allowEmpty()) {
                         $this->validInputs[$name] = $input;
@@ -193,7 +196,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
                     }
                 }
                 // make sure we have a value (empty) for validation
-                $this->data[$name] = '';
+                $this->data[$name] = null;
             }
 
             if ($input instanceof InputFilterInterface) {

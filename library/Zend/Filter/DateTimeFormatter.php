@@ -55,9 +55,9 @@ class DateTimeFormatter extends AbstractFilter
     {
         try {
             $result = $this->normalizeDateTime($value);
-        } catch (\Exception $ex) {
+        } catch (\Exception $e) {
             // DateTime threw an exception, an invalid date string was provided
-            throw new Exception\InvalidArgumentException($ex);
+            throw new Exception\InvalidArgumentException('Invalid date string provided', $e->getCode(), $e);
         }
 
         return $result;

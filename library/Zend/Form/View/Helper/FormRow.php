@@ -53,6 +53,15 @@ class FormRow extends AbstractHelper
      */
     protected $elementErrorsHelper;
 
+    /**
+     * @var string
+     */
+    protected $partial;
+
+    /**
+     * @var array
+     */
+    protected $partialVars = array();
 
     /**
      * Utility form helper that renders a label (if it exists), an element and errors
@@ -119,6 +128,19 @@ class FormRow extends AbstractHelper
                     $label = '<span>' . $label . '</span>';
                 }
 
+                if ($this->partial) {
+                    $vars = array(
+                        'element'       => $elementString,
+                        'label'         => $label,
+                        'labelOpen'     => $labelOpen,
+                        'labelClose'    => $labelClose,
+                        'labelPosition' => $this->labelPosition,
+                        'errors'        => $elementErrors,
+                        'renderErrors'  => $this->renderErrors
+                    );
+                    return $this->view->render($this->partial, array_merge($vars, $this->partialVars));
+                }
+
                 switch ($this->labelPosition) {
                     case self::LABEL_PREPEND:
                         $markup = $labelOpen . $label . $elementString . $labelClose;
@@ -134,6 +156,15 @@ class FormRow extends AbstractHelper
                 $markup .= $elementErrors;
             }
         } else {
+            if ($this->partial) {
+                $vars = array(
+                    'element'       => $elementString,
+                    'errors'        => $elementErrors,
+                    'renderErrors'  => $this->renderErrors
+                );
+                return $this->view->render($this->partial, array_merge($vars, $this->partialVars));
+            }
+
             if ($this->renderErrors) {
                 $markup = $elementString . $elementErrors;
             } else {
@@ -152,9 +183,10 @@ class FormRow extends AbstractHelper
      * @param null|ElementInterface $element
      * @param null|string           $labelPosition
      * @param bool                  $renderErrors
+     * @param string|array          $partial
      * @return string|FormRow
      */
-    public function __invoke(ElementInterface $element = null, $labelPosition = null, $renderErrors = null)
+    public function __invoke(ElementInterface $element = null, $labelPosition = null, $renderErrors = null, $partial = null)
     {
         if (!$element) {
             return $this;
@@ -164,8 +196,12 @@ class FormRow extends AbstractHelper
             $this->setLabelPosition($labelPosition);
         }
 
-        if ($renderErrors !== null){
+        if ($renderErrors !== null) {
             $this->setRenderErrors($renderErrors);
+        }
+
+        if ($partial != null) {
+            $this->setPartial($partial);
         }
 
         return $this->render($element);
@@ -245,6 +281,24 @@ class FormRow extends AbstractHelper
     public function getLabelAttributes()
     {
         return $this->labelAttributes;
+    }
+
+    /**
+     * Set a partial view script to use for rendering the row,
+     * can optionally accept an array containing partial name and extra vars
+     *
+     * @param string|array $partial
+     * @return FormRow
+     */
+    public function setPartial($partial)
+    {
+        if (is_array($partial)) {
+            $this->partial = key(reset($partial));
+            $this->partialVars = (array) reset($partial);
+        } else {
+            $this->partial = $partial;
+        }
+        return $this;
     }
 
     /**

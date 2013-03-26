@@ -995,6 +995,62 @@ class FormTest extends TestCase
         $this->assertEquals($product, $emptyProduct, var_export($product, 1) . "\n\n" . var_export($emptyProduct, 1));
     }
 
+    public function testCanCorrectlyPopulateOrphanedEntities()
+    {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped("The Intl extension is not loaded");
+        }
+
+        $form = new TestAsset\OrphansForm();
+
+        $data = array(
+            'test' => array(
+                array(
+                    'name' => 'Foo'
+                ),
+                array(
+                    'name' => 'Bar'
+                ),
+            )
+        );
+
+        $form->setData($data);
+        $valid = $form->isValid();
+        $this->assertEquals(true, $valid);
+
+        $formCollections = $form->getFieldsets();
+        $formCollection = $formCollections['test'];
+
+        $fieldsets = $formCollection->getFieldsets();
+
+        $fieldsetFoo = $fieldsets[0];
+        $fieldsetBar = $fieldsets[1];
+
+        $objectFoo = $fieldsetFoo->getObject();
+        $this->assertTrue(
+            $objectFoo instanceof Entity\Orphan,
+            'FormCollection with orphans does not bind objects from fieldsets'
+        );
+
+        $objectBar = $fieldsetBar->getObject();
+        $this->assertTrue(
+            $objectBar instanceof Entity\Orphan,
+            'FormCollection with orphans does not bind objects from fieldsets'
+        );
+
+        $this->assertSame(
+            'Foo',
+            $objectFoo->name,
+            'Object is not populated if it is an orphan in a fieldset inside a formCollection'
+        );
+
+        $this->assertSame(
+            'Bar',
+            $objectBar->name,
+            'Object is not populated if it is an orphan in a fieldset inside a formCollection'
+        );
+    }
+
     public function testAssertElementsNamesAreNotWrappedAroundFormNameByDefault()
     {
         $form = new \ZendTest\Form\TestAsset\FormCollection();

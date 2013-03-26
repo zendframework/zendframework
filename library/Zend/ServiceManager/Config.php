@@ -156,8 +156,10 @@ class Config implements ConfigInterface
             $serviceManager->setShared($name, $isShared);
         }
 
-        foreach ($this->getDelegates() as $name => $isShared) {
-            $serviceManager->setDelegate($name, $isShared);
+        foreach ($this->getDelegates() as $name => $delegates) {
+            foreach ($delegates as $delegate) {
+                $serviceManager->addDelegate($name, $delegate);
+            }
         }
     }
 }

@@ -49,7 +49,7 @@ class ServiceManager implements ServiceLocatorInterface
     protected $abstractFactories = array();
 
     /**
-     * @var string[]
+     * @var array[]
      */
     protected $delegates = array();
 
@@ -324,9 +324,13 @@ class ServiceManager implements ServiceLocatorInterface
      *
      * @return ServiceManager
      */
-    public function setDelegate($serviceName, $delegateFactoryName)
+    public function addDelegate($serviceName, $delegateFactoryName)
     {
-        $this->delegates[$this->canonicalizeName($serviceName)] = $delegateFactoryName;
+        if (!isset($this->delegates[$this->canonicalizeName($serviceName)])) {
+            $this->delegates[$this->canonicalizeName($serviceName)] = array();
+        }
+
+        $this->delegates[$this->canonicalizeName($serviceName)][] = $delegateFactoryName;
 
         return $this;
     }
@@ -495,7 +499,7 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
-     * Create an instance
+     * Create an instance of the requested service
      *
      * @param  string|array $name
      *
@@ -517,21 +521,50 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if (isset($this->delegates[$cName])) {
-            /* @var $delegateFactory DelegateFactoryInterface */
-            $delegateFactory = $this->get($this->delegates[$cName]);
-            $serviceManager  = $this;
+            $serviceManager      = $this;
+            $additionalDelegates = count($this->delegates[$cName]) - 1;
+            $creationCallback    = function () use ($serviceManager, $rName, $cName) {
+                return $serviceManager->doCreate($rName, $cName);
+            };
 
-            return $delegateFactory->createDelegateWithName(
-                $this,
-                $cName,
-                $rName,
-                function () use ($serviceManager, $rName, $cName) {
-                    return $serviceManager->doCreate($rName, $cName);
-                }
-            );
+            for ($i = 0; $i < $additionalDelegates; $i += 1) {
+                $creationCallback = $this->createDelegateCallback(
+                    $this->delegates[$cName][$i],
+                    $rName,
+                    $cName,
+                    $creationCallback
+                );
+            }
+
+            /* @var $delegateFactory DelegateFactoryInterface */
+            $delegateFactory = $this->get($this->delegates[$cName][$i]);
+
+            return $delegateFactory->createDelegateWithName($this, $cName, $rName, $creationCallback);
         }
 
         return $this->doCreate($rName, $cName);
+    }
+
+    /**
+     * Creates a callback that uses a delegate to create a service
+     *
+     * @param string   $delegateFactoryName name of the delegate factory
+     * @param string   $rName               requested service name
+     * @param string   $cName               canonical service name
+     * @param callable $creationCallback    callback that is responsible for instantiating the service
+     *
+     * @return callable
+     */
+    private function createDelegateCallback($delegateFactoryName, $rName, $cName, $creationCallback)
+    {
+        $serviceManager  = $this;
+
+        return function () use ($serviceManager, $delegateFactoryName, $rName, $cName, $creationCallback) {
+            /* @var $delegateFactory DelegateFactoryInterface */
+            $delegateFactory = $this->get($delegateFactoryName);
+
+            return $delegateFactory->createDelegateWithName($this, $cName, $rName, $creationCallback);
+        };
     }
 
     /**

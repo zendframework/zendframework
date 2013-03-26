@@ -220,30 +220,7 @@ class EventManager implements EventManagerInterface
      */
     public function triggerUntil($event, $target, $argv = null, $callback = null)
     {
-        if ($event instanceof EventInterface) {
-            $e        = $event;
-            $event    = $e->getName();
-            $callback = $target;
-        } elseif ($target instanceof EventInterface) {
-            $e = $target;
-            $e->setName($event);
-            $callback = $argv;
-        } elseif ($argv instanceof EventInterface) {
-            $e = $argv;
-            $e->setName($event);
-            $e->setTarget($target);
-        } else {
-            $e = new $this->eventClass();
-            $e->setName($event);
-            $e->setTarget($target);
-            $e->setParams($argv);
-        }
-
-        if (!is_callable($callback)) {
-            throw new Exception\InvalidCallbackException('Invalid callback provided');
-        }
-
-        return $this->triggerListeners($event, $e, $callback);
+        return $this->trigger($event, $target, $argv, $callback);
     }
 
     /**

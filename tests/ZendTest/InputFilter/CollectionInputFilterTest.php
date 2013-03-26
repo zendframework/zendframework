@@ -42,7 +42,6 @@ class CollectionInputFilterTest extends TestCase
 
         $baz = new Input();
         $baz->setRequired(false);
-        $baz->setAllowEmpty(true);
         $baz->getFilterChain()->attachByName('stringtrim');
         $baz->getValidatorChain()->attach(new Validator\StringLength(1, 6));
 
@@ -69,7 +68,6 @@ class CollectionInputFilterTest extends TestCase
 
         $baz = new Input();
         $baz->setRequired(false);
-        $baz->setAllowEmpty(true);
         $baz->getFilterChain()->attachByName('stringtrim');
         $baz->getValidatorChain()->attach(new Validator\StringLength(1, 6));
 

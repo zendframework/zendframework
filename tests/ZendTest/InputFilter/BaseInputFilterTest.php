@@ -156,11 +156,11 @@ class BaseInputFilterTest extends TestCase
                 array(
                     'foo' => ' bazbat ',
                     'bar' => '12345',
-                    'baz' => '',
+                    'baz' => 'thisistoolong',
                     'nest' => array(
                         'foo' => ' bazbat ',
                         'bar' => '12345',
-                        'baz' => '',
+                        'baz' => 'thisistoolong',
                     ),
                 ),
                 false,
@@ -184,6 +184,7 @@ class BaseInputFilterTest extends TestCase
 
     /**
      * @dataProvider dataSets
+     * @group fmlife
      */
     public function testCanValidateEntireDataset($dataset, $expected)
     {

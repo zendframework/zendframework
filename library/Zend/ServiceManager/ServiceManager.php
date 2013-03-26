@@ -561,9 +561,9 @@ class ServiceManager implements ServiceLocatorInterface
 
         return function () use ($serviceManager, $delegateFactoryName, $rName, $cName, $creationCallback) {
             /* @var $delegateFactory DelegateFactoryInterface */
-            $delegateFactory = $this->get($delegateFactoryName);
+            $delegateFactory = $serviceManager->get($delegateFactoryName);
 
-            return $delegateFactory->createDelegateWithName($this, $cName, $rName, $creationCallback);
+            return $delegateFactory->createDelegateWithName($serviceManager, $cName, $rName, $creationCallback);
         };
     }
 

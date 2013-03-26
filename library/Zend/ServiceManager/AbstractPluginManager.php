@@ -189,11 +189,7 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
     protected function createFromFactory($canonicalName, $requestedName)
     {
         $factory            = $this->factories[$canonicalName];
-        $hasCreationOptions = true;
-
-        if (null === $this->creationOptions || (is_array($this->creationOptions) && empty($this->creationOptions))) {
-            $hasCreationOptions = false;
-        }
+        $hasCreationOptions = !(null === $this->creationOptions || (is_array($this->creationOptions) && empty($this->creationOptions)));
 
         if (is_string($factory) && class_exists($factory, true)) {
             if (!$hasCreationOptions) {

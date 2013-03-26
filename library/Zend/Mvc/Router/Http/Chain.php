@@ -9,6 +9,7 @@
 
 namespace Zend\Mvc\Router\Http;
 
+use ArrayObject;
 use Traversable;
 use Zend\Mvc\Router\Exception;
 use Zend\Mvc\Router\PriorityList;
@@ -40,13 +41,14 @@ class Chain extends TreeRouteStack implements RouteInterface
      *
      * @param  array              $routes
      * @param  RoutePluginManager $routePlugins
-     * @throws Exception\InvalidArgumentException
+     * @param  ArrayObject        $prototypes
      */
-    public function __construct(array $routes, RoutePluginManager $routePlugins)
+    public function __construct(array $routes, RoutePluginManager $routePlugins, ArrayObject $prototypes)
     {
         $this->chainRoutes         = array_reverse($routes);
         $this->routePluginManager  = $routePlugins;
         $this->routes              = new PriorityList();
+        $this->prototypes          = $prototypes;
     }
 
     /**
@@ -69,6 +71,10 @@ class Chain extends TreeRouteStack implements RouteInterface
             throw new Exception\InvalidArgumentException('Missing "route" in options array');
         }
 
+        if (!isset($options['prototypes'])) {
+            throw new Exception\InvalidArgumentException('Missing "prototypes" in options array');
+        }
+
         if ($options['routes'] instanceof Traversable) {
             $options['routes'] = ArrayUtils::iteratorToArray($options['child_routes']);
         }
@@ -77,7 +83,11 @@ class Chain extends TreeRouteStack implements RouteInterface
             throw new Exception\InvalidArgumentException('Missing "route_plugins" in options array');
         }
 
-        return new static($options['routes'], $options['route_plugins']);
+        return new static(
+            $options['routes'],
+            $options['route_plugins'],
+            $options['prototypes']
+        );
     }
 
     /**

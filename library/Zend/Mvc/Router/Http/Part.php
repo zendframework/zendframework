@@ -9,6 +9,7 @@
 
 namespace Zend\Mvc\Router\Http;
 
+use ArrayObject;
 use Traversable;
 use Zend\Mvc\Router\Exception;
 use Zend\Mvc\Router\PriorityList;
@@ -48,12 +49,13 @@ class Part extends TreeRouteStack implements RouteInterface
      * Create a new part route.
      *
      * @param  mixed              $route
-     * @param  bool            $mayTerminate
+     * @param  bool               $mayTerminate
      * @param  RoutePluginManager $routePlugins
      * @param  array|null         $childRoutes
+     * @param  ArrayObject        $prototypes
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($route, $mayTerminate, RoutePluginManager $routePlugins, array $childRoutes = null)
+    public function __construct($route, $mayTerminate, RoutePluginManager $routePlugins, array $childRoutes = null, ArrayObject $prototypes = null)
     {
         $this->routePluginManager = $routePlugins;
 
@@ -68,6 +70,7 @@ class Part extends TreeRouteStack implements RouteInterface
         $this->route        = $route;
         $this->mayTerminate = $mayTerminate;
         $this->childRoutes  = $childRoutes;
+        $this->prototypes   = $prototypes;
         $this->routes       = new PriorityList();
     }
 
@@ -95,6 +98,10 @@ class Part extends TreeRouteStack implements RouteInterface
             throw new Exception\InvalidArgumentException('Missing "route_plugins" in options array');
         }
 
+        if (!isset($options['prototypes'])) {
+            $options['prototypes'] = null;
+        }
+
         if (!isset($options['may_terminate'])) {
             $options['may_terminate'] = false;
         }
@@ -106,7 +113,13 @@ class Part extends TreeRouteStack implements RouteInterface
             $options['child_routes'] = ArrayUtils::iteratorToArray($options['child_routes']);
         }
 
-        return new static($options['route'], $options['may_terminate'], $options['route_plugins'], $options['child_routes']);
+        return new static(
+            $options['route'],
+            $options['may_terminate'],
+            $options['route_plugins'],
+            $options['child_routes'],
+            $options['prototypes']
+        );
     }
 
     /**

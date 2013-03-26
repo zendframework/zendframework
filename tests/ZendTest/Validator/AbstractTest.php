@@ -181,10 +181,12 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $messages = $this->validator->getMessageTemplates();
         $this->assertEquals(
-            array('fooMessage' => '%value% was passed'), $messages);
+            array('fooMessage' => '%value% was passed',
+                  'barMessage' => '%value% was wrong'), $messages);
 
         $this->assertEquals(
-            array(TestAsset\ConcreteValidator::FOO_MESSAGE => '%value% was passed'),
+            array(TestAsset\ConcreteValidator::FOO_MESSAGE => '%value% was passed',
+                  TestAsset\ConcreteValidator::BAR_MESSAGE => '%value% was wrong'),
             $messages
             );
     }
@@ -237,6 +239,18 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('foo', $message);
         $this->assertContains('bar', $message);
         $this->assertContains('baz', $message);
+    }
+
+    public function testIdenticalMessagesNotReturned()
+    {
+        $this->validator->setMessage('Default error message');
+
+        $this->assertFalse($this->validator->isValid('invalid'));
+
+        $messages = $this->validator->getMessages();
+
+        $this->assertCount(1, $messages);
+        $this->assertEquals('Default error message', reset($messages));
     }
 
     /**

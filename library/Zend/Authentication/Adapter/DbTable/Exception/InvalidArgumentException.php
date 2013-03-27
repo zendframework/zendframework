@@ -7,11 +7,12 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Authentication\Adapter;
+namespace Zend\Authentication\Adapter\DbTable\Exception;
 
-/**
- * @deprecated
- */
-class DbTable extends DbTable\CredentialTreatmentAdapter
+use Zend\Authentication\Adapter\Exception;
+
+class InvalidArgumentException
+    extends Exception\InvalidArgumentException
+    implements ExceptionInterface
 {
 }

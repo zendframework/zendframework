@@ -150,4 +150,10 @@ class RuleTest extends TestCase
             $this->assertEquals((int) $expectedValues[$i], $rule->evaluate($i));
         }
     }
+
+    public function testGetNumPlurals()
+    {
+        $rule = Rule::fromString('nplurals=9; plural=n');
+        $this->assertEquals(9, $rule->getNumPlurals());
+    }
 }

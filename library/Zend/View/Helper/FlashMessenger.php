@@ -124,7 +124,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
 
         // Generate markup
         $markup  = sprintf($this->getMessageOpenFormat(), ' class="' . implode(' ', $classes) . '"');
-        $markup .= implode($this->getMessageSeparatorString(), $messagesToPrint);
+        $markup .= implode(sprintf($this->getMessageSeparatorString(), ' class="' . implode(' ', $classes) . '"'), $messagesToPrint);
         $markup .= $this->getMessageCloseString();
 
         return $markup;

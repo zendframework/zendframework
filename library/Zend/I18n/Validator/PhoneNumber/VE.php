@@ -1,0 +1,21 @@
+<?php
+return array(
+    'code' => '58',
+    'patterns' => array(
+        'national' => array(
+            'general' => '/^[24589]\\d{9}$/',
+            'fixed' => '/^(?:2(?:12|3[457-9]|[58][1-9]|[467]\\d|9[1-6])|50[01])\\d{7}$/',
+            'mobile' => '/^4(?:1[24-8]|2[46])\\d{7}$/',
+            'tollfree' => '/^800\\d{7}$/',
+            'premium' => '/^900\\d{7}$/',
+            'emergency' => '/^171$/',
+        ),
+        'possible' => array(
+            'general' => '/^\\d{7,10}$/',
+            'mobile' => '/^\\d{10}$/',
+            'tollfree' => '/^\\d{10}$/',
+            'premium' => '/^\\d{10}$/',
+            'emergency' => '/^\\d{3}$/',
+        ),
+    ),
+);

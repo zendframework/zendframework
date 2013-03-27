@@ -592,7 +592,12 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->events->getIdentifiers(), $identifiers);
         $identifiers[] = 'baz';
         $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->addIdentifiers($identifiers));
-        $this->assertSame($this->events->getIdentifiers(), $identifiers);
+
+        // This is done because the keys doesn't matter, just the values
+        $expectedIdentifiers = $this->events->getIdentifiers();
+        sort($expectedIdentifiers);
+        sort($identifiers);
+        $this->assertSame($expectedIdentifiers, $identifiers);
     }
 
     public function testIdentifierGetterSettersWorkWithTraversables()
@@ -602,7 +607,13 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->events->getIdentifiers(), (array) $identifiers);
         $identifiers = new ArrayIterator(array('foo', 'bar', 'baz'));
         $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->addIdentifiers($identifiers));
-        $this->assertSame($this->events->getIdentifiers(), (array) $identifiers);
+
+        // This is done because the keys doesn't matter, just the values
+        $expectedIdentifiers = $this->events->getIdentifiers();
+        sort($expectedIdentifiers);
+        $identifiers = (array) $identifiers;
+        sort($identifiers);
+        $this->assertSame($expectedIdentifiers, $identifiers);
     }
 
     public function testListenersAttachedWithWildcardAreTriggeredForAllEvents()

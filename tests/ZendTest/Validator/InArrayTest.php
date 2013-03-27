@@ -52,16 +52,6 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(1, 2, 3), $this->validator->getHaystack());
     }
 
-    public function testSetEmptyHaystack()
-    {
-        $this->validator->setHaystack(array());
-        $this->setExpectedException(
-            'Zend\Validator\Exception\RuntimeException',
-            'haystack option is mandatory'
-        );
-        $this->validator->getHaystack();
-    }
-
     /**
      * Ensures that getStrict() returns expected default value
      *

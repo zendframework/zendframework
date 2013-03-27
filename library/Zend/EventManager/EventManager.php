@@ -216,10 +216,16 @@ class EventManager implements EventManagerInterface
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @param  callable $callback
      * @return ResponseCollection
+     * @deprecated Please use trigger()
      * @throws Exception\InvalidCallbackException if invalid callable provided
      */
     public function triggerUntil($event, $target, $argv = null, $callback = null)
     {
+        trigger_error(
+            'This method is deprecated and will be removed in the future. ' .
+            'Please use trigger() instead.',
+            E_USER_DEPRECATED
+        );
         return $this->trigger($event, $target, $argv, $callback);
     }
 

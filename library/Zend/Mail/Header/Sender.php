@@ -41,7 +41,7 @@ class Sender implements HeaderInterface
         }
 
         // Check for address, and set if found
-        if (preg_match('^(?P<name>.*?)<(?P<email>[^>]+)>$', $value, $matches)) {
+        if (preg_match('/^(?P<name>.*?)<(?P<email>[^>]+)>$/', $value, $matches)) {
             $name = $matches['name'];
             if (empty($name)) {
                 $name = null;

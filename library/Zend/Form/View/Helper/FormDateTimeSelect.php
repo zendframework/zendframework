@@ -50,9 +50,10 @@ class FormDateTimeSelect extends FormDateSelectHelper
                 __METHOD__
             ));
         }
-
+        
+        $shouldRenderDelimiters = $element->shouldRenderDelimiters();
         $selectHelper = $this->getSelectElementHelper();
-        $pattern      = $this->parsePattern($element->shouldRenderDelimiters());
+        $pattern      = $this->parsePattern(shouldRenderDelimiters);
 
         $daysOptions   = $this->getDaysOptions($pattern['day']);
         $monthsOptions = $this->getMonthsOptions($pattern['month']);
@@ -88,6 +89,9 @@ class FormDateTimeSelect extends FormDateSelectHelper
             $data[$pattern['second']]  = $selectHelper->render($secondElement);
         } else {
             unset($pattern['second']);
+             if($shouldRenderDelimiters) {
+                unset($pattern[4]);
+            }
         }
 
         $markup = '';

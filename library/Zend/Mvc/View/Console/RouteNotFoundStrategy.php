@@ -221,7 +221,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                     continue; // this module does not provide a banner
                 }
 
-                // We colorize each banners in blue for visually splitting everything
+                // We colorize each banners in blue for visual emphasis
                 $banners[] = $console->colorize($module->getConsoleBanner($console), ColorInterface::BLUE);
             }
         }

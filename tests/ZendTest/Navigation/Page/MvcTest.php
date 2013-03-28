@@ -215,6 +215,44 @@ class MvcTest extends TestCase
         $this->assertEquals('/lolcat/myaction/1337#qux', $page->getHref());
     }
 
+    public function testGetHrefPassesQueryPartToRouter()
+    {
+        $page = new Page\Mvc(array(
+            'label'              => 'foo',
+            'query'              => 'foo=bar&baz=qux',
+            'controller'         => 'mycontroller',
+            'action'             => 'myaction',
+            'route'              => 'myroute',
+            'params'             => array(
+                'page' => 1337
+            )
+        ));
+
+        $route = new RegexRoute(
+            '(lolcat/(?<action>[^/]+)/(?<page>\d+))',
+            '/lolcat/%action%/%page%',
+            array(
+                'controller' => 'foobar',
+                'action'     => 'bazbat',
+                'page'       => 1,
+            )
+        );
+        $this->router->addRoute('myroute', $route);
+        $this->routeMatch->setMatchedRouteName('myroute');
+
+        $page->setRouteMatch($this->routeMatch);
+        $page->setRouter($this->router);
+
+        $this->assertEquals('/lolcat/myaction/1337?foo=bar&baz=qux', $page->getHref());
+
+        // Test with array notation
+        $page->setQuery(array(
+            'foo' => 'bar',
+            'baz' => 'qux',
+        ));
+        $this->assertEquals('/lolcat/myaction/1337?foo=bar&baz=qux', $page->getHref());
+    }
+
     public function testIsActiveReturnsTrueOnIdenticalControllerAction()
     {
         $page = new Page\Mvc(array(

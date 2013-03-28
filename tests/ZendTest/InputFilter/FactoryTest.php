@@ -428,4 +428,14 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter->getInputFilter());
         $this->assertEquals(3, $inputFilter->getCount());
     }
+
+    public function testFactoryWillCreateInputWithErrorMessage()
+    {
+        $factory = new Factory();
+        $input   = $factory->createInput(array(
+            'name'          => 'foo',
+            'error_message' => 'My custom error message',
+        ));
+        $this->assertEquals('My custom error message', $input->getErrorMessage());
+    }
 }

@@ -157,7 +157,7 @@ abstract class Console
     public static function overrideIsConsole($flag)
     {
         if(null != $flag) {
-            $flag = (bool)$flag;
+            $flag = (bool) $flag;
         }
         static::$isConsole = $flag;
     }

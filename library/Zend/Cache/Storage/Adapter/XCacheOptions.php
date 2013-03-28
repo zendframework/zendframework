@@ -100,7 +100,7 @@ class XCacheOptions extends AdapterOptions
      */
     public function setAdminAuth($adminAuth)
     {
-        $adminAuth = (boolean)$adminAuth;
+        $adminAuth = (bool) $adminAuth;
         if ($this->adminAuth !== $adminAuth) {
             $this->triggerOptionEvent('admin_auth', $adminAuth);
             $this->adminAuth = $adminAuth;

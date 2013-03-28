@@ -104,7 +104,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      */
     public function setUseConsoleRequest($boolean)
     {
-        $this->useConsoleRequest = (boolean) $boolean;
+        $this->useConsoleRequest = (bool) $boolean;
         return $this;
     }
 

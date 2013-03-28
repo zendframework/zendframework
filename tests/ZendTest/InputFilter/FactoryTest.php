@@ -413,4 +413,14 @@ class FactoryTest extends TestCase
         $test = $input->getFilterChain();
         $this->assertSame($chain, $test);
     }
+
+    public function testFactoryWillCreateInputWithErrorMessage()
+    {
+        $factory = new Factory();
+        $input   = $factory->createInput(array(
+            'name'          => 'foo',
+            'error_message' => 'My custom error message',
+        ));
+        $this->assertEquals('My custom error message', $input->getErrorMessage());
+    }
 }

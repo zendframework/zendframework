@@ -95,6 +95,28 @@ class FormElementErrors extends AbstractHelper
     }
 
     /**
+     * Set the attributes that will go on the message open format
+     *
+     * @param  array $attributes key value pairs of attributes
+     * @return FormElementErrors
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+
+    /**
+     * Get the attributes that will go on the message open format
+     *
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
      * Set the string used to close message representation
      *
      * @param  string $messageCloseString
@@ -103,7 +125,6 @@ class FormElementErrors extends AbstractHelper
     public function setMessageCloseString($messageCloseString)
     {
         $this->messageCloseString = (string) $messageCloseString;
-
         return $this;
     }
 
@@ -126,7 +147,6 @@ class FormElementErrors extends AbstractHelper
     public function setMessageOpenFormat($messageOpenFormat)
     {
         $this->messageOpenFormat = (string) $messageOpenFormat;
-
         return $this;
     }
 
@@ -149,7 +169,6 @@ class FormElementErrors extends AbstractHelper
     public function setMessageSeparatorString($messageSeparatorString)
     {
         $this->messageSeparatorString = (string) $messageSeparatorString;
-
         return $this;
     }
 
@@ -161,28 +180,5 @@ class FormElementErrors extends AbstractHelper
     public function getMessageSeparatorString()
     {
         return $this->messageSeparatorString;
-    }
-
-    /**
-     * Set the attributes that will go on the message open format
-     *
-     * @param  array $attributes key value pairs of attributes
-     * @return FormElementErrors
-     */
-    public function setAttributes(array $attributes)
-    {
-        $this->attributes = $attributes;
-
-        return $this;
-    }
-
-    /**
-     * Get the attributes that will go on the message open format
-     *
-     * @return array
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
     }
 }

@@ -21,28 +21,28 @@ use Zend\View\Helper\AbstractHelper;
 class DateFormat extends AbstractHelper
 {
     /**
-     * Locale to use instead of the default.
+     * Locale to use instead of the default
      *
      * @var string
      */
     protected $locale;
 
     /**
-     * Timezone to use.
+     * Timezone to use
      *
      * @var string
      */
     protected $timezone;
 
     /**
-     * Formatter instances.
+     * Formatter instances
      *
      * @var array
      */
     protected $formatters = array();
 
     /**
-     * Format a date.
+     * Format a date
      *
      * @param  DateTime|integer|array $date
      * @param  int                    $dateType
@@ -85,7 +85,33 @@ class DateFormat extends AbstractHelper
     }
 
     /**
-     * Set timezone to use instead of the default.
+     * Set locale to use instead of the default
+     *
+     * @param  string $locale
+     * @return DateFormat
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = (string) $locale;
+        return $this;
+    }
+
+    /**
+     * Get the locale to use
+     *
+     * @return string|null
+     */
+    public function getLocale()
+    {
+        if ($this->locale === null) {
+            $this->locale = Locale::getDefault();
+        }
+
+        return $this->locale;
+    }
+
+    /**
+     * Set timezone to use instead of the default
      *
      * @param  string $timezone
      * @return DateFormat
@@ -102,7 +128,7 @@ class DateFormat extends AbstractHelper
     }
 
     /**
-     * Get the timezone to use.
+     * Get the timezone to use
      *
      * @return string|null
      */
@@ -113,32 +139,5 @@ class DateFormat extends AbstractHelper
         }
 
         return $this->timezone;
-    }
-
-    /**
-     * Set locale to use instead of the default.
-     *
-     * @param  string $locale
-     * @return DateFormat
-     */
-    public function setLocale($locale)
-    {
-        $this->locale = (string) $locale;
-
-        return $this;
-    }
-
-    /**
-     * Get the locale to use.
-     *
-     * @return string|null
-     */
-    public function getLocale()
-    {
-        if ($this->locale === null) {
-            $this->locale = Locale::getDefault();
-        }
-
-        return $this->locale;
     }
 }

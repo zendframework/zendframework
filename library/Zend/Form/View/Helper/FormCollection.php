@@ -163,7 +163,6 @@ class FormCollection extends AbstractHelper
     public function setShouldWrap($wrap)
     {
         $this->shouldWrap = (bool) $wrap;
-
         return $this;
     }
 
@@ -178,6 +177,18 @@ class FormCollection extends AbstractHelper
     }
 
     /**
+     * Sets the name of the view helper that should be used to render sub elements.
+     *
+     * @param  string $defaultSubHelper The name of the view helper to set.
+     * @return FormCollection
+     */
+    public function setDefaultElementHelper($defaultSubHelper)
+    {
+        $this->defaultElementHelper = $defaultSubHelper;
+        return $this;
+    }
+
+    /**
      * Gets the name of the view helper that should be used to render sub elements.
      *
      * @return string
@@ -188,15 +199,14 @@ class FormCollection extends AbstractHelper
     }
 
     /**
-     * Sets the name of the view helper that should be used to render sub elements.
+     * Sets the element helper that should be used by this collection.
      *
-     * @param  string $defaultSubHelper The name of the view helper to set.
+     * @param  AbstractHelper $elementHelper The element helper to use.
      * @return FormCollection
      */
-    public function setDefaultElementHelper($defaultSubHelper)
+    public function setElementHelper(AbstractHelper $elementHelper)
     {
-        $this->defaultElementHelper = $defaultSubHelper;
-
+        $this->elementHelper = $elementHelper;
         return $this;
     }
 
@@ -225,34 +235,6 @@ class FormCollection extends AbstractHelper
     }
 
     /**
-     * Sets the element helper that should be used by this collection.
-     *
-     * @param  AbstractHelper $elementHelper The element helper to use.
-     * @return FormCollection
-     */
-    public function setElementHelper(AbstractHelper $elementHelper)
-    {
-        $this->elementHelper = $elementHelper;
-
-        return $this;
-    }
-
-    /**
-     * Retrieve the fieldset helper.
-     *
-     * @return AbstractHelper
-     */
-    protected function getFieldsetHelper()
-    {
-        if ($this->fieldsetHelper) {
-            return $this->fieldsetHelper;
-        }
-
-        //if no special fieldset helper was set fall back to FormCollection helper
-        return $this;
-    }
-
-    /**
      * Sets the fieldset helper that should be used by this collection.
      *
      * @param  AbstractHelper $fieldsetHelper The fieldset helper to use.
@@ -261,6 +243,19 @@ class FormCollection extends AbstractHelper
     public function setFieldsetHelper(AbstractHelper $fieldsetHelper)
     {
         $this->fieldsetHelper = $fieldsetHelper;
+        return $this;
+    }
+
+    /**
+     * Retrieve the fieldset helper.
+     *
+     * @return FormCollection
+     */
+    protected function getFieldsetHelper()
+    {
+        if ($this->fieldsetHelper) {
+            return $this->fieldsetHelper;
+        }
 
         return $this;
     }

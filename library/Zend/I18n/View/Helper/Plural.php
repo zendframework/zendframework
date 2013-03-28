@@ -28,7 +28,7 @@ use Zend\View\Helper\AbstractHelper;
 class Plural extends AbstractHelper
 {
     /**
-     * Rule to use
+     * Plural rule to use
      *
      * @var PluralRule
      */
@@ -45,7 +45,7 @@ class Plural extends AbstractHelper
      */
     public function __invoke($strings, $number)
     {
-        if ($this->rule === null) {
+        if (null === $this->getPluralRule()) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'No plural rule was set'
             ));
@@ -55,7 +55,7 @@ class Plural extends AbstractHelper
             $strings = (array) $strings;
         }
 
-        $pluralIndex = $this->rule->evaluate($number);
+        $pluralIndex = $this->getPluralRule()->evaluate($number);
 
         return $strings[$pluralIndex];
     }
@@ -75,5 +75,15 @@ class Plural extends AbstractHelper
         $this->rule = $pluralRule;
 
         return $this;
+    }
+
+    /**
+     * Get the plural rule to  use
+     *
+     * @return PluralRule
+     */
+    public function getPluralRule()
+    {
+        return $this->rule;
     }
 }

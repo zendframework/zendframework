@@ -89,7 +89,6 @@ abstract class AbstractTranslatorHelper extends AbstractHelper implements
     public function setTranslatorEnabled($enabled = true)
     {
         $this->translatorEnabled = (bool) $enabled;
-
         return $this;
     }
 
@@ -112,7 +111,6 @@ abstract class AbstractTranslatorHelper extends AbstractHelper implements
     public function setTranslatorTextDomain($textDomain = 'default')
     {
         $this->translatorTextDomain = $textDomain;
-
         return $this;
     }
 

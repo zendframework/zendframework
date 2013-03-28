@@ -192,7 +192,6 @@ abstract class AbstractWord extends FormInput
     public function setSeparator($separator)
     {
         $this->separator = (string) $separator;
-
         return $this;
     }
 

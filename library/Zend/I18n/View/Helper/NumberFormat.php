@@ -19,35 +19,35 @@ use Zend\View\Helper\AbstractHelper;
 class NumberFormat extends AbstractHelper
 {
     /**
-     * Locale to use instead of the default.
-     *
-     * @var string
-     */
-    protected $locale;
-
-    /**
-     * NumberFormat style to use.
+     * NumberFormat style to use
      *
      * @var integer
      */
     protected $formatStyle;
 
     /**
-     * NumberFormat type to use.
+     * NumberFormat type to use
      *
      * @var integer
      */
     protected $formatType;
 
     /**
-     * Formatter instances.
+     * Formatter instances
      *
      * @var array
      */
     protected $formatters = array();
 
     /**
-     * Format a number.
+     * Locale to use instead of the default
+     *
+     * @var string
+     */
+    protected $locale;
+
+    /**
+     * Format a number
      *
      * @param  int|float $number
      * @param  int       $formatStyle
@@ -84,7 +84,7 @@ class NumberFormat extends AbstractHelper
     }
 
     /**
-     * Set format style to use instead of the default.
+     * Set format style to use instead of the default
      *
      * @param  int $formatStyle
      * @return NumberFormat
@@ -92,12 +92,11 @@ class NumberFormat extends AbstractHelper
     public function setFormatStyle($formatStyle)
     {
         $this->formatStyle = (int) $formatStyle;
-
         return $this;
     }
 
     /**
-     * Get the format style to use.
+     * Get the format style to use
      *
      * @return int
      */
@@ -111,7 +110,7 @@ class NumberFormat extends AbstractHelper
     }
 
     /**
-     * Set format type to use instead of the default.
+     * Set format type to use instead of the default
      *
      * @param  int $formatType
      * @return NumberFormat
@@ -119,12 +118,11 @@ class NumberFormat extends AbstractHelper
     public function setFormatType($formatType)
     {
         $this->formatType = (int) $formatType;
-
         return $this;
     }
 
     /**
-     * Get the format type to use.
+     * Get the format type to use
      *
      * @return int
      */
@@ -137,7 +135,7 @@ class NumberFormat extends AbstractHelper
     }
 
     /**
-     * Set locale to use instead of the default.
+     * Set locale to use instead of the default
      *
      * @param  string $locale
      * @return NumberFormat
@@ -145,12 +143,11 @@ class NumberFormat extends AbstractHelper
     public function setLocale($locale)
     {
         $this->locale = (string) $locale;
-
         return $this;
     }
 
     /**
-     * Get the locale to use.
+     * Get the locale to use
      *
      * @return string|null
      */

@@ -26,6 +26,8 @@ class FormSelect extends AbstractHelper
     protected $validTagAttributes;
 
     /**
+     * Attributes valid for select
+     *
      * @var array
      */
     protected $validSelectAttributes = array(
@@ -39,6 +41,8 @@ class FormSelect extends AbstractHelper
     );
 
     /**
+     * Attributes valid for options
+     *
      * @var array
      */
     protected $validOptionAttributes = array(
@@ -49,6 +53,8 @@ class FormSelect extends AbstractHelper
     );
 
     /**
+     * Attributes valid for option groups
+     *
      * @var array
      */
     protected $validOptgroupAttributes = array(

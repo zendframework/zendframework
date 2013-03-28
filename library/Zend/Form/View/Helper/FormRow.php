@@ -19,36 +19,50 @@ class FormRow extends AbstractHelper
     const LABEL_PREPEND = 'prepend';
 
     /**
-     * @var string
-     */
-    protected $labelPosition = self::LABEL_PREPEND;
-
-    /**
-     * @var bool
-     */
-    protected $renderErrors = true;
-
-    /**
-     * @var array
-     */
-    protected $labelAttributes;
-
-    /**
+     * The class that is added to element that have errors
+     *
      * @var string
      */
     protected $inputErrorClass = 'input-error';
 
     /**
+     * The attributes for the row label
+     *
+     * @var array
+     */
+    protected $labelAttributes;
+
+    /**
+     * Where will be label rendered?
+     *
+     * @var string
+     */
+    protected $labelPosition = self::LABEL_PREPEND;
+
+    /**
+     * Are the errors are rendered by this helper?
+     *
+     * @var bool
+     */
+    protected $renderErrors = true;
+
+    /**
+     * Form label helper instance
+     *
      * @var FormLabel
      */
     protected $labelHelper;
 
     /**
+     * Form element helper instance
+     *
      * @var FormElement
      */
     protected $elementHelper;
 
     /**
+     * Form element errors helper instance
+     *
      * @var FormElementErrors
      */
     protected $elementErrorsHelper;
@@ -171,6 +185,50 @@ class FormRow extends AbstractHelper
     }
 
     /**
+     * Set the class that is added to element that have errors
+     *
+     * @param  string $inputErrorClass
+     * @return FormRow
+     */
+    public function setInputErrorClass($inputErrorClass)
+    {
+        $this->inputErrorClass = $inputErrorClass;
+        return $this;
+    }
+
+    /**
+     * Get the class that is added to element that have errors
+     *
+     * @return string
+     */
+    public function getInputErrorClass()
+    {
+        return $this->inputErrorClass;
+    }
+
+    /**
+     * Set the attributes for the row label
+     *
+     * @param  array $labelAttributes
+     * @return FormRow
+     */
+    public function setLabelAttributes($labelAttributes)
+    {
+        $this->labelAttributes = $labelAttributes;
+        return $this;
+    }
+
+    /**
+     * Get the attributes for the row label
+     *
+     * @return array
+     */
+    public function getLabelAttributes()
+    {
+        return $this->labelAttributes;
+    }
+
+    /**
      * Set the label position
      *
      * @param  string $labelPosition
@@ -205,7 +263,7 @@ class FormRow extends AbstractHelper
     }
 
     /**
-     * Are the errors rendered by this helper ?
+     * Set if the errors are rendered by this helper
      *
      * @param  bool $renderErrors
      * @return FormRow
@@ -213,62 +271,17 @@ class FormRow extends AbstractHelper
     public function setRenderErrors($renderErrors)
     {
         $this->renderErrors = (bool) $renderErrors;
-
         return $this;
     }
 
     /**
+     * Retrive if the errors are rendered by this helper
+     *
      * @return bool
      */
     public function getRenderErrors()
     {
         return $this->renderErrors;
-    }
-
-    /**
-     * Set the attributes for the row label
-     *
-     * @param  array $labelAttributes
-     * @return FormRow
-     */
-    public function setLabelAttributes($labelAttributes)
-    {
-        $this->labelAttributes = $labelAttributes;
-
-        return $this;
-    }
-
-    /**
-     * Get the attributes for the row label
-     *
-     * @return array
-     */
-    public function getLabelAttributes()
-    {
-        return $this->labelAttributes;
-    }
-
-    /**
-     * Set the class that is added to element that have errors
-     *
-     * @param  string $inputErrorClass
-     * @return FormRow
-     */
-    public function setInputErrorClass($inputErrorClass)
-    {
-        $this->inputErrorClass = $inputErrorClass;
-
-        return $this;
-    }
-
-    /**
-     * Get the class that is added to element that have errors
-     *
-     * @return string
-     */
-    public function getInputErrorClass()
-    {
-        return $this->inputErrorClass;
     }
 
     /**

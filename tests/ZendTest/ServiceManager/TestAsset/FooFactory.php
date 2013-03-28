@@ -11,9 +11,10 @@
 namespace ZendTest\ServiceManager\TestAsset;
 
 use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\MutableCreationOptionsInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class FooFactory implements FactoryInterface
+class FooFactory implements FactoryInterface, MutableCreationOptionsInterface
 {
     protected $creationOptions;
 

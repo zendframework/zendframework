@@ -202,7 +202,7 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
         }
 
         if ($factory instanceof FactoryInterface) {
-            if ($hasCreationOptions && method_exists($factory, 'setCreationOptions')) {
+            if ($hasCreationOptions && $factory instanceof MutableCreationOptionsInterface) {
                 $factory->setCreationOptions($this->creationOptions);
             }
 

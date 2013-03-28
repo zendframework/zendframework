@@ -1,0 +1,17 @@
+<configData>
+    <pageOne>
+        <label>About</label>
+        <controller>about</controller>
+        <action>index</action>
+    </pageOne>
+    <pageTwo>
+        <label>Main</label>
+        <controller>index</controller>
+        <action>index</action>
+    </pageTwo>
+    <pageThree>
+        <label>Contacts</label>
+        <controller>contacts</controller>
+        <action>index</action>
+    </pageThree>
+</configData>

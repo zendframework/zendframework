@@ -17,11 +17,16 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class ConstructedNavigationFactory extends AbstractNavigationFactory
 {
     /**
+     * @var string|\Zend\Config\Config|array
+     */
+    protected $config;
+
+    /**
      * @param string|\Zend\Config\Config|array $config
      */
     public function __construct($config)
     {
-        $this->pages = $this->getPagesFromConfig($config);
+        $this->config = $config;
     }
 
     /**
@@ -30,6 +35,9 @@ class ConstructedNavigationFactory extends AbstractNavigationFactory
      */
     public function getPages(ServiceLocatorInterface $serviceLocator)
     {
+        if (null === $this->pages) {
+            $this->pages = $this->preparePages($serviceLocator, $this->getPagesFromConfig($this->config));
+        }
         return $this->pages;
     }
 

@@ -217,7 +217,7 @@ abstract class CommonStringWrapperTest extends TestCase
      * @param string  $str
      * @param integer $width
      * @param string  $break
-     * @param boolean $cut
+     * @param bool $cut
      * @param mixed   $expected
      */
     public function testWordWrap($encoding, $string, $width, $break, $cut, $expected)

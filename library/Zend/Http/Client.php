@@ -1004,7 +1004,7 @@ class Client implements Stdlib\DispatchableInterface
      *
      * @param   string $domain
      * @param   string $path
-     * @param   boolean $secure
+     * @param   bool $secure
      * @return  Header\Cookie|bool
      */
     protected function prepareCookies($domain, $path, $secure)

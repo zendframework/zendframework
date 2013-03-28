@@ -106,7 +106,7 @@ class ValidatorChain implements
      *
      * @deprecated Please use attach()
      * @param  ValidatorInterface      $validator
-     * @param  boolean                 $breakChainOnFailure
+     * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
     public function addValidator(ValidatorInterface $validator, $breakChainOnFailure = false)

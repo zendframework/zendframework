@@ -545,7 +545,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Returns whether the table is read only or not.
      *
-     * @return boolean
+     * @return bool
      */
     public function isTableReadOnly()
     {

@@ -94,7 +94,7 @@ class IsInstanceOf extends AbstractValidator
      * Returns true if $value is instance of $this->className
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

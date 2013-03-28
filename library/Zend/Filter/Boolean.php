@@ -90,7 +90,7 @@ class Boolean extends AbstractFilter
      *
      * @param  integer|array $type
      * @throws Exception\InvalidArgumentException
-     * @return Boolean
+     * @return bool
      */
     public function setType($type = null)
     {
@@ -137,7 +137,7 @@ class Boolean extends AbstractFilter
      * @param  bool $flag When true this filter works like cast
      *                       When false it recognises only true and false
      *                       and all other values are returned as is
-     * @return Boolean
+     * @return bool
      */
     public function setCasting($flag = true)
     {
@@ -158,7 +158,7 @@ class Boolean extends AbstractFilter
     /**
      * @param  array|Traversable $translations
      * @throws Exception\InvalidArgumentException
-     * @return Boolean
+     * @return bool
      */
     public function setTranslations($translations)
     {

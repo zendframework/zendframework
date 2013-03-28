@@ -73,7 +73,7 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
-     * @param  boolean $flag When true, this filter will use the $_FILES['name']
+     * @param  bool $flag When true, this filter will use the $_FILES['name']
      *                       as the target filename.
      *                       Otherwise, it uses the default 'target' rules.
      * @return RenameUpload
@@ -85,7 +85,7 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getUseUploadName()
     {
@@ -93,8 +93,8 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
-     * @param boolean $flag When true, this filter will use the original file
-     *                      extension for the target filename
+     * @param  bool $flag When true, this filter will use the original file
+     *                    extension for the target filename
      * @return RenameUpload
      */
     public function setUseUploadExtension($flag = true)
@@ -104,7 +104,7 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getUseUploadExtension()
     {
@@ -112,7 +112,7 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
-     * @param  boolean $flag Shall existing files be overwritten?
+     * @param  bool $flag Shall existing files be overwritten?
      * @return RenameUpload
      */
     public function setOverwrite($flag = true)
@@ -122,7 +122,7 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getOverwrite()
     {
@@ -130,7 +130,7 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
-     * @param  boolean $flag Shall target files have a random postfix attached?
+     * @param  bool $flag Shall target files have a random postfix attached?
      * @return RenameUpload
      */
     public function setRandomize($flag = true)
@@ -140,7 +140,7 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getRandomize()
     {
@@ -199,7 +199,7 @@ class RenameUpload extends AbstractFilter
      * @param  string $sourceFile Source file path
      * @param  string $targetFile Target file path
      * @throws \Zend\Filter\Exception\RuntimeException
-     * @return boolean
+     * @return bool
      */
     protected function moveUploadedFile($sourceFile, $targetFile)
     {

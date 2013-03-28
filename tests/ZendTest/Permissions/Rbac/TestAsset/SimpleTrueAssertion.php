@@ -25,7 +25,7 @@ class SimpleTrueAssertion implements AssertionInterface
      * Assertion method - must return a boolean.
      *
      * @param  Rbac    $bac
-     * @return boolean
+     * @return bool
      */
     public function assert(Rbac $rbac)
     {

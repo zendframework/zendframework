@@ -33,7 +33,7 @@ class Memcached extends AbstractAdapter implements
     /**
      * Has this instance be initialized
      *
-     * @var boolean
+     * @var bool
      */
     protected $initialized = false;
 

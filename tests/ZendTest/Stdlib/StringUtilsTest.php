@@ -142,7 +142,7 @@ class StringUtilsTest extends TestCase
     /**
      * @dataProvider getUtf8StringValidity
      * @param string $str
-     * @param boolean $valid
+     * @param bool $valid
      */
     public function testIsValidUtf8($str, $valid)
     {

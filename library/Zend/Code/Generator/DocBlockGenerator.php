@@ -35,7 +35,7 @@ class DocBlockGenerator extends AbstractGenerator
     protected $indentation = '';
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $wordwrap = true;
 
@@ -193,7 +193,7 @@ class DocBlockGenerator extends AbstractGenerator
     /**
      * Set the word wrap
      *
-     * @param boolean $value
+     * @param bool $value
      * @return \Zend\Code\Generator\DocBlockGenerator
      */
     public function setWordWrap($value)
@@ -205,7 +205,7 @@ class DocBlockGenerator extends AbstractGenerator
     /**
      * Get the word wrap
      *
-     * @return boolean
+     * @return bool
      */
     public function getWordWrap()
     {

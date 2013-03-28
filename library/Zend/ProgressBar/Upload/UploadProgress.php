@@ -20,7 +20,7 @@ class UploadProgress extends AbstractUploadHandler
 {
     /**
      * @param  string $id
-     * @return array|boolean
+     * @return array|bool
      * @throws Exception\PhpEnvironmentException
      */
     protected function getUploadProgress($id)
@@ -57,7 +57,7 @@ class UploadProgress extends AbstractUploadHandler
     /**
      * Checks for the UploadProgress extension
      *
-     * @return boolean
+     * @return bool
      */
     public function isUploadProgressAvailable()
     {

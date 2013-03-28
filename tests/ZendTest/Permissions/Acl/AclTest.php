@@ -182,11 +182,11 @@ class AclTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests basic Role multiple inheritance
+     * Tests basic Role multiple inheritance with array
      *
      * @return void
      */
-    public function testRoleRegistryInheritsMultiple()
+    public function testRoleRegistryInheritsMultipleArray()
     {
         $roleParent1 = new Role\GenericRole('parent1');
         $roleParent2 = new Role\GenericRole('parent2');
@@ -195,6 +195,39 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $roleRegistry->add($roleParent1)
                      ->add($roleParent2)
                      ->add($roleChild, array($roleParent1, $roleParent2));
+        $roleChildParents = $roleRegistry->getParents($roleChild);
+        $this->assertTrue(2 === count($roleChildParents));
+        $i = 1;
+        foreach ($roleChildParents as $roleParentId => $roleParent) {
+            $this->assertTrue("parent$i" === $roleParentId);
+            $i++;
+        }
+        $this->assertTrue($roleRegistry->inherits($roleChild, $roleParent1));
+        $this->assertTrue($roleRegistry->inherits($roleChild, $roleParent2));
+        $roleRegistry->remove($roleParent1);
+        $roleChildParents = $roleRegistry->getParents($roleChild);
+        $this->assertTrue(1 === count($roleChildParents));
+        $this->assertTrue(isset($roleChildParents['parent2']));
+        $this->assertTrue($roleRegistry->inherits($roleChild, $roleParent2));
+    }
+
+    /**
+     * Tests basic Role multiple inheritance with traversable object
+     *
+     * @return void
+     */
+    public function testRoleRegistryInheritsMultipleTraversable()
+    {
+        $roleParent1 = new Role\GenericRole('parent1');
+        $roleParent2 = new Role\GenericRole('parent2');
+        $roleChild   = new Role\GenericRole('child');
+        $roleRegistry = new Role\Registry();
+        $roleRegistry->add($roleParent1)
+            ->add($roleParent2)
+            ->add(
+                $roleChild,
+                new \ArrayIterator(array($roleParent1, $roleParent2))
+            );
         $roleChildParents = $roleRegistry->getParents($roleChild);
         $this->assertTrue(2 === count($roleChildParents));
         $i = 1;

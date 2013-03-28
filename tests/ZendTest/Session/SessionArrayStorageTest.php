@@ -172,7 +172,7 @@ class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
      */
     public function testExpirationHops()
     {
-        // since we cannot explicitly test reinitalizing the session
+        // since we cannot explicitly test reinitializing the session
         // we will act in how session manager would in this case.
         $storage = new SessionArrayStorage();
         $manager = new SessionManager(null, $storage);

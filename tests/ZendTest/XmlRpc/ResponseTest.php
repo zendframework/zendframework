@@ -30,7 +30,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     /**
      * @var bool
      */
-    protected $_errorOccured = false;
+    protected $_errorOccurred = false;
 
     /**
      * Setup environment
@@ -133,9 +133,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         set_error_handler(array($this, 'trackError'));
         $invalidResponse = 'foo';
         $response = new Response();
-        $this->assertFalse($this->_errorOccured);
+        $this->assertFalse($this->_errorOccurred);
         $this->assertFalse($response->loadXml($invalidResponse));
-        $this->assertFalse($this->_errorOccured);
+        $this->assertFalse($this->_errorOccurred);
     }
 
     /**
@@ -242,7 +242,7 @@ EOD;
 
     public function trackError($error)
     {
-        $this->_errorOccured = true;
+        $this->_errorOccurred = true;
     }
 
     /**

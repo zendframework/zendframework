@@ -103,7 +103,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Navigation\MvcNavigationFactory
+     * @covers \Zend\Navigation\Service\AbstractNavigationFactory
      */
     public function testDefaultFactoryAcceptsFileString()
     {
@@ -112,7 +112,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Navigation\MvcNavigationFactory
+     * @covers \Zend\Navigation\Service\DefaultNavigationFactory
      */
     public function testMvcPagesGetInjectedWithComponents()
     {
@@ -182,7 +182,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Navigation\MvcNavigationFactory
+     * @covers \Zend\Navigation\Service\DefaultNavigationFactory
      */
     public function testDefaultFactory()
     {
@@ -193,7 +193,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Navigation\MvcNavigationFactory
+     * @covers \Zend\Navigation\Service\ConstructedNavigationFactory
      */
     public function testConstructedFromArray()
     {
@@ -220,7 +220,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Navigation\MvcNavigationFactory
+     * @covers \Zend\Navigation\Service\ConstructedNavigationFactory
      */
     public function testConstructedFromFileString()
     {
@@ -233,7 +233,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Navigation\MvcNavigationFactory
+     * @covers \Zend\Navigation\Service\ConstructedNavigationFactory
      */
     public function testConstructedFromConfig()
     {

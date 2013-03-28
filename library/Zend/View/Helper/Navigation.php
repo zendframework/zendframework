@@ -28,11 +28,6 @@ class Navigation extends AbstractNavigationHelper
     const NS = 'Zend\View\Helper\Navigation';
 
     /**
-     * @var Navigation\PluginManager
-     */
-    protected $plugins;
-
-    /**
      * Default proxy to use in {@link render()}
      *
      * @var string
@@ -47,13 +42,6 @@ class Navigation extends AbstractNavigationHelper
     protected $injected = array();
 
     /**
-     * Whether container should be injected when proxying
-     *
-     * @var bool
-     */
-    protected $injectContainer = true;
-
-    /**
      * Whether ACL should be injected when proxying
      *
      * @var bool
@@ -61,11 +49,23 @@ class Navigation extends AbstractNavigationHelper
     protected $injectAcl = true;
 
     /**
+     * Whether container should be injected when proxying
+     *
+     * @var bool
+     */
+    protected $injectContainer = true;
+
+    /**
      * Whether translator should be injected when proxying
      *
      * @var bool
      */
     protected $injectTranslator = true;
+
+    /**
+     * @var Navigation\PluginManager
+     */
+    protected $plugins;
 
     /**
      * Helper entry point
@@ -130,43 +130,7 @@ class Navigation extends AbstractNavigationHelper
      */
     public function render($container = null)
     {
-        $helper = $this->findHelper($this->getDefaultProxy());
-
-        return $helper->render($container);
-    }
-
-    /**
-     * Set manager for retrieving navigation helpers
-     *
-     * @param  Navigation\PluginManager $plugins
-     * @return Navigation
-     */
-    public function setPluginManager(Navigation\PluginManager $plugins)
-    {
-        $renderer = $this->getView();
-        if ($renderer) {
-            $plugins->setRenderer($renderer);
-        }
-        $this->plugins = $plugins;
-
-        return $this;
-    }
-
-    /**
-     * Retrieve plugin loader for navigation helpers
-     *
-     * Lazy-loads an instance of Navigation\HelperLoader if none currently
-     * registered.
-     *
-     * @return Navigation\PluginManager
-     */
-    public function getPluginManager()
-    {
-        if (null === $this->plugins) {
-            $this->setPluginManager(new Navigation\PluginManager());
-        }
-
-        return $this->plugins;
+        return $this->findHelper($this->getDefaultProxy())->render($container);
     }
 
     /**
@@ -237,8 +201,6 @@ class Navigation extends AbstractNavigationHelper
         }
     }
 
-    // Accessors:
-
     /**
      * Sets the default proxy to use in {@link render()}
      *
@@ -248,7 +210,6 @@ class Navigation extends AbstractNavigationHelper
     public function setDefaultProxy($proxy)
     {
         $this->defaultProxy = (string) $proxy;
-
         return $this;
     }
 
@@ -265,20 +226,19 @@ class Navigation extends AbstractNavigationHelper
     /**
      * Sets whether container should be injected when proxying
      *
-     * @param  bool $injectContainer [optional] whether container should be injected when proxying.
+     * @param  bool $injectContainer
      * @return Navigation
      */
     public function setInjectContainer($injectContainer = true)
     {
         $this->injectContainer = (bool) $injectContainer;
-
         return $this;
     }
 
     /**
      * Returns whether container should be injected when proxying
      *
-     * @return bool whether container should be injected when proxying
+     * @return bool
      */
     public function getInjectContainer()
     {
@@ -288,20 +248,19 @@ class Navigation extends AbstractNavigationHelper
     /**
      * Sets whether ACL should be injected when proxying
      *
-     * @param  bool $injectAcl [optional] whether ACL should be injected when proxying.
+     * @param  bool $injectAcl
      * @return Navigation
      */
     public function setInjectAcl($injectAcl = true)
     {
         $this->injectAcl = (bool) $injectAcl;
-
         return $this;
     }
 
     /**
      * Returns whether ACL should be injected when proxying
      *
-     * @return bool  whether ACL should be injected when proxying
+     * @return bool
      */
     public function getInjectAcl()
     {
@@ -311,23 +270,56 @@ class Navigation extends AbstractNavigationHelper
     /**
      * Sets whether translator should be injected when proxying
      *
-     * @param  bool $injectTranslator [optional] whether translator should be injected when proxying.
+     * @param  bool $injectTranslator
      * @return Navigation
      */
     public function setInjectTranslator($injectTranslator = true)
     {
         $this->injectTranslator = (bool) $injectTranslator;
-
         return $this;
     }
 
     /**
      * Returns whether translator should be injected when proxying
      *
-     * @return bool  whether translator should be injected when proxying
+     * @return bool
      */
     public function getInjectTranslator()
     {
         return $this->injectTranslator;
+    }
+
+    /**
+     * Set manager for retrieving navigation helpers
+     *
+     * @param  Navigation\PluginManager $plugins
+     * @return Navigation
+     */
+    public function setPluginManager(Navigation\PluginManager $plugins)
+    {
+        $renderer = $this->getView();
+        if ($renderer) {
+            $plugins->setRenderer($renderer);
+        }
+        $this->plugins = $plugins;
+
+        return $this;
+    }
+
+    /**
+     * Retrieve plugin loader for navigation helpers
+     *
+     * Lazy-loads an instance of Navigation\HelperLoader if none currently
+     * registered.
+     *
+     * @return Navigation\PluginManager
+     */
+    public function getPluginManager()
+    {
+        if (null === $this->plugins) {
+            $this->setPluginManager(new Navigation\PluginManager());
+        }
+
+        return $this->plugins;
     }
 }

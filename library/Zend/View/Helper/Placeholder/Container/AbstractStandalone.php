@@ -9,18 +9,29 @@
 
 namespace Zend\View\Helper\Placeholder\Container;
 
+use ArrayAccess;
+use Countable;
+use IteratorAggregate;
 use Zend\Escaper\Escaper;
 use Zend\View\Exception;
+use Zend\View\Helper\AbstractHelper;
 use Zend\View\Helper\Placeholder\Registry;
 use Zend\View\Renderer\RendererInterface;
 
 /**
  * Base class for targeted placeholder helpers
  */
-abstract class AbstractStandalone
-    extends \Zend\View\Helper\AbstractHelper
-    implements \IteratorAggregate, \Countable, \ArrayAccess
+abstract class AbstractStandalone extends AbstractHelper
+    implements IteratorAggregate, Countable, ArrayAccess
 {
+    /**
+     * Flag whether to automatically escape output, must also be
+     * enforced in the child class if __toString/toString is overridden
+     *
+     * @var bool
+     */
+    protected $autoEscape = true;
+
     /**
      * @var AbstractContainer
      */
@@ -44,14 +55,6 @@ abstract class AbstractStandalone
     protected $regKey;
 
     /**
-     * Flag whether to automatically escape output, must also be
-     * enforced in the child class if __toString/toString is overridden
-     *
-     * @var bool
-     */
-    protected $autoEscape = true;
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -61,125 +64,28 @@ abstract class AbstractStandalone
     }
 
     /**
-     * Retrieve registry
+     * Overload
      *
-     * @return Registry
-     */
-    public function getRegistry()
-    {
-        return $this->registry;
-    }
-
-    /**
-     * Set registry object
+     * Proxy to container methods
      *
-     * @param  Registry $registry
-     * @return AbstractStandalone
-     */
-    public function setRegistry(Registry $registry)
-    {
-        $this->registry = $registry;
-
-        return $this;
-    }
-
-    /**
-     * Set Escaper instance
-     *
-     * @param  Escaper $escaper
-     * @return AbstractStandalone
-     */
-    public function setEscaper(Escaper $escaper)
-    {
-        $encoding = $escaper->getEncoding();
-        $this->escapers[$encoding] = $escaper;
-
-        return $this;
-    }
-
-    /**
-     * Get Escaper instance
-     *
-     * Lazy-loads one if none available
-     *
-     * @param  string|null $enc Encoding to use
+     * @param  string $method
+     * @param  array $args
+     * @throws Exception\BadMethodCallException
      * @return mixed
      */
-    public function getEscaper($enc = 'UTF-8')
+    public function __call($method, $args)
     {
-        $enc = strtolower($enc);
-        if (!isset($this->escapers[$enc])) {
-            $this->setEscaper(new Escaper($enc));
+        $container = $this->getContainer();
+        if (method_exists($container, $method)) {
+            $return = call_user_func_array(array($container, $method), $args);
+            if ($return === $container) {
+                // If the container is returned, we really want the current object
+                return $this;
+            }
+            return $return;
         }
 
-        return $this->escapers[$enc];
-    }
-
-    /**
-     * Set whether or not auto escaping should be used
-     *
-     * @param  bool $autoEscape whether or not to auto escape output
-     * @return AbstractStandalone
-     */
-    public function setAutoEscape($autoEscape = true)
-    {
-        $this->autoEscape = ($autoEscape) ? true : false;
-
-        return $this;
-    }
-
-    /**
-     * Return whether autoEscaping is enabled or disabled
-     *
-     * return bool
-     */
-    public function getAutoEscape()
-    {
-        return $this->autoEscape;
-    }
-
-    /**
-     * Escape a string
-     *
-     * @param  string $string
-     * @return string
-     */
-    protected function escape($string)
-    {
-        if ($this->view instanceof RendererInterface
-            && method_exists($this->view, 'getEncoding')
-        ) {
-            $enc     = $this->view->getEncoding();
-            $escaper = $this->view->plugin('escapeHtml');
-            return $escaper((string) $string);
-        }
-
-        $escaper = $this->getEscaper();
-
-        return $escaper->escapeHtml((string) $string);
-    }
-
-    /**
-     * Set container on which to operate
-     *
-     * @param  AbstractContainer $container
-     * @return AbstractStandalone
-     */
-    public function setContainer(AbstractContainer $container)
-    {
-        $this->container = $container;
-
-        return $this;
-    }
-
-    /**
-     * Retrieve placeholder container
-     *
-     * @return AbstractContainer
-     */
-    public function getContainer()
-    {
-        return $this->container;
+        throw new Exception\BadMethodCallException('Method "' . $method . '" does not exist');
     }
 
     /**
@@ -238,28 +144,13 @@ abstract class AbstractStandalone
     }
 
     /**
-     * Overload
+     * Cast to string representation
      *
-     * Proxy to container methods
-     *
-     * @param  string $method
-     * @param  array $args
-     * @throws Exception\BadMethodCallException
-     * @return mixed
+     * @return string
      */
-    public function __call($method, $args)
+    public function __toString()
     {
-        $container = $this->getContainer();
-        if (method_exists($container, $method)) {
-            $return = call_user_func_array(array($container, $method), $args);
-            if ($return === $container) {
-                // If the container is returned, we really want the current object
-                return $this;
-            }
-            return $return;
-        }
-
-        throw new Exception\BadMethodCallException('Method "' . $method . '" does not exist');
+        return $this->toString();
     }
 
     /**
@@ -273,13 +164,120 @@ abstract class AbstractStandalone
     }
 
     /**
-     * Cast to string representation
+     * Escape a string
      *
+     * @param  string $string
      * @return string
      */
-    public function __toString()
+    protected function escape($string)
     {
-        return $this->toString();
+        if ($this->getView() instanceof RendererInterface
+            && method_exists($this->getView(), 'getEncoding')
+        ) {
+            $enc     = $this->getView()->getEncoding();
+            $escaper = $this->getView()->plugin('escapeHtml');
+            return $escaper((string) $string);
+        }
+
+        return $this->getEscaper()->escapeHtml((string) $string);
+    }
+
+    /**
+     * Set whether or not auto escaping should be used
+     *
+     * @param  bool $autoEscape whether or not to auto escape output
+     * @return AbstractStandalone
+     */
+    public function setAutoEscape($autoEscape = true)
+    {
+        $this->autoEscape = ($autoEscape) ? true : false;
+        return $this;
+    }
+
+    /**
+     * Return whether autoEscaping is enabled or disabled
+     *
+     * return bool
+     */
+    public function getAutoEscape()
+    {
+        return $this->autoEscape;
+    }
+
+    /**
+     * Set container on which to operate
+     *
+     * @param  AbstractContainer $container
+     * @return AbstractStandalone
+     */
+    public function setContainer(AbstractContainer $container)
+    {
+        $this->container = $container;
+        return $this;
+    }
+
+    /**
+     * Retrieve placeholder container
+     *
+     * @return AbstractContainer
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
+    /**
+     * Set Escaper instance
+     *
+     * @param  Escaper $escaper
+     * @return AbstractStandalone
+     */
+    public function setEscaper(Escaper $escaper)
+    {
+        $encoding = $escaper->getEncoding();
+        $this->escapers[$encoding] = $escaper;
+
+        return $this;
+    }
+
+    /**
+     * Get Escaper instance
+     *
+     * Lazy-loads one if none available
+     *
+     * @param  string|null $enc Encoding to use
+     * @return mixed
+     */
+    public function getEscaper($enc = 'UTF-8')
+    {
+        $enc = strtolower($enc);
+        if (!isset($this->escapers[$enc])) {
+            $this->setEscaper(new Escaper($enc));
+        }
+
+        return $this->escapers[$enc];
+    }
+
+    /**
+     * Set registry object
+     *
+     * @param  Registry $registry
+     * @return AbstractStandalone
+     */
+    public function setRegistry(Registry $registry)
+    {
+        $this->registry = $registry;
+        return $this;
+    }
+
+    /**
+     * Retrieve registry
+     *
+     * @return Registry
+     */
+    public function getRegistry()
+    {
+        return $this->registry;
     }
 
     /**
@@ -290,7 +288,6 @@ abstract class AbstractStandalone
     public function count()
     {
         $container = $this->getContainer();
-
         return count($container);
     }
 
@@ -342,7 +339,7 @@ abstract class AbstractStandalone
     /**
      * IteratorAggregate: get Iterator
      *
-     * @return \Iterator
+     * @return Iterator
      */
     public function getIterator()
     {

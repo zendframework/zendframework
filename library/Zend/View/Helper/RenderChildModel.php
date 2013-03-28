@@ -120,8 +120,12 @@ class RenderChildModel extends AbstractHelper
      */
     protected function getViewModelHelper()
     {
-        if (null === $this->viewModelHelper) {
-            $this->viewModelHelper = $this->getView()->plugin('view_model');
+        if ($this->viewModelHelper) {
+            return $this->viewModelHelper;
+        }
+
+        if (method_exists($this->getView(), 'plugin')) {
+            $this->viewModelHelper = $this->view->plugin('view_model');
         }
 
         return $this->viewModelHelper;

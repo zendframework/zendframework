@@ -27,23 +27,15 @@ class ViewModel extends AbstractHelper
     protected $root;
 
     /**
-     * Get the root view model
+     * Set the current view model
      *
-     * @return null|Model
+     * @param  Model $model
+     * @return ViewModel
      */
-    public function getRoot()
+    public function setCurrent(Model $model)
     {
-        return $this->root;
-    }
-
-    /**
-     * Is a root view model composed?
-     *
-     * @return bool
-     */
-    public function hasRoot()
-    {
-        return ($this->root instanceof Model);
+        $this->current = $model;
+        return $this;
     }
 
     /**
@@ -75,20 +67,26 @@ class ViewModel extends AbstractHelper
     public function setRoot(Model $model)
     {
         $this->root = $model;
-
         return $this;
     }
 
     /**
-     * Set the current view model
+     * Get the root view model
      *
-     * @param  Model $model
-     * @return ViewModel
+     * @return null|Model
      */
-    public function setCurrent(Model $model)
+    public function getRoot()
     {
-        $this->current = $model;
+        return $this->root;
+    }
 
-        return $this;
+    /**
+     * Is a root view model composed?
+     *
+     * @return bool
+     */
+    public function hasRoot()
+    {
+        return ($this->root instanceof Model);
     }
 }

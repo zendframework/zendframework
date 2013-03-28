@@ -162,6 +162,101 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     }
 
     /**
+     * Create string representation of placeholder
+     *
+     * @param  string|int $indent
+     * @return string
+     */
+    public function toString($indent = null)
+    {
+        $indent = (null !== $indent)
+            ? $this->getWhitespace($indent)
+            : $this->getIndent();
+
+        $items = array();
+        $this->getContainer()->ksort();
+        foreach ($this as $item) {
+            if (!$this->isValid($item)) {
+                continue;
+            }
+            $items[] = $this->itemToString($item, $indent);
+        }
+
+        $return = $indent . implode($this->getSeparator() . $indent, $items);
+        $return = preg_replace("/(\r\n?|\n)/", '$1' . $indent, $return);
+
+        return $return;
+    }
+
+    /**
+     * Start capture action
+     *
+     * @param  string $type
+     * @param  string $attrs
+     * @throws Exception\RuntimeException
+     * @return void
+     */
+    public function captureStart($type = Placeholder\Container\AbstractContainer::APPEND, $attrs = null)
+    {
+        if ($this->captureLock) {
+            throw new Exception\RuntimeException('Cannot nest headStyle captures');
+        }
+
+        $this->captureLock        = true;
+        $this->captureAttrs       = $attrs;
+        $this->captureType        = $type;
+        ob_start();
+    }
+
+    /**
+     * End capture action and store
+     *
+     * @return void
+     */
+    public function captureEnd()
+    {
+        $content             = ob_get_clean();
+        $attrs               = $this->captureAttrs;
+        $this->captureAttrs = null;
+        $this->captureLock  = false;
+
+        switch ($this->captureType) {
+            case Placeholder\Container\AbstractContainer::SET:
+                $this->setStyle($content, $attrs);
+                break;
+            case Placeholder\Container\AbstractContainer::PREPEND:
+                $this->prependStyle($content, $attrs);
+                break;
+            case Placeholder\Container\AbstractContainer::APPEND:
+            default:
+                $this->appendStyle($content, $attrs);
+                break;
+        }
+    }
+
+    /**
+     * Create data item for use in stack
+     *
+     * @param  string $content
+     * @param  array  $attributes
+     * @return stdClass
+     */
+    public function createData($content, array $attributes)
+    {
+        if (!isset($attributes['media'])) {
+            $attributes['media'] = 'screen';
+        } elseif (is_array($attributes['media'])) {
+            $attributes['media'] = implode(',', $attributes['media']);
+        }
+
+        $data = new stdClass();
+        $data->content    = $content;
+        $data->attributes = $attributes;
+
+        return $data;
+    }
+
+    /**
      * Determine if a value is a valid style tag
      *
      * @param  mixed $value
@@ -177,6 +272,71 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
         }
 
         return true;
+    }
+
+    /**
+     * Convert content and attributes into valid style tag
+     *
+     * @param  stdClass $item   Item to render
+     * @param  string   $indent Indentation to use
+     * @return string
+     */
+    public function itemToString(stdClass $item, $indent)
+    {
+        $attrString = '';
+        if (!empty($item->attributes)) {
+            $enc = 'UTF-8';
+            if ($this->view instanceof View\Renderer\RendererInterface
+                && method_exists($this->view, 'getEncoding')
+            ) {
+                $enc = $this->view->getEncoding();
+            }
+            $escaper = $this->getEscaper($enc);
+            foreach ($item->attributes as $key => $value) {
+                if (!in_array($key, $this->optionalAttributes)) {
+                    continue;
+                }
+                if ('media' == $key) {
+                    if (false === strpos($value, ',')) {
+                        if (!in_array($value, $this->mediaTypes)) {
+                            continue;
+                        }
+                    } else {
+                        $mediaTypes = explode(',', $value);
+                        $value = '';
+                        foreach ($mediaTypes as $type) {
+                            $type = trim($type);
+                            if (!in_array($type, $this->mediaTypes)) {
+                                continue;
+                            }
+                            $value .= $type .',';
+                        }
+                        $value = substr($value, 0, -1);
+                    }
+                }
+                $attrString .= sprintf(' %s="%s"', $key, $escaper->escapeHtmlAttr($value));
+            }
+        }
+
+        $escapeStart = $indent . '<!--' . PHP_EOL;
+        $escapeEnd = $indent . '-->' . PHP_EOL;
+        if (isset($item->attributes['conditional'])
+            && !empty($item->attributes['conditional'])
+            && is_string($item->attributes['conditional'])
+        ) {
+            $escapeStart = null;
+            $escapeEnd = null;
+        }
+
+        $html = '<style type="text/css"' . $attrString . '>' . PHP_EOL
+            . $escapeStart . $indent . $item->content . PHP_EOL . $escapeEnd
+            . '</style>';
+
+        if (null == $escapeStart && null == $escapeEnd) {
+            $html = '<!--[if ' . $item->attributes['conditional'] . ']> ' . $html . '<![endif]-->';
+        }
+
+        return $html;
     }
 
     /**
@@ -248,165 +408,5 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
         }
 
         return $this->getContainer()->set($value);
-    }
-
-    /**
-     * Start capture action
-     *
-     * @param  string $type
-     * @param  string $attrs
-     * @throws Exception\RuntimeException
-     * @return void
-     */
-    public function captureStart($type = Placeholder\Container\AbstractContainer::APPEND, $attrs = null)
-    {
-        if ($this->captureLock) {
-            throw new Exception\RuntimeException('Cannot nest headStyle captures');
-        }
-
-        $this->captureLock        = true;
-        $this->captureAttrs       = $attrs;
-        $this->captureType        = $type;
-        ob_start();
-    }
-
-    /**
-     * End capture action and store
-     *
-     * @return void
-     */
-    public function captureEnd()
-    {
-        $content             = ob_get_clean();
-        $attrs               = $this->captureAttrs;
-        $this->captureAttrs = null;
-        $this->captureLock  = false;
-
-        switch ($this->captureType) {
-            case Placeholder\Container\AbstractContainer::SET:
-                $this->setStyle($content, $attrs);
-                break;
-            case Placeholder\Container\AbstractContainer::PREPEND:
-                $this->prependStyle($content, $attrs);
-                break;
-            case Placeholder\Container\AbstractContainer::APPEND:
-            default:
-                $this->appendStyle($content, $attrs);
-                break;
-        }
-    }
-
-    /**
-     * Convert content and attributes into valid style tag
-     *
-     * @param  stdClass $item   Item to render
-     * @param  string   $indent Indentation to use
-     * @return string
-     */
-    public function itemToString(stdClass $item, $indent)
-    {
-        $attrString = '';
-        if (!empty($item->attributes)) {
-            $enc = 'UTF-8';
-            if ($this->view instanceof View\Renderer\RendererInterface
-                && method_exists($this->view, 'getEncoding')
-            ) {
-                $enc = $this->view->getEncoding();
-            }
-            $escaper = $this->getEscaper($enc);
-            foreach ($item->attributes as $key => $value) {
-                if (!in_array($key, $this->optionalAttributes)) {
-                    continue;
-                }
-                if ('media' == $key) {
-                    if (false === strpos($value, ',')) {
-                        if (!in_array($value, $this->mediaTypes)) {
-                            continue;
-                        }
-                    } else {
-                        $mediaTypes = explode(',', $value);
-                        $value = '';
-                        foreach ($mediaTypes as $type) {
-                            $type = trim($type);
-                            if (!in_array($type, $this->mediaTypes)) {
-                                continue;
-                            }
-                            $value .= $type .',';
-                        }
-                        $value = substr($value, 0, -1);
-                    }
-                }
-                $attrString .= sprintf(' %s="%s"', $key, $escaper->escapeHtmlAttr($value));
-            }
-        }
-
-        $escapeStart = $indent . '<!--' . PHP_EOL;
-        $escapeEnd = $indent . '-->' . PHP_EOL;
-        if (isset($item->attributes['conditional'])
-            && !empty($item->attributes['conditional'])
-            && is_string($item->attributes['conditional'])
-        ) {
-            $escapeStart = null;
-            $escapeEnd = null;
-        }
-
-        $html = '<style type="text/css"' . $attrString . '>' . PHP_EOL
-              . $escapeStart . $indent . $item->content . PHP_EOL . $escapeEnd
-              . '</style>';
-
-        if (null == $escapeStart && null == $escapeEnd) {
-            $html = '<!--[if ' . $item->attributes['conditional'] . ']> ' . $html . '<![endif]-->';
-        }
-
-        return $html;
-    }
-
-    /**
-     * Create string representation of placeholder
-     *
-     * @param  string|int $indent
-     * @return string
-     */
-    public function toString($indent = null)
-    {
-        $indent = (null !== $indent)
-                ? $this->getWhitespace($indent)
-                : $this->getIndent();
-
-        $items = array();
-        $this->getContainer()->ksort();
-        foreach ($this as $item) {
-            if (!$this->isValid($item)) {
-                continue;
-            }
-            $items[] = $this->itemToString($item, $indent);
-        }
-
-        $return = $indent . implode($this->getSeparator() . $indent, $items);
-        $return = preg_replace("/(\r\n?|\n)/", '$1' . $indent, $return);
-
-        return $return;
-    }
-
-    /**
-     * Create data item for use in stack
-     *
-     * @param  string $content
-     * @param  array  $attributes
-     * @return stdClass
-     */
-    public function createData($content, array $attributes)
-    {
-        if (!isset($attributes['media'])) {
-            $attributes['media'] = 'screen';
-        } elseif (is_array($attributes['media'])) {
-            $attributes['media'] = implode(',', $attributes['media']);
-        }
-
-        $data = new stdClass();
-        $data->content    = $content;
-        $data->attributes = $attributes;
-
-        return $data;
     }
 }

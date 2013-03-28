@@ -64,19 +64,18 @@ class Registry
     }
 
     /**
-     * createContainer
+     * Set the container for an item in the registry
      *
-     * @param  string $key
-     * @param  array  $value
-     * @return Container\AbstractContainer
+     * @param  string                      $key
+     * @param  Container\AbstractContainer $container
+     * @return Registry
      */
-    public function createContainer($key, array $value = array())
+    public function setContainer($key, Container\AbstractContainer $container)
     {
         $key = (string) $key;
+        $this->items[$key] = $container;
 
-        $this->items[$key] = new $this->containerClass($value);
-
-        return $this->items[$key];
+        return $this;
     }
 
     /**
@@ -111,18 +110,19 @@ class Registry
     }
 
     /**
-     * Set the container for an item in the registry
+     * createContainer
      *
-     * @param  string                      $key
-     * @param  Container\AbstractContainer $container
-     * @return Registry
+     * @param  string $key
+     * @param  array  $value
+     * @return Container\AbstractContainer
      */
-    public function setContainer($key, Container\AbstractContainer $container)
+    public function createContainer($key, array $value = array())
     {
         $key = (string) $key;
-        $this->items[$key] = $container;
 
-        return $this;
+        $this->items[$key] = new $this->containerClass($value);
+
+        return $this->items[$key];
     }
 
     /**

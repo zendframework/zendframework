@@ -21,13 +21,6 @@ class Cycle extends AbstractHelper implements \Iterator
     const DEFAULT_NAME = 'default';
 
     /**
-     * Pointers
-     *
-     * @var array
-     */
-    protected $pointers = array(self::DEFAULT_NAME =>-1);
-
-    /**
      * Array of values
      *
      * @var array
@@ -40,6 +33,13 @@ class Cycle extends AbstractHelper implements \Iterator
      * @var string
      */
     protected $name = self::DEFAULT_NAME;
+
+    /**
+     * Pointers
+     *
+     * @var array
+     */
+    protected $pointers = array(self::DEFAULT_NAME =>-1);
 
     /**
      * Add elements to alternate
@@ -55,8 +55,27 @@ class Cycle extends AbstractHelper implements \Iterator
         }
 
         $this->setName($name);
-
         return $this;
+    }
+
+    /**
+     * Cast to string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
+    }
+
+    /**
+     * Turn helper into string
+     *
+     * @return string
+     */
+    public function toString()
+    {
+        return (string) $this->data[$this->name][$this->key()];
     }
 
     /**
@@ -71,7 +90,6 @@ class Cycle extends AbstractHelper implements \Iterator
         $this->setName($name);
         $this->data[$name] = $data;
         $this->rewind();
-
         return $this;
     }
 
@@ -175,7 +193,6 @@ class Cycle extends AbstractHelper implements \Iterator
     public function rewind()
     {
         $this->pointers[$this->name] = -1;
-
         return $this;
     }
 
@@ -197,25 +214,5 @@ class Cycle extends AbstractHelper implements \Iterator
     public function current()
     {
         return $this->data[$this->name][$this->key()];
-    }
-
-    /**
-     * Turn helper into string
-     *
-     * @return string
-     */
-    public function toString()
-    {
-        return (string) $this->data[$this->name][$this->key()];
-    }
-
-    /**
-     * Cast to string
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->toString();
     }
 }

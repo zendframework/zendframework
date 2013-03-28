@@ -135,48 +135,92 @@ class Links extends AbstractHelper
     }
 
     /**
-     * Sets the helper's render flag
+     * Renders helper
      *
-     * The helper uses the bitwise '&' operator against the hex values of the
-     * render constants. This means that the flag can is "bitwised" value of
-     * the render constants. Examples:
-     * <code>
-     * // render all links except glossary
-     * $flag = Links:RENDER_ALL ^ Links:RENDER_GLOSSARY;
-     * $helper->setRenderFlag($flag);
+     * Implements {@link HelperInterface::render()}.
      *
-     * // render only chapters and sections
-     * $flag = Links:RENDER_CHAPTER | Links:RENDER_SECTION;
-     * $helper->setRenderFlag($flag);
-     *
-     * // render only relations that are not native W3C relations
-     * $helper->setRenderFlag(Links:RENDER_CUSTOM);
-     *
-     * // render all relations (default)
-     * $helper->setRenderFlag(Links:RENDER_ALL);
-     * </code>
-     *
-     * Note that custom relations can also be rendered directly using the
-     * {@link renderLink()} method.
-     *
-     * @param  int $renderFlag
-     * @return Links
+     * @param  AbstractContainer|string|null $container [optional] container to render.
+     *                                         Default is to render the
+     *                                         container registered in the
+     *                                         helper.
+     * @return string
      */
-    public function setRenderFlag($renderFlag)
+    public function render($container = null)
     {
-        $this->renderFlag = (int) $renderFlag;
+        $this->parseContainer($container);
+        if (null === $container) {
+            $container = $this->getContainer();
+        }
 
-        return $this;
+        $active = $this->findActive($container);
+        if ($active) {
+            $active = $active['page'];
+        } else {
+            // no active page
+            return '';
+        }
+
+        $output = '';
+        $indent = $this->getIndent();
+        $this->root = $container;
+
+        $result = $this->findAllRelations($active, $this->getRenderFlag());
+        foreach ($result as $attrib => $types) {
+            foreach ($types as $relation => $pages) {
+                foreach ($pages as $page) {
+                    $r = $this->renderLink($page, $attrib, $relation);
+                    if ($r) {
+                        $output .= $indent . $r . self::EOL;
+                    }
+                }
+            }
+        }
+
+        $this->root = null;
+
+        // return output (trim last newline by spec)
+        return strlen($output) ? rtrim($output, self::EOL) : '';
     }
 
     /**
-     * Returns the helper's render flag
+     * Renders the given $page as a link element, with $attrib = $relation
      *
-     * @return int
+     * @param  AbstractPage $page     the page to render the link for
+     * @param  string       $attrib   the attribute to use for $type,
+     *                                either 'rel' or 'rev'
+     * @param  string       $relation relation type, muse be one of;
+     *                                alternate, appendix, bookmark,
+     *                                chapter, contents, copyright,
+     *                                glossary, help, home, index, next,
+     *                                prev, section, start, stylesheet,
+     *                                subsection
+     * @return string
+     * @throws Exception\DomainException
      */
-    public function getRenderFlag()
+    public function renderLink(AbstractPage $page, $attrib, $relation)
     {
-        return $this->renderFlag;
+        if (!in_array($attrib, array('rel', 'rev'))) {
+            throw new Exception\DomainException(sprintf(
+                'Invalid relation attribute "%s", must be "rel" or "rev"',
+                $attrib
+            ));
+        }
+
+        if (!$href = $page->getHref()) {
+            return '';
+        }
+
+        // TODO: add more attribs
+        // http://www.w3.org/TR/html401/struct/links.html#h-12.2
+        $attribs = array(
+            $attrib  => $relation,
+            'href'   => $href,
+            'title'  => $page->getLabel()
+        );
+
+        return '<link' .
+            $this->htmlAttribs($attribs) .
+            $this->getClosingBracket();
     }
 
     // Finder methods:
@@ -673,96 +717,48 @@ class Links extends AbstractHelper
         return null;
     }
 
-    // Render methods:
-
     /**
-     * Renders the given $page as a link element, with $attrib = $relation
+     * Sets the helper's render flag
      *
-     * @param  AbstractPage $page     the page to render the link for
-     * @param  string       $attrib   the attribute to use for $type,
-     *                                either 'rel' or 'rev'
-     * @param  string       $relation relation type, muse be one of;
-     *                                alternate, appendix, bookmark,
-     *                                chapter, contents, copyright,
-     *                                glossary, help, home, index, next,
-     *                                prev, section, start, stylesheet,
-     *                                subsection
-     * @return string
-     * @throws Exception\DomainException
+     * The helper uses the bitwise '&' operator against the hex values of the
+     * render constants. This means that the flag can is "bitwised" value of
+     * the render constants. Examples:
+     * <code>
+     * // render all links except glossary
+     * $flag = Links:RENDER_ALL ^ Links:RENDER_GLOSSARY;
+     * $helper->setRenderFlag($flag);
+     *
+     * // render only chapters and sections
+     * $flag = Links:RENDER_CHAPTER | Links:RENDER_SECTION;
+     * $helper->setRenderFlag($flag);
+     *
+     * // render only relations that are not native W3C relations
+     * $helper->setRenderFlag(Links:RENDER_CUSTOM);
+     *
+     * // render all relations (default)
+     * $helper->setRenderFlag(Links:RENDER_ALL);
+     * </code>
+     *
+     * Note that custom relations can also be rendered directly using the
+     * {@link renderLink()} method.
+     *
+     * @param  int $renderFlag
+     * @return Links
      */
-    public function renderLink(AbstractPage $page, $attrib, $relation)
+    public function setRenderFlag($renderFlag)
     {
-        if (!in_array($attrib, array('rel', 'rev'))) {
-            throw new Exception\DomainException(sprintf(
-                'Invalid relation attribute "%s", must be "rel" or "rev"',
-                $attrib
-            ));
-        }
+        $this->renderFlag = (int) $renderFlag;
 
-        if (!$href = $page->getHref()) {
-            return '';
-        }
-
-        // TODO: add more attribs
-        // http://www.w3.org/TR/html401/struct/links.html#h-12.2
-        $attribs = array(
-            $attrib  => $relation,
-            'href'   => $href,
-            'title'  => $page->getLabel()
-        );
-
-        return '<link' .
-               $this->htmlAttribs($attribs) .
-               $this->getClosingBracket();
+        return $this;
     }
 
-    // Zend\View\Helper\Navigation\Helper:
-
     /**
-     * Renders helper
+     * Returns the helper's render flag
      *
-     * Implements {@link HelperInterface::render()}.
-     *
-     * @param  AbstractContainer|string|null $container [optional] container to render.
-     *                                         Default is to render the
-     *                                         container registered in the
-     *                                         helper.
-     * @return string
+     * @return int
      */
-    public function render($container = null)
+    public function getRenderFlag()
     {
-        $this->parseContainer($container);
-        if (null === $container) {
-            $container = $this->getContainer();
-        }
-
-        $active = $this->findActive($container);
-        if ($active) {
-            $active = $active['page'];
-        } else {
-            // no active page
-            return '';
-        }
-
-        $output = '';
-        $indent = $this->getIndent();
-        $this->root = $container;
-
-        $result = $this->findAllRelations($active, $this->getRenderFlag());
-        foreach ($result as $attrib => $types) {
-            foreach ($types as $relation => $pages) {
-                foreach ($pages as $page) {
-                    $r = $this->renderLink($page, $attrib, $relation);
-                    if ($r) {
-                        $output .= $indent . $r . self::EOL;
-                    }
-                }
-            }
-        }
-
-        $this->root = null;
-
-        // return output (trim last newline by spec)
-        return strlen($output) ? rtrim($output, self::EOL) : '';
+        return $this->renderFlag;
     }
 }

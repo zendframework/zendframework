@@ -137,56 +137,6 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     }
 
     /**
-     * Start capture action
-     *
-     * @param  mixed  $captureType Type of capture
-     * @param  string $type        Type of script
-     * @param  array  $attrs       Attributes of capture
-     * @throws Exception\RuntimeException
-     * @return void
-     */
-    public function captureStart($captureType = Placeholder\Container\AbstractContainer::APPEND, $type = 'text/javascript', $attrs = array())
-    {
-        if ($this->captureLock) {
-            throw new Exception\RuntimeException('Cannot nest headScript captures');
-        }
-
-        $this->captureLock        = true;
-        $this->captureType        = $captureType;
-        $this->captureScriptType  = $type;
-        $this->captureScriptAttrs = $attrs;
-        ob_start();
-    }
-
-    /**
-     * End capture action and store
-     *
-     * @return void
-     */
-    public function captureEnd()
-    {
-        $content                  = ob_get_clean();
-        $type                     = $this->captureScriptType;
-        $attrs                    = $this->captureScriptAttrs;
-        $this->captureScriptType  = null;
-        $this->captureScriptAttrs = null;
-        $this->captureLock        = false;
-
-        switch ($this->captureType) {
-            case Placeholder\Container\AbstractContainer::SET:
-            case Placeholder\Container\AbstractContainer::PREPEND:
-            case Placeholder\Container\AbstractContainer::APPEND:
-                $action = strtolower($this->captureType) . 'Script';
-                break;
-            default:
-                $action = 'appendScript';
-                break;
-        }
-
-        $this->$action($content, $type, $attrs);
-    }
-
-    /**
      * Overload method access
      *
      * Allows the following method calls:
@@ -268,6 +218,108 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     }
 
     /**
+     * Retrieve string representation
+     *
+     * @param  string|int $indent Amount of whitespaces or string to use for indention
+     * @return string
+     */
+    public function toString($indent = null)
+    {
+        $indent = (null !== $indent)
+            ? $this->getWhitespace($indent)
+            : $this->getIndent();
+
+        if ($this->view) {
+            $useCdata = $this->view->plugin('doctype')->isXhtml() ? true : false;
+        } else {
+            $useCdata = $this->useCdata ? true : false;
+        }
+
+        $escapeStart = ($useCdata) ? '//<![CDATA[' : '//<!--';
+        $escapeEnd   = ($useCdata) ? '//]]>' : '//-->';
+
+        $items = array();
+        $this->getContainer()->ksort();
+        foreach ($this as $item) {
+            if (!$this->isValid($item)) {
+                continue;
+            }
+
+            $items[] = $this->itemToString($item, $indent, $escapeStart, $escapeEnd);
+        }
+
+        return implode($this->getSeparator(), $items);
+    }
+
+    /**
+     * Start capture action
+     *
+     * @param  mixed  $captureType Type of capture
+     * @param  string $type        Type of script
+     * @param  array  $attrs       Attributes of capture
+     * @throws Exception\RuntimeException
+     * @return void
+     */
+    public function captureStart($captureType = Placeholder\Container\AbstractContainer::APPEND, $type = 'text/javascript', $attrs = array())
+    {
+        if ($this->captureLock) {
+            throw new Exception\RuntimeException('Cannot nest headScript captures');
+        }
+
+        $this->captureLock        = true;
+        $this->captureType        = $captureType;
+        $this->captureScriptType  = $type;
+        $this->captureScriptAttrs = $attrs;
+        ob_start();
+    }
+
+    /**
+     * End capture action and store
+     *
+     * @return void
+     */
+    public function captureEnd()
+    {
+        $content                  = ob_get_clean();
+        $type                     = $this->captureScriptType;
+        $attrs                    = $this->captureScriptAttrs;
+        $this->captureScriptType  = null;
+        $this->captureScriptAttrs = null;
+        $this->captureLock        = false;
+
+        switch ($this->captureType) {
+            case Placeholder\Container\AbstractContainer::SET:
+            case Placeholder\Container\AbstractContainer::PREPEND:
+            case Placeholder\Container\AbstractContainer::APPEND:
+                $action = strtolower($this->captureType) . 'Script';
+                break;
+            default:
+                $action = 'appendScript';
+                break;
+        }
+
+        $this->$action($content, $type, $attrs);
+    }
+
+    /**
+     * Create data item containing all necessary components of script
+     *
+     * @param  string $type       Type of data
+     * @param  array  $attributes Attributes of data
+     * @param  string $content    Content of data
+     * @return stdClass
+     */
+    public function createData($type, array $attributes, $content = null)
+    {
+        $data             = new stdClass();
+        $data->type       = $type;
+        $data->attributes = $attributes;
+        $data->source     = $content;
+
+        return $data;
+    }
+
+    /**
      * Is the file specified a duplicate?
      *
      * @param  string $file Name of file to check
@@ -303,6 +355,65 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
         }
 
         return true;
+    }
+
+    /**
+     * Create script HTML
+     *
+     * @param  mixed  $item        Item to convert
+     * @param  string $indent      String to add before the item
+     * @param  string $escapeStart Starting sequence
+     * @param  string $escapeEnd   Ending sequence
+     * @return string
+     */
+    public function itemToString($item, $indent, $escapeStart, $escapeEnd)
+    {
+        $attrString = '';
+        if (!empty($item->attributes)) {
+            foreach ($item->attributes as $key => $value) {
+                if ((!$this->arbitraryAttributesAllowed() && !in_array($key, $this->optionalAttributes))
+                    || in_array($key, array('conditional', 'noescape')))
+                {
+                    continue;
+                }
+                if ('defer' == $key) {
+                    $value = 'defer';
+                }
+                $attrString .= sprintf(' %s="%s"', $key, ($this->autoEscape) ? $this->escape($value) : $value);
+            }
+        }
+
+        $addScriptEscape = !(isset($item->attributes['noescape']) && filter_var($item->attributes['noescape'], FILTER_VALIDATE_BOOLEAN));
+
+        $type = ($this->autoEscape) ? $this->escape($item->type) : $item->type;
+        $html  = '<script type="' . $type . '"' . $attrString . '>';
+        if (!empty($item->source)) {
+            $html .= PHP_EOL;
+
+            if ($addScriptEscape) {
+                $html .= $indent . '    ' . $escapeStart . PHP_EOL;
+            }
+
+            $html .= $indent . '    ' . $item->source;
+
+            if ($addScriptEscape) {
+                $html .= PHP_EOL . $indent . '    ' . $escapeEnd;
+            }
+
+            $html .= PHP_EOL . $indent;
+        }
+        $html .= '</script>';
+
+        if (isset($item->attributes['conditional'])
+            && !empty($item->attributes['conditional'])
+            && is_string($item->attributes['conditional']))
+        {
+            $html = $indent . '<!--[if ' . $item->attributes['conditional'] . ']>' . $html . '<![endif]-->';
+        } else {
+            $html = $indent . $html;
+        }
+
+        return $html;
     }
 
     /**
@@ -387,7 +498,6 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     public function setAllowArbitraryAttributes($flag)
     {
         $this->arbitraryAttributes = (bool) $flag;
-
         return $this;
     }
 
@@ -399,116 +509,5 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     public function arbitraryAttributesAllowed()
     {
         return $this->arbitraryAttributes;
-    }
-
-    /**
-     * Create script HTML
-     *
-     * @param  mixed  $item        Item to convert
-     * @param  string $indent      String to add before the item
-     * @param  string $escapeStart Starting sequence
-     * @param  string $escapeEnd   Ending sequence
-     * @return string
-     */
-    public function itemToString($item, $indent, $escapeStart, $escapeEnd)
-    {
-        $attrString = '';
-        if (!empty($item->attributes)) {
-            foreach ($item->attributes as $key => $value) {
-                if ((!$this->arbitraryAttributesAllowed() && !in_array($key, $this->optionalAttributes))
-                    || in_array($key, array('conditional', 'noescape')))
-                {
-                    continue;
-                }
-                if ('defer' == $key) {
-                    $value = 'defer';
-                }
-                $attrString .= sprintf(' %s="%s"', $key, ($this->autoEscape) ? $this->escape($value) : $value);
-            }
-        }
-
-        $addScriptEscape = !(isset($item->attributes['noescape']) && filter_var($item->attributes['noescape'], FILTER_VALIDATE_BOOLEAN));
-
-        $type = ($this->autoEscape) ? $this->escape($item->type) : $item->type;
-        $html  = '<script type="' . $type . '"' . $attrString . '>';
-        if (!empty($item->source)) {
-            $html .= PHP_EOL;
-
-            if ($addScriptEscape) {
-                $html .= $indent . '    ' . $escapeStart . PHP_EOL;
-            }
-
-            $html .= $indent . '    ' . $item->source;
-
-            if ($addScriptEscape) {
-                $html .= PHP_EOL . $indent . '    ' . $escapeEnd;
-            }
-
-            $html .= PHP_EOL . $indent;
-        }
-        $html .= '</script>';
-
-        if (isset($item->attributes['conditional'])
-            && !empty($item->attributes['conditional'])
-            && is_string($item->attributes['conditional']))
-        {
-            $html = $indent . '<!--[if ' . $item->attributes['conditional'] . ']>' . $html . '<![endif]-->';
-        } else {
-            $html = $indent . $html;
-        }
-
-        return $html;
-    }
-
-    /**
-     * Retrieve string representation
-     *
-     * @param  string|int $indent Amount of whitespaces or string to use for indention
-     * @return string
-     */
-    public function toString($indent = null)
-    {
-        $indent = (null !== $indent)
-                ? $this->getWhitespace($indent)
-                : $this->getIndent();
-
-        if ($this->view) {
-            $useCdata = $this->view->plugin('doctype')->isXhtml() ? true : false;
-        } else {
-            $useCdata = $this->useCdata ? true : false;
-        }
-
-        $escapeStart = ($useCdata) ? '//<![CDATA[' : '//<!--';
-        $escapeEnd   = ($useCdata) ? '//]]>' : '//-->';
-
-        $items = array();
-        $this->getContainer()->ksort();
-        foreach ($this as $item) {
-            if (!$this->isValid($item)) {
-                continue;
-            }
-
-            $items[] = $this->itemToString($item, $indent, $escapeStart, $escapeEnd);
-        }
-
-        return implode($this->getSeparator(), $items);
-    }
-
-    /**
-     * Create data item containing all necessary components of script
-     *
-     * @param  string $type       Type of data
-     * @param  array  $attributes Attributes of data
-     * @param  string $content    Content of data
-     * @return stdClass
-     */
-    public function createData($type, array $attributes, $content = null)
-    {
-        $data             = new stdClass();
-        $data->type       = $type;
-        $data->attributes = $attributes;
-        $data->source     = $content;
-
-        return $data;
     }
 }

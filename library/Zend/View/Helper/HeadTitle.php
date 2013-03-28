@@ -84,39 +84,6 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     }
 
     /**
-     * Set a default order to add titles
-     *
-     * @param  string $setType
-     * @throws Exception\DomainException
-     * @return HeadTitle
-     */
-    public function setDefaultAttachOrder($setType)
-    {
-        if (!in_array($setType, array(
-            Placeholder\Container\AbstractContainer::APPEND,
-            Placeholder\Container\AbstractContainer::SET,
-            Placeholder\Container\AbstractContainer::PREPEND
-        ))) {
-            throw new Exception\DomainException(
-                "You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'"
-            );
-        }
-        $this->defaultAttachOrder = $setType;
-
-        return $this;
-    }
-
-    /**
-     * Get the default attach order, if any.
-     *
-     * @return mixed
-     */
-    public function getDefaultAttachOrder()
-    {
-        return $this->defaultAttachOrder;
-    }
-
-    /**
      * Turn helper into string
      *
      * @param  string|null $indent
@@ -160,6 +127,39 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
         $output = ($this->autoEscape) ? $this->escape($output) : $output;
 
         return $indent . '<title>' . $output . '</title>';
+    }
+
+    /**
+     * Set a default order to add titles
+     *
+     * @param  string $setType
+     * @throws Exception\DomainException
+     * @return HeadTitle
+     */
+    public function setDefaultAttachOrder($setType)
+    {
+        if (!in_array($setType, array(
+            Placeholder\Container\AbstractContainer::APPEND,
+            Placeholder\Container\AbstractContainer::SET,
+            Placeholder\Container\AbstractContainer::PREPEND
+        ))) {
+            throw new Exception\DomainException(
+                "You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'"
+            );
+        }
+        $this->defaultAttachOrder = $setType;
+
+        return $this;
+    }
+
+    /**
+     * Get the default attach order, if any.
+     *
+     * @return mixed
+     */
+    public function getDefaultAttachOrder()
+    {
+        return $this->defaultAttachOrder;
     }
 
     // Translator methods - Good candidate to refactor as a trait with PHP 5.4
@@ -216,7 +216,6 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     public function setTranslatorEnabled($enabled = true)
     {
         $this->translatorEnabled = (bool) $enabled;
-
         return $this;
     }
 
@@ -239,7 +238,6 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     public function setTranslatorTextDomain($textDomain = 'default')
     {
         $this->translatorTextDomain = $textDomain;
-
         return $this;
     }
 

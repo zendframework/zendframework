@@ -19,6 +19,49 @@ use Zend\View\Helper\HelperInterface as BaseHelperInterface;
 interface HelperInterface extends BaseHelperInterface
 {
     /**
+     * Magic overload: Should proxy to {@link render()}.
+     *
+     * @return string
+     */
+    public function __toString();
+
+    /**
+     * Renders helper
+     *
+     * @param  string|Navigation\AbstractContainer $container [optional] container to render.
+     *                                         Default is null, which indicates
+     *                                         that the helper should render
+     *                                         the container returned by {@link
+     *                                         getContainer()}.
+     * @return string helper output
+     * @throws \Zend\View\Exception\ExceptionInterface
+     */
+    public function render($container = null);
+
+    /**
+     * Sets ACL to use when iterating pages
+     *
+     * @param  Acl\AclInterface $acl [optional] ACL instance
+     * @return HelperInterface
+     */
+    public function setAcl(Acl\AclInterface $acl = null);
+
+    /**
+     * Returns ACL or null if it isn't set using {@link setAcl()} or
+     * {@link setDefaultAcl()}
+     *
+     * @return Acl\AclInterface|null
+     */
+    public function getAcl();
+
+    /**
+     * Checks if the helper has an ACL instance
+     *
+     * @return bool
+     */
+    public function hasAcl();
+
+    /**
      * Sets navigation container the helper should operate on by default
      *
      * @param  string|Navigation\AbstractContainer $container [optional] container to operate
@@ -37,20 +80,26 @@ interface HelperInterface extends BaseHelperInterface
     public function getContainer();
 
     /**
-     * Sets ACL to use when iterating pages
+     * Checks if the helper has a container
      *
-     * @param  Acl\AclInterface $acl [optional] ACL instance
-     * @return HelperInterface
+     * @return bool
      */
-    public function setAcl(Acl\AclInterface $acl = null);
+    public function hasContainer();
 
     /**
-     * Returns ACL or null if it isn't set using {@link setAcl()} or
-     * {@link setDefaultAcl()}
+     * Render invisible items?
      *
-     * @return Acl\AclInterface|null
+     * @param  bool $renderInvisible [optional] boolean flag
+     * @return HelperInterface
      */
-    public function getAcl();
+    public function setRenderInvisible($renderInvisible = true);
+
+    /**
+     * Return renderInvisible flag
+     *
+     * @return bool
+     */
+    public function getRenderInvisible();
 
     /**
      * Sets ACL role to use when iterating pages
@@ -71,6 +120,13 @@ interface HelperInterface extends BaseHelperInterface
     public function getRole();
 
     /**
+     * Checks if the helper has an ACL role
+     *
+     * @return bool
+     */
+    public function hasRole();
+
+    /**
      * Sets whether ACL should be used
      *
      * @param  bool $useAcl [optional] whether ACL should be used. Default is true.
@@ -84,60 +140,4 @@ interface HelperInterface extends BaseHelperInterface
      * @return bool
      */
     public function getUseAcl();
-
-    /**
-     * Return renderInvisible flag
-     *
-     * @return bool
-     */
-    public function getRenderInvisible();
-
-    /**
-     * Render invisible items?
-     *
-     * @param  bool $renderInvisible [optional] boolean flag
-     * @return HelperInterface
-     */
-    public function setRenderInvisible($renderInvisible = true);
-
-    /**
-     * Checks if the helper has a container
-     *
-     * @return bool
-     */
-    public function hasContainer();
-
-    /**
-     * Checks if the helper has an ACL instance
-     *
-     * @return bool
-     */
-    public function hasAcl();
-
-    /**
-     * Checks if the helper has an ACL role
-     *
-     * @return bool
-     */
-    public function hasRole();
-
-    /**
-     * Magic overload: Should proxy to {@link render()}.
-     *
-     * @return string
-     */
-    public function __toString();
-
-    /**
-     * Renders helper
-     *
-     * @param  string|Navigation\AbstractContainer $container [optional] container to render.
-     *                                         Default is null, which indicates
-     *                                         that the helper should render
-     *                                         the container returned by {@link
-     *                                         getContainer()}.
-     * @return string helper output
-     * @throws \Zend\View\Exception\ExceptionInterface
-     */
-    public function render($container = null);
 }

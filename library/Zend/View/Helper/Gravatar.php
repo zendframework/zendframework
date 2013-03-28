@@ -43,6 +43,20 @@ class Gravatar extends AbstractHtmlElement
     const DEFAULT_WAVATAR   = 'wavatar';
 
     /**
+     * Attributes for HTML image tag
+     *
+     * @var array
+     */
+    protected $attribs;
+
+    /**
+     * Email Address
+     *
+     * @var string
+     */
+    protected $email;
+
+    /**
      * Options
      *
      * @var array
@@ -53,20 +67,6 @@ class Gravatar extends AbstractHtmlElement
         'rating'      => self::RATING_G,
         'secure'      => null,
     );
-
-    /**
-     * Email Address
-     *
-     * @var string
-     */
-    protected $email;
-
-    /**
-     * Attributes for HTML image tag
-     *
-     * @var array
-     */
-    protected $attribs;
 
     /**
      * Returns an avatar from gravatar's service.
@@ -100,6 +100,16 @@ class Gravatar extends AbstractHtmlElement
     }
 
     /**
+     * Return valid image tag
+     *
+     * @return string
+     */
+    public function  __toString()
+    {
+        return $this->getImgTag();
+    }
+
+    /**
      * Configure state
      *
      * @param  array $options
@@ -118,36 +128,74 @@ class Gravatar extends AbstractHtmlElement
     }
 
     /**
-     * Get img size
+     * Get avatar url (including size, rating and default image options)
      *
-     * @return int The img size
+     * @return string
      */
-    public function getImgSize()
+    protected function getAvatarUrl()
     {
-        return $this->options['img_size'];
+        $src = $this->getGravatarUrl()
+            . '/'   . md5($this->getEmail())
+            . '?s=' . $this->getImgSize()
+            . '&d=' . $this->getDefaultImg()
+            . '&r=' . $this->getRating();
+        return $src;
     }
 
     /**
-     * Set img size in pixels
+     * Get URL to gravatar's service.
      *
-     * @param  int $imgSize Size of img must be between 1 and 512
+     * @return string URL
+     */
+    protected function getGravatarUrl()
+    {
+        return ($this->getSecure() === false) ? self::GRAVATAR_URL : self::GRAVATAR_URL_SECURE;
+    }
+
+    /**
+     * Return valid image tag
+     *
+     * @return string
+     */
+    public function getImgTag()
+    {
+        $this->setSrcAttribForImg();
+        $html = '<img'
+            . $this->htmlAttribs($this->getAttribs())
+            . $this->getClosingBracket();
+
+        return $html;
+    }
+
+    /**
+     * Set attribs for image tag
+     *
+     * Warning! You shouldn't set src attrib for image tag.
+     * This attrib is overwritten in protected method setSrcAttribForImg().
+     * This method(_setSrcAttribForImg) is called in public method getImgTag().
+     *
+     * @param  array $attribs
      * @return Gravatar
      */
-    public function setImgSize($imgSize)
+    public function setAttribs(array $attribs)
     {
-        $this->options['img_size'] = (int) $imgSize;
-
+        $this->attribs = $attribs;
         return $this;
     }
 
     /**
-     * Get default img
+     * Get attribs of image
      *
-     * @return string
+     * Warning!
+     * If you set src attrib, you get it, but this value will be overwritten in
+     * protected method setSrcAttribForImg(). And finally your get other src
+     * value!
+     *
+     * @return array
      */
-    public function getDefaultImg()
+    public function getAttribs()
     {
-        return $this->options['default_img'];
+        return $this->attribs;
     }
 
     /**
@@ -162,8 +210,61 @@ class Gravatar extends AbstractHtmlElement
     public function setDefaultImg($defaultImg)
     {
         $this->options['default_img'] = urlencode($defaultImg);
-
         return $this;
+    }
+
+    /**
+     * Get default img
+     *
+     * @return string
+     */
+    public function getDefaultImg()
+    {
+        return $this->options['default_img'];
+    }
+
+    /**
+     * Set email address
+     *
+     * @param  string $email
+     * @return Gravatar
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Get email address
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set img size in pixels
+     *
+     * @param  int $imgSize Size of img must be between 1 and 512
+     * @return Gravatar
+     */
+    public function setImgSize($imgSize)
+    {
+        $this->options['img_size'] = (int) $imgSize;
+        return $this;
+    }
+
+    /**
+     * Get img size
+     *
+     * @return int The img size
+     */
+    public function getImgSize()
+    {
+        return $this->options['img_size'];
     }
 
     /**
@@ -206,29 +307,6 @@ class Gravatar extends AbstractHtmlElement
     }
 
     /**
-     * Set email address
-     *
-     * @param  string $email
-     * @return Gravatar
-     */
-    public function setEmail( $email )
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email address
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
      * Load from an SSL or No-SSL location?
      *
      * @param  bool $flag
@@ -237,7 +315,6 @@ class Gravatar extends AbstractHtmlElement
     public function setSecure($flag)
     {
         $this->options['secure'] = ($flag === null) ? null : (bool) $flag;
-
         return $this;
     }
 
@@ -256,63 +333,6 @@ class Gravatar extends AbstractHtmlElement
     }
 
     /**
-     * Get attribs of image
-     *
-     * Warning!
-     * If you set src attrib, you get it, but this value will be overwritten in
-     * protected method setSrcAttribForImg(). And finally your get other src
-     * value!
-     *
-     * @return array
-     */
-    public function getAttribs()
-    {
-        return $this->attribs;
-    }
-
-    /**
-     * Set attribs for image tag
-     *
-     * Warning! You shouldn't set src attrib for image tag.
-     * This attrib is overwritten in protected method setSrcAttribForImg().
-     * This method(_setSrcAttribForImg) is called in public method getImgTag().
-     *
-     * @param  array $attribs
-     * @return Gravatar
-     */
-    public function setAttribs(array $attribs)
-    {
-        $this->attribs = $attribs;
-
-        return $this;
-    }
-
-    /**
-     * Get URL to gravatar's service.
-     *
-     * @return string URL
-     */
-    protected function getGravatarUrl()
-    {
-        return ($this->getSecure() === false) ? self::GRAVATAR_URL : self::GRAVATAR_URL_SECURE;
-    }
-
-    /**
-     * Get avatar url (including size, rating and default image options)
-     *
-     * @return string
-     */
-    protected function getAvatarUrl()
-    {
-        $src = $this->getGravatarUrl()
-             . '/'   . md5($this->getEmail())
-             . '?s=' . $this->getImgSize()
-             . '&d=' . $this->getDefaultImg()
-             . '&r=' . $this->getRating();
-        return $src;
-    }
-
-    /**
      * Set src attrib for image.
      *
      * You shouldn't set a own url value!
@@ -327,30 +347,5 @@ class Gravatar extends AbstractHtmlElement
         $attribs        = $this->getAttribs();
         $attribs['src'] = $this->getAvatarUrl();
         $this->setAttribs($attribs);
-    }
-
-    /**
-     * Return valid image tag
-     *
-     * @return string
-     */
-    public function getImgTag()
-    {
-        $this->setSrcAttribForImg();
-        $html = '<img'
-              . $this->htmlAttribs($this->getAttribs())
-              . $this->getClosingBracket();
-
-        return $html;
-    }
-
-    /**
-     * Return valid image tag
-     *
-     * @return string
-     */
-    public function  __toString()
-    {
-        return $this->getImgTag();
     }
 }

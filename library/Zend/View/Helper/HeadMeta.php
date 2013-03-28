@@ -153,6 +153,125 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
     }
 
     /**
+     * Render placeholder as string
+     *
+     * @param  string|int $indent
+     * @return string
+     */
+    public function toString($indent = null)
+    {
+        $indent = (null !== $indent)
+            ? $this->getWhitespace($indent)
+            : $this->getIndent();
+
+        $items = array();
+        $this->getContainer()->ksort();
+
+        try {
+            foreach ($this as $item) {
+                $items[] = $this->itemToString($item);
+            }
+        } catch (Exception\InvalidArgumentException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+            return '';
+        }
+
+        return $indent . implode($this->escape($this->getSeparator()) . $indent, $items);
+    }
+
+    /**
+     * Create data item for inserting into stack
+     *
+     * @param  string $type
+     * @param  string $typeValue
+     * @param  string $content
+     * @param  array  $modifiers
+     * @return stdClass
+     */
+    public function createData($type, $typeValue, $content, array $modifiers)
+    {
+        $data            = new stdClass;
+        $data->type      = $type;
+        $data->$type     = $typeValue;
+        $data->content   = $content;
+        $data->modifiers = $modifiers;
+
+        return $data;
+    }
+
+    /**
+     * Build meta HTML string
+     *
+     * @param  stdClass $item
+     * @throws Exception\InvalidArgumentException
+     * @return string
+     */
+    public function itemToString(stdClass $item)
+    {
+        if (!in_array($item->type, $this->typeKeys)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid type "%s" provided for meta',
+                $item->type
+            ));
+        }
+        $type = $item->type;
+
+        $modifiersString = '';
+        foreach ($item->modifiers as $key => $value) {
+            if ($this->view->plugin('doctype')->isHtml5()
+                && $key == 'scheme'
+            ) {
+                throw new Exception\InvalidArgumentException(
+                    'Invalid modifier "scheme" provided; not supported by HTML5'
+                );
+            }
+            if (!in_array($key, $this->modifierKeys)) {
+                continue;
+            }
+            $modifiersString .= $key . '="' . $this->escape($value) . '" ';
+        }
+
+        $modifiersString = rtrim($modifiersString);
+
+        if ('' != $modifiersString) {
+            $modifiersString = ' ' . $modifiersString;
+        }
+
+        if (method_exists($this->view, 'plugin')) {
+            if ($this->view->plugin('doctype')->isHtml5()
+                && $type == 'charset'
+            ) {
+                $tpl = ($this->view->plugin('doctype')->isXhtml())
+                    ? '<meta %s="%s"/>'
+                    : '<meta %s="%s">';
+            } elseif ($this->view->plugin('doctype')->isXhtml()) {
+                $tpl = '<meta %s="%s" content="%s"%s />';
+            } else {
+                $tpl = '<meta %s="%s" content="%s"%s>';
+            }
+        } else {
+            $tpl = '<meta %s="%s" content="%s"%s />';
+        }
+
+        $meta = sprintf(
+            $tpl,
+            $type,
+            $this->escape($item->$type),
+            $this->escape($item->content),
+            $modifiersString
+        );
+
+        if (isset($item->modifiers['conditional'])
+            && !empty($item->modifiers['conditional'])
+            && is_string($item->modifiers['conditional']))
+        {
+            $meta = '<!--[if ' . $this->escape($item->modifiers['conditional']) . ']>' . $meta . '<![endif]-->';
+        }
+
+        return $meta;
+    }
+
+    /**
      * Normalize type attribute of meta
      *
      * @param  string $type type in CamelCase
@@ -174,26 +293,6 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
                     $type
                 ));
         }
-    }
-
-    /**
-     * Create an HTML5-style meta charset tag. Something like <meta charset="utf-8">
-     *
-     * Not valid in a non-HTML5 doctype
-     *
-     * @param  string $charset
-     * @return HeadMeta Provides a fluent interface
-     */
-    public function setCharset($charset)
-    {
-        $item = new stdClass;
-        $item->type = 'charset';
-        $item->charset = $charset;
-        $item->content = null;
-        $item->modifiers = array();
-        $this->set($item);
-
-        return $this;
     }
 
     /**
@@ -321,121 +420,22 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
     }
 
     /**
-     * Build meta HTML string
+     * Create an HTML5-style meta charset tag. Something like <meta charset="utf-8">
      *
-     * @param  stdClass $item
-     * @throws Exception\InvalidArgumentException
-     * @return string
-     */
-    public function itemToString(stdClass $item)
-    {
-        if (!in_array($item->type, $this->typeKeys)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Invalid type "%s" provided for meta',
-                $item->type
-            ));
-        }
-        $type = $item->type;
-
-        $modifiersString = '';
-        foreach ($item->modifiers as $key => $value) {
-            if ($this->view->plugin('doctype')->isHtml5()
-                && $key == 'scheme'
-            ) {
-                throw new Exception\InvalidArgumentException(
-                    'Invalid modifier "scheme" provided; not supported by HTML5'
-                );
-            }
-            if (!in_array($key, $this->modifierKeys)) {
-                continue;
-            }
-            $modifiersString .= $key . '="' . $this->escape($value) . '" ';
-        }
-
-        $modifiersString = rtrim($modifiersString);
-
-        if ('' != $modifiersString) {
-            $modifiersString = ' ' . $modifiersString;
-        }
-
-        if (method_exists($this->view, 'plugin')) {
-            if ($this->view->plugin('doctype')->isHtml5()
-                && $type == 'charset'
-            ) {
-                $tpl = ($this->view->plugin('doctype')->isXhtml())
-                    ? '<meta %s="%s"/>'
-                    : '<meta %s="%s">';
-            } elseif ($this->view->plugin('doctype')->isXhtml()) {
-                $tpl = '<meta %s="%s" content="%s"%s />';
-            } else {
-                $tpl = '<meta %s="%s" content="%s"%s>';
-            }
-        } else {
-            $tpl = '<meta %s="%s" content="%s"%s />';
-        }
-
-        $meta = sprintf(
-            $tpl,
-            $type,
-            $this->escape($item->$type),
-            $this->escape($item->content),
-            $modifiersString
-        );
-
-        if (isset($item->modifiers['conditional'])
-            && !empty($item->modifiers['conditional'])
-            && is_string($item->modifiers['conditional']))
-        {
-            $meta = '<!--[if ' . $this->escape($item->modifiers['conditional']) . ']>' . $meta . '<![endif]-->';
-        }
-
-        return $meta;
-    }
-
-    /**
-     * Render placeholder as string
+     * Not valid in a non-HTML5 doctype
      *
-     * @param  string|int $indent
-     * @return string
+     * @param  string $charset
+     * @return HeadMeta Provides a fluent interface
      */
-    public function toString($indent = null)
+    public function setCharset($charset)
     {
-        $indent = (null !== $indent)
-                ? $this->getWhitespace($indent)
-                : $this->getIndent();
+        $item = new stdClass;
+        $item->type = 'charset';
+        $item->charset = $charset;
+        $item->content = null;
+        $item->modifiers = array();
+        $this->set($item);
 
-        $items = array();
-        $this->getContainer()->ksort();
-
-        try {
-            foreach ($this as $item) {
-                $items[] = $this->itemToString($item);
-            }
-        } catch (Exception\InvalidArgumentException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
-            return '';
-        }
-
-        return $indent . implode($this->escape($this->getSeparator()) . $indent, $items);
-    }
-
-    /**
-     * Create data item for inserting into stack
-     *
-     * @param  string $type
-     * @param  string $typeValue
-     * @param  string $content
-     * @param  array  $modifiers
-     * @return stdClass
-     */
-    public function createData($type, $typeValue, $content, array $modifiers)
-    {
-        $data            = new stdClass;
-        $data->type      = $type;
-        $data->$type     = $typeValue;
-        $data->content   = $content;
-        $data->modifiers = $modifiers;
-
-        return $data;
+        return $this;
     }
 }

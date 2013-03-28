@@ -21,7 +21,7 @@ abstract class AbstractContainer extends \ArrayObject
      *
      * @const string
      */
-    const SET    = 'SET';
+    const SET = 'SET';
 
     /**
      * Whether or not to append contents to placeholder
@@ -38,32 +38,11 @@ abstract class AbstractContainer extends \ArrayObject
     const PREPEND = 'PREPEND';
 
     /**
-     * What text to prefix the placeholder with when rendering
+     * Key to which to capture content
      *
      * @var string
      */
-    protected $prefix    = '';
-
-    /**
-     * What text to append the placeholder with when rendering
-     *
-     * @var string
-     */
-    protected $postfix   = '';
-
-    /**
-     * What string to use between individual items in the placeholder when rendering
-     *
-     * @var string
-     */
-    protected $separator = '';
-
-    /**
-     * What string to use as the indentation of output, this will typically be spaces. Eg: '    '
-     *
-     * @var string
-     */
-    protected $indent = '';
+    protected $captureKey;
 
     /**
      * Whether or not we're already capturing for this given container
@@ -80,11 +59,32 @@ abstract class AbstractContainer extends \ArrayObject
     protected $captureType;
 
     /**
-     * Key to which to capture content
+     * What string to use as the indentation of output, this will typically be spaces. Eg: '    '
      *
      * @var string
      */
-    protected $captureKey;
+    protected $indent = '';
+
+    /**
+     * What text to append the placeholder with when rendering
+     *
+     * @var string
+     */
+    protected $postfix   = '';
+
+    /**
+     * What text to prefix the placeholder with when rendering
+     *
+     * @var string
+     */
+    protected $prefix    = '';
+
+    /**
+     * What string to use between individual items in the placeholder when rendering
+     *
+     * @var string
+     */
+    protected $separator = '';
 
     /**
      * Constructor - This is needed so that we can attach a class member as the ArrayObject container
@@ -95,160 +95,35 @@ abstract class AbstractContainer extends \ArrayObject
     }
 
     /**
-     * Set a single value
-     *
-     * @param  mixed $value
-     * @return void
-     */
-    public function set($value)
-    {
-        $this->exchangeArray(array($value));
-
-        return $this;
-    }
-
-    /**
-     * Prepend a value to the top of the container
-     *
-     * @param  mixed $value
-     * @return void
-     */
-    public function prepend($value)
-    {
-        $values = $this->getArrayCopy();
-        array_unshift($values, $value);
-        $this->exchangeArray($values);
-
-        return $this;
-    }
-
-    /**
-     * Retrieve container value
-     *
-     * If single element registered, returns that element; otherwise,
-     * serializes to array.
-     *
-     * @return mixed
-     */
-    public function getValue()
-    {
-        if (1 == count($this)) {
-            $keys = $this->getKeys();
-            $key  = array_shift($keys);
-            return $this[$key];
-        }
-
-        return $this->getArrayCopy();
-    }
-
-    /**
-     * Set prefix for __toString() serialization
-     *
-     * @param  string $prefix
-     * @return AbstractContainer
-     */
-    public function setPrefix($prefix)
-    {
-        $this->prefix = (string) $prefix;
-
-        return $this;
-    }
-
-    /**
-     * Retrieve prefix
+     * Serialize object to string
      *
      * @return string
      */
-    public function getPrefix()
+    public function __toString()
     {
-        return $this->prefix;
+        return $this->toString();
     }
 
     /**
-     * Set postfix for __toString() serialization
+     * Render the placeholder
      *
-     * @param  string $postfix
-     * @return AbstractContainer
-     */
-    public function setPostfix($postfix)
-    {
-        $this->postfix = (string) $postfix;
-
-        return $this;
-    }
-
-    /**
-     * Retrieve postfix
-     *
+     * @param  null|int|string $indent
      * @return string
      */
-    public function getPostfix()
+    public function toString($indent = null)
     {
-        return $this->postfix;
-    }
+        $indent = ($indent !== null)
+            ? $this->getWhitespace($indent)
+            : $this->getIndent();
 
-    /**
-     * Set separator for __toString() serialization
-     *
-     * Used to implode elements in container
-     *
-     * @param  string $separator
-     * @return AbstractContainer
-     */
-    public function setSeparator($separator)
-    {
-        $this->separator = (string) $separator;
+        $items  = $this->getArrayCopy();
+        $return = $indent
+            . $this->getPrefix()
+            . implode($this->getSeparator(), $items)
+            . $this->getPostfix();
+        $return = preg_replace("/(\r\n?|\n)/", '$1' . $indent, $return);
 
-        return $this;
-    }
-
-    /**
-     * Retrieve separator
-     *
-     * @return string
-     */
-    public function getSeparator()
-    {
-        return $this->separator;
-    }
-
-    /**
-     * Set the indentation string for __toString() serialization,
-     * optionally, if a number is passed, it will be the number of spaces
-     *
-     * @param  string|int $indent
-     * @return AbstractContainer
-     */
-    public function setIndent($indent)
-    {
-        $this->indent = $this->getWhitespace($indent);
-
-        return $this;
-    }
-
-    /**
-     * Retrieve indentation
-     *
-     * @return string
-     */
-    public function getIndent()
-    {
-        return $this->indent;
-    }
-
-    /**
-     * Retrieve whitespace representation of $indent
-     *
-     * @param  int|string $indent
-     * @return string
-     */
-    public function getWhitespace($indent)
-    {
-        if (is_int($indent)) {
-            $indent = str_repeat(' ', $indent);
-        }
-
-        return (string) $indent;
+        return $return;
     }
 
     /**
@@ -334,6 +209,68 @@ abstract class AbstractContainer extends \ArrayObject
     }
 
     /**
+     * Retrieve container value
+     *
+     * If single element registered, returns that element; otherwise,
+     * serializes to array.
+     *
+     * @return mixed
+     */
+    public function getValue()
+    {
+        if (1 == count($this)) {
+            $keys = $this->getKeys();
+            $key  = array_shift($keys);
+            return $this[$key];
+        }
+
+        return $this->getArrayCopy();
+    }
+
+    /**
+     * Retrieve whitespace representation of $indent
+     *
+     * @param  int|string $indent
+     * @return string
+     */
+    public function getWhitespace($indent)
+    {
+        if (is_int($indent)) {
+            $indent = str_repeat(' ', $indent);
+        }
+
+        return (string) $indent;
+    }
+
+    /**
+     * Set a single value
+     *
+     * @param  mixed $value
+     * @return void
+     */
+    public function set($value)
+    {
+        $this->exchangeArray(array($value));
+
+        return $this;
+    }
+
+    /**
+     * Prepend a value to the top of the container
+     *
+     * @param  mixed $value
+     * @return void
+     */
+    public function prepend($value)
+    {
+        $values = $this->getArrayCopy();
+        array_unshift($values, $value);
+        $this->exchangeArray($values);
+
+        return $this;
+    }
+
+    /**
      * Next Index as defined by the PHP manual
      *
      * @return int
@@ -349,34 +286,93 @@ abstract class AbstractContainer extends \ArrayObject
     }
 
     /**
-     * Render the placeholder
+     * Set the indentation string for __toString() serialization,
+     * optionally, if a number is passed, it will be the number of spaces
      *
-     * @param  null|int|string $indent
-     * @return string
+     * @param  string|int $indent
+     * @return AbstractContainer
      */
-    public function toString($indent = null)
+    public function setIndent($indent)
     {
-        $indent = ($indent !== null)
-                ? $this->getWhitespace($indent)
-                : $this->getIndent();
-
-        $items  = $this->getArrayCopy();
-        $return = $indent
-                . $this->getPrefix()
-                . implode($this->getSeparator(), $items)
-                . $this->getPostfix();
-        $return = preg_replace("/(\r\n?|\n)/", '$1' . $indent, $return);
-
-        return $return;
+        $this->indent = $this->getWhitespace($indent);
+        return $this;
     }
 
     /**
-     * Serialize object to string
+     * Retrieve indentation
      *
      * @return string
      */
-    public function __toString()
+    public function getIndent()
     {
-        return $this->toString();
+        return $this->indent;
+    }
+
+    /**
+     * Set postfix for __toString() serialization
+     *
+     * @param  string $postfix
+     * @return AbstractContainer
+     */
+    public function setPostfix($postfix)
+    {
+        $this->postfix = (string) $postfix;
+        return $this;
+    }
+
+    /**
+     * Retrieve postfix
+     *
+     * @return string
+     */
+    public function getPostfix()
+    {
+        return $this->postfix;
+    }
+
+    /**
+     * Set prefix for __toString() serialization
+     *
+     * @param  string $prefix
+     * @return AbstractContainer
+     */
+    public function setPrefix($prefix)
+    {
+        $this->prefix = (string) $prefix;
+        return $this;
+    }
+
+    /**
+     * Retrieve prefix
+     *
+     * @return string
+     */
+    public function getPrefix()
+    {
+        return $this->prefix;
+    }
+
+    /**
+     * Set separator for __toString() serialization
+     *
+     * Used to implode elements in container
+     *
+     * @param  string $separator
+     * @return AbstractContainer
+     */
+    public function setSeparator($separator)
+    {
+        $this->separator = (string) $separator;
+        return $this;
+    }
+
+    /**
+     * Retrieve separator
+     *
+     * @return string
+     */
+    public function getSeparator()
+    {
+        return $this->separator;
     }
 }

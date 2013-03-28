@@ -16,18 +16,18 @@ use Zend\View\Exception;
 class PaginationControl extends AbstractHelper
 {
     /**
-     * Default view partial
-     *
-     * @var string|array
-     */
-    protected static $defaultViewPartial = null;
-
-    /**
      * Default Scrolling Style
      *
      * @var string
      */
     protected static $defaultScrollingStyle = 'sliding';
+
+    /**
+     * Default view partial
+     *
+     * @var string|array
+     */
+    protected static $defaultViewPartial = null;
 
     /**
      * Render the provided pages.  This checks if $view->paginator is set and,
@@ -90,6 +90,26 @@ class PaginationControl extends AbstractHelper
     }
 
     /**
+     * Sets the default Scrolling Style
+     *
+     * @param string $style string 'all' | 'elastic' | 'sliding' | 'jumping'
+     */
+    public static function setDefaultScrollingStyle($style)
+    {
+        static::$defaultScrollingStyle = $style;
+    }
+
+    /**
+     * Gets the default scrolling style
+     *
+     * @return string
+     */
+    public static function getDefaultScrollingStyle()
+    {
+        return static::$defaultScrollingStyle;
+    }
+
+    /**
      * Sets the default view partial.
      *
      * @param string|array $partial View partial
@@ -107,25 +127,5 @@ class PaginationControl extends AbstractHelper
     public static function getDefaultViewPartial()
     {
         return static::$defaultViewPartial;
-    }
-
-     /**
-     * Gets the default scrolling style
-     *
-     * @return string
-     */
-    public static function getDefaultScrollingStyle()
-    {
-        return static::$defaultScrollingStyle;
-    }
-
-    /**
-     * Sets the default Scrolling Style
-     *
-     * @param string $style string 'all' | 'elastic' | 'sliding' | 'jumping'
-     */
-    public static function setDefaultScrollingStyle($style)
-    {
-        static::$defaultScrollingStyle = $style;
     }
 }

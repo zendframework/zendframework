@@ -127,318 +127,6 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     protected static $defaultRole;
 
     /**
-     * Set the service locator.
-     *
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return AbstractHelper
-     */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-
-        return $this;
-    }
-
-    /**
-     * Get the service locator.
-     *
-     * @return ServiceLocatorInterface
-     */
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
-
-    /**
-     * Sets navigation container the helper operates on by default
-     *
-     * Implements {@link HelperInterface::setContainer()}.
-     *
-     * @param  string|Navigation\AbstractContainer $container Default is null, meaning container will be reset.
-     * @return AbstractHelper
-     */
-    public function setContainer($container = null)
-    {
-        $this->parseContainer($container);
-        $this->container = $container;
-
-        return $this;
-    }
-
-    /**
-     * Returns the navigation container helper operates on by default
-     *
-     * Implements {@link HelperInterface::getContainer()}.
-     *
-     * If no container is set, a new container will be instantiated and
-     * stored in the helper.
-     *
-     * @return Navigation\AbstractContainer  navigation container
-     */
-    public function getContainer()
-    {
-        if (null === $this->container) {
-            $this->container = new Navigation\Navigation();
-        }
-
-        return $this->container;
-    }
-
-    /**
-     * Verifies container and eventually fetches it from service locator if it is a string
-     *
-     * @param  Navigation\AbstractContainer|string|null $container
-     * @throws Exception\InvalidArgumentException
-     */
-    protected function parseContainer(&$container = null)
-    {
-        if (null === $container) {
-            return;
-        }
-
-        if (is_string($container)) {
-            if (!$this->getServiceLocator()) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                    'Attempted to set container with alias "%s" but no ServiceLocator was set',
-                    $container
-                ));
-            }
-
-            /**
-             * Load the navigation container from the root service locator
-             *
-             * The navigation container is probably located in Zend\ServiceManager\ServiceManager
-             * and not in the View\HelperPluginManager. If the set service locator is a
-             * HelperPluginManager, access the navigation container via the main service locator.
-             */
-            $sl = $this->getServiceLocator();
-            if ($sl instanceof View\HelperPluginManager) {
-                $sl = $sl->getServiceLocator();
-            }
-            $container = $sl->get($container);
-            return;
-        }
-
-        if (!$container instanceof Navigation\AbstractContainer) {
-            throw new  Exception\InvalidArgumentException(
-                'Container must be a string alias or an instance of ' .
-                    'Zend\Navigation\AbstractContainer'
-            );
-        }
-    }
-
-    /**
-     * Sets the minimum depth a page must have to be included when rendering
-     *
-     * @param  int $minDepth Default is null, which sets no minimum depth.
-     * @return AbstractHelper
-     */
-    public function setMinDepth($minDepth = null)
-    {
-        if (null === $minDepth || is_int($minDepth)) {
-            $this->minDepth = $minDepth;
-        } else {
-            $this->minDepth = (int) $minDepth;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Returns minimum depth a page must have to be included when rendering
-     *
-     * @return int|null
-     */
-    public function getMinDepth()
-    {
-        if (!is_int($this->minDepth) || $this->minDepth < 0) {
-            return 0;
-        }
-
-        return $this->minDepth;
-    }
-
-    /**
-     * Sets the maximum depth a page can have to be included when rendering
-     *
-     * @param  int $maxDepth Default is null, which sets no maximum depth.
-     * @return AbstractHelper
-     */
-    public function setMaxDepth($maxDepth = null)
-    {
-        if (null === $maxDepth || is_int($maxDepth)) {
-            $this->maxDepth = $maxDepth;
-        } else {
-            $this->maxDepth = (int) $maxDepth;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Returns maximum depth a page can have to be included when rendering
-     *
-     * @return int|null
-     */
-    public function getMaxDepth()
-    {
-        return $this->maxDepth;
-    }
-
-    /**
-     * Set the indentation string for using in {@link render()}, optionally a
-     * number of spaces to indent with
-     *
-     * @param  string|int $indent
-     * @return AbstractHelper
-     */
-    public function setIndent($indent)
-    {
-        $this->indent = $this->getWhitespace($indent);
-
-        return $this;
-    }
-
-    /**
-     * Returns indentation
-     *
-     * @return string
-     */
-    public function getIndent()
-    {
-        return $this->indent;
-    }
-
-    /**
-     * Sets ACL to use when iterating pages
-     *
-     * Implements {@link HelperInterface::setAcl()}.
-     *
-     * @param  Acl\AclInterface $acl ACL object.
-     * @return AbstractHelper
-     */
-    public function setAcl(Acl\AclInterface $acl = null)
-    {
-        $this->acl = $acl;
-
-        return $this;
-    }
-
-    /**
-     * Returns ACL or null if it isn't set using {@link setAcl()} or
-     * {@link setDefaultAcl()}
-     *
-     * Implements {@link HelperInterface::getAcl()}.
-     *
-     * @return Acl\AclInterface|null  ACL object or null
-     */
-    public function getAcl()
-    {
-        if ($this->acl === null && static::$defaultAcl !== null) {
-            return static::$defaultAcl;
-        }
-
-        return $this->acl;
-    }
-
-    /**
-     * Sets ACL role(s) to use when iterating pages
-     *
-     * Implements {@link HelperInterface::setRole()}.
-     *
-     * @param  mixed $role [optional] role to set. Expects a string, an
-     *                     instance of type {@link Acl\Role\RoleInterface}, or null. Default
-     *                     is null, which will set no role.
-     * @return AbstractHelper
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setRole($role = null)
-    {
-        if (null === $role || is_string($role) ||
-            $role instanceof Acl\Role\RoleInterface
-        ) {
-            $this->role = $role;
-        } else {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '$role must be a string, null, or an instance of '
-                .  'Zend\Permissions\Role\RoleInterface; %s given',
-                (is_object($role) ? get_class($role) : gettype($role))
-            ));
-        }
-
-        return $this;
-    }
-
-    /**
-     * Returns ACL role to use when iterating pages, or null if it isn't set
-     * using {@link setRole()} or {@link setDefaultRole()}
-     *
-     * Implements {@link HelperInterface::getRole()}.
-     *
-     * @return string|Acl\Role\RoleInterface|null
-     */
-    public function getRole()
-    {
-        if ($this->role === null && static::$defaultRole !== null) {
-            return static::$defaultRole;
-        }
-
-        return $this->role;
-    }
-
-    /**
-     * Sets whether ACL should be used
-     *
-     * Implements {@link HelperInterface::setUseAcl()}.
-     *
-     * @param  bool $useAcl Whether ACL should be used.
-     * @return AbstractHelper
-     */
-    public function setUseAcl($useAcl = true)
-    {
-        $this->useAcl = (bool) $useAcl;
-
-        return $this;
-    }
-
-    /**
-     * Returns whether ACL should be used
-     *
-     * Implements {@link HelperInterface::getUseAcl()}.
-     *
-     * @return bool
-     */
-    public function getUseAcl()
-    {
-        return $this->useAcl;
-    }
-
-    /**
-     * Return renderInvisible flag
-     *
-     * @return bool
-     */
-    public function getRenderInvisible()
-    {
-        return $this->renderInvisible;
-    }
-
-    /**
-     * Render invisible items?
-     *
-     * @param  bool $renderInvisible
-     * @return AbstractHelper
-     */
-    public function setRenderInvisible($renderInvisible = true)
-    {
-        $this->renderInvisible = (bool) $renderInvisible;
-
-        return $this;
-    }
-
-    // Magic overloads:
-
-    /**
      * Magic overload: Proxy calls to the navigation container
      *
      * @param  string $method    method name in container
@@ -449,8 +137,8 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     public function __call($method, array $arguments = array())
     {
         return call_user_func_array(
-                array($this->getContainer(), $method),
-                $arguments);
+            array($this->getContainer(), $method),
+            $arguments);
     }
 
     /**
@@ -473,8 +161,6 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
             return '';
         }
     }
-
-    // Public methods:
 
     /**
      * Finds the deepest active page in the given container
@@ -548,180 +234,46 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     }
 
     /**
-     * Checks if the helper has a container
+     * Verifies container and eventually fetches it from service locator if it is a string
      *
-     * Implements {@link HelperInterface::hasContainer()}.
-     *
-     * @return bool
+     * @param  Navigation\AbstractContainer|string|null $container
+     * @throws Exception\InvalidArgumentException
      */
-    public function hasContainer()
+    protected function parseContainer(&$container = null)
     {
-        return null !== $this->container;
-    }
-
-    /**
-     * Checks if the helper has an ACL instance
-     *
-     * Implements {@link HelperInterface::hasAcl()}.
-     *
-     * @return bool
-     */
-    public function hasAcl()
-    {
-        if ($this->acl instanceof Acl\Acl
-            || static::$defaultAcl instanceof Acl\Acl
-        ) {
-            return true;
+        if (null === $container) {
+            return;
         }
 
-        return false;
-    }
-
-    /**
-     * Checks if the helper has an ACL role
-     *
-     * Implements {@link HelperInterface::hasRole()}.
-     *
-     * @return bool
-     */
-    public function hasRole()
-    {
-        if ($this->role instanceof Acl\Role\RoleInterface
-            || is_string($this->role)
-            || static::$defaultRole instanceof Acl\Role\RoleInterface
-            || is_string(static::$defaultRole)
-        ) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Returns an HTML string containing an 'a' element for the given page
-     *
-     * @param  AbstractPage $page  page to generate HTML for
-     * @return string
-     */
-    public function htmlify(AbstractPage $page)
-    {
-        // get label and title for translating
-        $label = $page->getLabel();
-        $title = $page->getTitle();
-
-        if (null !== ($translator = $this->getTranslator())) {
-            $textDomain = $this->getTranslatorTextDomain();
-            if (is_string($label) && !empty($label)) {
-                $label = $translator->translate($label, $textDomain);
+        if (is_string($container)) {
+            if (!$this->getServiceLocator()) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Attempted to set container with alias "%s" but no ServiceLocator was set',
+                    $container
+                ));
             }
-            if (is_string($title) && !empty($title)) {
-                $title = $translator->translate($title, $textDomain);
+
+            /**
+             * Load the navigation container from the root service locator
+             *
+             * The navigation container is probably located in Zend\ServiceManager\ServiceManager
+             * and not in the View\HelperPluginManager. If the set service locator is a
+             * HelperPluginManager, access the navigation container via the main service locator.
+             */
+            $sl = $this->getServiceLocator();
+            if ($sl instanceof View\HelperPluginManager) {
+                $sl = $sl->getServiceLocator();
             }
+            $container = $sl->get($container);
+            return;
         }
 
-        // get attribs for anchor element
-        $attribs = array(
-            'id'     => $page->getId(),
-            'title'  => $title,
-            'class'  => $page->getClass(),
-            'href'   => $page->getHref(),
-            'target' => $page->getTarget()
-        );
-
-        $escaper = $this->view->plugin('escapeHtml');
-
-        return '<a' . $this->htmlAttribs($attribs) . '>' . $escaper($label) . '</a>';
-    }
-
-    // Translator methods - Good candidate to refactor as a trait with PHP 5.4
-
-    /**
-     * Sets translator to use in helper
-     *
-     * @param  Translator $translator  [optional] translator.
-     *                                 Default is null, which sets no translator.
-     * @param  string     $textDomain  [optional] text domain
-     *                                 Default is null, which skips setTranslatorTextDomain
-     * @return AbstractHelper
-     */
-    public function setTranslator(Translator $translator = null, $textDomain = null)
-    {
-        $this->translator = $translator;
-        if (null !== $textDomain) {
-            $this->setTranslatorTextDomain($textDomain);
+        if (!$container instanceof Navigation\AbstractContainer) {
+            throw new  Exception\InvalidArgumentException(
+                'Container must be a string alias or an instance of ' .
+                    'Zend\Navigation\AbstractContainer'
+            );
         }
-
-        return $this;
-    }
-
-    /**
-     * Returns translator used in helper
-     *
-     * @return Translator|null
-     */
-    public function getTranslator()
-    {
-        if (! $this->isTranslatorEnabled()) {
-            return null;
-        }
-
-        return $this->translator;
-    }
-
-    /**
-     * Checks if the helper has a translator
-     *
-     * @return bool
-     */
-    public function hasTranslator()
-    {
-        return (bool) $this->getTranslator();
-    }
-
-    /**
-     * Sets whether translator is enabled and should be used
-     *
-     * @param  bool $enabled
-     * @return AbstractHelper
-     */
-    public function setTranslatorEnabled($enabled = true)
-    {
-        $this->translatorEnabled = (bool) $enabled;
-
-        return $this;
-    }
-
-    /**
-     * Returns whether translator is enabled and should be used
-     *
-     * @return bool
-     */
-    public function isTranslatorEnabled()
-    {
-        return $this->translatorEnabled;
-    }
-
-    /**
-     * Set translation text domain
-     *
-     * @param  string $textDomain
-     * @return AbstractHelper
-     */
-    public function setTranslatorTextDomain($textDomain = 'default')
-    {
-        $this->translatorTextDomain = $textDomain;
-
-        return $this;
-    }
-
-    /**
-     * Return the translation text domain
-     *
-     * @return string
-     */
-    public function getTranslatorTextDomain()
-    {
-        return $this->translatorTextDomain;
     }
 
     // Iterator filter methods:
@@ -839,6 +391,42 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     }
 
     /**
+     * Returns an HTML string containing an 'a' element for the given page
+     *
+     * @param  AbstractPage $page  page to generate HTML for
+     * @return string
+     */
+    public function htmlify(AbstractPage $page)
+    {
+        // get label and title for translating
+        $label = $page->getLabel();
+        $title = $page->getTitle();
+
+        if (null !== ($translator = $this->getTranslator())) {
+            $textDomain = $this->getTranslatorTextDomain();
+            if (is_string($label) && !empty($label)) {
+                $label = $translator->translate($label, $textDomain);
+            }
+            if (is_string($title) && !empty($title)) {
+                $title = $translator->translate($title, $textDomain);
+            }
+        }
+
+        // get attribs for anchor element
+        $attribs = array(
+            'id'     => $page->getId(),
+            'title'  => $title,
+            'class'  => $page->getClass(),
+            'href'   => $page->getHref(),
+            'target' => $page->getTarget()
+        );
+
+        $escaper = $this->view->plugin('escapeHtml');
+
+        return '<a' . $this->htmlAttribs($attribs) . '>' . $escaper($label) . '</a>';
+    }
+
+    /**
      * Normalize an ID
      *
      * Overrides {@link View\Helper\AbstractHtmlElement::normalizeId()}.
@@ -852,6 +440,407 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
         $prefix = strtolower(trim(substr($prefix, strrpos($prefix, '\\')), '\\'));
 
         return $prefix . '-' . $value;
+    }
+
+    /**
+     * Sets ACL to use when iterating pages
+     *
+     * Implements {@link HelperInterface::setAcl()}.
+     *
+     * @param  Acl\AclInterface $acl ACL object.
+     * @return AbstractHelper
+     */
+    public function setAcl(Acl\AclInterface $acl = null)
+    {
+        $this->acl = $acl;
+        return $this;
+    }
+
+    /**
+     * Returns ACL or null if it isn't set using {@link setAcl()} or
+     * {@link setDefaultAcl()}
+     *
+     * Implements {@link HelperInterface::getAcl()}.
+     *
+     * @return Acl\AclInterface|null  ACL object or null
+     */
+    public function getAcl()
+    {
+        if ($this->acl === null && static::$defaultAcl !== null) {
+            return static::$defaultAcl;
+        }
+
+        return $this->acl;
+    }
+
+    /**
+     * Checks if the helper has an ACL instance
+     *
+     * Implements {@link HelperInterface::hasAcl()}.
+     *
+     * @return bool
+     */
+    public function hasAcl()
+    {
+        if ($this->acl instanceof Acl\Acl
+            || static::$defaultAcl instanceof Acl\Acl
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Sets navigation container the helper operates on by default
+     *
+     * Implements {@link HelperInterface::setContainer()}.
+     *
+     * @param  string|Navigation\AbstractContainer $container Default is null, meaning container will be reset.
+     * @return AbstractHelper
+     */
+    public function setContainer($container = null)
+    {
+        $this->parseContainer($container);
+        $this->container = $container;
+
+        return $this;
+    }
+
+    /**
+     * Returns the navigation container helper operates on by default
+     *
+     * Implements {@link HelperInterface::getContainer()}.
+     *
+     * If no container is set, a new container will be instantiated and
+     * stored in the helper.
+     *
+     * @return Navigation\AbstractContainer  navigation container
+     */
+    public function getContainer()
+    {
+        if (null === $this->container) {
+            $this->container = new Navigation\Navigation();
+        }
+
+        return $this->container;
+    }
+
+    /**
+     * Checks if the helper has a container
+     *
+     * Implements {@link HelperInterface::hasContainer()}.
+     *
+     * @return bool
+     */
+    public function hasContainer()
+    {
+        return null !== $this->container;
+    }
+
+    /**
+     * Set the indentation string for using in {@link render()}, optionally a
+     * number of spaces to indent with
+     *
+     * @param  string|int $indent
+     * @return AbstractHelper
+     */
+    public function setIndent($indent)
+    {
+        $this->indent = $this->getWhitespace($indent);
+        return $this;
+    }
+
+    /**
+     * Returns indentation
+     *
+     * @return string
+     */
+    public function getIndent()
+    {
+        return $this->indent;
+    }
+
+    /**
+     * Sets the maximum depth a page can have to be included when rendering
+     *
+     * @param  int $maxDepth Default is null, which sets no maximum depth.
+     * @return AbstractHelper
+     */
+    public function setMaxDepth($maxDepth = null)
+    {
+        if (null === $maxDepth || is_int($maxDepth)) {
+            $this->maxDepth = $maxDepth;
+        } else {
+            $this->maxDepth = (int) $maxDepth;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns maximum depth a page can have to be included when rendering
+     *
+     * @return int|null
+     */
+    public function getMaxDepth()
+    {
+        return $this->maxDepth;
+    }
+
+    /**
+     * Sets the minimum depth a page must have to be included when rendering
+     *
+     * @param  int $minDepth Default is null, which sets no minimum depth.
+     * @return AbstractHelper
+     */
+    public function setMinDepth($minDepth = null)
+    {
+        if (null === $minDepth || is_int($minDepth)) {
+            $this->minDepth = $minDepth;
+        } else {
+            $this->minDepth = (int) $minDepth;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns minimum depth a page must have to be included when rendering
+     *
+     * @return int|null
+     */
+    public function getMinDepth()
+    {
+        if (!is_int($this->minDepth) || $this->minDepth < 0) {
+            return 0;
+        }
+
+        return $this->minDepth;
+    }
+
+    /**
+     * Render invisible items?
+     *
+     * @param  bool $renderInvisible
+     * @return AbstractHelper
+     */
+    public function setRenderInvisible($renderInvisible = true)
+    {
+        $this->renderInvisible = (bool) $renderInvisible;
+        return $this;
+    }
+
+    /**
+     * Return renderInvisible flag
+     *
+     * @return bool
+     */
+    public function getRenderInvisible()
+    {
+        return $this->renderInvisible;
+    }
+
+    /**
+     * Sets ACL role(s) to use when iterating pages
+     *
+     * Implements {@link HelperInterface::setRole()}.
+     *
+     * @param  mixed $role [optional] role to set. Expects a string, an
+     *                     instance of type {@link Acl\Role\RoleInterface}, or null. Default
+     *                     is null, which will set no role.
+     * @return AbstractHelper
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setRole($role = null)
+    {
+        if (null === $role || is_string($role) ||
+            $role instanceof Acl\Role\RoleInterface
+        ) {
+            $this->role = $role;
+        } else {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '$role must be a string, null, or an instance of '
+                    .  'Zend\Permissions\Role\RoleInterface; %s given',
+                (is_object($role) ? get_class($role) : gettype($role))
+            ));
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns ACL role to use when iterating pages, or null if it isn't set
+     * using {@link setRole()} or {@link setDefaultRole()}
+     *
+     * Implements {@link HelperInterface::getRole()}.
+     *
+     * @return string|Acl\Role\RoleInterface|null
+     */
+    public function getRole()
+    {
+        if ($this->role === null && static::$defaultRole !== null) {
+            return static::$defaultRole;
+        }
+
+        return $this->role;
+    }
+
+    /**
+     * Checks if the helper has an ACL role
+     *
+     * Implements {@link HelperInterface::hasRole()}.
+     *
+     * @return bool
+     */
+    public function hasRole()
+    {
+        if ($this->role instanceof Acl\Role\RoleInterface
+            || is_string($this->role)
+            || static::$defaultRole instanceof Acl\Role\RoleInterface
+            || is_string(static::$defaultRole)
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Set the service locator.
+     *
+     * @param  ServiceLocatorInterface $serviceLocator
+     * @return AbstractHelper
+     */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+        return $this;
+    }
+
+    /**
+     * Get the service locator.
+     *
+     * @return ServiceLocatorInterface
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
+
+    // Translator methods - Good candidate to refactor as a trait with PHP 5.4
+
+    /**
+     * Sets translator to use in helper
+     *
+     * @param  Translator $translator  [optional] translator.
+     *                                 Default is null, which sets no translator.
+     * @param  string     $textDomain  [optional] text domain
+     *                                 Default is null, which skips setTranslatorTextDomain
+     * @return AbstractHelper
+     */
+    public function setTranslator(Translator $translator = null, $textDomain = null)
+    {
+        $this->translator = $translator;
+        if (null !== $textDomain) {
+            $this->setTranslatorTextDomain($textDomain);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns translator used in helper
+     *
+     * @return Translator|null
+     */
+    public function getTranslator()
+    {
+        if (! $this->isTranslatorEnabled()) {
+            return null;
+        }
+
+        return $this->translator;
+    }
+
+    /**
+     * Checks if the helper has a translator
+     *
+     * @return bool
+     */
+    public function hasTranslator()
+    {
+        return (bool) $this->getTranslator();
+    }
+
+    /**
+     * Sets whether translator is enabled and should be used
+     *
+     * @param  bool $enabled
+     * @return AbstractHelper
+     */
+    public function setTranslatorEnabled($enabled = true)
+    {
+        $this->translatorEnabled = (bool) $enabled;
+        return $this;
+    }
+
+    /**
+     * Returns whether translator is enabled and should be used
+     *
+     * @return bool
+     */
+    public function isTranslatorEnabled()
+    {
+        return $this->translatorEnabled;
+    }
+
+    /**
+     * Set translation text domain
+     *
+     * @param  string $textDomain
+     * @return AbstractHelper
+     */
+    public function setTranslatorTextDomain($textDomain = 'default')
+    {
+        $this->translatorTextDomain = $textDomain;
+        return $this;
+    }
+
+    /**
+     * Return the translation text domain
+     *
+     * @return string
+     */
+    public function getTranslatorTextDomain()
+    {
+        return $this->translatorTextDomain;
+    }
+
+    /**
+     * Sets whether ACL should be used
+     *
+     * Implements {@link HelperInterface::setUseAcl()}.
+     *
+     * @param  bool $useAcl
+     * @return AbstractHelper
+     */
+    public function setUseAcl($useAcl = true)
+    {
+        $this->useAcl = (bool) $useAcl;
+        return $this;
+    }
+
+    /**
+     * Returns whether ACL should be used
+     *
+     * Implements {@link HelperInterface::getUseAcl()}.
+     *
+     * @return bool
+     */
+    public function getUseAcl()
+    {
+        return $this->useAcl;
     }
 
     // Static methods:

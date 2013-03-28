@@ -98,7 +98,6 @@ class Url extends AbstractHelper
     public function setRouter(RouteStackInterface $router)
     {
         $this->router = $router;
-
         return $this;
     }
 
@@ -111,7 +110,6 @@ class Url extends AbstractHelper
     public function setRouteMatch(RouteMatch $routeMatch)
     {
         $this->routeMatch = $routeMatch;
-
         return $this;
     }
 }

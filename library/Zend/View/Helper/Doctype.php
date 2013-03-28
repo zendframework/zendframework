@@ -37,11 +37,6 @@ class Doctype extends AbstractHelper
     /**#@-*/
 
     /**
-     * @var ArrayObject Shared doctypes to use throughout all instances
-     */
-    protected static $registeredDoctypes;
-
-    /**
      * Default DocType
      *
      * @var string
@@ -54,6 +49,11 @@ class Doctype extends AbstractHelper
      * @var ArrayObject
      */
     protected $registry;
+
+    /**
+     * @var ArrayObject Shared doctypes to use throughout all instances
+     */
+    protected static $registeredDoctypes;
 
     /**
      * Constructor
@@ -113,6 +113,18 @@ class Doctype extends AbstractHelper
     }
 
     /**
+     * String representation of doctype
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $doctypes = $this->getDoctypes();
+
+        return $doctypes[$this->getDoctype()];
+    }
+
+    /**
      * Register the default doctypes we understand
      *
      * @return void
@@ -159,7 +171,6 @@ class Doctype extends AbstractHelper
     public function setDoctype($doctype)
     {
         $this->registry['doctype'] = $doctype;
-
         return $this;
     }
 
@@ -215,17 +226,5 @@ class Doctype extends AbstractHelper
     public function isRdfa()
     {
         return ($this->isHtml5() || stristr($this->getDoctype(), 'rdfa') ? true : false);
-    }
-
-    /**
-     * String representation of doctype
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        $doctypes = $this->getDoctypes();
-
-        return $doctypes[$this->getDoctype()];
     }
 }

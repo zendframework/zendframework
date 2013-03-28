@@ -26,14 +26,14 @@ abstract class AbstractHelper extends Helper\AbstractHelper
     const RECURSE_OBJECT = 0x02;
 
     /**
-     * @var Escaper\Escaper
-     */
-    protected $escaper = null;
-
-    /**
      * @var string Encoding
      */
     protected $encoding = 'UTF-8';
+
+    /**
+     * @var Escaper\Escaper
+     */
+    protected $escaper = null;
 
     /**
      * Invoke this helper: escape a value
@@ -77,37 +77,16 @@ abstract class AbstractHelper extends Helper\AbstractHelper
             return $this->__invoke((array) $value, $recurse | self::RECURSE_ARRAY);
         }
 
-        // At this point, we have a scalar; simply return it
         return $value;
     }
 
     /**
-     * Set instance of Escaper
+     * Escape a value for current escaping strategy
      *
-     * @param  Escaper\Escaper $escaper
-     * @return AbstractHelper
+     * @param  string $value
+     * @return string
      */
-    public function setEscaper(Escaper\Escaper $escaper)
-    {
-        $this->escaper = $escaper;
-        $this->encoding = $escaper->getEncoding();
-
-        return $this;
-    }
-
-    /**
-     * Get instance of Escaper
-     *
-     * @return null|Escaper\Escaper
-     */
-    public function getEscaper()
-    {
-        if (null === $this->escaper) {
-            $this->setEscaper(new Escaper\Escaper($this->getEncoding()));
-        }
-
-        return $this->escaper;
-    }
+    abstract protected function escape($value);
 
     /**
      * Set the encoding to use for escape operations
@@ -121,7 +100,7 @@ abstract class AbstractHelper extends Helper\AbstractHelper
         if (null !== $this->escaper) {
             throw new Exception\InvalidArgumentException(
                 'Character encoding settings cannot be changed once the Helper has been used or '
-                . ' if a Zend\Escaper\Escaper object (with preset encoding option) is set.'
+                    . ' if a Zend\Escaper\Escaper object (with preset encoding option) is set.'
             );
         }
 
@@ -141,10 +120,30 @@ abstract class AbstractHelper extends Helper\AbstractHelper
     }
 
     /**
-     * Escape a value for current escaping strategy
+     * Set instance of Escaper
      *
-     * @param  string $value
-     * @return string
+     * @param  Escaper\Escaper $escaper
+     * @return AbstractHelper
      */
-    abstract protected function escape($value);
+    public function setEscaper(Escaper\Escaper $escaper)
+    {
+        $this->escaper  = $escaper;
+        $this->encoding = $escaper->getEncoding();
+
+        return $this;
+    }
+
+    /**
+     * Get instance of Escaper
+     *
+     * @return null|Escaper\Escaper
+     */
+    public function getEscaper()
+    {
+        if (null === $this->escaper) {
+            $this->setEscaper(new Escaper\Escaper($this->getEncoding()));
+        }
+
+        return $this->escaper;
+    }
 }

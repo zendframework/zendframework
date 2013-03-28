@@ -17,7 +17,7 @@ use Zend\View\Exception;
 class BasePath extends AbstractHelper
 {
     /**
-     * Base path.
+     * Base path
      *
      * @var string
      */
@@ -54,7 +54,6 @@ class BasePath extends AbstractHelper
     public function setBasePath($basePath)
     {
         $this->basePath = rtrim($basePath, '/');
-
         return $this;
     }
 }

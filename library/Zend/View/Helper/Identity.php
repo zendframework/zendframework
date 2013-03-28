@@ -54,7 +54,6 @@ class Identity extends AbstractHelper
     public function setAuthenticationService(AuthenticationService $authenticationService)
     {
         $this->authenticationService = $authenticationService;
-
         return $this;
     }
 

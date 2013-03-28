@@ -15,7 +15,7 @@ use Zend\View\Renderer\RendererInterface as Renderer;
 abstract class AbstractHelper implements HelperInterface
 {
     /**
-     * View object
+     * View object instance
      *
      * @var Renderer
      */
@@ -30,7 +30,6 @@ abstract class AbstractHelper implements HelperInterface
     public function setView(Renderer $view)
     {
         $this->view = $view;
-
         return $this;
     }
 

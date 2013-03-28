@@ -51,19 +51,6 @@ class Layout extends AbstractHelper
     }
 
     /**
-     * Set layout template
-     *
-     * @param  string $template
-     * @return Layout
-     */
-    public function setTemplate($template)
-    {
-        $this->getRoot()->setTemplate((string) $template);
-
-        return $this;
-    }
-
-    /**
      * Get the root view model
      *
      * @throws Exception\RuntimeException
@@ -81,6 +68,18 @@ class Layout extends AbstractHelper
         }
 
         return $helper->getRoot();
+    }
+
+    /**
+     * Set layout template
+     *
+     * @param  string $template
+     * @return Layout
+     */
+    public function setTemplate($template)
+    {
+        $this->getRoot()->setTemplate((string) $template);
+        return $this;
     }
 
     /**

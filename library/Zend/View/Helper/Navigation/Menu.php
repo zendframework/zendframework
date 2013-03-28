@@ -21,11 +21,11 @@ use Zend\View\Exception;
 class Menu extends AbstractHelper
 {
     /**
-     * CSS class to use for the ul element
+     * Whether labels should be escaped
      *
-     * @var string
+     * @var bool
      */
-    protected $ulClass = 'navigation';
+    protected $escapeLabels = true;
 
     /**
      * Whether only active branch should be rendered
@@ -35,11 +35,11 @@ class Menu extends AbstractHelper
     protected $onlyActiveBranch = false;
 
     /**
-     * Whether labels should be escaped
+     * Partial view script to use for rendering menu
      *
-     * @var bool
+     * @var string|array
      */
-    protected $escapeLabels = true;
+    protected $partial = null;
 
     /**
      * Whether parents should be rendered when only rendering active branch
@@ -49,11 +49,11 @@ class Menu extends AbstractHelper
     protected $renderParents = true;
 
     /**
-     * Partial view script to use for rendering menu
+     * CSS class to use for the ul element
      *
-     * @var string|array
+     * @var string
      */
-    protected $partial = null;
+    protected $ulClass = 'navigation';
 
     /**
      * View helper entry point:
@@ -72,127 +72,353 @@ class Menu extends AbstractHelper
     }
 
     /**
-     * Sets CSS class to use for the first 'ul' element when rendering
+     * Renders menu
      *
-     * @param  string $ulClass CSS class to set
-     * @return Menu
-     */
-    public function setUlClass($ulClass)
-    {
-        if (is_string($ulClass)) {
-            $this->ulClass = $ulClass;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Returns CSS class to use for the first 'ul' element when rendering
+     * Implements {@link HelperInterface::render()}.
      *
+     * If a partial view is registered in the helper, the menu will be rendered
+     * using the given partial script. If no partial is registered, the menu
+     * will be rendered as an 'ul' element by the helper's internal method.
+     *
+     * @see renderPartial()
+     * @see renderMenu()
+     *
+     * @param  AbstractContainer $container [optional] container to render. Default is
+     *                              to render the container registered in the helper.
      * @return string
      */
-    public function getUlClass()
+    public function render($container = null)
     {
-        return $this->ulClass;
-    }
-
-    /**
-     * Sets a flag indicating whether only active branch should be rendered
-     *
-     * @param  bool $flag [optional] render only active branch.
-     * @return Menu
-     */
-    public function setOnlyActiveBranch($flag = true)
-    {
-        $this->onlyActiveBranch = (bool) $flag;
-
-        return $this;
-    }
-
-    /**
-     * Returns a flag indicating whether only active branch should be rendered
-     *
-     * By default, this value is false, meaning the entire menu will be
-     * be rendered.
-     *
-     * @return bool
-     */
-    public function getOnlyActiveBranch()
-    {
-        return $this->onlyActiveBranch;
-    }
-
-    /**
-     * Sets a flag indicating whether labels should be escaped
-     *
-     * @param bool $flag [optional] escape labels
-     * @return Menu
-     */
-    public function escapeLabels($flag = true)
-    {
-        $this->escapeLabels = (bool) $flag;
-
-        return $this;
-    }
-
-    /**
-     * Enables/disables rendering of parents when only rendering active branch
-     *
-     * See {@link setOnlyActiveBranch()} for more information.
-     *
-     * @param  bool $flag [optional] render parents when rendering active branch.
-     * @return Menu
-     */
-    public function setRenderParents($flag = true)
-    {
-        $this->renderParents = (bool) $flag;
-
-        return $this;
-    }
-
-    /**
-     * Returns flag indicating whether parents should be rendered when rendering
-     * only the active branch
-     *
-     * By default, this value is true.
-     *
-     * @return bool
-     */
-    public function getRenderParents()
-    {
-        return $this->renderParents;
-    }
-
-    /**
-     * Sets which partial view script to use for rendering menu
-     *
-     * @param  string|array $partial partial view script or null. If an array is
-     *                               given, it is expected to contain two
-     *                               values; the partial view script to use,
-     *                               and the module where the script can be
-     *                               found.
-     * @return Menu
-     */
-    public function setPartial($partial)
-    {
-        if (null === $partial || is_string($partial) || is_array($partial)) {
-            $this->partial = $partial;
+        $partial = $this->getPartial();
+        if ($partial) {
+            return $this->renderPartial($container, $partial);
         }
 
-        return $this;
+        return $this->renderMenu($container);
     }
 
     /**
-     * Returns partial view script to use for rendering menu
+     * Renders the deepest active menu within [$minDepth, $maxDepth], (called
+     * from {@link renderMenu()})
      *
-     * @return string|array|null
+     * @param  AbstractContainer $container    container to render
+     * @param  string            $ulClass      CSS class for first UL
+     * @param  string            $indent       initial indentation
+     * @param  int|null          $minDepth     minimum depth
+     * @param  int|null          $maxDepth     maximum depth
+     * @param  bool              $escapeLabels Whether or not to escape the labels
+     * @return string
      */
-    public function getPartial()
-    {
-        return $this->partial;
+    protected function renderDeepestMenu(
+        AbstractContainer $container,
+        $ulClass,
+        $indent,
+        $minDepth,
+        $maxDepth,
+        $escapeLabels
+    ) {
+        if (!$active = $this->findActive($container, $minDepth - 1, $maxDepth)) {
+            return '';
+        }
+
+        // special case if active page is one below minDepth
+        if ($active['depth'] < $minDepth) {
+            if (!$active['page']->hasPages()) {
+                return '';
+            }
+        } elseif (!$active['page']->hasPages()) {
+            // found pages has no children; render siblings
+            $active['page'] = $active['page']->getParent();
+        } elseif (is_int($maxDepth) && $active['depth'] +1 > $maxDepth) {
+            // children are below max depth; render siblings
+            $active['page'] = $active['page']->getParent();
+        }
+
+        $ulClass = $ulClass ? ' class="' . $ulClass . '"' : '';
+        $html = $indent . '<ul' . $ulClass . '>' . self::EOL;
+
+        foreach ($active['page'] as $subPage) {
+            if (!$this->accept($subPage)) {
+                continue;
+            }
+            $liClass = $subPage->isActive(true) ? ' class="active"' : '';
+            $html .= $indent . '    <li' . $liClass . '>' . self::EOL;
+            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels) . self::EOL;
+            $html .= $indent . '    </li>' . self::EOL;
+        }
+
+        $html .= $indent . '</ul>';
+
+        return $html;
     }
 
-    // Public methods:
+    /**
+     * Renders helper
+     *
+     * Renders a HTML 'ul' for the given $container. If $container is not given,
+     * the container registered in the helper will be used.
+     *
+     * Available $options:
+     *
+     *
+     * @param  AbstractContainer $container [optional] container to create menu from.
+     *                                      Default is to use the container retrieved
+     *                                      from {@link getContainer()}.
+     * @param  array             $options   [optional] options for controlling rendering
+     * @return string
+     */
+    public function renderMenu($container = null, array $options = array())
+    {
+        $this->parseContainer($container);
+        if (null === $container) {
+            $container = $this->getContainer();
+        }
+
+
+        $options = $this->normalizeOptions($options);
+
+        if ($options['onlyActiveBranch'] && !$options['renderParents']) {
+            $html = $this->renderDeepestMenu($container,
+                $options['ulClass'],
+                $options['indent'],
+                $options['minDepth'],
+                $options['maxDepth'],
+                $options['escapeLabels']);
+        } else {
+            $html = $this->renderNormalMenu($container,
+                $options['ulClass'],
+                $options['indent'],
+                $options['minDepth'],
+                $options['maxDepth'],
+                $options['onlyActiveBranch'],
+                $options['escapeLabels']);
+        }
+
+        return $html;
+    }
+
+    /**
+     * Renders a normal menu (called from {@link renderMenu()})
+     *
+     * @param  AbstractContainer $container    container to render
+     * @param  string            $ulClass      CSS class for first UL
+     * @param  string            $indent       initial indentation
+     * @param  int|null          $minDepth     minimum depth
+     * @param  int|null          $maxDepth     maximum depth
+     * @param  bool              $onlyActive   render only active branch?
+     * @param  bool              $escapeLabels Whether or not to escape the labels
+     * @return string
+     */
+    protected function renderNormalMenu(
+        AbstractContainer $container,
+        $ulClass,
+        $indent,
+        $minDepth,
+        $maxDepth,
+        $onlyActive,
+        $escapeLabels
+    ) {
+        $html = '';
+
+        // find deepest active
+        $found = $this->findActive($container, $minDepth, $maxDepth);
+        if ($found) {
+            $foundPage  = $found['page'];
+            $foundDepth = $found['depth'];
+        } else {
+            $foundPage = null;
+        }
+
+        // create iterator
+        $iterator = new RecursiveIteratorIterator($container,
+            RecursiveIteratorIterator::SELF_FIRST);
+        if (is_int($maxDepth)) {
+            $iterator->setMaxDepth($maxDepth);
+        }
+
+        // iterate container
+        $prevDepth = -1;
+        foreach ($iterator as $page) {
+            $depth = $iterator->getDepth();
+            $isActive = $page->isActive(true);
+            if ($depth < $minDepth || !$this->accept($page)) {
+                // page is below minDepth or not accepted by acl/visibility
+                continue;
+            } elseif ($onlyActive && !$isActive) {
+                // page is not active itself, but might be in the active branch
+                $accept = false;
+                if ($foundPage) {
+                    if ($foundPage->hasPage($page)) {
+                        // accept if page is a direct child of the active page
+                        $accept = true;
+                    } elseif ($foundPage->getParent()->hasPage($page)) {
+                        // page is a sibling of the active page...
+                        if (!$foundPage->hasPages() ||
+                            is_int($maxDepth) && $foundDepth + 1 > $maxDepth) {
+                            // accept if active page has no children, or the
+                            // children are too deep to be rendered
+                            $accept = true;
+                        }
+                    }
+                }
+
+                if (!$accept) {
+                    continue;
+                }
+            }
+
+            // make sure indentation is correct
+            $depth -= $minDepth;
+            $myIndent = $indent . str_repeat('        ', $depth);
+
+            if ($depth > $prevDepth) {
+                // start new ul tag
+                if ($ulClass && $depth ==  0) {
+                    $ulClass = ' class="' . $ulClass . '"';
+                } else {
+                    $ulClass = '';
+                }
+                $html .= $myIndent . '<ul' . $ulClass . '>' . self::EOL;
+            } elseif ($prevDepth > $depth) {
+                // close li/ul tags until we're at current depth
+                for ($i = $prevDepth; $i > $depth; $i--) {
+                    $ind = $indent . str_repeat('        ', $i);
+                    $html .= $ind . '    </li>' . self::EOL;
+                    $html .= $ind . '</ul>' . self::EOL;
+                }
+                // close previous li tag
+                $html .= $myIndent . '    </li>' . self::EOL;
+            } else {
+                // close previous li tag
+                $html .= $myIndent . '    </li>' . self::EOL;
+            }
+
+            // render li tag and page
+            $liClass = $isActive ? ' class="active"' : '';
+            $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
+                . $myIndent . '        ' . $this->htmlify($page, $escapeLabels) . self::EOL;
+
+            // store as previous depth for next iteration
+            $prevDepth = $depth;
+        }
+
+        if ($html) {
+            // done iterating container; close open ul/li tags
+            for ($i = $prevDepth+1; $i > 0; $i--) {
+                $myIndent = $indent . str_repeat('        ', $i-1);
+                $html .= $myIndent . '    </li>' . self::EOL
+                    . $myIndent . '</ul>' . self::EOL;
+            }
+            $html = rtrim($html, self::EOL);
+        }
+
+        return $html;
+    }
+
+    /**
+     * Renders the given $container by invoking the partial view helper
+     *
+     * The container will simply be passed on as a model to the view script
+     * as-is, and will be available in the partial script as 'container', e.g.
+     * <code>echo 'Number of pages: ', count($this->container);</code>.
+     *
+     * @param  AbstractContainer     $container [optional] container to pass to view
+     *                                  script. Default is to use the container
+     *                                  registered in the helper.
+     * @param  string|array  $partial   [optional] partial view script to use.
+     *                                  Default is to use the partial
+     *                                  registered in the helper. If an array
+     *                                  is given, it is expected to contain two
+     *                                  values; the partial view script to use,
+     *                                  and the module where the script can be
+     *                                  found.
+     * @return string
+     * @throws Exception\RuntimeException if no partial provided
+     * @throws Exception\InvalidArgumentException if partial is invalid array
+     */
+    public function renderPartial($container = null, $partial = null)
+    {
+        $this->parseContainer($container);
+        if (null === $container) {
+            $container = $this->getContainer();
+        }
+
+        if (null === $partial) {
+            $partial = $this->getPartial();
+        }
+
+        if (empty($partial)) {
+            throw new Exception\RuntimeException(
+                'Unable to render menu: No partial view script provided'
+            );
+        }
+
+        $model = array(
+            'container' => $container
+        );
+
+        if (is_array($partial)) {
+            if (count($partial) != 2) {
+                throw new Exception\InvalidArgumentException(
+                    'Unable to render menu: A view partial supplied as '
+                        .  'an array must contain two values: partial view '
+                        .  'script and module where script can be found'
+                );
+            }
+
+            $partialHelper = $this->view->plugin('partial');
+            return $partialHelper($partial[0], /*$partial[1], */$model);
+        }
+
+        $partialHelper = $this->view->plugin('partial');
+        return $partialHelper($partial, $model);
+    }
+
+    /**
+     * Renders the inner-most sub menu for the active page in the $container
+     *
+     * This is a convenience method which is equivalent to the following call:
+     * <code>
+     * renderMenu($container, array(
+     *     'indent'           => $indent,
+     *     'ulClass'          => $ulClass,
+     *     'minDepth'         => null,
+     *     'maxDepth'         => null,
+     *     'onlyActiveBranch' => true,
+     *     'renderParents'    => false
+     * ));
+     * </code>
+     *
+     * @param  AbstractContainer $container [optional] container to
+     *                                      render. Default is to render
+     *                                      the container registered in
+     *                                      the helper.
+     * @param  string            $ulClass   [optional] CSS class to
+     *                                      use for UL element. Default
+     *                                      is to use the value from
+     *                                      {@link getUlClass()}.
+     * @param  string|int        $indent    [optional] indentation as
+     *                                      a string or number of
+     *                                      spaces. Default is to use
+     *                                      the value retrieved from
+     *                                      {@link getIndent()}.
+     * @return string
+     */
+    public function renderSubMenu(
+        AbstractContainer $container = null,
+        $ulClass = null,
+        $indent = null
+    ) {
+        return $this->renderMenu($container, array(
+            'indent'           => $indent,
+            'ulClass'          => $ulClass,
+            'minDepth'         => null,
+            'maxDepth'         => null,
+            'onlyActiveBranch' => true,
+            'renderParents'    => false,
+            'escapeLabels'     => true
+        ));
+    }
 
     /**
      * Returns an HTML string containing an 'a' element for the given page if
@@ -305,353 +531,121 @@ class Menu extends AbstractHelper
         return $options;
     }
 
-    // Render methods:
-
     /**
-     * Renders the deepest active menu within [$minDepth, $maxDepth], (called
-     * from {@link renderMenu()})
+     * Sets a flag indicating whether labels should be escaped
      *
-     * @param  AbstractContainer $container    container to render
-     * @param  string            $ulClass      CSS class for first UL
-     * @param  string            $indent       initial indentation
-     * @param  int|null          $minDepth     minimum depth
-     * @param  int|null          $maxDepth     maximum depth
-     * @param  bool              $escapeLabels Whether or not to escape the labels
-     * @return string
+     * @param bool $flag [optional] escape labels
+     * @return Menu
      */
-    protected function renderDeepestMenu(AbstractContainer $container,
-                                         $ulClass,
-                                         $indent,
-                                         $minDepth,
-                                         $maxDepth,
-                                         $escapeLabels
-    ) {
-        if (!$active = $this->findActive($container, $minDepth - 1, $maxDepth)) {
-            return '';
-        }
-
-        // special case if active page is one below minDepth
-        if ($active['depth'] < $minDepth) {
-            if (!$active['page']->hasPages()) {
-                return '';
-            }
-        } elseif (!$active['page']->hasPages()) {
-            // found pages has no children; render siblings
-            $active['page'] = $active['page']->getParent();
-        } elseif (is_int($maxDepth) && $active['depth'] +1 > $maxDepth) {
-            // children are below max depth; render siblings
-            $active['page'] = $active['page']->getParent();
-        }
-
-        $ulClass = $ulClass ? ' class="' . $ulClass . '"' : '';
-        $html = $indent . '<ul' . $ulClass . '>' . self::EOL;
-
-        foreach ($active['page'] as $subPage) {
-            if (!$this->accept($subPage)) {
-                continue;
-            }
-            $liClass = $subPage->isActive(true) ? ' class="active"' : '';
-            $html .= $indent . '    <li' . $liClass . '>' . self::EOL;
-            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels) . self::EOL;
-            $html .= $indent . '    </li>' . self::EOL;
-        }
-
-        $html .= $indent . '</ul>';
-
-        return $html;
-    }
-
-    /**
-     * Renders a normal menu (called from {@link renderMenu()})
-     *
-     * @param  AbstractContainer $container    container to render
-     * @param  string            $ulClass      CSS class for first UL
-     * @param  string            $indent       initial indentation
-     * @param  int|null          $minDepth     minimum depth
-     * @param  int|null          $maxDepth     maximum depth
-     * @param  bool              $onlyActive   render only active branch?
-     * @param  bool              $escapeLabels Whether or not to escape the labels
-     * @return string
-     */
-    protected function renderNormalMenu(AbstractContainer $container,
-                                   $ulClass,
-                                   $indent,
-                                   $minDepth,
-                                   $maxDepth,
-                                   $onlyActive,
-                                   $escapeLabels
-    ) {
-        $html = '';
-
-        // find deepest active
-        $found = $this->findActive($container, $minDepth, $maxDepth);
-        if ($found) {
-            $foundPage  = $found['page'];
-            $foundDepth = $found['depth'];
-        } else {
-            $foundPage = null;
-        }
-
-        // create iterator
-        $iterator = new RecursiveIteratorIterator($container,
-                            RecursiveIteratorIterator::SELF_FIRST);
-        if (is_int($maxDepth)) {
-            $iterator->setMaxDepth($maxDepth);
-        }
-
-        // iterate container
-        $prevDepth = -1;
-        foreach ($iterator as $page) {
-            $depth = $iterator->getDepth();
-            $isActive = $page->isActive(true);
-            if ($depth < $minDepth || !$this->accept($page)) {
-                // page is below minDepth or not accepted by acl/visibility
-                continue;
-            } elseif ($onlyActive && !$isActive) {
-                // page is not active itself, but might be in the active branch
-                $accept = false;
-                if ($foundPage) {
-                    if ($foundPage->hasPage($page)) {
-                        // accept if page is a direct child of the active page
-                        $accept = true;
-                    } elseif ($foundPage->getParent()->hasPage($page)) {
-                        // page is a sibling of the active page...
-                        if (!$foundPage->hasPages() ||
-                            is_int($maxDepth) && $foundDepth + 1 > $maxDepth) {
-                            // accept if active page has no children, or the
-                            // children are too deep to be rendered
-                            $accept = true;
-                        }
-                    }
-                }
-
-                if (!$accept) {
-                    continue;
-                }
-            }
-
-            // make sure indentation is correct
-            $depth -= $minDepth;
-            $myIndent = $indent . str_repeat('        ', $depth);
-
-            if ($depth > $prevDepth) {
-                // start new ul tag
-                if ($ulClass && $depth ==  0) {
-                    $ulClass = ' class="' . $ulClass . '"';
-                } else {
-                    $ulClass = '';
-                }
-                $html .= $myIndent . '<ul' . $ulClass . '>' . self::EOL;
-            } elseif ($prevDepth > $depth) {
-                // close li/ul tags until we're at current depth
-                for ($i = $prevDepth; $i > $depth; $i--) {
-                    $ind = $indent . str_repeat('        ', $i);
-                    $html .= $ind . '    </li>' . self::EOL;
-                    $html .= $ind . '</ul>' . self::EOL;
-                }
-                // close previous li tag
-                $html .= $myIndent . '    </li>' . self::EOL;
-            } else {
-                // close previous li tag
-                $html .= $myIndent . '    </li>' . self::EOL;
-            }
-
-            // render li tag and page
-            $liClass = $isActive ? ' class="active"' : '';
-            $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
-                   . $myIndent . '        ' . $this->htmlify($page, $escapeLabels) . self::EOL;
-
-            // store as previous depth for next iteration
-            $prevDepth = $depth;
-        }
-
-        if ($html) {
-            // done iterating container; close open ul/li tags
-            for ($i = $prevDepth+1; $i > 0; $i--) {
-                $myIndent = $indent . str_repeat('        ', $i-1);
-                $html .= $myIndent . '    </li>' . self::EOL
-                       . $myIndent . '</ul>' . self::EOL;
-            }
-            $html = rtrim($html, self::EOL);
-        }
-
-        return $html;
-    }
-
-    /**
-     * Renders helper
-     *
-     * Renders a HTML 'ul' for the given $container. If $container is not given,
-     * the container registered in the helper will be used.
-     *
-     * Available $options:
-     *
-     *
-     * @param  AbstractContainer $container [optional] container to create menu from.
-     *                                      Default is to use the container retrieved
-     *                                      from {@link getContainer()}.
-     * @param  array             $options   [optional] options for controlling rendering
-     * @return string
-     */
-    public function renderMenu($container = null, array $options = array())
+    public function escapeLabels($flag = true)
     {
-        $this->parseContainer($container);
-        if (null === $container) {
-            $container = $this->getContainer();
-        }
-
-
-        $options = $this->normalizeOptions($options);
-
-        if ($options['onlyActiveBranch'] && !$options['renderParents']) {
-            $html = $this->renderDeepestMenu($container,
-                                              $options['ulClass'],
-                                              $options['indent'],
-                                              $options['minDepth'],
-                                              $options['maxDepth'],
-                                              $options['escapeLabels']);
-        } else {
-            $html = $this->renderNormalMenu($container,
-                                       $options['ulClass'],
-                                       $options['indent'],
-                                       $options['minDepth'],
-                                       $options['maxDepth'],
-                                       $options['onlyActiveBranch'],
-                                       $options['escapeLabels']);
-        }
-
-        return $html;
+        $this->escapeLabels = (bool) $flag;
+        return $this;
     }
 
     /**
-     * Renders the inner-most sub menu for the active page in the $container
+     * Sets a flag indicating whether only active branch should be rendered
      *
-     * This is a convenience method which is equivalent to the following call:
-     * <code>
-     * renderMenu($container, array(
-     *     'indent'           => $indent,
-     *     'ulClass'          => $ulClass,
-     *     'minDepth'         => null,
-     *     'maxDepth'         => null,
-     *     'onlyActiveBranch' => true,
-     *     'renderParents'    => false
-     * ));
-     * </code>
-     *
-     * @param  AbstractContainer $container [optional] container to
-     *                                      render. Default is to render
-     *                                      the container registered in
-     *                                      the helper.
-     * @param  string            $ulClass   [optional] CSS class to
-     *                                      use for UL element. Default
-     *                                      is to use the value from
-     *                                      {@link getUlClass()}.
-     * @param  string|int        $indent    [optional] indentation as
-     *                                      a string or number of
-     *                                      spaces. Default is to use
-     *                                      the value retrieved from
-     *                                      {@link getIndent()}.
-     * @return string
+     * @param  bool $flag [optional] render only active branch.
+     * @return Menu
      */
-    public function renderSubMenu(AbstractContainer $container = null,
-                                  $ulClass = null,
-                                  $indent = null
-    ) {
-        return $this->renderMenu($container, array(
-            'indent'           => $indent,
-            'ulClass'          => $ulClass,
-            'minDepth'         => null,
-            'maxDepth'         => null,
-            'onlyActiveBranch' => true,
-            'renderParents'    => false,
-            'escapeLabels'     => true
-        ));
-    }
-
-    /**
-     * Renders the given $container by invoking the partial view helper
-     *
-     * The container will simply be passed on as a model to the view script
-     * as-is, and will be available in the partial script as 'container', e.g.
-     * <code>echo 'Number of pages: ', count($this->container);</code>.
-     *
-     * @param  AbstractContainer     $container [optional] container to pass to view
-     *                                  script. Default is to use the container
-     *                                  registered in the helper.
-     * @param  string|array  $partial   [optional] partial view script to use.
-     *                                  Default is to use the partial
-     *                                  registered in the helper. If an array
-     *                                  is given, it is expected to contain two
-     *                                  values; the partial view script to use,
-     *                                  and the module where the script can be
-     *                                  found.
-     * @return string
-     * @throws Exception\RuntimeException if no partial provided
-     * @throws Exception\InvalidArgumentException if partial is invalid array
-     */
-    public function renderPartial($container = null, $partial = null)
+    public function setOnlyActiveBranch($flag = true)
     {
-        $this->parseContainer($container);
-        if (null === $container) {
-            $container = $this->getContainer();
-        }
-
-        if (null === $partial) {
-            $partial = $this->getPartial();
-        }
-
-        if (empty($partial)) {
-            throw new Exception\RuntimeException(
-                'Unable to render menu: No partial view script provided'
-            );
-        }
-
-        $model = array(
-            'container' => $container
-        );
-
-        if (is_array($partial)) {
-            if (count($partial) != 2) {
-                throw new Exception\InvalidArgumentException(
-                    'Unable to render menu: A view partial supplied as '
-                    .  'an array must contain two values: partial view '
-                    .  'script and module where script can be found'
-                );
-            }
-
-            $partialHelper = $this->view->plugin('partial');
-            return $partialHelper($partial[0], /*$partial[1], */$model);
-        }
-
-        $partialHelper = $this->view->plugin('partial');
-        return $partialHelper($partial, $model);
+        $this->onlyActiveBranch = (bool) $flag;
+        return $this;
     }
 
-    // Zend\View\Helper\Navigation\Helper:
+    /**
+     * Returns a flag indicating whether only active branch should be rendered
+     *
+     * By default, this value is false, meaning the entire menu will be
+     * be rendered.
+     *
+     * @return bool
+     */
+    public function getOnlyActiveBranch()
+    {
+        return $this->onlyActiveBranch;
+    }
 
     /**
-     * Renders menu
+     * Sets which partial view script to use for rendering menu
      *
-     * Implements {@link HelperInterface::render()}.
-     *
-     * If a partial view is registered in the helper, the menu will be rendered
-     * using the given partial script. If no partial is registered, the menu
-     * will be rendered as an 'ul' element by the helper's internal method.
-     *
-     * @see renderPartial()
-     * @see renderMenu()
-     *
-     * @param  AbstractContainer $container [optional] container to render. Default is
-     *                              to render the container registered in the helper.
-     * @return string
+     * @param  string|array $partial partial view script or null. If an array is
+     *                               given, it is expected to contain two
+     *                               values; the partial view script to use,
+     *                               and the module where the script can be
+     *                               found.
+     * @return Menu
      */
-    public function render($container = null)
+    public function setPartial($partial)
     {
-        $partial = $this->getPartial();
-        if ($partial) {
-            return $this->renderPartial($container, $partial);
+        if (null === $partial || is_string($partial) || is_array($partial)) {
+            $this->partial = $partial;
         }
 
-        return $this->renderMenu($container);
+        return $this;
+    }
+
+    /**
+     * Returns partial view script to use for rendering menu
+     *
+     * @return string|array|null
+     */
+    public function getPartial()
+    {
+        return $this->partial;
+    }
+
+    /**
+     * Enables/disables rendering of parents when only rendering active branch
+     *
+     * See {@link setOnlyActiveBranch()} for more information.
+     *
+     * @param  bool $flag [optional] render parents when rendering active branch.
+     * @return Menu
+     */
+    public function setRenderParents($flag = true)
+    {
+        $this->renderParents = (bool) $flag;
+        return $this;
+    }
+
+    /**
+     * Returns flag indicating whether parents should be rendered when rendering
+     * only the active branch
+     *
+     * By default, this value is true.
+     *
+     * @return bool
+     */
+    public function getRenderParents()
+    {
+        return $this->renderParents;
+    }
+
+    /**
+     * Sets CSS class to use for the first 'ul' element when rendering
+     *
+     * @param  string $ulClass CSS class to set
+     * @return Menu
+     */
+    public function setUlClass($ulClass)
+    {
+        if (is_string($ulClass)) {
+            $this->ulClass = $ulClass;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns CSS class to use for the first 'ul' element when rendering
+     *
+     * @return string
+     */
+    public function getUlClass()
+    {
+        return $this->ulClass;
     }
 }

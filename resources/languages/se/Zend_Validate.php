@@ -29,15 +29,15 @@ return array(
     "Invalid type given. String expected" => "Ogiltig typ given. Sträng förväntad",
     "The input contains non alphabetic characters" => "Indatan innehåller icke-alfabetiska tecken",
     "The input is an empty string" => "Indatan är en tom sträng",
-    
+
     // Zend_I18n_Validator_Float
     "Invalid type given. String, integer or float expected" => "Ogiltig typ given. Sträng, heltal eller flyttal förväntat",
     "The input does not appear to be a float" => "Indatan tycks inte vara ett flyttal",
-    
+
     // Zend_I18n_Validator_Int
     "Invalid type given. String or integer expected" => "Ogilitig typ given. Sträng eller heltal förväntat",
     "The input does not appear to be an integer" => "Indatan tycks inte vara ett heltal",
-    
+
     // Zend_I18n_Validator_PostCode
     "Invalid type given. String or integer expected" => "Ogiltig typ given. Sträng eller heltal förväntat",
     "The input does not appear to be a postal code" => "Indatan tycks inte vara ett postnummer",
@@ -56,7 +56,7 @@ return array(
     // Zend_Validator_Callback
     "The input is not valid" => "Indatan är inte giltig",
     "An exception has been raised within the callback" => "Ett undantag har rests inom callbacken",
-    
+
     // Zend_Validator_CreditCard
     "The input seems to contain an invalid checksum" => "Indatan tycks innehålla en ogiltig checksumma",
     "The input must contain only digits" => "Indatan måste innehålla enbart siffror",
@@ -65,7 +65,7 @@ return array(
     "The input is not from an allowed institute" => "Indatan härstammar inte från ett giltigt institut",
     "The input seems to be an invalid creditcard number" => "Indatan tycks vara ett ogiltigt kortnummer",
     "An exception has been raised while validating the input" => "Ett undantag har rests under valideringen av indatan",
-    
+
     // Zend_Validator_Csrf
     "The form submitted did not originate from the expected site" => "Det insända formuläret härstammade inte från den förväntade webbplatsen",
 
@@ -73,7 +73,7 @@ return array(
     "Invalid type given. String, integer, array or DateTime expected" => "Ogiltig typ given. Sträng, heltal, array eller DateTime förväntad",
     "The input does not appear to be a valid date" => "Indatan tycks inte vara ett giltigt datum",
     "The input does not fit the date format '%format%'" => "Indatan passar inte datumformatet '%format%'",
-    
+
     // Zend_Validator_DateStep
     "Invalid type given. String, integer, array or DateTime expected" => "Ogiltig typ given. Sträng, heltal, array eller DateTime förväntad",
     "The input does not appear to be a valid date" => "Indatan tycks inte vara ett giltigt datum",
@@ -98,7 +98,7 @@ return array(
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' kan inte matchas mot quoted-string-formatet",
     "'%localPart%' is not a valid local part for the email address" => "'%localPart%' är inte en giltig lokal del för e-postadressen",
     "The input exceeds the allowed length" => "Indatan överskrider den tillåtna längden",
-    
+
     // Zend_Validator_Explode
     "Invalid type given. String expected" => "Ogiltig typ given. Sträng förväntad",
 
@@ -184,7 +184,7 @@ return array(
     "File '%value%' was illegally uploaded. This could be a possible attack" => "Filen '%value%' laddades upp olagligt. Det här kan vara en möjlig attack",
     "File '%value%' was not found" => "Filen '%value%' hittades inte",
     "Unknown error while uploading file '%value%'" => "Okänt fel när filen '%value%' laddades upp",
-    
+
     // Zend_Validator_File_UploadFile
     "File exceeds the defined ini size" => "Filen överskrider den definerade ini-storleken",
     "File exceeds the defined form size" => "Filen överskrider den definerade formulär-storleken",
@@ -217,7 +217,7 @@ return array(
     "The input does not match the expected structure for a DNS hostname" => "Indatan tycks inte matcha den förväntade strukturen för ett DNS-värdnamn",
     "The input appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "Indatan tycks vara ett DNS-värdnamn men kan inte matcha mot värdnamnsschemat för TLDn '%tld%'",
     "The input does not appear to be a valid local network name" => "Indatan tycks inte vara ett giltigt lokalt nätverksnamn",
-    "The input does not appear to be a valid URI hostname" => "'%value%' tycks inte vara ett giltigt URI-värdnamn",    
+    "The input does not appear to be a valid URI hostname" => "'%value%' tycks inte vara ett giltigt URI-värdnamn",
     "The input appears to be an IP address, but IP addresses are not allowed" => "Indatan tycks vara en IP-adress, men IP-adresses är inte tillåtna",
     "The input appears to be a local network name but local network names are not allowed" => "Indatan tycks vara ett lokalt nätverksnamn men lokala nätverksnamn är inte tillåtna",
     "'%value%' appears to be a DNS hostname but cannot extract TLD part" => "Indatan tycks vara ett DNS-värdnamn men kan inte extrahera TLD-delen",
@@ -272,7 +272,7 @@ return array(
     // Zend_Validator_Sitemap_Priority
     "'%value%' is not a valid sitemap priority" => "Indatan är inte en giltig 'priority' för sajtkartor",
     "Invalid type given. Numeric string, integer or float expected" => "Ogiltig typ given. Numerisk sträng, heltal eller flyttal förväntat",
-    
+
     // Zend_Validator_Step
     "Invalid value given. Scalar expected" => "Ogiltigt värde givet. Skalär förväntad",
     "The input is not a valid step" => "Indatan är inte ett giltigt steg",
@@ -281,7 +281,7 @@ return array(
     "Invalid type given. String expected" => "Ogiltig typ given. Sträng förväntad",
     "The input is less than %min% characters long" => "Indatan är mindre än %min% tecken lång",
     "The input is more than %max% characters long" => "Indatan är mer än %max% tecken lång",
-    
+
     // Zend_Validator_Uri
     "Invalid type given. String expected" => "Ogiltig typ given. Sträng förväntad",
     "The input does not appear to be a valid Uri" => "Indatan tycks inte vara en giltig Uri",

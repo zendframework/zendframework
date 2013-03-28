@@ -130,7 +130,7 @@ foreach ($output as $file) {
 
     if ($return != 0) {
         echo "PHP file fails to parse: " . $fileName . ":" . PHP_EOL;
-        echo implode(PHP_EOL, $lintOutput) . PHP_EOL;
+        echo implode(PHP_EOL, $output) . PHP_EOL;
         $exit = 1;
         continue;
     }

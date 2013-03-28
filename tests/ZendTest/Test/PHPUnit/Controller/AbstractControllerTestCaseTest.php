@@ -258,4 +258,10 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertEquals(true, $result->stopped());
         $this->assertEquals(Application::ERROR_ROUTER_NO_MATCH, $this->getApplication()->getMvcEvent()->getError());
     }
+
+    public function testDispatchRequestUri()
+    {
+        $this->dispatch('/tests');
+        $this->assertEquals('/tests', $this->getApplication()->getRequest()->getRequestUri());
+    }
 }

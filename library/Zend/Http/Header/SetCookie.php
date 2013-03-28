@@ -512,9 +512,9 @@ class SetCookie implements MultipleHeaderInterface
      * Checks whether the cookie should be sent or not in a specific scenario
      *
      * @param string|Zend\Uri\Uri $uri URI to check against (secure, domain, path)
-     * @param boolean $matchSessionCookies Whether to send session cookies
+     * @param bool $matchSessionCookies Whether to send session cookies
      * @param int $now Override the current time when checking for expiry time
-     * @return boolean
+     * @return bool
      */
     public function match($uri, $matchSessionCookies = true, $now = null)
     {
@@ -554,7 +554,7 @@ class SetCookie implements MultipleHeaderInterface
      * @param  string $cookieDomain
      * @param  string $host
      *
-     * @return boolean
+     * @return bool
      */
     public static function matchCookieDomain($cookieDomain, $host)
     {
@@ -580,7 +580,7 @@ class SetCookie implements MultipleHeaderInterface
      *
      * @param  string $cookiePath
      * @param  string $path
-     * @return boolean
+     * @return bool
      */
     public static function matchCookiePath($cookiePath, $path)
     {

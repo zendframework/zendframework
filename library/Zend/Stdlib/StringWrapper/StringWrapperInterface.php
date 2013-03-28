@@ -82,7 +82,7 @@ interface StringWrapperInterface
      * Convert a string from defined encoding to the defined convert encoding
      *
      * @param string  $str
-     * @param boolean $reverse
+     * @param bool $reverse
      * @return string|false
      */
     public function convert($str, $reverse = false);
@@ -93,7 +93,7 @@ interface StringWrapperInterface
      * @param  string  $str
      * @param  integer $width
      * @param  string  $break
-     * @param  boolean $cut
+     * @param  bool $cut
      * @return string
      */
     public function wordWrap($str, $width = 75, $break = "\n", $cut = false);

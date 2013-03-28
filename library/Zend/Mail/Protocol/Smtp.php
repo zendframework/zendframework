@@ -196,7 +196,7 @@ class Smtp extends AbstractProtocol
     /**
      * Returns the perceived session status
      *
-     * @return boolean
+     * @return bool
      */
     public function hasSession()
     {

@@ -110,7 +110,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      * Convert a string from defined character encoding to the defined convert encoding
      *
      * @param string  $str
-     * @param boolean $reverse
+     * @param bool $reverse
      * @return string|false
      */
     public function convert($str, $reverse = false)
@@ -142,7 +142,7 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
      * @param  string  $string
      * @param  integer $width
      * @param  string  $break
-     * @param  boolean $cut
+     * @param  bool $cut
      * @return string|false
      */
     public function wordWrap($string, $width = 75, $break = "\n", $cut = false)

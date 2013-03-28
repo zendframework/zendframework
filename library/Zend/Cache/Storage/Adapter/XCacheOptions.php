@@ -24,7 +24,7 @@ class XCacheOptions extends AdapterOptions
     /**
      * Handle admin authentication
      *
-     * @var boolean
+     * @var bool
      */
     protected $adminAuth = false;
 
@@ -95,7 +95,7 @@ class XCacheOptions extends AdapterOptions
     /**
      * Enable/Disable admin authentication handling
      *
-     * @param  boolean $adminAuth
+     * @param  bool $adminAuth
      * @return XCacheOptions
      */
     public function setAdminAuth($adminAuth)
@@ -111,7 +111,7 @@ class XCacheOptions extends AdapterOptions
     /**
      * Get admin authentication enabled
      *
-     * @return boolean
+     * @return bool
      */
     public function getAdminAuth()
     {

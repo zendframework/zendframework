@@ -27,7 +27,7 @@ abstract class ErrorHandler
     /**
      * Check if this error handler is active
      *
-     * @return boolean
+     * @return bool
      */
     public static function started()
     {

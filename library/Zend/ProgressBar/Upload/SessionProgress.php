@@ -20,7 +20,7 @@ class SessionProgress extends AbstractUploadHandler
 {
     /**
      * @param  string $id
-     * @return array|boolean
+     * @return array|bool
      * @throws Exception\PhpEnvironmentException
      */
     protected function getUploadProgress($id)
@@ -62,7 +62,7 @@ class SessionProgress extends AbstractUploadHandler
     /**
      * Checks if Session Upload Progress is available
      *
-     * @return boolean
+     * @return bool
      */
     public function isSessionUploadProgressAvailable()
     {

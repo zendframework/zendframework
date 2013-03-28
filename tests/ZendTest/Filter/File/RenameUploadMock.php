@@ -16,7 +16,7 @@ class RenameUploadMock extends RenameUpload
     /**
      * @param  string $sourceFile Source file path
      * @param  string $targetFile Target file path
-     * @return boolean
+     * @return bool
      */
     protected function moveUploadedFile($sourceFile, $targetFile)
     {

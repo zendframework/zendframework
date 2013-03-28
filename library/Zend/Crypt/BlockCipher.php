@@ -46,7 +46,7 @@ class BlockCipher
     /**
      * Check if the salt has been set
      *
-     * @var boolean
+     * @var bool
      */
     protected $saltSetted = false;
 

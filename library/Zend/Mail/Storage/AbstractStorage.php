@@ -205,7 +205,7 @@ abstract class AbstractStorage implements
       * ArrayAccess::offsetExists()
       *
       * @param    int     $id
-      * @return   boolean
+      * @return   bool
       */
      public function offsetExists($id)
      {
@@ -248,7 +248,7 @@ abstract class AbstractStorage implements
       * ArrayAccess::offsetUnset()
       *
       * @param    int   $id
-      * @return   boolean success
+      * @return   bool success
       */
      public function offsetUnset($id)
      {

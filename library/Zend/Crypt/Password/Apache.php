@@ -121,7 +121,7 @@ class Apache implements PasswordInterface
      *
      * @param  string  $password
      * @param  string  $hash
-     * @return boolean
+     * @return bool
      */
     public function verify($password, $hash)
     {

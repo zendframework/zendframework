@@ -100,7 +100,7 @@ class CrudTest extends AbstractOnlineTestCase
             }
             $this->getLDAP()->delete($dn);
             if (!$exThrown) {
-                $this->fail('no exception thrown while illegaly updating entry');
+                $this->fail('no exception thrown while illegally updating entry');
             }
         } catch (Exception\LdapException $e) {
             $this->fail($e->getMessage());

@@ -286,7 +286,7 @@ class Headers implements Countable, Iterator
     }
 
     /**
-     * Advance the pointer for this object as an interator
+     * Advance the pointer for this object as an iterator
      *
      * @return void
      */

@@ -410,10 +410,16 @@ class ServiceManager implements ServiceLocatorInterface
      */
     public function get($name, $usePeeringServiceManagers = true)
     {
-        $cName   = $this->canonicalizeName($name);
+        // inlined canonicalizeName code for performance
+        if (isset($this->canonicalNames[$name])) {
+            $cName = $this->canonicalNames[$name];
+        } else {
+            $cName = $this->canonicalizeName($name);
+        }
+
         $isAlias = false;
 
-        if ($this->hasAlias($cName)) {
+        if (isset($this->aliases[$cName])) {
             $isAlias = true;
 
             do {
@@ -655,8 +661,7 @@ class ServiceManager implements ServiceLocatorInterface
      */
     public function hasAlias($alias)
     {
-        $alias = $this->canonicalizeName($alias);
-        return (isset($this->aliases[$alias]));
+        return isset($this->aliases[$this->canonicalizeName($alias)]);
     }
 
     /**

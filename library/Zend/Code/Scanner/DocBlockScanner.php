@@ -165,8 +165,8 @@ class DocBlockScanner implements ScannerInterface
 
         SCANNER_END:
 
-        $this->shortDescription = rtrim($this->shortDescription);
-        $this->longDescription  = rtrim($this->longDescription);
+        $this->shortDescription = trim($this->shortDescription);
+        $this->longDescription  = trim($this->longDescription);
         $this->isScanned        = true;
     }
 
@@ -197,7 +197,7 @@ class DocBlockScanner implements ScannerInterface
             }
             $currentChar = $stream[$streamIndex];
             $matches     = array();
-            $currentLine = (preg_match('#(.*)\n#', $stream, $matches, null,
+            $currentLine = (preg_match('#(.*?)\r?\n#', $stream, $matches, null,
                                        $streamIndex) === 1) ? $matches[1] : substr($stream, $streamIndex);
             if ($currentChar === ' ') {
                 $currentWord = (preg_match('#( +)#', $currentLine, $matches) === 1) ? $matches[1] : $currentLine;

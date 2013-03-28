@@ -17,7 +17,7 @@
  */
 
 /**
- * EN-Revision: 25.Jul.2011
+ * CS-Revision: 28.Mar.2013
  */
 return array(
     // Zend_I18n_Validator_Alnum

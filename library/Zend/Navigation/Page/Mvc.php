@@ -190,7 +190,12 @@ class Mvc extends AbstractPage
             );
         }
 
-        $params = $this->getParams();
+        if ($this->getRouteMatch() !== null) {
+            $params = array_merge($this->getRouteMatch()->getParams(), $this->getParams());
+        } else {
+            $params = $this->getParams();
+        }
+
 
         if (($param = $this->getController()) != null) {
             $params['controller'] = $param;

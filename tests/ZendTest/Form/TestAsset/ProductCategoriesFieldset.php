@@ -4,7 +4,8 @@ namespace ZendTest\Form\TestAsset;
 
 class ProductCategoriesFieldset extends ProductFieldset
 {
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         $template = new CategoryFieldset();

@@ -1358,7 +1358,8 @@ class FormTest extends TestCase
         $this->assertNull($this->form->getValidationGroup());
     }
 
-    public function testPreserveEntitiesBoundToCollectionAfterValidation() {
+    public function testPreserveEntitiesBoundToCollectionAfterValidation()
+    {
         $this->form->setInputFilter(new \Zend\InputFilter\InputFilter());
         $fieldset = new TestAsset\ProductCategoriesFieldset();
         $fieldset->setUseAsBaseFieldset(true);

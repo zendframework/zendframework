@@ -233,6 +233,8 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
                 )
             );
         }
+
+        $this->replaceTemplateObjects();
     }
 
     /**
@@ -535,5 +537,27 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
         $elementOrFieldset->setName($this->templatePlaceholder);
 
         return $elementOrFieldset;
+    }
+
+    /**
+     * Replaces the default template object of a sub element with the corresponding
+     * real entity so that all properties are preserved.
+     *
+     * @return void
+     */
+    protected function replaceTemplateObjects()
+    {
+        $fieldsets = $this->getFieldsets();
+
+        if (!count($fieldsets) || !$this->object) {
+            return;
+        }
+
+        foreach ($fieldsets as $fieldset) {
+            $i = $fieldset->getName();
+            if (isset($this->object[$i])) {
+                $fieldset->setObject($this->object[$i]);
+            }
+        }
     }
 }

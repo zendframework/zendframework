@@ -17,13 +17,13 @@
  */
 
 /**
- * EN-Revision: 30.Jul.2011
+ * CS-Revision: 28.Mar.2013
  */
 return array(
     // Zend_Captcha_AbstractWord
     "Empty captcha value" => "Hodnota captcha nebyla zadána",
     "Captcha ID field is missing" => "Chybí pole captcha ID",
-    "Captcha value is wrong" => "Chybná hodnota catpcha",
+    "Captcha value is wrong" => "Chybná hodnota captcha",
 
     // Zend_Captcha_ReCaptcha
     "Missing captcha fields" => "Chybí captcha pole",

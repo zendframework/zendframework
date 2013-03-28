@@ -17,7 +17,7 @@
  */
 
 /**
- * EN-Revision: 25.Jul.2011
+ * CS-Revision: 28.Mar.2013
  */
 return array(
     // Zend_I18n_Validator_Alnum
@@ -41,7 +41,7 @@ return array(
     // Zend_I18n_Validator_PostCode
     "Invalid type given. String or integer expected" => "Chybný typ. Byl očekáván řetězec nebo celé číslo",
     "The input does not appear to be a postal code" => "Hodnota nevypadá jako PSČ",
-    "An exception has been raised while validating the input" => "Během volání byla vyvolána výjimka",
+    "An exception has been raised while validating the input" => "Během kontroly hodnoty byla vyvolána výjimka",
 
     // Zend_Validator_Barcode
     "The input failed checksum validation" => "Hodnota má chybný kontrolní součet",
@@ -75,8 +75,6 @@ return array(
     "The input does not fit the date format '%format%'" => "Hodnota neodpovídá formátu data '%format%'",
 
     // Zend_Validator_DateStep
-    "Invalid type given. String, integer, array or DateTime expected" => "Chybný typ. Byl očekáván řetězec, číslo, pole nebo objekt Datetime",
-    "The input does not appear to be a valid date" => "Hodnota nevypadá jako platné datum",
     "The input is not a valid step" => "Hodnota není platný krok",
 
     // Zend_Validator_Db_Abstract
@@ -100,27 +98,27 @@ return array(
     "The input exceeds the allowed length" => "Hodnota překročila povolenou délku",
 
     // Zend_Validator_Explode
-    "Invalid type given. String expected" => "Chybný typ. Byl očekáván řetězec",
+    "Invalid type given." => "Chybný typ.",
 
     // Zend_Validator_File_Count
     "Too many files, maximum '%max%' are allowed but '%count%' are given" => "Příliš mnoho souborů. Maximum je '%max%', ale bylo zadáno '%count%'",
     "Too few files, minimum '%min%' are expected but '%count%' are given" => "Příliš málo souborů. Minimum je '%min%', ale byl zadáno jen '%count%'",
 
     // Zend_Validator_File_Crc32
-    "File '%value%' does not match the given crc32 hashes" => "Soubor '%value%' neodpovídá zadanému crc32 hashi",
+    "File does not match the given crc32 hashes" => "Soubor neodpovídá zadanému crc32 hashi",
     "A crc32 hash could not be evaluated for the given file" => "Pro zadaný soubor nemohl být vypočítán crc32 hash",
-    "File '%value%' is not readable or does not exist" => "Soubor '%value%' buď není čitelný nebo neexistuje",
+    "File is not readable or does not exist" => "Soubor není čitelný nebo neexistuje",
 
     // Zend_Validator_File_ExcludeExtension
-    "File '%value%' has a false extension" => "Soubor '%value%' má nesprávnou příponu",
-    "File '%value%' is not readable or does not exist" => "Soubor '%value%' buď není čitelný nebo neexistuje",
+    "File has an incorrect extension" => "Soubor má nesprávnou příponu",
+    "File is not readable or does not exist" => "Soubor není čitelný nebo neexistuje",
 
     // Zend_Validator_File_Exists
-    "File '%value%' does not exist" => "Soubor '%value%' neexistuje",
+    "File does not exist" => "Soubor neexistuje",
 
     // Zend_Validator_File_Extension
-    "File '%value%' has a false extension" => "Soubor '%value%' má nesprávnou příponu",
-    "File '%value%' is not readable or does not exist" => "Soubor '%value%' není čitelný nebo neexistuje",
+    "File has an incorrect extension" => "Soubor má nesprávnou příponu",
+    "File is not readable or does not exist" => "Soubor není čitelný nebo neexistuje",
 
     // Zend_Validator_File_FilesSize
     "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "Součet velikostí všech souborů by měl být maximálně '%max%', ale je '%size%'",
@@ -128,50 +126,50 @@ return array(
     "One or more files can not be read" => "Jeden nebo více souborů není možné načíst",
 
     // Zend_Validator_File_Hash
-    "File '%value%' does not match the given hashes" => "Soubor '%value%' neodpovídané danému hashi",
+    "File does not match the given hashes" => "Soubor neodpovídané danému hashi",
     "A hash could not be evaluated for the given file" => "Hash nemohl být pro daný soubor vypočítán",
-    "File '%value%' is not readable or does not exist" => "Soubor '%value%' není čitelný nebo neexistuje",
+    "File is not readable or does not exist" => "Soubor není čitelný nebo neexistuje",
 
     // Zend_Validator_File_ImageSize
-    "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected" => "Maximální šířka obrázku '%value%' by měla být '%maxwidth%', ale je '%width%'",
-    "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected" => "Minimální šířka obrázku '%value%' by měla být '%minwidth%', ale je '%width%'",
-    "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected" => "Maximální výška obrázku '%value%' by měla být '%maxheight%', ale je '%height%'",
-    "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected" => "Minimální výška obrázku '%value%' by měla být '%minheight%', ale je '%height%'",
-    "The size of image '%value%' could not be detected" => "Rozměry obrázku '%value%' nebylo možné zjistit",
-    "File '%value%' is not readable or does not exist" => "Soubor '%value%' není čitelný nebo neexistuje",
+    "Maximum allowed width for image should be '%maxwidth%' but '%width%' detected" => "Maximální šířka obrázku by měla být '%maxwidth%', ale je '%width%'",
+    "Minimum expected width for image should be '%minwidth%' but '%width%' detected" => "Minimální šířka obrázku by měla být '%minwidth%', ale je '%width%'",
+    "Maximum allowed height for image should be '%maxheight%' but '%height%' detected" => "Maximální výška obrázku by měla být '%maxheight%', ale je '%height%'",
+    "Minimum expected height for image should be '%minheight%' but '%height%' detected" => "Minimální výška obrázku by měla být '%minheight%', ale je '%height%'",
+    "The size of image could not be detected" => "Rozměry obrázku nebylo možné zjistit",
+    "File is not readable or does not exist" => "Soubor není čitelný nebo neexistuje",
 
     // Zend_Validator_File_IsCompressed
-    "File '%value%' is not compressed, '%type%' detected" => "Soubor '%value%' není komprimovaný, ale '%type%'",
-    "The mimetype of file '%value%' could not be detected" => "Mimetyp souboru '%value%' nebylo možné zjistit",
-    "File '%value%' is not readable or does not exist" => "Soubor '%value%' není čitelný nebo neexistuje",
+    "File is not compressed, '%type%' detected" => "Soubor není komprimovaný, ale '%type%'",
+    "The mimetype could not be detected from the file" => "Mimetyp souboru nebylo možné zjistit",
+    "File is not readable or does not exist" => "Soubor není čitelný nebo neexistuje",
 
     // Zend_Validator_File_IsImage
-    "File '%value%' is no image, '%type%' detected" => "Soubor '%value%' není obrázek, ale '%type%'",
-    "The mimetype of file '%value%' could not be detected" => "Mimetyp souboru '%value%' nebylo možné zjistit",
-    "File '%value%' is not readable or does not exist" => "Soubor '%value%' není čitelný nebo neexistuje",
+    "File is no image, '%type%' detected" => "Soubor není obrázek, ale '%type%'",
+    "The mimetype could not be detected from the file" => "Mimetyp souboru nebylo možné zjistit",
+    "File is not readable or does not exist" => "Soubor není čitelný nebo neexistuje",
 
     // Zend_Validator_File_Md5
-    "File '%value%' does not match the given md5 hashes" => "Soubor '%value%' neodpovídá danému md5 hashi",
-    "A md5 hash could not be evaluated for the given file" => "md5 hash nemohl být pro daný soubor vypočítán",
-    "File '%value%' is not readable or does not exist" => "Soubor '%value%' není čitelný nebo neexistuje",
+    "File does not match the given md5 hashes" => "Soubor neodpovídá danému md5 hashi",
+    "An md5 hash could not be evaluated for the given file" => "md5 hash nemohl být pro daný soubor vypočítán",
+    "File is not readable or does not exist" => "Soubor není čitelný nebo neexistuje",
 
     // Zend_Validator_File_MimeType
-    "File '%value%' has a false mimetype of '%type%'" => "Soubor '%value%' má neplatný mimetyp '%type%'",
-    "The mimetype of file '%value%' could not be detected" => "Mimetyp souboru '%value%' nebylo možné zjistit",
-    "File '%value%' is not readable or does not exist" => "Soubor '%value%' není čitelný nebo neexistuje",
+    "File has an incorrect mimetype of '%type%'" => "Soubor má neplatný mimetyp '%type%'",
+    "The mimetype could not be detected from the file" => "Mimetyp souboru nebylo možné zjistit",
+    "File is not readable or does not exist" => "Soubor není čitelný nebo neexistuje",
 
     // Zend_Validator_File_NotExists
-    "File '%value%' exists" => "Soubor '%value%' již existuje",
+    "File exists" => "Soubor již existuje",
 
     // Zend_Validator_File_Sha1
-    "File '%value%' does not match the given sha1 hashes" => "Soubor '%value%' neodpovídá danému sha1 hashi",
+    "File does not match the given sha1 hashes" => "Soubor neodpovídá danému sha1 hashi",
     "A sha1 hash could not be evaluated for the given file" => "sha1 hash nemohl být pro daný soubor vypočítán",
-    "File '%value%' is not readable or does not exist" => "Soubor '%value%' není čitelný nebo neexistuje",
+    "File is not readable or does not exist" => "Soubor není čitelný nebo neexistuje",
 
     // Zend_Validator_File_Size
-    "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected" => "Maximální povolená velikost souboru je '%max%', ale '%value%' má '%size%'",
-    "Minimum expected size for file '%value%' is '%min%' but '%size%' detected" => "Minimální velikost souboru je '%min%', ale '%value%' má '%size%'",
-    "File '%value%' is not readable or does not exist" => "Soubor '%value%' buď není čitelný nebo neexistuje",
+    "Maximum allowed size for file is '%max%' but '%size%' detected" => "Maximální velikost souboru by měla být '%max%', ale je '%size%'",
+    "Minimum expected size for file is '%min%' but '%size%' detected" => "Minimální velikost souboru by měla být '%min%', ale je '%size%'",
+    "File is not readable or does not exist" => "Soubor není čitelný nebo neexistuje",
 
     // Zend_Validator_File_Upload
     "File '%value%' exceeds the defined ini size" => "Soubor '%value%' překročil velikost definovanou v ini souboru",
@@ -180,15 +178,27 @@ return array(
     "File '%value%' was not uploaded" => "Soubor '%value%' nebyl nahrán",
     "No temporary directory was found for file '%value%'" => "Pro soubor '%value%' nebyl nalezen žádný dočasný adresář",
     "File '%value%' can't be written" => "Soubor '%value%' nemůže být zapsán",
-    "A PHP extension returned an error while uploading the file '%value%'" => "PHP rozšíření vrátilo chybu během nahrávání souboru '%value%'",
+    "A PHP extension returned an error while uploading the file '%value%'" => "Rozšíření PHP vrátilo chybu během nahrávání souboru '%value%'",
     "File '%value%' was illegally uploaded. This could be a possible attack" => "Soubor '%value%' byl nedovoleně nahrán. Může se jednat o útok",
     "File '%value%' was not found" => "Soubor '%value%' nebyl nalezen",
-    "Unknown error while uploading file '%value%'" => "Během nahrávání souboru '%value%' došlo k chybě",
+    "Unknown error while uploading file '%value%'" => "Během nahrávání souboru '%value%' došlo k neznámé chybě",
+
+    // Zend_Validator_File_UploadFile
+    "File exceeds the defined ini size" => "Soubor překročil velikost definovanou v ini souboru",
+    "File exceeds the defined form size" => "Soubor překročil velikost definovanou ve formuláře",
+    "File was only partially uploaded" => "Soubor byl nahrán jen částečně",
+    "File was not uploaded" => "Soubor nebyl nahrán",
+    "No temporary directory was found for file" => "Pro soubor nebyl nalezen žádný dočasný adresář",
+    "File can't be written" => "Soubor nemůže být zapsán",
+    "A PHP extension returned an error while uploading the file" => "Rozšíření PHP vrátilo chybu během nahrávání souboru",
+    "File was illegally uploaded. This could be a possible attack" => "Soubor byl nedovoleně nahrán. Může se jednat o útok",
+    "File was not found" => "Soubor nebyl nalezen",
+    "Unknown error while uploading file" => "Během nahrávání souboru došlo k neznámé chybě",
 
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Příliš mnoho slov. Je jich dovoleno maximálně '%max%', ale bylo zadáno '%count%'",
     "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Příliš málo slov. Musí jich být alespoň '%min%', ale bylo zadáno jen '%count%'",
-    "File '%value%' is not readable or does not exist" => "Soubor '%value%' není čitelný nebo neexistuje",
+    "File is not readable or does not exist" => "Soubor není čitelný nebo neexistuje",
 
     // Zend_Validator_GreaterThan
     "The input is not greater than '%min%'" => "Hodnota není větší než '%min%'",
@@ -212,7 +222,7 @@ return array(
     "The input appears to be a DNS hostname but cannot match TLD against known list" => "Hodnota vypadá jako hostname, ale nemohl být ověřen proti známým TLD",
 
     // Zend_Validator_Iban
-    "Unknown country within the IBAN '%value%'" => "Neznámý stát v IBAN '%value%'",
+    "Unknown country within the IBAN" => "Neznámý stát v IBAN",
     "Countries outside the Single Euro Payments Area (SEPA) are not supported" => "Státy mimo jednotný evropský platební prostor nejsou podporovány",
     "The input has a false IBAN format" => "Hodnota není platný formát IBAN",
     "The input has failed the IBAN check" => "Hodnota neprošlo kontrolou IBAN",
@@ -231,6 +241,9 @@ return array(
     // Zend_Validator_Isbn
     "Invalid type given. String or integer expected" => "Chybný typ. Byl očekáván řetězec nebo celé číslo",
     "The input is not a valid ISBN number" => "Hodnota není platné ISBN",
+
+    // Zend_Validator_IsInstanceOf
+    "The input is not an instance of '%className%'" => "Hodnota není instancí třídy '%className%'",
 
     // Zend_Validator_LessThan
     "The input is not less than '%max%'" => "Hodnota není menší než '%max%'",
@@ -262,14 +275,15 @@ return array(
     "Invalid type given. Numeric string, integer or float expected" => "Chybný typ. Byl očekáván číselný řetězec, celé nebo desetinné číslo",
 
     // Zend_Validator_Step
-    "Invalid type given. Scalar expected" => "Chybný typ. Byla očekávána skalární hodnota",
+    "Invalid value given. Scalar expected" => "Chybná hodnota. Byla očekávána skalární hodnota",
     "The input is not a valid step" => "Hodnota není platný krok",
 
     // Zend_Validator_StringLength
-    "Invalid type given. String expected" => "Chybný typ. Byla očekávána řetězec",
+    "Invalid type given. String expected" => "Chybný typ. Byl očekáván řetězec",
     "The input is less than %min% characters long" => "Hodnota je kratší než %min% znaků",
     "The input is more than %max% characters long" => "Hodnota je delší než %max% znaků",
 
     // Zend_Validator_Uri
+    "Invalid type given. String expected" => "Chybný typ. Byl očekáván řetězec",
     "The input does not appear to be a valid Uri" => "Hodnota nevypadá jako platná URI",
 );

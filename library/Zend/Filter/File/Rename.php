@@ -225,7 +225,7 @@ class Rename extends Filter\AbstractFilter
                     break;
 
                 case 'randomize' :
-                    $files['randomize'] = (boolean) $value;
+                    $files['randomize'] = (bool) $value;
                     break;
 
                 default:

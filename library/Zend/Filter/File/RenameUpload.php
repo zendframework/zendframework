@@ -80,7 +80,7 @@ class RenameUpload extends AbstractFilter
      */
     public function setUseUploadName($flag = true)
     {
-        $this->options['use_upload_name'] = (boolean) $flag;
+        $this->options['use_upload_name'] = (bool) $flag;
         return $this;
     }
 
@@ -117,7 +117,7 @@ class RenameUpload extends AbstractFilter
      */
     public function setOverwrite($flag = true)
     {
-        $this->options['overwrite'] = (boolean) $flag;
+        $this->options['overwrite'] = (bool) $flag;
         return $this;
     }
 
@@ -135,7 +135,7 @@ class RenameUpload extends AbstractFilter
      */
     public function setRandomize($flag = true)
     {
-        $this->options['randomize'] = (boolean) $flag;
+        $this->options['randomize'] = (bool) $flag;
         return $this;
     }
 

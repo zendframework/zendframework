@@ -272,7 +272,9 @@ class Form extends Fieldset implements FormInterface
     public function bindValues(array $values = array())
     {
         if (!is_object($this->object)) {
-            return;
+            if ( $this->baseFieldset === null || $this->baseFieldset->allowValueBinding() == false ) {
+                return;
+            }
         }
         if (!$this->hasValidated() && !empty($values)) {
             $this->setData($values);

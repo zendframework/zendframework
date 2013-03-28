@@ -3,7 +3,7 @@ namespace ZendTest\Db\Adapter\Driver\Pdo;
 
 use Zend\Db\Adapter\Driver\Pdo\Connection;
 
-class PgsqlTest extends \PHPUnit_Framework_TestCase
+class ConnectionTest extends \PHPUnit_Framework_TestCase
 {
 
     /**

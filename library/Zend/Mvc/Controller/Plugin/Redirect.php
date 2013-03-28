@@ -68,7 +68,7 @@ class Redirect extends AbstractPlugin
     /**
      * Refresh to current route
      *
-     * @return string
+     * @return Response
      */
     public function refresh()
     {

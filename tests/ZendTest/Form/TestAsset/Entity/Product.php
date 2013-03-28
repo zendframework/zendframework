@@ -80,4 +80,24 @@ class Product
     {
         return $this->price;
     }
+
+    /**
+     * Return category from index
+     *
+     * @param int $i
+     */
+    public function getCategory($i)
+    {
+        return $this->categories[$i];
+    }
+
+    /**
+     * Required when binding to a form
+     *
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
 }

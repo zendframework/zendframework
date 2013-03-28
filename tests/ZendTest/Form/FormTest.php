@@ -1357,4 +1357,48 @@ class FormTest extends TestCase
     {
         $this->assertNull($this->form->getValidationGroup());
     }
+
+    public function testPreserveEntitiesBoundToCollectionAfterValidation()
+    {
+        $this->form->setInputFilter(new \Zend\InputFilter\InputFilter());
+        $fieldset = new TestAsset\ProductCategoriesFieldset();
+        $fieldset->setUseAsBaseFieldset(true);
+
+        $product = new Entity\Product();
+        $product->setName('Foobar');
+        $product->setPrice(100);
+
+        $c1 = new Entity\Category();
+        $c1->setId(1);
+        $c1->setName('First Category');
+
+        $c2 = new Entity\Category();
+        $c2->setId(2);
+        $c2->setName('Second Category');
+
+        $product->setCategories(array($c1, $c2));
+
+        $this->form->add($fieldset);
+        $this->form->bind($product);
+
+        $data = array(
+            'product' => array(
+                'name' => 'Barbar',
+                'price' => 200,
+                'categories' => array(
+                    array('name' => 'Something else'),
+                    array('name' => 'Totally different'),
+                ),
+            ),
+        );
+
+        $hash1 = spl_object_hash($this->form->getObject()->getCategory(0));
+        $this->form->setData($data);
+        $this->form->isValid();
+        $hash2 = spl_object_hash($this->form->getObject()->getCategory(0));
+
+        // Returned object has to be the same as when binding or properties
+        // will be lost. (For example entity IDs.)
+        $this->assertTrue($hash1 == $hash2);
+    }
 }

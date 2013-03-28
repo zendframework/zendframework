@@ -35,6 +35,13 @@ class Mvc extends AbstractPage
     protected $controller;
 
     /**
+     * URL query part to use when assembling URL
+     *
+     * @var array|string
+     */
+    protected $query;
+
+    /**
      * Params to use when assembling URL
      *
      * @see getHref()
@@ -205,13 +212,18 @@ class Mvc extends AbstractPage
         }
 
         $options = array('name' => $name);
-        $url = $router->assemble($params, $options);
 
         // Add the fragment identifier if it is set
         $fragment = $this->getFragment();
         if (null !== $fragment) {
-            $url .= '#' . $fragment;
+            $options['fragment'] = $fragment;
         }
+
+        if (null !== ($query = $this->getQuery())) {
+            $options['query'] = $query;
+        }
+
+        $url = $router->assemble($params, $options);
 
         return $this->hrefCache = $url;
     }
@@ -282,6 +294,32 @@ class Mvc extends AbstractPage
     public function getController()
     {
         return $this->controller;
+    }
+
+    /**
+     * Sets URL query part to use when assembling URL
+     *
+     * @see getHref()
+     * @param  array|string|null $query    URL query part
+     * @return self   fluent interface, returns self
+     */
+    public function setQuery($query)
+    {
+        $this->query      = $query;
+        $this->hrefCache  = null;
+        return $this;
+    }
+
+    /**
+     * Returns URL query part to use when assembling URL
+     *
+     * @see getHref()
+     *
+     * @return array|string|null  URL query part (as an array or string) or null
+     */
+    public function getQuery()
+    {
+        return $this->query;
     }
 
     /**

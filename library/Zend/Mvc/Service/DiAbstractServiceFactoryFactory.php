@@ -17,10 +17,10 @@ use Zend\ServiceManager\ServiceManager;
 class DiAbstractServiceFactoryFactory implements FactoryInterface
 {
     /**
-     * Class responsible for instantiating a DiStrictAbstractServiceFactory
+     * Class responsible for instantiating a DiAbstractServiceFactory
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return DiStrictAbstractServiceFactory
+     * @return DiAbstractServiceFactory
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

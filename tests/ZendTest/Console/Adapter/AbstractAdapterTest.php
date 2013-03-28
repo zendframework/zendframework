@@ -50,15 +50,35 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         ob_start();
         $this->adapter->writeLine('foo');
-        $this->assertEquals("foo\n", ob_get_clean());
+        $this->assertEquals("foo" . PHP_EOL, ob_get_clean());
 
         ob_start();
         $this->adapter->writeLine("foo\nbar");
-        $this->assertEquals("foo bar\n", ob_get_clean());
+        $this->assertEquals("foo\nbar" . PHP_EOL, ob_get_clean());
 
         ob_start();
         $this->adapter->writeLine("\rfoo\r");
-        $this->assertEquals("foo\n", ob_get_clean());
+        $this->assertEquals("\rfoo\r" . PHP_EOL, ob_get_clean());
+    }
+
+    /**
+     * @issue ZF2-4051
+     * @link https://github.com/zendframework/zf2/issues/4051
+     */
+    public function testWriteLineOverflowAndWidthMatch()
+    {
+        // make sure console width is reported as 80
+        $this->adapter->setTestWidth(80);
+
+        ob_start();
+        $line = str_repeat('#', 80);
+        $this->adapter->writeLine($line);
+        $this->assertEquals($line . PHP_EOL, ob_get_clean());
+
+        ob_start();
+        $line2 = $line . '#';
+        $this->adapter->writeLine($line2);
+        $this->assertEquals($line2 . PHP_EOL, ob_get_clean());
     }
 
     public function testReadLine()

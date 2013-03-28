@@ -221,7 +221,8 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                     continue; // this module does not provide a banner
                 }
 
-                $banners[] = $module->getConsoleBanner($console);
+                // We colorize each banners in blue for visual emphasis
+                $banners[] = $console->colorize($module->getConsoleBanner($console), ColorInterface::BLUE);
             }
         }
 
@@ -267,13 +268,24 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                     continue; // this module does not provide usage info
                 }
 
+                // We prepend the usage by the module name (printed in red), so that each module is
+                // clearly visible by the user
+                $moduleName = sprintf("%s\n%s\n%s\n",
+                    str_repeat('-', $console->getWidth()),
+                    $name,
+                    str_repeat('-', $console->getWidth())
+                );
+
+                $moduleName = $console->colorize($moduleName, ColorInterface::RED);
+
                 $usage = $module->getConsoleUsage($console);
 
                 // Normalize what we got from the module or discard
                 if (is_array($usage)) {
+                    array_unshift($usage, $moduleName);
                     $usageInfo[$name] = $usage;
                 } elseif (is_string($usage)) {
-                    $usageInfo[$name] = array($usage);
+                    $usageInfo[$name] = array($moduleName, $usage);
                 }
             }
         }

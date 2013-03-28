@@ -17,18 +17,22 @@ use Zend\View\Exception;
 class Registry
 {
     /**
-     * @var Registry Singleton instance
+     * Singleton instance
+     *
+     * @var Registry
      */
     protected static $instance;
 
     /**
      * Default container class
+     *
      * @var string
      */
     protected $containerClass = 'Zend\View\Helper\Placeholder\Container';
 
     /**
      * Placeholder containers
+     *
      * @var array
      */
     protected $items = array();
@@ -63,7 +67,7 @@ class Registry
      * createContainer
      *
      * @param  string $key
-     * @param  array $value
+     * @param  array  $value
      * @return Container\AbstractContainer
      */
     public function createContainer($key, array $value = array())
@@ -71,6 +75,7 @@ class Registry
         $key = (string) $key;
 
         $this->items[$key] = new $this->containerClass($value);
+
         return $this->items[$key];
     }
 
@@ -101,14 +106,14 @@ class Registry
     public function containerExists($key)
     {
         $key = (string) $key;
-        $return =  array_key_exists($key, $this->items);
-        return $return;
+
+        return array_key_exists($key, $this->items);
     }
 
     /**
      * Set the container for an item in the registry
      *
-     * @param  string $key
+     * @param  string                      $key
      * @param  Container\AbstractContainer $container
      * @return Registry
      */
@@ -116,6 +121,7 @@ class Registry
     {
         $key = (string) $key;
         $this->items[$key] = $container;
+
         return $this;
     }
 
@@ -159,6 +165,7 @@ class Registry
         }
 
         $this->containerClass = $name;
+
         return $this;
     }
 

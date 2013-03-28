@@ -21,12 +21,15 @@ class Placeholder extends AbstractHelper
 {
     /**
      * Placeholder items
+     *
      * @var array
      */
     protected $items = array();
 
     /**
-     * @var \Zend\View\Helper\Placeholder\Registry
+     * Placeholder registry intance
+     *
+     * @var Placeholder\Registry
      */
     protected $registry;
 
@@ -34,7 +37,6 @@ class Placeholder extends AbstractHelper
      * Constructor
      *
      * Retrieve container registry from Placeholder\Registry, or create new one and register it.
-     *
      */
     public function __construct()
     {
@@ -45,8 +47,8 @@ class Placeholder extends AbstractHelper
      * Placeholder helper
      *
      * @param  string $name
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
      * @throws InvalidArgumentException
+     * @return Placeholder\Container\AbstractContainer
      */
     public function __invoke($name = null)
     {
@@ -54,14 +56,13 @@ class Placeholder extends AbstractHelper
             throw new InvalidArgumentException('Placeholder: missing argument.  $name is required by placeholder($name)');
         }
 
-        $name = (string) $name;
-        return $this->registry->getContainer($name);
+        return $this->getRegistry()->getContainer((string) $name);
     }
 
     /**
      * Retrieve the registry
      *
-     * @return \Zend\View\Helper\Placeholder\Registry
+     * @return Placeholder\Registry
      */
     public function getRegistry()
     {

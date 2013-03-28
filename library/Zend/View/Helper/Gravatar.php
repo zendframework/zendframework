@@ -79,9 +79,9 @@ class Gravatar extends AbstractHtmlElement
      *
      * @see    http://pl.gravatar.com/site/implement/url
      * @see    http://pl.gravatar.com/site/implement/url More information about gravatar's service.
-     * @param  string|null $email Email address.
-     * @param  null|array $options Options
-     * @param  array $attribs Attributes for image tag (title, alt etc.)
+     * @param  string|null $email   Email address.
+     * @param  null|array  $options Options
+     * @param  array       $attribs Attributes for image tag (title, alt etc.)
      * @return Gravatar
      */
     public function __invoke($email = "", $options = array(), $attribs = array())
@@ -95,6 +95,7 @@ class Gravatar extends AbstractHtmlElement
         if (!empty($attribs)) {
             $this->setAttribs($attribs);
         }
+
         return $this;
     }
 
@@ -112,6 +113,7 @@ class Gravatar extends AbstractHtmlElement
                 $this->{$method}($value);
             }
         }
+
         return $this;
     }
 
@@ -128,12 +130,13 @@ class Gravatar extends AbstractHtmlElement
     /**
      * Set img size in pixels
      *
-     * @param int $imgSize Size of img must be between 1 and 512
+     * @param  int $imgSize Size of img must be between 1 and 512
      * @return Gravatar
      */
     public function setImgSize($imgSize)
     {
         $this->options['img_size'] = (int) $imgSize;
+
         return $this;
     }
 
@@ -159,6 +162,7 @@ class Gravatar extends AbstractHtmlElement
     public function setDefaultImg($defaultImg)
     {
         $this->options['default_img'] = urlencode($defaultImg);
+
         return $this;
     }
 
@@ -187,6 +191,7 @@ class Gravatar extends AbstractHtmlElement
                     $rating
                 ));
         }
+
         return $this;
     }
 
@@ -203,12 +208,13 @@ class Gravatar extends AbstractHtmlElement
     /**
      * Set email address
      *
-     * @param string $email
+     * @param  string $email
      * @return Gravatar
      */
     public function setEmail( $email )
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -225,12 +231,13 @@ class Gravatar extends AbstractHtmlElement
     /**
      * Load from an SSL or No-SSL location?
      *
-     * @param bool $flag
+     * @param  bool $flag
      * @return Gravatar
      */
     public function setSecure($flag)
     {
         $this->options['secure'] = ($flag === null) ? null : (bool) $flag;
+
         return $this;
     }
 
@@ -244,6 +251,7 @@ class Gravatar extends AbstractHtmlElement
         if ($this->options['secure'] === null) {
             return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
         }
+
         return $this->options['secure'];
     }
 
@@ -275,6 +283,7 @@ class Gravatar extends AbstractHtmlElement
     public function setAttribs(array $attribs)
     {
         $this->attribs = $attribs;
+
         return $this;
     }
 

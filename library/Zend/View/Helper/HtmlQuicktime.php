@@ -13,19 +13,16 @@ class HtmlQuicktime extends AbstractHtmlElement
 {
     /**
      * Default file type for a movie applet
-     *
      */
     const TYPE = 'video/quicktime';
 
     /**
      * Object classid
-     *
      */
     const ATTRIB_CLASSID  = 'clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B';
 
     /**
      * Object Codebase
-     *
      */
     const ATTRIB_CODEBASE = 'http://www.apple.com/qtactivex/qtplugin.cab';
 
@@ -34,16 +31,15 @@ class HtmlQuicktime extends AbstractHtmlElement
      *
      * @var array
      */
-    protected $attribs = array('classid'  => self::ATTRIB_CLASSID,
-                                'codebase' => self::ATTRIB_CODEBASE);
+    protected $attribs = array('classid' => self::ATTRIB_CLASSID, 'codebase' => self::ATTRIB_CODEBASE);
 
     /**
      * Output a quicktime movie object tag
      *
-     * @param string $data The quicktime file
-     * @param array  $attribs Attribs for the object tag
-     * @param array  $params Params for in the object tag
-     * @param string $content Alternative content
+     * @param  string $data    The quicktime file
+     * @param  array  $attribs Attribs for the object tag
+     * @param  array  $params  Params for in the object tag
+     * @param  string $content Alternative content
      * @return string
      */
     public function __invoke($data, array $attribs = array(), array $params = array(), $content = null)

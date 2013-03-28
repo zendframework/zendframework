@@ -20,18 +20,21 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
 {
     /**
      * Registry key for placeholder
+     *
      * @var string
      */
     protected $regKey = 'Zend_View_Helper_HeadStyle';
 
     /**
      * Allowed optional attributes
+     *
      * @var array
      */
     protected $optionalAttributes = array('lang', 'title', 'media', 'dir');
 
     /**
      * Allowed media types
+     *
      * @var array
      */
     protected $mediaTypes = array(
@@ -41,18 +44,21 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
 
     /**
      * Capture type and/or attributes (used for hinting during capture)
+     *
      * @var string
      */
     protected $captureAttrs = null;
 
     /**
      * Capture lock
+     *
      * @var bool
      */
     protected $captureLock;
 
     /**
      * Capture type (append, prepend, set)
+     *
      * @var string
      */
     protected $captureType;
@@ -61,11 +67,11 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      * Constructor
      *
      * Set separator to PHP_EOL.
-     *
      */
     public function __construct()
     {
         parent::__construct();
+
         $this->setSeparator(PHP_EOL);
     }
 
@@ -74,10 +80,10 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      *
      * Returns headStyle helper object; optionally, allows specifying
      *
-     * @param  string $content Stylesheet contents
-     * @param  string $placement Append, prepend, or set
+     * @param  string       $content    Stylesheet contents
+     * @param  string       $placement  Append, prepend, or set
      * @param  string|array $attributes Optional attributes to utilize
-     * @return \Zend\View\Helper\HeadStyle
+     * @return HeadStyle
      */
     public function __invoke($content = null, $placement = 'APPEND', $attributes = array())
     {
@@ -110,9 +116,9 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      * - setStyle($content, $attributes = array())
      *
      * @param  string $method
-     * @param  array $args
-     * @return void
+     * @param  array  $args
      * @throws Exception\BadMethodCallException When no $content provided or invalid method
+     * @return void
      */
     public function __call($method, $args)
     {
@@ -177,8 +183,8 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      * Override append to enforce style creation
      *
      * @param  mixed $value
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function append($value)
     {
@@ -195,9 +201,9 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      * Override offsetSet to enforce style creation
      *
      * @param  string|int $index
-     * @param  mixed $value
-     * @return void
+     * @param  mixed      $value
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function offsetSet($index, $value)
     {
@@ -214,8 +220,8 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      * Override prepend to enforce style creation
      *
      * @param  mixed $value
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function prepend($value)
     {
@@ -232,8 +238,8 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      * Override set to enforce style creation
      *
      * @param  mixed $value
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function set($value)
     {
@@ -247,10 +253,10 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     /**
      * Start capture action
      *
-     * @param string $type
-     * @param string $attrs
-     * @return void
+     * @param  string $type
+     * @param  string $attrs
      * @throws Exception\RuntimeException
+     * @return void
      */
     public function captureStart($type = Placeholder\Container\AbstractContainer::APPEND, $attrs = null)
     {
@@ -293,8 +299,8 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     /**
      * Convert content and attributes into valid style tag
      *
-     * @param  stdClass $item Item to render
-     * @param  string $indent Indentation to use
+     * @param  stdClass $item   Item to render
+     * @param  string   $indent Indentation to use
      * @return string
      */
     public function itemToString(stdClass $item, $indent)
@@ -378,6 +384,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
 
         $return = $indent . implode($this->getSeparator() . $indent, $items);
         $return = preg_replace("/(\r\n?|\n)/", '$1' . $indent, $return);
+
         return $return;
     }
 
@@ -385,7 +392,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      * Create data item for use in stack
      *
      * @param  string $content
-     * @param  array $attributes
+     * @param  array  $attributes
      * @return stdClass
      */
     public function createData($content, array $attributes)

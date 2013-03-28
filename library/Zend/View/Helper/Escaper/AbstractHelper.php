@@ -18,14 +18,12 @@ use Zend\View\Helper;
  */
 abstract class AbstractHelper extends Helper\AbstractHelper
 {
-
-    /**@+
+    /**
      * @const Recursion constants
      */
     const RECURSE_NONE   = 0x00;
     const RECURSE_ARRAY  = 0x01;
     const RECURSE_OBJECT = 0x02;
-    /**@-*/
 
     /**
      * @var Escaper\Escaper
@@ -37,18 +35,77 @@ abstract class AbstractHelper extends Helper\AbstractHelper
      */
     protected $encoding = 'UTF-8';
 
+    /**
+     * Invoke this helper: escape a value
+     *
+     * @param  mixed $value
+     * @param  int   $recurse Expects one of the recursion constants; used to decide whether or not to recurse the given value when escaping
+     * @throws Exception\InvalidArgumentException
+     * @return mixed Given a scalar, a scalar value is returned. Given an object, with the $recurse flag not allowing object recursion, returns a string. Otherwise, returns an array.
+     */
+    public function __invoke($value, $recurse = self::RECURSE_NONE)
+    {
+        if (is_string($value)) {
+            return $this->escape($value);
+        }
+
+        if (is_array($value)) {
+            if (!(self::RECURSE_ARRAY & $recurse)) {
+                throw new Exception\InvalidArgumentException(
+                    'Array provided to Escape helper, but flags do not allow recursion'
+                );
+            }
+            foreach ($value as $k => $v) {
+                $value[$k] = $this->__invoke($v, $recurse);
+            }
+            return $value;
+        }
+
+        if (is_object($value)) {
+            if (!(self::RECURSE_OBJECT & $recurse)) {
+                // Attempt to cast it to a string
+                if (method_exists($value, '__toString')) {
+                    return $this->escape((string) $value);
+                }
+                throw new Exception\InvalidArgumentException(
+                    'Object provided to Escape helper, but flags do not allow recursion'
+                );
+            }
+            if (method_exists($value, 'toArray')) {
+                return $this->__invoke($value->toArray(), $recurse | self::RECURSE_ARRAY);
+            }
+            return $this->__invoke((array) $value, $recurse | self::RECURSE_ARRAY);
+        }
+
+        // At this point, we have a scalar; simply return it
+        return $value;
+    }
+
+    /**
+     * Set instance of Escaper
+     *
+     * @param  Escaper\Escaper $escaper
+     * @return AbstractHelper
+     */
     public function setEscaper(Escaper\Escaper $escaper)
     {
         $this->escaper = $escaper;
         $this->encoding = $escaper->getEncoding();
+
         return $this;
     }
 
+    /**
+     * Get instance of Escaper
+     *
+     * @return null|Escaper\Escaper
+     */
     public function getEscaper()
     {
         if (null === $this->escaper) {
             $this->setEscaper(new Escaper\Escaper($this->getEncoding()));
         }
+
         return $this->escaper;
     }
 
@@ -67,7 +124,9 @@ abstract class AbstractHelper extends Helper\AbstractHelper
                 . ' if a Zend\Escaper\Escaper object (with preset encoding option) is set.'
             );
         }
+
         $this->encoding = $encoding;
+
         return $this;
     }
 
@@ -82,54 +141,10 @@ abstract class AbstractHelper extends Helper\AbstractHelper
     }
 
     /**
-     * Invoke this helper: escape a value
-     *
-     * @param  mixed $value
-     * @param  int $recurse Expects one of the recursion constants; used to decide whether or not to recurse the given value when escaping
-     * @return mixed Given a scalar, a scalar value is returned. Given an object, with the $recurse flag not allowing object recursion, returns a string. Otherwise, returns an array.
-     * @throws Exception\InvalidArgumentException
-     */
-    public function __invoke($value, $recurse = self::RECURSE_NONE)
-    {
-        if (is_string($value)) {
-            return $this->escape($value);
-        }
-        if (is_array($value)) {
-            if (!(self::RECURSE_ARRAY & $recurse)) {
-                throw new Exception\InvalidArgumentException(
-                    'Array provided to Escape helper, but flags do not allow recursion'
-                );
-            }
-            foreach ($value as $k => $v) {
-                $value[$k] = $this->__invoke($v, $recurse);
-            }
-            return $value;
-        }
-        if (is_object($value)) {
-            if (!(self::RECURSE_OBJECT & $recurse)) {
-                // Attempt to cast it to a string
-                if (method_exists($value, '__toString')) {
-                    return $this->escape((string) $value);
-                }
-                throw new Exception\InvalidArgumentException(
-                    'Object provided to Escape helper, but flags do not allow recursion'
-                );
-            }
-            if (method_exists($value, 'toArray')) {
-                return $this->__invoke($value->toArray(), $recurse | self::RECURSE_ARRAY);
-            }
-            return $this->__invoke((array) $value, $recurse | self::RECURSE_ARRAY);
-        }
-        // At this point, we have a scalar; simply return it
-        return $value;
-    }
-
-    /**
      * Escape a value for current escaping strategy
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     abstract protected function escape($value);
-
 }

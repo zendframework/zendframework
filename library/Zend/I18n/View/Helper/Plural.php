@@ -35,23 +35,6 @@ class Plural extends AbstractHelper
     protected $rule;
 
     /**
-     * Set the plural rule to use
-     *
-     * @param  PluralRule|string $pluralRule
-     * @return Plural
-     */
-    public function setPluralRule($pluralRule)
-    {
-        if (!$pluralRule instanceof PluralRule) {
-            $pluralRule = PluralRule::fromString($pluralRule);
-        }
-
-        $this->rule = $pluralRule;
-
-        return $this;
-    }
-
-    /**
      * Given an array of strings, a number and, if wanted, an optional locale (the default one is used
      * otherwise), this picks the right string according to plural rules of the locale
      *
@@ -75,5 +58,22 @@ class Plural extends AbstractHelper
         $pluralIndex = $this->rule->evaluate($number);
 
         return $strings[$pluralIndex];
+    }
+
+    /**
+     * Set the plural rule to use
+     *
+     * @param  PluralRule|string $pluralRule
+     * @return Plural
+     */
+    public function setPluralRule($pluralRule)
+    {
+        if (!$pluralRule instanceof PluralRule) {
+            $pluralRule = PluralRule::fromString($pluralRule);
+        }
+
+        $this->rule = $pluralRule;
+
+        return $this;
     }
 }

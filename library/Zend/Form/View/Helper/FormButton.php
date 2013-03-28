@@ -45,6 +45,59 @@ class FormButton extends FormInput
     );
 
     /**
+     * Invoke helper as functor
+     *
+     * Proxies to {@link render()}.
+     *
+     * @param  ElementInterface|null $element
+     * @param  null|string           $buttonContent
+     * @return string|FormButton
+     */
+    public function __invoke(ElementInterface $element = null, $buttonContent = null)
+    {
+        if (!$element) {
+            return $this;
+        }
+
+        return $this->render($element, $buttonContent);
+    }
+
+    /**
+     * Render a form <button> element from the provided $element,
+     * using content from $buttonContent or the element's "label" attribute
+     *
+     * @param  ElementInterface $element
+     * @param  null|string $buttonContent
+     * @throws Exception\DomainException
+     * @return string
+     */
+    public function render(ElementInterface $element, $buttonContent = null)
+    {
+        $openTag = $this->openTag($element);
+
+        if (null === $buttonContent) {
+            $buttonContent = $element->getLabel();
+            if (null === $buttonContent) {
+                throw new Exception\DomainException(sprintf(
+                    '%s expects either button content as the second argument, ' .
+                        'or that the element provided has a label value; neither found',
+                    __METHOD__
+                ));
+            }
+
+            if (null !== ($translator = $this->getTranslator())) {
+                $buttonContent = $translator->translate(
+                    $buttonContent, $this->getTranslatorTextDomain()
+                );
+            }
+        }
+
+        $escape = $this->getEscapeHtmlHelper();
+
+        return $openTag . $escape($buttonContent) . $this->closeTag();
+    }
+
+    /**
      * Generate an opening button tag
      *
      * @param  null|array|ElementInterface $attributesOrElement
@@ -99,59 +152,6 @@ class FormButton extends FormInput
     public function closeTag()
     {
         return '</button>';
-    }
-
-    /**
-     * Render a form <button> element from the provided $element,
-     * using content from $buttonContent or the element's "label" attribute
-     *
-     * @param  ElementInterface $element
-     * @param  null|string $buttonContent
-     * @throws Exception\DomainException
-     * @return string
-     */
-    public function render(ElementInterface $element, $buttonContent = null)
-    {
-        $openTag = $this->openTag($element);
-
-        if (null === $buttonContent) {
-            $buttonContent = $element->getLabel();
-            if (null === $buttonContent) {
-                throw new Exception\DomainException(sprintf(
-                    '%s expects either button content as the second argument, ' .
-                    'or that the element provided has a label value; neither found',
-                    __METHOD__
-                ));
-            }
-
-            if (null !== ($translator = $this->getTranslator())) {
-                $buttonContent = $translator->translate(
-                    $buttonContent, $this->getTranslatorTextDomain()
-                );
-            }
-        }
-
-        $escape = $this->getEscapeHtmlHelper();
-
-        return $openTag . $escape($buttonContent) . $this->closeTag();
-    }
-
-    /**
-     * Invoke helper as functor
-     *
-     * Proxies to {@link render()}.
-     *
-     * @param  ElementInterface|null $element
-     * @param  null|string $buttonContent
-     * @return string|FormButton
-     */
-    public function __invoke(ElementInterface $element = null, $buttonContent = null)
-    {
-        if (!$element) {
-            return $this;
-        }
-
-        return $this->render($element, $buttonContent);
     }
 
     /**

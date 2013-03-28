@@ -47,76 +47,6 @@ class CurrencyFormat extends AbstractHelper
     protected $formatters = array();
 
     /**
-     * The 3-letter ISO 4217 currency code indicating the currency to use.
-     *
-     * @param  string $currencyCode
-     * @return CurrencyFormat
-     */
-    public function setCurrencyCode($currencyCode)
-    {
-        $this->currencyCode = $currencyCode;
-        return $this;
-    }
-
-    /**
-     * Get the 3-letter ISO 4217 currency code indicating the currency to use.
-     *
-     * @return string
-     */
-    public function getCurrencyCode()
-    {
-        return $this->currencyCode;
-    }
-
-    /**
-     * Set if the view helper should show two decimals
-     *
-     * @param  bool $showDecimals
-     * @return CurrencyFormat
-     */
-    public function setShouldShowDecimals($showDecimals)
-    {
-        $this->showDecimals = (bool) $showDecimals;
-        return $this;
-    }
-
-    /**
-     * Get if the view helper should show two decimals
-     *
-     * @return bool
-     */
-    public function shouldShowDecimals()
-    {
-        return $this->showDecimals;
-    }
-
-    /**
-     * Set locale to use instead of the default.
-     *
-     * @param  string $locale
-     * @return CurrencyFormat
-     */
-    public function setLocale($locale)
-    {
-        $this->locale = (string) $locale;
-        return $this;
-    }
-
-    /**
-     * Get the locale to use.
-     *
-     * @return string|null
-     */
-    public function getLocale()
-    {
-        if ($this->locale === null) {
-            $this->locale = Locale::getDefault();
-        }
-
-        return $this->locale;
-    }
-
-    /**
      * Format a number.
      *
      * @param  float  $number
@@ -159,5 +89,78 @@ class CurrencyFormat extends AbstractHelper
         return $this->formatters[$formatterId]->formatCurrency(
             $number, $currencyCode
         );
+    }
+
+    /**
+     * The 3-letter ISO 4217 currency code indicating the currency to use.
+     *
+     * @param  string $currencyCode
+     * @return CurrencyFormat
+     */
+    public function setCurrencyCode($currencyCode)
+    {
+        $this->currencyCode = $currencyCode;
+
+        return $this;
+    }
+
+    /**
+     * Get the 3-letter ISO 4217 currency code indicating the currency to use.
+     *
+     * @return string
+     */
+    public function getCurrencyCode()
+    {
+        return $this->currencyCode;
+    }
+
+    /**
+     * Set if the view helper should show two decimals
+     *
+     * @param  bool $showDecimals
+     * @return CurrencyFormat
+     */
+    public function setShouldShowDecimals($showDecimals)
+    {
+        $this->showDecimals = (bool) $showDecimals;
+
+        return $this;
+    }
+
+    /**
+     * Get if the view helper should show two decimals
+     *
+     * @return bool
+     */
+    public function shouldShowDecimals()
+    {
+        return $this->showDecimals;
+    }
+
+    /**
+     * Set locale to use instead of the default.
+     *
+     * @param  string $locale
+     * @return CurrencyFormat
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = (string) $locale;
+
+        return $this;
+    }
+
+    /**
+     * Get the locale to use.
+     *
+     * @return string|null
+     */
+    public function getLocale()
+    {
+        if ($this->locale === null) {
+            $this->locale = Locale::getDefault();
+        }
+
+        return $this->locale;
     }
 }

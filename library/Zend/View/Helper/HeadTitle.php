@@ -21,6 +21,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
 {
     /**
      * Registry key for placeholder
+     *
      * @var string
      */
     protected $regKey = 'Zend_View_Helper_HeadTitle';
@@ -58,7 +59,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
      *
      * @param  string $title
      * @param  string $setType
-     * @return \Zend\View\Helper\HeadTitle
+     * @return HeadTitle
      */
     public function __invoke($title = null, $setType = null)
     {
@@ -85,9 +86,9 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     /**
      * Set a default order to add titles
      *
-     * @param string $setType
-     * @return HeadTitle
+     * @param  string $setType
      * @throws Exception\DomainException
+     * @return HeadTitle
      */
     public function setDefaultAttachOrder($setType)
     {
@@ -215,6 +216,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     public function setTranslatorEnabled($enabled = true)
     {
         $this->translatorEnabled = (bool) $enabled;
+
         return $this;
     }
 
@@ -237,6 +239,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     public function setTranslatorTextDomain($textDomain = 'default')
     {
         $this->translatorTextDomain = $textDomain;
+
         return $this;
     }
 

@@ -42,69 +42,13 @@ class DateFormat extends AbstractHelper
     protected $formatters = array();
 
     /**
-     * Set timezone to use instead of the default.
-     *
-     * @param string $timezone
-     * @return DateFormat
-     */
-    public function setTimezone($timezone)
-    {
-        $this->timezone = (string) $timezone;
-
-        foreach ($this->formatters as $formatter) {
-            $formatter->setTimeZoneId($this->timezone);
-        }
-        return $this;
-    }
-
-    /**
-     * Get the timezone to use.
-     *
-     * @return string|null
-     */
-    public function getTimezone()
-    {
-        if (!$this->timezone) {
-            return date_default_timezone_get();
-        }
-
-        return $this->timezone;
-    }
-
-    /**
-     * Set locale to use instead of the default.
-     *
-     * @param  string $locale
-     * @return DateFormat
-     */
-    public function setLocale($locale)
-    {
-        $this->locale = (string) $locale;
-        return $this;
-    }
-
-    /**
-     * Get the locale to use.
-     *
-     * @return string|null
-     */
-    public function getLocale()
-    {
-        if ($this->locale === null) {
-            $this->locale = Locale::getDefault();
-        }
-
-        return $this->locale;
-    }
-
-    /**
      * Format a date.
      *
-     * @param  DateTime|integer|array  $date
-     * @param  int                     $dateType
-     * @param  int                     $timeType
-     * @param  string                  $locale
-     * @param  string|null             $pattern
+     * @param  DateTime|integer|array $date
+     * @param  int                    $dateType
+     * @param  int                    $timeType
+     * @param  string                 $locale
+     * @param  string|null            $pattern
      * @return string
      */
     public function __invoke(
@@ -138,5 +82,63 @@ class DateFormat extends AbstractHelper
         }
 
         return $this->formatters[$formatterId]->format($date);
+    }
+
+    /**
+     * Set timezone to use instead of the default.
+     *
+     * @param  string $timezone
+     * @return DateFormat
+     */
+    public function setTimezone($timezone)
+    {
+        $this->timezone = (string) $timezone;
+
+        foreach ($this->formatters as $formatter) {
+            $formatter->setTimeZoneId($this->timezone);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the timezone to use.
+     *
+     * @return string|null
+     */
+    public function getTimezone()
+    {
+        if (!$this->timezone) {
+            return date_default_timezone_get();
+        }
+
+        return $this->timezone;
+    }
+
+    /**
+     * Set locale to use instead of the default.
+     *
+     * @param  string $locale
+     * @return DateFormat
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = (string) $locale;
+
+        return $this;
+    }
+
+    /**
+     * Get the locale to use.
+     *
+     * @return string|null
+     */
+    public function getLocale()
+    {
+        if ($this->locale === null) {
+            $this->locale = Locale::getDefault();
+        }
+
+        return $this->locale;
     }
 }

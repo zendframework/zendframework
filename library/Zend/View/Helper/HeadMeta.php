@@ -16,20 +16,35 @@ use Zend\View\Exception;
 /**
  * Zend_Layout_View_Helper_HeadMeta
  *
- * @see        http://www.w3.org/TR/xhtml1/dtds.html
+ * @see http://www.w3.org/TR/xhtml1/dtds.html
  */
 class HeadMeta extends Placeholder\Container\AbstractStandalone
 {
     /**
-     * Types of attributes
+     * Allowed key types
+     *
      * @var array
      */
-    protected $typeKeys     = array('name', 'http-equiv', 'charset', 'property');
+    protected $typeKeys  = array('name', 'http-equiv', 'charset', 'property');
+
+    /**
+     * Required attributes for meta tag
+     *
+     * @var array
+     */
     protected $requiredKeys = array('content');
+
+    /**
+     * Allowed modifier keys
+     *
+     * @var array
+     */
     protected $modifierKeys = array('lang', 'scheme');
 
     /**
-     * @var string registry key
+     * Registry key for placeholder
+     *
+     * @var string
      */
     protected $regKey = 'Zend_View_Helper_HeadMeta';
 
@@ -42,6 +57,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
     public function __construct()
     {
         parent::__construct();
+
         $this->setSeparator(PHP_EOL);
     }
 
@@ -51,9 +67,9 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * @param  string $content
      * @param  string $keyValue
      * @param  string $keyType
-     * @param  array $modifiers
+     * @param  array  $modifiers
      * @param  string $placement
-     * @return \Zend\View\Helper\HeadMeta
+     * @return HeadMeta
      */
     public function __invoke($content = null, $keyValue = null, $keyType = 'name', $modifiers = array(), $placement = Placeholder\Container\AbstractContainer::APPEND)
     {
@@ -76,30 +92,6 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
     }
 
     /**
-     * Normalize type attribute of meta
-     *
-     * @param string $type type in CamelCase
-     * @return string
-     * @throws Exception\DomainException
-     */
-    protected function normalizeType($type)
-    {
-        switch ($type) {
-            case 'Name':
-                return 'name';
-            case 'HttpEquiv':
-                return 'http-equiv';
-            case 'Property':
-                return 'property';
-            default:
-                throw new Exception\DomainException(sprintf(
-                    'Invalid type "%s" passed to normalizeType',
-                    $type
-                ));
-        }
-    }
-
-    /**
      * Overload method access
      *
      * Allows the following 'virtual' methods:
@@ -117,9 +109,9 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * - setProperty($keyValue, $content, $modifiers = array())
      *
      * @param  string $method
-     * @param  array $args
-     * @return \Zend\View\Helper\HeadMeta
+     * @param  array  $args
      * @throws Exception\BadMethodCallException
+     * @return HeadMeta
      */
     public function __call($method, $args)
     {
@@ -153,6 +145,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
             }
 
             $this->$action($item);
+
             return $this;
         }
 
@@ -160,12 +153,36 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
     }
 
     /**
+     * Normalize type attribute of meta
+     *
+     * @param  string $type type in CamelCase
+     * @throws Exception\DomainException
+     * @return string
+     */
+    protected function normalizeType($type)
+    {
+        switch ($type) {
+            case 'Name':
+                return 'name';
+            case 'HttpEquiv':
+                return 'http-equiv';
+            case 'Property':
+                return 'property';
+            default:
+                throw new Exception\DomainException(sprintf(
+                    'Invalid type "%s" passed to normalizeType',
+                    $type
+                ));
+        }
+    }
+
+    /**
      * Create an HTML5-style meta charset tag. Something like <meta charset="utf-8">
      *
      * Not valid in a non-HTML5 doctype
      *
-     * @param string $charset
-     * @return \Zend\View\Helper\HeadMeta Provides a fluent interface
+     * @param  string $charset
+     * @return HeadMeta Provides a fluent interface
      */
     public function setCharset($charset)
     {
@@ -175,6 +192,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
         $item->content = null;
         $item->modifiers = array();
         $this->set($item);
+
         return $this;
     }
 
@@ -230,9 +248,9 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * OffsetSet
      *
      * @param  string|int $index
-     * @param  string $value
-     * @return void
+     * @param  string     $value
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function offsetSet($index, $value)
     {
@@ -249,8 +267,8 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * OffsetUnset
      *
      * @param  string|int $index
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function offsetUnset($index)
     {
@@ -265,8 +283,8 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * Prepend
      *
      * @param  string $value
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function prepend($value)
     {
@@ -283,8 +301,8 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * Set
      *
      * @param  string $value
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function set($value)
     {
@@ -388,6 +406,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
 
         $items = array();
         $this->getContainer()->ksort();
+
         try {
             foreach ($this as $item) {
                 $items[] = $this->itemToString($item);
@@ -396,6 +415,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
             trigger_error($e->getMessage(), E_USER_WARNING);
             return '';
         }
+
         return $indent . implode($this->escape($this->getSeparator()) . $indent, $items);
     }
 
@@ -405,7 +425,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * @param  string $type
      * @param  string $typeValue
      * @param  string $content
-     * @param  array $modifiers
+     * @param  array  $modifiers
      * @return stdClass
      */
     public function createData($type, $typeValue, $content, array $modifiers)
@@ -415,6 +435,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
         $data->$type     = $typeValue;
         $data->content   = $content;
         $data->modifiers = $modifiers;
+
         return $data;
     }
 }

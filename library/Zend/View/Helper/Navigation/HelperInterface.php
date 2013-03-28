@@ -25,7 +25,7 @@ interface HelperInterface extends BaseHelperInterface
      *                                         on. Default is null, which
      *                                         indicates that the container
      *                                         should be reset.
-     * @return HelperInterface fluent interface, returns self
+     * @return HelperInterface
      */
     public function setContainer($container = null);
 
@@ -40,7 +40,7 @@ interface HelperInterface extends BaseHelperInterface
      * Sets ACL to use when iterating pages
      *
      * @param  Acl\AclInterface $acl [optional] ACL instance
-     * @return HelperInterface  fluent interface, returns self
+     * @return HelperInterface
      */
     public function setAcl(Acl\AclInterface $acl = null);
 
@@ -48,7 +48,7 @@ interface HelperInterface extends BaseHelperInterface
      * Returns ACL or null if it isn't set using {@link setAcl()} or
      * {@link setDefaultAcl()}
      *
-     * @return Acl\AclInterface|null  ACL object or null
+     * @return Acl\AclInterface|null
      */
     public function getAcl();
 
@@ -59,15 +59,14 @@ interface HelperInterface extends BaseHelperInterface
      *                     instance of type {@link Acl\Role}, or null. Default
      *                     is null.
      * @throws \Zend\View\Exception\ExceptionInterface if $role is invalid
-     * @return HelperInterface fluent interface, returns
-     *                                             self
+     * @return HelperInterface
      */
     public function setRole($role = null);
 
     /**
      * Returns ACL role to use when iterating pages, or null if it isn't set
      *
-     * @return string|Acl\Role\RoleInterface|null  role or null
+     * @return string|Acl\Role\RoleInterface|null
      */
     public function getRole();
 
@@ -75,14 +74,14 @@ interface HelperInterface extends BaseHelperInterface
      * Sets whether ACL should be used
      *
      * @param  bool $useAcl [optional] whether ACL should be used. Default is true.
-     * @return HelperInterface  fluent interface, returns self
+     * @return HelperInterface
      */
     public function setUseAcl($useAcl = true);
 
     /**
      * Returns whether ACL should be used
      *
-     * @return bool  whether ACL should be used
+     * @return bool
      */
     public function getUseAcl();
 
@@ -97,28 +96,28 @@ interface HelperInterface extends BaseHelperInterface
      * Render invisible items?
      *
      * @param  bool $renderInvisible [optional] boolean flag
-     * @return HelperInterface  fluent interface returns self
+     * @return HelperInterface
      */
     public function setRenderInvisible($renderInvisible = true);
 
     /**
      * Checks if the helper has a container
      *
-     * @return bool  whether the helper has a container or not
+     * @return bool
      */
     public function hasContainer();
 
     /**
      * Checks if the helper has an ACL instance
      *
-     * @return bool  whether the helper has a an ACL instance or not
+     * @return bool
      */
     public function hasAcl();
 
     /**
      * Checks if the helper has an ACL role
      *
-     * @return bool  whether the helper has a an ACL role or not
+     * @return bool
      */
     public function hasRole();
 
@@ -138,7 +137,7 @@ interface HelperInterface extends BaseHelperInterface
      *                                         the container returned by {@link
      *                                         getContainer()}.
      * @return string helper output
-     * @throws \Zend\View\Exception\ExceptionInterface if unable to render
+     * @throws \Zend\View\Exception\ExceptionInterface
      */
     public function render($container = null);
 }

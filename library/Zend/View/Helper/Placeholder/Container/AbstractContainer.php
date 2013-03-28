@@ -18,67 +18,76 @@ abstract class AbstractContainer extends \ArrayObject
 {
     /**
      * Whether or not to override all contents of placeholder
+     *
      * @const string
      */
     const SET    = 'SET';
 
     /**
      * Whether or not to append contents to placeholder
+     *
      * @const string
      */
     const APPEND = 'APPEND';
 
     /**
      * Whether or not to prepend contents to placeholder
+     *
      * @const string
      */
     const PREPEND = 'PREPEND';
 
     /**
      * What text to prefix the placeholder with when rendering
+     *
      * @var string
      */
     protected $prefix    = '';
 
     /**
      * What text to append the placeholder with when rendering
+     *
      * @var string
      */
     protected $postfix   = '';
 
     /**
      * What string to use between individual items in the placeholder when rendering
+     *
      * @var string
      */
     protected $separator = '';
 
     /**
      * What string to use as the indentation of output, this will typically be spaces. Eg: '    '
+     *
      * @var string
      */
     protected $indent = '';
 
     /**
      * Whether or not we're already capturing for this given container
+     *
      * @var bool
      */
     protected $captureLock = false;
 
     /**
      * What type of capture (overwrite (set), append, prepend) to use
+     *
      * @var string
      */
     protected $captureType;
 
     /**
      * Key to which to capture content
+     *
      * @var string
      */
     protected $captureKey;
 
     /**
      * Constructor - This is needed so that we can attach a class member as the ArrayObject container
-     *
      */
     public function __construct()
     {
@@ -94,6 +103,7 @@ abstract class AbstractContainer extends \ArrayObject
     public function set($value)
     {
         $this->exchangeArray(array($value));
+
         return $this;
     }
 
@@ -108,6 +118,7 @@ abstract class AbstractContainer extends \ArrayObject
         $values = $this->getArrayCopy();
         array_unshift($values, $value);
         $this->exchangeArray($values);
+
         return $this;
     }
 
@@ -134,11 +145,12 @@ abstract class AbstractContainer extends \ArrayObject
      * Set prefix for __toString() serialization
      *
      * @param  string $prefix
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
+     * @return AbstractContainer
      */
     public function setPrefix($prefix)
     {
         $this->prefix = (string) $prefix;
+
         return $this;
     }
 
@@ -156,11 +168,12 @@ abstract class AbstractContainer extends \ArrayObject
      * Set postfix for __toString() serialization
      *
      * @param  string $postfix
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
+     * @return AbstractContainer
      */
     public function setPostfix($postfix)
     {
         $this->postfix = (string) $postfix;
+
         return $this;
     }
 
@@ -180,11 +193,12 @@ abstract class AbstractContainer extends \ArrayObject
      * Used to implode elements in container
      *
      * @param  string $separator
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
+     * @return AbstractContainer
      */
     public function setSeparator($separator)
     {
         $this->separator = (string) $separator;
+
         return $this;
     }
 
@@ -203,11 +217,12 @@ abstract class AbstractContainer extends \ArrayObject
      * optionally, if a number is passed, it will be the number of spaces
      *
      * @param  string|int $indent
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
+     * @return AbstractContainer
      */
     public function setIndent($indent)
     {
         $this->indent = $this->getWhitespace($indent);
+
         return $this;
     }
 
@@ -240,9 +255,9 @@ abstract class AbstractContainer extends \ArrayObject
      * Start capturing content to push into placeholder
      *
      * @param  string $type How to capture content into placeholder; append, prepend, or set
-     * @param  mixed $key Key to which to capture content
-     * @return void
+     * @param  mixed  $key  Key to which to capture content
      * @throws Exception\RuntimeException if nested captures detected
+     * @return void
      */
     public function captureStart($type = AbstractContainer::APPEND, $key = null)
     {
@@ -314,13 +329,13 @@ abstract class AbstractContainer extends \ArrayObject
     public function getKeys()
     {
         $array = $this->getArrayCopy();
+
         return array_keys($array);
     }
 
     /**
-     * Next Index
+     * Next Index as defined by the PHP manual
      *
-     * as defined by the PHP manual
      * @return int
      */
     public function nextIndex()
@@ -336,7 +351,7 @@ abstract class AbstractContainer extends \ArrayObject
     /**
      * Render the placeholder
      *
-     * @param null|int|string $indent
+     * @param  null|int|string $indent
      * @return string
      */
     public function toString($indent = null)
@@ -351,6 +366,7 @@ abstract class AbstractContainer extends \ArrayObject
                 . implode($this->getSeparator(), $items)
                 . $this->getPostfix();
         $return = preg_replace("/(\r\n?|\n)/", '$1' . $indent, $return);
+
         return $return;
     }
 

@@ -22,29 +22,9 @@ use Zend\I18n\View\Helper\AbstractTranslatorHelper;
 class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorAwareInterface
 {
     /**
-     * @var ServiceLocatorInterface
-     */
-    protected $serviceLocator;
-
-    /**
-     * @var string Templates for the open/close/separators for message tags
-     */
-    protected $messageCloseString     = '</li></ul>';
-    protected $messageOpenFormat      = '<ul%s><li>';
-    protected $messageSeparatorString = '</li><li>';
-
-    /**
-     * @var EscapeHtml
-     */
-    protected $escapeHtmlHelper;
-
-    /**
-     * @var PluginFlashMessenger
-     */
-    protected $pluginFlashMessenger;
-
-    /**
-     * @var array Default attributes for the open format tag
+     * Default attributes for the open format tag
+     *
+     * @var array
      */
     protected $classMessages = array(
         PluginFlashMessenger::NAMESPACE_INFO => 'info',
@@ -52,6 +32,36 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
         PluginFlashMessenger::NAMESPACE_SUCCESS => 'success',
         PluginFlashMessenger::NAMESPACE_DEFAULT => 'default',
     );
+
+    /**
+     * Templates for the open/close/separators for message tags
+     *
+     * @var string
+     */
+    protected $messageCloseString     = '</li></ul>';
+    protected $messageOpenFormat      = '<ul%s><li>';
+    protected $messageSeparatorString = '</li><li>';
+
+    /**
+     * Html escape helper
+     *
+     * @var EscapeHtml
+     */
+    protected $escapeHtmlHelper;
+
+    /**
+     * Flash messenger plugin
+     *
+     * @var PluginFlashMessenger
+     */
+    protected $pluginFlashMessenger;
+
+    /**
+     * Service locator
+     *
+     * @var ServiceLocatorInterface
+     */
+    protected $serviceLocator;
 
     /**
      * Returns the flash messenger plugin controller
@@ -133,7 +143,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Set the string used to close message representation
      *
-     * @param  string         $messageCloseString
+     * @param  string $messageCloseString
      * @return FlashMessenger
      */
     public function setMessageCloseString($messageCloseString)
@@ -156,7 +166,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Set the formatted string used to open message representation
      *
-     * @param  string         $messageOpenFormat
+     * @param  string $messageOpenFormat
      * @return FlashMessenger
      */
     public function setMessageOpenFormat($messageOpenFormat)
@@ -179,7 +189,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Set the string used to separate messages
      *
-     * @param  string         $messageSeparatorString
+     * @param  string $messageSeparatorString
      * @return FlashMessenger
      */
     public function setMessageSeparatorString($messageSeparatorString)

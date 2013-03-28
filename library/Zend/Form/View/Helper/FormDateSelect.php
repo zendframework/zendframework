@@ -81,7 +81,7 @@ class FormDateSelect extends FormMonthSelectHelper
     /**
      * Create a key => value options for days
      *
-     * @param string  $pattern Pattern to use for days
+     * @param  string $pattern Pattern to use for days
      * @return array
      */
     protected function getDaysOptions($pattern)

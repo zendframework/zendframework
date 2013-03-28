@@ -18,46 +18,66 @@ use Zend\View\Exception;
  */
 class HeadScript extends Placeholder\Container\AbstractStandalone
 {
-    /**#@+
+    /**
      * Script type constants
+     *
      * @const string
      */
     const FILE   = 'FILE';
     const SCRIPT = 'SCRIPT';
-    /**#@-*/
 
     /**
      * Registry key for placeholder
+     *
      * @var string
      */
     protected $regKey = 'Zend_View_Helper_HeadScript';
 
     /**
      * Are arbitrary attributes allowed?
+     *
      * @var bool
      */
     protected $arbitraryAttributes = false;
 
-    /**#@+
-     * Capture type and/or attributes (used for hinting during capture)
-     * @var string
+    /**
+     * Is capture lock?
+     *
+     * @var bool
      */
     protected $captureLock;
-    protected $captureScriptType  = null;
+
+    /**
+     * Capture type
+     *
+     * @var string
+     */
+    protected $captureScriptType;
+
+    /**
+     * Capture attributes
+     *
+     * @var null|array
+     */
     protected $captureScriptAttrs = null;
+
+    /**
+     * Capture type (append, prepend, set)
+     *
+     * @var string
+     */
     protected $captureType;
-    /**#@-*/
 
     /**
      * Optional allowed attributes for script tag
+     *
      * @var array
      */
-    protected $optionalAttributes = array(
-        'charset', 'defer', 'language', 'src'
-    );
+    protected $optionalAttributes = array('charset', 'defer', 'language', 'src');
 
     /**
      * Required attributes for script tag
+     *
      * @var string
      */
     protected $requiredAttributes = array('type');
@@ -65,6 +85,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     /**
      * Whether or not to format scripts using CDATA; used only if doctype
      * helper is not accessible
+     *
      * @var bool
      */
     public $useCdata = false;
@@ -73,11 +94,11 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * Constructor
      *
      * Set separator to PHP_EOL.
-     *
      */
     public function __construct()
     {
         parent::__construct();
+
         $this->setSeparator(PHP_EOL);
     }
 
@@ -92,7 +113,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * @param  string $placement Append, prepend, or set
      * @param  array  $attrs     Array of script attributes
      * @param  string $type      Script type and/or array of script attributes
-     * @return \Zend\View\Helper\HeadScript
+     * @return HeadScript
      */
     public function __invoke($mode = HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
     {
@@ -121,8 +142,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * @param  mixed  $captureType Type of capture
      * @param  string $type        Type of script
      * @param  array  $attrs       Attributes of capture
-     * @return void
      * @throws Exception\RuntimeException
+     * @return void
      */
     public function captureStart($captureType = Placeholder\Container\AbstractContainer::APPEND, $type = 'text/javascript', $attrs = array())
     {
@@ -144,9 +165,9 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      */
     public function captureEnd()
     {
-        $content                   = ob_get_clean();
-        $type                      = $this->captureScriptType;
-        $attrs                     = $this->captureScriptAttrs;
+        $content                  = ob_get_clean();
+        $type                     = $this->captureScriptType;
+        $attrs                    = $this->captureScriptAttrs;
         $this->captureScriptType  = null;
         $this->captureScriptAttrs = null;
         $this->captureLock        = false;
@@ -161,6 +182,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
                 $action = 'appendScript';
                 break;
         }
+
         $this->$action($content, $type, $attrs);
     }
 
@@ -179,8 +201,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      *
      * @param  string $method Method to call
      * @param  array  $args   Arguments of method
-     * @return \Zend\View\Helper\HeadScript
      * @throws Exception\BadMethodCallException if too few arguments or invalid method
+     * @return HeadScript
      */
     public function __call($method, $args)
     {
@@ -261,6 +283,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
                 return true;
             }
         }
+
         return false;
     }
 
@@ -286,8 +309,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * Override append
      *
      * @param  string $value Append script or file
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function append($value)
     {
@@ -304,8 +327,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * Override prepend
      *
      * @param  string $value Prepend script or file
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function prepend($value)
     {
@@ -322,8 +345,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * Override set
      *
      * @param  string $value Set script or file
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function set($value)
     {
@@ -341,8 +364,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      *
      * @param  string|int $index Set script of file offset
      * @param  mixed      $value
-     * @return void
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function offsetSet($index, $value)
     {
@@ -359,11 +382,12 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * Set flag indicating if arbitrary attributes are allowed
      *
      * @param  bool $flag Set flag
-     * @return \Zend\View\Helper\HeadScript
+     * @return HeadScript
      */
     public function setAllowArbitraryAttributes($flag)
     {
         $this->arbitraryAttributes = (bool) $flag;
+
         return $this;
     }
 
@@ -402,7 +426,6 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
                 $attrString .= sprintf(' %s="%s"', $key, ($this->autoEscape) ? $this->escape($value) : $value);
             }
         }
-
 
         $addScriptEscape = !(isset($item->attributes['noescape']) && filter_var($item->attributes['noescape'], FILTER_VALIDATE_BOOLEAN));
 
@@ -468,8 +491,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
             $items[] = $this->itemToString($item, $indent, $escapeStart, $escapeEnd);
         }
 
-        $return = implode($this->getSeparator(), $items);
-        return $return;
+        return implode($this->getSeparator(), $items);
     }
 
     /**
@@ -486,6 +508,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
         $data->type       = $type;
         $data->attributes = $attributes;
         $data->source     = $content;
+
         return $data;
     }
 }

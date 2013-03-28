@@ -18,33 +18,19 @@ use Zend\View\Exception;
 class Identity extends AbstractHelper
 {
     /**
+     * AuthenticationService instance
+     *
      * @var AuthenticationService
      */
     protected $authenticationService;
-
-    /**
-     * @return AuthenticationService
-     */
-    public function getAuthenticationService()
-    {
-        return $this->authenticationService;
-    }
-
-    /**
-     * @param AuthenticationService $authenticationService
-     */
-    public function setAuthenticationService(AuthenticationService $authenticationService)
-    {
-        $this->authenticationService = $authenticationService;
-    }
 
     /**
      * Retrieve the current identity, if any.
      *
      * If none available, returns null.
      *
-     * @return mixed|null
      * @throws Exception\RuntimeException
+     * @return mixed|null
      */
     public function __invoke()
     {
@@ -55,6 +41,30 @@ class Identity extends AbstractHelper
         if (!$this->authenticationService->hasIdentity()) {
             return null;
         }
+
         return $this->authenticationService->getIdentity();
+    }
+
+    /**
+     * Set AuthenticationService instance
+     *
+     * @param AuthenticationService $authenticationService
+     * @return Identity
+     */
+    public function setAuthenticationService(AuthenticationService $authenticationService)
+    {
+        $this->authenticationService = $authenticationService;
+
+        return $this;
+    }
+
+    /**
+     * Get AuthenticationService instance
+     *
+     * @return AuthenticationService
+     */
+    public function getAuthenticationService()
+    {
+        return $this->authenticationService;
     }
 }

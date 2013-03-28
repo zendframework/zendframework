@@ -14,7 +14,6 @@ namespace Zend\View\Helper;
  */
 class Cycle extends AbstractHelper implements \Iterator
 {
-
     /**
      * Default name
      * @var string
@@ -45,49 +44,54 @@ class Cycle extends AbstractHelper implements \Iterator
     /**
      * Add elements to alternate
      *
-     * @param array $data
-     * @param string $name
-     * @return \Zend\View\Helper\Cycle
+     * @param  array $data
+     * @param  string $name
+     * @return Cycle
      */
     public function __invoke(array $data = array(), $name = self::DEFAULT_NAME)
     {
-        if (!empty($data))
+        if (!empty($data)) {
            $this->data[$name] = $data;
+        }
 
         $this->setName($name);
+
         return $this;
     }
 
     /**
      * Add elements to alternate
      *
-     * @param array $data
-     * @param string $name
-     * @return \Zend\View\Helper\Cycle
+     * @param  array $data
+     * @param  string $name
+     * @return Cycle
      */
     public function assign(Array $data , $name = self::DEFAULT_NAME)
     {
         $this->setName($name);
         $this->data[$name] = $data;
         $this->rewind();
+
         return $this;
     }
 
     /**
      * Sets actual name of cycle
      *
-     * @param $name
-     * @return \Zend\View\Helper\Cycle
+     * @param  $name
+     * @return Cycle
      */
     public function setName($name = self::DEFAULT_NAME)
     {
        $this->name = $name;
 
-       if (!isset($this->data[$this->name]))
-         $this->data[$this->name] = array();
+       if (!isset($this->data[$this->name])) {
+           $this->data[$this->name] = array();
+       }
 
-       if (!isset($this->pointers[$this->name]))
-         $this->rewind();
+       if (!isset($this->pointers[$this->name])) {
+           $this->rewind();
+       }
 
        return $this;
     }
@@ -114,52 +118,38 @@ class Cycle extends AbstractHelper implements \Iterator
     }
 
     /**
-     * Turn helper into string
-     *
-     * @return string
-     */
-    public function toString()
-    {
-        return (string) $this->data[$this->name][$this->key()];
-    }
-
-    /**
-     * Cast to string
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->toString();
-    }
-
-    /**
      * Move to next value
      *
-     * @return \Zend\View\Helper\Cycle
+     * @return Cycle
      */
     public function next()
     {
         $count = count($this->data[$this->name]);
-        if ($this->pointers[$this->name] == ($count - 1))
+
+        if ($this->pointers[$this->name] == ($count - 1)) {
             $this->pointers[$this->name] = 0;
-        else
+        } else {
             $this->pointers[$this->name] = ++$this->pointers[$this->name];
+        }
+
         return $this;
     }
 
     /**
      * Move to previous value
      *
-     * @return \Zend\View\Helper\Cycle
+     * @return Cycle
      */
     public function prev()
     {
         $count = count($this->data[$this->name]);
-        if ($this->pointers[$this->name] <= 0)
+
+        if ($this->pointers[$this->name] <= 0) {
             $this->pointers[$this->name] = $count - 1;
-        else
+        } else {
             $this->pointers[$this->name] = --$this->pointers[$this->name];
+        }
+
         return $this;
     }
 
@@ -170,20 +160,22 @@ class Cycle extends AbstractHelper implements \Iterator
      */
     public function key()
     {
-        if ($this->pointers[$this->name] < 0)
+        if ($this->pointers[$this->name] < 0) {
             return 0;
-        else
+        } else {
             return $this->pointers[$this->name];
+        }
     }
 
     /**
      * Rewind pointer
      *
-     * @return \Zend\View\Helper\Cycle
+     * @return Cycle
      */
     public function rewind()
     {
         $this->pointers[$this->name] = -1;
+
         return $this;
     }
 
@@ -205,5 +197,25 @@ class Cycle extends AbstractHelper implements \Iterator
     public function current()
     {
         return $this->data[$this->name][$this->key()];
+    }
+
+    /**
+     * Turn helper into string
+     *
+     * @return string
+     */
+    public function toString()
+    {
+        return (string) $this->data[$this->name][$this->key()];
+    }
+
+    /**
+     * Cast to string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
     }
 }

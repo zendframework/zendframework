@@ -29,91 +29,21 @@ class FormElementErrors extends AbstractHelper
     protected $attributes = array();
 
     /**
-     * Set the string used to close message representation
+     * Invoke helper as functor
      *
-     * @param  string $messageCloseString
-     * @return FormElementErrors
+     * Proxies to {@link render()} if an element is passed.
+     *
+     * @param  ElementInterface $element
+     * @param  array            $attributes
+     * @return string|FormElementErrors
      */
-    public function setMessageCloseString($messageCloseString)
+    public function __invoke(ElementInterface $element = null, array $attributes = array())
     {
-        $this->messageCloseString = (string) $messageCloseString;
-        return $this;
-    }
+        if (!$element) {
+            return $this;
+        }
 
-    /**
-     * Get the string used to close message representation
-     *
-     * @return string
-     */
-    public function getMessageCloseString()
-    {
-        return $this->messageCloseString;
-    }
-
-    /**
-     * Set the formatted string used to open message representation
-     *
-     * @param  string $messageOpenFormat
-     * @return FormElementErrors
-     */
-    public function setMessageOpenFormat($messageOpenFormat)
-    {
-        $this->messageOpenFormat = (string) $messageOpenFormat;
-        return $this;
-    }
-
-    /**
-     * Get the formatted string used to open message representation
-     *
-     * @return string
-     */
-    public function getMessageOpenFormat()
-    {
-        return $this->messageOpenFormat;
-    }
-
-    /**
-     * Set the string used to separate messages
-     *
-     * @param  string $messageSeparatorString
-     * @return FormElementErrors
-     */
-    public function setMessageSeparatorString($messageSeparatorString)
-    {
-        $this->messageSeparatorString = (string) $messageSeparatorString;
-        return $this;
-    }
-
-    /**
-     * Get the string used to separate messages
-     *
-     * @return string
-     */
-    public function getMessageSeparatorString()
-    {
-        return $this->messageSeparatorString;
-    }
-
-    /**
-     * Set the attributes that will go on the message open format
-     *
-     * @param array $attributes key value pairs of attributes
-     * @return FormElementErrors
-     */
-    public function setAttributes(array $attributes)
-    {
-        $this->attributes = $attributes;
-        return $this;
-    }
-
-    /**
-     * Get the attributes that will go on the message open format
-     *
-     * @return array
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
+        return $this->render($element, $attributes);
     }
 
     /**
@@ -149,8 +79,8 @@ class FormElementErrors extends AbstractHelper
         $escapeHtml      = $this->getEscapeHtmlHelper();
         $messagesToPrint = array();
         array_walk_recursive($messages, function ($item) use (&$messagesToPrint, $escapeHtml) {
-            $messagesToPrint[] = $escapeHtml($item);
-        });
+                $messagesToPrint[] = $escapeHtml($item);
+            });
 
         if (empty($messagesToPrint)) {
             return '';
@@ -165,20 +95,94 @@ class FormElementErrors extends AbstractHelper
     }
 
     /**
-     * Invoke helper as functor
+     * Set the string used to close message representation
      *
-     * Proxies to {@link render()} if an element is passed.
-     *
-     * @param  ElementInterface $element
-     * @param  array $attributes
-     * @return string|FormElementErrors
+     * @param  string $messageCloseString
+     * @return FormElementErrors
      */
-    public function __invoke(ElementInterface $element = null, array $attributes = array())
+    public function setMessageCloseString($messageCloseString)
     {
-        if (!$element) {
-            return $this;
-        }
+        $this->messageCloseString = (string) $messageCloseString;
 
-        return $this->render($element, $attributes);
+        return $this;
+    }
+
+    /**
+     * Get the string used to close message representation
+     *
+     * @return string
+     */
+    public function getMessageCloseString()
+    {
+        return $this->messageCloseString;
+    }
+
+    /**
+     * Set the formatted string used to open message representation
+     *
+     * @param  string $messageOpenFormat
+     * @return FormElementErrors
+     */
+    public function setMessageOpenFormat($messageOpenFormat)
+    {
+        $this->messageOpenFormat = (string) $messageOpenFormat;
+
+        return $this;
+    }
+
+    /**
+     * Get the formatted string used to open message representation
+     *
+     * @return string
+     */
+    public function getMessageOpenFormat()
+    {
+        return $this->messageOpenFormat;
+    }
+
+    /**
+     * Set the string used to separate messages
+     *
+     * @param  string $messageSeparatorString
+     * @return FormElementErrors
+     */
+    public function setMessageSeparatorString($messageSeparatorString)
+    {
+        $this->messageSeparatorString = (string) $messageSeparatorString;
+
+        return $this;
+    }
+
+    /**
+     * Get the string used to separate messages
+     *
+     * @return string
+     */
+    public function getMessageSeparatorString()
+    {
+        return $this->messageSeparatorString;
+    }
+
+    /**
+     * Set the attributes that will go on the message open format
+     *
+     * @param  array $attributes key value pairs of attributes
+     * @return FormElementErrors
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    /**
+     * Get the attributes that will go on the message open format
+     *
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
     }
 }

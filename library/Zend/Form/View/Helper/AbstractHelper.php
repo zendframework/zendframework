@@ -157,6 +157,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
     public function setDoctype($doctype)
     {
         $this->getDoctypeHelper()->setDoctype($doctype);
+
         return $this;
     }
 
@@ -179,6 +180,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
     public function setEncoding($encoding)
     {
         $this->getEscapeHtmlHelper()->setEncoding($encoding);
+
         return $this;
     }
 
@@ -203,7 +205,6 @@ abstract class AbstractHelper extends BaseAbstractHelper
     public function createAttributesString(array $attributes)
     {
         $attributes = $this->prepareAttributes($attributes);
-
         $escape     = $this->getEscapeHtmlHelper();
         $strings    = array();
         foreach ($attributes as $key => $value) {
@@ -227,6 +228,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
             //@TODO Escape event attributes like AbstractHtmlElement view helper does in htmlAttribs ??
             $strings[] = sprintf('%s="%s"', $escape($key), $escape($value));
         }
+
         return implode(' ', $strings);
     }
 

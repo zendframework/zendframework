@@ -46,11 +46,35 @@ class FormMonthSelect extends AbstractHelper
      */
     protected $locale;
 
+    /**
+     * Invoke helper as function
+     *
+     * Proxies to {@link render()}.
+     *
+     * @param  ElementInterface $element
+     * @param  int              $dateType
+     * @param  null|string      $locale
+     * @return FormDateSelect
+     */
+    public function __invoke(ElementInterface $element = null, $dateType = IntlDateFormatter::LONG, $locale = null)
+    {
+        if (!$element) {
+            return $this;
+        }
+
+        $this->setDateType($dateType);
+
+        if ($locale !== null) {
+            $this->setLocale($locale);
+        }
+
+        return $this->render($element);
+    }
 
     /**
      * Render a month element that is composed of two selects
      *
-     * @param \Zend\Form\ElementInterface $element
+     * @param  \Zend\Form\ElementInterface $element
      * @throws \Zend\Form\Exception\InvalidArgumentException
      * @throws \Zend\Form\Exception\DomainException
      * @return string
@@ -105,31 +129,6 @@ class FormMonthSelect extends AbstractHelper
         }
 
         return $markup;
-    }
-
-    /**
-     * Invoke helper as function
-     *
-     * Proxies to {@link render()}.
-     *
-     * @param \Zend\Form\ElementInterface $element
-     * @param int                         $dateType
-     * @param null|string                 $locale
-     * @return FormDateSelect
-     */
-    public function __invoke(ElementInterface $element = null, $dateType = IntlDateFormatter::LONG, $locale = null)
-    {
-        if (!$element) {
-            return $this;
-        }
-
-        $this->setDateType($dateType);
-
-        if ($locale !== null) {
-            $this->setLocale($locale);
-        }
-
-        return $this->render($element);
     }
 
     /**

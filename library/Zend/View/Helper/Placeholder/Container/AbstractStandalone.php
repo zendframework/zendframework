@@ -22,7 +22,7 @@ abstract class AbstractStandalone
     implements \IteratorAggregate, \Countable, \ArrayAccess
 {
     /**
-     * @var \Zend\View\Helper\Placeholder\Container\AbstractContainer
+     * @var AbstractContainer
      */
     protected $container;
 
@@ -32,12 +32,13 @@ abstract class AbstractStandalone
     protected $escapers = array();
 
     /**
-     * @var \Zend\View\Helper\Placeholder\Registry
+     * @var Registry
      */
     protected $registry;
 
     /**
      * Registry key under which container registers itself
+     *
      * @var string
      */
     protected $regKey;
@@ -45,13 +46,13 @@ abstract class AbstractStandalone
     /**
      * Flag whether to automatically escape output, must also be
      * enforced in the child class if __toString/toString is overridden
+     *
      * @var bool
      */
     protected $autoEscape = true;
 
     /**
      * Constructor
-     *
      */
     public function __construct()
     {
@@ -62,7 +63,7 @@ abstract class AbstractStandalone
     /**
      * Retrieve registry
      *
-     * @return \Zend\View\Helper\Placeholder\Registry
+     * @return Registry
      */
     public function getRegistry()
     {
@@ -72,12 +73,13 @@ abstract class AbstractStandalone
     /**
      * Set registry object
      *
-     * @param  \Zend\View\Helper\Placeholder\Registry $registry
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractStandalone
+     * @param  Registry $registry
+     * @return AbstractStandalone
      */
     public function setRegistry(Registry $registry)
     {
         $this->registry = $registry;
+
         return $this;
     }
 
@@ -91,6 +93,7 @@ abstract class AbstractStandalone
     {
         $encoding = $escaper->getEncoding();
         $this->escapers[$encoding] = $escaper;
+
         return $this;
     }
 
@@ -108,6 +111,7 @@ abstract class AbstractStandalone
         if (!isset($this->escapers[$enc])) {
             $this->setEscaper(new Escaper($enc));
         }
+
         return $this->escapers[$enc];
     }
 
@@ -115,11 +119,12 @@ abstract class AbstractStandalone
      * Set whether or not auto escaping should be used
      *
      * @param  bool $autoEscape whether or not to auto escape output
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractStandalone
+     * @return AbstractStandalone
      */
     public function setAutoEscape($autoEscape = true)
     {
         $this->autoEscape = ($autoEscape) ? true : false;
+
         return $this;
     }
 
@@ -150,25 +155,27 @@ abstract class AbstractStandalone
         }
 
         $escaper = $this->getEscaper();
+
         return $escaper->escapeHtml((string) $string);
     }
 
     /**
      * Set container on which to operate
      *
-     * @param  \Zend\View\Helper\Placeholder\Container\AbstractContainer $container
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractStandalone
+     * @param  AbstractContainer $container
+     * @return AbstractStandalone
      */
     public function setContainer(AbstractContainer $container)
     {
         $this->container = $container;
+
         return $this;
     }
 
     /**
      * Retrieve placeholder container
      *
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
+     * @return AbstractContainer
      */
     public function getContainer()
     {
@@ -237,8 +244,8 @@ abstract class AbstractStandalone
      *
      * @param  string $method
      * @param  array $args
-     * @return mixed
      * @throws Exception\BadMethodCallException
+     * @return mixed
      */
     public function __call($method, $args)
     {
@@ -283,6 +290,7 @@ abstract class AbstractStandalone
     public function count()
     {
         $container = $this->getContainer();
+
         return count($container);
     }
 

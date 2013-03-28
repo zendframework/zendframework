@@ -66,7 +66,7 @@ class Breadcrumbs extends AbstractHelper
      * Sets breadcrumb separator
      *
      * @param  string $separator separator string
-     * @return Breadcrumbs fluent interface, returns self
+     * @return Breadcrumbs
      */
     public function setSeparator($separator)
     {
@@ -91,7 +91,7 @@ class Breadcrumbs extends AbstractHelper
      * Sets whether last page in breadcrumbs should be hyperlinked
      *
      * @param  bool $linkLast whether last page should be hyperlinked
-     * @return Breadcrumbs fluent interface, returns self
+     * @return Breadcrumbs
      */
     public function setLinkLast($linkLast)
     {
@@ -102,7 +102,7 @@ class Breadcrumbs extends AbstractHelper
     /**
      * Returns whether last page in breadcrumbs should be hyperlinked
      *
-     * @return bool  whether last page in breadcrumbs should be hyperlinked
+     * @return bool
      */
     public function getLinkLast()
     {
@@ -117,7 +117,7 @@ class Breadcrumbs extends AbstractHelper
      *                               values; the partial view script to use,
      *                               and the module where the script can be
      *                               found.
-     * @return Breadcrumbs fluent interface, returns self
+     * @return Breadcrumbs
      */
     public function setPartial($partial)
     {
@@ -146,7 +146,7 @@ class Breadcrumbs extends AbstractHelper
      *
      * @param  AbstractContainer $container [optional] container to render. Default is
      *                              to render the container registered in the helper.
-     * @return string               helper output
+     * @return string
      */
     public function renderStraight($container = null)
     {
@@ -279,7 +279,7 @@ class Breadcrumbs extends AbstractHelper
      *
      * @param  AbstractContainer $container [optional] container to render. Default is
      *                              to render the container registered in the helper.
-     * @return string               helper output
+     * @return string
      */
     public function render($container = null)
     {

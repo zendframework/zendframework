@@ -51,7 +51,7 @@ class ServerUrl extends AbstractHelper
      *                                     as a path. If a string is given, it
      *                                     will be appended as a path. Default
      *                                     is to not append any path.
-     * @return string                      server url
+     * @return string
      */
     public function __invoke($requestUri = null)
     {
@@ -69,21 +69,22 @@ class ServerUrl extends AbstractHelper
     /**
      * Returns host
      *
-     * @return string  host
+     * @return string
      */
     public function getHost()
     {
         if (null === $this->host) {
             $this->detectHost();
         }
+
         return $this->host;
     }
 
     /**
      * Sets host
      *
-     * @param  string $host                new host
-     * @return \Zend\View\Helper\ServerUrl  fluent interface, returns self
+     * @param  string $host
+     * @return ServerUrl
      */
     public function setHost($host)
     {
@@ -98,31 +99,34 @@ class ServerUrl extends AbstractHelper
         }
 
         $this->host = $host . ':' . $port;
+
         return $this;
     }
 
     /**
      * Returns scheme (typically http or https)
      *
-     * @return string  scheme (typically http or https)
+     * @return string
      */
     public function getScheme()
     {
         if (null === $this->scheme) {
             $this->detectScheme();
         }
+
         return $this->scheme;
     }
 
     /**
      * Sets scheme (typically http or https)
      *
-     * @param  string $scheme              new scheme (typically http or https)
-     * @return \Zend\View\Helper\ServerUrl  fluent interface, returns self
+     * @param  string $scheme
+     * @return ServerUrl
      */
     public function setScheme($scheme)
     {
         $this->scheme = $scheme;
+
         return $this;
     }
 
@@ -136,6 +140,7 @@ class ServerUrl extends AbstractHelper
         if (null === $this->port) {
             $this->detectPort();
         }
+
         return $this->port;
     }
 
@@ -148,6 +153,7 @@ class ServerUrl extends AbstractHelper
     public function setPort($port)
     {
         $this->port = (int) $port;
+
         return $this;
     }
 
@@ -160,6 +166,7 @@ class ServerUrl extends AbstractHelper
     public function setUseProxy($useProxy = false)
     {
         $this->useProxy = (bool) $useProxy;
+
         return $this;
     }
 
@@ -185,6 +192,7 @@ class ServerUrl extends AbstractHelper
             }
 
             $this->setHost($_SERVER['HTTP_HOST']);
+
             return;
         }
 
@@ -220,6 +228,7 @@ class ServerUrl extends AbstractHelper
             return false;
         }
         $this->setHost($host);
+
         return true;
     }
 
@@ -244,6 +253,7 @@ class ServerUrl extends AbstractHelper
                 $scheme = 'http';
                 break;
         }
+
         $this->setScheme($scheme);
     }
 
@@ -291,7 +301,9 @@ class ServerUrl extends AbstractHelper
         if (empty($scheme)) {
             return false;
         }
+
         $this->setScheme($scheme);
+
         return true;
     }
 
@@ -312,6 +324,7 @@ class ServerUrl extends AbstractHelper
 
         $port = $_SERVER['HTTP_X_FORWARDED_PORT'];
         $this->setPort($port);
+
         return true;
     }
 }

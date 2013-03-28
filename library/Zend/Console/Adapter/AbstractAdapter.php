@@ -74,8 +74,6 @@ abstract class AbstractAdapter implements AdapterInterface
 
     /**
      * Write a single line of text to console and advance cursor to the next line.
-     * If the text length matches console window width no newline character will be added,
-     * which prevents double empty lines.
      *
      * @param string   $text
      * @param null|int $color
@@ -83,21 +81,7 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function writeLine($text = "", $color = null, $bgColor = null)
     {
-        $width = StringUtils::getWrapper()->strlen($text);
-
-        // Remove newline characters from the end of string
-        $text = trim($text, "\r\n");
-
-        // Replace newline characters with spaces
-        $text = str_replace("\n", " ", $text);
-
-        // Write the line but refuse to add EOL if the text fits the window
-        if ($width % $this->getWidth() === 0) {
-            $this->write($text, $color, $bgColor);
-        } else {
-            $this->write($text, $color, $bgColor);
-            $this->write(PHP_EOL);
-        }
+        $this->write($text . PHP_EOL, $color, $bgColor);
     }
 
     /**

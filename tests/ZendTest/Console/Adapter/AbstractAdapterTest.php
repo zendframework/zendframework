@@ -54,11 +54,11 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         ob_start();
         $this->adapter->writeLine("foo\nbar");
-        $this->assertEquals("foo bar" . PHP_EOL, ob_get_clean());
+        $this->assertEquals("foo\nbar" . PHP_EOL, ob_get_clean());
 
         ob_start();
         $this->adapter->writeLine("\rfoo\r");
-        $this->assertEquals("foo" . PHP_EOL, ob_get_clean());
+        $this->assertEquals("\rfoo\r" . PHP_EOL, ob_get_clean());
     }
 
     /**
@@ -71,57 +71,14 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setTestWidth(80);
 
         ob_start();
-        $line = str_repeat('#',80);
+        $line = str_repeat('#', 80);
         $this->adapter->writeLine($line);
-        $this->assertEquals($line, ob_get_clean(), 'No newline because text matches console window width');
+        $this->assertEquals($line . PHP_EOL, ob_get_clean());
 
         ob_start();
         $line2 = $line . '#';
         $this->adapter->writeLine($line2);
-        $this->assertEquals($line . '#' . PHP_EOL, ob_get_clean());
-
-        ob_start();
-        $line3 = $line . $line;
-        $this->adapter->writeLine($line3);
-        $this->assertEquals($line3, ob_get_clean(), 'No newline because text matches console window width');
-
-
-        // make sure console is reported as utf8 compatible
-        $this->adapter->setTestUtf8(true);
-
-        ob_start();
-        $line = str_repeat('ź',80);
-        $this->adapter->writeLine($line);
-        $this->assertEquals($line, ob_get_clean(), 'No newline because text matches console window width');
-
-        ob_start();
-        $line2 = $line . 'ź';
-        $this->adapter->writeLine($line2);
-        $this->assertEquals($line . 'ź' . PHP_EOL, ob_get_clean());
-
-        ob_start();
-        $line3 = $line . $line;
-        $this->adapter->writeLine($line3);
-        $this->assertEquals($line3, ob_get_clean(), 'No newline because text matches console window width');
-
-
-        // attempt to test utf8 string on a non-utf8 console (which should result in utf8 decoding)
-        $this->adapter->setTestUtf8(false);
-
-        ob_start();
-        $line = str_repeat('ź',80);
-        $this->adapter->writeLine($line);
-        $this->assertEquals($line, ob_get_clean(), 'No newline because text matches console window width');
-
-        ob_start();
-        $line2 = $line . 'ź';
-        $this->adapter->writeLine($line2);
-        $this->assertEquals($line . 'ź' . PHP_EOL, ob_get_clean());
-
-        ob_start();
-        $line3 = $line . $line;
-        $this->adapter->writeLine($line3);
-        $this->assertEquals($line3, ob_get_clean(), 'No newline because text matches console window width');
+        $this->assertEquals($line2 . PHP_EOL, ob_get_clean());
     }
 
     public function testReadLine()

@@ -295,7 +295,7 @@ class ServiceManager implements ServiceLocatorInterface
         if (!$factory instanceof AbstractFactoryInterface) {
             throw new Exception\InvalidArgumentException(
                 'Provided abstract factory must be the class name of an abstract'
-                    . ' factory or an instance of an AbstractFactoryInterface.'
+                . ' factory or an instance of an AbstractFactoryInterface.'
             );
         }
 
@@ -431,7 +431,13 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if (!$instance) {
-            if ($this->canCreate(array($cName, $name))) {
+            if (
+                isset($this->invokableClasses[$cName])
+                || isset($this->factories[$cName])
+                || isset($this->aliases[$cName])
+                || isset($this->instances[$cName])
+                || $this->canCreateFromAbstractFactory($cName, $name)
+            ) {
                 $instance = $this->create(array($cName, $name));
             } elseif ($usePeeringServiceManagers && !$this->retrieveFromPeeringManagerFirst) {
                 $instance = $this->retrieveFromPeeringManager($name);
@@ -527,6 +533,8 @@ class ServiceManager implements ServiceLocatorInterface
      * @param  string|array $name
      * @param  bool         $checkAbstractFactories
      * @return bool
+     *
+     * @deprecated this method is being deprecated as of zendframework 2.2, and may be removed in future major versions
      */
     public function canCreate($name, $checkAbstractFactories = true)
     {
@@ -567,7 +575,13 @@ class ServiceManager implements ServiceLocatorInterface
             }
         }
 
-        if ($this->canCreate(array($cName, $rName), $checkAbstractFactories)) {
+        if (
+            isset($this->invokableClasses[$cName])
+            || isset($this->factories[$cName])
+            || isset($this->aliases[$cName])
+            || isset($this->instances[$cName])
+            || ($checkAbstractFactories && $this->canCreateFromAbstractFactory($cName, $name))
+        ) {
             return true;
         }
 
@@ -933,7 +947,7 @@ class ServiceManager implements ServiceLocatorInterface
      * @param string $type
      * @return bool
      *
-     * @deprecated this method is being deprecated as of zendframework 2.2, and may be removed
+     * @deprecated this method is being deprecated as of zendframework 2.2, and may be removed in future major versions
      */
     protected static function isSubclassOf($className, $type)
     {

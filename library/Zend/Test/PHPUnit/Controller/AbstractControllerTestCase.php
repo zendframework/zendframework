@@ -233,6 +233,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         $request->setQuery(new Parameters($query));
         $request->setPost(new Parameters($post));
         $request->setUri($uri);
+        $request->setRequestUri($uri->getPath());
 
         return $this;
     }

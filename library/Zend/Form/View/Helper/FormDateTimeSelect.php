@@ -53,7 +53,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
         
         $shouldRenderDelimiters = $element->shouldRenderDelimiters();
         $selectHelper = $this->getSelectElementHelper();
-        $pattern      = $this->parsePattern(shouldRenderDelimiters);
+        $pattern      = $this->parsePattern($shouldRenderDelimiters);
 
         $daysOptions   = $this->getDaysOptions($pattern['day']);
         $monthsOptions = $this->getMonthsOptions($pattern['month']);

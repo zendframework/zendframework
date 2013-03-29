@@ -9,6 +9,7 @@
 
 namespace Zend\Db\Adapter\Platform;
 
+use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Driver\Pgsql;
 use Zend\Db\Adapter\Driver\Pdo;
 use Zend\Db\Adapter\Exception;
@@ -34,12 +35,7 @@ class Postgresql implements PlatformInterface
     {
         if ($driver instanceof Pgsql\Pgsql
             || ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'Postgresql')
-        ) {
-            $this->resource = $driver->getConnection()->getResource();
-            return $this;
-        }
-
-        if ((is_resource($driver) && (in_array(get_resource_type($driver), array('pgsql link', 'pgsql link persistent'))))
+            || (is_resource($driver) && (in_array(get_resource_type($driver), array('pgsql link', 'pgsql link persistent'))))
             || ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'pgsql')
         ) {
             $this->resource = $driver;
@@ -113,6 +109,9 @@ class Postgresql implements PlatformInterface
      */
     public function quoteValue($value)
     {
+        if ($this->resource instanceof DriverInterface) {
+            $this->resource = $this->resource->getConnection()->getResource();
+        }
         if (is_resource($this->resource)) {
             return '\'' . pg_escape_string($this->resource, $value) . '\'';
         }
@@ -136,6 +135,9 @@ class Postgresql implements PlatformInterface
      */
     public function quoteTrustedValue($value)
     {
+        if ($this->resource instanceof DriverInterface) {
+            $this->resource = $this->resource->getConnection()->getResource();
+        }
         if (is_resource($this->resource)) {
             return '\'' . pg_escape_string($this->resource, $value) . '\'';
         }

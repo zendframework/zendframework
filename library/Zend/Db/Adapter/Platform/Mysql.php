@@ -9,6 +9,7 @@
 
 namespace Zend\Db\Adapter\Platform;
 
+use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Driver\Mysqli;
 use Zend\Db\Adapter\Driver\Pdo;
 use Zend\Db\Adapter\Exception;
@@ -35,14 +36,7 @@ class Mysql implements PlatformInterface
         // handle Zend_Db drivers
         if ($driver instanceof Mysqli\Mysqli
             || ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'Mysql')
-        ) {
-            /** @var $driver \Zend\Db\Adapter\Driver\DriverInterface */
-            $this->resource = $driver->getConnection()->getResource();
-            return $this;
-        }
-
-        // handle
-        if ($driver instanceof \mysqli
+            || ($driver instanceof \mysqli)
             || ($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'mysql')
         ) {
             $this->resource = $driver;
@@ -116,6 +110,9 @@ class Mysql implements PlatformInterface
      */
     public function quoteValue($value)
     {
+        if ($this->resource instanceof DriverInterface) {
+            $this->resource = $this->resource->getConnection()->getResource();
+        }
         if ($this->resource instanceof \mysqli) {
             return '\'' . $this->resource->real_escape_string($value) . '\'';
         }
@@ -139,6 +136,9 @@ class Mysql implements PlatformInterface
      */
     public function quoteTrustedValue($value)
     {
+        if ($this->resource instanceof DriverInterface) {
+            $this->resource = $this->resource->getConnection()->getResource();
+        }
         if ($this->resource instanceof \mysqli) {
             return '\'' . $this->resource->real_escape_string($value) . '\'';
         }

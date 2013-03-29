@@ -2,6 +2,7 @@
 namespace ZendTest\Db\Adapter\Driver\Pgsql;
 
 use Zend\Db\Adapter\Driver\Pgsql\Connection;
+use Zend\Db\Adapter\Exception as AdapterException;
 
 class ConnectionTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,11 +30,10 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     {
         if (extension_loaded('pgsql')) {
             try {
-                // Error supressing needed else pg_connect will fatal
-                $resource = @$this->connection->getResource();
-                // pg_connect allows to connect with an empty string
+                $resource = $this->connection->getResource();
+                // connected with empty string
                 $this->assertTrue(is_resource($resource));
-            } catch (\Zend\Db\Adapter\Exception\RuntimeException $exc) {
+            } catch (AdapterException\RuntimeException $exc) {
                 // If it throws an exception it has failed to connect
                 $this->setExpectedException('Zend\Db\Adapter\Exception\RuntimeException');
                 throw $exc;

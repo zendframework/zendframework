@@ -660,6 +660,7 @@ class ApplicationTest extends TestCase
         $this->assertSame($this->application, $result);
     }
 
+
     public function testCustomListener()
     {
         $this->application->bootstrap(array('BootstrapListener'));
@@ -679,5 +680,51 @@ class ApplicationTest extends TestCase
 
         $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_FINISH);
         $this->assertEquals(1, count($listeners));
+    }
+
+    public function eventPropagation()
+    {
+        return array(
+            'route'    => array(array(MvcEvent::EVENT_ROUTE)),
+            'dispatch' => array(array(MvcEvent::EVENT_DISPATCH, MvcEvent::EVENT_RENDER, MvcEvent::EVENT_FINISH)),
+        );
+    }
+
+    /**
+     * @dataProvider eventPropagation
+     */
+    public function testEventPropagationStatusIsClearedBetweenEventsDuringRun($events)
+    {
+        $event = new MvcEvent();
+        $event->setTarget($this->application);
+        $event->setApplication($this->application)
+              ->setRequest($this->application->getRequest())
+              ->setResponse($this->application->getResponse())
+              ->setRouter($this->serviceManager->get('Router'));
+        $event->stopPropagation(true);
+
+        // Intentionally not calling bootstrap; setting mvc event
+        $r = new ReflectionObject($this->application);
+        $eventProp = $r->getProperty('event');
+        $eventProp->setAccessible(true);
+        $eventProp->setValue($this->application, $event);
+
+        // Setup listeners that stop propagation, but do nothing else
+        $marker = array();
+        foreach ($events as $event) {
+            $marker[$event] = true;
+        }
+        $marker = (object) $marker;
+        $listener = function ($e) use ($marker) {
+            $marker->{$e->getName()} = $e->propagationIsStopped();
+            $e->stopPropagation(true);
+        };
+        $this->application->getEventManager()->attach($events, $listener);
+
+        $this->application->run();
+
+        foreach ($events as $event) {
+            $this->assertFalse($marker->{$event}, sprintf('Assertion failed for event "%s"', $event));
+        }
     }
 }

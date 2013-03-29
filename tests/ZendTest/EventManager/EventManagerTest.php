@@ -657,4 +657,37 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         StaticEventManager::resetInstance();
         $this->assertFalse($this->events->getSharedManager());
     }
+
+    public function testTriggerSetsStopPropagationFlagToFalse()
+    {
+        $marker = (object) array('propagationIsStopped' => true);
+        $this->events->attach('foo', function ($e) use ($marker) {
+            $marker->propagationIsStopped = $e->propagationIsStopped();
+        });
+
+        $event = new Event();
+        $event->stopPropagation(true);
+        $this->events->trigger('foo', $event);
+
+        $this->assertFalse($marker->propagationIsStopped);
+        $this->assertFalse($event->propagationIsStopped());
+    }
+
+    public function testTriggerUntilSetsStopPropagationFlagToFalse()
+    {
+        $marker = (object) array('propagationIsStopped' => true);
+        $this->events->attach('foo', function ($e) use ($marker) {
+            $marker->propagationIsStopped = $e->propagationIsStopped();
+        });
+
+        $criteria = function ($r) {
+            return false;
+        };
+        $event = new Event();
+        $event->stopPropagation(true);
+        $this->events->triggerUntil('foo', $event, $criteria);
+
+        $this->assertFalse($marker->propagationIsStopped);
+        $this->assertFalse($event->propagationIsStopped());
+    }
 }

@@ -201,6 +201,9 @@ class EventManager implements EventManagerInterface
             throw new Exception\InvalidCallbackException('Invalid callback provided');
         }
 
+        // Initial value of stop propagation flag should be false
+        $e->stopPropagation(false);
+
         return $this->triggerListeners($event, $e, $callback);
     }
 
@@ -242,6 +245,9 @@ class EventManager implements EventManagerInterface
         if (!is_callable($callback)) {
             throw new Exception\InvalidCallbackException('Invalid callback provided');
         }
+
+        // Initial value of stop propagation flag should be false
+        $e->stopPropagation(false);
 
         return $this->triggerListeners($event, $e, $callback);
     }

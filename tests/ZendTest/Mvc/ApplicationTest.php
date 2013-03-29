@@ -658,7 +658,18 @@ class ApplicationTest extends TestCase
         $this->assertSame($this->application, $result);
     }
 
-    public function testEventPropagationStatusIsClearedBetweenEventsDuringRun()
+    public function eventPropagation()
+    {
+        return array(
+            'route'    => array(array(MvcEvent::EVENT_ROUTE)),
+            'dispatch' => array(array(MvcEvent::EVENT_DISPATCH, MvcEvent::EVENT_RENDER, MvcEvent::EVENT_FINISH)),
+        );
+    }
+
+    /**
+     * @dataProvider eventPropagation
+     */
+    public function testEventPropagationStatusIsClearedBetweenEventsDuringRun($events)
     {
         $event = new MvcEvent();
         $event->setTarget($this->application);
@@ -675,28 +686,21 @@ class ApplicationTest extends TestCase
         $eventProp->setValue($this->application, $event);
 
         // Setup listeners that stop propagation, but do nothing else
-        $marker   = (object) array(
-            MvcEvent::EVENT_ROUTE => true,
-            MvcEvent::EVENT_DISPATCH => true,
-            MvcEvent::EVENT_RENDER => true,
-            MvcEvent::EVENT_FINISH => true,
-        );
+        $marker = array();
+        foreach ($events as $event) {
+            $marker[$event] = true;
+        }
+        $marker = (object) $marker;
         $listener = function ($e) use ($marker) {
             $marker->{$e->getName()} = $e->propagationIsStopped();
             $e->stopPropagation(true);
         };
-        $events = array(
-            MvcEvent::EVENT_ROUTE,
-            MvcEvent::EVENT_DISPATCH,
-            MvcEvent::EVENT_RENDER,
-            MvcEvent::EVENT_FINISH,
-        );
         $this->application->getEventManager()->attach($events, $listener);
 
         $this->application->run();
 
-        foreach ($marker as $key => $value) {
-            $this->assertFalse($value, sprintf('Assertion failed for event "%s"', $key));
+        foreach ($events as $event) {
+            $this->assertFalse($marker->{$event}, sprintf('Assertion failed for event "%s"', $event));
         }
     }
 }

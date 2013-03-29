@@ -11,6 +11,7 @@ namespace Zend\ServiceManager\Proxy;
 
 use ProxyManager\Factory\LazyLoadingValueHolderFactory;
 
+use ProxyManager\Proxy\LazyLoadingInterface;
 use Zend\ServiceManager\DelegateFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\Exception;
@@ -51,10 +52,18 @@ class LazyServiceFactory implements DelegateFactoryInterface
      */
     public function createDelegateWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName, $callback)
     {
+        $initializer = function (& $wrappedInstance, LazyLoadingInterface $proxy) use ($callback) {
+            $proxy->setProxyInitializer(null);
+
+            $wrappedInstance = call_user_func($callback);
+
+            return true;
+        };
+
         if (isset($this->servicesMap[$requestedName])) {
-            return $this->proxyFactory->createProxy($this->servicesMap[$requestedName], $callback);
+            return $this->proxyFactory->createProxy($this->servicesMap[$requestedName], $initializer);
         } elseif (isset($this->servicesMap[$name])) {
-            return $this->proxyFactory->createProxy($this->servicesMap[$name], $callback);
+            return $this->proxyFactory->createProxy($this->servicesMap[$name], $initializer);
         }
 
         throw new Exception\InvalidServiceNameException(

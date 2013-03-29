@@ -62,6 +62,7 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
         $serviceManager->setInvokableClass('foo', __CLASS__);
         $serviceManager->addDelegate('foo', 'foo-delegate');
 
+        /* @var $proxy self|\ProxyManager\Proxy\ValueHolderInterface|\ProxyManager\Proxy\LazyLoadingInterface */
         $proxy = $serviceManager->create('foo');
 
         $this->assertInstanceOf('ProxyManager\\Proxy\\LazyLoadingInterface', $proxy);
@@ -73,6 +74,9 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertFileExists(
             sys_get_temp_dir() . '/' . $namespace . '__CG__ZendTestServiceManagerProxyLazyServiceFactoryFactoryTest.php'
         );
+        $this->assertFalse($proxy->isProxyInitialized());
+        $this->assertEquals($this->invalidConfigProvider(), $proxy->invalidConfigProvider());
+        $this->assertTrue($proxy->isProxyInitialized());
     }
 
     public function testRegistersAutoloader()

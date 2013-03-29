@@ -232,7 +232,9 @@ class ServiceManager implements ServiceLocatorInterface
             $this->unregisterService($cName);
         }
 
-        $shared === null && $shared = $this->shareByDefault;
+        if ($shared === null) {
+            $shared = $this->shareByDefault;
+        }
 
         $this->invokableClasses[$cName] = $invokableClass;
         $this->shared[$cName]           = (bool) $shared;
@@ -270,7 +272,9 @@ class ServiceManager implements ServiceLocatorInterface
             $this->unregisterService($cName);
         }
 
-        $shared === null && $shared = $this->shareByDefault;
+        if ($shared === null) {
+            $shared = $this->shareByDefault;
+        }
 
         $this->factories[$cName] = $factory;
         $this->shared[$cName]    = (bool) $shared;

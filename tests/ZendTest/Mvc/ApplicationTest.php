@@ -657,4 +657,46 @@ class ApplicationTest extends TestCase
         $result = $method->invoke($this->application, $event);
         $this->assertSame($this->application, $result);
     }
+
+    public function testEventPropagationStatusIsClearedBetweenEventsDuringRun()
+    {
+        $event = new MvcEvent();
+        $event->setTarget($this->application);
+        $event->setApplication($this->application)
+              ->setRequest($this->application->getRequest())
+              ->setResponse($this->application->getResponse())
+              ->setRouter($this->serviceManager->get('Router'));
+        $event->stopPropagation(true);
+
+        // Intentionally not calling bootstrap; setting mvc event
+        $r = new ReflectionObject($this->application);
+        $eventProp = $r->getProperty('event');
+        $eventProp->setAccessible(true);
+        $eventProp->setValue($this->application, $event);
+
+        // Setup listeners that stop propagation, but do nothing else
+        $marker   = (object) array(
+            MvcEvent::EVENT_ROUTE => true,
+            MvcEvent::EVENT_DISPATCH => true,
+            MvcEvent::EVENT_RENDER => true,
+            MvcEvent::EVENT_FINISH => true,
+        );
+        $listener = function ($e) use ($marker) {
+            $marker->{$e->getName()} = $e->propagationIsStopped();
+            $e->stopPropagation(true);
+        };
+        $events = array(
+            MvcEvent::EVENT_ROUTE,
+            MvcEvent::EVENT_DISPATCH,
+            MvcEvent::EVENT_RENDER,
+            MvcEvent::EVENT_FINISH,
+        );
+        $this->application->getEventManager()->attach($events, $listener);
+
+        $this->application->run();
+
+        foreach ($marker as $key => $value) {
+            $this->assertFalse($value, sprintf('Assertion failed for event "%s"', $key));
+        }
+    }
 }

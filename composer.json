@@ -11,16 +11,19 @@
     "require": {
         "php": ">=5.3.3"
     },
+    "minimum-stability": "dev",
     "require-dev": {
         "doctrine/common": ">=2.1",
         "ircmaxell/random-lib": "dev-master",
         "ircmaxell/security-lib": "dev-master",
+        "ocramius/proxy-manager": "0.2.*",
         "phpunit/PHPUnit": "3.7.*"
     },
     "suggest": {
         "doctrine/common": "Doctrine\\Common >=2.1 for annotation features",
         "ext-intl": "ext/intl for i18n features",
         "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable",
+        "ocramius/proxy-manager": "ProxyManager to handle lazy initialization of services",
         "pecl-weakref": "Implementation of weak references for Zend\\Stdlib\\CallbackHandler",
         "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",
         "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"

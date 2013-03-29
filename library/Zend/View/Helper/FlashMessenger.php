@@ -9,7 +9,7 @@
 
 namespace Zend\View\Helper;
 
-use Zend\Mvc\Controller\Plugin\FlashMessenger as FlashMessengerPlugin;
+use Zend\Mvc\Controller\Plugin\FlashMessenger as PluginFlashMessenger;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Helper\AbstractHelper;
@@ -27,10 +27,10 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
      * @var array
      */
     protected $classMessages = array(
-        FlashMessengerPlugin::NAMESPACE_INFO => 'info',
-        FlashMessengerPlugin::NAMESPACE_ERROR => 'error',
-        FlashMessengerPlugin::NAMESPACE_SUCCESS => 'success',
-        FlashMessengerPlugin::NAMESPACE_DEFAULT => 'default',
+        PluginFlashMessenger::NAMESPACE_INFO => 'info',
+        PluginFlashMessenger::NAMESPACE_ERROR => 'error',
+        PluginFlashMessenger::NAMESPACE_SUCCESS => 'success',
+        PluginFlashMessenger::NAMESPACE_DEFAULT => 'default',
     );
 
     /**
@@ -52,9 +52,9 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Flash messenger plugin
      *
-     * @var FlashMessengerPlugin
+     * @var PluginFlashMessenger
      */
-    protected $flashMessengerPlugin;
+    protected $pluginFlashMessenger;
 
     /**
      * Service locator
@@ -67,14 +67,14 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
      * Returns the flash messenger plugin controller
      *
      * @param  string|null $namespace
-     * @return FlashMessenger|FlashMessengerPlugin
+     * @return FlashMessenger|PluginFlashMessenger
      */
     public function __invoke($namespace = null)
     {
         if (null === $namespace) {
             return $this;
         }
-        $flashMessenger = $this->getFlashMessengerPlugin();
+        $flashMessenger = $this->getPluginFlashMessenger();
 
         return $flashMessenger->getMessagesFromNamespace($namespace);
     }
@@ -88,7 +88,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
      */
     public function __call($method, $argv)
     {
-        $flashMessenger = $this->getFlashMessengerPlugin();
+        $flashMessenger = $this->getPluginFlashMessenger();
         return call_user_func_array(array($flashMessenger, $method), $argv);
     }
 
@@ -99,15 +99,15 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
      * @param  array  $classes
      * @return string
      */
-    public function render($namespace = FlashMessengerPlugin::NAMESPACE_DEFAULT, array $classes = array())
+    public function render($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $classes = array())
     {
-        $flashMessenger = $this->getFlashMessengerPlugin();
+        $flashMessenger = $this->getPluginFlashMessenger();
         $messages = $flashMessenger->getMessagesFromNamespace($namespace);
 
         // Prepare classes for opening tag
         if (empty($classes)) {
             $classes = isset($this->classMessages[$namespace]) ?
-                $this->classMessages[$namespace] : $this->classMessages[FlashMessengerPlugin::NAMESPACE_DEFAULT];
+                $this->classMessages[$namespace] : $this->classMessages[PluginFlashMessenger::NAMESPACE_DEFAULT];
             $classes = array($classes);
         }
 
@@ -137,32 +137,6 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
         $markup .= $this->getMessageCloseString();
 
         return $markup;
-    }
-
-    /**
-     * Set the flash messenger plugin
-     *
-     * @param  FlashMessengerPlugin $flashMessengerPlugin
-     * @return FlashMessenger
-     */
-    public function setFlashMessengerPlugin(FlashMessengerPlugin $flashMessengerPlugin)
-    {
-        $this->flashMessengerPlugin = $flashMessengerPlugin;
-        return $this;
-    }
-
-    /**
-     * Get the flash messenger plugin
-     *
-     * @return FlashMessengerPlugin
-     */
-    public function getFlashMessengerPlugin()
-    {
-        if (null === $this->flashMessengerPlugin) {
-            $this->setFlashMessengerPlugin(new FlashMessengerPlugin());
-        }
-
-        return $this->flashMessengerPlugin;
     }
 
     /**
@@ -229,6 +203,32 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     public function getMessageSeparatorString()
     {
         return $this->messageSeparatorString;
+    }
+
+    /**
+     * Set the flash messenger plugin
+     *
+     * @param  PluginFlashMessenger $pluginFlashMessenger
+     * @return FlashMessenger
+     */
+    public function setPluginFlashMessenger(PluginFlashMessenger $pluginFlashMessenger)
+    {
+        $this->pluginFlashMessenger = $pluginFlashMessenger;
+        return $this;
+    }
+
+    /**
+     * Get the flash messenger plugin
+     *
+     * @return PluginFlashMessenger
+     */
+    public function getPluginFlashMessenger()
+    {
+        if (null === $this->pluginFlashMessenger) {
+            $this->setPluginFlashMessenger(new PluginFlashMessenger());
+        }
+
+        return $this->pluginFlashMessenger;
     }
 
     /**

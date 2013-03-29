@@ -9,7 +9,7 @@
 
 namespace Zend\Db\Adapter\Platform;
 
-use Zend\Db\Adapter\Driver\Sqlsrv;
+use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Driver\Pdo;
 use Zend\Db\Adapter\Exception;
 
@@ -34,14 +34,9 @@ class SqlServer implements PlatformInterface
     public function setDriver($driver)
     {
         // handle Zend_Db drivers
-        if ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'Sqlsrv') {
-            /** @var $driver \Zend\Db\Adapter\Driver\DriverInterface */
-            $this->resource = $driver->getConnection()->getResource();
-            return $this;
-        }
-
-        // handle
-        if (($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'sqlsrv')) {
+        if (($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'Sqlsrv')
+            || (($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'sqlsrv'))
+        ) {
             $this->resource = $driver;
             return $this;
         }
@@ -112,6 +107,9 @@ class SqlServer implements PlatformInterface
      */
     public function quoteValue($value)
     {
+        if ($this->resource instanceof DriverInterface) {
+            $this->resource = $this->resource->getConnection()->getResource();
+        }
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }
@@ -132,6 +130,9 @@ class SqlServer implements PlatformInterface
      */
     public function quoteTrustedValue($value)
     {
+        if ($this->resource instanceof DriverInterface) {
+            $this->resource = $this->resource->getConnection()->getResource();
+        }
         if ($this->resource instanceof \PDO) {
             return $this->resource->quote($value);
         }

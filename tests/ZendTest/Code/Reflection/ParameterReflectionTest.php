@@ -48,6 +48,17 @@ class ParameterReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($type, $parameter->getType());
     }
 
+    public function testCallableTypeHint()
+    {
+        if (PHP_VERSION_ID < 50400) {
+            $this->markTestSkipped('`callable` is only supported in PHP >=5.4.0');
+        }
+
+        $parameter = new Reflection\ParameterReflection(array('ZendTest\Code\Reflection\TestAsset\CallableTypeHintClass', 'foo'), 'bar');
+
+        $this->assertEquals('callable', $parameter->getType());
+    }
+
     public function paramTypeTestProvider()
     {
         return array(

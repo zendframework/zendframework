@@ -129,6 +129,6 @@ class FormDateTimeSelectTest extends CommonTestCase
 
         // the last $markup char should be the '>' of the minutes  html select 
         // closing tag and not the delimiter
-        $this->assertEquals('>', substr($markup,0-1));
+        $this->assertEquals('>', substr($markup,-1));
     }
 }

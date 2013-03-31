@@ -15,14 +15,18 @@ use Zend\View\Helper\Identity;
 
 class IdentityFactory implements FactoryInterface
 {
+    /**
+     * {@inheritDoc}
+     *
+     * @return \Zend\View\Helper\Identity
+     */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $services = $serviceLocator->getServiceLocator();
         $helper = new Identity();
-        if (!$services->has('Zend\Authentication\AuthenticationService')) {
-            return $helper;
+        if ($services->has('Zend\Authentication\AuthenticationService')) {
+            $helper->setAuthenticationService($services->get('Zend\Authentication\AuthenticationService'));
         }
-        $helper->setAuthenticationService($services->get('Zend\Authentication\AuthenticationService'));
         return $helper;
     }
 }

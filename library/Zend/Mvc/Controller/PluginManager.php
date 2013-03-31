@@ -28,7 +28,7 @@ class PluginManager extends AbstractPluginManager
      * @var array
      */
     protected $factories = array(
-        'identity'                    => 'Zend\Mvc\Controller\Plugin\Service\IdentityFactory',
+        'identity' => 'Zend\Mvc\Controller\Plugin\Service\IdentityFactory',
     );
 
     /**

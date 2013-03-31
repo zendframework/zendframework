@@ -23,6 +23,15 @@ use Zend\Stdlib\DispatchableInterface;
 class PluginManager extends AbstractPluginManager
 {
     /**
+     * Default set of plugins factories
+     *
+     * @var array
+     */
+    protected $factories = array(
+        'identity'                    => 'Zend\Mvc\Controller\Plugin\Service\IdentityFactory',
+    );
+
+    /**
      * Default set of plugins
      *
      * @var array
@@ -65,17 +74,6 @@ class PluginManager extends AbstractPluginManager
     public function __construct(ConfigInterface $configuration = null)
     {
         parent::__construct($configuration);
-
-        $this->setFactory('identity', function ($plugins) {
-            $services = $plugins->getServiceLocator();
-            $plugin   = new Plugin\Identity();
-            if (!$services->has('Zend\Authentication\AuthenticationService')) {
-                return $plugin;
-            }
-            $plugin->setAuthenticationService($services->get('Zend\Authentication\AuthenticationService'));
-
-            return $plugin;
-        });
     }
 
     /**

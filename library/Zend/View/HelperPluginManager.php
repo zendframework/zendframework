@@ -28,8 +28,8 @@ class HelperPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $factories = array(
-        'flashmessenger'      => 'Zend\View\Helper\Service\FlashMessengerFactory',
-        'identity'            => 'Zend\View\Helper\Service\IdentityFactory',
+        'flashmessenger' => 'Zend\View\Helper\Service\FlashMessengerFactory',
+        'identity'       => 'Zend\View\Helper\Service\IdentityFactory',
     );
 
     /**

@@ -210,6 +210,9 @@ foreach ($matches as $match) {
 
 $content = preg_replace('(\n\s+([^=]+)=>)e', "'\n    \\1' . str_repeat(' ', " . $maxWidth . " - strlen('\\1')) . '=>'", $content);
 
+// Make the file end by EOL
+$content = rtrim($content, PHP_EOL) . PHP_EOL;
+
 // Write the contents to disk
 file_put_contents($output, $content);
 

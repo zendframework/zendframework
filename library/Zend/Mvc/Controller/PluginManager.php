@@ -64,19 +64,6 @@ class PluginManager extends AbstractPluginManager
     protected $controller;
 
     /**
-     * Constructor
-     *
-     * After invoking parent constructor, add an initializer to inject the
-     * attached controller, if any, to the currently requested plugin.
-     *
-     * @param null|ConfigInterface $configuration
-     */
-    public function __construct(ConfigInterface $configuration = null)
-    {
-        parent::__construct($configuration);
-    }
-
-    /**
      * Retrieve a registered instance
      *
      * After the plugin is retrieved from the service locator, inject the

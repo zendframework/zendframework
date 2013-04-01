@@ -20,6 +20,7 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\Stdlib\Hydrator;
 use ZendTest\Form\TestAsset\Entity;
+use ZendTest\Form\TestAsset\HydratorAwareModel;
 
 class FormTest extends TestCase
 {
@@ -619,6 +620,20 @@ class FormTest extends TestCase
         $this->form->bind($object);
 
         $this->assertTrue($this->form->isValid());
+    }
+
+    public function testUsesBoundObjectHydratorToPopulateForm()
+    {
+        $this->populateForm();
+        $object = new HydratorAwareModel();
+        $object->setFoo('fooValue');
+        $object->setBar('barValue');
+
+        $this->form->bind($object);
+        $foo = $this->form->get('foo');
+        $this->assertEquals('fooValue', $foo->getValue());
+        $bar = $this->form->get('bar');
+        $this->assertEquals('barValue', $bar->getValue());
     }
 
     public function testBindOnValidateIsTrueByDefault()

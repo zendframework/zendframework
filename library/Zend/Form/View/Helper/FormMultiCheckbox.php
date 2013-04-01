@@ -258,7 +258,6 @@ class FormMultiCheckbox extends FormInput
             $value           = '';
             $label           = '';
             $selected        = false;
-            $disabled        = false;
             $inputAttributes = $attributes;
             $labelAttributes = $globalLabelAttributes;
 
@@ -296,7 +295,7 @@ class FormMultiCheckbox extends FormInput
 
             $inputAttributes['value']    = $value;
             $inputAttributes['checked']  = $selected;
-            $inputAttributes['disabled'] = $disabled;
+            $inputAttributes['disabled'] = isset($inputAttributes['disabled']) ? true : false;
 
             $input = sprintf(
                 '<input %s%s',

@@ -225,14 +225,18 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
             }
 
             // key exists, empty string, input is required, allows empty; valid
+            // if continueIfEmpty is false, otherwise validation continues
             if ($dataExists
                 && '' === $this->data[$name]
                 && $input instanceof InputInterface
+                && $input instanceof EmptyContextInterface
                 && $input->isRequired()
                 && $input->allowEmpty()
             ) {
-                $this->validInputs[$name] = $input;
-                continue;
+                if (!$input->continueIfEmpty()) {
+                    $this->validInputs[$name] = $input;
+                    continue;
+                }
             }
 
             // key exists, is array representing file, no file present, input not

@@ -531,7 +531,11 @@ class BaseInputFilterTest extends TestCase
         $filter->add($foo, '')
                ->add($bar, 'bar');
 
-        $data = array('bar' => 124);
+        $data = array(
+            'bar' => 124,
+            'foo' => '',
+        );
+        
         $filter->setData($data);
 
         $this->assertTrue($filter->isValid());

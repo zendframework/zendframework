@@ -572,49 +572,6 @@ class BaseInputFilterTest extends TestCase
         );
     }
     
-//    /**
-//     * Idea here is that an empty field may or may not be valid based on 
-//     * context.
-//     */
-//    /**
-//     * @dataProvider contextDataProvider()
-//     */
-//    public function testValidationMarksInputValidWhenAllowEmptyFlagIsTrueAndContinueIfEmptyIsTrueAndContextValidatesEmptyField($allowEmpty, $blankIsValid, $valid)
-//    {
-//       // $this->markTestSkipped();
-//        
-//        $filter = new InputFilter();
-//        
-//        $data = array (
-//            'allowEmpty' => $allowEmpty,
-//            'blankIsValid' => $blankIsValid,
-//        );
-//        
-//        $allowEmpty = new Input();
-//        $allowEmpty->setAllowEmpty(true)
-//                   ->setContinueIfEmpty(true);
-//        
-//        $blankIsValid = new Input();
-//        $blankIsValid->getValidatorChain()->attach(new Validator\Callback(function($value, $context) {
-//            return ('y' === $value && empty($context['allowEmpty']));
-//        }));
-//        
-//        $filter->add($allowEmpty, 'allowEmpty')
-//               ->add($blankIsValid, 'blankIsValid'); 
-//        $filter->setData($data);
-////        die(var_dump($filter->get('blankIsValid')));
-//        
-//        //$this->assertSame($valid, $filter->isValid());
-//    }
-//    
-//    public static function contextDataProvider()
-//    {
-//        return array(
-//            array('', 'y', true),
-//            array('', 'n', false),
-//        );
-//    }
-    
     /**
      * Idea here is that an empty field may or may not be valid based on 
      * context.
@@ -647,7 +604,7 @@ class BaseInputFilterTest extends TestCase
         $filter->setData($data);
 //        die(var_dump($filter->get('blankIsValid')));
         
-        //$this->assertSame($valid, $filter->isValid());
+        $this->assertSame($valid, $filter->isValid());
     }
 
     public function testCanRetrieveRawValuesIndividuallyWithoutValidating()

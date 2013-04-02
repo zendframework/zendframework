@@ -358,7 +358,7 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter);
         $this->assertEquals(5, count($inputFilter));
 
-        foreach (array('foo', 'bar', 'baz', 'bat') as $name) {
+        foreach (array('foo', 'bar', 'baz', 'bat', 'zomg') as $name) {
             $input = $inputFilter->get($name);
 
             switch ($name) {

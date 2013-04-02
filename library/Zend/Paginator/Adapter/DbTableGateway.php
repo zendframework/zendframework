@@ -20,9 +20,12 @@ class DbTableGateway extends DbSelect
      * @param TableGateway                $tableGateway
      * @param Where|\Closure|string|array $where
      */
-    public function __construct(TableGateway $tableGateway, $where = null)
+    public function __construct(TableGateway $tableGateway, $where = null, $order = null)
     {
-        $select             = $tableGateway->getSql()->select($where);
+        $select = $tableGateway->getSql()->select();
+        if ($where) $select->where($where);
+        if ($order) $select->order($order);
+        
         $dbAdapter          = $tableGateway->getAdapter();
         $resultSetPrototype = $tableGateway->getResultSetPrototype();
 

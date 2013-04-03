@@ -503,7 +503,6 @@ class ServiceManager implements ServiceLocatorInterface
      *
      * @param  string|array $name
      *
-     *
      * @return bool|object
      */
     public function create($name)

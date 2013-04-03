@@ -745,7 +745,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 
         $delegator
             ->expects($this->once())
-            ->method('createDelegatorWithName')
+            ->method('createDelegateWithName')
             ->with(
                 $this->serviceManager,
                 'fooservice',

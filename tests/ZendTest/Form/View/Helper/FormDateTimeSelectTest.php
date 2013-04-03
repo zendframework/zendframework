@@ -115,12 +115,12 @@ class FormDateTimeSelectTest extends CommonTestCase
     {
         $element  = new DateTimeSelect('foo');
         $element->setValue(array(
-            'year' => '2012',
-            'month' => '09',
-            'day' => '24',
-            'hour' => '03',
+            'year'   => '2012',
+            'month'  => '09',
+            'day'    => '24',
+            'hour'   => '03',
             'minute' => '04',
-            'second' => '59'
+            'second' => '59',
         ));
         
         $element->setShouldShowSeconds(false);
@@ -129,6 +129,6 @@ class FormDateTimeSelectTest extends CommonTestCase
 
         // the last $markup char should be the '>' of the minutes  html select 
         // closing tag and not the delimiter
-        $this->assertEquals('>', substr($markup,-1));
+        $this->assertEquals('>', substr($markup, -1));
     }
 }

@@ -12,17 +12,17 @@ namespace Zend\ServiceManager\Proxy;
 use ProxyManager\Factory\LazyLoadingValueHolderFactory;
 
 use ProxyManager\Proxy\LazyLoadingInterface;
-use Zend\ServiceManager\DelegateFactoryInterface;
+use Zend\ServiceManager\DelegatorFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\Exception;
 
 /**
- * Delegate responsible of instantiating lazy loading value holder proxies of
- * given services
+ * Delegator factory responsible of instantiating lazy loading value holder proxies of
+ * given services at runtime
  *
  * @link https://github.com/Ocramius/ProxyManager/blob/master/docs/lazy-loading-value-holder.md
  */
-class LazyServiceFactory implements DelegateFactoryInterface
+class LazyServiceFactory implements DelegatorFactoryInterface
 {
     /**
      * @var \ProxyManager\Factory\LazyLoadingValueHolderFactory
@@ -50,7 +50,7 @@ class LazyServiceFactory implements DelegateFactoryInterface
      *
      * @return object|\ProxyManager\Proxy\LazyLoadingInterface|\ProxyManager\Proxy\ValueHolderInterface
      */
-    public function createDelegateWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName, $callback)
+    public function createDelegatorWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName, $callback)
     {
         $initializer = function (& $wrappedInstance, LazyLoadingInterface $proxy) use ($callback) {
             $proxy->setProxyInitializer(null);

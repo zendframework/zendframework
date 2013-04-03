@@ -16,7 +16,7 @@
         "doctrine/common": ">=2.1",
         "ircmaxell/random-lib": "dev-master",
         "ircmaxell/security-lib": "dev-master",
-        "ocramius/proxy-manager": "0.2.*",
+        "ocramius/proxy-manager": "0.3.*",
         "phpunit/PHPUnit": "3.7.*"
     },
     "suggest": {

@@ -58,9 +58,9 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
                  ),
             )
         );
-        $serviceManager->setFactory('foo-delegate', 'Zend\ServiceManager\Proxy\LazyServiceFactoryFactory');
+        $serviceManager->setFactory('foo-delegator', 'Zend\ServiceManager\Proxy\LazyServiceFactoryFactory');
         $serviceManager->setInvokableClass('foo', __CLASS__);
-        $serviceManager->addDelegate('foo', 'foo-delegate');
+        $serviceManager->addDelegator('foo', 'foo-delegator');
 
         /* @var $proxy self|\ProxyManager\Proxy\ValueHolderInterface|\ProxyManager\Proxy\LazyLoadingInterface */
         $proxy = $serviceManager->create('foo');
@@ -68,11 +68,11 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ProxyManager\\Proxy\\LazyLoadingInterface', $proxy);
         $this->assertInstanceOf(__CLASS__, $proxy);
         $this->assertSame(
-            $namespace . '\__CG__\ZendTest\ServiceManager\Proxy\LazyServiceFactoryFactoryTest',
+            $namespace . '\__PM__\ZendTest\ServiceManager\Proxy\LazyServiceFactoryFactoryTest',
             get_class($proxy)
         );
         $this->assertFileExists(
-            sys_get_temp_dir() . '/' . $namespace . '__CG__ZendTestServiceManagerProxyLazyServiceFactoryFactoryTest.php'
+            sys_get_temp_dir() . '/' . $namespace . '__PM__ZendTestServiceManagerProxyLazyServiceFactoryFactoryTest.php'
         );
         $this->assertFalse($proxy->isProxyInitialized());
         $this->assertEquals($this->invalidConfigProvider(), $proxy->invalidConfigProvider());
@@ -95,8 +95,8 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
                  ),
             )
         );
-        $serviceManager->setFactory('foo-delegate', 'Zend\ServiceManager\Proxy\LazyServiceFactoryFactory');
-        $serviceManager->create('foo-delegate');
+        $serviceManager->setFactory('foo-delegator', 'Zend\ServiceManager\Proxy\LazyServiceFactoryFactory');
+        $serviceManager->create('foo-delegator');
 
         $currentAutoloaders = spl_autoload_functions();
         $proxyAutoloader    = end($currentAutoloaders);

@@ -42,7 +42,7 @@ class LazyServiceFactoryTest extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
-    public function testCreateDelegateWithRequestedName()
+    public function testCreateDelegatorWithRequestedName()
     {
         $instance = new \stdClass();
         $callback = function () {};
@@ -55,10 +55,10 @@ class LazyServiceFactoryTest extends \PHPUnit_Framework_TestCase
             ->with('bar', $callback)
             ->will($this->returnValue($instance));
 
-        $this->assertSame($instance, $factory->createDelegateWithName($this->locator, 'baz', 'foo', $callback));
+        $this->assertSame($instance, $factory->createDelegatorWithName($this->locator, 'baz', 'foo', $callback));
     }
 
-    public function testCreateDelegateWithCanonicalName()
+    public function testCreateDelegatorWithCanonicalName()
     {
         $instance = new \stdClass();
         $callback = function () {};
@@ -71,15 +71,15 @@ class LazyServiceFactoryTest extends \PHPUnit_Framework_TestCase
             ->with('bar', $callback)
             ->will($this->returnValue($instance));
 
-        $this->assertSame($instance, $factory->createDelegateWithName($this->locator, 'foo', 'baz', $callback));
+        $this->assertSame($instance, $factory->createDelegatorWithName($this->locator, 'foo', 'baz', $callback));
     }
 
-    public function testCannotCreateDelegateWithNoMappedServiceClass()
+    public function testCannotCreateDelegatorWithNoMappedServiceClass()
     {
         $factory = new LazyServiceFactory($this->proxyFactory, array());
 
         $this->setExpectedException('Zend\\ServiceManager\\Exception\\InvalidServiceNameException');
 
-        $factory->createDelegateWithName($this->locator, 'foo', 'baz', function () {});
+        $factory->createDelegatorWithName($this->locator, 'foo', 'baz', function () {});
     }
 }

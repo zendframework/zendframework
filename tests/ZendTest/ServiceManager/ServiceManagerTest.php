@@ -18,7 +18,7 @@ use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
 
 use ZendTest\ServiceManager\TestAsset\FooCounterAbstractFactory;
-use ZendTest\ServiceManager\TestAsset\MockSelfReturningDelegateFactory;
+use ZendTest\ServiceManager\TestAsset\MockSelfReturningDelegatorFactory;
 
 class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -732,18 +732,18 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::create
-     * @covers Zend\ServiceManager\ServiceManager::createDelegateCallback
-     * @covers Zend\ServiceManager\ServiceManager::addDelegate
+     * @covers Zend\ServiceManager\ServiceManager::createDelegatorCallback
+     * @covers Zend\ServiceManager\ServiceManager::addDelegator
      */
-    public function testUsesDelegateWhenAvailable()
+    public function testUsesDelegatorWhenAvailable()
     {
-        $delegate = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
+        $delegator = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
 
-        $this->serviceManager->setService('foo-delegate', $delegate);
-        $this->serviceManager->addDelegator('foo-service', 'foo-delegate');
+        $this->serviceManager->setService('foo-delegator', $delegator);
+        $this->serviceManager->addDelegator('foo-service', 'foo-delegator');
         $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
 
-        $delegate
+        $delegator
             ->expects($this->once())
             ->method('createDelegatorWithName')
             ->with(
@@ -760,31 +760,31 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
                     return $service instanceof \stdClass;
                 })
             )
-            ->will($this->returnValue($delegate));
+            ->will($this->returnValue($delegator));
 
-        $this->assertSame($delegate, $this->serviceManager->create('foo-service'));
+        $this->assertSame($delegator, $this->serviceManager->create('foo-service'));
     }
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::create
-     * @covers Zend\ServiceManager\ServiceManager::createDelegateCallback
-     * @covers Zend\ServiceManager\ServiceManager::addDelegate
+     * @covers Zend\ServiceManager\ServiceManager::createDelegatorCallback
+     * @covers Zend\ServiceManager\ServiceManager::addDelegator
      */
     public function testUsesMultipleDelegates()
     {
-        $fooDelegate = new MockSelfReturningDelegateFactory();
-        $barDelegate = new MockSelfReturningDelegateFactory();
+        $fooDelegator = new MockSelfReturningDelegatorFactory();
+        $barDelegator = new MockSelfReturningDelegatorFactory();
 
-        $this->serviceManager->setService('foo-delegate', $fooDelegate);
-        $this->serviceManager->setService('bar-delegate', $barDelegate);
+        $this->serviceManager->setService('foo-delegate', $fooDelegator);
+        $this->serviceManager->setService('bar-delegate', $barDelegator);
         $this->serviceManager->addDelegator('foo-service', 'foo-delegate');
         $this->serviceManager->addDelegator('foo-service', 'bar-delegate');
         $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
 
-        $this->assertSame($barDelegate, $this->serviceManager->create('foo-service'));
-        $this->assertCount(1, $barDelegate->instances);
-        $this->assertCount(1, $fooDelegate->instances);
-        $this->assertInstanceOf('stdClass', array_shift($fooDelegate->instances));
-        $this->assertSame($fooDelegate, array_shift($barDelegate->instances));
+        $this->assertSame($barDelegator, $this->serviceManager->create('foo-service'));
+        $this->assertCount(1, $barDelegator->instances);
+        $this->assertCount(1, $fooDelegator->instances);
+        $this->assertInstanceOf('stdClass', array_shift($fooDelegator->instances));
+        $this->assertSame($fooDelegator, array_shift($barDelegator->instances));
     }
 }

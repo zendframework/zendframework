@@ -14,9 +14,9 @@ use Zend\ServiceManager\DelegatorFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Mock factory that logs delegated instances and returns itself
+ * Mock factory that logs delegated service instances and returns itself instead of the original service
  */
-class MockSelfReturningDelegateFactory implements DelegatorFactoryInterface
+class MockSelfReturningDelegatorFactory implements DelegatorFactoryInterface
 {
     /**
      * @var mixed[]

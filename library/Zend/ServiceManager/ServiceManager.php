@@ -521,14 +521,14 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if (isset($this->delegators[$cName])) {
-            $serviceManager      = $this;
-            $additionalDelegates = count($this->delegators[$cName]) - 1;
-            $creationCallback    = function () use ($serviceManager, $rName, $cName) {
+            $serviceManager       = $this;
+            $additionalDelegators = count($this->delegators[$cName]) - 1;
+            $creationCallback     = function () use ($serviceManager, $rName, $cName) {
                 return $serviceManager->doCreate($rName, $cName);
             };
 
-            for ($i = 0; $i < $additionalDelegates; $i += 1) {
-                $creationCallback = $this->createDelegateCallback(
+            for ($i = 0; $i < $additionalDelegators; $i += 1) {
+                $creationCallback = $this->createDelegatorCallback(
                     $this->delegators[$cName][$i],
                     $rName,
                     $cName,
@@ -536,34 +536,34 @@ class ServiceManager implements ServiceLocatorInterface
                 );
             }
 
-            /* @var $delegateFactory DelegatorFactoryInterface */
-            $delegateFactory = $this->get($this->delegators[$cName][$i]);
+            /* @var $delegatorFactory DelegatorFactoryInterface */
+            $delegatorFactory = $this->get($this->delegators[$cName][$i]);
 
-            return $delegateFactory->createDelegatorWithName($this, $cName, $rName, $creationCallback);
+            return $delegatorFactory->createDelegatorWithName($this, $cName, $rName, $creationCallback);
         }
 
         return $this->doCreate($rName, $cName);
     }
 
     /**
-     * Creates a callback that uses a delegate to create a service
+     * Creates a callback that uses a delegator to create a service
      *
-     * @param string   $delegateFactoryName name of the delegate factory
-     * @param string   $rName               requested service name
-     * @param string   $cName               canonical service name
-     * @param callable $creationCallback    callback that is responsible for instantiating the service
+     * @param string   $delegatorFactoryName name of the delegator factory service
+     * @param string   $rName                requested service name
+     * @param string   $cName                canonical service name
+     * @param callable $creationCallback     callback that is responsible for instantiating the service
      *
      * @return callable
      */
-    private function createDelegateCallback($delegateFactoryName, $rName, $cName, $creationCallback)
+    private function createDelegatorCallback($delegatorFactoryName, $rName, $cName, $creationCallback)
     {
         $serviceManager  = $this;
 
-        return function () use ($serviceManager, $delegateFactoryName, $rName, $cName, $creationCallback) {
-            /* @var $delegateFactory DelegatorFactoryInterface */
-            $delegateFactory = $serviceManager->get($delegateFactoryName);
+        return function () use ($serviceManager, $delegatorFactoryName, $rName, $cName, $creationCallback) {
+            /* @var $delegatorFactory DelegatorFactoryInterface */
+            $delegatorFactory = $serviceManager->get($delegatorFactoryName);
 
-            return $delegateFactory->createDelegatorWithName($serviceManager, $cName, $rName, $creationCallback);
+            return $delegatorFactory->createDelegatorWithName($serviceManager, $cName, $rName, $creationCallback);
         };
     }
 

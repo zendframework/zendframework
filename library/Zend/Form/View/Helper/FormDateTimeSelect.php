@@ -50,7 +50,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
                 __METHOD__
             ));
         }
-        
+
         $shouldRenderDelimiters = $element->shouldRenderDelimiters();
         $selectHelper = $this->getSelectElementHelper();
         $pattern      = $this->parsePattern($shouldRenderDelimiters);

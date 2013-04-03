@@ -51,7 +51,7 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * @var array[]
      */
-    protected $delegates = array();
+    protected $delegators = array();
 
     /**
      * @var array
@@ -317,20 +317,20 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
-     * Sets the given service name as to be handled by a delegate factory
+     * Sets the given service name as to be handled by a delegator factory
      *
-     * @param  string $serviceName
-     * @param  string $delegateFactoryName
+     * @param  string $serviceName          name of the service being the delegate
+     * @param  string $delegatorFactoryName name of the service being the delegator factory
      *
      * @return ServiceManager
      */
-    public function addDelegate($serviceName, $delegateFactoryName)
+    public function addDelegator($serviceName, $delegatorFactoryName)
     {
-        if (!isset($this->delegates[$this->canonicalizeName($serviceName)])) {
-            $this->delegates[$this->canonicalizeName($serviceName)] = array();
+        if (!isset($this->delegators[$this->canonicalizeName($serviceName)])) {
+            $this->delegators[$this->canonicalizeName($serviceName)] = array();
         }
 
-        $this->delegates[$this->canonicalizeName($serviceName)][] = $delegateFactoryName;
+        $this->delegators[$this->canonicalizeName($serviceName)][] = $delegatorFactoryName;
 
         return $this;
     }
@@ -520,26 +520,26 @@ class ServiceManager implements ServiceLocatorInterface
             }
         }
 
-        if (isset($this->delegates[$cName])) {
+        if (isset($this->delegators[$cName])) {
             $serviceManager      = $this;
-            $additionalDelegates = count($this->delegates[$cName]) - 1;
+            $additionalDelegates = count($this->delegators[$cName]) - 1;
             $creationCallback    = function () use ($serviceManager, $rName, $cName) {
                 return $serviceManager->doCreate($rName, $cName);
             };
 
             for ($i = 0; $i < $additionalDelegates; $i += 1) {
                 $creationCallback = $this->createDelegateCallback(
-                    $this->delegates[$cName][$i],
+                    $this->delegators[$cName][$i],
                     $rName,
                     $cName,
                     $creationCallback
                 );
             }
 
-            /* @var $delegateFactory DelegateFactoryInterface */
-            $delegateFactory = $this->get($this->delegates[$cName][$i]);
+            /* @var $delegateFactory DelegatorFactoryInterface */
+            $delegateFactory = $this->get($this->delegators[$cName][$i]);
 
-            return $delegateFactory->createDelegateWithName($this, $cName, $rName, $creationCallback);
+            return $delegateFactory->createDelegatorWithName($this, $cName, $rName, $creationCallback);
         }
 
         return $this->doCreate($rName, $cName);
@@ -560,10 +560,10 @@ class ServiceManager implements ServiceLocatorInterface
         $serviceManager  = $this;
 
         return function () use ($serviceManager, $delegateFactoryName, $rName, $cName, $creationCallback) {
-            /* @var $delegateFactory DelegateFactoryInterface */
+            /* @var $delegateFactory DelegatorFactoryInterface */
             $delegateFactory = $serviceManager->get($delegateFactoryName);
 
-            return $delegateFactory->createDelegateWithName($serviceManager, $cName, $rName, $creationCallback);
+            return $delegateFactory->createDelegatorWithName($serviceManager, $cName, $rName, $creationCallback);
         };
     }
 

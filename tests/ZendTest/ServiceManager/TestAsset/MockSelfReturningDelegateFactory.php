@@ -10,13 +10,13 @@
 
 namespace ZendTest\ServiceManager\TestAsset;
 
-use Zend\ServiceManager\DelegateFactoryInterface;
+use Zend\ServiceManager\DelegatorFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Mock factory that logs delegated instances and returns itself
  */
-class MockSelfReturningDelegateFactory implements DelegateFactoryInterface
+class MockSelfReturningDelegateFactory implements DelegatorFactoryInterface
 {
     /**
      * @var mixed[]
@@ -26,7 +26,7 @@ class MockSelfReturningDelegateFactory implements DelegateFactoryInterface
     /**
      * {@inheritDoc}
      */
-    public function createDelegateWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName, $callback)
+    public function createDelegatorWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName, $callback)
     {
         $this->instances[] = call_user_func($callback);
 

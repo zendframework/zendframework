@@ -737,15 +737,15 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsesDelegateWhenAvailable()
     {
-        $delegate = $this->getMock('Zend\\ServiceManager\\DelegateFactoryInterface');
+        $delegate = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
 
         $this->serviceManager->setService('foo-delegate', $delegate);
-        $this->serviceManager->addDelegate('foo-service', 'foo-delegate');
+        $this->serviceManager->addDelegator('foo-service', 'foo-delegate');
         $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
 
         $delegate
             ->expects($this->once())
-            ->method('createDelegateWithName')
+            ->method('createDelegatorWithName')
             ->with(
                 $this->serviceManager,
                 'fooservice',
@@ -777,8 +777,8 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->serviceManager->setService('foo-delegate', $fooDelegate);
         $this->serviceManager->setService('bar-delegate', $barDelegate);
-        $this->serviceManager->addDelegate('foo-service', 'foo-delegate');
-        $this->serviceManager->addDelegate('foo-service', 'bar-delegate');
+        $this->serviceManager->addDelegator('foo-service', 'foo-delegate');
+        $this->serviceManager->addDelegator('foo-service', 'bar-delegate');
         $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
 
         $this->assertSame($barDelegate, $this->serviceManager->create('foo-service'));

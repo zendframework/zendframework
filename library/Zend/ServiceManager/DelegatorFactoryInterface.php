@@ -12,7 +12,7 @@ namespace Zend\ServiceManager;
 /**
  * Interface for factories that can create delegates for services
  */
-interface DelegateFactoryInterface
+interface DelegatorFactoryInterface
 {
     /**
      * A factory that creates delegates of a given service
@@ -24,5 +24,5 @@ interface DelegateFactoryInterface
      *
      * @return mixed
      */
-    public function createDelegateWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName, $callback);
+    public function createDelegatorWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName, $callback);
 }

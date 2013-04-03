@@ -110,4 +110,25 @@ class FormDateTimeSelectTest extends CommonTestCase
     {
         $this->assertSame($this->helper, $this->helper->__invoke());
     }
+    
+    public function testNoMinutesDelimiterIfSecondsNotShown()
+    {
+        $element  = new DateTimeSelect('foo');
+        $element->setValue(array(
+            'year' => '2012',
+            'month' => '09',
+            'day' => '24',
+            'hour' => '03',
+            'minute' => '04',
+            'second' => '59'
+        ));
+        
+        $element->setShouldShowSeconds(false);
+        $element->shouldRenderDelimiters(true);
+        $markup  = $this->helper->__invoke($element);
+
+        // the last $markup char should be the '>' of the minutes  html select 
+        // closing tag and not the delimiter
+        $this->assertEquals('>', substr($markup,-1));
+    }
 }

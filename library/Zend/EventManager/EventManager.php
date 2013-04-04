@@ -461,9 +461,15 @@ class EventManager implements EventManagerInterface
         }
 
         foreach ($listeners as $listener) {
+            $listenerCallback = $listener->getCallback();
+            if (!$listenerCallback) {
+                $this->detach($listener);
+                continue;
+            }
+
             // Trigger the listener's callback, and push its result onto the
             // response collection
-            $responses->push(call_user_func($listener->getCallback(), $e));
+            $responses->push(call_user_func($listenerCallback, $e));
 
             // If the event was asked to stop propagating, do so
             if ($e->propagationIsStopped()) {

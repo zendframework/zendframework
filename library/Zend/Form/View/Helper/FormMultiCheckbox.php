@@ -256,11 +256,11 @@ class FormMultiCheckbox extends FormInput
             }
 
             $value           = '';
-            $label           = '';
-            $selected        = false;
-            $disabled        = false;
+            $label           = '';  
             $inputAttributes = $attributes;
             $labelAttributes = $globalLabelAttributes;
+            $selected        = isset($inputAttributes['selected']) && $inputAttributes['selected'] != false ? true : false;
+            $disabled        = isset($inputAttributes['disabled']) && $inputAttributes['disabled'] != false ? true : false;
 
             if (is_scalar($optionSpec)) {
                 $optionSpec = array(

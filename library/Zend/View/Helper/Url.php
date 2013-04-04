@@ -14,6 +14,7 @@ use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View\Exception;
+use Zend\Stdlib\Exception as StdlibException;
 
 /**
  * Helper for making easy links and getting urls that depend on the routes and router.
@@ -66,10 +67,11 @@ class Url extends AbstractHelper
      * @param  array                $params             Parameters for the link
      * @param  array|\Traversable   $options            Options for the route
      * @param  bool                 $reuseMatchedParams Whether to reuse matched parameters
-     * @return string Url                  For the link href attribute
-     * @throws Exception\RuntimeException  If no RouteStackInterface was provided
-     * @throws Exception\RuntimeException  If no RouteMatch was provided
-     * @throws Exception\RuntimeException  If RouteMatch didn't contain a matched route name
+     * @return string Url                         For the link href attribute
+     * @throws Exception\RuntimeException         If no RouteStackInterface was provided
+     * @throws Exception\RuntimeException         If no RouteMatch was provided
+     * @throws Exception\RuntimeException         If RouteMatch didn't contain a matched route name
+     * @throws Exception\InvalidArgumentException If the params object was not an array or \Traversable object
      */
     public function __invoke($name = null, $params = array(), $options = array(), $reuseMatchedParams = false)
     {
@@ -94,7 +96,14 @@ class Url extends AbstractHelper
             }
         }
 
-        $params = ArrayUtils::iteratorToArray($params, false);
+        try {
+
+            $params = ArrayUtils::iteratorToArray($params, false);
+
+        } catch(StdlibException\InvalidArgumentException $e) {
+
+            throw new Exception\InvalidArgumentException('Params is expected to be an array of a Traversable object');
+        }
 
         if ($reuseMatchedParams && $this->routeMatch !== null) {
             $routeMatchParams = $this->routeMatch->getParams();

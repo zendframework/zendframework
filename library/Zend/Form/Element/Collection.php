@@ -245,7 +245,9 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
             );
         }
 
-        $this->replaceTemplateObjects();
+        if (! $this->createNewObjects()) {
+            $this->replaceTemplateObjects();
+        }
     }
 
     /**

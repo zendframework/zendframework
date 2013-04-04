@@ -12,6 +12,7 @@ namespace Zend\View\Helper;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface;
+use Zend\Stdlib\ArrayUtils;
 use Zend\View\Exception;
 
 /**
@@ -61,16 +62,16 @@ class Url extends AbstractHelper
      * Generates an url given the name of a route.
      *
      * @see    Zend\Mvc\Router\RouteInterface::assemble()
-     * @param  string  $name               Name of the route
-     * @param  array   $params             Parameters for the link
-     * @param  array   $options            Options for the route
-     * @param  bool $reuseMatchedParams Whether to reuse matched parameters
+     * @param  string               $name               Name of the route
+     * @param  array                $params             Parameters for the link
+     * @param  array|\Traversable   $options            Options for the route
+     * @param  bool                 $reuseMatchedParams Whether to reuse matched parameters
      * @return string Url                  For the link href attribute
      * @throws Exception\RuntimeException  If no RouteStackInterface was provided
      * @throws Exception\RuntimeException  If no RouteMatch was provided
      * @throws Exception\RuntimeException  If RouteMatch didn't contain a matched route name
      */
-    public function __invoke($name = null, array $params = array(), $options = array(), $reuseMatchedParams = false)
+    public function __invoke($name = null, $params = array(), $options = array(), $reuseMatchedParams = false)
     {
         if (null === $this->router) {
             throw new Exception\RuntimeException('No RouteStackInterface instance provided');
@@ -92,6 +93,8 @@ class Url extends AbstractHelper
                 throw new Exception\RuntimeException('RouteMatch does not contain a matched route name');
             }
         }
+
+        $params = ArrayUtils::iteratorToArray($params, false);
 
         if ($reuseMatchedParams && $this->routeMatch !== null) {
             $routeMatchParams = $this->routeMatch->getParams();

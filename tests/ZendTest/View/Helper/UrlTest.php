@@ -73,6 +73,14 @@ class UrlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/ctrl/act', $url);
     }
 
+    public function testModel()
+    {
+        $it = new \ArrayIterator(array('controller' => 'ctrl', 'action' => 'act'));
+
+        $url = $this->url->__invoke('default', $it);
+        $this->assertEquals('/ctrl/act', $url);
+    }
+
     public function testPluginWithoutRouteMatchesInEventRaisesExceptionWhenNoRouteProvided()
     {
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'RouteMatch');

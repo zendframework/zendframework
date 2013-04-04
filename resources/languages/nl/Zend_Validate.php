@@ -187,7 +187,7 @@ return array(
 
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Te veel woorden, er is een maximum van '%max%', maar er waren '%count%' geteld",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Te weinig worden, er is een minimum van '%min%' maar er waren '%count%' getelc",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Te weinig worden, er is een minimum van '%min%' maar er waren '%count%' getelc",
     "File '%value%' is not readable or does not exist" => "Het bestand '%value%' kon niet worden gevonden",
 
     // Zend_Validator_GreaterThan

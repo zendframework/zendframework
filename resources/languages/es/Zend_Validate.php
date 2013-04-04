@@ -172,7 +172,7 @@ return array(
 
     // Zend_Validate_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Demasiadas palabras, sólo se permiten '%max%' pero se han contado '%count%'",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Demasiado pocas palabras, se esperaban al menos '%min%' pero se han contado '%count%'",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Demasiado pocas palabras, se esperaban al menos '%min%' pero se han contado '%count%'",
     "File '%value%' could not be found" => "No se ha podido encontrar el archivo '%value%'",
 
     // Zend_Validate_Float

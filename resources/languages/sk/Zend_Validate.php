@@ -172,7 +172,7 @@ return array(
 
     // Zend_Validate_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Príliš veľa slov. Maximálne je ich dovolených '%max%', ale bolo zadaných '%count%'",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Príliš málo slov. Musí ich byť aspoň '%min%', ale bolo zadaných len '%count%'",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Príliš málo slov. Musí ich byť aspoň '%min%', ale bolo zadaných len '%count%'",
     "File '%value%' is not readable or does not exist" => "Súbor '%value%' buď nie je čitateľný, alebo neexistuje",
 
     // Zend_Validate_Float

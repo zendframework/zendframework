@@ -187,7 +187,7 @@ return array(
 
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Твърде много думи, очакват се максимум '%max%', но '%count%' бяха открити",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Твърде малко думи, очакват се минимум '%min%' но само '%count%' бяха открити",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Твърде малко думи, очакват се минимум '%min%' но само '%count%' бяха открити",
     "File '%value%' is not readable or does not exist" => "Файлът '%value%' не може да бъде прочетен или не съществува",
 
     // Zend_Validator_GreaterThan

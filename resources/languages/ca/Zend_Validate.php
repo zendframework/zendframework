@@ -199,7 +199,7 @@ return array(
 
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Excés de paraules, màxim '%max%' es permeten però s'han comptat '%count%'",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Falten paraules, mínim '%min%' es permeten però s'han comptat '%count%'",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Falten paraules, mínim '%min%' es permeten però s'han comptat '%count%'",
     "File '%value%' is not readable or does not exist" => "L'arxiu '%value%' no és llegible o no existeix",
 
     // Zend_Validator_GreaterThan

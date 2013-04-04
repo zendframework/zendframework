@@ -172,7 +172,7 @@ return array(
 
     // Zend_Validate_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Preveč besed, največ '%max%' je dovoljenih vendar preštetih je bilo '%count%'",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Premalo besed, vsaj '%min%' je predvidenih vendar preštetih je bilo '%count%'",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Premalo besed, vsaj '%min%' je predvidenih vendar preštetih je bilo '%count%'",
     "File '%value%' is not readable or does not exist" => "Datoteke '%value%' ni mogoče brati ali pa ne obstaja",
 
     // Zend_Validate_Float

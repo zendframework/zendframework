@@ -172,7 +172,7 @@ return array(
 
     // Zend_Validate_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Virheellinen määrä sanoja, maksimäärä on '%max%', annettu '%count%'",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Virheellinen määrä sanoja, minimimäärä on '%min%', annettu '%count%'",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Virheellinen määrä sanoja, minimimäärä on '%min%', annettu '%count%'",
     "File '%value%' is not readable or does not exist" => "Tiedostoa '%value%' ei voida lukea tai sitä ei ole",
 
     // Zend_Validate_Float

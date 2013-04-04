@@ -172,7 +172,7 @@ return array(
 
     // Zend_Validate_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Слишком много слов, разрешено максимум '%max%' слов, но сейчас - '%count%'",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Слишком мало слов, разрешено минимум '%min%' слов, но сейчас - '%count%'",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Слишком мало слов, разрешено минимум '%min%' слов, но сейчас - '%count%'",
     "File '%value%' could not be found" => "Файл '%value%' не найден",
 
     // Zend_Validate_Float

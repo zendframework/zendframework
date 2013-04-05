@@ -96,13 +96,18 @@ class Url extends AbstractHelper
             }
         }
 
-        try {
+        if (! is_array($params)) {
 
-            $params = ArrayUtils::iteratorToArray($params, false);
+            if (! $params instanceof \Traversable) {
 
-        } catch(StdlibException\InvalidArgumentException $e) {
+                throw new Exception\InvalidArgumentException(
+                    'Params is expected to be an array of a Traversable object'
+                );
 
-            throw new Exception\InvalidArgumentException('Params is expected to be an array of a Traversable object');
+            } else {
+
+                $params = iterator_to_array($params);
+            }
         }
 
         if ($reuseMatchedParams && $this->routeMatch !== null) {

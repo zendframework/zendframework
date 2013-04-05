@@ -213,6 +213,11 @@ class Translator
             }
         }
 
+        // event manager enabled
+        if (isset($options['event_manager_enabled']) && $options['event_manager_enabled']) {
+            $translator->enableEventManager();
+        }
+
         return $translator;
     }
 

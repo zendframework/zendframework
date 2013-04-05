@@ -247,6 +247,17 @@ class TranslatorTest extends TestCase
         $this->assertFalse($this->translator->isEventManagerEnabled());
     }
 
+    public function testEnableEventMangerViaFactory()
+    {
+        $translator = Translator::factory(array(
+            'event_manager_enabled' => true
+        ));
+        $this->assertTrue($translator->isEventManagerEnabled());
+
+        $translator = Translator::factory(array());
+        $this->assertFalse($translator->isEventManagerEnabled());
+    }
+
     public function testMissingTranslationEvent()
     {
         $actualEvent = null;

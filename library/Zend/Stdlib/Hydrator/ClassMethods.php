@@ -177,7 +177,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
             if ($this->underscoreSeparatedKeys) {
                 $method = preg_replace_callback('/(_[a-z])/', $transform, $method);
             }
-            if (method_exists($object, $method)) {
+            if (is_callable(array($object, $method))) {
                 $value = $this->hydrateValue($property, $value);
 
                 $object->$method($value);

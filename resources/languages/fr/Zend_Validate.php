@@ -268,7 +268,7 @@ return array(
 
     // Zend_Validator_StringLength
     "Invalid type given. String expected" => "Type invalide. Chaîne attendue",
-    "The input is less than %min% characters long" => "L'entrée conteint moins de %min% caractères",
+    "The input is less than %min% characters long" => "L'entrée contient moins de %min% caractères",
     "The input is more than %max% characters long" => "L'entrée contient plus de %max% caractères",
 
     // Zend_Validator_Uri

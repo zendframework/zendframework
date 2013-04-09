@@ -9,6 +9,7 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
+use Traversable;
 use Zend\EventManager\EventInterface;
 use Zend\Mvc\Exception;
 use Zend\Mvc\InjectApplicationEventInterface;
@@ -22,7 +23,7 @@ class Url extends AbstractPlugin
      * Generates a URL based on a route
      *
      * @param  string             $route              RouteInterface name
-     * @param  array|\Traversable $params             Parameters to use in url generation, if any
+     * @param  array|Traversable $params             Parameters to use in url generation, if any
      * @param  array|bool         $options            RouteInterface-specific options to use in url generation, if any.
      *                                                If boolean, and no fourth argument, used as $reuseMatchedParams.
      * @param  bool               $reuseMatchedParams Whether to reuse matched parameters
@@ -39,16 +40,12 @@ class Url extends AbstractPlugin
             throw new Exception\DomainException('Url plugin requires a controller that implements InjectApplicationEventInterface');
         }
 
-        if (! is_array($params)) {
-
-            if (! $params instanceof \Traversable) {
-
+        if (!is_array($params)) {
+            if (!$params instanceof Traversable) {
                 throw new Exception\InvalidArgumentException(
                     'Params is expected to be an array of a Traversable object'
                 );
-
             } else {
-
                 $params = iterator_to_array($params);
             }
         }

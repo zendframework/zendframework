@@ -9,6 +9,7 @@
 
 namespace Zend\View\Helper;
 
+use Traversable;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface;
@@ -65,7 +66,7 @@ class Url extends AbstractHelper
      * @see    Zend\Mvc\Router\RouteInterface::assemble()
      * @param  string               $name               Name of the route
      * @param  array                $params             Parameters for the link
-     * @param  array|\Traversable   $options            Options for the route
+     * @param  array|Traversable   $options            Options for the route
      * @param  bool                 $reuseMatchedParams Whether to reuse matched parameters
      * @return string Url                         For the link href attribute
      * @throws Exception\RuntimeException         If no RouteStackInterface was provided
@@ -96,16 +97,12 @@ class Url extends AbstractHelper
             }
         }
 
-        if (! is_array($params)) {
-
-            if (! $params instanceof \Traversable) {
-
+        if (!is_array($params)) {
+            if (!$params instanceof Traversable) {
                 throw new Exception\InvalidArgumentException(
                     'Params is expected to be an array of a Traversable object'
                 );
-
             } else {
-
                 $params = iterator_to_array($params);
             }
         }

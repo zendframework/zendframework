@@ -81,7 +81,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
     }
 
     /**
-     * Set a configuration properties
+     * Set a configuration property
      *
      * @see ParameterObject::__set()
      * @param string $key

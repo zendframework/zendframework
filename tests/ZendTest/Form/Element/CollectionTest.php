@@ -322,6 +322,49 @@ class CollectionTest extends TestCase
         $this->assertSame($categories[1], $cat2);
     }
 
+    public function testCreatesNewObjectsIfSpecified()
+    {
+        $this->productFieldset->setUseAsBaseFieldset(true);
+        $categories = $this->productFieldset->get('categories');
+        $categories->setOptions(array(
+            'create_new_objects' => true,
+        ));
+
+        $form = new \Zend\Form\Form();
+        $form->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+        $form->add($this->productFieldset);
+
+        $product = new Product();
+        $product->setName("foo");
+        $product->setPrice(42);
+        $cat1 = new \ZendTest\Form\TestAsset\Entity\Category();
+        $cat1->setName("bar");
+        $cat2 = new \ZendTest\Form\TestAsset\Entity\Category();
+        $cat2->setName("bar2");
+
+        $product->setCategories(array($cat1,$cat2));
+
+        $form->bind($product);
+
+        $form->setData(
+            array("product"=>
+                array(
+                    "name" => "franz",
+                    "price" => 13,
+                    "categories" => array(
+                        array("name" => "sepp"),
+                        array("name" => "herbert")
+                    )
+                )
+            )
+        );
+        $form->isValid();
+
+        $categories = $product->getCategories();
+        $this->assertNotSame($categories[0], $cat1);
+        $this->assertNotSame($categories[1], $cat2);
+    }
+
     public function testExtractDefaultIsEmptyArray()
     {
         $collection = $this->form->get('fieldsets');

@@ -25,6 +25,11 @@ class FormSelect extends AbstractHelper
      */
     protected $validTagAttributes;
 
+    /**
+     * Attributes valid for select
+     *
+     * @var array
+     */
     protected $validSelectAttributes = array(
         'name'      => true,
         'autofocus' => true,
@@ -35,6 +40,11 @@ class FormSelect extends AbstractHelper
         'size'      => true
     );
 
+    /**
+     * Attributes valid for options
+     *
+     * @var array
+     */
     protected $validOptionAttributes = array(
         'disabled' => true,
         'selected' => true,
@@ -42,10 +52,32 @@ class FormSelect extends AbstractHelper
         'value'    => true,
     );
 
+    /**
+     * Attributes valid for option groups
+     *
+     * @var array
+     */
     protected $validOptgroupAttributes = array(
         'disabled' => true,
         'label'    => true,
     );
+
+    /**
+     * Invoke helper as functor
+     *
+     * Proxies to {@link render()}.
+     *
+     * @param  ElementInterface|null $element
+     * @return string|FormSelect
+     */
+    public function __invoke(ElementInterface $element = null)
+    {
+        if (!$element) {
+            return $this;
+        }
+
+        return $this->render($element);
+    }
 
     /**
      * Render a form <select> element from the provided $element
@@ -162,7 +194,7 @@ class FormSelect extends AbstractHelper
             $attributes = compact('value', 'selected', 'disabled');
 
             if (isset($optionSpec['attributes']) && is_array($optionSpec['attributes'])) {
-            	$attributes = array_merge($attributes, $optionSpec['attributes']);
+                $attributes = array_merge($attributes, $optionSpec['attributes']);
             }
 
             $this->validTagAttributes = $this->validOptionAttributes;
@@ -208,23 +240,6 @@ class FormSelect extends AbstractHelper
             $attributes,
             $this->renderOptions($options, $selectedOptions)
         );
-    }
-
-    /**
-     * Invoke helper as functor
-     *
-     * Proxies to {@link render()}.
-     *
-     * @param  ElementInterface|null $element
-     * @return string|FormSelect
-     */
-    public function __invoke(ElementInterface $element = null)
-    {
-        if (!$element) {
-            return $this;
-        }
-
-        return $this->render($element);
     }
 
     /**

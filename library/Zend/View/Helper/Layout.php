@@ -23,30 +23,6 @@ class Layout extends AbstractHelper
     protected $viewModelHelper;
 
     /**
-     * Get layout template
-     *
-     * @return string
-     */
-    public function getLayout()
-    {
-        $model = $this->getRoot();
-        return $model->getTemplate();
-    }
-
-    /**
-     * Set layout template
-     *
-     * @param  string $template
-     * @return Layout
-     */
-    public function setTemplate($template)
-    {
-        $model = $this->getRoot();
-        $model->setTemplate((string) $template);
-        return $this;
-    }
-
-    /**
      * Set layout template or retrieve "layout" view model
      *
      * If no arguments are given, grabs the "root" or "layout" view model.
@@ -60,7 +36,18 @@ class Layout extends AbstractHelper
         if (null === $template) {
             return $this->getRoot();
         }
+
         return $this->setTemplate($template);
+    }
+
+    /**
+     * Get layout template
+     *
+     * @return string
+     */
+    public function getLayout()
+    {
+        return $this->getRoot()->getTemplate();
     }
 
     /**
@@ -72,13 +59,27 @@ class Layout extends AbstractHelper
     protected function getRoot()
     {
         $helper = $this->getViewModelHelper();
+
         if (!$helper->hasRoot()) {
             throw new Exception\RuntimeException(sprintf(
                 '%s: no view model currently registered as root in renderer',
                 __METHOD__
             ));
         }
+
         return $helper->getRoot();
+    }
+
+    /**
+     * Set layout template
+     *
+     * @param  string $template
+     * @return Layout
+     */
+    public function setTemplate($template)
+    {
+        $this->getRoot()->setTemplate((string) $template);
+        return $this;
     }
 
     /**
@@ -88,11 +89,10 @@ class Layout extends AbstractHelper
      */
     protected function getViewModelHelper()
     {
-        if ($this->viewModelHelper) {
-            return $this->viewModelHelper;
+        if(null === $this->viewModelHelper) {
+            $this->viewModelHelper = $this->getView()->plugin('view_model');
         }
-        $view = $this->getView();
-        $this->viewModelHelper = $view->plugin('view_model');
+
         return $this->viewModelHelper;
     }
 }

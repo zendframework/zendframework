@@ -22,6 +22,7 @@ class Placeholder extends AbstractHelper
 {
     /**
      * Placeholder items
+     *
      * @var array
      */
     protected $items = array();
@@ -36,8 +37,8 @@ class Placeholder extends AbstractHelper
      * Placeholder helper
      *
      * @param  string $name
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
      * @throws InvalidArgumentException
+     * @return Placeholder\Container\AbstractContainer
      */
     public function __invoke($name = null)
     {

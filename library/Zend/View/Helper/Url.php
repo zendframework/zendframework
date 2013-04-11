@@ -34,41 +34,17 @@ class Url extends AbstractHelper
     protected $routeMatch;
 
     /**
-     * Set the router to use for assembling.
-     *
-     * @param RouteStackInterface $router
-     * @return Url
-     */
-    public function setRouter(RouteStackInterface $router)
-    {
-        $this->router = $router;
-        return $this;
-    }
-
-    /**
-     * Set route match returned by the router.
-     *
-     * @param  RouteMatch $routeMatch
-     * @return self
-     */
-    public function setRouteMatch(RouteMatch $routeMatch)
-    {
-        $this->routeMatch = $routeMatch;
-        return $this;
-    }
-
-    /**
      * Generates an url given the name of a route.
      *
      * @see    Zend\Mvc\Router\RouteInterface::assemble()
-     * @param  string  $name               Name of the route
-     * @param  array   $params             Parameters for the link
-     * @param  array   $options            Options for the route
-     * @param  bool $reuseMatchedParams Whether to reuse matched parameters
-     * @return string Url                  For the link href attribute
-     * @throws Exception\RuntimeException  If no RouteStackInterface was provided
-     * @throws Exception\RuntimeException  If no RouteMatch was provided
-     * @throws Exception\RuntimeException  If RouteMatch didn't contain a matched route name
+     * @param  string $name               Name of the route
+     * @param  array  $params             Parameters for the link
+     * @param  array  $options            Options for the route
+     * @param  bool   $reuseMatchedParams Whether to reuse matched parameters
+     * @throws Exception\RuntimeException If no RouteStackInterface was provided
+     * @throws Exception\RuntimeException If no RouteMatch was provided
+     * @throws Exception\RuntimeException If RouteMatch didn't contain a matched route name
+     * @return string Url                 For the link href attribute
      */
     public function __invoke($name = null, array $params = array(), $options = array(), $reuseMatchedParams = false)
     {
@@ -111,5 +87,29 @@ class Url extends AbstractHelper
         $options['name'] = $name;
 
         return $this->router->assemble($params, $options);
+    }
+
+    /**
+     * Set the router to use for assembling.
+     *
+     * @param RouteStackInterface $router
+     * @return Url
+     */
+    public function setRouter(RouteStackInterface $router)
+    {
+        $this->router = $router;
+        return $this;
+    }
+
+    /**
+     * Set route match returned by the router.
+     *
+     * @param  RouteMatch $routeMatch
+     * @return Url
+     */
+    public function setRouteMatch(RouteMatch $routeMatch)
+    {
+        $this->routeMatch = $routeMatch;
+        return $this;
     }
 }

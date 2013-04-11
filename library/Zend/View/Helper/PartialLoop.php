@@ -33,10 +33,10 @@ class PartialLoop extends Partial
      *
      * If no arguments are provided, returns object instance.
      *
-     * @param  string $name Name of view script
-     * @param  array $values Variables to populate in the view
-     * @return string
+     * @param  string $name   Name of view script
+     * @param  array  $values Variables to populate in the view
      * @throws Exception\InvalidArgumentException
+     * @return string
      */
     public function __invoke($name = null, $values = null)
     {

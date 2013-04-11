@@ -17,13 +17,13 @@ use Zend\I18n\Exception;
 class Translate extends AbstractTranslatorHelper
 {
     /**
-     * Translate a message.
+     * Translate a message
      *
      * @param  string $message
      * @param  string $textDomain
      * @param  string $locale
-     * @return string
      * @throws Exception\RuntimeException
+     * @return string
      */
     public function __invoke($message, $textDomain = null, $locale = null)
     {
@@ -34,6 +34,7 @@ class Translate extends AbstractTranslatorHelper
         if (null === $textDomain) {
             $textDomain = $this->getTranslatorTextDomain();
         }
+
         return $translator->translate($message, $textDomain, $locale);
     }
 }

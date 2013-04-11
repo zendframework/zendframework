@@ -16,11 +16,10 @@ use Zend\View\Helper\Escaper;
  */
 class EscapeCss extends Escaper\AbstractHelper
 {
-
     /**
      * Escape a value for current escaping strategy
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     protected function escape($value)

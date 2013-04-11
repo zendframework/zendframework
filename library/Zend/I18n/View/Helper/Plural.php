@@ -28,11 +28,37 @@ use Zend\View\Helper\AbstractHelper;
 class Plural extends AbstractHelper
 {
     /**
-     * Rule to use
+     * Plural rule to use
      *
      * @var PluralRule
      */
     protected $rule;
+
+    /**
+     * Given an array of strings, a number and, if wanted, an optional locale (the default one is used
+     * otherwise), this picks the right string according to plural rules of the locale
+     *
+     * @param  array|string $strings
+     * @param  int          $number
+     * @throws Exception\InvalidArgumentException
+     * @return string
+     */
+    public function __invoke($strings, $number)
+    {
+        if (null === $this->getPluralRule()) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'No plural rule was set'
+            ));
+        }
+
+        if (!is_array($strings)) {
+            $strings = (array) $strings;
+        }
+
+        $pluralIndex = $this->getPluralRule()->evaluate($number);
+
+        return $strings[$pluralIndex];
+    }
 
     /**
      * Set the plural rule to use
@@ -52,28 +78,12 @@ class Plural extends AbstractHelper
     }
 
     /**
-     * Given an array of strings, a number and, if wanted, an optional locale (the default one is used
-     * otherwise), this picks the right string according to plural rules of the locale
+     * Get the plural rule to  use
      *
-     * @param  array|string $strings
-     * @param  int          $number
-     * @throws Exception\InvalidArgumentException
-     * @return string
+     * @return PluralRule
      */
-    public function __invoke($strings, $number)
+    public function getPluralRule()
     {
-        if ($this->rule === null) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'No plural rule was set'
-            ));
-        }
-
-        if (!is_array($strings)) {
-            $strings = (array) $strings;
-        }
-
-        $pluralIndex = $this->rule->evaluate($number);
-
-        return $strings[$pluralIndex];
+        return $this->rule;
     }
 }

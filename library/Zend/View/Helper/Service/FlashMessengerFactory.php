@@ -15,6 +15,12 @@ use Zend\View\Helper\FlashMessenger;
 
 class FlashMessengerFactory implements FactoryInterface
 {
+    /**
+     * Create service
+     *
+     * @param  ServiceLocatorInterface $serviceLocator
+     * @return FlashMessenger
+     */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $serviceLocator = $serviceLocator->getServiceLocator();

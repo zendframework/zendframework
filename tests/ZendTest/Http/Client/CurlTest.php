@@ -254,6 +254,27 @@ class CurlTest extends CommonHttpTests
         );
     }
 
+    public function testSetOptionsMergesCurlOptions()
+    {
+        $adapter = new Adapter\Curl();
+
+        $adapter->setOptions(array(
+            'curloptions' => array(
+                'foo' => 'bar',
+            ),
+        ));
+        $adapter->setOptions(array(
+            'curloptions' => array(
+                'bar' => 'baz',
+            ),
+        ));
+
+        $this->assertEquals(
+            array('curloptions' => array('foo' => 'bar', 'bar' => 'baz')),
+            $this->readAttribute($adapter, 'config')
+        );
+    }
+
     public function testWorkWithProxyConfiguration()
     {
         $adapter = new Adapter\Curl();

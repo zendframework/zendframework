@@ -194,7 +194,7 @@ class FormSelect extends AbstractHelper
             $attributes = compact('value', 'selected', 'disabled');
 
             if (isset($optionSpec['attributes']) && is_array($optionSpec['attributes'])) {
-            	$attributes = array_merge($attributes, $optionSpec['attributes']);
+                $attributes = array_merge($attributes, $optionSpec['attributes']);
             }
 
             $this->validTagAttributes = $this->validOptionAttributes;

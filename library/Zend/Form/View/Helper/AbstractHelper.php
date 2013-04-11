@@ -203,7 +203,6 @@ abstract class AbstractHelper extends BaseAbstractHelper
     public function createAttributesString(array $attributes)
     {
         $attributes = $this->prepareAttributes($attributes);
-
         $escape     = $this->getEscapeHtmlHelper();
         $strings    = array();
         foreach ($attributes as $key => $value) {

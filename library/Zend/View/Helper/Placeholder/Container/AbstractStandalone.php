@@ -9,39 +9,45 @@
 
 namespace Zend\View\Helper\Placeholder\Container;
 
+use ArrayAccess;
+use Countable;
+use IteratorAggregate;
 use Zend\Escaper\Escaper;
 use Zend\View\Exception;
+use Zend\View\Helper\AbstractHelper;
 use Zend\View\Renderer\RendererInterface;
 
 /**
  * Base class for targeted placeholder helpers
  */
-abstract class AbstractStandalone
-    extends \Zend\View\Helper\AbstractHelper
-    implements \IteratorAggregate, \Countable, \ArrayAccess
+abstract class AbstractStandalone extends AbstractHelper implements
+    IteratorAggregate,
+    Countable,
+    ArrayAccess
 {
-    /**
-     * @var \Zend\View\Helper\Placeholder\Container\AbstractContainer
-     */
-    protected $container;
-
-    /**
-     * @var Escaper[]
-     */
-    protected $escapers = array();
-
     /**
      * Flag whether to automatically escape output, must also be
      * enforced in the child class if __toString/toString is overridden
+     *
      * @var bool
      */
     protected $autoEscape = true;
+
+    /**
+     * @var AbstractContainer
+     */
+    protected $container;
 
     /**
      * Default container class
      * @var string
      */
     protected $containerClass = 'Zend\View\Helper\Placeholder\Container';
+
+    /**
+     * @var Escaper[]
+     */
+    protected $escapers = array();
 
     /**
      * Constructor
@@ -53,40 +59,129 @@ abstract class AbstractStandalone
     }
 
     /**
-     * Set Escaper instance
+     * Overload
      *
-     * @param  Escaper $escaper
-     * @return AbstractStandalone
+     * Proxy to container methods
+     *
+     * @param  string $method
+     * @param  array $args
+     * @throws Exception\BadMethodCallException
+     * @return mixed
      */
-    public function setEscaper(Escaper $escaper)
+    public function __call($method, $args)
     {
-        $encoding = $escaper->getEncoding();
-        $this->escapers[$encoding] = $escaper;
-        return $this;
+        $container = $this->getContainer();
+        if (method_exists($container, $method)) {
+            $return = call_user_func_array(array($container, $method), $args);
+            if ($return === $container) {
+                // If the container is returned, we really want the current object
+                return $this;
+            }
+            return $return;
+        }
+
+        throw new Exception\BadMethodCallException('Method "' . $method . '" does not exist');
     }
 
     /**
-     * Get Escaper instance
+     * Overloading: set property value
      *
-     * Lazy-loads one if none available
+     * @param  string $key
+     * @param  mixed $value
+     * @return void
+     */
+    public function __set($key, $value)
+    {
+        $container = $this->getContainer();
+        $container[$key] = $value;
+    }
+
+    /**
+     * Overloading: retrieve property
      *
-     * @param  string|null $enc Encoding to use
+     * @param  string $key
      * @return mixed
      */
-    public function getEscaper($enc = 'UTF-8')
+    public function __get($key)
     {
-        $enc = strtolower($enc);
-        if (!isset($this->escapers[$enc])) {
-            $this->setEscaper(new Escaper($enc));
+        $container = $this->getContainer();
+        if (isset($container[$key])) {
+            return $container[$key];
         }
-        return $this->escapers[$enc];
+
+        return null;
+    }
+
+    /**
+     * Overloading: check if property is set
+     *
+     * @param  string $key
+     * @return bool
+     */
+    public function __isset($key)
+    {
+        $container = $this->getContainer();
+        return isset($container[$key]);
+    }
+
+    /**
+     * Overloading: unset property
+     *
+     * @param  string $key
+     * @return void
+     */
+    public function __unset($key)
+    {
+        $container = $this->getContainer();
+        if (isset($container[$key])) {
+            unset($container[$key]);
+        }
+    }
+
+    /**
+     * Cast to string representation
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
+    }
+
+    /**
+     * String representation
+     *
+     * @return string
+     */
+    public function toString()
+    {
+        return $this->getContainer()->toString();
+    }
+
+    /**
+     * Escape a string
+     *
+     * @param  string $string
+     * @return string
+     */
+    protected function escape($string)
+    {
+        if ($this->getView() instanceof RendererInterface
+            && method_exists($this->getView(), 'getEncoding')
+        ) {
+            $enc     = $this->getView()->getEncoding();
+            $escaper = $this->getView()->plugin('escapeHtml');
+            return $escaper((string) $string);
+        }
+
+        return $this->getEscaper()->escapeHtml((string) $string);
     }
 
     /**
      * Set whether or not auto escaping should be used
      *
      * @param  bool $autoEscape whether or not to auto escape output
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractStandalone
+     * @return AbstractStandalone
      */
     public function setAutoEscape($autoEscape = true)
     {
@@ -105,30 +200,10 @@ abstract class AbstractStandalone
     }
 
     /**
-     * Escape a string
-     *
-     * @param  string $string
-     * @return string
-     */
-    protected function escape($string)
-    {
-        if ($this->view instanceof RendererInterface
-            && method_exists($this->view, 'getEncoding')
-        ) {
-            $enc     = $this->view->getEncoding();
-            $escaper = $this->view->plugin('escapeHtml');
-            return $escaper((string) $string);
-        }
-
-        $escaper = $this->getEscaper();
-        return $escaper->escapeHtml((string) $string);
-    }
-
-    /**
      * Set container on which to operate
      *
-     * @param  \Zend\View\Helper\Placeholder\Container\AbstractContainer $container
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractStandalone
+     * @param  AbstractContainer $container
+     * @return AbstractStandalone
      */
     public function setContainer(AbstractContainer $container)
     {
@@ -139,7 +214,7 @@ abstract class AbstractStandalone
     /**
      * Retrieve placeholder container
      *
-     * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
+     * @return AbstractContainer
      */
     public function getContainer()
     {
@@ -201,103 +276,35 @@ abstract class AbstractStandalone
     }
 
     /**
-     * Overloading: set property value
+     * Set Escaper instance
      *
-     * @param  string $key
-     * @param  mixed $value
-     * @return void
+     * @param  Escaper $escaper
+     * @return AbstractStandalone
      */
-    public function __set($key, $value)
+    public function setEscaper(Escaper $escaper)
     {
-        $container = $this->getContainer();
-        $container[$key] = $value;
+        $encoding = $escaper->getEncoding();
+        $this->escapers[$encoding] = $escaper;
+
+        return $this;
     }
 
     /**
-     * Overloading: retrieve property
+     * Get Escaper instance
      *
-     * @param  string $key
+     * Lazy-loads one if none available
+     *
+     * @param  string|null $enc Encoding to use
      * @return mixed
      */
-    public function __get($key)
+    public function getEscaper($enc = 'UTF-8')
     {
-        $container = $this->getContainer();
-        if (isset($container[$key])) {
-            return $container[$key];
+        $enc = strtolower($enc);
+        if (!isset($this->escapers[$enc])) {
+            $this->setEscaper(new Escaper($enc));
         }
 
-        return null;
-    }
-
-    /**
-     * Overloading: check if property is set
-     *
-     * @param  string $key
-     * @return bool
-     */
-    public function __isset($key)
-    {
-        $container = $this->getContainer();
-        return isset($container[$key]);
-    }
-
-    /**
-     * Overloading: unset property
-     *
-     * @param  string $key
-     * @return void
-     */
-    public function __unset($key)
-    {
-        $container = $this->getContainer();
-        if (isset($container[$key])) {
-            unset($container[$key]);
-        }
-    }
-
-    /**
-     * Overload
-     *
-     * Proxy to container methods
-     *
-     * @param  string $method
-     * @param  array $args
-     * @return mixed
-     * @throws Exception\BadMethodCallException
-     */
-    public function __call($method, $args)
-    {
-        $container = $this->getContainer();
-        if (method_exists($container, $method)) {
-            $return = call_user_func_array(array($container, $method), $args);
-            if ($return === $container) {
-                // If the container is returned, we really want the current object
-                return $this;
-            }
-            return $return;
-        }
-
-        throw new Exception\BadMethodCallException('Method "' . $method . '" does not exist');
-    }
-
-    /**
-     * String representation
-     *
-     * @return string
-     */
-    public function toString()
-    {
-        return $this->getContainer()->toString();
-    }
-
-    /**
-     * Cast to string representation
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->toString();
+        return $this->escapers[$enc];
     }
 
     /**
@@ -359,7 +366,7 @@ abstract class AbstractStandalone
     /**
      * IteratorAggregate: get Iterator
      *
-     * @return \Iterator
+     * @return Iterator
      */
     public function getIterator()
     {

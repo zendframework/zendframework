@@ -16,13 +16,6 @@ use Zend\View\Exception;
 class PaginationControl extends AbstractHelper
 {
     /**
-     * Default view partial
-     *
-     * @var string|array
-     */
-    protected static $defaultViewPartial = null;
-
-    /**
      * Default Scrolling Style
      *
      * @var string
@@ -30,57 +23,24 @@ class PaginationControl extends AbstractHelper
     protected static $defaultScrollingStyle = 'sliding';
 
     /**
-     * Sets the default view partial.
+     * Default view partial
      *
-     * @param string|array $partial View partial
+     * @var string|array
      */
-    public static function setDefaultViewPartial($partial)
-    {
-        static::$defaultViewPartial = $partial;
-    }
-
-    /**
-     * Gets the default view partial
-     *
-     * @return string|array
-     */
-    public static function getDefaultViewPartial()
-    {
-        return static::$defaultViewPartial;
-    }
-
-     /**
-     * Gets the default scrolling style
-     *
-     * @return string
-     */
-    public static function getDefaultScrollingStyle()
-    {
-        return static::$defaultScrollingStyle;
-    }
-
-    /**
-     * Sets the default Scrolling Style
-     *
-     * @param string $style string 'all' | 'elastic' | 'sliding' | 'jumping'
-     */
-    public static function setDefaultScrollingStyle($style)
-    {
-        static::$defaultScrollingStyle = $style;
-    }
+    protected static $defaultViewPartial = null;
 
     /**
      * Render the provided pages.  This checks if $view->paginator is set and,
      * if so, uses that.  Also, if no scrolling style or partial are specified,
      * the defaults will be used (if set).
      *
-     * @param  \Zend\Paginator\Paginator (Optional) $paginator
-     * @param  string $scrollingStyle (Optional) Scrolling style
-     * @param  string $partial (Optional) View partial
-     * @param  array|string $params (Optional) params to pass to the partial
-     * @return string
+     * @param  Paginator\Paginator $paginator      (Optional)
+     * @param  string              $scrollingStyle (Optional) Scrolling style
+     * @param  string              $partial        (Optional) View partial
+     * @param  array|string        $params         (Optional) params to pass to the partial
      * @throws Exception\RuntimeException if no paginator or no view partial provided
      * @throws Exception\InvalidArgumentException if partial is invalid array
+     * @return string
      */
     public function __invoke(Paginator\Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
     {
@@ -127,5 +87,45 @@ class PaginationControl extends AbstractHelper
 
         $partialHelper = $this->view->plugin('partial');
         return $partialHelper($partial, $pages);
+    }
+
+    /**
+     * Sets the default Scrolling Style
+     *
+     * @param string $style string 'all' | 'elastic' | 'sliding' | 'jumping'
+     */
+    public static function setDefaultScrollingStyle($style)
+    {
+        static::$defaultScrollingStyle = $style;
+    }
+
+    /**
+     * Gets the default scrolling style
+     *
+     * @return string
+     */
+    public static function getDefaultScrollingStyle()
+    {
+        return static::$defaultScrollingStyle;
+    }
+
+    /**
+     * Sets the default view partial.
+     *
+     * @param string|array $partial View partial
+     */
+    public static function setDefaultViewPartial($partial)
+    {
+        static::$defaultViewPartial = $partial;
+    }
+
+    /**
+     * Gets the default view partial
+     *
+     * @return string|array
+     */
+    public static function getDefaultViewPartial()
+    {
+        return static::$defaultViewPartial;
     }
 }

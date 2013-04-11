@@ -16,11 +16,28 @@ use Zend\Form\Exception;
 class FormCaptcha extends AbstractHelper
 {
     /**
+     * Invoke helper as functor
+     *
+     * Proxies to {@link render()}.
+     *
+     * @param  ElementInterface $element
+     * @return string|FormCaptcha
+     */
+    public function __invoke(ElementInterface $element)
+    {
+        if (!$element) {
+            return $this;
+        }
+
+        return $this->render($element);
+    }
+
+    /**
      * Render a form captcha for an element
      *
      * @param  ElementInterface $element
-     * @return string
      * @throws Exception\DomainException if the element does not compose a captcha, or the renderer does not implement plugin()
+     * @return string
      */
     public function render(ElementInterface $element)
     {
@@ -45,22 +62,5 @@ class FormCaptcha extends AbstractHelper
 
         $helper = $renderer->plugin($helper);
         return $helper($element);
-    }
-
-    /**
-     * Invoke helper as functor
-     *
-     * Proxies to {@link render()}.
-     *
-     * @param  ElementInterface $element
-     * @return string|FormCaptcha
-     */
-    public function __invoke(ElementInterface $element)
-    {
-        if (!$element) {
-            return $this;
-        }
-
-        return $this->render($element);
     }
 }

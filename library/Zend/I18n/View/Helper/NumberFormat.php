@@ -19,6 +19,13 @@ use Zend\View\Helper\AbstractHelper;
 class NumberFormat extends AbstractHelper
 {
     /**
+     * number of decimals to use.
+     *
+     * @var integer
+     */
+    protected $decimals;
+
+    /**
      * NumberFormat style to use
      *
      * @var integer
@@ -31,13 +38,6 @@ class NumberFormat extends AbstractHelper
      * @var integer
      */
     protected $formatType;
-
-    /**
-     * number of decimals to use.
-     *
-     * @var integer
-     */
-    protected $decimals;
 
     /**
      * Formatter instances
@@ -60,13 +60,15 @@ class NumberFormat extends AbstractHelper
      * @param  int       $formatStyle
      * @param  int       $formatType
      * @param  string    $locale
+     * @param  int       $decimals
      * @return string
      */
     public function __invoke(
         $number,
         $formatStyle = null,
         $formatType  = null,
-        $locale      = null
+        $locale      = null,
+        $decimals    = null
     ) {
         if (null === $locale) {
             $locale = $this->getLocale();
@@ -77,14 +79,22 @@ class NumberFormat extends AbstractHelper
         if (null === $formatType) {
             $formatType = $this->getFormatType();
         }
+        if (!is_int($decimals) || $decimals < 0) {
+            $decimals = $this->getDecimals();
+        }
 
-        $formatterId = md5($formatStyle . "\0" . $locale);
+        $formatterId = md5($formatStyle . "\0" . $locale . "\0" . $decimals);
 
         if (!isset($this->formatters[$formatterId])) {
             $this->formatters[$formatterId] = new NumberFormatter(
                 $locale,
                 $formatStyle
             );
+
+            if ($decimals !== null) {
+                $this->formatters[$formatterId]->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $decimals);
+                $this->formatters[$formatterId]->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $decimals);
+            }
         }
 
         return $this->formatters[$formatterId]->format($number, $formatType);

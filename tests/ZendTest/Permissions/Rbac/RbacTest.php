@@ -141,4 +141,24 @@ class RbacTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($bar->getParent(), $foo);
         $this->assertEquals(1, count($foo->getChildren()));
     }
+
+    /**
+     * @tesdox Test adding custom child roles works
+     */
+    public function testAddCustomChildRole()
+    {
+        $role = $this->getMockForAbstractClass('\Zend\Permissions\Rbac\RoleInterface');
+        $this->rbac->setCreateMissingRoles(true)->addRole($role, array('parent'));
+
+        $role->expects($this->any())
+            ->method('getName')
+            ->will($this->returnValue('customchild'));
+
+        $role->expects($this->once())
+            ->method('hasPermission')
+            ->with('test')
+            ->will($this->returnValue(true));
+
+        $this->assertTrue($this->rbac->isGranted('parent', 'test'));
+    }
 }

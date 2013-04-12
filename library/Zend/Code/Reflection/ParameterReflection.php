@@ -77,6 +77,8 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
     {
         if ($this->isArray()) {
             return 'array';
+        } elseif (method_exists($this, 'isCallable') && $this->isCallable()) {
+            return 'callable';
         }
 
         if (($class = $this->getClass()) instanceof \ReflectionClass) {

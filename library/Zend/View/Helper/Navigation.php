@@ -190,6 +190,10 @@ class Navigation extends AbstractNavigationHelper
             $helper->setContainer();
             $this->inject($helper);
             $this->injected[$hash] = true;
+        } else {
+            if ($this->getInjectContainer()) {
+                $helper->setContainer($container);
+            }
         }
 
         return $helper;

@@ -29,7 +29,7 @@ class DbTableGateway extends DbSelect
         if ($order) {
             $select->order($order);
         }
-        
+
         $dbAdapter          = $tableGateway->getAdapter();
         $resultSetPrototype = $tableGateway->getResultSetPrototype();
 

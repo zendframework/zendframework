@@ -16,11 +16,11 @@
         "php": ">=5.3.3",
         "zendframework/zend-eventmanager": "self.version",
         "zendframework/zend-loader": "self.version",
-        "zendframework/zend-stdlib": "self.version",
-        "zendframework/zend-servicemanager": "self.version"
+        "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
-        "zendframework/zend-filter": "Zend\\Filter component"
+        "zendframework/zend-filter": "Zend\\Filter component",
+        "zendframework/zend-servicemanager": "self.version"
     },
     "extra": {
         "branch-alias": {

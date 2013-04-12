@@ -153,11 +153,14 @@ class Factory
                         $input->setRequired(!$value);
                     }
                     break;
-                case 'continue_if_empty':
-                    $input->setContinueIfEmpty($inputSpecification['continue_if_empty']);
-                    break;
+<<<<<<< HEAD
                 case 'error_message':
                     $input->setErrorMessage($value);
+=======
+                case 'continue_if_empty':
+                    $input->setContinueIfEmpty($inputSpecification['continue_if_empty']);
+>>>>>>> zburnham/validate_empty_with_context
+                    break;
                 case 'fallback_value':
                     $input->setFallbackValue($value);
                     break;

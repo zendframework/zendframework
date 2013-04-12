@@ -97,8 +97,8 @@ return array(
     "'%localPart%' can not be matched against quoted-string format"                                                             => "'%localPart%' passt nicht auf das quoted-string Format",
     "'%localPart%' is not a valid local part for the email address"                                                             => "'%localPart%' ist kein gültiger lokaler Teil für die Emailadresse",
     "The input exceeds the allowed length"                                                                                      => 'Der Eingabewert ist länger als erlaubt',
-    
-    
+
+
     // Zend_Validator_Explode
     "Invalid type given. String expected"                                                                                       => 'Ungültiger Eingabewert eingegeben. String erwartet',
 

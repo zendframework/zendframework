@@ -12,6 +12,7 @@ namespace ZendTest\Code\Generator;
 
 use Zend\Code\Generator\ParameterGenerator;
 use Zend\Code\Generator\ValueGenerator;
+use Zend\Code\Reflection\ParameterReflection;
 
 /**
  * @category   Zend
@@ -114,6 +115,19 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNotEquals('int', $codeGenParam->getType());
         $this->assertEquals('', $codeGenParam->getType());
+    }
+
+    public function testCallableTypeHint()
+    {
+        if (PHP_VERSION_ID < 50400) {
+            $this->markTestSkipped('`callable` is only supported in PHP >=5.4.0');
+        }
+
+        $parameter = ParameterGenerator::fromReflection(
+            new ParameterReflection(array('ZendTest\Code\Generator\TestAsset\CallableTypeHintClass', 'foo'), 'bar')
+        );
+
+        $this->assertEquals('callable', $parameter->getType());
     }
 
     /**

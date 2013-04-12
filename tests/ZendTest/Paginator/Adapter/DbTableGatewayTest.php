@@ -25,6 +25,8 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
     /** @var DbTableGateway */
     protected $dbTableGateway;
 
+    protected $mockTableGateway;
+
     public function setup()
     {
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
@@ -48,11 +50,14 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->mockStatement = $mockStatement;
-        $this->dbTableGateway = new DbTableGateway($mockTableGateway);
+
+        $this->mockTableGateway = $mockTableGateway;
     }
 
     public function testGetItems()
     {
+        $this->dbTableGateway = new DbTableGateway($this->mockTableGateway);
+
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $this->mockStatement
              ->expects($this->any())
@@ -65,6 +70,8 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 
     public function testCount()
     {
+        $this->dbTableGateway = new DbTableGateway($this->mockTableGateway);
+
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $mockResult->expects($this->any())
                    ->method('current')
@@ -76,5 +83,21 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 
         $count = $this->dbTableGateway->count();
         $this->assertEquals(10, $count);
+    }
+
+    public function testGetItemsWithWhereAndOrder()
+    {
+        $where = "foo = bar";
+        $order = "foo";
+        $this->dbTableGateway = new DbTableGateway($this->mockTableGateway, $where, $order);
+
+        $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $this->mockStatement
+             ->expects($this->any())
+             ->method('execute')
+             ->will($this->returnValue($mockResult));
+
+        $items = $this->dbTableGateway->getItems(2, 10);
+        $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);
     }
 }

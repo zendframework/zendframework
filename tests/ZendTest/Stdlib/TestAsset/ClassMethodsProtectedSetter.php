@@ -24,11 +24,6 @@ class ClassMethodsProtectedSetter
         $this->bar = $bar;
     }
 
-    public function getFoo()
-    {
-        return $this->foo;
-    }
-
     public function getBar()
     {
         return $this->bar;

@@ -933,7 +933,7 @@ class Client implements Stdlib\DispatchableInterface
                 break;
             }
 
-        } while ($this->redirectCounter < $this->config['maxredirects']);
+        } while ($this->redirectCounter <= $this->config['maxredirects']);
 
         $this->response = $response;
         return $response;

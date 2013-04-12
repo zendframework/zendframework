@@ -18,6 +18,7 @@ use Zend\Http\Header\AcceptEncoding;
 use Zend\Http\Header\SetCookie;
 use Zend\Http\Request;
 use Zend\Http\Response;
+use Zend\Http\Client\Adapter\Test;
 
 
 class ClientTest extends \PHPUnit_Framework_TestCase
@@ -197,5 +198,41 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testEncodeAuthHeaderThrowsExceptionWhenInvalidAuthTypeIsUsed()
     {
         $encoded = Client::encodeAuthHeader('test', 'test', 'test');
+    }
+    
+    public function testIfMaxredirectWorksCorrectly()
+    {
+        $testAdapter = new Test();
+        // first response, contains a redirect
+        $testAdapter->setResponse(
+            "HTTP/1.1 303 See Other\r\n"
+            . "Location: http://www.example.org/part2\r\n\r\n"
+            . "Page #1"
+        );
+        // seconds response, contains a redirect
+        $testAdapter->addResponse(
+            "HTTP/1.1 303 See Other\r\n"
+            . "Location: http://www.example.org/part3\r\n\r\n"
+            . "Page #2"
+        );
+        // third response
+        $testAdapter->addResponse(
+            "HTTP/1.1 303 See Other\r\n\r\n"
+            . "Page #3"
+        );
+        
+        // create a client which allows one redirect at most!
+        $client = new Client('http://www.example.org/part1', array(
+            'adapter' => $testAdapter,
+            'maxredirects' => 1,
+            'storeresponse' => true
+        ));
+        
+        // do the request
+        $response = $client->setMethod('GET')->send();
+        
+        // response should be the second response, since third response should not
+        // be requested, due to the maxredirects = 1 limit
+        $this->assertEquals($response->getContent(), "Page #2");
     }
 }

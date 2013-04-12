@@ -745,7 +745,7 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
 
         $delegator
             ->expects($this->once())
-            ->method('createDelegateWithName')
+            ->method('createDelegatorWithName')
             ->with(
                 $this->serviceManager,
                 'fooservice',
@@ -761,6 +761,8 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
                 })
             )
             ->will($this->returnValue($delegator));
+
+        //die(var_dump($this->serviceManager));
 
         $this->assertSame($delegator, $this->serviceManager->create('foo-service'));
     }

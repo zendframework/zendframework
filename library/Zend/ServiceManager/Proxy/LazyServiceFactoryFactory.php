@@ -12,6 +12,7 @@ namespace Zend\ServiceManager\Proxy;
 use ProxyManager\Configuration;
 use ProxyManager\Factory\LazyLoadingValueHolderFactory;
 
+use ProxyManager\GeneratorStrategy\EvaluatingGeneratorStrategy;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\Exception;
@@ -35,34 +36,39 @@ class LazyServiceFactoryFactory implements FactoryInterface
             throw new Exception\InvalidArgumentException('Missing "lazy_services" config key');
         }
 
-        $lazyServicesConfig = $config['lazy_services'];
+        $lazyServices = $config['lazy_services'];
 
-        if (!isset($lazyServicesConfig['map'])) {
-            throw new Exception\InvalidArgumentException('Missing "map" config key in "lazy_services"');
+        if (!isset($lazyServices['class_map'])) {
+            throw new Exception\InvalidArgumentException('Missing "class_map" config key in "lazy_services"');
         }
 
         $factoryConfig = new Configuration();
 
-        if (isset($lazyServicesConfig['proxies_target_dir'])) {
-            $factoryConfig->setProxiesTargetDir($lazyServicesConfig['proxies_target_dir']);
+        if (isset($lazyServices['proxies_target_dir'])) {
+            $factoryConfig->setProxiesTargetDir($lazyServices['proxies_target_dir']);
         }
 
-        if (isset($lazyServicesConfig['auto_generate_proxies'])) {
-            $factoryConfig->setAutoGenerateProxies($lazyServicesConfig['auto_generate_proxies']);
+        if (!isset($lazyServices['write_proxy_files']) || ! $lazyServices['write_proxy_files']) {
+            $factoryConfig->setGeneratorStrategy(new EvaluatingGeneratorStrategy());
+        }
+
+        if (isset($lazyServices['auto_generate_proxies'])) {
+            $factoryConfig->setAutoGenerateProxies($lazyServices['auto_generate_proxies']);
 
             // register the proxy autoloader if the proxies already exist
-            if (!$lazyServicesConfig['auto_generate_proxies']) {
+            if (!$lazyServices['auto_generate_proxies']) {
                 spl_autoload_register($factoryConfig->getProxyAutoloader());
+
+                $factoryConfig->setGeneratorStrategy(new EvaluatingGeneratorStrategy());
             }
         }
 
-        if (isset($lazyServicesConfig['proxies_namespace'])) {
-            $factoryConfig->setProxiesNamespace($lazyServicesConfig['proxies_namespace']);
+        //if (!isset($lazyServicesConfig['runtime_evaluate_proxies']))
+
+        if (isset($lazyServices['proxies_namespace'])) {
+            $factoryConfig->setProxiesNamespace($lazyServices['proxies_namespace']);
         }
 
-        return new LazyServiceFactory(
-            new LazyLoadingValueHolderFactory($factoryConfig),
-            $lazyServicesConfig['map']
-        );
+        return new LazyServiceFactory(new LazyLoadingValueHolderFactory($factoryConfig), $lazyServices['class_map']);
     }
 }

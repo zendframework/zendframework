@@ -44,7 +44,7 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
         $factory->createService($locator);
     }
 
-    public function testAutoGenerateProxies()
+    public function testAutoGenerateProxyFiles()
     {
         $serviceManager = new ServiceManager();
         $namespace      = 'ZendTestProxy' . uniqid();
@@ -53,8 +53,9 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
             'Config',
             array(
                  'lazy_services' => array(
-                     'map'               => array('foo' => __CLASS__),
+                     'class_map'         => array('foo' => __CLASS__),
                      'proxies_namespace' => $namespace,
+                     'write_proxy_files' => true,
                  ),
             )
         );
@@ -79,6 +80,41 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($proxy->isProxyInitialized());
     }
 
+    public function testAutoGenerateAndEvaluateProxies()
+    {
+        $serviceManager = new ServiceManager();
+        $namespace      = 'ZendTestProxy' . uniqid();
+
+        $serviceManager->setService(
+            'Config',
+            array(
+                 'lazy_services' => array(
+                     'class_map'         => array('foo' => __CLASS__),
+                     'proxies_namespace' => $namespace,
+                 ),
+            )
+        );
+        $serviceManager->setFactory('foo-delegator', 'Zend\ServiceManager\Proxy\LazyServiceFactoryFactory');
+        $serviceManager->setInvokableClass('foo', __CLASS__);
+        $serviceManager->addDelegator('foo', 'foo-delegator');
+
+        /* @var $proxy self|\ProxyManager\Proxy\ValueHolderInterface|\ProxyManager\Proxy\LazyLoadingInterface */
+        $proxy = $serviceManager->create('foo');
+
+        $this->assertInstanceOf('ProxyManager\\Proxy\\LazyLoadingInterface', $proxy);
+        $this->assertInstanceOf(__CLASS__, $proxy);
+        $this->assertSame(
+            $namespace . '\__PM__\ZendTest\ServiceManager\Proxy\LazyServiceFactoryFactoryTest',
+            get_class($proxy)
+        );
+        $this->assertFileNotExists(
+            sys_get_temp_dir() . '/' . $namespace . '__PM__ZendTestServiceManagerProxyLazyServiceFactoryFactoryTest.php'
+        );
+        $this->assertFalse($proxy->isProxyInitialized());
+        $this->assertEquals($this->invalidConfigProvider(), $proxy->invalidConfigProvider());
+        $this->assertTrue($proxy->isProxyInitialized());
+    }
+
     public function testRegistersAutoloader()
     {
         $autoloaders    = spl_autoload_functions();
@@ -89,7 +125,7 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
             'Config',
             array(
                  'lazy_services' => array(
-                     'map'                   => array('foo' => __CLASS__),
+                     'class_map'             => array('foo' => __CLASS__),
                      'proxies_namespace'     => $namespace,
                      'auto_generate_proxies' => false,
                  ),

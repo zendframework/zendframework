@@ -13,6 +13,7 @@ use Traversable;
 use Zend\Stdlib\Hydrator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\Stdlib\PriorityQueue;
+use Zend\Stdlib\Hydrator\HydratorAwareInterface;
 
 class Fieldset extends Element implements FieldsetInterface
 {
@@ -480,6 +481,9 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * Get the hydrator used when binding an object to the fieldset
      *
+     * If no hydrator is present and object implements HydratorAwareInterface,
+     * hydrator will be retrieved from the object.
+     *
      * Will lazy-load Hydrator\ArraySerializable if none is present.
      *
      * @return HydratorInterface
@@ -487,7 +491,11 @@ class Fieldset extends Element implements FieldsetInterface
     public function getHydrator()
     {
         if (!$this->hydrator instanceof HydratorInterface) {
-            $this->setHydrator(new Hydrator\ArraySerializable());
+            if ($this->object instanceof HydratorAwareInterface) {
+                $this->setHydrator($this->object->getHydrator());
+            } else {
+                $this->setHydrator(new Hydrator\ArraySerializable());
+            }
         }
         return $this->hydrator;
     }

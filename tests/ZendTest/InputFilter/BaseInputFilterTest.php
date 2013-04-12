@@ -450,13 +450,13 @@ class BaseInputFilterTest extends TestCase
         $this->assertTrue($filter->isValid());
     }
 
-    public function testValidationSkipsFileInputsMarkedAllowEmptyWhenNoFileDataIsPresent()
+    public function testValidationSkipsFileInputsMarkedNotRequiredWhenNoFileDataIsPresent()
     {
         $filter = new InputFilter();
 
         $foo   = new FileInput();
         $foo->getValidatorChain()->attach(new Validator\File\UploadFile());
-        $foo->setAllowEmpty(true);
+        $foo->setRequired(false);
 
         $filter->add($foo, 'foo');
 
@@ -473,16 +473,16 @@ class BaseInputFilterTest extends TestCase
         $this->assertTrue($filter->isValid());
 
         // Negative test
-        $foo->setAllowEmpty(false);
+        $foo->setRequired(true);
         $filter->setData($data);
         $this->assertFalse($filter->isValid());
     }
 
-    public function testValidationSkipsFileInputsMarkedAllowEmptyWhenNoMultiFileDataIsPresent()
+    public function testValidationSkipsFileInputsMarkedNotRequiredWhenNoMultiFileDataIsPresent()
     {
         $filter = new InputFilter();
         $foo    = new FileInput();
-        $foo->setAllowEmpty(true);
+        $foo->setRequired(false);
         $filter->add($foo, 'foo');
 
         $data = array(
@@ -498,7 +498,7 @@ class BaseInputFilterTest extends TestCase
         $this->assertTrue($filter->isValid());
 
         // Negative test
-        $foo->setAllowEmpty(false);
+        $foo->setRequired(true);
         $filter->setData($data);
         $this->assertFalse($filter->isValid());
     }

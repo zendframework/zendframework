@@ -172,7 +172,7 @@ return array(
 
     // Zend_Validate_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "For mange ord, maksimum '%max%' er tillatt, men '%count%' ble telt",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "For få ord, minimum '%min%' er forventet, men '%count%' ble telt",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "For få ord, minimum '%min%' er forventet, men '%count%' ble telt",
     "File '%value%' is not readable or does not exist" => "Filen '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_Float

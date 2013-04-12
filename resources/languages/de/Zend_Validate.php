@@ -187,7 +187,7 @@ return array(
 
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted"                                                    => "Zu viele Wörter. Maximal '%max%' sind erlaubt, aber '%count%' wurden gezählt",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted"                                                   => "Zu wenige Wörter. Mindestens '%min%' wurden erwartet, aber '%count%' wurden gezählt",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted"                                                   => "Zu wenige Wörter. Mindestens '%min%' wurden erwartet, aber '%count%' wurden gezählt",
     "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_GreaterThan

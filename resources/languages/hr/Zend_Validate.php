@@ -172,7 +172,7 @@ return array(
 
     // Zend_Validate_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Previše riječi, maksimalno '%max%' riječi je dozvoljeno, a ima ih '%count%'",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Premalo riječi, očekuje se minimalno '%min%' riječi, a ima ih '%count%' ",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Premalo riječi, očekuje se minimalno '%min%' riječi, a ima ih '%count%' ",
     "File '%value%' could not be found" => "Datoteku '%value%' nije moguće pronaći",
 
     // Zend_Validate_Float

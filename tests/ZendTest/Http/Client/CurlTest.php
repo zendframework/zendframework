@@ -254,6 +254,9 @@ class CurlTest extends CommonHttpTests
         );
     }
 
+    /**
+     * @group 4213
+     */
     public function testSetOptionsMergesCurlOptions()
     {
         $adapter = new Adapter\Curl();

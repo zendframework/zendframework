@@ -1496,4 +1496,18 @@ class FormTest extends TestCase
         // will be lost. (For example entity IDs.)
         $this->assertTrue($hash1 == $hash2);
     }
+
+    public function testAddRemove()
+    {
+        $form = clone $this->form;
+        $this->assertEquals($form, $this->form);
+
+        $file = new Element\File('file_resource');
+        $this->form->add($file);
+        $this->assertTrue($this->form->has('file_resource'));
+        $this->assertNotEquals($form, $this->form);
+
+        $this->form->remove('file_resource');
+        $this->assertEquals($form, $this->form);
+    }
 }

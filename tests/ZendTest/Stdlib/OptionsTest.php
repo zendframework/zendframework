@@ -32,6 +32,13 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $options->test_field);
     }
 
+    public function testConstructionWithOptions()
+    {
+        $options = new TestOptions(new TestOptions(array('test_field' => 1)));
+
+        $this->assertEquals(1, $options->test_field);
+    }
+
     public function testInvalidFieldThrowsException()
     {
         $this->setExpectedException('BadMethodCallException');

@@ -90,13 +90,14 @@ return array(
     // Zend_Validator_EmailAddress
     "Invalid type given. String expected"                                                                                       => 'Ungültiger Eingabewert eingegeben. String erwartet',
     "The input is not a valid email address. Use the basic format local-part@hostname"                                          => 'Der Eingabewert ist keine gültige E-Mail-Adresse. Benutzen Sie folgendes format: your-name@anbieter',
-    "'%hostname%' is not a valid hostname for email address '%value%'"                                                          => "'%hostname%' ist kein gültiger Hostname für die Emailadresse '%value%'",
+    "'%hostname%' is not a valid hostname for the email address"                                                                => "'%hostname%' ist kein gültiger Hostname für die Emailadresse",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'"                                    => "'%hostname%' scheint keinen gültigen MX Eintrag für die Emailadresse '%value%' zu haben",
-    "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network" => "'%hostname%' ist in keinem routebaren Netzwerksegment. Die Emailadresse '%value%' sollte nicht vom öffentlichen Netz aus aufgelöst werden",
+    "'%hostname%' is not in a routable network segment. The email address  should not be resolved from public network"          => "'%hostname%' ist in keinem routebaren Netzwerksegment. Die Emailadresse sollte nicht vom öffentlichen Netz aus aufgelöst werden",
     "'%localPart%' can not be matched against dot-atom format"                                                                  => "'%localPart%' passt nicht auf das dot-atom Format",
     "'%localPart%' can not be matched against quoted-string format"                                                             => "'%localPart%' passt nicht auf das quoted-string Format",
-    "'%localPart%' is not a valid local part for email address '%value%'"                                                       => "'%localPart%' ist kein gültiger lokaler Teil für die Emailadresse '%value%'",
+    "'%localPart%' is not a valid local part for the email address"                                                             => "'%localPart%' ist kein gültiger lokaler Teil für die Emailadresse",
     "The input exceeds the allowed length"                                                                                      => 'Der Eingabewert ist länger als erlaubt',
+
 
     // Zend_Validator_Explode
     "Invalid type given. String expected"                                                                                       => 'Ungültiger Eingabewert eingegeben. String erwartet',

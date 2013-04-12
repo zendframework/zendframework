@@ -347,6 +347,6 @@ class FormRowTest extends TestCase
 
         $this->helper->setLabelPosition('append');
         $markup = $this->helper->render($element);
-        $this->assertEquals('<input name="foo" id="bar" type="text" value=""/><label for="bar">Baz</label>', $markup);
+        $this->assertRegexp('#^<input name="foo" id="bar" type="text" value=""\/?><label for="bar">Baz</label>$#', $markup);
     }
 }

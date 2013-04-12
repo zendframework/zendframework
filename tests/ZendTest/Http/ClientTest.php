@@ -235,4 +235,37 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // be requested, due to the maxredirects = 1 limit
         $this->assertEquals($response->getContent(), "Page #2");
     }
+    
+    public function testIfClientDoesNotLooseAuthenticationOnRedirect()
+    {
+        // set up user credentials
+        $user = 'username123';
+        $password = 'password456';
+        $encoded = Client::encodeAuthHeader($user, $password, Client::AUTH_BASIC);
+        
+        // set up two responses that simulate a redirection
+        $testAdapter = new Test();
+        $testAdapter->setResponse(
+            "HTTP/1.1 303 See Other\r\n"
+            . "Location: http://www.example.org/part2\r\n\r\n"
+            . "The URL of this page has changed."
+        );
+        $testAdapter->addResponse(
+            "HTTP/1.1 200 OK\r\n\r\n"
+            . "Welcome to this Website."
+        );
+        
+        // create client with HTTP basic authentication
+        $client = new Client('http://www.example.org/part1', array(
+            'adapter' => $testAdapter,
+            'maxredirects' => 1
+        ));
+        $client->setAuth($user, $password, Client::AUTH_BASIC);
+        
+        // do request
+        $response = $client->setMethod('GET')->send();
+        
+        // the last request should contain the Authorization header
+        $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) !== false);
+    }
 }

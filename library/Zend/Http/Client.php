@@ -533,6 +533,14 @@ class Client implements Stdlib\DispatchableInterface
     }
 
     /**
+     * Clear http authentication
+     */
+    public function clearAuth()
+    {
+        $this->auth = array();
+    }
+
+    /**
      * Set the headers (for the request)
      *
      * @param  Headers|array $headers
@@ -732,13 +740,13 @@ class Client implements Stdlib\DispatchableInterface
      * Reset all the HTTP parameters (auth,cookies,request, response, etc)
      *
      * @param  bool   $clearCookies  Also clear all valid cookies? (defaults to false)
+     * @param  bool   $clearAuth     Also clear http authentication? (defaults to true)
      * @return Client
      */
-    public function resetParameters($clearCookies = false)
+    public function resetParameters($clearCookies = false, $clearAuth = true)
     {
         $uri = $this->getUri();
 
-        $this->auth       = null;
         $this->streamName = null;
         $this->encType    = null;
         $this->request    = null;
@@ -748,6 +756,10 @@ class Client implements Stdlib\DispatchableInterface
 
         if ($clearCookies) {
             $this->clearCookies();
+        }
+        
+        if ($clearAuth) {
+            $this->clearAuth();
         }
 
         return $this;
@@ -897,7 +909,7 @@ class Client implements Stdlib\DispatchableInterface
                    ((! $this->config['strictredirects']) && ($response->getStatusCode() == 302 ||
                        $response->getStatusCode() == 301))) {
 
-                    $this->resetParameters();
+                    $this->resetParameters(false, false);
                     $this->setMethod(Request::METHOD_GET);
                 }
 

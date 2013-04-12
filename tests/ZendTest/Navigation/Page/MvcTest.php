@@ -562,5 +562,34 @@ class MvcTest extends TestCase
         $this->assertEquals('/lollerblades/view/23', $page->getHref());
     }
 
+    public function testInheritedRouteMatchParamsWorkWithModuleRouteListener()
+    {
+        $page = new Page\Mvc(array(
+            'label' => 'mpinkstonwashere',
+            'route' => 'lmaoplane'
+        ));
 
+        $route = new SegmentRoute('/lmaoplane/:controller');
+
+        $router = new TreeRouteStack;
+        $router->addRoute('lmaoplane', $route);
+
+        $routeMatch = new RouteMatch(array(
+            ModuleRouteListener::MODULE_NAMESPACE => 'Application\Controller',
+            'controller' => 'index'
+        ));
+        $routeMatch->setMatchedRouteName('lmaoplane');
+
+        $event = new MvcEvent();
+        $event->setRouter($router)
+            ->setRouteMatch($routeMatch);
+
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->onRoute($event);
+
+        $page->setRouter($event->getRouter());
+        $page->setRouteMatch($event->getRouteMatch());
+
+        $this->assertEquals('/lmaoplane/index', $page->getHref());
+    }
 }

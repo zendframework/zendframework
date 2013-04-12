@@ -19,7 +19,7 @@ class Input implements InputInterface, EmptyContextInterface
      * @var bool
      */
     protected $allowEmpty = false;
-    
+
     /**
      * @var bool
      */
@@ -94,7 +94,7 @@ class Input implements InputInterface, EmptyContextInterface
         $this->breakOnFailure = (bool) $breakOnFailure;
         return $this;
     }
-    
+
     /**
      * @param bool $continueIfEmpty
      * @return \Zend\InputFilter\Input
@@ -190,7 +190,7 @@ class Input implements InputInterface, EmptyContextInterface
     {
         return $this->breakOnFailure;
     }
-    
+
     /**
      * @return bool
      */

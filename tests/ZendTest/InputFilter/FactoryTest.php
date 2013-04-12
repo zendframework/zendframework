@@ -239,7 +239,7 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
         $this->assertEquals('foo', $input->getName());
     }
-    
+
     public function testFactoryWillCreateInputWithContinueIfEmptyFlag()
     {
         $factory = new Factory();

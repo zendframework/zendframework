@@ -12,6 +12,6 @@ namespace Zend\InputFilter;
 interface EmptyContextInterface
 {
     public function setContinueIfEmpty($continueIfEmpty);
-    
+
     public function continueIfEmpty();
 }

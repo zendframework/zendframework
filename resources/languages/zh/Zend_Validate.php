@@ -187,7 +187,7 @@ return array(
 
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "输入的单词过多，最多允许'%max%'个单词，输入了'%count%'个",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "输入的单词过少，至少需要'%min%'个单词，输入了'%count%'个",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "输入的单词过少，至少需要'%min%'个单词，输入了'%count%'个",
     "File '%value%' is not readable or does not exist" => "文件'%value%'无法读取或不存在",
 
     // Zend_Validator_GreaterThan

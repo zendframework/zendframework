@@ -199,7 +199,7 @@ return array(
 
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "För många ord, maximalt '%max%' är tillåtna men '%count%' räknades",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "För få ord, minimalt '%min%' förväntas men '%count%' räknades",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "För få ord, minimalt '%min%' förväntas men '%count%' räknades",
     "File '%value%' is not readable or does not exist" => "Filen '%value%' är inte läsbar eller existerar inte",
 
     // Zend_Validator_GreaterThan

@@ -13,12 +13,17 @@ use Zend\Filter\FilterChain;
 use Zend\Validator\ValidatorChain;
 use Zend\Validator\NotEmpty;
 
-class Input implements InputInterface
+class Input implements InputInterface, EmptyContextInterface
 {
     /**
      * @var bool
      */
     protected $allowEmpty = false;
+    
+    /**
+     * @var bool
+     */
+    protected $continueIfEmpty = false;
 
     /**
      * @var bool
@@ -87,6 +92,16 @@ class Input implements InputInterface
     public function setBreakOnFailure($breakOnFailure)
     {
         $this->breakOnFailure = (bool) $breakOnFailure;
+        return $this;
+    }
+    
+    /**
+     * @param bool $continueIfEmpty
+     * @return \Zend\InputFilter\Input
+     */
+    public function setContinueIfEmpty($continueIfEmpty)
+    {
+        $this->continueIfEmpty = (bool) $continueIfEmpty;
         return $this;
     }
 
@@ -174,6 +189,14 @@ class Input implements InputInterface
     public function breakOnFailure()
     {
         return $this->breakOnFailure;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function continueIfEmpty()
+    {
+        return $this->continueIfEmpty;
     }
 
     /**
@@ -274,7 +297,12 @@ class Input implements InputInterface
      */
     public function isValid($context = null)
     {
-        $this->injectNotEmptyValidator();
+        // Empty value needs further validation if continueIfEmpty is set
+        // so don't inject NotEmpty validator which would always
+        // mark that as false
+        if (!$this->continueIfEmpty()) {
+            $this->injectNotEmptyValidator();
+        }
         $validator = $this->getValidatorChain();
         $value     = $this->getValue();
         $result    = $validator->isValid($value, $context);

@@ -239,6 +239,17 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
         $this->assertEquals('foo', $input->getName());
     }
+    
+    public function testFactoryWillCreateInputWithContinueIfEmptyFlag()
+    {
+        $factory = new Factory();
+        $input = $factory->createInput(array(
+            'name'              => 'foo',
+            'continue_if_empty' => true,
+        ));
+        $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
+        $this->assertTrue($input->continueIfEmpty());
+    }
 
     public function testFactoryAcceptsInputInterface()
     {
@@ -339,11 +350,15 @@ class FactoryTest extends TestCase
                 'type' => 'ZendTest\InputFilter\TestAsset\CustomInput',
                 'name' => 'bat',
             ),
+            'zomg' => array(
+                'name' => 'zomg',
+                'continue_if_empty' => true,
+            ),
         ));
         $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter);
-        $this->assertEquals(4, count($inputFilter));
+        $this->assertEquals(5, count($inputFilter));
 
-        foreach (array('foo', 'bar', 'baz', 'bat') as $name) {
+        foreach (array('foo', 'bar', 'baz', 'bat', 'zomg') as $name) {
             $input = $inputFilter->get($name);
 
             switch ($name) {
@@ -373,6 +388,9 @@ class FactoryTest extends TestCase
                     $this->assertInstanceOf('ZendTest\InputFilter\TestAsset\CustomInput', $input);
                     $this->assertEquals('bat', $input->getName());
                     break;
+                case 'zomg':
+                    $this->assertInstanceOf('Zend\InputFilter\Input', $input);
+                    $this->assertTrue($input->continueIfEmpty());
             }
         }
     }

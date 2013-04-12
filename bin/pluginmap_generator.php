@@ -146,7 +146,7 @@ if ($appending) {
     $content = str_replace("\\'", "'", $content);
 
     // Convert to an array and remove the first "array ("
-    $content = explode(PHP_EOL, $content);
+    $content = explode("\n", $content);
     array_shift($content);
 
     // Load existing class map file and remove the closing "bracket ");" from it
@@ -154,7 +154,7 @@ if ($appending) {
     array_pop($existing);
 
     // Merge
-    $content = implode(PHP_EOL, $existing + $content);
+    $content = implode("\n", $existing + $content);
 } else {
     // Create a file with the class/file map.
     // Stupid syntax highlighters make separating < from PHP declaration necessary
@@ -169,7 +169,7 @@ if ($appending) {
 }
 
 // Make the file end by EOL
-$content = rtrim($content, PHP_EOL) . PHP_EOL;
+$content = rtrim($content, "\n") . "\n";
 
 // Write the contents to disk
 file_put_contents($output, $content);

@@ -23,8 +23,12 @@ class DbTableGateway extends DbSelect
     public function __construct(TableGateway $tableGateway, $where = null, $order = null)
     {
         $select = $tableGateway->getSql()->select();
-        if ($where) $select->where($where);
-        if ($order) $select->order($order);
+        if ($where) {
+            $select->where($where);
+        }
+        if ($order) {
+            $select->order($order);
+        }
         
         $dbAdapter          = $tableGateway->getAdapter();
         $resultSetPrototype = $tableGateway->getResultSetPrototype();

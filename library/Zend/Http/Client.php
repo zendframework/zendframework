@@ -912,11 +912,20 @@ class Client implements Stdlib\DispatchableInterface
                     $this->resetParameters(false, false);
                     $this->setMethod(Request::METHOD_GET);
                 }
+                
 
                 // If we got a well formed absolute URI
                 if (($scheme = substr($location, 0, 6)) &&
                         ($scheme == 'http:/' || $scheme == 'https:')) {
+                    // remember host of last request
+                    $lastHost = $this->getUri()->getHost();
                     $this->setUri($location);
+                    
+                    // clear authentication for security reasons if host changed
+                    $nextHost = $this->getUri()->getHost();
+                    if (!preg_match('/' . preg_quote($lastHost, '/') . '$/i', $nextHost)) {
+                        $this->clearAuth();
+                    }
                 } else {
 
                     // Split into path and query and set the query

@@ -268,4 +268,75 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // the last request should contain the Authorization header
         $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) !== false);
     }
+    
+    public function testIfClientDoesNotForwardAuthenticationToForeignHost()
+    {
+        // set up user credentials
+        $user = 'username123';
+        $password = 'password456';
+        $encoded = Client::encodeAuthHeader($user, $password, Client::AUTH_BASIC);
+        
+        $testAdapter = new Test();
+        $client = new Client(null, array('adapter' => $testAdapter));
+        
+        // set up two responses that simulate a redirection from example.org to example.com
+        $testAdapter->setResponse(
+            "HTTP/1.1 303 See Other\r\n"
+            . "Location: http://example.com/part2\r\n\r\n"
+            . "The URL of this page has changed."
+        );
+        $testAdapter->addResponse(
+            "HTTP/1.1 200 OK\r\n\r\n"
+            . "Welcome to this Website."
+        );
+        
+        // set auth and do request
+        $client->setUri('http://example.org/part1')
+            ->setAuth($user, $password, Client::AUTH_BASIC);
+        $response = $client->setMethod('GET')->send();
+        
+        // the last request should NOT contain the Authorization header,
+        // because example.com is different from example.org
+        $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) === false);
+        
+        // set up two responses that simulate a rediration from example.org to sub.example.org
+        $testAdapter->setResponse(
+            "HTTP/1.1 303 See Other\r\n"
+            . "Location: http://sub.example.org/part2\r\n\r\n"
+            . "The URL of this page has changed."
+        );
+        $testAdapter->addResponse(
+            "HTTP/1.1 200 OK\r\n\r\n"
+            . "Welcome to this Website."
+        );
+        
+        // set auth and do request
+        $client->setUri('http://example.org/part1')
+            ->setAuth($user, $password, Client::AUTH_BASIC);
+        $response = $client->setMethod('GET')->send();
+        
+        // the last request should contain the Authorization header, 
+        // because sub.example.org is a subdomain unter example.org
+        $this->assertFalse(strpos($client->getLastRawRequest(), $encoded) === false);
+        
+        // set up two responses that simulate a rediration from sub.example.org to example.org
+        $testAdapter->setResponse(
+            "HTTP/1.1 303 See Other\r\n"
+            . "Location: http://example.org/part2\r\n\r\n"
+            . "The URL of this page has changed."
+        );
+        $testAdapter->addResponse(
+            "HTTP/1.1 200 OK\r\n\r\n"
+            . "Welcome to this Website."
+        );
+        
+        // set auth and do request
+        $client->setUri('http://sub.example.org/part1')
+            ->setAuth($user, $password, Client::AUTH_BASIC);
+        $response = $client->setMethod('GET')->send();
+        
+        // the last request should NOT contain the Authorization header, 
+        // because example.org is not a subdomain unter sub.example.org
+        $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) === false);
+    }
 }

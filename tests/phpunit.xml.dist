@@ -1,0 +1,41 @@
+<phpunit bootstrap="./Bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Zend Framework Test Suite">
+            <directory>./ZendTest</directory>
+            <exclude>./ZendTest/_files/</exclude>
+            <exclude>./ZendTest/AllTests/</exclude>
+        </testsuite>
+    </testsuites>
+
+    <groups>
+        <exclude>
+            <group>disable</group>
+            <group>integration</group>
+            <group>integration-sqlserver</group>
+            <group>integration-ibm_db2</group>
+        </exclude>
+    </groups>
+
+    <php>
+
+        <!-- Integration Test Variables -->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_HOSTNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_USERNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_PASSWORD" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_SQLSRV_DATABASE" value="" />-->
+
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_OCI8_HOSTNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_OCI8_USERNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_OCI8_PASSWORD" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_OCI8_DATABASE" value="" />-->
+
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_IBMDB2_HOSTNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_IBMDB2_USERNAME" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_IBMDB2_PASSWORD" value="" />-->
+        <!--<var name="ZEND_DB_ADAPTER_DRIVER_IBMDB2_DATABASE" value="" />-->
+
+    </php>
+
+
+
+</phpunit>

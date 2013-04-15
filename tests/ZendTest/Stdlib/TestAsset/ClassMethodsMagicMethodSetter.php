@@ -15,8 +15,7 @@ class ClassMethodsMagicMethodSetter
 
     public function __call($method, $args)
     {
-        if(strlen($method) > 3 && strtolower(substr($method, 3)) == 'foo')
-        {
+        if(strlen($method) > 3 && strtolower(substr($method, 3)) == 'foo') {
             $this->foo = $args[0];
         }
     }

@@ -173,15 +173,15 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(isset($datas['HasBar']));
         $this->assertEquals($datas['HasBar'], true);
         $test = $hydrator->hydrate(
-                array(
-                        'FooBar' => 'foo',
-                        'FooBarBaz' => 'bar',
-                        'IsFoo' => false,
-                        'IsBar' => false,
-                        'HasFoo' => false,
-                        'HasBar' => false,
-                ),
-                $this->classMethodsTitleCase
+            array(
+                    'FooBar' => 'foo',
+                    'FooBarBaz' => 'bar',
+                    'IsFoo' => false,
+                    'IsBar' => false,
+                    'HasFoo' => false,
+                    'HasBar' => false,
+            ),
+            $this->classMethodsTitleCase
         );
         $this->assertSame($this->classMethodsTitleCase, $test);
         $this->assertEquals($test->getFooBar(), 'foo');

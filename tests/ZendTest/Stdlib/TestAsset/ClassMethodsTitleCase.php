@@ -40,7 +40,6 @@ class ClassMethodsTitleCase
         return $this->FooBarBaz;
     }
 
-
     public function setFooBarBaz($value)
     {
         $this->FooBarBaz = $value;
@@ -58,7 +57,6 @@ class ClassMethodsTitleCase
         return $this;
     }
 
-
     public function getIsBar()
     {
         return $this->IsBar;
@@ -70,18 +68,15 @@ class ClassMethodsTitleCase
         return $this;
     }
 
-
     public function getHasFoo()
     {
         return $this->HasFoo;
     }
 
-
     public function getHasBar()
     {
         return $this->HasBar;
     }
-
 
     public function setHasFoo($HasFoo)
     {
@@ -89,12 +84,8 @@ class ClassMethodsTitleCase
         return $this;
     }
 
-
     public function setHasBar($HasBar)
     {
         $this->HasBar = $HasBar;
     }
-
-
-
 }

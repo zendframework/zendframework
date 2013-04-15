@@ -188,5 +188,4 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 
         return $object;
     }
-
 }

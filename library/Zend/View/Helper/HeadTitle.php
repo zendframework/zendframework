@@ -99,7 +99,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
 
         return $indent . '<title>' . $output . '</title>';
     }
-    
+
     /**
      * Render title string
      *

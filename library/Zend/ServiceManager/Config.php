@@ -107,6 +107,17 @@ class Config implements ConfigInterface
     }
 
     /**
+     * Get the delegator services map, with keys being the services acting as delegates,
+     * and values being the delegator factories names
+     *
+     * @return array
+     */
+    public function getDelegators()
+    {
+        return (isset($this->config['delegators'])) ? $this->config['delegators'] : array();
+    }
+
+    /**
      * Configure service manager
      *
      * @param ServiceManager $serviceManager
@@ -144,6 +155,12 @@ class Config implements ConfigInterface
 
         foreach ($this->getShared() as $name => $isShared) {
             $serviceManager->setShared($name, $isShared);
+        }
+
+        foreach ($this->getDelegators() as $originalServiceName => $delegators) {
+            foreach ($delegators as $delegator) {
+                $serviceManager->addDelegator($originalServiceName, $delegator);
+            }
         }
     }
 }

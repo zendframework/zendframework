@@ -120,13 +120,13 @@ abstract class AbstractServer implements Server
     /**
      * Dispatch method
      *
-     * @param  Method\Definition $invocable
+     * @param  Method\Definition $invokable
      * @param  array $params
      * @return mixed
      */
-    protected function _dispatch(Method\Definition $invocable, array $params)
+    protected function _dispatch(Method\Definition $invokable, array $params)
     {
-        $callback = $invocable->getCallback();
+        $callback = $invokable->getCallback();
         $type     = $callback->getType();
 
         if ('function' == $type) {
@@ -141,9 +141,9 @@ abstract class AbstractServer implements Server
             return call_user_func_array(array($class, $method), $params);
         }
 
-        $object = $invocable->getObject();
+        $object = $invokable->getObject();
         if (!is_object($object)) {
-            $invokeArgs = $invocable->getInvokeArguments();
+            $invokeArgs = $invokable->getInvokeArguments();
             if (!empty($invokeArgs)) {
                 $reflection = new ReflectionClass($class);
                 $object     = $reflection->newInstanceArgs($invokeArgs);

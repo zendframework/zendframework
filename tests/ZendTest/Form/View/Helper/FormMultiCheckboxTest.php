@@ -364,4 +364,5 @@ class FormMultiCheckboxTest extends CommonTestCase
         $uncheckedValue = $this->helper->getUncheckedValue();
         $this->assertSame('foo', $uncheckedValue);
     }
+
 }

@@ -16,6 +16,7 @@ use Zend\Stdlib\Hydrator\ObjectProperty;
 use Zend\Stdlib\Hydrator\ArraySerializable;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase;
+use ZendTest\Stdlib\TestAsset\ClassMethodsTitleCase;
 use ZendTest\Stdlib\TestAsset\ClassMethodsFilterProviderInterface;
 use ZendTest\Stdlib\TestAsset\ClassMethodsMagicMethodSetter;
 use ZendTest\Stdlib\TestAsset\ClassMethodsProtectedSetter;
@@ -45,6 +46,11 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     protected $classMethodsCamelCase;
 
     /**
+     * @var ClassMethodsTitleCase
+     */
+    protected $classMethodsTitleCase;
+
+    /**
      * @var ClassMethodsCamelCaseMissing
      */
     protected $classMethodsCamelCaseMissing;
@@ -67,6 +73,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->classMethodsCamelCase = new ClassMethodsCamelCase();
+        $this->classMethodsTitleCase = new ClassMethodsTitleCase();
         $this->classMethodsCamelCaseMissing = new ClassMethodsCamelCaseMissing();
         $this->classMethodsUnderscore = new ClassMethodsUnderscore();
         $this->classMethodsInvalidParameter = new ClassMethodsInvalidParameter();
@@ -82,6 +89,12 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->classMethodsCamelCase->isBar(), true);
         $this->assertEquals($this->classMethodsCamelCase->getHasFoo(), true);
         $this->assertEquals($this->classMethodsCamelCase->hasBar(), true);
+        $this->assertEquals($this->classMethodsTitleCase->getFooBar(), '1');
+        $this->assertEquals($this->classMethodsTitleCase->getFooBarBaz(), '2');
+        $this->assertEquals($this->classMethodsTitleCase->getIsFoo(), true);
+        $this->assertEquals($this->classMethodsTitleCase->getIsBar(), true);
+        $this->assertEquals($this->classMethodsTitleCase->getHasFoo(), true);
+        $this->assertEquals($this->classMethodsTitleCase->getHasBar(), true);
         $this->assertEquals($this->classMethodsUnderscore->getFooBar(), '1');
         $this->assertEquals($this->classMethodsUnderscore->getFooBarBaz(), '2');
         $this->assertEquals($this->classMethodsUnderscore->getIsFoo(), true);
@@ -142,6 +155,45 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($test->getHasFoo(), false);
         $this->assertEquals($test->hasBar(), false);
     }
+
+
+
+    public function testHydratorClassMethodsTitleCase()
+    {
+        $hydrator = new ClassMethods(false);
+        $datas = $hydrator->extract($this->classMethodsTitleCase);
+        $this->assertTrue(isset($datas['FooBar']));
+        $this->assertEquals($datas['FooBar'], '1');
+        $this->assertTrue(isset($datas['FooBarBaz']));
+        $this->assertFalse(isset($datas['foo_bar']));
+        $this->assertTrue(isset($datas['IsFoo']));
+        $this->assertEquals($datas['IsFoo'], true);
+        $this->assertTrue(isset($datas['IsBar']));
+        $this->assertEquals($datas['IsBar'], true);
+        $this->assertTrue(isset($datas['HasFoo']));
+        $this->assertEquals($datas['HasFoo'], true);
+        $this->assertTrue(isset($datas['HasBar']));
+        $this->assertEquals($datas['HasBar'], true);
+        $test = $hydrator->hydrate(
+            array(
+                    'FooBar' => 'foo',
+                    'FooBarBaz' => 'bar',
+                    'IsFoo' => false,
+                    'IsBar' => false,
+                    'HasFoo' => false,
+                    'HasBar' => false,
+            ),
+            $this->classMethodsTitleCase
+        );
+        $this->assertSame($this->classMethodsTitleCase, $test);
+        $this->assertEquals($test->getFooBar(), 'foo');
+        $this->assertEquals($test->getFooBarBaz(), 'bar');
+        $this->assertEquals($test->getIsFoo(), false);
+        $this->assertEquals($test->getIsBar(), false);
+        $this->assertEquals($test->getHasFoo(), false);
+        $this->assertEquals($test->getHasBar(), false);
+    }
+
 
     public function testHydratorClassMethodsUnderscore()
     {

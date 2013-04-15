@@ -29,7 +29,7 @@ trait ProvidesEvents
      */
     public function setEventManager(EventManagerInterface $events)
     {
-        $identifiers = array(__CLASS__, get_called_class());
+        $identifiers = array(__CLASS__, get_class($this));
         if (isset($this->eventIdentifier)) {
             if ((is_string($this->eventIdentifier))
                 || (is_array($this->eventIdentifier))

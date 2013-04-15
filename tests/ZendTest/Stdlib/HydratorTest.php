@@ -42,7 +42,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
      * @var ClassMethodsCamelCase
      */
     protected $classMethodsCamelCase;
-    
+
     /**
      * @var ClassMethodsTitleCase
      */
@@ -86,7 +86,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->classMethodsCamelCase->getIsFoo(), true);
         $this->assertEquals($this->classMethodsCamelCase->isBar(), true);
         $this->assertEquals($this->classMethodsCamelCase->getHasFoo(), true);
-        $this->assertEquals($this->classMethodsCamelCase->hasBar(), true);       
+        $this->assertEquals($this->classMethodsCamelCase->hasBar(), true);
         $this->assertEquals($this->classMethodsTitleCase->getFooBar(), '1');
         $this->assertEquals($this->classMethodsTitleCase->getFooBarBaz(), '2');
         $this->assertEquals($this->classMethodsTitleCase->getIsFoo(), true);
@@ -153,9 +153,9 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($test->getHasFoo(), false);
         $this->assertEquals($test->hasBar(), false);
     }
-    
-    
-    
+
+
+
     public function testHydratorClassMethodsTitleCase()
     {
     	$hydrator = new ClassMethods(false);
@@ -191,7 +191,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     	$this->assertEquals($test->getHasFoo(), false);
     	$this->assertEquals($test->getHasBar(), false);
     }
-    
+
 
     public function testHydratorClassMethodsUnderscore()
     {

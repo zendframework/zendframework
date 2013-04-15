@@ -423,7 +423,7 @@ class FactoryTest extends TestCase
         ));
         $this->assertEquals('My custom error message', $input->getErrorMessage());
     }
-    
+
     public function testFactoryWillNotGetPrioritySetting()
     {
         //Reminder: Priority at which to enqueue filter; defaults to 1000 (higher executes earlier)
@@ -444,10 +444,10 @@ class FactoryTest extends TestCase
                 )
             )
         ));
-        
+
         // We should have 3 filters
         $this->assertEquals(3, $input->getFilterChain()->count());
-        
+
         // Filters should pop in the following order:
         // string_to_upper (1001), string_to_lower (1000), string_trim (999)
         $index = 0;
@@ -461,7 +461,7 @@ class FactoryTest extends TestCase
                     break;
                 case 2:
                     $this->assertInstanceOf('Zend\Filter\StringTrim', $filter);
-                    break;               
+                    break;
             }
             $index++;
         }

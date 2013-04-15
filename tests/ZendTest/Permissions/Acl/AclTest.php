@@ -1372,4 +1372,12 @@ class AclTest extends \PHPUnit_Framework_TestCase
 
         $this->_acl->setRule(Acl\Acl::OP_ADD, Acl\Acl::TYPE_ALLOW, $roleGuest, $resourceFoo);
     }
+
+    public function testAllowNullPermissionAfterResourcesExistShouldAllowAllPermissionsForRole()
+    {
+        $this->_acl->addRole('admin');
+        $this->_acl->addResource('newsletter');
+        $this->_acl->allow('admin');
+        $this->assertTrue($this->_acl->isAllowed('admin'));
+    }
 }

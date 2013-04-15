@@ -162,9 +162,9 @@ abstract class AbstractController implements
         $events->setIdentifiers(array(
             'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
-            get_called_class(),
+            get_class($this),
             $this->eventIdentifier,
-            substr(get_called_class(), 0, strpos(get_called_class(), '\\'))
+            substr(get_called_class(), 0, strpos(get_class($this), '\\'))
         ));
         $this->events = $events;
         $this->attachDefaultListeners();

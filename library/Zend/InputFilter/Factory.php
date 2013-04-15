@@ -267,11 +267,12 @@ class Factory
                     );
                 }
                 $name = $filter['name'];
+                $priority = isset($filter['priority']) ? $filter['priority'] : FilterChain::DEFAULT_PRIORITY;
                 $options = array();
                 if (isset($filter['options'])) {
                     $options = $filter['options'];
                 }
-                $chain->attachByName($name, $options);
+                $chain->attachByName($name, $options, $priority);
                 continue;
             }
 

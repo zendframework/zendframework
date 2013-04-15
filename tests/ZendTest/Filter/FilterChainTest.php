@@ -183,6 +183,38 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
         $valueExpected = 'abc';
         $this->assertEquals($valueExpected, $unserialized->filter($value));
     }
+    
+    public function testMergingTwoFilterChainsKeepFiltersPriority()
+    {
+        $value         = 'AbC';
+        $valueExpected = 'abc';
+        
+        $chain = new FilterChain();
+        $chain->attach(new StripUpperCase())
+              ->attach(new LowerCase(), 1001);        
+        $this->assertEquals($valueExpected, $chain->filter($value));
+        
+        $chain = new FilterChain();
+        $chain->attach(new LowerCase(), 1001)
+              ->attach(new StripUpperCase());        
+        $this->assertEquals($valueExpected, $chain->filter($value));
+        
+        $chain = new FilterChain();
+        $chain->attach(new LowerCase(), 1001);        
+        $chainToMerge = new FilterChain();
+        $chainToMerge->attach(new StripUpperCase());        
+        $chain->merge($chainToMerge);
+        $this->assertEquals(2, $chain->count());
+        $this->assertEquals($valueExpected, $chain->filter($value));
+        
+        $chain = new FilterChain();
+        $chain->attach(new StripUpperCase());        
+        $chainToMerge = new FilterChain();
+        $chainToMerge->attach(new LowerCase(), 1001);        
+        $chain->merge($chainToMerge);
+        $this->assertEquals(2, $chain->count());
+        $this->assertEquals($valueExpected, $chain->filter($value));        
+    }
 }
 
 

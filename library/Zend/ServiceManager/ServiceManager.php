@@ -326,11 +326,13 @@ class ServiceManager implements ServiceLocatorInterface
      */
     public function addDelegator($serviceName, $delegatorFactoryName)
     {
-        if (!isset($this->delegators[$this->canonicalizeName($serviceName)])) {
-            $this->delegators[$this->canonicalizeName($serviceName)] = array();
+        $cName = $this->canonicalizeName($serviceName);
+
+        if (!isset($this->delegators[$cName])) {
+            $this->delegators[$cName] = array();
         }
 
-        $this->delegators[$this->canonicalizeName($serviceName)][] = $delegatorFactoryName;
+        $this->delegators[$cName][] = $delegatorFactoryName;
 
         return $this;
     }

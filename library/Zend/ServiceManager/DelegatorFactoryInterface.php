@@ -10,12 +10,12 @@
 namespace Zend\ServiceManager;
 
 /**
- * Interface for factories that can create delegators for services
+ * Interface for factories that can create delegates for services
  */
 interface DelegatorFactoryInterface
 {
     /**
-     * A factory that creates delegators of a given service
+     * A factory that creates delegates of a given service
      *
      * @param ServiceLocatorInterface $serviceLocator the service locator which requested the service
      * @param string                  $name           the normalized service name

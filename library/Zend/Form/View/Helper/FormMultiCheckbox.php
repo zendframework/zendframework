@@ -256,7 +256,7 @@ class FormMultiCheckbox extends FormInput
             }
 
             $value           = '';
-            $label           = '';  
+            $label           = '';
             $inputAttributes = $attributes;
             $labelAttributes = $globalLabelAttributes;
             $selected        = isset($inputAttributes['selected']) && $inputAttributes['type'] != 'radio' && $inputAttributes['selected'] != false ? true : false;

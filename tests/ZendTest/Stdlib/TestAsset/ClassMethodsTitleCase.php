@@ -24,76 +24,76 @@ class ClassMethodsTitleCase
 
     protected $HasBar = true;
 
-	public function getFooBar()
-	{
-		return $this->FooBar;
-	}
+    public function getFooBar()
+    {
+        return $this->FooBar;
+    }
 
-	public function setFooBar($value)
-	{
-		$this->FooBar = $value;
-		return $this;
-	}
+    public function setFooBar($value)
+    {
+        $this->FooBar = $value;
+        return $this;
+    }
 
-	public function getFooBarBaz()
-	{
-		return $this->FooBarBaz;
-	}
-
-
-	public function setFooBarBaz($value)
-	{
-		$this->FooBarBaz = $value;
-		return $this;
-	}
-
-	public function getIsFoo()
-	{
-		return $this->IsFoo;
-	}
-
-	public function setIsFoo($IsFoo)
-	{
-		$this->IsFoo = $IsFoo;
-		return $this;
-	}
+    public function getFooBarBaz()
+    {
+        return $this->FooBarBaz;
+    }
 
 
-	public function getIsBar()
-	{
-		return $this->IsBar;
-	}
+    public function setFooBarBaz($value)
+    {
+        $this->FooBarBaz = $value;
+        return $this;
+    }
 
-	public function setIsBar($IsBar)
-	{
-		$this->IsBar = $IsBar;
-		return $this;
-	}
+    public function getIsFoo()
+    {
+        return $this->IsFoo;
+    }
 
-
-	public function getHasFoo()
-	{
-		return $this->HasFoo;
-	}
-
-
-	public function getHasBar()
-	{
-		return $this->HasBar;
-	}
+    public function setIsFoo($IsFoo)
+    {
+        $this->IsFoo = $IsFoo;
+        return $this;
+    }
 
 
-	public function setHasFoo($HasFoo)
-	{
-		$this->HasFoo = $HasFoo;
-		return $this;
-	}
+    public function getIsBar()
+    {
+        return $this->IsBar;
+    }
+
+    public function setIsBar($IsBar)
+    {
+        $this->IsBar = $IsBar;
+        return $this;
+    }
 
 
-	public function setHasBar($HasBar)
-	{
-		$this->HasBar = $HasBar;
-	}
+    public function getHasFoo()
+    {
+        return $this->HasFoo;
+    }
+
+
+    public function getHasBar()
+    {
+        return $this->HasBar;
+    }
+
+
+    public function setHasFoo($HasFoo)
+    {
+        $this->HasFoo = $HasFoo;
+        return $this;
+    }
+
+
+    public function setHasBar($HasBar)
+    {
+        $this->HasBar = $HasBar;
+    }
 
 
 

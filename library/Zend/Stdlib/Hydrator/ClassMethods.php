@@ -137,7 +137,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
             if (preg_match('/^get/', $method)) {
                 $attribute = substr($method, 3);
                 if(!property_exists($object, $attribute)) {
-                	$attribute = lcfirst($attribute);
+                    $attribute = lcfirst($attribute);
                 }
             }
 

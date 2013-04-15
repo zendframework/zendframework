@@ -158,38 +158,38 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
 
     public function testHydratorClassMethodsTitleCase()
     {
-    	$hydrator = new ClassMethods(false);
-    	$datas = $hydrator->extract($this->classMethodsTitleCase);
-     	$this->assertTrue(isset($datas['FooBar']));
-    	$this->assertEquals($datas['FooBar'], '1');
-    	$this->assertTrue(isset($datas['FooBarBaz']));
-    	$this->assertFalse(isset($datas['foo_bar']));
-    	$this->assertTrue(isset($datas['IsFoo']));
-    	$this->assertEquals($datas['IsFoo'], true);
-    	$this->assertTrue(isset($datas['IsBar']));
-    	$this->assertEquals($datas['IsBar'], true);
-    	$this->assertTrue(isset($datas['HasFoo']));
-    	$this->assertEquals($datas['HasFoo'], true);
-    	$this->assertTrue(isset($datas['HasBar']));
-    	$this->assertEquals($datas['HasBar'], true);
-    	$test = $hydrator->hydrate(
-    			array(
-    					'FooBar' => 'foo',
-    					'FooBarBaz' => 'bar',
-    					'IsFoo' => false,
-    					'IsBar' => false,
-    					'HasFoo' => false,
-    					'HasBar' => false,
-    			),
-    			$this->classMethodsTitleCase
-    	);
-    	$this->assertSame($this->classMethodsTitleCase, $test);
-    	$this->assertEquals($test->getFooBar(), 'foo');
-    	$this->assertEquals($test->getFooBarBaz(), 'bar');
-    	$this->assertEquals($test->getIsFoo(), false);
-    	$this->assertEquals($test->getIsBar(), false);
-    	$this->assertEquals($test->getHasFoo(), false);
-    	$this->assertEquals($test->getHasBar(), false);
+        $hydrator = new ClassMethods(false);
+        $datas = $hydrator->extract($this->classMethodsTitleCase);
+        $this->assertTrue(isset($datas['FooBar']));
+        $this->assertEquals($datas['FooBar'], '1');
+        $this->assertTrue(isset($datas['FooBarBaz']));
+        $this->assertFalse(isset($datas['foo_bar']));
+        $this->assertTrue(isset($datas['IsFoo']));
+        $this->assertEquals($datas['IsFoo'], true);
+        $this->assertTrue(isset($datas['IsBar']));
+        $this->assertEquals($datas['IsBar'], true);
+        $this->assertTrue(isset($datas['HasFoo']));
+        $this->assertEquals($datas['HasFoo'], true);
+        $this->assertTrue(isset($datas['HasBar']));
+        $this->assertEquals($datas['HasBar'], true);
+        $test = $hydrator->hydrate(
+                array(
+                        'FooBar' => 'foo',
+                        'FooBarBaz' => 'bar',
+                        'IsFoo' => false,
+                        'IsBar' => false,
+                        'HasFoo' => false,
+                        'HasBar' => false,
+                ),
+                $this->classMethodsTitleCase
+        );
+        $this->assertSame($this->classMethodsTitleCase, $test);
+        $this->assertEquals($test->getFooBar(), 'foo');
+        $this->assertEquals($test->getFooBarBaz(), 'bar');
+        $this->assertEquals($test->getIsFoo(), false);
+        $this->assertEquals($test->getIsBar(), false);
+        $this->assertEquals($test->getHasFoo(), false);
+        $this->assertEquals($test->getHasBar(), false);
     }
 
 

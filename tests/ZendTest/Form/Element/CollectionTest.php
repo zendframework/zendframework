@@ -413,4 +413,10 @@ class CollectionTest extends TestCase
             'obj3' => $obj3,
         ));
     }
+
+    public function testGetElementsForFieldsetCollectionReturnsFieldsetElements()
+    {
+        $collection = $this->form->get('fieldsets');
+        $this->assertCount(1, $collection->getElements());
+    }
 }

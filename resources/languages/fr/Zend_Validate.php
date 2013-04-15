@@ -12,9 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Translator
- * @subpackage Resource
  * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -191,7 +188,7 @@ return array(
 
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Trop de mots. '%max%' sont autorisés, '%count%' comptés",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Pas assez de mots. '%min%' sont attendus, '%count%' comptés",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Pas assez de mots. '%min%' sont attendus, '%count%' comptés",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
     // Zend_Validator_GreaterThan
@@ -271,7 +268,7 @@ return array(
 
     // Zend_Validator_StringLength
     "Invalid type given. String expected" => "Type invalide. Chaîne attendue",
-    "The input is less than %min% characters long" => "L'entrée conteint moins de %min% caractères",
+    "The input is less than %min% characters long" => "L'entrée contient moins de %min% caractères",
     "The input is more than %max% characters long" => "L'entrée contient plus de %max% caractères",
 
     // Zend_Validator_Uri

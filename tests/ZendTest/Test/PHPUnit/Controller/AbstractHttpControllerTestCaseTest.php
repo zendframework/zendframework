@@ -199,6 +199,14 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertXpathQuery('//form[@id="id"]');
     }
 
+    public function testAssertXpathQueryWithBadXpathUsage()
+    {
+        $this->dispatch('/tests');
+
+        $this->setExpectedException('ErrorException');
+        $this->assertXpathQuery('form#myform');
+    }
+
     public function testAssertNotQuery()
     {
         $this->dispatch('/tests');
@@ -239,6 +247,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
             'actually occurs 3 times' // check actual occurs is display
         );
         $this->assertXpathQueryCount('//div[@class="top"]', 2);
+    }
+
+    public function testAssertXpathQueryCountWithBadXpathUsage()
+    {
+        $this->dispatch('/tests');
+        $this->assertXpathQueryCount('div.top', 0);
     }
 
     public function testAssertNotQueryCount()
@@ -455,12 +469,22 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
     public function testAssertQueryWithDynamicPostParamsInDispatchMethod()
     {
         $this->dispatch('/tests', 'POST', array('num_post' => 5));
+        $request = $this->getRequest();
+        $this->assertEquals($request->getMethod(), 'POST');
         $this->assertQueryCount('div.post', 5);
         $this->assertXpathQueryCount('//div[@class="post"]', 5);
         $this->assertQueryCount('div.get', 0);
         $this->assertXpathQueryCount('//div[@class="get"]', 0);
     }
 
+    public function testAssertQueryWithDynamicPutParamsInDispatchMethod()
+    {
+        $this->dispatch('/tests', 'PUT', array('num_post' => 5, 'foo' => 'bar'));
+        $request = $this->getRequest();
+        $this->assertEquals($request->getMethod(), 'PUT');
+        $this->assertEquals('num_post=5&foo=bar', $request->getContent());
+    }
+    /*
     public function testAssertUriWithHostname()
     {
         $this->dispatch('http://my.domain.tld:443');

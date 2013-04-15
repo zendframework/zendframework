@@ -151,10 +151,10 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
      */
     public function setupDefaultFeatures()
     {
-        if ($this->connection->getDriverName() == 'sqlite') {
+        $driverName = $this->connection->getDriverName();
+        if ($driverName == 'sqlite') {
             $this->addFeature(null, new Feature\SqliteRowCounter);
-        }
-        if ($this->connection->getDriverName() == 'oci') {
+        } elseif ($driverName == 'oci') {
             $this->addFeature(null, new Feature\OracleRowCounter);
         }
         return $this;
@@ -187,6 +187,9 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
             switch ($name) {
                 case 'pgsql':
                     return 'Postgresql';
+                case 'oci':
+                    return 'Oracle';
+
                 default:
                     return ucfirst($name);
             }
@@ -198,6 +201,8 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
                     return 'MySQL';
                 case 'pgsql':
                     return 'PostgreSQL';
+                case 'oci':
+                    return 'Oracle';
                 default:
                     return ucfirst($name);
             }

@@ -56,7 +56,8 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Returns the flash messenger plugin controller
      *
-     * @return FlashMessenger|FlashMessenger\Controller\Plugin\FlashMessenger
+     * @param  string|null $namespace
+     * @return FlashMessenger|PluginFlashMessenger
      */
     public function __invoke($namespace = null)
     {
@@ -123,7 +124,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
 
         // Generate markup
         $markup  = sprintf($this->getMessageOpenFormat(), ' class="' . implode(' ', $classes) . '"');
-        $markup .= implode($this->getMessageSeparatorString(), $messagesToPrint);
+        $markup .= implode(sprintf($this->getMessageSeparatorString(), ' class="' . implode(' ', $classes) . '"'), $messagesToPrint);
         $markup .= $this->getMessageCloseString();
 
         return $markup;
@@ -237,6 +238,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Set the flash messenger plugin
      *
+     * @param  PluginFlashMessenger $pluginFlashMessenger
      * @return FlashMessenger
      */
     public function setPluginFlashMessenger(PluginFlashMessenger $pluginFlashMessenger)

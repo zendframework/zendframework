@@ -456,8 +456,16 @@ abstract class AbstractContainer extends ArrayObject
      * @return array        Returns the old array
      * @see ArrayObject::exchangeArray()
      */
-    protected function exchangeArrayCompat($input)
+    public function exchangeArray($input)
     {
+        // handle arrayobject, iterators and the like:
+        if (is_object($input) && ($input instanceof ArrayObject || $input instanceof \ArrayObject)) {
+            $input = $input->getArrayCopy();
+        }
+        if (!is_array($input)) {
+            $input = (array) $input;
+        }
+
         $storage = $this->verifyNamespace();
         $name    = $this->getName();
 
@@ -484,6 +492,7 @@ abstract class AbstractContainer extends ArrayObject
         if ($container instanceof Traversable) {
             return $container;
         }
+
         return new ArrayIterator($container);
     }
 

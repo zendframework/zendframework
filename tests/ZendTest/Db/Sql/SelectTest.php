@@ -17,6 +17,7 @@ use Zend\Db\Sql\Predicate;
 use Zend\Db\Sql\TableIdentifier;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\Sql92;
+use ZendTest\Db\TestAsset\TrustingSql92Platform;
 
 class SelectTest extends \PHPUnit_Framework_TestCase
 {
@@ -44,7 +45,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test getRawState() returns infromation populated via from()
+     * @testdox unit test: Test getRawState() returns information populated via from()
      * @covers Zend\Db\Sql\Select::getRawState
      * @depends testFrom
      */
@@ -66,7 +67,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test getRawState() returns infromation populated via from()
+     * @testdox unit test: Test getRawState() returns information populated via from()
      * @covers Zend\Db\Sql\Select::getRawState
      * @depends testQuantifier
      */
@@ -238,6 +239,21 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $where = $select->getRawState('where');
         $predicates = $where->getPredicates();
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
+    }
+
+    /**
+     * @testdox unit test: Test where() will accept any array with string key (without ?) with Predicate throw Exception
+     * @covers Zend\Db\Sql\Select::where
+     */
+    public function testWhereArgument1IsAssociativeArrayIsPredicate()
+    {
+        $select = new Select;
+            $where = array(
+            'name' => new Predicate\Literal("name = 'Ralph'"),
+            'age' => new Predicate\Expression('age = ?', 33),
+        );
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Using Predicate must not use string keys');
+        $select->where($where);
     }
 
     /**
@@ -500,7 +516,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSqlString(Select $select, $unused, $unused2, $expectedSqlString)
     {
-        $this->assertEquals($expectedSqlString, $select->getSqlString());
+        $this->assertEquals($expectedSqlString, $select->getSqlString(new TrustingSql92Platform()));
     }
 
     /**
@@ -1017,6 +1033,13 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processSelect' => array('TOP ?', array(array('"foo".*')), '"foo"'),
         );
 
+        $select43 = new Select();
+        $select43->from(array('x' => 'foo'))->columns(array('bar'), false);
+        $sqlPrep43 = 'SELECT "bar" AS "bar" FROM "foo" AS "x"';
+        $sqlStr43 = 'SELECT "bar" AS "bar" FROM "foo" AS "x"';
+        $internalTests43 = array(
+            'processSelect' => array(array(array('"bar"', '"bar"')), '"foo" AS "x"')
+        );
 
         /**
          * $select = the select object
@@ -1071,6 +1094,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select40, $sqlPrep40, array(),    $sqlStr40, $internalTests40),
             array($select41, $sqlPrep41, array(),    $sqlStr41, $internalTests41),
             array($select42, $sqlPrep42, array(),    $sqlStr42, $internalTests42),
+            array($select43, $sqlPrep43, array(),    $sqlStr43, $internalTests43),
         );
     }
 }

@@ -37,6 +37,11 @@ class HostnameTest extends TestCase
                 'example.com',
                 null
             ),
+            'no-match-with-different-number-of-parts-2' => array(
+                new Hostname('example.com'),
+                'foo.example.com',
+                null
+            ),
             'match-overrides-default' => array(
                 new Hostname(':foo.example.com', array(), array('foo' => 'baz')),
                 'bat.example.com',
@@ -51,6 +56,105 @@ class HostnameTest extends TestCase
                 new Hostname(':foo.example.com', array('foo' => '\d+')),
                 '123.example.com',
                 array('foo' => '123')
+            ),
+            'constraints-allow-match-2' => array(
+                new Hostname(
+                    'www.:domain.com',
+                    array('domain' => '(mydomain|myaltdomain1|myaltdomain2)'),
+                    array('domain'    => 'mydomain')
+                ),
+                'www.mydomain.com',
+                array('domain' => 'mydomain')
+            ),
+            'optional-subdomain' => array(
+                new Hostname('[:foo.]example.com'),
+                'bar.example.com',
+                array('foo' => 'bar'),
+            ),
+            'two-optional-subdomain' => array(
+                new Hostname('[:foo.][:bar.]example.com'),
+                'baz.bat.example.com',
+                array('foo' => 'baz', 'bar' => 'bat'),
+            ),
+            'missing-optional-subdomain' => array(
+                new Hostname('[:foo.]example.com'),
+                'example.com',
+                array('foo' => null),
+            ),
+            'one-of-two-missing-optional-subdomain' => array(
+                new Hostname('[:foo.][:bar.]example.com'),
+                'bat.example.com',
+                array('foo' => null, 'foo' => 'bat'),
+            ),
+            'two-missing-optional-subdomain' => array(
+                new Hostname('[:foo.][:bar.]example.com'),
+                'example.com',
+                array('foo' => null, 'bar' => null),
+            ),
+            'two-optional-subdomain-nested' => array(
+                new Hostname('[[:foo.]:bar.]example.com'),
+                'baz.bat.example.com',
+                array('foo' => 'baz', 'bar' => 'bat'),
+            ),
+            'one-of-two-missing-optional-subdomain-nested' => array(
+                new Hostname('[[:foo.]:bar.]example.com'),
+                'bat.example.com',
+                array('foo' => null, 'bar' => 'bat'),
+            ),
+            'two-missing-optional-subdomain-nested' => array(
+                new Hostname('[[:foo.]:bar.]example.com'),
+                'example.com',
+                array('foo' => null, 'bar' => null),
+            ),
+            'no-match-on-different-hostname-and-optional-subdomain' => array(
+                new Hostname('[:foo.]example.com'),
+                'bar.test.com',
+                null,
+            ),
+            'no-match-with-different-number-of-parts-and-optional-subdomain' => array(
+                new Hostname('[:foo.]example.com'),
+                'bar.baz.example.com',
+                null,
+            ),
+            'match-overrides-default-optional-subdomain' => array(
+                new Hostname('[:foo.]:bar.example.com', array(), array('bar' => 'baz')),
+                'bat.qux.example.com',
+                array('foo' => 'bat', 'bar' => 'qux'),
+            ),
+            'constraints-prevent-match-optional-subdomain' => array(
+                new Hostname('[:foo.]example.com', array('foo' => '\d+')),
+                'bar.example.com',
+                null,
+            ),
+            'constraints-allow-match-optional-subdomain' => array(
+                new Hostname('[:foo.]example.com', array('foo' => '\d+')),
+                '123.example.com',
+                array('foo' => '123'),
+            ),
+            'middle-subdomain-optional' => array(
+                new Hostname(':foo.[:bar.]example.com'),
+                'baz.bat.example.com',
+                array('foo' => 'baz', 'bar' => 'bat'),
+            ),
+            'missing-middle-subdomain-optional' => array(
+                new Hostname(':foo.[:bar.]example.com'),
+                'baz.example.com',
+                array('foo' => 'baz'),
+            ),
+            'non-standard-delimeter' => array(
+                new Hostname('user-:username.example.com'),
+                'user-jdoe.example.com',
+                array('username' => 'jdoe'),
+            ),
+            'non-standard-delimeter-optional' => array(
+                new Hostname(':page{-}[-:username].example.com'),
+                'article-jdoe.example.com',
+                array('page' => 'article', 'username' => 'jdoe'),
+            ),
+            'missing-non-standard-delimeter-optional' => array(
+                new Hostname(':page{-}[-:username].example.com'),
+                'article.example.com',
+                array('page' => 'article'),
             ),
         );
     }

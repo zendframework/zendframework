@@ -201,9 +201,8 @@ class MimeType extends AbstractValidator
                 $file
             ));
         } else {
-            $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             ErrorHandler::start(E_NOTICE|E_WARNING);
-            $this->finfo = finfo_open($const, $file);
+            $this->finfo = finfo_open(FILEINFO_MIME_TYPE, $file);
             $error       = ErrorHandler::stop();
             if (empty($this->finfo)) {
                 $this->finfo = null;
@@ -342,11 +341,17 @@ class MimeType extends AbstractValidator
      * mime types will be accepted like "image/gif", "image/jpeg" and so on.
      *
      * @param  string|array $value Real file to check for mimetype
+     * @param  array        $file  File data from \Zend\File\Transfer\Transfer (optional)
      * @return bool
      */
-    public function isValid($value)
+    public function isValid($value, $file = null)
     {
-        if (is_array($value)) {
+        if (is_string($value) && is_array($file)) {
+            // Legacy Zend\Transfer API support
+            $filename = $file['name'];
+            $filetype = $file['type'];
+            $file     = $file['tmp_name'];
+        } elseif (is_array($value)) {
             if (!isset($value['tmp_name']) || !isset($value['name']) || !isset($value['type'])) {
                 throw new Exception\InvalidArgumentException(
                     'Value array must be in $_FILES format'
@@ -370,16 +375,15 @@ class MimeType extends AbstractValidator
 
         $mimefile = $this->getMagicFile();
         if (class_exists('finfo', false)) {
-            $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             if (!$this->isMagicFileDisabled() && (!empty($mimefile) && empty($this->finfo))) {
                 ErrorHandler::start(E_NOTICE|E_WARNING);
-                $this->finfo = finfo_open($const, $mimefile);
+                $this->finfo = finfo_open(FILEINFO_MIME_TYPE, $mimefile);
                 ErrorHandler::stop();
             }
 
             if (empty($this->finfo)) {
                 ErrorHandler::start(E_NOTICE|E_WARNING);
-                $this->finfo = finfo_open($const);
+                $this->finfo = finfo_open(FILEINFO_MIME_TYPE);
                 ErrorHandler::stop();
             }
 

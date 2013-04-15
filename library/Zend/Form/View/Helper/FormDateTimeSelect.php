@@ -51,8 +51,9 @@ class FormDateTimeSelect extends FormDateSelectHelper
             ));
         }
 
+        $shouldRenderDelimiters = $element->shouldRenderDelimiters();
         $selectHelper = $this->getSelectElementHelper();
-        $pattern      = $this->parsePattern($element->shouldRenderDelimiters());
+        $pattern      = $this->parsePattern($shouldRenderDelimiters);
 
         $daysOptions   = $this->getDaysOptions($pattern['day']);
         $monthsOptions = $this->getMonthsOptions($pattern['month']);
@@ -78,16 +79,19 @@ class FormDateTimeSelect extends FormDateSelectHelper
         }
 
         $data = array();
-        $data[$pattern['day']]   = $selectHelper->render($dayElement);
-        $data[$pattern['month']] = $selectHelper->render($monthElement);
-        $data[$pattern['year']]  = $selectHelper->render($yearElement);
-        $data[$pattern['hour']]  = $selectHelper->render($hourElement);
-        $data[$pattern['minute']]  = $selectHelper->render($minuteElement);
+        $data[$pattern['day']]    = $selectHelper->render($dayElement);
+        $data[$pattern['month']]  = $selectHelper->render($monthElement);
+        $data[$pattern['year']]   = $selectHelper->render($yearElement);
+        $data[$pattern['hour']]   = $selectHelper->render($hourElement);
+        $data[$pattern['minute']] = $selectHelper->render($minuteElement);
 
         if ($element->shouldShowSeconds()) {
             $data[$pattern['second']]  = $selectHelper->render($secondElement);
         } else {
             unset($pattern['second']);
+            if ($shouldRenderDelimiters) {
+                unset($pattern[4]);
+            }
         }
 
         $markup = '';
@@ -99,6 +103,7 @@ class FormDateTimeSelect extends FormDateSelectHelper
                 $markup .= $data[$value];
             }
         }
+        $markup = trim($markup);
 
         return $markup;
     }
@@ -167,7 +172,9 @@ class FormDateTimeSelect extends FormDateSelectHelper
     {
         if ($this->pattern === null) {
             $intl           = new IntlDateFormatter($this->getLocale(), $this->dateType, $this->timeType);
-            $this->pattern  = $intl->getPattern();
+            // remove time zone format character
+            $pattern = rtrim($intl->getPattern(), ' z');
+            $this->pattern  = $pattern;
         }
 
         return $this->pattern;
@@ -182,24 +189,27 @@ class FormDateTimeSelect extends FormDateSelectHelper
     protected function parsePattern($renderDelimiters = true)
     {
         $pattern    = $this->getPattern();
-        $pregResult = preg_split('/([ -,.:\/]+)/', $pattern, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        $pregResult = preg_split("/([ -,.:\/]*'.*?'[ -,.:\/]*)|([ -,.:\/]+)/", $pattern, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
         $result = array();
         foreach ($pregResult as $value) {
-            if (stripos($value, 'd') !== false) {
+            if (stripos($value, "'") === false && stripos($value, 'd') !== false) {
                 $result['day'] = $value;
-            } elseif (strpos($value, 'M') !== false) {
+            } elseif (stripos($value, "'") === false && strpos($value, 'M') !== false) {
                 $result['month'] = $value;
-            } elseif (stripos($value, 'y') !== false) {
+            } elseif (stripos($value, "'") === false && stripos($value, 'y') !== false) {
                 $result['year'] = $value;
-            } elseif (stripos($value, 'h') !==  false) {
+            } elseif (stripos($value, "'") === false && stripos($value, 'h') !==  false) {
                 $result['hour'] = $value;
-            } elseif (stripos($value, 'm') !== false) {
+            } elseif (stripos($value, "'") === false && stripos($value, 'm') !== false) {
                 $result['minute'] = $value;
-            } elseif (strpos($value, 's') !== false) {
+            } elseif (stripos($value, "'") === false && strpos($value, 's') !== false) {
                 $result['second'] = $value;
+            } elseif (stripos($value, "'") === false && stripos($value, 'a') !== false) {
+                // ignore ante/post meridiem marker
+                continue;
             } elseif ($renderDelimiters) {
-                $result[] = $value;
+                $result[] = str_replace("'", '', $value);
             }
         }
 

@@ -74,7 +74,7 @@ class Part extends TreeRouteStack implements RouteInterface
     /**
      * factory(): defined by RouteInterface interface.
      *
-     * @see    Route::factory()
+     * @see    \Zend\Mvc\Router\RouteInterface::factory()
      * @param  mixed $options
      * @throws Exception\InvalidArgumentException
      * @return Part
@@ -112,7 +112,7 @@ class Part extends TreeRouteStack implements RouteInterface
     /**
      * match(): defined by RouteInterface interface.
      *
-     * @see    Route::match()
+     * @see    \Zend\Mvc\Router\RouteInterface::match()
      * @param  Request  $request
      * @param  int|null $pathOffset
      * @return RouteMatch|null
@@ -136,8 +136,11 @@ class Part extends TreeRouteStack implements RouteInterface
             $uri        = $request->getUri();
             $pathLength = strlen($uri->getPath());
 
-            if ($this->mayTerminate && $nextOffset === $pathLength && trim($uri->getQuery()) == "") {
-                return $match;
+            if ($this->mayTerminate && $nextOffset === $pathLength) {
+                $query = $uri->getQuery();
+                if ('' == trim($query) || !$this->hasQueryChild()) {
+                    return $match;
+                }
             }
 
             foreach ($this->routes as $name => $route) {
@@ -155,7 +158,7 @@ class Part extends TreeRouteStack implements RouteInterface
     /**
      * assemble(): Defined by RouteInterface interface.
      *
-     * @see    Route::assemble()
+     * @see    \Zend\Mvc\Router\RouteInterface::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed
@@ -191,7 +194,7 @@ class Part extends TreeRouteStack implements RouteInterface
     /**
      * getAssembledParams(): defined by RouteInterface interface.
      *
-     * @see    Route::getAssembledParams
+     * @see    RouteInterface::getAssembledParams
      * @return array
      */
     public function getAssembledParams()
@@ -199,5 +202,20 @@ class Part extends TreeRouteStack implements RouteInterface
         // Part routes may not occur as base route of other part routes, so we
         // don't have to return anything here.
         return array();
+    }
+
+    /**
+     * Is one of the child routes a query route?
+     *
+     * @return bool
+     */
+    protected function hasQueryChild()
+    {
+        foreach ($this->routes as $route) {
+            if ($route instanceof Query) {
+                return true;
+            }
+        }
+        return false;
     }
 }

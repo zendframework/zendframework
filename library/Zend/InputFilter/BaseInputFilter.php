@@ -171,7 +171,10 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
             ) {
                 if ($input instanceof InputInterface) {
                     // - test if input is required
-                    if (!$input->isRequired()) {
+                    if (!$input->isRequired()
+                        // "Not required" should not apply to empty strings (#3983)
+                        && !(array_key_exists($name, $this->data) && is_string($this->data[$name]))
+                    ) {
                         $this->validInputs[$name] = $input;
                         continue;
                     }
@@ -182,7 +185,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
                     }
                 }
                 // make sure we have a value (empty) for validation
-                $this->data[$name] = '';
+                $this->data[$name] = null;
             }
 
             if ($input instanceof InputFilterInterface) {

@@ -20,7 +20,7 @@ class ValidatorManagerFactory extends AbstractPluginManagerFactory
      * Create and return the validator plugin manager
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return ValidatorPluginManager
+     * @return \Zend\Validator\ValidatorPluginManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

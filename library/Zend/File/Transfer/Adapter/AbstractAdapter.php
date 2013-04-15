@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_File
  */
 
 namespace Zend\File\Transfer\Adapter;
@@ -30,8 +29,6 @@ use Zend\Validator;
  * and filter chains instead.
  *
  * @todo      Rewrite
- * @category  Zend
- * @package   Zend_File_Transfer
  */
 abstract class AbstractAdapter implements TranslatorAwareInterface
 {
@@ -1227,16 +1224,15 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
         }
 
         if (class_exists('finfo', false)) {
-            $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             if (!empty($value['options']['magicFile'])) {
                 ErrorHandler::start();
-                $mime = finfo_open($const, $value['options']['magicFile']);
+                $mime = finfo_open(FILEINFO_MIME_TYPE, $value['options']['magicFile']);
                 ErrorHandler::stop();
             }
 
             if (empty($mime)) {
                 ErrorHandler::start();
-                $mime = finfo_open($const);
+                $mime = finfo_open(FILEINFO_MIME_TYPE);
                 ErrorHandler::stop();
             }
 

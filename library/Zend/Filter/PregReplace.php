@@ -143,6 +143,7 @@ class PregReplace extends AbstractFilter
      * Validate a pattern and ensure it does not contain the "e" modifier
      *
      * @param  string $pattern
+     * @return bool
      * @throws Exception\InvalidArgumentException
      */
     protected function validatePattern($pattern)

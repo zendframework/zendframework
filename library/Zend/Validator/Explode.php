@@ -20,7 +20,7 @@ class Explode extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID => "Invalid type given.",
+        self::INVALID => "Invalid type given",
     );
 
     /**

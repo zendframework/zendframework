@@ -148,7 +148,7 @@ class ServiceManager implements ServiceLocatorInterface
         if ($this->allowOverride === false) {
             throw new Exception\RuntimeException(sprintf(
                 '%s: cannot alter default shared service setting; container is marked immutable (allow_override is false)',
-                __METHOD__
+                get_called_class() . '::' . __FUNCTION__
             ));
         }
         $this->shareByDefault = (bool) $shareByDefault;
@@ -226,7 +226,7 @@ class ServiceManager implements ServiceLocatorInterface
             if ($this->allowOverride === false) {
                 throw new Exception\InvalidServiceNameException(sprintf(
                     'A service by the name or alias "%s" already exists and cannot be overridden; please use an alternate name',
-                    $cName
+                    $name
                 ));
             }
             $this->unregisterService($cName);
@@ -266,7 +266,7 @@ class ServiceManager implements ServiceLocatorInterface
             if ($this->allowOverride === false) {
                 throw new Exception\InvalidServiceNameException(sprintf(
                     'A service by the name or alias "%s" already exists and cannot be overridden, please use an alternate name',
-                    $cName
+                    $name
                 ));
             }
             $this->unregisterService($cName);
@@ -362,7 +362,7 @@ class ServiceManager implements ServiceLocatorInterface
             if ($this->allowOverride === false) {
                 throw new Exception\InvalidServiceNameException(sprintf(
                     '%s: A service by the name "%s" or alias already exists and cannot be overridden, please use an alternate name.',
-                    __METHOD__,
+                    get_called_class() . '::' . __FUNCTION__,
                     $name
                 ));
             }
@@ -391,7 +391,7 @@ class ServiceManager implements ServiceLocatorInterface
         ) {
             throw new Exception\ServiceNotFoundException(sprintf(
                 '%s: A service by the name "%s" was not found and could not be marked as shared',
-                __METHOD__,
+                get_called_class() . '::' . __FUNCTION__,
                 $name
             ));
         }
@@ -427,7 +427,7 @@ class ServiceManager implements ServiceLocatorInterface
         if ($usePeeringServiceManagers && $retrieveFromPeeringManagerFirst) {
             $instance = $this->retrieveFromPeeringManager($name);
 
-            if(null !== $instance) {
+            if (null !== $instance) {
                 return $instance;
             }
         }
@@ -445,7 +445,7 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         // Still no instance? raise an exception
-        if (!$instance && !is_array($instance)) {
+        if ($instance === null && !is_array($instance)) {
             if ($isAlias) {
                 throw new Exception\ServiceNotFoundException(sprintf(
                     'An alias "%s" was requested but no service could be found.',
@@ -455,7 +455,7 @@ class ServiceManager implements ServiceLocatorInterface
 
             throw new Exception\ServiceNotFoundException(sprintf(
                 '%s was unable to fetch or create an instance for %s',
-                __METHOD__,
+                get_called_class() . '::' . __FUNCTION__,
                 $name
             ));
         }
@@ -494,11 +494,11 @@ class ServiceManager implements ServiceLocatorInterface
             $instance = $this->createFromFactory($cName, $rName);
         }
 
-        if (!$instance && isset($this->invokableClasses[$cName])) {
+        if ($instance === false && isset($this->invokableClasses[$cName])) {
             $instance = $this->createFromInvokable($cName, $rName);
         }
 
-        if (!$instance && $this->canCreateFromAbstractFactory($cName, $rName)) {
+        if ($instance === false && $this->canCreateFromAbstractFactory($cName, $rName)) {
             $instance = $this->createFromAbstractFactory($cName, $rName);
         }
 
@@ -838,7 +838,7 @@ class ServiceManager implements ServiceLocatorInterface
         if (!class_exists($invokable)) {
             throw new Exception\ServiceNotFoundException(sprintf(
                 '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
-                __METHOD__,
+                get_called_class() . '::' . __FUNCTION__,
                 $canonicalName,
                 ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
                 $invokable

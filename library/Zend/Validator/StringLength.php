@@ -142,7 +142,7 @@ class StringLength extends AbstractValidator
     /**
      * Set the string wrapper to detect the string length
      *
-     * @param StringWrapper
+     * @param StringWrapper $stringWrapper
      * @return StringLength
      */
     public function setStringWrapper(StringWrapper $stringWrapper)

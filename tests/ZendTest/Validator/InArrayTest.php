@@ -52,14 +52,14 @@ class InArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(1, 2, 3), $this->validator->getHaystack());
     }
 
-    public function testSetEmptyHaystack()
+    public function testUnsetHaystackRaisesException()
     {
-        $this->validator->setHaystack(array());
+        $validator = new InArray();
         $this->setExpectedException(
             'Zend\Validator\Exception\RuntimeException',
             'haystack option is mandatory'
         );
-        $this->validator->getHaystack();
+        $validator->getHaystack();
     }
 
     /**

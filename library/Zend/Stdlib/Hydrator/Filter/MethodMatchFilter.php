@@ -23,7 +23,8 @@ class MethodMatchFilter implements FilterInterface
     protected $exclude = null;
 
     /**
-     * @param string $method The method to exclude
+     * @param string $method The method to exclude or include
+     * @param bool $exclude If the method should be excluded
      */
     public function __construct($method, $exclude = true)
     {

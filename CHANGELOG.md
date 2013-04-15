@@ -1,5 +1,235 @@
 # CHANGELOG
 
+## 2.1.4 (13 Mar 2013):
+
+- ZF2013-01: Query route (http://framework.zend.com/security/ZF2013-01)
+- ZF2013-02: RNG support (http://framework.zend.com/security/ZF2013-02)
+- ZF2013-03: DB platform quoting (http://framework.zend.com/security/ZF2013-03)
+- 2752: `Zend_Json_Server` to accept null parameters
+  (https://github.com/zendframework/zf2/issues/2752)
+- 3696: `Zend\Json\Server\Server` should allow parameters with NULL values
+  (https://github.com/zendframework/zf2/issues/3696)
+- 3767: Allow NULL parameter values in `Zend/Json/Server`
+  (https://github.com/zendframework/zf2/issues/3767)
+- 3827: Fix mismatches between the PHPDoc and the method signatures
+  (https://github.com/zendframework/zf2/issues/3827)
+- 3840: allow a null page in pages array, to compensate for ZF issue #3823
+  (https://github.com/zendframework/zf2/issues/3840)
+- 3842: Hotfix/zend test improve console usage
+  (https://github.com/zendframework/zf2/issues/3842)
+- 3849: Check if values are set in `Zend\Db\Sql\Insert.php` for prepared
+  statement
+  (https://github.com/zendframework/zf2/issues/3849)
+- 3867: `FileGenerator::setUses()` MUST can take arguments from
+  `FileGenerator::getUses()`
+  (https://github.com/zendframework/zf2/issues/3867)
+- 3868: `ClassGenerator::fromReflection` not generate class properties
+  (https://github.com/zendframework/zf2/issues/3868)
+- 3869: Remove BC break in `Identical` validator
+  (https://github.com/zendframework/zf2/issues/3869)
+- 3871: The method delete on the `RowGateway` now returns the affected rows
+  (https://github.com/zendframework/zf2/issues/3871)
+- 3873: Fixes an issue when binding a model to a form collection element
+  (https://github.com/zendframework/zf2/issues/3873)
+- 3885: Hotfix/add tests console adapter
+  (https://github.com/zendframework/zf2/issues/3885)
+- 3886: Add tests console prompt
+  (https://github.com/zendframework/zf2/issues/3886)
+- 3888: `DefinitionList` `hasMethod` fix
+  (https://github.com/zendframework/zf2/issues/3888)
+- 3907: Add tests console request response
+  (https://github.com/zendframework/zf2/issues/3907)
+- 3916: Fix PUT HTTP method usage with params
+  (https://github.com/zendframework/zf2/issues/3916)
+- 3917: Clean the Console abstract adapter
+  (https://github.com/zendframework/zf2/issues/3917)
+- 3921: [+BUGFIX] Fixed column names bug `Zend\Db\Sql\Select`
+  (https://github.com/zendframework/zf2/issues/3921)
+- 3925: Added view and validator dependency
+  (https://github.com/zendframework/zf2/issues/3925)
+- 3936: Improve the remove of `SendResponseListener`
+  (https://github.com/zendframework/zf2/issues/3936)
+- 3946: Adding config to `openssl_pkey_export()`
+  (https://github.com/zendframework/zf2/issues/3946)
+- 3947: fix exception %s passed variable of 'A service by the name or alias %s'  should be $name
+  (https://github.com/zendframework/zf2/issues/3947)
+- 3948: Bug/merging translator textdomains
+  (https://github.com/zendframework/zf2/issues/3948)
+- 3950: Fix zero value in argument
+  (https://github.com/zendframework/zf2/issues/3950)
+- 3957: [Hotfix] Fixed incorrect `PDO_Oci` platform recognition
+  (https://github.com/zendframework/zf2/issues/3957)
+- 3960: Update toString() to use late static binding for encoding methods
+  (https://github.com/zendframework/zf2/issues/3960)
+- 3964: Fix fluent interface
+  (https://github.com/zendframework/zf2/issues/3964)
+- 3966: Better polyfill support for `Stdlib` and `Session`
+  (https://github.com/zendframework/zf2/issues/3966)
+- 3968: fixed `Exception\InvalidArgumentException` messages in `Zend\Log`
+  (https://github.com/zendframework/zf2/issues/3968)
+- 3971: SessionArrayStorage doesn't preserve `_REQUEST_ACCESS_TIME`
+  (https://github.com/zendframework/zf2/issues/3971)
+- 3973: Documentation improvement `Zend\View\Stream`
+  (https://github.com/zendframework/zf2/issues/3973)
+- 3980: change `HOST_DNS_OR_IPV4_OR_IPV6` to `0x13` for `$validHostTypes`
+  (https://github.com/zendframework/zf2/issues/3980)
+- 3981: Improve exception messages
+  (https://github.com/zendframework/zf2/issues/3981)
+- 3982: Fix `\Zend\Soap\AutoDiscover` constructor
+  (https://github.com/zendframework/zf2/issues/3982)
+- 3984: Update `ArrayStack.php`
+  (https://github.com/zendframework/zf2/issues/3984)
+- 3987: Fix ChromePhp logger interface and debug level
+  (https://github.com/zendframework/zf2/issues/3987)
+- 3988: Fix & Unit test for `preparestatement` notices
+  (https://github.com/zendframework/zf2/issues/3988)
+- 3991: Hotfix/3858 - `findHelper` problem in Navigation Helper
+  (https://github.com/zendframework/zf2/issues/3991)
+- 3993: `SessionArrayStorage` Request Access Time and Storage Initialization
+  (https://github.com/zendframework/zf2/issues/3993)
+- 3997: Allow https on scheme without a hostname
+  (https://github.com/zendframework/zf2/issues/3997)
+- 4001: Fix `ViewFeedStrategyFactory` comment
+  (https://github.com/zendframework/zf2/issues/4001)
+- 4005: Hotfix/case sensitive console
+  (https://github.com/zendframework/zf2/issues/4005)
+- 4007: Pass `ClassGenerator` instance instead of boolean
+  (https://github.com/zendframework/zf2/issues/4007)
+- 4009: Minor if to else if improvement
+  (https://github.com/zendframework/zf2/issues/4009)
+- 4010: Hotfix/zend test with console route
+  (https://github.com/zendframework/zf2/issues/4010)
+
+## 2.1.3 (21 Feb 2013):
+
+- 3714: Zend\Stdlib\ArrayObject::offsetExists() returning by reference
+  (https://github.com/zendframework/zf2/issues/3714)
+- 3855: Fix #3852
+  (https://github.com/zendframework/zf2/issues/3855)
+- 3856: Simple route case insensitive
+  (https://github.com/zendframework/zf2/issues/3856)
+
+## 2.1.2 (20 Feb 2013):
+
+- 3085: create controller via Zend\Mvc\Controller\ControllerManager
+  (https://github.com/zendframework/zf2/issues/3085)
+- 3469: ConnectionInterface docblock is wrong or implementation is wrong..
+  (https://github.com/zendframework/zf2/issues/3469)
+- 3506: [WIP] [#3113] Fix spelling in error validation messages
+  (https://github.com/zendframework/zf2/issues/3506)
+- 3636: If route has child routes and in URL has arbitrary query like "?lang=de"
+  it does not work
+  (https://github.com/zendframework/zf2/issues/3636)
+- 3652: Query parameter ?action=somevalue will get 404 error
+  (https://github.com/zendframework/zf2/issues/3652)
+- 3683: Fix to make sure NotEmpty validator is not already set
+  (https://github.com/zendframework/zf2/issues/3683)
+- 3691: Fix for GitHub issue 3469
+  (https://github.com/zendframework/zf2/issues/3691)
+- 3698: Openssl error string
+  (https://github.com/zendframework/zf2/issues/3698)
+- 3699: Certain servers may not set a whitespace after a colon 
+  (Set-Cookie: header)
+  (https://github.com/zendframework/zf2/issues/3699)
+- 3701: Synced pt\_BR\Zend\_Validate.php with en\Zend\_Validate.php
+  (https://github.com/zendframework/zf2/issues/3701)
+- 3702: added new file: resources\languages\pt\_BR\Zend\_Captcha.php
+  (https://github.com/zendframework/zf2/issues/3702)
+- 3703: [WIP] Adding parallel testing ANT build configuration and related files
+  (https://github.com/zendframework/zf2/issues/3703)
+- 3705: Recent composer.json update of stdlib package
+  (https://github.com/zendframework/zf2/issues/3705)
+- 3706: clear joins and create without columns
+  (https://github.com/zendframework/zf2/issues/3706)
+- 3707: quoteIdentifier problem in sequence
+  (https://github.com/zendframework/zf2/issues/3707)
+- 3708: Filter\File\RenameUpload: wrap move\_uploaded\_file to be easly mocked
+  (https://github.com/zendframework/zf2/issues/3708)
+- 3712: Fix for URIs with a query string not matching
+  (https://github.com/zendframework/zf2/issues/3712)
+- 3713: Session Container Mismatch & Version Compare fixes for 5.3.3
+  (https://github.com/zendframework/zf2/issues/3713)
+- 3715: [#3705] Fix autoload.files setting in composer.json
+  (https://github.com/zendframework/zf2/issues/3715)
+- 3716: Added the Zend\Form decepence in composer.json for Zend\Mvc
+  (https://github.com/zendframework/zf2/issues/3716)
+- 3721: Created README.md files for each component
+  (https://github.com/zendframework/zf2/issues/3721)
+- 3722: [Form] [DateTimeSelect] Filter, manager, and view helper fixes
+  (https://github.com/zendframework/zf2/issues/3722)
+- 3725: Use built-in php constants
+  (https://github.com/zendframework/zf2/issues/3725)
+- 3729: Zend\Barcode (Fixes #2862)
+  (https://github.com/zendframework/zf2/issues/3729)
+- 3732: Fix for #2531 - Multiplie navigation don't work
+  (https://github.com/zendframework/zf2/issues/3732)
+- 3733: Fix/select where
+  (https://github.com/zendframework/zf2/issues/3733)
+- 3735: [Form] [FormElementManager] don't overwrite form factory if already set
+  (https://github.com/zendframework/zf2/issues/3735)
+- 3742: Object+hydrator element annotation fix
+  (https://github.com/zendframework/zf2/issues/3742)
+- 3743: [#3739 & #3740] Using version-compare in accept header handler params.
+  (https://github.com/zendframework/zf2/issues/3743)
+- 3746: Fix bugs for some locales!
+  (https://github.com/zendframework/zf2/issues/3746)
+- 3757: Fixed a bug where mail messages were malformed when using the Sendmail
+  (https://github.com/zendframework/zf2/issues/3757)
+- 3764: Validator File MimeType (IsImage & IsCompressed)
+  (https://github.com/zendframework/zf2/issues/3764)
+- 3771: Zend\File\Transfer\Adapter\Http on receive : error "File was not found"  in ZF 2.1
+  (https://github.com/zendframework/zf2/issues/3771)
+- 3778: [#3711] Fix regression in query string matching
+  (https://github.com/zendframework/zf2/issues/3778)
+- 3782: [WIP] Zend\Di\Di::get() with call parameters ignored shared instances.
+  (https://github.com/zendframework/zf2/issues/3782)
+- 3783: Provide branch-alias entries for each component composer.json
+  (https://github.com/zendframework/zf2/issues/3783)
+- 3785: Zend\Db\Sql\Literal Fix when % is used in string
+  (https://github.com/zendframework/zf2/issues/3785)
+- 3786: Inject shared event manager in initializer
+  (https://github.com/zendframework/zf2/issues/3786)
+- 3789: Update library/Zend/Mail/Header/AbstractAddressList.php
+  (https://github.com/zendframework/zf2/issues/3789)
+- 3793: Resolved Issue: #3748 - offsetGet and __get should do a direct proxy to
+  $_SESSION
+  (https://github.com/zendframework/zf2/issues/3793)
+- 3794: Implement query and fragment assembling into the HTTP router itself
+  (https://github.com/zendframework/zf2/issues/3794)
+- 3797: remove @category, @package, and @subpackage docblocks
+  (https://github.com/zendframework/zf2/issues/3797)
+- 3798: Remove extra semicolons
+  (https://github.com/zendframework/zf2/issues/3798)
+- 3803: Fix identical validator
+  (https://github.com/zendframework/zf2/issues/3803)
+- 3806: Remove obsolete catch statement
+  (https://github.com/zendframework/zf2/issues/3806)
+- 3807: Resolve undefined classes in phpDoc
+  (https://github.com/zendframework/zf2/issues/3807)
+- 3808: Add missing @return annotations
+  (https://github.com/zendframework/zf2/issues/3808)
+- 3813: Bug fix for GlobIterator extending service
+  (https://github.com/zendframework/zf2/issues/3813)
+- 3817: Add failing tests for Simple console route
+  (https://github.com/zendframework/zf2/issues/3817)
+- 3819: Allow form element filter to convert a string to array
+  (https://github.com/zendframework/zf2/issues/3819)
+- 3828: Cannot validate form when keys of collection in data are non consecutive
+  (https://github.com/zendframework/zf2/issues/3828)
+- 3831: Non-matching argument type for ArrayObject
+  (https://github.com/zendframework/zf2/issues/3831)
+- 3832: Zend\Db\Sql\Predicate\Predicate->literal() does not work with integer 0
+  as $expressionParameters
+  (https://github.com/zendframework/zf2/issues/3832)
+- 3836: Zend\Db\Sql\Predicate\Predicate Fix for literal() usage
+  (https://github.com/zendframework/zf2/issues/3836)
+- 3837: Fix for legacy Transfer usage of File Validators
+  (https://github.com/zendframework/zf2/issues/3837)
+- 3838: Stdlib\ArrayObject & Zend\Session\Container Compatibility with ArrayObject
+  (https://github.com/zendframework/zf2/issues/3838)
+- 3839: Fixes #2477 - Implemented optional subdomains using regex
+  (https://github.com/zendframework/zf2/issues/3839)
+
 ## 2.1.1 (06 Feb 2013):
 
 - 2510: Zend\Session\Container does not allow modification by reference
@@ -438,6 +668,11 @@ For those affected, the following courses of action are possible:
  * Initialize and register a Zend\Session\Storage\SessionStorage object
    explicitly with the session manager instance.
 
+## 2.0.8 (13 Mar 2013):
+
+- ZF2013-01: Query route (http://framework.zend.com/security/ZF2013-01)
+- ZF2013-02: RNG support (http://framework.zend.com/security/ZF2013-02)
+- ZF2013-03: DB platform quoting (http://framework.zend.com/security/ZF2013-03)
 
 ## 2.0.7 (29 Jan 2013):
 

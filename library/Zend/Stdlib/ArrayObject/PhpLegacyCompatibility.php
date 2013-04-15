@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Stdlib;
+namespace Zend\Stdlib\ArrayObject;
 
 use ArrayObject as PhpArrayObject;
 
@@ -19,7 +19,7 @@ use ArrayObject as PhpArrayObject;
  * simply extends the PHP ArrayObject implementation, and provides default
  * behavior in the constructor.
  */
-class ArrayObject extends PhpArrayObject
+abstract class PhpLegacyCompatibility extends PhpArrayObject
 {
     /**
      * Constructor

@@ -272,7 +272,9 @@ class Form extends Fieldset implements FormInterface
     public function bindValues(array $values = array())
     {
         if (!is_object($this->object)) {
-            return;
+            if ( $this->baseFieldset === null || $this->baseFieldset->allowValueBinding() == false ) {
+                return;
+            }
         }
         if (!$this->hasValidated() && !empty($values)) {
             $this->setData($values);
@@ -321,7 +323,7 @@ class Form extends Fieldset implements FormInterface
                 continue;
             }
 
-            if (is_array($value)) {
+            if (is_array($value) && is_array($match[$name])) {
                 $data[$name] = $this->prepareBindData($value, $match[$name]);
             } else {
                 $data[$name] = $value;
@@ -441,9 +443,10 @@ class Form extends Fieldset implements FormInterface
         $filter->setData($this->data);
         $filter->setValidationGroup(InputFilterInterface::VALIDATE_ALL);
 
-        if ($this->validationGroup !== null) {
-            $this->prepareValidationGroup($this, $this->data, $this->validationGroup);
-            $filter->setValidationGroup($this->validationGroup);
+        $validationGroup = $this->getValidationGroup();
+        if ($validationGroup !== null) {
+            $this->prepareValidationGroup($this, $this->data, $validationGroup);
+            $filter->setValidationGroup($validationGroup);
         }
 
         $this->isValid = $result = $filter->isValid();
@@ -533,6 +536,16 @@ class Form extends Fieldset implements FormInterface
     }
 
     /**
+     * Retrieve the current validation group, if any
+     *
+     * @return null|array
+     */
+    public function getValidationGroup()
+    {
+        return $this->validationGroup;
+    }
+
+    /**
      * Prepare the validation group in case Collection elements were used (this function also handle the case where elements
      * could have been dynamically added or removed from a collection using JavaScript)
      *
@@ -558,10 +571,8 @@ class Form extends Fieldset implements FormInterface
                 $values = array();
 
                 if (isset($data[$key])) {
-                    $count = count($data[$key]);
-
-                    for ($i = 0; $i != $count; ++$i) {
-                        $values[] = $value;
+                    foreach(array_keys($data[$key]) as $cKey) {
+                        $values[$cKey] = $value;
                     }
                 }
 

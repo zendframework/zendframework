@@ -151,4 +151,18 @@ class PriorityQueueTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($queueClone->isEmpty());
     }
+
+    public function testQueueRevertsToInitialStateWhenEmpty()
+    {
+        $queue = new PriorityQueue();
+        $testQueue = clone $queue; // store the default state
+
+        $testQueue->insert('foo', 1);
+        $testQueue->insert('bar', 2);
+
+        $testQueue->remove('foo');
+        $testQueue->remove('bar');
+
+        $this->assertEquals($queue, $testQueue);
+    }
 }

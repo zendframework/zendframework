@@ -51,9 +51,7 @@ class Form extends AbstractHelper
     /**
      * Render a form from the provided $form,
      *
-     * @param  ElementInterface          $element
-     * @param  null|string               $buttonContent
-     * @throws Exception\DomainException
+     * @param  FormInterface $form
      * @return string
      */
     public function render(FormInterface $form)

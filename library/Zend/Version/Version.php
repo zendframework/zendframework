@@ -19,7 +19,7 @@ final class Version
     /**
      * Zend Framework version identification - see compareVersion()
      */
-    const VERSION = '2.2.0dev';
+    const VERSION = '2.1.5dev';
 
     /**
      * Github Service Identifier for version information is retreived from
@@ -91,7 +91,7 @@ final class Version
                 static::$latestVersion = array_reduce($tags, function ($a, $b) {
                     return version_compare($a, $b, '>') ? $a : $b;
                 });
-            } elseif($service == self::VERSION_SERVICE_ZEND) {
+            } elseif ($service == self::VERSION_SERVICE_ZEND) {
                 $handle = fopen('http://framework.zend.com/api/zf-version?v=2', 'r');
                 if (false !== $handle) {
                     static::$latestVersion = stream_get_contents($handle);

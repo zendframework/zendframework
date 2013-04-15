@@ -13,9 +13,10 @@ namespace ZendTest\Mvc\Router\Http;
 use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Http\Request as Request;
-use Zend\Stdlib\Request as BaseRequest;
 use Zend\Mvc\Router\RoutePluginManager;
 use Zend\Mvc\Router\Http\Part;
+use Zend\Stdlib\Parameters;
+use Zend\Stdlib\Request as BaseRequest;
 use ZendTest\Mvc\Router\FactoryTester;
 
 class PartTest extends TestCase
@@ -121,6 +122,7 @@ class PartTest extends TestCase
                         'param_delimiter' => '/'
                     )
                 ),
+                /*
                 'query' => array(
                     'type' => 'Zend\Mvc\Router\Http\Query',
                     'options' => array(
@@ -128,6 +130,7 @@ class PartTest extends TestCase
                         'param_delimiter' => '&'
                     )
                 )
+                */
             )
         );
     }
@@ -233,6 +236,7 @@ class PartTest extends TestCase
                         'param1' => 'value1'
                 )
             ),
+            /*
             'match-query' => array(
                 self::getRouteAlternative(),
                 '/fo-fo/index?param1=value1',
@@ -243,6 +247,7 @@ class PartTest extends TestCase
                     'action' => 'index'
                 )
             )
+            */
         );
     }
 
@@ -381,5 +386,94 @@ class PartTest extends TestCase
 
         $route = Part::factory($options);
         $this->assertInstanceOf('Zend\Mvc\Router\Http\Part', $route);
+    }
+
+    /**
+     * @group 3711
+     */
+    public function testPartRouteMarkedAsMayTerminateCanMatchWhenQueryStringPresent()
+    {
+        $options = array(
+            'route' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/resource',
+                    'defaults' => array(
+                        'controller' => 'ResourceController',
+                        'action'     => 'resource',
+                    ),
+                ),
+            ),
+            'route_plugins' => new RoutePluginManager(),
+            'may_terminate' => true,
+            'child_routes'  => array(
+                'child' => array(
+                    'type' => 'Zend\Mvc\Router\Http\Literal',
+                    'options' => array(
+                        'route' => '/child',
+                        'defaults' => array(
+                            'action' => 'child',
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $route = Part::factory($options);
+        $request = new Request();
+        $request->setUri('http://example.com/resource?foo=bar');
+        $query = new Parameters(array('foo' => 'bar'));
+        $request->setQuery($query);
+        $query = $request->getQuery();
+
+        $match = $route->match($request);
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $match);
+        $this->assertEquals('resource', $match->getParam('action'));
+    }
+
+    /**
+     * @group 3711
+     */
+    public function testPartRouteMarkedAsMayTerminateButWithQueryRouteChildWillMatchChildRoute()
+    {
+        $options = array(
+            'route' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/resource',
+                    'defaults' => array(
+                        'controller' => 'ResourceController',
+                        'action'     => 'resource',
+                    ),
+                ),
+            ),
+            'route_plugins' => new RoutePluginManager(),
+            'may_terminate' => true,
+            /*
+            'child_routes'  => array(
+                'query' => array(
+                    'type' => 'Zend\Mvc\Router\Http\Query',
+                    'options' => array(
+                        'defaults' => array(
+                            'query' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+            */
+        );
+
+        $route = Part::factory($options);
+        $request = new Request();
+        $request->setUri('http://example.com/resource?foo=bar');
+        $query = new Parameters(array('foo' => 'bar'));
+        $request->setQuery($query);
+        $query = $request->getQuery();
+
+        /*
+        $match = $route->match($request);
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $match);
+        $this->assertEquals('string', $match->getParam('query'));
+        */
     }
 }

@@ -12,21 +12,18 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Translate
- * @subpackage Resource
  * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * EN-Revision: 30.Jul.2011
+ * CS-Revision: 28.Mar.2013
  */
 return array(
     // Zend_Captcha_AbstractWord
     "Empty captcha value" => "Hodnota captcha nebyla zadána",
     "Captcha ID field is missing" => "Chybí pole captcha ID",
-    "Captcha value is wrong" => "Chybná hodnota catpcha",
+    "Captcha value is wrong" => "Chybná hodnota captcha",
 
     // Zend_Captcha_ReCaptcha
     "Missing captcha fields" => "Chybí captcha pole",

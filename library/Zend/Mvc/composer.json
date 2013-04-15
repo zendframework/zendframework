@@ -14,6 +14,7 @@
     "target-dir": "Zend/Mvc",
     "require": {
         "php": ">=5.3.3",
+        "zendframework/zend-config": "self.version",
         "zendframework/zend-console": "self.version",
         "zendframework/zend-di": "self.version",
         "zendframework/zend-eventmanager": "self.version",
@@ -25,5 +26,11 @@
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-text": "self.version",
         "zendframework/zend-view": "self.version"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev",
+            "dev-develop": "2.2-dev"
+        }
     }
 }

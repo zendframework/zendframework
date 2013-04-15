@@ -73,6 +73,21 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that the validator follows expected behavior for legacy Zend\Transfer API
+     *
+     * @dataProvider basicBehaviorDataProvider
+     * @return void
+     */
+    public function testLegacy($options, $isValidParam, $expected)
+    {
+        if (is_array($isValidParam)) {
+            $validator = new File\IsImage($options);
+            $validator->enableHeaderCheck();
+            $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
+        }
+    }
+
+    /**
      * Ensures that getMimeType() returns expected value
      *
      * @return void
@@ -171,6 +186,15 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($magicFile, $validator->getMagicFile());
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
+    }
+
+    public function testNonMimeOptionsAtConstructorStillSetsDefaults()
+    {
+        $validator = new File\IsImage(array(
+            'enableHeaderCheck' => true,
+        ));
+
+        $this->assertNotEmpty($validator->getMimeType());
     }
 
     /**

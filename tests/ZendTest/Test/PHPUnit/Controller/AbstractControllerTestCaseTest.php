@@ -9,6 +9,7 @@
  */
 namespace ZendTest\Test\PHPUnit\Controller;
 
+use Zend\Console\Console;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\RequestInterface;
@@ -59,6 +60,26 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
     {
         $applicationClass = get_class($this->getApplication());
         $this->assertEquals($applicationClass, 'Zend\Mvc\Application');
+    }
+
+    public function testApplicationClassAndTestRestoredConsoleFlag()
+    {
+        $this->assertTrue(Console::isConsole());
+        $this->getApplication();
+        $this->assertFalse(Console::isConsole());
+        $this->tearDown();
+        $this->assertTrue(Console::isConsole());
+
+        Console::overrideIsConsole(false);
+        parent::setUp();
+
+        $this->assertFalse(Console::isConsole());
+        $this->getApplication();
+        $this->assertFalse(Console::isConsole());
+
+        parent::tearDown();
+
+        $this->assertFalse(Console::isConsole());
     }
 
     public function testApplicationServiceLocatorClass()
@@ -211,5 +232,11 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $result = $this->triggerApplicationEvent(MvcEvent::EVENT_ROUTE);
         $this->assertEquals(true, $result->stopped());
         $this->assertEquals(Application::ERROR_ROUTER_NO_MATCH, $this->getApplication()->getMvcEvent()->getError());
+    }
+
+    public function testDispatchRequestUri()
+    {
+        $this->dispatch('/tests');
+        $this->assertEquals('/tests', $this->getApplication()->getRequest()->getRequestUri());
     }
 }

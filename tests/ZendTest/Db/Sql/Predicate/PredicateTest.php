@@ -11,6 +11,7 @@
 namespace ZendTest\Db\Sql\Predicate;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Predicate\IsNull;
 use Zend\Db\Sql\Predicate\Predicate;
 
@@ -193,4 +194,55 @@ class PredicateTest extends TestCase
 
         $this->assertEquals(')', $parts[6]);
     }
+
+    /**
+     * @testdox Unit test: Test expression() is chainable and returns proper values
+     */
+    public function testExpression()
+    {
+        $predicate = new Predicate;
+
+        // is chainable
+        $this->assertSame($predicate, $predicate->expression('foo = ?', 0));
+        // with parameter
+        $this->assertEquals(
+            array(array('foo = %s', array(0), array(Expression::TYPE_VALUE))),
+            $predicate->getExpressionData()
+        );
+    }
+
+    /**
+     * @testdox Unit test: Test literal() is chainable, returns proper values, and is backwards compatible with 2.0.*
+     */
+    public function testLiteral()
+    {
+        $predicate = new Predicate;
+
+        // is chainable
+        $this->assertSame($predicate, $predicate->literal('foo = bar'));
+        // with parameter
+        $this->assertEquals(
+            array(array('foo = bar', array(), array())),
+            $predicate->getExpressionData()
+        );
+
+        // test literal() is backwards-compatible, and works with with parameters
+        $predicate = new Predicate;
+        $predicate->expression('foo = ?', 'bar');
+        // with parameter
+        $this->assertEquals(
+            array(array('foo = %s', array('bar'), array(Expression::TYPE_VALUE))),
+            $predicate->getExpressionData()
+        );
+
+        // test literal() is backwards-compatible, and works with with parameters, even 0 which tests as false
+        $predicate = new Predicate;
+        $predicate->expression('foo = ?', 0);
+        // with parameter
+        $this->assertEquals(
+            array(array('foo = %s', array(0), array(Expression::TYPE_VALUE))),
+            $predicate->getExpressionData()
+        );
+    }
+
 }

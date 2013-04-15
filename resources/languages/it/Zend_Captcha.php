@@ -12,9 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Translate
- * @subpackage Resource
  * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,12 +20,12 @@
  * EN-Revision: 30.Jul.2011
  */
 return array(
-    // Zend_Captcha_ReCaptcha
+    // Zend\Captcha\ReCaptcha
     "Missing captcha fields" => "Campi captcha mancanti",
     "Failed to validate captcha" => "Validazione del captcha fallito",
     "Captcha value is wrong: %value%" => "Il valore del Captcha è sbagliato: %value%",
 
-    // Zend_Captcha_Word
+    // Zend\Captcha\Word
     "Empty captcha value" => "Valore del captcha vuoto",
     "Captcha ID field is missing" => "Manca il campo Captcha ID",
     "Captcha value is wrong" => "Il valore del Captcha è sbagliato",

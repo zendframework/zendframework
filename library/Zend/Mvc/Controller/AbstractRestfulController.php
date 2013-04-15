@@ -359,7 +359,9 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * Check if request has certain content type
      *
-     * @return boolean
+     * @param  Request $request
+     * @param  string|null $contentType
+     * @return bool
      */
     public function requestHasContentType(Request $request, $contentType = '')
     {
@@ -429,7 +431,7 @@ abstract class AbstractRestfulController extends AbstractController
      * Retrieve the identifier, if any
      *
      * Attempts to see if an identifier was passed in either the URI or the
-     * query string, returning if if found. Otherwise, returns a boolean false.
+     * query string, returning it if found. Otherwise, returns a boolean false.
      *
      * @param  \Zend\Mvc\Router\RouteMatch $routeMatch
      * @param  Request $request

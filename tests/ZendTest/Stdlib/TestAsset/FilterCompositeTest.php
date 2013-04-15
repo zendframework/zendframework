@@ -81,13 +81,13 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
     {
         $andCondition = array(
             'servicelocator' => function($property) {
-                if($property === 'getServiceLocator') {
+                if ($property === 'getServiceLocator') {
                     return false;
                 }
                 return true;
             },
             'foobar' => function($property) {
-                if($property === 'getFooBar') {
+                if ($property === 'getFooBar') {
                     return false;
                 }
                 return true;

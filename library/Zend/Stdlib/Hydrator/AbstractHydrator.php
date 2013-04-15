@@ -158,7 +158,7 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      * </code>
      *
      * @param string $name Index in the composite
-     * @param callable|Zend\Stdlib\Hydrator\Filter\FilterInterface $filter
+     * @param callable|Filter\FilterInterface $filter
      * @param int $condition
      * @return Filter\FilterComposite
      */

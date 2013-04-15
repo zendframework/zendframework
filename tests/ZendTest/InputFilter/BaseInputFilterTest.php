@@ -85,9 +85,15 @@ class BaseInputFilterTest extends TestCase
         $baz->getFilterChain()->attachByName('stringtrim');
         $baz->getValidatorChain()->attach(new Validator\StringLength(1, 6));
 
+        $qux = new Input();
+        $qux->setAllowEmpty(true);
+        $qux->getFilterChain()->attachByName('stringtrim');
+        $qux->getValidatorChain()->attach(new Validator\StringLength(5, 6));
+
         $filter->add($foo, 'foo')
                ->add($bar, 'bar')
                ->add($baz, 'baz')
+               ->add($qux, 'qux')
                ->add($this->getChildInputFilter(), 'nest');
 
         return $filter;
@@ -123,6 +129,33 @@ class BaseInputFilterTest extends TestCase
         $validData = array(
             'foo' => ' bazbat ',
             'bar' => '12345',
+            'baz' => null,
+            'qux' => '',
+            'nest' => array(
+                'foo' => ' bazbat ',
+                'bar' => '12345',
+                'baz' => null,
+            ),
+        );
+        $filter->setData($validData);
+        $this->assertTrue($filter->isValid());
+
+        $filter = $this->getInputFilter();
+        $validData = array(
+            'foo' => ' bazbat ',
+            'bar' => '12345',
+            'qux' => '',
+            'nest' => array(
+                'foo' => ' bazbat ',
+                'bar' => '12345',
+            ),
+        );
+        $filter->setData($validData);
+        $this->assertTrue($filter->isValid());
+
+        $invalidData = array(
+            'foo' => ' bazbat ',
+            'bar' => '12345',
             'baz' => '',
             'nest' => array(
                 'foo' => ' bazbat ',
@@ -130,13 +163,14 @@ class BaseInputFilterTest extends TestCase
                 'baz' => '',
             ),
         );
-        $filter->setData($validData);
-        $this->assertTrue($filter->isValid());
+        $filter->setData($invalidData);
+        $this->assertFalse($filter->isValid());
 
         $invalidData = array(
             'foo' => ' baz bat ',
             'bar' => 'abc45',
             'baz' => ' ',
+            'qux' => ' ',
             'nest' => array(
                 'foo' => ' baz bat ',
                 'bar' => '123ab',
@@ -227,11 +261,10 @@ class BaseInputFilterTest extends TestCase
         $validData = array(
             'foo' => ' bazbat ',
             'bar' => '12345',
-            'baz' => '',
+            'qux' => '',
             'nest' => array(
                 'foo' => ' bazbat ',
                 'bar' => '12345',
-                'baz' => '',
             ),
         );
         $filter->setData($validData);
@@ -239,11 +272,12 @@ class BaseInputFilterTest extends TestCase
         $expected = array(
             'foo' => 'bazbat',
             'bar' => '12345',
-            'baz' => '',
+            'baz' => null,
+            'qux' => '',
             'nest' => array(
                 'foo' => 'bazbat',
                 'bar' => '12345',
-                'baz' => '',
+                'baz' => null,
             ),
         );
         $this->assertEquals($expected, $filter->getValues());
@@ -255,11 +289,12 @@ class BaseInputFilterTest extends TestCase
         $validData = array(
             'foo' => ' bazbat ',
             'bar' => '12345',
-            'baz' => '',
+            'baz' => null,
+            'qux' => '',
             'nest' => array(
                 'foo' => ' bazbat ',
                 'bar' => '12345',
-                'baz' => '',
+                'baz' => null,
             ),
         );
         $filter->setData($validData);

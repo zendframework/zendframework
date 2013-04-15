@@ -669,7 +669,7 @@ class Acl implements AclInterface
         $id = $resource->getResourceId();
 
         $children = $this->resources[$id]['children'];
-        foreach($children as $child) {
+        foreach ($children as $child) {
             $child_return = $this->getChildResources($child);
             $child_return[$child->getResourceId()] = $child;
 

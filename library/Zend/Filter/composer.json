@@ -25,5 +25,11 @@
         "zendframework/zend-validator": "Zend\\Validator component",
         "zendframework/zend-crypt": "Zend\\Crypt component",
         "zendframework/zend-stdlib": "Zend\\Stdlib component"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev",
+            "dev-develop": "2.2-dev"
+        }
     }
 }

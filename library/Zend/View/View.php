@@ -184,6 +184,10 @@ class View implements EventManagerAwareInterface
         $event->setRenderer($renderer);
         $results = $events->trigger(ViewEvent::EVENT_RENDERER_POST, $event);
 
+        // If EVENT_RENDERER or EVENT_RENDERER_POST changed the model, make sure
+        // we use this new model instead of the current $model
+        $model   = $event->getModel();
+
         // If we have children, render them first, but only if:
         // a) the renderer does not implement TreeRendererInterface, or
         // b) it does, but canRenderTrees() returns false

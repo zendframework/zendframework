@@ -19,6 +19,13 @@
         "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
-        "zendframework/zend-filter": "Zend\\Filter component"
+        "zendframework/zend-filter": "Zend\\Filter component",
+        "zendframework/zend-servicemanager": "self.version"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev",
+            "dev-develop": "2.2-dev"
+        }
     }
 }

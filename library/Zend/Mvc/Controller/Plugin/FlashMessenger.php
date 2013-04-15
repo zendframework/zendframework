@@ -235,7 +235,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Whether "info" namespace has messages
      *
-     * @return boolean
+     * @return bool
      */
     public function hasInfoMessages()
     {
@@ -250,7 +250,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Whether "success" namespace has messages
      *
-     * @return boolean
+     * @return bool
      */
     public function hasSuccessMessages()
     {
@@ -265,7 +265,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Whether "error" namespace has messages
      *
-     * @return boolean
+     * @return bool
      */
     public function hasErrorMessages()
     {
@@ -355,7 +355,8 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Clear all messages from specific namespace
      *
-     * @return boolean True if messages were cleared, false if none existed
+     * @param  string $namespaceToClear
+     * @return bool True if messages were cleared, false if none existed
      */
     public function clearMessagesFromNamespace($namespaceToClear)
     {
@@ -370,7 +371,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Clear all messages from the container
      *
-     * @return boolean True if messages were cleared, false if none existed
+     * @return bool True if messages were cleared, false if none existed
      */
     public function clearMessagesFromContainer()
     {
@@ -402,7 +403,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
      * Check to see if messages have been added to "info"
      * namespace within this request
      *
-     * @return boolean
+     * @return bool
      */
     public function hasCurrentInfoMessages()
     {
@@ -418,7 +419,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
      * Check to see if messages have been added to "success"
      * namespace within this request
      *
-     * @return boolean
+     * @return bool
      */
     public function hasCurrentSuccessMessages()
     {
@@ -434,7 +435,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
      * Check to see if messages have been added to "error"
      * namespace within this request
      *
-     * @return boolean
+     * @return bool
      */
     public function hasCurrentErrorMessages()
     {
@@ -516,6 +517,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
      * Get messages that have been added to the current
      * namespace in specific namespace
      *
+     * @param  string $namespaceToGet
      * @return array
      */
     public function getCurrentMessagesFromNamespace($namespaceToGet)
@@ -531,7 +533,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Clear messages from the current request and current namespace
      *
-     * @return bool
+     * @return bool True if current messages were cleared, false if none existed.
      */
     public function clearCurrentMessages()
     {
@@ -549,7 +551,8 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Clear messages from the current namespace
      *
-     * @return boolean
+     * @param  string $namespaceToClear
+     * @return bool True if current messages were cleared from the given namespace, false if none existed.
      */
     public function clearCurrentMessagesFromNamespace($namespaceToClear)
     {
@@ -564,7 +567,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Clear messages from the container
      *
-     * @return boolean
+     * @return bool True if current messages were cleared from the container, false if none existed.
      */
     public function clearCurrentMessagesFromContainer()
     {
@@ -617,6 +620,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
     /**
      * Get messages from a specific namespace
      *
+     * @param  string $namespaceToGet
      * @return array
      */
     public function getMessagesFromNamespace($namespaceToGet)

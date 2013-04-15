@@ -98,9 +98,12 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
         if ($found) {
             unset($this->items[$key]);
             $this->queue = null;
-            $queue = $this->getQueue();
-            foreach ($this->items as $item) {
-                $queue->insert($item['data'], $item['priority']);
+
+            if (!$this->isEmpty()) {
+                $queue = $this->getQueue();
+                foreach ($this->items as $item) {
+                    $queue->insert($item['data'], $item['priority']);
+                }
             }
             return true;
         }

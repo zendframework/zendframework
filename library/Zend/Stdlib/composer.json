@@ -9,10 +9,7 @@
     "autoload": {
         "psr-0": {
             "Zend\\Stdlib\\": ""
-        },
-        "files": [
-            "Zend/Stdlib/compatibility/autoload.php"
-        ]
+        }
     },
     "target-dir": "Zend/Stdlib",
     "suggest": {
@@ -20,5 +17,11 @@
     },
     "require": {
         "php": ">=5.3.3"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev",
+            "dev-develop": "2.2-dev"
+        }
     }
 }

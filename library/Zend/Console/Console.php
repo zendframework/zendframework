@@ -102,6 +102,14 @@ abstract class Console
     }
 
     /**
+     * Reset the console instance
+     */
+    public static function resetInstance()
+    {
+        static::$instance = null;
+    }
+
+    /**
      * Check if currently running under MS Windows
      *
      * @see http://stackoverflow.com/questions/738823/possible-values-for-php-os
@@ -135,10 +143,10 @@ abstract class Console
      */
     public static function isConsole()
     {
-        if (null !== static::$isConsole && is_bool(static::$isConsole)) {
-            return static::$isConsole;
+        if (null === static::$isConsole) {
+            static::$isConsole = (PHP_SAPI == 'cli');
         }
-        return PHP_SAPI == 'cli';
+        return static::$isConsole;
     }
 
     /**
@@ -148,6 +156,9 @@ abstract class Console
      */
     public static function overrideIsConsole($flag)
     {
+        if(null != $flag) {
+            $flag = (bool)$flag;
+        }
         static::$isConsole = $flag;
     }
 

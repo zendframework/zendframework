@@ -28,6 +28,7 @@ class ZendMonitor extends AbstractWriter
     /**
      * Constructor
      *
+     * @param array|\Traversable|null $options
      * @return ZendMonitor
      */
     public function __construct($options = null)

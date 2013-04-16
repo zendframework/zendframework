@@ -555,12 +555,18 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Render table with alias in from/join parts
      *
+     * @todo move TableIdentifier concatination here
      * @param string $table
      * @param string $alias
+     * @return string
      */
-    protected function renderTableAsAlias($table, $alias)
+    protected function renderTable($table, $alias = null)
     {
-        return $table . ' AS ' . $alias;
+        $sql = $table;
+        if ($alias) {
+            $sql .= ' AS ' . $alias;
+        }
+        return $sql;
     }
 
     /**
@@ -604,7 +610,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         if ($alias) {
             $fromTable = $platform->quoteIdentifier($alias);
-            $table = $this->renderTableAsAlias($table, $fromTable);
+            $table = $this->renderTable($table, $fromTable);
         } else {
             $fromTable = $table;
         }

@@ -309,7 +309,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
 
     /**
      * @param Driver\DriverInterface $driver
-     * @return Platform\PlatformInterface
+     * @return Platform\PlatformInterface 
      */
     protected function createPlatform($parameters)
     {

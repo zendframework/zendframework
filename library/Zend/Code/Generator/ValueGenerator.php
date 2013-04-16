@@ -9,6 +9,8 @@
 
 namespace Zend\Code\Generator;
 
+use Zend\Stdlib\ArrayObject;
+
 class ValueGenerator extends AbstractGenerator
 {
     /**#@+
@@ -57,13 +59,19 @@ class ValueGenerator extends AbstractGenerator
      * @var array
      */
     protected $allowedTypes = null;
+    /**
+     * Autodetectable constants
+     * @var ArrayObject
+     */
+    protected $constants = null;
 
     /**
-     * @param  mixed  $value
-     * @param  string $type
-     * @param  string $outputMode
+     * @param mixed       $value
+     * @param string      $type
+     * @param string      $outputMode
+     * @param ArrayObject $constants
      */
-    public function __construct($value = null, $type = self::TYPE_AUTO, $outputMode = self::OUTPUT_MULTIPLE_LINE)
+    public function __construct($value = null, $type = self::TYPE_AUTO, $outputMode = self::OUTPUT_MULTIPLE_LINE, ArrayObject $constants = null)
     {
         if ($value !== null) { // strict check is important here if $type = AUTO
             $this->setValue($value);
@@ -74,6 +82,72 @@ class ValueGenerator extends AbstractGenerator
         if ($outputMode !== self::OUTPUT_MULTIPLE_LINE) {
             $this->setOutputMode($outputMode);
         }
+        if ($constants !== null) {
+            $this->constants = $constants;
+        } else {
+            $this->constants = new ArrayObject();
+        }
+
+    }
+
+    /**
+     * Init constant list by defined and magic constants
+     */
+    public function initEnvironmentConstants()
+    {
+        $constants   = array(
+            '__DIR__',
+            '__FILE__',
+            '__LINE__',
+            '__CLASS__',
+            '__TRAIT__',
+            '__METHOD__',
+            '__FUNCTION__',
+            '__NAMESPACE__',
+            '::'
+        );
+        $constants = array_merge($constants, array_keys(get_defined_constants()), $this->constants->getArrayCopy());
+        $this->constants->exchangeArray($constants);
+    }
+
+    /**
+     * Add constant to list
+     *
+     * @param string $constant
+     *
+     * @return $this
+     */
+    public function addConstant($constant)
+    {
+        $this->constants->append($constant);
+
+        return $this;
+    }
+
+    /**
+     * Delete constant from constant list
+     *
+     * @param string $constant
+     *
+     * @return bool
+     */
+    public function deleteConstant($constant)
+    {
+        if (($index = array_search($constant, $this->constants->getArrayCopy())) !== false) {
+            $this->constants->offsetUnset($index);
+        }
+
+        return $index !== false;
+    }
+
+    /**
+     * Return constnat list
+     *
+     * @return ArrayObject
+     */
+    public function getConstants()
+    {
+        return $this->constants;
     }
 
     /**
@@ -198,6 +272,11 @@ class ValueGenerator extends AbstractGenerator
             case 'boolean':
                 return self::TYPE_BOOLEAN;
             case 'string':
+                foreach($this->constants as $constant) {
+                    if(strpos($value,$constant)!==false) {
+                        return self::TYPE_CONSTANT;
+                    }
+                }
                 return self::TYPE_STRING;
             case 'double':
             case 'float':
@@ -239,7 +318,7 @@ class ValueGenerator extends AbstractGenerator
                 );
                 foreach ($rii as $curKey => $curValue) {
                     if (!$curValue instanceof ValueGenerator) {
-                        $curValue = new self($curValue);
+                        $curValue = new self($curValue, self::TYPE_AUTO, self::OUTPUT_MULTIPLE_LINE, $this->getConstants());
                         $rii->getSubIterator()->offsetSet($curKey, $curValue);
                     }
                     $curValue->setArrayDepth($rii->getDepth());
@@ -304,9 +383,9 @@ class ValueGenerator extends AbstractGenerator
             case self::TYPE_OTHER:
             default:
                 throw new Exception\RuntimeException(sprintf(
-                    'Type "%s" is unknown or cannot be used as property default value.',
-                    get_class($value)
-                ));
+                                                         'Type "%s" is unknown or cannot be used as property default value.',
+                                                         get_class($value)
+                                                     ));
         }
 
         return $output;

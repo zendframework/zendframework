@@ -17,7 +17,6 @@ use Zend\Db\Metadata\Source\SqliteMetadata;
  */
 class SqliteMetadataTest extends \PHPUnit_Framework_TestCase
 {
-    const DBFILE = 'zftest.sqlite';
 
     /**
      * @var SqliteMetadata
@@ -37,20 +36,10 @@ class SqliteMetadataTest extends \PHPUnit_Framework_TestCase
     {
         $this->adapter = new Adapter(array(
             'driver' => 'Pdo',
-            'dsn' => 'sqlite:' . self::DBFILE
+            'dsn' => 'sqlite::memory:'
         ));
         $this->metadata = new SqliteMetadata($this->adapter);
 
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-        parent::tearDown();
-        unlink(self::DBFILE);
     }
 
     public function testGetSchemas()

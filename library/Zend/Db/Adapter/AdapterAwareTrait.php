@@ -11,9 +11,6 @@ namespace Zend\Db\Adapter;
 
 use Zend\Db\Adapter\Adapter;
 
-/**
- * @packcage   Zend_Db
- */
 trait AdapterAwareTrait
 {
     /**

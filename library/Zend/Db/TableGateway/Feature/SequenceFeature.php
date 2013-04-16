@@ -41,7 +41,9 @@ class SequenceFeature extends AbstractFeature
         $this->sequenceName    = $sequenceName;
     }
 
-
+    /**
+     * @param  Insert $insert 
+     */
     public function preInsert(Insert $insert)
     {
         $columns = $insert->getRawState('columns');
@@ -56,10 +58,7 @@ class SequenceFeature extends AbstractFeature
         if ($this->sequenceValue === null)
             return $insert;
 
-        array_push($columns, $this->primaryKeyField);
-        array_push($values, $this->sequenceValue);
-        $insert->columns($columns);
-        $insert->values($values);
+        $insert->values(array($this->primaryKeyField => $this->sequenceValue),  Insert::VALUES_MERGE);  
         return $insert;
     }
 

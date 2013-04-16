@@ -246,7 +246,7 @@ class SqliteMetadata extends AbstractSource
         $sql .= $name;
 
         if (null !== $value) {
-            $sql .= '(' . $p->quoteValue($value) . ')';
+            $sql .= '(' . $p->quoteTrustedValue($value) . ')';
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);

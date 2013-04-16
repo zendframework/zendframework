@@ -26,7 +26,7 @@ class PostgresqlMetadata extends AbstractSource
         $sql = 'SELECT ' . $p->quoteIdentifier('schema_name')
             . ' FROM ' . $p->quoteIdentifierChain(array('information_schema', 'schemata'))
             . ' WHERE ' . $p->quoteIdentifier('schema_name')
-            . ' != ' . $p->quoteValue('information_schema')
+            . ' != \'information_schema\''
             . ' AND ' . $p->quoteIdentifier('schema_name') . " NOT LIKE 'pg_%'";
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -68,14 +68,14 @@ class PostgresqlMetadata extends AbstractSource
             . '  = ' . $p->quoteIdentifierChain(array('v','table_name'))
 
             . ' WHERE ' . $p->quoteIdentifierChain(array('t','table_type'))
-            . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+            . ' IN (\'BASE TABLE\', \'VIEW\')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('t','table_schema'))
-                . ' = ' . $p->quoteValue($schema);
+                . ' = ' . $p->quoteTrustedValue($schema);
         } else {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('t','table_schema'))
-                . ' != ' . $p->quoteValue('information_schema');
+                . ' != \'information_schema\'';
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -122,13 +122,13 @@ class PostgresqlMetadata extends AbstractSource
             . ' FROM ' . $platform->quoteIdentifier('information_schema')
             . $platform->getIdentifierSeparator() . $platform->quoteIdentifier('columns')
             . ' WHERE ' . $platform->quoteIdentifier('table_schema')
-            . ' != ' . $platform->quoteValue('information')
+            . ' != \'information\''
             . ' AND ' . $platform->quoteIdentifier('table_name')
-            . ' = ' . $platform->quoteValue($table);
+            . ' = ' . $platform->quoteTrustedValue($table);
 
         if ($schema != '__DEFAULT_SCHEMA__') {
             $sql .= ' AND ' . $platform->quoteIdentifier('table_schema')
-                . ' = ' . $platform->quoteValue($schema);
+                . ' = ' . $platform->quoteTrustedValue($schema);
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -221,16 +221,16 @@ class PostgresqlMetadata extends AbstractSource
              . '  = ' . $p->quoteIdentifierChain(array('kcu2','ordinal_position'))
 
              . ' WHERE ' . $p->quoteIdentifierChain(array('t','table_name'))
-             . ' = ' . $p->quoteValue($table)
+             . ' = ' . $p->quoteTrustedValue($table)
              . ' AND ' . $p->quoteIdentifierChain(array('t','table_type'))
-             . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+             . ' IN (\'BASE TABLE\', \'VIEW\')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('t','table_schema'))
-            . ' = ' . $p->quoteValue($schema);
+            . ' = ' . $p->quoteTrustedValue($schema);
         } else {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('t','table_schema'))
-            . ' != ' . $p->quoteValue('information_schema');
+            . ' != \'information_schema\'';
         }
 
         $sql .= ' ORDER BY CASE ' . $p->quoteIdentifierChain(array('tc','constraint_type'))
@@ -322,10 +322,10 @@ class PostgresqlMetadata extends AbstractSource
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= $p->quoteIdentifier('trigger_schema')
-                . ' = ' . $p->quoteValue($schema);
+                . ' = ' . $p->quoteTrustedValue($schema);
         } else {
             $sql .= $p->quoteIdentifier('trigger_schema')
-                . ' != ' . $p->quoteValue('information_schema');
+                . ' != \'information_schema\'';
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);

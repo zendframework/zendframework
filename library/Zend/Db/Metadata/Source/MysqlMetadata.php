@@ -25,7 +25,7 @@ class MysqlMetadata extends AbstractSource
         $sql = 'SELECT ' . $p->quoteIdentifier('SCHEMA_NAME')
              . ' FROM ' . $p->quoteIdentifierChain(array('INFORMATION_SCHEMA', 'SCHEMATA'))
              . ' WHERE ' . $p->quoteIdentifier('SCHEMA_NAME')
-             . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
+             . ' != \'INFORMATION_SCHEMA\'';
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
 
@@ -66,14 +66,14 @@ class MysqlMetadata extends AbstractSource
              . '  = ' . $p->quoteIdentifierChain(array('V','TABLE_NAME'))
 
              . ' WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
-             . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+             . ' IN (\'BASE TABLE\', \'VIEW\')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
-                  . ' = ' . $p->quoteValue($schema);
+                  . ' = ' . $p->quoteTrustedValue($schema);
         } else {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
-                  . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
+                  . ' != \'INFORMATION_SCHEMA\'';
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -122,16 +122,16 @@ class MysqlMetadata extends AbstractSource
              . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
              . '  = ' . $p->quoteIdentifierChain(array('C','TABLE_NAME'))
              . ' WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
-             . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')'
+             . ' IN (\'BASE TABLE\', \'VIEW\')'
              . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
-             . '  = ' . $p->quoteValue($table);
+             . '  = ' . $p->quoteTrustedValue($table);
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
-                  . ' = ' . $p->quoteValue($schema);
+                  . ' = ' . $p->quoteTrustedValue($schema);
         } else {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
-                  . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
+                  . ' != \'INFORMATION_SCHEMA\'';
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -216,16 +216,16 @@ class MysqlMetadata extends AbstractSource
              . '  = ' . $p->quoteIdentifierChain(array('RC','CONSTRAINT_NAME'))
 
              . ' WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
-             . ' = ' . $p->quoteValue($table)
+             . ' = ' . $p->quoteTrustedValue($table)
              . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
-             . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+             . ' IN (\'BASE TABLE\', \'VIEW\')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
-            . ' = ' . $p->quoteValue($schema);
+            . ' = ' . $p->quoteTrustedValue($schema);
         } else {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
-            . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
+            . ' != \'INFORMATION_SCHEMA\'';
         }
 
         $sql .= ' ORDER BY CASE ' . $p->quoteIdentifierChain(array('TC','CONSTRAINT_TYPE'))
@@ -302,14 +302,14 @@ class MysqlMetadata extends AbstractSource
         . ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_NAME'))
         . '  = ' . $p->quoteIdentifierChain(array('TC','TABLE_NAME'))
         . ' WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
-        . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+        . ' IN (\'BASE TABLE\', \'VIEW\')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
-            . ' = ' . $p->quoteValue($schema);
+            . ' = ' . $p->quoteTrustedValue($schema);
         } else {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
-            . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
+            . ' != \'INFORMATION_SCHEMA\'';
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -353,14 +353,14 @@ class MysqlMetadata extends AbstractSource
         . '  = ' . $p->quoteIdentifierChain(array('KCU','TABLE_NAME'))
 
         . ' WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
-        . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+        . ' IN (\'BASE TABLE\', \'VIEW\')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
-            . ' = ' . $p->quoteValue($schema);
+            . ' = ' . $p->quoteTrustedValue($schema);
         } else {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
-            . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
+            . ' != \'INFORMATION_SCHEMA\'';
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -415,14 +415,14 @@ class MysqlMetadata extends AbstractSource
         . '  = ' . $p->quoteIdentifierChain(array('KCU','CONSTRAINT_NAME'))
 
         . 'WHERE ' . $p->quoteIdentifierChain(array('T','TABLE_TYPE'))
-        . ' IN (' . $p->quoteValueList(array('BASE TABLE', 'VIEW')) . ')';
+        . ' IN (\'BASE TABLE\', \'VIEW\')';
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
-            . ' = ' . $p->quoteValue($schema);
+            . ' = ' . $p->quoteTrustedValue($schema);
         } else {
             $sql .= ' AND ' . $p->quoteIdentifierChain(array('T','TABLE_SCHEMA'))
-            . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
+            . ' != \'INFORMATION_SCHEMA\'';
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
@@ -475,10 +475,10 @@ class MysqlMetadata extends AbstractSource
 
         if ($schema != self::DEFAULT_SCHEMA) {
             $sql .= $p->quoteIdentifier('TRIGGER_SCHEMA')
-            . ' = ' . $p->quoteValue($schema);
+            . ' = ' . $p->quoteTrustedValue($schema);
         } else {
             $sql .= $p->quoteIdentifier('TRIGGER_SCHEMA')
-            . ' != ' . $p->quoteValue('INFORMATION_SCHEMA');
+            . ' != \'INFORMATION_SCHEMA\'';
         }
 
         $results = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);

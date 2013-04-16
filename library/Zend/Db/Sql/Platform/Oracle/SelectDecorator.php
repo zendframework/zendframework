@@ -35,6 +35,14 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
     }
 
     /**
+     * @see \Zend\Db\Sql\Select::renderTable
+     */
+    protected function renderTable($table, $alias = null)
+    {
+        return $table . ' ' . $alias;
+    }
+
+	/**
      * @param AdapterInterface $adapter
      * @param StatementContainerInterface $statementContainer
      */

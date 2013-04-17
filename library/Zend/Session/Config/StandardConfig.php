@@ -803,7 +803,7 @@ class StandardConfig implements ConfigInterface
             throw new Exception\BadMethodCallException(sprintf(
                 'Method "%s" does not exist in %s',
                 $method,
-                get_called_class()
+                get_class($this)
             ));
         }
     }

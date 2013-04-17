@@ -50,7 +50,7 @@ class SendResponseListener implements
     {
         $eventManager->setIdentifiers(array(
             __CLASS__,
-            get_called_class(),
+            get_class($this),
         ));
         $this->eventManager = $eventManager;
         $this->attachDefaultListeners();

@@ -677,7 +677,7 @@ class Uri implements UriInterface
             throw new Exception\InvalidUriPartException(sprintf(
                 'Scheme "%s" is not valid or is not accepted by %s',
                 $scheme,
-                get_called_class()
+                get_class($this)
             ), Exception\InvalidUriPartException::INVALID_SCHEME);
         }
 
@@ -726,7 +726,7 @@ class Uri implements UriInterface
             throw new Exception\InvalidUriPartException(sprintf(
                 'Host "%s" is not valid or is not accepted by %s',
                 $host,
-                get_called_class()
+                get_class($this)
             ), Exception\InvalidUriPartException::INVALID_HOSTNAME);
         }
 

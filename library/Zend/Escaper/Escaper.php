@@ -103,14 +103,14 @@ class Escaper
             $encoding = (string) $encoding;
             if ($encoding === '') {
                 throw new Exception\InvalidArgumentException(
-                    get_called_class() . ' constructor parameter does not allow a blank value'
+                    get_class($this) . ' constructor parameter does not allow a blank value'
                 );
             }
 
             $encoding = strtolower($encoding);
             if (!in_array($encoding, $this->supportedEncodings)) {
                 throw new Exception\InvalidArgumentException(
-                    'Value of \'' . $encoding . '\' passed to ' . get_called_class()
+                    'Value of \'' . $encoding . '\' passed to ' . get_class($this)
                     . ' constructor parameter is invalid. Provide an encoding supported by htmlspecialchars()'
                 );
             }
@@ -376,7 +376,7 @@ class Escaper
             $result = mb_convert_encoding($string, $to, $from);
         } else {
             throw new Exception\RuntimeException(
-                get_called_class()
+                get_class($this)
                 . ' requires either the iconv or mbstring extension to be installed'
                 . ' when escaping for non UTF-8 strings.'
             );

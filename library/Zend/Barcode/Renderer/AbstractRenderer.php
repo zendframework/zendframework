@@ -92,7 +92,7 @@ abstract class AbstractRenderer implements RendererInterface
             $this->setOptions($options);
         }
         $this->type = strtolower(substr(
-            get_called_class(),
+            get_class($this),
             strlen($this->rendererNamespace) + 1
         ));
     }

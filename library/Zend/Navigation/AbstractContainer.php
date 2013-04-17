@@ -353,7 +353,7 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
         if (!$result) {
             throw new Exception\BadMethodCallException(sprintf(
                 'Bad method call: Unknown method %s::%s',
-                get_called_class(),
+                get_class($this),
                 $method
             ), 0, $error);
         }

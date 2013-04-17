@@ -207,7 +207,7 @@ class Application implements
     {
         $eventManager->setIdentifiers(array(
             __CLASS__,
-            get_called_class(),
+            get_class($this),
         ));
         $this->events = $eventManager;
         return $this;

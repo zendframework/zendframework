@@ -208,7 +208,7 @@ abstract class AbstractObject implements ObjectInterface
         if (is_array($options)) {
             $this->setOptions($options);
         }
-        $this->type = strtolower(substr(get_called_class(), strlen($this->barcodeNamespace) + 1));
+        $this->type = strtolower(substr(get_class($this), strlen($this->barcodeNamespace) + 1));
         if ($this->mandatoryChecksum) {
             $this->withChecksum = true;
             $this->withChecksumInText = true;

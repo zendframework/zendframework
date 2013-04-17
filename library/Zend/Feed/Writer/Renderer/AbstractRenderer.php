@@ -218,7 +218,7 @@ class AbstractRenderer
         Writer\Writer::registerCoreExtensions();
         $manager = Writer\Writer::getExtensionManager();
         $all = Writer\Writer::getExtensions();
-        if (stripos(get_called_class(), 'entry')) {
+        if (stripos(get_class($this), 'entry')) {
             $exts = $all['entryRenderer'];
         } else {
             $exts = $all['feedRenderer'];

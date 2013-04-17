@@ -346,9 +346,9 @@ class Form extends Fieldset implements FormInterface
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects the flag to be one of %s::%s or %s::%s',
                 __METHOD__,
-                get_called_class(),
+                get_class($this),
                 'BIND_ON_VALIDATE',
-                get_called_class(),
+                get_class($this),
                 'BIND_MANUAL'
             ));
         }

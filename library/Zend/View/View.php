@@ -89,7 +89,7 @@ class View implements EventManagerAwareInterface
     {
         $events->setIdentifiers(array(
             __CLASS__,
-            get_called_class(),
+            get_class($this),
         ));
         $this->events = $events;
         return $this;

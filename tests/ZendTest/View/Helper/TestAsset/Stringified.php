@@ -14,6 +14,6 @@ class Stringified
 {
     public function __toString()
     {
-        return get_called_class();
+        return get_class($this);
     }
 }

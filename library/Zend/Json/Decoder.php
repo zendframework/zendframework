@@ -80,7 +80,7 @@ class Decoder
      *
      * @param string $source String source to decode
      * @param int $decodeType How objects should be decoded -- see
-     * {@link Zend_Json::TYPE_ARRAY} and {@link Zend_Json::TYPE_OBJECT} for
+     * {@link Zend\Json\Json::TYPE_ARRAY} and {@link Zend\Json\Json::TYPE_OBJECT} for
      * valid values
      * @throws InvalidArgumentException
      * @return void
@@ -120,15 +120,15 @@ class Decoder
      *         - array of one or more of the above types
      *
      * By default, decoded objects will be returned as associative arrays; to
-     * return a stdClass object instead, pass {@link Zend_Json::TYPE_OBJECT} to
+     * return a stdClass object instead, pass {@link Zend\Json\Json::TYPE_OBJECT} to
      * the $objectDecodeType parameter.
      *
      * @static
      * @access public
      * @param string $source String to be decoded
      * @param int $objectDecodeType How objects should be decoded; should be
-     * either or {@link Zend_Json::TYPE_ARRAY} or
-     * {@link Zend_Json::TYPE_OBJECT}; defaults to TYPE_ARRAY
+     * either or {@link Zend\Json\Json::TYPE_ARRAY} or
+     * {@link Zend\Json\Json::TYPE_OBJECT}; defaults to TYPE_ARRAY
      * @return mixed
      */
     public static function decode($source, $objectDecodeType = Json::TYPE_OBJECT)
@@ -166,7 +166,7 @@ class Decoder
      * Decodes an object of the form:
      *  { "attribute: value, "attribute2" : value,...}
      *
-     * If Zend_Json_Encoder was used to encode the original object then
+     * If Zend\Json\Encoder was used to encode the original object then
      * a special attribute called __className which specifies a class
      * name that should wrap the data contained within the encoded source.
      *

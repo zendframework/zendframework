@@ -10,10 +10,10 @@
 namespace Zend\Json;
 
 /**
- * Class for Zend_Json encode method.
+ * Class for Zend\Json\Json encode method.
  *
  * This class simply holds a string with a native Javascript Expression,
- * so objects | arrays to be encoded with Zend_Json can contain native
+ * so objects | arrays to be encoded with Zend\Json\Json can contain native
  * Javascript Expressions.
  *
  * Example:
@@ -21,14 +21,14 @@ namespace Zend\Json;
  * $foo = array(
  *     'integer'  =>9,
  *     'string'   =>'test string',
- *     'function' => Zend_Json_Expr(
- *         'function() { window.alert("javascript function encoded by Zend_Json") }'
+ *     'function' => Zend\Json\Expr(
+ *         'function() { window.alert("javascript function encoded by Zend\Json\Json") }'
  *     ),
  * );
  *
- * Zend_Json::encode($foo, false, array('enableJsonExprFinder' => true));
+ * Zend\Json\Json::encode($foo, false, array('enableJsonExprFinder' => true));
  * // it will returns json encoded string:
- * // {"integer":9,"string":"test string","function":function() {window.alert("javascript function encoded by Zend_Json")}}
+ * // {"integer":9,"string":"test string","function":function() {window.alert("javascript function encoded by Zend\Json\Json")}}
  * </code>
  */
 class Expr

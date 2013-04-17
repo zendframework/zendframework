@@ -10,7 +10,7 @@
 namespace Zend\Json\Server\Exception;
 
 /**
- * Thrown by Zend_Json_Server_Client when an HTTP error occurs during an
+ * Thrown by Zend\Json\Server\Client when an HTTP error occurs during an
  * JSON-RPC method call.
  */
 class HttpException extends RuntimeException

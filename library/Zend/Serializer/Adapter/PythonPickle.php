@@ -234,7 +234,7 @@ class PythonPickle extends AbstractAdapter
             throw new Exception\RuntimeException(sprintf(
                 'PHP-Type "%s" can not be serialized by %s',
                 gettype($value),
-                get_called_class()
+                get_class($this)
             ));
         }
     }

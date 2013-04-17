@@ -459,7 +459,6 @@ class Request extends HttpRequest
      * Uses a variety of criteria in order to detect the base URL of the request
      * (i.e., anything additional to the document root).
      *
-     * The base URL includes the schema, host, and port, in addition to the path.
      *
      * @return string
      */

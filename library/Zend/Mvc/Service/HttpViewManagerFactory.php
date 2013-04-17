@@ -9,26 +9,20 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Console\Console;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Mvc\View\Console\ViewManager as ConsoleViewManager;
 use Zend\Mvc\View\Http\ViewManager as HttpViewManager;
 
-class ViewManagerFactory implements FactoryInterface
+class HttpViewManagerFactory implements FactoryInterface
 {
     /**
-     * Create and return a view manager based on detected environment
+     * Create and return a view manager for the HTTP environment
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return ConsoleViewManager|HttpViewManager
+     * @return HttpViewManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if (Console::isConsole()) {
-            return $serviceLocator->get('ConsoleViewManager');
-        }
-
-        return $serviceLocator->get('HttpViewManager');
+        return new HttpViewManager();
     }
 }

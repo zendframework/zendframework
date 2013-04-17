@@ -1,5 +1,205 @@
 # CHANGELOG
 
+## 2.1.5 (17 Apr 2017):
+
+- 2536: `Zend\Validate` translations out of date
+  (https://github.com/zendframework/zf2/issues/2536)
+- 2898: `ConstructedNavigationFactory` does not inject components
+  (https://github.com/zendframework/zf2/issues/2898)
+- 3373: `Collection` in `Form` not binds values when form has no object and hydrator set
+  (https://github.com/zendframework/zf2/issues/3373)
+- 3534: ZF2 2.0.6 Authentication and postgres database
+  (https://github.com/zendframework/zf2/issues/3534)
+- 3626: `Zend\Form\View\Helper\FormRow`: labels are appended by default
+  (https://github.com/zendframework/zf2/issues/3626)
+- 3685: Problem on appending new identifier on `EventManager`
+  (https://github.com/zendframework/zf2/issues/3685)
+- 3695: Adapter name and sequence problems
+  (https://github.com/zendframework/zf2/issues/3695)
+- 3719: `Zend\Db\Metadata\Source\AbstractSource` Notice: Undefined index
+  (https://github.com/zendframework/zf2/issues/3719)
+- 3731: Console banners are all shown consecutively
+  (https://github.com/zendframework/zf2/issues/3731)
+- 3882: `EventManager` or `Stdlib\CallbackHandler` can't handle `WeakRef` enough.
+  (https://github.com/zendframework/zf2/issues/3882)
+- 3898: `Zend\Navigation\Service\ConstructedNavigationFactory` not inject
+  dependences (router, action and etc)
+  (https://github.com/zendframework/zf2/issues/3898)
+- 3912: Ajustment `SequenceFeature` generic drivers
+  (https://github.com/zendframework/zf2/issues/3912)
+- 3934: `Acl` allow role access on all resources not honoured if added after resources
+  (https://github.com/zendframework/zf2/issues/3934)
+- 3983: Update `BaseInputFilter`
+  (https://github.com/zendframework/zf2/issues/3983)
+- 4002: Update `DocBlockScanner`
+  (https://github.com/zendframework/zf2/issues/4002)
+- 4013: Fix PHP Notice in `Translator` class
+  (https://github.com/zendframework/zf2/issues/4013)
+- 4014: update to `FlashMessenger` view helper to allow for classes on separator
+  (https://github.com/zendframework/zf2/issues/4014)
+- 4020: Add parent roles with traversable object
+  (https://github.com/zendframework/zf2/issues/4020)
+- 4026: `Zend\Validator` Test Suite Fix
+  (https://github.com/zendframework/zf2/issues/4026)
+- 4027: Move deprecation notice inside constructor of `Query` class
+  (https://github.com/zendframework/zf2/issues/4027)
+- 4035: [Router] non existent child route during assembly doesn't throw exception
+  (https://github.com/zendframework/zf2/issues/4035)
+- 4037: Remove unnecessary `autoload.php` from composer config.
+  (https://github.com/zendframework/zf2/issues/4037)
+- 4047: Update `InArray.php`
+  (https://github.com/zendframework/zf2/issues/4047)
+- 4049: removed unused cache test assets from test suite
+  (https://github.com/zendframework/zf2/issues/4049)
+- 4051: `writeLine()` with console is (literally) breaking when the string is "too long"?
+  (https://github.com/zendframework/zf2/issues/4051)
+- 4053: Implement better text domain merging support
+  (https://github.com/zendframework/zf2/issues/4053)
+- 4054: 2.1.4: `Zend/Stdlib/composer.json` requires  "Zend/Stdlib/compatibility/autoload.php"
+  (https://github.com/zendframework/zf2/issues/4054)
+- 4055: Fix #4051 `console::writeLine()` 
+  (https://github.com/zendframework/zf2/issues/4055)
+- 4061: Normalize console usage
+  (https://github.com/zendframework/zf2/issues/4061)
+- 4063: Resolved Issue #2898
+  (https://github.com/zendframework/zf2/issues/4063)
+- 4064: Fixed issue with invalid `@cover` annotations, pointed to not existed class
+  (https://github.com/zendframework/zf2/issues/4064)
+- 4066: `HttpControllerTestCase` gives wrong messages for `assertRedirect`/`assertNotRedirect`
+  (https://github.com/zendframework/zf2/issues/4066)
+- 4070: Hotfix for issue #4069
+  (https://github.com/zendframework/zf2/issues/4070)
+- 4074: fix typos
+  (https://github.com/zendframework/zf2/issues/4074)
+- 4075: `Form\Collection`: allow create new objects
+  (https://github.com/zendframework/zf2/issues/4075)
+- 4077: Fix `Collection` form element replacing bound objects with dummies upon form validation
+  (https://github.com/zendframework/zf2/issues/4077)
+- 4079: Some fixes for phpDoc in `Zend\Mvc`
+  (https://github.com/zendframework/zf2/issues/4079)
+- 4084: Introduce query parameter for `Navigation\Page\Mvc`
+  (https://github.com/zendframework/zf2/issues/4084)
+- 4085: Fix loading of a text domain from different sources, fixes issue #4045
+  (https://github.com/zendframework/zf2/issues/4085)
+- 4089: Zend\Test - set the request's `requestUri` to the dispatched url
+  (https://github.com/zendframework/zf2/issues/4089)
+- 4095: `Zend\Navigation\Page\Mvc::getHref` does not use `RouteMatch` parameters
+  (https://github.com/zendframework/zf2/issues/4095)
+- 4102: simplify constant usage. `FILEINFO_MIME_TYPE` is available since PHP 5.3.0
+  (https://github.com/zendframework/zf2/issues/4102)
+- 4103: `FormDateTimeSelect` - minutes delimiter always shown
+  (https://github.com/zendframework/zf2/issues/4103)
+- 4111: Updated translations
+  (https://github.com/zendframework/zf2/issues/4111)
+- 4117: [InputFilter] Allow specification of error message via `Factory`
+  (https://github.com/zendframework/zf2/issues/4117)
+- 4118: Fix name of variable used for capturing output when executing shell command
+  (https://github.com/zendframework/zf2/issues/4118)
+- 4119: Fix weird verbalization
+  (https://github.com/zendframework/zf2/issues/4119)
+- 4123: Fix#3373
+  (https://github.com/zendframework/zf2/issues/4123)
+- 4129: Update to `ServiceManager` to provide more precise error messages
+  (https://github.com/zendframework/zf2/issues/4129)
+- 4133: Fix#4103
+  (https://github.com/zendframework/zf2/issues/4133)
+- 4134: Zend\Mvc\Router\Console\Simple not compatible with older versions of pcre (and therefore CentOS)
+  (https://github.com/zendframework/zf2/issues/4134)
+- 4135: Update Czech validator messages
+  (https://github.com/zendframework/zf2/issues/4135)
+- 4138: Modified Router to use backwards compatible regex expression Issue: 4134
+  (https://github.com/zendframework/zf2/issues/4138)
+- 4140: When displaying navigations three times last navigation has data of prev...
+  (https://github.com/zendframework/zf2/issues/4140)
+- 4143: Fixed issue #3626
+  (https://github.com/zendframework/zf2/issues/4143)
+- 4144: feature / `quoteTrustedValueList`
+  (https://github.com/zendframework/zf2/issues/4144)
+- 4147: Reset stop-propagation flag when triggering event
+  (https://github.com/zendframework/zf2/issues/4147)
+- 4148: Filters priority setting when populating filters in inputfilter factory and not losing it when merging filter chains
+  (https://github.com/zendframework/zf2/issues/4148)
+- 4150: Hotfix - `callable` type introspection for method parameters
+  (https://github.com/zendframework/zf2/issues/4150)
+- 4152: Fixed some EMail Validation Strings - German
+  (https://github.com/zendframework/zf2/issues/4152)
+- 4153: [Feed] sync svn r24842 - Fix ZF-4491
+  (https://github.com/zendframework/zf2/issues/4153)
+- 4154: Catch `LogicException` for Rewind and fix CP errors
+  (https://github.com/zendframework/zf2/issues/4154)
+- 4157: end autoload classmap generated file with EOL
+  (https://github.com/zendframework/zf2/issues/4157)
+- 4161: servicemanager is a requirement
+  (https://github.com/zendframework/zf2/issues/4161)
+- 4164: Fetch model from event parameter
+  (https://github.com/zendframework/zf2/issues/4164)
+- 4167: `Console` posix adapter `writeLine()` background color bleeding through to the next line.
+  (https://github.com/zendframework/zf2/issues/4167)
+- 4168: Fix #4167 - Console posix adapter `writeLine()` background color bleeding through to the next line.
+  (https://github.com/zendframework/zf2/issues/4168)
+- 4171: Fix BC break in 2.1.5dev - Revert to previous `isRequired` behavior for file upload inputs
+  (https://github.com/zendframework/zf2/issues/4171)
+- 4172: [Form] Remove after Add doesn't restore initial state
+  (https://github.com/zendframework/zf2/issues/4172)
+- 4180: Radio & Multicheckbox Problem with selected & disabled attributes
+  (https://github.com/zendframework/zf2/issues/4180)
+- 4182: Issue #3358 - Fix for console router not accepting controller word as part of a route
+  (https://github.com/zendframework/zf2/issues/4182)
+- 4183: Update `Zend_Validate.php` resource
+  (https://github.com/zendframework/zf2/issues/4183)
+- 4184: Updated `Page\Mvc::getHref` to grab correct controller name from `routeMatch`
+  (https://github.com/zendframework/zf2/issues/4184)
+- 4191: `Zend\Stdlib\Hydrator\ClassMethods::hydrate()` - support for `__call()` magic method
+  (https://github.com/zendframework/zf2/issues/4191)
+- 4198: fixed typo in french `Zend_Validator_StringLength`
+  (https://github.com/zendframework/zf2/issues/4198)
+- 4199:  Issue #4172 - Fixed empty priority queue state
+  (https://github.com/zendframework/zf2/issues/4199)
+- 4201: Issue #4172 - Added tests for add/remove sequence in `Zend\Form`
+  (https://github.com/zendframework/zf2/issues/4201)
+- 4203: Allow an instance of `Zend\Stdlib\AbstractOptions` to set configuration properties of the same class
+  (https://github.com/zendframework/zf2/issues/4203)
+- 4207: Fixed default plural rule.
+  (https://github.com/zendframework/zf2/issues/4207)
+- 4210: Fixed failure when implementing custom rbac roles
+  (https://github.com/zendframework/zf2/issues/4210)
+- 4213: [Curl] `setOptions` should merge config items that can be arrays
+  (https://github.com/zendframework/zf2/issues/4213)
+- 4216: Require `Zend\Config` in `Zend\Mvc`
+  (https://github.com/zendframework/zf2/issues/4216)
+- 4224: `Mail\Headers.php`: Adjust regex for field name to RFC 5322
+  (https://github.com/zendframework/zf2/issues/4224)
+- 4225: change variable naming
+  (https://github.com/zendframework/zf2/issues/4225)
+- 4226: ZF2 ACL full access
+  (https://github.com/zendframework/zf2/issues/4226)
+- 4227: Updated `Zend_Captcha` and `Zend_Validate` for catalan language
+  (https://github.com/zendframework/zf2/issues/4227)
+- 4232: Correct tests for group multicheckbox & radio attributes
+  (https://github.com/zendframework/zf2/issues/4232)
+- 4233: remove mistake doc for `Zend\Http\PhpEnvironment\Request::detectBaseUrl()`
+  (https://github.com/zendframework/zf2/issues/4233)
+- 4235: fixed `setEventManager`
+  (https://github.com/zendframework/zf2/issues/4235)
+- 4236: Update `ProvidesEvents.php`
+  (https://github.com/zendframework/zf2/issues/4236)
+- 4237: Update `ModuleManager.php`
+  (https://github.com/zendframework/zf2/issues/4237)
+- 4239: Remove annotation in `Zend\Db\Adapter\AdapterAwareTrait`
+  (https://github.com/zendframework/zf2/issues/4239)
+- 4240: A Better fix for #3912
+  (https://github.com/zendframework/zf2/issues/4240)
+- 4241: `Zend\Db\Metadata` - remove quoting of known scalars, use `quoteTrustedValue()` for provided values
+  (https://github.com/zendframework/zf2/issues/4241)
+- 4242: fix `Zend\Json` doc and little typo
+  (https://github.com/zendframework/zf2/issues/4242)
+- 4243: remove `if` `else` for same return
+  (https://github.com/zendframework/zf2/issues/4243)
+- 4244: remove unused `require_once __DIR__ . '/SplAutoloader.php';`
+  (https://github.com/zendframework/zf2/issues/4244)
+- 4246: replaced `get_called_class()` with `get_class($this)` in non-static context
+  (https://github.com/zendframework/zf2/issues/4246)
+
 ## 2.1.4 (13 Mar 2013):
 
 - ZF2013-01: Query route (http://framework.zend.com/security/ZF2013-01)

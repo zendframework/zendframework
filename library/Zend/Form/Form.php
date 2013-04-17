@@ -699,7 +699,13 @@ class Form extends Fieldset implements FormInterface
             }
         }
 
-        foreach ($fieldset->getElements() as $element) {
+        if ($fieldset instanceof Collection && $fieldset->getTargetElement() instanceof FieldsetInterface) {
+            $elements = $fieldset->getTargetElement()->getElements();
+        } else {
+            $elements = $fieldset->getElements();
+        }
+
+        foreach ($elements as $element) {
             $name = $element->getName();
 
             if ($this->preferFormInputFilter && $inputFilter->has($name)) {

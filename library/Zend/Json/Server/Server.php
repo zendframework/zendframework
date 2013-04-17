@@ -497,7 +497,7 @@ class Server extends AbstractServer
         }
 
         $params        = $request->getParams();
-        $invocable     = $this->table->getMethod($method);
+        $invokable     = $this->table->getMethod($method);
         $serviceMap    = $this->getServiceMap();
         $service       = $serviceMap->getService($method);
         $serviceParams = $service->getParams();
@@ -509,7 +509,7 @@ class Server extends AbstractServer
         //Make sure named parameters are passed in correct order
         if (is_string( key( $params ) )) {
 
-            $callback = $invocable->getCallback();
+            $callback = $invokable->getCallback();
             if ('function' == $callback->getType()) {
                 $reflection = new ReflectionFunction( $callback->getFunction() );
             } else {
@@ -534,7 +534,7 @@ class Server extends AbstractServer
         }
 
         try {
-            $result = $this->_dispatch($invocable, $params);
+            $result = $this->_dispatch($invokable, $params);
         } catch (\Exception $e) {
             return $this->fault($e->getMessage(), $e->getCode(), $e);
         }

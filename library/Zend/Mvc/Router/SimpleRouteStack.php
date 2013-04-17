@@ -205,8 +205,8 @@ class SimpleRouteStack implements RouteStackInterface
     /**
      * Check if a route with a specific name exists
      *
-     * @param string $name
-     * @return boolean true if route exists
+     * @param  string $name
+     * @return bool true if route exists
      */
     public function hasRoute($name)
     {

@@ -9,6 +9,7 @@
 
 namespace Zend\Permissions\Acl\Role;
 
+use Traversable;
 use Zend\Permissions\Acl\Exception;
 
 class Registry
@@ -34,8 +35,8 @@ class Registry
      * will have the least priority, and the last parent added will have the
      * highest priority.
      *
-     * @param  RoleInterface              $role
-     * @param  RoleInterface|string|array $parents
+     * @param  RoleInterface                           $role
+     * @param  RoleInterface|string|array|Traversable $parents
      * @throws Exception\InvalidArgumentException
      * @return Registry Provides a fluent interface
      */
@@ -53,7 +54,7 @@ class Registry
         $roleParents = array();
 
         if (null !== $parents) {
-            if (!is_array($parents)) {
+            if (!is_array($parents) && !$parents instanceof Traversable) {
                 $parents = array($parents);
             }
             foreach ($parents as $parent) {

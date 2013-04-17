@@ -39,9 +39,9 @@ class TextDomainTest extends TestCase
     public function testPluralRuleDefault()
     {
         $domain = new TextDomain();
-        $this->assertEquals(0, $domain->getPluralRule()->evaluate(0));
-        $this->assertEquals(1, $domain->getPluralRule()->evaluate(1));
-        $this->assertEquals(0, $domain->getPluralRule()->evaluate(2));
+        $this->assertEquals(1, $domain->getPluralRule()->evaluate(0));
+        $this->assertEquals(0, $domain->getPluralRule()->evaluate(1));
+        $this->assertEquals(1, $domain->getPluralRule()->evaluate(2));
     }
 
     public function testMerging()

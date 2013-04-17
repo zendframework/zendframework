@@ -157,7 +157,7 @@ class EventManager implements EventManagerInterface
     public function addIdentifiers($identifiers)
     {
         if (is_array($identifiers) || $identifiers instanceof Traversable) {
-            $this->identifiers = array_unique($this->identifiers + (array) $identifiers);
+            $this->identifiers = array_unique(array_merge($this->identifiers, (array) $identifiers));
         } elseif ($identifiers !== null) {
             $this->identifiers = array_unique(array_merge($this->identifiers, array($identifiers)));
         }
@@ -201,6 +201,9 @@ class EventManager implements EventManagerInterface
             throw new Exception\InvalidCallbackException('Invalid callback provided');
         }
 
+        // Initial value of stop propagation flag should be false
+        $e->stopPropagation(false);
+
         return $this->triggerListeners($event, $e, $callback);
     }
 
@@ -242,6 +245,9 @@ class EventManager implements EventManagerInterface
         if (!is_callable($callback)) {
             throw new Exception\InvalidCallbackException('Invalid callback provided');
         }
+
+        // Initial value of stop propagation flag should be false
+        $e->stopPropagation(false);
 
         return $this->triggerListeners($event, $e, $callback);
     }
@@ -455,9 +461,15 @@ class EventManager implements EventManagerInterface
         }
 
         foreach ($listeners as $listener) {
+            $listenerCallback = $listener->getCallback();
+            if (!$listenerCallback) {
+                $this->detach($listener);
+                continue;
+            }
+
             // Trigger the listener's callback, and push its result onto the
             // response collection
-            $responses->push(call_user_func($listener->getCallback(), $e));
+            $responses->push(call_user_func($listenerCallback, $e));
 
             // If the event was asked to stop propagating, do so
             if ($e->propagationIsStopped()) {

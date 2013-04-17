@@ -80,7 +80,11 @@ abstract class AbstractIterator implements RecursiveIterator
      */
     public function hasChildren()
     {
-        return count($this->children) > 0;
+        if ($this->valid() && ($this->current() instanceof RecursiveIterator)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

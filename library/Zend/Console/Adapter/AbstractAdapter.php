@@ -11,6 +11,7 @@ namespace Zend\Console\Adapter;
 
 use Zend\Console\Charset;
 use Zend\Console\Exception;
+use Zend\Stdlib\StringUtils;
 
 /**
  * Common console adapter codebase
@@ -73,8 +74,6 @@ abstract class AbstractAdapter implements AdapterInterface
 
     /**
      * Write a single line of text to console and advance cursor to the next line.
-     * If the text length matches console window width no newline character will be added,
-     * which prevents double empty lines.
      *
      * @param string   $text
      * @param null|int $color
@@ -82,21 +81,7 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function writeLine($text = "", $color = null, $bgColor = null)
     {
-        $width = $this->getStringWidth($text);
-
-        // Remove newline characters from the end of string
-        $text = trim($text, "\r\n");
-
-        // Replace newline characters with spaces
-        $text = str_replace("\n", " ", $text);
-
-        // Write the line but refuse to add EOL if the text fits the window
-        if ($width % $this->getWidth() === 0) {
-            $this->write($text, $color, $bgColor);
-        } else {
-            $this->write($text, $color, $bgColor);
-            $this->write(PHP_EOL);
-        }
+        $this->write($text . PHP_EOL, $color, $bgColor);
     }
 
     /**
@@ -224,7 +209,7 @@ abstract class AbstractAdapter implements AdapterInterface
             }
 
         } elseif ($fillStyle) {
-            $fillChar = $this->stringTrim($fillStyle, 1);
+            $fillChar = StringUtils::getWrapper()->substr($fillStyle, 0, 1);
         } else {
             $fillChar = ' ';
         }
@@ -481,56 +466,6 @@ abstract class AbstractAdapter implements AdapterInterface
     public function clearScreen()
     {
         return $this->clear();
-    }
-
-    /**
-     * Helper function that return string length as rendered in console.
-     *
-     * @static
-     * @param $string
-     * @return int
-     */
-    protected function getStringWidth($string)
-    {
-        $width = strlen($string);
-
-        if (!$this->isUtf8()) {
-            return $width;
-        }
-
-        if (static::$hasMBString === null) {
-            static::$hasMBString = extension_loaded( 'mbstring' );
-        }
-
-        $width = (static::$hasMBString)
-               ? mb_strlen($string, 'UTF-8' )
-               : strlen(utf8_decode($string));
-
-        return $width;
-    }
-
-    /**
-     * Trim a string in an encoding-safe way
-     *
-     * @param  mixed $string
-     * @param  mixed $length
-     * @return int
-     */
-    protected function stringTrim($string, $length)
-    {
-        if ($this->isUtf8()) {
-            if (static::$hasMBString === null) {
-                static::$hasMBString = extension_loaded('mbstring');
-            }
-
-            if (static::$hasMBString) {
-                return mb_strcut($string, 0, $length, 'UTF-8');
-            }
-
-            return substr(utf8_decode($string), 0, $length);
-        }
-
-        return substr($string, 0, $length);
     }
 
     /**

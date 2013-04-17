@@ -130,7 +130,7 @@ foreach ($output as $file) {
 
     if ($return != 0) {
         echo "PHP file fails to parse: " . $fileName . ":" . PHP_EOL;
-        echo implode(PHP_EOL, $lintOutput) . PHP_EOL;
+        echo implode(PHP_EOL, $output) . PHP_EOL;
         $exit = 1;
         continue;
     }
@@ -142,7 +142,7 @@ foreach ($output as $file) {
     $return = null;
     exec("php-cs-fixer fix --dry-run --level=psr2 " . escapeshellarg($fileName), $output, $return);
     if ($return != 0 || !empty($output)) {
-        echo "PHP file fails contains CS issues: " . $fileName . ":" . PHP_EOL;
+        echo "PHP file contains CS issues: " . $fileName . ":" . PHP_EOL;
         echo implode(PHP_EOL, $output) . PHP_EOL;
         $exit = 1;
         continue;

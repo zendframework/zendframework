@@ -184,8 +184,8 @@ class FilterChain extends AbstractFilter implements Countable
      */
     public function merge(FilterChain $filterChain)
     {
-        foreach ($filterChain->filters as $filter) {
-            $this->attach($filter);
+        foreach ($filterChain->filters->toArray(PriorityQueue::EXTR_BOTH) as $item) {
+            $this->attach($item['data'], $item['priority']);
         }
 
         return $this;

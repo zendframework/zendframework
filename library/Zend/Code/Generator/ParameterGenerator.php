@@ -56,6 +56,8 @@ class ParameterGenerator extends AbstractGenerator
 
         if ($reflectionParameter->isArray()) {
             $param->setType('array');
+        } elseif (method_exists($reflectionParameter, 'isCallable') && $reflectionParameter->isCallable()) {
+            $param->setType('callable');
         } else {
             $typeClass = $reflectionParameter->getClass();
             if ($typeClass) {

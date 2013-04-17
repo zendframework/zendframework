@@ -76,9 +76,9 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         $fieldName = str_replace(' ', '-', ucwords(str_replace(array('_', '-'), ' ', $fieldName)));
 
         // Validate what we have
-        if (!preg_match('/^[a-z][a-z0-9-]*$/i', $fieldName)) {
+        if (!preg_match('/^[\x21-\x39\x3B-\x7E]*$/i', $fieldName)) {
             throw new Exception\InvalidArgumentException(
-                'Header name must start with a letter, and consist of only letters, numbers and dashes.'
+                'Header name must be composed of printable US-ASCII characters, except colon.'
             );
         }
 

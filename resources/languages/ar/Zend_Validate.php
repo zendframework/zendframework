@@ -172,7 +172,7 @@ return array(
 
     // Zend_Validate_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "'%count%' كلمات أكثر من العدد الأقصى المسموح به وهو '%max%' كلمات",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "'%count%' كلمات أقل من العدد الأدنى المسموح وهو '%min%' كلمات",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "'%count%' كلمات أقل من العدد الأدنى المسموح وهو '%min%' كلمات",
     "File '%value%' is not readable or does not exist" => "الملف '%value%' لا يمكن قراءته أو أنه غير موجود",
 
     // Zend_Validate_Float

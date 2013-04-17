@@ -134,6 +134,9 @@ class Curl implements HttpAdapter, StreamInterface
                     $this->setCurlOption(CURLOPT_PROXYPORT, $v);
                     break;
                 default:
+                    if (is_array($v) && isset($this->config[$option]) && is_array($this->config[$option])) {
+                        $v = ArrayUtils::merge($this->config[$option], $v);
+                    }
                     $this->config[$option] = $v;
                     break;
             }

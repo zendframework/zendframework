@@ -39,8 +39,8 @@ class FilePostRedirectGet extends AbstractPlugin
     /**
      * @param  FormInterface $form
      * @param  string        $redirect      Route or URL string (default: current route)
-     * @param  boolean       $redirectToUrl Use $redirect as a URL string (default: false)
-     * @return boolean|array|Response
+     * @param  bool          $redirectToUrl Use $redirect as a URL string (default: false)
+     * @return bool|array|Response
      */
     public function __invoke(FormInterface $form, $redirect = null, $redirectToUrl = false)
     {
@@ -55,7 +55,7 @@ class FilePostRedirectGet extends AbstractPlugin
     /**
      * @param  FormInterface $form
      * @param  string        $redirect      Route or URL string (default: current route)
-     * @param  boolean       $redirectToUrl Use $redirect as a URL string (default: false)
+     * @param  bool          $redirectToUrl Use $redirect as a URL string (default: false)
      * @return Response
      */
     protected function handlePostRequest(FormInterface $form, $redirect, $redirectToUrl)
@@ -109,7 +109,7 @@ class FilePostRedirectGet extends AbstractPlugin
 
     /**
      * @param  FormInterface $form
-     * @return boolean|array
+     * @return bool|array
      */
     protected function handleGetRequest(FormInterface $form)
     {
@@ -288,7 +288,7 @@ class FilePostRedirectGet extends AbstractPlugin
      * TODO: Good candidate for traits method in PHP 5.4 with PostRedirectGet plugin
      *
      * @param  string  $redirect
-     * @param  boolean $redirectToUrl
+     * @param  bool    $redirectToUrl
      * @return Response
      * @throws \Zend\Mvc\Exception\RuntimeException
      */

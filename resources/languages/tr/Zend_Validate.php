@@ -187,7 +187,7 @@ return array(
 
     // Zend_Validator_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Çok fazla kelime, en fazla '%max%' kelimeye izin veriliyor fakat '%count%' sayıldı",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Çok az kelime, en az '%min%' kelimeye izin veriliyor fakat '%count%' sayıldı",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Çok az kelime, en az '%min%' kelimeye izin veriliyor fakat '%count%' sayıldı",
     "File '%value%' is not readable or does not exist" => "'%value%' dosyası okunamıyor ya da yok",
 
     // Zend_Validator_GreaterThan

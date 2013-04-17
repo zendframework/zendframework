@@ -41,7 +41,9 @@ class SequenceFeature extends AbstractFeature
         $this->sequenceName    = $sequenceName;
     }
 
-
+    /**
+     * @param  Insert $insert
+     */
     public function preInsert(Insert $insert)
     {
         $columns = $insert->getRawState('columns');
@@ -53,20 +55,19 @@ class SequenceFeature extends AbstractFeature
         }
 
         $this->sequenceValue = $this->nextSequenceId();
-        if ($this->sequenceValue === null)
+        if ($this->sequenceValue === null) {
             return $insert;
+        }
 
-        array_push($columns, $this->primaryKeyField);
-        array_push($values, $this->sequenceValue);
-        $insert->columns($columns);
-        $insert->values($values);
+        $insert->values(array($this->primaryKeyField => $this->sequenceValue),  Insert::VALUES_MERGE);
         return $insert;
     }
 
     public function postInsert(StatementInterface $statement, ResultInterface $result)
     {
-        if ($this->sequenceValue !== null)
+        if ($this->sequenceValue !== null) {
             $this->tableGateway->lastInsertValue = $this->sequenceValue;
+        }
     }
 
     /**
@@ -78,7 +79,6 @@ class SequenceFeature extends AbstractFeature
         $platform = $this->tableGateway->adapter->getPlatform();
         $platformName = $platform->getName();
 
-        $sql = '';
         switch ($platformName) {
             case 'Oracle':
                 $sql = 'SELECT ' . $platform->quoteIdentifier($this->sequenceName) . '.NEXTVAL FROM dual';
@@ -93,7 +93,7 @@ class SequenceFeature extends AbstractFeature
         $statement = $this->tableGateway->adapter->createStatement();
         $statement->prepare($sql);
         $result = $statement->execute();
-        $sequence = $result->getResource()->fetch(\PDO::FETCH_ASSOC);
+        $sequence = $result->current();
         unset($statement, $result);
         return $sequence['nextval'];
     }
@@ -107,7 +107,6 @@ class SequenceFeature extends AbstractFeature
         $platform = $this->tableGateway->adapter->getPlatform();
         $platformName = $platform->getName();
 
-        $sql = '';
         switch ($platformName) {
             case 'Oracle':
                 $sql = 'SELECT ' . $platform->quoteIdentifier($this->sequenceName) . '.CURRVAL FROM dual';
@@ -122,7 +121,7 @@ class SequenceFeature extends AbstractFeature
         $statement = $this->tableGateway->adapter->createStatement();
         $statement->prepare($sql);
         $result = $statement->execute();
-        $sequence = $result->getResource()->fetch(\PDO::FETCH_ASSOC);
+        $sequence = $result->current();
         unset($statement, $result);
         return $sequence['currval'];
     }

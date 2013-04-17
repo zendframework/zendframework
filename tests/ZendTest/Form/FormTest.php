@@ -995,6 +995,62 @@ class FormTest extends TestCase
         $this->assertEquals($product, $emptyProduct, var_export($product, 1) . "\n\n" . var_export($emptyProduct, 1));
     }
 
+    public function testCanCorrectlyPopulateOrphanedEntities()
+    {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped("The Intl extension is not loaded");
+        }
+
+        $form = new TestAsset\OrphansForm();
+
+        $data = array(
+            'test' => array(
+                array(
+                    'name' => 'Foo'
+                ),
+                array(
+                    'name' => 'Bar'
+                ),
+            )
+        );
+
+        $form->setData($data);
+        $valid = $form->isValid();
+        $this->assertEquals(true, $valid);
+
+        $formCollections = $form->getFieldsets();
+        $formCollection = $formCollections['test'];
+
+        $fieldsets = $formCollection->getFieldsets();
+
+        $fieldsetFoo = $fieldsets[0];
+        $fieldsetBar = $fieldsets[1];
+
+        $objectFoo = $fieldsetFoo->getObject();
+        $this->assertTrue(
+            $objectFoo instanceof Entity\Orphan,
+            'FormCollection with orphans does not bind objects from fieldsets'
+        );
+
+        $objectBar = $fieldsetBar->getObject();
+        $this->assertTrue(
+            $objectBar instanceof Entity\Orphan,
+            'FormCollection with orphans does not bind objects from fieldsets'
+        );
+
+        $this->assertSame(
+            'Foo',
+            $objectFoo->name,
+            'Object is not populated if it is an orphan in a fieldset inside a formCollection'
+        );
+
+        $this->assertSame(
+            'Bar',
+            $objectBar->name,
+            'Object is not populated if it is an orphan in a fieldset inside a formCollection'
+        );
+    }
+
     public function testAssertElementsNamesAreNotWrappedAroundFormNameByDefault()
     {
         $form = new \ZendTest\Form\TestAsset\FormCollection();
@@ -1356,5 +1412,63 @@ class FormTest extends TestCase
     public function testGetValidationGroupReturnsNullWhenNoneSet()
     {
         $this->assertNull($this->form->getValidationGroup());
+    }
+
+    public function testPreserveEntitiesBoundToCollectionAfterValidation()
+    {
+        $this->form->setInputFilter(new \Zend\InputFilter\InputFilter());
+        $fieldset = new TestAsset\ProductCategoriesFieldset();
+        $fieldset->setUseAsBaseFieldset(true);
+
+        $product = new Entity\Product();
+        $product->setName('Foobar');
+        $product->setPrice(100);
+
+        $c1 = new Entity\Category();
+        $c1->setId(1);
+        $c1->setName('First Category');
+
+        $c2 = new Entity\Category();
+        $c2->setId(2);
+        $c2->setName('Second Category');
+
+        $product->setCategories(array($c1, $c2));
+
+        $this->form->add($fieldset);
+        $this->form->bind($product);
+
+        $data = array(
+            'product' => array(
+                'name' => 'Barbar',
+                'price' => 200,
+                'categories' => array(
+                    array('name' => 'Something else'),
+                    array('name' => 'Totally different'),
+                ),
+            ),
+        );
+
+        $hash1 = spl_object_hash($this->form->getObject()->getCategory(0));
+        $this->form->setData($data);
+        $this->form->isValid();
+        $hash2 = spl_object_hash($this->form->getObject()->getCategory(0));
+
+        // Returned object has to be the same as when binding or properties
+        // will be lost. (For example entity IDs.)
+        $this->assertTrue($hash1 == $hash2);
+    }
+
+    public function testAddRemove()
+    {
+        $form = clone $this->form;
+        $this->assertEquals($form, $this->form);
+
+        $file = new Element\File('file_resource');
+        $this->form->add($file);
+        $this->assertTrue($this->form->has('file_resource'));
+        $this->assertNotEquals($form, $this->form);
+
+        $this->form->remove('file_resource');
+        $this->assertEquals($form, $this->form);
     }
 }

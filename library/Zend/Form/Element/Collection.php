@@ -330,19 +330,6 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * If the target element is a FieldsetInterface, return it's attached elements
-     */
-    public function getElements()
-    {
-        if ($this->getTargetElement() instanceof FieldsetInterface) {
-            return $this->getTargetElement()->getElements();
-        }
-        return parent::getElements();
-    }
-
-    /**
      * Get allow add
      *
      * @param bool $allowAdd

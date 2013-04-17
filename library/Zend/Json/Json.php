@@ -46,7 +46,7 @@ class Json
      *
      * @param string $encodedValue Encoded in JSON format
      * @param int $objectDecodeType Optional; flag indicating how to decode
-     * objects. See {@link Zend_Json_Decoder::decode()} for details.
+     * objects. See {@link Zend\Json\Decoder::decode()} for details.
      * @return mixed
      * @throws RuntimeException
      */
@@ -85,10 +85,10 @@ class Json
      *
      * NOTE: Only public variables will be encoded
      *
-     * NOTE: Encoding native javascript expressions are possible using Zend_Json_Expr.
+     * NOTE: Encoding native javascript expressions are possible using Zend\Json\Expr.
      *       You can enable this by setting $options['enableJsonExprFinder'] = true
      *
-     * @see Zend_Json_Expr
+     * @see Zend\Json\Expr
      *
      * @param  mixed $valueToEncode
      * @param  bool $cycleCheck Optional; whether or not to check for object recursion; off by default
@@ -105,7 +105,7 @@ class Json
             }
         }
 
-        // Pre-encoding look for Zend_Json_Expr objects and replacing by tmp ids
+        // Pre-encoding look for Zend\Json\Expr objects and replacing by tmp ids
         $javascriptExpressions = array();
         if (isset($options['enableJsonExprFinder'])
            && ($options['enableJsonExprFinder'] == true)
@@ -123,7 +123,7 @@ class Json
             $encodedResult = Encoder::encode($valueToEncode, $cycleCheck, $options);
         }
 
-        //only do post-processing to revert back the Zend_Json_Expr if any.
+        //only do post-processing to revert back the Zend\Json\Expr if any.
         if (count($javascriptExpressions) > 0) {
             $count = count($javascriptExpressions);
             for ($i = 0; $i < $count; $i++) {
@@ -143,9 +143,9 @@ class Json
     }
 
     /**
-     * Check & Replace Zend_Json_Expr for tmp ids in the valueToEncode
+     * Check & Replace Zend\Json\Expr for tmp ids in the valueToEncode
      *
-     * Check if the value is a Zend_Json_Expr, and if replace its value
+     * Check if the value is a Zend\Json\Expr, and if replace its value
      * with a magic key and save the javascript expression in an array.
      *
      * NOTE this method is recursive.
@@ -186,9 +186,9 @@ class Json
      * Return the value of an XML attribute text or the text between
      * the XML tags
      *
-     * In order to allow Zend_Json_Expr from xml, we check if the node
-     * matches the pattern that try to detect if it is a new Zend_Json_Expr
-     * if it matches, we return a new Zend_Json_Expr instead of a text node
+     * In order to allow Zend\Json\Expr from xml, we check if the node
+     * matches the pattern that try to detect if it is a new Zend\Json\Expr
+     * if it matches, we return a new Zend\Json\Expr instead of a text node
      *
      * @param SimpleXMLElement $simpleXmlElementObject
      * @return Expr|string
@@ -298,7 +298,7 @@ class Json
      * calling a recursive (protected static) function in this class. Then, it
      * converts that PHP array into JSON by calling the "encode" static function.
      *
-     * NOTE: Encoding native javascript expressions via Zend_Json_Expr is not possible.
+     * NOTE: Encoding native javascript expressions via Zend\Json\Expr is not possible.
      *
      * @static
      * @access public
@@ -323,7 +323,7 @@ class Json
         // Call the recursive function to convert the XML into a PHP array.
         $resultArray = static::_processXml($simpleXmlElementObject, $ignoreXmlAttributes);
 
-        // Convert the PHP array to JSON using Zend_Json encode method.
+        // Convert the PHP array to JSON using Zend\Json\Json encode method.
         // It is just that simple.
         $jsonStringOutput = static::encode($resultArray);
         return($jsonStringOutput);

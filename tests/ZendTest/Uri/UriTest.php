@@ -902,7 +902,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * Valid query or fragment parts
      *
      * Each valid query or fragment part should require no encoding and if
-     * passed throuh an encoding method shoudl return unchanged.
+     * passed throuh an encoding method should return unchanged.
      *
      * @return array
      */

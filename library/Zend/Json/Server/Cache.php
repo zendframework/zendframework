@@ -13,7 +13,7 @@ use Zend\Server\Cache as ServerCache;
 use Zend\Stdlib\ErrorHandler;
 
 /**
- * Zend_Json_Server_Cache: cache Zend_Json_Server server definition and SMD
+ * Zend\Json\Server\Cache: cache Zend\Json\Server\Server server definition and SMD
  */
 class Cache extends ServerCache
 {

@@ -9,7 +9,7 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 This is the second minor (feature) release for the version 2 series.
 
-17 Apr 2013
+DD MMM YYYY
 
 ### UPDATES IN 2.2.0
 

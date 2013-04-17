@@ -164,7 +164,7 @@ abstract class AbstractController implements
             __CLASS__,
             get_class($this),
             $this->eventIdentifier,
-            substr(get_called_class(), 0, strpos(get_class($this), '\\'))
+            substr(get_class($this), 0, strpos(get_class($this), '\\'))
         ));
         $this->events = $events;
         $this->attachDefaultListeners();

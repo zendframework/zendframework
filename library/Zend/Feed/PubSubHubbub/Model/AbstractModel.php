@@ -29,7 +29,7 @@ class AbstractModel
     public function __construct(TableGatewayInterface $tableGateway = null)
     {
         if ($tableGateway === null) {
-            $parts = explode('\\', get_called_class());
+            $parts = explode('\\', get_class($this));
             $table = strtolower(array_pop($parts));
             $this->db = new TableGateway($table, null);
         } else {

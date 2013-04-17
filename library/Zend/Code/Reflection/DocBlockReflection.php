@@ -104,7 +104,7 @@ class DocBlockReflection implements ReflectionInterface
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s must have a (string) DocComment or a Reflector in the constructor',
-                get_called_class()
+                get_class($this)
             ));
         }
 

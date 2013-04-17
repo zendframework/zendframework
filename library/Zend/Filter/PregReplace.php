@@ -132,7 +132,7 @@ class PregReplace extends AbstractFilter
         if ($this->options['pattern'] === null) {
             throw new Exception\RuntimeException(sprintf(
                 'Filter %s does not have a valid pattern set',
-                get_called_class()
+                get_class($this)
             ));
         }
 

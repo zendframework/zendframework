@@ -108,7 +108,20 @@ class ControllerManager extends AbstractPluginManager
     }
 
     /**
-     * Override: do not use peering service manager to retrieve controller
+     * Override: do not use peering service managers
+     *
+     * @param  string|array $name
+     * @param  bool         $checkAbstractFactories
+     * @param  bool         $usePeeringServiceManagers
+     * @return bool
+     */
+    public function has($name, $checkAbstractFactories = true, $usePeeringServiceManagers = false)
+    {
+        return parent::has($name, $checkAbstractFactories, $usePeeringServiceManagers);
+    }
+
+    /**
+     * Override: do not use peering service managers
      *
      * @param  string $name
      * @param  array $options

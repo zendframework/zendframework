@@ -33,6 +33,7 @@ class ControllerManagerTest extends TestCase
 
         $this->controllers = new ControllerManager();
         $this->controllers->setServiceLocator($this->services);
+        $this->controllers->addPeeringServiceManager($this->services);
     }
 
     public function testInjectControllerDependenciesInjectsExpectedDependencies()
@@ -58,5 +59,16 @@ class ControllerManagerTest extends TestCase
         $this->controllers->injectControllerDependencies($controller, $this->controllers);
         $this->assertSame($events, $controller->getEventManager());
         $this->assertSame($this->sharedEvents, $events->getSharedManager());
+    }
+
+    /**
+     * @covers            ControllerManager::has
+     * @covers            ControllerManager::get
+     * @expectedException Zend\ServiceManager\Exception\ServiceNotFoundException
+     */
+    public function testDoNotUsePeeringServiceManagers()
+    {
+        $this->assertFalse($this->controllers->has('EventManager'));
+        $this->controllers->get('EventManager');
     }
 }

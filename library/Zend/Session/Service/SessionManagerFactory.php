@@ -29,15 +29,15 @@ class SessionManagerFactory implements FactoryInterface
      * - Zend\Session\Storage\StorageInterface
      * - Zend\Session\SaveHandler\SaveHandlerInterface
      *
-     * The first two have corresponding factories inside this namespace. The 
+     * The first two have corresponding factories inside this namespace. The
      * last, however, does not, due to the differences in implementations, and
      * the fact that save handlers will often be written in userland. As such
      * if you wish to attach a save handler to the manager, you will need to
-     * write your own factory, and assign it to the service name 
+     * write your own factory, and assign it to the service name
      * "Zend\Session\SaveHandler\SaveHandlerInterface", (or alias that name
      * to your own service).
-     * 
-     * @param  ServiceLocatorInterface $services 
+     *
+     * @param  ServiceLocatorInterface $services
      * @return SessionManager
      * @throws ServiceNotCreatedException if any collaborators are not of the
      *         correct type

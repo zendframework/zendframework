@@ -25,8 +25,8 @@ class StorageFactory implements FactoryInterface
      * instance. That array should contain the key "type", specifying the storage
      * type to use, and optionally "options", containing any options to be used in
      * creating the StorageInterface instance.
-     * 
-     * @param  ServiceLocatorInterface $services 
+     *
+     * @param  ServiceLocatorInterface $services
      * @return StorageInterface
      * @throws ServiceNotCreatedException if session_storage is missing, or the
      *         factory cannot create the storage instance.

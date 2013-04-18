@@ -21,12 +21,12 @@ class SessionConfigFactory implements FactoryInterface
      *
      * Uses "session_config" section of configuration to seed a ConfigInterface
      * instance. By default, Zend\Session\Config\SessionConfig will be used, but
-     * you may also specify a specific implementation variant using the 
+     * you may also specify a specific implementation variant using the
      * "config_class" subkey.
-     * 
-     * @param  ServiceLocatorInterface $services 
+     *
+     * @param  ServiceLocatorInterface $services
      * @return ConfigInterface
-     * @throws ServiceNotCreatedException if session_config is missing, or an 
+     * @throws ServiceNotCreatedException if session_config is missing, or an
      *         invalid config_class is used
      */
     public function createService(ServiceLocatorInterface $services)

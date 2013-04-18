@@ -16,7 +16,7 @@ use Zend\Session\Container;
 /**
  * Session container abstract service factory.
  *
- * Allows creating Container instances, using the Zend\Service\ManagerInterface 
+ * Allows creating Container instances, using the Zend\Service\ManagerInterface
  * if present. Containers are named in a "session_containers" array in the
  * Config service:
  *
@@ -86,8 +86,8 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
 
     /**
      * Retrieve config from service locator, and cache for later
-     * 
-     * @param  ServiceLocatorInterface $serviceLocator 
+     *
+     * @param  ServiceLocatorInterface $serviceLocator
      * @return false|array
      */
     protected function getConfig(ServiceLocatorInterface $serviceLocator)
@@ -118,8 +118,8 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
      * Normalize the container name in order to perform a lookup
      *
      * Strips off the "SessionContainer\" prefix, and lowercases the name.
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return string
      */
     protected function normalizeContainerName($name)

@@ -30,10 +30,10 @@ use Zend\Session\Container;
  * );
  * </code>
  *
- * Services use the prefix "SessionConfig\\":
+ * Services use the prefix "SessionContainer\\":
  *
  * <code>
- * $container = $services->get('SessionConfig\captcha');
+ * $container = $services->get('SessionContainer\captcha');
  * </code>
  */
 class ContainerAbstractFactory implements AbstractFactoryInterface

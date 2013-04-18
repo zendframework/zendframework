@@ -16,7 +16,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $mockAdapter = null;
-    
+
     /**
      * Sql object
      * @var Sql
@@ -115,14 +115,14 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->sql->delete('bar');
 
     }
-    
+
     /**
      * @covers Zend\Db\Sql\Sql::prepareStatementForSqlObject
      */
     public function testPrepareStatementForSqlObject()
-    {        
+    {
         $insert = $this->sql->insert()->columns(array('foo'));
-        $stmt = $this->sql->prepareStatementForSqlObject($insert);        
+        $stmt = $this->sql->prepareStatementForSqlObject($insert);
         $this->assertInstanceOf('Zend\Db\Adapter\Driver\StatementInterface', $stmt);
     }
 }

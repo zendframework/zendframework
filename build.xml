@@ -16,11 +16,19 @@
     </target>
 
     <target name="composer-install" description="Installs dependencies via composer install">
-        <exec executable="composer" failonerror="true">
-            <arg value="install" />
-            <arg value="--dev" />
-            <arg value="--prefer-source" />
-        </exec>
+        <sequential>
+            <exec executable="composer" failonerror="true">
+                <arg value="self-update" />
+            </exec>
+            <exec executable="composer" failonerror="true">
+                <arg value="--version" />
+            </exec>
+            <exec executable="composer" failonerror="true">
+                <arg value="install" />
+                <arg value="--dev" />
+                <arg value="--prefer-source" />
+            </exec>
+        </sequential>
     </target>
 
     <target
@@ -102,12 +110,12 @@
 
             </echo>
             <exec
-                    executable="${basedir}/vendor/bin/phpunit"
-                    output="${basedir}/build/test-results/@{component}.log"
-                    error="${basedir}/build/test-results/@{component}.log"
-                    failonerror="true"
-                    append="true"
-                    >
+                executable="${basedir}/vendor/bin/phpunit"
+                output="${basedir}/build/test-results/@{component}.log"
+                error="${basedir}/build/test-results/@{component}.log"
+                failonerror="true"
+                append="true"
+            >
                 <arg value="-c" />
                 <arg value="${basedir}/tests/phpunit.xml.dist" />
                 <arg value="${basedir}/tests/ZendTest/@{component}" />

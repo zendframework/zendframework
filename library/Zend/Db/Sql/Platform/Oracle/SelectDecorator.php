@@ -42,7 +42,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         return $table . ' ' . $alias;
     }
 
-	/**
+    /**
      * @param AdapterInterface $adapter
      * @param StatementContainerInterface $statementContainer
      */

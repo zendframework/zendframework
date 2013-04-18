@@ -136,11 +136,7 @@
                 error="${basedir}/build/cs-results/check-cs.log"
                 failonerror="true"
                 append="true"
-            >
-                <arg value="-c" />
-                <arg value="${basedir}/tests/phpunit.xml.dist" />
-                <arg value="${basedir}/tests/ZendTest/@{component}" />
-            </exec>
+            />
         </sequential>
     </macrodef>
 </project>

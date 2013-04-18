@@ -115,7 +115,7 @@ class DbSelect implements AdapterInterface
         foreach ($joins as $join) {
             $select->join($join['name'], $join['on'], array(), $join['type']);
         }
-        
+
         $select->columns(array('c' => new Expression('COUNT(1)')));
 
         $statement = $this->sql->prepareStatementForSqlObject($select);

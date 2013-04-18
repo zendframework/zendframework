@@ -84,7 +84,7 @@ abstract class Factory
      * @param  array $options 
      * @return ArrayStorage
      */
-    protected function createArrayStorage($type, $options)
+    protected static function createArrayStorage($type, $options)
     {
         $input         = array();
         $flags         = ArrayObject::ARRAY_AS_PROPS;

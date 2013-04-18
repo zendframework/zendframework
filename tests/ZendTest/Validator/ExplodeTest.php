@@ -89,4 +89,48 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals($validator->getOption('messageVariables'),
                                      'messageVariables', $validator);
     }
+
+    public function testSetValidatorAsArray()
+    {
+        $validator = new Explode();
+        $validator->setValidator(
+            array(
+                'name' => 'inarray',
+                'options' => array(
+                    'haystack' => array(
+                        'a', 'b', 'c'
+                    )
+                )
+            )
+        );
+
+        /** @var $inArrayValidator \Zend\Validator\InArray */
+        $inArrayValidator = $validator->getValidator();
+        $this->assertInstanceOf('Zend\Validator\InArray', $inArrayValidator);
+        $this->assertSame(
+            array('a', 'b', 'c'), $inArrayValidator->getHaystack()
+        );
+    }
+
+    /**
+     * @expectedException \Zend\Validator\Exception\RuntimeException
+     */
+    public function testSetValidatorMissingName()
+    {
+        $validator = new Explode();
+        $validator->setValidator(
+            array(
+                'options' => array()
+            )
+        );
+    }
+
+    /**
+     * @expectedException \Zend\Validator\Exception\RuntimeException
+     */
+    public function testSetValidatorInvalidParam()
+    {
+        $validator = new Explode();
+        $validator->setValidator('inarray');
+    }
 }

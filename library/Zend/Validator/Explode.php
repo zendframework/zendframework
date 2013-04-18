@@ -10,11 +10,16 @@
 namespace Zend\Validator;
 
 use Traversable;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\ArrayUtils;
 
-class Explode extends AbstractValidator
+class Explode extends AbstractValidator implements ServiceLocatorAwareInterface
 {
     const INVALID = 'explodeInvalid';
+
+    protected $pluginManager;
 
     /**
      * @var array
@@ -66,13 +71,56 @@ class Explode extends AbstractValidator
     }
 
     /**
+     * Set service locator
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->pluginManager = $serviceLocator;
+    }
+
+    /**
+     * Get service locator
+     *
+     * @return ServiceLocatorInterface|ValidatorPluginManager
+     */
+    public function getServiceLocator()
+    {
+        if (!$this->pluginManager) {
+            $this->setServiceLocator(new ValidatorPluginManager());
+        }
+
+        return $this->pluginManager;
+    }
+
+    /**
      * Sets the Validator for validating each value
      *
-     * @param ValidatorInterface $validator
+     * @param ValidatorInterface|array $validator
+     * @throws Exception\RuntimeException
      * @return Explode
      */
-    public function setValidator(ValidatorInterface $validator)
+    public function setValidator($validator)
     {
+        if (is_array($validator)) {
+            if (!isset($validator['name'])) {
+                throw new Exception\RuntimeException(
+                    'Invalid validator specification provided; does not include "name" key'
+                );
+            }
+            $name = $validator['name'];
+            $options = isset($validator['options']) ?
+                $validator['options'] : array();
+            $validator = $this->getServiceLocator()->get($name, $options);
+        }
+
+        if (!$validator instanceof ValidatorInterface) {
+            throw new Exception\RuntimeException(
+                'Invalid validator given'
+            );
+        }
+
         $this->validator = $validator;
         return $this;
     }

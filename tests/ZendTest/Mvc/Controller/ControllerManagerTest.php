@@ -62,13 +62,13 @@ class ControllerManagerTest extends TestCase
     }
 
     /**
-     * @covers            ControllerManager::has
-     * @covers            ControllerManager::get
-     * @expectedException Zend\ServiceManager\Exception\ServiceNotFoundException
+     * @covers ControllerManager::has
+     * @covers ControllerManager::get
      */
     public function testDoNotUsePeeringServiceManagers()
     {
         $this->assertFalse($this->controllers->has('EventManager'));
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $this->controllers->get('EventManager');
     }
 }

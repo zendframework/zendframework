@@ -628,6 +628,46 @@ class SimpleTestTest extends TestCase
                     'test' => true,
                 )
             ),
+            'group-5' => array(
+                'group (-t | --test ):test',
+                array('group', '--test'),
+                array(
+                    'group' => true,
+                    'test' => true,
+                ),
+            ),
+            'group-6' => array(
+                'group (-t | --test ):test',
+                array('group', '-t'),
+                array(
+                    'group' => true,
+                    'test' => true,
+                ),
+            ),
+            'group-7' => array(
+                'group [-x|-y|-z]:test',
+                array('group', '-y'),
+                array(
+                    'group' => true,
+                    'test' => true,
+                ),
+            ),
+            'group-8' => array(
+                'group [--foo|--bar|--baz]:test',
+                array('group', '--foo'),
+                array(
+                    'group' => true,
+                    'test' => true,
+                ),
+            ),
+            'group-9' => array(
+                'group (--foo|--bar|--baz):test',
+                array('group', '--foo'),
+                array(
+                    'group' => true,
+                    'test' => true,
+                ),
+            ),
 
             /*'combined-2' => array(
                 '--foo --bar',

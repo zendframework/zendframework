@@ -65,4 +65,14 @@ class SessionManagerFactoryTest extends \PHPUnit_Framework_TestCase
         $manager = $this->services->get('Zend\Session\ManagerInterface');
         $this->assertSame($manager, Container::getDefaultManager());
     }
+
+    public function testCanDisableContainerDefaultManagerInjectionViaConfiguration()
+    {
+        $config = array('session_manager' => array(
+            'enable_default_container_manager' => false,
+        ));
+        $this->services->setService('Config', $config);
+        $manager = $this->services->get('Zend\Session\ManagerInterface');
+        $this->assertNotSame($manager, Container::getDefaultManager());
+    }
 }

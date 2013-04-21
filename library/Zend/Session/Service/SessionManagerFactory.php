@@ -21,6 +21,15 @@ use Zend\Session\Storage\StorageInterface;
 class SessionManagerFactory implements FactoryInterface
 {
     /**
+     * Default configuration for manager behavior
+     * 
+     * @var array
+     */
+    protected $defaultManagerConfig = array(
+        'enable_default_container_manager' => true,
+    );
+
+    /**
      * Create session manager object
      *
      * Will consume any combination (or zero) of the following services, when
@@ -38,6 +47,13 @@ class SessionManagerFactory implements FactoryInterface
      * "Zend\Session\SaveHandler\SaveHandlerInterface", (or alias that name
      * to your own service).
      *
+     * You can configure limited behaviors via the "session_manager" key of the
+     * Config service. Currently, these include:
+     *
+     * - enable_default_container_manager: whether to inject the created instance
+     *   as the default manager for Container instances. The default value for 
+     *   this is true; set it to false to disable.
+     *
      * @param  ServiceLocatorInterface $services
      * @return SessionManager
      * @throws ServiceNotCreatedException if any collaborators are not of the
@@ -45,9 +61,10 @@ class SessionManagerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $services)
     {
-        $config      = null;
-        $storage     = null;
-        $saveHandler = null;
+        $config        = null;
+        $storage       = null;
+        $saveHandler   = null;
+        $managerConfig = $this->defaultManagerConfig;
 
         if ($services->has('Zend\Session\Config\ConfigInterface')) {
             $config = $services->get('Zend\Session\Config\ConfigInterface');
@@ -86,7 +103,25 @@ class SessionManagerFactory implements FactoryInterface
         }
 
         $manager = new SessionManager($config, $storage, $saveHandler);
-        Container::setDefaultManager($manager);
+
+        // Get session manager configuration, if any, and merge with default configuration
+        if ($services->has('Config')) {
+            $configService = $services->get('Config');
+            if (isset($configService['session_manager'])
+                && is_array($configService['session_manager'])
+            ) {
+                $managerConfig = array_merge($managerConfig, $configService['session_manager']);
+            }
+        }
+
+        // If configuration enables the session manager as the default manager for container
+        // instances, do so.
+        if (isset($managerConfig['enable_default_container_manager'])
+            && $managerConfig['enable_default_container_manager']
+        ) {
+            Container::setDefaultManager($manager);
+        }
+
         return $manager;
     }
 }

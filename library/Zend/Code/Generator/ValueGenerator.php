@@ -141,7 +141,7 @@ class ValueGenerator extends AbstractGenerator
     }
 
     /**
-     * Return constnat list
+     * Return constant list
      *
      * @return ArrayObject
      */

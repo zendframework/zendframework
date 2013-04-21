@@ -455,10 +455,12 @@ class Client implements Stdlib\DispatchableInterface
     {
         $uri = $this->getUri();
 
-        $this->streamName = null;
-        $this->encType    = null;
-        $this->request    = null;
-        $this->response   = null;
+        $this->streamName      = null;
+        $this->encType         = null;
+        $this->request         = null;
+        $this->response        = null;
+        $this->lastRawRequest  = null;
+        $this->lastRawResponse = null;
 
         $this->setUri($uri);
 
@@ -958,6 +960,20 @@ class Client implements Stdlib\DispatchableInterface
 
         $this->response = $response;
         return $response;
+    }
+
+    /**
+     * Fully reset the HTTP client (auth, cookies, request, response, etc.)
+     *
+     * @return Client
+     */
+    public function reset() 
+    {
+       $this->resetParameters();
+       $this->clearAuth();
+       $this->clearCookies();
+       
+       return $this;
     }
 
     /**

@@ -13,6 +13,7 @@ use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Session\Config\ConfigInterface;
+use Zend\Session\Container;
 use Zend\Session\SaveHandler\SaveHandlerInterface;
 use Zend\Session\SessionManager;
 use Zend\Session\Storage\StorageInterface;
@@ -84,6 +85,8 @@ class SessionManagerFactory implements FactoryInterface
             }
         }
 
-        return new SessionManager($config, $storage, $saveHandler);
+        $manager = new SessionManager($config, $storage, $saveHandler);
+        Container::setDefaultManager($manager);
+        return $manager;
     }
 }

@@ -11,6 +11,7 @@ namespace ZendTest\Session\Service;
 
 use Zend\ServiceManager\ServiceManager;
 use Zend\Session\Config\StandardConfig;
+use Zend\Session\Container;
 use Zend\Session\Service\SessionManagerFactory;
 use Zend\Session\Storage\ArrayStorage;
 
@@ -57,5 +58,11 @@ class SessionManagerFactoryTest extends \PHPUnit_Framework_TestCase
         $manager = $this->services->get('Zend\Session\ManagerInterface');
         $test = $manager->getSaveHandler();
         $this->assertSame($saveHandler, $test);
+    }
+
+    public function testFactoryWillMarkManagerAsContainerDefaultByDefault()
+    {
+        $manager = $this->services->get('Zend\Session\ManagerInterface');
+        $this->assertSame($manager, Container::getDefaultManager());
     }
 }

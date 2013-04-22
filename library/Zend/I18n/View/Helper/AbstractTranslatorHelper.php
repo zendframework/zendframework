@@ -9,6 +9,7 @@
 
 namespace Zend\I18n\View\Helper;
 
+use Zend\I18n\Exception;
 use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\View\Helper\AbstractHelper;
@@ -29,6 +30,19 @@ abstract class AbstractTranslatorHelper extends AbstractHelper implements
      * @var string
      */
     protected $translatorTextDomain = 'default';
+
+    /**
+     * @throws Exception\InvalidArgumentException if ext/intl is not present
+     */
+    public function __construct()
+    {
+        if (!extension_loaded('intl')) {
+            throw new Exception\ExtensionNotLoadedException(sprintf(
+                '%s component requires the intl PHP extension',
+                __NAMESPACE__
+            ));
+        }
+    }
 
     /**
      * Whether translator should be used

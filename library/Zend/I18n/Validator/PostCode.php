@@ -11,6 +11,7 @@ namespace Zend\I18n\Validator;
 
 use Locale;
 use Traversable;
+use Zend\I18n\Exception as I18nException;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Callback;
@@ -226,9 +227,17 @@ class PostCode extends AbstractValidator
      * Accepts a string locale and/or "format".
      *
      * @param  array|Traversable $options
+     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
      */
     public function __construct($options = array())
     {
+        if (!extension_loaded('intl')) {
+            throw new I18nException\ExtensionNotLoadedException(sprintf(
+                '%s component requires the intl PHP extension',
+                __NAMESPACE__
+            ));
+        }
+
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }

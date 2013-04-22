@@ -84,10 +84,18 @@ class Translator
      *
      * @param  array|Traversable                  $options
      * @return Translator
+     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
      * @throws Exception\InvalidArgumentException
      */
     public static function factory($options)
     {
+        if (!extension_loaded('intl')) {
+            throw new Exception\ExtensionNotLoadedException(sprintf(
+                '%s component requires the intl PHP extension',
+                __NAMESPACE__
+            ));
+        }
+
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {

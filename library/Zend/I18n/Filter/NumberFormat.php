@@ -37,6 +37,7 @@ class NumberFormat extends AbstractLocale
         $style = NumberFormatter::DEFAULT_STYLE,
         $type = NumberFormatter::TYPE_DOUBLE)
     {
+        parent::__construct();
         if ($localeOrOptions !== null) {
             if ($localeOrOptions instanceof Traversable) {
                 $localeOrOptions = iterator_to_array($localeOrOptions);

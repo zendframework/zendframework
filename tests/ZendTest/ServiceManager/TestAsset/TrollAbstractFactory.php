@@ -9,42 +9,28 @@
 
 namespace ZendTest\ServiceManager\TestAsset;
 
+use stdClass;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-/**
- * Abstract factory that keeps track of the number of times it is instantiated
- */
-class FooCounterAbstractFactory implements AbstractFactoryInterface
+class TrollAbstractFactory implements AbstractFactoryInterface
 {
-    /**
-     * @var int
-     */
-    public static $instantiationCount = 0;
+    public $inexistingServiceCheckResult = null;
 
-    /**
-     * Increments instantiation count
-     */
-    public function __construct()
-    {
-        self::$instantiationCount += 1;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        if ($name == 'foo') {
+        // Check if a non-existing service exists
+        $this->inexistingServiceCheckResult = $serviceLocator->has('NonExistingService');
+
+        if ($requestedName === 'SomethingThatCanBeCreated') {
             return true;
         }
+
+        return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        return new Foo;
+        return new stdClass;
     }
 }

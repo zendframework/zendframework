@@ -1335,4 +1335,18 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array(array('scheme' => 'http', 'host' => 'example.com'))
         );
     }
+
+    public function testParseTwice()
+    {
+        $uri  = new Uri();
+        $uri->parse('http://user@example.com:1/absolute/url?query#fragment');
+        $uri->parse('/relative/url');
+        $this->assertNull($uri->getScheme());
+        $this->assertNull($uri->getHost());
+        $this->assertNull($uri->getUserInfo());
+        $this->assertNull($uri->getPort());
+        $this->assertNull($uri->getQuery());
+        $this->assertNull($uri->getFragment());
+    }
+
 }

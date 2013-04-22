@@ -254,6 +254,20 @@ class Uri implements UriInterface
     }
 
     /**
+     * Reset URI parts
+     */
+    protected function reset()
+    {
+        $this->setScheme(null);
+        $this->setPort(null);
+        $this->setUserInfo(null);
+        $this->setHost(null);
+        $this->setPath(null);
+        $this->setFragment(null);
+        $this->setQuery(null);
+    }
+
+    /**
      * Parse a URI string
      *
      * @param  string $uri
@@ -261,6 +275,8 @@ class Uri implements UriInterface
      */
     public function parse($uri)
     {
+        $this->reset();
+
         // Capture scheme
         if (($scheme = self::parseScheme($uri)) !== null) {
             $this->setScheme($scheme);

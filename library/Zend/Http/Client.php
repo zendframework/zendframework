@@ -298,8 +298,18 @@ class Client implements Stdlib\DispatchableInterface
     public function setUri($uri)
     {
         if (!empty($uri)) {
+            // remember host of last request
+            $lastHost = $this->getRequest()->getUri()->getHost();
             $this->getRequest()->setUri($uri);
-
+            
+            // if host changed, the HTTP authentication should be cleared for security
+            // reasons, see #4215 for a discussion - currently authentication is also 
+            // cleared for peer subdomains due to technical limits
+            $nextHost = $this->getRequest()->getUri()->getHost();
+            if (!preg_match('/' . preg_quote($lastHost, '/') . '$/i', $nextHost)) {
+                $this->clearAuth();
+            }
+            
             // Set auth if username and password has been specified in the uri
             if ($this->getUri()->getUser() && $this->getUri()->getPassword()) {
                 $this->setAuth($this->getUri()->getUser(), $this->getUri()->getPassword());
@@ -919,15 +929,8 @@ class Client implements Stdlib\DispatchableInterface
                 // If we got a well formed absolute URI
                 if (($scheme = substr($location, 0, 6)) &&
                         ($scheme == 'http:/' || $scheme == 'https:')) {
-                    // remember host of last request
-                    $lastHost = $this->getUri()->getHost();
+                    # setURI() clears parameters if host changed, see #4215
                     $this->setUri($location);
-                    
-                    // clear authentication for security reasons if host changed
-                    $nextHost = $this->getUri()->getHost();
-                    if (!preg_match('/' . preg_quote($lastHost, '/') . '$/i', $nextHost)) {
-                        $this->clearAuth();
-                    }
                 } else {
 
                     // Split into path and query and set the query

@@ -929,7 +929,7 @@ class Client implements Stdlib\DispatchableInterface
                 // If we got a well formed absolute URI
                 if (($scheme = substr($location, 0, 6)) &&
                         ($scheme == 'http:/' || $scheme == 'https:')) {
-                    # setURI() clears parameters if host changed, see #4215
+                    // setURI() clears parameters if host changed, see #4215
                     $this->setUri($location);
                 } else {
 

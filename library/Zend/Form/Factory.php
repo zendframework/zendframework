@@ -413,7 +413,7 @@ class Factory
      */
     protected function prepareAndInjectHydrator($hydratorOrName, FieldsetInterface $fieldset, $method)
     {
-        if (is_object($hydratorOrName) && $hydratorOrName instanceof Hydrator\HydratorInterface) {
+        if ($hydratorOrName instanceof Hydrator\HydratorInterface) {
             $fieldset->setHydrator($hydratorOrName);
             return;
         }

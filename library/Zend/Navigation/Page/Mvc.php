@@ -190,7 +190,7 @@ class Mvc extends AbstractPage
             );
         }
 
-        if ($this->get(useRouteMatch) && $this->getRouteMatch() !== null) {
+        if ($this->get('useRouteMatch') && $this->getRouteMatch() !== null) {
             $rmParams = $this->getRouteMatch()->getParams();
 
             if (isset($rmParams[ModuleRouteListener::ORIGINAL_CONTROLLER])) {

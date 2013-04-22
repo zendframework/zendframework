@@ -56,12 +56,12 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * @var string
      */
-    public $lastAbstractFactoryUsed = null;
+    protected $lastAbstractFactoryUsed = null;
 
     /**
      * @var string
      */
-    public $lastCanonicalNameUsed   = null;
+    protected $lastCanonicalNameUsed   = null;
 
     /**
      * @var array

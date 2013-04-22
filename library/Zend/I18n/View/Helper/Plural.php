@@ -35,7 +35,7 @@ class Plural extends AbstractHelper
     protected $rule;
 
     /**
-     * @throws Exception\InvalidArgumentException if ext/intl is not present
+     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
      */
     public function __construct()
     {

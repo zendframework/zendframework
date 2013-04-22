@@ -32,7 +32,7 @@ abstract class AbstractTranslatorHelper extends AbstractHelper implements
     protected $translatorTextDomain = 'default';
 
     /**
-     * @throws Exception\InvalidArgumentException if ext/intl is not present
+     * @throws Exception\ExtensionsNotLoadedException if ext/intl is not present
      */
     public function __construct()
     {

@@ -48,7 +48,7 @@ class Sql
 
     public function setTable($table)
     {
-        if (is_string($table) || $table instanceof TableIdentifier) {
+        if (is_string($table) || is_array($table) || $table instanceof TableIdentifier) {
             $this->table = $table;
         } else {
             throw new Exception\InvalidArgumentException('Table must be a string or instance of TableIdentifier.');

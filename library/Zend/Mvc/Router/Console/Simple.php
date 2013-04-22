@@ -692,17 +692,17 @@ class Simple implements RouteInterface
             if (isset($part['alternatives'])) {
                 if ($part['hasValue']) {
                     foreach ($part['alternatives'] as $alt) {
-                        if ($alt == $matchedName) {
+                        if ($alt === $matchedName && !isset($matches[$alt])) {
                             $matches[$alt] = $value;
-                        } else {
+                        } elseif (!isset($matches[$alt])) {
                             $matches[$alt] = null;
                         }
                     }
                 } else {
                     foreach ($part['alternatives'] as $alt) {
-                        if ($alt == $matchedName) {
+                        if ($alt === $matchedName && !isset($matches[$alt])) {
                             $matches[$alt] = true;
-                        } else {
+                        } elseif (!isset($matches[$alt])) {
                             $matches[$alt] = false;
                         }
                     }

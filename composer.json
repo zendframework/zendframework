@@ -9,7 +9,8 @@
     "homepage": "http://framework.zend.com/",
     "license": "BSD-3-Clause",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "ext-intl": "*"
     },
     "require-dev": {
         "doctrine/common": ">=2.1",
@@ -19,7 +20,6 @@
     },
     "suggest": {
         "doctrine/common": "Doctrine\\Common >=2.1 for annotation features",
-        "ext-intl": "ext/intl for i18n features",
         "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable",
         "pecl-weakref": "Implementation of weak references for Zend\\Stdlib\\CallbackHandler",
         "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",

@@ -16,6 +16,7 @@ use Zend\Http\Client\Adapter;
 use Zend\Http\Client\Adapter\Exception as AdapterException;
 use Zend\Http\Request;
 use Zend\Http\Response;
+use Zend\Stdlib\Parameters;
 
 
 /**
@@ -994,7 +995,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->client->setArgSeparator(';');
         $request = new Request();
         $request->setUri('http://framework.zend.com');
-        $request->setQuery(array('foo' => 'bar', 'baz' => 'bat'));
+        $request->setQuery(new Parameters(array('foo' => 'bar', 'baz' => 'bat')));
         $this->client->send($request);
         $rawRequest = $this->client->getLastRawRequest();
         $this->assertContains('?foo=bar;baz=bat', $rawRequest);

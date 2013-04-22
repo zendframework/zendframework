@@ -542,7 +542,8 @@ class MvcTest extends TestCase
     {
         $page = new Page\Mvc(array(
             'label' => 'lollerblades',
-            'route' => 'lollerblades'
+            'route' => 'lollerblades',
+            'useRouteMatch' => true
         ));
 
         $route = new SegmentRoute('/lollerblades/view/:serialNumber');
@@ -565,7 +566,8 @@ class MvcTest extends TestCase
     {
         $page = new Page\Mvc(array(
             'label' => 'mpinkstonwashere',
-            'route' => 'lmaoplane'
+            'route' => 'lmaoplane',
+            'useRouteMatch' => true
         ));
 
         $route = new SegmentRoute('/lmaoplane/:controller');

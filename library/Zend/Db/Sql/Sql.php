@@ -51,7 +51,7 @@ class Sql
         if (is_string($table) || is_array($table) || $table instanceof TableIdentifier) {
             $this->table = $table;
         } else {
-            throw new Exception\InvalidArgumentException('Table must be a string or instance of TableIdentifier.');
+            throw new Exception\InvalidArgumentException('Table must be a string, array or instance of TableIdentifier.');
         }
         return $this;
     }

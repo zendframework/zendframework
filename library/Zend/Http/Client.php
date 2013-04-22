@@ -301,15 +301,15 @@ class Client implements Stdlib\DispatchableInterface
             // remember host of last request
             $lastHost = $this->getRequest()->getUri()->getHost();
             $this->getRequest()->setUri($uri);
-            
+
             // if host changed, the HTTP authentication should be cleared for security
-            // reasons, see #4215 for a discussion - currently authentication is also 
+            // reasons, see #4215 for a discussion - currently authentication is also
             // cleared for peer subdomains due to technical limits
             $nextHost = $this->getRequest()->getUri()->getHost();
             if (!preg_match('/' . preg_quote($lastHost, '/') . '$/i', $nextHost)) {
                 $this->clearAuth();
             }
-            
+
             // Set auth if username and password has been specified in the uri
             if ($this->getUri()->getUser() && $this->getUri()->getPassword()) {
                 $this->setAuth($this->getUri()->getUser(), $this->getUri()->getPassword());
@@ -477,7 +477,7 @@ class Client implements Stdlib\DispatchableInterface
         if ($clearCookies) {
             $this->clearCookies();
         }
-        
+
         if ($clearAuth) {
             $this->clearAuth();
         }
@@ -924,7 +924,7 @@ class Client implements Stdlib\DispatchableInterface
                     $this->resetParameters(false, false);
                     $this->setMethod(Request::METHOD_GET);
                 }
-                
+
 
                 // If we got a well formed absolute URI
                 if (($scheme = substr($location, 0, 6)) &&
@@ -970,12 +970,12 @@ class Client implements Stdlib\DispatchableInterface
      *
      * @return Client
      */
-    public function reset() 
+    public function reset()
     {
        $this->resetParameters();
        $this->clearAuth();
        $this->clearCookies();
-       
+
        return $this;
     }
 

@@ -199,7 +199,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $encoded = Client::encodeAuthHeader('test', 'test', 'test');
     }
-    
+
     public function testIfMaxredirectWorksCorrectly()
     {
         $testAdapter = new Test();
@@ -220,29 +220,29 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             "HTTP/1.1 303 See Other\r\n\r\n"
             . "Page #3"
         );
-        
+
         // create a client which allows one redirect at most!
         $client = new Client('http://www.example.org/part1', array(
             'adapter' => $testAdapter,
             'maxredirects' => 1,
             'storeresponse' => true
         ));
-        
+
         // do the request
         $response = $client->setMethod('GET')->send();
-        
+
         // response should be the second response, since third response should not
         // be requested, due to the maxredirects = 1 limit
         $this->assertEquals($response->getContent(), "Page #2");
     }
-    
+
     public function testIfClientDoesNotLooseAuthenticationOnRedirect()
     {
         // set up user credentials
         $user = 'username123';
         $password = 'password456';
         $encoded = Client::encodeAuthHeader($user, $password, Client::AUTH_BASIC);
-        
+
         // set up two responses that simulate a redirection
         $testAdapter = new Test();
         $testAdapter->setResponse(
@@ -254,31 +254,31 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             "HTTP/1.1 200 OK\r\n\r\n"
             . "Welcome to this Website."
         );
-        
+
         // create client with HTTP basic authentication
         $client = new Client('http://www.example.org/part1', array(
             'adapter' => $testAdapter,
             'maxredirects' => 1
         ));
         $client->setAuth($user, $password, Client::AUTH_BASIC);
-        
+
         // do request
         $response = $client->setMethod('GET')->send();
-        
+
         // the last request should contain the Authorization header
         $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) !== false);
     }
-    
+
     public function testIfClientDoesNotForwardAuthenticationToForeignHost()
     {
         // set up user credentials
         $user = 'username123';
         $password = 'password456';
         $encoded = Client::encodeAuthHeader($user, $password, Client::AUTH_BASIC);
-        
+
         $testAdapter = new Test();
         $client = new Client(null, array('adapter' => $testAdapter));
-        
+
         // set up two responses that simulate a redirection from example.org to example.com
         $testAdapter->setResponse(
             "HTTP/1.1 303 See Other\r\n"
@@ -289,16 +289,16 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             "HTTP/1.1 200 OK\r\n\r\n"
             . "Welcome to this Website."
         );
-        
+
         // set auth and do request
         $client->setUri('http://example.org/part1')
             ->setAuth($user, $password, Client::AUTH_BASIC);
         $response = $client->setMethod('GET')->send();
-        
+
         // the last request should NOT contain the Authorization header,
         // because example.com is different from example.org
         $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) === false);
-        
+
         // set up two responses that simulate a rediration from example.org to sub.example.org
         $testAdapter->setResponse(
             "HTTP/1.1 303 See Other\r\n"
@@ -309,16 +309,16 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             "HTTP/1.1 200 OK\r\n\r\n"
             . "Welcome to this Website."
         );
-        
+
         // set auth and do request
         $client->setUri('http://example.org/part1')
             ->setAuth($user, $password, Client::AUTH_BASIC);
         $response = $client->setMethod('GET')->send();
-        
-        // the last request should contain the Authorization header, 
+
+        // the last request should contain the Authorization header,
         // because sub.example.org is a subdomain unter example.org
         $this->assertFalse(strpos($client->getLastRawRequest(), $encoded) === false);
-        
+
         // set up two responses that simulate a rediration from sub.example.org to example.org
         $testAdapter->setResponse(
             "HTTP/1.1 303 See Other\r\n"
@@ -329,13 +329,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             "HTTP/1.1 200 OK\r\n\r\n"
             . "Welcome to this Website."
         );
-        
+
         // set auth and do request
         $client->setUri('http://sub.example.org/part1')
             ->setAuth($user, $password, Client::AUTH_BASIC);
         $response = $client->setMethod('GET')->send();
-        
-        // the last request should NOT contain the Authorization header, 
+
+        // the last request should NOT contain the Authorization header,
         // because example.org is not a subdomain unter sub.example.org
         $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) === false);
     }

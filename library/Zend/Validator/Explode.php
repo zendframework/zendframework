@@ -10,11 +10,9 @@
 namespace Zend\Validator;
 
 use Traversable;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\ArrayUtils;
 
-class Explode extends AbstractValidator implements ServiceLocatorAwareInterface
+class Explode extends AbstractValidator implements ValidatorPluginManagerAwareInterface
 {
     const INVALID = 'explodeInvalid';
 
@@ -70,24 +68,24 @@ class Explode extends AbstractValidator implements ServiceLocatorAwareInterface
     }
 
     /**
-     * Set service locator
+     * Set validator plugin manager
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ValidatorPluginManager $pluginManager
      */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    public function setValidatorPluginManager(ValidatorPluginManager $pluginManager)
     {
-        $this->pluginManager = $serviceLocator;
+        $this->pluginManager = $pluginManager;
     }
 
     /**
-     * Get service locator
+     * Get validator plugin manager
      *
-     * @return ServiceLocatorInterface|ValidatorPluginManager
+     * @return ValidatorPluginManager
      */
-    public function getServiceLocator()
+    public function getValidatorPluginManager()
     {
         if (!$this->pluginManager) {
-            $this->setServiceLocator(new ValidatorPluginManager());
+            $this->setValidatorPluginManager(new ValidatorPluginManager());
         }
 
         return $this->pluginManager;
@@ -109,9 +107,8 @@ class Explode extends AbstractValidator implements ServiceLocatorAwareInterface
                 );
             }
             $name = $validator['name'];
-            $options = isset($validator['options']) ?
-                $validator['options'] : array();
-            $validator = $this->getServiceLocator()->get($name, $options);
+            $options = isset($validator['options']) ? $validator['options'] : array();
+            $validator = $this->getValidatorPluginManager()->get($name, $options);
         }
 
         if (!$validator instanceof ValidatorInterface) {

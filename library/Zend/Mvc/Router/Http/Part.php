@@ -166,7 +166,7 @@ class Part extends TreeRouteStack implements RouteInterface
      */
     public function assemble(array $params = array(), array $options = array())
     {
-       if ($this->childRoutes !== null) {
+        if ($this->childRoutes !== null) {
             $this->addRoutes($this->childRoutes);
             $this->childRoutes = null;
         }

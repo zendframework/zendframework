@@ -54,6 +54,16 @@ class ServiceManager implements ServiceLocatorInterface
     protected $pendingAbstractFactoryRequests = array();
 
     /**
+     * @var string
+     */
+    protected $lastAbstractFactoryUsed = null;
+
+    /**
+     * @var string
+     */
+    protected $lastCanonicalNameUsed   = null;
+
+    /**
      * @var array
      */
     protected $shared = array();
@@ -608,7 +618,18 @@ class ServiceManager implements ServiceLocatorInterface
                 return false;
             }
 
+            $objectHash = spl_object_hash($abstractFactory);
+
+            if ($this->lastAbstractFactoryUsed === $objectHash && $this->lastCanonicalNameUsed === $cName) {
+                $this->lastAbstractFactoryUsed = $this->lastCanonicalNameUsed = null;
+                return false;
+            }
+
+            $this->lastAbstractFactoryUsed = $objectHash;
+            $this->lastCanonicalNameUsed   = $cName;
+
             if ($abstractFactory->canCreateServiceWithName($this, $cName, $rName)) {
+                $this->lastAbstractFactoryUsed = $this->lastCanonicalNameUsed = null;
                 return true;
             }
         }

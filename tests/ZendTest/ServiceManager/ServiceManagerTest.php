@@ -5,11 +5,11 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ServiceManager
  */
 
 namespace ZendTest\ServiceManager;
 
+use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Di\Di;
 use Zend\Mvc\Service\DiFactory;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
@@ -19,7 +19,10 @@ use Zend\ServiceManager\Config;
 
 use ZendTest\ServiceManager\TestAsset\FooCounterAbstractFactory;
 
-class ServiceManagerTest extends \PHPUnit_Framework_TestCase
+/**
+ * @group Zend_ServiceManager
+ */
+class ServiceManagerTest extends TestCase
 {
 
     /**
@@ -546,6 +549,24 @@ class ServiceManagerTest extends \PHPUnit_Framework_TestCase
         $sm->addAbstractFactory($abstractFactory);
         $foo = $sm->get('foo');
         $this->assertSame($abstractFactory->expectedInstance, $foo);
+    }
+
+    /**
+     * When failing, this test will trigger a fatal error: Allowed memory size of # bytes exhausted
+     */
+    public function testCallingANonExistingServiceFromAnAbstractServiceDoesNotMakeTheServerExhaustTheAllowedMemoryByCallingItselfForTheGivenService()
+    {
+        $abstractFactory = new TestAsset\TrollAbstractFactory;
+        $this->serviceManager->addAbstractFactory($abstractFactory);
+
+        $this->assertSame($abstractFactory->inexistingServiceCheckResult, null);
+
+        // By doing this the Service Manager will rely on the Abstract Service Factory
+        $service = $this->serviceManager->get('SomethingThatCanBeCreated');
+
+        $this->assertSame(false, $abstractFactory->inexistingServiceCheckResult);
+
+        $this->assertInstanceOf('stdClass', $service);
     }
 
     public function testShouldAllowAddingInitializersAsClassNames()

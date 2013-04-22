@@ -393,8 +393,9 @@ class MimeType extends AbstractValidator
             }
         }
 
-        if (empty($this->type) &&
-            (function_exists('mime_content_type') && ini_get('mime_magic.magicfile'))) {
+        if (empty($this->type)
+            && (function_exists('mime_content_type') && ini_get('mime_magic.magicfile'))
+        ) {
             $this->type = mime_content_type($file);
         }
 

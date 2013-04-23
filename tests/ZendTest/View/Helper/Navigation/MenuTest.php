@@ -529,7 +529,7 @@ class MenuTest extends AbstractTest
             'class' => 'foobar',
         ));
 
-        $expected = $this->_getExpected('menu/addpageclasstoli_as_false.html');
+        $expected = $this->_getExpected('menu/addclasstolistitem_as_false.html');
         $actual = $this->_helper->renderMenu($container);
 
         $this->assertEquals($expected, $actual);
@@ -538,7 +538,7 @@ class MenuTest extends AbstractTest
     public function testRenderingWithPageClassToLi()
     {
         $options = array(
-            'addPageClassToLi' => true,
+            'addClassToListItem' => true,
         );
 
         $container = new \Zend\Navigation\Navigation($this->_nav2->toArray());
@@ -548,7 +548,7 @@ class MenuTest extends AbstractTest
             'class' => 'foobar',
         ));
 
-        $expected = $this->_getExpected('menu/addpageclasstoli_as_true.html');
+        $expected = $this->_getExpected('menu/addclasstolistitem_as_true.html');
         $actual = $this->_helper->renderMenu($container, $options);
 
         $this->assertEquals($expected, $actual);
@@ -557,7 +557,7 @@ class MenuTest extends AbstractTest
     public function testRenderDeepestMenuWithPageClassToLi()
     {
         $options = array(
-            'addPageClassToLi' => true,
+            'addClassToListItem' => true,
             'onlyActiveBranch' => true,
             'renderParents' => false,
         );
@@ -566,7 +566,7 @@ class MenuTest extends AbstractTest
         $pages[1]['class'] = 'foobar';
         $container = new \Zend\Navigation\Navigation($pages);
 
-        $expected = $this->_getExpected('menu/onlyactivebranch_addpageclasstoli.html');
+        $expected = $this->_getExpected('menu/onlyactivebranch_addclasstolistitem.html');
         $actual = $this->_helper->renderMenu($container, $options);
 
         $this->assertEquals($expected, $actual);

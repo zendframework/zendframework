@@ -53,7 +53,7 @@ class Menu extends AbstractHelper
      *
      * @var bool
      */
-    protected $addPageClassToLi = false;
+    protected $addClassToListItem = false;
 
     /**
      * Partial view script to use for rendering menu
@@ -175,9 +175,9 @@ class Menu extends AbstractHelper
      *                    Default is true.
      * @return Menu  fluent interface, returns self
      */
-    public function setAddPageClassToLi($flag = true)
+    public function setAddClassToListItem($flag = true)
     {
-        $this->addPageClassToLi = (bool) $flag;
+        $this->addClassToListItem = (bool) $flag;
         return $this;
     }
 
@@ -188,9 +188,9 @@ class Menu extends AbstractHelper
      *
      * @return bool  whether parents should be rendered
      */
-    public function getAddPageClassToLi()
+    public function getAddClassToListItem()
     {
-        return $this->addPageClassToLi;
+        return $this->addClassToListItem;
     }
 
     /**
@@ -234,7 +234,7 @@ class Menu extends AbstractHelper
      * @param bool $escapeLabel     Whether or not to escape the label
      * @return string               HTML string for the given page
      */
-    public function htmlify(AbstractPage $page, $escapeLabel = true, $addPageClassToLi = false)
+    public function htmlify(AbstractPage $page, $escapeLabel = true, $addClassToListItem = false)
     {
         // get label and title for translating
         $label = $page->getLabel();
@@ -257,7 +257,7 @@ class Menu extends AbstractHelper
             'title'  => $title,
         );
 
-        if ($addPageClassToLi === false) {
+        if ($addClassToListItem === false) {
             $attribs['class'] = $page->getClass();
         }
 
@@ -335,8 +335,8 @@ class Menu extends AbstractHelper
             $options['renderParents'] = $this->getRenderParents();
         }
 
-        if (!isset($options['addPageClassToLi'])) {
-            $options['addPageClassToLi'] = $this->getAddPageClassToLi();
+        if (!isset($options['addClassToListItem'])) {
+            $options['addClassToListItem'] = $this->getAddClassToListItem();
         }
 
         return $options;
@@ -362,7 +362,7 @@ class Menu extends AbstractHelper
                                          $minDepth,
                                          $maxDepth,
                                          $escapeLabels,
-                                         $addPageClassToLi
+                                         $addClassToListItem
     ) {
         if (!$active = $this->findActive($container, $minDepth - 1, $maxDepth)) {
             return '';
@@ -396,13 +396,13 @@ class Menu extends AbstractHelper
                 $liClasses[] = 'active';
             }
             // Add CSS class from page to <li>
-            if ($addPageClassToLi && $subPage->getClass()) {
+            if ($addClassToListItem && $subPage->getClass()) {
                 $liClasses[] = $subPage->getClass();
             }
             $liClass = empty($liClasses) ? '' : ' class="' . implode(' ', $liClasses) . '"';
 
             $html .= $indent . '    <li' . $liClass . '>' . self::EOL;
-            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels, $addPageClassToLi) . self::EOL;
+            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels, $addClassToListItem) . self::EOL;
             $html .= $indent . '    </li>' . self::EOL;
         }
 
@@ -421,7 +421,7 @@ class Menu extends AbstractHelper
      * @param  int|null                  $maxDepth          maximum depth
      * @param  bool                      $onlyActive        render only active branch?
      * @param  bool                      $escapeLabels      Whether or not to escape the labels
-     * @param  bool                      $addPageClassToLi  Whether or not page class applied to <li> element
+     * @param  bool                      $addClassToListItem  Whether or not page class applied to <li> element
      * @return string
      */
     protected function renderNormalMenu(AbstractContainer $container,
@@ -431,7 +431,7 @@ class Menu extends AbstractHelper
                                    $maxDepth,
                                    $onlyActive,
                                    $escapeLabels,
-                                   $addPageClassToLi
+                                   $addClassToListItem
     ) {
         $html = '';
 
@@ -515,13 +515,13 @@ class Menu extends AbstractHelper
                 $liClasses[] = 'active';
             }
             // Add CSS class from page to <li>
-            if ($addPageClassToLi && $page->getClass()) {
+            if ($addClassToListItem && $page->getClass()) {
                 $liClasses[] = $page->getClass();
             }
             $liClass = empty($liClasses) ? '' : ' class="' . implode(' ', $liClasses) . '"';
 
             $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
-                   . $myIndent . '        ' . $this->htmlify($page, $escapeLabels, $addPageClassToLi) . self::EOL;
+                   . $myIndent . '        ' . $this->htmlify($page, $escapeLabels, $addClassToListItem) . self::EOL;
 
             // store as previous depth for next iteration
             $prevDepth = $depth;
@@ -572,7 +572,7 @@ class Menu extends AbstractHelper
                                               $options['minDepth'],
                                               $options['maxDepth'],
                                               $options['escapeLabels'],
-                                              $options['addPageClassToLi']);
+                                              $options['addClassToListItem']);
         } else {
             $html = $this->renderNormalMenu($container,
                                        $options['ulClass'],
@@ -581,7 +581,7 @@ class Menu extends AbstractHelper
                                        $options['maxDepth'],
                                        $options['onlyActiveBranch'],
                                        $options['escapeLabels'],
-                                       $options['addPageClassToLi']);
+                                       $options['addClassToListItem']);
         }
 
         return $html;
@@ -629,7 +629,7 @@ class Menu extends AbstractHelper
             'onlyActiveBranch' => true,
             'renderParents'    => false,
             'escapeLabels'     => true,
-            'addPageClassToLi' => false,
+            'addClassToListItem' => false,
         ));
     }
 

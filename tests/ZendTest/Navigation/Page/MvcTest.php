@@ -538,14 +538,34 @@ class MvcTest extends TestCase
         $page->setDefaultRouter(null);
     }
 
+    public function testBoolSetAndGetUseRouteMatch()
+    {
+        $page = new Page\Mvc(array(
+            'useRouteMatch' => 2,
+        ));
+        $this->assertSame(true, $page->getUseRouteMatch());
+
+        $page->setUseRouteMatch(null);
+        $this->assertSame(false, $page->getUseRouteMatch());
+
+        $page->setUseRouteMatch(false);
+        $this->assertSame(false, $page->getUseRouteMatch());
+
+        $page->setUseRouteMatch(true);
+        $this->assertSame(true, $page->getUseRouteMatch());
+
+        $page->setUseRouteMatch();
+        $this->assertSame(true, $page->getUseRouteMatch());
+    }
+
     public function testMvcPageParamsInheritRouteMatchParams()
     {
         $page = new Page\Mvc(array(
             'label' => 'lollerblades',
-            'route' => 'lollerblades'
+            'route' => 'lollerblades',
         ));
 
-        $route = new SegmentRoute('/lollerblades/view/:serialNumber');
+        $route = new SegmentRoute('/lollerblades/view[/:serialNumber]');
 
         $router = new TreeRouteStack;
         $router->addRoute('lollerblades', $route);
@@ -558,6 +578,9 @@ class MvcTest extends TestCase
         $page->setRouter($router);
         $page->setRouteMatch($routeMatch);
 
+        $this->assertEquals('/lollerblades/view', $page->getHref());
+
+        $page->setUseRouteMatch(true);
         $this->assertEquals('/lollerblades/view/23', $page->getHref());
     }
 
@@ -565,10 +588,10 @@ class MvcTest extends TestCase
     {
         $page = new Page\Mvc(array(
             'label' => 'mpinkstonwashere',
-            'route' => 'lmaoplane'
+            'route' => 'lmaoplane',
         ));
 
-        $route = new SegmentRoute('/lmaoplane/:controller');
+        $route = new SegmentRoute('/lmaoplane[/:controller]');
 
         $router = new TreeRouteStack;
         $router->addRoute('lmaoplane', $route);
@@ -589,6 +612,9 @@ class MvcTest extends TestCase
         $page->setRouter($event->getRouter());
         $page->setRouteMatch($event->getRouteMatch());
 
+        $this->assertEquals('/lmaoplane', $page->getHref());
+
+        $page->setUseRouteMatch(true);
         $this->assertEquals('/lmaoplane/index', $page->getHref());
     }
 }

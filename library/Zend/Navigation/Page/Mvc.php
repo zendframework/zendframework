@@ -76,6 +76,13 @@ class Mvc extends AbstractPage
     protected $routeMatch;
 
     /**
+     * If true and set routeMatch than getHref will use routeMatch params
+     * to assemble uri
+     * @var bool
+     */
+    protected $useRouteMatch = false;
+
+    /**
      * Router for assembling URLs
      *
      * @see getHref()
@@ -190,7 +197,7 @@ class Mvc extends AbstractPage
             );
         }
 
-        if ($this->getRouteMatch() !== null) {
+        if ($this->getUseRouteMatch() && $this->getRouteMatch() !== null) {
             $rmParams = $this->getRouteMatch()->getParams();
 
             if (isset($rmParams[ModuleRouteListener::ORIGINAL_CONTROLLER])) {
@@ -424,6 +431,30 @@ class Mvc extends AbstractPage
     public function setRouteMatch(RouteMatch $matches)
     {
         $this->routeMatch = $matches;
+        return $this;
+    }
+
+    /**
+     * Get the useRouteMatch
+     *
+     * @return bool
+     */
+    public function getUseRouteMatch()
+    {
+        return $this->useRouteMatch;
+    }
+
+    /**
+     * Set whether the page should use route match params for assembling link uri
+     *
+     * @see getHref()
+     * @param bool $useRoteMatch [optional]
+     * @return Mvc
+     */
+    public function setUseRouteMatch($useRoteMatch = true)
+    {
+        $this->useRouteMatch = (bool) $useRoteMatch;
+        $this->hrefCache = null;
         return $this;
     }
 

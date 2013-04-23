@@ -199,8 +199,14 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
                     continue; // this module does not provide a banner
                 }
 
+                // Don't render empty completely empty lines
+                $banner = $module->getConsoleBanner($console);
+                if ($banner == '') {
+                    continue;
+                }
+
                 // We colorize each banners in blue for visual emphasis
-                $banners[] = $console->colorize($module->getConsoleBanner($console), ColorInterface::BLUE);
+                $banners[] = $console->colorize($banner, ColorInterface::BLUE);
             }
         }
 
@@ -259,10 +265,10 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
                 $usage = $module->getConsoleUsage($console);
 
                 // Normalize what we got from the module or discard
-                if (is_array($usage)) {
+                if (is_array($usage) && !empty($usage)) {
                     array_unshift($usage, $moduleName);
                     $usageInfo[$name] = $usage;
-                } elseif (is_string($usage)) {
+                } elseif (is_string($usage) && ($usage != '')) {
                     $usageInfo[$name] = array($moduleName, $usage);
                 }
             }

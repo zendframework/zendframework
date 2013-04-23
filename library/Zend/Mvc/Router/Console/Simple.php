@@ -797,7 +797,7 @@ class Simple implements RouteInterface
             return null; // there are extraneous params that were not consumed
         }
 
-        return new RouteMatch(array_replace($matches, $this->defaults));
+        return new RouteMatch(array_replace($this->defaults, $matches));
     }
 
     /**

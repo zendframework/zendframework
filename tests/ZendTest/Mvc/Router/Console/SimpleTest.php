@@ -773,17 +773,20 @@ class SimpleTestTest extends TestCase
         );
     }
 
-    public function testMatchMergeOfTheDefaults()
+    public function testMatchValuesOverrideDefaults()
     {
         $defaults = array(
-            'controller' => 'Controller/Test',
+            'foo' => 'bar',
+            'baz' => 'inga',
         );
+        $foo = 'a value';
 
-        $request = new ConsoleRequest(array('scriptname.php', 'foo', 'controller'));
-        $route = new Simple('foo controller', array(), $defaults);
+        $request = new ConsoleRequest(array('scriptname.php', $foo));
+        $route = new Simple('<foo>', array(), $defaults);
         $match = $route->match($request);
 
         $this->assertInstanceOf('Zend\Mvc\Router\Console\RouteMatch', $match);
-        $this->assertEquals($defaults['controller'], $match->getParam('controller'));
+        $this->assertEquals($foo, $match->getParam('foo'));
+        $this->assertEquals($defaults['baz'], $match->getParam('baz'));
     }
 }

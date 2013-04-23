@@ -538,12 +538,31 @@ class MvcTest extends TestCase
         $page->setDefaultRouter(null);
     }
 
+    public function testBoolSetAndGetUseRouteMatch()
+    {
+        $page = new Page\Mvc(array(
+            'useRouteMatch' => 2,
+        ));
+        $this->assertSame(true, $page->getUseRouteMatch());
+
+        $page->setUseRouteMatch(null);
+        $this->assertSame(false, $page->getUseRouteMatch());
+
+        $page->setUseRouteMatch(false);
+        $this->assertSame(false, $page->getUseRouteMatch());
+
+        $page->setUseRouteMatch(true);
+        $this->assertSame(true, $page->getUseRouteMatch());
+
+        $page->setUseRouteMatch();
+        $this->assertSame(true, $page->getUseRouteMatch());
+    }
+
     public function testMvcPageParamsInheritRouteMatchParams()
     {
         $page = new Page\Mvc(array(
             'label' => 'lollerblades',
             'route' => 'lollerblades',
-            'useRouteMatch' => true
         ));
 
         $route = new SegmentRoute('/lollerblades/view/:serialNumber');
@@ -559,6 +578,9 @@ class MvcTest extends TestCase
         $page->setRouter($router);
         $page->setRouteMatch($routeMatch);
 
+        $this->assertEquals('/lollerblades/view/', $page->getHref());
+
+        $page->setUseRouteMatch(true);
         $this->assertEquals('/lollerblades/view/23', $page->getHref());
     }
 
@@ -567,7 +589,6 @@ class MvcTest extends TestCase
         $page = new Page\Mvc(array(
             'label' => 'mpinkstonwashere',
             'route' => 'lmaoplane',
-            'useRouteMatch' => true
         ));
 
         $route = new SegmentRoute('/lmaoplane/:controller');
@@ -591,6 +612,9 @@ class MvcTest extends TestCase
         $page->setRouter($event->getRouter());
         $page->setRouteMatch($event->getRouteMatch());
 
+        $this->assertEquals('/lmaoplane/', $page->getHref());
+
+        $page->setUseRouteMatch(true);
         $this->assertEquals('/lmaoplane/index', $page->getHref());
     }
 }

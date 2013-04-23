@@ -543,19 +543,19 @@ class MvcTest extends TestCase
         $page = new Page\Mvc(array(
             'useRouteMatch' => 2,
         ));
-        $this->assertSame(true, $page->getUseRouteMatch());
+        $this->assertSame(true, $page->useRouteMatch());
 
         $page->setUseRouteMatch(null);
-        $this->assertSame(false, $page->getUseRouteMatch());
+        $this->assertSame(false, $page->useRouteMatch());
 
         $page->setUseRouteMatch(false);
-        $this->assertSame(false, $page->getUseRouteMatch());
+        $this->assertSame(false, $page->useRouteMatch());
 
         $page->setUseRouteMatch(true);
-        $this->assertSame(true, $page->getUseRouteMatch());
+        $this->assertSame(true, $page->useRouteMatch());
 
         $page->setUseRouteMatch();
-        $this->assertSame(true, $page->getUseRouteMatch());
+        $this->assertSame(true, $page->useRouteMatch());
     }
 
     public function testMvcPageParamsInheritRouteMatchParams()

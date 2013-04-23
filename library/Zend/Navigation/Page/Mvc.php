@@ -197,7 +197,7 @@ class Mvc extends AbstractPage
             );
         }
 
-        if ($this->getUseRouteMatch() && $this->getRouteMatch() !== null) {
+        if ($this->useRouteMatch()) {
             $rmParams = $this->getRouteMatch()->getParams();
 
             if (isset($rmParams[ModuleRouteListener::ORIGINAL_CONTROLLER])) {
@@ -435,11 +435,11 @@ class Mvc extends AbstractPage
     }
 
     /**
-     * Get the useRouteMatch
+     * Get the useRouteMatch flag
      *
      * @return bool
      */
-    public function getUseRouteMatch()
+    public function useRouteMatch()
     {
         return $this->useRouteMatch;
     }
@@ -448,12 +448,12 @@ class Mvc extends AbstractPage
      * Set whether the page should use route match params for assembling link uri
      *
      * @see getHref()
-     * @param bool $useRoteMatch [optional]
+     * @param bool $useRouteMatch [optional]
      * @return Mvc
      */
-    public function setUseRouteMatch($useRoteMatch = true)
+    public function setUseRouteMatch($useRouteMatch = true)
     {
-        $this->useRouteMatch = (bool) $useRoteMatch;
+        $this->useRouteMatch = (bool) $useRouteMatch;
         $this->hrefCache = null;
         return $this;
     }

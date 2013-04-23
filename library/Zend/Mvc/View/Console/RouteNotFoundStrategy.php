@@ -281,10 +281,10 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                 $usage = $module->getConsoleUsage($console);
 
                 // Normalize what we got from the module or discard
-                if (is_array($usage)) {
+                if (is_array($usage) && !empty($usage)) {
                     array_unshift($usage, $moduleName);
                     $usageInfo[$name] = $usage;
-                } elseif (is_string($usage)) {
+                } elseif (is_string($usage) && ($usage != '')) {
                     $usageInfo[$name] = array($moduleName, $usage);
                 }
             }

@@ -48,6 +48,11 @@ class CreateTable extends AbstractSql implements SqlInterface
         $this->columns[] = $column;
     }
 
+    public function addConstraint(Constraint\ConstraintInterface $constraint)
+    {
+        $this->constraints[] = $constraint;
+    }
+
     protected function processTable(PlatformInterface $adapterPlatform = null)
     {
         $ret = array();

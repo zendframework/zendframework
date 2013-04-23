@@ -80,19 +80,6 @@ class Translator
     protected $pluginManager;
 
     /**
-     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
-     */
-    public function __construct()
-    {
-        if (!extension_loaded('intl')) {
-            throw new Exception\ExtensionNotLoadedException(sprintf(
-                '%s component requires the intl PHP extension',
-                __NAMESPACE__
-            ));
-        }
-    }
-
-    /**
      * Instantiate a translator
      *
      * @param  array|Traversable                  $options
@@ -230,10 +217,17 @@ class Translator
      * Get the default locale.
      *
      * @return string
+     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present and no locale set
      */
     public function getLocale()
     {
         if ($this->locale === null) {
+            if (!extension_loaded('intl')) {
+                throw new Exception\ExtensionNotLoadedException(sprintf(
+                    '%s component requires the intl PHP extension',
+                    __NAMESPACE__
+                ));
+            }
             $this->locale = Locale::getDefault();
         }
 

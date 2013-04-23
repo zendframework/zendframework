@@ -454,6 +454,7 @@ class Mvc extends AbstractPage
     public function setUseRouteMatch($useRoteMatch = true)
     {
         $this->useRouteMatch = (bool) $useRoteMatch;
+        $this->hrefCache = null;
         return $this;
     }
 

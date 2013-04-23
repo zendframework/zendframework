@@ -565,7 +565,7 @@ class MvcTest extends TestCase
             'route' => 'lollerblades',
         ));
 
-        $route = new SegmentRoute('/lollerblades/view/:serialNumber');
+        $route = new SegmentRoute('/lollerblades/view[/:serialNumber]');
 
         $router = new TreeRouteStack;
         $router->addRoute('lollerblades', $route);
@@ -578,7 +578,7 @@ class MvcTest extends TestCase
         $page->setRouter($router);
         $page->setRouteMatch($routeMatch);
 
-        $this->assertEquals('/lollerblades/view/', $page->getHref());
+        $this->assertEquals('/lollerblades/view', $page->getHref());
 
         $page->setUseRouteMatch(true);
         $this->assertEquals('/lollerblades/view/23', $page->getHref());
@@ -591,7 +591,7 @@ class MvcTest extends TestCase
             'route' => 'lmaoplane',
         ));
 
-        $route = new SegmentRoute('/lmaoplane/:controller');
+        $route = new SegmentRoute('/lmaoplane[/:controller]');
 
         $router = new TreeRouteStack;
         $router->addRoute('lmaoplane', $route);
@@ -612,7 +612,7 @@ class MvcTest extends TestCase
         $page->setRouter($event->getRouter());
         $page->setRouteMatch($event->getRouteMatch());
 
-        $this->assertEquals('/lmaoplane/', $page->getHref());
+        $this->assertEquals('/lmaoplane', $page->getHref());
 
         $page->setUseRouteMatch(true);
         $this->assertEquals('/lmaoplane/index', $page->getHref());

@@ -49,6 +49,13 @@ class Menu extends AbstractHelper
     protected $renderParents = true;
 
     /**
+     * Whether page class should be applied to <li> element
+     *
+     * @var bool
+     */
+    protected $addPageClassToLi = false;
+
+    /**
      * Partial view script to use for rendering menu
      *
      * @var string|array
@@ -162,6 +169,31 @@ class Menu extends AbstractHelper
     }
 
     /**
+     * Enables/disables page class applied to <li> element
+     *
+     * @param  bool $flag [optional] page class applied to <li> element
+     *                    Default is true.
+     * @return Menu  fluent interface, returns self
+     */
+    public function setAddPageClassToLi($flag = true)
+    {
+        $this->addPageClassToLi = (bool) $flag;
+        return $this;
+    }
+
+    /**
+     * Returns flag indicating whether page class should be applied to <li> element
+     *
+     * By default, this value is false.
+     *
+     * @return bool  whether parents should be rendered
+     */
+    public function getAddPageClassToLi()
+    {
+        return $this->addPageClassToLi;
+    }
+
+    /**
      * Sets which partial view script to use for rendering menu
      *
      * @param  string|array $partial partial view script or null. If an array is
@@ -202,7 +234,7 @@ class Menu extends AbstractHelper
      * @param bool $escapeLabel     Whether or not to escape the label
      * @return string               HTML string for the given page
      */
-    public function htmlify(AbstractPage $page, $escapeLabel = true)
+    public function htmlify(AbstractPage $page, $escapeLabel = true, $addPageClassToLi = false)
     {
         // get label and title for translating
         $label = $page->getLabel();
@@ -223,8 +255,11 @@ class Menu extends AbstractHelper
         $attribs = array(
             'id'     => $page->getId(),
             'title'  => $title,
-            'class'  => $page->getClass()
         );
+
+        if ($addPageClassToLi === false) {
+            $attribs['class'] = $page->getClass();
+        }
 
         // does page have a href?
         $href = $page->getHref();
@@ -300,6 +335,10 @@ class Menu extends AbstractHelper
             $options['renderParents'] = $this->getRenderParents();
         }
 
+        if (!isset($options['addPageClassToLi'])) {
+            $options['addPageClassToLi'] = $this->getAddPageClassToLi();
+        }
+
         return $options;
     }
 
@@ -322,7 +361,8 @@ class Menu extends AbstractHelper
                                          $indent,
                                          $minDepth,
                                          $maxDepth,
-                                         $escapeLabels
+                                         $escapeLabels,
+                                         $addPageClassToLi
     ) {
         if (!$active = $this->findActive($container, $minDepth - 1, $maxDepth)) {
             return '';
@@ -348,9 +388,21 @@ class Menu extends AbstractHelper
             if (!$this->accept($subPage)) {
                 continue;
             }
-            $liClass = $subPage->isActive(true) ? ' class="active"' : '';
+
+            // render li tag and page
+            $liClasses = array();
+            // Is page active?
+            if ($subPage->isActive(true)) {
+                $liClasses[] = 'active';
+            }
+            // Add CSS class from page to <li>
+            if ($addPageClassToLi && $subPage->getClass()) {
+                $liClasses[] = $subPage->getClass();
+            }
+            $liClass = empty($liClasses) ? '' : ' class="' . implode(' ', $liClasses) . '"';
+
             $html .= $indent . '    <li' . $liClass . '>' . self::EOL;
-            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels) . self::EOL;
+            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels, $addPageClassToLi) . self::EOL;
             $html .= $indent . '    </li>' . self::EOL;
         }
 
@@ -362,13 +414,14 @@ class Menu extends AbstractHelper
     /**
      * Renders a normal menu (called from {@link renderMenu()})
      *
-     * @param  AbstractContainer         $container    container to render
-     * @param  string                    $ulClass      CSS class for first UL
-     * @param  string                    $indent       initial indentation
-     * @param  int|null                  $minDepth     minimum depth
-     * @param  int|null                  $maxDepth     maximum depth
-     * @param  bool                      $onlyActive   render only active branch?
-     * @param  bool                      $escapeLabels Whether or not to escape the labels
+     * @param  AbstractContainer         $container         container to render
+     * @param  string                    $ulClass           CSS class for first UL
+     * @param  string                    $indent            initial indentation
+     * @param  int|null                  $minDepth          minimum depth
+     * @param  int|null                  $maxDepth          maximum depth
+     * @param  bool                      $onlyActive        render only active branch?
+     * @param  bool                      $escapeLabels      Whether or not to escape the labels
+     * @param  bool                      $addPageClassToLi  Whether or not page class applied to <li> element
      * @return string
      */
     protected function renderNormalMenu(AbstractContainer $container,
@@ -377,7 +430,8 @@ class Menu extends AbstractHelper
                                    $minDepth,
                                    $maxDepth,
                                    $onlyActive,
-                                   $escapeLabels
+                                   $escapeLabels,
+                                   $addPageClassToLi
     ) {
         $html = '';
 
@@ -455,9 +509,19 @@ class Menu extends AbstractHelper
             }
 
             // render li tag and page
-            $liClass = $isActive ? ' class="active"' : '';
+            $liClasses = array();
+            // Is page active?
+            if ($isActive) {
+                $liClasses[] = 'active';
+            }
+            // Add CSS class from page to <li>
+            if ($addPageClassToLi && $page->getClass()) {
+                $liClasses[] = $page->getClass();
+            }
+            $liClass = empty($liClasses) ? '' : ' class="' . implode(' ', $liClasses) . '"';
+
             $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
-                   . $myIndent . '        ' . $this->htmlify($page, $escapeLabels) . self::EOL;
+                   . $myIndent . '        ' . $this->htmlify($page, $escapeLabels, $addPageClassToLi) . self::EOL;
 
             // store as previous depth for next iteration
             $prevDepth = $depth;
@@ -507,7 +571,8 @@ class Menu extends AbstractHelper
                                               $options['indent'],
                                               $options['minDepth'],
                                               $options['maxDepth'],
-                                              $options['escapeLabels']);
+                                              $options['escapeLabels'],
+                                              $options['addPageClassToLi']);
         } else {
             $html = $this->renderNormalMenu($container,
                                        $options['ulClass'],
@@ -515,7 +580,8 @@ class Menu extends AbstractHelper
                                        $options['minDepth'],
                                        $options['maxDepth'],
                                        $options['onlyActiveBranch'],
-                                       $options['escapeLabels']);
+                                       $options['escapeLabels'],
+                                       $options['addPageClassToLi']);
         }
 
         return $html;
@@ -562,7 +628,8 @@ class Menu extends AbstractHelper
             'maxDepth'         => null,
             'onlyActiveBranch' => true,
             'renderParents'    => false,
-            'escapeLabels'     => true
+            'escapeLabels'     => true,
+            'addPageClassToLi' => false,
         ));
     }
 

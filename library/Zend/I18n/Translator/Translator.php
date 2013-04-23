@@ -80,14 +80,9 @@ class Translator
     protected $pluginManager;
 
     /**
-     * Instantiate a translator
-     *
-     * @param  array|Traversable                  $options
-     * @return Translator
      * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
-     * @throws Exception\InvalidArgumentException
      */
-    public static function factory($options)
+    public function __construct()
     {
         if (!extension_loaded('intl')) {
             throw new Exception\ExtensionNotLoadedException(sprintf(
@@ -95,7 +90,17 @@ class Translator
                 __NAMESPACE__
             ));
         }
+    }
 
+    /**
+     * Instantiate a translator
+     *
+     * @param  array|Traversable                  $options
+     * @return Translator
+     * @throws Exception\InvalidArgumentException
+     */
+    public static function factory($options)
+    {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {

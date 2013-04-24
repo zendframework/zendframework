@@ -304,13 +304,9 @@ class Hostname extends AbstractValidator
     );
 
     /**
-     * Sets validator options
+     * Sets validator options.
      *
-     * @param integer $allow       OPTIONAL Set what types of hostname to allow (default ALLOW_DNS)
-     * @param  bool $validateIdn OPTIONAL Set whether IDN domains are validated (default true)
-     * @param  bool $validateTld OPTIONAL Set whether the TLD element of a hostname is validated (default true)
-     * @param Ip      $ipValidator OPTIONAL
-     * @see http://www.iana.org/cctld/specifications-policies-cctlds-01apr02.htm  Technical Specifications for ccTLDs
+     * @param array $options
      */
     public function __construct($options = array())
     {

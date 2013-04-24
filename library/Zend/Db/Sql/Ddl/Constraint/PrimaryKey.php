@@ -14,11 +14,11 @@ class PrimaryKey extends AbstractConstraint
 
         $newSpec = sprintf($this->specification, implode(', ', $newSpecParts));
 
-        return array(
+        return array(array(
             $newSpec,
             $this->columns,
             $newSpecTypes
-        );
+        ));
     }
 
 }

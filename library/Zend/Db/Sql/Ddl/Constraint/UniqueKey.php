@@ -4,21 +4,38 @@ namespace Zend\Db\Sql\Ddl\Constraint;
 
 class UniqueKey extends AbstractConstraint
 {
-    protected $specification = 'UNIQUE KEY %1$s (%2$s)';
+    protected $specification = 'CONSTRAINT UNIQUE KEY %1$s(...)';
+
+    public function __construct($column, $name = null)
+    {
+        $this->setColumns($column);
+        $this->name = $name;
+    }
 
     public function getExpressionData()
     {
         $colCount = count($this->columns);
-        $newSpecParts = array_fill(0, $colCount, '%s');
-        $newSpecTypes = array_fill(0, $colCount, self::TYPE_IDENTIFIER);
 
-        $newSpec = sprintf($this->specification, implode(', ', $newSpecParts));
+        $values = array();
+        $values[] = ($this->name) ? $this->name . ' ' : '';
 
-        return array(
+        $newSpecTypes = array(self::TYPE_IDENTIFIER);
+
+        $newSpecParts = array();
+
+
+        for ($i = 0; $i < $colCount; $i++) {
+            $newSpecParts[] = '%' . ($i+2) . '$s';
+            $newSpecTypes[] = self::TYPE_IDENTIFIER;
+        }
+
+        $newSpec = str_replace('...', implode(', ', $newSpecParts), $this->specification);
+//var_dump($newSpec, $newSpecTypes);
+        return array(array(
             $newSpec,
-            $this->columns,
+            array_merge($values, $this->columns),
             $newSpecTypes
-        );
+        ));
     }
 
 }

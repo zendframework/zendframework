@@ -16,7 +16,6 @@ class DropTable extends AbstractSql implements SqlInterface
     );
 
     protected $table = '';
-    protected $columns = array();
 
     public function __construct($table = '')
     {

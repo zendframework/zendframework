@@ -11,22 +11,29 @@ class CreateTable extends AbstractSql implements SqlInterface
 {
     const TABLE = 'table';
     const COLUMNS = 'columns';
+    const CONSTRAINTS = 'constraints';
     const OPTIONS = 'options';
 
     protected $specifications = array(
-        self::TABLE => array(
-            'CREATE TABLE %1$s' => array(null)
-        ),
+        self::TABLE => 'CREATE TABLE %1$s',
+        ' (',
         self::COLUMNS  => array(
-            "(\n    %1\$s\n)" => array(
-                array(1 => '%1$s', 'combinedby' => "\n    ")
+            "\n    %1\$s" => array(
+                array(1 => '%1$s', 'combinedby' => ",\n    ")
             )
         ),
+        self::CONSTRAINTS => array(
+            ",\n    %1\$s" => array(
+                array(1 => '%1$s', 'combinedby' => ",\n    ")
+            )
+        ),
+        "\n)"
     );
 
     protected $isTemporary = false;
     protected $table = '';
     protected $columns = array();
+    protected $constraints = array();
 
     public function __construct($table = '', $isTemporary = false)
     {
@@ -67,7 +74,17 @@ class CreateTable extends AbstractSql implements SqlInterface
     {
         $sqls = array();
         foreach ($this->columns as $column) {
-            $sqls[] = $this->processExpression($column, $adapterPlatform);
+            $sqls[] = $this->processExpression($column, $adapterPlatform)->getSql();
+        }
+
+        return array($sqls);
+    }
+
+    protected function processConstraints(PlatformInterface $adapterPlatform = null)
+    {
+        $sqls = array();
+        foreach ($this->constraints as $constraint) {
+            $sqls[] = $this->processExpression($constraint, $adapterPlatform)->getSql();
         }
 
         return array($sqls);
@@ -82,64 +99,18 @@ class CreateTable extends AbstractSql implements SqlInterface
         $parameters = array();
 
         foreach ($this->specifications as $name => $specification) {
+            if (is_int($name)) {
+                $sqls[] = $specification;
+                continue;
+            }
             $parameters[$name] = $this->{'process' . $name}($adapterPlatform, null, null, $sqls, $parameters);
             if ($specification && is_array($parameters[$name])) {
                 $sqls[$name] = $this->createSqlFromSpecificationAndParameters($specification, $parameters[$name]);
             }
         }
 
-        $sql = implode(' ', $sqls);
+        $sql = implode('', $sqls);
         return $sql;
     }
-//
-//    /**
-//     * @param $specifications
-//     * @param $parameters
-//     * @return string
-//     * @throws Exception\RuntimeException
-//     */
-//    protected function createSqlFromSpecificationAndParameters($specifications, $parameters)
-//    {
-//        if (is_string($specifications)) {
-//            return vsprintf($specifications, $parameters);
-//        }
-//
-//        $parametersCount = count($parameters);
-//        foreach ($specifications as $specificationString => $paramSpecs) {
-//            if ($parametersCount == count($paramSpecs)) {
-//                break;
-//            }
-//            unset($specificationString, $paramSpecs);
-//        }
-//
-//        if (!isset($specificationString)) {
-//            throw new Exception\RuntimeException(
-//                'A number of parameters was found that is not supported by this specification'
-//            );
-//        }
-//
-//        $topParameters = array();
-//        foreach ($parameters as $position => $paramsForPosition) {
-//            if (isset($paramSpecs[$position]['combinedby'])) {
-//                $multiParamValues = array();
-//                foreach ($paramsForPosition as $multiParamsForPosition) {
-//                    $ppCount = count($multiParamsForPosition);
-//                    if (!isset($paramSpecs[$position][$ppCount])) {
-//                        throw new Exception\RuntimeException('A number of parameters (' . $ppCount . ') was found that is not supported by this specification');
-//                    }
-//                    $multiParamValues[] = vsprintf($paramSpecs[$position][$ppCount], $multiParamsForPosition);
-//                }
-//                $topParameters[] = implode($paramSpecs[$position]['combinedby'], $multiParamValues);
-//            } elseif ($paramSpecs[$position] !== null) {
-//                $ppCount = count($paramsForPosition);
-//                if (!isset($paramSpecs[$position][$ppCount])) {
-//                    throw new Exception\RuntimeException('A number of parameters (' . $ppCount . ') was found that is not supported by this specification');
-//                }
-//                $topParameters[] = vsprintf($paramSpecs[$position][$ppCount], $paramsForPosition);
-//            } else {
-//                $topParameters[] = $paramsForPosition;
-//            }
-//        }
-//        return vsprintf($specificationString, $topParameters);
-//    }
+
 }

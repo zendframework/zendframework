@@ -12,9 +12,15 @@ class Column implements ColumnInterface
     protected $default = null;
     protected $options = array();
 
-    public function __construct($name)
+    public function __construct($name = null)
+    {
+        (!$name) ?: $this->setName($name);
+    }
+
+    public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getName()
@@ -22,10 +28,45 @@ class Column implements ColumnInterface
         return $this->name;
     }
 
+    public function setNullable($nullable)
+    {
+        $this->isNullable = (bool) $nullable;
+        return $this;
+    }
+
     public function isNullable()
     {
         return $this->isNullable;
     }
+
+    public function setDefault($default)
+    {
+        $this->default = $default;
+    }
+
+    public function getDefault()
+    {
+        return $this->default;
+    }
+
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
+        return $this;
+    }
+
+    public function setOption($name, $value)
+    {
+        $this->options[$name] = $value;
+        return $this;
+    }
+
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+
 
     public function getExpressionData()
     {

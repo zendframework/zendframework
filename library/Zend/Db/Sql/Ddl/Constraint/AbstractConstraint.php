@@ -8,7 +8,7 @@ abstract class AbstractConstraint implements ConstraintInterface
 
     public function __construct($columns = null)
     {
-        ($columns) ?: $this->setColumns($columns);
+        (!$columns) ?: $this->setColumns($columns);
     }
 
     public function setColumns($columns)

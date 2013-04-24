@@ -45,6 +45,7 @@ class ContainerAbstractFactoryTest extends \PHPUnit_Framework_TestCase
         foreach ($config['session_containers'] as $name) {
             $containers[] = array('SessionContainer\\' . $name, $name);
         }
+
         return $containers;
     }
 
@@ -77,6 +78,7 @@ class ContainerAbstractFactoryTest extends \PHPUnit_Framework_TestCase
             $containers[] = array($name);
         }
         $containers[] = array('DOES_NOT_EXIST');
+
         return $containers;
     }
 

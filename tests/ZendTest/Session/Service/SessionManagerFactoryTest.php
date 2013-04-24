@@ -10,7 +10,6 @@
 namespace ZendTest\Session\Service;
 
 use Zend\ServiceManager\ServiceManager;
-use Zend\Session\Config\StandardConfig;
 use Zend\Session\Container;
 use Zend\Session\Service\SessionManagerFactory;
 use Zend\Session\Storage\ArrayStorage;

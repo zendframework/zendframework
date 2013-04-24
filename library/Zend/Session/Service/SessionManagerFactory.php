@@ -22,7 +22,7 @@ class SessionManagerFactory implements FactoryInterface
 {
     /**
      * Default configuration for manager behavior
-     * 
+     *
      * @var array
      */
     protected $defaultManagerConfig = array(
@@ -51,10 +51,10 @@ class SessionManagerFactory implements FactoryInterface
      * Config service. Currently, these include:
      *
      * - enable_default_container_manager: whether to inject the created instance
-     *   as the default manager for Container instances. The default value for 
+     *   as the default manager for Container instances. The default value for
      *   this is true; set it to false to disable.
      *
-     * @param  ServiceLocatorInterface $services
+     * @param  ServiceLocatorInterface    $services
      * @return SessionManager
      * @throws ServiceNotCreatedException if any collaborators are not of the
      *         correct type

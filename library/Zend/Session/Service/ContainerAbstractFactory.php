@@ -47,8 +47,8 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
 
     /**
      * @param  ServiceLocatorInterface $serviceLocator
-     * @param  string $name
-     * @param  string $requestedName
+     * @param  string                  $name
+     * @param  string                  $requestedName
      * @return bool
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
@@ -68,8 +68,8 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
 
     /**
      * @param  ServiceLocatorInterface $serviceLocator
-     * @param  string $name
-     * @param  string $requestedName
+     * @param  string                  $name
+     * @param  string                  $requestedName
      * @return Container
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
@@ -98,12 +98,14 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
 
         if (!$serviceLocator->has('Config')) {
             $this->config = array();
+
             return false;
         }
 
         $config = $serviceLocator->get('Config');
         if (!isset($config['session_containers']) || !is_array($config['session_containers'])) {
             $this->config = array();
+
             return false;
         }
 
@@ -111,6 +113,7 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
         $config = array_flip($config);
 
         $this->config = array_change_key_case($config);
+
         return $this->config;
     }
 

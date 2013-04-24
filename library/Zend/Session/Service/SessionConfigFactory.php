@@ -24,7 +24,7 @@ class SessionConfigFactory implements FactoryInterface
      * you may also specify a specific implementation variant using the
      * "config_class" subkey.
      *
-     * @param  ServiceLocatorInterface $services
+     * @param  ServiceLocatorInterface    $services
      * @return ConfigInterface
      * @throws ServiceNotCreatedException if session_config is missing, or an
      *         invalid config_class is used
@@ -58,6 +58,7 @@ class SessionConfigFactory implements FactoryInterface
             ));
         }
         $sessionConfig->setOptions($config);
+
         return $sessionConfig;
     }
 }

@@ -96,7 +96,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     protected $prefixColumnsWithTable = true;
 
     /**
-     * @var string|TableIdentifier
+     * @var string|array|TableIdentifier
      */
     protected $table = null;
 
@@ -148,7 +148,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * Constructor
      *
-     * @param  null|string $table
+     * @param  null|string|array|TableIdentifier $table
      */
     public function __construct($table = null)
     {

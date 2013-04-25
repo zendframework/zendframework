@@ -530,9 +530,9 @@ class MenuTest extends AbstractTest
         ));
 
         $expected = $this->_getExpected('menu/addclasstolistitem_as_false.html');
-        $actual = $this->_helper->renderMenu($container);
+        $actual   = $this->_helper->renderMenu($container);
 
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals(trim($expected), trim($actual));
     }
 
     public function testRenderingWithPageClassToLi()
@@ -551,7 +551,7 @@ class MenuTest extends AbstractTest
         $expected = $this->_getExpected('menu/addclasstolistitem_as_true.html');
         $actual = $this->_helper->renderMenu($container, $options);
 
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals(trim($expected), trim($actual));
     }
 
     public function testRenderDeepestMenuWithPageClassToLi()
@@ -569,7 +569,7 @@ class MenuTest extends AbstractTest
         $expected = $this->_getExpected('menu/onlyactivebranch_addclasstolistitem.html');
         $actual = $this->_helper->renderMenu($container, $options);
 
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals(trim($expected), trim($actual));
     }
 
     /**

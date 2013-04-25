@@ -13,7 +13,8 @@
     },
     "target-dir": "Zend/Stdlib",
     "suggest": {
-        "pecl-weakref": "Implementation of weak references for Stdlib\\CallbackHandler"
+        "pecl-weakref": "Implementation of weak references for Stdlib\\CallbackHandler",
+        "zendframework/zend-servicemanager": "For using the hydrator plugin manager"
     },
     "require": {
         "php": ">=5.3.3"

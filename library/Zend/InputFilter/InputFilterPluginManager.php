@@ -11,6 +11,8 @@ namespace Zend\InputFilter;
 
 use Zend\InputFilter\Exception;
 use Zend\ServiceManager\AbstractPluginManager;
+use Zend\ServiceManager\ConfigInterface;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * Plugin manager implementation for input filters.
@@ -18,10 +20,39 @@ use Zend\ServiceManager\AbstractPluginManager;
 class InputFilterPluginManager extends AbstractPluginManager
 {
     /**
+     * @param ConfigInterface $configuration
+     */
+    public function __construct(ConfigInterface $configuration = null)
+    {
+        parent::__construct($configuration);
+
+        $this->addInitializer(array($this, 'populateFactory'));
+    }
+
+    /**
+     * Populate the factory with filter chain and validator chain
+     *
+     * @param $element
+     */
+    public function populateFactory($element)
+    {
+        if ($element instanceof InputFilter) {
+            $factory = $element->getFactory();
+            $factory->getDefaultFilterChain()->setPluginManager($this->serviceLocator->get('FilterManager'));
+            $factory->getDefaultValidatorChain()->setPluginManager($this->serviceLocator->get('ValidatorManager'));
+        }
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function validatePlugin($plugin)
     {
+        // Hook to perform various initialization, when the element is not created through the factory
+        if ($plugin instanceof InitializableInterface) {
+            $plugin->init();
+        }
+
         if ($plugin instanceof InputFilterInterface) {
             // we're okay
             return;

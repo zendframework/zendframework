@@ -42,6 +42,19 @@ class DateFormat extends AbstractHelper
     protected $formatters = array();
 
     /**
+     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
+     */
+    public function __construct()
+    {
+        if (!extension_loaded('intl')) {
+            throw new Exception\ExtensionNotLoadedException(sprintf(
+                '%s component requires the intl PHP extension',
+                __NAMESPACE__
+            ));
+        }
+    }
+
+    /**
      * Format a date
      *
      * @param  DateTime|integer|array $date

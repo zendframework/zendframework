@@ -35,6 +35,19 @@ class Plural extends AbstractHelper
     protected $rule;
 
     /**
+     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
+     */
+    public function __construct()
+    {
+        if (!extension_loaded('intl')) {
+            throw new Exception\ExtensionNotLoadedException(sprintf(
+                '%s component requires the intl PHP extension',
+                __NAMESPACE__
+            ));
+        }
+    }
+
+    /**
      * Given an array of strings, a number and, if wanted, an optional locale (the default one is used
      * otherwise), this picks the right string according to plural rules of the locale
      *

@@ -296,7 +296,7 @@ class TemplatePathStack implements ResolverInterface
 
         // Ensure we have the expected file extension
         $defaultSuffix = $this->getDefaultSuffix();
-        if (pathinfo($name, PATHINFO_EXTENSION) != $defaultSuffix) {;
+        if (pathinfo($name, PATHINFO_EXTENSION) != $defaultSuffix) {
             $name .= '.' . $defaultSuffix;
         }
 

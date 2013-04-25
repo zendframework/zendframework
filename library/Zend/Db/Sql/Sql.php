@@ -18,7 +18,7 @@ class Sql
     /** @var AdapterInterface */
     protected $adapter = null;
 
-    /** @var string */
+    /** @var string|array|TableIdentifier */
     protected $table = null;
 
     /** @var Platform\Platform */

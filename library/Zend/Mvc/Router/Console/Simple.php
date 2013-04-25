@@ -290,7 +290,7 @@ class Simple implements RouteInterface
                     (?P<options>
                         (?:
                             \ *?
-                            (?P<name>[a-z0-9][a-zA-Z0-9_]*?)
+                            (?P<name>[a-z0-9][a-zA-Z0-9_\-]*?)
                             \ *?
                             (?:\||(?=\]))
                             \ *?
@@ -330,7 +330,7 @@ class Simple implements RouteInterface
                     (?P<options>
                         (?:
                             \ *?
-                            (?P<name>[a-z0-9][a-zA-Z0-9_]+)
+                            (?P<name>[a-z0-9][a-zA-Z0-9_\-]+)
                             \ *?
                             (?:\||(?=\)))
                             \ *?
@@ -447,7 +447,7 @@ class Simple implements RouteInterface
              * Optional literal param, i.e.
              *    [something]
              */
-            elseif (preg_match('/\G\[ *?(?P<name>[a-z0-9][a-zA-Z0-9\_]*?) *?\](?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G\[ *?(?P<name>[a-z0-9][a-zA-Z0-9\_\-]*?) *?\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'literal'    => true,
@@ -460,7 +460,7 @@ class Simple implements RouteInterface
              * Optional value param, i.e.
              *    [SOMETHING]
              */
-            elseif (preg_match('/\G\[(?P<name>[A-Z0-9\_]+)\](?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G\[(?P<name>[a-z0-9][a-zA-Z0-9\_\-]*?)\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => strtolower( $m['name'] ),
                     'literal'    => false,
@@ -473,7 +473,7 @@ class Simple implements RouteInterface
              * Optional value param, syntax 2, i.e.
              *    [<SOMETHING>]
              */
-            elseif (preg_match('/\G\[ *\<(?P<name>[a-zA-Z0-9\_]+)\> *\](?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G\[ *\<(?P<name>[a-z0-9][a-zA-Z0-9\_\-]*?)\> *\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => strtolower( $m['name'] ),
                     'literal'    => false,
@@ -486,7 +486,7 @@ class Simple implements RouteInterface
              * Mandatory value param, i.e.
              *    <something>
              */
-            elseif (preg_match('/\G\< *(?P<name>[a-zA-Z0-9\_]+) *\>(?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G\< *(?P<name>[a-z0-9][a-zA-Z0-9\_\-]*?) *\>(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'literal'    => false,
@@ -499,7 +499,7 @@ class Simple implements RouteInterface
              * Mandatory value param, i.e.
              *   SOMETHING
              */
-            elseif (preg_match('/\G(?P<name>[A-Z0-9\_]*?)(?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G(?P<name>[A-Z][a-zA-Z0-9\_\-]*?)(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => strtolower( $m['name'] ),
                     'literal'    => false,
@@ -512,7 +512,7 @@ class Simple implements RouteInterface
              * Mandatory literal param, i.e.
              *   something
              */
-            elseif (preg_match('/\G(?P<name>[a-z0-9][a-zA-Z0-9\_]*?)(?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G(?P<name>[a-z0-9][a-zA-Z0-9\_\-]*?)(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'literal'    => true,

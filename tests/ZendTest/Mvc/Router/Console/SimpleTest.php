@@ -6,7 +6,7 @@ use Zend\Console\Request as ConsoleRequest;
 use Zend\Mvc\Router\Console\Simple;
 use ZendTest\Mvc\Router\FactoryTester;
 
-class SimpleTestTest extends TestCase
+class SimpleTest extends TestCase
 {
     public static function routeProvider()
     {

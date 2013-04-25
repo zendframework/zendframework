@@ -1,5 +1,4 @@
 #!/bin/bash
-cd "$(dirname $(dirname "$0"))"
 
 libraryCS=$(php php-cs-fixer.phar fix -v --dry-run --level=psr2 ./library)
 testsCS=$(php php-cs-fixer.phar fix -v --dry-run --level=psr2 ./tests)

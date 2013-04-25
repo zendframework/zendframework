@@ -11,6 +11,7 @@ namespace Zend\I18n\View\Helper;
 
 use Locale;
 use NumberFormatter;
+use Zend\I18n\Exception;
 use Zend\View\Helper\AbstractHelper;
 
 /**
@@ -45,6 +46,19 @@ class CurrencyFormat extends AbstractHelper
      * @var array
      */
     protected $formatters = array();
+
+    /**
+     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
+     */
+    public function __construct()
+    {
+        if (!extension_loaded('intl')) {
+            throw new Exception\ExtensionNotLoadedException(sprintf(
+                '%s component requires the intl PHP extension',
+                __NAMESPACE__
+            ));
+        }
+    }
 
     /**
      * The 3-letter ISO 4217 currency code indicating the currency to use.

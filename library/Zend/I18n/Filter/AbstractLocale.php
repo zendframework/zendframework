@@ -11,9 +11,23 @@ namespace Zend\I18n\Filter;
 
 use Locale;
 use Zend\Filter\AbstractFilter;
+use Zend\I18n\Exception;
 
 abstract class AbstractLocale extends AbstractFilter
 {
+    /**
+     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
+     */
+    public function __construct()
+    {
+        if (!extension_loaded('intl')) {
+            throw new Exception\ExtensionNotLoadedException(sprintf(
+                '%s component requires the intl PHP extension',
+                __NAMESPACE__
+            ));
+        }
+    }
+
     /**
      * Sets the locale option
      *

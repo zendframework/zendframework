@@ -21,6 +21,13 @@ use Zend\View\Exception;
 class Menu extends AbstractHelper
 {
     /**
+     * Whether page class should be applied to <li> element
+     *
+     * @var bool
+     */
+    protected $addClassToListItem = false;
+
+    /**
      * Whether labels should be escaped
      *
      * @var bool
@@ -101,12 +108,13 @@ class Menu extends AbstractHelper
      * Renders the deepest active menu within [$minDepth, $maxDepth], (called
      * from {@link renderMenu()})
      *
-     * @param  AbstractContainer $container    container to render
-     * @param  string            $ulClass      CSS class for first UL
-     * @param  string            $indent       initial indentation
-     * @param  int|null          $minDepth     minimum depth
-     * @param  int|null          $maxDepth     maximum depth
-     * @param  bool              $escapeLabels Whether or not to escape the labels
+     * @param  AbstractContainer $container          container to render
+     * @param  string            $ulClass            CSS class for first UL
+     * @param  string            $indent             initial indentation
+     * @param  int|null          $minDepth           minimum depth
+     * @param  int|null          $maxDepth           maximum depth
+     * @param  bool              $escapeLabels       Whether or not to escape the labels
+     * @param  bool              $addClassToListItem Whether or not page class applied to <li> element
      * @return string
      */
     protected function renderDeepestMenu(
@@ -115,7 +123,8 @@ class Menu extends AbstractHelper
         $indent,
         $minDepth,
         $maxDepth,
-        $escapeLabels
+        $escapeLabels,
+        $addClassToListItem
     ) {
         if (!$active = $this->findActive($container, $minDepth - 1, $maxDepth)) {
             return '';
@@ -141,9 +150,21 @@ class Menu extends AbstractHelper
             if (!$this->accept($subPage)) {
                 continue;
             }
-            $liClass = $subPage->isActive(true) ? ' class="active"' : '';
+
+            // render li tag and page
+            $liClasses = array();
+            // Is page active?
+            if ($subPage->isActive(true)) {
+                $liClasses[] = 'active';
+            }
+            // Add CSS class from page to <li>
+            if ($addClassToListItem && $subPage->getClass()) {
+                $liClasses[] = $subPage->getClass();
+            }
+            $liClass = empty($liClasses) ? '' : ' class="' . implode(' ', $liClasses) . '"';
+
             $html .= $indent . '    <li' . $liClass . '>' . self::EOL;
-            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels) . self::EOL;
+            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels, $addClassToListItem) . self::EOL;
             $html .= $indent . '    </li>' . self::EOL;
         }
 
@@ -183,7 +204,9 @@ class Menu extends AbstractHelper
                 $options['indent'],
                 $options['minDepth'],
                 $options['maxDepth'],
-                $options['escapeLabels']);
+                $options['escapeLabels'],
+                $options['addClassToListItem']
+            );
         } else {
             $html = $this->renderNormalMenu($container,
                 $options['ulClass'],
@@ -191,7 +214,9 @@ class Menu extends AbstractHelper
                 $options['minDepth'],
                 $options['maxDepth'],
                 $options['onlyActiveBranch'],
-                $options['escapeLabels']);
+                $options['escapeLabels'],
+                $options['addClassToListItem']
+            );
         }
 
         return $html;
@@ -200,13 +225,14 @@ class Menu extends AbstractHelper
     /**
      * Renders a normal menu (called from {@link renderMenu()})
      *
-     * @param  AbstractContainer $container    container to render
-     * @param  string            $ulClass      CSS class for first UL
-     * @param  string            $indent       initial indentation
-     * @param  int|null          $minDepth     minimum depth
-     * @param  int|null          $maxDepth     maximum depth
-     * @param  bool              $onlyActive   render only active branch?
-     * @param  bool              $escapeLabels Whether or not to escape the labels
+     * @param  AbstractContainer $container          container to render
+     * @param  string            $ulClass            CSS class for first UL
+     * @param  string            $indent             initial indentation
+     * @param  int|null          $minDepth           minimum depth
+     * @param  int|null          $maxDepth           maximum depth
+     * @param  bool              $onlyActive         render only active branch?
+     * @param  bool              $escapeLabels       Whether or not to escape the labels
+     * @param  bool              $addClassToListItem Whether or not page class applied to <li> element
      * @return string
      */
     protected function renderNormalMenu(
@@ -216,7 +242,8 @@ class Menu extends AbstractHelper
         $minDepth,
         $maxDepth,
         $onlyActive,
-        $escapeLabels
+        $escapeLabels,
+        $addClassToListItem
     ) {
         $html = '';
 
@@ -294,9 +321,19 @@ class Menu extends AbstractHelper
             }
 
             // render li tag and page
-            $liClass = $isActive ? ' class="active"' : '';
+            $liClasses = array();
+            // Is page active?
+            if ($isActive) {
+                $liClasses[] = 'active';
+            }
+            // Add CSS class from page to <li>
+            if ($addClassToListItem && $page->getClass()) {
+                $liClasses[] = $page->getClass();
+            }
+            $liClass = empty($liClasses) ? '' : ' class="' . implode(' ', $liClasses) . '"';
+
             $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
-                . $myIndent . '        ' . $this->htmlify($page, $escapeLabels) . self::EOL;
+                . $myIndent . '        ' . $this->htmlify($page, $escapeLabels, $addClassToListItem) . self::EOL;
 
             // store as previous depth for next iteration
             $prevDepth = $depth;
@@ -410,13 +447,14 @@ class Menu extends AbstractHelper
         $indent = null
     ) {
         return $this->renderMenu($container, array(
-            'indent'           => $indent,
-            'ulClass'          => $ulClass,
-            'minDepth'         => null,
-            'maxDepth'         => null,
-            'onlyActiveBranch' => true,
-            'renderParents'    => false,
-            'escapeLabels'     => true
+            'indent'             => $indent,
+            'ulClass'            => $ulClass,
+            'minDepth'           => null,
+            'maxDepth'           => null,
+            'onlyActiveBranch'   => true,
+            'renderParents'      => false,
+            'escapeLabels'       => true,
+            'addClassToListItem' => false,
         ));
     }
 
@@ -430,7 +468,7 @@ class Menu extends AbstractHelper
      * @param  bool         $escapeLabel Whether or not to escape the label
      * @return string
      */
-    public function htmlify(AbstractPage $page, $escapeLabel = true)
+    public function htmlify(AbstractPage $page, $escapeLabel = true, $addClassToListItem = false)
     {
         // get label and title for translating
         $label = $page->getLabel();
@@ -451,8 +489,11 @@ class Menu extends AbstractHelper
         $attribs = array(
             'id'     => $page->getId(),
             'title'  => $title,
-            'class'  => $page->getClass()
         );
+
+        if ($addClassToListItem === false) {
+            $attribs['class'] = $page->getClass();
+        }
 
         // does page have a href?
         $href = $page->getHref();
@@ -528,6 +569,10 @@ class Menu extends AbstractHelper
             $options['renderParents'] = $this->getRenderParents();
         }
 
+        if (!isset($options['addClassToListItem'])) {
+            $options['addClassToListItem'] = $this->getAddClassToListItem();
+        }
+
         return $options;
     }
 
@@ -541,6 +586,31 @@ class Menu extends AbstractHelper
     {
         $this->escapeLabels = (bool) $flag;
         return $this;
+    }
+
+    /**
+     * Enables/disables page class applied to <li> element
+     *
+     * @param  bool $flag [optional] page class applied to <li> element
+     *                    Default is true.
+     * @return Menu  fluent interface, returns self
+     */
+    public function setAddClassToListItem($flag = true)
+    {
+        $this->addClassToListItem = (bool) $flag;
+        return $this;
+    }
+
+    /**
+     * Returns flag indicating whether page class should be applied to <li> element
+     *
+     * By default, this value is false.
+     *
+     * @return bool  whether parents should be rendered
+     */
+    public function getAddClassToListItem()
+    {
+        return $this->addClassToListItem;
     }
 
     /**

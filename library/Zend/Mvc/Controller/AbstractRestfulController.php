@@ -40,7 +40,7 @@ abstract class AbstractRestfulController extends AbstractController
 
     /**
      * Name of request or query parameter containing identifier
-     * 
+     *
      * @var string
      */
     protected $identifierName = 'id';
@@ -59,8 +59,8 @@ abstract class AbstractRestfulController extends AbstractController
 
     /**
      * Set the route match/query parameter name containing the identifier
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return self
      */
     public function setIdentifierName($name)
@@ -71,7 +71,7 @@ abstract class AbstractRestfulController extends AbstractController
 
     /**
      * Retrieve the route match/query parameter name containing the identifier
-     * 
+     *
      * @return string
      */
     public function getIdentifierName()

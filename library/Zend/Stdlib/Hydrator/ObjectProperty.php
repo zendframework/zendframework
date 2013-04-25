@@ -33,16 +33,15 @@ class ObjectProperty extends AbstractHydrator
         $data = get_object_vars($object);
 
         $filter = $this->getFilter();
-        foreach (array_keys($data) as $name) {
+        foreach ($data as $name => $value) {
+            // Filter keys, removing any we don't want
             if (!$filter->filter($name)) {
                 unset($data[$name]);
+                continue;
             }
+            // Extract data
+            $data[$name] = $this->extractValue($name, $value);
         }
-
-        $self = $this;
-        array_walk($data, function (&$value, $name) use ($self) {
-            $value = $self->extractValue($name, $value);
-        });
 
         return $data;
     }

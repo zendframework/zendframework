@@ -299,7 +299,7 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
 
 class ClientNotReset extends HttpClient
 {
-    public function resetParameters($clearCookies = false)
+    public function resetParameters($clearCookies = false, $clearAuth = true)
     {
         // Do nothing
     }

@@ -91,19 +91,9 @@ class ForwardTest extends TestCase
     public function testPluginWithoutEventAwareControllerRaisesDomainException()
     {
         $controller = new UneventfulController();
-        $plugin     = new ForwardPlugin();
+        $plugin     = new ForwardPlugin($this->controllers);
         $plugin->setController($controller);
         $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'InjectApplicationEventInterface');
-        $plugin->dispatch('forward');
-    }
-
-    public function testPluginWithoutLocatorAwareControllerRaisesDomainException()
-    {
-        $controller = new UnlocatableEventfulController();
-        $controller->setEvent($this->controller->getEvent());
-        $plugin     = new ForwardPlugin();
-        $plugin->setController($controller);
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException');
         $plugin->dispatch('forward');
     }
 

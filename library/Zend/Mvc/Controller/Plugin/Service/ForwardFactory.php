@@ -41,8 +41,6 @@ class ForwardFactory implements FactoryInterface
         }
         $controllers = $services->get('ControllerLoader');
 
-        $helper = new Forward();
-        $helper->setLocator($controllers);
-        return $helper;
+        return new Forward($controllers);
     }
 }

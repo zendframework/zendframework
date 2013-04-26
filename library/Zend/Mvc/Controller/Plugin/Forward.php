@@ -45,6 +45,14 @@ class Forward extends AbstractPlugin
     protected $listenersToDetach = null;
 
     /**
+     * @param ControllerManager $locator
+     */
+    public function __construct(ControllerManager $locator)
+    {
+        $this->setLocator($locator);
+    }
+
+    /**
      * Set maximum number of nested forwards allowed
      *
      * @param  int $maxNestedForwards
@@ -129,12 +137,6 @@ class Forward extends AbstractPlugin
     {
         $event   = clone($this->getEvent());
         $locator = $this->getLocator();
-        if (!$locator instanceof ControllerManager) {
-            throw new Exception\DomainException(sprintf(
-                '%s requires that Zend\Mvc\Controller\ControllerManager is injected via setLocator(); no manager found',
-                __METHOD__
-            ));
-        }
 
         $controller = $locator->get($name);
         if ($controller instanceof InjectApplicationEventInterface) {

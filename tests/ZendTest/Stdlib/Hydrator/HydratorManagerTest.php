@@ -15,8 +15,6 @@ use Zend\Stdlib\Hydrator\HydratorPluginManager;
 
 /**
  * @category   Zend
- * @package    Zend_Stdlib
- * @subpackage UnitTests
  * @group      Zend_Stdlib
  */
 class HydratorManagerTest extends \PHPUnit_Framework_TestCase

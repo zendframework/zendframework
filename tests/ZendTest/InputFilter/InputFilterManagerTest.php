@@ -15,8 +15,6 @@ use Zend\InputFilter\InputFilterPluginManager;
 
 /**
  * @category   Zend
- * @package    Zend_Stdlib
- * @subpackage UnitTests
  * @group      Zend_Stdlib
  */
 class InputFilterManagerTest extends \PHPUnit_Framework_TestCase

@@ -20,6 +20,13 @@ use Zend\Stdlib\Exception;
 class HydratorPluginManager extends AbstractPluginManager
 {
     /**
+     * Whether or not to share by default
+     *
+     * @var bool
+     */
+    protected $shareByDefault = false;
+
+    /**
      * Default set of adapters
      *
      * @var array

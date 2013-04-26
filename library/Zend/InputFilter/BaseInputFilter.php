@@ -12,12 +12,13 @@ namespace Zend\InputFilter;
 use ArrayAccess;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\InitializableInterface;
 
 /**
  * @todo       How should we deal with required input when data is missing?
  *             should a message be returned? if so, what message?
  */
-class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInterface
+class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInterface, InitializableInterface
 {
     protected $data;
     protected $inputs = array();
@@ -25,6 +26,16 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
     protected $validationGroup;
     protected $validInputs;
 
+    /**
+     * This function is automatically called when creating element with factory. It
+     * allows to perform various operations (add elements...)
+     *
+     * @return void
+     */
+    public function init()
+    {
+    }
+    
     /**
      * Countable: number of inputs in this input filter
      *

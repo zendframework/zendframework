@@ -9,7 +9,10 @@
 
 namespace Zend\Mvc\Service;
 
-class SerializerAdapterPluginManagerFactory extends AbstractPluginManagerFactory
+use Zend\ServiceManager\ConfigInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+class HydratorManagerFactory extends AbstractPluginManagerFactory
 {
-    const PLUGIN_MANAGER_CLASS = 'Zend\Serializer\AdapterPluginManager';
+    const PLUGIN_MANAGER_CLASS = 'Zend\Stdlib\Hydrator\HydratorPluginManager';
 }

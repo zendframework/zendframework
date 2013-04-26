@@ -7,9 +7,15 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Mvc\Service;
+namespace Zend\ModuleManager\Feature;
 
-class SerializerAdapterPluginManagerFactory extends AbstractPluginManagerFactory
+interface HydratorProviderInterface
 {
-    const PLUGIN_MANAGER_CLASS = 'Zend\Serializer\AdapterPluginManager';
+    /**
+     * Expected to return \Zend\ServiceManager\Config object or array to
+     * seed such an object.
+     *
+     * @return array|\Zend\ServiceManager\Config
+     */
+    public function getHydratorConfig();
 }

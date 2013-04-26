@@ -12,6 +12,7 @@ namespace Zend\InputFilter;
 use Zend\InputFilter\Exception;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\InitializableInterface;
 
 /**
@@ -36,7 +37,7 @@ class InputFilterPluginManager extends AbstractPluginManager
      */
     public function populateFactory($element)
     {
-        if ($element instanceof InputFilter) {
+        if ($element instanceof InputFilter && $this->serviceLocator instanceof ServiceLocatorInterface) {
             $factory = $element->getFactory();
             $factory->getDefaultFilterChain()->setPluginManager($this->serviceLocator->get('FilterManager'));
             $factory->getDefaultValidatorChain()->setPluginManager($this->serviceLocator->get('ValidatorManager'));
@@ -48,12 +49,12 @@ class InputFilterPluginManager extends AbstractPluginManager
      */
     public function validatePlugin($plugin)
     {
-        // Hook to perform various initialization, when the element is not created through the factory
-        if ($plugin instanceof InitializableInterface) {
-            $plugin->init();
-        }
-
         if ($plugin instanceof InputFilterInterface) {
+            // Hook to perform various initialization, when the element is not created through the factory
+            if ($plugin instanceof InitializableInterface) {
+                $plugin->init();
+            }
+
             // we're okay
             return;
         }

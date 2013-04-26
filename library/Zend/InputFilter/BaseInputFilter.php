@@ -35,7 +35,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
     public function init()
     {
     }
-    
+
     /**
      * Countable: number of inputs in this input filter
      *

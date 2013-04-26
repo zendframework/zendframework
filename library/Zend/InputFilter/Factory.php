@@ -20,6 +20,12 @@ class Factory
     protected $defaultFilterChain;
     protected $defaultValidatorChain;
 
+    public function __construct()
+    {
+        $this->defaultFilterChain    = new FilterChain();
+        $this->defaultValidatorChain = new ValidatorChain();
+    }
+
     /**
      * Set default filter chain to use
      *

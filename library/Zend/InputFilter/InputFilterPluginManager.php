@@ -21,6 +21,13 @@ use Zend\Stdlib\InitializableInterface;
 class InputFilterPluginManager extends AbstractPluginManager
 {
     /**
+     * Whether or not to share by default
+     *
+     * @var bool
+     */
+    protected $shareByDefault = false;
+
+    /**
      * @param ConfigInterface $configuration
      */
     public function __construct(ConfigInterface $configuration = null)

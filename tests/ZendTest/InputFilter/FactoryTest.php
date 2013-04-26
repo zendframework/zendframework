@@ -19,16 +19,16 @@ use Zend\Validator;
 
 class FactoryTest extends TestCase
 {
-    public function testFactoryDoesNotComposeFilterChainByDefault()
+    public function testFactoryComposesFilterChainByDefault()
     {
         $factory = new Factory();
-        $this->assertNull($factory->getDefaultFilterChain());
+        $this->assertInstanceOf('Zend\Filter\FilterChain', $factory->getDefaultFilterChain());
     }
 
-    public function testFactoryDoesNotComposeValidatorChainByDefault()
+    public function testFactoryComposesValidatorChainByDefault()
     {
         $factory = new Factory();
-        $this->assertNull($factory->getDefaultValidatorChain());
+        $this->assertInstanceOf('Zend\Validator\ValidatorChain', $factory->getDefaultValidatorChain());
     }
 
     public function testFactoryAllowsInjectingFilterChain()

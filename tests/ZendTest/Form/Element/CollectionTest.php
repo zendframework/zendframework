@@ -15,6 +15,8 @@ use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
 use Zend\Form\Element\Collection as Collection;
+use Zend\Form\Fieldset;
+use Zend\Form\Form;
 use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 use ZendTest\Form\TestAsset\Entity\Product;
 
@@ -434,6 +436,37 @@ class CollectionTest extends TestCase
         );
 
         $this->assertEquals($expected, $collection->extract());
+    }
+
+    public function testValidateData()
+    {
+        $myFieldset = new Fieldset();
+        $myFieldset->add(array(
+            'name' => 'email',
+            'type' => 'Email',
+        ));
+
+        $myForm = new Form();
+        $myForm->add(array(
+            'name' => 'collection',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $myFieldset,
+            ),
+        ));
+
+        $data = array(
+            'collection' => array(
+                array('email' => 'test1@test1.com'),
+                array('email' => 'test2@test2.com'),
+                array('email' => 'test3@test3.com'),
+            )
+        );
+
+        $myForm->setData($data);
+
+        $this->assertTrue($myForm->isValid());
+        $this->assertEmpty($myForm->getMessages());
     }
 
     protected function prepareForExtract($collection)

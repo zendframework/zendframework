@@ -705,26 +705,28 @@ class Form extends Fieldset implements FormInterface
             $elements = $fieldset->getElements();
         }
 
-        foreach ($elements as $element) {
-            $name = $element->getName();
+        if (!$fieldset instanceof Collection || $inputFilter instanceof CollectionInputFilter) {
+            foreach ($elements as $element) {
+                $name = $element->getName();
 
-            if ($this->preferFormInputFilter && $inputFilter->has($name)) {
-                continue;
-            }
-
-            if (!$element instanceof InputProviderInterface) {
-                if ($inputFilter->has($name)) {
+                if ($this->preferFormInputFilter && $inputFilter->has($name)) {
                     continue;
                 }
-                // Create a new empty default input for this element
-                $spec = array('name' => $name, 'required' => false);
-            } else {
-                // Create an input based on the specification returned from the element
-                $spec  = $element->getInputSpecification();
-            }
 
-            $input = $inputFactory->createInput($spec);
-            $inputFilter->add($input, $name);
+                if (!$element instanceof InputProviderInterface) {
+                    if ($inputFilter->has($name)) {
+                        continue;
+                    }
+                    // Create a new empty default input for this element
+                    $spec = array('name' => $name, 'required' => false);
+                } else {
+                    // Create an input based on the specification returned from the element
+                    $spec  = $element->getInputSpecification();
+                }
+
+                $input = $inputFactory->createInput($spec);
+                $inputFilter->add($input, $name);
+            }
         }
 
         foreach ($fieldset->getFieldsets() as $childFieldset) {

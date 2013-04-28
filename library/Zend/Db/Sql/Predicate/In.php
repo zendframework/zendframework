@@ -9,8 +9,8 @@
 
 namespace Zend\Db\Sql\Predicate;
 
-use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Exception;
+use Zend\Db\Sql\Select;
 
 class In implements PredicateInterface
 {

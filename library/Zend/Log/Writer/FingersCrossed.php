@@ -10,13 +10,13 @@ namespace Zend\Log\Writer;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Log\Filter\Priority as PriorityFilter;
-use Zend\Log\Filter\FilterInterface;
-use Zend\Log\Formatter\FormatterInterface;
 use Zend\Log\Exception;
+use Zend\Log\Filter\FilterInterface;
+use Zend\Log\Filter\Priority as PriorityFilter;
+use Zend\Log\Formatter\FormatterInterface;
 use Zend\Log\Logger;
-use Zend\Log\Writer\WriterInterface;
 use Zend\Log\Writer\AbstractWriter;
+use Zend\Log\Writer\WriterInterface;
 use Zend\Log\WriterPluginManager;
 
 /**

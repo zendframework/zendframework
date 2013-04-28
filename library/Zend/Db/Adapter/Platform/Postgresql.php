@@ -10,8 +10,8 @@
 namespace Zend\Db\Adapter\Platform;
 
 use Zend\Db\Adapter\Driver\DriverInterface;
-use Zend\Db\Adapter\Driver\Pgsql;
 use Zend\Db\Adapter\Driver\Pdo;
+use Zend\Db\Adapter\Driver\Pgsql;
 use Zend\Db\Adapter\Exception;
 
 class Postgresql implements PlatformInterface

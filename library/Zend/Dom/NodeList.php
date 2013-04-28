@@ -9,12 +9,12 @@
 
 namespace Zend\Dom;
 
+use ArrayAccess;
 use Countable;
 use DOMDocument;
 use DOMNodeList;
 use DOMNode;
 use Iterator;
-use ArrayAccess;
 
 /**
  * Nodelist for DOM XPath query

@@ -9,8 +9,8 @@
 
 namespace Zend\Captcha;
 
-use Zend\Session\Container;
 use Zend\Math\Rand;
+use Zend\Session\Container;
 
 /**
  * AbstractWord-based captcha adapter

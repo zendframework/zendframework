@@ -12,8 +12,8 @@ namespace Zend\InputFilter;
 use Traversable;
 use Zend\Filter\FilterChain;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Validator\ValidatorChain;
 use Zend\Validator\ValidatorInterface;
+use Zend\Validator\ValidatorChain;
 
 class Factory
 {

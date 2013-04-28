@@ -18,9 +18,9 @@
 
 namespace Zend\Form\Element;
 
-use Zend\Form\FormInterface;
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
+use Zend\Form\FormInterface;
 use Zend\InputFilter\InputProviderInterface;
 
 /**

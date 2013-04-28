@@ -9,9 +9,9 @@
 
 namespace Zend\Log\Writer;
 
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\Log\Formatter;
 use Zend\Log\Exception;
+use Zend\Log\Formatter;
+use Zend\ServiceManager\AbstractPluginManager;
 
 class FormatterPluginManager extends AbstractPluginManager
 {

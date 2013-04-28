@@ -9,8 +9,8 @@
 
 namespace Zend\Stdlib\Hydrator\Filter;
 
-use ReflectionMethod;
 use ReflectionException;
+use ReflectionMethod;
 use Zend\Stdlib\Exception\InvalidArgumentException;
 use Zend\Stdlib\Hydrator\Filter\FilterInterface;
 

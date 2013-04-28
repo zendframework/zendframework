@@ -10,10 +10,10 @@
 namespace Zend\Mvc\Service;
 
 use stdClass;
+use Zend\Console\Adapter\AdapterInterface;
+use Zend\Console\Console;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Console\Console;
-use Zend\Console\Adapter\AdapterInterface;
 
 class ConsoleAdapterFactory implements FactoryInterface
 {

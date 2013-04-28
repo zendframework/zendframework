@@ -9,8 +9,8 @@
 
 namespace Zend\Authentication\Storage;
 
-use Zend\Stdlib\PriorityQueue;
 use Zend\Authentication\Storage\StorageInterface;
+use Zend\Stdlib\PriorityQueue;
 
 class Chain implements StorageInterface
 {

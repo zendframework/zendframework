@@ -10,9 +10,9 @@
 namespace Zend\Di;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Di\Definition\ArrayDefinition;
 use Zend\Di\Definition\RuntimeDefinition;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Configures Di instances

@@ -9,9 +9,9 @@
 
 namespace Zend\Form;
 
+use Zend\Form\Factory;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Form\Factory;
 
 /**
  * Abstract form factory.

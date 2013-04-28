@@ -11,7 +11,6 @@ namespace Zend\Cache\Storage\Adapter;
 
 use Redis as RedisResource;
 use RedisException as RedisResourceException;
-
 use stdClass;
 use Zend\Cache\Storage\Adapter\AbstractAdapter;
 use Zend\Cache\Exception;

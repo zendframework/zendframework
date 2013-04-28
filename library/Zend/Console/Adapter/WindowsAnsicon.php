@@ -9,9 +9,9 @@
 
 namespace Zend\Console\Adapter;
 
+use Zend\Console\Charset;
 use Zend\Console\Charset\CharsetInterface;
 use Zend\Console\Exception;
-use Zend\Console\Charset;
 
 /**
  * MS Windows with ANSICON console adapter

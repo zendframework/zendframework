@@ -9,10 +9,10 @@
 
 namespace Zend\ModuleManager\Listener;
 
-use Zend\Loader\ModuleAutoloader;
-use Zend\ModuleManager\ModuleEvent;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Loader\ModuleAutoloader;
+use Zend\ModuleManager\ModuleEvent;
 
 /**
  * Module loader listener

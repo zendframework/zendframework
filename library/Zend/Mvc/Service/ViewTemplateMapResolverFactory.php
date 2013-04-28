@@ -9,9 +9,9 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\View\Resolver as ViewResolver;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View\Resolver as ViewResolver;
 
 class ViewTemplateMapResolverFactory implements FactoryInterface
 {

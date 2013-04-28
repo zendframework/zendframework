@@ -9,10 +9,10 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Mvc\Exception\RuntimeException;
-use Zend\Mvc\Exception\InvalidArgumentException;
 use Zend\ModuleManager\Listener\ServiceListener;
 use Zend\ModuleManager\Listener\ServiceListenerInterface;
+use Zend\Mvc\Exception\InvalidArgumentException;
+use Zend\Mvc\Exception\RuntimeException;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

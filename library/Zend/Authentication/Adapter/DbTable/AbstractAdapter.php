@@ -149,7 +149,7 @@ abstract class AbstractAdapter extends BaseAdapter
      */
     public function setAmbiguityIdentity($flag)
     {
-        if (is_integer($flag)) {
+        if (is_int($flag)) {
             $this->ambiguityIdentity = (1 === $flag ? true : false);
         } elseif (is_bool($flag)) {
             $this->ambiguityIdentity = $flag;

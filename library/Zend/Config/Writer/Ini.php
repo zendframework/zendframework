@@ -143,7 +143,7 @@ class Ini extends AbstractWriter
      */
     protected function prepareValue($value)
     {
-        if (is_integer($value) || is_float($value)) {
+        if (is_int($value) || is_float($value)) {
             return $value;
         } elseif (is_bool($value)) {
             return ($value ? 'true' : 'false');

@@ -78,12 +78,11 @@ class Decoder
     /**
      * Constructor
      *
-     * @param string $source String source to decode
-     * @param int $decodeType How objects should be decoded -- see
+     * @param string $source     String source to decode
+     * @param int    $decodeType How objects should be decoded -- see
      * {@link Zend\Json\Json::TYPE_ARRAY} and {@link Zend\Json\Json::TYPE_OBJECT} for
      * valid values
      * @throws InvalidArgumentException
-     * @return void
      */
     protected function __construct($source, $decodeType)
     {

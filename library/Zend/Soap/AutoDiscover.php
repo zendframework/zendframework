@@ -150,8 +150,9 @@ class AutoDiscover
     /**
      * Set the class map of php to wsdl qname types.
      *
-     * @param array $classmap
+     * @param  array $classmap
      * @return AutoDiscover
+     * @throws Exception\InvalidArgumentException
      */
     public function setClassMap($classMap)
     {

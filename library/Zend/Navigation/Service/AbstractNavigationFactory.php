@@ -124,9 +124,10 @@ abstract class AbstractNavigationFactory implements FactoryInterface
                 if (!isset($page['routeMatch']) && $routeMatch) {
                     $page['routeMatch'] = $routeMatch;
                 }
-                if (!isset($page['router'])) {
-                    $page['router'] = $router;
-                }
+            }
+			
+            if (!isset($page['router'])) {
+                $page['router'] = $router;
             }
 
             if (isset($page['pages'])) {

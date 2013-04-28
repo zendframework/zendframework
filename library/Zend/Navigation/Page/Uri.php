@@ -10,6 +10,7 @@
 namespace Zend\Navigation\Page;
 
 use Zend\Navigation\Exception;
+use Zend\Mvc\Router\RouteStackInterface;
 
 /**
  * Represents a page that is defined by specifying a URI
@@ -22,6 +23,13 @@ class Uri extends AbstractPage
      * @var string|null
      */
     protected $uri = null;
+    
+    /**
+     * RouteInterface used to determine request uri path
+     *
+     * @var string
+     */
+    protected $route;
 
     /**
      * Sets page URI
@@ -75,6 +83,52 @@ class Uri extends AbstractPage
 
         return $uri;
     }
+    
+    public function isActive($recursive = false)
+    {
+        $uri = $this->getUri();
+        
+        if (!$this->active) {
+            $router = $this->getRouter();
+            if (!$router instanceof RouteStackInterface) {
+                throw new Exception\DomainException(
+                        __METHOD__
+                        . ' cannot execute as no Zend\Mvc\Router\RouteStackInterface instance is composed'
+                );
+            }
+            
+            if ($router->getRequestUri()->getPath() == $uri) {
+                $this->active = true;
+                return true;
+            }
+        }
+    
+        return parent::isActive($recursive);
+    }
+    
+    /**
+     * Get the router.
+     *
+     * @return null|RouteStackInterface
+     */
+    public function getRouter()
+    {
+        return $this->router;
+    }
+    
+    /**
+     * Sets router for assembling URLs
+     *
+     * @see getHref()
+     *
+     * @param  RouteStackInterface $router Router
+     * @return Mvc    fluent interface, returns self
+     */
+    public function setRouter(RouteStackInterface $router)
+    {
+        $this->router = $router;
+        return $this;
+    }
 
     /**
      * Returns an array representation of the page
@@ -90,4 +144,5 @@ class Uri extends AbstractPage
             )
         );
     }
+    
 }

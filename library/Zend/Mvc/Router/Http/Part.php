@@ -52,7 +52,7 @@ class Part extends TreeRouteStack implements RouteInterface
      * @param  bool               $mayTerminate
      * @param  RoutePluginManager $routePlugins
      * @param  array|null         $childRoutes
-     * @param  ArrayObject        $prototypes
+     * @param  ArrayObject|null   $prototypes
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($route, $mayTerminate, RoutePluginManager $routePlugins, array $childRoutes = null, ArrayObject $prototypes = null)

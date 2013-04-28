@@ -41,9 +41,9 @@ class Chain extends TreeRouteStack implements RouteInterface
      *
      * @param  array              $routes
      * @param  RoutePluginManager $routePlugins
-     * @param  ArrayObject        $prototypes
+     * @param  ArrayObject|null   $prototypes
      */
-    public function __construct(array $routes, RoutePluginManager $routePlugins, ArrayObject $prototypes)
+    public function __construct(array $routes, RoutePluginManager $routePlugins, ArrayObject $prototypes = null)
     {
         $this->chainRoutes         = array_reverse($routes);
         $this->routePluginManager  = $routePlugins;
@@ -68,11 +68,11 @@ class Chain extends TreeRouteStack implements RouteInterface
         }
 
         if (!isset($options['routes'])) {
-            throw new Exception\InvalidArgumentException('Missing "route" in options array');
+            throw new Exception\InvalidArgumentException('Missing "routes" in options array');
         }
 
         if (!isset($options['prototypes'])) {
-            throw new Exception\InvalidArgumentException('Missing "prototypes" in options array');
+            $options['prototypes'] = null;
         }
 
         if ($options['routes'] instanceof Traversable) {
@@ -96,9 +96,10 @@ class Chain extends TreeRouteStack implements RouteInterface
      * @see    \Zend\Mvc\Router\RouteInterface::match()
      * @param  Request  $request
      * @param  int|null $pathOffset
+     * @param  array    $options
      * @return RouteMatch|null
      */
-    public function match(Request $request, $pathOffset = null)
+    public function match(Request $request, $pathOffset = null, array $options = array())
     {
         if (!method_exists($request, 'getUri')) {
             return null;
@@ -121,7 +122,7 @@ class Chain extends TreeRouteStack implements RouteInterface
         $pathLength = strlen($uri->getPath());
 
         foreach ($this->routes as $route) {
-            $subMatch = $route->match($request, $pathOffset);
+            $subMatch = $route->match($request, $pathOffset, $options);
 
             if ($subMatch === null) {
                 return null;
@@ -161,7 +162,7 @@ class Chain extends TreeRouteStack implements RouteInterface
 
         foreach ($this->routes as $key => $route) {
             $chainOptions = $options;
-            $chainOptions['has_child'] = ($options['has_child'] || $key !== $lastRouteKey);
+            $chainOptions['has_child'] = ((isset($options['has_child']) ? $options['has_child'] : false) || $key !== $lastRouteKey);
 
             $path   .= $route->assemble($params, $chainOptions);
             $params  = array_diff_key($params, array_flip($route->getAssembledParams()));

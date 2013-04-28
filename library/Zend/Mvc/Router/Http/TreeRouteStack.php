@@ -150,22 +150,25 @@ class TreeRouteStack extends SimpleRouteStack
 
         if ($baseUrlLength !== null) {
             $pathLength = strlen($uri->getPath()) - $baseUrlLength;
-
-            foreach ($this->routes as $name => $route) {
-                if (($match = $route->match($request, $baseUrlLength, $options)) instanceof RouteMatch && $match->getLength() === $pathLength) {
-                    $match->setMatchedRouteName($name);
-
-                    foreach ($this->defaultParams as $paramName => $value) {
-                        if ($match->getParam($paramName) === null) {
-                            $match->setParam($paramName, $value);
-                        }
-                    }
-
-                    return $match;
-                }
-            }
         } else {
-            return parent::match($request);
+            $pathLength = null;
+        }
+
+        foreach ($this->routes as $name => $route) {
+            if (
+                ($match = $route->match($request, $baseUrlLength, $options)) instanceof RouteMatch
+                && ($pathLength === null || $match->getLength() === $pathLength)
+            ) {
+                $match->setMatchedRouteName($name);
+
+                foreach ($this->defaultParams as $paramName => $value) {
+                    if ($match->getParam($paramName) === null) {
+                        $match->setParam($paramName, $value);
+                    }
+                }
+
+                return $match;
+            }
         }
 
         return null;

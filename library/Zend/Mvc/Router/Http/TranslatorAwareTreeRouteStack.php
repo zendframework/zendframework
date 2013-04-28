@@ -11,6 +11,7 @@ namespace Zend\Mvc\Router\Http;
 
 use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
+use Zend\Stdlib\RequestInterface as Request;
 
 /**
  * Translator aware tree route stack.

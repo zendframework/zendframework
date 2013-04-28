@@ -26,6 +26,16 @@ use Zend\Stdlib\ArrayUtils;
 class Translator
 {
     /**
+     * Event fired when the translation for a message is missing.
+     */
+    const EVENT_MISSING_TRANSLATION = 'missingTranslation';
+
+    /**
+     * Event fired when no messages were loaded for a locale/text-domain combination.
+     */
+    const EVENT_NO_MESSAGES_LOADED = 'noMessagesLoaded';
+
+    /**
      * Messages loaded by the translator.
      *
      * @var array
@@ -427,7 +437,7 @@ class Translator
 
         if ($this->isEventManagerEnabled()) {
             $this->getEventManager()->trigger(
-                'getTranslatedMessage.missing-translation',
+                self::EVENT_MISSING_TRANSLATION,
                 $this,
                 array(
                     'message'     => $message,
@@ -548,7 +558,7 @@ class Translator
         if (!$messagesLoaded) {
             if ($this->isEventManagerEnabled()) {
                 $this->getEventManager()->trigger(
-                    'loadMessages.no-messages-loaded',
+                    self::EVENT_NO_MESSAGES_LOADED,
                     $this,
                     array(
                         'locale'      => $locale,
@@ -696,8 +706,8 @@ class Translator
     {
         $events->setIdentifiers(array(
             __CLASS__,
-            get_called_class(),
-            'module_manager',
+            get_class($this),
+            'translator',
         ));
         $this->events = $events;
         return $this;

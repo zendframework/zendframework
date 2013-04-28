@@ -263,7 +263,7 @@ class TranslatorTest extends TestCase
         $actualEvent = null;
 
         $this->translator->enableEventManager();
-        $this->translator->getEventManager()->attach('getTranslatedMessage.missing-translation', function(EventInterface $event) use (&$actualEvent) {
+        $this->translator->getEventManager()->attach(Translator::EVENT_MISSING_TRANSLATION, function(EventInterface $event) use (&$actualEvent) {
             $actualEvent = $event;
         });
 
@@ -291,7 +291,7 @@ class TranslatorTest extends TestCase
         $actualEvent = null;
 
         $this->translator->enableEventManager();
-        $this->translator->getEventManager()->attach('loadMessages.no-messages-loaded', function(EventInterface $event) use (&$actualEvent) {
+        $this->translator->getEventManager()->attach(Translator::EVENT_NO_MESSAGES_LOADED, function(EventInterface $event) use (&$actualEvent) {
             $actualEvent = $event;
         });
 

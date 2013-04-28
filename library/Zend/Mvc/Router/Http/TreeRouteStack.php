@@ -145,7 +145,7 @@ class TreeRouteStack extends SimpleRouteStack
                 throw new Exception\InvalidArgumentException('Chain routes must be an array or Traversable object');
             }
 
-            $chainRoutes = array($specs) + $specs['chain_routes'];
+            $chainRoutes = array_merge(array($specs), $specs['chain_routes']);
             unset($chainRoutes[0]['chain_routes']);
 
             $options = array(

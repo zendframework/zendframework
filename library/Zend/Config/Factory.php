@@ -256,7 +256,7 @@ class Factory
      *
      * @param string $extension
      * @param string|Writer\AbstractWriter $writer
-     * @throw Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
     public static function registerWriter($extension, $writer)

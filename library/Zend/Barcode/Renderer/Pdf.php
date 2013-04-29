@@ -138,13 +138,13 @@ class Pdf extends AbstractRenderer
 
     /**
      * Draw a polygon in the rendering resource
-     * @param string $text
-     * @param float $size
-     * @param array $position
-     * @param string $font
+     * @param string  $text
+     * @param float   $size
+     * @param array   $position
+     * @param string  $font
      * @param integer $color
-     * @param string $alignment
-     * @param float $orientation
+     * @param string  $alignment
+     * @param float   $orientation
      */
     protected function drawText(
         $text,

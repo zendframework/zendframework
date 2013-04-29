@@ -27,12 +27,11 @@ class CallbackCheckAdapter extends AbstractAdapter
     /**
      * __construct() - Sets configuration options
      *
-     * @param  DbAdapter $zendDb
-     * @param  string    $tableName           Optional
-     * @param  string    $identityColumn      Optional
-     * @param  string    $credentialColumn    Optional
-     * @param  callable  $credentialValidationCallback   Optional
-     * @return \Zend\Authentication\Adapter\DbTable
+     * @param DbAdapter $zendDb
+     * @param string    $tableName                    Optional
+     * @param string    $identityColumn               Optional
+     * @param string    $credentialColumn             Optional
+     * @param callable  $credentialValidationCallback Optional
      */
     public function __construct(
         DbAdapter $zendDb,

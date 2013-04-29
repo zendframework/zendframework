@@ -168,7 +168,8 @@ abstract class AbstractRestfulController extends AbstractController
      * Not marked as abstract, as that would introduce a BC break
      * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
-     * @return mixed
+     * @param  $id
+     * @param  $data
      * @throws Exception\RuntimeException
      */
     public function patch($id, $data)

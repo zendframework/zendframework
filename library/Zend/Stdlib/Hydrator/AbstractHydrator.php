@@ -102,9 +102,9 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
     /**
      * Converts a value for extraction. If no strategy exists the plain value is returned.
      *
-     * @param string $name The name of the strategy to use.
-     * @param mixed $value The value that should be converted.
-     * @param array $data The object is optionally provided as context.
+     * @param  string $name  The name of the strategy to use.
+     * @param  mixed  $value  The value that should be converted.
+     * @param  array  $object The object is optionally provided as context.
      * @return mixed
      */
     public function extractValue($name, $value, $object = null)

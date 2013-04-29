@@ -155,8 +155,8 @@ class Server extends AbstractServer
      * Handle request
      *
      * @param  Request $request
-     * @throws Exception\InvalidArgumentException
      * @return null|Response
+     * @throws Exception\InvalidArgumentException
      */
     public function handle($request = false)
     {

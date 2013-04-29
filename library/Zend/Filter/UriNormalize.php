@@ -34,8 +34,7 @@ class UriNormalize extends AbstractFilter
     /**
      * Sets filter options
      *
-     * @param  array|\Traversable|null $options
-     * @return void
+     * @param array|\Traversable|null $options
      */
     public function __construct($options = null)
     {

@@ -132,7 +132,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Set resource
      *
-     * @param  mysqli $resource
+     * @param  \mysqli $resource
      * @return Connection
      */
     public function setResource(\mysqli $resource)

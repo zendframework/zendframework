@@ -48,6 +48,10 @@ class Stream
     /**
      * Opens the script file and converts markup.
      *
+     * @param  string $path
+     * @param         $mode
+     * @param         $options
+     * @param         $opened_path
      * @return bool
      */
     public function stream_open($path, $mode, $options, &$opened_path)
@@ -95,7 +99,8 @@ class Stream
     /**
      * Reads from the stream.
      *
-     * @return string|false
+     * @param  int $count
+     * @return string
      */
     public function stream_read($count)
     {
@@ -141,6 +146,8 @@ class Stream
     /**
      * Seek to a specific point in the stream.
      *
+     * @param  $offset
+     * @param  $whence
      * @return bool
      */
     public function stream_seek($offset, $whence)

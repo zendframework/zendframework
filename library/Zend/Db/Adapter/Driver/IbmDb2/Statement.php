@@ -10,8 +10,8 @@
 namespace Zend\Db\Adapter\Driver\IbmDb2;
 
 use Zend\Db\Adapter\Driver\StatementInterface;
-use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Profiler;
 
 class Statement implements StatementInterface, Profiler\ProfilerAwareInterface

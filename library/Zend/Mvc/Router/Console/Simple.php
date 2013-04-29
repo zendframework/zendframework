@@ -22,13 +22,13 @@
 namespace Zend\Mvc\Router\Console;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\RequestInterface as Request;
-use Zend\Mvc\Router\Exception;
 use Zend\Console\Request as ConsoleRequest;
 use Zend\Filter\FilterChain;
-use Zend\Validator\ValidatorChain;
 use Zend\Mvc\Exception\InvalidArgumentException;
+use Zend\Mvc\Router\Exception;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Validator\ValidatorChain;
 
 /**
  * Segment route.

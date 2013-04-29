@@ -13,8 +13,8 @@ use ProxyManager\Factory\LazyLoadingValueHolderFactory;
 
 use ProxyManager\Proxy\LazyLoadingInterface;
 use Zend\ServiceManager\DelegatorFactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\Exception;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Delegator factory responsible of instantiating lazy loading value holder proxies of

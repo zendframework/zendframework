@@ -9,15 +9,14 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Http\Request;
 use Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart;
+use Zend\Http\Request;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Zend\View\Model\ModelInterface;
 use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Exception\InvalidArgumentException;
 use Zend\Mvc\Exception\DomainException;
-
+use Zend\Mvc\Exception\InvalidArgumentException;
+use Zend\View\Model\ModelInterface;
 
 /**
  * Controller Plugin to assist in selecting an appropriate View Model type based on the

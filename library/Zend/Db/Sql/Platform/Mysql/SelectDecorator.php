@@ -13,8 +13,8 @@ use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
-use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
 use Zend\Db\Adapter\StatementContainerInterface;
+use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
 use Zend\Db\Sql\Select;
 
 class SelectDecorator extends Select implements PlatformDecoratorInterface

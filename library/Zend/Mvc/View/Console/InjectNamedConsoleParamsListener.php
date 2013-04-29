@@ -9,10 +9,10 @@
 
 namespace Zend\Mvc\View\Console;
 
+use Zend\Console\Request as ConsoleRequest;
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface as Events;
 use Zend\Mvc\MvcEvent;
-use Zend\Console\Request as ConsoleRequest;
 
 class InjectNamedConsoleParamsListener extends AbstractListenerAggregate
 {

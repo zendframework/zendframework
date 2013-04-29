@@ -9,10 +9,10 @@
 
 namespace Zend\Navigation\Page;
 
+use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface;
 use Zend\Navigation\Exception;
-use Zend\Mvc\ModuleRouteListener;
 
 /**
  * Represents a page that is defined using controller, action, route

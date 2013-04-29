@@ -9,9 +9,9 @@
 
 namespace Zend\Mvc\Controller\Plugin\Service;
 
+use Zend\Mvc\Controller\Plugin\Identity;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Mvc\Controller\Plugin\Identity;
 
 class IdentityFactory implements FactoryInterface
 {

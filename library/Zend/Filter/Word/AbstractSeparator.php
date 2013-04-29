@@ -9,8 +9,8 @@
 
 namespace Zend\Filter\Word;
 
-use Zend\Filter\Exception;
 use Zend\Filter\AbstractFilter;
+use Zend\Filter\Exception;
 
 abstract class AbstractSeparator extends AbstractFilter
 {

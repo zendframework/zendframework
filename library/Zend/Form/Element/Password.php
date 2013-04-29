@@ -18,9 +18,9 @@
 
 namespace Zend\Form\Element;
 
-use Zend\Form\FormInterface;
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
+use Zend\Form\FormInterface;
 
 /**
  * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)

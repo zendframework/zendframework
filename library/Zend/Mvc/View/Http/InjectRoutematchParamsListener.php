@@ -9,10 +9,10 @@
 
 namespace Zend\Mvc\View\Http;
 
+use Zend\Console\Request as ConsoleRequest;
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Http\Request as HttpRequest;
-use Zend\Console\Request as ConsoleRequest;
 use Zend\Mvc\MvcEvent;
 
 class InjectRoutematchParamsListener extends AbstractListenerAggregate

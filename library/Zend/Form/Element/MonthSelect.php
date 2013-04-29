@@ -14,8 +14,8 @@ use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
 use Zend\Form\FormInterface;
 use Zend\InputFilter\InputProviderInterface;
-use Zend\Validator\ValidatorInterface;
 use Zend\Validator\Regex as RegexValidator;
+use Zend\Validator\ValidatorInterface;
 
 class MonthSelect extends Element implements InputProviderInterface, ElementPrepareAwareInterface
 {

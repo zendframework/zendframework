@@ -20,7 +20,8 @@ class ModuleLoader
 
     /**
      * Load list of modules or application configuration
-     * @param array $modules
+     *
+     * @param array $configuration
      */
     public function __construct(array $configuration)
     {
@@ -50,6 +51,7 @@ class ModuleLoader
 
     /**
      * Get the application
+     *
      * @return Zend\Mvc\Application
      */
     public function getApplication()
@@ -59,6 +61,7 @@ class ModuleLoader
 
     /**
      * Get the module manager
+     *
      * @return Zend\ModuleManager\ModuleManager
      */
     public function getModuleManager()
@@ -68,6 +71,7 @@ class ModuleLoader
 
     /**
      * Get module
+     *
      * @return mixed
      */
     public function getModule($moduleName)
@@ -77,6 +81,7 @@ class ModuleLoader
 
     /**
      * Get the service manager
+     *
      * @var ServiceManager
      */
     public function getServiceManager()

@@ -9,16 +9,18 @@
 
 namespace Zend\Paginator\Adapter;
 
-use Zend\Paginator\Adapter\DbSelect;
+use Zend\Db\Sql\Where;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Paginator\Adapter\DbSelect;
 
 class DbTableGateway extends DbSelect
 {
     /**
-     * Construnct
+     * Constructs instance.
      *
      * @param TableGateway                $tableGateway
      * @param Where|\Closure|string|array $where
+     * @param null                        $order
      */
     public function __construct(TableGateway $tableGateway, $where = null, $order = null)
     {

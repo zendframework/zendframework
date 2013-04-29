@@ -87,7 +87,7 @@ interface PlatformInterface
      * Quote identifier in fragment
      *
      * @param  string $identifier
-     * @param  array $safeWords
+     * @param  array $additionalSafeWords
      * @return string
      */
     public function quoteIdentifierInFragment($identifier, array $additionalSafeWords = array());

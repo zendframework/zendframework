@@ -9,9 +9,9 @@
 
 namespace Zend\Authentication\Adapter\Http;
 
+use Zend\Authentication\Result as AuthResult;
 use Zend\Crypt\Password\Apache as ApachePassword;
 use Zend\Stdlib\ErrorHandler;
-use Zend\Authentication\Result as AuthResult;
 
 /**
  * Apache Authentication Resolver

@@ -10,8 +10,8 @@
 namespace Zend\Crypt\PublicKey;
 
 use Traversable;
-use Zend\Crypt\PublicKey\RsaOptions;
 use Zend\Crypt\PublicKey\Rsa\Exception;
+use Zend\Crypt\PublicKey\RsaOptions;
 use Zend\Stdlib\ArrayUtils;
 
 /**

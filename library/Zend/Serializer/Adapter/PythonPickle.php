@@ -11,9 +11,9 @@ namespace Zend\Serializer\Adapter;
 
 use stdClass;
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Serializer\Exception;
 use Zend\Math\BigInteger;
+use Zend\Serializer\Exception;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @link       http://www.python.org

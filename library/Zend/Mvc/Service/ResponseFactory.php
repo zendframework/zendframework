@@ -9,9 +9,9 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Http\PhpEnvironment\Response as HttpResponse;
-use Zend\Console\Response as ConsoleResponse;
 use Zend\Console\Console;
+use Zend\Console\Response as ConsoleResponse;
+use Zend\Http\PhpEnvironment\Response as HttpResponse;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

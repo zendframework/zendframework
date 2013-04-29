@@ -9,9 +9,9 @@
 
 namespace Zend\Code\Reflection\DocBlock;
 
-use Zend\Code\Reflection\Exception;
 use Zend\Code\Reflection\DocBlock\Tag\GenericTag;
 use Zend\Code\Reflection\DocBlock\Tag\TagInterface;
+use Zend\Code\Reflection\Exception;
 
 class TagManager
 {

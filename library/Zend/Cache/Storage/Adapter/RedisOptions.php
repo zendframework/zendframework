@@ -9,9 +9,8 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use Zend\Cache\Storage\Adapter\AdapterOptions;
-
 use Redis as RedisResource;
+use Zend\Cache\Storage\Adapter\AdapterOptions;
 
 class RedisOptions extends AdapterOptions
 {

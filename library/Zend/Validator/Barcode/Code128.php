@@ -9,9 +9,9 @@
 
 namespace Zend\Validator\Barcode;
 
-use Zend\Validator\Exception;
 use Zend\Stdlib\StringUtils;
 use Zend\Stdlib\StringWrapper\StringWrapperInterface;
+use Zend\Validator\Exception;
 
 class Code128 extends AbstractAdapter
 {

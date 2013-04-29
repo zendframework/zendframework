@@ -17,8 +17,8 @@ use Zend\Mvc\MvcEvent;
 use Zend\Mvc\ResponseSender\ConsoleResponseSender;
 use Zend\Mvc\ResponseSender\HttpResponseSender;
 use Zend\Mvc\ResponseSender\PhpEnvironmentResponseSender;
-use Zend\Mvc\ResponseSender\SimpleStreamResponseSender;
 use Zend\Mvc\ResponseSender\SendResponseEvent;
+use Zend\Mvc\ResponseSender\SimpleStreamResponseSender;
 use Zend\Stdlib\ResponseInterface as Response;
 
 class SendResponseListener implements

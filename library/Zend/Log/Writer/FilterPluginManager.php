@@ -9,9 +9,9 @@
 
 namespace Zend\Log\Writer;
 
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\Log\Filter;
 use Zend\Log\Exception;
+use Zend\Log\Filter;
+use Zend\ServiceManager\AbstractPluginManager;
 
 class FilterPluginManager extends AbstractPluginManager
 {

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
 namespace ZendTest\Mvc\Router\Console;
 
 use PHPUnit_Framework_TestCase as TestCase;
@@ -669,18 +677,170 @@ class SimpleTest extends TestCase
                 ),
             ),
 
-            /*'combined-2' => array(
-                '--foo --bar',
-                array('a','b', 'c', '--foo', '--bar'),
+            /**
+             * @bug ZF2-4315
+             * @link https://github.com/zendframework/zf2/issues/4315
+             */
+            'literal-with-dashes' => array(
+                'foo-bar-baz [--bar=]',
+                array('foo-bar-baz',),
                 array(
-                    0     => 'a',
-                    1     => 'b',
-                    2     => 'c',
-                    'foo' => true,
-                    'bar' => true,
-                    'baz' => null
+                    'foo-bar-baz' => true,
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
                 )
-            ),*/
+            ),
+
+            'literal-optional-with-dashes' => array(
+                '[foo-bar-baz] [--bar=]',
+                array('foo-bar-baz'),
+                array(
+                    'foo-bar-baz' => true,
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+            'literal-optional-with-dashes2' => array(
+                'foo [foo-bar-baz] [--bar=]',
+                array('foo'),
+                array(
+                    'foo-bar-baz' => false,
+                    'foo'         => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+            'literal-alternative-with-dashes' => array(
+                '(foo-bar|foo-baz) [--bar=]',
+                array('foo-bar',),
+                array(
+                    'foo-bar'     => true,
+                    'foo-baz'     => false,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+            'literal-optional-alternative-with-dashes' => array(
+                '[foo-bar|foo-baz] [--bar=]',
+                array('foo-baz',),
+                array(
+                    'foo-bar'     => false,
+                    'foo-baz'     => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+            'literal-optional-alternative-with-dashes2' => array(
+                'foo [foo-bar|foo-baz] [--bar=]',
+                array('foo',),
+                array(
+                    'foo'         => true,
+                    'foo-bar'     => false,
+                    'foo-baz'     => false,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+            'literal-flag-with-dashes' => array(
+                'foo --bar-baz',
+                array('foo','--bar-baz'),
+                array(
+                    'foo'         => true,
+                    'bar-baz'     => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+            'literal-optional-flag-with-dashes' => array(
+                'foo [--bar-baz]',
+                array('foo','--bar-baz'),
+                array(
+                    'foo'         => true,
+                    'bar-baz'     => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+            'literal-optional-flag-with-dashes2' => array(
+                'foo [--bar-baz]',
+                array('foo'),
+                array(
+                    'foo'         => true,
+                    'bar-baz'     => false,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+            'literal-optional-flag-alternative-with-dashes' => array(
+                'foo [--foo-bar|--foo-baz]',
+                array('foo','--foo-baz'),
+                array(
+                    'foo'         => true,
+                    'foo-bar'     => false,
+                    'foo-baz'     => true,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+            'literal-optional-flag-alternative-with-dashes2' => array(
+                'foo [--foo-bar|--foo-baz]',
+                array('foo'),
+                array(
+                    'foo'         => true,
+                    'foo-bar'     => false,
+                    'foo-baz'     => false,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+            'value-with-dashes' => array(
+                '<foo-bar-baz> [--bar=]',
+                array('abc',),
+                array(
+                    'foo-bar-baz' => 'abc',
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+
+            'value-optional-with-dashes' => array(
+                '[<foo-bar-baz>] [--bar=]',
+                array('abc'),
+                array(
+                    'foo-bar-baz' => 'abc',
+                    'foo'         => null,
+                    'bar'         => null,
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+            'value-optional-with-dashes2' => array(
+                '[<foo-bar-baz>] [--bar=]',
+                array('--bar','abc'),
+                array(
+                    'foo-bar-baz' => null,
+                    'foo'         => null,
+                    'bar'         => 'abc',
+                    'baz'         => null,
+                    'something'   => null,
+                )
+            ),
+
 
         );
     }

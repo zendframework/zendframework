@@ -33,7 +33,7 @@
 
     <target
         name="tests-parallel"
-        depends="prepare,composer-install"
+        depends="prepare,composer-install,get-cs-fixer"
         description="Run tests for the various components in parallel"
     >
         <parallel threadCount="8">

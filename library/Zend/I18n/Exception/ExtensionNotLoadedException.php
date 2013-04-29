@@ -7,14 +7,10 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Mvc\Service\TestAsset;
+namespace Zend\I18n\Exception;
 
 use DomainException;
 
-class InvalidDispatchableClass
-{
-    public function __construct()
-    {
-        throw new DomainException('Should not instantiate this!');
-    }
-}
+class ExtensionNotLoadedException extends DomainException implements
+    ExceptionInterface
+{}

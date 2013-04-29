@@ -89,9 +89,9 @@ class Upce extends Ean13
         $height = ($this->drawText) ? 1.1 : 1;
 
         // Start character (101)
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
 
         $textTable = str_split($this->getText());
         $system = 0;
@@ -104,17 +104,17 @@ class Upce extends Ean13
         for ($i = 1; $i < 7; $i++) {
             $bars = str_split($this->codingMap[$parity[$i - 1]][$textTable[$i]]);
             foreach ($bars as $b) {
-                $barcodeTable[] = array($b , $this->barThinWidth , 0 , 1);
+                $barcodeTable[] = array($b, $this->barThinWidth, 0, 1);
             }
         }
 
         // Stop character (10101)
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
         return $barcodeTable;
     }
 

@@ -105,7 +105,7 @@ class Query implements RouteInterface
                 $matches[urldecode($key)] = urldecode($value);
             }
         }
-        
+
         return $matches;
     }
 

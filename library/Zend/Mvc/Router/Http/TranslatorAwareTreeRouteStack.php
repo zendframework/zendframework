@@ -28,7 +28,7 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
     /**
      * Whether the translator is enabled.
      *
-     * @var boolean
+     * @var bool
      */
     protected $translatorEnabled = true;
 
@@ -118,7 +118,7 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
      * hasTranslator(): defined by TranslatorAwareInterface.
      *
      * @see    TranslatorAwareInterface::hasTranslator()
-     * @return boolean
+     * @return bool
      */
     public function hasTranslator()
     {
@@ -129,7 +129,7 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
      * setTranslatorEnabled(): defined by TranslatorAwareInterface.
      *
      * @see    TranslatorAwareInterface::setTranslatorEnabled()
-     * @param  boolean $enabled
+     * @param  bool $enabled
      * @return TreeRouteStack
      */
     public function setTranslatorEnabled($enabled = true)
@@ -142,7 +142,7 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
      * isTranslatorEnabled(): defined by TranslatorAwareInterface.
      *
      * @see    TranslatorAwareInterface::isTranslatorEnabled()
-     * @return boolean
+     * @return bool
      */
     public function isTranslatorEnabled()
     {

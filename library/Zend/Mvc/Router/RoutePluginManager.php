@@ -24,7 +24,7 @@ class RoutePluginManager extends AbstractPluginManager
     /**
      * Do not share instances.
      *
-     * @var boolean
+     * @var bool
      */
     protected $shareByDefault = false;
 
@@ -37,7 +37,7 @@ class RoutePluginManager extends AbstractPluginManager
      *
      * @param  string       $name
      * @param  string       $invokableClass
-     * @param  null|boolean $shared
+     * @param  null|bool    $shared
      * @return RoutePluginManager
      */
     public function setInvokableClass($name, $invokableClass, $shared = null)

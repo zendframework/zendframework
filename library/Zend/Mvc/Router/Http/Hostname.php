@@ -202,7 +202,7 @@ class Hostname implements RouteInterface
      *
      * @param  array   $parts
      * @param  array   $mergedParams
-     * @param  boolean $isOptional
+     * @param  bool    $isOptional
      * @return string
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException

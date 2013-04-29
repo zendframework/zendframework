@@ -261,8 +261,8 @@ class Segment implements RouteInterface
      *
      * @param  array   $parts
      * @param  array   $mergedParams
-     * @param  boolean $isOptional
-     * @param  boolean $hasChild
+     * @param  bool    $isOptional
+     * @param  bool    $hasChild
      * @param  array   $options
      * @return string
      * @throws Exception\InvalidArgumentException

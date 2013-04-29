@@ -47,6 +47,10 @@ class FormSelect extends AbstractHelper
         'label'    => true,
     );
 
+    protected $translatableAttributes = array(
+        'label' => true,
+    );
+
     /**
      * Render a form <select> element from the provided $element
      *

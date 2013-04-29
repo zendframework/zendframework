@@ -239,6 +239,43 @@ class FormSelectTest extends CommonTestCase
         $this->assertContains('>translated content<', $markup);
     }
 
+    public function testCanTranslateOptGroupLabel()
+    {
+        $element = new SelectElement('test');
+        $element->setValueOptions(array(
+            'optgroup' => array(
+                'label' => 'translate me',
+                'options' => array(
+                    '0' => 'foo',
+                    '1' => 'bar',
+                ),
+            ),
+        ));
+
+        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
+        $mockTranslator->expects($this->at(0))
+                       ->method('translate')
+                       ->with('translate me')
+                       ->will($this->returnValue('translated label'));
+        $mockTranslator->expects($this->at(1))
+                       ->method('translate')
+                       ->with('foo')
+                       ->will($this->returnValue('translated foo'));
+        $mockTranslator->expects($this->at(2))
+                       ->method('translate')
+                       ->with('bar')
+                       ->will($this->returnValue('translated bar'));
+
+        $this->helper->setTranslator($mockTranslator);
+        $this->assertTrue($this->helper->hasTranslator());
+
+        $markup = $this->helper->__invoke($element);
+
+        $this->assertContains('label="translated label"', $markup);
+        $this->assertContains('>translated foo<', $markup);
+        $this->assertContains('>translated bar<', $markup);
+    }
+
     public function testTranslatorMethods()
     {
         $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');

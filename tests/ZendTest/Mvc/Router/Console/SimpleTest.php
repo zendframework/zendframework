@@ -685,7 +685,7 @@ class SimpleTest extends TestCase
                 'foo-bar-baz [--bar=]',
                 array('foo-bar-baz',),
                 array(
-                    'foo-bar-baz' => true,
+                    'foo-bar-baz' => null,
                     'foo'         => null,
                     'bar'         => null,
                     'baz'         => null,
@@ -709,7 +709,7 @@ class SimpleTest extends TestCase
                 array('foo'),
                 array(
                     'foo-bar-baz' => false,
-                    'foo'         => true,
+                    'foo'         => null,
                     'bar'         => null,
                     'baz'         => null,
                     'something'   => null,
@@ -741,7 +741,7 @@ class SimpleTest extends TestCase
                 'foo [foo-bar|foo-baz] [--bar=]',
                 array('foo',),
                 array(
-                    'foo'         => true,
+                    'foo'         => null,
                     'foo-bar'     => false,
                     'foo-baz'     => false,
                     'bar'         => null,
@@ -753,7 +753,7 @@ class SimpleTest extends TestCase
                 'foo --bar-baz',
                 array('foo','--bar-baz'),
                 array(
-                    'foo'         => true,
+                    'foo'         => null,
                     'bar-baz'     => true,
                     'bar'         => null,
                     'baz'         => null,
@@ -764,7 +764,7 @@ class SimpleTest extends TestCase
                 'foo [--bar-baz]',
                 array('foo','--bar-baz'),
                 array(
-                    'foo'         => true,
+                    'foo'         => null,
                     'bar-baz'     => true,
                     'bar'         => null,
                     'baz'         => null,
@@ -775,7 +775,7 @@ class SimpleTest extends TestCase
                 'foo [--bar-baz]',
                 array('foo'),
                 array(
-                    'foo'         => true,
+                    'foo'         => null,
                     'bar-baz'     => false,
                     'bar'         => null,
                     'baz'         => null,
@@ -786,7 +786,7 @@ class SimpleTest extends TestCase
                 'foo [--foo-bar|--foo-baz]',
                 array('foo','--foo-baz'),
                 array(
-                    'foo'         => true,
+                    'foo'         => null,
                     'foo-bar'     => false,
                     'foo-baz'     => true,
                     'bar'         => null,
@@ -798,7 +798,7 @@ class SimpleTest extends TestCase
                 'foo [--foo-bar|--foo-baz]',
                 array('foo'),
                 array(
-                    'foo'         => true,
+                    'foo'         => null,
                     'foo-bar'     => false,
                     'foo-baz'     => false,
                     'bar'         => null,

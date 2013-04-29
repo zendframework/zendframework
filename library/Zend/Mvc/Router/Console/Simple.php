@@ -701,7 +701,7 @@ class Simple implements RouteInterface
                 } else {
                     foreach ($part['alternatives'] as $alt) {
                         if ($alt === $matchedName && !isset($matches[$alt])) {
-                            $matches[$alt] = true;
+                            $matches[$alt] = isset($this->defaults[$alt])? $this->defaults[$alt] : true;
                         } elseif (!isset($matches[$alt])) {
                             $matches[$alt] = false;
                         }
@@ -771,14 +771,19 @@ class Simple implements RouteInterface
             } elseif (isset($part['alternatives'])) {
                 // from all alternativesm set matching parameter to TRUE and the rest to FALSE
                 foreach ($part['alternatives'] as $alt) {
-                    $matches[$alt] = $alt == $value;
+                    if ($alt == $value) {
+                        $matches[$alt] = isset($this->defaults[$alt])? $this->defaults[$alt] : true;
+                    } else {
+                        $matches[$alt] = false;
+                    }
                 }
 
                 // set alternatives group value
                 $matches[$part['name']] = $value;
             } else if (!$part['required']) {
-                // set optional flag to true
-                $matches[$part['name']] = true;
+                // set optional parameter flag
+                $name = $part['name'];
+                $matches[$name] = isset($this->defaults[$name])? $this->defaults[$name] : true;
             }
 
             /**
@@ -793,6 +798,25 @@ class Simple implements RouteInterface
          */
         if ($argPos < count($params)) {
             return null; // there are extraneous params that were not consumed
+        }
+
+        /**
+         * Any optional flags that were not entered have value false
+         */
+        foreach ($this->parts as &$part) {
+            if (!$part['required'] && !$part['hasValue']) {
+                if (!isset($matches[$part['name']])) {
+                    $matches[$part['name']] = false;
+                }
+                // unset alternatives also should be false
+                if (isset($part['alternatives'])) {
+                    foreach ($part['alternatives'] as $alt) {
+                        if (!isset($matches[$alt])) {
+                            $matches[$alt] = false;
+                        }
+                    }
+                }
+            }
         }
 
         return new RouteMatch(array_replace($this->defaults, $matches));

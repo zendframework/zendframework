@@ -806,6 +806,42 @@ class SimpleTest extends TestCase
                 array('create', 'controller'),
                 array('create' => null, 'controller' => 'defaultValue'),
             ),
+            'alternative-literal-non-present' => array(
+                '(foo | bar)',
+                array('bar' => 'something'),
+                array('foo'),
+                array('foo' => true, 'bar' => false),
+            ),
+            'alternative-literal-present' => array(
+                '(foo | bar)',
+                array('bar' => 'something'),
+                array('bar'),
+                array('foo' => false, 'bar' => 'something'),
+            ),
+            'alternative-flag-non-present' => array(
+                '(--foo | --bar)',
+                array('bar' => 'something'),
+                array('--foo'),
+                array('foo' => true, 'bar' => false),
+            ),
+            'alternative-flag-present' => array(
+                '(--foo | --bar)',
+                array('bar' => 'something'),
+                array('--bar'),
+                array('foo' => false, 'bar' => 'something'),
+            ),
+            'optional-literal-non-present' => array(
+                'foo [bar]',
+                array('bar' => 'something'),
+                array('foo'),
+                array('foo' => null, 'bar' => false),
+            ),
+            'optional-literal-present' => array(
+                'foo [bar]',
+                array('bar' => 'something'),
+                array('foo', 'bar'),
+                array('foo' => null, 'bar' => 'something'),
+            ),
         );
     }
 
@@ -833,7 +869,7 @@ class SimpleTest extends TestCase
             $this->assertInstanceOf('Zend\Mvc\Router\Console\RouteMatch', $match, "The route matches");
 
             foreach ($params as $key => $value) {
-                $this->assertEquals(
+                $this->assertSame(
                     $value,
                     $match->getParam($key),
                     $value === null ? "Param $key is not present" : "Param $key is present and is equal to '$value'"

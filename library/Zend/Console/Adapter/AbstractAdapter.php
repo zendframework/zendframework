@@ -96,8 +96,8 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function writeAt($text, $x, $y, $color = null, $bgColor = null)
     {
-        $this->setPos( $x, $y );
-        $this->write( $text, $color, $bgColor );
+        $this->setPos($x, $y);
+        $this->write($text, $color, $bgColor);
     }
 
     /**
@@ -457,7 +457,7 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function clearLine()
     {
-        echo "\r" . str_repeat( " ", $this->getWidth() ) . "\r";
+        echo "\r" . str_repeat(" ", $this->getWidth()) . "\r";
     }
 
     /**

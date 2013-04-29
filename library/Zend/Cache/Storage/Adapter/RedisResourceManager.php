@@ -294,7 +294,7 @@ class RedisResourceManager
             $constants  = $reflection->getConstants();
             foreach ($constants as $constName => $constValue) {
                 if (substr($constName, 0, 4) == 'OPT_') {
-                    $libOptions[ $constValue ] = $resource->getOption($constValue);
+                    $libOptions[$constValue] = $resource->getOption($constValue);
                 }
             }
             return $libOptions;

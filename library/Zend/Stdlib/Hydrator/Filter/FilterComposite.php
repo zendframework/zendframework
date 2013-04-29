@@ -96,7 +96,7 @@ class FilterComposite implements FilterInterface
      */
     public function addFilter($name, $filter, $condition = self::CONDITION_OR)
     {
-        if ( !is_callable($filter) && !($filter instanceof FilterInterface) ) {
+        if (!is_callable($filter) && !($filter instanceof FilterInterface)) {
             throw new InvalidArgumentException(
                 'The value of ' . $name . ' should be either a callable or ' .
                 'an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'
@@ -166,13 +166,13 @@ class FilterComposite implements FilterInterface
         // Check if 1 from the or filters return true
         foreach ($this->orFilter as $filter) {
             if (is_callable($filter)) {
-                if ( $filter($property) === true) {
+                if ($filter($property) === true) {
                     $returnValue = true;
                     break;
                 }
                 continue;
             } else {
-                if ( $filter->filter($property) === true) {
+                if ($filter->filter($property) === true) {
                     $returnValue = true;
                     break;
                 }

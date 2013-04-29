@@ -272,8 +272,8 @@ class ValueGenerator extends AbstractGenerator
             case 'boolean':
                 return self::TYPE_BOOLEAN;
             case 'string':
-                foreach($this->constants as $constant) {
-                    if(strpos($value,$constant)!==false) {
+                foreach ($this->constants as $constant) {
+                    if (strpos($value, $constant) !== false) {
                         return self::TYPE_CONSTANT;
                     }
                 }

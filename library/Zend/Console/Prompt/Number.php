@@ -88,7 +88,7 @@ class Number extends Line
             } elseif (!is_numeric($number)) {
                 $this->getConsole()->writeLine("$number is not a number\n");
                 $valid = false;
-            } elseif (!$this->allowFloat && (round($number) != $number) ) {
+            } elseif (!$this->allowFloat && (round($number) != $number)) {
                 $this->getConsole()->writeLine("Please enter a non-floating number, i.e. " . round($number) . "\n");
                 $valid = false;
             } elseif ($this->max !== null && $number > $this->max) {

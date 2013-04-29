@@ -256,7 +256,7 @@ class Redis extends AbstractAdapter implements
 
         $namespacedKeyValuePairs = array();
         foreach ($normalizedKeyValuePairs as $normalizedKey => & $value) {
-            $namespacedKeyValuePairs[ $this->namespacePrefix . $normalizedKey ] = & $value;
+            $namespacedKeyValuePairs[$this->namespacePrefix . $normalizedKey] = & $value;
         }
         try {
             if ($ttl > 0) {
@@ -266,7 +266,7 @@ class Redis extends AbstractAdapter implements
                 }
                 //mSet does not allow ttl, so use transaction
                 $transaction = $redis->multi();
-                foreach($namespacedKeyValuePairs as $key => $value) {
+                foreach ($namespacedKeyValuePairs as $key => $value) {
                     $transaction->setex($key, $ttl, $value);
                 }
                 $success = $transaction->exec();

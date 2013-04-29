@@ -84,7 +84,7 @@ class Value implements ArrayAccess, Countable
      */
     public function offsetExists($offset)
     {
-        return $offset >= 0  &&  $offset < strlen($this->value);
+        return $offset >= 0 && $offset < strlen($this->value);
     }
 
     /**

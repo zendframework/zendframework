@@ -311,7 +311,7 @@ class Memory extends AbstractAdapter implements
         if ($success) {
             $data = & $this->data[$ns][$normalizedKey];
             $ttl  = $options->getTtl();
-            if ($ttl && microtime(true) >= ($data[1] + $ttl) ) {
+            if ($ttl && microtime(true) >= ($data[1] + $ttl)) {
                 $success = false;
             }
         }
@@ -346,7 +346,7 @@ class Memory extends AbstractAdapter implements
         $result = array();
         foreach ($normalizedKeys as $normalizedKey) {
             if (isset($data[$normalizedKey])) {
-                if (!$ttl || $now < ($data[$normalizedKey][1] + $ttl) ) {
+                if (!$ttl || $now < ($data[$normalizedKey][1] + $ttl)) {
                     $result[$normalizedKey] = $data[$normalizedKey][0];
                 }
             }
@@ -371,7 +371,7 @@ class Memory extends AbstractAdapter implements
 
         // check if expired
         $ttl = $options->getTtl();
-        if ($ttl && microtime(true) >= ($this->data[$ns][$normalizedKey][1] + $ttl) ) {
+        if ($ttl && microtime(true) >= ($this->data[$ns][$normalizedKey][1] + $ttl)) {
             return false;
         }
 
@@ -399,7 +399,7 @@ class Memory extends AbstractAdapter implements
         $result = array();
         foreach ($normalizedKeys as $normalizedKey) {
             if (isset($data[$normalizedKey])) {
-                if (!$ttl || $now < ($data[$normalizedKey][1] + $ttl) ) {
+                if (!$ttl || $now < ($data[$normalizedKey][1] + $ttl)) {
                     $result[] = $normalizedKey;
                 }
             }

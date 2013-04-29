@@ -191,7 +191,7 @@ class Svg extends AbstractRenderer
     protected function createElement($tagName, $attributes = array(), $textContent = null)
     {
         $element = $this->resource->createElement($tagName);
-        foreach ($attributes as $k =>$v) {
+        foreach ($attributes as $k => $v) {
             $element->setAttribute($k, $v);
         }
         if ($textContent !== null) {

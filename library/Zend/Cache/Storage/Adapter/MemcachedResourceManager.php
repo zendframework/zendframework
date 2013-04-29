@@ -93,7 +93,7 @@ class MemcachedResourceManager
     {
         $id = (string) $id;
 
-        if ( !($resource instanceof MemcachedResource) ) {
+        if (!($resource instanceof MemcachedResource)) {
             if ($resource instanceof Traversable) {
                 $resource = ArrayUtils::iteratorToArray($resource);
             } elseif (!is_array($resource)) {
@@ -247,7 +247,7 @@ class MemcachedResourceManager
             $constants  = $reflection->getConstants();
             foreach ($constants as $constName => $constValue) {
                 if (substr($constName, 0, 4) == 'OPT_') {
-                    $libOptions[ $constValue ] = $resource->getOption($constValue);
+                    $libOptions[$constValue] = $resource->getOption($constValue);
                 }
             }
             return $libOptions;
@@ -455,7 +455,7 @@ class MemcachedResourceManager
         $result = array();
         foreach ($servers as $server) {
             $this->normalizeServer($server);
-            $result[ $server['host'] . ':' . $server['port'] ] = $server;
+            $result[$server['host'] . ':' . $server['port']] = $server;
         }
 
         $servers = array_values($result);

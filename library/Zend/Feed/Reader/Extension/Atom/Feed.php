@@ -276,7 +276,7 @@ class Feed extends Extension\AbstractFeed
         if (!$imageUrl) {
             $image = null;
         } else {
-            $image = array('uri'=>$imageUrl);
+            $image = array('uri' => $imageUrl);
         }
 
         $this->data['image'] = $image;

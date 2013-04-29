@@ -284,7 +284,7 @@ class RenameUpload extends AbstractFilter
      * @param  string $filename
      * @return string
      */
-    protected function applyRandomToFilename($source,$filename)
+    protected function applyRandomToFilename($source, $filename)
     {
         $info = pathinfo($filename);
         $filename = $info['filename'] . uniqid('_');

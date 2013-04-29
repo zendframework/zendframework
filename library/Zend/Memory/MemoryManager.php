@@ -135,9 +135,9 @@ class MemoryManager
         $this->_generateMemManagerId();
 
         $memoryLimitStr = trim(ini_get('memory_limit'));
-        if ($memoryLimitStr != ''  &&  $memoryLimitStr != -1) {
+        if ($memoryLimitStr != '' && $memoryLimitStr != -1) {
             $this->memoryLimit = (int) $memoryLimitStr;
-            switch (strtolower($memoryLimitStr[strlen($memoryLimitStr)-1])) {
+            switch (strtolower($memoryLimitStr[strlen($memoryLimitStr) - 1])) {
                 case 'g':
                     $this->memoryLimit *= 1024;
                     // no break
@@ -314,7 +314,7 @@ class MemoryManager
         }
 
         // Remove just updated object from list of candidates to unload
-        if ( isset($this->unloadCandidates[$id])) {
+        if (isset($this->unloadCandidates[$id])) {
             unset($this->unloadCandidates[$id]);
         }
 

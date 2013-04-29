@@ -85,7 +85,7 @@ class Base implements FormatterInterface
                 $value[$key] = $this->normalize($subvalue);
             }
             $value = json_encode($value);
-        } elseif (is_object($value) && !method_exists($value,'__toString')) {
+        } elseif (is_object($value) && !method_exists($value, '__toString')) {
             $value = sprintf('object(%s) %s', get_class($value), json_encode($value));
         } elseif (is_resource($value)) {
             $value = sprintf('resource(%s)', get_resource_type($value));

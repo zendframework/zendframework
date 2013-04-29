@@ -102,7 +102,7 @@ interface EntryInterface
     /**
      * Get the number of comments/replies for current entry
      *
-     * @return integer
+     * @return int
      */
     public function getCommentCount();
 

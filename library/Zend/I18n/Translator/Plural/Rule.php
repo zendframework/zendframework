@@ -33,14 +33,14 @@ class Rule
     /**
      * Number of plurals in this rule.
      *
-     * @var integer
+     * @var int
      */
     protected $numPlurals;
 
     /**
      * Create a new plural rule.
      *
-     * @param  integer $numPlurals
+     * @param  int $numPlurals
      * @param  array   $ast
      * @return Rule
      */
@@ -53,8 +53,8 @@ class Rule
     /**
      * Evaluate a number and return the plural index.
      *
-     * @param  integer $number
-     * @return integer
+     * @param  int $number
+     * @return int
      * @throws Exception\RangeException
      */
     public function evaluate($number)
@@ -74,7 +74,7 @@ class Rule
     /**
      * Get number of possible plural forms.
      *
-     * @return integer
+     * @return int
      */
     public function getNumPlurals()
     {
@@ -85,8 +85,8 @@ class Rule
      * Evaluate a part of an ast.
      *
      * @param  array   $ast
-     * @param  integer $number
-     * @return integer
+     * @param  int $number
+     * @return int
      * @throws Exception\ParseException
      */
     protected function evaluateAstPart(array $ast, $number)

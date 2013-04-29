@@ -266,6 +266,6 @@ class ValidatorChain implements
      */
     public function __sleep()
     {
-        return array('validators','messages');
+        return array('validators', 'messages');
     }
 }

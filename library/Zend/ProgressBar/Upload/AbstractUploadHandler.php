@@ -166,7 +166,7 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
     /**
      * Returns the formatted size
      *
-     * @param  integer $size
+     * @param  int $size
      * @return string
      */
     protected function toByteString($size)

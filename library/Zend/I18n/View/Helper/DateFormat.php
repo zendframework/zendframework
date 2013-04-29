@@ -57,7 +57,7 @@ class DateFormat extends AbstractHelper
     /**
      * Format a date
      *
-     * @param  DateTime|integer|array $date
+     * @param  DateTime|int|array $date
      * @param  int                    $dateType
      * @param  int                    $timeType
      * @param  string                 $locale

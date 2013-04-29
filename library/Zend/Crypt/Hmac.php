@@ -57,7 +57,7 @@ class Hmac
      *
      * @param  string  $hash
      * @param  bool $output
-     * @return integer
+     * @return int
      */
     public static function getOutputSize($hash, $output = self::OUTPUT_STRING)
     {

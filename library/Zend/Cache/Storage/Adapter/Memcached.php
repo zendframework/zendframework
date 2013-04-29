@@ -261,7 +261,7 @@ class Memcached extends AbstractAdapter implements
             $tmp            = array();
             $nsPrefixLength = strlen($this->namespacePrefix);
             foreach ($result as $internalKey => & $value) {
-                $tmp[ substr($internalKey, $nsPrefixLength) ] = & $value;
+                $tmp[substr($internalKey, $nsPrefixLength)] = & $value;
             }
             $result = $tmp;
         }
@@ -353,7 +353,7 @@ class Memcached extends AbstractAdapter implements
             $tmp            = array();
             $nsPrefixLength = strlen($this->namespacePrefix);
             foreach (array_keys($result) as $internalKey) {
-                $tmp[ substr($internalKey, $nsPrefixLength) ] = array();
+                $tmp[substr($internalKey, $nsPrefixLength)] = array();
             }
             $result = $tmp;
         } else {
@@ -400,7 +400,7 @@ class Memcached extends AbstractAdapter implements
 
         $namespacedKeyValuePairs = array();
         foreach ($normalizedKeyValuePairs as $normalizedKey => & $value) {
-            $namespacedKeyValuePairs[ $this->namespacePrefix . $normalizedKey ] = & $value;
+            $namespacedKeyValuePairs[$this->namespacePrefix . $normalizedKey] = & $value;
         }
 
         if (!$memc->setMulti($namespacedKeyValuePairs, $expiration)) {

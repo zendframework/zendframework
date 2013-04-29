@@ -104,7 +104,7 @@ class TreeRouteStack extends SimpleRouteStack
      * @see    RouteStackInterface::addRoute()
      * @param  string  $name
      * @param  mixed   $route
-     * @param  integer $priority
+     * @param  int $priority
      * @return TreeRouteStack
      */
     public function addRoute($name, $route, $priority = null)

@@ -137,7 +137,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $header, $pattern, $responseHeader->getFieldValue()
             ));
         }
-        $this->assertTrue((boolean) preg_match($pattern, $responseHeader->getFieldValue()));
+        $this->assertTrue((bool) preg_match($pattern, $responseHeader->getFieldValue()));
     }
 
     /**
@@ -160,7 +160,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $header, $pattern
             ));
         }
-        $this->assertFalse((boolean) preg_match($pattern, $responseHeader->getFieldValue()));
+        $this->assertFalse((bool) preg_match($pattern, $responseHeader->getFieldValue()));
     }
 
     /**
@@ -254,7 +254,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $pattern, $responseHeader->getFieldValue()
             ));
         }
-        $this->assertTrue((boolean) preg_match($pattern, $responseHeader->getFieldValue()));
+        $this->assertTrue((bool) preg_match($pattern, $responseHeader->getFieldValue()));
     }
 
     /**
@@ -275,7 +275,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 'Failed asserting response DOES NOT redirect to URL MATCHING "%s"', $pattern
             ));
         }
-        $this->assertFalse((boolean) preg_match($pattern, $responseHeader->getFieldValue()));
+        $this->assertFalse((bool) preg_match($pattern, $responseHeader->getFieldValue()));
     }
 
     /**
@@ -321,7 +321,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * Count the dom query executed
      *
      * @param  string $path
-     * @return integer
+     * @return int
      */
     private function queryCount($path)
     {
@@ -332,7 +332,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * Count the dom query executed
      *
      * @param  string $path
-     * @return integer
+     * @return int
      */
     private function xpathQueryCount($path)
     {
@@ -696,7 +696,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $path, $pattern, $result->current()->nodeValue
             ));
         }
-        $this->assertTrue((boolean) preg_match($pattern, $result->current()->nodeValue));
+        $this->assertTrue((bool) preg_match($pattern, $result->current()->nodeValue));
     }
 
     /**
@@ -742,7 +742,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $path, $pattern
             ));
         }
-        $this->assertFalse((boolean) preg_match($pattern, $result->current()->nodeValue));
+        $this->assertFalse((bool) preg_match($pattern, $result->current()->nodeValue));
     }
 
     /**

@@ -21,7 +21,7 @@ class TranslatePlural extends AbstractTranslatorHelper
      *
      * @param  string  $singular
      * @param  string  $plural
-     * @param  integer $number
+     * @param  int $number
      * @param  string  $textDomain
      * @param  string  $locale
      * @throws Exception\RuntimeException

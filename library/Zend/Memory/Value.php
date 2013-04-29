@@ -79,19 +79,19 @@ class Value implements ArrayAccess, Countable
      * ArrayAccess interface method
      * returns true if string offset exists
      *
-     * @param integer $offset
+     * @param int $offset
      * @return bool
      */
     public function offsetExists($offset)
     {
-        return $offset >= 0  &&  $offset < strlen($this->value);
+        return $offset >= 0 && $offset < strlen($this->value);
     }
 
     /**
      * ArrayAccess interface method
      * Get character at $offset position
      *
-     * @param integer $offset
+     * @param int $offset
      * @return string
      */
     public function offsetGet($offset)
@@ -103,7 +103,7 @@ class Value implements ArrayAccess, Countable
      * ArrayAccess interface method
      * Set character at $offset position
      *
-     * @param integer $offset
+     * @param int $offset
      * @param string $char
      */
     public function offsetSet($offset, $char)
@@ -120,7 +120,7 @@ class Value implements ArrayAccess, Countable
      * ArrayAccess interface method
      * Unset character at $offset position
      *
-     * @param integer $offset
+     * @param int $offset
      */
     public function offsetUnset($offset)
     {

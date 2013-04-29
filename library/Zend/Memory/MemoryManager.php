@@ -33,7 +33,7 @@ class MemoryManager
      * Default value is 2/3 of memory_limit php.ini variable
      * Negative value means no limit
      *
-     * @var integer
+     * @var int
      */
     private $memoryLimit = -1;
 
@@ -42,21 +42,21 @@ class MemoryManager
      * Default value is 16K
      * Negative value means that memory objects are never swapped
      *
-     * @var integer
+     * @var int
      */
     private $minSize = 16384;
 
     /**
      * Overall size of memory, used by values
      *
-     * @var integer
+     * @var int
      */
     private $memorySize = 0;
 
     /**
      * Id for next Zend_Memory object
      *
-     * @var integer
+     * @var int
      */
     private $nextId = 0;
 
@@ -100,7 +100,7 @@ class MemoryManager
     /**
      * Unique memory manager id
      *
-     * @var integer
+     * @var int
      */
     private $managerId;
 
@@ -135,9 +135,9 @@ class MemoryManager
         $this->_generateMemManagerId();
 
         $memoryLimitStr = trim(ini_get('memory_limit'));
-        if ($memoryLimitStr != ''  &&  $memoryLimitStr != -1) {
-            $this->memoryLimit = (integer)$memoryLimitStr;
-            switch (strtolower($memoryLimitStr[strlen($memoryLimitStr)-1])) {
+        if ($memoryLimitStr != '' && $memoryLimitStr != -1) {
+            $this->memoryLimit = (int) $memoryLimitStr;
+            switch (strtolower($memoryLimitStr[strlen($memoryLimitStr) - 1])) {
                 case 'g':
                     $this->memoryLimit *= 1024;
                     // no break
@@ -174,7 +174,7 @@ class MemoryManager
     /**
      * Set memory grow limit
      *
-     * @param integer $newLimit
+     * @param int $newLimit
      */
     public function setMemoryLimit($newLimit)
     {
@@ -186,7 +186,7 @@ class MemoryManager
     /**
      * Get memory grow limit
      *
-     * @return integer
+     * @return int
      */
     public function getMemoryLimit()
     {
@@ -196,7 +196,7 @@ class MemoryManager
     /**
      * Set minimum size of values, which may be swapped
      *
-     * @param integer $newSize
+     * @param int $newSize
      */
     public function setMinSize($newSize)
     {
@@ -206,7 +206,7 @@ class MemoryManager
     /**
      * Get minimum size of values, which may be swapped
      *
-     * @return integer
+     * @return int
      */
     public function getMinSize()
     {
@@ -274,7 +274,7 @@ class MemoryManager
      *
      * @internal
      * @param Container\Movable $container
-     * @param integer $id
+     * @param int $id
      * @return null
      */
     public function unlink(Container\Movable $container, $id)
@@ -299,7 +299,7 @@ class MemoryManager
      *
      * @internal
      * @param \Zend\Memory\Container\Movable $container
-     * @param integer $id
+     * @param int $id
      */
     public function processUpdate(Container\Movable $container, $id)
     {
@@ -314,7 +314,7 @@ class MemoryManager
         }
 
         // Remove just updated object from list of candidates to unload
-        if ( isset($this->unloadCandidates[$id])) {
+        if (isset($this->unloadCandidates[$id])) {
             unset($this->unloadCandidates[$id]);
         }
 
@@ -386,7 +386,7 @@ class MemoryManager
      * if object is not changed since last swap
      *
      * @param \Zend\Memory\Container\Movable $container
-     * @param integer $id
+     * @param int $id
      */
     private function _swap(Container\Movable $container, $id)
     {
@@ -409,7 +409,7 @@ class MemoryManager
      *
      * @internal
      * @param \Zend\Memory\Container\Movable $container
-     * @param integer $id
+     * @param int $id
      */
     public function load(Container\Movable $container, $id)
     {

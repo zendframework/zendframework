@@ -20,7 +20,7 @@ class FirePhp implements FormatterInterface
     public function format($event)
     {
         $label = null;
-        if ( !empty($event['extra']) ) {
+        if (!empty($event['extra'])) {
             $line  = $event['extra'];
             $label = $event['message'];
         } else {

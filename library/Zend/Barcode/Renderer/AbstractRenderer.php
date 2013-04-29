@@ -40,25 +40,25 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Offset of the barcode from the top of the rendering resource
-     * @var integer
+     * @var int
      */
     protected $topOffset = 0;
 
     /**
      * Offset of the barcode from the left of the rendering resource
-     * @var integer
+     * @var int
      */
     protected $leftOffset = 0;
 
     /**
      * Horizontal position of the barcode in the rendering resource
-     * @var integer
+     * @var int
      */
     protected $horizontalPosition = 'left';
 
     /**
      * Vertical position of the barcode in the rendering resource
-     * @var integer
+     * @var int
      */
     protected $verticalPosition = 'top';
 
@@ -146,7 +146,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Manually adjust top position
-     * @param  integer $value
+     * @param  int $value
      * @return AbstractRenderer
      * @throws Exception\OutOfRangeException
      */
@@ -163,7 +163,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Retrieve vertical adjustment
-     * @return integer
+     * @return int
      */
     public function getTopOffset()
     {
@@ -172,7 +172,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Manually adjust left position
-     * @param  integer $value
+     * @param  int $value
      * @return AbstractRenderer
      * @throws Exception\OutOfRangeException
      */
@@ -189,7 +189,7 @@ abstract class AbstractRenderer implements RendererInterface
 
     /**
      * Retrieve vertical adjustment
-     * @return integer
+     * @return int
      */
     public function getLeftOffset()
     {
@@ -463,7 +463,7 @@ abstract class AbstractRenderer implements RendererInterface
     /**
      * Draw a polygon in the rendering resource
      * @param array $points
-     * @param integer $color
+     * @param int $color
      * @param  bool $filled
      */
     abstract protected function drawPolygon($points, $color, $filled = true);
@@ -474,7 +474,7 @@ abstract class AbstractRenderer implements RendererInterface
      * @param float $size
      * @param array $position
      * @param string $font
-     * @param integer $color
+     * @param int $color
      * @param string $alignment
      * @param float $orientation
      */

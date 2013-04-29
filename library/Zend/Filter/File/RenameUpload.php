@@ -99,7 +99,7 @@ class RenameUpload extends AbstractFilter
      */
     public function setUseUploadExtension($flag = true)
     {
-        $this->options['use_upload_extension'] = (boolean) $flag;
+        $this->options['use_upload_extension'] = (bool) $flag;
         return $this;
     }
 
@@ -284,7 +284,7 @@ class RenameUpload extends AbstractFilter
      * @param  string $filename
      * @return string
      */
-    protected function applyRandomToFilename($source,$filename)
+    protected function applyRandomToFilename($source, $filename)
     {
         $info = pathinfo($filename);
         $filename = $info['filename'] . uniqid('_');

@@ -177,7 +177,7 @@ class Xml implements FormatterInterface
         foreach ($dataToInsert as $key => $value) {
             if (empty($value)
                 || is_scalar($value)
-                || (is_object($value) && method_exists($value,'__toString'))
+                || (is_object($value) && method_exists($value, '__toString'))
             ) {
                 if ($key == "message") {
                     $value = $escaper->escapeHtml($value);

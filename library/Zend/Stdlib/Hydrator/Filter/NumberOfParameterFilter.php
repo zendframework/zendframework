@@ -39,7 +39,7 @@ class NumberOfParameterFilter implements FilterInterface
     {
         try {
             $reflectionMethod = new ReflectionMethod($property);
-        } catch( ReflectionException $exception) {
+        } catch (ReflectionException $exception) {
             throw new InvalidArgumentException(
                 "Method $property doesn't exist"
             );

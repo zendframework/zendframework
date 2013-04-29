@@ -255,7 +255,7 @@ class Apc extends AbstractAdapter implements
         $prefixL = strlen($prefix);
         $result  = array();
         foreach ($fetch as $internalKey => & $value) {
-            $result[ substr($internalKey, $prefixL) ] = $value;
+            $result[substr($internalKey, $prefixL)] = $value;
         }
 
         return $result;
@@ -378,7 +378,7 @@ class Apc extends AbstractAdapter implements
             }
 
             $this->normalizeMetadata($metadata);
-            $result[ substr($internalKey, $prefixL) ] = & $metadata;
+            $result[substr($internalKey, $prefixL)] = & $metadata;
         }
 
         return $result;

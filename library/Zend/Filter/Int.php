@@ -17,7 +17,7 @@ class Int extends AbstractFilter
      * Returns (int) $value
      *
      * @param  string $value
-     * @return integer
+     * @return int
      */
     public function filter($value)
     {

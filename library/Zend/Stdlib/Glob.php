@@ -31,7 +31,7 @@ abstract class Glob
      *
      * @see    http://docs.php.net/glob
      * @param  string  $pattern
-     * @param  integer $flags
+     * @param  int $flags
      * @param  bool $forceFallback
      * @return array|false
      */
@@ -48,7 +48,7 @@ abstract class Glob
      * Use the glob function provided by the system.
      *
      * @param  string  $pattern
-     * @param  integer $flags
+     * @param  int $flags
      * @return array|false
      */
     protected static function systemGlob($pattern, $flags)
@@ -82,7 +82,7 @@ abstract class Glob
      * Expand braces manually, then use the system glob.
      *
      * @param  string  $pattern
-     * @param  integer $flags
+     * @param  int $flags
      * @return array|false
      */
     protected static function fallbackGlob($pattern, $flags)
@@ -162,9 +162,9 @@ abstract class Glob
      * Find the end of the sub-pattern in a brace expression.
      *
      * @param  string  $pattern
-     * @param  integer $begin
-     * @param  integer $flags
-     * @return integer|null
+     * @param  int $begin
+     * @param  int $flags
+     * @return int|null
      */
     protected static function nextBraceSub($pattern, $begin, $flags)
     {

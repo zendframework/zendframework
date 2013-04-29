@@ -158,7 +158,7 @@ class Identical extends AbstractValidator
 
         if (!$this->getLiteral() && $context !== null) {
             if (is_array($token)) {
-                while (is_array($token)){
+                while (is_array($token)) {
                     $key = key($token);
                     if (!isset($context[$key])) {
                         break;

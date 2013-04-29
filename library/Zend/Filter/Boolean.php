@@ -88,7 +88,7 @@ class Boolean extends AbstractFilter
     /**
      * Set boolean types
      *
-     * @param  integer|array $type
+     * @param  int|array $type
      * @throws Exception\InvalidArgumentException
      * @return bool
      */

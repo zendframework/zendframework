@@ -39,7 +39,7 @@ class Symbol
     /**
      * Left binding power (precedence).
      *
-     * @var integer
+     * @var int
      */
     public $leftBindingPower;
 
@@ -90,7 +90,7 @@ class Symbol
      *
      * @param  Parser  $parser
      * @param  string  $id
-     * @param  integer $leftBindingPower
+     * @param  int $leftBindingPower
      */
     public function __construct(Parser $parser, $id, $leftBindingPower)
     {

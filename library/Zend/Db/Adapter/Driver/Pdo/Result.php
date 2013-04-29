@@ -172,7 +172,7 @@ class Result implements Iterator, ResultInterface
     /**
      * Count
      *
-     * @return integer
+     * @return int
      */
     public function count()
     {
@@ -208,7 +208,7 @@ class Result implements Iterator, ResultInterface
     /**
      * Get affected rows
      *
-     * @return integer
+     * @return int
      */
     public function getAffectedRows()
     {

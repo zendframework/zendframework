@@ -48,7 +48,7 @@ class Identity extends AbstractPlugin
      */
     public function __invoke()
     {
-        if (!$this->authenticationService instanceof AuthenticationService){
+        if (!$this->authenticationService instanceof AuthenticationService) {
             throw new Exception\RuntimeException('No AuthenticationService instance provided');
         }
         if (!$this->authenticationService->hasIdentity()) {

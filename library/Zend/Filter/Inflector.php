@@ -248,8 +248,8 @@ class Inflector extends AbstractFilter
      *
      * ex:
      * array(
-     *     ':controller' => array('CamelCaseToUnderscore','StringToLower'),
-     *     ':action'     => array('CamelCaseToUnderscore','StringToLower'),
+     *     ':controller' => array('CamelCaseToUnderscore', 'StringToLower'),
+     *     ':action'     => array('CamelCaseToUnderscore', 'StringToLower'),
      *     'suffix'      => 'phtml'
      *     );
      *

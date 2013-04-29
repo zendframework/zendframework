@@ -14,14 +14,14 @@ class Null implements AdapterInterface
     /**
      * Item count
      *
-     * @var integer
+     * @var int
      */
     protected $count = null;
 
     /**
      * Constructor.
      *
-     * @param integer $count Total item count (Optional)
+     * @param int $count Total item count (Optional)
      */
     public function __construct($count = 0)
     {
@@ -31,8 +31,8 @@ class Null implements AdapterInterface
     /**
      * Returns an array of items for a page.
      *
-     * @param  integer $offset Page offset
-     * @param  integer $itemCountPerPage Number of items per page
+     * @param  int $offset Page offset
+     * @param  int $itemCountPerPage Number of items per page
      * @return array
      */
     public function getItems($offset, $itemCountPerPage)
@@ -50,7 +50,7 @@ class Null implements AdapterInterface
     /**
      * Returns the total number of rows in the array.
      *
-     * @return integer
+     * @return int
      */
     public function count()
     {

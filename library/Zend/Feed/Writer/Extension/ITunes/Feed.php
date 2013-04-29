@@ -137,7 +137,7 @@ class Feed
         if (!isset($this->data['categories'])) {
             $this->data['categories'] = array();
         }
-        foreach ($values as $key=>$value) {
+        foreach ($values as $key => $value) {
             if (!is_array($value)) {
                 if ($this->stringWrapper->strlen($value) > 255) {
                     throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "category" may only'
@@ -175,7 +175,7 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "image" may only'
             . ' be a valid URI/IRI');
         }
-        if (!in_array(substr($value, -3), array('jpg','png'))) {
+        if (!in_array(substr($value, -3), array('jpg', 'png'))) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "image" may only'
             . ' use file extension "jpg" or "png" which must be the last three'
             . ' characters of the URI (i.e. no query string or fragment)');
@@ -214,7 +214,7 @@ class Feed
      */
     public function setItunesExplicit($value)
     {
-        if (!in_array($value, array('yes','no','clean'))) {
+        if (!in_array($value, array('yes', 'no', 'clean'))) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "explicit" may only'
             . ' be one of "yes", "no" or "clean"');
         }

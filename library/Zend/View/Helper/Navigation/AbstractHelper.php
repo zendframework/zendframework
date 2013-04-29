@@ -338,7 +338,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      * Determines whether a page should be allowed given certain parameters
      *
      * @param   array   $params
-     * @return  boolean
+     * @return  bool
      */
     protected function isAllowed($params)
     {

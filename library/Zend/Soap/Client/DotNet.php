@@ -44,8 +44,8 @@ class DotNet extends SOAPClient
      * @param  string       $request  The request body.
      * @param  string       $location The SOAP URI.
      * @param  string       $action   The SOAP action to call.
-     * @param  integer      $version  The SOAP version to use.
-     * @param  integer      $one_way  (Optional) The number 1 if a response is not expected.
+     * @param  int      $version  The SOAP version to use.
+     * @param  int      $one_way  (Optional) The number 1 if a response is not expected.
      * @return string The XML SOAP response.
      */
     public function _doRequest(CommonClient $client, $request, $location, $action, $version, $one_way = null)

@@ -192,7 +192,7 @@ class Proxy extends Socket
      * Preform handshaking with HTTPS proxy using CONNECT method
      *
      * @param string  $host
-     * @param integer $port
+     * @param int $port
      * @param string  $httpVer
      * @param array   $headers
      * @throws AdapterException\RuntimeException

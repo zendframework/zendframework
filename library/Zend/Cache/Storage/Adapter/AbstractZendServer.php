@@ -74,7 +74,7 @@ abstract class AbstractZendServer extends AbstractAdapter
         $result  = array();
         $prefixL = strlen($prefix);
         foreach ($fetch as $k => & $v) {
-            $result[ substr($k, $prefixL) ] = $v;
+            $result[substr($k, $prefixL)] = $v;
         }
 
         return $result;
@@ -152,7 +152,7 @@ abstract class AbstractZendServer extends AbstractAdapter
         $result  = array();
         $prefixL = strlen($prefix);
         foreach ($fetch as $internalKey => $value) {
-            $result[ substr($internalKey, $prefixL) ] = array();
+            $result[substr($internalKey, $prefixL)] = array();
         }
 
         return $result;

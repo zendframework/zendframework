@@ -158,7 +158,7 @@ class Gettext implements FileLoaderInterface
     /**
      * Read a single integer from the current file.
      *
-     * @return integer
+     * @return int
      */
     protected function readInteger()
     {
@@ -174,8 +174,8 @@ class Gettext implements FileLoaderInterface
     /**
      * Read an integer from the current file.
      *
-     * @param  integer $num
-     * @return integer
+     * @param  int $num
+     * @return int
      */
     protected function readIntegerList($num)
     {

@@ -84,7 +84,7 @@ class Http implements AdapterInterface
     /**
      * Nonce timeout period
      *
-     * @var integer
+     * @var int
      */
     protected $nonceTimeout;
 
@@ -491,7 +491,7 @@ class Http implements AdapterInterface
             && !is_array($result)
             && $this->_secureStringCompare($result, $creds[1])
         ) {
-            $identity = array('username'=>$creds[0], 'realm'=>$this->realm);
+            $identity = array('username' => $creds[0], 'realm' => $this->realm);
             return new Authentication\Result(Authentication\Result::SUCCESS, $identity);
         } elseif (is_array($result)) {
             return new Authentication\Result(Authentication\Result::SUCCESS, $result);
@@ -583,7 +583,7 @@ class Http implements AdapterInterface
         // If our digest matches the client's let them in, otherwise return
         // a 401 code and exit to prevent access to the protected resource.
         if ($this->_secureStringCompare($digest, $data['response'])) {
-            $identity = array('username'=>$data['username'], 'realm'=>$data['realm']);
+            $identity = array('username' => $data['username'], 'realm' => $data['realm']);
             return new Authentication\Result(Authentication\Result::SUCCESS, $identity);
         }
 

@@ -37,8 +37,8 @@ class Number extends Line
      * @param string    $promptText     The prompt text to display in console
      * @param bool      $allowEmpty     Is empty response allowed?
      * @param bool      $allowFloat     Are floating (non-decimal) numbers allowed?
-     * @param integer   $min            Minimum value (inclusive)
-     * @param integer   $max            Maximum value (inclusive)
+     * @param int   $min            Minimum value (inclusive)
+     * @param int   $max            Maximum value (inclusive)
      */
     public function __construct(
         $promptText = 'Please enter a number: ',

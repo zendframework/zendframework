@@ -118,7 +118,7 @@ class Bcrypt implements PasswordInterface
     /**
      * Set the cost parameter
      *
-     * @param  integer|string $cost
+     * @param  int|string $cost
      * @throws Exception\InvalidArgumentException
      * @return Bcrypt
      */

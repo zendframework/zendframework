@@ -107,7 +107,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
      * Return the array nesting level based on the type name
      *
      * @param  string $type
-     * @return integer
+     * @return int
      */
     protected function _getNestedCount($type)
     {

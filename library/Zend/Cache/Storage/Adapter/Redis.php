@@ -28,7 +28,7 @@ class Redis extends AbstractAdapter implements
     /**
      * Has this instance be initialized
      *
-     * @var boolean
+     * @var bool
      */
     protected $initialized = false;
 
@@ -139,7 +139,7 @@ class Redis extends AbstractAdapter implements
      * Internal method to get an item.
      *
      * @param string  &$normalizedKey Key where to store data
-     * @param boolean &$success       If the operation was successfull
+     * @param bool &$success       If the operation was successfull
      * @param mixed   &$casToken      Token
      * @return mixed Data on success, false on key not found
      * @throws Exception\RuntimeException
@@ -199,7 +199,7 @@ class Redis extends AbstractAdapter implements
      *
      * @param string &$normalizedKey Normalized key which will be checked
      *
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException
      */
     protected function internalHasItem(& $normalizedKey)
@@ -218,7 +218,7 @@ class Redis extends AbstractAdapter implements
      * @param string &$normalizedKey Key in Redis under which value will be saved
      * @param mixed  &$value         Value to store under cache key
      *
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException
      */
     protected function internalSetItem(& $normalizedKey, & $value)
@@ -307,7 +307,7 @@ class Redis extends AbstractAdapter implements
      *
      * @param string &$normalizedKey Key which will be removed
      *
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException
      */
     protected function internalRemoveItem(& $normalizedKey)

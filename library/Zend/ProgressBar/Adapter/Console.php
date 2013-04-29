@@ -57,7 +57,7 @@ class Console extends AbstractAdapter
     /**
      * Width of the progressbar
      *
-     * @var integer
+     * @var int
      */
     protected $width = null;
 
@@ -80,7 +80,7 @@ class Console extends AbstractAdapter
     /**
      * Width of the bar element
      *
-     * @var integer
+     * @var int
      */
     protected $barWidth;
 
@@ -204,7 +204,7 @@ class Console extends AbstractAdapter
     /**
      * Set the width of the progressbar
      *
-     * @param  integer $width
+     * @param  int $width
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setWidth($width = null)
@@ -315,7 +315,7 @@ class Console extends AbstractAdapter
     /**
      * Set the width of the text element
      *
-     * @param  integer $width
+     * @param  int $width
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setTextWidth($width)
@@ -365,8 +365,8 @@ class Console extends AbstractAdapter
      * @param  float   $current       Current progress value
      * @param  float   $max           Max progress value
      * @param  float   $percent       Current percent value
-     * @param  integer $timeTaken     Taken time in seconds
-     * @param  integer $timeRemaining Remaining time in seconds
+     * @param  int $timeTaken     Taken time in seconds
+     * @param  int $timeRemaining Remaining time in seconds
      * @param  string  $text          Status text
      * @return void
      */

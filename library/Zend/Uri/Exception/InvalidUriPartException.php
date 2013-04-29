@@ -14,7 +14,7 @@ class InvalidUriPartException extends InvalidArgumentException
     /**
      * Part-specific error codes
      *
-     * @var integer
+     * @var int
      */
     const INVALID_SCHEME    = 1;
     const INVALID_USER      = 2;

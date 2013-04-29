@@ -54,7 +54,7 @@ class Transfer
             $adapter = '\Zend\File\Transfer\Adapter\\' . ucfirst($adapter);
         }
 
-        $direction = (integer) $direction;
+        $direction = (int) $direction;
         $this->adapter[$direction] = new $adapter($options);
         if (!$this->adapter[$direction] instanceof Adapter\AbstractAdapter) {
             throw new Exception\InvalidArgumentException(
@@ -79,7 +79,7 @@ class Transfer
             return $this->adapter;
         }
 
-        $direction = (integer) $direction;
+        $direction = (int) $direction;
         return $this->adapter[$direction];
     }
 
@@ -94,7 +94,7 @@ class Transfer
     public function __call($method, array $options)
     {
         if (array_key_exists('direction', $options)) {
-            $direction = (integer) $options['direction'];
+            $direction = (int) $options['direction'];
         } else {
             $direction = 0;
         }

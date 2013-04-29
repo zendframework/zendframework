@@ -84,7 +84,7 @@ class Http implements AdapterInterface
     /**
      * Nonce timeout period
      *
-     * @var integer
+     * @var int
      */
     protected $nonceTimeout;
 

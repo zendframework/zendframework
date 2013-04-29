@@ -220,7 +220,7 @@ class Json
      *
      * @param SimpleXMLElement $simpleXmlElementObject
      * @param  bool $ignoreXmlAttributes
-     * @param integer $recursionDepth
+     * @param int $recursionDepth
      * @throws Exception\RecursionException if the XML tree is deeper than the allowed limit.
      * @return array
      */

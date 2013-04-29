@@ -41,7 +41,7 @@ abstract class AbstractValidator implements
     /**
      * Limits the maximum returned length of a error message
      *
-     * @var Integer
+     * @var int
      */
     protected static $messageLength = -1;
 
@@ -547,7 +547,7 @@ abstract class AbstractValidator implements
     /**
      * Returns the maximum allowed message length
      *
-     * @return integer
+     * @return int
      */
     public static function getMessageLength()
     {
@@ -557,7 +557,7 @@ abstract class AbstractValidator implements
     /**
      * Sets the maximum allowed message length
      *
-     * @param integer $length
+     * @param int $length
      */
     public static function setMessageLength($length = -1)
     {

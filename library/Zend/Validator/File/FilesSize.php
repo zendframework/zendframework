@@ -49,7 +49,7 @@ class FilesSize extends Size
      * Min limits the used disk space for all files, when used with max=null it is the maximum file size
      * It also accepts an array with the keys 'min' and 'max'
      *
-     * @param  integer|array|Traversable $options Options for this validator
+     * @param  int|array|Traversable $options Options for this validator
      * @throws \Zend\Validator\Exception\InvalidArgumentException
      */
     public function __construct($options = null)

@@ -27,7 +27,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
     /**
      * Count all items
      *
-     * @return integer
+     * @return int
      */
     public function count()
     {
@@ -97,7 +97,7 @@ class ItemList implements Countable, SeekableIterator, ArrayAccess
     /**
      * Seek to an absolute position
      *
-     * @param  integer $index
+     * @param  int $index
      * @throws OutOfBoundsException When the seek position is invalid
      * @return void
      */

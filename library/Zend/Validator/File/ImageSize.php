@@ -55,14 +55,14 @@ class ImageSize extends AbstractValidator
     /**
      * Detected width
      *
-     * @var integer
+     * @var int
      */
     protected $width;
 
     /**
      * Detected height
      *
-     * @var integer
+     * @var int
      */
     protected $height;
 
@@ -113,7 +113,7 @@ class ImageSize extends AbstractValidator
     /**
      * Returns the minimum allowed width
      *
-     * @return integer
+     * @return int
      */
     public function getMinWidth()
     {
@@ -123,7 +123,7 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the minimum allowed width
      *
-     * @param  integer $minWidth
+     * @param  int $minWidth
      * @return ImageSize Provides a fluid interface
      * @throws Exception\InvalidArgumentException When minwidth is greater than maxwidth
      */
@@ -141,7 +141,7 @@ class ImageSize extends AbstractValidator
     /**
      * Returns the maximum allowed width
      *
-     * @return integer
+     * @return int
      */
     public function getMaxWidth()
     {
@@ -151,7 +151,7 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the maximum allowed width
      *
-     * @param  integer $maxWidth
+     * @param  int $maxWidth
      * @return ImageSize Provides a fluid interface
      * @throws Exception\InvalidArgumentException When maxwidth is less than minwidth
      */
@@ -169,7 +169,7 @@ class ImageSize extends AbstractValidator
     /**
      * Returns the minimum allowed height
      *
-     * @return integer
+     * @return int
      */
     public function getMinHeight()
     {
@@ -179,7 +179,7 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the minimum allowed height
      *
-     * @param  integer $minHeight
+     * @param  int $minHeight
      * @return ImageSize Provides a fluid interface
      * @throws Exception\InvalidArgumentException When minheight is greater than maxheight
      */
@@ -197,7 +197,7 @@ class ImageSize extends AbstractValidator
     /**
      * Returns the maximum allowed height
      *
-     * @return integer
+     * @return int
      */
     public function getMaxHeight()
     {
@@ -207,7 +207,7 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the maximum allowed height
      *
-     * @param  integer $maxHeight
+     * @param  int $maxHeight
      * @return ImageSize Provides a fluid interface
      * @throws Exception\InvalidArgumentException When maxheight is less than minheight
      */

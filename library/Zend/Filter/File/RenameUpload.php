@@ -99,7 +99,7 @@ class RenameUpload extends AbstractFilter
      */
     public function setUseUploadExtension($flag = true)
     {
-        $this->options['use_upload_extension'] = (boolean) $flag;
+        $this->options['use_upload_extension'] = (bool) $flag;
         return $this;
     }
 

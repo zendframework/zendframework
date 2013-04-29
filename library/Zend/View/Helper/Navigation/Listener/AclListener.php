@@ -28,7 +28,7 @@ class AclListener
      *      - Page is accepted if ACL allows page's resource or privilege.
      *
      * @param   MvcEvent    $event
-     * @return  boolean
+     * @return  bool
      */
     public static function accept(Event $event)
     {

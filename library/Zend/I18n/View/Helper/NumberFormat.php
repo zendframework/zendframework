@@ -22,21 +22,21 @@ class NumberFormat extends AbstractHelper
     /**
      * number of decimals to use.
      *
-     * @var integer
+     * @var int
      */
     protected $decimals;
 
     /**
      * NumberFormat style to use
      *
-     * @var integer
+     * @var int
      */
     protected $formatStyle;
 
     /**
      * NumberFormat type to use
      *
-     * @var integer
+     * @var int
      */
     protected $formatType;
 
@@ -168,7 +168,7 @@ class NumberFormat extends AbstractHelper
     /**
      * Set number of decimals to use instead of the default.
      *
-     * @param  integer $decimals
+     * @param  int $decimals
      * @return NumberFormat
      */
     public function setDecimals($decimals)
@@ -180,7 +180,7 @@ class NumberFormat extends AbstractHelper
     /**
      * Get number of decimals.
      *
-     * @return integer
+     * @return int
      */
     public function getDecimals()
     {

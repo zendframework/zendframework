@@ -27,7 +27,7 @@ class Error extends AbstractObject
     /**
      * Height is forced
      * @param bool $recalculate
-     * @return integer
+     * @return int
      */
     public function getHeight($recalculate = false)
     {
@@ -37,7 +37,7 @@ class Error extends AbstractObject
     /**
      * Width is forced
      * @param bool $recalculate
-     * @return integer
+     * @return int
      */
     public function getWidth($recalculate = false)
     {

@@ -691,7 +691,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  string        $name
-     * @param  integer|array $value
+     * @param  int|array $value
      * @param  bool       $utc
      * @return Node Provides a fluid interface
      * @throws Exception\LdapException
@@ -708,7 +708,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  string        $name
-     * @param  integer|array $value
+     * @param  int|array $value
      * @param  bool       $utc
      * @return Node Provides a fluid interface
      * @throws Exception\LdapException
@@ -724,7 +724,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * Checks if the attribute can be set and sets it accordingly.
      *
      * @param  string        $name
-     * @param  integer|array $value
+     * @param  int|array $value
      * @param  bool       $utc
      * @param  bool       $append
      * @throws Exception\LdapException
@@ -920,7 +920,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an online method.
      *
      * @param  string|Filter\AbstractFilter $filter
-     * @param  integer                      $scope
+     * @param  int                      $scope
      * @param  string                       $sort
      * @return Node\Collection
      * @throws Exception\LdapException
@@ -939,8 +939,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an online method.
      *
      * @param  string|Filter\AbstractFilter $filter
-     * @param  integer                      $scope
-     * @return integer
+     * @param  int                      $scope
+     * @return int
      * @throws Exception\LdapException
      */
     public function countSubtree($filter, $scope = Ldap::SEARCH_SCOPE_SUB)
@@ -953,7 +953,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an online method.
      *
-     * @return integer
+     * @return int
      * @throws Exception\LdapException
      */
     public function countChildren()

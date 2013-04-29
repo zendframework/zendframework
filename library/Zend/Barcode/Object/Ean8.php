@@ -29,7 +29,7 @@ class Ean8 extends Ean13
 
     /**
      * Width of the barcode (in pixels)
-     * @return integer
+     * @return int
      */
     protected function calculateBarcodeWidth()
     {

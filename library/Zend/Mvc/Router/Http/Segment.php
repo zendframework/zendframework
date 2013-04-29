@@ -215,7 +215,7 @@ class Segment implements RouteInterface
      *
      * @param  array   $parts
      * @param  array   $constraints
-     * @param  integer $groupIndex
+     * @param  int $groupIndex
      * @return string
      * @throws Exception\RuntimeException
      */

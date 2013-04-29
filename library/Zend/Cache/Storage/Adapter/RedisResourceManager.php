@@ -33,7 +33,7 @@ class RedisResourceManager
      * Check if a resource exists
      *
      * @param string $id
-     * @return boolean
+     * @return bool
      */
     public function hasResource($id)
     {

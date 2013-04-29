@@ -49,7 +49,7 @@ class Postnet extends AbstractObject
 
     /**
      * Width of the barcode (in pixels)
-     * @return integer
+     * @return int
      */
     protected function calculateBarcodeWidth()
     {

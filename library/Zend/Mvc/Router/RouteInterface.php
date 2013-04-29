@@ -19,7 +19,7 @@ interface RouteInterface
     /**
      * Priority used for route stacks.
      *
-     * @var integer
+     * @var int
      * public $priority;
      */
 

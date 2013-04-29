@@ -35,7 +35,7 @@ interface RouteInterface
      * Match a given request.
      *
      * @param  Request $request
-     * @return RouteMatch
+     * @return RouteMatch|null
      */
     public function match(Request $request);
 

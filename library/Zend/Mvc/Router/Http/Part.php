@@ -18,9 +18,7 @@ use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;
 
 /**
- * RouteInterface part.
- *
- * @see        http://guides.rubyonrails.org/routing.html
+ * Part route.
  */
 class Part extends TreeRouteStack implements RouteInterface
 {
@@ -79,8 +77,8 @@ class Part extends TreeRouteStack implements RouteInterface
      *
      * @see    \Zend\Mvc\Router\RouteInterface::factory()
      * @param  mixed $options
-     * @throws Exception\InvalidArgumentException
      * @return Part
+     * @throws Exception\InvalidArgumentException
      */
     public static function factory($options = array())
     {
@@ -109,6 +107,7 @@ class Part extends TreeRouteStack implements RouteInterface
         if (!isset($options['child_routes']) || !$options['child_routes']) {
             $options['child_routes'] = null;
         }
+
         if ($options['child_routes'] instanceof Traversable) {
             $options['child_routes'] = ArrayUtils::iteratorToArray($options['child_routes']);
         }
@@ -126,17 +125,18 @@ class Part extends TreeRouteStack implements RouteInterface
      * match(): defined by RouteInterface interface.
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
-     * @param  Request  $request
-     * @param  int|null $pathOffset
+     * @param  Request      $request
+     * @param  integer|null $pathOffset
+     * @param  array        $options
      * @return RouteMatch|null
      */
-    public function match(Request $request, $pathOffset = null)
+    public function match(Request $request, $pathOffset = null, array $options = array())
     {
         if ($pathOffset === null) {
             $pathOffset = 0;
         }
 
-        $match = $this->route->match($request, $pathOffset);
+        $match = $this->route->match($request, $pathOffset, $options);
 
         if ($match !== null && method_exists($request, 'getUri')) {
             if ($this->childRoutes !== null) {
@@ -157,7 +157,7 @@ class Part extends TreeRouteStack implements RouteInterface
             }
 
             foreach ($this->routes as $name => $route) {
-                if (($subMatch = $route->match($request, $nextOffset)) instanceof RouteMatch) {
+                if (($subMatch = $route->match($request, $nextOffset, $options)) instanceof RouteMatch) {
                     if ($match->getLength() + $subMatch->getLength() + $pathOffset === $pathLength) {
                         return $match->merge($subMatch)->setMatchedRouteName($name);
                     }

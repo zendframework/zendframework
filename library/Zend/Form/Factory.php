@@ -468,6 +468,11 @@ class Factory
      */
     protected function prepareAndInjectInputFilter($spec, FormInterface $form, $method)
     {
+        if ($spec instanceof InputFilterInterface) {
+            $form->setInputFilter($spec);
+            return;
+        }
+
         if (is_string($spec)) {
             if (!class_exists($spec)) {
                 throw new Exception\DomainException(sprintf(

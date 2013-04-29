@@ -589,6 +589,12 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals($validator->getOption('messageTemplates'),
                                      'messageTemplates', $validator);
     }
+
+    public function testTypeAutoDetectionHasNoSideEffect()
+    {
+        $validator = new NotEmpty(array('translatorEnabled' => true));
+        $this->assertEquals(493, $validator->getType());
+    }
 }
 
 class ClassTest2

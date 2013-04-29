@@ -62,6 +62,10 @@ class FormSelect extends AbstractHelper
         'label'    => true,
     );
 
+    protected $translatableAttributes = array(
+        'label' => true,
+    );
+
     /**
      * Invoke helper as functor
      *

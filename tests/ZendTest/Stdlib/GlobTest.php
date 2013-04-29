@@ -32,4 +32,13 @@ class GlobTest extends TestCase
         $result = Glob::glob('/some/path/{,*.}{this,orthis}.php', Glob::GLOB_BRACE);
         $this->assertInternalType('array', $result);
     }
+
+    public function testThrowExceptionOnError()
+    {
+        $this->setExpectedException('Zend\Stdlib\Exception\RuntimeException');
+
+        // run into a max path lengh error
+        $path = '/' . str_repeat('a', 10000);
+        Glob::glob($path);
+    }
 }

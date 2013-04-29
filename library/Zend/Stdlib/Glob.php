@@ -9,6 +9,9 @@
 
 namespace Zend\Stdlib;
 
+use Zend\Stdlib\Exception;
+use Zend\Stdlib\ErrorHandler;
+
 /**
  * Wrapper for glob with fallback if GLOB_BRACE is not available.
  */
@@ -33,9 +36,10 @@ abstract class Glob
      * @param  string  $pattern
      * @param  integer $flags
      * @param  bool $forceFallback
-     * @return array|false
+     * @return array
+     * @throws Exception\RuntimeException
      */
-    public static function glob($pattern, $flags, $forceFallback = false)
+    public static function glob($pattern, $flags = 0, $forceFallback = false)
     {
         if (!defined('GLOB_BRACE') || $forceFallback) {
             return static::fallbackGlob($pattern, $flags);
@@ -49,7 +53,8 @@ abstract class Glob
      *
      * @param  string  $pattern
      * @param  integer $flags
-     * @return array|false
+     * @return array
+     * @throws Exception\RuntimeException
      */
     protected static function systemGlob($pattern, $flags)
     {
@@ -75,7 +80,13 @@ abstract class Glob
             $globFlags = 0;
         }
 
-        return glob($pattern, $globFlags);
+        ErrorHandler::start();
+        $res = glob($pattern, $globFlags);
+        $err = ErrorHandler::stop();
+        if ($res === false) {
+            throw new Exception\RuntimeException("glob('{$pattern}', {$globFlags}) failed", 0, $err);
+        }
+        return $res;
     }
 
     /**
@@ -83,7 +94,8 @@ abstract class Glob
      *
      * @param  string  $pattern
      * @param  integer $flags
-     * @return array|false
+     * @return array
+     * @throws Exception\RuntimeException
      */
     protected static function fallbackGlob($pattern, $flags)
     {

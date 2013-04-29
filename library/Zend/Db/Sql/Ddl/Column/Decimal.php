@@ -2,7 +2,7 @@
 
 namespace Zend\Db\Sql\Ddl\Column;
 
-class Date extends Column
+class Decimal extends Column
 {
     protected $specification = '%1$s DECIMAL(%2$s.%3$s)%4$s%5$s';
     protected $precision;

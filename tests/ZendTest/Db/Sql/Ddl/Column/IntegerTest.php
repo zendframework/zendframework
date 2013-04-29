@@ -8,11 +8,11 @@
  * @package Zend_Db
  */
 
-namespace Zend\Db\Sql\Ddl\Constraint;
+namespace ZendTest\Db\Sql\Ddl\Column;
 
-use Zend\Db\Sql\ExpressionInterface;
+use Zend\Db\Sql\Ddl\Column\Integer;
 
-interface ConstraintInterface extends ExpressionInterface
+class IntegerTest extends \PHPUnit_Framework_TestCase
 {
-    public function getColumns();
+
 }

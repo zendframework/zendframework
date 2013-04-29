@@ -768,7 +768,6 @@ class Simple implements RouteInterface
              */
             if ($part['hasValue']) {
                 $matches[$part['name']] = $value;
-
             } elseif (isset($part['alternatives'])) {
                 // from all alternativesm set matching parameter to TRUE and the rest to FALSE
                 foreach ($part['alternatives'] as $alt) {
@@ -777,9 +776,8 @@ class Simple implements RouteInterface
 
                 // set alternatives group value
                 $matches[$part['name']] = $value;
-
-            } else {
-                // set matching parameter flag to true
+            } else if (!$part['required']) {
+                // set optional flag to true
                 $matches[$part['name']] = true;
             }
 

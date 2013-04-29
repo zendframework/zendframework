@@ -66,9 +66,11 @@ class Console extends AbstractAdapter
      *
      * @var array
      */
-    protected $elements = array(self::ELEMENT_PERCENT,
-                                 self::ELEMENT_BAR,
-                                 self::ELEMENT_ETA);
+    protected $elements = array(
+        self::ELEMENT_PERCENT,
+        self::ELEMENT_BAR,
+        self::ELEMENT_ETA,
+    );
 
     /**
      * Which action to do at finish call

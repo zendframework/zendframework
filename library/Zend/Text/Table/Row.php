@@ -72,7 +72,7 @@ class Row
      *
      * Returns null, when the index is out of range
      *
-     * @param  integer $index
+     * @param  int $index
      * @return Column|null
      */
     public function getColumn($index)
@@ -98,7 +98,7 @@ class Row
      * Get the widths of all columns, which were rendered last
      *
      * @throws Exception\UnexpectedValueException When no columns were rendered yet
-     * @return integer
+     * @return int
      */
     public function getColumnWidths()
     {
@@ -114,7 +114,7 @@ class Row
      *
      * @param  array                               $columnWidths Width of all columns
      * @param  Decorator $decorator    Decorator for the row borders
-     * @param  integer                             $padding      Padding for the columns
+     * @param  int                             $padding      Padding for the columns
      * @throws Exception\OverflowException When there are too many columns
      * @return string
      */

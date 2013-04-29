@@ -27,14 +27,14 @@ class PriorityList implements Iterator, Countable
     /**
      * Serial assigned to routes to preserve LIFO.
      *
-     * @var integer
+     * @var int
      */
     protected $serial = 0;
 
     /**
      * Internal counter to avoid usage of count().
      *
-     * @var integer
+     * @var int
      */
     protected $count = 0;
 
@@ -50,7 +50,7 @@ class PriorityList implements Iterator, Countable
      *
      * @param  string  $name
      * @param  RouteInterface   $route
-     * @param  integer $priority
+     * @param  int $priority
      * @return void
      */
     public function insert($name, RouteInterface $route, $priority)
@@ -126,7 +126,7 @@ class PriorityList implements Iterator, Countable
      *
      * @param  array $route1,
      * @param  array $route2
-     * @return integer
+     * @return int
      */
     protected function compare(array $route1, array $route2)
     {
@@ -202,7 +202,7 @@ class PriorityList implements Iterator, Countable
      * count(): defined by Countable interface.
      *
      * @see    Countable::count()
-     * @return integer
+     * @return int
      */
     public function count()
     {

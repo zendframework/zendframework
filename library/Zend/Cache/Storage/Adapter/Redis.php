@@ -27,7 +27,7 @@ class Redis extends AbstractAdapter implements
     /**
      * Has this instance be initialized
      *
-     * @var boolean
+     * @var bool
      */
     protected $initialized = false;
 
@@ -138,7 +138,7 @@ class Redis extends AbstractAdapter implements
      * Internal method to get an item.
      *
      * @param string  &$normalizedKey Key where to store data
-     * @param boolean &$success       If the operation was successfull
+     * @param bool &$success       If the operation was successfull
      * @param mixed   &$casToken      Token
      * @return mixed Data on success, false on key not found
      * @throws Exception\RuntimeException
@@ -198,7 +198,7 @@ class Redis extends AbstractAdapter implements
      *
      * @param string &$normalizedKey Normalized key which will be checked
      *
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException
      */
     protected function internalHasItem(& $normalizedKey)
@@ -217,7 +217,7 @@ class Redis extends AbstractAdapter implements
      * @param string &$normalizedKey Key in Redis under which value will be saved
      * @param mixed  &$value         Value to store under cache key
      *
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException
      */
     protected function internalSetItem(& $normalizedKey, & $value)
@@ -255,7 +255,7 @@ class Redis extends AbstractAdapter implements
 
         $namespacedKeyValuePairs = array();
         foreach ($normalizedKeyValuePairs as $normalizedKey => & $value) {
-            $namespacedKeyValuePairs[ $this->namespacePrefix . $normalizedKey ] = & $value;
+            $namespacedKeyValuePairs[$this->namespacePrefix . $normalizedKey] = & $value;
         }
         try {
             if ($ttl > 0) {
@@ -265,7 +265,7 @@ class Redis extends AbstractAdapter implements
                 }
                 //mSet does not allow ttl, so use transaction
                 $transaction = $redis->multi();
-                foreach($namespacedKeyValuePairs as $key => $value) {
+                foreach ($namespacedKeyValuePairs as $key => $value) {
                     $transaction->setex($key, $ttl, $value);
                 }
                 $success = $transaction->exec();
@@ -306,7 +306,7 @@ class Redis extends AbstractAdapter implements
      *
      * @param string &$normalizedKey Key which will be removed
      *
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException
      */
     protected function internalRemoveItem(& $normalizedKey)

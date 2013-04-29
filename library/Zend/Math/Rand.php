@@ -27,7 +27,7 @@ abstract class Rand
     /**
      * Generate random bytes using OpenSSL or Mcrypt and mt_rand() as fallback
      *
-     * @param  integer $length
+     * @param  int $length
      * @param  bool $strong true if you need a strong random generator (cryptography)
      * @return string
      * @throws Exception\RuntimeException
@@ -109,10 +109,10 @@ abstract class Rand
     /**
      * Generate a random integer between $min and $max
      *
-     * @param  integer $min
-     * @param  integer $max
+     * @param  int $min
+     * @param  int $max
      * @param  bool $strong true if you need a strong random generator (cryptography)
-     * @return integer
+     * @return int
      * @throws Exception\DomainException
      */
     public static function getInteger($min, $max, $strong = false)
@@ -170,7 +170,7 @@ abstract class Rand
      * Uses supplied character list for generating the new string.
      * If no character list provided - uses Base 64 character set.
      *
-     * @param  integer $length
+     * @param  int $length
      * @param  string|null $charlist
      * @param  bool $strong  true if you need a strong random generator (cryptography)
      * @return string

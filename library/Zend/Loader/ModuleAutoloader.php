@@ -153,9 +153,9 @@ class ModuleAutoloader implements SplAutoloader
             }
         }
 
-        if (count($this->namespacedPaths) >= 1 ) {
-            foreach ( $this->namespacedPaths as $namespace=>$path ) {
-                if ( false === strpos($moduleName,$namespace) ) {
+        if (count($this->namespacedPaths) >= 1) {
+            foreach ($this->namespacedPaths as $namespace => $path) {
+                if (false === strpos($moduleName, $namespace)) {
                     continue;
                 }
 
@@ -359,8 +359,8 @@ class ModuleAutoloader implements SplAutoloader
             ));
         }
         if ($moduleName) {
-            if (in_array( substr($moduleName, -2 ), array('\\*','\\%') ) ) {
-                $this->namespacedPaths[ substr($moduleName, 0, -2 ) ] = static::normalizePath($path);
+            if (in_array( substr($moduleName, -2), array('\\*', '\\%'))) {
+                $this->namespacedPaths[substr($moduleName, 0, -2)] = static::normalizePath($path);
             } else {
                 $this->explicitPaths[$moduleName] = static::normalizePath($path);
             }

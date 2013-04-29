@@ -282,7 +282,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Get the redirections count
      *
-     * @return integer
+     * @return int
      */
     public function getRedirectionsCount()
     {

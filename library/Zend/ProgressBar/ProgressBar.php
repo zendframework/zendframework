@@ -41,7 +41,7 @@ class ProgressBar
     /**
      * Start time of the progressbar, required for ETA
      *
-     * @var integer
+     * @var int
      */
     protected $startTime;
 

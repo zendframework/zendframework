@@ -96,7 +96,7 @@ class DateTime extends AbstractValidator
     /**
      * Sets the calendar to be used by the IntlDateFormatter
      *
-     * @param integer|null $calendar
+     * @param int|null $calendar
      * @return DateTime provides fluent interface
      */
     public function setCalendar($calendar)
@@ -119,7 +119,7 @@ class DateTime extends AbstractValidator
     /**
      * Sets the date format to be used by the IntlDateFormatter
      *
-     * @param integer|null $dateType
+     * @param int|null $dateType
      * @return DateTime provides fluent interface
      */
     public function setDateType($dateType)
@@ -166,7 +166,7 @@ class DateTime extends AbstractValidator
     /**
      * Sets the time format to be used by the IntlDateFormatter
      *
-     * @param integer|null $timeType
+     * @param int|null $timeType
      * @return DateTime provides fluent interface
      */
     public function setTimeType($timeType)

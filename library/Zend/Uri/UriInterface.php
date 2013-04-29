@@ -117,7 +117,7 @@ interface UriInterface
     /**
      * Get the URI port
      *
-     * @return integer|null
+     * @return int|null
      */
     public function getPort();
 
@@ -202,7 +202,7 @@ interface UriInterface
     /**
      * Set the port part of the URI
      *
-     * @param  integer $port
+     * @param  int $port
      * @return Uri
      */
     public function setPort($port);

@@ -31,7 +31,7 @@ abstract class AbstractProtocol
 
     /**
      * Maximum of the transaction log
-     * @var integer
+     * @var int
      */
     protected $maximumLog = 64;
 
@@ -45,7 +45,7 @@ abstract class AbstractProtocol
 
     /**
      * Port number of connection
-     * @var integer
+     * @var int
      */
     protected $port;
 
@@ -89,7 +89,7 @@ abstract class AbstractProtocol
      * Constructor.
      *
      * @param  string  $host OPTIONAL Hostname of remote connection (default: 127.0.0.1)
-     * @param  integer $port OPTIONAL Port number (default: null)
+     * @param  int $port OPTIONAL Port number (default: null)
      * @throws Exception\RuntimeException
      */
     public function __construct($host = '127.0.0.1', $port = null)
@@ -118,7 +118,7 @@ abstract class AbstractProtocol
     /**
      * Set the maximum log size
      *
-     * @param integer $maximumLog Maximum log size
+     * @param int $maximumLog Maximum log size
      */
     public function setMaximumLog($maximumLog)
     {
@@ -250,7 +250,7 @@ abstract class AbstractProtocol
      *
      * @param  string $request
      * @throws Exception\RuntimeException
-     * @return integer|bool Number of bytes written to remote host
+     * @return int|bool Number of bytes written to remote host
      */
     protected function _send($request)
     {
@@ -276,7 +276,7 @@ abstract class AbstractProtocol
     /**
      * Get a line from the stream.
      *
-     * @param  integer $timeout Per-request timeout value if applicable
+     * @param  int $timeout Per-request timeout value if applicable
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -319,7 +319,7 @@ abstract class AbstractProtocol
      * Throws a Zend_Mail_Protocol_Exception if an unexpected code is returned.
      *
      * @param  string|array $code One or more codes that indicate a successful response
-     * @param  integer $timeout Per-request timeout value if applicable
+     * @param  int $timeout Per-request timeout value if applicable
      * @throws Exception\RuntimeException
      * @return string Last line of response string
      */

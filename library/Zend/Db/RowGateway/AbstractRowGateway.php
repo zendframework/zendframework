@@ -120,7 +120,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     /**
      * Save
      *
-     * @return integer
+     * @return int
      */
     public function save()
     {

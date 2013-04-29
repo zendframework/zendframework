@@ -122,7 +122,7 @@ class Http extends Uri
      * default. Users may still enforce allowing other host types.
      *
      * @param  string  $host
-     * @param  integer $allowed
+     * @param  int $allowed
      * @return bool
      */
     public static function validateHost($host, $allowed = self::HOST_DNS_OR_IPV4_OR_IPV6)
@@ -162,7 +162,7 @@ class Http extends Uri
      *
      * If no port is set, will return the default port according to the scheme
      *
-     * @return integer
+     * @return int
      * @see    Zend\Uri\Uri::getPort()
      */
     public function getPort()

@@ -45,7 +45,7 @@ interface AdapterInterface
     /**
      * Returns the allowed characters
      *
-     * @return integer|string|array
+     * @return int|string|array
      */
     public function getCharacters();
 

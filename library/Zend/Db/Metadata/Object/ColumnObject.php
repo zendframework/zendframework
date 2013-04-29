@@ -56,13 +56,13 @@ class ColumnObject
 
     /**
      *
-     * @var integer
+     * @var int
      */
     protected $characterMaximumLength = null;
 
     /**
      *
-     * @var integer
+     * @var int
      */
     protected $characterOctetLength = null;
 

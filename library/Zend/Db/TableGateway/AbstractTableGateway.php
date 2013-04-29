@@ -66,7 +66,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
 
     /**
      *
-     * @var integer
+     * @var int
      */
     protected $lastInsertValue = null;
 
@@ -415,7 +415,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     /**
      * Get last insert value
      *
-     * @return integer
+     * @return int
      */
     public function getLastInsertValue()
     {

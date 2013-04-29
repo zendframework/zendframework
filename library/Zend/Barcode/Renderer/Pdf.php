@@ -27,7 +27,7 @@ class Pdf extends AbstractRenderer
 
     /**
      * Page number in PDF resource
-     * @var integer
+     * @var int
      */
     protected $page = 0;
 
@@ -41,7 +41,7 @@ class Pdf extends AbstractRenderer
      * Set a PDF resource to draw the barcode inside
      *
      * @param PdfDocument $pdf
-     * @param integer     $page
+     * @param int     $page
      * @return Pdf
      */
     public function setResource(PdfDocument $pdf, $page = 0)
@@ -98,7 +98,7 @@ class Pdf extends AbstractRenderer
     /**
      * Draw a polygon in the rendering resource
      * @param array $points
-     * @param integer $color
+     * @param int $color
      * @param  bool $filled
      */
     protected function drawPolygon($points, $color, $filled = true)
@@ -142,7 +142,7 @@ class Pdf extends AbstractRenderer
      * @param float   $size
      * @param array   $position
      * @param string  $font
-     * @param integer $color
+     * @param int     $color
      * @param string  $alignment
      * @param float   $orientation
      */

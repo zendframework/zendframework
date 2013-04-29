@@ -93,11 +93,11 @@ abstract class ArrayUtils
      *
      * For example:
      * <code>
-     * $list = array( 'a','b','c','d' );
+     * $list = array('a', 'b', 'c', 'd');
      * $list = array(
      *     0 => 'foo',
      *     1 => 'bar',
-     *     2 => array( 'foo' => 'baz' ),
+     *     2 => array('foo' => 'baz'),
      * );
      * </code>
      *

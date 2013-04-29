@@ -33,7 +33,7 @@ class RedisResourceManager
      * Check if a resource exists
      *
      * @param string $id
-     * @return boolean
+     * @return bool
      */
     public function hasResource($id)
     {
@@ -294,7 +294,7 @@ class RedisResourceManager
             $constants  = $reflection->getConstants();
             foreach ($constants as $constName => $constValue) {
                 if (substr($constName, 0, 4) == 'OPT_') {
-                    $libOptions[ $constValue ] = $resource->getOption($constValue);
+                    $libOptions[$constValue] = $resource->getOption($constValue);
                 }
             }
             return $libOptions;

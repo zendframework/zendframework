@@ -45,7 +45,7 @@ class Count extends AbstractValidator
     /**
      * Actual filecount
      *
-     * @var integer
+     * @var int
      */
     protected $count;
 
@@ -76,7 +76,7 @@ class Count extends AbstractValidator
      * 'min': Minimum filecount
      * 'max': Maximum filecount
      *
-     * @param  integer|array|\Traversable $options Options for the adapter
+     * @param  int|array|\Traversable $options Options for the adapter
      */
     public function __construct($options = null)
     {
@@ -95,7 +95,7 @@ class Count extends AbstractValidator
     /**
      * Returns the minimum file count
      *
-     * @return integer
+     * @return int
      */
     public function getMin()
     {
@@ -105,7 +105,7 @@ class Count extends AbstractValidator
     /**
      * Sets the minimum file count
      *
-     * @param  integer|array $min The minimum file count
+     * @param  int|array $min The minimum file count
      * @return Count Provides a fluent interface
      * @throws Exception\InvalidArgumentException When min is greater than max
      */
@@ -119,7 +119,7 @@ class Count extends AbstractValidator
             throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
-        $min = (integer) $min;
+        $min = (int) $min;
         if (($this->getMax() !== null) && ($min > $this->getMax())) {
             throw new Exception\InvalidArgumentException("The minimum must be less than or equal to the maximum file count, but $min >"
                                             . " {$this->getMax()}");
@@ -132,7 +132,7 @@ class Count extends AbstractValidator
     /**
      * Returns the maximum file count
      *
-     * @return integer
+     * @return int
      */
     public function getMax()
     {
@@ -142,7 +142,7 @@ class Count extends AbstractValidator
     /**
      * Sets the maximum file count
      *
-     * @param  integer|array $max The maximum file count
+     * @param  int|array $max The maximum file count
      * @return Count Provides a fluent interface
      * @throws Exception\InvalidArgumentException When max is smaller than min
      */
@@ -156,7 +156,7 @@ class Count extends AbstractValidator
             throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
-        $max = (integer) $max;
+        $max = (int) $max;
         if (($this->getMin() !== null) && ($max < $this->getMin())) {
             throw new Exception\InvalidArgumentException("The maximum must be greater than or equal to the minimum file count, but "
                                             . "$max < {$this->getMin()}");

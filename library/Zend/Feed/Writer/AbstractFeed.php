@@ -125,7 +125,7 @@ class AbstractFeed
     /**
      * Set the feed creation date
      *
-     * @param null|integer|DateTime
+     * @param null|int|DateTime
      * @throws Exception\InvalidArgumentException
      * @return AbstractFeed
      */
@@ -147,7 +147,7 @@ class AbstractFeed
     /**
      * Set the feed modification date
      *
-     * @param null|integer|DateTime
+     * @param null|int|DateTime
      * @throws Exception\InvalidArgumentException
      * @return AbstractFeed
      */
@@ -169,7 +169,7 @@ class AbstractFeed
     /**
      * Set the feed last-build date. Ignored for Atom 1.0.
      *
-     * @param null|integer|DateTime
+     * @param null|int|DateTime
      * @throws Exception\InvalidArgumentException
      * @return AbstractFeed
      */

@@ -89,7 +89,7 @@ class Layout extends AbstractHelper
      */
     protected function getViewModelHelper()
     {
-        if(null === $this->viewModelHelper) {
+        if (null === $this->viewModelHelper) {
             $this->viewModelHelper = $this->getView()->plugin('view_model');
         }
 

@@ -145,7 +145,7 @@ class Result implements ResultInterface
     /**
      * Get affected rows
      *
-     * @return integer
+     * @return int
      */
     public function getAffectedRows()
     {
@@ -175,7 +175,7 @@ class Result implements ResultInterface
     /**
      * Get field count
      *
-     * @return integer
+     * @return int
      */
     public function getFieldCount()
     {

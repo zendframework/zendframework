@@ -88,7 +88,7 @@ class Figlet
     /**
      * Output width, defaults to 80.
      *
-     * @var integer
+     * @var int
      */
     protected $outputWidth = 80;
 
@@ -102,35 +102,35 @@ class Figlet
     /**
      * Height of the characters
      *
-     * @var integer
+     * @var int
      */
     protected $charHeight;
 
     /**
      * Max length of any character
      *
-     * @var integer
+     * @var int
      */
     protected $maxLength;
 
     /**
      * Smush mode
      *
-     * @var integer
+     * @var int
      */
     protected $smushMode = 0;
 
     /**
      * Smush defined by the font
      *
-     * @var integer
+     * @var int
      */
     protected $fontSmush = 0;
 
     /**
      * Smush defined by the user
      *
-     * @var integer
+     * @var int
      */
     protected $userSmush = 0;
 
@@ -147,7 +147,7 @@ class Figlet
      * For using font default, this parameter should be null, else one of
      * the values of Zend\Text\Figlet::JUSTIFICATION_*
      *
-     * @var integer
+     * @var int
      */
     protected $justification = null;
 
@@ -157,14 +157,14 @@ class Figlet
      * For using font default, this parameter should be null, else one of
      * the values of Zend\Text\Figlet::DIRECTION_*
      *
-     * @var integer
+     * @var int
      */
     protected $rightToLeft = null;
 
     /**
      * Override font file smush layout
      *
-     * @var integer
+     * @var int
      */
     protected $smushOverride = 0;
 
@@ -178,28 +178,28 @@ class Figlet
     /**
      * Previous character width
      *
-     * @var integer
+     * @var int
      */
     protected $previousCharWidth = 0;
 
     /**
      * Current character width
      *
-     * @var integer
+     * @var int
      */
     protected $currentCharWidth = 0;
 
     /**
      * Current outline length
      *
-     * @var integer
+     * @var int
      */
     protected $outlineLength = 0;
 
     /**
      * Maximum outline length
      *
-     * @var integer
+     * @var int
      */
     protected $outlineLengthLimit = 0;
 
@@ -213,14 +213,14 @@ class Figlet
     /**
      * In character line length
      *
-     * @var integer
+     * @var int
      */
     protected $inCharLineLength = 0;
 
     /**
      * Maximum in character line length
      *
-     * @var integer
+     * @var int
      */
     protected $inCharLineLengthLimit = 0;
 
@@ -328,7 +328,7 @@ class Figlet
      * Set the justification. 0 stands for left aligned, 1 for centered and 2
      * for right aligned.
      *
-     * @param  integer $justification Justification of the output text
+     * @param  int $justification Justification of the output text
      * @return Figlet
      */
     public function setJustification($justification)
@@ -340,7 +340,7 @@ class Figlet
     /**
      * Set the output width
      *
-     * @param  integer $outputWidth Output with which should be used for word
+     * @param  int $outputWidth Output with which should be used for word
      *                              wrapping and justification
      * @return Figlet
      */
@@ -355,7 +355,7 @@ class Figlet
      * Zend\Text\Figlet::DIRECTION_LEFT_TO_RIGHT. For writing from right to left,
      * use Zend\Text\Figlet::DIRECTION_RIGHT_TO_LEFT.
      *
-     * @param  integer $rightToLeft Right-to-left mode
+     * @param  int $rightToLeft Right-to-left mode
      * @return Figlet
      */
     public function setRightToLeft($rightToLeft)
@@ -369,7 +369,7 @@ class Figlet
      *
      * Use one of the constants of Zend\Text\Figlet::SM_*, you may combine them.
      *
-     * @param  integer $smushMode Smush mode to use for generating text
+     * @param  int $smushMode Smush mode to use for generating text
      * @return Figlet
      */
     public function setSmushMode($smushMode)
@@ -710,7 +710,7 @@ class Figlet
      * Returns the maximum amount that the current character can be smushed into
      * the current line.
      *
-     * @return integer
+     * @return int
      */
     protected function _smushAmount()
     {
@@ -1185,7 +1185,7 @@ class Figlet
      * Unicode compatible ord() method
      *
      * @param  string $c The char to get the value from
-     * @return integer
+     * @return int
      */
     protected function _uniOrd($c)
     {

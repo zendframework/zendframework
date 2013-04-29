@@ -23,7 +23,7 @@ class PartialLoop extends Partial
     /**
      * Marker to where the pointer is at in the loop
      *
-     * @var integer
+     * @var int
      */
     protected $partialCounter = 0;
 

@@ -129,7 +129,7 @@ class Unicode implements Decorator
     /**
      * Convert am unicode character code to a character
      *
-     * @param  integer $code
+     * @param  int $code
      * @return string|false
      */
     protected function _uniChar($code)

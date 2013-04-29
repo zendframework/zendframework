@@ -259,7 +259,7 @@ class Atom extends AbstractEntry implements EntryInterface
     /**
      * Get the number of comments/replies for current entry
      *
-     * @return integer
+     * @return int
      */
     public function getCommentCount()
     {

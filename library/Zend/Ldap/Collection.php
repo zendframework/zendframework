@@ -24,7 +24,7 @@ class Collection implements \Iterator, \Countable
     /**
      * Current item number
      *
-     * @var integer
+     * @var int
      */
     protected $current = -1;
 

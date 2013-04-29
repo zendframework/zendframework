@@ -419,7 +419,7 @@ abstract class AbstractAccept implements HeaderInterface
             }
 
             // Asterisks
-            $values = array('type', 'subtype','format');
+            $values = array('type', 'subtype', 'format');
             foreach ($values as $value) {
                 if ($a->$value == '*' && $b->$value != '*') {
                     return 1;

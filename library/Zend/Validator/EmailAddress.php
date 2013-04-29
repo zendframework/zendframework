@@ -157,7 +157,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Returns the allow option of the attached hostname validator
      *
-     * @return integer
+     * @return int
      */
     public function getAllow()
     {
@@ -167,7 +167,7 @@ class EmailAddress extends AbstractValidator
     /**
      * Sets the allow option of the hostname validator to use
      *
-     * @param integer $allow
+     * @param int $allow
      * @return EmailAddress Provides a fluent interface
      */
     public function setAllow($allow)

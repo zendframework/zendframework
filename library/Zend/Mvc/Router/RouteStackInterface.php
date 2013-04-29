@@ -16,7 +16,7 @@ interface RouteStackInterface extends RouteInterface
      *
      * @param  string  $name
      * @param  mixed   $route
-     * @param  integer $priority
+     * @param  int $priority
      * @return RouteStackInterface
      */
     public function addRoute($name, $route, $priority = null);

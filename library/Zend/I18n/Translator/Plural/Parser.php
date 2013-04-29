@@ -29,7 +29,7 @@ class Parser
     /**
      * Current lexer position in the string.
      *
-     * @var integer
+     * @var int
      */
     protected $currentPos;
 
@@ -131,7 +131,7 @@ class Parser
      * Register a left infix symbol.
      *
      * @param  string  $id
-     * @param  integer $leftBindingPower
+     * @param  int $leftBindingPower
      * @return void
      */
     protected function registerLeftInfixSymbol($id, $leftBindingPower)
@@ -149,7 +149,7 @@ class Parser
      * Register a right infix symbol.
      *
      * @param  string  $id
-     * @param  integer $leftBindingPower
+     * @param  int $leftBindingPower
      * @return void
      */
     protected function registerRightInfixSymbol($id, $leftBindingPower)
@@ -167,7 +167,7 @@ class Parser
      * Register a prefix symbol.
      *
      * @param  string  $id
-     * @param  integer $leftBindingPower
+     * @param  int $leftBindingPower
      * @return void
      */
     protected function registerPrefixSymbol($id, $leftBindingPower)
@@ -185,7 +185,7 @@ class Parser
      * Register a symbol.
      *
      * @param  string  $id
-     * @param  integer $leftBindingPower
+     * @param  int $leftBindingPower
      * @return Symbol
      */
     protected function registerSymbol($id, $leftBindingPower = 0)
@@ -236,7 +236,7 @@ class Parser
     /**
      * Parse an expression.
      *
-     * @param  integer $rightBindingPower
+     * @param  int $rightBindingPower
      * @return Symbol
      */
     public function expression($rightBindingPower = 0)

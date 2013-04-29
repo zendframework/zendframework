@@ -20,7 +20,7 @@ class Gmp implements AdapterInterface
      * Create string representing big integer in decimal form from arbitrary integer format
      *
      * @param  string $operand
-     * @param  integer|null $base
+     * @param  int|null $base
      * @return bool|string
      */
     public function init($operand, $base = null)
@@ -292,7 +292,7 @@ class Gmp implements AdapterInterface
         $chars = self::BASE62_ALPHABET;
 
         // convert operand to decimal
-        if ($fromBase !== 10 ) {
+        if ($fromBase !== 10) {
             $decimal = '0';
             for ($i = 0, $len = strlen($operand); $i < $len; $i++) {
                 $decimal = gmp_mul($decimal, $fromBase);

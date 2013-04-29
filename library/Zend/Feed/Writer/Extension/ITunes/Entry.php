@@ -152,7 +152,7 @@ class Entry
      */
     public function setItunesExplicit($value)
     {
-        if (!in_array($value, array('yes','no','clean'))) {
+        if (!in_array($value, array('yes', 'no', 'clean'))) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "explicit" may only'
             . ' be one of "yes", "no" or "clean"');
         }

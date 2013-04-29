@@ -98,7 +98,7 @@ class Regex implements RouteInterface
      * match(): defined by RouteInterface interface.
      *
      * @param  Request $request
-     * @param  integer $pathOffset
+     * @param  int $pathOffset
      * @return RouteMatch|null
      */
     public function match(Request $request, $pathOffset = null)

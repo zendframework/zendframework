@@ -23,7 +23,7 @@ class Iterator implements AdapterInterface
     /**
      * Item count
      *
-     * @var integer
+     * @var int
      */
     protected $count = null;
 
@@ -46,8 +46,8 @@ class Iterator implements AdapterInterface
     /**
      * Returns an iterator of items for a page, or an empty array.
      *
-     * @param  integer $offset Page offset
-     * @param  integer $itemCountPerPage Number of items per page
+     * @param  int $offset Page offset
+     * @param  int $itemCountPerPage Number of items per page
      * @return array|\Zend\Paginator\SerializableLimitIterator
      */
     public function getItems($offset, $itemCountPerPage)
@@ -61,7 +61,7 @@ class Iterator implements AdapterInterface
     /**
      * Returns the total number of rows in the collection.
      *
-     * @return integer
+     * @return int
      */
     public function count()
     {

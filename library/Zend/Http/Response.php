@@ -233,7 +233,7 @@ class Response extends AbstractMessage implements ResponseInterface
     /**
      * Set HTTP status code and (optionally) message
      *
-     * @param  integer $code
+     * @param  int $code
      * @throws Exception\InvalidArgumentException
      * @return Response
      */

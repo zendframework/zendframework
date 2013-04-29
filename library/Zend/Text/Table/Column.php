@@ -41,7 +41,7 @@ class Column
     /**
      * Colspan of the column
      *
-     * @var integer
+     * @var int
      */
     protected $colSpan = 1;
 
@@ -57,7 +57,7 @@ class Column
      *
      * @param string  $content  The content of the column
      * @param string  $align    The align of the content
-     * @param integer $colSpan  The colspan of the column
+     * @param int $colSpan  The colspan of the column
      * @param string  $charset  The encoding of the content
      */
     public function __construct($content = null, $align = null, $colSpan = null, $charset = null)
@@ -154,7 +154,7 @@ class Column
     /**
      * Get the colspan
      *
-     * @return integer
+     * @return int
      */
     public function getColSpan()
     {
@@ -164,8 +164,8 @@ class Column
     /**
      * Render the column width the given column width
      *
-     * @param  integer $columnWidth The width of the column
-     * @param  integer $padding     The padding for the column
+     * @param  int $columnWidth The width of the column
+     * @param  int $padding     The padding for the column
      * @throws Exception\InvalidArgumentException When $columnWidth is lower than 1
      * @throws Exception\OutOfBoundsException When padding is greater than columnWidth
      * @return string

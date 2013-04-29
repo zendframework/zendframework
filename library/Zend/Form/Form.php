@@ -273,7 +273,7 @@ class Form extends Fieldset implements FormInterface
     public function bindValues(array $values = array())
     {
         if (!is_object($this->object)) {
-            if ( $this->baseFieldset === null || $this->baseFieldset->allowValueBinding() == false ) {
+            if ($this->baseFieldset === null || $this->baseFieldset->allowValueBinding() == false) {
                 return;
             }
         }
@@ -572,7 +572,7 @@ class Form extends Fieldset implements FormInterface
                 $values = array();
 
                 if (isset($data[$key])) {
-                    foreach(array_keys($data[$key]) as $cKey) {
+                    foreach (array_keys($data[$key]) as $cKey) {
                         $values[$cKey] = $value;
                     }
                 }

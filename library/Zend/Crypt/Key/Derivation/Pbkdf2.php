@@ -22,8 +22,8 @@ class Pbkdf2
      * @param  string  $hash       The hash algorithm to be used by HMAC
      * @param  string  $password   The source password/key
      * @param  string  $salt
-     * @param  integer $iterations The number of iterations
-     * @param  integer $length     The output size
+     * @param  int $iterations The number of iterations
+     * @param  int $length     The output size
      * @throws Exception\InvalidArgumentException
      * @return string
      */

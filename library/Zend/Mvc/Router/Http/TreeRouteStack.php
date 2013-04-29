@@ -238,10 +238,12 @@ class TreeRouteStack extends SimpleRouteStack
      * match(): defined by \Zend\Mvc\Router\RouteInterface
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
-     * @param  Request $request
-     * @return RouteMatch
+     * @param  Request      $request
+     * @param  integer|null $pathOffset
+     * @param  array        $options
+     * @return RouteMatch|null
      */
-    public function match(Request $request)
+    public function match(Request $request, $pathOffset = null, array $options = array())
     {
         if (!method_exists($request, 'getUri')) {
             return null;
@@ -254,28 +256,35 @@ class TreeRouteStack extends SimpleRouteStack
         $uri           = $request->getUri();
         $baseUrlLength = strlen($this->baseUrl) ?: null;
 
+        if ($pathOffset !== null) {
+            $baseUrlLength += $pathOffset;
+        }
+
         if ($this->requestUri === null) {
             $this->setRequestUri($uri);
         }
 
         if ($baseUrlLength !== null) {
             $pathLength = strlen($uri->getPath()) - $baseUrlLength;
-
-            foreach ($this->routes as $name => $route) {
-                if (($match = $route->match($request, $baseUrlLength)) instanceof RouteMatch && $match->getLength() === $pathLength) {
-                    $match->setMatchedRouteName($name);
-
-                    foreach ($this->defaultParams as $paramName => $value) {
-                        if ($match->getParam($paramName) === null) {
-                            $match->setParam($paramName, $value);
-                        }
-                    }
-
-                    return $match;
-                }
-            }
         } else {
-            return parent::match($request);
+            $pathLength = null;
+        }
+
+        foreach ($this->routes as $name => $route) {
+            if (
+                ($match = $route->match($request, $baseUrlLength, $options)) instanceof RouteMatch
+                && ($pathLength === null || $match->getLength() === $pathLength)
+            ) {
+                $match->setMatchedRouteName($name);
+
+                foreach ($this->defaultParams as $paramName => $value) {
+                    if ($match->getParam($paramName) === null) {
+                        $match->setParam($paramName, $value);
+                    }
+                }
+
+                return $match;
+            }
         }
 
         return null;

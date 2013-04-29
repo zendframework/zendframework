@@ -16,8 +16,6 @@ use Zend\Stdlib\RequestInterface as Request;
 
 /**
  * Scheme route.
- *
- * @see        http://guides.rubyonrails.org/routing.html
  */
 class Scheme implements RouteInterface
 {
@@ -79,7 +77,7 @@ class Scheme implements RouteInterface
      *
      * @see    \Zend\Mvc\Router\RouteInterface::match()
      * @param  Request $request
-     * @return RouteMatch
+     * @return RouteMatch|null
      */
     public function match(Request $request)
     {

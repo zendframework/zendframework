@@ -12,6 +12,7 @@ namespace ZendTest\I18n\Translator;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Locale;
+use Zend\EventManager\EventInterface;
 use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TextDomain;
 use ZendTest\I18n\Translator\TestAsset\Loader as TestLoader;
@@ -233,5 +234,131 @@ class TranslatorTest extends TestCase
 
         $this->assertEquals('Message 1', $this->translator->translate('Message 1'));
         $this->assertEquals('Message 9', $this->translator->translate('Message 9'));
+    }
+
+    public function testEnableDisableEventManger()
+    {
+        $this->assertFalse($this->translator->isEventManagerEnabled(), 'Default value');
+
+        $this->translator->enableEventManager();
+        $this->assertTrue($this->translator->isEventManagerEnabled());
+
+        $this->translator->disableEventManager();
+        $this->assertFalse($this->translator->isEventManagerEnabled());
+    }
+
+    public function testEnableEventMangerViaFactory()
+    {
+        $translator = Translator::factory(array(
+            'event_manager_enabled' => true
+        ));
+        $this->assertTrue($translator->isEventManagerEnabled());
+
+        $translator = Translator::factory(array());
+        $this->assertFalse($translator->isEventManagerEnabled());
+    }
+
+    public function testMissingTranslationEvent()
+    {
+        $actualEvent = null;
+
+        $this->translator->enableEventManager();
+        $this->translator->getEventManager()->attach(Translator::EVENT_MISSING_TRANSLATION, function(EventInterface $event) use (&$actualEvent) {
+            $actualEvent = $event;
+        });
+
+        $this->translator->translate('foo', 'bar', 'baz');
+
+        $this->assertInstanceOf('Zend\EventManager\Event', $actualEvent);
+        $this->assertEquals(
+            array(
+                'message'     => 'foo',
+                'locale'      => 'baz',
+                'text_domain' => 'bar',
+            ),
+            $actualEvent->getParams()
+        );
+
+        // But fire no event when disabled
+        $actualEvent = null;
+        $this->translator->disableEventManager();
+        $this->translator->translate('foo', 'bar', 'baz');
+        $this->assertNull($actualEvent);
+    }
+
+    public function testListenerOnMissingTranslationEventCanReturnString()
+    {
+        $trigger     = null;
+        $doNotTriger = null;
+
+        $this->translator->enableEventManager();
+        $this->translator->getEventManager()->attach(Translator::EVENT_MISSING_TRANSLATION, function(EventInterface $event) use (&$trigger) {
+            $trigger = true;
+        });
+        $this->translator->getEventManager()->attach(Translator::EVENT_MISSING_TRANSLATION, function(EventInterface $event) {
+            return 'EVENT TRIGGERED';
+        });
+        $this->translator->getEventManager()->attach(Translator::EVENT_MISSING_TRANSLATION, function(EventInterface $event) use (&$doNotTrigger) {
+            $doNotTrigger = true;
+        });
+
+        $result = $this->translator->translate('foo', 'bar', 'baz');
+        $this->assertTrue($trigger);
+        $this->assertEquals('EVENT TRIGGERED', $result);
+        $this->assertNull($doNotTrigger);
+    }
+
+    public function testNoMessagesLoadedEvent()
+    {
+        $actualEvent = null;
+
+        $this->translator->enableEventManager();
+        $this->translator->getEventManager()->attach(Translator::EVENT_NO_MESSAGES_LOADED, function(EventInterface $event) use (&$actualEvent) {
+            $actualEvent = $event;
+        });
+
+        $this->translator->translate('foo', 'bar', 'baz');
+
+        $this->assertInstanceOf('Zend\EventManager\Event', $actualEvent);
+        $this->assertEquals(
+            array(
+                'locale'      => 'baz',
+                'text_domain' => 'bar',
+            ),
+            $actualEvent->getParams()
+        );
+
+        // But fire no event when disabled
+        $actualEvent = null;
+        $this->translator->disableEventManager();
+        $this->translator->translate('foo', 'bar', 'baz');
+        $this->assertNull($actualEvent);
+    }
+
+    public function testListenerOnNoMessagesLoadedEventCanReturnTextDomainObject()
+    {
+        $trigger      = null;
+        $doNotTrigger = null;
+        $textDomain   = new TextDomain(array(
+            'foo' => 'BOOYAH',
+        ));
+
+        $this->translator->enableEventManager();
+        $events = $this->translator->getEventManager();
+        $events->attach(Translator::EVENT_NO_MESSAGES_LOADED, function(EventInterface $event) use (&$trigger) {
+            $trigger = true;
+        });
+        $events->attach(Translator::EVENT_NO_MESSAGES_LOADED, function(EventInterface $event) use ($textDomain) {
+            return $textDomain;
+        });
+        $events->attach(Translator::EVENT_NO_MESSAGES_LOADED, function(EventInterface $event) use (&$doNotTrigger){
+            $doNotTrigger = true;
+        });
+
+        $result = $this->translator->translate('foo', 'bar', 'baz');
+
+        $this->assertTrue($trigger);
+        $this->assertNull($doNotTrigger);
+        $this->assertEquals('BOOYAH', $result);
     }
 }

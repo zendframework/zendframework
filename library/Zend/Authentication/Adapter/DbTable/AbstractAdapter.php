@@ -76,11 +76,10 @@ abstract class AbstractAdapter extends BaseAdapter
     /**
      * __construct() - Sets configuration options
      *
-     * @param  DbAdapter $zendDb
-     * @param  string    $tableName           Optional
-     * @param  string    $identityColumn      Optional
-     * @param  string    $credentialColumn    Optional
-     * @return \Zend\Authentication\Adapter\DbTable
+     * @param DbAdapter $zendDb
+     * @param string    $tableName           Optional
+     * @param string    $identityColumn      Optional
+     * @param string    $credentialColumn    Optional
      */
     public function __construct(
         DbAdapter $zendDb,

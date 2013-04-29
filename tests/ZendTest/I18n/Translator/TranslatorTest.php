@@ -286,6 +286,28 @@ class TranslatorTest extends TestCase
         $this->assertNull($actualEvent);
     }
 
+    public function testListenerOnMissingTranslationEventCanReturnString()
+    {
+        $trigger     = null;
+        $doNotTriger = null;
+
+        $this->translator->enableEventManager();
+        $this->translator->getEventManager()->attach(Translator::EVENT_MISSING_TRANSLATION, function(EventInterface $event) use (&$trigger) {
+            $trigger = true;
+        });
+        $this->translator->getEventManager()->attach(Translator::EVENT_MISSING_TRANSLATION, function(EventInterface $event) {
+            return 'EVENT TRIGGERED';
+        });
+        $this->translator->getEventManager()->attach(Translator::EVENT_MISSING_TRANSLATION, function(EventInterface $event) use (&$doNotTrigger) {
+            $doNotTrigger = true;
+        });
+
+        $result = $this->translator->translate('foo', 'bar', 'baz');
+        $this->assertTrue($trigger);
+        $this->assertEquals('EVENT TRIGGERED', $result);
+        $this->assertNull($doNotTrigger);
+    }
+
     public function testNoMessagesLoadedEvent()
     {
         $actualEvent = null;
@@ -311,5 +333,32 @@ class TranslatorTest extends TestCase
         $this->translator->disableEventManager();
         $this->translator->translate('foo', 'bar', 'baz');
         $this->assertNull($actualEvent);
+    }
+
+    public function testListenerOnNoMessagesLoadedEventCanReturnTextDomainObject()
+    {
+        $trigger      = null;
+        $doNotTrigger = null;
+        $textDomain   = new TextDomain(array(
+            'foo' => 'BOOYAH',
+        ));
+
+        $this->translator->enableEventManager();
+        $events = $this->translator->getEventManager();
+        $events->attach(Translator::EVENT_NO_MESSAGES_LOADED, function(EventInterface $event) use (&$trigger) {
+            $trigger = true;
+        });
+        $events->attach(Translator::EVENT_NO_MESSAGES_LOADED, function(EventInterface $event) use ($textDomain) {
+            return $textDomain;
+        });
+        $events->attach(Translator::EVENT_NO_MESSAGES_LOADED, function(EventInterface $event) use (&$doNotTrigger){
+            $doNotTrigger = true;
+        });
+
+        $result = $this->translator->translate('foo', 'bar', 'baz');
+
+        $this->assertTrue($trigger);
+        $this->assertNull($doNotTrigger);
+        $this->assertEquals('BOOYAH', $result);
     }
 }

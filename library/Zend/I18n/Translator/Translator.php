@@ -443,15 +443,22 @@ class Translator
         }
 
         if ($this->isEventManagerEnabled()) {
-            $this->getEventManager()->trigger(
+            $results = $this->getEventManager()->trigger(
                 self::EVENT_MISSING_TRANSLATION,
                 $this,
                 array(
                     'message'     => $message,
                     'locale'      => $locale,
                     'text_domain' => $textDomain,
-                )
+                ),
+                function ($r) {
+                    return is_string($r);
+                }
             );
+            $last = $results->last();
+            if (is_string($last)) {
+                return $last;
+            }
         }
 
         return null;
@@ -563,19 +570,30 @@ class Translator
         $messagesLoaded |= $this->loadMessagesFromFiles($textDomain, $locale);
 
         if (!$messagesLoaded) {
+            $discoveredTextDomain = null;
             if ($this->isEventManagerEnabled()) {
-                $this->getEventManager()->trigger(
+                $results = $this->getEventManager()->trigger(
                     self::EVENT_NO_MESSAGES_LOADED,
                     $this,
                     array(
                         'locale'      => $locale,
                         'text_domain' => $textDomain,
-                    )
+                    ),
+                    function ($r) {
+                        return ($r instanceof TextDomain);
+                    }
                 );
+                $last = $results->last();
+                if ($last instanceof TextDomain) {
+                    $discoveredTextDomain = $last;
+                }
             }
 
-            $this->messages[$textDomain][$locale] = null;
-        } elseif ($cache !== null) {
+            $this->messages[$textDomain][$locale] = $discoveredTextDomain;
+            $messagesLoaded = true;
+        }
+
+        if ($messagesLoaded && $cache !== null) {
             $cache->setItem($cacheId, $this->messages[$textDomain][$locale]);
         }
     }

@@ -1036,7 +1036,7 @@ abstract class AbstractObject implements ObjectInterface
         $y2 = $y1 * cos($this->orientation / 180 * pi())
             + $x1 * sin($this->orientation / 180 * pi())
             + $this->getOffsetTop();
-        return array(intval($x2) , intval($y2));
+        return array(intval($x2), intval($y2));
     }
 
     /**

@@ -66,12 +66,12 @@ class Code25 extends AbstractObject
         $barcodeTable = array();
 
         // Start character (30301)
-        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth);
+        $barcodeTable[] = array(1, $this->barThickWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThickWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth);
 
         $text = str_split($this->getText());
         foreach ($text as $char) {
@@ -79,17 +79,17 @@ class Code25 extends AbstractObject
             foreach ($barcodeChar as $c) {
                 /* visible, width, top, length */
                 $width = $c ? $this->barThickWidth : $this->barThinWidth;
-                $barcodeTable[] = array(1 , $width , 0 , 1);
-                $barcodeTable[] = array(0 , $this->barThinWidth);
+                $barcodeTable[] = array(1, $width, 0, 1);
+                $barcodeTable[] = array(0, $this->barThinWidth);
             }
         }
 
         // Stop character (30103)
-        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
+        $barcodeTable[] = array(1, $this->barThickWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThickWidth, 0, 1);
         return $barcodeTable;
     }
 

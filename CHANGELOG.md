@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.1.5 (17 Apr 2017):
+## 2.1.5 (17 Apr 2013):
 
 - 2536: `Zend\Validate` translations out of date
   (https://github.com/zendframework/zf2/issues/2536)

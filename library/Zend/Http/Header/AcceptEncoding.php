@@ -8,6 +8,7 @@
  */
 
 namespace Zend\Http\Header;
+
 use Zend\Http\Header\Accept\FieldValuePart;
 
 /**

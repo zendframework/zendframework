@@ -82,16 +82,16 @@ class TreeRouteStack extends SimpleRouteStack
 
         $routes = $this->routePluginManager;
         foreach (array(
+                'chain'    => __NAMESPACE__ . '\Chain',
                 'hostname' => __NAMESPACE__ . '\Hostname',
                 'literal'  => __NAMESPACE__ . '\Literal',
+                'method'   => __NAMESPACE__ . '\Method',
                 'part'     => __NAMESPACE__ . '\Part',
-                'chain'    => __NAMESPACE__ . '\Chain',
+                'query'    => __NAMESPACE__ . '\Query',
                 'regex'    => __NAMESPACE__ . '\Regex',
                 'scheme'   => __NAMESPACE__ . '\Scheme',
                 'segment'  => __NAMESPACE__ . '\Segment',
                 'wildcard' => __NAMESPACE__ . '\Wildcard',
-                'query'    => __NAMESPACE__ . '\Query',
-                'method'   => __NAMESPACE__ . '\Method',
             ) as $name => $class
         ) {
             $routes->setInvokableClass($name, $class);

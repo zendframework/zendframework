@@ -29,8 +29,8 @@ class ChainTest extends TestCase
                     'options' => array(
                         'route'    => '/:controller',
                         'defaults' => array(
-                            'controller' => 'foo'
-                        )
+                            'controller' => 'foo',
+                        ),
                     ),
                 ),
                 array(
@@ -38,8 +38,8 @@ class ChainTest extends TestCase
                     'options' => array(
                         'route'    => '/:bar',
                         'defaults' => array(
-                            'bar' => 'bar'
-                        )
+                            'bar' => 'bar',
+                        ),
                     ),
                 ),
                 array(
@@ -57,19 +57,28 @@ class ChainTest extends TestCase
                 self::getRoute(),
                 '/foo/bar',
                 null,
-                array('controller' => 'foo', 'bar' => 'bar')
+                array(
+                    'controller' => 'foo',
+                    'bar'        => 'bar',
+                ),
             ),
             'offset-skips-beginning' => array(
                 self::getRoute(),
                 '/baz/foo/bar',
                 4,
-                array('controller' => 'foo', 'bar' => 'bar')
+                array(
+                    'controller' => 'foo',
+                    'bar'        => 'bar',
+                ),
             ),
             'parameters-are-used-only-once' => array(
                 self::getRoute(),
                 '/foo/baz',
                 null,
-                array('controller' => 'foo', 'bar' => 'baz')
+                array(
+                    'controller' => 'foo',
+                    'bar' => 'baz',
+                ),
             ),
         );
     }
@@ -133,11 +142,11 @@ class ChainTest extends TestCase
             'Zend\Mvc\Router\Http\Chain',
             array(
                 'routes'        => 'Missing "routes" in options array',
-                'route_plugins' => 'Missing "route_plugins" in options array'
+                'route_plugins' => 'Missing "route_plugins" in options array',
             ),
             array(
                 'routes'        => array(),
-                'route_plugins' => new RoutePluginManager()
+                'route_plugins' => new RoutePluginManager(),
             )
         );
     }

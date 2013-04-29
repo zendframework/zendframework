@@ -146,7 +146,7 @@ class SimpleTest extends TestCase
                 'foo [--bar]',
                 array('foo', '--bar'),
                 array(
-                    'foo' => true,
+                    'foo' => null,
                     'bar' => true,
                 )
             ),
@@ -204,7 +204,7 @@ class SimpleTest extends TestCase
                 'foo [--bar=]',
                 array('foo', '--bar=4'),
                 array(
-                    'foo' => true,
+                    'foo' => null,
                     'bar' => 4,
                 )
             ),
@@ -304,12 +304,12 @@ class SimpleTest extends TestCase
             'mandatory-literal-match-1' => array(
                 'foo',
                 array('foo'),
-                array('foo' => true)
+                array('foo' => null)
             ),
             'mandatory-literal-match-2' => array(
                 'foo bar baz',
                 array('foo','bar','baz'),
-                array('foo' => true,'bar'=>true,'baz'=>true,'bazinga'=>null)
+                array('foo' => null, 'bar' => null, 'baz' => null, 'bazinga' => null)
             ),
             'mandatory-literal-mismatch' => array(
                 'foo',
@@ -329,17 +329,17 @@ class SimpleTest extends TestCase
             'mandatory-literal-alternative-match-1' => array(
                 'foo ( bar | baz )',
                 array('foo','bar'),
-                array('foo' => true, 'bar' => true, 'baz' => false)
+                array('foo' => null, 'bar' => true, 'baz' => false)
             ),
             'mandatory-literal-alternative-match-2' => array(
                 'foo (bar|baz)',
                 array('foo','bar'),
-                array('foo' => true, 'bar' => true, 'baz' => false)
+                array('foo' => null, 'bar' => true, 'baz' => false)
             ),
             'mandatory-literal-alternative-match-3' => array(
                 'foo ( bar    |   baz )',
                 array('foo','baz'),
-                array('foo' => true, 'bar' => false, 'baz' => true)
+                array('foo' => null, 'bar' => false, 'baz' => true)
             ),
             'mandatory-literal-alternative-mismatch' => array(
                 'foo ( bar |   baz )',
@@ -349,12 +349,12 @@ class SimpleTest extends TestCase
             'mandatory-literal-namedAlternative-match-1' => array(
                 'foo ( bar | baz ):altGroup',
                 array('foo','bar'),
-                array('foo' => true, 'altGroup'=>'bar', 'bar' => true, 'baz' => false)
+                array('foo' => null, 'altGroup'=>'bar', 'bar' => true, 'baz' => false)
             ),
             'mandatory-literal-namedAlternative-match-2' => array(
                 'foo ( bar |   baz   ):altGroup9',
                 array('foo','baz'),
-                array('foo' => true, 'altGroup9'=>'baz', 'bar' => false, 'baz' => true)
+                array('foo' => null, 'altGroup9'=>'baz', 'bar' => false, 'baz' => true)
             ),
             'mandatory-literal-namedAlternative-mismatch' => array(
                 'foo ( bar |   baz   ):altGroup9',
@@ -366,7 +366,7 @@ class SimpleTest extends TestCase
             'optional-literal-match' => array(
                 'foo [bar] [baz]',
                 array('foo','bar'),
-                array('foo' => true, 'bar' => true, 'baz' => null)
+                array('foo' => null, 'bar' => true, 'baz' => null)
             ),
             'optional-literal-mismatch' => array(
                 'foo [bar] [baz]',
@@ -381,32 +381,32 @@ class SimpleTest extends TestCase
             'optional-literal-alternative-match' => array(
                 'foo [bar | baz]',
                 array('foo','baz'),
-                array('foo' => true, 'baz' => true, 'bar' => false)
+                array('foo' => null, 'baz' => true, 'bar' => false)
             ),
             'optional-literal-alternative-mismatch' => array(
                 'foo [bar | baz]',
                 array('foo'),
-                array('foo' => true, 'baz' => false, 'bar' => false)
+                array('foo' => null, 'baz' => false, 'bar' => false)
             ),
             'optional-literal-namedAlternative-match-1' => array(
                 'foo [bar | baz]:altGroup1',
                 array('foo','baz'),
-                array('foo' => true, 'altGroup1' => 'baz', 'baz' => true, 'bar' => false)
+                array('foo' => null, 'altGroup1' => 'baz', 'baz' => true, 'bar' => false)
             ),
             'optional-literal-namedAlternative-match-2' => array(
                 'foo [bar | baz | bazinga]:altGroup100',
                 array('foo','bazinga'),
-                array('foo' => true, 'altGroup100' => 'bazinga', 'bazinga' => true, 'baz' => false, 'bar' => false)
+                array('foo' => null, 'altGroup100' => 'bazinga', 'bazinga' => true, 'baz' => false, 'bar' => false)
             ),
             'optional-literal-namedAlternative-match-3' => array(
                 'foo [ bar ]:altGroup100',
                 array('foo','bar'),
-                array('foo' => true, 'altGroup100' => 'bar', 'bar' => true, 'baz' => null)
+                array('foo' => null, 'altGroup100' => 'bar', 'bar' => true, 'baz' => null)
             ),
             'optional-literal-namedAlternative-mismatch' => array(
                 'foo [ bar | baz ]:altGroup9',
                 array('foo'),
-                array('foo' => true, 'altGroup9'=> null, 'bar' => false, 'baz' => false)
+                array('foo' => null, 'altGroup9'=> null, 'bar' => false, 'baz' => false)
             ),
 
             // -- value params
@@ -430,19 +430,19 @@ class SimpleTest extends TestCase
                 'a b <foo> c',
                 array('a','b','bar','c'),
                 array(
-                    'a' => true,
-                    'b' => true,
+                    'a' => null,
+                    'b' => null,
                     'foo' => 'bar',
                     'bar' => null,
-                    'c' => true,
+                    'c' => null,
                 ),
             ),
             'optional-value-param-1' => array(
                 'a b [<c>]',
                 array('a','b','bar'),
                 array(
-                    'a'   => true,
-                    'b'   => true,
+                    'a'   => null,
+                    'b'   => null,
                     'c'   => 'bar',
                     'bar' => null,
                 ),
@@ -451,8 +451,8 @@ class SimpleTest extends TestCase
                 'a b [<c>]',
                 array('a','b'),
                 array(
-                    'a'   => true,
-                    'b'   => true,
+                    'a'   => null,
+                    'b'   => null,
                     'c'   => null,
                     'bar' => null,
                 ),
@@ -486,7 +486,7 @@ class SimpleTest extends TestCase
                 'a <b> [ --foo | -f ]',
                 array('a','bar'),
                 array(
-                    'a'   => true,
+                    'a'   => null,
                     'b'   => 'bar',
                     'foo' => false,
                     'f'   => false,
@@ -497,7 +497,7 @@ class SimpleTest extends TestCase
                 'a <b> [ --foo | -f ]',
                 array('a','bar', '-f'),
                 array(
-                    'a'   => true,
+                    'a'   => null,
                     'b'   => 'bar',
                     'foo' => false,
                     'f'   => true,
@@ -508,7 +508,7 @@ class SimpleTest extends TestCase
                 'a <b> [ --foo | -f ]',
                 array('a','--foo', 'bar'),
                 array(
-                    'a'   => true,
+                    'a'   => null,
                     'b'   => 'bar',
                     'foo' => true,
                     'f'   => false,
@@ -521,8 +521,8 @@ class SimpleTest extends TestCase
                 'a b <c> [<d>] [--eee|-e] [--fff|-f]',
                 array('a','b','foo','bar'),
                 array(
-                    'a'   => true,
-                    'b'   => true,
+                    'a'   => null,
+                    'b'   => null,
                     'c'   => 'foo',
                     'd'   => 'bar',
                     'e'   => false,
@@ -535,8 +535,8 @@ class SimpleTest extends TestCase
                 'a b <c> [<d>] [--eee|-e] [--fff|-f]',
                 array('a','b','--eee', 'foo','bar'),
                 array(
-                    'a'   => true,
-                    'b'   => true,
+                    'a'   => null,
+                    'b'   => null,
                     'c'   => 'foo',
                     'd'   => 'bar',
                     'e'   => false,
@@ -567,10 +567,10 @@ class SimpleTest extends TestCase
                 'foo bar [--baz] woo',
                 array('foo','bar','woo'),
                 array(
-                    'foo' => true,
-                    'bar' => true,
+                    'foo' => null,
+                    'bar' => null,
                     'baz' => false,
-                    'woo' => true
+                    'woo' => null
                 )
             ),
             'too-many-arguments5' => array(
@@ -580,7 +580,7 @@ class SimpleTest extends TestCase
                     'foo' => true,
                     'bar' => true,
                     'baz' => false,
-                    'woo' => true
+                    'woo' => null
                 )
             ),
             'too-many-arguments6' => array(
@@ -594,7 +594,7 @@ class SimpleTest extends TestCase
                 'literal <bar> [--foo=] --baz',
                 array('literal', 'oneBar', '--foo=4', '--baz'),
                 array(
-                    'literal' => true,
+                    'literal' => null,
                     'bar' => 'oneBar',
                     'foo' => 4,
                     'baz' => true
@@ -605,7 +605,7 @@ class SimpleTest extends TestCase
                 'group [-t|--test]:testgroup',
                 array('group', '-t'),
                 array(
-                    'group' => true,
+                    'group' => null,
                     'testgroup' => true,
                 )
             ),
@@ -614,7 +614,7 @@ class SimpleTest extends TestCase
                 'group [-t|--test]:testgroup',
                 array('group', '--test'),
                 array(
-                    'group' => true,
+                    'group' => null,
                     'testgroup' => true,
                 )
             ),
@@ -623,7 +623,7 @@ class SimpleTest extends TestCase
                 'group [-t|--test]:test',
                 array('group', '-t'),
                 array(
-                    'group' => true,
+                    'group' => null,
                     'test' => true,
                 )
             ),
@@ -632,7 +632,7 @@ class SimpleTest extends TestCase
                 'group [-t|--test]:test',
                 array('group', '--test'),
                 array(
-                    'group' => true,
+                    'group' => null,
                     'test' => true,
                 )
             ),
@@ -640,7 +640,7 @@ class SimpleTest extends TestCase
                 'group (-t | --test ):test',
                 array('group', '--test'),
                 array(
-                    'group' => true,
+                    'group' => null,
                     'test' => true,
                 ),
             ),
@@ -648,7 +648,7 @@ class SimpleTest extends TestCase
                 'group (-t | --test ):test',
                 array('group', '-t'),
                 array(
-                    'group' => true,
+                    'group' => null,
                     'test' => true,
                 ),
             ),
@@ -656,7 +656,7 @@ class SimpleTest extends TestCase
                 'group [-x|-y|-z]:test',
                 array('group', '-y'),
                 array(
-                    'group' => true,
+                    'group' => null,
                     'test' => true,
                 ),
             ),
@@ -664,7 +664,7 @@ class SimpleTest extends TestCase
                 'group [--foo|--bar|--baz]:test',
                 array('group', '--foo'),
                 array(
-                    'group' => true,
+                    'group' => null,
                     'test' => true,
                 ),
             ),
@@ -672,7 +672,7 @@ class SimpleTest extends TestCase
                 'group (--foo|--bar|--baz):test',
                 array('group', '--foo'),
                 array(
-                    'group' => true,
+                    'group' => null,
                     'test' => true,
                 ),
             ),
@@ -685,7 +685,7 @@ class SimpleTest extends TestCase
                 'foo-bar-baz [--bar=]',
                 array('foo-bar-baz',),
                 array(
-                    'foo-bar-baz' => true,
+                    'foo-bar-baz' => null,
                     'foo'         => null,
                     'bar'         => null,
                     'baz'         => null,
@@ -709,7 +709,7 @@ class SimpleTest extends TestCase
                 array('foo'),
                 array(
                     'foo-bar-baz' => false,
-                    'foo'         => true,
+                    'foo'         => null,
                     'bar'         => null,
                     'baz'         => null,
                     'something'   => null,
@@ -741,7 +741,7 @@ class SimpleTest extends TestCase
                 'foo [foo-bar|foo-baz] [--bar=]',
                 array('foo',),
                 array(
-                    'foo'         => true,
+                    'foo'         => null,
                     'foo-bar'     => false,
                     'foo-baz'     => false,
                     'bar'         => null,
@@ -753,7 +753,7 @@ class SimpleTest extends TestCase
                 'foo --bar-baz',
                 array('foo','--bar-baz'),
                 array(
-                    'foo'         => true,
+                    'foo'         => null,
                     'bar-baz'     => true,
                     'bar'         => null,
                     'baz'         => null,
@@ -764,7 +764,7 @@ class SimpleTest extends TestCase
                 'foo [--bar-baz]',
                 array('foo','--bar-baz'),
                 array(
-                    'foo'         => true,
+                    'foo'         => null,
                     'bar-baz'     => true,
                     'bar'         => null,
                     'baz'         => null,
@@ -775,7 +775,7 @@ class SimpleTest extends TestCase
                 'foo [--bar-baz]',
                 array('foo'),
                 array(
-                    'foo'         => true,
+                    'foo'         => null,
                     'bar-baz'     => false,
                     'bar'         => null,
                     'baz'         => null,
@@ -786,7 +786,7 @@ class SimpleTest extends TestCase
                 'foo [--foo-bar|--foo-baz]',
                 array('foo','--foo-baz'),
                 array(
-                    'foo'         => true,
+                    'foo'         => null,
                     'foo-bar'     => false,
                     'foo-baz'     => true,
                     'bar'         => null,
@@ -798,7 +798,7 @@ class SimpleTest extends TestCase
                 'foo [--foo-bar|--foo-baz]',
                 array('foo'),
                 array(
-                    'foo'         => true,
+                    'foo'         => null,
                     'foo-bar'     => false,
                     'foo-baz'     => false,
                     'bar'         => null,
@@ -853,7 +853,7 @@ class SimpleTest extends TestCase
      */
     public function testMatching($routeDefinition, array $arguments = array(), array $params = null)
     {
-        array_unshift($arguments,'scriptname.php');
+        array_unshift($arguments, 'scriptname.php');
         $request = new ConsoleRequest($arguments);
         $route = new Simple($routeDefinition);
         $match = $route->match($request);
@@ -876,7 +876,7 @@ class SimpleTest extends TestCase
     public function testCanNotMatchingWithEmtpyMandatoryParam()
     {
         $arguments = array('--foo=');
-        array_unshift($arguments,'scriptname.php');
+        array_unshift($arguments, 'scriptname.php');
         $request = new ConsoleRequest($arguments);
         $route = new Simple('--foo=');
         $match = $route->match($request);
@@ -933,17 +933,108 @@ class SimpleTest extends TestCase
         );
     }
 
-    public function testMatchMergeOfTheDefaults()
+    public static function routeDefaultsProvider()
     {
-        $defaults = array(
-            'controller' => 'Controller/Test',
+        return array(
+            'required-literals-no-defaults' => array(
+                'create controller',
+                array(),
+                array('create', 'controller'),
+                array('create' => null, 'controller' => null),
+            ),
+            'required-literals-defaults' => array(
+                'create controller',
+                array('controller' => 'value'),
+                array('create', 'controller'),
+                array('create' => null, 'controller' => 'value'),
+            ),
+            'value-param-no-defaults' => array(
+                'create controller <controller>',
+                array(),
+                array('create', 'controller', 'foo'),
+                array('create' => null, 'controller' => 'foo'),
+            ),
+            'value-param-defaults-overridden' => array(
+                'create controller <controller>',
+                array('controller' => 'defaultValue'),
+                array('create', 'controller', 'foo'),
+                array('create' => null, 'controller' => 'foo'),
+            ),
+            'optional-value-param-defaults' => array(
+                'create controller [<controller>]',
+                array('controller' => 'defaultValue'),
+                array('create', 'controller'),
+                array('create' => null, 'controller' => 'defaultValue'),
+            ),
+            'alternative-literal-non-present' => array(
+                '(foo | bar)',
+                array('bar' => 'something'),
+                array('foo'),
+                array('foo' => true, 'bar' => false),
+            ),
+            'alternative-literal-present' => array(
+                '(foo | bar)',
+                array('bar' => 'something'),
+                array('bar'),
+                array('foo' => false, 'bar' => 'something'),
+            ),
+            'alternative-flag-non-present' => array(
+                '(--foo | --bar)',
+                array('bar' => 'something'),
+                array('--foo'),
+                array('foo' => true, 'bar' => false),
+            ),
+            'alternative-flag-present' => array(
+                '(--foo | --bar)',
+                array('bar' => 'something'),
+                array('--bar'),
+                array('foo' => false, 'bar' => 'something'),
+            ),
+            'optional-literal-non-present' => array(
+                'foo [bar]',
+                array('bar' => 'something'),
+                array('foo'),
+                array('foo' => null, 'bar' => false),
+            ),
+            'optional-literal-present' => array(
+                'foo [bar]',
+                array('bar' => 'something'),
+                array('foo', 'bar'),
+                array('foo' => null, 'bar' => 'something'),
+            ),
         );
+    }
 
-        $request = new ConsoleRequest(array('scriptname.php', 'foo', 'controller'));
-        $route = new Simple('foo controller', array(), $defaults);
+    /**
+     * @dataProvider routeDefaultsProvider
+     * @param        string         $routeDefinition
+     * @param        array          $defaults
+     * @param        array          $arguments
+     * @param        array|null     $params
+     */
+    public function testMatchingWithDefaults(
+        $routeDefinition,
+        array $defaults = array(),
+        array $arguments = array(),
+        array $params = null
+    ) {
+        array_unshift($arguments, 'scriptname.php');
+        $request = new ConsoleRequest($arguments);
+        $route = new Simple($routeDefinition, array(), $defaults);
         $match = $route->match($request);
 
-        $this->assertInstanceOf('Zend\Mvc\Router\Console\RouteMatch', $match);
-        $this->assertEquals($defaults['controller'], $match->getParam('controller'));
+        if ($params === null) {
+            $this->assertNull($match, "The route must not match");
+        } else {
+            $this->assertInstanceOf('Zend\Mvc\Router\Console\RouteMatch', $match, "The route matches");
+
+            foreach ($params as $key => $value) {
+                $this->assertSame(
+                    $value,
+                    $match->getParam($key),
+                    $value === null ? "Param $key is not present" : "Param $key is present and is equal to '$value'"
+                );
+            }
+        }
     }
 }

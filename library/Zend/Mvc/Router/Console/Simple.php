@@ -780,7 +780,7 @@ class Simple implements RouteInterface
 
                 // set alternatives group value
                 $matches[$part['name']] = $value;
-            } else if (!$part['required']) {
+            } elseif (!$part['required']) {
                 // set optional parameter flag
                 $name = $part['name'];
                 $matches[$name] = isset($this->defaults[$name])? $this->defaults[$name] : true;

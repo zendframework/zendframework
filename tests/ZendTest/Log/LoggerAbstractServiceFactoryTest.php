@@ -39,8 +39,8 @@ class LoggerAbstractServiceFactoryTeset extends \PHPUnit_Framework_TestCase
 
         $this->serviceManager->setService('Config', array(
             'log' => array(
-                'Application\Frontend\Logger' => array(),
-                'Application\Backend\Logger' => array(),
+                'Application\Frontend' => array(),
+                'Application\Backend'  => array(),
             ),
         ));
     }
@@ -51,8 +51,8 @@ class LoggerAbstractServiceFactoryTeset extends \PHPUnit_Framework_TestCase
     public function providerValidLoggerService()
     {
         return array(
-            array('Application\Frontend\Logger'),
-            array('Application\Backend\Logger'),
+            array('Logger\Application\Frontend'),
+            array('Logger\Application\Backend'),
         );
     }
 
@@ -62,7 +62,9 @@ class LoggerAbstractServiceFactoryTeset extends \PHPUnit_Framework_TestCase
     public function providerInvalidLoggerService()
     {
         return array(
-            array('Application\Unknown\Logger'),
+            array('Logger\Application\Unknown'),
+            array('Application\Frontend'),
+            array('Application\Backend'),
         );
     }
 

@@ -16,19 +16,19 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class FormAbstractFactory implements AbstractFactoryInterface
 {
     /**
+     * @var array
+     */
+    protected $config;
+
+    /**
      * @var string Top-level configuration key indicating forms configuration
      */
-    protected $configKey     = 'form_manager';
+    protected $configKey     = 'forms';
 
     /**
      * @var Factory Form factory used to create forms
      */
     protected $factory;
-
-    /**
-     * @var string Service prefix necessary for abstract factory to trigger
-     */
-    protected $servicePrefix = 'Form\\';
 
     /**
      * Can we create the requested service?
@@ -40,36 +40,12 @@ class FormAbstractFactory implements AbstractFactoryInterface
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $rName)
     {
-        if (!$services->has('Config')) {
+        $config = $this->getConfig($services);
+        if (empty($config)) {
             return false;
         }
 
-        $prefixLength = strlen($this->servicePrefix);
-        if (strlen($rName) < $prefixLength
-            || substr($rName, 0, $prefixLength) !== $this->servicePrefix
-        ) {
-            return false;
-        }
-
-        $config = $services->get('Config');
-        if (!isset($config[$this->configKey])
-            || !is_array($config[$this->configKey])
-            || empty($config[$this->configKey])
-        ) {
-            return false;
-        }
-
-        $config = $config[$this->configKey];
-
-        $serviceName = substr($rName, $prefixLength);
-        if (!isset($config[$serviceName])
-            || !is_array($config[$serviceName])
-            || empty($config[$serviceName])
-        ) {
-            return false;
-        }
-
-        return true;
+        return (isset($config[$rName]) && is_array($config[$rName]) && !empty($config[$rName]));
     }
 
     /**
@@ -82,15 +58,41 @@ class FormAbstractFactory implements AbstractFactoryInterface
      */
     public function createServiceWithName(ServiceLocatorInterface $services, $name, $rName)
     {
-        $serviceName = substr($rName, strlen($this->servicePrefix));
-        $config = $services->get('Config');
-
-        $config = $config[$this->configKey][$serviceName];
-
+        $config  = $this->getConfig($services);
+        $config  = $config[$rName];
         $factory = $this->getFormFactory($services);
-        $this->marshalInputFilter($config, $services, $factory);
 
+        $this->marshalInputFilter($config, $services, $factory);
         return $factory->createForm($config);
+    }
+
+    /**
+     * Get forms configuration, if any
+     * 
+     * @param  ServiceLocatorInterface $services 
+     * @return array
+     */
+    protected function getConfig(ServiceLocatorInterface $services)
+    {
+        if ($this->config !== null) {
+            return $this->config;
+        }
+
+        if (!$services->has('Config')) {
+            $this->config = array();
+            return $this->config;
+        }
+
+        $config = $services->get('Config');
+        if (!isset($config[$this->configKey])
+            || !is_array($config[$this->configKey])
+        ) {
+            $this->config = array();
+            return $this->config;
+        }
+
+        $this->config = $config[$this->configKey];
+        return $this->config;
     }
 
     /**

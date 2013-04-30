@@ -66,20 +66,20 @@ class FormAbstractFactoryTest extends TestCase
 
     public function testInvalidFormManagerConfigIndicatesCannotCreateForm()
     {
-        $this->services->setService('Config', array('form_manager' => 'string'));
+        $this->services->setService('Config', array('forms' => 'string'));
         $this->assertFalse($this->forms->canCreateServiceWithName($this->services, 'Form\Foo', 'Form\Foo'));
     }
 
     public function testEmptyFormManagerConfigIndicatesCannotCreateForm()
     {
-        $this->services->setService('Config', array('form_manager' => array()));
+        $this->services->setService('Config', array('forms' => array()));
         $this->assertFalse($this->forms->canCreateServiceWithName($this->services, 'Form\Foo', 'Form\Foo'));
     }
 
     public function testMissingFormConfigIndicatesCannotCreateForm()
     {
         $this->services->setService('Config', array(
-            'form_manager' => array(
+            'forms' => array(
                 'Bar' => array(),
             ),
         ));
@@ -89,34 +89,34 @@ class FormAbstractFactoryTest extends TestCase
     public function testInvalidFormConfigIndicatesCannotCreateForm()
     {
         $this->services->setService('Config', array(
-            'form_manager' => array(
+            'forms' => array(
                 'Foo' => 'string',
             ),
         ));
-        $this->assertFalse($this->forms->canCreateServiceWithName($this->services, 'Form\Foo', 'Form\Foo'));
+        $this->assertFalse($this->forms->canCreateServiceWithName($this->services, 'Foo', 'Foo'));
     }
 
     public function testEmptyFormConfigIndicatesCannotCreateForm()
     {
         $this->services->setService('Config', array(
-            'form_manager' => array(
+            'forms' => array(
                 'Foo' => array(),
             ),
         ));
-        $this->assertFalse($this->forms->canCreateServiceWithName($this->services, 'Form\Foo', 'Form\Foo'));
+        $this->assertFalse($this->forms->canCreateServiceWithName($this->services, 'Foo', 'Foo'));
     }
 
     public function testPopulatedFormConfigIndicatesFormCanBeCreated()
     {
         $this->services->setService('Config', array(
-            'form_manager' => array(
+            'forms' => array(
                 'Foo' => array(
                     'type'     => 'Zend\Form\Form',
                     'elements' => array(),
                 ),
             ),
         ));
-        $this->assertTrue($this->forms->canCreateServiceWithName($this->services, 'Form\Foo', 'Form\Foo'));
+        $this->assertTrue($this->forms->canCreateServiceWithName($this->services, 'Foo', 'Foo'));
     }
 
     public function testFormCanBeCreatedViaInteractionOfAllManagers()
@@ -137,9 +137,9 @@ class FormAbstractFactoryTest extends TestCase
             ),
             'input_filter' => 'FooInputFilter',
         );
-        $config = array('form_manager' => array('Foo' => $formConfig));
+        $config = array('forms' => array('Foo' => $formConfig));
         $this->services->setService('Config', $config);
-        $form = $this->forms->createServiceWithName($this->services, 'Form\Foo', 'Form\Foo');
+        $form = $this->forms->createServiceWithName($this->services, 'Foo', 'Foo');
         $this->assertInstanceOf('Zend\Form\Form', $form);
 
         $hydrator = $form->getHydrator();
@@ -189,9 +189,9 @@ class FormAbstractFactoryTest extends TestCase
                 ),
             ),
         );
-        $config = array('form_manager' => array('Foo' => $formConfig));
+        $config = array('forms' => array('Foo' => $formConfig));
         $this->services->setService('Config', $config);
-        $form = $this->forms->createServiceWithName($this->services, 'Form\Foo', 'Form\Foo');
+        $form = $this->forms->createServiceWithName($this->services, 'Foo', 'Foo');
         $this->assertInstanceOf('Zend\Form\Form', $form);
 
         $hydrator = $form->getHydrator();

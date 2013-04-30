@@ -21,6 +21,16 @@ use Zend\Stdlib\InitializableInterface;
 class InputFilterPluginManager extends AbstractPluginManager
 {
     /**
+     * Default set of plugins
+     *
+     * @var array
+     */
+    protected $invokableClasses = array(
+        'inputfilter' => 'Zend\InputFilter\InputFilter',
+        'collection'  => 'Zend\InputFilter\CollectionInputFilter',
+    );
+
+    /**
      * Whether or not to share by default
      *
      * @var bool

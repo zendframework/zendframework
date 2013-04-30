@@ -106,13 +106,13 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
         }
 
         $config = $serviceLocator->get('Config');
-        if (!isset($config['session_containers']) || !is_array($config['session_containers'])) {
+        if (!isset($config[$this->configKey]) || !is_array($config[$this->configKey])) {
             $this->config = array();
 
             return false;
         }
 
-        $config = $config['session_containers'];
+        $config = $config[$this->configKey];
         $config = array_flip($config);
 
         $this->config = array_change_key_case($config);

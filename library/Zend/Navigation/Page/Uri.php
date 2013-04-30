@@ -98,12 +98,12 @@ class Uri extends AbstractPage
     public function isActive($recursive = false)
     {
         if (!$this->active) {
-		    if ($this->getRequest() instanceof Request) {
+            if ($this->getRequest() instanceof Request) {
                 if ($this->getRequest()->getUri()->getPath() == $this->getUri()) {
                     $this->active = true;
                     return true;
                 }
-		    }
+            }
         }
         
         return parent::isActive($recursive);

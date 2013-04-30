@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Navigation\Page;
 
 use Zend\Http\Request;
@@ -20,10 +21,10 @@ class Uri extends AbstractPage
     /**
      * Page URI
      *
-     * @var string null
+     * @var string|null
      */
     protected $uri = null;
-
+	
     /**
      * Request object used to determine uri path
      *
@@ -34,18 +35,19 @@ class Uri extends AbstractPage
     /**
      * Sets page URI
      *
-     * @param string $uri
-     *            page URI, must a string or null
-     *            
-     * @return Uri fluent interface, returns self
-     * @throws Exception\InvalidArgumentException if $uri is invalid
+     * @param  string $uri                page URI, must a string or null
+     *
+     * @return Uri   fluent interface, returns self
+     * @throws Exception\InvalidArgumentException  if $uri is invalid
      */
     public function setUri($uri)
     {
-        if (null !== $uri && ! is_string($uri)) {
-            throw new Exception\InvalidArgumentException('Invalid argument: $uri must be a string or null');
+        if (null !== $uri && !is_string($uri)) {
+            throw new Exception\InvalidArgumentException(
+                'Invalid argument: $uri must be a string or null'
+            );
         }
-        
+
         $this->uri = $uri;
         return $this;
     }
@@ -70,19 +72,19 @@ class Uri extends AbstractPage
     public function getHref()
     {
         $uri = $this->getUri();
-        
+
         $fragment = $this->getFragment();
         if (null !== $fragment) {
-            if ('#' == substr($uri, - 1)) {
+            if ('#' == substr($uri, -1)) {
                 return $uri . $fragment;
             } else {
                 return $uri . '#' . $fragment;
             }
         }
-        
+
         return $uri;
     }
-
+	
     /**
      * Returns whether page should be considered active or not
      *
@@ -142,8 +144,11 @@ class Uri extends AbstractPage
      */
     public function toArray()
     {
-        return array_merge(parent::toArray(), array(
-            'uri' => $this->getUri()
-        ));
+        return array_merge(
+            parent::toArray(),
+            array(
+                'uri' => $this->getUri(),
+            )
+        );
     }
 }

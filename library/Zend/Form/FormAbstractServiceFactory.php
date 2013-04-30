@@ -68,8 +68,8 @@ class FormAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * Get forms configuration, if any
-     * 
-     * @param  ServiceLocatorInterface $services 
+     *
+     * @param  ServiceLocatorInterface $services
      * @return array
      */
     protected function getConfig(ServiceLocatorInterface $services)

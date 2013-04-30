@@ -25,7 +25,7 @@ class StorageCacheAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * Configuration key for cache objects
-     * 
+     *
      * @var string
      */
     protected $configKey = 'caches';
@@ -61,8 +61,8 @@ class StorageCacheAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * Retrieve cache configuration, if any
-     * 
-     * @param  ServiceLocatorInterface $services 
+     *
+     * @param  ServiceLocatorInterface $services
      * @return array
      */
     protected function getConfig(ServiceLocatorInterface $services)

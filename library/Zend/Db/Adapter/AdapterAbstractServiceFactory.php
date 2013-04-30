@@ -26,10 +26,10 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * Can we create an adapter by the requested name?
-     * 
-     * @param  ServiceLocatorInterface $services 
-     * @param  string $name 
-     * @param  string $requestedName 
+     *
+     * @param  ServiceLocatorInterface $services
+     * @param  string $name
+     * @param  string $requestedName
      * @return bool
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
@@ -48,10 +48,10 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * Create a DB adapter
-     * 
-     * @param  ServiceLocatorInterface $services 
-     * @param  string $name 
-     * @param  string $requestedName 
+     *
+     * @param  ServiceLocatorInterface $services
+     * @param  string $name
+     * @param  string $requestedName
      * @return Adapter
      */
     public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
@@ -62,8 +62,8 @@ class AdapterAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * Get db configuration, if any
-     * 
-     * @param  ServiceLocatorInterface $services 
+     *
+     * @param  ServiceLocatorInterface $services
      * @return array
      */
     protected function getConfig(ServiceLocatorInterface $services)

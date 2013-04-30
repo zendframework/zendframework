@@ -26,7 +26,7 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * Configuration key holding logger configuration
-     * 
+     *
      * @var string
      */
     protected $configKey = 'log';
@@ -61,8 +61,8 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * Retrieve configuration for loggers, if any
-     * 
-     * @param  ServiceLocatorInterface $services 
+     *
+     * @param  ServiceLocatorInterface $services
      * @return array
      */
     protected function getConfig(ServiceLocatorInterface $services)

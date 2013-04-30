@@ -47,7 +47,7 @@ class ContainerAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * Configuration key in which session containers live
-     * 
+     *
      * @var string
      */
     protected $configKey = 'session_containers';
@@ -119,8 +119,8 @@ class ContainerAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * Retrieve the session manager instance, if any
-     * 
-     * @param  ServiceLocatorInterface $services 
+     *
+     * @param  ServiceLocatorInterface $services
      * @return null|\Zend\Session\ManagerInterface
      */
     protected function getSessionManager(ServiceLocatorInterface $services)

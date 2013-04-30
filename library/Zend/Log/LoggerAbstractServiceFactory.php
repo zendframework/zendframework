@@ -20,6 +20,18 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class LoggerAbstractServiceFactory implements AbstractFactoryInterface
 {
     /**
+     * @var array
+     */
+    protected $config;
+
+    /**
+     * Configuration key holding logger configuration
+     * 
+     * @var string
+     */
+    protected $configKey = 'log';
+
+    /**
      * @param  ServiceLocatorInterface $serviceLocator
      * @param  string                  $name
      * @param  string                  $requestedName
@@ -27,33 +39,45 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        if ('logger\\' != substr(strtolower($requestedName), 0, 7)) {
+        $config = $this->getConfig($serviceLocator);
+        if (empty($config)) {
             return false;
         }
 
-        $config  = $serviceLocator->get('Config');
-        if (!isset($config['log'])) {
-            return false;
-        }
-
-        $config  = array_change_key_case($config['log']);
-        $service = substr(strtolower($requestedName), 7);
-
-        return isset($config[$service]);
+        return isset($config[$requestedName]);
     }
 
     /**
      * @param  ServiceLocatorInterface $serviceLocator
      * @param  string                  $name
      * @param  string                  $requestedName
-     * @return \Zend\Log\Logger
+     * @return Logger
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $config  = $serviceLocator->get('Config');
-        $config  = array_change_key_case($config['log']);
-        $service = substr(strtolower($requestedName), 7);
+        $config  = $this->getConfig($serviceLocator);
+        return new Logger($config[$requestedName]);
+    }
 
-        return new Logger($config[$service]);
+    /**
+     * Retrieve configuration for loggers, if any
+     * 
+     * @param  ServiceLocatorInterface $services 
+     * @return array
+     */
+    protected function getConfig(ServiceLocatorInterface $services)
+    {
+        if ($this->config !== null) {
+            return $this->config;
+        }
+
+        $config = $services->get('Config');
+        if (!isset($config[$this->configKey])) {
+            $this->config = array();
+            return $this->config;
+        }
+
+        $this->config = $config[$this->configKey];
+        return $this->config;
     }
 }

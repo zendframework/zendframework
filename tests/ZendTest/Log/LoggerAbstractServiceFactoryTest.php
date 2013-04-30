@@ -24,7 +24,7 @@ class LoggerAbstractServiceFactoryTeset extends \PHPUnit_Framework_TestCase
     /**
      * @var \Zend\ServiceManager\ServiceLocatorInterface
      */
-    private $serviceManager;
+    protected $serviceManager;
 
     /**
      * Set up LoggerAbstractServiceFactory and loggers configuration.
@@ -51,8 +51,8 @@ class LoggerAbstractServiceFactoryTeset extends \PHPUnit_Framework_TestCase
     public function providerValidLoggerService()
     {
         return array(
-            array('Logger\Application\Frontend'),
-            array('Logger\Application\Backend'),
+            array('Application\Frontend'),
+            array('Application\Backend'),
         );
     }
 
@@ -63,8 +63,8 @@ class LoggerAbstractServiceFactoryTeset extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('Logger\Application\Unknown'),
-            array('Application\Frontend'),
-            array('Application\Backend'),
+            array('Logger\Application\Frontend'),
+            array('Application\Backend\Logger'),
         );
     }
 

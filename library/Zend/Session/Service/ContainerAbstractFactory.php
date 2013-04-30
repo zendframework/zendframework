@@ -58,58 +58,55 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
     protected $sessionManager;
 
     /**
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $services
      * @param  string                  $name
      * @param  string                  $requestedName
      * @return bool
      */
-    public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
+    public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
-        $config = $this->getConfig($serviceLocator);
-        if (!$config) {
+        $config = $this->getConfig($services);
+        if (empty($config)) {
             return false;
         }
 
         $containerName = $this->normalizeContainerName($requestedName);
-
         return array_key_exists($containerName, $config);
     }
 
     /**
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $services
      * @param  string                  $name
      * @param  string                  $requestedName
      * @return Container
      */
-    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
+    public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
-        $manager = $this->getSessionManager($serviceLocator);
+        $manager = $this->getSessionManager($services);
         return new Container($requestedName, $manager);
     }
 
     /**
      * Retrieve config from service locator, and cache for later
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $services
      * @return false|array
      */
-    protected function getConfig(ServiceLocatorInterface $serviceLocator)
+    protected function getConfig(ServiceLocatorInterface $services)
     {
         if (null !== $this->config) {
             return $this->config;
         }
 
-        if (!$serviceLocator->has('Config')) {
+        if (!$services->has('Config')) {
             $this->config = array();
-
-            return false;
+            return $this->config;
         }
 
-        $config = $serviceLocator->get('Config');
+        $config = $services->get('Config');
         if (!isset($config[$this->configKey]) || !is_array($config[$this->configKey])) {
             $this->config = array();
-
-            return false;
+            return $this->config;
         }
 
         $config = $config[$this->configKey];

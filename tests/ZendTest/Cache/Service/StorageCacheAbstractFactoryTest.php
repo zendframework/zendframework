@@ -49,16 +49,16 @@ class StorageCacheAbstractFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanLookupCacheByName()
     {
-        $this->assertTrue($this->sm->has('Cache\Memory'));
-        $this->assertTrue($this->sm->has('Cache\Foo'));
+        $this->assertTrue($this->sm->has('Memory'));
+        $this->assertTrue($this->sm->has('Foo'));
     }
 
     public function testCanRetrieveCacheByName()
     {
-        $cacheA = $this->sm->get('Cache\Memory');
+        $cacheA = $this->sm->get('Memory');
         $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cacheA);
 
-        $cacheB = $this->sm->get('Cache\Foo');
+        $cacheB = $this->sm->get('Foo');
         $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cacheB);
 
         $this->assertNotSame($cacheA, $cacheB);

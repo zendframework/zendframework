@@ -91,7 +91,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($uri, $page->getHref());
     }
 	
-    public function testIsActiveReturnsTrueWhenMatchingRequestUri()
+    public function testIsActiveReturnsTrueWhenHasMatchingRequestUri()
     {
         $page = new Page\Uri(array(
             'label' => 'foo',

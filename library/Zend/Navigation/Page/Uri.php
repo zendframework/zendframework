@@ -97,7 +97,7 @@ class Uri extends AbstractPage
     public function isActive($recursive = false)
     {
         if (!$this->active) {
-            if ($this->getRequest()->getRequestUri() == $this->getUri()) {
+            if ($this->getRequest()->getUri()->getPath() == $this->getUri()) {
                 $this->active = true;
                 return true;
             }
@@ -116,7 +116,7 @@ class Uri extends AbstractPage
     {
         $request = $this->request;
         if (!$request instanceof Request) {
-            throw new DomainException('The instance does not contain a valid Request.');
+            throw new DomainException('Instance does not contain a valid Request.');
         }
         
         $this->request = $request;

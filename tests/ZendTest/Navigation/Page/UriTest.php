@@ -12,6 +12,7 @@ namespace ZendTest\Navigation\Page;
 
 use Zend\Navigation\Page;
 use Zend\Navigation;
+use Zend\Http\Request;
 
 /**
  * Tests the class Zend_Navigation_Page_Uri
@@ -23,6 +24,11 @@ use Zend\Navigation;
  */
 class UriTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        $this->request  = new Request;	
+	}
+	
     public function testUriOptionAsString()
     {
         $page = new Page\Uri(array(
@@ -88,6 +94,24 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $page->setUri($uri);
 
         $this->assertEquals($uri, $page->getHref());
+    }
+	
+    public function testIsActiveReturnsTrueWhenMatchingRequestUri()
+    {
+        $page = new Page\Uri(array(
+            'label' => 'foo',
+            'uri' => '/bar'
+        ));
+		
+		$request = new Request();
+        $request->setUri('/bar');
+        $request->setMethod('GET');
+		
+		$this->assertInstanceOf('Zend\Http\Request', $request);
+		
+		$page->setRequest($request);
+
+        $this->assertTrue($page->isActive());
     }
 
     /**

@@ -15,19 +15,18 @@ use Zend\Mvc\Exception;
 use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Forward extends AbstractPlugin
 {
     /**
+     * @var ControllerManager
+     */
+    protected $controllers;
+
+    /**
      * @var MvcEvent
      */
     protected $event;
-
-    /**
-     * @var ServiceLocatorInterface
-     */
-    protected $locator;
 
     /**
      * @var int
@@ -45,11 +44,11 @@ class Forward extends AbstractPlugin
     protected $listenersToDetach = null;
 
     /**
-     * @param ControllerManager $locator
+     * @param ControllerManager $controllers
      */
-    public function __construct(ControllerManager $locator)
+    public function __construct(ControllerManager $controllers)
     {
-        $this->setLocator($locator);
+        $this->controllers = $controllers;
     }
 
     /**
@@ -103,31 +102,9 @@ class Forward extends AbstractPlugin
     }
 
     /**
-     * Set the service locator for controllers
-     *
-     * @param  ControllerManager $locator
-     * @return self
-     */
-    public function setLocator(ControllerManager $locator)
-    {
-        $this->locator = $locator;
-        return $this;
-    }
-
-    /**
-     * Get the service locator for controllers
-     *
-     * @return ControllerManager
-     */
-    public function getLocator()
-    {
-        return $this->locator;
-    }
-
-    /**
      * Dispatch another controller
      *
-     * @param  string $name Controller name; either a class name or an alias used in the DI container or service locator
+     * @param  string $name Controller name; either a class name or an alias used in the controller manager
      * @param  null|array $params Parameters with which to seed a custom RouteMatch object for the new controller
      * @return mixed
      * @throws Exception\DomainException if composed controller does not define InjectApplicationEventInterface
@@ -136,9 +113,8 @@ class Forward extends AbstractPlugin
     public function dispatch($name, array $params = null)
     {
         $event   = clone($this->getEvent());
-        $locator = $this->getLocator();
 
-        $controller = $locator->get($name);
+        $controller = $this->controllers->get($name);
         if ($controller instanceof InjectApplicationEventInterface) {
             $controller->setEvent($event);
         }

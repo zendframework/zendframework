@@ -533,10 +533,17 @@ class Factory
      */
     protected function getHydratorFromName($hydratorName)
     {
-        $serviceLocator = $this->getFormElementManager()->getServiceLocator();
+        $services = $this->getFormElementManager()->getServiceLocator();
 
-        if ($serviceLocator && $serviceLocator->has($hydratorName)) {
-            return $serviceLocator->get($hydratorName);
+        if ($services && $services->has('HydratorManager')) {
+            $hydrators = $services->get('HydratorManager');
+            if ($hydrators->has($hydratorName)) {
+                return $hydrators->get($hydratorName);
+            }
+        }
+
+        if ($services && $services->has($hydratorName)) {
+            return $services->get($hydratorName);
         }
 
         if (!class_exists($hydratorName)) {

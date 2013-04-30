@@ -67,6 +67,7 @@ class UrlIntegrationTest extends \PHPUnit_Framework_TestCase
             ),
             'factories' => array(
                 'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
+                'ConsoleViewManager'      => 'Zend\Mvc\Service\ConsoleViewManagerFactory',
                 'EventManager'            => 'Zend\Mvc\Service\EventManagerFactory',
                 'ViewHelperManager'       => 'Zend\Mvc\Service\ViewHelperManagerFactory',
                 'Request'                 => 'Zend\Mvc\Service\RequestFactory',
@@ -74,6 +75,7 @@ class UrlIntegrationTest extends \PHPUnit_Framework_TestCase
                 'Router'                  => 'Zend\Mvc\Service\RouterFactory',
                 'ConsoleRouter'           => 'Zend\Mvc\Service\RouterFactory',
                 'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
+                'HttpViewManager'         => 'Zend\Mvc\Service\HttpViewManagerFactory',
                 'RoutePluginManager'      => 'Zend\Mvc\Service\RoutePluginManagerFactory',
                 'ViewManager'             => 'Zend\Mvc\Service\ViewManagerFactory',
                 'ViewResolver'            => 'Zend\Mvc\Service\ViewResolverFactory',

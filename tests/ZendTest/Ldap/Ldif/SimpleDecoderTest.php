@@ -385,4 +385,27 @@ memberurl: ldap:///(&(cn=myName)(uid=something))";
         $actual   = Ldif\Encoder::decode($data);
         $this->assertEquals($expected, $actual);
     }
+
+
+    public function testDecodeSimpleSingleItemWithMultilineComment()
+    {
+        $data =
+"version: 1
+dn: cn=test3,ou=example,dc=cno
+objectclass: oc1
+attr3:: w7bDpMO8
+
+# This is a comment
+ on multiple lines
+dn: cn=test4,ou=example,dc=cno
+objectclass: oc1
+attr3:: w7bDpMO8";
+
+        $expected = array(
+            'dn'          => 'cn=test3,ou=example,dc=cno',
+            'objectclass' => array('oc1'),
+            'attr3'       => array('öäü'));
+        $actual   = Ldif\Encoder::decode($data);
+        $this->assertEquals($expected, $actual[0]);
+    }
 }

@@ -122,6 +122,7 @@ abstract class AbstractNavigationFactory implements FactoryInterface
     protected function injectComponents(array $pages, RouteMatch $routeMatch = null, Router $router = null, Request $request = null)
     {
         foreach ($pages as &$page) {
+            $hasUri = isset($page['uri']);
             $hasMvc = isset($page['action']) || isset($page['controller']) || isset($page['route']);
             if ($hasMvc) {
                 if (!isset($page['routeMatch']) && $routeMatch) {
@@ -130,10 +131,10 @@ abstract class AbstractNavigationFactory implements FactoryInterface
                 if (!isset($page['router'])) {
                     $page['router'] = $router;
                 }
-            }
-            
-            if (!isset($page['request'])) {
-                $page['request'] = $request;
+            } elseif($hasUri) {
+                if (!isset($page['request'])) {
+                    $page['request'] = $request;
+                }   
             }
 
             if (isset($page['pages'])) {

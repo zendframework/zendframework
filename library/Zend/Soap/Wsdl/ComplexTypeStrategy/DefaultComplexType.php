@@ -9,19 +9,18 @@
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
+use ReflectionClass;
 use Zend\Soap\Exception;
+use Zend\Soap\Wsdl;
 
-/**
- * Zend_Soap_Wsdl_Strategy_DefaultComplexType
- */
 class DefaultComplexType extends AbstractComplexTypeStrategy
 {
     /**
      * Add a complex type by recursively using all the class properties fetched via Reflection.
      *
      * @param  string $type Name of the class to be specified
-     * @throws Exception\InvalidArgumentException if class does not exist
      * @return string XSD Type for the given PHP type
+     * @throws Exception\InvalidArgumentException if class does not exist
      */
     public function addComplexType($type)
     {
@@ -38,10 +37,10 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
         }
 
         $dom = $this->getContext()->toDomDocument();
-        $class = new \ReflectionClass($type);
+        $class = new ReflectionClass($type);
 
         $soapTypeName = $this->getContext()->translateType($type);
-        $soapType     = 'tns:' . $soapTypeName;
+        $soapType     = Wsdl::TYPES_NS . ':' . $soapTypeName;
 
         // Register type here to avoid recursion
         $this->getContext()->addType($type, $soapType);
@@ -49,19 +48,20 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
 
         $defaultProperties = $class->getDefaultProperties();
 
-        $complexType = $dom->createElement('xsd:complexType');
+        $complexType = $dom->createElementNS(Wsdl::XSD_NS_URI, 'complexType');
         $complexType->setAttribute('name', $soapTypeName);
 
-        $all = $dom->createElement('xsd:all');
+        $all = $dom->createElementNS(Wsdl::XSD_NS_URI, 'all');
 
         foreach ($class->getProperties() as $property) {
             if ($property->isPublic() && preg_match_all('/@var\s+([^\s]+)/m', $property->getDocComment(), $matches)) {
 
                 /**
-                 * @todo check if 'xsd:element' must be used here (it may not be compatible with using 'complexType'
-                 * node for describing other classes used as attribute types for current class
+                 * @todo check if 'xsd:element' must be used here (it may not be
+                 * compatible with using 'complexType' node for describing other
+                 * classes used as attribute types for current class
                  */
-                $element = $dom->createElement('xsd:element');
+                $element = $dom->createElementNS(Wsdl::XSD_NS_URI, 'element');
                 $element->setAttribute('name', $propertyName = $property->getName());
                 $element->setAttribute('type', $this->getContext()->getType(trim($matches[1][0])));
 

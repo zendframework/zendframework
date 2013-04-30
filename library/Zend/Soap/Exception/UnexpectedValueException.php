@@ -9,7 +9,10 @@
 
 namespace Zend\Soap\Exception;
 
-class UnexpectedValueException
-    extends \UnexpectedValueException
-    implements ExceptionInterface
+use UnexpectedValueException as SPLUnexpectedValueException;
+
+/**
+ * Exception thrown when provided arguments are invalid
+ */
+class UnexpectedValueException extends SPLUnexpectedValueException implements ExceptionInterface
 {}

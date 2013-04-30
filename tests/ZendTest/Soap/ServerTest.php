@@ -12,6 +12,7 @@ namespace ZendTest\Soap;
 
 require_once __DIR__ . '/TestAsset/commontypes.php';
 
+use Zend\Soap\AutoDiscover;
 use Zend\Soap\Server;
 
 /**
@@ -494,8 +495,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
 
         $request =
-            '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-          . '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
+          '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
                              . 'xmlns:ns1="http://framework.zend.com" '
                              . 'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
                              . 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
@@ -506,7 +506,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
           .             '<param0 xsi:type="xsd:string">World</param0>'
           .         '</ns1:testFunc2>'
           .     '</SOAP-ENV:Body>'
-          . '</SOAP-ENV:Envelope>' . "\n";
+          . '</SOAP-ENV:Envelope>';
 
         $response = $server->handle($request);
 
@@ -648,81 +648,116 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedResponse, $server1->handle($request));
     }
 
-    public function testRegisterFaultException()
+    /**
+     * @dataProvider dataProviderForRegisterFaultException
+     *
+     * @param string|array $exception
+     */
+    public function testRegisterFaultException($exception)
     {
         $server = new Server();
 
-        $server->registerFaultException("Zend_Soap_Server_Exception");
-        $server->registerFaultException(array("OutOfBoundsException", "BogusException"));
+        $server->registerFaultException($exception);
 
-        $this->assertEquals(array(
-            'Zend_Soap_Server_Exception',
-            'OutOfBoundsException',
-            'BogusException',
-        ), $server->getFaultExceptions());
+        if (!is_array($exception)) {
+            $this->assertContains($exception, $server->getFaultExceptions());
+        } else {
+            foreach($exception as $row) {
+                $this->assertContains($row, $server->getFaultExceptions());
+            }
+        }
     }
 
-    public function testDeregisterFaultException()
+    /**
+     * @dataProvider dataProviderForRegisterFaultException
+     *
+     * @param string|array $exception
+     */
+    public function testDeregisterFaultException($exception)
     {
         $server = new Server();
 
-        $server->registerFaultException(array("OutOfBoundsException", "BogusException"));
-        $ret = $server->deregisterFaultException("BogusException");
-        $this->assertTrue($ret);
+        $server->registerFaultException($exception);
+        if (is_array($exception)) {
+            $exception = array_shift($exception);
+        }
 
-        $this->assertEquals(array(
-            'OutOfBoundsException',
-        ), $server->getFaultExceptions());
+        $this->assertTrue($server->deregisterFaultException($exception));
 
-        $ret = $server->deregisterFaultException("NonRegisteredException");
-        $this->assertFalse($ret);
+        $this->assertNotContains($exception, $server->getFaultExceptions());
     }
 
-    public function testGetFaultExceptions()
+    /**
+     * @dataProvider dataProviderForRegisterFaultException
+     *
+     * @param string|array $exception
+     */
+    public function testIsRegisteredAsFaultException($exception)
     {
-        $server = new Server();
 
-        $this->assertEquals(array(), $server->getFaultExceptions());
-        $server->registerFaultException("Exception");
-        $this->assertEquals(array("Exception"), $server->getFaultExceptions());
+        $server = new Server();
+        $server->registerFaultException($exception);
+
+
+        if (!is_array($exception)) {
+            $this->assertTrue($server->isRegisteredAsFaultException($exception));
+        } else {
+            foreach($exception as $row) {
+                $this->assertTrue($server->isRegisteredAsFaultException($row));
+            }
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderForRegisterFaultException()
+    {
+        return array(
+            array('Zend\Soap\Exception\InvalidArgumentException'),
+            array('InvalidArgumentException'),
+            array('Zend\Server\Exception\RuntimeException'),
+            array(array('Zend\Server\Exception\RuntimeException')),
+            array(array('Zend\Server\Exception\RuntimeException', 'InvalidArgumentException')),
+        );
     }
 
     public function testFaultWithTextMessage()
     {
         $server = new Server();
-        $fault = $server->fault("Faultmessage!");
+        $fault = $server->fault('FaultMessage!');
 
-        $this->assertTrue($fault instanceof \SOAPFault);
-        $this->assertContains("Faultmessage!", $fault->getMessage());
+        $this->assertTrue($fault instanceof \SoapFault);
+        $this->assertContains('FaultMessage!', $fault->getMessage());
     }
 
     public function testFaultWithUnregisteredException()
     {
         $server = new Server();
-        $fault = $server->fault(new \Exception("MyException"));
+        $fault = $server->fault(new \Exception('MyException'));
 
-        $this->assertTrue($fault instanceof \SOAPFault);
-        $this->assertContains("Unknown error", $fault->getMessage());
-        $this->assertNotContains("MyException", $fault->getMessage());
+        $this->assertTrue($fault instanceof \SoapFault);
+        $this->assertContains('Unknown error', $fault->getMessage());
+        $this->assertNotContains('MyException', $fault->getMessage());
     }
 
     public function testFaultWithRegisteredException()
     {
         $server = new Server();
-        $server->registerFaultException("Exception");
-        $fault = $server->fault(new \Exception("MyException"));
-
-        $this->assertTrue($fault instanceof \SOAPFault);
-        $this->assertNotContains("Unknown error", $fault->getMessage());
-        $this->assertContains("MyException", $fault->getMessage());
+        $server->registerFaultException('\Zend\Soap\Exception\RuntimeException');
+        $server->registerFaultException('\Zend\Soap\Exception\InvalidArgumentException');
+        $fault = $server->fault(new \Zend\Soap\Exception\RuntimeException('MyException'));
+        $this->assertTrue($fault instanceof \SoapFault);
+        $this->assertNotContains('Unknown error', $fault->getMessage());
+        $this->assertContains('MyException', $fault->getMessage());
     }
 
-    public function testFautlWithBogusInput()
+    public function testFaultWithBogusInput()
     {
         $server = new Server();
-        $fault = $server->fault(array("Here", "There", "Bogus"));
+        $fault = $server->fault(array('Here', 'There', 'Bogus'));
 
-        $this->assertContains("Unknown error", $fault->getMessage());
+        $this->assertContains('Unknown error', $fault->getMessage());
     }
 
     /**
@@ -731,22 +766,49 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testFaultWithIntegerFailureCodeDoesNotBreakClassSoapFault()
     {
         $server = new Server();
-        $fault = $server->fault("Faultmessage!", 5000);
+        $fault = $server->fault("FaultMessage!", 5000);
 
-        $this->assertTrue($fault instanceof \SOAPFault);
+        $this->assertTrue($fault instanceof \SoapFault);
     }
 
     /**
-     * @todo Implement testHandlePhpErrors().
+     * @expectedException \SoapFault
      */
     public function testHandlePhpErrors()
     {
-        $server = new Server();
+        if (headers_sent()) {
+            $this->markTestSkipped('Cannot run ' . __METHOD__ . '() when headers have already been sent; enable output buffering to run this test');
+            return;
+        }
 
-        // Remove the following line when you implement this test.
-        $this->markTestIncomplete(
-          "This test has not been implemented yet."
-        );
+        $wsdlFilename = __DIR__ . '/TestAsset/testHandlePhpErrors.wsdl';
+        $autodiscover = new AutoDiscover();
+        $autodiscover->setOperationBodyStyle(array(
+            'use'           => 'literal',
+        ));
+
+        $autodiscover->setBindingStyle(array(
+            'style'         => 'document',
+            'transport'     => 'http://schemas.xmlsoap.org/soap/http'
+        ));
+
+
+        $autodiscover->setServiceName('ExampleService');
+        $autodiscover->setUri('http://example.com');
+
+
+        $autodiscover->setClass('\ZendTest\Soap\TestAsset\errorClass');
+
+        $wsdl = $autodiscover->generate();
+        $wsdl->dump($wsdlFilename);
+
+        $server = new Server($wsdlFilename);
+
+        $server->setClass('\ZendTest\Soap\TestAsset\errorClass');
+
+        $client = new \Zend\Soap\Client\Local($server, $wsdlFilename);
+        $client->triggerError();
+        unlink($wsdlFilename);
     }
 
     public function testLoadFunctionsIsNotImplemented()
@@ -874,6 +936,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
           .     '</SOAP-ENV:Body>'
           . '</SOAP-ENV:Envelope>' . "\n";
         $response = $server->handle($request);
+
         $this->assertContains('Invalid XML', $response->getMessage());
     }
 

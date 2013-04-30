@@ -30,6 +30,7 @@ class ConsoleViewManagerFactory implements FactoryInterface
                 'ConsoleViewManager requires a Console environment; console environment not detected'
             );
         }
+
         return new ConsoleViewManager();
     }
 }

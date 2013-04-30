@@ -104,9 +104,25 @@ class UriTest extends \PHPUnit_Framework_TestCase
 		
         $page->setRequest($request);
 		
-		$this->assertInstanceOf('Zend\Http\Request', $page->getRequest());
+        $this->assertInstanceOf('Zend\Http\Request', $page->getRequest());
 
         $this->assertTrue($page->isActive());
+    }
+	
+    public function testIsActiveReturnsFalseOnNonMatchingRequestUri()
+    {
+        $page = new Page\Uri(array(
+            'label' => 'foo',
+            'uri' => '/bar'
+        ));
+		
+        $request = new Request();
+        $request->setUri('/baz');
+        $request->setMethod('GET');
+		
+        $page->setRequest($request);
+
+        $this->assertFalse($page->isActive());
     }
 
     /**

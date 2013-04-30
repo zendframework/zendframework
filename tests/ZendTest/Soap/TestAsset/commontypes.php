@@ -686,8 +686,8 @@ class PublicPrivateProtected
     private $baz;
 }
 
-class errorClass {
-
+class errorClass
+{
     public function triggerError()
     {
         trigger_error('TestError', E_USER_ERROR);

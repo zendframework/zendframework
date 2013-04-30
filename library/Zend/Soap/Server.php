@@ -566,7 +566,7 @@ class Server implements ZendServerServer
      *
      * See {@link setObject()} to set pre-configured object instances as request handlers.
      *
-     * @param  string|object $class Class name or object instance which executes 
+     * @param  string|object $class Class name or object instance which executes
      *             SOAP Requests at endpoint.
      * @param  string $namespace
      * @param  null|array $argv

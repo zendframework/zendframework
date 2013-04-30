@@ -206,7 +206,7 @@ class Wsdl
             $xpath->registerNamespace(self::SOAP_ENC_NS,    self::SOAP_ENC_URI);
             $xpath->registerNamespace(self::WSDL_NS,        self::WSDL_NS_URI);
 
-            // Select only attribute nodes. Data nodes does not contain uri 
+            // Select only attribute nodes. Data nodes does not contain uri
             // except for documentation node but this is for the user to decide.
             // This list does not include xmlns:tsn attribute of document root.
             // That attribute is changed above.

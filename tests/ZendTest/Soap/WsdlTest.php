@@ -25,7 +25,7 @@ use Zend\Uri\Uri;
 class WsdlTest extends WsdlTestHelper
 {
 
-    function testConstructor()
+    public function testConstructor()
     {
         $this->assertEquals(Wsdl::WSDL_NS_URI,              $this->dom->lookupNamespaceUri(null));
         $this->assertEquals(Wsdl::SOAP_11_NS_URI,              $this->dom->lookupNamespaceUri('soap'));
@@ -123,7 +123,7 @@ class WsdlTest extends WsdlTestHelper
      *
      * @param array $parameters message parameters
      */
-    function testAddMessage($parameters)
+    public function testAddMessage($parameters)
     {
         $messageParts = array();
         foreach($parameters as $i => $parameter) {
@@ -194,7 +194,7 @@ class WsdlTest extends WsdlTestHelper
         );
     }
 
-    function testAddPortType()
+    public function testAddPortType()
     {
         $portName = 'myPortType';
         $this->wsdl->addPortType($portName);
@@ -214,7 +214,7 @@ class WsdlTest extends WsdlTestHelper
      *
      * @param string $operationName
      */
-    function testAddPortOperation($operationName, $inputRequest = null, $outputResponse = null, $fail = null)
+    public function testAddPortOperation($operationName, $inputRequest = null, $outputResponse = null, $fail = null)
     {
         $portName = 'myPortType';
         $portType = $this->wsdl->addPortType($portName);
@@ -254,7 +254,7 @@ class WsdlTest extends WsdlTestHelper
     /**
      *
      */
-    function dataProviderForAddPortOperation()
+    public function dataProviderForAddPortOperation()
     {
         return array(
             array('operation'),
@@ -267,7 +267,7 @@ class WsdlTest extends WsdlTestHelper
         );
     }
 
-    function testAddBinding()
+    public function testAddBinding()
     {
         $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
 
@@ -296,7 +296,7 @@ class WsdlTest extends WsdlTestHelper
      * @param null $faultEncoding
      * @param null $faultName
      */
-    function testAddBindingOperation($operationName,
+    public function testAddBindingOperation($operationName,
         $input = null, $inputEncoding = null,
         $output = null, $outputEncoding = null,
         $fault = null, $faultEncoding = null, $faultName = null)
@@ -383,7 +383,7 @@ class WsdlTest extends WsdlTestHelper
     /**
      * @dataProvider dataProviderForSoapBindingStyle
      */
-    function testAddSoapBinding($style)
+    public function testAddSoapBinding($style)
     {
         $this->wsdl->addPortType('myPortType');
         $binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
@@ -409,7 +409,7 @@ class WsdlTest extends WsdlTestHelper
     /**
      * @dataProvider dataProviderForAddSoapOperation
      */
-    function testAddSoapOperation($operationUrl)
+    public function testAddSoapOperation($operationUrl)
     {
         $this->wsdl->addPortType('myPortType');
         $binding = $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
@@ -434,7 +434,7 @@ class WsdlTest extends WsdlTestHelper
     /**
      * @dataProvider dataProviderForAddService
      */
-    function testAddService($serviceUrl)
+    public function testAddService($serviceUrl)
     {
         $this->wsdl->addPortType('myPortType');
         $this->wsdl->addBinding('MyServiceBinding', 'myPortType');
@@ -539,7 +539,7 @@ class WsdlTest extends WsdlTestHelper
     /**
      *
      */
-    function testAddDocumentation()
+    public function testAddDocumentation()
     {
         $doc = 'This is a description for Port Type node.';
         $this->wsdl->addDocumentation($this->wsdl, $doc);
@@ -552,7 +552,7 @@ class WsdlTest extends WsdlTestHelper
 
     }
 
-    function testAddDocumentationToSomeElmenet()
+    public function testAddDocumentationToSomeElmenet()
     {
         $portType = $this->wsdl->addPortType('myPortType');
 
@@ -644,13 +644,13 @@ class WsdlTest extends WsdlTestHelper
         $this->assertEquals('',                 $this->wsdl->getType('void'),    'void  detection failed.');
     }
 
-    function testGetComplexTypeBasedOnStrategiesBackwardsCompabilityBoolean()
+    public function testGetComplexTypeBasedOnStrategiesBackwardsCompabilityBoolean()
     {
         $this->assertEquals('tns:WsdlTestClass', $this->wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
         $this->assertTrue($this->wsdl->getComplexTypeStrategy() instanceof Wsdl\ComplexTypeStrategy\DefaultComplexType);
     }
 
-    function testGetComplexTypeBasedOnStrategiesStringNames()
+    public function testGetComplexTypeBasedOnStrategiesStringNames()
     {
         $this->wsdl = new Wsdl($this->defaultServiceName, 'http://localhost/MyService.php', new Wsdl\ComplexTypeStrategy\DefaultComplexType);
         $this->assertEquals('tns:WsdlTestClass', $this->wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
@@ -661,7 +661,7 @@ class WsdlTest extends WsdlTestHelper
         $this->assertTrue($wsdl2->getComplexTypeStrategy() instanceof Wsdl\ComplexTypeStrategy\AnyType);
     }
 
-    function testAddingSameComplexTypeMoreThanOnceIsIgnored()
+    public function testAddingSameComplexTypeMoreThanOnceIsIgnored()
     {
         $this->wsdl->addType('\ZendTest\Soap\TestAsset\WsdlTestClass', 'tns:SomeTypeName');
         $this->wsdl->addType('\ZendTest\Soap\TestAsset\WsdlTestClass', 'tns:AnotherTypeName');
@@ -677,7 +677,7 @@ class WsdlTest extends WsdlTestHelper
         $this->testDocumentNodes();
     }
 
-    function testUsingSameComplexTypeTwiceLeadsToReuseOfDefinition()
+    public function testUsingSameComplexTypeTwiceLeadsToReuseOfDefinition()
     {
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
         $this->assertEquals(
@@ -705,7 +705,7 @@ class WsdlTest extends WsdlTestHelper
         $this->assertEquals($this->defaultServiceUri, $schema->getAttribute('targetNamespace'));
     }
 
-    function testAddComplexType()
+    public function testAddComplexType()
     {
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
 
@@ -762,7 +762,8 @@ class WsdlTest extends WsdlTestHelper
     /**
      * @return array
      */
-    public function dataProviderForTranslateType() {
+    public function dataProviderForTranslateType()
+    {
         return array(
             array('\\SomeType','SomeType'),
             array('SomeType\\','SomeType'),
@@ -778,7 +779,7 @@ class WsdlTest extends WsdlTestHelper
      * @group ZF-3910
      * @group ZF-11937
      */
-    function testCaseOfDocBlockParamsDosNotMatterForSoapTypeDetectionZf3910()
+    public function testCaseOfDocBlockParamsDosNotMatterForSoapTypeDetectionZf3910()
     {
         $this->assertEquals("xsd:string",   $this->wsdl->getType("StrIng"));
         $this->assertEquals("xsd:string",   $this->wsdl->getType("sTr"));

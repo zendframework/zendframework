@@ -38,7 +38,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
 
             return $complexType;
         }
-        
+
         if (($soapType = $this->scanRegisteredTypes($type)) !== null) {
             // Existing complex type
             return $soapType;

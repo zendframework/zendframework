@@ -54,4 +54,3 @@ class DefaultComplexTypeTest extends WsdlTestHelper
         $this->testDocumentNodes();
     }
 }
-

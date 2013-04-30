@@ -64,7 +64,8 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
         $this->testDocumentNodes();
     }
 
-    public function dataProviderForFunctionReturningSimpleArrayOfBasicTypes(){
+    public function dataProviderForFunctionReturningSimpleArrayOfBasicTypes()
+    {
         return array(
             array('int', 'ArrayOfInt'),
             array('string', 'ArrayOfString'),
@@ -113,7 +114,8 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
     /**
      * @return array
      */
-    public function dataProviderForNestedTypesDefinitions() {
+    public function dataProviderForNestedTypesDefinitions()
+    {
         return array(
             array(
                 'string[][]',

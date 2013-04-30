@@ -36,7 +36,8 @@ use ZendTest\Soap\WsdlTestHelper;
 class CompositeStrategyTest extends WsdlTestHelper
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         // override parent setup because it is needed only in one method
     }
 
@@ -129,7 +130,8 @@ class CompositeStrategyTest extends WsdlTestHelper
     /**
      *
      */
-    public function testGetDefaultStrategy() {
+    public function testGetDefaultStrategy()
+    {
         $strategyClass =  'Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType';
 
         $strategy = new Composite(array(), $strategyClass);
@@ -137,4 +139,3 @@ class CompositeStrategyTest extends WsdlTestHelper
         $this->assertEquals($strategyClass, get_class($strategy->getDefaultStrategy()));
     }
 }
-

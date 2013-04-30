@@ -27,31 +27,31 @@ class DotNet extends SOAPClient
      * Curl HTTP client adapter.
      * @var CurlClient
      */
-    private $curlClient = null;
+    protected $curlClient = null;
 
     /**
      * The last request headers.
      * @var string
      */
-    private $lastRequestHeaders = '';
+    protected $lastRequestHeaders = '';
 
     /**
      * The last response headers.
      * @var string
      */
-    private $lastResponseHeaders = '';
+    protected $lastResponseHeaders = '';
 
     /**
      * SOAP client options.
      * @var array
      */
-    private $options = array();
+    protected $options = array();
 
     /**
      * Should NTLM authentication be used?
      * @var boolean
      */
-    private $useNtlm = false;
+    protected $useNtlm = false;
 
     /**
      * Constructor
@@ -225,7 +225,7 @@ class DotNet extends SOAPClient
      * @param  array $headers The headers to flatten.
      * @return string The headers string.
      */
-    private function flattenHeaders(array $headers)
+    protected function flattenHeaders(array $headers)
     {
         $result = '';
 

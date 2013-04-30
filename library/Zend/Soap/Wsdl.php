@@ -48,18 +48,18 @@ class Wsdl
      * DOM Instance
      * @var DOMDocument
      */
-    private $dom;
+    protected $dom;
 
     /**
      * Types defined on schema
      * @var array
      */
-    private $includedTypes = array();
+    protected $includedTypes = array();
 
     /**
      * @var DOMElement
      */
-    private $schema = null;
+    protected $schema = null;
 
     /**
      * Strategy for detection of complex types
@@ -70,13 +70,13 @@ class Wsdl
      * URI where the WSDL will be available
      * @var string
      */
-    private $uri;
+    protected $uri;
 
     /**
      * Root XML_Tree_Node
      * @var DOMElement WSDL
      */
-    private $wsdl;
+    protected $wsdl;
 
     /**
      * @param  string  $name Name of the Web Service being Described
@@ -752,7 +752,7 @@ class Wsdl
      * @return DOMElement parsed element
      * @throws Exception\RuntimeException if $element is not an array
      */
-    private function _parseElement($element)
+    protected function _parseElement($element)
     {
         if (!is_array($element)) {
             throw new Exception\RuntimeException('The "element" parameter needs to be an associative array.');
@@ -788,7 +788,7 @@ class Wsdl
      * @param  mixed $value
      * @return string safe value or original $value
      */
-    private function sanitizeAttributeValueByName($name, $value)
+    protected function sanitizeAttributeValueByName($name, $value)
     {
         switch (strtolower($name)) {
             case 'targetnamespace':
@@ -811,7 +811,7 @@ class Wsdl
      * @param  array $attributes
      * @param  bool $withSanitizer
      */
-    private function arrayToAttributes(\DOMNode $node, array $attributes, $withSanitizer = true)
+    protected function arrayToAttributes(\DOMNode $node, array $attributes, $withSanitizer = true)
     {
         foreach($attributes as $attributeName => $attributeValue) {
             if ($withSanitizer) {
@@ -829,7 +829,7 @@ class Wsdl
      * @param  string $attributeName
      * @param  mixed $attributeValue
      */
-    private function setAttributeWithSanitization(\DOMNode $node, $attributeName, $attributeValue)
+    protected function setAttributeWithSanitization(\DOMNode $node, $attributeName, $attributeValue)
     {
         $attributeValue = $this->sanitizeAttributeValueByName($attributeName, $attributeValue);
         $this->setAttribute($node, $attributeName, $attributeValue);
@@ -842,7 +842,7 @@ class Wsdl
      * @param  string $attributeName
      * @param  mixed $attributeValue
      */
-    private function setAttribute(\DOMNode $node, $attributeName, $attributeValue)
+    protected function setAttribute(\DOMNode $node, $attributeName, $attributeValue)
     {
         $attributeNode = $node->ownerDocument->createAttribute($attributeName);
         $node->appendChild($attributeNode);
@@ -858,7 +858,7 @@ class Wsdl
      * @return string
      * @throws Exception\InvalidArgumentException
      */
-    private function getSoapNamespaceUriByVersion($soapVersion)
+    protected function getSoapNamespaceUriByVersion($soapVersion)
     {
         if ($soapVersion != SOAP_1_1 AND $soapVersion != SOAP_1_2) {
             throw new Exception\InvalidArgumentException('Invalid SOAP version, use constants: SOAP_1_1 or SOAP_1_2');

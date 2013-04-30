@@ -10,7 +10,6 @@
 namespace Zend\Navigation\Page;
 
 use Zend\Http\Request;
-use Zend\Mvc\Exception\DomainException;
 use Zend\Navigation\Exception;
 
 /**
@@ -99,10 +98,12 @@ class Uri extends AbstractPage
     public function isActive($recursive = false)
     {
         if (!$this->active) {
-            if ($this->getRequest()->getUri()->getPath() == $this->getUri()) {
-                $this->active = true;
-                return true;
-            }
+		    if ($this->getRequest() instanceof Request) {
+                if ($this->getRequest()->getUri()->getPath() == $this->getUri()) {
+                    $this->active = true;
+                    return true;
+                }
+		    }
         }
         
         return parent::isActive($recursive);
@@ -112,17 +113,10 @@ class Uri extends AbstractPage
      * Get the request
      *
      * @return Request
-     * @throws DomainException if unable to find request
      */
     public function getRequest()
     {
-        $request = $this->request;
-        if (!$request instanceof Request) {
-            throw new DomainException('Instance does not contain a valid Request.');
-        }
-        
-        $this->request = $request;
-        return $request;
+        return $this->request;
     }
 
     /**

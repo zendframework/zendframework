@@ -15,6 +15,8 @@ use stdClass;
 use Zend\EventManager\StaticEventManager;
 use Zend\Http\Request;
 use Zend\Http\Response;
+use Zend\Mvc\Controller\ControllerManager;
+use Zend\Mvc\Controller\PluginManager;
 use Zend\Mvc\Controller\Plugin\Forward as ForwardPlugin;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
@@ -46,14 +48,37 @@ class ForwardTest extends TestCase
         $routeMatch->setMatchedRouteName('some-route');
         $event->setRouteMatch($routeMatch);
 
-        $locator = new Locator;
-        $locator->add('forward', function () {
-            return new ForwardController();
+        $services    = new Locator();
+        $plugins     = $this->plugins = new PluginManager();
+        $plugins->setServiceLocator($services);
+
+        $controllers = $this->controllers = new ControllerManager();
+        $controllers->setFactory('forward', function () use ($plugins) {
+            $controller = new ForwardController();
+            $controller->setPluginManager($plugins);
+            return $controller;
+        });
+        $controllers->setServiceLocator($services);
+        $services->add('ControllerLoader', function () use ($controllers) {
+            return $controllers;
+        });
+        $services->add('ControllerPluginManager', function () use ($plugins) {
+            return $plugins;
+        });
+        $services->add('Zend\ServiceManager\ServiceLocatorInterface', function () use ($services) {
+            return $services;
+        });
+        $services->add('EventManager', function () use ($mockEventManager) {
+            return $mockEventManager;
+        });
+        $services->add('SharedEventManager', function () use ($mockSharedEventManager) {
+            return $mockSharedEventManager;
         });
 
         $this->controller = new SampleController();
         $this->controller->setEvent($event);
-        $this->controller->setServiceLocator($locator);
+        $this->controller->setServiceLocator($services);
+        $this->controller->setPluginManager($plugins);
 
         $this->plugin = $this->controller->plugin('forward');
     }
@@ -66,28 +91,17 @@ class ForwardTest extends TestCase
     public function testPluginWithoutEventAwareControllerRaisesDomainException()
     {
         $controller = new UneventfulController();
-        $plugin     = new ForwardPlugin();
+        $plugin     = new ForwardPlugin($this->controllers);
         $plugin->setController($controller);
         $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'InjectApplicationEventInterface');
         $plugin->dispatch('forward');
     }
 
-    public function testPluginWithoutLocatorAwareControllerRaisesDomainException()
-    {
-        $controller = new UnlocatableEventfulController();
-        $controller->setEvent($this->controller->getEvent());
-        $plugin     = new ForwardPlugin();
-        $plugin->setController($controller);
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'implements ServiceLocatorAwareInterface');
-        $plugin->dispatch('forward');
-    }
-
-    public function testPluginWithoutControllerLocatorRaisesDomainException()
+    public function testPluginWithoutControllerLocatorRaisesServiceNotCreatedException()
     {
         $controller = new SampleController();
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotCreatedException');
         $plugin     = $controller->plugin('forward');
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'composes Locator');
-        $plugin->dispatch('forward');
     }
 
     public function testDispatchRaisesDomainExceptionIfDiscoveredControllerIsNotDispatchable()
@@ -96,7 +110,7 @@ class ForwardTest extends TestCase
         $locator->add('bogus', function () {
             return new stdClass;
         });
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'DispatchableInterface');
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $this->plugin->dispatch('bogus');
     }
 
@@ -104,9 +118,7 @@ class ForwardTest extends TestCase
     {
         $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'Circular forwarding');
         $sampleController = $this->controller;
-        $sampleController->getServiceLocator()->add('sample', function () use ($sampleController) {
-            return $sampleController;
-        });
+        $this->controllers->setService('sample', $sampleController);
         $this->plugin->dispatch('sample', array('action' => 'test-circular'));
     }
 

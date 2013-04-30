@@ -19,7 +19,7 @@ use Zend\ServiceManager\ServiceManager;
  * @subpackage UnitTests
  * @group      Zend_Cache
  */
-class StorageCacheAbstractFactoryTest extends \PHPUnit_Framework_TestCase
+class StorageCacheAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
 {
     protected $sm;
 
@@ -33,16 +33,12 @@ class StorageCacheAbstractFactoryTest extends \PHPUnit_Framework_TestCase
                 'adapter' => 'Memory',
                 'plugins' => array('Serializer', 'ClearExpiredByFactor'),
             ),
-            'invalid' => array(
-                'adapter' => 'Memory',
-                'plugins' => array('Serializer', 'ClearExpiredByFactor'),
-            ),
             'Foo' => array(
                 'adapter' => 'Memory',
                 'plugins' => array('Serializer', 'ClearExpiredByFactor'),
             ),
         )));
-        $this->sm->addAbstractFactory('Zend\Cache\Service\StorageCacheAbstractFactory');
+        $this->sm->addAbstractFactory('Zend\Cache\Service\StorageCacheAbstractServiceFactory');
     }
 
     public function tearDown()
@@ -53,16 +49,16 @@ class StorageCacheAbstractFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanLookupCacheByName()
     {
-        $this->assertTrue($this->sm->has('Cache\Memory'));
-        $this->assertTrue($this->sm->has('Cache\Foo'));
+        $this->assertTrue($this->sm->has('Memory'));
+        $this->assertTrue($this->sm->has('Foo'));
     }
 
     public function testCanRetrieveCacheByName()
     {
-        $cacheA = $this->sm->get('Cache\Memory');
+        $cacheA = $this->sm->get('Memory');
         $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cacheA);
 
-        $cacheB = $this->sm->get('Cache\Foo');
+        $cacheB = $this->sm->get('Foo');
         $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cacheB);
 
         $this->assertNotSame($cacheA, $cacheB);

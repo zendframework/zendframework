@@ -36,7 +36,7 @@ use Zend\Session\Container;
  * $container = $services->get('SessionContainer\captcha');
  * </code>
  */
-class ContainerAbstractFactory implements AbstractFactoryInterface
+class ContainerAbstractServiceFactory implements AbstractFactoryInterface
 {
     /**
      * Cached container configuration
@@ -46,75 +46,94 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
     protected $config;
 
     /**
-     * @param  ServiceLocatorInterface $serviceLocator
+     * Configuration key in which session containers live
+     *
+     * @var string
+     */
+    protected $configKey = 'session_containers';
+
+    /**
+     * @var \Zend\Session\ManagerInterface
+     */
+    protected $sessionManager;
+
+    /**
+     * @param  ServiceLocatorInterface $services
      * @param  string                  $name
      * @param  string                  $requestedName
      * @return bool
      */
-    public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
+    public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
-        $config = $this->getConfig($serviceLocator);
-        if (!$config) {
+        $config = $this->getConfig($services);
+        if (empty($config)) {
             return false;
         }
 
         $containerName = $this->normalizeContainerName($requestedName);
-        if (!$containerName) {
-            return false;
-        }
-
         return array_key_exists($containerName, $config);
     }
 
     /**
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $services
      * @param  string                  $name
      * @param  string                  $requestedName
      * @return Container
      */
-    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
+    public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
-        $containerName = substr($requestedName, 17);
-        $manager       = null;
-
-        if ($serviceLocator->has('Zend\Session\ManagerInterface')) {
-            $manager = $serviceLocator->get('Zend\Session\ManagerInterface');
-        }
-
-        return new Container($containerName, $manager);
+        $manager = $this->getSessionManager($services);
+        return new Container($requestedName, $manager);
     }
 
     /**
      * Retrieve config from service locator, and cache for later
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $services
      * @return false|array
      */
-    protected function getConfig(ServiceLocatorInterface $serviceLocator)
+    protected function getConfig(ServiceLocatorInterface $services)
     {
         if (null !== $this->config) {
             return $this->config;
         }
 
-        if (!$serviceLocator->has('Config')) {
+        if (!$services->has('Config')) {
             $this->config = array();
-
-            return false;
+            return $this->config;
         }
 
-        $config = $serviceLocator->get('Config');
-        if (!isset($config['session_containers']) || !is_array($config['session_containers'])) {
+        $config = $services->get('Config');
+        if (!isset($config[$this->configKey]) || !is_array($config[$this->configKey])) {
             $this->config = array();
-
-            return false;
+            return $this->config;
         }
 
-        $config = $config['session_containers'];
+        $config = $config[$this->configKey];
         $config = array_flip($config);
 
         $this->config = array_change_key_case($config);
 
         return $this->config;
+    }
+
+    /**
+     * Retrieve the session manager instance, if any
+     *
+     * @param  ServiceLocatorInterface $services
+     * @return null|\Zend\Session\ManagerInterface
+     */
+    protected function getSessionManager(ServiceLocatorInterface $services)
+    {
+        if ($this->sessionManager !== null) {
+            return $this->sessionManager;
+        }
+
+        if ($services->has('Zend\Session\ManagerInterface')) {
+            $this->sessionManager = $services->get('Zend\Session\ManagerInterface');
+        }
+
+        return $this->sessionManager;
     }
 
     /**
@@ -127,13 +146,6 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
      */
     protected function normalizeContainerName($name)
     {
-        $containerName = strtolower($name);
-        if (18 > strlen($containerName)
-            || ('sessioncontainer\\' !== substr($containerName, 0, 17))
-        ) {
-            return false;
-        }
-
-        return substr($containerName, 17);
+        return strtolower($name);
     }
 }

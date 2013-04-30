@@ -468,6 +468,11 @@ class Factory
      */
     protected function prepareAndInjectInputFilter($spec, FormInterface $form, $method)
     {
+        if ($spec instanceof InputFilterInterface) {
+            $form->setInputFilter($spec);
+            return;
+        }
+
         if (is_string($spec)) {
             if (!class_exists($spec)) {
                 throw new Exception\DomainException(sprintf(
@@ -490,6 +495,9 @@ class Factory
 
         $factory = $this->getInputFilterFactory();
         $filter  = $factory->createInputFilter($spec);
+        if (method_exists($filter, 'setFactory')) {
+            $filter->setFactory($factory);
+        }
         $form->setInputFilter($filter);
     }
 
@@ -528,10 +536,17 @@ class Factory
      */
     protected function getHydratorFromName($hydratorName)
     {
-        $serviceLocator = $this->getFormElementManager()->getServiceLocator();
+        $services = $this->getFormElementManager()->getServiceLocator();
 
-        if ($serviceLocator && $serviceLocator->has($hydratorName)) {
-            return $serviceLocator->get($hydratorName);
+        if ($services && $services->has('HydratorManager')) {
+            $hydrators = $services->get('HydratorManager');
+            if ($hydrators->has($hydratorName)) {
+                return $hydrators->get($hydratorName);
+            }
+        }
+
+        if ($services && $services->has($hydratorName)) {
+            return $services->get($hydratorName);
         }
 
         if (!class_exists($hydratorName)) {

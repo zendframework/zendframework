@@ -17,6 +17,7 @@ use Zend\Form\FormElementManager;
 use Zend\Form\Factory as FormFactory;
 use Zend\InputFilter;
 use Zend\ServiceManager\ServiceManager;
+use Zend\Stdlib\Hydrator\HydratorPluginManager;
 
 /**
  * @category   Zend
@@ -314,11 +315,39 @@ class FactoryTest extends TestCase
         }
     }
 
+    public function testCanCreateFormsWithInputFilterInstances()
+    {
+        $filter = new TestAsset\InputFilter();
+        $form = $this->factory->createForm(array(
+            'name'         => 'foo',
+            'input_filter' => $filter,
+        ));
+        $this->assertInstanceOf('Zend\Form\FormInterface', $form);
+        $test = $form->getInputFilter();
+        $this->assertSame($filter, $test);
+    }
+
     public function testCanCreateFormsAndSpecifyHydrator()
     {
         $form = $this->factory->createForm(array(
             'name'     => 'foo',
             'hydrator' => 'Zend\Stdlib\Hydrator\ObjectProperty',
+        ));
+        $this->assertInstanceOf('Zend\Form\FormInterface', $form);
+        $hydrator = $form->getHydrator();
+        $this->assertInstanceOf('Zend\Stdlib\Hydrator\ObjectProperty', $hydrator);
+    }
+
+    public function testCanCreateFormsAndSpecifyHydratorManagedByHydratorManager()
+    {
+        $hydrators = new HydratorPluginManager();
+        $services = $this->factory->getFormElementManager()->getServiceLocator();
+        $hydrators->setServiceLocator($services);
+        $services->setService('HydratorManager', new HydratorPluginManager());
+
+        $form = $this->factory->createForm(array(
+            'name'     => 'foo',
+            'hydrator' => 'ObjectProperty',
         ));
         $this->assertInstanceOf('Zend\Form\FormInterface', $form);
         $hydrator = $form->getHydrator();

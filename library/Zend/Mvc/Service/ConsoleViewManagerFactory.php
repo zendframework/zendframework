@@ -10,25 +10,27 @@
 namespace Zend\Mvc\Service;
 
 use Zend\Console\Console;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Mvc\View\Console\ViewManager as ConsoleViewManager;
-use Zend\Mvc\View\Http\ViewManager as HttpViewManager;
 
-class ViewManagerFactory implements FactoryInterface
+class ConsoleViewManagerFactory implements FactoryInterface
 {
     /**
-     * Create and return a view manager based on detected environment
+     * Create and return the view manager for the console environment
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return ConsoleViewManager|HttpViewManager
+     * @return ConsoleViewManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if (Console::isConsole()) {
-            return $serviceLocator->get('ConsoleViewManager');
+        if (!Console::isConsole()) {
+            throw new ServiceNotCreatedException(
+                'ConsoleViewManager requires a Console environment; console environment not detected'
+            );
         }
 
-        return $serviceLocator->get('HttpViewManager');
+        return new ConsoleViewManager();
     }
 }

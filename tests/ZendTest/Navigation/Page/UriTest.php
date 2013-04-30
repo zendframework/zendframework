@@ -102,9 +102,9 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $request->setUri('/bar');
         $request->setMethod('GET');
 		
-        $this->assertInstanceOf('Zend\Http\Request', $request);
-		
         $page->setRequest($request);
+		
+		$this->assertInstanceOf('Zend\Http\Request', $page->getRequest());
 
         $this->assertTrue($page->isActive());
     }

@@ -24,7 +24,6 @@ class Local extends SOAPClient
 {
     /**
      * Server object
-     *
      * @var \Zend\Soap\Server
      */
     protected $server;
@@ -56,6 +55,7 @@ class Local extends SOAPClient
      * @param string $action
      * @param int    $version
      * @param int    $oneWay
+     *
      * @return mixed
      */
     public function _doRequest(Common $client, $request, $location, $action, $version, $oneWay = null)

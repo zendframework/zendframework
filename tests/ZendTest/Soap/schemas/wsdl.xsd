@@ -51,7 +51,7 @@ No other rights are granted by implication, estoppel or otherwise.
       <xs:element name="documentation" type="wsdl:tDocumentation" minOccurs="0" />
     </xs:sequence>
   </xs:complexType>
-	 
+
   <xs:complexType name="tExtensibleAttributesDocumented" abstract="true" >
 
     <xs:complexContent>
@@ -133,7 +133,7 @@ No other rights are granted by implication, estoppel or otherwise.
           <xs:selector xpath="wsdl:port" />
           <xs:field xpath="@name" />
         </xs:unique>
-	  </xs:element>
+      </xs:element>
     </xs:choice>
   </xs:group>
 
@@ -204,7 +204,7 @@ No other rights are granted by implication, estoppel or otherwise.
   <xs:complexType name="tOperation" >
     <xs:complexContent>   
       <xs:extension base="wsdl:tExtensibleDocumented" >
-	    <xs:sequence>
+        <xs:sequence>
 
           <xs:choice>
             <xs:group ref="wsdl:request-response-or-one-way-operation" />
@@ -221,9 +221,9 @@ No other rights are granted by implication, estoppel or otherwise.
   <xs:group name="request-response-or-one-way-operation" >
     <xs:sequence>
       <xs:element name="input" type="wsdl:tParam" />
-	  <xs:sequence minOccurs='0' >
-	    <xs:element name="output" type="wsdl:tParam" />
-		<xs:element name="fault" type="wsdl:tFault" minOccurs="0" maxOccurs="unbounded" />
+      <xs:sequence minOccurs='0' >
+        <xs:element name="output" type="wsdl:tParam" />
+        <xs:element name="fault" type="wsdl:tFault" minOccurs="0" maxOccurs="unbounded" />
       </xs:sequence>
     </xs:sequence>
   </xs:group>
@@ -231,10 +231,10 @@ No other rights are granted by implication, estoppel or otherwise.
   <xs:group name="solicit-response-or-notification-operation" >
     <xs:sequence>
       <xs:element name="output" type="wsdl:tParam" />
-	  <xs:sequence minOccurs='0' >
-	    <xs:element name="input" type="wsdl:tParam" />
-		<xs:element name="fault" type="wsdl:tFault" minOccurs="0" maxOccurs="unbounded" />
-	  </xs:sequence>
+      <xs:sequence minOccurs='0' >
+        <xs:element name="input" type="wsdl:tParam" />
+        <xs:element name="fault" type="wsdl:tFault" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
     </xs:sequence>
 
   </xs:group>

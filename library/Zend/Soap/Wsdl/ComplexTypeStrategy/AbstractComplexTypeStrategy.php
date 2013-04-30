@@ -9,25 +9,28 @@
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
+use Zend\Soap\Wsdl;
+
 /**
  * Abstract class for Zend_Soap_Wsdl_Strategy.
+ *
  */
 abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterface
 {
     /**
      * Context object
-     *
-     * @var \Zend\Soap\Wsdl
+     * @var Wsdl
      */
     protected $context;
 
     /**
      * Set the Zend_Soap_Wsdl Context object this strategy resides in.
      *
-     * @param \Zend\Soap\Wsdl $context
+     * @param Wsdl $context
+     *
      * @return void
      */
-    public function setContext(\Zend\Soap\Wsdl $context)
+    public function setContext(Wsdl $context)
     {
         $this->context = $context;
     }
@@ -35,7 +38,7 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
     /**
      * Return the current Zend_Soap_Wsdl context object
      *
-     * @return \Zend\Soap\Wsdl
+     * @return Wsdl
      */
     public function getContext()
     {
@@ -46,10 +49,12 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
      * Look through registered types
      *
      * @param string $phpType
+     *
      * @return string
      */
     public function scanRegisteredTypes($phpType)
     {
+
         if (array_key_exists($phpType, $this->getContext()->getTypes())) {
             $soapTypes = $this->getContext()->getTypes();
             return $soapTypes[$phpType];

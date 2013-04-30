@@ -12,8 +12,10 @@ namespace ZendTest\Soap;
 
 require_once __DIR__ . '/TestAsset/commontypes.php';
 
+use Zend\Soap\AutoDiscover;
 use Zend\Soap\Client;
 use Zend\Soap\Server;
+use Zend\Soap\Wsdl;
 
 /**
  * @category   Zend
@@ -41,6 +43,21 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $ctx = stream_context_create();
 
+        $typeMap = array(
+            array(
+                'type_name'     => 'dateTime',
+                'type_ns'       => 'http://www.w3.org/2001/XMLSchema',
+                'from_xml'      => 'strtotime',
+                'to_xml'        => 'strtotime',
+            ),
+            array(
+                'type_name'     => 'date',
+                'type_ns'       => 'http://www.w3.org/2001/XMLSchema',
+                'from_xml'      => 'strtotime',
+                'to_xml'        => 'strtotime',
+            )
+        );
+
         $nonWSDLOptions = array('soap_version'   => SOAP_1_1,
                                 'classmap'       => array('TestData1' => '\ZendTest\Soap\TestAsset\TestData1',
                                                     'TestData2' => '\ZendTest\Soap\TestAsset\TestData2',),
@@ -65,7 +82,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                                 'cache_wsdl'     => 8,
                                 'features'       => 4,
 
-                                'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5);
+                                'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
+                                'typemap'        => $typeMap
+        );
 
         $client->setOptions($nonWSDLOptions);
         $this->assertTrue($client->getOptions() == $nonWSDLOptions);
@@ -96,7 +115,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
                              'stream_context' => $ctx,
 
-                             'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5);
+                             'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
+                             'typemap'        => $typeMap
+        );
 
         $client1->setOptions($wsdlOptions);
         $this->assertTrue($client1->getOptions() == $wsdlOptions);
@@ -107,6 +128,21 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client = new Client();
 
         $this->assertTrue($client->getOptions() == array('encoding' => 'UTF-8', 'soap_version' => SOAP_1_2));
+
+        $typeMap = array(
+            array(
+                'type_name'     => 'dateTime',
+                'type_ns'       => 'http://www.w3.org/2001/XMLSchema',
+                'from_xml'      => 'strtotime',
+                'to_xml'        => 'strtotime',
+            ),
+            array(
+                'type_name'     => 'date',
+                'type_ns'       => 'http://www.w3.org/2001/XMLSchema',
+                'from_xml'      => 'strtotime',
+                'to_xml'        => 'strtotime',
+            )
+        );
 
         $options = array('soap_version'   => SOAP_1_1,
                          'wsdl'           => __DIR__.'/TestAsset/wsdl_example.wsdl',
@@ -130,7 +166,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                          'local_cert'     => __DIR__.'/TestAsset/cert_file',
                          'passphrase'     => 'some pass phrase',
 
-                         'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5);
+                         'compression'    => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5,
+                         'typemap'        => $typeMap
+        );
 
         $client->setOptions($options);
         $this->assertTrue($client->getOptions() == $options);
@@ -243,24 +281,50 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @todo Implement testGetTypes().
      */
     public function testGetTypes()
     {
-        // Remove the following line when you implement this test.
-        $this->markTestIncomplete(
-          "This test has not been implemented yet."
-        );
+        $wsdlFilename = __DIR__ . '/TestAsset/GetTypesWsdlTest.wsdl';
+
+        $autodiscover = new AutoDiscover();
+        $autodiscover->setServiceName('ExampleService');
+        $autodiscover->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
+        $autodiscover->setClass('\ZendTest\Soap\TestAsset\AutoDiscoverTestClass2');
+        $autodiscover->setUri('http://example.com');
+        $wsdl = $autodiscover->generate();
+        $wsdl->dump($wsdlFilename);
+
+        $server = new Server($wsdlFilename);
+        $server->setClass('\ZendTest\Soap\TestAsset\AutoDiscoverTestClass2');
+
+        $client = new Client\Local($server, $wsdlFilename);
+        $soapClient = $client->getSoapClient();
+
+        $typesArray = $soapClient->__getTypes();
+
+        $this->assertCount(2, $typesArray);
+
+        $count = 0;
+        foreach ($typesArray as $element) {
+            if (strpos($element, 'struct AutoDiscoverTestClass1') === 0 OR strpos($element, 'AutoDiscoverTestClass1 ArrayOfAutoDiscoverTestClass1') === 0) {
+                $count++;
+            }
+        }
+        $this->assertEquals(2, $count, 'Invalid types');
+
+        unlink($wsdlFilename);
     }
 
+    /**
+     * @outputBuffering enabled
+     */
     public function testGetLastRequest()
     {
-        if (headers_sent()) {
-            $this->markTestSkipped('Cannot run testGetLastRequest() when headers have already been sent; enable output buffering to run this test');
+        if (headers_sent($file, $line)) {
+            $this->markTestSkipped('Cannot run testGetLastRequest() when headers have already been sent. Output started in '.$file.'@'.$line.' enable output buffering to run this test');
 
             return;
         }
-
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');
         $server->setClass('\ZendTest\Soap\TestAsset\TestClass');
 
@@ -519,5 +583,28 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $soap->setSoapClient($clientMock);
 
         $this->assertSame($clientMock, $soap->getSoapClient());
+    }
+
+    /**
+     * @expectedException \Zend\Soap\Exception\UnexpectedValueException
+     * @dataProvider dataProviderForInitSoapClientObjectException
+     */
+    public function testInitSoapClientObjectException($wsdl, $options)
+    {
+        $client = new Client($wsdl, $options);
+        $client->getSoapClient();
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderForInitSoapClientObjectException()
+    {
+        return array(
+            array(null,                             array()),
+            array(null,                             array('location'=>'http://example.com')),
+            array(__DIR__ . './TestAsset/wsdl_example.wsdl',    array('use'=>SOAP_ENCODED)),
+            array(__DIR__ . './TestAsset/wsdl_example.wsdl',    array('style'=>SOAP_DOCUMENT))
+        );
     }
 }

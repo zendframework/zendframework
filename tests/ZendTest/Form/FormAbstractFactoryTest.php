@@ -79,7 +79,9 @@ class FormAbstractFactoryTest extends TestCase
     public function testMissingFormConfigIndicatesCannotCreateForm()
     {
         $this->services->setService('Config', array(
-            'form_manager' => array(),
+            'form_manager' => array(
+                'Bar' => array(),
+            ),
         ));
         $this->assertFalse($this->forms->canCreateServiceWithName($this->services, 'Form\Foo', 'Form\Foo'));
     }

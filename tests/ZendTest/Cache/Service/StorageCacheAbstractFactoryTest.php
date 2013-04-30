@@ -33,10 +33,6 @@ class StorageCacheAbstractFactoryTest extends \PHPUnit_Framework_TestCase
                 'adapter' => 'Memory',
                 'plugins' => array('Serializer', 'ClearExpiredByFactor'),
             ),
-            'invalid' => array(
-                'adapter' => 'Memory',
-                'plugins' => array('Serializer', 'ClearExpiredByFactor'),
-            ),
             'Foo' => array(
                 'adapter' => 'Memory',
                 'plugins' => array('Serializer', 'ClearExpiredByFactor'),

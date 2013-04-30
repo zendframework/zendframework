@@ -19,6 +19,18 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class StorageCacheAbstractFactory implements AbstractFactoryInterface
 {
     /**
+     * @var array
+     */
+    protected $config;
+
+    /**
+     * Configuration key for cache objects
+     * 
+     * @var string
+     */
+    protected $configKey = 'caches';
+
+    /**
      * @param  ServiceLocatorInterface $serviceLocator
      * @param  string                  $name
      * @param  string                  $requestedName
@@ -26,19 +38,12 @@ class StorageCacheAbstractFactory implements AbstractFactoryInterface
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        if ('cache\\' !== substr(strtolower($requestedName), 0, 6)) {
+        $config  = $this->getConfig($serviceLocator);
+        if (empty($config)) {
             return false;
         }
 
-        $config  = $serviceLocator->get('Config');
-        if (!isset($config['caches'])) {
-            return false;
-        }
-
-        $config  = array_change_key_case($config['caches']);
-        $service = substr(strtolower($requestedName), 6);
-
-        return isset($config[$service]) && is_array($config[$service]);
+        return (isset($config[$requestedName]) && is_array($config[$requestedName]));
     }
 
     /**
@@ -49,11 +54,30 @@ class StorageCacheAbstractFactory implements AbstractFactoryInterface
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $config      = $serviceLocator->get('Config');
-        $config      = array_change_key_case($config['caches']);
-        $service     = substr(strtolower($requestedName), 6);
-        $cacheConfig = $config[$service];
+        $config = $this->getConfig($serviceLocator);
+        $config = $config[$requestedName];
+        return StorageFactory::factory($config);
+    }
 
-        return StorageFactory::factory($cacheConfig);
+    /**
+     * Retrieve cache configuration, if any
+     * 
+     * @param  ServiceLocatorInterface $services 
+     * @return array
+     */
+    protected function getConfig(ServiceLocatorInterface $services)
+    {
+        if ($this->config !== null) {
+            return $this->config;
+        }
+
+        $config = $services->get('Config');
+        if (!isset($config[$this->configKey])) {
+            $this->config = array();
+            return $this->config;
+        }
+
+        $this->config = $config[$this->configKey];
+        return $this->config;
     }
 }

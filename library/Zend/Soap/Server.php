@@ -872,7 +872,7 @@ class Server implements ZendServerServer
         $fault          = false;
         $this->response = '';
 
-        if (is_object($setRequestException) && is_subclass_of($setRequestException, 'Exception')) {
+        if ($setRequestException instanceof \Exception) {
             // Create SOAP fault message if we've caught a request exception
             $fault = $this->fault($setRequestException->getMessage(), 'Sender');
         } else {
@@ -1009,7 +1009,7 @@ class Server implements ZendServerServer
      */
     public function fault($fault = null, $code = 'Receiver')
     {
-        if (is_object($fault) && is_subclass_of($fault, 'Exception')) {
+        if ($fault instanceof \Exception) {
             if ($this->isRegisteredAsFaultException($fault)) {
                 $message = $fault->getMessage();
                 $eCode   = $fault->getCode();

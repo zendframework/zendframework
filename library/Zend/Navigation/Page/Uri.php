@@ -116,7 +116,7 @@ class Uri extends AbstractPage
     {
         $request = $this->request;
         if (!$request instanceof Request) {
-            throw new DomainException('The event used does not contain a valid Request.');
+            throw new DomainException('The instance does not contain a valid Request.');
         }
         
         $this->request = $request;
@@ -127,7 +127,7 @@ class Uri extends AbstractPage
      * Sets request for assembling URLs
      *
      * @param Request $request            
-     * @return Mvc fluent interface, returns self
+     * @return Fluent interface, returns self
      */
     public function setRequest(Request $request)
     {

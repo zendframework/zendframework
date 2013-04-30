@@ -13,19 +13,14 @@ use ReflectionClass;
 use Zend\Soap\Exception;
 use Zend\Soap\Wsdl;
 
-/**
- * Zend_Soap_Wsdl_Strategy_DefaultComplexType
- *
- */
 class DefaultComplexType extends AbstractComplexTypeStrategy
 {
     /**
      * Add a complex type by recursively using all the class properties fetched via Reflection.
      *
      * @param  string $type Name of the class to be specified
-     * @throws Exception\InvalidArgumentException if class does not exist
-     *
      * @return string XSD Type for the given PHP type
+     * @throws Exception\InvalidArgumentException if class does not exist
      */
     public function addComplexType($type)
     {

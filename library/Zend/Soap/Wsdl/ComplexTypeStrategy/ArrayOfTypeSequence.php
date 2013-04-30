@@ -11,18 +11,13 @@ namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 use Zend\Soap\Wsdl;
 
-/**
- * Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence
- *
- */
 class ArrayOfTypeSequence extends DefaultComplexType
 {
     /**
      * Add an unbounded ArrayOfType based on the xsd:sequence syntax if
      * type[] is detected in return value doc comment.
      *
-     * @param string $type
-     *
+     * @param  string $type
      * @return string tns:xsd-type
      */
     public function addComplexType($type)
@@ -42,15 +37,15 @@ class ArrayOfTypeSequence extends DefaultComplexType
             }
 
             return $complexType;
-        } elseif (($soapType = $this->scanRegisteredTypes($type)) !== null) {
-
+        }
+        
+        if (($soapType = $this->scanRegisteredTypes($type)) !== null) {
             // Existing complex type
             return $soapType;
-        } else {
-
-            // New singular complex type
-            return parent::addComplexType($type);
         }
+
+        // New singular complex type
+        return parent::addComplexType($type);
     }
 
     /**
@@ -59,7 +54,6 @@ class ArrayOfTypeSequence extends DefaultComplexType
      *
      * @param  string $singularType
      * @param  int    $level
-     *
      * @return string
      */
     protected function _getTypeBasedOnNestingLevel($singularType, $level)
@@ -76,7 +70,6 @@ class ArrayOfTypeSequence extends DefaultComplexType
      * From a nested definition with type[], get the singular xsd:type
      *
      * @param  string $type
-     *
      * @return string
      */
     protected function _getSingularType($type)
@@ -101,8 +94,6 @@ class ArrayOfTypeSequence extends DefaultComplexType
      * @param  string $arrayType      Array type name (e.g. 'tns:ArrayOfArrayOfInt')
      * @param  string $childType      Qualified array items type (e.g. 'xsd:int', 'tns:ArrayOfInt')
      * @param  string $phpArrayType   PHP type (e.g. 'int[][]', '\MyNamespace\MyClassName[][][]')
-     *
-     * @return void
      */
     protected function _addSequenceType($arrayType, $childType, $phpArrayType)
     {

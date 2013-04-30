@@ -16,16 +16,13 @@ use Zend\Server\Reflection\ReflectionParameter;
 /**
  * Describes how types, return values and method details are detected during
  * AutoDiscovery of a WSDL.
- *
  */
-
 class ReflectionDiscovery implements DiscoveryStrategyInterface
 {
     /**
      * Returns description from phpdoc block
      *
-     * @param \Zend\Server\Reflection\AbstractFunction $function
-     *
+     * @param  AbstractFunction $function
      * @return string
      */
     public function getFunctionDocumentation(AbstractFunction $function)
@@ -36,8 +33,7 @@ class ReflectionDiscovery implements DiscoveryStrategyInterface
     /**
      * Return parameter type
      *
-     * @param \Zend\Server\Reflection\ReflectionParameter $param
-     *
+     * @param  ReflectionParameter $param
      * @return string
      */
     public function getFunctionParameterType(ReflectionParameter $param)
@@ -48,9 +44,8 @@ class ReflectionDiscovery implements DiscoveryStrategyInterface
     /**
      * Return function return type
      *
-     * @param \Zend\Server\Reflection\AbstractFunction $function
-     * @param \Zend\Server\Reflection\Prototype        $prototype
-     *
+     * @param  AbstractFunction $function
+     * @param  Prototype        $prototype
      * @return string
      */
     public function getFunctionReturnType(AbstractFunction $function, Prototype $prototype)
@@ -61,9 +56,8 @@ class ReflectionDiscovery implements DiscoveryStrategyInterface
     /**
      * Return true if function is one way (return nothing)
      *
-     * @param \Zend\Server\Reflection\AbstractFunction $function
-     * @param \Zend\Server\Reflection\Prototype        $prototype
-     *
+     * @param  AbstractFunction $function
+     * @param  Prototype        $prototype
      * @return bool
      */
     public function isFunctionOneWay(AbstractFunction $function, Prototype $prototype)

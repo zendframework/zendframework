@@ -13,7 +13,6 @@ use Zend\Soap\Wsdl;
 
 /**
  * Interface strategies that generate an XSD-Schema for complex data types in WSDL files.
- *
  */
 interface ComplexTypeStrategyInterface
 {
@@ -28,7 +27,6 @@ interface ComplexTypeStrategyInterface
      * Create a complex type based on a strategy
      *
      * @param  string $type
-     *
      * @return string XSD type
      */
     public function addComplexType($type);

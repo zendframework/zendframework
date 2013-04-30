@@ -12,20 +12,15 @@ namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 use Zend\Soap\Exception;
 use Zend\Soap\Wsdl;
 
-/**
- * ArrayOfTypeComplex strategy
- *
- */
 class ArrayOfTypeComplex extends DefaultComplexType
 {
     /**
      * Add an ArrayOfType based on the xsd:complexType syntax if type[] is
      * detected in return value doc comment.
      *
-     * @param string $type
-     * @throws Exception\InvalidArgumentException
-     *
+     * @param  string $type
      * @return string tns:xsd-type
+     * @throws Exception\InvalidArgumentException
      */
     public function addComplexType($type)
     {
@@ -37,26 +32,26 @@ class ArrayOfTypeComplex extends DefaultComplexType
         $nestingLevel = $this->_getNestedCount($type);
 
         if ($nestingLevel == 0) {
-
             return parent::addComplexType($singularType);
-        } elseif ($nestingLevel == 1) {
+        }
 
-            // The following blocks define the Array of Object structure
-            return $this->_addArrayOfComplexType($singularType, $type);
-        } else {
+        if ($nestingLevel != 1) {
             throw new Exception\InvalidArgumentException(
-                'ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than one level. Use array object properties to return deep nested data.'
+                'ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than one level. '
+                . 'Use array object properties to return deep nested data.'
             );
         }
+
+        // The following blocks define the Array of Object structure
+        return $this->_addArrayOfComplexType($singularType, $type);
     }
 
     /**
      * Add an ArrayOfType based on the xsd:complexType syntax if type[] is
      * detected in return value doc comment.
      *
-     * @param string $singularType   e.g. '\MyNamespace\MyClassname'
-     * @param string $type           e.g. '\MyNamespace\MyClassname[]'
-     *
+     * @param  string $singularType   e.g. '\MyNamespace\MyClassname'
+     * @param  string $type           e.g. '\MyNamespace\MyClassname[]'
      * @return string tns:xsd-type   e.g. 'tns:ArrayOfMyNamespace.MyClassname'
      */
     protected function _addArrayOfComplexType($singularType, $type)
@@ -107,7 +102,6 @@ class ArrayOfTypeComplex extends DefaultComplexType
      * From a nested definition with type[], get the singular PHP Type
      *
      * @param  string $type
-     *
      * @return string
      */
     protected function _getSingularPhpType($type)

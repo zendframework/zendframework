@@ -59,11 +59,12 @@ use Zend\Soap\Exception;
  * of SOAP this wrapper service handles the parsing between the formats.
  *
  * @example
- *
+ * <code>
  *  $service = new MyCalculatorService();
  *  $soap = new \Zend\Soap\Server($wsdlFile);
  *  $soap->setObject(new \Zend\Soap\Server\DocumentLiteralWrapper($service));
  *  $soap->handle();
+ * </code>
  */
 class DocumentLiteralWrapper
 {
@@ -91,9 +92,8 @@ class DocumentLiteralWrapper
     /**
      * Proxy method that does the heavy document/literal decomposing.
      *
-     * @param string $method
-     * @param array $args
-     *
+     * @param  string $method
+     * @param  array $args
      * @return mixed
      */
     public function __call($method, $args)
@@ -102,8 +102,7 @@ class DocumentLiteralWrapper
         $this->_assertServiceDelegateHasMethod($method);
 
         $delegateArgs = $this->_parseArguments($method, $args[0]);
-        $ret = call_user_func_array(array($this->object, $method), $delegateArgs);
-
+        $ret          = call_user_func_array(array($this->object, $method), $delegateArgs);
         return $this->_getResultMessage($method, $ret);
     }
 
@@ -111,16 +110,14 @@ class DocumentLiteralWrapper
      * Parse the document/literal wrapper into arguments to call the real
      * service.
      *
-     * @param string $method
-     * @param object $document
-     * @throws \Zend\Soap\Exception\UnexpectedValueException
-     *
+     * @param  string $method
+     * @param  object $document
      * @return array
+     * @throws Exception\UnexpectedValueException
      */
     protected function _parseArguments($method, $document)
     {
         $reflMethod = $this->reflection->getMethod($method);
-        /* @var \Zend\Server\Reflection\ReflectionParameter[] $params  */
         $params = array();
         foreach ($reflMethod->getParameters() as $param) {
             $params[$param->getName()] = $param;
@@ -145,9 +142,8 @@ class DocumentLiteralWrapper
     /**
      * Returns result message content
      *
-     * @param $method
-     * @param $ret
-     *
+     * @param  string $method
+     * @param  mixed $ret
      * @return array
      */
     protected function _getResultMessage($method, $ret)
@@ -156,10 +152,8 @@ class DocumentLiteralWrapper
     }
 
     /**
-     * @param $method
-     * @throws \Zend\Soap\Exception\BadMethodCallException
-     *
-     * @return void
+     * @param  string $method
+     * @throws Exception\BadMethodCallException
      */
     protected function _assertServiceDelegateHasMethod($method)
     {
@@ -173,12 +167,10 @@ class DocumentLiteralWrapper
     }
 
     /**
-     * @param $args
-     * @throws \Zend\Soap\Exception\UnexpectedValueException
-     *
-     * @return void
+     * @param  array $args
+     * @throws Exception\UnexpectedValueException
      */
-    protected function _assertOnlyOneArgument($args)
+    protected function _assertOnlyOneArgument(array $args)
     {
         if (count($args) != 1) {
             throw new Exception\UnexpectedValueException(sprintf(

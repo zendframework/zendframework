@@ -370,4 +370,19 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
         $expected = array_merge(array('dn' => $node->getDnString()), $node->getData(false));
         $this->assertEquals($expected, $data);
     }
+
+    public function testDecodeSimpleSingleItemWithUri()
+    {
+        $data =
+"version: 1
+dn: cn=test3,ou=example,dc=cno
+objectclass: oc1
+memberurl: ldap:///(&(cn=myName)(uid=something))";
+        $expected = array(
+            'dn'          => 'cn=test3,ou=example,dc=cno',
+            'objectclass' => array('oc1'),
+            'memberurl'   => array('ldap:///(&(cn=myName)(uid=something))'));
+        $actual   = Ldif\Encoder::decode($data);
+        $this->assertEquals($expected, $actual);
+    }
 }

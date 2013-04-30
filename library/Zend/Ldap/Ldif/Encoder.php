@@ -72,7 +72,7 @@ class Encoder
                 $last[2] .= substr($line, 1);
             } elseif (substr($line, 0, 1) === '#') {
                 continue;
-            } elseif (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^:<]*)$/i', $line, $matches)) {
+            } elseif (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^<]*)$/i', $line, $matches)) {
                 $name  = strtolower($matches[1]);
                 $type  = trim($matches[2]);
                 $value = $matches[3];

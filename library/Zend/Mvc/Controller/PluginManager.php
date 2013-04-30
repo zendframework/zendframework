@@ -28,6 +28,7 @@ class PluginManager extends AbstractPluginManager
      * @var array
      */
     protected $factories = array(
+        'forward'  => 'Zend\Mvc\Controller\Plugin\Service\ForwardFactory',
         'identity' => 'Zend\Mvc\Controller\Plugin\Service\IdentityFactory',
     );
 
@@ -40,7 +41,6 @@ class PluginManager extends AbstractPluginManager
         'acceptableviewmodelselector' => 'Zend\Mvc\Controller\Plugin\AcceptableViewModelSelector',
         'filepostredirectget'         => 'Zend\Mvc\Controller\Plugin\FilePostRedirectGet',
         'flashmessenger'              => 'Zend\Mvc\Controller\Plugin\FlashMessenger',
-        'forward'                     => 'Zend\Mvc\Controller\Plugin\Forward',
         'layout'                      => 'Zend\Mvc\Controller\Plugin\Layout',
         'params'                      => 'Zend\Mvc\Controller\Plugin\Params',
         'postredirectget'             => 'Zend\Mvc\Controller\Plugin\PostRedirectGet',

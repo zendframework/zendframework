@@ -302,8 +302,8 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
     /**
      * @return mixed
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
-        return $this->connection->getLastGeneratedValue();
+        return $this->connection->getLastGeneratedValue($name);
     }
 }

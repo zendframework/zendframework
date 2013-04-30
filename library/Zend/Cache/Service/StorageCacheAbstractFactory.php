@@ -19,9 +19,9 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class StorageCacheAbstractFactory implements AbstractFactoryInterface
 {
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @param string $name
-     * @param string $requestedName
+     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  string                  $name
+     * @param  string                  $requestedName
      * @return bool
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
@@ -37,13 +37,14 @@ class StorageCacheAbstractFactory implements AbstractFactoryInterface
 
         $config  = array_change_key_case($config['caches']);
         $service = substr(strtolower($requestedName), 6);
+
         return isset($config[$service]) && is_array($config[$service]);
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @param string $name
-     * @param string $requestedName
+     * @param  ServiceLocatorInterface              $serviceLocator
+     * @param  string                               $name
+     * @param  string                               $requestedName
      * @return \Zend\Cache\Storage\StorageInterface
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
@@ -52,6 +53,7 @@ class StorageCacheAbstractFactory implements AbstractFactoryInterface
         $config      = array_change_key_case($config['caches']);
         $service     = substr(strtolower($requestedName), 6);
         $cacheConfig = $config[$service];
+
         return StorageFactory::factory($cacheConfig);
     }
 }

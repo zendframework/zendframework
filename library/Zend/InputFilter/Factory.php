@@ -17,7 +17,14 @@ use Zend\Validator\ValidatorChain;
 
 class Factory
 {
+    /**
+     * @var FilterChain
+     */
     protected $defaultFilterChain;
+
+    /**
+     * @var ValidatorChain
+     */
     protected $defaultValidatorChain;
 
     public function __construct()
@@ -270,6 +277,11 @@ class Factory
         return $inputFilter;
     }
 
+    /**
+     * @param  FilterChain       $chain
+     * @param  array|Traversable $filters
+     * @return void
+     */
     protected function populateFilters(FilterChain $chain, $filters)
     {
         foreach ($filters as $filter) {
@@ -300,6 +312,11 @@ class Factory
         }
     }
 
+    /**
+     * @param  ValidatorChain    $chain
+     * @param  array|Traversable $validators
+     * @return void
+     */
     protected function populateValidators(ValidatorChain $chain, $validators)
     {
         foreach ($validators as $validator) {

@@ -11,22 +11,34 @@ namespace Zend\Form;
 
 use Zend\InputFilter\InputFilterInterface;
 use Zend\ServiceManager\AbstractFactoryInterface;
-use Zend\ServiceManager\ServiceManagerInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class FormAbstractFactory implements AbstractFactoryInterface
 {
+    /**
+     * @var string Top-level configuration key indicating forms configuration
+     */
     protected $configKey     = 'form_manager';
+
+    /**
+     * @var Factory Form factory used to create forms
+     */
+    protected $factory;
+
+    /**
+     * @var string Service prefix necessary for abstract factory to trigger
+     */
     protected $servicePrefix = 'Form\\';
 
     /**
      * Can we create the requested service?
-     * 
-     * @param  ServiceManagerInterface $services 
+     *
+     * @param  ServiceLocatorInterface $services
      * @param  string $name Service name (as resolved by ServiceManager)
      * @param  string $rName Name by which service was requested
      * @return bool
      */
-    public function canCreateServiceWithName(ServiceManagerInterface $services, $name, $rName)
+    public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $rName)
     {
         if (!$services->has('Config')) {
             return false;
@@ -40,8 +52,8 @@ class FormAbstractFactory implements AbstractFactoryInterface
         }
 
         $config = $services->get('Config');
-        if (!isset($config[$this->configKey]) 
-            || !is_array($config[$this->configKey]) 
+        if (!isset($config[$this->configKey])
+            || !is_array($config[$this->configKey])
             || empty($config[$this->configKey])
         ) {
             return false;
@@ -62,26 +74,32 @@ class FormAbstractFactory implements AbstractFactoryInterface
 
     /**
      * Create a form
-     * 
-     * @param  ServiceManagerInterface $services 
+     *
+     * @param  ServiceLocatorInterface $services
      * @param  string $name Service name (as resolved by ServiceManager)
      * @param  string $rName Name by which service was requested
      * @return Form
      */
-    public function createServiceWithName(ServiceManagerInterface $services, $name, $rName)
+    public function createServiceWithName(ServiceLocatorInterface $services, $name, $rName)
     {
         $serviceName = substr($rName, strlen($this->servicePrefix));
         $config = $services->get('Config');
 
         $config = $config[$this->configKey][$serviceName];
 
-        $factory = $this->getFormFactory();
+        $factory = $this->getFormFactory($services);
         $this->marshalInputFilter($config, $services, $factory);
 
         return $factory->createForm($config);
     }
 
-    protected function getFormFactory(ServiceManagerInterface $services)
+    /**
+     * Retrieve the form factory, creating it if necessary
+     *
+     * @param  ServiceLocatorInterface $services
+     * @return Factory
+     */
+    protected function getFormFactory(ServiceLocatorInterface $services)
     {
         if ($this->factory instanceof Factory) {
             return $this->factory;
@@ -96,7 +114,20 @@ class FormAbstractFactory implements AbstractFactoryInterface
         return $this->factory;
     }
 
-    protected function marshalInputFilter(array &$config, ServiceManagerInterface $services, Factory $formFactory)
+    /**
+     * Marshal the input filter into the configuration
+     *
+     * If an input filter is specified:
+     * - if the InputFilterManager is present, checks if it's there; if so,
+     *   retrieves it and resets the specification to the instance.
+     * - otherwise, pulls the input filter factory from the form factory, and
+     *   attaches the FilterManager and ValidatorManager to it.
+     *
+     * @param array $config
+     * @param ServiceLocatorInterface $services
+     * @param Factory $formFactory
+     */
+    protected function marshalInputFilter(array &$config, ServiceLocatorInterface $services, Factory $formFactory)
     {
         if (!isset($config['input_filter'])) {
             return;
@@ -118,6 +149,6 @@ class FormAbstractFactory implements AbstractFactoryInterface
 
         $inputFilterFactory = $formFactory->getInputFilterFactory();
         $inputFilterFactory->getDefaultFilterChain()->setPluginManager($services->get('FilterManager'));
-        $inputValidatorFactory->getDefaultValidatorChain()->setPluginManager($services->get('ValidatorManager'));
+        $inputFilterFactory->getDefaultValidatorChain()->setPluginManager($services->get('ValidatorManager'));
     }
 }

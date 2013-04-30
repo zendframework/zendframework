@@ -495,6 +495,9 @@ class Factory
 
         $factory = $this->getInputFilterFactory();
         $filter  = $factory->createInputFilter($spec);
+        if (method_exists($filter, 'setFactory')) {
+            $filter->setFactory($factory);
+        }
         $form->setInputFilter($filter);
     }
 

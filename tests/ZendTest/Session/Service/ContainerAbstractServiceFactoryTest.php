@@ -15,7 +15,7 @@ use Zend\Session\Storage\ArrayStorage;
 /**
  * @group      Zend_Session
  */
-class ContainerAbstractFactoryTest extends \PHPUnit_Framework_TestCase
+class ContainerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public $config = array(
         'session_containers' => array(
@@ -33,7 +33,7 @@ class ContainerAbstractFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->services->setService('Zend\Session\Storage\StorageInterface', new ArrayStorage());
         $this->services->setFactory('Zend\Session\ManagerInterface', 'Zend\Session\Service\SessionManagerFactory');
-        $this->services->addAbstractFactory('Zend\Session\Service\ContainerAbstractFactory');
+        $this->services->addAbstractFactory('Zend\Session\Service\ContainerAbstractServiceFactory');
 
         $this->services->setService('Config', $this->config);
     }

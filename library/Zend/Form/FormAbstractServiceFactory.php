@@ -13,7 +13,7 @@ use Zend\InputFilter\InputFilterInterface;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class FormAbstractFactory implements AbstractFactoryInterface
+class FormAbstractServiceFactory implements AbstractFactoryInterface
 {
     /**
      * @var array

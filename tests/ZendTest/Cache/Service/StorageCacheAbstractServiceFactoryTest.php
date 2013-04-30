@@ -19,7 +19,7 @@ use Zend\ServiceManager\ServiceManager;
  * @subpackage UnitTests
  * @group      Zend_Cache
  */
-class StorageCacheAbstractFactoryTest extends \PHPUnit_Framework_TestCase
+class StorageCacheAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
 {
     protected $sm;
 
@@ -38,7 +38,7 @@ class StorageCacheAbstractFactoryTest extends \PHPUnit_Framework_TestCase
                 'plugins' => array('Serializer', 'ClearExpiredByFactor'),
             ),
         )));
-        $this->sm->addAbstractFactory('Zend\Cache\Service\StorageCacheAbstractFactory');
+        $this->sm->addAbstractFactory('Zend\Cache\Service\StorageCacheAbstractServiceFactory');
     }
 
     public function tearDown()

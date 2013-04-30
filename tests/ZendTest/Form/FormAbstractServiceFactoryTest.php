@@ -11,14 +11,14 @@ namespace ZendTest\Form;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Filter\FilterPluginManager;
-use Zend\Form\FormAbstractFactory;
+use Zend\Form\FormAbstractServiceFactory;
 use Zend\Form\FormElementManager;
 use Zend\InputFilter\InputFilterPluginManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\Hydrator\HydratorPluginManager;
 use Zend\Validator\ValidatorPluginManager;
 
-class FormAbstractFactoryTest extends TestCase
+class FormAbstractServiceFactoryTest extends TestCase
 {
     public function setUp()
     {
@@ -43,7 +43,7 @@ class FormAbstractFactoryTest extends TestCase
 
         $inputFilters->setInvokableClass('FooInputFilter', 'Zend\InputFilter\InputFilter');
 
-        $forms = $this->forms = new FormAbstractFactory;
+        $forms = $this->forms = new FormAbstractServiceFactory;
         $services->addAbstractFactory($forms);
     }
 

@@ -16,7 +16,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 /**
  * Storage cache factory for multiple caches.
  */
-class StorageCacheAbstractFactory implements AbstractFactoryInterface
+class StorageCacheAbstractServiceFactory implements AbstractFactoryInterface
 {
     /**
      * @var array

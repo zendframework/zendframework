@@ -36,7 +36,7 @@ use Zend\Session\Container;
  * $container = $services->get('SessionContainer\captcha');
  * </code>
  */
-class ContainerAbstractFactory implements AbstractFactoryInterface
+class ContainerAbstractServiceFactory implements AbstractFactoryInterface
 {
     /**
      * Cached container configuration

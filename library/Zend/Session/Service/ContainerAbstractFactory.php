@@ -46,6 +46,18 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
     protected $config;
 
     /**
+     * Configuration key in which session containers live
+     * 
+     * @var string
+     */
+    protected $configKey = 'session_containers';
+
+    /**
+     * @var \Zend\Session\ManagerInterface
+     */
+    protected $sessionManager;
+
+    /**
      * @param  ServiceLocatorInterface $serviceLocator
      * @param  string                  $name
      * @param  string                  $requestedName
@@ -59,9 +71,6 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
         }
 
         $containerName = $this->normalizeContainerName($requestedName);
-        if (!$containerName) {
-            return false;
-        }
 
         return array_key_exists($containerName, $config);
     }
@@ -74,14 +83,8 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
      */
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $containerName = substr($requestedName, 17);
-        $manager       = null;
-
-        if ($serviceLocator->has('Zend\Session\ManagerInterface')) {
-            $manager = $serviceLocator->get('Zend\Session\ManagerInterface');
-        }
-
-        return new Container($containerName, $manager);
+        $manager = $this->getSessionManager($serviceLocator);
+        return new Container($requestedName, $manager);
     }
 
     /**
@@ -118,6 +121,25 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
     }
 
     /**
+     * Retrieve the session manager instance, if any
+     * 
+     * @param  ServiceLocatorInterface $services 
+     * @return null|\Zend\Session\ManagerInterface
+     */
+    protected function getSessionManager(ServiceLocatorInterface $services)
+    {
+        if ($this->sessionManager !== null) {
+            return $this->sessionManager;
+        }
+
+        if ($services->has('Zend\Session\ManagerInterface')) {
+            $this->sessionManager = $services->get('Zend\Session\ManagerInterface');
+        }
+
+        return $this->sessionManager;
+    }
+
+    /**
      * Normalize the container name in order to perform a lookup
      *
      * Strips off the "SessionContainer\" prefix, and lowercases the name.
@@ -127,13 +149,6 @@ class ContainerAbstractFactory implements AbstractFactoryInterface
      */
     protected function normalizeContainerName($name)
     {
-        $containerName = strtolower($name);
-        if (18 > strlen($containerName)
-            || ('sessioncontainer\\' !== substr($containerName, 0, 17))
-        ) {
-            return false;
-        }
-
-        return substr($containerName, 17);
+        return strtolower($name);
     }
 }

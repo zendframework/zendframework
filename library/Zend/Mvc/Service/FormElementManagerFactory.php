@@ -9,6 +9,7 @@
 
 namespace Zend\Mvc\Service;
 
+use Zend\Form\Form;
 use Zend\Form\FormElementManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -25,6 +26,16 @@ class FormElementManagerFactory extends AbstractPluginManagerFactory
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $plugins = parent::createService($serviceLocator);
+        if ($serviceLocator->has('Di')) {
+            $di = $serviceLocator->get('Di');
+            $im = $di->instanceManager();
+            if (!$im->getTypePreferences('Zend\Form\FormInterface')) {
+                $form = new Form;
+                $im->setTypePreference('Zend\Form\FormInterface', array($form));
+            }
+            $plugins->addPeeringServiceManager($serviceLocator);
+            $plugins->setRetrieveFromPeeringManagerFirst(true);
+        }
         return $plugins;
     }
 }

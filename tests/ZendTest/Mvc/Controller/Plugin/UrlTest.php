@@ -31,6 +31,12 @@ class UrlTest extends TestCase
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
             ),
         )));
+        $router->addRoute('default', array(
+            'type' => 'Zend\Mvc\Router\Http\Segment',
+            'options' => array(
+                'route' => '/:controller[/:action]',
+            )
+        ));
         $this->router = $router;
 
         $event = new MvcEvent();
@@ -46,6 +52,14 @@ class UrlTest extends TestCase
     {
         $url = $this->plugin->fromRoute('home');
         $this->assertEquals('/', $url);
+    }
+
+    public function testModel()
+    {
+        $it = new \ArrayIterator(array('controller' => 'ctrl', 'action' => 'act'));
+
+        $url = $this->plugin->fromRoute('default', $it);
+        $this->assertEquals('/ctrl/act', $url);
     }
 
     public function testPluginWithoutControllerRaisesDomainException()

@@ -9,13 +9,13 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\AbstractFactoryInterface;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\Exception;
 use Zend\Di\Di;
 use Zend\Di\Exception\ClassNotFoundException;
 use Zend\Mvc\Exception\DomainException;
+use Zend\ServiceManager\AbstractFactoryInterface;
+use Zend\ServiceManager\AbstractPluginManager;
+use Zend\ServiceManager\Exception;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class DiStrictAbstractServiceFactory extends Di implements AbstractFactoryInterface
 {

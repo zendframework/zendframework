@@ -17,6 +17,23 @@ use Zend\Form\View\Helper\FormInput;
 class ReCaptcha extends FormInput
 {
     /**
+     * Invoke helper as functor
+     *
+     * Proxies to {@link render()}.
+     *
+     * @param  ElementInterface $element
+     * @return string
+     */
+    public function __invoke(ElementInterface $element = null)
+    {
+        if (!$element) {
+            return $this;
+        }
+
+        return $this->render($element);
+    }
+
+    /**
      * Render ReCaptcha form elements
      *
      * @param  ElementInterface $element
@@ -47,23 +64,6 @@ class ReCaptcha extends FormInput
         $js     = $this->renderJsEvents($challengeId, $responseId);
 
         return $hidden . $markup . $js;
-    }
-
-    /**
-     * Invoke helper as functor
-     *
-     * Proxies to {@link render()}.
-     *
-     * @param  ElementInterface $element
-     * @return string
-     */
-    public function __invoke(ElementInterface $element = null)
-    {
-        if (!$element) {
-            return $this;
-        }
-
-        return $this->render($element);
     }
 
     /**

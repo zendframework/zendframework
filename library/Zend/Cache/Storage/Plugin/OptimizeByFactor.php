@@ -17,60 +17,13 @@ use Zend\EventManager\EventManagerInterface;
 class OptimizeByFactor extends AbstractPlugin
 {
     /**
-     * Handles
-     *
-     * @var array
-     */
-    protected $handles = array();
-
-    /**
-     * Attach
-     *
-     * @param  EventManagerInterface $events
-     * @param  int                   $priority
-     * @return OptimizeByFactor
-     * @throws Exception\LogicException
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $index = spl_object_hash($events);
-        if (isset($this->handles[$index])) {
-            throw new Exception\LogicException('Plugin already attached');
-        }
-
-        $handles = array();
-        $this->handles[$index] = & $handles;
-
-        $callback = array($this, 'optimizeByFactor');
-        $handles[] = $events->attach('removeItem.post',  $callback, $priority);
-        $handles[] = $events->attach('removeItems.post', $callback, $priority);
-
-        return $this;
-    }
-
-    /**
-     * Detach
-     *
-     * @param  EventManagerInterface $events
-     * @return OptimizeByFactor
-     * @throws Exception\LogicException
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        $index = spl_object_hash($events);
-        if (!isset($this->handles[$index])) {
-            throw new Exception\LogicException('Plugin not attached');
-        }
-
-        // detach all handles of this index
-        foreach ($this->handles[$index] as $handle) {
-            $events->detach($handle);
-        }
-
-        // remove all detached handles
-        unset($this->handles[$index]);
-
-        return $this;
+        $callback          = array($this, 'optimizeByFactor');
+        $this->listeners[] = $events->attach('removeItem.post',  $callback, $priority);
+        $this->listeners[] = $events->attach('removeItems.post', $callback, $priority);
     }
 
     /**

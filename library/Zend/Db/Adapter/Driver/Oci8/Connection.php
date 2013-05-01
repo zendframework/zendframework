@@ -40,7 +40,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * In transaction
      *
-     * @var boolean
+     * @var bool
      */
     protected $inTransaction = false;
 
@@ -212,7 +212,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Is connected
      *
-     * @return boolean
+     * @return bool
      */
     public function isConnected()
     {
@@ -245,7 +245,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * In transaction
      *
-     * @return boolean
+     * @return bool
      */
     public function inTransaction()
     {
@@ -335,7 +335,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      * Get last generated id
      *
      * @param  null $name Ignored
-     * @return integer
+     * @return int
      */
     public function getLastGeneratedValue($name = null)
     {

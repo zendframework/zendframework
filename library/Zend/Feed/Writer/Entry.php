@@ -177,7 +177,7 @@ class Entry
     /**
      * Set the feed creation date
      *
-     * @param null|integer|DateTime $date
+     * @param null|int|DateTime $date
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -198,7 +198,7 @@ class Entry
     /**
      * Set the feed modification date
      *
-     * @param null|integer|DateTime $date
+     * @param null|int|DateTime $date
      * @throws Exception\InvalidArgumentException
      * @return Entry
      */
@@ -493,7 +493,7 @@ class Entry
     /**
      * Get the number of comments/replies for current entry
      *
-     * @return integer
+     * @return int
      */
     public function getCommentCount()
     {

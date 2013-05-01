@@ -43,7 +43,6 @@ class InlineScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        Registry::unsetRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new Helper\InlineScript();
     }
@@ -57,17 +56,6 @@ class InlineScriptTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->helper);
-    }
-
-    public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
-    {
-        $registry = Registry::getRegistry();
-        if ($registry->containerExists('Zend_View_Helper_InlineScript')) {
-            $registry->deleteContainer('Zend_View_Helper_InlineScript');
-        }
-        $this->assertFalse($registry->containerExists('Zend_View_Helper_InlineScript'));
-        $helper = new Helper\InlineScript();
-        $this->assertTrue($registry->containerExists('Zend_View_Helper_InlineScript'));
     }
 
     public function testInlineScriptReturnsObjectInstance()

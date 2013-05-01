@@ -9,10 +9,13 @@
 
 namespace Zend\View\Helper;
 
+use Traversable;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface;
+use Zend\Stdlib\ArrayUtils;
 use Zend\View\Exception;
+use Zend\Stdlib\Exception as StdlibException;
 
 /**
  * Helper for making easy links and getting urls that depend on the routes and router.
@@ -34,43 +37,20 @@ class Url extends AbstractHelper
     protected $routeMatch;
 
     /**
-     * Set the router to use for assembling.
-     *
-     * @param RouteStackInterface $router
-     * @return Url
-     */
-    public function setRouter(RouteStackInterface $router)
-    {
-        $this->router = $router;
-        return $this;
-    }
-
-    /**
-     * Set route match returned by the router.
-     *
-     * @param  RouteMatch $routeMatch
-     * @return self
-     */
-    public function setRouteMatch(RouteMatch $routeMatch)
-    {
-        $this->routeMatch = $routeMatch;
-        return $this;
-    }
-
-    /**
      * Generates an url given the name of a route.
      *
      * @see    Zend\Mvc\Router\RouteInterface::assemble()
-     * @param  string  $name               Name of the route
-     * @param  array   $params             Parameters for the link
-     * @param  array   $options            Options for the route
-     * @param  bool $reuseMatchedParams Whether to reuse matched parameters
-     * @return string Url                  For the link href attribute
-     * @throws Exception\RuntimeException  If no RouteStackInterface was provided
-     * @throws Exception\RuntimeException  If no RouteMatch was provided
-     * @throws Exception\RuntimeException  If RouteMatch didn't contain a matched route name
+     * @param  string               $name               Name of the route
+     * @param  array                $params             Parameters for the link
+     * @param  array|Traversable    $options            Options for the route
+     * @param  bool                 $reuseMatchedParams Whether to reuse matched parameters
+     * @return string Url                         For the link href attribute
+     * @throws Exception\RuntimeException         If no RouteStackInterface was provided
+     * @throws Exception\RuntimeException         If no RouteMatch was provided
+     * @throws Exception\RuntimeException         If RouteMatch didn't contain a matched route name
+     * @throws Exception\InvalidArgumentException If the params object was not an array or \Traversable object
      */
-    public function __invoke($name = null, array $params = array(), $options = array(), $reuseMatchedParams = false)
+    public function __invoke($name = null, $params = array(), $options = array(), $reuseMatchedParams = false)
     {
         if (null === $this->router) {
             throw new Exception\RuntimeException('No RouteStackInterface instance provided');
@@ -93,6 +73,15 @@ class Url extends AbstractHelper
             }
         }
 
+        if (!is_array($params)) {
+            if (!$params instanceof Traversable) {
+                throw new Exception\InvalidArgumentException(
+                    'Params is expected to be an array or a Traversable object'
+                );
+            }
+            $params = iterator_to_array($params);
+        }
+
         if ($reuseMatchedParams && $this->routeMatch !== null) {
             $routeMatchParams = $this->routeMatch->getParams();
 
@@ -111,5 +100,29 @@ class Url extends AbstractHelper
         $options['name'] = $name;
 
         return $this->router->assemble($params, $options);
+    }
+
+    /**
+     * Set the router to use for assembling.
+     *
+     * @param RouteStackInterface $router
+     * @return Url
+     */
+    public function setRouter(RouteStackInterface $router)
+    {
+        $this->router = $router;
+        return $this;
+    }
+
+    /**
+     * Set route match returned by the router.
+     *
+     * @param  RouteMatch $routeMatch
+     * @return Url
+     */
+    public function setRouteMatch(RouteMatch $routeMatch)
+    {
+        $this->routeMatch = $routeMatch;
+        return $this;
     }
 }

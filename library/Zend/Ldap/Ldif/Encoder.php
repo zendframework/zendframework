@@ -65,14 +65,17 @@ class Encoder
         $items = array();
         $item  = array();
         $last  = null;
+        $inComment = false;
         foreach (explode("\n", $string) as $line) {
             $line    = rtrim($line, "\x09\x0A\x0D\x00\x0B");
             $matches = array();
-            if (substr($line, 0, 1) === ' ' && $last !== null) {
+            if (substr($line, 0, 1) === ' ' && $last !== null && !$inComment) {
                 $last[2] .= substr($line, 1);
             } elseif (substr($line, 0, 1) === '#') {
+                $inComment = true;
                 continue;
-            } elseif (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^:<]*)$/i', $line, $matches)) {
+            } elseif (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^<]*)$/i', $line, $matches)) {
+                $inComment = false;
                 $name  = strtolower($matches[1]);
                 $type  = trim($matches[2]);
                 $value = $matches[3];

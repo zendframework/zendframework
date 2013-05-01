@@ -51,7 +51,7 @@ class Code25interleaved extends Code25
 
     /**
      * Width of the barcode (in pixels)
-     * @return integer
+     * @return int
      */
     protected function calculateBarcodeWidth()
     {
@@ -98,14 +98,14 @@ class Code25interleaved extends Code25
                 $barWidth = (substr($this->codingMap[$char2], $ibar, 1))
                           ? $this->barThickWidth
                           : $this->barThinWidth;
-                $barcodeTable[] = array(0, $barWidth, 0 , 1);
+                $barcodeTable[] = array(0, $barWidth, 0, 1);
             }
         }
 
         // Stop character (100)
-        $barcodeTable[] = array(1 , $this->barThickWidth, 0, 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth,  0, 1);
-        $barcodeTable[] = array(1 , $this->barThinWidth,  0, 1);
+        $barcodeTable[] = array(1, $this->barThickWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
         return $barcodeTable;
     }
 

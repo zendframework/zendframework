@@ -11,8 +11,8 @@ namespace Zend\Log\Writer;
 
 use Traversable;
 use Zend\Log\Exception;
-use Zend\Log\Logger;
 use Zend\Log\Formatter\Simple as SimpleFormatter;
+use Zend\Log\Logger;
 
 /**
  * Writes log messages to syslog

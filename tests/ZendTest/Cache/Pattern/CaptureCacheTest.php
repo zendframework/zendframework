@@ -23,9 +23,11 @@ class CaptureCacheTest extends CommonPatternTest
 
     protected $_tmpCacheDir;
     protected $_umask;
+    protected $_bufferedServerSuperGlobal;
 
     public function setUp()
     {
+        $this->_bufferedServerSuperGlobal = $_SERVER;
         $this->_umask = umask();
 
         $this->_tmpCacheDir = @tempnam(sys_get_temp_dir(), 'zend_cache_test_');
@@ -51,6 +53,8 @@ class CaptureCacheTest extends CommonPatternTest
 
     public function tearDown()
     {
+        $_SERVER = $this->_bufferedServerSuperGlobal;
+
         $this->_removeRecursive($this->_tmpCacheDir);
 
         if ($this->_umask != umask()) {
@@ -128,5 +132,50 @@ class CaptureCacheTest extends CommonPatternTest
 
         $this->setExpectedException('Zend\Cache\Exception\LogicException');
         $captureCache->remove('/pageId');
+    }
+
+    public function testGetFilenameWithoutPublicDir()
+    {
+        $captureCache = new Cache\Pattern\CaptureCache();
+
+        $this->assertEquals('/index.html', $captureCache->getFilename('/'));
+        $this->assertEquals('/dir1/test', $captureCache->getFilename('/dir1/test'));
+        $this->assertEquals('/dir1/test.html', $captureCache->getFilename('/dir1/test.html'));
+        $this->assertEquals('/dir1/dir2/test.html', $captureCache->getFilename('/dir1/dir2/test.html'));
+    }
+
+    public function testGetFilenameWithoutPublicDirAndNoPageId()
+    {
+        $_SERVER['REQUEST_URI'] = '/dir1/test.html';
+        $captureCache = new Cache\Pattern\CaptureCache();
+        $this->assertEquals('/dir1/test.html', $captureCache->getFilename());
+    }
+
+    public function testGetFilenameWithPublicDir()
+    {
+        $options = new Cache\Pattern\PatternOptions(array(
+            'public_dir' => $this->_tmpCacheDir
+        ));
+
+        $captureCache = new Cache\Pattern\CaptureCache();
+        $captureCache->setOptions($options);
+
+        $this->assertEquals($this->_tmpCacheDir . '/index.html', $captureCache->getFilename('/'));
+        $this->assertEquals($this->_tmpCacheDir . '/dir1/test', $captureCache->getFilename('/dir1/test'));
+        $this->assertEquals($this->_tmpCacheDir . '/dir1/test.html', $captureCache->getFilename('/dir1/test.html'));
+        $this->assertEquals($this->_tmpCacheDir . '/dir1/dir2/test.html', $captureCache->getFilename('/dir1/dir2/test.html'));
+    }
+
+    public function testGetFilenameWithPublicDirAndNoPageId()
+    {
+        $_SERVER['REQUEST_URI'] = '/dir1/test.html';
+
+        $options = new Cache\Pattern\PatternOptions(array(
+            'public_dir' => $this->_tmpCacheDir
+        ));
+        $captureCache = new Cache\Pattern\CaptureCache();
+        $captureCache->setOptions($options);
+
+        $this->assertEquals($this->_tmpCacheDir . '/dir1/test.html', $captureCache->getFilename());
     }
 }

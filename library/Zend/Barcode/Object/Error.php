@@ -27,7 +27,7 @@ class Error extends AbstractObject
     /**
      * Height is forced
      * @param bool $recalculate
-     * @return integer
+     * @return int
      */
     public function getHeight($recalculate = false)
     {
@@ -37,7 +37,7 @@ class Error extends AbstractObject
     /**
      * Width is forced
      * @param bool $recalculate
-     * @return integer
+     * @return int
      */
     public function getWidth($recalculate = false)
     {
@@ -52,8 +52,8 @@ class Error extends AbstractObject
     public function draw()
     {
         $this->instructions = array();
-        $this->addText('ERROR:', 10, array(5 , 18), $this->font, 0, 'left');
-        $this->addText($this->text, 10, array(5 , 32), $this->font, 0, 'left');
+        $this->addText('ERROR:', 10, array(5, 18), $this->font, 0, 'left');
+        $this->addText($this->text, 10, array(5, 32), $this->font, 0, 'left');
         return $this->instructions;
     }
 

@@ -48,8 +48,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
      */
     protected function isXhtml()
     {
-        $doctype = $this->view->plugin('doctype');
-        return $doctype->isXhtml();
+        return $this->getView()->plugin('doctype')->isXhtml();
     }
 
     /**
@@ -65,7 +64,8 @@ abstract class AbstractHtmlElement extends AbstractHelper
     protected function htmlAttribs($attribs)
     {
         $xhtml   = '';
-        $escaper = $this->view->plugin('escapehtml');
+        $escaper = $this->getView()->plugin('escapehtml');
+
         foreach ((array) $attribs as $key => $val) {
             $key = $escaper($key);
 
@@ -96,8 +96,8 @@ abstract class AbstractHtmlElement extends AbstractHelper
             } else {
                 $xhtml .= " $key=\"$val\"";
             }
-
         }
+
         return $xhtml;
     }
 
@@ -117,6 +117,7 @@ abstract class AbstractHtmlElement extends AbstractHelper
             $value = str_replace('][', '-', $value);
             $value = str_replace('[', '-', $value);
         }
+
         return $value;
     }
 }

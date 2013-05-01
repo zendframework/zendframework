@@ -27,7 +27,7 @@ abstract class ErrorHandler
     /**
      * Check if this error handler is active
      *
-     * @return boolean
+     * @return bool
      */
     public static function started()
     {
@@ -109,7 +109,7 @@ abstract class ErrorHandler
      */
     public static function addError($errno, $errstr = '', $errfile = '', $errline = 0)
     {
-        $stack = & static::$stack[ count(static::$stack) - 1 ];
+        $stack = & static::$stack[count(static::$stack) - 1];
         $stack = new ErrorException($errstr, 0, $errno, $errfile, $errline, $stack);
     }
 }

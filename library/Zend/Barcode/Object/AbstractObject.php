@@ -39,50 +39,50 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Height of the object
-     * @var integer
+     * @var int
      */
     protected $height = null;
 
     /**
      * Width of the object
-     * @var integer
+     * @var int
      */
     protected $width = null;
 
     /**
      * Height of the bar
-     * @var integer
+     * @var int
      */
     protected $barHeight = 50;
 
     /**
      * Width of a thin bar
-     * @var integer
+     * @var int
      */
     protected $barThinWidth = 1;
 
     /**
      * Width of a thick bar
-     * @var integer
+     * @var int
      */
     protected $barThickWidth = 3;
 
     /**
      * Factor to multiply bar and font measure
      * (barHeight, barThinWidth, barThickWidth & fontSize)
-     * @var integer
+     * @var int
      */
     protected $factor = 1;
 
     /**
      * Font and bars color of the object
-     * @var integer
+     * @var int
      */
     protected $foreColor = 0x000000;
 
     /**
      * Background color of the object
-     * @var integer
+     * @var int
      */
     protected $backgroundColor = 0xFFFFFF;
 
@@ -113,14 +113,14 @@ abstract class AbstractObject implements ObjectInterface
     /**
      * Offset from the top the object
      * (calculated from the orientation)
-     * @var integer
+     * @var int
      */
     protected $offsetTop = null;
 
     /**
      * Offset from the left the object
      * (calculated from the orientation)
-     * @var integer
+     * @var int
      */
     protected $offsetLeft = null;
 
@@ -146,7 +146,7 @@ abstract class AbstractObject implements ObjectInterface
      * Font resource
      *  - integer (1 to 5): corresponds to GD included fonts
      *  - string: corresponds to path of a TTF font
-     * @var integer|string
+     * @var int|string
      */
     protected $font = null;
 
@@ -170,7 +170,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Fix barcode length (numeric or string like 'even')
-     * @var integer | string
+     * @var int | string
      */
     protected $barcodeLength = null;
 
@@ -272,7 +272,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Set height of the barcode bar
-     * @param integer $value
+     * @param int $value
      * @return \Zend\Barcode\Object\ObjectInterface
      * @throws \Zend\Barcode\Object\Exception\ExceptionInterface
      */
@@ -289,7 +289,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Get height of the barcode bar
-     * @return integer
+     * @return int
      */
     public function getBarHeight()
     {
@@ -298,7 +298,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Set thickness of thin bar
-     * @param integer $value
+     * @param int $value
      * @return \Zend\Barcode\Object\ObjectInterface
      * @throws \Zend\Barcode\Object\Exception\ExceptionInterface
      */
@@ -315,7 +315,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Get thickness of thin bar
-     * @return integer
+     * @return int
      */
     public function getBarThinWidth()
     {
@@ -324,7 +324,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Set thickness of thick bar
-     * @param integer $value
+     * @param int $value
      * @return \Zend\Barcode\Object\ObjectInterface
      * @throws \Zend\Barcode\Object\Exception\ExceptionInterface
      */
@@ -341,7 +341,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Get thickness of thick bar
-     * @return integer
+     * @return int
      */
     public function getBarThickWidth()
     {
@@ -369,7 +369,7 @@ abstract class AbstractObject implements ObjectInterface
     /**
      * Get factor applying to
      * thinBarWidth - thickBarWidth - barHeight - fontSize
-     * @return integer
+     * @return int
      */
     public function getFactor()
     {
@@ -398,7 +398,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Retrieve color of the barcode and text
-     * @return integer
+     * @return int
      */
     public function getForeColor()
     {
@@ -407,7 +407,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Set the color of the background
-     * @param integer $value
+     * @param int $value
      * @return \Zend\Barcode\Object\ObjectInterface
      * @throws \Zend\Barcode\Object\Exception\ExceptionInterface
      */
@@ -427,7 +427,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Retrieve background color of the image
-     * @return integer
+     * @return int
      */
     public function getBackgroundColor()
     {
@@ -675,7 +675,7 @@ abstract class AbstractObject implements ObjectInterface
      * Set the font:
      *  - if integer between 1 and 5, use gd built-in fonts
      *  - if string, $value is assumed to be the path to a TTF font
-     * @param integer|string $value
+     * @param int|string $value
      * @return \Zend\Barcode\Object\ObjectInterface
      * @throws \Zend\Barcode\Object\Exception\ExceptionInterface
      */
@@ -706,7 +706,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Retrieve the font
-     * @return integer|string
+     * @return int|string
      */
     public function getFont()
     {
@@ -748,7 +748,7 @@ abstract class AbstractObject implements ObjectInterface
     /**
      * Quiet zone before first bar
      * and after the last bar
-     * @return integer
+     * @return int
      */
     public function getQuietZone()
     {
@@ -780,7 +780,7 @@ abstract class AbstractObject implements ObjectInterface
     /**
      * Add a polygon drawing instruction in the set of instructions
      * @param array $points
-     * @param integer $color
+     * @param int $color
      * @param  bool $filled
      */
     protected function addPolygon(array $points, $color = null, $filled = true)
@@ -802,7 +802,7 @@ abstract class AbstractObject implements ObjectInterface
      * @param float $size
      * @param array $position
      * @param string $font
-     * @param integer $color
+     * @param int $color
      * @param string $alignment
      * @param float $orientation
      */
@@ -862,8 +862,8 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Check the ratio between the thick and the thin bar
-     * @param integer $min
-     * @param integer $max
+     * @param int $min
+     * @param int $max
      * @return void
      * @throws \Zend\Barcode\Object\Exception\ExceptionInterface
      */
@@ -897,7 +897,7 @@ abstract class AbstractObject implements ObjectInterface
     /**
      * Width of the result image
      * (before any rotation)
-     * @return integer
+     * @return int
      */
     protected function calculateWidth()
     {
@@ -908,13 +908,13 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Calculate the width of the barcode
-     * @return integer
+     * @return int
      */
     abstract protected function calculateBarcodeWidth();
 
     /**
      * Height of the result object
-     * @return integer
+     * @return int
      */
     protected function calculateHeight()
     {
@@ -925,7 +925,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Height of the barcode
-     * @return integer
+     * @return int
      */
     protected function calculateBarcodeHeight()
     {
@@ -941,7 +941,7 @@ abstract class AbstractObject implements ObjectInterface
     /**
      * Get height of the result object
      * @param bool $recalculate
-     * @return integer
+     * @return int
      */
     public function getHeight($recalculate = false)
     {
@@ -956,7 +956,7 @@ abstract class AbstractObject implements ObjectInterface
     /**
      * Get width of the result object
      * @param bool $recalculate
-     * @return integer
+     * @return int
      */
     public function getWidth($recalculate = false)
     {
@@ -1036,7 +1036,7 @@ abstract class AbstractObject implements ObjectInterface
         $y2 = $y1 * cos($this->orientation / 180 * pi())
             + $x1 * sin($this->orientation / 180 * pi())
             + $this->getOffsetTop();
-        return array(intval($x2) , intval($y2));
+        return array(intval($x2), intval($y2));
     }
 
     /**

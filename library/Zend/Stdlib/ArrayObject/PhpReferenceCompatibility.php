@@ -59,10 +59,9 @@ abstract class PhpReferenceCompatibility implements IteratorAggregate, ArrayAcce
     /**
      * Constructor
      *
-     * @param  array       $input
-     * @param  int         $flags
-     * @param  string      $iteratorClass
-     * @return ArrayObject
+     * @param array  $input
+     * @param int    $flags
+     * @param string $iteratorClass
      */
     public function __construct($input = array(), $flags = self::STD_PROP_LIST, $iteratorClass = 'ArrayIterator')
     {
@@ -76,7 +75,7 @@ abstract class PhpReferenceCompatibility implements IteratorAggregate, ArrayAcce
      * Returns whether the requested key exists
      *
      * @param  mixed $key
-     * @return boolean
+     * @return bool
      */
     public function __isset($key)
     {
@@ -279,7 +278,7 @@ abstract class PhpReferenceCompatibility implements IteratorAggregate, ArrayAcce
      * Returns whether the requested key exists
      *
      * @param  mixed $key
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($key)
     {

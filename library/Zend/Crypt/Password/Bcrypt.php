@@ -31,7 +31,7 @@ class Bcrypt implements PasswordInterface
     protected $salt;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $backwardCompatibility = false;
 
@@ -118,7 +118,7 @@ class Bcrypt implements PasswordInterface
     /**
      * Set the cost parameter
      *
-     * @param  integer|string $cost
+     * @param  int|string $cost
      * @throws Exception\InvalidArgumentException
      * @return Bcrypt
      */
@@ -177,19 +177,19 @@ class Bcrypt implements PasswordInterface
     /**
      * Set the backward compatibility $2a$ instead of $2y$ for PHP 5.3.7+
      *
-     * @param boolean $value
+     * @param bool $value
      * @return Bcrypt
      */
     public function setBackwardCompatibility($value)
     {
-        $this->backwardCompatibility = (boolean) $value;
+        $this->backwardCompatibility = (bool) $value;
         return $this;
     }
 
     /**
      * Get the backward compatibility
      *
-     * @return boolean
+     * @return bool
      */
     public function getBackwardCompatibility()
     {

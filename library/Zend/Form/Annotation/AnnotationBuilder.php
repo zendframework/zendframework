@@ -318,7 +318,14 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
             $events->trigger(__FUNCTION__, $this, $event);
         }
 
-        $filterSpec[$name] = $event->getParam('inputSpec');
+        // Since "type" is a reserved name in the filter specification,
+        // we need to add the specification without the name as the key.
+        // In all other cases, though, the name is fine.
+        if ($name === 'type') {
+            $filterSpec[] = $event->getParam('inputSpec');
+        } else {
+            $filterSpec[$name] = $event->getParam('inputSpec');
+        }
 
         $elementSpec = $event->getParam('elementSpec');
         $type        = (isset($elementSpec['spec']['type']))

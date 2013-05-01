@@ -65,7 +65,7 @@ class Royalmail extends AbstractObject
 
     /**
      * Width of the barcode (in pixels)
-     * @return integer
+     * @return int
      */
     protected function calculateBarcodeWidth()
     {
@@ -92,21 +92,21 @@ class Royalmail extends AbstractObject
         $barcodeTable = array();
 
         // Start character (1)
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 5/8);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 5/8);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
 
         // Text to encode
         $textTable = str_split($this->getText());
         foreach ($textTable as $char) {
             $bars = str_split($this->codingMap[$char]);
             foreach ($bars as $b) {
-                $barcodeTable[] = array(1 , $this->barThinWidth , ($b > 1 ? 3/8 : 0) , ($b % 2 ? 5/8 : 1));
-                $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
+                $barcodeTable[] = array(1, $this->barThinWidth, ($b > 1 ? 3/8 : 0), ($b % 2 ? 5/8 : 1));
+                $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
             }
         }
 
         // Stop character (1)
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
         return $barcodeTable;
     }
 

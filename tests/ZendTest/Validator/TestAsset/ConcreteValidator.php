@@ -15,15 +15,18 @@ use Zend\Validator\AbstractValidator;
 class ConcreteValidator extends AbstractValidator
 {
     const FOO_MESSAGE = 'fooMessage';
+    const BAR_MESSAGE = 'barMessage';
 
     protected $messageTemplates = array(
         'fooMessage' => '%value% was passed',
+        'barMessage' => '%value% was wrong'
     );
 
     public function isValid($value)
     {
         $this->setValue($value);
         $this->error(self::FOO_MESSAGE);
+        $this->error(self::BAR_MESSAGE);
         return false;
     }
 }

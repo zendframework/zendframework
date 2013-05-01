@@ -37,8 +37,8 @@ class Number extends Line
      * @param string    $promptText     The prompt text to display in console
      * @param bool      $allowEmpty     Is empty response allowed?
      * @param bool      $allowFloat     Are floating (non-decimal) numbers allowed?
-     * @param integer   $min            Minimum value (inclusive)
-     * @param integer   $max            Maximum value (inclusive)
+     * @param int   $min            Minimum value (inclusive)
+     * @param int   $max            Maximum value (inclusive)
      */
     public function __construct(
         $promptText = 'Please enter a number: ',
@@ -88,7 +88,7 @@ class Number extends Line
             } elseif (!is_numeric($number)) {
                 $this->getConsole()->writeLine("$number is not a number\n");
                 $valid = false;
-            } elseif (!$this->allowFloat && (round($number) != $number) ) {
+            } elseif (!$this->allowFloat && (round($number) != $number)) {
                 $this->getConsole()->writeLine("Please enter a non-floating number, i.e. " . round($number) . "\n");
                 $valid = false;
             } elseif ($this->max !== null && $number > $this->max) {

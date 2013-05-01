@@ -9,9 +9,11 @@
 
 namespace Zend\Soap\Client;
 
+use SoapClient;
+
 if (extension_loaded('soap')) {
 
-class Common extends \SoapClient
+class Common extends SoapClient
 {
     /**
      * doRequest() pre-processing method
@@ -30,19 +32,19 @@ class Common extends \SoapClient
     public function __construct($doRequestCallback, $wsdl, $options)
     {
         $this->doRequestCallback = $doRequestCallback;
-
         parent::__construct($wsdl, $options);
     }
 
     /**
      * Performs SOAP request over HTTP.
-     * Overridden to implement different transport layers, perform additional XML processing or other purpose.
+     * Overridden to implement different transport layers, perform additional
+     * XML processing or other purpose.
      *
-     * @param string $request
-     * @param string $location
-     * @param string $action
-     * @param int    $version
-     * @param int    $oneWay
+     * @param  string $request
+     * @param  string $location
+     * @param  string $action
+     * @param  int    $version
+     * @param  int    $oneWay
      * @return mixed
      */
     public function __doRequest($request, $location, $action, $version, $oneWay = null)

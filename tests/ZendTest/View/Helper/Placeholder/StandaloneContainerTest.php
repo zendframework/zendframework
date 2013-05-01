@@ -10,6 +10,7 @@
 
 namespace ZendTest\View\Helper\Placeholder;
 
+use Zend\View\Helper\Placeholder\Container;
 use Zend\View\Renderer\PhpRenderer as View;
 
 /**
@@ -25,6 +26,11 @@ class StandaloneContainerTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
+     * @var Foo
+     */
+    protected $helper;
+
+    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -32,22 +38,79 @@ class StandaloneContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        \Zend\View\Helper\Placeholder\Registry::unsetRegistry();
-        $this->basePath = __DIR__ . '/_files/modules';
         $this->helper = new Foo();
     }
 
     /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
      * @return void
      */
-    public function tearDown()
+    public function testSetContainer()
     {
-        unset($this->helper);
+        $container = new Container();
+        $this->assertNotSame($container, $this->helper->getContainer());
+        $this->helper->setContainer($container);
+        $this->assertSame($container, $this->helper->getContainer());
     }
 
+    /**
+     * @return void
+     */
+    public function testGetContainer()
+    {
+        $container = $this->helper->getContainer();
+        $this->assertInstanceOf('Zend\View\Helper\Placeholder\Container', $container);
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetContainerCreatesNewContainer()
+    {
+        $this->helper->deleteContainer();
+        $container = $this->helper->getContainer();
+        $this->assertInstanceOf('Zend\View\Helper\Placeholder\Container', $container);
+    }
+
+    /**
+     * @return void
+     */
+    public function testDeleteContainer()
+    {
+        $this->assertNotNull($this->helper->getContainer());
+        $this->assertTrue($this->helper->deleteContainer());
+        $this->assertFalse($this->helper->deleteContainer());
+    }
+
+    /**
+     * @expectedException DomainException
+     * @return void
+     */
+    public function testSetContainerClassThrowsDomainException()
+    {
+        $this->helper->setContainerClass('bat');
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     * @return void
+     */
+    public function testSetContainerClassThrowsInvalidArgumentException()
+    {
+        $this->helper->setContainerClass(get_class($this));
+    }
+
+    /**
+     * @return void
+     */
+    public function testSetGetContainerClass()
+    {
+        $this->helper->setContainerClass('ZendTest\View\Helper\Placeholder\Bar');
+        $this->assertEquals('ZendTest\View\Helper\Placeholder\Bar', $this->helper->getContainerClass());
+    }
+
+    /**
+     * @return void
+     */
     public function testViewAccessorWorks()
     {
         $view = new View();
@@ -55,7 +118,10 @@ class StandaloneContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($view, $this->helper->getView());
     }
 
-    public function testContainersPersistBetweenInstances()
+    /**
+     * @return void
+     */
+    public function testContainerDoesNotPersistBetweenInstances()
     {
         $foo1 = new Foo;
         $foo1->append('Foo');
@@ -64,9 +130,9 @@ class StandaloneContainerTest extends \PHPUnit_Framework_TestCase
         $foo2 = new Foo;
         $foo2->append('Bar');
 
-        $test = $foo1->toString();
-        $this->assertContains('Foo', $test);
-        $this->assertContains(' - ', $test);
+        $test = $foo2->toString();
+        $this->assertNotContains('Foo', $test);
+        $this->assertNotContains(' - ', $test);
         $this->assertContains('Bar', $test);
     }
 }
@@ -76,3 +142,6 @@ class Foo extends \Zend\View\Helper\Placeholder\Container\AbstractStandalone
     protected $_regKey = 'foo';
     public function direct() {}
 }
+
+class Bar extends \Zend\View\Helper\Placeholder\Container\AbstractContainer
+{}

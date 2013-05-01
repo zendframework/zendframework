@@ -109,6 +109,16 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($edate, $entry->getDateCreated());
     }
 
+    public function testGetsDateCreatedWithFractional()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/datecreated/plain/fractional.xml')
+        );
+        $entry = $feed->current();
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertEquals($edate, $entry->getDateCreated());
+    }
+
     /**
      * Get modification date (Unencoded Text)
      */
@@ -126,6 +136,16 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/datemodified/plain/atom10.xml')
+        );
+        $entry = $feed->current();
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertEquals($edate, $entry->getDateModified());
+    }
+
+    public function testGetsDateModifiedWithFractional()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/datemodified/plain/fractional.xml')
         );
         $entry = $feed->current();
         $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');

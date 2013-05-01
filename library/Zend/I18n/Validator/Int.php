@@ -89,7 +89,7 @@ class Int extends AbstractValidator
     /**
      * Returns true if and only if $value is a valid integer
      *
-     * @param  string|integer $value
+     * @param  string|int $value
      * @return bool
      * @throws Exception\InvalidArgumentException
      */

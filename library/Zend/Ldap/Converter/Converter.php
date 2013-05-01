@@ -123,7 +123,7 @@ class Converter
      * The date-entity <var>$date</var> can be either a timestamp, a
      * DateTime Object, a string that is parseable by strtotime().
      *
-     * @param integer|string|DateTime $date  The date-entity
+     * @param int|string|DateTime $date  The date-entity
      * @param  bool                 $asUtc Whether to return the LDAP-compatible date-string as UTC or as local value
      * @return string
      * @throws Exception\InvalidArgumentException
@@ -158,7 +158,7 @@ class Converter
      * case-insensitive string 'true' to an LDAP-compatible 'TRUE'. All other
      * other values are converted to an LDAP-compatible 'FALSE'.
      *
-     * @param  bool|integer|string $value The boolean value to encode
+     * @param  bool|int|string $value The boolean value to encode
      * @return string
      */
     public static function toLdapBoolean($value)

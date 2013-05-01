@@ -58,6 +58,27 @@ class DateTimeTest extends TestCase
         }
     }
 
+    public function testProvidesInputSpecificationThatIncludesDateTimeFormatterBasedOnAttributes()
+    {
+        $element = new DateTimeElement('foo');
+        $element->setFormat(DateTime::W3C);
+
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayHasKey('filters', $inputSpec);
+        $this->assertInternalType('array', $inputSpec['filters']);
+
+        foreach ($inputSpec['filters'] as $filter) {
+            switch ($filter['name']) {
+                case 'Zend\Filter\DateTimeFormatter':
+                    $this->assertEquals($filter['options']['format'], DateTime::W3C);
+                    $this->assertEquals($filter['options']['format'], $element->getFormat());
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     public function testUsesBrowserFormatByDefault()
     {
         $element = new DateTimeElement('foo');

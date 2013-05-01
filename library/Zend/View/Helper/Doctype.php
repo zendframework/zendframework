@@ -37,21 +37,92 @@ class Doctype extends AbstractHelper
     /**#@-*/
 
     /**
-     * @var ArrayObject Shared doctypes to use throughout all instances
-     */
-    protected static $registeredDoctypes;
-
-    /**
      * Default DocType
+     *
      * @var string
      */
     protected $defaultDoctype = self::HTML4_LOOSE;
 
     /**
      * Registry containing current doctype and mappings
+     *
      * @var ArrayObject
      */
     protected $registry;
+
+    /**
+     * @var ArrayObject Shared doctypes to use throughout all instances
+     */
+    protected static $registeredDoctypes;
+
+    /**
+     * Constructor
+     *
+     * Map constants to doctype strings, and set default doctype
+     */
+    public function __construct()
+    {
+        if (null === static::$registeredDoctypes) {
+            static::registerDefaultDoctypes();
+            $this->setDoctype($this->defaultDoctype);
+        }
+        $this->registry = static::$registeredDoctypes;
+    }
+
+    /**
+     * Set or retrieve doctype
+     *
+     * @param  string $doctype
+     * @throws Exception\DomainException
+     * @return Doctype
+     */
+    public function __invoke($doctype = null)
+    {
+        if (null !== $doctype) {
+            switch ($doctype) {
+                case self::XHTML11:
+                case self::XHTML1_STRICT:
+                case self::XHTML1_TRANSITIONAL:
+                case self::XHTML1_FRAMESET:
+                case self::XHTML_BASIC1:
+                case self::XHTML1_RDFA:
+                case self::XHTML1_RDFA11:
+                case self::XHTML5:
+                case self::HTML4_STRICT:
+                case self::HTML4_LOOSE:
+                case self::HTML4_FRAMESET:
+                case self::HTML5:
+                    $this->setDoctype($doctype);
+                    break;
+                default:
+                    if (substr($doctype, 0, 9) != '<!DOCTYPE') {
+                        throw new Exception\DomainException('The specified doctype is malformed');
+                    }
+                    if (stristr($doctype, 'xhtml')) {
+                        $type = self::CUSTOM_XHTML;
+                    } else {
+                        $type = self::CUSTOM;
+                    }
+                    $this->setDoctype($type);
+                    $this->registry['doctypes'][$type] = $doctype;
+                    break;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * String representation of doctype
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $doctypes = $this->getDoctypes();
+
+        return $doctypes[$this->getDoctype()];
+    }
 
     /**
      * Register the default doctypes we understand
@@ -92,63 +163,6 @@ class Doctype extends AbstractHelper
     }
 
     /**
-     * Constructor
-     *
-     * Map constants to doctype strings, and set default doctype
-     */
-    public function __construct()
-    {
-        if (null === static::$registeredDoctypes) {
-            static::registerDefaultDoctypes();
-            $this->setDoctype($this->defaultDoctype);
-        }
-        $this->registry = static::$registeredDoctypes;
-    }
-
-    /**
-     * Set or retrieve doctype
-     *
-     * @param  string $doctype
-     * @return Doctype Provides a fluent interface
-     * @throws Exception\DomainException
-     */
-    public function __invoke($doctype = null)
-    {
-        if (null !== $doctype) {
-            switch ($doctype) {
-                case self::XHTML11:
-                case self::XHTML1_STRICT:
-                case self::XHTML1_TRANSITIONAL:
-                case self::XHTML1_FRAMESET:
-                case self::XHTML_BASIC1:
-                case self::XHTML1_RDFA:
-                case self::XHTML1_RDFA11:
-                case self::XHTML5:
-                case self::HTML4_STRICT:
-                case self::HTML4_LOOSE:
-                case self::HTML4_FRAMESET:
-                case self::HTML5:
-                    $this->setDoctype($doctype);
-                    break;
-                default:
-                    if (substr($doctype, 0, 9) != '<!DOCTYPE') {
-                        throw new Exception\DomainException('The specified doctype is malformed');
-                    }
-                    if (stristr($doctype, 'xhtml')) {
-                        $type = self::CUSTOM_XHTML;
-                    } else {
-                        $type = self::CUSTOM;
-                    }
-                    $this->setDoctype($type);
-                    $this->registry['doctypes'][$type] = $doctype;
-                    break;
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * Set doctype
      *
      * @param  string $doctype
@@ -170,6 +184,7 @@ class Doctype extends AbstractHelper
         if (!isset($this->registry['doctype'])) {
             $this->setDoctype($this->defaultDoctype);
         }
+
         return $this->registry['doctype'];
     }
 
@@ -211,16 +226,5 @@ class Doctype extends AbstractHelper
     public function isRdfa()
     {
         return ($this->isHtml5() || stristr($this->getDoctype(), 'rdfa') ? true : false);
-    }
-
-    /**
-     * String representation of doctype
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        $doctypes = $this->getDoctypes();
-        return $doctypes[$this->getDoctype()];
     }
 }

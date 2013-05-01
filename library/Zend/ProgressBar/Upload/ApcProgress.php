@@ -20,7 +20,7 @@ class ApcProgress extends AbstractUploadHandler
 {
     /**
      * @param  string $id
-     * @return array|boolean
+     * @return array|bool
      * @throws Exception\PhpEnvironmentException
      */
     protected function getUploadProgress($id)
@@ -53,7 +53,7 @@ class ApcProgress extends AbstractUploadHandler
     /**
      * Checks for the APC extension
      *
-     * @return boolean
+     * @return bool
      */
     public function isApcAvailable()
     {

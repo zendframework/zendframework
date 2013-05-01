@@ -20,6 +20,7 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\Stdlib\Hydrator;
 use ZendTest\Form\TestAsset\Entity;
+use ZendTest\Form\TestAsset\HydratorAwareModel;
 
 class FormTest extends TestCase
 {
@@ -621,6 +622,20 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->isValid());
     }
 
+    public function testUsesBoundObjectHydratorToPopulateForm()
+    {
+        $this->populateForm();
+        $object = new HydratorAwareModel();
+        $object->setFoo('fooValue');
+        $object->setBar('barValue');
+
+        $this->form->bind($object);
+        $foo = $this->form->get('foo');
+        $this->assertEquals('fooValue', $foo->getValue());
+        $bar = $this->form->get('bar');
+        $this->assertEquals('barValue', $bar->getValue());
+    }
+
     public function testBindOnValidateIsTrueByDefault()
     {
         $this->assertTrue($this->form->bindOnValidate());
@@ -1178,6 +1193,30 @@ class FormTest extends TestCase
         );
         $this->form->setData($validSet);
         $this->assertTrue($this->form->isValid());
+    }
+
+    public function testDonNotApplyEmptyInputFiltersToSubFieldsetOfCollectionElementsWithCollectionInputFilters()
+    {
+        $collectionFieldset = new Fieldset('item');
+        $collectionFieldset->add(new Element('foo'));
+
+        $collection = new Element\Collection('items');
+        $collection->setCount(3);
+        $collection->setTargetElement($collectionFieldset);
+        $this->form->add($collection);
+
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter = $inputFilterFactory->createInputFilter(array(
+            'items' => array(
+                'type'         => 'Zend\InputFilter\CollectionInputFilter',
+                'input_filter' => new InputFilter(),
+            ),
+        ));
+
+        $this->form->setInputFilter($inputFilter);
+
+        $this->assertInstanceOf('Zend\InputFilter\CollectionInputFilter', $this->form->getInputFilter()->get('items'));
+        $this->assertCount(1, $this->form->getInputFilter()->get('items')->getInputs());
     }
 
     public function testFormValidationCanHandleNonConsecutiveKeysOfCollectionInData()

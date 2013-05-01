@@ -9,8 +9,8 @@
 
 namespace Zend\Stdlib\Hydrator\Filter;
 
-use ReflectionMethod;
 use ReflectionException;
+use ReflectionMethod;
 use Zend\Stdlib\Exception\InvalidArgumentException;
 use Zend\Stdlib\Hydrator\Filter\FilterInterface;
 
@@ -39,7 +39,7 @@ class NumberOfParameterFilter implements FilterInterface
     {
         try {
             $reflectionMethod = new ReflectionMethod($property);
-        } catch( ReflectionException $exception) {
+        } catch (ReflectionException $exception) {
             throw new InvalidArgumentException(
                 "Method $property doesn't exist"
             );

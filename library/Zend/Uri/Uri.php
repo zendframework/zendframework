@@ -69,7 +69,7 @@ class Uri implements UriInterface
     /**
      * URI port
      *
-     * @var integer
+     * @var int
      */
     protected $port;
 
@@ -97,7 +97,7 @@ class Uri implements UriInterface
     /**
      * Which host part types are valid for this URI?
      *
-     * @var integer
+     * @var int
      */
     protected $validHostTypes = self::HOST_ALL;
 
@@ -254,6 +254,20 @@ class Uri implements UriInterface
     }
 
     /**
+     * Reset URI parts
+     */
+    protected function reset()
+    {
+        $this->setScheme(null);
+        $this->setPort(null);
+        $this->setUserInfo(null);
+        $this->setHost(null);
+        $this->setPath(null);
+        $this->setFragment(null);
+        $this->setQuery(null);
+    }
+
+    /**
      * Parse a URI string
      *
      * @param  string $uri
@@ -261,6 +275,8 @@ class Uri implements UriInterface
      */
     public function parse($uri)
     {
+        $this->reset();
+
         // Capture scheme
         if (($scheme = self::parseScheme($uri)) !== null) {
             $this->setScheme($scheme);
@@ -601,7 +617,7 @@ class Uri implements UriInterface
     /**
      * Get the URI port
      *
-     * @return integer|null
+     * @return int|null
      */
     public function getPort()
     {
@@ -737,7 +753,7 @@ class Uri implements UriInterface
     /**
      * Set the port part of the URI
      *
-     * @param  integer $port
+     * @param  int $port
      * @return Uri
      */
     public function setPort($port)
@@ -859,7 +875,7 @@ class Uri implements UriInterface
      * from what is commonly accepted as valid HTTP URLs for example.
      *
      * @param  string  $host
-     * @param  integer $allowed bitmask of allowed host types
+     * @param  int $allowed bitmask of allowed host types
      * @return bool
      */
     public static function validateHost($host, $allowed = self::HOST_ALL)
@@ -895,7 +911,7 @@ class Uri implements UriInterface
      *
      * Valid values include numbers between 1 and 65535, and empty values
      *
-     * @param  integer $port
+     * @param  int $port
      * @return bool
      */
     public static function validatePort($port)
@@ -1139,7 +1155,7 @@ class Uri implements UriInterface
      * Check if a host name is a valid IP address, depending on allowed IP address types
      *
      * @param  string  $host
-     * @param  integer $allowed allowed address types
+     * @param  int $allowed allowed address types
      * @return bool
      */
     protected static function isValidIpAddress($host, $allowed)
@@ -1237,9 +1253,9 @@ class Uri implements UriInterface
      * If the class defines a default port for the current scheme, and the
      * current port is default, it will be unset.
      *
-     * @param  integer $port
+     * @param  int $port
      * @param  string  $scheme
-     * @return integer|null
+     * @return int|null
      */
     protected static function normalizePort($port, $scheme = null)
     {

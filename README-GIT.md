@@ -73,7 +73,7 @@ repository.
 
 ### Pre-Commit Hook (Optional)
 
-The ZF2 Travis-CI will confirm that code style standards are met 
+The ZF2 Travis-CI will confirm that code style standards are met
 by using ```php-cs-fixer``` (https://github.com/fabpot/PHP-CS-Fixer) during it's build runs.
 
 To reduce the number of red Travis-CI builds, the following Git pre-commit hook
@@ -85,13 +85,13 @@ can help catch code style issues before committing. Save it as
 <?php
 /**
  * .git/hooks/pre-commit
- * 
- * This pre-commit hooks will check for PHP errors (lint), and make sure the 
+ *
+ * This pre-commit hooks will check for PHP errors (lint), and make sure the
  * code is PSR-2 compliant.
- * 
+ *
  * Dependecy: PHP-CS-Fixer (https://github.com/fabpot/PHP-CS-Fixer)
- * 
- * @author  Mardix  http://github.com/mardix 
+ *
+ * @author  Mardix  http://github.com/mardix
  * @author  Matthew Weier O'Phinney http://mwop.net/
  * @since   4 Sept 2012
  */
@@ -194,12 +194,12 @@ create a branch for fixing an issue in the tracker.
 Switched to a new branch 'zf9295'
 ```
 ... do some work ...
-  
+
 ```sh
 % git commit
 ```
 ... write your log message ...
-  
+
 ```sh
 % git push origin HEAD:zf9295
 Counting objects: 38, done.
@@ -249,7 +249,7 @@ Once you know that your changes have been accepted to the master
 repository, we suggest doing some cleanup of these branches.
 
  -  Local branch cleanup
-    
+
     ```sh
     % git branch -d <branchname>
     ```
@@ -275,4 +275,4 @@ on GitHub.
 ## CONTRIBUTORS AND COMMITTERS
 
 Both Zend's internal Zend Framework team and the members of the Community Review
-team have push privileges to the ZF2 repository. 
+team have push privileges to the ZF2 repository.

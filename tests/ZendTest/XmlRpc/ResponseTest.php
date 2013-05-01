@@ -73,7 +73,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      *
      * Call as method call
      *
-     * Returns: boolean
+     * Returns: bool
      */
     public function testIsFault()
     {
@@ -100,7 +100,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      * Expects:
      * - response:
      *
-     * Returns: boolean
+     * Returns: bool
      */
     public function testLoadXml()
     {

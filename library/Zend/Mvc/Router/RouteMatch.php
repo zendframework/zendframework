@@ -87,7 +87,7 @@ class RouteMatch
      * Get a specific parameter.
      *
      * @param  string $name
-     * @param  mixed $default
+     * @param  mixed  $default
      * @return mixed
      */
     public function getParam($name, $default = null)

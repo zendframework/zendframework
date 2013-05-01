@@ -17,7 +17,7 @@ interface AclInterface
      * The $resource parameter can either be a Resource or a Resource identifier.
      *
      * @param  Resource\ResourceInterface|string $resource
-     * @return boolean
+     * @return bool
      */
     public function hasResource($resource);
 
@@ -45,7 +45,7 @@ interface AclInterface
      * @param  Role\RoleInterface|string            $role
      * @param  Resource\ResourceInterface|string    $resource
      * @param  string                               $privilege
-     * @return boolean
+     * @return bool
      */
     public function isAllowed($role = null, $resource = null, $privilege = null);
 }

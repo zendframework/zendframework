@@ -64,7 +64,7 @@ class ObjectProperty extends AbstractHydrator
             ));
         }
         foreach ($data as $property => $value) {
-            $object->$property = $this->hydrateValue($property, $value);
+            $object->$property = $this->hydrateValue($property, $value, $data);
         }
         return $object;
     }

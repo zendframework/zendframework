@@ -41,7 +41,7 @@ class Test implements AdapterInterface
     /**
      * Current position in the response buffer
      *
-     * @var integer
+     * @var int
      */
     protected $responseIndex = 0;
 
@@ -199,7 +199,7 @@ class Test implements AdapterInterface
      * Sets the position of the response buffer.  Selects which
      * response will be returned on the next call to read().
      *
-     * @param integer $index
+     * @param int $index
      * @throws Exception\OutOfRangeException
      */
     public function setResponseIndex($index)

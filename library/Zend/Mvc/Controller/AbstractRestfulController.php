@@ -39,6 +39,13 @@ abstract class AbstractRestfulController extends AbstractController
     );
 
     /**
+     * Name of request or query parameter containing identifier
+     *
+     * @var string
+     */
+    protected $identifierName = 'id';
+
+    /**
      * @var int From Zend\Json\Json
      */
     protected $jsonDecodeType = Json::TYPE_ARRAY;
@@ -49,6 +56,28 @@ abstract class AbstractRestfulController extends AbstractController
      * @var array
      */
     protected $customHttpMethodsMap = array();
+
+    /**
+     * Set the route match/query parameter name containing the identifier
+     *
+     * @param  string $name
+     * @return self
+     */
+    public function setIdentifierName($name)
+    {
+        $this->identifierName = (string) $name;
+        return $this;
+    }
+
+    /**
+     * Retrieve the route match/query parameter name containing the identifier
+     *
+     * @return string
+     */
+    public function getIdentifierName()
+    {
+        return $this->identifierName;
+    }
 
     /**
      * Create a new resource
@@ -139,7 +168,8 @@ abstract class AbstractRestfulController extends AbstractController
      * Not marked as abstract, as that would introduce a BC break
      * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
-     * @return mixed
+     * @param  $id
+     * @param  $data
      * @throws Exception\RuntimeException
      */
     public function patch($id, $data)
@@ -439,12 +469,13 @@ abstract class AbstractRestfulController extends AbstractController
      */
     protected function getIdentifier($routeMatch, $request)
     {
-        $id = $routeMatch->getParam('id', false);
+        $identifier = $this->getIdentifierName();
+        $id = $routeMatch->getParam($identifier, false);
         if ($id) {
             return $id;
         }
 
-        $id = $request->getQuery()->get('id', false);
+        $id = $request->getQuery()->get($identifier, false);
         if ($id) {
             return $id;
         }

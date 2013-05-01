@@ -102,15 +102,16 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
     /**
      * Converts a value for extraction. If no strategy exists the plain value is returned.
      *
-     * @param string $name The name of the strategy to use.
-     * @param mixed $value The value that should be converted.
+     * @param  string $name  The name of the strategy to use.
+     * @param  mixed  $value  The value that should be converted.
+     * @param  array  $object The object is optionally provided as context.
      * @return mixed
      */
-    public function extractValue($name, $value)
+    public function extractValue($name, $value, $object = null)
     {
         if ($this->hasStrategy($name)) {
             $strategy = $this->getStrategy($name);
-            $value = $strategy->extract($value);
+            $value = $strategy->extract($value, $object);
         }
         return $value;
     }
@@ -120,13 +121,14 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      *
      * @param string $name The name of the strategy to use.
      * @param mixed $value The value that should be converted.
+     * @param array $data The whole data is optionally provided as context.
      * @return mixed
      */
-    public function hydrateValue($name, $value)
+    public function hydrateValue($name, $value, $data = null)
     {
         if ($this->hasStrategy($name)) {
             $strategy = $this->getStrategy($name);
-            $value = $strategy->hydrate($value);
+            $value = $strategy->hydrate($value, $data);
         }
         return $value;
     }

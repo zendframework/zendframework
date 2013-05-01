@@ -9,10 +9,10 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Mvc\Exception\RuntimeException;
-use Zend\Mvc\Exception\InvalidArgumentException;
 use Zend\ModuleManager\Listener\ServiceListener;
 use Zend\ModuleManager\Listener\ServiceListenerInterface;
+use Zend\Mvc\Exception\InvalidArgumentException;
+use Zend\Mvc\Exception\RuntimeException;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -46,6 +46,7 @@ class ServiceListenerFactory implements FactoryInterface
             'ControllerPluginManager'        => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
             'ConsoleAdapter'                 => 'Zend\Mvc\Service\ConsoleAdapterFactory',
             'ConsoleRouter'                  => 'Zend\Mvc\Service\RouterFactory',
+            'ConsoleViewManager'             => 'Zend\Mvc\Service\ConsoleViewManagerFactory',
             'DependencyInjector'             => 'Zend\Mvc\Service\DiFactory',
             'DiAbstractServiceFactory'       => 'Zend\Mvc\Service\DiAbstractServiceFactoryFactory',
             'DiServiceInitializer'           => 'Zend\Mvc\Service\DiServiceInitializerFactory',
@@ -53,11 +54,15 @@ class ServiceListenerFactory implements FactoryInterface
             'FilterManager'                  => 'Zend\Mvc\Service\FilterManagerFactory',
             'FormElementManager'             => 'Zend\Mvc\Service\FormElementManagerFactory',
             'HttpRouter'                     => 'Zend\Mvc\Service\RouterFactory',
+            'HttpViewManager'                => 'Zend\Mvc\Service\HttpViewManagerFactory',
+            'HydratorManager'                => 'Zend\Mvc\Service\HydratorManagerFactory',
+            'InputFilterManager'             => 'Zend\Mvc\Service\InputFilterManagerFactory',
             'PaginatorPluginManager'         => 'Zend\Mvc\Service\PaginatorPluginManagerFactory',
             'Request'                        => 'Zend\Mvc\Service\RequestFactory',
             'Response'                       => 'Zend\Mvc\Service\ResponseFactory',
             'Router'                         => 'Zend\Mvc\Service\RouterFactory',
             'RoutePluginManager'             => 'Zend\Mvc\Service\RoutePluginManagerFactory',
+            'SerializerAdapterManager'       => 'Zend\Mvc\Service\SerializerAdapterPluginManagerFactory',
             'ValidatorManager'               => 'Zend\Mvc\Service\ValidatorManagerFactory',
             'ViewHelperManager'              => 'Zend\Mvc\Service\ViewHelperManagerFactory',
             'ViewFeedRenderer'               => 'Zend\Mvc\Service\ViewFeedRendererFactory',
@@ -79,6 +84,11 @@ class ServiceListenerFactory implements FactoryInterface
             'Zend\View\Resolver\TemplatePathStack'   => 'ViewTemplatePathStack',
             'Zend\View\Resolver\AggregateResolver'   => 'ViewResolver',
             'Zend\View\Resolver\ResolverInterface'   => 'ViewResolver',
+        ),
+        'abstract_factories' => array(
+            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
+            'Zend\Form\FormAbstractServiceFactory',
+            'Zend\Log\LoggerAbstractServiceFactory',
         ),
     );
 

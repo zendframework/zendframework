@@ -9,9 +9,9 @@
 
 namespace Zend\Validator\Barcode;
 
-use Zend\Validator\Exception;
 use Zend\Stdlib\StringUtils;
 use Zend\Stdlib\StringWrapper\StringWrapperInterface;
+use Zend\Validator\Exception;
 
 class Code128 extends AbstractAdapter
 {
@@ -345,7 +345,7 @@ class Code128 extends AbstractAdapter
      *
      * @param string $value
      * @param string $set
-     * @return integer
+     * @return int
      */
     protected function ord128($value, $set)
     {
@@ -406,7 +406,7 @@ class Code128 extends AbstractAdapter
      *  "00" to "99" ==   0 to  99
      *   132 to  138 == 100 to 106
      *
-     * @param integer $value
+     * @param int $value
      * @param string $set
      * @return string
      */

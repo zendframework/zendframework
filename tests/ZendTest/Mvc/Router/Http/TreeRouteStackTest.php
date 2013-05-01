@@ -395,6 +395,39 @@ class TreeRouteStackTest extends TestCase
         $this->assertEquals(1000, $routes->get('foo')->priority);
     }
 
+    public function testPrototypeRoute()
+    {
+        $stack = new TreeRouteStack();
+        $stack->addPrototype(
+            'bar',
+            array('type' => 'literal', 'options' => array('route' => '/bar'))
+        );
+        $stack->addRoute('foo', 'bar');
+        $this->assertEquals('/bar', $stack->assemble(array(), array('name' => 'foo')));
+    }
+
+    public function testChainRouteAssembling()
+    {
+        $stack = new TreeRouteStack();
+        $stack->addPrototype(
+            'bar',
+            array('type' => 'literal', 'options' => array('route' => '/bar'))
+        );
+        $stack->addRoute(
+            'foo',
+            array(
+                'type' => 'literal',
+                'options' => array(
+                    'route' => '/foo'
+                ),
+                'chain_routes' => array(
+                    'bar'
+                ),
+            )
+        );
+        $this->assertEquals('/foo/bar', $stack->assemble(array(), array('name' => 'foo')));
+    }
+
     public function testFactory()
     {
         $tester = new FactoryTester($this);

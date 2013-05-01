@@ -617,13 +617,29 @@ class ClassGenerator extends AbstractGenerator
      */
     public function getMethod($methodName)
     {
-        foreach ($this->getMethods() as $method) {
+        foreach ($this->methods as $method) {
             if ($method->getName() == $methodName) {
                 return $method;
             }
         }
 
         return false;
+    }
+
+    /**
+     * @param  string $methodName
+     * @return ClassGenerator
+     */
+    public function removeMethod($methodName)
+    {
+        foreach ($this->methods as $key => $method) {
+            if ($method->getName() == $methodName) {
+                unset($this->methods[$key]);
+                break;
+            }
+        }
+
+        return $this;
     }
 
     /**

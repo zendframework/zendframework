@@ -17,7 +17,7 @@ class HtmlEntities extends AbstractFilter
     /**
      * Corresponds to the second htmlentities() argument
      *
-     * @var integer
+     * @var int
      */
     protected $quoteStyle;
 
@@ -78,7 +78,7 @@ class HtmlEntities extends AbstractFilter
     /**
      * Returns the quoteStyle option
      *
-     * @return integer
+     * @return int
      */
     public function getQuoteStyle()
     {
@@ -88,7 +88,7 @@ class HtmlEntities extends AbstractFilter
     /**
      * Sets the quoteStyle option
      *
-     * @param  integer $quoteStyle
+     * @param  int $quoteStyle
      * @return HtmlEntities Provides a fluent interface
      */
     public function setQuoteStyle($quoteStyle)

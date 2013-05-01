@@ -47,7 +47,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * Number of items in query result
      *
-     * @var integer
+     * @var int
      */
     protected $itemCount = -1;
 
@@ -124,7 +124,7 @@ class DefaultIterator implements \Iterator, \Countable
      * or a valid callback accepting the attribute's name as it's only
      * argument and returning the new attribute's name.
      *
-     * @param  integer|callable $attributeNameTreatment
+     * @param  int|callable $attributeNameTreatment
      * @return DefaultIterator Provides a fluent interface
      */
     public function setAttributeNameTreatment($attributeNameTreatment)
@@ -159,7 +159,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * Returns the currently set attribute name treatment
      *
-     * @return integer|callable
+     * @return int|callable
      */
     public function getAttributeNameTreatment()
     {

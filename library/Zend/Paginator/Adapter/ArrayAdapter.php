@@ -21,7 +21,7 @@ class ArrayAdapter implements AdapterInterface
     /**
      * Item count
      *
-     * @var integer
+     * @var int
      */
     protected $count = null;
 
@@ -39,8 +39,8 @@ class ArrayAdapter implements AdapterInterface
     /**
      * Returns an array of items for a page.
      *
-     * @param  integer $offset Page offset
-     * @param  integer $itemCountPerPage Number of items per page
+     * @param  int $offset Page offset
+     * @param  int $itemCountPerPage Number of items per page
      * @return array
      */
     public function getItems($offset, $itemCountPerPage)
@@ -51,7 +51,7 @@ class ArrayAdapter implements AdapterInterface
     /**
      * Returns the total number of rows in the array.
      *
-     * @return integer
+     * @return int
      */
     public function count()
     {

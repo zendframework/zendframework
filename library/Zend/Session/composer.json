@@ -17,8 +17,9 @@
         "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
-        "zendframework/zend-validator": "Zend\\Validator component",
-        "zendframework/zend-eventmanager": "Zend\\EventManager component"
+        "zendframework/zend-eventmanager": "Zend\\EventManager component",
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
+        "zendframework/zend-validator": "Zend\\Validator component"
     },
     "extra": {
         "branch-alias": {

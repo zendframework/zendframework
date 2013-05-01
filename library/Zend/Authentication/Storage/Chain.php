@@ -9,8 +9,8 @@
 
 namespace Zend\Authentication\Storage;
 
-use Zend\Stdlib\PriorityQueue;
 use Zend\Authentication\Storage\StorageInterface;
+use Zend\Stdlib\PriorityQueue;
 
 class Chain implements StorageInterface
 {
@@ -33,7 +33,7 @@ class Chain implements StorageInterface
 
     /**
      * @param StorageInterface $storage
-     * @param integer          $priority
+     * @param int          $priority
      */
     public function add(StorageInterface $storage, $priority = 1)
     {

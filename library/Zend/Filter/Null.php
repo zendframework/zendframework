@@ -68,9 +68,9 @@ class Null extends AbstractFilter
     /**
      * Set boolean types
      *
-     * @param  integer|array $type
+     * @param  int|array $type
      * @throws Exception\InvalidArgumentException
-     * @return Boolean
+     * @return bool
      */
     public function setType($type = null)
     {

@@ -307,7 +307,7 @@ class Bcmath implements AdapterInterface
         $chars = self::BASE62_ALPHABET;
 
         // convert to decimal
-        if ($fromBase == 10 ) {
+        if ($fromBase == 10) {
             $decimal = $operand;
         } else {
             $decimal = '0';
@@ -318,7 +318,7 @@ class Bcmath implements AdapterInterface
         }
 
         if ($toBase == 10) {
-            return  $decimal;
+            return $decimal;
         }
 
         // convert decimal to base

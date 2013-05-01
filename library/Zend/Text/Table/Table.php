@@ -50,14 +50,14 @@ class Table
     /**
      * Auto separation mode
      *
-     * @var integer
+     * @var int
      */
     protected $autoSeparate = self::AUTO_SEPARATE_ALL;
 
     /**
      * Padding for columns
      *
-     * @var integer
+     * @var int
      */
     protected $padding = 0;
 
@@ -177,7 +177,7 @@ class Table
     /**
      * Set auto separation mode
      *
-     * @param  integer $autoSeparate Auto separation mode
+     * @param  int $autoSeparate Auto separation mode
      * @return Table
      */
     public function setAutoSeparate($autoSeparate)
@@ -206,7 +206,7 @@ class Table
     /**
      * Set the column padding
      *
-     * @param  integer $padding The padding for the columns
+     * @param  int $padding The padding for the columns
      * @return Table
      */
     public function setPadding($padding)
@@ -245,7 +245,7 @@ class Table
     /**
      * Set default column align for rows created by appendRow(array $data)
      *
-     * @param  integer $columnNum
+     * @param  int $columnNum
      * @param  string  $align
      * @return Table
      */

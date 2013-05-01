@@ -45,7 +45,7 @@ class WordCount extends AbstractValidator
     /**
      * Word count
      *
-     * @var integer
+     * @var int
      */
     protected $count;
 
@@ -70,7 +70,7 @@ class WordCount extends AbstractValidator
      * 'min': Minimum word count
      * 'max': Maximum word count
      *
-     * @param  integer|array|\Traversable $options Options for the adapter
+     * @param  int|array|\Traversable $options Options for the adapter
      */
     public function __construct($options = null)
     {
@@ -89,7 +89,7 @@ class WordCount extends AbstractValidator
     /**
      * Returns the minimum word count
      *
-     * @return integer
+     * @return int
      */
     public function getMin()
     {
@@ -99,7 +99,7 @@ class WordCount extends AbstractValidator
     /**
      * Sets the minimum word count
      *
-     * @param  integer|array $min The minimum word count
+     * @param  int|array $min The minimum word count
      * @return WordCount Provides a fluent interface
      * @throws Exception\InvalidArgumentException When min is greater than max
      */
@@ -113,7 +113,7 @@ class WordCount extends AbstractValidator
             throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
-        $min = (integer) $min;
+        $min = (int) $min;
         if (($this->getMax() !== null) && ($min > $this->getMax())) {
             throw new Exception\InvalidArgumentException(
                 "The minimum must be less than or equal to the maximum word count, but $min >"
@@ -127,7 +127,7 @@ class WordCount extends AbstractValidator
     /**
      * Returns the maximum word count
      *
-     * @return integer
+     * @return int
      */
     public function getMax()
     {
@@ -137,7 +137,7 @@ class WordCount extends AbstractValidator
     /**
      * Sets the maximum file count
      *
-     * @param  integer|array $max The maximum word count
+     * @param  int|array $max The maximum word count
      * @return WordCount Provides a fluent interface
      * @throws Exception\InvalidArgumentException When max is smaller than min
      */
@@ -151,7 +151,7 @@ class WordCount extends AbstractValidator
             throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
-        $max = (integer) $max;
+        $max = (int) $max;
         if (($this->getMin() !== null) && ($max < $this->getMin())) {
             throw new Exception\InvalidArgumentException(
                 "The maximum must be greater than or equal to the minimum word count, but "

@@ -80,7 +80,7 @@ class Smtp extends AbstractProtocol
      * are present.
      *
      * @param  string|array $host
-     * @param  null|integer $port
+     * @param  null|int $port
      * @param  null|array   $config
      * @throws Exception\InvalidArgumentException
      */
@@ -196,7 +196,7 @@ class Smtp extends AbstractProtocol
     /**
      * Returns the perceived session status
      *
-     * @return boolean
+     * @return bool
      */
     public function hasSession()
     {

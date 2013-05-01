@@ -23,18 +23,6 @@ class Json extends AbstractHelper
     protected $response;
 
     /**
-     * Set the response object
-     *
-     * @param  Response $response
-     * @return Json
-     */
-    public function setResponse(Response $response)
-    {
-        $this->response = $response;
-        return $this;
-    }
-
-    /**
      * Encode data as JSON and set response header
      *
      * @param  mixed $data
@@ -51,5 +39,17 @@ class Json extends AbstractHelper
         }
 
         return $data;
+    }
+
+    /**
+     * Set the response object
+     *
+     * @param  Response $response
+     * @return Json
+     */
+    public function setResponse(Response $response)
+    {
+        $this->response = $response;
+        return $this;
     }
 }

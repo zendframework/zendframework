@@ -13,6 +13,8 @@ use Locale;
 use Traversable;
 use Zend\Cache;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerInterface;
 use Zend\I18n\Exception;
 use Zend\I18n\Translator\Loader\FileLoaderInterface;
 use Zend\I18n\Translator\Loader\RemoteLoaderInterface;
@@ -23,6 +25,16 @@ use Zend\Stdlib\ArrayUtils;
  */
 class Translator
 {
+    /**
+     * Event fired when the translation for a message is missing.
+     */
+    const EVENT_MISSING_TRANSLATION = 'missingTranslation';
+
+    /**
+     * Event fired when no messages were loaded for a locale/text-domain combination.
+     */
+    const EVENT_NO_MESSAGES_LOADED = 'noMessagesLoaded';
+
     /**
      * Messages loaded by the translator.
      *
@@ -78,6 +90,20 @@ class Translator
      * @var LoaderPluginManager
      */
     protected $pluginManager;
+
+    /**
+     * Event manager for triggering translator events.
+     *
+     * @var EventManagerInterface
+     */
+    protected $events;
+
+    /**
+     * Whether events are enabled
+     *
+     * @var bool
+     */
+    protected $eventsEnabled = false;
 
     /**
      * Instantiate a translator
@@ -195,6 +221,11 @@ class Translator
             } else {
                 $translator->setCache(Cache\StorageFactory::factory($options['cache']));
             }
+        }
+
+        // event manager enabled
+        if (isset($options['event_manager_enabled']) && $options['event_manager_enabled']) {
+            $translator->enableEventManager();
         }
 
         return $translator;
@@ -388,14 +419,15 @@ class Translator
     /**
      * Get a translated message.
      *
-     * @param  string $message
-     * @param  string $locale
-     * @param  string $textDomain
-     * @return string|null
+     * @triggers getTranslatedMessage.missing-translation
+     * @param    string $message
+     * @param    string $locale
+     * @param    string $textDomain
+     * @return   string|null
      */
     protected function getTranslatedMessage(
         $message,
-        $locale = null,
+        $locale,
         $textDomain = 'default'
     ) {
         if ($message === '') {
@@ -408,6 +440,25 @@ class Translator
 
         if (isset($this->messages[$textDomain][$locale][$message])) {
             return $this->messages[$textDomain][$locale][$message];
+        }
+
+        if ($this->isEventManagerEnabled()) {
+            $results = $this->getEventManager()->trigger(
+                self::EVENT_MISSING_TRANSLATION,
+                $this,
+                array(
+                    'message'     => $message,
+                    'locale'      => $locale,
+                    'text_domain' => $textDomain,
+                ),
+                function ($r) {
+                    return is_string($r);
+                }
+            );
+            $last = $results->last();
+            if (is_string($last)) {
+                return $last;
+            }
         }
 
         return null;
@@ -491,10 +542,11 @@ class Translator
     /**
      * Load messages for a given language and domain.
      *
-     * @param  string                     $textDomain
-     * @param  string                     $locale
-     * @throws Exception\RuntimeException
-     * @return void
+     * @triggers loadMessages.no-messages-loaded
+     * @param    string $textDomain
+     * @param    string $locale
+     * @throws   Exception\RuntimeException
+     * @return   void
      */
     protected function loadMessages($textDomain, $locale)
     {
@@ -518,8 +570,30 @@ class Translator
         $messagesLoaded |= $this->loadMessagesFromFiles($textDomain, $locale);
 
         if (!$messagesLoaded) {
-            $this->messages[$textDomain][$locale] = null;
-        } elseif ($cache !== null) {
+            $discoveredTextDomain = null;
+            if ($this->isEventManagerEnabled()) {
+                $results = $this->getEventManager()->trigger(
+                    self::EVENT_NO_MESSAGES_LOADED,
+                    $this,
+                    array(
+                        'locale'      => $locale,
+                        'text_domain' => $textDomain,
+                    ),
+                    function ($r) {
+                        return ($r instanceof TextDomain);
+                    }
+                );
+                $last = $results->last();
+                if ($last instanceof TextDomain) {
+                    $discoveredTextDomain = $last;
+                }
+            }
+
+            $this->messages[$textDomain][$locale] = $discoveredTextDomain;
+            $messagesLoaded = true;
+        }
+
+        if ($messagesLoaded && $cache !== null) {
             $cache->setItem($cacheId, $this->messages[$textDomain][$locale]);
         }
     }
@@ -529,7 +603,7 @@ class Translator
      *
      * @param  string $textDomain
      * @param  string $locale
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException When specified loader is not a remote loader
      */
     protected function loadMessagesFromRemote($textDomain, $locale)
@@ -562,7 +636,7 @@ class Translator
      *
      * @param  string $textDomain
      * @param  string $locale
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException When specified loader is not a file loader
      */
     protected function loadMessagesFromPatterns($textDomain, $locale)
@@ -599,7 +673,7 @@ class Translator
      *
      * @param  string $textDomain
      * @param  string $locale
-     * @return boolean
+     * @return bool
      * @throws Exception\RuntimeException When specified loader is not a file loader
      */
     protected function loadMessagesFromFiles($textDomain, $locale)
@@ -631,5 +705,68 @@ class Translator
         }
 
         return $messagesLoaded;
+    }
+
+    /**
+     * Get the event manager.
+     *
+     * @return EventManagerInterface|null
+     */
+    public function getEventManager()
+    {
+        if (!$this->events instanceof EventManagerInterface) {
+            $this->setEventManager(new EventManager());
+        }
+
+        return $this->events;
+    }
+
+    /**
+     * Set the event manager instance used by this translator.
+     *
+     * @param  EventManagerInterface $events
+     * @return Translator
+     */
+    public function setEventManager(EventManagerInterface $events)
+    {
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_class($this),
+            'translator',
+        ));
+        $this->events = $events;
+        return $this;
+    }
+
+    /**
+     * Check whether the event manager is enabled.
+     *
+     * @return boolean
+     */
+    public function isEventManagerEnabled()
+    {
+        return $this->eventsEnabled;
+    }
+
+    /**
+     * Enable the event manager.
+     *
+     * @return Translator
+     */
+    public function enableEventManager()
+    {
+        $this->eventsEnabled = true;
+        return $this;
+    }
+
+    /**
+     * Disable the event manager.
+     *
+     * @return Translator
+     */
+    public function disableEventManager()
+    {
+        $this->eventsEnabled = false;
+        return $this;
     }
 }

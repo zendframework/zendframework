@@ -15,7 +15,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
 {
     /**
      * HTTP controller must not use the console request
-     * @var boolean
+     * @var bool
      */
     protected $useConsoleRequest = false;
 
@@ -137,7 +137,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $header, $pattern, $responseHeader->getFieldValue()
             ));
         }
-        $this->assertTrue((boolean) preg_match($pattern, $responseHeader->getFieldValue()));
+        $this->assertTrue((bool) preg_match($pattern, $responseHeader->getFieldValue()));
     }
 
     /**
@@ -160,7 +160,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $header, $pattern
             ));
         }
-        $this->assertFalse((boolean) preg_match($pattern, $responseHeader->getFieldValue()));
+        $this->assertFalse((bool) preg_match($pattern, $responseHeader->getFieldValue()));
     }
 
     /**
@@ -254,7 +254,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $pattern, $responseHeader->getFieldValue()
             ));
         }
-        $this->assertTrue((boolean) preg_match($pattern, $responseHeader->getFieldValue()));
+        $this->assertTrue((bool) preg_match($pattern, $responseHeader->getFieldValue()));
     }
 
     /**
@@ -275,7 +275,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 'Failed asserting response DOES NOT redirect to URL MATCHING "%s"', $pattern
             ));
         }
-        $this->assertFalse((boolean) preg_match($pattern, $responseHeader->getFieldValue()));
+        $this->assertFalse((bool) preg_match($pattern, $responseHeader->getFieldValue()));
     }
 
     /**
@@ -292,7 +292,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * Execute a DOM/XPath query
      *
      * @param  string $path
-     * @param  boolean $useXpath
+     * @param  bool $useXpath
      * @return array
      */
     private function query($path, $useXpath = false)
@@ -321,7 +321,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * Count the dom query executed
      *
      * @param  string $path
-     * @return integer
+     * @return int
      */
     private function queryCount($path)
     {
@@ -332,7 +332,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * Count the dom query executed
      *
      * @param  string $path
-     * @return integer
+     * @return int
      */
     private function xpathQueryCount($path)
     {
@@ -343,7 +343,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * Assert against DOM/XPath selection
      *
      * @param string $path
-     * @param boolean $useXpath
+     * @param bool $useXpath
      */
     private function queryAssertion($path, $useXpath = false)
     {
@@ -381,7 +381,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      * Assert against DOM/XPath selection
      *
      * @param string $path CSS selector path
-     * @param boolean $useXpath
+     * @param bool $useXpath
      */
     private function notQueryAssertion($path, $useXpath = false)
     {
@@ -420,7 +420,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      *
      * @param string $path CSS selector path
      * @param string $count Number of nodes that should match
-     * @param boolean $useXpath
+     * @param bool $useXpath
      */
     private function queryCountAssertion($path, $count, $useXpath = false)
     {
@@ -462,7 +462,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      *
      * @param  string $path CSS selector path
      * @param  string $count Number of nodes that should NOT match
-     * @param boolean $useXpath
+     * @param bool $useXpath
      */
     private function notQueryCountAssertion($path, $count, $useXpath = false)
     {
@@ -504,7 +504,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      *
      * @param string $path CSS selector path
      * @param string $count Minimum number of nodes that should match
-     * @param boolean $useXpath
+     * @param bool $useXpath
      */
     private function queryCountMinAssertion($path, $count, $useXpath = false)
     {
@@ -546,7 +546,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      *
      * @param  string $path CSS selector path
      * @param  string $count Maximum number of nodes that should match
-     * @param boolean $useXpath
+     * @param bool $useXpath
      */
     private function queryCountMaxAssertion($path, $count, $useXpath = false)
     {
@@ -588,7 +588,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      *
      * @param  string $path CSS selector path
      * @param  string $match content that should be contained in matched nodes
-     * @param boolean $useXpath
+     * @param bool $useXpath
      */
     private function queryContentContainsAssertion($path, $match, $useXpath = false)
     {
@@ -634,7 +634,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      *
      * @param  string $path CSS selector path
      * @param  string $match content that should NOT be contained in matched nodes
-     * @param boolean $useXpath
+     * @param bool $useXpath
      */
     private function notQueryContentContainsAssertion($path, $match, $useXpath = false)
     {
@@ -680,7 +680,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      *
      * @param  string $path CSS selector path
      * @param  string $pattern Pattern that should be contained in matched nodes
-     * @param boolean $useXpath
+     * @param bool $useXpath
      */
     private function queryContentRegexAssertion($path, $pattern, $useXpath = false)
     {
@@ -696,7 +696,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $path, $pattern, $result->current()->nodeValue
             ));
         }
-        $this->assertTrue((boolean) preg_match($pattern, $result->current()->nodeValue));
+        $this->assertTrue((bool) preg_match($pattern, $result->current()->nodeValue));
     }
 
     /**
@@ -726,7 +726,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      *
      * @param string $path CSS selector path
      * @param string $pattern pattern that should NOT be contained in matched nodes
-     * @param boolean $useXpath
+     * @param bool $useXpath
      */
     private function notQueryContentRegexAssertion($path, $pattern, $useXpath = false)
     {
@@ -742,7 +742,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $path, $pattern
             ));
         }
-        $this->assertFalse((boolean) preg_match($pattern, $result->current()->nodeValue));
+        $this->assertFalse((bool) preg_match($pattern, $result->current()->nodeValue));
     }
 
     /**

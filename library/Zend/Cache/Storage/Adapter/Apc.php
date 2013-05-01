@@ -142,7 +142,7 @@ class Apc extends AbstractAdapter implements
             $pattern = '/^' . preg_quote($prefix, '/') . '/';
         }
 
-        $baseIt = new BaseApcIterator('user', $pattern, 0, 1, \APC_LIST_ACTIVE);
+        $baseIt = new BaseApcIterator('user', $pattern, 0, 1, APC_LIST_ACTIVE);
         return new ApcIterator($this, $baseIt, $prefix);
     }
 
@@ -176,7 +176,7 @@ class Apc extends AbstractAdapter implements
         $options = $this->getOptions();
         $prefix  = $namespace . $options->getNamespaceSeparator();
         $pattern = '/^' . preg_quote($prefix, '/') . '/';
-        return apc_delete(new BaseApcIterator('user', $pattern, 0, 1, \APC_LIST_ACTIVE));
+        return apc_delete(new BaseApcIterator('user', $pattern, 0, 1, APC_LIST_ACTIVE));
     }
 
     /* ClearByPrefixInterface */
@@ -198,7 +198,7 @@ class Apc extends AbstractAdapter implements
         $namespace = $options->getNamespace();
         $nsPrefix  = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $pattern = '/^' . preg_quote($nsPrefix . $prefix, '/') . '/';
-        return apc_delete(new BaseApcIterator('user', $pattern, 0, 1, \APC_LIST_ACTIVE));
+        return apc_delete(new BaseApcIterator('user', $pattern, 0, 1, APC_LIST_ACTIVE));
     }
 
     /* reading */
@@ -255,7 +255,7 @@ class Apc extends AbstractAdapter implements
         $prefixL = strlen($prefix);
         $result  = array();
         foreach ($fetch as $internalKey => & $value) {
-            $result[ substr($internalKey, $prefixL) ] = $value;
+            $result[substr($internalKey, $prefixL)] = $value;
         }
 
         return $result;
@@ -328,9 +328,9 @@ class Apc extends AbstractAdapter implements
         if (!apc_exists($internalKey)) {
             $metadata = false;
         } else {
-            $format   = \APC_ITER_ALL ^ \APC_ITER_VALUE ^ \APC_ITER_TYPE ^ \APC_ITER_REFCOUNT;
+            $format   = APC_ITER_ALL ^ APC_ITER_VALUE ^ APC_ITER_TYPE ^ APC_ITER_REFCOUNT;
             $regexp   = '/^' . preg_quote($internalKey, '/') . '$/';
-            $it       = new BaseApcIterator('user', $regexp, $format, 100, \APC_LIST_ACTIVE);
+            $it       = new BaseApcIterator('user', $regexp, $format, 100, APC_LIST_ACTIVE);
             $metadata = $it->current();
         }
 
@@ -367,8 +367,8 @@ class Apc extends AbstractAdapter implements
             $prefix  = $namespace . $options->getNamespaceSeparator();
             $pattern = '/^' . preg_quote($prefix, '/') . '(' . implode('|', $keysRegExp) . ')' . '$/';
         }
-        $format  = \APC_ITER_ALL ^ \APC_ITER_VALUE ^ \APC_ITER_TYPE ^ \APC_ITER_REFCOUNT;
-        $it      = new BaseApcIterator('user', $pattern, $format, 100, \APC_LIST_ACTIVE);
+        $format  = APC_ITER_ALL ^ APC_ITER_VALUE ^ APC_ITER_TYPE ^ APC_ITER_REFCOUNT;
+        $it      = new BaseApcIterator('user', $pattern, $format, 100, APC_LIST_ACTIVE);
         $result  = array();
         $prefixL = strlen($prefix);
         foreach ($it as $internalKey => $metadata) {
@@ -378,7 +378,7 @@ class Apc extends AbstractAdapter implements
             }
 
             $this->normalizeMetadata($metadata);
-            $result[ substr($internalKey, $prefixL) ] = & $metadata;
+            $result[substr($internalKey, $prefixL)] = & $metadata;
         }
 
         return $result;

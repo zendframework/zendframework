@@ -39,7 +39,7 @@ class Ean5 extends Ean13
 
     /**
      * Width of the barcode (in pixels)
-     * @return integer
+     * @return int
      */
     protected function calculateBarcodeWidth()
     {
@@ -59,11 +59,11 @@ class Ean5 extends Ean13
         $barcodeTable = array();
 
         // Start character (01011)
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
 
         $firstCharacter = true;
         $textTable = str_split($this->getText());
@@ -74,12 +74,12 @@ class Ean5 extends Ean13
                 $firstCharacter = false;
             } else {
                 // Intermediate character (01)
-                $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
-                $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
+                $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+                $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
             }
             $bars = str_split($this->codingMap[$this->getParity($i)][$textTable[$i]]);
             foreach ($bars as $b) {
-                $barcodeTable[] = array($b , $this->barThinWidth , 0 , 1);
+                $barcodeTable[] = array($b, $this->barThinWidth, 0, 1);
             }
         }
 

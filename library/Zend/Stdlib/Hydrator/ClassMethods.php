@@ -15,10 +15,10 @@ use Zend\Stdlib\Exception;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use Zend\Stdlib\Hydrator\Filter\FilterProviderInterface;
-use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
 use Zend\Stdlib\Hydrator\Filter\GetFilter;
 use Zend\Stdlib\Hydrator\Filter\HasFilter;
 use Zend\Stdlib\Hydrator\Filter\IsFilter;
+use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
 use Zend\Stdlib\Hydrator\Filter\NumberOfParameterFilter;
 
 class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
@@ -66,7 +66,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     }
 
     /**
-     * @param  boolean      $underscoreSeparatedKeys
+     * @param  bool      $underscoreSeparatedKeys
      * @return ClassMethods
      */
     public function setUnderscoreSeparatedKeys($underscoreSeparatedKeys)
@@ -77,7 +77,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getUnderscoreSeparatedKeys()
     {
@@ -136,13 +136,15 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
             $attribute = $method;
             if (preg_match('/^get/', $method)) {
                 $attribute = substr($method, 3);
-                $attribute = lcfirst($attribute);
+                if (!property_exists($object, $attribute)) {
+                    $attribute = lcfirst($attribute);
+                }
             }
 
             if ($this->underscoreSeparatedKeys) {
                 $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
             }
-            $attributes[$attribute] = $this->extractValue($attribute, $object->$method());
+            $attributes[$attribute] = $this->extractValue($attribute, $object->$method(), $object);
         }
 
         return $attributes;
@@ -178,13 +180,11 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
                 $method = preg_replace_callback('/(_[a-z])/', $transform, $method);
             }
             if (is_callable(array($object, $method))) {
-                $value = $this->hydrateValue($property, $value);
-
+                $value = $this->hydrateValue($property, $value, $data);
                 $object->$method($value);
             }
         }
 
         return $object;
     }
-
 }

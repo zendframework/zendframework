@@ -46,7 +46,7 @@ class StringLength extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  integer|array|\Traversable $options
+     * @param  int|array|\Traversable $options
      */
     public function __construct($options = array())
     {
@@ -70,7 +70,7 @@ class StringLength extends AbstractValidator
     /**
      * Returns the min option
      *
-     * @return integer
+     * @return int
      */
     public function getMin()
     {
@@ -80,7 +80,7 @@ class StringLength extends AbstractValidator
     /**
      * Sets the min option
      *
-     * @param  integer $min
+     * @param  int $min
      * @throws Exception\InvalidArgumentException
      * @return StringLength Provides a fluent interface
      */
@@ -91,14 +91,14 @@ class StringLength extends AbstractValidator
                                             . " " . $this->getMax());
         }
 
-        $this->options['min'] = max(0, (integer) $min);
+        $this->options['min'] = max(0, (int) $min);
         return $this;
     }
 
     /**
      * Returns the max option
      *
-     * @return integer|null
+     * @return int|null
      */
     public function getMax()
     {
@@ -108,7 +108,7 @@ class StringLength extends AbstractValidator
     /**
      * Sets the max option
      *
-     * @param  integer|null $max
+     * @param  int|null $max
      * @throws Exception\InvalidArgumentException
      * @return StringLength Provides a fluent interface
      */
@@ -120,7 +120,7 @@ class StringLength extends AbstractValidator
             throw new Exception\InvalidArgumentException("The maximum must be greater than or equal to the minimum length, but "
                                             . "$max < " . $this->getMin());
         } else {
-            $this->options['max'] = (integer) $max;
+            $this->options['max'] = (int) $max;
         }
 
         return $this;

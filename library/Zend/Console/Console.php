@@ -118,8 +118,8 @@ abstract class Console
     public static function isWindows()
     {
         return
-            ( defined('PHP_OS') && ( substr_compare(PHP_OS,'win',0,3,true) === 0) ) ||
-            (getenv('OS') != false && substr_compare(getenv('OS'),'windows',0,7,true))
+            (defined('PHP_OS') && (substr_compare(PHP_OS, 'win', 0, 3, true) === 0)) ||
+            (getenv('OS') != false && substr_compare(getenv('OS'), 'windows', 0, 7, true))
         ;
     }
 
@@ -156,8 +156,8 @@ abstract class Console
      */
     public static function overrideIsConsole($flag)
     {
-        if(null != $flag) {
-            $flag = (bool)$flag;
+        if (null != $flag) {
+            $flag = (bool) $flag;
         }
         static::$isConsole = $flag;
     }

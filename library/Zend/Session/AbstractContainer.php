@@ -9,12 +9,12 @@
 
 namespace Zend\Session;
 
-use Zend\Stdlib\ArrayObject;
 use ArrayIterator;
 use Iterator;
 use Traversable;
 use Zend\Session\ManagerInterface as Manager;
 use Zend\Session\Storage\StorageInterface as Storage;
+use Zend\Stdlib\ArrayObject;
 
 /**
  * Session storage container

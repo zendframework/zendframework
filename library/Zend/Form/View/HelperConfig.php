@@ -18,7 +18,9 @@ use Zend\ServiceManager\ServiceManager;
 class HelperConfig implements ConfigInterface
 {
     /**
-     * @var array Pre-aliased view helpers
+     * Pre-aliased view helpers
+     *
+     * @var array
      */
     protected $invokables = array(
         'form'                    => 'Zend\Form\View\Helper\Form',

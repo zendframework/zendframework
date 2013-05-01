@@ -154,7 +154,7 @@ abstract class StringUtils
      * Check if a given encoding is a known single-byte character encoding
      *
      * @param string $encoding
-     * @return boolean
+     * @return bool
      */
     public static function isSingleByteEncoding($encoding)
     {
@@ -165,7 +165,7 @@ abstract class StringUtils
      * Check if a given string is valid UTF-8 encoded
      *
      * @param string $str
-     * @return boolean
+     * @return bool
      */
     public static function isValidUtf8($str)
     {

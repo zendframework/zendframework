@@ -132,7 +132,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Set resource
      *
-     * @param  mysqli $resource
+     * @param  \mysqli $resource
      * @return Connection
      */
     public function setResource(\mysqli $resource)
@@ -328,7 +328,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      * Get last generated id
      *
      * @param  null $name Ignored
-     * @return integer
+     * @return int
      */
     public function getLastGeneratedValue($name = null)
     {

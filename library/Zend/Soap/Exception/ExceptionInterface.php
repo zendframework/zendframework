@@ -9,5 +9,8 @@
 
 namespace Zend\Soap\Exception;
 
+/**
+ * Common Exception interface
+ */
 interface ExceptionInterface
 {}

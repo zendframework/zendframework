@@ -75,7 +75,7 @@ class Db extends AbstractWriter
         }
 
         $tableName = (string) $tableName;
-        if ('' === $tableName){
+        if ('' === $tableName) {
             throw new Exception\InvalidArgumentException('You must specify a table name. Either directly in the constructor, or via options');
         }
 

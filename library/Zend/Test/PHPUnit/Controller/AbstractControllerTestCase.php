@@ -35,19 +35,19 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 
     /**
      * Flag to use console router or not
-     * @var boolean
+     * @var bool
      */
     protected $useConsoleRequest = false;
 
     /**
      * Flag console used before tests
-     * @var boolean
+     * @var bool
      */
     private $usedConsoleBackup;
 
     /**
      * Trace error when exception is throwed in application
-     * @var boolean
+     * @var bool
      */
     protected $traceError = false;
 
@@ -70,7 +70,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 
     /**
      * Get the trace error flag
-     * @return boolean
+     * @return bool
      */
     public function getTraceError()
     {
@@ -79,7 +79,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 
     /**
      * Set the trace error flag
-     * @param  boolean $traceError
+     * @param  bool $traceError
      * @return AbstractControllerTestCase
      */
     public function setTraceError($traceError)
@@ -90,7 +90,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 
     /**
      * Get the usage of the console router or not
-     * @return boolean $boolean
+     * @return bool $boolean
      */
     public function getUseConsoleRequest()
     {
@@ -99,12 +99,12 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 
     /**
      * Set the usage of the console router or not
-     * @param  boolean $boolean
+     * @param  bool $boolean
      * @return AbstractControllerTestCase
      */
     public function setUseConsoleRequest($boolean)
     {
-        $this->useConsoleRequest = (boolean) $boolean;
+        $this->useConsoleRequest = (bool) $boolean;
         return $this;
     }
 
@@ -282,7 +282,6 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 
         // reset singleton
         StaticEventManager::resetInstance();
-        Placeholder\Registry::unsetRegistry();
 
         return $this;
     }

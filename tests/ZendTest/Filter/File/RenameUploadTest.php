@@ -258,6 +258,40 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('#' . $fileNoExt . '_.{13}\.xml#', $filter($this->_oldFile));
     }
 
+    public function testGetFileWithOriginalExtension()
+    {
+        $fileNoExt = $this->_filesPath . '/newfile';
+        $filter = new RenameUploadMock(array(
+            'target'          => $this->_newFile,
+            'use_upload_extension' => true,
+            'randomize'       => false,
+        ));
+
+        $oldFilePathInfo = pathinfo($this->_oldFile);
+
+        $this->assertRegExp(
+            '#' . $fileNoExt . '.'.$oldFilePathInfo['extension'].'#',
+            $filter($this->_oldFile)
+        );
+    }
+
+    public function testGetRandomizedFileWithOriginalExtension()
+    {
+        $fileNoExt = $this->_filesPath . '/newfile';
+        $filter = new RenameUploadMock(array(
+            'target'          => $this->_newFile,
+            'use_upload_extension' => true,
+            'randomize'       => true,
+        ));
+
+        $oldFilePathInfo = pathinfo($this->_oldFile);
+
+        $this->assertRegExp(
+            '#' . $fileNoExt . '_.{13}\.'.$oldFilePathInfo['extension'].'#',
+            $filter($this->_oldFile)
+        );
+    }
+
     /**
      * @return void
      */

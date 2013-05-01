@@ -49,7 +49,7 @@ class Gz extends AbstractCompressionAlgorithm
     /**
      * Returns the set compression level
      *
-     * @return integer
+     * @return int
      */
     public function getLevel()
     {
@@ -59,7 +59,7 @@ class Gz extends AbstractCompressionAlgorithm
     /**
      * Sets a new compression level
      *
-     * @param integer $level
+     * @param int $level
      * @throws Exception\InvalidArgumentException
      * @return Gz
      */

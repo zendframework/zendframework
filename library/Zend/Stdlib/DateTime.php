@@ -11,10 +11,14 @@ namespace Zend\Stdlib;
 
 use DateTimeZone;
 
+trigger_error('DateTime extension deprecated as of ZF 2.1.4; use the \DateTime constructor to parse extended ISO8601 dates instead', E_USER_DEPRECATED);
+
 /**
  * DateTime
  *
  * An extension of the \DateTime object.
+ *
+ * @deprecated
  */
 class DateTime extends \DateTime
 {

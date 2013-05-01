@@ -9,10 +9,10 @@
 
 namespace Zend\Code\Generator\DocBlock;
 
-use Zend\Code\Generator\AbstractGenerator;
-use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
 use ReflectionClass;
 use ReflectionMethod;
+use Zend\Code\Generator\AbstractGenerator;
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
 
 class Tag extends AbstractGenerator
 {

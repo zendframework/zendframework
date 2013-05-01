@@ -113,7 +113,7 @@ class OpenLdap extends Schema\AbstractItem implements ObjectClassInterface
     /**
      * Gets the objectClass type
      *
-     * @return integer
+     * @return int
      */
     public function getType()
     {

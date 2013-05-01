@@ -59,6 +59,18 @@ class Application implements
     protected $configuration = null;
 
     /**
+     * Default application event listeners
+     *
+     * @var array
+     */
+    protected $defaultListeners = array(
+        'RouteListener',
+        'DispatchListener',
+        'ViewManager',
+        'SendResponseListener',
+    );
+
+    /**
      * MVC event token
      * @var MvcEvent
      */
@@ -118,17 +130,19 @@ class Application implements
      * router. Attaches the ViewManager as a listener. Triggers the bootstrap
      * event.
      *
+     * @param array $listeners List of listeners to attach.
      * @return Application
      */
-    public function bootstrap()
+    public function bootstrap(array $listeners = array())
     {
         $serviceManager = $this->serviceManager;
         $events         = $this->getEventManager();
 
-        $events->attach($serviceManager->get('RouteListener'));
-        $events->attach($serviceManager->get('DispatchListener'));
-        $events->attach($serviceManager->get('ViewManager'));
-        $events->attach($serviceManager->get('SendResponseListener'));
+        $listeners = array_unique(array_merge($this->defaultListeners, $listeners));
+
+        foreach ($listeners as $listener) {
+            $events->attach($serviceManager->get($listener));
+        }
 
         // Setup MVC Event
         $this->event = $event  = new MvcEvent();
@@ -233,10 +247,11 @@ class Application implements
     public static function init($configuration = array())
     {
         $smConfig = isset($configuration['service_manager']) ? $configuration['service_manager'] : array();
+        $listeners = isset($configuration['listeners']) ? $configuration['listeners'] : array();
         $serviceManager = new ServiceManager(new Service\ServiceManagerConfig($smConfig));
         $serviceManager->setService('ApplicationConfig', $configuration);
         $serviceManager->get('ModuleManager')->loadModules();
-        return $serviceManager->get('Application')->bootstrap();
+        return $serviceManager->get('Application')->bootstrap($listeners);
     }
 
     /**

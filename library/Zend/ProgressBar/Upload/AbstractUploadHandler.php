@@ -159,14 +159,14 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
 
     /**
      * @param  string $id
-     * @return array|boolean
+     * @return array|bool
      */
     abstract protected function getUploadProgress($id);
 
     /**
      * Returns the formatted size
      *
-     * @param  integer $size
+     * @param  int $size
      * @return string
      */
     protected function toByteString($size)

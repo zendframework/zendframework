@@ -13,8 +13,8 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
-use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\ResultSet\ResultSetInterface;
 
 class DbSelect implements AdapterInterface
 {
@@ -39,7 +39,7 @@ class DbSelect implements AdapterInterface
     /**
      * Total item count
      *
-     * @var integer
+     * @var int
      */
     protected $rowCount = null;
 
@@ -72,8 +72,8 @@ class DbSelect implements AdapterInterface
     /**
      * Returns an array of items for a page.
      *
-     * @param  integer $offset           Page offset
-     * @param  integer $itemCountPerPage Number of items per page
+     * @param  int $offset           Page offset
+     * @param  int $itemCountPerPage Number of items per page
      * @return array
      */
     public function getItems($offset, $itemCountPerPage)
@@ -94,7 +94,7 @@ class DbSelect implements AdapterInterface
     /**
      * Returns the total number of rows in the result set.
      *
-     * @return integer
+     * @return int
      */
     public function count()
     {

@@ -49,7 +49,7 @@ class Postnet extends AbstractObject
 
     /**
      * Width of the barcode (in pixels)
-     * @return integer
+     * @return int
      */
     protected function calculateBarcodeWidth()
     {
@@ -76,21 +76,21 @@ class Postnet extends AbstractObject
         $barcodeTable = array();
 
         // Start character (1)
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
 
         // Text to encode
         $textTable = str_split($this->getText());
         foreach ($textTable as $char) {
             $bars = str_split($this->codingMap[$char]);
             foreach ($bars as $b) {
-                $barcodeTable[] = array(1 , $this->barThinWidth , 0.5 - $b * 0.5 , 1);
-                $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
+                $barcodeTable[] = array(1, $this->barThinWidth, 0.5 - $b * 0.5, 1);
+                $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
             }
         }
 
         // Stop character (1)
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
         return $barcodeTable;
     }
 

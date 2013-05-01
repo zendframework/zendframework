@@ -30,7 +30,6 @@ class Xterm256
      * Populate color property with X11-formatted equivalent
      *
      * @param mixed $color
-     * @return void
      */
     protected function __construct($color = null)
     {

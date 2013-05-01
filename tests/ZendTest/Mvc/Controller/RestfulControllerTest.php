@@ -11,6 +11,7 @@
 namespace ZendTest\Mvc\Controller;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use ReflectionObject;
 use stdClass;
 use Zend\EventManager\SharedEventManager;
 use Zend\Http\Response;
@@ -393,5 +394,34 @@ class RestfulControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertInstanceOf('Zend\Http\Response', $result);
         $this->assertEquals(405, $result->getStatusCode());
+    }
+
+    public function testIdentifierNameDefaultsToId()
+    {
+        $this->assertEquals('id', $this->controller->getIdentifierName());
+    }
+
+    public function testCanSetIdentifierName()
+    {
+        $this->controller->setIdentifierName('name');
+        $this->assertEquals('name', $this->controller->getIdentifierName());
+    }
+
+    public function testUsesConfiguredIdentifierNameToGetIdentifier()
+    {
+        $r = new ReflectionObject($this->controller);
+        $getIdentifier = $r->getMethod('getIdentifier');
+        $getIdentifier->setAccessible(true);
+
+        $this->controller->setIdentifierName('name');
+
+        $this->routeMatch->setParam('name', 'foo');
+        $result = $getIdentifier->invoke($this->controller, $this->routeMatch, $this->request);
+        $this->assertEquals('foo', $result);
+
+        $this->routeMatch->setParam('name', false);
+        $this->request->getQuery()->set('name', 'bar');
+        $result = $getIdentifier->invoke($this->controller, $this->routeMatch, $this->request);
+        $this->assertEquals('bar', $result);
     }
 }

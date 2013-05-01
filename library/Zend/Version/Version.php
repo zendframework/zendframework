@@ -19,7 +19,7 @@ final class Version
     /**
      * Zend Framework version identification - see compareVersion()
      */
-    const VERSION = '2.1.6dev';
+    const VERSION = '2.2.0dev';
 
     /**
      * Github Service Identifier for version information is retreived from
@@ -73,7 +73,7 @@ final class Version
      * @param string $service Version Service with which to retrieve the version
      * @return string
      */
-    public static function getLatest($service = self::VERSION_SERVICE_GITHUB)
+    public static function getLatest($service = self::VERSION_SERVICE_ZEND)
     {
         if (null === static::$latestVersion) {
             static::$latestVersion = 'not available';

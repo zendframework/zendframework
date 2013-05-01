@@ -124,6 +124,7 @@ class ValidatorPluginManager extends AbstractPluginManager
     {
         parent::__construct($configuration);
         $this->addInitializer(array($this, 'injectTranslator'));
+        $this->addInitializer(array($this, 'injectValidatorPluginManager'));
     }
 
     /**
@@ -139,6 +140,19 @@ class ValidatorPluginManager extends AbstractPluginManager
             if ($locator && $locator->has('translator')) {
                 $validator->setTranslator($locator->get('translator'));
             }
+        }
+    }
+
+    /**
+     * Inject a validator plugin manager
+     *
+     * @param $validator
+     * @return void
+     */
+    public function injectValidatorPluginManager($validator)
+    {
+        if ($validator instanceof ValidatorPluginManagerAwareInterface) {
+            $validator->setValidatorPluginManager($this);
         }
     }
 

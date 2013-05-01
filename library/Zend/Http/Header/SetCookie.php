@@ -37,14 +37,14 @@ class SetCookie implements MultipleHeaderInterface
     /**
      * Version
      *
-     * @var integer
+     * @var int
      */
     protected $version = null;
 
     /**
      * Max Age
      *
-     * @var integer
+     * @var int
      */
     protected $maxAge = null;
 
@@ -317,7 +317,7 @@ class SetCookie implements MultipleHeaderInterface
     /**
      * Set version
      *
-     * @param integer $version
+     * @param int $version
      * @throws Exception\InvalidArgumentException
      */
     public function setVersion($version)
@@ -331,7 +331,7 @@ class SetCookie implements MultipleHeaderInterface
     /**
      * Get version
      *
-     * @return integer
+     * @return int
      */
     public function getVersion()
     {
@@ -341,7 +341,7 @@ class SetCookie implements MultipleHeaderInterface
     /**
      * Set Max-Age
      *
-     * @param integer $maxAge
+     * @param int $maxAge
      * @throws Exception\InvalidArgumentException
      */
     public function setMaxAge($maxAge)
@@ -355,7 +355,7 @@ class SetCookie implements MultipleHeaderInterface
     /**
      * Get Max-Age
      *
-     * @return integer
+     * @return int
      */
     public function getMaxAge()
     {
@@ -512,9 +512,9 @@ class SetCookie implements MultipleHeaderInterface
      * Checks whether the cookie should be sent or not in a specific scenario
      *
      * @param string|Zend\Uri\Uri $uri URI to check against (secure, domain, path)
-     * @param boolean $matchSessionCookies Whether to send session cookies
+     * @param bool $matchSessionCookies Whether to send session cookies
      * @param int $now Override the current time when checking for expiry time
-     * @return boolean
+     * @return bool
      */
     public function match($uri, $matchSessionCookies = true, $now = null)
     {
@@ -554,7 +554,7 @@ class SetCookie implements MultipleHeaderInterface
      * @param  string $cookieDomain
      * @param  string $host
      *
-     * @return boolean
+     * @return bool
      */
     public static function matchCookieDomain($cookieDomain, $host)
     {
@@ -580,7 +580,7 @@ class SetCookie implements MultipleHeaderInterface
      *
      * @param  string $cookiePath
      * @param  string $path
-     * @return boolean
+     * @return bool
      */
     public static function matchCookiePath($cookiePath, $path)
     {

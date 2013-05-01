@@ -32,7 +32,7 @@ class Codabar extends AbstractObject
 
     /**
      * Width of the barcode (in pixels)
-     * @return integer
+     * @return int
      */
     protected function calculateBarcodeWidth()
     {
@@ -66,9 +66,9 @@ class Codabar extends AbstractObject
             $barcodeChar = str_split($this->codingMap[$char]);
             foreach ($barcodeChar as $c) {
                 // visible, width, top, length
-                $barcodeTable[] = array($c , $this->barThinWidth , 0 , 1);
+                $barcodeTable[] = array($c, $this->barThinWidth, 0, 1);
             }
-            $barcodeTable[] = array(0 , $this->barThinWidth);
+            $barcodeTable[] = array(0, $this->barThinWidth);
         }
         return $barcodeTable;
     }

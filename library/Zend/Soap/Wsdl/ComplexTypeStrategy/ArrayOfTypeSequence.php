@@ -9,15 +9,15 @@
 
 namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
-/**
- * Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence
- */
+use Zend\Soap\Wsdl;
+
 class ArrayOfTypeSequence extends DefaultComplexType
 {
     /**
-     * Add an unbounded ArrayOfType based on the xsd:sequence syntax if type[] is detected in return value doc comment.
+     * Add an unbounded ArrayOfType based on the xsd:sequence syntax if
+     * type[] is detected in return value doc comment.
      *
-     * @param string $type
+     * @param  string $type
      * @return string tns:xsd-type
      */
     public function addComplexType($type)
@@ -26,6 +26,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
 
         if ($nestedCounter > 0) {
             $singularType = $this->_getSingularType($type);
+            $complexType = '';
 
             for ($i = 1; $i <= $nestedCounter; $i++) {
                 $complexType    = $this->_getTypeBasedOnNestingLevel($singularType, $i);
@@ -36,17 +37,20 @@ class ArrayOfTypeSequence extends DefaultComplexType
             }
 
             return $complexType;
-        } elseif (($soapType = $this->scanRegisteredTypes($type)) !== null) {
+        }
+
+        if (($soapType = $this->scanRegisteredTypes($type)) !== null) {
             // Existing complex type
             return $soapType;
-        } else {
-            // New singular complex type
-            return parent::addComplexType($type);
         }
+
+        // New singular complex type
+        return parent::addComplexType($type);
     }
 
     /**
-     * Return the ArrayOf or simple type name based on the singular xsdtype and the nesting level
+     * Return the ArrayOf or simple type name based on the singular xsdtype
+     * and the nesting level
      *
      * @param  string $singularType
      * @param  int    $level
@@ -59,7 +63,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
             return $this->getContext()->getType($singularType);
         }
 
-        return 'tns:' . str_repeat('ArrayOf', $level) . ucfirst($this->getContext()->translateType($singularType));
+        return Wsdl::TYPES_NS . ':' . str_repeat('ArrayOf', $level) . ucfirst($this->getContext()->translateType($singularType));
     }
 
     /**
@@ -77,7 +81,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
      * Return the array nesting level based on the type name
      *
      * @param  string $type
-     * @return integer
+     * @return int
      */
     protected function _getNestedCount($type)
     {
@@ -90,7 +94,6 @@ class ArrayOfTypeSequence extends DefaultComplexType
      * @param  string $arrayType      Array type name (e.g. 'tns:ArrayOfArrayOfInt')
      * @param  string $childType      Qualified array items type (e.g. 'xsd:int', 'tns:ArrayOfInt')
      * @param  string $phpArrayType   PHP type (e.g. 'int[][]', '\MyNamespace\MyClassName[][][]')
-     * @return void
      */
     protected function _addSequenceType($arrayType, $childType, $phpArrayType)
     {
@@ -106,20 +109,20 @@ class ArrayOfTypeSequence extends DefaultComplexType
 
         $arrayTypeName = substr($arrayType, strpos($arrayType, ':') + 1);
 
-        $complexType = $dom->createElement('xsd:complexType');
+        $complexType = $dom->createElementNS(Wsdl::XSD_NS_URI, 'complexType');
+        $this->getContext()->getSchema()->appendChild($complexType);
+
         $complexType->setAttribute('name', $arrayTypeName);
 
-        $sequence = $dom->createElement('xsd:sequence');
+        $sequence = $dom->createElementNS(Wsdl::XSD_NS_URI, 'sequence');
+        $complexType->appendChild($sequence);
 
-        $element = $dom->createElement('xsd:element');
+        $element = $dom->createElementNS(Wsdl::XSD_NS_URI, 'element');
+        $sequence->appendChild($element);
+
         $element->setAttribute('name', 'item');
         $element->setAttribute('type', $childType);
         $element->setAttribute('minOccurs', 0);
         $element->setAttribute('maxOccurs', 'unbounded');
-        $sequence->appendChild($element);
-
-        $complexType->appendChild($sequence);
-
-        $this->getContext()->getSchema()->appendChild($complexType);
     }
 }

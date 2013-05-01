@@ -181,4 +181,34 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
             )
         ));
     }
+
+    public function testCanSetLiteralParameterThroughConstructor()
+    {
+        $validator = new Identical(array('token' => 'foo', 'literal' => true));
+        // Default is false
+        $validator->setLiteral(true);
+        $this->assertTrue($validator->getLiteral());
+    }
+
+    public function testLiteralParameterDoesNotAffectValidationWhenNoContextIsProvided()
+    {
+        $this->validator->setToken(array('foo' => 'bar'));
+
+        $this->validator->setLiteral(false);
+        $this->assertTrue($this->validator->isValid(array('foo' => 'bar')));
+
+        $this->validator->setLiteral(true);
+        $this->assertTrue($this->validator->isValid(array('foo' => 'bar')));
+    }
+
+    public function testLiteralParameterWorksWhenContextIsProvided()
+    {
+        $this->validator->setToken(array('foo' => 'bar'));
+        $this->validator->setLiteral(true);
+
+        $this->assertTrue($this->validator->isValid(
+            array('foo' => 'bar'),
+            array('foo' => 'baz') // Provide a context to make sure the literal parameter will work
+        ));
+    }
 }

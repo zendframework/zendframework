@@ -79,10 +79,10 @@ abstract class AbstractAdapter extends AbstractValidator implements AdapterInter
             return $this;
         }
 
-        $method = 'set' . ucfirst ($key);
-        if (method_exists ($this, $method)) {
+        $method = 'set' . ucfirst($key);
+        if (method_exists($this, $method)) {
             // Setter exists; use it
-            $this->$method ($value);
+            $this->$method($value);
             $this->options[$key] = $value;
         } elseif (property_exists($this, $key)) {
             // Assume it's metadata

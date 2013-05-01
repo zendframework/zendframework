@@ -22,13 +22,13 @@
 namespace Zend\Mvc\Router\Console;
 
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\RequestInterface as Request;
-use Zend\Mvc\Router\Exception;
 use Zend\Console\Request as ConsoleRequest;
 use Zend\Filter\FilterChain;
-use Zend\Validator\ValidatorChain;
 use Zend\Mvc\Exception\InvalidArgumentException;
+use Zend\Mvc\Router\Exception;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Validator\ValidatorChain;
 
 /**
  * Segment route.
@@ -462,7 +462,7 @@ class Simple implements RouteInterface
              */
             elseif (preg_match('/\G\[(?P<name>[a-z0-9][a-zA-Z0-9\_\-]*?)\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
-                    'name'       => strtolower( $m['name'] ),
+                    'name'       => strtolower($m['name']),
                     'literal'    => false,
                     'required'   => false,
                     'positional' => true,
@@ -475,7 +475,7 @@ class Simple implements RouteInterface
              */
             elseif (preg_match('/\G\[ *\<(?P<name>[a-z0-9][a-zA-Z0-9\_\-]*?)\> *\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
-                    'name'       => strtolower( $m['name'] ),
+                    'name'       => strtolower($m['name']),
                     'literal'    => false,
                     'required'   => false,
                     'positional' => true,
@@ -501,7 +501,7 @@ class Simple implements RouteInterface
              */
             elseif (preg_match('/\G(?P<name>[A-Z][a-zA-Z0-9\_\-]*?)(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
-                    'name'       => strtolower( $m['name'] ),
+                    'name'       => strtolower($m['name']),
                     'literal'    => false,
                     'required'   => true,
                     'positional' => true,
@@ -522,7 +522,7 @@ class Simple implements RouteInterface
                 );
             } else {
                 throw new Exception\InvalidArgumentException(
-                    'Cannot understand Console route at "' . substr( $def, $pos ) . '"'
+                    'Cannot understand Console route at "' . substr($def, $pos) . '"'
                 );
             }
 
@@ -701,7 +701,7 @@ class Simple implements RouteInterface
                 } else {
                     foreach ($part['alternatives'] as $alt) {
                         if ($alt === $matchedName && !isset($matches[$alt])) {
-                            $matches[$alt] = true;
+                            $matches[$alt] = isset($this->defaults[$alt])? $this->defaults[$alt] : true;
                         } elseif (!isset($matches[$alt])) {
                             $matches[$alt] = false;
                         }
@@ -768,19 +768,22 @@ class Simple implements RouteInterface
              */
             if ($part['hasValue']) {
                 $matches[$part['name']] = $value;
-
             } elseif (isset($part['alternatives'])) {
                 // from all alternativesm set matching parameter to TRUE and the rest to FALSE
                 foreach ($part['alternatives'] as $alt) {
-                    $matches[$alt] = $alt == $value;
+                    if ($alt == $value) {
+                        $matches[$alt] = isset($this->defaults[$alt])? $this->defaults[$alt] : true;
+                    } else {
+                        $matches[$alt] = false;
+                    }
                 }
 
                 // set alternatives group value
                 $matches[$part['name']] = $value;
-
-            } else {
-                // set matching parameter flag to true
-                $matches[$part['name']] = true;
+            } elseif (!$part['required']) {
+                // set optional parameter flag
+                $name = $part['name'];
+                $matches[$name] = isset($this->defaults[$name])? $this->defaults[$name] : true;
             }
 
             /**
@@ -797,7 +800,26 @@ class Simple implements RouteInterface
             return null; // there are extraneous params that were not consumed
         }
 
-        return new RouteMatch(array_replace($matches, $this->defaults));
+        /**
+         * Any optional flags that were not entered have value false
+         */
+        foreach ($this->parts as &$part) {
+            if (!$part['required'] && !$part['hasValue']) {
+                if (!isset($matches[$part['name']])) {
+                    $matches[$part['name']] = false;
+                }
+                // unset alternatives also should be false
+                if (isset($part['alternatives'])) {
+                    foreach ($part['alternatives'] as $alt) {
+                        if (!isset($matches[$alt])) {
+                            $matches[$alt] = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return new RouteMatch(array_replace($this->defaults, $matches));
     }
 
     /**

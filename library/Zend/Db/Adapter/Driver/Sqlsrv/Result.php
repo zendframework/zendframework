@@ -32,7 +32,7 @@ class Result implements \Iterator, ResultInterface
 
     /**
      *
-     * @var integer
+     * @var int
      */
     protected $position = -1;
 
@@ -160,7 +160,7 @@ class Result implements \Iterator, ResultInterface
     /**
      * Count
      *
-     * @return integer
+     * @return int
      */
     public function count()
     {
@@ -191,7 +191,7 @@ class Result implements \Iterator, ResultInterface
     /**
      * Get affected rows
      *
-     * @return integer
+     * @return int
      */
     public function getAffectedRows()
     {

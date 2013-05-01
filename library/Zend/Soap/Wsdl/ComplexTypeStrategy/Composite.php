@@ -13,29 +13,23 @@ use Zend\Soap\Exception;
 use Zend\Soap\Wsdl;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
 
-/**
- * Zend_Soap_Wsdl_Strategy_Composite
- */
 class Composite implements ComplexTypeStrategy
 {
     /**
      * Typemap of Complex Type => Strategy pairs.
-     *
      * @var array
      */
     protected $typeMap = array();
 
     /**
      * Default Strategy of this composite
-     *
      * @var string|ComplexTypeStrategy
      */
     protected $defaultStrategy;
 
     /**
      * Context WSDL file that this composite serves
-     *
-     * @var \Zend\Soap\Wsdl|null
+     * @var Wsdl|null
      */
     protected $context;
 
@@ -45,21 +39,24 @@ class Composite implements ComplexTypeStrategy
      * @param array $typeMap
      * @param string|ComplexTypeStrategy $defaultStrategy
      */
-    public function __construct(array $typeMap=array(), $defaultStrategy='\Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType')
-    {
-        foreach ($typeMap AS $type => $strategy) {
+    public function __construct(
+        array $typeMap = array(),
+        $defaultStrategy = 'Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType'
+    ) {
+        foreach ($typeMap as $type => $strategy) {
             $this->connectTypeToStrategy($type, $strategy);
         }
+
         $this->defaultStrategy = $defaultStrategy;
     }
 
     /**
      * Connect a complex type to a given strategy.
      *
-     * @throws Exception\InvalidArgumentException
      * @param  string $type
      * @param  string|ComplexTypeStrategy $strategy
      * @return Composite
+     * @throws Exception\InvalidArgumentException
      */
     public function connectTypeToStrategy($type, $strategy)
     {
@@ -73,8 +70,8 @@ class Composite implements ComplexTypeStrategy
     /**
      * Return default strategy of this composite
      *
-     * @throws  Exception\InvalidArgumentException
      * @return ComplexTypeStrategy
+     * @throws Exception\InvalidArgumentException
      */
     public function getDefaultStrategy()
     {
@@ -82,7 +79,7 @@ class Composite implements ComplexTypeStrategy
         if (is_string($strategy) && class_exists($strategy)) {
             $strategy = new $strategy;
         }
-        if ( !($strategy instanceof ComplexTypeStrategy) ) {
+        if (!($strategy instanceof ComplexTypeStrategy)) {
             throw new Exception\InvalidArgumentException(
                 'Default Strategy for Complex Types is not a valid strategy object.'
             );
@@ -94,9 +91,9 @@ class Composite implements ComplexTypeStrategy
     /**
      * Return specific strategy or the default strategy of this type.
      *
-     * @throws  Exception\InvalidArgumentException
-     * @param  string $type
+     * @param string $type
      * @return ComplexTypeStrategy
+     * @throws Exception\InvalidArgumentException
      */
     public function getStrategyOfType($type)
     {
@@ -107,7 +104,7 @@ class Composite implements ComplexTypeStrategy
                 $strategy = new $strategy();
             }
 
-            if ( !($strategy instanceof ComplexTypeStrategy) ) {
+            if (!($strategy instanceof ComplexTypeStrategy)) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'Strategy for Complex Type "%s" is not a valid strategy object.',
                     $type
@@ -117,13 +114,14 @@ class Composite implements ComplexTypeStrategy
         } else {
             $strategy = $this->getDefaultStrategy();
         }
+
         return $strategy;
     }
 
     /**
      * Method accepts the current WSDL context file.
      *
-     * @param \Zend\Soap\Wsdl $context
+     * @param  Wsdl $context
      * @return Composite
      */
     public function setContext(Wsdl $context)
@@ -135,13 +133,13 @@ class Composite implements ComplexTypeStrategy
     /**
      * Create a complex type based on a strategy
      *
-     * @throws  Exception\InvalidArgumentException
      * @param  string $type
      * @return string XSD type
+     * @throws Exception\InvalidArgumentException
      */
     public function addComplexType($type)
     {
-        if (!($this->context instanceof Wsdl) ) {
+        if (!($this->context instanceof Wsdl)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Cannot add complex type "%s", no context is set for this composite strategy.',
                 $type
@@ -150,6 +148,7 @@ class Composite implements ComplexTypeStrategy
 
         $strategy = $this->getStrategyOfType($type);
         $strategy->setContext($this->context);
+
         return $strategy->addComplexType($type);
     }
 }

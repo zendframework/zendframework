@@ -282,7 +282,7 @@ class Client implements Stdlib\DispatchableInterface
     /**
      * Get the redirections count
      *
-     * @return integer
+     * @return int
      */
     public function getRedirectionsCount()
     {
@@ -298,7 +298,17 @@ class Client implements Stdlib\DispatchableInterface
     public function setUri($uri)
     {
         if (!empty($uri)) {
+            // remember host of last request
+            $lastHost = $this->getRequest()->getUri()->getHost();
             $this->getRequest()->setUri($uri);
+
+            // if host changed, the HTTP authentication should be cleared for security
+            // reasons, see #4215 for a discussion - currently authentication is also
+            // cleared for peer subdomains due to technical limits
+            $nextHost = $this->getRequest()->getUri()->getHost();
+            if (!preg_match('/' . preg_quote($lastHost, '/') . '$/i', $nextHost)) {
+                $this->clearAuth();
+            }
 
             // Set auth if username and password has been specified in the uri
             if ($this->getUri()->getUser() && $this->getUri()->getPassword()) {
@@ -441,6 +451,37 @@ class Client implements Stdlib\DispatchableInterface
     public function setParameterGet(array $query)
     {
         $this->getRequest()->getQuery()->fromArray($query);
+        return $this;
+    }
+
+    /**
+     * Reset all the HTTP parameters (request, response, etc)
+     *
+     * @param  bool   $clearCookies  Also clear all valid cookies? (defaults to false)
+     * @param  bool   $clearAuth     Also clear http authentication? (defaults to true)
+     * @return Client
+     */
+    public function resetParameters($clearCookies = false, $clearAuth = true)
+    {
+        $uri = $this->getUri();
+
+        $this->streamName      = null;
+        $this->encType         = null;
+        $this->request         = null;
+        $this->response        = null;
+        $this->lastRawRequest  = null;
+        $this->lastRawResponse = null;
+
+        $this->setUri($uri);
+
+        if ($clearCookies) {
+            $this->clearCookies();
+        }
+
+        if ($clearAuth) {
+            $this->clearAuth();
+        }
+
         return $this;
     }
 
@@ -674,6 +715,14 @@ class Client implements Stdlib\DispatchableInterface
     }
 
     /**
+     * Clear http authentication
+     */
+    public function clearAuth()
+    {
+        $this->auth = array();
+    }
+
+    /**
      * Calculate the response value according to the HTTP authentication type
      *
      * @see http://www.faqs.org/rfcs/rfc2617.html
@@ -726,31 +775,6 @@ class Client implements Stdlib\DispatchableInterface
                 break;
         }
         return $response;
-    }
-
-    /**
-     * Reset all the HTTP parameters (auth,cookies,request, response, etc)
-     *
-     * @param  bool   $clearCookies  Also clear all valid cookies? (defaults to false)
-     * @return Client
-     */
-    public function resetParameters($clearCookies = false)
-    {
-        $uri = $this->getUri();
-
-        $this->auth       = null;
-        $this->streamName = null;
-        $this->encType    = null;
-        $this->request    = null;
-        $this->response   = null;
-
-        $this->setUri($uri);
-
-        if ($clearCookies) {
-            $this->clearCookies();
-        }
-
-        return $this;
     }
 
     /**
@@ -897,13 +921,15 @@ class Client implements Stdlib\DispatchableInterface
                    ((! $this->config['strictredirects']) && ($response->getStatusCode() == 302 ||
                        $response->getStatusCode() == 301))) {
 
-                    $this->resetParameters();
+                    $this->resetParameters(false, false);
                     $this->setMethod(Request::METHOD_GET);
                 }
+
 
                 // If we got a well formed absolute URI
                 if (($scheme = substr($location, 0, 6)) &&
                         ($scheme == 'http:/' || $scheme == 'https:')) {
+                    // setURI() clears parameters if host changed, see #4215
                     $this->setUri($location);
                 } else {
 
@@ -933,10 +959,24 @@ class Client implements Stdlib\DispatchableInterface
                 break;
             }
 
-        } while ($this->redirectCounter < $this->config['maxredirects']);
+        } while ($this->redirectCounter <= $this->config['maxredirects']);
 
         $this->response = $response;
         return $response;
+    }
+
+    /**
+     * Fully reset the HTTP client (auth, cookies, request, response, etc.)
+     *
+     * @return Client
+     */
+    public function reset()
+    {
+       $this->resetParameters();
+       $this->clearAuth();
+       $this->clearCookies();
+
+       return $this;
     }
 
     /**
@@ -1004,7 +1044,7 @@ class Client implements Stdlib\DispatchableInterface
      *
      * @param   string $domain
      * @param   string $path
-     * @param   boolean $secure
+     * @param   bool $secure
      * @return  Header\Cookie|bool
      */
     protected function prepareCookies($domain, $path, $secure)

@@ -19,8 +19,8 @@ namespace Zend\Json;
  * Example:
  * <code>
  * $foo = array(
- *     'integer'  =>9,
- *     'string'   =>'test string',
+ *     'integer'  => 9,
+ *     'string'   => 'test string',
  *     'function' => Zend\Json\Expr(
  *         'function() { window.alert("javascript function encoded by Zend\Json\Json") }'
  *     ),

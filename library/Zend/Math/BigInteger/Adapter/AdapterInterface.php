@@ -20,7 +20,7 @@ interface AdapterInterface
      * Create adapter-specific representation of a big integer
      *
      * @param  string $operand
-     * @param  integer|null $base
+     * @param  int|null $base
      * @return mixed
      */
     public function init($operand, $base = null);

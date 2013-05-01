@@ -209,7 +209,7 @@ class Mcrypt implements SymmetricInterface
     /**
      * Get the maximum key size for the selected cipher and mode of operation
      *
-     * @return integer
+     * @return int
      */
     public function getKeySize()
     {
@@ -374,7 +374,7 @@ class Mcrypt implements SymmetricInterface
     /**
      * Get the salt (IV) size
      *
-     * @return integer
+     * @return int
      */
     public function getSaltSize()
     {
@@ -488,7 +488,7 @@ class Mcrypt implements SymmetricInterface
     /**
      * Get the block size
      *
-     * @return integer
+     * @return int
      */
     public function getBlockSize()
     {

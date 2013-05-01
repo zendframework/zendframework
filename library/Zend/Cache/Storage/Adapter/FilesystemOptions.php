@@ -140,7 +140,7 @@ class FilesystemOptions extends AdapterOptions
                 );
             }
 
-            $cacheDir = rtrim(realpath($cacheDir), \DIRECTORY_SEPARATOR);
+            $cacheDir = rtrim(realpath($cacheDir), DIRECTORY_SEPARATOR);
         } else {
             $cacheDir = sys_get_temp_dir();
         }

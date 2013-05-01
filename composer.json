@@ -12,7 +12,7 @@
         "php": ">=5.3.3"
     },
     "require-dev": {
-        "doctrine/common": ">=2.1",
+        "doctrine/annotations": ">=1.0",
         "ircmaxell/random-lib": "dev-master",
         "ircmaxell/security-lib": "dev-master",
         "ocramius/proxy-manager": "0.3.*",
@@ -20,7 +20,7 @@
     },
     "suggest": {
         "ext-intl": "ext/intl for i18n features (included in default builds of PHP)",
-        "doctrine/common": "Doctrine\\Common >=2.1 for annotation features",
+        "doctrine/annotations": "Doctrine Annotations >=1.0 for annotation features",
         "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable",
         "ocramius/proxy-manager": "ProxyManager to handle lazy initialization of services",
         "pecl-weakref": "Implementation of weak references for Zend\\Stdlib\\CallbackHandler",

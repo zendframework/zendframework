@@ -86,7 +86,9 @@ class ServiceListenerFactory implements FactoryInterface
             'Zend\View\Resolver\ResolverInterface'   => 'ViewResolver',
         ),
         'abstract_factories' => array(
-            'Zend\Form\FormAbstractFactory',
+            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
+            'Zend\Form\FormAbstractServiceFactory',
+            'Zend\Log\LoggerAbstractServiceFactory',
         ),
     );
 

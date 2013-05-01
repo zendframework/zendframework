@@ -7,17 +7,16 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Log;
+namespace Zend\Cache\Service;
 
+use Zend\Cache\StorageFactory;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Logger abstract service factory.
- *
- * Allow to configure multiple loggers for application.
+ * Storage cache factory for multiple caches.
  */
-class LoggerAbstractServiceFactory implements AbstractFactoryInterface
+class StorageCacheAbstractServiceFactory implements AbstractFactoryInterface
 {
     /**
      * @var array
@@ -25,11 +24,11 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
     protected $config;
 
     /**
-     * Configuration key holding logger configuration
+     * Configuration key for cache objects
      *
      * @var string
      */
-    protected $configKey = 'log';
+    protected $configKey = 'caches';
 
     /**
      * @param  ServiceLocatorInterface $services
@@ -44,23 +43,24 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
             return false;
         }
 
-        return isset($config[$requestedName]);
+        return (isset($config[$requestedName]) && is_array($config[$requestedName]));
     }
 
     /**
-     * @param  ServiceLocatorInterface $services
-     * @param  string                  $name
-     * @param  string                  $requestedName
-     * @return Logger
+     * @param  ServiceLocatorInterface              $services
+     * @param  string                               $name
+     * @param  string                               $requestedName
+     * @return \Zend\Cache\Storage\StorageInterface
      */
     public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
-        $config  = $this->getConfig($services);
-        return new Logger($config[$requestedName]);
+        $config = $this->getConfig($services);
+        $config = $config[$requestedName];
+        return StorageFactory::factory($config);
     }
 
     /**
-     * Retrieve configuration for loggers, if any
+     * Retrieve cache configuration, if any
      *
      * @param  ServiceLocatorInterface $services
      * @return array

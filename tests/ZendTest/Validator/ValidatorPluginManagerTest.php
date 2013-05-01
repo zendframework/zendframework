@@ -73,4 +73,10 @@ class ValidatorPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Validator\Exception\RuntimeException');
         $this->validators->get('test');
     }
+
+    public function testInjectedValidatorPluginManager()
+    {
+        $validator = $this->validators->get('explode');
+        $this->assertSame($this->validators, $validator->getValidatorPluginManager());
+    }
 }

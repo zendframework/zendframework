@@ -264,4 +264,45 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests');
         $this->assertEquals('/tests', $this->getApplication()->getRequest()->getRequestUri());
     }
+
+    public function testDefaultDispatchMethod()
+    {
+        $this->dispatch('/tests');
+        $this->assertEquals('GET', $this->getRequest()->getMethod());
+    }
+
+    public function testDispatchMethodSetOnRequest()
+    {
+        $this->getRequest()->setMethod('POST');
+        $this->dispatch('/tests');
+        $this->assertEquals('POST', $this->getRequest()->getMethod());
+    }
+
+    public function testExplicitDispatchMethodOverrideRequestMethod()
+    {
+        $this->getRequest()->setMethod('POST');
+        $this->dispatch('/tests', 'GET');
+        $this->assertEquals('GET', $this->getRequest()->getMethod());
+    }
+
+    public function testPutRequestParams()
+    {
+        $this->dispatch('/tests', 'PUT', array('a' => 1));
+        $this->assertEquals('a=1', $this->getRequest()->getContent());
+    }
+
+    public function testPreserveContentOfPutRequest()
+    {
+        $this->getRequest()->setMethod('PUT');
+        $this->getRequest()->setContent('my content');
+        $this->dispatch('/tests');
+        $this->assertEquals('my content', $this->getRequest()->getContent());
+    }
+
+    public function testExplicityPutParamsOverrideRequestContent()
+    {
+        $this->getRequest()->setContent('my content');
+        $this->dispatch('/tests', 'PUT', array('a' => 1));
+        $this->assertEquals('a=1', $this->getRequest()->getContent());
+    }
 }

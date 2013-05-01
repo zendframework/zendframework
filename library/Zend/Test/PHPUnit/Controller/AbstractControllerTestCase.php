@@ -216,7 +216,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         } elseif ($method == HttpRequest::METHOD_GET) {
             $query = array_merge($query, $params);
         } elseif ($method == HttpRequest::METHOD_PUT) {
-            if (!$content = $request->getContent()){
+            if (count($params) != 0){
                 array_walk($params,
                     function(&$item, $key) { $item = $key . '=' . $item; }
                 );
@@ -250,10 +250,15 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * @param  array|null $params
      * @throws \Exception
      */
-    public function dispatch($url, $method = HttpRequest::METHOD_GET, $params = array())
+    public function dispatch($url, $method = null, $params = array())
     {
-        if ($requestMethod = $this->getRequest()->getMethod()){
+        if ( !isset($method) &&
+             $this->getRequest() instanceof HttpRequest &&
+             $requestMethod = $this->getRequest()->getMethod()
+        ) {
             $method = $requestMethod;
+        } elseif (!isset($method)) {
+            $method = HttpRequest::METHOD_GET;
         }
 
         $this->url($url, $method, $params);

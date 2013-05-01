@@ -2,20 +2,18 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license http://framework.zend.com/license/new-bsd New BSD License
- * @package Zend_Db
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace ZendTest\Db\Sql\Ddl;
 
-use Zend\Db\Sql\Ddl\CreateTable;
 use Zend\Db\Sql\Ddl\Column\Column;
+use Zend\Db\Sql\Ddl\CreateTable;
 
 class CreateTableTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * test object construction
      * @covers Zend\Db\Sql\Ddl\CreateTable::__construct

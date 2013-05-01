@@ -2,9 +2,9 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license http://framework.zend.com/license/new-bsd New BSD License
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Db\Sql\Ddl\Column;
@@ -17,7 +17,7 @@ class Boolean extends Column
     protected $specification = '%s TINYINT NOT NULL';
 
     /**
-     * @param null $name
+     * @param string $name
      */
     public function __construct($name)
     {
@@ -29,16 +29,14 @@ class Boolean extends Column
      */
     public function getExpressionData()
     {
-        $spec = $this->specification;
-
+        $spec   = $this->specification;
         $params = array($this->name);
-        $types = array(self::TYPE_IDENTIFIER);
+        $types  = array(self::TYPE_IDENTIFIER);
 
         return array(array(
             $spec,
             $params,
-            $types
+            $types,
         ));
     }
-
 }

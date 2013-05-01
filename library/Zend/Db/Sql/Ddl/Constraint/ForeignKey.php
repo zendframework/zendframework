@@ -2,10 +2,9 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license http://framework.zend.com/license/new-bsd New BSD License
- * @package Zend_Db
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Db\Sql\Ddl\Constraint;
@@ -15,22 +14,7 @@ class ForeignKey extends AbstractConstraint
     /**
      * @var string
      */
-    protected $specification = 'CONSTRAINT %1$s FOREIGN KEY (%2$s) REFERENCES %3$s (%4$s) ON DELETE %5$s ON UPDATE %6$s';
-
-    /**
-     * @var string
-     */
     protected $name;
-
-    /**
-     * @var string
-     */
-    protected $referenceTable;
-
-    /**
-     * @var string
-     */
-    protected $referenceColumn;
 
     /**
      * @var string
@@ -43,12 +27,27 @@ class ForeignKey extends AbstractConstraint
     protected $onUpdateRule = 'NO ACTION';
 
     /**
+     * @var string
+     */
+    protected $referenceColumn;
+
+    /**
+     * @var string
+     */
+    protected $referenceTable;
+
+    /**
+     * @var string
+     */
+    protected $specification = 'CONSTRAINT %1$s FOREIGN KEY (%2$s) REFERENCES %3$s (%4$s) ON DELETE %5$s ON UPDATE %6$s';
+
+    /**
      * @param array|null|string $name
      * @param string            $column
      * @param string            $referenceTable
      * @param string            $referenceColumn
-     * @param string            $onDeleteRule
-     * @param string            $onUpdateRule
+     * @param null|string       $onDeleteRule
+     * @param null|string       $onUpdateRule
      */
     public function __construct($name, $column, $referenceTable, $referenceColumn, $onDeleteRule = null, $onUpdateRule = null)
     {
@@ -61,13 +60,12 @@ class ForeignKey extends AbstractConstraint
     }
 
     /**
-     * @param string $name
-     * @return $this
+     * @param  string $name
+     * @return self
      */
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -80,13 +78,12 @@ class ForeignKey extends AbstractConstraint
     }
 
     /**
-     * @param string $referenceTable
-     * @return $this
+     * @param  string $referenceTable
+     * @return self
      */
     public function setReferenceTable($referenceTable)
     {
         $this->referenceTable = $referenceTable;
-
         return $this;
     }
 
@@ -99,13 +96,12 @@ class ForeignKey extends AbstractConstraint
     }
 
     /**
-     * @param string $referenceColumn
-     * @return $this
+     * @param  string $referenceColumn
+     * @return self
      */
     public function setReferenceColumn($referenceColumn)
     {
         $this->referenceColumn = $referenceColumn;
-
         return $this;
     }
 
@@ -118,13 +114,12 @@ class ForeignKey extends AbstractConstraint
     }
 
     /**
-     * @param string $onDeleteRule
-     * @return $this
+     * @param  string $onDeleteRule
+     * @return self
      */
     public function setOnDeleteRule($onDeleteRule)
     {
         $this->onDeleteRule = $onDeleteRule;
-
         return $this;
     }
 
@@ -137,13 +132,12 @@ class ForeignKey extends AbstractConstraint
     }
 
     /**
-     * @param string $onUpdateRule
-     * @return $this
+     * @param  string $onUpdateRule
+     * @return self
      */
     public function setOnUpdateRule($onUpdateRule)
     {
         $this->onUpdateRule = $onUpdateRule;
-
         return $this;
     }
 
@@ -168,7 +162,7 @@ class ForeignKey extends AbstractConstraint
                 $this->referenceTable,
                 $this->referenceColumn,
                 $this->onDeleteRule,
-                $this->onUpdateRule
+                $this->onUpdateRule,
             ),
             array(
                 self::TYPE_IDENTIFIER,
@@ -177,9 +171,7 @@ class ForeignKey extends AbstractConstraint
                 self::TYPE_IDENTIFIER,
                 self::TYPE_LITERAL,
                 self::TYPE_LITERAL,
-            )
-
+            ),
         ));
     }
-
 }

@@ -2,9 +2,9 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license http://framework.zend.com/license/new-bsd New BSD License
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Db\Sql\Ddl\Column;
@@ -12,19 +12,9 @@ namespace Zend\Db\Sql\Ddl\Column;
 class Column implements ColumnInterface
 {
     /**
-     * @var string
+     * @var null|string|int
      */
-    protected $specification = '%s %s';
-
-    /**
-     * @var null
-     */
-    protected $name = null;
-
-    /**
-     * @var string
-     */
-    protected $type = 'INTEGER';
+    protected $default = null;
 
     /**
      * @var bool
@@ -32,9 +22,9 @@ class Column implements ColumnInterface
     protected $isNullable = false;
 
     /**
-     * @var null
+     * @var string
      */
-    protected $default = null;
+    protected $name = null;
 
     /**
      * @var array
@@ -42,7 +32,17 @@ class Column implements ColumnInterface
     protected $options = array();
 
     /**
-     * @param null $name
+     * @var string
+     */
+    protected $specification = '%s %s';
+
+    /**
+     * @var string
+     */
+    protected $type = 'INTEGER';
+
+    /**
+     * @param null|string $name
      */
     public function __construct($name = null)
     {
@@ -50,18 +50,17 @@ class Column implements ColumnInterface
     }
 
     /**
-     * @param $name
-     * @return $this
+     * @param  string $name
+     * @return self
      */
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
 
     /**
-     * @return null
+     * @return null|string
      */
     public function getName()
     {
@@ -69,13 +68,12 @@ class Column implements ColumnInterface
     }
 
     /**
-     * @param $nullable
-     * @return $this
+     * @param  bool $nullable
+     * @return self
      */
     public function setNullable($nullable)
     {
         $this->isNullable = (bool) $nullable;
-
         return $this;
     }
 
@@ -88,18 +86,17 @@ class Column implements ColumnInterface
     }
 
     /**
-     * @param $default
-     * @return $this
+     * @param  null|string|int $default
+     * @return self
      */
     public function setDefault($default)
     {
         $this->default = $default;
-
         return $this;
     }
 
     /**
-     * @return null
+     * @return null|string|int
      */
     public function getDefault()
     {
@@ -107,25 +104,23 @@ class Column implements ColumnInterface
     }
 
     /**
-     * @param array $options
-     * @return $this
+     * @param  array $options
+     * @return self
      */
     public function setOptions(array $options)
     {
         $this->options = $options;
-
         return $this;
     }
 
     /**
-     * @param $name
-     * @param $value
-     * @return $this
+     * @param  string $name
+     * @param  string $value
+     * @return self
      */
     public function setOption($name, $value)
     {
         $this->options[$name] = $value;
-
         return $this;
     }
 
@@ -144,7 +139,7 @@ class Column implements ColumnInterface
     {
         $spec = $this->specification;
 
-        $params = array();
+        $params   = array();
         $params[] = $this->name;
         $params[] = $this->type;
 
@@ -155,17 +150,15 @@ class Column implements ColumnInterface
         }
 
         if ($this->default !== null) {
-            $spec .= ' DEFAULT %s';
+            $spec    .= ' DEFAULT %s';
             $params[] = $this->default;
-            $types[] = self::TYPE_VALUE;
+            $types[]  = self::TYPE_VALUE;
         }
 
         return array(array(
             $spec,
             $params,
-            $types
+            $types,
         ));
-
     }
-
 }

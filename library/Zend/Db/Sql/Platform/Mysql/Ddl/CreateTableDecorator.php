@@ -11,8 +11,8 @@ namespace Zend\Db\Sql\Platform\Mysql\Ddl;
 
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Platform\PlatformInterface;
-use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
 use Zend\Db\Sql\Ddl\CreateTable;
+use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
 
 class CreateTableDecorator extends CreateTable implements PlatformDecoratorInterface
 {
@@ -21,11 +21,18 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
      */
     protected $createTable;
 
+    /**
+     * @param CreateTable $subject
+     */
     public function setSubject($subject)
     {
         $this->createTable = $subject;
     }
 
+    /**
+     * @param  null|PlatformInterface $platform
+     * @return string
+     */
     public function getSqlString(PlatformInterface $platform = null)
     {
         // localize variables
@@ -39,12 +46,12 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
     {
         $sqls = array();
         foreach ($this->columns as $i => $column) {
-            /** @var \Zend\Db\Sql\Ddl\Column\ColumnInterface $column */
             $stmtContainer = $this->processExpression($column, $platform);
-            $sql = $stmtContainer->getSql();
+            $sql           = $stmtContainer->getSql();
             $columnOptions = $column->getOptions();
+
             foreach ($columnOptions as $coName => $coValue) {
-                switch(strtolower(str_replace(array('-', '_', ' '), '', $coName))) {
+                switch (strtolower(str_replace(array('-', '_', ' '), '', $coName))) {
                     case 'identity':
                     case 'serial':
                     case 'autoincrement':
@@ -77,7 +84,4 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
         }
         return array($sqls);
     }
-
-
-
 }

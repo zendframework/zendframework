@@ -2,9 +2,9 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license http://framework.zend.com/license/new-bsd New BSD License
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Db\Sql\Ddl\Column;
@@ -12,18 +12,18 @@ namespace Zend\Db\Sql\Ddl\Column;
 class Blob extends Column
 {
     /**
-     * @var string Change type to blob
-     */
-    protected $type = 'BLOB';
-
-    /**
      * @var int
      */
     protected $length;
 
     /**
-     * @param null $name
-     * @param $length
+     * @var string Change type to blob
+     */
+    protected $type = 'BLOB';
+
+    /**
+     * @param null  $name
+     * @param int   $length
      * @param bool  $nullable
      * @param null  $default
      * @param array $options
@@ -38,13 +38,12 @@ class Blob extends Column
     }
 
     /**
-     * @param $length
-     * @return $this
+     * @param  int $length
+     * @return self
      */
     public function setLength($length)
     {
         $this->length = $length;
-
         return $this;
     }
 
@@ -63,7 +62,7 @@ class Blob extends Column
     {
         $spec = $this->specification;
 
-        $params = array();
+        $params   = array();
         $params[] = $this->name;
         $params[] = $this->type;
 
@@ -78,16 +77,15 @@ class Blob extends Column
         }
 
         if ($this->default !== null) {
-            $spec .= ' DEFAULT %s';
+            $spec    .= ' DEFAULT %s';
             $params[] = $this->default;
-            $types[] = self::TYPE_VALUE;
+            $types[]  = self::TYPE_VALUE;
         }
 
         return array(array(
             $spec,
             $params,
-            $types
+            $types,
         ));
-
     }
 }

@@ -2,9 +2,9 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license http://framework.zend.com/license/new-bsd New BSD License
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Db\Sql\Ddl\Column;
@@ -12,9 +12,9 @@ namespace Zend\Db\Sql\Ddl\Column;
 class Float extends Column
 {
     /**
-     * @var string
+     * @var int
      */
-    protected $specification = '%s DECIMAL(%s) %s %s';
+    protected $decimal;
 
     /**
      * @var int
@@ -22,19 +22,19 @@ class Float extends Column
     protected $digits;
 
     /**
-     * @var int
+     * @var string
      */
-    protected $decimal;
+    protected $specification = '%s DECIMAL(%s) %s %s';
 
     /**
-     * @param null $name
-     * @param $digits
-     * @param $decimal
+     * @param null|string $name
+     * @param int $digits
+     * @param int $decimal
      */
     public function __construct($name, $digits, $decimal)
     {
-        $this->name = $name;
-        $this->digits = $digits;
+        $this->name    = $name;
+        $this->digits  = $digits;
         $this->decimal = $decimal;
     }
 
@@ -43,26 +43,24 @@ class Float extends Column
      */
     public function getExpressionData()
     {
-        $spec = $this->specification;
-
+        $spec   = $this->specification;
         $params = array();
 
-        $types = array(self::TYPE_IDENTIFIER, self::TYPE_LITERAL);
-        $params[] = $this->name;
-        $params[] = $this->digits;
+        $types      = array(self::TYPE_IDENTIFIER, self::TYPE_LITERAL);
+        $params[]   = $this->name;
+        $params[]   = $this->digits;
         $params[1] .= ', ' . $this->decimal;
 
-        $types[] = self::TYPE_LITERAL;
+        $types[]  = self::TYPE_LITERAL;
         $params[] = (!$this->isNullable) ? 'NOT NULL' : '';
 
-        $types[] = ($this->default !== null) ? self::TYPE_VALUE : self::TYPE_LITERAL;
+        $types[]  = ($this->default !== null) ? self::TYPE_VALUE : self::TYPE_LITERAL;
         $params[] = ($this->default !== null) ? $this->default : '';
 
         return array(array(
             $spec,
             $params,
-            $types
+            $types,
         ));
     }
-
 }

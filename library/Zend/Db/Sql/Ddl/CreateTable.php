@@ -2,23 +2,37 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license http://framework.zend.com/license/new-bsd New BSD License
- * @package Zend_Db
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Db\Sql\Ddl;
 
 use Zend\Db\Adapter\Platform\PlatformInterface;
-use Zend\Db\Sql\AbstractSql;
 use Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform;
+use Zend\Db\Sql\AbstractSql;
 
 class CreateTable extends AbstractSql implements SqlInterface
 {
-    const TABLE = 'table';
-    const COLUMNS = 'columns';
+    const COLUMNS     = 'columns';
     const CONSTRAINTS = 'constraints';
+    const TABLE       = 'table';
+
+    /**
+     * @var array
+     */
+    protected $columns = array();
+
+    /**
+     * @var array
+     */
+    protected $constraints = array();
+
+    /**
+     * @var bool
+     */
+    protected $isTemporary = false;
 
     /**
      * Specifications for Sql String generation
@@ -35,28 +49,13 @@ class CreateTable extends AbstractSql implements SqlInterface
             "\n    %1\$s" => array(
                 array(1 => '%1$s', 'combinedby' => ",\n    ")
             )
-        )
+        ),
     );
-
-    /**
-     * @var bool
-     */
-    protected $isTemporary = false;
 
     /**
      * @var string
      */
     protected $table = '';
-
-    /**
-     * @var array
-     */
-    protected $columns = array();
-
-    /**
-     * @var array
-     */
-    protected $constraints = array();
 
     /**
      * @param string $table
@@ -69,13 +68,12 @@ class CreateTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param $temporary
-     * @return $this
+     * @param  bool $temporary
+     * @return self
      */
     public function setTemporary($temporary)
     {
         $this->isTemporary = (bool) $temporary;
-
         return $this;
     }
 
@@ -88,35 +86,32 @@ class CreateTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param $name
-     * @return $this
+     * @param  string $name
+     * @return self
      */
     public function setTable($name)
     {
         $this->table = $name;
-
         return $this;
     }
 
     /**
-     * @param Column\ColumnInterface $column
-     * @return $this
+     * @param  Column\ColumnInterface $column
+     * @return self
      */
     public function addColumn(Column\ColumnInterface $column)
     {
         $this->columns[] = $column;
-
         return $this;
     }
 
     /**
-     * @param Constraint\ConstraintInterface $constraint
-     * @return $this
+     * @param  Constraint\ConstraintInterface $constraint
+     * @return self
      */
     public function addConstraint(Constraint\ConstraintInterface $constraint)
     {
         $this->constraints[] = $constraint;
-
         return $this;
     }
 
@@ -127,9 +122,9 @@ class CreateTable extends AbstractSql implements SqlInterface
     public function getRawState($key = null)
     {
         $rawState = array(
-            self::TABLE      => $this->table,
-            self::COLUMNS    => $this->columns,
+            self::COLUMNS     => $this->columns,
             self::CONSTRAINTS => $this->constraints,
+            self::TABLE       => $this->table,
         );
 
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
@@ -144,7 +139,7 @@ class CreateTable extends AbstractSql implements SqlInterface
         // get platform, or create default
         $adapterPlatform = ($adapterPlatform) ?: new AdapterSql92Platform;
 
-        $sqls = array();
+        $sqls       = array();
         $parameters = array();
 
         foreach ($this->specifications as $name => $specification) {
@@ -152,11 +147,28 @@ class CreateTable extends AbstractSql implements SqlInterface
                 $sqls[] = $specification;
                 continue;
             }
-            $parameters[$name] = $this->{'process' . $name}($adapterPlatform, null, null, $sqls, $parameters);
-            if ($specification && is_array($parameters[$name]) && ($parameters[$name] != array(array()))) {
-                $sqls[$name] = $this->createSqlFromSpecificationAndParameters($specification, $parameters[$name]);
+
+            $parameters[$name] = $this->{'process' . $name}(
+                $adapterPlatform,
+                null,
+                null,
+                $sqls,
+                $parameters
+            );
+
+            if ($specification
+                && is_array($parameters[$name])
+                && ($parameters[$name] != array(array()))
+            ) {
+                $sqls[$name] = $this->createSqlFromSpecificationAndParameters(
+                    $specification,
+                    $parameters[$name]
+                );
             }
-            if (stripos($name, 'table') === false && $parameters[$name] !== array(array())) {
+
+            if (stripos($name, 'table') === false
+                && $parameters[$name] !== array(array())
+            ) {
                 $sqls[] = ",\n";
             }
         }
@@ -178,7 +190,6 @@ class CreateTable extends AbstractSql implements SqlInterface
             $ret[] = 'TEMPORARY';
         }
         $ret[] = $adapterPlatform->quoteIdentifier($this->table);
-
         return $ret;
     }
 
@@ -188,7 +199,6 @@ class CreateTable extends AbstractSql implements SqlInterface
         foreach ($this->columns as $column) {
             $sqls[] = $this->processExpression($column, $adapterPlatform)->getSql();
         }
-
         return array($sqls);
     }
 
@@ -198,8 +208,6 @@ class CreateTable extends AbstractSql implements SqlInterface
         foreach ($this->constraints as $constraint) {
             $sqls[] = $this->processExpression($constraint, $adapterPlatform)->getSql();
         }
-
         return array($sqls);
     }
-
 }

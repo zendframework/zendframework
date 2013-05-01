@@ -13,7 +13,6 @@ use Zend\Db\Sql\Platform\AbstractPlatform;
 
 class Mysql extends AbstractPlatform
 {
-
     public function __construct()
     {
         $this->setTypeDecorator('Zend\Db\Sql\Select', new SelectDecorator());

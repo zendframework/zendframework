@@ -2,26 +2,50 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link http://github.com/zendframework/zf2 for the canonical source repository
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license http://framework.zend.com/license/new-bsd New BSD License
- * @package Zend_Db
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Db\Sql\Ddl;
 
 use Zend\Db\Adapter\Platform\PlatformInterface;
-use Zend\Db\Sql\AbstractSql;
 use Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform;
+use Zend\Db\Sql\AbstractSql;
 
 class AlterTable extends AbstractSql implements SqlInterface
 {
-    const TABLE = 'table';
-    const ADD_COLUMNS = 'addColumns';
-    const CHANGE_COLUMNS = 'changeColumns';
-    const DROP_COLUMNS = 'dropColumns';
-    const ADD_CONSTRAINTS = 'addConstraints';
+    const ADD_COLUMNS      = 'addColumns';
+    const ADD_CONSTRAINTS  = 'addConstraints';
+    const CHANGE_COLUMNS   = 'changeColumns';
+    const DROP_COLUMNS     = 'dropColumns';
     const DROP_CONSTRAINTS = 'dropConstraints';
+    const TABLE            = 'table';
+
+    /**
+     * @var array
+     */
+    protected $addColumns = array();
+
+    /**
+     * @var array
+     */
+    protected $addConstraints = array();
+
+    /**
+     * @var array
+     */
+    protected $changeColumns = array();
+
+    /**
+     * @var array
+     */
+    protected $dropColumns = array();
+
+    /**
+     * @var array
+     */
+    protected $dropConstraints = array();
 
     /**
      * Specifications for Sql String generation
@@ -62,31 +86,6 @@ class AlterTable extends AbstractSql implements SqlInterface
     protected $table = '';
 
     /**
-     * @var array
-     */
-    protected $addColumns = array();
-
-    /**
-     * @var array
-     */
-    protected $changeColumns = array();
-
-    /**
-     * @var array
-     */
-    protected $dropColumns = array();
-
-    /**
-     * @var array
-     */
-    protected $addConstraints = array();
-
-    /**
-     * @var array
-     */
-    protected $dropConstraints = array();
-
-    /**
      * @param string $table
      */
     public function __construct($table = '')
@@ -95,8 +94,8 @@ class AlterTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param $name
-     * @return $this
+     * @param  string $name
+     * @return self
      */
     public function setTable($name)
     {
@@ -106,8 +105,8 @@ class AlterTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param Column\ColumnInterface $column
-     * @return $this
+     * @param  Column\ColumnInterface $column
+     * @return self
      */
     public function addColumn(Column\ColumnInterface $column)
     {
@@ -117,9 +116,9 @@ class AlterTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param $name
-     * @param Column\ColumnInterface $column
-     * @return $this
+     * @param  string $name
+     * @param  Column\ColumnInterface $column
+     * @return self
      */
     public function changeColumn($name, Column\ColumnInterface $column)
     {
@@ -129,8 +128,8 @@ class AlterTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param $name
-     * @return $this
+     * @param  string $name
+     * @return self
      */
     public function dropColumn($name)
     {
@@ -140,8 +139,8 @@ class AlterTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param $name
-     * @return $this
+     * @param  string $name
+     * @return self
      */
     public function dropConstraint($name)
     {
@@ -151,8 +150,8 @@ class AlterTable extends AbstractSql implements SqlInterface
     }
 
     /**
-     * @param Constraint\ConstraintInterface $constraint
-     * @return $this
+     * @param  Constraint\ConstraintInterface $constraint
+     * @return self
      */
     public function addConstraint(Constraint\ConstraintInterface $constraint)
     {
@@ -266,5 +265,4 @@ class AlterTable extends AbstractSql implements SqlInterface
 
         return array($sqls);
     }
-
 }

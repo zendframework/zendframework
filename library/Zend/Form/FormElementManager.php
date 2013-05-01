@@ -89,7 +89,9 @@ class FormElementManager extends AbstractPluginManager
             $factory = $element->getFormFactory();
             $factory->setFormElementManager($this);
 
-            if ($this->serviceLocator instanceof ServiceLocatorInterface) {
+            if ($this->serviceLocator instanceof ServiceLocatorInterface
+                && $this->serviceLocator->has('InputFilterManager')
+            ) {
                 $inputFilters = $this->serviceLocator->get('InputFilterManager');
                 $factory->getInputFilterFactory()->setInputFilterManager($inputFilters);
             }

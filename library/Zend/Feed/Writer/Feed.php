@@ -148,7 +148,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
             }
             $entries[$timestamp] = $entry;
         }
-        krsort($entries, \SORT_NUMERIC);
+        krsort($entries, SORT_NUMERIC);
         $this->entries = array_values($entries);
 
         return $this;

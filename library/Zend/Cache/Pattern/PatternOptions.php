@@ -654,7 +654,7 @@ class PatternOptions extends AbstractOptions
             );
         }
 
-        $this->publicDir = rtrim(realpath($publicDir), \DIRECTORY_SEPARATOR);
+        $this->publicDir = rtrim(realpath($publicDir), DIRECTORY_SEPARATOR);
         return $this;
     }
 

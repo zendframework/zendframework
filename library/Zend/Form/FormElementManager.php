@@ -11,6 +11,7 @@ namespace Zend\Form;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\InitializableInterface;
 
 /**
@@ -85,7 +86,13 @@ class FormElementManager extends AbstractPluginManager
     public function injectFactory($element)
     {
         if ($element instanceof FormFactoryAwareInterface) {
-            $element->getFormFactory()->setFormElementManager($this);
+            $factory = $element->getFormFactory();
+            $factory->setFormElementManager($this);
+
+            if ($this->serviceLocator instanceof ServiceLocatorInterface) {
+                $inputFilters = $this->serviceLocator->get('InputFilterManager');
+                $factory->getInputFilterFactory()->setInputFilterManager($inputFilters);
+            }
         }
     }
 

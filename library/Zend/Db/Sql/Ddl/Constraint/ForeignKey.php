@@ -12,16 +12,44 @@ namespace Zend\Db\Sql\Ddl\Constraint;
 
 class ForeignKey extends AbstractConstraint
 {
+    /**
+     * @var string
+     */
     protected $specification = 'CONSTRAINT %1$s FOREIGN KEY (%2$s) REFERENCES %3$s (%4$s) ON DELETE %5$s ON UPDATE %6$s';
 
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * @var string
+     */
     protected $referenceTable;
+
+    /**
+     * @var string
+     */
     protected $referenceColumn;
 
+    /**
+     * @var string
+     */
     protected $onDeleteRule = 'NO ACTION';
+
+    /**
+     * @var string
+     */
     protected $onUpdateRule = 'NO ACTION';
 
+    /**
+     * @param array|null|string $name
+     * @param string            $column
+     * @param string            $referenceTable
+     * @param string            $referenceColumn
+     * @param string            $onDeleteRule
+     * @param string            $onUpdateRule
+     */
     public function __construct($name, $column, $referenceTable, $referenceColumn, $onDeleteRule = null, $onUpdateRule = null)
     {
         $this->setName($name);
@@ -32,59 +60,106 @@ class ForeignKey extends AbstractConstraint
         (!$onUpdateRule) ?: $this->setOnUpdateRule($onUpdateRule);
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @param string $referenceTable
+     * @return $this
+     */
     public function setReferenceTable($referenceTable)
     {
         $this->referenceTable = $referenceTable;
+
+        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getReferenceTable()
     {
         return $this->referenceTable;
     }
 
+    /**
+     * @param string $referenceColumn
+     * @return $this
+     */
     public function setReferenceColumn($referenceColumn)
     {
         $this->referenceColumn = $referenceColumn;
+
+        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getReferenceColumn()
     {
         return $this->referenceColumn;
     }
 
+    /**
+     * @param string $onDeleteRule
+     * @return $this
+     */
     public function setOnDeleteRule($onDeleteRule)
     {
         $this->onDeleteRule = $onDeleteRule;
+
+        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getOnDeleteRule()
     {
         return $this->onDeleteRule;
     }
 
+    /**
+     * @param string $onUpdateRule
+     * @return $this
+     */
     public function setOnUpdateRule($onUpdateRule)
     {
         $this->onUpdateRule = $onUpdateRule;
+
+        return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getOnUpdateRule()
     {
         return $this->onUpdateRule;
     }
 
+    /**
+     * @return array
+     */
     public function getExpressionData()
     {
-
         return array(array(
             $this->specification,
             array(

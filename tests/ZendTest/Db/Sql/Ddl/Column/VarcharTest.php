@@ -16,13 +16,13 @@ class VarcharTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Varchar::getExpressionData
-     * @todo   Implement testGetExpressionData().
      */
     public function testGetExpressionData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $column = new Varchar('foo', 20);
+        $this->assertEquals(
+            array(array('%s VARCHAR(%s) %s %s', array('foo', 20, 'NOT NULL', ''), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL, $column::TYPE_LITERAL, $column::TYPE_LITERAL))),
+            $column->getExpressionData()
         );
     }
 }

@@ -16,13 +16,13 @@ class FloatTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Float::getExpressionData
-     * @todo   Implement testGetExpressionData().
      */
     public function testGetExpressionData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $column = new Float('foo', 5, 10);
+        $this->assertEquals(
+            array(array('%s DECIMAL(%s) %s %s', array('foo', '5, 10', 'NOT NULL', ''), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL, $column::TYPE_LITERAL, $column::TYPE_LITERAL))),
+            $column->getExpressionData()
         );
     }
 }

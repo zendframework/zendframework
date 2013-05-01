@@ -12,7 +12,6 @@ namespace Zend\Db\Sql\Ddl;
 
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Sql\AbstractSql;
-use Zend\Db\Sql\Exception;
 use Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform;
 
 class CreateTable extends AbstractSql implements SqlInterface
@@ -21,6 +20,10 @@ class CreateTable extends AbstractSql implements SqlInterface
     const COLUMNS = 'columns';
     const CONSTRAINTS = 'constraints';
 
+    /**
+     * Specifications for Sql String generation
+     * @var array
+     */
     protected $specifications = array(
         self::TABLE => 'CREATE TABLE %1$s (',
         self::COLUMNS  => array(
@@ -57,11 +60,12 @@ class CreateTable extends AbstractSql implements SqlInterface
 
     /**
      * @param string $table
-     * @param bool $isTemporary
+     * @param bool   $isTemporary
      */
     public function __construct($table = '', $isTemporary = false)
     {
         $this->table = $table;
+        $this->setTemporary($isTemporary);
     }
 
     /**
@@ -71,6 +75,7 @@ class CreateTable extends AbstractSql implements SqlInterface
     public function setTemporary($temporary)
     {
         $this->isTemporary = (bool) $temporary;
+
         return $this;
     }
 
@@ -89,6 +94,7 @@ class CreateTable extends AbstractSql implements SqlInterface
     public function setTable($name)
     {
         $this->table = $name;
+
         return $this;
     }
 
@@ -99,6 +105,7 @@ class CreateTable extends AbstractSql implements SqlInterface
     public function addColumn(Column\ColumnInterface $column)
     {
         $this->columns[] = $column;
+
         return $this;
     }
 
@@ -109,11 +116,12 @@ class CreateTable extends AbstractSql implements SqlInterface
     public function addConstraint(Constraint\ConstraintInterface $constraint)
     {
         $this->constraints[] = $constraint;
+
         return $this;
     }
 
     /**
-     * @param string|null $key
+     * @param  string|null $key
      * @return array
      */
     public function getRawState($key = null)
@@ -123,11 +131,12 @@ class CreateTable extends AbstractSql implements SqlInterface
             self::COLUMNS    => $this->columns,
             self::CONSTRAINTS => $this->constraints,
         );
+
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
     /**
-     * @param PlatformInterface $adapterPlatform
+     * @param  PlatformInterface $adapterPlatform
      * @return string
      */
     public function getSqlString(PlatformInterface $adapterPlatform = null)
@@ -157,8 +166,8 @@ class CreateTable extends AbstractSql implements SqlInterface
             array_pop($sqls);
         }
 
-
         $sql = implode('', $sqls) . "\n)";
+
         return $sql;
     }
 
@@ -169,6 +178,7 @@ class CreateTable extends AbstractSql implements SqlInterface
             $ret[] = 'TEMPORARY';
         }
         $ret[] = $adapterPlatform->quoteIdentifier($this->table);
+
         return $ret;
     }
 
@@ -191,6 +201,5 @@ class CreateTable extends AbstractSql implements SqlInterface
 
         return array($sqls);
     }
-
 
 }

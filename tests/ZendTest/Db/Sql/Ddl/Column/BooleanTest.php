@@ -16,13 +16,13 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Boolean::getExpressionData
-     * @todo   Implement testGetExpressionData().
      */
     public function testGetExpressionData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $column = new Boolean('foo');
+        $this->assertEquals(
+            array(array('%s TINYINT NOT NULL', array('foo'), array($column::TYPE_IDENTIFIER))),
+            $column->getExpressionData()
         );
     }
 }

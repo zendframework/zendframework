@@ -11,70 +11,135 @@ namespace Zend\Db\Sql\Ddl\Column;
 
 class Column implements ColumnInterface
 {
+    /**
+     * @var string
+     */
     protected $specification = '%s %s';
 
+    /**
+     * @var null
+     */
     protected $name = null;
+
+    /**
+     * @var string
+     */
     protected $type = 'INTEGER';
+
+    /**
+     * @var bool
+     */
     protected $isNullable = false;
+
+    /**
+     * @var null
+     */
     protected $default = null;
+
+    /**
+     * @var array
+     */
     protected $options = array();
 
+    /**
+     * @param null $name
+     */
     public function __construct($name = null)
     {
         (!$name) ?: $this->setName($name);
     }
 
+    /**
+     * @param $name
+     * @return $this
+     */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
+    /**
+     * @return null
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @param $nullable
+     * @return $this
+     */
     public function setNullable($nullable)
     {
         $this->isNullable = (bool) $nullable;
+
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function isNullable()
     {
         return $this->isNullable;
     }
 
+    /**
+     * @param $default
+     * @return $this
+     */
     public function setDefault($default)
     {
         $this->default = $default;
+
+        return $this;
     }
 
+    /**
+     * @return null
+     */
     public function getDefault()
     {
         return $this->default;
     }
 
+    /**
+     * @param array $options
+     * @return $this
+     */
     public function setOptions(array $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return $this
+     */
     public function setOption($name, $value)
     {
         $this->options[$name] = $value;
+
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getOptions()
     {
         return $this->options;
     }
 
-
-
+    /**
+     * @return array
+     */
     public function getExpressionData()
     {
         $spec = $this->specification;

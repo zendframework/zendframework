@@ -10,17 +10,23 @@
 
 namespace ZendTest\Db\Sql\Ddl\Constraint;
 
+use Zend\Db\Sql\Ddl\Constraint\PrimaryKey;
+
 class PrimaryKeyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers Zend\Db\Sql\Ddl\Constraint\PrimaryKey::getExpressionData
-     * @todo   Implement testGetExpressionData().
      */
     public function testGetExpressionData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $pk = new PrimaryKey('foo');
+        $this->assertEquals(
+            array(array(
+                'PRIMARY KEY (%s)',
+                array('foo'),
+                array($pk::TYPE_IDENTIFIER)
+            )),
+            $pk->getExpressionData()
         );
     }
 }

@@ -16,13 +16,10 @@ class DropTableTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers Zend\Db\Sql\Ddl\DropTable::getSqlString
-     * @todo   Implement testGetSqlString().
      */
     public function testGetSqlString()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $dt = new DropTable('foo');
+        $this->assertEquals('DROP TABLE "foo"', $dt->getSqlString());
     }
 }

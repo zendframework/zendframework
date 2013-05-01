@@ -10,17 +10,23 @@
 
 namespace ZendTest\Db\Sql\Ddl\Constraint;
 
+use Zend\Db\Sql\Ddl\Constraint\UniqueKey;
+
 class UniqueKeyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers Zend\Db\Sql\Ddl\Constraint\UniqueKey::getExpressionData
-     * @todo   Implement testGetExpressionData().
      */
     public function testGetExpressionData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $uk = new UniqueKey('foo', 'my_uk');
+        $this->assertEquals(
+            array(array(
+                'CONSTRAINT UNIQUE KEY %s(%s)',
+                array('my_uk', 'foo'),
+                array($uk::TYPE_IDENTIFIER, $uk::TYPE_IDENTIFIER)
+            )),
+            $uk->getExpressionData()
         );
     }
 }

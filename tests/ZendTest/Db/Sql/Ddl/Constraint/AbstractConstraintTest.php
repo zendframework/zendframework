@@ -14,39 +14,38 @@ use Zend\Db\Sql\Ddl\Constraint\AbstractConstraint;
 
 class AbstractConstraintTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var \Zend\Db\Sql\Ddl\Constraint\AbstractConstraint */
+    protected $ac;
+
+    public function setup()
+    {
+        $this->ac = $this->getMockForAbstractClass('Zend\Db\Sql\Ddl\Constraint\AbstractConstraint');
+    }
+
     /**
      * @covers Zend\Db\Sql\Ddl\Constraint\AbstractConstraint::setColumns
-     * @todo   Implement testSetColumns().
      */
     public function testSetColumns()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertSame($this->ac, $this->ac->setColumns(array('foo', 'bar')));
+        $this->assertEquals(array('foo', 'bar'), $this->ac->getColumns());
     }
 
     /**
      * @covers Zend\Db\Sql\Ddl\Constraint\AbstractConstraint::addColumn
-     * @todo   Implement testAddColumn().
      */
     public function testAddColumn()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertSame($this->ac, $this->ac->addColumn('foo'));
+        $this->assertEquals(array('foo'), $this->ac->getColumns());
     }
 
     /**
      * @covers Zend\Db\Sql\Ddl\Constraint\AbstractConstraint::getColumns
-     * @todo   Implement testGetColumns().
      */
     public function testGetColumns()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->ac->setColumns(array('foo', 'bar'));
+        $this->assertEquals(array('foo', 'bar'), $this->ac->getColumns());
     }
 }

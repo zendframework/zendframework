@@ -16,13 +16,17 @@ class CheckTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers Zend\Db\Sql\Ddl\Constraint\Check::getExpressionData
-     * @todo   Implement testGetExpressionData().
      */
     public function testGetExpressionData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $check = new Check('id>0', 'foo');
+        $this->assertEquals(
+            array(array(
+                'CONSTRAINT %s CHECK (%s)',
+                array('foo', 'id>0'),
+                array($check::TYPE_IDENTIFIER, $check::TYPE_LITERAL)
+            )),
+            $check->getExpressionData()
         );
     }
 }

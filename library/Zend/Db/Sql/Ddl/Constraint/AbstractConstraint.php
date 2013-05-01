@@ -11,13 +11,23 @@ namespace Zend\Db\Sql\Ddl\Constraint;
 
 abstract class AbstractConstraint implements ConstraintInterface
 {
+    /**
+     * @var array
+     */
     protected $columns = array();
 
+    /**
+     * @param string|array $columns
+     */
     public function __construct($columns = null)
     {
         (!$columns) ?: $this->setColumns($columns);
     }
 
+    /**
+     * @param $columns
+     * @return $this
+     */
     public function setColumns($columns)
     {
         if (!is_array($columns)) {
@@ -25,13 +35,24 @@ abstract class AbstractConstraint implements ConstraintInterface
         }
 
         $this->columns = $columns;
+
+        return $this;
     }
 
+    /**
+     * @param $column
+     * @return $this
+     */
     public function addColumn($column)
     {
         $this->columns[] = $column;
+
+        return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getColumns()
     {
         return $this->columns;

@@ -15,4 +15,24 @@ use Zend\Db\Sql\Ddl\Column\Integer;
 class IntegerTest extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * @covers Zend\Db\Sql\Ddl\Column\Float::__construct
+     */
+    public function testObjectConstruction()
+    {
+        $integer = new Integer('foo');
+        $this->assertEquals('foo', $integer->getName());
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Ddl\Column\Column::getExpressionData
+     */
+    public function testGetExpressionData()
+    {
+        $column = new Integer('foo');
+        $this->assertEquals(
+            array(array('%s %s', array('foo', 'INTEGER NOT NULL'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
+            $column->getExpressionData()
+        );
+    }
 }

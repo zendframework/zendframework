@@ -11,9 +11,17 @@ namespace Zend\Db\Sql\Ddl\Column;
 
 class Integer extends Column
 {
+    /**
+     * @var int
+     */
     protected $length;
-    protected $type = 'BLOB';
 
+    /**
+     * @param null  $name
+     * @param bool  $nullable
+     * @param null  $default
+     * @param array $options
+     */
     public function __construct($name, $nullable = false, $default = null, array $options = array())
     {
         $this->setName($name);

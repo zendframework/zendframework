@@ -12,7 +12,7 @@ namespace Zend\Db\Sql\Ddl\Constraint;
 
 class UniqueKey extends AbstractConstraint
 {
-    protected $specification = 'CONSTRAINT UNIQUE KEY %1$s(...)';
+    protected $specification = 'CONSTRAINT UNIQUE KEY %s(...)';
 
     public function __construct($column, $name = null)
     {
@@ -25,20 +25,19 @@ class UniqueKey extends AbstractConstraint
         $colCount = count($this->columns);
 
         $values = array();
-        $values[] = ($this->name) ? $this->name . ' ' : '';
+        $values[] = ($this->name) ? $this->name : '';
 
         $newSpecTypes = array(self::TYPE_IDENTIFIER);
 
         $newSpecParts = array();
 
-
         for ($i = 0; $i < $colCount; $i++) {
-            $newSpecParts[] = '%' . ($i+2) . '$s';
+            $newSpecParts[] = '%s';
             $newSpecTypes[] = self::TYPE_IDENTIFIER;
         }
 
         $newSpec = str_replace('...', implode(', ', $newSpecParts), $this->specification);
-//var_dump($newSpec, $newSpecTypes);
+
         return array(array(
             $newSpec,
             array_merge($values, $this->columns),

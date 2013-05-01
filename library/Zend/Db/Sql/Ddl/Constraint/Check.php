@@ -12,21 +12,23 @@ namespace Zend\Db\Sql\Ddl\Constraint;
 
 class Check extends AbstractConstraint
 {
-    protected $specification = 'PRIMARY KEY (%s)';
+    protected $specification = 'CONSTRAINT %s CHECK (%s)';
+
+    protected $expression;
+
+    public function __construct($expression, $name)
+    {
+        $this->expression = $expression;
+        $this->name = $name;
+    }
 
     public function getExpressionData()
     {
-        $colCount = count($this->columns);
-        $newSpecParts = array_fill(0, $colCount, '%s');
-        $newSpecTypes = array_fill(0, $colCount, self::TYPE_IDENTIFIER);
-
-        $newSpec = sprintf($this->specification, implode(', ', $newSpecParts));
-
-        return array(
-            $newSpec,
-            $this->columns,
-            $newSpecTypes
-        );
+        return array(array(
+            $this->specification,
+            array($this->name, $this->expression),
+            array(self::TYPE_IDENTIFIER, self::TYPE_LITERAL)
+        ));
     }
 
 }

@@ -11,15 +11,29 @@ namespace Zend\Db\Sql\Ddl\Column;
 
 class Varchar extends Column
 {
-    protected $specification = '%1$s VARCHAR(%2$s)%3$s%4$s';
+    /**
+     * @var string
+     */
+    protected $specification = '%s VARCHAR(%s) %s %s';
+
+    /**
+     * @var int
+     */
     protected $length;
 
+    /**
+     * @param null $name
+     * @param $length
+     */
     public function __construct($name, $length)
     {
         $this->name = $name;
         $this->length = $length;
     }
 
+    /**
+     * @return array
+     */
     public function getExpressionData()
     {
         $spec = $this->specification;
@@ -30,9 +44,8 @@ class Varchar extends Column
         $params[] = $this->name;
         $params[] = $this->length;
 
-
         $types[] = self::TYPE_LITERAL;
-        $params[] = (!$this->isNullable) ? ' NOT NULL' : '';
+        $params[] = (!$this->isNullable) ? 'NOT NULL' : '';
 
         $types[] = ($this->default !== null) ? self::TYPE_VALUE : self::TYPE_LITERAL;
         $params[] = ($this->default !== null) ? $this->default : '';
@@ -42,6 +55,6 @@ class Varchar extends Column
             $params,
             $types
         ));
-
     }
+
 }

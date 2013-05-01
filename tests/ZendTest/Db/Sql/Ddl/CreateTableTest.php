@@ -15,6 +15,18 @@ use Zend\Db\Sql\Ddl\Column\Column;
 
 class CreateTableTest extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     * test object construction
+     * @covers Zend\Db\Sql\Ddl\CreateTable::__construct
+     */
+    public function testObjectConstruction()
+    {
+        $ct = new CreateTable('foo', true);
+        $this->assertEquals('foo', $ct->getRawState($ct::TABLE));
+        $this->assertTrue($ct->isTemporary());
+    }
+
     /**
      * @covers Zend\Db\Sql\Ddl\CreateTable::setTemporary
      */

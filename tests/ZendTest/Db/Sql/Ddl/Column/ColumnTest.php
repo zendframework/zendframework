@@ -16,121 +16,113 @@ class ColumnTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Column::setName
-     * @todo   Implement testSetName().
      */
     public function testSetName()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $column = new Column();
+        $this->assertSame($column, $column->setName('foo'));
+        return $column;
     }
 
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Column::getName
-     * @todo   Implement testGetName().
+     * @depends testSetName
      */
-    public function testGetName()
+    public function testGetName(Column $column)
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals('foo', $column->getName());
     }
 
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Column::setNullable
-     * @todo   Implement testSetNullable().
      */
     public function testSetNullable()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $column = new Column;
+        $this->assertSame($column, $column->setNullable(true));
+        return $column;
     }
 
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Column::isNullable
-     * @todo   Implement testIsNullable().
+     * @depends testSetNullable
      */
-    public function testIsNullable()
+    public function testIsNullable(Column $column)
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue($column->isNullable());
+        $column->setNullable(false);
+        $this->assertFalse($column->isNullable());
     }
 
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Column::setDefault
-     * @todo   Implement testSetDefault().
      */
     public function testSetDefault()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $column = new Column;
+        $this->assertSame($column, $column->setDefault('foo bar'));
+        return $column;
     }
 
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Column::getDefault
-     * @todo   Implement testGetDefault().
+     * @depends testSetDefault
      */
-    public function testGetDefault()
+    public function testGetDefault(Column $column)
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals('foo bar', $column->getDefault());
     }
 
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Column::setOptions
-     * @todo   Implement testSetOptions().
      */
     public function testSetOptions()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $column = new Column;
+        $this->assertSame($column, $column->setOptions(array('autoincrement' => true)));
+        return $column;
     }
 
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Column::setOption
-     * @todo   Implement testSetOption().
      */
     public function testSetOption()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $column = new Column;
+        $this->assertSame($column, $column->setOption('primary', true));
     }
 
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Column::getOptions
-     * @todo   Implement testGetOptions().
+     * @depends testSetOptions
      */
-    public function testGetOptions()
+    public function testGetOptions(Column $column)
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals(array('autoincrement' => true), $column->getOptions());
     }
 
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Column::getExpressionData
-     * @todo   Implement testGetExpressionData().
      */
     public function testGetExpressionData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $column = new Column;
+        $column->setName('foo');
+        $this->assertEquals(
+            array(array('%s %s', array('foo', 'INTEGER NOT NULL'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
+            $column->getExpressionData()
+        );
+
+        $column->setNullable(true);
+        $this->assertEquals(
+            array(array('%s %s', array('foo', 'INTEGER'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
+            $column->getExpressionData()
+        );
+
+        $column->setDefault('bar');
+        $this->assertEquals(
+            array(array('%s %s DEFAULT %s', array('foo', 'INTEGER', 'bar'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL, $column::TYPE_VALUE))),
+            $column->getExpressionData()
         );
     }
 }

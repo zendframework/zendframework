@@ -12,7 +12,6 @@ namespace Zend\Db\Sql\Ddl;
 
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Sql\AbstractSql;
-use Zend\Db\Sql\Exception;
 use Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform;
 
 class DropTable extends AbstractSql implements SqlInterface
@@ -51,6 +50,7 @@ class DropTable extends AbstractSql implements SqlInterface
         }
 
         $sql = implode(' ', $sqls);
+
         return $sql;
     }
 

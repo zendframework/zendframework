@@ -7,9 +7,10 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Mvc\I18n;
+namespace Zend\Mvc\Service;
 
 use Zend\I18n\Translator\TranslatorServiceFactory as I18nTranslatorServiceFactory;
+use Zend\Mvc\I18n\Translator;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**

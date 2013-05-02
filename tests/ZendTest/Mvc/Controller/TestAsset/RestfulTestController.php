@@ -126,6 +126,21 @@ class RestfulTestController extends AbstractRestfulController
     }
 
     /**
+     * Modify an entire resource collection
+     *
+     * @param  array|\Traversable $items
+     * @return array|\Traversable
+     */
+    public function patchList($items)
+    {
+        //This isn't great code to have in a test class, but I seems the simplest without BC breaks.
+        if (isset($items['name']) && $items['name'] == 'testDispatchViaPatchWithoutIdentifierReturns405ResponseIfPatchListThrowsException'){
+            parent::patchList($items);
+        }
+        return $items;
+    }
+
+    /**
      * Update an existing resource
      *
      * @param  mixed $id

@@ -499,4 +499,20 @@ class FactoryTest extends TestCase
             $index++;
         }
     }
+
+    public function testConflictNameWithInputFilterType()
+    {
+        $factory = new Factory();
+
+        $inputFilter = $factory->createInputFilter(
+            array(
+                'type' => array(
+                    'required' => true
+                )
+            )
+        );
+
+        $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter);
+        $this->assertTrue($inputFilter->has('type'));
+    }
 }

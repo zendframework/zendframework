@@ -197,6 +197,23 @@ abstract class AbstractRestfulController extends AbstractController
     }
 
     /**
+     * Modify a resource collection withou completely replacing it
+     *
+     * Not marked as abstract, as that would introduce a BC break
+     * (introduced in 2.2.0); instead, raises an exception if not implemented.
+     *
+     * @param  mixed $data
+     * @return mixed
+     * @throws Exception\RuntimeException
+     */
+    public function patchList($data)
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
+
+    /**
      * Update an existing resource
      *
      * @param  mixed $id
@@ -329,14 +346,24 @@ abstract class AbstractRestfulController extends AbstractController
             // PATCH
             case 'patch':
                 $id = $this->getIdentifier($routeMatch, $request);
-                if ($id === false) {
+                $data = $this->processBodyContent($request);
+
+                if ($id !== false) {
+                    $action = 'patch';
+                    $return = $this->patch($id, $data);
+                    break;
+                }
+
+                //TODO: This try-catch should be removed in the future, but it will create a BC break for
+                //apps that expect a 405 instead of going to patchList
+                try {
+                    $action = 'patchList';
+                    $return = $this->patchList($data);
+                } catch (Exception\RuntimeException $ex) {
                     $response = $e->getResponse();
                     $response->setStatusCode(405);
                     return $response;
                 }
-                $data   = $this->processBodyContent($request);
-                $action = 'patch';
-                $return = $this->patch($id, $data);
                 break;
             // POST
             case 'post':

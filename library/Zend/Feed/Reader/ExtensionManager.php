@@ -17,7 +17,7 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Validation checks that we have an Extension\AbstractEntry or
  * Extension\AbstractFeed.
  */
-class ExtensionManager extends AbstractPluginManager
+class ExtensionManager extends AbstractPluginManager implements ExtensionManagerInterface
 {
     /**
      * Default set of extension classes

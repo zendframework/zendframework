@@ -106,6 +106,21 @@ class RestfulControllerTest extends TestCase
         $this->assertEquals('replaceList', $this->routeMatch->getParam('action'));
     }
 
+    public function testDispatchInvokesPatchListMethodWhenNoActionPresentAndPatchInvokedWithoutIdentifier()
+    {
+        $entities = array(
+            array('id' => uniqid(), 'name' => __FUNCTION__),
+            array('id' => uniqid(), 'name' => __FUNCTION__),
+            array('id' => uniqid(), 'name' => __FUNCTION__),
+        );
+        $string = http_build_query($entities);
+        $this->request->setMethod('PATCH')
+                      ->setContent($string);
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertEquals($entities, $result);
+        $this->assertEquals('patchList', $this->routeMatch->getParam('action'));
+    }
+
     public function testDispatchInvokesDeleteMethodWhenNoActionPresentAndDeleteInvokedWithIdentifier()
     {
         $entity = array('id' => 1, 'name' => __FUNCTION__);
@@ -373,7 +388,7 @@ class RestfulControllerTest extends TestCase
         $this->assertFalse($this->controller->requestHasContentType($this->request, TestAsset\RestfulTestController::CONTENT_TYPE_JSON));
     }
 
-    public function testDispatchViaPatchWithoutIdentifierReturns405Response()
+    public function testDispatchViaPatchWithoutIdentifierReturns405ResponseIfPatchListThrowsException()
     {
         $entity = new stdClass;
         $entity->name = 'foo';

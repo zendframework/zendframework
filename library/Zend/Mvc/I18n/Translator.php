@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Mvc;
+namespace Zend\Mvc\I18n;
 
 use Zend\I18n\Translator\Translator as I18nTranslator;
 use Zend\Validator\Translator\TranslatorInterface as ValidatorTranslatorInterface;

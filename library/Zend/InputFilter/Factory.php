@@ -275,7 +275,7 @@ class Factory
 
         $type = 'Zend\InputFilter\InputFilter';
 
-        if (isset($inputFilterSpecification['type'])) {
+        if (isset($inputFilterSpecification['type']) && is_string($inputFilterSpecification['type'])) {
             $type = $inputFilterSpecification['type'];
             unset($inputFilterSpecification['type']);
         }

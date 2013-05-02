@@ -397,7 +397,7 @@ class RestfulControllerTest extends TestCase
     }
 
     public function testDispatchInvokesGetMethodWhenNoActionPresentAndZeroIdentifierPresentOnGet()
-        {
+    {
         $entity = new stdClass;
         $this->controller->entity = $entity;
         $this->routeMatch->setParam('id', 0);

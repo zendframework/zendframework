@@ -60,7 +60,7 @@ class ClientStatic
         }
 
         if (!empty($body)) {
-            $request->setBody($body);
+            $request->setContent($body);
         }
 
         return static::getStaticClient()->send($request);

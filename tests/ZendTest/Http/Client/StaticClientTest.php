@@ -81,6 +81,24 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test GET with body
+     */
+    public function testHttpGetWithBody()
+    {
+        $getBody = 'baz';
+
+        $response= HTTPClient::get($this->baseuri . 'testRawGetData.php',
+                                   array('foo' => 'bar'),
+                                   array(),
+                                   $getBody);
+
+        $this->assertTrue($response->isSuccess());
+        $this->assertContains('foo', $response->getBody());
+        $this->assertContains('bar', $response->getBody());
+        $this->assertContains($getBody, $response->getBody());
+    }
+
+    /**
      * Test simple POST
      */
     public function testHttpSimplePost()

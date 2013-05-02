@@ -23,9 +23,9 @@
     },
     "suggest": {
         "zendframework/zend-db": "Zend\\Db component",
-        "zendframework/zend-i18n": "self.version",
+        "zendframework/zend-i18n": "Zend\\I18n component to allow translation of validation error messages as well as to use the various Date validators",
         "zendframework/zend-math": "Zend\\Math component",
-        "zendframework/zend-servicemanager": "self.version"
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component to allow using the ValidatorPluginManager and validator chains"
     },
     "extra": {
         "branch-alias": {

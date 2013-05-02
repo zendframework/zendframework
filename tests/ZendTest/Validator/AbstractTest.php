@@ -11,7 +11,6 @@
 namespace ZendTest\Validator;
 
 use ReflectionMethod;
-use Zend\I18n\Translator\Translator;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\EmailAddress;
 use Zend\Validator\Hostname;
@@ -53,7 +52,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $this->testTranslatorNullByDefault();
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new Translator();
+        $translator = new TestAsset\Translator();
         restore_error_handler();
         $this->validator->setTranslator($translator);
         $this->assertSame($translator, $this->validator->getTranslator());
@@ -79,7 +78,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $loader->translations = array(
             'fooMessage' => 'This is the translated message for %value%',
         );
-        $translator = new Translator();
+        $translator = new TestAsset\Translator();
         $translator->getPluginManager()->setService('default', $loader);
         $translator->addTranslationFile('default', null);
 
@@ -97,7 +96,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $loader->translations = array(
             '%value% was passed' => 'This is the translated message for %value%',
         );
-        $translator = new Translator();
+        $translator = new TestAsset\Translator();
         $translator->getPluginManager()->setService('default', $loader);
         $translator->addTranslationFile('default', null);
 
@@ -147,7 +146,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     public function testTranslatorEnabledPerDefault()
     {
         set_error_handler(array($this, 'errorHandlerIgnore'));
-        $translator = new Translator();
+        $translator = new TestAsset\Translator();
         $this->validator->setTranslator($translator);
         $this->assertTrue($this->validator->isTranslatorEnabled());
     }
@@ -158,7 +157,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $loader->translations = array(
             '%value% was passed' => 'This is the translated message for %value%',
         );
-        $translator = new Translator();
+        $translator = new TestAsset\Translator();
         $translator->getPluginManager()->setService('default', $loader);
         $translator->addTranslationFile('default', null);
         $this->validator->setTranslator($translator);
@@ -202,7 +201,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorMethods()
     {
-        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $translatorMock = $this->getMock('ZendTest\Validator\TestAsset\Translator');
         $this->validator->setTranslator($translatorMock, 'foo');
 
         $this->assertEquals($translatorMock, $this->validator->getTranslator());
@@ -222,7 +221,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->validator->hasTranslator());
 
-        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $translatorMock = $this->getMock('ZendTest\Validator\TestAsset\Translator');
         AbstractValidator::setDefaultTranslator($translatorMock, 'foo');
 
         $this->assertEquals($translatorMock, AbstractValidator::getDefaultTranslator());

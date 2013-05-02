@@ -19,7 +19,6 @@ use Zend\Stdlib\Exception\LogicException;
 use Zend\Stdlib\Parameters;
 use Zend\Stdlib\ResponseInterface;
 use Zend\Uri\Http as HttpUri;
-use Zend\View\Helper\Placeholder;
 
 abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 {
@@ -213,15 +212,19 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
 
         if ($method == HttpRequest::METHOD_POST) {
-            $post = $params;
+            if (count($params) != 0){
+                $post = $params;
+            }
         } elseif ($method == HttpRequest::METHOD_GET) {
             $query = array_merge($query, $params);
         } elseif ($method == HttpRequest::METHOD_PUT) {
-            array_walk($params,
-                function(&$item, $key) { $item = $key . '=' . $item; }
-            );
-            $content = implode('&', $params);
-            $request->setContent($content);
+            if (count($params) != 0){
+                array_walk($params,
+                    function(&$item, $key) { $item = $key . '=' . $item; }
+                );
+                $content = implode('&', $params);
+                $request->setContent($content);
+            }
         } elseif ($params) {
             trigger_error(
                 'Additional params is only supported by GET, POST and PUT HTTP method',
@@ -249,8 +252,17 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * @param  array|null $params
      * @throws \Exception
      */
-    public function dispatch($url, $method = HttpRequest::METHOD_GET, $params = array())
+    public function dispatch($url, $method = null, $params = array())
     {
+        if ( !isset($method) &&
+             $this->getRequest() instanceof HttpRequest &&
+             $requestMethod = $this->getRequest()->getMethod()
+        ) {
+            $method = $requestMethod;
+        } elseif (!isset($method)) {
+            $method = HttpRequest::METHOD_GET;
+        }
+
         $this->url($url, $method, $params);
         $this->getApplication()->run();
 

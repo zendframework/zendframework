@@ -354,4 +354,31 @@ class CollectionInputFilterTest extends TestCase
 
         $this->assertTrue($this->filter->isValid());
     }
+
+    public function testEmptyCollectionIsValidByDefault()
+    {
+        $data = array();
+
+        $this->filter->setInputFilter($this->getBaseInputFilter());
+        $this->filter->setData($data);
+
+        $this->assertTrue($this->filter->isValid());
+    }
+
+    public function testEmptyCollectionIsNotValidIfRequired()
+    {
+        $data = array();
+
+        $this->filter->setInputFilter($this->getBaseInputFilter());
+        $this->filter->setData($data);
+        $this->filter->setIsRequired(true);
+
+        $this->assertFalse($this->filter->isValid());
+    }
+
+    public function testSetRequired()
+    {
+        $this->filter->setIsRequired(true);
+        $this->assertEquals(true,$this->filter->getIsRequired());
+    }
 }

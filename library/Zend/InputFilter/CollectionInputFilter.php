@@ -29,6 +29,11 @@ class CollectionInputFilter extends InputFilter
     protected $collectionInvalidInputs;
 
     /*
+     * @var bool
+     */
+    protected $isRequired = false;
+
+    /*
      * @var int
      */
     protected $count = null;
@@ -88,6 +93,29 @@ class CollectionInputFilter extends InputFilter
     }
 
     /**
+     * Set if the collection can be empty
+     *
+     * @param bool $isRequired
+     * @return CollectionInputFilter
+     */
+    public function setIsRequired($isRequired)
+    {
+        $this->isRequired = $isRequired;
+        return $this;
+    }
+
+    /**
+     * Get if collection can be empty
+     *
+     * @return bool
+     */
+    public function getIsRequired()
+    {
+        return $this->isRequired;
+    }
+
+
+    /**
      * Set the count of data to validate
      *
      * @param int $count
@@ -128,6 +156,9 @@ class CollectionInputFilter extends InputFilter
         $valid = true;
 
         if ($this->getCount() < 1) {
+            if ($this->isRequired) {
+                $valid = false;
+            }
             return $valid;
         }
 

@@ -12,8 +12,9 @@ namespace Zend\I18n\Validator;
 use Locale;
 use IntlDateFormatter;
 use Traversable;
+use Zend\I18n\Exception as I18nException;
 use Zend\Validator\AbstractValidator;
-use Zend\Validator\Exception;
+use Zend\Validator\Exception as ValidatorException;
 
 class DateTime extends AbstractValidator
 {
@@ -38,12 +39,12 @@ class DateTime extends AbstractValidator
     /**
      * @var int
      */
-    protected $dateType = IntlDateFormatter::NONE;
+    protected $dateType;
 
     /**
      * @var int
      */
-    protected $timeType = IntlDateFormatter::NONE;
+    protected $timeType;
 
     /**
      * Optional timezone
@@ -60,7 +61,7 @@ class DateTime extends AbstractValidator
     /**
      * @var int
      */
-    protected $calendar = IntlDateFormatter::GREGORIAN;
+    protected $calendar;
 
     /**
      * @var IntlDateFormatter
@@ -80,9 +81,22 @@ class DateTime extends AbstractValidator
      * Constructor for the Date validator
      *
      * @param array|Traversable $options
+     * @throws I18nException\ExtensionNotLoadedException if ext/intl is not present
      */
     public function __construct($options = array())
     {
+        if (!extension_loaded('intl')) {
+            throw new I18nException\ExtensionNotLoadedException(sprintf(
+                '%s component requires the intl PHP extension',
+                __NAMESPACE__
+            ));
+        }
+
+        // Delaying initialization until we know ext/intl is available
+        $this->dateType = IntlDateFormatter::NONE;
+        $this->timeType = IntlDateFormatter::NONE;
+        $this->calendar = IntlDateFormatter::GREGORIAN;
+
         parent::__construct($options);
 
         if (null === $this->locale) {
@@ -239,7 +253,7 @@ class DateTime extends AbstractValidator
      *
      * @param  string                             $value
      * @return bool
-     * @throws Exception\InvalidArgumentException
+     * @throws ValidatorException\InvalidArgumentException
      */
     public function isValid($value)
     {
@@ -254,7 +268,7 @@ class DateTime extends AbstractValidator
         $formatter = $this->getIntlDateFormatter();
 
         if (intl_is_failure($formatter->getErrorCode())) {
-            throw new Exception\InvalidArgumentException("Invalid locale string given");
+            throw new ValidatorException\InvalidArgumentException("Invalid locale string given");
         }
 
         $position   = 0;

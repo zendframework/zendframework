@@ -13,7 +13,6 @@ use Traversable;
 use Zend\Http\Request as HttpRequest;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Uri;
-use Zend\Version\Version;
 
 class Publisher
 {

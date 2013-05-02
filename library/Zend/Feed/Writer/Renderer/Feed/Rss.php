@@ -14,8 +14,8 @@ use DOMDocument;
 use DOMElement;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
+use Zend\Feed\Writer\Version;
 use Zend\Uri;
-use Zend\Version\Version;
 
 /**
 */

@@ -396,6 +396,17 @@ class RestfulControllerTest extends TestCase
         $this->assertEquals(405, $result->getStatusCode());
     }
 
+    public function testDispatchInvokesGetMethodWhenNoActionPresentAndZeroIdentifierPresentOnGet()
+    {
+        $entity = new stdClass;
+        $this->controller->entity = $entity;
+        $this->routeMatch->setParam('id', 0);
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertArrayHasKey('entity', $result);
+        $this->assertEquals($entity, $result['entity']);
+        $this->assertEquals('get', $this->routeMatch->getParam('action'));
+    }
+
     public function testIdentifierNameDefaultsToId()
     {
         $this->assertEquals('id', $this->controller->getIdentifierName());

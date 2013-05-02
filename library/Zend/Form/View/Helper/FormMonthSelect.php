@@ -30,7 +30,7 @@ class FormMonthSelect extends AbstractHelper
      *
      * @var int
      */
-    protected $dateType = IntlDateFormatter::LONG;
+    protected $dateType;
 
     /**
      * Pattern to use for Date rendering
@@ -45,6 +45,22 @@ class FormMonthSelect extends AbstractHelper
      * @var string
      */
     protected $locale;
+
+    /**
+     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
+     */
+    public function __construct()
+    {
+        if (!extension_loaded('intl')) {
+            throw new Exception\ExtensionNotLoadedException(sprintf(
+                '%s component requires the intl PHP extension',
+                __NAMESPACE__
+            ));
+        }
+
+        // Delaying initialization until we know ext/intl is available
+        $this->dateType = IntlDateFormatter::LONG;
+    }
 
     /**
      * Invoke helper as function

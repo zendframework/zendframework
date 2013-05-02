@@ -47,7 +47,7 @@ class FormMonthSelect extends AbstractHelper
     protected $locale;
 
     /**
-     * @throws Exception\ExtensionsNotLoadedException if ext/intl is not present
+     * @throws Exception\ExtensionNotLoadedException if ext/intl is not present
      */
     public function __construct()
     {
@@ -58,6 +58,7 @@ class FormMonthSelect extends AbstractHelper
             ));
         }
 
+        // Delaying initialization until we know ext/intl is available
         $this->dateType = IntlDateFormatter::LONG;
     }
 

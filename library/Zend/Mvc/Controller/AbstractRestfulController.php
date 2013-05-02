@@ -262,6 +262,7 @@ abstract class AbstractRestfulController extends AbstractController
     /**
      * Handle the request
      *
+     * @todo   try-catch in "patch" for patchList should be removed in the future
      * @param  MvcEvent $e
      * @return mixed
      * @throws Exception\DomainException if no route matches in event or invalid HTTP method
@@ -354,8 +355,9 @@ abstract class AbstractRestfulController extends AbstractController
                     break;
                 }
 
-                //TODO: This try-catch should be removed in the future, but it will create a BC break for
-                //apps that expect a 405 instead of going to patchList
+                // TODO: This try-catch should be removed in the future, but it
+                // will create a BC break for pre-2.2.0 apps that expect a 405
+                // instead of going to patchList
                 try {
                     $action = 'patchList';
                     $return = $this->patchList($data);

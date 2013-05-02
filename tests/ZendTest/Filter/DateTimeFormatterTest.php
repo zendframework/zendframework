@@ -33,6 +33,15 @@ class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
         date_default_timezone_set($this->defaultTimezone);
     }
 
+    public function testFormatterDoesNotFormatAnEmptyString()
+    {
+        date_default_timezone_set('UTC');
+
+        $filter = new DateTimeFormatter();
+        $result = $filter->filter('');
+        $this->assertEquals('', $result);
+    }
+
     public function testDateTimeFormatted()
     {
         date_default_timezone_set('UTC');

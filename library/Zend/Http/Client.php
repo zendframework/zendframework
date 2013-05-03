@@ -461,8 +461,13 @@ class Client implements Stdlib\DispatchableInterface
      * @param  bool   $clearAuth     Also clear http authentication? (defaults to true)
      * @return Client
      */
-    public function resetParameters($clearCookies = false, $clearAuth = true)
+    public function resetParameters($clearCookies = false /*, $clearAuth = true */)
     {
+        $clearAuth = true;
+        if (func_num_args() > 1) {
+            $clearAuth = func_get_arg(1);
+        }
+
         $uri = $this->getUri();
 
         $this->streamName      = null;

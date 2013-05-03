@@ -17,9 +17,11 @@
         "zendframework/zend-escaper": "self.version",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-servicemanager": "self.version",
+        "zendframework/zend-validator": "self.version"
         "zendframework/zend-version": "self.version"
     },
     "suggest": {
+        "zendframework/zend-http": "Zend\\Http for PubSubHubbub, and optionally for use with Zend\\Feed\Reader",
         "zendframework/zend-validator": "Zend\\Validator component"
     },
     "extra": {

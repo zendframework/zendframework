@@ -136,8 +136,8 @@ class ValidatorPluginManager extends AbstractPluginManager
     {
         if ($validator instanceof Translator\TranslatorAwareInterface) {
             $locator = $this->getServiceLocator();
-            if ($locator && $locator->has('translator')) {
-                $validator->setTranslator($locator->get('translator'));
+            if ($locator && $locator->has('MvcTranslator')) {
+                $validator->setTranslator($locator->get('MvcTranslator'));
             }
         }
     }

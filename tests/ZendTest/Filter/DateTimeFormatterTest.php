@@ -42,6 +42,22 @@ class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', $result);
     }
 
+    public function testFormatterDoesNotFormatNull()
+    {
+        $filter = new DateTimeFormatter();
+        $result = $filter->filter(null);
+        $this->assertEquals(null, $result);
+    }
+
+    public function testFormatterFormatsZero()
+    {
+        date_default_timezone_set('UTC');
+
+        $filter = new DateTimeFormatter();
+        $result = $filter->filter(0);
+        $this->assertEquals('1970-01-01T00:00:00+0000', $result);
+    }
+
     public function testDateTimeFormatted()
     {
         date_default_timezone_set('UTC');

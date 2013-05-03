@@ -71,7 +71,7 @@ class DateTimeFormatter extends AbstractFilter
      */
     protected function normalizeDateTime($value)
     {
-        if (empty($value)) {
+        if ($value === '' || $value === null) {
             return $value;
         } elseif (is_int($value)) {
             $dateTime = new DateTime('@' . $value);

@@ -66,7 +66,7 @@ class Uri
     );
 
     /**
-     * @param  string $uri 
+     * @param  string $uri
      */
     public function __construct($uri)
     {
@@ -90,8 +90,8 @@ class Uri
      * Create an instance
      *
      * Useful for chained validations
-     * 
-     * @param  string $uri 
+     *
+     * @param  string $uri
      * @return self
      */
     public static function factory($uri)
@@ -101,7 +101,7 @@ class Uri
 
     /**
      * Retrieve the host
-     * 
+     *
      * @return string
      */
     public function getHost()
@@ -111,7 +111,7 @@ class Uri
 
     /**
      * Retrieve the URI path
-     * 
+     *
      * @return string
      */
     public function getPath()
@@ -121,7 +121,7 @@ class Uri
 
     /**
      * Retrieve the scheme
-     * 
+     *
      * @return string
      */
     public function getScheme()
@@ -130,8 +130,8 @@ class Uri
     }
 
     /**
-     * Is the URI valid? 
-     * 
+     * Is the URI valid?
+     *
      * @return bool
      */
     public function isValid()
@@ -174,7 +174,7 @@ class Uri
 
     /**
      * Is the URI absolute?
-     * 
+     *
      * @return bool
      */
     public function isAbsolute()

@@ -27,7 +27,7 @@ class ValidatorPluginManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsInjectingTranslator()
     {
-        $translator = $this->getMock("Zend\I18n\Translator\Translator");
+        $translator = $this->getMock('ZendTest\Validator\TestAsset\Translator');
 
         $slContents = array(array('translator', $translator));
         $serviceLocator = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');

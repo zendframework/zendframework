@@ -10,13 +10,10 @@
 namespace Zend\Validator;
 
 use Traversable;
-use Zend\I18n\Translator\Translator;
-use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Validator\Exception\InvalidArgumentException;
 
 abstract class AbstractValidator implements
-    TranslatorAwareInterface,
+    Translator\TranslatorAwareInterface,
     ValidatorInterface
 {
     /**
@@ -28,7 +25,7 @@ abstract class AbstractValidator implements
 
     /**
      * Default translation object for all validate objects
-     * @var Translator
+     * @var Translator\TranslatorInterface
      */
     protected static $defaultTranslator;
 
@@ -49,7 +46,7 @@ abstract class AbstractValidator implements
         'messages'             => array(), // Array of validation failure messages
         'messageTemplates'     => array(), // Array of validation failure message templates
         'messageVariables'     => array(), // Array of additional variables available for validation failure messages
-        'translator'           => null,    // Translation object to used -> Zend\I18n\Translator\Translator
+        'translator'           => null,    // Translation object to used -> Translator\TranslatorInterface
         'translatorTextDomain' => null,    // Translation text domain
         'translatorEnabled'    => true,    // Is translation enabled?
         'valueObscured'        => false,   // Flag indicating whether or not value should be obfuscated
@@ -103,7 +100,7 @@ abstract class AbstractValidator implements
             return $this->options[$option];
         }
 
-        throw new InvalidArgumentException("Invalid option '$option'");
+        throw new Exception\InvalidArgumentException("Invalid option '$option'");
     }
 
     /**
@@ -212,7 +209,7 @@ abstract class AbstractValidator implements
         }
 
         if (!isset($this->abstractOptions['messageTemplates'][$messageKey])) {
-            throw new InvalidArgumentException("No message template exists for key '$messageKey'");
+            throw new Exception\InvalidArgumentException("No message template exists for key '$messageKey'");
         }
 
         $this->abstractOptions['messageTemplates'][$messageKey] = $messageString;
@@ -268,7 +265,7 @@ abstract class AbstractValidator implements
             return $result;
         }
 
-        throw new InvalidArgumentException("No property exists by the name '$property'");
+        throw new Exception\InvalidArgumentException("No property exists by the name '$property'");
     }
 
     /**
@@ -395,12 +392,12 @@ abstract class AbstractValidator implements
     /**
      * Set translation object
      *
-     * @param  Translator|null $translator
+     * @param  Translator\TranslatorInterface|null $translator
      * @param  string          $textDomain (optional)
      * @return AbstractValidator
      * @throws Exception\InvalidArgumentException
      */
-    public function setTranslator(Translator $translator = null, $textDomain = null)
+    public function setTranslator(Translator\TranslatorInterface $translator = null, $textDomain = null)
     {
         $this->abstractOptions['translator'] = $translator;
         if (null !== $textDomain) {
@@ -412,7 +409,7 @@ abstract class AbstractValidator implements
     /**
      * Return translation object
      *
-     * @return Translator|null
+     * @return Translator\TranslatorInterface|null
      */
     public function getTranslator()
     {
@@ -466,13 +463,13 @@ abstract class AbstractValidator implements
     /**
      * Set default translation object for all validate objects
      *
-     * @param  Translator|null $translator
+     * @param  Translator\TranslatorInterface|null $translator
      * @param  string          $textDomain (optional)
      * @return void
      * @throws Exception\InvalidArgumentException
      */
     public static function setDefaultTranslator(
-        Translator $translator = null, $textDomain = null
+        Translator\TranslatorInterface $translator = null, $textDomain = null
     )
     {
         static::$defaultTranslator = $translator;
@@ -484,7 +481,7 @@ abstract class AbstractValidator implements
     /**
      * Get default translation object for all validate objects
      *
-     * @return Translator|null
+     * @return Translator\TranslatorInterface|null
      */
     public static function getDefaultTranslator()
     {

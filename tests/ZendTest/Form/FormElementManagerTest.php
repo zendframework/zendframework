@@ -67,4 +67,46 @@ class FormElementManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Form\Exception\InvalidElementException');
         $this->manager->get('test');
     }
+
+    public function testStringCreationOptions()
+    {
+        $args = 'foo';
+        $element = $this->manager->get('element', $args);
+        $this->assertEquals('foo', $element->getName(), 'The argument is string');
+    }
+
+    public function testArrayCreationOptions()
+    {
+        $args = array(
+            'name' => 'foo',
+            'options' => array(
+                'label' => 'bar'
+            ),
+        );
+        $element = $this->manager->get('element', $args);
+        $this->assertEquals('foo', $element->getName(), 'Specified name in array[name]');
+        $this->assertEquals('bar', $element->getLabel(), 'Specified options in array[options]');
+    }
+
+    public function testOptionsCreationOptions()
+    {
+        $args = array(
+            'label' => 'bar'
+        );
+        $element = $this->manager->get('element', $args);
+        $this->assertEquals('element', $element->getName(), 'Invokable CNAME');
+        $this->assertEquals('bar', $element->getLabel(), 'Specified options in array');
+    }
+
+    public function testArrayOptionsCreationOptions()
+    {
+        $args = array(
+            'options' => array(
+                'label' => 'bar'
+            ),
+        );
+        $element = $this->manager->get('element', $args);
+        $this->assertEquals('element', $element->getName(), 'Invokable CNAME');
+        $this->assertEquals('bar', $element->getLabel(), 'Specified options in array[options]');
+    }
 }

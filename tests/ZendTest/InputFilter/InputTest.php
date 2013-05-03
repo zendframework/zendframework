@@ -272,4 +272,30 @@ class InputTest extends TestCase
         $this->assertEquals(2, count($validators));
         $this->assertEquals($notEmptyMock, $validators[1]['instance']);
     }
+
+    public static function dataFallbackValue()
+    {
+        return array(
+            array(
+                'fallbackValue' => null
+            ),
+            array(
+                'fallbackValue' => ''
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider dataFallbackValue
+     */
+    public function testNullOrEmptyStringInFallbackValue($fallbackValue)
+    {
+        $this->input->setFallbackValue($fallbackValue);
+        $validator = new Validator\Date();
+        $this->input->getValidatorChain()->attach($validator);
+        $this->input->setValue('123'); // not a date
+
+        $this->assertTrue($this->input->isValid());
+        $this->assertEmpty($this->input->getMessages());
+    }
 }

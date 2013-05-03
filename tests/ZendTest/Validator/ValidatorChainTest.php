@@ -10,7 +10,6 @@
 
 namespace ZendTest\Validator;
 
-use Zend\I18n\Translator\Translator;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Between;
 use Zend\Validator\NotEmpty;
@@ -142,7 +141,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     public function testSetGetDefaultTranslator()
     {
-        $translator = new Translator();
+        $translator = new TestAsset\Translator();
         AbstractValidator::setDefaultTranslator($translator);
         $this->assertSame($translator, AbstractValidator::getDefaultTranslator());
     }

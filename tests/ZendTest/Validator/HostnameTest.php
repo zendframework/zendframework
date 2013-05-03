@@ -10,7 +10,6 @@
 
 namespace ZendTest\Validator;
 
-use Zend\I18n\Translator\Translator;
 use Zend\Validator\Hostname;
 
 /**
@@ -266,7 +265,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         );
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = $translations;
-        $translator = new Translator();
+        $translator = new TestAsset\Translator();
         $translator->getPluginManager()->setService('default', $loader);
         $translator->addTranslationFile('default', null);
         $this->validator->setTranslator($translator);

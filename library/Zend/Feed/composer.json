@@ -17,7 +17,6 @@
         "zendframework/zend-escaper": "self.version",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-servicemanager": "self.version",
-        "zendframework/zend-uri": "self.version",
         "zendframework/zend-version": "self.version"
     },
     "suggest": {

@@ -24,8 +24,8 @@ class Rename extends Filter\AbstractFilter
     /**
      * Class constructor
      *
-     * Options argument may be either a string, a Zend_Config object, or an array.
-     * If an array or Zend_Config object, it accepts the following keys:
+     * Options argument may be either a string, a Zend\Config\Config object, or an array.
+     * If an array or Zend\Config\Config object, it accepts the following keys:
      * 'source'    => Source filename or directory which will be renamed
      * 'target'    => Target filename or directory, the new name of the source file
      * 'overwrite' => Shall existing files be overwritten ?

@@ -55,7 +55,7 @@ class Upload extends AbstractValidator
     /**
      * Sets validator options
      *
-     * The array $files must be given in syntax of Zend_File_Transfer to be checked
+     * The array $files must be given in syntax of Zend\File\Transfer\Transfer to be checked
      * If no files are given the $_FILES array will be used automatically.
      * NOTE: This validator will only work with HTTP POST uploads!
      *

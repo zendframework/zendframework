@@ -43,7 +43,7 @@ class PubSubHubbub
     /**
      * Simple utility function which imports any feed URL and
      * determines the existence of Hub Server endpoints. This works
-     * best if directly given an instance of Zend_Feed_Reader_Atom|Rss
+     * best if directly given an instance of Zend\Feed\Reader\Atom|Rss
      * to leverage off.
      *
      * @param  \Zend\Feed\Reader\Feed\AbstractFeed|string $source
@@ -65,7 +65,7 @@ class PubSubHubbub
     }
 
     /**
-     * Allows the external environment to make Zend_Oauth use a specific
+     * Allows the external environment to make Oauth use a specific
      * Client instance.
      *
      * @param  Http\Client $httpClient

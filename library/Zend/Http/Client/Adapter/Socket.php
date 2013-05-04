@@ -106,7 +106,7 @@ class Socket implements HttpAdapter, StreamInterface
         }
         if (!is_array($options)) {
             throw new AdapterException\InvalidArgumentException(
-                'Array or Zend_Config object expected, got ' . gettype($options)
+                'Array or Zend\Config object expected, got ' . gettype($options)
             );
         }
 
@@ -483,7 +483,7 @@ class Socket implements HttpAdapter, StreamInterface
             }
 
             // We automatically decode chunked-messages when writing to a stream
-            // this means we have to disallow the Zend_Http_Response to do it again
+            // this means we have to disallow the Zend\Http\Response to do it again
             if ($this->outStream) {
                 $response = str_ireplace("Transfer-Encoding: chunked\r\n", '', $response);
             }

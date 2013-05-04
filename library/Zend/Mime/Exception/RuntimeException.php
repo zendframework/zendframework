@@ -10,7 +10,7 @@
 namespace Zend\Mime\Exception;
 
 /**
- * Exception for Zend_Mime component.
+ * Exception for Zend\Mime component.
  */
 class RuntimeException
     extends \RuntimeException

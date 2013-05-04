@@ -84,7 +84,7 @@ abstract class AbstractCallback implements CallbackInterface
 
     /**
      * Send the response, including all headers.
-     * If you wish to handle this via Zend_Http, use the getter methods
+     * If you wish to handle this via Zend\Http, use the getter methods
      * to retrieve any data needed to be set on your HTTP Response object, or
      * simply give this object the HTTP Response instance to work with for you!
      *

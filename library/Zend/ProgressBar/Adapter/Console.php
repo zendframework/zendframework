@@ -14,7 +14,7 @@ use Zend\Stdlib\ErrorHandler;
 use Zend\Stdlib\StringUtils;
 
 /**
- * Zend_ProgressBar_Adapter_Console offers a text-based progressbar for console
+ * Zend\ProgressBar\Adapter\Console offers a text-based progressbar for console
  * applications
  */
 class Console extends AbstractAdapter
@@ -136,7 +136,7 @@ class Console extends AbstractAdapter
     protected $charset = 'utf-8';
 
     /**
-     * Defined by Zend_ProgressBar_Adapter
+     * Defined by Zend\ProgressBar adapter
      *
      * @param  array|\Traversable $options
      */

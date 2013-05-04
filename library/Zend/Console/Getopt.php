@@ -341,7 +341,7 @@ class Getopt
     /**
      * Define multiple configuration options from an associative array.
      * These are not program options, but properties to configure
-     * the behavior of Zend_Console_Getopt.
+     * the behavior of Zend\Console\Getopt.
      *
      * @param  array $getoptConfig
      * @return \Zend\Console\Getopt Provides a fluent interface
@@ -359,7 +359,7 @@ class Getopt
     /**
      * Define one configuration option as a key/value pair.
      * These are not program options, but properties to configure
-     * the behavior of Zend_Console_Getopt.
+     * the behavior of Zend\Console\Getopt.
      *
      * @param  string $configKey
      * @param  string $configValue

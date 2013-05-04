@@ -15,11 +15,11 @@ use Zend\Http\Response;
 use Zend\Stdlib\ErrorHandler;
 
 /**
- * HTTP Proxy-supporting Zend_Http_Client adapter class, based on the default
+ * HTTP Proxy-supporting Zend\Http\Client adapter class, based on the default
  * socket based adapter.
  *
  * Should be used if proxy HTTP access is required. If no proxy is set, will
- * fall back to Zend_Http_Client_Adapter_Socket behavior. Just like the
+ * fall back to Zend\Http\Client\Adapter\Socket behavior. Just like the
  * default Socket adapter, this adapter does not require any special extensions
  * installed.
  */

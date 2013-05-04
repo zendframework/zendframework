@@ -13,7 +13,7 @@ use Zend\ProgressBar\Exception;
 use Zend\Session;
 
 /**
- * Zend_ProgressBar offers an interface for multiple environments.
+ * Zend\ProgressBar offers an interface for multiple environments.
  */
 class ProgressBar
 {

@@ -23,7 +23,7 @@ interface CallbackInterface
 
     /**
      * Send the response, including all headers.
-     * If you wish to handle this via Zend_Controller, use the getter methods
+     * If you wish to handle this via Controller, use the getter methods
      * to retrieve any data needed to be set on your HTTP Response object, or
      * simply give this object the HTTP Response instance to work with for you!
      *
@@ -33,8 +33,8 @@ interface CallbackInterface
 
     /**
      * An instance of a class handling Http Responses. This is implemented in
-     * Zend_Feed_Pubsubhubbub_HttpResponse which shares an unenforced interface with
-     * (i.e. not inherited from) Zend_Controller_Response_Http.
+     * Zend\Feed\Pubsubhubbub\HttpResponse which shares an unenforced interface with
+     * (i.e. not inherited from) Zend\Feed\Pubsubhubbub\AbstractCallback.
      *
      * @param HttpResponse|\Zend\Http\PhpEnvironment\Response $httpResponse
      */
@@ -42,8 +42,8 @@ interface CallbackInterface
 
     /**
      * An instance of a class handling Http Responses. This is implemented in
-     * Zend_Feed_Pubsubhubbub_HttpResponse which shares an unenforced interface with
-     * (i.e. not inherited from) Zend_Controller_Response_Http.
+     * Zend\Feed\Pubsubhubbub\HttpResponse which shares an unenforced interface with
+     * (i.e. not inherited from) Zend\Feed\Pubsubhubbub\AbstractCallback.
      *
      * @return HttpResponse|\Zend\Http\PhpEnvironment\Response
      */

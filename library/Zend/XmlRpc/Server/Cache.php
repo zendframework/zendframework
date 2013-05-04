@@ -10,7 +10,7 @@
 namespace Zend\XmlRpc\Server;
 
 /**
- * Zend_XmlRpc_Server_Cache: cache Zend_XmlRpc_Server server definition
+ * Zend\XmlRpc\Server\Cache: cache Zend\XmlRpc\Server server definition
  */
 class Cache extends \Zend\Server\Cache
 {

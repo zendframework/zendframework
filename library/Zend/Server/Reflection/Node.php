@@ -10,7 +10,7 @@
 namespace Zend\Server\Reflection;
 
 /**
- * Node Tree class for Zend_Server reflection operations
+ * Node Tree class for Zend\Server reflection operations
  */
 class Node
 {

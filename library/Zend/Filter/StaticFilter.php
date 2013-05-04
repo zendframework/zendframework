@@ -50,7 +50,7 @@ class StaticFilter
      *
      * The first argument of this method is a data input value, that you would have filtered.
      * The second argument is a string, which corresponds to the basename of the filter class,
-     * relative to the Zend_Filter namespace. This method automatically loads the class,
+     * relative to the Zend\Filter namespace. This method automatically loads the class,
      * creates an instance, and applies the filter() method to the data input. You can also pass
      * an array of constructor arguments, if they are needed for the filter class.
      *

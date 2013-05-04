@@ -35,7 +35,10 @@
 
     <target name="merge-clover" description="Merges the individual clover reports of each component into a single clover.xml">
         <sequential>
-            <exec executable="vendor/bin/phpcov.php" failonerror="true">
+            <exec executable="php" failonerror="true">
+                <arg value="-d" />
+                <arg value="memory_limit=-1" />
+                <arg value="vendor/bin/phpcov.php" />
                 <arg value="--merge" />
                 <arg value="--clover" />
                 <arg value="${basedir}/build/logs/clover.xml" />

@@ -14,7 +14,9 @@
     "target-dir": "Zend/Config",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-stdlib": "self.version",
+        "zendframework/zend-stdlib": "self.version"
+    },
+    "suggest": {
         "zendframework/zend-servicemanager": "self.version"
     },
     "extra": {

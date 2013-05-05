@@ -270,7 +270,7 @@ class Csrf extends AbstractValidator
     protected function initCsrfToken()
     {
         $session = $this->getSession();
-        //$session->setExpirationHops(1, null, true);
+        //$session->setExpirationHops(1, null);
         $timeout = $this->getTimeout();
         if (null !== $timeout) {
             $session->setExpirationSeconds($timeout);

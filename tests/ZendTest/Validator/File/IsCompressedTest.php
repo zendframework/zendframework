@@ -42,17 +42,25 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     public function basicBehaviorDataProvider()
     {
         $testFile = __DIR__ . '/_files/test.zip';
+
+        // Sometimes mime_content_type() gives application/zip and sometimes 
+        // application/x-zip ...
+        $expectedMimeType = mime_content_type(__DIR__ . '/_files/test.zip');
+        if (!in_array($expectedMimeType, array('application/zip', 'application/x-zip'))) {
+            $this->markTestSkipped('mime_content_type exhibits buggy behavior on this system!');
+        }
+
         $fileUpload = array(
             'tmp_name' => $testFile, 'name' => basename($testFile),
-            'size' => 200, 'error' => 0, 'type' => 'application/zip'
+            'size' => 200, 'error' => 0, 'type' => $expectedMimeType
         );
         return array(
             //    Options, isValid Param, Expected value
             array(null,                                          $fileUpload, true),
             array('zip',                                         $fileUpload, true),
             array('test/notype',                                 $fileUpload, false),
-            array('application/zip, application/x-tar',          $fileUpload, true),
-            array(array('application/zip', 'application/x-tar'), $fileUpload, true),
+            array('application/x-zip, application/zip, application/x-tar', $fileUpload, true),
+            array(array('application/x-zip', 'application/zip', 'application/x-tar'), $fileUpload, true),
             array(array('zip', 'tar'),                           $fileUpload, true),
             array(array('tar', 'arj'),                           $fileUpload, false),
         );

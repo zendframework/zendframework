@@ -17,7 +17,7 @@
         "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
-        "zendframework/zend-servicemanager": "self.version"
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager for use with the Config Factory to retrieve reader and writer instances"
     },
     "extra": {
         "branch-alias": {

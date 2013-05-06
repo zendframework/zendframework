@@ -45,13 +45,14 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
 
         // Sometimes mime_content_type() gives application/zip and sometimes 
         // application/x-zip ...
+        $allowed          = array('application/zip', 'application/x-zip');
         $expectedMimeType = mime_content_type($testFile);
         $fileUpload       = array(
             'tmp_name' => $testFile,
             'name'     => basename($testFile),
             'size'     => 200,
             'error'    => 0,
-            'type'     => $expectedMimeType,
+            'type'     => in_array($expectedMimeType, $allowed) ? $expectedMimeType : 'application/zip',
         );
 
         return array(
@@ -59,7 +60,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
             array(null,                                                               $fileUpload, true),
             array('zip',                                                              $fileUpload, true),
             array('test/notype',                                                      $fileUpload, false),
-            array(array('application/x-zip, application/zip, application/x-tar'),     $fileUpload, true),
+            array('application/x-zip, application/zip, application/x-tar',            $fileUpload, true),
             array(array('application/x-zip', 'application/zip', 'application/x-tar'), $fileUpload, true),
             array(array('zip', 'tar'),                                                $fileUpload, true),
             array(array('tar', 'arj'),                                                $fileUpload, false),
@@ -85,8 +86,17 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     /**
      * Skip a test if mime_content_type returns buggy information
      */
-    protected function skipIfBuggyMimeContentType()
+    protected function skipIfBuggyMimeContentType($options)
     {
+        if (!is_array($options)) {
+            $options = (array) $options;
+        }
+
+        if (!in_array('application/zip', $options)) {
+            // mime_content_type does not play a role; no need to skip
+            return;
+        }
+
         // Sometimes mime_content_type() gives application/zip and sometimes 
         // application/x-zip ...
         $expectedMimeType = mime_content_type(__DIR__ . '/_files/test.zip');
@@ -104,7 +114,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     public function testBasic($options, $isValidParam, $expected)
     {
         $this->skipIfNoFileInfoExtension();
-        $this->skipIfBuggyMimeContentType();
+        $this->skipIfBuggyMimeContentType($options);
 
         $validator = new File\IsCompressed($options);
         $validator->enableHeaderCheck();
@@ -124,7 +134,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->skipIfNoFileInfoExtension();
-        $this->skipIfBuggyMimeContentType();
+        $this->skipIfBuggyMimeContentType($options);
 
         $validator = new File\IsCompressed($options);
         $validator->enableHeaderCheck();

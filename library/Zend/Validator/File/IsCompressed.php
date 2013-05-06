@@ -71,6 +71,7 @@ class IsCompressed extends MimeType
             'application/x-stuffit',
             'application/x-tar',
             'application/zip',
+            'application/x-zip',
             'application/zoo',
             'multipart/x-gzip',
         );

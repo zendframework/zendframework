@@ -100,4 +100,21 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
         $items = $this->dbTableGateway->getItems(2, 10);
         $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);
     }
+
+    public function testGetItemsWithWhereAndOrderAndGroup()
+    {
+        $where = "foo = bar";
+        $order = "foo";
+        $group = "foo";
+        $this->dbTableGateway = new DbTableGateway($this->mockTableGateway, $where, $order, $group);
+
+        $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $this->mockStatement
+             ->expects($this->any())
+             ->method('execute')
+             ->will($this->returnValue($mockResult));
+
+        $items = $this->dbTableGateway->getItems(2, 10);
+        $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);
+    }
 }

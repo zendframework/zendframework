@@ -29,14 +29,14 @@ class ValidatorPluginManagerTest extends \PHPUnit_Framework_TestCase
     {
         $translator = $this->getMock('ZendTest\Validator\TestAsset\Translator');
 
-        $slContents = array(array('translator', $translator));
+        $slContents = array(array('MvcTranslator', $translator));
         $serviceLocator = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');
         $serviceLocator->expects($this->once())
             ->method('get')
             ->will($this->returnValueMap($slContents));
         $serviceLocator->expects($this->once())
             ->method('has')
-            ->with($this->equalTo('translator'))
+            ->with($this->equalTo('MvcTranslator'))
             ->will($this->returnValue(true));
 
         $this->validators->setServiceLocator($serviceLocator);
@@ -51,7 +51,7 @@ class ValidatorPluginManagerTest extends \PHPUnit_Framework_TestCase
         $serviceLocator = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');
         $serviceLocator->expects($this->once())
             ->method('has')
-            ->with($this->equalTo('translator'))
+            ->with($this->equalTo('MvcTranslator'))
             ->will($this->returnValue(false));
 
         $this->validators->setServiceLocator($serviceLocator);

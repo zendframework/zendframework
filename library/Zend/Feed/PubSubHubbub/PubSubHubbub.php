@@ -65,7 +65,7 @@ class PubSubHubbub
     }
 
     /**
-     * Allows the external environment to make Oauth use a specific
+     * Allows the external environment to make ZendOAuth use a specific
      * Client instance.
      *
      * @param  Http\Client $httpClient

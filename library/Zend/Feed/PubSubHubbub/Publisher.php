@@ -49,7 +49,7 @@ class Publisher
     protected $parameters = array();
 
     /**
-     * Constructor; accepts an array or Zend\Config instance to preset
+     * Constructor; accepts an array or Zend\Config\Config instance to preset
      * options for the Publisher without calling all supported setter
      * methods in turn.
      *

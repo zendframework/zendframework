@@ -202,10 +202,6 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
         }
 
         if ($factory instanceof FactoryInterface) {
-            if ($hasCreationOptions && $factory instanceof MutableCreationOptionsInterface) {
-                $factory->setCreationOptions($this->creationOptions);
-            }
-
             $instance = $this->createServiceViaCallback(array($factory, 'createService'), $canonicalName, $requestedName);
         } elseif (is_callable($factory)) {
             $instance = $this->createServiceViaCallback($factory, $canonicalName, $requestedName);
@@ -216,5 +212,36 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
         }
 
         return $instance;
+    }
+
+    /**
+     * Create service via callback
+     *
+     * @param  callable $callable
+     * @param  string   $cName
+     * @param  string   $rName
+     * @throws Exception\ServiceNotCreatedException
+     * @throws Exception\ServiceNotFoundException
+     * @throws Exception\CircularDependencyFoundException
+     * @return object
+     */
+    protected function createServiceViaCallback($callable, $cName, $rName)
+    {
+        if (is_object($callable)) {
+            $factory = $callable;
+        } elseif (is_array($callable)) {
+            // reset both rewinds and returns the value of the first array element
+            $factory = reset($callable);
+        }
+
+        if (isset($factory)
+            && ($factory instanceof MutableCreationOptionsInterface)
+            && is_array($this->creationOptions)
+            && !empty($this->creationOptions)
+        ) {
+            $factory->setCreationOptions($this->creationOptions);
+        }
+
+        return parent::createServiceViaCallback($callable, $cName, $rName);
     }
 }

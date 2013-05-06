@@ -581,8 +581,6 @@ class BaseInputFilterTest extends TestCase
      */
     public function testValidationMarksInputValidWhenAllowEmptyFlagIsTrueAndContinueIfEmptyIsTrueAndContextValidatesEmptyField($allowEmpty, $blankIsValid, $valid)
     {
-       // $this->markTestSkipped();
-
         $filter = new InputFilter();
 
         $data = array (
@@ -602,7 +600,6 @@ class BaseInputFilterTest extends TestCase
         $filter->add($allowEmpty, 'allowEmpty')
                ->add($blankIsValid, 'blankIsValid');
         $filter->setData($data);
-//        die(var_dump($filter->get('blankIsValid')));
 
         $this->assertSame($valid, $filter->isValid());
     }

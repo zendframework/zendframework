@@ -9,7 +9,7 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\Form\FormDiMock;
+use Zend\Form\Form;
 use Zend\Form\FormElementManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -30,7 +30,7 @@ class FormElementManagerFactory extends AbstractPluginManagerFactory
             $di = $serviceLocator->get('Di');
             $im = $di->instanceManager();
             if (!$im->getTypePreferences('Zend\Form\FormInterface')) {
-                $form = new FormDiMock;
+                $form = new Form;
                 $im->setTypePreference('Zend\Form\FormInterface', array($form));
             }
             $plugins->addPeeringServiceManager($serviceLocator);

@@ -21,8 +21,9 @@ class DbTableGateway extends DbSelect
      * @param TableGateway                $tableGateway
      * @param Where|\Closure|string|array $where
      * @param null                        $order
+     * @param null|string|array           $group
      */
-    public function __construct(TableGateway $tableGateway, $where = null, $order = null)
+    public function __construct(TableGateway $tableGateway, $where = null, $order = null, $group = null)
     {
         $select = $tableGateway->getSql()->select();
         if ($where) {
@@ -30,6 +31,9 @@ class DbTableGateway extends DbSelect
         }
         if ($order) {
             $select->order($order);
+        }
+        if ($group) {
+            $select->group($group);
         }
 
         $dbAdapter          = $tableGateway->getAdapter();

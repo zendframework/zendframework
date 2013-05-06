@@ -73,11 +73,6 @@ class FormRow extends AbstractHelper
     protected $partial;
 
     /**
-     * @var array
-     */
-    protected $partialVars = array();
-
-    /**
      * Invoke helper as functor
      *
      * Proxies to {@link render()}.
@@ -87,7 +82,7 @@ class FormRow extends AbstractHelper
      * @param  bool                  $renderErrors
      * @return string|FormRow
      */
-    public function __invoke(ElementInterface $element = null, $labelPosition = null, $renderErrors = null)
+    public function __invoke(ElementInterface $element = null, $labelPosition = null, $renderErrors = null, $partial = null)
     {
         if (!$element) {
             return $this;
@@ -101,6 +96,10 @@ class FormRow extends AbstractHelper
 
         if ($renderErrors !== null) {
             $this->setRenderErrors($renderErrors);
+        }
+
+        if ($partial !== null) {
+            $this->setPartial($partial);
         }
 
         return $this->render($element);
@@ -124,6 +123,15 @@ class FormRow extends AbstractHelper
         $inputErrorClass = $this->getInputErrorClass();
         $elementErrors   = $elementErrorsHelper->render($element);
 
+        if (isset($label) && '' !== $label) {
+            // Translate the label
+            if (null !== ($translator = $this->getTranslator())) {
+                $label = $translator->translate(
+                    $label, $this->getTranslatorTextDomain()
+                );
+            }
+        }
+
         // Does this element have errors ?
         if (!empty($elementErrors) && !empty($inputErrorClass)) {
             $classAttributes = ($element->hasAttribute('class') ? $element->getAttribute('class') . ' ' : '');
@@ -132,16 +140,21 @@ class FormRow extends AbstractHelper
             $element->setAttribute('class', $classAttributes);
         }
 
+        if ($this->partial) {
+            $vars = array(
+                'element'           => $element,
+                'label'             => $label,
+                'labelAttributes'   => $this->labelAttributes,
+                'labelPosition'     => $this->labelPosition,
+                'renderErrors'      => $this->renderErrors,
+            );
+
+            return $this->view->render($this->partial, $vars);
+        }
+
         $elementString = $elementHelper->render($element);
 
         if (isset($label) && '' !== $label) {
-            // Translate the label
-            if (null !== ($translator = $this->getTranslator())) {
-                $label = $translator->translate(
-                    $label, $this->getTranslatorTextDomain()
-                );
-            }
-
             $label = $escapeHtmlHelper($label);
             $labelAttributes = $element->getLabelAttributes();
 
@@ -171,19 +184,6 @@ class FormRow extends AbstractHelper
                     $label = '<span>' . $label . '</span>';
                 }
 
-                if ($this->partial) {
-                    $vars = array(
-                        'element'       => $elementString,
-                        'label'         => $label,
-                        'labelOpen'     => $labelOpen,
-                        'labelClose'    => $labelClose,
-                        'labelPosition' => $this->labelPosition,
-                        'errors'        => $elementErrors,
-                        'renderErrors'  => $this->renderErrors
-                    );
-                    return $this->view->render($this->partial, array_merge($vars, $this->partialVars));
-                }
-
                 switch ($this->labelPosition) {
                     case self::LABEL_PREPEND:
                         $markup = $labelOpen . $label . $elementString . $labelClose;
@@ -199,15 +199,6 @@ class FormRow extends AbstractHelper
                 $markup .= $elementErrors;
             }
         } else {
-            if ($this->partial) {
-                $vars = array(
-                    'element'       => $elementString,
-                    'errors'        => $elementErrors,
-                    'renderErrors'  => $this->renderErrors
-                );
-                return $this->view->render($this->partial, array_merge($vars, $this->partialVars));
-            }
-
             if ($this->renderErrors) {
                 $markup = $elementString . $elementErrors;
             } else {
@@ -316,6 +307,28 @@ class FormRow extends AbstractHelper
     public function getRenderErrors()
     {
         return $this->renderErrors;
+    }
+
+    /**
+     * Set a partial view script to use for rendering the row
+     *
+     * @param null|string $partial
+     * @return FormRow
+     */
+    public function setPartial($partial)
+    {
+        $this->partial = $partial;
+        return $this;
+    }
+
+    /**
+     * Retrive current partial
+     *
+     * @return null|string
+     */
+    public function getPartial()
+    {
+        return $this->partial;
     }
 
     /**

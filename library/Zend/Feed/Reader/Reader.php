@@ -494,9 +494,9 @@ class Reader
     /**
      * Set plugin manager for use with Extensions
      *
-     * @param ExtensionManager $extensionManager
+     * @param ExtensionManagerInterface $extensionManager
      */
-    public static function setExtensionManager(ExtensionManager $extensionManager)
+    public static function setExtensionManager(ExtensionManagerInterface $extensionManager)
     {
         static::$extensionManager = $extensionManager;
     }
@@ -504,7 +504,7 @@ class Reader
     /**
      * Get plugin manager for use with Extensions
      *
-     * @return ExtensionManager
+     * @return ExtensionManagerInterface
      */
     public static function getExtensionManager()
     {

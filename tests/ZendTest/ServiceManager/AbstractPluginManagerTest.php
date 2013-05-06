@@ -11,6 +11,7 @@
 namespace ZendTest\ServiceManager;
 
 use ReflectionClass;
+use ReflectionObject;
 use Zend\ServiceManager\Exception;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
@@ -29,6 +30,14 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         $this->serviceManager = new ServiceManager;
+        $this->pluginManager = new FooPluginManager(new Config(array(
+            'factories' => array(
+                'Foo' => 'ZendTest\ServiceManager\TestAsset\FooFactory',
+            ),
+            'shared' => array(
+                'Foo' => false,
+            ),
+        )));
     }
 
     public function testSetMultipleCreationOptions()
@@ -60,5 +69,53 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $value = $reflProperty->getValue($pluginManager);
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\FooFactory', $value['foo']);
         $this->assertEquals(array('key2' => 'value2'), $value['foo']->getCreationOptions());
+    }
+
+    public function testAbstractFactoryWithMutableCreationOptions()
+    {
+        $creationOptions = array('key1' => 'value1');
+        $mock = 'ZendTest\ServiceManager\TestAsset\AbstractFactoryWithMutableCreationOptions';
+        $abstractFactory = $this->getMock($mock, array('setCreationOptions'));
+        $abstractFactory->expects($this->once())
+            ->method('setCreationOptions')
+            ->with($creationOptions);
+
+        $this->pluginManager->addAbstractFactory($abstractFactory);
+        $instance = $this->pluginManager->get('classnoexists', $creationOptions);
+        $this->assertTrue(is_object($instance));
+    }
+
+    public function testMutableMethodNeverCalledWithoutCreationOptions()
+    {
+        $mock = 'ZendTest\ServiceManager\TestAsset\CallableWithMutableCreationOptions';
+        $callable = $this->getMock($mock, array('setCreationOptions'));
+        $callable->expects($this->never())
+            ->method('setCreationOptions');
+
+        $ref = new ReflectionObject($this->pluginManager);
+
+        $method = $ref->getMethod('createServiceViaCallback');
+        $method->setAccessible(true);
+        $method->invoke($this->pluginManager, $callable, 'foo', 'bar');
+    }
+
+    public function testCallableObjectWithMutableCreationOptions()
+    {
+        $creationOptions = array('key1' => 'value1');
+        $mock = 'ZendTest\ServiceManager\TestAsset\CallableWithMutableCreationOptions';
+        $callable = $this->getMock($mock, array('setCreationOptions'));
+        $callable->expects($this->once())
+            ->method('setCreationOptions')
+            ->with($creationOptions);
+
+        $ref = new ReflectionObject($this->pluginManager);
+
+        $property = $ref->getProperty('creationOptions');
+        $property->setAccessible(true);
+        $property->setValue($this->pluginManager, $creationOptions);
+
+        $method = $ref->getMethod('createServiceViaCallback');
+        $method->setAccessible(true);
+        $method->invoke($this->pluginManager, $callable, 'foo', 'bar');
     }
 }

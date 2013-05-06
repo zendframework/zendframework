@@ -9,8 +9,8 @@
 
 namespace Zend\Feed\Writer\Extension\ITunes;
 
+use Zend\Feed\Uri;
 use Zend\Feed\Writer;
-use Zend\Uri;
 use Zend\Stdlib\StringUtils;
 use Zend\Stdlib\StringWrapper\StringWrapperInterface;
 
@@ -171,7 +171,7 @@ class Feed
      */
     public function setItunesImage($value)
     {
-        if (!Uri\UriFactory::factory($value)->isValid()) {
+        if (!Uri::factory($value)->isValid()) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "image" may only'
             . ' be a valid URI/IRI');
         }
@@ -254,7 +254,7 @@ class Feed
      */
     public function setItunesNewFeedUrl($value)
     {
-        if (!Uri\UriFactory::factory($value)->isValid()) {
+        if (!Uri::factory($value)->isValid()) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "newFeedUrl" may only'
             . ' be a valid URI/IRI');
         }

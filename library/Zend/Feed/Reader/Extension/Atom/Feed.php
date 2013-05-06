@@ -14,7 +14,7 @@ use DOMElement;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Collection;
 use Zend\Feed\Reader\Extension;
-use Zend\Uri;
+use Zend\Feed\Uri;
 
 class Feed extends Extension\AbstractFeed
 {
@@ -482,10 +482,10 @@ class Feed extends Extension\AbstractFeed
      */
     protected function absolutiseUri($link)
     {
-        if (!Uri\UriFactory::factory($link)->isAbsolute()) {
+        if (!Uri::factory($link)->isAbsolute()) {
             if ($this->getBaseUrl() !== null) {
                 $link = $this->getBaseUrl() . $link;
-                if (!Uri\UriFactory::factory($link)->isValid()) {
+                if (!Uri::factory($link)->isValid()) {
                     $link = null;
                 }
             }

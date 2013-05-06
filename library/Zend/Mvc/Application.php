@@ -136,7 +136,7 @@ class Application implements
     public function bootstrap(array $listeners = array())
     {
         $serviceManager = $this->serviceManager;
-        $events         = $this->getEventManager();
+        $events         = $this->events;
 
         $listeners = array_unique(array_merge($this->defaultListeners, $listeners));
 

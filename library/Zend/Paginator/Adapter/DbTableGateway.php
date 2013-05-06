@@ -10,6 +10,7 @@
 namespace Zend\Paginator\Adapter;
 
 use Zend\Db\Sql\Where;
+use Zend\Db\Sql\Having;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Paginator\Adapter\DbSelect;
 
@@ -18,12 +19,13 @@ class DbTableGateway extends DbSelect
     /**
      * Constructs instance.
      *
-     * @param TableGateway                $tableGateway
-     * @param Where|\Closure|string|array $where
-     * @param null                        $order
-     * @param null|string|array           $group
+     * @param TableGateway                      $tableGateway
+     * @param null|Where|\Closure|string|array  $where
+     * @param null|string|array                 $order
+     * @param null|string|array                 $group
+     * @param null|Having|\Closure|string|array $having
      */
-    public function __construct(TableGateway $tableGateway, $where = null, $order = null, $group = null)
+    public function __construct(TableGateway $tableGateway, $where = null, $order = null, $group = null, $having = null)
     {
         $select = $tableGateway->getSql()->select();
         if ($where) {
@@ -34,6 +36,9 @@ class DbTableGateway extends DbSelect
         }
         if ($group) {
             $select->group($group);
+        }
+        if ($having) {
+            $select->having($having);
         }
 
         $dbAdapter          = $tableGateway->getAdapter();

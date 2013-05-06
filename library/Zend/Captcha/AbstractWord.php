@@ -248,7 +248,7 @@ abstract class AbstractWord extends AbstractAdapter
                 throw new Exception\InvalidArgumentException("Session class $this->sessionClass not found");
             }
             $this->session = new $this->sessionClass('Zend_Form_Captcha_' . $id);
-            $this->session->setExpirationHops(1, null, true);
+            $this->session->setExpirationHops(1, null);
             $this->session->setExpirationSeconds($this->getTimeout());
         }
         return $this->session;

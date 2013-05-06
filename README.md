@@ -5,11 +5,11 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.2.0dev*
+*Zend Framework 2.2.0rc2*
 
 This is the second minor (feature) release for the version 2 series.
 
-DD MMM YYYY
+06 May 2013
 
 ### UPDATES IN 2.2.0
 

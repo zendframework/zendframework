@@ -196,6 +196,9 @@ class Form extends Fieldset implements FormInterface
      */
     public function prepareElement(FormInterface $form)
     {
+        if ($form !== $this) {
+            return;
+        }
         $name = $this->getName();
 
         foreach ($this->byName as $elementOrFieldset) {

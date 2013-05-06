@@ -9,12 +9,13 @@
 
 namespace ZendTest\ServiceManager\TestAsset;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use stdClass;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\MutableCreationOptionsInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
 /**
  * implements multiple interface mock
- *
  */
 class AbstractFactoryWithMutableCreationOptions implements
     AbstractFactoryInterface,
@@ -27,7 +28,7 @@ class AbstractFactoryWithMutableCreationOptions implements
 
     public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        return new \StdClass;
+        return new stdClass;
     }
 
     public function setCreationOptions(array $options)

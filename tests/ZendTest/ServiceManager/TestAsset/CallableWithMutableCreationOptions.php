@@ -9,11 +9,12 @@
 
 namespace ZendTest\ServiceManager\TestAsset;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use stdClass;
 use Zend\ServiceManager\MutableCreationOptionsInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
 /**
  * implements multiple interface invokable object mock
- *
  */
 class CallableWithMutableCreationOptions implements MutableCreationOptionsInterface
 {
@@ -24,6 +25,6 @@ class CallableWithMutableCreationOptions implements MutableCreationOptionsInterf
 
     public function __invoke(ServiceLocatorInterface $serviceLocator, $cName, $rName)
     {
-        return new \StdClass;
+        return new stdClass;
     }
 }

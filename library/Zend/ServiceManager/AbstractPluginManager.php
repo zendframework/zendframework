@@ -230,11 +230,15 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
         if (is_object($callable)) {
             $factory = $callable;
         } elseif (is_array($callable)) {
+            // reset both rewinds and returns the value of the first array element
             $factory = reset($callable);
         }
 
-        if (isset($factory) && ($factory instanceof MutableCreationOptionsInterface)
-            && is_array($this->creationOptions) && !empty($this->creationOptions)){
+        if (isset($factory)
+            && ($factory instanceof MutableCreationOptionsInterface)
+            && is_array($this->creationOptions)
+            && !empty($this->creationOptions)
+        ) {
             $factory->setCreationOptions($this->creationOptions);
         }
 

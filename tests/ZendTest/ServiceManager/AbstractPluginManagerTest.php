@@ -11,6 +11,7 @@
 namespace ZendTest\ServiceManager;
 
 use ReflectionClass;
+use ReflectionObject;
 use Zend\ServiceManager\Exception;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
@@ -31,11 +32,11 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager = new ServiceManager;
         $this->pluginManager = new FooPluginManager(new Config(array(
             'factories' => array(
-                'Foo' => 'ZendTest\ServiceManager\TestAsset\FooFactory'
+                'Foo' => 'ZendTest\ServiceManager\TestAsset\FooFactory',
             ),
             'shared' => array(
-                'Foo' => false
-            )
+                'Foo' => false,
+            ),
         )));
     }
 
@@ -76,8 +77,8 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $mock = 'ZendTest\ServiceManager\TestAsset\AbstractFactoryWithMutableCreationOptions';
         $abstractFactory = $this->getMock($mock, array('setCreationOptions'));
         $abstractFactory->expects($this->once())
-                ->method('setCreationOptions')
-                ->with($creationOptions);
+            ->method('setCreationOptions')
+            ->with($creationOptions);
 
         $this->pluginManager->addAbstractFactory($abstractFactory);
         $instance = $this->pluginManager->get('classnoexists', $creationOptions);
@@ -89,9 +90,10 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $mock = 'ZendTest\ServiceManager\TestAsset\CallableWithMutableCreationOptions';
         $callable = $this->getMock($mock, array('setCreationOptions'));
         $callable->expects($this->never())
-                 ->method('setCreationOptions');
+            ->method('setCreationOptions');
 
-        $ref = new \ReflectionObject($this->pluginManager);
+        $ref = new ReflectionObject($this->pluginManager);
+
         $method = $ref->getMethod('createServiceViaCallback');
         $method->setAccessible(true);
         $method->invoke($this->pluginManager, $callable, 'foo', 'bar');
@@ -103,13 +105,15 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $mock = 'ZendTest\ServiceManager\TestAsset\CallableWithMutableCreationOptions';
         $callable = $this->getMock($mock, array('setCreationOptions'));
         $callable->expects($this->once())
-                 ->method('setCreationOptions')
-                 ->with($creationOptions);
+            ->method('setCreationOptions')
+            ->with($creationOptions);
 
-        $ref = new \ReflectionObject($this->pluginManager);
+        $ref = new ReflectionObject($this->pluginManager);
+
         $property = $ref->getProperty('creationOptions');
         $property->setAccessible(true);
         $property->setValue($this->pluginManager, $creationOptions);
+
         $method = $ref->getMethod('createServiceViaCallback');
         $method->setAccessible(true);
         $method->invoke($this->pluginManager, $callable, 'foo', 'bar');

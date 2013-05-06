@@ -192,13 +192,15 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
                 continue;
             }
 
-            // key doesn't exist, input is required, allows empty; valid
+            // key doesn't exist, input is required, allows empty; valid if
+            // continueIfEmpty is false or input doesn't implement
+            // that interface; otherwise validation chain continues
             if (!$dataExists
                 && $input instanceof InputInterface
                 && $input->isRequired()
                 && $input->allowEmpty()
             ) {
-                if (!$input->allowEmpty()) {
+                if(!($input instanceOf EmptyContextInterface && $input->continueIfEmpty())) {
                     $this->validInputs[$name] = $input;
                     continue;
                 }
@@ -214,15 +216,19 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
                 continue;
             }
 
-            // key exists, is null, input is required, allows empty; valid
+            // key exists, is null, input is required, allows empty; valid if
+            // continueIfEmpty is false or input doesn't implement
+            // that interface; otherwise validation chain continues
             if ($dataExists
                 && null === $this->data[$name]
                 && $input instanceof InputInterface
                 && $input->isRequired()
                 && $input->allowEmpty()
             ) {
-                $this->validInputs[$name] = $input;
-                continue;
+                if (!($input instanceof EmptyContextInterface && $input->continueIfEmpty())) {
+                    $this->validInputs[$name] = $input;
+                    continue;
+                }
             }
 
             // key exists, empty string, input is not required, allows empty; valid
@@ -240,11 +246,10 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
             if ($dataExists
                 && '' === $this->data[$name]
                 && $input instanceof InputInterface
-                && $input instanceof EmptyContextInterface
                 && $input->isRequired()
                 && $input->allowEmpty()
             ) {
-                if (!$input->continueIfEmpty()) {
+                if (!($input instanceof EmptyContextInterface && $input->continueIfEmpty())) {
                     $this->validInputs[$name] = $input;
                     continue;
                 }

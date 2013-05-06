@@ -56,6 +56,7 @@
 - [4165: Validate empty with context](https://github.com/zendframework/zf2/issues/4165)
 - [4169: Fixed error in adapter paginator DbTableGateway](https://github.com/zendframework/zf2/issues/4169)
 - [4170: Hydrator aware interface](https://github.com/zendframework/zf2/issues/4170)
+- [4175: AbstractRestfulController uses wrong action for id=0](https://github.com/zendframework/zf2/issues/4175)
 - [4178: Allow passing objects to the url helper](https://github.com/zendframework/zf2/issues/4178)
 - [4181: Make identifier name configurable for AbstractRestfulController](https://github.com/zendframework/zf2/issues/4181)
 - [4187: Add event manager as soft dependency to translator](https://github.com/zendframework/zf2/issues/4187)
@@ -63,6 +64,7 @@
 - [4204: Hotfix for #4202](https://github.com/zendframework/zf2/issues/4204)
 - [4206: Added sequence name for PostgreSQL](https://github.com/zendframework/zf2/issues/4206)
 - [4215: Bugfix for redirection handling in Zend\Http\Client](https://github.com/zendframework/zf2/issues/4215)
+- [4219: Custom validators registered through ValidatorProviderInterface not found](https://github.com/zendframework/zf2/issues/4219)
 - [4231: (Form) (Hotfix) Get Elements for Collection](https://github.com/zendframework/zf2/issues/4231)
 - [4238: ValueGenerator constant detection](https://github.com/zendframework/zf2/issues/4238)
 - [4247: Added Brazilian IBAN format to IBAN validation](https://github.com/zendframework/zf2/issues/4247)
@@ -88,7 +90,7 @@
 - [4294: BaseInputFilter not populating InputFilters of Element\Collection](https://github.com/zendframework/zf2/issues/4294)
 - [4295: Console route defaults should be overridden by entered values](https://github.com/zendframework/zf2/issues/4295)
 - [4296: illegal usage of array\_walk in ObjectProperty, ClassMapAutoloader](https://github.com/zendframework/zf2/issues/4296)
-- [4298: View\Helper\Navigation\Menu: add flag to set page class to &lt;li&gt;](https://github.com/zendframework/zf2/issues/4298)
+- [4298: View\Helper\Navigation\Menu: add flag to set page class to ](https://github.com/zendframework/zf2/issues/4298)
 - [4299: Suggestion: Don't render empty module console information](https://github.com/zendframework/zf2/issues/4299)
 - [4300: Maestro detection improvements in Zend\Validator\CreditCard](https://github.com/zendframework/zf2/issues/4300)
 - [4301: remove extra semicolon](https://github.com/zendframework/zf2/issues/4301)
@@ -121,9 +123,57 @@
 - [4361: Ldap Ldif Decoder bug fix](https://github.com/zendframework/zf2/issues/4361)
 - [4364: AbstractFactory consistency](https://github.com/zendframework/zf2/issues/4364)
 - [4365: Use InputFilterPluginManager in InputFilter\Factory](https://github.com/zendframework/zf2/issues/4365)
+- [4366: Fix for issue #3945, and fix for PUT with request content](https://github.com/zendframework/zf2/issues/4366)
 - [4367: Remove reference to root namespace (fixes #4363)](https://github.com/zendframework/zf2/issues/4367)
 - [4372: Ability to load custom form classes from FormElementManager in Mvc.](https://github.com/zendframework/zf2/issues/4372)
+- [4374: CollectionInputFilter returns always valid for empty collections](https://github.com/zendframework/zf2/issues/4374)
+- [4376: Fix get with body in ClientStatic](https://github.com/zendframework/zf2/issues/4376)
+- [4378: Add patchList method to AbstractRestfulController](https://github.com/zendframework/zf2/issues/4378)
+- [4379: Fix for #4175](https://github.com/zendframework/zf2/issues/4379)
+- [4380: Decouple I18n\View\Helper\AbstractTranslatorHelper from ext\intl](https://github.com/zendframework/zf2/issues/4380)
+- [4382: Fix conflict InputFilter::type with Input::name in InputFilter factory](https://github.com/zendframework/zf2/issues/4382)
+- [4383: ensure the wrapElements option in Zend\Form\Form::prepareElement](https://github.com/zendframework/zf2/issues/4383)
+- [4389: Remove cache and log abstract factories from MVC](https://github.com/zendframework/zf2/issues/4389)
+- [4391: Segregated interfaces for Translator dependency of Validator component](https://github.com/zendframework/zf2/issues/4391)
+- [4392: Remove Version dependency from Feed component](https://github.com/zendframework/zf2/issues/4392)
+- [4393: 2.2RC1 BC Break: DateTimeFormatter sets blank data to today's date](https://github.com/zendframework/zf2/issues/4393)
+- [4394: Ensure that DateTimeFormatter doesn't format an empty string](https://github.com/zendframework/zf2/issues/4394)
+- [4396: Make ServiceManager dependency optional in Feed component](https://github.com/zendframework/zf2/issues/4396)
+- [4398: Allow DateTimeFormatter to format zero.](https://github.com/zendframework/zf2/issues/4398)
+- [4405: 2.2.0RC1 Form\View\Helper\FormRow "partial view" messed up](https://github.com/zendframework/zf2/issues/4405)
+- [4408: Optimize MutableCreationOptionsInterface capability](https://github.com/zendframework/zf2/issues/4408)
+- [4410: Fix conflict between translator service in ZF2 and skeleton app](https://github.com/zendframework/zf2/issues/4410)
+- [4411: Fix BC break in HTTP client resetParameters signature](https://github.com/zendframework/zf2/issues/4411)
+- [4412: FormRow: enable partial rendering](https://github.com/zendframework/zf2/issues/4412)
+- [4415: Remove URI dependency and make HTTP dependency optional in Feed](https://github.com/zendframework/zf2/issues/4415)
+- [4417: add docblock to I18n\Validator\PhoneNumber\{Code}.php](https://github.com/zendframework/zf2/issues/4417)
+- [4418: remove @package docblock from demos files](https://github.com/zendframework/zf2/issues/4418)
+- [4420: sync svn r23693 - (ZF-11002) ehancement implemented as proposed](https://github.com/zendframework/zf2/issues/4420)
+- [4423: Minor param overflow](https://github.com/zendframework/zf2/issues/4423)
+- [4424: Edit config composer.json](https://github.com/zendframework/zf2/issues/4424)
+- [4425: Fix FormElementManagerFactory breaks csrf validation (in Mvc)](https://github.com/zendframework/zf2/issues/4425)
+- [4432: code concistency : update Zend\Mvc\Application::bootstrap](https://github.com/zendframework/zf2/issues/4432)
 
+### Potential Breakage
+
+`Zend\Validator` was altered to remove the dependency on `Zend\I18n` by creating
+[Segregated Interfaces](http://en.wikipedia.org/wiki/Interface_segregation_principle).
+The practical upshot is that `Zend\Validator\AbstractValidator` no longer
+implements `Zend\I18n\Translator\TranslatorAwareInterface`, but rather
+`Zend\Validator\Translator\TranslatorAwareInterface`, which now typehints on
+`Zend\Validator\Translator\TranslatorInterface` instead of
+`Zend\I18n\Translator\Translator`. This means you cannot pass a
+`Zend\I18n\Translator\Translator` instance directly to a validator any longer.
+
+However, we have included a new class, `Zend\Mvc\I18n\Translator`, that extends
+the i18n Translator class and implements the Validator TranslatorInterface. This
+class may be used as a drop-in replacement. In fact, by default,
+`Zend\Validator\ValidatorPluginManager` is now using the `MvcTranslator`
+service, which utilizes this new class, making the change seamless for most
+users.
+
+The above change will only affect you if you were manually injecting a
+translator instance into your validators.
 
 ## 2.1.5 (17 Apr 2013):
 

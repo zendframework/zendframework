@@ -5,11 +5,11 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.2.0dev*
+*Zend Framework 2.2.0rc2*
 
 This is the second minor (feature) release for the version 2 series.
 
-DD MMM YYYY
+06 May 2013
 
 ### UPDATES IN 2.2.0
 
@@ -37,6 +37,11 @@ DD MMM YYYY
   database system. Zend\Db now offers abstraction around DDL, and 
   specifically MySQL and ANSI SQL-92; we will gradually add this 
   capability for the other database vendors we support.
+
+- **Simplification of dependencies in Zend\Feed.** We either removed or made
+  optional several dependencies in Zend\Feed, making it easier to use standalone
+  and/or with third-party components. We plan a larger story around this for
+  2.3.0.
 
 - **Authentication:** The DB adapter now supports non-RDBMS credential validation.
 

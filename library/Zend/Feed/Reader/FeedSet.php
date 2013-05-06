@@ -11,7 +11,7 @@ namespace Zend\Feed\Reader;
 
 use ArrayObject;
 use DOMNodeList;
-use Zend\Uri;
+use Zend\Feed\Uri;
 
 /**
 */
@@ -67,17 +67,17 @@ class FeedSet extends ArrayObject
      */
     protected function absolutiseUri($link, $uri = null)
     {
-        $linkUri = Uri\UriFactory::factory($link);
+        $linkUri = Uri::factory($link);
         if (!$linkUri->isAbsolute() or !$linkUri->isValid()) {
             if ($uri !== null) {
-                $uri = Uri\UriFactory::factory($uri);
+                $uri = Uri::factory($uri);
 
                 if ($link[0] !== '/') {
                     $link = $uri->getPath() . '/' . $link;
                 }
 
                 $link = $uri->getScheme() . '://' . $uri->getHost() . '/' . $this->canonicalizePath($link);
-                if (!Uri\UriFactory::factory($link)->isValid()) {
+                if (!Uri::factory($link)->isValid()) {
                     $link = null;
                 }
             }

@@ -277,6 +277,30 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         //$this->assertEquals('info:', $feed->getTitle());
     }
 
+    public function testImportRemoteFeedMethodPerformsAsExpected()
+    {
+        $uri = 'http://example.com/feeds/reader.xml';
+        $feedContents = file_get_contents($this->feedSamplePath . '/Reader/rss20.xml');
+        $response = $this->getMock('Zend\Feed\Reader\Http\ResponseInterface', array('getStatusCode', 'getBody'));
+        $response->expects($this->once())
+            ->method('getStatusCode')
+            ->will($this->returnValue(200));
+        $response->expects($this->once())
+            ->method('getBody')
+            ->will($this->returnValue($feedContents));
+
+        $client = $this->getMock('Zend\Feed\Reader\Http\ClientInterface', array('get'));
+        $client->expects($this->once())
+            ->method('get')
+            ->with($this->equalTo($uri))
+            ->will($this->returnValue($response));
+
+        $feed = Reader\Reader::importRemoteFeed($uri, $client);
+        $this->assertInstanceOf('Zend\Feed\Reader\Feed\FeedInterface', $feed);
+        $type = Reader\Reader::detectType($feed);
+        $this->assertEquals(Reader\Reader::TYPE_RSS_20, $type);
+    }
+
     protected function _getTempDirectory()
     {
         $tmpdir = array();

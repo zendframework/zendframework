@@ -10,7 +10,7 @@
 namespace Zend\Feed\Writer;
 
 use DateTime;
-use Zend\Uri;
+use Zend\Feed\Uri;
 
 /**
 */
@@ -191,7 +191,7 @@ class Deleted
         if (isset($by['uri'])) {
             if (empty($by['uri'])
                 || !is_string($by['uri'])
-                || !Uri\UriFactory::factory($by['uri'])->isValid()
+                || !Uri::factory($by['uri'])->isValid()
             ) {
                 throw new Exception\InvalidArgumentException('Invalid parameter: "uri" array value must'
                  . ' be a non-empty string and valid URI/IRI');

@@ -12,10 +12,10 @@ namespace Zend\Feed\Writer\Renderer\Feed;
 use DateTime;
 use DOMDocument;
 use DOMElement;
+use Zend\Feed\Uri;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer\Version;
-use Zend\Uri;
 
 /**
 */
@@ -239,7 +239,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         $root->appendChild($link);
         $text = $dom->createTextNode($value);
         $link->appendChild($text);
-        if (!Uri\UriFactory::factory($value)->isValid()) {
+        if (!Uri::factory($value)->isValid()) {
             $link->setAttribute('isPermaLink', 'false');
         }
     }
@@ -317,7 +317,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         }
 
         if (empty($image['link']) || !is_string($image['link'])
-            || !Uri\UriFactory::factory($image['link'])->isValid()
+            || !Uri::factory($image['link'])->isValid()
         ) {
             $message = 'Invalid parameter: parameter \'link\''
             . ' must be a non-empty string and valid URI/IRI';

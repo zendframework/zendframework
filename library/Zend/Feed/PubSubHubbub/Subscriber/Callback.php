@@ -11,7 +11,7 @@ namespace Zend\Feed\PubSubHubbub\Subscriber;
 
 use Zend\Feed\PubSubHubbub;
 use Zend\Feed\PubSubHubbub\Exception;
-use Zend\Uri;
+use Zend\Feed\Uri;
 
 class Callback extends PubSubHubbub\AbstractCallback
 {
@@ -161,7 +161,7 @@ class Callback extends PubSubHubbub\AbstractCallback
         ) {
             return false;
         }
-        if (!Uri\UriFactory::factory($httpGetData['hub_topic'])->isValid()) {
+        if (!Uri::factory($httpGetData['hub_topic'])->isValid()) {
             return false;
         }
 

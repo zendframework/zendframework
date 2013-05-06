@@ -32,6 +32,13 @@ class CustomForm extends Form
         $this->add($field2);
 
         $this->add(array(
+            'name' => 'csrf',
+            'type' => 'Zend\Form\Element\Csrf',
+            'attributes' => array(
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type' => 'submit'

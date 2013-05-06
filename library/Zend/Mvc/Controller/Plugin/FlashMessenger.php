@@ -155,7 +155,7 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
 
         if (!$this->messageAdded) {
             $this->getMessagesFromContainer();
-            $container->setExpirationHops(1, null, true);
+            $container->setExpirationHops(1, null);
         }
 
         if (!isset($container->{$namespace})

@@ -24,7 +24,7 @@ class Sql
     /** @var Platform\Platform */
     protected $sqlPlatform = null;
 
-    public function __construct(AdapterInterface $adapter, $table = null, PlatformInterface $sqlPlatform = null)
+    public function __construct(AdapterInterface $adapter, $table = null, Platform\AbstractPlatform $sqlPlatform = null)
     {
         $this->adapter = $adapter;
         if ($table) {

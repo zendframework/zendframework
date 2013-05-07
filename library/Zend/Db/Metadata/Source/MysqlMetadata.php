@@ -373,13 +373,9 @@ class MysqlMetadata extends AbstractSource
         $this->data['constraint_keys'][$schema] = $data;
     }
 
-    protected function loadConstraintReferences($schema)
+    protected function loadConstraintReferences($table, $schema)
     {
-        if (isset($this->data['constraint_references'][$schema])) {
-            return;
-        }
-
-        $this->prepareDataHierarchy('constraint_references', $schema);
+        parent::loadConstraintReferences($table, $schema);
 
         $p = $this->adapter->getPlatform();
 

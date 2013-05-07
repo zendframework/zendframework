@@ -273,7 +273,7 @@ class InputTest extends TestCase
         $this->assertEquals($notEmptyMock, $validators[1]['instance']);
     }
 
-    public static function dataFallbackValue()
+    public function dataFallbackValue()
     {
         return array(
             array(

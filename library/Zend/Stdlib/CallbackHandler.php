@@ -11,7 +11,6 @@ namespace Zend\Stdlib;
 
 use Closure;
 use ReflectionClass;
-use WeakRef;
 
 /**
  * CallbackHandler
@@ -40,12 +39,6 @@ class CallbackHandler
     protected static $isPhp54;
 
     /**
-     * Is pecl/weakref extension installed?
-     * @var bool
-     */
-    protected static $hasWeakRefExtension;
-
-    /**
      * Constructor
      *
      * @param  string|array|object|callable $callback PHP callback
@@ -60,13 +53,6 @@ class CallbackHandler
     /**
      * Registers the callback provided in the constructor
      *
-     * If you have pecl/weakref {@see http://pecl.php.net/weakref} installed,
-     * this method provides additional behavior.
-     *
-     * If a callback is a functor, or an array callback composing an object
-     * instance, this method will pass the object to a WeakRef instance prior
-     * to registering the callback.
-     *
      * @param  callable $callback
      * @throws Exception\InvalidCallbackException
      * @return void
@@ -77,44 +63,7 @@ class CallbackHandler
             throw new Exception\InvalidCallbackException('Invalid callback provided; not callable');
         }
 
-        if (null === static::$hasWeakRefExtension) {
-            static::$hasWeakRefExtension = class_exists('WeakRef');
-        }
-
-        // If pecl/weakref is not installed, simply store the callback and return
-        if (!static::$hasWeakRefExtension) {
-            $this->callback = $callback;
-            return;
-        }
-
-        // If WeakRef exists, we want to use it.
-
-        // If we have a non-closure object, pass it to WeakRef, and then
-        // register it.
-        if (is_object($callback) && !$callback instanceof Closure) {
-            $this->callback = new WeakRef($callback);
-            return;
-        }
-
-        // If we have a string or closure, register as-is
-        if (!is_array($callback)) {
-            $this->callback = $callback;
-            return;
-        }
-
-        list($target, $method) = $callback;
-
-        // If we have an array callback, and the first argument is not an
-        // object, register as-is
-        if (!is_object($target)) {
-            $this->callback = $callback;
-            return;
-        }
-
-        // We have an array callback with an object as the first argument;
-        // pass it to WeakRef, and then register the new callback
-        $target = new WeakRef($target);
-        $this->callback = array($target, $method);
+        $this->callback = $callback;
     }
 
     /**
@@ -124,32 +73,7 @@ class CallbackHandler
      */
     public function getCallback()
     {
-        $callback = $this->callback;
-
-        // String callbacks -- simply return
-        if (is_string($callback)) {
-            return $callback;
-        }
-
-        // WeakRef callbacks -- pull it out of the object and return it
-        if ($callback instanceof WeakRef) {
-            return $callback->get();
-        }
-
-        // Non-WeakRef object callback -- return it
-        if (is_object($callback)) {
-            return $callback;
-        }
-
-        // Array callback with WeakRef object -- retrieve the object first, and
-        // then return
-        list($target, $method) = $callback;
-        if ($target instanceof WeakRef) {
-            return array($target->get(), $method);
-        }
-
-        // Otherwise, return it
-        return $callback;
+        return $this->callback;
     }
 
     /**
@@ -161,11 +85,6 @@ class CallbackHandler
     public function call(array $args = array())
     {
         $callback = $this->getCallback();
-
-        // WeakRef object will return null if the real object was disposed
-        if (null === $callback) {
-            return null;
-        }
 
         // Minor performance tweak, if the callback gets called more than once
         if (!isset(static::$isPhp54)) {

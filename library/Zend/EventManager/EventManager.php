@@ -462,10 +462,6 @@ class EventManager implements EventManagerInterface
 
         foreach ($listeners as $listener) {
             $listenerCallback = $listener->getCallback();
-            if (!$listenerCallback) {
-                $this->detach($listener);
-                continue;
-            }
 
             // Trigger the listener's callback, and push its result onto the
             // response collection

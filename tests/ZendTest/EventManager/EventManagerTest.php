@@ -546,22 +546,6 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($responses->stopped());
     }
 
-    public function testWeakRefsAreHonoredWhenTriggering()
-    {
-        if (!class_exists('WeakRef', false)) {
-            $this->markTestSkipped('Requires pecl/weakref');
-        }
-
-        $functor = new TestAsset\Functor;
-        $this->events->attach('test', $functor);
-
-        unset($functor);
-
-        $result = $this->events->trigger('test', $this, array());
-        $message = $result->last();
-        $this->assertNull($message);
-    }
-
     public function testDuplicateIdentifiersAreNotRegistered()
     {
         $events = new EventManager(array(__CLASS__, get_class($this)));

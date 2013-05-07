@@ -43,6 +43,15 @@ DD MMM YYYY
   and/or with third-party components. We plan a larger story around this for
   2.3.0.
 
+- **Removal of soft dependency on Weakref.** Zend\Stdlib\CallbackHandler, and,
+  by extension, Zend\EventManager, had detection for the [Weakref
+  extension](http://pecl.php.net/weakref), and internally would register
+  callbacks as Weakref objects when possible. However, due to improvements in 
+  PHP garbage collection, this was often leading to listeners disappearing
+  from scope entirely. As a result, we have removed all support for Weakref
+  starting in 2.2.0. This change is fully backwards compatible, as usage of
+  Weakref was an internal implementation detail only.
+
 - **Authentication:** The DB adapter now supports non-RDBMS credential validation.
 
 - **Cache:** New storage backend: Redis.

@@ -41,6 +41,13 @@ class CurrencyFormat extends AbstractHelper
     protected $locale;
 
     /**
+     * Currency pattern
+     *
+     * @var string
+     */
+    protected $currencyPattern;
+
+    /**
      * If set to true, the currency will be returned with two decimals
      *
      * @var bool
@@ -65,15 +72,17 @@ class CurrencyFormat extends AbstractHelper
      *
      * @param  float  $number
      * @param  string $currencyCode
-     * @param  bool    $showDecimals
+     * @param  bool   $showDecimals
      * @param  string $locale
+     * @param  string $pattern
      * @return string
      */
     public function __invoke(
         $number,
         $currencyCode = null,
         $showDecimals = null,
-        $locale       = null
+        $locale       = null,
+        $pattern      = null
     ) {
         if (null === $locale) {
             $locale = $this->getLocale();
@@ -84,6 +93,9 @@ class CurrencyFormat extends AbstractHelper
         if (null !== $showDecimals) {
             $this->setShouldShowDecimals($showDecimals);
         }
+        if (null === $pattern) {
+            $pattern = $this->getCurrencyPattern();
+        }
 
         $formatterId = md5($locale);
 
@@ -92,6 +104,10 @@ class CurrencyFormat extends AbstractHelper
                 $locale,
                 NumberFormatter::CURRENCY
             );
+        }
+
+        if ($pattern !== null) {
+            $this->formatters[$formatterId]->setPattern($pattern);
         }
 
         if ($this->shouldShowDecimals()) {
@@ -125,6 +141,29 @@ class CurrencyFormat extends AbstractHelper
     public function getCurrencyCode()
     {
         return $this->currencyCode;
+    }
+
+
+    /**
+     * Set the currency pattern
+     *
+     * @param  string $currencyPattern
+     * @return CurrencyFormat
+     */
+    public function setCurrencyPattern($currencyPattern)
+    {
+        $this->currencyPattern = $currencyPattern;
+        return $this;
+    }
+
+    /**
+     * Get the currency pattern
+     *
+     * @return string
+     */
+    public function getCurrencyPattern()
+    {
+        return $this->currencyPattern;
     }
 
     /**

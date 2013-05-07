@@ -23,7 +23,6 @@
         "doctrine/annotations": "Doctrine Annotations >=1.0 for annotation features",
         "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable",
         "ocramius/proxy-manager": "ProxyManager to handle lazy initialization of services",
-        "pecl-weakref": "Implementation of weak references for Zend\\Stdlib\\CallbackHandler",
         "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",
         "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
     },

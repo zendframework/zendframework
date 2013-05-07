@@ -297,5 +297,6 @@ class InputTest extends TestCase
 
         $this->assertTrue($this->input->isValid());
         $this->assertEmpty($this->input->getMessages());
+        $this->assertSame($fallbackValue, $this->input->getValue());
     }
 }

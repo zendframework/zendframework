@@ -22,7 +22,7 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
     /**
      *
      * @dataProvider providesSimpleClasses
-     * @param type $class
+     * @param string $class
      */
     public function testDiSimple($class)
     {
@@ -39,7 +39,7 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
     /**
      * provides known classes invokable without parameters
      *
-     * @return string
+     * @return array
      */
     public function providesSimpleClasses()
     {

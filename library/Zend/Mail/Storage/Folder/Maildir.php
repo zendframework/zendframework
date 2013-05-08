@@ -193,7 +193,7 @@ class Maildir extends Storage\Maildir implements FolderInterface
                 throw new Exception\RuntimeException("{$this->currentFolder} is not selectable", 0, $e);
             }
             // seems like file has vanished; rebuilding folder tree - but it's still an exception
-            $this->_buildFolderTree($this->rootdir);
+            $this->_buildFolderTree();
             throw new Exception\RuntimeException('seems like the maildir has vanished, I\'ve rebuild the ' .
                                                          'folder tree, search for an other folder and try again', 0, $e);
         }

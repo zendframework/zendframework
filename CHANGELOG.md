@@ -1641,7 +1641,7 @@ class.
   (https://github.com/zendframework/zf2/issues/2426)
 - 2432: Prevent space before end of tag with HTML5 doctype
   (https://github.com/zendframework/zf2/issues/2432)
-- 2433: fix for setJsonpCallback not called when received JsonModel + test
+- 2433: fix for setJsonpCallback not called when recieved JsonModel + test
   (https://github.com/zendframework/zf2/issues/2433)
 - 2434: added phpdoc in Zend\Db
   (https://github.com/zendframework/zf2/issues/2434)
@@ -1685,7 +1685,7 @@ class.
   not shown (https://github.com/zendframework/zf2/issues/2641)
 - 2642: Fix Travis build for CS issue
   (https://github.com/zendframework/zf2/issues/2642)
-- 2643: fix for setJsonpCallback not called when received JsonModel + test
+- 2643: fix for setJsonpCallback not called when recieved JsonModel + test
   (https://github.com/zendframework/zf2/issues/2643)
 - 2644: Add fluidity to the prepare() function for a form
   (https://github.com/zendframework/zf2/issues/2644)

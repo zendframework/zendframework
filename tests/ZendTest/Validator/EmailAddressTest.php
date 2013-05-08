@@ -420,7 +420,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     public function testEmailsExceedingLength()
     {
         $emailAddresses = array(
-            'thislocalpathoftheemailaddressislongerthantheallowedsizeof64characters@domain.com',
+            'thislocalpathoftheemailadressislongerthantheallowedsizeof64characters@domain.com',
             'bob@verylongdomainsupercalifragilisticexpialidociousspoonfulofsugarverylongdomainsupercalifragilisticexpialidociousspoonfulofsugarverylongdomainsupercalifragilisticexpialidociousspoonfulofsugarverylongdomainsupercalifragilisticexpialidociousspoonfulofsugarexpialidociousspoonfulofsugar.com',
             );
         foreach ($emailAddresses as $input) {

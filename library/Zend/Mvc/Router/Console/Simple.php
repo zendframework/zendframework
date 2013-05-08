@@ -51,7 +51,7 @@ class Simple implements RouteInterface
     /**
      * @var ConsoleRouteMatcher
      */
-    private $matcher;
+    protected $matcher;
 
     /**
      * Create a new simple console route.

@@ -9,11 +9,9 @@
 
 namespace Zend\Stdlib\Hydrator\Aggregate;
 
-use Traversable;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Exception;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use Zend\Stdlib\Hydrator\HydratorInterface;
@@ -21,10 +19,6 @@ use Zend\Stdlib\Hydrator\HydratorInterface;
 class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
 {
     const DEFAULT_PRIORITY = 1;
-    const EVENT_HYDRATE    = 'hydrate';
-    const EVENT_EXTRACT    = 'extract';
-    const PARAM_OBJECT     = 'object';
-    const PARAM_DATA       = 'data';
 
     /**
      * @var \Zend\EventManager\EventManagerInterface|null

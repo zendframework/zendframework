@@ -43,10 +43,11 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     {
         $testFile = __DIR__ . '/_files/test.zip';
 
-        // Sometimes mime_content_type() gives application/zip and sometimes 
+        // Sometimes finfo gives application/zip and sometimes
         // application/x-zip ...
+        $expectedMimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $testFile);
+
         $allowed          = array('application/zip', 'application/x-zip');
-        $expectedMimeType = mime_content_type($testFile);
         $fileUpload       = array(
             'tmp_name' => $testFile,
             'name'     => basename($testFile),
@@ -72,19 +73,15 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
      */
     protected function skipIfNoFileInfoExtension()
     {
-        if (!extension_loaded('fileinfo') &&
-            function_exists('mime_content_type') && ini_get('mime_magic.magicfile') &&
-            (mime_content_type(__DIR__ . '/_files/test.zip') == 'text/plain')
-        ) {
+        if (!extension_loaded('fileinfo')) {
             $this->markTestSkipped(
-                'This PHP Version has no finfo, has mime_content_type, ' .
-                    ' but mime_content_type exhibits buggy behavior on this system.'
+                'This PHP Version has no finfo extension'
             );
         }
     }
 
     /**
-     * Skip a test if mime_content_type returns buggy information
+     * Skip a test if finfo returns buggy information
      */
     protected function skipIfBuggyMimeContentType($options)
     {
@@ -93,15 +90,15 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
         }
 
         if (!in_array('application/zip', $options)) {
-            // mime_content_type does not play a role; no need to skip
+            // finfo does not play a role; no need to skip
             return;
         }
 
-        // Sometimes mime_content_type() gives application/zip and sometimes 
+        // Sometimes finfo gives application/zip and sometimes
         // application/x-zip ...
-        $expectedMimeType = mime_content_type(__DIR__ . '/_files/test.zip');
+        $expectedMimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), __DIR__ . '/_files/test.zip');
         if (!in_array($expectedMimeType, array('application/zip', 'application/x-zip'))) {
-            $this->markTestSkipped('mime_content_type exhibits buggy behavior on this system!');
+            $this->markTestSkipped('finfo exhibits buggy behavior on this system!');
         }
     }
 

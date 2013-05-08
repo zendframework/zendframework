@@ -42,35 +42,63 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     public function basicBehaviorDataProvider()
     {
         $testFile = __DIR__ . '/_files/test.zip';
-        $fileUpload = array(
-            'tmp_name' => $testFile, 'name' => basename($testFile),
-            'size' => 200, 'error' => 0, 'type' => 'application/zip'
+
+        // Sometimes finfo gives application/zip and sometimes
+        // application/x-zip ...
+        $expectedMimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $testFile);
+
+        $allowed          = array('application/zip', 'application/x-zip');
+        $fileUpload       = array(
+            'tmp_name' => $testFile,
+            'name'     => basename($testFile),
+            'size'     => 200,
+            'error'    => 0,
+            'type'     => in_array($expectedMimeType, $allowed) ? $expectedMimeType : 'application/zip',
         );
+
         return array(
             //    Options, isValid Param, Expected value
-            array(null,                                          $fileUpload, true),
-            array('zip',                                         $fileUpload, true),
-            array('test/notype',                                 $fileUpload, false),
-            array('application/zip, application/x-tar',          $fileUpload, true),
-            array(array('application/zip', 'application/x-tar'), $fileUpload, true),
-            array(array('zip', 'tar'),                           $fileUpload, true),
-            array(array('tar', 'arj'),                           $fileUpload, false),
+            array(null,                                                               $fileUpload, true),
+            array('zip',                                                              $fileUpload, true),
+            array('test/notype',                                                      $fileUpload, false),
+            array('application/x-zip, application/zip, application/x-tar',            $fileUpload, true),
+            array(array('application/x-zip', 'application/zip', 'application/x-tar'), $fileUpload, true),
+            array(array('zip', 'tar'),                                                $fileUpload, true),
+            array(array('tar', 'arj'),                                                $fileUpload, false),
         );
     }
 
     /**
-     * @return void
+     * Skip a test if the file info extension is missing
      */
     protected function skipIfNoFileInfoExtension()
     {
-        if (!extension_loaded('fileinfo') &&
-            function_exists('mime_content_type') && ini_get('mime_magic.magicfile') &&
-            (mime_content_type(__DIR__ . '/_files/test.zip') == 'text/plain')
-        ) {
+        if (!extension_loaded('fileinfo')) {
             $this->markTestSkipped(
-                'This PHP Version has no finfo, has mime_content_type, ' .
-                    ' but mime_content_type exhibits buggy behavior on this system.'
+                'This PHP Version has no finfo extension'
             );
+        }
+    }
+
+    /**
+     * Skip a test if finfo returns buggy information
+     */
+    protected function skipIfBuggyMimeContentType($options)
+    {
+        if (!is_array($options)) {
+            $options = (array) $options;
+        }
+
+        if (!in_array('application/zip', $options)) {
+            // finfo does not play a role; no need to skip
+            return;
+        }
+
+        // Sometimes finfo gives application/zip and sometimes
+        // application/x-zip ...
+        $expectedMimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), __DIR__ . '/_files/test.zip');
+        if (!in_array($expectedMimeType, array('application/zip', 'application/x-zip'))) {
+            $this->markTestSkipped('finfo exhibits buggy behavior on this system!');
         }
     }
 
@@ -83,6 +111,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     public function testBasic($options, $isValidParam, $expected)
     {
         $this->skipIfNoFileInfoExtension();
+        $this->skipIfBuggyMimeContentType($options);
 
         $validator = new File\IsCompressed($options);
         $validator->enableHeaderCheck();
@@ -93,17 +122,20 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
      * Ensures that the validator follows expected behavior for legacy Zend\Transfer API
      *
      * @dataProvider basicBehaviorDataProvider
-     * @return void
      */
     public function testLegacy($options, $isValidParam, $expected)
     {
-        if (is_array($isValidParam)) {
-            $this->skipIfNoFileInfoExtension();
-
-            $validator = new File\IsCompressed($options);
-            $validator->enableHeaderCheck();
-            $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
+        if (!is_array($isValidParam)) {
+            // nothing to test
+            return;
         }
+
+        $this->skipIfNoFileInfoExtension();
+        $this->skipIfBuggyMimeContentType($options);
+
+        $validator = new File\IsCompressed($options);
+        $validator->enableHeaderCheck();
+        $this->assertEquals($expected, $validator->isValid($isValidParam['tmp_name'], $isValidParam));
     }
 
     /**

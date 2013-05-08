@@ -329,14 +329,14 @@ class RedisResourceManager
             throw new Exception\RuntimeException("No resource with id '{$id}'");
         }
 
-        $constValue = $this->normalizeLibOptionKey($key);
+        $this->normalizeLibOptionKey($key);
         $resource   = & $this->resources[$id];
 
         if ($resource instanceof RedisResource) {
-            return $resource->getOption($constValue);
+            return $resource->getOption($key);
         }
 
-        return isset($resource['lib_options'][$constValue]) ? $resource['lib_options'][$constValue] : null;
+        return isset($resource['lib_options'][$key]) ? $resource['lib_options'][$key] : null;
     }
 
     /**

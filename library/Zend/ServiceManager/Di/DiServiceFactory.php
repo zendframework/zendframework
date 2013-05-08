@@ -81,7 +81,7 @@ class DiServiceFactory extends Di implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
-        return $this->get($this->name, $this->parameters, true);
+        return $this->get($this->name, $this->parameters);
     }
 
     /**

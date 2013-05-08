@@ -171,11 +171,11 @@ class DocBlockGenerator extends AbstractGenerator
         if (is_array($tag)) {
             $tag = new DockBlockTag($tag);
         } elseif (!$tag instanceof DockBlockTag) {
-            throw new Exception\InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects either an array of method options or an instance of %s\DocBlock\Tag',
                 __METHOD__,
                 __NAMESPACE__
-            );
+            ));
         }
 
         $this->tags[] = $tag;

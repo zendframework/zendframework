@@ -40,10 +40,10 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
     {
         $this->serviceLocator = $serviceLocator;
         if ($requestedName) {
-            return $this->get($requestedName, array(), true);
+            return $this->get($requestedName, array());
         }
 
-        return $this->get($serviceName, array(), true);
+        return $this->get($serviceName, array());
     }
 
     /**

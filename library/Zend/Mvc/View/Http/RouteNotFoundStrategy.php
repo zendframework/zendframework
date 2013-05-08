@@ -193,7 +193,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         $model->setTemplate($this->getNotFoundTemplate());
 
         // If displaying reasons, inject the reason
-        $this->injectNotFoundReason($model, $e);
+        $this->injectNotFoundReason($model);
 
         // If displaying exceptions, inject
         $this->injectException($model, $e);

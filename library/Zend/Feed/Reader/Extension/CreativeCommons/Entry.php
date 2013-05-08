@@ -53,9 +53,7 @@ class Entry extends Extension\AbstractEntry
 
             $licenses = array_unique($licenses);
         } else {
-            $cc = new Feed(
-                $this->domDocument, $this->data['type'], $this->xpath
-            );
+            $cc = new Feed();
             $licenses = $cc->getLicenses();
         }
 

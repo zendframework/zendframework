@@ -9,7 +9,7 @@
 
 namespace Zend\Console;
 
-class CommandlineMatcher 
+class ConsoleRouteMatcher
 {
     /**
      * Parts of the route.
@@ -39,7 +39,7 @@ class CommandlineMatcher
      * @param array $constraints
      * @param array $defaults
      * @param array $aliases
-     * @return \Zend\Console\CommandlineMatcher
+     * @return \Zend\Console\ConsoleRouteMatcher
      */
     public function __construct(
         $route,

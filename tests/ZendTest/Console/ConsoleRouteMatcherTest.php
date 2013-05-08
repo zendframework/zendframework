@@ -10,7 +10,7 @@
 
 namespace ZendTest\Console;
 
-use Zend\Console\CommandlineMatcher;
+use Zend\Console\ConsoleRouteMatcher;
 
 /**
  * @category   Zend
@@ -18,7 +18,7 @@ use Zend\Console\CommandlineMatcher;
  * @subpackage UnitTests
  * @group      Zend_Console
  */
-class CommandlineMatcherTest extends \PHPUnit_Framework_TestCase
+class ConsoleRouteMatcherTest extends \PHPUnit_Framework_TestCase
 {
 
     public static function routeProvider()
@@ -858,7 +858,7 @@ class CommandlineMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatching($routeDefinition, array $arguments = array(), array $params = null)
     {
-        $route = new CommandlineMatcher($routeDefinition);
+        $route = new ConsoleRouteMatcher($routeDefinition);
         $match = $route->match($arguments);
 
 
@@ -880,7 +880,7 @@ class CommandlineMatcherTest extends \PHPUnit_Framework_TestCase
     public function testCannotMatchWithEmptyMandatoryParam()
     {
         $arguments = array('--foo=');
-        $route = new CommandlineMatcher('--foo=');
+        $route = new ConsoleRouteMatcher('--foo=');
         $match = $route->match($arguments);
         $this->assertEquals(null, $match);
     }
@@ -970,7 +970,7 @@ class CommandlineMatcherTest extends \PHPUnit_Framework_TestCase
         array $arguments = array(),
         array $params = null
     ) {
-        $route = new CommandlineMatcher($routeDefinition, array(), $defaults);
+        $route = new ConsoleRouteMatcher($routeDefinition, array(), $defaults);
         $match = $route->match($arguments);
 
         if ($params === null) {

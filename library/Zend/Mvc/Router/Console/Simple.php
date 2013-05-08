@@ -22,7 +22,7 @@
 namespace Zend\Mvc\Router\Console;
 
 use Traversable;
-use Zend\Console\CommandlineMatcher;
+use Zend\Console\ConsoleRouteMatcher;
 use Zend\Console\Request as ConsoleRequest;
 use Zend\Filter\FilterChain;
 use Zend\Mvc\Exception\InvalidArgumentException;
@@ -49,7 +49,7 @@ class Simple implements RouteInterface
     protected $assembledParams = array();
 
     /**
-     * @var CommandlineMatcher
+     * @var ConsoleRouteMatcher
      */
     private $matcher;
 
@@ -73,7 +73,7 @@ class Simple implements RouteInterface
         $filters = null,
         $validators = null
     ) {
-        $this->matcher = new CommandlineMatcher($route, $constraints, $defaults, $aliases);
+        $this->matcher = new ConsoleRouteMatcher($route, $constraints, $defaults, $aliases);
 
         if ($filters !== null) {
             if ($filters instanceof FilterChain) {

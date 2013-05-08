@@ -41,22 +41,11 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
      */
     public function extract($object)
     {
-        $results = $this->eventManager->trigger(static::EVENT_EXTRACT, $this, array(static::PARAM_OBJECT => $object));
-        $data    = array();
+        $event = new ExtractEvent($this, $object);
 
-        foreach ($results as $result) {
-            if ($result instanceof Traversable) {
-                $result = ArrayUtils::iteratorToArray($result);
-            }
+        $this->eventManager->trigger($event);
 
-            if (!is_array($result)) {
-                continue;
-            }
-
-            $data = ArrayUtils::merge($data, $result);
-        }
-
-        return $data;
+        return $event->getExtractedData();
     }
 
     /**
@@ -64,19 +53,11 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
      */
     public function hydrate(array $data, $object)
     {
-        $result = $this
-            ->eventManager
-            ->trigger(
-                static::EVENT_EXTRACT,
-                $this,
-                array(
-                     static::PARAM_OBJECT => $object,
-                     static::PARAM_DATA   => $data,
-                )
-            )
-            ->last();
+        $event = new HydrateEvent($this, $object, $data);
 
-        return is_object($result) ? $result : $object;
+        $this->eventManager->trigger($event);
+
+        return $event->getHydratedObject();
     }
 
     /**

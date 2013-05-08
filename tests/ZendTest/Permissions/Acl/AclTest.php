@@ -1209,7 +1209,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-8039
      *
-     * Meant to test for the (in)existance of this notice:
+     * Meant to test for the (in)existence of this notice:
      * "Notice: Undefined index: allPrivileges in lib/Zend/Acl.php on line 682"
      */
     public function testMethodRemoveAllowDoesNotThrowNotice()

@@ -455,7 +455,7 @@ class Dn implements \ArrayAccess
      *
      * Escapes the given VALUES according to RFC 2253 so that they can be safely used in LDAP DNs.
      * The characters ",", "+", """, "\", "<", ">", ";", "#", " = " with a special meaning in RFC 2252
-     * are preceeded by ba backslash. Control characters with an ASCII code < 32 are represented as \hexpair.
+     * are preceded by ba backslash. Control characters with an ASCII code < 32 are represented as \hexpair.
      * Finally all leading and trailing spaces are converted to sequences of \20.
      * @see    Net_LDAP2_Util::escape_dn_value() from Benedikt Hallinger <beni@php.net>
      * @link   http://pear.php.net/package/Net_LDAP2

@@ -39,7 +39,7 @@ class ConsoleRouteMatcher
      * @param array $constraints
      * @param array $defaults
      * @param array $aliases
-     * @return \Zend\Console\ConsoleRouteMatcher
+     * @return self
      */
     public function __construct(
         $route,
@@ -53,8 +53,8 @@ class ConsoleRouteMatcher
         $this->parts = $this->parseDefinition($route);
     }
 
-
-    /** Parse a route definition.
+    /**
+     * Parse a route definition.
      *
      * @param  string $def
      * @return array
@@ -69,7 +69,7 @@ class ConsoleRouteMatcher
         $unnamedGroupCounter = 1;
 
         while ($pos < $length) {
-            /**
+            /*
              * Mandatory long param
              *    --param=
              *    --param=whatever
@@ -84,7 +84,7 @@ class ConsoleRouteMatcher
                     'hasValue'   => !empty($m['hasValue']),
                 );
             }
-            /**
+            /*
              * Optional long flag
              *    [--param]
              */
@@ -100,7 +100,7 @@ class ConsoleRouteMatcher
                     'hasValue'   => false,
                 );
             }
-            /**
+            /*
              * Optional long param
              *    [--param=]
              *    [--param=whatever]
@@ -117,7 +117,7 @@ class ConsoleRouteMatcher
                     'hasValue'   => !empty($m['hasValue']),
                 );
             }
-            /**
+            /*
              * Mandatory short param
              *    -a
              *    -a=i
@@ -134,7 +134,7 @@ class ConsoleRouteMatcher
                     'hasValue'  => !empty($m['type']) ? $m['type'] : null,
                 );
             }
-            /**
+            /*
              * Optional short param
              *    [-a]
              *    [-a=n]
@@ -150,7 +150,7 @@ class ConsoleRouteMatcher
                     'hasValue'  => !empty($m['type']) ? $m['type'] : null,
                 );
             }
-            /**
+            /*
              * Optional literal param alternative
              *    [ something | somethingElse | anotherOne ]
              *    [ something | somethingElse | anotherOne ]:namedGroup
@@ -190,7 +190,7 @@ class ConsoleRouteMatcher
                 );
             }
 
-            /**
+            /*
              * Required literal param alternative
              *    ( something | somethingElse | anotherOne )
              *    ( something | somethingElse | anotherOne ):namedGroup
@@ -228,7 +228,7 @@ class ConsoleRouteMatcher
                     'hasValue'      => false,
                 );
             }
-            /**
+            /*
              * Required long/short flag alternative
              *    ( --something | --somethingElse | --anotherOne | -s | -a )
              *    ( --something | --somethingElse | --anotherOne | -s | -a ):namedGroup
@@ -271,7 +271,7 @@ class ConsoleRouteMatcher
                     'hasValue'      => false,
                 );
             }
-            /**
+            /*
              * Optional flag alternative
              *    [ --something | --somethingElse | --anotherOne | -s | -a ]
              *    [ --something | --somethingElse | --anotherOne | -s | -a ]:namedGroup
@@ -314,7 +314,7 @@ class ConsoleRouteMatcher
                     'hasValue'      => false,
                 );
             }
-            /**
+            /*
              * Optional literal param, i.e.
              *    [something]
              */
@@ -327,7 +327,7 @@ class ConsoleRouteMatcher
                     'hasValue'   => false,
                 );
             }
-            /**
+            /*
              * Optional value param, i.e.
              *    [SOMETHING]
              */
@@ -340,7 +340,7 @@ class ConsoleRouteMatcher
                     'hasValue'   => true,
                 );
             }
-            /**
+            /*
              * Optional value param, syntax 2, i.e.
              *    [<SOMETHING>]
              */
@@ -353,7 +353,7 @@ class ConsoleRouteMatcher
                     'hasValue'   => true,
                 );
             }
-            /**
+            /*
              * Mandatory value param, i.e.
              *    <something>
              */
@@ -366,7 +366,7 @@ class ConsoleRouteMatcher
                     'hasValue'   => true,
                 );
             }
-            /**
+            /*
              * Mandatory value param, i.e.
              *   SOMETHING
              */
@@ -379,7 +379,7 @@ class ConsoleRouteMatcher
                     'hasValue'   => true,
                 );
             }
-            /**
+            /*
              * Mandatory literal param, i.e.
              *   something
              */
@@ -404,11 +404,17 @@ class ConsoleRouteMatcher
         return $parts;
     }
 
+    /**
+     * Match parameters against route passed to constructor
+     *
+     * @param $params
+     * @return array|null
+     */
     public function match($params)
     {
         $matches = array();
 
-        /**
+        /*
          * Extract positional and named parts
          */
         $positional = $named = array();
@@ -420,11 +426,11 @@ class ConsoleRouteMatcher
             }
         }
 
-        /**
+        /*
          * Scan for named parts inside Console params
          */
         foreach ($named as &$part) {
-            /**
+            /*
              * Prepare match regex
              */
             if (isset($part['alternatives'])) {
@@ -456,7 +462,7 @@ class ConsoleRouteMatcher
                 }
             }
 
-            /**
+            /*
              * Look for param
              */
             $value = $param = null;
@@ -482,14 +488,14 @@ class ConsoleRouteMatcher
 
 
             if (!$param) {
-                /**
+                /*
                  * Drop out if that was a mandatory param
                  */
                 if ($part['required']) {
                     return null;
                 }
 
-                /**
+                /*
                  * Continue to next positional param
                  */
                 else {
@@ -498,14 +504,14 @@ class ConsoleRouteMatcher
             }
 
 
-            /**
+            /*
              * Value for flags is always boolean
              */
             if ($param && !$part['hasValue']) {
                 $value = true;
             }
 
-            /**
+            /*
              * Try to retrieve value if it is expected
              */
             if ((null === $value || "" === $value) && $part['hasValue']) {
@@ -521,7 +527,7 @@ class ConsoleRouteMatcher
                 }
             }
 
-            /**
+            /*
              * Validate the value against constraints
              */
             if ($part['hasValue'] && isset($this->constraints[$part['name']])) {
@@ -533,7 +539,7 @@ class ConsoleRouteMatcher
                 }
             }
 
-            /**
+            /*
              * Store the value
              */
             if ($part['hasValue']) {
@@ -542,7 +548,7 @@ class ConsoleRouteMatcher
                 $matches[$part['name']] = true;
             }
 
-            /**
+            /*
              * If there are alternatives, fill them
              */
             if (isset($part['alternatives'])) {
@@ -566,7 +572,7 @@ class ConsoleRouteMatcher
             }
         }
 
-        /**
+        /*
          * Scan for left-out flags that should result in a mismatch
          */
         foreach ($params as $param) {
@@ -575,12 +581,12 @@ class ConsoleRouteMatcher
             }
         }
 
-        /**
+        /*
          * Go through all positional params
          */
         $argPos = 0;
         foreach ($positional as &$part) {
-            /**
+            /*
              * Check if param exists
              */
             if (!isset($params[$argPos])) {
@@ -595,7 +601,7 @@ class ConsoleRouteMatcher
 
             $value = $params[$argPos];
 
-            /**
+            /*
              * Check if literal param matches
              */
             if ($part['literal']) {
@@ -607,7 +613,7 @@ class ConsoleRouteMatcher
                 }
             }
 
-            /**
+            /*
              * Validate the value against constraints
              */
             if ($part['hasValue'] && isset($this->constraints[$part['name']])) {
@@ -619,13 +625,13 @@ class ConsoleRouteMatcher
                 }
             }
 
-            /**
+            /*
              * Store the value
              */
             if ($part['hasValue']) {
                 $matches[$part['name']] = $value;
             } elseif (isset($part['alternatives'])) {
-                // from all alternativesm set matching parameter to TRUE and the rest to FALSE
+                // from all alternatives set matching parameter to TRUE and the rest to FALSE
                 foreach ($part['alternatives'] as $alt) {
                     if ($alt == $value) {
                         $matches[$alt] = isset($this->defaults[$alt])? $this->defaults[$alt] : true;
@@ -642,21 +648,21 @@ class ConsoleRouteMatcher
                 $matches[$name] = isset($this->defaults[$name])? $this->defaults[$name] : true;
             }
 
-            /**
+            /*
              * Advance to next argument
              */
             $argPos++;
 
         }
 
-        /**
+        /*
          * Check if we have consumed all positional parameters
          */
         if ($argPos < count($params)) {
             return null; // there are extraneous params that were not consumed
         }
 
-        /**
+        /*
          * Any optional flags that were not entered have value false
          */
         foreach ($this->parts as &$part) {

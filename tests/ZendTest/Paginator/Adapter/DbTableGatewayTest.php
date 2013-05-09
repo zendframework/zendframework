@@ -10,6 +10,7 @@
 
 namespace ZendTest\Paginator\Adapter;
 
+use Zend\Db\Adapter\Platform\Sql92;
 use Zend\Paginator\Adapter\DbTableGateway;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Db\ResultSet\ResultSet;
@@ -25,6 +26,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
     /** @var DbTableGateway */
     protected $dbTableGateway;
 
+    /** @var \Zend\Db\TableGateway\TableGateway */
     protected $mockTableGateway;
 
     public function setup()
@@ -34,13 +36,12 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
         $mockDriver->expects($this->any())
                    ->method('createStatement')
                    ->will($this->returnValue($mockStatement));
-        $mockPlatform = $this->getMock('Zend\Db\Adapter\Platform\PlatformInterface');
-        $mockPlatform->expects($this->any())
-                     ->method('getName')
-                     ->will($this->returnValue('platform'));
+        $mockDriver->expects($this->any())
+            ->method('formatParameterName')
+            ->will($this->returnArgument(0));
         $mockAdapter = $this->getMockForAbstractClass(
             'Zend\Db\Adapter\Adapter',
-            array($mockDriver, $mockPlatform)
+            array($mockDriver, new Sql92())
         );
 
         $tableName = 'foobar';
@@ -110,6 +111,10 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $this->mockStatement
+            ->expects($this->once())
+            ->method('setSql')
+            ->with($this->equalTo('SELECT "foobar".* FROM "foobar" WHERE foo = bar GROUP BY "foo" ORDER BY "foo" ASC LIMIT limit OFFSET offset'));
+        $this->mockStatement
              ->expects($this->any())
              ->method('execute')
              ->will($this->returnValue($mockResult));
@@ -128,9 +133,13 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $this->mockStatement
-             ->expects($this->any())
-             ->method('execute')
-             ->will($this->returnValue($mockResult));
+            ->expects($this->once())
+            ->method('setSql')
+            ->with($this->equalTo('SELECT "foobar".* FROM "foobar" WHERE foo = bar GROUP BY "foo" HAVING count(foo)>0 ORDER BY "foo" ASC LIMIT limit OFFSET offset'));
+        $this->mockStatement
+            ->expects($this->any())
+            ->method('execute')
+            ->will($this->returnValue($mockResult));
 
         $items = $this->dbTableGateway->getItems(2, 10);
         $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);

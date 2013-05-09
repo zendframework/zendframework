@@ -27,7 +27,8 @@ class DbTableGateway extends DbSelect
      */
     public function __construct(TableGateway $tableGateway, $where = null, $order = null, $group = null, $having = null)
     {
-        $select = $tableGateway->getSql()->select();
+        $sql    = $tableGateway->getSql();
+        $select = $sql->select();
         if ($where) {
             $select->where($where);
         }
@@ -41,9 +42,7 @@ class DbTableGateway extends DbSelect
             $select->having($having);
         }
 
-        $dbAdapter          = $tableGateway->getAdapter();
         $resultSetPrototype = $tableGateway->getResultSetPrototype();
-
-        parent::__construct($select, $dbAdapter, $resultSetPrototype);
+        parent::__construct($select, $sql, $resultSetPrototype);
     }
 }

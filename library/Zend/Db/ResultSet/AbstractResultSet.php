@@ -57,6 +57,11 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
      */
     public function initialize($dataSource)
     {
+        // reset buffering
+        if (is_array($this->buffer)) {
+            $this->buffer = array();
+        }
+
         if ($dataSource instanceof ResultInterface) {
             $this->count = $dataSource->count();
             $this->fieldCount = $dataSource->getFieldCount();
@@ -64,7 +69,9 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
             if ($dataSource->isBuffered()) {
                 $this->buffer = -1;
             }
-            $this->dataSource->rewind();
+            if (is_array($this->buffer)) {
+                $this->dataSource->rewind();
+            }
             return $this;
         }
 
@@ -97,6 +104,9 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
             throw new Exception\RuntimeException('Buffering must be enabled before iteration is started');
         } elseif ($this->buffer === null) {
             $this->buffer = array();
+            if ($this->dataSource instanceof ResultInterface) {
+                $this->dataSource->rewind();
+            }
         }
         return $this;
     }

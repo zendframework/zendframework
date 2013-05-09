@@ -221,7 +221,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if ($this->inTransaction) {
             throw new Exception\RuntimeException('Nested transactions are not supported');
         }
-        
+
         if (!$this->isConnected()) {
             $this->connect();
         }
@@ -238,7 +238,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if (!$this->inTransaction) {
             return; // We ignore attempts to commit non-existing transaction
         }
-        
+
         pg_query($this->resource, 'COMMIT');
         $this->inTransaction = false;
     }
@@ -251,7 +251,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if (!$this->inTransaction) {
             return;
         }
-        
+
         pg_query($this->resource, 'ROLLBACK');
         $this->inTransaction = false;
     }

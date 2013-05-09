@@ -60,6 +60,6 @@ class ExtractEvent extends Event
 
     public function mergeExtractedData(array $additionalData)
     {
-        $this->extractedData = ArrayUtils::merge($this->extractedData, $additionalData);
+        $this->extractedData = array_merge($this->extractedData, $additionalData);
     }
 }

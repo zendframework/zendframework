@@ -18,7 +18,7 @@ class Sql
     /** @var AdapterInterface */
     protected $adapter = null;
 
-    /** @var string */
+    /** @var string|array|TableIdentifier */
     protected $table = null;
 
     /** @var Platform\Platform */
@@ -48,10 +48,10 @@ class Sql
 
     public function setTable($table)
     {
-        if (is_string($table) || $table instanceof TableIdentifier) {
+        if (is_string($table) || is_array($table) || $table instanceof TableIdentifier) {
             $this->table = $table;
         } else {
-            throw new Exception\InvalidArgumentException('Table must be a string or instance of TableIdentifier.');
+            throw new Exception\InvalidArgumentException('Table must be a string, array or instance of TableIdentifier.');
         }
         return $this;
     }

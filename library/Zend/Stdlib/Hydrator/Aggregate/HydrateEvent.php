@@ -12,6 +12,10 @@ namespace Zend\Stdlib\Hydrator\Aggregate;
 
 use Zend\EventManager\Event;
 
+/**
+ * Event triggered when the {@see \Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator} hydrates
+ * data into an object
+ */
 class HydrateEvent extends Event
 {
     const EVENT_HYDRATE = 'hydrate';
@@ -31,6 +35,11 @@ class HydrateEvent extends Event
      */
     protected $hydrationData;
 
+    /**
+     * @param object $target
+     * @param object $hydratedObject
+     * @param array  $hydrationData
+     */
     public function __construct($target, $hydratedObject, array $hydrationData)
     {
         $this->target         = $target;
@@ -38,21 +47,37 @@ class HydrateEvent extends Event
         $this->hydrationData  = $hydrationData;
     }
 
+    /**
+     * Retrieves the object that is being hydrated
+     *
+     * @return object
+     */
     public function getHydratedObject()
     {
         return $this->hydratedObject;
     }
 
+    /**
+     * @param object $hydratedObject
+     */
     public function setHydratedObject($hydratedObject)
     {
         $this->hydratedObject = $hydratedObject;
     }
 
+    /**
+     * Retrieves the data that is being used for hydration
+     *
+     * @return array
+     */
     public function getHydrationData()
     {
         return $this->hydrationData;
     }
 
+    /**
+     * @param array $hydrationData
+     */
     public function setHydrationData(array $hydrationData)
     {
         $this->hydrationData = $hydrationData;

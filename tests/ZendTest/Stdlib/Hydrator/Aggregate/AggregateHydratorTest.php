@@ -13,6 +13,9 @@ use PHPUnit_Framework_TestCase;
 use Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator;
 use stdClass;
 
+/**
+ * Unit tests for {@see \Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator}
+ */
 class AggregateHydratorTest extends PHPUnit_Framework_TestCase
 {
     /**

@@ -14,6 +14,11 @@ use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
+/**
+ * Aggregate listener wrapping around a hydrator. Listens
+ * to {@see \Zend\Stdlib\Hydrator\Aggregate::EVENT_HYDRATE} and
+ * {@see \Zend\Stdlib\Hydrator\Aggregate::EVENT_EXTRACT}
+ */
 class HydratorListener extends AbstractListenerAggregate
 {
     /**
@@ -39,6 +44,12 @@ class HydratorListener extends AbstractListenerAggregate
     }
 
     /**
+     * Callback to be used when {@see \Zend\Stdlib\Hydrator\Aggregate\HydrateEvent::EVENT_HYDRATE} is triggered
+     *
+     * @param \Zend\Stdlib\Hydrator\Aggregate\HydrateEvent $event
+     *
+     * @return object
+     *
      * @internal
      */
     public function onHydrate(HydrateEvent $event)
@@ -51,6 +62,12 @@ class HydratorListener extends AbstractListenerAggregate
     }
 
     /**
+     * Callback to be used when {@see \Zend\Stdlib\Hydrator\Aggregate\ExtractEvent::EVENT_EXTRACT} is triggered
+     *
+     * @param \Zend\Stdlib\Hydrator\Aggregate\ExtractEvent $event
+     *
+     * @return array
+     *
      * @internal
      */
     public function onExtract(ExtractEvent $event)

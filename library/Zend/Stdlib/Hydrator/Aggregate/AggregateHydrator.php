@@ -16,6 +16,9 @@ use Zend\Stdlib\Exception;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
+/**
+ * Aggregate hydrator that composes multiple hydrators via events
+ */
 class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
 {
     const DEFAULT_PRIORITY = 1;
@@ -25,6 +28,12 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
      */
     protected $eventManager;
 
+    /**
+     * Attaches the provided hydrator to the list of hydrators to be used while hydrating/extracting data
+     *
+     * @param \Zend\Stdlib\Hydrator\HydratorInterface $hydrator
+     * @param int                                     $priority
+     */
     public function add(HydratorInterface $hydrator, $priority = self::DEFAULT_PRIORITY)
     {
         $this->getEventManager()->attachAggregate(new HydratorListener($hydrator), $priority);

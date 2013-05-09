@@ -686,39 +686,43 @@ class Di implements DependencyInjectionInterface
             // PRIORITY 6 - globally preferred implementations
 
             // next consult alias level preferred instances
-            if ($alias && $this->instanceManager->hasTypePreferences($alias)) {
-                $pInstances = $this->instanceManager->getTypePreferences($alias);
-                foreach ($pInstances as $pInstance) {
-                    if (is_object($pInstance)) {
-                        $computedParams['value'][$fqParamPos] = $pInstance;
-                        continue 2;
+            // RESOLVE_EAGER wants to inject the cross-cutting concerns.
+            // If you want to retrieve an instance from TypePreferences,
+            // use AwareInterface or specify the method requirement option METHOD_IS_EAGER at ClassDefinition
+            if ($methodRequirementType & self::RESOLVE_EAGER) {
+                if ($alias && $this->instanceManager->hasTypePreferences($alias)) {
+                    $pInstances = $this->instanceManager->getTypePreferences($alias);
+                    foreach ($pInstances as $pInstance) {
+                        if (is_object($pInstance)) {
+                            $computedParams['value'][$fqParamPos] = $pInstance;
+                            continue 2;
+                        }
+                        $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
+                             $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
+                        if ($pInstanceClass === $type || self::isSubclassOf($pInstanceClass, $type)) {
+                            $computedParams['retrieval'][$fqParamPos] = array($pInstance, $pInstanceClass);
+                            continue 2;
+                        }
                     }
-                    $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
-                         $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                    if ($pInstanceClass === $type || self::isSubclassOf($pInstanceClass, $type)) {
-                        $computedParams['retrieval'][$fqParamPos] = array($pInstance, $pInstanceClass);
-                        continue 2;
+                }
+
+                // next consult class level preferred instances
+                if ($type && $this->instanceManager->hasTypePreferences($type)) {
+                    $pInstances = $this->instanceManager->getTypePreferences($type);
+                    foreach ($pInstances as $pInstance) {
+                        if (is_object($pInstance)) {
+                            $computedParams['value'][$fqParamPos] = $pInstance;
+                            continue 2;
+                        }
+                        $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
+                             $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
+                        if ($pInstanceClass === $type || self::isSubclassOf($pInstanceClass, $type)) {
+                            $computedParams['retrieval'][$fqParamPos] = array($pInstance, $pInstanceClass);
+                            continue 2;
+                        }
                     }
                 }
             }
-
-            // next consult class level preferred instances
-            if ($type && $this->instanceManager->hasTypePreferences($type)) {
-                $pInstances = $this->instanceManager->getTypePreferences($type);
-                foreach ($pInstances as $pInstance) {
-                    if (is_object($pInstance)) {
-                        $computedParams['value'][$fqParamPos] = $pInstance;
-                        continue 2;
-                    }
-                    $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
-                         $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                    if ($pInstanceClass === $type || self::isSubclassOf($pInstanceClass, $type)) {
-                        $computedParams['retrieval'][$fqParamPos] = array($pInstance, $pInstanceClass);
-                        continue 2;
-                    }
-                }
-            }
-
             if (!$isRequired) {
                 $computedParams['optional'][$fqParamPos] = true;
             }

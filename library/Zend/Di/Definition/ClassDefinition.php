@@ -9,8 +9,8 @@
 
 namespace Zend\Di\Definition;
 
-use Zend\Di\Di;
 use Zend\Di\Definition\Builder\InjectionMethod;
+use Zend\Di\Di;
 
 /**
  * Class definitions for a single class

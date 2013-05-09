@@ -10,6 +10,7 @@
 namespace Zend\Di\Definition;
 
 use Zend\Di\Definition\Builder\InjectionMethod;
+
 /**
  * Class definitions based on a given array
  */

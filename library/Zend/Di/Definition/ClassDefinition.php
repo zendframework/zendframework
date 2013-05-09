@@ -10,6 +10,8 @@
 namespace Zend\Di\Definition;
 
 use Zend\Di\Di;
+use Zend\Di\Definition\Builder\InjectionMethod;
+
 /**
  * Class definitions for a single class
  */
@@ -77,40 +79,13 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
      */
     public function addMethod($method, $isRequired = null)
     {
-        if ($isRequired === null) {
+       if ($isRequired === null) {
             if ($method === '__construct') {
                 $methodRequirementType = Di::METHOD_IS_CONSTRUCTOR;
             }
             $methodRequirementType = Di::METHOD_IS_OPTIONAL;
-        }
-
-        if (is_bool($isRequired)) {
-            $methodRequirementType = $isRequired ? Di::METHOD_IS_REQUIRED : Di::METHOD_IS_OPTIONAL;
-        }
-
-        if (is_int($isRequired)) {
-            $methodRequirementType = $isRequired;
-        }
-
-        if (is_string($isRequired)) {
-            switch (strtolower($isRequired)) {
-                case "require":
-                case "required":
-                    $methodRequirementType = Di::METHOD_IS_REQUIRED;
-                    break;
-                case "aware":
-                    $methodRequirementType = Di::METHOD_IS_AWARE;
-                    break;
-                case "optional":
-                    $methodRequirementType = Di::METHOD_IS_OPTIONAL;
-                    break;
-                case "constructor":
-                    $methodRequirementType = Di::MEHTOD_IS_CONSTRUCTOR;
-                    break;
-                case "instantiator":
-                    $methodRequirementType = Di::METHOD_IS_INSTANTIATOR;
-                    break;
-            }
+        } else {
+            $methodRequirementType = InjectionMethod::detectMethodRequirement($isRequired);
         }
 
         $this->methods[$method] = $methodRequirementType;

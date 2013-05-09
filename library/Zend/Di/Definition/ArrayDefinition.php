@@ -9,6 +9,7 @@
 
 namespace Zend\Di\Definition;
 
+use Zend\Di\Definition\Builder\InjectionMethod;
 /**
  * Class definitions based on a given array
  */
@@ -27,6 +28,15 @@ class ArrayDefinition implements DefinitionInterface
         foreach ($dataArray as $class => $value) {
             // force lower names
             $dataArray[$class] = array_change_key_case($dataArray[$class], CASE_LOWER);
+        }
+        foreach ($dataArray as $class => $definition) {
+            if (isset($definition['methods']) && is_array($definition['methods'])) {
+                foreach ($definition['methods'] as $type => $requirement) {
+                    if (!is_int($requirement)) {
+                        $dataArray[$class]['methods'][$type] = InjectionMethod::detectMethodRequirement($requirement);
+                    }
+                }
+            }
         }
         $this->dataArray = $dataArray;
     }

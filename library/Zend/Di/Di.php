@@ -11,8 +11,8 @@ namespace Zend\Di;
 
 use Closure;
 use ReflectionClass;
-use Zend\Di\Exception;
-
+use Zend\Di\Exception\RuntimeException as DiRuntimeException;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 /**
  * Dependency injector that can generate instances using class definitions and configured instance parameters
  */
@@ -757,7 +757,28 @@ class Di implements DependencyInjectionInterface
                     } else {
                         $resolvedParams[$index] = $this->get($computedParams['retrieval'][$fqParamPos][0], $callTimeUserParams);
                     }
-                } catch (Exception\RuntimeException $e) {
+                } catch (ServiceNotCreatedException $e) {
+                    //Zend\ServiceManager\Exception\ServiceNotCreatedException
+                    //Zend\Di\Exception\RuntimeException
+                    if ($methodRequirementType & self::RESOLVE_STRICT) {
+                        //finally ( be aware to do at the end of flow)
+                        array_pop($this->currentDependencies);
+                        // if this item was marked strict,
+                        // plus it cannot be resolve, and no value exist, bail out
+                        throw new Exception\MissingPropertyException(sprintf(
+                            'Missing %s for parameter ' . $name . ' for ' . $class . '::' . $method,
+                            (($value[0] === null) ? 'value' : 'instance/object' )
+                        ),
+                        $e->getCode(),
+                        $e);
+                    } else {
+                        //finally ( be aware to do at the end of flow)
+                        array_pop($this->currentDependencies);
+                        return false;
+                    }
+                } catch (DiRuntimeException $e) {
+                    //Zend\ServiceManager\Exception\ServiceNotCreatedException
+                    //Zend\Di\Exception\RuntimeException
                     if ($methodRequirementType & self::RESOLVE_STRICT) {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);

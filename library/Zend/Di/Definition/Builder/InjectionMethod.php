@@ -9,6 +9,8 @@
 
 namespace Zend\Di\Definition\Builder;
 
+use Zend\Di\Di;
+
 /**
  * Definitions for an injection endpoint method
  */
@@ -52,10 +54,42 @@ class InjectionMethod
      */
     public function addParameter($name, $class = null, $isRequired = null, $default = null)
     {
+        if (is_bool($isRequired)) {
+            $methodRequirementType = $isRequired ? Di::METHOD_IS_REQUIRED : Di::METHOD_IS_OPTIONAL;
+        }
+
+        if (null === $isRequired) {
+            $methodRequirementType = Di::METHOD_IS_REQUIRED;
+        }
+
+        if (is_int($isRequired)) {
+            $methodRequirementType = $isRequired;
+        }
+
+        if (is_string($isRequired)) {
+            switch (strtolower($isRequired)) {
+                case "require":
+                case "required":
+                    $methodRequirementType = Di::METHOD_IS_REQUIRED;
+                    break;
+                case "aware":
+                    $methodRequirementType = Di::METHOD_IS_AWARE;
+                    break;
+                case "optional":
+                    $methodRequirementType = Di::METHOD_IS_OPTIONAL;
+                    break;
+                case "constructor":
+                    $methodRequirementType = Di::MEHTOD_IS_CONSTRUCTOR;
+                    break;
+                case "instantiator":
+                    $methodRequirementType = Di::METHOD_IS_INSTANTIATOR;
+                    break;
+            }
+        }
         $this->parameters[] = array(
             $name,
             $class,
-            ($isRequired == null) ? true : false,
+            $methodRequirementType,
             $default,
         );
 

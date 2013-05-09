@@ -78,7 +78,7 @@ class Result
         if ($code < self::FAILURE_UNCATEGORIZED) {
             $code = self::FAILURE;
         } elseif ($code > self::SUCCESS) {
-            $code = 1;
+            $code = self::SUCCESS;
         }
 
         $this->code     = $code;

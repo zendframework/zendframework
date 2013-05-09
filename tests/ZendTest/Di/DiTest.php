@@ -10,12 +10,11 @@
 
 namespace ZendTest\Di;
 
-use Zend\Di\Di;
-use Zend\Di\DefinitionList;
-use Zend\Di\InstanceManager;
 use Zend\Di\Config;
 use Zend\Di\Definition;
-
+use Zend\Di\DefinitionList;
+use Zend\Di\Di;
+use Zend\Di\InstanceManager;
 
 class DiTest extends \PHPUnit_Framework_TestCase
 {
@@ -456,7 +455,13 @@ class DiTest extends \PHPUnit_Framework_TestCase
      */
     public function testNewInstanceWillUsePreferredClassForInterfaceHints()
     {
-        $di = new Di();
+        $definitionList = new DefinitionList(array(
+            $classdef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\PreferredImplClasses\C'),
+            new Definition\RuntimeDefinition()
+        ));
+        $classdef->addMethod('setA', Di::METHOD_IS_EAGER);
+        $di = new Di($definitionList);
+
         $di->instanceManager()->addTypePreference(
             'ZendTest\Di\TestAsset\PreferredImplClasses\A',
             'ZendTest\Di\TestAsset\PreferredImplClasses\BofA'
@@ -467,6 +472,35 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\Di\TestAsset\PreferredImplClasses\BofA', $a);
         $d = $di->get('ZendTest\Di\TestAsset\PreferredImplClasses\D');
         $this->assertSame($a, $d->a);
+    }
+
+    public function testMatchPreferredClassWithAwareInterface()
+    {
+        $di = new Di();
+
+        $di->instanceManager()->addTypePreference(
+            'ZendTest\Di\TestAsset\PreferredImplClasses\A',
+            'ZendTest\Di\TestAsset\PreferredImplClasses\BofA'
+        );
+
+        $e = $di->get('ZendTest\Di\TestAsset\PreferredImplClasses\E');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\PreferredImplClasses\BofA', $e->a);
+    }
+
+    public function testWillNotUsePreferredClassForInterfaceHints()
+    {
+        $di = new Di();
+
+        $di->instanceManager()->addTypePreference(
+            'ZendTest\Di\TestAsset\PreferredImplClasses\A',
+            'ZendTest\Di\TestAsset\PreferredImplClasses\BofA'
+        );
+
+        $c = $di->get('ZendTest\Di\TestAsset\PreferredImplClasses\C');
+        $a = $c->a;
+        $this->assertNull($a);
+        $d = $di->get('ZendTest\Di\TestAsset\PreferredImplClasses\D');
+        $this->assertNull($d->a);
     }
 
     public function testInjectionInstancesCanBeInjectedMultipleTimes()

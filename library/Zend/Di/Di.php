@@ -538,7 +538,7 @@ class Di implements DependencyInjectionInterface
      */
     protected function resolveMethodParameters($class, $method, array $callTimeUserParams, $alias, $methodRequirementType, $isInstantiator = false)
     {
-        //BC compatibility
+        //for BC
         if (is_bool($methodRequirementType)) {
             if ($isInstantiator) {
                 $methodRequirementType = Di::METHOD_IS_INSTANTIATOR;
@@ -556,9 +556,9 @@ class Di implements DependencyInjectionInterface
 
         // computed parameters array
         $computedParams = array(
-            'value'    => array(),
-            'required' => array(),
-            'optional' => array()
+            'value'     => array(),
+            'retrieval' => array(),
+            'optional'  => array()
         );
 
         // retrieve instance configurations for all contexts
@@ -614,13 +614,13 @@ class Di implements DependencyInjectionInterface
                 if ($type !== false && is_string($callTimeCurValue)) {
                     if ($this->instanceManager->hasAlias($callTimeCurValue)) {
                         // was an alias provided?
-                        $computedParams['required'][$fqParamPos] = array(
+                        $computedParams['retrieval'][$fqParamPos] = array(
                             $callTimeUserParams[$name],
                             $this->instanceManager->getClassFromAlias($callTimeCurValue)
                         );
                     } elseif ($this->definitions->hasClass($callTimeUserParams[$name])) {
                         // was a known class provided?
-                        $computedParams['required'][$fqParamPos] = array(
+                        $computedParams['retrieval'][$fqParamPos] = array(
                             $callTimeCurValue,
                             $callTimeCurValue
                         );
@@ -659,13 +659,13 @@ class Di implements DependencyInjectionInterface
                         $computedParams['value'][$fqParamPos] = $iConfigCurValue;
                     } elseif (is_string($iConfigCurValue)
                         && isset($aliases[$iConfigCurValue])) {
-                        $computedParams['required'][$fqParamPos] = array(
+                        $computedParams['retrieval'][$fqParamPos] = array(
                             $iConfig[$thisIndex]['parameters'][$name],
                             $this->instanceManager->getClassFromAlias($iConfigCurValue)
                         );
                     } elseif (is_string($iConfigCurValue)
                         && $this->definitions->hasClass($iConfigCurValue)) {
-                        $computedParams['required'][$fqParamPos] = array(
+                        $computedParams['retrieval'][$fqParamPos] = array(
                             $iConfigCurValue,
                             $iConfigCurValue
                         );
@@ -696,7 +696,7 @@ class Di implements DependencyInjectionInterface
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
                     if ($pInstanceClass === $type || self::isSubclassOf($pInstanceClass, $type)) {
-                        $computedParams['required'][$fqParamPos] = array($pInstance, $pInstanceClass);
+                        $computedParams['retrieval'][$fqParamPos] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
                 }
@@ -713,7 +713,7 @@ class Di implements DependencyInjectionInterface
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
                     if ($pInstanceClass === $type || self::isSubclassOf($pInstanceClass, $type)) {
-                        $computedParams['required'][$fqParamPos] = array($pInstance, $pInstanceClass);
+                        $computedParams['retrieval'][$fqParamPos] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
                 }
@@ -724,7 +724,7 @@ class Di implements DependencyInjectionInterface
             }
 
             if ($type && $isRequired && ($methodRequirementType & self::RESOLVE_EAGER)) {
-                $computedParams['required'][$fqParamPos] = array($type, $type);
+                $computedParams['retrieval'][$fqParamPos] = array($type, $type);
             }
 
         }
@@ -736,22 +736,22 @@ class Di implements DependencyInjectionInterface
             if (isset($computedParams['value'][$fqParamPos])) {
                 // if there is a value supplied, use it
                 $resolvedParams[$index] = $computedParams['value'][$fqParamPos];
-            } elseif (isset($computedParams['required'][$fqParamPos])) {
+            } elseif (isset($computedParams['retrieval'][$fqParamPos])) {
                 // detect circular dependencies! (they can only happen in instantiators)
-                if ($isInstantiator && in_array($computedParams['required'][$fqParamPos][1], $this->currentDependencies)) {
+                if ($isInstantiator && in_array($computedParams['retrieval'][$fqParamPos][1], $this->currentDependencies)) {
                     throw new Exception\CircularDependencyException(
                         "Circular dependency detected: $class depends on {$value[1]} and viceversa"
                     );
                 }
 
                 array_push($this->currentDependencies, $class);
-                $dConfig = $this->instanceManager->getConfig($computedParams['required'][$fqParamPos][0]);
+                $dConfig = $this->instanceManager->getConfig($computedParams['retrieval'][$fqParamPos][0]);
 
                 try {
                     if ($dConfig['shared'] === false) {
-                        $resolvedParams[$index] = $this->newInstance($computedParams['required'][$fqParamPos][0], $callTimeUserParams, false);
+                        $resolvedParams[$index] = $this->newInstance($computedParams['retrieval'][$fqParamPos][0], $callTimeUserParams, false);
                     } else {
-                        $resolvedParams[$index] = $this->get($computedParams['required'][$fqParamPos][0], $callTimeUserParams);
+                        $resolvedParams[$index] = $this->get($computedParams['retrieval'][$fqParamPos][0], $callTimeUserParams);
                     }
                 } catch (Exception\RuntimeException $e) {
                     if ($methodRequirementType & self::RESOLVE_STRICT) {

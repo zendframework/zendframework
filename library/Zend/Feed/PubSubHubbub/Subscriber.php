@@ -619,10 +619,6 @@ class Subscriber
             }
             $client->setUri($url);
             $client->setRawBody($params = $this->_getRequestParameters($url, $mode));
-
-\Log::debug("Contacting PSHB hub at " . $url);
-\Log::debug("with params: " . $params);
-
             $response = $client->send();
             if ($response->getStatusCode() !== 204
                 && $response->getStatusCode() !== 202

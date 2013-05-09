@@ -92,6 +92,12 @@ class Di implements DependencyInjectionInterface
     const METHOD_IS_REQUIRED = 3;
 
     /**
+     *
+     * resolve mode RESOLVE_EAGER
+     */
+    const METHOD_IS_EAGER = 1;
+
+    /**
      * Constructor
      *
      * @param null|DefinitionList  $definitions

@@ -52,7 +52,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $sql->setTable('foo');
         $this->assertSame('foo', $sql->getTable());
 
-        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Table must be a string or instance of TableIdentifier.');
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Table must be a string, array or instance of TableIdentifier.');
         $sql->setTable(null);
     }
 

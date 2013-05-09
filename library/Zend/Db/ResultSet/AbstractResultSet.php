@@ -46,7 +46,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
     /**
      * @var int
      */
-    protected $position = -1;
+    protected $position = 0;
 
     /**
      * Set the data source for the result set
@@ -64,6 +64,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
             if ($dataSource->isBuffered()) {
                 $this->buffer = -1;
             }
+            $this->dataSource->rewind();
             return $this;
         }
 
@@ -219,7 +220,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
      */
     public function rewind()
     {
-        if (!is_array($this->buffer) || $this->position === -1) {
+        if (!is_array($this->buffer)) {
             if ($this->dataSource instanceof Iterator) {
                 $this->dataSource->rewind();
             } else {

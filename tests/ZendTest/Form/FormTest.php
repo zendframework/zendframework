@@ -183,6 +183,15 @@ class FormTest extends TestCase
         $this->assertTrue($fooInput->isRequired());
     }
 
+    public function testInputProviderInterfaceAddsInputFiltersOnlyForSelf()
+    {
+        $form = new TestAsset\InputFilterProviderWithFieldset();
+
+        $inputFilter = $form->getInputFilter();
+        $fieldsetInputFilter = $inputFilter->get('basic_fieldset');
+        $this->assertFalse($fieldsetInputFilter->has('foo'));
+    }
+
     public function testCallingIsValidRaisesExceptionIfNoDataSet()
     {
         $this->setExpectedException('Zend\Form\Exception\DomainException');

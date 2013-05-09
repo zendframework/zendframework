@@ -755,6 +755,8 @@ class Di implements DependencyInjectionInterface
                     }
                 } catch (Exception\RuntimeException $e) {
                     if ($methodRequirementType & self::RESOLVE_STRICT) {
+                        //finally ( be aware to do at the end of flow)
+                        array_pop($this->currentDependencies);
                         // if this item was marked strict,
                         // plus it cannot be resolve, and no value exist, bail out
                         throw new Exception\MissingPropertyException(sprintf(
@@ -764,6 +766,8 @@ class Di implements DependencyInjectionInterface
                         $e->getCode(),
                         $e);
                     } else {
+                        //finally ( be aware to do at the end of flow)
+                        array_pop($this->currentDependencies);
                         return false;
                     }
                 }

@@ -95,6 +95,16 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Zend\EventManager\EventManagerInterface', $hydrator->getEventManager());
 
+        $eventManager
+            ->expects($this->once())
+            ->method('setIdentifiers')
+            ->with(
+                array(
+                     'Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator',
+                     'Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator',
+                )
+            );
+
         $hydrator->setEventManager($eventManager);
 
         $this->assertSame($eventManager, $hydrator->getEventManager());

@@ -59,6 +59,8 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
      */
     public function setEventManager(EventManagerInterface $eventManager)
     {
+        $eventManager->setIdentifiers(array(__CLASS__, get_class($this)));
+
         $this->eventManager = $eventManager;
     }
 
@@ -68,7 +70,7 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
     public function getEventManager()
     {
         if (null === $this->eventManager) {
-            $this->eventManager = new EventManager();
+            $this->setEventManager(new EventManager());
         }
 
         return $this->eventManager;

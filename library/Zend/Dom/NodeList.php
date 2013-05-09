@@ -3,13 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Dom
  */
 
 namespace Zend\Dom;
 
+use ArrayAccess;
 use Countable;
 use DOMDocument;
 use DOMNodeList;
@@ -18,11 +18,8 @@ use Iterator;
 
 /**
  * Nodelist for DOM XPath query
- *
- * @package    Zend_Dom
- * @subpackage Query
  */
-class NodeList implements Iterator, Countable
+class NodeList implements Iterator, Countable, ArrayAccess
 {
     /**
      * CSS Selector query
@@ -55,11 +52,10 @@ class NodeList implements Iterator, Countable
     /**
      * Constructor
      *
-     * @param  string       $cssQuery
-     * @param  string|array $xpathQuery
-     * @param  DOMDocument  $document
-     * @param  DOMNodeList  $nodeList
-     * @return void
+     * @param string       $cssQuery
+     * @param string|array $xpathQuery
+     * @param DOMDocument  $document
+     * @param DOMNodeList  $nodeList
      */
     public function  __construct($cssQuery, $xpathQuery, DOMDocument $document, DOMNodeList $nodeList)
     {
@@ -165,5 +161,53 @@ class NodeList implements Iterator, Countable
     public function count()
     {
         return $this->nodeList->length;
+    }
+
+    /**
+     * ArrayAccess: offset exists
+     *
+     * @param int $key
+     * @return bool
+     */
+    public function offsetExists($key)
+    {
+        if (in_array($key, range(0, $this->nodeList->length - 1)) && $this->nodeList->length > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * ArrayAccess: get offset
+     *
+     * @param int $key
+     * @return mixed
+     */
+    public function offsetGet($key)
+    {
+        return $this->nodeList->item($key);
+    }
+
+    /**
+     * ArrayAccess: set offset
+     *
+     * @param  mixed $key
+     * @param  mixed $value
+     * @throws Exception\BadMethodCallException when attemptingn to write to a read-only item
+     */
+    public function offsetSet($key, $value)
+    {
+        throw new Exception\BadMethodCallException('Attempting to write to a read-only list');
+    }
+
+    /**
+     * ArrayAccess: unset offset
+     *
+     * @param  mixed $key
+     * @throws Exception\BadMethodCallException when attemptingn to unset a read-only item
+     */
+    public function offsetUnset($key)
+    {
+        throw new Exception\BadMethodCallException('Attempting to unset on a read-only list');
     }
 }

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap;
@@ -14,9 +13,6 @@ use DateTime;
 
 /**
  * Zend\Ldap\Attribute is a collection of LDAP attribute related functions.
- *
- * @category   Zend
- * @package    Zend_Ldap
  */
 class Attribute
 {
@@ -32,7 +28,7 @@ class Attribute
      * @param  array                     $data
      * @param  string                    $attribName
      * @param  string|array|\Traversable $value
-     * @param  boolean                   $append
+     * @param  bool                   $append
      * @return void
      */
     public static function setAttribute(array &$data, $attribName, $value, $append = false)
@@ -68,7 +64,7 @@ class Attribute
      *
      * @param  array   $data
      * @param  string  $attribName
-     * @param  integer $index
+     * @param  int $index
      * @return array|mixed
      */
     public static function getAttribute(array $data, $attribName, $index = null)
@@ -102,7 +98,7 @@ class Attribute
      * @param array       $data
      * @param string      $attribName
      * @param mixed|array $value
-     * @return boolean
+     * @return bool
      */
     public static function attributeHasValue(array &$data, $attribName, $value)
     {
@@ -287,9 +283,9 @@ class Attribute
      *
      * @param  array                      $data
      * @param  string                     $attribName
-     * @param  integer|array|\Traversable $value
-     * @param  boolean                    $utc
-     * @param  boolean                    $append
+     * @param  int|array|\Traversable $value
+     * @param  bool                    $utc
+     * @param  bool                    $append
      */
     public static function setDateTimeAttribute(
         array &$data, $attribName, $value, $utc = false,
@@ -314,8 +310,8 @@ class Attribute
     }
 
     /**
-     * @param  integer $value
-     * @param  boolean $utc
+     * @param  int $value
+     * @param  bool $utc
      * @return string|null
      */
     private static function valueToLdapDateTime($value, $utc)
@@ -332,8 +328,8 @@ class Attribute
      *
      * @param  array   $data
      * @param  string  $attribName
-     * @param  integer $index
-     * @return array|integer
+     * @param  int $index
+     * @return array|int
      */
     public static function getDateTimeAttribute(array $data, $attribName, $index = null)
     {
@@ -357,7 +353,7 @@ class Attribute
 
     /**
      * @param  string|DateTime $value
-     * @return integer|null
+     * @return int|null
      */
     private static function valueFromLdapDateTime($value)
     {

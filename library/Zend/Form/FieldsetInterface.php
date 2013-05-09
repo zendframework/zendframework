@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form;
@@ -14,10 +13,6 @@ use Countable;
 use IteratorAggregate;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- */
 interface FieldsetInterface extends
     Countable,
     IteratorAggregate,
@@ -117,7 +112,7 @@ interface FieldsetInterface extends
      * Checks if the object can be set in this fieldset
      *
      * @param $object
-     * @return boolean
+     * @return bool
      */
     public function allowObjectBinding($object);
 
@@ -147,7 +142,7 @@ interface FieldsetInterface extends
     /**
      * Checks if this fieldset can bind data
      *
-     * @return boolean
+     * @return bool
      */
     public function allowValueBinding();
 }

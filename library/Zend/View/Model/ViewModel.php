@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Model;
@@ -18,12 +17,7 @@ use Zend\View\Exception;
 use Zend\View\Model;
 use Zend\View\Variables as ViewVariables;
 
-/**
- * @category   Zend
- * @package    Zend_View
- * @subpackage Model
- */
-class ViewModel implements ModelInterface
+class ViewModel implements ModelInterface, ClearableModelInterface
 {
     /**
      * What variable a parent model should capture this model to
@@ -176,7 +170,7 @@ class ViewModel implements ModelInterface
     /**
      * Set renderer options/hints en masse
      *
-     * @param array|\Traversable $options
+     * @param array|Traversable $options
      * @throws \Zend\View\Exception\InvalidArgumentException
      * @return ViewModel
      */
@@ -211,6 +205,17 @@ class ViewModel implements ModelInterface
     }
 
     /**
+     * Clear any existing renderer options/hints
+     *
+     * @return ViewModel
+     */
+    public function clearOptions()
+    {
+        $this->options = array();
+        return $this;
+    }
+
+    /**
      * Get a single view variable
      *
      * @param  string       $name
@@ -222,9 +227,9 @@ class ViewModel implements ModelInterface
         $name = (string) $name;
         if (array_key_exists($name, $this->variables)) {
             return $this->variables[$name];
-        } else {
-            return $default;
         }
+
+        return $default;
     }
 
     /**
@@ -287,6 +292,19 @@ class ViewModel implements ModelInterface
     }
 
     /**
+     * Clear all variables
+     *
+     * Resets the internal variable container to an empty container.
+     *
+     * @return ViewModel
+     */
+    public function clearVariables()
+    {
+        $this->variables = new ViewVariables();
+        return $this;
+    }
+
+    /**
      * Set the template to be used by this model
      *
      * @param  string $template
@@ -322,7 +340,7 @@ class ViewModel implements ModelInterface
         if (null !== $captureTo) {
             $child->setCaptureTo($captureTo);
         }
-        if (null !== $captureTo) {
+        if (null !== $append) {
             $child->setAppend($append);
         }
 
@@ -349,6 +367,17 @@ class ViewModel implements ModelInterface
     public function hasChildren()
     {
         return (0 < count($this->children));
+    }
+
+    /**
+     * Clears out all child models
+     *
+     * @return ViewModel
+     */
+    public function clearChildren()
+    {
+        $this->children = array();
+        return $this;
     }
 
     /**

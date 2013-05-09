@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Log
  */
 
 namespace Zend\Log\Formatter;
@@ -17,11 +16,6 @@ use Traversable;
 use Zend\Escaper\Escaper;
 use Zend\Stdlib\ArrayUtils;
 
-/**
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Formatter
- */
 class Xml implements FormatterInterface
 {
     /**
@@ -183,7 +177,7 @@ class Xml implements FormatterInterface
         foreach ($dataToInsert as $key => $value) {
             if (empty($value)
                 || is_scalar($value)
-                || (is_object($value) && method_exists($value,'__toString'))
+                || (is_object($value) && method_exists($value, '__toString'))
             ) {
                 if ($key == "message") {
                     $value = $escaper->escapeHtml($value);

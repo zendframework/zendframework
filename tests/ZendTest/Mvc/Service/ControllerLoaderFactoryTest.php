@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mvc
  */
@@ -15,6 +15,9 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Mvc\Service\ControllerLoaderFactory;
 use Zend\Mvc\Service\ControllerPluginManagerFactory;
 use Zend\Mvc\Service\DiFactory;
+use Zend\Mvc\Service\DiStrictAbstractServiceFactoryFactory;
+use Zend\Mvc\Service\DiAbstractServiceFactoryFactory;
+use Zend\Mvc\Service\DiServiceInitializerFactory;
 use Zend\Mvc\Service\EventManagerFactory;
 use Zend\ServiceManager\Config;
 use Zend\ServiceManager\ServiceManager;
@@ -42,6 +45,9 @@ class ControllerLoaderFactoryTest extends TestCase
         $this->services->setService('Config', $config);
         $this->services->setFactory('ControllerPluginManager', new ControllerPluginManagerFactory());
         $this->services->setFactory('Di', new DiFactory());
+        $this->services->setFactory('DiStrictAbstractServiceFactory', new DiStrictAbstractServiceFactoryFactory());
+        $this->services->setFactory('DiAbstractServiceFactory', new DiAbstractServiceFactoryFactory());
+        $this->services->setFactory('DiServiceInitializer', new DiServiceInitializerFactory());
         $this->services->setFactory('EventManager', new EventManagerFactory());
         $this->services->setInvokableClass('SharedEventManager', 'Zend\EventManager\SharedEventManager');
     }

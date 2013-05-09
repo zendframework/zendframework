@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Di
  */
 
 namespace Zend\Di\Definition;
@@ -20,9 +19,6 @@ use Zend\Di\Definition\Annotation;
 
 /**
  * Class definitions based on a set of directories to be scanned
- *
- * @category   Zend
- * @package    Zend_Di
  */
 class CompilerDefinition implements DefinitionInterface
 {
@@ -303,161 +299,6 @@ class CompilerDefinition implements DefinitionInterface
         }
 
     }
-
-//    public function processClass($className)
-//    {
-//        $strategy = $this->introspectionStrategy;
-//        $sClass = $this->directoryScanner->getClass($className, true, true);
-//
-//        if (!$sClass->isInstantiable()) {
-//            return;
-//        }
-//
-//        // determine supertypes
-//        $superTypes = array();
-//        if (($parentClasses = $sClass->getParentClasses()) !== null) {
-//            $superTypes = array_merge($superTypes, $parentClasses);
-//        }
-//        if (($interfaces = $sClass->getInterfaces())) {
-//            $superTypes = array_merge($superTypes, $interfaces);
-//        }
-//
-//        $className = $sClass->getName();
-//        $this->classes[$className] = array(
-//            'supertypes'       => $superTypes,
-//            'instantiator'     => null,
-//            'methods'          => array(),
-//            'parameters'       => array()
-//        );
-//
-//        $def = &$this->classes[$className];
-//
-//        if ($def['instantiator'] == null) {
-//            if ($sClass->isInstantiable()) {
-//                $def['instantiator'] = '__construct';
-//            }
-//        }
-//
-//        if ($sClass->hasMethod('__construct')) {
-//            $mScanner = $sClass->getMethod('__construct');
-//            if ($mScanner->isPublic() && $mScanner->getNumberOfParameters() > 0) {
-//                $def['methods']['__construct'] = true;
-//                $this->processParams($def, $sClass, $mScanner);
-//            }
-//        }
-//
-//        foreach ($sClass->getMethods(true) as $mScanner) {
-//            if (!$mScanner->isPublic()) {
-//                continue;
-//            }
-//
-//            $methodName = $mScanner->getName();
-//
-//            if ($mScanner->getName() === '__construct') {
-//                continue;
-//            }
-//
-//            if ($strategy->getUseAnnotations() == true) {
-//
-//                $annotations = $mScanner->getAnnotations($strategy->getAnnotationManager());
-//
-//                if (($annotations instanceof AnnotationCollection)
-//                    && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Inject')) {
-//
-//                    $def['methods'][$methodName] = true;
-//                    $this->processParams($def, $sClass, $mScanner);
-//                    continue;
-//                }
-//            }
-//
-//            $methodPatterns = $this->introspectionStrategy->getMethodNameInclusionPatterns();
-//
-//            // matches a method injection pattern?
-//            foreach ($methodPatterns as $methodInjectorPattern) {
-//                preg_match($methodInjectorPattern, $methodName, $matches);
-//                if ($matches) {
-//                    $def['methods'][$methodName] = false; // check ot see if this is required?
-//                    $this->processParams($def, $sClass, $mScanner);
-//                    continue 2;
-//                }
-//            }
-//
-//        }
-//
-//        $interfaceInjectorPatterns = $this->introspectionStrategy->getInterfaceInjectionInclusionPatterns();
-//
-//        // matches the interface injection pattern
-//        /** @var $sInterface \Zend\Code\Scanner\ClassScanner */
-//        foreach ($sClass->getInterfaces(true) as $sInterface) {
-//            foreach ($interfaceInjectorPatterns as $interfaceInjectorPattern) {
-//                preg_match($interfaceInjectorPattern, $sInterface->getName(), $matches);
-//                if ($matches) {
-//                    foreach ($sInterface->getMethods(true) as $sMethod) {
-//                        if ($sMethod->getName() === '__construct') {
-                              // constructor not allowed in interfaces
-//                            continue;
-//                        }
-//                        $def['methods'][$sMethod->getName()] = true;
-//                        $this->processParams($def, $sClass, $sMethod);
-//                    }
-//                    continue 2;
-//                }
-//            }
-//        }
-//
-//    }
-//
-//    protected function processParams(&$def, DerivedClassScanner $sClass, MethodScanner $sMethod)
-//    {
-//        if (count($sMethod->getParameters()) === 0) {
-//            return;
-//        }
-//
-//        $methodName = $sMethod->getName();
-//
-//        $def['parameters'][$methodName] = array();
-//
-//        foreach ($sMethod->getParameters(true) as $position => $p) {
-//
-//            /** @var $p \Zend\Code\Scanner\ParameterScanner  */
-//            $actualParamName = $p->getName();
-//
-//            $paramName = $this->createDistinctParameterName($actualParamName, $sClass->getName());
-//
-//            $fqName = $sClass->getName() . '::' . $sMethod->getName() . ':' . $position;
-//
-//            $def['parameters'][$methodName][$fqName] = array();
-//
-//            // set the class name, if it exists
-//            $def['parameters'][$methodName][$fqName][] = $actualParamName;
-//            $def['parameters'][$methodName][$fqName][] = ($p->getClass() !== null) ? $p->getClass() : null;
-//            $def['parameters'][$methodName][$fqName][] = !$p->isOptional();
-//        }
-//    }
-//
-//    protected function createDistinctParameterName($paramName, $class)
-//    {
-//        $currentParams = array();
-//        if ($this->classes[$class]['parameters'] === array()) {
-//            return $paramName;
-//        }
-//        foreach ($this->classes as $cdata) {
-//            foreach ($cdata['parameters'] as $mdata) {
-//                $currentParams = array_merge($currentParams, array_keys($mdata));
-//            }
-//        }
-//
-//        if (!in_array($paramName, $currentParams)) {
-//            return $paramName;
-//        }
-//
-//        $alt = 2;
-//        while (in_array($paramName . (string) $alt, $currentParams)) {
-//            $alt++;
-//        }
-//
-//        return $paramName . (string) $alt;
-//    }
 
     /**
      * {@inheritDoc}

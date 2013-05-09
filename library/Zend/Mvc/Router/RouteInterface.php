@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router;
@@ -14,15 +13,13 @@ use Zend\Stdlib\RequestInterface as Request;
 
 /**
  * RouteInterface interface.
- *
- * @package    Zend_Mvc_Router
  */
 interface RouteInterface
 {
     /**
      * Priority used for route stacks.
      *
-     * @var integer
+     * @var int
      * public $priority;
      */
 
@@ -38,7 +35,7 @@ interface RouteInterface
      * Match a given request.
      *
      * @param  Request $request
-     * @return RouteMatch
+     * @return RouteMatch|null
      */
     public function match(Request $request);
 

@@ -16,5 +16,11 @@
         "php": ">=5.3.3",
         "zendframework/zend-escaper": "self.version",
         "zendframework/zend-validator": "self.version"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev",
+            "dev-develop": "2.3-dev"
+        }
     }
 }

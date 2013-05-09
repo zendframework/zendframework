@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Node\Schema;
@@ -15,10 +14,6 @@ use Zend\Ldap\Exception;
 /**
  * This class provides a base implementation for managing schema
  * items like objectClass and attributeType.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Schema
  */
 abstract class AbstractItem implements \ArrayAccess, \Countable
 {
@@ -71,16 +66,16 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
     {
         if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
      * Checks whether a specific attribute exists.
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {
@@ -131,7 +126,7 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
      * Checks whether a specific attribute exists.
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($name)
     {

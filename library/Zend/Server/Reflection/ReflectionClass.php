@@ -3,22 +3,19 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Server
  */
 
 namespace Zend\Server\Reflection;
+
+use ReflectionClass as PhpReflectionClass;
 
 /**
  * Class/Object reflection
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
  * creating its own list of {@link Zend_Server_Reflection_Method}s.
- *
- * @category   Zend
- * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
  */
 class ReflectionClass
 {
@@ -43,7 +40,7 @@ class ReflectionClass
 
     /**
      * ReflectionClass object
-     * @var ReflectionClass
+     * @var PhpReflectionClass
      */
     protected $reflection;
 
@@ -53,11 +50,11 @@ class ReflectionClass
      * Create array of dispatchable methods, each a
      * {@link Zend\Server\Reflection\ReflectionMethod}. Sets reflection object property.
      *
-     * @param \ReflectionClass $reflection
+     * @param PhpReflectionClass $reflection
      * @param string $namespace
      * @param mixed $argv
      */
-    public function __construct(\ReflectionClass $reflection, $namespace = null, $argv = false)
+    public function __construct(PhpReflectionClass $reflection, $namespace = null, $argv = false)
     {
         $this->reflection = $reflection;
         $this->setNamespace($namespace);
@@ -176,6 +173,6 @@ class ReflectionClass
      */
     public function __wakeup()
     {
-        $this->reflection = new \ReflectionClass($this->getName());
+        $this->reflection = new PhpReflectionClass($this->getName());
     }
 }

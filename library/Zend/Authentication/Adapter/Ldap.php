@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Authentication
  */
 
 namespace Zend\Authentication\Adapter;
@@ -15,12 +14,7 @@ use Zend\Authentication\Result as AuthenticationResult;
 use Zend\Ldap as ZendLdap;
 use Zend\Ldap\Exception\LdapException;
 
-/**
- * @category   Zend
- * @package    Zend_Authentication
- * @subpackage Adapter
- */
-class Ldap implements AdapterInterface
+class Ldap extends AbstractAdapter
 {
 
     /**
@@ -38,20 +32,6 @@ class Ldap implements AdapterInterface
     protected $options = null;
 
     /**
-     * The username of the account being authenticated.
-     *
-     * @var string
-     */
-    protected $username = null;
-
-    /**
-     * The password of the account being authenticated.
-     *
-     * @var string
-     */
-    protected $password = null;
-
-    /**
      * The DN of the authenticated account. Used to retrieve the account entry on request.
      *
      * @var string
@@ -61,18 +41,18 @@ class Ldap implements AdapterInterface
     /**
      * Constructor
      *
-     * @param  array  $options  An array of arrays of Zend\Ldap\Ldap options
-     * @param  string $username The username of the account being authenticated
-     * @param  string $password The password of the account being authenticated
+     * @param  array  $options    An array of arrays of Zend\Ldap\Ldap options
+     * @param  string $identity   The username of the account being authenticated
+     * @param  string $credential The password of the account being authenticated
      */
-    public function __construct(array $options = array(), $username = null, $password = null)
+    public function __construct(array $options = array(), $identity = null, $credential = null)
     {
         $this->setOptions($options);
-        if ($username !== null) {
-            $this->setUsername($username);
+        if ($identity !== null) {
+            $this->setIdentity($identity);
         }
-        if ($password !== null) {
-            $this->setPassword($password);
+        if ($credential !== null) {
+            $this->setCredential($credential);
         }
     }
 
@@ -96,6 +76,12 @@ class Ldap implements AdapterInterface
     public function setOptions($options)
     {
         $this->options = is_array($options) ? $options : array();
+        if (array_key_exists('identity', $this->options)) {
+            $this->options['username'] = $this->options['identity'];
+        }
+        if (array_key_exists('credential', $this->options)) {
+            $this->options['password'] = $this->options['credential'];
+        }
         return $this;
     }
 
@@ -107,7 +93,7 @@ class Ldap implements AdapterInterface
      */
     public function getUsername()
     {
-        return $this->username;
+        return $this->getIdentity();
     }
 
     /**
@@ -118,8 +104,7 @@ class Ldap implements AdapterInterface
      */
     public function setUsername($username)
     {
-        $this->username = (string) $username;
-        return $this;
+        return $this->setIdentity($username);
     }
 
     /**
@@ -130,7 +115,7 @@ class Ldap implements AdapterInterface
      */
     public function getPassword()
     {
-        return $this->password;
+        return $this->getCredential();
     }
 
     /**
@@ -141,38 +126,7 @@ class Ldap implements AdapterInterface
      */
     public function setPassword($password)
     {
-        $this->password = (string) $password;
-        return $this;
-    }
-
-    /**
-     * setIdentity() - set the identity (username) to be used
-     *
-     * Proxies to {@see setUsername()}
-     *
-     * Closes ZF-6813
-     *
-     * @param  string $identity
-     * @return Ldap Provides a fluent interface
-     */
-    public function setIdentity($identity)
-    {
-        return $this->setUsername($identity);
-    }
-
-    /**
-     * setCredential() - set the credential (password) value to be used
-     *
-     * Proxies to {@see setPassword()}
-     *
-     * Closes ZF-6813
-     *
-     * @param  string $credential
-     * @return Ldap Provides a fluent interface
-     */
-    public function setCredential($credential)
-    {
-        return $this->setPassword($credential);
+        return $this->setCredential($password);
     }
 
     /**
@@ -231,8 +185,8 @@ class Ldap implements AdapterInterface
         $messages[0] = ''; // reserved
         $messages[1] = ''; // reserved
 
-        $username = $this->username;
-        $password = $this->password;
+        $username = $this->identity;
+        $password = $this->credential;
 
         if (!$username) {
             $code = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
@@ -452,7 +406,7 @@ class Ldap implements AdapterInterface
      *
      * @param  array $returnAttribs
      * @param  array $omitAttribs
-     * @return stdClass|boolean
+     * @return stdClass|bool
      */
     public function getAccountObject(array $returnAttribs = array(), array $omitAttribs = array())
     {
@@ -462,7 +416,9 @@ class Ldap implements AdapterInterface
 
         $returnObject = new stdClass();
 
-        $omitAttribs = array_map('strtolower', $omitAttribs);
+        $returnAttribs = array_map('strtolower', $returnAttribs);
+        $omitAttribs   = array_map('strtolower', $omitAttribs);
+        $returnAttribs = array_diff($returnAttribs, $omitAttribs);
 
         $entry = $this->getLdap()->getEntry($this->authenticatedDn, $returnAttribs, true);
         foreach ($entry as $attr => $value) {
@@ -489,10 +445,12 @@ class Ldap implements AdapterInterface
     {
         $str = '';
         foreach ($options as $key => $val) {
-            if ($key === 'password')
+            if ($key === 'password' || $key === 'credential') {
                 $val = '*****';
-            if ($str)
+            }
+            if ($str) {
                 $str .= ',';
+            }
             $str .= $key . '=' . $val;
         }
         return $str;

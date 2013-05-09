@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Navigation
  */
@@ -14,6 +14,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\Http\Regex as RegexRoute;
 use Zend\Mvc\Router\Http\Literal as LiteralRoute;
+use Zend\Mvc\Router\Http\Segment as SegmentRoute;
 use Zend\Mvc\Router\Http\TreeRouteStack;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -213,6 +214,44 @@ class MvcTest extends TestCase
         $page->setRouter($this->router);
 
         $this->assertEquals('/lolcat/myaction/1337#qux', $page->getHref());
+    }
+
+    public function testGetHrefPassesQueryPartToRouter()
+    {
+        $page = new Page\Mvc(array(
+            'label'              => 'foo',
+            'query'              => 'foo=bar&baz=qux',
+            'controller'         => 'mycontroller',
+            'action'             => 'myaction',
+            'route'              => 'myroute',
+            'params'             => array(
+                'page' => 1337
+            )
+        ));
+
+        $route = new RegexRoute(
+            '(lolcat/(?<action>[^/]+)/(?<page>\d+))',
+            '/lolcat/%action%/%page%',
+            array(
+                'controller' => 'foobar',
+                'action'     => 'bazbat',
+                'page'       => 1,
+            )
+        );
+        $this->router->addRoute('myroute', $route);
+        $this->routeMatch->setMatchedRouteName('myroute');
+
+        $page->setRouteMatch($this->routeMatch);
+        $page->setRouter($this->router);
+
+        $this->assertEquals('/lolcat/myaction/1337?foo=bar&baz=qux', $page->getHref());
+
+        // Test with array notation
+        $page->setQuery(array(
+            'foo' => 'bar',
+            'baz' => 'qux',
+        ));
+        $this->assertEquals('/lolcat/myaction/1337?foo=bar&baz=qux', $page->getHref());
     }
 
     public function testIsActiveReturnsTrueOnIdenticalControllerAction()
@@ -434,6 +473,7 @@ class MvcTest extends TestCase
 
         $options['privilege'] = null;
         $options['resource']  = null;
+        $options['permission']  = null;
         $options['pages']     = array();
         $options['type']      = 'Zend\Navigation\Page\Mvc';
 
@@ -497,5 +537,85 @@ class MvcTest extends TestCase
         // This method intentionally has no assertion.
         $page->getHref();
         $page->setDefaultRouter(null);
+    }
+
+    public function testBoolSetAndGetUseRouteMatch()
+    {
+        $page = new Page\Mvc(array(
+            'useRouteMatch' => 2,
+        ));
+        $this->assertSame(true, $page->useRouteMatch());
+
+        $page->setUseRouteMatch(null);
+        $this->assertSame(false, $page->useRouteMatch());
+
+        $page->setUseRouteMatch(false);
+        $this->assertSame(false, $page->useRouteMatch());
+
+        $page->setUseRouteMatch(true);
+        $this->assertSame(true, $page->useRouteMatch());
+
+        $page->setUseRouteMatch();
+        $this->assertSame(true, $page->useRouteMatch());
+    }
+
+    public function testMvcPageParamsInheritRouteMatchParams()
+    {
+        $page = new Page\Mvc(array(
+            'label' => 'lollerblades',
+            'route' => 'lollerblades',
+        ));
+
+        $route = new SegmentRoute('/lollerblades/view[/:serialNumber]');
+
+        $router = new TreeRouteStack;
+        $router->addRoute('lollerblades', $route);
+
+        $routeMatch = new RouteMatch(array(
+            'serialNumber' => 23,
+        ));
+        $routeMatch->setMatchedRouteName('lollerblades');
+
+        $page->setRouter($router);
+        $page->setRouteMatch($routeMatch);
+
+        $this->assertEquals('/lollerblades/view', $page->getHref());
+
+        $page->setUseRouteMatch(true);
+        $this->assertEquals('/lollerblades/view/23', $page->getHref());
+    }
+
+    public function testInheritedRouteMatchParamsWorkWithModuleRouteListener()
+    {
+        $page = new Page\Mvc(array(
+            'label' => 'mpinkstonwashere',
+            'route' => 'lmaoplane',
+        ));
+
+        $route = new SegmentRoute('/lmaoplane[/:controller]');
+
+        $router = new TreeRouteStack;
+        $router->addRoute('lmaoplane', $route);
+
+        $routeMatch = new RouteMatch(array(
+            ModuleRouteListener::MODULE_NAMESPACE => 'Application\Controller',
+            'controller' => 'index'
+        ));
+        $routeMatch->setMatchedRouteName('lmaoplane');
+
+        $event = new MvcEvent();
+        $event->setRouter($router)
+            ->setRouteMatch($routeMatch);
+
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->onRoute($event);
+
+        $page->setRouter($event->getRouter());
+        $page->setRouteMatch($event->getRouteMatch());
+
+        $this->assertEquals('/lmaoplane', $page->getHref());
+
+        $page->setUseRouteMatch(true);
+        $this->assertEquals('/lmaoplane/index', $page->getHref());
     }
 }

@@ -3,28 +3,28 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
 use Zend\Db\Adapter\Driver\ConnectionInterface;
 use Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Profiler;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- */
-class Connection implements ConnectionInterface
+class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 {
 
     /**
      * @var Mysqli
      */
     protected $driver = null;
+
+    /**
+     * @var Profiler\ProfilerInterface
+     */
+    protected $profiler = null;
 
     /**
      * Connection parameters
@@ -41,7 +41,7 @@ class Connection implements ConnectionInterface
     /**
      * In transaction
      *
-     * @var boolean
+     * @var bool
      */
     protected $inTransaction = false;
 
@@ -70,6 +70,24 @@ class Connection implements ConnectionInterface
     {
         $this->driver = $driver;
         return $this;
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return Connection
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**
@@ -114,7 +132,7 @@ class Connection implements ConnectionInterface
     /**
      * Set resource
      *
-     * @param  mysqli $resource
+     * @param  \mysqli $resource
      * @return Connection
      */
     public function setResource(\mysqli $resource)
@@ -138,12 +156,12 @@ class Connection implements ConnectionInterface
      * Connect
      *
      * @throws Exception\RuntimeException
-     * @return void
+     * @return Connection
      */
     public function connect()
     {
         if ($this->resource instanceof \mysqli) {
-            return;
+            return $this;
         }
 
         // localize
@@ -196,6 +214,7 @@ class Connection implements ConnectionInterface
             $this->resource->set_charset($p['charset']);
         }
 
+        return $this;
     }
 
     /**
@@ -248,8 +267,8 @@ class Connection implements ConnectionInterface
         }
 
         $this->resource->commit();
-
         $this->inTransaction = false;
+        $this->resource->autocommit(true);
     }
 
     /**
@@ -269,6 +288,7 @@ class Connection implements ConnectionInterface
         }
 
         $this->resource->rollback();
+        $this->resource->autocommit(true);
         return $this;
     }
 
@@ -285,7 +305,15 @@ class Connection implements ConnectionInterface
             $this->connect();
         }
 
+        if ($this->profiler) {
+            $this->profiler->profilerStart($sql);
+        }
+
         $resultResource = $this->resource->query($sql);
+
+        if ($this->profiler) {
+            $this->profiler->profilerFinish($sql);
+        }
 
         // if the returnValue is something other than a mysqli_result, bypass wrapping it
         if ($resultResource === false) {
@@ -300,7 +328,7 @@ class Connection implements ConnectionInterface
      * Get last generated id
      *
      * @param  null $name Ignored
-     * @return integer
+     * @return int
      */
     public function getLastGeneratedValue($name = null)
     {

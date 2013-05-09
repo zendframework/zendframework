@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Ldif;
@@ -14,10 +13,6 @@ use Zend\Ldap;
 
 /**
  * Zend\Ldap\Ldif\Encoder provides methods to encode and decode LDAP data into/from Ldif.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Ldif
  */
 class Encoder
 {
@@ -33,7 +28,7 @@ class Encoder
     );
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $versionWritten = false;
 
@@ -55,7 +50,7 @@ class Encoder
      */
     public static function decode($string)
     {
-        $encoder = new self(array());
+        $encoder = new static(array());
         return $encoder->_decode($string);
     }
 
@@ -70,14 +65,17 @@ class Encoder
         $items = array();
         $item  = array();
         $last  = null;
+        $inComment = false;
         foreach (explode("\n", $string) as $line) {
             $line    = rtrim($line, "\x09\x0A\x0D\x00\x0B");
             $matches = array();
-            if (substr($line, 0, 1) === ' ' && $last !== null) {
+            if (substr($line, 0, 1) === ' ' && $last !== null && !$inComment) {
                 $last[2] .= substr($line, 1);
             } elseif (substr($line, 0, 1) === '#') {
+                $inComment = true;
                 continue;
-            } elseif (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^:<]*)$/i', $line, $matches)) {
+            } elseif (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^<]*)$/i', $line, $matches)) {
+                $inComment = false;
                 $name  = strtolower($matches[1]);
                 $type  = trim($matches[2]);
                 $value = $matches[3];
@@ -136,7 +134,7 @@ class Encoder
      */
     public static function encode($value, array $options = array())
     {
-        $encoder = new self($options);
+        $encoder = new static($options);
 
         return $encoder->_encode($value);
     }
@@ -167,7 +165,7 @@ class Encoder
      * @link http://www.faqs.org/rfcs/rfc2849.html
      *
      * @param  string  $string
-     * @param  boolean $base64
+     * @param  bool $base64
      * @return string
      */
     protected function encodeString($string, &$base64 = null)
@@ -185,24 +183,24 @@ class Encoder
          *                ; and less-than ("<" , ASCII 60 decimal)
          *
          */
-        $unsafe_init_char = array(0, 10, 13, 32, 58, 60);
+        $unsafeInitChar = array(0, 10, 13, 32, 58, 60);
         /*
          * SAFE-CHAR      = %x01-09 / %x0B-0C / %x0E-7F
          *                ; any value <= 127 decimal except NUL, LF,
          *                ; and CR
          */
-        $unsafe_char = array(0, 10, 13);
+        $unsafeChar = array(0, 10, 13);
 
         $base64 = false;
-        for ($i = 0; $i < strlen($string); $i++) {
+        for ($i = 0, $len = strlen($string); $i < $len; $i++) {
             $char = ord(substr($string, $i, 1));
             if ($char >= 127) {
                 $base64 = true;
                 break;
-            } elseif ($i === 0 && in_array($char, $unsafe_init_char)) {
+            } elseif ($i === 0 && in_array($char, $unsafeInitChar)) {
                 $base64 = true;
                 break;
-            } elseif (in_array($char, $unsafe_char)) {
+            } elseif (in_array($char, $unsafeChar)) {
                 $base64 = true;
                 break;
             }

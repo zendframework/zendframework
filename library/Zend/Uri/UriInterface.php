@@ -3,18 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Uri
  */
 
 namespace Zend\Uri;
 
 /**
  * Interface defining an URI
- *
- * @category  Zend
- * @package   Zend_Uri
  */
 interface UriInterface
 {
@@ -32,21 +28,21 @@ interface UriInterface
      *
      * Note that a relative URI may still be valid
      *
-     * @return boolean
+     * @return bool
      */
     public function isValid();
 
     /**
      * Check if the URI is a valid relative URI
      *
-     * @return boolean
+     * @return bool
      */
     public function isValidRelative();
 
     /**
      * Check if the URI is an absolute or relative URI
      *
-     * @return boolean
+     * @return bool
      */
     public function isAbsolute();
 
@@ -121,7 +117,7 @@ interface UriInterface
     /**
      * Get the URI port
      *
-     * @return integer|null
+     * @return int|null
      */
     public function getPort();
 
@@ -206,7 +202,7 @@ interface UriInterface
     /**
      * Set the port part of the URI
      *
-     * @param  integer $port
+     * @param  int $port
      * @return Uri
      */
     public function setPort($port);

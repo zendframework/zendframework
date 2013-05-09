@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Annotation\Parser;
@@ -24,9 +23,6 @@ use Zend\EventManager\EventInterface;
  * AnnotationManager. If the annotation examined is in the list of classes we
  * are interested in, the raw annotation is passed to the DocParser in order to
  * retrieve the annotation object instance. Otherwise, it is skipped.
- *
- * @package    Zend_Code
- * @subpackage Annotation
  */
 class DoctrineAnnotationParser implements ParserInterface
 {
@@ -72,6 +68,7 @@ class DoctrineAnnotationParser implements ParserInterface
         if (!$this->docParser instanceof DocParser) {
             $this->setDocParser(new DocParser());
         }
+
         return $this->docParser;
     }
 
@@ -150,6 +147,7 @@ class DoctrineAnnotationParser implements ParserInterface
         foreach ($annotations as $annotation) {
             $this->allowedAnnotations[$annotation] = true;
         }
+
         return $this;
     }
 }

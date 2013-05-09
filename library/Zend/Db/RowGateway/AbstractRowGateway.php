@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\RowGateway;
@@ -15,11 +14,6 @@ use Countable;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\TableIdentifier;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage RowGateway
- */
 abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayInterface
 {
 
@@ -126,7 +120,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
     /**
      * Save
      *
-     * @return integer
+     * @return int
      */
     public function save()
     {
@@ -211,17 +205,20 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
         $statement = $this->sql->prepareStatementForSqlObject($this->sql->delete()->where($where));
         $result = $statement->execute();
 
-        if ($result->getAffectedRows() == 1) {
+        $affectedRows = $result->getAffectedRows();
+        if ($affectedRows == 1) {
             // detach from database
             $this->primaryKeyData = null;
         }
+
+        return $affectedRows;
     }
 
     /**
      * Offset Exists
      *
      * @param  string $offset
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -313,7 +310,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
      * __isset
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {
@@ -352,5 +349,4 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
             $this->primaryKeyData[$column] = $this->data[$column];
         }
     }
-
 }

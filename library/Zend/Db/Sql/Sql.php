@@ -3,35 +3,42 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\Adapter\Driver\StatementInterface;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Sql
- */
 class Sql
 {
+    /** @var AdapterInterface */
     protected $adapter = null;
+
+    /** @var string */
     protected $table = null;
+
+    /** @var Platform\Platform */
     protected $sqlPlatform = null;
 
-    public function __construct(Adapter $adapter, $table = null, Platform\AbstractPlatform $sqlPlatform = null)
+    public function __construct(AdapterInterface $adapter, $table = null, Platform\AbstractPlatform $sqlPlatform = null)
     {
         $this->adapter = $adapter;
         if ($table) {
             $this->setTable($table);
         }
         $this->sqlPlatform = ($sqlPlatform) ?: new Platform\Platform($adapter);
+    }
+
+    /**
+     * @return null|\Zend\Db\Adapter\AdapterInterface
+     */
+    public function getAdapter()
+    {
+        return $this->adapter;
     }
 
     public function hasTable()
@@ -54,11 +61,16 @@ class Sql
         return $this->table;
     }
 
+    public function getSqlPlatform()
+    {
+        return $this->sqlPlatform;
+    }
+
     public function select($table = null)
     {
         if ($this->table !== null && $table !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'This Sql object in intended to work with only the table "%s" provided at construction time.',
+                'This Sql object is intended to work with only the table "%s" provided at construction time.',
                 $this->table
             ));
         }
@@ -69,7 +81,7 @@ class Sql
     {
         if ($this->table !== null && $table !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'This Sql object in intended to work with only the table "%s" provided at construction time.',
+                'This Sql object is intended to work with only the table "%s" provided at construction time.',
                 $this->table
             ));
         }
@@ -80,7 +92,7 @@ class Sql
     {
         if ($this->table !== null && $table !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'This Sql object in intended to work with only the table "%s" provided at construction time.',
+                'This Sql object is intended to work with only the table "%s" provided at construction time.',
                 $this->table
             ));
         }
@@ -91,16 +103,21 @@ class Sql
     {
         if ($this->table !== null && $table !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'This Sql object in intended to work with only the table "%s" provided at construction time.',
+                'This Sql object is intended to work with only the table "%s" provided at construction time.',
                 $this->table
             ));
         }
         return new Delete(($table) ?: $this->table);
     }
 
+    /**
+     * @param PreparableSqlInterface $sqlObject
+     * @param StatementInterface|null $statement
+     * @return StatementInterface
+     */
     public function prepareStatementForSqlObject(PreparableSqlInterface $sqlObject, StatementInterface $statement = null)
     {
-        $statement = ($statement) ?: $this->adapter->createStatement();
+        $statement = ($statement) ?: $this->adapter->getDriver()->createStatement();
 
         if ($this->sqlPlatform) {
             $this->sqlPlatform->setSubject($sqlObject);

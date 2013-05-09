@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Server
  */
 
 namespace Zend\Server;
@@ -14,9 +13,6 @@ use ReflectionClass;
 
 /**
  * Abstract Server implementation
- *
- * @category   Zend
- * @package    Zend_Server
  */
 abstract class AbstractServer implements Server
 {
@@ -124,13 +120,13 @@ abstract class AbstractServer implements Server
     /**
      * Dispatch method
      *
-     * @param  Method\Definition $invocable
+     * @param  Method\Definition $invokable
      * @param  array $params
      * @return mixed
      */
-    protected function _dispatch(Method\Definition $invocable, array $params)
+    protected function _dispatch(Method\Definition $invokable, array $params)
     {
-        $callback = $invocable->getCallback();
+        $callback = $invokable->getCallback();
         $type     = $callback->getType();
 
         if ('function' == $type) {
@@ -145,9 +141,9 @@ abstract class AbstractServer implements Server
             return call_user_func_array(array($class, $method), $params);
         }
 
-        $object = $invocable->getObject();
+        $object = $invokable->getObject();
         if (!is_object($object)) {
-            $invokeArgs = $invocable->getInvokeArguments();
+            $invokeArgs = $invokable->getInvokeArguments();
             if (!empty($invokeArgs)) {
                 $reflection = new ReflectionClass($class);
                 $object     = $reflection->newInstanceArgs($invokeArgs);

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace Zend\Filter\Encrypt;
@@ -18,9 +17,6 @@ use Zend\Stdlib\ArrayUtils;
 
 /**
  * Encryption adapter for openssl
- *
- * @category   Zend
- * @package    Zend_Filter
  */
 class Openssl implements EncryptionAlgorithmInterface
 {
@@ -55,7 +51,7 @@ class Openssl implements EncryptionAlgorithmInterface
     /**
      * Internal create package
      *
-     * @var boolean
+     * @var bool
      */
     protected $package = false;
 
@@ -312,7 +308,7 @@ class Openssl implements EncryptionAlgorithmInterface
     /**
      * Returns if header should be packaged
      *
-     * @return boolean
+     * @return bool
      */
     public function getPackage()
     {
@@ -322,12 +318,12 @@ class Openssl implements EncryptionAlgorithmInterface
     /**
      * Sets if the envelope keys should be included in the encrypted value
      *
-     * @param boolean $package
+     * @param  bool $package
      * @return Openssl
      */
     public function setPackage($package)
     {
-        $this->package = (boolean) $package;
+        $this->package = (bool) $package;
         return $this;
     }
 

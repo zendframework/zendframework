@@ -3,16 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Writer;
 
 /**
-* @category Zend
-* @package Zend_Feed_Writer
 */
 class Writer
 {
@@ -44,7 +41,7 @@ class Writer
     const TYPE_RSS_ANY          = 'rss';
 
     /**
-     * @var ExtensionManager
+     * @var ExtensionManagerInterface
      */
     protected static $extensionManager = null;
 
@@ -65,9 +62,9 @@ class Writer
     /**
      * Set plugin loader for use with Extensions
      *
-     * @param ExtensionManager
+     * @param ExtensionManagerInterface
      */
-    public static function setExtensionManager(ExtensionManager $extensionManager)
+    public static function setExtensionManager(ExtensionManagerInterface $extensionManager)
     {
         static::$extensionManager = $extensionManager;
     }
@@ -75,7 +72,7 @@ class Writer
     /**
      * Get plugin manager for use with Extensions
      *
-     * @return ExtensionManager
+     * @return ExtensionManagerInterface
      */
     public static function getExtensionManager()
     {
@@ -134,7 +131,7 @@ class Writer
      * Is a given named Extension registered?
      *
      * @param  string $extensionName
-     * @return boolean
+     * @return bool
      */
     public static function isRegistered($extensionName)
     {

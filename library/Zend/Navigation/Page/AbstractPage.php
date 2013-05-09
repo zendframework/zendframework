@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Navigation
  */
 
 namespace Zend\Navigation\Page;
@@ -18,10 +17,6 @@ use Zend\Stdlib\ArrayUtils;
 
 /**
  * Base class for Zend\Navigation\Page pages
- *
- * @category   Zend
- * @package    Zend_Navigation
- * @subpackage Page
  */
 abstract class AbstractPage extends AbstractContainer
 {
@@ -112,6 +107,13 @@ abstract class AbstractPage extends AbstractContainer
      * @var string|null
      */
     protected $privilege;
+
+    /**
+     * Permission associated with this page
+     *
+     * @var string|null
+     */
+    protected $permission;
 
     /**
      * Whether this page should be considered active
@@ -706,6 +708,31 @@ abstract class AbstractPage extends AbstractContainer
     }
 
     /**
+     * Sets permission associated with this page
+     *
+     * @param  string|null $permission  [optional] permission to associate
+     *                                  with this page. Default is null, which
+     *                                  sets no permission.
+     *
+     * @return AbstractPage fluent interface, returns self
+     */
+    public function setPermission($permission = null)
+    {
+        $this->permission = is_string($permission) ? $permission : null;
+        return $this;
+    }
+
+    /**
+     * Returns permission associated with this page
+     *
+     * @return string|null  permission or null
+     */
+    public function getPermission()
+    {
+        return $this->permission;
+    }
+
+    /**
      * Sets whether page should be considered active or not
      *
      * @param  bool $active [optional] whether page should be
@@ -1132,9 +1159,10 @@ abstract class AbstractPage extends AbstractContainer
             'order'     => $this->getOrder(),
             'resource'  => $this->getResource(),
             'privilege' => $this->getPrivilege(),
+            'permission' => $this->getPermission(),
             'active'    => $this->isActive(),
             'visible'   => $this->isVisible(),
-            'type'      => get_called_class(),
+            'type'      => get_class($this),
             'pages'     => parent::toArray(),
         ));
     }

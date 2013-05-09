@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Scanner;
@@ -27,19 +26,19 @@ class CachingFileScanner extends FileScanner
     protected $fileScanner = null;
 
     /**
-     * Constructor
-     *
-     * @param array|null $file
-     * @param AnnotationManager $annotationManager
+     * @param  array|null $file
+     * @param  AnnotationManager $annotationManager
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($file, AnnotationManager $annotationManager = null)
     {
         if (!file_exists($file)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                                                             'File "%s" not found', $file
-                                                         ));
+                'File "%s" not found',
+                $file
+            ));
         }
+
         $file = realpath($file);
 
         $cacheId = md5($file) . '/' . ((isset($annotationManager) ? spl_object_hash($annotationManager) : 'no-annotation'));
@@ -53,8 +52,6 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Clear cache
-     *
      * @return void
      */
     public static function clearCache()
@@ -63,8 +60,6 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Get annotation manager
-     *
      * @return AnnotationManager
      */
     public function getAnnotationManager()
@@ -73,8 +68,6 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Get file
-     *
      * @return array|null|string
      */
     public function getFile()
@@ -83,8 +76,6 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Get doc comment
-     *
      * @return null|string
      */
     public function getDocComment()
@@ -93,9 +84,7 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Get namespaces
-     *
-     * @return string[]
+     * @return array
      */
     public function getNamespaces()
     {
@@ -103,9 +92,7 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Get uses
-     *
-     * @param null|string $namespace
+     * @param  null|string $namespace
      * @return array|null
      */
     public function getUses($namespace = null)
@@ -114,7 +101,7 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Get includes
+     * @return array
      */
     public function getIncludes()
     {
@@ -122,8 +109,6 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Get class names
-     *
      * @return array
      */
     public function getClassNames()
@@ -132,9 +117,7 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Get classes
-     *
-     * @return string[]
+     * @return array
      */
     public function getClasses()
     {
@@ -142,9 +125,7 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Get class
-     *
-     * @param int|string $className
+     * @param  int|string $className
      * @return ClassScanner
      */
     public function getClass($className)
@@ -153,9 +134,7 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Get class name information
-     *
-     * @param string $className
+     * @param  string $className
      * @return bool|null|NameInformation
      */
     public function getClassNameInformation($className)
@@ -164,9 +143,7 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Get function names
-     *
-     * @return string[]
+     * @return array
      */
     public function getFunctionNames()
     {
@@ -174,9 +151,7 @@ class CachingFileScanner extends FileScanner
     }
 
     /**
-     * Get functions
-     *
-     * @return string[]
+     * @return array
      */
     public function getFunctions()
     {

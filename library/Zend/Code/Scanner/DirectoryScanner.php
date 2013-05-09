@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Scanner;
@@ -37,8 +36,6 @@ class DirectoryScanner implements ScannerInterface
     protected $classToFileScanner = null;
 
     /**
-     * Constructor
-     *
      * @param null|string|array $directory
      */
     public function __construct($directory = null)
@@ -55,9 +52,7 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * Add directory
-     *
-     * @param DirectoryScanner|string $directory
+     * @param  DirectoryScanner|string $directory
      * @return void
      * @throws Exception\InvalidArgumentException
      */
@@ -68,8 +63,10 @@ class DirectoryScanner implements ScannerInterface
         } elseif (is_string($directory)) {
             $realDir = realpath($directory);
             if (!$realDir || !is_dir($realDir)) {
-                throw new Exception\InvalidArgumentException(
-                    sprintf('Directory "%s" does not exist', $realDir));
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Directory "%s" does not exist',
+                    $realDir
+                ));
             }
             $this->directories[] = $realDir;
         } else {
@@ -80,9 +77,7 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * Add directory scanner
-     *
-     * @param DirectoryScanner $directoryScanner
+     * @param  DirectoryScanner $directoryScanner
      * @return void
      */
     public function addDirectoryScanner(DirectoryScanner $directoryScanner)
@@ -91,9 +86,7 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * Add file scanner
-     *
-     * @param FileScanner $fileScanner
+     * @param  FileScanner $fileScanner
      * @return void
      */
     public function addFileScanner(FileScanner $fileScanner)
@@ -102,8 +95,6 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * Scan
-     *
      * @return void
      */
     protected function scan()
@@ -133,8 +124,6 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * Get namespace
-     *
      * @todo implement method
      */
     public function getNamespaces()
@@ -143,9 +132,7 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * Get files
-     *
-     * @param bool $returnFileScanners
+     * @param  bool $returnFileScanners
      * @return array
      */
     public function getFiles($returnFileScanners = false)
@@ -161,9 +148,7 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * Get class names
-     *
-     * @return string[]
+     * @return array
      */
     public function getClassNames()
     {
@@ -177,10 +162,8 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * Get classes
-     *
-     * @param bool $returnDerivedScannerClass
-     * @return string[]
+     * @param  bool  $returnDerivedScannerClass
+     * @return array
      */
     public function getClasses($returnDerivedScannerClass = false)
     {
@@ -203,9 +186,7 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * Check for a class
-     *
-     * @param string $class
+     * @param  string $class
      * @return bool
      */
     public function hasClass($class)
@@ -220,10 +201,8 @@ class DirectoryScanner implements ScannerInterface
     }
 
     /**
-     * Get class
-     *
-     * @param string $class
-     * @param bool $returnDerivedScannerClass
+     * @param  string $class
+     * @param  bool $returnDerivedScannerClass
      * @return ClassScanner|DerivedClassScanner
      * @throws Exception\InvalidArgumentException
      */

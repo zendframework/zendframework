@@ -3,20 +3,17 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Generator\DocBlock;
 
+use ReflectionClass;
+use ReflectionMethod;
 use Zend\Code\Generator\AbstractGenerator;
 use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
 
-/**
- * @category   Zend
- * @package    Zend_Code_Generator
- */
 class Tag extends AbstractGenerator
 {
     /**
@@ -48,7 +45,7 @@ class Tag extends AbstractGenerator
     protected $description = null;
 
     /**
-     * @param array $options
+     * @param  array $options
      */
     public function __construct(array $options = array())
     {
@@ -70,12 +67,12 @@ class Tag extends AbstractGenerator
     {
         $tagName = $reflectionTag->getName();
 
-        $codeGenDocBlockTag = new self();
+        $codeGenDocBlockTag = new static();
         $codeGenDocBlockTag->setName($tagName);
 
         // transport any properties via accessors and mutators from reflection to codegen object
-        $reflectionClass = new \ReflectionClass($reflectionTag);
-        foreach ($reflectionClass->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
+        $reflectionClass = new ReflectionClass($reflectionTag);
+        foreach ($reflectionClass->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
             if (substr($method->getName(), 0, 3) == 'get') {
                 $propertyName = substr($method->getName(), 3);
                 if (method_exists($codeGenDocBlockTag, 'set' . $propertyName)) {
@@ -94,7 +91,6 @@ class Tag extends AbstractGenerator
     public function setName($name)
     {
         $this->name = ltrim($name, '@');
-
         return $this;
     }
 
@@ -113,7 +109,6 @@ class Tag extends AbstractGenerator
     public function setDescription($description)
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -135,5 +130,4 @@ class Tag extends AbstractGenerator
 
         return $output;
     }
-
 }

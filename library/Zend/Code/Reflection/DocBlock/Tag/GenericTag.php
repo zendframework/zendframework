@@ -3,20 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-/**
- * @category   Zend
- * @package    Zend_Reflection
- */
 class GenericTag implements TagInterface
 {
-
     /**
      * @var string
      */
@@ -27,7 +21,9 @@ class GenericTag implements TagInterface
      */
     protected $content = null;
 
-    /** @var null|string */
+    /**
+     * @var null|string
+     */
     protected $contentSplitCharacter = null;
 
     /**
@@ -36,7 +32,7 @@ class GenericTag implements TagInterface
     protected $values = array();
 
     /**
-     * @param string $contentSplitCharacter
+     * @param  string $contentSplitCharacter
      */
     public function __construct($contentSplitCharacter = ' ')
     {
@@ -44,7 +40,7 @@ class GenericTag implements TagInterface
     }
 
     /**
-     * @param string $tagDocBlockLine
+     * @param  string $tagDocBlockLine
      * @return void
      */
     public function initialize($tagDocBlockLine)
@@ -62,16 +58,26 @@ class GenericTag implements TagInterface
         return $this->name;
     }
 
+    /**
+     * @param  string $name
+     */
     public function setName($name)
     {
         $this->name = $name;
     }
 
+    /**
+     * @return string
+     */
     public function getContent()
     {
         return $this->content;
     }
 
+    /**
+     * @param  int $position
+     * @return string
+     */
     public function returnValue($position)
     {
         return $this->values[$position];
@@ -90,10 +96,12 @@ class GenericTag implements TagInterface
         return 'DocBlock Tag [ * @' . $this->name . ' ]' . PHP_EOL;
     }
 
+    /**
+     * @param  string $docBlockLine
+     */
     protected function parse($docBlockLine)
     {
         $this->content = trim($docBlockLine);
         $this->values = explode($this->contentSplitCharacter, $docBlockLine);
     }
-
 }

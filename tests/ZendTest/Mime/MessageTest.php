@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mime
  */
@@ -115,5 +115,17 @@ EOD;
         $this->assertEquals('image/gif', $part2->type);
         $this->assertEquals('base64', $part2->encoding);
         $this->assertEquals('12', $part2->id);
+    }
+
+    public function testNonMultipartMessageShouldNotRemovePartFromMessage()
+    {
+        $message = new Mime\Message();  // No Parts
+        $part    = new Mime\Part('This is a test');
+        $message->addPart($part);
+        $message->generateMessage();
+
+        $parts = $message->getParts();
+        $test  = current($parts);
+        $this->assertSame($part, $test);
     }
 }

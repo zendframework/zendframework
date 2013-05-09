@@ -3,18 +3,12 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Header;
 
-/**
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Header
- */
 class Subject implements UnstructuredInterface
 {
     /**
@@ -32,7 +26,8 @@ class Subject implements UnstructuredInterface
     public static function fromString($headerLine)
     {
         $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
-        list($name, $value) = explode(': ', $decodedLine, 2);
+        list($name, $value) = explode(':', $decodedLine, 2);
+        $value = ltrim($value);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'subject') {

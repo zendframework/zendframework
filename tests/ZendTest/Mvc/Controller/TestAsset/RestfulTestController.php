@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mvc
  */
@@ -18,27 +18,6 @@ class RestfulTestController extends AbstractRestfulController
     public $entity   = array();
 
     /**
-     * Return list of resources
-     *
-     * @return mixed
-     */
-    public function getList()
-    {
-        return array('entities' => $this->entities);
-    }
-
-    /**
-     * Return single resource
-     *
-     * @param  mixed $id
-     * @return mixed
-     */
-    public function get($id)
-    {
-        return array('entity' => $this->entity);
-    }
-
-    /**
      * Create a new resource
      *
      * @param  mixed $data
@@ -46,19 +25,6 @@ class RestfulTestController extends AbstractRestfulController
      */
     public function create($data)
     {
-        return array('entity' => $data);
-    }
-
-    /**
-     * Update an existing resource
-     *
-     * @param  mixed $id
-     * @param  mixed $data
-     * @return mixed
-     */
-    public function update($id, $data)
-    {
-        $data['id'] = $id;
         return array('entity' => $data);
     }
 
@@ -74,6 +40,119 @@ class RestfulTestController extends AbstractRestfulController
         return array();
     }
 
+    /**
+     * Delete the collection
+     *
+     * @return \Zend\Http\Response
+     */
+    public function deleteList()
+    {
+        $response = $this->getResponse();
+        $response->setStatusCode(204);
+        $response->getHeaders()->addHeaderLine('X-Deleted', 'true');
+        return $response;
+    }
+
+    /**
+     * Return single resource
+     *
+     * @param  mixed $id
+     * @return mixed
+     */
+    public function get($id)
+    {
+        return array('entity' => $this->entity);
+    }
+
+    /**
+     * Return list of resources
+     *
+     * @return mixed
+     */
+    public function getList()
+    {
+        return array('entities' => $this->entities);
+    }
+
+    /**
+     * Retrieve the headers for a given resource
+     *
+     * @return void
+     */
+    public function head($id = null)
+    {
+        if ($id) {
+            $this->getResponse()->getHeaders()->addHeaderLine('X-ZF2-Id', $id);
+        }
+    }
+
+    /**
+     * Return list of allowed HTTP methods
+     *
+     * @return \Zend\Http\Response
+     */
+    public function options()
+    {
+        $response = $this->getResponse();
+        $headers  = $response->getHeaders();
+        $headers->addHeaderLine('Allow', 'GET, POST, PUT, DELETE, PATCH, HEAD, TRACE');
+        return $response;
+    }
+
+    /**
+     * Patch (partial update) an entity
+     *
+     * @param  int $id
+     * @param  array $data
+     * @return array
+     */
+    public function patch($id, $data)
+    {
+        $entity     = (array) $this->entity;
+        $data['id'] = $id;
+        $updated    = array_merge($entity, $data);
+        return array('entity' => $updated);
+    }
+
+    /**
+     * Replace the entire resource collection
+     *
+     * @param  array|\Traversable $items
+     * @return array|\Traversable
+     */
+    public function replaceList($items)
+    {
+        return $items;
+    }
+
+    /**
+     * Modify an entire resource collection
+     *
+     * @param  array|\Traversable $items
+     * @return array|\Traversable
+     */
+    public function patchList($items)
+    {
+        //This isn't great code to have in a test class, but I seems the simplest without BC breaks.
+        if (isset($items['name']) && $items['name'] == 'testDispatchViaPatchWithoutIdentifierReturns405ResponseIfPatchListThrowsException'){
+            parent::patchList($items);
+        }
+        return $items;
+    }
+
+    /**
+     * Update an existing resource
+     *
+     * @param  mixed $id
+     * @param  mixed $data
+     * @return mixed
+     */
+    public function update($id, $data)
+    {
+        $data['id'] = $id;
+        return array('entity' => $data);
+    }
+
     public function editAction()
     {
         return array('content' => __FUNCTION__);
@@ -82,5 +161,10 @@ class RestfulTestController extends AbstractRestfulController
     public function testSomeStrangelySeparatedWordsAction()
     {
         return array('content' => 'Test Some Strangely Separated Words');
+    }
+
+    public function describe()
+    {
+        return array('description' => __METHOD__);
     }
 }

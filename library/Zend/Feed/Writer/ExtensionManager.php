@@ -3,82 +3,78 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed_Writer
  */
 
 namespace Zend\Feed\Writer;
 
-use Zend\ServiceManager\AbstractPluginManager;
-
 /**
- * Plugin manager implementation for feed writer extensions
+ * Default implementation of ExtensionManagerInterface
  *
- * Validation checks that we have an Entry, Feed, or Extension\AbstractRenderer.
- *
- * @category   Zend
- * @package    Zend_Feed_Writer
+ * Decorator of ExtensionPluginManager.
  */
-class ExtensionManager extends AbstractPluginManager
+class ExtensionManager implements ExtensionManagerInterface
 {
-    /**
-     * Default set of extension classes
-     *
-     * @var array
-     */
-    protected $invokableClasses = array(
-        'atomrendererfeed'           => 'Zend\Feed\Writer\Extension\Atom\Renderer\Feed',
-        'contentrendererentry'       => 'Zend\Feed\Writer\Extension\Content\Renderer\Entry',
-        'dublincorerendererentry'    => 'Zend\Feed\Writer\Extension\DublinCore\Renderer\Entry',
-        'dublincorerendererfeed'     => 'Zend\Feed\Writer\Extension\DublinCore\Renderer\Feed',
-        'itunesentry'                => 'Zend\Feed\Writer\Extension\ITunes\Entry',
-        'itunesfeed'                 => 'Zend\Feed\Writer\Extension\ITunes\Feed',
-        'itunesrendererentry'        => 'Zend\Feed\Writer\Extension\ITunes\Renderer\Entry',
-        'itunesrendererfeed'         => 'Zend\Feed\Writer\Extension\ITunes\Renderer\Feed',
-        'slashrendererentry'         => 'Zend\Feed\Writer\Extension\Slash\Renderer\Entry',
-        'threadingrendererentry'     => 'Zend\Feed\Writer\Extension\Threading\Renderer\Entry',
-        'wellformedwebrendererentry' => 'Zend\Feed\Writer\Extension\WellFormedWeb\Renderer\Entry',
-    );
+    protected $pluginManager;
 
     /**
-     * Do not share instances
+     * Constructor
      *
-     * @var bool
+     * Seeds the extension manager with a plugin manager; if none provided,
+     * creates an instance.
+     *
+     * @param  null|ExtensionPluginManager $pluginManager
      */
-    protected $shareByDefault = false;
-
-    /**
-     * Validate the plugin
-     *
-     * Checks that the extension loaded is of a valid type.
-     *
-     * @param  mixed $plugin
-     * @return void
-     * @throws Exception\InvalidArgumentException if invalid
-     */
-    public function validatePlugin($plugin)
+    public function __construct(ExtensionPluginManager $pluginManager = null)
     {
-        if ($plugin instanceof Extension\AbstractRenderer) {
-            // we're okay
-            return;
+        if (null === $pluginManager) {
+            $pluginManager = new ExtensionPluginManager();
         }
+        $this->pluginManager = $pluginManager;
+    }
 
-        if ('Feed' == substr(get_class($plugin), -4)) {
-            // we're okay
-            return;
+    /**
+     * Method overloading
+     *
+     * Proxy to composed ExtensionPluginManager instance.
+     *
+     * @param  string $method
+     * @param  array $args
+     * @return mixed
+     * @throws Exception\BadMethodCallException
+     */
+    public function __call($method, $args)
+    {
+        if (!method_exists($this->pluginManager, $method)) {
+            throw new Exception\BadMethodCallException(sprintf(
+                'Method by name of %s does not exist in %s',
+                $method,
+                __CLASS__
+            ));
         }
+        return call_user_func_array(array($this->pluginManager, $method), $args);
+    }
 
-        if ('Entry' == substr(get_class($plugin), -5)) {
-            // we're okay
-            return;
-        }
+    /**
+     * Get the named extension
+     *
+     * @param  string $name
+     * @return Extension\AbstractEntry|Extension\AbstractFeed
+     */
+    public function get($name)
+    {
+        return $this->pluginManager->get($name);
+    }
 
-        throw new Exception\InvalidArgumentException(sprintf(
-            'Plugin of type %s is invalid; must implement %s\Extension\RendererInterface '
-            . 'or the classname must end in "Feed" or "Entry"',
-            (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
-            __NAMESPACE__
-        ));
+    /**
+     * Do we have the named extension?
+     *
+     * @param  string $name
+     * @return bool
+     */
+    public function has($name)
+    {
+        return $this->pluginManager->has($name);
     }
 }

@@ -4,7 +4,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -24,6 +24,7 @@ use Zend\Loader\StandardAutoloader;
  * --append|-a                  Append to autoload file if it exists
  * --overwrite|-w               Whether or not to overwrite existing autoload
  *                              file
+ * --ignore|-i [ <string> ]     Comma-separated namespaces to ignore
  */
 
 $zfLibraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
@@ -53,6 +54,7 @@ $rules = array(
     'output|o-s'  => 'Where to write autoload file; if not provided, assumes "autoload_classmap.php" in library directory',
     'append|a'    => 'Append to autoload file if it exists',
     'overwrite|w' => 'Whether or not to overwrite existing autoload file',
+    'ignore|i-s'  => 'Comma-separated namespaces to ignore',
 );
 
 try {
@@ -66,6 +68,11 @@ try {
 if ($opts->getOption('h')) {
     echo $opts->getUsageMessage();
     exit(0);
+}
+
+$ignoreNamespaces = array();
+if (isset($opts->i)) {
+    $ignoreNamespaces = explode(',', $opts->i);
 }
 
 $relativePathForClassmap = '';
@@ -157,6 +164,12 @@ foreach ($l as $file) {
     $filename  = $relativePathForClassmap . $filename;
 
     foreach ($file->getClasses() as $class) {
+        foreach ($ignoreNamespaces as $ignoreNs) {
+            if ($ignoreNs == substr($class, 0, strlen($ignoreNs))) {
+                continue 2;
+            }
+        }
+
         $map->{$class} = $filename;
     }
 }
@@ -171,7 +184,7 @@ if ($appending) {
     $content = str_replace("\\'", "'", $content);
 
     // Convert to an array and remove the first "array("
-    $content = explode(PHP_EOL, $content);
+    $content = explode("\n", $content);
     array_shift($content);
 
     // Load existing class map file and remove the closing "bracket ");" from it
@@ -179,7 +192,7 @@ if ($appending) {
     array_pop($existing);
 
     // Merge
-    $content = implode(PHP_EOL, array_merge($existing, $content));
+    $content = implode("\n", array_merge($existing, $content));
 } else {
     // Create a file with the class/file map.
     // Stupid syntax highlighters make separating < from PHP declaration necessary
@@ -209,6 +222,9 @@ foreach ($matches as $match) {
 }
 
 $content = preg_replace('(\n\s+([^=]+)=>)e', "'\n    \\1' . str_repeat(' ', " . $maxWidth . " - strlen('\\1')) . '=>'", $content);
+
+// Make the file end by EOL
+$content = rtrim($content, "\n") . "\n";
 
 // Write the contents to disk
 file_put_contents($output, $content);

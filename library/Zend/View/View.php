@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View;
@@ -19,10 +18,6 @@ use Zend\View\Model\ModelInterface as Model;
 use Zend\View\Renderer\RendererInterface as Renderer;
 use Zend\View\Renderer\TreeRendererInterface;
 
-/**
- * @category   Zend
- * @package    Zend_View
- */
 class View implements EventManagerAwareInterface
 {
     /**
@@ -94,7 +89,7 @@ class View implements EventManagerAwareInterface
     {
         $events->setIdentifiers(array(
             __CLASS__,
-            get_called_class(),
+            get_class($this),
         ));
         $this->events = $events;
         return $this;
@@ -185,6 +180,13 @@ class View implements EventManagerAwareInterface
                 __METHOD__
             ));
         }
+
+        $event->setRenderer($renderer);
+        $results = $events->trigger(ViewEvent::EVENT_RENDERER_POST, $event);
+
+        // If EVENT_RENDERER or EVENT_RENDERER_POST changed the model, make sure
+        // we use this new model instead of the current $model
+        $model   = $event->getModel();
 
         // If we have children, render them first, but only if:
         // a) the renderer does not implement TreeRendererInterface, or

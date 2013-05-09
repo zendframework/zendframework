@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Filter
  */
@@ -77,6 +77,17 @@ class UpperCaseTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('This is a File', file_get_contents($this->_newFile));
         $filter = new FileUpperCase();
         $filter($this->_newFile);
+        $this->assertContains('THIS IS A FILE', file_get_contents($this->_newFile));
+    }
+
+    /**
+     * @return void
+     */
+    public function testNormalWorkflowWithFilesArray()
+    {
+        $this->assertContains('This is a File', file_get_contents($this->_newFile));
+        $filter = new FileUpperCase();
+        $filter(array('tmp_name' => $this->_newFile));
         $this->assertContains('THIS IS A FILE', file_get_contents($this->_newFile));
     }
 

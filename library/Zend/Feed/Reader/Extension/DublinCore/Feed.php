@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Extension\DublinCore;
@@ -15,10 +14,6 @@ use Zend\Feed\Reader;
 use Zend\Feed\Reader\Collection;
 use Zend\Feed\Reader\Extension;
 
-/**
-* @category Zend
-* @package Zend_Feed_Reader
-*/
 class Feed extends Extension\AbstractFeed
 {
     /**
@@ -231,7 +226,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if ($date) {
-            $d = DateTime::createFromFormat(DateTime::ISO8601, $date);
+            $d = new DateTime($date);
         }
 
         $this->data['date'] = $d;

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Server
  */
@@ -41,16 +41,6 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(0 < count($prototypes));
     }
 
-    public function testConstructorThrowsExceptionOnNonFunction()
-    {
-        $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
-        $r = new Reflection\ReflectionFunction($function);
-        $params = $r->getParameters();
-
-        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid reflection class');
-        $r = new Reflection\ReflectionFunction($params[0]);
-    }
-
     public function test__getSet()
     {
         $function = new \ReflectionFunction('\ZendTest\Server\Reflection\function1');
@@ -85,8 +75,7 @@ class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
         $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
-        $this->assertTrue(is_array($prototypes));
-        $this->assertTrue(0 < count($prototypes));
+        $this->assertInternalType('array', $prototypes);
         $this->assertEquals(8, count($prototypes));
 
         foreach ($prototypes as $p) {

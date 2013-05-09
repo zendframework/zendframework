@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Soap
  */
@@ -84,7 +84,7 @@ function TestFunc7()
 /**
  * Return Object
  *
- * @return StdClass
+ * @return stdClass
  */
 function TestFunc8()
 {
@@ -199,7 +199,7 @@ class AutoDiscoverTestClass2
     /**
      *
      * @param \ZendTest\Soap\TestAsset\AutoDiscoverTestClass1 $test
-     * @return boolean
+     * @return bool
      */
     public function add(AutoDiscoverTestClass1 $test)
     {
@@ -277,7 +277,7 @@ class ComplexTest
 class ComplexObjectStructure
 {
     /**
-     * @var boolean
+     * @var bool
      */
     public $boolean = true;
 
@@ -633,4 +633,63 @@ class TestLocalSoapClient extends \SoapClient
     }
 }
 
+}
+
+class SequenceTest
+{
+    /**
+     * @var int
+     */
+    public $var = 5;
+}
+
+
+
+class Book
+{
+    /**
+     * @var int
+     */
+    public $somevar;
+}
+class Cookie
+{
+    /**
+     * @var int
+     */
+    public $othervar;
+}
+class Anything
+{
+}
+
+
+
+class PublicPrivateProtected
+{
+    const PROTECTED_VAR_NAME = 'bar';
+    const PRIVATE_VAR_NAME = 'baz';
+
+    /**
+     * @var string
+     */
+    public $foo;
+
+    /**
+     * @var string
+     */
+    protected $bar;
+
+    /**
+     * @var string
+     */
+    private $baz;
+}
+
+class errorClass
+{
+    public function triggerError()
+    {
+        trigger_error('TestError', E_USER_ERROR);
+    }
 }

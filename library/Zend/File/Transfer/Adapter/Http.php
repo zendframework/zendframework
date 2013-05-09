@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_File
  */
 
 namespace Zend\File\Transfer\Adapter;
@@ -18,8 +17,6 @@ use Zend\ProgressBar\Adapter;
 /**
  * File transfer adapter class for the HTTP protocol
  *
- * @category  Zend
- * @package   Zend_File_Transfer
  */
 class Http extends AbstractAdapter
 {
@@ -100,7 +97,7 @@ class Http extends AbstractAdapter
      * Checks if the files are valid
      *
      * @param  string|array $files (Optional) Files to check
-     * @return boolean True if all checks are valid
+     * @return bool True if all checks are valid
      */
     public function isValid($files = null)
     {
@@ -136,7 +133,7 @@ class Http extends AbstractAdapter
      * Receive the file from the client (Upload)
      *
      * @param  string|array $files (Optional) Files to receive
-     * @return boolean
+     * @return bool
      */
     public function receive($files = null)
     {
@@ -207,7 +204,7 @@ class Http extends AbstractAdapter
      * Checks if the file was already sent
      *
      * @param  string|array $files Files to check
-     * @return boolean
+     * @return bool
      * @throws Exception\BadMethodCallException Not implemented
      */
     public function isSent($files = null)
@@ -219,7 +216,7 @@ class Http extends AbstractAdapter
      * Checks if the file was already received
      *
      * @param  string|array $files (Optional) Files to check
-     * @return boolean
+     * @return bool
      */
     public function isReceived($files = null)
     {
@@ -241,7 +238,7 @@ class Http extends AbstractAdapter
      * Checks if the file was already filtered
      *
      * @param  string|array $files (Optional) Files to check
-     * @return boolean
+     * @return bool
      */
     public function isFiltered($files = null)
     {
@@ -263,7 +260,7 @@ class Http extends AbstractAdapter
      * Has a file been uploaded ?
      *
      * @param  array|string|null $files
-     * @return boolean
+     * @return bool
      */
     public function isUploaded($files = null)
     {
@@ -391,7 +388,7 @@ class Http extends AbstractAdapter
     /**
      * Checks the APC extension for progress information
      *
-     * @return boolean
+     * @return bool
      */
     public static function isApcAvailable()
     {
@@ -401,7 +398,7 @@ class Http extends AbstractAdapter
     /**
      * Checks the UploadProgress extension for progress information
      *
-     * @return boolean
+     * @return bool
      */
     public static function isUploadProgressAvailable()
     {

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Cache
  */
 
 namespace Zend\Cache\Storage\Adapter;
@@ -13,11 +12,6 @@ namespace Zend\Cache\Storage\Adapter;
 use Zend\Cache\Exception;
 use Zend\Cache\Storage\IteratorInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage Storage
- */
 class DbaIterator implements IteratorInterface
 {
     /**
@@ -51,7 +45,7 @@ class DbaIterator implements IteratorInterface
     /**
      * The current internal key
      *
-     * @var string|boolean
+     * @var string|bool
      */
     protected $currentInternalKey;
 
@@ -167,7 +161,7 @@ class DbaIterator implements IteratorInterface
     /**
      * Checks if current position is valid
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

@@ -3,18 +3,12 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Console
  */
 
 namespace Zend\Console\Prompt;
 
-/**
- * @category   Zend
- * @package    Zend_Console
- * @subpackage Prompt
- */
 class Confirm extends Char
 {
     /**
@@ -74,7 +68,12 @@ class Confirm extends Char
      */
     public function show()
     {
-        $response = parent::show() === $this->yesChar;
+        $char = parent::show();
+        if ($this->ignoreCase) {
+            $response = strtolower($char) === strtolower($this->yesChar);
+        } else {
+            $response = $char === $this->yesChar;
+        }
         return $this->lastResponse = $response;
     }
 
@@ -112,5 +111,4 @@ class Confirm extends Char
     {
         return $this->yesChar;
     }
-
 }

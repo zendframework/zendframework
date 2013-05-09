@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
@@ -14,173 +13,80 @@ use Zend\Form\ElementInterface;
 use Zend\Form\Element\MultiCheckbox as MultiCheckboxElement;
 use Zend\Form\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- */
 class FormMultiCheckbox extends FormInput
 {
     const LABEL_APPEND  = 'append';
     const LABEL_PREPEND = 'prepend';
 
     /**
-     * @var boolean
-     */
-    protected $useHiddenElement = false;
-
-    /**
-     * @var string
-     */
-    protected $uncheckedValue = '';
-
-    /**
-     * @var FormInput
-     */
-    protected $inputHelper;
-
-    /**
-     * @var FormLabel
-     */
-    protected $labelHelper;
-
-    /**
-     * @var string
-     */
-    protected $labelPosition = self::LABEL_APPEND;
-
-    /**
+     * The attributes applied to option label
+     *
      * @var array
      */
     protected $labelAttributes;
 
     /**
+     * Where will be label rendered?
+     *
+     * @var string
+     */
+    protected $labelPosition = self::LABEL_APPEND;
+
+    /**
+     * Separator for checkbox elements
+     *
      * @var string
      */
     protected $separator = '';
 
     /**
-     * Set value for labelPosition
+     * Prefixing the element with a hidden element for the unset value?
      *
-     * @param  mixed $labelPosition
-     * @throws Exception\InvalidArgumentException
-     * @return $this
+     * @var bool
      */
-    public function setLabelPosition($labelPosition)
+    protected $useHiddenElement = false;
+
+    /**
+     * The unchecked value used when "UseHiddenElement" is turned on
+     *
+     * @var string
+     */
+    protected $uncheckedValue = '';
+
+    /**
+     * Form input helper instance
+     *
+     * @var FormInput
+     */
+    protected $inputHelper;
+
+    /**
+     * Form label helper instance
+     *
+     * @var FormLabel
+     */
+    protected $labelHelper;
+
+    /**
+     * Invoke helper as functor
+     *
+     * Proxies to {@link render()}.
+     *
+     * @param  ElementInterface|null $element
+     * @param  null|string           $labelPosition
+     * @return string|FormMultiCheckbox
+     */
+    public function __invoke(ElementInterface $element = null, $labelPosition = null)
     {
-        $labelPosition = strtolower($labelPosition);
-        if (!in_array($labelPosition, array(self::LABEL_APPEND, self::LABEL_PREPEND))) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects either %s::LABEL_APPEND or %s::LABEL_PREPEND; received "%s"',
-                __METHOD__,
-                __CLASS__,
-                __CLASS__,
-                (string) $labelPosition
-            ));
+        if (!$element) {
+            return $this;
         }
-        $this->labelPosition = $labelPosition;
 
-        return $this;
-    }
+        if ($labelPosition !== null) {
+            $this->setLabelPosition($labelPosition);
+        }
 
-    /**
-     * Get position of label
-     *
-     * @return string
-     */
-    public function getLabelPosition()
-    {
-        return $this->labelPosition;
-    }
-
-    /**
-     * Set separator string for checkbox elements
-     *
-     * @param  string $separator
-     * @return FormMultiCheckbox
-     */
-    public function setSeparator($separator)
-    {
-        $this->separator = (string) $separator;
-        return $this;
-    }
-
-    /**
-     * Get separator for checkbox elements
-     *
-     * @return string
-     */
-    public function getSeparator()
-    {
-        return $this->separator;
-    }
-
-    /**
-     * Sets the attributes applied to option label.
-     *
-     * @param  array|null $attributes
-     * @return FormMultiCheckbox
-     */
-    public function setLabelAttributes($attributes)
-    {
-        $this->labelAttributes = $attributes;
-        return $this;
-    }
-
-    /**
-     * Returns the attributes applied to each option label.
-     *
-     * @return array|null
-     */
-    public function getLabelAttributes()
-    {
-        return $this->labelAttributes;
-    }
-
-    /**
-     * Returns the option for prefixing the element with a hidden element
-     * for the unset value.
-     *
-     * @return boolean
-     */
-    public function getUseHiddenElement()
-    {
-        return $this->useHiddenElement;
-    }
-
-    /**
-     * Sets the option for prefixing the element with a hidden element
-     * for the unset value.
-     *
-     * @param  boolean $useHiddenElement
-     * @return FormMultiCheckbox
-     */
-    public function setUseHiddenElement($useHiddenElement)
-    {
-        $this->useHiddenElement = (bool) $useHiddenElement;
-        return $this;
-    }
-
-    /**
-     * Returns the unchecked value used when "UseHiddenElement" is turned on.
-     *
-     * @return string
-     */
-    public function getUncheckedValue()
-    {
-        return $this->uncheckedValue;
-    }
-
-    /**
-     * Sets the unchecked value used when "UseHiddenElement" is turned on.
-     *
-     * @param  boolean $value
-     * @return FormMultiCheckbox
-     */
-    public function setUncheckedValue($value)
-    {
-        $this->uncheckedValue = $value;
-        return $this;
+        return $this->render($element);
     }
 
     /**
@@ -232,14 +138,14 @@ class FormMultiCheckbox extends FormInput
     /**
      * Render options
      *
-     * @param MultiCheckboxElement $element
-     * @param array                $options
-     * @param array                $selectedOptions
-     * @param array                $attributes
+     * @param  MultiCheckboxElement $element
+     * @param  array                $options
+     * @param  array                $selectedOptions
+     * @param  array                $attributes
      * @return string
      */
     protected function renderOptions(MultiCheckboxElement $element, array $options, array $selectedOptions,
-                                     array $attributes)
+        array $attributes)
     {
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
         $labelHelper      = $this->getLabelHelper();
@@ -263,10 +169,10 @@ class FormMultiCheckbox extends FormInput
 
             $value           = '';
             $label           = '';
-            $selected        = false;
-            $disabled        = false;
             $inputAttributes = $attributes;
             $labelAttributes = $globalLabelAttributes;
+            $selected        = isset($inputAttributes['selected']) && $inputAttributes['type'] != 'radio' && $inputAttributes['selected'] != false ? true : false;
+            $disabled        = isset($inputAttributes['disabled']) && $inputAttributes['disabled'] != false ? true : false;
 
             if (is_scalar($optionSpec)) {
                 $optionSpec = array(
@@ -347,8 +253,8 @@ class FormMultiCheckbox extends FormInput
         $closingBracket = $this->getInlineClosingBracket();
 
         $uncheckedValue = $element->getUncheckedValue()
-                ? $element->getUncheckedValue()
-                : $this->uncheckedValue;
+            ? $element->getUncheckedValue()
+            : $this->uncheckedValue;
 
         $hiddenAttributes = array(
             'name'  => $element->getName(),
@@ -363,25 +269,127 @@ class FormMultiCheckbox extends FormInput
     }
 
     /**
-     * Invoke helper as functor
+     * Sets the attributes applied to option label.
      *
-     * Proxies to {@link render()}.
-     *
-     * @param  ElementInterface|null $element
-     * @param  null|string           $labelPosition
-     * @return string|FormMultiCheckbox
+     * @param  array|null $attributes
+     * @return FormMultiCheckbox
      */
-    public function __invoke(ElementInterface $element = null, $labelPosition = null)
+    public function setLabelAttributes($attributes)
     {
-        if (!$element) {
-            return $this;
-        }
+        $this->labelAttributes = $attributes;
+        return $this;
+    }
 
-        if ($labelPosition !== null) {
-            $this->setLabelPosition($labelPosition);
-        }
+    /**
+     * Returns the attributes applied to each option label.
+     *
+     * @return array|null
+     */
+    public function getLabelAttributes()
+    {
+        return $this->labelAttributes;
+    }
 
-        return $this->render($element);
+    /**
+     * Set value for labelPosition
+     *
+     * @param  mixed $labelPosition
+     * @throws Exception\InvalidArgumentException
+     * @return FormMultiCheckbox
+     */
+    public function setLabelPosition($labelPosition)
+    {
+        $labelPosition = strtolower($labelPosition);
+        if (!in_array($labelPosition, array(self::LABEL_APPEND, self::LABEL_PREPEND))) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects either %s::LABEL_APPEND or %s::LABEL_PREPEND; received "%s"',
+                __METHOD__,
+                __CLASS__,
+                __CLASS__,
+                (string) $labelPosition
+            ));
+        }
+        $this->labelPosition = $labelPosition;
+
+        return $this;
+    }
+
+    /**
+     * Get position of label
+     *
+     * @return string
+     */
+    public function getLabelPosition()
+    {
+        return $this->labelPosition;
+    }
+
+    /**
+     * Set separator string for checkbox elements
+     *
+     * @param  string $separator
+     * @return FormMultiCheckbox
+     */
+    public function setSeparator($separator)
+    {
+        $this->separator = (string) $separator;
+        return $this;
+    }
+
+    /**
+     * Get separator for checkbox elements
+     *
+     * @return string
+     */
+    public function getSeparator()
+    {
+        return $this->separator;
+    }
+
+    /**
+     * Sets the option for prefixing the element with a hidden element
+     * for the unset value.
+     *
+     * @param  bool $useHiddenElement
+     * @return FormMultiCheckbox
+     */
+    public function setUseHiddenElement($useHiddenElement)
+    {
+        $this->useHiddenElement = (bool) $useHiddenElement;
+        return $this;
+    }
+
+    /**
+     * Returns the option for prefixing the element with a hidden element
+     * for the unset value.
+     *
+     * @return bool
+     */
+    public function getUseHiddenElement()
+    {
+        return $this->useHiddenElement;
+    }
+
+    /**
+     * Sets the unchecked value used when "UseHiddenElement" is turned on.
+     *
+     * @param  bool $value
+     * @return FormMultiCheckbox
+     */
+    public function setUncheckedValue($value)
+    {
+        $this->uncheckedValue = $value;
+        return $this;
+    }
+
+    /**
+     * Returns the unchecked value used when "UseHiddenElement" is turned on.
+     *
+     * @return string
+     */
+    public function getUncheckedValue()
+    {
+        return $this->uncheckedValue;
     }
 
     /**
@@ -392,6 +400,25 @@ class FormMultiCheckbox extends FormInput
     protected function getInputType()
     {
         return 'checkbox';
+    }
+
+    /**
+     * Get element name
+     *
+     * @param  ElementInterface $element
+     * @throws Exception\DomainException
+     * @return string
+     */
+    protected static function getName(ElementInterface $element)
+    {
+        $name = $element->getName();
+        if ($name === null || $name === '') {
+            throw new Exception\DomainException(sprintf(
+                '%s requires that the element has an assigned name; none discovered',
+                __METHOD__
+            ));
+        }
+        return $name . '[]';
     }
 
     /**
@@ -436,24 +463,5 @@ class FormMultiCheckbox extends FormInput
         }
 
         return $this->labelHelper;
-    }
-
-    /**
-     * Get element name
-     *
-     * @param  ElementInterface $element
-     * @throws Exception\DomainException
-     * @return string
-     */
-    protected static function getName(ElementInterface $element)
-    {
-        $name = $element->getName();
-        if ($name === null || $name === '') {
-            throw new Exception\DomainException(sprintf(
-                '%s requires that the element has an assigned name; none discovered',
-                __METHOD__
-            ));
-        }
-        return $name . '[]';
     }
 }

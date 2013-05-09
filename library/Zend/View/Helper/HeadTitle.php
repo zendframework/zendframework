@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -16,15 +15,13 @@ use Zend\View\Exception;
 
 /**
  * Helper for setting and retrieving title element for HTML head
- *
- * @package    Zend_View
- * @subpackage Helper
  */
 class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     TranslatorAwareInterface
 {
     /**
      * Registry key for placeholder
+     *
      * @var string
      */
     protected $regKey = 'Zend_View_Helper_HeadTitle';
@@ -62,7 +59,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
      *
      * @param  string $title
      * @param  string $setType
-     * @return \Zend\View\Helper\HeadTitle
+     * @return HeadTitle
      */
     public function __invoke($title = null, $setType = null)
     {
@@ -87,40 +84,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     }
 
     /**
-     * Set a default order to add titles
-     *
-     * @param string $setType
-     * @return HeadTitle
-     * @throws Exception\DomainException
-     */
-    public function setDefaultAttachOrder($setType)
-    {
-        if (!in_array($setType, array(
-            Placeholder\Container\AbstractContainer::APPEND,
-            Placeholder\Container\AbstractContainer::SET,
-            Placeholder\Container\AbstractContainer::PREPEND
-        ))) {
-            throw new Exception\DomainException(
-                "You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'"
-            );
-        }
-        $this->defaultAttachOrder = $setType;
-
-        return $this;
-    }
-
-    /**
-     * Get the default attach order, if any.
-     *
-     * @return mixed
-     */
-    public function getDefaultAttachOrder()
-    {
-        return $this->defaultAttachOrder;
-    }
-
-    /**
-     * Turn helper into string
+     * Render title (wrapped by title tag)
      *
      * @param  string|null $indent
      * @return string
@@ -131,6 +95,18 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
                 ? $this->getWhitespace($indent)
                 : $this->getIndent();
 
+        $output = $this->renderTitle();
+
+        return $indent . '<title>' . $output . '</title>';
+    }
+
+    /**
+     * Render title string
+     *
+     * @return string
+     */
+    public function renderTitle()
+    {
         $items = array();
 
         if (null !== ($translator = $this->getTranslator())) {
@@ -162,7 +138,40 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
 
         $output = ($this->autoEscape) ? $this->escape($output) : $output;
 
-        return $indent . '<title>' . $output . '</title>';
+        return $output;
+    }
+
+    /**
+     * Set a default order to add titles
+     *
+     * @param  string $setType
+     * @throws Exception\DomainException
+     * @return HeadTitle
+     */
+    public function setDefaultAttachOrder($setType)
+    {
+        if (!in_array($setType, array(
+            Placeholder\Container\AbstractContainer::APPEND,
+            Placeholder\Container\AbstractContainer::SET,
+            Placeholder\Container\AbstractContainer::PREPEND
+        ))) {
+            throw new Exception\DomainException(
+                "You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'"
+            );
+        }
+        $this->defaultAttachOrder = $setType;
+
+        return $this;
+    }
+
+    /**
+     * Get the default attach order, if any.
+     *
+     * @return mixed
+     */
+    public function getDefaultAttachOrder()
+    {
+        return $this->defaultAttachOrder;
     }
 
     // Translator methods - Good candidate to refactor as a trait with PHP 5.4

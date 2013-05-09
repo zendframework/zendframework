@@ -14,8 +14,17 @@
     "target-dir": "Zend/Serializer",
     "require": {
         "php": ">=5.3.3",
-		"zendframework/zend-stdlib": "self.version",
-		"zendframework/zend-json": "self.version",
-		"zendframework/zend-math": "self.version"
+        "zendframework/zend-stdlib": "self.version",
+        "zendframework/zend-json": "self.version",
+        "zendframework/zend-math": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-servicemanager": "To support plugin manager support"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev",
+            "dev-develop": "2.3-dev"
+        }
     }
 }

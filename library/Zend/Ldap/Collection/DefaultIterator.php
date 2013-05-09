@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Collection;
@@ -17,9 +16,6 @@ use Zend\Stdlib\ErrorHandler;
 /**
  * Zend\Ldap\Collection\DefaultIterator is the default collection iterator implementation
  * using ext/ldap
- *
- * @category   Zend
- * @package    Zend_Ldap
  */
 class DefaultIterator implements \Iterator, \Countable
 {
@@ -51,7 +47,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * Number of items in query result
      *
-     * @var integer
+     * @var int
      */
     protected $itemCount = -1;
 
@@ -128,7 +124,7 @@ class DefaultIterator implements \Iterator, \Countable
      * or a valid callback accepting the attribute's name as it's only
      * argument and returning the new attribute's name.
      *
-     * @param  integer|callable $attributeNameTreatment
+     * @param  int|callable $attributeNameTreatment
      * @return DefaultIterator Provides a fluent interface
      */
     public function setAttributeNameTreatment($attributeNameTreatment)
@@ -163,7 +159,7 @@ class DefaultIterator implements \Iterator, \Countable
     /**
      * Returns the currently set attribute name treatment
      *
-     * @return integer|callable
+     * @return int|callable
      */
     public function getAttributeNameTreatment()
     {
@@ -197,14 +193,14 @@ class DefaultIterator implements \Iterator, \Countable
             return null;
         }
 
-        $entry          = array('dn' => $this->key());
-        $ber_identifier = null;
+        $entry         = array('dn' => $this->key());
+        $berIdentifier = null;
 
         $resource = $this->ldap->getResource();
         ErrorHandler::start();
         $name = ldap_first_attribute(
             $resource, $this->current,
-            $ber_identifier
+            $berIdentifier
         );
         ErrorHandler::stop();
 
@@ -240,7 +236,7 @@ class DefaultIterator implements \Iterator, \Countable
             ErrorHandler::start();
             $name = ldap_next_attribute(
                 $resource, $this->current,
-                $ber_identifier
+                $berIdentifier
             );
             ErrorHandler::stop();
         }
@@ -332,7 +328,7 @@ class DefaultIterator implements \Iterator, \Countable
      * after calls to rewind() or next()
      * Implements Iterator
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

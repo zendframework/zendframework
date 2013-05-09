@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Paginator
  */
@@ -22,6 +22,7 @@ use Zend\Paginator\Adapter;
 use Zend\Paginator\Exception;
 use Zend\View;
 use Zend\View\Helper;
+use ZendTest\Paginator\TestAsset\TestArrayAggregate;
 
 /**
  * @category   Zend
@@ -81,6 +82,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
             mkdir($tmpDir);
         }
         $this->cacheDir = $tmpDir;
+
         return $tmpDir;
     }
 
@@ -794,12 +796,4 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($outputGetCacheId, 'Zend_Paginator_1_' . $outputGetCacheInternalId);
     }
 
-}
-
-class TestArrayAggregate implements Paginator\AdapterAggregateInterface
-{
-    public function getPaginatorAdapter()
-    {
-        return new Adapter\ArrayAdapter(array(1, 2, 3, 4));
-    }
 }

@@ -3,29 +3,21 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
-/**
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- */
 class HtmlPage extends AbstractHtmlElement
 {
     /**
      * Default file type for html
-     *
      */
     const TYPE = 'text/html';
 
     /**
      * Object classid
-     *
      */
     const ATTRIB_CLASSID  = 'clsid:25336920-03F9-11CF-8FD0-00AA00686F13';
 
@@ -39,15 +31,15 @@ class HtmlPage extends AbstractHtmlElement
     /**
      * Output a html object tag
      *
-     * @param string $data The html url
-     * @param array  $attribs Attribs for the object tag
-     * @param array  $params Params for in the object tag
-     * @param string $content Alternative content
+     * @param  string $data    The html url
+     * @param  array  $attribs Attribs for the object tag
+     * @param  array  $params  Params for in the object tag
+     * @param  string $content Alternative content
      * @return string
      */
     public function __invoke($data, array $attribs = array(), array $params = array(), $content = null)
     {
-        // Attrs
+        // Attribs
         $attribs = array_merge($this->attribs, $attribs);
 
         // Params

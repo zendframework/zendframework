@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Ldap
  */
@@ -369,5 +369,43 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
         $data     = Ldif\Encoder::decode($ldif);
         $expected = array_merge(array('dn' => $node->getDnString()), $node->getData(false));
         $this->assertEquals($expected, $data);
+    }
+
+    public function testDecodeSimpleSingleItemWithUri()
+    {
+        $data =
+"version: 1
+dn: cn=test3,ou=example,dc=cno
+objectclass: oc1
+memberurl: ldap:///(&(cn=myName)(uid=something))";
+        $expected = array(
+            'dn'          => 'cn=test3,ou=example,dc=cno',
+            'objectclass' => array('oc1'),
+            'memberurl'   => array('ldap:///(&(cn=myName)(uid=something))'));
+        $actual   = Ldif\Encoder::decode($data);
+        $this->assertEquals($expected, $actual);
+    }
+
+
+    public function testDecodeSimpleSingleItemWithMultilineComment()
+    {
+        $data =
+"version: 1
+dn: cn=test3,ou=example,dc=cno
+objectclass: oc1
+attr3:: w7bDpMO8
+
+# This is a comment
+ on multiple lines
+dn: cn=test4,ou=example,dc=cno
+objectclass: oc1
+attr3:: w7bDpMO8";
+
+        $expected = array(
+            'dn'          => 'cn=test3,ou=example,dc=cno',
+            'objectclass' => array('oc1'),
+            'attr3'       => array('öäü'));
+        $actual   = Ldif\Encoder::decode($data);
+        $this->assertEquals($expected, $actual[0]);
     }
 }

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
  */
 
 namespace Zend\Json\Server\Smd;
@@ -18,8 +17,6 @@ use Zend\Json\Server\Smd;
  * Create Service Mapping Description for a method
  *
  * @todo       Revised method regex to allow NS; however, should SMD be revised to strip PHP NS instead when attaching functions?
- * @package    Zend_Json
- * @subpackage Server
  */
 class Service
 {
@@ -431,7 +428,7 @@ class Service
      * Validate parameter type
      *
      * @param string  $type
-     * @param boolean $isReturn
+     * @param  bool $isReturn
      * @return string
      * @throws InvalidArgumentException
      */

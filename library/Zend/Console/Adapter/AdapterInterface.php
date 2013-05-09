@@ -3,19 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Console
  */
 
 namespace Zend\Console\Adapter;
 
 use Zend\Console\Charset\CharsetInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Console
- */
 interface AdapterInterface
 {
     const LINE_NONE = 1;
@@ -148,28 +143,6 @@ interface AdapterInterface
      */
     public function isUtf8();
 
-
-//    /**
-//     * Return current cursor position - array($x, $y)
-//     *
-//     * @return array        array($x, $y);
-//     */
-//    public function getPos();
-//
-//    /**
-//     * Return current cursor X coordinate (column)
-//     *
-//     * @return  false|int       Integer or false if failed to determine.
-//     */
-//    public function getX();
-//
-//    /**
-//     * Return current cursor Y coordinate (row)
-//     *
-//     * @return  false|int       Integer or false if failed to determine.
-//     */
-//    public function getY();
-
     /**
      * Set cursor position
      *
@@ -194,19 +167,6 @@ interface AdapterInterface
      * @return string
      */
     public function getTitle();
-
-    /**
-     * Set console window title
-     *
-     * @param $title
-     */
-    public function setTitle($title);
-
-    /**
-     * Reset console window title to previous value.
-     */
-    public function resetTitle();
-
 
     /**
      * Prepare a string that will be rendered in color.

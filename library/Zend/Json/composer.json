@@ -18,5 +18,11 @@
     },
     "suggest": {
         "zendframework/zend-server": "Zend\\Server component"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev",
+            "dev-develop": "2.3-dev"
+        }
     }
 }

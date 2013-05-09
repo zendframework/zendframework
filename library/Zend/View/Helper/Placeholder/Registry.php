@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper\Placeholder;
@@ -14,25 +13,26 @@ use Zend\View\Exception;
 
 /**
  * Registry for placeholder containers
- *
- * @package    Zend_View
- * @subpackage Helper
  */
 class Registry
 {
     /**
-     * @var Registry Singleton instance
+     * Singleton instance
+     *
+     * @var Registry
      */
     protected static $instance;
 
     /**
      * Default container class
+     *
      * @var string
      */
     protected $containerClass = 'Zend\View\Helper\Placeholder\Container';
 
     /**
      * Placeholder containers
+     *
      * @var array
      */
     protected $items = array();
@@ -44,8 +44,9 @@ class Registry
      */
     public static function getRegistry()
     {
+        trigger_error('Placeholder view helpers should no longer use a singleton registry', E_USER_DEPRECATED);
         if (null === static::$instance) {
-            static::$instance = new self();
+            static::$instance = new static();
         }
 
         return static::$instance;
@@ -60,22 +61,23 @@ class Registry
      */
     public static function unsetRegistry()
     {
+        trigger_error('Placeholder view helpers should no longer use a singleton registry', E_USER_DEPRECATED);
         static::$instance = null;
     }
 
     /**
-     * createContainer
+     * Set the container for an item in the registry
      *
-     * @param  string $key
-     * @param  array $value
-     * @return Container\AbstractContainer
+     * @param  string                      $key
+     * @param  Container\AbstractContainer $container
+     * @return Registry
      */
-    public function createContainer($key, array $value = array())
+    public function setContainer($key, Container\AbstractContainer $container)
     {
         $key = (string) $key;
+        $this->items[$key] = $container;
 
-        $this->items[$key] = new $this->containerClass($value);
-        return $this->items[$key];
+        return $this;
     }
 
     /**
@@ -105,22 +107,24 @@ class Registry
     public function containerExists($key)
     {
         $key = (string) $key;
-        $return =  array_key_exists($key, $this->items);
-        return $return;
+
+        return array_key_exists($key, $this->items);
     }
 
     /**
-     * Set the container for an item in the registry
+     * createContainer
      *
      * @param  string $key
-     * @param  Container\AbstractContainer $container
-     * @return Registry
+     * @param  array  $value
+     * @return Container\AbstractContainer
      */
-    public function setContainer($key, Container\AbstractContainer $container)
+    public function createContainer($key, array $value = array())
     {
         $key = (string) $key;
-        $this->items[$key] = $container;
-        return $this;
+
+        $this->items[$key] = new $this->containerClass($value);
+
+        return $this->items[$key];
     }
 
     /**
@@ -163,6 +167,7 @@ class Registry
         }
 
         $this->containerClass = $name;
+
         return $this;
     }
 

@@ -14,5 +14,14 @@
     "target-dir": "Zend/Db",
     "require": {
         "php": ">=5.3.3"
+    },
+    "suggest": {
+        "zendframework/zend-stdlib": "self.version"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev",
+            "dev-develop": "2.3-dev"
+        }
     }
 }

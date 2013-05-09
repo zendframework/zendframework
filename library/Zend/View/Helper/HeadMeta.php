@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -17,22 +16,35 @@ use Zend\View\Exception;
 /**
  * Zend_Layout_View_Helper_HeadMeta
  *
- * @see        http://www.w3.org/TR/xhtml1/dtds.html
- * @package    Zend_View
- * @subpackage Helper
+ * @see http://www.w3.org/TR/xhtml1/dtds.html
  */
 class HeadMeta extends Placeholder\Container\AbstractStandalone
 {
     /**
-     * Types of attributes
+     * Allowed key types
+     *
      * @var array
      */
-    protected $typeKeys     = array('name', 'http-equiv', 'charset', 'property');
+    protected $typeKeys = array('name', 'http-equiv', 'charset', 'property', 'itemprop');
+
+    /**
+     * Required attributes for meta tag
+     *
+     * @var array
+     */
     protected $requiredKeys = array('content');
+
+    /**
+     * Allowed modifier keys
+     *
+     * @var array
+     */
     protected $modifierKeys = array('lang', 'scheme');
 
     /**
-     * @var string registry key
+     * Registry key for placeholder
+     *
+     * @var string
      */
     protected $regKey = 'Zend_View_Helper_HeadMeta';
 
@@ -45,6 +57,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
     public function __construct()
     {
         parent::__construct();
+
         $this->setSeparator(PHP_EOL);
     }
 
@@ -54,9 +67,9 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * @param  string $content
      * @param  string $keyValue
      * @param  string $keyType
-     * @param  array $modifiers
+     * @param  array  $modifiers
      * @param  string $placement
-     * @return \Zend\View\Helper\HeadMeta
+     * @return HeadMeta
      */
     public function __invoke($content = null, $keyValue = null, $keyType = 'name', $modifiers = array(), $placement = Placeholder\Container\AbstractContainer::APPEND)
     {
@@ -79,30 +92,6 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
     }
 
     /**
-     * Normalize type attribute of meta
-     *
-     * @param string $type type in CamelCase
-     * @return string
-     * @throws Exception\DomainException
-     */
-    protected function normalizeType($type)
-    {
-        switch ($type) {
-            case 'Name':
-                return 'name';
-            case 'HttpEquiv':
-                return 'http-equiv';
-            case 'Property':
-                return 'property';
-            default:
-                throw new Exception\DomainException(sprintf(
-                    'Invalid type "%s" passed to normalizeType',
-                    $type
-                ));
-        }
-    }
-
-    /**
      * Overload method access
      *
      * Allows the following 'virtual' methods:
@@ -120,13 +109,17 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * - setProperty($keyValue, $content, $modifiers = array())
      *
      * @param  string $method
-     * @param  array $args
-     * @return \Zend\View\Helper\HeadMeta
+     * @param  array  $args
      * @throws Exception\BadMethodCallException
+     * @return HeadMeta
      */
     public function __call($method, $args)
     {
-        if (preg_match('/^(?P<action>set|(pre|ap)pend|offsetSet)(?P<type>Name|HttpEquiv|Property)$/', $method, $matches)) {
+        if (preg_match(
+            '/^(?P<action>set|(pre|ap)pend|offsetSet)(?P<type>Name|HttpEquiv|Property|Itemprop)$/',
+            $method,
+            $matches)
+        ) {
             $action = $matches['action'];
             $type   = $this->normalizeType($matches['type']);
             $argc   = count($args);
@@ -156,6 +149,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
             }
 
             $this->$action($item);
+
             return $this;
         }
 
@@ -163,146 +157,50 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
     }
 
     /**
-     * Create an HTML5-style meta charset tag. Something like <meta charset="utf-8">
+     * Render placeholder as string
      *
-     * Not valid in a non-HTML5 doctype
-     *
-     * @param string $charset
-     * @return \Zend\View\Helper\HeadMeta Provides a fluent interface
+     * @param  string|int $indent
+     * @return string
      */
-    public function setCharset($charset)
+    public function toString($indent = null)
     {
-        $item = new stdClass;
-        $item->type = 'charset';
-        $item->charset = $charset;
-        $item->content = null;
-        $item->modifiers = array();
-        $this->set($item);
-        return $this;
-    }
+        $indent = (null !== $indent)
+            ? $this->getWhitespace($indent)
+            : $this->getIndent();
 
-    /**
-     * Determine if item is valid
-     *
-     * @param  mixed $item
-     * @return boolean
-     */
-    protected function isValid($item)
-    {
-        if ((!$item instanceof stdClass)
-            || !isset($item->type)
-            || !isset($item->modifiers))
-        {
-            return false;
-        }
+        $items = array();
+        $this->getContainer()->ksort();
 
-        if (!isset($item->content)
-        && (! $this->view->plugin('doctype')->isHtml5()
-        || (! $this->view->plugin('doctype')->isHtml5() && $item->type !== 'charset'))) {
-            return false;
-        }
-
-        // <meta property= ... /> is only supported with doctype RDFa
-        if (!$this->view->plugin('doctype')->isRdfa()
-            && $item->type === 'property') {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Append
-     *
-     * @param  string $value
-     * @return void
-     * @throws Exception\InvalidArgumentException
-     */
-    public function append($value)
-    {
-        if (!$this->isValid($value)) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid value passed to append; please use appendMeta()'
-            );
-        }
-
-        return $this->getContainer()->append($value);
-    }
-
-    /**
-     * OffsetSet
-     *
-     * @param  string|int $index
-     * @param  string $value
-     * @return void
-     * @throws Exception\InvalidArgumentException
-     */
-    public function offsetSet($index, $value)
-    {
-        if (!$this->isValid($value)) {
-            throw  new Exception\InvalidArgumentException(
-                'Invalid value passed to offsetSet; please use offsetSetName() or offsetSetHttpEquiv()'
-            );
-        }
-
-        return $this->getContainer()->offsetSet($index, $value);
-    }
-
-    /**
-     * OffsetUnset
-     *
-     * @param  string|int $index
-     * @return void
-     * @throws Exception\InvalidArgumentException
-     */
-    public function offsetUnset($index)
-    {
-        if (!in_array($index, $this->getContainer()->getKeys())) {
-            throw new Exception\InvalidArgumentException('Invalid index passed to offsetUnset()');
-        }
-
-        return $this->getContainer()->offsetUnset($index);
-    }
-
-    /**
-     * Prepend
-     *
-     * @param  string $value
-     * @return void
-     * @throws Exception\InvalidArgumentException
-     */
-    public function prepend($value)
-    {
-        if (!$this->isValid($value)) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid value passed to prepend; please use prependMeta()'
-            );
-        }
-
-        return $this->getContainer()->prepend($value);
-    }
-
-    /**
-     * Set
-     *
-     * @param  string $value
-     * @return void
-     * @throws Exception\InvalidArgumentException
-     */
-    public function set($value)
-    {
-        if (!$this->isValid($value)) {
-            throw new Exception\InvalidArgumentException('Invalid value passed to set; please use setMeta()');
-        }
-
-        $container = $this->getContainer();
-        foreach ($container->getArrayCopy() as $index => $item) {
-            if ($item->type == $value->type && $item->{$item->type} == $value->{$value->type}) {
-                $this->offsetUnset($index);
+        try {
+            foreach ($this as $item) {
+                $items[] = $this->itemToString($item);
             }
+        } catch (Exception\InvalidArgumentException $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+            return '';
         }
 
-        return $this->append($value);
+        return $indent . implode($this->escape($this->getSeparator()) . $indent, $items);
+    }
+
+    /**
+     * Create data item for inserting into stack
+     *
+     * @param  string $type
+     * @param  string $typeValue
+     * @param  string $content
+     * @param  array  $modifiers
+     * @return stdClass
+     */
+    public function createData($type, $typeValue, $content, array $modifiers)
+    {
+        $data            = new stdClass;
+        $data->type      = $type;
+        $data->$type     = $typeValue;
+        $data->content   = $content;
+        $data->modifiers = $modifiers;
+
+        return $data;
     }
 
     /**
@@ -378,46 +276,181 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
     }
 
     /**
-     * Render placeholder as string
+     * Normalize type attribute of meta
      *
-     * @param  string|int $indent
+     * @param  string $type type in CamelCase
+     * @throws Exception\DomainException
      * @return string
      */
-    public function toString($indent = null)
+    protected function normalizeType($type)
     {
-        $indent = (null !== $indent)
-                ? $this->getWhitespace($indent)
-                : $this->getIndent();
-
-        $items = array();
-        $this->getContainer()->ksort();
-        try {
-            foreach ($this as $item) {
-                $items[] = $this->itemToString($item);
-            }
-        } catch (Exception\InvalidArgumentException $e) {
-            trigger_error($e->getMessage(), E_USER_WARNING);
-            return '';
+        switch ($type) {
+            case 'Name':
+                return 'name';
+            case 'HttpEquiv':
+                return 'http-equiv';
+            case 'Property':
+                return 'property';
+            case 'Itemprop':
+                return 'itemprop';
+            default:
+                throw new Exception\DomainException(sprintf(
+                    'Invalid type "%s" passed to normalizeType',
+                    $type
+                ));
         }
-        return $indent . implode($this->escape($this->getSeparator()) . $indent, $items);
     }
 
     /**
-     * Create data item for inserting into stack
+     * Determine if item is valid
      *
-     * @param  string $type
-     * @param  string $typeValue
-     * @param  string $content
-     * @param  array $modifiers
-     * @return stdClass
+     * @param  mixed $item
+     * @return bool
      */
-    public function createData($type, $typeValue, $content, array $modifiers)
+    protected function isValid($item)
     {
-        $data            = new stdClass;
-        $data->type      = $type;
-        $data->$type     = $typeValue;
-        $data->content   = $content;
-        $data->modifiers = $modifiers;
-        return $data;
+        if ((!$item instanceof stdClass)
+            || !isset($item->type)
+            || !isset($item->modifiers)
+        ) {
+            return false;
+        }
+
+        if (!isset($item->content)
+            && (! $this->view->plugin('doctype')->isHtml5()
+            || (! $this->view->plugin('doctype')->isHtml5() && $item->type !== 'charset'))
+        ) {
+            return false;
+        }
+
+        // <meta itemprop= ... /> is only supported with doctype html
+        if (! $this->view->plugin('doctype')->isHtml5()
+            && $item->type === 'itemprop'
+        ) {
+            return false;
+        }
+
+        // <meta property= ... /> is only supported with doctype RDFa
+        if (!$this->view->plugin('doctype')->isRdfa()
+            && $item->type === 'property'
+        ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Append
+     *
+     * @param  string $value
+     * @return void
+     * @throws Exception\InvalidArgumentException
+     */
+    public function append($value)
+    {
+        if (!$this->isValid($value)) {
+            throw new Exception\InvalidArgumentException(
+                'Invalid value passed to append; please use appendMeta()'
+            );
+        }
+
+        return $this->getContainer()->append($value);
+    }
+
+    /**
+     * OffsetSet
+     *
+     * @param  string|int $index
+     * @param  string     $value
+     * @throws Exception\InvalidArgumentException
+     * @return void
+     */
+    public function offsetSet($index, $value)
+    {
+        if (!$this->isValid($value)) {
+            throw  new Exception\InvalidArgumentException(
+                'Invalid value passed to offsetSet; please use offsetSetName() or offsetSetHttpEquiv()'
+            );
+        }
+
+        return $this->getContainer()->offsetSet($index, $value);
+    }
+
+    /**
+     * OffsetUnset
+     *
+     * @param  string|int $index
+     * @throws Exception\InvalidArgumentException
+     * @return void
+     */
+    public function offsetUnset($index)
+    {
+        if (!in_array($index, $this->getContainer()->getKeys())) {
+            throw new Exception\InvalidArgumentException('Invalid index passed to offsetUnset()');
+        }
+
+        return $this->getContainer()->offsetUnset($index);
+    }
+
+    /**
+     * Prepend
+     *
+     * @param  string $value
+     * @throws Exception\InvalidArgumentException
+     * @return void
+     */
+    public function prepend($value)
+    {
+        if (!$this->isValid($value)) {
+            throw new Exception\InvalidArgumentException(
+                'Invalid value passed to prepend; please use prependMeta()'
+            );
+        }
+
+        return $this->getContainer()->prepend($value);
+    }
+
+    /**
+     * Set
+     *
+     * @param  string $value
+     * @throws Exception\InvalidArgumentException
+     * @return void
+     */
+    public function set($value)
+    {
+        if (!$this->isValid($value)) {
+            throw new Exception\InvalidArgumentException('Invalid value passed to set; please use setMeta()');
+        }
+
+        $container = $this->getContainer();
+        foreach ($container->getArrayCopy() as $index => $item) {
+            if ($item->type == $value->type && $item->{$item->type} == $value->{$value->type}) {
+                $this->offsetUnset($index);
+            }
+        }
+
+        return $this->append($value);
+    }
+
+    /**
+     * Create an HTML5-style meta charset tag. Something like <meta charset="utf-8">
+     *
+     * Not valid in a non-HTML5 doctype
+     *
+     * @param  string $charset
+     * @return HeadMeta Provides a fluent interface
+     */
+    public function setCharset($charset)
+    {
+        $item = new stdClass;
+        $item->type = 'charset';
+        $item->charset = $charset;
+        $item->content = null;
+        $item->modifiers = array();
+        $this->set($item);
+
+        return $this;
     }
 }

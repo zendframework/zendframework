@@ -3,19 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Writer;
 
 use DateTime;
-use Zend\Uri;
+use Zend\Feed\Uri;
 
 /**
-* @category Zend
-* @package Zend_Feed_Writer
 */
 class Deleted
 {
@@ -194,7 +191,7 @@ class Deleted
         if (isset($by['uri'])) {
             if (empty($by['uri'])
                 || !is_string($by['uri'])
-                || !Uri\UriFactory::factory($by['uri'])->isValid()
+                || !Uri::factory($by['uri'])->isValid()
             ) {
                 throw new Exception\InvalidArgumentException('Invalid parameter: "uri" array value must'
                  . ' be a non-empty string and valid URI/IRI');
@@ -237,5 +234,4 @@ class Deleted
         }
         return $this->data['comment'];
     }
-
 }

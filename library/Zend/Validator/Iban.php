@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace Zend\Validator;
@@ -17,9 +16,6 @@ use Zend\Validator\Exception;
 
 /**
  * Validates IBAN Numbers (International Bank Account Numbers)
- *
- * @category   Zend
- * @package    Zend_Validator
  */
 class Iban extends AbstractValidator
 {
@@ -80,6 +76,7 @@ class Iban extends AbstractValidator
         'BE' => 'BE[0-9]{2}[0-9]{3}[0-9]{7}[0-9]{2}',
         'BG' => 'BG[0-9]{2}[A-Z]{4}[0-9]{4}[0-9]{2}[A-Z0-9]{8}',
         'BH' => 'BH[0-9]{2}[A-Z]{4}[A-Z0-9]{14}',
+        'BR' => 'BR[0-9]{2}[0-9]{8}[0-9]{5}[0-9]{10}[A-Z][A-Z0-9]',
         'CH' => 'CH[0-9]{2}[0-9]{5}[A-Z0-9]{12}',
         'CR' => 'CR[0-9]{2}[0-9]{3}[0-9]{14}',
         'CY' => 'CY[0-9]{2}[0-9]{3}[0-9]{5}[A-Z0-9]{16}',

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace Zend\I18n\Filter;
@@ -15,11 +14,6 @@ use Traversable;
 use Zend\I18n\Exception;
 use Zend\Stdlib\ErrorHandler;
 
-/**
- * @category   Zend
- * @package    Zend_I18n
- * @subpackage Filter
- */
 class NumberFormat extends AbstractLocale
 {
     protected $options = array(
@@ -43,6 +37,7 @@ class NumberFormat extends AbstractLocale
         $style = NumberFormatter::DEFAULT_STYLE,
         $type = NumberFormatter::TYPE_DOUBLE)
     {
+        parent::__construct();
         if ($localeOrOptions !== null) {
             if ($localeOrOptions instanceof Traversable) {
                 $localeOrOptions = iterator_to_array($localeOrOptions);

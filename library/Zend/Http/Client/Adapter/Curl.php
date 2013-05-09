@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http\Client\Adapter;
@@ -20,10 +19,6 @@ use Zend\Stdlib\ArrayUtils;
 /**
  * An adapter class for Zend\Http\Client based on the curl extension.
  * Curl requires libcurl. See for full requirements the PHP manual: http://php.net/curl
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Client_Adapter
  */
 class Curl implements HttpAdapter, StreamInterface
 {
@@ -139,6 +134,9 @@ class Curl implements HttpAdapter, StreamInterface
                     $this->setCurlOption(CURLOPT_PROXYPORT, $v);
                     break;
                 default:
+                    if (is_array($v) && isset($this->config[$option]) && is_array($this->config[$option])) {
+                        $v = ArrayUtils::merge($this->config[$option], $v);
+                    }
                     $this->config[$option] = $v;
                     break;
             }
@@ -178,7 +176,7 @@ class Curl implements HttpAdapter, StreamInterface
      *
      * @param  string  $host
      * @param  int     $port
-     * @param  boolean $secure
+     * @param  bool $secure
      * @return void
      * @throws AdapterException\RuntimeException if unable to connect
      */
@@ -374,6 +372,7 @@ class Curl implements HttpAdapter, StreamInterface
         foreach ($headers as $key => $value) {
             $curlHeaders[] = $key . ': ' . $value;
         }
+
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, $curlHeaders);
 
         /**
@@ -409,8 +408,8 @@ class Curl implements HttpAdapter, StreamInterface
         }
 
         // send the request
-        $response = curl_exec($this->curl);
 
+        $response = curl_exec($this->curl);
         // if we used streaming, headers are already there
         if (!is_resource($this->outputStream)) {
             $this->response = $response;

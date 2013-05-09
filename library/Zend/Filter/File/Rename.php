@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace Zend\Filter\File;
@@ -15,10 +14,6 @@ use Zend\Filter;
 use Zend\Filter\Exception;
 use Zend\Stdlib\ArrayUtils;
 
-/**
- * @category   Zend
- * @package    Zend_Filter
- */
 class Rename extends Filter\AbstractFilter
 {
     /**
@@ -34,6 +29,7 @@ class Rename extends Filter\AbstractFilter
      * 'source'    => Source filename or directory which will be renamed
      * 'target'    => Target filename or directory, the new name of the source file
      * 'overwrite' => Shall existing files be overwritten ?
+     * 'randomize' => Shall target files have a random postfix attached?
      *
      * @param  string|array|Traversable $options Target file or directory to be renamed
      * @throws Exception\InvalidArgumentException
@@ -45,7 +41,9 @@ class Rename extends Filter\AbstractFilter
         } elseif (is_string($options)) {
             $options = array('target' => $options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Invalid options argument provided to filter');
+            throw new Exception\InvalidArgumentException(
+                'Invalid options argument provided to filter'
+            );
         }
 
         $this->setFile($options);
@@ -67,7 +65,8 @@ class Rename extends Filter\AbstractFilter
      * Array accepts the following keys:
      * 'source'    => Source filename or directory which will be renamed
      * 'target'    => Target filename or directory, the new name of the sourcefile
-     * 'overwrite' => Shall existing files be overwritten ?
+     * 'overwrite' => Shall existing files be overwritten?
+     * 'randomize' => Shall target files have a random postfix attached?
      *
      * @param  string|array $options Old file or directory to be rewritten
      * @return \Zend\Filter\File\Rename
@@ -86,7 +85,8 @@ class Rename extends Filter\AbstractFilter
      * Array accepts the following keys:
      * 'source'    => Source filename or directory which will be renamed
      * 'target'    => Target filename or directory, the new name of the sourcefile
-     * 'overwrite' => Shall existing files be overwritten ?
+     * 'overwrite' => Shall existing files be overwritten?
+     * 'randomize' => Shall target files have a random postfix attached?
      *
      * @param  string|array $options Old file or directory to be rewritten
      * @return Rename
@@ -97,7 +97,9 @@ class Rename extends Filter\AbstractFilter
         if (is_string($options)) {
             $options = array('target' => $options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Invalid options to rename filter provided');
+            throw new Exception\InvalidArgumentException(
+                'Invalid options to rename filter provided'
+            );
         }
 
         $this->_convertOptions($options);
@@ -110,7 +112,7 @@ class Rename extends Filter\AbstractFilter
      * But existing files will be erased when the overwrite option is true
      *
      * @param  string  $value  Full path of file to change
-     * @param  boolean $source Return internal informations
+     * @param  bool $source Return internal informations
      * @return string The new filename which has been set
      * @throws Exception\InvalidArgumentException If the target file already exists.
      */
@@ -129,7 +131,7 @@ class Rename extends Filter\AbstractFilter
             return $value;
         }
 
-        if (($file['overwrite'] == true) && (file_exists($file['target']))) {
+        if ($file['overwrite'] && file_exists($file['target'])) {
             unlink($file['target']);
         }
 
@@ -152,23 +154,44 @@ class Rename extends Filter\AbstractFilter
      * Renames the file $value to the new name set before
      * Returns the file $value, removing all but digit characters
      *
-     * @param  string $value Full path of file to change
+     * @param  string|array $value Full path of file to change or $_FILES data array
      * @throws Exception\RuntimeException
-     * @return string The new filename which has been set, or false when there were errors
+     * @return string|array The new filename which has been set
      */
     public function filter($value)
     {
-        $file   = $this->getNewName($value, true);
+        // An uploaded file? Retrieve the 'tmp_name'
+        $isFileUpload = (is_array($value) && isset($value['tmp_name']));
+        if ($isFileUpload) {
+            $uploadData = $value;
+            $value      = $value['tmp_name'];
+        }
+
+        $file = $this->getNewName($value, true);
         if (is_string($file)) {
-            return $file;
+            if ($isFileUpload) {
+                return $uploadData;
+            } else {
+                return $file;
+            }
         }
 
         $result = rename($file['source'], $file['target']);
 
         if ($result !== true) {
-            throw new Exception\RuntimeException(sprintf("File '%s' could not be renamed. An error occurred while processing the file.", $value));
+            throw new Exception\RuntimeException(
+                sprintf(
+                    "File '%s' could not be renamed. " .
+                    "An error occurred while processing the file.",
+                    $value
+                )
+            );
         }
 
+        if ($isFileUpload) {
+            $uploadData['tmp_name'] = $file['target'];
+            return $uploadData;
+        }
         return $file['target'];
     }
 
@@ -198,7 +221,11 @@ class Rename extends Filter\AbstractFilter
                     break;
 
                 case 'overwrite' :
-                    $files['overwrite'] = (boolean) $value;
+                    $files['overwrite'] = (bool) $value;
+                    break;
+
+                case 'randomize' :
+                    $files['randomize'] = (bool) $value;
                     break;
 
                 default:
@@ -222,16 +249,20 @@ class Rename extends Filter\AbstractFilter
             $files['overwrite'] = false;
         }
 
+        if (empty($files['randomize'])) {
+            $files['randomize'] = false;
+        }
+
         $found = false;
         foreach ($this->files as $key => $value) {
             if ($value['source'] == $files['source']) {
                 $this->files[$key] = $files;
-                $found              = true;
+                $found             = true;
             }
         }
 
         if (!$found) {
-            $count                = count($this->files);
+            $count               = count($this->files);
             $this->files[$count] = $files;
         }
 
@@ -258,6 +289,7 @@ class Rename extends Filter\AbstractFilter
 
             if ($value['source'] == $file) {
                 $rename = $value;
+                break;
             }
         }
 
@@ -265,7 +297,7 @@ class Rename extends Filter\AbstractFilter
             return $file;
         }
 
-        if (!isset($rename['target']) || ($rename['target'] == '*')) {
+        if (!isset($rename['target']) || $rename['target'] == '*') {
             $rename['target'] = $rename['source'];
         }
 
@@ -277,6 +309,16 @@ class Rename extends Filter\AbstractFilter
             }
 
             $rename['target'] .= $name;
+        }
+
+        if ($rename['randomize']) {
+            $info = pathinfo($rename['target']);
+            $newTarget = $info['dirname'] . DIRECTORY_SEPARATOR .
+                $info['filename'] . uniqid('_');
+            if (isset($info['extension'])) {
+                $newTarget .= '.' . $info['extension'];
+            }
+            $rename['target'] = $newTarget;
         }
 
         return $rename;

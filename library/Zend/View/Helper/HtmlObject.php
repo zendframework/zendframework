@@ -3,32 +3,26 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
 use Zend\View\Exception\InvalidArgumentException;
 
-/**
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
- */
 class HtmlObject extends AbstractHtmlElement
 {
     /**
      * Output an object set
      *
-     * @param string $data The data file
-     * @param string $type Data file type
-     * @param array  $attribs Attribs for the object tag
-     * @param array  $params Params for in the object tag
-     * @param string $content Alternative content for object
-     * @return string
+     * @param  string $data    The data file
+     * @param  string $type    Data file type
+     * @param  array  $attribs Attribs for the object tag
+     * @param  array  $params  Params for in the object tag
+     * @param  string $content Alternative content for object
      * @throws InvalidArgumentException
+     * @return string
      */
     public function __invoke($data = null, $type = null, array $attribs = array(), array $params = array(), $content = null)
     {
@@ -37,8 +31,7 @@ class HtmlObject extends AbstractHtmlElement
         }
 
         // Merge data and type
-        $attribs = array_merge(array('data' => $data,
-                                     'type' => $type), $attribs);
+        $attribs = array_merge(array('data' => $data, 'type' => $type), $attribs);
 
         // Params
         $paramHtml = array();

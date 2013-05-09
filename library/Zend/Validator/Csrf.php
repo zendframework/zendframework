@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
@@ -175,6 +174,7 @@ class Csrf extends AbstractValidator
     public function getSession()
     {
         if (null === $this->session) {
+            // Using fully qualified name, to ensure polyfill class alias is used
             $this->session = new SessionContainer($this->getSessionName());
         }
         return $this->session;
@@ -270,7 +270,7 @@ class Csrf extends AbstractValidator
     protected function initCsrfToken()
     {
         $session = $this->getSession();
-        //$session->setExpirationHops(1, null, true);
+        //$session->setExpirationHops(1, null);
         $timeout = $this->getTimeout();
         if (null !== $timeout) {
             $session->setExpirationSeconds($timeout);

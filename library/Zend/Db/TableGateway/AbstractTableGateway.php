@@ -3,14 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\TableGateway;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Db\Sql\Delete;
@@ -22,11 +21,8 @@ use Zend\Db\Sql\Update;
 use Zend\Db\Sql\Where;
 
 /**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage TableGateway
  *
- * @property Adapter $adapter
+ * @property AdapterInterface $adapter
  * @property int $lastInsertValue
  * @property string $table
  */
@@ -39,7 +35,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     protected $isInitialized = false;
 
     /**
-     * @var Adapter
+     * @var AdapterInterface
      */
     protected $adapter = null;
 
@@ -70,7 +66,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
 
     /**
      *
-     * @var integer
+     * @var int
      */
     protected $lastInsertValue = null;
 
@@ -101,7 +97,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         $this->featureSet->setTableGateway($this);
         $this->featureSet->apply('preInitialize', array());
 
-        if (!$this->adapter instanceof Adapter) {
+        if (!$this->adapter instanceof AdapterInterface) {
             throw new Exception\RuntimeException('This table does not have an Adapter setup');
         }
 
@@ -135,7 +131,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     /**
      * Get adapter
      *
-     * @return Adapter
+     * @return AdapterInterface
      */
     public function getAdapter()
     {
@@ -419,7 +415,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     /**
      * Get last insert value
      *
-     * @return integer
+     * @return int
      */
     public function getLastInsertValue()
     {

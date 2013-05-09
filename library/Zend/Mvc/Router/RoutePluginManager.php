@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router;
@@ -19,20 +18,39 @@ use Zend\ServiceManager\AbstractPluginManager;
  * createFromInvokable() to call the route's factory method in order to get an
  * instance. The manager is marked to not share by default, in order to allow
  * multiple route instances of the same type.
- *
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Router
  */
 class RoutePluginManager extends AbstractPluginManager
 {
     /**
-     * @var bool Do not share instances
+     * Do not share instances.
+     *
+     * @var bool
      */
     protected $shareByDefault = false;
 
     /**
-     * Validate the plugin
+     * Override setInvokableClass().
+     *
+     * Performs normal operation, but also auto-aliases the class name to the
+     * service name. This ensures that providing the FQCN does not trigger an
+     * abstract factory later.
+     *
+     * @param  string       $name
+     * @param  string       $invokableClass
+     * @param  null|bool    $shared
+     * @return RoutePluginManager
+     */
+    public function setInvokableClass($name, $invokableClass, $shared = null)
+    {
+        parent::setInvokableClass($name, $invokableClass, $shared);
+        if ($name != $invokableClass) {
+            $this->setAlias($invokableClass, $name);
+        }
+        return $this;
+    }
+
+    /**
+     * Validate the plugin.
      *
      * Checks that the filter loaded is either a valid callback or an instance
      * of FilterInterface.
@@ -56,7 +74,7 @@ class RoutePluginManager extends AbstractPluginManager
     }
 
     /**
-     * Attempt to create an instance via an invokable class
+     * Attempt to create an instance via an invokable class.
      *
      * Overrides parent implementation by invoking the route factory,
      * passing $creationOptions as the argument.
@@ -75,7 +93,7 @@ class RoutePluginManager extends AbstractPluginManager
                 __METHOD__,
                 $canonicalName,
                 ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
-                $canonicalName
+                $invokable
             ));
         }
 
@@ -85,7 +103,7 @@ class RoutePluginManager extends AbstractPluginManager
                 __METHOD__,
                 $canonicalName,
                 ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
-                $canonicalName,
+                $invokable,
                 __NAMESPACE__
             ));
         }

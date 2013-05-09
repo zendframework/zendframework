@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Debug.php
  */
 
 namespace Zend\Debug;
@@ -14,9 +13,6 @@ use Zend\Escaper\Escaper;
 
 /**
  * Concrete class for generating debug dumps related to the output source.
- *
- * @category   Zend
- * @package    Zend_Debug
  */
 class Debug
 {
@@ -91,7 +87,7 @@ class Debug
      * @param  bool   $echo  OPTIONAL Echo output if true.
      * @return string
      */
-    public static function dump($var, $label=null, $echo=true)
+    public static function dump($var, $label = null, $echo = true)
     {
         // format the label
         $label = ($label===null) ? '' : rtrim($label) . ' ';
@@ -123,5 +119,4 @@ class Debug
         }
         return $output;
     }
-
 }

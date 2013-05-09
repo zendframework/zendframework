@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Extension\Atom;
@@ -15,12 +14,8 @@ use DOMElement;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Collection;
 use Zend\Feed\Reader\Extension;
-use Zend\Uri;
+use Zend\Feed\Uri;
 
-/**
-* @category Zend
-* @package Reader\Reader
-*/
 class Feed extends Extension\AbstractFeed
 {
     /**
@@ -43,7 +38,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get an array with feed authors
      *
-     * @return array
+     * @return Collection\Author
      */
     public function getAuthors()
     {
@@ -65,7 +60,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if (count($authors) == 0) {
-            $authors = null;
+            $authors = new Collection\Author();
         } else {
             $authors = new Collection\Author(
                 Reader\Reader::arrayUnique($authors)
@@ -125,7 +120,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if ($dateCreated) {
-            $date = DateTime::createFromFormat(DateTime::ISO8601, $dateCreated);
+            $date = new DateTime($dateCreated);
         }
 
         $this->data['datecreated'] = $date;
@@ -153,7 +148,7 @@ class Feed extends Extension\AbstractFeed
         }
 
         if ($dateModified) {
-            $date = DateTime::createFromFormat(DateTime::ISO8601, $dateModified);
+            $date = new DateTime($dateModified);
         }
 
         $this->data['datemodified'] = $date;
@@ -281,7 +276,7 @@ class Feed extends Extension\AbstractFeed
         if (!$imageUrl) {
             $image = null;
         } else {
-            $image = array('uri'=>$imageUrl);
+            $image = array('uri' => $imageUrl);
         }
 
         $this->data['image'] = $image;
@@ -487,10 +482,10 @@ class Feed extends Extension\AbstractFeed
      */
     protected function absolutiseUri($link)
     {
-        if (!Uri\UriFactory::factory($link)->isAbsolute()) {
+        if (!Uri::factory($link)->isAbsolute()) {
             if ($this->getBaseUrl() !== null) {
                 $link = $this->getBaseUrl() . $link;
-                if (!Uri\UriFactory::factory($link)->isValid()) {
+                if (!Uri::factory($link)->isValid()) {
                     $link = null;
                 }
             }

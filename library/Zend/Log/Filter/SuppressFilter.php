@@ -3,25 +3,44 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Log
  */
 
 namespace Zend\Log\Filter;
 
+use Traversable;
+use Zend\Log\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Filter
- */
 class SuppressFilter implements FilterInterface
 {
     /**
-     * @var boolean
+     * @var bool
      */
     protected $accept = true;
+
+    /**
+     * This is a simple boolean filter.
+     *
+     * @param int|array|Traversable $suppress
+     * @throws Exception\InvalidArgumentException
+     */
+    public function __construct($suppress = false)
+    {
+        if ($suppress instanceof Traversable) {
+            $suppress = iterator_to_array($suppress);
+        }
+        if (is_array($suppress)) {
+            $suppress = isset($suppress['suppress']) ? $suppress['suppress'] : false;
+        }
+        if (!is_bool($suppress)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                    'Suppress must be an boolean; received "%s"', gettype($suppress)
+            ));
+        }
+
+        $this->suppress($suppress);
+    }
 
     /**
      * This is a simple boolean filter.
@@ -29,7 +48,7 @@ class SuppressFilter implements FilterInterface
      * Call suppress(true) to suppress all log events.
      * Call suppress(false) to accept all log events.
      *
-     * @param boolean $suppress Should all log events be suppressed?
+     * @param  bool $suppress Should all log events be suppressed?
      * @return void
      */
     public function suppress($suppress)
@@ -41,7 +60,7 @@ class SuppressFilter implements FilterInterface
      * Returns TRUE to accept the message, FALSE to block it.
      *
      * @param array $event event data
-     * @return boolean accepted?
+     * @return bool accepted?
      */
     public function filter(array $event)
     {

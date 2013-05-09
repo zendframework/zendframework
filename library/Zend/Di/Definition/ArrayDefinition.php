@@ -3,18 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Di
  */
 
 namespace Zend\Di\Definition;
 
+use Zend\Di\Definition\Builder\InjectionMethod;
+
 /**
  * Class definitions based on a given array
- *
- * @category   Zend
- * @package    Zend_Di
  */
 class ArrayDefinition implements DefinitionInterface
 {
@@ -31,6 +29,15 @@ class ArrayDefinition implements DefinitionInterface
         foreach ($dataArray as $class => $value) {
             // force lower names
             $dataArray[$class] = array_change_key_case($dataArray[$class], CASE_LOWER);
+        }
+        foreach ($dataArray as $class => $definition) {
+            if (isset($definition['methods']) && is_array($definition['methods'])) {
+                foreach ($definition['methods'] as $type => $requirement) {
+                    if (!is_int($requirement)) {
+                        $dataArray[$class]['methods'][$type] = InjectionMethod::detectMethodRequirement($requirement);
+                    }
+                }
+            }
         }
         $this->dataArray = $dataArray;
     }
@@ -166,5 +173,4 @@ class ArrayDefinition implements DefinitionInterface
     {
         return $this->dataArray;
     }
-
 }

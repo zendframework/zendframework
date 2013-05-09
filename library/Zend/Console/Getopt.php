@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Console
  */
 
 namespace Zend\Console;
@@ -67,11 +66,6 @@ namespace Zend\Console;
  *
  * Example:  'abc:' means options '-a', '-b', and '-c'
  * are legal, and the latter requires a string parameter.
- *
- * @category   Zend
- * @package    Zend_Console_Getopt
- * @version    Release: @package_version@
- * @since      Class available since Release 0.6.0
  *
  * @todo  Handle flags that implicitly print usage message, e.g. --help
  *
@@ -193,7 +187,7 @@ class Getopt
     /**
      * State of the options: parsed or not yet parsed?
      *
-     * @var boolean
+     * @var bool
      */
     protected $parsed = false;
 
@@ -255,7 +249,7 @@ class Getopt
      * Test whether a given option has been seen.
      *
      * @param  string $key
-     * @return boolean
+     * @return bool
      */
     public function __isset($key)
     {
@@ -637,7 +631,7 @@ class Getopt
     /**
      * Define help messages for options.
      *
-     * The parameter $help_map is an associative array
+     * The parameter $helpMap is an associative array
      * mapping option name (short or long) to the help string.
      *
      * @param  array $helpMap

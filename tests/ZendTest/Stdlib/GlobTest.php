@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Stdlib
  */
@@ -31,5 +31,14 @@ class GlobTest extends TestCase
     {
         $result = Glob::glob('/some/path/{,*.}{this,orthis}.php', Glob::GLOB_BRACE);
         $this->assertInternalType('array', $result);
+    }
+
+    public function testThrowExceptionOnError()
+    {
+        $this->setExpectedException('Zend\Stdlib\Exception\RuntimeException');
+
+        // run into a max path lengh error
+        $path = '/' . str_repeat('a', 10000);
+        Glob::glob($path);
     }
 }

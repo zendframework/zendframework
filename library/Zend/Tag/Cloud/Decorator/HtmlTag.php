@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Tag
  */
 
 namespace Zend\Tag\Cloud\Decorator;
@@ -15,9 +14,6 @@ use Zend\Tag\ItemList;
 
 /**
  * Simple HTML decorator for tags
- *
- * @category  Zend
- * @package   Zend_Tag
  */
 class HtmlTag extends AbstractTag
 {
@@ -55,14 +51,14 @@ class HtmlTag extends AbstractTag
     /**
      * Maximum fontsize
      *
-     * @var integer
+     * @var int
      */
     protected $maxFontSize = 20;
 
     /**
      * Minimum fontsize
      *
-     * @var integer
+     * @var int
      */
     protected $minFontSize = 10;
 
@@ -156,7 +152,7 @@ class HtmlTag extends AbstractTag
     /**
      * Set maximum font size
      *
-     * @param  integer $maxFontSize
+     * @param  int $maxFontSize
      * @throws InvalidArgumentException When fontsize is not numeric
      * @return HTMLTag
      */

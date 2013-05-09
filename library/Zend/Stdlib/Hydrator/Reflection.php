@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib\Hydrator;
@@ -13,11 +12,6 @@ namespace Zend\Stdlib\Hydrator;
 use ReflectionClass;
 use Zend\Stdlib\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Stdlib
- * @subpackage Hydrator
- */
 class Reflection extends AbstractHydrator
 {
     /**
@@ -37,9 +31,12 @@ class Reflection extends AbstractHydrator
         $result = array();
         foreach (self::getReflProperties($object) as $property) {
             $propertyName = $property->getName();
+            if (!$this->filterComposite->filter($propertyName)) {
+                continue;
+            }
 
             $value = $property->getValue($object);
-            $result[$propertyName] = $this->extractValue($propertyName, $value);
+            $result[$propertyName] = $this->extractValue($propertyName, $value, $object);
         }
 
         return $result;
@@ -57,7 +54,7 @@ class Reflection extends AbstractHydrator
         $reflProperties = self::getReflProperties($object);
         foreach ($data as $key => $value) {
             if (isset($reflProperties[$key])) {
-                $reflProperties[$key]->setValue($object, $this->hydrateValue($key, $value));
+                $reflProperties[$key]->setValue($object, $this->hydrateValue($key, $value, $data));
             }
         }
         return $object;

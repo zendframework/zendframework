@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode\Renderer;
@@ -17,9 +16,6 @@ use ZendPdf\PdfDocument;
 
 /**
  * Class for rendering the barcode in PDF resource
- *
- * @category   Zend
- * @package    Zend_Barcode
  */
 class Pdf extends AbstractRenderer
 {
@@ -31,7 +27,7 @@ class Pdf extends AbstractRenderer
 
     /**
      * Page number in PDF resource
-     * @var integer
+     * @var int
      */
     protected $page = 0;
 
@@ -45,7 +41,7 @@ class Pdf extends AbstractRenderer
      * Set a PDF resource to draw the barcode inside
      *
      * @param PdfDocument $pdf
-     * @param integer     $page
+     * @param int     $page
      * @return Pdf
      */
     public function setResource(PdfDocument $pdf, $page = 0)
@@ -102,8 +98,8 @@ class Pdf extends AbstractRenderer
     /**
      * Draw a polygon in the rendering resource
      * @param array $points
-     * @param integer $color
-     * @param boolean $filled
+     * @param int $color
+     * @param  bool $filled
      */
     protected function drawPolygon($points, $color, $filled = true)
     {
@@ -142,13 +138,13 @@ class Pdf extends AbstractRenderer
 
     /**
      * Draw a polygon in the rendering resource
-     * @param string $text
-     * @param float $size
-     * @param array $position
-     * @param string $font
-     * @param integer $color
-     * @param string $alignment
-     * @param float $orientation
+     * @param string  $text
+     * @param float   $size
+     * @param array   $position
+     * @param string  $font
+     * @param int     $color
+     * @param string  $alignment
+     * @param float   $orientation
      */
     protected function drawText(
         $text,
@@ -206,7 +202,7 @@ class Pdf extends AbstractRenderer
     {
         $drawingString = iconv('UTF-8', 'UTF-16BE//IGNORE', $text);
         $characters    = array();
-        for ($i = 0; $i < strlen($drawingString); $i ++) {
+        for ($i = 0, $len = strlen($drawingString); $i < $len; $i++) {
             $characters[] = (ord($drawingString[$i ++]) << 8) | ord($drawingString[$i]);
         }
         $glyphs = $font->glyphNumbersForCharacters($characters);

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
@@ -13,12 +12,9 @@ namespace Zend\Validator\File;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
-
+use Zend\Validator\Exception;
 /**
  * Validator for the file extension of a file
- *
- * @category  Zend
- * @package   Zend_Validator
  */
 class Extension extends AbstractValidator
 {
@@ -32,8 +28,8 @@ class Extension extends AbstractValidator
      * @var array Error message templates
      */
     protected $messageTemplates = array(
-        self::FALSE_EXTENSION => "File '%value%' has a false extension",
-        self::NOT_FOUND       => "File '%value%' is not readable or does not exist",
+        self::FALSE_EXTENSION => "File has an incorrect extension",
+        self::NOT_FOUND       => "File is not readable or does not exist",
     );
 
     /**
@@ -42,8 +38,8 @@ class Extension extends AbstractValidator
      * @var array
      */
     protected $options = array(
-        'case' => false,   // Validate case sensitive
-        'extension' => '', // List of extensions
+        'case'      => false,   // Validate case sensitive
+        'extension' => '',      // List of extensions
     );
 
     /**
@@ -56,7 +52,7 @@ class Extension extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  string|array|\Traversable $options
+     * @param  string|array|Traversable $options
      */
     public function __construct($options = null)
     {
@@ -92,7 +88,7 @@ class Extension extends AbstractValidator
     /**
      * Returns the case option
      *
-     * @return boolean
+     * @return bool
      */
     public function getCase()
     {
@@ -102,12 +98,12 @@ class Extension extends AbstractValidator
     /**
      * Sets the case to use
      *
-     * @param  boolean $case
+     * @param  bool $case
      * @return Extension Provides a fluent interface
      */
     public function setCase($case)
     {
-        $this->options['case'] = (boolean) $case;
+        $this->options['case'] = (bool) $case;
         return $this;
     }
 
@@ -174,62 +170,50 @@ class Extension extends AbstractValidator
      * Returns true if and only if the file extension of $value is included in the
      * set extension list
      *
-     * @param  string  $value Real file to check for extension
-     * @param  array   $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @param  string|array $value Real file to check for extension
+     * @param  array        $file  File data from \Zend\File\Transfer\Transfer (optional)
+     * @return bool
      */
     public function isValid($value, $file = null)
     {
-        if ($file === null) {
-            $file = array('name' => basename($value));
+        if (is_string($value) && is_array($file)) {
+            // Legacy Zend\Transfer API support
+            $filename = $file['name'];
+            $file     = $file['tmp_name'];
+        } elseif (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = $value['name'];
+        } else {
+            $file     = $value;
+            $filename = basename($file);
         }
+        $this->setValue($filename);
 
         // Is file readable ?
-        if (false === stream_resolve_include_path($value)) {
-            return $this->throwError($file, self::NOT_FOUND);
+        if (false === stream_resolve_include_path($file)) {
+            $this->error(self::NOT_FOUND);
+            return false;
         }
 
-        if ($file !== null) {
-            $info['extension'] = substr($file['name'], strrpos($file['name'], '.') + 1);
-        } else {
-            $info = pathinfo($value);
-        }
-
+        $extension  = substr($filename, strrpos($filename, '.') + 1);
         $extensions = $this->getExtension();
 
-        if ($this->getCase() && (in_array($info['extension'], $extensions))) {
+        if ($this->getCase() && (in_array($extension, $extensions))) {
             return true;
         } elseif (!$this->getCase()) {
-            foreach ($extensions as $extension) {
-                if (strtolower($extension) == strtolower($info['extension'])) {
+            foreach ($extensions as $ext) {
+                if (strtolower($ext) == strtolower($extension)) {
                     return true;
                 }
             }
         }
 
-        return $this->throwError($file, self::FALSE_EXTENSION);
-    }
-
-    /**
-     * Throws an error of the given type
-     *
-     * @param  string $file
-     * @param  string $errorType
-     * @return false
-     */
-    protected function throwError($file, $errorType)
-    {
-        if ($file !== null) {
-            if (is_array($file)) {
-                if (array_key_exists('name', $file)) {
-                    $this->value = $file['name'];
-                }
-            } elseif (is_string($file)) {
-                $this->value = $file;
-            }
-        }
-
-        $this->error($errorType);
+        $this->error(self::FALSE_EXTENSION);
         return false;
     }
 }

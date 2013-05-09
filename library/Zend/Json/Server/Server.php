@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
  */
 
 namespace Zend\Json\Server;
@@ -17,10 +16,6 @@ use Zend\Server\Definition;
 use Zend\Server\Method;
 use Zend\Server\Reflection;
 
-/**
- * @category   Zend
- * @package    Zend_Json
- */
 class Server extends AbstractServer
 {
     /**#@+
@@ -160,8 +155,8 @@ class Server extends AbstractServer
      * Handle request
      *
      * @param  Request $request
-     * @throws Exception\InvalidArgumentException
      * @return null|Response
+     * @throws Exception\InvalidArgumentException
      */
     public function handle($request = false)
     {
@@ -268,7 +263,7 @@ class Server extends AbstractServer
      *
      * The response is always available via {@link getResponse()}.
      *
-     * @param boolean $flag
+     * @param  bool $flag
      * @return Server
      */
     public function setReturnResponse($flag = true)
@@ -280,7 +275,7 @@ class Server extends AbstractServer
     /**
      * Retrieve return response flag
      *
-     * @return boolean
+     * @return bool
      */
     public function getReturnResponse()
     {
@@ -371,7 +366,7 @@ class Server extends AbstractServer
             if (array_key_exists('default', $param)) {
                 $value = $param['default'];
             }
-            array_push($args, $value);
+            $args[$param['name']] = $value;
         }
         return $args;
     }
@@ -502,7 +497,7 @@ class Server extends AbstractServer
         }
 
         $params        = $request->getParams();
-        $invocable     = $this->table->getMethod($method);
+        $invokable     = $this->table->getMethod($method);
         $serviceMap    = $this->getServiceMap();
         $service       = $serviceMap->getService($method);
         $serviceParams = $service->getParams();
@@ -512,11 +507,10 @@ class Server extends AbstractServer
         }
 
         //Make sure named parameters are passed in correct order
-        if (is_string( key( $params ) )) {
-
-            $callback = $invocable->getCallback();
+        if (is_string(key($params))) {
+            $callback = $invokable->getCallback();
             if ('function' == $callback->getType()) {
-                $reflection = new ReflectionFunction( $callback->getFunction() );
+                $reflection = new ReflectionFunction($callback->getFunction());
             } else {
 
                 $reflection = new ReflectionMethod(
@@ -527,10 +521,10 @@ class Server extends AbstractServer
 
             $orderedParams = array();
             foreach ($reflection->getParameters() as $refParam) {
-                if (isset( $params[ $refParam->getName() ] )) {
-                    $orderedParams[ $refParam->getName() ] = $params[ $refParam->getName() ];
+                if (array_key_exists($refParam->getName(), $params)) {
+                    $orderedParams[$refParam->getName()] = $params[$refParam->getName()];
                 } elseif ($refParam->isOptional()) {
-                    $orderedParams[ $refParam->getName() ] = null;
+                    $orderedParams[$refParam->getName()] = null;
                 } else {
                     return $this->fault('Invalid params', Error::ERROR_INVALID_PARAMS);
                 }
@@ -539,7 +533,7 @@ class Server extends AbstractServer
         }
 
         try {
-            $result = $this->_dispatch($invocable, $params);
+            $result = $this->_dispatch($invokable, $params);
         } catch (\Exception $e) {
             return $this->fault($e->getMessage(), $e->getCode(), $e);
         }

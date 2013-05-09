@@ -3,26 +3,32 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Math
  */
 
 namespace Zend\Math;
 
+use RandomLib;
+
 /**
  * Pseudorandom number generator (PRNG)
- *
- * @category   Zend
- * @package    Zend_Math
  */
 abstract class Rand
 {
+
+    /**
+     * Alternative random byte generator using RandomLib
+     *
+     * @var RandomLib\Generator
+     */
+    protected static $generator = null;
+
     /**
      * Generate random bytes using OpenSSL or Mcrypt and mt_rand() as fallback
      *
-     * @param  integer $length
-     * @param  boolean $strong true if you need a strong random generator (cryptography)
+     * @param  int $length
+     * @param  bool $strong true if you need a strong random generator (cryptography)
      * @return string
      * @throws Exception\RuntimeException
      */
@@ -31,55 +37,82 @@ abstract class Rand
         if ($length <= 0) {
             return false;
         }
-        if (extension_loaded('openssl')) {
-            $rand = openssl_random_pseudo_bytes($length, $secure);
-            if ($secure === true) {
-                return $rand;
+        $bytes = '';
+        if (function_exists('openssl_random_pseudo_bytes')
+            && (version_compare(PHP_VERSION, '5.3.4') >= 0
+            || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
+        ) {
+            $bytes = openssl_random_pseudo_bytes($length, $usable);
+            if (true === $usable) {
+                return $bytes;
             }
         }
-        if (extension_loaded('mcrypt')) {
-            // PHP bug #55169
-            // @see https://bugs.php.net/bug.php?id=55169
-            if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN' ||
-                version_compare(PHP_VERSION, '5.3.7') >= 0) {
-                $rand = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
-                if ($rand !== false && strlen($rand) === $length) {
-                    return $rand;
-                }
+        if (function_exists('mcrypt_create_iv')
+            && (version_compare(PHP_VERSION, '5.3.7') >= 0
+            || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
+        ) {
+            $bytes = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
+            if ($bytes !== false && strlen($bytes) === $length) {
+                return $bytes;
             }
         }
-        if ($strong) {
-            throw new Exception\RuntimeException(
+        $checkAlternatives = (file_exists('/dev/urandom') && is_readable('/dev/urandom'))
+            || class_exists('\\COM', false);
+        if (true === $strong && false === $checkAlternatives) {
+            throw new Exception\RuntimeException (
                 'This PHP environment doesn\'t support secure random number generation. ' .
-                'Please consider to install the OpenSSL and/or Mcrypt extensions'
+                'Please consider installing the OpenSSL and/or Mcrypt extensions'
             );
         }
-        $rand = '';
-        for ($i = 0; $i < $length; $i++) {
-            $rand .= chr(mt_rand(0, 255));
+        $generator = self::getAlternativeGenerator();
+        return $generator->generate($length);
+    }
+
+    /**
+     * Retrieve a fallback/alternative RNG generator
+     *
+     * @return RandomLib\Generator
+     */
+    public static function getAlternativeGenerator()
+    {
+        if (!is_null(self::$generator)) {
+            return self::$generator;
         }
-        return $rand;
+        if (!class_exists('RandomLib\\Factory')) {
+            throw new Exception\RuntimeException(
+                'The RandomLib fallback pseudorandom number generator (PRNG) '
+                . ' must be installed in the absence of the OpenSSL and '
+                . 'Mcrypt extensions'
+            );
+        }
+        $factory = new RandomLib\Factory;
+        $factory->registerSource(
+            'HashTiming',
+            'Zend\Math\Source\HashTiming'
+        );
+        self::$generator = $factory->getMediumStrengthGenerator();
+        return self::$generator;
     }
 
     /**
      * Generate random boolean
      *
-     * @param  boolean $strong true if you need a strong random generator (cryptography)
+     * @param  bool $strong true if you need a strong random generator (cryptography)
      * @return bool
      */
     public static function getBoolean($strong = false)
     {
         $byte = static::getBytes(1, $strong);
-        return (boolean) (ord($byte) % 2);
+        return (bool) (ord($byte) % 2);
     }
 
     /**
      * Generate a random integer between $min and $max
      *
-     * @param  integer $min
-     * @param  integer $max
-     * @param  boolean $strong true if you need a strong random generator (cryptography)
-     * @return integer
+     * @param  int $min
+     * @param  int $max
+     * @param  bool $strong true if you need a strong random generator (cryptography)
+     * @return int
      * @throws Exception\DomainException
      */
     public static function getInteger($min, $max, $strong = false)
@@ -118,7 +151,7 @@ abstract class Rand
      * and we fix the exponent to the bias (1023). In this way we generate
      * a float of 1.mantissa.
      *
-     * @param  boolean $strong  true if you need a strong random generator (cryptography)
+     * @param  bool $strong  true if you need a strong random generator (cryptography)
      * @return float
      */
     public static function getFloat($strong = false)
@@ -137,9 +170,9 @@ abstract class Rand
      * Uses supplied character list for generating the new string.
      * If no character list provided - uses Base 64 character set.
      *
-     * @param  integer $length
+     * @param  int $length
      * @param  string|null $charlist
-     * @param  boolean $strong  true if you need a strong random generator (cryptography)
+     * @param  bool $strong  true if you need a strong random generator (cryptography)
      * @return string
      * @throws Exception\DomainException
      */

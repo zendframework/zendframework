@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
@@ -16,8 +15,6 @@ use Zend\Validator\Exception;
 /**
  * Validator for the maximum size of a file up to a max of 2GB
  *
- * @category  Zend
- * @package   Zend_Validator
  */
 class Upload extends AbstractValidator
 {
@@ -137,7 +134,7 @@ class Upload extends AbstractValidator
      * @param  string $value Single file to check for upload errors, when giving null the $_FILES array
      *                       from initialization will be used
      * @param  mixed  $file
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $file = null)
     {
@@ -206,9 +203,9 @@ class Upload extends AbstractValidator
 
         if (count($this->getMessages()) > 0) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     /**

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -72,6 +72,31 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals('string', $this->parameterContainer->offsetGetErrata('1'));
+
+        // test that setting an index applies to correct named parameter
+        $this->parameterContainer[0] = 'Zero';
+        $this->parameterContainer[1] = 'One';
+        $this->assertEquals(
+            array('foo' => 'Zero', 'boo' => 'One', '1' => 'book'),
+            $this->parameterContainer->getNamedArray()
+        );
+        $this->assertEquals(
+            array(0 => 'Zero', 1 => 'One', 2 => 'book'),
+            $this->parameterContainer->getPositionalArray()
+        );
+
+        // test no-index applies
+        $this->parameterContainer['buffer'] = 'A buffer Element';
+        $this->parameterContainer[] = 'Second To Last';
+        $this->parameterContainer[] = 'Last';
+        $this->assertEquals(
+            array('foo' => 'Zero', 'boo' => 'One', '1' => 'book', 'buffer' => 'A buffer Element', '4' => 'Second To Last', '5' => 'Last'),
+            $this->parameterContainer->getNamedArray()
+        );
+        $this->assertEquals(
+            array(0 => 'Zero', 1 => 'One', 2 => 'book', 3 => 'A buffer Element', 4 => 'Second To Last', 5 => 'Last'),
+            $this->parameterContainer->getPositionalArray()
+        );
     }
 
     /**
@@ -211,7 +236,7 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test rewind() resets the interators pointer
+     * @testdox unit test: Test rewind() resets the iterators pointer
      * @covers Zend\Db\Adapter\ParameterContainer::rewind
      */
     public function testRewind()

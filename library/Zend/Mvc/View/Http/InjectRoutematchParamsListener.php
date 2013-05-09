@@ -3,31 +3,20 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\View\Http;
 
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Http\Request as HttpRequest;
 use Zend\Console\Request as ConsoleRequest;
+use Zend\EventManager\AbstractListenerAggregate;
+use Zend\EventManager\EventManagerInterface;
+use Zend\Http\Request as HttpRequest;
 use Zend\Mvc\MvcEvent;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage View
- */
-class InjectRoutematchParamsListener implements ListenerAggregateInterface
+class InjectRoutematchParamsListener extends AbstractListenerAggregate
 {
-    /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
     /**
      * Should request params overwrite existing request params?
      *
@@ -36,29 +25,11 @@ class InjectRoutematchParamsListener implements ListenerAggregateInterface
     protected $overwrite = true;
 
     /**
-     * Attach the aggregate to the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach('dispatch', array($this, 'injectParams'), 90);
-    }
-
-    /**
-     * Detach listeners
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
     }
 
     /**
@@ -98,7 +69,7 @@ class InjectRoutematchParamsListener implements ListenerAggregateInterface
     /**
      * Should RouteMatch parameters replace existing Request params?
      *
-     * @param boolean $overwrite
+     * @param  bool $overwrite
      */
     public function setOverwrite($overwrite)
     {
@@ -106,7 +77,7 @@ class InjectRoutematchParamsListener implements ListenerAggregateInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getOverwrite()
     {

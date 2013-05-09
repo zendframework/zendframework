@@ -3,19 +3,19 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\View\Http;
 
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface as Events;
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\View\Model\ClearableModelInterface;
 use Zend\View\Model\ModelInterface as ViewModel;
 
-class InjectViewModelListener implements ListenerAggregateInterface
+class InjectViewModelListener extends AbstractListenerAggregate
 {
     /**
      * FilterInterface/inflector used to normalize names for use as template identifiers
@@ -25,37 +25,13 @@ class InjectViewModelListener implements ListenerAggregateInterface
     protected $inflector;
 
     /**
-     * Listeners we've registered
-     *
-     * @var array
-     */
-    protected $listeners = array();
-
-    /**
-     * Attach listeners
-     *
-     * @param  Events $events
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(Events $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'injectViewModel'), -100);
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'injectViewModel'), -100);
-    }
-
-    /**
-     * Detach listeners
-     *
-     * @param  Events $events
-     * @return void
-     */
-    public function detach(Events $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER_ERROR, array($this, 'injectViewModel'), -100);
     }
 
     /**
@@ -80,6 +56,10 @@ class InjectViewModelListener implements ListenerAggregateInterface
         if ($result->terminate()) {
             $e->setViewModel($result);
             return;
+        }
+
+        if ($e->getError() && $model instanceof ClearableModelInterface) {
+            $model->clearChildren();
         }
 
         $model->addChild($result);

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Storage;
@@ -15,11 +14,6 @@ use Zend\Mail\Headers;
 use Zend\Mail\Header\HeaderInterface;
 use Zend\Mime;
 
-/**
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Storage
- */
 class Part implements RecursiveIterator, Part\PartInterface
 {
     /**
@@ -198,7 +192,7 @@ class Part implements RecursiveIterator, Part\PartInterface
         }
         $counter = 1;
         foreach ($parts as $part) {
-            $this->parts[$counter++] = new self(array('headers' => $part['header'], 'content' => $part['body']));
+            $this->parts[$counter++] = new static(array('headers' => $part['header'], 'content' => $part['body']));
         }
     }
 
@@ -380,7 +374,7 @@ class Part implements RecursiveIterator, Part\PartInterface
      * @see Part::hasHeader
      *
      * @param  string
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
  */
 
 namespace Zend\Json\Server;
@@ -14,11 +13,7 @@ use Zend\Server\Cache as ServerCache;
 use Zend\Stdlib\ErrorHandler;
 
 /**
- * Zend_Json_Server_Cache: cache Zend_Json_Server server definition and SMD
- *
- * @category   Zend
- * @package    Zend_Json
- * @subpackage Server
+ * Zend\Json\Server\Cache: cache Zend\Json\Server\Server server definition and SMD
  */
 class Cache extends ServerCache
 {
@@ -29,7 +24,7 @@ class Cache extends ServerCache
      *
      * @param  string $filename
      * @param  \Zend\Json\Server\Server $server
-     * @return boolean
+     * @return bool
      */
     public static function saveSmd($filename, Server $server)
     {

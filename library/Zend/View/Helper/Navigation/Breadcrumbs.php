@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper\Navigation;
@@ -17,19 +16,15 @@ use Zend\View\Exception;
 
 /**
  * Helper for printing breadcrumbs
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
  */
 class Breadcrumbs extends AbstractHelper
 {
     /**
-     * Breadcrumbs separator string
+     * Whether last page in breadcrumb should be hyperlinked
      *
-     * @var string
+     * @var bool
      */
-    protected $separator = ' &gt; ';
+    protected $linkLast = false;
 
     /**
      * The minimum depth a page must have to be included when rendering
@@ -39,18 +34,18 @@ class Breadcrumbs extends AbstractHelper
     protected $minDepth = 1;
 
     /**
-     * Whether last page in breadcrumb should be hyperlinked
-     *
-     * @var bool
-     */
-    protected $linkLast = false;
-
-    /**
      * Partial view script to use for rendering menu
      *
      * @var string|array
      */
     protected $partial;
+
+    /**
+     * Breadcrumbs separator string
+     *
+     * @var string
+     */
+    protected $separator = ' &gt; ';
 
     /**
      * Helper entry point
@@ -68,90 +63,31 @@ class Breadcrumbs extends AbstractHelper
     }
 
     /**
-     * Sets breadcrumb separator
+     * Renders helper
      *
-     * @param  string $separator separator string
-     * @return Breadcrumbs fluent interface, returns self
+     * Implements {@link HelperInterface::render()}.
+     *
+     * @param  AbstractContainer $container [optional] container to render. Default is
+     *                                      to render the container registered in the helper.
+     * @return string
      */
-    public function setSeparator($separator)
+    public function render($container = null)
     {
-        if (is_string($separator)) {
-            $this->separator = $separator;
+        $partial = $this->getPartial();
+        if ($partial) {
+            return $this->renderPartial($container, $partial);
         }
 
-        return $this;
+        return $this->renderStraight($container);
     }
-
-    /**
-     * Returns breadcrumb separator
-     *
-     * @return string  breadcrumb separator
-     */
-    public function getSeparator()
-    {
-        return $this->separator;
-    }
-
-    /**
-     * Sets whether last page in breadcrumbs should be hyperlinked
-     *
-     * @param  bool $linkLast whether last page should be hyperlinked
-     * @return Breadcrumbs fluent interface, returns self
-     */
-    public function setLinkLast($linkLast)
-    {
-        $this->linkLast = (bool) $linkLast;
-        return $this;
-    }
-
-    /**
-     * Returns whether last page in breadcrumbs should be hyperlinked
-     *
-     * @return bool  whether last page in breadcrumbs should be hyperlinked
-     */
-    public function getLinkLast()
-    {
-        return $this->linkLast;
-    }
-
-    /**
-     * Sets which partial view script to use for rendering menu
-     *
-     * @param  string|array $partial partial view script or null. If an array is
-     *                               given, it is expected to contain two
-     *                               values; the partial view script to use,
-     *                               and the module where the script can be
-     *                               found.
-     * @return Breadcrumbs fluent interface, returns self
-     */
-    public function setPartial($partial)
-    {
-        if (null === $partial || is_string($partial) || is_array($partial)) {
-            $this->partial = $partial;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Returns partial view script to use for rendering menu
-     *
-     * @return string|array|null
-     */
-    public function getPartial()
-    {
-        return $this->partial;
-    }
-
-    // Render methods:
 
     /**
      * Renders breadcrumbs by chaining 'a' elements with the separator
      * registered in the helper
      *
      * @param  AbstractContainer $container [optional] container to render. Default is
-     *                              to render the container registered in the helper.
-     * @return string               helper output
+     *                                      to render the container registered in the helper.
+     * @return string
      */
     public function renderStraight($container = null)
     {
@@ -184,8 +120,8 @@ class Breadcrumbs extends AbstractHelper
             if ($parent instanceof AbstractPage) {
                 // prepend crumb to html
                 $html = $this->htmlify($parent)
-                      . $this->getSeparator()
-                      . $html;
+                    . $this->getSeparator()
+                    . $html;
             }
 
             if ($parent === $container) {
@@ -214,9 +150,9 @@ class Breadcrumbs extends AbstractHelper
      *                               is expected to contain two values; the
      *                               partial view script to use, and the module
      *                               where the script can be found.
-     * @return string               helper output
      * @throws Exception\RuntimeException if no partial provided
      * @throws Exception\InvalidArgumentException if partial is invalid array
+     * @return string               helper output
      */
     public function renderPartial($container = null, $partial = null)
     {
@@ -262,8 +198,8 @@ class Breadcrumbs extends AbstractHelper
             if (count($partial) != 2) {
                 throw new Exception\InvalidArgumentException(
                     'Unable to render menu: A view partial supplied as '
-                    .  'an array must contain two values: partial view '
-                    .  'script and module where script can be found'
+                        .  'an array must contain two values: partial view '
+                        .  'script and module where script can be found'
                 );
             }
 
@@ -275,24 +211,79 @@ class Breadcrumbs extends AbstractHelper
         return $partialHelper($partial, $model);
     }
 
-    // Zend\View\Helper\Navigation\Helper:
+    /**
+     * Sets whether last page in breadcrumbs should be hyperlinked
+     *
+     * @param  bool $linkLast whether last page should be hyperlinked
+     * @return Breadcrumbs
+     */
+    public function setLinkLast($linkLast)
+    {
+        $this->linkLast = (bool) $linkLast;
+        return $this;
+    }
 
     /**
-     * Renders helper
+     * Returns whether last page in breadcrumbs should be hyperlinked
      *
-     * Implements {@link HelperInterface::render()}.
-     *
-     * @param  AbstractContainer $container [optional] container to render. Default is
-     *                              to render the container registered in the helper.
-     * @return string               helper output
+     * @return bool
      */
-    public function render($container = null)
+    public function getLinkLast()
     {
-        $partial = $this->getPartial();
-        if ($partial) {
-            return $this->renderPartial($container, $partial);
-        } else {
-            return $this->renderStraight($container);
+        return $this->linkLast;
+    }
+
+    /**
+     * Sets which partial view script to use for rendering menu
+     *
+     * @param  string|array $partial partial view script or null. If an array is
+     *                               given, it is expected to contain two
+     *                               values; the partial view script to use,
+     *                               and the module where the script can be
+     *                               found.
+     * @return Breadcrumbs
+     */
+    public function setPartial($partial)
+    {
+        if (null === $partial || is_string($partial) || is_array($partial)) {
+            $this->partial = $partial;
         }
+
+        return $this;
+    }
+
+    /**
+     * Returns partial view script to use for rendering menu
+     *
+     * @return string|array|null
+     */
+    public function getPartial()
+    {
+        return $this->partial;
+    }
+
+    /**
+     * Sets breadcrumb separator
+     *
+     * @param  string $separator separator string
+     * @return Breadcrumbs
+     */
+    public function setSeparator($separator)
+    {
+        if (is_string($separator)) {
+            $this->separator = $separator;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns breadcrumb separator
+     *
+     * @return string  breadcrumb separator
+     */
+    public function getSeparator()
+    {
+        return $this->separator;
     }
 }

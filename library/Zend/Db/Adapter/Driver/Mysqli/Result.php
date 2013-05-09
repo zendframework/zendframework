@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
@@ -14,11 +13,6 @@ use Iterator;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Adapter\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- */
 class Result implements
     Iterator,
     ResultInterface
@@ -141,7 +135,7 @@ class Result implements
     /**
      * Is query result?
      *
-     * @return boolean
+     * @return bool
      */
     public function isQueryResult()
     {
@@ -151,15 +145,15 @@ class Result implements
     /**
      * Get affected rows
      *
-     * @return integer
+     * @return int
      */
     public function getAffectedRows()
     {
         if ($this->resource instanceof \mysqli || $this->resource instanceof \mysqli_stmt) {
             return $this->resource->affected_rows;
-        } else {
-            return $this->resource->num_rows;
         }
+
+        return $this->resource->num_rows;
     }
 
     /**
@@ -220,7 +214,7 @@ class Result implements
         }
 
         // dereference
-        for ($i = 0; $i < count($this->statementBindValues['keys']); $i++) {
+        for ($i = 0, $count = count($this->statementBindValues['keys']); $i < $count; $i++) {
             $this->currentData[$this->statementBindValues['keys'][$i]] = $this->statementBindValues['values'][$i];
         }
         $this->currentComplete = true;
@@ -232,7 +226,7 @@ class Result implements
     /**
      * Load from mysqli result
      *
-     * @return boolean
+     * @return bool
      */
     protected function loadFromMysqliResult()
     {
@@ -297,7 +291,7 @@ class Result implements
     /**
      * Valid
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {
@@ -307,16 +301,16 @@ class Result implements
 
         if ($this->resource instanceof \mysqli_stmt) {
             return $this->loadDataFromMysqliStatement();
-        } else {
-            return $this->loadFromMysqliResult();
         }
+
+        return $this->loadFromMysqliResult();
     }
 
     /**
      * Count
      *
      * @throws Exception\RuntimeException
-     * @return integer
+     * @return int
      */
     public function count()
     {
@@ -329,7 +323,7 @@ class Result implements
     /**
      * Get field count
      *
-     * @return integer
+     * @return int
      */
     public function getFieldCount()
     {
@@ -345,5 +339,4 @@ class Result implements
     {
         return $this->generatedValue;
     }
-
 }

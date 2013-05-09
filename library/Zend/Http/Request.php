@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http;
@@ -19,8 +18,6 @@ use Zend\Uri\Http as HttpUri;
 /**
  * HTTP Request
  *
- * @category  Zend
- * @package   Zend_Http
  * @link      http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5
  */
 class Request extends AbstractMessage implements RequestInterface
@@ -37,6 +34,7 @@ class Request extends AbstractMessage implements RequestInterface
     const METHOD_TRACE   = 'TRACE';
     const METHOD_CONNECT = 'CONNECT';
     const METHOD_PATCH   = 'PATCH';
+    const METHOD_PROPFIND= 'PROPFIND';
     /**#@-*/
 
     /**
@@ -371,6 +369,16 @@ class Request extends AbstractMessage implements RequestInterface
     }
 
     /**
+     * Is this a PROPFIND method request?
+     *
+     * @return bool
+     */
+    public function isPropFind()
+    {
+        return ($this->method === self::METHOD_PROPFIND);
+    }
+
+    /**
      * Is this a GET method request?
      *
      * @return bool
@@ -455,7 +463,7 @@ class Request extends AbstractMessage implements RequestInterface
      *
      * Should work with Prototype/Script.aculo.us, possibly others.
      *
-     * @return boolean
+     * @return bool
      */
     public function isXmlHttpRequest()
     {
@@ -466,7 +474,7 @@ class Request extends AbstractMessage implements RequestInterface
     /**
      * Is this a Flash request?
      *
-     * @return boolean
+     * @return bool
      */
     public function isFlashRequest()
     {
@@ -490,9 +498,7 @@ class Request extends AbstractMessage implements RequestInterface
     public function toString()
     {
         $str = $this->renderRequestLine() . "\r\n";
-        if ($this->headers) {
-            $str .= $this->headers->toString();
-        }
+        $str .= $this->getHeaders()->toString();
         $str .= "\r\n";
         $str .= $this->getContent();
         return $str;

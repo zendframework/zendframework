@@ -3,23 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Config
  */
 
 namespace Zend\Config\Writer;
 
 use Traversable;
-use Zend\Config\Config;
 use Zend\Config\Exception;
 use Zend\Stdlib\ArrayUtils;
 
-/**
- * @category   Zend
- * @package    Zend_Config
- * @subpackage Writer
- */
 abstract class AbstractWriter implements WriterInterface
 {
     /**
@@ -28,7 +21,7 @@ abstract class AbstractWriter implements WriterInterface
      * @see    WriterInterface::toFile()
      * @param  string  $filename
      * @param  mixed   $config
-     * @param  boolean $exclusiveLock
+     * @param  bool $exclusiveLock
      * @return void
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
@@ -52,7 +45,14 @@ abstract class AbstractWriter implements WriterInterface
                 ), $error);
             }, E_WARNING
         );
-        file_put_contents($filename, $this->toString($config), $flags);
+
+        try {
+            file_put_contents($filename, $this->toString($config), $flags);
+        } catch (\Exception $e) {
+            restore_error_handler();
+            throw $e;
+        }
+
         restore_error_handler();
     }
 

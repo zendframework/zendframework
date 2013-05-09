@@ -3,22 +3,19 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ProgressBar
  */
 
 namespace Zend\ProgressBar\Adapter;
 
 use Zend\ProgressBar\Adapter\Exception;
 use Zend\Stdlib\ErrorHandler;
+use Zend\Stdlib\StringUtils;
 
 /**
  * Zend_ProgressBar_Adapter_Console offers a text-based progressbar for console
  * applications
- *
- * @category  Zend
- * @package   Zend_ProgressBar
  */
 class Console extends AbstractAdapter
 {
@@ -60,7 +57,7 @@ class Console extends AbstractAdapter
     /**
      * Width of the progressbar
      *
-     * @var integer
+     * @var int
      */
     protected $width = null;
 
@@ -69,9 +66,11 @@ class Console extends AbstractAdapter
      *
      * @var array
      */
-    protected $elements = array(self::ELEMENT_PERCENT,
-                                 self::ELEMENT_BAR,
-                                 self::ELEMENT_ETA);
+    protected $elements = array(
+        self::ELEMENT_PERCENT,
+        self::ELEMENT_BAR,
+        self::ELEMENT_ETA,
+    );
 
     /**
      * Which action to do at finish call
@@ -83,7 +82,7 @@ class Console extends AbstractAdapter
     /**
      * Width of the bar element
      *
-     * @var integer
+     * @var int
      */
     protected $barWidth;
 
@@ -125,7 +124,7 @@ class Console extends AbstractAdapter
     /**
      * Whether the output started yet or not
      *
-     * @var boolean
+     * @var bool
      */
     protected $outputStarted = false;
 
@@ -207,12 +206,12 @@ class Console extends AbstractAdapter
     /**
      * Set the width of the progressbar
      *
-     * @param  integer $width
+     * @param  int $width
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setWidth($width = null)
     {
-        if ($width === null || !is_integer($width)) {
+        if ($width === null || !is_int($width)) {
             if (substr(PHP_OS, 0, 3) === 'WIN') {
                 // We have to default to 79 on windows, because the windows
                 // terminal always has a fixed width of 80 characters and the
@@ -318,7 +317,7 @@ class Console extends AbstractAdapter
     /**
      * Set the width of the text element
      *
-     * @param  integer $width
+     * @param  int $width
      * @return \Zend\ProgressBar\Adapter\Console
      */
     public function setTextWidth($width)
@@ -368,8 +367,8 @@ class Console extends AbstractAdapter
      * @param  float   $current       Current progress value
      * @param  float   $max           Max progress value
      * @param  float   $percent       Current percent value
-     * @param  integer $timeTaken     Taken time in seconds
-     * @param  integer $timeRemaining Remaining time in seconds
+     * @param  int $timeTaken     Taken time in seconds
+     * @param  int $timeRemaining Remaining time in seconds
      * @param  string  $text          Status text
      * @return void
      */
@@ -438,7 +437,12 @@ class Console extends AbstractAdapter
                     break;
 
                 case self::ELEMENT_TEXT:
-                    $renderedElements[] = \Zend\Text\MultiByte::strPad(substr($text, 0, $this->textWidth), $this->textWidth, ' ', STR_PAD_RIGHT, $this->charset);
+                    $renderedElements[] = StringUtils::getWrapper($this->charset)->strPad(
+                        substr($text, 0, $this->textWidth),
+                        $this->textWidth,
+                        ' ',
+                        STR_PAD_RIGHT
+                    );
                     break;
             }
         }

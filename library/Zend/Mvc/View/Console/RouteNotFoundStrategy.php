@@ -3,43 +3,35 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\View\Console;
 
-use Zend\Mvc\Application;
-use Zend\Mvc\MvcEvent;
+use Zend\Console\Adapter\AdapterInterface as ConsoleAdapter;
+use Zend\Console\ColorInterface;
+use Zend\Console\Response as ConsoleResponse;
+use Zend\Console\Request as ConsoleRequest;
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\ServiceManager\ServiceManager;
-use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Zend\Mvc\Application;
 use Zend\Mvc\Exception\RuntimeException;
-use Zend\Console\Response as ConsoleResponse;
-use Zend\Console\Request as ConsoleRequest;
-use Zend\Console\Adapter\AdapterInterface as ConsoleAdapter;
-use Zend\View\Model\ConsoleModel;
-use Zend\Version\Version;
+use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
+use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ResponseInterface as Response;
+use Zend\Stdlib\StringUtils;
 use Zend\Text\Table;
+use Zend\Version\Version;
+use Zend\View\Model\ConsoleModel;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage View
- */
-class RouteNotFoundStrategy implements ListenerAggregateInterface
+class RouteNotFoundStrategy extends AbstractListenerAggregate
 {
-    /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
     /**
      * Whether or not to display the reason for routing failure
      *
@@ -50,34 +42,16 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
     /**
      * The reason for a not-found condition
      *
-     * @var boolean|string
+     * @var bool|string
      */
     protected $reason = false;
 
     /**
-     * Attach the aggregate to the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'handleRouteNotFoundError'));
-    }
-
-    /**
-     * Detach aggregate listeners from the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
     }
 
     /**
@@ -188,7 +162,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         $banner = $this->getConsoleBanner($console, $mm);
 
         // Get application usage information
-        $usage = $this->getConsoleUsage($console, $scriptName, $mm, $router);
+        $usage = $this->getConsoleUsage($console, $scriptName, $mm);
 
         // Inject the text into view
         $result  = $banner ? rtrim($banner, "\r\n")        : '';
@@ -225,7 +199,14 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                     continue; // this module does not provide a banner
                 }
 
-                $banners[] = $module->getConsoleBanner($console);
+                // Don't render empty completely empty lines
+                $banner = $module->getConsoleBanner($console);
+                if ($banner == '') {
+                    continue;
+                }
+
+                // We colorize each banners in blue for visual emphasis
+                $banners[] = $console->colorize($banner, ColorInterface::BLUE);
             }
         }
 
@@ -271,13 +252,24 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                     continue; // this module does not provide usage info
                 }
 
+                // We prepend the usage by the module name (printed in red), so that each module is
+                // clearly visible by the user
+                $moduleName = sprintf("%s\n%s\n%s\n",
+                    str_repeat('-', $console->getWidth()),
+                    $name,
+                    str_repeat('-', $console->getWidth())
+                );
+
+                $moduleName = $console->colorize($moduleName, ColorInterface::RED);
+
                 $usage = $module->getConsoleUsage($console);
 
                 // Normalize what we got from the module or discard
-                if (is_array($usage)) {
+                if (is_array($usage) && !empty($usage)) {
+                    array_unshift($usage, $moduleName);
                     $usageInfo[$name] = $usage;
-                } elseif (is_string($usage)) {
-                    $usageInfo[$name] = array($usage);
+                } elseif (is_string($usage) && ($usage != '')) {
+                    $usageInfo[$name] = array($moduleName, $usage);
                 }
             }
         }
@@ -326,9 +318,12 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
                         $result .= "\n";
                     }
 
+                    // Colorize the command
+                    $a = $console->colorize($scriptName . ' ' . $a, ColorInterface::GREEN);
+
                     $tableCols = 2;
                     $tableType = 1;
-                    $table[]   = array($scriptName . ' ' . $a, $b);
+                    $table[]   = array($a, $b);
                     continue;
                 }
 
@@ -389,6 +384,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         $result  = '';
         $padding = 2;
 
+
         // If there is only 1 column, just concatenate it
         if ($cols == 1) {
             foreach ($data as $row) {
@@ -397,12 +393,15 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
             return $result;
         }
 
+        // Get the string wrapper supporting UTF-8 character encoding
+        $strWrapper = StringUtils::getWrapper('UTF-8');
+
         // Determine max width for each column
         $maxW = array();
         for ($x = 1; $x <= $cols; $x += 1) {
             $maxW[$x] = 0;
             foreach ($data as $row) {
-                $maxW[$x] = max($maxW[$x], mb_strlen($row[$x-1],'utf-8') + $padding * 2);
+                $maxW[$x] = max($maxW[$x], $strWrapper->strlen($row[$x-1]) + $padding * 2);
             }
         }
 

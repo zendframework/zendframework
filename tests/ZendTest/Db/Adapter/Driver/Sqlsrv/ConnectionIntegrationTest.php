@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
 namespace ZendTest\Db\Adapter\Driver\Sqlsrv;
 
 use Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv;
@@ -158,5 +166,25 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
         $this->markTestIncomplete('Need to create a temporary sequence.');
         $connection = new Connection($this->variables);
         $connection->getLastGeneratedValue();
+    }
+
+    /**
+     * @group zf3469
+     */
+    public function testConnectReturnsConnectionWhenResourceSet()
+    {
+        $resource = sqlsrv_connect(
+            $this->variables['hostname'], array(
+                'UID' => $this->variables['username'],
+                'PWD' => $this->variables['password']
+            )
+        );
+        $connection = new Connection(array());
+        $connection->setResource($resource);
+        $this->assertSame($connection, $connection->connect());
+
+        $connection->disconnect();
+        unset($connection);
+        unset($resource);
     }
 }

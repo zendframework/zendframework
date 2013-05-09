@@ -3,19 +3,15 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Reflection;
 
 use ReflectionFunction;
+use Zend\Code\Reflection\DocBlock\Tag\ReturnTag;
 
-/**
- * @category   Zend
- * @package    Zend_Reflection
- */
 class FunctionReflection extends ReflectionFunction implements ReflectionInterface
 {
     /**
@@ -27,8 +23,12 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     public function getDocBlock()
     {
         if ('' == ($comment = $this->getDocComment())) {
-            throw new Exception\InvalidArgumentException($this->getName() . ' does not have a DocBlock');
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s does not have a DocBlock',
+                $this->getName()
+            ));
         }
+
         $instance = new DocBlockReflection($comment);
 
         return $instance;
@@ -60,19 +60,19 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     public function getContents($includeDocBlock = true)
     {
         return implode("\n",
-                       array_splice(
-                           file($this->getFileName()),
-                           $this->getStartLine($includeDocBlock),
-                           ($this->getEndLine() - $this->getStartLine()),
-                           true
-                       )
+            array_splice(
+                file($this->getFileName()),
+                $this->getStartLine($includeDocBlock),
+                ($this->getEndLine() - $this->getStartLine()),
+                true
+            )
         );
     }
 
     /**
      * Get function parameters
      *
-     * @return ReflectionParameter[]
+     * @return ParameterReflection[]
      */
     public function getParameters()
     {
@@ -84,6 +84,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
             unset($phpReflection);
         }
         unset($phpReflections);
+
         return $zendReflections;
     }
 
@@ -91,17 +92,19 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
      * Get return type tag
      *
      * @throws Exception\InvalidArgumentException
-     * @return DocBlock\Tag\ReturnTag
+     * @return ReturnTag
      */
     public function getReturn()
     {
         $docBlock = $this->getDocBlock();
         if (!$docBlock->hasTag('return')) {
-            throw new Exception\InvalidArgumentException('Function does not specify an @return annotation tag; cannot determine return type');
+            throw new Exception\InvalidArgumentException(
+                'Function does not specify an @return annotation tag; cannot determine return type'
+            );
         }
+
         $tag    = $docBlock->getTag('return');
-        $return = DocBlockReflection::factory('@return ' . $tag->getDescription());
-        return $return;
+        return new DocBlockReflection('@return ' . $tag->getDescription());
     }
 
     public function toString()

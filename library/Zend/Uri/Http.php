@@ -3,18 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Uri
  */
 
 namespace Zend\Uri;
 
 /**
  * HTTP URI handler
- *
- * @category  Zend
- * @package   Zend_Uri
  */
 class Http extends Uri
 {
@@ -37,7 +33,7 @@ class Http extends Uri
     /**
      * @see Uri::$validHostTypes
      */
-    protected $validHostTypes = self::HOST_DNS_OR_IPV4_OR_IPV6;
+    protected $validHostTypes = self::HOST_DNS_OR_IPV4_OR_IPV6_OR_REGNAME;
 
     /**
      * User name as provided in authority of URI
@@ -57,7 +53,7 @@ class Http extends Uri
      * This applies additional HTTP specific validation rules beyond the ones
      * required by the generic URI syntax
      *
-     * @return boolean
+     * @return bool
      * @see    Uri::isValid()
      */
     public function isValid()
@@ -126,8 +122,8 @@ class Http extends Uri
      * default. Users may still enforce allowing other host types.
      *
      * @param  string  $host
-     * @param  integer $allowed
-     * @return boolean
+     * @param  int $allowed
+     * @return bool
      */
     public static function validateHost($host, $allowed = self::HOST_DNS_OR_IPV4_OR_IPV6)
     {
@@ -166,7 +162,7 @@ class Http extends Uri
      *
      * If no port is set, will return the default port according to the scheme
      *
-     * @return integer
+     * @return int
      * @see    Zend\Uri\Uri::getPort()
      */
     public function getPort()

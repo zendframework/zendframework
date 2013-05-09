@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Form
  */
@@ -79,5 +79,25 @@ class Product
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * Return category from index
+     *
+     * @param int $i
+     */
+    public function getCategory($i)
+    {
+        return $this->categories[$i];
+    }
+
+    /**
+     * Required when binding to a form
+     *
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
     }
 }

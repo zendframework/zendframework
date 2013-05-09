@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Stdlib
  */
@@ -32,6 +32,13 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $options->test_field);
     }
 
+    public function testConstructionWithOptions()
+    {
+        $options = new TestOptions(new TestOptions(array('test_field' => 1)));
+
+        $this->assertEquals(1, $options->test_field);
+    }
+
     public function testInvalidFieldThrowsException()
     {
         $this->setExpectedException('BadMethodCallException');
@@ -46,7 +53,6 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
             $this->fail('Nonstrict options should not throw an exception');
         }
     }
-
 
     public function testConstructionWithNull()
     {
@@ -64,5 +70,35 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, isset($options->test_field));
         unset($options->testField);
         $this->assertEquals(false, isset($options->test_field));
+    }
+
+    public function testUnsetThrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $options = new TestOptions;
+        unset($options->foobarField);
+    }
+
+    public function testGetThrowsBadMethodCallException()
+    {
+        $this->setExpectedException('BadMethodCallException');
+        $options = new TestOptions();
+        $options->fieldFoobar;
+    }
+
+    public function testSetFromArrayAcceptsArray()
+    {
+        $array = array('test_field' => 3);
+        $options = new TestOptions();
+
+        $this->assertSame($options, $options->setFromArray($array));
+        $this->assertEquals(3, $options->test_field);
+    }
+
+    public function testSetFromArrayThrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $options = new TestOptions;
+        $options->setFromArray('asd');
     }
 }

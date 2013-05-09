@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Driver\Pdo;
@@ -13,19 +12,20 @@ namespace Zend\Db\Adapter\Driver\Pdo;
 use Zend\Db\Adapter\Driver\StatementInterface;
 use Zend\Db\Adapter\Exception;
 use Zend\Db\Adapter\ParameterContainer;
+use Zend\Db\Adapter\Profiler;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- */
-class Statement implements StatementInterface
+class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 {
 
     /**
      * @var \PDO
      */
     protected $pdo = null;
+
+    /**
+     * @var Profiler\ProfilerInterface
+     */
+    protected $profiler = null;
 
     /**
      * @var Pdo
@@ -40,7 +40,7 @@ class Statement implements StatementInterface
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $isQuery = null;
 
@@ -62,7 +62,7 @@ class Statement implements StatementInterface
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $isPrepared = false;
 
@@ -76,6 +76,24 @@ class Statement implements StatementInterface
     {
         $this->driver = $driver;
         return $this;
+    }
+
+    /**
+     * @param Profiler\ProfilerInterface $profiler
+     * @return Statement
+     */
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    {
+        $this->profiler = $profiler;
+        return $this;
+    }
+
+    /**
+     * @return null|Profiler\ProfilerInterface
+     */
+    public function getProfiler()
+    {
+        return $this->profiler;
     }
 
     /**
@@ -214,10 +232,21 @@ class Statement implements StatementInterface
         }
         /** END Standard ParameterContainer Merging Block */
 
+        if ($this->profiler) {
+            $this->profiler->profilerStart($this);
+        }
+
         try {
             $this->resource->execute();
         } catch (\PDOException $e) {
+            if ($this->profiler) {
+                $this->profiler->profilerFinish();
+            }
             throw new Exception\InvalidQueryException('Statement could not be executed', null, $e);
+        }
+
+        if ($this->profiler) {
+            $this->profiler->profilerFinish();
         }
 
         $result = $this->driver->createResult($this->resource, $this);
@@ -274,5 +303,4 @@ class Statement implements StatementInterface
         }
 
     }
-
 }

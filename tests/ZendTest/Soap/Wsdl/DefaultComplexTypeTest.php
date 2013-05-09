@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Soap
  */
@@ -12,6 +12,10 @@ namespace ZendTest\Soap\Wsdl;
 
 use Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType;
 use Zend\Soap\Wsdl;
+use ZendTest\Soap\TestAsset\PublicPrivateProtected;
+use ZendTest\Soap\WsdlTestHelper;
+
+require_once __DIR__ . '/../TestAsset/commontypes.php';
 
 /**
  * @category   Zend
@@ -20,24 +24,18 @@ use Zend\Soap\Wsdl;
  * @group      Zend_Soap
  * @group      Zend_Soap_Wsdl
  */
-class DefaultComplexTypeTest extends \PHPUnit_Framework_TestCase
+class DefaultComplexTypeTest extends WsdlTestHelper
 {
     /**
-     * @var Zend_Soap_Wsdl
+     * @var DefaultComplexType
      */
-    private $wsdl;
-
-    /**
-     * @var Zend_Soap_Wsdl_Strategy_DefaultComplexType
-     */
-    private $strategy;
+    protected $strategy;
 
     public function setUp()
     {
         $this->strategy = new DefaultComplexType();
-        $this->wsdl = new Wsdl("TestService", "http://framework.zend.com/soap/unittests");
-        $this->wsdl->setComplexTypeStrategy($this->strategy);
-        $this->strategy->setContext($this->wsdl);
+
+        parent::setUp();
     }
 
     /**
@@ -45,31 +43,14 @@ class DefaultComplexTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnlyPublicPropertiesAreDiscoveredByStrategy()
     {
-        $this->strategy->addComplexType('\ZendTest\Soap\Wsdl\PublicPrivateProtected');
+        $this->strategy->addComplexType('ZendTest\Soap\TestAsset\PublicPrivateProtected');
 
-        $xml = $this->wsdl->toXML();
-        $this->assertNotContains( PublicPrivateProtected::PROTECTED_VAR_NAME, $xml);
-        $this->assertNotContains( PublicPrivateProtected::PRIVATE_VAR_NAME, $xml);
+        $nodes = $this->xpath->query('//xsd:element[@name="'.(PublicPrivateProtected::PROTECTED_VAR_NAME).'"]');
+        $this->assertEquals(0, $nodes->length, 'Document should not contain protected fields');
+
+        $nodes = $this->xpath->query('//xsd:element[@name="'.(PublicPrivateProtected::PRIVATE_VAR_NAME).'"]');
+        $this->assertEquals(0, $nodes->length, 'Document should not contain private fields');
+
+        $this->testDocumentNodes();
     }
-}
-
-class PublicPrivateProtected
-{
-    const PROTECTED_VAR_NAME = 'bar';
-    const PRIVATE_VAR_NAME = 'baz';
-
-    /**
-     * @var string
-     */
-    public $foo;
-
-    /**
-     * @var string
-     */
-    protected $bar;
-
-    /**
-     * @var string
-     */
-    private $baz;
 }

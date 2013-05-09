@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Controller\Plugin;
@@ -17,15 +16,11 @@ use Zend\Mvc\MvcEvent;
 
 /**
  * @todo       allow specifying status code as a default, or as an option to methods
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage Controller
  */
 class Redirect extends AbstractPlugin
 {
     protected $event;
     protected $response;
-    protected $router;
 
     /**
      * Generates a URL based on a route
@@ -38,7 +33,7 @@ class Redirect extends AbstractPlugin
      * @throws Exception\DomainException if composed controller does not implement InjectApplicationEventInterface, or
      *         router cannot be found in controller event
      */
-    public function toRoute($route = null, array $params = array(), $options = array(), $reuseMatchedParams = false)
+    public function toRoute($route = null, $params = array(), $options = array(), $reuseMatchedParams = false)
     {
         $controller = $this->getController();
         if (!$controller || !method_exists($controller, 'plugin')) {
@@ -68,6 +63,16 @@ class Redirect extends AbstractPlugin
         $response->getHeaders()->addHeaderLine('Location', $url);
         $response->setStatusCode(302);
         return $response;
+    }
+
+    /**
+     * Refresh to current route
+     *
+     * @return Response
+     */
+    public function refresh()
+    {
+        return $this->toRoute(null, array(), array(), true);
     }
 
     /**

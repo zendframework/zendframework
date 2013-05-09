@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Log
  */
 
 namespace Zend\Log\Formatter;
@@ -13,11 +12,6 @@ namespace Zend\Log\Formatter;
 use DateTime;
 use Traversable;
 
-/**
- * @category   Zend
- * @package    Zend_Log
- * @subpackage Formatter
- */
 class Base implements FormatterInterface
 {
     /**
@@ -32,10 +26,18 @@ class Base implements FormatterInterface
      * Class constructor
      *
      * @see http://php.net/manual/en/function.date.php
-     * @param null|string $dateTimeFormat Format for DateTime objects
+     * @param null|string|array|Traversable $dateTimeFormat Format for DateTime objects
      */
     public function __construct($dateTimeFormat = null)
     {
+        if ($dateTimeFormat instanceof Traversable) {
+            $dateTimeFormat = iterator_to_array($dateTimeFormat);
+        }
+
+        if (is_array($dateTimeFormat)) {
+            $dateTimeFormat = isset($dateTimeFormat['dateTimeFormat'])? $dateTimeFormat['dateTimeFormat'] : null;
+        }
+
         if (null !== $dateTimeFormat) {
             $this->dateTimeFormat = $dateTimeFormat;
         }
@@ -83,7 +85,7 @@ class Base implements FormatterInterface
                 $value[$key] = $this->normalize($subvalue);
             }
             $value = json_encode($value);
-        } elseif (is_object($value) && !method_exists($value,'__toString')) {
+        } elseif (is_object($value) && !method_exists($value, '__toString')) {
             $value = sprintf('object(%s) %s', get_class($value), json_encode($value));
         } elseif (is_resource($value)) {
             $value = sprintf('resource(%s)', get_resource_type($value));

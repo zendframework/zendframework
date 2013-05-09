@@ -3,17 +3,12 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator\Barcode;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
 abstract class AbstractAdapter implements AdapterInterface
 {
     /**
@@ -31,7 +26,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * Checks the length of a barcode
      *
      * @param  string $value The barcode to check for proper length
-     * @return boolean
+     * @return bool
      */
     public function hasValidLength($value)
     {
@@ -71,7 +66,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * Checks for allowed characters within the barcode
      *
      * @param  string $value The barcode to check for allowed characters
-     * @return boolean
+     * @return bool
      */
     public function hasValidCharacters($value)
     {
@@ -102,7 +97,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * Validates the checksum
      *
      * @param  string $value The barcode to check the checksum for
-     * @return boolean
+     * @return bool
      */
     public function hasValidChecksum($value)
     {
@@ -129,7 +124,7 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Returns the allowed characters
      *
-     * @return integer|string|array
+     * @return int|string|array
      */
     public function getCharacters()
     {
@@ -160,8 +155,8 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Sets the checksum validation, if no value is given, the actual setting is returned
      *
-     * @param  boolean $check
-     * @return AbstractAdapter|boolean
+     * @param  bool $check
+     * @return AbstractAdapter|bool
      */
     public function useChecksum($check = null)
     {
@@ -169,7 +164,7 @@ abstract class AbstractAdapter implements AdapterInterface
             return $this->options['useChecksum'];
         }
 
-        $this->options['useChecksum'] = (boolean) $check;
+        $this->options['useChecksum'] = (bool) $check;
         return $this;
     }
 
@@ -188,7 +183,7 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Sets the allowed characters of this barcode
      *
-     * @param integer $characters
+     * @param int $characters
      * @return AbstractAdapter
      */
     protected function setCharacters($characters)
@@ -202,7 +197,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * GTIN implementation factor 3
      *
      * @param  string $value The barcode to validate
-     * @return boolean
+     * @return bool
      */
     protected function gtin($value)
     {
@@ -232,7 +227,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * IDENTCODE implementation factors 9 and 4
      *
      * @param  string $value The barcode to validate
-     * @return boolean
+     * @return bool
      */
     protected function identcode($value)
     {
@@ -262,7 +257,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * CODE25 implementation factor 3
      *
      * @param  string $value The barcode to validate
-     * @return boolean
+     * @return bool
      */
     protected function code25($value)
     {
@@ -292,7 +287,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * POSTNET implementation
      *
      * @param  string $value The barcode to validate
-     * @return boolean
+     * @return bool
      */
     protected function postnet($value)
     {

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Escaper
  */
 
 namespace Zend\Escaper;
@@ -14,8 +13,6 @@ use Zend\Escaper\Exception;
 
 /**
  * Context specific methods for use in secure output escaping
- *
- * @package    Zend_Escaper
  */
 class Escaper
 {
@@ -52,7 +49,7 @@ class Escaper
      *
      * @var string
      */
-    protected $htmlSpecialCharsFlags = \ENT_QUOTES;
+    protected $htmlSpecialCharsFlags = ENT_QUOTES;
 
     /**
      * Static Matcher which escapes characters for HTML Attribute contexts
@@ -106,14 +103,14 @@ class Escaper
             $encoding = (string) $encoding;
             if ($encoding === '') {
                 throw new Exception\InvalidArgumentException(
-                    get_called_class() . ' constructor parameter does not allow a blank value'
+                    get_class($this) . ' constructor parameter does not allow a blank value'
                 );
             }
 
             $encoding = strtolower($encoding);
             if (!in_array($encoding, $this->supportedEncodings)) {
                 throw new Exception\InvalidArgumentException(
-                    'Value of \'' . $encoding . '\' passed to ' . get_called_class()
+                    'Value of \'' . $encoding . '\' passed to ' . get_class($this)
                     . ' constructor parameter is invalid. Provide an encoding supported by htmlspecialchars()'
                 );
             }
@@ -122,7 +119,7 @@ class Escaper
         }
 
         if (defined('ENT_SUBSTITUTE')) {
-            $this->htmlSpecialCharsFlags|= \ENT_SUBSTITUTE;
+            $this->htmlSpecialCharsFlags|= ENT_SUBSTITUTE;
         }
 
         // set matcher callbacks
@@ -379,7 +376,7 @@ class Escaper
             $result = mb_convert_encoding($string, $to, $from);
         } else {
             throw new Exception\RuntimeException(
-                get_called_class()
+                get_class($this)
                 . ' requires either the iconv or mbstring extension to be installed'
                 . ' when escaping for non UTF-8 strings.'
             );

@@ -14,14 +14,26 @@
     "target-dir": "Zend/Mvc",
     "require": {
         "php": ">=5.3.3",
+        "zendframework/zend-config": "self.version",
         "zendframework/zend-console": "self.version",
         "zendframework/zend-di": "self.version",
         "zendframework/zend-eventmanager": "self.version",
+        "zendframework/zend-form": "self.version",
         "zendframework/zend-modulemanager": "self.version",
         "zendframework/zend-http": "self.version",
         "zendframework/zend-uri": "self.version",
         "zendframework/zend-servicemanager": "self.version",
         "zendframework/zend-stdlib": "self.version",
+        "zendframework/zend-text": "self.version",
         "zendframework/zend-view": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-i18n": "Zend\\I18n component for translatable segments"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev",
+            "dev-develop": "2.3-dev"
+        }
     }
 }

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql;
@@ -121,7 +120,15 @@ class Expression implements ExpressionInterface
         $parameters = (is_scalar($this->parameters)) ? array($this->parameters) : $this->parameters;
 
         $types = array();
-        for ($i = 0; $i < count($parameters); $i++) {
+        $parametersCount = count($parameters);
+
+        if ($parametersCount == 0 && strpos($this->expression, self::PLACEHOLDER) !== false) {
+            // if there are no parameters, but there is a placeholder
+            $parametersCount = substr_count($this->expression, self::PLACEHOLDER);
+            $parameters = array_fill(0, $parametersCount, null);
+        }
+
+        for ($i = 0; $i < $parametersCount; $i++) {
             $types[$i] = (isset($this->types[$i]) && ($this->types[$i] == self::TYPE_IDENTIFIER || $this->types[$i] == self::TYPE_LITERAL))
                 ? $this->types[$i] : self::TYPE_VALUE;
         }
@@ -129,10 +136,10 @@ class Expression implements ExpressionInterface
         // assign locally, escaping % signs
         $expression = str_replace('%', '%%', $this->expression);
 
-        if (count($parameters) > 0) {
+        if ($parametersCount > 0) {
             $count = 0;
             $expression = str_replace(self::PLACEHOLDER, '%s', $expression, $count);
-            if ($count !== count($parameters)) {
+            if ($count !== $parametersCount) {
                 throw new Exception\RuntimeException('The number of replacements in the expression does not match the number of parameters');
             }
         }
@@ -143,5 +150,4 @@ class Expression implements ExpressionInterface
             $types
         ));
     }
-
 }

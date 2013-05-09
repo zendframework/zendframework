@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Navigation
  */
 
 namespace Zend\Navigation;
@@ -20,9 +19,6 @@ use Zend\Stdlib\ErrorHandler;
  * Zend_Navigation_Container
  *
  * AbstractContainer class for Zend\Navigation\Page classes.
- *
- * @category  Zend
- * @package   Zend_Navigation
  */
 abstract class AbstractContainer implements Countable, RecursiveIterator
 {
@@ -163,6 +159,9 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
         }
 
         foreach ($pages as $page) {
+            if (null === $page) {
+                continue;
+            }
             $this->addPage($page);
         }
 
@@ -326,9 +325,9 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
     {
         if ($all) {
             return $this->findAllBy($property, $value);
-        } else {
-            return $this->findOneBy($property, $value);
         }
+
+        return $this->findOneBy($property, $value);
     }
 
     /**
@@ -354,7 +353,7 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
         if (!$result) {
             throw new Exception\BadMethodCallException(sprintf(
                 'Bad method call: Unknown method %s::%s',
-                get_called_class(),
+                get_class($this),
                 $method
             ), 0, $error);
         }

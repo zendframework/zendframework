@@ -3,18 +3,12 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Console
  */
 
 namespace Zend\Console\Prompt;
 
-/**
- * @category   Zend
- * @package    Zend_Console
- * @subpackage Prompt
- */
 class Char extends AbstractPrompt
 {
     /**
@@ -45,33 +39,25 @@ class Char extends AbstractPrompt
     /**
      * Ask the user for a single key stroke
      *
-     * @param string  $promptText     The prompt text to display in console
-     * @param string  $allowedChars   A list of allowed chars (i.e. "abc12345")
-     * @param bool    $ignoreCase     If true, case will be ignored and prompt will always return lower-cased response
-     * @param bool    $allowEmpty     Is empty response allowed?
-     * @param bool    $echo           Display the selection after user presses key
+     * @param string $promptText   The prompt text to display in console
+     * @param string $allowedChars A list of allowed chars (i.e. "abc12345")
+     * @param bool   $ignoreCase   If true, case will be ignored and prompt will always return lower-cased response
+     * @param bool   $allowEmpty   Is empty response allowed?
+     * @param bool   $echo         Display the selection after user presses key
      */
     public function __construct(
         $promptText = 'Please hit a key',
-        $allowedChars = 'abc',
+        $allowedChars = '0123456789abcdefghijklmnopqrstuvwxyz',
         $ignoreCase = true,
         $allowEmpty = false,
         $echo = true
     ) {
 
-        if ($promptText !== null) {
-            $this->setPromptText($promptText);
-        }
+        $this->setPromptText($promptText);
+        $this->setAllowEmpty($allowEmpty);
+        $this->setIgnoreCase($ignoreCase);
 
-        if ($allowEmpty !== null) {
-            $this->setAllowEmpty($allowEmpty);
-        }
-
-        if ($ignoreCase !== null) {
-            $this->setIgnoreCase($ignoreCase);
-        }
-
-        if ($allowedChars !== null) {
+        if (null != $allowedChars) {
             if ($this->ignoreCase) {
                 $this->setAllowedChars(strtolower($allowedChars));
             } else {
@@ -79,9 +65,7 @@ class Char extends AbstractPrompt
             }
         }
 
-        if ($echo !== null) {
-            $this->setEcho($echo);
-        }
+        $this->setEcho($echo);
     }
 
     /**
@@ -105,47 +89,32 @@ class Char extends AbstractPrompt
             $mask = implode("", $mask);   // convert back to string
         }
 
-        do {
-            /**
-             * Read char from console
-             */
-            $char = $this->getConsole()->readChar($mask);
+        /**
+         * Read char from console
+         */
+        $char = $this->getConsole()->readChar($mask);
 
-            /**
-             * Lowercase the response if case is irrelevant
-             */
-            if ($this->ignoreCase) {
-                $char = strtolower($char);
+        if ($this->echo) {
+            echo trim($char)."\n";
+        } else {
+            if ($this->promptText) {
+                echo "\n";  // skip to next line but only if we had any prompt text
             }
-
-            /**
-             * Check if it is an allowed char
-             */
-            if (stristr($this->allowedChars, $char) !== false) {
-                if ($this->echo) {
-                    echo trim($char)."\n";
-                } else {
-                    if ($this->promptText) {
-                        echo "\n";  // skip to next line but only if we had any prompt text
-                    }
-                }
-                break;
-            }
-        } while (true);
+        }
 
         return $this->lastResponse = $char;
     }
 
     /**
-     * @param boolean $allowEmpty
+     * @param bool $allowEmpty
      */
     public function setAllowEmpty($allowEmpty)
     {
-        $this->allowEmpty = $allowEmpty;
+        $this->allowEmpty = (bool) $allowEmpty;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getAllowEmpty()
     {
@@ -185,15 +154,15 @@ class Char extends AbstractPrompt
     }
 
     /**
-     * @param boolean $ignoreCase
+     * @param bool $ignoreCase
      */
     public function setIgnoreCase($ignoreCase)
     {
-        $this->ignoreCase = $ignoreCase;
+        $this->ignoreCase = (bool) $ignoreCase;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIgnoreCase()
     {
@@ -201,19 +170,18 @@ class Char extends AbstractPrompt
     }
 
     /**
-     * @param boolean $echo
+     * @param bool $echo
      */
     public function setEcho($echo)
     {
-        $this->echo = $echo;
+        $this->echo = (bool) $echo;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getEcho()
     {
         return $this->echo;
     }
-
 }

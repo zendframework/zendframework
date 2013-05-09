@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Session
  */
@@ -73,7 +73,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function testManagerUsesSessionStorageByDefault()
     {
         $storage = $this->manager->getStorage();
-        $this->assertTrue($storage instanceof Session\Storage\SessionStorage);
+        $this->assertTrue($storage instanceof Session\Storage\SessionArrayStorage);
     }
 
     public function testCanPassStorageToConstructor()
@@ -151,6 +151,18 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $id2 = session_id();
         $this->assertTrue($this->manager->sessionExists());
         $this->assertEquals($id1, $id2);
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testStorageContentIsPreservedByWriteCloseOperation()
+    {
+        $this->manager->start();
+        $storage = $this->manager->getStorage();
+        $storage['foo'] = 'bar';
+        $this->manager->writeClose();
+        $this->assertTrue(isset($storage['foo']) && $storage['foo'] == 'bar');
     }
 
     /**
@@ -357,39 +369,13 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testIdShouldBeMutablePriorAfterSessionStarted()
+    public function testIdShouldNotBeMutableAfterSessionStarted()
     {
+        $this->setExpectedException('RuntimeException',
+            'Session has already been started, to change the session ID call regenerateId()');
         $this->manager->start();
         $origId = $this->manager->getId();
         $this->manager->setId(__METHOD__);
-        $this->assertNotSame($origId, $this->manager->getId());
-        $this->assertSame(__METHOD__, $this->manager->getId());
-        $this->assertSame(__METHOD__, session_id());
-    }
-
-    /**
-     * @runInSeparateProcess
-     */
-    public function testSettingIdAfterSessionStartedShouldSendExpireCookie()
-    {
-        if (!extension_loaded('xdebug')) {
-            $this->markTestSkipped('Xdebug required for this test');
-        }
-
-        $config = $this->manager->getConfig();
-        $config->setUseCookies(true);
-        $this->manager->start();
-        $origId = $this->manager->getId();
-        $this->manager->setId(__METHOD__);
-        $headers = xdebug_get_headers();
-        $found  = false;
-        $sName  = $this->manager->getName();
-        foreach ($headers as $header) {
-            if (stristr($header, 'Set-Cookie:') && stristr($header, $sName)) {
-                $found  = true;
-            }
-        }
-        $this->assertTrue($found, 'No session cookie found: ' . var_export($headers, true));
     }
 
     /**
@@ -525,16 +511,32 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function testStartingSessionThatFailsAValidatorShouldRaiseException()
     {
         $chain = $this->manager->getValidatorChain();
-        $chain->attach('session.validate', array($this, 'validateSession'));
+        $chain->attach('session.validate', array(new TestAsset\TestFailingValidator(), 'isValid'));
         $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'failed');
         $this->manager->start();
     }
 
     /**
-     * @see testStartingSessionThatFailsAValidatorShouldRaiseException()
+     * @runInSeparateProcess
      */
-    public static function validateSession()
+    public function testResumeSessionThatFailsAValidatorShouldRaiseException()
     {
-        return false;
+        $this->manager->setSaveHandler(new TestAsset\TestSaveHandlerWithValidator);
+        $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'failed');
+        $this->manager->start();
     }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testSessionWriteCloseStoresMetadata()
+    {
+        $this->manager->start();
+        $storage = $this->manager->getStorage();
+        $storage->setMetadata('foo', 'bar');
+        $metaData = $storage->getMetadata();
+        $this->manager->writeClose();
+        $this->assertSame($_SESSION['__ZF'], $metaData);
+    }
+
 }

@@ -3,33 +3,22 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\View\Http;
 
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Http\Response as HttpResponse;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\ViewModel;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage View
- */
-class RouteNotFoundStrategy implements ListenerAggregateInterface
+class RouteNotFoundStrategy extends AbstractListenerAggregate
 {
-    /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
     /**
      * Whether or not to display exceptions related to the 404 condition
      *
@@ -59,10 +48,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
     protected $reason = false;
 
     /**
-     * Attach the aggregate to the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
@@ -91,21 +77,6 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
     public function displayExceptions()
     {
         return $this->displayExceptions;
-    }
-
-    /**
-     * Detach aggregate listeners from the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
     }
 
     /**
@@ -222,7 +193,7 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         $model->setTemplate($this->getNotFoundTemplate());
 
         // If displaying reasons, inject the reason
-        $this->injectNotFoundReason($model, $e);
+        $this->injectNotFoundReason($model);
 
         // If displaying exceptions, inject
         $this->injectException($model, $e);
@@ -275,6 +246,8 @@ class RouteNotFoundStrategy implements ListenerAggregateInterface
         if (!$this->displayExceptions()) {
             return;
         }
+
+        $model->setVariable('display_exceptions', true);
 
         $exception = $e->getParam('exception', false);
         if (!$exception instanceof \Exception) {

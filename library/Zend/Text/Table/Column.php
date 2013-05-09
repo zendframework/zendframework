@@ -3,20 +3,17 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Text
  */
 
 namespace Zend\Text\Table;
 
+use Zend\Stdlib\StringUtils;
 use Zend\Text;
 
 /**
  * Column class for Zend\Text\Table\Row
- *
- * @category  Zend
- * @package   Zend_Text_Table
  */
 class Column
 {
@@ -44,7 +41,7 @@ class Column
     /**
      * Colspan of the column
      *
-     * @var integer
+     * @var int
      */
     protected $colSpan = 1;
 
@@ -60,7 +57,7 @@ class Column
      *
      * @param string  $content  The content of the column
      * @param string  $align    The align of the content
-     * @param integer $colSpan  The colspan of the column
+     * @param int $colSpan  The colspan of the column
      * @param string  $charset  The encoding of the content
      */
     public function __construct($content = null, $align = null, $colSpan = null, $charset = null)
@@ -107,7 +104,8 @@ class Column
         if ($inputCharset !== $outputCharset) {
             if (PHP_OS !== 'AIX') {
                 // AIX does not understand these character sets
-                $content = iconv($inputCharset, $outputCharset, $content);
+                $strWrapper = StringUtils::getWrapper($inputCharset, $outputCharset);
+                $content = $strWrapper->convert($content);
             }
 
         }
@@ -156,7 +154,7 @@ class Column
     /**
      * Get the colspan
      *
-     * @return integer
+     * @return int
      */
     public function getColSpan()
     {
@@ -166,8 +164,8 @@ class Column
     /**
      * Render the column width the given column width
      *
-     * @param  integer $columnWidth The width of the column
-     * @param  integer $padding     The padding for the column
+     * @param  int $columnWidth The width of the column
+     * @param  int $padding     The padding for the column
      * @throws Exception\InvalidArgumentException When $columnWidth is lower than 1
      * @throws Exception\OutOfBoundsException When padding is greater than columnWidth
      * @return string
@@ -203,12 +201,13 @@ class Column
         }
 
         $outputCharset = Table::getOutputCharset();
-        $lines         = explode("\n", Text\MultiByte::wordWrap($this->content, $columnWidth, "\n", true, $outputCharset));
+        $strWrapper    = StringUtils::getWrapper($outputCharset);
+        $lines         = explode("\n", $strWrapper->wordWrap($this->content, $columnWidth, "\n", true));
         $paddedLines   = array();
 
-        foreach ($lines AS $line) {
+        foreach ($lines as $line) {
             $paddedLines[] = str_repeat(' ', $padding)
-                           . Text\MultiByte::strPad($line, $columnWidth, ' ', $padMode, $outputCharset)
+                           . $strWrapper->strPad($line, $columnWidth, ' ', $padMode)
                            . str_repeat(' ', $padding);
         }
 

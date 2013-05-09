@@ -3,20 +3,45 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Adapter\Platform;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Adapter
- */
+use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Driver\Pdo;
+use Zend\Db\Adapter\Exception;
+
 class Sqlite implements PlatformInterface
 {
+
+    /** @var \PDO */
+    protected $resource = null;
+
+    public function __construct($driver = null)
+    {
+        if ($driver) {
+            $this->setDriver($driver);
+        }
+    }
+
+    /**
+     * @param \Zend\Db\Adapter\Driver\Pdo\Pdo||\PDO $driver
+     * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
+     * @return $this
+     */
+    public function setDriver($driver)
+    {
+        if (($driver instanceof \PDO && $driver->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'sqlite')
+            || ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'Sqlite')
+        ) {
+            $this->resource = $driver;
+            return $this;
+        }
+
+        throw new Exception\InvalidArgumentException('$driver must be a Sqlite PDO Zend\Db\Adapter\Driver, Sqlite PDO instance');
+    }
 
     /**
      * Get name
@@ -82,7 +107,36 @@ class Sqlite implements PlatformInterface
      */
     public function quoteValue($value)
     {
-        return '\'' . str_replace('\'', '\\' . '\'', $value) . '\'';
+        if ($this->resource instanceof DriverInterface) {
+            $this->resource = $this->resource->getConnection()->getResource();
+        }
+        if ($this->resource instanceof \PDO) {
+            return $this->resource->quote($value);
+        }
+        trigger_error(
+            'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
+                . 'can introduce security vulnerabilities in a production environment.'
+        );
+        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
+    }
+
+    /**
+     * Quote Trusted Value
+     *
+     * The ability to quote values without notices
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function quoteTrustedValue($value)
+    {
+        if ($this->resource instanceof DriverInterface) {
+            $this->resource = $this->resource->getConnection()->getResource();
+        }
+        if ($this->resource instanceof \PDO) {
+            return $this->resource->quote($value);
+        }
+        return '\'' . addcslashes($value, "\x00\n\r\\'\"\x1a") . '\'';
     }
 
     /**
@@ -93,11 +147,14 @@ class Sqlite implements PlatformInterface
      */
     public function quoteValueList($valueList)
     {
-        $valueList = str_replace('\'', '\\' . '\'', $valueList);
-        if (is_array($valueList)) {
-            $valueList = implode('\', \'', $valueList);
+        if (!is_array($valueList)) {
+            return $this->quoteValue($valueList);
         }
-        return '\'' . $valueList . '\'';
+        $value = reset($valueList);
+        do {
+            $valueList[key($valueList)] = $this->quoteValue($value);
+        } while ($value = next($valueList));
+        return implode(', ', $valueList);
     }
 
     /**
@@ -120,8 +177,12 @@ class Sqlite implements PlatformInterface
     public function quoteIdentifierInFragment($identifier, array $safeWords = array())
     {
         $parts = preg_split('#([\.\s\W])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        if ($safeWords) {
+            $safeWords = array_flip($safeWords);
+            $safeWords = array_change_key_case($safeWords, CASE_LOWER);
+        }
         foreach ($parts as $i => $part) {
-            if ($safeWords && in_array($part, $safeWords)) {
+            if ($safeWords && isset($safeWords[strtolower($part)])) {
                 continue;
             }
             switch ($part) {

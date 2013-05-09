@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Node;
@@ -14,10 +13,6 @@ use Zend\Ldap;
 
 /**
  * Zend\Ldap\Node\RootDse provides a simple data-container for the RootDse node.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage RootDse
  */
 class RootDse extends AbstractNode
 {
@@ -44,9 +39,9 @@ class RootDse extends AbstractNode
             && $data['structuralobjectclass'][0] === 'OpenLDAProotDSE'
         ) {
             return new RootDse\OpenLdap($dn, $data);
-        } else {
-            return new self($dn, $data);
         }
+
+        return new static($dn, $data);
     }
 
     /**
@@ -86,7 +81,7 @@ class RootDse extends AbstractNode
      * Determines if the version is supported
      *
      * @param  string|int|array $versions version(s) to check
-     * @return boolean
+     * @return bool
      */
     public function supportsVersion($versions)
     {
@@ -97,7 +92,7 @@ class RootDse extends AbstractNode
      * Determines if the sasl mechanism is supported
      *
      * @param  string|array $mechlist SASL mechanisms to check
-     * @return boolean
+     * @return bool
      */
     public function supportsSaslMechanism($mechlist)
     {

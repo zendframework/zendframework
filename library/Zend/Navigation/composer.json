@@ -20,5 +20,11 @@
         "zendframework/zend-config": "Zend\\Config component",
         "zendframework/zend-mvc": "Zend\\Mvc component",
         "zendframework/zend-view": "Zend\\View component"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev",
+            "dev-develop": "2.3-dev"
+        }
     }
 }

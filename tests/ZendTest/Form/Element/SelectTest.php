@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage UnitTest
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -205,5 +205,18 @@ class SelectTest extends TestCase
         $this->assertEquals(array('baz' => 'foo'), $element->getOption('empty_option'));
     }
 
+    public function testDisableInputSpecification()
+    {
+        $element = new SelectElement();
+        $element->setValueOptions(array(
+            'Option 1' => 'option1',
+            'Option 2' => 'option2',
+            'Option 3' => 'option3',
+        ));
+        $element->setDisableInArrayValidator(true);
+
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayNotHasKey('validators', $inputSpec);
+    }
 
 }

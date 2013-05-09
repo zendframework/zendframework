@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Reader\Feed;
@@ -17,8 +16,6 @@ use Zend\Feed\Reader\Collection;
 use Zend\Feed\Reader\Exception;
 
 /**
-* @category Zend
-* @package Reader
 */
 class Rss extends AbstractFeed
 {
@@ -88,9 +85,9 @@ class Rss extends AbstractFeed
         }
 
         $authors = array();
-        $authors_dc = $this->getExtension('DublinCore')->getAuthors();
-        if (!empty($authors_dc)) {
-            foreach ($authors_dc as $author) {
+        $authorsDc = $this->getExtension('DublinCore')->getAuthors();
+        if (!empty($authorsDc)) {
+            foreach ($authorsDc as $author) {
                 $authors[] = array(
                     'name' => $author['name']
                 );
@@ -686,7 +683,7 @@ class Rss extends AbstractFeed
             $entries = $this->xpath->evaluate('//rss:item');
         }
 
-        foreach ($entries as $index=>$entry) {
+        foreach ($entries as $index => $entry) {
             $this->entries[$index] = $entry;
         }
     }

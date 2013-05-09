@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_View
  */
@@ -71,6 +71,22 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     {
         $url = $this->url->__invoke('default', array('controller' => 'ctrl', 'action' => 'act'));
         $this->assertEquals('/ctrl/act', $url);
+    }
+
+    public function testModel()
+    {
+        $it = new \ArrayIterator(array('controller' => 'ctrl', 'action' => 'act'));
+
+        $url = $this->url->__invoke('default', $it);
+        $this->assertEquals('/ctrl/act', $url);
+    }
+
+    /**
+     * @expectedException \Zend\View\Exception\InvalidArgumentException
+     */
+    public function testThrowsExceptionOnInvalidParams()
+    {
+        $this->url->__invoke('default', 'invalid params');
     }
 
     public function testPluginWithoutRouteMatchesInEventRaisesExceptionWhenNoRouteProvided()

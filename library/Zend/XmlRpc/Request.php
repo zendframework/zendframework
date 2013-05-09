@@ -3,12 +3,15 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc;
+
+use DOMDocument;
+use SimpleXMLElement;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * XmlRpc Request object
@@ -20,9 +23,6 @@ namespace Zend\XmlRpc;
  * Additionally, if errors occur setting the method or parsing XML, a fault is
  * generated and stored in {@link $fault}; developers may check for it using
  * {@link isFault()} and {@link getFault()}.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
  */
 class Request
 {
@@ -113,7 +113,7 @@ class Request
      * Set method to call
      *
      * @param string $method
-     * @return boolean Returns true on success, false if method name is invalid
+     * @return bool Returns true on success, false if method name is invalid
      */
     public function setMethod($method)
     {
@@ -273,7 +273,7 @@ class Request
      *
      * @param string $request
      * @throws Exception\ValueException if invalid XML
-     * @return boolean True on success, false if an error occurred.
+     * @return bool True on success, false if an error occurred.
      */
     public function loadXml($request)
     {
@@ -284,9 +284,10 @@ class Request
         }
 
         // @see ZF-12293 - disable external entities for security purposes
-        $loadEntities = libxml_disable_entity_loader(true);
+        $loadEntities  = libxml_disable_entity_loader(true);
+        $xmlErrorsFlag = libxml_use_internal_errors(true);
         try {
-            $dom = new \DOMDocument;
+            $dom = new DOMDocument;
             $dom->loadXML($request);
             foreach ($dom->childNodes as $child) {
                 if ($child->nodeType === XML_DOCUMENT_TYPE_NODE) {
@@ -295,14 +296,24 @@ class Request
                     );
                 }
             }
-            $xml = simplexml_import_dom($dom);
-            //$xml = new \SimpleXMLElement($request);
+            ErrorHandler::start();
+            $xml   = simplexml_import_dom($dom);
+            $error = ErrorHandler::stop();
             libxml_disable_entity_loader($loadEntities);
+            libxml_use_internal_errors($xmlErrorsFlag);
         } catch (\Exception $e) {
             // Not valid XML
             $this->fault = new Fault(631);
             $this->fault->setEncoding($this->getEncoding());
             libxml_disable_entity_loader($loadEntities);
+            libxml_use_internal_errors($xmlErrorsFlag);
+            return false;
+        }
+        if (!$xml instanceof SimpleXMLElement || $error) {
+            // Not valid XML
+            $this->fault = new Fault(631);
+            $this->fault->setEncoding($this->getEncoding());
+            libxml_use_internal_errors($xmlErrorsFlag);
             return false;
         }
 
@@ -351,7 +362,7 @@ class Request
      * Does the current request contain errors and should it return a fault
      * response?
      *
-     * @return boolean
+     * @return bool
      */
     public function isFault()
     {

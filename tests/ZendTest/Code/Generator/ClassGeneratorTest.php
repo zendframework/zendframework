@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Code
  */
@@ -106,7 +106,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\InvalidArgumentException',
-            'addProperty() expects string for name'
+            'Zend\Code\Generator\ClassGenerator::addProperty expects string for name'
         );
         $classGenerator->addProperty(true);
     }
@@ -138,7 +138,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\ExceptionInterface',
-            'addMethod() expects string for name'
+            'Zend\Code\Generator\ClassGenerator::addMethod expects string for name'
         );
 
         $classGenerator->addMethod(true);
@@ -173,6 +173,16 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($classGenerator->hasMethod('methodOne'));
     }
 
+    public function testRemoveMethod()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addMethod('methodOne');
+        $this->assertTrue($classGenerator->hasMethod('methodOne'));
+
+        $classGenerator->removeMethod('methodOne');
+        $this->assertFalse($classGenerator->hasMethod('methodOne'));
+    }
+
     /**
      * @group ZF-7361
      */
@@ -186,8 +196,7 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $classGenerator = ClassGenerator::fromArray(
-            array(
+        $classGenerator = ClassGenerator::fromArray(array(
             'name' => 'SampleClass',
             'flags' => ClassGenerator::FLAG_ABSTRACT,
             'extendedClass' => 'ExtendedClassName',
@@ -354,10 +363,24 @@ CODE;
         $this->assertContains('class FunClass', $received, $received);
     }
 
+    /**
+     * @group ZF2-151
+     */
+    public function testAddUses()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('My\Class');
+        $classGenerator->addUse('My\First\Use\Class');
+        $classGenerator->addUse('My\Second\Use\Class', 'MyAlias');
+        $generated = $classGenerator->generate();
+
+        $this->assertContains('use My\First\Use\Class;', $generated);
+        $this->assertContains('use My\Second\Use\Class as MyAlias;', $generated);
+    }
+
     public function testCreateFromArrayWithDocBlockFromArray()
     {
-        $classGenerator = ClassGenerator::fromArray(
-            array(
+        $classGenerator = ClassGenerator::fromArray(array(
             'name' => 'SampleClass',
             'docblock' => array(
                 'shortdescription' => 'foo',
@@ -370,13 +393,27 @@ CODE;
 
     public function testCreateFromArrayWithDocBlockInstance()
     {
-        $classGenerator = ClassGenerator::fromArray(
-            array(
+        $classGenerator = ClassGenerator::fromArray(array(
             'name' => 'SampleClass',
             'docblock' => new DocBlockGenerator('foo'),
         ));
 
         $docBlock = $classGenerator->getDocBlock();
         $this->assertInstanceOf('Zend\Code\Generator\DocBlockGenerator', $docBlock);
+    }
+
+    public function testExtendedClassProperies()
+    {
+        $reflClass = new ClassReflection('ZendTest\Code\Generator\TestAsset\ExtendedClassWithProperties');
+        $classGenerator = ClassGenerator::fromReflection($reflClass);
+        $code = $classGenerator->generate();
+        $this->assertContains('publicExtendedClassProperty', $code);
+        $this->assertContains('protectedExtendedClassProperty', $code);
+        $this->assertContains('privateExtendedClassProperty', $code);
+        $this->assertNotContains('publicClassProperty', $code);
+        $this->assertNotContains('protectedClassProperty', $code);
+        $this->assertNotContains('privateClassProperty', $code);
+
+
     }
 }

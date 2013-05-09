@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_View
  */
@@ -27,9 +27,6 @@ class PhpRendererStrategyTest extends TestCase
 {
     public function setUp()
     {
-        // Necessary to ensure placeholders do not persist between individual tests
-        PlaceholderRegistry::unsetRegistry();
-
         $this->renderer = new PhpRenderer;
         $this->strategy = new PhpRendererStrategy($this->renderer);
         $this->event    = new ViewEvent();

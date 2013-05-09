@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
@@ -17,10 +16,6 @@ use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
 class DateStep extends Date
 {
     const NOT_STEP     = 'dateStepNotStep';
@@ -35,7 +30,7 @@ class DateStep extends Date
     /**
      * Optional base date value
      *
-     * @var string|integer|\DateTime
+     * @var string|int|\DateTime
      */
     protected $baseValue = '1970-01-01T00:00:00Z';
 
@@ -110,7 +105,7 @@ class DateStep extends Date
     /**
      * Sets the base value from which the step should be computed
      *
-     * @param  string|integer|\DateTime $baseValue
+     * @param  string|int|\DateTime $baseValue
      * @return DateStep
      */
     public function setBaseValue($baseValue)
@@ -122,7 +117,7 @@ class DateStep extends Date
     /**
      * Returns the base value from which the step should be computed
      *
-     * @return string|integer|\DateTime
+     * @return string|int|\DateTime
      */
     public function getBaseValue()
     {
@@ -176,7 +171,7 @@ class DateStep extends Date
     /**
      * Converts an int or string to a DateTime object
      *
-     * @param  string|integer|\DateTime $param
+     * @param  string|int|\DateTime $param
      * @return \DateTime
      * @throws Exception\InvalidArgumentException
      */
@@ -209,7 +204,7 @@ class DateStep extends Date
     /**
      * Returns true if a date is within a valid step
      *
-     * @param  string|integer|\DateTime $value
+     * @param  string|int|\DateTime $value
      * @return bool
      * @throws Exception\InvalidArgumentException
      */

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Navigation
  */
 
 namespace Zend\Navigation\Service;
@@ -14,18 +13,20 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Constructed factory to set pages during construction.
- *
- * @category  Zend
- * @package   Zend_Navigation
  */
 class ConstructedNavigationFactory extends AbstractNavigationFactory
 {
+    /**
+     * @var string|\Zend\Config\Config|array
+     */
+    protected $config;
+
     /**
      * @param string|\Zend\Config\Config|array $config
      */
     public function __construct($config)
     {
-        $this->pages = $this->getPagesFromConfig($config);
+        $this->config = $config;
     }
 
     /**
@@ -34,6 +35,9 @@ class ConstructedNavigationFactory extends AbstractNavigationFactory
      */
     public function getPages(ServiceLocatorInterface $serviceLocator)
     {
+        if (null === $this->pages) {
+            $this->pages = $this->preparePages($serviceLocator, $this->getPagesFromConfig($this->config));
+        }
         return $this->pages;
     }
 

@@ -3,14 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 namespace Zend\Soap\Exception;
 
-class RuntimeException
-    extends \RuntimeException
-    implements ExceptionInterface
+use RuntimeException as SPLRuntimeException;
+
+/**
+ * Exception thrown when there is an error during program execution
+ */
+class RuntimeException extends SPLRuntimeException implements ExceptionInterface
 {}

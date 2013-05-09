@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Navigation
  */
 
 namespace Zend\Navigation\Service;
@@ -20,9 +19,6 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Abstract navigation factory
- *
- * @category  Zend
- * @package   Zend_Navigation
  */
 abstract class AbstractNavigationFactory implements FactoryInterface
 {
@@ -67,14 +63,24 @@ abstract class AbstractNavigationFactory implements FactoryInterface
                 ));
             }
 
-            $application = $serviceLocator->get('Application');
-            $routeMatch  = $application->getMvcEvent()->getRouteMatch();
-            $router      = $application->getMvcEvent()->getRouter();
             $pages       = $this->getPagesFromConfig($configuration['navigation'][$this->getName()]);
-
-            $this->pages = $this->injectComponents($pages, $routeMatch, $router);
+            $this->pages = $this->preparePages($serviceLocator, $pages);
         }
         return $this->pages;
+    }
+
+    /**
+     * @param ServiceLocatorInterface $serviceLocator
+     * @param array|\Zend\Config\Config $pages
+     * @throws \Zend\Navigation\Exception\InvalidArgumentException
+     */
+    protected function preparePages(ServiceLocatorInterface $serviceLocator, $pages)
+    {
+        $application = $serviceLocator->get('Application');
+        $routeMatch  = $application->getMvcEvent()->getRouteMatch();
+        $router      = $application->getMvcEvent()->getRouter();
+
+        return $this->injectComponents($pages, $routeMatch, $router);
     }
 
     /**

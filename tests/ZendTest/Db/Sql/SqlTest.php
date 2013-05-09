@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -16,6 +16,11 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $mockAdapter = null;
+
+    /**
+     * Sql object
+     * @var Sql
+     */
     protected $sql = null;
 
     public function setup()
@@ -61,7 +66,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foo', $select->getRawState('table'));
 
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException',
-            'This Sql object in intended to work with only the table "foo" provided at construction time.');
+            'This Sql object is intended to work with only the table "foo" provided at construction time.');
         $this->sql->select('bar');
     }
 
@@ -75,7 +80,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foo', $insert->getRawState('table'));
 
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException',
-            'This Sql object in intended to work with only the table "foo" provided at construction time.');
+            'This Sql object is intended to work with only the table "foo" provided at construction time.');
         $this->sql->insert('bar');
     }
 
@@ -89,7 +94,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foo', $update->getRawState('table'));
 
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException',
-            'This Sql object in intended to work with only the table "foo" provided at construction time.');
+            'This Sql object is intended to work with only the table "foo" provided at construction time.');
         $this->sql->update('bar');
 
     }
@@ -106,8 +111,18 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foo', $delete->getRawState('table'));
 
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException',
-            'This Sql object in intended to work with only the table "foo" provided at construction time.');
+            'This Sql object is intended to work with only the table "foo" provided at construction time.');
         $this->sql->delete('bar');
 
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Sql::prepareStatementForSqlObject
+     */
+    public function testPrepareStatementForSqlObject()
+    {
+        $insert = $this->sql->insert()->columns(array('foo'));
+        $stmt = $this->sql->prepareStatementForSqlObject($insert);
+        $this->assertInstanceOf('Zend\Db\Adapter\Driver\StatementInterface', $stmt);
     }
 }

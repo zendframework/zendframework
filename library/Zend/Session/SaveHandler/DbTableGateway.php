@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Session
  */
 
 namespace Zend\Session\SaveHandler;
@@ -14,10 +13,6 @@ use Zend\Db\TableGateway\TableGateway;
 
 /**
  * DB Table Gateway session save handler
- *
- * @category   Zend
- * @package    Zend_Session
- * @subpackage SaveHandler
  */
 class DbTableGateway implements SaveHandlerInterface
 {
@@ -70,7 +65,7 @@ class DbTableGateway implements SaveHandlerInterface
      *
      * @param  string $savePath
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function open($savePath, $name)
     {
@@ -84,7 +79,7 @@ class DbTableGateway implements SaveHandlerInterface
     /**
      * Close session
      *
-     * @return boolean
+     * @return bool
      */
     public function close()
     {
@@ -119,7 +114,7 @@ class DbTableGateway implements SaveHandlerInterface
      *
      * @param string $id
      * @param string $data
-     * @return boolean
+     * @return bool
      */
     public function write($id, $data)
     {
@@ -150,7 +145,7 @@ class DbTableGateway implements SaveHandlerInterface
      * Destroy session
      *
      * @param  string $id
-     * @return boolean
+     * @return bool
      */
     public function destroy($id)
     {

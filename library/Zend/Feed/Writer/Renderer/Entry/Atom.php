@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Writer\Renderer\Entry;
@@ -13,15 +12,11 @@ namespace Zend\Feed\Writer\Renderer\Entry;
 use DateTime;
 use DOMDocument;
 use DOMElement;
+use Zend\Feed\Uri;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
-use Zend\Uri;
 use Zend\Validator;
 
-/**
- * @category Zend
- * @package Zend_Feed_Writer
- */
 class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {
     /**
@@ -272,7 +267,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
             $this->getDataContainer()->setId(
                 $this->getDataContainer()->getLink());
         }
-        if (!Uri\UriFactory::factory($this->getDataContainer()->getId())->isValid()
+        if (!Uri::factory($this->getDataContainer()->getId())->isValid()
             && !preg_match(
                 "#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#",
                 $this->getDataContainer()->getId())

@@ -15,6 +15,7 @@
     "target-dir": "Zend/Log",
     "require": {
         "php": ">=5.3.3",
+        "zendframework/zend-servicemanager": "self.version",
         "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
@@ -23,5 +24,11 @@
         "zendframework/zend-escaper": "Zend\\Escaper component, for use in the XML formatter",
         "zendframework/zend-mail": "Zend\\Mail component",
         "zendframework/zend-validator": "Zend\\Validator component"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev",
+            "dev-develop": "2.3-dev"
+        }
     }
 }

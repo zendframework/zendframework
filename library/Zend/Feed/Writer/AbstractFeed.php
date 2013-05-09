@@ -3,21 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace Zend\Feed\Writer;
 
 use DateTime;
-use Zend\Uri;
+use Zend\Feed\Uri;
 use Zend\Validator;
 
-/**
- * @category Zend
- * @package Zend_Feed_Writer
- */
 class AbstractFeed
 {
     /**
@@ -82,7 +77,7 @@ class AbstractFeed
         }
         if (isset($author['uri'])) {
             if (empty($author['uri']) || !is_string($author['uri']) ||
-                !Uri\UriFactory::factory($author['uri'])->isValid()
+                !Uri::factory($author['uri'])->isValid()
             ) {
                 throw new Exception\InvalidArgumentException(
                     'Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
@@ -130,7 +125,7 @@ class AbstractFeed
     /**
      * Set the feed creation date
      *
-     * @param null|integer|DateTime
+     * @param null|int|DateTime
      * @throws Exception\InvalidArgumentException
      * @return AbstractFeed
      */
@@ -152,7 +147,7 @@ class AbstractFeed
     /**
      * Set the feed modification date
      *
-     * @param null|integer|DateTime
+     * @param null|int|DateTime
      * @throws Exception\InvalidArgumentException
      * @return AbstractFeed
      */
@@ -174,7 +169,7 @@ class AbstractFeed
     /**
      * Set the feed last-build date. Ignored for Atom 1.0.
      *
-     * @param null|integer|DateTime
+     * @param null|int|DateTime
      * @throws Exception\InvalidArgumentException
      * @return AbstractFeed
      */
@@ -234,7 +229,7 @@ class AbstractFeed
                 $generator['version'] = $data['version'];
             }
             if (isset($data['uri'])) {
-                if (empty($data['uri']) || !is_string($data['uri']) || !Uri\UriFactory::factory($data['uri'])->isValid()) {
+                if (empty($data['uri']) || !is_string($data['uri']) || !Uri::factory($data['uri'])->isValid()) {
                     throw new Exception\InvalidArgumentException('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
                 }
                 $generator['uri'] = $data['uri'];
@@ -251,7 +246,7 @@ class AbstractFeed
                 $generator['version'] = $version;
             }
             if (isset($uri)) {
-                if (empty($uri) || !is_string($uri) || !Uri\UriFactory::factory($uri)->isValid()) {
+                if (empty($uri) || !is_string($uri) || !Uri::factory($uri)->isValid()) {
                     throw new Exception\InvalidArgumentException('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
                 }
                 $generator['uri'] = $uri;
@@ -271,7 +266,7 @@ class AbstractFeed
      */
     public function setId($id)
     {
-        if ((empty($id) || !is_string($id) || !Uri\UriFactory::factory($id)->isValid())
+        if ((empty($id) || !is_string($id) || !Uri::factory($id)->isValid())
             && !preg_match("#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#", $id)
             && !$this->_validateTagUri($id)
         ) {
@@ -327,7 +322,7 @@ class AbstractFeed
     public function setImage(array $data)
     {
         if (empty($data['uri']) || !is_string($data['uri'])
-            || !Uri\UriFactory::factory($data['uri'])->isValid()
+            || !Uri::factory($data['uri'])->isValid()
         ) {
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter \'uri\''
             . ' must be a non-empty string and valid URI/IRI');
@@ -363,7 +358,7 @@ class AbstractFeed
      */
     public function setLink($link)
     {
-        if (empty($link) || !is_string($link) || !Uri\UriFactory::factory($link)->isValid()) {
+        if (empty($link) || !is_string($link) || !Uri::factory($link)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
         }
         $this->data['link'] = $link;
@@ -381,7 +376,7 @@ class AbstractFeed
      */
     public function setFeedLink($link, $type)
     {
-        if (empty($link) || !is_string($link) || !Uri\UriFactory::factory($link)->isValid()) {
+        if (empty($link) || !is_string($link) || !Uri::factory($link)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter: "link"" must be a non-empty string and valid URI/IRI');
         }
         if (!in_array(strtolower($type), array('rss', 'rdf', 'atom'))) {
@@ -435,7 +430,7 @@ class AbstractFeed
      */
     public function setBaseUrl($url)
     {
-        if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
+        if (empty($url) || !is_string($url) || !Uri::factory($url)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter: "url" array value'
             . ' must be a non-empty string and valid URI/IRI');
         }
@@ -453,7 +448,7 @@ class AbstractFeed
      */
     public function addHub($url)
     {
-        if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
+        if (empty($url) || !is_string($url) || !Uri::factory($url)->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid parameter: "url" array value'
             . ' must be a non-empty string and valid URI/IRI');
         }
@@ -497,7 +492,7 @@ class AbstractFeed
         if (isset($category['scheme'])) {
             if (empty($category['scheme'])
                 || !is_string($category['scheme'])
-                || !Uri\UriFactory::factory($category['scheme'])->isValid()
+                || !Uri::factory($category['scheme'])->isValid()
             ) {
                 throw new Exception\InvalidArgumentException('The Atom scheme or RSS domain of'
                 . ' a category must be a valid URI');
@@ -536,9 +531,9 @@ class AbstractFeed
     {
         if (isset($this->data['authors'][$index])) {
             return $this->data['authors'][$index];
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**

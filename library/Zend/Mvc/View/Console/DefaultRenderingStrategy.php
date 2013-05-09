@@ -3,57 +3,28 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\View\Console;
 
+use Zend\Console\Response as ConsoleResponse;
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ResponseInterface as Response;
-use Zend\Console\Response as ConsoleResponse;
 use Zend\View\Model\ConsoleModel as ConsoleViewModel;
-use Zend\View\Model\ModelInterface as ViewModel;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage View
- */
-class DefaultRenderingStrategy implements ListenerAggregateInterface
+class DefaultRenderingStrategy extends AbstractListenerAggregate
 {
     /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
-    /**
-     * Attach the aggregate to the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_RENDER, array($this, 'render'), -10000);
-    }
-
-    /**
-     * Detach aggregate listeners from the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
     }
 
     /**
@@ -69,14 +40,12 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
             return $result; // the result is already rendered ...
         }
 
-        // <artial arguments
+        // marshal arguments
         $response  = $e->getResponse();
 
         if (empty($result)) {
-            /**
-             * There is absolutely no result, so there's nothing to display.
-             * We will return an empty response object
-             */
+            // There is absolutely no result, so there's nothing to display.
+            // We will return an empty response object
             return $response;
         }
 
@@ -84,7 +53,8 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
         $responseText = '';
         if ($result->hasChildren()) {
             foreach ($result->getChildren() as $child) {
-                // Do not use ::getResult() method here as we cannot be sure if children are also console models.
+                // Do not use ::getResult() method here as we cannot be sure if
+                // children are also console models.
                 $responseText .= $child->getVariable(ConsoleViewModel::RESULT);
             }
         }
@@ -102,12 +72,9 @@ class DefaultRenderingStrategy implements ListenerAggregateInterface
         );
 
         // Pass on console-specific options
-        if (
-            $response  instanceof ConsoleResponse &&
-            $result    instanceof ConsoleViewModel
+        if ($response instanceof ConsoleResponse
+            && $result instanceof ConsoleViewModel
         ) {
-            /* @var $response ConsoleResponse */
-            /* @var $result ConsoleViewModel */
             $errorLevel = $result->getErrorLevel();
             $response->setErrorLevel($errorLevel);
         }

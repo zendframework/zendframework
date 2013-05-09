@@ -3,27 +3,23 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Serializer
  */
 
 namespace Zend\Serializer\Adapter;
 
 use stdClass;
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Serializer\Exception;
 use Zend\Math\BigInteger;
+use Zend\Serializer\Exception;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * @link       http://www.python.org
  * @see        Phython3.1/Lib/pickle.py
  * @see        Phython3.1/Modules/_pickle.c
  * @link       http://pickle-js.googlecode.com
- * @category   Zend
- * @package    Zend_Serializer
- * @subpackage Adapter
  */
 class PythonPickle extends AbstractAdapter
 {
@@ -138,7 +134,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Constructor.
      *
-     * @param  array|\Traversable|PythonPickleOptions $options Optional
+     * @param  array|Traversable|PythonPickleOptions $options Optional
      */
     public function __construct($options = null)
     {
@@ -155,7 +151,7 @@ class PythonPickle extends AbstractAdapter
     /**
      * Set options
      *
-     * @param  array|\Traversable|PythonPickleOptions $options
+     * @param  array|Traversable|PythonPickleOptions $options
      * @return PythonPickle
      */
     public function setOptions($options)
@@ -238,7 +234,7 @@ class PythonPickle extends AbstractAdapter
             throw new Exception\RuntimeException(sprintf(
                 'PHP-Type "%s" can not be serialized by %s',
                 gettype($value),
-                get_called_class()
+                get_class($this)
             ));
         }
     }
@@ -425,7 +421,9 @@ class PythonPickle extends AbstractAdapter
         $this->memorize($value);
 
         foreach ($value as $k => $v) {
-            $this->pickle .= $this->write($k) . $this->write($v) . self::OP_SETITEM;
+            $this->write($k);
+            $this->write($v);
+            $this->pickle .= self::OP_SETITEM;
         }
     }
 
@@ -445,7 +443,8 @@ class PythonPickle extends AbstractAdapter
         $this->memorize($value);
 
         foreach ($value as $v) {
-            $this->pickle .= $this->write($v) . self::OP_APPEND;
+            $this->write($v);
+            $this->pickle .= self::OP_APPEND;
         }
     }
 

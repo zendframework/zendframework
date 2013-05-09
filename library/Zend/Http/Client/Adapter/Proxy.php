@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http\Client\Adapter;
@@ -23,10 +22,6 @@ use Zend\Stdlib\ErrorHandler;
  * fall back to Zend_Http_Client_Adapter_Socket behavior. Just like the
  * default Socket adapter, this adapter does not require any special extensions
  * installed.
- *
- * @category   Zend
- * @package    Zend_Http
- * @subpackage Client_Adapter
  */
 class Proxy extends Socket
 {
@@ -54,7 +49,7 @@ class Proxy extends Socket
     /**
      * Whether HTTPS CONNECT was already negotiated with the proxy or not
      *
-     * @var boolean
+     * @var bool
      */
     protected $negotiated = false;
 
@@ -84,13 +79,15 @@ class Proxy extends Socket
      *
      * @param string  $host
      * @param int     $port
-     * @param boolean $secure
+     * @param  bool $secure
+     * @throws AdapterException\RuntimeException
      */
     public function connect($host, $port = 80, $secure = false)
     {
         // If no proxy is set, fall back to Socket adapter
         if (! $this->config['proxy_host']) {
-            return parent::connect($host, $port, $secure);
+            parent::connect($host, $port, $secure);
+            return;
         }
 
         /* Url might require stream context even if proxy connection doesn't */
@@ -99,7 +96,7 @@ class Proxy extends Socket
         }
 
         // Connect (a non-secure connection) to the proxy server
-        return parent::connect(
+        parent::connect(
             $this->config['proxy_host'],
             $this->config['proxy_port'],
             false
@@ -111,16 +108,16 @@ class Proxy extends Socket
      *
      * @param string        $method
      * @param \Zend\Uri\Uri $uri
-     * @param string        $http_ver
+     * @param string        $httpVer
      * @param array         $headers
      * @param string        $body
      * @throws AdapterException\RuntimeException
      * @return string Request as string
      */
-    public function write($method, $uri, $http_ver = '1.1', $headers = array(), $body = '')
+    public function write($method, $uri, $httpVer = '1.1', $headers = array(), $body = '')
     {
         // If no proxy is set, fall back to default Socket adapter
-        if (! $this->config['proxy_host']) return parent::write($method, $uri, $http_ver, $headers, $body);
+        if (! $this->config['proxy_host']) return parent::write($method, $uri, $httpVer, $headers, $body);
 
         // Make sure we're properly connected
         if (! $this->socket) {
@@ -130,7 +127,7 @@ class Proxy extends Socket
         $host = $this->config['proxy_host'];
         $port = $this->config['proxy_port'];
 
-        if ($this->connected_to[0] != "tcp://$host" || $this->connected_to[1] != $port) {
+        if ($this->connectedTo[0] != "tcp://$host" || $this->connectedTo[1] != $port) {
             throw new AdapterException\RuntimeException("Trying to write but we are connected to the wrong proxy server");
         }
 
@@ -143,7 +140,7 @@ class Proxy extends Socket
 
         // if we are proxying HTTPS, preform CONNECT handshake with the proxy
         if ($uri->getScheme() == 'https' && (! $this->negotiated)) {
-            $this->connectHandshake($uri->getHost(), $uri->getPort(), $http_ver, $headers);
+            $this->connectHandshake($uri->getHost(), $uri->getPort(), $httpVer, $headers);
             $this->negotiated = true;
         }
 
@@ -156,9 +153,9 @@ class Proxy extends Socket
             if ($uri->getQuery()) {
                 $path .= '?' . $uri->getQuery();
             }
-            $request = "$method $path HTTP/$http_ver\r\n";
+            $request = "$method $path HTTP/$httpVer\r\n";
         } else {
-            $request = "$method $uri HTTP/$http_ver\r\n";
+            $request = "$method $uri HTTP/$httpVer\r\n";
         }
 
         // Add all headers to the request string
@@ -195,14 +192,14 @@ class Proxy extends Socket
      * Preform handshaking with HTTPS proxy using CONNECT method
      *
      * @param string  $host
-     * @param integer $port
-     * @param string  $http_ver
+     * @param int $port
+     * @param string  $httpVer
      * @param array   $headers
      * @throws AdapterException\RuntimeException
      */
-    protected function connectHandshake($host, $port = 443, $http_ver = '1.1', array &$headers = array())
+    protected function connectHandshake($host, $port = 443, $httpVer = '1.1', array &$headers = array())
     {
-        $request = "CONNECT $host:$port HTTP/$http_ver\r\n" .
+        $request = "CONNECT $host:$port HTTP/$httpVer\r\n" .
                    "Host: " . $this->config['proxy_host'] . "\r\n";
 
         // Add the user-agent header

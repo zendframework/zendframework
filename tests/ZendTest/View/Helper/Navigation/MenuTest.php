@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_View
  */
@@ -518,6 +518,58 @@ class MenuTest extends AbstractTest
         $actual = $this->_helper->renderMenu(null, $options);
 
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testRenderingWithoutPageClassToLi()
+    {
+        $container = new \Zend\Navigation\Navigation($this->_nav2->toArray());
+        $container->addPage(array(
+            'label' => 'Class test',
+            'uri' => 'test',
+            'class' => 'foobar',
+        ));
+
+        $expected = $this->_getExpected('menu/addclasstolistitem_as_false.html');
+        $actual   = $this->_helper->renderMenu($container);
+
+        $this->assertEquals(trim($expected), trim($actual));
+    }
+
+    public function testRenderingWithPageClassToLi()
+    {
+        $options = array(
+            'addClassToListItem' => true,
+        );
+
+        $container = new \Zend\Navigation\Navigation($this->_nav2->toArray());
+        $container->addPage(array(
+            'label' => 'Class test',
+            'uri' => 'test',
+            'class' => 'foobar',
+        ));
+
+        $expected = $this->_getExpected('menu/addclasstolistitem_as_true.html');
+        $actual = $this->_helper->renderMenu($container, $options);
+
+        $this->assertEquals(trim($expected), trim($actual));
+    }
+
+    public function testRenderDeepestMenuWithPageClassToLi()
+    {
+        $options = array(
+            'addClassToListItem' => true,
+            'onlyActiveBranch' => true,
+            'renderParents' => false,
+        );
+
+        $pages = $this->_nav2->toArray();
+        $pages[1]['class'] = 'foobar';
+        $container = new \Zend\Navigation\Navigation($pages);
+
+        $expected = $this->_getExpected('menu/onlyactivebranch_addclasstolistitem.html');
+        $actual = $this->_helper->renderMenu($container, $options);
+
+        $this->assertEquals(trim($expected), trim($actual));
     }
 
     /**

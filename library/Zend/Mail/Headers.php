@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace Zend\Mail;
@@ -20,10 +19,6 @@ use Zend\Loader\PluginClassLocator;
  * Basic mail headers collection functionality
  *
  * Handles aggregation of headers
- *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Header
  */
 class Headers implements Countable, Iterator
 {
@@ -75,7 +70,7 @@ class Headers implements Countable, Iterator
         // iterate the header lines, some might be continuations
         foreach (explode($EOL, $string) as $line) {
             // check if a header name is present
-            if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $line, $matches)) {
+            if (preg_match('/^(?P<name>[\x21-\x39\x3B-\x7E]+):.*$/', $line, $matches)) {
                 if ($currentLine) {
                     // a header name was present, then store the current complete line
                     $headers->addHeaderLine($currentLine);
@@ -274,7 +269,7 @@ class Headers implements Countable, Iterator
      * Get all headers of a certain name/type
      *
      * @param  string $name
-     * @return boolean|ArrayIterator|Header\HeaderInterface Returns false if there is no headers with $name in this
+     * @return bool|ArrayIterator|Header\HeaderInterface Returns false if there is no headers with $name in this
      * contain, an ArrayIterator if the header is a MultipleHeadersInterface instance and finally returns
      * HeaderInterface for the rest of cases.
      */

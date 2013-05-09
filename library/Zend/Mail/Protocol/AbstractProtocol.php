@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace Zend\Mail\Protocol;
@@ -15,9 +14,6 @@ use Zend\Validator;
 /**
  * Provides low-level methods for concrete adapters to communicate with a remote mail server and track requests and responses.
  *
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage Protocol
  * @todo Implement proxy settings
  */
 abstract class AbstractProtocol
@@ -35,7 +31,7 @@ abstract class AbstractProtocol
 
     /**
      * Maximum of the transaction log
-     * @var integer
+     * @var int
      */
     protected $maximumLog = 64;
 
@@ -49,7 +45,7 @@ abstract class AbstractProtocol
 
     /**
      * Port number of connection
-     * @var integer
+     * @var int
      */
     protected $port;
 
@@ -93,13 +89,13 @@ abstract class AbstractProtocol
      * Constructor.
      *
      * @param  string  $host OPTIONAL Hostname of remote connection (default: 127.0.0.1)
-     * @param  integer $port OPTIONAL Port number (default: null)
+     * @param  int $port OPTIONAL Port number (default: null)
      * @throws Exception\RuntimeException
      */
     public function __construct($host = '127.0.0.1', $port = null)
     {
         $this->validHost = new Validator\ValidatorChain();
-        $this->validHost->addValidator(new Validator\Hostname(Validator\Hostname::ALLOW_ALL));
+        $this->validHost->attach(new Validator\Hostname(Validator\Hostname::ALLOW_ALL));
 
         if (!$this->validHost->isValid($host)) {
             throw new Exception\RuntimeException(implode(', ', $this->validHost->getMessages()));
@@ -122,7 +118,7 @@ abstract class AbstractProtocol
     /**
      * Set the maximum log size
      *
-     * @param integer $maximumLog Maximum log size
+     * @param int $maximumLog Maximum log size
      */
     public function setMaximumLog($maximumLog)
     {
@@ -212,7 +208,7 @@ abstract class AbstractProtocol
      *
      * @param  string $remote Remote
      * @throws Exception\RuntimeException
-     * @return boolean
+     * @return bool
      */
     protected function _connect($remote)
     {
@@ -254,7 +250,7 @@ abstract class AbstractProtocol
      *
      * @param  string $request
      * @throws Exception\RuntimeException
-     * @return integer|boolean Number of bytes written to remote host
+     * @return int|bool Number of bytes written to remote host
      */
     protected function _send($request)
     {
@@ -280,7 +276,7 @@ abstract class AbstractProtocol
     /**
      * Get a line from the stream.
      *
-     * @param  integer $timeout Per-request timeout value if applicable
+     * @param  int $timeout Per-request timeout value if applicable
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -323,7 +319,7 @@ abstract class AbstractProtocol
      * Throws a Zend_Mail_Protocol_Exception if an unexpected code is returned.
      *
      * @param  string|array $code One or more codes that indicate a successful response
-     * @param  integer $timeout Per-request timeout value if applicable
+     * @param  int $timeout Per-request timeout value if applicable
      * @throws Exception\RuntimeException
      * @return string Last line of response string
      */

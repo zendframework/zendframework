@@ -3,19 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Server
  */
 
 namespace Zend\Server\Reflection;
 
 /**
  * Node Tree class for Zend_Server reflection operations
- *
- * @category   Zend
- * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
  */
 class Node
 {
@@ -58,7 +53,7 @@ class Node
      * Set parent node
      *
      * @param \Zend\Server\Reflection\Node $node
-     * @param boolean $new Whether or not the child node is newly created
+     * @param  bool $new Whether or not the child node is newly created
      * and should always be attached
      * @return void
      */
@@ -81,7 +76,7 @@ class Node
      */
     public function createChild($value)
     {
-        $child = new self($value, $this);
+        $child = new static($value, $this);
 
         return $child;
     }
@@ -114,7 +109,7 @@ class Node
     /**
      * Does this node have children?
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChildren()
     {

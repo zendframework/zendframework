@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap;
@@ -14,10 +13,6 @@ use Zend\EventManager\EventManager;
 
 /**
  * Zend\Ldap\Node provides an object oriented view into a LDAP node.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Node
  */
 class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
 {
@@ -38,14 +33,14 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * This node will be added
      *
-     * @var boolean
+     * @var bool
      */
     protected $new;
 
     /**
      * This node will be deleted
      *
-     * @var boolean
+     * @var bool
      */
     protected $delete;
 
@@ -66,7 +61,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * Controls iteration status
      *
-     * @var boolean
+     * @var bool
      */
     private $iteratorRewind = false;
 
@@ -80,7 +75,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  Dn      $dn
      * @param  array   $data
-     * @param  boolean $fromDataSource
+     * @param  bool $fromDataSource
      * @param  Ldap    $ldap
      * @throws Exception\LdapException
      */
@@ -128,9 +123,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         if ($this->ldap === null) {
             throw new Exception\LdapException(null, 'No LDAP connection specified.',
                 Exception\LdapException::LDAP_OTHER);
-        } else {
-            return $this->ldap;
         }
+
+        return $this->ldap;
     }
 
     /**
@@ -185,7 +180,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an offline method.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAttached()
     {
@@ -212,7 +207,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
 
     /**
      * @param  array   $data
-     * @param  boolean $fromDataSource
+     * @param  bool $fromDataSource
      * @throws Exception\LdapException
      */
     protected function loadData(array $data, $fromDataSource)
@@ -245,7 +240,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         } else {
             throw new Exception\LdapException(null, '$dn is of a wrong data type.');
         }
-        $new = new self($dn, array(), false, null);
+        $new = new static($dn, array(), false, null);
         $new->ensureRdnAttributeValues();
         $new->setAttribute('objectClass', $objectClass);
 
@@ -273,7 +268,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
         if ($data === null) {
             return null;
         }
-        $entry = new self($dn, $data, true, $ldap);
+        $entry = new static($dn, $data, true, $ldap);
 
         return $entry;
     }
@@ -282,7 +277,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * Factory method to create a detached Zend\Ldap\Node from array data.
      *
      * @param  array   $data
-     * @param  boolean $fromDataSource
+     * @param  bool $fromDataSource
      * @return Node
      * @throws Exception\LdapException
      */
@@ -299,7 +294,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
             throw new Exception\LdapException(null, '\'dn\' key is of a wrong data type.');
         }
         $fromDataSource = ($fromDataSource === true) ? true : false;
-        $new            = new self($dn, $data, $fromDataSource, null);
+        $new            = new static($dn, $data, $fromDataSource, null);
         $new->ensureRdnAttributeValues();
 
         return $new;
@@ -308,7 +303,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * Ensures that teh RDN attributes are correctly set.
      *
-     * @param  boolean $overwrite True to overwrite the RDN attributes
+     * @param  bool $overwrite True to overwrite the RDN attributes
      * @return void
      */
     protected function ensureRdnAttributeValues($overwrite = false)
@@ -327,7 +322,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * Node will be added (instead of updated) on calling update() if $new is true.
      *
-     * @param boolean $new
+     * @param  bool $new
      */
     protected function markAsNew($new)
     {
@@ -340,7 +335,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * Please note, that this doesn't tell you if the node is present on the server.
      * Use {@link exits()} to see if a node is already there.
      *
-     * @return boolean
+     * @return bool
      */
     public function isNew()
     {
@@ -352,7 +347,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * Node will be deleted on calling update() if $delete is true.
      *
-     * @param boolean $delete
+     * @param  bool $delete
      */
     protected function markAsToBeDeleted($delete)
     {
@@ -363,7 +358,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * Is this node going to be deleted once update() is called?
      *
-     * @return boolean
+     * @return bool
      */
     public function willBeDeleted()
     {
@@ -387,7 +382,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     /**
      * Is this node going to be moved once update() is called?
      *
-     * @return boolean
+     * @return bool
      */
     public function willBeMoved()
     {
@@ -681,7 +676,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * @param  string  $name
      * @param  mixed   $value
-     * @param  boolean $append
+     * @param  bool $append
      * @throws Exception\LdapException
      */
     protected function _setAttribute($name, $value, $append)
@@ -696,8 +691,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  string        $name
-     * @param  integer|array $value
-     * @param  boolean       $utc
+     * @param  int|array $value
+     * @param  bool       $utc
      * @return Node Provides a fluid interface
      * @throws Exception\LdapException
      */
@@ -713,8 +708,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an offline method.
      *
      * @param  string        $name
-     * @param  integer|array $value
-     * @param  boolean       $utc
+     * @param  int|array $value
+     * @param  bool       $utc
      * @return Node Provides a fluid interface
      * @throws Exception\LdapException
      */
@@ -729,9 +724,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * Checks if the attribute can be set and sets it accordingly.
      *
      * @param  string        $name
-     * @param  integer|array $value
-     * @param  boolean       $utc
-     * @param  boolean       $append
+     * @param  int|array $value
+     * @param  bool       $utc
+     * @param  bool       $append
      * @throws Exception\LdapException
      */
     protected function _setDateTimeAttribute($name, $value, $utc, $append)
@@ -803,7 +798,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
 
     /**
      * @param  string $name
-     * @return boolean
+     * @return bool
      * @throws Exception\LdapException
      */
     protected function assertChangeableAttribute($name)
@@ -816,9 +811,9 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
             throw new Exception\LdapException(null, 'Cannot change attribute because it\'s part of the RDN');
         } elseif (in_array($name, static::$systemAttributes)) {
             throw new Exception\LdapException(null, 'Cannot change attribute because it\'s read-only');
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     /**
@@ -886,7 +881,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an online method.
      *
      * @param  Ldap $ldap
-     * @return boolean
+     * @return bool
      * @throws Exception\LdapException
      */
     public function exists(Ldap $ldap = null)
@@ -925,7 +920,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an online method.
      *
      * @param  string|Filter\AbstractFilter $filter
-     * @param  integer                      $scope
+     * @param  int                      $scope
      * @param  string                       $sort
      * @return Node\Collection
      * @throws Exception\LdapException
@@ -944,8 +939,8 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * This is an online method.
      *
      * @param  string|Filter\AbstractFilter $filter
-     * @param  integer                      $scope
-     * @return integer
+     * @param  int                      $scope
+     * @return int
      * @throws Exception\LdapException
      */
     public function countSubtree($filter, $scope = Ldap::SEARCH_SCOPE_SUB)
@@ -958,7 +953,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * This is an online method.
      *
-     * @return integer
+     * @return int
      * @throws Exception\LdapException
      */
     public function countChildren()
@@ -987,7 +982,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      *
      * Can be used offline but returns false if children have not been retrieved yet.
      *
-     * @return boolean
+     * @return bool
      * @throws Exception\LdapException
      */
     public function hasChildren()
@@ -1087,7 +1082,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * after calls to rewind() or next().
      * Implements Iterator
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Text
  */
 
 namespace Zend\Text\Figlet;
@@ -13,12 +12,10 @@ namespace Zend\Text\Figlet;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\ErrorHandler;
+use Zend\Stdlib\StringUtils;
 
 /**
  * Zend\Text\Figlet is a PHP implementation of FIGlet
- *
- * @category  Zend
- * @package   Zend_Text_Figlet
  */
 class Figlet
 {
@@ -69,7 +66,7 @@ class Figlet
     /**
      * Indicates if a font was loaded yet
      *
-     * @var boolean
+     * @var bool
      */
     protected $fontLoaded = false;
 
@@ -91,7 +88,7 @@ class Figlet
     /**
      * Output width, defaults to 80.
      *
-     * @var integer
+     * @var int
      */
     protected $outputWidth = 80;
 
@@ -105,42 +102,42 @@ class Figlet
     /**
      * Height of the characters
      *
-     * @var integer
+     * @var int
      */
     protected $charHeight;
 
     /**
      * Max length of any character
      *
-     * @var integer
+     * @var int
      */
     protected $maxLength;
 
     /**
      * Smush mode
      *
-     * @var integer
+     * @var int
      */
     protected $smushMode = 0;
 
     /**
      * Smush defined by the font
      *
-     * @var integer
+     * @var int
      */
     protected $fontSmush = 0;
 
     /**
      * Smush defined by the user
      *
-     * @var integer
+     * @var int
      */
     protected $userSmush = 0;
 
     /**
      * Whether to handle paragraphs || not
      *
-     * @var boolean
+     * @var bool
      */
     protected $handleParagraphs = false;
 
@@ -150,7 +147,7 @@ class Figlet
      * For using font default, this parameter should be null, else one of
      * the values of Zend\Text\Figlet::JUSTIFICATION_*
      *
-     * @var integer
+     * @var int
      */
     protected $justification = null;
 
@@ -160,14 +157,14 @@ class Figlet
      * For using font default, this parameter should be null, else one of
      * the values of Zend\Text\Figlet::DIRECTION_*
      *
-     * @var integer
+     * @var int
      */
     protected $rightToLeft = null;
 
     /**
      * Override font file smush layout
      *
-     * @var integer
+     * @var int
      */
     protected $smushOverride = 0;
 
@@ -181,28 +178,28 @@ class Figlet
     /**
      * Previous character width
      *
-     * @var integer
+     * @var int
      */
     protected $previousCharWidth = 0;
 
     /**
      * Current character width
      *
-     * @var integer
+     * @var int
      */
     protected $currentCharWidth = 0;
 
     /**
      * Current outline length
      *
-     * @var integer
+     * @var int
      */
     protected $outlineLength = 0;
 
     /**
      * Maximum outline length
      *
-     * @var integer
+     * @var int
      */
     protected $outlineLengthLimit = 0;
 
@@ -216,14 +213,14 @@ class Figlet
     /**
      * In character line length
      *
-     * @var integer
+     * @var int
      */
     protected $inCharLineLength = 0;
 
     /**
      * Maximum in character line length
      *
-     * @var integer
+     * @var int
      */
     protected $inCharLineLengthLimit = 0;
 
@@ -318,7 +315,7 @@ class Figlet
     /**
      * Set handling of paragraphs
      *
-     * @param  boolean $handleParagraphs Whether to handle paragraphs or not
+     * @param  bool $handleParagraphs Whether to handle paragraphs or not
      * @return Figlet
      */
     public function setHandleParagraphs($handleParagraphs)
@@ -331,7 +328,7 @@ class Figlet
      * Set the justification. 0 stands for left aligned, 1 for centered and 2
      * for right aligned.
      *
-     * @param  integer $justification Justification of the output text
+     * @param  int $justification Justification of the output text
      * @return Figlet
      */
     public function setJustification($justification)
@@ -343,7 +340,7 @@ class Figlet
     /**
      * Set the output width
      *
-     * @param  integer $outputWidth Output with which should be used for word
+     * @param  int $outputWidth Output with which should be used for word
      *                              wrapping and justification
      * @return Figlet
      */
@@ -358,7 +355,7 @@ class Figlet
      * Zend\Text\Figlet::DIRECTION_LEFT_TO_RIGHT. For writing from right to left,
      * use Zend\Text\Figlet::DIRECTION_RIGHT_TO_LEFT.
      *
-     * @param  integer $rightToLeft Right-to-left mode
+     * @param  int $rightToLeft Right-to-left mode
      * @return Figlet
      */
     public function setRightToLeft($rightToLeft)
@@ -372,7 +369,7 @@ class Figlet
      *
      * Use one of the constants of Zend\Text\Figlet::SM_*, you may combine them.
      *
-     * @param  integer $smushMode Smush mode to use for generating text
+     * @param  int $smushMode Smush mode to use for generating text
      * @return Figlet
      */
     public function setSmushMode($smushMode)
@@ -413,9 +410,16 @@ class Figlet
             throw new Exception\InvalidArgumentException('$text must be a string');
         }
 
-        if ($encoding !== 'UTF-8') {
-            $text = iconv($encoding, 'UTF-8', $text);
+        // Get the string wrapper supporting UTF-8 character encoding and the input encoding
+        $strWrapper = StringUtils::getWrapper($encoding, 'UTF-8');
+
+        // Convert $text to UTF-8 and check encoding
+        $text = $strWrapper->convert($text);
+        if (!StringUtils::isValidUtf8($text)) {
+            throw new Exception\UnexpectedValueException('$text is not encoded with ' . $encoding);
         }
+
+        $strWrapper = StringUtils::getWrapper('UTF-8');
 
         $this->output     = '';
         $this->outputLine = array();
@@ -427,21 +431,14 @@ class Figlet
 
         $wordBreakMode  = 0;
         $lastCharWasEol = false;
-
-        ErrorHandler::start(E_NOTICE);
-        $textLength = iconv_strlen($text, 'UTF-8');
-        $error      = ErrorHandler::stop();
-
-        if ($textLength === false) {
-            throw new Exception\UnexpectedValueException('$text is not encoded with ' . $encoding, 0, $error);
-        }
+        $textLength     = $strWrapper->strlen($text);
 
         for ($charNum = 0; $charNum < $textLength; $charNum++) {
             // Handle paragraphs
-            $char = iconv_substr($text, $charNum, 1, 'UTF-8');
+            $char = $strWrapper->substr($text, $charNum, 1);
 
             if ($char === "\n" && $this->handleParagraphs && !$lastCharWasEol) {
-                $nextChar = iconv_substr($text, ($charNum + 1), 1, 'UTF-8');
+                $nextChar = $strWrapper->substr($text, ($charNum + 1), 1);
                 if (!$nextChar) {
                     $nextChar = null;
                 }
@@ -638,7 +635,7 @@ class Figlet
      * Returns true if this can be done, false otherwise.
      *
      * @param  string $char Character which to add to the output
-     * @return boolean
+     * @return bool
      */
     protected function _addChar($char)
     {
@@ -686,7 +683,7 @@ class Figlet
             }
         }
 
-        $this->outlineLength                          = strlen($this->outputLine[0]);
+        $this->outlineLength                         = strlen($this->outputLine[0]);
         $this->inCharLine[$this->inCharLineLength++] = $char;
 
         return true;
@@ -713,7 +710,7 @@ class Figlet
      * Returns the maximum amount that the current character can be smushed into
      * the current line.
      *
-     * @return integer
+     * @return int
      */
     protected function _smushAmount()
     {
@@ -1188,7 +1185,7 @@ class Figlet
      * Unicode compatible ord() method
      *
      * @param  string $c The char to get the value from
-     * @return integer
+     * @return int
      */
     protected function _uniOrd($c)
     {

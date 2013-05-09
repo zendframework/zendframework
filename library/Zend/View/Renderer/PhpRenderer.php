@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Renderer;
@@ -29,8 +28,47 @@ use Zend\View\Variables;
  * mark them as part of the internal implementation, and thus prevent conflict
  * with variables injected into the renderer.
  *
- * @category   Zend
- * @package    Zend_View
+ * Convenience methods for build in helpers (@see __call):
+ *
+ * @method \Zend\View\Helper\BasePath basePath($file = null)
+ * @method \Zend\View\Helper\Cycle cycle(array $data = array(), $name = \Zend\View\Helper\Cycle::DEFAULT_NAME)
+ * @method \Zend\View\Helper\DeclareVars declareVars()
+ * @method \Zend\View\Helper\Doctype doctype($doctype = null)
+ * @method mixed escapeCss($value, $recurse = \Zend\View\Helper\Escaper\AbstractHelper::RECURSE_NONE)
+ * @method mixed escapeHtml($value, $recurse = \Zend\View\Helper\Escaper\AbstractHelper::RECURSE_NONE)
+ * @method mixed escapeHtmlAttr($value, $recurse = \Zend\View\Helper\Escaper\AbstractHelper::RECURSE_NONE)
+ * @method mixed escapeJs($value, $recurse = \Zend\View\Helper\Escaper\AbstractHelper::RECURSE_NONE)
+ * @method mixed escapeUrl($value, $recurse = \Zend\View\Helper\Escaper\AbstractHelper::RECURSE_NONE)
+ * @method \Zend\View\Helper\FlashMessenger flashMessenger($namespace = null)
+ * @method \Zend\View\Helper\Gravatar gravatar($email = "", $options = array(), $attribs = array())
+ * @method \Zend\View\Helper\HeadLink headLink(array $attributes = null, $placement = \Zend\View\Helper\Placeholder\Container\AbstractContainer::APPEND)
+ * @method \Zend\View\Helper\HeadMeta headMeta($content = null, $keyValue = null, $keyType = 'name', $modifiers = array(), $placement = \Zend\View\Helper\Placeholder\Container\AbstractContainer::APPEND)
+ * @method \Zend\View\Helper\HeadScript headScript($mode = \Zend\View\Helper\HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
+ * @method \Zend\View\Helper\HeadStyle headStyle($content = null, $placement = 'APPEND', $attributes = array())
+ * @method \Zend\View\Helper\HeadTitle headTitle($title = null, $setType = null)
+ * @method string htmlFlash($data, array $attribs = array(), array $params = array(), $content = null)
+ * @method string htmlList(array $items, $ordered = false, $attribs = false, $escape = true)
+ * @method string htmlObject($data = null, $type = null, array $attribs = array(), array $params = array(), $content = null)
+ * @method string htmlPage($data, array $attribs = array(), array $params = array(), $content = null)
+ * @method string htmlQuicktime($data, array $attribs = array(), array $params = array(), $content = null)
+ * @method mixed|null identity()
+ * @method \Zend\View\Helper\InlineScript inlineScript($mode = \Zend\View\Helper\HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
+ * @method string|void json($data, array $jsonOptions = array())
+ * @method \Zend\View\Helper\Layout layout($template = null)
+ * @method \Zend\View\Helper\Navigation navigation($container = null)
+ * @method string paginationControl(\Zend\Paginator\Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
+ * @method string|\Zend\View\Helper\Partial partial($name = null, $values = null)
+ * @method string partialLoop($name = null, $values = null)
+ * @method \Zend\View\Helper\Placeholder\Container\AbstractContainer placeHolder($name = null)
+ * @method string renderChildModel($child)
+ * @method void renderToPlaceholder($script, $placeholder)
+ * @method string serverUrl($requestUri = null)
+ * @method string url($name = null, array $params = array(), $options = array(), $reuseMatchedParams = false)
+ * @method \Zend\View\Helper\ViewModel viewModel()
+ * @method \Zend\View\Helper\Navigation\Breadcrumbs breadCrumbs($container = null)
+ * @method \Zend\View\Helper\Navigation\Links links($container = null)
+ * @method \Zend\View\Helper\Navigation\Menu menu($container = null)
+ * @method \Zend\View\Helper\Navigation\Sitemap sitemap($container = null)
  */
 class PhpRenderer implements Renderer, TreeRendererInterface
 {
@@ -464,9 +502,14 @@ class PhpRenderer implements Renderer, TreeRendererInterface
                     $this->__template
                 ));
             }
-            ob_start();
-            include $this->__file;
-            $this->__content = ob_get_clean();
+            try {
+                ob_start();
+                include $this->__file;
+                $this->__content = ob_get_clean();
+            } catch (\Exception $ex) {
+                ob_end_clean();
+                throw $ex;
+            }
         }
 
         $this->setVars(array_pop($this->__varsCache));
@@ -522,5 +565,4 @@ class PhpRenderer implements Renderer, TreeRendererInterface
     {
         $this->__vars = clone $this->vars();
     }
-
 }

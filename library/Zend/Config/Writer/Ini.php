@@ -3,20 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Config
  */
 
 namespace Zend\Config\Writer;
 
 use Zend\Config\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Config
- * @subpackage Writer
- */
 class Ini extends AbstractWriter
 {
     /**
@@ -74,7 +68,7 @@ class Ini extends AbstractWriter
     /**
      * Return whether the writer should render without sections.
      *
-     * @return boolean
+     * @return bool
      */
     public function shouldRenderWithoutSections()
     {
@@ -149,7 +143,7 @@ class Ini extends AbstractWriter
      */
     protected function prepareValue($value)
     {
-        if (is_integer($value) || is_float($value)) {
+        if (is_int($value) || is_float($value)) {
             return $value;
         } elseif (is_bool($value)) {
             return ($value ? 'true' : 'false');

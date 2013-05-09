@@ -14,8 +14,19 @@
     "target-dir": "Zend/I18n",
     "require": {
         "php": ">=5.3.3",
-        "ext-intl": "*",
-        "zendframework/zend-filter": "self.version",
         "zendframework/zend-stdlib": "self.version"
+    },
+    "suggest": {
+        "ext-intl": "Required for most features of Zend\\I18n; included in default builds of PHP",
+        "zendframework/zend-eventmanager": "You should install this package to use the events in the translator",
+        "zendframework/zend-filter": "You should install this package to use the provided filters",
+        "zendframework/zend-validator": "You should install this package to use the provided validators",
+        "zendframework/zend-view": "You should install this package to use the provided view helpers"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev",
+            "dev-develop": "2.3-dev"
+        }
     }
 }

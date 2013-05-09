@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -15,14 +14,12 @@ use Zend\View\Model\ModelInterface;
 
 /**
  * Helper for rendering a template fragment in its own variable scope.
- *
- * @package    Zend_View
- * @subpackage Helper
  */
 class Partial extends AbstractHelper
 {
     /**
      * Variable to which object will be assigned
+     *
      * @var string
      */
     protected $objectKey;
@@ -31,10 +28,10 @@ class Partial extends AbstractHelper
      * Renders a template fragment within a variable scope distinct from the
      * calling View object. It proxies to view's render function
      *
-     * @param  string|ModelInterface $name Name of view script, or a view model
-     * @param  array|object $values Variables to populate in the view
-     * @return string|Partial
+     * @param  string|ModelInterface $name   Name of view script, or a view model
+     * @param  array|object          $values Variables to populate in the view
      * @throws Exception\RuntimeException
+     * @return string|Partial
      */
     public function __invoke($name = null, $values = null)
     {
@@ -78,6 +75,7 @@ class Partial extends AbstractHelper
         }
 
         $this->objectKey = (string) $key;
+
         return $this;
     }
 

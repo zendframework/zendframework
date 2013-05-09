@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace Zend\Mail;
@@ -13,10 +12,6 @@ namespace Zend\Mail;
 use Countable;
 use Iterator;
 
-/**
- * @category   Zend
- * @package    Zend_Mail
- */
 class AddressList implements Countable, Iterator
 {
     /**
@@ -114,7 +109,7 @@ class AddressList implements Countable, Iterator
      * Get an address by email
      *
      * @param  string $email
-     * @return boolean|Address\AddressInterface
+     * @return bool|Address\AddressInterface
      */
     public function get($email)
     {

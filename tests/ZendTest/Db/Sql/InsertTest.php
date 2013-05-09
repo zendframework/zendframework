@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Db
  */
@@ -12,6 +12,8 @@ namespace ZendTest\Db\Sql;
 
 use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\TableIdentifier;
+use ZendTest\Db\TestAsset\TrustingSql92Platform;
 
 class InsertTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,6 +38,10 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     {
         $this->insert->into('table', 'schema');
         $this->assertEquals('table', $this->readAttribute($this->insert, 'table'));
+
+        $tableIdentifier = new TableIdentifier('table', 'schema');
+        $this->insert->into($tableIdentifier);
+        $this->assertEquals($tableIdentifier, $this->readAttribute($this->insert, 'table'));
     }
 
     /**
@@ -89,6 +95,25 @@ class InsertTest extends \PHPUnit_Framework_TestCase
             ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()')));
 
         $this->insert->prepareStatement($mockAdapter, $mockStatement);
+
+        // with TableIdentifier
+        $this->insert = new Insert;
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $pContainer = new \Zend\Db\Adapter\ParameterContainer(array());
+        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+        $mockStatement->expects($this->at(1))
+            ->method('setSql')
+            ->with($this->equalTo('INSERT INTO "sch"."foo" ("bar", "boo") VALUES (?, NOW())'));
+
+        $this->insert->into(new TableIdentifier('foo', 'sch'))
+            ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()')));
+
+        $this->insert->prepareStatement($mockAdapter, $mockStatement);
     }
 
     /**
@@ -99,7 +124,14 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->insert->into('foo')
             ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null));
 
-        $this->assertEquals('INSERT INTO "foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $this->insert->getSqlString());
+        $this->assertEquals('INSERT INTO "foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $this->insert->getSqlString(new TrustingSql92Platform()));
+
+        // with TableIdentifier
+        $this->insert = new Insert;
+        $this->insert->into(new TableIdentifier('foo', 'sch'))
+            ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null));
+
+        $this->assertEquals('INSERT INTO "sch"."foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $this->insert->getSqlString(new TrustingSql92Platform()));
     }
 
     /**
@@ -153,7 +185,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->insert->into('foo')
             ->values(array('qux' => 100), Insert::VALUES_MERGE);
 
-        $this->assertEquals('INSERT INTO "foo" ("bar", "boo", "bam", "qux") VALUES (\'baz\', NOW(), NULL, \'100\')', $this->insert->getSqlString());
+        $this->assertEquals('INSERT INTO "foo" ("bar", "boo", "bam", "qux") VALUES (\'baz\', NOW(), NULL, \'100\')', $this->insert->getSqlString(new TrustingSql92Platform()));
 
     }
 

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_View
  */
@@ -44,7 +44,6 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        PlaceholderRegistry::unsetRegistry();
         Helper\Doctype::unsetDoctypeRegistry();
         $this->basePath = __DIR__ . '/_files/modules';
         $this->view     = new View();
@@ -61,17 +60,6 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->helper);
-    }
-
-    public function testNamespaceRegisteredInPlaceholderRegistryAfterInstantiation()
-    {
-        $registry = PlaceholderRegistry::getRegistry();
-        if ($registry->containerExists('Zend_View_Helper_HeadLink')) {
-            $registry->deleteContainer('Zend_View_Helper_HeadLink');
-        }
-        $this->assertFalse($registry->containerExists('Zend_View_Helper_HeadLink'));
-        $helper = new Helper\HeadLink();
-        $this->assertTrue($registry->containerExists('Zend_View_Helper_HeadLink'));
     }
 
     public function testHeadLinkReturnsObjectInstance()
@@ -379,6 +367,22 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         $this->helper->appendStylesheet('/bar/baz', array('screen','print'));
         $test = $this->helper->toString();
         $this->assertContains(' media="screen,print"', $test);
+    }
+
+    public function testSetPrevRelationship()
+    {
+        $this->helper->appendPrev('/foo/bar');
+        $test = $this->helper->toString();
+        $this->assertContains('href="/foo/bar"', $test);
+        $this->assertContains('rel="prev"', $test);
+    }
+
+    public function testSetNextRelationship()
+    {
+        $this->helper->appendNext('/foo/bar');
+        $test = $this->helper->toString();
+        $this->assertContains('href="/foo/bar"', $test);
+        $this->assertContains('rel="next"', $test);
     }
 
     /**

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
@@ -13,10 +12,6 @@ namespace Zend\Validator;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
 class GreaterThan extends AbstractValidator
 {
     const NOT_GREATER           = 'notGreaterThan';
@@ -52,7 +47,7 @@ class GreaterThan extends AbstractValidator
      * If false, then strict comparisons are done, and the value may equal
      * the min option
      *
-     * @var boolean
+     * @var bool
      */
     protected $inclusive;
 
@@ -117,7 +112,7 @@ class GreaterThan extends AbstractValidator
     /**
      * Returns the inclusive option
      *
-     * @return boolean
+     * @return bool
      */
     public function getInclusive()
     {
@@ -127,7 +122,7 @@ class GreaterThan extends AbstractValidator
     /**
      * Sets the inclusive option
      *
-     * @param  boolean $inclusive
+     * @param  bool $inclusive
      * @return GreaterThan Provides a fluent interface
      */
     public function setInclusive($inclusive)
@@ -140,7 +135,7 @@ class GreaterThan extends AbstractValidator
      * Returns true if and only if $value is greater than min option
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {
@@ -160,5 +155,4 @@ class GreaterThan extends AbstractValidator
 
         return true;
     }
-
 }

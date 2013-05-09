@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc\Server;
@@ -24,10 +23,6 @@ namespace Zend\XmlRpc\Server;
  *
  * To allow method chaining, you may use the {@link getInstance()} factory
  * to instantiate a Zend_XmlRpc_Server_Fault.
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Server
  */
 class Fault extends \Zend\XmlRpc\Fault
 {
@@ -84,7 +79,7 @@ class Fault extends \Zend\XmlRpc\Fault
      */
     public static function getInstance(\Exception $e)
     {
-        return new self($e);
+        return new static($e);
     }
 
     /**
@@ -135,7 +130,7 @@ class Fault extends \Zend\XmlRpc\Fault
      * 'observe' that accepts an exception as its sole argument.
      *
      * @param string $class
-     * @return boolean
+     * @return bool
      */
     public static function attachObserver($class)
     {
@@ -157,7 +152,7 @@ class Fault extends \Zend\XmlRpc\Fault
      * Detach an observer
      *
      * @param string $class
-     * @return boolean
+     * @return bool
      */
     public static function detachObserver($class)
     {

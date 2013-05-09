@@ -3,19 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
 
 use Countable;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
 class ValidatorChain implements
     Countable,
     ValidatorInterface
@@ -88,22 +83,35 @@ class ValidatorChain implements
     }
 
     /**
-     * Adds a validator to the end of the chain
+     * Attach a validator to the end of the chain
      *
      * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
      * if one exists, will not be executed.
      *
      * @param  ValidatorInterface      $validator
-     * @param  boolean                 $breakChainOnFailure
+     * @param  bool                 $breakChainOnFailure
+     * @return ValidatorChain Provides a fluent interface
+     */
+    public function attach(ValidatorInterface $validator, $breakChainOnFailure = false)
+    {
+        $this->validators[] = array(
+            'instance'            => $validator,
+            'breakChainOnFailure' => (bool) $breakChainOnFailure,
+        );
+        return $this;
+    }
+
+    /**
+     * Proxy to attach() to keep BC
+     *
+     * @deprecated Please use attach()
+     * @param  ValidatorInterface      $validator
+     * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
     public function addValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
-        $this->validators[] = array(
-            'instance'            => $validator,
-            'breakChainOnFailure' => (boolean)$breakChainOnFailure
-        );
-        return $this;
+        return $this->attach($validator, $breakChainOnFailure);
     }
 
     /**
@@ -113,16 +121,17 @@ class ValidatorChain implements
      * if one exists, will not be executed.
      *
      * @param  ValidatorInterface      $validator
-     * @param  boolean                 $breakChainOnFailure
+     * @param  bool                 $breakChainOnFailure
      * @return ValidatorChain Provides a fluent interface
      */
     public function prependValidator(ValidatorInterface $validator, $breakChainOnFailure = false)
     {
-        array_unshift($this->validators,
-                      array(
-                           'instance'            => $validator,
-                           'breakChainOnFailure' => (boolean)$breakChainOnFailure
-                      )
+        array_unshift(
+            $this->validators,
+            array(
+               'instance'            => $validator,
+               'breakChainOnFailure' => (bool) $breakChainOnFailure,
+            )
         );
         return $this;
     }
@@ -135,11 +144,25 @@ class ValidatorChain implements
      * @param  bool   $breakChainOnFailure
      * @return ValidatorChain
      */
-    public function addByName($name, $options = array(), $breakChainOnFailure = false)
+    public function attachByName($name, $options = array(), $breakChainOnFailure = false)
     {
         $validator = $this->plugin($name, $options);
-        $this->addValidator($validator, $breakChainOnFailure);
+        $this->attach($validator, $breakChainOnFailure);
         return $this;
+    }
+
+    /**
+     * Proxy to attachByName() to keep BC
+     *
+     * @deprecated Please use attachByName()
+     * @param  string $name
+     * @param  array  $options
+     * @param  bool   $breakChainOnFailure
+     * @return ValidatorChain
+     */
+    public function addByName($name, $options = array(), $breakChainOnFailure = false)
+    {
+        return $this->attachByName($name, $options, $breakChainOnFailure);
     }
 
     /**
@@ -164,7 +187,7 @@ class ValidatorChain implements
      *
      * @param  mixed $value
      * @param  mixed $context Extra "context" to provide the validator
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $context = null)
     {
@@ -224,7 +247,7 @@ class ValidatorChain implements
      * Invoke chain as command
      *
      * @param  mixed $value
-     * @return boolean
+     * @return bool
      */
     public function __invoke($value)
     {
@@ -243,6 +266,6 @@ class ValidatorChain implements
      */
     public function __sleep()
     {
-        return array('validators','messages');
+        return array('validators', 'messages');
     }
 }

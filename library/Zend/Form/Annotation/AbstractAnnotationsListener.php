@@ -3,14 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form\Annotation;
 
 use ReflectionClass;
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 
@@ -23,33 +23,9 @@ use Zend\EventManager\ListenerAggregateInterface;
  * on the "discoverName" event and will use the class or property name, as
  * discovered via reflection, if no other annotation has provided the name
  * already.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage Annotation
  */
-abstract class AbstractAnnotationsListener implements ListenerAggregateInterface
+abstract class AbstractAnnotationsListener extends AbstractListenerAggregate
 {
-    /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
-    /**
-     * Detach listeners
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if (false !== $events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
-    }
-
     /**
      * Attempt to discover a name set via annotation
      *

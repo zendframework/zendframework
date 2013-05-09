@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace Zend\Feed\PubSubHubbub;
@@ -14,11 +13,6 @@ use Traversable;
 use Zend\Http\PhpEnvironment\Response as PhpResponse;
 use Zend\Stdlib\ArrayUtils;
 
-/**
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- * @subpackage Callback
- */
 abstract class AbstractCallback implements CallbackInterface
 {
     /**
@@ -205,7 +199,9 @@ abstract class AbstractCallback implements CallbackInterface
     protected function _detectCallbackUrl()
     {
         $callbackUrl = '';
-        if (isset($_SERVER['HTTP_X_REWRITE_URL'])) {
+        if (isset($_SERVER['HTTP_X_ORIGINAL_URL'])) {
+            $callbackUrl = $_SERVER['HTTP_X_ORIGINAL_URL'];
+        } elseif (isset($_SERVER['HTTP_X_REWRITE_URL'])) {
             $callbackUrl = $_SERVER['HTTP_X_REWRITE_URL'];
         } elseif (isset($_SERVER['REQUEST_URI'])) {
             $callbackUrl = $_SERVER['REQUEST_URI'];
@@ -246,9 +242,9 @@ abstract class AbstractCallback implements CallbackInterface
             || ($scheme == 'https' && $port == 443)
         ) {
             return $name;
-        } else {
-            return $name . ':' . $port;
         }
+
+        return $name . ':' . $port;
     }
 
     /**

@@ -3,22 +3,18 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form;
 
 use Traversable;
 use Zend\Stdlib\Hydrator;
+use Zend\Stdlib\Hydrator\HydratorAwareInterface;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\Stdlib\PriorityQueue;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- */
 class Fieldset extends Element implements FieldsetInterface
 {
     /**
@@ -86,7 +82,7 @@ class Fieldset extends Element implements FieldsetInterface
      * Set options for a fieldset. Accepted options are:
      * - use_as_base_fieldset: is this fieldset use as the base fieldset?
      *
-     * @param  array|\Traversable $options
+     * @param  array|Traversable $options
      * @return Element|ElementInterface
      * @throws Exception\InvalidArgumentException
      */
@@ -358,10 +354,10 @@ class Fieldset extends Element implements FieldsetInterface
      * Ensures state is ready for use. Here, we append the name of the fieldsets to every elements in order to avoid
      * name clashes if the same fieldset is used multiple times
      *
-     * @param  Form $form
+     * @param  FormInterface $form
      * @return mixed|void
      */
-    public function prepareElement(Form $form)
+    public function prepareElement(FormInterface $form)
     {
         $name = $this->getName();
 
@@ -463,7 +459,7 @@ class Fieldset extends Element implements FieldsetInterface
      * Checks if the object can be set in this fieldset
      *
      * @param object $object
-     * @return boolean
+     * @return bool
      */
     public function allowObjectBinding($object)
     {
@@ -485,6 +481,9 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * Get the hydrator used when binding an object to the fieldset
      *
+     * If no hydrator is present and object implements HydratorAwareInterface,
+     * hydrator will be retrieved from the object.
+     *
      * Will lazy-load Hydrator\ArraySerializable if none is present.
      *
      * @return HydratorInterface
@@ -492,7 +491,11 @@ class Fieldset extends Element implements FieldsetInterface
     public function getHydrator()
     {
         if (!$this->hydrator instanceof HydratorInterface) {
-            $this->setHydrator(new Hydrator\ArraySerializable());
+            if ($this->object instanceof HydratorAwareInterface) {
+                $this->setHydrator($this->object->getHydrator());
+            } else {
+                $this->setHydrator(new Hydrator\ArraySerializable());
+            }
         }
         return $this->hydrator;
     }
@@ -500,7 +503,7 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * Checks if this fieldset can bind data
      *
-     * @return boolean
+     * @return bool
      */
     public function allowValueBinding()
     {
@@ -525,7 +528,7 @@ class Fieldset extends Element implements FieldsetInterface
 
             $element = $this->byName[$name];
 
-            if($element instanceof FieldsetInterface && $element->allowValueBinding()) {
+            if ($element instanceof FieldsetInterface && $element->allowValueBinding()) {
                 $value = $element->bindValues($value);
             }
 

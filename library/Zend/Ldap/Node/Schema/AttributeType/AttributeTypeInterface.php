@@ -3,19 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Node\Schema\AttributeType;
 
 /**
  * This class provides a contract for schema attribute-types.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Schema
  */
 interface AttributeTypeInterface
 {
@@ -50,7 +45,7 @@ interface AttributeTypeInterface
     /**
      * Returns if the attribute is single-valued.
      *
-     * @return boolean
+     * @return bool
      */
     public function isSingleValued();
 

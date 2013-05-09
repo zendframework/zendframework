@@ -3,14 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Session
  */
 
 namespace Zend\Session\Storage;
 
-use ArrayObject;
+use Zend\Stdlib\ArrayObject;
 use Zend\Session\Exception;
 
 /**
@@ -18,10 +17,6 @@ use Zend\Session\Exception;
  *
  * Defines an ArrayObject interface for accessing session storage, with options
  * for setting metadata, locking, and marking as isImmutable.
- *
- * @category   Zend
- * @package    Zend_Session
- * @subpackage Storage
  */
 class ArrayStorage extends ArrayObject implements StorageInterface
 {
@@ -37,9 +32,9 @@ class ArrayStorage extends ArrayObject implements StorageInterface
      * Instantiates storage as an ArrayObject, allowing property access.
      * Also sets the initial request access time.
      *
-     * @param  array $input
-     * @param  int $flags
-     * @param  string $iteratorClass
+     * @param array  $input
+     * @param int    $flags
+     * @param string $iteratorClass
      */
     public function __construct(
         $input = array(),
@@ -53,12 +48,13 @@ class ArrayStorage extends ArrayObject implements StorageInterface
     /**
      * Set the request access time
      *
-     * @param  float $time
+     * @param  float        $time
      * @return ArrayStorage
      */
     protected function setRequestAccessTime($time)
     {
         $this->setMetadata('_REQUEST_ACCESS_TIME', $time);
+
         return $this;
     }
 
@@ -79,13 +75,13 @@ class ArrayStorage extends ArrayObject implements StorageInterface
      * locked, raises an exception.
      *
      * @param  string $key
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return void
      */
 
     /**
-     * @param  mixed $key
-     * @param  mixed $value
+     * @param  mixed                      $key
+     * @param  mixed                      $value
      * @throws Exception\RuntimeException
      */
     public function offsetSet($key, $value)
@@ -114,6 +110,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
     {
         if (null === $key) {
             $this->setMetadata('_READONLY', true);
+
             return $this;
         }
         if (isset($this[$key])) {
@@ -155,6 +152,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
         if (!$locks) {
             return false;
         }
+
         return array_key_exists($key, $locks);
     }
 
@@ -170,6 +168,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
             // Unlock everything
             $this->setMetadata('_READONLY', false);
             $this->setMetadata('_LOCKS', false);
+
             return $this;
         }
 
@@ -188,6 +187,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
             unset($locks[$key]);
             $this->setMetadata('_LOCKS', $locks, true);
         }
+
         return $this;
     }
 
@@ -199,6 +199,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
     public function markImmutable()
     {
         $this->isImmutable = true;
+
         return $this;
     }
 
@@ -222,9 +223,9 @@ class ArrayStorage extends ArrayObject implements StorageInterface
      * - localizing session storage
      * - etc.
      *
-     * @param  string $key
-     * @param  mixed $value
-     * @param  bool $overwriteArray Whether to overwrite or merge array values; by default, merges
+     * @param  string                     $key
+     * @param  mixed                      $value
+     * @param  bool                       $overwriteArray Whether to overwrite or merge array values; by default, merges
      * @return ArrayStorage
      * @throws Exception\RuntimeException
      */
@@ -239,6 +240,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
         if (!isset($this['__ZF'])) {
             $this['__ZF'] = array();
         }
+
         if (isset($this['__ZF'][$key]) && is_array($value)) {
             if ($overwriteArray) {
                 $this['__ZF'][$key] = $value;
@@ -291,7 +293,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
     /**
      * Clear the storage object or a subkey of the object
      *
-     * @param  null|int|string $key
+     * @param  null|int|string            $key
      * @return ArrayStorage
      * @throws Exception\RuntimeException
      */
@@ -302,6 +304,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
         }
         if (null === $key) {
             $this->fromArray(array());
+
             return $this;
         }
 
@@ -324,7 +327,7 @@ class ArrayStorage extends ArrayObject implements StorageInterface
      *
      * Overwrites any data that was previously set.
      *
-     * @param  array $array
+     * @param  array        $array
      * @return ArrayStorage
      */
     public function fromArray(array $array)
@@ -332,22 +335,26 @@ class ArrayStorage extends ArrayObject implements StorageInterface
         $ts = $this->getRequestAccessTime();
         $this->exchangeArray($array);
         $this->setRequestAccessTime($ts);
+
         return $this;
     }
 
     /**
      * Cast the object to an array
      *
-     * Returns data only, no metadata.
-     *
+     * @param  bool $metaData Whether to include metadata
      * @return array
      */
-    public function toArray()
+    public function toArray($metaData = false)
     {
         $values = $this->getArrayCopy();
+        if ($metaData) {
+            return $values;
+        }
         if (isset($values['__ZF'])) {
             unset($values['__ZF']);
         }
+
         return $values;
     }
 }

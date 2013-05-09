@@ -3,31 +3,29 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router\Http;
 
 use Traversable;
+use Zend\I18n\Translator\Translator;
 use Zend\Mvc\Router\Exception;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;
 
 /**
  * Segment route.
- *
- * @package    Zend_Mvc_Router
- * @subpackage Http
- * @see        http://guides.rubyonrails.org/routing.html
  */
 class Segment implements RouteInterface
 {
     /**
-     * @var array Cache for the encode output
+     * Cache for the encode output.
+     *
+     * @var array
      */
-    private static $cacheEncode = array();
+    protected static $cacheEncode = array();
 
     /**
      * Map of allowed special chars in path segments.
@@ -41,7 +39,7 @@ class Segment implements RouteInterface
      *
      * @var array
      */
-    private static $urlencodeCorrectionMap = array(
+    protected static $urlencodeCorrectionMap = array(
         '%21' => "!", // sub-delims
         '%24' => "$", // sub-delims
         '%26' => "&", // sub-delims
@@ -58,7 +56,7 @@ class Segment implements RouteInterface
         '%3D' => "=", // sub-delims
         '%40' => "@", // pchar
 //      '%5F' => "_", // unreserved - not touched by rawurlencode
-        '%7E' => "~", // unreserved
+//      '%7E' => "~", // unreserved - not touched by rawurlencode
     );
 
     /**
@@ -97,6 +95,13 @@ class Segment implements RouteInterface
     protected $assembledParams = array();
 
     /**
+     * Translation keys used in the regex.
+     *
+     * @var array
+     */
+    protected $translationKeys = array();
+
+    /**
      * Create a new regex route.
      *
      * @param  string $route
@@ -113,10 +118,10 @@ class Segment implements RouteInterface
     /**
      * factory(): defined by RouteInterface interface.
      *
-     * @see    Route::factory()
+     * @see    \Zend\Mvc\Router\RouteInterface::factory()
      * @param  array|Traversable $options
-     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
      * @return Segment
+     * @throws Exception\InvalidArgumentException
      */
     public static function factory($options = array())
     {
@@ -166,19 +171,11 @@ class Segment implements RouteInterface
             }
 
             if ($matches['token'] === ':') {
-                if (isset($def[$currentPos]) && $def[$currentPos] === '{') {
-                    if (!preg_match('(\G\{(?P<name>[^}]+)\}:?)', $def, $matches, 0, $currentPos)) {
-                        throw new Exception\RuntimeException('Translated parameter missing closing bracket');
-                    }
-
-                    $levelParts[$level][] = array('translated-parameter', $matches['name']);
-                } else {
-                    if (!preg_match('(\G(?P<name>[^:/{\[\]]+)(?:{(?P<delimiters>[^}]+)})?:?)', $def, $matches, 0, $currentPos)) {
-                        throw new Exception\RuntimeException('Found empty parameter name');
-                    }
-
-                    $levelParts[$level][] = array('parameter', $matches['name'], isset($matches['delimiters']) ? $matches['delimiters'] : null);
+                if (!preg_match('(\G(?P<name>[^:/{\[\]]+)(?:{(?P<delimiters>[^}]+)})?:?)', $def, $matches, 0, $currentPos)) {
+                    throw new Exception\RuntimeException('Found empty parameter name');
                 }
+
+                $levelParts[$level][] = array('parameter', $matches['name'], isset($matches['delimiters']) ? $matches['delimiters'] : null);
 
                 $currentPos += strlen($matches[0]);
             } elseif ($matches['token'] === '{') {
@@ -218,9 +215,8 @@ class Segment implements RouteInterface
      *
      * @param  array   $parts
      * @param  array   $constraints
-     * @param  integer $groupIndex
+     * @param  int $groupIndex
      * @return string
-     * @throws Exception\RuntimeException
      */
     protected function buildRegex(array $parts, array $constraints, &$groupIndex = 1)
     {
@@ -250,15 +246,10 @@ class Segment implements RouteInterface
                     $regex .= '(?:' . $this->buildRegex($part[1], $constraints, $groupIndex) . ')?';
                     break;
 
-                // @codeCoverageIgnoreStart
                 case 'translated-literal':
-                    throw new Exception\RuntimeException('Translated literals are not implemented yet');
+                    $regex .= '#' . $part[1] . '#';
+                    $this->translationKeys[] = $part[1];
                     break;
-
-                case 'translated-parameter':
-                    throw new Exception\RuntimeException('Translated parameters are not implemented yet');
-                    break;
-                // @codeCoverageIgnoreEnd
             }
         }
 
@@ -270,14 +261,25 @@ class Segment implements RouteInterface
      *
      * @param  array   $parts
      * @param  array   $mergedParams
-     * @param  boolean $isOptional
-     * @param  boolean $hasChild
+     * @param  bool    $isOptional
+     * @param  bool    $hasChild
+     * @param  array   $options
      * @return string
-     * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
-    protected function buildPath(array $parts, array $mergedParams, $isOptional, $hasChild)
+    protected function buildPath(array $parts, array $mergedParams, $isOptional, $hasChild, array $options)
     {
+        if ($this->translationKeys) {
+            if (!isset($options['translator']) || !$options['translator'] instanceof Translator) {
+                throw new Exception\RuntimeException('No translator provided');
+            }
+
+            $translator = $options['translator'];
+            $textDomain = (isset($options['text_domain']) ? $options['text_domain'] : 'default');
+            $locale     = (isset($options['locale']) ? $options['locale'] : null);
+        }
+
         $path      = '';
         $skip      = true;
         $skippable = false;
@@ -308,7 +310,7 @@ class Segment implements RouteInterface
 
                 case 'optional':
                     $skippable    = true;
-                    $optionalPart = $this->buildPath($part[1], $mergedParams, true, $hasChild);
+                    $optionalPart = $this->buildPath($part[1], $mergedParams, true, $hasChild, $options);
 
                     if ($optionalPart !== '') {
                         $path .= $optionalPart;
@@ -316,15 +318,9 @@ class Segment implements RouteInterface
                     }
                     break;
 
-                // @codeCoverageIgnoreStart
                 case 'translated-literal':
-                    throw new Exception\RuntimeException('Translated literals are not implemented yet');
+                    $path .= $translator->translate($part[1], $textDomain, $locale);
                     break;
-
-                case 'translated-parameter':
-                    throw new Exception\RuntimeException('Translated parameters are not implemented yet');
-                    break;
-                // @codeCoverageIgnoreEnd
             }
         }
 
@@ -338,12 +334,14 @@ class Segment implements RouteInterface
     /**
      * match(): defined by RouteInterface interface.
      *
-     * @see    Route::match()
-     * @param  Request $request
+     * @see    \Zend\Mvc\Router\RouteInterface::match()
+     * @param  Request     $request
      * @param  string|null $pathOffset
-     * @return RouteMatch
+     * @param  array       $options
+     * @return RouteMatch|null
+     * @throws Exception\RuntimeException
      */
-    public function match(Request $request, $pathOffset = null)
+    public function match(Request $request, $pathOffset = null, array $options = array())
     {
         if (!method_exists($request, 'getUri')) {
             return null;
@@ -352,10 +350,26 @@ class Segment implements RouteInterface
         $uri  = $request->getUri();
         $path = $uri->getPath();
 
+        $regex = $this->regex;
+
+        if ($this->translationKeys) {
+            if (!isset($options['translator']) || !$options['translator'] instanceof Translator) {
+                throw new Exception\RuntimeException('No translator provided');
+            }
+
+            $translator = $options['translator'];
+            $textDomain = (isset($options['text_domain']) ? $options['text_domain'] : 'default');
+            $locale     = (isset($options['locale']) ? $options['locale'] : null);
+
+            foreach ($this->translationKeys as $key) {
+                $regex = str_replace('#' . $key . '#', $translator->translate($key, $textDomain, $locale), $regex);
+            }
+        }
+
         if ($pathOffset !== null) {
-            $result = preg_match('(\G' . $this->regex . ')', $path, $matches, null, $pathOffset);
+            $result = preg_match('(\G' . $regex . ')', $path, $matches, null, $pathOffset);
         } else {
-            $result = preg_match('(^' . $this->regex . '$)', $path, $matches);
+            $result = preg_match('(^' . $regex . '$)', $path, $matches);
         }
 
         if (!$result) {
@@ -377,7 +391,7 @@ class Segment implements RouteInterface
     /**
      * assemble(): Defined by RouteInterface interface.
      *
-     * @see    Route::assemble()
+     * @see    \Zend\Mvc\Router\RouteInterface::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed
@@ -390,14 +404,15 @@ class Segment implements RouteInterface
             $this->parts,
             array_merge($this->defaults, $params),
             false,
-            (isset($options['has_child']) ? $options['has_child'] : false)
+            (isset($options['has_child']) ? $options['has_child'] : false),
+            $options
         );
     }
 
     /**
      * getAssembledParams(): defined by RouteInterface interface.
      *
-     * @see    Route::getAssembledParams
+     * @see    RouteInterface::getAssembledParams
      * @return array
      */
     public function getAssembledParams()
@@ -408,10 +423,10 @@ class Segment implements RouteInterface
     /**
      * Encode a path segment.
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
-    private function encode($value)
+    protected function encode($value)
     {
         if (!isset(static::$cacheEncode[$value])) {
             static::$cacheEncode[$value] = rawurlencode($value);
@@ -423,10 +438,10 @@ class Segment implements RouteInterface
     /**
      * Decode a path segment.
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
-    private function decode($value)
+    protected function decode($value)
     {
         return rawurldecode($value);
     }

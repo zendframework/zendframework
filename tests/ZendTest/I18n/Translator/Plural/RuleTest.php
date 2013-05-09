@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_I18n
  */
@@ -149,5 +149,11 @@ class RuleTest extends TestCase
         for ($i = 0; $i < 200; $i++) {
             $this->assertEquals((int) $expectedValues[$i], $rule->evaluate($i));
         }
+    }
+
+    public function testGetNumPlurals()
+    {
+        $rule = Rule::fromString('nplurals=9; plural=n');
+        $this->assertEquals(9, $rule->getNumPlurals());
     }
 }

@@ -3,18 +3,12 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Metadata\Object;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Metadata
- */
 class ColumnObject
 {
 
@@ -50,7 +44,7 @@ class ColumnObject
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $isNullable = null;
 
@@ -62,13 +56,13 @@ class ColumnObject
 
     /**
      *
-     * @var integer
+     * @var int
      */
     protected $characterMaximumLength = null;
 
     /**
      *
-     * @var integer
+     * @var int
      */
     protected $characterOctetLength = null;
 
@@ -86,7 +80,7 @@ class ColumnObject
 
     /**
      *
-     * @var boolean
+     * @var bool
      */
     protected $numericUnsigned = null;
 
@@ -325,7 +319,7 @@ class ColumnObject
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getNumericUnsigned()
     {
@@ -333,7 +327,7 @@ class ColumnObject
     }
 
     /**
-     * @param boolean $numericUnsigned
+     * @param  bool $numericUnsigned
      * @return ColumnObject
      */
     public function setNumericUnsigned($numericUnsigned)
@@ -343,7 +337,7 @@ class ColumnObject
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isNumericUnsigned()
     {
@@ -392,5 +386,4 @@ class ColumnObject
         $this->errata[$errataName] = $errataValue;
         return $this;
     }
-
 }

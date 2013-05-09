@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_XmlRpc
  */
@@ -30,7 +30,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     /**
      * @var bool
      */
-    protected $_errorOccured = false;
+    protected $_errorOccurred = false;
 
     /**
      * Setup environment
@@ -73,7 +73,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      *
      * Call as method call
      *
-     * Returns: boolean
+     * Returns: bool
      */
     public function testIsFault()
     {
@@ -100,7 +100,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      * Expects:
      * - response:
      *
-     * Returns: boolean
+     * Returns: bool
      */
     public function testLoadXml()
     {
@@ -133,9 +133,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         set_error_handler(array($this, 'trackError'));
         $invalidResponse = 'foo';
         $response = new Response();
-        $this->assertFalse($this->_errorOccured);
+        $this->assertFalse($this->_errorOccurred);
         $this->assertFalse($response->loadXml($invalidResponse));
-        $this->assertFalse($this->_errorOccured);
+        $this->assertFalse($this->_errorOccurred);
     }
 
     /**
@@ -242,7 +242,7 @@ EOD;
 
     public function trackError($error)
     {
-        $this->_errorOccured = true;
+        $this->_errorOccurred = true;
     }
 
     /**

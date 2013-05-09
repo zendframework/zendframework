@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mvc
  */
@@ -12,19 +12,18 @@ namespace ZendTest\Mvc;
 
 use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
+use ReflectionObject;
 use stdClass;
 use Zend\Config\Config;
-use Zend\EventManager\EventManager;
 use Zend\Http\Request;
 use Zend\Http\PhpEnvironment\Response;
-use Zend\Modulemanager\ModuleManager;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router;
 use Zend\Mvc\Service\ServiceManagerConfig;
-use Zend\Mvc\View\Http\ViewManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Uri\UriFactory;
+use ZendTest\Mvc\TestAsset\StubBootstrapListener;
 
 /**
  * @category   Zend
@@ -37,6 +36,11 @@ class ApplicationTest extends TestCase
      * @var ServiceManager
      */
     protected $serviceManager;
+
+    /**
+     * @var Application
+     */
+    protected $application;
 
     public function setUp()
     {
@@ -68,11 +72,14 @@ class ApplicationTest extends TestCase
                     'Request'          => 'Zend\Http\PhpEnvironment\Request',
                     'Response'         => 'Zend\Http\PhpEnvironment\Response',
                     'RouteListener'    => 'Zend\Mvc\RouteListener',
-                    'ViewManager'      => 'ZendTest\Mvc\TestAsset\MockViewManager'
+                    'ViewManager'      => 'ZendTest\Mvc\TestAsset\MockViewManager',
+                    'SendResponseListener' => 'ZendTest\Mvc\TestAsset\MockSendResponseListener',
+                    'BootstrapListener' => 'ZendTest\Mvc\TestAsset\StubBootstrapListener',
                 ),
                 'factories' => array(
                     'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
                     'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
+                    'RoutePluginManager'      => 'Zend\Mvc\Service\RoutePluginManagerFactory',
                     'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
                     'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
                     'Config'                  => $config,
@@ -183,6 +190,18 @@ class ApplicationTest extends TestCase
         $this->assertSame(array($dispatchListener, 'onDispatch'), $callback);
     }
 
+    public function testBootstrapRegistersSendResponseListener()
+    {
+        $sendResponseListener = $this->serviceManager->get('SendResponseListener');
+        $this->application->bootstrap();
+        $events = $this->application->getEventManager();
+        $listeners = $events->getListeners(MvcEvent::EVENT_FINISH);
+        $this->assertEquals(1, count($listeners));
+        $listener = $listeners->top();
+        $callback = $listener->getCallback();
+        $this->assertSame(array($sendResponseListener, 'sendResponse'), $callback);
+    }
+
     public function testBootstrapRegistersViewManagerAsBootstrapListener()
     {
         $viewManager = $this->serviceManager->get('ViewManager');
@@ -228,7 +247,6 @@ class ApplicationTest extends TestCase
             ),
         ));
         $router->addRoute('path', $route);
-
         if ($addService) {
             $controllerLoader = $this->serviceManager->get('ControllerLoader');
             $controllerLoader->setFactory('path', function () {
@@ -353,7 +371,8 @@ class ApplicationTest extends TestCase
         $this->application->getEventManager()->attach(MvcEvent::EVENT_FINISH, function ($e) {
             return $e->getResponse()->setContent($e->getResponse()->getBody() . 'foobar');
         });
-        $this->assertContains('foobar', $this->application->run()->getBody(), 'The "finish" event was not triggered ("foobar" not in response)');
+        $this->application->run();
+        $this->assertContains('foobar', $this->application->getResponse()->getBody(), 'The "finish" event was not triggered ("foobar" not in response)');
     }
 
     /**
@@ -627,5 +646,85 @@ class ApplicationTest extends TestCase
 
         $this->application->run();
         $this->assertTrue($triggered);
+    }
+
+    public function testCompleteRequestShouldReturnApplicationInstance()
+    {
+        $r      = new ReflectionObject($this->application);
+        $method = $r->getMethod('completeRequest');
+        $method->setAccessible(true);
+
+        $this->application->bootstrap();
+        $event  = $this->application->getMvcEvent();
+        $result = $method->invoke($this->application, $event);
+        $this->assertSame($this->application, $result);
+    }
+
+
+    public function testCustomListener()
+    {
+        $this->application->bootstrap(array('BootstrapListener'));
+
+        // must contains custom bootstrap listeners
+        $bootstrapListener = $this->serviceManager->get('BootstrapListener');
+        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_BOOTSTRAP);
+        $bootstrapListeners = $bootstrapListener->getListeners();
+        $this->assertTrue($listeners->contains($bootstrapListeners[0]));
+
+        // must contains default listeners
+        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_DISPATCH);
+        $this->assertEquals(1, count($listeners));
+
+        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_ROUTE);
+        $this->assertEquals(1, count($listeners));
+
+        $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_FINISH);
+        $this->assertEquals(1, count($listeners));
+    }
+
+    public function eventPropagation()
+    {
+        return array(
+            'route'    => array(array(MvcEvent::EVENT_ROUTE)),
+            'dispatch' => array(array(MvcEvent::EVENT_DISPATCH, MvcEvent::EVENT_RENDER, MvcEvent::EVENT_FINISH)),
+        );
+    }
+
+    /**
+     * @dataProvider eventPropagation
+     */
+    public function testEventPropagationStatusIsClearedBetweenEventsDuringRun($events)
+    {
+        $event = new MvcEvent();
+        $event->setTarget($this->application);
+        $event->setApplication($this->application)
+              ->setRequest($this->application->getRequest())
+              ->setResponse($this->application->getResponse())
+              ->setRouter($this->serviceManager->get('Router'));
+        $event->stopPropagation(true);
+
+        // Intentionally not calling bootstrap; setting mvc event
+        $r = new ReflectionObject($this->application);
+        $eventProp = $r->getProperty('event');
+        $eventProp->setAccessible(true);
+        $eventProp->setValue($this->application, $event);
+
+        // Setup listeners that stop propagation, but do nothing else
+        $marker = array();
+        foreach ($events as $event) {
+            $marker[$event] = true;
+        }
+        $marker = (object) $marker;
+        $listener = function ($e) use ($marker) {
+            $marker->{$e->getName()} = $e->propagationIsStopped();
+            $e->stopPropagation(true);
+        };
+        $this->application->getEventManager()->attach($events, $listener);
+
+        $this->application->run();
+
+        foreach ($events as $event) {
+            $this->assertFalse($marker->{$event}, sprintf('Assertion failed for event "%s"', $event));
+        }
     }
 }

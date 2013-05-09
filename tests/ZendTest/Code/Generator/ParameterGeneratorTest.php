@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Code
  */
@@ -12,6 +12,7 @@ namespace ZendTest\Code\Generator;
 
 use Zend\Code\Generator\ParameterGenerator;
 use Zend\Code\Generator\ValueGenerator;
+use Zend\Code\Reflection\ParameterReflection;
 
 /**
  * @category   Zend
@@ -23,7 +24,6 @@ use Zend\Code\Generator\ValueGenerator;
  */
 class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-
 
     public function testTypeGetterAndSetterPersistValue()
     {
@@ -117,6 +117,19 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', $codeGenParam->getType());
     }
 
+    public function testCallableTypeHint()
+    {
+        if (PHP_VERSION_ID < 50400) {
+            $this->markTestSkipped('`callable` is only supported in PHP >=5.4.0');
+        }
+
+        $parameter = ParameterGenerator::fromReflection(
+            new ParameterReflection(array('ZendTest\Code\Generator\TestAsset\CallableTypeHintClass', 'foo'), 'bar')
+        );
+
+        $this->assertEquals('callable', $parameter->getType());
+    }
+
     /**
      * @dataProvider dataFromReflectionGenerate
      * @param string $methodName
@@ -124,7 +137,6 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromReflectionGenerate($methodName, $expectedCode)
     {
-        //$this->markTestSkipped('Test may not be necessary any longer');
         $reflectionParameter = $this->getFirstReflectionParameter($methodName);
         $codeGenParam = ParameterGenerator::fromReflection($reflectionParameter);
 
@@ -149,20 +161,45 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
             array('defaultNumber', '$number = 1234'),
             array('defaultFloat', '$float = 1.34'),
             array('defaultConstant', '$con = \'foo\'')
-            );
+        );
     }
 
-
     /**
-     * @param  string $method
+     * @param  string                               $method
      * @return \Zend\Reflection\ReflectionParameter
      */
     protected function getFirstReflectionParameter($method)
     {
-        $reflectionClass = new \Zend\Code\Reflection\ClassReflection('ZendTest\Code\Generator\TestAsset\ParameterClass');
+        $reflectionClass = new \Zend\Code\Reflection\ClassReflection(
+            'ZendTest\Code\Generator\TestAsset\ParameterClass'
+        );
         $method = $reflectionClass->getMethod($method);
 
         $params = $method->getParameters();
+
         return array_shift($params);
+    }
+
+    public function testCreateFromArray()
+    {
+        $parameterGenerator = ParameterGenerator::fromArray(array(
+            'name'              => 'SampleParameter',
+            'type'              => 'int',
+            'defaultvalue'      => 'foo',
+            'passedbyreference' => false,
+            'position'          => 1,
+            'sourcedirty'       => false,
+            'sourcecontent'     => 'foo',
+            'indentation'       => '-',
+        ));
+
+        $this->assertEquals('SampleParameter', $parameterGenerator->getName());
+        $this->assertEquals('int', $parameterGenerator->getType());
+        $this->assertInstanceOf('Zend\Code\Generator\ValueGenerator', $parameterGenerator->getDefaultValue());
+        $this->assertFalse($parameterGenerator->getPassedByReference());
+        $this->assertEquals(1, $parameterGenerator->getPosition());
+        $this->assertFalse($parameterGenerator->isSourceDirty());
+        $this->assertEquals('foo', $parameterGenerator->getSourceContent());
+        $this->assertEquals('-', $parameterGenerator->getIndentation());
     }
 }

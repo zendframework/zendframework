@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Text
  */
 
 namespace Zend\Text\Table;
@@ -14,9 +13,6 @@ use Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
 
 /**
  * Row class for Zend\Text\Table
- *
- * @category  Zend
- * @package   Zend_Text_Table
  */
 class Row
 {
@@ -76,7 +72,7 @@ class Row
      *
      * Returns null, when the index is out of range
      *
-     * @param  integer $index
+     * @param  int $index
      * @return Column|null
      */
     public function getColumn($index)
@@ -102,7 +98,7 @@ class Row
      * Get the widths of all columns, which were rendered last
      *
      * @throws Exception\UnexpectedValueException When no columns were rendered yet
-     * @return integer
+     * @return int
      */
     public function getColumnWidths()
     {
@@ -118,7 +114,7 @@ class Row
      *
      * @param  array                               $columnWidths Width of all columns
      * @param  Decorator $decorator    Decorator for the row borders
-     * @param  integer                             $padding      Padding for the columns
+     * @param  int                             $padding      Padding for the columns
      * @throws Exception\OverflowException When there are too many columns
      * @return string
      */

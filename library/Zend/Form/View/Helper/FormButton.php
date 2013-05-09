@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
@@ -13,11 +12,6 @@ namespace Zend\Form\View\Helper;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- */
 class FormButton extends FormInput
 {
     /**
@@ -49,6 +43,59 @@ class FormButton extends FormInput
         'reset'          => true,
         'submit'         => true,
     );
+
+    /**
+     * Invoke helper as functor
+     *
+     * Proxies to {@link render()}.
+     *
+     * @param  ElementInterface|null $element
+     * @param  null|string           $buttonContent
+     * @return string|FormButton
+     */
+    public function __invoke(ElementInterface $element = null, $buttonContent = null)
+    {
+        if (!$element) {
+            return $this;
+        }
+
+        return $this->render($element, $buttonContent);
+    }
+
+    /**
+     * Render a form <button> element from the provided $element,
+     * using content from $buttonContent or the element's "label" attribute
+     *
+     * @param  ElementInterface $element
+     * @param  null|string $buttonContent
+     * @throws Exception\DomainException
+     * @return string
+     */
+    public function render(ElementInterface $element, $buttonContent = null)
+    {
+        $openTag = $this->openTag($element);
+
+        if (null === $buttonContent) {
+            $buttonContent = $element->getLabel();
+            if (null === $buttonContent) {
+                throw new Exception\DomainException(sprintf(
+                    '%s expects either button content as the second argument, ' .
+                        'or that the element provided has a label value; neither found',
+                    __METHOD__
+                ));
+            }
+
+            if (null !== ($translator = $this->getTranslator())) {
+                $buttonContent = $translator->translate(
+                    $buttonContent, $this->getTranslatorTextDomain()
+                );
+            }
+        }
+
+        $escape = $this->getEscapeHtmlHelper();
+
+        return $openTag . $escape($buttonContent) . $this->closeTag();
+    }
 
     /**
      * Generate an opening button tag
@@ -105,59 +152,6 @@ class FormButton extends FormInput
     public function closeTag()
     {
         return '</button>';
-    }
-
-    /**
-     * Render a form <button> element from the provided $element,
-     * using content from $buttonContent or the element's "label" attribute
-     *
-     * @param  ElementInterface $element
-     * @param  null|string $buttonContent
-     * @throws Exception\DomainException
-     * @return string
-     */
-    public function render(ElementInterface $element, $buttonContent = null)
-    {
-        $openTag = $this->openTag($element);
-
-        if (null === $buttonContent) {
-            $buttonContent = $element->getLabel();
-            if (null === $buttonContent) {
-                throw new Exception\DomainException(sprintf(
-                    '%s expects either button content as the second argument, ' .
-                    'or that the element provided has a label value; neither found',
-                    __METHOD__
-                ));
-            }
-
-            if (null !== ($translator = $this->getTranslator())) {
-                $buttonContent = $translator->translate(
-                    $buttonContent, $this->getTranslatorTextDomain()
-                );
-            }
-        }
-
-        $escape = $this->getEscapeHtmlHelper();
-
-        return $openTag . $escape($buttonContent) . $this->closeTag();
-    }
-
-    /**
-     * Invoke helper as functor
-     *
-     * Proxies to {@link render()}.
-     *
-     * @param  ElementInterface|null $element
-     * @param  null|string $buttonContent
-     * @return string|FormButton
-     */
-    public function __invoke(ElementInterface $element = null, $buttonContent = null)
-    {
-        if (!$element) {
-            return $this;
-        }
-
-        return $this->render($element, $buttonContent);
     }
 
     /**

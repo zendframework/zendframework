@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Filter
  */
@@ -95,6 +95,20 @@ class DecompressTest extends \PHPUnit_Framework_TestCase
 
         $filter2  = new DecompressFilter('bz2');
         $content2 = $filter2($archive);
+        $this->assertEquals('compress me', $content2);
+    }
+
+    public function testFilterMethodProxiesToDecompress()
+    {
+        $filter   = new DecompressFilter('bz2');
+        $archive = __DIR__ . '/../_files/compressed.bz2';
+        $filter->setArchive($archive);
+
+        $content = $filter->compress('compress me');
+        $this->assertTrue($content);
+
+        $filter2  = new DecompressFilter('bz2');
+        $content2 = $filter2->filter($archive);
         $this->assertEquals('compress me', $content2);
     }
 }

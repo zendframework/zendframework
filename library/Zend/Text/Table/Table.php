@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Text
  */
 
 namespace Zend\Text\Table;
@@ -16,9 +15,6 @@ use Zend\Text\Table\Decorator\DecoratorInterface as Decorator;
 
 /**
  * Zend\Text\Table\Table enables developers to create tables out of characters
- *
- * @category  Zend
- * @package   Zend_Text_Table
  */
 class Table
 {
@@ -54,14 +50,14 @@ class Table
     /**
      * Auto separation mode
      *
-     * @var integer
+     * @var int
      */
     protected $autoSeparate = self::AUTO_SEPARATE_ALL;
 
     /**
      * Padding for columns
      *
-     * @var integer
+     * @var int
      */
     protected $padding = 0;
 
@@ -181,7 +177,7 @@ class Table
     /**
      * Set auto separation mode
      *
-     * @param  integer $autoSeparate Auto separation mode
+     * @param  int $autoSeparate Auto separation mode
      * @return Table
      */
     public function setAutoSeparate($autoSeparate)
@@ -210,7 +206,7 @@ class Table
     /**
      * Set the column padding
      *
-     * @param  integer $padding The padding for the columns
+     * @param  int $padding The padding for the columns
      * @return Table
      */
     public function setPadding($padding)
@@ -249,7 +245,7 @@ class Table
     /**
      * Set default column align for rows created by appendRow(array $data)
      *
-     * @param  integer $columnNum
+     * @param  int $columnNum
      * @param  string  $align
      * @return Table
      */

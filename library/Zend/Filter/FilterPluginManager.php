@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
@@ -18,9 +17,6 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Enforces that filters retrieved are either callbacks or instances of
  * FilterInterface. Additionally, it registers a number of default filters
  * available, as well as aliases for them.
- *
- * @category   Zend
- * @package    Zend_Filter
  */
 class FilterPluginManager extends AbstractPluginManager
 {
@@ -40,6 +36,7 @@ class FilterPluginManager extends AbstractPluginManager
         'compressgz'                => 'Zend\Filter\Compress\Gz',
         'compresslzf'               => 'Zend\Filter\Compress\Lzf',
         'compressrar'               => 'Zend\Filter\Compress\Rar',
+        'compresssnappy'            => 'Zend\Filter\Compress\Snappy',
         'compresstar'               => 'Zend\Filter\Compress\Tar',
         'compresszip'               => 'Zend\Filter\Compress\Zip',
         'decompress'                => 'Zend\Filter\Decompress',
@@ -53,6 +50,7 @@ class FilterPluginManager extends AbstractPluginManager
         'fileencrypt'               => 'Zend\Filter\File\Encrypt',
         'filelowercase'             => 'Zend\Filter\File\LowerCase',
         'filerename'                => 'Zend\Filter\File\Rename',
+        'filerenameupload'          => 'Zend\Filter\File\RenameUpload',
         'fileuppercase'             => 'Zend\Filter\File\UpperCase',
         'htmlentities'              => 'Zend\Filter\HtmlEntities',
         'inflector'                 => 'Zend\Filter\Inflector',
@@ -68,6 +66,7 @@ class FilterPluginManager extends AbstractPluginManager
         'stringtrim'                => 'Zend\Filter\StringTrim',
         'stripnewlines'             => 'Zend\Filter\StripNewlines',
         'striptags'                 => 'Zend\Filter\StripTags',
+        'urinormalize'              => 'Zend\Filter\UriNormalize',
         'wordcamelcasetodash'       => 'Zend\Filter\Word\CamelCaseToDash',
         'wordcamelcasetoseparator'  => 'Zend\Filter\Word\CamelCaseToSeparator',
         'wordcamelcasetounderscore' => 'Zend\Filter\Word\CamelCaseToUnderscore',

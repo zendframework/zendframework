@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ProgressBar
  */
 
 namespace Zend\ProgressBar\Adapter;
@@ -15,9 +14,6 @@ use Zend\Json\Json;
 /**
  * Zend_ProgressBar_Adapter_JsPush offers a simple method for updating a
  * progressbar in a browser.
- *
- * @category  Zend
- * @package   Zend_ProgressBar
  */
 class JsPush extends AbstractAdapter
 {
@@ -67,8 +63,8 @@ class JsPush extends AbstractAdapter
      * @param  float   $current       Current progress value
      * @param  float   $max           Max progress value
      * @param  float   $percent       Current percent value
-     * @param  integer $timeTaken     Taken time in seconds
-     * @param  integer $timeRemaining Remaining time in seconds
+     * @param  int $timeTaken     Taken time in seconds
+     * @param  int $timeRemaining Remaining time in seconds
      * @param  string  $text          Status text
      * @return void
      */

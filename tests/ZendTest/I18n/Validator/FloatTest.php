@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_I18n
  */
@@ -59,6 +59,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
             array(0.01,   true),
             array(-0.1,   true),
             array('10.1', true),
+            array('5.00', true),
             array('10.0', true),
             array('10.10', true),
             array(1,      true),

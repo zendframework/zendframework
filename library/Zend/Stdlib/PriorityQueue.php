@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib;
@@ -25,9 +24,6 @@ use Serializable;
  * This class aggregates items for the queue itself, but also composes an
  * "inner" iterator in the form of an SplPriorityQueue object for performing
  * the actual iteration.
- *
- * @category   Zend
- * @package    Zend_Stdlib
  */
 class PriorityQueue implements Countable, IteratorAggregate, Serializable
 {
@@ -88,7 +84,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      * instances.
      *
      * @param  mixed $datum
-     * @return boolean False if the item was not found, true otherwise.
+     * @return bool False if the item was not found, true otherwise.
      */
     public function remove($datum)
     {
@@ -102,9 +98,12 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
         if ($found) {
             unset($this->items[$key]);
             $this->queue = null;
-            $queue = $this->getQueue();
-            foreach ($this->items as $item) {
-                $queue->insert($item['data'], $item['priority']);
+
+            if (!$this->isEmpty()) {
+                $queue = $this->getQueue();
+                foreach ($this->items as $item) {
+                    $queue->insert($item['data'], $item['priority']);
+                }
             }
             return true;
         }

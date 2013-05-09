@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Code
  */
@@ -34,10 +34,11 @@ class PropertyTagTest extends \PHPUnit_Framework_TestCase
     public function testParseTypeAndName()
     {
         $tag = new PropertyTag();
-        $tag->initialize('string $test');
+        $tag->initialize('string|null $test');
         $this->assertEquals('$test', $tag->getPropertyName());
         $this->assertNull($tag->getDescription());
         $this->assertEquals('string', $tag->getType());
+        $this->assertEquals(array('string', 'null'), $tag->getTypes());
     }
 
     public function testParseNameAndDescription()

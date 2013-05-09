@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Mail
  */
@@ -21,11 +21,10 @@ use Zend\Mail\Protocol\Smtp;
  */
 class SmtpProtocolSpy extends Smtp
 {
+    public $calledQuit = false;
     protected $connect = false;
-    protected $helo;
     protected $mail;
     protected $rcptTest = array();
-    protected $sess = true;
 
     public function connect()
     {
@@ -33,23 +32,21 @@ class SmtpProtocolSpy extends Smtp
         return true;
     }
 
+    public function disconnect()
+    {
+        $this->connect = false;
+        parent::disconnect();
+    }
+
     public function helo($serverName = '127.0.0.1')
     {
         parent::helo($serverName);
-        $this->helo = $serverName;
     }
 
     public function quit()
     {
-        $this->helo = null;
-        $this->rset();
-    }
-
-    public function disconnect()
-    {
-        $this->helo    = null;
-        $this->connect = false;
-        $this->rset();
+        $this->calledQuit = true;
+        parent::quit();
     }
 
     public function rset()
@@ -89,16 +86,6 @@ class SmtpProtocolSpy extends Smtp
     public function isConnected()
     {
         return $this->connect;
-    }
-
-    /**
-     * Get server name we opened a connection with
-     *
-     * @return null|string
-     */
-    public function getHelo()
-    {
-        return $this->helo;
     }
 
     /**

@@ -3,25 +3,21 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode\Object;
 
 /**
  * Class for generate Barcode
- *
- * @category   Zend
- * @package    Zend_Barcode
  */
 class Error extends AbstractObject
 {
     /**
      * All texts are accepted
      * @param string $value
-     * @return boolean
+     * @return bool
      */
     public function validateText($value)
     {
@@ -31,7 +27,7 @@ class Error extends AbstractObject
     /**
      * Height is forced
      * @param bool $recalculate
-     * @return integer
+     * @return int
      */
     public function getHeight($recalculate = false)
     {
@@ -41,7 +37,7 @@ class Error extends AbstractObject
     /**
      * Width is forced
      * @param bool $recalculate
-     * @return integer
+     * @return int
      */
     public function getWidth($recalculate = false)
     {
@@ -56,8 +52,8 @@ class Error extends AbstractObject
     public function draw()
     {
         $this->instructions = array();
-        $this->addText('ERROR:', 10, array(5 , 18), $this->font, 0, 'left');
-        $this->addText($this->text, 10, array(5 , 32), $this->font, 0, 'left');
+        $this->addText('ERROR:', 10, array(5, 18), $this->font, 0, 'left');
+        $this->addText($this->text, 10, array(5, 32), $this->font, 0, 'left');
         return $this->instructions;
     }
 

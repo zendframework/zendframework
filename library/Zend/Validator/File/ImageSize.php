@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator\File;
@@ -16,9 +15,6 @@ use Zend\Validator\Exception;
 
 /**
  * Validator for the image size of a image file
- *
- * @category  Zend
- * @package   Zend_Validator
  */
 class ImageSize extends AbstractValidator
 {
@@ -36,12 +32,12 @@ class ImageSize extends AbstractValidator
      * @var array Error message template
      */
     protected $messageTemplates = array(
-        self::WIDTH_TOO_BIG    => "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected",
-        self::WIDTH_TOO_SMALL  => "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected",
-        self::HEIGHT_TOO_BIG   => "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected",
-        self::HEIGHT_TOO_SMALL => "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected",
-        self::NOT_DETECTED     => "The size of image '%value%' could not be detected",
-        self::NOT_READABLE     => "File '%value%' is not readable or does not exist",
+        self::WIDTH_TOO_BIG    => "Maximum allowed width for image should be '%maxwidth%' but '%width%' detected",
+        self::WIDTH_TOO_SMALL  => "Minimum expected width for image should be '%minwidth%' but '%width%' detected",
+        self::HEIGHT_TOO_BIG   => "Maximum allowed height for image should be '%maxheight%' but '%height%' detected",
+        self::HEIGHT_TOO_SMALL => "Minimum expected height for image should be '%minheight%' but '%height%' detected",
+        self::NOT_DETECTED     => "The size of image could not be detected",
+        self::NOT_READABLE     => "File is not readable or does not exist",
     );
 
     /**
@@ -59,14 +55,14 @@ class ImageSize extends AbstractValidator
     /**
      * Detected width
      *
-     * @var integer
+     * @var int
      */
     protected $width;
 
     /**
      * Detected height
      *
-     * @var integer
+     * @var int
      */
     protected $height;
 
@@ -117,7 +113,7 @@ class ImageSize extends AbstractValidator
     /**
      * Returns the minimum allowed width
      *
-     * @return integer
+     * @return int
      */
     public function getMinWidth()
     {
@@ -127,7 +123,7 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the minimum allowed width
      *
-     * @param  integer $minWidth
+     * @param  int $minWidth
      * @return ImageSize Provides a fluid interface
      * @throws Exception\InvalidArgumentException When minwidth is greater than maxwidth
      */
@@ -145,7 +141,7 @@ class ImageSize extends AbstractValidator
     /**
      * Returns the maximum allowed width
      *
-     * @return integer
+     * @return int
      */
     public function getMaxWidth()
     {
@@ -155,7 +151,7 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the maximum allowed width
      *
-     * @param  integer $maxWidth
+     * @param  int $maxWidth
      * @return ImageSize Provides a fluid interface
      * @throws Exception\InvalidArgumentException When maxwidth is less than minwidth
      */
@@ -173,7 +169,7 @@ class ImageSize extends AbstractValidator
     /**
      * Returns the minimum allowed height
      *
-     * @return integer
+     * @return int
      */
     public function getMinHeight()
     {
@@ -183,7 +179,7 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the minimum allowed height
      *
-     * @param  integer $minHeight
+     * @param  int $minHeight
      * @return ImageSize Provides a fluid interface
      * @throws Exception\InvalidArgumentException When minheight is greater than maxheight
      */
@@ -201,7 +197,7 @@ class ImageSize extends AbstractValidator
     /**
      * Returns the maximum allowed height
      *
-     * @return integer
+     * @return int
      */
     public function getMaxHeight()
     {
@@ -211,7 +207,7 @@ class ImageSize extends AbstractValidator
     /**
      * Sets the maximum allowed height
      *
-     * @param  integer $maxHeight
+     * @param  int $maxHeight
      * @return ImageSize Provides a fluid interface
      * @throws Exception\InvalidArgumentException When maxheight is less than minheight
      */
@@ -322,46 +318,61 @@ class ImageSize extends AbstractValidator
      * Returns true if and only if the image size of $value is at least min and
      * not bigger than max
      *
-     * @param  string $value Real file to check for image size
-     * @param  array  $file  File data from \Zend\File\Transfer\Transfer
-     * @return boolean
+     * @param  string|array $value Real file to check for image size
+     * @param  array        $file  File data from \Zend\File\Transfer\Transfer (optional)
+     * @return bool
      */
     public function isValid($value, $file = null)
     {
-        if ($file === null) {
-            $file = array('name' => basename($value));
+        if (is_string($value) && is_array($file)) {
+            // Legacy Zend\Transfer API support
+            $filename = $file['name'];
+            $file     = $file['tmp_name'];
+        } elseif (is_array($value)) {
+            if (!isset($value['tmp_name']) || !isset($value['name'])) {
+                throw new Exception\InvalidArgumentException(
+                    'Value array must be in $_FILES format'
+                );
+            }
+            $file     = $value['tmp_name'];
+            $filename = $value['name'];
+        } else {
+            $file     = $value;
+            $filename = basename($file);
         }
+        $this->setValue($filename);
 
         // Is file readable ?
-        if (false === stream_resolve_include_path($value)) {
-            return $this->throwError($file, self::NOT_READABLE);
+        if (false === stream_resolve_include_path($file)) {
+            $this->error(self::NOT_READABLE);
+            return false;
         }
 
         ErrorHandler::start();
-        $size = getimagesize($value);
+        $size = getimagesize($file);
         ErrorHandler::stop();
-        $this->setValue($file);
 
         if (empty($size) || ($size[0] === 0) || ($size[1] === 0)) {
-            return $this->throwError($file, self::NOT_DETECTED);
+            $this->error(self::NOT_DETECTED);
+            return false;
         }
 
         $this->width  = $size[0];
         $this->height = $size[1];
         if ($this->width < $this->getMinWidth()) {
-            $this->throwError($file, self::WIDTH_TOO_SMALL);
+            $this->error(self::WIDTH_TOO_SMALL);
         }
 
         if (($this->getMaxWidth() !== null) && ($this->getMaxWidth() < $this->width)) {
-            $this->throwError($file, self::WIDTH_TOO_BIG);
+            $this->error(self::WIDTH_TOO_BIG);
         }
 
         if ($this->height < $this->getMinHeight()) {
-            $this->throwError($file, self::HEIGHT_TOO_SMALL);
+            $this->error(self::HEIGHT_TOO_SMALL);
         }
 
         if (($this->getMaxHeight() !== null) && ($this->getMaxHeight() < $this->height)) {
-            $this->throwError($file, self::HEIGHT_TOO_BIG);
+            $this->error(self::HEIGHT_TOO_BIG);
         }
 
         if (count($this->getMessages()) > 0) {
@@ -369,28 +380,5 @@ class ImageSize extends AbstractValidator
         }
 
         return true;
-    }
-
-    /**
-     * Throws an error of the given type
-     *
-     * @param  string $file
-     * @param  string $errorType
-     * @return false
-     */
-    protected function throwError($file, $errorType)
-    {
-        if ($file !== null) {
-            if (is_array($file)) {
-                if (array_key_exists('name', $file)) {
-                    $this->value = $file['name'];
-                }
-            } elseif (is_string($file)) {
-                $this->value = $file;
-            }
-        }
-
-        $this->error($errorType);
-        return false;
     }
 }

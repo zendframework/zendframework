@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Filter
  */
@@ -53,7 +53,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
             dirname(__DIR__).'/_files/newencryption.txt',
             $filter->getFilename());
 
-        $filter->setVector('1234567890123456');
+        $filter->setKey('1234567890123456');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt',
             $filter->filter(dirname(__DIR__).'/_files/encryption.txt'));
 
@@ -70,7 +70,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new FileEncrypt();
         $filter->setFilename(dirname(__DIR__).'/_files/newencryption.txt');
-        $filter->setVector('1234567890123456');
+        $filter->setKey('1234567890123456');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt',
             $filter->filter(dirname(__DIR__).'/_files/encryption.txt'));
 
@@ -79,7 +79,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
             file_get_contents(dirname(__DIR__).'/_files/newencryption.txt'));
 
         $filter = new FileDecrypt();
-        $filter->setVector('1234567890123456');
+        $filter->setKey('1234567890123456');
         $input = $filter->filter(dirname(__DIR__).'/_files/newencryption.txt');
         $this->assertEquals(dirname(__DIR__).'/_files/newencryption.txt', $input);
 
@@ -94,7 +94,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
     public function testNonExistingFile()
     {
         $filter = new FileEncrypt();
-        $filter->setVector('1234567890123456');
+        $filter->setKey('1234567890123456');
 
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
         echo $filter->filter(dirname(__DIR__).'/_files/nofile.txt');
@@ -106,7 +106,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
     public function testEncryptionInSameFile()
     {
         $filter = new FileEncrypt();
-        $filter->setVector('1234567890123456');
+        $filter->setKey('1234567890123456');
 
         copy(dirname(__DIR__).'/_files/encryption.txt', dirname(__DIR__).'/_files/newencryption.txt');
         $filter->filter(dirname(__DIR__).'/_files/newencryption.txt');

@@ -3,14 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
 
-use Zend\I18n\Translator\Translator;
 use Zend\Validator\Hostname;
 
 /**
@@ -266,7 +265,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         );
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = $translations;
-        $translator = new Translator();
+        $translator = new TestAsset\Translator();
         $translator->getPluginManager()->setService('default', $loader);
         $translator->addTranslationFile('default', null);
         $this->validator->setTranslator($translator);
@@ -448,6 +447,16 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid('tĕst123.si'));
         $this->assertTrue($validator->isValid('tàrø.si'));
         $this->assertFalse($validator->isValid('رات.si'));
+    }
+
+    public function testIDNIT()
+    {
+        $validator = new Hostname(Hostname::ALLOW_ALL);
+
+        $this->assertTrue($validator->isValid('plainascii.it'));
+        $this->assertTrue($validator->isValid('città-caffè.it'));
+        $this->assertTrue($validator->isValid('edgetest-àâäèéêëìîïòôöùûüæœçÿß.it'));
+        $this->assertFalse($validator->isValid('رات.it'));
     }
 
     public function testEqualsMessageTemplates()

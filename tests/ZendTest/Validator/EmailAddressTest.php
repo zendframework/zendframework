@@ -3,14 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
 
-use Zend\I18n\Translator\Translator;
 use Zend\Validator\EmailAddress;
 use Zend\Validator\Hostname;
 
@@ -27,7 +26,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     protected $validator;
 
-    /** @var boolean */
+    /** @var bool */
     public $multipleOptionsDetected;
 
     public function setUp()
@@ -396,7 +395,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         );
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = $translations;
-        $translator = new Translator();
+        $translator = new TestAsset\Translator();
         $translator->getPluginManager()->setService('test', $loader);
         $translator->addTranslationFile('test', null);
 
@@ -522,8 +521,12 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     public function testSetSingleMessageViaOptions()
     {
         $validator = new EmailAddress(array('message' => 'TestMessage'));
-        $messages = $validator->getMessageTemplates();
-        $this->assertEquals('TestMessage', $messages[EmailAddress::INVALID]);
+        foreach ($validator->getMessageTemplates() as $message) {
+            $this->assertEquals('TestMessage', $message);
+        }
+        foreach ($validator->getHostnameValidator()->getMessageTemplates() as $message) {
+            $this->assertEquals('TestMessage', $message);
+        }
     }
 
     public function testSetMultipleMessageViaOptions()
@@ -559,8 +562,12 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $messages = $this->validator->getMessageTemplates();
         $this->assertNotEquals('TestMessage', $messages[EmailAddress::INVALID]);
         $this->validator->setMessage('TestMessage');
-        $messages = $this->validator->getMessageTemplates();
-        $this->assertEquals('TestMessage', $messages[EmailAddress::INVALID]);
+        foreach ($this->validator->getMessageTemplates() as $message) {
+            $this->assertEquals('TestMessage', $message);
+        }
+        foreach ($this->validator->getHostnameValidator()->getMessageTemplates() as $message) {
+            $this->assertEquals('TestMessage', $message);
+        }
     }
 
     /**

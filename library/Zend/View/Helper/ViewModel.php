@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -14,9 +13,6 @@ use Zend\View\Model\ModelInterface as Model;
 
 /**
  * Helper for storing and retrieving the root and current view model
- *
- * @package    Zend_View
- * @subpackage Helper
  */
 class ViewModel extends AbstractHelper
 {
@@ -31,23 +27,15 @@ class ViewModel extends AbstractHelper
     protected $root;
 
     /**
-     * Get the root view model
+     * Set the current view model
      *
-     * @return null|Model
+     * @param  Model $model
+     * @return ViewModel
      */
-    public function getRoot()
+    public function setCurrent(Model $model)
     {
-        return $this->root;
-    }
-
-    /**
-     * Is a root view model composed?
-     *
-     * @return bool
-     */
-    public function hasRoot()
-    {
-        return ($this->root instanceof Model);
+        $this->current = $model;
+        return $this;
     }
 
     /**
@@ -83,14 +71,22 @@ class ViewModel extends AbstractHelper
     }
 
     /**
-     * Set the current view model
+     * Get the root view model
      *
-     * @param  Model $model
-     * @return ViewModel
+     * @return null|Model
      */
-    public function setCurrent(Model $model)
+    public function getRoot()
     {
-        $this->current = $model;
-        return $this;
+        return $this->root;
+    }
+
+    /**
+     * Is a root view model composed?
+     *
+     * @return bool
+     */
+    public function hasRoot()
+    {
+        return ($this->root instanceof Model);
     }
 }

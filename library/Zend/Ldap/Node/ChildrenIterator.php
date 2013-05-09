@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace Zend\Ldap\Node;
@@ -14,10 +13,6 @@ use Zend\Ldap;
 
 /**
  * Zend\Ldap\Node\ChildrenIterator provides an iterator to a collection of children nodes.
- *
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage Node
  */
 class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \ArrayAccess
 {
@@ -95,7 +90,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * after calls to rewind() or next().
      * Implements Iterator
      *
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {
@@ -106,15 +101,15 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * Checks if current node has children.
      * Returns whether the current element has children.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChildren()
     {
         if ($this->current() instanceof Ldap\Node) {
             return $this->current()->hasChildren();
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -126,9 +121,9 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
     {
         if ($this->current() instanceof Ldap\Node) {
             return $this->current()->getChildren();
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -142,9 +137,9 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
     {
         if ($this->offsetExists($rdn)) {
             return $this->data[$rdn];
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -152,7 +147,7 @@ class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \Ar
      * Implements ArrayAccess.
      *
      * @param  string $rdn
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($rdn)
     {

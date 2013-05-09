@@ -3,18 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode\Object;
 
 /**
  * Class for generate Ean13 barcode
- *
- * @category   Zend
- * @package    Zend_Barcode
  */
 class Ean13 extends AbstractObject
 {
@@ -65,7 +61,7 @@ class Ean13 extends AbstractObject
 
     /**
      * Width of the barcode (in pixels)
-     * @return integer
+     * @return int
      */
     protected function calculateBarcodeWidth()
     {
@@ -94,9 +90,9 @@ class Ean13 extends AbstractObject
         $height = ($this->drawText) ? 1.1 : 1;
 
         // Start character (101)
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
 
         $textTable = str_split($this->getText());
         $parity = $this->parities[$textTable[0]];
@@ -105,29 +101,29 @@ class Ean13 extends AbstractObject
         for ($i = 1; $i < 7; $i++) {
             $bars = str_split($this->codingMap[$parity[$i - 1]][$textTable[$i]]);
             foreach ($bars as $b) {
-                $barcodeTable[] = array($b , $this->barThinWidth , 0 , 1);
+                $barcodeTable[] = array($b, $this->barThinWidth, 0, 1);
             }
         }
 
         // Middle character (01010)
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
 
         // Second part
         for ($i = 7; $i < 13; $i++) {
             $bars = str_split($this->codingMap['C'][$textTable[$i]]);
             foreach ($bars as $b) {
-                $barcodeTable[] = array($b , $this->barThinWidth , 0 , 1);
+                $barcodeTable[] = array($b, $this->barThinWidth, 0, 1);
             }
         }
 
         // Stop character (101)
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, $height);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, $height);
         return $barcodeTable;
     }
 
@@ -159,7 +155,7 @@ class Ean13 extends AbstractObject
      */
     protected function drawText()
     {
-        if (get_called_class() == 'Zend\Barcode\Object\Ean13') {
+        if (get_class($this) == 'Zend\Barcode\Object\Ean13') {
             $this->drawEan13Text();
         } else {
             parent::drawText();

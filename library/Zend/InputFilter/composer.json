@@ -17,5 +17,14 @@
         "zendframework/zend-filter": "self.version",
         "zendframework/zend-validator": "self.version",
         "zendframework/zend-stdlib": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-servicemanager": "To support plugin manager support"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev",
+            "dev-develop": "2.3-dev"
+        }
     }
 }

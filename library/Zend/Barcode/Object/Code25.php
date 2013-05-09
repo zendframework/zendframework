@@ -3,18 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode\Object;
 
 /**
  * Class for generate Interleaved 2 of 5 barcode
- *
- * @category   Zend
- * @package    Zend_Barcode
  */
 class Code25 extends AbstractObject
 {
@@ -39,7 +35,7 @@ class Code25 extends AbstractObject
 
     /**
      * Width of the barcode (in pixels)
-     * @return integer
+     * @return int
      */
     protected function calculateBarcodeWidth()
     {
@@ -70,12 +66,12 @@ class Code25 extends AbstractObject
         $barcodeTable = array();
 
         // Start character (30301)
-        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth);
+        $barcodeTable[] = array(1, $this->barThickWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThickWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth);
 
         $text = str_split($this->getText());
         foreach ($text as $char) {
@@ -83,17 +79,17 @@ class Code25 extends AbstractObject
             foreach ($barcodeChar as $c) {
                 /* visible, width, top, length */
                 $width = $c ? $this->barThickWidth : $this->barThinWidth;
-                $barcodeTable[] = array(1 , $width , 0 , 1);
-                $barcodeTable[] = array(0 , $this->barThinWidth);
+                $barcodeTable[] = array(1, $width, 0, 1);
+                $barcodeTable[] = array(0, $this->barThinWidth);
             }
         }
 
         // Stop character (30103)
-        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
+        $barcodeTable[] = array(1, $this->barThickWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThickWidth, 0, 1);
         return $barcodeTable;
     }
 

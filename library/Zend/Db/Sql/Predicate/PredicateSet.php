@@ -3,20 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql\Predicate;
 
 use Countable;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage Sql
- */
 class PredicateSet implements PredicateInterface, Countable
 {
     const COMBINED_BY_AND = 'AND';
@@ -108,7 +102,7 @@ class PredicateSet implements PredicateInterface, Countable
     public function getExpressionData()
     {
         $parts = array();
-        for ($i = 0; $i < count($this->predicates); $i++) {
+        for ($i = 0, $count = count($this->predicates); $i < $count; $i++) {
 
             /** @var $predicate PredicateInterface */
             $predicate = $this->predicates[$i][1];
@@ -139,5 +133,4 @@ class PredicateSet implements PredicateInterface, Countable
     {
         return count($this->predicates);
     }
-
 }

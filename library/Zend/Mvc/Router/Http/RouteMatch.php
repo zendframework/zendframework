@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router\Http;
@@ -14,16 +13,13 @@ use Zend\Mvc\Router\RouteMatch as BaseRouteMatch;
 
 /**
  * Part route match.
- *
- * @package    Zend_Mvc_Router
- * @subpackage Http
  */
 class RouteMatch extends BaseRouteMatch
 {
     /**
      * Length of the matched path.
      *
-     * @var integer
+     * @var int
      */
     protected $length;
 
@@ -31,7 +27,7 @@ class RouteMatch extends BaseRouteMatch
      * Create a part RouteMatch with given parameters and length.
      *
      * @param  array   $params
-     * @param  integer $length
+     * @param  int $length
      */
     public function __construct(array $params, $length = 0)
     {
@@ -61,10 +57,10 @@ class RouteMatch extends BaseRouteMatch
     /**
      * Merge parameters from another match.
      *
-     * @param  self $match
+     * @param  RouteMatch $match
      * @return RouteMatch
      */
-    public function merge(self $match)
+    public function merge(RouteMatch $match)
     {
         $this->params  = array_merge($this->params, $match->getParams());
         $this->length += $match->getLength();
@@ -77,7 +73,7 @@ class RouteMatch extends BaseRouteMatch
     /**
      * Get the matched path length.
      *
-     * @return integer
+     * @return int
      */
     public function getLength()
     {

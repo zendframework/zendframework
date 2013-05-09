@@ -3,24 +3,20 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode\Object;
 
 /**
  * Class for generate Interleaved 2 of 5 barcode
- *
- * @category   Zend
- * @package    Zend_Barcode
  */
 class Code25interleaved extends Code25
 {
     /**
      * Drawing of bearer bars
-     * @var boolean
+     * @var bool
      */
     private $withBearerBars = false;
 
@@ -35,7 +31,7 @@ class Code25interleaved extends Code25
 
     /**
      * Activate/deactivate drawing of bearer bars
-     * @param boolean $value
+     * @param  bool $value
      * @return Code25
      */
     public function setWithBearerBars($value)
@@ -46,7 +42,7 @@ class Code25interleaved extends Code25
 
     /**
      * Retrieve if bearer bars are enabled
-     * @return boolean
+     * @return bool
      */
     public function getWithBearerBars()
     {
@@ -55,7 +51,7 @@ class Code25interleaved extends Code25
 
     /**
      * Width of the barcode (in pixels)
-     * @return integer
+     * @return int
      */
     protected function calculateBarcodeWidth()
     {
@@ -85,7 +81,7 @@ class Code25interleaved extends Code25
 
         // Encoded $text
         $text = $this->getText();
-        for ($i = 0; $i < strlen($text); $i += 2) { // Draw 2 chars at a time
+        for ($i = 0, $len = strlen($text); $i < $len; $i += 2) { // Draw 2 chars at a time
             $char1 = substr($text, $i, 1);
             $char2 = substr($text, $i + 1, 1);
 
@@ -102,14 +98,14 @@ class Code25interleaved extends Code25
                 $barWidth = (substr($this->codingMap[$char2], $ibar, 1))
                           ? $this->barThickWidth
                           : $this->barThinWidth;
-                $barcodeTable[] = array(0, $barWidth, 0 , 1);
+                $barcodeTable[] = array(0, $barWidth, 0, 1);
             }
         }
 
         // Stop character (100)
-        $barcodeTable[] = array(1 , $this->barThickWidth, 0, 1);
-        $barcodeTable[] = array(0 , $this->barThinWidth,  0, 1);
-        $barcodeTable[] = array(1 , $this->barThinWidth,  0, 1);
+        $barcodeTable[] = array(1, $this->barThickWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
         return $barcodeTable;
     }
 

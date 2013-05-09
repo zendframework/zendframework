@@ -3,17 +3,12 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace Zend\Feed\PubSubHubbub;
 
-/**
- * @category   Zend
- * @package    Zend_Feed_Pubsubhubbub
- */
 class HttpResponse
 {
     /**
@@ -85,7 +80,7 @@ class HttpResponse
      *
      * @param  string $name
      * @param  string $value
-     * @param  boolean $replace
+     * @param  bool $replace
      * @return \Zend\Feed\PubSubHubbub\HttpResponse
      */
     public function setHeader($name, $value, $replace = false)
@@ -137,7 +132,7 @@ class HttpResponse
     /**
      * Can we send headers?
      *
-     * @param  boolean $throw Whether or not to throw an exception if headers have been sent; defaults to false
+     * @param  bool $throw Whether or not to throw an exception if headers have been sent; defaults to false
      * @return HttpResponse
      * @throws Exception\RuntimeException
      */

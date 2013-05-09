@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode\Renderer;
@@ -15,9 +14,6 @@ use Zend\Stdlib\ErrorHandler;
 
 /**
  * Class for rendering the barcode as image
- *
- * @category   Zend
- * @package    Zend_Barcode
  */
 class Image extends AbstractRenderer
 {
@@ -43,25 +39,25 @@ class Image extends AbstractRenderer
 
     /**
      * Resource for the font and bars color of the image
-     * @var integer
+     * @var int
      */
     protected $imageForeColor = null;
 
     /**
      * Resource for the background color of the image
-     * @var integer
+     * @var int
      */
     protected $imageBackgroundColor = null;
 
     /**
      * Height of the rendered image wanted by user
-     * @var integer
+     * @var int
      */
     protected $userHeight = 0;
 
     /**
      * Width of the rendered image wanted by user
-     * @var integer
+     * @var int
      */
     protected $userWidth = 0;
 
@@ -83,7 +79,7 @@ class Image extends AbstractRenderer
     /**
      * Set height of the result image
      *
-     * @param null|integer $value
+     * @param null|int $value
      * @throws Exception\OutOfRangeException
      * @return Image
      */
@@ -328,8 +324,8 @@ class Image extends AbstractRenderer
      * Draw a polygon in the image resource
      *
      * @param array $points
-     * @param integer $color
-     * @param boolean $filled
+     * @param int $color
+     * @param  bool $filled
      */
     protected function drawPolygon($points, $color, $filled = true)
     {
@@ -361,7 +357,7 @@ class Image extends AbstractRenderer
      * @param float $size
      * @param array $position
      * @param string $font
-     * @param integer $color
+     * @param int $color
      * @param string $alignment
      * @param float $orientation
      * @throws Exception\RuntimeException

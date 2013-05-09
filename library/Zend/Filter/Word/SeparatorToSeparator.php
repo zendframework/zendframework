@@ -3,20 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace Zend\Filter\Word;
 
+use Zend\Filter\AbstractFilter;
 use Zend\Filter\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Filter
- */
-class SeparatorToSeparator extends \Zend\Filter\PregReplace
+class SeparatorToSeparator extends AbstractFilter
 {
     protected $searchSeparator = null;
     protected $replacementSeparator = null;
@@ -87,27 +83,11 @@ class SeparatorToSeparator extends \Zend\Filter\PregReplace
      */
     public function filter($value)
     {
-        return $this->_separatorToSeparatorFilter($value);
-    }
-
-    /**
-     * Do the real work, replaces the seperator to search for with the replacement seperator
-     *
-     * Returns the replaced string
-     *
-     * @param  string $value
-     * @return string
-     * @throws Exception\RuntimeException
-     */
-    protected function _separatorToSeparatorFilter($value)
-    {
         if ($this->searchSeparator == null) {
             throw new Exception\RuntimeException('You must provide a search separator for this filter to work.');
         }
 
-        $this->setPattern('#' . preg_quote($this->searchSeparator, '#') . '#');
-        $this->setReplacement($this->replacementSeparator);
-        return parent::filter($value);
+        $pattern = '#' . preg_quote($this->searchSeparator, '#') . '#';
+        return preg_replace($pattern, $this->replacementSeparator, $value);
     }
-
 }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Form
  */
@@ -363,5 +363,49 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->helper->setUncheckedValue('foo');
         $uncheckedValue = $this->helper->getUncheckedValue();
         $this->assertSame('foo', $uncheckedValue);
+    }
+
+    public function testGetDisableAttributeReturnTrue()
+    {
+        $element = new MultiCheckboxElement('foo');
+        $element->setAttribute('disabled', 'true' );
+        $this->assertSame('true', $element->getAttribute('disabled'));
+    }
+
+    public function testGetSelectedAttributeReturnTrue()
+    {
+        $element = new MultiCheckboxElement('foo');
+        $element->setAttribute('selected', 'true' );
+        $this->assertSame('true', $element->getAttribute('selected'));
+    }
+
+    public function testGetDisableAttributeForGroupReturnTrue()
+    {
+        $element = new MultiCheckboxElement('foo');
+        $element->setAttribute('disabled', 'true' );
+        $element->setValueOptions(array(
+            array(
+                'label' => 'label1',
+                'value' => 'value1',
+            ),
+        ));
+        $markup  = $this->helper->render($element);
+        $this->assertRegexp('#disabled="disabled" value="value1"#', $markup);
+
+    }
+
+    public function testGetSelectedAttributeForGroupReturnTrue()
+    {
+        $element = new MultiCheckboxElement('foo');
+        $element->setAttribute('selected', 'true' );
+        $element->setValueOptions(array(
+            array(
+                'label' => 'label1',
+                'value' => 'value1',
+            ),
+        ));
+        $markup  = $this->helper->render($element);
+        $this->assertRegexp('#value="value1" checked="checked"#', $markup);
+
     }
 }

@@ -3,29 +3,24 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
 
 /**
  * Helper for ordered and unordered lists
- *
- * @category   Zend
- * @package    Zend_View
- * @subpackage Helper
  */
 class HtmlList extends AbstractHtmlElement
 {
     /**
      * Generates a 'List' element.
      *
-     * @param array   $items   Array with the elements of the list
-     * @param boolean $ordered Specifies ordered/unordered list; default unordered
-     * @param array   $attribs Attributes for the ol/ul tag.
-     * @param boolean $escape Escape the items.
+     * @param  array $items   Array with the elements of the list
+     * @param  bool  $ordered Specifies ordered/unordered list; default unordered
+     * @param  array $attribs Attributes for the ol/ul tag.
+     * @param  bool  $escape  Escape the items.
      * @return string The list XHTML.
      */
     public function __invoke(array $items, $ordered = false, $attribs = false, $escape = true)
@@ -35,7 +30,7 @@ class HtmlList extends AbstractHtmlElement
         foreach ($items as $item) {
             if (!is_array($item)) {
                 if ($escape) {
-                    $escaper = $this->view->plugin('escapeHtml');
+                    $escaper = $this->getView()->plugin('escapeHtml');
                     $item    = $escaper($item);
                 }
                 $list .= '<li>' . $item . '</li>' . self::EOL;

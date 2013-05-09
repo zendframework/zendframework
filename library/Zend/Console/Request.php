@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Console
  */
 
 namespace Zend\Console;
@@ -14,10 +13,6 @@ use Zend\Stdlib\Message;
 use Zend\Stdlib\Parameters;
 use Zend\Stdlib\RequestInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Console
- */
 class Request extends Message implements RequestInterface
 {
     /**
@@ -124,11 +119,7 @@ class Request extends Message implements RequestInterface
      */
     public function params()
     {
-        if ($this->params === null) {
-            $this->params = new Parameters();
-        }
-
-        return $this->params;
+        return $this->getParams();
     }
 
     /**
@@ -142,6 +133,18 @@ class Request extends Message implements RequestInterface
     {
         $this->envParams = $env;
         return $this;
+    }
+
+    /**
+     * Return a single parameter container responsible for env parameters
+     *
+     * @param string    $name       Parameter name
+     * @param string    $default    (optional) default value in case the parameter does not exist
+     * @return \Zend\Stdlib\Parameters
+     */
+    public function getEnv($name, $default = null)
+    {
+        return $this->env()->get($name, $default);
     }
 
     /**
@@ -191,5 +194,4 @@ class Request extends Message implements RequestInterface
     {
         return $this->scriptName;
     }
-
 }

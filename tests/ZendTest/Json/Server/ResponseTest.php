@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Json
  */
@@ -65,6 +65,13 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $error = new Server\Error();
         $this->response->setError($error);
         $this->assertSame($error, $this->response->getError());
+    }
+
+    public function testErrorAccesorsShouldWorkWithNullInput()
+    {
+        $this->response->setError(null);
+        $this->assertNull($this->response->getError());
+        $this->assertFalse($this->response->isError());
     }
 
     public function testIdShouldBeNullByDefault()

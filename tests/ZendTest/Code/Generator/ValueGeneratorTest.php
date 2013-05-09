@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Code
  */
@@ -34,7 +34,6 @@ class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
         $valueGenerator = new ValueGenerator();
         $valueGenerator->setValue('foo');
         $this->assertEquals('foo', $valueGenerator->getValue());
-        //$this->assertEquals('\'foo\';', $valueGenerator->generate());
     }
 
     public function testPropertyDefaultValueCanHandleStrings()
@@ -73,28 +72,34 @@ class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
             5,
             'one' => 1,
             'two' => '2',
+            'constant1' => '__DIR__ . \'/anydir1/anydir2\'',
             array(
+                'baz' => true,
                 'foo',
                 'bar',
                 array(
                     'baz1',
-                    'baz2'
-                    )
-                ),
+                    'baz2',
+                    'constant2' => 'ArrayObject::STD_PROP_LIST',
+                )
+            ),
             new ValueGenerator('PHP_EOL', 'constant')
-            );
+        );
 
         $expectedSource = <<<EOS
 array(
         5,
         'one' => 1,
         'two' => '2',
+        'constant1' => __DIR__ . '/anydir1/anydir2',
         array(
+            'baz' => true,
             'foo',
             'bar',
             array(
                 'baz1',
-                'baz2'
+                'baz2',
+                'constant2' => ArrayObject::STD_PROP_LIST
                 )
             ),
         PHP_EOL
@@ -102,11 +107,9 @@ array(
 EOS;
 
         $valueGenerator = new ValueGenerator();
+        $valueGenerator->initEnvironmentConstants();
         $valueGenerator->setValue($targetValue);
         $generatedTargetSource = $valueGenerator->generate();
         $this->assertEquals($expectedSource, $generatedTargetSource);
-
     }
-
-
 }

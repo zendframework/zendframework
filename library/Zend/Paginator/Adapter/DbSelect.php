@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Paginator
  */
 
 namespace Zend\Paginator\Adapter;
@@ -14,13 +13,9 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
-use Zend\Db\ResultSet\ResultSetInterface;
 use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\ResultSet\ResultSetInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Paginator
- */
 class DbSelect implements AdapterInterface
 {
 
@@ -44,7 +39,7 @@ class DbSelect implements AdapterInterface
     /**
      * Total item count
      *
-     * @var integer
+     * @var int
      */
     protected $rowCount = null;
 
@@ -77,8 +72,8 @@ class DbSelect implements AdapterInterface
     /**
      * Returns an array of items for a page.
      *
-     * @param  integer $offset           Page offset
-     * @param  integer $itemCountPerPage Number of items per page
+     * @param  int $offset           Page offset
+     * @param  int $itemCountPerPage Number of items per page
      * @return array
      */
     public function getItems($offset, $itemCountPerPage)
@@ -99,7 +94,7 @@ class DbSelect implements AdapterInterface
     /**
      * Returns the total number of rows in the result set.
      *
-     * @return integer
+     * @return int
      */
     public function count()
     {
@@ -111,6 +106,15 @@ class DbSelect implements AdapterInterface
         $select->reset(Select::COLUMNS);
         $select->reset(Select::LIMIT);
         $select->reset(Select::OFFSET);
+        $select->reset(Select::ORDER);
+        $select->reset(Select::GROUP);
+
+        // get join information, clear, and repopulate without columns
+        $joins = $select->getRawState(Select::JOINS);
+        $select->reset(Select::JOINS);
+        foreach ($joins as $join) {
+            $select->join($join['name'], $join['on'], array(), $join['type']);
+        }
 
         $select->columns(array('c' => new Expression('COUNT(1)')));
 

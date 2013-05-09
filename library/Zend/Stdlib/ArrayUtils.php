@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib;
@@ -16,9 +15,6 @@ use Traversable;
  * Utility class for testing and manipulation of PHP arrays.
  *
  * Declared abstract, as we have no need for instantiation.
- *
- * @category   Zend
- * @package    Zend_Stdlib
  */
 abstract class ArrayUtils
 {
@@ -97,11 +93,11 @@ abstract class ArrayUtils
      *
      * For example:
      * <code>
-     * $list = array( 'a','b','c','d' );
+     * $list = array('a', 'b', 'c', 'd');
      * $list = array(
      *     0 => 'foo',
      *     1 => 'bar',
-     *     2 => array( 'foo' => 'baz' ),
+     *     2 => array('foo' => 'baz'),
      * );
      * </code>
      *
@@ -162,6 +158,36 @@ abstract class ArrayUtils
         }
 
         return (array_values($value) !== $value);
+    }
+
+    /**
+     * Checks if a value exists in an array.
+     *
+     * Due to "foo" == 0 === TRUE with in_array when strict = false, an option
+     * has been added to prevent this. When $strict = 0/false, the most secure
+     * non-strict check is implemented. if $strict = -1, the default in_array
+     * non-strict behaviour is used.
+     *
+     * @param mixed $needle
+     * @param array $haystack
+     * @param int|bool $strict
+     * @return bool
+     */
+    public static function inArray($needle, array $haystack, $strict = false)
+    {
+        if (!$strict) {
+            if (is_int($needle) || is_float($needle)) {
+                $needle = (string) $needle;
+            }
+            if (is_string($needle)) {
+                foreach ($haystack as &$h) {
+                    if (is_int($h) || is_float($h)) {
+                        $h = (string) $h;
+                    }
+                }
+            }
+        }
+        return in_array($needle, $haystack, $strict);
     }
 
     /**

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Validator
  */
@@ -128,5 +128,87 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageVariables'),
                                      'messageVariables', $validator);
+    }
+
+    public function testValidatingStringTokenInContext()
+    {
+        $this->validator->setToken('email');
+
+        $this->assertTrue($this->validator->isValid(
+            'john@doe.com',
+            array('email' => 'john@doe.com')
+        ));
+
+        $this->assertFalse($this->validator->isValid(
+            'john@doe.com',
+            array('email' => 'harry@hoe.com')
+        ));
+
+        $this->assertFalse($this->validator->isValid(
+            'harry@hoe.com',
+            array('email' => 'john@doe.com')
+        ));
+    }
+
+    public function testValidatingArrayTokenInContext()
+    {
+        $this->validator->setToken(array('user' => 'email'));
+
+        $this->assertTrue($this->validator->isValid(
+            'john@doe.com',
+            array(
+                'user' => array(
+                    'email' => 'john@doe.com'
+                )
+            )
+        ));
+
+        $this->assertFalse($this->validator->isValid(
+            'john@doe.com',
+            array(
+                'user' => array(
+                    'email' => 'harry@hoe.com'
+                )
+            )
+        ));
+
+        $this->assertFalse($this->validator->isValid(
+            'harry@hoe.com',
+            array(
+                'user' => array(
+                    'email' => 'john@doe.com'
+                )
+            )
+        ));
+    }
+
+    public function testCanSetLiteralParameterThroughConstructor()
+    {
+        $validator = new Identical(array('token' => 'foo', 'literal' => true));
+        // Default is false
+        $validator->setLiteral(true);
+        $this->assertTrue($validator->getLiteral());
+    }
+
+    public function testLiteralParameterDoesNotAffectValidationWhenNoContextIsProvided()
+    {
+        $this->validator->setToken(array('foo' => 'bar'));
+
+        $this->validator->setLiteral(false);
+        $this->assertTrue($this->validator->isValid(array('foo' => 'bar')));
+
+        $this->validator->setLiteral(true);
+        $this->assertTrue($this->validator->isValid(array('foo' => 'bar')));
+    }
+
+    public function testLiteralParameterWorksWhenContextIsProvided()
+    {
+        $this->validator->setToken(array('foo' => 'bar'));
+        $this->validator->setLiteral(true);
+
+        $this->assertTrue($this->validator->isValid(
+            array('foo' => 'bar'),
+            array('foo' => 'baz') // Provide a context to make sure the literal parameter will work
+        ));
     }
 }

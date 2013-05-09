@@ -3,23 +3,18 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-/**
- * @category   Zend
- * @package    Zend_Reflection
- */
-class ParamTag implements TagInterface
+class ParamTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
-     * @var string
+     * @var array
      */
-    protected $type = null;
+    protected $types = array();
 
     /**
      * @var string
@@ -42,14 +37,17 @@ class ParamTag implements TagInterface
     /**
      * Initializer
      *
-     * @param string $tagDocBlockLine
+     * @param  string $tagDocBlockLine
      */
     public function initialize($tagDocBlockLine)
     {
         $matches = array();
-        preg_match('#([\w|\\\]+)(?:\s+(\$\S+)){0,1}(?:\s+(.*))?#s', $tagDocBlockLine, $matches);
 
-        $this->type = $matches[1];
+        if (!preg_match('#((?:[\w|\\\]+(?:\[\])*\|?)+)(?:\s+(\$\S+))?(?:\s+(.*))?#s', $tagDocBlockLine, $matches)) {
+            return;
+        }
+
+        $this->types = explode('|', $matches[1]);
 
         if (isset($matches[2])) {
             $this->variableName = $matches[2];
@@ -64,10 +62,20 @@ class ParamTag implements TagInterface
      * Get parameter variable type
      *
      * @return string
+     * @deprecated 2.0.4 use getTypes instead
      */
     public function getType()
     {
-        return $this->type;
+        if (empty($this->types)) {
+            return '';
+        }
+
+        return $this->types[0];
+    }
+
+    public function getTypes()
+    {
+        return $this->types;
     }
 
     /**
@@ -80,6 +88,9 @@ class ParamTag implements TagInterface
         return $this->variableName;
     }
 
+    /**
+     * @return string
+     */
     public function getDescription()
     {
         return $this->description;

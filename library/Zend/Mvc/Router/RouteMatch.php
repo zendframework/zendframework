@@ -3,17 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace Zend\Mvc\Router;
 
 /**
  * RouteInterface match.
- *
- * @package    Zend_Mvc_Router
  */
 class RouteMatch
 {
@@ -90,7 +87,7 @@ class RouteMatch
      * Get a specific parameter.
      *
      * @param  string $name
-     * @param  mixed $default
+     * @param  mixed  $default
      * @return mixed
      */
     public function getParam($name, $default = null)

@@ -3,20 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Stdlib
  */
 
 namespace Zend\Stdlib\Hydrator;
 
 use Zend\Stdlib\Exception;
 
-/**
- * @category   Zend
- * @package    Zend_Stdlib
- * @subpackage Hydrator
- */
 class ObjectProperty extends AbstractHydrator
 {
     /**
@@ -36,11 +30,19 @@ class ObjectProperty extends AbstractHydrator
             ));
         }
 
-        $self = $this;
         $data = get_object_vars($object);
-        array_walk($data, function (&$value, $name) use ($self) {
-            $value = $self->extractValue($name, $value);
-        });
+
+        $filter = $this->getFilter();
+        foreach ($data as $name => $value) {
+            // Filter keys, removing any we don't want
+            if (!$filter->filter($name)) {
+                unset($data[$name]);
+                continue;
+            }
+            // Extract data
+            $data[$name] = $this->extractValue($name, $value);
+        }
+
         return $data;
     }
 
@@ -62,7 +64,7 @@ class ObjectProperty extends AbstractHydrator
             ));
         }
         foreach ($data as $property => $value) {
-            $object->$property = $this->hydrateValue($property, $value);
+            $object->$property = $this->hydrateValue($property, $value, $data);
         }
         return $object;
     }

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode\Renderer;
@@ -16,9 +15,6 @@ use DOMText;
 
 /**
  * Class for rendering the barcode as svg
- *
- * @category   Zend
- * @package    Zend_Barcode
  */
 class Svg extends AbstractRenderer
 {
@@ -37,19 +33,19 @@ class Svg extends AbstractRenderer
 
     /**
      * Height of the rendered image wanted by user
-     * @var integer
+     * @var int
      */
     protected $userHeight = 0;
 
     /**
      * Width of the rendered image wanted by user
-     * @var integer
+     * @var int
      */
     protected $userWidth = 0;
 
     /**
      * Set height of the result image
-     * @param null|integer $value
+     * @param null|int $value
      * @throws Exception\OutOfRangeException
      * @return Svg
      */
@@ -195,7 +191,7 @@ class Svg extends AbstractRenderer
     protected function createElement($tagName, $attributes = array(), $textContent = null)
     {
         $element = $this->resource->createElement($tagName);
-        foreach ($attributes as $k =>$v) {
+        foreach ($attributes as $k => $v) {
             $element->setAttribute($k, $v);
         }
         if ($textContent !== null) {
@@ -291,8 +287,8 @@ class Svg extends AbstractRenderer
      * Draw a polygon in the svg resource
      *
      * @param array $points
-     * @param integer $color
-     * @param boolean $filled
+     * @param int $color
+     * @param  bool $filled
      */
     protected function drawPolygon($points, $color, $filled = true)
     {
@@ -323,7 +319,7 @@ class Svg extends AbstractRenderer
      * @param float $size
      * @param array $position
      * @param string $font
-     * @param integer $color
+     * @param int $color
      * @param string $alignment
      * @param float $orientation
      */

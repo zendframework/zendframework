@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_View
  */
@@ -14,6 +14,7 @@ use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
 use Zend\View\Renderer\JsonRenderer;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -233,5 +234,31 @@ class JsonRendererTest extends TestCase
         $this->renderer->setJsonpCallback('callback');
         $test       = $this->renderer->render($model);
         $this->assertEquals($expected, $test);
+    }
+
+    /**
+     * @group 2463
+     */
+    public function testRecursesJsonModelChildrenWhenRendering()
+    {
+        $root   = new JsonModel(array('foo' => 'bar'));
+        $child1 = new JsonModel(array('foo' => 'bar'));
+        $child2 = new JsonModel(array('foo' => 'bar'));
+        $child1->setCaptureTo('child1');
+        $child2->setCaptureTo('child2');
+        $root->addChild($child1)
+             ->addChild($child2);
+
+        $expected = array(
+            'foo' => 'bar',
+            'child1' => array(
+                'foo' => 'bar',
+            ),
+            'child2' => array(
+                'foo' => 'bar',
+            ),
+        );
+        $test  = $this->renderer->render($root);
+        $this->assertEquals(json_encode($expected), $test);
     }
 }

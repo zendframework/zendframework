@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Uri
  */
@@ -902,7 +902,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
      * Valid query or fragment parts
      *
      * Each valid query or fragment part should require no encoding and if
-     * passed throuh an encoding method shoudl return unchanged.
+     * passed throuh an encoding method should return unchanged.
      *
      * @return array
      */
@@ -1335,4 +1335,18 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array(array('scheme' => 'http', 'host' => 'example.com'))
         );
     }
+
+    public function testParseTwice()
+    {
+        $uri  = new Uri();
+        $uri->parse('http://user@example.com:1/absolute/url?query#fragment');
+        $uri->parse('/relative/url');
+        $this->assertNull($uri->getScheme());
+        $this->assertNull($uri->getHost());
+        $this->assertNull($uri->getUserInfo());
+        $this->assertNull($uri->getPort());
+        $this->assertNull($uri->getQuery());
+        $this->assertNull($uri->getFragment());
+    }
+
 }

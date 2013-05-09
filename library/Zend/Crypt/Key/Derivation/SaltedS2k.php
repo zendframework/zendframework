@@ -3,18 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Crypt
  */
 
 namespace Zend\Crypt\Key\Derivation;
 
 /**
  * Salted S2K key generation (OpenPGP document, RFC 2440)
- *
- * @category   Zend
- * @package    Zend_Crypt
  */
 class SaltedS2k
 {
@@ -49,7 +45,7 @@ class SaltedS2k
      *
      * @param  string  $hash       The hash algorithm to be used by HMAC
      * @param  string  $password   The source password/key
-     * @param  integer $bytes      The output size in bytes
+     * @param  int $bytes      The output size in bytes
      * @param  string  $salt       The salt of the algorithm
      * @throws Exception\InvalidArgumentException
      * @return string

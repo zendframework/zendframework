@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace Zend\Validator;
@@ -15,10 +14,6 @@ use Zend\Uri\Exception\ExceptionInterface as UriException;
 use Zend\Uri\Uri as UriHandler;
 use Zend\Validator\Exception\InvalidArgumentException;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- */
 class Uri extends AbstractValidator
 {
     const INVALID = 'uriInvalid';
@@ -38,19 +33,19 @@ class Uri extends AbstractValidator
     protected $uriHandler;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $allowRelative = true;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $allowAbsolute = true;
 
     /**
      * Sets default option values for this instance
      *
-     * @param array|\Traversable $options
+     * @param array|Traversable $options
      */
     public function __construct($options = array())
     {
@@ -121,7 +116,7 @@ class Uri extends AbstractValidator
     /**
      * Returns the allowAbsolute option
      *
-     * @return boolean
+     * @return bool
      */
     public function getAllowAbsolute()
     {
@@ -131,19 +126,19 @@ class Uri extends AbstractValidator
     /**
      * Sets the allowAbsolute option
      *
-     * @param  boolean $allowAbsolute
+     * @param  bool $allowAbsolute
      * @return Uri
      */
     public function setAllowAbsolute($allowAbsolute)
     {
-        $this->allowAbsolute = (boolean) $allowAbsolute;
+        $this->allowAbsolute = (bool) $allowAbsolute;
         return $this;
     }
 
     /**
      * Returns the allowRelative option
      *
-     * @return boolean
+     * @return bool
      */
     public function getAllowRelative()
     {
@@ -153,12 +148,12 @@ class Uri extends AbstractValidator
     /**
      * Sets the allowRelative option
      *
-     * @param  boolean $allowRelative
+     * @param  bool $allowRelative
      * @return Uri
      */
     public function setAllowRelative($allowRelative)
     {
-        $this->allowRelative = (boolean) $allowRelative;
+        $this->allowRelative = (bool) $allowRelative;
         return $this;
     }
 
@@ -166,7 +161,7 @@ class Uri extends AbstractValidator
      * Returns true if and only if $value validates as a Uri
      *
      * @param  string $value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

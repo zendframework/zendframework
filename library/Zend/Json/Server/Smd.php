@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
  */
 
 namespace Zend\Json\Server;
@@ -13,11 +12,6 @@ namespace Zend\Json\Server;
 use Zend\Json\Server\Exception\InvalidArgumentException;
 use Zend\Json\Server\Exception\RuntimeException;
 
-/**
- * @category   Zend
- * @package    Zend_Json
- * @subpackage Server
- */
 class Smd
 {
     const ENV_JSONRPC_1 = 'JSON-RPC-1.0';
@@ -333,7 +327,7 @@ class Smd
      * Get service object
      *
      * @param  string $name
-     * @return boolean|Smd\Service
+     * @return bool|Smd\Service
      */
     public function getService($name)
     {
@@ -357,7 +351,7 @@ class Smd
      * Remove service
      *
      * @param  string $name
-     * @return boolean
+     * @return bool
      */
     public function removeService($name)
     {

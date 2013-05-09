@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Log
  */
@@ -26,6 +26,18 @@ class SimpleTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must be a string');
         new Simple(1);
+    }
+
+    /**
+     * @dataProvider provideDateTimeFormats
+     */
+    public function testConstructorWithOptions($dateTimeFormat)
+    {
+        $options = array('dateTimeFormat' => $dateTimeFormat, 'format' => '%timestamp%');
+        $formatter = new Simple($options);
+
+        $this->assertEquals($dateTimeFormat, $formatter->getDateTimeFormat());
+        $this->assertAttributeEquals('%timestamp%', 'format', $formatter);
     }
 
     public function testDefaultFormat()

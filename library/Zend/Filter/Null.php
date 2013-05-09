@@ -3,19 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace Zend\Filter;
 
 use Traversable;
 
-/**
- * @category   Zend
- * @package    Zend_Filter
- */
 class Null extends AbstractFilter
 {
     const TYPE_BOOLEAN      = 1;
@@ -73,9 +68,9 @@ class Null extends AbstractFilter
     /**
      * Set boolean types
      *
-     * @param  integer|array $type
+     * @param  int|array $type
      * @throws Exception\InvalidArgumentException
-     * @return Boolean
+     * @return bool
      */
     public function setType($type = null)
     {

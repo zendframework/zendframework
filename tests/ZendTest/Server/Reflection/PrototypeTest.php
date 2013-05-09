@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Server
  */
@@ -89,12 +89,6 @@ class PrototypeTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'One or more params are invalid');
         $r1 = new Reflection\Prototype($this->_r->getReturnValue(), $this->_parametersRaw);
-    }
-
-    public function testConstructionThrowsExceptionOnInvalidParamType()
-    {
-        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid parameters');
-        $r1 = new Reflection\Prototype($this->_r->getReturnValue(), 'string');
     }
 
     /**

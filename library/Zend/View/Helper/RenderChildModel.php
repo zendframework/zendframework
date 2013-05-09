@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace Zend\View\Helper;
@@ -18,18 +17,19 @@ use Zend\View\Model\ModelInterface as Model;
  *
  * Finds children matching "capture-to" values, and renders them using the
  * composed view instance.
- *
- * @package    Zend_View
- * @subpackage Helper
  */
 class RenderChildModel extends AbstractHelper
 {
     /**
-     * @var Model Current view model
+     * Current view model
+     *
+     * @var Model
      */
     protected $current;
 
     /**
+     * View model helper instance
+     *
      * @var ViewModel
      */
     protected $viewModelHelper;
@@ -68,6 +68,7 @@ class RenderChildModel extends AbstractHelper
         $return  = $view->render($model);
         $helper  = $this->getViewModelHelper();
         $helper->setCurrent($current);
+
         return $return;
     }
 
@@ -89,6 +90,7 @@ class RenderChildModel extends AbstractHelper
                 return $childModel;
             }
         }
+
         return false;
     }
 
@@ -107,6 +109,7 @@ class RenderChildModel extends AbstractHelper
                 __METHOD__
             ));
         }
+
         return $helper->getCurrent();
     }
 
@@ -120,8 +123,11 @@ class RenderChildModel extends AbstractHelper
         if ($this->viewModelHelper) {
             return $this->viewModelHelper;
         }
-        $view = $this->getView();
-        $this->viewModelHelper = $view->plugin('view_model');
+
+        if (method_exists($this->getView(), 'plugin')) {
+            $this->viewModelHelper = $this->view->plugin('view_model');
+        }
+
         return $this->viewModelHelper;
     }
 }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Code
  */
@@ -38,5 +38,26 @@ EOB;
         $this->assertEquals('@mytag', $tags[0]['name']);
         $this->assertArrayHasKey('value', $tags[0]);
         $this->assertEquals('', $tags[0]['value']);
+    }
+
+    public function testDocBlockScannerDescriptions()
+    {
+        $docComment = <<<EOB
+/**
+ * Short Description
+ *
+ * Long Description
+ * continued in the second line
+ */
+EOB;
+        $tokenScanner = new DocBlockScanner($docComment);
+        $this->assertEquals('Short Description', $tokenScanner->getShortDescription());
+        $this->assertEquals('Long Description continued in the second line', $tokenScanner->getLongDescription());
+
+        // windows-style line separators
+        $docComment = str_replace("\n", "\r\n", $docComment);
+        $tokenScanner = new DocBlockScanner($docComment);
+        $this->assertEquals('Short Description', $tokenScanner->getShortDescription());
+        $this->assertEquals('Long Description continued in the second line', $tokenScanner->getLongDescription());
     }
 }

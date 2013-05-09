@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Session
  */
@@ -71,6 +71,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function run(\PHPUnit_Framework_TestResult $result = NULL)
     {
         $this->setPreserveGlobalState(false);
+
         return parent::run($result);
     }
 
@@ -179,7 +180,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $config  = $manager->getConfig();
         $this->assertTrue($config instanceof Session\Config\SessionConfig);
         $storage = $manager->getStorage();
-        $this->assertTrue($storage instanceof Session\Storage\SessionStorage);
+        $this->assertTrue($storage instanceof Session\Storage\SessionArrayStorage);
     }
 
     public function testContainerAllowsInjectingManagerViaConstructor()
@@ -525,5 +526,37 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('old', $old, "'exchangeArray' doesn't return an array of old items");
         $this->assertFalse($this->container->offsetExists('old'), "'exchangeArray' doesn't remove old items");
         $this->assertTrue($this->container->offsetExists('new'), "'exchangeArray' doesn't add the new array items");
+    }
+
+    public function testExchangeArrayObject()
+    {
+        $this->container->offsetSet('old', 'old');
+        $this->assertTrue($this->container->offsetExists('old'));
+
+        $old = $this->container->exchangeArray(new \Zend\Stdlib\ArrayObject(array('new' => 'new')));
+        $this->assertArrayHasKey('old', $old, "'exchangeArray' doesn't return an array of old items");
+        $this->assertFalse($this->container->offsetExists('old'), "'exchangeArray' doesn't remove old items");
+        $this->assertTrue($this->container->offsetExists('new'), "'exchangeArray' doesn't add the new array items");
+    }
+
+    public function testMultiDimensionalUnset()
+    {
+        if (version_compare(PHP_VERSION, '5.3.4') < 0) {
+            $this->markTestSkipped('Known issue on versions of PHP less than 5.3.4');
+        }
+        $this->container->foo = array('bar' => 'baz');
+        unset($this->container['foo']['bar']);
+        $this->assertSame(array(), $this->container->foo);
+    }
+
+    public function testUpgradeBehaviors()
+    {
+        $storage = $this->manager->getStorage();
+        $storage['foo'] = new \ArrayObject(array('bar' => 'baz'));
+
+        $container = new Container('foo', $this->manager);
+        $this->assertEquals('baz', $container->bar);
+        $container->baz = 'boo';
+        $this->assertEquals('boo', $storage['foo']['baz']);
     }
 }

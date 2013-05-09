@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ModuleManager
  */
 
 namespace Zend\ModuleManager\Listener;
@@ -19,10 +18,6 @@ use Zend\Mvc\MvcEvent;
 
 /**
  * Locator registration listener
- *
- * @category   Zend
- * @package    Zend_ModuleManager
- * @subpackage Listener
  */
 class LocatorRegistrationListener extends AbstractListener implements
     ListenerAggregateInterface
@@ -35,7 +30,7 @@ class LocatorRegistrationListener extends AbstractListener implements
     /**
      * @var array
      */
-    protected $listeners = array();
+    protected $callbacks = array();
 
     /**
      * loadModule
@@ -55,14 +50,14 @@ class LocatorRegistrationListener extends AbstractListener implements
     }
 
     /**
-     * loadModulesPost
+     * loadModules
      *
      * Once all the modules are loaded, loop
      *
      * @param  Event $e
      * @return void
      */
-    public function onLoadModulesPost(Event $e)
+    public function onLoadModules(Event $e)
     {
         $moduleManager = $e->getTarget();
         $events        = $moduleManager->getEventManager()->getSharedManager();
@@ -114,29 +109,23 @@ class LocatorRegistrationListener extends AbstractListener implements
     }
 
     /**
-     * Attach one or more listeners
-     *
-     * @param  EventManagerInterface $events
-     * @return LocatorRegistrationListener
+     * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, array($this, 'onLoadModule'));
-        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($this, 'onLoadModulesPost'), -1000);
+        $this->callbacks[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, array($this, 'onLoadModule'));
+        $this->callbacks[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, array($this, 'onLoadModules'), -1000);
         return $this;
     }
 
     /**
-     * Detach all previously attached listeners
-     *
-     * @param  EventManagerInterface $events
-     * @return void
+     * {@inheritDoc}
      */
     public function detach(EventManagerInterface $events)
     {
-        foreach ($this->listeners as $key => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$key]);
+        foreach ($this->callbacks as $index => $callback) {
+            if ($events->detach($callback)) {
+                unset($this->callbacks[$index]);
             }
         }
     }

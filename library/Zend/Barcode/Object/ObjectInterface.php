@@ -3,19 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Barcode
  */
 
 namespace Zend\Barcode\Object;
 
 /**
  * Interface for generate Barcode
- *
- * @category   Zend
- * @package    Zend_Barcode
- * @subpackage Object
  */
 interface ObjectInterface
 {
@@ -55,47 +50,47 @@ interface ObjectInterface
 
     /**
      * Set height of the barcode bar
-     * @param integer $value
+     * @param int $value
      * @return ObjectInterface
      */
     public function setBarHeight($value);
 
     /**
      * Get height of the barcode bar
-     * @return integer
+     * @return int
      */
     public function getBarHeight();
 
     /**
      * Set thickness of thin bar
-     * @param integer $value
+     * @param int $value
      * @return ObjectInterface
      */
     public function setBarThinWidth($value);
 
     /**
      * Get thickness of thin bar
-     * @return integer
+     * @return int
      */
     public function getBarThinWidth();
 
     /**
      * Set thickness of thick bar
-     * @param integer $value
+     * @param int $value
      * @return ObjectInterface
      */
     public function setBarThickWidth($value);
 
     /**
      * Get thickness of thick bar
-     * @return integer
+     * @return int
      */
     public function getBarThickWidth();
 
     /**
      * Set factor applying to
      * thinBarWidth - thickBarWidth - barHeight - fontSize
-     * @param integer $value
+     * @param int $value
      * @return ObjectInterface
      */
     public function setFactor($value);
@@ -103,7 +98,7 @@ interface ObjectInterface
     /**
      * Get factor applying to
      * thinBarWidth - thickBarWidth - barHeight - fontSize
-     * @return integer
+     * @return int
      */
     public function getFactor();
 
@@ -116,33 +111,33 @@ interface ObjectInterface
 
     /**
      * Retrieve color of the barcode and text
-     * @return integer
+     * @return int
      */
     public function getForeColor();
 
     /**
      * Set the color of the background
-     * @param integer $value
+     * @param int $value
      * @return ObjectInterface
      */
     public function setBackgroundColor($value);
 
     /**
      * Retrieve background color of the image
-     * @return integer
+     * @return int
      */
     public function getBackgroundColor();
 
     /**
      * Activate/deactivate drawing of the bar
-     * @param boolean $value
+     * @param  bool $value
      * @return ObjectInterface
      */
     public function setWithBorder($value);
 
     /**
      * Retrieve if border are draw or not
-     * @return boolean
+     * @return bool
      */
     public function getWithBorder();
 
@@ -192,21 +187,21 @@ interface ObjectInterface
 
     /**
      * Activate/deactivate drawing of text to encode
-     * @param boolean $value
+     * @param  bool $value
      * @return ObjectInterface
      */
     public function setDrawText($value);
 
     /**
      * Retrieve if drawing of text to encode is enabled
-     * @return boolean
+     * @return bool
      */
     public function getDrawText();
 
     /**
      * Activate/deactivate the adjustment of the position
      * of the characters to the position of the bars
-     * @param boolean $value
+     * @param  bool $value
      * @return ObjectInterface
      */
     public function setStretchText($value);
@@ -214,7 +209,7 @@ interface ObjectInterface
     /**
      * Retrieve if the adjustment of the position of the characters
      * to the position of the bars is enabled
-     * @return boolean
+     * @return bool
      */
     public function getStretchText();
 
@@ -222,7 +217,7 @@ interface ObjectInterface
      * Activate/deactivate the automatic generation
      * of the checksum character
      * added to the barcode text
-     * @param boolean $value
+     * @param  bool $value
      * @return ObjectInterface
      */
     public function setWithChecksum($value);
@@ -230,7 +225,7 @@ interface ObjectInterface
     /**
      * Retrieve if the checksum character is automatically
      * added to the barcode text
-     * @return boolean
+     * @return bool
      */
     public function getWithChecksum();
 
@@ -238,7 +233,7 @@ interface ObjectInterface
      * Activate/deactivate the automatic generation
      * of the checksum character
      * added to the barcode text
-     * @param boolean $value
+     * @param  bool $value
      * @return ObjectInterface
      */
     public function setWithChecksumInText($value);
@@ -246,7 +241,7 @@ interface ObjectInterface
     /**
      * Retrieve if the checksum character is automatically
      * added to the barcode text
-     * @return boolean
+     * @return bool
      */
     public function getWithChecksumInText();
 
@@ -254,14 +249,14 @@ interface ObjectInterface
      * Set the font:
      *  - if integer between 1 and 5, use gd built-in fonts
      *  - if string, $value is assumed to be the path to a TTF font
-     * @param integer|string $value
+     * @param int|string $value
      * @return ObjectInterface
      */
     public function setFont($value);
 
     /**
      * Retrieve the font
-     * @return integer|string
+     * @return int|string
      */
     public function getFont();
 
@@ -281,7 +276,7 @@ interface ObjectInterface
     /**
      * Quiet zone before first bar
      * and after the last bar
-     * @return integer
+     * @return int
      */
     public function getQuietZone();
 
@@ -299,22 +294,22 @@ interface ObjectInterface
 
     /**
      * Get height of the result object
-     * @param boolean $recalculate
-     * @return integer
+     * @param  bool $recalculate
+     * @return int
      */
     public function getHeight($recalculate = false);
 
     /**
      * Get width of the result object
-     * @param boolean $recalculate
-     * @return integer
+     * @param  bool $recalculate
+     * @return int
      */
     public function getWidth($recalculate = false);
 
     /**
      * Calculate the offset from the left of the object
      * if an orientation is activated
-     * @param boolean $recalculate
+     * @param  bool $recalculate
      * @return float
      */
     public function getOffsetLeft($recalculate = false);
@@ -322,7 +317,7 @@ interface ObjectInterface
     /**
      * Calculate the offset from the top of the object
      * if an orientation is activated
-     * @param boolean $recalculate
+     * @param  bool $recalculate
      * @return float
      */
     public function getOffsetTop($recalculate = false);

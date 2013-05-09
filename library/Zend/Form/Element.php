@@ -3,21 +3,20 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace Zend\Form;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\InitializableInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- */
-class Element implements ElementInterface
+class Element implements
+    ElementAttributeRemovalInterface,
+    ElementInterface,
+    InitializableInterface
 {
     /**
      * @var array
@@ -66,6 +65,16 @@ class Element implements ElementInterface
     }
 
     /**
+     * This function is automatically called when creating element with factory. It
+     * allows to perform various operations (add elements...)
+     *
+     * @return void
+     */
+    public function init()
+    {
+    }
+
+    /**
      * Set value for name
      *
      * @param  string $name
@@ -92,7 +101,7 @@ class Element implements ElementInterface
      * - label: label to associate with the element
      * - label_attributes: attributes to use when the label is rendered
      *
-     * @param  array|\Traversable $options
+     * @param  array|Traversable $options
      * @return Element|ElementInterface
      * @throws Exception\InvalidArgumentException
      */
@@ -177,6 +186,18 @@ class Element implements ElementInterface
     }
 
     /**
+     * Remove a single attribute
+     *
+     * @param string $key
+     * @return ElementInterface
+     */
+    public function removeAttribute($key)
+    {
+        unset($this->attributes[$key]);
+        return $this;
+    }
+
+    /**
      * Does the element has a specific attribute ?
      *
      * @param  string $key
@@ -219,6 +240,21 @@ class Element implements ElementInterface
     public function getAttributes()
     {
         return $this->attributes;
+    }
+
+    /**
+     * Remove many attributes at once
+     *
+     * @param array $keys
+     * @return ElementInterface
+     */
+    public function removeAttributes(array $keys)
+    {
+        foreach ($keys as $key) {
+            unset($this->attributes[$key]);
+        }
+
+        return $this;
     }
 
     /**

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_XmlRpc
  */
 
 namespace Zend\XmlRpc;
@@ -45,10 +44,6 @@ use Zend\Server\Reflection;
  * $response = $server->handle();
  * echo $response;
  * </code>
- *
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Server
  */
 class Server extends AbstractServer
 {
@@ -120,7 +115,7 @@ class Server extends AbstractServer
     /**
      * Flag: whether or not {@link handle()} should return a response instead
      * of automatically emitting it.
-     * @var boolean
+     * @var bool
      */
     protected $returnResponse = false;
 
@@ -259,7 +254,7 @@ class Server extends AbstractServer
      *
      * The response is always available via {@link getResponse()}.
      *
-     * @param boolean $flag
+     * @param  bool $flag
      * @return Server
      */
     public function setReturnResponse($flag = true)
@@ -271,7 +266,7 @@ class Server extends AbstractServer
     /**
      * Retrieve return response flag
      *
-     * @return boolean
+     * @return bool
      */
     public function getReturnResponse()
     {
@@ -435,7 +430,7 @@ class Server extends AbstractServer
      *
      * @param  string $class
      * @throws Server\Exception\InvalidArgumentException if invalid response class
-     * @return boolean True if class was set, false if not
+     * @return bool True if class was set, false if not
      */
     public function setResponseClass($class)
     {

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace Zend\Http\Response;
@@ -16,9 +15,6 @@ use Zend\Stdlib\ErrorHandler;
 
 /**
  * Represents an HTTP response message as PHP stream resource
- *
- * @package    Zend_Http
- * @subpackage Response
  */
 class Stream extends Response
 {
@@ -30,7 +26,7 @@ class Stream extends Response
     protected $contentLength = null;
 
     /**
-     * The portion of the body that has alredy been streamed
+     * The portion of the body that has already been streamed
      *
      * @var int
      */
@@ -55,9 +51,29 @@ class Stream extends Response
     /**
      * Should we clean up the stream file when this response is closed?
      *
-     * @var boolean
+     * @var bool
      */
     protected $cleanup;
+
+    /**
+     * Set content length
+     *
+     * @param int $contentLength
+     */
+    public function setContentLength($contentLength = null)
+    {
+        $this->contentLength = $contentLength;
+    }
+
+    /**
+     * Get content length
+     *
+     * @return int|null
+     */
+    public function getContentLength()
+    {
+        return $this->contentLength;
+    }
 
     /**
      * Get the response as stream
@@ -84,7 +100,7 @@ class Stream extends Response
     /**
      * Get the cleanup trigger
      *
-     * @return boolean
+     * @return bool
      */
     public function getCleanup()
     {
@@ -182,12 +198,13 @@ class Stream extends Response
         $headers = $response->getHeaders();
         foreach ($headers as $header) {
             if ($header instanceof \Zend\Http\Header\ContentLength) {
-                $response->contentLength = (int) $header->getFieldValue();
-                if (strlen($response->content) > $response->contentLength) {
+                $response->setContentLength((int) $header->getFieldValue());
+                $contentLength = $response->getContentLength();
+                if (strlen($response->content) > $contentLength) {
                     throw new Exception\OutOfRangeException(sprintf(
                         'Too much content was extracted from the stream (%d instead of %d bytes)',
                         strlen($response->content),
-                        $response->contentLength
+                        $contentLength
                     ));
                 }
                 break;
@@ -242,10 +259,11 @@ class Stream extends Response
      */
     protected function readStream()
     {
-        if (!is_null($this->contentLength)) {
-            $bytes =  $this->contentLength - $this->contentStreamed;
+        $contentLength = $this->getContentLength();
+        if (null !== $contentLength) {
+            $bytes = $contentLength - $this->contentStreamed;
         } else {
-            $bytes = -1; //Read the whole buffer
+            $bytes = -1; // Read the whole buffer
         }
 
         if (!is_resource($this->stream) || $bytes == 0) {
@@ -255,7 +273,7 @@ class Stream extends Response
         $this->content         .= stream_get_contents($this->stream, $bytes);
         $this->contentStreamed += strlen($this->content);
 
-        if ($this->contentLength == $this->contentStreamed) {
+        if ($this->getContentLength() == $this->contentStreamed) {
             $this->stream = null;
         }
     }

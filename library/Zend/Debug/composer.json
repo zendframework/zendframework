@@ -18,5 +18,11 @@
     },
     "suggest": {
         "ext/xdebug": "XDebug, for better backtrace output"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev",
+            "dev-develop": "2.3-dev"
+        }
     }
 }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   Zend_Form
  */
@@ -318,5 +318,49 @@ class FormRowTest extends TestCase
 
         $markup = $this->helper->__invoke($element);
         $this->assertEquals(2,  count(explode("<ul><li>The input does not appear to be a valid date</li></ul>", $markup)));
+    }
+
+    public function testInvokeWithNoRenderErrors()
+    {
+        $mock = $this->getMock(get_class($this->helper), array('setRenderErrors'));
+        $mock->expects($this->never())
+                ->method('setRenderErrors');
+
+        $mock->__invoke(new Element('foo'));
+    }
+
+    public function testInvokeWithRenderErrorsTrue()
+    {
+        $mock = $this->getMock(get_class($this->helper), array('setRenderErrors'));
+        $mock->expects($this->once())
+                ->method('setRenderErrors')
+                ->with(true);
+
+        $mock->__invoke(new Element('foo'), null, true);
+    }
+
+    public function testAppendLabelEvenIfElementHasId()
+    {
+        $element  = new Element('foo');
+        $element->setAttribute('id', 'bar');
+        $element->setLabel('Baz');
+
+        $this->helper->setLabelPosition('append');
+        $markup = $this->helper->render($element);
+        $this->assertRegexp('#^<input name="foo" id="bar" type="text" value=""\/?><label for="bar">Baz</label>$#', $markup);
+    }
+
+    public function testUsePartialView()
+    {
+        $element = new Element('fooname');
+        $element->setLabel('foolabel');
+        $partial = 'formrow-partial.phtml';
+
+        $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
+        $markup = $this->helper->__invoke($element, null, null, $partial);
+        $this->assertContains('fooname', $markup);
+        $this->assertContains('foolabel', $markup);
+
+        $this->assertSame($partial, $this->helper->getPartial());
     }
 }

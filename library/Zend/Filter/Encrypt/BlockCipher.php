@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace Zend\Filter\Encrypt;
@@ -21,9 +20,6 @@ use Zend\Crypt\Symmetric\Exception as SymmetricException;
 
 /**
  * Encryption adapter for Zend\Crypt\BlockCipher
- *
- * @category   Zend
- * @package    Zend_Filter
  */
 class BlockCipher implements EncryptionAlgorithmInterface
 {
@@ -34,15 +30,13 @@ class BlockCipher implements EncryptionAlgorithmInterface
      *     'key_iteration' => the number of iterations for the PBKDF2 key generation
      *     'algorithm      => cipher algorithm to use
      *     'hash'          => algorithm to use for the authentication
-     *     'iv'            => initialization vector
+     *     'vector'        => initialization vector
      * )
      */
     protected $encryption = array(
-        'key'                 => 'ZendFramework',
         'key_iteration'       => 5000,
         'algorithm'           => 'aes',
         'hash'                => 'sha256',
-        'vector'              => null,
     );
 
     /**
@@ -62,7 +56,7 @@ class BlockCipher implements EncryptionAlgorithmInterface
     /**
      * Class constructor
      *
-     * @param  string|array|\Traversable $options Encryption Options
+     * @param  string|array|Traversable $options Encryption Options
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      */
@@ -183,6 +177,34 @@ class BlockCipher implements EncryptionAlgorithmInterface
     }
 
     /**
+     * Set the encryption key
+     *
+     * @param  string $key
+     * @return BlockCipher
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setKey($key)
+    {
+        try {
+            $this->blockCipher->setKey($key);
+        } catch (CryptException\InvalidArgumentException $e) {
+            throw new Exception\InvalidArgumentException($e->getMessage());
+        }
+        $this->encryption['key'] = $key;
+        return $this;
+    }
+
+    /**
+     * Get the encryption key
+     *
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->encryption['key'];
+    }
+
+    /**
      * Returns the compression
      *
      * @return array
@@ -229,8 +251,6 @@ class BlockCipher implements EncryptionAlgorithmInterface
             $encrypted = $this->blockCipher->encrypt($value);
         } catch (CryptException\InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException($e->getMessage());
-        } catch (SymmetricException\InvalidArgumentException $e) {
-            throw new Exception\InvalidArgumentException($e->getMessage());
         }
         return $encrypted;
     }
@@ -265,5 +285,4 @@ class BlockCipher implements EncryptionAlgorithmInterface
     {
         return 'BlockCipher';
     }
-
 }

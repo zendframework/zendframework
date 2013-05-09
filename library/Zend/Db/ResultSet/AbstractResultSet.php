@@ -18,7 +18,6 @@ use Zend\Db\Adapter\Driver\ResultInterface;
 
 abstract class AbstractResultSet implements Iterator, ResultSetInterface
 {
-
     /**
      * if -1, datasource is already buffered
      * if -2, implicitly disabling buffering in ResultSet
@@ -47,7 +46,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
     /**
      * @var int
      */
-    protected $position = 0;
+    protected $position = -1;
 
     /**
      * Set the data source for the result set
@@ -211,7 +210,6 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
             $key = key($this->dataSource);
             return ($key !== null);
         }
-
     }
 
     /**
@@ -221,7 +219,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
      */
     public function rewind()
     {
-        if (!is_array($this->buffer)) {
+        if (!is_array($this->buffer) || $this->position === -1) {
             if ($this->dataSource instanceof Iterator) {
                 $this->dataSource->rewind();
             } else {

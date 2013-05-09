@@ -9,6 +9,8 @@
 
 namespace Zend\Di\Definition\Builder;
 
+use Zend\Di\Di;
+
 /**
  * Definitions for an injection endpoint method
  */
@@ -55,7 +57,7 @@ class InjectionMethod
         $this->parameters[] = array(
             $name,
             $class,
-            ($isRequired == null) ? true : false,
+            self::detectMethodRequirement($isRequired),
             $default,
         );
 
@@ -68,5 +70,52 @@ class InjectionMethod
     public function getParameters()
     {
         return $this->parameters;
+    }
+
+    /**
+     *
+     * @param mixed $requirement
+     * @return int
+     */
+    public static function detectMethodRequirement($requirement)
+    {
+        if (is_bool($requirement)) {
+            return $requirement ? Di::METHOD_IS_REQUIRED : Di::METHOD_IS_OPTIONAL;
+        }
+
+        if (null === $requirement) {
+            //This is mismatch to ClassDefinition::addMethod is it ok ? is optional?
+            return Di::METHOD_IS_REQUIRED;
+        }
+
+        if (is_int($requirement)) {
+            return $requirement;
+        }
+
+        if (is_string($requirement)) {
+            switch (strtolower($requirement)) {
+                default:
+                case "require":
+                case "required":
+                    return Di::METHOD_IS_REQUIRED;
+                    break;
+                case "aware":
+                    return Di::METHOD_IS_AWARE;
+                    break;
+                case "optional":
+                    return Di::METHOD_IS_OPTIONAL;
+                    break;
+                case "constructor":
+                    return Di::MEHTOD_IS_CONSTRUCTOR;
+                    break;
+                case "instantiator":
+                    return Di::METHOD_IS_INSTANTIATOR;
+                    break;
+                case "eager":
+                    return Di::METHOD_IS_EAGER;
+                    break;
+            }
+        }
+        return 0;
     }
 }

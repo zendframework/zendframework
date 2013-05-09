@@ -111,6 +111,9 @@ class InjectionMethod
                 case "instantiator":
                     return Di::METHOD_IS_INSTANTIATOR;
                     break;
+                case "eager":
+                    return Di::METHOD_IS_EAGER;
+                    break;
             }
         }
         return 0;

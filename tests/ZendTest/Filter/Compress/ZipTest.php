@@ -102,6 +102,10 @@ class ZipTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
+        if (!constant('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED')) {
+            $this->markTestSkipped('ZIP compression tests are currently disabled');
+        }
+
         $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',
@@ -176,6 +180,10 @@ class ZipTest extends \PHPUnit_Framework_TestCase
      */
     public function testZipCompressFile()
     {
+        if (!constant('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED')) {
+            $this->markTestSkipped('ZIP compression tests are currently disabled');
+        }
+
         $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',
@@ -200,6 +208,10 @@ class ZipTest extends \PHPUnit_Framework_TestCase
      */
     public function testCompressNonExistingTargetFile()
     {
+        if (!constant('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED')) {
+            $this->markTestSkipped('ZIP compression tests are currently disabled');
+        }
+
         $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',
@@ -223,6 +235,10 @@ class ZipTest extends \PHPUnit_Framework_TestCase
      */
     public function testZipCompressDirectory()
     {
+        if (!constant('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED')) {
+            $this->markTestSkipped('ZIP compression tests are currently disabled');
+        }
+
         $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',
@@ -260,6 +276,10 @@ class ZipTest extends \PHPUnit_Framework_TestCase
 
     public function testDecompressWillThrowExceptionWhenDecompressingWithNoTarget()
     {
+        if (!constant('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED')) {
+            $this->markTestSkipped('ZIP compression tests are currently disabled');
+        }
+
         $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',

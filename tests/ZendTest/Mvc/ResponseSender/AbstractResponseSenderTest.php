@@ -37,7 +37,7 @@ class AbstractResponseSenderTest extends TestCase
         $response->getHeaders()->addHeaders($headers);
 
         $mockSendResponseEvent = $this->getMock(
-            'Zend\Mvc\ResponseSender\SendResponseEvent', 
+            'Zend\Mvc\ResponseSender\SendResponseEvent',
             array('getResponse')
         );
         $mockSendResponseEvent->expects(

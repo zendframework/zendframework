@@ -145,14 +145,11 @@ class Result implements \Iterator, ResultInterface
      */
     protected function loadData()
     {
-        $this->currentComplete = false;
-        $this->currentData = null;
-
+        $this->currentComplete = true;
         $this->currentData = oci_fetch_assoc($this->resource);
 
         if ($this->currentData !== false) {
             $this->position++;
-            $this->currentComplete = true;
             return true;
         }
         return false;
@@ -192,7 +189,7 @@ class Result implements \Iterator, ResultInterface
     public function valid()
     {
         if ($this->currentComplete) {
-            return true;
+            return ($this->currentData !== false);
         }
 
         return $this->loadData();

@@ -18,7 +18,6 @@
         "zendframework/zend-console": "self.version",
         "zendframework/zend-di": "self.version",
         "zendframework/zend-eventmanager": "self.version",
-        "zendframework/zend-form": "self.version",
         "zendframework/zend-modulemanager": "self.version",
         "zendframework/zend-http": "self.version",
         "zendframework/zend-uri": "self.version",
@@ -29,6 +28,7 @@
     },
     "suggest": {
         "zendframework/zend-filter": "Zend\\Filter component",
+        "zendframework/zend-form": "Zend\\Form component",
         "zendframework/zend-i18n": "Zend\\I18n component for translatable segments",
         "zendframework/zend-inputfilter": "Zend\\Inputfilter component",
         "zendframework/zend-serializer": "Zend\\Serializer component",

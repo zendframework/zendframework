@@ -28,7 +28,12 @@
         "zendframework/zend-view": "self.version"
     },
     "suggest": {
-        "zendframework/zend-i18n": "Zend\\I18n component for translatable segments"
+        "zendframework/zend-filter": "Zend\\Filter component",
+        "zendframework/zend-i18n": "Zend\\I18n component for translatable segments",
+        "zendframework/zend-inputfilter": "Zend\\Inputfilter component",
+        "zendframework/zend-serializer": "Zend\\Serializer component",
+        "zendframework/zend-stdlib": "Zend\\Stdlib component",
+        "zendframework/zend-validator": "Zend\\Validator component"
     },
     "extra": {
         "branch-alias": {

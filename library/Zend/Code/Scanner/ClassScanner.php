@@ -276,7 +276,7 @@ class ClassScanner implements ScannerInterface
                 continue;
             }
 
-            $return[] = $info['name'];
+            $return[] = $this->getConstant($info['name']);
         }
 
         return $return;

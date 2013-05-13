@@ -100,7 +100,7 @@ class ClassScannerTest extends TestCase
         $file    = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
         $class   = $file->getClass('ZendTest\Code\TestAsset\FooClass');
         $this->assertEquals(11, $class->getLineStart());
-        $this->assertEquals(31, $class->getLineEnd());
+        $this->assertEquals(36, $class->getLineEnd());
 
         $file    = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
         $class   = $file->getClass('ZendTest\Code\TestAsset\BarClass');

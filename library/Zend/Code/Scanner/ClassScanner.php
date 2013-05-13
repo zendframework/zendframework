@@ -243,6 +243,27 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Returns a list of constant names
+     *
+     * @return array
+     */
+    public function getConstantNames()
+    {
+        $this->scan();
+
+        $return = array();
+        foreach ($this->infos as $info) {
+            if ($info['type'] != 'constant') {
+                continue;
+            }
+
+            $return[] = $info['name'];
+        }
+
+        return $return;
+    }
+
+    /**
      * @return array
      */
     public function getConstants()
@@ -259,6 +280,41 @@ class ClassScanner implements ScannerInterface
         }
 
         return $return;
+    }
+
+    public function getConstant($constantNameOrInfoIndex)
+    {
+        $this->scan();
+
+        if (is_int($constantNameOrInfoIndex)) {
+            $info = $this->infos[$constantNameOrInfoIndex];
+            if ($info['type'] != 'constant') {
+                throw new Exception\InvalidArgumentException('Index of info offset is not about a constant');
+            }
+        } elseif (is_string($constantNameOrInfoIndex)) {
+            $constantFound = false;
+            foreach ($this->infos as $info) {
+                if ($info['type'] === 'constant' && $info['name'] === $constantNameOrInfoIndex) {
+                    $constantFound = true;
+                    break;
+                }
+            }
+            if (!$constantFound) {
+                return false;
+            }
+        } else {
+            throw new Exception\InvalidArgumentException('Invalid constant name of info index type.  Must be of type int or string');
+        }
+        if (!isset($info)) {
+            return false;
+        }
+        $p = new ConstantScanner(
+            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
+            $this->nameInformation
+        );
+        $p->setClass($this->name);
+        $p->setScannerClass($this);
+        return $p;
     }
 
     /**
@@ -487,6 +543,7 @@ class ClassScanner implements ScannerInterface
                 return false;
             }
             $token = $tokens[$tokenIndex];
+
             if (is_string($token)) {
                 $tokenType    = null;
                 $tokenContent = $token;
@@ -638,7 +695,7 @@ class ClassScanner implements ScannerInterface
                         goto SCANNER_CLASS_BODY_CONST_END;
                     }
 
-                    if ($tokenType === T_STRING) {
+                    if ($tokenType === T_STRING && null === $infos[$infoIndex]['name']) {
                         $infos[$infoIndex]['name'] = $tokenContent;
                     }
 
@@ -699,7 +756,13 @@ class ClassScanner implements ScannerInterface
                         }
                     }
 
+
                     switch ($tokenType) {
+
+                        case T_CONST:
+                            $memberContext             = 'constant';
+                            $infos[$infoIndex]['type'] = 'constant';
+                            goto SCANNER_CLASS_BODY_CONST_CONTINUE;
 
                         case T_VARIABLE:
                             if ($memberContext === null) {
@@ -715,7 +778,7 @@ class ClassScanner implements ScannerInterface
                             goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
 
                         case T_STRING:
-                            if ($memberContext === 'method' && $infos[$infoIndex]['name'] === null) {
+                            if ($memberContext === 'method' && null === $infos[$infoIndex]['name']) {
                                 $infos[$infoIndex]['name'] = $tokenContent;
                             }
                             goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;

@@ -122,6 +122,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Return documentation comment
+     *
      * @return null|string
      */
     public function getDocComment()
@@ -132,6 +134,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Return documentation block
+     *
      * @return false|DocBlockScanner
      */
     public function getDocBlock()
@@ -144,6 +148,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Return a name of class
+     *
      * @return null|string
      */
     public function getName()
@@ -153,6 +159,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Return short name of class
+     *
      * @return null|string
      */
     public function getShortName()
@@ -162,6 +170,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Return number of first line
+     *
      * @return int|null
      */
     public function getLineStart()
@@ -171,6 +181,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Return number of last line
+     *
      * @return int|null
      */
     public function getLineEnd()
@@ -180,6 +192,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Verify if class is final
+     *
      * @return bool
      */
     public function isFinal()
@@ -189,6 +203,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Verify if class is instantiable
+     *
      * @return bool
      */
     public function isInstantiable()
@@ -198,6 +214,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Verify if class is an abstract class
+     *
      * @return bool
      */
     public function isAbstract()
@@ -207,6 +225,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Verify if class is an interface
+     *
      * @return bool
      */
     public function isInterface()
@@ -216,6 +236,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Verify if class has parent
+     *
      * @return bool
      */
     public function hasParentClass()
@@ -225,6 +247,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Return a name of parent class
+     *
      * @return null|string
      */
     public function getParentClass()
@@ -234,6 +258,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Return a list of interface names
+     *
      * @return array
      */
     public function getInterfaces()
@@ -243,7 +269,7 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
-     * Returns a list of constant names
+     * Return a list of constant names
      *
      * @return array
      */
@@ -264,7 +290,9 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
-     * @return array
+     * Return a list of constants
+     *
+     * @return ConstantScanner[]
      */
     public function getConstants()
     {
@@ -282,6 +310,13 @@ class ClassScanner implements ScannerInterface
         return $return;
     }
 
+    /**
+     * Return a single constant by given name or index of info
+     *
+     * @param  string|int $constantNameOrInfoIndex
+     * @throws Exception\InvalidArgumentException
+     * @return bool|ConstantScanner
+     */
     public function getConstant($constantNameOrInfoIndex)
     {
         $this->scan();
@@ -318,7 +353,26 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
-     * Returns a list of property names
+     * Verify if class has constant
+     *
+     * @param  string $name
+     * @return bool
+     */
+    public function hasConstant($name)
+    {
+        $this->scan();
+
+        foreach ($this->infos as $info) {
+            if ($info['type'] === 'constant' && $info['name'] === $name) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Return a list of property names
      *
      * @return array
      */
@@ -339,9 +393,9 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
-     * Returns a list of properties
+     * Return a list of properties
      *
-     * @return array
+     * @return PropertyScanner
      */
     public function getProperties()
     {
@@ -359,6 +413,13 @@ class ClassScanner implements ScannerInterface
         return $return;
     }
 
+    /**
+     * Return a single property by given name or index of info
+     *
+     * @param  string|int $propertyNameOrInfoIndex
+     * @throws Exception\InvalidArgumentException
+     * @return bool|PropertyScanner
+     */
     public function getProperty($propertyNameOrInfoIndex)
     {
         $this->scan();
@@ -395,6 +456,27 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Verify if class has property
+     *
+     * @param  string $name
+     * @return bool
+     */
+    public function hasProperty($name)
+    {
+        $this->scan();
+
+        foreach ($this->infos as $info) {
+            if ($info['type'] === 'property' && $info['name'] === $name) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Return a list of method names
+     *
      * @return array
      */
     public function getMethodNames()
@@ -414,6 +496,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Return a list of methods
+     *
      * @return MethodScanner[]
      */
     public function getMethods()
@@ -433,6 +517,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Return a single method by given name or index of info
+     *
      * @param  string|int $methodNameOrInfoIndex
      * @throws Exception\InvalidArgumentException
      * @return MethodScanner
@@ -473,6 +559,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Verify if class has method by given name
+     *
      * @param  string $name
      * @return bool
      */
@@ -500,6 +588,8 @@ class ClassScanner implements ScannerInterface
     }
 
     /**
+     * Scan tokens
+     *
      * @return void
      * @throws Exception\RuntimeException
      */

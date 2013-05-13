@@ -20,7 +20,6 @@ class Text extends Column
 
     /**
      * @param null|string $name
-     * @param int         $length
      */
     public function __construct($name)
     {

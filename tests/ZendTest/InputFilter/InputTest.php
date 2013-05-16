@@ -282,19 +282,23 @@ class InputTest extends TestCase
             array(
                 'fallbackValue' => ''
             ),
+            array(
+                'fallbackValue' => 'some value'
+            ),
         );
     }
 
     /**
      * @dataProvider dataFallbackValue
      */
-    public function testNullOrEmptyStringInFallbackValue($fallbackValue)
+    public function testFallbackValue($fallbackValue)
     {
         $this->input->setFallbackValue($fallbackValue);
         $validator = new Validator\Date();
         $this->input->getValidatorChain()->attach($validator);
         $this->input->setValue('123'); // not a date
 
+        var_dump($this->input);
         $this->assertTrue($this->input->isValid());
         $this->assertEmpty($this->input->getMessages());
         $this->assertSame($fallbackValue, $this->input->getValue());

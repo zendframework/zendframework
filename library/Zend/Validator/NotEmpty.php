@@ -48,6 +48,21 @@ class NotEmpty extends AbstractValidator
     );
 
     /**
+     * Default value for types; value = 493
+     *
+     * @var array
+     */
+    protected $defaultType = array(
+        self::OBJECT,
+        self::SPACE,
+        self::NULL,
+        self::EMPTY_ARRAY,
+        self::STRING,
+        self::FLOAT,
+        self::BOOLEAN
+    );
+
+    /**
      * @var array
      */
     protected $messageTemplates = array(
@@ -60,9 +75,7 @@ class NotEmpty extends AbstractValidator
      *
      * @var array
      */
-    protected $options = array(
-        'type' => 493,  // Internal type to detect
-    );
+    protected $options = array();
 
     /**
      * Constructor
@@ -71,6 +84,8 @@ class NotEmpty extends AbstractValidator
      */
     public function __construct($options = null)
     {
+        $this->setType($this->defaultType);
+
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }

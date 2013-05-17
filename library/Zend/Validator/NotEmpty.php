@@ -131,13 +131,18 @@ class NotEmpty extends AbstractValidator
     }
 
     /**
-     * Set the types
-     *
-     * @param  int|array $type
-     * @throws Exception\InvalidArgumentException
-     * @return NotEmpty
+     * @return int
      */
-    public function setType($type = null)
+    public function getDefaultType()
+    {
+        return $this->calculateTypeValue($this->defaultType);
+    }
+
+    /**
+     * @param array|int|string $type
+     * @return int
+     */
+    protected function calculateTypeValue($type)
     {
         if (is_array($type)) {
             $detected = 0;
@@ -154,11 +159,26 @@ class NotEmpty extends AbstractValidator
             $type = array_search($type, $this->constants);
         }
 
+        return $type;
+    }
+
+    /**
+     * Set the types
+     *
+     * @param  int|array $type
+     * @throws Exception\InvalidArgumentException
+     * @return NotEmpty
+     */
+    public function setType($type = null)
+    {
+        $type = $this->calculateTypeValue($type);
+
         if (!is_int($type) || ($type < 0) || ($type > self::ALL)) {
             throw new Exception\InvalidArgumentException('Unknown type');
         }
 
         $this->options['type'] = $type;
+
         return $this;
     }
 

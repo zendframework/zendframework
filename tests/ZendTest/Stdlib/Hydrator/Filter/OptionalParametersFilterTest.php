@@ -15,6 +15,7 @@ use Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter;
  * Unit tests for {@see \Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter}
  *
  * @covers \Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter
+ * @group Zend_Stdlib
  */
 class OptionalParametersFilterTest extends \PHPUnit_Framework_TestCase
 {

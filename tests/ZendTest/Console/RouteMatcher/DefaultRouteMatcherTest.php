@@ -8,9 +8,9 @@
  * @package   Zend_Console
  */
 
-namespace ZendTest\Console;
+namespace ZendTest\Console\RouteMatcher;
 
-use Zend\Console\ConsoleRouteMatcher;
+use Zend\Console\RouteMatcher\DefaultRouteMatcher;
 
 /**
  * @category   Zend
@@ -18,7 +18,7 @@ use Zend\Console\ConsoleRouteMatcher;
  * @subpackage UnitTests
  * @group      Zend_Console
  */
-class ConsoleRouteMatcherTest extends \PHPUnit_Framework_TestCase
+class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
 {
 
     public static function routeProvider()
@@ -858,7 +858,7 @@ class ConsoleRouteMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function testMatching($routeDefinition, array $arguments = array(), array $params = null)
     {
-        $route = new ConsoleRouteMatcher($routeDefinition);
+        $route = new DefaultRouteMatcher($routeDefinition);
         $match = $route->match($arguments);
 
 
@@ -880,7 +880,7 @@ class ConsoleRouteMatcherTest extends \PHPUnit_Framework_TestCase
     public function testCannotMatchWithEmptyMandatoryParam()
     {
         $arguments = array('--foo=');
-        $route = new ConsoleRouteMatcher('--foo=');
+        $route = new DefaultRouteMatcher('--foo=');
         $match = $route->match($arguments);
         $this->assertEquals(null, $match);
     }
@@ -970,7 +970,7 @@ class ConsoleRouteMatcherTest extends \PHPUnit_Framework_TestCase
         array $arguments = array(),
         array $params = null
     ) {
-        $route = new ConsoleRouteMatcher($routeDefinition, array(), $defaults);
+        $route = new DefaultRouteMatcher($routeDefinition, array(), $defaults);
         $match = $route->match($arguments);
 
         if ($params === null) {

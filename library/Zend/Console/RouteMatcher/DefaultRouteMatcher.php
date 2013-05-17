@@ -7,9 +7,11 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Console;
+namespace Zend\Console\RouteMatcher;
 
-class ConsoleRouteMatcher
+use Zend\Console\Exception;
+
+class DefaultRouteMatcher implements RouteMatcherInterface
 {
     /**
      * Parts of the route.
@@ -407,7 +409,7 @@ class ConsoleRouteMatcher
     /**
      * Match parameters against route passed to constructor
      *
-     * @param $params
+     * @param array $params
      * @return array|null
      */
     public function match($params)

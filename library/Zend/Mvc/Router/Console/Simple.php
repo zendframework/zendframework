@@ -24,6 +24,7 @@ namespace Zend\Mvc\Router\Console;
 use Traversable;
 use Zend\Console\RouteMatcher\DefaultRouteMatcher;
 use Zend\Console\Request as ConsoleRequest;
+use Zend\Console\RouteMatcher\RouteMatcherInterface;
 use Zend\Filter\FilterChain;
 use Zend\Mvc\Exception\InvalidArgumentException;
 use Zend\Mvc\Router\Exception;
@@ -56,7 +57,7 @@ class Simple implements RouteInterface
     /**
      * Create a new simple console route.
      *
-     * @param  string                                   $route
+     * @param  string|RouteMatcherInterface             $routeOrRouteMatcher
      * @param  array                                    $constraints
      * @param  array                                    $defaults
      * @param  array                                    $aliases
@@ -66,42 +67,22 @@ class Simple implements RouteInterface
      * @return \Zend\Mvc\Router\Console\Simple
      */
     public function __construct(
-        $route,
+        $routeOrRouteMatcher,
         array $constraints = array(),
         array $defaults = array(),
         array $aliases = array(),
         $filters = null,
         $validators = null
     ) {
-        $this->matcher = new DefaultRouteMatcher($route, $constraints, $defaults, $aliases);
-
-        if ($filters !== null) {
-            if ($filters instanceof FilterChain) {
-                $this->filters = $filters;
-            } elseif ($filters instanceof Traversable) {
-                $this->filters = new FilterChain(array(
-                    'filters' => ArrayUtils::iteratorToArray($filters, false)
-                ));
-            } elseif (is_array($filters)) {
-                $this->filters = new FilterChain(array(
-                    'filters' => $filters
-                ));
-            } else {
-                throw new InvalidArgumentException('Cannot use ' . gettype($filters) . ' as filters for ' . __CLASS__);
-            }
-        }
-
-        if ($validators !== null) {
-            if ($validators instanceof ValidatorChain) {
-                $this->validators = $validators;
-            } elseif ($validators instanceof Traversable || is_array($validators)) {
-                $this->validators = new ValidatorChain();
-                foreach ($validators as $v) {
-                    $this->validators->attach($v);
-                }
-            } else {
-                throw new InvalidArgumentException('Cannot use ' . gettype($validators) . ' as validators for ' . __CLASS__);
-            }
+        if (is_string($routeOrRouteMatcher)) {
+            $this->matcher = new DefaultRouteMatcher($routeOrRouteMatcher, $constraints, $defaults, $aliases);
+        } elseif ($routeOrRouteMatcher instanceof RouteMatcherInterface) {
+            $this->matcher = $routeOrRouteMatcher;
+        } else {
+            throw new InvalidArgumentException(
+                "routeOrRouteMatcher should either be string, or class implementing RouteMatcherInterface. "
+                . gettype($routeOrRouteMatcher) . " was given."
+            );
         }
     }
 

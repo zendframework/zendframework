@@ -35,24 +35,68 @@ class DefaultRouteMatcher implements RouteMatcherInterface
     protected $aliases;
 
     /**
+     * @var \Zend\Validator\ValidatorChain
+     */
+    protected $validators;
+
+    /**
+     * @var \Zend\Filter\FilterChain
+     */
+    protected $filters;
+
+    /**
      * Class constructor
      *
      * @param string $route
      * @param array $constraints
      * @param array $defaults
      * @param array $aliases
+     * @param null $filters
+     * @param null $validators
+     * @throws InvalidArgumentException
      * @return self
      */
     public function __construct(
         $route,
         array $constraints = array(),
         array $defaults = array(),
-        array $aliases = array()
+        array $aliases = array(),
+        $filters = null,
+        $validators = null
     ) {
         $this->defaults = $defaults;
         $this->constraints = $constraints;
         $this->aliases = $aliases;
         $this->parts = $this->parseDefinition($route);
+
+        if ($filters !== null) {
+            if ($filters instanceof FilterChain) {
+                $this->filters = $filters;
+            } elseif ($filters instanceof Traversable) {
+                $this->filters = new FilterChain(array(
+                    'filters' => ArrayUtils::iteratorToArray($filters, false)
+                ));
+            } elseif (is_array($filters)) {
+                $this->filters = new FilterChain(array(
+                    'filters' => $filters
+                ));
+            } else {
+                throw new InvalidArgumentException('Cannot use ' . gettype($filters) . ' as filters for ' . __CLASS__);
+            }
+        }
+
+        if ($validators !== null) {
+            if ($validators instanceof ValidatorChain) {
+                $this->validators = $validators;
+            } elseif ($validators instanceof Traversable || is_array($validators)) {
+                $this->validators = new ValidatorChain();
+                foreach ($validators as $v) {
+                    $this->validators->attach($v);
+                }
+            } else {
+                throw new InvalidArgumentException('Cannot use ' . gettype($validators) . ' as validators for ' . __CLASS__);
+            }
+        }
     }
 
     /**

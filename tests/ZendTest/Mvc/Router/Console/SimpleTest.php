@@ -78,4 +78,25 @@ class SimpleTest extends TestCase
         $this->assertEquals('bar', $match->getParam('foo'));
     }
 
+    public function testCustomRouteMatcherCanBeInjectedViaConstructor()
+    {
+        $arguments = array('--foo=bar');
+        array_unshift($arguments, 'scriptname.php');
+        $request = new ConsoleRequest($arguments);
+
+        $routeMatcher = $this->getMock('Zend\Console\RouteMatcher\RouteMatcherInterface', array('match'));
+        $routeMatcher->expects($this->once())->method('match')
+            ->with(array('--foo=bar'));
+
+        $route = new Simple($routeMatcher);
+        $route->match($request);
+    }
+
+    public function testConstructorThrowsExceptionWhenFirstArgumentIsNotStringNorRouteMatcherInterface()
+    {
+        $this->setExpectedException('Zend\Mvc\Exception\InvalidArgumentException');
+
+        new Simple(new \stdClass());
+    }
+
 }

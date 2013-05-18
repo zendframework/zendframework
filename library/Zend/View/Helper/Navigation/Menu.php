@@ -464,8 +464,9 @@ class Menu extends AbstractHelper
      *
      * Overrides {@link AbstractHelper::htmlify()}.
      *
-     * @param  AbstractPage $page        page to generate HTML for
-     * @param  bool         $escapeLabel Whether or not to escape the label
+     * @param  AbstractPage $page               page to generate HTML for
+     * @param  bool         $escapeLabel        Whether or not to escape the label
+     * @param  bool         $addClassToListItem Whether or not to add the page class to the list item
      * @return string
      */
     public function htmlify(AbstractPage $page, $escapeLabel = true, $addClassToListItem = false)

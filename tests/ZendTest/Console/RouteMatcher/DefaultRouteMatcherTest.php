@@ -987,4 +987,95 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
+    public static function routeConstraintsProvider()
+    {
+        return array(
+            'simple-constraints' => array(
+                '<numeric> <alpha>',
+                array(
+                    'numeric' => '/^[0-9]+$/',
+                    'alpha'   => '/^[a-zA-Z]+$/',
+                ),
+                array('1234', 'test'),
+                true
+            ),
+            'constraints-on-optional-param' => array(
+                '<alpha> [<numeric>]',
+                array(
+                    'numeric' => '/^[0-9]+$/',
+                    'alpha'   => '/^[a-zA-Z]+$/',
+                ),
+                array('test', '1234'),
+                true
+            ),
+            'optional-empty-param' => array(
+                '<alpha> [<numeric>]',
+                array(
+                    'numeric' => '/^[0-9]+$/',
+                    'alpha'   => '/^[a-zA-Z]+$/',
+                ),
+                array('test'),
+                true
+            ),
+            'named-param' => array(
+                '--foo=',
+                array(
+                    'foo' => '/^bar$/'
+                ),
+                array('--foo=bar'),
+                true,
+            ),
+            'failing-param' => array(
+                '<good1> <good2> <bad>',
+                array(
+                    'good1'   => '/^[a-zA-Z]+$/',
+                    'good2'   => '/^[a-zA-Z]+$/',
+                    'bad'   => '/^[a-zA-Z]+$/',
+                ),
+                array('foo', 'bar', 'foo123bar'),
+                false
+            ),
+            'failing-optional-param' => array(
+                '<good> [<bad>]',
+                array(
+                    'good2'   => '/^(foo|bar)$/',
+                    'bad'   => '/^(foo|bar)$/',
+                ),
+                array('foo', 'baz'),
+                false
+            ),
+            'failing-named-param' => array(
+                '--foo=',
+                array(
+                    'foo' => '/^bar$/'
+                ),
+                array('--foo=baz'),
+                false,
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider routeConstraintsProvider
+     * @param        string $routeDefinition
+     * @param        array  $constraints
+     * @param        array  $arguments
+     * @param        bool   $shouldMatch
+     */
+    public function testMatchingWithConstraints(
+        $routeDefinition,
+        array $constraints = array(),
+        array $arguments = array(),
+        $shouldMatch = true
+    ) {
+        $route = new DefaultRouteMatcher($routeDefinition, $constraints);
+        $match = $route->match($arguments);
+
+        if ($shouldMatch === false) {
+            $this->assertNull($match, "The route must not match");
+        } else {
+            $this->assertInternalType('array', $match);
+        }
+    }
 }

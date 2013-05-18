@@ -1078,4 +1078,94 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             $this->assertInternalType('array', $match);
         }
     }
+
+    public static function routeAliasesProvider()
+    {
+        return array(
+            'simple-alias' => array(
+                '--user=',
+                array(
+                    'username' => 'user'
+                ),
+                array('--username=JohnDoe'),
+                array(
+                    'user' => 'JohnDoe'
+                )
+            ),
+            'multiple-aliases' => array(
+                '--name= --email=',
+                array(
+                    'username' => 'name',
+                    'useremail' => 'email'
+                ),
+                array('--username=JohnDoe', '--useremail=johndoe@domain.com'),
+                array(
+                    'name' => 'JohnDoe',
+                    'email' => 'johndoe@domain.com',
+                )
+            ),
+            'flags' => array(
+                'foo --bar',
+                array(
+                    'baz' => 'bar'
+                ),
+                array('foo', '--baz'),
+                array(
+                    'bar' => true
+                )
+            ),
+            'with-alternatives' => array(
+                'do-something (--remove|--update)',
+                array(
+                    'delete' => 'remove'
+                ),
+                array('do-something', '--delete'),
+                array(
+                    'remove' => true,
+                )
+            ),
+            'with-alternatives-2' => array(
+                'do-something (--update|--remove)',
+                array(
+                    'delete' => 'remove'
+                ),
+                array('do-something', '--delete'),
+                array(
+                    'remove' => true,
+                )
+            )
+        );
+    }
+
+    /**
+     * @dataProvider routeAliasesProvider
+     * @param        string     $routeDefinition
+     * @param        array      $aliases
+     * @param        array      $arguments
+     * @param        array|null $params
+     */
+    public function testMatchingWithAliases(
+        $routeDefinition,
+        array $aliases = array(),
+        array $arguments = array(),
+        array $params = null
+    )
+    {
+        $route = new DefaultRouteMatcher($routeDefinition, array(), array(), $aliases);
+        $match = $route->match($arguments);
+
+        if ($params === null) {
+            $this->assertNull($match, "The route must not match");
+        } else {
+            $this->assertInternalType('array', $match);
+
+            foreach ($params as $key => $value) {
+                $this->assertEquals(
+                    $value,
+                    isset($match[$key])?$match[$key]:null,
+                    $value === null ? "Param $key is not present" : "Param $key is present and is equal to $value"
+                );
+            }
+        }
+    }
 }

@@ -451,6 +451,37 @@ class DefaultRouteMatcher implements RouteMatcherInterface
     }
 
     /**
+     * Returns list of names representing single parameter
+     *
+     * @param string $name
+     * @return string
+     */
+    private function getAliases($name)
+    {
+        $namesToMatch = array($name);
+        foreach ($this->aliases as $alias => $canonical) {
+            if ($name == $canonical) {
+                $namesToMatch[] = $alias;
+            }
+        }
+        return $namesToMatch;
+    }
+
+    /**
+     * Returns canonical name of a parameter
+     *
+     * @param string $name
+     * @return string
+     */
+    private function getCanonicalName($name)
+    {
+        if (isset($this->aliases[$name])) {
+            return $this->aliases[$name];
+        }
+        return $name;
+    }
+
+    /**
      * Match parameters against route passed to constructor
      *
      * @param array $params
@@ -482,7 +513,13 @@ class DefaultRouteMatcher implements RouteMatcherInterface
             if (isset($part['alternatives'])) {
                 // an alternative of flags
                 $regex = '/^\-+(?P<name>';
-                $regex .= join('|', $part['alternatives']);
+
+                $alternativeAliases = array();
+                foreach ($part['alternatives'] as $alternative) {
+                    $alternativeAliases[] = '(?:' . implode('|', $this->getAliases($alternative)) . ')';
+                }
+
+                $regex .= join('|', $alternativeAliases);
 
                 if ($part['hasValue']) {
                     $regex .= ')(?:\=(?P<value>.*?)$)?$/';
@@ -491,19 +528,21 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                 }
             } else {
                 // a single named flag
+                $name = '(?:' . implode('|', $this->getAliases($part['name'])) . ')';
+
                 if ($part['short'] === true) {
                     // short variant
                     if ($part['hasValue']) {
-                        $regex = '/^\-' . $part['name'] . '(?:\=(?P<value>.*?)$)?$/i';
+                        $regex = '/^\-' . $name . '(?:\=(?P<value>.*?)$)?$/i';
                     } else {
-                        $regex = '/^\-' . $part['name'] . '$/i';
+                        $regex = '/^\-' . $name . '$/i';
                     }
                 } elseif ($part['short'] === false) {
                     // long variant
                     if ($part['hasValue']) {
-                        $regex = '/^\-{2,}' . $part['name'] . '(?:\=(?P<value>.*?)$)?$/i';
+                        $regex = '/^\-{2,}' . $name . '(?:\=(?P<value>.*?)$)?$/i';
                     } else {
-                        $regex = '/^\-{2,}' . $part['name'] . '$/i';
+                        $regex = '/^\-{2,}' . $name . '$/i';
                     }
                 }
             }
@@ -525,7 +564,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     }
 
                     if (isset($m['name'])) {
-                        $matchedName = $m['name'];
+                        $matchedName = $this->getCanonicalName($m['name']);
                     }
 
                     break;

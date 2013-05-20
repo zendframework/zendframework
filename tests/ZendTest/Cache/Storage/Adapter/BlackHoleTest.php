@@ -11,6 +11,15 @@
 namespace ZendTest\Cache\Storage\Adapter;
 
 use Zend\Cache\Storage\Adapter\BlackHole;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\ClearByPrefixInterface;
+use Zend\Cache\Storage\ClearExpiredInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\OptimizableInterface;
+use Zend\Cache\Storage\TaggableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
 use Zend\Cache\StorageFactory;
 
 /**
@@ -83,5 +92,64 @@ class BlackHoleAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(array(), $this->storage->getItems(array('test')));
         $this->assertSame(array(), $this->storage->getMetadatas(array('test')));
         $this->assertSame(array('test'), $this->storage->removeItems(array('test')));
+    }
+
+    public function testAvailableSpaceCapableInterface()
+    {
+        $this->assertInstanceOf('Zend\Cache\Storage\AvailableSpaceCapableInterface', $this->storage);
+        $this->assertSame(0, $this->storage->getAvailableSpace());
+    }
+
+    public function testClearByNamespaceInterface()
+    {
+        $this->assertInstanceOf('Zend\Cache\Storage\ClearByNamespaceInterface', $this->storage);
+        $this->assertFalse($this->storage->clearByNamespace('test'));
+    }
+
+    public function testClearByPrefixInterface()
+    {
+        $this->assertInstanceOf('Zend\Cache\Storage\ClearByPrefixInterface', $this->storage);
+        $this->assertFalse($this->storage->clearByPrefix('test'));
+    }
+
+    public function testCleariExpiredInterface()
+    {
+        $this->assertInstanceOf('Zend\Cache\Storage\ClearExpiredInterface', $this->storage);
+        $this->assertFalse($this->storage->clearExpired());
+    }
+
+    public function testFlushableInterface()
+    {
+        $this->assertInstanceOf('Zend\Cache\Storage\FlushableInterface', $this->storage);
+        $this->assertFalse($this->storage->flush());
+    }
+
+    public function testIterableInterface()
+    {
+        $this->assertInstanceOf('Zend\Cache\Storage\IterableInterface', $this->storage);
+        $iterator = $this->storage->getIterator();
+        foreach ($iterator as $item) {
+            $this->fail('The iterator of the BlackHole adapter should be empty');
+        }
+    }
+
+    public function testOptimizableInterface()
+    {
+        $this->assertInstanceOf('Zend\Cache\Storage\OptimizableInterface', $this->storage);
+        $this->assertFalse($this->storage->optimize());
+    }
+
+    public function testTaggableInterface()
+    {
+        $this->assertInstanceOf('Zend\Cache\Storage\TaggableInterface', $this->storage);
+        $this->assertFalse($this->storage->setTags('test', array('tag1')));
+        $this->assertFalse($this->storage->getTags('test'));
+        $this->assertFalse($this->storage->clearByTags(array('tag1')));
+    }
+
+    public function testTotalSpaceCapableInterface()
+    {
+        $this->assertInstanceOf('Zend\Cache\Storage\TotalSpaceCapableInterface', $this->storage);
+        $this->assertSame(0, $this->storage->getTotalSpace());
     }
 }

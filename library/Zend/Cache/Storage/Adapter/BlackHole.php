@@ -10,10 +10,29 @@
 namespace Zend\Cache\Storage\Adapter;
 
 use stdClass;
+use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\ClearByNamespaceInterface;
+use Zend\Cache\Storage\ClearByPrefixInterface;
+use Zend\Cache\Storage\ClearExpiredInterface;
+use Zend\Cache\Storage\FlushableInterface;
+use Zend\Cache\Storage\IterableInterface;
+use Zend\Cache\Storage\OptimizableInterface;
 use Zend\Cache\Storage\StorageInterface;
+use Zend\Cache\Storage\TaggableInterface;
+use Zend\Cache\Storage\TotalSpaceCapableInterface;
 
-class BlackHole implements StorageInterface
+class BlackHole implements
+    StorageInterface,
+    AvailableSpaceCapableInterface,
+    ClearByNamespaceInterface,
+    ClearByPrefixInterface,
+    ClearExpiredInterface,
+    FlushableInterface,
+    IterableInterface,
+    OptimizableInterface,        
+    TaggableInterface,
+    TotalSpaceCapableInterface
 {
     /**
      * Capabilities of this adapter
@@ -340,5 +359,144 @@ class BlackHole implements StorageInterface
             $this->capabilities     = new Capabilities($this, $this->capabilityMarker);
         }
         return $this->capabilities;
+    }
+
+    /* AvailableSpaceCapableInterface */
+
+    /**
+     * Get available space in bytes
+     *
+     * @return int|float
+     */
+    public function getAvailableSpace()
+    {
+        return 0;
+    }
+
+    /* ClearByNamespaceInterface */
+
+    /**
+     * Remove items of given namespace
+     *
+     * @param string $namespace
+     * @return bool
+     */
+    public function clearByNamespace($namespace)
+    {
+        return false;
+    }
+
+    /* ClearByPrefixInterface */
+
+    /**
+     * Remove items matching given prefix
+     *
+     * @param string $prefix
+     * @return bool
+     */
+    public function clearByPrefix($prefix)
+    {
+        return false;
+    }
+
+    /* ClearExpiredInterface */
+
+    /**
+     * Remove expired items
+     *
+     * @return bool
+     */
+    public function clearExpired()
+    {
+        return false;
+    }
+
+    /* FlushableInterface */
+
+    /**
+     * Flush the whole storage
+     *
+     * @return bool
+     */
+    public function flush()
+    {
+        return false;
+    }
+
+    /* IterableInterface */
+
+    /**
+     * Get the storage iterator
+     *
+     * @return KeyIterator
+     */
+    public function getIterator()
+    {
+        return new KeyListIterator($this, array());
+    }
+
+    /* OptimizableInterface */
+
+    /**
+     * Optimize the storage
+     *
+     * @return bool
+     */
+    public function optimize()
+    {
+        return false;
+    }
+
+    /* TaggableInterface */
+
+    /**
+     * Set tags to an item by given key.
+     * An empty array will remove all tags.
+     *
+     * @param string   $key
+     * @param string[] $tags
+     * @return bool
+     */
+    public function setTags($key, array $tags)
+    {
+        return false;
+    }
+
+    /**
+     * Get tags of an item by given key
+     *
+     * @param string $key
+     * @return string[]|FALSE
+     */
+    public function getTags($key)
+    {
+        return false;
+    }
+
+    /**
+     * Remove items matching given tags.
+     *
+     * If $disjunction only one of the given tags must match
+     * else all given tags must match.
+     *
+     * @param string[] $tags
+     * @param  bool  $disjunction
+     * @return bool
+     */
+    public function clearByTags(array $tags, $disjunction = false)
+    {
+        return false;
+    }
+
+    /* TotalSpaceCapableInterface */
+
+    /**
+     * Get total space in bytes
+     *
+     * @return int|float
+     */
+    public function getTotalSpace()
+    {
+        return 0;
     }
 }

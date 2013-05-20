@@ -11,6 +11,7 @@ namespace Zend\Console\RouteMatcher;
 
 use Zend\Console\Exception;
 use Zend\Validator\ValidatorInterface;
+use Zend\Filter\FilterInterface;
 
 class DefaultRouteMatcher implements RouteMatcherInterface
 {
@@ -41,9 +42,9 @@ class DefaultRouteMatcher implements RouteMatcherInterface
     protected $validators = array();
 
     /**
-     * @var \Zend\Filter\FilterChain
+     * @var FilterInterface[]
      */
-    protected $filters;
+    protected $filters = array();
 
     /**
      * Class constructor
@@ -70,25 +71,18 @@ class DefaultRouteMatcher implements RouteMatcherInterface
         $this->aliases = $aliases;
 
         if ($filters !== null) {
-            if ($filters instanceof FilterChain) {
-                $this->filters = $filters;
-            } elseif ($filters instanceof Traversable) {
-                $this->filters = new FilterChain(array(
-                    'filters' => ArrayUtils::iteratorToArray($filters, false)
-                ));
-            } elseif (is_array($filters)) {
-                $this->filters = new FilterChain(array(
-                    'filters' => $filters
-                ));
-            } else {
-                throw new InvalidArgumentException('Cannot use ' . gettype($filters) . ' as filters for ' . __CLASS__);
+            foreach ($filters as $name => $filter) {
+                if (!$filter instanceof FilterInterface) {
+                    throw new Exception\InvalidArgumentException('Cannot use ' . gettype($filters) . ' as filter for ' . __CLASS__);
+                }
+                $this->filters[$name] = $filter;
             }
         }
 
         if ($validators !== null) {
             foreach ($validators as $name => $validator) {
                 if (!$validator instanceof ValidatorInterface) {
-                    throw new InvalidArgumentException('Cannot use ' . gettype($validators) . ' as validator for ' . __CLASS__);
+                    throw new Exception\InvalidArgumentException('Cannot use ' . gettype($validator) . ' as validator for ' . __CLASS__);
                 }
                 $this->validators[$name] = $validator;
             }
@@ -761,6 +755,13 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                         }
                     }
                 }
+            }
+        }
+
+        // run filters
+        foreach ($matches as $name => $value) {
+            if (isset($this->filters[$name])) {
+                $matches[$name] = $this->filters[$name]->filter($value);
             }
         }
 

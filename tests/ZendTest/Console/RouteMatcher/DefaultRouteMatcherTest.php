@@ -1169,7 +1169,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public static function routeValidatorsProvider()
+    public function routeValidatorsProvider()
     {
         return array(
             'validators-valid' => array(
@@ -1199,6 +1199,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                 array('foozbar', 'not_digits'),
                 false
             ),
+
         );
     }
 
@@ -1217,6 +1218,75 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             $this->assertNull($match, "The route must not match");
         } else {
             $this->assertInternalType('array', $match);
+        }
+    }
+
+    public function routeFiltersProvider()
+    {
+        $genericFilter = $this->getMock('Zend\Filter\FilterInterface', array('filter'));
+        $genericFilter->expects($this->once())->method('filter')
+            ->with('foobar')->will($this->returnValue('foobaz'));
+
+        return array(
+            'filters-generic' => array(
+                '<param>',
+                array(
+                    'param' => $genericFilter
+                ),
+                array('foobar'),
+                array(
+                    'param' => 'foobaz'
+                )
+            ),
+            'filters-single' => array(
+                '<number>',
+                array(
+                    'number' => new \Zend\Filter\Int()
+                ),
+                array('123four'),
+                array(
+                    'number' => 123
+                )
+            ),
+            'filters-multiple' => array(
+                '<number> <strtolower>',
+                array(
+                    'number' => new \Zend\Filter\Int(),
+                    'strtolower' => new \Zend\Filter\StringToLower(),
+                ),
+                array('nan', 'FOOBAR'),
+                array(
+                    'number' => 0,
+                    'strtolower' => 'foobar'
+                )
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider routeFiltersProvider
+     * @param string $routeDefinition
+     * @param array $filters
+     * @param array $arguments
+     * @param array $params
+     */
+    public function testParamsCanBeFiltered($routeDefinition, $filters, $arguments, $params)
+    {
+        $matcher = new DefaultRouteMatcher($routeDefinition, array(), array(), array(), $filters);
+        $match = $matcher->match($arguments);
+
+        if (null === $match) {
+            $this->fail("Route '$routeDefinition' must match.'");
+        }
+
+        $this->assertInternalType('array', $match);
+
+        foreach ($params as $key => $value) {
+            $this->assertEquals(
+                $value,
+                isset($match[$key])?$match[$key]:null,
+                $value === null ? "Param $key is not present" : "Param $key is present and is equal to $value"
+            );
         }
     }
 }

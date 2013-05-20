@@ -1289,4 +1289,20 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             );
         }
     }
+
+    public function testConstructorDoesNotAcceptInvalidFilters()
+    {
+        $this->setExpectedException('Zend\Console\Exception\InvalidArgumentException');
+        new DefaultRouteMatcher('<foo>', array(), array(), array(), array(
+            new \stdClass()
+        ));
+    }
+
+    public function testConstructorDoesNotAcceptInvalidValidators()
+    {
+        $this->setExpectedException('Zend\Console\Exception\InvalidArgumentException');
+        new DefaultRouteMatcher('<foo>', array(), array(), array(), array(), array(
+            new \stdClass()
+        ));
+    }
 }

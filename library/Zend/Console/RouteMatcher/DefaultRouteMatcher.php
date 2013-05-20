@@ -10,6 +10,7 @@
 namespace Zend\Console\RouteMatcher;
 
 use Zend\Console\Exception;
+use Zend\Validator\ValidatorInterface;
 
 class DefaultRouteMatcher implements RouteMatcherInterface
 {
@@ -35,9 +36,9 @@ class DefaultRouteMatcher implements RouteMatcherInterface
     protected $aliases;
 
     /**
-     * @var \Zend\Validator\ValidatorChain
+     * @var ValidatorInterface[]
      */
-    protected $validators;
+    protected $validators = array();
 
     /**
      * @var \Zend\Filter\FilterChain
@@ -51,8 +52,8 @@ class DefaultRouteMatcher implements RouteMatcherInterface
      * @param array $constraints
      * @param array $defaults
      * @param array $aliases
-     * @param null $filters
-     * @param null $validators
+     * @param array $filters
+     * @param ValidatorInterface[] $validators
      * @throws InvalidArgumentException
      * @return self
      */
@@ -61,13 +62,12 @@ class DefaultRouteMatcher implements RouteMatcherInterface
         array $constraints = array(),
         array $defaults = array(),
         array $aliases = array(),
-        $filters = null,
-        $validators = null
+        array $filters = null,
+        array $validators = null
     ) {
         $this->defaults = $defaults;
         $this->constraints = $constraints;
         $this->aliases = $aliases;
-        $this->parts = $this->parseDefinition($route);
 
         if ($filters !== null) {
             if ($filters instanceof FilterChain) {
@@ -86,17 +86,15 @@ class DefaultRouteMatcher implements RouteMatcherInterface
         }
 
         if ($validators !== null) {
-            if ($validators instanceof ValidatorChain) {
-                $this->validators = $validators;
-            } elseif ($validators instanceof Traversable || is_array($validators)) {
-                $this->validators = new ValidatorChain();
-                foreach ($validators as $v) {
-                    $this->validators->attach($v);
+            foreach ($validators as $name => $validator) {
+                if (!$validator instanceof ValidatorInterface) {
+                    throw new InvalidArgumentException('Cannot use ' . gettype($validators) . ' as validator for ' . __CLASS__);
                 }
-            } else {
-                throw new InvalidArgumentException('Cannot use ' . gettype($validators) . ' as validators for ' . __CLASS__);
+                $this->validators[$name] = $validator;
             }
         }
+
+        $this->parts = $this->parseDefinition($route);
     }
 
     /**
@@ -764,6 +762,18 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     }
                 }
             }
+        }
+
+        // run validators
+        $valid = true;
+        foreach ($matches as $name => $value) {
+            if (isset($this->validators[$name])) {
+                $valid &= $this->validators[$name]->isValid($value);
+            }
+        }
+
+        if (!$valid) {
+            return null;
         }
 
         return array_replace($this->defaults, $matches);

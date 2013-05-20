@@ -1168,4 +1168,55 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
+    public static function routeValidatorsProvider()
+    {
+        return array(
+            'validators-valid' => array(
+                '<string> <number>',
+                array(
+                    'string' => new \Zend\Validator\StringLength(array('min' => 5, 'max' => 12)),
+                    'number' => new \Zend\Validator\Digits()
+                ),
+                array('foobar', '12345'),
+                true
+            ),
+            'validators-invalid' => array(
+                '<string> <number>',
+                array(
+                    'string' => new \Zend\Validator\StringLength(array('min' => 5, 'max' => 12)),
+                    'number' => new \Zend\Validator\Digits()
+                ),
+                array('foo', '12345'),
+                false
+            ),
+            'validators-invalid2' => array(
+                '<number> <string>',
+                array(
+                    'string' => new \Zend\Validator\StringLength(array('min' => 5, 'max' => 12)),
+                    'number' => new \Zend\Validator\Digits()
+                ),
+                array('foozbar', 'not_digits'),
+                false
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider routeValidatorsProvider
+     * @param string $routeDefinition
+     * @param array $validators
+     * @param array $arguments
+     * @param bool $shouldMatch
+     */
+    public function testParamsCanBeValidated($routeDefinition, $validators, $arguments, $shouldMatch)
+    {
+        $matcher = new DefaultRouteMatcher($routeDefinition, array(), array(), array(), null, $validators);
+        $match = $matcher->match($arguments);
+        if ($shouldMatch === false) {
+            $this->assertNull($match, "The route must not match");
+        } else {
+            $this->assertInternalType('array', $match);
+        }
+    }
 }

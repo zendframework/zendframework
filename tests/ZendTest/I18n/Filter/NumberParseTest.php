@@ -11,14 +11,14 @@
 namespace ZendTest\I18n\Filter;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\I18n\Filter\Number as NumberFilter;
+use Zend\I18n\Filter\NumberParse as NumberParseFilter;
 use NumberFormatter;
 
 class NumberTest extends TestCase
 {
     public function testConstructWithOptions()
     {
-        $filter = new NumberFilter(array(
+        $filter = new NumberParseFilter(array(
             'locale' => 'en_US',
             'style'  => NumberFormatter::DECIMAL
         ));
@@ -29,7 +29,7 @@ class NumberTest extends TestCase
 
     public function testConstructWithParameters()
     {
-        $filter = new NumberFilter('en_US', NumberFormatter::DECIMAL);
+        $filter = new NumberParseFilter('en_US', NumberFormatter::DECIMAL);
 
         $this->assertEquals('en_US', $filter->getLocale());
         $this->assertEquals(NumberFormatter::DECIMAL, $filter->getStyle());
@@ -45,7 +45,7 @@ class NumberTest extends TestCase
      */
     public function testFormattedToNumber($locale, $style, $type, $value, $expected)
     {
-        $filter = new NumberFilter($locale, $style, $type);
+        $filter = new NumberParseFilter($locale, $style, $type);
         $this->assertSame($expected, $filter->filter($value));
     }
 

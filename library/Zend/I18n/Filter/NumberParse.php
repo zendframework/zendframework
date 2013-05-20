@@ -12,7 +12,7 @@ namespace Zend\I18n\Filter;
 use Zend\I18n\Exception;
 use Zend\Stdlib\ErrorHandler;
 
-class Number extends NumberFormat
+class NumberParse extends NumberFormat
 {
 
     /**

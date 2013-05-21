@@ -18,6 +18,7 @@ class PhpArrayTest extends TestCase
 {
     protected $testFilesDir;
     protected $originalLocale;
+    protected $originalIncludePath;
 
     public function setUp()
     {
@@ -25,20 +26,22 @@ class PhpArrayTest extends TestCase
         Locale::setDefault('en_EN');
 
         $this->testFilesDir = realpath(__DIR__ . '/../_files');
+
+        $this->originalIncludePath = get_include_path();
+        set_include_path($this->testFilesDir);
     }
 
     public function tearDown()
     {
         Locale::setDefault($this->originalLocale);
 
-        // Restore original include path
-        restore_include_path();
+        set_include_path($this->originalIncludePath);
     }
 
     public function testLoaderFailsToLoadMissingFile()
     {
         $loader = new PhpArrayLoader();
-        $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException', 'Could not open file');
+        $this->setExpectedException('Zend\I18n\Exception\InvalidArgumentException', 'Could not find or open file');
         $loader->load('en_EN', 'missing');
     }
 
@@ -79,9 +82,6 @@ class PhpArrayTest extends TestCase
 
     public function testLoaderLoadsFromIncludePath()
     {
-        // Set test include path
-        set_include_path($this->testFilesDir);
-
         $loader = new PhpArrayLoader();
         $textDomain = $loader->load('en_EN', 'translation_en.php');
 

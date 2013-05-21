@@ -25,7 +25,7 @@ class NumberParse extends NumberFormat
     public function filter($value)
     {
         if (!is_int($value)
-            || !is_float($value)) {
+            && !is_float($value)) {
 
             ErrorHandler::start();
 

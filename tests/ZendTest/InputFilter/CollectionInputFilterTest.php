@@ -163,6 +163,16 @@ class CollectionInputFilterTest extends TestCase
         $this->assertTrue($this->filter->isValid());
     }
 
+    public function testCanValidateValidDataWithNonConsecutiveKeys()
+    {
+        $collectionData = $this->getValidCollectionData();
+        $collectionData[2] = $collectionData[0];
+        unset($collectionData[0]);
+        $this->filter->setInputFilter($this->getBaseInputFilter());
+        $this->filter->setData($collectionData);
+        $this->assertTrue($this->filter->isValid());
+    }
+
     public function testInvalidDataReturnsFalse()
     {
         $invalidCollectionData = array(

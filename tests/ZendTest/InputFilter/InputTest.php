@@ -298,7 +298,6 @@ class InputTest extends TestCase
         $this->input->getValidatorChain()->attach($validator);
         $this->input->setValue('123'); // not a date
 
-        var_dump($this->input);
         $this->assertTrue($this->input->isValid());
         $this->assertEmpty($this->input->getMessages());
         $this->assertSame($fallbackValue, $this->input->getValue());

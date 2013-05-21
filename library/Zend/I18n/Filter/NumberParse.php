@@ -159,6 +159,5 @@ class NumberParse extends AbstractLocale
         }
 
         return $value;
-
     }
 }

@@ -24,8 +24,12 @@ class NumberFormat extends NumberParse
      */
     public function filter($value)
     {
-        if (is_int($value)
-            || is_float($value)) {
+        if (!is_int($value)
+            && !is_float($value)) {
+
+            $result = parent::filter($value);
+
+        } else {
 
             ErrorHandler::start();
 
@@ -36,16 +40,12 @@ class NumberFormat extends NumberParse
 
             ErrorHandler::stop();
 
-        } else {
-
-            $result = parent::filter($value);
-
         }
 
-        if ($result === false) {
-            return $value;
+        if (false !== $result) {
+            return str_replace("\xC2\xA0", ' ', $result);
         }
 
-        return str_replace("\xC2\xA0", ' ', $result);
+        return $value;
     }
 }

@@ -363,4 +363,13 @@ class FormRowTest extends TestCase
 
         $this->assertSame($partial, $this->helper->getPartial());
     }
+
+    public function testAssertButtonElementDoesNotRenderLabelTwice()
+    {
+        $element = new Element\Button('button');
+        $element->setLabel('foo');
+
+        $markup = $this->helper->render($element);
+        $this->assertRegexp('#^<button type="button" name="button" value=""\/?>foo</button>$#', $markup);
+    }
 }

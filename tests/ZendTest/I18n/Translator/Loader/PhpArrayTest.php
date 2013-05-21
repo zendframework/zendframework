@@ -73,4 +73,19 @@ class PhpArrayTest extends TestCase
         $this->assertEquals(1, $textDomain->getPluralRule()->evaluate(2));
         $this->assertEquals(2, $textDomain->getPluralRule()->evaluate(10));
     }
+
+    public function testLoaderLoadsFromIncludePath()
+    {
+        // Set test include path
+        set_include_path($this->testFilesDir);
+
+        $loader = new PhpArrayLoader();
+        $textDomain = $loader->load('en_EN', 'translation_en.php');
+
+        $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
+        $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
+
+        // Restore original include path
+        restore_include_path();
+    }
 }

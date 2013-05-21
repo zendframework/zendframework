@@ -29,7 +29,8 @@ class PhpArray implements FileLoaderInterface
      */
     public function load($locale, $filename)
     {
-        if (!is_file($filename) || !is_readable($filename)) {
+        if (!stream_resolve_include_path($filename) &&
+            (!is_file($filename) || !is_readable($filename))) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Could not open file %s for reading',
                 $filename

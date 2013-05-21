@@ -30,6 +30,9 @@ class PhpArrayTest extends TestCase
     public function tearDown()
     {
         Locale::setDefault($this->originalLocale);
+
+        // Restore original include path
+        restore_include_path();
     }
 
     public function testLoaderFailsToLoadMissingFile()
@@ -84,8 +87,5 @@ class PhpArrayTest extends TestCase
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
-
-        // Restore original include path
-        restore_include_path();
     }
 }

@@ -29,15 +29,15 @@ class PhpArray implements FileLoaderInterface
      */
     public function load($locale, $filename)
     {
-        if (!stream_resolve_include_path($filename) &&
-            (!is_file($filename) || !is_readable($filename))) {
+        $fromIncludePath = stream_resolve_include_path($filename);
+        if (!$fromIncludePath && (!is_file($filename) || !is_readable($filename))) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Could not open file %s for reading',
                 $filename
             ));
         }
 
-        $messages = include $filename;
+        $messages = include ($fromIncludePath !== false) ? $fromIncludePath : $filename;
 
         if (!is_array($messages)) {
             throw new Exception\InvalidArgumentException(sprintf(

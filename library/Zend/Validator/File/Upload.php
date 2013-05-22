@@ -213,7 +213,7 @@ class Upload extends AbstractValidator
      *
      * @param  string $file
      * @param  string $errorType
-     * @return false
+     * @return bool
      */
     protected function throwError($file, $errorType)
     {

@@ -23,7 +23,7 @@ use Zend\Http\Request;
  * @group      Zend_Navigation
  */
 class UriTest extends \PHPUnit_Framework_TestCase
-{	
+{
     public function testUriOptionAsString()
     {
         $page = new Page\Uri(array(
@@ -90,36 +90,36 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($uri, $page->getHref());
     }
-	
+
     public function testIsActiveReturnsTrueWhenHasMatchingRequestUri()
     {
         $page = new Page\Uri(array(
             'label' => 'foo',
             'uri' => '/bar'
         ));
-		
+
         $request = new Request();
         $request->setUri('/bar');
         $request->setMethod('GET');
-		
+
         $page->setRequest($request);
-		
+
         $this->assertInstanceOf('Zend\Http\Request', $page->getRequest());
 
         $this->assertTrue($page->isActive());
     }
-	
+
     public function testIsActiveReturnsFalseOnNonMatchingRequestUri()
     {
         $page = new Page\Uri(array(
             'label' => 'foo',
             'uri' => '/bar'
         ));
-		
+
         $request = new Request();
         $request->setUri('/baz');
         $request->setMethod('GET');
-		
+
         $page->setRequest($request);
 
         $this->assertFalse($page->isActive());

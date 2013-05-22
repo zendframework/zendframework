@@ -23,7 +23,7 @@ class Uri extends AbstractPage
      * @var string|null
      */
     protected $uri = null;
-	
+
     /**
      * Request object used to determine uri path
      *
@@ -83,7 +83,7 @@ class Uri extends AbstractPage
 
         return $uri;
     }
-	
+
     /**
      * Returns whether page should be considered active or not
      *
@@ -105,7 +105,7 @@ class Uri extends AbstractPage
                 }
             }
         }
-        
+
         return parent::isActive($recursive);
     }
 
@@ -122,7 +122,7 @@ class Uri extends AbstractPage
     /**
      * Sets request for assembling URLs
      *
-     * @param Request $request            
+     * @param Request $request
      * @return Fluent interface, returns self
      */
     public function setRequest(Request $request = null)

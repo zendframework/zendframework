@@ -139,7 +139,7 @@ abstract class AbstractNavigationFactory implements FactoryInterface
             } elseif ($hasUri) {
                 if (!isset($page['request'])) {
                     $page['request'] = $request;
-                }   
+                }
             }
 
             if (isset($page['pages'])) {
@@ -148,5 +148,5 @@ abstract class AbstractNavigationFactory implements FactoryInterface
         }
         return $pages;
     }
-    
+
 }

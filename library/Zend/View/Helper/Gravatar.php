@@ -62,10 +62,11 @@ class Gravatar extends AbstractHtmlElement
      * @var array
      */
     protected $options = array(
-        'img_size'    => 80,
-        'default_img' => self::DEFAULT_MM,
-        'rating'      => self::RATING_G,
-        'secure'      => null,
+        'img_size'        => 80,
+        'default_img'     => self::DEFAULT_MM,
+        'rating'          => self::RATING_G,
+        'secure'          => null,
+        'skip_email_hash' => false,
     );
 
     /**
@@ -135,7 +136,7 @@ class Gravatar extends AbstractHtmlElement
     protected function getAvatarUrl()
     {
         $src = $this->getGravatarUrl()
-            . '/'   . md5($this->getEmail())
+            . '/'   . ($this->getSkipEmailHash() ? $this->getEmail() : md5($this->getEmail()))
             . '?s=' . $this->getImgSize()
             . '&d=' . $this->getDefaultImg()
             . '&r=' . $this->getRating();
@@ -331,6 +332,33 @@ class Gravatar extends AbstractHtmlElement
 
         return $this->options['secure'];
     }
+
+    /**
+     * Skip email hashing
+     *
+     * This is useful if you are using a webservice that provides you the
+     * gravatar hash (md5sum) of users' email addresses, but not the actual
+     * email addresses themselves.
+     *
+     * @param  bool $flag
+     * @return Gravatar
+     */
+    public function setSkipEmailHash($flag)
+    {
+        $this->options['skip_email_hash'] = $flag;
+        return $this;
+    }
+
+    /**
+     * Returns if the helper should pass the email through md5() or not.
+     *
+     * @return boolean
+     */
+    public function getSkipEmailHash()
+    {
+        return $this->options['skip_email_hash'];
+    }
+
 
     /**
      * Set src attrib for image.

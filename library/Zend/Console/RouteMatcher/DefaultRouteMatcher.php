@@ -55,8 +55,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
      * @param array $aliases
      * @param array $filters
      * @param ValidatorInterface[] $validators
-     * @throws InvalidArgumentException
-     * @return self
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct(
         $route,

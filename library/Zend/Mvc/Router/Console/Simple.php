@@ -50,7 +50,7 @@ class Simple implements RouteInterface
     protected $assembledParams = array();
 
     /**
-     * @var \Zend\Console\RouteMatcher\DefaultRouteMatcher
+     * @var RouteMatcherInterface
      */
     protected $matcher;
 
@@ -63,8 +63,7 @@ class Simple implements RouteInterface
      * @param  array                                    $aliases
      * @param  null|array|Traversable|FilterChain       $filters
      * @param  null|array|Traversable|ValidatorChain    $validators
-     * @throws \Zend\Mvc\Exception\InvalidArgumentException
-     * @return \Zend\Mvc\Router\Console\Simple
+     * @throws InvalidArgumentException
      */
     public function __construct(
         $routeOrRouteMatcher,
@@ -91,19 +90,19 @@ class Simple implements RouteInterface
      *
      * @see    \Zend\Mvc\Router\RouteInterface::factory()
      * @param  array|Traversable $options
-     * @throws \Zend\Mvc\Router\Exception\InvalidArgumentException
-     * @return Simple
+     * @throws InvalidArgumentException
+     * @return self
      */
     public static function factory($options = array())
     {
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+            throw new InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
 
         if (!isset($options['route'])) {
-            throw new Exception\InvalidArgumentException('Missing "route" in options array');
+            throw new InvalidArgumentException('Missing "route" in options array');
         }
 
         foreach (array(
@@ -149,10 +148,7 @@ class Simple implements RouteInterface
             return null;
         }
 
-        /** @var $request ConsoleRequest */
-        /** @var $params \Zend\Stdlib\Parameters */
-        $params = $request->getParams()->toArray();
-
+        $params  = $request->getParams()->toArray();
         $matches = $this->matcher->match($params);
 
         if (null !== $matches) {

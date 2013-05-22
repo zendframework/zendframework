@@ -82,6 +82,11 @@ abstract class AbstractNavigationFactory implements FactoryInterface
         $router      = $application->getMvcEvent()->getRouter();
         $request     = $application->getMvcEvent()->getRequest();
 
+        // HTTP request is the only one that may be injected
+        if (!$request instanceof Request) {
+            $request = null;
+        }
+
         return $this->injectComponents($pages, $routeMatch, $router, $request);
     }
 
@@ -116,10 +121,10 @@ abstract class AbstractNavigationFactory implements FactoryInterface
      * @param array $pages
      * @param RouteMatch $routeMatch
      * @param Router $router
-     * @param Request $request
+     * @param null|Request $request
      * @return mixed
      */
-    protected function injectComponents(array $pages, RouteMatch $routeMatch = null, Router $router = null, Request $request = null)
+    protected function injectComponents(array $pages, RouteMatch $routeMatch = null, Router $router = null, $request = null)
     {
         foreach ($pages as &$page) {
             $hasUri = isset($page['uri']);

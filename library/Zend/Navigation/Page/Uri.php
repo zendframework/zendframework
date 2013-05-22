@@ -125,7 +125,7 @@ class Uri extends AbstractPage
      * @param Request $request            
      * @return Fluent interface, returns self
      */
-    public function setRequest(Request $request)
+    public function setRequest(Request $request = null)
     {
         $this->request = $request;
         return $this;

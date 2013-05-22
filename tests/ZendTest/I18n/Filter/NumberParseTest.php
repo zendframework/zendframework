@@ -13,7 +13,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\I18n\Filter\NumberParse as NumberParseFilter;
 use NumberFormatter;
 
-class NumberTest extends TestCase
+class NumberParseTest extends TestCase
 {
     public function testConstructWithOptions()
     {

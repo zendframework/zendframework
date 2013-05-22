@@ -9,6 +9,7 @@
 
 namespace Zend\Form\View\Helper;
 
+use Zend\Form\Element\Button;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\View\Helper\AbstractHelper;
@@ -80,6 +81,7 @@ class FormRow extends AbstractHelper
      * @param  null|ElementInterface $element
      * @param  null|string           $labelPosition
      * @param  bool                  $renderErrors
+     * @param  string|null           $partial
      * @return string|FormRow
      */
     public function __invoke(ElementInterface $element = null, $labelPosition = null, $renderErrors = null, $partial = null)
@@ -185,6 +187,11 @@ class FormRow extends AbstractHelper
 
                 if ($label !== '' && !$element->hasAttribute('id')) {
                     $label = '<span>' . $label . '</span>';
+                }
+
+                // Button element is a special case, because label is always rendered inside it
+                if ($element instanceof Button) {
+                    $labelOpen = $labelClose = $label = '';
                 }
 
                 switch ($this->labelPosition) {

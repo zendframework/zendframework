@@ -69,10 +69,10 @@ class Gravatar extends AbstractHtmlElement
      * @var array
      */
     protected $options = array(
-        'img_size'        => 80,
-        'default_img'     => self::DEFAULT_MM,
-        'rating'          => self::RATING_G,
-        'secure'          => null,
+        'img_size'    => 80,
+        'default_img' => self::DEFAULT_MM,
+        'rating'      => self::RATING_G,
+        'secure'      => null,
     );
 
     /**

@@ -295,6 +295,14 @@ defined('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST_MINOR') || define('TES
 defined('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_SPECIFIC') || define('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_SPECIFIC', false);
 
 /**
+ * Zend\Filter tests
+ *
+ * Some tests are problematic, largely due to environment. Specifically, the Zip compression filter
+ * has this issue. These tests are enabled by default; set them to false to disable them.
+ */
+defined('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED') || define('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED', true);
+
+/**
  * Zend\Ldap online tests
  */
 defined('TESTS_ZEND_LDAP_ONLINE_ENABLED') || define('TESTS_ZEND_LDAP_ONLINE_ENABLED', false);

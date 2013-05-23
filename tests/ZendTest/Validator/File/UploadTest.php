@@ -249,4 +249,30 @@ class UploadTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('fileUploadErrorFileNotFound', $validator->getMessages()));
         $this->assertContains("nofile.mo'", current($validator->getMessages()));
     }
+
+    /**
+     * @group ZF-12128
+     */
+    public function testErrorMessage()
+    {
+        $_FILES = array(
+            'foo' => array(
+                'name'     => 'bar',
+                'type'     => 'text',
+                'size'     => 100,
+                'tmp_name' => 'tmp_bar',
+                'error'    => 7,
+            )
+        );
+
+        $validator = new File\Upload;
+        $validator->isValid('foo');
+
+        $this->assertEquals(
+            array(
+                'fileUploadErrorCantWrite' => "File 'bar' can't be written",
+            ),
+            $validator->getMessages()
+        );
+    }
 }

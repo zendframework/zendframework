@@ -101,6 +101,15 @@ class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2013-02-01T17:30:01+0000', $result);
     }
 
+    public function testAcceptDateTimeValue()
+    {
+        date_default_timezone_set('UTC');
+
+        $filter = new DateTimeFormatter();
+        $result = $filter->filter(new DateTime('2012-01-01'));
+        $this->assertEquals('2012-01-01T00:00:00+0000', $result);
+    }
+
     public function testInvalidArgumentExceptionThrownOnInvalidInput()
     {
         $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException');

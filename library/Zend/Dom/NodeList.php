@@ -57,7 +57,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      * @param DOMDocument  $document
      * @param DOMNodeList  $nodeList
      */
-    public function  __construct($cssQuery, $xpathQuery, DOMDocument $document, DOMNodeList $nodeList)
+    public function __construct($cssQuery, $xpathQuery, DOMDocument $document, DOMNodeList $nodeList)
     {
         $this->cssQuery   = $cssQuery;
         $this->xpathQuery = $xpathQuery;

@@ -33,6 +33,11 @@ defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED') || define('TESTS_Z
 defined('TESTS_ZEND_FORM_ANNOTATION_SUPPORT') || define('TESTS_ZEND_FORM_ANNOTATION_SUPPORT', true);
 
 /**
+ * Zend\Filter
+ */
+defined('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED') || define('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED', false);
+
+/**
  * Zend\Cache\Storage\Adapter
  */
 defined('TESTS_ZEND_CACHE_APC_ENABLED') || define('TESTS_ZEND_CACHE_APC_ENABLED', true);

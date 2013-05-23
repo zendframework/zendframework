@@ -9,17 +9,17 @@
 
 namespace ZendTest\Db\Sql\Ddl\Column;
 
-use Zend\Db\Sql\Ddl\Column\Integer;
+use Zend\Db\Sql\Ddl\Column\BigInteger;
 
-class IntegerTest extends \PHPUnit_Framework_TestCase
+class BigIntegerTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @covers Zend\Db\Sql\Ddl\Column\Integer::__construct
+     * @covers Zend\Db\Sql\Ddl\Column\BigInteger::__construct
      */
     public function testObjectConstruction()
     {
-        $integer = new Integer('foo');
+        $integer = new BigInteger('foo');
         $this->assertEquals('foo', $integer->getName());
     }
 
@@ -28,9 +28,9 @@ class IntegerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetExpressionData()
     {
-        $column = new Integer('foo');
+        $column = new BigInteger('foo');
         $this->assertEquals(
-            array(array('%s %s', array('foo', 'INTEGER NOT NULL'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
+            array(array('%s %s', array('foo', 'BIGINT NOT NULL'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
             $column->getExpressionData()
         );
     }

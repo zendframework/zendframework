@@ -30,7 +30,7 @@ class BlackHole implements
     ClearExpiredInterface,
     FlushableInterface,
     IterableInterface,
-    OptimizableInterface,        
+    OptimizableInterface,
     TaggableInterface,
     TotalSpaceCapableInterface
 {

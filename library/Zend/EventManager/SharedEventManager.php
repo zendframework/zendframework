@@ -65,7 +65,7 @@ class SharedEventManager implements
         $listeners = array();
         foreach ($ids as $id) {
             if (!array_key_exists($id, $this->identifiers)) {
-                $this->identifiers[$id] = new EventManager();
+                $this->identifiers[$id] = new EventManager($id);
             }
             $listeners[] = $this->identifiers[$id]->attach($event, $callback, $priority);
         }

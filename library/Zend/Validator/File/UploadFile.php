@@ -52,6 +52,7 @@ class UploadFile extends AbstractValidator
      *
      * @param  string $value File to check for upload errors
      * @return bool
+     * @throws Exception\InvalidArgumentException
      */
     public function isValid($value)
     {

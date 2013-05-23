@@ -195,7 +195,7 @@ class Checkbox extends Element implements InputProviderInterface
      */
     public function isChecked()
     {
-        return (bool) $this->value;
+        return $this->value === $this->getCheckedValue();
     }
 
     /**
@@ -206,7 +206,7 @@ class Checkbox extends Element implements InputProviderInterface
      */
     public function setChecked($value)
     {
-        $this->value = (bool) $value;
+        $this->value = $value ? $this->getCheckedValue() : $this->getUncheckedValue();
         return $this;
     }
 
@@ -218,11 +218,9 @@ class Checkbox extends Element implements InputProviderInterface
      */
     public function setValue($value)
     {
-        if (is_bool($value)) {
-            $this->value = $value;
-        } else {
-            $this->value = $value === $this->getCheckedValue();
-        }
+        // Cast to strings because POST data comes in string form
+        $checked = (string) $value === (string) $this->getCheckedValue();
+        $this->value = $checked ? $this->getCheckedValue() : $this->getUncheckedValue();
         return $this;
     }
 }

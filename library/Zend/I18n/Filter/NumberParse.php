@@ -35,8 +35,8 @@ class NumberParse extends AbstractLocale
     public function __construct(
         $localeOrOptions = null,
         $style = NumberFormatter::DEFAULT_STYLE,
-        $type = NumberFormatter::TYPE_DOUBLE)
-    {
+        $type = NumberFormatter::TYPE_DOUBLE
+    ) {
         parent::__construct();
         if ($localeOrOptions !== null) {
             if ($localeOrOptions instanceof Traversable) {
@@ -142,8 +142,8 @@ class NumberParse extends AbstractLocale
     public function filter($value)
     {
         if (!is_int($value)
-            && !is_float($value)) {
-
+            && !is_float($value)
+        ) {
             ErrorHandler::start();
 
             $result = $this->getFormatter()->parse(

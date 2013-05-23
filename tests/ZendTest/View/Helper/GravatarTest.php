@@ -188,6 +188,18 @@ class GravatarTest extends TestCase
         );
     }
 
+    public function testPassingAnMd5HashSkipsMd5Hashing()
+    {
+        $this->assertNotContains(
+            'test@test.com',
+            $this->helper->__invoke('test@test.com')->__toString()
+        );
+        $this->assertContains(
+            'b642b4217b34b1e8d3bd915fc65c4452',
+            $this->helper->__invoke('b642b4217b34b1e8d3bd915fc65c4452')->__toString()
+        );
+    }
+
     /**
      * Test auto detect location.
      * If request was made through the HTTPS protocol use secure location.

@@ -57,6 +57,13 @@ class Gravatar extends AbstractHtmlElement
     protected $email;
 
     /**
+     * True or false if the email address passed is already an MD5 hash
+     *
+     * @var bool
+     */
+    protected $emailIsHashed;
+
+    /**
      * Options
      *
      * @var array
@@ -135,7 +142,7 @@ class Gravatar extends AbstractHtmlElement
     protected function getAvatarUrl()
     {
         $src = $this->getGravatarUrl()
-            . '/'   . md5($this->getEmail())
+            . '/'   . ($this->emailIsHashed ? $this->getEmail() : md5($this->getEmail()))
             . '?s=' . $this->getImgSize()
             . '&d=' . $this->getDefaultImg()
             . '&r=' . $this->getRating();
@@ -231,6 +238,7 @@ class Gravatar extends AbstractHtmlElement
      */
     public function setEmail($email)
     {
+        $this->emailIsHashed = (bool) preg_match('/^[A-Za-z0-9]{32}$/', $email);
         $this->email = $email;
         return $this;
     }

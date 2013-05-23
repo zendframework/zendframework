@@ -89,6 +89,22 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cache);
     }
 
+    /**
+     * @group 4445
+     */
+    public function testFactoryWithAdapterAsStringAndOptions()
+    {
+        $cache = Cache\StorageFactory::factory(array(
+            'adapter' => 'Memory',
+            'options' => array(
+                'namespace' => 'test'
+            ),
+        ));
+
+        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cache);
+        $this->assertSame('test', $cache->getOptions()->getNamespace());
+    }
+
     public function testFactoryAdapterAsArray()
     {
         $cache = Cache\StorageFactory::factory(array(

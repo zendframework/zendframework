@@ -14,11 +14,11 @@
     "target-dir": "Zend/Config",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-stdlib": "self.version",
-        "zendframework/zend-json": "self.version"
+        "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
-        "zendframework/zend-servicemanager": "Zend\\ServiceManager for use with the Config Factory to retrieve reader and writer instances"
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager for use with the Config Factory to retrieve reader and writer instances",
+        "zendframework/zend-json": "Zend\\Json to use the Json reader or writer classes"
     },
     "extra": {
         "branch-alias": {

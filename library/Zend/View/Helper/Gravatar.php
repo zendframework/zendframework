@@ -104,7 +104,7 @@ class Gravatar extends AbstractHtmlElement
      *
      * @return string
      */
-    public function  __toString()
+    public function __toString()
     {
         return $this->getImgTag();
     }

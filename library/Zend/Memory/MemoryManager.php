@@ -54,7 +54,7 @@ class MemoryManager
     private $memorySize = 0;
 
     /**
-     * Id for next Zend_Memory object
+     * Id for next Zend\Memory object
      *
      * @var int
      */
@@ -214,7 +214,7 @@ class MemoryManager
     }
 
     /**
-     * Create new Zend_Memory value container
+     * Create new Zend\Memory value container
      *
      * @param string $value
      * @return Container\ContainerInterface
@@ -226,7 +226,7 @@ class MemoryManager
     }
 
     /**
-     * Create new Zend_Memory value container, which has value always
+     * Create new Zend\Memory value container, which has value always
      * locked in memory
      *
      * @param string $value
@@ -239,7 +239,7 @@ class MemoryManager
     }
 
     /**
-     * Create new Zend_Memory object
+     * Create new Zend\Memory object
      *
      * @param string $value
      * @param  bool $locked

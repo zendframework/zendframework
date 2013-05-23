@@ -33,7 +33,7 @@ class Mysql implements PlatformInterface
      */
     public function setDriver($driver)
     {
-        // handle Zend_Db drivers
+        // handle Zend\Db drivers
         if ($driver instanceof Mysqli\Mysqli
             || ($driver instanceof Pdo\Pdo && $driver->getDatabasePlatformName() == 'Mysql')
             || ($driver instanceof \mysqli)

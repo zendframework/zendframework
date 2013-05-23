@@ -10,7 +10,7 @@
 namespace Zend\XmlRpc\Client\Exception;
 
 /**
- * Thrown by Zend_XmlRpc_Client_Introspection when any error occurs.
+ * Thrown by Zend\XmlRpc\Client\ServerIntrospection when any error occurs.
  */
 class IntrospectException extends InvalidArgumentException
 {

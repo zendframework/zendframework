@@ -827,7 +827,7 @@ class AbstractFeed
     }
 
     /**
-     * Load extensions from Zend_Feed_Writer
+     * Load extensions from Zend\Feed\Writer\Writer
      *
      * @throws Exception\RuntimeException
      * @return void

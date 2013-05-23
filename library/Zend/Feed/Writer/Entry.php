@@ -709,7 +709,7 @@ class Entry
     }
 
     /**
-     * Creates a new Zend_Feed_Writer_Source data container for use. This is NOT
+     * Creates a new Zend\Feed\Writer\Source data container for use. This is NOT
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
@@ -726,7 +726,7 @@ class Entry
     }
 
     /**
-     * Appends a Zend_Feed_Writer_Entry object representing a new entry/item
+     * Appends a Zend\Feed\Writer\Entry object representing a new entry/item
      * the feed data container's internal group of entries.
      *
      * @param Source $source
@@ -750,7 +750,7 @@ class Entry
     }
 
     /**
-     * Load extensions from Zend_Feed_Writer
+     * Load extensions from Zend\Feed\Writer\Writer
      *
      * @return void
      */

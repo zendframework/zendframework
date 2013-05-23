@@ -12,7 +12,7 @@ namespace Zend\ProgressBar\Adapter\Exception;
 use Zend\ProgressBar\Exception;
 
 /**
- * Exception for Zend_Progressbar component.
+ * Exception for Zend\Progressbar component.
  */
 class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface

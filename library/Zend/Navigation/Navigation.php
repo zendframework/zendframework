@@ -12,7 +12,7 @@ namespace Zend\Navigation;
 use Traversable;
 
 /**
- * A simple container class for {@link Zend_Navigation_Page} pages
+ * A simple container class for {@link Zend\Navigation\Page} pages
  */
 class Navigation extends AbstractContainer
 {

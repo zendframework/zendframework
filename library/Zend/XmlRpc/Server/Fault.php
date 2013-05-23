@@ -22,7 +22,7 @@ namespace Zend\XmlRpc\Server;
  * need only implement a static 'observe' method.
  *
  * To allow method chaining, you may use the {@link getInstance()} factory
- * to instantiate a Zend_XmlRpc_Server_Fault.
+ * to instantiate a Zend\XmlRpc\Server\Fault.
  */
 class Fault extends \Zend\XmlRpc\Fault
 {

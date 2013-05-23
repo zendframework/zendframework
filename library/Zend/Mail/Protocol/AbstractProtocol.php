@@ -316,7 +316,7 @@ abstract class AbstractProtocol
      * Parse server response for successful codes
      *
      * Read the response from the stream and check for expected return code.
-     * Throws a Zend_Mail_Protocol_Exception if an unexpected code is returned.
+     * Throws a Zend\Mail\Protocol\Exception\ExceptionInterface if an unexpected code is returned.
      *
      * @param  string|array $code One or more codes that indicate a successful response
      * @param  int $timeout Per-request timeout value if applicable

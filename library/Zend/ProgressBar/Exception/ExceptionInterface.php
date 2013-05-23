@@ -10,7 +10,7 @@
 namespace Zend\ProgressBar\Exception;
 
 /**
- * Exception class for Zend_ProgressBar
+ * Exception class for Zend\ProgressBar
  */
 interface ExceptionInterface
 {

@@ -16,7 +16,7 @@ class Message
     protected $mime = null;
 
     /**
-     * Returns the list of all Zend_Mime_Parts in the message
+     * Returns the list of all Zend\Mime\Part in the message
      *
      * @return array of \Zend\Mime\Part
      */
@@ -26,7 +26,7 @@ class Message
     }
 
     /**
-     * Sets the given array of Zend_Mime_Parts as the array for the message
+     * Sets the given array of Zend\Mime\Part as the array for the message
      *
      * @param array $parts
      */
@@ -36,7 +36,7 @@ class Message
     }
 
     /**
-     * Append a new Zend_Mime_Part to the current message
+     * Append a new Zend\Mime\Part to the current message
      *
      * @param \Zend\Mime\Part $part
      */
@@ -60,10 +60,10 @@ class Message
     }
 
     /**
-     * Set Zend_Mime object for the message
+     * Set Zend\Mime\Mime object for the message
      *
      * This can be used to set the boundary specifically or to use a subclass of
-     * Zend_Mime for generating the boundary.
+     * Zend\Mime for generating the boundary.
      *
      * @param \Zend\Mime\Mime $mime
      */
@@ -73,7 +73,7 @@ class Message
     }
 
     /**
-     * Returns the Zend_Mime object in use by the message
+     * Returns the Zend\Mime\Mime object in use by the message
      *
      * If the object was not present, it is created and returned. Can be used to
      * determine the boundary used in this message.
@@ -96,12 +96,12 @@ class Message
      * only one part is present, the content of this part is returned. If no
      * part had been added, an empty string is returned.
      *
-     * Parts are separated by the mime boundary as defined in Zend_Mime. If
-     * {@link setMime()} has been called before this method, the Zend_Mime
-     * object set by this call will be used. Otherwise, a new Zend_Mime object
+     * Parts are separated by the mime boundary as defined in Zend\Mime\Mime. If
+     * {@link setMime()} has been called before this method, the Zend\Mime\Mime
+     * object set by this call will be used. Otherwise, a new Zend\Mime\Mime object
      * is generated and used.
      *
-     * @param string $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
+     * @param string $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
      * @return string
      */
     public function generateMessage($EOL = Mime::LINEEND)
@@ -207,12 +207,12 @@ class Message
     }
 
     /**
-     * Decodes a MIME encoded string and returns a Zend_Mime_Message object with
+     * Decodes a MIME encoded string and returns a Zend\Mime\Message object with
      * all the MIME parts set according to the given string
      *
      * @param string $message
      * @param string $boundary
-     * @param string $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
+     * @param string $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
      * @throws Exception\RuntimeException
      * @return \Zend\Mime\Message
      */

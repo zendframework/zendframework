@@ -12,7 +12,7 @@ namespace Zend\ProgressBar\Adapter;
 use Zend\Json\Json;
 
 /**
- * Zend_ProgressBar_Adapter_JsPull offers a simple method for updating a
+ * Zend\ProgressBar\Adapter\JsPull offers a simple method for updating a
  * progressbar in a browser.
  */
 class JsPull extends AbstractAdapter

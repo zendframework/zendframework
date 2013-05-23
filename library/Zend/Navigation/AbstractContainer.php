@@ -16,7 +16,7 @@ use Traversable;
 use Zend\Stdlib\ErrorHandler;
 
 /**
- * Zend_Navigation_Container
+ * Zend\Navigation\Container
  *
  * AbstractContainer class for Zend\Navigation\Page classes.
  */

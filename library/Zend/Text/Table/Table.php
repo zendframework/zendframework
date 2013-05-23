@@ -300,7 +300,7 @@ class Table
      * Append a row to the table
      *
      * @param  array|Row $row The row to append to the table
-     * @throws Exception\InvalidArgumentException When $row is neither an array nor Zend_Zext_Table_Row
+     * @throws Exception\InvalidArgumentException When $row is neither an array nor Zend\Text\Table\Row
      * @throws Exception\OverflowException When a row contains too many columns
      * @return Table
      */

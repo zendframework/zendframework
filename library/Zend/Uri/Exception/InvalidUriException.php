@@ -10,7 +10,7 @@
 namespace Zend\Uri\Exception;
 
 /**
- * Exceptions for Zend_Uri
+ * Exceptions for Zend\Uri
  */
 class InvalidUriException extends InvalidArgumentException implements ExceptionInterface
 {}

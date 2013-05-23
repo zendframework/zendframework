@@ -18,7 +18,7 @@ use Zend\Uri;
 
 /**
  * A Cookies object is designed to contain and maintain HTTP cookies, and should
- * be used along with Zend_Http_Client in order to manage cookies across HTTP requests and
+ * be used along with Zend\Http\Client in order to manage cookies across HTTP requests and
  * responses.
  *
  * The class contains an array of Zend\Http\Header\Cookie objects. Cookies can be added

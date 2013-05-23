@@ -259,7 +259,7 @@ class Figlet
      * Instantiate the FIGlet with a specific font. If no font is given, the
      * standard font is used. You can also supply multiple options via
      * the $options variable, which can either be an array or an instance of
-     * Zend_Config.
+     * Zend\Config\Config.
      *
      * @param array|Traversable $options Options for the output
      */

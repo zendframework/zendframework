@@ -68,6 +68,19 @@ class MvcTest extends TestCase
         $this->assertEquals('/news/view', $page->getHref());
     }
 
+    public function testHrefRouteMatchEnabledWithoutRouteMatchObject()
+    {
+        $page = new Page\Mvc(array(
+            'label'      => 'foo',
+            'route' => 'test/route',
+            'use_route_match' => true
+        ));
+        $router = $this->getMock('\Zend\Mvc\Router\Http\TreeRouteStack');
+        $router->expects($this->once())->method('assemble')->will($this->returnValue('/test/route'));
+        $page->setRouter($router);
+        $this->assertEquals('/test/route', $page->getHref());
+    }
+
     public function testHrefGeneratedIsRouteAware()
     {
         $page = new Page\Mvc(array(

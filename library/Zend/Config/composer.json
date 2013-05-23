@@ -17,6 +17,7 @@
         "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
+        "zendframework/zend-json": "Zend\\Json to use the Json reader or writer classes",
         "zendframework/zend-servicemanager": "Zend\\ServiceManager for use with the Config Factory to retrieve reader and writer instances"
     },
     "extra": {

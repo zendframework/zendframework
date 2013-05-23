@@ -15,7 +15,7 @@ use ReflectionClass as PhpReflectionClass;
  * Class/Object reflection
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
- * creating its own list of {@link Zend_Server_Reflection_Method}s.
+ * creating its own list of {@link Zend\Server\Reflection\ReflectionMethod}s.
  */
 class ReflectionClass
 {
@@ -122,7 +122,7 @@ class ReflectionClass
     }
 
     /**
-     * Return array of dispatchable {@link \Zend\Server\Reflection\Method}s.
+     * Return array of dispatchable {@link \Zend\Server\Reflection\ReflectionMethod}s.
      *
      * @access public
      * @return array

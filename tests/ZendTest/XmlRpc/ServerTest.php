@@ -461,13 +461,13 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testLoadFunctionsThrowsExceptionWithBadData()
     {
         $o = new \stdClass();
-        $this->setExpectedException('Zend\XmlRpc\Server\Exception\InvalidArgumentException', 'Unable to load server definition; must be an array or Zend_Server_Definition, received stdClass');
+        $this->setExpectedException('Zend\XmlRpc\Server\Exception\InvalidArgumentException', 'Unable to load server definition; must be an array or Zend\Server\Definition, received stdClass');
         $this->_server->loadFunctions($o);
     }
 
     public function testLoadFunctionsThrowsExceptionsWithBadData2()
     {
-        $this->setExpectedException('Zend\XmlRpc\Server\Exception\InvalidArgumentException', 'Unable to load server definition; must be an array or Zend_Server_Definition, received string');
+        $this->setExpectedException('Zend\XmlRpc\Server\Exception\InvalidArgumentException', 'Unable to load server definition; must be an array or Zend\Server\Definition, received string');
         $this->_server->loadFunctions('foo');
     }
 

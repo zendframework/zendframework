@@ -15,7 +15,7 @@ use Zend\XmlRpc\Server\Exception as ServerException;
 /**
  * XmlRpc Request object -- Request via STDIN
  *
- * Extends {@link Zend_XmlRpc_Request} to accept a request via STDIN. Request is
+ * Extends {@link Zend\XmlRpc\Request} to accept a request via STDIN. Request is
  * built at construction time using data from STDIN; if no data is available, the
  * request is declared a fault.
  */

@@ -10,7 +10,7 @@
 namespace Zend\Uri\Exception;
 
 /**
- * Exception for Zend_Uri
+ * Exception for Zend\Uri
  */
 interface ExceptionInterface
 {}

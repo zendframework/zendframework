@@ -16,8 +16,8 @@ use Zend\Uri;
 
 
 /**
- * A Zend_Http_CookieJar object is designed to contain and maintain HTTP cookies, and should
- * be used along with Zend_Http_Client in order to manage cookies across HTTP requests and
+ * A Zend\Http\Cookies object is designed to contain and maintain HTTP cookies, and should
+ * be used along with Zend\Http\Client in order to manage cookies across HTTP requests and
  * responses.
  *
  * The class contains an array of Zend\Http\Header\Cookie objects. Cookies can be added
@@ -36,7 +36,7 @@ use Zend\Uri;
 class Cookies extends Headers
 {
     /**
-     * Return cookie(s) as a Zend_Http_Cookie object
+     * Return cookie(s) as a Zend\Http\Cookie object
      *
      */
     const COOKIE_OBJECT = 0;

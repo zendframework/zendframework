@@ -12,7 +12,7 @@ namespace Zend\Tag\Cloud\Decorator\Exception;
 use Zend\Tag\Exception\ExceptionInterface as Exception;
 
 /**
- * Exception class for Zend_Tag_Cloud_Decorator
+ * Exception class for Zend\Tag\Cloud\Decorator
  */
 interface ExceptionInterface extends Exception
 {}

@@ -12,7 +12,7 @@ namespace Zend\XmlRpc\Client\Exception;
 use Zend\XmlRpc\Exception\ExceptionInterface as Exception;
 
 /**
- * Base class for all Zend_XmlRpc_Client_* exceptions
+ * Base class for all Zend\XmlRpc\Client\* exceptions
  */
 interface ExceptionInterface extends Exception
 {

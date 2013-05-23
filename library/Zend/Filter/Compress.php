@@ -192,7 +192,7 @@ class Compress extends AbstractFilter
     }
 
     /**
-     * Defined by Zend_Filter_Filter
+     * Defined by Zend\Filter\FilterInterface
      *
      * Compresses the content $value with the defined settings
      *

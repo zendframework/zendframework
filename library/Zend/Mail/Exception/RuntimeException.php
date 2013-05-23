@@ -10,7 +10,7 @@
 namespace Zend\Mail\Exception;
 
 /**
- * Exception for Zend_Mail component.
+ * Exception for Zend\Mail component.
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {

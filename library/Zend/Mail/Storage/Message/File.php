@@ -22,8 +22,8 @@ class File extends Part\File implements MessageInterface
     /**
      * Public constructor
      *
-     * In addition to the parameters of Zend_Mail_Part::__construct() this constructor supports:
-     * - flags array with flags for message, keys are ignored, use constants defined in Zend_Mail_Storage
+     * In addition to the parameters of Zend\Mail\Storage\Part::__construct() this constructor supports:
+     * - flags array with flags for message, keys are ignored, use constants defined in Zend\Mail\Storage
      *
      * @param  array $params
      * @throws \Zend\Mail\Storage\Exception\ExceptionInterface

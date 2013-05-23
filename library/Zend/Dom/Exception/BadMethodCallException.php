@@ -10,7 +10,7 @@
 namespace Zend\Dom\Exception;
 
 /**
- * Zend_Dom Exceptions
+ * Zend\Dom Exceptions
  */
 class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface
 {

@@ -19,7 +19,7 @@ use SimpleXMLElement;
  * fault, as well as generating the XML for an XMLRPC fault response.
  *
  * To allow method chaining, you may only use the {@link getInstance()} factory
- * to instantiate a Zend_XmlRpc_Server_Fault.
+ * to instantiate a Zend\XmlRpc\Server\Fault.
  */
 class Fault
 {

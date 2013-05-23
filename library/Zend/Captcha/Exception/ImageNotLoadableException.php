@@ -10,7 +10,7 @@
 namespace Zend\Captcha\Exception;
 
 /**
- * Exception for Zend_Form component.
+ * Exception for Zend\Form component.
  */
 class ImageNotLoadableException extends RuntimeException
 {

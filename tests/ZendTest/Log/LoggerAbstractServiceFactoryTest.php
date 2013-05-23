@@ -19,7 +19,7 @@ use Zend\Mvc\Service\ServiceManagerConfig;
  * @subpackage UnitTests
  * @group      Zend_Log
  */
-class LoggerAbstractServiceFactoryTeset extends \PHPUnit_Framework_TestCase
+class LoggerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var \Zend\ServiceManager\ServiceLocatorInterface

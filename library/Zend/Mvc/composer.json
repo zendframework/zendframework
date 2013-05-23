@@ -14,21 +14,26 @@
     "target-dir": "Zend/Mvc",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-config": "self.version",
-        "zendframework/zend-console": "self.version",
-        "zendframework/zend-di": "self.version",
         "zendframework/zend-eventmanager": "self.version",
-        "zendframework/zend-form": "self.version",
-        "zendframework/zend-modulemanager": "self.version",
-        "zendframework/zend-http": "self.version",
-        "zendframework/zend-uri": "self.version",
         "zendframework/zend-servicemanager": "self.version",
-        "zendframework/zend-stdlib": "self.version",
-        "zendframework/zend-text": "self.version",
-        "zendframework/zend-view": "self.version"
+        "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
-        "zendframework/zend-i18n": "Zend\\I18n component for translatable segments"
+        "zendframework/zend-config": "Zend\\Config component",
+        "zendframework/zend-console": "Zend\\Console component",
+        "zendframework/zend-di": "Zend\\Di component",
+        "zendframework/zend-filter": "Zend\\Filter component",
+        "zendframework/zend-http": "Zend\\Http component",
+        "zendframework/zend-form": "Zend\\Form component",
+        "zendframework/zend-i18n": "Zend\\I18n component for translatable segments",
+        "zendframework/zend-inputfilter": "Zend\\Inputfilter component",
+        "zendframework/zend-modulemanager": "Zend\\ModuleManager component",
+        "zendframework/zend-serializer": "Zend\\Serializer component",
+        "zendframework/zend-stdlib": "Zend\\Stdlib component",
+        "zendframework/zend-text": "Zend\\Text component",
+        "zendframework/zend-uri": "Zend\\Uri component",
+        "zendframework/zend-validator": "Zend\\Validator component",
+        "zendframework/zend-view": "Zend\\View component"
     },
     "extra": {
         "branch-alias": {

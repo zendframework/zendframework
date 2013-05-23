@@ -56,8 +56,6 @@ class FilterPluginManager extends AbstractPluginManager
         'htmlentities'              => 'Zend\Filter\HtmlEntities',
         'inflector'                 => 'Zend\Filter\Inflector',
         'int'                       => 'Zend\Filter\Int',
-        'localizedtonormalized'     => 'Zend\Filter\LocalizedToNormalized',
-        'normalizedtolocalized'     => 'Zend\Filter\NormalizedToLocalized',
         'null'                      => 'Zend\Filter\Null',
         'numberformat'              => 'Zend\I18n\Filter\NumberFormat',
         'numberparse'               => 'Zend\I18n\Filter\NumberParse',

@@ -13,7 +13,7 @@ use Traversable;
 use Zend\Stdlib\ArrayUtils;
 
 /**
- * Abstract class for Zend_ProgressBar_Adapters
+ * Abstract class for Zend\ProgressBar Adapters
  */
 abstract class AbstractAdapter
 {
@@ -30,7 +30,7 @@ abstract class AbstractAdapter
     /**
      * Create a new adapter
      *
-     * $options may be either be an array or a Zend_Config object which
+     * $options may be either be an array or a Zend\Config object which
      * specifies adapter related options.
      *
      * @param  array|Traversable $options

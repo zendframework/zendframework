@@ -209,7 +209,7 @@ class AbstractRenderer
     }
 
     /**
-     * Load extensions from Zend_Feed_Writer
+     * Load extensions from Zend\Feed\Writer\Writer
      *
      * @return void
      */

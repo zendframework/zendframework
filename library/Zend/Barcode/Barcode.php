@@ -71,7 +71,7 @@ abstract class Barcode
     }
 
     /**
-     * Factory for Zend_Barcode classes.
+     * Factory for Zend\Barcode classes.
      *
      * First argument may be a string containing the base of the adapter class
      * name, e.g. 'int25' corresponds to class Object\Int25.  This

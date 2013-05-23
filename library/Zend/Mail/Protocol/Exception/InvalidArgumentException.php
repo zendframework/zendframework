@@ -12,7 +12,7 @@ namespace Zend\Mail\Protocol\Exception;
 use Zend\Mail\Exception;
 
 /**
- * Exception for Zend_Mail component.
+ * Exception for Zend\Mail component.
  */
 class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface

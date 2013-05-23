@@ -10,7 +10,7 @@
 namespace Zend\Barcode\Exception;
 
 /**
- * Exception for Zend_Barcode component.
+ * Exception for Zend\Barcode component.
  */
 class OutOfRangeException extends \OutOfRangeException implements ExceptionInterface
 {

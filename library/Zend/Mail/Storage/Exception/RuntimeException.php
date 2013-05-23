@@ -12,7 +12,7 @@ namespace Zend\Mail\Storage\Exception;
 use Zend\Mail\Exception;
 
 /**
- * Exception for Zend_Mail component.
+ * Exception for Zend\Mail component.
  */
 class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface

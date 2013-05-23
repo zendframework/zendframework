@@ -12,7 +12,7 @@ namespace Zend\XmlRpc\Client\Exception;
 use Zend\XmlRpc\Exception;
 
 /**
- * Thrown by Zend_XmlRpc_Client when an XML-RPC fault response is returned.
+ * Thrown by Zend\XmlRpc\Client when an XML-RPC fault response is returned.
  */
 class FaultException extends Exception\BadMethodCallException implements ExceptionInterface
 {

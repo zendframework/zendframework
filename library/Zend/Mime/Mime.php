@@ -292,7 +292,7 @@ class Mime
      *
      * @param string $str
      * @param string $encoding
-     * @param string $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
+     * @param string $EOL EOL string; defaults to {@link LINEEND}
      * @return string
      */
     public static function encode($str, $encoding, $EOL = self::LINEEND)

@@ -20,7 +20,7 @@ use Zend\Log\Logger;
 class Syslog extends AbstractWriter
 {
     /**
-     * Maps Zend_Log priorities to PHP's syslog priorities
+     * Maps Zend\Log priorities to PHP's syslog priorities
      *
      * @var array
      */

@@ -10,6 +10,7 @@
 namespace Zend\Cache;
 
 use Traversable;
+use Zend\EventManager\EventsCapableInterface;
 use Zend\Stdlib\ArrayUtils;
 
 abstract class StorageFactory
@@ -71,6 +72,14 @@ abstract class StorageFactory
 
         // add plugins
         if (isset($cfg['plugins'])) {
+            if (!$adapter instanceof EventsCapableInterface) {
+                throw new Exception\RuntimeException(sprintf(
+                    "The adapter '%s' doesn't implement '%s' and therefore can't handle plugins",
+                    get_class($adapter),
+                    'Zend\EventManager\EventsCapableInterface'
+                ));
+            }
+
             if (!is_array($cfg['plugins'])) {
                 throw new Exception\InvalidArgumentException(
                     'Plugins needs to be an array'

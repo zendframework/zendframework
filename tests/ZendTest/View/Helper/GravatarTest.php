@@ -92,7 +92,6 @@ class GravatarTest extends TestCase
         $this->helper->setDefaultImg('monsterid')
                      ->setImgSize(150)
                      ->setSecure(true)
-                     ->setSkipEmailHash(true)
                      ->setEmail("example@example.com")
                      ->setAttribs($attribs)
                      ->setRating('pg');
@@ -102,7 +101,6 @@ class GravatarTest extends TestCase
         $this->assertEquals($attribs, $this->helper->getAttribs());
         $this->assertEquals(150, $this->helper->getImgSize());
         $this->assertTrue($this->helper->getSecure());
-        $this->assertTrue($this->helper->getSkipEmailHash());
     }
 
     public function tesSetDefaultImg()
@@ -190,15 +188,15 @@ class GravatarTest extends TestCase
         );
     }
 
-    public function testSkipEmailHashingOptionTogglesMd5Hashing()
+    public function testPassingAnMd5HashSkipsMd5Hashing()
     {
         $this->assertNotContains(
-            'b642b4217b34b1e8d3bd915fc65c4452',
-            $this->helper->__invoke('b642b4217b34b1e8d3bd915fc65c4452')->__toString()
+            'test@test.com',
+            $this->helper->__invoke('test@test.com')->__toString()
         );
         $this->assertContains(
             'b642b4217b34b1e8d3bd915fc65c4452',
-            $this->helper->__invoke('b642b4217b34b1e8d3bd915fc65c4452', array('skip_email_hash' => true))->__toString()
+            $this->helper->__invoke('b642b4217b34b1e8d3bd915fc65c4452')->__toString()
         );
     }
 

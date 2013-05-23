@@ -37,10 +37,10 @@ class HydratorListener extends AbstractListenerAggregate
     /**
      * {@inheritDoc}
      */
-    public function attach(EventManagerInterface $events)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $this->listeners[] = $events->attach(HydrateEvent::EVENT_HYDRATE, array($this, 'onHydrate'));
-        $this->listeners[] = $events->attach(ExtractEvent::EVENT_EXTRACT, array($this, 'onExtract'));
+        $this->listeners[] = $events->attach(HydrateEvent::EVENT_HYDRATE, array($this, 'onHydrate'), $priority);
+        $this->listeners[] = $events->attach(ExtractEvent::EVENT_EXTRACT, array($this, 'onExtract'), $priority);
     }
 
     /**

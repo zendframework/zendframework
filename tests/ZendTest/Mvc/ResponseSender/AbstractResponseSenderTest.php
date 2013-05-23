@@ -36,10 +36,19 @@ class AbstractResponseSenderTest extends TestCase
         $response = new Response();
         $response->getHeaders()->addHeaders($headers);
 
-        $mockSendResponseEvent = $this->getMock('Zend\Mvc\ResponseSender\SendResponseEvent', array('getResponse'));
-        $mockSendResponseEvent->expects($this->any())->method('getResponse')->will($this->returnValue($response));
+        $mockSendResponseEvent = $this->getMock(
+            'Zend\Mvc\ResponseSender\SendResponseEvent',
+            array('getResponse')
+        );
+        $mockSendResponseEvent->expects(
+            $this->any())
+                ->method('getResponse')
+                ->will($this->returnValue($response)
+        );
 
-        $responseSender = $this->getMockForAbstractClass('Zend\Mvc\ResponseSender\AbstractResponseSender');
+        $responseSender = $this->getMockForAbstractClass(
+            'Zend\Mvc\ResponseSender\AbstractResponseSender'
+        );
         $responseSender->sendHeaders($mockSendResponseEvent);
 
         $sentHeaders = xdebug_get_headers();
@@ -51,8 +60,13 @@ class AbstractResponseSenderTest extends TestCase
             $this->assertEquals(0, count($diff));
         }
 
+        $expected = array();
+        if (version_compare(phpversion('xdebug'), '2.2.0', '>='))  {
+            $expected = xdebug_get_headers();
+        }
+
         $responseSender->sendHeaders($mockSendResponseEvent);
-        $this->assertEquals(array(), xdebug_get_headers());
+        $this->assertEquals($expected, xdebug_get_headers());
     }
 
     /**

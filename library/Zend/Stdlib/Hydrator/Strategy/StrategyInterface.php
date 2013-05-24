@@ -14,16 +14,18 @@ interface StrategyInterface
     /**
      * Converts the given value so that it can be extracted by the hydrator.
      *
-     * @param mixed $value The original value.
+     * @param mixed   $value The original value.
+     * @param object $object The original object.
      * @return mixed Returns the value that should be extracted.
      */
-    public function extract($value);
+    public function extract($value, $object = null);
 
     /**
      * Converts the given value so that it can be hydrated by the hydrator.
      *
      * @param mixed $value The original value.
+     * @param array  $data The original data.
      * @return mixed Returns the value that should be hydrated.
      */
-    public function hydrate($value);
+    public function hydrate($value, array $data = null);
 }

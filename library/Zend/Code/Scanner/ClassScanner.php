@@ -292,10 +292,16 @@ class ClassScanner implements ScannerInterface
     /**
      * Return a list of constants
      *
-     * @return ConstantScanner[]
+     * @param  bool $namesOnly Set false to return instances of ConstantScanner
+     * @return array|ConstantScanner[]
      */
-    public function getConstants()
+    public function getConstants($namesOnly = true)
     {
+        if (true === $namesOnly) {
+            trigger_error('Use method getConstantNames() instead', E_USER_DEPRECATED);
+            return $this->getConstantNames();
+        }
+
         $this->scan();
 
         $return = array();

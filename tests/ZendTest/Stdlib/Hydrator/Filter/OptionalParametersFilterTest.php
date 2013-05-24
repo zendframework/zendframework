@@ -45,6 +45,22 @@ class OptionalParametersFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expectedResult, $this->filter->filter($method));
     }
 
+    /**
+     * Verifies a list of methods against expected results over subsequent calls, checking
+     * that the filter behaves consistently regardless of cache optimizations
+     *
+     * @param string $method
+     * @param bool   $expectedResult
+     *
+     * @dataProvider methodProvider
+     */
+    public function testMethodsOnSubsequentCalls($method, $expectedResult)
+    {
+        for ($i = 0; $i < 5; $i += 1) {
+            $this->assertSame($expectedResult, $this->filter->filter($method));
+        }
+    }
+
     public function testTriggersExceptionOnUnknownMethod()
     {
         $this->setExpectedException('InvalidArgumentException');

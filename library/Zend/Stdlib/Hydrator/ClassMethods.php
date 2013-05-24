@@ -19,7 +19,7 @@ use Zend\Stdlib\Hydrator\Filter\GetFilter;
 use Zend\Stdlib\Hydrator\Filter\HasFilter;
 use Zend\Stdlib\Hydrator\Filter\IsFilter;
 use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
-use Zend\Stdlib\Hydrator\Filter\NumberOfParameterFilter;
+use Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter;
 
 class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
@@ -30,6 +30,11 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     protected $underscoreSeparatedKeys = true;
 
     /**
+     * @var \Zend\Stdlib\Hydrator\Filter\FilterInterface
+     */
+    private $callableMethodFilter;
+
+    /**
      * Define if extract values will use camel case or name with underscore
      * @param bool|array $underscoreSeparatedKeys
      */
@@ -38,10 +43,12 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
         parent::__construct();
         $this->setUnderscoreSeparatedKeys($underscoreSeparatedKeys);
 
+        $this->callableMethodFilter = new OptionalParametersFilter();
+
         $this->filterComposite->addFilter("is", new IsFilter());
         $this->filterComposite->addFilter("has", new HasFilter());
         $this->filterComposite->addFilter("get", new GetFilter());
-        $this->filterComposite->addFilter("parameter", new NumberOfParameterFilter(), FilterComposite::CONDITION_AND);
+        $this->filterComposite->addFilter("parameter", new OptionalParametersFilter(), FilterComposite::CONDITION_AND);
     }
 
     /**
@@ -128,8 +135,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
                 continue;
             }
 
-            $reflectionMethod = new ReflectionMethod(get_class($object) . '::' . $method);
-            if ($reflectionMethod->getNumberOfParameters() > 0) {
+            if (!$this->callableMethodFilter->filter(get_class($object) . '::' . $method)) {
                 continue;
             }
 

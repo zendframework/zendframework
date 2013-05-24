@@ -19,10 +19,23 @@ use ReflectionParameter;
 class OptionalParametersFilter implements FilterInterface
 {
     /**
+     * Map of methods already analyzed
+     * by {@see \Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter::filter()},
+     * cached for performance reasons
+     *
+     * @var bool[]
+     */
+    private static $propertiesCache = array();
+
+    /**
      * {@inheritDoc}
      */
     public function filter($property)
     {
+        if (isset(self::$propertiesCache[$property])) {
+            return self::$propertiesCache[$property];
+        }
+
         try {
             $reflectionMethod = new ReflectionMethod($property);
         } catch (ReflectionException $exception) {
@@ -36,6 +49,6 @@ class OptionalParametersFilter implements FilterInterface
             }
         );
 
-        return empty($mandatoryParameters);
+        return self::$propertiesCache[$property] = empty($mandatoryParameters);
     }
 }

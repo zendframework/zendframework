@@ -9,6 +9,9 @@
 
 namespace Zend\Stdlib\Hydrator\Strategy;
 
+/**
+ * @todo v3.0, add optional object/data to extract/hydrate.
+ */
 interface StrategyInterface
 {
     /**

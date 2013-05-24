@@ -52,6 +52,7 @@ class ClassScannerTest extends TestCase
         $file  = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
         $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
         $this->assertInternalType('array', $class->getConstantNames());
+        $this->assertContains('FOO', $class->getConstantNames());
     }
 
     public function testClassScannerHasProperties()
@@ -68,14 +69,47 @@ class ClassScannerTest extends TestCase
         $this->assertContains('fooBarBaz', $class->getMethodNames());
     }
 
-    public function testClassScannerReturnsConstantsWithConstantScanners()
+    public function testGetConstantsReturnsConstantNames()
     {
         $file    = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
         $class   = $file->getClass('ZendTest\Code\TestAsset\FooClass');
-        $constants = $class->getConstants();
+        $this->assertContains('foo', $class->getConstants());
+    }
+
+    public function testGetConstantsReturnsInstancesOfConstantScanner()
+    {
+        $file    = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
+        $class   = $file->getClass('ZendTest\Code\TestAsset\FooClass');
+        $constants = $class->getConstants(false);
         foreach ($constants as $constant) {
             $this->assertInstanceOf('Zend\Code\Scanner\ConstantScanner', $constant);
         }
+    }
+
+    public function testHasConstant()
+    {
+        $file    = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
+        $class   = $file->getClass('ZendTest\Code\TestAsset\FooClass');
+        $this->assertTrue($class->hasConstant('FOO'));
+        $this->assertFalse($class->hasConstant('foo'));
+    }
+
+    public function testHasProperty()
+    {
+        $file    = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
+        $class   = $file->getClass('ZendTest\Code\TestAsset\FooClass');
+        $this->assertTrue($class->hasProperty('foo'));
+        $this->assertFalse($class->hasProperty('FOO'));
+        $this->assertTrue($class->hasProperty('bar'));
+    }
+
+    public function testHasMethod()
+    {
+        $file    = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
+        $class   = $file->getClass('ZendTest\Code\TestAsset\FooClass');
+        $this->assertTrue($class->hasMethod('fooBarBaz'));
+        $this->assertFalse($class->hasMethod('FooBarBaz'));
+        $this->assertFalse($class->hasMethod('bar'));
     }
 
     public function testClassScannerReturnsMethodsWithMethodScanners()

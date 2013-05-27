@@ -44,10 +44,10 @@ class PartialLoop extends Partial
             return $this;
         }
 
-        if (!is_array($values)
-            && (!$values instanceof Traversable)
-            && (is_object($values) && !method_exists($values, 'toArray'))
-        ) {
+        if (!( is_array($values)
+            || $values instanceof Traversable
+            || (is_object($values) && method_exists($values, 'toArray'))
+        )) {
             throw new Exception\InvalidArgumentException('PartialLoop helper requires iterable data');
         }
 

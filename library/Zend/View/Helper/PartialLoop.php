@@ -44,14 +44,14 @@ class PartialLoop extends Partial
             return $this;
         }
 
-        if (is_array($values)) {
-            // it's ok. do nothing
-        } else if ($values instanceof Traversable) {
-            $values = ArrayUtils::iteratorToArray($values);
-        } else if (is_object($values) && method_exists($values, 'toArray')) {
-            $values = $values->toArray();
-        } else {
-            throw new Exception\InvalidArgumentException('PartialLoop helper requires iterable data');
+        if (!is_array($values)) {
+            if ($values instanceof Traversable) {
+                $values = ArrayUtils::iteratorToArray($values);
+            } elseif (is_object($values) && method_exists($values, 'toArray')) {
+                $values = $values->toArray();
+            } else {
+                throw new Exception\InvalidArgumentException('PartialLoop helper requires iterable data');
+            }
         }
 
         // reset the counter if it's called again

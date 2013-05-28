@@ -97,7 +97,7 @@ class Bcrypt implements PasswordInterface
             }
         }
         $hash = crypt($password, $prefix . $this->cost . '$' . $salt64);
-        if (strlen($hash) <= 13) {
+        if (strlen($hash) < 13) {
             throw new Exception\RuntimeException('Error during the bcrypt generation');
         }
         return $hash;

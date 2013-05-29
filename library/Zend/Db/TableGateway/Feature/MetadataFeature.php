@@ -59,7 +59,7 @@ class MetadataFeature extends AbstractFeature
         if (!($m->getTable($t->table) instanceof TableObject)) {
             return;
         }
-        
+
         $pkc = null;
 
         foreach ($m->getConstraints($t->table) as $constraint) {

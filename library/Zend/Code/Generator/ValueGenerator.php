@@ -364,9 +364,18 @@ class ValueGenerator extends AbstractGenerator
                     /* @var $v ValueGenerator */
                     $v->setArrayDepth($this->arrayDepth + 1);
                     $partV = $v->generate();
-                    if ($n === $noKeyIndex) {
+                    $short = false;
+                    if (is_int($n)) {
+                        if ($n === $noKeyIndex) {
+                            $short = true;
+                            $noKeyIndex++;
+                        } else {
+                            $noKeyIndex = max($n + 1, $noKeyIndex);
+                        }
+                    }
+
+                    if ($short) {
                         $outputParts[] = $partV;
-                        $noKeyIndex++;
                     } else {
                         $outputParts[] = (is_int($n) ? $n : self::escape($n)) . ' => ' . $partV;
                     }

@@ -112,4 +112,29 @@ EOS;
         $generatedTargetSource = $valueGenerator->generate();
         $this->assertEquals($expectedSource, $generatedTargetSource);
     }
+
+    public function testPropertyDefaultValueCanHandleArrayWithUnsortedKeys()
+    {
+        $value = array(
+            1 => 'a',
+            0 => 'b',
+            'c',
+            7 => 'd',
+            3 => 'e'
+        );
+
+        $valueGenerator = new ValueGenerator();
+        $valueGenerator->setValue($value);
+$expectedSource = <<<EOS
+array(
+        1 => 'a',
+        0 => 'b',
+        'c',
+        7 => 'd',
+        3 => 'e'
+        )
+EOS;
+
+        $this->assertEquals($expectedSource, $valueGenerator->generate());
+    }
 }

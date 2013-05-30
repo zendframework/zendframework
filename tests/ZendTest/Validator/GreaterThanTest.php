@@ -99,8 +99,8 @@ class GreaterThanTest extends \PHPUnit_Framework_TestCase
                                      'messageVariables', $validator);
     }
 
-	public function testCorrectInclusiveMessageReturn()
-	{
+    public function testCorrectInclusiveMessageReturn()
+    {
         $valuesToValidate = array(0, 0.5, 5, 10);
 
         foreach ($valuesToValidate as $value) {

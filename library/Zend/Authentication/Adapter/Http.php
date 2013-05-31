@@ -13,6 +13,7 @@ use Zend\Authentication;
 use Zend\Http\Request as HTTPRequest;
 use Zend\Http\Response as HTTPResponse;
 use Zend\Uri\UriFactory;
+use Zend\Crypt\Utils as CryptUtils;
 
 /**
  * HTTP Authentication Adapter
@@ -489,7 +490,7 @@ class Http implements AdapterInterface
 
         if (!$result instanceof Authentication\Result
             && !is_array($result)
-            && $this->_secureStringCompare($result, $creds[1])
+            && CryptUtils::compareStrings($result, $creds[1])
         ) {
             $identity = array('username' => $creds[0], 'realm' => $this->realm);
             return new Authentication\Result(Authentication\Result::SUCCESS, $identity);
@@ -582,7 +583,7 @@ class Http implements AdapterInterface
 
         // If our digest matches the client's let them in, otherwise return
         // a 401 code and exit to prevent access to the protected resource.
-        if ($this->_secureStringCompare($digest, $data['response'])) {
+        if (CryptUtils::compareStrings($digest, $data['response'])) {
             $identity = array('username' => $data['username'], 'realm' => $data['realm']);
             return new Authentication\Result(Authentication\Result::SUCCESS, $identity);
         }
@@ -797,27 +798,5 @@ class Http implements AdapterInterface
         $temp = null;
 
         return $data;
-    }
-
-    /**
-     * Securely compare two strings for equality while avoided C level memcmp()
-     * optimisations capable of leaking timing information useful to an attacker
-     * attempting to iteratively guess the unknown string (e.g. password) being
-     * compared against.
-     *
-     * @param string $a
-     * @param string $b
-     * @return bool
-     */
-    protected function _secureStringCompare($a, $b)
-    {
-        if (strlen($a) !== strlen($b)) {
-            return false;
-        }
-        $result = 0;
-        for ($i = 0, $len = strlen($a); $i < $len; $i++) {
-            $result |= ord($a[$i]) ^ ord($b[$i]);
-        }
-        return $result == 0;
     }
 }

@@ -10,6 +10,7 @@
 namespace Zend\Form;
 
 use Traversable;
+use Zend\Form\Exception\InvalidElementException;
 use Zend\Stdlib\Hydrator;
 use Zend\Stdlib\Hydrator\HydratorAwareInterface;
 use Zend\Stdlib\Hydrator\HydratorInterface;
@@ -206,14 +207,13 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * Retrieve a named element or fieldset
      *
-     * @todo   Should this raise an exception if no entry is found?
      * @param  string $elementOrFieldset
      * @return ElementInterface
      */
     public function get($elementOrFieldset)
     {
         if (!$this->has($elementOrFieldset)) {
-            return null;
+            throw new InvalidElementException("No element by the name of [$elementOrFieldset] found in form.");
         }
         return $this->byName[$elementOrFieldset];
     }

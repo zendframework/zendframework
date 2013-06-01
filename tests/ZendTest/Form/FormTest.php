@@ -166,6 +166,14 @@ class FormTest extends TestCase
         $this->assertSame($filter, $this->form->getInputFilter());
     }
 
+    /**
+     * @expectedException Zend\Form\Exception\InvalidElementException
+     */
+    public function testShouldThrowExceptionWhenGetInvalidElement()
+    {
+        $this->form->get('doesnt_exist');
+    }
+
     public function testDefaultNonRequiredInputFilterIsSet()
     {
         $this->form->add(new Element('foo'));

@@ -11,6 +11,7 @@ namespace Zend\Authentication\Adapter;
 
 use Zend\Authentication\Result as AuthenticationResult;
 use Zend\Stdlib\ErrorHandler;
+use Zend\Crypt\Utils as CryptUtils;
 
 class Digest extends AbstractAdapter
 {
@@ -178,7 +179,7 @@ class Digest extends AbstractAdapter
                 break;
             }
             if (substr($line, 0, $idLength) === $id) {
-                if ($this->_secureStringCompare(substr($line, -32), md5("$this->identity:$this->realm:$this->credential"))) {
+                if (CryptUtils::compareStrings(substr($line, -32), md5("$this->identity:$this->realm:$this->credential"))) {
                     $result['code'] = AuthenticationResult::SUCCESS;
                 } else {
                     $result['code'] = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
@@ -191,27 +192,5 @@ class Digest extends AbstractAdapter
         $result['code'] = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
         $result['messages'][] = "Username '$this->identity' and realm '$this->realm' combination not found";
         return new AuthenticationResult($result['code'], $result['identity'], $result['messages']);
-    }
-
-    /**
-     * Securely compare two strings for equality while avoided C level memcmp()
-     * optimisations capable of leaking timing information useful to an attacker
-     * attempting to iteratively guess the unknown string (e.g. password) being
-     * compared against.
-     *
-     * @param string $a
-     * @param string $b
-     * @return bool
-     */
-    protected function _secureStringCompare($a, $b)
-    {
-        if (strlen($a) !== strlen($b)) {
-            return false;
-        }
-        $result = 0;
-        for ($i = 0, $len = strlen($a); $i < $len; $i++) {
-            $result |= ord($a[$i]) ^ ord($b[$i]);
-        }
-        return $result == 0;
     }
 }

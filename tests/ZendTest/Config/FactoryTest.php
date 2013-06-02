@@ -21,6 +21,7 @@ use Zend\Config\Factory;
 class FactoryTest extends \PHPUnit_Framework_TestCase
 {
     protected $tmpFiles = array();
+    protected $originalIncludePath;
 
     protected function getTestAssetFileName($ext)
     {
@@ -30,8 +31,16 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         return $this->tmpfiles[$ext];
     }
 
+    public function setUp()
+    {
+        $this->originalIncludePath = get_include_path();
+        set_include_path(__DIR__ . '/TestAssets');
+    }
+
     public function tearDown()
     {
+        set_include_path($this->originalIncludePath);
+
         foreach ($this->tmpFiles as $file) {
             if (file_exists($file)) {
                 if (!is_writable($file)) {
@@ -98,6 +107,20 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             __DIR__ . '/TestAssets/Ini/include-base.ini',
             __DIR__ . '/TestAssets/Xml/include-base2.xml',
             __DIR__ . '/TestAssets/Php/include-base3.php',
+        );
+        $config = Factory::fromFiles($files);
+
+        $this->assertEquals('bar', $config['base']['foo']);
+        $this->assertEquals('baz', $config['test']['bar']);
+        $this->assertEquals('baz', $config['last']['bar']);
+    }
+
+    public function testFromIniAndXmlAndPhpFilesFromIncludePath()
+    {
+        $files = array (
+            'Ini/include-base.ini',
+            'Xml/include-base2.xml',
+            'Php/include-base3.php',
         );
         $config = Factory::fromFiles($files);
 

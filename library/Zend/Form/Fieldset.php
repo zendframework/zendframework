@@ -10,7 +10,6 @@
 namespace Zend\Form;
 
 use Traversable;
-use Zend\Form\Exception\InvalidElementException;
 use Zend\Stdlib\Hydrator;
 use Zend\Stdlib\Hydrator\HydratorAwareInterface;
 use Zend\Stdlib\Hydrator\HydratorInterface;
@@ -213,7 +212,10 @@ class Fieldset extends Element implements FieldsetInterface
     public function get($elementOrFieldset)
     {
         if (!$this->has($elementOrFieldset)) {
-            throw new InvalidElementException("No element by the name of [$elementOrFieldset] found in form.");
+            throw new Exception\InvalidElementException(sprintf(
+                "No element by the name of [%s] found in form",
+                $elementOrFieldset
+            ));
         }
         return $this->byName[$elementOrFieldset];
     }

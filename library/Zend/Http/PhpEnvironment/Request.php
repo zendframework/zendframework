@@ -257,8 +257,9 @@ class Request extends HttpRequest
         // URI host & port
         $host = null;
         $port = null;
-        if (isset($this->serverParams['SERVER_NAME'])) {
-            $host = $this->serverParams['SERVER_NAME'];
+        // Set the host. HTTP_HOST will take precedence over SERVER_NAME as it will reflect the requested URL (not necessarily the server name)
+        if (isset($this->serverParams['HTTP_HOST']) || isset($this->serverParams['SERVER_NAME'])) {
+            $host = (isset($this->serverParams['HTTP_HOST'])) ? $this->serverParams['HTTP_HOST'] : $this->serverParams['SERVER_NAME'];
             if (isset($this->serverParams['SERVER_PORT'])) {
                 $port = (int) $this->serverParams['SERVER_PORT'];
             }

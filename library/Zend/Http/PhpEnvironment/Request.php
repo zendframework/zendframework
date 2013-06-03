@@ -267,9 +267,8 @@ class Request extends HttpRequest
                 $port = (int) $matches[1];
             }
         }
-        // Do we need HTTP_POST????
-        elseif (isset($this->serverParams['HTTP_HOST']) || isset($this->serverParams['SERVER_NAME'])) {
-            $host = (isset($this->serverParams['HTTP_HOST'])) ? $this->serverParams['HTTP_HOST'] : $this->serverParams['SERVER_NAME'];
+        elseif (isset($this->serverParams['SERVER_NAME'])) {
+            $host = $this->serverParams['SERVER_NAME'];
             if (isset($this->serverParams['SERVER_PORT'])) {
                 $port = (int) $this->serverParams['SERVER_PORT'];
             }

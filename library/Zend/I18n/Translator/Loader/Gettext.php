@@ -44,7 +44,8 @@ class Gettext implements FileLoaderInterface
      */
     public function load($locale, $filename)
     {
-        $fromIncludePath = stream_resolve_include_path($filename);
+        $resolvedIncludePath = stream_resolve_include_path($filename);
+        $fromIncludePath = ($resolvedIncludePath !== false) ? $resolvedIncludePath : $filename;
         if (!$fromIncludePath || !is_file($fromIncludePath) || !is_readable($fromIncludePath)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Could not find or open file %s for reading',

@@ -266,8 +266,7 @@ class Request extends HttpRequest
                 $host = substr($host, 0, -1 * (strlen($matches[1]) + 1));
                 $port = (int) $matches[1];
             }
-        }
-        elseif (isset($this->serverParams['SERVER_NAME'])) {
+        } elseif (isset($this->serverParams['SERVER_NAME'])) {
             $host = $this->serverParams['SERVER_NAME'];
             if (isset($this->serverParams['SERVER_PORT'])) {
                 $port = (int) $this->serverParams['SERVER_PORT'];

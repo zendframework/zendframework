@@ -257,8 +257,18 @@ class Request extends HttpRequest
         // URI host & port
         $host = null;
         $port = null;
-        // Set the host. HTTP_HOST will take precedence over SERVER_NAME as it will reflect the requested URL (not necessarily the server name)
-        if (isset($this->serverParams['HTTP_HOST']) || isset($this->serverParams['SERVER_NAME'])) {
+
+        // Set the host
+        if ($this->getHeaders()->get('host')) {
+            $host = $this->getHeaders()->get('host')->getFieldValue();
+            // works for regname, IPv4 & IPv6
+            if (preg_match('|\:(\d+)$|', $host, $matches)) {
+                $host = substr($host, 0, -1 * (strlen($matches[1]) + 1));
+                $port = (int) $matches[1];
+            }
+        }
+        // Do we need HTTP_POST????
+        elseif (isset($this->serverParams['HTTP_HOST']) || isset($this->serverParams['SERVER_NAME'])) {
             $host = (isset($this->serverParams['HTTP_HOST'])) ? $this->serverParams['HTTP_HOST'] : $this->serverParams['SERVER_NAME'];
             if (isset($this->serverParams['SERVER_PORT'])) {
                 $port = (int) $this->serverParams['SERVER_PORT'];
@@ -272,13 +282,6 @@ class Request extends HttpRequest
                     // Unset the port so the default port can be used
                     $port = null;
                 }
-            }
-        } elseif ($this->getHeaders()->get('host')) {
-            $host = $this->getHeaders()->get('host')->getFieldValue();
-            // works for regname, IPv4 & IPv6
-            if (preg_match('|\:(\d+)$|', $host, $matches)) {
-                $host = substr($host, 0, -1 * (strlen($matches[1]) + 1));
-                $port = (int) $matches[1];
             }
         }
         $uri->setHost($host);

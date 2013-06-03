@@ -28,7 +28,7 @@ class PhpArrayTest extends TestCase
         $this->testFilesDir = realpath(__DIR__ . '/../_files');
 
         $this->originalIncludePath = get_include_path();
-        set_include_path($this->testFilesDir.PATH_SEPARATOR.$this->testFilesDir.'/translations.phar');
+        set_include_path($this->testFilesDir . PATH_SEPARATOR . $this->testFilesDir . '/translations.phar');
     }
 
     public function tearDown()
@@ -92,7 +92,7 @@ class PhpArrayTest extends TestCase
     public function testLoaderLoadsFromPhar()
     {
         $loader = new PhpArrayLoader();
-        $textDomain = $loader->load('en_EN', 'phar://'.$this->testFilesDir.'/translations.phar/translation_en.php');
+        $textDomain = $loader->load('en_EN', 'phar://' . $this->testFilesDir . '/translations.phar/translation_en.php');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);

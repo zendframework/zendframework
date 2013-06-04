@@ -15,9 +15,6 @@
     "require": {
         "php": ">=5.3.3"
     },
-    "suggest": {
-        "zendframework/zend-stdlib": "Zend\\Stdlib component"
-    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.2-dev",

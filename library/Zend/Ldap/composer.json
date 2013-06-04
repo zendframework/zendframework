@@ -16,6 +16,12 @@
         "php": ">=5.3.3",
         "zendframework/zend-stdlib": "self.version"
     },
+    "require-dev": {
+        "zendframework/zend-eventmanager": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-eventmanager": "Zend\\EventManager component"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.2-dev",

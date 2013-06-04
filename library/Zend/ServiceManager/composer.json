@@ -15,6 +15,9 @@
     "require": {
         "php": ">=5.3.3"
     },
+    "require-dev": {
+        "zendframework/zend-di": "self.version"
+    },
     "suggest": {
         "zendframework/zend-di": "Zend\\Di component"
     },

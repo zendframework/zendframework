@@ -17,6 +17,12 @@
         "zendframework/zend-code": "self.version",
         "zendframework/zend-stdlib": "self.version"
     },
+    "require-dev": {
+        "zendframework/zend-servicemanager": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.2-dev",

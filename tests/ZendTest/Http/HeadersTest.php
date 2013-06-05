@@ -270,4 +270,11 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $expected = implode("\r\n", $expected) . "\r\n";
         $this->assertEquals($expected, $string);
     }
+
+    public function testZeroIsAValidHeaderValue()
+    {
+        $headers = Headers::fromString('Fake: 0');
+        $this->assertSame('0', $headers->get('Fake')->getFieldValue());
+    }
+
 }

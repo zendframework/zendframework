@@ -237,4 +237,27 @@ class RedisOptions extends AdapterOptions
     {
         return $this->getResourceManager()->getDatabase($this->getResourceId());
     }
+
+    /**
+     * Set resource password
+     *
+     * @param string $password Password
+     *
+     * @return RedisOptions
+     */
+    public function setPassword($password)
+    {
+        $this->getResourceManager()->setPassword($this->getResourceId(), $password);
+        return $this;
+    }
+
+    /**
+     * Get resource password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->getResourceManager()->getPassword($this->getResourceId());
+    }
 }

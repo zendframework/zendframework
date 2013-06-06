@@ -25,12 +25,12 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     /**
      * @var \Zend\Mvc\ApplicationInterface
      */
-    private $application;
+    protected $application;
 
     /**
      * @var array
      */
-    private $applicationConfig;
+    protected $applicationConfig;
 
     /**
      * Flag to use console router or not
@@ -42,7 +42,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * Flag console used before tests
      * @var bool
      */
-    private $usedConsoleBackup;
+    protected $usedConsoleBackup;
 
     /**
      * Trace error when exception is throwed in application

@@ -103,37 +103,37 @@ return array(
     // Zend\Validator\Explode
     "Invalid type given. String expected" => "Type invalide. Chaîne attendue",
 
-    // Zend\Validator\\File\Count
+    // Zend\Validator\File\Count
     "Too many files, maximum '%max%' are allowed but '%count%' are given" => "Trop de fichiers. '%max%' sont autorisés au maximum, mais '%count%' reçu(s)",
     "Too few files, minimum '%min%' are expected but '%count%' are given" => "Trop peu de fichiers. '%min%' sont attendus, mais '%count%' reçu(s)",
 
-    // Zend\Validator\\File\Crc32
+    // Zend\Validator\File\Crc32
     "File '%value%' does not match the given crc32 hashes" => "Le fichier '%value%' ne correspond pas aux sommes de contrôle CRC32 données",
     "A crc32 hash could not be evaluated for the given file" => "Une somme de contrôle CRC32 n'a pas pu être calculée pour le fichier",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
-    // Zend\Validator\\File\ExcludeExtension
+    // Zend\Validator\File\ExcludeExtension
     "File '%value%' has a false extension" => "Le fichier '%value%' a une mauvaise extension",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
-    // Zend\Validator\\File\Exists
+    // Zend\Validator\File\Exists
     "File '%value%' does not exist" => "Le fichier '%value%' n'existe pas",
 
-    // Zend\Validator\\File\Extension
+    // Zend\Validator\File\Extension
     "File '%value%' has a false extension" => "Le fichier '%value%' a une mauvaise extension",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
-    // Zend\Validator\\File\FilesSize
+    // Zend\Validator\File\FilesSize
     "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "Tous les fichiers devraient avoir une taille maximale de '%max%' mais une taille de '%size%' a été détectée",
     "All files in sum should have a minimum size of '%min%' but '%size%' were detected" => "Tous les fichiers devraient avoir une taille minimale de '%max%' mais une taille de '%size%' a été détectée",
     "One or more files can not be read" => "Un ou plusieurs fichiers ne peut pas être lu",
 
-    // Zend\Validator\\File\Hash
+    // Zend\Validator\File\Hash
     "File '%value%' does not match the given hashes" => "Le fichier '%value%' ne correspond pas aux sommes de contrôle données",
     "A hash could not be evaluated for the given file" => "Une somme de contrôle n'a pas pu être calculée pour le fichier",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
-    // Zend\Validator\\File\ImageSize
+    // Zend\Validator\File\ImageSize
     "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected" => "La largeur maximale pour l'image '%value%' devrait être '%maxwidth%', mais '%width%' détecté",
     "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected" => "La largeur minimale pour l'image '%value%' devrait être '%minwidth%', mais '%width%' détecté",
     "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected" => "La hauteur maximale pour l'image '%value%' devrait être '%maxheight%', mais '%height%' détecté",
@@ -141,35 +141,35 @@ return array(
     "The size of image '%value%' could not be detected" => "La taille de l'image '%value%' n'a pas pu être détectée",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
-    // Zend\Validator\\File\IsCompressed
+    // Zend\Validator\File\IsCompressed
     "File '%value%' is not compressed, '%type%' detected" => "Le fichier '%value%' n'est pas compressé, '%type%' détecté",
     "The mimetype of file '%value%' could not be detected" => "Le type MIME du fichier '%value%' n'a pas pu être détecté",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
-    // Zend\Validator\\File\IsImage
+    // Zend\Validator\File\IsImage
     "File '%value%' is no image, '%type%' detected" => "Le fichier '%value%' n'est pas une image, '%type%' détecté",
     "The mimetype of file '%value%' could not be detected" => "Le type MIME du fichier '%value%' n'a pas pu être détecté",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
-    // Zend\Validator\\File\Md5
+    // Zend\Validator\File\Md5
     "File '%value%' does not match the given md5 hashes" => "Le fichier '%value%' ne correspond pas aux sommes de contrôle MD5 données",
     "A md5 hash could not be evaluated for the given file" => "Une somme de contrôle MD5 n'a pas pu être calculée pour le fichier",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
-    // Zend\Validator\\File\MimeType
+    // Zend\Validator\File\MimeType
     "File '%value%' has a false mimetype of '%type%'" => "Le fichier '%value%' a un faux type MIME : '%type%'",
     "The mimetype of file '%value%' could not be detected" => "Le type MIME du fichier '%value%' n'a pas pu être détecté",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
-    // Zend\Validator\\File\NotExists
+    // Zend\Validator\File\NotExists
     "File '%value%' exists" => "Le fichier '%value%' existe",
 
-    // Zend\Validator\\File\Sha1
+    // Zend\Validator\File\Sha1
     "File '%value%' does not match the given sha1 hashes" => "Le fichier '%value%' ne correspond pas aux sommes de contrôle SHA1 données",
     "A sha1 hash could not be evaluated for the given file" => "Une somme de contrôle SHA1 n'a pas pu être calculée pour le fichier",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
-    // Zend\Validator\\File\Size
+    // Zend\Validator\File\Size
     "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected" => "La taille de fichier maximale pour '%value%' est '%max%', mais '%size%' détectée",
     "Minimum expected size for file '%value%' is '%min%' but '%size%' detected" => "La taille de fichier minimale pour '%value%' est '%min%', mais '%size%' détectée",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
@@ -198,7 +198,7 @@ return array(
     "File was not found" => "Le fichier n'a pas été trouvé",
     "Unknown error while uploading file" => "Erreur inconnue lors de l'envoi du fichier",
 
-    // Zend\Validator\\File\WordCount
+    // Zend\Validator\File\WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Trop de mots. '%max%' sont autorisés, '%count%' comptés",
     "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Pas assez de mots. '%min%' sont attendus, '%count%' comptés",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",

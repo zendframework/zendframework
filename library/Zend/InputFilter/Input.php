@@ -278,6 +278,7 @@ class Input implements InputInterface, EmptyContextInterface
     {
         $this->setAllowEmpty($input->allowEmpty());
         $this->setBreakOnFailure($input->breakOnFailure());
+        $this->setContinueIfEmpty($input->continueIfEmpty());
         $this->setErrorMessage($input->getErrorMessage());
         $this->setName($input->getName());
         $this->setRequired($input->isRequired());

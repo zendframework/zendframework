@@ -18,7 +18,7 @@ interface StrategyEnabledInterface
      *
      * @param string $name The name of the strategy to register.
      * @param StrategyInterface $strategy The strategy to register.
-     * @return HydratorInterface
+     * @return StrategyEnabledInterface
      */
     public function addStrategy($name, StrategyInterface $strategy);
 
@@ -42,7 +42,7 @@ interface StrategyEnabledInterface
      * Removes the strategy with the given name.
      *
      * @param string $name The name of the strategy to remove.
-     * @return HydratorInterface
+     * @return StrategyEnabledInterface
      */
     public function removeStrategy($name);
 }

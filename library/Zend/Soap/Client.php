@@ -180,7 +180,7 @@ class Client implements ServerClient
                     $this->setEncoding($value);
                     break;
 
-                case 'soapVersion':
+                case 'soapversion':
                 case 'soap_version':
                     $this->setSoapVersion($value);
                     break;

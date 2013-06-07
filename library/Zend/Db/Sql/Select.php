@@ -432,7 +432,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function combine(Select $select, $type = self::COMBINE_UNION, $modifier = '')
     {
         if ($this->combine !== array()) {
-            throw new Exception\InvalidArgumentException('This Select object is already combined and cannot be combined with multiple Selects');
+            throw new Exception\InvalidArgumentException('This Select object is already combined and cannot be combined with multiple Selects objects');
         }
         $this->combine = array(
             'select' => $select,
@@ -923,12 +923,19 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if ($this->combine == array()) {
             return null;
         }
+
+        $type = $this->combine['type'];
+        if ($this->combine['modifier']) {
+            $type .= ' ' . $this->combine['modifier'];
+        }
+        $type = strtoupper($type);
+
         if ($driver) {
             $sql = $this->processSubSelect($this->combine['select'], $platform, $driver, $parameterContainer);
-            return array(strtoupper($this->combine['type']), $sql);
+            return array($type, $sql);
         }
         return array(
-            strtoupper($this->combine['type']),
+            $type,
             $this->processSubSelect($this->combine['select'], $platform)
         );
     }

@@ -34,6 +34,9 @@ class SqliteMetadataTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        if (!extension_loaded('pdo_sqlite')) {
+            $this->markTestSkipped('I cannot test without the pdo_sqlite extension');
+        }
         $this->adapter = new Adapter(array(
             'driver' => 'Pdo',
             'dsn' => 'sqlite::memory:'

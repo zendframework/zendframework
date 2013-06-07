@@ -415,6 +415,34 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test combine() returns same Select object (is chainable)
+     * @covers Zend\Db\Sql\Select::combine
+     */
+    public function testCombine()
+    {
+        $select = new Select;
+        $combine = new Select;
+        $return = $select->combine($combine, $select::COMBINE_UNION, 'ALL');
+        $this->assertSame($select, $return);
+
+        return $return;
+    }
+
+    /**
+     * @testdox unit test: Test getRawState() returns information populated via combine()
+     * @covers Zend\Db\Sql\Select::getRawState
+     * @depends testCombine
+     */
+    public function testGetRawStateViaCombine(Select $select)
+    {
+        $state = $select->getRawState('combine');
+        $this->assertInstanceOf('Zend\Db\Sql\Select', $state['select']);
+        $this->assertNotSame($select, $state['select']);
+        $this->assertEquals(Select::COMBINE_UNION, $state['type']);
+        $this->assertEquals('ALL', $state['modifier']);
+    }
+
+    /**
      * @testdox unit test: Test reset() resets internal stat of Select object, based on input
      * @covers Zend\Db\Sql\Select::reset
      */
@@ -558,6 +586,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
      * @covers Zend\Db\Sql\Select::processOrder
      * @covers Zend\Db\Sql\Select::processLimit
      * @covers Zend\Db\Sql\Select::processOffset
+     * @covers Zend\Db\Sql\Select::processCombine
      */
     public function testProcessMethods(Select $select, $unused, $unused2, $unused3, $internalTests)
     {
@@ -1041,6 +1070,17 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processSelect' => array(array(array('"bar"', '"bar"')), '"foo" AS "x"')
         );
 
+        $select44 = new Select;
+        $select44->from('foo')->where('a = b');
+        $select44b = new Select;
+        $select44b->from('bar')->where('c = d');
+        $select44->combine($select44b, Select::COMBINE_UNION, 'ALL');
+        $sqlPrep44 = // same
+        $sqlStr44 = '( SELECT "foo".* FROM "foo" WHERE a = b ) UNION ALL ( SELECT "bar".* FROM "bar" WHERE c = d )';
+        $internalTests44 = array(
+            'processCombine' => array('UNION ALL', 'SELECT "bar".* FROM "bar" WHERE c = d')
+        );
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -1095,6 +1135,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select41, $sqlPrep41, array(),    $sqlStr41, $internalTests41),
             array($select42, $sqlPrep42, array(),    $sqlStr42, $internalTests42),
             array($select43, $sqlPrep43, array(),    $sqlStr43, $internalTests43),
+            array($select44, $sqlPrep44, array(),    $sqlStr44, $internalTests44),
         );
     }
 }

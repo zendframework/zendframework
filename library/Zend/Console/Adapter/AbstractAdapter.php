@@ -53,7 +53,11 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function write($text, $color = null, $bgColor = null)
     {
-        if ($color !== null || $bgColor !== null) {
+
+    	//Encode text to match console encoding
+    	$text = $this->encodeText($text);
+
+    	if ($color !== null || $bgColor !== null) {
             echo $this->colorize($text, $color, $bgColor);
         } else {
             echo $text;
@@ -496,5 +500,30 @@ abstract class AbstractAdapter implements AdapterInterface
         } while ("" === $char || ($mask !== null && false === strstr($mask, $char)));
         fclose($f);
         return $char;
+    }
+
+    /**
+     * Encode a text to match console encoding
+     *
+     * @param string   $text
+     * @return string the encoding text
+     */
+    public function encodeText($text)
+    {
+    	$textIsUtf8 = StringUtils::isValidUtf8($text);
+
+    	if($this->isUtf8()){
+    		if($textIsUtf8){
+    			return $text;
+    		}
+    		else{
+    			return utf8_encode($text);
+    		}
+    	}
+    	else if($textIsUtf8){
+    		return utf8_decode($text);
+    	}
+
+    	return $text;
     }
 }

@@ -66,9 +66,15 @@ class DefaultRenderingStrategy extends AbstractListenerAggregate
             $responseText .= $result->getVariable(ConsoleViewModel::RESULT);
         }
 
-        // Append console response to response object
+        // Fetch service manager
+        $sm = $e->getApplication()->getServiceManager();
+
+        // Fetch console
+        $console = $sm->get('console');
+
+        // Append console encoded response to response object
         $response->setContent(
-            $response->getContent() . $responseText
+             $console->encodeText($response->getContent() . $responseText)
         );
 
         // Pass on console-specific options

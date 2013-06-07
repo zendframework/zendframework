@@ -191,6 +191,26 @@ class RedisTest extends CommonAdapterTest
         );
     }
 
+    public function testGetSetLibOptions()
+    {
+        $options = array('serializer', RedisResource::SERIALIZER_PHP);
+        $this->_options->setLibOptions($options);
+
+        $value  = array('value');
+        $key    = 'key';
+        //test if it's still possible to set/get item and if lib serializer works
+        $this->_storage->setItem($key, $value);
+        $this->assertEquals($value, $this->_storage->getItem($key), 'this->_storage should return an array, lib options were not set correctly');
+
+
+        $options = array('serializer', RedisResource::SERIALIZER_NONE);
+        $this->_options->setLibOptions($options);
+        $this->_storage = $this->_storage;
+        $this->_storage->setItem($key, $value);
+        //should not serialize array correctly
+        $this->assertFalse(is_array($this->_storage->getItem($key)), 'Redis should not serialize automatically anymore, lib options were not set correctly');
+    }
+
     /* RedisOptions */
 
     public function testGetSetNamespace()

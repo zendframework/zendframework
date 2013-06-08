@@ -147,11 +147,11 @@ class Logger implements LoggerInterface
             }
 
             if (isset($options['exceptionhandler']) && $options['exceptionhandler'] === true) {
-                self::registerExceptionHandler($this);
+                static::registerExceptionHandler($this);
             }
 
             if (isset($options['errorhandler']) && $options['errorhandler'] === true) {
-                self::registerErrorHandler($this);
+                static::registerErrorHandler($this);
             }
 
         }

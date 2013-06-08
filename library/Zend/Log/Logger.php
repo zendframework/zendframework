@@ -517,16 +517,16 @@ class Logger implements LoggerInterface
             return false;
         }
 
-        $errorHandlerMap = static::$errorPriorityMap;
+        $errorPriorityMap = static::$errorPriorityMap;
 
         $previous = set_error_handler(function ($level, $message, $file, $line)
-            use ($logger, $errorHandlerMap, $continueNativeHandler)
+            use ($logger, $errorPriorityMap, $continueNativeHandler)
         {
             $iniLevel = error_reporting();
 
             if ($iniLevel & $level) {
-                if (isset(Logger::$errorPriorityMap[$level])) {
-                    $priority = $errorHandlerMap[$level];
+                if (isset($errorPriorityMap[$level])) {
+                    $priority = $errorPriorityMap[$level];
                 } else {
                     $priority = Logger::INFO;
                 }

@@ -11,6 +11,7 @@ namespace Zend\Log\Formatter;
 
 use DateTime;
 use Traversable;
+use Zend\Stdlib\ErrorHandler;
 
 class Base implements FormatterInterface
 {
@@ -75,15 +76,12 @@ class Base implements FormatterInterface
             return $value;
         }
 
+        ErrorHandler::start();
         if ($value instanceof DateTime) {
             $value = $value->format($this->getDateTimeFormat());
-        } elseif (is_array($value) || $value instanceof Traversable) {
-            if ($value instanceof Traversable) {
-                $value = iterator_to_array($value);
-            }
-            foreach ($value as $key => $subvalue) {
-                $value[$key] = $this->normalize($subvalue);
-            }
+        } elseif ($value instanceof Traversable) {
+            $value = json_encode(iterator_to_array($value));
+        } elseif (is_array($value)) {
             $value = json_encode($value);
         } elseif (is_object($value) && !method_exists($value, '__toString')) {
             $value = sprintf('object(%s) %s', get_class($value), json_encode($value));
@@ -92,6 +90,7 @@ class Base implements FormatterInterface
         } elseif (!is_object($value)) {
             $value = gettype($value);
         }
+        ErrorHandler::stop();
 
         return (string) $value;
     }

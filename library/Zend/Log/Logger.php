@@ -519,7 +519,7 @@ class Logger implements LoggerInterface
 
         $errorHandlerMap = static::$errorPriorityMap;
 
-        $previous = set_error_handler(function ($level, $message, $file, $line, $context)
+        $previous = set_error_handler(function ($level, $message, $file, $line)
             use ($logger, $errorHandlerMap, $continueNativeHandler)
         {
             $iniLevel = error_reporting();
@@ -534,7 +534,6 @@ class Logger implements LoggerInterface
                     'errno'   => $level,
                     'file'    => $file,
                     'line'    => $line,
-                    'context' => $context,
                 ));
             }
 

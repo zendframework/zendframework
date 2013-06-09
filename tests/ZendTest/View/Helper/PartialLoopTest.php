@@ -156,6 +156,22 @@ class PartialLoopTest extends TestCase
         }
     }
 
+    /**
+     * @return void
+     */
+    public function testPassingNullDataThrowsExcpetion()
+    {
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $this->helper->setView($view);
+
+        try {
+            $result = $this->helper->__invoke('partialLoop.phtml', null);
+            $this->fail('PartialLoop should throw exception when passed null data.');
+        } catch (\Zend\View\Exception\InvalidArgumentException $e) {
+        }
+    }
+
     public function testPassingNoArgsReturnsHelperInstance()
     {
         $test = $this->helper->__invoke();

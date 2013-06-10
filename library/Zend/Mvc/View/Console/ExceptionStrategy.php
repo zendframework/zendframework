@@ -39,8 +39,21 @@ class ExceptionStrategy extends AbstractListenerAggregate
 :stack
 ======================================================================
    Previous Exception(s):
-======================================================================
 :previous
+
+EOT;
+
+    /**
+     * A template for message to show in console when an exception has previous exceptions.
+     * @var string
+     */
+    protected $previousMessage = <<<EOT
+======================================================================
+ :className
+ :message
+----------------------------------------------------------------------
+:file::line
+:stack
 
 EOT;
 
@@ -112,6 +125,26 @@ EOT;
     }
 
     /**
+     * Sets template for previous message that will be shown in Console.
+     *
+     * @param string $previousMessage
+     * @return ExceptionStrategy
+     */
+    public function setPreviousMessage($previousMessage)
+    {
+        $this->previousMessage = $previousMessage;
+        return $this;
+    }
+
+    /**
+     * @return callable|string
+     */
+    public function getPreviousMessage()
+    {
+        return $this->previousMessage;
+    }
+
+    /**
      * Create an exception view model, and set the HTTP status code
      *
      * @todo   dispatch.error does not halt dispatch unless a response is
@@ -152,6 +185,30 @@ EOT;
                     $callback = $this->message;
                     $message = (string) $callback($exception, $this->displayExceptions);
                 } elseif ($this->displayExceptions && $exception instanceof \Exception) {
+                    $previous = '';
+                    $previousException = $exception->getPrevious();
+                    while($previousException) {
+                        $previous .= str_replace(
+                            array(
+                                ':className',
+                                ':message',
+                                ':code',
+                                ':file',
+                                ':line',
+                                ':stack',
+                            ),array(
+                                get_class($previousException),
+                                $previousException->getMessage(),
+                                $previousException->getCode(),
+                                $previousException->getFile(),
+                                $previousException->getLine(),
+                                $exception->getTraceAsString(),
+                            ),
+                            $this->previousMessage
+                        );
+                        $previousException = $previousException->getPrevious();
+                    }
+
                     /* @var $exception \Exception */
                     $message = str_replace(
                         array(
@@ -169,7 +226,7 @@ EOT;
                             $exception->getFile(),
                             $exception->getLine(),
                             $exception->getTraceAsString(),
-                            $exception->getPrevious(),
+                            $previous
                         ),
                         $this->message
                     );

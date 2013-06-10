@@ -191,7 +191,7 @@ class RedisTest extends CommonAdapterTest
         );
     }
 
-    public function testGetSetLibOptions()
+    public function testGetSetLibOptionsOnExistingRedisResourceInstance()
     {
         $options = array('serializer', RedisResource::SERIALIZER_PHP);
         $this->_options->setLibOptions($options);
@@ -200,15 +200,34 @@ class RedisTest extends CommonAdapterTest
         $key    = 'key';
         //test if it's still possible to set/get item and if lib serializer works
         $this->_storage->setItem($key, $value);
-        $this->assertEquals($value, $this->_storage->getItem($key), 'this->_storage should return an array, lib options were not set correctly');
+        $this->assertEquals($value, $this->_storage->getItem($key), 'Redis should return an array, lib options were not set correctly');
 
 
         $options = array('serializer', RedisResource::SERIALIZER_NONE);
         $this->_options->setLibOptions($options);
-        $this->_storage = $this->_storage;
         $this->_storage->setItem($key, $value);
         //should not serialize array correctly
         $this->assertFalse(is_array($this->_storage->getItem($key)), 'Redis should not serialize automatically anymore, lib options were not set correctly');
+    }
+
+    public function testGetSetLibOptionsWithCleanRedisResourceInstance()
+    {
+        $options = array('serializer', RedisResource::SERIALIZER_PHP);
+        $this->_options->setLibOptions($options);
+
+        $redis = new Cache\Storage\Adapter\Redis($this->_options);
+        $value  = array('value');
+        $key    = 'key';
+        //test if it's still possible to set/get item and if lib serializer works
+        $redis->setItem($key, $value);
+        $this->assertEquals($value, $redis->getItem($key), 'Redis should return an array, lib options were not set correctly');
+
+
+        $options = array('serializer', RedisResource::SERIALIZER_NONE);
+        $this->_options->setLibOptions($options);
+        $redis->setItem($key, $value);
+        //should not serialize array correctly
+        $this->assertFalse(is_array($redis->getItem($key)), 'Redis should not serialize automatically anymore, lib options were not set correctly');
     }
 
     /* RedisOptions */

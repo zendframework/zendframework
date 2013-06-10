@@ -16,7 +16,8 @@
         "php": ">=5.3.3",
         "zendframework/zend-loader": "self.version",
         "zendframework/zend-stdlib": "self.version",
-        "zendframework/zend-uri": "self.version"
+        "zendframework/zend-uri": "self.version",
+        "zendframework/zend-validator": "self.version"
     },
     "extra": {
         "branch-alias": {

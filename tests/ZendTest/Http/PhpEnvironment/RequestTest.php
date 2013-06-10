@@ -326,6 +326,26 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
+                    'SERVER_NAME' => 'test.example.com',
+                    'HTTP_HOST' => 'requested.example.com',
+                    'REQUEST_URI' => 'http://test.example.com/news',
+                ),
+                'requested.example.com',
+                '80',
+                '/news',
+            ),
+            array(
+                array(
+                    'SERVER_NAME' => 'test.example.com',
+                    'HTTP_HOST' => '<script>alert("Spoofed host");</script>',
+                    'REQUEST_URI' => 'http://test.example.com/news',
+                ),
+                'test.example.com',
+                '80',
+                '/news',
+            ),
+            array(
+                array(
                     'SERVER_NAME' => '[1:2:3:4:5:6::6]',
                     'SERVER_ADDR' => '1:2:3:4:5:6::6',
                     'SERVER_PORT' => '80',

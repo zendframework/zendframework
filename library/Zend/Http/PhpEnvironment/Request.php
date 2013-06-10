@@ -257,7 +257,33 @@ class Request extends HttpRequest
         // URI host & port
         $host = null;
         $port = null;
-        if (isset($this->serverParams['SERVER_NAME'])) {
+
+        // Set the host
+        if ($this->getHeaders()->get('host')) {
+            $host = $this->getHeaders()->get('host')->getFieldValue();
+
+            // works for regname, IPv4 & IPv6
+            if (preg_match('|\:(\d+)$|', $host, $matches)) {
+                $host = substr($host, 0, -1 * (strlen($matches[1]) + 1));
+                $port = (int) $matches[1];
+            }
+
+            // set up a validator that check if the hostname is legal (not spoofed)
+            $hostnameValidator = new \Zend\Validator\Hostname(
+                array(
+                    'allow'=>\Zend\Validator\Hostname::ALLOW_ALL,
+                    'useIdnCheck'=>false,
+                    'useTldCheck'=>false
+                )
+            );
+            // If invalid. Reset the host & port
+            if (!$hostnameValidator->isValid($host)) {
+                $host = null;
+                $port = null;
+            }
+        }
+
+        if (!$host && isset($this->serverParams['SERVER_NAME'])) {
             $host = $this->serverParams['SERVER_NAME'];
             if (isset($this->serverParams['SERVER_PORT'])) {
                 $port = (int) $this->serverParams['SERVER_PORT'];
@@ -271,13 +297,6 @@ class Request extends HttpRequest
                     // Unset the port so the default port can be used
                     $port = null;
                 }
-            }
-        } elseif ($this->getHeaders()->get('host')) {
-            $host = $this->getHeaders()->get('host')->getFieldValue();
-            // works for regname, IPv4 & IPv6
-            if (preg_match('|\:(\d+)$|', $host, $matches)) {
-                $host = substr($host, 0, -1 * (strlen($matches[1]) + 1));
-                $port = (int) $matches[1];
             }
         }
         $uri->setHost($host);

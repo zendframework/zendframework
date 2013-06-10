@@ -206,14 +206,16 @@ class Fieldset extends Element implements FieldsetInterface
     /**
      * Retrieve a named element or fieldset
      *
-     * @todo   Should this raise an exception if no entry is found?
      * @param  string $elementOrFieldset
      * @return ElementInterface
      */
     public function get($elementOrFieldset)
     {
         if (!$this->has($elementOrFieldset)) {
-            return null;
+            throw new Exception\InvalidElementException(sprintf(
+                "No element by the name of [%s] found in form",
+                $elementOrFieldset
+            ));
         }
         return $this->byName[$elementOrFieldset];
     }

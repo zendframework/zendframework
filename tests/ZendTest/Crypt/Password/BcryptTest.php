@@ -134,7 +134,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
             );
             $this->bcrypt->verify('test', $hash);
         } else {
-            $this->skip('Test requires PHP which does not support $2y hashes (<5.3.7)');
+            $this->markTestSkipped('Test requires PHP which does not support $2y hashes (<5.3.7)');
         }
     }
 

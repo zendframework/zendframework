@@ -443,10 +443,12 @@ class FieldsetTest extends TestCase
         $this->assertEquals('bar', $option);
     }
 
-    public function testGetReturnsNull()
+    /**
+     * @expectedException Zend\Form\Exception\InvalidElementException
+     */
+    public function testShouldThrowExceptionWhenGetInvalidElement()
     {
-        $foo = $this->fieldset->get('foo');
-        $this->assertNull($foo);
+        $this->fieldset->get('doesnt_exist');
     }
 
     public function testBindValuesHasNoName()

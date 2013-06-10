@@ -259,7 +259,6 @@ class RedisResourceManager
         $this->normalizeLibOptions($libOptions);
         $resource = & $this->resources[$id];
 
-        //this needs reconnect and reinitialization of an resource
         $resource['lib_options'] = $libOptions;
 
         if ($resource['resource'] instanceof RedisResource) {

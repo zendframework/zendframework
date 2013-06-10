@@ -68,7 +68,7 @@ class Redis extends AbstractAdapter implements
 
         // reset initialized flag on update option(s)
         $initialized = & $this->initialized;
-        $this->getEventManager()->attach(array('option'), function ($event) use (& $initialized) {
+        $this->getEventManager()->attach('option', function ($event) use (& $initialized) {
             $initialized = false;
         });
     }

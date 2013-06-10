@@ -399,7 +399,11 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if (is_numeric($limit)) {
             $this->limit = $limit;
         } else {
-            throw new Exception\InvalidArgumentException('Invalid value for Limit.');
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects parameter to be numeric, "%s" given',
+                __METHOD__,
+                (is_object($limit) ? get_class($limit) : gettype($limit))
+            ));
         }
         return $this;
     }
@@ -413,7 +417,11 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if (is_numeric($offset)) {
             $this->offset = $offset;
         } else {
-            throw new Exception\InvalidArgumentException('Invalid value for Offset.');
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects parameter to be numeric, "%s" given',
+                __METHOD__,
+                (is_object($offset) ? get_class($offset) : gettype($offset))
+            ));
         }
         return $this;
     }

@@ -396,9 +396,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function limit($limit)
     {
-        if(is_numeric($limit)){
+        if (is_numeric($limit)) {
             $this->limit = $limit;
-        }else{
+        } else {
             throw new Exception\InvalidArgumentException('Invalid value for Limit.');
         }
         return $this;
@@ -410,9 +410,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function offset($offset)
     {
-        if(is_numeric($offset)){
-    	    $this->offset = $offset;
-        }else{
+        if (is_numeric($offset)) {
+            $this->offset = $offset;
+        } else {
             throw new Exception\InvalidArgumentException('Invalid value for Offset.');
         }
         return $this;

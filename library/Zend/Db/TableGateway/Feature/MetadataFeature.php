@@ -12,6 +12,7 @@ namespace Zend\Db\TableGateway\Feature;
 use Zend\Db\Metadata\Metadata;
 use Zend\Db\Metadata\MetadataInterface;
 use Zend\Db\TableGateway\Exception;
+use Zend\Db\Metadata\Object\TableObject;
 
 class MetadataFeature extends AbstractFeature
 {
@@ -54,7 +55,11 @@ class MetadataFeature extends AbstractFeature
         // set locally
         $this->sharedData['metadata']['columns'] = $columns;
 
-        // process primary key
+        // process primary key only if table is a table; there are no PK constraints on views
+        if (!($m->getTable($t->table) instanceof TableObject)) {
+            return;
+        }
+
         $pkc = null;
 
         foreach ($m->getConstraints($t->table) as $constraint) {

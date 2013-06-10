@@ -21,7 +21,7 @@
  */
 return array(
     // Zend_Captcha_ReCaptcha
-    "Missing captcha fields" => "沒有找到驗證碼區域",
+    "Missing captcha fields" => "請輸入驗證碼",
     "Failed to validate captcha" => "驗證碼校驗失敗",
     "Captcha value is wrong: %value%" => "驗證碼不匹配: %value%",
 

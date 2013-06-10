@@ -121,7 +121,7 @@ class Bcrypt implements PasswordInterface
             /* This should only happen if the algorithm that generated hash is
              * either unsupported by this version of crypt(), or is invalid.
              *
-             * An example of when this can happen, is if you generate 
+             * An example of when this can happen, is if you generate
              * non-backwards-compatible hashes on 5.3.7+, and then try to verify
              * them on < 5.3.7.
              *

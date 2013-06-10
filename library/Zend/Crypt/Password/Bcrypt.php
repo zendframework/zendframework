@@ -117,7 +117,7 @@ class Bcrypt implements PasswordInterface
         if ($result === $hash) {
             return true;
         }
-        if (strlen($result) <= strlen($hash)) {
+        if (strlen($result) <= 13) {
             /* This should only happen if the algorithm that generated hash is
              * either unsupported by this version of crypt(), or is invalid.
              *

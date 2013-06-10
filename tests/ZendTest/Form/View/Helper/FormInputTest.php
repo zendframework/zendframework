@@ -183,6 +183,12 @@ class FormInputTest extends CommonTestCase
             array('ontimeupdate', 'assertContains'),
             array('onvolumechange', 'assertContains'),
             array('onwaiting', 'assertContains'),
+        );
+    }
+
+    public function validAttributes2()
+    {
+        return array(
             array('pattern', 'assertContains'),
             array('placeholder', 'assertContains'),
             array('readonly', 'assertContains'),
@@ -324,6 +330,27 @@ class FormInputTest extends CommonTestCase
      * @dataProvider validAttributes
      */
     public function testAllValidFormMarkupAttributesPresentInElementAreRendered($attribute, $assertion)
+    {
+        $element = $this->getCompleteElement();
+        $markup  = $this->helper->render($element);
+        switch ($attribute) {
+            case 'value':
+                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
+                break;
+            default:
+                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+                break;
+        }
+        $this->$assertion($expect, $markup);
+    }
+
+    /**
+     * Split into 2 as 5.3.3 was segfaulting, and the segfault appears to be due
+     * to number of items in the data provider.
+     *
+     * @dataProvider validAttributes2
+     */
+    public function testAllValidFormMarkupAttributesPresentInElementAreRendered2($attribute, $assertion)
     {
         $element = $this->getCompleteElement();
         $markup  = $this->helper->render($element);

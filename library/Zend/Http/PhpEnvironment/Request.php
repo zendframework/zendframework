@@ -14,6 +14,7 @@ use Zend\Http\Request as HttpRequest;
 use Zend\Stdlib\Parameters;
 use Zend\Stdlib\ParametersInterface;
 use Zend\Uri\Http as HttpUri;
+use Zend\Validator\Hostname as HostnameValidator;
 
 /**
  * HTTP Request for current PHP environment
@@ -269,13 +270,11 @@ class Request extends HttpRequest
             }
 
             // set up a validator that check if the hostname is legal (not spoofed)
-            $hostnameValidator = new \Zend\Validator\Hostname(
-                array(
-                    'allow'=>\Zend\Validator\Hostname::ALLOW_ALL,
-                    'useIdnCheck'=>false,
-                    'useTldCheck'=>false
-                )
-            );
+            $hostnameValidator = new HostnameValidator(array(
+                'allow'       => HostnameValidator::ALLOW_ALL,
+                'useIdnCheck' => false,
+                'useTldCheck' => false,
+            ));
             // If invalid. Reset the host & port
             if (!$hostnameValidator->isValid($host)) {
                 $host = null;

@@ -396,7 +396,11 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function limit($limit)
     {
-        $this->limit = (int) $limit;
+        if(is_numeric($limit)){
+            $this->limit = $limit;
+        }else{
+            throw new Exception\InvalidArgumentException('Invalid value for Limit.');
+        }
         return $this;
     }
 
@@ -406,7 +410,11 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function offset($offset)
     {
-        $this->offset = (int) $offset;
+        if(is_numeric($offset)){
+    	    $this->offset = $offset;
+        }else{
+            throw new Exception\InvalidArgumentException('Invalid value for Offset.');
+        }
         return $this;
     }
 
@@ -845,11 +853,14 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if ($this->limit === null) {
             return null;
         }
+        
+        $limit = (int) $this->limit;
+        
         if ($driver) {
             $sql = $driver->formatParameterName('limit');
-            $parameterContainer->offsetSet('limit', $this->limit, ParameterContainer::TYPE_INTEGER);
+            $parameterContainer->offsetSet('limit', $limit, ParameterContainer::TYPE_INTEGER);
         } else {
-            $sql = $platform->quoteValue($this->limit);
+            $sql = $platform->quoteValue($limit);
         }
 
         return array($sql);
@@ -860,12 +871,15 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if ($this->offset === null) {
             return null;
         }
+        
+        $offset = (int) $this->offset;
+        
         if ($driver) {
-            $parameterContainer->offsetSet('offset', $this->offset, ParameterContainer::TYPE_INTEGER);
+            $parameterContainer->offsetSet('offset', $offset, ParameterContainer::TYPE_INTEGER);
             return array($driver->formatParameterName('offset'));
         }
 
-        return array($platform->quoteValue($this->offset));
+        return array($platform->quoteValue($offset));
     }
 
     /**

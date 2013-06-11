@@ -408,6 +408,14 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function limit($limit)
     {
+        if (!is_numeric($limit)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects parameter to be numeric, "%s" given',
+                __METHOD__,
+                (is_object($limit) ? get_class($limit) : gettype($limit))
+            ));
+        }
+
         $this->limit = $limit;
         return $this;
     }
@@ -418,6 +426,14 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function offset($offset)
     {
+        if (!is_numeric($offset)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects parameter to be numeric, "%s" given',
+                __METHOD__,
+                (is_object($offset) ? get_class($offset) : gettype($offset))
+            ));
+        }
+
         $this->offset = $offset;
         return $this;
     }
@@ -895,11 +911,14 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if ($this->limit === null) {
             return null;
         }
+
+        $limit = (int) $this->limit;
+
         if ($driver) {
             $sql = $driver->formatParameterName('limit');
-            $parameterContainer->offsetSet('limit', $this->limit, ParameterContainer::TYPE_INTEGER);
+            $parameterContainer->offsetSet('limit', $limit, ParameterContainer::TYPE_INTEGER);
         } else {
-            $sql = $platform->quoteValue($this->limit);
+            $sql = $platform->quoteValue($limit);
         }
 
         return array($sql);
@@ -910,12 +929,15 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if ($this->offset === null) {
             return null;
         }
+
+        $offset = (int) $this->offset;
+
         if ($driver) {
-            $parameterContainer->offsetSet('offset', $this->offset, ParameterContainer::TYPE_INTEGER);
+            $parameterContainer->offsetSet('offset', $offset, ParameterContainer::TYPE_INTEGER);
             return array($driver->formatParameterName('offset'));
         }
 
-        return array($platform->quoteValue($this->offset));
+        return array($platform->quoteValue($offset));
     }
 
     protected function processCombine(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)

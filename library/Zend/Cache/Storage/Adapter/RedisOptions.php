@@ -172,6 +172,7 @@ class RedisOptions extends AdapterOptions
     */
     public function setLibOptions(array $libOptions)
     {
+        $this->triggerOptionEvent('lib_option', $libOptions);
         $this->getResourceManager()->setLibOptions($this->getResourceId(), $libOptions);
         return $this;
     }

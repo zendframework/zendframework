@@ -131,12 +131,16 @@ class Mvc extends AbstractPage
                     $myParams['action'] = $this->action;
                 }
 
-                if (null !== $this->getRoute()
-                    && $this->routeMatch->getMatchedRouteName() === $this->getRoute()
-                    && (count(array_intersect_assoc($reqParams, $myParams)) == count($myParams))
-                ) {
-                    $this->active = true;
-                    return true;
+                if (null !== $this->getRoute()) {
+                    $this->active = false;
+                    if (
+                        $this->routeMatch->getMatchedRouteName() === $this->getRoute()
+                        && (count(array_intersect_assoc($reqParams, $myParams)) == count($myParams))
+                    ) {
+                        $this->active = true;
+                    }
+
+                    return $this->active;
                 }
             }
 

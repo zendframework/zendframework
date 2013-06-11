@@ -297,7 +297,7 @@ class StandardConfig implements ConfigInterface
             throw new Exception\InvalidArgumentException('Invalid gc_probability; must be numeric');
         }
         $gcProbability = (int) $gcProbability;
-        if (1 > $gcProbability || 100 < $gcProbability) {
+        if (0 > $gcProbability || 100 < $gcProbability) {
             throw new Exception\InvalidArgumentException('Invalid gc_probability; must be a percentage');
         }
         $this->setOption('gc_probability', $gcProbability);

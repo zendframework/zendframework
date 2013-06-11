@@ -272,4 +272,14 @@ class InputTest extends TestCase
         $this->assertEquals(2, count($validators));
         $this->assertEquals($notEmptyMock, $validators[1]['instance']);
     }
+
+    public function testMergeRetainsContinueIfEmptyFlag()
+    {
+        $input = new Input('foo');
+        $input->setContinueIfEmpty(true);
+
+        $input2 = new Input('bar');
+        $input2->merge($input);
+        $this->assertTrue($input2->continueIfEmpty());
+    }
 }

@@ -98,4 +98,32 @@ class GreaterThanTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals($validator->getOption('messageVariables'),
                                      'messageVariables', $validator);
     }
+
+    public function testCorrectInclusiveMessageReturn()
+    {
+        $valuesToValidate = array(0, 0.5, 5, 10);
+
+        foreach ($valuesToValidate as $value) {
+            $validator = new GreaterThan(10);
+            $validator->isValid($value);
+            $message = $validator->getMessages();
+
+            $this->assertArrayHaskey('notGreaterThan', $message);
+            $this->assertEquals($message['notGreaterThan'], "The input is not greater than '10'");
+        }
+    }
+
+    public function testCorrectNotInclusiveMessageReturn()
+    {
+        $valuesToValidate = array(0, 0.5, 5, 9);
+
+        foreach ($valuesToValidate as $value) {
+            $validator = new GreaterThan(array('min' => 10, 'inclusive' => true));
+            $validator->isValid($value);
+            $message = $validator->getMessages();
+
+            $this->assertArrayHaskey('notGreaterThanInclusive', $message);
+            $this->assertEquals($message['notGreaterThanInclusive'], "The input is not greater or equal than '10'");
+        }
+    }
 }

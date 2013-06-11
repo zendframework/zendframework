@@ -218,7 +218,7 @@ class DocBlockGenerator extends AbstractGenerator
     public function generate()
     {
         if (!$this->isSourceDirty()) {
-            return $this->docCommentize($this->getSourceContent());
+            return $this->docCommentize(trim($this->getSourceContent()));
         }
 
         $output = '';

@@ -302,4 +302,14 @@ class InputTest extends TestCase
         $this->assertEmpty($this->input->getMessages());
         $this->assertSame($fallbackValue, $this->input->getValue());
     }
+
+    public function testMergeRetainsContinueIfEmptyFlag()
+    {
+        $input = new Input('foo');
+        $input->setContinueIfEmpty(true);
+
+        $input2 = new Input('bar');
+        $input2->merge($input);
+        $this->assertTrue($input2->continueIfEmpty());
+    }
 }

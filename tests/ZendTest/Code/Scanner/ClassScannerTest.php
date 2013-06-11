@@ -10,9 +10,10 @@
 
 namespace ZendTest\Code\Scanner;
 
-use Zend\Code\Scanner\FileScanner;
-use Zend\Code\Annotation;
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Code\Annotation;
+use Zend\Code\Scanner\FileScanner;
+use Zend\Stdlib\ErrorHandler;
 
 class ClassScannerTest extends TestCase
 {
@@ -69,11 +70,20 @@ class ClassScannerTest extends TestCase
         $this->assertContains('fooBarBaz', $class->getMethodNames());
     }
 
+    /**
+     * @todo Remove error handling once we remove deprecation warning from getConstants method
+     */
     public function testGetConstantsReturnsConstantNames()
     {
-        $file    = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
-        $class   = $file->getClass('ZendTest\Code\TestAsset\FooClass');
-        $this->assertContains('foo', $class->getConstants());
+        $file      = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
+        $class     = $file->getClass('ZendTest\Code\TestAsset\FooClass');
+
+        ErrorHandler::start(E_USER_DEPRECATED);
+        $constants = $class->getConstants();
+        $error = ErrorHandler::stop();
+
+        $this->assertInstanceOf('ErrorException', $error);
+        $this->assertContains('FOO', $constants);
     }
 
     public function testGetConstantsReturnsInstancesOfConstantScanner()

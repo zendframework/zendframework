@@ -1527,4 +1527,19 @@ class FormTest extends TestCase
         $this->form->remove('file_resource');
         $this->assertEquals($form, $this->form);
     }
+
+    public function testNestedFormElementNameWrapping()
+    {
+        //build form
+        $rootForm = new Form;
+        $leafForm = new Form('form');
+        $element = new Element('element');
+        $leafForm->setWrapElements(true);
+        $leafForm->add($element);
+        $rootForm->add($leafForm);
+
+        //prepare for view
+        $rootForm->prepare();
+        $this->assertEquals('form[element]', $element->getName());
+    }
 }

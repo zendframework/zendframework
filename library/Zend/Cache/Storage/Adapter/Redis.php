@@ -80,7 +80,6 @@ class Redis extends AbstractAdapter implements
      */
     protected function getRedisResource()
     {
-
         if (!$this->initialized) {
             $options = $this->getOptions();
 
@@ -222,9 +221,10 @@ class Redis extends AbstractAdapter implements
      */
     protected function internalSetItem(& $normalizedKey, & $value)
     {
+        $redis = $this->getRedisResource();
+        $ttl = $this->getOptions()->getTtl();
+
         try {
-            $redis = $this->getRedisResource();
-            $ttl = $this->getOptions()->getTtl();
             if ($ttl) {
                 if ($this->resourceManager->getMayorVersion($this->resourceId) < 2) {
                     throw new Exception\UnsupportedMethodCallException("To use ttl you need version >= 2.0.0");

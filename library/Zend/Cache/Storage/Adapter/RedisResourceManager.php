@@ -66,12 +66,12 @@ class RedisResourceManager
 
         $redis = new RedisResource();
 
+        $resource['resource'] = $redis;
+        $this->connect($resource);
+
         foreach ($resource['lib_options'] as $k => $v) {
             $redis->setOption($k, $v);
         }
-
-        $resource['resource'] = $redis;
-        $this->connect($resource);
 
         $info = $redis->info();
         $resource['version'] = $info['redis_version'];
@@ -107,6 +107,7 @@ class RedisResourceManager
         if (!$success) {
             throw new Exception\RuntimeException('Could not estabilish connection with Redis instance');
         }
+
         $resource['initialized'] = true;
         if ($resource['password']) {
             $redis->auth($resource['password']);
@@ -256,18 +257,19 @@ class RedisResourceManager
         }
 
         $this->normalizeLibOptions($libOptions);
-
         $resource = & $this->resources[$id];
-        if ($resource instanceof RedisResource) {
-            if (method_exists($resource, 'setOptions')) {
-                $resource->setOptions($libOptions);
+
+        $resource['lib_options'] = $libOptions;
+
+        if ($resource['resource'] instanceof RedisResource) {
+            $redis = & $resource['resource'];
+            if (method_exists($redis, 'setOptions')) {
+                $redis->setOptions($libOptions);
             } else {
                 foreach ($libOptions as $key => $value) {
-                    $resource->setOption($key, $value);
+                    $redis->setOption($key, $value);
                 }
             }
-        } else {
-            $resource['lib_options'] = $libOptions;
         }
 
         return $this;

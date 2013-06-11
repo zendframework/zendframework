@@ -121,4 +121,32 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($outputExpected, $formatter->format($event));
     }
+
+    public function testFormatNoInfiniteLoopOnSelfReferencingArrayValues()
+    {
+        $datetime  = new DateTime();
+        $formatter = new BaseFormatter();
+
+        $selfRefArr = array();
+        $selfRefArr['selfRefArr'] = & $selfRefArr;
+
+        $event = array(
+            'timestamp' => $datetime,
+            'priority'  => 1,
+            'message'   => 'tottakai',
+            'extra' => array(
+                'selfRefArr' => $selfRefArr,
+            ),
+        );
+        $outputExpected = array(
+            'timestamp' => $datetime->format($formatter->getDateTimeFormat()),
+            'priority'  => 1,
+            'message'   => 'tottakai',
+            'extra' => array(
+                'selfRefArr' => '{"selfRefArr":{"selfRefArr":null}}',
+            ),
+        );
+
+        $this->assertEquals($outputExpected, $formatter->format($event));
+    }
 }

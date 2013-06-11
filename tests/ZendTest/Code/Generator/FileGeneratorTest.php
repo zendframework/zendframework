@@ -298,4 +298,10 @@ EOS;
         $class = $fileGenerator->getClass('bar');
         $this->assertInstanceOf('Zend\Code\Generator\ClassGenerator', $class);
     }
+
+    public function testGeneratingFromAReflectedFilenameShouldRaiseExceptionIfFileDoesNotExist()
+    {
+        $this->setExpectedException('Zend\Code\Generator\Exception\InvalidArgumentException', 'found');
+        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/does/not/exist.really');
+    }
 }

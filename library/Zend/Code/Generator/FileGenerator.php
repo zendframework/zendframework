@@ -73,13 +73,14 @@ class FileGenerator extends AbstractGenerator
     {
         $realpath = realpath($filePath);
 
-        if (
-            $realpath === false
-            && ($realpath = FileReflection::findRealpathInIncludePath($filePath)) === false
-        ) {
+        if ($realpath === false) {
+            $realpath = stream_resolve_include_path($filePath);
+        }
+
+        if (!$realpath || !in_array($realPath, get_included_files())) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'No file for %s was found.',
-                $realpath
+                $filePath
             ));
         }
 

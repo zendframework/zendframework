@@ -68,7 +68,6 @@ class MethodGeneratorTest extends \PHPUnit_Framework_TestCase
      * Enter description here...
      *
      * @return bool
-     *
      */
     public function someMethod()
     {

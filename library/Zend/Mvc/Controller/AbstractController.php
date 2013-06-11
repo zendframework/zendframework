@@ -198,7 +198,7 @@ abstract class AbstractController implements
      */
     public function setEvent(Event $e)
     {
-        if ($e instanceof Event && !$e instanceof MvcEvent) {
+        if (!$e instanceof MvcEvent) {
             $eventParams = $e->getParams();
             $e = new MvcEvent();
             $e->setParams($eventParams);

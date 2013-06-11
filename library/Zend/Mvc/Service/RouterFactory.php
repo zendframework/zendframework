@@ -31,7 +31,8 @@ class RouterFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator, $cName = null, $rName = null)
     {
-        $config             = $serviceLocator->get('Config');
+        $config             = $serviceLocator->has('Config') ? $serviceLocator->get('Config') : array();
+        $routerClass        = null;
         $routerConfig       = array();
         $routePluginManager = $serviceLocator->get('RoutePluginManager');
 
@@ -43,22 +44,26 @@ class RouterFactory implements FactoryInterface
                 $routerConfig = $config['console']['router'];
             }
 
-            if (!isset($routerConfig['route_plugins'])) {
-                $routerConfig['route_plugins'] = $routePluginManager;
+            $routerClass = 'Zend\Mvc\Router\Console\SimpleRouteStack';
+        } else {
+            // This is an HTTP request, so use HTTP router
+            if (isset($config['router'])) {
+                $routerConfig = $config['router'];
             }
 
-            return ConsoleRouter::factory($routerConfig);
+            $routerClass = 'Zend\Mvc\Router\Http\TreeRouteStack';
         }
 
-        // This is an HTTP request, so use HTTP router
-        if (isset($config['router'])) {
-            $routerConfig = $config['router'];
+        if (isset($routerConfig['router_class']) && class_exists($routerConfig['router_class'])) {
+            $routerClass = $routerConfig['router_class'];
         }
 
         if (!isset($routerConfig['route_plugins'])) {
             $routerConfig['route_plugins'] = $routePluginManager;
         }
 
-        return HttpRouter::factory($routerConfig);
+        $factory = sprintf('%s::factory', $routerClass);
+
+        return call_user_func($factory, $routerConfig);
     }
 }

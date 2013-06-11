@@ -153,16 +153,100 @@ class DerivedClassScanner extends ClassScanner
     }
 
     /**
+     * Return a list of constant names
+     *
      * @return array
      */
-    public function getConstants()
+    public function getConstantNames()
     {
-        $constants = $this->classScanner->getConstants();
+        $constants = $this->classScanner->getConstantNames();
         foreach ($this->parentClassScanners as $pClassScanner) {
-            $constants = array_merge($constants, $pClassScanner->getConstants());
+            $constants = array_merge($constants, $pClassScanner->getConstantNames());
         }
 
         return $constants;
+    }
+
+    /**
+     * Return a list of constants
+     *
+     * @param  bool $namesOnly Set false to return instances of ConstantScanner
+     * @return array|ConstantScanner[]
+     */
+    public function getConstants($namesOnly = true)
+    {
+        if (true === $namesOnly) {
+            trigger_error('Use method getConstantNames() instead', E_USER_DEPRECATED);
+            return $this->getConstantNames();
+        }
+
+        $constants = $this->classScanner->getConstants();
+        foreach ($this->parentClassScanners as $pClassScanner) {
+            $constants = array_merge($constants, $pClassScanner->getConstants($namesOnly));
+        }
+
+        return $constants;
+    }
+
+    /**
+     * Return a single constant by given name or index of info
+     *
+     * @param  string|int $constantNameOrInfoIndex
+     * @throws Exception\InvalidArgumentException
+     * @return bool|ConstantScanner
+     */
+    public function getConstant($constantNameOrInfoIndex)
+    {
+        if ($this->classScanner->hasConstant($constantNameOrInfoIndex)) {
+            return $this->classScanner->getConstant($constantNameOrInfoIndex);
+        }
+
+        foreach ($this->parentClassScanners as $pClassScanner) {
+            if ($pClassScanner->hasConstant($constantNameOrInfoIndex)) {
+                return $pClassScanner->getConstant($constantNameOrInfoIndex);
+            }
+        }
+
+        throw new Exception\InvalidArgumentException(sprintf(
+            'Constant %s not found in %s',
+            $constantNameOrInfoIndex,
+            $this->classScanner->getName()
+        ));
+    }
+
+    /**
+     * Verify if class or parent class has constant
+     *
+     * @param  string $name
+     * @return bool
+     */
+    public function hasConstant($name)
+    {
+        if ($this->classScanner->hasConstant($name)) {
+            return true;
+        }
+        foreach ($this->parentClassScanners as $pClassScanner) {
+            if ($pClassScanner->hasConstant($name)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Return a list of property names
+     *
+     * @return array
+     */
+    public function getPropertyNames()
+    {
+        $properties = $this->classScanner->getPropertyNames();
+        foreach ($this->parentClassScanners as $pClassScanner) {
+            $properties = array_merge($properties, $pClassScanner->getPropertyNames());
+        }
+
+        return $properties;
     }
 
     /**
@@ -177,6 +261,52 @@ class DerivedClassScanner extends ClassScanner
         }
 
         return $properties;
+    }
+
+    /**
+     * Return a single property by given name or index of info
+     *
+     * @param  string|int $propertyNameOrInfoIndex
+     * @throws Exception\InvalidArgumentException
+     * @return bool|PropertyScanner
+     */
+    public function getProperty($propertyNameOrInfoIndex)
+    {
+        if ($this->classScanner->hasProperty($propertyNameOrInfoIndex)) {
+            return $this->classScanner->getProperty($propertyNameOrInfoIndex);
+        }
+
+        foreach ($this->parentClassScanners as $pClassScanner) {
+            if ($pClassScanner->hasProperty($propertyNameOrInfoIndex)) {
+                return $pClassScanner->getProperty($propertyNameOrInfoIndex);
+            }
+        }
+
+        throw new Exception\InvalidArgumentException(sprintf(
+            'Property %s not found in %s',
+            $propertyNameOrInfoIndex,
+            $this->classScanner->getName()
+        ));
+    }
+
+    /**
+     * Verify if class or parent class has property
+     *
+     * @param  string $name
+     * @return bool
+     */
+    public function hasProperty($name)
+    {
+        if ($this->classScanner->hasProperty($name)) {
+            return true;
+        }
+        foreach ($this->parentClassScanners as $pClassScanner) {
+            if ($pClassScanner->hasProperty($name)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -230,6 +360,8 @@ class DerivedClassScanner extends ClassScanner
     }
 
     /**
+     * Verify if class or parent class has method by given name
+     *
      * @param  string $name
      * @return bool
      */

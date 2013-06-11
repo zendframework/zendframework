@@ -13,6 +13,11 @@ abstract class FooClass implements \ArrayAccess, E\Blarg, Local\SubClass
     const BAR = 5;
     const FOO = self::BAR;
 
+    /**
+     * Constant comment
+     */
+    const BAZ = 'baz';
+
     protected static $bar = 'value';
     public $foo = 'value2';
 

@@ -631,4 +631,40 @@ class MvcTest extends TestCase
         $page->setUseRouteMatch(true);
         $this->assertEquals('/lmaoplane/index', $page->getHref());
     }
+
+    public function testMistakeDetectIsActiveOnIndexController()
+    {
+        $page = new Page\Mvc(
+            array(
+                'label' => 'some Label',
+                'route' => 'myRoute',
+            )
+        );
+
+        $route = new LiteralRoute('/foo');
+
+        $router = new TreeRouteStack;
+        $router->addRoute('myRoute', $route);
+
+        $routeMatch = new RouteMatch(
+            array(
+                ModuleRouteListener::MODULE_NAMESPACE => 'Application\Controller',
+                'controller' => 'index',
+                'action' => 'index'
+            )
+        );
+        $routeMatch->setMatchedRouteName('index');
+
+        $event = new MvcEvent();
+        $event->setRouter($router)
+            ->setRouteMatch($routeMatch);
+
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->onRoute($event);
+
+        $page->setRouter($event->getRouter());
+        $page->setRouteMatch($event->getRouteMatch());
+
+        $this->assertFalse($page->isActive());
+    }
 }

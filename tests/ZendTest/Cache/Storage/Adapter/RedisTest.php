@@ -261,4 +261,11 @@ class RedisTest extends CommonAdapterTest
         $this->assertEquals($database, $this->_options->getDatabase(), 'Database not set correctly using RedisOptions');
     }
 
+    public function testOptionsGetSetPassword()
+    {
+        $password = 'my-secret';
+        $this->_options->setPassword($password);
+        $this->assertEquals($password, $this->_options->getPassword(), 'Password was set incorrectly using RedisOptions');
+    }
+
 }

@@ -213,22 +213,27 @@ class Client implements ServerClient
                     $this->setHttpPassword($value);
                     break;
 
+                case 'proxyhost':
                 case 'proxy_host':
                     $this->setProxyHost($value);
                     break;
 
+                case 'proxyport':
                 case 'proxy_port':
                     $this->setProxyPort($value);
                     break;
 
+                case 'proxylogin':
                 case 'proxy_login':
                     $this->setProxyLogin($value);
                     break;
 
+                case 'proxypassword':
                 case 'proxy_password':
                     $this->setProxyPassword($value);
                     break;
 
+                case 'localcert':
                 case 'local_cert':
                     $this->setHttpsCertificate($value);
                     break;
@@ -241,6 +246,7 @@ class Client implements ServerClient
                     $this->setCompressionOptions($value);
                     break;
 
+                case 'streamcontext':
                 case 'stream_context':
                     $this->setStreamContext($value);
                     break;
@@ -249,6 +255,7 @@ class Client implements ServerClient
                     $this->setSoapFeatures($value);
                     break;
 
+                case 'cachewsdl':
                 case 'cache_wsdl':
                     $this->setWSDLCache($value);
                     break;
@@ -258,8 +265,8 @@ class Client implements ServerClient
                     $this->setUserAgent($value);
                     break;
 
-                case 'type_map':
                 case 'typemap':
+                case 'type_map':
                     $this->setTypemap($value);
                     break;
 

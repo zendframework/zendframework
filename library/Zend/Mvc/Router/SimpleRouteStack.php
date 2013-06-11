@@ -73,11 +73,12 @@ class SimpleRouteStack implements RouteStackInterface
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
 
-        $instance = new static();
-
+        $routePluginManager = null;
         if (isset($options['route_plugins'])) {
-            $instance->setRoutePluginManager($options['route_plugins']);
+            $routePluginManager = $options['route_plugins'];
         }
+
+        $instance = new static($routePluginManager);
 
         if (isset($options['routes'])) {
             $instance->addRoutes($options['routes']);

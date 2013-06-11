@@ -67,6 +67,12 @@ class StandardConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(20, $this->config->getGcProbability());
     }
 
+    public function testGcProbabilityCanBeSetToZero()
+    {
+        $this->config->setGcProbability(0);
+        $this->assertEquals(0, $this->config->getGcProbability());
+    }
+
     public function testSettingInvalidGcProbabilityRaisesException()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid gc_probability; must be numeric');

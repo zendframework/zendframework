@@ -50,6 +50,9 @@ class FormDateTest extends CommonTestCase
         $this->assertContains('type="date"', $markup);
     }
 
+    /**
+     * @return array
+     */
     public function validAttributes()
     {
         return array(
@@ -69,12 +72,6 @@ class FormDateTest extends CommonTestCase
             array('formtarget',     'assertNotContains'),
             array('height',         'assertNotContains'),
             array('list',           'assertContains'),
-        );
-    }
-
-    public function validAttributes2()
-    {
-        return array(
             array('max',            'assertContains'),
             array('maxlength',      'assertNotContains'),
             array('min',            'assertContains'),
@@ -131,28 +128,9 @@ class FormDateTest extends CommonTestCase
 
     /**
      * @dataProvider validAttributes
+     * @return void
      */
     public function testAllValidFormMarkupAttributesPresentInElementAreRendered($attribute, $assertion)
-    {
-        $element = $this->getCompleteElement();
-        $markup  = $this->helper->render($element);
-        switch ($attribute) {
-            case 'value':
-                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
-                break;
-            default:
-                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
-                break;
-        }
-        $this->$assertion($expect, $markup);
-    }
-
-    /**
-     * Split into two to fix a regression in PHPUnit when run under 5.3.3
-     *
-     * @dataProvider validAttributes2
-     */
-    public function testAllValidFormMarkupAttributesPresentInElementAreRendered2($attribute, $assertion)
     {
         $element = $this->getCompleteElement();
         $markup  = $this->helper->render($element);

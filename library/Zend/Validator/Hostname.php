@@ -140,6 +140,7 @@ class Hostname extends AbstractValidator
      * (.TH) Thailand http://www.iana.org/domains/idn-tables/tables/th_th-th_1.0.html
      * (.TM) Turkmenistan http://www.nic.tm/TM-IDN-Policy.pdf
      * (.TR) Turkey https://www.nic.tr/index.php
+     * (.UA) Ukraine http://www.iana.org/domains/idn-tables/tables/ua_cyrl_1.2.html
      * (.VE) Venice http://www.iana.org/domains/idn-tables/tables/ve_es_1.0.html
      * (.VN) Vietnam http://www.vnnic.vn/english/5-6-300-2-2-04-20071115.htm#1.%20Introduction
      *
@@ -247,6 +248,7 @@ class Hostname extends AbstractValidator
         'TM'  => array(1 => '/^[\x{002d}0-9a-zà-öø-ÿāăąćĉċčďđēėęěĝġģĥħīįĵķĺļľŀłńņňŋőœŕŗřśŝşšţťŧūŭůűųŵŷźżž]{1,63}$/iu'),
         'TW'  => 'Hostname/Cn.php',
         'TR'  => array(1 => '/^[\x{002d}0-9a-zğıüşöç]{1,63}$/iu'),
+        'UA'  => array(1 => '/^[\x{002d}0-9a-zабвгдежзийклмнопрстуфхцчшщъыьэюяѐёђѓєѕіїјљњћќѝўџґӂʼ]{1,63}$/iu'),
         'VE'  => array(1 => '/^[\x{002d}0-9a-záéíóúüñ]{1,63}$/iu'),
         'VN'  => array(1 => '/^[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯư\x{1EA0}-\x{1EF9}]{1,63}$/iu'),
         '中国' => 'Hostname/Cn.php',

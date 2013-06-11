@@ -112,14 +112,16 @@ class RedirectTest extends TestCase
     }
 
     /**
-     * @todo restore setExpectedException call into code prior to last line once we can drop 5.3.3 as a requirement
-     * @expectedException Zend\Mvc\Exception\RuntimeException
-     * @expectedExceptionMessage matched
+     * This block is required to bypass a PCRE bug in 5.3.3
+     *
+     * @todo   Remove once we no longer support 5.3.3
+     * @return void
      */
     public function testPluginWithRouteMatchesReturningNoMatchedRouteNameRaisesExceptionWhenNoRouteProvided()
     {
         $event = $this->controller->getEvent();
         $event->setRouteMatch(new RouteMatch(array()));
+        $this->setExpectedException('Zend\Mvc\Exception\RuntimeException', 'matched');
         $url = $this->plugin->toRoute();
     }
 

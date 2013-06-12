@@ -39,14 +39,17 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
+        $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $this->mockResult = $mockResult;
+
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $this->mockStatement = $mockStatement;
 
-        $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $this->mockStatement->expects($this->any())->method('execute')->will($this->returnValue($this->mockResult));
 
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
-        $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
+
         $mockPlatform = $this->getMock('Zend\Db\Adapter\Platform\PlatformInterface');
         $mockPlatform->expects($this->any())->method('getName')->will($this->returnValue('platform'));
         $mockAdapter = $this->getMockForAbstractClass(
@@ -59,10 +62,15 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
             array('prepareStatementForSqlObject', 'execute'),
             array($mockAdapter)
         );
-
         $this->mockSql = $mockSql;
+        $this->mockSql->expects($this->once())
+            ->method('prepareStatementForSqlObject')
+            ->with($this->isInstanceOf('Zend\Db\Sql\Select'))
+            ->will($this->returnValue($this->mockStatement));
+
+
         $this->mockSelect = $this->getMock('Zend\Db\Sql\Select');
-        $this->mockResult = $mockResult;
+
         $this->dbSelect = new DbSelect($this->mockSelect, $mockSql);
     }
 
@@ -76,11 +84,6 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
 
     public function testCount()
     {
-        $this->mockSql->expects($this->once())
-            ->method('prepareStatementForSqlObject')
-            ->with($this->isInstanceOf('Zend\Db\Sql\Select'))
-            ->will($this->returnValue($this->mockStatement));
-        $this->mockSql->expects($this->any())->method('execute')->will($this->returnValue($this->mockResult));
         $this->mockResult->expects($this->once())->method('current')->will($this->returnValue(array('c' => 5)));
 
         $this->mockSelect->expects($this->exactly(3))->method('reset'); // called for columns, limit, offset, order

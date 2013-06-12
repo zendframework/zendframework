@@ -48,7 +48,7 @@ class CallbackCache extends AbstractPattern
         $key     = $this->generateCallbackKey($callback, $args);
         $result  = $storage->getItem($key, $success);
         if ($success) {
-            if (!isset($result[0])) {
+            if (!array_key_exists(0, $result)) {
                 throw new Exception\RuntimeException("Invalid cached data for key '{$key}'");
             }
 

@@ -10,7 +10,6 @@
 namespace Zend\XmlRpc;
 
 use DateTime;
-use Zend\Math\BigInteger;
 
 /**
  * Represent a native XML-RPC value entity, used as parameters for the methods
@@ -277,17 +276,8 @@ abstract class AbstractValue
     protected static function _phpVarToNativeXmlRpc($value)
     {
         // @see http://framework.zend.com/issues/browse/ZF-8623
-        if (is_object($value)) {
-            if ($value instanceof AbstractValue) {
-                return $value;
-            }
-            if ($value instanceof BigInteger) {
-                throw new Exception\InvalidArgumentException(
-                    'Using Zend\Math\BigInteger to get an ' .
-                    'instance of Value_BigInteger is not ' .
-                    'available anymore.'
-                );
-            }
+        if ($value instanceof AbstractValue) {
+            return $value;
         }
 
         switch (static::getXmlRpcTypeByValue($value)) {

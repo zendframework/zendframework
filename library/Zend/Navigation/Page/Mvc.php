@@ -132,15 +132,15 @@ class Mvc extends AbstractPage
                 }
 
                 if (null !== $this->getRoute()) {
-                    $this->active = false;
                     if (
                         $this->routeMatch->getMatchedRouteName() === $this->getRoute()
                         && (count(array_intersect_assoc($reqParams, $myParams)) == count($myParams))
                     ) {
                         $this->active = true;
+                        return $this->active;
+                    } else {
+                        return parent::isActive($recursive);
                     }
-
-                    return $this->active;
                 }
             }
 

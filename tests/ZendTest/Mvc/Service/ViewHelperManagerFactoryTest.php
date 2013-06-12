@@ -21,9 +21,26 @@ class ViewHelperManagerFactoryTest extends TestCase
         $this->factory  = new ViewHelperManagerFactory();
     }
 
-    public function testDoctypeFactoryDoesNotRaiseErrorOnMissingConfiguration()
+    /**
+     * @return array
+     */
+    public function emptyConfiguration()
     {
-        $this->services->setService('Config', array());
+        return array(
+            'no-config'                => array(array()),
+            'view-manager-config-only' => array(array('view_manager' => array())),
+            'empty-doctype-config'     => array(array('view_manager' => array('doctype' => null))),
+        );
+    }
+
+    /**
+     * @dataProvider emptyConfiguration
+     * @param  array $config
+     * @return void
+     */
+    public function testDoctypeFactoryDoesNotRaiseErrorOnMissingConfiguration($config)
+    {
+        $this->services->setService('Config', $config);
         $manager = $this->factory->createService($this->services);
         $this->assertInstanceof('Zend\View\HelperPluginManager', $manager);
         $doctype = $manager->get('doctype');

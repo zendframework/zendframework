@@ -66,20 +66,22 @@ class FileGenerator extends AbstractGenerator
      *
      * @param  string $filePath
      * @param  bool $includeIfNotAlreadyIncluded
-     * @throws Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException If file does not exists
+     * @throes Exception\RuntimeException If file exists but is not included or required
      * @return FileGenerator
      */
     public static function fromReflectedFileName($filePath, $includeIfNotAlreadyIncluded = true)
     {
         $realpath = realpath($filePath);
 
-        if (
-            $realpath === false
-            && ($realpath = FileReflection::findRealpathInIncludePath($filePath)) === false
-        ) {
+        if ($realpath === false) {
+            $realpath = stream_resolve_include_path($filePath);
+        }
+
+        if (!$realpath) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'No file for %s was found.',
-                $realpath
+                $filePath
             ));
         }
 

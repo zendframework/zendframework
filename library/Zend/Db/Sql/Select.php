@@ -478,7 +478,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 $this->quantifier = null;
                 break;
             case self::COLUMNS:
-                $this->columns = array();
+                $this->columns = array(self::SQL_STAR);
                 break;
             case self::JOINS:
                 $this->joins = array();

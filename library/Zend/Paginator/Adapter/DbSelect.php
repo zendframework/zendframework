@@ -103,7 +103,6 @@ class DbSelect implements AdapterInterface
         }
 
         $select = clone $this->select;
-        $select->reset(Select::COLUMNS);
         $select->reset(Select::LIMIT);
         $select->reset(Select::OFFSET);
         $select->reset(Select::ORDER);

@@ -45,6 +45,7 @@ class Router implements RouteStackInterface
     public function assemble(array $params = array(), array $options = array())
     {
     }
+
     /**
      * Add a route to the stack.
      *

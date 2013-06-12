@@ -15,7 +15,10 @@ use SeekableIterator;
 use Zend\Tag\Exception\InvalidArgumentException;
 use Zend\Tag\Exception\OutOfBoundsException;
 
-class ItemList implements Countable, SeekableIterator, ArrayAccess
+class ItemList implements
+    Countable,
+    SeekableIterator,
+    ArrayAccess
 {
     /**
      * Items in this list

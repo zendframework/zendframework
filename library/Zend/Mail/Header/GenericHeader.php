@@ -9,7 +9,9 @@
 
 namespace Zend\Mail\Header;
 
-class GenericHeader implements HeaderInterface, UnstructuredInterface
+class GenericHeader implements
+    HeaderInterface,
+    UnstructuredInterface
 {
     /**
      * @var string

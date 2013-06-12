@@ -19,7 +19,9 @@ use Zend\Stdlib\Hydrator\HydratorInterface;
 /**
  * Aggregate hydrator that composes multiple hydrators via events
  */
-class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
+class AggregateHydrator implements
+    HydratorInterface,
+    EventManagerAwareInterface
 {
     const DEFAULT_PRIORITY = 1;
 

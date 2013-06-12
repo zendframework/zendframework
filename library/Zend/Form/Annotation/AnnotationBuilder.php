@@ -28,7 +28,9 @@ use Zend\Stdlib\ArrayUtils;
  * Parses a class' properties for annotations in order to create a form and
  * input filter definition.
  */
-class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareInterface
+class AnnotationBuilder implements
+    EventManagerAwareInterface,
+    FormFactoryAwareInterface
 {
     /**
      * @var AnnotationManager

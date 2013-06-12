@@ -20,7 +20,9 @@ use Zend\Stdlib\ErrorHandler;
  *
  * AbstractContainer class for Zend\Navigation\Page classes.
  */
-abstract class AbstractContainer implements Countable, RecursiveIterator
+abstract class AbstractContainer implements
+    Countable,
+    RecursiveIterator
 {
     /**
      * Contains sub pages

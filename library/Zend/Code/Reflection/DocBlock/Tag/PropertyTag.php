@@ -9,7 +9,9 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class PropertyTag implements TagInterface, PhpDocTypedTagInterface
+class PropertyTag implements
+    TagInterface,
+    PhpDocTypedTagInterface
 {
     /**
      * @var array

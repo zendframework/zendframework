@@ -11,7 +11,9 @@ namespace Zend\Db\Sql\Predicate;
 
 use Countable;
 
-class PredicateSet implements PredicateInterface, Countable
+class PredicateSet implements
+    PredicateInterface,
+    Countable
 {
     const COMBINED_BY_AND = 'AND';
     const OP_AND          = 'AND';

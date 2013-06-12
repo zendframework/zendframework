@@ -9,10 +9,13 @@
 
 namespace Zend\Db\Adapter\Driver\Oci8;
 
+use Iterator;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Adapter\Exception;
 
-class Result implements \Iterator, ResultInterface
+class Result implements
+    Iterator,
+    ResultInterface
 {
 
     /**

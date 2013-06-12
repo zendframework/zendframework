@@ -14,7 +14,9 @@ use Zend\Db\Adapter\Exception;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Profiler;
 
-class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
+class Statement implements
+    StatementInterface,
+    Profiler\ProfilerAwareInterface
 {
     /**
      * @var resource

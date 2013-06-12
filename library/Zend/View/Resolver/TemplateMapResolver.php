@@ -16,7 +16,9 @@ use Zend\Stdlib\ArrayUtils;
 use Zend\View\Exception;
 use Zend\View\Renderer\RendererInterface as Renderer;
 
-class TemplateMapResolver implements IteratorAggregate, ResolverInterface
+class TemplateMapResolver implements
+    IteratorAggregate,
+    ResolverInterface
 {
     /**
      * @var array

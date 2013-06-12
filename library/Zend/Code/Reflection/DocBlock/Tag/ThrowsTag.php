@@ -9,7 +9,9 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class ThrowsTag implements TagInterface, PhpDocTypedTagInterface
+class ThrowsTag implements
+    TagInterface,
+    PhpDocTypedTagInterface
 {
     /**
      * @var string

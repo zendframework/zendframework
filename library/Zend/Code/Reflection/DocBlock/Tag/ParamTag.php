@@ -9,7 +9,9 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class ParamTag implements TagInterface, PhpDocTypedTagInterface
+class ParamTag implements
+    TagInterface,
+    PhpDocTypedTagInterface
 {
     /**
      * @var array

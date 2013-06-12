@@ -14,7 +14,10 @@ use Countable;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\TableIdentifier;
 
-abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayInterface
+abstract class AbstractRowGateway implements
+    ArrayAccess,
+    Countable,
+    RowGatewayInterface
 {
 
     /**

@@ -20,7 +20,9 @@ use Zend\Stdlib\ErrorHandler;
  * A sockets based (stream\socket\client) adapter class for Zend\Http\Client. Can be used
  * on almost every PHP environment, and does not require any special extensions.
  */
-class Socket implements HttpAdapter, StreamInterface
+class Socket implements
+    HttpAdapter,
+    StreamInterface
 {
     /**
      * Map SSL transport wrappers to stream crypto method constants

@@ -14,7 +14,9 @@ use Zend\Mail\Headers;
 /**
  * @todo       Allow setting date from DateTime, Zend\Date, or string
  */
-class Received implements HeaderInterface, MultipleHeadersInterface
+class Received implements
+    HeaderInterface,
+    MultipleHeadersInterface
 {
     /**
      * @var string

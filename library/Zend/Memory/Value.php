@@ -18,7 +18,9 @@ use Countable;
  * It's an OO string wrapper.
  * Used to intercept string updates.
  */
-class Value implements ArrayAccess, Countable
+class Value implements
+    ArrayAccess,
+    Countable
 {
     /**
      * Value

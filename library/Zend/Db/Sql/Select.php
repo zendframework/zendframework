@@ -21,7 +21,9 @@ use Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform;
  * @property Where $where
  * @property Having $having
  */
-class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
+class Select extends AbstractSql implements
+    SqlInterface,
+    PreparableSqlInterface
 {
     /**#@+
      * Constant

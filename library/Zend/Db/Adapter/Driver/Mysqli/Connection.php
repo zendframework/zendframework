@@ -13,7 +13,9 @@ use Zend\Db\Adapter\Driver\ConnectionInterface;
 use Zend\Db\Adapter\Exception;
 use Zend\Db\Adapter\Profiler;
 
-class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
+class Connection implements
+    ConnectionInterface,
+    Profiler\ProfilerAwareInterface
 {
 
     /**

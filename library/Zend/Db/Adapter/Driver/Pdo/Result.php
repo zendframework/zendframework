@@ -14,7 +14,9 @@ use PDOStatement;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Adapter\Exception;
 
-class Result implements Iterator, ResultInterface
+class Result implements
+    Iterator,
+    ResultInterface
 {
 
     const STATEMENT_MODE_SCROLLABLE = 'scrollable';

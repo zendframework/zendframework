@@ -20,7 +20,9 @@ use Zend\Stdlib\ArrayUtils;
  * An adapter class for Zend\Http\Client based on the curl extension.
  * Curl requires libcurl. See for full requirements the PHP manual: http://php.net/curl
  */
-class Curl implements HttpAdapter, StreamInterface
+class Curl implements
+    HttpAdapter,
+    StreamInterface
 {
     /**
      * Parameters array

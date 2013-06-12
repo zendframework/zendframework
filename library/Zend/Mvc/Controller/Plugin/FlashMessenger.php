@@ -19,7 +19,9 @@ use Zend\Stdlib\SplQueue;
 /**
  * Flash Messenger - implement session-based messages
  */
-class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Countable
+class FlashMessenger extends AbstractPlugin implements
+    IteratorAggregate,
+    Countable
 {
     /**
      * Default messages namespace

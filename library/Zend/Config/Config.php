@@ -21,7 +21,10 @@ use Iterator;
  * Implements Countable, Iterator and ArrayAccess
  * to facilitate easy access to the data.
  */
-class Config implements Countable, Iterator, ArrayAccess
+class Config implements
+    Countable,
+    Iterator,
+    ArrayAccess
 {
     /**
      * Whether modifications to configuration data are allowed.

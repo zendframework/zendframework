@@ -13,7 +13,9 @@ use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Exception;
 use Zend\Db\Adapter\Profiler;
 
-class Pgsql implements DriverInterface, Profiler\ProfilerAwareInterface
+class Pgsql implements
+    DriverInterface,
+    Profiler\ProfilerAwareInterface
 {
     /**
      * @var Connection

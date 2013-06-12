@@ -12,7 +12,9 @@ namespace Zend\Mail;
 use Countable;
 use Iterator;
 
-class AddressList implements Countable, Iterator
+class AddressList implements
+    Countable,
+    Iterator
 {
     /**
      * List of Address objects we're managing

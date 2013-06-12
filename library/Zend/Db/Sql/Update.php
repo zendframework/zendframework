@@ -19,7 +19,9 @@ use Zend\Db\Adapter\StatementContainerInterface;
  *
  * @property Where $where
  */
-class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
+class Update extends AbstractSql implements
+    SqlInterface,
+    PreparableSqlInterface
 {
     /**@#++
      * @const

@@ -309,7 +309,7 @@ EOS;
     public function testGeneratingFromAReflectedFilenameShouldRaiseExceptionIfFileDoesNotExistInIncludePath()
     {
         $this->setExpectedException('Zend\Code\Generator\Exception\InvalidArgumentException', 'found');
-        FileGenerator::fromReflectedFileName('TwoInterface.php');
+        FileGenerator::fromReflectedFileName('an_empty_file.php');
     }
 
     public function testGeneratingFromAReflectedFilenameInIncludePathWithoutIncludeFlagEnable()
@@ -318,7 +318,7 @@ EOS;
         $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
 
         try {
-            FileGenerator::fromReflectedFileName('TwoInterface.php', false);
+            FileGenerator::fromReflectedFileName('an_empty_file.php', false);
             set_include_path($oldIncludePath);
             $this->fail('Should throw exception');
         } catch(Exception $e) {
@@ -329,11 +329,11 @@ EOS;
 
     public function testGeneratingFromAReflectedFilenameIncluded()
     {
-        include_once __DIR__ . '/TestAsset/TwoInterface.php';
+        include_once __DIR__ . '/TestAsset/an_empty_file.php';
         $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
 
         try {
-            FileGenerator::fromReflectedFileName('TwoInterface.php', false);
+            FileGenerator::fromReflectedFileName('an_empty_file.php', false);
             set_include_path($oldIncludePath);
         } catch(Exception $e) {
             set_include_path($oldIncludePath);
@@ -343,11 +343,11 @@ EOS;
 
     public function testGeneratingFromAReflectedFilenameInIncludePath()
     {
-        $this->assertFalse(in_array(realpath(__DIR__ . '/TestAsset/ThreeInterface.php'), get_included_files()));
+        $this->assertFalse(in_array(realpath(__DIR__ . '/TestAsset/a_second_empty_file.php'), get_included_files()));
         $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
 
         try {
-            FileGenerator::fromReflectedFileName('ThreeInterface.php');
+            FileGenerator::fromReflectedFileName('a_second_empty_file.php');
             set_include_path($oldIncludePath);
         } catch(Exception $e) {
             set_include_path($oldIncludePath);

@@ -35,6 +35,14 @@ class TestCallbackCache
 
 }
 
+class FailableCallback
+{
+    public function __invoke()
+    {
+        throw new \Exception('This callback should either fail or never be invoked');
+    }
+}
+
 /**
  * Test function
  * @see ZendTest\Cache\Pattern\Foo::bar
@@ -164,5 +172,18 @@ class CallbackCacheTest extends CommonPatternTest
         } else {
             $this->assertEquals('', $data);
         }
+    }
+
+    /**
+     * @group 4629
+     * @return void
+     */
+    public function testCallCanReturnCachedNullValues()
+    {
+        $callback = new FailableCallback();
+        $key      = $this->_pattern->generateKey($callback, array());
+        $this->_storage->setItem($key, array(null));
+        $value    = $this->_pattern->call($callback);
+        $this->assertNull($value);
     }
 }

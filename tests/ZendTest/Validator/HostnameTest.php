@@ -312,7 +312,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
 
         // Check TLD matching
         $valuesExpected = array(
-            array(true, array('xn--brger-kva.com')),
+            array(true, array('xn--brger-kva.com', 'xn--eckwd4c7cu47r2wf.jp')),
             array(false, array('xn--brger-x45d2va.com', 'xn--bürger.com', 'xn--'))
             );
         foreach ($valuesExpected as $element) {

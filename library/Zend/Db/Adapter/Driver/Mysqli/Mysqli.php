@@ -14,9 +14,7 @@ use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Exception;
 use Zend\Db\Adapter\Profiler;
 
-class Mysqli implements
-    DriverInterface,
-    Profiler\ProfilerAwareInterface
+class Mysqli implements DriverInterface, Profiler\ProfilerAwareInterface
 {
 
     /**

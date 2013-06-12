@@ -22,9 +22,7 @@ use Zend\View\Resolver\ResolverInterface as Resolver;
 /**
  * JSON renderer
  */
-class JsonRenderer implements
-    Renderer,
-    TreeRendererInterface
+class JsonRenderer implements Renderer, TreeRendererInterface
 {
     /**
      * Whether or not to merge child models with no capture-to value set

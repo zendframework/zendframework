@@ -19,9 +19,7 @@ use Zend\Db\Adapter\StatementContainerInterface;
  *
  * @property Where $where
  */
-class Delete extends AbstractSql implements
-    SqlInterface,
-    PreparableSqlInterface
+class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
     /**@#+
      * @const

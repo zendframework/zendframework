@@ -16,9 +16,7 @@ use Iterator;
 use IteratorAggregate;
 use Zend\Db\Adapter\Driver\ResultInterface;
 
-abstract class AbstractResultSet implements
-    Iterator,
-    ResultSetInterface
+abstract class AbstractResultSet implements Iterator, ResultSetInterface
 {
     /**
      * if -1, datasource is already buffered

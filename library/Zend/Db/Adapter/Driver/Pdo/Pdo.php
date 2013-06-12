@@ -16,10 +16,7 @@ use Zend\Db\Adapter\Driver\Feature\DriverFeatureInterface;
 use Zend\Db\Adapter\Exception;
 use Zend\Db\Adapter\Profiler;
 
-class Pdo implements
-    DriverInterface,
-    DriverFeatureInterface,
-    Profiler\ProfilerAwareInterface
+class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerAwareInterface
 {
     /**
      * @const

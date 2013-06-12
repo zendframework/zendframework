@@ -14,9 +14,7 @@ use Zend\Db\Adapter\Driver\Sqlsrv\Exception\ErrorException;
 use Zend\Db\Adapter\Exception;
 use Zend\Db\Adapter\Profiler;
 
-class Connection implements
-    ConnectionInterface,
-    Profiler\ProfilerAwareInterface
+class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 {
     /**
      * @var Sqlsrv

@@ -13,10 +13,7 @@ use ArrayAccess;
 use Countable;
 use Iterator;
 
-class ParameterContainer implements
-    Iterator,
-    ArrayAccess,
-    Countable
+class ParameterContainer implements Iterator, ArrayAccess, Countable
 {
 
     const TYPE_AUTO    = 'auto';

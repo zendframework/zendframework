@@ -15,9 +15,7 @@ use Zend\Form\FormInterface;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Csrf as CsrfValidator;
 
-class Csrf extends Element implements
-    InputProviderInterface,
-    ElementPrepareAwareInterface
+class Csrf extends Element implements InputProviderInterface, ElementPrepareAwareInterface
 {
     /**
      * Seed attributes

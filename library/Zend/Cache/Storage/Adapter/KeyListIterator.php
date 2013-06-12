@@ -13,9 +13,7 @@ use Countable;
 use Zend\Cache\Storage\IteratorInterface;
 use Zend\Cache\Storage\StorageInterface;
 
-class KeyListIterator implements
-    IteratorInterface,
-    Countable
+class KeyListIterator implements IteratorInterface, Countable
 {
 
     /**

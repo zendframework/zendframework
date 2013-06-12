@@ -14,9 +14,7 @@ use Zend\Mail\Headers;
 use Zend\Mail\Header\HeaderInterface;
 use Zend\Mime;
 
-class Part implements
-    RecursiveIterator,
-    Part\PartInterface
+class Part implements RecursiveIterator, Part\PartInterface
 {
     /**
      * Headers of the part

@@ -13,9 +13,7 @@ use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Exception;
 use Zend\Db\Adapter\Profiler;
 
-class Sqlsrv implements
-    DriverInterface,
-    Profiler\ProfilerAwareInterface
+class Sqlsrv implements DriverInterface, Profiler\ProfilerAwareInterface
 {
 
     /**

@@ -24,9 +24,7 @@ use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventsCapableInterface;
 
-abstract class AbstractAdapter implements
-    StorageInterface,
-    EventsCapableInterface
+abstract class AbstractAdapter implements StorageInterface, EventsCapableInterface
 {
     /**
      * The used EventManager if any

@@ -14,9 +14,7 @@ use Iterator;
 use LimitIterator;
 use Serializable;
 
-class SerializableLimitIterator extends LimitIterator implements
-    Serializable,
-    ArrayAccess
+class SerializableLimitIterator extends LimitIterator implements Serializable, ArrayAccess
 {
 
     /**

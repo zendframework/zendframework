@@ -13,9 +13,7 @@ use Zend\Filter\FilterChain;
 use Zend\Validator\NotEmpty;
 use Zend\Validator\ValidatorChain;
 
-class Input implements
-    InputInterface,
-    EmptyContextInterface
+class Input implements InputInterface, EmptyContextInterface
 {
     /**
      * @var bool

@@ -15,9 +15,7 @@ use Iterator;
 /**
  * Priority list
  */
-class PriorityList implements
-    Iterator,
-    Countable
+class PriorityList implements Iterator, Countable
 {
     /**
      * Internal list of all routes.

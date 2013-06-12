@@ -25,10 +25,7 @@ use Serializable;
  * "inner" iterator in the form of an SplPriorityQueue object for performing
  * the actual iteration.
  */
-class PriorityQueue implements
-    Countable,
-    IteratorAggregate,
-    Serializable
+class PriorityQueue implements Countable, IteratorAggregate, Serializable
 {
     const EXTR_DATA     = 0x00000001;
     const EXTR_PRIORITY = 0x00000002;

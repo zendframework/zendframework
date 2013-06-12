@@ -23,9 +23,7 @@ use Zend\Paginator\ScrollingStyle\ScrollingStyleInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View;
 
-class Paginator implements
-    Countable,
-    IteratorAggregate
+class Paginator implements Countable, IteratorAggregate
 {
 
     /**

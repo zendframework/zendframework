@@ -20,9 +20,7 @@ use Zend\Loader\PluginClassLocator;
  *
  * Handles aggregation of headers
  */
-class Headers implements
-    Countable,
-    Iterator
+class Headers implements Countable, Iterator
 {
     /** @var string End of Line for fields */
     const EOL = "\r\n";

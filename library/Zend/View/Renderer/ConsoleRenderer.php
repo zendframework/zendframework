@@ -20,9 +20,7 @@ use Zend\View\Resolver\ResolverInterface;
  * mark them as part of the internal implementation, and thus prevent conflict
  * with variables injected into the renderer.
  */
-class ConsoleRenderer implements
-    RendererInterface,
-    TreeRendererInterface
+class ConsoleRenderer implements RendererInterface, TreeRendererInterface
 {
     /**
      * @var FilterChain

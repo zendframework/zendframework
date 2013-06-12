@@ -15,9 +15,7 @@ use Iterator;
 /**
  * Server methods metadata
  */
-class Definition implements
-    Countable,
-    Iterator
+class Definition implements Countable, Iterator
 {
     /**
      * @var array Array of \Zend\Server\Method\Definition objects

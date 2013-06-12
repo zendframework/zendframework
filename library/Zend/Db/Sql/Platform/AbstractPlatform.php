@@ -16,10 +16,7 @@ use Zend\Db\Sql\Exception;
 use Zend\Db\Sql\PreparableSqlInterface;
 use Zend\Db\Sql\SqlInterface;
 
-class AbstractPlatform implements
-    PlatformDecoratorInterface,
-    PreparableSqlInterface,
-    SqlInterface
+class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInterface, SqlInterface
 {
     /**
      * @var object

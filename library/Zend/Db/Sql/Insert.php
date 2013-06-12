@@ -15,9 +15,7 @@ use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Adapter\Platform\Sql92;
 use Zend\Db\Adapter\StatementContainerInterface;
 
-class Insert extends AbstractSql implements
-    SqlInterface,
-    PreparableSqlInterface
+class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
     /**#@+
      * Constants

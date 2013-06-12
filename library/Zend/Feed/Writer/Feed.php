@@ -15,9 +15,7 @@ use Zend\Feed\Writer\Renderer;
 
 /**
 */
-class Feed extends AbstractFeed implements
-    Iterator,
-    Countable
+class Feed extends AbstractFeed implements Iterator, Countable
 {
 
     /**

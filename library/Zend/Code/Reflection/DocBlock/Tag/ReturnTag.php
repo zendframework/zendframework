@@ -9,9 +9,7 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class ReturnTag implements
-    TagInterface,
-    PhpDocTypedTagInterface
+class ReturnTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
      * @var array

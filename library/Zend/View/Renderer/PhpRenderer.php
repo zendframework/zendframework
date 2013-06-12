@@ -70,9 +70,7 @@ use Zend\View\Variables;
  * @method \Zend\View\Helper\Navigation\Menu menu($container = null)
  * @method \Zend\View\Helper\Navigation\Sitemap sitemap($container = null)
  */
-class PhpRenderer implements
-    Renderer,
-    TreeRendererInterface
+class PhpRenderer implements Renderer, TreeRendererInterface
 {
     /**
      * @var string Rendered content

@@ -19,9 +19,7 @@ use Zend\Stdlib\ErrorHandler;
  * Zend\Ldap\Collection\DefaultIterator is the default collection iterator implementation
  * using ext/ldap
  */
-class DefaultIterator implements
-    Iterator,
-    Countable
+class DefaultIterator implements Iterator, Countable
 {
     const ATTRIBUTE_TO_LOWER = 1;
     const ATTRIBUTE_TO_UPPER = 2;

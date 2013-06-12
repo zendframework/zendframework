@@ -17,9 +17,7 @@ use Zend\View\Exception;
 use Zend\View\Model;
 use Zend\View\Variables as ViewVariables;
 
-class ViewModel implements
-    ModelInterface,
-    ClearableModelInterface
+class ViewModel implements ModelInterface, ClearableModelInterface
 {
     /**
      * What variable a parent model should capture this model to

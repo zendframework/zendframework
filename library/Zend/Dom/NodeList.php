@@ -19,10 +19,7 @@ use Iterator;
 /**
  * Nodelist for DOM XPath query
  */
-class NodeList implements
-    Iterator,
-    Countable,
-    ArrayAccess
+class NodeList implements Iterator, Countable, ArrayAccess
 {
     /**
      * CSS Selector query

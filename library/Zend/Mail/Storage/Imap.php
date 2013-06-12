@@ -12,9 +12,7 @@ namespace Zend\Mail\Storage;
 use Zend\Mail;
 use Zend\Mail\Protocol;
 
-class Imap extends AbstractStorage implements
-    Folder\FolderInterface,
-    Writable\WritableInterface
+class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\WritableInterface
 {
     // TODO: with an internal cache we could optimize this class, or create an extra class with
     // such optimizations. Especially the various fetch calls could be combined to one cache call

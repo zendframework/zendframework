@@ -9,9 +9,7 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class MethodTag implements
-    TagInterface,
-    PhpDocTypedTagInterface
+class MethodTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
      * Return value type

@@ -15,9 +15,7 @@ use Zend\Di\Di;
 /**
  * Class definitions for a single class
  */
-class ClassDefinition implements
-    DefinitionInterface,
-    PartialMarker
+class ClassDefinition implements DefinitionInterface, PartialMarker
 {
     /**
      * @var null|string

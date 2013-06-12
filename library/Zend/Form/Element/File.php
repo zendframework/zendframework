@@ -23,9 +23,7 @@ use Zend\Form\ElementPrepareAwareInterface;
 use Zend\Form\FormInterface;
 use Zend\InputFilter\InputProviderInterface;
 
-class File extends Element implements
-    InputProviderInterface,
-    ElementPrepareAwareInterface
+class File extends Element implements InputProviderInterface, ElementPrepareAwareInterface
 {
     /**
      * Seed attributes

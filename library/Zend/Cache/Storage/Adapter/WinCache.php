@@ -140,6 +140,8 @@ class WinCache extends AbstractAdapter implements
 
         if ($success) {
             $casToken = $result;
+        } else {
+            $result = null;
         }
 
         return $result;

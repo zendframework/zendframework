@@ -41,12 +41,9 @@ class RouterFactory implements FactoryInterface
         if ($rName === 'ConsoleRouter'                       // force console router
             || ($cName === 'router' && Console::isConsole()) // auto detect console
         ) {
-            // We are in a console, use console router.
-            if (isset($config['console']) && isset($config['console']['router'])) {
-                $routerConfig = $config['console']['router'];
-            }
-
+            // We are in a console, use console router defaults.
             $routerClass = 'Zend\Mvc\Router\Console\SimpleRouteStack';
+            $routerConfig = isset($config['console']['router']) ? $config['console']['router'] : array();
         }
 
         // Obtain the configured router class, if any

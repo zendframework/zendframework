@@ -69,7 +69,7 @@ class FileReflection implements ReflectionInterface
      * @throws Exception\InvalidArgumentException If file does not exists
      * @throws Exception\RuntimeException If file exists but is not included or required
      */
-    public function __construct($filename, $includeIfNotAlreadyIncluded = true)
+    public function __construct($filename, $includeIfNotAlreadyIncluded = false)
     {
         if (($fileRealPath = realpath($filename)) === false) {
             $fileRealPath = stream_resolve_include_path($filename);

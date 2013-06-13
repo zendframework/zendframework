@@ -71,7 +71,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
 
         try {
-            new FileReflection('a_second_empty_file.php');
+            new FileReflection('a_second_empty_file.php', true);
             set_include_path($oldIncludePath);
         } catch(Exception $e) {
             set_include_path($oldIncludePath);

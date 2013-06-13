@@ -246,12 +246,4 @@ interface AdapterInterface
      * @return string
      */
     public function readChar($mask = null);
-
-    /**
-     * Encode a text to match console encoding
-     *
-     * @param string   $text
-     * @return string the encoding text
-     */
-    public function encodeText($text);
 }

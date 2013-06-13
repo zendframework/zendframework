@@ -59,23 +59,22 @@ class DefaultRenderingStrategy extends AbstractListenerAggregate
             }
         }
 
-        // Fetch result from primary model
-        if ($result instanceof ConsoleViewModel) {
-            $responseText .= $result->getResult();
-        } else {
-            $responseText .= $result->getVariable(ConsoleViewModel::RESULT);
-        }
-
         // Fetch service manager
         $sm = $e->getApplication()->getServiceManager();
 
         // Fetch console
         $console = $sm->get('console');
 
-        // Append console encoded response to response object
-        $response->setContent(
-             $console->encodeText($response->getContent() . $responseText)
-        );
+        // Append console response to response object
+        if (is_callable(array($console,'encodeText'))) {
+        	$response->setContent(
+        			call_user_func(array($console,'encodeText'), $response->getContent() . $responseText)
+        	);
+        } else {
+        	$response->setContent(
+        			$response->getContent() . $responseText
+        	);
+        }
 
         // Pass on console-specific options
         if ($response instanceof ConsoleResponse

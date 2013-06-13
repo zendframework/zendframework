@@ -121,8 +121,8 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($char, 'r');
     }
 
-    public function testEncodeText(){
-
+    public function testEncodeText()
+    {
     	//Utf8 string
     	$text = '\u00E9\u00E9\u00E9';
 

@@ -84,16 +84,28 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @param  mixed $data
      * @return mixed
+     * @throws Exception\RuntimeException
      */
-    abstract public function create($data);
+    public function create($data)
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
 
     /**
      * Delete an existing resource
      *
      * @param  mixed $id
      * @return mixed
+     * @throws Exception\RuntimeException
      */
-    abstract public function delete($id);
+    public function delete($id)
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
 
     /**
      * Delete the entire resource collection
@@ -116,15 +128,27 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @param  mixed $id
      * @return mixed
+     * @throws Exception\RuntimeException
      */
-    abstract public function get($id);
+    public function get($id)
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
 
     /**
      * Return list of resources
      *
      * @return mixed
+     * @throws Exception\RuntimeException
      */
-    abstract public function getList();
+    public function getList()
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
 
     /**
      * Retrieve HEAD metadata for the resource
@@ -219,8 +243,14 @@ abstract class AbstractRestfulController extends AbstractController
      * @param  mixed $id
      * @param  mixed $data
      * @return mixed
+     * @throws Exception\RuntimeException
      */
-    abstract public function update($id, $data);
+    public function update($id, $data)
+    {
+        throw new Exception\RuntimeException(sprintf(
+            '%s is unimplemented', __METHOD__
+        ));
+    }
 
     /**
      * Basic functionality for when a page is not available

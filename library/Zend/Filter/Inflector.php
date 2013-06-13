@@ -147,7 +147,7 @@ class Inflector extends AbstractFilter
      * Set Whether or not the inflector should throw an exception when a replacement
      * identifier is still found within an inflected target.
      *
-     * @param bool $throwTargetExceptionsOn
+     * @param  bool $throwTargetExceptionsOn
      * @return Inflector
      */
     public function setThrowTargetExceptionsOn($throwTargetExceptionsOn)
@@ -169,7 +169,7 @@ class Inflector extends AbstractFilter
     /**
      * Set the Target Replacement Identifier, by default ':'
      *
-     * @param string $targetReplacementIdentifier
+     * @param  string $targetReplacementIdentifier
      * @return Inflector
      */
     public function setTargetReplacementIdentifier($targetReplacementIdentifier)
@@ -195,7 +195,7 @@ class Inflector extends AbstractFilter
      * Set a Target
      * ex: 'scripts/:controller/:action.:suffix'
      *
-     * @param string
+     * @param  string $target
      * @return Inflector
      */
     public function setTarget($target)
@@ -217,7 +217,7 @@ class Inflector extends AbstractFilter
     /**
      * Set Target Reference
      *
-     * @param reference $target
+     * @param  reference $target
      * @return Inflector
      */
     public function setTargetReference(&$target)
@@ -227,13 +227,13 @@ class Inflector extends AbstractFilter
     }
 
     /**
-     * SetRules() is the same as calling addRules() with the exception that it
+     * Is the same as calling addRules() with the exception that it
      * clears the rules before adding them.
      *
-     * @param array $rules
+     * @param  array $rules
      * @return Inflector
      */
-    public function setRules(Array $rules)
+    public function setRules(array $rules)
     {
         $this->clearRules();
         $this->addRules($rules);
@@ -241,7 +241,7 @@ class Inflector extends AbstractFilter
     }
 
     /**
-     * AddRules(): multi-call to setting filter rules.
+     * Multi-call to setting filter rules.
      *
      * If prefixed with a ":" (colon), a filter rule will be added.  If not
      * prefixed, a static replacement will be added.
@@ -253,10 +253,10 @@ class Inflector extends AbstractFilter
      *     'suffix'      => 'phtml'
      *     );
      *
-     * @param array
+     * @param  array $rules
      * @return Inflector
      */
-    public function addRules(Array $rules)
+    public function addRules(array $rules)
     {
         $keys = array_keys($rules);
         foreach ($keys as $spec) {
@@ -293,10 +293,10 @@ class Inflector extends AbstractFilter
     }
 
     /**
-     * getRule() returns a rule set by setFilterRule(), a numeric index must be provided
+     * Returns a rule set by setFilterRule(), a numeric index must be provided
      *
-     * @param string $spec
-     * @param int $index
+     * @param  string $spec
+     * @param  int $index
      * @return FilterInterface|false
      */
     public function getRule($spec, $index)
@@ -311,7 +311,7 @@ class Inflector extends AbstractFilter
     }
 
     /**
-     * ClearRules() clears the rules currently in the inflector
+     * Clears the rules currently in the inflector
      *
      * @return Inflector
      */
@@ -325,8 +325,8 @@ class Inflector extends AbstractFilter
      * Set a filtering rule for a spec.  $ruleSet can be a string, Filter object
      * or an array of strings or filter objects.
      *
-     * @param string $spec
-     * @param array|string|\Zend\Filter\FilterInterface $ruleSet
+     * @param  string $spec
+     * @param  array|string|\Zend\Filter\FilterInterface $ruleSet
      * @return Inflector
      */
     public function setFilterRule($spec, $ruleSet)
@@ -339,8 +339,8 @@ class Inflector extends AbstractFilter
     /**
      * Add a filter rule for a spec
      *
-     * @param mixed $spec
-     * @param mixed $ruleSet
+     * @param  mixed $spec
+     * @param  mixed $ruleSet
      * @return Inflector
      */
     public function addFilterRule($spec, $ruleSet)
@@ -370,8 +370,8 @@ class Inflector extends AbstractFilter
     /**
      * Set a static rule for a spec.  This is a single string value
      *
-     * @param string $name
-     * @param string $value
+     * @param  string $name
+     * @param  string $value
      * @return Inflector
      */
     public function setStaticRule($name, $value)
@@ -388,8 +388,8 @@ class Inflector extends AbstractFilter
      * in to be referenced when its time to build the output string from the
      * target.
      *
-     * @param string $name
-     * @param mixed $reference
+     * @param  string $name
+     * @param  mixed $reference
      * @return Inflector
      */
     public function setStaticRuleReference($name, &$reference)

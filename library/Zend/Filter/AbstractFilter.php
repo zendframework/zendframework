@@ -86,7 +86,6 @@ abstract class AbstractFilter implements FilterInterface
     }
 
     /**
-     *
      * @param  mixed $options
      * @return bool
      */

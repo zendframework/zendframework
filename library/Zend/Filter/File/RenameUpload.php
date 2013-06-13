@@ -198,7 +198,7 @@ class RenameUpload extends AbstractFilter
     /**
      * @param  string $sourceFile Source file path
      * @param  string $targetFile Target file path
-     * @throws \Zend\Filter\Exception\RuntimeException
+     * @throws Exception\RuntimeException
      * @return bool
      */
     protected function moveUploadedFile($sourceFile, $targetFile)
@@ -218,7 +218,7 @@ class RenameUpload extends AbstractFilter
 
     /**
      * @param  string $targetFile Target file path
-     * @throws \Zend\Filter\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     protected function checkFileExists($targetFile)
     {
@@ -281,6 +281,7 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
+     * @param  string $source
      * @param  string $filename
      * @return string
      */

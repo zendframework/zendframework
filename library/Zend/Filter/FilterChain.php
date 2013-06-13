@@ -34,6 +34,7 @@ class FilterChain extends AbstractFilter implements Countable
     /**
      * Initialize filter chain
      *
+     * @param null|array|Traversable $options
      */
     public function __construct($options = null)
     {
@@ -44,6 +45,11 @@ class FilterChain extends AbstractFilter implements Countable
         }
     }
 
+    /**
+     * @param  array|Traversable $options
+     * @return FilterChain
+     * @throws Exception\InvalidArgumentException
+     */
     public function setOptions($options)
     {
         if (!is_array($options) && !$options instanceof \Traversable) {

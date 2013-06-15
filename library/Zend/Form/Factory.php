@@ -481,7 +481,7 @@ class Factory
                 ));
             }
             $factoryOrName = $factoryOrName['type'];
-        } 
+        }
 
         if (is_string($factoryOrName)) {
             $factory = $this->getFactoryFromName($factoryOrName);

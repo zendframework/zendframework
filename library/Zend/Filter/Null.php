@@ -70,7 +70,7 @@ class Null extends AbstractFilter
      *
      * @param  int|array $type
      * @throws Exception\InvalidArgumentException
-     * @return bool
+     * @return self
      */
     public function setType($type = null)
     {

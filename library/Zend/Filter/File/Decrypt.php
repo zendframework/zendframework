@@ -38,7 +38,7 @@ class Decrypt extends Filter\Decrypt
      * Sets the new filename where the content will be stored
      *
      * @param  string $filename (Optional) New filename to set
-     * @return Decrypt
+     * @return self
      */
     public function setFilename($filename = null)
     {

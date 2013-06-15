@@ -50,7 +50,7 @@ class Encrypt extends AbstractFilter
      * Sets new encryption options
      *
      * @param  string|array $options (Optional) Encryption options
-     * @return Encrypt
+     * @return self
      * @throws Exception\DomainException
      * @throws Exception\InvalidArgumentException
      */

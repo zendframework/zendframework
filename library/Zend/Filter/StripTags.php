@@ -90,7 +90,7 @@ class StripTags extends AbstractFilter
      * Sets the tagsAllowed option
      *
      * @param  array|string $tagsAllowed
-     * @return StripTags Provides a fluent interface
+     * @return self Provides a fluent interface
      */
     public function setTagsAllowed($tagsAllowed)
     {
@@ -143,7 +143,7 @@ class StripTags extends AbstractFilter
      * Sets the attributesAllowed option
      *
      * @param  array|string $attributesAllowed
-     * @return StripTags Provides a fluent interface
+     * @return self Provides a fluent interface
      */
     public function setAttributesAllowed($attributesAllowed)
     {

@@ -15,7 +15,7 @@ abstract class AbstractUnicode extends AbstractFilter
      * Set the input encoding for the given string
      *
      * @param  string|null $encoding
-     * @return AbstractUnicode
+     * @return self
      * @throws Exception\InvalidArgumentException
      * @throws Exception\ExtensionNotLoadedException
      */

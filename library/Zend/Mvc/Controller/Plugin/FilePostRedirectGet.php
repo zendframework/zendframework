@@ -295,14 +295,17 @@ class FilePostRedirectGet extends AbstractPlugin
      */
     protected function redirect($redirect, $redirectToUrl)
     {
-        $controller = $this->getController();
-        $params     = array();
+        $controller         = $this->getController();
+        $params             = array();
+        $options            = array();
+        $reuseMatchedParams = false;
 
         if (null === $redirect) {
             $routeMatch = $controller->getEvent()->getRouteMatch();
 
             $redirect = $routeMatch->getMatchedRouteName();
-            $params   = $routeMatch->getParams();
+            //null indicates to redirect for self.
+            $reuseMatchedParams = true;
         }
 
         if (method_exists($controller, 'getPluginManager')) {
@@ -321,7 +324,7 @@ class FilePostRedirectGet extends AbstractPlugin
         }
 
         if ($redirectToUrl === false) {
-            $response = $redirector->toRoute($redirect, $params);
+            $response = $redirector->toRoute($redirect, $params, $options, $reuseMatchedParams);
             $response->setStatusCode(303);
             return $response;
         }

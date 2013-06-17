@@ -155,23 +155,26 @@ class ElementTest extends TestCase
         $this->assertEquals('option', $option);
     }
 
+    public function testSpecificOptionsSetLabelAttributes()
+    {
+        $element = new Element('foo');
+        $element->setOptions(array(
+                                 'label' => 'foo',
+                                 'label_attributes' => array('bar' => 'baz')
+                             ));
+        $option = $element->getOption('label_attributes');
+        $this->assertEquals(array('bar' => 'baz'), $option);
+    }
+
     public function testLabelOptionsAccessors()
     {
         $element = new Element('foo');
         $element->setOptions(array(
-                                  'label' => 'foo',
-                                  'label_attributes' => array('bar' => 'baz'),
                                   'label_options' => array('moar' => 'foo')
                              ));
 
-        $option = $element->getLabel();
-        $this->assertEquals('foo', $option);
-
-        $option = $element->getLabelAttributes();
-        $this->assertEquals(array('bar' => 'baz'), $option);
-
-        $option = $element->getLabelOptions();
-        $this->assertEquals(array('moar' => 'foo'), $option);
+        $labelOptions = $element->getLabelOptions();
+        $this->assertEquals(array('moar' => 'foo'), $labelOptions);
     }
 
     public function testSetOptionsWrongInputRaisesException()

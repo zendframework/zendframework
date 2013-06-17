@@ -160,7 +160,7 @@ class FormRow extends AbstractHelper
         $elementString = $elementHelper->render($element);
 
         if (isset($label) && '' !== $label) {
-            // ElementInterface may not provide label specific methods
+            // @todo ElementInterface may not provide label specific methods
             if (method_exists($element, 'getLabelOptions')) {
                 $labelOptions = $element->getLabelOptions();
             }

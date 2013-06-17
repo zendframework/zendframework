@@ -118,10 +118,14 @@ class FormLabel extends AbstractHelper
             ));
         }
 
-        $labelAttributes = $attributesOrElement->getLabelAttributes();
+        // @todo ElementInterface may not provide label specific methods
+        if (method_exists($attributesOrElement, 'getLabelAttributes')) {
+            $labelAttributes = $attributesOrElement->getLabelAttributes();
+        }
+
         $attributes = array('for' => $id);
 
-        if (!empty($labelAttributes)) {
+        if (isset($labelAttributes) && !empty($labelAttributes)) {
             $attributes = array_merge($labelAttributes, $attributes);
         }
 

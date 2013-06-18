@@ -1157,4 +1157,39 @@ class PageTest extends \PHPUnit_Framework_TestCase
         ksort($toArray);
         $this->assertEquals($options, $toArray);
     }
+
+    public function testSetPermission()
+    {
+        $page = AbstractPage::factory(array(
+            'type'       => 'uri'
+        ));
+
+        $page->setPermission('my_permission');
+        $this->assertEquals('my_permission', $page->getPermission());
+    }
+
+    public function testSetArrayPermission()
+    {
+        $page = AbstractPage::factory(array(
+            'type'       => 'uri'
+        ));
+
+        $page->setPermission(array('my_permission', 'other_permission'));
+        $this->assertInternalType('array', $page->getPermission());
+        $this->assertCount(2, $page->getPermission());
+    }
+
+    public function testSetObjectPermission()
+    {
+        $page = AbstractPage::factory(array(
+            'type'       => 'uri'
+        ));
+
+        $permission = new \stdClass();
+        $permission->name = 'my_permission';
+
+        $page->setPermission($permission);
+        $this->assertInstanceOf('stdClass', $page->getPermission());
+        $this->assertEquals('my_permission', $page->getPermission()->name);
+    }
 }

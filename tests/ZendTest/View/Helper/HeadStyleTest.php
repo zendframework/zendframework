@@ -362,6 +362,28 @@ a {
         $this->assertContains('<!--[if lt IE 7]>', $test);
     }
 
+    public function testConditionalScriptNoIE()
+    {
+        $this->helper->appendStyle('
+a {
+    display: none;
+}', array('media' => 'screen,projection', 'conditional' => '!IE'));
+        $test = $this->helper->toString();
+        $this->assertContains('<!--[if !IE]><!--><', $test);
+        $this->assertContains('<!--<![endif]-->', $test);
+    }
+    
+    public function testConditionalScriptNoIEWidthSpace()
+    {
+        $this->helper->appendStyle('
+a {
+    display: none;
+}', array('media' => 'screen,projection', 'conditional' => '! IE'));
+        $test = $this->helper->toString();
+        $this->assertContains('<!--[if ! IE]><!--><', $test);
+        $this->assertContains('<!--<![endif]-->', $test);
+    }
+
     /**
      * @issue ZF-5435
      */

@@ -107,4 +107,48 @@ class SmtpProtocolSpy extends Smtp
     {
         return $this->rcptTest;
     }
+
+    /**
+     * Get Auth Status
+     *
+     * @return bool
+     */
+    public function getAuth()
+    {
+        return $this->auth;
+    }
+
+    /**
+     * Set Auth Status
+     *
+     * @param bool $status
+     * @return self
+     */
+    public function setAuth($status)
+    {
+        $this->auth = (bool) $status;
+        return $this;
+    }
+
+    /**
+     * Get Session Status
+     *
+     * @return bool
+     */
+    public function getSessionStatus()
+    {
+        return $this->sess;
+    }
+
+    /**
+     * Set Session Status
+     *
+     * @param bool $status
+     * @return self
+     */
+    public function setSessionStatus($status)
+    {
+        $this->sess = (bool) $status;
+        return $this;
+    }
 }

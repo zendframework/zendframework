@@ -391,7 +391,7 @@ class FormRowTest extends TestCase
         $label = '<span>foo</span>';
         $element = new Element('fooname');
         $element->setLabel($label);
-        $element->setLabelOptions(array('disable_escape' => true));
+        $element->setLabelOptions(array('disable_html_escape' => true));
 
         $markup = $this->helper->__invoke($element);
 

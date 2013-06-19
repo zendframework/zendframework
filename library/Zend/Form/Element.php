@@ -16,6 +16,7 @@ use Zend\Stdlib\InitializableInterface;
 class Element implements
     ElementAttributeRemovalInterface,
     ElementInterface,
+    LabelAwareInterface,
     InitializableInterface
 {
     /**
@@ -34,9 +35,13 @@ class Element implements
     protected $labelAttributes;
 
     /**
-     * @var array label specific options
+     * Label specific options
+     *
+     * @var array
      */
-    protected $labelOptions = array();
+    protected $labelOptions = array(
+        'disable_html_escape' => false
+    );
 
     /**
      * @var array Validation error messages

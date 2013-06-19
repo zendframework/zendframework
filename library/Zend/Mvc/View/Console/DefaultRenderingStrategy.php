@@ -67,13 +67,13 @@ class DefaultRenderingStrategy extends AbstractListenerAggregate
 
         // Append console response to response object
         if (is_callable(array($console,'encodeText'))) {
-        	$response->setContent(
-        			call_user_func(array($console,'encodeText'), $response->getContent() . $responseText)
-        	);
+            $response->setContent(
+                    call_user_func(array($console,'encodeText'), $response->getContent() . $responseText)
+            );
         } else {
-        	$response->setContent(
-        			$response->getContent() . $responseText
-        	);
+            $response->setContent(
+                    $response->getContent() . $responseText
+            );
         }
 
         // Pass on console-specific options

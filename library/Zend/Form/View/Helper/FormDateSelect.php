@@ -92,8 +92,8 @@ class FormDateSelect extends FormMonthSelectHelper
 
         $result = array();
         for ($day = 1; $day <= 31; $day++) {
-            $key   = $keyFormatter->format($date);
-            $value = $valueFormatter->format($date);
+            $key   = $keyFormatter->format($date->getTimestamp());
+            $value = $valueFormatter->format($date->getTimestamp());
             $result[$key] = $value;
 
             $date->modify('+1 day');

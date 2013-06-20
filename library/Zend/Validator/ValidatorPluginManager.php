@@ -94,6 +94,7 @@ class ValidatorPluginManager extends AbstractPluginManager
         'isinstanceof'             => 'Zend\Validator\IsInstanceOf',
         'lessthan'                 => 'Zend\Validator\LessThan',
         'notempty'                 => 'Zend\Validator\NotEmpty',
+        'phonenumber'              => 'Zend\I18n\Validator\PhoneNumber',
         'postcode'                 => 'Zend\I18n\Validator\PostCode',
         'regex'                    => 'Zend\Validator\Regex',
         'sitemapchangefreq'        => 'Zend\Validator\Sitemap\Changefreq',

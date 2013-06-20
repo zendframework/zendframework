@@ -56,6 +56,7 @@ class ValidatorPluginManager extends AbstractPluginManager
         'csrf'                     => 'Zend\Validator\Csrf',
         'date'                     => 'Zend\Validator\Date',
         'datestep'                 => 'Zend\Validator\DateStep',
+        'datetime'                 => 'Zend\I18n\Validator\DateTime',
         'dbnorecordexists'         => 'Zend\Validator\Db\NoRecordExists',
         'dbrecordexists'           => 'Zend\Validator\Db\RecordExists',
         'digits'                   => 'Zend\Validator\Digits',

@@ -9,6 +9,8 @@
 
 namespace Zend\I18n\Validator;
 
+use Traversable;
+use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 
 class PhoneNumber extends AbstractValidator

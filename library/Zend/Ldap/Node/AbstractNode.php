@@ -9,13 +9,15 @@
 
 namespace Zend\Ldap\Node;
 
+use ArrayAccess;
+use Countable;
 use Zend\Ldap;
 use Zend\Ldap\Exception;
 
 /**
  * This class provides a base implementation for LDAP nodes
  */
-abstract class AbstractNode implements \ArrayAccess, \Countable
+abstract class AbstractNode implements ArrayAccess, Countable
 {
     protected static $systemAttributes = array('createtimestamp', 'creatorsname',
                                                'entrycsn', 'entrydn', 'entryuuid', 'hassubordinates', 'modifiersname',

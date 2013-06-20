@@ -29,6 +29,7 @@ class SmtpProtocolSpy extends Smtp
     public function connect()
     {
         $this->connect = true;
+
         return true;
     }
 
@@ -121,12 +122,13 @@ class SmtpProtocolSpy extends Smtp
     /**
      * Set Auth Status
      *
-     * @param bool $status
+     * @param  bool $status
      * @return self
      */
     public function setAuth($status)
     {
         $this->auth = (bool) $status;
+
         return $this;
     }
 
@@ -143,12 +145,13 @@ class SmtpProtocolSpy extends Smtp
     /**
      * Set Session Status
      *
-     * @param bool $status
+     * @param  bool $status
      * @return self
      */
     public function setSessionStatus($status)
     {
         $this->sess = (bool) $status;
+
         return $this;
     }
 }

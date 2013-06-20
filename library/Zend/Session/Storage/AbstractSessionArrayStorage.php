@@ -19,7 +19,10 @@ use Zend\Session\Exception;
  * Replaces the $_SESSION superglobal with an ArrayObject that allows for
  * property access, metadata storage, locking, and immutability.
  */
-abstract class AbstractSessionArrayStorage implements IteratorAggregate, StorageInterface, StorageInitializationInterface
+abstract class AbstractSessionArrayStorage implements
+    IteratorAggregate,
+    StorageInterface,
+    StorageInitializationInterface
 {
     /**
      * Constructor

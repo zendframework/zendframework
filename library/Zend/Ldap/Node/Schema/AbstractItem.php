@@ -9,13 +9,15 @@
 
 namespace Zend\Ldap\Node\Schema;
 
+use ArrayAccess;
+use Countable;
 use Zend\Ldap\Exception;
 
 /**
  * This class provides a base implementation for managing schema
  * items like objectClass and attributeType.
  */
-abstract class AbstractItem implements \ArrayAccess, \Countable
+abstract class AbstractItem implements ArrayAccess, Countable
 {
     /**
      * The underlying data

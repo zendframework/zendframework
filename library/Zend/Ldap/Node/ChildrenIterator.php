@@ -9,12 +9,16 @@
 
 namespace Zend\Ldap\Node;
 
+use ArrayAccess;
+use Countable;
+use Iterator;
+use RecursiveIterator;
 use Zend\Ldap;
 
 /**
  * Zend\Ldap\Node\ChildrenIterator provides an iterator to a collection of children nodes.
  */
-class ChildrenIterator implements \Iterator, \Countable, \RecursiveIterator, \ArrayAccess
+class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayAccess
 {
     /**
      * An array of Zend\Ldap\Node objects

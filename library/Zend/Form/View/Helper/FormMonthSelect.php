@@ -175,7 +175,7 @@ class FormMonthSelect extends AbstractHelper
     }
 
     /**
-     * Retrive pattern to use for Date rendering
+     * Retrieve pattern to use for Date rendering
      *
      * @return string
      */

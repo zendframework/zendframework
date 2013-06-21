@@ -72,6 +72,7 @@
         "zendframework/zend-permissions-acl": "self.version",
         "zendframework/zend-permissions-rbac": "self.version",
         "zendframework/zend-progressbar": "self.version",
+        "zendframework/zend-resources": "self.version",
         "zendframework/zend-serializer": "self.version",
         "zendframework/zend-server": "self.version",
         "zendframework/zend-servicemanager": "self.version",

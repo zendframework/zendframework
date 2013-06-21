@@ -9,12 +9,13 @@
 
 namespace Zend\View\Helper\Placeholder\Container;
 
+use ArrayObject;
 use Zend\View\Exception;
 
 /**
  * Abstract class representing container for placeholder values
  */
-abstract class AbstractContainer extends \ArrayObject
+abstract class AbstractContainer extends ArrayObject
 {
     /**
      * Whether or not to override all contents of placeholder

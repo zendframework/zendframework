@@ -21,7 +21,8 @@
         "zendframework/zend-eventmanager": "You should install this package to use the events in the translator",
         "zendframework/zend-filter": "You should install this package to use the provided filters",
         "zendframework/zend-validator": "You should install this package to use the provided validators",
-        "zendframework/zend-view": "You should install this package to use the provided view helpers"
+        "zendframework/zend-view": "You should install this package to use the provided view helpers",
+        "zendframework/zend-resources": "Translation resources"
     },
     "extra": {
         "branch-alias": {

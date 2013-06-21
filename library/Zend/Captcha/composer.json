@@ -21,7 +21,8 @@
         "zendframework/zendservice-recaptcha": "*"
     },
     "suggest": {
-        "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha component"
+        "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha component",
+        "zendframework/zend-resources": "Translations of captcha messages"
     },
     "extra": {
         "branch-alias": {

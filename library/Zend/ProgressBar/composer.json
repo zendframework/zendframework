@@ -14,8 +14,10 @@
     "target-dir": "Zend/ProgressBar",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-stdlib": "self.version",
-        "zendframework/zend-json": "self.version"
+        "zendframework/zend-stdlib": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-json": "Zend\\Json component"
     },
     "extra": {
         "branch-alias": {

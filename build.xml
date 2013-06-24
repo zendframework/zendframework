@@ -24,6 +24,7 @@
                 <arg value="--version" />
             </exec>
             <exec executable="composer" failonerror="true">
+                <env key="COMPOSER_ROOT_VERSION" value="dev-develop"/>
                 <arg value="install" />
                 <arg value="--dev" />
                 <arg value="--prefer-source" />

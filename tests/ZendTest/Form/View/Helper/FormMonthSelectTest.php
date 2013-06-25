@@ -89,4 +89,11 @@ class FormMonthSelectTest extends CommonTestCase
     {
         $this->assertSame($this->helper, $this->helper->__invoke());
     }
+
+    public function testMonthElementValueOptions()
+    {
+        $element = new MonthSelect('foo');
+        $this->helper->render($element);
+        $this->assertEquals(12, count($element->getMonthElement()->getValueOptions()));
+    }
 }

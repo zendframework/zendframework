@@ -25,6 +25,7 @@ use Zend\Loader\StandardAutoloader;
  * --overwrite|-w               Whether or not to overwrite existing autoload
  *                              file
  * --ignore|-i [ <string> ]     Comma-separated namespaces to ignore
+ * --sort|-s                    Alphabetically sort classes
  */
 
 $zfLibraryPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';

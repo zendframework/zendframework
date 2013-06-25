@@ -89,4 +89,11 @@ class FormDateSelectTest extends CommonTestCase
     {
         $this->assertSame($this->helper, $this->helper->__invoke());
     }
+
+    public function testDayElementValueOptions()
+    {
+        $element = new DateSelect('foo');
+        $this->helper->render($element);
+        $this->assertEquals(31, count($element->getDayElement()->getValueOptions()));
+    }
 }

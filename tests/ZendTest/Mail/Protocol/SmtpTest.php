@@ -66,4 +66,14 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->connection->disconnect();
         $this->assertTrue($this->connection->calledQuit);
     }
+
+    public function testDisconnectResetsAuthFlag()
+    {
+        $this->connection->connect();
+        $this->connection->setSessionStatus(true);
+        $this->connection->setAuth(true);
+        $this->assertTrue($this->connection->getAuth());
+        $this->connection->disconnect();
+        $this->assertFalse($this->connection->getAuth());
+    }
 }

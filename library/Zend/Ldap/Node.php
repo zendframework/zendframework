@@ -9,12 +9,14 @@
 
 namespace Zend\Ldap;
 
+use Iterator;
+use RecursiveIterator;
 use Zend\EventManager\EventManager;
 
 /**
  * Zend\Ldap\Node provides an object oriented view into a LDAP node.
  */
-class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
+class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
 {
     /**
      * Holds the node's new Dn if node is renamed.

@@ -180,7 +180,7 @@ class StripTags extends AbstractFilter
                 (is_object($limit) ? get_class($limit) : gettype($limit))
             ));
         }
-        
+
         $value = (string) $value;
 
         // Strip HTML comments first

@@ -53,7 +53,7 @@ class StringToLower extends AbstractUnicode
                 (is_object($limit) ? get_class($limit) : gettype($limit))
             ));
         }
-        
+
         if ($this->options['encoding'] !== null) {
             return mb_strtolower((string) $value,  $this->options['encoding']);
         }

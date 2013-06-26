@@ -124,6 +124,50 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test offsetSetMaxLength() will persist errata data
+     * @covers Zend\Db\Adapter\ParameterContainer::offsetSetMaxLength
+     * @testdox unit test: Test offsetGetMaxLength() return persisted errata data, if it exists
+     * @covers Zend\Db\Adapter\ParameterContainer::offsetGetMaxLength
+     */
+    public function testOffsetSetAndGetMaxLength()
+    {
+        $this->parameterContainer->offsetSetMaxLength('foo', 100);
+        $this->assertEquals(100, $this->parameterContainer->offsetGetMaxLength('foo'));
+    }
+
+    /**
+     * @testdox unit test: Test offsetHasMaxLength() will check if errata exists for a particular key
+     * @covers Zend\Db\Adapter\ParameterContainer::offsetHasMaxLength
+     */
+    public function testOffsetHasMaxLength()
+    {
+        $this->parameterContainer->offsetSetMaxLength('foo', 100);
+        $this->assertTrue($this->parameterContainer->offsetHasMaxLength('foo'));
+    }
+
+    /**
+     * @testdox unit test: Test offsetUnsetMaxLength() will unset data for a particular key
+     * @covers Zend\Db\Adapter\ParameterContainer::offsetUnsetMaxLength
+     */
+    public function testOffsetUnsetMaxLength()
+    {
+        $this->parameterContainer->offsetSetMaxLength('foo', 100);
+        $this->parameterContainer->offsetUnsetMaxLength('foo');
+        $this->assertNull($this->parameterContainer->offsetGetMaxLength('foo'));
+    }
+
+    /**
+     * @testdox unit test: Test getMaxLengthIterator() will return an iterator for the errata data
+     * @covers Zend\Db\Adapter\ParameterContainer::getMaxLengthIterator
+     */
+    public function testGetMaxLengthIterator()
+    {
+        $this->parameterContainer->offsetSetMaxLength('foo', 100);
+        $data = $this->parameterContainer->getMaxLengthIterator();
+        $this->assertInstanceOf('ArrayIterator', $data);
+    }
+
+    /**
      * @testdox unit test: Test offsetSetErrata() will persist errata data
      * @covers Zend\Db\Adapter\ParameterContainer::offsetSetErrata
      */

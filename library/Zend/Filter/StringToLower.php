@@ -46,6 +46,14 @@ class StringToLower extends AbstractUnicode
      */
     public function filter($value)
     {
+        if(!is_scalar($value)){
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects parameter to be string, "%s" given',
+                __METHOD__,
+                (is_object($limit) ? get_class($limit) : gettype($limit))
+            ));
+        }
+        
         if ($this->options['encoding'] !== null) {
             return mb_strtolower((string) $value,  $this->options['encoding']);
         }

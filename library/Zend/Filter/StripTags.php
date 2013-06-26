@@ -173,6 +173,14 @@ class StripTags extends AbstractFilter
      */
     public function filter($value)
     {
+        if(!is_scalar($value)){
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects parameter to be string, "%s" given',
+                __METHOD__,
+                (is_object($limit) ? get_class($limit) : gettype($limit))
+            ));
+        }
+        
         $value = (string) $value;
 
         // Strip HTML comments first

@@ -88,6 +88,19 @@ class ReCaptchaTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($privKey, $captcha->getService()->getPrivateKey());
     }
 
+    public function testSetAndGetRecaptchaServicePublicAndPrivateKeysFromOptions()
+    {
+        $publicKey = 'publicKey';
+        $privateKey = 'privateKey';
+        $options = array(
+            'public_key' => $publicKey,
+            'private_key' => $privateKey
+        );
+        $captcha = new ReCaptcha($options);
+        $this->assertSame($publicKey, $captcha->getService()->getPublicKey());
+        $this->assertSame($privateKey, $captcha->getService()->getPrivateKey());
+    }
+
     /** @group ZF-7654 */
     public function testConstructorShouldAllowSettingLangOptionOnServiceObject()
     {

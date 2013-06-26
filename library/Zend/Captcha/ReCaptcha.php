@@ -126,11 +126,9 @@ class ReCaptcha extends AbstractAdapter
         parent::__construct($options);
 
         if (!empty($options)) {
-            //set private key if specified
             if (array_key_exists('private_key', $options)) {
                 $this->getService()->setPrivateKey($options['private_key']);
             }
-            //set public key if specified
             if (array_key_exists('public_key', $options)) {
                 $this->getService()->setPublicKey($options['public_key']);
             }

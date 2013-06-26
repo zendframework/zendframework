@@ -177,7 +177,7 @@ class StripTags extends AbstractFilter
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects parameter to be string, "%s" given',
                 __METHOD__,
-                (is_object($limit) ? get_class($limit) : gettype($limit))
+                (is_object($value) ? get_class($value) : gettype($value))
             ));
         }
 

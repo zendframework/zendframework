@@ -175,7 +175,7 @@ class StripTags extends AbstractFilter
     {
         if(!is_scalar($value)){
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects parameter to be string, "%s" given',
+                '%s expects parameter to be scalar, "%s" given',
                 __METHOD__,
                 (is_object($value) ? get_class($value) : gettype($value))
             ));

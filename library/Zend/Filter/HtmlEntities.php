@@ -186,7 +186,7 @@ class HtmlEntities extends AbstractFilter
                 (is_object($value) ? get_class($value) : gettype($value))
             ));
         }
-        
+
         $filtered = htmlentities((string) $value, $this->getQuoteStyle(), $this->getEncoding(), $this->getDoubleQuote());
         if (strlen((string) $value) && !strlen($filtered)) {
             if (!function_exists('iconv')) {

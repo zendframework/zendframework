@@ -78,7 +78,7 @@ class RealPath extends AbstractFilter
                 (is_object($value) ? get_class($value) : gettype($value))
             ));
         }
-        
+
         $path = (string) $value;
         if ($this->options['exists']) {
             return realpath($path);

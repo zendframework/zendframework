@@ -28,7 +28,7 @@ class Int extends AbstractFilter
                 (is_object($value) ? get_class($value) : gettype($value))
             ));
         }
-        
+
         return (int) ((string) $value);
     }
 }

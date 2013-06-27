@@ -36,7 +36,7 @@ class BaseNameTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($output, $filter($input));
         }
     }
-    
+
     /**
      * Ensures that an InvalidArgumentException is raised if array is used
      *
@@ -46,13 +46,13 @@ class BaseNameTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new BaseNameFilter();
         $input = array('/path/to/filename', '/path/to/filename.ext');
-    
+
         try {
             $filter->filter($input);
         } catch (\Zend\Filter\Exception\InvalidArgumentException $expected) {
             return;
         }
-    
+
         $this->fail('An expected InvalidArgumentException has not been raised.');
     }
 }

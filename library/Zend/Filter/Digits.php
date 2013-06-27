@@ -30,7 +30,7 @@ class Digits extends AbstractFilter
                 (is_object($value) ? get_class($value) : gettype($value))
             ));
         }
-        
+
         if (!StringUtils::hasPcreUnicodeSupport()) {
             // POSIX named classes are not supported, use alternative 0-9 match
             $pattern = '/[^0-9]/';

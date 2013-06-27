@@ -29,7 +29,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp ()
+    protected function setUp()
     {
         parent::setUp();
         $this->adapter = new Adapter\Null(101);

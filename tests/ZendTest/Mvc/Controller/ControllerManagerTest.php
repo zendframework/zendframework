@@ -62,8 +62,8 @@ class ControllerManagerTest extends TestCase
     }
 
     /**
-     * @covers ControllerManager::has
-     * @covers ControllerManager::get
+     * @covers Zend\ServiceManager\ServiceManager::has
+     * @covers Zend\ServiceManager\AbstractPluginManager::get
      */
     public function testDoNotUsePeeringServiceManagers()
     {

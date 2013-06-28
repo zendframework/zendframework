@@ -111,7 +111,7 @@ abstract class AbstractPage extends AbstractContainer
     /**
      * Permission associated with this page
      *
-     * @var string|null
+     * @var mixed|null
      */
     protected $permission;
 
@@ -710,7 +710,7 @@ abstract class AbstractPage extends AbstractContainer
     /**
      * Sets permission associated with this page
      *
-     * @param  string|null $permission  [optional] permission to associate
+     * @param  mixed|null $permission  [optional] permission to associate
      *                                  with this page. Default is null, which
      *                                  sets no permission.
      *
@@ -718,14 +718,14 @@ abstract class AbstractPage extends AbstractContainer
      */
     public function setPermission($permission = null)
     {
-        $this->permission = is_string($permission) ? $permission : null;
+        $this->permission = $permission;
         return $this;
     }
 
     /**
      * Returns permission associated with this page
      *
-     * @return string|null  permission or null
+     * @return mixed|null  permission or null
      */
     public function getPermission()
     {

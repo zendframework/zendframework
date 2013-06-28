@@ -18,7 +18,7 @@ interface LoggerAwareInterface
 {
     /**
      * Set logger instance
-     * 
+     *
      * @param LoggerInterface
      * @return void
      */

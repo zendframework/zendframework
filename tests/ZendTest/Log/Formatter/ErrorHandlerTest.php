@@ -54,7 +54,7 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('r', $formatter->getDateTimeFormat());
     }
 
-    public function testComplexEvent ()
+    public function testComplexEvent()
     {
         $date = new DateTime();
         $stringObject = new StringObject();

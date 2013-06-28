@@ -172,7 +172,7 @@ abstract class AbstractWord extends AbstractAdapter
      * @param string $id
      * @return AbstractWord
      */
-    protected function setId ($id)
+    protected function setId($id)
     {
         $this->id = $id;
         return $this;

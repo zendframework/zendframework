@@ -823,7 +823,7 @@ class WsdlTest extends WsdlTestHelper
     /**
      * @expectedException RuntimeException
      */
-    public function testAddElementException ()
+    public function testAddElementException()
     {
         $this->wsdl->addElement(1);
     }

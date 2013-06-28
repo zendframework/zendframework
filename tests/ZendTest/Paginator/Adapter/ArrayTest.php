@@ -28,7 +28,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp ()
+    protected function setUp()
     {
         parent::setUp();
         $this->adapter = new Adapter\ArrayAdapter(range(1, 101));
@@ -36,7 +36,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown ()
+    protected function tearDown()
     {
         $this->adapter = null;
         parent::tearDown();

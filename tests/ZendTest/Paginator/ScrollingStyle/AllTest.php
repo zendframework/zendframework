@@ -44,7 +44,7 @@ class AllTest extends \PHPUnit_Framework_TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown ()
+    protected function tearDown()
     {
         $this->scrollingStyle = null;
         $this->paginator = null;

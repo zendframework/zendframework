@@ -468,11 +468,6 @@ class Factory
      */
     protected function prepareAndInjectFactory($factoryOrName, FieldsetInterface $fieldset, $method)
     {
-        if ($factoryOrName instanceof Factory) {
-            $fieldset->setFormFactory($factoryOrName);
-            return;
-        }
-
         if (is_array($factoryOrName)) {
             if (!isset($factoryOrName['type'])) {
                 throw new Exception\DomainException(sprintf(

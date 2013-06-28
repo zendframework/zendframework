@@ -68,14 +68,14 @@ class DefaultRenderingStrategyTest extends TestCase
 
     public function testIgnoresNonConsoleModelNotContainingResultKeyWhenObtainingResult()
     {
-    	//Register console service
-    	$sm = new ServiceManager();
-    	$sm->setService('console', new ConsoleAdapter());
+        //Register console service
+        $sm = new ServiceManager();
+        $sm->setService('console', new ConsoleAdapter());
 
-    	$mockApplication = new MockApplication;
-    	$mockApplication->setServiceManager($sm);
+        $mockApplication = new MockApplication;
+        $mockApplication->setServiceManager($sm);
 
-    	$event    = new MvcEvent();
+        $event    = new MvcEvent();
         $event->setApplication($mockApplication);
 
         $model    = new Model\ViewModel(array('content' => 'Page not found'));

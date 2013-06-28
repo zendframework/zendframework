@@ -53,11 +53,10 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function write($text, $color = null, $bgColor = null)
     {
+        //Encode text to match console encoding
+        $text = $this->encodeText($text);
 
-    	//Encode text to match console encoding
-    	$text = $this->encodeText($text);
-
-    	if ($color !== null || $bgColor !== null) {
+        if ($color !== null || $bgColor !== null) {
             echo $this->colorize($text, $color, $bgColor);
         } else {
             echo $text;

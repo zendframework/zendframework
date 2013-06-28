@@ -123,25 +123,25 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testEncodeText()
     {
-    	//Utf8 string
-    	$text = '\u00E9\u00E9\u00E9';
+        //Utf8 string
+        $text = '\u00E9\u00E9\u00E9';
 
-    	//Console UTF8 - Text utf8
-    	$this->adapter->setTestUtf8(true);
-    	$encodedText = $this->adapter->encodeText($text);
-    	$this->assertEquals($text,$encodedText);
+        //Console UTF8 - Text utf8
+        $this->adapter->setTestUtf8(true);
+        $encodedText = $this->adapter->encodeText($text);
+        $this->assertEquals($text,$encodedText);
 
-    	//Console UTF8 - Text not utf8
-    	$encodedText = $this->adapter->encodeText(utf8_decode($text));
-    	$this->assertEquals($text,$encodedText);
+        //Console UTF8 - Text not utf8
+        $encodedText = $this->adapter->encodeText(utf8_decode($text));
+        $this->assertEquals($text,$encodedText);
 
-    	//Console not UTF8 - Text utf8
-    	$this->adapter->setTestUtf8(false);
-    	$encodedText = $this->adapter->encodeText($text);
-    	$this->assertEquals(utf8_decode($text),$encodedText);
+        //Console not UTF8 - Text utf8
+        $this->adapter->setTestUtf8(false);
+        $encodedText = $this->adapter->encodeText($text);
+        $this->assertEquals(utf8_decode($text),$encodedText);
 
-    	//Console not UTF8 - Text not utf8
-    	$encodedText = $this->adapter->encodeText(utf8_decode($text));
-    	$this->assertEquals(utf8_decode($text),$encodedText);
+        //Console not UTF8 - Text not utf8
+        $encodedText = $this->adapter->encodeText(utf8_decode($text));
+        $this->assertEquals(utf8_decode($text),$encodedText);
     }
 }

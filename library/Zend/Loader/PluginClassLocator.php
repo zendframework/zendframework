@@ -9,12 +9,13 @@
 
 namespace Zend\Loader;
 
+use IteratorAggregate;
 use Traversable;
 
 /**
  * Plugin class locator interface
  */
-interface PluginClassLocator extends ShortNameLocator, \IteratorAggregate
+interface PluginClassLocator extends ShortNameLocator, IteratorAggregate
 {
     /**
      * Register a class to a given short name

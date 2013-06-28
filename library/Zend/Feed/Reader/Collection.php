@@ -9,9 +9,9 @@
 
 namespace Zend\Feed\Reader;
 
-class Collection extends \ArrayObject
+use ArrayObject;
+
+class Collection extends ArrayObject
 {
-
-
 
 }

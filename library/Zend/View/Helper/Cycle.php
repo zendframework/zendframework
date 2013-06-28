@@ -9,13 +9,16 @@
 
 namespace Zend\View\Helper;
 
+use Iterator;
+
 /**
  * Helper for alternating between set of values
  */
-class Cycle extends AbstractHelper implements \Iterator
+class Cycle extends AbstractHelper implements Iterator
 {
     /**
      * Default name
+     *
      * @var string
      */
     const DEFAULT_NAME = 'default';
@@ -180,9 +183,9 @@ class Cycle extends AbstractHelper implements \Iterator
     {
         if ($this->pointers[$this->name] < 0) {
             return 0;
-        } else {
-            return $this->pointers[$this->name];
         }
+
+        return $this->pointers[$this->name];
     }
 
     /**

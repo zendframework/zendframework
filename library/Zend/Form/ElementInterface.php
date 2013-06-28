@@ -112,6 +112,7 @@ interface ElementInterface
     /**
      * Set the label (if any) used for this element
      *
+     * @todo remove redundancy with LabelAwareInterface
      * @param  $label
      * @return ElementInterface
      */
@@ -120,6 +121,7 @@ interface ElementInterface
     /**
      * Retrieve the label (if any) used for this element
      *
+     * @todo remove redundancy with LabelAwareInterface
      * @return string
      */
     public function getLabel();

@@ -12,6 +12,7 @@ namespace Zend\Form\View\Helper;
 use Zend\Form\Element\Button;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
+use Zend\Form\LabelAwareInterface;
 use Zend\Form\View\Helper\AbstractHelper;
 
 class FormRow extends AbstractHelper
@@ -160,8 +161,18 @@ class FormRow extends AbstractHelper
         $elementString = $elementHelper->render($element);
 
         if (isset($label) && '' !== $label) {
-            $label = $escapeHtmlHelper($label);
-            $labelAttributes = $element->getLabelAttributes();
+
+            $labelOptions = array();
+            $labelAttributes = array();
+
+            if ($element instanceof LabelAwareInterface) {
+                $labelOptions = $element->getLabelOptions();
+                $labelAttributes = $element->getLabelAttributes();
+            }
+
+            if (empty($labelOptions) || $labelOptions['disable_html_escape'] == false) {
+                $label = $escapeHtmlHelper($label);
+            }
 
             if (empty($labelAttributes)) {
                 $labelAttributes = $this->labelAttributes;

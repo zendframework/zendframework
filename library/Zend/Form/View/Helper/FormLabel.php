@@ -11,6 +11,7 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
+use Zend\Form\LabelAwareInterface;
 
 class FormLabel extends AbstractHelper
 {
@@ -118,7 +119,11 @@ class FormLabel extends AbstractHelper
             ));
         }
 
-        $labelAttributes = $attributesOrElement->getLabelAttributes();
+        $labelAttributes = array();
+        if ($attributesOrElement instanceof LabelAwareInterface) {
+            $labelAttributes = $attributesOrElement->getLabelAttributes();
+        }
+
         $attributes = array('for' => $id);
 
         if (!empty($labelAttributes)) {

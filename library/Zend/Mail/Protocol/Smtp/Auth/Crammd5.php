@@ -9,6 +9,7 @@
 
 namespace Zend\Mail\Protocol\Smtp\Auth;
 
+use Zend\Crypt\Hmac;
 use Zend\Mail\Protocol\Smtp;
 
 /**
@@ -66,8 +67,7 @@ class Crammd5 extends Smtp
 
 
     /**
-     * @todo Perform CRAM-MD5 authentication with supplied credentials
-     *
+     * Performs CRAM-MD5 authentication with supplied credentials
      */
     public function auth()
     {
@@ -132,23 +132,11 @@ class Crammd5 extends Smtp
      *
      * @param  string $key   Challenge key (usually password)
      * @param  string $data  Challenge data
-     * @param  int    $block Length of blocks
+     * @param  int    $block Length of blocks (deprecated; unused)
      * @return string
      */
     protected function _hmacMd5($key, $data, $block = 64)
     {
-        if (strlen($key) > 64) {
-            $key = pack('H32', md5($key));
-        } elseif (strlen($key) < 64) {
-            $key = str_pad($key, $block, "\0");
-        }
-
-        $kIpad = substr($key, 0, 64) ^ str_repeat(chr(0x36), 64);
-        $kOpad = substr($key, 0, 64) ^ str_repeat(chr(0x5C), 64);
-
-        $inner = pack('H32', md5($kIpad . $data));
-        $digest = md5($kOpad . $inner);
-
-        return $digest;
+        return Hmac::compute($key, 'md5', $data);
     }
 }

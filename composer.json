@@ -51,8 +51,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Zend\\": "library/",
-            "ZendTest\\": "tests/"
+            "Zend\\": "library/"
         }
     },
     "bin": [

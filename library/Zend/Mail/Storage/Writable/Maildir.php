@@ -9,6 +9,7 @@
 
 namespace Zend\Mail\Storage\Writable;
 
+use RecursiveIteratorIterator;
 use Zend\Mail\Exception as MailException;
 use Zend\Mail\Storage;
 use Zend\Mail\Storage\Exception as StorageException;
@@ -754,7 +755,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
             }
         }
 
-        $folders = new \RecursiveIteratorIterator($this->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
+        $folders = new RecursiveIteratorIterator($this->getFolders(), RecursiveIteratorIterator::SELF_FIRST);
         foreach ($folders as $folder) {
             $subdir = $folder->getGlobalName();
             if ($subdir == 'INBOX') {

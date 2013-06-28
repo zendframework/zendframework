@@ -9,10 +9,12 @@
 
 namespace Zend\Ldap;
 
+use ArrayAccess;
+
 /**
  * Zend\Ldap\Dn provides an API for DN manipulation
  */
-class Dn implements \ArrayAccess
+class Dn implements ArrayAccess
 {
     const ATTR_CASEFOLD_NONE  = 'none';
     const ATTR_CASEFOLD_UPPER = 'upper';

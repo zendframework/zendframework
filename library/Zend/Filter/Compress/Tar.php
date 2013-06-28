@@ -65,7 +65,7 @@ class Tar extends AbstractCompressionAlgorithm
      * Sets the archive to use for de-/compression
      *
      * @param  string $archive Archive to use
-     * @return Tar
+     * @return self
      */
     public function setArchive($archive)
     {
@@ -89,7 +89,7 @@ class Tar extends AbstractCompressionAlgorithm
      * Sets the target path to use
      *
      * @param  string $target
-     * @return Tar
+     * @return self
      * @throws Exception\InvalidArgumentException if target path does not exist
      */
     public function setTarget($target)
@@ -119,7 +119,7 @@ class Tar extends AbstractCompressionAlgorithm
      * Either Gz or Bz2.
      *
      * @param string $mode
-     * @return Tar
+     * @return self
      * @throws Exception\InvalidArgumentException for invalid $mode values
      * @throws Exception\ExtensionNotLoadedException if bz2 mode selected but extension not loaded
      * @throws Exception\ExtensionNotLoadedException if gz mode selected but extension not loaded

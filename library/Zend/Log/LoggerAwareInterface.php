@@ -25,9 +25,10 @@ interface LoggerAwareInterface
     public function setLogger(LoggerInterface $logger);
     
     /**
-     * Get logger instance
+     * Get logger instance. Currently commented out as this would possibly break
+     * existing implementations.
      * 
      * @return null|LoggerInterface
      */
-    public function getLogger();
+    // public function getLogger();
 }

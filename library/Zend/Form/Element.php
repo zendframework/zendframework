@@ -16,8 +16,8 @@ use Zend\Stdlib\InitializableInterface;
 class Element implements
     ElementAttributeRemovalInterface,
     ElementInterface,
-    LabelAwareInterface,
-    InitializableInterface
+    InitializableInterface,
+    LabelOptionsAwareInterface
 {
     /**
      * @var array

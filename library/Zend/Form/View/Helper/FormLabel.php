@@ -11,7 +11,7 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
-use Zend\Form\LabelAwareInterface;
+use Zend\Form\LabelOptionsAwareInterface;
 
 class FormLabel extends AbstractHelper
 {
@@ -120,7 +120,7 @@ class FormLabel extends AbstractHelper
         }
 
         $labelAttributes = array();
-        if ($attributesOrElement instanceof LabelAwareInterface) {
+        if ($attributesOrElement instanceof LabelOptionsAwareInterface) {
             $labelAttributes = $attributesOrElement->getLabelAttributes();
         }
 

@@ -12,7 +12,7 @@ namespace Zend\Form\View\Helper;
 use Zend\Form\Element\Button;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
-use Zend\Form\LabelAwareInterface;
+use Zend\Form\LabelOptionsAwareInterface;
 use Zend\Form\View\Helper\AbstractHelper;
 
 class FormRow extends AbstractHelper
@@ -165,8 +165,8 @@ class FormRow extends AbstractHelper
             $labelOptions = array();
             $labelAttributes = array();
 
-            if ($element instanceof LabelAwareInterface) {
-                $labelOptions = $element->getLabelOptions();
+            if ($element instanceof LabelOptionsAwareInterface) {
+                $labelOptions    = $element->getLabelOptions();
                 $labelAttributes = $element->getLabelAttributes();
             }
 

@@ -9,15 +9,8 @@
 
 namespace Zend\Form;
 
-class LabelAwareTrait
+class LabelOptionsAwareTrait
 {
-    /**
-     * Label content
-     *
-     * @var string
-     */
-    protected $label;
-
     /**
      * Label specific html attributes
      *
@@ -35,35 +28,10 @@ class LabelAwareTrait
     );
 
     /**
-     * Set the label used for this element
-     *
-     * @param $label
-     * @return LabelAwareInterface
-     */
-    public function setLabel($label)
-    {
-        if (is_string($label)) {
-            $this->label = $label;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Retrieve the label used for this element
-     *
-     * @return string
-     */
-    public function getLabel()
-    {
-        return $this->label;
-    }
-
-    /**
      * Set the attributes to use with the label
      *
      * @param array $labelAttributes
-     * @return LabelAwareInterface
+     * @return LabelOptionsAwareInterface
      */
     public function setLabelAttributes(array $labelAttributes)
     {
@@ -85,7 +53,7 @@ class LabelAwareTrait
      * Set label specific options
      *
      * @param array $labelOptions
-     * @return LabelAwareInterface
+     * @return LabelOptionsAwareInterface
      */
     public function setLabelOptions(array $labelOptions)
     {

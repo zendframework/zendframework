@@ -402,7 +402,7 @@ document.write(bar.strlen());');
         $this->assertContains('<!--[if ! IE]><!--><', $test);
         $this->assertContains('<!--<![endif]-->', $test);
     }
-    
+
     /**
      * @issue ZF-5435
      */

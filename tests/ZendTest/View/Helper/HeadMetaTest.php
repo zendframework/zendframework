@@ -529,11 +529,11 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp("|^<!--\[if lt IE 7\]>|", $html);
         $this->assertRegExp("|<!\[endif\]-->$|", $html);
     }
-    
+
     public function testConditionalNoIE()
     {
         $html = $this->helper->appendHttpEquiv('foo', 'bar', array('conditional' => '!IE'))->toString();
-        
+
         $this->assertContains('<!--[if !IE]><!--><', $html);
         $this->assertContains('<!--<![endif]-->', $html);
     }
@@ -541,7 +541,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     public function testConditionalNoIEWidthSpace()
     {
         $html = $this->helper->appendHttpEquiv('foo', 'bar', array('conditional' => '! IE'))->toString();
-        
+
         $this->assertContains('<!--[if ! IE]><!--><', $html);
         $this->assertContains('<!--<![endif]-->', $html);
     }

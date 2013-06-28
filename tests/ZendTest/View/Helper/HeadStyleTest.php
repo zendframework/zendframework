@@ -372,7 +372,7 @@ a {
         $this->assertContains('<!--[if !IE]><!--><', $test);
         $this->assertContains('<!--<![endif]-->', $test);
     }
-    
+
     public function testConditionalScriptNoIEWidthSpace()
     {
         $this->helper->appendStyle('

@@ -16,5 +16,18 @@ use Zend\Log\LoggerInterface;
  */
 interface LoggerAwareInterface
 {
+    /**
+     * Set logger instance
+     * 
+     * @param LoggerInterface
+     * @return void
+     */
     public function setLogger(LoggerInterface $logger);
+    
+    /**
+     * Get logger instance
+     * 
+     * @return null|LoggerInterface
+     */
+    public function getLogger();
 }

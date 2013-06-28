@@ -42,7 +42,7 @@ class StringTrim extends AbstractFilter
      * Sets the charList option
      *
      * @param  string $charList
-     * @return StringTrim Provides a fluent interface
+     * @return self Provides a fluent interface
      */
     public function setCharList($charList)
     {

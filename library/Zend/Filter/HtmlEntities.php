@@ -89,7 +89,7 @@ class HtmlEntities extends AbstractFilter
      * Sets the quoteStyle option
      *
      * @param  int $quoteStyle
-     * @return HtmlEntities Provides a fluent interface
+     * @return self Provides a fluent interface
      */
     public function setQuoteStyle($quoteStyle)
     {
@@ -112,7 +112,7 @@ class HtmlEntities extends AbstractFilter
      * Set encoding
      *
      * @param  string $value
-     * @return HtmlEntities
+     * @return self
      */
     public function setEncoding($value)
     {
@@ -138,7 +138,7 @@ class HtmlEntities extends AbstractFilter
      * Proxies to {@link setEncoding()}
      *
      * @param  string $charSet
-     * @return HtmlEntities Provides a fluent interface
+     * @return self Provides a fluent interface
      */
     public function setCharSet($charSet)
     {
@@ -159,7 +159,7 @@ class HtmlEntities extends AbstractFilter
      * Sets the doubleQuote option
      *
      * @param  bool $doubleQuote
-     * @return HtmlEntities Provides a fluent interface
+     * @return self Provides a fluent interface
      */
     public function setDoubleQuote($doubleQuote)
     {

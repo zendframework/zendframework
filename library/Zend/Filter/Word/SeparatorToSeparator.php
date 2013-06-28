@@ -20,8 +20,8 @@ class SeparatorToSeparator extends AbstractFilter
     /**
      * Constructor
      *
-     * @param  string  $searchSeparator      Separator to search for
-     * @param  string  $replacementSeparator Separator to replace with
+     * @param  string $searchSeparator      Separator to search for
+     * @param  string $replacementSeparator Separator to replace with
      */
     public function __construct($searchSeparator = ' ', $replacementSeparator = '-')
     {
@@ -32,8 +32,8 @@ class SeparatorToSeparator extends AbstractFilter
     /**
      * Sets a new seperator to search for
      *
-     * @param  string  $separator  Seperator to search for
-     * @return SeparatorToSeparator
+     * @param  string $separator Seperator to search for
+     * @return self
      */
     public function setSearchSeparator($separator)
     {
@@ -44,7 +44,7 @@ class SeparatorToSeparator extends AbstractFilter
     /**
      * Returns the actual set separator to search for
      *
-     * @return  string
+     * @return string
      */
     public function getSearchSeparator()
     {
@@ -54,8 +54,8 @@ class SeparatorToSeparator extends AbstractFilter
     /**
      * Sets a new separator which replaces the searched one
      *
-     * @param  string  $separator  Separator which replaces the searched one
-     * @return SeparatorToSeparator
+     * @param  string $separator Separator which replaces the searched one
+     * @return self
      */
     public function setReplacementSeparator($separator)
     {
@@ -66,7 +66,7 @@ class SeparatorToSeparator extends AbstractFilter
     /**
      * Returns the actual set separator which replaces the searched one
      *
-     * @return  string
+     * @return string
      */
     public function getReplacementSeparator()
     {

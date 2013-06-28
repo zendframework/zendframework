@@ -104,7 +104,7 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets the encryption keys
      *
      * @param  string|array $keys Key with type association
-     * @return Openssl
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     protected function _setKeys($keys)
@@ -168,7 +168,7 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets public keys
      *
      * @param  string|array $key Public keys
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return self
      */
     public function setPublicKey($key)
     {
@@ -202,7 +202,7 @@ class Openssl implements EncryptionAlgorithmInterface
      *
      * @param  string $key Private key
      * @param  string $passphrase
-     * @return Openssl
+     * @return self
      */
     public function setPrivateKey($key, $passphrase = null)
     {
@@ -239,7 +239,7 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets envelope keys
      *
      * @param  string|array $key Envelope keys
-     * @return \Zend\Filter\Encrypt\Openssl
+     * @return self
      */
     public function setEnvelopeKey($key)
     {
@@ -271,7 +271,7 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets a new passphrase
      *
      * @param string $passphrase
-     * @return Openssl
+     * @return self
      */
     public function setPassphrase($passphrase)
     {
@@ -293,7 +293,7 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets a internal compression for values to encrypt
      *
      * @param string|array $compression
-     * @return Openssl
+     * @return self
      */
     public function setCompression($compression)
     {
@@ -319,7 +319,7 @@ class Openssl implements EncryptionAlgorithmInterface
      * Sets if the envelope keys should be included in the encrypted value
      *
      * @param  bool $package
-     * @return Openssl
+     * @return self
      */
     public function setPackage($package)
     {

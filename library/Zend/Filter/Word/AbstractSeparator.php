@@ -37,8 +37,8 @@ abstract class AbstractSeparator extends AbstractFilter
     /**
      * Sets a new separator
      *
-     * @param  string  $separator  Separator
-     * @return AbstractSeparator
+     * @param  string $separator Separator
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setSeparator($separator)
@@ -53,7 +53,7 @@ abstract class AbstractSeparator extends AbstractFilter
     /**
      * Returns the actual set separator
      *
-     * @return  string
+     * @return string
      */
     public function getSeparator()
     {

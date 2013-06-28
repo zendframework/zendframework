@@ -43,7 +43,7 @@ class RealPath extends AbstractFilter
      * FALSE when not existing paths can be given
      *
      * @param  bool $flag Path must exist
-     * @return RealPath
+     * @return self
      */
     public function setExists($flag = true)
     {

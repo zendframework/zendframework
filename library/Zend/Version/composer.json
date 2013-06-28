@@ -16,6 +16,9 @@
         "php": ">=5.3.3",
         "zendframework/zend-json": "self.version"
     },
+    "suggest": {
+        "zendframework/zend-http": "Allows use of Zend\\Http\\Client to check version information"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.2-dev",

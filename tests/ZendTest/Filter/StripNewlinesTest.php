@@ -25,7 +25,7 @@ class StripNewlinesTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testBasic ()
+    public function testBasic()
     {
         $filter = new StripNewLinesFilter();
         $valuesExpected = array(

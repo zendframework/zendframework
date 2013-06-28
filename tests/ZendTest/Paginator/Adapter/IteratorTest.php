@@ -30,7 +30,7 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp ()
+    protected function setUp()
     {
         parent::setUp();
         $iterator = new \ArrayIterator(range(1, 101));
@@ -39,7 +39,7 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown ()
+    protected function tearDown()
     {
         $this->adapter = null;
         parent::tearDown();

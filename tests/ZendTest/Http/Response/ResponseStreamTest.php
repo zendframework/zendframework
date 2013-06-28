@@ -27,7 +27,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Foo Bar\r\nBar Foo", $response->getBody());
     }
 
-    public function testGzipResponse ()
+    public function testGzipResponse()
     {
         $stream = fopen(__DIR__ . '/../_files/response_gzip','rb');
 

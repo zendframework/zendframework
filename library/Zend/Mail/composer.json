@@ -18,9 +18,13 @@
         "zendframework/zend-mime": "self.version",
         "zendframework/zend-stdlib": "self.version"
     },
+    "require-dev": {
+        "zendframework/zend-servicemanager": "self.version",
+        "zendframework/zend-validator": "self.version"
+    },
     "suggest": {
-        "zendframework/zend-validator": "Zend\\Validator component",
-        "zendframework/zend-servicemanager": "Zend\\ServiceManager component"
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
+        "zendframework/zend-validator": "Zend\\Validator component"
     },
     "extra": {
         "branch-alias": {

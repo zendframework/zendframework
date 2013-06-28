@@ -15,6 +15,12 @@
     "require": {
         "php": ">=5.3.3"
     },
+    "require-dev": {
+        "zendframework/zend-cache": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-cache": "Zend\\Cache component"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.2-dev",

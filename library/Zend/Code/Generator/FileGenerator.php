@@ -9,6 +9,7 @@
 
 namespace Zend\Code\Generator;
 
+use Zend\Code\Reflection\Exception as ReflectionException;
 use Zend\Code\Reflection\FileReflection;
 
 class FileGenerator extends AbstractGenerator
@@ -66,30 +67,13 @@ class FileGenerator extends AbstractGenerator
      *
      * @param  string $filePath
      * @param  bool $includeIfNotAlreadyIncluded
-     * @throws Exception\InvalidArgumentException If file does not exists
-     * @throes Exception\RuntimeException If file exists but is not included or required
+     * @throws ReflectionException\InvalidArgumentException If file does not exists
+     * @throws ReflectionException\RuntimeException If file exists but is not included or required
      * @return FileGenerator
      */
     public static function fromReflectedFileName($filePath, $includeIfNotAlreadyIncluded = true)
     {
-        $realpath = realpath($filePath);
-
-        if ($realpath === false) {
-            $realpath = stream_resolve_include_path($filePath);
-        }
-
-        if (!$realpath) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'No file for %s was found.',
-                $filePath
-            ));
-        }
-
-        if ($includeIfNotAlreadyIncluded && !in_array($realpath, get_included_files())) {
-            include $realpath;
-        }
-
-        $fileReflector = new FileReflection($realpath);
+        $fileReflector = new FileReflection($filePath, $includeIfNotAlreadyIncluded);
         $codeGenerator = static::fromReflection($fileReflector);
 
         return $codeGenerator;

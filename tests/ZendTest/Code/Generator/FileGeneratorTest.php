@@ -300,58 +300,9 @@ EOS;
         $this->assertInstanceOf('Zend\Code\Generator\ClassGenerator', $class);
     }
 
-    public function testGeneratingFromAReflectedFilenameShouldRaiseExceptionIfFileDoesNotExist()
+    public function testGeneratingFromAReflectedFileName()
     {
-        $this->setExpectedException('Zend\Code\Generator\Exception\InvalidArgumentException', 'found');
-        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/does/not/exist.really');
-    }
-
-    public function testGeneratingFromAReflectedFilenameShouldRaiseExceptionIfFileDoesNotExistInIncludePath()
-    {
-        $this->setExpectedException('Zend\Code\Generator\Exception\InvalidArgumentException', 'found');
-        FileGenerator::fromReflectedFileName('an_empty_file.php');
-    }
-
-    public function testGeneratingFromAReflectedFilenameInIncludePathWithoutIncludeFlagEnable()
-    {
-        $this->setExpectedException('Zend\Code\Reflection\Exception\RuntimeException', 'must be required');
-        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
-
-        try {
-            FileGenerator::fromReflectedFileName('an_empty_file.php', false);
-            set_include_path($oldIncludePath);
-            $this->fail('Should throw exception');
-        } catch(Exception $e) {
-            set_include_path($oldIncludePath);
-            throw $e;
-        }
-    }
-
-    public function testGeneratingFromAReflectedFilenameIncluded()
-    {
-        include_once __DIR__ . '/TestAsset/an_empty_file.php';
-        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
-
-        try {
-            FileGenerator::fromReflectedFileName('an_empty_file.php', false);
-            set_include_path($oldIncludePath);
-        } catch(Exception $e) {
-            set_include_path($oldIncludePath);
-            throw $e;
-        }
-    }
-
-    public function testGeneratingFromAReflectedFilenameInIncludePath()
-    {
-        $this->assertFalse(in_array(realpath(__DIR__ . '/TestAsset/a_second_empty_file.php'), get_included_files()));
-        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
-
-        try {
-            FileGenerator::fromReflectedFileName('a_second_empty_file.php');
-            set_include_path($oldIncludePath);
-        } catch(Exception $e) {
-            set_include_path($oldIncludePath);
-            throw $e;
-        }
+        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/TestAsset/OneInterface.php');
+        $this->assertInstanceOf('Zend\Code\Generator\FileGenerator', $generator);
     }
 }

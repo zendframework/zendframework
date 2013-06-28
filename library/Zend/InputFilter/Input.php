@@ -142,6 +142,7 @@ class Input implements InputInterface, EmptyContextInterface
     public function setRequired($required)
     {
         $this->required = (bool) $required;
+        $this->setAllowEmpty(!$required);
         return $this;
     }
 

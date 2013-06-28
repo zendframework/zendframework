@@ -49,4 +49,15 @@ class ReturnTagTest extends \PHPUnit_Framework_TestCase
         $this->tag->setDescription('bar bar bar');
         $this->assertEquals('@return string bar bar bar', $this->tag->generate());
     }
+
+    public function testConstructorWithOptions()
+    {
+        $this->tag->setOptions(array(
+            'datatype' => 'string|null',
+        ));
+        $tagWithOptionsFromConstructor = new ReturnTag(array(
+            'datatype' => 'string|null',
+        ));
+        $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
+    }
 }

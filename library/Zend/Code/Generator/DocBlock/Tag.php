@@ -45,19 +45,6 @@ class Tag extends AbstractGenerator
     protected $description = null;
 
     /**
-     * @param  array $options
-     */
-    public function __construct(array $options = array())
-    {
-        if (isset($options['name'])) {
-            $this->setName($options['name']);
-        }
-        if (isset($options['description'])) {
-            $this->setDescription($options['description']);
-        }
-    }
-
-    /**
      * Build a Tag generator object from a reflection object
      *
      * @param  ReflectionDocBlockTag $reflectionTag

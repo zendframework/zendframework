@@ -11,7 +11,6 @@ namespace Zend\Mvc\Controller;
 
 use Zend\Mvc\Exception;
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\ConfigInterface;
 use Zend\Stdlib\DispatchableInterface;
 
 /**

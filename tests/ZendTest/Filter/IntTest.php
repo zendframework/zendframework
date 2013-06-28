@@ -41,4 +41,23 @@ class IntTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($output, $filter($input));
         }
     }
+
+    /**
+     * Ensures that an InvalidArgumentException is raised if array is used
+     *
+     * @return void
+     */
+    public function testExceptionRaisedIfArrayUsed()
+    {
+        $filter = new IntFilter();
+        $input = array('123 test', '456 test');
+
+        try {
+            $filter->filter($input);
+        } catch (\Zend\Filter\Exception\InvalidArgumentException $expected) {
+            return;
+        }
+
+        $this->fail('An expected InvalidArgumentException has not been raised.');
+    }
 }

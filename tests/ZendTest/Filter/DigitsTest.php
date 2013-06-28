@@ -85,4 +85,23 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
                 );
         }
     }
+
+    /**
+     * Ensures that an InvalidArgumentException is raised if array is used
+     *
+     * @return void
+     */
+    public function testExceptionRaisedIfArrayUsed()
+    {
+        $filter = new DigitsFilter();
+        $input = array('abc123', 'abc 123');
+
+        try {
+            $filter->filter($input);
+        } catch (\Zend\Filter\Exception\InvalidArgumentException $expected) {
+            return;
+        }
+
+        $this->fail('An expected InvalidArgumentException has not been raised.');
+    }
 }

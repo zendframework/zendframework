@@ -106,4 +106,26 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
                . DIRECTORY_SEPARATOR . '_files';
         $this->assertEquals($path, $filter($path3));
     }
+
+    /**
+     * Ensures that an InvalidArgumentException is raised if array is used
+     *
+     * @return void
+     */
+    public function testExceptionRaisedIfArrayUsed()
+    {
+        $filter   = $this->_filter;
+        $input = array(
+            $this->_filesPath . DIRECTORY_SEPARATOR . 'file.1',
+            $this->_filesPath . DIRECTORY_SEPARATOR . 'file.2'
+        );
+
+        try {
+            $filter->filter($input);
+        } catch (\Zend\Filter\Exception\InvalidArgumentException $expected) {
+            return;
+        }
+
+        $this->fail('An expected InvalidArgumentException has not been raised.');
+    }
 }

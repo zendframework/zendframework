@@ -259,6 +259,24 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that an InvalidArgumentException is raised if array is used
+     *
+     * @return void
+     */
+    public function testExceptionRaisedIfArrayUsed()
+    {
+        $input = array('<', '>');
+
+        try {
+            $this->_filter->filter($input);
+        } catch (\Zend\Filter\Exception\InvalidArgumentException $expected) {
+            return;
+        }
+
+        $this->fail('An expected InvalidArgumentException has not been raised.');
+    }
+
+    /**
      * Null error handler; used when wanting to ignore specific error types
      */
     public function errorHandler($errno, $errstr)

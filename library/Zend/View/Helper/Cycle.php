@@ -18,7 +18,7 @@ class Cycle extends AbstractHelper implements Iterator
 {
     /**
      * Default name
-     * 
+     *
      * @var string
      */
     const DEFAULT_NAME = 'default';

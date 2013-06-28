@@ -46,7 +46,7 @@ class Feed extends Extension\AbstractFeed
 
     /**
      * Get update frequency
-     * 
+     *
      * @return int
      */
     public function getUpdateFrequency()
@@ -64,7 +64,7 @@ class Feed extends Extension\AbstractFeed
 
     /**
      * Get update frequency as ticks
-     * 
+     *
      * @return int
      */
     public function getUpdateFrequencyAsTicks()

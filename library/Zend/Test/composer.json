@@ -24,6 +24,12 @@
         "zendframework/zend-uri": "self.version",
         "zendframework/zend-view": "self.version"
     },
+    "require-dev": {
+        "zendframework/zend-console": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-console": "Zend\\Console component"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.2-dev",

@@ -16,7 +16,15 @@
         "php": ">=5.3.3",
         "zendframework/zend-stdlib": "self.version"
     },
+    "require-dev": {
+        "zendframework/zend-filter": "self.version",
+        "zendframework/zend-i18n": "self.version",
+        "zendframework/zend-json": "self.version",
+        "zendframework/zend-servicemanager": "self.version"
+    },
     "suggest": {
+        "zendframework/zend-filter": "Zend\\Filter component",
+        "zendframework/zend-i18n": "Zend\\I18n component",
         "zendframework/zend-json": "Zend\\Json to use the Json reader or writer classes",
         "zendframework/zend-servicemanager": "Zend\\ServiceManager for use with the Config Factory to retrieve reader and writer instances"
     },

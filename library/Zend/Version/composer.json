@@ -13,7 +13,8 @@
     },
     "target-dir": "Zend/Version",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-json": "self.version"
     },
     "extra": {
         "branch-alias": {

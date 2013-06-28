@@ -44,9 +44,11 @@ class Gettext implements FileLoaderInterface
      */
     public function load($locale, $filename)
     {
-        if (!is_file($filename) || !is_readable($filename)) {
+        $resolvedIncludePath = stream_resolve_include_path($filename);
+        $fromIncludePath = ($resolvedIncludePath !== false) ? $resolvedIncludePath : $filename;
+        if (!$fromIncludePath || !is_file($fromIncludePath) || !is_readable($fromIncludePath)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Could not open file %s for reading',
+                'Could not find or open file %s for reading',
                 $filename
             ));
         }
@@ -54,7 +56,7 @@ class Gettext implements FileLoaderInterface
         $textDomain = new TextDomain();
 
         ErrorHandler::start();
-        $this->file = fopen($filename, 'rb');
+        $this->file = fopen($fromIncludePath, 'rb');
         $error = ErrorHandler::stop();
         if (false === $this->file) {
             throw new Exception\InvalidArgumentException(sprintf(

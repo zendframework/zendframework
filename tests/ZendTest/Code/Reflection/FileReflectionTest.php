@@ -10,6 +10,7 @@
 
 namespace ZendTest\Code\Reflection;
 
+use Exception;
 use Zend\Code\Reflection\FileReflection;
 
 /**
@@ -31,8 +32,51 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
     public function testFileConstructorThrowsExceptionOnNonExistentFile()
     {
         $nonExistentFile = 'Non/Existent/File.php';
-        $this->setExpectedException('Zend\Code\Reflection\Exception\RuntimeException', 'File Non/Existent/File.php must be required before it can be reflected');
+        $this->setExpectedException('Zend\Code\Reflection\Exception\InvalidArgumentException', 'found');
         $reflectionFile = new FileReflection($nonExistentFile);
+    }
+
+    public function testFileConstructorFromAReflectedFilenameInIncludePathWithoutIncludeFlagEnabled()
+    {
+        $this->setExpectedException('Zend\Code\Reflection\Exception\RuntimeException', 'must be required');
+        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
+
+        try {
+            new FileReflection('an_empty_file.php', false);
+            set_include_path($oldIncludePath);
+            $this->fail('Should throw exception');
+        } catch (Exception $e) {
+            set_include_path($oldIncludePath);
+            throw $e;
+        }
+    }
+
+    public function testFileConstructorFromAReflectedFilenameIncluded()
+    {
+        include_once __DIR__ . '/TestAsset/an_empty_file.php';
+        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
+
+        try {
+            new FileReflection('an_empty_file.php', false);
+            set_include_path($oldIncludePath);
+        } catch (Exception $e) {
+            set_include_path($oldIncludePath);
+            throw $e;
+        }
+    }
+
+    public function testFileConstructorFromAReflectedFilenameInIncludePath()
+    {
+        $this->assertFalse(in_array(realpath(__DIR__ . '/TestAsset/a_second_empty_file.php'), get_included_files()));
+        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
+
+        try {
+            new FileReflection('a_second_empty_file.php', true);
+            set_include_path($oldIncludePath);
+        } catch(Exception $e) {
+            set_include_path($oldIncludePath);
+            throw $e;
+        }
     }
 
     public function testFileGetClassReturnsClassReflectionObject()

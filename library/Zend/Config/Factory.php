@@ -65,11 +65,17 @@ class Factory
      */
     public static function fromFile($filename, $returnConfigObject = false)
     {
-        $fromIncludePath = stream_resolve_include_path($filename);
-        if ($fromIncludePath) {
+        $filepath = $filename;
+        if (!file_exists($filename)) {
+            $fromIncludePath = stream_resolve_include_path($filename);
+            if (!$fromIncludePath) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Filename "%s" cannot be found relative to the working directory or the include_path ("%s")',
+                    $filename,
+                    get_include_path()
+                ));
+            }
             $filepath = $fromIncludePath;
-        } else {
-            $filepath = $filename;
         }
 
         $pathinfo = pathinfo($filepath);

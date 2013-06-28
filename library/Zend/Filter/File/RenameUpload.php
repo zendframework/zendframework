@@ -51,7 +51,7 @@ class RenameUpload extends AbstractFilter
 
     /**
      * @param  string $target Target file path or directory
-     * @return RenameUpload
+     * @return self
      */
     public function setTarget($target)
     {
@@ -76,7 +76,7 @@ class RenameUpload extends AbstractFilter
      * @param  bool $flag When true, this filter will use the $_FILES['name']
      *                       as the target filename.
      *                       Otherwise, it uses the default 'target' rules.
-     * @return RenameUpload
+     * @return self
      */
     public function setUseUploadName($flag = true)
     {
@@ -95,7 +95,7 @@ class RenameUpload extends AbstractFilter
     /**
      * @param  bool $flag When true, this filter will use the original file
      *                    extension for the target filename
-     * @return RenameUpload
+     * @return self
      */
     public function setUseUploadExtension($flag = true)
     {
@@ -113,7 +113,7 @@ class RenameUpload extends AbstractFilter
 
     /**
      * @param  bool $flag Shall existing files be overwritten?
-     * @return RenameUpload
+     * @return self
      */
     public function setOverwrite($flag = true)
     {
@@ -131,7 +131,7 @@ class RenameUpload extends AbstractFilter
 
     /**
      * @param  bool $flag Shall target files have a random postfix attached?
-     * @return RenameUpload
+     * @return self
      */
     public function setRandomize($flag = true)
     {
@@ -198,7 +198,7 @@ class RenameUpload extends AbstractFilter
     /**
      * @param  string $sourceFile Source file path
      * @param  string $targetFile Target file path
-     * @throws \Zend\Filter\Exception\RuntimeException
+     * @throws Exception\RuntimeException
      * @return bool
      */
     protected function moveUploadedFile($sourceFile, $targetFile)
@@ -218,7 +218,7 @@ class RenameUpload extends AbstractFilter
 
     /**
      * @param  string $targetFile Target file path
-     * @throws \Zend\Filter\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     protected function checkFileExists($targetFile)
     {
@@ -281,6 +281,7 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
+     * @param  string $source
      * @param  string $filename
      * @return string
      */

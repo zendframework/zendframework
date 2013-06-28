@@ -62,7 +62,7 @@ class Rar extends AbstractCompressionAlgorithm
      * Sets the callback to use
      *
      * @param  string $callback
-     * @return Rar
+     * @return self
      * @throws Exception\InvalidArgumentException if invalid callback provided
      */
     public function setCallback($callback)
@@ -89,7 +89,7 @@ class Rar extends AbstractCompressionAlgorithm
      * Sets the archive to use for de-/compression
      *
      * @param  string $archive Archive to use
-     * @return Rar
+     * @return self
      */
     public function setArchive($archive)
     {
@@ -113,7 +113,7 @@ class Rar extends AbstractCompressionAlgorithm
      * Sets the password to use
      *
      * @param  string $password
-     * @return Rar
+     * @return self
      */
     public function setPassword($password)
     {
@@ -135,7 +135,7 @@ class Rar extends AbstractCompressionAlgorithm
      * Sets the targetpath to use
      *
      * @param  string $target
-     * @return Rar
+     * @return self
      * @throws Exception\InvalidArgumentException if specified target directory does not exist
      */
     public function setTarget($target)

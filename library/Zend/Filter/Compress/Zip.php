@@ -60,7 +60,7 @@ class Zip extends AbstractCompressionAlgorithm
      * Sets the archive to use for de-/compression
      *
      * @param  string $archive Archive to use
-     * @return Zip
+     * @return self
      */
     public function setArchive($archive)
     {
@@ -85,7 +85,7 @@ class Zip extends AbstractCompressionAlgorithm
      *
      * @param  string $target
      * @throws Exception\InvalidArgumentException
-     * @return Zip
+     * @return self
      */
     public function setTarget($target)
     {

@@ -38,7 +38,7 @@ class Encrypt extends Filter\Encrypt
      * Sets the new filename where the content will be stored
      *
      * @param  string $filename (Optional) New filename to set
-     * @return Encrypt
+     * @return self
      */
     public function setFilename($filename = null)
     {

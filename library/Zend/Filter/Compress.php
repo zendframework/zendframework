@@ -51,7 +51,7 @@ class Compress extends AbstractFilter
      *
      * @param  array $options
      * @throws Exception\InvalidArgumentException if options is not an array or Traversable
-     * @return Compress
+     * @return self
      */
     public function setOptions($options)
     {
@@ -122,7 +122,7 @@ class Compress extends AbstractFilter
      * Sets compression adapter
      *
      * @param  string|Compress\CompressionAlgorithmInterface $adapter Adapter to use
-     * @return Compress
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setAdapter($adapter)
@@ -153,7 +153,7 @@ class Compress extends AbstractFilter
      * Set adapter options
      *
      * @param  array $options
-     * @return Compress
+     * @return self
      */
     public function setAdapterOptions(array $options)
     {

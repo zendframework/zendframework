@@ -25,7 +25,8 @@ trait HydratorAwareTrait
      * Set hydrator
      *
      * @param  HydratorInterface $hydrator
-     * @return HydratorAwareInterface
+     * @return self
+     * @access public
      */
     public function setHydrator(HydratorInterface $hydrator)
     {
@@ -37,7 +38,9 @@ trait HydratorAwareTrait
     /**
      * Retrieve hydrator
      *
-     * @return HydratorInterface
+     * @param void
+     * @return null|HydratorInterface
+     * @access public
      */
     public function getHydrator()
     {

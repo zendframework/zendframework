@@ -479,10 +479,10 @@ class Factory
         }
 
         if (is_string($factoryOrName)) {
-            $factory = $this->getFactoryFromName($factoryOrName);
+            $factoryOrName = $this->getFactoryFromName($factoryOrName);
         }
 
-        if (!$factory instanceof Factory) {
+        if (!$factoryOrName instanceof Factory) {
             throw new Exception\DomainException(sprintf(
                 '%s expects a valid extention of Zend\Form\Factory; received "%s"',
                 $method,
@@ -490,7 +490,7 @@ class Factory
             ));
         }
 
-        $fieldset->setFormFactory($factory);
+        $fieldset->setFormFactory($factoryOrName);
     }
 
     /**

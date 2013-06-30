@@ -88,6 +88,14 @@ class DateTimeSelectTest extends TestCase
         $this->assertEquals('05', $element->getSecondElement()->getValue());
     }
 
+    public function testCanGetValue()
+    {
+        $element  = new DateTimeSelectElement();
+        $element->setValue(new DateTime('2012-09-24 03:04:05'));
+        
+        $this->assertEquals('2012-09-24 03:04:05', $element->getValue());
+    }
+
     /**
      * @expectedException \Zend\Form\Exception\InvalidArgumentException
      */

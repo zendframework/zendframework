@@ -92,7 +92,7 @@ class DateTimeSelectTest extends TestCase
     {
         $element  = new DateTimeSelectElement();
         $element->setValue(new DateTime('2012-09-24 03:04:05'));
-        
+
         $this->assertEquals('2012-09-24 03:04:05', $element->getValue());
     }
 

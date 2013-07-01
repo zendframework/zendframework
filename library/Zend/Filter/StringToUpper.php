@@ -46,7 +46,11 @@ class StringToUpper extends AbstractUnicode
      */
     public function filter($value)
     {
-        if(!is_scalar($value)){
+        if (null === $value) {
+            return null;
+        }
+
+        if (!is_scalar($value)){
             trigger_error(
                 sprintf(
                     '%s expects parameter to be scalar, "%s" given; cannot filter',

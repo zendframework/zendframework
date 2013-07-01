@@ -557,4 +557,13 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ErrorException', $err);
         $this->assertContains('cannot filter', $err->getMessage());
     }
+
+    /**
+     * @return void
+     */
+    public function testReturnsNullIfNullIsUsed()
+    {
+        $filtered = $this->_filter->filter(null);
+        $this->assertNull($filtered);
+    }
 }

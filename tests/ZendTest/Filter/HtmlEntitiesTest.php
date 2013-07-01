@@ -278,6 +278,15 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @return void
+     */
+    public function testReturnsNullIfNullIsUsed()
+    {
+        $filtered = $this->_filter->filter(null);
+        $this->assertNull($filtered);
+    }
+
+    /**
      * Null error handler; used when wanting to ignore specific error types
      */
     public function errorHandler($errno, $errstr)

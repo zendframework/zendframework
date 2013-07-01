@@ -11,6 +11,7 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\Int as IntFilter;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -43,21 +44,21 @@ class IntTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that an InvalidArgumentException is raised if array is used
+     * Ensures that a warning is raised if array is used
      *
      * @return void
      */
-    public function testExceptionRaisedIfArrayUsed()
+    public function testWarningIsRaisedIfArrayUsed()
     {
         $filter = new IntFilter();
         $input = array('123 test', '456 test');
 
-        try {
-            $filter->filter($input);
-        } catch (\Zend\Filter\Exception\InvalidArgumentException $expected) {
-            return;
-        }
+        ErrorHandler::start(E_USER_WARNING);
+        $filtered = $filter->filter($input);
+        $err = ErrorHandler::stop();
 
-        $this->fail('An expected InvalidArgumentException has not been raised.');
+        $this->assertEquals($input, $filtered);
+        $this->assertInstanceOf('ErrorException', $err);
+        $this->assertContains('cannot filter', $err->getMessage());
     }
 }

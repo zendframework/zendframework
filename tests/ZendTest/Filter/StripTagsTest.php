@@ -11,6 +11,7 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\StripTags as StripTagsFilter;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
@@ -540,20 +541,20 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that an InvalidArgumentException is raised if array is used
+     * Ensures that a warning is raised if array is used
      *
      * @return void
      */
-    public function testExceptionRaisedIfArrayUsed()
+    public function testWarningIsRaisedIfArrayUsed()
     {
         $input = array('<li data-name="Test User" data-id="11223"></li>', '<li data-name="Test User 2" data-id="456789"></li>');
 
-        try {
-            $this->_filter->filter($input);
-        } catch (\Zend\Filter\Exception\InvalidArgumentException $expected) {
-            return;
-        }
+        ErrorHandler::start(E_USER_WARNING);
+        $filtered = $this->_filter->filter($input);
+        $err = ErrorHandler::stop();
 
-        $this->fail('An expected InvalidArgumentException has not been raised.');
+        $this->assertEquals($input, $filtered);
+        $this->assertInstanceOf('ErrorException', $err);
+        $this->assertContains('cannot filter', $err->getMessage());
     }
 }

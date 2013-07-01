@@ -10,22 +10,22 @@
 namespace Zend\I18n\Translator\Loader;
 
 /**
- * Abstract file loader implementation; provides facilities around resolving 
+ * Abstract file loader implementation; provides facilities around resolving
  * files via the include_path.
  */
 abstract class AbstractFileLoader implements FileLoaderInterface
 {
     /**
      * Whether or not to consult the include_path when locating files
-     * 
+     *
      * @var bool
      */
     protected $useIncludePath = false;
 
     /**
      * Indicate whether or not to use the include_path to resolve translation files
-     * 
-     * @param bool $flag 
+     *
+     * @param bool $flag
      * @return self
      */
     public function setUseIncludePath($flag = true)
@@ -35,8 +35,8 @@ abstract class AbstractFileLoader implements FileLoaderInterface
     }
 
     /**
-     * Are we using the include_path to resolve translation files? 
-     * 
+     * Are we using the include_path to resolve translation files?
+     *
      * @return bool
      */
     public function useIncludePath()
@@ -47,11 +47,11 @@ abstract class AbstractFileLoader implements FileLoaderInterface
     /**
      * Resolve a translation file
      *
-     * Checks if the file exists and is readable, returning a boolean false if not; if the "useIncludePath" 
-     * flag is enabled, it will attempt to resolve the file from the 
+     * Checks if the file exists and is readable, returning a boolean false if not; if the "useIncludePath"
+     * flag is enabled, it will attempt to resolve the file from the
      * include_path if the file does not exist on the current working path.
-     * 
-     * @param string $filename 
+     *
+     * @param string $filename
      * @return string|false
      */
     protected function resolveFile($filename)
@@ -67,8 +67,8 @@ abstract class AbstractFileLoader implements FileLoaderInterface
 
     /**
      * Resolve a translation file via the include_path
-     * 
-     * @param string $filename 
+     *
+     * @param string $filename
      * @return string|false
      */
     protected function resolveViaIncludePath($filename)

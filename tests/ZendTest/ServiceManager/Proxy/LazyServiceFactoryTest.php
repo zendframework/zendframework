@@ -24,6 +24,9 @@ class LazyServiceFactoryTest extends \PHPUnit_Framework_TestCase
      */
     protected $proxyFactory;
 
+    /**
+     * @var \Zend\ServiceManager\ServiceLocatorInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
     protected $locator;
 
     /**

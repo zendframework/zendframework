@@ -33,7 +33,7 @@ class StreamResponseSenderTest extends TestCase
 
     public function testSendResponseTwoTimesPrintsResponseOnlyOnce()
     {
-        $file = fopen(__DIR__ . '/TestAsset/sample-stream-file.txt', 'r');
+        $file = fopen(__DIR__ . '/TestAsset/sample-stream-file.txt', 'rb');
         $mockResponse = $this->getMock('Zend\Http\Response\Stream');
         $mockResponse->expects($this->once())->method('getStream')->will($this->returnValue($file));
         $mockSendResponseEvent = $this->getSendResponseEventMock($mockResponse);

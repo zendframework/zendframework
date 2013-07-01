@@ -104,6 +104,7 @@ class IniTest extends TestCase
     public function testLoaderLoadsFromIncludePath()
     {
         $loader = new IniLoader();
+        $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', 'translation_en.ini');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
@@ -113,6 +114,7 @@ class IniTest extends TestCase
     public function testLoaderLoadsFromPhar()
     {
         $loader = new IniLoader();
+        $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', 'phar://' . $this->testFilesDir . '/translations.phar/translation_en.ini');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);

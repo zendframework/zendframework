@@ -83,6 +83,7 @@ class PhpArrayTest extends TestCase
     public function testLoaderLoadsFromIncludePath()
     {
         $loader = new PhpArrayLoader();
+        $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', 'translation_en.php');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
@@ -92,6 +93,7 @@ class PhpArrayTest extends TestCase
     public function testLoaderLoadsFromPhar()
     {
         $loader = new PhpArrayLoader();
+        $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', 'phar://' . $this->testFilesDir . '/translations.phar/translation_en.php');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);

@@ -17,7 +17,7 @@ use Zend\I18n\Translator\TextDomain;
 /**
  * PHP INI format loader.
  */
-class Ini implements FileLoaderInterface
+class Ini extends AbstractFileLoader
 {
     /**
      * load(): defined by FileLoaderInterface.

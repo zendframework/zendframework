@@ -16,7 +16,7 @@ use Zend\I18n\Translator\TextDomain;
 /**
  * PHP array loader.
  */
-class PhpArray implements FileLoaderInterface
+class PhpArray extends AbstractFileLoader
 {
     /**
      * load(): defined by FileLoaderInterface.

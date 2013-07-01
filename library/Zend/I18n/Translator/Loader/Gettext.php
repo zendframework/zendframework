@@ -17,7 +17,7 @@ use Zend\Stdlib\ErrorHandler;
 /**
  * Gettext loader.
  */
-class Gettext implements FileLoaderInterface
+class Gettext extends AbstractFileLoader
 {
     /**
      * Current file pointer.
@@ -44,9 +44,8 @@ class Gettext implements FileLoaderInterface
      */
     public function load($locale, $filename)
     {
-        $resolvedIncludePath = stream_resolve_include_path($filename);
-        $fromIncludePath = ($resolvedIncludePath !== false) ? $resolvedIncludePath : $filename;
-        if (!$fromIncludePath || !is_file($fromIncludePath) || !is_readable($fromIncludePath)) {
+        $resolvedFile = $this->resolveFile($filename);
+        if (!$resolvedFile) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Could not find or open file %s for reading',
                 $filename
@@ -56,7 +55,7 @@ class Gettext implements FileLoaderInterface
         $textDomain = new TextDomain();
 
         ErrorHandler::start();
-        $this->file = fopen($fromIncludePath, 'rb');
+        $this->file = fopen($resolvedFile, 'rb');
         $error = ErrorHandler::stop();
         if (false === $this->file) {
             throw new Exception\InvalidArgumentException(sprintf(

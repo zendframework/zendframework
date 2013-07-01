@@ -13,6 +13,14 @@ use Zend\Stdlib\ArrayUtils;
 
 class Factory
 {
+    /**@+
+     * Constants defining rules for whether or not to use the include_path;
+     * used with fromFile() and fromFiles().
+     */
+    const NO_USE_INCLUDE_PATH = false;
+    const USE_INCLUDE_PATH = true;
+    /**@-*/
+
     /**
      * Plugin manager for loading readers
      *
@@ -59,14 +67,22 @@ class Factory
      *
      * @param  string  $filename
      * @param  bool $returnConfigObject
+     * @param  bool $useIncludePath
      * @return array|Config
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public static function fromFile($filename, $returnConfigObject = false)
+    public static function fromFile($filename, $returnConfigObject = false, $useIncludePath = self::NO_USE_INCLUDE_PATH)
     {
         $filepath = $filename;
         if (!file_exists($filename)) {
+            if (!$useIncludePath) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Filename "%s" cannot be found relative to the working directory',
+                    $filename
+                ));
+            }
+
             $fromIncludePath = stream_resolve_include_path($filename);
             if (!$fromIncludePath) {
                 throw new Exception\RuntimeException(sprintf(
@@ -122,14 +138,15 @@ class Factory
      *
      * @param  array   $files
      * @param  bool $returnConfigObject
+     * @param  bool $useIncludePath
      * @return array|Config
      */
-    public static function fromFiles(array $files, $returnConfigObject = false)
+    public static function fromFiles(array $files, $returnConfigObject = false, $useIncludePath = self::NO_USE_INCLUDE_PATH)
     {
         $config = array();
 
         foreach ($files as $file) {
-            $config = ArrayUtils::merge($config, static::fromFile($file));
+            $config = ArrayUtils::merge($config, static::fromFile($file, false, $useIncludePath));
         }
 
         return ($returnConfigObject) ? new Config($config) : $config;

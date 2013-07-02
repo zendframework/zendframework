@@ -397,4 +397,14 @@ class FormRowTest extends TestCase
 
         $this->assertContains($label, $markup);
     }
+
+    public function testCanSetLabelPositionBeforeInvoke()
+    {
+        $element = new Element('foo');
+
+        $this->helper->setLabelPosition('append');
+        $this->helper->__invoke($element);
+
+        $this->assertSame('append', $this->helper->getLabelPosition());
+    }
 }

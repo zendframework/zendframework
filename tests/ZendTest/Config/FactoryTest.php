@@ -122,7 +122,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             'Xml/include-base2.xml',
             'Php/include-base3.php',
         );
-        $config = Factory::fromFiles($files, false, Factory::USE_INCLUDE_PATH);
+        $config = Factory::fromFiles($files, false, true);
 
         $this->assertEquals('bar', $config['base']['foo']);
         $this->assertEquals('baz', $config['test']['bar']);

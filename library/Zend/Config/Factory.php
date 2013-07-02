@@ -13,14 +13,6 @@ use Zend\Stdlib\ArrayUtils;
 
 class Factory
 {
-    /**@+
-     * Constants defining rules for whether or not to use the include_path;
-     * used with fromFile() and fromFiles().
-     */
-    const NO_USE_INCLUDE_PATH = false;
-    const USE_INCLUDE_PATH = true;
-    /**@-*/
-
     /**
      * Plugin manager for loading readers
      *
@@ -72,7 +64,7 @@ class Factory
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public static function fromFile($filename, $returnConfigObject = false, $useIncludePath = self::NO_USE_INCLUDE_PATH)
+    public static function fromFile($filename, $returnConfigObject = false, $useIncludePath = false)
     {
         $filepath = $filename;
         if (!file_exists($filename)) {
@@ -141,7 +133,7 @@ class Factory
      * @param  bool $useIncludePath
      * @return array|Config
      */
-    public static function fromFiles(array $files, $returnConfigObject = false, $useIncludePath = self::NO_USE_INCLUDE_PATH)
+    public static function fromFiles(array $files, $returnConfigObject = false, $useIncludePath = false)
     {
         $config = array();
 

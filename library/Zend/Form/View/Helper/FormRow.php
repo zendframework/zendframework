@@ -92,7 +92,7 @@ class FormRow extends AbstractHelper
 
         if ($labelPosition !== null) {
             $this->setLabelPosition($labelPosition);
-        } else {
+        } elseif ($this->labelPosition === null) {
             $this->setLabelPosition(self::LABEL_PREPEND);
         }
 

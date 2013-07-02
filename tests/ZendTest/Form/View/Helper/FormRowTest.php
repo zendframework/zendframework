@@ -372,4 +372,14 @@ class FormRowTest extends TestCase
         $markup = $this->helper->render($element);
         $this->assertRegexp('#^<button type="button" name="button" value=""\/?>foo</button>$#', $markup);
     }
+
+    public function testCanSetLabelPositionBeforeInvoke()
+    {
+        $element = new Element('foo');
+
+        $this->helper->setLabelPosition('append');
+        $this->helper->__invoke($element);
+
+        $this->assertSame('append', $this->helper->getLabelPosition());
+    }
 }

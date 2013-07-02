@@ -59,6 +59,13 @@ class DefaultRenderingStrategy extends AbstractListenerAggregate
             }
         }
 
+        // Fetch result from primary model
+        if ($result instanceof ConsoleViewModel) {
+            $responseText .= $result->getResult();
+        } else {
+            $responseText .= $result->getVariable(ConsoleViewModel::RESULT);
+        }
+
         // Fetch service manager
         $sm = $e->getApplication()->getServiceManager();
 

@@ -20,14 +20,16 @@ interface FilterEnabledInterface extends FilterProviderInterface
      * To exclude e.g. the method getServiceLocator:
      *
      * <code>
-     * $composite->addFilter("servicelocator",
+     * $composite->addFilter(
+     *     "servicelocator",
      *     function($property) {
      *         list($class, $method) = explode('::', $property);
      *         if ($method === 'getServiceLocator') {
      *             return false;
      *         }
      *         return true;
-     *     }, FilterComposite::CONDITION_AND
+     *     },
+     *     FilterComposite::CONDITION_AND
      * );
      * </code>
      *

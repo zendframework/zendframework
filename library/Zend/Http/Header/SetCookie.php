@@ -176,41 +176,15 @@ class SetCookie implements MultipleHeaderInterface
     {
         $this->type = 'Cookie';
 
-        if ($name) {
-            $this->setName($name);
-        }
-
-        if ($value) {
-            $this->setValue($value); // in parent
-        }
-
-        if ($version!==null) {
-            $this->setVersion($version);
-        }
-
-        if ($maxAge!==null) {
-            $this->setMaxAge($maxAge);
-        }
-
-        if ($domain) {
-            $this->setDomain($domain);
-        }
-
-        if ($expires) {
-            $this->setExpires($expires);
-        }
-
-        if ($path) {
-            $this->setPath($path);
-        }
-
-        if ($secure) {
-            $this->setSecure($secure);
-        }
-
-        if ($httponly) {
-            $this->setHttpOnly($httponly);
-        }
+        $this->setName($name)
+             ->setValue($value)
+             ->setVersion($version)
+             ->setMaxAge($maxAge)
+             ->setDomain($domain)
+             ->setExpires($expires)
+             ->setPath($path)
+             ->setSecure($secure)
+             ->setHttpOnly($httponly);
     }
 
     /**

@@ -282,7 +282,7 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function setName($name)
     {
-        if (preg_match("/[=,; \t\r\n\013\014]/", $name)) {
+        if ($name !== null && preg_match("/[=,; \t\r\n\013\014]/", $name)) {
             throw new Exception\InvalidArgumentException("Cookie name cannot contain these characters: =,; \\t\\r\\n\\013\\014 ({$name})");
         }
 
@@ -322,7 +322,7 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function setVersion($version)
     {
-        if (!is_int($version)) {
+        if ($version !== null && !is_int($version)) {
             throw new Exception\InvalidArgumentException('Invalid Version number specified');
         }
         $this->version = $version;
@@ -346,7 +346,7 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function setMaxAge($maxAge)
     {
-        if (!is_int($maxAge) || ($maxAge<0)) {
+        if ($maxAge !== null && (!is_int($maxAge) || ($maxAge < 0))) {
             throw new Exception\InvalidArgumentException('Invalid Max-Age number specified');
         }
         $this->maxAge = $maxAge;
@@ -369,14 +369,20 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function setExpires($expires)
     {
-        if (!empty($expires)) {
-            if (is_string($expires)) {
-                $expires = strtotime($expires);
-            } elseif (!is_int($expires)) {
-                throw new Exception\InvalidArgumentException('Invalid expires time specified');
-            }
-            $this->expires = (int) $expires;
+        if ($expires === null) {
+            $this->expires = null;
+            return $this;
         }
+
+        if (is_string($expires)) {
+            $expires = strtotime($expires);
+        }
+
+        if (!is_int($expires) || $expires < 0) {
+            throw new Exception\InvalidArgumentException('Invalid expires time specified');
+        }
+
+        $this->expires = $expires;
         return $this;
     }
 
@@ -386,7 +392,7 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function getExpires($inSeconds = false)
     {
-        if ($this->expires == null) {
+        if ($this->expires === null) {
             return;
         }
         if ($inSeconds) {

@@ -41,13 +41,6 @@ interface FilterEnabledInterface extends FilterProviderInterface
     public function addFilter($name, $filter, $condition = FilterComposite::CONDITION_OR);
 
     /**
-     * Get the filter instance
-     *
-     * @return FilterComposite
-     */
-    public function getFilter();
-
-    /**
      * Check whether a specific filter exists at key $name or not
      *
      * @param string $name Index in the composite

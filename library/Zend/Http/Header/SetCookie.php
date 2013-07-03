@@ -300,10 +300,12 @@ class SetCookie implements MultipleHeaderInterface
 
     /**
      * @param string $value
+     * @return SetCookie
      */
     public function setValue($value)
     {
         $this->value = $value;
+        return $this;
     }
 
     /**
@@ -319,6 +321,7 @@ class SetCookie implements MultipleHeaderInterface
      *
      * @param int $version
      * @throws Exception\InvalidArgumentException
+     * @return SetCookie
      */
     public function setVersion($version)
     {
@@ -326,6 +329,7 @@ class SetCookie implements MultipleHeaderInterface
             throw new Exception\InvalidArgumentException('Invalid Version number specified');
         }
         $this->version = $version;
+        return $this;
     }
 
     /**
@@ -343,6 +347,7 @@ class SetCookie implements MultipleHeaderInterface
      *
      * @param int $maxAge
      * @throws Exception\InvalidArgumentException
+     * @return SetCookie
      */
     public function setMaxAge($maxAge)
     {
@@ -350,6 +355,7 @@ class SetCookie implements MultipleHeaderInterface
             throw new Exception\InvalidArgumentException('Invalid Max-Age number specified');
         }
         $this->maxAge = $maxAge;
+        return $this;
     }
 
     /**
@@ -403,10 +409,12 @@ class SetCookie implements MultipleHeaderInterface
 
     /**
      * @param string $domain
+     * @return SetCookie
      */
     public function setDomain($domain)
     {
         $this->domain = $domain;
+        return $this;
     }
 
     /**
@@ -419,10 +427,12 @@ class SetCookie implements MultipleHeaderInterface
 
     /**
      * @param string $path
+     * @return SetCookie
      */
     public function setPath($path)
     {
         $this->path = $path;
+        return $this;
     }
 
     /**
@@ -435,10 +445,12 @@ class SetCookie implements MultipleHeaderInterface
 
     /**
      * @param  bool $secure
+     * @return SetCookie
      */
     public function setSecure($secure)
     {
         $this->secure = $secure;
+        return $this;
     }
 
     /**
@@ -451,10 +463,12 @@ class SetCookie implements MultipleHeaderInterface
 
     /**
      * @param  bool $httponly
+     * @return SetCookie
      */
     public function setHttponly($httponly)
     {
         $this->httponly = $httponly;
+        return $this;
     }
 
     /**

@@ -283,6 +283,7 @@ class Factory
         $inputFilter = $this->getInputFilterManager()->get($type);
 
         if ($inputFilter instanceof CollectionInputFilter) {
+            $inputFilter->setFactory($this);
             if (isset($inputFilterSpecification['input_filter'])) {
                 $inputFilter->setInputFilter($inputFilterSpecification['input_filter']);
             }

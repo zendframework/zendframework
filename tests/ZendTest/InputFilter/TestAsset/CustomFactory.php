@@ -14,5 +14,4 @@ use Zend\InputFilter\Factory;
 
 class CustomFactory extends Factory
 {
-
 }

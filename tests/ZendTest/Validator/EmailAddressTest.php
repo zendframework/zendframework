@@ -196,7 +196,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             "\"\x1E\"@example.com",
             "\"\x1F\"@example.com",
             '"""@example.com', // x22 (not escaped)
-            '"\"@example.com', // x92 (not escaped)
+            '"\"@example.com', // x5C (not escaped)
             "\"\x7F\"@example.com",
             );
         foreach ($emailAddresses as $input) {

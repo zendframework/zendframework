@@ -161,16 +161,16 @@ class SetCookie implements MultipleHeaderInterface
      *
      * @todo Add validation of each one of the parameters (legal domain, etc.)
      *
-     * @param string $name
-     * @param string $value
-     * @param int $expires
-     * @param string $path
-     * @param string $domain
-     * @param bool $secure
-     * @param bool $httponly
-     * @param string $maxAge
-     * @param int $version
-     * @return SetCookie
+     * @param   string      $name
+     * @param   string      $value
+     * @param   int|string  $expires
+     * @param   string      $path
+     * @param   string      $domain
+     * @param   bool        $secure
+     * @param   bool        $httponly
+     * @param   string      $maxAge
+     * @param   int         $version
+     * @return  SetCookie
      */
     public function __construct($name = null, $value = null, $expires = null, $path = null, $domain = null, $secure = false, $httponly = false, $maxAge = null, $version = null)
     {
@@ -343,7 +343,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * @param int $expires
+     * @param  int|string $expires
      * @throws Exception\InvalidArgumentException
      * @return SetCookie
      */
@@ -368,7 +368,7 @@ class SetCookie implements MultipleHeaderInterface
 
     /**
      * @param bool $inSeconds
-     * @return int
+     * @return int|string
      */
     public function getExpires($inSeconds = false)
     {

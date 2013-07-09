@@ -254,6 +254,9 @@ class Factory
             $this->prepareAndInjectFieldsets($spec['fieldsets'], $fieldset, __METHOD__);
         }
 
+        $factory = (isset($spec['factory']) ? $spec['factory'] : $this);
+        $this->prepareAndInjectFactory($factory, $fieldset, __METHOD__);
+
         return $fieldset;
     }
 
@@ -451,6 +454,46 @@ class Factory
     }
 
     /**
+     * Prepare and inject a named factory
+     *
+     * Takes a string indicating a factory class name (or a concrete instance), try first to instantiates the class
+     * by pulling it from service manager, and injects the factory instance into the fieldset.
+     *
+     * @param  string|array|Factory      $factoryOrName
+     * @param  FieldsetInterface         $fieldset
+     * @param  string                    $method
+     * @return void
+     * @throws Exception\DomainException If $factoryOrName is not a string, does not resolve to a known class, or
+     *                                   the class does not extend Form\Factory
+     */
+    protected function prepareAndInjectFactory($factoryOrName, FieldsetInterface $fieldset, $method)
+    {
+        if (is_array($factoryOrName)) {
+            if (!isset($factoryOrName['type'])) {
+                throw new Exception\DomainException(sprintf(
+                    '%s expects array specification to have a type value',
+                    $method
+                ));
+            }
+            $factoryOrName = $factoryOrName['type'];
+        }
+
+        if (is_string($factoryOrName)) {
+            $factoryOrName = $this->getFactoryFromName($factoryOrName);
+        }
+
+        if (!$factoryOrName instanceof Factory) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects a valid extention of Zend\Form\Factory; received "%s"',
+                $method,
+                $factoryOrName
+            ));
+        }
+
+        $fieldset->setFormFactory($factoryOrName);
+    }
+
+    /**
      * Prepare an input filter instance and inject in the provided form
      *
      * If the input filter specified is a string, assumes it is a class name,
@@ -558,5 +601,31 @@ class Factory
 
         $hydrator = new $hydratorName;
         return $hydrator;
+    }
+
+    /**
+     * Try to pull factory from service manager, or instantiates it from its name
+     *
+     * @param  string $factoryName
+     * @return mixed
+     * @throws Exception\DomainException
+     */
+    protected function getFactoryFromName($factoryName)
+    {
+        $services = $this->getFormElementManager()->getServiceLocator();
+
+        if ($services && $services->has($factoryName)) {
+            return $services->get($factoryName);
+        }
+
+        if (!class_exists($factoryName)) {
+            throw new Exception\DomainException(sprintf(
+                'Expects string factory name to be a valid class name; received "%s"',
+                $factoryName
+            ));
+        }
+
+        $factory = new $factoryName;
+        return $factory;
     }
 }

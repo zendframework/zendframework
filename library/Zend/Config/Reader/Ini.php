@@ -12,7 +12,7 @@ namespace Zend\Config\Reader;
 use Zend\Config\Exception;
 
 /**
- * XML config reader.
+ * INI config reader.
  */
 class Ini implements ReaderInterface
 {

@@ -378,6 +378,22 @@ class Http implements AdapterInterface
     }
 
     /**
+     * @deprecated
+     * @see Http::challengeClient()
+     * @return Authentication\Result Always returns a non-identity Auth result
+     */
+    protected function _challengeClient()
+    {
+        trigger_error(
+            'This method is deprecated and will be removed in the feature'
+            . ', please use the public challengeClient() instead',
+            E_USER_DEPRECATED
+        );
+        
+    	return $this->challengeClient();
+    }
+    
+    /**
      * Challenge Client
      *
      * Sets a 401 or 407 Unauthorized response code, and creates the

@@ -103,6 +103,16 @@ class CurrencyFormatTest extends \PHPUnit_Framework_TestCase
         $this->assertMbStringEquals($expected, $this->helper->__invoke($number));
     }
 
+    public function testViewhelperExecutedSequentially()
+    {
+        $helper = $this->helper;
+        $helper->setShouldShowDecimals(true);
+
+        $this->assertEquals('1.234,43 €', $helper(1234.4321, 'EUR', null, 'de_DE'));
+        $this->assertEquals('1.234 €', $helper(1234.4321, 'EUR', false, 'de_DE'));
+        $this->assertEquals('1.234,43 €', $helper(1234.4321, 'EUR', null, 'de_DE'));
+    }
+
     public function testDefaultLocale()
     {
         $this->assertMbStringEquals(Locale::getDefault(), $this->helper->getLocale());

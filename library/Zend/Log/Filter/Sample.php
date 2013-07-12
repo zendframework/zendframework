@@ -52,6 +52,6 @@ class Sample implements FilterInterface
      */
     public function filter(array $event)
     {
-        return (mt_rand() / mt_getrandmax()) <= $this->$_sampleRate;
+        return (mt_rand() / mt_getrandmax()) <= $this->_sampleRate;
     }
 }

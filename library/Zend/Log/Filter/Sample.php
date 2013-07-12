@@ -16,7 +16,7 @@ class Sample implements FilterInterface
 {
     /**
      * Sample rate [0-1].
-     * 
+     *
      * @var float
      */
     protected $_sampleRate;
@@ -27,7 +27,7 @@ class Sample implements FilterInterface
      * Sample rate must be a float number between 0 and 1 included.
      * If 0.5, only half of the values will be logged.
      * If 0.1 only 1 among 10 values will be logged.
-     * 
+     *
      * @param  float|int $samplerate Sample rate [0-1].
      * @return Priority
      * @throws Exception\InvalidArgumentException
@@ -40,10 +40,10 @@ class Sample implements FilterInterface
                 gettype($sampleRate)
             ));
         }
-        
+
         $this->_sampleRate = (float) $sampleRate;
     }
-    
+
     /**
      * Returns TRUE to accept the message, FALSE to block it.
      *

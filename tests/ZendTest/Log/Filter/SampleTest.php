@@ -25,7 +25,7 @@ class SampleTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must be numeric');
         new Sample('bar');
     }
-    
+
     public function testSampleLimit0()
     {
         // Should log nothing.
@@ -35,11 +35,28 @@ class SampleTest extends \PHPUnit_Framework_TestCase
         $ret = false;
         for ($i = 0; $i < 100; $i ++) {
             if ($filter->filter(array())) {
-                break;	
+                break;
                 $ret = true;
-            }            
+            }
         }
-        
+
         $this->assertFalse($ret);
+    }
+
+    public function testSampleLimit1()
+    {
+        // Should log all events.
+        $filter = new Sample(1);
+
+        // Since sampling is a random process, let's test several times.
+        $ret = true;
+        for ($i = 0; $i < 100; $i ++) {
+            if (! $filter->filter(array())) {
+                break;
+                $ret = false;
+            }
+        }
+
+        $this->assertTrue($ret);
     }
 }

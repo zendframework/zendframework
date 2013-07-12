@@ -185,7 +185,9 @@ class Request
     }
 
     /**
-     * 
+     * Was a malformed JSON provided?
+     *
+     * @return bool
      */
     public function isParseError()
     {

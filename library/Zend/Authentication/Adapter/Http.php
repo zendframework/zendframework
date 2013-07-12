@@ -389,10 +389,10 @@ class Http implements AdapterInterface
             . ', please use the public challengeClient() instead',
             E_USER_DEPRECATED
         );
-        
-    	return $this->challengeClient();
+
+        return $this->challengeClient();
     }
-    
+
     /**
      * Challenge Client
      *

@@ -248,12 +248,10 @@ class Request
      */
     public function loadJson($json)
     {
-        try
-        {
+        try {
             $options = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
             $this->setOptions($options);
         } catch(\Exception $e) {
-
             $this->isParseError = true;
         }
     }

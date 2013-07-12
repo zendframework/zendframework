@@ -29,6 +29,12 @@ class Request
     protected $isMethodError = false;
 
     /**
+     * Flag
+     * @var bool
+     */
+    protected $isParseError = false;
+
+    /**
      * Requested method
      * @var string
      */
@@ -179,6 +185,14 @@ class Request
     }
 
     /**
+     * 
+     */
+    public function isParseError()
+    {
+        return $this->isParseError;
+    }
+
+    /**
      * Set request identifier
      *
      * @param  mixed $name
@@ -234,8 +248,14 @@ class Request
      */
     public function loadJson($json)
     {
-        $options = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
-        $this->setOptions($options);
+        try
+        {
+            $options = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
+            $this->setOptions($options);
+        } catch(\Exception $e) {
+
+            $this->isParseError = true;
+        }
     }
 
     /**

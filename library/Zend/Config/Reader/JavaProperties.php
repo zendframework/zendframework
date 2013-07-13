@@ -44,7 +44,7 @@ class JavaProperties implements ReaderInterface
         $this->directory = dirname($filename);
 
         $config = $this->parse(file_get_contents($filename));
-      
+
         return $this->process($config);
     }
 
@@ -64,7 +64,7 @@ class JavaProperties implements ReaderInterface
         $this->directory = null;
 
         $config = $this->parse($string);
-      
+
         return $this->process($config);
     }
 
@@ -99,7 +99,8 @@ class JavaProperties implements ReaderInterface
      * @param  string $string
      * @return array
      */
-    protected function parse($string) {
+    protected function parse($string)
+    {
         $result = array();
         $lines = explode("\n", $string);
         $key = "";
@@ -116,8 +117,7 @@ class JavaProperties implements ReaderInterface
             if (!$isWaitingOtherLine) {
                 $key = substr($line, 0, strpos($line, ':'));
                 $value = substr($line, strpos($line, ':') + 1, strlen($line));
-            }
-            else {
+            } else {
                 $value .= $line;
             }
 
@@ -125,8 +125,7 @@ class JavaProperties implements ReaderInterface
             if (strrpos($value, "\\") === strlen($value)-strlen("\\")) {
                 $value = substr($value,0,strlen($value)-1);
                 $isWaitingOtherLine = true;
-            }
-            else {
+            } else {
                 $isWaitingOtherLine = false;
             }
 

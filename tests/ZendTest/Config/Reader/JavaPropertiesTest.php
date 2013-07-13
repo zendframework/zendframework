@@ -35,7 +35,7 @@ class JavaPropertiesTest extends AbstractReaderTestCase
     public function testFromFile()
     {
         $arrayJavaProperties = $this->reader->fromFile($this->getTestAssetPath('include-target'));
-        
+
         $this->assertNotEmpty($arrayJavaProperties);
         $this->assertEquals($arrayJavaProperties['single.line'], 'test');
         $this->assertEquals($arrayJavaProperties['path'], '\test\with\slashes');
@@ -45,13 +45,13 @@ class JavaPropertiesTest extends AbstractReaderTestCase
     public function testIncludeAsElement()
     {
         $arrayJavaProperties = $this->reader->fromFile($this->getTestAssetPath('include-base'));
-        
+
         $this->assertNotEmpty($arrayJavaProperties);
         $this->assertEquals($arrayJavaProperties['single.line'], 'test');
         $this->assertEquals($arrayJavaProperties['path'], '\test\with\slashes');
         $this->assertEquals($arrayJavaProperties['multiple'], 'line test');
     }
-    
+
     public function testFromString()
     {
         $JavaProperties = <<<'ASSET'
@@ -64,7 +64,7 @@ test
 ASSET;
 
         $arrayJavaProperties = $this->reader->fromString($JavaProperties);
-        
+
         $this->assertNotEmpty($arrayJavaProperties);
         $this->assertEquals($arrayJavaProperties['single.line'], 'test');
         $this->assertEquals($arrayJavaProperties['path'], '\test\with\slashes');

@@ -5,6 +5,7 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Config
  */
 
 namespace Zend\Config\Reader;
@@ -44,7 +45,7 @@ class JavaProperties implements ReaderInterface
         $this->directory = dirname($filename);
 
         $config = $this->parse(file_get_contents($filename));
-		
+      
         return $this->process($config);
     }
 
@@ -64,7 +65,7 @@ class JavaProperties implements ReaderInterface
         $this->directory = null;
 
         $config = $this->parse($string);
-		
+      
         return $this->process($config);
     }
 
@@ -105,7 +106,7 @@ class JavaProperties implements ReaderInterface
         $key = "";
         $isWaitingOtherLine = false;
         foreach ($lines as $i => $line) {
-        	// Ignore empty lines and commented lines
+           // Ignore empty lines and commented lines
             if (empty($line)
                || (!$isWaitingOtherLine && strpos($line, "#") === 0)
                || (!$isWaitingOtherLine && strpos($line, "!") === 0)) {

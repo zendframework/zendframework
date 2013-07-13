@@ -94,7 +94,6 @@ class JavaProperties implements ReaderInterface
      * Parse Java-style properties string
      *
      * @todo Support use of the equals sign "key=value" as key-value delimiter
-     * @todo Support use of the exclamation point "!" as comment mark
      * @todo Ignore whitespace that precedes text past the first line of multiline values
      *
      * @param  string $string
@@ -107,7 +106,9 @@ class JavaProperties implements ReaderInterface
         $isWaitingOtherLine = false;
         foreach ($lines as $i => $line) {
         	// Ignore empty lines and commented lines
-            if (empty($line) || (!$isWaitingOtherLine && strpos($line, "#") === 0)) {
+            if (empty($line)
+               || (!$isWaitingOtherLine && strpos($line, "#") === 0)
+               || (!$isWaitingOtherLine && strpos($line, "!") === 0)) {
                 continue;
             }
 

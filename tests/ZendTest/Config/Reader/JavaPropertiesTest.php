@@ -59,6 +59,8 @@ class JavaPropertiesTest extends AbstractReaderTestCase
     public function testFromString()
     {
         $JavaProperties = <<<'ASSET'
+#comment
+!comment
 single.line:test
 path:\\test\\with\\slashes
 multiple:line \

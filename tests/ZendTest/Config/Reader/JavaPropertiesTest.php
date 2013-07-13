@@ -55,13 +55,7 @@ class JavaPropertiesTest extends AbstractReaderTestCase
         $this->assertEquals($arrayJavaProperties['path'], '\test\with\slashes');
         $this->assertEquals($arrayJavaProperties['multiple'], 'line test');
     }
-/*
-    public function testInvalidJavaPropertiesFile()
-    {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
-        $arrayJavaProperties = $this->reader->fromFile($this->getTestAssetPath('invalid'));
-    }
-*/
+    
     public function testFromString()
     {
         $JavaProperties = <<<'ASSET'
@@ -78,13 +72,12 @@ ASSET;
         $this->assertEquals($arrayJavaProperties['path'], '\test\with\slashes');
         $this->assertEquals($arrayJavaProperties['multiple'], 'line test');
     }
-/*
+
     public function testInvalidString()
     {
-        $JavaProperties = 'failing|test';
+        $JavaProperties = '@include:fail.properties';
 
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
         $arrayJavaPropterties = $this->reader->fromString($JavaProperties);
     }
-*/
 }

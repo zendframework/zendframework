@@ -58,7 +58,6 @@ class JavaPropertiesTest extends AbstractReaderTestCase
 #comment
 !comment
 single.line:test
-path:\\test\\with\\slashes
 multiple:line \
 test
 ASSET;

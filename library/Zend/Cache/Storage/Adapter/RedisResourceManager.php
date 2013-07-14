@@ -507,12 +507,27 @@ class RedisResourceManager
 
     /**
      * Get redis server version
+     * Proxy for corrected function name
+     * 
+     * @deprecated
      *
      * @param string $id
      * @return int
      * @throws Exception\RuntimeException
      */
     public function getMayorVersion($id)
+    {
+        return $this->getMajorVersion($id);
+    }
+
+    /**
+     * Get redis server version
+     *
+     * @param string $id
+     * @return int
+     * @throws Exception\RuntimeException
+     */
+    public function getMajorVersion($id)
     {
         if (!$this->hasResource($id)) {
             throw new Exception\RuntimeException("No resource with id '{$id}'");

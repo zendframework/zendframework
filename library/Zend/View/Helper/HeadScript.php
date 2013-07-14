@@ -115,7 +115,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * @param  string $type      Script type and/or array of script attributes
      * @return HeadScript
      */
-    public function __invoke($mode = static::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
+    public function __invoke($mode = self::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
     {
         if ((null !== $spec) && is_string($spec)) {
             $action    = ucfirst(strtolower($mode));

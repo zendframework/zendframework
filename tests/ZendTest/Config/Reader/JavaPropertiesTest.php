@@ -70,11 +70,13 @@ ASSET;
         $this->assertEquals($arrayJavaProperties['multiple'], 'line test');
     }
 
-    public function testInvalidString()
+    public function testInvalidIncludeInString()
     {
         $JavaProperties = '@include:fail.properties';
 
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+        $expectedErrorMessage = 'Cannot process @include statement for a string';
+
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', $expectedErrorMessage);
         $arrayJavaPropterties = $this->reader->fromString($JavaProperties);
     }
 }

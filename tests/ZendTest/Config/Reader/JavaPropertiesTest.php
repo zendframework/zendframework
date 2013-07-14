@@ -38,7 +38,6 @@ class JavaPropertiesTest extends AbstractReaderTestCase
 
         $this->assertNotEmpty($arrayJavaProperties);
         $this->assertEquals($arrayJavaProperties['single.line'], 'test');
-        $this->assertEquals($arrayJavaProperties['path'], '\test\with\slashes');
         $this->assertEquals($arrayJavaProperties['multiple'], 'line test');
     }
 
@@ -48,7 +47,6 @@ class JavaPropertiesTest extends AbstractReaderTestCase
 
         $this->assertNotEmpty($arrayJavaProperties);
         $this->assertEquals($arrayJavaProperties['single.line'], 'test');
-        $this->assertEquals($arrayJavaProperties['path'], '\test\with\slashes');
         $this->assertEquals($arrayJavaProperties['multiple'], 'line test');
     }
 
@@ -66,7 +64,6 @@ ASSET;
 
         $this->assertNotEmpty($arrayJavaProperties);
         $this->assertEquals($arrayJavaProperties['single.line'], 'test');
-        $this->assertEquals($arrayJavaProperties['path'], '\test\with\slashes');
         $this->assertEquals($arrayJavaProperties['multiple'], 'line test');
     }
 

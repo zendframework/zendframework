@@ -9,7 +9,7 @@
 
 namespace ZendTest\Config\Reader;
 
-use Zend\Config\Reader\JavaProperties as JavaProperties;
+use Zend\Config\Reader\JavaProperties;
 
 /**
  * @group      Zend_Config

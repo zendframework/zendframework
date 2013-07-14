@@ -122,8 +122,8 @@ class JavaProperties implements ReaderInterface
             }
 
             // Check if ends with single '\' (indicating another line is expected)
-            if (strrpos($value, "\\") === strlen($value)-strlen("\\")) {
-                $value = substr($value,0,strlen($value)-1);
+            if (strrpos($value, "\\") === strlen($value) - strlen("\\")) {
+                $value = substr($value, 0, strlen($value) - 1);
                 $isWaitingOtherLine = true;
             } else {
                 $isWaitingOtherLine = false;

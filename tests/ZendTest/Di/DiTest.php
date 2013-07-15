@@ -474,6 +474,41 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($a, $d->a);
     }
 
+    public function testNewInstanceWillThrowAnClassNotFoundExceptionWhenClassIsAnInterface()
+    {
+        $definitionArray = array (
+            'ZendTest\\Di\\TestAsset\\ConstructorInjection\\D' => array(
+                'supertypes' => array(),
+                'instantiator' => '__construct',
+                'methods' => array('__construct' => 3),
+                'parameters' => array(
+                    '__construct' =>
+                    array (
+                        'ZendTest\\Di\\TestAsset\\ConstructorInjection\\D::__construct:0' => array(
+                            0 => 'd',
+                            1 => 'ZendTest\\Di\\TestAsset\\DummyInterface',
+                            2 => true,
+                            3 => NULL,
+                        ),
+                    ),
+                ),
+            ),
+            'ZendTest\\Di\\TestAsset\\DummyInterface' => array(
+                'supertypes' => array(),
+                'instantiator' => NULL,
+                'methods' => array(),
+                'parameters' => array(),
+            ),
+        );
+        $definitionList = new DefinitionList(array(
+            new Definition\ArrayDefinition($definitionArray)
+        ));
+        $di = new Di($definitionList);
+
+        $this->setExpectedException('Zend\Di\Exception\ClassNotFoundException', 'Cannot instantiate interface');
+        $di->get('ZendTest\Di\TestAsset\ConstructorInjection\D');
+    }
+
     public function testMatchPreferredClassWithAwareInterface()
     {
         $di = new Di();

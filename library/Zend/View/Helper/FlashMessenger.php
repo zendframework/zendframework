@@ -31,6 +31,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
         PluginFlashMessenger::NAMESPACE_ERROR => 'error',
         PluginFlashMessenger::NAMESPACE_SUCCESS => 'success',
         PluginFlashMessenger::NAMESPACE_DEFAULT => 'default',
+        PluginFlashMessenger::NAMESPACE_WARNING => 'warning',
     );
 
     /**

@@ -507,9 +507,8 @@ class RedisResourceManager
 
     /**
      * Get redis server version
-     * Proxy for corrected function name
-     * 
-     * @deprecated
+     *
+     * @deprecated 2.2.2 Use getMajorVersion instead
      *
      * @param string $id
      * @return int

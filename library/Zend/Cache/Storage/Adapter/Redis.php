@@ -226,7 +226,7 @@ class Redis extends AbstractAdapter implements
 
         try {
             if ($ttl) {
-                if ($this->resourceManager->getMayorVersion($this->resourceId) < 2) {
+                if ($this->resourceManager->getMajorVersion($this->resourceId) < 2) {
                     throw new Exception\UnsupportedMethodCallException("To use ttl you need version >= 2.0.0");
                 }
                 $success = $redis->setex($this->namespacePrefix . $normalizedKey, $ttl, $value);
@@ -260,7 +260,7 @@ class Redis extends AbstractAdapter implements
         try {
             if ($ttl > 0) {
                 //check if ttl is supported
-                if ($this->resourceManager->getMayorVersion($this->resourceId) < 2) {
+                if ($this->resourceManager->getMajorVersion($this->resourceId) < 2) {
                     throw new Exception\UnsupportedMethodCallException("To use ttl you need version >= 2.0.0");
                 }
                 //mSet does not allow ttl, so use transaction
@@ -402,7 +402,7 @@ class Redis extends AbstractAdapter implements
     {
         if ($this->capabilities === null) {
             $this->capabilityMarker = new stdClass();
-            $minTtl = $this->resourceManager->getMayorVersion($this->resourceId) < 2 ? 0 : 1;
+            $minTtl = $this->resourceManager->getMajorVersion($this->resourceId) < 2 ? 0 : 1;
             //without serialization redis supports only strings for simple
             //get/set methods
             $this->capabilities     = new Capabilities(

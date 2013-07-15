@@ -15,7 +15,6 @@ use ZendTest\Di\TestAsset\DummyInterface;
 class D
 {
     protected $d = null;
-
     public function __construct(DummyInterface $d)
     {
         $this->d = $d;

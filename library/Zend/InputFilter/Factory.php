@@ -212,6 +212,7 @@ class Factory
                     break;
                 case 'error_message':
                     $input->setErrorMessage($value);
+                    break;
                 case 'fallback_value':
                     $input->setFallbackValue($value);
                     break;

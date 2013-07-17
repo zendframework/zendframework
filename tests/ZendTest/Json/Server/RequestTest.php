@@ -233,6 +233,13 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo.bar', $this->request->getMethod());
     }
 
+    public function testIsParseErrorSetOnMalformedJson()
+    {
+        $testJson = '{"id":1, "method": "test", "params:"[1,2,3]}';
+        $this->request->loadJson($testJson);
+        $this->assertTrue($this->request->isParseError());
+    }
+
     public function getOptions()
     {
         return array(

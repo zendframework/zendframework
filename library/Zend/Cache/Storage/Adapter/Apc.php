@@ -748,10 +748,6 @@ class Apc extends AbstractAdapter implements
      */
     protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value)
     {
-        if (!$this->internalHasItem($normalizedKey)) {
-            return false;
-        }
-
         return apc_cas($normalizedKey, $token, $value);
     }
 }

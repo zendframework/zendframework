@@ -483,6 +483,10 @@ class Server extends AbstractServer
     {
         $request = $this->getRequest();
 
+        if($request->isParseError()){
+            return $this->fault('Parse error', Error::ERROR_PARSE);
+        }
+
         if (!$request->isMethodError() && (null === $request->getMethod())) {
             return $this->fault('Invalid Request', Error::ERROR_INVALID_REQUEST);
         }

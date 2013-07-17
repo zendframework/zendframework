@@ -742,7 +742,6 @@ class Apc extends AbstractAdapter implements
      * @param  string $normalizedKey
      * @param  mixed  $value
      * @return bool
-     * @throws Exception\ExceptionInterface
      * @see    getItem()
      * @see    setItem()
      */

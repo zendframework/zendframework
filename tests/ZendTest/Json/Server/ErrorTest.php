@@ -52,8 +52,8 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
 
     public function testSetCodeShouldCastToInteger()
     {
-        $this->error->setCode('-32768');
-        $this->assertEquals(-32768, $this->error->getCode());
+        $this->error->setCode('-32700');
+        $this->assertEquals(-32700, $this->error->getCode());
     }
 
     public function testCodeShouldBeLimitedToStandardIntegers()

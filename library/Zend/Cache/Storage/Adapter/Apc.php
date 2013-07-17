@@ -734,4 +734,24 @@ class Apc extends AbstractAdapter implements
             $metadata['num_hits']
         );
     }
+
+    /**
+     * Internal method to set an item only if token matches
+     *
+     * @param  mixed  $token
+     * @param  string $normalizedKey
+     * @param  mixed  $value
+     * @return bool
+     * @throws Exception\ExceptionInterface
+     * @see    getItem()
+     * @see    setItem()
+     */
+    protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value)
+    {
+        if (!$this->internalHasItem($normalizedKey)) {
+            return false;
+        }
+
+        return apc_cas($normalizedKey, $token, $value);
+    }
 }

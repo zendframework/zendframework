@@ -16,7 +16,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @paramstring $uri The URL to redirect to
+     * @param  string $uri The URL to redirect to
      * @dataProvider locationFromStringCreatesValidLocationHeaderProvider
      */
     public function testLocationFromStringCreatesValidLocationHeader($uri)

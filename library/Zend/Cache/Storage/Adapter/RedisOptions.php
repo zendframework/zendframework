@@ -21,7 +21,7 @@ class RedisOptions extends AdapterOptions
     protected $namespaceSeparator = ':';
 
     /**
-     * The memcached resource manager
+     * The redis resource manager
      *
      * @var null|RedisResourceManager
      */

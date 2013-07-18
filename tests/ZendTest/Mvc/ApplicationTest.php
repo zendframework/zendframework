@@ -332,14 +332,15 @@ class ApplicationTest extends TestCase
         });
 
         $result = $this->application->run();
-        $this->assertSame($response, $result);
+        $this->assertSame($this->application, $result);
+        $this->assertSame($response, $result->getResponse());
     }
 
     public function testControllerIsDispatchedDuringRun()
     {
         $this->setupPathController();
 
-        $response = $this->application->run();
+        $response = $this->application->run()->getResponse();
         $this->assertContains('PathController', $response->getContent());
         $this->assertContains('dispatch', $response->toString());
     }
@@ -496,7 +497,8 @@ class ApplicationTest extends TestCase
         });
 
         $result = $this->application->run();
-        $this->assertSame($response, $result, var_export($result, 1));
+        $this->assertSame($this->application, $result, get_class($result));
+        $this->assertSame($response, $result->getResponse(), get_class($result));
     }
 
     /**

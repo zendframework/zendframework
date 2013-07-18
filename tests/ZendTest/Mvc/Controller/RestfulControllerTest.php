@@ -391,21 +391,6 @@ class RestfulControllerTest extends TestCase
         $this->assertFalse($this->controller->requestHasContentType($this->request, TestAsset\RestfulTestController::CONTENT_TYPE_JSON));
     }
 
-    public function testDispatchViaPatchWithoutIdentifierReturns405ResponseIfPatchListThrowsException()
-    {
-        $entity = new stdClass;
-        $entity->name = 'foo';
-        $entity->type = 'standard';
-        $this->controller->entity = $entity;
-        $entity = array('name' => __FUNCTION__);
-        $string = http_build_query($entity);
-        $this->request->setMethod('PATCH')
-                      ->setContent($string);
-        $result = $this->controller->dispatch($this->request, $this->response);
-        $this->assertInstanceOf('Zend\Http\Response', $result);
-        $this->assertEquals(405, $result->getStatusCode());
-    }
-
     public function testDispatchWithUnrecognizedMethodReturns405Response()
     {
         $this->request->setMethod('PROPFIND');

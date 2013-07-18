@@ -58,13 +58,13 @@ final class Version
     /**
      * Fetches the version of the latest stable release.
      *
-     * By default, this uses the API provided by framework.zend.com for version 
+     * By default, this uses the API provided by framework.zend.com for version
      * retrieval.
      *
-     * If $service is set to VERSION_SERVICE_GITHUB, this will use the GitHub 
+     * If $service is set to VERSION_SERVICE_GITHUB, this will use the GitHub
      * API (v3) and only returns refs that begin with * 'tags/release-'.
      * Because GitHub returns the refs in alphabetical order, we need to reduce
-     * the array to a single value, comparing the version numbers with 
+     * the array to a single value, comparing the version numbers with
      * version_compare().
      *
      * @see http://developer.github.com/v3/git/refs/#get-all-references

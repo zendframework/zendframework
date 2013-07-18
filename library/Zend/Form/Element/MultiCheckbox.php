@@ -25,7 +25,7 @@ class MultiCheckbox extends Checkbox
     protected $attributes = array(
         'type' => 'multi_checkbox',
     );
-    
+
     /**
      * @var bool
      */
@@ -116,7 +116,7 @@ class MultiCheckbox extends Checkbox
         }
         return parent::setAttribute($key, $value);
     }
-    
+
     /**
      * Set the flag to allow for disabling the automatic addition of an InArray validator.
      *

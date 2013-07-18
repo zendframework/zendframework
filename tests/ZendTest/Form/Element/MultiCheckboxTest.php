@@ -134,7 +134,7 @@ class MultiCheckboxTest extends TestCase
         $this->assertEquals(array('bar' => 'baz'), $element->getOption('value_options'));
         $this->assertEquals(array('foo' => 'bar'), $element->getOption('options'));
     }
-    
+
     public function testDisableInputSpecification()
     {
         $element = new MultiCheckboxElement();

@@ -168,7 +168,7 @@ class Checkbox extends Element implements InputProviderInterface
             'name' => $this->getName(),
             'required' => true,
         );
-        
+
         if ($validator = $this->getValidator()) {
             $spec['validators'] = array(
                 $validator,

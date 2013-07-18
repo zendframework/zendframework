@@ -35,7 +35,6 @@ class HttpTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Adapter\Http::_challengeClient()
      * @expectedException PHPUnit_Framework_Error_Deprecated
      */
     public function testProtectedMethodChallengeClientTriggersErrorDeprecated()

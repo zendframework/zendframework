@@ -138,14 +138,26 @@ class BaseTest extends \PHPUnit_Framework_TestCase
                 'selfRefArr' => $selfRefArr,
             ),
         );
-        $outputExpected = array(
-            'timestamp' => $datetime->format($formatter->getDateTimeFormat()),
-            'priority'  => 1,
-            'message'   => 'tottakai',
-            'extra' => array(
-                'selfRefArr' => '{"selfRefArr":{"selfRefArr":null}}',
-            ),
-        );
+
+        if (version_compare(PHP_VERSION, '5.5.0alpha1', 'lte')) {
+            $outputExpected = array(
+                'timestamp' => $datetime->format($formatter->getDateTimeFormat()),
+                'priority'  => 1,
+                'message'   => 'tottakai',
+                'extra' => array(
+                    'selfRefArr' => '{"selfRefArr":{"selfRefArr":null}}',
+                ),
+            );
+        } else {
+            $outputExpected = array(
+                'timestamp' => $datetime->format($formatter->getDateTimeFormat()),
+                'priority'  => 1,
+                'message'   => 'tottakai',
+                'extra' => array(
+                    'selfRefArr' => '',
+                ),
+            );
+        }
 
         $this->assertEquals($outputExpected, $formatter->format($event));
     }

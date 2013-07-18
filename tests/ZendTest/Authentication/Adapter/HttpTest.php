@@ -14,40 +14,40 @@ use Zend\Authentication\Adapter;
 
 class HttpTest extends \PHPUnit_Framework_TestCase
 {
-	/**
-	 * @var Wrapper
-	 */
-	protected $_wrapper;
+    /**
+     * @var Wrapper
+     */
+    protected $_wrapper;
 
-	public function setUp()
-	{
-		$config = array(
-			'accept_schemes' => 'basic',
-			'realm'          => 'testing',
-		);
+    public function setUp()
+    {
+        $config = array(
+            'accept_schemes' => 'basic',
+            'realm'          => 'testing',
+        );
 
-		$this->_wrapper = new Wrapper($config);
-	}
+        $this->_wrapper = new Wrapper($config);
+    }
 
-	public function tearDown()
-	{
-		unset($this->_wrapper);
-	}
+    public function tearDown()
+    {
+        unset($this->_wrapper);
+    }
 
-	/**
-	 * @covers Adapter\Http::_challengeClient()
-	 * @expectedException PHPUnit_Framework_Error_Deprecated
-	 */
-	public function testProtectedMethodChallengeClientTriggersErrorDeprecated()
-	{
-		$this->_wrapper->_challengeClient();
-	}
+    /**
+     * @covers Adapter\Http::_challengeClient()
+     * @expectedException PHPUnit_Framework_Error_Deprecated
+     */
+    public function testProtectedMethodChallengeClientTriggersErrorDeprecated()
+    {
+        $this->_wrapper->_challengeClient();
+    }
 }
 
 class Wrapper extends Adapter\Http
 {
-	public function __call($method, $args)
-	{
-		return call_user_func_array(array($this, $method), $args);
-	}
+    public function __call($method, $args)
+    {
+        return call_user_func_array(array($this, $method), $args);
+    }
 }

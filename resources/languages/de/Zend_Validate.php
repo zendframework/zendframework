@@ -116,7 +116,7 @@ return array(
     "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_File_Exists
-    "File '%value%' does not exist"                                                                                             => "File '%value%' does not exist",
+    "File '%value%' does not exist"                                                                                             => "Die Datei '%value%' existiert nicht",
 
     // Zend_Validator_File_Extension
     "File '%value%' has a false extension"                                                                                      => "Die Datei '%value%' hat einen falschen Dateityp",

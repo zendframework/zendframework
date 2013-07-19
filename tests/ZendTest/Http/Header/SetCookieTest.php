@@ -153,6 +153,94 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($target, $headerLine);
     }
 
+    public function testSetCookieAttributesAreUnsettable()
+    {
+        $setCookieHeader = new SetCookie();
+        $setCookieHeader->setName('myname');
+        $setCookieHeader->setValue('myvalue');
+        $setCookieHeader->setExpires('Wed, 13-Jan-2021 22:23:01 GMT');
+        $setCookieHeader->setDomain('docs.foo.com');
+        $setCookieHeader->setPath('/accounts');
+        $setCookieHeader->setSecure(true);
+        $setCookieHeader->setHttponly(true);
+
+        $target = 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
+            . ' Domain=docs.foo.com; Path=/accounts;'
+            . ' Secure; HttpOnly';
+        $this->assertSame($target, $setCookieHeader->getFieldValue()); // attributes set
+
+        $setCookieHeader->setExpires(NULL);
+        $setCookieHeader->setDomain(NULL);
+        $setCookieHeader->setPath(NULL);
+        $setCookieHeader->setSecure(NULL);
+        $setCookieHeader->setHttponly(NULL);
+        $this->assertSame('myname=myvalue', $setCookieHeader->getFieldValue()); // attributes unset
+
+        $setCookieHeader->setValue(NULL);
+        $this->assertSame('myname=', $setCookieHeader->getFieldValue());
+        $this->assertNull($setCookieHeader->getValue());
+        $this->assertNull($setCookieHeader->getExpires());
+        $this->assertNull($setCookieHeader->getDomain());
+        $this->assertNull($setCookieHeader->getPath());
+        $this->assertNull($setCookieHeader->isSecure());
+        $this->assertNull($setCookieHeader->isHttponly());
+    }
+
+    public function testSetCookieFieldValueIsEmptyStringWhenNameIsUnset()
+    {
+        $setCookieHeader = new SetCookie();
+        $this->assertSame('', $setCookieHeader->getFieldValue()); // empty
+
+        $setCookieHeader->setName('myname');
+        $setCookieHeader->setValue('myvalue');
+        $setCookieHeader->setExpires('Wed, 13-Jan-2021 22:23:01 GMT');
+        $setCookieHeader->setDomain('docs.foo.com');
+        $setCookieHeader->setPath('/accounts');
+        $setCookieHeader->setSecure(true);
+        $setCookieHeader->setHttponly(true);
+
+        $target = 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
+            . ' Domain=docs.foo.com; Path=/accounts;'
+            . ' Secure; HttpOnly';
+        $this->assertSame($target, $setCookieHeader->getFieldValue()); // not empty
+
+        $setCookieHeader->setName(null);
+        $this->assertSame('', $setCookieHeader->getFieldValue()); // empty again
+        $this->assertNull($setCookieHeader->getName());
+    }
+
+    public function testSetCookieSetExpiresWithZeroTimeStamp()
+    {
+        $setCookieHeader = new SetCookie('myname', 'myvalue', 0);
+        $this->assertSame('Thu, 01-Jan-1970 00:00:00 GMT', $setCookieHeader->getExpires());
+
+        $setCookieHeader = new SetCookie('myname', 'myvalue', 1);
+        $this->assertSame('Thu, 01-Jan-1970 00:00:01 GMT', $setCookieHeader->getExpires());
+
+        $setCookieHeader->setExpires(0);
+        $this->assertSame('Thu, 01-Jan-1970 00:00:00 GMT', $setCookieHeader->getExpires());
+
+        $target = 'myname=myvalue; Expires=Thu, 01-Jan-1970 00:00:00 GMT';
+        $this->assertSame($target, $setCookieHeader->getFieldValue());
+    }
+
+    public function testSetCookieSetExpiresWithUnixEpochString()
+    {
+        $setCookieHeader = new SetCookie('myname', 'myvalue', 'Thu, 01-Jan-1970 00:00:00 GMT');
+        $this->assertSame('Thu, 01-Jan-1970 00:00:00 GMT', $setCookieHeader->getExpires());
+        $this->assertSame(0, $setCookieHeader->getExpires(true));
+
+        $setCookieHeader = new SetCookie('myname', 'myvalue', 1);
+        $this->assertSame('Thu, 01-Jan-1970 00:00:01 GMT', $setCookieHeader->getExpires());
+
+        $setCookieHeader->setExpires('Thu, 01-Jan-1970 00:00:00 GMT');
+        $this->assertSame('Thu, 01-Jan-1970 00:00:00 GMT', $setCookieHeader->getExpires());
+        $this->assertSame(0, $setCookieHeader->getExpires(true));
+
+        $target = 'myname=myvalue; Expires=Thu, 01-Jan-1970 00:00:00 GMT';
+        $this->assertSame($target, $setCookieHeader->getFieldValue());
+    }
+
     public function testIsValidForRequestSubdomainMatch()
     {
         $setCookieHeader = new SetCookie(

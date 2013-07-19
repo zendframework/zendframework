@@ -446,6 +446,19 @@ class Di implements DependencyInjectionInterface
             $callParameters = $this->resolveMethodParameters($class, '__construct', $params, $alias, self::METHOD_IS_CONSTRUCTOR, true);
         }
 
+        if (!class_exists($class)) {
+            if (interface_exists($class)) {
+                throw new Exception\ClassNotFoundException(sprintf(
+                    'Cannot instantiate interface "%s"',
+                    $class
+                ));
+            }
+            throw new Exception\ClassNotFoundException(sprintf(
+                'Class "%s" does not exist; cannot instantiate',
+                $class
+            ));
+        }
+
         // Hack to avoid Reflection in most common use cases
         switch (count($callParameters)) {
             case 0:

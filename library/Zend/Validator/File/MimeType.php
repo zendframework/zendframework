@@ -106,17 +106,17 @@ class MimeType extends AbstractValidator
                 $this->setMagicFile($options['magicFile']);
                 unset($options['magicFile']);
             }
-    
+
             if (isset($options['enableHeaderCheck'])) {
                 $this->enableHeaderCheck($options['enableHeaderCheck']);
                 unset($options['enableHeaderCheck']);
             }
-    
+
             if (array_key_exists('mimeType', $options)) {
                 $this->setMimeType($options['mimeType']);
                 unset($options['mimeType']);
             }
-    
+
             // Handle cases where mimetypes are interspersed with options, or
             // options are simply an array of mime types
             foreach (array_keys($options) as $key) {

@@ -139,7 +139,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        if (version_compare(PHP_VERSION, '5.5.0alpha1', 'lte')) {
+        if (version_compare(PHP_VERSION, '5.5', 'lt')) {
             $outputExpected = array(
                 'timestamp' => $datetime->format($formatter->getDateTimeFormat()),
                 'priority'  => 1,

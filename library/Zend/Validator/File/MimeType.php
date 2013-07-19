@@ -101,31 +101,31 @@ class MimeType extends AbstractValidator
         } elseif (is_string($options)) {
             $this->setMimeType($options);
             $options = array();
-        }
-
-        if (isset($options['magicFile'])) {
-            $this->setMagicFile($options['magicFile']);
-            unset($options['magicFile']);
-        }
-
-        if (isset($options['enableHeaderCheck'])) {
-            $this->enableHeaderCheck($options['enableHeaderCheck']);
-            unset($options['enableHeaderCheck']);
-        }
-
-        if (array_key_exists('mimeType', $options)) {
-            $this->setMimeType($options['mimeType']);
-            unset($options['mimeType']);
-        }
-
-        // Handle cases where mimetypes are interspersed with options, or
-        // options are simply an array of mime types
-        foreach (array_keys($options) as $key) {
-            if (!is_int($key)) {
-                continue;
+        } elseif (is_array($options)) {
+            if (isset($options['magicFile'])) {
+                $this->setMagicFile($options['magicFile']);
+                unset($options['magicFile']);
             }
-            $this->addMimeType($options[$key]);
-            unset($options[$key]);
+
+            if (isset($options['enableHeaderCheck'])) {
+                $this->enableHeaderCheck($options['enableHeaderCheck']);
+                unset($options['enableHeaderCheck']);
+            }
+
+            if (array_key_exists('mimeType', $options)) {
+                $this->setMimeType($options['mimeType']);
+                unset($options['mimeType']);
+            }
+
+            // Handle cases where mimetypes are interspersed with options, or
+            // options are simply an array of mime types
+            foreach (array_keys($options) as $key) {
+                if (!is_int($key)) {
+                    continue;
+                }
+                $this->addMimeType($options[$key]);
+                unset($options[$key]);
+            }
         }
 
         parent::__construct($options);

@@ -384,11 +384,12 @@ class Http implements AdapterInterface
      */
     protected function _challengeClient()
     {
-        trigger_error(
-            'This method is deprecated and will be removed in the future'
-            . ', please use the public challengeClient() instead',
-            E_USER_DEPRECATED
-        );
+        trigger_error(sprintf(
+            'The method "%s" is deprecated and will be removed in the future; '
+            . 'please use the public method "%s::challengeClient()" instead',
+            __METHOD__,
+            __CLASS__
+        ), E_USER_DEPRECATED);
 
         return $this->challengeClient();
     }

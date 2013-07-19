@@ -135,15 +135,13 @@ class FormElementErrorsTest extends CommonTestCase
         $helper = $this->helper;
         $this->assertEquals($helper(), $helper);
     }
-    
+
     public function testCanTranslateContent()
     {
-        $messages = array(
-            array(
-                'First validator message',
-            ),
-        );
-        
+        $messages = array(array(
+            'First validator message',
+        ));
+
         $element = new Element('foo');
         $element->setMessages($messages);
 
@@ -156,7 +154,7 @@ class FormElementErrorsTest extends CommonTestCase
         $this->assertTrue($this->helper->hasTranslator());
 
         $markup = $this->helper->__invoke($element);
-        $this->assertRegexp('#<ul class="error">\s*<li>translated content</li>\s*</ul>#s', $markup);
+        $this->assertRegexp('#<ul[^>]*>\s*<li>translated content</li>\s*</ul>#s', $markup);
     }
 
     public function testTranslatorMethods()

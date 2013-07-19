@@ -477,23 +477,23 @@ class DiTest extends \PHPUnit_Framework_TestCase
     public function testNewInstanceWillThrowAnClassNotFoundExceptionWhenClassIsAnInterface()
     {
         $definitionArray = array (
-            'ZendTest\\Di\\TestAsset\\ConstructorInjection\\D' => array(
+            'ZendTest\Di\TestAsset\ConstructorInjection\D' => array(
                 'supertypes' => array(),
                 'instantiator' => '__construct',
                 'methods' => array('__construct' => 3),
                 'parameters' => array(
                     '__construct' =>
                     array (
-                        'ZendTest\\Di\\TestAsset\\ConstructorInjection\\D::__construct:0' => array(
+                        'ZendTest\Di\TestAsset\ConstructorInjection\D::__construct:0' => array(
                             0 => 'd',
-                            1 => 'ZendTest\\Di\\TestAsset\\DummyInterface',
+                            1 => 'ZendTest\Di\TestAsset\DummyInterface',
                             2 => true,
                             3 => NULL,
                         ),
                     ),
                 ),
             ),
-            'ZendTest\\Di\\TestAsset\\DummyInterface' => array(
+            'ZendTest\Di\TestAsset\DummyInterface' => array(
                 'supertypes' => array(),
                 'instantiator' => NULL,
                 'methods' => array(),

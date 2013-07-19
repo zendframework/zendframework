@@ -448,9 +448,15 @@ class Di implements DependencyInjectionInterface
 
         if (!class_exists($class)) {
             if (interface_exists($class)) {
-                throw new Exception\ClassNotFoundException('Cannot instantiate interface '.$class);
+                throw new Exception\ClassNotFoundException(sprintf(
+                    'Cannot instantiate interface "%s"',
+                    $class
+                ));
             }
-            throw new Exception\ClassNotFoundException($class.' does not exist');
+            throw new Exception\ClassNotFoundException(sprintf(
+                'Class "%s" does not exist; cannot instantiate',
+                $class
+            ));
         }
 
         // Hack to avoid Reflection in most common use cases

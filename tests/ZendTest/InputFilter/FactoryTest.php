@@ -520,11 +520,24 @@ class FactoryTest extends TestCase
     public function testCustomFactoryInCollection()
     {
         $factory = new CustomFactory();
-        /** @var \Zend\InputFilter\CollectionInputFilter $inputFilter */
         $inputFilter = $factory->createInputFilter(array(
             'type'        => 'collection',
             'input_filter' => new InputFilter(),
         ));
         $this->assertInstanceOf('ZendTest\InputFilter\TestAsset\CustomFactory', $inputFilter->getFactory());
+    }
+
+    /**
+     * @group 4838
+     */
+    public function testCanSetInputErrorMessage()
+    {
+        $factory = new Factory();
+        $input   = $factory->createInput(array(
+            'name'          => 'test',
+            'type'          => 'Zend\InputFilter\Input',
+            'error_message' => 'Custom error message',
+        ));
+        $this->assertEquals('Custom error message', $input->getErrorMessage());
     }
 }

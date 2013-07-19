@@ -337,15 +337,12 @@ class EmailAddress extends AbstractValidator
         if (preg_match('/^[' . $atext . ']+(\x2e+[' . $atext . ']+)*$/', $this->localPart)) {
             $result = true;
         } else {
-            // Try quoted string format
+            // Try quoted string format (RFC 5321 Chapter 4.1.2)
 
-            // Quoted-string characters are: DQUOTE *([FWS] qtext/quoted-pair) [FWS] DQUOTE
-            // qtext: Non white space controls, and the rest of the US-ASCII characters not
-            //   including "\" or the quote character
-            $noWsCtl = '\x01-\x08\x0b\x0c\x0e-\x1f\x7f';
-            $qtext   = $noWsCtl . '\x21\x23-\x5b\x5d-\x7e';
-            $ws      = '\x20\x09';
-            if (preg_match('/^\x22([' . $ws . $qtext . '])*[$ws]?\x22$/', $this->localPart)) {
+            // Quoted-string characters are: DQUOTE *(qtext/quoted-pair) DQUOTE
+            $qtext      = '\x20-\x21\x23-\x5b\x5d-\x7e'; // %d32-33 / %d35-91 / %d93-126
+            $quotedPair = '\x20-\x7e'; // %d92 %d32-126
+            if (preg_match('/^"(['. $qtext .']|\x5c[' . $quotedPair . '])*"$/', $this->localPart)) {
                 $result = true;
             } else {
                 $this->error(self::DOT_ATOM);

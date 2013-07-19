@@ -35,7 +35,7 @@ class InlineScript extends HeadScript
      * @param  string $type      Script type and/or array of script attributes
      * @return InlineScript
      */
-    public function __invoke($mode = HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
+    public function __invoke($mode = self::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
     {
         return parent::__invoke($mode, $spec, $placement, $attrs, $type);
     }

@@ -19,7 +19,7 @@ class Sample implements FilterInterface
      *
      * @var float
      */
-    protected $_sampleRate;
+    protected $sampleRate;
 
     /**
      * Filters logging by sample rate.
@@ -41,17 +41,17 @@ class Sample implements FilterInterface
             ));
         }
 
-        $this->_sampleRate = (float) $sampleRate;
+        $this->sampleRate = (float) $sampleRate;
     }
 
     /**
      * Returns TRUE to accept the message, FALSE to block it.
      *
-     * @param array $event event data
+     * @param  array $event event data
      * @return bool Accepted ?
      */
     public function filter(array $event)
     {
-        return (mt_rand() / mt_getrandmax()) <= $this->_sampleRate;
+        return (mt_rand() / mt_getrandmax()) <= $this->sampleRate;
     }
 }

@@ -20,4 +20,10 @@ class SampleEntity
      * @Annotation\AllowEmpty(true)
      */
     public $sampleinput;
+
+    /**
+     *
+     * @Annotation\Attributes({"type":"text"})
+     */
+    public $anotherSampleInput;
 }

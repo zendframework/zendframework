@@ -85,7 +85,14 @@ abstract class AbstractRestfulController extends AbstractController
      * @param  mixed $data
      * @return mixed
      */
-    abstract public function create($data);
+    public function create($data)
+    {
+        $this->response->setStatusCode(405);
+
+        return array(
+            'content' => 'Method Not Allowed'
+        );
+    }
 
     /**
      * Delete an existing resource
@@ -93,7 +100,14 @@ abstract class AbstractRestfulController extends AbstractController
      * @param  mixed $id
      * @return mixed
      */
-    abstract public function delete($id);
+    public function delete($id)
+    {
+        $this->response->setStatusCode(405);
+
+        return array(
+            'content' => 'Method Not Allowed'
+        );
+    }
 
     /**
      * Delete the entire resource collection
@@ -102,13 +116,14 @@ abstract class AbstractRestfulController extends AbstractController
      * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
      * @return mixed
-     * @throws Exception\RuntimeException
      */
     public function deleteList()
     {
-        throw new Exception\RuntimeException(sprintf(
-            '%s is unimplemented', __METHOD__
-        ));
+        $this->response->setStatusCode(405);
+
+        return array(
+            'content' => 'Method Not Allowed'
+        );
     }
 
     /**
@@ -117,14 +132,28 @@ abstract class AbstractRestfulController extends AbstractController
      * @param  mixed $id
      * @return mixed
      */
-    abstract public function get($id);
+    public function get($id)
+    {
+        $this->response->setStatusCode(405);
+
+        return array(
+            'content' => 'Method Not Allowed'
+        );
+    }
 
     /**
      * Return list of resources
      *
      * @return mixed
      */
-    abstract public function getList();
+    public function getList()
+    {
+        $this->response->setStatusCode(405);
+
+        return array(
+            'content' => 'Method Not Allowed'
+        );
+    }
 
     /**
      * Retrieve HEAD metadata for the resource
@@ -134,13 +163,14 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @param  null|mixed $id
      * @return mixed
-     * @throws Exception\RuntimeException
      */
     public function head($id = null)
     {
-        throw new Exception\RuntimeException(sprintf(
-            '%s is unimplemented', __METHOD__
-        ));
+        $this->response->setStatusCode(405);
+
+        return array(
+            'content' => 'Method Not Allowed'
+        );
     }
 
     /**
@@ -153,13 +183,14 @@ abstract class AbstractRestfulController extends AbstractController
      * (introduced in 2.1.0); instead, raises an exception if not implemented.
      *
      * @return mixed
-     * @throws Exception\RuntimeException
      */
     public function options()
     {
-        throw new Exception\RuntimeException(sprintf(
-            '%s is unimplemented', __METHOD__
-        ));
+        $this->response->setStatusCode(405);
+
+        return array(
+            'content' => 'Method Not Allowed'
+        );
     }
 
     /**
@@ -170,13 +201,14 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @param  $id
      * @param  $data
-     * @throws Exception\RuntimeException
      */
     public function patch($id, $data)
     {
-        throw new Exception\RuntimeException(sprintf(
-            '%s is unimplemented', __METHOD__
-        ));
+        $this->response->setStatusCode(405);
+
+        return array(
+            'content' => 'Method Not Allowed'
+        );
     }
 
     /**
@@ -187,13 +219,14 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @param  mixed $data
      * @return mixed
-     * @throws Exception\RuntimeException
      */
     public function replaceList($data)
     {
-        throw new Exception\RuntimeException(sprintf(
-            '%s is unimplemented', __METHOD__
-        ));
+        $this->response->setStatusCode(405);
+
+        return array(
+            'content' => 'Method Not Allowed'
+        );
     }
 
     /**
@@ -204,13 +237,14 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @param  mixed $data
      * @return mixed
-     * @throws Exception\RuntimeException
      */
     public function patchList($data)
     {
-        throw new Exception\RuntimeException(sprintf(
-            '%s is unimplemented', __METHOD__
-        ));
+        $this->response->setStatusCode(405);
+
+        return array(
+            'content' => 'Method Not Allowed'
+        );
     }
 
     /**
@@ -220,7 +254,14 @@ abstract class AbstractRestfulController extends AbstractController
      * @param  mixed $data
      * @return mixed
      */
-    abstract public function update($id, $data);
+    public function update($id, $data)
+    {
+        $this->response->setStatusCode(405);
+
+        return array(
+            'content' => 'Method Not Allowed'
+        );
+    }
 
     /**
      * Basic functionality for when a page is not available

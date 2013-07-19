@@ -90,13 +90,33 @@ class CurrencyFormat extends AbstractHelper
         if (null === $currencyCode) {
             $currencyCode = $this->getCurrencyCode();
         }
-        if (null !== $showDecimals) {
-            $this->setShouldShowDecimals($showDecimals);
+        if (null === $showDecimals) {
+            $showDecimals = $this->shouldShowDecimals();
         }
         if (null === $pattern) {
             $pattern = $this->getCurrencyPattern();
         }
 
+        return $this->formatCurrency($number, $currencyCode, $showDecimals, $locale, $pattern);
+    }
+
+    /**
+     * Format a number
+     *
+     * @param  float  $number
+     * @param  string $currencyCode
+     * @param  bool   $showDecimals
+     * @param  string $locale
+     * @param  string $pattern
+     * @return string
+     */
+    protected function formatCurrency(
+        $number,
+        $currencyCode,
+        $showDecimals,
+        $locale,
+        $pattern
+    ) {
         $formatterId = md5($locale);
 
         if (!isset($this->formatters[$formatterId])) {
@@ -110,7 +130,7 @@ class CurrencyFormat extends AbstractHelper
             $this->formatters[$formatterId]->setPattern($pattern);
         }
 
-        if ($this->shouldShowDecimals()) {
+        if ($showDecimals) {
             $this->formatters[$formatterId]->setAttribute(NumberFormatter::FRACTION_DIGITS, 2);
         } else {
             $this->formatters[$formatterId]->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);

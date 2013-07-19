@@ -16,6 +16,7 @@ use Zend\InputFilter\Factory;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator;
+use ZendTest\InputFilter\TestAsset\CustomFactory;
 
 class FactoryTest extends TestCase
 {
@@ -514,5 +515,16 @@ class FactoryTest extends TestCase
 
         $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter);
         $this->assertTrue($inputFilter->has('type'));
+    }
+
+    public function testCustomFactoryInCollection()
+    {
+        $factory = new CustomFactory();
+        /** @var \Zend\InputFilter\CollectionInputFilter $inputFilter */
+        $inputFilter = $factory->createInputFilter(array(
+            'type'        => 'collection',
+            'input_filter' => new InputFilter(),
+        ));
+        $this->assertInstanceOf('ZendTest\InputFilter\TestAsset\CustomFactory', $inputFilter->getFactory());
     }
 }

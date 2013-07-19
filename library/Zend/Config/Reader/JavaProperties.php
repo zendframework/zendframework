@@ -30,7 +30,7 @@ class JavaProperties implements ReaderInterface
      * @see    ReaderInterface::fromFile()
      * @param  string $filename
      * @return array
-     * @throws Exception\RuntimeException
+     * @throws Exception\RuntimeException if the file cannot be read
      */
     public function fromFile($filename)
     {
@@ -53,7 +53,8 @@ class JavaProperties implements ReaderInterface
      *
      * @see    ReaderInterface::fromString()
      * @param  string $string
-     * @return array|bool
+     * @return array
+     * @throws Exception\RuntimeException if an @include key is found
      */
     public function fromString($string)
     {
@@ -73,7 +74,7 @@ class JavaProperties implements ReaderInterface
      *
      * @param  array $data
      * @return array
-     * @throws Exception\RuntimeException
+     * @throws Exception\RuntimeException if an @include key is found
      */
     protected function process(array $data)
     {

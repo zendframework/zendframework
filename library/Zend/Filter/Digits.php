@@ -18,8 +18,11 @@ class Digits extends AbstractFilter
      *
      * Returns the string $value, removing all but digit characters
      *
+     * If the value provided is non-scalar, the value will remain unfiltered
+     * and an E_USER_WARNING will be raised indicating it's unfilterable.
+     *
      * @param  string $value
-     * @return string
+     * @return string|mixed
      */
     public function filter($value)
     {

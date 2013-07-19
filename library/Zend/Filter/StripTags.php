@@ -166,10 +166,12 @@ class StripTags extends AbstractFilter
     /**
      * Defined by Zend\Filter\FilterInterface
      *
-     * @todo improve docblock descriptions
+     * If the value provided is non-scalar, the value will remain unfiltered
+     * and an E_USER_WARNING will be raised indicating it's unfilterable.
      *
+     * @todo   improve docblock descriptions
      * @param  string $value
-     * @return string
+     * @return string|mixed
      */
     public function filter($value)
     {

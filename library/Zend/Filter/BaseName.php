@@ -14,10 +14,13 @@ class BaseName extends AbstractFilter
     /**
      * Defined by Zend\Filter\FilterInterface
      *
-     * Returns basename($value)
+     * Returns basename($value).
+     *
+     * If the value provided is non-scalar, the value will remain unfiltered
+     * and an E_USER_WARNING will be raised indicating it's unfilterable.
      *
      * @param  string $value
-     * @return string
+     * @return string|mixed
      */
     public function filter($value)
     {

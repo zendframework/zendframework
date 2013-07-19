@@ -16,8 +16,11 @@ class Int extends AbstractFilter
      *
      * Returns (int) $value
      *
+     * If the value provided is non-scalar, the value will remain unfiltered
+     * and an E_USER_WARNING will be raised indicating it's unfilterable.
+     *
      * @param  string $value
-     * @return int
+     * @return int|mixed
      */
     public function filter($value)
     {

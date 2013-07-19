@@ -173,9 +173,12 @@ class HtmlEntities extends AbstractFilter
      * Returns the string $value, converting characters to their corresponding HTML entity
      * equivalents where they exist
      *
+     * If the value provided is non-scalar, the value will remain unfiltered
+     * and an E_USER_WARNING will be raised indicating it's unfilterable.
+     *
      * @param  string $value
-     * @return string
-     * @throws Exception\InvalidArgumentException
+     * @return string|mixed
+     * @throws Exception\DomainException on encoding mismatches
      */
     public function filter($value)
     {

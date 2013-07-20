@@ -15,6 +15,16 @@ use Zend\View\Exception;
 
 /**
  * Helper for setting and retrieving script elements for HTML head section
+ *
+ * Allows the following method calls:
+ * @method HeadScript appendFile($src, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript offsetSetFile($index, $src, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript prependFile($src, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript setFile($src, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript appendScript($script, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript offsetSetScript($index, $src, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript prependScript($script, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript setScript($script, $type = 'text/javascript', $attrs = array())
  */
 class HeadScript extends Placeholder\Container\AbstractStandalone
 {
@@ -138,16 +148,6 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
 
     /**
      * Overload method access
-     *
-     * Allows the following method calls:
-     * - appendFile($src, $type = 'text/javascript', $attrs = array())
-     * - offsetSetFile($index, $src, $type = 'text/javascript', $attrs = array())
-     * - prependFile($src, $type = 'text/javascript', $attrs = array())
-     * - setFile($src, $type = 'text/javascript', $attrs = array())
-     * - appendScript($script, $type = 'text/javascript', $attrs = array())
-     * - offsetSetScript($index, $src, $type = 'text/javascript', $attrs = array())
-     * - prependScript($script, $type = 'text/javascript', $attrs = array())
-     * - setScript($script, $type = 'text/javascript', $attrs = array())
      *
      * @param  string $method Method to call
      * @param  array  $args   Arguments of method

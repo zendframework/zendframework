@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Config
  */
 
 namespace ZendTest\Config\Reader;
@@ -14,9 +13,6 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Config\Reader\ReaderInterface;
 
 /**
- * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
  * @group      Zend_Config
  */
 abstract class AbstractReaderTestCase extends TestCase

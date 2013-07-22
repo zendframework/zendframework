@@ -57,6 +57,21 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
     }
 
     /**
+     * Proxy to __invoke()
+     *
+     * Allows calling $helper->headLink(), but, more importantly, chaining calls
+     * like ->appendStylesheet()->headLink().
+     *
+     * @param  array  $attributes
+     * @param  string $placement
+     * @return HeadLink
+     */
+    public function headLink(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
+    {
+        return call_user_func_array(array($this, '__invoke'), func_get_args());
+    }
+
+    /**
      * headLink() - View Helper Method
      *
      * Returns current object instance. Optionally, allows passing array of

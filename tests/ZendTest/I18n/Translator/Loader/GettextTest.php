@@ -90,6 +90,7 @@ class GettextTest extends TestCase
     public function testLoaderLoadsFromIncludePath()
     {
         $loader = new GettextLoader();
+        $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', 'translation_en.mo');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);
@@ -99,6 +100,7 @@ class GettextTest extends TestCase
     public function testLoaderLoadsFromPhar()
     {
         $loader = new GettextLoader();
+        $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', 'phar://' . $this->testFilesDir . '/translations.phar/translation_en.mo');
 
         $this->assertEquals('Message 1 (en)', $textDomain['Message 1']);

@@ -90,7 +90,7 @@ class Bcrypt implements PasswordInterface
             // check if the password contains 8-bit character
             if (preg_match('/[\x80-\xFF]/', $password)) {
                 throw new Exception\RuntimeException(
-                    'The bcrypt implementation used by PHP can contains a security flaw ' .
+                    'The bcrypt implementation used by PHP can contain a security flaw ' .
                     'using password with 8-bit character. ' .
                     'We suggest to upgrade to PHP 5.3.7+ or use passwords with only 7-bit characters'
                 );

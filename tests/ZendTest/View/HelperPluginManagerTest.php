@@ -10,6 +10,8 @@
 
 namespace ZendTest\View;
 
+use Zend\I18n\Translator\Translator;
+use Zend\Mvc\I18n\Translator as MvcTranslator;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View\HelperPluginManager;
 use Zend\View\Renderer\PhpRenderer;
@@ -79,5 +81,27 @@ class HelperPluginManagerTest extends \PHPUnit_Framework_TestCase
         $identity = $this->helpers->get('identity');
         $expected = $services->get('Zend\Authentication\AuthenticationService');
         $this->assertSame($expected, $identity->getAuthenticationService());
+    }
+
+    public function testIfHelperIsTranslatorAwareAndMvcTranslatorIsAvailableItWillInjectTheMvcTranslator()
+    {
+        $translator = new MvcTranslator();
+        $services   = new ServiceManager();
+        $services->setService('MvcTranslator', $translator);
+        $this->helpers->setServiceLocator($services);
+
+        $helper = $this->helpers->get('HeadTitle');
+        $this->assertSame($translator, $helper->getTranslator());
+    }
+
+    public function testIfHelperIsTranslatorAwareAndMvcTranslatorIsUnavailableAndTranslatorIsAvailableItWillInjectTheTranslator()
+    {
+        $translator = new Translator();
+        $services   = new ServiceManager();
+        $services->setService('Translator', $translator);
+        $this->helpers->setServiceLocator($services);
+
+        $helper = $this->helpers->get('HeadTitle');
+        $this->assertSame($translator, $helper->getTranslator());
     }
 }

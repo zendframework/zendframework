@@ -92,16 +92,16 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         $this->helper->offsetSet(1, 'foo');
     }
 
-    public function testCreatingLinkStackViaHeadScriptCreatesAppropriateOutput()
+    public function testCreatingLinkStackViaHeadLinkCreatesAppropriateOutput()
     {
         $links = array(
             'link1' => array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => 'foo'),
             'link2' => array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => 'bar'),
             'link3' => array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => 'baz'),
         );
-        $this->helper->__invoke($links['link1'])
-                     ->__invoke($links['link2'], 'PREPEND')
-                     ->__invoke($links['link3']);
+        $this->helper->headLink($links['link1'])
+                     ->headLink($links['link2'], 'PREPEND')
+                     ->headLink($links['link3']);
 
         $string = $this->helper->toString();
         $lines  = substr_count($string, PHP_EOL);

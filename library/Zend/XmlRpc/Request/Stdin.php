@@ -10,7 +10,7 @@
 namespace Zend\XmlRpc\Request;
 
 use Zend\XmlRpc\Request as XmlRpcRequest;
-use Zend\XmlRpc\Server\Exception as ServerException;
+use Zend\XmlRpc\Fault;
 
 /**
  * XmlRpc Request object -- Request via STDIN
@@ -39,7 +39,7 @@ class Stdin extends XmlRpcRequest
     {
         $fh = fopen('php://stdin', 'r');
         if (!$fh) {
-            $this->fault = new ServerException(630);
+            $this->fault = new Fault(630);
             return;
         }
 

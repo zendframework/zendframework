@@ -17,6 +17,20 @@ use Zend\View\Exception;
  * Zend\View\Helper\HeadMeta
  *
  * @see http://www.w3.org/TR/xhtml1/dtds.html
+ *
+ * Allows the following 'virtual' methods:
+ * @method HeadMeta appendName($keyValue, $content, $modifiers = array())
+ * @method HeadMeta offsetGetName($index, $keyValue, $content, $modifiers = array())
+ * @method HeadMeta prependName($keyValue, $content, $modifiers = array())
+ * @method HeadMeta setName($keyValue, $content, $modifiers = array())
+ * @method HeadMeta appendHttpEquiv($keyValue, $content, $modifiers = array())
+ * @method HeadMeta offsetGetHttpEquiv($index, $keyValue, $content, $modifiers = array())
+ * @method HeadMeta prependHttpEquiv($keyValue, $content, $modifiers = array())
+ * @method HeadMeta setHttpEquiv($keyValue, $content, $modifiers = array())
+ * @method HeadMeta appendProperty($keyValue, $content, $modifiers = array())
+ * @method HeadMeta offsetGetProperty($index, $keyValue, $content, $modifiers = array())
+ * @method HeadMeta prependProperty($keyValue, $content, $modifiers = array())
+ * @method HeadMeta setProperty($keyValue, $content, $modifiers = array())
  */
 class HeadMeta extends Placeholder\Container\AbstractStandalone
 {
@@ -93,20 +107,6 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
 
     /**
      * Overload method access
-     *
-     * Allows the following 'virtual' methods:
-     * - appendName($keyValue, $content, $modifiers = array())
-     * - offsetGetName($index, $keyValue, $content, $modifiers = array())
-     * - prependName($keyValue, $content, $modifiers = array())
-     * - setName($keyValue, $content, $modifiers = array())
-     * - appendHttpEquiv($keyValue, $content, $modifiers = array())
-     * - offsetGetHttpEquiv($index, $keyValue, $content, $modifiers = array())
-     * - prependHttpEquiv($keyValue, $content, $modifiers = array())
-     * - setHttpEquiv($keyValue, $content, $modifiers = array())
-     * - appendProperty($keyValue, $content, $modifiers = array())
-     * - offsetGetProperty($index, $keyValue, $content, $modifiers = array())
-     * - prependProperty($keyValue, $content, $modifiers = array())
-     * - setProperty($keyValue, $content, $modifiers = array())
      *
      * @param  string $method
      * @param  array  $args

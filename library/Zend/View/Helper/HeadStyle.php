@@ -15,6 +15,12 @@ use Zend\View\Exception;
 
 /**
  * Helper for setting and retrieving stylesheets
+ *
+ * Allows the following method calls:
+ * @method HeadStyle appendStyle($content, $attributes = array())
+ * @method HeadStyle offsetSetStyle($index, $content, $attributes = array())
+ * @method HeadStyle prependStyle($content, $attributes = array())
+ * @method HeadStyle setStyle($content, $attributes = array())
  */
 class HeadStyle extends Placeholder\Container\AbstractStandalone
 {
@@ -108,12 +114,6 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
 
     /**
      * Overload method calls
-     *
-     * Allows the following method calls:
-     * - appendStyle($content, $attributes = array())
-     * - offsetSetStyle($index, $content, $attributes = array())
-     * - prependStyle($content, $attributes = array())
-     * - setStyle($content, $attributes = array())
      *
      * @param  string $method
      * @param  array  $args

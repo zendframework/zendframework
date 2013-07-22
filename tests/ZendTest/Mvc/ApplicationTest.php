@@ -665,13 +665,13 @@ class ApplicationTest extends TestCase
     {
         $this->application->bootstrap(array('BootstrapListener'));
 
-        // must contains custom bootstrap listeners
+        // must contain custom bootstrap listeners
         $bootstrapListener = $this->serviceManager->get('BootstrapListener');
         $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_BOOTSTRAP);
         $bootstrapListeners = $bootstrapListener->getListeners();
         $this->assertTrue($listeners->contains($bootstrapListeners[0]));
 
-        // must contains default listeners
+        // must contain default listeners
         $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(1, count($listeners));
 

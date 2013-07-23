@@ -68,15 +68,23 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     public function getAnnotations(AnnotationManager $annotationManager)
     {
         $docComment = $this->getDocComment();
+
         if ($docComment == '') {
             return false;
         }
 
-        if (!$this->annotations) {
-            $fileScanner       = new FileScanner($this->getFileName());
-            $nameInformation   = $fileScanner->getClassNameInformation($this->getName());
-            $this->annotations = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
+        if ($this->annotations) {
+            return $this->annotations;
         }
+
+        $fileScanner       = new FileScanner($this->getFileName());
+        $nameInformation   = $fileScanner->getClassNameInformation($this->getName());
+
+        if (!$nameInformation) {
+            return false;
+        }
+
+        $this->annotations = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
 
         return $this->annotations;
     }

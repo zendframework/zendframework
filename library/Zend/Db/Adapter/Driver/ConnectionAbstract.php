@@ -83,10 +83,14 @@ abstract class ConnectionAbstract implements ConnectionInterface, Profiler\Profi
     /**
      * Get resource
      *
-     * @return mixed
+     * @return resource
      */
     public function getResource()
     {
+        if (!$this->isConnected()) {
+            $this->connect();
+        }
+
         return $this->resource;
     }
 

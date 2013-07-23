@@ -47,12 +47,18 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
             return false;
         }
 
-        if (!$this->annotations) {
-            $cachingFileScanner = new CachingFileScanner($this->getFileName());
-            $nameInformation    = $cachingFileScanner->getClassNameInformation($this->getDeclaringClass()->getName());
-
-            $this->annotations = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
+        if ($this->annotations) {
+            return $this->annotations;
         }
+
+        $cachingFileScanner = new CachingFileScanner($this->getFileName());
+        $nameInformation    = $cachingFileScanner->getClassNameInformation($this->getDeclaringClass()->getName());
+
+        if (!$nameInformation) {
+            return false;
+        }
+
+        $this->annotations = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
 
         return $this->annotations;
     }

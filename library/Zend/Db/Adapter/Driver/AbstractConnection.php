@@ -105,7 +105,7 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     }
 
     /**
-     * @param array $connectionParameters
+     * @param  array $connectionParameters
      * @return self
      */
     public function setConnectionParameters(array $connectionParameters)
@@ -116,7 +116,7 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
+     * @param  Profiler\ProfilerInterface $profiler
      * @return self
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)

@@ -29,6 +29,13 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     protected $inTransaction = false;
 
     /**
+     * Nested transactions count.
+     *
+     * @var integer
+     */
+    protected $nestedTransactionsCount = 0;
+
+    /**
      * @var Profiler\ProfilerInterface
      */
     protected $profiler = null;

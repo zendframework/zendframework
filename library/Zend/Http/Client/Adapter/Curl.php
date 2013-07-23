@@ -427,6 +427,14 @@ class Curl implements HttpAdapter, StreamInterface
             $this->response = str_ireplace("Transfer-Encoding: chunked\r\n", '', $this->response);
         }
 
+        // cURL can automatically handle content encoding; prevent double-decoding from occurring
+        if (isset($this->config['curloptions'][CURLOPT_ENCODING])
+            && '' == $this->config['curloptions'][CURLOPT_ENCODING]
+            && stripos($this->response, "Content-Encoding: gzip\r\n")
+        ) {
+            $this->response = str_ireplace("Content-Encoding: gzip\r\n", '', $this->response);
+        }
+
         // Eliminate multiple HTTP responses.
         do {
             $parts  = preg_split('|(?:\r?\n){2}|m', $this->response, 2);

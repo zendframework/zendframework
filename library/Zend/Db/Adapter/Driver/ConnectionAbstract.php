@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
 namespace Zend\Db\Adapter\Driver;
 
 use Zend\Db\Adapter\Profiler;
@@ -24,6 +32,25 @@ abstract class ConnectionAbstract implements ConnectionInterface, Profiler\Profi
      * @var Profiler\ProfilerInterface
      */
     protected $profiler = null;
+
+    /**
+     * @var resource
+     */
+    protected $resource = null;
+
+    /**
+     * Disconnect
+     *
+     * @return Connection
+     */
+    public function disconnect()
+    {
+        if ($this->isConnected()) {
+            $this->resource = null;
+        }
+
+        return $this;
+    }
 
     /**
      * Get connection parameters
@@ -54,13 +81,34 @@ abstract class ConnectionAbstract implements ConnectionInterface, Profiler\Profi
     }
 
     /**
+     * Get resource
+     *
+     * @return mixed
+     */
+    public function getResource()
+    {
+        return $this->resource;
+    }
+
+    /**
      * Checks whether the connection is in transaction state.
      *
      * @return boolean
      */
-    public function isInTransaction()
+    public function inTransaction()
     {
         return $this->inTransaction;
+    }
+
+    /**
+     * @param array $connectionParameters
+     * @return Connection
+     */
+    public function setConnectionParameters(array $connectionParameters)
+    {
+        $this->connectionParameters = $connectionParameters;
+
+        return $this;
     }
 
     /**

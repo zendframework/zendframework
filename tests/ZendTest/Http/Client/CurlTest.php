@@ -347,4 +347,22 @@ class CurlTest extends CommonHttpTests
 
         $this->assertContains($header, $curlInfo['request_header'], 'Expecting valid basic authorization header');
     }
+
+    /**
+     * @group 4555
+     */
+    public function testResponseDoesNotDoubleDecodeGzippedBody()
+    {
+        $this->client->setUri($this->baseuri . 'testCurlGzipData.php');
+        $adapter = new Adapter\Curl();
+        $adapter->setOptions(array(
+            'curloptions' => array(
+                CURLOPT_ENCODING => '',
+            ),
+        ));
+        $this->client->setAdapter($adapter);
+        $this->client->setMethod('GET');
+        $this->client->send();
+        $this->assertEquals('Success', $this->client->getResponse()->getBody());
+    }
 }

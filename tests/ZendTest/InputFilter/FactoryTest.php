@@ -16,6 +16,8 @@ use Zend\InputFilter\Factory;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator;
+use Zend\InputFilter\InputFilterPluginManager;
+use Zend\ServiceManager;
 
 class FactoryTest extends TestCase
 {
@@ -514,5 +516,32 @@ class FactoryTest extends TestCase
 
         $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter);
         $this->assertTrue($inputFilter->has('type'));
+    }
+
+    public function testSetInputFilterManagerWithServiceManager()
+    {
+        $inputFilterManager = new InputFilterPluginManager;
+        $serviceManager = new ServiceManager\ServiceManager;
+        $serviceManager->setService('ValidatorManager', new Validator\ValidatorPluginManager);
+        $serviceManager->setService('FilterManager', new Filter\FilterPluginManager);
+        $inputFilterManager->setServiceLocator($serviceManager);
+        $factory = new Factory();
+        $factory->setInputFilterManager($inputFilterManager);
+        $this->assertInstanceOf(
+            'Zend\Validator\ValidatorPluginManager',
+            $factory->getDefaultValidatorChain()->getPluginManager()
+        );
+        $this->assertInstanceOf(
+            'Zend\Filter\FilterPluginManager',
+            $factory->getDefaultFilterChain()->getPluginManager()
+        );
+    }
+
+    public function testSetInputFilterManagerWithoutServiceManager()
+    {
+        $inputFilterManager = new InputFilterPluginManager();
+        $factory = new Factory();
+        $factory->setInputFilterManager($inputFilterManager);
+        $this->assertSame($inputFilterManager, $factory->getInputFilterManager());
     }
 }

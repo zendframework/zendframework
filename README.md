@@ -13,7 +13,7 @@ Develop:
 
 This is the third minor (feature) release for the version 2 series.
 
-DD MMM YYYY
+DD MMM YYY
 
 ### UPDATES IN 2.3.0
 

@@ -498,4 +498,24 @@ class FormInputTest extends CommonTestCase
 
         $this->assertContains('placeholder="translated string"', $markup);
     }
+    
+    public function testCanTranslateTitle()
+    {
+        $element = new Element('test');
+        $element->setAttribute('title', 'test');
+
+        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
+
+        $mockTranslator->expects($this->exactly(1))
+                ->method('translate')
+                ->will($this->returnValue('translated string'));
+
+        $this->helper->setTranslator($mockTranslator);
+
+        $this->assertTrue($this->helper->hasTranslator());
+
+        $markup = $this->helper->__invoke($element);
+
+        $this->assertContains('title="translated string"', $markup);
+    }
 }

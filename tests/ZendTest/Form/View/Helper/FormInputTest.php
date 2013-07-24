@@ -508,6 +508,7 @@ class FormInputTest extends CommonTestCase
 
         $mockTranslator->expects($this->exactly(1))
                 ->method('translate')
+                ->with($this->equalTo('test'))
                 ->will($this->returnValue('translated string'));
 
         $this->helper->setTranslator($mockTranslator);

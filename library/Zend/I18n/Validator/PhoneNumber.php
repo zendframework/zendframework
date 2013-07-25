@@ -28,7 +28,7 @@ class PhoneNumber extends AbstractValidator
     protected $messageTemplates = array(
         self::NO_MATCH    => 'The input does not match a phone number format',
         self::UNSUPPORTED => 'The country provided is currently unsupported',
-        self::INVALID     => 'Invalid type given.  String expected',
+        self::INVALID     => 'Invalid type given. String expected',
     );
 
     /**

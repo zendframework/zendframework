@@ -498,7 +498,7 @@ class FormInputTest extends CommonTestCase
 
         $this->assertContains('placeholder="translated string"', $markup);
     }
-    
+
     public function testCanTranslateTitle()
     {
         $element = new Element('test');

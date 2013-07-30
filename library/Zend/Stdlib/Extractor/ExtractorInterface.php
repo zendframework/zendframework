@@ -7,18 +7,15 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Stdlib\Hydrator;
+namespace Zend\Stdlib\Extractor;
 
-use Zend\Stdlib\Extractor\ExtractorInterface;
-
-interface HydratorInterface extends ExtractorInterface
+interface ExtractorInterface
 {
     /**
-     * Hydrate $object with the provided $data.
+     * Extract values from an object
      *
-     * @param  array $data
      * @param  object $object
-     * @return object
+     * @return array
      */
-    public function hydrate(array $data, $object);
+    public function extract($object);
 }

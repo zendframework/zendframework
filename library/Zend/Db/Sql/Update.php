@@ -228,13 +228,13 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $set = implode(', ', $setSql);
         }
 
-        $sql = sprintf($this->specifications[self::SPECIFICATION_UPDATE], $table, $set);
+        $sql = sprintf($this->specifications[static::SPECIFICATION_UPDATE], $table, $set);
 
         // process where
         if ($this->where->count() > 0) {
             $whereParts = $this->processExpression($this->where, $platform, $driver, 'where');
             $parameterContainer->merge($whereParts->getParameterContainer());
-            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts->getSql());
+            $sql .= ' ' . sprintf($this->specifications[static::SPECIFICATION_WHERE], $whereParts->getSql());
         }
         $statementContainer->setSql($sql);
     }
@@ -278,10 +278,10 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $set = implode(', ', $setSql);
         }
 
-        $sql = sprintf($this->specifications[self::SPECIFICATION_UPDATE], $table, $set);
+        $sql = sprintf($this->specifications[static::SPECIFICATION_UPDATE], $table, $set);
         if ($this->where->count() > 0) {
             $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
-            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts->getSql());
+            $sql .= ' ' . sprintf($this->specifications[static::SPECIFICATION_WHERE], $whereParts->getSql());
         }
         return $sql;
     }

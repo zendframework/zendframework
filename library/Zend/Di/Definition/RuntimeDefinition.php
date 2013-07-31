@@ -302,8 +302,9 @@ class RuntimeDefinition implements DefinitionInterface
                 preg_match($interfaceInjectorPattern, $rIface->getName(), $matches);
                 if ($matches) {
                     foreach ($rIface->getMethods() as $rMethod) {
-                        if ($rMethod->getName() === '__construct') {
+                        if (($rMethod->getName() === '__construct') || (count($rMethod->getParameters()) < 1)) {
                             // constructor not allowed in interfaces
+                            // Don't call interface methods without a parameter (Some aware interfaces define setters in ZF2)
                             continue;
                         }
                         $def['methods'][$rMethod->getName()] = Di::METHOD_IS_AWARE;

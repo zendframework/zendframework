@@ -254,7 +254,7 @@ class CompilerDefinition implements DefinitionInterface
                 preg_match($interfaceInjectorPattern, $rIface->getName(), $matches);
                 if ($matches) {
                     foreach ($rIface->getMethods() as $rMethod) {
-                        if ($rMethod->getName() === '__construct') {
+                        if (($rMethod->getName() === '__construct') || (count($rMethod->getParameters()) < 1)) {
                             // constructor not allowed in interfaces
                             continue;
                         }

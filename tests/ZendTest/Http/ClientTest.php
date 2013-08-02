@@ -340,7 +340,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) === false);
     }
 
-    public function testClientAlwaysReachableIfSpecified()
+    public function testAdapterAlwaysReachableIfSpecified()
     {
         $testAdapter = new Test();
         $client = new Client('http://www.example.org/', array(

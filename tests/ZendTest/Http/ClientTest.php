@@ -339,4 +339,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // because example.org is not a subdomain unter sub.example.org
         $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) === false);
     }
+
+    public function testClientAlwaysReachableIfSpecified()
+    {
+        $testAdapter = new Test();
+        $client = new Client('http://www.example.org/', array(
+            'adapter' => $testAdapter,
+        ));
+
+        $this->assertSame($testAdapter, $client->getAdapter());
+    }
 }

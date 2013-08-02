@@ -205,7 +205,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function getAdapter()
     {
-        if ($this->adapter == null) {
+        if (! $this->adapter) {
             $this->setAdapter($this->config['adapter']);
         }
 

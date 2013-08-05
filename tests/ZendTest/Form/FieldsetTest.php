@@ -93,6 +93,12 @@ class FieldsetTest extends TestCase
         $form->populateValues(array('fieldsets' => array()));
     }
 
+    public function testExtractOnAnEmptyTraversable()
+    {
+        $form = new TestAsset\FormCollection();
+        $form->populateValues(new \ArrayObject(array('fieldsets' => new \ArrayObject())));
+    }
+
     public function testPopulateValuesWithInvalidElementRaisesException()
     {
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');

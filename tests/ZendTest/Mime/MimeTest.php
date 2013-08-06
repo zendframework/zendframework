@@ -135,6 +135,33 @@ class MimeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public static function dataTestFromMessageDecode()
+    {
+        return array(
+            array('äöü', 'quoted-printable', '=C3=A4=C3=B6=C3=BC'),
+            array('Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!', 'quoted-printable', 'Alle meine Entchen schwimmen in dem See, schwimmen in dem See, K=C3=B6pfche=
+n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'),
+            array('foobar', 'base64', 'Zm9vYmFyCg=='),
+        );
+    }
+
+    /**
+     * @dataProvider dataTestFromMessageDecode
+     */
+    public function testFromMessageDecode($input, $encoding, $result)
+    {
+        $parts = Mime\Message::createFromMessage(
+            '--089e0141a1902f83ee04e0a07b7a'."\r\n"
+            .'Content-Type: text/plain; charset=UTF-8'."\r\n"
+            .'Content-Transfer-Encoding: '.$encoding."\r\n"
+            ."\r\n"
+            .$result."\r\n"
+            .'--089e0141a1902f83ee04e0a07b7a--',
+            '089e0141a1902f83ee04e0a07b7a'
+        )->getParts();
+        $this->assertSame($input."\n", $parts[0]->getRawContent());
+    }
+
     /**
      * @group ZF-1688
      */

@@ -58,6 +58,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
             'fixed-type-fixed-subtype-wildcard-format' => array('application/vnd.foobar+*'),
             'fixed-type-partial-wildcard-subtype-fixed-format' => array('application/vnd.*+json'),
             'fixed' => array('application/vnd.foobar+json'),
+            'fixed-mixed-case' => array('APPLICATION/vnd.FooBar+json'),
         );
     }
 
@@ -68,7 +69,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
     {
         $header = ContentType::fromString('Content-Type: application/vnd.foobar+json');
         $result = $header->match($matchAgainst);
-        $this->assertEquals($matchAgainst, $result);
+        $this->assertEquals(strtolower($matchAgainst), $result);
     }
 
     public function invalidMatches()

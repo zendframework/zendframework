@@ -305,4 +305,19 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests', 'PUT', array('a' => 1));
         $this->assertEquals('a=1', $this->getRequest()->getContent());
     }
+
+    public function testAssertTemplateName()
+    {
+        $this->dispatch('/tests');
+
+        $this->assertTemplateName('layout/layout');
+        $this->assertTemplateName('baz/index/unittests');
+    }
+
+    public function testAssertNotTemplateName()
+    {
+        $this->dispatch('/tests');
+
+        $this->assertNotTemplateName('template/does/not/exist');
+    }
 }

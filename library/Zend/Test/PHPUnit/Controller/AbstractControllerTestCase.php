@@ -697,7 +697,8 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * @param string $templateName
      * @return boolean
      */
-    protected function searchTemplates($viewModel, $templateName){
+    protected function searchTemplates($viewModel, $templateName)
+    {
         if ($viewModel->getTemplate($templateName) == $templateName){
             return true;
         }

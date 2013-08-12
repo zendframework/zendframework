@@ -48,10 +48,15 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             'wildcard' => array('*/*'),
+            'wildcard-format' => array('*/*+*'),
             'wildcard-type-subtype-fixed-format' => array('*/*+json'),
+            'wildcard-type-partial-wildcard-subtype-fixed-format' => array('*/vnd.*+json'),
             'wildcard-type-format-subtype' => array('*/json'),
             'fixed-type-wildcard-subtype' => array('application/*'),
+            'fixed-type-wildcard-subtype-fixed-format' => array('application/*+json'),
+            'fixed-type-format-subtype' => array('application/json'),
             'fixed-type-fixed-subtype-wildcard-format' => array('application/vnd.foobar+*'),
+            'fixed-type-partial-wildcard-subtype-fixed-format' => array('application/vnd.*+json'),
             'fixed' => array('application/vnd.foobar+json'),
         );
     }
@@ -64,5 +69,28 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
         $header = ContentType::fromString('Content-Type: application/vnd.foobar+json');
         $result = $header->match($matchAgainst);
         $this->assertTrue($header->match($matchAgainst));
+    }
+
+    public function invalidMatches()
+    {
+        return array(
+            'format' => array('application/vnd.foobar+xml'),
+            'wildcard-subtype' => array('application/vendor.*+json'),
+            'subtype' => array('application/vendor.foobar+json'),
+            'type' => array('text/vnd.foobar+json'),
+            'wildcard-type-format' => array('*/vnd.foobar+xml'),
+            'wildcard-type-wildcard-subtype' => array('*/vendor.*+json'),
+            'wildcard-type-subtype' => array('*/vendor.foobar+json'),
+        );
+    }
+
+    /**
+     * @dataProvider invalidMatches
+     */
+    public function testFailedMatches($matchAgainst)
+    {
+        $header = ContentType::fromString('Content-Type: application/vnd.foobar+json');
+        $result = $header->match($matchAgainst);
+        $this->assertFalse($header->match($matchAgainst));
     }
 }

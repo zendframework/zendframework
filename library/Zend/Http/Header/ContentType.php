@@ -51,7 +51,7 @@ class ContentType implements HeaderInterface
 
         if (count($parts) > 0) {
             $parameters = array();
-            foreach ($parameters as $parameter) {
+            foreach ($parts as $parameter) {
                 $parameter = trim($parameter);
                 if (!preg_match('/^(?P<key>[^\s\=]+)\=(?P<value>[^\s\=]*)$/', $parameter, $matches)) {
                     continue;

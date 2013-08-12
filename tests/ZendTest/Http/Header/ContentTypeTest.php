@@ -68,7 +68,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
     {
         $header = ContentType::fromString('Content-Type: application/vnd.foobar+json');
         $result = $header->match($matchAgainst);
-        $this->assertTrue($header->match($matchAgainst));
+        $this->assertEquals($matchAgainst, $result);
     }
 
     public function invalidMatches()
@@ -91,6 +91,30 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
     {
         $header = ContentType::fromString('Content-Type: application/vnd.foobar+json');
         $result = $header->match($matchAgainst);
-        $this->assertFalse($header->match($matchAgainst));
+        $this->assertFalse($result);
+    }
+
+    public function multipleCriteria()
+    {
+        $criteria = array(
+            'application/vnd.foobar+xml',
+            'application/vnd.*+json',
+            'application/vendor.foobar+xml',
+            '*/vnd.foobar+json',
+        );
+        return array(
+            'array' => array($criteria),
+            'string' => array(implode(',', $criteria)),
+        );
+    }
+
+    /**
+     * @dataProvider multipleCriteria
+     */
+    public function testReturnsMatchingMediaTypeOfFirstCriteriaToValidate($criteria)
+    {
+        $header = ContentType::fromString('Content-Type: application/vnd.foobar+json');
+        $result = $header->match($criteria);
+        $this->assertEquals('application/vnd.*+json', $result);
     }
 }

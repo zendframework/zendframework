@@ -68,7 +68,7 @@ class ContentType implements HeaderInterface
      * Determine if the mediatype value in this header matches the provided criteria
      *
      * @param  array|string $matchAgainst
-     * @return stdClass|bool Matched value or false
+     * @return string|bool Matched value or false
      */
     public function match($matchAgainst)
     {
@@ -76,23 +76,32 @@ class ContentType implements HeaderInterface
             $matchAgainst = $this->splitMediaTypesFromString($matchAgainst);
         }
 
-        $left = $this->getMediaTypeObjectFromString($this->getMediaType());
+        $mediaType = $this->getMediaType();
+        $left      = $this->getMediaTypeObjectFromString($mediaType);
 
         foreach ($matchAgainst as $matchType) {
+            if ($mediaType == $matchType) {
+                return $matchType;
+            }
+
             $right = $this->getMediaTypeObjectFromString($matchType);
 
             // Is the right side a wildcard type?
             if ($right->type == '*') {
-                return $this->validateSubtype($right, $left);
+                if ($this->validateSubtype($right, $left)) {
+                    return $matchType;
+                }
             }
 
             // Do the types match?
             if ($right->type == $left->type) {
-                return $this->validateSubtype($right, $left);
+                if ($this->validateSubtype($right, $left)) {
+                    return $matchType;
+                }
             }
-
-            return false;
         }
+
+        return false;
     }
 
     /**

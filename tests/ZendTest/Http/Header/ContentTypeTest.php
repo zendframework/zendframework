@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace ZendTest\Http\Header;
@@ -30,22 +29,40 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testContentTypeGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('ContentType needs to be completed');
-
-        $contentTypeHeader = new ContentType();
-        $this->assertEquals('xxx', $contentTypeHeader->getFieldValue());
+        $header = ContentType::fromString('Content-Type: application/json');
+        $this->assertEquals('application/json', $header->getFieldValue());
     }
 
     public function testContentTypeToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('ContentType needs to be completed');
+        $header = new ContentType();
+        $header->setMediaType('application/atom+xml')
+               ->setCharset('ISO-8859-1');
 
-        $contentTypeHeader = new ContentType();
-
-        // @todo set some values, then test output
-        $this->assertEmpty('Content-Type: xxx', $contentTypeHeader->toString());
+        $this->assertEquals('Content-Type: application/atom+xml; charset=ISO-8859-1', $header->toString());
     }
 
-    /** Implmentation specific tests here */
+    /** Implementation specific tests here */
 
+    public function wildcardMatches()
+    {
+        return array(
+            'wildcard' => array('*/*'),
+            'wildcard-type-subtype-fixed-format' => array('*/*+json'),
+            'wildcard-type-format-subtype' => array('*/json'),
+            'fixed-type-wildcard-subtype' => array('application/*'),
+            'fixed-type-fixed-subtype-wildcard-format' => array('application/vnd.foobar+*'),
+            'fixed' => array('application/vnd.foobar+json'),
+        );
+    }
+
+    /**
+     * @dataProvider wildcardMatches
+     */
+    public function testMatchWildCard($matchAgainst)
+    {
+        $header = ContentType::fromString('Content-Type: application/vnd.foobar+json');
+        $result = $header->match($matchAgainst);
+        $this->assertTrue($header->match($matchAgainst));
+    }
 }

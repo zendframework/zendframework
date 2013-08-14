@@ -12,12 +12,6 @@ namespace ZendTest\Validator;
 
 use Zend\Validator\Bitwise;
 
-/**
- * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
- * @group      Zend_Validator
- */
 class BitwiseTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Bitwise */

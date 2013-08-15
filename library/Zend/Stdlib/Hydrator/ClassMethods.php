@@ -183,7 +183,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
         foreach ($data as $property => $value) {
             $method = 'set' . ucfirst($property);
             if ($this->underscoreSeparatedKeys) {
-                $method = preg_replace_callback('/(_[a-z])/', $transform, $method);
+                $method = preg_replace_callback('/(_[a-z])/i', $transform, $method);
             }
             if (is_callable(array($object, $method))) {
                 $value = $this->hydrateValue($property, $value, $data);

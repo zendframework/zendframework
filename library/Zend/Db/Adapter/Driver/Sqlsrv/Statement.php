@@ -291,19 +291,16 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
                         $this->parameterReferences[$position++] = $params;
                         break;
                     default:
-                        if(is_array($errata)){
-                            $this->parameterReferences[$position++] = $errata;
-                        }else{
                             $params = array($value, \SQLSRV_PARAM_IN, null, null);
                             $this->parameterReferences[$position++] = $params;
                         }
-                }
+            }elseif(is_array($value)){
+                $this->parameterReferences[$position++] = $value;
             } else {
                 $params = array($value, \SQLSRV_PARAM_IN, null, null);
                 $this->parameterReferences[$position++] = $params;
             }
         }
-
     }
 
     public function setQueryTimeout($queryTimeout)

@@ -188,7 +188,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param string $sql
+     * @param  string $sql
      * @throws Exception\RuntimeException
      * @return Statement
      */
@@ -204,6 +204,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         $this->resource = sqlsrv_prepare($this->sqlsrv, $sql, $pRef, $this->options);
 
         $this->isPrepared = true;
+
         return $this;
     }
 
@@ -294,7 +295,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
                             $params = array($value, \SQLSRV_PARAM_IN, null, null);
                             $this->parameterReferences[$position++] = $params;
                         }
-            }elseif(is_array($value)){
+            } elseif (is_array($value)) {
                 $this->parameterReferences[$position++] = $value;
             } else {
                 $params = array($value, \SQLSRV_PARAM_IN, null, null);
@@ -305,9 +306,9 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 
     public function setQueryTimeout($queryTimeout)
     {
-        if(is_int($queryTimeout)){
+        if (is_int($queryTimeout)) {
             $this->options['QueryTimeout'] = $queryTimeout;
-        }else{
+        } else {
             $message = 'Invalid argument provided to ';
             $message.=  __METHOD__ . ' method in class ' . __CLASS__;
             throw new Exception\InvalidArgumentException($message);
@@ -316,9 +317,9 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 
     public function setSendStreamParamsAtExec($sendStreamParamsAtExec)
     {
-        if(is_bool($sendStreamParamsAtExec)){
+        if (is_bool($sendStreamParamsAtExec)) {
             $this->options['SendStreamParamsAtExec'] = $sendStreamParamsAtExec;
-        }else{
+        } else {
             $message = 'Invalid argument provided to ';
             $message.=  __METHOD__ . ' method in class ' . __CLASS__;
             throw new Exception\InvalidArgumentException($message);

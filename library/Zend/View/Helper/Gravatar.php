@@ -239,7 +239,7 @@ class Gravatar extends AbstractHtmlElement
     public function setEmail($email)
     {
         $this->emailIsHashed = (bool) preg_match('/^[A-Za-z0-9]{32}$/', $email);
-        $this->email = $email;
+        $this->email = strtolower(trim($email));
         return $this;
     }
 

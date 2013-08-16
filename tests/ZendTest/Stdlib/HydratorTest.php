@@ -235,7 +235,6 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
     public function testHydratorClassMethodsUnderscoreWithUnderscoreUpperCasedHydrateDataKeys()
     {
         $hydrator = new ClassMethods(true);
-        $datas = $hydrator->extract($this->classMethodsUnderscore);
         $test = $hydrator->hydrate(
             array(
                 'FOO_BAR' => 'foo',

@@ -748,7 +748,7 @@ abstract class AbstractPage extends AbstractContainer
      *
      * @return AbstractPage fluent interface, returns self
      */
-    public function setTextdomain($textDomain = null)
+    public function setTextDomain($textDomain = null)
     {
         if (null !== $textDomain) {
             $this->textDomain = $textDomain;
@@ -761,7 +761,7 @@ abstract class AbstractPage extends AbstractContainer
      *
      * @return mixed|null  text domain or null
      */
-    public function getTextdomain()
+    public function getTextDomain()
     {
         return $this->textDomain;
     }

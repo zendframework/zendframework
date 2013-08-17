@@ -18,7 +18,7 @@ namespace Zend\Stdlib;
  * class_alias is a global construct, so we can alias either one to Zend\Stdlib\ArrayObject,
  * and from this point forward, that alias will be used.
  */
-if (PHP_VERSION_ID >= 50304) {
+if (PHP_VERSION_ID < 50304) {
     class_alias('Zend\Stdlib\ArrayObject\PhpLegacyCompatibility', 'Zend\Stdlib\AbstractArrayObject');
 } else {
     class_alias('Zend\Stdlib\ArrayObject\PhpReferenceCompatibility', 'Zend\Stdlib\AbstractArrayObject');

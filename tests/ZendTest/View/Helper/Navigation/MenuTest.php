@@ -219,6 +219,15 @@ class MenuTest extends AbstractTest
         $this->assertEquals($expected, $this->_helper->render());
     }
 
+    public function testTranslationUsingZendTranslateWithTextDomain()
+    {
+        $translator = $this->_getTranslatorWithTextDomain();
+        $this->_helper->setTranslator($translator);
+
+        $expected = $this->_getExpected('menu/textdomain.html');
+        $this->assertEquals($expected, $this->_helper->render($this->_nav3));
+    }
+
     public function testTranslationUsingZendTranslateAdapter()
     {
         $translator = $this->_getTranslator();

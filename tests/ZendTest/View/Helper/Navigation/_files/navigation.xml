@@ -209,4 +209,122 @@
 
     </nav_test2>
 
+    <nav_test3>
+
+        <page1>
+            <label>Page 1</label>
+            <uri>page1</uri>
+            <pages>
+
+                <page1_1>
+                    <label>Page 1.1</label>
+                    <uri>page1/page1_1</uri>
+                    <textdomain>ZendTest_1</textdomain>
+                </page1_1>
+
+            </pages>
+        </page1>
+
+        <page2>
+            <label>Page 2</label>
+            <uri>page2</uri>
+            <textdomain>ZendTest_1</textdomain>
+            <pages>
+
+                <page2_1>
+                    <label>Page 2.1</label>
+                    <uri>page2/page2_1</uri>
+                </page2_1>
+
+                <page2_2>
+                    <label>Page 2.2</label>
+                    <uri>page2/page2_2</uri>
+                    <pages>
+
+                        <page2_2_1>
+                            <label>Page 2.2.1</label>
+                            <uri>page2/page2_2/page2_2_1</uri>
+                        </page2_2_1>
+
+                        <page2_2_2>
+                            <label>Page 2.2.2</label>
+                            <uri>page2/page2_2/page2_2_2</uri>
+                            <active>1</active>
+                        </page2_2_2>
+
+                    </pages>
+                </page2_2>
+
+                <page2_3>
+                    <label>Page 2.3</label>
+                    <uri>page2/page2_3</uri>
+                    <textdomain>ZendTest_No</textdomain>
+                    <pages>
+
+                        <page2_3_1>
+                            <label>Page 2.3.1</label>
+                            <uri>page2/page2_3/page2_3_1</uri>
+                        </page2_3_1>
+
+                        <page2_3_2>
+                            <label>Page 2.3.2</label>
+                            <uri>page2/page2_3/page2_3_2</uri>
+                            <visible>0</visible>
+                            <pages>
+
+                                    <page2_3_2_1>
+                                        <label>Page 2.3.2.1</label>
+                                        <uri>page2/page2_3/page2_3_2/1</uri>
+                                        <active>1</active>
+                                    </page2_3_2_1>
+
+                                    <page2_3_2_2>
+                                        <label>Page 2.3.2.2</label>
+                                        <uri>page2/page2_3/page2_3_2/2</uri>
+                                        <active>1</active>
+
+                                        <pages>
+                                            <page_2_3_2_2_1>
+                                                <label>Ignore</label>
+                                                <uri>#</uri>
+                                                <active>1</active>
+                                            </page_2_3_2_2_1>
+                                        </pages>
+                                    </page2_3_2_2>
+
+                            </pages>
+                        </page2_3_2>
+
+                        <page2_3_3>
+                            <label>Page 2.3.3</label>
+                            <uri>page2/page2_3/page2_3_3</uri>
+                            <resource>admin_foo</resource>
+                            <textdomain>ZendTest_1</textdomain>
+                            <pages>
+
+                                    <page2_3_3_1>
+                                        <label>Page 2.3.3.1</label>
+                                        <uri>page2/page2_3/page2_3_3/1</uri>
+                                        <active>1</active>
+                                        <textdomain>ZendTest_2</textdomain>
+                                    </page2_3_3_1>
+
+                                    <page2_3_3_2>
+                                        <label>Page 2.3.3.2</label>
+                                        <uri>page2/page2_3/page2_3_3/2</uri>
+                                        <resource>guest_foo</resource>
+                                        <active>1</active>
+                                    </page2_3_3_2>
+
+                            </pages>
+                        </page2_3_3>
+
+                    </pages>
+                </page2_3>
+
+            </pages>
+        </page2>
+
+    </nav_test3>
+
 </navigation_test>

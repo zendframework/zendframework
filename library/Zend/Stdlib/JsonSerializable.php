@@ -9,7 +9,7 @@
 
 namespace Zend\Stdlib;
 
-if (version_compare(PHP_VERSION, '5.4.0', 'lt')) {
+if (PHP_VERSION_ID < 50400) {
     class_alias(
         'Zend\Stdlib\JsonSerializable\PhpLegacyCompatibility',
         'JsonSerializable'

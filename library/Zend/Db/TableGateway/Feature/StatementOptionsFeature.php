@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Db\Table\Feature;
+namespace Zend\Db\TableGateway\Feature;
 
 use Zend\Db\Adapter\Driver\StatementInterface;
 

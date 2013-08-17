@@ -110,7 +110,7 @@ class Breadcrumbs extends AbstractHelper
             $html = $active->getLabel();
             if (null !== ($translator = $this->getTranslator())) {
                 if (null === ($textDomain = $active->getTextdomain())) {
-                    $textDomain = $this->getTranslatorTextDomain();
+                    $textDomain = $this->getTranslatorTextdomain();
                 }
                 $html = $translator->translate($html, $textDomain);
             }

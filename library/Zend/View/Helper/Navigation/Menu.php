@@ -478,7 +478,7 @@ class Menu extends AbstractHelper
         // translate label and title?
         if (null !== ($translator = $this->getTranslator())) {
             if (null === ($textDomain = $page->getTextdomain())) {
-                $textDomain = $this->getTranslatorTextDomain();
+                $textDomain = $this->getTranslatorTextdomain();
             }
             if (is_string($label) && !empty($label)) {
                 $label = $translator->translate($label, $textDomain);

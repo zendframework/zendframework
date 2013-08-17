@@ -398,7 +398,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
 
         if (null !== ($translator = $this->getTranslator())) {
             if (null === ($textDomain = $page->getTextdomain())) {
-                $textDomain = $this->getTranslatorTextDomain();
+                $textDomain = $this->getTranslatorTextdomain();
             }
             if (is_string($label) && !empty($label)) {
                 $label = $translator->translate($label, $textDomain);

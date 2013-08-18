@@ -230,7 +230,6 @@ abstract class AbstractTableGateway implements TableGatewayInterface
 
         // prepare and execute
         $statement = $this->sql->prepareStatementForSqlObject($select);
-        $this->featureSet->apply('preSelectExecute', array($statement));
         $result = $statement->execute();
 
         // build result set
@@ -289,7 +288,6 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         $this->featureSet->apply('preInsert', array($insert));
 
         $statement = $this->sql->prepareStatementForSqlObject($insert);
-        $this->featureSet->apply('preInsertExecute', array($statement));
         $result = $statement->execute();
         $this->lastInsertValue = $this->adapter->getDriver()->getConnection()->getLastGeneratedValue();
 
@@ -350,7 +348,6 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         $this->featureSet->apply('preUpdate', array($update));
 
         $statement = $this->sql->prepareStatementForSqlObject($update);
-        $this->featureSet->apply('preUpdateExecute', array($statement));
         $result = $statement->execute();
 
         // apply postUpdate features
@@ -407,7 +404,6 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         $this->featureSet->apply('preDelete', array($delete));
 
         $statement = $this->sql->prepareStatementForSqlObject($delete);
-        $this->featureSet->apply('preDeleteExecute', array($statement));
         $result = $statement->execute();
 
         // apply postDelete features

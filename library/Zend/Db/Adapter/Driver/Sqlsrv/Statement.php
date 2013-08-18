@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -63,12 +62,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
      * @var bool
      */
     protected $isPrepared = false;
-
-    /**
-     *
-     * @var array 
-     */
-    protected $options = array();
 
     /**
      * Set driver
@@ -188,7 +181,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * @param  string $sql
+     * @param string $sql
      * @throws Exception\RuntimeException
      * @return Statement
      */
@@ -200,11 +193,13 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         $sql = ($sql) ?: $this->sql;
 
         $pRef = &$this->parameterReferences;
+        for ($position = 0, $count = substr_count($sql, '?'); $position < $count; $position++) {
+            $pRef[$position] = array('', SQLSRV_PARAM_IN, null, null);
+        }
 
-        $this->resource = sqlsrv_prepare($this->sqlsrv, $sql, $pRef, $this->options);
+        $this->resource = sqlsrv_prepare($this->sqlsrv, $sql, $pRef);
 
         $this->isPrepared = true;
-
         return $this;
     }
 
@@ -225,6 +220,9 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
      */
     public function execute($parameters = null)
     {
+        if (!$this->isPrepared) {
+            $this->prepare();
+        }
 
         /** START Standard ParameterContainer Merging Block */
         if (!$this->parameterContainer instanceof ParameterContainer) {
@@ -244,9 +242,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             $this->bindParametersFromContainer();
         }
         /** END Standard ParameterContainer Merging Block */
-        if (!$this->isPrepared) {
-            $this->prepare();
-        }
 
         if ($this->profiler) {
             $this->profiler->profilerStart($this);
@@ -276,70 +271,19 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
      */
     protected function bindParametersFromContainer()
     {
-        $parameters = $this->parameterContainer->getNamedArray();
-
+        $values = $this->parameterContainer->getPositionalArray();
         $position = 0;
-        foreach ($parameters as $key => &$value) {
-            if ($this->parameterContainer->offsetHasErrata($key)) {
-                $errata = $this->parameterContainer->offsetGetErrata($key);
-                switch ($errata) {
-                    case ParameterContainer::TYPE_BINARY:
-                        $params = array();
-                        $params[] = $value;
-                        $params[] = \SQLSRV_PARAM_IN;
-                        $params[] = \SQLSRV_PHPTYPE_STREAM(\SQLSRV_ENC_BINARY);
-                        $params[] = \SQLSRV_SQLTYPE_VARBINARY('max');
-                        $this->parameterReferences[$position++] = $params;
-                        break;
-                    default:
-                            $params = array($value, \SQLSRV_PARAM_IN, null, null);
-                            $this->parameterReferences[$position++] = $params;
-                        }
-            } elseif (is_array($value)) {
-                $this->parameterReferences[$position++] = $value;
-            } else {
-                $params = array($value, \SQLSRV_PARAM_IN, null, null);
-                $this->parameterReferences[$position++] = $params;
-            }
+        foreach ($values as $value) {
+            $this->parameterReferences[$position++][0] = $value;
         }
-    }
 
-    public function setQueryTimeout($queryTimeout)
-    {
-        if (is_int($queryTimeout)) {
-            $this->options['QueryTimeout'] = $queryTimeout;
-        } else {
-            $message = 'Invalid argument provided to ';
-            $message.=  __METHOD__ . ' method in class ' . __CLASS__;
-            throw new Exception\InvalidArgumentException($message);
-        }
+        // @todo bind errata
+        //foreach ($this->parameterContainer as $name => &$value) {
+        //    $p[$position][0] = $value;
+        //    $position++;
+        //    if ($this->parameterContainer->offsetHasErrata($name)) {
+        //        $p[$position][3] = $this->parameterContainer->offsetGetErrata($name);
+        //    }
+        //}
     }
-
-    public function setSendStreamParamsAtExec($sendStreamParamsAtExec)
-    {
-        if (is_bool($sendStreamParamsAtExec)) {
-            $this->options['SendStreamParamsAtExec'] = $sendStreamParamsAtExec;
-        } else {
-            $message = 'Invalid argument provided to ';
-            $message.=  __METHOD__ . ' method in class ' . __CLASS__;
-            throw new Exception\InvalidArgumentException($message);
-        }
-    }
-
-    public function setScrollable($scrollable)
-    {
-        switch ($scrollable) {
-            case \SQLSRV_CURSOR_FORWARD:
-            case \SQLSRV_CURSOR_STATIC:
-            case \SQLSRV_CURSOR_DYNAMIC:
-            case \SQLSRV_CURSOR_KEYSET:
-                $this->options['Scrollable'] = $scrollable;
-                break;
-            default:
-                $message = 'Invalid argument provided to ';
-                $message.=  __METHOD__ . ' method in class ' . __CLASS__;
-                throw new Exception\InvalidArgumentException($message);
-        }
-    }
-
 }

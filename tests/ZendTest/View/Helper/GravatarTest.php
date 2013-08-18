@@ -274,4 +274,11 @@ class GravatarTest extends TestCase
         );
         $this->helper->__invoke()->setOptions($options);
     }
+
+    public function testEmailIsProperlyNormalized()
+    {
+        $this->assertEquals('example@example.com',
+            $this->helper->__invoke('Example@Example.com ')->getEmail()
+        );
+    }
 }

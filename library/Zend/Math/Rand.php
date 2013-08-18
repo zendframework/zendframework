@@ -34,6 +34,8 @@ abstract class Rand
      */
     public static function getBytes($length, $strong = false)
     {
+        $length = (int) $length;
+        
         if ($length <= 0) {
             return false;
         }

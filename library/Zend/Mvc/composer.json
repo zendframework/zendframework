@@ -19,6 +19,7 @@
         "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
+        "zendframework/zend-authentication": "Zend\\Authentication component for Identity plugin",
         "zendframework/zend-config": "Zend\\Config component",
         "zendframework/zend-console": "Zend\\Console component",
         "zendframework/zend-di": "Zend\\Di component",
@@ -29,6 +30,7 @@
         "zendframework/zend-inputfilter": "Zend\\Inputfilter component",
         "zendframework/zend-modulemanager": "Zend\\ModuleManager component",
         "zendframework/zend-serializer": "Zend\\Serializer component",
+        "zendframework/zend-session": "Zend\\Session component for FlashMessenger, PRG, and FPRG plugins",
         "zendframework/zend-stdlib": "Zend\\Stdlib component",
         "zendframework/zend-text": "Zend\\Text component",
         "zendframework/zend-uri": "Zend\\Uri component",

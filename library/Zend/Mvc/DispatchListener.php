@@ -191,6 +191,33 @@ class DispatchListener implements ListenerAggregateInterface
     }
 
     /**
+     * Marshal a controller not found exception event
+     *
+     * @deprecated Use marshalControllerNotFoundEvent() instead
+     * @param  string $type
+     * @param  string $controllerName
+     * @param  MvcEvent $event
+     * @param  Application $application
+     * @param  \Exception $exception
+     * @return mixed
+     */
+    protected function marshallControllerNotFoundEvent(
+        $type,
+        $controllerName,
+        MvcEvent $event,
+        Application $application,
+        \Exception $exception = null
+    ) {
+        trigger_error(sprintf(
+            '%s is deprecated; please use %s::marshalControllerNotFoundEvent instead',
+            __METHOD__,
+            __CLASS__
+        ), E_USER_DEPRECATED);
+
+        return $this->marshalControllerNotFoundEvent($type, $controllerName, $event, $application, $exception);
+    }
+
+    /**
      * Marshal a bad controller exception event
      *
      * @param  string $controllerName

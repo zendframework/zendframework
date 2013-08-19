@@ -859,7 +859,7 @@ class Di implements DependencyInjectionInterface
         if (is_subclass_of($className, $type)) {
             return true;
         }
-        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+        if (PHP_VERSION_ID >= 50307) {
             return false;
         }
         if (!interface_exists($type)) {

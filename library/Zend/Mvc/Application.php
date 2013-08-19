@@ -268,7 +268,7 @@ class Application implements
      *           discovered controller, and controller class (if known).
      *           Typically, a handler should return a populated Response object
      *           that can be returned immediately.
-     * @return self
+     * @return ResponseInterface
      */
     public function run()
     {
@@ -294,13 +294,12 @@ class Application implements
                 $event->setTarget($this);
                 $event->setResponse($response);
                 $events->trigger(MvcEvent::EVENT_FINISH, $event);
-                $this->response = $response;
-                return $this;
+                return $response;
             }
             if ($event->getError()) {
                 return $this->completeRequest($event);
             }
-            return $this;
+            return $event->getResponse();
         }
         if ($event->getError()) {
             return $this->completeRequest($event);
@@ -315,8 +314,7 @@ class Application implements
             $event->setTarget($this);
             $event->setResponse($response);
             $events->trigger(MvcEvent::EVENT_FINISH, $event);
-            $this->response = $response;
-            return $this;
+            return $response;
         }
 
         $response = $this->getResponse();

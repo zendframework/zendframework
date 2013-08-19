@@ -81,11 +81,4 @@ class MonthSelectTest extends TestCase
         $this->assertEquals('2012', $element->getYearElement()->getValue());
         $this->assertEquals('09', $element->getMonthElement()->getValue());
     }
-
-    public function testCanGetValue()
-    {
-        $element  = new MonthSelectElement();
-        $element->setValue(new DateTime('2012-09'));
-        $this->assertEquals('2012-09', $element->getValue());
-    }
 }

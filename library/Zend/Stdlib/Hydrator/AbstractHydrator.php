@@ -15,7 +15,7 @@ use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use Zend\Stdlib\Hydrator\StrategyEnabledInterface;
 use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
 
-abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInterface, FilterEnabledInterface
+abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInterface
 {
     /**
      * The list with strategies that this hydrator has.

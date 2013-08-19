@@ -333,11 +333,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
             . '</style>';
 
         if (null == $escapeStart && null == $escapeEnd) {
-            // inner wrap with comment end and start if !IE
-            if (str_replace(' ', '', $item->attributes['conditional']) === '!IE') {
-                $html = '<!-->' . $html . '<!--';
-            }
-            $html = '<!--[if ' . $item->attributes['conditional'] . ']>' . $html . '<![endif]-->';
+            $html = '<!--[if ' . $item->attributes['conditional'] . ']> ' . $html . '<![endif]-->';
         }
 
         return $html;

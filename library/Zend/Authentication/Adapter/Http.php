@@ -336,11 +336,11 @@ class Http implements AdapterInterface
 
         $headers = $this->request->getHeaders();
         if (!$headers->has($getHeader)) {
-            return $this->challengeClient();
+            return $this->_challengeClient();
         }
         $authHeader = $headers->get($getHeader)->getFieldValue();
         if (!$authHeader) {
-            return $this->challengeClient();
+            return $this->_challengeClient();
         }
 
         list($clientScheme) = explode(' ', $authHeader);
@@ -360,7 +360,7 @@ class Http implements AdapterInterface
         // client sent a scheme that is not the one required
         if (!in_array($clientScheme, $this->acceptSchemes)) {
             // challenge again the client
-            return $this->challengeClient();
+            return $this->_challengeClient();
         }
 
         switch ($clientScheme) {
@@ -378,23 +378,6 @@ class Http implements AdapterInterface
     }
 
     /**
-     * @deprecated
-     * @see Http::challengeClient()
-     * @return Authentication\Result Always returns a non-identity Auth result
-     */
-    protected function _challengeClient()
-    {
-        trigger_error(sprintf(
-            'The method "%s" is deprecated and will be removed in the future; '
-            . 'please use the public method "%s::challengeClient()" instead',
-            __METHOD__,
-            __CLASS__
-        ), E_USER_DEPRECATED);
-
-        return $this->challengeClient();
-    }
-
-    /**
      * Challenge Client
      *
      * Sets a 401 or 407 Unauthorized response code, and creates the
@@ -402,7 +385,7 @@ class Http implements AdapterInterface
      *
      * @return Authentication\Result Always returns a non-identity Auth result
      */
-    public function challengeClient()
+    protected function _challengeClient()
     {
         if ($this->imaProxy) {
             $statusCode = 407;
@@ -491,12 +474,12 @@ class Http implements AdapterInterface
         // implementation does. If invalid credentials are detected,
         // re-challenge the client.
         if (!ctype_print($auth)) {
-            return $this->challengeClient();
+            return $this->_challengeClient();
         }
         // Fix for ZF-1515: Now re-challenges on empty username or password
         $creds = array_filter(explode(':', $auth));
         if (count($creds) != 2) {
-            return $this->challengeClient();
+            return $this->_challengeClient();
         }
 
         $result = $this->basicResolver->resolve($creds[0], $this->realm, $creds[1]);
@@ -515,7 +498,7 @@ class Http implements AdapterInterface
             return new Authentication\Result(Authentication\Result::SUCCESS, $result);
         }
 
-        return $this->challengeClient();
+        return $this->_challengeClient();
     }
 
     /**
@@ -547,17 +530,17 @@ class Http implements AdapterInterface
         // See ZF-1052. This code was a bit too unforgiving of invalid
         // usernames. Now, if the username is bad, we re-challenge the client.
         if ('::invalid::' == $data['username']) {
-            return $this->challengeClient();
+            return $this->_challengeClient();
         }
 
         // Verify that the client sent back the same nonce
         if ($this->_calcNonce() != $data['nonce']) {
-            return $this->challengeClient();
+            return $this->_challengeClient();
         }
         // The opaque value is also required to match, but of course IE doesn't
         // play ball.
         if (!$this->ieNoOpaque && $this->_calcOpaque() != $data['opaque']) {
-            return $this->challengeClient();
+            return $this->_challengeClient();
         }
 
         // Look up the user's password hash. If not found, deny access.
@@ -566,7 +549,7 @@ class Http implements AdapterInterface
         // to be recreatable with the current settings of this object.
         $ha1 = $this->digestResolver->resolve($data['username'], $data['realm']);
         if ($ha1 === false) {
-            return $this->challengeClient();
+            return $this->_challengeClient();
         }
 
         // If MD5-sess is used, a1 value is made of the user's password
@@ -605,7 +588,7 @@ class Http implements AdapterInterface
             return new Authentication\Result(Authentication\Result::SUCCESS, $identity);
         }
 
-        return $this->challengeClient();
+        return $this->_challengeClient();
     }
 
     /**

@@ -48,21 +48,6 @@ class NotEmpty extends AbstractValidator
     );
 
     /**
-     * Default value for types; value = 493
-     *
-     * @var array
-     */
-    protected $defaultType = array(
-        self::OBJECT,
-        self::SPACE,
-        self::NULL,
-        self::EMPTY_ARRAY,
-        self::STRING,
-        self::FLOAT,
-        self::BOOLEAN
-    );
-
-    /**
      * @var array
      */
     protected $messageTemplates = array(
@@ -75,7 +60,9 @@ class NotEmpty extends AbstractValidator
      *
      * @var array
      */
-    protected $options = array();
+    protected $options = array(
+        'type' => 493,  // Internal type to detect
+    );
 
     /**
      * Constructor
@@ -84,8 +71,6 @@ class NotEmpty extends AbstractValidator
      */
     public function __construct($options = null)
     {
-        $this->setType($this->defaultType);
-
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }
@@ -131,18 +116,13 @@ class NotEmpty extends AbstractValidator
     }
 
     /**
-     * @return int
+     * Set the types
+     *
+     * @param  int|array $type
+     * @throws Exception\InvalidArgumentException
+     * @return NotEmpty
      */
-    public function getDefaultType()
-    {
-        return $this->calculateTypeValue($this->defaultType);
-    }
-
-    /**
-     * @param array|int|string $type
-     * @return int
-     */
-    protected function calculateTypeValue($type)
+    public function setType($type = null)
     {
         if (is_array($type)) {
             $detected = 0;
@@ -159,26 +139,11 @@ class NotEmpty extends AbstractValidator
             $type = array_search($type, $this->constants);
         }
 
-        return $type;
-    }
-
-    /**
-     * Set the types
-     *
-     * @param  int|array $type
-     * @throws Exception\InvalidArgumentException
-     * @return NotEmpty
-     */
-    public function setType($type = null)
-    {
-        $type = $this->calculateTypeValue($type);
-
         if (!is_int($type) || ($type < 0) || ($type > self::ALL)) {
             throw new Exception\InvalidArgumentException('Unknown type');
         }
 
         $this->options['type'] = $type;
-
         return $this;
     }
 

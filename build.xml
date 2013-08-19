@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ZF2" default="build">
-    <target name="travis" depends="tests-parallel,merge-clover,show-test-results" />
+    <target name="travis" depends="tests-parallel,show-test-results" />
 
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="${basedir}/build"/>
@@ -9,8 +9,6 @@
     <target name="prepare" depends="clean" description="Prepare for build">
         <mkdir dir="${basedir}/build/test-results"/>
         <mkdir dir="${basedir}/build/cs-results"/>
-        <mkdir dir="${basedir}/build/coverage"/>
-        <mkdir dir="${basedir}/build/logs"/>
     </target>
 
     <target name="get-cs-fixer" depends="clean" description="Get coding standards fixer">
@@ -26,26 +24,10 @@
                 <arg value="--version" />
             </exec>
             <exec executable="composer" failonerror="true">
-                <env key="COMPOSER_ROOT_VERSION" value="dev-develop"/>
+                <env key="COMPOSER_ROOT_VERSION" value="dev-master"/>
                 <arg value="install" />
                 <arg value="--dev" />
                 <arg value="--prefer-source" />
-            </exec>
-        </sequential>
-    </target>
-
-    <target name="merge-clover" description="Merges the individual clover reports of each component into a single clover.xml">
-        <sequential>
-            <exec executable="php" failonerror="true">
-                <arg value="-d" />
-                <arg value="memory_limit=-1" />
-                <arg value="vendor/bin/phpcov.php" />
-                <arg value="--merge" />
-                <arg value="--clover" />
-                <arg value="${basedir}/build/logs/clover.xml" />
-                <arg value="--whitelist" />
-                <arg value="${basedir}/library" />
-                <arg value="${basedir}/build/coverage" />
             </exec>
         </sequential>
     </target>
@@ -137,8 +119,6 @@
             >
                 <arg value="-c" />
                 <arg value="${basedir}/tests/phpunit.xml.dist" />
-                <arg value="--coverage-php" />
-                <arg value="${basedir}/build/coverage/coverage-@{component}.cov" />
                 <arg value="${basedir}/tests/ZendTest/@{component}" />
             </exec>
         </sequential>

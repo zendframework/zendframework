@@ -77,7 +77,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
 
         // Check header integrity
         $this->assertEquals('timeout=15,max=100', $response->getHeaders()->get('keep-alive')->getFieldValue());
-        $this->assertEquals('text/html; charset=iso-8859-1', $response->getHeaders()->get('content-type')->getFieldValue());
+        $this->assertEquals('text/html;charset=iso-8859-1', $response->getHeaders()->get('content-type')->getFieldValue());
     }
 
 

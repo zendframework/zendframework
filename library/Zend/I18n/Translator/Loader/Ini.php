@@ -17,7 +17,7 @@ use Zend\I18n\Translator\TextDomain;
 /**
  * PHP INI format loader.
  */
-class Ini extends AbstractFileLoader
+class Ini implements FileLoaderInterface
 {
     /**
      * load(): defined by FileLoaderInterface.
@@ -30,18 +30,16 @@ class Ini extends AbstractFileLoader
      */
     public function load($locale, $filename)
     {
-        $resolvedIncludePath = stream_resolve_include_path($filename);
-        $fromIncludePath = ($resolvedIncludePath !== false) ? $resolvedIncludePath : $filename;
-        if (!$fromIncludePath || !is_file($fromIncludePath) || !is_readable($fromIncludePath)) {
+        if (!is_file($filename) || !is_readable($filename)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Could not find or open file %s for reading',
+                'Could not open file %s for reading',
                 $filename
             ));
         }
 
         $messages           = array();
         $iniReader          = new IniReader();
-        $messagesNamespaced = $iniReader->fromFile($fromIncludePath);
+        $messagesNamespaced = $iniReader->fromFile($filename);
 
         $list = $messagesNamespaced;
         if (isset($messagesNamespaced['translation'])) {

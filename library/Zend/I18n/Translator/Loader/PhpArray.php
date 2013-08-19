@@ -16,7 +16,7 @@ use Zend\I18n\Translator\TextDomain;
 /**
  * PHP array loader.
  */
-class PhpArray extends AbstractFileLoader
+class PhpArray implements FileLoaderInterface
 {
     /**
      * load(): defined by FileLoaderInterface.
@@ -29,16 +29,14 @@ class PhpArray extends AbstractFileLoader
      */
     public function load($locale, $filename)
     {
-        $resolvedIncludePath = stream_resolve_include_path($filename);
-        $fromIncludePath = ($resolvedIncludePath !== false) ? $resolvedIncludePath : $filename;
-        if (!$fromIncludePath || !is_file($fromIncludePath) || !is_readable($fromIncludePath)) {
+        if (!is_file($filename) || !is_readable($filename)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Could not find or open file %s for reading',
+                'Could not open file %s for reading',
                 $filename
             ));
         }
 
-        $messages = include $fromIncludePath;
+        $messages = include $filename;
 
         if (!is_array($messages)) {
             throw new Exception\InvalidArgumentException(sprintf(

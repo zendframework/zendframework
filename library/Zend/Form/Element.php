@@ -16,8 +16,7 @@ use Zend\Stdlib\InitializableInterface;
 class Element implements
     ElementAttributeRemovalInterface,
     ElementInterface,
-    InitializableInterface,
-    LabelOptionsAwareInterface
+    InitializableInterface
 {
     /**
      * @var array
@@ -33,15 +32,6 @@ class Element implements
      * @var array
      */
     protected $labelAttributes;
-
-    /**
-     * Label specific options
-     *
-     * @var array
-     */
-    protected $labelOptions = array(
-        'disable_html_escape' => false
-    );
 
     /**
      * @var array Validation error messages
@@ -131,10 +121,6 @@ class Element implements
 
         if (isset($options['label_attributes'])) {
             $this->setLabelAttributes($options['label_attributes']);
-        }
-
-        if (isset($options['label_options'])) {
-            $this->setLabelOptions($options['label_options']);
         }
 
         $this->options = $options;
@@ -349,28 +335,6 @@ class Element implements
     public function getLabelAttributes()
     {
         return $this->labelAttributes;
-    }
-
-    /**
-     * Set label specific options
-     *
-     * @param array $labelOptions
-     * @return Element|ElementInterface
-     */
-    public function setLabelOptions(array $labelOptions)
-    {
-        $this->labelOptions = $labelOptions;
-        return $this;
-    }
-
-    /**
-     * Get label specific options
-     *
-     * @return array
-     */
-    public function getLabelOptions()
-    {
-        return $this->labelOptions;
     }
 
     /**

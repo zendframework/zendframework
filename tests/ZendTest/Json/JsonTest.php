@@ -463,29 +463,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('{"firstName":"John","lastName":"Doe","email":"john@doe.com"}', $result);
     }
 
-    public function testJsonSerializableWithBuiltinImplementation()
-    {
-        if (version_compare(PHP_VERSION, '5.4.0', 'lt')) {
-            $this->markTestSkipped('JsonSerializable does not exist in PHP <5.4.0.');
-        }
-
-        $encoded = Json\Encoder::encode(
-            new TestAsset\JsonSerializableBuiltinImpl()
-        );
-
-        $this->assertEquals('["jsonSerialize"]', $encoded);
-    }
-
-    public function testJsonSerializableWithZFImplementation()
-    {
-        $encoded = Json\Encoder::encode(
-            new TestAsset\JsonSerializableZFImpl()
-        );
-
-        $this->assertEquals('["jsonSerialize"]', $encoded);
-    }
-
-    /**
+     /**
      * test encoding array with Zend_JSON_Expr
      *
      * @group ZF-4946

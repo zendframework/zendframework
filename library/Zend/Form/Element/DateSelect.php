@@ -115,18 +115,6 @@ class DateSelect extends MonthSelect
     }
 
     /**
-     * @return String
-     */
-    public function getValue()
-    {
-        return sprintf('%s-%s-%s',
-            $this->getYearElement()->getValue(),
-            $this->getMonthElement()->getValue(),
-            $this->getDayElement()->getValue()
-        );
-    }
-
-    /**
      * Prepare the form element (mostly used for rendering purposes)
      *
      * @param  FormInterface $form

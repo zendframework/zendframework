@@ -244,21 +244,6 @@ class DateTimeSelect extends DateSelect
     }
 
     /**
-     * @return String
-     */
-    public function getValue()
-    {
-        return sprintf('%s-%s-%s %s:%s:%s',
-            $this->getYearElement()->getValue(),
-            $this->getMonthElement()->getValue(),
-            $this->getDayElement()->getValue(),
-            $this->getHourElement()->getValue(),
-            $this->getMinuteElement()->getValue(),
-            $this->getSecondElement()->getValue()
-        );
-    }
-
-    /**
      * Prepare the form element (mostly used for rendering purposes)
      *
      * @param  FormInterface $form

@@ -9,6 +9,8 @@
  */
 namespace ZendTest\Test\PHPUnit\Controller;
 
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Zend\Console\Console;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
@@ -26,7 +28,8 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 {
     public function tearDownCacheDir()
     {
-        $cacheDir = sys_get_temp_dir() . '/zf2-module-test';
+        vfsStreamWrapper::register();
+        $cacheDir = vfsStream::url('zf2-module-test');
         if (is_dir($cacheDir)) {
             static::rmdir($cacheDir);
         }

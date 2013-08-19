@@ -278,12 +278,16 @@ class Curl implements HttpAdapter, StreamInterface
                 if (isset($this->config['curloptions'][CURLOPT_INFILE])) {
                     // Now we will probably already have Content-Length set, so that we have to delete it
                     // from $headers at this point:
-                    if ( !isset($headers['Content-Length']) ) {
+                    if (!isset($headers['Content-Length'])
+                        && !isset($this->config['curloptions'][CURLOPT_INFILESIZE])
+                    ) {
                         throw new AdapterException\RuntimeException("Cannot set a file-handle for cURL option CURLOPT_INFILE without also setting its size in CURLOPT_INFILESIZE.");
                     }
 
-                    $this->config['curloptions'][CURLOPT_INFILESIZE] = (int) $headers['Content-Length'];
-                    unset($headers['Content-Length']);
+                    if (isset($headers['Content-Length'])) {
+                        $this->config['curloptions'][CURLOPT_INFILESIZE] = (int) $headers['Content-Length'];
+                        unset($headers['Content-Length']);
+                    }
 
                     if (is_resource($body)) {
                         $body = '';

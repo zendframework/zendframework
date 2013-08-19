@@ -79,6 +79,45 @@ class CollectionTest extends TestCase
         $this->assertEquals(3, count($collection->getElements()));
     }
 
+    public function testCanRemoveElementsIfAllowRemoveIsTrue()
+    {
+        $collection = $this->form->get('colors');
+        $collection->setAllowRemove(true);
+        $this->assertTrue($collection->allowRemove());
+
+        $data = array();
+        $data[] = 'blue';
+        $data[] = 'green';
+
+        $collection->populateValues($data);
+        $this->assertEquals(2, count($collection->getElements()));
+
+        unset($data[0]);
+
+        $collection->populateValues($data);
+        $this->assertEquals(1, count($collection->getElements()));
+    }
+
+    public function testCanReplaceElementsIfAllowAddAndAllowRemoveIsTrue()
+    {
+        $collection = $this->form->get('colors');
+        $collection->setAllowAdd(true);
+        $collection->setAllowRemove(true);
+
+        $data = array();
+        $data[] = 'blue';
+        $data[] = 'green';
+
+        $collection->populateValues($data);
+        $this->assertEquals(2, count($collection->getElements()));
+
+        unset($data[0]);
+        $data[] = 'orange';
+
+        $collection->populateValues($data);
+        $this->assertEquals(2, count($collection->getElements()));
+    }
+
     public function testCanValidateFormWithCollectionWithoutTemplate()
     {
         $this->form->setData(array(

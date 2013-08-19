@@ -28,7 +28,8 @@
         "zendframework/zend-i18n": "Zend\\I18n component to allow translation of validation error messages as well as to use the various Date validators",
         "zendframework/zend-math": "Zend\\Math component",
         "zendframework/zend-resources": "Translations of validator messages",
-        "zendframework/zend-servicemanager": "Zend\\ServiceManager component to allow using the ValidatorPluginManager and validator chains"
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component to allow using the ValidatorPluginManager and validator chains",
+        "zendframework/zend-uri": "Zend\\Uri component, required by the Uri and Sitemap\\Loc validators"
     },
     "extra": {
         "branch-alias": {

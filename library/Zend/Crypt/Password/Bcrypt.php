@@ -83,7 +83,7 @@ class Bcrypt implements PasswordInterface
          * Check for security flaw in the bcrypt implementation used by crypt()
          * @see http://php.net/security/crypt_blowfish.php
          */
-        if ((version_compare(PHP_VERSION, '5.3.7') >= 0) && !$this->backwardCompatibility) {
+        if ((PHP_VERSION_ID >= 50307) && !$this->backwardCompatibility) {
             $prefix = '$2y$';
         } else {
             $prefix = '$2a$';

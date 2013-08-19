@@ -41,7 +41,7 @@ abstract class Rand
         }
         $bytes = '';
         if (function_exists('openssl_random_pseudo_bytes')
-            && (version_compare(PHP_VERSION, '5.3.4') >= 0
+            && ((PHP_VERSION_ID >= 50304)
             || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
         ) {
             $bytes = openssl_random_pseudo_bytes($length, $usable);
@@ -50,7 +50,7 @@ abstract class Rand
             }
         }
         if (function_exists('mcrypt_create_iv')
-            && (version_compare(PHP_VERSION, '5.3.7') >= 0
+            && ((PHP_VERSION_ID >= 50307)
             || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
         ) {
             $bytes = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);

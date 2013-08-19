@@ -93,6 +93,21 @@ class FieldsetTest extends TestCase
         $form->populateValues(array('fieldsets' => array()));
     }
 
+    public function testExtractOnAnEmptyTraversable()
+    {
+        $form = new TestAsset\FormCollection();
+        $form->populateValues(new \ArrayObject(array('fieldsets' => new \ArrayObject())));
+    }
+
+    public function testTraversableAcceptedValueForFieldset()
+    {
+        $subValue = new \ArrayObject(array('field' => 'value'));
+        $subFieldset = new TestAsset\ValueStoringFieldset('subFieldset');
+        $this->fieldset->add($subFieldset);
+        $this->fieldset->populateValues(array('subFieldset' => $subValue));
+        $this->assertEquals($subValue, $subFieldset->getStoredValue());
+    }
+
     public function testPopulateValuesWithInvalidElementRaisesException()
     {
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');

@@ -13,8 +13,6 @@ namespace ZendTest\View\Helper;
 use ArrayObject;
 use Iterator;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Form\Element\Collection;
-use Zend\Form\Form;
 use Zend\View\Helper\PartialLoop;
 use Zend\View\Renderer\PhpRenderer as View;
 

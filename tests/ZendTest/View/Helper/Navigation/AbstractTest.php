@@ -75,6 +75,13 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     protected $_nav2;
 
+    /**
+     * The third container in the config file (files/navigation.xml)
+     *
+     * @var Navigation\Navigation
+     */
+    protected $_nav3;
+
     private $_oldControllerDir;
 
     /**
@@ -92,6 +99,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         // setup containers from config
         $this->_nav1 = new Navigation($config->get('nav_test1'));
         $this->_nav2 = new Navigation($config->get('nav_test2'));
+        $this->_nav3 = new Navigation($config->get('nav_test3'));
 
         // setup view
         $view = new PhpRenderer();
@@ -202,6 +210,41 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         $translator = new Translator();
         $translator->getPluginManager()->setService('default', $loader);
         $translator->addTranslationFile('default', null);
+        return $translator;
+    }
+
+    /**
+     * Returns translator with text domain
+     *
+     * @return Translator
+     */
+    protected function _getTranslatorWithTextDomain()
+    {
+        $loader1 = new TestAsset\ArrayTranslator();
+        $loader1->translations = array(
+            'Page 1'       => 'TextDomain1 1',
+            'Page 1.1'     => 'TextDomain1 1.1',
+            'Page 2'       => 'TextDomain1 2',
+            'Page 2.3'     => 'TextDomain1 2.3',
+            'Page 2.3.3'   => 'TextDomain1 2.3.3',
+            'Page 2.3.3.1' => 'TextDomain1 2.3.3.1',
+        );
+
+        $loader2 = new TestAsset\ArrayTranslator();
+        $loader2->translations = array(
+            'Page 1'       => 'TextDomain2 1',
+            'Page 1.1'     => 'TextDomain2 1.1',
+            'Page 2'       => 'TextDomain2 2',
+            'Page 2.3'     => 'TextDomain2 2.3',
+            'Page 2.3.3'   => 'TextDomain2 2.3.3',
+            'Page 2.3.3.1' => 'TextDomain2 2.3.3.1',
+        );
+
+        $translator = new Translator();
+        $translator->getPluginManager()->setService('default1', $loader1);
+        $translator->getPluginManager()->setService('default2', $loader2);
+        $translator->addTranslationFile('default1', null, 'ZendTest_1');
+        $translator->addTranslationFile('default2', null, 'ZendTest_2');
         return $translator;
     }
 }

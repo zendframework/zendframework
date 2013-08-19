@@ -116,6 +116,13 @@ abstract class AbstractPage extends AbstractContainer
     protected $permission;
 
     /**
+     * Text domain for Translator
+     *
+     * @var string
+     */
+    protected $textDomain;
+
+    /**
      * Whether this page should be considered active
      *
      * @var bool
@@ -730,6 +737,33 @@ abstract class AbstractPage extends AbstractContainer
     public function getPermission()
     {
         return $this->permission;
+    }
+
+    /**
+     * Sets text domain for translation
+     *
+     * @param  string|null $textDomain  [optional] text domain to associate
+     *                                  with this page. Default is null, which
+     *                                  sets no text domain.
+     *
+     * @return AbstractPage fluent interface, returns self
+     */
+    public function setTextDomain($textDomain = null)
+    {
+        if (null !== $textDomain) {
+            $this->textDomain = $textDomain;
+        }
+        return $this;
+    }
+
+    /**
+     * Returns text domain for translation
+     *
+     * @return mixed|null  text domain or null
+     */
+    public function getTextDomain()
+    {
+        return $this->textDomain;
     }
 
     /**

@@ -164,8 +164,8 @@ class Factory
             );
         }
 
-        $extension          = substr(strrchr($filename, '.'), 1);
-        $directory          = dirname($filename);
+        $extension = substr(strrchr($filename, '.'), 1);
+        $directory = dirname($filename);
 
         if (!is_dir($directory)) {
             throw new Exception\RuntimeException(

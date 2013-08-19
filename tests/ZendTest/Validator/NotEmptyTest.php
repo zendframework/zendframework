@@ -483,7 +483,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetType()
     {
-        $this->assertEquals(493, $this->validator->getType());
+        $this->assertEquals($this->validator->getDefaultType(), $this->validator->getType());
     }
 
     /**
@@ -593,7 +593,21 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     public function testTypeAutoDetectionHasNoSideEffect()
     {
         $validator = new NotEmpty(array('translatorEnabled' => true));
-        $this->assertEquals(493, $validator->getType());
+        $this->assertEquals($validator->getDefaultType(), $validator->getType());
+    }
+
+    public function testDefaultType()
+    {
+        $this->assertSame(
+            NotEmpty::BOOLEAN
+                | NotEmpty::FLOAT
+                | NotEmpty::STRING
+                | NotEmpty::EMPTY_ARRAY
+                | NotEmpty::NULL
+                | NotEmpty::SPACE
+                | NotEmpty::OBJECT,
+            $this->validator->getDefaultType()
+        );
     }
 }
 

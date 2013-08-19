@@ -12,6 +12,9 @@ before_install:
 script:
  - ant travis -keep-going
 
+after_script:
+  - php vendor/bin/coveralls
+
 notifications:
   irc: "irc.freenode.org#zftalk.dev"
   email: false

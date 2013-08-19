@@ -43,6 +43,9 @@ trait ProvidesEvents
         }
         $events->setIdentifiers($identifiers);
         $this->events = $events;
+        if (method_exists($this, 'attachDefaultListeners')) {
+            $this->attachDefaultListeners();
+        }
         return $this;
     }
 

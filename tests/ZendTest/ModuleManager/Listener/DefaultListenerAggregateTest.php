@@ -109,7 +109,7 @@ class DefaultListenerAggregateTest extends TestCase
         $this->assertEquals(1, count($moduleManager->getEventManager()->getEvents()));
 
         $listenerAggregate->attach($moduleManager->getEventManager());
-        $this->assertEquals(3, count($moduleManager->getEventManager()->getEvents()));
+        $this->assertEquals(4, count($moduleManager->getEventManager()->getEvents()));
 
         $listenerAggregate->detach($moduleManager->getEventManager());
         $this->assertEquals(1, count($moduleManager->getEventManager()->getEvents()));

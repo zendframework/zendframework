@@ -50,6 +50,9 @@ class FormDateTest extends CommonTestCase
         $this->assertContains('type="date"', $markup);
     }
 
+    /**
+     * @return array
+     */
     public function validAttributes()
     {
         return array(
@@ -125,6 +128,7 @@ class FormDateTest extends CommonTestCase
 
     /**
      * @dataProvider validAttributes
+     * @return void
      */
     public function testAllValidFormMarkupAttributesPresentInElementAreRendered($attribute, $assertion)
     {

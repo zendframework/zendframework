@@ -475,7 +475,6 @@ class ServiceManager implements ServiceLocatorInterface
                 isset($this->invokableClasses[$cName])
                 || isset($this->factories[$cName])
                 || isset($this->aliases[$cName])
-                || isset($this->instances[$cName])
                 || $this->canCreateFromAbstractFactory($cName, $name)
             ) {
                 $instance = $this->create(array($cName, $name));

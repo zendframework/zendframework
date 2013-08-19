@@ -1212,7 +1212,7 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->isValid());
     }
 
-    public function testDonNotApplyEmptyInputFiltersToSubFieldsetOfCollectionElementsWithCollectionInputFilters()
+    public function testDoNotApplyEmptyInputFiltersToSubFieldsetOfCollectionElementsWithCollectionInputFilters()
     {
         $collectionFieldset = new Fieldset('item');
         $collectionFieldset->add(new Element('foo'));

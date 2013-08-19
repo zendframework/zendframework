@@ -36,7 +36,7 @@ return array(
     // Zend\I18n\Validator\PhoneNumber
     "The input does not match a phone number format" => "The input does not match a phone number format",
     "The country provided is currently unsupported" => "The country provided is currently unsupported",
-    "Invalid type given.  String expected" => "Invalid type given.  String expected",
+    "Invalid type given. String expected" => "Invalid type given. String expected",
 
     // Zend\I18n\Validator\PostCode
     "Invalid type given. String or integer expected" => "Invalid type given. String or integer expected",

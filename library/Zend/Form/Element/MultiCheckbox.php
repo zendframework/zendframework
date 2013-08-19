@@ -29,6 +29,11 @@ class MultiCheckbox extends Checkbox
     /**
      * @var bool
      */
+    protected $disableInArrayValidator = false;
+
+    /**
+     * @var bool
+     */
     protected $useHiddenElement = false;
 
     /**
@@ -87,6 +92,9 @@ class MultiCheckbox extends Checkbox
         if (isset($this->options['options'])) {
             $this->setValueOptions($this->options['options']);
         }
+        if (isset($this->options['disable_inarray_validator'])) {
+            $this->setDisableInArrayValidator($this->options['disable_inarray_validator']);
+        }
 
         return $this;
     }
@@ -110,13 +118,35 @@ class MultiCheckbox extends Checkbox
     }
 
     /**
+     * Set the flag to allow for disabling the automatic addition of an InArray validator.
+     *
+     * @param bool $disableOption
+     * @return Select
+     */
+    public function setDisableInArrayValidator($disableOption)
+    {
+        $this->disableInArrayValidator = (bool) $disableOption;
+        return $this;
+    }
+
+    /**
+     * Get the disable in array validator flag.
+     *
+     * @return bool
+     */
+    public function disableInArrayValidator()
+    {
+        return $this->disableInArrayValidator;
+    }
+
+    /**
      * Get validator
      *
      * @return ValidatorInterface
      */
     protected function getValidator()
     {
-        if (null === $this->validator) {
+        if (null === $this->validator && !$this->disableInArrayValidator()) {
             $inArrayValidator = new InArrayValidator(array(
                 'haystack'  => $this->getValueOptionsValues(),
                 'strict'    => false,

@@ -15,8 +15,15 @@
     "require": {
         "php": ">=5.3.3"
     },
-    "suggest": {
+    "require-dev": {
+        "zendframework/zend-eventmanager": "self.version",
+        "zendframework/zend-servicemanager": "self.version",
         "zendframework/zend-stdlib": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-eventmanager": "Zend\\EventManager component",
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
+        "zendframework/zend-stdlib": "Zend\\Stdlib component"
     },
     "extra": {
         "branch-alias": {

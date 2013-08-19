@@ -56,8 +56,8 @@ class ArrayInput extends Input
         foreach ($values as $value) {
             $result = $validator->isValid($value, $context);
             if (!$result) {
-                if ($fallbackValue = $this->getFallbackValue()) {
-                    $this->setValue($fallbackValue);
+                if ($this->hasFallback()) {
+                    $this->setValue($this->getFallbackValue());
                     $result = true;
                 }
                 break;

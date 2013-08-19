@@ -224,6 +224,7 @@ class Message
         foreach ($parts as $part) {
             // now we build a new MimePart for the current Message Part:
             $newPart = new Part($part['body']);
+
             foreach ($part['header'] as $header) {
                 /** @var \Zend\Mail\Header\HeaderInterface $header */
                 /**
@@ -255,7 +256,8 @@ class Message
                         $newPart->language = $fieldValue;
                         break;
                     default:
-                        throw new Exception\RuntimeException('Unknown header ignored for MimePart:' . $fieldName);
+                        // Ignore unknown header
+                        break;
                 }
             }
             $res->addPart($newPart);

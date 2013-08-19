@@ -156,8 +156,6 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($test->hasBar(), false);
     }
 
-
-
     public function testHydratorClassMethodsTitleCase()
     {
         $hydrator = new ClassMethods(false);
@@ -194,7 +192,6 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($test->getHasBar(), false);
     }
 
-
     public function testHydratorClassMethodsUnderscore()
     {
         $hydrator = new ClassMethods(true);
@@ -223,6 +220,30 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
                 'is_bar' => false,
                 'has_foo' => false,
                 'has_bar' => false,
+            ),
+            $this->classMethodsUnderscore
+        );
+        $this->assertSame($this->classMethodsUnderscore, $test);
+        $this->assertEquals($test->getFooBar(), 'foo');
+        $this->assertEquals($test->getFooBarBaz(), 'bar');
+        $this->assertEquals($test->getIsFoo(), false);
+        $this->assertEquals($test->isBar(), false);
+        $this->assertEquals($test->getHasFoo(), false);
+        $this->assertEquals($test->hasBar(), false);
+    }
+
+    public function testHydratorClassMethodsUnderscoreWithUnderscoreUpperCasedHydrateDataKeys()
+    {
+        $hydrator = new ClassMethods(true);
+        $datas = $hydrator->extract($this->classMethodsUnderscore);
+        $test = $hydrator->hydrate(
+            array(
+                'FOO_BAR' => 'foo',
+                'FOO_BAR_BAZ' => 'bar',
+                'IS_FOO' => false,
+                'IS_BAR' => false,
+                'HAS_FOO' => false,
+                'HAS_BAR' => false,
             ),
             $this->classMethodsUnderscore
         );

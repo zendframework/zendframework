@@ -33,7 +33,7 @@
         "zendframework/zend-resources": "Translations of validator messages",
         "zendframework/zend-servicemanager": "Zend\\ServiceManager component to allow using the ValidatorPluginManager and validator chains",
         "zendframework/zend-session": "Zend\\Session component",
-        "zendframework/zend-uri": "Zend\\Uri component"
+        "zendframework/zend-uri": "Zend\\Uri component, required by the Uri and Sitemap\\Loc validators"
     },
     "extra": {
         "branch-alias": {

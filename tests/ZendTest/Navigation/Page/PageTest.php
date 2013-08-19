@@ -726,6 +726,17 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($page->isVisible());
     }
 
+    public function testSetTranslatorTextDomainString()
+    {
+        $page = AbstractPage::factory(array(
+            'type'  => 'uri',
+            'label' => 'hello'
+        ));
+
+        $page->setTextdomain('foo');
+        $this->assertEquals('foo', $page->getTextdomain());
+    }
+
     public function testMagicOverLoadsShouldSetAndGetNativeProperties()
     {
         $page = AbstractPage::factory(array(

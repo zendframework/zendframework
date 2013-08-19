@@ -230,6 +230,16 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group 4893
+     */
+    public function testRequestsWithoutHttpVersionAreOK()
+    {
+        $requestString = "GET http://www.domain.com/index.php";
+        $request = Request::fromString($requestString);
+        $this->assertEquals($request::METHOD_GET, $request->getMethod());
+    }
+
+    /**
      * PHPUNIT DATA PROVIDER
      *
      * @param $providerContext

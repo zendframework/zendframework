@@ -9,7 +9,7 @@
 
 namespace Zend\Stdlib\Extractor;
 
-interface ExtractorInterface
+interface ExtractionInterface
 {
     /**
      * Extract values from an object

@@ -146,11 +146,19 @@ EOS;
         $this->assertEquals(5, $reflectionClass->getStartLine(true));
     }
 
-
     public function testGetDeclaringFileReturnsFilename()
     {
         $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2');
         $this->assertContains('TestSampleClass2.php', $reflectionClass->getDeclaringFile()->getFileName());
     }
 
+    public function testGetAnnotationsWithNoNameInformation()
+    {
+        $annotationManager = $this->getMock('Zend\Code\Annotation\AnnotationManager');
+
+        $reflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestClassUsingTrait');
+
+        $this->assertFalse($reflection->getAnnotations($annotationManager));
+
+    }
 }

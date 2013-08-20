@@ -154,11 +154,14 @@ EOS;
 
     public function testGetAnnotationsWithNoNameInformation()
     {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('Skipping; PHP 5.4 or greater is needed');
+        }
+
         $annotationManager = $this->getMock('Zend\Code\Annotation\AnnotationManager');
 
         $reflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestClassUsingTrait');
 
         $this->assertFalse($reflection->getAnnotations($annotationManager));
-
     }
 }

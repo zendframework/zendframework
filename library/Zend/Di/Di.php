@@ -600,6 +600,17 @@ class Di implements DependencyInjectionInterface
 
         if ($requestedClass != $class && $this->instanceManager->hasConfig($requestedClass)) {
             $iConfig['requestedClass'] = $this->instanceManager->getConfig($requestedClass);
+
+            if (array_key_exists('parameters', $iConfig['requestedClass'])) {
+                $newParameters = array();
+
+                foreach($iConfig['requestedClass']['parameters'] as $name=>$parameter) {
+                    $newParameters[$requestedClass.'::'.$method.'::'.$name] = $parameter;
+                }
+
+                $iConfig['requestedClass']['parameters'] = $newParameters;
+            }
+
             if ($requestedAlias) {
                 $iConfig['requestedAlias'] = $this->instanceManager->getConfig($requestedAlias);
             }

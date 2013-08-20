@@ -54,17 +54,4 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5', 'doSomething');
         $this->assertEquals("    {\n\n        return 'mixedValue';\n\n    }\n", $reflectionMethod->getContents(false));
     }
-
-    public function testGetAnnotationsWithNoNameInformation()
-    {
-        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
-            $this->markTestSkipped('Skipping; PHP 5.4 or greater is needed');
-        }
-
-        $annotationManager = $this->getMock('Zend\Code\Annotation\AnnotationManager');
-
-        $reflection = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestClassUsingTrait', 'traitMethod');
-
-        $this->assertFalse($reflection->getAnnotations($annotationManager));
-    }
 }

@@ -9,6 +9,6 @@
 
 namespace ZendTest\Di\TestAsset\AggregateClasses;
 
-class Item implements ItemInterface {
-
+class Item implements ItemInterface
+{
 }

@@ -33,7 +33,7 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $config = array(
-            'MyModule\Config' => array(
+            'MyModule' => array(
                 'foo' => array(
                     'bar'
                 )

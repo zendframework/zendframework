@@ -40,15 +40,6 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $appConfig = array(
-            'modules' => array(),
-            'module_listener_options' => array(
-                'config_cache_enabled' => false,
-                'cache_dir'            => 'data/cache',
-                'module_paths'         => array(),
-            ),
-        );
-
         $sm = $this->serviceManager = new ServiceManager(
             new ServiceManagerConfig(array(
                 'abstract_factories' => array(
@@ -57,7 +48,6 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
             ))
         );
 
-        $sm->setService('ApplicationConfig', $appConfig);
         $sm->setService('Config', $config);
     }
 

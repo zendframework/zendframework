@@ -90,12 +90,12 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
 
         // Tests adding a single pattern
         $this->assertSame($factory, $factory->addPattern('#foobarone#i'));
-        $this->assertEquals(count($defaults) + 1, count($factory->getPatterns()));
+        $this->assertCount(count($defaults) + 1, $factory->getPatterns());
 
         // Tests adding multiple patterns at once
         $patterns = $factory->getPatterns();
         $this->assertSame($factory, $factory->addPatterns(array('#foobartwo#i', '#foobarthree#i')));
-        $this->assertEquals(count($patterns + 2), count($factory->getPatterns()));
+        $this->assertCount(count($patterns + 2), $factory->getPatterns());
 
         // Tests whether the latest added pattern is the first in stack
         $patterns = $factory->getPatterns();

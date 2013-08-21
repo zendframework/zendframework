@@ -1546,6 +1546,7 @@ class FormTest extends TestCase
     public function testCanOverrideDefaultInputSettings()
     {
         $myFieldset = new TestAsset\MyFieldset();
+        $myFieldset->setUseAsBaseFieldset(true);
         $form = new Form();
         $form->add($myFieldset);
         

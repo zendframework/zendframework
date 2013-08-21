@@ -103,11 +103,12 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideServiceLocator
+     * @return void
      */
-    public function testCanCreateService($serviceLocator)
+    public function testCanCreateService()
     {
         $factory = new AbstractConfigFactory();
+        $serviceLocator = $this->serviceManager;
 
         $this->assertFalse($factory->canCreateServiceWithName($serviceLocator, 'mymodulefail', 'MyModule\Fail'));
         $this->assertTrue($factory->canCreateServiceWithName($serviceLocator, 'mymoduleconfig', 'MyModule\Config'));
@@ -115,29 +116,16 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends testCanCreateService
-     * @dataProvider provideServiceLocator
      * @return void
      */
-    public function testCreateService($serviceLocator)
+    public function testCreateService()
     {
+        $serviceLocator = $this->serviceManager;
         $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('MyModule\Config'));
         $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('MyModule_Config'));
         $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('Config.MyModule'));
         $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('phly-blog.config'));
         $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('phly-blog-config'));
         $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('config-phly-blog'));
-    }
-
-    /**
-     * @return array
-     */
-    public function provideServiceLocator()
-    {
-        return array(
-            array(
-                $this->serviceManager,
-                $this->serviceManager
-            )
-        );
     }
 }

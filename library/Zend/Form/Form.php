@@ -717,13 +717,6 @@ class Form extends Fieldset implements FormInterface
         $formFactory  = $this->getFormFactory();
         $inputFactory = $formFactory->getInputFilterFactory();
 
-        if ($fieldset === $this && $fieldset instanceof InputFilterProviderInterface) {
-            foreach ($fieldset->getInputFilterSpecification() as $name => $spec) {
-                $input = $inputFactory->createInput($spec);
-                $inputFilter->add($input, $name);
-            }
-        }
-
         if ($fieldset instanceof Collection && $fieldset->getTargetElement() instanceof FieldsetInterface) {
             $elements = $fieldset->getTargetElement()->getElements();
         } else {
@@ -751,6 +744,13 @@ class Form extends Fieldset implements FormInterface
 
                 $input = $inputFactory->createInput($spec);
                 $inputFilter->add($input, $name);
+            }
+
+            if ($fieldset instanceof InputFilterProviderInterface) {
+                foreach ($fieldset->getInputFilterSpecification() as $name => $spec) {
+                    $input = $inputFactory->createInput($spec);
+                    $inputFilter->add($input, $name);
+                }
             }
         }
 

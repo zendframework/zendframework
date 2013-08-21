@@ -1542,4 +1542,18 @@ class FormTest extends TestCase
         $rootForm->prepare();
         $this->assertEquals('form[element]', $element->getName());
     }
+
+    /**
+     * @group 4996
+     */
+    public function testCanOverrideDefaultInputSettings()
+    {
+        $myFieldset = new TestAsset\MyFieldset();
+        $myFieldset->setUseAsBaseFieldset(true);
+        $form = new Form();
+        $form->add($myFieldset);
+
+        $inputFilter = $form->getInputFilter()->get('my-fieldset');
+        $this->assertFalse($inputFilter->get('email')->isRequired());
+    }
 }

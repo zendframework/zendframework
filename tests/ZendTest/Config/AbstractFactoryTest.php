@@ -121,11 +121,11 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateService()
     {
         $serviceLocator = $this->serviceManager;
-        $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('MyModule\Config'));
-        $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('MyModule_Config'));
-        $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('Config.MyModule'));
-        $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('phly-blog.config'));
-        $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('phly-blog-config'));
-        $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('config-phly-blog'));
+        $this->assertInternalType('array', $serviceLocator->get('MyModule\Config'));
+        $this->assertInternalType('array', $serviceLocator->get('MyModule_Config'));
+        $this->assertInternalType('array', $serviceLocator->get('Config.MyModule'));
+        $this->assertInternalType('array', $serviceLocator->get('phly-blog.config'));
+        $this->assertInternalType('array', $serviceLocator->get('phly-blog-config'));
+        $this->assertInternalType('array', $serviceLocator->get('config-phly-blog'));
     }
 }

@@ -18,7 +18,7 @@ use Zend\ServiceManager;
 class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
 {
     /**
-     * @var Config[]
+     * @var array
      */
     protected $configs = array();
 
@@ -83,8 +83,7 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
         }
 
         $config = $serviceLocator->get('Config');
-        $config = new Config($config[$key]);
-        $this->configs[$requestedName] = $this->configs[$key] = $config;
+        $this->configs[$requestedName] = $this->configs[$key] = $config[$key];
         return $config;
     }
 

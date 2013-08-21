@@ -45,6 +45,20 @@ class TokenArrayScannerTest extends TestCase
         $this->assertContains('ZendTest\Code\TestAsset\FooClass', $classes);
     }
 
+    /**
+     * @group gh-4989
+     */
+    public function testScannerReturnsClassNamesForTraits()
+    {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('Skipping; PHP 5.4 or greater is needed');
+        }
+        $tokenScanner = new TokenArrayScanner(token_get_all(file_get_contents((__DIR__ . '/../TestAsset/FooTrait.php'))));
+        $classes = $tokenScanner->getClassNames();
+        $this->assertInternalType('array', $classes);
+        $this->assertContains('ZendTest\Code\TestAsset\FooTrait', $classes);
+    }
+
     public function testScannerReturnsFunctions()
     {
         $tokenScanner = new TokenArrayScanner(token_get_all(file_get_contents((__DIR__ . '/../TestAsset/functions.php'))));

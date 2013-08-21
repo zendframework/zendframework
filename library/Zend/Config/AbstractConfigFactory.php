@@ -9,14 +9,19 @@
 
 namespace Zend\Config;
 
+use Traversable;
 use Zend\ServiceManager;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class AbstractConfigFactory
  */
 class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
 {
+    /**
+     * @var Config[]
+     */
+    protected $configs = array();
+
     /**
      * @var string[]
      */
@@ -40,6 +45,10 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
      */
     public function canCreateServiceWithName(ServiceManager\ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
+        if (isset($this->configs[$requestedName])) {
+            return true;
+        }
+
         if (!$serviceLocator->has('Config')) {
             return false;
         }
@@ -59,24 +68,35 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
      * @param ServiceManager\ServiceLocatorInterface $serviceLocator
      * @param string $name
      * @param string $requestedName
-     * @return mixed
+     * @return string|mixed|array
      */
     public function createServiceWithName(ServiceManager\ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
+        if (isset($this->configs[$requestedName])) {
+            return $this->configs[$requestedName];
+        }
+
         $key = $this->match($requestedName);
+        if (isset($this->configs[$key])) {
+            $this->configs[$requestedName] = $this->configs[$key];
+            return $this->configs[$key];
+        }
+
         $config = $serviceLocator->get('Config');
-        return new Config($config[$key]);
+        $config = new Config($config[$key]);
+        $this->configs[$requestedName] = $this->configs[$key] = $config;
+        return $config;
     }
 
     /**
      * @param string $pattern
      * @return $this
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function addPattern($pattern)
     {
         if (!is_string($pattern)) {
-            throw new \InvalidArgumentException('pattern must be string');
+            throw new Exception\InvalidArgumentException('pattern must be string');
         }
 
         $patterns = $this->getPatterns();
@@ -86,18 +106,18 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
     }
 
     /**
-     * @param array|\Traversable $patterns
+     * @param array|Traversable $patterns
      * @return $this
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function addPatterns($patterns)
     {
-        if ($patterns instanceof \Traversable) {
-            $patterns = ArrayUtils::iteratorToArray($patterns);
+        if ($patterns instanceof Traversable) {
+            $patterns = iterator_to_array($patterns);
         }
 
         if (!is_array($patterns)) {
-            throw new \InvalidArgumentException("patterns must be array or Traversable");
+            throw new Exception\InvalidArgumentException("patterns must be array or Traversable");
         }
 
         foreach ($patterns as $pattern) {
@@ -108,14 +128,14 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
     }
 
     /**
-     * @param array|\Traversable $patterns
+     * @param array|Traversable $patterns
      * @return $this
      * @throws \InvalidArgumentException
      */
     public function setPatterns($patterns)
     {
-        if ($patterns instanceof \Traversable) {
-            $patterns = ArrayUtils::iteratorToArray($patterns);
+        if ($patterns instanceof Traversable) {
+            $patterns = iterator_to_array($patterns);
         }
 
         if (!is_array($patterns)) {

@@ -267,6 +267,18 @@ EOS;
     }
 
     /**
+     * @group gh-4988
+     */
+    public function testNonNamespaceClassReturnsAllMethods()
+    {
+        require_once __DIR__ . '/../TestAsset/NonNamespaceClass.php';
+
+        $reflClass = new ClassReflection('ZendTest_Code_NsTest_BarClass');
+        $classGenerator = ClassGenerator::fromReflection($reflClass);
+        $this->assertCount(1, $classGenerator->getMethods());
+    }
+
+    /**
      * @group ZF-9602
      */
     public function testSetextendedclassShouldIgnoreEmptyClassnameOnGenerate()

@@ -22,7 +22,7 @@ class MyFieldset extends Fieldset implements InputFilterProviderInterface
             'name' => 'email',
         ));
     }
-  
+
     public function getInputFilterSpecification()
     {
         return array(

@@ -1552,7 +1552,7 @@ class FormTest extends TestCase
         $myFieldset->setUseAsBaseFieldset(true);
         $form = new Form();
         $form->add($myFieldset);
-        
+
         $inputFilter = $form->getInputFilter()->get('my-fieldset');
         $this->assertFalse($inputFilter->get('email')->isRequired());
     }

@@ -10,7 +10,7 @@ namespace ZendTest\Config;
 use Zend\Config\AbstractConfigFactory;
 use Zend\Config\Config;
 use Zend\Mvc\Service\ServiceManagerConfig;
-use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager;
 
 /**
  * Class AbstractFactoryTest
@@ -37,10 +37,15 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
                 'foo' => array(
                     'bar'
                 )
+            ),
+            'phly-blog' => array(
+                'foo' => array(
+                    'bar'
+                )
             )
         );
 
-        $sm = $this->serviceManager = new ServiceManager(
+        $sm = $this->serviceManager = new ServiceManager\ServiceManager(
             new ServiceManagerConfig(array(
                 'abstract_factories' => array(
                     'Zend\Config\AbstractConfigFactory',
@@ -51,30 +56,77 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
         $sm->setService('Config', $config);
     }
 
-    public function testCanCreateService()
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testInvalidPattern()
     {
-        $sm = $this->serviceManager;
+        $factory = new AbstractConfigFactory();
+        $factory->addPattern(new \stdClass());
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testInvalidPatternIterator()
+    {
+        $factory = new AbstractConfigFactory();
+        $factory->addPatterns('invalid');
+    }
+
+    public function testPatterns()
+    {
+        $factory = new AbstractConfigFactory();
+        $defaults = $factory->getPatterns();
+
+        // Tests that the accessor returns an array
+        $this->assertInternalType('array', $defaults);
+        $this->assertGreaterThan(0, count($defaults));
+
+        // Tests adding a single pattern
+        $this->assertSame($factory, $factory->addPattern('#foobarone#i'));
+        $this->assertEquals(count($defaults) + 1, $factory->getPatterns());
+
+        // Tests adding multiple patterns at once
+        $patterns = $factory->getPatterns();
+        $this->assertSame($factory, $factory->addPatterns(array('#foobartwo#i', '#foobarthree#i')));
+        $this->assertEquals(count($patterns + 2), count($factory->getPatterns()));
+
+        // Tests whether the latest added pattern is the first in stack
+        $patterns = $factory->getPatterns();
+        $this->assertSame('#foobarthree#i', $patterns[0]);
+    }
+
+    /**
+     * @dataProvider provideServiceLocator
+     */
+    public function testCanCreateService($serviceLocator)
+    {
         $factory = new AbstractConfigFactory();
 
-        $this->assertFalse($factory->canCreateServiceWithName($sm, 'mymodulefail', 'MyModule\Fail'));
-        $this->assertTrue($factory->canCreateServiceWithName($sm, 'mymoduleconfig', 'MyModule\Config'));
+        $this->assertFalse($factory->canCreateServiceWithName($serviceLocator, 'mymodulefail', 'MyModule\Fail'));
+        $this->assertTrue($factory->canCreateServiceWithName($serviceLocator, 'mymoduleconfig', 'MyModule\Config'));
     }
 
     /**
      * @depends testCanCreateService
+     * @dataProvider provideServiceLocator
      */
-    public function testCreateService()
+    public function testCreateService($serviceLocator)
     {
-        $sm = $this->serviceManager;
-        $this->assertInstanceOf('Zend\Config\Config', $sm->get('MyModule\Config'));
+        $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('MyModule\Config'));
+        $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('MyModule_Config'));
+        $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('Config.MyModule'));
+        $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('phly-blog.config'));
+        $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('phly-blog-config'));
+        $this->assertInstanceOf('Zend\Config\Config', $serviceLocator->get('config-phly-blog'));
     }
 
     /**
-     * @depends testCreateService
+     * @return ServiceManager\ServiceLocatorInterface
      */
-    public function testServiceManager()
+    public function provideServiceLocator()
     {
-        $sm = $this->serviceManager;
-        $this->assertInstanceOf('Zend\Config\Config', $sm->get('MyModule\Config'));
+        return $this->serviceManager;
     }
 }

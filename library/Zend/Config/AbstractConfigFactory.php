@@ -10,6 +10,7 @@
 namespace Zend\Config;
 
 use Zend\ServiceManager;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Class AbstractConfigFactory
@@ -17,9 +18,17 @@ use Zend\ServiceManager;
 class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
 {
     /**
-     * @var string
+     * @var string[]
      */
-    protected $pattern = '#^(.*)\\\\Config$#i';
+    protected $defaultPatterns = array(
+        '#config[\._-](.*)$#i',
+        '#^(.*)[\\\\\._-]config$#i'
+    );
+
+    /**
+     * @var string[]
+     */
+    protected $patterns;
 
     /**
      * Determine if we can create a service with name
@@ -31,16 +40,17 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
      */
     public function canCreateServiceWithName(ServiceManager\ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        if (!preg_match($this->pattern, $requestedName, $matches)) {
+        if (!$serviceLocator->has('Config')) {
+            return false;
+        }
+
+        $key = $this->match($requestedName);
+        if (null === $key) {
             return false;
         }
 
         $config = $serviceLocator->get('Config');
-        if (!isset($config[$matches[1]])) {
-            return false;
-        }
-
-        return true;
+        return isset($config[$key]);
     }
 
     /**
@@ -53,8 +63,91 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
      */
     public function createServiceWithName(ServiceManager\ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        preg_match($this->pattern, $requestedName, $matches);
+        $key = $this->match($requestedName);
         $config = $serviceLocator->get('Config');
-        return new Config($config[$matches[1]]);
+        return new Config($config[$key]);
+    }
+
+    /**
+     * @param string $pattern
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
+    public function addPattern($pattern)
+    {
+        if (!is_string($pattern)) {
+            throw new \InvalidArgumentException('pattern must be string');
+        }
+
+        $patterns = $this->getPatterns();
+        array_unshift($patterns, $pattern);
+        $this->setPatterns($patterns);
+        return $this;
+    }
+
+    /**
+     * @param array|\Traversable $patterns
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
+    public function addPatterns($patterns)
+    {
+        if ($patterns instanceof \Traversable) {
+            $patterns = ArrayUtils::iteratorToArray($patterns);
+        }
+
+        if (!is_array($patterns)) {
+            throw new \InvalidArgumentException("patterns must be array or Traversable");
+        }
+
+        foreach ($patterns as $pattern) {
+            $this->addPattern($pattern);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param array|\Traversable $patterns
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
+    public function setPatterns($patterns)
+    {
+        if ($patterns instanceof \Traversable) {
+            $patterns = ArrayUtils::iteratorToArray($patterns);
+        }
+
+        if (!is_array($patterns)) {
+            throw new \InvalidArgumentException("patterns must be array or Traversable");
+        }
+
+        $this->patterns = $patterns;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPatterns()
+    {
+        if (null === $this->patterns) {
+            $this->setPatterns($this->defaultPatterns);
+        }
+        return $this->patterns;
+    }
+
+    /**
+     * @param string $requestedName
+     * @return null|string
+     */
+    protected function match($requestedName)
+    {
+        foreach ($this->getPatterns() as $pattern) {
+            if (preg_match($pattern, $requestedName, $matches)) {
+                return $matches[1];
+            }
+        }
+        return null;
     }
 }

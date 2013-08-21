@@ -9,6 +9,8 @@
 
 namespace Zend\Validator;
 
+use Traversable;
+
 class Bitwise extends AbstractValidator
 {
     const OP_AND = 'and';
@@ -149,7 +151,7 @@ class Bitwise extends AbstractValidator
      */
     public function setControl($control)
     {
-        $this->control = (integer) $control;
+        $this->control = (int) $control;
 
         return $this;
     }

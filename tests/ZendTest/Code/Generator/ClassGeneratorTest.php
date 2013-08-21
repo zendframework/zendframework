@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace ZendTest\Code\Generator;
@@ -18,7 +17,6 @@ use Zend\Code\Reflection\ClassReflection;
 
 /**
  * @category   Zend
- * @package    Zend_Code_Generator
  * @subpackage UnitTests
  *
  * @group Zend_Code_Generator
@@ -267,6 +265,18 @@ EOS;
     }
 
     /**
+     * @group 4988
+     */
+    public function testNonNamespaceClassReturnsAllMethods()
+    {
+        require_once __DIR__ . '/../TestAsset/NonNamespaceClass.php';
+
+        $reflClass = new ClassReflection('ZendTest_Code_NsTest_BarClass');
+        $classGenerator = ClassGenerator::fromReflection($reflClass);
+        $this->assertCount(1, $classGenerator->getMethods());
+    }
+
+    /**
      * @group ZF-9602
      */
     public function testSetextendedclassShouldIgnoreEmptyClassnameOnGenerate()
@@ -379,7 +389,7 @@ CODE;
     }
 
     /**
-     * @group gh-4990
+     * @group 4990
      */
     public function testAddOneUseTwiceOnlyAddsOne()
     {
@@ -395,7 +405,7 @@ CODE;
     }
 
     /**
-     * @group gh-4990
+     * @group 4990
      */
     public function testAddOneUseWithAliasTwiceOnlyAddsOne()
     {

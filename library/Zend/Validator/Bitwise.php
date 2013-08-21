@@ -65,7 +65,7 @@ class Bitwise extends AbstractValidator
     public function __construct($options = null)
     {
         if ($options instanceof Traversable) {
-            $options = ArrayUtils::iteratorToArray($options);
+            $options = iterator_to_array($options);
         }
         if (!is_array($options)) {
             $options = func_get_args();
@@ -126,21 +126,19 @@ class Bitwise extends AbstractValidator
     {
         $this->setValue($value);
 
-        $ret = false;
-
         if (self::OP_AND === $this->operator) {
             if ($this->strict) {
                 // All the bits set in value must be set in control
-                $ret = (boolean) (($this->control & $value) == $value);
+                return (bool) (($this->control & $value) == $value);
             } else {
                 // At least one of the bits must be common between value and control
-                $ret = (boolean) ($this->control & $value);
+                return (bool) ($this->control & $value);
             }
         } elseif (self::OP_XOR === $this->operator) {
-            $ret = (boolean) (($this->control ^ $value) === ($this->control | $value));
+            return (bool) (($this->control ^ $value) === ($this->control | $value));
         }
 
-        return $ret;
+        return false;
     }
 
     /**

@@ -8,7 +8,6 @@
 namespace ZendTest\Config;
 
 use Zend\Config\AbstractConfigFactory;
-use Zend\Config\Config;
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager;
 

@@ -89,7 +89,7 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
 
     /**
      * @param string $pattern
-     * @return $this
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function addPattern($pattern)
@@ -106,7 +106,7 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
 
     /**
      * @param array|Traversable $patterns
-     * @return $this
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function addPatterns($patterns)
@@ -128,7 +128,7 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
 
     /**
      * @param array|Traversable $patterns
-     * @return $this
+     * @return self
      * @throws \InvalidArgumentException
      */
     public function setPatterns($patterns)

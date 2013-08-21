@@ -133,6 +133,11 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function provideServiceLocator()
     {
-        return array($this->serviceManager);
+        return array(
+            array(
+                $this->serviceManager,
+                $this->serviceManager
+            )
+        );
     }
 }

@@ -244,7 +244,7 @@ class ServiceListener implements ServiceListenerInterface
         if (!$config instanceof ServiceConfig) {
             throw new Exception\RuntimeException(sprintf(
                 'Invalid service manager configuration class provided; received "%s", expected an instance of Zend\ServiceManager\Config',
-                $class
+                (is_object($config) ? get_class($config) : (is_scalar($config) ? $config : gettype($config)))
             ));
         }
 

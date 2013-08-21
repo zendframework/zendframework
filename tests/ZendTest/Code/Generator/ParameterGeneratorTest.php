@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace ZendTest\Code\Generator;
@@ -16,7 +15,6 @@ use Zend\Code\Reflection\ParameterReflection;
 
 /**
  * @category   Zend
- * @package    Zend_Code_Generator
  * @subpackage UnitTests
  *
  * @group Zend_Code_Generator
@@ -204,7 +202,7 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group gh-4988
+     * @group 4988
      */
     public function testParameterGeneratorReturnsCorrectTypeForNonNamespaceClasses()
     {

@@ -58,6 +58,7 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException InvalidArgumentException
+     * @return void
      */
     public function testInvalidPattern()
     {
@@ -67,6 +68,7 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException InvalidArgumentException
+     * @return void
      */
     public function testInvalidPatternIterator()
     {
@@ -74,6 +76,9 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
         $factory->addPatterns('invalid');
     }
 
+    /**
+     * @return void
+     */
     public function testPatterns()
     {
         $factory = new AbstractConfigFactory();
@@ -85,7 +90,7 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
 
         // Tests adding a single pattern
         $this->assertSame($factory, $factory->addPattern('#foobarone#i'));
-        $this->assertEquals(count($defaults) + 1, $factory->getPatterns());
+        $this->assertEquals(count($defaults) + 1, count($factory->getPatterns()));
 
         // Tests adding multiple patterns at once
         $patterns = $factory->getPatterns();
@@ -111,6 +116,7 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @depends testCanCreateService
      * @dataProvider provideServiceLocator
+     * @return void
      */
     public function testCreateService($serviceLocator)
     {
@@ -123,10 +129,10 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return ServiceManager\ServiceLocatorInterface
+     * @return array
      */
     public function provideServiceLocator()
     {
-        return $this->serviceManager;
+        return array($this->serviceManager);
     }
 }

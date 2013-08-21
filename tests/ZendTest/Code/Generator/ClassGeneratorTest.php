@@ -378,6 +378,38 @@ CODE;
         $this->assertContains('use My\Second\Use\Class as MyAlias;', $generated);
     }
 
+    /**
+     * @group gh-4990
+     */
+    public function testAddOneUseTwiceOnlyAddsOne()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('My\Class');
+        $classGenerator->addUse('My\First\Use\Class');
+        $classGenerator->addUse('My\First\Use\Class');
+        $generated = $classGenerator->generate();
+
+        $this->assertCount(1, $classGenerator->getUses());
+
+        $this->assertContains('use My\First\Use\Class;', $generated);
+    }
+
+    /**
+     * @group gh-4990
+     */
+    public function testAddOneUseWithAliasTwiceOnlyAddsOne()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('My\Class');
+        $classGenerator->addUse('My\First\Use\Class', 'MyAlias');
+        $classGenerator->addUse('My\First\Use\Class', 'MyAlias');
+        $generated = $classGenerator->generate();
+
+        $this->assertCount(1, $classGenerator->getUses());
+
+        $this->assertContains('use My\First\Use\Class as MyAlias;', $generated);
+    }
+
     public function testCreateFromArrayWithDocBlockFromArray()
     {
         $classGenerator = ClassGenerator::fromArray(array(

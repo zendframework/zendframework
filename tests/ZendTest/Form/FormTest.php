@@ -1543,6 +1543,9 @@ class FormTest extends TestCase
         $this->assertEquals('form[element]', $element->getName());
     }
 
+    /**
+     * @group 4996
+     */
     public function testCanOverrideDefaultInputSettings()
     {
         $myFieldset = new TestAsset\MyFieldset();

@@ -38,6 +38,11 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid(0x4));
         $this->assertFalse($validator->isValid(0x8));
 
+        $validator->isValid(0x8);
+        $messages = $validator->getMessages();
+        $this->assertArrayHasKey($validator::NOT_AND, $messages);
+        $this->assertSame("The input has no common bit set with '$controlSum'", $messages[$validator::NOT_AND]);
+
         $this->assertTrue($validator->isValid(0x1 | 0x2));
         $this->assertTrue($validator->isValid(0x1 | 0x2 | 0x4));
         $this->assertTrue($validator->isValid(0x1 | 0x8));
@@ -60,6 +65,11 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid(0x4));
         $this->assertFalse($validator->isValid(0x8));
 
+        $validator->isValid(0x8);
+        $messages = $validator->getMessages();
+        $this->assertArrayHasKey($validator::NOT_AND_STRICT, $messages);
+        $this->assertSame("The input doesn't have the same bits set as '$controlSum'", $messages[$validator::NOT_AND_STRICT]);
+
         $this->assertTrue($validator->isValid(0x1 | 0x2));
         $this->assertTrue($validator->isValid(0x1 | 0x2 | 0x4));
         $this->assertFalse($validator->isValid(0x1 | 0x8));
@@ -81,6 +91,11 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid(0x10));
         $this->assertFalse($validator->isValid(0x1));
         $this->assertFalse($validator->isValid(0x4));
+
+        $validator->isValid(0x4);
+        $messages = $validator->getMessages();
+        $this->assertArrayHasKey($validator::NOT_XOR, $messages);
+        $this->assertSame("The input has common bit set with '$controlSum'", $messages[$validator::NOT_XOR]);
 
         $this->assertTrue($validator->isValid(0x8 | 0x10));
         $this->assertFalse($validator->isValid(0x1 | 0x4));

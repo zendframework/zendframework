@@ -42,7 +42,7 @@ class Bitwise extends AbstractValidator
      * @var array
      */
     protected $messageVariables = array(
-        'control' => array('options' => 'control'),
+        'control' => 'control',
     );
 
     /**
@@ -131,12 +131,15 @@ class Bitwise extends AbstractValidator
         if (self::OP_AND === $this->operator) {
             if ($this->strict) {
                 // All the bits set in value must be set in control
+                $this->error(self::NOT_AND_STRICT);
                 return (bool) (($this->control & $value) == $value);
             } else {
                 // At least one of the bits must be common between value and control
+                $this->error(self::NOT_AND);
                 return (bool) ($this->control & $value);
             }
         } elseif (self::OP_XOR === $this->operator) {
+            $this->error(self::NOT_XOR);
             return (bool) (($this->control ^ $value) === ($this->control | $value));
         }
 

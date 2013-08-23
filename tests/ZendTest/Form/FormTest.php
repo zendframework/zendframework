@@ -1557,8 +1557,12 @@ class FormTest extends TestCase
         $this->assertFalse($inputFilter->get('email')->isRequired());
     }
 
+    /**
+     * @group 5007
+     */
     public function testComplexFormInputFilterMergesIntoExisting()
     {
+        $this->form->setPreferFormInputFilter(true);
         $this->form->add(array(
             'name' => 'importance',
             'type'  => 'Zend\Form\Element\Select',
@@ -1586,6 +1590,9 @@ class FormTest extends TestCase
         $this->assertFalse($this->form->getInputFilter()->get('importance')->isRequired());
     }
 
+    /**
+     * @group 5007
+     */
     public function testInputFilterOrderOfPrecedence1()
     {
         $spec = array(
@@ -1628,50 +1635,8 @@ class FormTest extends TestCase
 
         $factory = new \Zend\Form\Factory();
         $this->form = $factory->createForm($spec);
-        // $form->setData(array('element' => '0'));
+        $this->form->setPreferFormInputFilter(true);
         $this->assertFalse($this->form->getInputFilter()->get('element')
             ->isRequired());
-    }
-
-    public function testInputFilterOrderOfPrecedence2()
-    {
-        $spec = array(
-            'name' => 'test',
-            'input_filter' => array(
-                'element' => array(
-                    'required' => false,
-                    'filters' => array(
-                        array(
-                            'name' => 'Boolean'
-                        )
-                    ),
-                    'validators' => array(
-                        array(
-                            'name' => 'InArray',
-                            'options' => array(
-                                'haystack' => array(
-                                    "0",
-                                    "1"
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-        );
-
-        $factory = new \Zend\Form\Factory();
-        $this->form = $factory->createForm($spec);
-        $this->assertFalse($this->form->getInputFilter()->get('element')->isRequired());
-        $this->form->add(array(
-            'name' => 'element',
-            'type' => 'Zend\Form\Element\Checkbox',
-            'options' => array(
-                'use_hidden_element' => true,
-                'checked_value' => '1',
-                'unchecked_value' => '0'
-            )
-        ));
-        $this->assertTrue($this->form->getInputFilter()->get('element')->isRequired());
     }
 }

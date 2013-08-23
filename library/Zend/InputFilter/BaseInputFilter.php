@@ -74,8 +74,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
 
         if (isset($this->inputs[$name]) && $this->inputs[$name] instanceof InputInterface) {
             // The element already exists, so merge the config. Please note
-            // that the order is important (already existing
-            // input is merged with the parameter given)
+            // that this merges the new input into the original.
             $original = $this->inputs[$name];
             $original->merge($input);
             return $this;

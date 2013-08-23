@@ -1556,4 +1556,33 @@ class FormTest extends TestCase
         $inputFilter = $form->getInputFilter()->get('my-fieldset');
         $this->assertFalse($inputFilter->get('email')->isRequired());
     }
+
+    public function testComplexFormInputFilterMergesIntoExisting()
+    {
+        $form = new \Zend\Form\Form();
+        $form->add(array(
+            'name' => 'importance',
+            'type'  => 'Zend\Form\Element\Select',
+            'options' => array(
+                'label' => 'Importance',
+                'empty_option' => '',
+                'value_options' => array(
+                    'normal' => 'Normal',
+                    'important' => 'Important'
+                ),
+            ),
+        ));
+
+        $inputFilter = new \Zend\InputFilter\BaseInputFilter();
+        $factory     = new \Zend\InputFilter\Factory();
+        $inputFilter->add($factory->createInput(array(
+            'name'     => 'importance',
+            'required' => false,
+        )));
+
+        $this->assertTrue($form->getInputFilter()->get('importance')->isRequired());
+        $this->assertFalse($inputFilter->get('importance')->isRequired());
+        $form->setInputFilter($inputFilter);
+        $this->assertFalse($form->getInputFilter()->get('importance')->isRequired());
+    }
 }

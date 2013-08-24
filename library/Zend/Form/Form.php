@@ -125,7 +125,7 @@ class Form extends Fieldset implements FormInterface
 
     /**
      * Set options for a form. Accepted options are:
-     * - prefer_form_input_filter: is form input filter is prefered?
+     * - prefer_form_input_filter: is form input filter is preferred?
      *
      * @param  array|Traversable $options
      * @return Element|ElementInterface

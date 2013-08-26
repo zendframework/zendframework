@@ -9,6 +9,8 @@
 
 namespace Zend\Http\Header;
 
+use \Zend\Uri\UriFactory;
+
 /**
  * @throws Exception\InvalidArgumentException
  * @see http://tools.ietf.org/id/draft-abarth-origin-03.html#rfc.section.2
@@ -27,7 +29,8 @@ class Origin implements HeaderInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Origin string: "' . $name . '"');
         }
 
-        if (!filter_var($value, FILTER_VALIDATE_URL)) {
+        $uri = UriFactory::factory($value);
+        if (!$uri->isValid()) {
             throw new Exception\InvalidArgumentException('Invalid header value for Origin key: "' . $name . '"');
         }
 

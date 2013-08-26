@@ -106,7 +106,7 @@ class Form extends Fieldset implements FormInterface
      *
      * @var bool
      */
-    protected $preferFormInputFilter = false;
+    protected $preferFormInputFilter = true;
 
     /**
      * Are the form elements/fieldsets wrapped by the form name ?

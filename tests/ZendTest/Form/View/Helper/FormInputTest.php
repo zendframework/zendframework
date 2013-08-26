@@ -183,6 +183,7 @@ class FormInputTest extends CommonTestCase
             array('ontimeupdate', 'assertContains'),
             array('onvolumechange', 'assertContains'),
             array('onwaiting', 'assertContains'),
+            array('role', 'assertContains'),
         );
     }
 
@@ -210,6 +211,7 @@ class FormInputTest extends CommonTestCase
             array('optgroup', 'assertNotContains'),
             array('arbitrary', 'assertNotContains'),
             array('meta', 'assertNotContains'),
+            array('role', 'assertContains'),
         );
     }
 
@@ -321,6 +323,7 @@ class FormInputTest extends CommonTestCase
             'optgroup'           => 'value',
             'arbitrary'          => 'value',
             'meta'               => 'value',
+            'role'               => 'value',
         ));
         $element->setValue('value');
         return $element;

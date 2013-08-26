@@ -122,6 +122,26 @@ class Form extends Fieldset implements FormInterface
      */
     protected $validationGroup;
 
+
+    /**
+     * Set options for a form. Accepted options are:
+     * - prefer_form_input_filter: is form input filter is preferred?
+     *
+     * @param  array|Traversable $options
+     * @return Element|ElementInterface
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        if (isset($options['prefer_form_input_filter'])) {
+            $this->setPreferFormInputFilter($options['prefer_form_input_filter']);
+        }
+
+        return $this;
+    }
+
     /**
      * Add an element or fieldset
      *

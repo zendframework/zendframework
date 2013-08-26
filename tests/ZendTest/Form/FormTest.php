@@ -1633,10 +1633,33 @@ class FormTest extends TestCase
             )
         );
 
-        $factory = new \Zend\Form\Factory();
+        $factory = new Factory();
         $this->form = $factory->createForm($spec);
         $this->form->setPreferFormInputFilter(true);
         $this->assertFalse($this->form->getInputFilter()->get('element')
             ->isRequired());
+    }
+
+    public function testCanSetPreferFormInputFilterFlagViaSetOptions()
+    {
+        $flag = ! $this->form->getPreferFormInputFilter();
+        $this->form->setOptions(array(
+            'prefer_form_input_filter' => $flag,
+        ));
+        $this->assertSame($flag, $this->form->getPreferFormInputFilter());
+    }
+
+    public function testFactoryCanSetPreferFormInputFilterFlag()
+    {
+        $factory = new Factory();
+        foreach (array(true, false) as $flag) {
+            $form = $factory->createForm(array(
+                'name'    => 'form',
+                'options' => array(
+                    'prefer_form_input_filter' => $flag,
+                ),
+            ));
+            $this->assertSame($flag, $form->getPreferFormInputFilter());
+        }
     }
 }

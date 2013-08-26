@@ -1640,6 +1640,9 @@ class FormTest extends TestCase
             ->isRequired());
     }
 
+    /**
+     * @group 5015
+     */
     public function testCanSetPreferFormInputFilterFlagViaSetOptions()
     {
         $flag = ! $this->form->getPreferFormInputFilter();
@@ -1649,6 +1652,9 @@ class FormTest extends TestCase
         $this->assertSame($flag, $this->form->getPreferFormInputFilter());
     }
 
+    /**
+     * @group 5015
+     */
     public function testFactoryCanSetPreferFormInputFilterFlag()
     {
         $factory = new Factory();
@@ -1661,5 +1667,10 @@ class FormTest extends TestCase
             ));
             $this->assertSame($flag, $form->getPreferFormInputFilter());
         }
+    }
+
+    public function testPreferFormInputFilterFlagIsEnabledByDefault()
+    {
+        $this->assertTrue($this->form->getPreferFormInputFilter());
     }
 }

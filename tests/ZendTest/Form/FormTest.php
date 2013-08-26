@@ -1669,6 +1669,9 @@ class FormTest extends TestCase
         }
     }
 
+    /**
+     * @group 5028
+     */
     public function testPreferFormInputFilterFlagIsEnabledByDefault()
     {
         $this->assertTrue($this->form->getPreferFormInputFilter());

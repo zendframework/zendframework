@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.2.4 (2013-08-26)
+
+- [5008: deprecated feature in classmap generator](https://github.com/zendframework/zf2/issues/5008)
+- [5015: Allow set Form::setPreferFormInputFilter via options](https://github.com/zendframework/zf2/issues/5015)
+- [5028: Fix forms regression introduced in 2.2.3](https://github.com/zendframework/zf2/issues/5028)
+
 ## 2.2.3 (2013-08-21):
 
 - [4851: allow usage of validator and filter plugin managers in input filter factory if form manager injected](https://github.com/zendframework/zf2/issues/4851)

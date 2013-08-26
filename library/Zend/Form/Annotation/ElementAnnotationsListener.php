@@ -251,9 +251,8 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
             return;
         }
 
-        $name       = $e->getParam('name');
-        $filterSpec = $e->getParam('filterSpec');
-        $filterSpec[$name] = $annotation->getInput();
+        $inputSpec = $e->getParam('inputSpec');
+        $inputSpec['type'] = $annotation->getInput();
     }
 
     /**

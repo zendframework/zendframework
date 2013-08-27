@@ -179,7 +179,7 @@ return array(
 
     // Zend_Validate_Hostname
     "Invalid type given. String expected" => "Chybný typ. Bol očakávaný reťazec",
-    "The input appears to be an IP address, but IP addresses are not allowed" => "'Zadaná hodnota vyzerá ako IP adresa, ale tie nie sú dovolené",
+    "The input appears to be an IP address, but IP addresses are not allowed" => "Zadaná hodnota vyzerá ako IP adresa, ale tie nie sú dovolené",
     "The input appears to be a DNS hostname but cannot match TLD against known list" => "Zadaná hodnota vyzerá ako hostname, ale nemohol byť overený voči známym TLD",
     "The input appears to be a DNS hostname but contains a dash in an invalid position" => "Zadaná hodnota vyzerá ako hostname, ale obsahuje pomlčku na nedovolenom mieste",
     "The input appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "Zadaná hodnota vyzerá ako hostname, ale nezodpovedá formátu hostname pre '%tld%'",

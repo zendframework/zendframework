@@ -387,9 +387,9 @@ class OfflineTest extends TestLdap\AbstractTestCase
     public function testDeleteUnusedAttribute()
     {
         $node = $this->createTestNode();
-        $node->deleteAttribute('nonexistant');
+        $node->deleteAttribute('nonexistent');
         $changedData = $node->getChangedData();
-        $this->assertArrayNotHasKey('nonexistant', $changedData);
+        $this->assertArrayNotHasKey('nonexistent', $changedData);
     }
 
     public function testRenameNodeString()

@@ -261,7 +261,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     /**
      * @expectedException Zend\Ldap\Exception\ExceptionInterface
      */
-    public function testGetNonexistantParent()
+    public function testGetNonexistentParent()
     {
         $node  = $this->getLDAP()->getNode(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE);
         $pnode = $node->getParent();

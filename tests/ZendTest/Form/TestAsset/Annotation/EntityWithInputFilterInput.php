@@ -12,7 +12,8 @@ namespace ZendTest\Form\TestAsset\Annotation;
 
 use Zend\Form\Annotation;
 
-class EntityWithInputFilterInput{
+class EntityWithInputFilterInput
+{
 
     /**
      * @Annotation\Input("ZendTest\Form\TestAsset\Annotation\InputFilterInput")

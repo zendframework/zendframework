@@ -9,47 +9,45 @@
 
 namespace Zend\Code\Generator\DocBlock\Tag;
 
-use Zend\Code\Generator\DocBlock\Tag;
-use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionTagInterface;
 
-class ReturnTag extends Tag
+class ReturnTag extends AbstractTypeableTag implements TagInterface
 {
     /**
-     * @var string
-     */
-    protected $datatype = null;
-
-    /**
-     * @param  ReflectionDocBlockTag $reflectionTagReturn
+     * @param  ReflectionTagInterface $reflectionTagReturn
      * @return ReturnTag
+     * @deprecated Use TagManager::createTag() instead
      */
-    public static function fromReflection(ReflectionDocBlockTag $reflectionTagReturn)
+    public static function fromReflection(ReflectionTagInterface $reflectionTagReturn)
     {
-        $returnTag = new static();
-        $returnTag
-            ->setName('return')
-            ->setDatatype($reflectionTagReturn->getType()) // @todo rename
-            ->setDescription($reflectionTagReturn->getDescription());
-
-        return $returnTag;
-    }
-
-    /**
-     * @param  string $datatype
-     * @return ReturnTag
-     */
-    public function setDatatype($datatype)
-    {
-        $this->datatype = $datatype;
-        return $this;
+        // @todo TagManager
     }
 
     /**
      * @return string
      */
+    public function getName()
+    {
+        return 'return';
+    }
+
+    /**
+     * @param string $datatype
+     * @return ReturnTag
+     * @deprecated Use setTypes() instead
+     */
+    public function setDatatype($datatype)
+    {
+        return $this->setTypes($datatype);
+    }
+
+    /**
+     * @return string
+     * @deprecated Use getTypes() instead
+     */
     public function getDatatype()
     {
-        return $this->datatype;
+        return implode('|', $this->getTypes());
     }
 
     /**
@@ -57,6 +55,10 @@ class ReturnTag extends Tag
      */
     public function generate()
     {
-        return '@return ' . $this->datatype . ' ' . $this->description;
+        $output = '@return '
+        . implode('|', $this->types)
+        . (!empty($this->description)) ? ' ' . $this->description : '';
+
+        return $output;
     }
 }

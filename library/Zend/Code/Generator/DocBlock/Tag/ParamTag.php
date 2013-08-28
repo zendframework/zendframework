@@ -9,71 +9,87 @@
 
 namespace Zend\Code\Generator\DocBlock\Tag;
 
-use Zend\Code\Generator\DocBlock\Tag;
-use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionTagInterface;
 
-class ParamTag extends Tag
+class ParamTag extends AbstractTypeableTag implements TagInterface
 {
     /**
      * @var string
      */
-    protected $datatype = null;
+    protected $variableName = null;
 
     /**
-     * @var string
+     * @param  ReflectionTagInterface $reflectionTagReturn
+     * @return ReturnTag
+     * @deprecated Use TagManager::createTag() instead
      */
-    protected $paramName = null;
-
-    /**
-     * @param  ReflectionDocBlockTag $reflectionTagParam
-     * @return ParamTag
-     */
-    public static function fromReflection(ReflectionDocBlockTag $reflectionTagParam)
+    public static function fromReflection(ReflectionTagInterface $reflectionTagReturn)
     {
-        $paramTag = new static();
-        $paramTag
-            ->setName('param')
-            ->setDatatype($reflectionTagParam->getType()) // @todo rename
-            ->setParamName($reflectionTagParam->getVariableName())
-            ->setDescription($reflectionTagParam->getDescription());
-
-        return $paramTag;
+        // @todo TagManager
     }
 
     /**
-     * @param  string $datatype
+     * @return string
+     */
+    public function getName()
+    {
+       return 'param';
+    }
+
+    /**
+     * @param string $variableName
      * @return ParamTag
      */
-    public function setDatatype($datatype)
+    public function setVariableName($variableName)
     {
-        $this->datatype = $datatype;
+        $this->variableName = $variableName;
         return $this;
     }
 
     /**
      * @return string
      */
+    public function getVariableName()
+    {
+        return $this->variableName;
+    }
+
+    /**
+     * @param string $datatype
+     * @return ReturnTag
+     * @deprecated Use setTypes() instead
+     */
+    public function setDatatype($datatype)
+    {
+        return $this->setTypes($datatype);
+    }
+
+    /**
+     * @return string
+     * @deprecated Use getTypes() instead
+     */
     public function getDatatype()
     {
-        return $this->datatype;
+        return implode('|', $this->getTypes());
     }
 
     /**
      * @param  string $paramName
      * @return ParamTag
+     * @deprecated Use setVariableName() instead
      */
     public function setParamName($paramName)
     {
-        $this->paramName = $paramName;
-        return $this;
+        return $this->setVariableName($paramName);
     }
 
     /**
      * @return string
+     * @deprecated Use getVariableName() instead
      */
     public function getParamName()
     {
-        return $this->paramName;
+        return $this->getVariableName();
     }
 
     /**
@@ -81,10 +97,10 @@ class ParamTag extends Tag
      */
     public function generate()
     {
-        $output = '@param '
-            . (($this->datatype != null) ? $this->datatype : 'unknown')
-            . (($this->paramName != null) ? ' $' . $this->paramName : '')
-            . (($this->description != null) ? ' ' . $this->description : '');
+        $output = '@param'
+            . (!empty($this->types)) ? ' ' . implode('|', $this->types) : 'unknown'
+            . (!empty($this->variableName)) ? ' $' . $this->variableName : ''
+            . (!empty($this->description)) ? ' ' . $this->description : '';
 
         return $output;
     }

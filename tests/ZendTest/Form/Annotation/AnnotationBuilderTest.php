@@ -243,4 +243,15 @@ class AnnotationBuilderTest extends TestCase
         $this->assertInstanceOf("Zend\Stdlib\Hydrator\ClassMethods",$fieldset->getHydrator());
         $this->assertFalse($fieldset->getHydrator()->getUnderscoreSeparatedKeys());
     }
+
+    public function testInputFilterInputAnnotation()
+    {
+        $entity  = new TestAsset\Annotation\EntityWithInputFilterInput();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+        $inputFilter = $form->getInputFilter();
+
+        $this->assertTrue($inputFilter->has('input'));
+        $this->assertInstanceOf('ZendTest\Form\TestAsset\Annotation\InputFilterInput', $inputFilter->get('input'));
+    }
 }

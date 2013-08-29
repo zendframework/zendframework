@@ -9,8 +9,7 @@
  */
 
 namespace ZendTest\Code\Generator\DocBlock\Tag;
-
-use Zend\Code\Generator\DocBlock\Tag\ReturnTag;
+use Zend\Code\Generator\DocBlock\Tag\ThrowsTag;
 
 /**
  * @category   Zend
@@ -20,16 +19,16 @@ use Zend\Code\Generator\DocBlock\Tag\ReturnTag;
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
-class ReturnTagTest extends \PHPUnit_Framework_TestCase
+class ThrowsTagTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ReturnTag
+     * @var ThrowsTag
      */
     protected $tag;
 
     public function setUp()
     {
-        $this->tag = new ReturnTag();
+        $this->tag = new ThrowsTag();
     }
 
     public function tearDown()
@@ -39,13 +38,13 @@ class ReturnTagTest extends \PHPUnit_Framework_TestCase
 
     public function testNameIsCorrect()
     {
-        $this->assertEquals('return', $this->tag->getName());
+        $this->assertEquals('throws', $this->tag->getName());
     }
 
-    public function testReturnProducesCorrectDocBlockLine()
+    public function testParamProducesCorrectDocBlockLine()
     {
-        $this->tag->setTypes('string|int');
-        $this->tag->setDescription('bar bar bar');
-        $this->assertEquals('@return string|int bar bar bar', $this->tag->generate());
+        $this->tag->setTypes('Exception\\MyException');
+        $this->tag->setDescription('description');
+        $this->assertEquals('@throws Exception\\MyException description', $this->tag->generate());
     }
 }

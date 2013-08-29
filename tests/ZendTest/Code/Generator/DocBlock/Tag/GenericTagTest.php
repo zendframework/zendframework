@@ -10,7 +10,7 @@
 
 namespace ZendTest\Code\Generator\DocBlock\Tag;
 
-use Zend\Code\Generator\DocBlock\Tag\AuthorTag;
+use Zend\Code\Generator\DocBlock\Tag\GenericTag;
 
 /**
  * @category   Zend
@@ -20,16 +20,16 @@ use Zend\Code\Generator\DocBlock\Tag\AuthorTag;
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
-class AuthorTagTest extends \PHPUnit_Framework_TestCase
+class GenericTagTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var AuthorTag
+     * @var GenericTag
      */
     protected $tag;
 
     public function setUp()
     {
-        $this->tag = new AuthorTag();
+        $this->tag = new GenericTag();
     }
 
     public function tearDown()
@@ -39,31 +39,26 @@ class AuthorTagTest extends \PHPUnit_Framework_TestCase
 
     public function testGetterAndSetterPersistValue()
     {
-        $this->tag->setAuthorName('Foo');
-        $this->tag->setAuthorEmail('Bar');
-        $this->assertEquals('Foo', $this->tag->getAuthorName());
-        $this->assertEquals('Bar', $this->tag->getAuthorEmail());
+        $this->tag->setName('var');
+        $this->tag->setContent('string');
+        $this->assertEquals('var', $this->tag->getName());
+        $this->assertEquals('string', $this->tag->getContent());
     }
 
     public function testParamProducesCorrectDocBlockLine()
     {
-        $this->tag->setAuthorName('foo');
-        $this->tag->setAuthorEmail('string');
-        $this->assertEquals('@author foo <string>', $this->tag->generate());
-    }
-
-    public function testNameIsCorrect()
-    {
-        $this->assertEquals('author', $this->tag->getName());
+        $this->tag->setName('var');
+        $this->tag->setContent('string');
+        $this->assertEquals('@var string', $this->tag->generate());
     }
 
     public function testConstructorWithOptions()
     {
         $this->tag->setOptions(array(
-            'authorEmail' => 'string',
-            'authorName' => 'foo',
+            'name' => 'var',
+            'content' => 'string',
         ));
-        $tagWithOptionsFromConstructor = new AuthorTag('foo', 'string');
+        $tagWithOptionsFromConstructor = new GenericTag('var', 'string');
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
     }
 }

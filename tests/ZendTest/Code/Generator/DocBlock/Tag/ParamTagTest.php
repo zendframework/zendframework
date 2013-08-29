@@ -43,21 +43,27 @@ class ParamTagTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Foo', $this->tag->getVariableName());
     }
 
+    public function testNameIsCorrect()
+    {
+        $this->assertEquals('param', $this->tag->getName());
+    }
+
     public function testParamProducesCorrectDocBlockLine()
     {
         $this->tag->setVariableName('foo');
-        $this->tag->setTypes('string');
-        $this->tag->setDescription('bar bar bar');
-        $this->assertEquals('@param string $foo bar bar bar', $this->tag->generate());
+        $this->tag->setTypes('string|null');
+        $this->tag->setDescription('description');
+        $this->assertEquals('@param string|null $foo description', $this->tag->generate());
     }
 
     public function testConstructorWithOptions()
     {
         $this->tag->setOptions(array(
-            'types' => 'string',
             'variableName' => 'foo',
+            'types' => array('string'),
+            'description' => 'description'
         ));
-        $tagWithOptionsFromConstructor = new ParamTag('foo', 'string');
+        $tagWithOptionsFromConstructor = new ParamTag('foo', array('string'), 'description');
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
     }
 }

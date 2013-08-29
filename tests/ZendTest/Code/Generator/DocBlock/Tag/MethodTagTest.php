@@ -10,7 +10,7 @@
 
 namespace ZendTest\Code\Generator\DocBlock\Tag;
 
-use Zend\Code\Generator\DocBlock\Tag\LicenseTag;
+use Zend\Code\Generator\DocBlock\Tag\MethodTag;
 
 /**
  * @category   Zend
@@ -20,16 +20,16 @@ use Zend\Code\Generator\DocBlock\Tag\LicenseTag;
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
-class LicenseTagTest extends \PHPUnit_Framework_TestCase
+class MethodTagTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var LicenseTag
+     * @var MethodTag
      */
     protected $tag;
 
     public function setUp()
     {
-        $this->tag = new LicenseTag();
+        $this->tag = new MethodTag();
     }
 
     public function tearDown()
@@ -39,32 +39,35 @@ class LicenseTagTest extends \PHPUnit_Framework_TestCase
 
     public function testGetterAndSetterPersistValue()
     {
-        $this->tag->setUrl('foo');
-        $this->tag->setLicenseName('bar');
-
-        $this->assertEquals('foo', $this->tag->getUrl());
-        $this->assertEquals('bar', $this->tag->getLicenseName());
+        $this->tag->setIsStatic(true);
+        $this->tag->setMethodName('method');
+        $this->assertEquals(true, $this->tag->isStatic());
+        $this->assertEquals('method', $this->tag->getMethodName());
     }
 
     public function testNameIsCorrect()
     {
-        $this->assertEquals('license', $this->tag->getName());
+        $this->assertEquals('method', $this->tag->getName());
     }
 
-    public function testLicenseProducesCorrectDocBlockLine()
+    public function testParamProducesCorrectDocBlockLine()
     {
-        $this->tag->setUrl('foo');
-        $this->tag->setLicenseName('bar bar bar');
-        $this->assertEquals('@license foo bar bar bar', $this->tag->generate());
+        $this->tag->setIsStatic(true);
+        $this->tag->setMethodName('method');
+        $this->tag->setTypes('int');
+        $this->tag->setDescription('method(string $a)');
+        $this->assertEquals('@method static int method() method(string $a)', $this->tag->generate());
     }
 
     public function testConstructorWithOptions()
     {
         $this->tag->setOptions(array(
-            'url' => 'foo',
-            'licenseName' => 'bar',
+            'isStatic' => true,
+            'methodName' => 'method',
+            'types' => array('string'),
+            'description' => 'description'
         ));
-        $tagWithOptionsFromConstructor = new LicenseTag('foo', 'bar');
+        $tagWithOptionsFromConstructor = new MethodTag('method', array('string'), 'description', true);
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
     }
 }

@@ -10,7 +10,7 @@
 
 namespace ZendTest\Code\Generator\DocBlock\Tag;
 
-use Zend\Code\Generator\DocBlock\Tag\AuthorTag;
+use Zend\Code\Generator\DocBlock\Tag\PropertyTag;
 
 /**
  * @category   Zend
@@ -20,16 +20,16 @@ use Zend\Code\Generator\DocBlock\Tag\AuthorTag;
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
-class AuthorTagTest extends \PHPUnit_Framework_TestCase
+class PropertyTagTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var AuthorTag
+     * @var PropertyTag
      */
     protected $tag;
 
     public function setUp()
     {
-        $this->tag = new AuthorTag();
+        $this->tag = new PropertyTag();
     }
 
     public function tearDown()
@@ -39,31 +39,31 @@ class AuthorTagTest extends \PHPUnit_Framework_TestCase
 
     public function testGetterAndSetterPersistValue()
     {
-        $this->tag->setAuthorName('Foo');
-        $this->tag->setAuthorEmail('Bar');
-        $this->assertEquals('Foo', $this->tag->getAuthorName());
-        $this->assertEquals('Bar', $this->tag->getAuthorEmail());
-    }
-
-    public function testParamProducesCorrectDocBlockLine()
-    {
-        $this->tag->setAuthorName('foo');
-        $this->tag->setAuthorEmail('string');
-        $this->assertEquals('@author foo <string>', $this->tag->generate());
+        $this->tag->setPropertyName('property');
+        $this->assertEquals('property', $this->tag->getPropertyName());
     }
 
     public function testNameIsCorrect()
     {
-        $this->assertEquals('author', $this->tag->getName());
+        $this->assertEquals('property', $this->tag->getName());
+    }
+
+    public function testParamProducesCorrectDocBlockLine()
+    {
+        $this->tag->setPropertyName('property');
+        $this->tag->setTypes('string[]');
+        $this->tag->setDescription('description');
+        $this->assertEquals('@property string[] $property description', $this->tag->generate());
     }
 
     public function testConstructorWithOptions()
     {
         $this->tag->setOptions(array(
-            'authorEmail' => 'string',
-            'authorName' => 'foo',
+            'propertyName' => 'property',
+            'types' => array('string'),
+            'description' => 'description'
         ));
-        $tagWithOptionsFromConstructor = new AuthorTag('foo', 'string');
+        $tagWithOptionsFromConstructor = new PropertyTag('property', array('string'), 'description');
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
     }
 }

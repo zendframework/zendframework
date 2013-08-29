@@ -40,7 +40,7 @@ class TagManager extends PrototypeClassFactory
         $tagName = $reflectionTag->getName();
 
         /* @var TagInterface $newTag */
-        $newTag = $this->getPrototype($tagName);
+        $newTag = $this->getClonedPrototype($tagName);
 
         // transport any properties via accessors and mutators from reflection to codegen object
         $reflectionClass = new \ReflectionClass($reflectionTag);

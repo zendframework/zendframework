@@ -38,7 +38,7 @@ class TagManager extends PrototypeClassFactory
     public function createTag($tagName, $content = null)
     {
         /* @var TagInterface $newTag */
-        $newTag = $this->getPrototype($tagName);
+        $newTag = $this->getClonedPrototype($tagName);
 
         if ($content) {
             $newTag->initialize($content);

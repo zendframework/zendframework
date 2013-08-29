@@ -90,7 +90,7 @@ class PrototypeClassFactory
      * @return PrototypeInterface
      * @throws Exception\RuntimeException
      */
-    public function getPrototype($prototypeName)
+    public function getClonedPrototype($prototypeName)
     {
         $prototypeName = $this->normalizeName($prototypeName);
 

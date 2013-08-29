@@ -9,7 +9,7 @@
 
 namespace Zend\Code\Generator;
 
-use Zend\Code\Generator\DocBlock\Tag\GenericTag;
+use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Generator\DocBlock\Tag\TagInterface;
 use Zend\Code\Generator\DocBlock\TagManager;
 use Zend\Code\Reflection\DocBlockReflection;
@@ -184,7 +184,8 @@ class DocBlockGenerator extends AbstractGenerator
     public function setTag($tag)
     {
         if (is_array($tag)) {
-            $genericTag = new GenericTag();
+            // use deprecated Tag class for backward compatiblity to old array-keys
+            $genericTag = new Tag();
             $genericTag->setOptions($tag);
             $tag = $genericTag;
         } elseif (!$tag instanceof TagInterface) {

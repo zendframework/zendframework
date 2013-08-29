@@ -7,11 +7,12 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Code\Reflection\DocBlock;
+namespace Zend\Code\Generator\DocBlock;
 
+use Zend\Code\Generator\DocBlock\Tag\TagInterface;
 use Zend\Code\Generic\Prototype\PrototypeClassFactory;
-use Zend\Code\Reflection\DocBlock\Tag\GenericTag;
-use Zend\Code\Reflection\DocBlock\Tag\TagInterface;
+
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionTagInterface;
 
 class TagManager extends PrototypeClassFactory
 {
@@ -31,19 +32,26 @@ class TagManager extends PrototypeClassFactory
     }
 
     /**
-     * @param string $tagName
-     * @param string $content
+     * @param ReflectionTagInterface $reflectionTag
      * @return TagInterface
      */
-    public function createTag($tagName, $content = null)
+    public function createTagFromReflection(ReflectionTagInterface $reflectionTag)
     {
+        $tagName = $reflectionTag->getName();
+
         /* @var TagInterface $newTag */
         $newTag = $this->getPrototype($tagName);
 
-        if ($content) {
-            $newTag->initialize($content);
+        // transport any properties via accessors and mutators from reflection to codegen object
+        $reflectionClass = new \ReflectionClass($reflectionTag);
+        foreach ($reflectionClass->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
+            if (substr($method->getName(), 0, 3) == 'get') {
+                $propertyName = substr($method->getName(), 3);
+                if (method_exists($newTag, 'set' . $propertyName)) {
+                    $newTag->{'set' . $propertyName}($reflectionTag->{'get' . $propertyName}());
+                }
+            }
         }
-
         return $newTag;
     }
 }

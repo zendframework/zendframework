@@ -7,15 +7,12 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Code\Reflection\DocBlock\Tag;
+namespace Zend\Code\Generic\Prototype;
 
-use Zend\Code\Generic\Prototype\PrototypeInterface;
-
-interface TagInterface extends PrototypeInterface
+interface PrototypeGenericInterface extends PrototypeInterface
 {
     /**
-     * @param  string $content
-     * @return void
+     * @param string $name
      */
-    public function initialize($content);
+    public function setName($name);
 }

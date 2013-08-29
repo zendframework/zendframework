@@ -9,7 +9,9 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-class GenericTag implements TagInterface
+use Zend\Code\Generic\Prototype\PrototypeGenericInterface;
+
+class GenericTag implements TagInterface, PrototypeGenericInterface
 {
     /**
      * @var string

@@ -10,8 +10,9 @@
 namespace Zend\Code\Generator\DocBlock\Tag;
 
 use Zend\Code\Generator\AbstractGenerator;
+use Zend\Code\Generic\Prototype\PrototypeGenericInterface;
 
-class GenericTag extends AbstractGenerator implements TagInterface
+class GenericTag extends AbstractGenerator implements TagInterface, PrototypeGenericInterface
 {
     /**
      * @var string

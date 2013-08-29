@@ -21,7 +21,7 @@ class Tag extends GenericTag
     /**
      * @param  ReflectionTagInterface $reflectionTag
      * @return Tag
-     * @deprecated use TagManager::createTag() instead
+     * @deprecated use TagManager::createTagFromReflection() instead
      */
     public static function fromReflection(ReflectionTagInterface $reflectionTag)
     {

@@ -15,10 +15,6 @@ use Zend\Code\Generator\ValueGenerator;
 use Zend\Code\Reflection\MethodReflection;
 
 /**
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage UnitTests
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */

@@ -13,10 +13,6 @@ use Zend\Code\Generator\PropertyGenerator;
 use Zend\Code\Generator\PropertyValueGenerator;
 
 /**
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage UnitTests
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */

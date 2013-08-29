@@ -14,10 +14,6 @@ use Zend\Code\Generator\DocBlock\Tag;
 use Zend\Code\Reflection\DocBlockReflection;
 
 /**
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage UnitTests
- *
  * @group      Zend_Code_Generator
  * @group      Zend_Code_Generator_Php
  */

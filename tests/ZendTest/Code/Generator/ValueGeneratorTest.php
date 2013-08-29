@@ -12,10 +12,6 @@ namespace ZendTest\Code\Generator;
 use Zend\Code\Generator\ValueGenerator;
 
 /**
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage UnitTests
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */

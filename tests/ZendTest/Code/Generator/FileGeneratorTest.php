@@ -15,12 +15,6 @@ use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Reflection\FileReflection;
 
 /**
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  * @group Zend_Code_Generator_Php_File

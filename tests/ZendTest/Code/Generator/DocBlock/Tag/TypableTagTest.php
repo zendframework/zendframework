@@ -12,10 +12,6 @@ namespace ZendTest\Code\Generator\DocBlock\Tag;
 use ZendTest\Code\Generator\TestAsset\TypeableTag;
 
 /**
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage UnitTests
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */

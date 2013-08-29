@@ -13,10 +13,6 @@ use ZendTest\Code\Generator\TestAsset\PrototypeClass;
 use ZendTest\Code\Generator\TestAsset\PrototypeGenericClass;
 
 /**
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage UnitTests
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */

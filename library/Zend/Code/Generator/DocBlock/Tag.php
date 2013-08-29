@@ -11,26 +11,19 @@ namespace Zend\Code\Generator\DocBlock;
 
 use ReflectionClass;
 use ReflectionMethod;
-use Zend\Code\Generator\AbstractGenerator;
+use Zend\Code\Generator\DocBlock\Tag\GenericTag;
 use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
 
-class Tag extends AbstractGenerator
+/**
+ * @deprecated Use GenericTag instead
+ */
+class Tag extends GenericTag
 {
-    /**
-     * @var string
-     */
-    protected $name = null;
 
     /**
-     * @var string
-     */
-    protected $description = null;
-
-    /**
-     * Build a Tag generator object from a reflection object
-     *
      * @param  ReflectionDocBlockTag $reflectionTag
      * @return Tag
+     * @deprecated use TagManager::createTag() instead
      */
     public static function fromReflection(ReflectionDocBlockTag $reflectionTag)
     {
@@ -54,49 +47,21 @@ class Tag extends AbstractGenerator
     }
 
     /**
-     * @param  string $name
-     * @return Tag
-     */
-    public function setName($name)
-    {
-        $this->name = ltrim($name, '@');
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * @param  string $description
      * @return Tag
+     * @deprecated Use GenericTag::setContent() instead
      */
     public function setDescription($description)
     {
-        $this->description = $description;
-        return $this;
+        return $this->setContent($description);
     }
 
     /**
      * @return string
+     * @deprecated Use GenericTag::getContent() instead
      */
     public function getDescription()
     {
-        return $this->description;
-    }
-
-    /**
-     * @return string
-     */
-    public function generate()
-    {
-        $output = '@' . $this->name
-            . (($this->description != null) ? ' ' . $this->description : '');
-
-        return $output;
+        return $this->getContent();
     }
 }

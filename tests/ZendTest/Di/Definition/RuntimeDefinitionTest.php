@@ -93,4 +93,14 @@ class RuntimeDefinitionTest extends TestCase
             )
         );
     }
+
+    /**
+     * Test if methods from aware interfaces without params are excluded
+     */
+    public function testExcludeAwareMethodsWithoutParameters()
+    {
+        $definition = new RuntimeDefinition();
+        $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'setSomething'));
+        $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'getSomething'));
+    }
 }

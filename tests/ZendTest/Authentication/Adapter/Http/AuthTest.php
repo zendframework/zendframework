@@ -186,7 +186,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
     public function testBasicAuthBadUser()
     {
-        // Attempt Basic Authentication with a nonexistant username and
+        // Attempt Basic Authentication with a nonexistent username and
         // password
 
         // The expected Basic Www-Authenticate header value

@@ -799,7 +799,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $nav = $this->_getFindByNavigation();
 
-        $found = $nav->findOneBy('id', 'non-existant');
+        $found = $nav->findOneBy('id', 'non-existent');
         $this->assertNull($found);
     }
 
@@ -823,7 +823,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     public function testFindAllByShouldReturnEmptyArrayifNotFound()
     {
         $nav = $this->_getFindByNavigation();
-        $found = $nav->findAllBy('id', 'non-existant');
+        $found = $nav->findAllBy('id', 'non-existent');
 
         $expected = array('type' => 'array', 'count' => 0);
         $actual = array('type' => gettype($found), 'count' => count($found));

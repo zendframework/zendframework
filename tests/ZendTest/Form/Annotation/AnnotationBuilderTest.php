@@ -246,12 +246,18 @@ class AnnotationBuilderTest extends TestCase
 
     public function testInputFilterInputAnnotation()
     {
-        $entity  = new TestAsset\Annotation\EntityWithInputFilterInput();
+        $entity = new TestAsset\Annotation\EntityWithInputFilterInput();
         $builder = new Annotation\AnnotationBuilder();
-        $form    = $builder->createForm($entity);
+        $form = $builder->createForm($entity);
         $inputFilter = $form->getInputFilter();
 
         $this->assertTrue($inputFilter->has('input'));
-        $this->assertInstanceOf('ZendTest\Form\TestAsset\Annotation\InputFilterInput', $inputFilter->get('input'));
+        foreach (
+            array('Zend\InputFilter\InputInterface', 'ZendTest\Form\TestAsset\Annotation\InputFilterInput') as
+            $expectedInstance
+        ) {
+            $this->assertInstanceOf($expectedInstance, $inputFilter->get('input'));
+        }
+
     }
 }

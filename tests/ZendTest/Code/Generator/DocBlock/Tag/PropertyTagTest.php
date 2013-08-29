@@ -52,6 +52,13 @@ class PropertyTagTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('property', $this->tag->getPropertyName());
     }
 
+
+    public function testGetterForVariableNameTrimsCorrectly()
+    {
+        $this->tag->setPropertyName('$property$');
+        $this->assertEquals('property$', $this->tag->getPropertyName());
+    }
+
     public function testNameIsCorrect()
     {
         $this->assertEquals('property', $this->tag->getName());

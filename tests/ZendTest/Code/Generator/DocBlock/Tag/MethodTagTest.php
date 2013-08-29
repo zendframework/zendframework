@@ -55,6 +55,12 @@ class MethodTagTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('method', $this->tag->getMethodName());
     }
 
+    public function testGetterForMethodNameTrimsCorrectly()
+    {
+        $this->tag->setMethodName('()method()');
+        $this->assertEquals('()method', $this->tag->getMethodName());
+    }
+
     public function testNameIsCorrect()
     {
         $this->assertEquals('method', $this->tag->getName());

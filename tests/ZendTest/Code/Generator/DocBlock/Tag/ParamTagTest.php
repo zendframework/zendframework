@@ -52,6 +52,12 @@ class ParamTagTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Foo', $this->tag->getVariableName());
     }
 
+    public function testGetterForVariableNameTrimsCorrectly()
+    {
+        $this->tag->setVariableName('$param$');
+        $this->assertEquals('param$', $this->tag->getVariableName());
+    }
+
     public function testNameIsCorrect()
     {
         $this->assertEquals('param', $this->tag->getName());

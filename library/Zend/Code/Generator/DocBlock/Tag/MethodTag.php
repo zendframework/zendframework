@@ -70,7 +70,7 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
      */
     public function setMethodName($methodName)
     {
-        $this->methodName = $methodName;
+        $this->methodName = rtrim($methodName, ')(');
         return $this;
     }
 

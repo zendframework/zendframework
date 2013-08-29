@@ -59,7 +59,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
      */
     public function setVariableName($variableName)
     {
-        $this->variableName = $variableName;
+        $this->variableName = ltrim($variableName, '$');
         return $this;
     }
 

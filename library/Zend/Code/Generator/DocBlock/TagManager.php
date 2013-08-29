@@ -50,6 +50,11 @@ class TagManager extends PrototypeClassFactory
                 if (method_exists($newTag, 'set' . $propertyName)) {
                     $newTag->{'set' . $propertyName}($reflectionTag->{'get' . $propertyName}());
                 }
+            } elseif (substr($method->getName(), 0, 2) == 'is') {
+                $propertyName = ucfirst($method->getName());
+                if (method_exists($newTag, 'set' . $propertyName)) {
+                    $newTag->{'set' . $propertyName}($reflectionTag->{$method->getName()}());
+                }
             }
         }
         return $newTag;

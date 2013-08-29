@@ -243,6 +243,7 @@ class DocBlockGenerator extends AbstractGenerator
             $output .= $ld . self::LINE_FEED . self::LINE_FEED;
         }
 
+        /* @var $tag GeneratorInterface */
         foreach ($this->getTags() as $tag) {
             $output .= $tag->generate() . self::LINE_FEED;
         }

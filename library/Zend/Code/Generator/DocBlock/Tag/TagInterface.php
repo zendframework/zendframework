@@ -13,8 +13,4 @@ use Zend\Code\Generic\Prototype\PrototypeInterface;
 
 interface TagInterface extends PrototypeInterface
 {
-    /**
-     * @return string
-     */
-    public function generate();
 }

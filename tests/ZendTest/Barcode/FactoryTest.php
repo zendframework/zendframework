@@ -247,7 +247,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $barcode = Barcode\Barcode::makeBarcode('barcodeNamespaceWithoutExtendingObjectAbstract');
     }
 
-    public function testBarcodeObjectFactoryWithUnexistantBarcode()
+    public function testBarcodeObjectFactoryWithUnexistentBarcode()
     {
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $barcode = Barcode\Barcode::makeBarcode('zf123', array());
@@ -329,7 +329,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $renderer = Barcode\Barcode::makeRenderer('rendererNamespaceWithoutExtendingRendererAbstract');
     }
 
-    public function testBarcodeRendererFactoryWithUnexistantRenderer()
+    public function testBarcodeRendererFactoryWithUnexistentRenderer()
     {
         $this->setExpectedException('\Zend\ServiceManager\Exception\ServiceNotFoundException');
         $renderer = Barcode\Barcode::makeRenderer('zend', array());

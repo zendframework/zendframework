@@ -19,6 +19,20 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     protected $variableName = null;
 
     /**
+     * @param string $variableName
+     * @param array $types
+     * @param string $description
+     */
+    public function __construct($variableName = null, $types = [], $description = null)
+    {
+        if (!empty($variableName)) {
+            $this->setVariableName($variableName);
+        }
+
+        parent::__construct($types, $description);
+    }
+
+    /**
      * @param  ReflectionTagInterface $reflectionTagReturn
      * @return ReturnTag
      * @deprecated Use TagManager::createTag() instead

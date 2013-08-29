@@ -25,6 +25,21 @@ class AuthorTag extends AbstractGenerator implements TagInterface
     protected $authorEmail = null;
 
     /**
+     * @param string $authorName
+     * @param string $authorEmail
+     */
+    public function __construct($authorName = null, $authorEmail = null)
+    {
+        if (!empty($authorName)) {
+            $this->setAuthorName($authorName);
+        }
+
+        if (!empty($authorEmail)) {
+            $this->setAuthorEmail($authorEmail);
+        }
+    }
+
+    /**
      * @param  ReflectionTagInterface $reflectionTagReturn
      * @return ReturnTag
      * @deprecated Use TagManager::createTag() instead

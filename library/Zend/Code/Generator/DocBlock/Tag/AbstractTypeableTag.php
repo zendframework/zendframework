@@ -24,6 +24,21 @@ abstract class AbstractTypeableTag extends AbstractGenerator
     protected $types = [];
 
     /**
+     * @param array $types
+     * @param string $description
+     */
+    public function __construct($types = [], $description = null)
+    {
+        if (!empty($types)) {
+            $this->setTypes($types);
+        }
+
+        if (!empty($description)) {
+            $this->setDescription($description);
+        }
+    }
+
+    /**
      * @param string $description
      * @return ReturnTag
      */

@@ -25,6 +25,21 @@ class LicenseTag extends AbstractGenerator implements TagInterface
     protected $licenseName = null;
 
     /**
+     * @param string $url
+     * @param string $licenseName
+     */
+    public function __construct($url = null, $licenseName = null)
+    {
+        if (!empty($url)) {
+            $this->setUrl($url);
+        }
+
+        if (!empty($licenseName)) {
+            $this->setLicenseName($licenseName);
+        }
+    }
+
+    /**
      * @param  ReflectionTagInterface $reflectionTagReturn
      * @return ReturnTag
      * @deprecated Use TagManager::createTag() instead

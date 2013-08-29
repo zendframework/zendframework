@@ -37,27 +37,19 @@ class ReturnTagTest extends \PHPUnit_Framework_TestCase
         $this->tag = null;
     }
 
-    public function testDatatypeGetterAndSetterPersistValue()
-    {
-        $this->tag->setDatatype('Foo');
-        $this->assertEquals('Foo', $this->tag->getDatatype());
-    }
-
     public function testReturnProducesCorrectDocBlockLine()
     {
-        $this->tag->setDatatype('string');
+        $this->tag->setTypes('string|int');
         $this->tag->setDescription('bar bar bar');
-        $this->assertEquals('@return string bar bar bar', $this->tag->generate());
+        $this->assertEquals('@return string|int bar bar bar', $this->tag->generate());
     }
 
     public function testConstructorWithOptions()
     {
         $this->tag->setOptions(array(
-            'datatype' => 'string|null',
+            'types' => 'string|null',
         ));
-        $tagWithOptionsFromConstructor = new ReturnTag(array(
-            'datatype' => 'string|null',
-        ));
+        $tagWithOptionsFromConstructor = new ReturnTag('string|null');
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
     }
 }

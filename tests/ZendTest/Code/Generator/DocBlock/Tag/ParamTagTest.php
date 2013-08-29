@@ -37,22 +37,16 @@ class ParamTagTest extends \PHPUnit_Framework_TestCase
         $this->tag = null;
     }
 
-    public function testDatatypeGetterAndSetterPersistValue()
+    public function testGetterAndSetterPersistValue()
     {
-        $this->tag->setDatatype('Foo');
-        $this->assertEquals('Foo', $this->tag->getDatatype());
-    }
-
-    public function testParamNameGetterAndSetterPersistValue()
-    {
-        $this->tag->setParamName('Foo');
-        $this->assertEquals('Foo', $this->tag->getParamName());
+        $this->tag->setVariableName('Foo');
+        $this->assertEquals('Foo', $this->tag->getVariableName());
     }
 
     public function testParamProducesCorrectDocBlockLine()
     {
-        $this->tag->setParamName('foo');
-        $this->tag->setDatatype('string');
+        $this->tag->setVariableName('foo');
+        $this->tag->setTypes('string');
         $this->tag->setDescription('bar bar bar');
         $this->assertEquals('@param string $foo bar bar bar', $this->tag->generate());
     }
@@ -60,13 +54,10 @@ class ParamTagTest extends \PHPUnit_Framework_TestCase
     public function testConstructorWithOptions()
     {
         $this->tag->setOptions(array(
-            'datatype' => 'string',
-            'paramName' => 'foo',
+            'types' => 'string',
+            'variableName' => 'foo',
         ));
-        $tagWithOptionsFromConstructor = new ParamTag(array(
-            'datatype' => 'string',
-            'paramName' => 'foo',
-        ));
+        $tagWithOptionsFromConstructor = new ParamTag('foo', 'string');
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
     }
 }

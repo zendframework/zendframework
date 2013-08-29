@@ -59,10 +59,7 @@ class LicenseTagTest extends \PHPUnit_Framework_TestCase
             'url' => 'foo',
             'licenseName' => 'bar',
         ));
-        $tagWithOptionsFromConstructor = new LicenseTag(array(
-            'url' => 'foo',
-            'licenseName' => 'bar',
-        ));
+        $tagWithOptionsFromConstructor = new LicenseTag('foo', 'bar');
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
     }
 }

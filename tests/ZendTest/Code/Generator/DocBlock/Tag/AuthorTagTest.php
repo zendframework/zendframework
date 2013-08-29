@@ -37,36 +37,28 @@ class AuthorTagTest extends \PHPUnit_Framework_TestCase
         $this->tag = null;
     }
 
-    public function testDatatypeGetterAndSetterPersistValue()
+    public function testGetterAndSetterPersistValue()
     {
-        $this->tag->setDatatype('Foo');
-        $this->assertEquals('Foo', $this->tag->getDatatype());
-    }
-
-    public function testParamNameGetterAndSetterPersistValue()
-    {
-        $this->tag->setParamName('Foo');
-        $this->assertEquals('Foo', $this->tag->getParamName());
+        $this->tag->setAuthorName('Foo');
+        $this->tag->setAuthorEmail('Bar');
+        $this->assertEquals('Foo', $this->tag->getAuthorName());
+        $this->assertEquals('Bar', $this->tag->getAuthorEmail());
     }
 
     public function testParamProducesCorrectDocBlockLine()
     {
-        $this->tag->setParamName('foo');
-        $this->tag->setDatatype('string');
-        $this->tag->setDescription('bar bar bar');
-        $this->assertEquals('@param string $foo bar bar bar', $this->tag->generate());
+        $this->tag->setAuthorName('foo');
+        $this->tag->setAuthorEmail('string');
+        $this->assertEquals('@author foo <string>', $this->tag->generate());
     }
 
     public function testConstructorWithOptions()
     {
         $this->tag->setOptions(array(
-            'datatype' => 'string',
-            'paramName' => 'foo',
+            'authorEmail' => 'string',
+            'authorName' => 'foo',
         ));
-        $tagWithOptionsFromConstructor = new AuthorTag(array(
-            'datatype' => 'string',
-            'paramName' => 'foo',
-        ));
+        $tagWithOptionsFromConstructor = new AuthorTag('foo', 'string');
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
     }
 }

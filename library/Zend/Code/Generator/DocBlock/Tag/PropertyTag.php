@@ -62,7 +62,7 @@ class PropertyTag extends AbstractTypeableTag implements TagInterface
     public function generate()
     {
         $output = '@property'
-            . ((!empty($this->types)) ? ' ' . implode('|', $this->types) : '')
+            . ((!empty($this->types)) ? ' ' . $this->getTypesAsString() : '')
             . ((!empty($this->propertyName)) ? ' $' . $this->propertyName : '')
             . ((!empty($this->description)) ? ' ' . $this->description : '');
 

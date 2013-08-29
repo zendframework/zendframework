@@ -89,7 +89,7 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
     {
         $output = '@method'
             . (($this->isStatic) ? ' static' : '')
-            . ((!empty($this->types)) ? ' ' . implode('|', $this->types) : '')
+            . ((!empty($this->types)) ? ' ' . $this->getTypesAsString() : '')
             . ((!empty($this->methodName)) ? ' ' . $this->methodName . '()' : '')
             . ((!empty($this->description)) ? ' ' . $this->description : '');
 

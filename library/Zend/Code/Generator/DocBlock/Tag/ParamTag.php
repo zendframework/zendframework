@@ -87,7 +87,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
      */
     public function getDatatype()
     {
-        return implode('|', $this->getTypes());
+        return $this->getTypesAsString();
     }
 
     /**
@@ -115,7 +115,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     public function generate()
     {
         $output = '@param'
-            . ((!empty($this->types)) ? ' ' . implode('|', $this->types) : 'unknown')
+            . ((!empty($this->types)) ? ' ' . $this->getTypesAsString() : '')
             . ((!empty($this->variableName)) ? ' $' . $this->variableName : '')
             . ((!empty($this->description)) ? ' ' . $this->description : '');
 

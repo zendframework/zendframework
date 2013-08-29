@@ -79,4 +79,13 @@ abstract class AbstractTypeableTag extends AbstractGenerator
     {
         return $this->types;
     }
+
+    /**
+     * @param string $delimiter
+     * @return string
+     */
+    public function getTypesAsString($delimiter = '|')
+    {
+        return implode($delimiter, $this->types);
+    }
 }

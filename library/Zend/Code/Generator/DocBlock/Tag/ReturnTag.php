@@ -50,7 +50,7 @@ class ReturnTag extends AbstractTypeableTag implements TagInterface
      */
     public function getDatatype()
     {
-        return implode('|', $this->getTypes());
+        return $this->getTypesAsString();
     }
 
     /**
@@ -59,7 +59,7 @@ class ReturnTag extends AbstractTypeableTag implements TagInterface
     public function generate()
     {
         $output = '@return '
-        . implode('|', $this->types)
+        . $this->getTypesAsString()
         . ((!empty($this->description)) ? ' ' . $this->description : '');
 
         return $output;

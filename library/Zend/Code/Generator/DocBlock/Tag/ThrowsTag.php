@@ -26,8 +26,8 @@ class ThrowsTag extends AbstractTypeableTag implements TagInterface
     public function generate()
     {
         $output = '@throws'
-        . (!empty($this->types)) ? ' ' . implode('|', $this->types) : ''
-        . (!empty($this->description)) ? ' ' . $this->description : '';
+        . ((!empty($this->types)) ? ' ' . implode('|', $this->types) : '')
+        . ((!empty($this->description)) ? ' ' . $this->description : '');
 
         return $output;
     }

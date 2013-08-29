@@ -21,13 +21,13 @@ abstract class AbstractTypeableTag extends AbstractGenerator
     /**
      * @var array
      */
-    protected $types = [];
+    protected $types = array();
 
     /**
      * @param array $types
      * @param string $description
      */
-    public function __construct($types = [], $description = null)
+    public function __construct($types = array(), $description = null)
     {
         if (!empty($types)) {
             $this->setTypes($types);

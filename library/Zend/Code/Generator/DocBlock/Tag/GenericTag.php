@@ -80,7 +80,7 @@ class GenericTag extends AbstractGenerator implements TagInterface
     public function generate()
     {
         $output = '@' . $this->name
-            . (!empty($this->content)) ? ' ' . $this->content : '';
+            . ((!empty($this->content)) ? ' ' . $this->content : '');
 
         return $output;
     }

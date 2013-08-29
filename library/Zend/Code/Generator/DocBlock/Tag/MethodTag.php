@@ -27,7 +27,7 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
      * @param string $description
      * @param bool $isStatic
      */
-    public function __construct($methodName = null, $types = [], $description = null, $isStatic = false)
+    public function __construct($methodName = null, $types = array(), $description = null, $isStatic = false)
     {
         if (!empty($methodName)) {
             $this->setMethodName($methodName);
@@ -88,10 +88,10 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
     public function generate()
     {
         $output = '@method'
-            . ($this->isStatic) ? ' static' : ''
-            . (!empty($this->types)) ? ' ' . implode('|', $this->types) : ''
-            . (!empty($this->methodName)) ? ' ' . $this->methodName . '()' : ''
-            . (!empty($this->description)) ? ' ' . $this->description : '';
+            . (($this->isStatic) ? ' static' : '')
+            . ((!empty($this->types)) ? ' ' . implode('|', $this->types) : '')
+            . ((!empty($this->methodName)) ? ' ' . $this->methodName . '()' : '')
+            . ((!empty($this->description)) ? ' ' . $this->description : '');
 
         return $output;
     }

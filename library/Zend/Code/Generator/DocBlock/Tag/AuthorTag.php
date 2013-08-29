@@ -99,8 +99,8 @@ class AuthorTag extends AbstractGenerator implements TagInterface
     public function generate()
     {
         $output = '@author'
-            . (!empty($this->authorName)) ? ' ' . $this->authorName : ''
-            . (!empty($this->authorEmail)) ? ' <' . $this->authorEmail . '>' : '';
+            . ((!empty($this->authorName)) ? ' ' . $this->authorName : '')
+            . ((!empty($this->authorEmail)) ? ' <' . $this->authorEmail . '>' : '');
 
         return $output;
     }

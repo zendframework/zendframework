@@ -11,6 +11,8 @@
 namespace ZendTest\Code\Generator\DocBlock\Tag;
 
 use Zend\Code\Generator\DocBlock\Tag\LicenseTag;
+use Zend\Code\Generator\DocBlock\TagManager;
+use Zend\Code\Reflection\DocBlockReflection;
 
 /**
  * @category   Zend
@@ -26,15 +28,22 @@ class LicenseTagTest extends \PHPUnit_Framework_TestCase
      * @var LicenseTag
      */
     protected $tag;
+    /**
+     * @var TagManager
+     */
+    protected $tagmanager;
 
     public function setUp()
     {
         $this->tag = new LicenseTag();
+        $this->tagmanager = new TagManager();
+        $this->tagmanager->initializeDefaultTags();
     }
 
     public function tearDown()
     {
         $this->tag = null;
+        $this->tagmanager = null;
     }
 
     public function testGetterAndSetterPersistValue()
@@ -66,5 +75,17 @@ class LicenseTagTest extends \PHPUnit_Framework_TestCase
         ));
         $tagWithOptionsFromConstructor = new LicenseTag('foo', 'bar');
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
+    }
+
+    public function testCreatingTagFromReflection()
+    {
+        $docreflection = new DocBlockReflection('/** @license http://zend.com License');
+        $reflectionTag = $docreflection->getTag('license');
+
+        /** @var LicenseTag $tag */
+        $tag = $this->tagmanager->createTagFromReflection($reflectionTag);
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag\LicenseTag', $tag);
+        $this->assertEquals('http://zend.com', $tag->getUrl());
+        $this->assertEquals('License', $tag->getLicenseName());
     }
 }

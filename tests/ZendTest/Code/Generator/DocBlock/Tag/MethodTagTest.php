@@ -11,6 +11,8 @@
 namespace ZendTest\Code\Generator\DocBlock\Tag;
 
 use Zend\Code\Generator\DocBlock\Tag\MethodTag;
+use Zend\Code\Generator\DocBlock\TagManager;
+use Zend\Code\Reflection\DocBlockReflection;
 
 /**
  * @category   Zend
@@ -27,14 +29,22 @@ class MethodTagTest extends \PHPUnit_Framework_TestCase
      */
     protected $tag;
 
+    /**
+     * @var TagManager
+     */
+    protected $tagmanager;
+
     public function setUp()
     {
         $this->tag = new MethodTag();
+        $this->tagmanager = new TagManager();
+        $this->tagmanager->initializeDefaultTags();
     }
 
     public function tearDown()
     {
         $this->tag = null;
+        $this->tagmanager = null;
     }
 
     public function testGetterAndSetterPersistValue()
@@ -69,5 +79,19 @@ class MethodTagTest extends \PHPUnit_Framework_TestCase
         ));
         $tagWithOptionsFromConstructor = new MethodTag('method', array('string'), 'description', true);
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
+    }
+
+    public function testCreatingTagFromReflection()
+    {
+        $docreflection = new DocBlockReflection('/** @method static int method() method(int $a)');
+        $reflectionTag = $docreflection->getTag('method');
+
+        /** @var MethodTag $tag */
+        $tag = $this->tagmanager->createTagFromReflection($reflectionTag);
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag\MethodTag', $tag);
+        $this->assertEquals(true, $tag->isStatic());
+        $this->assertEquals('int', $tag->getTypesAsString());
+        $this->assertEquals('method', $tag->getMethodName());
+        $this->assertEquals('method(int $a)', $tag->getDescription());
     }
 }

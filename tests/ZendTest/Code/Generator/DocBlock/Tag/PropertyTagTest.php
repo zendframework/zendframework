@@ -11,6 +11,8 @@
 namespace ZendTest\Code\Generator\DocBlock\Tag;
 
 use Zend\Code\Generator\DocBlock\Tag\PropertyTag;
+use Zend\Code\Generator\DocBlock\TagManager;
+use Zend\Code\Reflection\DocBlockReflection;
 
 /**
  * @category   Zend
@@ -26,15 +28,22 @@ class PropertyTagTest extends \PHPUnit_Framework_TestCase
      * @var PropertyTag
      */
     protected $tag;
+    /**
+     * @var TagManager
+     */
+    protected $tagmanager;
 
     public function setUp()
     {
         $this->tag = new PropertyTag();
+        $this->tagmanager = new TagManager();
+        $this->tagmanager->initializeDefaultTags();
     }
 
     public function tearDown()
     {
         $this->tag = null;
+        $this->tagmanager = null;
     }
 
     public function testGetterAndSetterPersistValue()
@@ -65,5 +74,18 @@ class PropertyTagTest extends \PHPUnit_Framework_TestCase
         ));
         $tagWithOptionsFromConstructor = new PropertyTag('property', array('string'), 'description');
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
+    }
+
+    public function testCreatingTagFromReflection()
+    {
+        $docreflection = new DocBlockReflection('/** @property int $foo description');
+        $reflectionTag = $docreflection->getTag('property');
+
+        /** @var PropertyTag $tag */
+        $tag = $this->tagmanager->createTagFromReflection($reflectionTag);
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag\PropertyTag', $tag);
+        $this->assertEquals('foo', $tag->getPropertyName());
+        $this->assertEquals('description', $tag->getDescription());
+        $this->assertEquals('int', $tag->getTypesAsString());
     }
 }

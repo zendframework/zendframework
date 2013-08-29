@@ -14,6 +14,14 @@ use Zend\Code\Generic\Prototype\PrototypeClassFactory;
 
 use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionTagInterface;
 
+/**
+ * This class is used in DocBlockGenerator and creates the needed
+ * Tag classes depending on the tag. So for example an @author tag
+ * will trigger the creation of an AuthorTag class.
+ *
+ * If none of the classes is applicable, the GenericTag class will be
+ * created
+ */
 class TagManager extends PrototypeClassFactory
 {
     /**

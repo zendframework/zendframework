@@ -11,6 +11,18 @@ namespace Zend\Code\Generic\Prototype;
 
 use Zend\Code\Reflection\Exception;
 
+
+/**
+ * This is a factory for classes which are identified by name.
+ *
+ * All classes that this factory can supply need to
+ * be registered before (prototypes). This prototypes need to implement
+ * an interface which ensures every prototype has a name.
+ *
+ * If the factory can not supply the class someone is asking for
+ * it tries to fallback on a generic default prototype, which would
+ * have need to be set before.
+ */
 class PrototypeClassFactory
 {
     /**

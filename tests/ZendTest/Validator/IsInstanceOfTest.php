@@ -99,8 +99,10 @@ class IsInstanceOfTest extends \PHPUnit_Framework_TestCase
 
     public function testPassTraversableToConstructor()
     {
-        $validator  = new Validator\IsInstanceOf(new \ArrayIterator(array('className' => 'DateTime')));
+        $validator = new Validator\IsInstanceOf(new \ArrayIterator(array('className' => 'DateTime')));
         $this->assertEquals('DateTime', $validator->getClassName());
         $this->assertTrue($validator->isValid(new DateTime()));
+        $this->assertFalse($validator->isValid(null));
+        $this->assertFalse($validator->isValid($this));
     }
 }

@@ -96,4 +96,10 @@ class IsInstanceOfTest extends \PHPUnit_Framework_TestCase
             $validator->getOption('messageVariables')
         );
     }
+
+    public function testPassTraversableToConstructor()
+    {
+        $validator  = new Validator\IsInstanceOf(new \ArrayIterator(array('className' => 'DateTime')));
+        $this->assertEquals('DateTime', $validator->getClassName());
+    }
 }

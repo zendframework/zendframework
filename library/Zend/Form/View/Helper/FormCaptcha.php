@@ -23,7 +23,7 @@ class FormCaptcha extends AbstractHelper
      * @param  ElementInterface $element
      * @return string|FormCaptcha
      */
-    public function __invoke(ElementInterface $element)
+    public function __invoke(ElementInterface $element = null)
     {
         if (!$element) {
             return $this;

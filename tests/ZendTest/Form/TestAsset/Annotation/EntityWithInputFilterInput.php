@@ -11,13 +11,11 @@ namespace ZendTest\Form\TestAsset\Annotation;
 
 use Zend\Form\Annotation;
 
-/**
- * @Annotation\Options({"use_as_base_fieldset":true})
- */
-class EntityUsingOptions
+class EntityWithInputFilterInput
 {
+
     /**
-      * @Annotation\Options({"label":"Username:", "label_attributes": {"class": "label"}})
-      */
-    public $username;
+     * @Annotation\Input("ZendTest\Form\TestAsset\Annotation\InputFilterInput")
+     */
+    public $input;
 }

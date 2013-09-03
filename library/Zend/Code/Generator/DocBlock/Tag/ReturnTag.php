@@ -17,7 +17,7 @@ class ReturnTag extends AbstractTypeableTag implements TagInterface
     /**
      * @param ReflectionTagInterface $reflectionTag
      * @return ReturnTag
-     * @deprecated Use TagManager::createTagFromReflection() instead
+     * @deprecated Deprecated in 2.3. Use TagManager::createTagFromReflection() instead
      */
     public static function fromReflection(ReflectionTagInterface $reflectionTag)
     {
@@ -37,7 +37,7 @@ class ReturnTag extends AbstractTypeableTag implements TagInterface
     /**
      * @param string $datatype
      * @return ReturnTag
-     * @deprecated Use setTypes() instead
+     * @deprecated Deprecated in 2.3. Use setTypes() instead
      */
     public function setDatatype($datatype)
     {
@@ -46,7 +46,7 @@ class ReturnTag extends AbstractTypeableTag implements TagInterface
 
     /**
      * @return string
-     * @deprecated Use getTypes() or getTypesAsString() instead
+     * @deprecated Deprecated in 2.3. Use getTypes() or getTypesAsString() instead
      */
     public function getDatatype()
     {

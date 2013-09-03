@@ -36,7 +36,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     /**
      * @param ReflectionTagInterface $reflectionTag
      * @return ReturnTag
-     * @deprecated Use TagManager::createTagFromReflection() instead
+     * @deprecated Deprecated in 2.3. Use TagManager::createTagFromReflection() instead
      */
     public static function fromReflection(ReflectionTagInterface $reflectionTag)
     {
@@ -74,7 +74,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     /**
      * @param string $datatype
      * @return ReturnTag
-     * @deprecated Use setTypes() instead
+     * @deprecated Deprecated in 2.3. Use setTypes() instead
      */
     public function setDatatype($datatype)
     {
@@ -83,7 +83,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
 
     /**
      * @return string
-     * @deprecated Use getTypes() or getTypesAsString() instead
+     * @deprecated Deprecated in 2.3. Use getTypes() or getTypesAsString() instead
      */
     public function getDatatype()
     {
@@ -93,7 +93,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
     /**
      * @param  string $paramName
      * @return ParamTag
-     * @deprecated Use setVariableName() instead
+     * @deprecated Deprecated in 2.3. Use setVariableName() instead
      */
     public function setParamName($paramName)
     {
@@ -102,7 +102,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
 
     /**
      * @return string
-     * @deprecated Use getVariableName() instead
+     * @deprecated Deprecated in 2.3. Use getVariableName() instead
      */
     public function getParamName()
     {

@@ -391,4 +391,61 @@ class CollectionInputFilterTest extends TestCase
         $this->filter->setIsRequired(true);
         $this->assertEquals(true,$this->filter->getIsRequired());
     }
+    
+    public function testNestedCollection()
+    {
+        $items_inputfilter = new BaseInputFilter();
+        $items_inputfilter->add(new Input(), 'id')
+                          ->add(new Input(), 'type');
+        $items = new CollectionInputFilter();
+        $items->setInputFilter($items_inputfilter);
+        
+        $groups_inputfilter = new BaseInputFilter();
+        $groups_inputfilter->add(new Input(), 'group_class')
+                           ->add($items, 'items');
+        $groups = new CollectionInputFilter();
+        $groups->setInputFilter($groups_inputfilter);
+        
+        $inputFilter = new BaseInputFilter();
+        $inputFilter->add($groups, 'groups');
+        
+        $data = array(
+            'groups' => array(
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 100,
+                            'type' => 'item-1',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 200,
+                            'type' => 'item-2',
+                        ),
+                        array(
+                            'id' => 300,
+                            'type' => 'item-3',
+                        ),
+                        array(
+                            'id' => 400,
+                            'type' => 'item-4',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'biz',
+                ),
+            ),
+        );
+        
+        $inputFilter->setData($data);
+        $inputFilter->isValid();
+        $values = $inputFilter->getValues();
+        $this->assertSame($data, $values);
+    }
 }

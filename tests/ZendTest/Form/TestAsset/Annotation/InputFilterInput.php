@@ -9,15 +9,8 @@
 
 namespace ZendTest\Form\TestAsset\Annotation;
 
-use Zend\Form\Annotation;
+use Zend\InputFilter\Input as Ancestor;
 
-/**
- * @Annotation\Options({"use_as_base_fieldset":true})
- */
-class EntityUsingOptions
+class InputFilterInput extends Ancestor
 {
-    /**
-      * @Annotation\Options({"label":"Username:", "label_attributes": {"class": "label"}})
-      */
-    public $username;
 }

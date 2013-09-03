@@ -1677,18 +1677,20 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->getPreferFormInputFilter());
     }
 
+    /**
+     * @group 5050
+     */
     public function testFileInputFilterNotOverwritten()
     {
         $form = new TestAsset\FileInputFilterProviderForm();
 
-        $formInputFilter = $form->getInputFilter();
+        $formInputFilter     = $form->getInputFilter();
         $fieldsetInputFilter = $formInputFilter->get('file_fieldset');
-        $fileFilter = $fieldsetInputFilter->get('file_field');
+        $fileInput           = $fieldsetInputFilter->get('file_field');
 
-        $this->assertInstanceOf('Zend\InputFilter\FileInput', $fileFilter);
+        $this->assertInstanceOf('Zend\InputFilter\FileInput', $fileInput);
 
-        $chain = $fileFilter->getFilterChain();
-
-        $this->assertCount(1, $chain);
+        $chain = $fileInput->getFilterChain();
+        $this->assertCount(1, $chain, var_export($chain, 1));
     }
 }

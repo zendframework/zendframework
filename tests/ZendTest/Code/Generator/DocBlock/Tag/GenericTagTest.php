@@ -9,7 +9,7 @@
 
 namespace ZendTest\Code\Generator\DocBlock\Tag;
 
-use Zend\Code\Generator\DocBlock\Tag\LicenseTag;
+use Zend\Code\Generator\DocBlock\Tag\GenericTag;
 use Zend\Code\Generator\DocBlock\TagManager;
 use Zend\Code\Reflection\DocBlockReflection;
 
@@ -17,10 +17,10 @@ use Zend\Code\Reflection\DocBlockReflection;
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
-class LicenseTagTest extends \PHPUnit_Framework_TestCase
+class GenericTagTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var LicenseTag
+     * @var GenericTag
      */
     protected $tag;
     /**
@@ -30,7 +30,7 @@ class LicenseTagTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->tag = new LicenseTag();
+        $this->tag = new GenericTag();
         $this->tagmanager = new TagManager();
         $this->tagmanager->initializeDefaultTags();
     }
@@ -43,44 +43,38 @@ class LicenseTagTest extends \PHPUnit_Framework_TestCase
 
     public function testGetterAndSetterPersistValue()
     {
-        $this->tag->setUrl('foo');
-        $this->tag->setLicenseName('bar');
-
-        $this->assertEquals('foo', $this->tag->getUrl());
-        $this->assertEquals('bar', $this->tag->getLicenseName());
+        $this->tag->setName('var');
+        $this->tag->setContent('string');
+        $this->assertEquals('var', $this->tag->getName());
+        $this->assertEquals('string', $this->tag->getContent());
     }
 
-    public function testNameIsCorrect()
+    public function testParamProducesCorrectDocBlockLine()
     {
-        $this->assertEquals('license', $this->tag->getName());
-    }
-
-    public function testLicenseProducesCorrectDocBlockLine()
-    {
-        $this->tag->setUrl('foo');
-        $this->tag->setLicenseName('bar bar bar');
-        $this->assertEquals('@license foo bar bar bar', $this->tag->generate());
+        $this->tag->setName('var');
+        $this->tag->setContent('string');
+        $this->assertEquals('@var string', $this->tag->generate());
     }
 
     public function testConstructorWithOptions()
     {
         $this->tag->setOptions(array(
-            'url' => 'foo',
-            'licenseName' => 'bar',
+            'name' => 'var',
+            'content' => 'string',
         ));
-        $tagWithOptionsFromConstructor = new LicenseTag('foo', 'bar');
+        $tagWithOptionsFromConstructor = new GenericTag('var', 'string');
         $this->assertEquals($this->tag->generate(), $tagWithOptionsFromConstructor->generate());
     }
 
     public function testCreatingTagFromReflection()
     {
-        $docreflection = new DocBlockReflection('/** @license http://zend.com License');
-        $reflectionTag = $docreflection->getTag('license');
+        $docreflection = new DocBlockReflection('/** @var string');
+        $reflectionTag = $docreflection->getTag('var');
 
-        /** @var LicenseTag $tag */
+        /** @var GenericTag $tag */
         $tag = $this->tagmanager->createTagFromReflection($reflectionTag);
-        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag\LicenseTag', $tag);
-        $this->assertEquals('http://zend.com', $tag->getUrl());
-        $this->assertEquals('License', $tag->getLicenseName());
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag\GenericTag', $tag);
+        $this->assertEquals('var', $tag->getName());
+        $this->assertEquals('string', $tag->getContent());
     }
 }

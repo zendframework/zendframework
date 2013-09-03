@@ -7,15 +7,18 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Code\Reflection\DocBlock\Tag;
+namespace ZendTest\Code\Generator\TestAsset;
 
 use Zend\Code\Generic\Prototype\PrototypeInterface;
 
-interface TagInterface extends PrototypeInterface
+class PrototypeClass implements PrototypeInterface
 {
     /**
-     * @param  string $content
-     * @return void
+     * @return string
      */
-    public function initialize($content);
+    public function getName()
+    {
+        return 'prototype';
+    }
+
 }

@@ -9,7 +9,7 @@
 
 namespace ZendTest\Code\Generator\DocBlock\Tag;
 
-use Zend\Code\Generator\DocBlock\Tag\ReturnTag;
+use Zend\Code\Generator\DocBlock\Tag\ThrowsTag;
 use Zend\Code\Generator\DocBlock\TagManager;
 use Zend\Code\Reflection\DocBlockReflection;
 
@@ -17,10 +17,10 @@ use Zend\Code\Reflection\DocBlockReflection;
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
-class ReturnTagTest extends \PHPUnit_Framework_TestCase
+class ThrowsTagTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ReturnTag
+     * @var ThrowsTag
      */
     protected $tag;
     /**
@@ -30,7 +30,7 @@ class ReturnTagTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->tag = new ReturnTag();
+        $this->tag = new ThrowsTag();
         $this->tagmanager = new TagManager();
         $this->tagmanager->initializeDefaultTags();
     }
@@ -43,25 +43,25 @@ class ReturnTagTest extends \PHPUnit_Framework_TestCase
 
     public function testNameIsCorrect()
     {
-        $this->assertEquals('return', $this->tag->getName());
+        $this->assertEquals('throws', $this->tag->getName());
     }
 
-    public function testReturnProducesCorrectDocBlockLine()
+    public function testParamProducesCorrectDocBlockLine()
     {
-        $this->tag->setTypes('string|int');
-        $this->tag->setDescription('bar bar bar');
-        $this->assertEquals('@return string|int bar bar bar', $this->tag->generate());
+        $this->tag->setTypes('Exception\\MyException');
+        $this->tag->setDescription('description');
+        $this->assertEquals('@throws Exception\\MyException description', $this->tag->generate());
     }
 
     public function testCreatingTagFromReflection()
     {
-        $docreflection = new DocBlockReflection('/** @return int The return');
-        $reflectionTag = $docreflection->getTag('return');
+        $docreflection = new DocBlockReflection('/** @throws Exception\Invalid description');
+        $reflectionTag = $docreflection->getTag('throws');
 
-        /** @var ReturnTag $tag */
+        /** @var ThrowsTag $tag */
         $tag = $this->tagmanager->createTagFromReflection($reflectionTag);
-        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag\ReturnTag', $tag);
-        $this->assertEquals('The return', $tag->getDescription());
-        $this->assertEquals('int', $tag->getTypesAsString());
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag\ThrowsTag', $tag);
+        $this->assertEquals('description', $tag->getDescription());
+        $this->assertEquals('Exception\Invalid', $tag->getTypesAsString());
     }
 }

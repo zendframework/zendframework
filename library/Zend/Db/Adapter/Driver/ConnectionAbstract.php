@@ -41,7 +41,7 @@ abstract class ConnectionAbstract implements ConnectionInterface, Profiler\Profi
     /**
      * Disconnect
      *
-     * @return Connection
+     * @return self
      */
     public function disconnect()
     {
@@ -106,7 +106,7 @@ abstract class ConnectionAbstract implements ConnectionInterface, Profiler\Profi
 
     /**
      * @param array $connectionParameters
-     * @return Connection
+     * @return self
      */
     public function setConnectionParameters(array $connectionParameters)
     {
@@ -117,7 +117,7 @@ abstract class ConnectionAbstract implements ConnectionInterface, Profiler\Profi
 
     /**
      * @param Profiler\ProfilerInterface $profiler
-     * @return Connection
+     * @return self
      */
     public function setProfiler(Profiler\ProfilerInterface $profiler)
     {

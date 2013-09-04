@@ -1154,6 +1154,7 @@ class Client implements Stdlib\DispatchableInterface
         }
 
         // Merge the headers of the request (if any)
+        // here we need right 'http field' and not lowercase letters
         $requestHeaders = $this->getRequest()->getHeaders();
         foreach ($requestHeaders as $requestHeaderElement) {
             $headers[$requestHeaderElement->getFieldName()] = $requestHeaderElement->getFieldValue();

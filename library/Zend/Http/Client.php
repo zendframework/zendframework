@@ -905,7 +905,7 @@ class Client implements Stdlib\DispatchableInterface
                     $response->setCleanup(true);
                 }
             } else {
-                $response = Response::fromString($response);
+                $response = $this->getResponse()->fromString($response);
             }
 
             // Get the cookies from response (if any)

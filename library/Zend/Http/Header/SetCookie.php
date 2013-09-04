@@ -205,13 +205,9 @@ class SetCookie implements MultipleHeaderInterface
             return '';
         }
 
-        $value = $this->getValue();
-        if (strpos($value, '"')!==false) {
-            $value = '"'.urlencode(str_replace('"', '', $value)).'"';
-        } else {
-            $value = urlencode($value);
-        }
-        $fieldValue = $this->getName() . '=' . $value;
+        $value = urlencode($this->getValue());
+
+        $fieldValue = $this->getName() . '="' . $value .'"';
 
         $version = $this->getVersion();
         if ($version!==null) {

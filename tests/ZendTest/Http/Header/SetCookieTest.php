@@ -306,6 +306,26 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($cookie->getFieldName() . ': ' . $expected, $cookie->toString());
     }
 
+    public function testSetJsonValue()
+    {
+		$cookieName ="fooCookie";
+		$jsonData = json_encode(array('foo'=>'bar'));
+
+		$cookie= new SetCookie($cookieName,$jsonData);
+
+		$regExp = sprintf('#^%s="%s"#',$cookieName,urlencode($jsonData));
+		$this->assertRegExp($regExp,$cookie->getFieldValue());
+
+		$cookieName ="fooCookie";
+		$jsonData = json_encode(array('foo'=>'bar'));
+
+		$cookie= new SetCookie($cookieName,$jsonData);
+		$cookie->setDomain('example.org');
+
+		$regExp = sprintf('#^%s="%s"; Domain=#',$cookieName,urlencode($jsonData));
+		$this->assertRegExp($regExp,$cookie->getFieldValue());
+    }
+
     /**
      * Provide valid cookie strings with information about them
      *

@@ -308,22 +308,22 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
 
     public function testSetJsonValue()
     {
-		$cookieName ="fooCookie";
-		$jsonData = json_encode(array('foo'=>'bar'));
+        $cookieName ="fooCookie";
+        $jsonData = json_encode(array('foo'=>'bar'));
 
-		$cookie= new SetCookie($cookieName,$jsonData);
+        $cookie= new SetCookie($cookieName,$jsonData);
 
-		$regExp = sprintf('#^%s="%s"#',$cookieName,urlencode($jsonData));
-		$this->assertRegExp($regExp,$cookie->getFieldValue());
+        $regExp = sprintf('#^%s=%s#',$cookieName,urlencode($jsonData));
+        $this->assertRegExp($regExp,$cookie->getFieldValue());
 
-		$cookieName ="fooCookie";
-		$jsonData = json_encode(array('foo'=>'bar'));
+        $cookieName ="fooCookie";
+        $jsonData = json_encode(array('foo'=>'bar'));
 
-		$cookie= new SetCookie($cookieName,$jsonData);
-		$cookie->setDomain('example.org');
+        $cookie= new SetCookie($cookieName,$jsonData);
+        $cookie->setDomain('example.org');
 
-		$regExp = sprintf('#^%s="%s"; Domain=#',$cookieName,urlencode($jsonData));
-		$this->assertRegExp($regExp,$cookie->getFieldValue());
+        $regExp = sprintf('#^%s=%s; Domain=#',$cookieName,urlencode($jsonData));
+        $this->assertRegExp($regExp,$cookie->getFieldValue());
     }
 
     /**

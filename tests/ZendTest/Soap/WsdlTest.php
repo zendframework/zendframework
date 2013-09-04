@@ -126,7 +126,7 @@ class WsdlTest extends WsdlTestHelper
     public function testAddMessage($parameters)
     {
         $messageParts = array();
-        foreach($parameters as $i => $parameter) {
+        foreach ($parameters as $i => $parameter) {
             $messageParts['parameter'.$i] = $this->wsdl->getType($parameter);
         }
 
@@ -156,7 +156,7 @@ class WsdlTest extends WsdlTestHelper
     public function testAddComplexMessage($parameters)
     {
         $messageParts = array();
-        foreach($parameters as $i => $parameter) {
+        foreach ($parameters as $i => $parameter) {
             $messageParts['parameter'.$i] = array(
                 'type'      => $this->wsdl->getType($parameter),
                 'name'      => 'parameter'.$i
@@ -851,7 +851,7 @@ class WsdlTest extends WsdlTestHelper
         $this->assertEquals('sequence', $nodes->item(0)->firstChild->localName);
 
         $n = 0;
-        foreach($element['sequence'] as $elementDefinition) {
+        foreach ($element['sequence'] as $elementDefinition) {
             $n++;
             $elementNode = $this->xpath->query('xsd:element[@name="'.$elementDefinition['name'].'"]', $nodes->item(0)->firstChild);
             $this->assertEquals($elementDefinition['type'], $elementNode->item(0)->getAttribute('type'));

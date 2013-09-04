@@ -604,7 +604,7 @@ class Di implements DependencyInjectionInterface
             if (array_key_exists('parameters', $iConfig['requestedClass'])) {
                 $newParameters = array();
 
-                foreach($iConfig['requestedClass']['parameters'] as $name=>$parameter) {
+                foreach ($iConfig['requestedClass']['parameters'] as $name=>$parameter) {
                     $newParameters[$requestedClass.'::'.$method.'::'.$name] = $parameter;
                 }
 

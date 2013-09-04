@@ -463,11 +463,11 @@ class FactoryTest extends TestCase
 
         $validatorArray = $validatorChain->getValidators();
         $found = false;
-        foreach($validatorArray as $validator) {
+        foreach ($validatorArray as $validator) {
             $validatorInstance = $validator['instance'];
             $this->assertInstanceOf('Zend\Validator\ValidatorInterface', $validatorInstance);
 
-            if($validatorInstance instanceof \ZendTest\Validator\TestAsset\ConcreteValidator) {
+            if ($validatorInstance instanceof \ZendTest\Validator\TestAsset\ConcreteValidator) {
                 $found = true;
                 break;
             }

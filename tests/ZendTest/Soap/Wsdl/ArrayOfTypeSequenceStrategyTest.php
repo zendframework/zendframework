@@ -221,7 +221,7 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
 
 
         // array of class a and class b
-        foreach(array(
+        foreach (array(
             'ArrayOfComplexTypeB'       =>      'ComplexTypeB',
             'ArrayOfComplexTypeA'       =>      'ComplexTypeA'
                 ) as $arrayTypeName => $typeName) {

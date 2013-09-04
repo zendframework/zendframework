@@ -486,7 +486,7 @@ class FactoryTest extends TestCase
         // Filters should pop in the following order:
         // string_to_upper (1001), string_to_lower (1000), string_trim (999)
         $index = 0;
-        foreach($input->getFilterChain()->getFilters() as $filter) {
+        foreach ($input->getFilterChain()->getFilters() as $filter) {
             switch($index) {
                 case 0:
                     $this->assertInstanceOf('Zend\Filter\StringToUpper', $filter);

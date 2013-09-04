@@ -813,7 +813,7 @@ class Wsdl
      */
     protected function arrayToAttributes(\DOMNode $node, array $attributes, $withSanitizer = true)
     {
-        foreach($attributes as $attributeName => $attributeValue) {
+        foreach ($attributes as $attributeName => $attributeValue) {
             if ($withSanitizer) {
                 $this->setAttributeWithSanitization($node, $attributeName, $attributeValue);
             } else {

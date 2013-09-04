@@ -11,6 +11,7 @@
 namespace ZendTest\Http;
 
 use ReflectionClass;
+use Zend\Uri\Http;
 use Zend\Http\Client;
 use Zend\Http\Cookies;
 use Zend\Http\Exception;

@@ -108,7 +108,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $setCookieHeader->setSecure(true);
         $setCookieHeader->setHttponly(true);
 
-        $target = 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
+        $target = 'myname="myvalue"; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
             . ' Domain=docs.foo.com; Path=/accounts;'
             . ' Secure; HttpOnly';
 
@@ -126,7 +126,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $setCookieHeader->setSecure(true);
         $setCookieHeader->setHttponly(true);
 
-        $target = 'Set-Cookie: myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
+        $target = 'Set-Cookie: myname="myvalue"; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
             . ' Domain=docs.foo.com; Path=/accounts;'
             . ' Secure; HttpOnly';
 
@@ -147,7 +147,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $appendCookie = new SetCookie('othername', 'othervalue');
         $headerLine = $setCookieHeader->toStringMultipleHeaders(array($appendCookie));
 
-        $target = 'Set-Cookie: myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
+        $target = 'Set-Cookie: myname="myvalue"; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
             . ' Domain=docs.foo.com; Path=/accounts;'
             . ' Secure; HttpOnly, othername=othervalue';
         $this->assertEquals($target, $headerLine);
@@ -164,7 +164,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $setCookieHeader->setSecure(true);
         $setCookieHeader->setHttponly(true);
 
-        $target = 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
+        $target = 'myname="myvalue"; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
             . ' Domain=docs.foo.com; Path=/accounts;'
             . ' Secure; HttpOnly';
         $this->assertSame($target, $setCookieHeader->getFieldValue()); // attributes set
@@ -174,7 +174,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $setCookieHeader->setPath(NULL);
         $setCookieHeader->setSecure(NULL);
         $setCookieHeader->setHttponly(NULL);
-        $this->assertSame('myname=myvalue', $setCookieHeader->getFieldValue()); // attributes unset
+        $this->assertSame('myname="myvalue"', $setCookieHeader->getFieldValue()); // attributes unset
 
         $setCookieHeader->setValue(NULL);
         $this->assertSame('myname=', $setCookieHeader->getFieldValue());
@@ -199,7 +199,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $setCookieHeader->setSecure(true);
         $setCookieHeader->setHttponly(true);
 
-        $target = 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
+        $target = 'myname="myvalue"; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
             . ' Domain=docs.foo.com; Path=/accounts;'
             . ' Secure; HttpOnly';
         $this->assertSame($target, $setCookieHeader->getFieldValue()); // not empty
@@ -220,7 +220,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $setCookieHeader->setExpires(0);
         $this->assertSame('Thu, 01-Jan-1970 00:00:00 GMT', $setCookieHeader->getExpires());
 
-        $target = 'myname=myvalue; Expires=Thu, 01-Jan-1970 00:00:00 GMT';
+        $target = 'myname="myvalue"; Expires=Thu, 01-Jan-1970 00:00:00 GMT';
         $this->assertSame($target, $setCookieHeader->getFieldValue());
     }
 
@@ -237,7 +237,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('Thu, 01-Jan-1970 00:00:00 GMT', $setCookieHeader->getExpires());
         $this->assertSame(0, $setCookieHeader->getExpires(true));
 
-        $target = 'myname=myvalue; Expires=Thu, 01-Jan-1970 00:00:00 GMT';
+        $target = 'myname="myvalue"; Expires=Thu, 01-Jan-1970 00:00:00 GMT';
         $this->assertSame($target, $setCookieHeader->getFieldValue());
     }
 
@@ -313,7 +313,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
 
         $cookie= new SetCookie($cookieName,$jsonData);
 
-        $regExp = sprintf('#^%s=%s#',$cookieName,urlencode($jsonData));
+        $regExp = sprintf('#^%s="%s"#',$cookieName,urlencode($jsonData));
         $this->assertRegExp($regExp,$cookie->getFieldValue());
 
         $cookieName ="fooCookie";
@@ -322,7 +322,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $cookie= new SetCookie($cookieName,$jsonData);
         $cookie->setDomain('example.org');
 
-        $regExp = sprintf('#^%s=%s; Domain=#',$cookieName,urlencode($jsonData));
+        $regExp = sprintf('#^%s="%s"; Domain=#',$cookieName,urlencode($jsonData));
         $this->assertRegExp($regExp,$cookie->getFieldValue());
     }
 

@@ -601,7 +601,7 @@ class SetCookie implements MultipleHeaderInterface
                     'The SetCookie multiple header implementation can only accept an array of SetCookie headers'
                 );
             }
-            $headerLine .= ', ' . $header->getFieldValue();
+            $headerLine .= "\n" . $header->toString();
         }
         return $headerLine;
     }

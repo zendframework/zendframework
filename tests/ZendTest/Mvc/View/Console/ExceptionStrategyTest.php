@@ -165,7 +165,7 @@ class ExceptionStrategyTest extends TestCase
     {
         $errors = array(Application::ERROR_CONTROLLER_NOT_FOUND, Application::ERROR_CONTROLLER_INVALID, Application::ERROR_ROUTER_NO_MATCH);
 
-        foreach($errors as $error) {
+        foreach ($errors as $error) {
             $events = new EventManager();
             $events->attachAggregate($this->strategy);
 
@@ -184,7 +184,7 @@ class ExceptionStrategyTest extends TestCase
     {
         $errors = array(Application::ERROR_EXCEPTION, 'user-defined-error');
 
-        foreach($errors as $error) {
+        foreach ($errors as $error) {
             $events = new EventManager();
             $events->attachAggregate($this->strategy);
 
@@ -219,7 +219,7 @@ class ExceptionStrategyTest extends TestCase
 
         $events->trigger($event, null, array('exception'=>$exception)); //$this->strategy->prepareExceptionViewModel($event);
 
-        foreach($messages as $message) {
+        foreach ($messages as $message) {
             $this->assertContains($message, $event->getResult()->getResult(), sprintf('Not all errors are rendered'));
         }
     }

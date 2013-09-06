@@ -379,6 +379,30 @@ document.write(bar.strlen());');
         $this->assertContains('    <!--[if lt IE 7]>', $test);
     }
 
+    public function testConditionalScriptNoIE()
+    {
+        $this->helper->setAllowArbitraryAttributes(true);
+        $this->helper->appendFile(
+            '/js/foo.js', 'text/javascript', array('conditional' => '!IE')
+        );
+        $test = $this->helper->toString();
+
+        $this->assertContains('<!--[if !IE]><!--><', $test);
+        $this->assertContains('<!--<![endif]-->', $test);
+    }
+
+    public function testConditionalScriptNoIEWidthSpace()
+    {
+        $this->helper->setAllowArbitraryAttributes(true);
+        $this->helper->appendFile(
+            '/js/foo.js', 'text/javascript', array('conditional' => '! IE')
+        );
+        $test = $this->helper->toString();
+
+        $this->assertContains('<!--[if ! IE]><!--><', $test);
+        $this->assertContains('<!--<![endif]-->', $test);
+    }
+
     /**
      * @issue ZF-5435
      */

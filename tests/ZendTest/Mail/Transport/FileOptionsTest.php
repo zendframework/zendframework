@@ -35,7 +35,7 @@ class FileOptionsTest extends \PHPUnit_Framework_TestCase
         $callback = $this->options->getCallback();
         $this->assertTrue(is_callable($callback));
         $test     = call_user_func($callback, '');
-        $this->assertRegExp('#^ZendMail_\d+_\d+\.tmp$#', $test);
+        $this->assertRegExp('#^ZendMail_\d+_\d+\.eml$#', $test);
     }
 
     public function testPathIsMutable()

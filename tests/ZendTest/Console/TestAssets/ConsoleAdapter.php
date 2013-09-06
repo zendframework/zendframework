@@ -32,7 +32,7 @@ class ConsoleAdapter extends AbstractAdapter
      */
     public function readLine($maxLength = 2048)
     {
-        if($this->autoRewind) {
+        if ($this->autoRewind) {
             rewind($this->stream);
         }
         $line = stream_get_line($this->stream, $maxLength, PHP_EOL);
@@ -47,7 +47,7 @@ class ConsoleAdapter extends AbstractAdapter
      */
     public function readChar($mask = null)
     {
-        if($this->autoRewind) {
+        if ($this->autoRewind) {
             rewind($this->stream);
         }
         do {

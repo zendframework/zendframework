@@ -135,6 +135,16 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testFactoryInstantiateAdapterWithPluginsWithoutEventsCapableInterfaceThrowsException()
+    {
+        // The BlackHole adapter doesn't implement EventsCapableInterface
+        $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
+        Cache\StorageFactory::factory(array(
+            'adapter' => 'blackhole',
+            'plugins' => array('Serializer'),
+        ));
+    }
+
     public function testFactoryWithPluginsAndOptionsArray()
     {
         $factory = array(

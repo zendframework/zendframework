@@ -9,6 +9,8 @@
  */
 namespace ZendTest\Test\PHPUnit\Controller;
 
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Zend\Console\Console;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
@@ -26,7 +28,8 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 {
     public function tearDownCacheDir()
     {
-        $cacheDir = sys_get_temp_dir() . '/zf2-module-test';
+        vfsStreamWrapper::register();
+        $cacheDir = vfsStream::url('zf2-module-test');
         if (is_dir($cacheDir)) {
             static::rmdir($cacheDir);
         }
@@ -304,5 +307,20 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->getRequest()->setContent('my content');
         $this->dispatch('/tests', 'PUT', array('a' => 1));
         $this->assertEquals('a=1', $this->getRequest()->getContent());
+    }
+
+    public function testAssertTemplateName()
+    {
+        $this->dispatch('/tests');
+
+        $this->assertTemplateName('layout/layout');
+        $this->assertTemplateName('baz/index/unittests');
+    }
+
+    public function testAssertNotTemplateName()
+    {
+        $this->dispatch('/tests');
+
+        $this->assertNotTemplateName('template/does/not/exist');
     }
 }

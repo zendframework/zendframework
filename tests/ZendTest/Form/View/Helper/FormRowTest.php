@@ -373,6 +373,31 @@ class FormRowTest extends TestCase
         $this->assertRegexp('#^<button type="button" name="button" value=""\/?>foo</button>$#', $markup);
     }
 
+    public function testAssertLabelHtmlEscapeIsOnByDefault()
+    {
+        $element = new Element('fooname');
+        $escapeHelper = $this->renderer->getHelperPluginManager()->get('escapeHtml');
+
+        $label = '<span>foo</span>';
+        $element->setLabel($label);
+
+        $markup = $this->helper->__invoke($element);
+
+        $this->assertContains($escapeHelper->__invoke($label), $markup);
+    }
+
+    public function testCanDisableLabelHtmlEscape()
+    {
+        $label = '<span>foo</span>';
+        $element = new Element('fooname');
+        $element->setLabel($label);
+        $element->setLabelOptions(array('disable_html_escape' => true));
+
+        $markup = $this->helper->__invoke($element);
+
+        $this->assertContains($label, $markup);
+    }
+
     public function testCanSetLabelPositionBeforeInvoke()
     {
         $element = new Element('foo');

@@ -150,6 +150,12 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $target = 'Set-Cookie: myname="myvalue"; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
             . ' Domain=docs.foo.com; Path=/accounts;'
             . ' Secure; HttpOnly, othername="othervalue"';
+        $this->assertNotEquals($target, $headerLine);
+
+        $target = 'Set-Cookie: myname="myvalue"; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
+            . ' Domain=docs.foo.com; Path=/accounts;'
+            . ' Secure; HttpOnly';
+        $target.= 'Set-Cookie: othername="othervalue"';
         $this->assertEquals($target, $headerLine);
     }
 

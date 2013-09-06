@@ -100,8 +100,9 @@ class SetCookie implements MultipleHeaderInterface
                 $keyValuePairs = preg_split('#;\s*#', $headerLine);
 
                 foreach ($keyValuePairs as $keyValue) {
-                    if (strpos($keyValue, '=')) {
-                        list($headerKey, $headerValue) = preg_split('#=\s*#', $keyValue, 2);
+                    if (preg_match('#^(?<headerKey>[^=]+)=\s*("?)(?<headerValue>[^"]+)\2#',$keyValue,$matches)) {
+                        $headerKey  = $matches['headerKey'];
+                        $headerValue= $matches['headerValue'];
                     } else {
                         $headerKey = $keyValue;
                         $headerValue = null;
@@ -205,13 +206,9 @@ class SetCookie implements MultipleHeaderInterface
             return '';
         }
 
-        $value = $this->getValue();
-        if (strpos($value, '"')!==false) {
-            $value = '"'.urlencode(str_replace('"', '', $value)).'"';
-        } else {
-            $value = urlencode($value);
-        }
-        $fieldValue = $this->getName() . '=' . $value;
+        $value = urlencode($this->getValue());
+
+        $fieldValue = $this->getName() . '="' . $value . '"';
 
         $version = $this->getVersion();
         if ($version!==null) {
@@ -604,7 +601,7 @@ class SetCookie implements MultipleHeaderInterface
                     'The SetCookie multiple header implementation can only accept an array of SetCookie headers'
                 );
             }
-            $headerLine .= ', ' . $header->getFieldValue();
+            $headerLine .= "\n" . $header->toString();
         }
         return $headerLine;
     }

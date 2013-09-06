@@ -206,8 +206,6 @@ class Code128 extends AbstractObject
         }
 
         $currentCharset = null;
-        $sum = 0;
-        $fak = 0;
         $result = array();
 
         for ($pos = 0; $pos < strlen($string); $pos++) {

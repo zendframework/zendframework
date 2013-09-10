@@ -525,6 +525,10 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
                 // No value; clear value in this input
                 if ($input instanceof InputFilterInterface) {
                     $input->setData(array());
+                    if ($input instanceof CollectionInputFilter) {
+                        $input->clearValues();
+                        $input->clearRawValues();
+                    }
                     continue;
                 }
 

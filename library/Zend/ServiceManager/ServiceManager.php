@@ -433,7 +433,7 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * Resolve the alias for the given canonical name
      *
-     * @param string $cName The canonical name to resolve
+     * @param  string $cName The canonical name to resolve
      * @return string The resolved canonical name
      */
     protected function resolveAlias($cName)

@@ -810,4 +810,25 @@ class ServiceManagerTest extends TestCase
         $this->assertInstanceOf('stdClass', array_shift($fooDelegator->instances));
         $this->assertSame($fooDelegator, array_shift($barDelegator->instances));
     }
+
+    /**
+     * @covers Zend\ServiceMnager\ServiceManager::resolveAlias
+     */
+    public function testCircularAliasReferenceThrowsException()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\CircularReferenceException');
+
+        // Only affects service managers that allow overwriting definitions
+        $this->serviceManager->setAllowOverride(true);
+        $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
+        $this->serviceManager->setAlias('foo-alias', 'foo-service');
+        $this->serviceManager->setAlias('bar-alias', 'foo-alias');
+        $this->serviceManager->setAlias('baz-alias', 'bar-alias');
+
+        // This will now cause a cyclic reference
+        $this->serviceManager->setAlias('foo-alias', 'bar-alias');
+
+        // This should throw the exception
+        $this->serviceManager->get('baz-alias');
+    }
 }

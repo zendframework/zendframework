@@ -10,6 +10,7 @@
 namespace Zend\ServiceManager;
 
 use ReflectionClass;
+use Zend\ServiceManager\Exception\CircularReferenceException;
 
 class ServiceManager implements ServiceLocatorInterface
 {
@@ -430,6 +431,31 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Resolve the alias for the given canonical name
+     *
+     * @param string $cName The canonical name to resolve
+     * @return string The resolved canonical name
+     */
+    protected function resolveAlias($cName)
+    {
+        $stack = array();
+
+        while ($this->hasAlias($cName)) {
+            if (isset($stack[$cName])) {
+                throw new CircularReferenceException(sprintf(
+                    'Circular alias reference: %s -> %s',
+                    implode(' -> ', $stack), $cName
+                ));
+            }
+
+            $stack[$cName] = $cName;
+            $cName = $this->aliases[$cName];
+        }
+
+        return $cName;
+    }
+
+    /**
      * Retrieve a registered instance
      *
      * @param  string  $name
@@ -448,12 +474,9 @@ class ServiceManager implements ServiceLocatorInterface
 
         $isAlias = false;
 
-        if (isset($this->aliases[$cName])) {
+        if ($this->hasAlias($cName)) {
             $isAlias = true;
-
-            do {
-                $cName = $this->aliases[$cName];
-            } while ($this->hasAlias($cName));
+            $cName = $this->resolveAlias($cName);
         }
 
         $instance = null;

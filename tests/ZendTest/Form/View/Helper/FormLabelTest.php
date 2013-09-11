@@ -184,4 +184,21 @@ class FormLabelTest extends CommonTestCase
         $this->helper->setTranslatorEnabled(false);
         $this->assertFalse($this->helper->isTranslatorEnabled());
     }
+
+    public function testLabelIsEscapedByDefault()
+    {
+        $element = new Element('foo');
+        $element->setLabel('The value <a>for</a> foo:');
+        $markup = $this->helper->__invoke($element);
+        $this->assertNotContains('<a>for</a>', $markup);
+    }
+
+    public function testCanDisableLabelHtmlEscape()
+    {
+        $element = new Element('foo');
+        $element->setLabel('The value <a>for</a> foo:');
+        $element->setLabelOptions(array('disable_html_escape' => true));
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('<a>for</a>', $markup);
+    }
 }

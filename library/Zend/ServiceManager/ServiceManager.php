@@ -10,7 +10,6 @@
 namespace Zend\ServiceManager;
 
 use ReflectionClass;
-use Zend\ServiceManager\Exception\CircularReferenceException;
 
 class ServiceManager implements ServiceLocatorInterface
 {
@@ -442,7 +441,7 @@ class ServiceManager implements ServiceLocatorInterface
 
         while ($this->hasAlias($cName)) {
             if (isset($stack[$cName])) {
-                throw new CircularReferenceException(sprintf(
+                throw new Exception\CircularReferenceException(sprintf(
                     'Circular alias reference: %s -> %s',
                     implode(' -> ', $stack), $cName
                 ));

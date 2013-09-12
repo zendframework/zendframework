@@ -754,6 +754,38 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Ensure the alias definition will not result in a circular reference
+     *
+     * @param  string $alias
+     * @param  string $nameOrAlias
+     * @throws Exception\CircularReferenceException
+     * @return self
+     */
+    protected function checkForCircularAliasReference($alias, $nameOrAlias)
+    {
+        $aliases = $this->aliases;
+        $aliases[$alias] = $nameOrAlias;
+        $stack = array();
+
+        while (isset($aliases[$alias])) {
+            if (isset($stack[$alias])) {
+                throw new Exception\CircularReferenceException(sprintf(
+                    'The alias definition "%s" : "%s" results in a circular reference: "%s" -> "%s"',
+                    $alias,
+                    $nameOrAlias,
+                    implode('" -> "', $stack),
+                    $alias
+                ));
+            }
+
+            $stack[$alias] = $alias;
+            $alias = $aliases[$alias];
+        }
+
+        return $this;
+    }
+
+    /**
      * @param  string $alias
      * @param  string $nameOrAlias
      * @return ServiceManager
@@ -779,6 +811,10 @@ class ServiceManager implements ServiceLocatorInterface
                 $cAlias,
                 $alias
             ));
+        }
+
+        if ($this->hasAlias($alias)) {
+            $this->checkForCircularAliasReference($cAlias, $nameOrAlias);
         }
 
         $this->aliases[$cAlias] = $nameOrAlias;

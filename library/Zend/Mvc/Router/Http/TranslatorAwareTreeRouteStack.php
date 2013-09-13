@@ -9,7 +9,7 @@
 
 namespace Zend\Mvc\Router\Http;
 
-use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorInterface;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Stdlib\RequestInterface as Request;
 
@@ -21,7 +21,7 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
     /**
      * Translator used for translatable segments.
      *
-     * @var Translator
+     * @var TranslatorInterface
      */
     protected $translator;
 
@@ -88,11 +88,11 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
      * setTranslator(): defined by TranslatorAwareInterface.
      *
      * @see    TranslatorAwareInterface::setTranslator()
-     * @param  Translator $translator
-     * @param  string     $textDomain
+     * @param  TranslatorInterface $translator
+     * @param  string              $textDomain
      * @return TreeRouteStack
      */
-    public function setTranslator(Translator $translator = null, $textDomain = null)
+    public function setTranslator(TranslatorInterface $translator = null, $textDomain = null)
     {
         $this->translator = $translator;
 
@@ -107,7 +107,7 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
      * getTranslator(): defined by TranslatorAwareInterface.
      *
      * @see    TranslatorAwareInterface::getTranslator()
-     * @return Translator
+     * @return TranslatorInterface
      */
     public function getTranslator()
     {

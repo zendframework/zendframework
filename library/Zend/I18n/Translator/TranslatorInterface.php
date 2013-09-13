@@ -7,33 +7,26 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Mvc\I18n;
+namespace Zend\I18n\Translator;
 
-use Zend\I18n\Translator\TranslatorInterface;
-use Zend\Validator\Translator\TranslatorInterface as ValidatorTranslatorInterface;
-
-class DummyTranslator implements
-    TranslatorInterface,
-    ValidatorTranslatorInterface
+/**
+ * Translator interface.
+ */
+interface TranslatorInterface
 {
     /**
-     * translate(): defined by ValidatorTranslatorInterface()
+     * Translate a message.
      *
-     * @see    ValidatorTranslatorInterface::translate()
      * @param  string $message
      * @param  string $textDomain
      * @param  string $locale
      * @return string
      */
-    public function translate($message, $textDomain = 'default', $locale = null)
-    {
-        return $message;
-    }
+    public function translate($message, $textDomain = 'default', $locale = null);
 
     /**
-     * translatePlural(): defined by TranslatorInterface()
+     * Translate a plural message.
      *
-     * @see    TranslatorInterface::translatePlural()
      * @param  string                         $singular
      * @param  string                         $plural
      * @param  int                            $number
@@ -48,7 +41,5 @@ class DummyTranslator implements
         $number,
         $textDomain = 'default',
         $locale = null
-    ) {
-        return ($number === 1 ? $singular : $plural);
-    }
+    );
 }

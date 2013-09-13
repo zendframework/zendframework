@@ -25,7 +25,7 @@ class TranslatorServiceFactory extends I18nTranslatorServiceFactory
         // Configure the translator
         $config = $serviceLocator->get('Config');
 
-        if (!isset($config['translator']) || !class_exists('Zend\I18n\Translator')) {
+        if (!isset($config['translator'])) {
             return new DummyTranslator();
         }
 

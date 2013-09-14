@@ -212,6 +212,10 @@ class MenuTest extends AbstractTest
 
     public function testTranslationUsingZendTranslate()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $translator = $this->_getTranslator();
         $this->_helper->setTranslator($translator);
 
@@ -221,6 +225,10 @@ class MenuTest extends AbstractTest
 
     public function testTranslationUsingZendTranslateAdapter()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $translator = $this->_getTranslator();
         $this->_helper->setTranslator($translator);
 

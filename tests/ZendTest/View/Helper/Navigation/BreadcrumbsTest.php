@@ -165,6 +165,10 @@ class BreadcrumbsTest extends AbstractTest
 
     public function testTranslationUsingZendTranslate()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->_helper->setTranslator($this->_getTranslator());
 
         $expected = $this->_getExpected('bc/translated.html');
@@ -173,6 +177,10 @@ class BreadcrumbsTest extends AbstractTest
 
     public function testTranslationUsingZendTranslateAdapter()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $translator = $this->_getTranslator();
         $this->_helper->setTranslator($translator);
 

@@ -208,6 +208,11 @@ class FormTest extends TestCase
 
     public function testHasValidatedFlag()
     {
+        if (!extension_loaded('intl')) {
+            // Required by \Zend\I18n\Validator\Float
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $form = new TestAsset\NewProductForm();
 
         $this->assertFalse($form->hasValidated());
@@ -247,6 +252,11 @@ class FormTest extends TestCase
 
     public function testSpecifyingValidationGroupForcesPartialValidation()
     {
+        if (!extension_loaded('intl')) {
+            // Required by \Zend\I18n\Validator\Float
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->populateForm();
         $invalidSet = array(
             'foo' => 'a',
@@ -264,6 +274,11 @@ class FormTest extends TestCase
 
     public function testSpecifyingValidationGroupForNestedFieldsetsForcesPartialValidation()
     {
+        if (!extension_loaded('intl')) {
+            // Required by \Zend\I18n\Validator\Float
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $form = new TestAsset\NewProductForm();
         $form->setData(array(
             'product' => array(
@@ -985,6 +1000,11 @@ class FormTest extends TestCase
 
     public function testCanCorrectlyExtractDataFromOneToManyRelationship()
     {
+        if (!extension_loaded('intl')) {
+            // Required by \Zend\I18n\Validator\Float
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $product = $this->getOneToManyEntity();
 
         $form = new TestAsset\NewProductForm();
@@ -1472,6 +1492,11 @@ class FormTest extends TestCase
 
     public function testPreserveEntitiesBoundToCollectionAfterValidation()
     {
+        if (!extension_loaded('intl')) {
+            // Required by \Zend\I18n\Validator\Float
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->form->setInputFilter(new \Zend\InputFilter\InputFilter());
         $fieldset = new TestAsset\ProductCategoriesFieldset();
         $fieldset->setUseAsBaseFieldset(true);

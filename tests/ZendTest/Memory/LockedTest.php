@@ -45,13 +45,13 @@ class LockedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($memObject->getRef(), '012_456789');
 
         // value property
-        $this->assertEquals((string)$memObject->value, '012_456789');
+        $this->assertEquals((string) $memObject->value, '012_456789');
 
         $memObject->value[7] = '_';
-        $this->assertEquals((string)$memObject->value, '012_456_89');
+        $this->assertEquals((string) $memObject->value, '012_456_89');
 
         $memObject->value = 'another value';
-        $this->assertEquals((string)$memObject->value, 'another value');
+        $this->assertEquals((string) $memObject->value, 'another value');
     }
 
     /**

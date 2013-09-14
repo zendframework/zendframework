@@ -213,7 +213,7 @@ class FormSelectTest extends CommonTestCase
         $element->setValueOptions($options);
         $markup = $this->helper->render($element);
         list($value, $label) = each($options);
-        $this->assertRegexp(sprintf('#option .*?value="%s"#', (string)$value), $markup);
+        $this->assertRegexp(sprintf('#option .*?value="%s"#', (string) $value), $markup);
     }
 
     public function testInvokeWithNoElementChainsHelper()

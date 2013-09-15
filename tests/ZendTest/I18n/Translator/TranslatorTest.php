@@ -36,6 +36,10 @@ class TranslatorTest extends TestCase
 
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->originalLocale = Locale::getDefault();
         $this->translator     = new Translator();
 
@@ -46,7 +50,9 @@ class TranslatorTest extends TestCase
 
     public function tearDown()
     {
-        Locale::setDefault($this->originalLocale);
+        if (extension_loaded('intl')) {
+            Locale::setDefault($this->originalLocale);
+        }
     }
 
     public function testFactoryCreatesTranslator()

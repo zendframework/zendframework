@@ -259,20 +259,20 @@ class CollectionInputFilter extends InputFilter
     {
         return $this->collectionRawValues;
     }
-    
+
     /**
      * Clear collectionValues
-     * 
+     *
      * @access public
      */
     public function clearValues()
     {
         return $this->collectionValues = array();
     }
-    
+
     /**
      * Clear collectionRawValues
-     * 
+     *
      * @access public
      */
     public function clearRawValues()

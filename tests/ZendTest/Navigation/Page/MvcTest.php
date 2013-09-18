@@ -49,6 +49,21 @@ class MvcTest extends TestCase
     {
     }
 
+    public function testHrefGeneratedByRouterWithDefaultRoute()
+    {
+        $page = new Page\Mvc(array(
+            'label'      => 'foo',
+            'action'     => 'index',
+            'controller' => 'index'
+        ));
+        Page\Mvc::setDefaultRoute('default');
+        $page->setRouter($this->router);
+        $page->setAction('view');
+        $page->setController('news');
+
+        $this->assertEquals('/news/view', $page->getHref());
+    }
+
     public function testHrefGeneratedByRouterRequiresNoRoute()
     {
         $page = new Page\Mvc(array(

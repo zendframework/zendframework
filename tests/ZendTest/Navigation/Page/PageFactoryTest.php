@@ -15,12 +15,31 @@ use Zend\Navigation;
 /**
  * Tests Zend_Navigation_Page::factory()
  *
-/**
  * @group      Zend_Navigation
  */
 class PageFactoryTest extends \PHPUnit_Framework_TestCase
 {
 
+    public function testDetectFactoryPage()
+    {
+        AbstractPage::addFactory(function ($page) {
+            if (isset($page['factory_uri'])) {
+                return new \Zend\Navigation\Page\Uri($page);
+            } elseif (isset($page['factory_mvc'])) {
+                return new \Zend\Navigation\Page\Mvc($page);
+            }
+        });
+
+        $this->assertInstanceOf('Zend\\Navigation\\Page\\Uri', AbstractPage::factory(array(
+            'label' => 'URI Page',
+            'factory_uri' => '#'
+        )));
+
+        $this->assertInstanceOf('Zend\\Navigation\\Page\\Mvc', AbstractPage::factory(array(
+            'label' => 'URI Page',
+            'factory_mvc' => '#'
+        )));
+    }
 
     public function testDetectMvcPage()
     {

@@ -408,12 +408,12 @@ class Message
             	if(is_array($value) && isset($value[0])) {
             		switch($value[0]) {
             			case 'Content-Type':
-							$contentType = Header\ContentType::fromString('Content-Type: ' . $value[1]);
-							$headers->addHeader($contentType);
+                                        $contentType = Header\ContentType::fromString('Content-Type: ' . $value[1]);
+                                        $headers->addHeader($contentType);
             				break;
             			case 'Content-Transfer-Encoding':
-							$contentTE = Header\ContentTransferEncoding::fromString('Content-Transfer-Encoding: ' . $value[1]);
-							$headers->addHeader($contentTE);
+					$contentTE = Header\ContentTransferEncoding::fromString('Content-Transfer-Encoding: ' . $value[1]);
+					$headers->addHeader($contentTE);
             				break;
             			default:
             				$part_headers_fixed[$key] = $value;

@@ -405,22 +405,22 @@ class Message
             $part_headers = $part->getHeadersArray();
             $part_headers_fixed = array();
             foreach($part_headers as $key => $value) {
-            	if(is_array($value) && isset($value[0])) {
-            		switch($value[0]) {
-            			case 'Content-Type':
-                                        $contentType = Header\ContentType::fromString('Content-Type: ' . $value[1]);
-                                        $headers->addHeader($contentType);
-            				break;
-            			case 'Content-Transfer-Encoding':
-					$contentTE = Header\ContentTransferEncoding::fromString('Content-Transfer-Encoding: ' . $value[1]);
-					$headers->addHeader($contentTE);
-            				break;
-            			default:
-            				$part_headers_fixed[$key] = $value;
-            		}
-            	} else {
-            		$part_headers_fixed[$key] = $value;
-            	}
+                if(is_array($value) && isset($value[0])) {
+            	    switch($value[0]) {
+            		    case 'Content-Type':
+                            $contentType = Header\ContentType::fromString('Content-Type: ' . $value[1]);
+                            $headers->addHeader($contentType);
+            			    break;
+            		    case 'Content-Transfer-Encoding':
+					        $contentTE = Header\ContentTransferEncoding::fromString('Content-Transfer-Encoding: ' . $value[1]);
+					        $headers->addHeader($contentTE);
+            			    break;
+            		    default:
+            			    $part_headers_fixed[$key] = $value;
+            	    }
+                } else {
+            	    $part_headers_fixed[$key] = $value;
+                }
             }
             $headers->addHeaders($part_headers_fixed);
         }

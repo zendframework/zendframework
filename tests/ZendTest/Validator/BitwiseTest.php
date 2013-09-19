@@ -23,6 +23,55 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Bitwise::isvalid()
+     * @dataProvider constructDataProvider
+     */
+    public function testConstruct(array $args, array $options)
+    {
+        $validator = new Bitwise($args);
+
+        $this->assertSame($options['control'], $validator->getControl());
+        $this->assertSame($options['operator'], $validator->getOperator());
+        $this->assertSame($options['strict'], $validator->getStrict());
+    }
+
+    public function constructDataProvider()
+    {
+        return array(
+            array(
+                array(),
+                array('control' => 0, 'operator' => null, 'strict' => false),
+            ),
+            array(
+                array(0x1),
+                array('control' => 0x1, 'operator' => null, 'strict' => false),
+            ),
+            array(
+                array(0x1, Bitwise::OP_AND),
+                array('control' => 0x1, 'operator' => Bitwise::OP_AND, 'strict' => false),
+            ),
+            array(
+                array(0x1, Bitwise::OP_AND, true),
+                array('control' => 0x1, 'operator' => Bitwise::OP_AND, 'strict' => true),
+            ),
+
+            array(
+                array('control' => 0x1),
+                array('control' => 0x1, 'operator' => null, 'strict' => false),
+            ),
+            array(
+                array('control' => 0x1, 'operator' => Bitwise::OP_AND),
+                array('control' => 0x1, 'operator' => Bitwise::OP_AND, 'strict' => false),
+            ),
+            array(
+                array('control' => 0x1, 'operator' => Bitwise::OP_AND, 'strict' => true),
+                array('control' => 0x1, 'operator' => Bitwise::OP_AND, 'strict' => true),
+            ),
+        );
+
+    }
+
+    /**
+     * @covers Bitwise::isvalid()
      */
     public function testBitwiseAndNotStrict()
     {

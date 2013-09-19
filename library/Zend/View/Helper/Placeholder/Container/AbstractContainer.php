@@ -260,7 +260,7 @@ abstract class AbstractContainer extends ArrayObject
      * Prepend a value to the top of the container
      *
      * @param  mixed $value
-     * @return void
+     * @return AbstractContainer
      */
     public function prepend($value)
     {
@@ -268,6 +268,18 @@ abstract class AbstractContainer extends ArrayObject
         array_unshift($values, $value);
         $this->exchangeArray($values);
 
+        return $this;
+    }
+
+    /**
+     * Append a value to the end of the container
+     *
+     * @param  mixed $value
+     * @return AbstractContainer
+     */
+    public function append($value)
+    {
+        parent::append($value);
         return $this;
     }
 

@@ -97,4 +97,3 @@ class ContentTransferEncoding implements HeaderInterface
         return $this->transferEncoding;
     }
 }
-

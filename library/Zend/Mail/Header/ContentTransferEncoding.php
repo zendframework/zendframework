@@ -72,7 +72,7 @@ class ContentTransferEncoding implements HeaderInterface
      *
      * @param  string $transferEncoding
      * @throws Exception\InvalidArgumentException
-     * @return ContentTransferEncoding
+     * @return self
      */
     public function setTransferEncoding($transferEncoding)
     {
@@ -88,7 +88,7 @@ class ContentTransferEncoding implements HeaderInterface
     }
 
     /**
-     * Retrieve the content transfer encoding 
+     * Retrieve the content transfer encoding
      *
      * @return string
      */

@@ -547,8 +547,8 @@ class Message
     {
         $headers = $this->getHeaders();
         return $headers->toString()
-               . Headers::EOL
-               . $this->getBodyText();
+        . Headers::EOL
+        . $this->getBodyText();
     }
 
     /**

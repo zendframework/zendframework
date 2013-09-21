@@ -28,7 +28,7 @@ class BaseName extends AbstractFilter
             return null;
         }
 
-        if (!is_scalar($value)){
+        if (!is_scalar($value)) {
             trigger_error(
                 sprintf(
                     '%s expects parameter to be scalar, "%s" given; cannot filter',

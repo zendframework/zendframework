@@ -35,8 +35,8 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if (null === self::$_unicodeEnabled) {
-            self::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
+        if (null === static::$_unicodeEnabled) {
+            static::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
         }
     }
 
@@ -49,7 +49,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new DigitsFilter();
 
-        if (self::$_unicodeEnabled && extension_loaded('mbstring')) {
+        if (static::$_unicodeEnabled && extension_loaded('mbstring')) {
             // Filter for the value with mbstring
             /**
              * The first element of $valuesExpected contains multibyte digit characters.

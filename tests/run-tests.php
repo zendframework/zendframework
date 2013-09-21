@@ -10,7 +10,7 @@
  */
 
 /**
- * runtests.php - Launch PHPUnit for specific test group(s).
+ * run-tests.php - Launch PHPUnit for specific test group(s).
  *
  * Usage: runtests.sh [ -h <html-dir> ] [ -c <clover-xml-file> ] [ -g ]
  *     [ ALL | <test-group> [ <test-group> ... ] ]

@@ -159,7 +159,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      * Ensure the IDN check works on resource files as expected
      *
      */
-    public function testRessourceIDN()
+    public function testResourceIDN()
     {
         $validator = new Hostname();
 

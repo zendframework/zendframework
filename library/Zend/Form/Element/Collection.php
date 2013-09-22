@@ -529,9 +529,9 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
                     $fieldset->setObject($object);
                     $values[$name] = $fieldset->extract();
                 } else {
-                    foreach($fieldset->fieldsets as $childFieldset){
+                    foreach ($fieldset->fieldsets as $childFieldset) {
                         $childName = $childFieldset->getName();
-                        if (isset($object[$childName])){
+                        if (isset($object[$childName])) {
                             $childObject = $object[$childName];
                             if ($childFieldset->allowObjectBinding($childObject)) {
                                 $fieldset->setObject($childObject);

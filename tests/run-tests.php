@@ -12,7 +12,7 @@
 /**
  * run-tests.php - Launch PHPUnit for specific test group(s).
  *
- * Usage: runtests.sh [ -h <html-dir> ] [ -c <clover-xml-file> ] [ -g ]
+ * Usage: php run-tests.php [ -h <html-dir> ] [ -c <clover-xml-file> ] [ -g ]
  *     [ ALL | <test-group> [ <test-group> ... ] ]
  *
  * This script makes it easier to execute PHPUnit test runs from the

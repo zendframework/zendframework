@@ -84,7 +84,7 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
                 $basePathHelper->setBasePath($config['view_manager']['base_path']);
             } else {
                 $request = $serviceLocator->get('Request');
-                if(is_callable(array($request, 'getBasePath'))) {
+                if (is_callable(array($request, 'getBasePath'))) {
                     $basePathHelper->setBasePath($request->getBasePath());
                 }
             }

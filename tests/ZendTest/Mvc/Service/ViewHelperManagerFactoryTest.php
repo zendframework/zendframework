@@ -29,7 +29,7 @@ class ViewHelperManagerFactoryTest extends TestCase
     public function setUp()
     {
         $this->services = new ServiceManager();
-        $this->factory  = new ViewHelperManagerFactory();
+        $this->factory = new ViewHelperManagerFactory();
     }
 
     /**

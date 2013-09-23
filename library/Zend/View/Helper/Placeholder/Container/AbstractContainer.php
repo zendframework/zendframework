@@ -260,7 +260,7 @@ abstract class AbstractContainer extends ArrayObject
      * Prepend a value to the top of the container
      *
      * @param  mixed $value
-     * @return AbstractContainer
+     * @return self
      */
     public function prepend($value)
     {
@@ -275,7 +275,7 @@ abstract class AbstractContainer extends ArrayObject
      * Append a value to the end of the container
      *
      * @param  mixed $value
-     * @return AbstractContainer
+     * @return self
      */
     public function append($value)
     {
@@ -303,7 +303,7 @@ abstract class AbstractContainer extends ArrayObject
      * optionally, if a number is passed, it will be the number of spaces
      *
      * @param  string|int $indent
-     * @return AbstractContainer
+     * @return self
      */
     public function setIndent($indent)
     {
@@ -325,7 +325,7 @@ abstract class AbstractContainer extends ArrayObject
      * Set postfix for __toString() serialization
      *
      * @param  string $postfix
-     * @return AbstractContainer
+     * @return self
      */
     public function setPostfix($postfix)
     {
@@ -347,7 +347,7 @@ abstract class AbstractContainer extends ArrayObject
      * Set prefix for __toString() serialization
      *
      * @param  string $prefix
-     * @return AbstractContainer
+     * @return self
      */
     public function setPrefix($prefix)
     {
@@ -371,7 +371,7 @@ abstract class AbstractContainer extends ArrayObject
      * Used to implode elements in container
      *
      * @param  string $separator
-     * @return AbstractContainer
+     * @return self
      */
     public function setSeparator($separator)
     {

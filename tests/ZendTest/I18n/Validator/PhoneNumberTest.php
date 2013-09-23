@@ -3044,10 +3044,10 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
                 $this->assertTrue($this->validator->isValid($countryCodePrefixed));
 
                 // check fully qualified E.123/E.164 international variants
-                $fullyQualifiedDoubleO = '00'. $parameters['code'] . $value;
+                $fullyQualifiedDoubleO = '00' . $parameters['code'] . $value;
                 $this->assertTrue($this->validator->isValid($fullyQualifiedDoubleO));
 
-                $fullyQualifiedPlus = '+'. $parameters['code'] . $value;
+                $fullyQualifiedPlus = '+' . $parameters['code'] . $value;
                 $this->assertTrue($this->validator->isValid($fullyQualifiedPlus));
             }
         }

@@ -72,19 +72,19 @@ class Bitwise extends AbstractValidator
 
         if (!is_array($options)) {
             $options = func_get_args();
+
+            $temp['control'] = array_shift($options);
+
+            if (!empty($options)) {
+                $temp['operator'] = array_shift($options);
+            }
+
+            if (!empty($options)) {
+                $temp['strict'] = array_shift($options);
+            }
+
+            $options = $temp;
         }
-
-        $temp['control'] = array_shift($options);
-
-        if (!empty($options)) {
-            $temp['operator'] = array_shift($options);
-        }
-
-        if (!empty($options)) {
-            $temp['strict'] = array_shift($options);
-        }
-
-        $options = $temp;
 
         parent::__construct($options);
     }

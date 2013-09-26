@@ -42,11 +42,10 @@ class HelperPluginManager extends AbstractPluginManager
         // basepath and url are not very useful without their factories, however the doctype
         // helper works fine as an invokable. The factory for doctype simply checks for the
         // config value from the merged config.
-        'doctype'             => 'Zend\View\Helper\Doctype', // overridden by a factory in ViewHelperManagerFactory
         'basepath'            => 'Zend\View\Helper\BasePath',
-        'url'                 => 'Zend\View\Helper\Url',
         'cycle'               => 'Zend\View\Helper\Cycle',
         'declarevars'         => 'Zend\View\Helper\DeclareVars',
+        'doctype'             => 'Zend\View\Helper\Doctype', // overridden by a factory in ViewHelperManagerFactory
         'escapehtml'          => 'Zend\View\Helper\EscapeHtml',
         'escapehtmlattr'      => 'Zend\View\Helper\EscapeHtmlAttr',
         'escapejs'            => 'Zend\View\Helper\EscapeJs',
@@ -73,6 +72,7 @@ class HelperPluginManager extends AbstractPluginManager
         'renderchildmodel'    => 'Zend\View\Helper\RenderChildModel',
         'rendertoplaceholder' => 'Zend\View\Helper\RenderToPlaceholder',
         'serverurl'           => 'Zend\View\Helper\ServerUrl',
+        'url'                 => 'Zend\View\Helper\Url',
         'viewmodel'           => 'Zend\View\Helper\ViewModel',
     );
 

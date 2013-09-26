@@ -760,8 +760,7 @@ class ServiceManagerTest extends TestCase
     {
         $delegator = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
 
-        $this->serviceManager->setService('foo-delegator', $delegator);
-        $this->serviceManager->addDelegator('foo-service', 'foo-delegator');
+        $this->serviceManager->addDelegator('foo-service', $delegator);
         $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
 
         $delegator
@@ -783,8 +782,6 @@ class ServiceManagerTest extends TestCase
             )
             ->will($this->returnValue($delegator));
 
-        //die(var_dump($this->serviceManager));
-
         $this->assertSame($delegator, $this->serviceManager->create('foo-service'));
     }
 
@@ -798,10 +795,8 @@ class ServiceManagerTest extends TestCase
         $fooDelegator = new MockSelfReturningDelegatorFactory();
         $barDelegator = new MockSelfReturningDelegatorFactory();
 
-        $this->serviceManager->setService('foo-delegate', $fooDelegator);
-        $this->serviceManager->setService('bar-delegate', $barDelegator);
-        $this->serviceManager->addDelegator('foo-service', 'foo-delegate');
-        $this->serviceManager->addDelegator('foo-service', 'bar-delegate');
+        $this->serviceManager->addDelegator('foo-service', $fooDelegator);
+        $this->serviceManager->addDelegator('foo-service', $barDelegator);
         $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
 
         $this->assertSame($barDelegator, $this->serviceManager->create('foo-service'));

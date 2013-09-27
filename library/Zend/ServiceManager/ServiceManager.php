@@ -1042,8 +1042,10 @@ class ServiceManager implements ServiceLocatorInterface
 
             $delegatorFactory = $this->delegators[$canonicalName][$i];
 
-            if (is_string($delegatorFactory) && class_exists($delegatorFactory, true)) {
-                $delegatorFactory = new $delegatorFactory;
+            if (is_string($delegatorFactory)) {
+                $delegatorFactory = !$this->has($delegatorFactory) && class_exists($delegatorFactory, true) ?
+                    new $delegatorFactory
+                    : $this->get($delegatorFactory);
                 $this->delegators[$canonicalName][$i] = $delegatorFactory;
             }
 

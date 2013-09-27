@@ -893,4 +893,21 @@ class ServiceManagerTest extends TestCase
             return;
         }
     }
+
+    public function testDelegatorFromCallback()
+    {
+        $realService = $this->getMock('stdClass', array(), array(), 'RealService');
+        $delegator = $this->getMock('stdClass', array(), array(), 'Delegator');
+
+        $delegator = function($serviceManager, $cName, $rName, $callback) use($delegator) {
+            $delegator->real = call_user_func($callback);
+            return $delegator;
+        };
+
+        $this->serviceManager->addDelegator('foo-service', $delegator);
+        $this->serviceManager->setService('foo-service', $realService);
+
+        $this->assertSame($delegator, $this->serviceManager->create('foo-service'));
+        $this->assertSame($realService, $delegator->real);
+    }
 }

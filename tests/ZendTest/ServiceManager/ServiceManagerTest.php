@@ -753,10 +753,68 @@ class ServiceManagerTest extends TestCase
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::create
+     * @covers Zend\ServiceManager\ServiceManager::createDelegatorFromFactory
      * @covers Zend\ServiceManager\ServiceManager::createDelegatorCallback
      * @covers Zend\ServiceManager\ServiceManager::addDelegator
      */
     public function testUsesDelegatorWhenAvailable()
+    {
+        $delegator = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
+
+        $this->serviceManager->setService('foo-delegator', $delegator);
+        $this->serviceManager->addDelegator('foo-service', 'foo-delegator');
+        $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
+
+        $delegator
+            ->expects($this->once())
+            ->method('createDelegatorWithName')
+            ->with(
+                $this->serviceManager,
+                'fooservice',
+                'foo-service',
+                $this->callback(function ($callback) {
+                    if (!is_callable($callback)) {
+                        return false;
+                    }
+
+                    $service = call_user_func($callback);
+
+                    return $service instanceof \stdClass;
+                })
+            )
+            ->will($this->returnValue($delegator));
+
+        $this->assertSame($delegator, $this->serviceManager->create('foo-service'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::create
+     * @covers Zend\ServiceManager\ServiceManager::createDelegatorFromFactory
+     * @covers Zend\ServiceManager\ServiceManager::createDelegatorCallback
+     * @covers Zend\ServiceManager\ServiceManager::addDelegator
+     */
+    public function testUsesMultipleDelegates()
+    {
+        $fooDelegator = new MockSelfReturningDelegatorFactory();
+        $barDelegator = new MockSelfReturningDelegatorFactory();
+
+        $this->serviceManager->setService('foo-delegate', $fooDelegator);
+        $this->serviceManager->setService('bar-delegate', $barDelegator);
+        $this->serviceManager->addDelegator('foo-service', 'foo-delegate');
+        $this->serviceManager->addDelegator('foo-service', 'bar-delegate');
+        $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
+
+        $this->assertSame($barDelegator, $this->serviceManager->create('foo-service'));
+        $this->assertCount(1, $barDelegator->instances);
+        $this->assertCount(1, $fooDelegator->instances);
+        $this->assertInstanceOf('stdClass', array_shift($fooDelegator->instances));
+        $this->assertSame($fooDelegator, array_shift($barDelegator->instances));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::createDelegatorFromFactory
+     */
+    public function testDelegatorFactoryWhenNotRegisteredAsService()
     {
         $delegator = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
 
@@ -787,10 +845,11 @@ class ServiceManagerTest extends TestCase
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::create
+     * @covers Zend\ServiceManager\ServiceManager::createDelegatorFromFactory
      * @covers Zend\ServiceManager\ServiceManager::createDelegatorCallback
      * @covers Zend\ServiceManager\ServiceManager::addDelegator
      */
-    public function testUsesMultipleDelegates()
+    public function testMultipleDelegatorFactoriesWhenNotRegisteredAsServices()
     {
         $fooDelegator = new MockSelfReturningDelegatorFactory();
         $barDelegator = new MockSelfReturningDelegatorFactory();

@@ -15,7 +15,7 @@ use Zend\Filter\Word\CamelCaseToSeparator as CamelCaseToSeparatorFilter;
 use Zend\Stdlib\StringUtils;
 
 /**
- * Test class for Zend\Filter\Word\CamelCaseToSeparator which simulates the 
+ * Test class for Zend\Filter\Word\CamelCaseToSeparator which simulates the
  * PCRE Unicode features disabled
  */
 class CamelCaseToSeparatorNoPcreUnicodeTest extends CamelCaseToSeparatorTest

@@ -17,6 +17,7 @@ use Zend\ServiceManager\Config;
 
 use ZendTest\ServiceManager\TestAsset\FooCounterAbstractFactory;
 use ZendTest\ServiceManager\TestAsset\FooPluginManager;
+use ZendTest\ServiceManager\TestAsset\MockSelfReturningDelegatorFactory;
 
 class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -167,5 +168,28 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
             ->with($delegator);
 
         $this->assertSame($delegator, $pluginManager->get('foo-service'));
+    }
+
+    public function testMultipleDelegatorsUsage()
+    {
+        $pluginManager = $this->getMockForAbstractClass('Zend\ServiceManager\AbstractPluginManager');
+
+        $fooDelegator = new MockSelfReturningDelegatorFactory();
+        $barDelegator = new MockSelfReturningDelegatorFactory();
+
+        $pluginManager->addDelegator('foo-service', $fooDelegator);
+        $pluginManager->addDelegator('foo-service', $barDelegator);
+        $pluginManager->setInvokableClass('foo-service', 'stdClass');
+
+        $pluginManager->expects($this->once())
+            ->method('validatePlugin')
+            ->with($barDelegator);
+
+        $this->assertSame($barDelegator, $pluginManager->get('foo-service'));
+        $this->assertCount(1, $barDelegator->instances);
+        $this->assertCount(1, $fooDelegator->instances);
+        $this->assertInstanceOf('stdClass', array_shift($fooDelegator->instances));
+        $this->assertSame($fooDelegator, array_shift($barDelegator->instances));
+
     }
 }

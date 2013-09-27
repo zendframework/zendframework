@@ -119,19 +119,19 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $method->invoke($this->pluginManager, $callable, 'foo', 'bar');
     }
 
-    public function testValidatePluginGetsCalledOnDelegatorFactoryIfItsAService()
+    public function testValidatePluginIsCalledWithDelegatorFactoryIfItsAService()
     {
-        $pluginManagerMock = $this->getMockForAbstractClass('Zend\ServiceManager\AbstractPluginManager');
-        $delegatorFactoryMock = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
+        $pluginManager = $this->getMockForAbstractClass('Zend\ServiceManager\AbstractPluginManager');
+        $delegatorFactory = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
 
-        $pluginManagerMock->setService('delegator-factory', $delegatorFactoryMock);
-        $pluginManagerMock->addDelegator('foo-service', 'delegator-factory');
+        $pluginManager->setService('delegator-factory', $delegatorFactory);
+        $pluginManager->addDelegator('foo-service', 'delegator-factory');
 
-        $pluginManagerMock->expects($this->once())
+        $pluginManager->expects($this->once())
             ->method('validatePlugin')
-            ->with($delegatorFactoryMock);
+            ->with($delegatorFactory);
 
-        $pluginManagerMock->create('foo-service');
+        $pluginManager->create('foo-service');
     }
 
     public function testSingleDelegatorUsage()

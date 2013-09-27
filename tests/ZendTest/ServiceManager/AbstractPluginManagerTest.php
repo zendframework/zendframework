@@ -117,4 +117,55 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $method->setAccessible(true);
         $method->invoke($this->pluginManager, $callable, 'foo', 'bar');
     }
+
+    public function testValidatePluginGetsCalledOnDelegatorFactoryIfItsAService()
+    {
+        $pluginManagerMock = $this->getMockForAbstractClass('Zend\ServiceManager\AbstractPluginManager');
+        $delegatorFactoryMock = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
+
+        $pluginManagerMock->setService('delegator-factory', $delegatorFactoryMock);
+        $pluginManagerMock->addDelegator('foo-service', 'delegator-factory');
+
+        $pluginManagerMock->expects($this->once())
+            ->method('validatePlugin')
+            ->with($delegatorFactoryMock);
+
+        $pluginManagerMock->create('foo-service');
+    }
+
+    public function testSingleDelegatorUsage()
+    {
+        $delegatorFactory = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
+        $pluginManager = $this->getMockForAbstractClass('Zend\ServiceManager\AbstractPluginManager');
+        $realService = $this->getMock('stdClass', array(), array(), 'RealService');
+        $delegator = $this->getMock('stdClass', array(), array(), 'Delegator');
+
+        $delegatorFactory
+            ->expects($this->once())
+            ->method('createDelegatorWithName')
+            ->with(
+                $pluginManager,
+                'fooservice',
+                'foo-service',
+                $this->callback(function ($callback) use ($realService) {
+                    if (!is_callable($callback)) {
+                        return false;
+                    }
+
+                    return call_user_func($callback) === $realService;
+                })
+            )
+            ->will($this->returnValue($delegator));
+
+        $pluginManager->setFactory('foo-service', function() use ($realService) {
+            return $realService;
+        });
+        $pluginManager->addDelegator('foo-service', $delegatorFactory);
+
+        $pluginManager->expects($this->once())
+            ->method('validatePlugin')
+            ->with($delegator);
+
+        $this->assertSame($delegator, $pluginManager->get('foo-service'));
+    }
 }

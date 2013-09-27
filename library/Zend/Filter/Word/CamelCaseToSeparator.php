@@ -25,7 +25,7 @@ class CamelCaseToSeparator extends AbstractSeparator
             $pattern     = array('#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#', '#(?<=(?:\p{Ll}|\p{Nd}))(\p{Lu})#');
             $replacement = array($this->separator . '\1', $this->separator . '\1');
         } else {
-            $pattern     = array('#(?<=(?:[A-Z]))([A-Z]+)([A-Z][A-z])#', '#(?<=(?:[a-z0-9]))([A-Z])#');
+            $pattern     = array('#(?<=(?:[A-Z]))([A-Z]+)([A-Z][a-z])#', '#(?<=(?:[a-z0-9]))([A-Z])#');
             $replacement = array('\1' . $this->separator . '\2', $this->separator . '\1');
         }
 

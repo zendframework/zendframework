@@ -864,4 +864,33 @@ class ServiceManagerTest extends TestCase
         $this->assertInstanceOf('stdClass', array_shift($fooDelegator->instances));
         $this->assertSame($fooDelegator, array_shift($barDelegator->instances));
     }
+
+    public function testInvalidDelegatorFactoryThrowsException()
+    {
+        $delegatorFactory = new \stdClass;
+        $this->serviceManager->addDelegator('foo-service', $delegatorFactory);
+
+        try {
+            $this->serviceManager->create('foo-service');
+            $this->fail('Expected exception was not raised');
+        }catch (Exception\ServiceNotCreatedException $expected) {
+            $this->assertRegExp('/invalid factory/', $expected->getMessage());
+            return;
+        }
+    }
+
+    public function testInvalidDelegatorFactoryAmongMultipleOnesThrowsException()
+    {
+        $this->serviceManager->addDelegator('foo-service', new MockSelfReturningDelegatorFactory());
+        $this->serviceManager->addDelegator('foo-service', new MockSelfReturningDelegatorFactory());
+        $this->serviceManager->addDelegator('foo-service', 'stdClass');
+
+        try {
+            $this->serviceManager->create('foo-service');
+            $this->fail('Expected exception was not raised');
+        }catch (Exception\ServiceNotCreatedException $expected) {
+            $this->assertRegExp('/invalid factory/', $expected->getMessage());
+            return;
+        }
+    }
 }

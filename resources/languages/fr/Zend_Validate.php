@@ -69,7 +69,7 @@ return array(
     // Zend\Validator\DateStep
     "Invalid type given. String, integer, array or DateTime expected" => "Entrée invalide. Chaîne, entier, tableau ou DateTime attendu",
     "The input does not appear to be a valid date" => "L'entrée ne semble pas être une date valide",
-    "The input is not a valid step" => "L'entrée n'est pas une intervalle valide",
+    "The input is not a valid step" => "L'entrée n'est pas un intervalle valide",
 
     // Zend\Validator\Db\AbstractDb
     "No record matching the input was found" => "Aucun enregistrement trouvé",

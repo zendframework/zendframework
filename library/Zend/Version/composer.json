@@ -16,7 +16,7 @@
         "php": ">=5.3.3"
     },
     "suggest": {
-        "zendframework/zend-json": "Zend\\Json component to support Zend\Version\Version::getLatest('GITHUB')",
+        "zendframework/zend-json": "Zend\\Json component to support Zend\\Version\\Version::getLatest('GITHUB')",
     },
     "extra": {
         "branch-alias": {

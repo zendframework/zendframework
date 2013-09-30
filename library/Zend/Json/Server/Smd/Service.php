@@ -44,7 +44,7 @@ class Service
      * Regex for names
      * @var string
      */
-    protected $nameRegex = '/^[a-z][a-z0-9.\\\\_]+$/i';
+    protected $nameRegex = '/^[a-z_][a-z0-9.\\\\_]+$/i';
 
     /**
      * Parameter option types

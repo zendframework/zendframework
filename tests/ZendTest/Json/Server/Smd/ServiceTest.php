@@ -47,16 +47,16 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $service = new Service(null);
     }
 
-    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormat()
-    {
-        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
-        $this->service->setName('0ab-?');
-    }
-
     public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithInt()
     {
         $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
         $this->service->setName('0ab-?');
+    }
+    
+    public function testSettingNameShouldNotThrowExceptionWhenContainingValidFormatStartingWithUnderscore()
+    {
+        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
+        $this->service->setName('_getMyproperty?');
     }
 
     public function testNameAccessorsShouldWorkWithNormalInput()

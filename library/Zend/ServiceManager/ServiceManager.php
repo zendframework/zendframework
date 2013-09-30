@@ -541,10 +541,10 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * Creates a callback that uses a delegator to create a service
      *
-     * @param DelegatorFactoryInterface $delegatorFactory the delegator factory
-     * @param string                    $rName            requested service name
-     * @param string                    $cName            canonical service name
-     * @param callable                  $creationCallback callback that is responsible for instantiating the service
+     * @param DelegatorFactoryInterface|callable $delegatorFactory the delegator factory
+     * @param string                             $rName            requested service name
+     * @param string                             $cName            canonical service name
+     * @param callable                           $creationCallback callback for instantiating the real service
      *
      * @return callable
      */
@@ -553,7 +553,9 @@ class ServiceManager implements ServiceLocatorInterface
         $serviceManager  = $this;
 
         return function () use ($serviceManager, $delegatorFactory, $rName, $cName, $creationCallback) {
-            return $delegatorFactory->createDelegatorWithName($serviceManager, $cName, $rName, $creationCallback);
+            return $delegatorFactory instanceof DelegatorFactoryInterface
+                ? $delegatorFactory->createDelegatorWithName($serviceManager, $cName, $rName, $creationCallback)
+                : $delegatorFactory($serviceManager, $cName, $rName, $creationCallback);
         };
     }
 
@@ -1049,7 +1051,7 @@ class ServiceManager implements ServiceLocatorInterface
                 $this->delegators[$canonicalName][$i] = $delegatorFactory;
             }
 
-            if (!$delegatorFactory instanceof DelegatorFactoryInterface) {
+            if (!$delegatorFactory instanceof DelegatorFactoryInterface && !is_callable($delegatorFactory)) {
                 throw new Exception\ServiceNotCreatedException(sprintf(
                     'While attempting to create %s%s an invalid factory was registered for this instance type.',
                     $canonicalName,
@@ -1068,7 +1070,9 @@ class ServiceManager implements ServiceLocatorInterface
             }
         }
 
-        $delegator = $delegatorFactory->createDelegatorWithName($this, $canonicalName, $requestedName, $creationCallback);
+        $delegator = $delegatorFactory instanceof DelegatorFactoryInterface
+            ? $delegatorFactory->createDelegatorWithName($serviceManager, $canonicalName, $requestedName, $creationCallback)
+            : $delegatorFactory($serviceManager, $canonicalName, $requestedName, $creationCallback);
 
         return $delegator;
     }

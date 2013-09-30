@@ -899,15 +899,17 @@ class ServiceManagerTest extends TestCase
         $realService = $this->getMock('stdClass', array(), array(), 'RealService');
         $delegator = $this->getMock('stdClass', array(), array(), 'Delegator');
 
-        $delegator = function($serviceManager, $cName, $rName, $callback) use($delegator) {
+        $delegatorFactoryCallback = function($serviceManager, $cName, $rName, $callback) use ($delegator) {
             $delegator->real = call_user_func($callback);
             return $delegator;
         };
 
-        $this->serviceManager->addDelegator('foo-service', $delegator);
-        $this->serviceManager->setService('foo-service', $realService);
+        $this->serviceManager->setFactory('foo-service', function() use ($realService) { return $realService; } );
+        $this->serviceManager->addDelegator('foo-service', $delegatorFactoryCallback);
 
-        $this->assertSame($delegator, $this->serviceManager->create('foo-service'));
-        $this->assertSame($realService, $delegator->real);
+        $service = $this->serviceManager->create('foo-service');
+
+        $this->assertSame($delegator, $service);
+        $this->assertSame($realService, $service->real);
     }
 }

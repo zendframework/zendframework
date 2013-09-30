@@ -43,8 +43,10 @@ class Service
     /**
      * Regex for names
      * @var string
+     * 
+     * @link http://php.net/manual/en/language.oop5.basic.php
      */
-    protected $nameRegex = '/^[a-z_][a-z0-9.\\\\_]+$/i';
+    protected $nameRegex = '/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/i';
 
     /**
      * Parameter option types

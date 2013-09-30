@@ -62,10 +62,8 @@ class ParameterGenerator extends AbstractGenerator
                 $parameterType = $typeClass->getName();
                 $currentNamespace = $reflectionParameter->getDeclaringClass()->getNamespaceName();
 
-                if (!empty($currentNamespace)) {
-                    if (substr($parameterType, 0, strlen($currentNamespace)) == $currentNamespace) {
-                        $parameterType = substr($parameterType, strlen($currentNamespace) + 1);
-                    }
+                if (!empty($currentNamespace) && substr($parameterType, 0, strlen($currentNamespace)) == $currentNamespace) {
+                    $parameterType = substr($parameterType, strlen($currentNamespace) + 1);
                 } else {
                     $parameterType = '\\' . trim($parameterType, '\\');
                 }

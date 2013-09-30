@@ -213,4 +213,19 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('\ZendTest_Code_NsTest_BarClass', $param->getType());
     }
+
+    /**
+     * @group 5193
+     */
+    public function testTypehintsWithNamespaceInNamepsacedClassReturnTypewithBackslash()
+    {
+        require_once __DIR__ . '/TestAsset/NamespaceTypeHintClass.php';
+
+        $reflClass = new \Zend\Code\Reflection\ClassReflection('Namespaced\TypeHint\Bar');
+        $params = $reflClass->getMethod('method')->getParameters();
+
+        $param = ParameterGenerator::fromReflection($params[0]);
+
+        $this->assertEquals('\OtherNamespace\ParameterClass', $param->getType());
+    }
 }

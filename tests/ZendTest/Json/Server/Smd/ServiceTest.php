@@ -58,6 +58,27 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->service->setName('_getMyProperty');
         $this->assertEquals('_getMyProperty', $this->service->getName());
     }
+    
+    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithRpc()
+    {
+        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
+        $this->service->setName('rpcFoo');
+    }
+    
+    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithRpcInsensitiveCase()
+    {
+        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
+        $this->service->setName('RpcFoo');
+    }
+    
+    public function testSettingNameShouldNotThrowExceptionWhenContainingValidFormatContainingRpc()
+    {
+        $this->service->setName('_rpcFoo');
+        $this->assertEquals('_rpcFoo', $this->service->getName());
+        
+        $this->service->setName('MyRpcFoo');
+        $this->assertEquals('MyRpcFoo', $this->service->getName());
+    }
 
     public function testNameAccessorsShouldWorkWithNormalInput()
     {

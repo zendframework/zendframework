@@ -1059,22 +1059,15 @@ class ServiceManager implements ServiceLocatorInterface
                 ));
             }
 
-            // add additional callbacks for every delegatorFactory but the last
-            if ($delegatorsCount > 1 && $i != $delegatorsCount - 1) {
-                $creationCallback = $this->createDelegatorCallback(
-                    $delegatorFactory,
-                    $requestedName,
-                    $canonicalName,
-                    $creationCallback
-                );
-            }
+            $creationCallback = $this->createDelegatorCallback(
+                $delegatorFactory,
+                $requestedName,
+                $canonicalName,
+                $creationCallback
+            );
         }
 
-        $delegator = $delegatorFactory instanceof DelegatorFactoryInterface
-            ? $delegatorFactory->createDelegatorWithName($serviceManager, $canonicalName, $requestedName, $creationCallback)
-            : $delegatorFactory($serviceManager, $canonicalName, $requestedName, $creationCallback);
-
-        return $delegator;
+        return $creationCallback($serviceManager, $canonicalName, $requestedName, $creationCallback);
     }
 
     /**

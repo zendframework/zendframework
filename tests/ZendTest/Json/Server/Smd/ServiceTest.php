@@ -55,8 +55,8 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     
     public function testSettingNameShouldNotThrowExceptionWhenContainingValidFormatStartingWithUnderscore()
     {
-        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
-        $this->service->setName('_getMyproperty?');
+        $this->service->setName('_getMyProperty');
+        $this->assertEquals('_getMyProperty', $this->service->getName());
     }
 
     public function testNameAccessorsShouldWorkWithNormalInput()

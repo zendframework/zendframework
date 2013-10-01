@@ -69,7 +69,7 @@ return array(
     // Zend\Validator\DateStep
     "Invalid type given. String, integer, array or DateTime expected" => "Entrée invalide. Chaîne, entier, tableau ou DateTime attendu",
     "The input does not appear to be a valid date" => "L'entrée ne semble pas être une date valide",
-    "The input is not a valid step" => "L'entrée n'est pas une étape valide",
+    "The input is not a valid step" => "L'entrée n'est pas un pas de date valide",
 
     // Zend\Validator\Db\AbstractDb
     "No record matching the input was found" => "Aucun enregistrement trouvé",
@@ -125,10 +125,10 @@ return array(
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
     // Zend\Validator\File\ImageSize
-    "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected" => "La largeur maximale pour l'image '%value%' devrait être '%maxwidth%', mais '%width%' détectée",
-    "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected" => "La largeur minimale pour l'image '%value%' devrait être '%minwidth%', mais '%width%' détectée",
-    "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected" => "La hauteur maximale pour l'image '%value%' devrait être '%maxheight%', mais '%height%' détectée",
-    "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected" => "La hauteur maximale pour l'image '%value%' devrait être '%minheight%', mais '%height%' détectée",
+    "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected" => "La largeur maximale pour l'image '%value%' devrait être de '%maxwidth%', mais largeur de '%width%' détectée",
+    "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected" => "La largeur minimale pour l'image '%value%' devrait être de '%minwidth%', mais largeur de '%width%' détectée",
+    "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected" => "La hauteur maximale pour l'image '%value%' devrait être de '%maxheight%', mais largeur de '%height%' détectée",
+    "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected" => "La hauteur maximale pour l'image '%value%' devrait être de '%minheight%', mais largeur de '%height%' détectée",
     "The size of image '%value%' could not be detected" => "La taille de l'image '%value%' n'a pas pu être détectée",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 

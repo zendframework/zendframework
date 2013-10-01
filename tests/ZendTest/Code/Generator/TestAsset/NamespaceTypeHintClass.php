@@ -11,7 +11,8 @@ namespace Namespaced\TypeHint {
 
     use OtherNamespace\ParameterClass;
 
-    class Bar {
+    class Bar
+    {
 
         public function method(ParameterClass $object)
         {
@@ -21,7 +22,8 @@ namespace Namespaced\TypeHint {
 
 namespace OtherNamespace {
 
-    class ParameterClass {
+    class ParameterClass
+    {
 
     }
 }

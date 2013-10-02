@@ -229,11 +229,11 @@ class Observer
 
     public static function getInstance()
     {
-        if (!self::$_instance) {
-            self::$_instance = new self();
+        if (!static::$_instance) {
+            static::$_instance = new self();
         }
 
-        return self::$_instance;
+        return static::$_instance;
     }
 
     public static function observe(Server\Fault $fault)

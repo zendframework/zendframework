@@ -24,11 +24,11 @@ class TestClassCache
 
     public static function bar()
     {
-        ++self::$fooCounter;
+        ++static::$fooCounter;
         $args = func_get_args();
 
-        echo 'foobar_output('.implode(', ', $args) . ') : ' . self::$fooCounter;
-        return 'foobar_return('.implode(', ', $args) . ') : ' . self::$fooCounter;
+        echo 'foobar_output('.implode(', ', $args) . ') : ' . static::$fooCounter;
+        return 'foobar_return('.implode(', ', $args) . ') : ' . static::$fooCounter;
     }
 
     public static function emptyMethod() {}

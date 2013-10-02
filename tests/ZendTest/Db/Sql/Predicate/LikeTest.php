@@ -51,4 +51,12 @@ class LikeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testInstanceOfPerSetters()
+    {
+        $like = new Like();
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Like', $like->setIdentifier('bar'));
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Like', $like->setSpecification('%1$s LIKE %2$s'));
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Like', $like->setLike('foo%'));
+    }
+
 }

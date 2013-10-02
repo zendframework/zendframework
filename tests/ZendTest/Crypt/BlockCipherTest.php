@@ -103,6 +103,13 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('sha1', $this->blockCipher->getHashAlgorithm());
     }
 
+    public function testSetPbkdf2HashAlgorithm()
+    {
+        $result = $this->blockCipher->setPbkdf2HashAlgorithm('sha1');
+        $this->assertEquals($result, $this->blockCipher);
+        $this->assertEquals('sha1', $this->blockCipher->getPbkdf2HashAlgorithm());
+    }
+
     public function testSetKeyIteration()
     {
         $result = $this->blockCipher->setKeyIteration(1000);

@@ -38,4 +38,23 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Db\Adapter\Exception\InvalidConnectionParametersException');
         $this->connection->getResource();
     }
+
+    /**
+     * Test getConnectedDsn returns a DSN string if it has been set
+     *
+     * @covers Zend\Db\Adapter\Driver\Pdo\Connection::getConnectedDsn
+     */
+    public function testGetConnectedDsn()
+    {
+        $startString = "mysql:host=localhost;dbname=test";
+
+        $reflectPdo = new \ReflectionClass($this->connection);
+        $dsnProperty = $reflectPdo->getProperty("connectedDsn");
+        $dsnProperty->setAccessible(true);
+        $dsnProperty->setValue($this->connection, $startString);
+
+        $responseString = $this->connection->getConnectedDsn();
+
+        $this->assertEquals($startString, $responseString);
+    }
 }

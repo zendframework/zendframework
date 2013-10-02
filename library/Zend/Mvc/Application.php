@@ -272,8 +272,8 @@ class Application implements
      */
     public function run()
     {
-        $events = $this->getEventManager();
-        $event  = $this->getMvcEvent();
+        $events = $this->events;
+        $event  = $this->event;
 
         // Define callback used to determine whether or not to short-circuit
         $shortCircuit = function ($r) use ($event) {
@@ -342,7 +342,7 @@ class Application implements
      */
     protected function completeRequest(MvcEvent $event)
     {
-        $events = $this->getEventManager();
+        $events = $this->events;
         $event->setTarget($this);
         $events->trigger(MvcEvent::EVENT_RENDER, $event);
         $events->trigger(MvcEvent::EVENT_FINISH, $event);

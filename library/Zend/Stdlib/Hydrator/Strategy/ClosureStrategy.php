@@ -33,10 +33,10 @@ class ClosureStrategy implements StrategyInterface
      * You can describe how your values will extract and hydrate, like this:
      * $hydrator->addStrategy('category', new ClosureStrategy(
      *     function(Category $value) {
-     *         return (int)$value->id;
+     *         return (int) $value->id;
      *     },
      *     function($value) {
-     *         return new Category((int)$value);
+     *         return new Category((int) $value);
      *     }
      * ));
      *

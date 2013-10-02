@@ -335,7 +335,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                   'label'  => 'cat_dog2',
                   'scheme' => null)
         );
-        $this->assertEquals($expected, (array)$feed->getCategories());
+        $this->assertEquals($expected, (array) $feed->getCategories());
     }
 
     /**
@@ -360,7 +360,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                   'label'  => 'cat_dog2',
                   'scheme' => null)
         );
-        $this->assertEquals($expected, (array)$feed->getCategories());
+        $this->assertEquals($expected, (array) $feed->getCategories());
     }
 
     public function testHubsCanBeSet()
@@ -374,7 +374,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             'http://www.example.com/hub', 'http://www.example.com/hub2'
         );
-        $this->assertEquals($expected, (array)$feed->getHubs());
+        $this->assertEquals($expected, (array) $feed->getHubs());
     }
 
     public function testImageCanBeSet()

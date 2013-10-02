@@ -126,10 +126,15 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-
     public function testPrependImplementsFluentInterface()
     {
         $result = $this->container->prepend( 'test' );
+        $this->assertSame($this->container, $result);
+    }
+
+    public function testAppendImplementsFluentInterface()
+    {
+        $result = $this->container->append( 'test' );
         $this->assertSame($this->container, $result);
     }
 
@@ -141,7 +146,6 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $result = $this->container->set( 'test' );
         $this->assertSame($this->container, $result);
     }
-
 
     /**
      * @return void

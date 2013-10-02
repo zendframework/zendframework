@@ -307,7 +307,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         }
 
         $array = array();
-        foreach ((array)$value as $k => $v) {
+        foreach ((array) $value as $k => $v) {
             $array[$k] = $this->_toArray($v);
         }
         return $array;

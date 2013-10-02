@@ -143,7 +143,7 @@ EOS;
                         . '  }' . PHP_EOL
                         . '}' . PHP_EOL;
 
-        $this->assertEquals($expectedString, (string)$classDocBlock);
+        $this->assertEquals($expectedString, (string) $classDocBlock);
     }
 
     public function testFunctionDocBlockTags()

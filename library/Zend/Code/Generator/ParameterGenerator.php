@@ -11,8 +11,6 @@ namespace Zend\Code\Generator;
 
 use Zend\Code\Reflection\ParameterReflection;
 
-/**
- */
 class ParameterGenerator extends AbstractGenerator
 {
     /**

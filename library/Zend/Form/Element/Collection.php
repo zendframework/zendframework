@@ -211,14 +211,12 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
         if ($this->targetElement instanceof FieldsetInterface) {
             foreach ($this->byName as $name => $fieldset) {
                 if (isset($data[$name])) {
-                    /* @var $fieldset FieldsetInterface */
                     $fieldset->populateValues($data[$name]);
                     unset($data[$name]);
                 }
             }
         } else {
             foreach ($this->byName as $name => $element) {
-                /* @var $element ElementInterface */
                 $element->setAttribute('value', $data[$name]);
                 unset($data[$name]);
             }

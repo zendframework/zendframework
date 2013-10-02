@@ -351,7 +351,7 @@ class TranslatorTest extends TestCase
         $events->attach(Translator::EVENT_NO_MESSAGES_LOADED, function(EventInterface $event) use ($textDomain) {
             return $textDomain;
         });
-        $events->attach(Translator::EVENT_NO_MESSAGES_LOADED, function(EventInterface $event) use (&$doNotTrigger){
+        $events->attach(Translator::EVENT_NO_MESSAGES_LOADED, function(EventInterface $event) use (&$doNotTrigger) {
             $doNotTrigger = true;
         });
 

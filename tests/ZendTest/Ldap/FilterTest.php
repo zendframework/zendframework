@@ -91,7 +91,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testToStringImplementation()
     {
         $f1 = Ldap\Filter::ends('name', 'value');
-        $this->assertEquals($f1->toString(), (string)$f1);
+        $this->assertEquals($f1->toString(), (string) $f1);
     }
 
     public function testNegate()

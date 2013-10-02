@@ -152,7 +152,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     {
         $node = $this->createTestNode();
         $this->assertEquals('cn=name,dc=example,dc=org', $node->toString());
-        $this->assertEquals('cn=name,dc=example,dc=org', (string)$node);
+        $this->assertEquals('cn=name,dc=example,dc=org', (string) $node);
     }
 
     public function testToArray()

@@ -341,7 +341,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                   'label'  => 'cat_dog2',
                   'scheme' => null)
         );
-        $this->assertEquals($expected, (array)$entry->getCategories());
+        $this->assertEquals($expected, (array) $entry->getCategories());
     }
 
     /**
@@ -366,7 +366,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                   'label'  => 'cat_dog2',
                   'scheme' => null)
         );
-        $this->assertEquals($expected, (array)$entry->getCategories());
+        $this->assertEquals($expected, (array) $entry->getCategories());
     }
 
 }

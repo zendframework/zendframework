@@ -116,35 +116,35 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         $dnString3 = 'cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
 
         $dn = Ldap\Dn::fromString($dnString1, null);
-        $this->assertEquals($dnString1, (string)$dn);
+        $this->assertEquals($dnString1, (string) $dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $this->assertEquals($dnString2, (string)$dn);
+        $this->assertEquals($dnString2, (string) $dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_LOWER);
-        $this->assertEquals($dnString3, (string)$dn);
+        $this->assertEquals($dnString3, (string) $dn);
 
         $dn = Ldap\Dn::fromString($dnString1, Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $this->assertEquals($dnString2, (string)$dn);
+        $this->assertEquals($dnString2, (string) $dn);
         $dn->setCaseFold(null);
-        $this->assertEquals($dnString1, (string)$dn);
+        $this->assertEquals($dnString1, (string) $dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_LOWER);
-        $this->assertEquals($dnString3, (string)$dn);
+        $this->assertEquals($dnString3, (string) $dn);
 
         $dn = Ldap\Dn::fromString($dnString1, Ldap\Dn::ATTR_CASEFOLD_LOWER);
-        $this->assertEquals($dnString3, (string)$dn);
+        $this->assertEquals($dnString3, (string) $dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $this->assertEquals($dnString2, (string)$dn);
+        $this->assertEquals($dnString2, (string) $dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_LOWER);
-        $this->assertEquals($dnString3, (string)$dn);
+        $this->assertEquals($dnString3, (string) $dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $this->assertEquals($dnString2, (string)$dn);
+        $this->assertEquals($dnString2, (string) $dn);
 
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
         $dn = Ldap\Dn::fromString($dnString1, null);
-        $this->assertEquals($dnString2, (string)$dn);
+        $this->assertEquals($dnString2, (string) $dn);
 
         Ldap\Dn::setDefaultCaseFold(null);
         $dn = Ldap\Dn::fromString($dnString1, null);
-        $this->assertEquals($dnString1, (string)$dn);
+        $this->assertEquals($dnString1, (string) $dn);
 
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
     }

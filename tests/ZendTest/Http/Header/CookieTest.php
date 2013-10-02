@@ -156,7 +156,7 @@ class CookieTest extends \PHPUnit_Framework_TestCase
 //        // Because ';' has special meaning in the cookie, strip it out for this test.
 //        $val = str_replace(';', '', $val);
 //        $cookie = Http\Cookie::fromString('cookie=' . $val . '; domain=example.com', null, false);
-//        $this->assertEquals('cookie=' . $val . ';', (string)$cookie);
+//        $this->assertEquals('cookie=' . $val . ';', (string) $cookie);
 //    }
 //
 //    /**
@@ -170,7 +170,7 @@ class CookieTest extends \PHPUnit_Framework_TestCase
 //        // Because ';' has special meaning in the cookie, strip it out for this test.
 //        $val = str_replace(';', '', $val);
 //        $cookie = Http\Cookie::fromString('cookie=' . $val . '; domain=example.com', null, true);
-//        $this->assertEquals('cookie=' . urlencode($val) . ';', (string)$cookie);
+//        $this->assertEquals('cookie=' . urlencode($val) . ';', (string) $cookie);
 //    }
 //
 //    /**

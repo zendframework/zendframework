@@ -334,25 +334,23 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
     public function testAssertQueryContentContains()
     {
         $this->dispatch('/tests');
-        $this->assertQueryContentContains('div#content', 'foo');
+        $this->assertQueryContentContains('div.top', 'foo');
 
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
-            'actual content is "foo"' // check actual content is display
+            'PHPUnit_Framework_ExpectationFailedException'
         );
-        $this->assertQueryContentContains('div#content', 'bar');
+        $this->assertQueryContentContains('div.top', 'bar');
     }
 
     public function testAssertXpathQueryContentContains()
     {
         $this->dispatch('/tests');
-        $this->assertXpathQueryContentContains('//div[@id="content"]', 'foo');
+        $this->assertXpathQueryContentContains('//div[@class="top"]', 'foo');
 
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
-            'actual content is "foo"' // check actual content is display
+            'PHPUnit_Framework_ExpectationFailedException'
         );
-        $this->assertXpathQueryContentContains('//div[@id="content"]', 'bar');
+        $this->assertXpathQueryContentContains('//div[@class="top"]', 'bar');
     }
 
     public function testAssertNotQueryContentContains()

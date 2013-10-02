@@ -148,8 +148,8 @@ class Application implements
         $this->event = $event  = new MvcEvent();
         $event->setTarget($this);
         $event->setApplication($this)
-              ->setRequest($this->getRequest())
-              ->setResponse($this->getResponse())
+              ->setRequest($this->request)
+              ->setResponse($this->response)
               ->setRouter($serviceManager->get('Router'));
 
         // Trigger bootstrap events
@@ -317,7 +317,7 @@ class Application implements
             return $response;
         }
 
-        $response = $this->getResponse();
+        $response = $this->response;
         $event->setResponse($response);
         $this->completeRequest($event);
 

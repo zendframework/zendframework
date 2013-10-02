@@ -34,7 +34,7 @@ class PhoneNumber extends AbstractValidator
     /**
      * Phone Number Patterns
      *
-     * @link http://libphonenumber.googlecode.com/svn/trunk/resources/PhoneNumberMetaData.xml
+     * @link http://code.google.com/p/libphonenumber/source/browse/trunk/resources/PhoneNumberMetadata.xml
      * @var array
      */
     protected static $phone = array();

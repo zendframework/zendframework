@@ -211,13 +211,13 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     /**
      * @param Select $select
      * @return ResultSet
-     * @throws \RuntimeException
+     * @throws Exception\RuntimeException
      */
     protected function executeSelect(Select $select)
     {
         $selectState = $select->getRawState();
         if ($selectState['table'] != $this->table) {
-            throw new \RuntimeException('The table name of the provided select object must match that of the table');
+            throw new Exception\RuntimeException('The table name of the provided select object must match that of the table');
         }
 
         if ($selectState['columns'] == array(Select::SQL_STAR)

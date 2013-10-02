@@ -182,7 +182,7 @@ class Wsdl
      */
     public function setUri($uri)
     {
-        if ($uri instanceof Uri){
+        if ($uri instanceof Uri) {
             $uri = $uri->toString();
         }
 

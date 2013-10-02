@@ -149,7 +149,7 @@ class ServiceFactoryTest extends \PHPUnit_Framework_TestCase
                        $this->isInstanceOf("Zend\Mvc\Router\RouteMatch"),
                        $this->isInstanceOf("Zend\Mvc\Router\RouteStackInterface"));
 
-        $this->serviceManager->setFactory('Navigation', function ($serviceLocator) use ($factory){
+        $this->serviceManager->setFactory('Navigation', function ($serviceLocator) use ($factory) {
               return $factory->createService($serviceLocator);
         });
 

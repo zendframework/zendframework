@@ -27,7 +27,7 @@ class FooCounterAbstractFactory implements AbstractFactoryInterface
      */
     public function __construct()
     {
-        self::$instantiationCount += 1;
+        static::$instantiationCount += 1;
     }
 
     /**

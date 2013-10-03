@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_AllTests
  */
 
 namespace ZendTest\AllTests\StreamWrapper;
@@ -32,10 +31,6 @@ namespace ZendTest\AllTests\StreamWrapper;
  *         Zend\AllTests\StreamWrapper\PHPInput::restoreDefault();
  *     }
  * }
-*
- * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
  */
 class PHPInput
 {
@@ -51,14 +46,14 @@ class PHPInput
     {
         stream_wrapper_unregister('php');
         stream_wrapper_register('php', 'ZendTest\\AllTests\\StreamWrapper\\PHPInput');
-        self::$_data = $data;
+        static::$_data = $data;
     }
 
     public static function restoreDefault()
     {
         // Reset static values
-        self::$_returnValues = array();
-        self::$_arguments = array();
+        static::$_returnValues = array();
+        static::$_arguments = array();
 
         // Restore original stream wrapper
         stream_wrapper_restore('php');
@@ -67,14 +62,14 @@ class PHPInput
     public static function methodWillReturn($methodName, $returnValue)
     {
         $methodName = strtolower($methodName);
-        self::$_returnValues[$methodName] = $returnValue;
+        static::$_returnValues[$methodName] = $returnValue;
     }
 
     public static function argumentsPassedTo($methodName)
     {
         $methodName = strtolower($methodName);
-        if (isset(self::$_arguments[$methodName])) {
-            return self::$_arguments[$methodName];
+        if (isset(static::$_arguments[$methodName])) {
+            return static::$_arguments[$methodName];
         }
 
         return null;
@@ -82,10 +77,10 @@ class PHPInput
 
     public function stream_open()
     {
-        self::$_arguments[__FUNCTION__] = func_get_args();
+        static::$_arguments[__FUNCTION__] = func_get_args();
 
-        if (array_key_exists(__FUNCTION__, self::$_returnValues)) {
-            return self::$_returnValues[__FUNCTION__];
+        if (array_key_exists(__FUNCTION__, static::$_returnValues)) {
+            return static::$_returnValues[__FUNCTION__];
         }
 
         return true;
@@ -93,41 +88,41 @@ class PHPInput
 
     public function stream_eof()
     {
-        self::$_arguments[__FUNCTION__] = func_get_args();
+        static::$_arguments[__FUNCTION__] = func_get_args();
 
-        if (array_key_exists(__FUNCTION__, self::$_returnValues)) {
-            return self::$_returnValues[__FUNCTION__];
+        if (array_key_exists(__FUNCTION__, static::$_returnValues)) {
+            return static::$_returnValues[__FUNCTION__];
         }
 
-        return (0 == strlen(self::$_data));
+        return (0 == strlen(static::$_data));
     }
 
     public function stream_read($count)
     {
-        self::$_arguments[__FUNCTION__] = func_get_args();
+        static::$_arguments[__FUNCTION__] = func_get_args();
 
-        if (array_key_exists(__FUNCTION__, self::$_returnValues)) {
-            return self::$_returnValues[__FUNCTION__];
+        if (array_key_exists(__FUNCTION__, static::$_returnValues)) {
+            return static::$_returnValues[__FUNCTION__];
         }
 
         // To match the behavior of php://input, we need to clear out the data
         // as it is read
-        if ($count > strlen(self::$_data)) {
-            $data = self::$_data;
-            self::$_data = '';
+        if ($count > strlen(static::$_data)) {
+            $data = static::$_data;
+            static::$_data = '';
         } else {
-            $data = substr(self::$_data, 0, $count);
-            self::$_data = substr(self::$_data, $count);
+            $data = substr(static::$_data, 0, $count);
+            static::$_data = substr(static::$_data, $count);
         }
         return $data;
     }
 
     public function stream_stat()
     {
-        self::$_arguments[__FUNCTION__] = func_get_args();
+        static::$_arguments[__FUNCTION__] = func_get_args();
 
-        if (array_key_exists(__FUNCTION__, self::$_returnValues)) {
-            return self::$_returnValues[__FUNCTION__];
+        if (array_key_exists(__FUNCTION__, static::$_returnValues)) {
+            return static::$_returnValues[__FUNCTION__];
         }
 
         return array();

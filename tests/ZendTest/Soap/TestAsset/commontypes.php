@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 namespace ZendTest\Soap\TestAsset;
@@ -104,11 +103,6 @@ function TestFunc9($foo, $bar)
     return "$foo $bar";
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class TestFixingMultiplePrototypes
 {
     /**
@@ -125,11 +119,6 @@ class TestFixingMultiplePrototypes
     }
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Test
 {
     /**
@@ -189,11 +178,6 @@ class AutoDiscoverTestClass1
     public $param = "hello";
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class AutoDiscoverTestClass2
 {
     /**
@@ -226,11 +210,6 @@ class AutoDiscoverTestClass2
     }
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class ComplexTypeB
 {
     /**
@@ -243,11 +222,6 @@ class ComplexTypeB
     public $foo;
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class ComplexTypeA
 {
     /**
@@ -256,11 +230,6 @@ class ComplexTypeA
     public $baz = array();
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class ComplexTest
 {
     /**
@@ -269,11 +238,6 @@ class ComplexTest
     public $var = 5;
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class ComplexObjectStructure
 {
     /**
@@ -297,11 +261,6 @@ class ComplexObjectStructure
     public $array = array(1, 2, 3);
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class ComplexObjectWithObjectStructure
 {
     /**
@@ -310,11 +269,6 @@ class ComplexObjectWithObjectStructure
     public $object;
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class MyService
 {
     /**
@@ -341,11 +295,6 @@ class MyService
     }
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class MyServiceSequence
 {
     /**
@@ -380,11 +329,6 @@ class MyServiceSequence
     }
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class MyResponse
 {
     /**
@@ -393,11 +337,6 @@ class MyResponse
     public $p1;
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Recursion
 {
     /**
@@ -419,11 +358,6 @@ function OneWay($message)
 
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class NoReturnType
 {
     /**

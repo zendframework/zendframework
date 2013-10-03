@@ -151,7 +151,7 @@ class RedisTest extends CommonAdapterTest
         $redisResource = new RedisResource();
         $redisResource->connect($host, $port);
         $info = $redisResource->info();
-        $majorVersion = (int)$info['redis_version'];
+        $majorVersion = (int) $info['redis_version'];
 
         $this->assertEquals($majorVersion, $this->_options->getResourceManager()->getMajorVersion($this->_options->getResourceId()));
 

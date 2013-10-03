@@ -12,11 +12,6 @@ namespace ZendTest\Form\TestAsset;
 use DomainException;
 use Zend\Stdlib\ArraySerializableInterface;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class Model implements ArraySerializableInterface
 {
     protected $foo;

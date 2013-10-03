@@ -68,7 +68,7 @@ class SessionConfig extends StandardConfig
      * @param  string $storageName
      * @param  mixed $storageValue
      * @return SessionConfig
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function setStorageOption($storageName, $storageValue)
     {
@@ -87,7 +87,7 @@ class SessionConfig extends StandardConfig
 
         $result = ini_set($key, $storageValue);
         if (FALSE === $result) {
-            throw new \InvalidArgumentException("'" . $key .
+            throw new Exception\InvalidArgumentException("'" . $key .
                     "' is not a valid sessions-related ini setting.");
         }
         return $this;

@@ -93,7 +93,7 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
      * calling {@link Page\AbstractPage::setParent()}.
      *
      * @param  Page\AbstractPage|array|Traversable $page  page to add
-     * @return AbstractContainer fluent interface, returns self
+     * @return self fluent interface, returns self
      * @throws Exception\InvalidArgumentException if page is invalid
      */
     public function addPage($page)
@@ -136,7 +136,7 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
      * Adds several pages at once
      *
      * @param  array|Traversable|AbstractContainer $pages pages to add
-     * @return AbstractContainer fluent interface, returns self
+     * @return self fluent interface, returns self
      * @throws Exception\InvalidArgumentException if $pages is not array,
      *                                            Traversable or AbstractContainer
      */
@@ -172,7 +172,7 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
      * Sets pages this container should have, removing existing pages
      *
      * @param  array $pages pages to set
-     * @return AbstractContainer fluent interface, returns self
+     * @return self fluent interface, returns self
      */
     public function setPages(array $pages)
     {
@@ -223,7 +223,7 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
     /**
      * Removes all pages in container
      *
-     * @return AbstractContainer fluent interface, returns self
+     * @return self fluent interface, returns self
      */
     public function removePages()
     {

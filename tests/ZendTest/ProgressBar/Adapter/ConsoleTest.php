@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ProgressBar
  */
 
 namespace ZendTest\ProgressBar\Adapter;
@@ -15,9 +14,6 @@ use Zend\ProgressBar\Adapter;
 require_once 'MockupStream.php';
 
 /**
- * @category   Zend
- * @package    Zend_ProgressBar
- * @subpackage UnitTests
  * @group      Zend_ProgressBar
  */
 class ConsoleTest extends \PHPUnit_Framework_TestCase

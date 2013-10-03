@@ -34,7 +34,7 @@ class PhoneNumber extends AbstractValidator
     /**
      * Phone Number Patterns
      *
-     * @link http://libphonenumber.googlecode.com/svn/trunk/resources/PhoneNumberMetaData.xml
+     * @link http://code.google.com/p/libphonenumber/source/browse/trunk/resources/PhoneNumberMetadata.xml
      * @var array
      */
     protected static $phone = array();
@@ -164,7 +164,7 @@ class PhoneNumber extends AbstractValidator
      */
     protected function loadPattern($code)
     {
-        if (!isset(self::$phone[$code])) {
+        if (!isset(static::$phone[$code])) {
             if (!preg_match('/^[A-Z]{2}$/D', $code)) {
                 return false;
             }
@@ -174,10 +174,10 @@ class PhoneNumber extends AbstractValidator
                 return false;
             }
 
-            self::$phone[$code] = include $file;
+            static::$phone[$code] = include $file;
         }
 
-        return self::$phone[$code];
+        return static::$phone[$code];
     }
 
     /**

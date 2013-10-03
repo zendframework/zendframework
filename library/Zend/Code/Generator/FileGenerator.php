@@ -98,10 +98,8 @@ class FileGenerator extends AbstractGenerator
             $phpClass = ClassGenerator::fromReflection($class);
             $phpClass->setContainingFileGenerator($file);
 
-            if ($uses) {
-                foreach ($uses as $fileUse) {
-                    $phpClass->addUse($fileUse['use'], $fileUse['as']);
-                }
+            foreach ($uses as $fileUse) {
+                $phpClass->addUse($fileUse['use'], $fileUse['as']);
             }
 
             $file->setClass($phpClass);

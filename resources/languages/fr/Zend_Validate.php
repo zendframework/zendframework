@@ -22,6 +22,10 @@ return array(
     "The input contains non alphabetic characters" => "L'entrée contient des caractères non alphabétiques",
     "The input is an empty string" => "L'entrée est une chaîne vide",
 
+    // Zend\I18n\Validator\DateTime
+    "Invalid type given. String expected" => "Type invalide. Chaîne attendue",
+    "The input does not appear to be a valid datetime" => "L'entrée ne semble pas être une date/heure valide",
+
     // Zend\I18n\Validator\Float
     "Invalid type given. String, integer or float expected" => "Type invalide. Chaîne, entier ou flottant attendu",
     "The input does not appear to be a float" => "L'entrée n'est pas un nombre flottant",

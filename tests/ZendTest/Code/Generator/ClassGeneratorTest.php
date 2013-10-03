@@ -16,8 +16,6 @@ use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Reflection\ClassReflection;
 
 /**
- * @category   Zend
- * @subpackage UnitTests
  *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php

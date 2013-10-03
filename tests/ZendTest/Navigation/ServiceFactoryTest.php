@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Navigation
  */
 
 namespace ZendTest\Navigation;
@@ -22,9 +21,6 @@ use Zend\ServiceManager\ServiceManager;
 /**
  * Tests the class Zend\Navigation\MvcNavigationFactory
  *
- * @category   Zend
- * @package    Zend_Navigation
- * @subpackage UnitTests
  * @group      Zend_Navigation
  */
 class ServiceFactoryTest extends \PHPUnit_Framework_TestCase

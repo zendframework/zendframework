@@ -37,6 +37,8 @@ class CreateTableTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($ct->isTemporary());
         $ct->setTemporary('yes');
         $this->assertTrue($ct->isTemporary());
+
+        $this->assertStringStartsWith("CREATE TEMPORARY TABLE", $ct->getSqlString());
     }
 
     /**

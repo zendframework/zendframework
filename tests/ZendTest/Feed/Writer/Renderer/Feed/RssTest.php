@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\Writer\Renderer\Feed;
@@ -17,9 +16,6 @@ use Zend\Feed\Writer\Version;
 use Zend\Feed\Reader;
 
 /**
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
  */

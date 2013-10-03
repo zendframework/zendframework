@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_File
  */
 
 namespace ZendTest\File\Transfer\Adapter;
@@ -19,9 +18,6 @@ use Zend\Validator\File as FileValidator;
 /**
  * Test class for Zend\File\Transfer\Adapter\Http
  *
- * @category   Zend
- * @package    Zend_File
- * @subpackage UnitTests
  * @group      Zend_File
  */
 class HttpTest extends \PHPUnit_Framework_TestCase

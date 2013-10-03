@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace ZendTest\Db\TableGateway\Feature;
@@ -14,11 +13,6 @@ use PHPUnit_Framework_TestCase;
 use Zend\EventManager\EventManager;
 use Zend\Db\TableGateway\Feature\EventFeature;
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
- */
 class EventFeatureTest extends PHPUnit_Framework_TestCase
 {
     /** @var EventManager */

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -15,11 +14,6 @@ use Zend\Captcha;
 use Zend\Form\Element\Captcha as CaptchaElement;
 use Zend\Form\View\Helper\FormCaptcha as FormCaptchaHelper;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- */
 class FormCaptchaTest extends CommonTestCase
 {
     protected $publicKey  = TESTS_ZEND_FORM_RECAPTCHA_PUBLIC_KEY;

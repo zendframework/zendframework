@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper;
@@ -22,9 +21,6 @@ use ZendTest\Session\TestAsset\TestManager as SessionManager;
 /**
  * Test class for Zend_View_Helper_Cycle.
  *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  * @group      Zend_View_Helper
  */

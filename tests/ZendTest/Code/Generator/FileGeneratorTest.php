@@ -125,8 +125,6 @@ namespace ZendTest\Code\Generator\TestAsset;
 /**
  * class docblock
  *
- * @package Zend_Reflection_TestSampleSingleClass
- *
  */
 class TestSampleSingleClass
 {

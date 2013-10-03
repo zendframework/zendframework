@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Barcode
  */
 
 namespace ZendTest\Barcode\Renderer;
@@ -15,9 +14,6 @@ use Zend\Barcode\Renderer\Svg;
 use Zend\Barcode\Object\Code39;
 
 /**
- * @category   Zend
- * @package    Zend_Barcode
- * @subpackage UnitTests
  * @group      Zend_Barcode
  */
 class SvgTest extends TestCommon

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Paginator
  */
 
 namespace ZendTest\Paginator;
@@ -25,9 +24,6 @@ use Zend\View\Helper;
 use ZendTest\Paginator\TestAsset\TestArrayAggregate;
 
 /**
- * @category   Zend
- * @package    Zend_Paginator
- * @subpackage UnitTests
  * @group      Zend_Paginator
  */
 class PaginatorTest extends \PHPUnit_Framework_TestCase

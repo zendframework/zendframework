@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 /* Test Functions */
@@ -102,11 +101,6 @@ function Zend_Soap_AutoDiscover_TestFunc9($foo, $bar)
     return "$foo $bar";
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
 {
     /**
@@ -123,11 +117,6 @@ class Zend_Soap_AutoDiscover_TestFixingMultiplePrototypes
     }
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_AutoDiscover_Test
 {
     /**
@@ -187,11 +176,6 @@ class Zend_Soap_AutoDiscoverTestClass1
     public $param = "hello";
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_AutoDiscoverTestClass2
 {
     /**
@@ -224,11 +208,6 @@ class Zend_Soap_AutoDiscoverTestClass2
     }
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_Wsdl_ComplexTypeB
 {
     /**
@@ -241,11 +220,6 @@ class Zend_Soap_Wsdl_ComplexTypeB
     public $foo;
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_Wsdl_ComplexTypeA
 {
     /**
@@ -254,11 +228,6 @@ class Zend_Soap_Wsdl_ComplexTypeA
     public $baz = array();
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_Wsdl_ComplexTest
 {
     /**
@@ -267,11 +236,6 @@ class Zend_Soap_Wsdl_ComplexTest
     public $var = 5;
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_Wsdl_ComplexObjectStructure
 {
     /**
@@ -295,11 +259,6 @@ class Zend_Soap_Wsdl_ComplexObjectStructure
     public $array = array(1, 2, 3);
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_Wsdl_ComplexObjectWithObjectStructure
 {
     /**
@@ -308,11 +267,6 @@ class Zend_Soap_Wsdl_ComplexObjectWithObjectStructure
     public $object;
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_AutoDiscover_MyService
 {
     /**
@@ -339,11 +293,6 @@ class Zend_Soap_AutoDiscover_MyService
     }
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_AutoDiscover_MyServiceSequence
 {
     /**
@@ -378,11 +327,6 @@ class Zend_Soap_AutoDiscover_MyServiceSequence
     }
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_AutoDiscover_MyResponse
 {
     /**
@@ -391,11 +335,6 @@ class Zend_Soap_AutoDiscover_MyResponse
     public $p1;
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_AutoDiscover_Recursion
 {
     /**
@@ -417,11 +356,6 @@ function Zend_Soap_AutoDiscover_OneWay($message)
 
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_AutoDiscover_NoReturnType
 {
     /**

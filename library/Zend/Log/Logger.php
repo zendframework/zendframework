@@ -131,7 +131,10 @@ class Logger implements LoggerInterface
             $options = ArrayUtils::iteratorToArray($options);
         }
 
-        if (is_array($options)) {
+        if ($options && !is_array($options)) {
+            throw new Exception\InvalidArgumentException('Options must be an array or an object implementing \Traversable ');
+        }
+        else if (is_array($options)) {
             if (isset($options['writers']) && is_array($options['writers'])) {
                 foreach ($options['writers'] as $writer) {
 
@@ -154,9 +157,6 @@ class Logger implements LoggerInterface
                 static::registerErrorHandler($this);
             }
 
-        }
-        else {
-            throw new Exception\InvalidArgumentException('Options must be an array or an object implementing \Traversable ');
         }
 
         $this->processors = new SplPriorityQueue();

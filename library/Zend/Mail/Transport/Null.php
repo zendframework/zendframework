@@ -40,6 +40,6 @@ class Null implements TransportInterface
      */
     public function getLastMessage()
     {
-        return $this->lastFile;
+        return $this->lastMessage;
     }
 }

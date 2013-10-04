@@ -380,6 +380,19 @@ class ViewModel implements ModelInterface, ClearableModelInterface
         return $this;
     }
 
+    public function getChildrenByCaptureTo($capture)
+    {
+        $children = array();
+        
+        foreach ($this->children as $child) {
+            if ($child->captureTo() === $capture) {
+                $children[] = $child;
+            }
+        }
+
+        return $children;
+    }
+
     /**
      * Set the name of the variable to capture this model to, if it is a child model
      *

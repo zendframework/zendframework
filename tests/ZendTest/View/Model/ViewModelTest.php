@@ -312,4 +312,13 @@ class ViewModelTest extends TestCase
         $this->assertTrue(isset($variables['bar']));
         $this->assertEquals('baz', $variables['bar']);
     }
+
+    public function testGetChildrenByCaptureTo()
+    {
+        $model = new ViewModel();
+        $child = new ViewModel();
+        $model->addChild($child, 'foo');
+
+        $this->assertEquals(array($child), $model->getChildrenByCaptureTo('foo'));
+    }    
 }

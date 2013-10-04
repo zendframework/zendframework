@@ -123,7 +123,7 @@ class Logger implements LoggerInterface
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(array $options = null)
+    public function __construct($options = null)
     {
         $this->writers = new SplPriorityQueue();
 
@@ -154,6 +154,9 @@ class Logger implements LoggerInterface
                 static::registerErrorHandler($this);
             }
 
+        }
+        else {
+            throw new Exception\InvalidArgumentException('Options must be an array or an object implementing \Traversable ');
         }
 
         $this->processors = new SplPriorityQueue();

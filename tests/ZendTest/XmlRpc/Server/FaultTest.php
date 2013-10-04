@@ -203,6 +203,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
 
         $e = new Server\Exception\RuntimeException('Testing fault', 411);
         $fault = Server\Fault::getInstance($e);
+        $fault->setEncoding('UTF-8');
 
         $this->assertEquals(trim($xml), trim($fault->__toString()));
     }

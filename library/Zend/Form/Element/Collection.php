@@ -493,7 +493,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
     {
 
         if ($this->object instanceof Traversable) {
-            $this->object = ArrayUtils::iteratorToArray($this->object);
+            $this->object = ArrayUtils::iteratorToArray($this->object, false);
         }
 
         if (!is_array($this->object)) {

@@ -11,13 +11,16 @@ namespace Zend\Db\Sql\Predicate;
 
 use Zend\Db\Sql\Exception;
 use Zend\Db\Sql\Select;
+use Zend\Db\Sql\AbstractExpression;
 
-class In implements PredicateInterface
+class In extends AbstractExpression implements PredicateInterface
 {
     protected $identifier;
     protected $valueSet;
 
     protected $specification = '%s IN %s';
+
+    protected $valueSpecSpecification = '%%s IN (%s)';
 
     /**
      * Constructor
@@ -116,12 +119,13 @@ class In implements PredicateInterface
             $replacements[] = $values;
             $types[] = self::TYPE_VALUE;
         } else {
+            foreach ($values as $argument) {
+                list($replacements[], $types[]) = $this->normalizeArgument($argument, self::TYPE_VALUE);
+            }
             $specification = vsprintf(
                 $this->specification,
                 array($identifierSpecFragment, '(' . implode(', ', array_fill(0, count($values), '%s')) . ')')
             );
-            $replacements = array_merge($replacements, $values);
-            $types = array_merge($types, array_fill(0, count($values), self::TYPE_VALUE));
         }
 
         return array(array(

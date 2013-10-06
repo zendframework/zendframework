@@ -10,8 +10,9 @@
 namespace Zend\Db\Sql\Predicate;
 
 use Zend\Db\Sql\Exception;
+use Zend\Db\Sql\AbstractExpression;
 
-class Operator implements PredicateInterface
+class Operator extends AbstractExpression implements PredicateInterface
 {
     const OPERATOR_EQUAL_TO                  = '=';
     const OP_EQ                              = '=';
@@ -83,6 +84,10 @@ class Operator implements PredicateInterface
     public function setLeft($left)
     {
         $this->left = $left;
+        if (is_array($left)) {
+            $left = $this->normalizeArgument($left, $this->leftType);
+            $this->leftType = $left[1];
+        }
         return $this;
     }
 
@@ -155,9 +160,13 @@ class Operator implements PredicateInterface
      * @param  int|float|bool|string $value
      * @return Operator
      */
-    public function setRight($value)
+    public function setRight($right)
     {
-        $this->right = $value;
+        $this->right = $right;
+        if (is_array($right)) {
+            $right = $this->normalizeArgument($right, $this->rightType);
+            $this->rightType = $right[1];
+        }
         return $this;
     }
 
@@ -209,10 +218,12 @@ class Operator implements PredicateInterface
      */
     public function getExpressionData()
     {
+        list($values[], $types[]) = $this->normalizeArgument($this->left, $this->leftType);
+        list($values[], $types[]) = $this->normalizeArgument($this->right, $this->rightType);
         return array(array(
             '%s ' . $this->operator . ' %s',
-            array($this->left, $this->right),
-            array($this->leftType, $this->rightType)
+            $values,
+            $types
         ));
     }
 }

@@ -402,9 +402,9 @@ class Message
         $parts = $this->body->getParts();
         if (!empty($parts)) {
             $part = array_shift($parts);
-            $part_headers = $part->getHeadersArray();
-            $part_headers_fixed = array();
-            foreach($part_headers as $key => $value) {
+            $partHeaders = $part->getHeadersArray();
+            $partHeadersFixed = array();
+            foreach($partHeaders as $key => $value) {
                 if(is_array($value) && isset($value[0])) {
                     switch($value[0]) {
                         case 'Content-Type':
@@ -416,13 +416,13 @@ class Message
                             $headers->addHeader($contentTE);
                             break;
                         default:
-                            $part_headers_fixed[$key] = $value;
+                            $partHeadersFixed[$key] = $value;
                     }
                 } else {
-                    $part_headers_fixed[$key] = $value;
+                    $partHeadersFixed[$key] = $value;
                 }
             }
-            $headers->addHeaders($part_headers_fixed);
+            $headers->addHeaders($partHeadersFixed);
         }
         return $this;
     }

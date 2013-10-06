@@ -14,6 +14,24 @@ use Zend\Mail\Headers;
 class ContentTransferEncoding implements HeaderInterface
 {
     /**
+     * Allowed Content-Transfer-Encoding parameters specified by RFC 1521
+     * (reduced set)
+     * @var array
+     */
+    protected static $allowedTransferEncodings = array(
+        '7bit',
+        '8bit',
+        'quoted-printable',
+        'base64',
+        /*
+         * not implemented:
+         * 'binary',
+         * x-token: 'X-'
+         */
+    );
+
+
+    /**
      * @var string
      */
     protected $transferEncoding;
@@ -33,7 +51,7 @@ class ContentTransferEncoding implements HeaderInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Content-Transfer-Encoding string');
         }
 
-        $transferEncoding   = $value;
+        $transferEncoding = $value;
 
         $header = new static();
         $header->setTransferEncoding($transferEncoding);
@@ -53,7 +71,7 @@ class ContentTransferEncoding implements HeaderInterface
 
     public function setEncoding($encoding)
     {
-        // This header must be always in US-ASCII
+        // Header must be always in US-ASCII
         return $this;
     }
 
@@ -76,9 +94,9 @@ class ContentTransferEncoding implements HeaderInterface
      */
     public function setTransferEncoding($transferEncoding)
     {
-        if (!preg_match('/^(7bit|8bit|quoted\-printable|base64)+$/i', $transferEncoding)) {
+        if (!in_array($transferEncoding, self::$allowedTransferEncodings)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects a value in the format "(7bit|8bit|quoted-printable|base64)"; received "%s"',
+                '%s expects one of "'. implode(', ', self::$allowedTransferEncodings) . '"; received "%s"',
                 __METHOD__,
                 (string) $transferEncoding
             ));

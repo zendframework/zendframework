@@ -320,5 +320,16 @@ class ViewModelTest extends TestCase
         $model->addChild($child, 'foo');
 
         $this->assertEquals(array($child), $model->getChildrenByCaptureTo('foo'));
+    }
+
+    public function testGetChildrenByCaptureToRecusive()
+    {
+        $model = new ViewModel();
+        $child = new ViewModel();
+        $subChild = new ViewModel();
+        $child->addChild($subChild, 'bar');
+        $model->addChild($child, 'foo');
+
+        $this->assertEquals(array($subChild), $model->getChildrenByCaptureTo('bar'));
     }    
 }

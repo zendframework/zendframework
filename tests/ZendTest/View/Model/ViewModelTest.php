@@ -331,5 +331,16 @@ class ViewModelTest extends TestCase
         $model->addChild($child, 'foo');
 
         $this->assertEquals(array($subChild), $model->getChildrenByCaptureTo('bar'));
-    }    
+    }
+
+    public function testGetChildrenByCaptureToNonRecursive()
+    {
+        $model = new ViewModel();
+        $child = new ViewModel();
+        $subChild = new ViewModel();
+        $child->addChild($subChild, 'bar');
+        $model->addChild($child, 'foo');
+
+        $this->assertEmpty($model->getChildrenByCaptureTo('bar', false));
+    }
 }

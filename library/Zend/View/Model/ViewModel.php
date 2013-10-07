@@ -390,12 +390,12 @@ class ViewModel implements ModelInterface, ClearableModelInterface
     public function getChildrenByCaptureTo($capture, $recursive = true)
     {
         $children = array();
-        
+
         foreach ($this->children as $child) {
             if ($recursive === true) {
                 $children += $child->getChildrenByCaptureTo($capture);
             }
-            
+
             if ($child->captureTo() === $capture) {
                 $children[] = $child;
             }

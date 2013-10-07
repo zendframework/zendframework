@@ -128,7 +128,7 @@ interface ModelInterface extends Countable, IteratorAggregate
      * @return array
      */
     public function getChildrenByCaptureTo($capture, $recursive = true);
-        
+
     /**
      * Set the name of the variable to capture this model to, if it is a child model
      *

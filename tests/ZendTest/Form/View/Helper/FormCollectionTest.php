@@ -176,4 +176,15 @@ class FormCollectionTest extends TestCase
 
         $this->assertContains('>translated legend<', $markup);
     }
+
+    public function testShouldWrapWithoutLabel()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setLabel('');
+        $this->helper->setShouldWrap(true);
+
+        $markup = $this->helper->render($collection);
+        $this->assertContains('<fieldset>', $markup);
+    }
 }

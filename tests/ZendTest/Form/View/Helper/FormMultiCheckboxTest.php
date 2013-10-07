@@ -402,4 +402,20 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->assertRegexp('#value="value1" checked="checked"#', $markup);
 
     }
+
+    public function testDisableEscapeHtmlHelper()
+    {
+        $element = new MultiCheckboxElement('foo');
+        $element->setLabelOptions(array(
+            'disable_html_escape' => true,
+        ));
+        $element->setValueOptions(array(
+            array(
+                'label' => '<span>label1</span>',
+                'value' => 'value1',
+            ),
+        ));
+        $markup  = $this->helper->render($element);
+        $this->assertRegexp('#<span>label1</span>#', $markup);
+    }
 }

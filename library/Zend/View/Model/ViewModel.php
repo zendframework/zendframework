@@ -380,7 +380,14 @@ class ViewModel implements ModelInterface, ClearableModelInterface
         return $this;
     }
 
-    public function getChildrenByCaptureTo($capture)
+    /**
+     * Returns an array of Viewmodels with captureTo value $capture
+     *
+     * @param string $capture
+     * @param bool $recursive search recursive through children, default true
+     * @return array
+     */
+    public function getChildrenByCaptureTo($capture, $recursive = true)
     {
         $children = array();
         

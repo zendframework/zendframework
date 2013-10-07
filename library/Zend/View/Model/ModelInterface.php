@@ -121,6 +121,15 @@ interface ModelInterface extends Countable, IteratorAggregate
     public function hasChildren();
 
     /**
+     * Returns an array of ModelInterface with captureTo value $capture
+     *
+     * @param string $capture
+     * @param bool $recursive search recursive through children, default true
+     * @return array
+     */
+    public function getChildrenByCaptureTo($capture, $recursive = true);
+        
+    /**
      * Set the name of the variable to capture this model to, if it is a child model
      *
      * @param  string $capture

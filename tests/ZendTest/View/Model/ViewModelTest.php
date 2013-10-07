@@ -322,7 +322,7 @@ class ViewModelTest extends TestCase
         $this->assertEquals(array($child), $model->getChildrenByCaptureTo('foo'));
     }
 
-    public function testGetChildrenByCaptureToRecusive()
+    public function testGetChildrenByCaptureToRecursive()
     {
         $model = new ViewModel();
         $child = new ViewModel();

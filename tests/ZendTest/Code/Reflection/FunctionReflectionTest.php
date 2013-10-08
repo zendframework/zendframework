@@ -32,7 +32,56 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
     public function testFunctionDocBlockReturn()
     {
         require_once __DIR__ . '/TestAsset/functions.php';
-        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function6');
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function3');
         $this->assertInstanceOf('Zend\Code\Reflection\DocBlockReflection', $function->getDocBlock());
+    }
+
+    public function testInternalFunctionBodyReturn()
+    {
+        $function = new FunctionReflection('array_splice');
+        $this->setExpectedException('Zend\Code\Reflection\Exception\InvalidArgumentException');
+        $body = $function->getBody();
+    }
+
+    public function testFunctionBodyReturn()
+    {
+        require_once __DIR__ . '/TestAsset/functions.php';
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function1');
+        $body = $function->getBody();
+        $this->assertEquals("return 'function1';", trim($body));
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function4');
+        $body = $function->getBody();
+        $this->assertEquals("return 'function4';", trim($body));
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function5');
+        $body = $function->getBody();
+        $this->assertEquals("return 'function5';", trim($body));
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function6');
+        $body = $function->getBody();
+        $this->assertEquals("\$closure = function() { return 'bar'; };     return 'function6';", trim($body));
+    }
+
+    public function testFunctionClosureBodyReturn()
+    {
+        require_once __DIR__ . '/TestAsset/closures.php';
+
+        $function = new FunctionReflection($function1);
+        $body = $function->getBody();
+        $this->assertEquals("return 'function1';", trim($body));
+
+        $function = new FunctionReflection($function2);
+        $body = $function->getBody();
+        $this->assertEquals("return 'function2';", trim($body));
+
+        $function = new FunctionReflection($function3);
+        $body = $function->getBody();
+        $this->assertEquals("return 'function3';", trim($body));
+
+        $function = new FunctionReflection($function4);
+        $body = $function->getBody();
+        $this->assertEquals("\$closure = function() { return 'bar'; };     return 'function4';", trim($body));
     }
 }

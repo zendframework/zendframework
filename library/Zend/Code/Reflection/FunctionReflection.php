@@ -54,7 +54,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     /**
      * Get contents of function
      *
-     * @param  bool $includeDocBlock
+     * @param  bool   $includeDocBlock
      * @return string
      */
     public function getContents($includeDocBlock = true)
@@ -104,7 +104,45 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
         }
 
         $tag    = $docBlock->getTag('return');
+
         return new DocBlockReflection('@return ' . $tag->getDescription());
+    }
+
+    /**
+     * Get method body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        $fileName = $this->getFileName();
+        if (false === $fileName) {
+            throw new Exception\InvalidArgumentException(
+                'Cannot determine internals functions body'
+            );
+        }
+
+        $lines = array_slice(
+            file($fileName, FILE_IGNORE_NEW_LINES),
+            $this->getStartLine() - 1,
+            ($this->getEndLine() - ($this->getStartLine() - 1)),
+            true
+        );
+
+        $functionLine = implode(' ', $lines);
+        if ($this->isClosure()) {
+            preg_match('#^\s*\$[^\=]+=\s*function\s*\([^\)]*\)\s*\{(.*)\}\s*;\s*$#', $functionLine, $matches);
+        } else {
+            preg_match('#^\s*function\s*[^\(]+\([^\)]*\)\s*\{(.*)\}\s*$#', $functionLine, $matches);
+        }
+
+        if (!isset($matches[1])) {
+            return false;
+        }
+
+        $body = $matches[1];
+
+        return $body;
     }
 
     public function toString()

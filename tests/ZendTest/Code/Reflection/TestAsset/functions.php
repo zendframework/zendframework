@@ -12,7 +12,7 @@ namespace ZendTest\Code\Reflection\TestAsset;
 
 function function1()
 {
-    return 'foo';
+    return 'function1';
 }
 
 
@@ -38,7 +38,19 @@ function function2($one, $two = 'two')
  * @param int $two
  * @return true
  */
-function function6($one, $two = 2)
+function function3($one, $two = 2)
 {
     return true;
+}
+
+function function4($arg) {
+    return 'function4';
+}
+
+function function5() { return 'function5'; }
+
+function function6()
+{
+    $closure = function() { return 'bar'; };
+    return 'function6';
 }

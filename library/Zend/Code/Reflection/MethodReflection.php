@@ -134,27 +134,30 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      */
     public function getBody()
     {
+        $fileName = $this->getFileName();
+        if (false === $fileName) {
+            throw new Exception\InvalidArgumentException(
+                'Cannot determine internals functions body'
+            );
+        }
+
         $lines = array_slice(
-            file($this->getDeclaringClass()->getFileName(), FILE_IGNORE_NEW_LINES),
-            $this->getStartLine(),
-            ($this->getEndLine() - $this->getStartLine()),
+            file($fileName, FILE_IGNORE_NEW_LINES),
+            $this->getStartLine() - 1,
+            ($this->getEndLine() - ($this->getStartLine() - 1)),
             true
         );
 
-        $firstLine = array_shift($lines);
+        $functionLine = implode("\n", $lines);
+        preg_match('#^\s*[(public|protected|private|abstract|final|static)\s*]+function\s*[^\(]+\([^\)]*\)\s*\{(.*)\}\s*$#s', $functionLine, $matches);
 
-        if (trim($firstLine) !== '{') {
-            array_unshift($lines, $firstLine);
+        if (!isset($matches[1])) {
+            return false;
         }
 
-        $lastLine = array_pop($lines);
+        $body = $matches[1];
 
-        if (trim($lastLine) !== '}') {
-            array_push($lines, $lastLine);
-        }
-
-        // just in case we had code on the bracket lines
-        return rtrim(ltrim(implode("\n", $lines), '{'), '}');
+        return $body;
     }
 
     public function toString()

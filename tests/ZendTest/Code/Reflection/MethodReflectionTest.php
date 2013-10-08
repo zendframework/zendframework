@@ -45,12 +45,30 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testGetBodyReturnsCorrectBody()
     {
-        $body = '        //we need a multi-line method body.
+        $body = '
+        //we need a multi-line method body.
         $assigned = 1;
         $alsoAssigined = 2;
-        return \'mixedValue\';';
+        return \'mixedValue\';
+    ';
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6', 'doSomething');
         $this->assertEquals($body, $reflectionMethod->getBody());
+        
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'doSomething');
+        $body = $reflectionMethod->getBody();
+        $this->assertEquals(trim($body), "return 'doSomething';");
+        
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'doSomethingElse');
+        $body = $reflectionMethod->getBody();
+        $this->assertEquals(trim($body), "return 'doSomethingElse';");
+        
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'doSomethingAgain');
+        $body = $reflectionMethod->getBody();
+        $this->assertEquals(trim($body), "\$closure = function(\$foo) { return \$foo; };\n        return 'doSomethingAgain';");
+        
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'doStaticSomething');
+        $body = $reflectionMethod->getBody();
+        $this->assertEquals(trim($body), "return 'doStaticSomething';");
     }
 
     public function testGetContentsReturnsCorrectContent()

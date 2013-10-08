@@ -46,7 +46,7 @@ class Service
      * @link http://php.net/manual/en/language.oop5.basic.php
      * @link http://www.jsonrpc.org/specification#request_object
      */
-    protected $nameRegex = '/^(?!^rpc)[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff\.\\\]*$/';
+    protected $nameRegex = '/^(?!^rpc\.)[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff\.\\\]*$/';
 
     /**
      * Parameter option types

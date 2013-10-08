@@ -186,6 +186,7 @@ class FormCollectionTest extends TestCase
         $collection->setAttribute('id', 'some-identifier');
 
         $markup = $this->helper->render($collection);
+        // die(PHP_EOL . PHP_EOL . $markup . PHP_EOL . PHP_EOL);
         $this->assertContains(' id="some-identifier"', $markup);
     }
 }

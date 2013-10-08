@@ -13,11 +13,11 @@
     },
     "target-dir": "Zend/Debug",
     "require": {
-        "php": ">=5.3.3",
-        "zendframework/zend-escaper": "self.version"
+        "php": ">=5.3.3"
     },
     "suggest": {
-        "ext/xdebug": "XDebug, for better backtrace output"
+        "ext/xdebug": "XDebug, for better backtrace output",
+        "zendframework/zend-escaper": "To support escaped output"
     },
     "extra": {
         "branch-alias": {

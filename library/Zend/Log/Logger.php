@@ -156,7 +156,7 @@ class Logger implements LoggerInterface
 
         } elseif ($options) {
             throw new Exception\InvalidArgumentException('Options must be an array or an object implementing \Traversable ');
-        } 
+        }
 
         $this->processors = new SplPriorityQueue();
     }

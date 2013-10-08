@@ -108,6 +108,12 @@ class FormCollection extends AbstractHelper
             $label = $element->getLabel();
 
             if (!empty($label)) {
+                $attributes = $element->getAttributes();
+                unset($attributes['name']);
+                $attributesString = '';
+                if (count($attributes)) {
+                    $attributesString = ' ' . $this->createAttributesString($attributes);
+                }
 
                 if (null !== ($translator = $this->getTranslator())) {
                     $label = $translator->translate(
@@ -119,7 +125,8 @@ class FormCollection extends AbstractHelper
                 $label = $escapeHtmlHelper($label);
 
                 $markup = sprintf(
-                    '<fieldset><legend>%s</legend>%s</fieldset>',
+                    '<fieldset%s><legend>%s</legend>%s</fieldset>',
+                    $attributesString,
                     $label,
                     $markup
                 );

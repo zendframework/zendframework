@@ -176,4 +176,17 @@ class FormCollectionTest extends TestCase
 
         $this->assertContains('>translated legend<', $markup);
     }
+
+    public function testRenderCollectionAttributes()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setLabel('label');
+        $this->helper->setShouldWrap(true);
+        $collection->setAttribute('id', 'some-identifier');
+
+        $markup = $this->helper->render($collection);
+        // die(PHP_EOL . PHP_EOL . $markup . PHP_EOL . PHP_EOL);
+        $this->assertContains(' id="some-identifier"', $markup);
+    }
 }

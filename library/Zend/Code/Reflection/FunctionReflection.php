@@ -129,11 +129,11 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
             true
         );
 
-        $functionLine = implode(' ', $lines);
+        $functionLine = implode("\n", $lines);
         if ($this->isClosure()) {
-            preg_match('#^\s*\$[^\=]+=\s*function\s*\([^\)]*\)\s*\{(.*)\}\s*;\s*$#', $functionLine, $matches);
+            preg_match('#^\s*\$[^\=]+=\s*function\s*\([^\)]*\)\s*\{(.*)\}\s*;\s*$#s', $functionLine, $matches);
         } else {
-            preg_match('#^\s*function\s*[^\(]+\([^\)]*\)\s*\{(.*)\}\s*$#', $functionLine, $matches);
+            preg_match('#^\s*function\s*[^\(]+\([^\)]*\)\s*\{(.*)\}\s*$#s', $functionLine, $matches);
         }
 
         if (!isset($matches[1])) {

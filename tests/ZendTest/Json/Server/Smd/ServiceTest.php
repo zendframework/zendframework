@@ -65,10 +65,10 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->service->setName('rpcFoo');
     }
 
-    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithRpcInsensitiveCase()
+    public function testSettingNameShouldNotThrowExceptionWhenContainingInvalidFormatStartingWithRpcInsensitiveCase()
     {
-        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
         $this->service->setName('RpcFoo');
+        $this->assertEquals('RpcFoo', $this->service->getName());
     }
 
     public function testSettingNameShouldNotThrowExceptionWhenContainingValidFormatContainingRpc()

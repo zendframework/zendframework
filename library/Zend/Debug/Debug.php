@@ -104,7 +104,7 @@ class Debug
                     . PHP_EOL . $output
                     . PHP_EOL;
         } else {
-            if (!extension_loaded('xdebug')) {
+            if (!extension_loaded('xdebug') || null !== static::$escaper) {
                 $output = static::getEscaper()->escapeHtml($output);
             }
 

@@ -94,4 +94,14 @@ class DebugTest extends \PHPUnit_Framework_TestCase
         $this->assertContains("</pre>", $result);
     }
 
+    public function testDebugHaveEscaper()
+    {
+        $escaper = new \Zend\Escaper\Escaper;
+        Debug::setEscaper($escaper);
+
+        $a = array("a" => "<script type=\"text/javascript\"");
+        $result = Debug::dump($a, "LABEL", false);
+        $this->assertContains("&lt;script type=&quot;text/javascript&quot;&quot;", $result);
+    }
+
 }

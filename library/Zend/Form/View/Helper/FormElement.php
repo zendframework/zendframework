@@ -121,7 +121,7 @@ class FormElement extends BaseAbstractHelper
      *
      * @param string $type
      * @param string $plugin
-     * @return FormElement
+     * @return self
      */
     public function addType($type, $plugin)
     {
@@ -135,7 +135,7 @@ class FormElement extends BaseAbstractHelper
      *
      * @param string $instance
      * @param string $plugin
-     * @return FormElement
+     * @return self
      */
     public function addInstance($instance, $plugin)
     {

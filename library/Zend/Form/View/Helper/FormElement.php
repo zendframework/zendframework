@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -22,13 +23,13 @@ class FormElement extends BaseAbstractHelper
      * @var array
      */
     protected $instanceMap = array(
-        'Zend\Form\Element\Button' => 'form_button',
-        'Zend\Form\Element\Captcha' => 'form_captcha',
-        'Zend\Form\Element\Csrf' => 'form_hidden',
-        'Zend\Form\Element\Collection' => 'form_collection',
+        'Zend\Form\Element\Button'         => 'form_button',
+        'Zend\Form\Element\Captcha'        => 'form_captcha',
+        'Zend\Form\Element\Csrf'           => 'form_hidden',
+        'Zend\Form\Element\Collection'     => 'form_collection',
         'Zend\Form\Element\DateTimeSelect' => 'form_date_time_select',
-        'Zend\Form\Element\DateSelect' => 'form_date_select',
-        'Zend\Form\Element\MonthSelect' => 'form_month_select',
+        'Zend\Form\Element\DateSelect'     => 'form_date_select',
+        'Zend\Form\Element\MonthSelect'    => 'form_month_select',
     );
 
     /**
@@ -37,31 +38,31 @@ class FormElement extends BaseAbstractHelper
      * @var array
      */
     protected $typeMap = array(
-        'checkbox' => 'form_checkbox',
-        'color' => 'form_color',
-        'date' => 'form_date',
-        'datetime' => 'form_date_time',
+        'checkbox'       => 'form_checkbox',
+        'color'          => 'form_color',
+        'date'           => 'form_date',
+        'datetime'       => 'form_date_time',
         'datetime-local' => 'form_date_time_local',
-        'email' => 'form_email',
-        'file' => 'form_file',
-        'hidden' => 'form_hidden',
-        'image' => 'form_image',
-        'month' => 'form_month',
+        'email'          => 'form_email',
+        'file'           => 'form_file',
+        'hidden'         => 'form_hidden',
+        'image'          => 'form_image',
+        'month'          => 'form_month',
         'multi_checkbox' => 'form_multi_checkbox',
-        'number' => 'form_number',
-        'password' => 'form_password',
-        'radio' => 'form_radio',
-        'range' => 'form_range',
-        'reset' => 'form_reset',
-        'search' => 'form_search',
-        'select' => 'form_select',
-        'submit' => 'form_submit',
-        'tel' => 'form_tel',
-        'text' => 'form_text',
-        'textarea' => 'form_textarea',
-        'time' => 'form_time',
-        'url' => 'form_url',
-        'week' => 'form_week',
+        'number'         => 'form_number',
+        'password'       => 'form_password',
+        'radio'          => 'form_radio',
+        'range'          => 'form_range',
+        'reset'          => 'form_reset',
+        'search'         => 'form_search',
+        'select'         => 'form_select',
+        'submit'         => 'form_submit',
+        'tel'            => 'form_tel',
+        'text'           => 'form_text',
+        'textarea'       => 'form_textarea',
+        'time'           => 'form_time',
+        'url'            => 'form_url',
+        'week'           => 'form_week',
     );
 
     /**

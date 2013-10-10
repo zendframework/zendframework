@@ -15,21 +15,21 @@ use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 class FormElement extends BaseAbstractHelper
 {
-    const DEFAULT_HELPER = 'form_input';
+    const DEFAULT_HELPER = 'forminput';
 
     /**
      * Instance map to view helper
      *
      * @var array
      */
-    protected $instanceMap = array(
-        'Zend\Form\Element\Button'         => 'form_button',
-        'Zend\Form\Element\Captcha'        => 'form_captcha',
-        'Zend\Form\Element\Csrf'           => 'form_hidden',
-        'Zend\Form\Element\Collection'     => 'form_collection',
-        'Zend\Form\Element\DateTimeSelect' => 'form_date_time_select',
-        'Zend\Form\Element\DateSelect'     => 'form_date_select',
-        'Zend\Form\Element\MonthSelect'    => 'form_month_select',
+    protected $classMap = array(
+        'Zend\Form\Element\Button'         => 'formbutton',
+        'Zend\Form\Element\Captcha'        => 'formcaptcha',
+        'Zend\Form\Element\Csrf'           => 'formhidden',
+        'Zend\Form\Element\Collection'     => 'formcollection',
+        'Zend\Form\Element\DateTimeSelect' => 'formdatetimeselect',
+        'Zend\Form\Element\DateSelect'     => 'formdateselect',
+        'Zend\Form\Element\MonthSelect'    => 'formmonthselect',
     );
 
     /**
@@ -38,31 +38,31 @@ class FormElement extends BaseAbstractHelper
      * @var array
      */
     protected $typeMap = array(
-        'checkbox'       => 'form_checkbox',
-        'color'          => 'form_color',
-        'date'           => 'form_date',
-        'datetime'       => 'form_date_time',
-        'datetime-local' => 'form_date_time_local',
-        'email'          => 'form_email',
-        'file'           => 'form_file',
-        'hidden'         => 'form_hidden',
-        'image'          => 'form_image',
-        'month'          => 'form_month',
-        'multi_checkbox' => 'form_multi_checkbox',
-        'number'         => 'form_number',
-        'password'       => 'form_password',
-        'radio'          => 'form_radio',
-        'range'          => 'form_range',
-        'reset'          => 'form_reset',
-        'search'         => 'form_search',
-        'select'         => 'form_select',
-        'submit'         => 'form_submit',
-        'tel'            => 'form_tel',
-        'text'           => 'form_text',
-        'textarea'       => 'form_textarea',
-        'time'           => 'form_time',
-        'url'            => 'form_url',
-        'week'           => 'form_week',
+        'checkbox'       => 'formcheckbox',
+        'color'          => 'formcolor',
+        'date'           => 'formdate',
+        'datetime'       => 'formdatetime',
+        'datetime-local' => 'formdatetimelocal',
+        'email'          => 'formemail',
+        'file'           => 'formfile',
+        'hidden'         => 'formhidden',
+        'image'          => 'formimage',
+        'month'          => 'formmonth',
+        'multi_checkbox' => 'formmulticheckbox',
+        'number'         => 'formnumber',
+        'password'       => 'formpassword',
+        'radio'          => 'formradio',
+        'range'          => 'formrange',
+        'reset'          => 'formreset',
+        'search'         => 'formsearch',
+        'select'         => 'formselect',
+        'submit'         => 'formsubmit',
+        'tel'            => 'formtel',
+        'text'           => 'formtext',
+        'textarea'       => 'formtextarea',
+        'time'           => 'formtime',
+        'url'            => 'formurl',
+        'week'           => 'formweek',
     );
 
     /**
@@ -135,7 +135,7 @@ class FormElement extends BaseAbstractHelper
     }
 
     /**
-     * Add type map to plugin
+     * Add form element type to plugin map
      *
      * @param string $type
      * @param string $plugin
@@ -149,15 +149,15 @@ class FormElement extends BaseAbstractHelper
     }
 
     /**
-     * Add instance map to plugin
+     * Add instance class to plugin map
      *
-     * @param string $instance
+     * @param string $class
      * @param string $plugin
      * @return self
      */
-    public function addInstance($instance, $plugin)
+    public function addClass($class, $plugin)
     {
-        $this->instanceMap[$instance] = $plugin;
+        $this->classMap[$class] = $plugin;
 
         return $this;
     }
@@ -183,7 +183,7 @@ class FormElement extends BaseAbstractHelper
      */
     protected function renderInstance(ElementInterface $element)
     {
-        foreach ($this->instanceMap as $class => $pluginName) {
+        foreach ($this->classMap as $class => $pluginName) {
             if (is_a($element, $class)) {
                 return $this->renderHelper($pluginName, $element);
             }

@@ -96,24 +96,19 @@ class FormElement extends BaseAbstractHelper
             return '';
         }
 
-        foreach ($this->instanceMap as $class => $pluginName) {
-            if (is_a($element, $class)) {
-                $helper = $renderer->plugin($pluginName);
-                return $helper($element);
-            }
+        $renderedInstance = $this->renderInstance($element);
+
+        if ($renderedInstance !== null) {
+            return $renderedInstance;
         }
 
-        $type = $element->getAttribute('type');
+        $renderedType = $this->renderType($element);
 
-        foreach ($this->typeMap as $typeName => $pluginName) {
-            if ($typeName == $type) {
-                $helper = $renderer->plugin($pluginName);
-                return $helper($element);
-            }
+        if ($renderedType !== null) {
+            return $renderedType;
         }
 
-        $helper = $renderer->plugin('form_input');
-        return $helper($element);
+        return $this->renderHelper('form_input', $element);
     }
 
     /**
@@ -142,5 +137,52 @@ class FormElement extends BaseAbstractHelper
         $this->instanceMap[$instance] = $plugin;
 
         return $this;
+    }
+
+    /**
+     * Render element by helper name
+     *
+     * @param string $name
+     * @param ElementInterface $element
+     * @return string
+     */
+    protected function renderHelper($name, ElementInterface $element)
+    {
+        $helper = $this->getView()->plugin($name);
+        return $helper($element);
+    }
+
+    /**
+     * Render element by instance map
+     *
+     * @param ElementInterface $element
+     * @return string|null
+     */
+    protected function renderInstance(ElementInterface $element)
+    {
+        foreach ($this->instanceMap as $class => $pluginName) {
+            if (is_a($element, $class)) {
+                return $this->renderHelper($pluginName, $element);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Render element by type map
+     *
+     * @param ElementInterface $element
+     * @return string|null
+     */
+    protected function renderType(ElementInterface $element)
+    {
+        $type = $element->getAttribute('type');
+
+        foreach ($this->typeMap as $typeName => $pluginName) {
+            if ($typeName == $type) {
+                return $this->renderHelper($pluginName, $element);
+            }
+        }
+        return null;
     }
 }

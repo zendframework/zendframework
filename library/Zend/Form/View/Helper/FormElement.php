@@ -14,6 +14,8 @@ use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 class FormElement extends BaseAbstractHelper
 {
+    const DEFAULT_HELPER = 'form_input';
+
     /**
      * Instance map to view helper
      *
@@ -63,6 +65,13 @@ class FormElement extends BaseAbstractHelper
     );
 
     /**
+     * Default helper name
+     *
+     * @var string
+     */
+    protected $defaultHelper = self::DEFAULT_HELPER;
+
+    /**
      * Invoke helper as function
      *
      * Proxies to {@link render()}.
@@ -108,7 +117,20 @@ class FormElement extends BaseAbstractHelper
             return $renderedType;
         }
 
-        return $this->renderHelper('form_input', $element);
+        return $this->renderHelper($this->defaultHelper, $element);
+    }
+
+    /**
+     * Set default helper name
+     *
+     * @param string $name
+     * @return self
+     */
+    public function setDefaultHelper($name)
+    {
+        $this->defaultHelper = $name;
+
+        return $this;
     }
 
     /**

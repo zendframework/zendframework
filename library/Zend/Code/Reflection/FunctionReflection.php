@@ -59,9 +59,15 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
      */
     public function getContents($includeDocBlock = true)
     {
+        $fileName = $this->getFileName();
+        if (false === $fileName) {
+            throw new Exception\InvalidArgumentException(
+                'Cannot determine internals functions contents'
+            );
+        }
         return implode("\n",
             array_splice(
-                file($this->getFileName()),
+                file($fileName),
                 $this->getStartLine($includeDocBlock),
                 ($this->getEndLine() - $this->getStartLine()),
                 true
@@ -131,7 +137,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
 
         $functionLine = implode("\n", $lines);
         if ($this->isClosure()) {
-            preg_match('#^\s*\$[^\=]+=\s*function\s*\([^\)]*\)\s*\{(.*)\}\s*;\s*$#s', $functionLine, $matches);
+            preg_match('#function\s*\([^\)]*\)\s*\{(.*\;)\s*\}#s', $functionLine, $matches);
         } else {
             preg_match('#^\s*function\s*[^\(]+\([^\)]*\)\s*\{(.*)\}\s*$#s', $functionLine, $matches);
         }

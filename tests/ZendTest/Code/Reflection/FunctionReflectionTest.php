@@ -62,28 +62,28 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function6');
         $body = $function->getBody();
         $this->assertEquals("\$closure = function() { return 'bar'; };\n    return 'function6';", trim($body));
-        
+
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function7');
         $body = $function->getBody();
         $this->assertEquals("return 'function7';", trim($body));
-        
+
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function8');
         $body = $function->getBody();
         $this->assertEquals("return 'function8';", trim($body));
-        
+
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function9');
         $body = $function->getBody();
         $this->assertEquals("return 'function9';", trim($body));
-        
+
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function10');
         $body = $function->getBody();
         $this->assertEquals("\$closure = function() { return 'function10'; }; return \$closure();", trim($body));
-        
+
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function11');
         $body = $function->getBody();
         $this->assertEquals("return 'function11';", trim($body));
     }
-    
+
     public function testFunctionClosureBodyReturn()
     {
         require_once __DIR__ . '/TestAsset/closures.php';
@@ -103,23 +103,23 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $function = new FunctionReflection($function4);
         $body = $function->getBody();
         $this->assertEquals("\$closure = function() { return 'bar'; };\n    return 'function4';", trim($body));
-        
+
         $function5 = $list1['closure'];
         $function = new FunctionReflection($function5);
         $body = $function->getBody();
         $this->assertEquals("return 'function5';", trim($body));
-        
+
         $function6 = $list2[0];
         $function = new FunctionReflection($function6);
         $body = $function->getBody();
         $this->assertEquals("return 'function6';", trim($body));
-        
+
         $function7 = $list3[0];
         $function = new FunctionReflection($function7);
         $body = $function->getBody();
         $this->assertEquals("return \$c = function() { return 'function7'; }; return \$c();", trim($body));
     }
-    
+
     public function testInternalFunctionContentsReturn()
     {
         $function = new FunctionReflection('array_splice');

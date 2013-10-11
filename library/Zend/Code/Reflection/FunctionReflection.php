@@ -65,6 +65,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
                 'Cannot determine internals functions contents'
             );
         }
+
         return implode("\n",
             array_splice(
                 file($fileName),
@@ -136,7 +137,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
         );
 
         $functionLine = implode("\n", $lines);
-        
+
         $body = false;
         if ($this->isClosure()) {
             preg_match('#function\s*\([^\)]*\)\s*\{(.*\;)\s*\}#s', $functionLine, $matches);
@@ -150,7 +151,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
                 $body = $matches[1];
             }
         }
-        
+
         return $body;
     }
 

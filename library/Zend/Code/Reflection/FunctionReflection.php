@@ -139,7 +139,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
         if ($this->isClosure()) {
             preg_match('#function\s*\([^\)]*\)\s*\{(.*\;)\s*\}#s', $functionLine, $matches);
         } else {
-            preg_match('#^\s*function\s*[^\(]+\([^\)]*\)\s*\{(.*)\}\s*$#s', $functionLine, $matches);
+            preg_match('#function\s*[^\(]+\([^\)]*\)\s*\{(.*\;)\s*\}$#s', $functionLine, $matches);
         }
 
         if (!isset($matches[1])) {

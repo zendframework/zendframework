@@ -66,8 +66,24 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function7');
         $body = $function->getBody();
         $this->assertEquals("return 'function7';", trim($body));
+        
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function8');
+        $body = $function->getBody();
+        $this->assertEquals("return 'function8';", trim($body));
+        
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function9');
+        $body = $function->getBody();
+        $this->assertEquals("return 'function9';", trim($body));
+        
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function10');
+        $body = $function->getBody();
+        $this->assertEquals("\$closure = function() { return 'function10'; }; return \$closure();", trim($body));
+        
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function11');
+        $body = $function->getBody();
+        $this->assertEquals("return 'function11';", trim($body));
     }
-
+    
     public function testFunctionClosureBodyReturn()
     {
         require_once __DIR__ . '/TestAsset/closures.php';

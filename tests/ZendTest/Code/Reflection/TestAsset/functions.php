@@ -61,3 +61,7 @@ function function6()
 }
 
 $foo = 'foo'; function function7() { return 'function7'; }
+
+function function8() { return 'function8'; } function function9() { return 'function9'; }
+
+function function10() { $closure = function() { return 'function10'; }; return $closure(); } function function11() { return 'function11'; }

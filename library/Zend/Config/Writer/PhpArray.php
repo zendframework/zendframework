@@ -34,7 +34,7 @@ class PhpArray extends AbstractWriter
             'close' => $this->useBracketArraySyntax ? ']' : ')'
         );
 
-        return "<?php\n\n" .
+        return "<?php\n" .
                "return " . $arraySyntax['open'] . "\n" . $this->processIndented($config, $arraySyntax) .
                $arraySyntax['close'] . ";\n";
     }

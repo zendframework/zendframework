@@ -176,7 +176,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $result = Factory::toFile($file, $config);
 
         // build string line by line as we are trailing-whitespace sensitive.
-        $expected = "<?php\n\n";
+        $expected = "<?php\n";
         $expected .= "return array(\n";
         $expected .= "    'test' => 'foo',\n";
         $expected .= "    'bar' => array(\n";

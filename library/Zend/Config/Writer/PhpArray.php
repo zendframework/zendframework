@@ -12,6 +12,11 @@ namespace Zend\Config\Writer;
 class PhpArray extends AbstractWriter
 {
     /**
+     * @var string
+     */
+    const INDENT_STRING = '    ';
+
+    /**
      * @var bool
      */
     protected $useBracketArraySyntax = false;
@@ -48,7 +53,7 @@ class PhpArray extends AbstractWriter
         $arrayString = "";
 
         foreach ($config as $key => $value) {
-            $arrayString .= str_repeat('    ', $indentLevel);
+            $arrayString .= str_repeat(self::INDENT_STRING, $indentLevel);
             $arrayString .= (is_int($key) ? $key : "'" . addslashes($key) . "'") . ' => ';
 
             if (is_array($value)) {
@@ -58,7 +63,7 @@ class PhpArray extends AbstractWriter
                     $indentLevel++;
                     $arrayString .= $array['open'] . "\n"
                                   . $this->processIndented($value, $array, $indentLevel)
-                                  . str_repeat('    ', --$indentLevel) . $array['close'] . ",\n";
+                                  . str_repeat(self::INDENT_STRING, --$indentLevel) . $array['close'] . ",\n";
                 }
             } elseif (is_object($value)) {
                 $arrayString .= var_export($value, true) . ",\n";

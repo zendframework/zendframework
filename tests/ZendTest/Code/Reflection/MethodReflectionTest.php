@@ -48,7 +48,6 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $body = '        //we need a multi-line method body.
         $assigned = 1;
         $alsoAssigined = 2;
-
         return \'mixedValue\';';
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6', 'doSomething');
         $this->assertEquals($body, $reflectionMethod->getBody());

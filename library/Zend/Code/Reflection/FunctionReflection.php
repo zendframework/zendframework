@@ -15,6 +15,16 @@ use Zend\Code\Reflection\DocBlock\Tag\ReturnTag;
 class FunctionReflection extends ReflectionFunction implements ReflectionInterface
 {
     /**
+     * Constant use in @MethodReflection to display prototype as an array
+     */
+    const PROTOTYPE_AS_ARRAY = 'prototype_as_array';
+
+    /**
+     * Constant use in @MethodReflection to display prototype as a string
+     */
+    const PROTOTYPE_AS_STRING = 'prototype_as_string';
+
+    /**
      * Get function DocBlock
      *
      * @throws Exception\InvalidArgumentException
@@ -54,7 +64,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     /**
      * Get contents of function
      *
-     * @param  bool $includeDocBlock
+     * @param  bool   $includeDocBlock
      * @return string
      */
     public function getContents($includeDocBlock = true)
@@ -67,6 +77,58 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
                 true
             )
         );
+    }
+
+    /**
+     * Get method prototype
+     *
+     * @return array
+     */
+    public function getPrototype($format = FunctionReflection::PROTOTYPE_AS_ARRAY)
+    {
+        $returnType = 'mixed';
+        $docBlock = $this->getDocBlock();
+        if ($docBlock) {
+            /** @var Zend\Code\Reflection\DocBlock\Tag\ReturnTag $return */
+            $return = $docBlock->getTag('return');
+            $returnTypes = $return->getTypes();
+            $returnType = count($returnTypes) > 1 ? implode('|', $returnTypes) : $returnTypes[0];
+        }
+
+        $prototype = array(
+            'namespace' => $this->getNamespaceName(),
+            'name'      => substr($this->getName(), strlen($this->getNamespaceName()) + 1),
+            'return'    => $returnType,
+            'arguments' => array(),
+        );
+
+        $parameters = $this->getParameters();
+        foreach ($parameters as $parameter) {
+            $prototype['arguments'][$parameter->getName()] = array(
+                'type'     => $parameter->getType(),
+                'required' => !$parameter->isOptional(),
+                'by_ref'   => $parameter->isPassedByReference(),
+                'default'  => $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null,
+            );
+        }
+
+        if ($format == FunctionReflection::PROTOTYPE_AS_STRING) {
+            $line = $prototype['return'] . ' ' . $prototype['name'] . '(';
+            $args = array();
+            foreach ($prototype['arguments'] as $name => $argument) {
+                $argsLine = ($argument['type'] ? $argument['type'] . ' ' : '') . ($argument['by_ref'] ? '&' : '') . '$' . $name;
+                if (!$argument['required']) {
+                    $argsLine .= ' = ' . var_export($argument['default'], true);
+                }
+                $args[] = $argsLine;
+            }
+            $line .= implode(', ', $args);
+            $line .= ')';
+
+            return $line;
+        }
+
+        return $prototype;
     }
 
     /**
@@ -104,6 +166,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
         }
 
         $tag    = $docBlock->getTag('return');
+
         return new DocBlockReflection('@return ' . $tag->getDescription());
     }
 

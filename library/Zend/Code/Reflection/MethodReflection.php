@@ -17,6 +17,16 @@ use Zend\Code\Scanner\CachingFileScanner;
 class MethodReflection extends PhpReflectionMethod implements ReflectionInterface
 {
     /**
+     * Constant use in @MethodReflection to display prototype as an array
+     */
+    const PROTOTYPE_AS_ARRAY = 'prototype_as_array';
+    
+    /**
+     * Constant use in @MethodReflection to display prototype as a string
+     */
+    const PROTOTYPE_AS_STRING = 'prototype_as_string';
+
+    /**
      * @var AnnotationScanner
      */
     protected $annotations = null;
@@ -93,9 +103,9 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      * 
      * @return array
      */
-    public function getPrototype()
+    public function getPrototype($format = MethodReflection::PROTOTYPE_AS_ARRAY)
     {
-        $returnType = '';
+        $returnType = 'mixed';
         $docBlock = $this->getDocBlock();
         if ($docBlock) {
             /** @var Zend\Code\Reflection\DocBlock\Tag\ReturnTag $return */
@@ -121,6 +131,22 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
                 'by_ref'   => $parameter->isPassedByReference(),
                 'default'  => $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null,
             );
+        }
+        
+        if ($format == MethodReflection::PROTOTYPE_AS_STRING) {
+            $line = $prototype['return'] . ' ' . $prototype['name'] . '(';
+            $args = array();
+            foreach ($prototype['arguments'] as $name => $argument) {
+                $argsLine = ($argument['type'] ? $argument['type'] . ' ' : '') . ($argument['by_ref'] ? '&' : '') . '$' . $name;
+                if (!$argument['required']) {
+                    $argsLine .= ' = ' . var_export($argument['default'], true);
+                }
+                $args[] = $argsLine;
+            }
+            $line .= implode(', ', $args);
+            $line .= ')';
+            
+            return $line;
         }
         
         return $prototype;

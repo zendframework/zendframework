@@ -89,13 +89,14 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
             ),
         );
         $this->assertEquals($prototype, $reflectionMethod->getPrototype());
+        $this->assertEquals('int doSomethingElse(int $one, int $two = 2, string $three = \'three\')', $reflectionMethod->getPrototype(MethodReflection::PROTOTYPE_AS_STRING));
         
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', 'getProp2');
         $prototype = array(
             'namespace' => 'ZendTest\Code\Reflection\TestAsset',
             'class' => 'TestSampleClass2',
             'name' => 'getProp2',
-            'return' => '',
+            'return' => 'mixed',
             'arguments' => array(
                 'param1' => array(
                     'type'     => '',
@@ -112,5 +113,30 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
             ),
         );
         $this->assertEquals($prototype, $reflectionMethod->getPrototype());
+        $this->assertEquals('mixed getProp2($param1, ZendTest\Code\Reflection\TestAsset\TestSampleClass $param2)', $reflectionMethod->getPrototype(MethodReflection::PROTOTYPE_AS_STRING));
+        
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass12', 'doSomething');
+        $prototype = array(
+            'namespace' => 'ZendTest\Code\Reflection\TestAsset',
+            'class' => 'TestSampleClass12',
+            'name' => 'doSomething',
+            'return' => 'string',
+            'arguments' => array(
+                'one' => array(
+                    'type'     => 'int',
+                    'required' => true,
+                    'by_ref'   => true,
+                    'default'  => null,
+                ),
+                'two' => array(
+                    'type'     => 'int',
+                    'required' => true,
+                    'by_ref'   => false,
+                    'default'  => null,
+                ),
+            ),
+        );
+        $this->assertEquals($prototype, $reflectionMethod->getPrototype());
+        $this->assertEquals('string doSomething(int &$one, int $two)', $reflectionMethod->getPrototype(MethodReflection::PROTOTYPE_AS_STRING));
     }
 }

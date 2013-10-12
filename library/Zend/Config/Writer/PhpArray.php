@@ -48,6 +48,14 @@ class PhpArray extends AbstractWriter
         $this->useBracketArraySyntax = $value;
     }
 
+    /**
+     * Recursively processes a PHP config array structure into a readable format.
+     *
+     * @param array $config
+     * @param array $array
+     * @param int $indentLevel
+     * @return string
+     */
     protected function processIndented(array $config, array $array, &$indentLevel = 1)
     {
         $arrayString = "";

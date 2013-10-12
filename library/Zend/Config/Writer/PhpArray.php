@@ -49,7 +49,7 @@ class PhpArray extends AbstractWriter
 
         foreach ($config as $key => $value) {
             $arrayString .= str_repeat('    ', $indentLevel);
-            $arrayString .= (is_numeric($key) ? $key : "'" . addslashes($key) . "'") . ' => ';
+            $arrayString .= (is_int($key) ? $key : "'" . addslashes($key) . "'") . ' => ';
 
             if (is_array($value)) {
                 if ($value === array()) {

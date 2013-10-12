@@ -12,6 +12,11 @@ namespace Zend\Config\Writer;
 class PhpArray extends AbstractWriter
 {
     /**
+     * @var bool
+     */
+    protected $useBracketArraySyntax = false;
+
+    /**
      * processConfig(): defined by AbstractWriter.
      *
      * @param  array $config
@@ -19,11 +24,26 @@ class PhpArray extends AbstractWriter
      */
     public function processConfig(array $config)
     {
+        $array = array(
+            'open' => $this->useBracketArraySyntax ? '[' : 'array(',
+            'close' => $this->useBracketArraySyntax ? ']' : ')'
+        );
+
         return "<?php\n\n" .
-               "return array(\n" . $this->processIndented($config) . ");\n";
+               "return " . $array['open'] . "\n" . $this->processIndented($config, $array) . $array['close'] . ";\n";
     }
 
-    protected function processIndented(array $config, &$indentLevel = 1)
+    /**
+     * Sets whether or not to use the PHP 5.4+ "[]" array syntax.
+     *
+     * @param bool $value
+     */
+    public function setUseBracketArraySyntax($value)
+    {
+        $this->useBracketArraySyntax = $value;
+    }
+
+    protected function processIndented(array $config, array $array, &$indentLevel = 1)
     {
         $arrayString = "";
 
@@ -33,11 +53,12 @@ class PhpArray extends AbstractWriter
 
             if (is_array($value)) {
                 if ($value === array()) {
-                    $arrayString .= "array(),\n";
+                    $arrayString .= $array['open'] . $array['close'] . ",\n";
                 } else {
                     $indentLevel++;
-                    $arrayString .= "array(\n" . $this->processIndented($value, $indentLevel)
-                                  . str_repeat('    ', --$indentLevel) . "),\n";
+                    $arrayString .= $array['open'] . "\n"
+                                  . $this->processIndented($value, $array, $indentLevel)
+                                  . str_repeat('    ', --$indentLevel) . $array['close'] . ",\n";
                 }
             } elseif (is_object($value)) {
                 $arrayString .= var_export($value, true) . ",\n";

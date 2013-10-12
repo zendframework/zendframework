@@ -47,4 +47,24 @@ class PhpArrayTest extends AbstractWriterTestCase
 
         $this->assertEquals($expected, $configString);
     }
+
+    public function testRenderWithBracketArraySyntax()
+    {
+        $config = new Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
+
+        $this->writer->setUseBracketArraySyntax(true);
+        $configString = $this->writer->toString($config);
+
+        // build string line by line as we are trailing-whitespace sensitive.
+        $expected = "<?php\n\n";
+        $expected .= "return [\n";
+        $expected .= "    'test' => 'foo',\n";
+        $expected .= "    'bar' => [\n";
+        $expected .= "        0 => 'baz',\n";
+        $expected .= "        1 => 'foo',\n";
+        $expected .= "    ],\n";
+        $expected .= "];\n";
+
+        $this->assertEquals($expected, $configString);
+    }
 }

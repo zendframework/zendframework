@@ -42,7 +42,8 @@ class PhpArray extends AbstractWriter
     /**
      * Sets whether or not to use the PHP 5.4+ "[]" array syntax.
      *
-     * @param bool $value
+     * @param  bool $value
+     * @return void
      */
     public function setUseBracketArraySyntax($value)
     {
@@ -52,9 +53,9 @@ class PhpArray extends AbstractWriter
     /**
      * Recursively processes a PHP config array structure into a readable format.
      *
-     * @param array $config
-     * @param array $arraySyntax
-     * @param int $indentLevel
+     * @param  array $config
+     * @param  array $arraySyntax
+     * @param  int   $indentLevel
      * @return string
      */
     protected function processIndented(array $config, array $arraySyntax, &$indentLevel = 1)

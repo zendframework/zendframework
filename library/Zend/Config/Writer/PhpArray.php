@@ -19,9 +19,25 @@ class PhpArray extends AbstractWriter
      */
     public function processConfig(array $config)
     {
-        $arrayString = "<?php\n"
-                     . "return " . var_export($config, true) . ";\n";
+        $arrayString = "<?php\n\n"
+                     . "return";
+        $indentLevel = 0;
 
-        return $arrayString;
+        foreach (explode("\n", var_export($config, true)) as $line) {
+            $line = trim($line);
+
+            if ($line === '),' || $line === ')') {
+                $indentLevel--;
+            } else if (preg_match('/^\s*array \(/', $line)) {
+                $line = 'array(';
+                $indentLevel++;
+                $arrayString .= ' ' . $line;
+                continue;
+            }
+
+            $arrayString .= "\n" . str_repeat('    ', $indentLevel) . $line;
+        }
+
+        return $arrayString . ";\n";
     }
 }

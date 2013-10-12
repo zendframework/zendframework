@@ -176,14 +176,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $result = Factory::toFile($file, $config);
 
         // build string line by line as we are trailing-whitespace sensitive.
-        $expected = "<?php\n";
-        $expected .= "return array (\n";
-        $expected .= "  'test' => 'foo',\n";
-        $expected .= "  'bar' => \n";
-        $expected .= "  array (\n";
-        $expected .= "    0 => 'baz',\n";
-        $expected .= "    1 => 'foo',\n";
-        $expected .= "  ),\n";
+        $expected = "<?php\n\n";
+        $expected .= "return array(\n";
+        $expected .= "    'test' => 'foo',\n";
+        $expected .= "    'bar' => array(\n";
+        $expected .= "        0 => 'baz',\n";
+        $expected .= "        1 => 'foo',\n";
+        $expected .= "    ),\n";
         $expected .= ");\n";
 
         $this->assertEquals(true, $result);

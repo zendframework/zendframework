@@ -9,8 +9,16 @@
 
 namespace ZendTest\Code\Reflection\TestAsset;
 
+/**
+ * /!\ Don't fix this file with the coding style.
+ * The class Zend\Code\Reflection\FunctionReflection must parse a lot of closure formats
+ */
 class TestSampleClass11
 {
+    /**
+     * Doc block doSomething
+     * @return string
+     */
     public function doSomething() {
         return 'doSomething';
     }
@@ -27,4 +35,8 @@ class TestSampleClass11
     {
         return 'doStaticSomething';
     }
+    
+    public function inline1() { return 'inline1'; } public function inline2() { return 'inline2'; } public function inline3() { return 'inline3'; }
+    
+    public function emptyFunction() {}
 }

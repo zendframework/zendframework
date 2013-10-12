@@ -147,9 +147,9 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
             ($this->getEndLine() - ($this->getStartLine() - 1)),
             true
         );
-
+        
         $functionLine = implode("\n", $lines);
-        preg_match('#^\s*[(public|protected|private|abstract|final|static)\s*]+function\s*[^\(]+\([^\)]*\)\s*\{(.*)\}\s*$#s', $functionLine, $matches);
+        preg_match('#[(public|protected|private|abstract|final|static)\s*]+function\s+' . $this->getName() . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)}#s', $functionLine, $matches);
 
         if (!isset($matches[1])) {
             return false;

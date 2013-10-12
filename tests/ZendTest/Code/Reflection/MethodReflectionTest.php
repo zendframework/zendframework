@@ -69,6 +69,22 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'doStaticSomething');
         $body = $reflectionMethod->getBody();
         $this->assertEquals(trim($body), "return 'doStaticSomething';");
+        
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'inline1');
+        $body = $reflectionMethod->getBody();
+        $this->assertEquals(trim($body), "return 'inline1';");
+        
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'inline2');
+        $body = $reflectionMethod->getBody();
+        $this->assertEquals(trim($body), "return 'inline2';");
+        
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'inline3');
+        $body = $reflectionMethod->getBody();
+        $this->assertEquals(trim($body), "return 'inline3';");
+        
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'emptyFunction');
+        $body = $reflectionMethod->getBody();
+        $this->assertEquals(trim($body), "");
     }
 
     public function testGetContentsReturnsCorrectContent()

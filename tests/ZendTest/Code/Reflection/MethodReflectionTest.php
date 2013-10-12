@@ -48,6 +48,7 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $body = '        //we need a multi-line method body.
         $assigned = 1;
         $alsoAssigined = 2;
+
         return \'mixedValue\';';
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6', 'doSomething');
         $this->assertEquals($body, $reflectionMethod->getBody());
@@ -90,7 +91,7 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($prototype, $reflectionMethod->getPrototype());
         $this->assertEquals('int doSomethingElse(int $one, int $two = 2, string $three = \'three\')', $reflectionMethod->getPrototype(MethodReflection::PROTOTYPE_AS_STRING));
-        
+
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', 'getProp2');
         $prototype = array(
             'namespace' => 'ZendTest\Code\Reflection\TestAsset',
@@ -114,7 +115,7 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($prototype, $reflectionMethod->getPrototype());
         $this->assertEquals('mixed getProp2($param1, ZendTest\Code\Reflection\TestAsset\TestSampleClass $param2)', $reflectionMethod->getPrototype(MethodReflection::PROTOTYPE_AS_STRING));
-        
+
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass12', 'doSomething');
         $prototype = array(
             'namespace' => 'ZendTest\Code\Reflection\TestAsset',

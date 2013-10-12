@@ -20,7 +20,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      * Constant use in @MethodReflection to display prototype as an array
      */
     const PROTOTYPE_AS_ARRAY = 'prototype_as_array';
-    
+
     /**
      * Constant use in @MethodReflection to display prototype as a string
      */
@@ -97,10 +97,10 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
 
         return $zendReflection;
     }
-    
+
     /**
      * Get method prototype
-     * 
+     *
      * @return array
      */
     public function getPrototype($format = MethodReflection::PROTOTYPE_AS_ARRAY)
@@ -113,7 +113,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
             $returnTypes = $return->getTypes();
             $returnType = count($returnTypes) > 1 ? implode('|', $returnTypes) : $returnTypes[0];
         }
-        
+
         $declaringClass = $this->getDeclaringClass();
         $prototype = array(
             'namespace' => $declaringClass->getNamespaceName(),
@@ -122,9 +122,9 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
             'return'    => $returnType,
             'arguments' => array(),
         );
-        
+
         $parameters = $this->getParameters();
-        foreach($parameters as $parameter) {
+        foreach ($parameters as $parameter) {
             $prototype['arguments'][$parameter->getName()] = array(
                 'type'     => $parameter->getType(),
                 'required' => !$parameter->isOptional(),
@@ -132,7 +132,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
                 'default'  => $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null,
             );
         }
-        
+
         if ($format == MethodReflection::PROTOTYPE_AS_STRING) {
             $line = $prototype['return'] . ' ' . $prototype['name'] . '(';
             $args = array();
@@ -145,10 +145,10 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
             }
             $line .= implode(', ', $args);
             $line .= ')';
-            
+
             return $line;
         }
-        
+
         return $prototype;
     }
 
@@ -178,7 +178,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     /**
      * Get method contents
      *
-     * @param  bool $includeDocBlock
+     * @param  bool   $includeDocBlock
      * @return string
      */
     public function getContents($includeDocBlock = true)

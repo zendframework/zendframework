@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc;
@@ -25,11 +24,6 @@ use Zend\ServiceManager\ServiceManager;
 use Zend\Uri\UriFactory;
 use ZendTest\Mvc\TestAsset\StubBootstrapListener;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage UnitTest
- */
 class ApplicationTest extends TestCase
 {
     /**
@@ -332,14 +326,15 @@ class ApplicationTest extends TestCase
         });
 
         $result = $this->application->run();
-        $this->assertSame($response, $result);
+        $this->assertSame($this->application, $result);
+        $this->assertSame($response, $result->getResponse());
     }
 
     public function testControllerIsDispatchedDuringRun()
     {
         $this->setupPathController();
 
-        $response = $this->application->run();
+        $response = $this->application->run()->getResponse();
         $this->assertContains('PathController', $response->getContent());
         $this->assertContains('dispatch', $response->toString());
     }
@@ -496,7 +491,8 @@ class ApplicationTest extends TestCase
         });
 
         $result = $this->application->run();
-        $this->assertSame($response, $result, var_export($result, 1));
+        $this->assertSame($this->application, $result, get_class($result));
+        $this->assertSame($response, $result->getResponse(), get_class($result));
     }
 
     /**

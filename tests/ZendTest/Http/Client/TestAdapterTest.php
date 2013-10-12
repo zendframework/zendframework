@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace ZendTest\Http\Client;
@@ -13,9 +12,6 @@ namespace ZendTest\Http\Client;
 /**
  * Exercises Zend_Http_Client_Adapter_Test
  *
- * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */

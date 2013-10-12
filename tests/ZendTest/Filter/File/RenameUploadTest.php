@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter\File;
@@ -13,9 +12,6 @@ namespace ZendTest\Filter\File;
 use Zend\Filter\File\RenameUpload as FileRenameUpload;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class RenameUploadTest extends \PHPUnit_Framework_TestCase
@@ -70,9 +66,9 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         mkdir($this->_filesPath);
         mkdir($this->_newDir);
 
-        $this->_oldFile    = $this->_filesPath . '/testfile.txt';
-        $this->_newFile    = $this->_filesPath . '/newfile.xml';
-        $this->_newDirFile = $this->_newDir . '/testfile.txt';
+        $this->_oldFile    = $this->_filesPath . DIRECTORY_SEPARATOR . 'testfile.txt';
+        $this->_newFile    = $this->_filesPath . DIRECTORY_SEPARATOR . 'newfile.xml';
+        $this->_newDirFile = $this->_newDir . DIRECTORY_SEPARATOR . 'testfile.txt';
 
         touch($this->_oldFile);
     }

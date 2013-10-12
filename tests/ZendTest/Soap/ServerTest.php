@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 namespace ZendTest\Soap;
@@ -18,9 +17,6 @@ use Zend\Soap\Server;
 /**
  * Zend_Soap_Server
  *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
  * @group      Zend_Soap
  * @group      Zend_Soap_Server
  */
@@ -662,7 +658,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         if (!is_array($exception)) {
             $this->assertContains($exception, $server->getFaultExceptions());
         } else {
-            foreach($exception as $row) {
+            foreach ($exception as $row) {
                 $this->assertContains($row, $server->getFaultExceptions());
             }
         }
@@ -702,7 +698,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         if (!is_array($exception)) {
             $this->assertTrue($server->isRegisteredAsFaultException($exception));
         } else {
-            foreach($exception as $row) {
+            foreach ($exception as $row) {
                 $this->assertTrue($server->isRegisteredAsFaultException($row));
             }
         }

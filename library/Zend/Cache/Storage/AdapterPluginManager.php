@@ -28,6 +28,7 @@ class AdapterPluginManager extends AbstractPluginManager
      */
     protected $invokableClasses = array(
         'apc'            => 'Zend\Cache\Storage\Adapter\Apc',
+        'blackhole'      => 'Zend\Cache\Storage\Adapter\BlackHole',
         'dba'            => 'Zend\Cache\Storage\Adapter\Dba',
         'filesystem'     => 'Zend\Cache\Storage\Adapter\Filesystem',
         'memcached'      => 'Zend\Cache\Storage\Adapter\Memcached',

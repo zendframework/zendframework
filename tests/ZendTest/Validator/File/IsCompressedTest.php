@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator\File;
@@ -15,9 +14,6 @@ use Zend\Validator\File;
 /**
  * IsCompressed testbed
  *
- * @category   Zend
- * @package    Zend_Validator_File
- * @subpackage UnitTests
  * @group      Zend_Validator
  */
 class IsCompressedTest extends \PHPUnit_Framework_TestCase
@@ -30,6 +26,11 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
             || (version_compare(PHP_VERSION, '5.4', '>=')
                 && version_compare(PHP_VERSION, '5.4.1', '<'))
         ) {
+            return __DIR__ . '/_files/magic.lte.5.3.10.mime';
+        }
+
+        // Ubuntu has backported the changes in 12.04 to PHP 5.3.10.
+        if (strpos(PHP_VERSION, 'ubuntu') !== false && version_compare(PHP_VERSION, '5.3.10', '>=')) {
             return __DIR__ . '/_files/magic.lte.5.3.10.mime';
         }
 

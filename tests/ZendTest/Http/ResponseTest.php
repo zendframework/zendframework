@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace ZendTest\Http;
@@ -272,7 +271,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response = Response::fromString($response_str);
 
         $this->assertEquals(strtolower(str_replace("\n", "\r\n", $response_str)), strtolower($response->toString()), 'Response convertion to string does not match original string');
-        $this->assertEquals(strtolower(str_replace("\n", "\r\n", $response_str)), strtolower((string)$response), 'Response convertion to string does not match original string');
+        $this->assertEquals(strtolower(str_replace("\n", "\r\n", $response_str)), strtolower((string) $response), 'Response convertion to string does not match original string');
     }
 
     public function testToStringGzip()
@@ -281,7 +280,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response = Response::fromString($response_str);
 
         $this->assertEquals(strtolower($response_str), strtolower($response->toString()), 'Response convertion to string does not match original string');
-        $this->assertEquals(strtolower($response_str), strtolower((string)$response), 'Response convertion to string does not match original string');
+        $this->assertEquals(strtolower($response_str), strtolower((string) $response), 'Response convertion to string does not match original string');
     }
 
     public function testGetHeaders()
@@ -316,7 +315,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
         // Check header integrity
         $this->assertEquals('timeout=15,max=100', $response->getHeaders()->get('keep-alive')->getFieldValue());
-        $this->assertEquals('text/html;charset=iso-8859-1', $response->getHeaders()->get('content-type')->getFieldValue());
+        $this->assertEquals('text/html; charset=iso-8859-1', $response->getHeaders()->get('content-type')->getFieldValue());
     }
 
     /**

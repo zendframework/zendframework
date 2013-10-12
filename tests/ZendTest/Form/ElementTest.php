@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form;
@@ -13,11 +12,6 @@ namespace ZendTest\Form;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class ElementTest extends TestCase
 {
     public function testAttributesAreEmptyByDefault()
@@ -159,11 +153,22 @@ class ElementTest extends TestCase
     {
         $element = new Element('foo');
         $element->setOptions(array(
-                                  'label' => 'foo',
-                                  'label_attributes' => array('bar' => 'baz')
-                             ));
+            'label' => 'foo',
+            'label_attributes' => array('bar' => 'baz')
+        ));
         $option = $element->getOption('label_attributes');
         $this->assertEquals(array('bar' => 'baz'), $option);
+    }
+
+    public function testLabelOptionsAccessors()
+    {
+        $element = new Element('foo');
+        $element->setOptions(array(
+            'label_options' => array('moar' => 'foo')
+        ));
+
+        $labelOptions = $element->getLabelOptions();
+        $this->assertEquals(array('moar' => 'foo'), $labelOptions);
     }
 
     public function testSetOptionsWrongInputRaisesException()

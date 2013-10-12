@@ -5,16 +5,10 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ProgressBar
  */
 
 namespace ZendTest\ProgressBar\Adapter;
 
-/**
- * @category   Zend
- * @package    Zend_ProgressBar
- * @subpackage UnitTests
- */
 class MockupStream
 {
 
@@ -30,22 +24,22 @@ class MockupStream
         $this->test = $url["host"];
         $this->position = 0;
 
-        self::$tests[$url["host"]] = '';
+        static::$tests[$url["host"]] = '';
         return true;
     }
 
     public function stream_read($count)
     {
-        $ret = substr(self::$tests[$this->test], $this->position, $count);
+        $ret = substr(static::$tests[$this->test], $this->position, $count);
         $this->position += strlen($ret);
         return $ret;
     }
 
     public function stream_write($data)
     {
-        $left = substr(self::$tests[$this->test], 0, $this->position);
-        $right = substr(self::$tests[$this->test], $this->position + strlen($data));
-        self::$tests[$this->test] = $left . $data . $right;
+        $left = substr(static::$tests[$this->test], 0, $this->position);
+        $right = substr(static::$tests[$this->test], $this->position + strlen($data));
+        static::$tests[$this->test] = $left . $data . $right;
         $this->position += strlen($data);
         return strlen($data);
     }
@@ -57,14 +51,14 @@ class MockupStream
 
     public function stream_eof()
     {
-        return $this->position >= strlen(self::$tests[$this->test]);
+        return $this->position >= strlen(static::$tests[$this->test]);
     }
 
     public function stream_seek($offset, $whence)
     {
         switch ($whence) {
             case SEEK_SET:
-                if ($offset < strlen(self::$tests[$this->test]) && $offset >= 0) {
+                if ($offset < strlen(static::$tests[$this->test]) && $offset >= 0) {
                     $this->position = $offset;
                     return true;
                 } else {
@@ -82,8 +76,8 @@ class MockupStream
                 break;
 
             case SEEK_END:
-                if (strlen(self::$tests[$this->test]) + $offset >= 0) {
-                    $this->position = strlen(self::$tests[$this->test]) + $offset;
+                if (strlen(static::$tests[$this->test]) + $offset >= 0) {
+                    $this->position = strlen(static::$tests[$this->test]) + $offset;
                     return true;
                 } else {
                     return false;
@@ -97,6 +91,6 @@ class MockupStream
 
     public function __destruct()
     {
-        unset(self::$tests[$this->test]);
+        unset(static::$tests[$this->test]);
     }
 }

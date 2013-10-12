@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Navigation
  */
 
 namespace ZendTest\Navigation\Page;
@@ -20,9 +19,6 @@ use Zend\Config;
  * Tests the class Zend_Navigation_Page
  *
  * @author    Robin Skoglund
- * @category   Zend
- * @package    Zend_Navigation
- * @subpackage UnitTests
  * @group      Zend_Navigation
  */
 class PageTest extends \PHPUnit_Framework_TestCase
@@ -724,6 +720,17 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
         $page->setVisible(array());
         $this->assertFalse($page->isVisible());
+    }
+
+    public function testSetTranslatorTextDomainString()
+    {
+        $page = AbstractPage::factory(array(
+            'type'  => 'uri',
+            'label' => 'hello'
+        ));
+
+        $page->setTextdomain('foo');
+        $this->assertEquals('foo', $page->getTextdomain());
     }
 
     public function testMagicOverLoadsShouldSetAndGetNativeProperties()

@@ -305,7 +305,7 @@ class FileGenerator extends AbstractGenerator
     public function setUses(array $uses)
     {
         foreach ($uses as $use) {
-            $use = (array)$use;
+            $use = (array) $use;
             if (array_key_exists('use', $use) && array_key_exists('as', $use)) {
                 $import = $use['use'];
                 $alias  = $use['as'];

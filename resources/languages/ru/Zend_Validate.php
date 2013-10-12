@@ -20,6 +20,11 @@ return array(
     "Invalid type given, value should be a string" => "Недопустимый тип данных, значение должно быть строкой",
     "'%value%' contains non alphabetic characters" => "'%value%' содержит не буквенные символы",
     "'%value%' is an empty string" => "'%value%' - пустая строка",
+    
+    // Zend\I18n\Validator\PhoneNumber
+    "The input does not match a phone number format" => "Неправильный формат номера телефона",
+    "The country provided is currently unsupported" => "Страна в настоящее время не поддерживается",
+    "Invalid type given. String expected" => "Недопустимый тип данных, значение должно быть строкой",
 
     // Zend_Validate_Barcode
     "'%value%' failed checksum validation" => "'%value%' ошибка проверки контрольной суммы",
@@ -178,17 +183,18 @@ return array(
     "'%value%' has not only hexadecimal digit characters" => "Значение '%value%' должно содержать только шестнадцатиричные символы",
 
     // Zend_Validate_Hostname
-    "Invalid type given, value should be a string" => "Недопустимый тип данных, значение должно быть строкой",
-    "'%value%' appears to be an IP address, but IP addresses are not allowed" => "Значение '%value%' выглядит как IP-адрес, но IP-адреса не разрешены",
-    "'%value%' appears to be a DNS hostname but cannot match TLD against known list" => "'%value%' выглядит как DNS имя хоста, но оно не дожно быть из списка доменов верхнего уровня",
-    "'%value%' appears to be a DNS hostname but contains a dash in an invalid position" => "'%value%' выглядит как DNS имя хоста, но знак '-' находится в недопустимом месте",
-    "'%value%' appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "'%value%' выглядит как DNS имя хоста, но оно не соответствует шаблону для доменных имен верхнего уровня '%tld%'",
-    "'%value%' appears to be a DNS hostname but cannot extract TLD part" => "'%value%' выглядит как DNS имя хоста, но не удаётся извлечь домен верхнего уровня",
-    "'%value%' does not match the expected structure for a DNS hostname" => "'%value%' не соответствует ожидаемой структуре для DNS имени хоста",
-    "'%value%' does not appear to be a valid local network name" => "'%value%' является недопустимым локальным сетевым адресом",
-    "'%value%' appears to be a local network name but local network names are not allowed" => "'%value%' выглядит как локальный сетевой адрес, но локальные сетевые адреса не разрешены",
-    "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded" => "'%value%' выглядит как DNS имя хоста, но указанное значение не может быть преобразованно в допустимый для DNS набор символов",
-
+    "The input appears to be a DNS hostname but the given punycode notation cannot be decoded" => "Значение похоже на DNS имя хоста, но указанное значение не может быть преобразованно в допустимый для DNS набор символов",
+    "Invalid type given. String expected" => "Недопустимый тип данных, значение должно быть строкой",
+    "The input appears to be a DNS hostname but contains a dash in an invalid position" => "Значение похоже на DNS имя хоста, но знак '-' находится в недопустимом месте",
+    "The input does not match the expected structure for a DNS hostname" => 'Значение не соответствует структуре DNS имени хоста',
+    "The input appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "Значение похоже на DNS имя хоста, но оно не соответствует шаблону для доменных имен верхнего уровня '%tld%'",
+    "The input does not appear to be a valid local network name" => "Значение является недопустимым локальным сетевым адресом",
+    "The input does not appear to be a valid local network name" => "Значение является недопустимым URI имени хоста",
+    "The input appears to be an IP address, but IP addresses are not allowed" => "Значение похоже на IP-адрес, но IP-адреса не разрешены",
+    "The input appears to be a local network name but local network names are not allowed" => 'Значение похоже на адрес в локальной сети. Локальные адреса не разрешены',
+    "The input appears to be a DNS hostname but cannot extract TLD part" => "Значение похоже на DNS имя хоста, но не удаётся извлечь домен верхнего уровня",
+    "The input appears to be a DNS hostname but cannot match TLD against known list" => "Значение похоже на DNS имя хоста, но оно не дожно быть из списка доменов верхнего уровня",
+    
     // Zend_Validate_Iban
     "Unknown country within the IBAN '%value%'" => "Не известная страна IBAN '%value%'",
     "'%value%' has a false IBAN format" => "'%value%' имеет недопустимый IBAN формат",

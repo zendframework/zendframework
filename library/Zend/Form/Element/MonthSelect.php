@@ -277,6 +277,17 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     }
 
     /**
+     * @return String
+     */
+    public function getValue()
+    {
+        return sprintf('%s-%s',
+            $this->getYearElement()->getValue(),
+            $this->getMonthElement()->getValue()
+        );
+    }
+
+    /**
      * Prepare the form element (mostly used for rendering purposes)
      *
      * @param  FormInterface $form

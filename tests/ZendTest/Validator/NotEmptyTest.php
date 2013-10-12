@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
@@ -14,9 +13,6 @@ use stdClass;
 use Zend\Validator\NotEmpty;
 
 /**
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
  * @group      Zend_Validator
  */
 class NotEmptyTest extends \PHPUnit_Framework_TestCase
@@ -483,7 +479,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetType()
     {
-        $this->assertEquals(493, $this->validator->getType());
+        $this->assertEquals($this->validator->getDefaultType(), $this->validator->getType());
     }
 
     /**
@@ -593,7 +589,21 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     public function testTypeAutoDetectionHasNoSideEffect()
     {
         $validator = new NotEmpty(array('translatorEnabled' => true));
-        $this->assertEquals(493, $validator->getType());
+        $this->assertEquals($validator->getDefaultType(), $validator->getType());
+    }
+
+    public function testDefaultType()
+    {
+        $this->assertSame(
+            NotEmpty::BOOLEAN
+                | NotEmpty::FLOAT
+                | NotEmpty::STRING
+                | NotEmpty::EMPTY_ARRAY
+                | NotEmpty::NULL
+                | NotEmpty::SPACE
+                | NotEmpty::OBJECT,
+            $this->validator->getDefaultType()
+        );
     }
 }
 

@@ -59,13 +59,34 @@ class Factory
      *
      * @param  string  $filename
      * @param  bool $returnConfigObject
+     * @param  bool $useIncludePath
      * @return array|Config
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public static function fromFile($filename, $returnConfigObject = false)
+    public static function fromFile($filename, $returnConfigObject = false, $useIncludePath = false)
     {
-        $pathinfo = pathinfo($filename);
+        $filepath = $filename;
+        if (!file_exists($filename)) {
+            if (!$useIncludePath) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Filename "%s" cannot be found relative to the working directory',
+                    $filename
+                ));
+            }
+
+            $fromIncludePath = stream_resolve_include_path($filename);
+            if (!$fromIncludePath) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Filename "%s" cannot be found relative to the working directory or the include_path ("%s")',
+                    $filename,
+                    get_include_path()
+                ));
+            }
+            $filepath = $fromIncludePath;
+        }
+
+        $pathinfo = pathinfo($filepath);
 
         if (!isset($pathinfo['extension'])) {
             throw new Exception\RuntimeException(sprintf(
@@ -77,14 +98,14 @@ class Factory
         $extension = strtolower($pathinfo['extension']);
 
         if ($extension === 'php') {
-            if (!is_file($filename) || !is_readable($filename)) {
+            if (!is_file($filepath) || !is_readable($filepath)) {
                 throw new Exception\RuntimeException(sprintf(
                     "File '%s' doesn't exist or not readable",
                     $filename
                 ));
             }
 
-            $config = include $filename;
+            $config = include $filepath;
         } elseif (isset(static::$extensions[$extension])) {
             $reader = static::$extensions[$extension];
             if (!$reader instanceof Reader\ReaderInterface) {
@@ -93,7 +114,7 @@ class Factory
             }
 
             /** @var Reader\ReaderInterface $reader  */
-            $config = $reader->fromFile($filename);
+            $config = $reader->fromFile($filepath);
         } else {
             throw new Exception\RuntimeException(sprintf(
                 'Unsupported config file extension: .%s',
@@ -109,14 +130,15 @@ class Factory
      *
      * @param  array   $files
      * @param  bool $returnConfigObject
+     * @param  bool $useIncludePath
      * @return array|Config
      */
-    public static function fromFiles(array $files, $returnConfigObject = false)
+    public static function fromFiles(array $files, $returnConfigObject = false, $useIncludePath = false)
     {
         $config = array();
 
         foreach ($files as $file) {
-            $config = ArrayUtils::merge($config, static::fromFile($file));
+            $config = ArrayUtils::merge($config, static::fromFile($file, false, $useIncludePath));
         }
 
         return ($returnConfigObject) ? new Config($config) : $config;
@@ -157,16 +179,16 @@ class Factory
             );
         }
 
-        if (!isset(self::$writerExtensions[$extension])) {
+        if (!isset(static::$writerExtensions[$extension])) {
             throw new Exception\RuntimeException(
                 "Unsupported config file extension: '.{$extension}' for writing."
             );
         }
 
-        $writer = self::$writerExtensions[$extension];
+        $writer = static::$writerExtensions[$extension];
         if (($writer instanceOf Writer\AbstractWriter) === false) {
             $writer = self::getWriterPluginManager()->get($writer);
-            self::$writerExtensions[$extension] = $writer;
+            static::$writerExtensions[$extension] = $writer;
         }
 
         if (is_object($config)) {
@@ -210,7 +232,7 @@ class Factory
      */
     public static function setWriterPluginManager(WriterPluginManager $writers)
     {
-        self::$writers = $writers;
+        static::$writers = $writers;
     }
 
     /**
@@ -272,6 +294,6 @@ class Factory
             ));
         }
 
-        self::$writerExtensions[$extension] = $writer;
+        static::$writerExtensions[$extension] = $writer;
     }
 }

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\Element;
@@ -86,6 +85,14 @@ class DateTimeSelectTest extends TestCase
         $this->assertEquals('03', $element->getHourElement()->getValue());
         $this->assertEquals('04', $element->getMinuteElement()->getValue());
         $this->assertEquals('05', $element->getSecondElement()->getValue());
+    }
+
+    public function testCanGetValue()
+    {
+        $element  = new DateTimeSelectElement();
+        $element->setValue(new DateTime('2012-09-24 03:04:05'));
+
+        $this->assertEquals('2012-09-24 03:04:05', $element->getValue());
     }
 
     /**

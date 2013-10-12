@@ -74,7 +74,7 @@ class Exists extends AbstractValidator
         $asArray   = (bool) $asArray;
         $directory = $this->options['directory'];
         if ($asArray && isset($directory)) {
-            $directory = explode(',', (string)$directory);
+            $directory = explode(',', (string) $directory);
         }
 
         return $directory;

@@ -905,7 +905,7 @@ class Client implements Stdlib\DispatchableInterface
                     $response->setCleanup(true);
                 }
             } else {
-                $response = Response::fromString($response);
+                $response = $this->getResponse()->fromString($response);
             }
 
             // Get the cookies from response (if any)
@@ -1154,9 +1154,10 @@ class Client implements Stdlib\DispatchableInterface
         }
 
         // Merge the headers of the request (if any)
-        $requestHeaders = $this->getRequest()->getHeaders()->toArray();
-        foreach ($requestHeaders as $key => $value) {
-            $headers[$key] = $value;
+        // here we need right 'http field' and not lowercase letters
+        $requestHeaders = $this->getRequest()->getHeaders();
+        foreach ($requestHeaders as $requestHeaderElement) {
+            $headers[$requestHeaderElement->getFieldName()] = $requestHeaderElement->getFieldValue();
         }
         return $headers;
     }

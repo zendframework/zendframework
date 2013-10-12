@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper;
@@ -17,9 +16,6 @@ use Zend\View;
 /**
  * Test class for Zend_View_Helper_HeadScript.
  *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -377,6 +373,30 @@ document.write(bar.strlen());');
         $this->helper->__invoke()->setIndent(4);
         $test = $this->helper->__invoke()->toString();
         $this->assertContains('    <!--[if lt IE 7]>', $test);
+    }
+
+    public function testConditionalScriptNoIE()
+    {
+        $this->helper->setAllowArbitraryAttributes(true);
+        $this->helper->appendFile(
+            '/js/foo.js', 'text/javascript', array('conditional' => '!IE')
+        );
+        $test = $this->helper->toString();
+
+        $this->assertContains('<!--[if !IE]><!--><', $test);
+        $this->assertContains('<!--<![endif]-->', $test);
+    }
+
+    public function testConditionalScriptNoIEWidthSpace()
+    {
+        $this->helper->setAllowArbitraryAttributes(true);
+        $this->helper->appendFile(
+            '/js/foo.js', 'text/javascript', array('conditional' => '! IE')
+        );
+        $test = $this->helper->toString();
+
+        $this->assertContains('<!--[if ! IE]><!--><', $test);
+        $this->assertContains('<!--<![endif]-->', $test);
     }
 
     /**

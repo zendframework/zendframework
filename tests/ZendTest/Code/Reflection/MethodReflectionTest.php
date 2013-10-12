@@ -59,4 +59,58 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("    {\n\n        return 'mixedValue';\n\n    }\n", $reflectionMethod->getContents(false));
     }
 
+    public function testGetPrototypeMethod()
+    {
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass10', 'doSomethingElse');
+        $prototype = array(
+            'namespace' => 'ZendTest\Code\Reflection\TestAsset',
+            'class' => 'TestSampleClass10',
+            'name' => 'doSomethingElse',
+            'return' => 'int',
+            'arguments' => array(
+                'one' => array(
+                    'type'     => 'int',
+                    'required' => true,
+                    'by_ref'   => false,
+                    'default'  => null,
+                ),
+                'two' => array(
+                    'type'     => 'int',
+                    'required' => false,
+                    'by_ref'   => false,
+                    'default'  => 2,
+                ),
+                'three' => array(
+                    'type'     => 'string',
+                    'required' => false,
+                    'by_ref'   => false,
+                    'default'  => 'three',
+                ),
+            ),
+        );
+        $this->assertEquals($prototype, $reflectionMethod->getPrototype());
+        
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', 'getProp2');
+        $prototype = array(
+            'namespace' => 'ZendTest\Code\Reflection\TestAsset',
+            'class' => 'TestSampleClass2',
+            'name' => 'getProp2',
+            'return' => '',
+            'arguments' => array(
+                'param1' => array(
+                    'type'     => '',
+                    'required' => true,
+                    'by_ref'   => false,
+                    'default'  => null,
+                ),
+                'param2' => array(
+                    'type'     => 'ZendTest\Code\Reflection\TestAsset\TestSampleClass',
+                    'required' => true,
+                    'by_ref'   => false,
+                    'default'  => null,
+                ),
+            ),
+        );
+        $this->assertEquals($prototype, $reflectionMethod->getPrototype());
+    }
 }

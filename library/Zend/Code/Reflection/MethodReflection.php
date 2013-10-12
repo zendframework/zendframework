@@ -10,7 +10,6 @@
 namespace Zend\Code\Reflection;
 
 use ReflectionMethod as PhpReflectionMethod;
-use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Scanner\AnnotationScanner;
 use Zend\Code\Scanner\CachingFileScanner;
@@ -87,6 +86,44 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         unset($phpReflection);
 
         return $zendReflection;
+    }
+    
+    /**
+     * Get method prototype
+     * 
+     * @return array
+     */
+    public function getPrototype()
+    {
+        $returnType = '';
+        $docBlock = $this->getDocBlock();
+        if ($docBlock) {
+            /** @var Zend\Code\Reflection\DocBlock\Tag\ReturnTag $return */
+            $return = $docBlock->getTag('return');
+            $returnTypes = $return->getTypes();
+            $returnType = count($returnTypes) > 1 ? implode('|', $returnTypes) : $returnTypes[0];
+        }
+        
+        $declaringClass = $this->getDeclaringClass();
+        $prototype = array(
+            'namespace' => $declaringClass->getNamespaceName(),
+            'class'     => substr($declaringClass->getName(), strlen($declaringClass->getNamespaceName()) + 1),
+            'name'      => $this->getName(),
+            'return'    => $returnType,
+            'arguments' => array(),
+        );
+        
+        $parameters = $this->getParameters();
+        foreach($parameters as $parameter) {
+            $prototype['arguments'][$parameter->getName()] = array(
+                'type'     => $parameter->getType(),
+                'required' => !$parameter->isOptional(),
+                'by_ref'   => $parameter->isPassedByReference(),
+                'default'  => $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null,
+            );
+        }
+        
+        return $prototype;
     }
 
     /**

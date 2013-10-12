@@ -14,7 +14,8 @@ use Zend\Mail\Message;
 /**
  * File transport
  *
- * Class for saving outgoing emails in filesystem
+ * The null transport will just store the message in memory.  It is helpful
+ * when unit testing.
  */
 class Null implements TransportInterface
 {

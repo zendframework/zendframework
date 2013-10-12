@@ -19,25 +19,33 @@ class PhpArray extends AbstractWriter
      */
     public function processConfig(array $config)
     {
-        $arrayString = "<?php\n\n"
-                     . "return";
-        $indentLevel = 0;
+        return "<?php\n\n" .
+               "return array(\n" . $this->processIndented($config) . ");\n";
+    }
 
-        foreach (explode("\n", var_export($config, true)) as $line) {
-            $line = trim($line);
+    protected function processIndented(array $config, &$indentLevel = 1)
+    {
+        $arrayString = "";
 
-            if ($line === '),' || $line === ')') {
-                $indentLevel--;
-            } else if (preg_match('/^\s*array \(/', $line)) {
-                $line = 'array(';
-                $indentLevel++;
-                $arrayString .= ' ' . $line;
-                continue;
+        foreach ($config as $key => $value) {
+            $arrayString .= str_repeat('    ', $indentLevel);
+            $arrayString .= (is_numeric($key) ? $key : "'" . addslashes($key) . "'") . ' => ';
+
+            if (is_array($value)) {
+                if ($value === array()) {
+                    $arrayString .= "array(),\n";
+                } else {
+                    $indentLevel++;
+                    $arrayString .= "array(\n" . $this->processIndented($value, $indentLevel)
+                                  . str_repeat('    ', --$indentLevel) . "),\n";
+                }
+            } elseif (is_object($value)) {
+                $arrayString .= var_export($value, true) . ",\n";
+            } else {
+                $arrayString .= "'" . addslashes($value) . "',\n";
             }
-
-            $arrayString .= "\n" . str_repeat('    ', $indentLevel) . $line;
         }
 
-        return $arrayString . ";\n";
+        return $arrayString;
     }
 }

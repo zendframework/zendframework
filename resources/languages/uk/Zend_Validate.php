@@ -11,15 +11,16 @@
  * EN-Revision: 21134
  */
 return array(
+    '' => array('plural_forms' => 'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);'),
     // Zend_Validate_Alnum
     "Invalid type given, value should be float, string, or integer" => "Неприпустимий тип даних, значення повинно бути числом з плаваючою крапкою, рядком чи цілим числом",
     "'%value%' contains characters which are non alphabetic and no digits" => "'%value%' містить символи які не є літерами чи цифрами",
-    "'%value%' is an empty string" => "'%value%' - пустий рядок",
+    "'%value%' is an empty string" => "'%value%' - порожній рядок",
 
     // Zend_Validate_Alpha
     "Invalid type given, value should be a string" => "Неприпустимий тип даних, значення повинно бути рядком",
     "'%value%' contains non alphabetic characters" => "'%value%' містить символи які не є літерами",
-    "'%value%' is an empty string" => "'%value%' - пустий рядок",
+    "'%value%' is an empty string" => "'%value%' - порожній рядок",
 
     // Zend_Validate_Barcode
     "'%value%' failed checksum validation" => "'%value%' помилка перевірки контрольної суми",

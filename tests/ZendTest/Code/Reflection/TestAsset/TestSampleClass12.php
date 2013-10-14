@@ -12,12 +12,12 @@ namespace ZendTest\Code\Reflection\TestAsset;
 class TestSampleClass12
 {
     /**
-     * 
-     * @param int $one
-     * @param int $two
+     *
+     * @param  int    $one
+     * @param  int    $two
      * @return string
      */
-    public function doSomething(&$one, $two)
+    protected function doSomething(&$one, $two)
     {
         return 'mixedValue';
     }

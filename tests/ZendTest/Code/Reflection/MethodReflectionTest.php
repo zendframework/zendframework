@@ -66,6 +66,7 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
             'namespace' => 'ZendTest\Code\Reflection\TestAsset',
             'class' => 'TestSampleClass10',
             'name' => 'doSomethingElse',
+            'visibility' => 'public',
             'return' => 'int',
             'arguments' => array(
                 'one' => array(
@@ -89,13 +90,14 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
             ),
         );
         $this->assertEquals($prototype, $reflectionMethod->getPrototype());
-        $this->assertEquals('int doSomethingElse(int $one, int $two = 2, string $three = \'three\')', $reflectionMethod->getPrototype(MethodReflection::PROTOTYPE_AS_STRING));
+        $this->assertEquals('public int doSomethingElse(int $one, int $two = 2, string $three = \'three\')', $reflectionMethod->getPrototype(MethodReflection::PROTOTYPE_AS_STRING));
 
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', 'getProp2');
         $prototype = array(
             'namespace' => 'ZendTest\Code\Reflection\TestAsset',
             'class' => 'TestSampleClass2',
             'name' => 'getProp2',
+            'visibility' => 'public',
             'return' => 'mixed',
             'arguments' => array(
                 'param1' => array(
@@ -113,13 +115,14 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
             ),
         );
         $this->assertEquals($prototype, $reflectionMethod->getPrototype());
-        $this->assertEquals('mixed getProp2($param1, ZendTest\Code\Reflection\TestAsset\TestSampleClass $param2)', $reflectionMethod->getPrototype(MethodReflection::PROTOTYPE_AS_STRING));
+        $this->assertEquals('public mixed getProp2($param1, ZendTest\Code\Reflection\TestAsset\TestSampleClass $param2)', $reflectionMethod->getPrototype(MethodReflection::PROTOTYPE_AS_STRING));
 
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass12', 'doSomething');
         $prototype = array(
             'namespace' => 'ZendTest\Code\Reflection\TestAsset',
             'class' => 'TestSampleClass12',
             'name' => 'doSomething',
+            'visibility' => 'protected',
             'return' => 'string',
             'arguments' => array(
                 'one' => array(
@@ -137,6 +140,6 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
             ),
         );
         $this->assertEquals($prototype, $reflectionMethod->getPrototype());
-        $this->assertEquals('string doSomething(int &$one, int $two)', $reflectionMethod->getPrototype(MethodReflection::PROTOTYPE_AS_STRING));
+        $this->assertEquals('protected string doSomething(int &$one, int $two)', $reflectionMethod->getPrototype(MethodReflection::PROTOTYPE_AS_STRING));
     }
 }

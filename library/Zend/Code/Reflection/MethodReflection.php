@@ -116,11 +116,12 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
 
         $declaringClass = $this->getDeclaringClass();
         $prototype = array(
-            'namespace' => $declaringClass->getNamespaceName(),
-            'class'     => substr($declaringClass->getName(), strlen($declaringClass->getNamespaceName()) + 1),
-            'name'      => $this->getName(),
-            'return'    => $returnType,
-            'arguments' => array(),
+            'namespace'  => $declaringClass->getNamespaceName(),
+            'class'      => substr($declaringClass->getName(), strlen($declaringClass->getNamespaceName()) + 1),
+            'name'       => $this->getName(),
+            'visibility' => ($this->isPublic() ? 'public' : ($this->isPrivate() ? 'private' : 'protected')),
+            'return'     => $returnType,
+            'arguments'  => array(),
         );
 
         $parameters = $this->getParameters();
@@ -134,7 +135,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         }
 
         if ($format == MethodReflection::PROTOTYPE_AS_STRING) {
-            $line = $prototype['return'] . ' ' . $prototype['name'] . '(';
+            $line = $prototype['visibility'] . ' ' . $prototype['return'] . ' ' . $prototype['name'] . '(';
             $args = array();
             foreach ($prototype['arguments'] as $name => $argument) {
                 $argsLine = ($argument['type'] ? $argument['type'] . ' ' : '') . ($argument['by_ref'] ? '&' : '') . '$' . $name;

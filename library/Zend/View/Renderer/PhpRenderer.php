@@ -502,6 +502,13 @@ class PhpRenderer implements Renderer, TreeRendererInterface
                     $this->__template
                 ));
             }
+            if (!is_readable($this->__file) || is_dir($this->__file)) {
+                throw new Exception\UnexpectedValueException(sprintf(
+                    '%s: Unable to open template "%s"; File does not exists, is not readable or is a directory',
+                    __METHOD__,
+                    $this->__file
+                ));
+            }
             try {
                 ob_start();
                 include $this->__file;

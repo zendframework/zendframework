@@ -352,6 +352,28 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $test = $this->renderer->render('should-not-find-this');
     }
 
+    public function testRendererRaisesExceptionIfResolvedTemplateDoesNotExists()
+    {
+        $this->setExpectedException('Zend\View\Exception\UnexpectedValueException', 'File does not exists');
+        $resolver = new TemplateMapResolver(array(
+            'not-exists' => '/does/not/exists',
+        ));
+
+        $this->renderer->setResolver($resolver);
+        $this->renderer->render('not-exists');
+    }
+
+    public function testRendererRaisesExceptionIfResolvedTemplateIsDirectory()
+    {
+        $this->setExpectedException('Zend\View\Exception\UnexpectedValueException', 'File does not exists');
+        $resolver = new TemplateMapResolver(array(
+            'is-directory' => '.',
+        ));
+
+        $this->renderer->setResolver($resolver);
+        $this->renderer->render('is-directory');
+    }
+
     /**
      * @group view-model
      */

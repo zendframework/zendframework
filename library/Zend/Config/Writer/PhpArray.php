@@ -43,11 +43,12 @@ class PhpArray extends AbstractWriter
      * Sets whether or not to use the PHP 5.4+ "[]" array syntax.
      *
      * @param  bool $value
-     * @return void
+     * @return self
      */
     public function setUseBracketArraySyntax($value)
     {
         $this->useBracketArraySyntax = $value;
+        return $this;
     }
 
     /**

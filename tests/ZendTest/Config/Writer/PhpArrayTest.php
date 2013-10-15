@@ -72,4 +72,9 @@ class PhpArrayTest extends AbstractWriterTestCase
 
         $this->assertEquals($expected, $configString);
     }
+
+    public function testSetUseBracketArraySyntaxReturnsFluentInterface()
+    {
+        $this->assertSame($this->writer, $this->writer->setUseBracketArraySyntax(true));
+    }
 }

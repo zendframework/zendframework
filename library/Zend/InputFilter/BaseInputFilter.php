@@ -148,7 +148,8 @@ class BaseInputFilter implements InputFilterInterface
      */
     public function isValid()
     {
-        if (null === $this->data) {
+        $data = $this->getRawValues();
+        if (null === $data) {
             throw new Exception\RuntimeException(sprintf(
                 '%s: no data present to validate!',
                 __METHOD__
@@ -162,10 +163,7 @@ class BaseInputFilter implements InputFilterInterface
         $inputs = $this->validationGroup ?: array_keys($this->inputs);
         foreach ($inputs as $name) {
             $input = $this->inputs[$name];
-            if (!array_key_exists($name, $this->data)
-                || (null === $this->data[$name])
-                || (is_string($this->data[$name]) && strlen($this->data[$name]) === 0)
-            ) {
+            if (empty($data[$name])) {
                 if ($input instanceof InputInterface) {
                     // - test if input is required
                     if (!$input->isRequired()) {
@@ -179,7 +177,7 @@ class BaseInputFilter implements InputFilterInterface
                     }
                 }
                 // make sure we have a value (empty) for validation
-                $this->data[$name] = '';
+                $data[$name] = '';
             }
 
             if ($input instanceof InputFilterInterface) {
@@ -192,7 +190,7 @@ class BaseInputFilter implements InputFilterInterface
                 continue;
             }
             if ($input instanceof InputInterface) {
-                if (!$input->isValid($this->data)) {
+                if (!$input->isValid($data)) {
                     // Validation failure
                     $this->invalidInputs[$name] = $input;
                     $valid = false;
@@ -436,5 +434,8 @@ class BaseInputFilter implements InputFilterInterface
 
             $input->setValue($value);
         }
+
+        //reset data
+        $this->data = array();
     }
 }

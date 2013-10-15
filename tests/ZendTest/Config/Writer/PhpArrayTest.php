@@ -31,10 +31,13 @@ class PhpArrayTest extends AbstractWriterTestCase
      */
     public function testRender()
     {
-        $config = new Config(array(
+        $configArray = array(
             'test' => 'foo',
             'bar' => array(0 => 'baz', 1 => 'foo'),
-            'emptyArray' => array()));
+            'emptyArray' => array(),
+            'object' => (object) array('foo' => 'bar')
+        );
+        $config = new Config($configArray);
 
         $configString = $this->writer->toString($config);
 
@@ -47,6 +50,9 @@ class PhpArrayTest extends AbstractWriterTestCase
         $expected .= "        1 => 'foo',\n";
         $expected .= "    ),\n";
         $expected .= "    'emptyArray' => array(),\n";
+        $expected .= "    'object' => stdClass::__set_state(array(\n";
+        $expected .= "   'foo' => 'bar',\n";
+        $expected .= ")),\n";
         $expected .= ");\n";
 
         $this->assertEquals($expected, $configString);

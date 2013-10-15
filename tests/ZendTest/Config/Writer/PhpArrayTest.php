@@ -31,13 +31,12 @@ class PhpArrayTest extends AbstractWriterTestCase
      */
     public function testRender()
     {
-        $configArray = array(
+        $config = new Config(array(
             'test' => 'foo',
             'bar' => array(0 => 'baz', 1 => 'foo'),
             'emptyArray' => array(),
             'object' => (object) array('foo' => 'bar')
-        );
-        $config = new Config($configArray);
+        ));
 
         $configString = $this->writer->toString($config);
 

@@ -31,7 +31,10 @@ class PhpArrayTest extends AbstractWriterTestCase
      */
     public function testRender()
     {
-        $config = new Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
+        $config = new Config(array(
+            'test' => 'foo',
+            'bar' => array(0 => 'baz', 1 => 'foo'),
+            'emptyArray' => array()));
 
         $configString = $this->writer->toString($config);
 
@@ -43,6 +46,7 @@ class PhpArrayTest extends AbstractWriterTestCase
         $expected .= "        0 => 'baz',\n";
         $expected .= "        1 => 'foo',\n";
         $expected .= "    ),\n";
+        $expected .= "    'emptyArray' => array(),\n";
         $expected .= ");\n";
 
         $this->assertEquals($expected, $configString);
@@ -50,7 +54,7 @@ class PhpArrayTest extends AbstractWriterTestCase
 
     public function testRenderWithBracketArraySyntax()
     {
-        $config = new Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
+        $config = new Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo'), 'emptyArray' => array()));
 
         $this->writer->setUseBracketArraySyntax(true);
         $configString = $this->writer->toString($config);
@@ -63,6 +67,7 @@ class PhpArrayTest extends AbstractWriterTestCase
         $expected .= "        0 => 'baz',\n";
         $expected .= "        1 => 'foo',\n";
         $expected .= "    ],\n";
+        $expected .= "    'emptyArray' => [],\n";
         $expected .= "];\n";
 
         $this->assertEquals($expected, $configString);

@@ -509,4 +509,25 @@ class BaseInputFilterTest extends TestCase
         $this->assertArrayHasKey('foo', $messages);
         $this->assertNotEmpty($messages['foo']);
     }
+
+
+    public function testIsValidWhenValuesSetOnFilters()
+    {
+        $filter = $this->getInputFilter();
+
+        $data = array(
+            'bar' => '12345',
+            'nest' => array(
+                'foo' => ' bazbat ',
+                'bar' => '12345',
+            ),
+        );
+
+        $filter->setData($data);
+        $this->assertFalse($filter->isValid());
+
+        $filter->get('foo')->setValue(' baz 2 bat ');
+        $this->assertTrue($filter->get('foo')->isValid(), 'Filtered value is not valid');
+        $this->assertTrue($filter->isValid(), 'Input filter did return value from filter');
+    }    
 }

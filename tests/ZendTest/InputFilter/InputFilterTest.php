@@ -44,4 +44,20 @@ class InputFilterTest extends TestCase
         $foo = $this->filter->get('foo');
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $foo);
     }
+
+    public function testIsValidWhenValuesSetOnFilters()
+    {
+        $filter = new InputFilter();
+        $filter->add(array(
+            'name' => 'email',
+            'validators' => array(
+                array('name' => 'EmailAddress')
+            )
+        ));
+
+//	$filter->get('email')->setValue('chuck@manchuck.com');
+       // $filter->setData(array('email' => 'chuck@manchuck.com'));
+        $this->assertTrue($filter->get('email')->isValid(), 'Filtered value is not valid');
+        $this->assertTrue($filter->isValid(), 'Input filter did return value from filter');
+    }
 }

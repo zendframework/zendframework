@@ -456,4 +456,14 @@ class FieldsetTest extends TestCase
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
         $this->fieldset->setObject('foo');
     }
+
+    public function testInputFilterNotAddedTwiceWhenUsingFieldsets()
+    {
+        $form = new Form();
+
+        $fieldset = new TestAsset\FieldsetWithInputFilter('fieldset');
+        $form->add($fieldset);
+        $filters = $form->getInputFilter()->get('fieldset')->get('foo')->getFilterChain();
+        $this->assertEquals(1, $filters->count());
+    }
 }

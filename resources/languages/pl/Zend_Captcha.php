@@ -8,7 +8,7 @@
  */
 
 /**
- * EN-Revision: 30.Jul.2011
+ * EN-Revision: 16.Oct.2013
  */
 return array(
     // Zend_Captcha_ReCaptcha

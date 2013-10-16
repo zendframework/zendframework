@@ -330,7 +330,18 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
     public function testAssertQueryContentContains()
     {
         $this->dispatch('/tests');
-        $this->assertQueryContentContains('div.top', 'foo');
+        $this->assertQueryContentContains('div#content', 'foo');
+
+        $this->setExpectedException(
+            'PHPUnit_Framework_ExpectationFailedException'
+        );
+        $this->assertQueryContentContains('div#content', 'bar');
+    }
+
+    public function testAssertQueryContentContainsWithSecondElement()
+    {
+        $this->dispatch('/tests');
+        $this->assertQueryContentContains('div#content', 'foo');
 
         $this->setExpectedException(
             'PHPUnit_Framework_ExpectationFailedException'

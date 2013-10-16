@@ -33,6 +33,13 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(9, $setCookieHeader->getVersion());
     }
 
+    public function testSetCookieFromStringWithQuotedValue()
+    {
+        $setCookieHeader = SetCookie::fromString('Set-Cookie: myname="quotedValue"');
+        $this->assertEquals('quotedValue', $setCookieHeader->getValue());
+        $this->assertEquals('myname=quotedValue', $setCookieHeader->getFieldValue());
+    }
+
     public function testSetCookieFromStringCreatesValidSetCookieHeader()
     {
         $setCookieHeader = SetCookie::fromString('Set-Cookie: xxx');

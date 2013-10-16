@@ -1692,4 +1692,14 @@ class FormTest extends TestCase
         $chain = $fileInput->getFilterChain();
         $this->assertCount(1, $chain, var_export($chain, 1));
     }
+
+    public function testInputFilterNotAddedTwiceWhenUsingFieldsets()
+    {
+        $form = new Form();
+
+        $fieldset = new TestAsset\FieldsetWithInputFilter('fieldset');
+        $form->add($fieldset);
+        $filters = $form->getInputFilter()->get('fieldset')->get('foo')->getFilterChain();
+        $this->assertEquals(1, $filters->count());
+    }
 }

@@ -9,12 +9,11 @@
 
 namespace Zend\EventManager;
 
-use Traversable;
-
 /**
- * NOTE: THIS TRAIT IS DEPRECATED! Please use EventManagerAwareTrait instead.
+ * @deprecated Please use EventManagerAwareTrait instead.
+ *
  * This trait exists solely for backwards compatibility in the 2.x branch and
- * willl likely be removed in 3.x.
+ * will likely be removed in 3.x.
  */
 trait ProvidesEvents
 {

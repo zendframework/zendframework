@@ -9,7 +9,7 @@
 
 namespace Zend\EventManager;
 
-use \Zend\EventManager\ProvidesEvents;
+use Traversable;
 
 /**
  * A trait for objects that provide events.
@@ -18,6 +18,8 @@ use \Zend\EventManager\ProvidesEvents;
  * EventManagerAwareInterface, which will make it so the default initializer in
  * a ZF2 MVC application will automatically inject an instance of the
  * EventManager into your object when it is pulled from the ServiceManager.
+ *
+ * @see Zend\Mvc\Service\ServiceManagerConfig
  */
 trait EventManagerAwareTrait
 {

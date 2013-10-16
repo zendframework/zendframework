@@ -140,14 +140,14 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
 
         $body = false;
         if ($this->isClosure()) {
-            preg_match('#function\s*\([^\)]*\)\s*\{(.*\;)\s*\}#s', $functionLine, $matches);
-            if ($matches[1]) {
-                $body = $matches[1];
+            preg_match('#function\s*\([^\)]*\)\s*(use\s*\([^\)]+\))?\s*\{(.*\;)\s*\}#s', $functionLine, $matches);
+            if (isset($matches[2])) {
+                $body = $matches[2];
             }
         } else {
             $name = substr($this->getName(), strrpos($this->getName(), '\\')+1);
             preg_match('#function\s+' . $name . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)}#', $functionLine, $matches);
-            if ($matches[1]) {
+            if (isset($matches[1])) {
                 $body = $matches[1];
             }
         }

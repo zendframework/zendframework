@@ -118,6 +118,10 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $function = new FunctionReflection($function7);
         $body = $function->getBody();
         $this->assertEquals("return \$c = function() { return 'function7'; }; return \$c();", trim($body));
+
+        $function = new FunctionReflection($function8);
+        $body = $function->getBody();
+        $this->assertEquals("return 'function 8';", trim($body));
     }
 
     public function testInternalFunctionContentsReturn()

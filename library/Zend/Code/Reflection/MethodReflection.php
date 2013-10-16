@@ -10,7 +10,6 @@
 namespace Zend\Code\Reflection;
 
 use ReflectionMethod as PhpReflectionMethod;
-use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Scanner\AnnotationScanner;
 use Zend\Code\Scanner\CachingFileScanner;
@@ -120,7 +119,14 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      */
     public function getContents($includeDocBlock = true)
     {
-        $fileContents = file($this->getFileName());
+        $fileName     = $this->getFileName();
+        if (false === $fileName) {
+            throw new Exception\InvalidArgumentException(
+                'Cannot determine internals methods contents'
+            );
+        }
+        
+        $fileContents = file($fileName);
         $startNum     = $this->getStartLine($includeDocBlock);
         $endNum       = ($this->getEndLine() - $this->getStartLine());
 

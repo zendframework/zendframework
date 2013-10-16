@@ -42,6 +42,14 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(37, $reflectionMethod->getStartLine());
         $this->assertEquals(21, $reflectionMethod->getStartLine(true));
     }
+    
+    public function testInternalFunctionContentsReturn()
+    {
+        $reflectionMethod = new MethodReflection('DOMDocument', 'validate');
+        
+        $this->setExpectedException('Zend\Code\Reflection\Exception\InvalidArgumentException');
+        $contents = $reflectionMethod->getContents();
+    }
 
     public function testGetBodyReturnsCorrectBody()
     {

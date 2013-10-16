@@ -11,6 +11,14 @@ namespace Zend\EventManager;
 
 use \Zend\EventManager\ProvidesEvents;
 
+/**
+ * A trait for objects that provide events.
+ *
+ * If you use this trait in an object, you will probably want to also implement
+ * EventManagerAwareInterface, which will make it so the default initializer in
+ * a ZF2 MVC application will automatically inject an instance of the
+ * EventManager into your object when it is pulled from the ServiceManager.
+ */
 trait EventManagerAwareTrait
 {
     /**
@@ -19,7 +27,11 @@ trait EventManagerAwareTrait
     protected $events;
 
     /**
-     * Set the event manager instance used by this context
+     * Set the event manager instance used by this context.
+     *
+     * For convenience, this method will also set the class name / LSB name as
+     * identifiers, in addition to any string or array of strings set to the
+     * $this->eventIdentifier property.
      *
      * @param  EventManagerInterface $events
      * @return mixed

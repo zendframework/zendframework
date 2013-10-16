@@ -157,7 +157,7 @@ class DateSelect extends MonthSelect
                 array(
                     'name'    => 'Callback',
                     'options' => array(
-                        'callback' => function($date) {
+                        'callback' => function ($date) {
                             // Convert the date to a specific format
                             if (is_array($date)) {
                                 $date = $date['year'] . '-' . $date['month'] . '-' . $date['day'];

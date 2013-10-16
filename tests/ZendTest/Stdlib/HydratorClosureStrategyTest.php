@@ -73,13 +73,13 @@ class HydratorClosureStrategyTest extends \PHPUnit_Framework_TestCase
     public function testExtractingObjects()
     {
         $this->hydrator->addStrategy('field1', new ClosureStrategy(
-            function($value) {
+            function ($value) {
                 return sprintf('%s', $value);
             },
             null
         ));
         $this->hydrator->addStrategy('field2', new ClosureStrategy(
-            function($value) {
+            function ($value) {
                 return sprintf('hello, %s!', $value);
             },
             null
@@ -96,13 +96,13 @@ class HydratorClosureStrategyTest extends \PHPUnit_Framework_TestCase
     {
         $this->hydrator->addStrategy('field2', new ClosureStrategy(
             null,
-            function($value) {
+            function ($value) {
                 return sprintf('hello, %s!', $value);
             }
         ));
         $this->hydrator->addStrategy('field3', new ClosureStrategy(
             null,
-            function($value) {
+            function ($value) {
                 return new TestAsset\HydratorClosureStrategyEntity($value, sprintf('111%s', $value));
             }
         ));

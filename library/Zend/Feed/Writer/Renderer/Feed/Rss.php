@@ -26,7 +26,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      *
      * @param  Writer\Feed $container
      */
-    public function __construct (Writer\Feed $container)
+    public function __construct(Writer\Feed $container)
     {
         parent::__construct($container);
     }

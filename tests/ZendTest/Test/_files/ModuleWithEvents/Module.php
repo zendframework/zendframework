@@ -29,7 +29,7 @@ class Module
 
         $application = $e->getApplication();
         $events      = $application->getEventManager()->getSharedManager();
-        $events->attach('Zend\Mvc\Application', MvcEvent::EVENT_FINISH, function($e) use ($application) {
+        $events->attach('Zend\Mvc\Application', MvcEvent::EVENT_FINISH, function ($e) use ($application) {
             $response = $application->getResponse();
             $response->setContent("<html></html>");
         }, 1000000);

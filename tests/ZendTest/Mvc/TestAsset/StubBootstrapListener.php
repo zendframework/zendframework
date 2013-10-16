@@ -20,7 +20,7 @@ class StubBootstrapListener implements ListenerAggregateInterface
     /**
      * @see \Zend\EventManager\ListenerAggregateInterface::attach()
      */
-    public function attach (EventManagerInterface $events)
+    public function attach(EventManagerInterface $events)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_BOOTSTRAP, array($this, 'onBootstrap'));
     }
@@ -28,7 +28,7 @@ class StubBootstrapListener implements ListenerAggregateInterface
     /**
      * @see \Zend\EventManager\ListenerAggregateInterface::detach()
      */
-    public function detach (EventManagerInterface $events)
+    public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
             if ($events->detach($listener)) {

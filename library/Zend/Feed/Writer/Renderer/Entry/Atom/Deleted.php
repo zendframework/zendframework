@@ -22,7 +22,7 @@ class Deleted extends Renderer\AbstractRenderer implements Renderer\RendererInte
      *
      * @param  Writer\Deleted $container
      */
-    public function __construct (Writer\Deleted $container)
+    public function __construct(Writer\Deleted $container)
     {
         parent::__construct($container);
     }

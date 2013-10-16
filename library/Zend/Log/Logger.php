@@ -521,8 +521,7 @@ class Logger implements LoggerInterface
 
         $errorPriorityMap = static::$errorPriorityMap;
 
-        $previous = set_error_handler(function ($level, $message, $file, $line)
-            use ($logger, $errorPriorityMap, $continueNativeHandler)
+        $previous = set_error_handler(function ($level, $message, $file, $line) use ($logger, $errorPriorityMap, $continueNativeHandler)
         {
             $iniLevel = error_reporting();
 

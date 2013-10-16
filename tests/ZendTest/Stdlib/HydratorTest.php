@@ -365,7 +365,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
         $hydrator = new ClassMethods(false);
         $datas = $hydrator->extract($this->classMethodsCamelCase);
         $hydrator->addFilter("exclude",
-            function($property) {
+            function ($property) {
                 list($class, $method) = explode('::', $property);
 
                 if ($method == 'getHasFoo') {
@@ -395,7 +395,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
             $hydrator->extract($serializable)
         );
 
-        $hydrator->addFilter("foo", function($property) {
+        $hydrator->addFilter("foo", function ($property) {
                 if ($property == "foo") {
                     return false;
                 }
@@ -411,7 +411,7 @@ class HydratorTest extends \PHPUnit_Framework_TestCase
             $hydrator->extract($serializable)
         );
 
-        $hydrator->addFilter("len", function($property) {
+        $hydrator->addFilter("len", function ($property) {
                 if (strlen($property) !== 3) {
                     return false;
                 }

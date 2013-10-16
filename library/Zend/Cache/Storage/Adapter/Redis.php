@@ -186,7 +186,7 @@ class Redis extends AbstractAdapter implements
         //combine the key => value pairs and remove all missing values
         return array_filter(
             array_combine($normalizedKeys, $results),
-            function($value) {
+            function ($value) {
                 return $value !== false;
             }
         );

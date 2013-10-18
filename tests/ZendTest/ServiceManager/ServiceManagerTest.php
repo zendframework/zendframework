@@ -1101,4 +1101,17 @@ class ServiceManagerTest extends TestCase
             array(tmpfile())
         );
     }
+
+    public function testMultipleAbstractFactoriesLookingForANonExistingServiceDuringCanCreatePhase()
+    {
+        $abstractFactory = new TestAsset\TrollAbstractFactory;
+        $anotherAbstractFactory = new TestAsset\AnotherTrollAbstractFactory;
+
+        $this->serviceManager->addAbstractFactory($abstractFactory);
+        $this->serviceManager->addAbstractFactory($anotherAbstractFactory);
+
+        $this->assertTrue($this->serviceManager->has('anothertroll'));
+        $this->assertFalse($abstractFactory->inexistingServiceCheckResult);
+        $this->assertFalse($anotherAbstractFactory->inexistingServiceCheckResult);
+    }
 }

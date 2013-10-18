@@ -30,10 +30,14 @@ class Received implements HeaderInterface, MultipleHeadersInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Received string');
         }
 
-        $header = new static();
-        $header->value= $value;
+        $header = new static($value);
 
         return $header;
+    }
+
+    public function __construct($value = '')
+    {
+        $this->value = $value;
     }
 
     public function getFieldName()

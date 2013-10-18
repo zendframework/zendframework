@@ -28,10 +28,14 @@ class Date implements HeaderInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Date string');
         }
 
-        $header = new static();
-        $header->value= $value;
+        $header = new static($value);
 
         return $header;
+    }
+
+    public function __construct($value)
+    {
+        $this->value = $value;
     }
 
     public function getFieldName()

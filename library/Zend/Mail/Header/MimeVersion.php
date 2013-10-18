@@ -28,7 +28,7 @@ class MimeVersion implements HeaderInterface
         // Check for version, and set if found
         $header = new static();
         if (preg_match('/^(?P<version>\d+\.\d+)$/', $value, $matches)) {
-            $header->version = $matches['version'];
+            $header->setVersion($matches['version']);
         }
 
         return $header;

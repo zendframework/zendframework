@@ -76,7 +76,7 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
         $fieldName = str_replace(' ', '-', ucwords(str_replace(array('_', '-'), ' ', $fieldName)));
 
         // Validate what we have
-        if (!preg_match('/^[\x21-\x39\x3B-\x7E]*$/i', $fieldName)) {
+        if (!preg_match('/^[\x21-\x39\x3B-\x7E]*$/', $fieldName)) {
             throw new Exception\InvalidArgumentException(
                 'Header name must be composed of printable US-ASCII characters, except colon.'
             );

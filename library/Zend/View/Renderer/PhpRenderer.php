@@ -502,20 +502,20 @@ class PhpRenderer implements Renderer, TreeRendererInterface
                     $this->__template
                 ));
             }
-            if (!is_readable($this->__file) || is_dir($this->__file)) {
-                throw new Exception\UnexpectedValueException(sprintf(
-                    '%s: Unable to open template "%s"; File does not exists, is not readable or is a directory',
-                    __METHOD__,
-                    $this->__file
-                ));
-            }
             try {
                 ob_start();
-                include $this->__file;
+                $includeReturn = include $this->__file;
                 $this->__content = ob_get_clean();
             } catch (\Exception $ex) {
                 ob_end_clean();
                 throw $ex;
+            }
+            if ($includeReturn === false && empty($this->__content)) {
+                throw new Exception\UnexpectedValueException(sprintf(
+                    '%s: Unable to render template "%s"; file include failed',
+                    __METHOD__,
+                    $this->__file
+                ));
             }
         }
 

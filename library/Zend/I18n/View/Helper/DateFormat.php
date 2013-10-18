@@ -133,8 +133,11 @@ class DateFormat extends AbstractHelper
     {
         $this->timezone = (string) $timezone;
 
+        // The method setTimeZoneId is deprecated as of PHP 5.5.0
+        $setTimeZoneMethodName = version_compare(PHP_VERSION, '5.5.0', '<') ? 'setTimeZoneId' : 'setTimeZone';
+
         foreach ($this->formatters as $formatter) {
-            $formatter->setTimeZoneId($this->timezone);
+            $formatter->$setTimeZoneMethodName($this->timezone);
         }
 
         return $this;

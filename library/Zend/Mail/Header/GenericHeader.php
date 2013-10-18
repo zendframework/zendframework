@@ -31,15 +31,31 @@ class GenericHeader implements HeaderInterface, UnstructuredInterface
     public static function fromString($headerLine)
     {
         $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
-        $parts = explode(':', $decodedLine, 2);
-        if (count($parts) != 2) {
-            throw new Exception\InvalidArgumentException('Header must match with the format "name: value"');
-        }
-        $header = new static($parts[0], ltrim($parts[1]));
+        list($name, $value) = GenericHeader::splitHeaderLine($decodedLine);
+        $header = new static($name, $value);
         if ($decodedLine != $headerLine) {
             $header->setEncoding('UTF-8');
         }
         return $header;
+    }
+
+    /**
+     * Splits the header line in `name` and `value` parts.
+     *
+     * @param string $headerLine
+     * @return string[] `name` in the first index and `value` in the second.
+     * @throws Exception\InvalidArgumentException If header does not match with the format ``name:value``
+     */
+    public static function splitHeaderLine($headerLine)
+    {
+        $parts = explode(':', $headerLine, 2);
+        if (count($parts) !== 2) {
+            throw new Exception\InvalidArgumentException('Header must match with the format "name:value"');
+        }
+
+        $parts[1] = ltrim($parts[1]);
+
+        return $parts;
     }
 
     /**

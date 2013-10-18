@@ -31,6 +31,8 @@ interface HeaderInterface
      *
      * @param string $headerLine
      * @return self
+     * @throws Exception\InvalidArgumentException If the header does not match with RFC 2822 definition.
+     * @see http://tools.ietf.org/html/rfc2822#section-2.2
      */
     public static function fromString($headerLine);
 

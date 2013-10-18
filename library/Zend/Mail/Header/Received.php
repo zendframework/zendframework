@@ -23,7 +23,7 @@ class Received implements HeaderInterface, MultipleHeadersInterface
 
     public static function fromString($headerLine)
     {
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'received') {

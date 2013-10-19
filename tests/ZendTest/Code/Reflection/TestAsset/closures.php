@@ -39,4 +39,7 @@ $list3 = array(function() { return $c = function() { return 'function7'; }; retu
 
 $function8 = function() use ($list1) { return 'function 8'; };
 
+/**
+ * closure doc block
+ */
 $function9 = function() {};

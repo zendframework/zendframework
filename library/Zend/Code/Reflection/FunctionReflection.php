@@ -77,7 +77,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
 
         $content = false;
         if ($this->isClosure()) {
-            preg_match('#function\s*\([^\)]*\)\s*(use\s*\([^\)]+\))?\s*\{(.*\;)\s*\}#s', $functionLine, $matches);
+            preg_match('#function\s*\([^\)]*\)\s*(use\s*\([^\)]+\))?\s*\{(.*\;)?\s*\}#s', $functionLine, $matches);
             if (isset($matches[0])) {
                 $content = $matches[0];
             }

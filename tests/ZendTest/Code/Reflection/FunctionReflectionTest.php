@@ -90,7 +90,7 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testFunctionClosureBodyReturn()
     {
-        require_once __DIR__ . '/TestAsset/closures.php';
+        require __DIR__ . '/TestAsset/closures.php';
 
         $function = new FunctionReflection($function1);
         $body = $function->getBody();
@@ -184,18 +184,35 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("function function12() {}", trim($content));
     }
 
+    public function testFunctionClosureContentsReturnWithoutDocBlock()
+    {
+        require __DIR__ . '/TestAsset/closures.php';
+
+        $function = new FunctionReflection($function2);
+        $content = $function->getContents(false);
+        $this->assertEquals("function() { return 'function2'; }", trim($content));
+
+        $function = new FunctionReflection($function9);
+        $content = $function->getContents(false);
+        $this->assertEquals("function() {}", trim($content));
+    }
+
     public function testFunctionContentsReturnWithDocBlock()
     {
         require_once __DIR__ . '/TestAsset/functions.php';
-
-        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function1');
-        $content = $function->getContents();
-        $this->assertEquals("function function1()\n{\n    return 'function1';\n}", trim($content));
-        $this->assertEquals($function->getContents(true), $function->getContents(false));
 
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function3');
         $content = $function->getContents();
         $this->assertEquals("/**\n * Enter description here...\n *\n * @param string \$one\n * @param int \$two"
                           . "\n * @return true\n */\nfunction function3(\$one, \$two = 2)\n{\n    return true;\n}", trim($content));
+    }
+
+    public function testFunctionClosureContentsReturnWithDocBlock()
+    {
+        require __DIR__ . '/TestAsset/closures.php';
+
+        $function = new FunctionReflection($function9);
+        $content = $function->getContents();
+        $this->assertEquals("/**\n * closure doc block\n */\nfunction() {}", trim($content));
     }
 }

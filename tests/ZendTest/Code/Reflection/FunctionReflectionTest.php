@@ -128,6 +128,62 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
     {
         $function = new FunctionReflection('array_splice');
         $this->setExpectedException('Zend\Code\Reflection\Exception\InvalidArgumentException');
-        $body = $function->getContents();
+        $content = $function->getContents();
+    }
+    
+    public function testFunctionContentsReturnWithoutDocBlock()
+    {
+        require_once __DIR__ . '/TestAsset/functions.php';
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function1');
+        $content = $function->getContents(false);
+        $this->assertEquals("function function1()\n{\n    return 'function1';\n}", trim($content));
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function4');
+        $content = $function->getContents(false);
+        $this->assertEquals("function function4(\$arg) {\n    return 'function4';\n}", trim($content));
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function5');
+        $content = $function->getContents(false);
+        $this->assertEquals("function function5() { return 'function5'; }", trim($content));
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function6');
+        $content = $function->getContents(false);
+        $this->assertEquals("function function6()\n{\n    \$closure = function() { return 'bar'; };\n    return 'function6';\n}", trim($content));
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function7');
+        $content = $function->getContents(false);
+        $this->assertEquals("function function7() { return 'function7'; }", trim($content));
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function8');
+        $content = $function->getContents(false);
+        $this->assertEquals("function function8() { return 'function8'; }", trim($content));
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function9');
+        $content = $function->getContents(false);
+        $this->assertEquals("function function9() { return 'function9'; }", trim($content));
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function10');
+        $content = $function->getContents(false);
+        $this->assertEquals("function function10() { \$closure = function() { return 'function10'; }; return \$closure(); }", trim($content));
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function11');
+        $content = $function->getContents(false);
+        $this->assertEquals("function function11() { return 'function11'; }", trim($content));
+    }
+    
+    public function testFunctionContentsReturnWithDocBlock()
+    {
+        require_once __DIR__ . '/TestAsset/functions.php';
+
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function1');
+        $content = $function->getContents();
+        $this->assertEquals("function function1()\n{\n    return 'function1';\n}", trim($content));
+        $this->assertEquals($function->getContents(true), $function->getContents(false));
+        
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function3');
+        $content = $function->getContents();
+        $this->assertEquals("/**\n * Enter description here...\n *\n * @param string \$one\n * @param int \$two"
+                          . "\n * @return true\n */\nfunction function3(\$one, \$two = 2)\n{\n    return true;\n}", trim($content));
     }
 }

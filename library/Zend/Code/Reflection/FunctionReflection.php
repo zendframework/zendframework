@@ -66,14 +66,30 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
             );
         }
 
-        return implode("\n",
-            array_splice(
-                file($fileName),
-                $this->getStartLine($includeDocBlock),
-                ($this->getEndLine() - $this->getStartLine()),
-                true
-            )
+        $lines = array_slice(
+            file($fileName, FILE_IGNORE_NEW_LINES),
+            $this->getStartLine() - 1,
+            ($this->getEndLine() - ($this->getStartLine() - 1)),
+            true
         );
+
+        $functionLine = implode("\n", $lines);
+
+        $content = false;
+        if ($this->isClosure()) {
+            preg_match('#function\s*\([^\)]*\)\s*(use\s*\([^\)]+\))?\s*\{(.*\;)\s*\}#s', $functionLine, $matches);
+            if (isset($matches[0])) {
+                $content = $matches[0];
+            }
+        } else {
+            $name = substr($this->getName(), strrpos($this->getName(), '\\')+1);
+            preg_match('#function\s+' . $name . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)}#', $functionLine, $matches);
+            if (isset($matches[0])) {
+                $content = $matches[0];
+            }
+        }
+
+        return $includeDocBlock && $this->getDocComment() ? $this->getDocComment() . "\n" . $content : $content;
     }
 
     /**

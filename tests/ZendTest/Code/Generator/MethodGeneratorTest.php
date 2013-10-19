@@ -129,10 +129,7 @@ EOS;
         $methodGenerator->setAbstract(true);
 
         $expected = <<<EOS
-    abstract public function foo(\$one)
-    {
-    }
-
+    abstract public function foo(\$one);
 EOS;
         $this->assertEquals($expected, $methodGenerator->generate());
     }

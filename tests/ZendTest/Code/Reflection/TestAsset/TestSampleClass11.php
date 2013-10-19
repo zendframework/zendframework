@@ -38,5 +38,8 @@ class TestSampleClass11
     
     public function inline1() { return 'inline1'; } public function inline2() { return 'inline2'; } public function inline3() { return 'inline3'; }
     
+    /**
+     * Awesome doc block
+     */
     public function emptyFunction() {}
 }

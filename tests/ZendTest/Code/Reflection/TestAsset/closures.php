@@ -38,3 +38,5 @@ $list2 = array(function() { return 'function6'; });
 $list3 = array(function() { return $c = function() { return 'function7'; }; return $c(); });
 
 $function8 = function() use ($list1) { return 'function 8'; };
+
+$function9 = function() {};

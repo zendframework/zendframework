@@ -114,7 +114,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     /**
      * Get method contents
      *
-     * @param  bool $includeDocBlock
+     * @param  bool   $includeDocBlock
      * @return string
      */
     public function getContents($includeDocBlock = true)
@@ -125,12 +125,24 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
                 'Cannot determine internals methods contents'
             );
         }
-        
-        $fileContents = file($fileName);
-        $startNum     = $this->getStartLine($includeDocBlock);
-        $endNum       = ($this->getEndLine() - $this->getStartLine());
 
-        return implode("\n", array_splice($fileContents, $startNum, $endNum, true));
+        $lines = array_slice(
+            file($fileName, FILE_IGNORE_NEW_LINES),
+            $this->getStartLine() - 1,
+            ($this->getEndLine() - ($this->getStartLine() - 1)),
+            true
+        );
+
+        $functionLine = implode("\n", $lines);
+        preg_match('#[(public|protected|private|abstract|final|static)\s*]+function\s+' . $this->getName() . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)?}#s', $functionLine, $matches);
+
+        if (!isset($matches[0])) {
+            return false;
+        }
+
+        $content = $matches[0];
+
+        return $includeDocBlock && $this->getDocComment() ? $this->getDocComment() . "\n" . $content : $content;
     }
 
     /**
@@ -153,7 +165,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
             ($this->getEndLine() - ($this->getStartLine() - 1)),
             true
         );
-        
+
         $functionLine = implode("\n", $lines);
         preg_match('#[(public|protected|private|abstract|final|static)\s*]+function\s+' . $this->getName() . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)}#s', $functionLine, $matches);
 

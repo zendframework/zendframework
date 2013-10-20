@@ -220,7 +220,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         } elseif ($method == HttpRequest::METHOD_PUT) {
             if (count($params) != 0) {
                 array_walk($params,
-                    function(&$item, $key) { $item = $key . '=' . $item; }
+                    function (&$item, $key) { $item = $key . '=' . $item; }
                 );
                 $content = implode('&', $params);
                 $request->setContent($content);

@@ -31,7 +31,7 @@ class Module
     {
         return array(
             'factories' => array(
-                'FooObject' => function($sm) {
+                'FooObject' => function ($sm) {
                     return new \stdClass();
                 }
             ),

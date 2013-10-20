@@ -561,12 +561,12 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $data = array(
             0 => array(
-                "alpha" => new Json\Expr("function() {}"),
+                "alpha" => new Json\Expr("function () {}"),
                 "beta"  => "gamma",
             ),
             1 => array(
                 "alpha" => "gamma",
-                "beta"  => new Json\Expr("function() {}"),
+                "beta"  => new Json\Expr("function () {}"),
             ),
             2 => array(
                 "alpha" => "gamma",
@@ -576,7 +576,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $result = Json\Json::encode($data, false, array('enableJsonExprFinder' => true));
 
         $this->assertEquals(
-            '[{"alpha":function() {},"beta":"gamma"},{"alpha":"gamma","beta":function() {}},{"alpha":"gamma","beta":"gamma"}]',
+            '[{"alpha":function () {},"beta":"gamma"},{"alpha":"gamma","beta":function () {}},{"alpha":"gamma","beta":"gamma"}]',
             $result
         );
     }
@@ -616,7 +616,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
         $data = array(
             0 => array(
-                "alpha" => new Json\Expr("function() {}"),
+                "alpha" => new Json\Expr("function () {}"),
                 "beta"  => "gamma",
             ),
         );

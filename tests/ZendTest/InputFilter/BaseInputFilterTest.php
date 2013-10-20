@@ -608,7 +608,7 @@ class BaseInputFilterTest extends TestCase
                    ->setContinueIfEmpty(true);
 
         $blankIsValid = new Input();
-        $blankIsValid->getValidatorChain()->attach(new Validator\Callback(function($value, $context) {
+        $blankIsValid->getValidatorChain()->attach(new Validator\Callback(function ($value, $context) {
             return ('y' === $value && empty($context['allowEmpty']));
         }));
 

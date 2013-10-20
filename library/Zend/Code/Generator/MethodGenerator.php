@@ -252,11 +252,11 @@ class MethodGenerator extends AbstractMemberGenerator
         }
 
         $output .= ')';
-        
+
         if ($this->isAbstract()) {
             return $output . ';';
         }
-        
+
         $output .= self::LINE_FEED . $indent . '{' . self::LINE_FEED;
 
         if ($this->body) {

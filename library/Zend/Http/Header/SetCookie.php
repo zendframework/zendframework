@@ -133,8 +133,7 @@ class SetCookie implements MultipleHeaderInterface
             };
         }
 
-        list($name, $value) = explode(':', $headerLine, 2);
-        $value = ltrim($value);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // some sites return set-cookie::value, this is to get rid of the second :
         $name = (strtolower($name) =='set-cookie:') ? 'set-cookie' : $name;

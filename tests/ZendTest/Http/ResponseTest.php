@@ -306,6 +306,21 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response = Response::fromString($response_str);
     }
 
+    /**
+     * @group 5253
+     */
+    public function testMultilineHeaderNoSpaces()
+    {
+        $response = Response::fromString($this->readResponse('response_multiline_header_nospace'));
+
+        // Make sure we got the corrent no. of headers
+        $this->assertEquals(6, count($response->getHeaders()), 'Header count is expected to be 6');
+
+        // Check header integrity
+        $this->assertEquals('timeout=15,max=100', $response->getHeaders()->get('keep-alive')->getFieldValue());
+        $this->assertEquals('text/html;charset=iso-8859-1', $response->getHeaders()->get('content-type')->getFieldValue());
+    }
+
     public function testMultilineHeader()
     {
         $response = Response::fromString($this->readResponse('response_multiline_header'));

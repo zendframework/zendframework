@@ -34,7 +34,7 @@ class CacheControl implements HeaderInterface
     {
         $header = new static();
 
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'cache-control') {

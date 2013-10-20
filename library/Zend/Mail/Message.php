@@ -402,7 +402,27 @@ class Message
         $parts = $this->body->getParts();
         if (!empty($parts)) {
             $part = array_shift($parts);
-            $headers->addHeaders($part->getHeadersArray());
+            $partHeaders = $part->getHeadersArray();
+            $partHeadersFixed = array();
+            foreach($partHeaders as $key => $value) {
+                if(is_array($value) && isset($value[0])) {
+                    switch($value[0]) {
+                        case 'Content-Type':
+                            $contentType = Header\ContentType::fromString('Content-Type: ' . $value[1]);
+                            $headers->addHeader($contentType);
+                            break;
+                        case 'Content-Transfer-Encoding':
+                            $contentTE = Header\ContentTransferEncoding::fromString('Content-Transfer-Encoding: ' . $value[1]);
+                            $headers->addHeader($contentTE);
+                            break;
+                        default:
+                            $partHeadersFixed[$key] = $value;
+                    }
+                } else {
+                    $partHeadersFixed[$key] = $value;
+                }
+            }
+            $headers->addHeaders($partHeadersFixed);
         }
         return $this;
     }

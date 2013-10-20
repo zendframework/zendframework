@@ -31,21 +31,55 @@ class PhpArrayTest extends AbstractWriterTestCase
      */
     public function testRender()
     {
-        $config = new Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
+        $config = new Config(array(
+            'test' => 'foo',
+            'bar' => array(0 => 'baz', 1 => 'foo'),
+            'emptyArray' => array(),
+            'object' => (object) array('foo' => 'bar')
+        ));
 
         $configString = $this->writer->toString($config);
 
         // build string line by line as we are trailing-whitespace sensitive.
         $expected = "<?php\n";
-        $expected .= "return array (\n";
-        $expected .= "  'test' => 'foo',\n";
-        $expected .= "  'bar' => \n";
-        $expected .= "  array (\n";
-        $expected .= "    0 => 'baz',\n";
-        $expected .= "    1 => 'foo',\n";
-        $expected .= "  ),\n";
+        $expected .= "return array(\n";
+        $expected .= "    'test' => 'foo',\n";
+        $expected .= "    'bar' => array(\n";
+        $expected .= "        0 => 'baz',\n";
+        $expected .= "        1 => 'foo',\n";
+        $expected .= "    ),\n";
+        $expected .= "    'emptyArray' => array(),\n";
+        $expected .= "    'object' => stdClass::__set_state(array(\n";
+        $expected .= "   'foo' => 'bar',\n";
+        $expected .= ")),\n";
         $expected .= ");\n";
 
         $this->assertEquals($expected, $configString);
+    }
+
+    public function testRenderWithBracketArraySyntax()
+    {
+        $config = new Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo'), 'emptyArray' => array()));
+
+        $this->writer->setUseBracketArraySyntax(true);
+        $configString = $this->writer->toString($config);
+
+        // build string line by line as we are trailing-whitespace sensitive.
+        $expected = "<?php\n";
+        $expected .= "return [\n";
+        $expected .= "    'test' => 'foo',\n";
+        $expected .= "    'bar' => [\n";
+        $expected .= "        0 => 'baz',\n";
+        $expected .= "        1 => 'foo',\n";
+        $expected .= "    ],\n";
+        $expected .= "    'emptyArray' => [],\n";
+        $expected .= "];\n";
+
+        $this->assertEquals($expected, $configString);
+    }
+
+    public function testSetUseBracketArraySyntaxReturnsFluentInterface()
+    {
+        $this->assertSame($this->writer, $this->writer->setUseBracketArraySyntax(true));
     }
 }

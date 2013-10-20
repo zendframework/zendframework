@@ -34,9 +34,28 @@ class GenericHeader implements HeaderInterface
      */
     public static function fromString($headerLine)
     {
-        list($fieldName, $fieldValue) = explode(': ', $headerLine, 2);
+        list($fieldName, $fieldValue) = GenericHeader::splitHeaderLine($headerLine);
         $header = new static($fieldName, $fieldValue);
         return $header;
+    }
+
+    /**
+     * Splits the header line in `name` and `value` parts.
+     *
+     * @param string $headerLine
+     * @return string[] `name` in the first index and `value` in the second.
+     * @throws Exception\InvalidArgumentException If header does not match with the format ``name:value``
+     */
+    public static function splitHeaderLine($headerLine)
+    {
+        $parts = explode(':', $headerLine, 2);
+        if (count($parts) !== 2) {
+            throw new Exception\InvalidArgumentException('Header must match with the format "name:value"');
+        }
+
+        $parts[1] = ltrim($parts[1]);
+
+        return $parts;
     }
 
     /**

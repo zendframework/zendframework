@@ -138,7 +138,10 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
 
     public function testHeadersAddHeaderLineThrowsExceptionOnMissingFieldValue()
     {
-        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException', 'Header must match with the format "name: value"');
+        $this->setExpectedException(
+            'Zend\Mail\Header\Exception\InvalidArgumentException',
+            'Header must match with the format "name:value"'
+        );
         $headers = new Mail\Headers();
         $headers->addHeaderLine('Foo');
     }

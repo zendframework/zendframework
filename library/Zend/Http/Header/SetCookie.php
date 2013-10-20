@@ -77,6 +77,13 @@ class SetCookie implements MultipleHeaderInterface
     protected $secure = null;
 
     /**
+     * If the value need to be quoted or not
+     *
+     * @var bool|null
+     */
+    protected $quoteFieldValue = null;
+
+    /**
      * @var bool|null
      */
     protected $httponly = null;
@@ -197,6 +204,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
+     *
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -207,8 +215,11 @@ class SetCookie implements MultipleHeaderInterface
         }
 
         $value = urlencode($this->getValue());
+        if ( $this->quoteFieldValue() ) {
+            $value = '"'. $value . '"';
+        }
 
-        $fieldValue = $this->getName() . '=' . $value . '';
+        $fieldValue = $this->getName() . '=' . $value;
 
         $version = $this->getVersion();
         if ($version!==null) {
@@ -425,6 +436,16 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
+     * @param  bool $quotedValue
+     * @return SetCookie
+     */
+    public function setQuoteFieldValue($quotedValue=false)
+    {
+        $this->quoteFieldValue = $quotedValue;
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function isSecure()
@@ -479,6 +500,16 @@ class SetCookie implements MultipleHeaderInterface
     public function isSessionCookie()
     {
         return ($this->expires === null);
+    }
+
+    /**
+     * Check whether the cookie is a session cookie (has no expiry time set)
+     *
+     * @return bool
+     */
+    public function quoteFieldValue()
+    {
+        return ($this->quoteFieldValue === true);
     }
 
     public function isValidForRequest($requestDomain, $path, $isSecure = false)

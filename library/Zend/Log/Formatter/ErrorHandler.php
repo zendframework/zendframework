@@ -44,7 +44,7 @@ class ErrorHandler extends Simple
      * @param string $key
      * @return array
      */
-    protected function buildReplacementsFromArray ($event, $key = null)
+    protected function buildReplacementsFromArray($event, $key = null)
     {
         $result = array();
         foreach ($event as $index => $value) {

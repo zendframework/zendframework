@@ -22,7 +22,7 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
      *
      * @param  \Zend\Feed\Writer\Feed $container
      */
-    public function __construct ($container)
+    public function __construct($container)
     {
         parent::__construct($container);
     }

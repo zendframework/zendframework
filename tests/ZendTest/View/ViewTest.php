@@ -323,7 +323,7 @@ class ViewTest extends TestCase
             return $renderer;
         });
 
-        $this->view->getEventManager(ViewEvent::EVENT_RENDERER_POST, function($e) use ($model2) {
+        $this->view->getEventManager(ViewEvent::EVENT_RENDERER_POST, function ($e) use ($model2) {
             $e->setModel($model2);
         });
 

@@ -110,7 +110,7 @@ class ReCaptcha extends FormInput
 function windowOnLoad(fn)
 {
     var old = window.onload;
-    window.onload = function() {
+    window.onload = function () {
         if (old) {
             old();
         }
@@ -125,11 +125,11 @@ function zendBindEvent(el, eventName, eventHandler)
         el.attachEvent('on'+eventName, eventHandler);
     }
 }
-windowOnLoad(function() {
+windowOnLoad(function () {
     zendBindEvent(
         document.getElementById("$challengeId").form,
         'submit',
-        function(e) {
+        function (e) {
             document.getElementById("$challengeId").value = document.getElementById("recaptcha_challenge_field").value;
             document.getElementById("$responseId").value = document.getElementById("recaptcha_response_field").value;
         }

@@ -53,7 +53,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
         $self = $this;
         set_exit_overload(
-            function($param = null) use ($self) {
+            function ($param = null) use ($self) {
                 if ($param) {
                     $self->assertEquals($param, 1);
                 }

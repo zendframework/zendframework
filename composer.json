@@ -16,6 +16,7 @@
         "ircmaxell/random-lib": "dev-master",
         "ircmaxell/security-lib": "dev-master",
         "ocramius/proxy-manager": "0.4.*",
+        "fabpot/php-cs-fixer": "*@dev",
         "phpunit/PHPUnit": "3.7.*"
     },
     "suggest": {

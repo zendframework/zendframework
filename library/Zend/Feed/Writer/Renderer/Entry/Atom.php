@@ -24,7 +24,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      *
      * @param  Writer\Entry $container
      */
-    public function __construct (Writer\Entry $container)
+    public function __construct(Writer\Entry $container)
     {
         parent::__construct($container);
     }

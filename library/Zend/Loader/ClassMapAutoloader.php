@@ -206,7 +206,7 @@ class ClassMapAutoloader implements SplAutoloader
             return ($p !== '' && $p !== '.');
         }));
 
-        array_walk($parts, function ($value, $key) use(&$parts) {
+        array_walk($parts, function ($value, $key) use (&$parts) {
             if ($value === '..') {
                 unset($parts[$key], $parts[$key-1]);
                 $parts = array_values($parts);

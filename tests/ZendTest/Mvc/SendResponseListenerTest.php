@@ -27,7 +27,7 @@ class SendResponseListenerTest extends TestCase
     {
         $listener = new SendResponseListener();
         $result = array();
-        $listener->getEventManager()->attach('sendResponse', function($e) use (&$result) {
+        $listener->getEventManager()->attach('sendResponse', function ($e) use (&$result) {
             $result['target'] = $e->getTarget();
             $result['response'] = $e->getResponse();
         }, 10000);

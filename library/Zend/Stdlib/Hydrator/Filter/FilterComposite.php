@@ -41,7 +41,7 @@ class FilterComposite implements FilterInterface
     public function __construct($orFilter = array(), $andFilter = array())
     {
         array_walk($orFilter,
-            function($value, $key) {
+            function ($value, $key) {
                 if (
                     !is_callable($value)
                     && !$value instanceof FilterInterface
@@ -55,7 +55,7 @@ class FilterComposite implements FilterInterface
         );
 
         array_walk($andFilter,
-            function($value, $key) {
+            function ($value, $key) {
                 if (
                     !is_callable($value)
                     && !$value instanceof FilterInterface
@@ -79,7 +79,7 @@ class FilterComposite implements FilterInterface
      * This example will exclude all methods from the hydration, that starts with 'getService'
      * <code>
      * $composite->addFilter('exclude',
-     *     function($method) {
+     *     function ($method) {
      *         if (preg_match('/^getService/', $method) {
      *             return false;
      *         }

@@ -22,7 +22,7 @@ class Atom extends AbstractAtom implements Renderer\RendererInterface
      *
      * @param  Writer\Feed $container
      */
-    public function __construct (Writer\Feed $container)
+    public function __construct(Writer\Feed $container)
     {
         parent::__construct($container);
     }

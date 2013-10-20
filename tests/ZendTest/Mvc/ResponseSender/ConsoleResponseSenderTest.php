@@ -35,7 +35,7 @@ class ConsoleResponseSenderTest extends TestCase
         $mockSendResponseEvent = $this->getSendResponseEventMock($mockResponse);
         $mockSendResponseEvent->expects($this->once())->method('setContentSent');
         $mockSendResponseEvent->expects($this->any())->method('contentSent')->will($this->returnCallback(
-            function() use (&$returnValue) {
+            function () use (&$returnValue) {
                 if (false === $returnValue) {
                     $returnValue = true;
                     return false;

@@ -540,6 +540,27 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('text/html', $header->getFieldValue());
     }
 
+    public function testSettingUtf8MailBodyFromSinglePartMimeUtf8MessageSetsAppropriateHeaders()
+    {
+        $mime = new Mime('foo-bar');
+        $part = new MimePart('UTF-8 TestString: AaÜüÄäÖöß');
+        $part->type = Mime::TYPE_TEXT;
+        $part->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
+        $part->charset = 'utf-8';
+        $body = new MimeMessage();
+        $body->setMime($mime);
+        $body->addPart($part);
+
+        $this->message->setEncoding('UTF-8');
+        $this->message->setBody($body);
+
+        $this->assertContains(
+            'Content-Type: text/plain;' . Headers::FOLDING . 'charset="utf-8"' . Headers::EOL
+            . 'Content-Transfer-Encoding: quoted-printable' . Headers::EOL,
+            $this->message->getHeaders()->toString()
+        );
+    }
+
     public function testSettingBodyFromMultiPartMimeMessageSetsAppropriateHeaders()
     {
         $mime = new Mime('foo-bar');

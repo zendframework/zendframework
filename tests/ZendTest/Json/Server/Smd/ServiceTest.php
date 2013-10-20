@@ -43,16 +43,43 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $service = new Service(null);
     }
 
-    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormat()
+    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithInt()
     {
         $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
         $this->service->setName('0ab-?');
     }
 
-    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithInt()
+    public function testSettingNameShouldNotThrowExceptionWhenContainingValidFormatStartingWithUnderscore()
+    {
+        $this->service->setName('_getMyProperty');
+        $this->assertEquals('_getMyProperty', $this->service->getName());
+    }
+
+    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithRpc()
     {
         $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
-        $this->service->setName('0ab-?');
+        $this->service->setName('rpc.Foo');
+    }
+
+    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithRpcWithoutPeriodChar()
+    {
+        $this->service->setName('rpcFoo');
+        $this->assertEquals('rpcFoo', $this->service->getName());
+    }
+
+    public function testSettingNameShouldNotThrowExceptionWhenContainingInvalidFormatStartingWithRpcInsensitiveCase()
+    {
+        $this->service->setName('RpcFoo');
+        $this->assertEquals('RpcFoo', $this->service->getName());
+    }
+
+    public function testSettingNameShouldNotThrowExceptionWhenContainingValidFormatContainingRpc()
+    {
+        $this->service->setName('_rpcFoo');
+        $this->assertEquals('_rpcFoo', $this->service->getName());
+
+        $this->service->setName('MyRpcFoo');
+        $this->assertEquals('MyRpcFoo', $this->service->getName());
     }
 
     public function testNameAccessorsShouldWorkWithNormalInput()

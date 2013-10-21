@@ -166,9 +166,12 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $connection['database'] = $findParameterValue(array('database', 'db'));
         $connection['username'] = $findParameterValue(array('username', 'uid', 'UID'));
         $connection['password'] = $findParameterValue(array('password', 'pwd', 'PWD'));
+        $connection['persistent'] = $findParameterValue(array('persistent', 'PERSISTENT', 'Persistent'));
         $connection['options']  = (isset($p['driver_options']) ? $p['driver_options'] : array());
 
-        $this->resource = db2_connect(
+        $db2_connect = ($connection['persistent'] ? 'db2_pconnect' : 'db2_connect');
+        
+        $this->resource = $db2_connect(
             $connection['database'],
             $connection['username'],
             $connection['password'],

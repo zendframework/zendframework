@@ -57,11 +57,21 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(303, $response->getStatusCode());
     }
 
+    public function testResponseSetStatusCodeWithUnknownCode()
+    {
+        $response = new Response;
+        $response->setStatusCode(606);
+        $this->assertEquals(606, $response->getStatusCode());
+    }
+
     public function testResponseSetStatusCodeThrowsExceptionOnInvalidCode()
     {
         $response = new Response;
-        $this->setExpectedException('Zend\Http\Exception\InvalidArgumentException', 'Invalid status code');
-        $response->setStatusCode(606);
+        $this->setExpectedException(
+            'Zend\Http\Exception\InvalidArgumentException',
+            'Invalid status code provided: "foo"'
+        );
+        $response->setStatusCode('foo');
     }
 
     public function testResponseEndsAtStatusCode()
@@ -302,8 +312,8 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     public function testUnknownCode()
     {
         $response_str = $this->readResponse('response_unknown');
-        $this->setExpectedException('InvalidArgumentException', 'Invalid status code provided: "550"');
         $response = Response::fromString($response_str);
+        $this->assertEquals(550, $response->getStatusCode());
     }
 
     /**

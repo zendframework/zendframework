@@ -183,7 +183,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
 
         $sql = sprintf(
-            $this->specifications[self::SPECIFICATION_INSERT],
+            $this->specifications[static::SPECIFICATION_INSERT],
             $table,
             implode(', ', $columns),
             implode(', ', $values)
@@ -232,7 +232,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         $values = implode(', ', $values);
 
-        return sprintf($this->specifications[self::SPECIFICATION_INSERT], $table, $columns, $values);
+        return sprintf($this->specifications[static::SPECIFICATION_INSERT], $table, $columns, $values);
     }
 
     /**

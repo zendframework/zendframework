@@ -188,4 +188,76 @@ class InsertTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * @coversNothing
+     */
+    public function testSpecificationconstantsCouldBeOverridedByExtensionInPrepareStatement()
+    {
+        $replace = new Replace();
+
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $pContainer = new \Zend\Db\Adapter\ParameterContainer(array());
+        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+        $mockStatement->expects($this->at(1))
+            ->method('setSql')
+            ->with($this->equalTo('REPLACE INTO "foo" ("bar", "boo") VALUES (?, NOW())'));
+
+        $replace->into('foo')
+            ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()')));
+
+        $replace->prepareStatement($mockAdapter, $mockStatement);
+
+        // with TableIdentifier
+        $replace = new Replace();
+
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $pContainer = new \Zend\Db\Adapter\ParameterContainer(array());
+        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+        $mockStatement->expects($this->at(1))
+            ->method('setSql')
+            ->with($this->equalTo('REPLACE INTO "sch"."foo" ("bar", "boo") VALUES (?, NOW())'));
+
+        $replace->into(new TableIdentifier('foo', 'sch'))
+            ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()')));
+
+        $replace->prepareStatement($mockAdapter, $mockStatement);
+    }
+
+    /**
+     * @coversNothing
+     */
+    public function testSpecificationconstantsCouldBeOverridedByExtensionInGetSqlString()
+    {
+        $replace = new Replace();
+        $replace->into('foo')
+            ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null));
+
+        $this->assertEquals('REPLACE INTO "foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $replace->getSqlString(new TrustingSql92Platform()));
+
+        // with TableIdentifier
+        $replace = new Replace();
+        $replace->into(new TableIdentifier('foo', 'sch'))
+            ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null));
+
+        $this->assertEquals('REPLACE INTO "sch"."foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $replace->getSqlString(new TrustingSql92Platform()));
+    }
+}
+
+class Replace extends Insert
+{
+    const SPECIFICATION_INSERT = 'replace';
+
+    protected $specifications = array(
+        self::SPECIFICATION_INSERT => 'REPLACE INTO %1$s (%2$s) VALUES (%3$s)'
+    );
 }

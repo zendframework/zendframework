@@ -10,7 +10,6 @@
 namespace Zend\Db\Adapter\Driver;
 
 use Zend\Db\Adapter\Profiler;
-use Zend\Db\Adapter\Profiler\ProfilerInterface;
 
 abstract class AbstractConnection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 {
@@ -20,9 +19,9 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     protected $connectionParameters = array();
 
     /**
-     * @var string|null
+     * @var string
      */
-    protected $driverName;
+    protected $driverName = null;
 
     /**
      * @var boolean
@@ -30,17 +29,19 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     protected $inTransaction = false;
 
     /**
-     * @var ProfilerInterface|null
+     * @var Profiler\ProfilerInterface
      */
-    protected $profiler;
+    protected $profiler = null;
 
     /**
-     * @var resource|null
+     * @var resource
      */
-    protected $resource;
+    protected $resource = null;
 
     /**
-     * {@inheritDoc}
+     * Disconnect
+     *
+     * @return self
      */
     public function disconnect()
     {
@@ -72,7 +73,7 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     }
 
     /**
-     * @return null|ProfilerInterface
+     * @return null|Profiler\ProfilerInterface
      */
     public function getProfiler()
     {
@@ -80,7 +81,7 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     }
 
     /**
-     * {@inheritDoc}
+     * Get resource
      *
      * @return resource
      */
@@ -104,7 +105,7 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     }
 
     /**
-     * @param  array $connectionParameters
+     * @param array $connectionParameters
      * @return self
      */
     public function setConnectionParameters(array $connectionParameters)
@@ -115,11 +116,10 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     }
 
     /**
-     * {@inheritDoc}
-     *
+     * @param Profiler\ProfilerInterface $profiler
      * @return self
      */
-    public function setProfiler(ProfilerInterface $profiler)
+    public function setProfiler(Profiler\ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
 

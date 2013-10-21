@@ -3033,7 +3033,6 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers PhoneNumber::__construct()
      * @dataProvider constructDataProvider
      *
      * @param array  $args

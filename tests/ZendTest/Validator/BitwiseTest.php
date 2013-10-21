@@ -22,8 +22,11 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Bitwise::isvalid()
+     * @covers Bitwise::__construct()
      * @dataProvider constructDataProvider
+     *
+     * @param array $args
+     * @param array $options
      */
     public function testConstruct(array $args, array $options)
     {

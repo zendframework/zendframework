@@ -549,14 +549,6 @@ class SetCookie implements MultipleHeaderInterface
      */
     public static function matchCookieDomain($cookieDomain, $host)
     {
-        if (! $cookieDomain) {
-            throw new Exception\InvalidArgumentException('$cookieDomain is expected to be a cookie domain');
-        }
-
-        if (! $host) {
-            throw new Exception\InvalidArgumentException('$host is expected to be a host name');
-        }
-
         $cookieDomain = strtolower($cookieDomain);
         $host = strtolower($host);
         // Check for either exact match or suffix match
@@ -575,14 +567,6 @@ class SetCookie implements MultipleHeaderInterface
      */
     public static function matchCookiePath($cookiePath, $path)
     {
-        if (! $cookiePath) {
-            throw new Exception\InvalidArgumentException('$cookiePath is expected to be a cookie path');
-        }
-
-        if (! $path) {
-            throw new Exception\InvalidArgumentException('$path is expected to be a host name');
-        }
-
         return (strpos($path, $cookiePath) === 0);
     }
 

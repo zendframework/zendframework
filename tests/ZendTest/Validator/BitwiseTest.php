@@ -39,21 +39,8 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
         return array(
             array(
                 array(),
-                array('control' => 0, 'operator' => null, 'strict' => false),
+                array('control' => null, 'operator' => null, 'strict' => false),
             ),
-            array(
-                array(0x1),
-                array('control' => 0x1, 'operator' => null, 'strict' => false),
-            ),
-            array(
-                array(0x1, Bitwise::OP_AND),
-                array('control' => 0x1, 'operator' => Bitwise::OP_AND, 'strict' => false),
-            ),
-            array(
-                array(0x1, Bitwise::OP_AND, true),
-                array('control' => 0x1, 'operator' => Bitwise::OP_AND, 'strict' => true),
-            ),
-
             array(
                 array('control' => 0x1),
                 array('control' => 0x1, 'operator' => null, 'strict' => false),

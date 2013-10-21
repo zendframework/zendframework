@@ -183,7 +183,7 @@ class FormElement extends BaseAbstractHelper
     protected function renderInstance(ElementInterface $element)
     {
         foreach ($this->classMap as $class => $pluginName) {
-            if (is_a($element, $class)) {
+            if ($element instanceof $class) {
                 return $this->renderHelper($pluginName, $element);
             }
         }
@@ -200,10 +200,8 @@ class FormElement extends BaseAbstractHelper
     {
         $type = $element->getAttribute('type');
 
-        foreach ($this->typeMap as $typeName => $pluginName) {
-            if ($typeName == $type) {
-                return $this->renderHelper($pluginName, $element);
-            }
+        if (isset($this->typeMap[$type])) {
+            return $this->renderHelper($this->typeMap[$type], $element);
         }
         return null;
     }

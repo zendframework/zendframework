@@ -10,6 +10,7 @@
 namespace ZendTest;
 
 use Zend\Debug\Debug;
+use Zend\Escaper\Escaper;
 
 /**
  * @group      Zend_Debug
@@ -96,7 +97,7 @@ class DebugTest extends \PHPUnit_Framework_TestCase
 
     public function testDebugHaveEscaper()
     {
-        $escaper = new \Zend\Escaper\Escaper;
+        $escaper = new Escaper;
         Debug::setEscaper($escaper);
 
         $a = array("a" => "<script type=\"text/javascript\"");

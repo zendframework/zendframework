@@ -9,6 +9,7 @@
 
 namespace Zend\I18n\Validator;
 
+use Locale;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
@@ -86,6 +87,9 @@ class PhoneNumber extends AbstractValidator
 
         if (array_key_exists('country', $options)) {
             $this->setCountry($options['country']);
+        } else {
+            $country = Locale::getRegion(Locale::getDefault());
+            $this->setCountry($country);
         }
 
         if (array_key_exists('allowed_types', $options)) {

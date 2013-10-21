@@ -210,8 +210,20 @@ class PhoneNumber extends AbstractValidator
             }
         }
 
-        if ($countryPattern['code'] == substr($value, 0, strlen($countryPattern['code']))) {
-            $valueNoCountry = substr($value, strlen($countryPattern['code']));
+        $codeLength = strlen($countryPattern['code']);
+
+        /*
+         * Check for existence of either:
+         *   1) E.123/E.164 international prefix
+         *   2) International double-O prefix
+         *   3) Bare country prefix
+         */
+        if (('+' . $countryPattern['code']) == substr($value, 0, $codeLength + 1)) {
+            $valueNoCountry = substr($value, $codeLength + 1);
+        } elseif (('00' . $countryPattern['code']) == substr($value, 0, $codeLength + 2)) {
+            $valueNoCountry = substr($value, $codeLength + 2);
+        } elseif ($countryPattern['code'] == substr($value, 0, $codeLength)) {
+            $valueNoCountry = substr($value, $codeLength);
         }
 
         // check against allowed types strict match:

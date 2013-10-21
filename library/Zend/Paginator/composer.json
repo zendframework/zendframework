@@ -25,7 +25,7 @@
         "zendframework/zend-view": "self.version"
     },
     "suggest": {
-        "zendframework/zend-cache": "Zend\\Cache component",
+        "zendframework/zend-cache":"To support cache feature"
         "zendframework/zend-db": "Zend\\Db component",
         "zendframework/zend-filter": "Zend\\Filter component",
         "zendframework/zend-json": "Zend\\Json component",

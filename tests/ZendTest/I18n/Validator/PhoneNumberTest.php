@@ -10,6 +10,7 @@
 
 namespace Zend\I18nTest\Validator;
 
+use Locale;
 use Zend\I18n\Validator\PhoneNumber;
 
 class PhoneNumberTest extends \PHPUnit_Framework_TestCase
@@ -3032,6 +3033,49 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
         $this->validator = new PhoneNumber();
     }
 
+    /**
+     * @covers PhoneNumber::__construct()
+     * @dataProvider constructDataProvider
+     *
+     * @param array  $args
+     * @param array  $options
+     * @param string $locale
+     */
+    public function testConstruct(array $args, array $options, $locale = null)
+    {
+        if ($locale) {
+            Locale::setDefault($locale);
+        }
+
+        $validator = new PhoneNumber($args);
+
+        $this->assertSame($options['country'], $validator->getCountry());
+    }
+
+    public function constructDataProvider()
+    {
+        return array(
+            array(
+                array(),
+                array('country' => Locale::getRegion(Locale::getDefault())),
+                null
+            ),
+            array(
+                array(),
+                array('country' => 'CN'),
+                'zh_CN'
+            ),
+            array(
+                array('country' => 'CN'),
+                array('country' => 'CN'),
+                null
+            ),
+        );
+    }
+
+    /**
+     * @TODO: use dataProvider for this in order to enforce clean context
+     */
     public function testExampleNumbers()
     {
         foreach ($this->phone as $country => $parameters) {
@@ -3046,6 +3090,9 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @TODO: use dataProvider for this in order to enforce clean context
+     */
     public function testExampleNumbersAgainstPossible()
     {
         $this->validator->allowPossible(true);

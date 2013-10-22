@@ -53,6 +53,7 @@ class SessionManagerFactory implements FactoryInterface
      * - enable_default_container_manager: whether to inject the created instance
      *   as the default manager for Container instances. The default value for
      *   this is true; set it to false to disable.
+     * - validators: ...
      *
      * @param  ServiceLocatorInterface    $services
      * @return SessionManager
@@ -111,6 +112,15 @@ class SessionManagerFactory implements FactoryInterface
                 && is_array($configService['session_manager'])
             ) {
                 $managerConfig = array_merge($managerConfig, $configService['session_manager']);
+            }
+            // Attach validators to session manager, if any
+            if (isset($managerConfig['validators'])) {
+                $chain = $manager->getValidatorChain();
+                foreach ($managerConfig['validators'] as $validator) {
+                    $validator = new $validator();
+                    $chain->attach('session.validate', array($validator, 'isValid'));
+
+                }
             }
         }
 

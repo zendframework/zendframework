@@ -88,6 +88,9 @@ class GenericHeader implements HeaderInterface
             throw new Exception\InvalidArgumentException('Header name must be a string');
         }
 
+        // Pre-filter to normalize valid characters, change underscore to dash
+        $fieldName = str_replace('_', '-', $fieldName);
+
         /*
          * Following RFC 2616 section 4.2
          *

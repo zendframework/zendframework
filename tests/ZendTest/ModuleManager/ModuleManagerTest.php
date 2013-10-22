@@ -88,17 +88,6 @@ class ModuleManagerTest extends TestCase
         $this->assertSame($config->some, 'thing');
     }
 
-    public function testIgnoreNullModule()
-    {
-        $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager  = new ModuleManager(array('SomeModule', null), new EventManager);
-        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
-        $moduleManager->loadModules();
-        $loadedModules = $moduleManager->getLoadedModules();
-        $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
-        $this->assertSame(count($loadedModules), 1);
-    }
-
     public function testCanLoadMultipleModules()
     {
         $configListener = $this->defaultListeners->getConfigListener();

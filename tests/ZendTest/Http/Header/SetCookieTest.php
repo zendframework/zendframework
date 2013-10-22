@@ -319,6 +319,27 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($cookie->getFieldName() . ': ' . $expected, $cookie->toString());
     }
 
+    public function testRfcCompatibility()
+    {
+        $name = 'myname';
+        $value = 'myvalue';
+        $formatUnquoted = '%s: %s=%s';
+        $formatQuoted = '%s: %s="%s"';
+
+        $cookie = new SetCookie( $name, $value );
+
+        // default
+        $this->assertEquals( $cookie->toString(), sprintf($formatUnquoted,$cookie->getFieldName(),$name,$value));
+
+        // rfc with quote
+        $cookie->setQuoteFieldValue(true);
+        $this->assertEquals( $cookie->toString(), sprintf($formatQuoted,$cookie->getFieldName(),$name,$value));
+
+        // rfc without quote
+        $cookie->setQuoteFieldValue(false);
+        $this->assertEquals( $cookie->toString(), sprintf($formatUnquoted,$cookie->getFieldName(),$name,$value));
+    }
+
     public function testSetJsonValue()
     {
         $cookieName ="fooCookie";

@@ -46,8 +46,6 @@ class Allow implements HeaderInterface
      */
     public static function fromString($headerLine)
     {
-        $header = new static();
-
         list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
@@ -55,14 +53,8 @@ class Allow implements HeaderInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Allow string: "' . $name . '"');
         }
 
-        // reset list of methods
-        $header->methods = array_fill_keys(array_keys($header->methods), false);
-
-        // allow methods from header line
-        foreach (explode(',', $value) as $method) {
-            $method = trim(strtoupper($method));
-            $header->methods[$method] = true;
-        }
+        $header = new static();
+        $header->allowMethods(explode(',', $value));
 
         return $header;
     }

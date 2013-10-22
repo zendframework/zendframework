@@ -41,7 +41,7 @@ abstract class AbstractAccept implements HeaderInterface
 
     /**
      *
-     * @var array
+     * @var stdClass[]
      */
     protected $fieldValueParts = array();
 
@@ -290,7 +290,7 @@ abstract class AbstractAccept implements HeaderInterface
      * Match a media string against this header
      *
      * @param array|string $matchAgainst
-     * @return AcceptFieldValuePart|bool The matched value or false
+     * @return Accept\FieldValuePArt\AcceptFieldValuePart|bool The matched value or false
      */
     public function match($matchAgainst)
     {
@@ -411,7 +411,7 @@ abstract class AbstractAccept implements HeaderInterface
      */
     protected function sortFieldValueParts()
     {
-        $sort = function ($a, $b) { // If A has higher prio than B, return -1.
+        $sort = function ($a, $b) { // If A has higher precedence than B, return -1.
             if ($a->priority > $b->priority) {
                 return -1;
             } elseif ($a->priority < $b->priority) {
@@ -436,7 +436,7 @@ abstract class AbstractAccept implements HeaderInterface
 
             //@todo count number of dots in case of type==application in subtype
 
-            // So far they're still the same. Longest stringlength may be more specific
+            // So far they're still the same. Longest string length may be more specific
             if (strlen($a->raw) == strlen($b->raw)) return 0;
             return (strlen($a->raw) > strlen($b->raw)) ? -1 : 1;
         };

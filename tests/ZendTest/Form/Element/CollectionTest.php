@@ -527,4 +527,52 @@ class CollectionTest extends TestCase
             'obj3' => $obj3,
         ));
     }
+
+    public function testCanBindObjectAndPopulateAndExtractNestedFieldsets()
+    {
+
+        $productFieldset = new \ZendTest\Form\TestAsset\ProductFieldset();
+        $productFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+
+        $mainFieldset = new Fieldset('shop');
+        $mainFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+        $mainFieldset->add($productFieldset);
+
+        $form = new Form();
+        $form->setHydrator(new ObjectPropertyHydrator());
+        $form->add(array(
+            'name' => 'collection',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $mainFieldset,
+                'count' => 2
+            ),
+        ));
+        $form->get('collection')->setHydrator(new ObjectPropertyHydrator());
+
+        $market = new stdClass();
+
+        $prices = array(100, 200);
+
+        $shop1 = new stdClass();
+        $shop1->product = new Product();
+        $shop1->product->setPrice($prices[0]);
+
+        $shop2 = new stdClass();
+        $shop2->product = new Product();
+        $shop2->product->setPrice($prices[1]);
+
+        $market->collection = array($shop1, $shop2);
+        $form->bind($market);
+
+        //test for object binding
+        foreach ($form->get('collection')->getFieldsets() as $_fieldset) {
+            $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Product', $_fieldset->get('product')->getObject());
+        };
+
+        //test for correct extract and populate
+        foreach ($prices as $_k => $_price) {
+            $this->assertEquals($_price, $form->get('collection')->get($_k)->get('product')->get('price')->getValue());
+        }
+    }
 }

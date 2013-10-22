@@ -79,9 +79,9 @@ class SetCookie implements MultipleHeaderInterface
     /**
      * If the value need to be quoted or not
      *
-     * @var bool|null
+     * @var bool
      */
-    protected $quoteFieldValue = null;
+    protected $quoteFieldValue = false;
 
     /**
      * @var bool|null
@@ -204,7 +204,6 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     *
      * @throws Exception\RuntimeException
      * @return string
      */
@@ -439,9 +438,9 @@ class SetCookie implements MultipleHeaderInterface
      * @param  bool $quotedValue
      * @return SetCookie
      */
-    public function setQuoteFieldValue($quotedValue=false)
+    public function setQuoteFieldValue($quotedValue)
     {
-        $this->quoteFieldValue = $quotedValue;
+        $this->quoteFieldValue = (bool) $quotedValue;
         return $this;
     }
 
@@ -507,9 +506,9 @@ class SetCookie implements MultipleHeaderInterface
      *
      * @return bool
      */
-    public function quoteFieldValue()
+    public function hasQuoteFieldValue()
     {
-        return ($this->quoteFieldValue === true);
+        return $this->quoteFieldValue;
     }
 
     public function isValidForRequest($requestDomain, $path, $isSecure = false)

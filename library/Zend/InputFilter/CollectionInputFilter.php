@@ -165,7 +165,7 @@ class CollectionInputFilter extends InputFilter
         if (count($this->collectionData) < $this->getCount()) {
             $valid = false;
         }
-        
+
         if (empty($this->collectionData)) {
             $this->clearValues();
             $this->clearRawValues();

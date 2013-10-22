@@ -1702,7 +1702,7 @@ class FormTest extends TestCase
         $filters = $form->getInputFilter()->get('fieldset')->get('foo')->getFilterChain();
         $this->assertEquals(1, $filters->count());
     }
-    
+
     public function testFormWithNestedCollections()
     {
         $spec = array(
@@ -1798,10 +1798,10 @@ class FormTest extends TestCase
                 ),
             ),
         );
-    
+
         $factory = new Factory();
         $this->form = $factory->createForm($spec);
-        
+
         $data = array(
             'name' => 'foo',
             'groups' => array(
@@ -1837,9 +1837,9 @@ class FormTest extends TestCase
                 ),
             ),
         );
-        
+
         $this->form->setData($data);
-        
+
         $isValid = $this->form->isValid();
         $this->assertEquals($data, $this->form->getData());
     }

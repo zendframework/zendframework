@@ -391,7 +391,7 @@ class CollectionInputFilterTest extends TestCase
         $this->filter->setIsRequired(true);
         $this->assertEquals(true,$this->filter->getIsRequired());
     }
-    
+
     public function testNestedCollectionWithEmptyChild()
     {
         $items_inputfilter = new BaseInputFilter();
@@ -399,16 +399,16 @@ class CollectionInputFilterTest extends TestCase
                           ->add(new Input(), 'type');
         $items = new CollectionInputFilter();
         $items->setInputFilter($items_inputfilter);
-        
+
         $groups_inputfilter = new BaseInputFilter();
         $groups_inputfilter->add(new Input(), 'group_class')
                            ->add($items, 'items');
         $groups = new CollectionInputFilter();
         $groups->setInputFilter($groups_inputfilter);
-        
+
         $inputFilter = new BaseInputFilter();
         $inputFilter->add($groups, 'groups');
-        
+
         $preFilterdata = array(
             'groups' => array(
                 array(
@@ -442,7 +442,7 @@ class CollectionInputFilterTest extends TestCase
                 ),
             ),
         );
-        
+
         $postFilterdata = array(
             'groups' => array(
                 array(
@@ -477,13 +477,13 @@ class CollectionInputFilterTest extends TestCase
                 ),
             ),
         );
-        
+
         $inputFilter->setData($preFilterdata);
         $inputFilter->isValid();
         $values = $inputFilter->getValues();
         $this->assertEquals($postFilterdata, $values);
     }
-    
+
     public function testNestedCollectionWithEmptyData()
     {
         $items_inputfilter = new BaseInputFilter();
@@ -491,16 +491,16 @@ class CollectionInputFilterTest extends TestCase
                           ->add(new Input(), 'type');
         $items = new CollectionInputFilter();
         $items->setInputFilter($items_inputfilter);
-    
+
         $groups_inputfilter = new BaseInputFilter();
         $groups_inputfilter->add(new Input(), 'group_class')
                            ->add($items, 'items');
         $groups = new CollectionInputFilter();
         $groups->setInputFilter($groups_inputfilter);
-    
+
         $inputFilter = new BaseInputFilter();
         $inputFilter->add($groups, 'groups');
-    
+
         $data = array(
             'groups' => array(
                 array(
@@ -535,7 +535,7 @@ class CollectionInputFilterTest extends TestCase
                 ),
             ),
         );
-    
+
         $inputFilter->setData($data);
         $inputFilter->isValid();
         $values = $inputFilter->getValues();

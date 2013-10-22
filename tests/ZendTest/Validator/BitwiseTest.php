@@ -14,7 +14,7 @@ use Zend\Validator\Bitwise;
 class BitwiseTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \ZendTest\Validator\Bitwise
+     * @var \Zend\Validator\Bitwise
      */
     public $validator;
 
@@ -24,7 +24,7 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \ZendTest\Validator\Bitwise::__construct()
+     * @covers \Zend\Validator\Bitwise::__construct()
      * @dataProvider constructDataProvider
      *
      * @param array $args
@@ -63,7 +63,7 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \ZendTest\Validator\Bitwise::isvalid()
+     * @covers \Zend\Validator\Bitwise::isvalid()
      */
     public function testBitwiseAndNotStrict()
     {
@@ -89,7 +89,7 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \ZendTest\Validator\Bitwise::isvalid()
+     * @covers \Zend\Validator\Bitwise::isvalid()
      */
     public function testBitwiseAndStrict()
     {
@@ -116,7 +116,7 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \ZendTest\Validator\Bitwise::isvalid()
+     * @covers \Zend\Validator\Bitwise::isvalid()
      */
     public function testBitwiseXor()
     {
@@ -144,7 +144,7 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \ZendTest\Validator\Bitwise::setOperator()
+     * @covers \Zend\Validator\Bitwise::setOperator()
      */
     public function testSetOperator()
     {
@@ -158,7 +158,7 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \ZendTest\Validator\Bitwise::setStrict()
+     * @covers \Zend\Validator\Bitwise::setStrict()
      */
     public function testSetStrict()
     {

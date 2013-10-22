@@ -350,50 +350,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($testAdapter, $client->getAdapter());
     }
 
-    /**
-     * Custom response object is set but still invalid code coming back
-     * @expectedException Zend\Http\Exception\InvalidArgumentException
-     */
-    public function testUsageOfCustomResponseInvalidCode()
-    {
-        require_once(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .'_files' . DIRECTORY_SEPARATOR . 'CustomResponse.php');
-        $testAdapter = new Test();
-        $testAdapter->setResponse(
-            "HTTP/1.1 496 CustomResponse\r\n\r\n"
-            . "Whatever content"
-        );
-
-        $client = new Client('http://www.example.org/', array(
-            'adapter' => $testAdapter,
-        ));
-        $client->setResponse(new CustomResponse());
-        $response = $client->send();
-    }
-
-    /**
-     * Custom response object is set with defined status code 497.
-     * Should not throw an exception.
-     */
-    public function testUsageOfCustomResponseCustomCode()
-    {
-        require_once(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .'_files' . DIRECTORY_SEPARATOR . 'CustomResponse.php');
-        $testAdapter = new Test();
-        $testAdapter->setResponse(
-            "HTTP/1.1 497 CustomResponse\r\n\r\n"
-            . "Whatever content"
-        );
-
-        $client = new Client('http://www.example.org/', array(
-            'adapter' => $testAdapter,
-        ));
-        $client->setResponse(new CustomResponse());
-        $response = $client->send();
-
-        $this->assertInstanceOf('ZendTest\Http\CustomResponse', $response);
-        $this->assertEquals(497, $response->getStatusCode());
-        $this->assertEquals('Whatever content', $response->getContent());
-    }
-
     public function testPrepareHeadersCreateRightHttpField()
     {
         $body = json_encode(array('foofoo'=>'barbar'));

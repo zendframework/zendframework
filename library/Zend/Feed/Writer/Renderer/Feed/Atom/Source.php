@@ -22,7 +22,7 @@ class Source extends AbstractAtom implements Renderer\RendererInterface
      *
      * @param  Writer\Source $container
      */
-    public function __construct (Writer\Source $container)
+    public function __construct(Writer\Source $container)
     {
         parent::__construct($container);
     }

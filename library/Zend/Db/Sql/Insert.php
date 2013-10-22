@@ -92,7 +92,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function values(array $values, $flag = self::VALUES_SET)
     {
         if ($values == null) {
-            throw new \InvalidArgumentException('values() expects an array of values');
+            throw new Exception\InvalidArgumentException('values() expects an array of values');
         }
 
         // determine if this is assoc or a set of values
@@ -183,7 +183,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
 
         $sql = sprintf(
-            $this->specifications[self::SPECIFICATION_INSERT],
+            $this->specifications[static::SPECIFICATION_INSERT],
             $table,
             implode(', ', $columns),
             implode(', ', $values)
@@ -232,7 +232,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         $values = implode(', ', $values);
 
-        return sprintf($this->specifications[self::SPECIFICATION_INSERT], $table, $columns, $values);
+        return sprintf($this->specifications[static::SPECIFICATION_INSERT], $table, $columns, $values);
     }
 
     /**

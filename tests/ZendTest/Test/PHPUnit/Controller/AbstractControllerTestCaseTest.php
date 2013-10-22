@@ -5,10 +5,11 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Test
  */
 namespace ZendTest\Test\PHPUnit\Controller;
 
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Zend\Console\Console;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
@@ -17,16 +18,14 @@ use Zend\Stdlib\ResponseInterface;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 /**
- * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
  * @group      Zend_Test
  */
 class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 {
     public function tearDownCacheDir()
     {
-        $cacheDir = sys_get_temp_dir() . '/zf2-module-test';
+        vfsStreamWrapper::register();
+        $cacheDir = vfsStream::url('zf2-module-test');
         if (is_dir($cacheDir)) {
             static::rmdir($cacheDir);
         }
@@ -304,5 +303,20 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->getRequest()->setContent('my content');
         $this->dispatch('/tests', 'PUT', array('a' => 1));
         $this->assertEquals('a=1', $this->getRequest()->getContent());
+    }
+
+    public function testAssertTemplateName()
+    {
+        $this->dispatch('/tests');
+
+        $this->assertTemplateName('layout/layout');
+        $this->assertTemplateName('baz/index/unittests');
+    }
+
+    public function testAssertNotTemplateName()
+    {
+        $this->dispatch('/tests');
+
+        $this->assertNotTemplateName('template/does/not/exist');
     }
 }

@@ -180,13 +180,13 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
         }
 
-        $sql = sprintf($this->specifications[self::SPECIFICATION_DELETE], $table);
+        $sql = sprintf($this->specifications[static::SPECIFICATION_DELETE], $table);
 
         // process where
         if ($this->where->count() > 0) {
             $whereParts = $this->processExpression($this->where, $platform, $driver, 'where');
             $parameterContainer->merge($whereParts->getParameterContainer());
-            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts->getSql());
+            $sql .= ' ' . sprintf($this->specifications[static::SPECIFICATION_WHERE], $whereParts->getSql());
         }
         $statementContainer->setSql($sql);
     }
@@ -216,11 +216,11 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $table = $adapterPlatform->quoteIdentifier($schema) . $adapterPlatform->getIdentifierSeparator() . $table;
         }
 
-        $sql = sprintf($this->specifications[self::SPECIFICATION_DELETE], $table);
+        $sql = sprintf($this->specifications[static::SPECIFICATION_DELETE], $table);
 
         if ($this->where->count() > 0) {
             $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
-            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts->getSql());
+            $sql .= ' ' . sprintf($this->specifications[static::SPECIFICATION_WHERE], $whereParts->getSql());
         }
 
         return $sql;

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form;
@@ -1212,7 +1211,7 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->isValid());
     }
 
-    public function testDonNotApplyEmptyInputFiltersToSubFieldsetOfCollectionElementsWithCollectionInputFilters()
+    public function testDoNotApplyEmptyInputFiltersToSubFieldsetOfCollectionElementsWithCollectionInputFilters()
     {
         $collectionFieldset = new Fieldset('item');
         $collectionFieldset->add(new Element('foo'));
@@ -1541,5 +1540,166 @@ class FormTest extends TestCase
         //prepare for view
         $rootForm->prepare();
         $this->assertEquals('form[element]', $element->getName());
+    }
+
+    /**
+     * @group 4996
+     */
+    public function testCanOverrideDefaultInputSettings()
+    {
+        $myFieldset = new TestAsset\MyFieldset();
+        $myFieldset->setUseAsBaseFieldset(true);
+        $form = new Form();
+        $form->add($myFieldset);
+
+        $inputFilter = $form->getInputFilter()->get('my-fieldset');
+        $this->assertFalse($inputFilter->get('email')->isRequired());
+    }
+
+    /**
+     * @group 5007
+     */
+    public function testComplexFormInputFilterMergesIntoExisting()
+    {
+        $this->form->setPreferFormInputFilter(true);
+        $this->form->add(array(
+            'name' => 'importance',
+            'type'  => 'Zend\Form\Element\Select',
+            'options' => array(
+                'label' => 'Importance',
+                'empty_option' => '',
+                'value_options' => array(
+                    'normal' => 'Normal',
+                    'important' => 'Important'
+                ),
+            ),
+        ));
+
+        $inputFilter = new \Zend\InputFilter\BaseInputFilter();
+        $factory     = new \Zend\InputFilter\Factory();
+        $inputFilter->add($factory->createInput(array(
+            'name'     => 'importance',
+            'required' => false,
+        )));
+
+        $this->assertTrue($this->form->getInputFilter()->get('importance')->isRequired());
+        $this->assertFalse($inputFilter->get('importance')->isRequired());
+        $this->form->getInputFilter();
+        $this->form->setInputFilter($inputFilter);
+        $this->assertFalse($this->form->getInputFilter()->get('importance')->isRequired());
+    }
+
+    /**
+     * @group 5007
+     */
+    public function testInputFilterOrderOfPrecedence1()
+    {
+        $spec = array(
+            'name' => 'test',
+            'elements' => array(
+                array(
+                    'spec' => array(
+                        'name' => 'element',
+                        'type' => 'Zend\Form\Element\Checkbox',
+                        'options' => array(
+                            'use_hidden_element' => true,
+                            'checked_value' => '1',
+                            'unchecked_value' => '0'
+                        )
+                    )
+                )
+            ),
+            'input_filter' => array(
+                'element' => array(
+                    'required' => false,
+                    'filters' => array(
+                        array(
+                            'name' => 'Boolean'
+                        )
+                    ),
+                    'validators' => array(
+                        array(
+                            'name' => 'InArray',
+                            'options' => array(
+                                'haystack' => array(
+                                    "0",
+                                    "1"
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
+
+        $factory = new Factory();
+        $this->form = $factory->createForm($spec);
+        $this->form->setPreferFormInputFilter(true);
+        $this->assertFalse($this->form->getInputFilter()->get('element')
+            ->isRequired());
+    }
+
+    /**
+     * @group 5015
+     */
+    public function testCanSetPreferFormInputFilterFlagViaSetOptions()
+    {
+        $flag = ! $this->form->getPreferFormInputFilter();
+        $this->form->setOptions(array(
+            'prefer_form_input_filter' => $flag,
+        ));
+        $this->assertSame($flag, $this->form->getPreferFormInputFilter());
+    }
+
+    /**
+     * @group 5015
+     */
+    public function testFactoryCanSetPreferFormInputFilterFlag()
+    {
+        $factory = new Factory();
+        foreach (array(true, false) as $flag) {
+            $form = $factory->createForm(array(
+                'name'    => 'form',
+                'options' => array(
+                    'prefer_form_input_filter' => $flag,
+                ),
+            ));
+            $this->assertSame($flag, $form->getPreferFormInputFilter());
+        }
+    }
+
+    /**
+     * @group 5028
+     */
+    public function testPreferFormInputFilterFlagIsEnabledByDefault()
+    {
+        $this->assertTrue($this->form->getPreferFormInputFilter());
+    }
+
+    /**
+     * @group 5050
+     */
+    public function testFileInputFilterNotOverwritten()
+    {
+        $form = new TestAsset\FileInputFilterProviderForm();
+
+        $formInputFilter     = $form->getInputFilter();
+        $fieldsetInputFilter = $formInputFilter->get('file_fieldset');
+        $fileInput           = $fieldsetInputFilter->get('file_field');
+
+        $this->assertInstanceOf('Zend\InputFilter\FileInput', $fileInput);
+
+        $chain = $fileInput->getFilterChain();
+        $this->assertCount(1, $chain, var_export($chain, 1));
+    }
+
+    public function testInputFilterNotAddedTwiceWhenUsingFieldsets()
+    {
+        $form = new Form();
+
+        $fieldset = new TestAsset\FieldsetWithInputFilter('fieldset');
+        $form->add($fieldset);
+        $filters = $form->getInputFilter()->get('fieldset')->get('foo')->getFilterChain();
+        $this->assertEquals(1, $filters->count());
     }
 }

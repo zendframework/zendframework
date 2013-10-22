@@ -49,7 +49,7 @@ class RequestId implements ProcessorInterface
             return $this->identifier;
         }
 
-        $requestTime = (version_compare(PHP_VERSION, '5.4.0') >= 0)
+        $requestTime = (PHP_VERSION_ID >= 50400)
                      ? $_SERVER['REQUEST_TIME_FLOAT']
                      : $_SERVER['REQUEST_TIME'];
 

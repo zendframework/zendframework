@@ -22,7 +22,7 @@
     },
     "suggest": {
         "zendframework/zend-json": "Zend\\Json component",
-        "zendframework/zend-session": "Zend\\Session component"
+        "zendframework/zend-session": "To support progressbar persistent"
     },
     "extra": {
         "branch-alias": {

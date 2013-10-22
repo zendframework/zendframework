@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace ZendTest\Ldap;
@@ -14,9 +13,6 @@ use Zend\Ldap;
 use Zend\Ldap\Filter;
 
 /**
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
  * @group      Zend_Ldap
  */
 class FilterTest extends \PHPUnit_Framework_TestCase
@@ -91,7 +87,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testToStringImplementation()
     {
         $f1 = Ldap\Filter::ends('name', 'value');
-        $this->assertEquals($f1->toString(), (string)$f1);
+        $this->assertEquals($f1->toString(), (string) $f1);
     }
 
     public function testNegate()

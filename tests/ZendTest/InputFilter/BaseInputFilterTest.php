@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_InputFilter
  */
 
 namespace ZendTest\InputFilter;
@@ -609,7 +608,7 @@ class BaseInputFilterTest extends TestCase
                    ->setContinueIfEmpty(true);
 
         $blankIsValid = new Input();
-        $blankIsValid->getValidatorChain()->attach(new Validator\Callback(function($value, $context) {
+        $blankIsValid->getValidatorChain()->attach(new Validator\Callback(function ($value, $context) {
             return ('y' === $value && empty($context['allowEmpty']));
         }));
 
@@ -764,5 +763,23 @@ class BaseInputFilterTest extends TestCase
         $this->assertCount(2, $filters);
         $this->assertEquals('foo', $filters['foo']->getName());
         $this->assertEquals('bar', $filters['bar']->getName());
+    }
+
+    /**
+     * @group 4996
+     */
+    public function testAddingExistingInputWillMergeIntoExisting()
+    {
+        $filter = new InputFilter();
+
+        $foo1    = new Input('foo');
+        $foo1->setRequired(true);
+        $filter->add($foo1);
+
+        $foo2    = new Input('foo');
+        $foo2->setRequired(false);
+        $filter->add($foo2);
+
+        $this->assertFalse($filter->get('foo')->isRequired());
     }
 }

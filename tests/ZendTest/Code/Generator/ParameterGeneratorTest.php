@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace ZendTest\Code\Generator;
@@ -15,10 +14,6 @@ use Zend\Code\Generator\ValueGenerator;
 use Zend\Code\Reflection\ParameterReflection;
 
 /**
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage UnitTests
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
@@ -201,5 +196,20 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($parameterGenerator->isSourceDirty());
         $this->assertEquals('foo', $parameterGenerator->getSourceContent());
         $this->assertEquals('-', $parameterGenerator->getIndentation());
+    }
+
+    /**
+     * @group 4988
+     */
+    public function testParameterGeneratorReturnsCorrectTypeForNonNamespaceClasses()
+    {
+        require_once __DIR__ . '/../TestAsset/NonNamespaceClass.php';
+
+        $reflClass = new \Zend\Code\Reflection\ClassReflection('ZendTest_Code_NsTest_BarClass');
+        $params = $reflClass->getMethod('fooMethod')->getParameters();
+
+        $param = ParameterGenerator::fromReflection($params[0]);
+
+        $this->assertEquals('\ZendTest_Code_NsTest_BarClass', $param->getType());
     }
 }

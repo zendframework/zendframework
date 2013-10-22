@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper\Navigation;
@@ -13,9 +12,6 @@ namespace ZendTest\View\Helper\Navigation;
 /**
  * Tests Zend_View_Helper_Navigation_Menu
  *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -217,6 +213,16 @@ class MenuTest extends AbstractTest
 
         $expected = $this->_getExpected('menu/translated.html');
         $this->assertEquals($expected, $this->_helper->render());
+    }
+
+    public function testTranslationUsingZendTranslateWithTextDomain()
+    {
+        $translator = $this->_getTranslatorWithTextDomain();
+        $this->_helper->setTranslator($translator);
+
+        $expected = $this->_getExpected('menu/textdomain.html');
+        $test     = $this->_helper->render($this->_nav3);
+        $this->assertEquals(trim($expected), trim($test));
     }
 
     public function testTranslationUsingZendTranslateAdapter()

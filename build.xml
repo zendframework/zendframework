@@ -13,10 +13,6 @@
         <mkdir dir="${basedir}/build/logs"/>
     </target>
 
-    <target name="get-cs-fixer" depends="clean" description="Get coding standards fixer">
-        <get src="http://cs.sensiolabs.org/get/php-cs-fixer.phar" dest="${basedir}/php-cs-fixer.phar"/>
-    </target>
-
     <target name="composer-install" description="Installs dependencies via composer install">
         <sequential>
             <exec executable="composer" failonerror="true">
@@ -52,7 +48,7 @@
 
     <target
         name="tests-parallel"
-        depends="prepare,composer-install,get-cs-fixer"
+        depends="prepare,composer-install"
         description="Run tests for the various components in parallel"
     >
         <parallel threadCount="8">

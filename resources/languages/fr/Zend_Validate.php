@@ -9,7 +9,7 @@
 
 
 /**
- * FR-Revision: 06.June.2013
+ * FR-Revision: 29.Sept.2013
  */
 return array(
     // Zend\I18n\Validator\Alnum
@@ -22,6 +22,10 @@ return array(
     "The input contains non alphabetic characters" => "L'entrée contient des caractères non alphabétiques",
     "The input is an empty string" => "L'entrée est une chaîne vide",
 
+    // Zend\I18n\Validator\DateTime
+    "Invalid type given. String expected" => "Type invalide. Chaîne attendue",
+    "The input does not appear to be a valid datetime" => "L'entrée ne semble pas être une date/heure valide",
+
     // Zend\I18n\Validator\Float
     "Invalid type given. String, integer or float expected" => "Type invalide. Chaîne, entier ou flottant attendu",
     "The input does not appear to be a float" => "L'entrée n'est pas un nombre flottant",
@@ -31,7 +35,7 @@ return array(
     "The input does not appear to be an integer" => "L'entrée n'est pas un entier",
 
     // Zend\I18n\Validator\PostCode
-    "Invalid type given. String or integer expected" => "Type invalid. Chaîne ou entier attendu",
+    "Invalid type given. String or integer expected" => "Type invalide. Chaîne ou entier attendu",
     "The input does not appear to be a postal code" => "L'entrée ne semble pas être un code postal valide",
     "An exception has been raised while validating the input" => "Une exception a été levée lors de la validation de l'entrée",
 
@@ -69,7 +73,7 @@ return array(
     // Zend\Validator\DateStep
     "Invalid type given. String, integer, array or DateTime expected" => "Entrée invalide. Chaîne, entier, tableau ou DateTime attendu",
     "The input does not appear to be a valid date" => "L'entrée ne semble pas être une date valide",
-    "The input is not a valid step" => "L'entrée n'est pas une step valide",
+    "The input is not a valid step" => "L'entrée n'est pas un pas de date valide",
 
     // Zend\Validator\Db\AbstractDb
     "No record matching the input was found" => "Aucun enregistrement trouvé",
@@ -117,7 +121,7 @@ return array(
     // Zend\Validator\File\FilesSize
     "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "Tous les fichiers devraient avoir une taille maximale de '%max%' mais une taille de '%size%' a été détectée",
     "All files in sum should have a minimum size of '%min%' but '%size%' were detected" => "Tous les fichiers devraient avoir une taille minimale de '%max%' mais une taille de '%size%' a été détectée",
-    "One or more files can not be read" => "Un ou plusieurs fichiers ne peut pas être lu",
+    "One or more files can not be read" => "Un ou plusieurs fichiers ne peuvent être lus",
 
     // Zend\Validator\File\Hash
     "File '%value%' does not match the given hashes" => "Le fichier '%value%' ne correspond pas aux sommes de contrôle données",
@@ -125,10 +129,10 @@ return array(
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 
     // Zend\Validator\File\ImageSize
-    "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected" => "La largeur maximale pour l'image '%value%' devrait être '%maxwidth%', mais '%width%' détecté",
-    "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected" => "La largeur minimale pour l'image '%value%' devrait être '%minwidth%', mais '%width%' détecté",
-    "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected" => "La hauteur maximale pour l'image '%value%' devrait être '%maxheight%', mais '%height%' détecté",
-    "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected" => "La hauteur maximale pour l'image '%value%' devrait être '%minheight%', mais '%height%' détecté",
+    "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected" => "La largeur maximale pour l'image '%value%' devrait être de '%maxwidth%', mais largeur de '%width%' détectée",
+    "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected" => "La largeur minimale pour l'image '%value%' devrait être de '%minwidth%', mais largeur de '%width%' détectée",
+    "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected" => "La hauteur maximale pour l'image '%value%' devrait être de '%maxheight%', mais hauteur de '%height%' détectée",
+    "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected" => "La hauteur maximale pour l'image '%value%' devrait être de '%minheight%', mais hauteur de '%height%' détectée",
     "The size of image '%value%' could not be detected" => "La taille de l'image '%value%' n'a pas pu être détectée",
     "File '%value%' is not readable or does not exist" => "Le fichier '%value%' n'est pas lisible ou n'existe pas",
 

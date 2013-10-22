@@ -1,5 +1,40 @@
 # CHANGELOG
 
+## 2.2.4 (2013-08-26)
+
+- [5008: deprecated feature in classmap generator](https://github.com/zendframework/zf2/issues/5008)
+- [5015: Allow set Form::setPreferFormInputFilter via options](https://github.com/zendframework/zf2/issues/5015)
+- [5028: Fix forms regression introduced in 2.2.3](https://github.com/zendframework/zf2/issues/5028)
+
+## 2.2.3 (2013-08-21):
+
+- [4851: allow usage of validator and filter plugin managers in input filter factory if form manager injected](https://github.com/zendframework/zf2/issues/4851)
+- [4868: Tests for issue with unexpected injection.](https://github.com/zendframework/zf2/issues/4868)
+- [4877: Validator\File tests throwing errors in custom PHP 5.3.10 distributions](https://github.com/zendframework/zf2/issues/4877)
+- [4878: Form element title attribute test](https://github.com/zendframework/zf2/issues/4878)
+- [4881: Update Validator translations](https://github.com/zendframework/zf2/issues/4881)
+- [4883: Update Zend&#95;Validate.php](https://github.com/zendframework/zf2/issues/4883)
+- [4893: Resolves warning raised when version is not matched.](https://github.com/zendframework/zf2/issues/4893)
+- [4895: Small fix for ZendTest\Form\FormTest method name](https://github.com/zendframework/zf2/issues/4895)
+- [4897: Support file stream](https://github.com/zendframework/zf2/issues/4897)
+- [4905: Update Statement.php](https://github.com/zendframework/zf2/issues/4905)
+- [4909: renamed test class according to psr-0](https://github.com/zendframework/zf2/issues/4909)
+- [4915: Dependency suggest for MVC plugins](https://github.com/zendframework/zf2/issues/4915)
+- [4919: Notices being triggered when hydrating classes with no properties with the reflection hydrator](https://github.com/zendframework/zf2/issues/4919)
+- [4920: Redundant conditional](https://github.com/zendframework/zf2/issues/4920)
+- [4922: remove unused $typeFormats property at Zend/Code/Generator/DocBlock/Tag.php](https://github.com/zendframework/zf2/issues/4922)
+- [4925: HttpClient: adapter always reachable through getter if specified on contructor](https://github.com/zendframework/zf2/issues/4925)
+- [4929: Add Zend\Uri as a suggest because it is required by the Uri &amp; Sitemap\Loc validator](https://github.com/zendframework/zf2/issues/4929)
+- [4934: Mime\Message: createFromString: decode transfer encoding](https://github.com/zendframework/zf2/issues/4934)
+- [4957: Undefined variable: class in Zend/ModuleManager/Listener/ServiceListener.php](https://github.com/zendframework/zf2/issues/4957)
+- [4966: Fix issue #4952](https://github.com/zendframework/zf2/issues/4966)
+- [4976: Applied trim and strtolower to Gravatar email per Gravatar docs: https://en.gravatar.com/site/implement/hash/](https://github.com/zendframework/zf2/issues/4976)
+- [4978: added missing docblock for &quot;@link&quot;, &quot;@copyright&quot;, and &quot;@license&quot; and fix wrong namespace according PSR-0](https://github.com/zendframework/zf2/issues/4978)
+- [4981: Revise docblocks in Zend\Session\ContainerAbstractServiceFactory](https://github.com/zendframework/zf2/issues/4981)
+- [4988: &#91;Zend-Code&#92; Fix Code Generation for non namespace classes](https://github.com/zendframework/zf2/issues/4988)
+- [4990: &#91;Zend-Code&#92; Make sure that a use is only added once in ClassGenerator](https://github.com/zendframework/zf2/issues/4990)
+- [4996: BaseInputFilter-&gt;add deasn't work (Form Validation breaks since 2.2)](https://github.com/zendframework/zf2/issues/4996)
+
 ## 2.2.2 (2013-07-24):
 
 - [4105: Method &quot;headLink&quot; does not exist](https://github.com/zendframework/zf2/issues/4105)

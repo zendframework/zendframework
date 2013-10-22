@@ -19,7 +19,7 @@
         "zendframework/zend-cache": "self.version"
     },
     "suggest": {
-        "zendframework/zend-cache": "Zend\\Cache component"
+        "zendframework/zend-cache": "To support swap the memory objects"
     },
     "extra": {
         "branch-alias": {

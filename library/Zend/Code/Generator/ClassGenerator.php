@@ -118,7 +118,8 @@ class ClassGenerator extends AbstractGenerator
 
         $methods = array();
         foreach ($classReflection->getMethods() as $reflectionMethod) {
-            if ($reflectionMethod->getDeclaringClass()->getName() == $cg->getNamespaceName() . "\\" . $cg->getName()) {
+            $className = ($cg->getNamespaceName())? $cg->getNamespaceName() . "\\" . $cg->getName() : $cg->getName();
+            if ($reflectionMethod->getDeclaringClass()->getName() == $className) {
                 $methods[] = MethodGenerator::fromReflection($reflectionMethod);
             }
         }
@@ -490,7 +491,7 @@ class ClassGenerator extends AbstractGenerator
             $use .= ' as ' . $useAlias;
         }
 
-        $this->uses[] = $use;
+        $this->uses[$use] = $use;
         return $this;
     }
 
@@ -524,7 +525,7 @@ class ClassGenerator extends AbstractGenerator
      */
     public function getUses()
     {
-        return $this->uses;
+        return array_values($this->uses);
     }
 
     /**

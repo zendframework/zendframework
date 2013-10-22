@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace Zend\Db\Sql;
@@ -152,4 +151,70 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('DELETE FROM "sch"."foo" WHERE x = y', $this->delete->getSqlString());
     }
 
+    /**
+     * @coversNothing
+     */
+    public function testSpecificationconstantsCouldBeOverridedByExtensionInPrepareStatement()
+    {
+        $deleteIgnore = new DeleteIgnore();
+
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $mockStatement->expects($this->at(2))
+            ->method('setSql')
+            ->with($this->equalTo('DELETE IGNORE FROM "foo" WHERE x = y'));
+
+        $deleteIgnore->from('foo')
+            ->where('x = y');
+
+        $deleteIgnore->prepareStatement($mockAdapter, $mockStatement);
+
+
+
+        // with TableIdentifier
+        $deleteIgnore = new DeleteIgnore();
+
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $mockStatement->expects($this->at(2))
+            ->method('setSql')
+            ->with($this->equalTo('DELETE IGNORE FROM "sch"."foo" WHERE x = y'));
+
+        $deleteIgnore->from(new TableIdentifier('foo', 'sch'))
+            ->where('x = y');
+
+        $deleteIgnore->prepareStatement($mockAdapter, $mockStatement);
+    }
+
+    /**
+     * @coversNothing
+     */
+    public function testSpecificationconstantsCouldBeOverridedByExtensionInGetSqlString()
+    {
+        $deleteIgnore = new DeleteIgnore();
+
+        $deleteIgnore->from('foo')
+            ->where('x = y');
+        $this->assertEquals('DELETE IGNORE FROM "foo" WHERE x = y', $deleteIgnore->getSqlString());
+
+        // with TableIdentifier
+        $deleteIgnore = new DeleteIgnore();
+        $deleteIgnore->from(new TableIdentifier('foo', 'sch'))
+            ->where('x = y');
+        $this->assertEquals('DELETE IGNORE FROM "sch"."foo" WHERE x = y', $deleteIgnore->getSqlString());
+    }
+}
+
+class DeleteIgnore extends Delete
+{
+    const SPECIFICATION_DELETE = 'deleteIgnore';
+
+    protected $specifications = array(
+        self::SPECIFICATION_DELETE => 'DELETE IGNORE FROM %1$s',
+        self::SPECIFICATION_WHERE  => 'WHERE %1$s',
+    );
 }

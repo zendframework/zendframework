@@ -251,7 +251,13 @@ class MethodGenerator extends AbstractMemberGenerator
             $output .= implode(', ', $parameterOutput);
         }
 
-        $output .= ')' . self::LINE_FEED . $indent . '{' . self::LINE_FEED;
+        $output .= ')';
+
+        if ($this->isAbstract()) {
+            return $output . ';';
+        }
+
+        $output .= self::LINE_FEED . $indent . '{' . self::LINE_FEED;
 
         if ($this->body) {
             $output .= preg_replace('#^(.+?)$#m', $indent . $indent . '$1', trim($this->body))

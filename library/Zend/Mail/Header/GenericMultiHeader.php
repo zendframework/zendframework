@@ -17,11 +17,7 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterfa
     public static function fromString($headerLine)
     {
         $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
-        $parts = explode(': ', $decodedLine, 2);
-        if (count($parts) != 2) {
-            throw new Exception\InvalidArgumentException('Header must match with the format "name: value"');
-        }
-        list($fieldName, $fieldValue) = $parts;
+        list($fieldName, $fieldValue) = GenericHeader::splitHeaderLine($decodedLine);
 
         if (strpos($fieldValue, ',')) {
             $headers = array();

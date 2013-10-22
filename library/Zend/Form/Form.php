@@ -106,7 +106,7 @@ class Form extends Fieldset implements FormInterface
      *
      * @var bool
      */
-    protected $preferFormInputFilter = false;
+    protected $preferFormInputFilter = true;
 
     /**
      * Are the form elements/fieldsets wrapped by the form name ?
@@ -121,6 +121,26 @@ class Form extends Fieldset implements FormInterface
      * @var null|array
      */
     protected $validationGroup;
+
+
+    /**
+     * Set options for a form. Accepted options are:
+     * - prefer_form_input_filter: is form input filter is preferred?
+     *
+     * @param  array|Traversable $options
+     * @return Element|ElementInterface
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setOptions($options)
+    {
+        parent::setOptions($options);
+
+        if (isset($options['prefer_form_input_filter'])) {
+            $this->setPreferFormInputFilter($options['prefer_form_input_filter']);
+        }
+
+        return $this;
+    }
 
     /**
      * Add an element or fieldset
@@ -717,13 +737,6 @@ class Form extends Fieldset implements FormInterface
         $formFactory  = $this->getFormFactory();
         $inputFactory = $formFactory->getInputFilterFactory();
 
-        if ($fieldset === $this && $fieldset instanceof InputFilterProviderInterface) {
-            foreach ($fieldset->getInputFilterSpecification() as $name => $spec) {
-                $input = $inputFactory->createInput($spec);
-                $inputFilter->add($input, $name);
-            }
-        }
-
         if ($fieldset instanceof Collection && $fieldset->getTargetElement() instanceof FieldsetInterface) {
             $elements = $fieldset->getTargetElement()->getElements();
         } else {
@@ -751,6 +764,13 @@ class Form extends Fieldset implements FormInterface
 
                 $input = $inputFactory->createInput($spec);
                 $inputFilter->add($input, $name);
+            }
+
+            if ($fieldset === $this && $fieldset instanceof InputFilterProviderInterface) {
+                foreach ($fieldset->getInputFilterSpecification() as $name => $spec) {
+                    $input = $inputFactory->createInput($spec);
+                    $inputFilter->add($input, $name);
+                }
             }
         }
 

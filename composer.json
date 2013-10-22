@@ -36,7 +36,9 @@
         "doctrine/annotations": ">=1.0",
         "ircmaxell/random-lib": "dev-master",
         "ircmaxell/security-lib": "dev-master",
+        "mikey179/vfsStream": "1.2.*",
         "ocramius/proxy-manager": "0.4.*",
+        "fabpot/php-cs-fixer": "*@dev",
         "phpunit/PHPUnit": "3.7.*",
         "satooshi/php-coveralls": "dev-master",
         "sebastianbergmann/phpcov": "1.1.0"

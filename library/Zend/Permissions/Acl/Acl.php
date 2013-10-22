@@ -93,7 +93,7 @@ class Acl implements AclInterface
      * will have the least priority, and the last parent added will have the
      * highest priority.
      *
-     * @param  Role\RoleInterface              $role
+     * @param  Role\RoleInterface|string       $role
      * @param  Role\RoleInterface|string|array $parents
      * @throws Exception\InvalidArgumentException
      * @return Acl Provides a fluent interface

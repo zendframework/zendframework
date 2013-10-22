@@ -5,12 +5,12 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace ZendTest\Http;
 
 use ReflectionClass;
+use Zend\Uri\Http;
 use Zend\Http\Client;
 use Zend\Http\Cookies;
 use Zend\Http\Exception;
@@ -338,5 +338,85 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // the last request should NOT contain the Authorization header,
         // because example.org is not a subdomain unter sub.example.org
         $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) === false);
+    }
+
+    public function testAdapterAlwaysReachableIfSpecified()
+    {
+        $testAdapter = new Test();
+        $client = new Client('http://www.example.org/', array(
+            'adapter' => $testAdapter,
+        ));
+
+        $this->assertSame($testAdapter, $client->getAdapter());
+    }
+
+    /**
+     * Custom response object is set but still invalid code coming back
+     * @expectedException Zend\Http\Exception\InvalidArgumentException
+     */
+    public function testUsageOfCustomResponseInvalidCode()
+    {
+        require_once(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .'_files' . DIRECTORY_SEPARATOR . 'CustomResponse.php');
+        $testAdapter = new Test();
+        $testAdapter->setResponse(
+            "HTTP/1.1 496 CustomResponse\r\n\r\n"
+            . "Whatever content"
+        );
+
+        $client = new Client('http://www.example.org/', array(
+            'adapter' => $testAdapter,
+        ));
+        $client->setResponse(new CustomResponse());
+        $response = $client->send();
+    }
+
+    /**
+     * Custom response object is set with defined status code 497.
+     * Should not throw an exception.
+     */
+    public function testUsageOfCustomResponseCustomCode()
+    {
+        require_once(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .'_files' . DIRECTORY_SEPARATOR . 'CustomResponse.php');
+        $testAdapter = new Test();
+        $testAdapter->setResponse(
+            "HTTP/1.1 497 CustomResponse\r\n\r\n"
+            . "Whatever content"
+        );
+
+        $client = new Client('http://www.example.org/', array(
+            'adapter' => $testAdapter,
+        ));
+        $client->setResponse(new CustomResponse());
+        $response = $client->send();
+
+        $this->assertInstanceOf('ZendTest\Http\CustomResponse', $response);
+        $this->assertEquals(497, $response->getStatusCode());
+        $this->assertEquals('Whatever content', $response->getContent());
+    }
+
+    public function testPrepareHeadersCreateRightHttpField()
+    {
+        $body = json_encode(array('foofoo'=>'barbar'));
+
+        $client = new Client();
+        $prepareHeadersReflection = new \ReflectionMethod($client, 'prepareHeaders');
+        $prepareHeadersReflection->setAccessible(true);
+
+        $request= new Request();
+        $request->getHeaders()->addHeaderLine('content-type','application/json');
+        $request->getHeaders()->addHeaderLine('content-length',strlen($body));
+        $client->setRequest($request);
+
+        $client->setEncType('application/json');
+
+        $this->assertSame($client->getRequest(),$request);
+
+        $headers = $prepareHeadersReflection->invoke($client,$body,new Http('http://localhost:5984'));
+
+        $this->assertArrayNotHasKey('content-type', $headers);
+        $this->assertArrayHasKey('Content-Type', $headers);
+
+        $this->assertArrayNotHasKey('content-length', $headers);
+        $this->assertArrayHasKey('Content-Length', $headers);
     }
 }

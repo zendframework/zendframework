@@ -23,7 +23,7 @@ class Fieldset extends Element implements FieldsetInterface
     protected $factory;
 
     /**
-     * @var array
+     * @var ElementInterface[]
      */
     protected $byName    = array();
 
@@ -397,7 +397,7 @@ class Fieldset extends Element implements FieldsetInterface
 
             $element = $this->get($name);
 
-            if ($element instanceof FieldsetInterface && is_array($value)) {
+            if ($element instanceof FieldsetInterface && (is_array($value) || $value instanceof Traversable)) {
                 $element->populateValues($value);
                 continue;
             }

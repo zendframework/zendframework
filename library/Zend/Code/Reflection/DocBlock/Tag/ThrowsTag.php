@@ -12,9 +12,9 @@ namespace Zend\Code\Reflection\DocBlock\Tag;
 class ThrowsTag implements TagInterface, PhpDocTypedTagInterface
 {
     /**
-     * @var string
+     * @var array
      */
-    protected $type = null;
+    protected $types = array();
 
     /**
      * @var string
@@ -38,7 +38,7 @@ class ThrowsTag implements TagInterface, PhpDocTypedTagInterface
         $matches = array();
         preg_match('#([\w|\\\]+)(?:\s+(.*))?#', $tagDocBlockLine, $matches);
 
-        $this->type = $matches[1];
+        $this->types = explode('|', $matches[1]);
 
         if (isset($matches[2])) {
             $this->description = $matches[2];
@@ -53,14 +53,20 @@ class ThrowsTag implements TagInterface, PhpDocTypedTagInterface
      */
     public function getType()
     {
-        return $this->type;
+        return implode('|', $this->getTypes());
     }
 
+    /**
+     * @return array
+     */
     public function getTypes()
     {
-        return array($this->type);
+        return $this->types;
     }
 
+    /**
+     * @return string
+     */
     public function getDescription()
     {
         return $this->description;

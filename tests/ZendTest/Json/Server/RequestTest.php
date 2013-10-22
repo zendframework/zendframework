@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
  */
 
 namespace ZendTest\Json\Server;
@@ -13,9 +12,6 @@ namespace ZendTest\Json\Server;
 use Zend\Json;
 
 /**
- * @category   Zend
- * @package    Zend_JSON_Server
- * @subpackage UnitTests
  * @group      Zend_JSON
  * @group      Zend_JSON_Server
  */

@@ -12,6 +12,16 @@ namespace Zend\Config\Writer;
 class PhpArray extends AbstractWriter
 {
     /**
+     * @var string
+     */
+    const INDENT_STRING = '    ';
+
+    /**
+     * @var bool
+     */
+    protected $useBracketArraySyntax = false;
+
+    /**
      * processConfig(): defined by AbstractWriter.
      *
      * @param  array $config
@@ -19,8 +29,59 @@ class PhpArray extends AbstractWriter
      */
     public function processConfig(array $config)
     {
-        $arrayString = "<?php\n"
-                     . "return " . var_export($config, true) . ";\n";
+        $arraySyntax = array(
+            'open' => $this->useBracketArraySyntax ? '[' : 'array(',
+            'close' => $this->useBracketArraySyntax ? ']' : ')'
+        );
+
+        return "<?php\n" .
+               "return " . $arraySyntax['open'] . "\n" . $this->processIndented($config, $arraySyntax) .
+               $arraySyntax['close'] . ";\n";
+    }
+
+    /**
+     * Sets whether or not to use the PHP 5.4+ "[]" array syntax.
+     *
+     * @param  bool $value
+     * @return self
+     */
+    public function setUseBracketArraySyntax($value)
+    {
+        $this->useBracketArraySyntax = $value;
+        return $this;
+    }
+
+    /**
+     * Recursively processes a PHP config array structure into a readable format.
+     *
+     * @param  array $config
+     * @param  array $arraySyntax
+     * @param  int   $indentLevel
+     * @return string
+     */
+    protected function processIndented(array $config, array $arraySyntax, &$indentLevel = 1)
+    {
+        $arrayString = "";
+
+        foreach ($config as $key => $value) {
+            $arrayString .= str_repeat(self::INDENT_STRING, $indentLevel);
+            $arrayString .= (is_int($key) ? $key : "'" . addslashes($key) . "'") . ' => ';
+
+            if (is_array($value)) {
+                if ($value === array()) {
+                    $arrayString .= $arraySyntax['open'] . $arraySyntax['close'] . ",\n";
+                } else {
+                    $indentLevel++;
+                    $arrayString .= $arraySyntax['open'] . "\n"
+                                  . $this->processIndented($value, $arraySyntax, $indentLevel)
+                                  . str_repeat(self::INDENT_STRING, --$indentLevel) . $arraySyntax['close'] . ",\n";
+                }
+            } elseif (is_object($value)) {
+                $arrayString .= var_export($value, true) . ",\n";
+            } else {
+                $arrayString .= "'" . addslashes($value) . "',\n";
+            }
+        }
 
         return $arrayString;
     }

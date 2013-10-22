@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Di
  */
 
 namespace ZendTest\Di\Definition;
@@ -118,5 +117,18 @@ class CompilerDefinitionTest extends TestCase
         $definition->compile();
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setFoo'));
         $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setName'));
+    }
+
+    /**
+     * Test if methods from aware interfaces without params are excluded
+     */
+    public function testExcludeAwareMethodsWithoutParameters()
+    {
+        $definition = new CompilerDefinition();
+        $definition->addDirectory(__DIR__ . '/../TestAsset/AwareClasses');
+        $definition->compile();
+
+        $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'setSomething'));
+        $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'getSomething'));
     }
 }

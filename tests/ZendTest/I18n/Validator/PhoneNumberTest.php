@@ -5,11 +5,11 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace Zend\I18nTest\Validator;
 
+use Locale;
 use Zend\I18n\Validator\PhoneNumber;
 
 class PhoneNumberTest extends \PHPUnit_Framework_TestCase
@@ -3032,6 +3032,48 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
         $this->validator = new PhoneNumber();
     }
 
+    /**
+     * @dataProvider constructDataProvider
+     *
+     * @param array  $args
+     * @param array  $options
+     * @param string $locale
+     */
+    public function testConstruct(array $args, array $options, $locale = null)
+    {
+        if ($locale) {
+            Locale::setDefault($locale);
+        }
+
+        $validator = new PhoneNumber($args);
+
+        $this->assertSame($options['country'], $validator->getCountry());
+    }
+
+    public function constructDataProvider()
+    {
+        return array(
+            array(
+                array(),
+                array('country' => Locale::getRegion(Locale::getDefault())),
+                null
+            ),
+            array(
+                array(),
+                array('country' => 'CN'),
+                'zh_CN'
+            ),
+            array(
+                array('country' => 'CN'),
+                array('country' => 'CN'),
+                null
+            ),
+        );
+    }
+
+    /**
+     * @TODO: use dataProvider for this in order to enforce clean context
+     */
     public function testExampleNumbers()
     {
         foreach ($this->phone as $country => $parameters) {
@@ -3039,13 +3081,24 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
             foreach ($parameters['patterns']['example'] as $type => $value) {
                 $this->validator->allowedTypes(array($type));
                 $this->assertTrue($this->validator->isValid($value));
+
                 // check with country code:
-                $value = $parameters['code'] . $value;
-                $this->assertTrue($this->validator->isValid($value));
+                $countryCodePrefixed = $parameters['code'] . $value;
+                $this->assertTrue($this->validator->isValid($countryCodePrefixed));
+
+                // check fully qualified E.123/E.164 international variants
+                $fullyQualifiedDoubleO = '00' . $parameters['code'] . $value;
+                $this->assertTrue($this->validator->isValid($fullyQualifiedDoubleO));
+
+                $fullyQualifiedPlus = '+' . $parameters['code'] . $value;
+                $this->assertTrue($this->validator->isValid($fullyQualifiedPlus));
             }
         }
     }
 
+    /**
+     * @TODO: use dataProvider for this in order to enforce clean context
+     */
     public function testExampleNumbersAgainstPossible()
     {
         $this->validator->allowPossible(true);
@@ -3054,9 +3107,17 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
             foreach ($parameters['patterns']['example'] as $type => $value) {
                 $this->validator->allowedTypes(array($type));
                 $this->assertTrue($this->validator->isValid($value));
+
                 // check with country code:
-                $value = $parameters['code'] . $value;
-                $this->assertTrue($this->validator->isValid($value));
+                $countryCodePrefixed = $parameters['code'] . $value;
+                $this->assertTrue($this->validator->isValid($countryCodePrefixed));
+
+                // check fully qualified E.123/E.164 international variants
+                $fullyQualifiedDoubleO = '00'. $parameters['code'] . $value;
+                $this->assertTrue($this->validator->isValid($fullyQualifiedDoubleO), $fullyQualifiedDoubleO);
+
+                $fullyQualifiedPlus = '+'. $parameters['code'] . $value;
+                $this->assertTrue($this->validator->isValid($fullyQualifiedPlus), $fullyQualifiedPlus);
             }
         }
     }

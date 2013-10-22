@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\Element;
@@ -77,6 +76,45 @@ class CollectionTest extends TestCase
         $data[] = 'orange';
         $collection->populateValues($data);
         $this->assertEquals(3, count($collection->getElements()));
+    }
+
+    public function testCanRemoveElementsIfAllowRemoveIsTrue()
+    {
+        $collection = $this->form->get('colors');
+        $collection->setAllowRemove(true);
+        $this->assertTrue($collection->allowRemove());
+
+        $data = array();
+        $data[] = 'blue';
+        $data[] = 'green';
+
+        $collection->populateValues($data);
+        $this->assertEquals(2, count($collection->getElements()));
+
+        unset($data[0]);
+
+        $collection->populateValues($data);
+        $this->assertEquals(1, count($collection->getElements()));
+    }
+
+    public function testCanReplaceElementsIfAllowAddAndAllowRemoveIsTrue()
+    {
+        $collection = $this->form->get('colors');
+        $collection->setAllowAdd(true);
+        $collection->setAllowRemove(true);
+
+        $data = array();
+        $data[] = 'blue';
+        $data[] = 'green';
+
+        $collection->populateValues($data);
+        $this->assertEquals(2, count($collection->getElements()));
+
+        unset($data[0]);
+        $data[] = 'orange';
+
+        $collection->populateValues($data);
+        $this->assertEquals(2, count($collection->getElements()));
     }
 
     public function testCanValidateFormWithCollectionWithoutTemplate()

@@ -38,7 +38,8 @@
         "zendframework/zend-view": "self.version"
     },
     "suggest": {
-        "zendframework/zend-authentication": "Zend\\Authentication component",
+        "zendframework/zend-authentication": "Zend\\Authentication component for Identity plugin",
+        "zendframework/zend-config": "Zend\\Config component",
         "zendframework/zend-console": "Zend\\Console component",
         "zendframework/zend-di": "Zend\\Di component",
         "zendframework/zend-filter": "Zend\\Filter component",
@@ -50,6 +51,8 @@
         "zendframework/zend-modulemanager": "Zend\\ModuleManager component",
         "zendframework/zend-session": "Zend\\Session component",
         "zendframework/zend-serializer": "Zend\\Serializer component",
+        "zendframework/zend-session": "Zend\\Session component for FlashMessenger, PRG, and FPRG plugins",
+        "zendframework/zend-stdlib": "Zend\\Stdlib component",
         "zendframework/zend-text": "Zend\\Text component",
         "zendframework/zend-uri": "Zend\\Uri component",
         "zendframework/zend-validator": "Zend\\Validator component",

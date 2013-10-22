@@ -935,7 +935,7 @@ class Server implements ZendServerServer
     public function registerFaultException($class)
     {
         if (is_array($class)) {
-            foreach($class as $row) {
+            foreach ($class as $row) {
                 $this->registerFaultException($row);
             }
 

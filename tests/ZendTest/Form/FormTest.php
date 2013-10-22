@@ -1702,4 +1702,145 @@ class FormTest extends TestCase
         $filters = $form->getInputFilter()->get('fieldset')->get('foo')->getFilterChain();
         $this->assertEquals(1, $filters->count());
     }
+
+    public function testFormWithNestedCollections()
+    {
+        $spec = array(
+            'name' => 'test',
+            'elements' => array(
+                array(
+                    'spec' => array(
+                        'name' => 'name',
+                        'type' => 'Zend\Form\Element\Text',
+                    ),
+                    'spec' => array(
+                        'name' => 'groups',
+                        'type' => 'Zend\Form\Element\Collection',
+                        'options' => array(
+                            'target_element' => array(
+                                'type' => 'Zend\Form\Fieldset',
+                                'name' => 'group',
+                                'elements' => array(
+                                    array(
+                                        'spec' => array(
+                                            'type' => 'Zend\Form\Element\Text',
+                                            'name' => 'group_class',
+                                        ),
+                                    ),
+                                    array(
+                                        'spec' => array(
+                                            'type' => 'Zend\Form\Element\Collection',
+                                            'name' => 'items',
+                                            'options' => array(
+                                                'target_element' => array(
+                                                    'type' => 'Zend\Form\Fieldset',
+                                                    'name' => 'item',
+                                                    'elements' => array(
+                                                        array(
+                                                            'spec' => array(
+                                                                'type' => 'Zend\Form\Element\Text',
+                                                                'name' => 'id',
+                                                            ),
+                                                        ),
+                                                        array(
+                                                            'spec' => array(
+                                                                'type' => 'Zend\Form\Element\Text',
+                                                                'name' => 'type',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    )
+                )
+            ),
+            'input_filter' => array(
+                'type' => 'Zend\InputFilter\InputFilter',
+                'name' => array(
+                    'filters' => array(
+                        array('name' => 'StringTrim'),
+                        array('name' => 'Null'),
+                    ),
+                    'validators' => array(
+                        array(
+                            'name' => 'StringLength',
+                            'options' => array(
+                                'max' => 255,
+                            ),
+                        ),
+                    ),
+                ),
+                'groups' => array(
+                    'type' => 'Zend\InputFilter\CollectionInputFilter',
+                    'input_filter' => array(
+                        'type' => 'Zend\InputFilter\InputFilter',
+                        'group_class' => array(
+                            'required' => false,
+                        ),
+                        'items' => array(
+                            'type' => 'Zend\InputFilter\CollectionInputFilter',
+                            'input_filter' => array(
+                                'type' => 'Zend\InputFilter\InputFilter',
+                                'id' => array(
+                                    'required' => false,
+                                ),
+                                'type' => array(
+                                    'required' => false,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $factory = new Factory();
+        $this->form = $factory->createForm($spec);
+
+        $data = array(
+            'name' => 'foo',
+            'groups' => array(
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 100,
+                            'type' => 'item-1',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 200,
+                            'type' => 'item-2',
+                        ),
+                        array(
+                            'id' => 300,
+                            'type' => 'item-3',
+                        ),
+                        array(
+                            'id' => 400,
+                            'type' => 'item-4',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'biz',
+                    'items' => array(),
+                ),
+            ),
+        );
+
+        $this->form->setData($data);
+
+        $isValid = $this->form->isValid();
+        $this->assertEquals($data, $this->form->getData());
+    }
 }

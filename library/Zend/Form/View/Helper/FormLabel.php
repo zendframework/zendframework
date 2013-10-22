@@ -63,6 +63,17 @@ class FormLabel extends AbstractHelper
                     $label, $this->getTranslatorTextDomain()
                 );
             }
+
+            $labelOptions = array();
+
+            if ($element instanceof LabelOptionsAwareInterface) {
+                $labelOptions = $element->getLabelOptions();
+            }
+
+            if (empty($labelOptions) || $labelOptions['disable_html_escape'] == false) {
+                $escapeHtmlHelper = $this->getEscapeHtmlHelper();
+                $label = $escapeHtmlHelper($label);
+            }
         }
 
         if ($label && $labelContent) {

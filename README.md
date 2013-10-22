@@ -36,6 +36,11 @@ DD MMM YYY
     returning the new `Tag` classes (`ReturnTag`, `AuthorTag`, `ParamTag`, ...)
     where applicable and otherwise `GenericTag`. The deprecated class `Tag` will
     not be returned anymore.
+- [#5101](https://github.com/zendframework/zf2/pull/5101) introduces a behavior
+  change in the FormLabel view helper: it now escapes the label content by
+  default. If you wish to disable escaping, you need to either pass the label
+  option `disable_html_escape` to the form element, or call the
+  `setEscapeHtmlHelper(false)` method on the `formLabel()` view helper.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

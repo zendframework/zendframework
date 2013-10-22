@@ -35,6 +35,10 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->helper = new DateFormatHelper();
     }
 
@@ -51,6 +55,14 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
 
     public function dateTestsDataProvider()
     {
+        if (!extension_loaded('intl')) {
+            if (version_compare(\PHPUnit_Runner_Version::VERSION, '3.8.0-dev') === 1) {
+                $this->markTestSkipped('ext/intl not enabled');
+            } else {
+                return array(array());
+            }
+        }
+
         $date = new DateTime('2012-07-02T22:44:03Z');
 
         return array(
@@ -143,6 +155,14 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
 
     public function dateTestsDataProviderWithPattern()
     {
+        if (!extension_loaded('intl')) {
+            if (version_compare(\PHPUnit_Runner_Version::VERSION, '3.8.0-dev') === 1) {
+                $this->markTestSkipped('ext/intl not enabled');
+            } else {
+                return array(array());
+            }
+        }
+
         $date = new DateTime('2012-07-02T22:44:03Z');
 
         return array(

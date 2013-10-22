@@ -287,6 +287,11 @@ class CollectionTest extends TestCase
 
     public function testDoesNotCreateNewObjects()
     {
+        if (!extension_loaded('intl')) {
+            // Required by \Zend\I18n\Validator\Float
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $form = new \Zend\Form\Form();
         $form->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
         $this->productFieldset->setUseAsBaseFieldset(true);
@@ -325,6 +330,11 @@ class CollectionTest extends TestCase
 
     public function testCreatesNewObjectsIfSpecified()
     {
+        if (!extension_loaded('intl')) {
+            // Required by \Zend\I18n\Validator\Float
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->productFieldset->setUseAsBaseFieldset(true);
         $categories = $this->productFieldset->get('categories');
         $categories->setOptions(array(

@@ -20,6 +20,10 @@ class GettextTest extends TestCase
 
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->originalLocale = Locale::getDefault();
         Locale::setDefault('en_EN');
 
@@ -28,7 +32,9 @@ class GettextTest extends TestCase
 
     public function tearDown()
     {
-        Locale::setDefault($this->originalLocale);
+        if (extension_loaded('intl')) {
+            Locale::setDefault($this->originalLocale);
+        }
     }
 
     public function testLoaderFailsToLoadMissingFile()

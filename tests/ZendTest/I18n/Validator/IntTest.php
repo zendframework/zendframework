@@ -22,15 +22,26 @@ class IntTest extends \PHPUnit_Framework_TestCase
      */
     protected $validator;
 
+    /**
+     * @var string
+     */
+    protected $locale;
+
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->locale    = Locale::getDefault();
         $this->validator = new IntValidator();
     }
 
     public function tearDown()
     {
-        Locale::setDefault($this->locale);
+        if (extension_loaded('intl')) {
+            Locale::setDefault($this->locale);
+        }
     }
 
     public function intDataProvider()

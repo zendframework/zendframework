@@ -329,6 +329,10 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslator()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $config     = new Config($this->translatorData, true);
         $translator = new Translator();
         $translator->addTranslationFile('phparray', $this->translatorFile);
@@ -340,6 +344,23 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ein Hund', $config->pages[0]->label);
         $this->assertEquals('twoDogs', $config->pages[1]->id);
         $this->assertEquals('zwei Hunde', $config->pages[1]->label);
+    }
+
+    public function testTranslatorWithoutIntl()
+    {
+        if (extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl enabled');
+        }
+
+        $this->setExpectedException('Zend\I18n\Exception\ExtensionNotLoadedException',
+            'Zend\I18n\Translator component requires the intl PHP extension');
+
+        $config     = new Config($this->translatorData, true);
+        $translator = new Translator();
+        $translator->addTranslationFile('phparray', $this->translatorFile);
+        $processor  = new TranslatorProcessor($translator);
+
+        $processor->process($config);
     }
 
     public function testTranslatorReadOnly()
@@ -355,6 +376,26 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorSingleValue()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
+        $translator = new Translator();
+        $translator->addTranslationFile('phparray', $this->translatorFile);
+        $processor  = new TranslatorProcessor($translator);
+
+        $this->assertEquals('ein Hund', $processor->processValue('one dog'));
+    }
+
+    public function testTranslatorSingleValueWithoutIntl()
+    {
+        if (extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl enabled');
+        }
+
+        $this->setExpectedException('Zend\I18n\Exception\ExtensionNotLoadedException',
+            'Zend\I18n\Translator component requires the intl PHP extension');
+
         $translator = new Translator();
         $translator->addTranslationFile('phparray', $this->translatorFile);
         $processor  = new TranslatorProcessor($translator);

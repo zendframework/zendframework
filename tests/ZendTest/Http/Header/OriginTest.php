@@ -13,7 +13,6 @@ use Zend\Http\Header\Origin;
 
 class OriginTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testOriginFromStringCreatesValidOriginHeader()
     {
         $OriginHeader = Origin::fromString('Origin: http://zend.org');
@@ -44,7 +43,4 @@ class OriginTest extends \PHPUnit_Framework_TestCase
         // @todo set some values, then test output
         $this->assertEmpty('Origin: http://zend.org', $OriginHeader->toString());
     }
-
-    /** Implmentation specific tests here */
-
 }

@@ -23,6 +23,10 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->validator = new AlphaValidator();
     }
 

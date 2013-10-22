@@ -86,6 +86,10 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testMaximumErrorMessageLength()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->assertEquals(-1, AbstractValidator::getMessageLength());
         AbstractValidator::setMessageLength(10);
         $this->assertEquals(10, AbstractValidator::getMessageLength());

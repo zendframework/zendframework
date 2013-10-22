@@ -27,13 +27,19 @@ class FloatTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->locale    = Locale::getDefault();
         $this->validator = new FloatValidator(array('locale' => 'en'));
     }
 
     public function tearDown()
     {
-        Locale::setDefault($this->locale);
+        if (extension_loaded('intl')) {
+            Locale::setDefault($this->locale);
+        }
     }
 
     /**

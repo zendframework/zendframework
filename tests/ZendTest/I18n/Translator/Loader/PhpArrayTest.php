@@ -21,6 +21,10 @@ class PhpArrayTest extends TestCase
 
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->originalLocale = Locale::getDefault();
         Locale::setDefault('en_EN');
 
@@ -32,9 +36,10 @@ class PhpArrayTest extends TestCase
 
     public function tearDown()
     {
-        Locale::setDefault($this->originalLocale);
-
-        set_include_path($this->originalIncludePath);
+        if (extension_loaded('intl')) {
+            Locale::setDefault($this->originalLocale);
+            set_include_path($this->originalIncludePath);
+        }
     }
 
     public function testLoaderFailsToLoadMissingFile()

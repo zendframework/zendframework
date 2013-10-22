@@ -187,6 +187,10 @@ class BaseInputFilterTest extends TestCase
      */
     public function testCanValidateEntireDataset($dataset, $expected)
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $filter->setData($dataset);
         $this->assertSame($expected, $filter->isValid());
@@ -194,6 +198,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanValidatePartialDataset()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $validData = array(
             'foo' => ' bazbat ',
@@ -217,6 +225,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanRetrieveInvalidInputsOnFailedValidation()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $invalidData = array(
             'foo' => ' bazbat ',
@@ -242,6 +254,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanRetrieveValidInputsOnFailedValidation()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $invalidData = array(
             'foo' => ' bazbat ',
@@ -268,6 +284,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testValuesRetrievedAreFiltered()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $validData = array(
             'foo' => ' bazbat ',
@@ -296,6 +316,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanGetRawInputValues()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $validData = array(
             'foo' => ' bazbat ',
@@ -315,6 +339,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanGetValidationMessages()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $filter->get('baz')->setRequired(true);
         $filter->get('nest')->get('baz')->setRequired(true);
@@ -621,6 +649,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanRetrieveRawValuesIndividuallyWithoutValidating()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $data = array(
             'foo' => ' bazbat ',
@@ -637,6 +669,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanRetrieveUnvalidatedButFilteredInputValue()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $data = array(
             'foo' => ' baz 2 bat ',
@@ -671,6 +707,10 @@ class BaseInputFilterTest extends TestCase
     }
     public function testHasUnknown()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $validData = array(
             'foo' => ' bazbat ',
@@ -691,6 +731,10 @@ class BaseInputFilterTest extends TestCase
     }
     public function testGetUknown()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $unknown = array(
             'bar' => '12345',

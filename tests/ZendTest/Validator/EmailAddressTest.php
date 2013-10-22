@@ -413,6 +413,10 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testHostnameValidatorMessagesShouldBeTranslated()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $hostnameValidator = new Hostname();
         $translations = array(
             'hostnameIpAddressNotAllowed'   => 'hostnameIpAddressNotAllowed translation',

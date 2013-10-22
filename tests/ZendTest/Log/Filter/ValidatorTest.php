@@ -12,7 +12,7 @@ namespace ZendTest\Log\Filter;
 use Zend\Log\Filter\Validator;
 use Zend\Validator\ValidatorChain;
 use Zend\Validator\Digits as DigitsFilter;
-use Zend\I18n\Validator\Int;
+use Zend\Validator\NotEmpty as NotEmptyFilter;
 
 /**
  * @group      Zend_Log
@@ -31,8 +31,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testValidatorChain()
     {
         $validatorChain = new ValidatorChain();
+        $validatorChain->attach(new NotEmptyFilter());
         $validatorChain->attach(new DigitsFilter());
-        $validatorChain->attach(new Int());
         $filter = new Validator($validatorChain);
         $this->assertTrue($filter->filter(array('message' => '123')));
         $this->assertFalse($filter->filter(array('message' => 'test')));

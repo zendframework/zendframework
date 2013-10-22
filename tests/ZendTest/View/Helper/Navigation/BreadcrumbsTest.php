@@ -204,6 +204,14 @@ class BreadcrumbsTest extends AbstractTest
         $this->assertEquals($expected, $this->_helper->render());
     }
 
+    public function testRenderingPartialWithSeparator()
+    {
+        $this->_helper->setPartial('bc_separator.phtml')->setSeparator(' / ');
+
+        $expected = $this->_getExpected('bc/partialwithseparator.html');
+        $this->assertEquals($expected, $this->_helper->render());
+    }
+
     public function testRenderingPartialBySpecifyingAnArrayAsPartial()
     {
         $this->_helper->setPartial(array('bc.phtml', 'application'));

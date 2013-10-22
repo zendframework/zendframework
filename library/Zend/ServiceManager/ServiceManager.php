@@ -443,7 +443,8 @@ class ServiceManager implements ServiceLocatorInterface
             if (isset($stack[$cName])) {
                 throw new Exception\CircularReferenceException(sprintf(
                     'Circular alias reference: %s -> %s',
-                    implode(' -> ', $stack), $cName
+                    implode(' -> ', $stack),
+                    $cName
                 ));
             }
 

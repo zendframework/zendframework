@@ -56,6 +56,7 @@ class HeaderLoader extends PluginClassLoader
         'lastmodified'       => 'Zend\Http\Header\LastModified',
         'location'           => 'Zend\Http\Header\Location',
         'maxforwards'        => 'Zend\Http\Header\MaxForwards',
+        'Origin'             => 'Zend\Http\Header\Origin',
         'pragma'             => 'Zend\Http\Header\Pragma',
         'proxyauthenticate'  => 'Zend\Http\Header\ProxyAuthenticate',
         'proxyauthorization' => 'Zend\Http\Header\ProxyAuthorization',

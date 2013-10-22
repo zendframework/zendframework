@@ -34,6 +34,10 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->helper = new NumberFormatHelper();
     }
 
@@ -50,6 +54,14 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
 
     public function currencyTestsDataProvider()
     {
+        if (!extension_loaded('intl')) {
+            if (version_compare(\PHPUnit_Runner_Version::VERSION, '3.8.0-dev') === 1) {
+                $this->markTestSkipped('ext/intl not enabled');
+            } else {
+                return array(array());
+            }
+        }
+
         return array(
             array(
                 'de_DE',

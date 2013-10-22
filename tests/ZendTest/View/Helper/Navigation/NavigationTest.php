@@ -183,6 +183,10 @@ class NavigationTest extends AbstractTest
 
     public function testInjectingTranslator()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->_helper->setTranslator($this->_getTranslator());
 
         $expected = $this->_getExpected('menu/translated.html');

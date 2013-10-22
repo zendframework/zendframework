@@ -70,6 +70,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testErrorMessagesAreTranslatedWhenTranslatorPresent()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
             'fooMessage' => 'This is the translated message for %value%',
@@ -88,6 +92,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testCanTranslateMessagesInsteadOfKeys()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
             '%value% was passed' => 'This is the translated message for %value%',
@@ -149,6 +157,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testCanDisableTranslator()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
             '%value% was passed' => 'This is the translated message for %value%',

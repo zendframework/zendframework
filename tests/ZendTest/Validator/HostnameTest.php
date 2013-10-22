@@ -256,6 +256,10 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidatorMessagesShouldBeTranslated()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $translations = array(
             'hostnameInvalidLocalName' => 'this is the IP error message',
         );

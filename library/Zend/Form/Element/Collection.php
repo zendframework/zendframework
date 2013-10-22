@@ -519,6 +519,30 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
             }
         }
 
+        // Recursively extract and populate values for nested fieldsets
+        foreach ($this->fieldsets as $fieldset) {
+            $name = $fieldset->getName();
+            if (isset($values[$name])) {
+                $object = $values[$name];
+
+                if ($fieldset->allowObjectBinding($object)) {
+                    $fieldset->setObject($object);
+                    $values[$name] = $fieldset->extract();
+                } else {
+                    foreach ($fieldset->fieldsets as $childFieldset) {
+                        $childName = $childFieldset->getName();
+                        if (isset($object[$childName])) {
+                            $childObject = $object[$childName];
+                            if ($childFieldset->allowObjectBinding($childObject)) {
+                                $fieldset->setObject($childObject);
+                                $values[$name][$childName] = $fieldset->extract();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         return $values;
     }
 

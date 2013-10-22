@@ -810,4 +810,46 @@ class ServiceManagerTest extends TestCase
         $this->assertInstanceOf('stdClass', array_shift($fooDelegator->instances));
         $this->assertSame($fooDelegator, array_shift($barDelegator->instances));
     }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::resolveAlias
+     */
+    public function testSetCircularAliasReferenceThrowsException()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\CircularReferenceException');
+
+        // Only affects service managers that allow overwriting definitions
+        $this->serviceManager->setAllowOverride(true);
+        $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
+        $this->serviceManager->setAlias('foo-alias', 'foo-service');
+        $this->serviceManager->setAlias('bar-alias', 'foo-alias');
+        $this->serviceManager->setAlias('baz-alias', 'bar-alias');
+
+        // This will now cause a cyclic reference and should throw an exception
+        $this->serviceManager->setAlias('foo-alias', 'bar-alias');
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::checkForCircularAliasReference
+     */
+    public function testResolveCircularAliasReferenceThrowsException()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\CircularReferenceException');
+
+        // simulate an inconsistent state of $servicemanager->aliases as it could be
+        // caused by derived classes
+        $cyclicAliases = array(
+            'fooalias' => 'bazalias',
+            'baralias' => 'fooalias',
+            'bazalias' => 'baralias'
+        );
+
+        $reflection = new \ReflectionObject($this->serviceManager);
+        $propertyReflection = $reflection->getProperty('aliases');
+        $propertyReflection->setAccessible(true);
+        $propertyReflection->setValue($this->serviceManager, $cyclicAliases);
+
+        // This should throw the exception
+        $this->serviceManager->get('baz-alias');
+    }
 }

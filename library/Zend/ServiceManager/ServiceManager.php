@@ -430,6 +430,32 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Resolve the alias for the given canonical name
+     *
+     * @param  string $cName The canonical name to resolve
+     * @return string The resolved canonical name
+     */
+    protected function resolveAlias($cName)
+    {
+        $stack = array();
+
+        while ($this->hasAlias($cName)) {
+            if (isset($stack[$cName])) {
+                throw new Exception\CircularReferenceException(sprintf(
+                    'Circular alias reference: %s -> %s',
+                    implode(' -> ', $stack),
+                    $cName
+                ));
+            }
+
+            $stack[$cName] = $cName;
+            $cName = $this->aliases[$cName];
+        }
+
+        return $cName;
+    }
+
+    /**
      * Retrieve a registered instance
      *
      * @param  string  $name
@@ -448,12 +474,9 @@ class ServiceManager implements ServiceLocatorInterface
 
         $isAlias = false;
 
-        if (isset($this->aliases[$cName])) {
+        if ($this->hasAlias($cName)) {
             $isAlias = true;
-
-            do {
-                $cName = $this->aliases[$cName];
-            } while ($this->hasAlias($cName));
+            $cName = $this->resolveAlias($cName);
         }
 
         $instance = null;
@@ -732,6 +755,38 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Ensure the alias definition will not result in a circular reference
+     *
+     * @param  string $alias
+     * @param  string $nameOrAlias
+     * @throws Exception\CircularReferenceException
+     * @return self
+     */
+    protected function checkForCircularAliasReference($alias, $nameOrAlias)
+    {
+        $aliases = $this->aliases;
+        $aliases[$alias] = $nameOrAlias;
+        $stack = array();
+
+        while (isset($aliases[$alias])) {
+            if (isset($stack[$alias])) {
+                throw new Exception\CircularReferenceException(sprintf(
+                    'The alias definition "%s" : "%s" results in a circular reference: "%s" -> "%s"',
+                    $alias,
+                    $nameOrAlias,
+                    implode('" -> "', $stack),
+                    $alias
+                ));
+            }
+
+            $stack[$alias] = $alias;
+            $alias = $aliases[$alias];
+        }
+
+        return $this;
+    }
+
+    /**
      * @param  string $alias
      * @param  string $nameOrAlias
      * @return ServiceManager
@@ -757,6 +812,10 @@ class ServiceManager implements ServiceLocatorInterface
                 $cAlias,
                 $alias
             ));
+        }
+
+        if ($this->hasAlias($alias)) {
+            $this->checkForCircularAliasReference($cAlias, $nameOrAlias);
         }
 
         $this->aliases[$cAlias] = $nameOrAlias;

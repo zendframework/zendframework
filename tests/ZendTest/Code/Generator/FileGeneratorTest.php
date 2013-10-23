@@ -296,4 +296,14 @@ EOS;
         $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/TestAsset/OneInterface.php');
         $this->assertInstanceOf('Zend\Code\Generator\FileGenerator', $generator);
     }
+
+    public function testGeneratedClassesHaveUses()
+    {
+        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/TestAsset/ClassWithUses.php');
+        $class = $generator->getClass();
+
+        $expectedUses = array('ZendTest\Code\Generator\TestAsset\ClassWithNamespace');
+
+        $this->assertEquals($expectedUses, $class->getUses());
+    }
 }

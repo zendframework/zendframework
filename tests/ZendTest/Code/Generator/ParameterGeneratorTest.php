@@ -76,7 +76,7 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
         $reflectionParameter = $this->getFirstReflectionParameter('type');
         $codeGenParam = ParameterGenerator::fromReflection($reflectionParameter);
 
-        $this->assertEquals('stdClass', $codeGenParam->getType());
+        $this->assertEquals('\\stdClass', $codeGenParam->getType());
     }
 
     public function testFromReflectionGetReference()
@@ -143,7 +143,7 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('name', '$param'),
-            array('type', 'stdClass $bar'),
+            array('type', '\\stdClass $bar'),
             array('reference', '&$baz'),
             array('defaultValue', '$value = \'foo\''),
             array('defaultNull', '$value = null'),
@@ -162,7 +162,7 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param  string                               $method
-     * @return \Zend\Reflection\ReflectionParameter
+     * @return \Zend\Code\Reflection\ParameterReflection
      */
     protected function getFirstReflectionParameter($method)
     {
@@ -212,5 +212,20 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
         $param = ParameterGenerator::fromReflection($params[0]);
 
         $this->assertEquals('\ZendTest_Code_NsTest_BarClass', $param->getType());
+    }
+
+    /**
+     * @group 5193
+     */
+    public function testTypehintsWithNamespaceInNamepsacedClassReturnTypewithBackslash()
+    {
+        require_once __DIR__ . '/TestAsset/NamespaceTypeHintClass.php';
+
+        $reflClass = new \Zend\Code\Reflection\ClassReflection('Namespaced\TypeHint\Bar');
+        $params = $reflClass->getMethod('method')->getParameters();
+
+        $param = ParameterGenerator::fromReflection($params[0]);
+
+        $this->assertEquals('\OtherNamespace\ParameterClass', $param->getType());
     }
 }

@@ -15,6 +15,9 @@
     "require": {
         "php": ">=5.3.3"
     },
+    "require-dev": {
+        "zendframework/zend-escaper": "*"
+    },
     "suggest": {
         "ext/xdebug": "XDebug, for better backtrace output",
         "zendframework/zend-escaper": "To support escaped output"

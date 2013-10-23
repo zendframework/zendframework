@@ -14,6 +14,7 @@ use Zend\Di\Di;
 use Zend\Mvc\Service\DiFactory;
 use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\Exception;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
 
@@ -953,5 +954,96 @@ class ServiceManagerTest extends TestCase
 
         $this->assertSame($delegator, $service);
         $this->assertSame($realService, $service->real);
+    }
+
+    /**
+     * @dataProvider getServiceOfVariousTypes
+     * @param $service
+     */
+    public function testAbstractFactoriesCanReturnAnyTypeButNull($service)
+    {
+        $abstractFactory = $this->getMock('Zend\ServiceManager\AbstractFactoryInterface');
+        $abstractFactory
+            ->expects($this->any())
+            ->method('canCreateServiceWithName')
+            ->with($this->serviceManager, 'something', 'something')
+            ->will($this->returnValue(true));
+
+        $abstractFactory
+            ->expects($this->any())
+            ->method('createServiceWithName')
+            ->with($this->serviceManager, 'something', 'something')
+            ->will($this->returnValue($service));
+
+        $this->serviceManager->addAbstractFactory($abstractFactory);
+
+        if ($service === null) {
+            try {
+                $this->serviceManager->get('something');
+                $this->fail('ServiceManager::get() successfully returned null');
+            } catch(\Exception $e) {
+                $this->assertInstanceOf('Zend\ServiceManager\Exception\ServiceNotCreatedException', $e);
+            }
+        } else {
+            $this->assertSame($service, $this->serviceManager->get('something'));
+        }
+    }
+
+    /**
+     * @dataProvider getServiceOfVariousTypes
+     * @param $service
+     */
+    public function testFactoriesCanReturnAnyTypeButNull($service)
+    {
+        $factory = function () use ($service) {
+            return $service;
+        };
+        $this->serviceManager->setFactory('something', $factory);
+
+        if ($service === null) {
+            try {
+                $this->serviceManager->get('something');
+                $this->fail('ServiceManager::get() successfully returned null');
+            } catch(\Exception $e) {
+                $this->assertInstanceOf('Zend\ServiceManager\Exception\ServiceNotCreatedException', $e);
+            }
+        } else {
+            $this->assertSame($service, $this->serviceManager->get('something'));
+        }
+    }
+
+    /**
+     * @dataProvider getServiceOfVariousTypes
+     * @param $service
+     */
+    public function testServicesCanBeOfAnyTypeButNull($service)
+    {
+        $this->serviceManager->setService('something', $service);
+
+        if ($service === null) {
+            try {
+                $this->serviceManager->get('something');
+                $this->fail('ServiceManager::get() successfully returned null');
+            } catch(\Exception $e) {
+                $this->assertInstanceOf('Zend\ServiceManager\Exception\ServiceNotFoundException', $e);
+            }
+        } else {
+            $this->assertSame($service, $this->serviceManager->get('something'));
+        }
+    }
+
+    public function getServiceOfVariousTypes()
+    {
+        return array(
+            array(null),
+            array('string'),
+            array(1),
+            array(1.2),
+            array(array()),
+            array(function () {}),
+            array(false),
+            array(new \stdClass()),
+            array(tmpfile())
+        );
     }
 }

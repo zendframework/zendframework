@@ -595,21 +595,21 @@ class ServiceManager implements ServiceLocatorInterface
      */
     public function doCreate($rName, $cName)
     {
-        $instance = false;
+        $instance = null;
 
         if (isset($this->factories[$cName])) {
             $instance = $this->createFromFactory($cName, $rName);
         }
 
-        if ($instance === false && isset($this->invokableClasses[$cName])) {
+        if ($instance === null && isset($this->invokableClasses[$cName])) {
             $instance = $this->createFromInvokable($cName, $rName);
         }
 
-        if ($instance === false && $this->canCreateFromAbstractFactory($cName, $rName)) {
+        if ($instance === null && $this->canCreateFromAbstractFactory($cName, $rName)) {
             $instance = $this->createFromAbstractFactory($cName, $rName);
         }
 
-        if ($instance === false && $this->throwExceptionInCreate) {
+        if ($instance === null && $this->throwExceptionInCreate) {
             throw new Exception\ServiceNotFoundException(sprintf(
                 'No valid instance was found for %s%s',
                 $cName,
@@ -1063,7 +1063,7 @@ class ServiceManager implements ServiceLocatorInterface
                     );
                     unset($this->pendingAbstractFactoryRequests[get_class($abstractFactory)]);
                 } else {
-                    $instance = false;
+                    $instance = null;
                 }
             } catch (\Exception $e) {
                 unset($this->pendingAbstractFactoryRequests[get_class($abstractFactory)]);
@@ -1077,12 +1077,10 @@ class ServiceManager implements ServiceLocatorInterface
                     $e
                 );
             }
-            if (is_object($instance)) {
-                break;
+            if ($instance !== null) {
+                return $instance;
             }
         }
-
-        return $instance;
     }
 
     /**

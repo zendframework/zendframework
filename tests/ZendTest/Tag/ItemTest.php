@@ -17,7 +17,7 @@ use Zend\Tag\Exception\InvalidArgumentException;
  */
 class ItemTest extends \PHPUnit_Framework_TestCase
 {
-    public function testConstuctor()
+    public function testConstructor()
     {
         $tag = new Tag\Item(array(
             'title' => 'foo',

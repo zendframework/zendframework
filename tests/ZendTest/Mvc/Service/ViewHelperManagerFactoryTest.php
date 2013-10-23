@@ -16,20 +16,10 @@ use Zend\ServiceManager\ServiceManager;
 
 class ViewHelperManagerFactoryTest extends TestCase
 {
-    /**
-     * @var ServiceManager
-     */
-    protected $services;
-
-    /**
-     * @var ViewHelperManagerFactory
-     */
-    protected $factory;
-
     public function setUp()
     {
         $this->services = new ServiceManager();
-        $this->factory = new ViewHelperManagerFactory();
+        $this->factory  = new ViewHelperManagerFactory();
     }
 
     /**

@@ -598,13 +598,16 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 'Failed asserting node DENOTED BY %s EXISTS', $path
             ));
         }
-        if ($result->current()->nodeValue != $match) {
-            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node denoted by %s CONTAINS content "%s", actual content is "%s"',
-                $path, $match, $result->current()->nodeValue
-            ));
+        foreach ($result as $node) {
+            if ($node->nodeValue == $match) {
+                $this->assertEquals($match, $node->nodeValue);
+                return;
+            }
         }
-        $this->assertEquals($result->current()->nodeValue, $match);
+        throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+            'Failed asserting node denoted by %s CONTAINS content "%s"',
+            $path, $match
+        ));
     }
 
     /**
@@ -644,13 +647,16 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 'Failed asserting node DENOTED BY %s EXISTS', $path
             ));
         }
-        if ($result->current()->nodeValue == $match) {
-            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content "%s"',
-                $path, $match
-            ));
+        foreach ($result as $node) {
+            if ($node->nodeValue == $match) {
+                throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                    'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content "%s"',
+                    $path, $match
+                ));
+            }
+            $currentValue = $node->nodeValue;
         }
-        $this->assertNotEquals($result->current()->nodeValue, $match);
+        $this->assertNotEquals($currentValue, $match);
     }
 
     /**

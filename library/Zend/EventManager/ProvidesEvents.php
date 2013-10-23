@@ -9,6 +9,8 @@
 
 namespace Zend\EventManager;
 
+trigger_error('Zend\EventManager\ProvidesEvents has been deprecated in favor of Zend\EventManager\EventManagerAwareTrait; please update your code', E_USER_DEPRECATED);
+
 /**
  * @deprecated Please use EventManagerAwareTrait instead.
  *

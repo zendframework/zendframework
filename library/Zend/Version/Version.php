@@ -78,11 +78,11 @@ final class Version
      */
     public static function getLatest($service = self::VERSION_SERVICE_ZEND, Http\Client $httpClient = null)
     {
-        if (null !== static::$latestVersion) {
-            return static::$latestVersion;
+        if (null !== self::$latestVersion) {
+            return self::$latestVersion;
         }
 
-        static::$latestVersion = 'not available';
+        self::$latestVersion = 'not available';
 
         if (null === $httpClient && !ini_get('allow_url_fopen')) {
             trigger_error(
@@ -96,7 +96,7 @@ final class Version
                 E_USER_WARNING
             );
 
-            return static::$latestVersion;
+            return self::$latestVersion;
         }
 
         $response = false;
@@ -115,10 +115,10 @@ final class Version
         }
 
         if ($response) {
-            static::$latestVersion = $response;
+            self::$latestVersion = $response;
         }
 
-        return static::$latestVersion;
+        return self::$latestVersion;
     }
 
     /**
@@ -130,7 +130,7 @@ final class Version
      */
     public static function isLatest()
     {
-        return static::compareVersion(self::getLatest()) < 1;
+        return self::compareVersion(self::getLatest()) < 1;
     }
 
     /**

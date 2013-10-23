@@ -118,12 +118,16 @@ class FormCollection extends AbstractHelper
 
                 $label = $escapeHtmlHelper($label);
 
-                $markup = sprintf(
-                    '<fieldset><legend>%s</legend>%s</fieldset>',
-                    $label,
-                    $markup
-                );
+                $labelMarkup = sprintf('<legend>%s</legend>', $label);
+            } else {
+                $labelMarkup = '';
             }
+
+            $markup = sprintf(
+                '<fieldset>%s%s</fieldset>',
+                $labelMarkup,
+                $markup
+            );
         }
 
         return $markup;

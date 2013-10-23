@@ -45,6 +45,11 @@ DD MMM YYY
   from "ControllerManager" to "ControllerLoader", and updates code to reference
   that alias ("ControllerManager"). This makes the service name match the class
   name, and begins future-proofing the component.
+- [#5283](https://github.com/zendframework/zf2/pull/5283) deprecates the trait
+  `Zend\EventManager\ProvidesEvents` in favor of
+  `Zend\EventManager\EventManagerAwareTrait`, and now raises an
+  `E_USER_DEPRECATED` when loaded. Please update your code to use the newer
+  trait.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

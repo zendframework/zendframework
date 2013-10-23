@@ -122,4 +122,23 @@ class LocatorRegistrationTest extends TestCase
         $this->assertInstanceOf('Zend\ModuleManager\ModuleManager', $sharedInstance2);
         $this->assertSame($this->moduleManager, $locator->get('Foo\Bar')->moduleManager);
     }
+
+    public function testNoDuplicateServicesAreDefinedForModuleManager()
+    {
+        $locatorRegistrationListener = new LocatorRegistrationListener;
+        $this->moduleManager->getEventManager()->attachAggregate($locatorRegistrationListener);
+
+        $this->moduleManager->loadModules();
+        $this->application->bootstrap();
+        $registeredServices = $this->application->getServiceManager()->getRegisteredServices();
+
+        $aliases = $registeredServices['aliases'];
+        $instances = $registeredServices['instances'];
+
+        $this->assertContains('zendmodulemanagermodulemanager', $aliases);
+        $this->assertFalse(in_array('modulemanager', $aliases));
+
+        $this->assertContains('modulemanager', $instances);
+        $this->assertFalse(in_array('zendmodulemanagermodulemanager', $instances));
+    }
 }

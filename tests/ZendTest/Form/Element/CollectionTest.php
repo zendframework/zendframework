@@ -18,6 +18,9 @@ use Zend\Form\Fieldset;
 use Zend\Form\Form;
 use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 use ZendTest\Form\TestAsset\Entity\Product;
+use Zend\Stdlib\Hydrator\ArraySerializable;
+use ZendTest\Form\TestAsset\CustomCollection;
+use ZendTest\Form\TestAsset\ArrayModel;
 
 class CollectionTest extends TestCase
 {
@@ -545,5 +548,55 @@ class CollectionTest extends TestCase
         foreach ($prices as $_k => $_price) {
             $this->assertEquals($_price, $form->get('collection')->get($_k)->get('product')->get('price')->getValue());
         }
+    }
+
+    public function testExtractFromTraversableImplementingToArrayThroughCollectionHydrator()
+    {
+        $collection = $this->form->get('fieldsets');
+
+        // this test is using a hydrator set on the collection
+        $collection->setHydrator(new ArraySerializable());
+
+        $this->prepareForExtractWithCustomTraversable($collection);
+
+        $expected = array(
+            array('foo' => 'foo_value_1', 'bar' => 'bar_value_1', 'foobar' => 'foobar_value_1'),
+            array('foo' => 'foo_value_2', 'bar' => 'bar_value_2', 'foobar' => 'foobar_value_2'),
+        );
+
+        $this->assertEquals($expected, $collection->extract());
+    }
+
+    public function testExtractFromTraversableImplementingToArrayThroughTargetElementHydrator()
+    {
+        $collection = $this->form->get('fieldsets');
+
+        // this test is using a hydrator set on the target element of the collection
+        $targetElement = $collection->getTargetElement();
+        $targetElement->setHydrator(new ArraySerializable());
+        $obj1 = new ArrayModel();
+        $targetElement->setObject($obj1);
+
+        $this->prepareForExtractWithCustomTraversable($collection);
+
+        $expected = array(
+            array('foo' => 'foo_value_1', 'bar' => 'bar_value_1', 'foobar' => 'foobar_value_1'),
+            array('foo' => 'foo_value_2', 'bar' => 'bar_value_2', 'foobar' => 'foobar_value_2'),
+        );
+
+        $this->assertEquals($expected, $collection->extract());
+    }
+
+    protected function prepareForExtractWithCustomTraversable($collection)
+    {
+        $obj2 = new ArrayModel();
+        $obj2->exchangeArray(array('foo' => 'foo_value_1', 'bar' => 'bar_value_1', 'foobar' => 'foobar_value_1'));
+        $obj3 = new ArrayModel();
+        $obj3->exchangeArray(array('foo' => 'foo_value_2', 'bar' => 'bar_value_2', 'foobar' => 'foobar_value_2'));
+
+        $traversable = new CustomCollection();
+        $traversable->append($obj2);
+        $traversable->append($obj3);
+        $collection->setObject($traversable);
     }
 }

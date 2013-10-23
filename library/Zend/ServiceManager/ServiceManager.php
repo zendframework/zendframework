@@ -1080,11 +1080,12 @@ class ServiceManager implements ServiceLocatorInterface
         if ($force) {
             $this->nestedContextCounter = -1;
             $this->nestedContext = array();
-        } else {
-            $this->nestedContextCounter--;
-            if ($this->nestedContextCounter === -1) {
-                $this->nestedContext = array();
-            }
+            return $this;
+        }
+
+        $this->nestedContextCounter--;
+        if ($this->nestedContextCounter === -1) {
+            $this->nestedContext = array();
         }
         return $this;
     }

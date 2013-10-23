@@ -101,11 +101,11 @@ class DocBlockGenerator extends AbstractGenerator
 
     protected static function getTagManager()
     {
-        if (!isset(self::$tagManager)) {
-            self::$tagManager = new TagManager();
-            self::$tagManager->initializeDefaultTags();
+        if (!isset(static::$tagManager)) {
+            static::$tagManager = new TagManager();
+            static::$tagManager->initializeDefaultTags();
         }
-        return self::$tagManager;
+        return static::$tagManager;
     }
 
 

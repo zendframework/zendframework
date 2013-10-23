@@ -234,8 +234,8 @@ abstract class AbstractPage extends AbstractContainer
             }
         }
 
-        if (self::$factories) {
-            foreach (self::$factories as $factoryCallBack) {
+        if (static::$factories) {
+            foreach (static::$factories as $factoryCallBack) {
                 if (($page = call_user_func($factoryCallBack, $options))) {
                     return $page;
                 }
@@ -264,7 +264,7 @@ abstract class AbstractPage extends AbstractContainer
      */
     public static function addFactory($callback)
     {
-        self::$factories[] = $callback;
+        static::$factories[] = $callback;
     }
 
     /**

@@ -28,7 +28,7 @@ class DiAbstractServiceFactoryFactory implements FactoryInterface
 
         if ($serviceLocator instanceof ServiceManager) {
             /* @var $serviceLocator ServiceManager */
-            $serviceLocator->addAbstractFactory($factory);
+            $serviceLocator->addAbstractFactory($factory, false);
         }
 
         return $factory;

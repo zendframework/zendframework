@@ -37,4 +37,14 @@ class CamelCaseToSeparatorTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Camel:-#Cased:-#Words', $filtered);
     }
+
+    public function testFilterSeperatesMultipleUppercasedLettersAndUnderscores()
+    {
+        $string   = 'TheseAre_SOME_CamelCASEDWords';
+        $filter   = new CamelCaseToSeparatorFilter('_');
+        $filtered = $filter($string);
+
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('These_Are_SOME_Camel_CASED_Words', $filtered);
+    }
 }

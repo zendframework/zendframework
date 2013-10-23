@@ -58,9 +58,11 @@ class ForwardTest extends TestCase
             return $controller;
         });
         $controllers->setServiceLocator($services);
-        $services->add('ControllerLoader', function () use ($controllers) {
+        $controllerLoader = function () use ($controllers) {
             return $controllers;
-        });
+        };
+        $services->add('ControllerLoader', $controllerLoader);
+        $services->add('ControllerManager', $controllerLoader);
         $services->add('ControllerPluginManager', function () use ($plugins) {
             return $plugins;
         });

@@ -105,10 +105,15 @@ class FormCollection extends AbstractHelper
 
         // Every collection is wrapped by a fieldset if needed
         if ($this->shouldWrap) {
+            $attributes = $element->getAttributes();
+            unset($attributes['name']);
+            $attributesString = '';
+            if (count($attributes)) {
+                $attributesString = ' ' . $this->createAttributesString($attributes);
+            }
+
             $label = $element->getLabel();
-
             if (!empty($label)) {
-
                 if (null !== ($translator = $this->getTranslator())) {
                     $label = $translator->translate(
                         $label,
@@ -124,7 +129,8 @@ class FormCollection extends AbstractHelper
             }
 
             $markup = sprintf(
-                '<fieldset>%s%s</fieldset>',
+                '<fieldset%s>%s%s</fieldset>',
+                $attributesString,
                 $labelMarkup,
                 $markup
             );

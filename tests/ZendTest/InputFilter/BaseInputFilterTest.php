@@ -828,7 +828,6 @@ class BaseInputFilterTest extends TestCase
         $this->assertFalse($filter->get('foo')->isRequired());
     }
 
-
     /**
      * @group 5270
      */
@@ -841,7 +840,7 @@ class BaseInputFilterTest extends TestCase
                               ->attachByName('alpha');
         $foo->getValidatorChain()->attach(new Validator\StringLength(15, 18));
 
-        $filter->add($foo, 'foo');        
+        $filter->add($foo, 'foo');
 
         //test valid with setData
         $filter->setData(array('foo' => 'invalid'));
@@ -860,5 +859,5 @@ class BaseInputFilterTest extends TestCase
         $filter->get('foo')->setValue('thisisavalidstring');
         $this->assertTrue($filter->get('foo')->isValid(), 'Filtered value is not valid');
         $this->assertTrue($filter->isValid(), 'Input filter did return value from filter');
-    }    
+    }
 }

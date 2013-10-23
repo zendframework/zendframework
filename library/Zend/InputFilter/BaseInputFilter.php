@@ -173,13 +173,14 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
     /**
      * Validate a set of inputs against the current data
      *
-     * @param array $inputs
+     * @param  array $inputs
+     * @param  array $data
      * @return bool
      */
-    protected function validateInputs(array $inputs, $data = array())
+    protected function validateInputs(array $inputs, array $data = array())
     {
-        //backwards compatibility
-        if(empty($data)) {
+        // backwards compatibility
+        if (empty($data)) {
             $data = $this->getRawValues();
         }
 

@@ -705,6 +705,7 @@ class BaseInputFilterTest extends TestCase
         $this->assertArrayHasKey('foo', $messages);
         $this->assertNotEmpty($messages['foo']);
     }
+
     public function testHasUnknown()
     {
         if (!extension_loaded('intl')) {
@@ -825,5 +826,38 @@ class BaseInputFilterTest extends TestCase
         $filter->add($foo2);
 
         $this->assertFalse($filter->get('foo')->isRequired());
+    }
+
+    /**
+     * @group 5270
+     */
+    public function testIsValidWhenValuesSetOnFilters()
+    {
+        $filter = new InputFilter();
+
+        $foo = new Input();
+        $foo->getFilterChain()->attachByName('stringtrim')
+                              ->attachByName('alpha');
+        $foo->getValidatorChain()->attach(new Validator\StringLength(15, 18));
+
+        $filter->add($foo, 'foo');
+
+        //test valid with setData
+        $filter->setData(array('foo' => 'invalid'));
+        $this->assertFalse($filter->isValid());
+
+        //test invalid with setData
+        $filter->setData(array('foo' => 'thisisavalidstring'));
+        $this->assertTrue($filter->isValid());
+
+        //test invalid when setting data on actual filter
+        $filter->get('foo')->setValue('invalid');
+        $this->assertFalse($filter->get('foo')->isValid(), 'Filtered value is valid, should be invalid');
+        $this->assertFalse($filter->isValid(), 'Input filter did not return value from filter');
+
+        //test valid when setting data on actual filter
+        $filter->get('foo')->setValue('thisisavalidstring');
+        $this->assertTrue($filter->get('foo')->isValid(), 'Filtered value is not valid');
+        $this->assertTrue($filter->isValid(), 'Input filter did return value from filter');
     }
 }

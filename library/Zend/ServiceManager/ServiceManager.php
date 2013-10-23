@@ -555,25 +555,7 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         if (isset($this->delegators[$cName])) {
-            $serviceManager       = $this;
-            $additionalDelegators = count($this->delegators[$cName]) - 1;
-            $creationCallback     = function () use ($serviceManager, $rName, $cName) {
-                return $serviceManager->doCreate($rName, $cName);
-            };
-
-            for ($i = 0; $i < $additionalDelegators; $i += 1) {
-                $creationCallback = $this->createDelegatorCallback(
-                    $this->delegators[$cName][$i],
-                    $rName,
-                    $cName,
-                    $creationCallback
-                );
-            }
-
-            /* @var $delegatorFactory DelegatorFactoryInterface */
-            $delegatorFactory = $this->get($this->delegators[$cName][$i]);
-
-            return $delegatorFactory->createDelegatorWithName($this, $cName, $rName, $creationCallback);
+            return $this->createDelegatorFromFactory($cName, $rName);
         }
 
         return $this->doCreate($rName, $cName);
@@ -582,22 +564,21 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * Creates a callback that uses a delegator to create a service
      *
-     * @param string   $delegatorFactoryName name of the delegator factory service
-     * @param string   $rName                requested service name
-     * @param string   $cName                canonical service name
-     * @param callable $creationCallback     callback that is responsible for instantiating the service
+     * @param DelegatorFactoryInterface|callable $delegatorFactory the delegator factory
+     * @param string                             $rName            requested service name
+     * @param string                             $cName            canonical service name
+     * @param callable                           $creationCallback callback for instantiating the real service
      *
      * @return callable
      */
-    private function createDelegatorCallback($delegatorFactoryName, $rName, $cName, $creationCallback)
+    private function createDelegatorCallback($delegatorFactory, $rName, $cName, $creationCallback)
     {
         $serviceManager  = $this;
 
-        return function () use ($serviceManager, $delegatorFactoryName, $rName, $cName, $creationCallback) {
-            /* @var $delegatorFactory DelegatorFactoryInterface */
-            $delegatorFactory = $serviceManager->get($delegatorFactoryName);
-
-            return $delegatorFactory->createDelegatorWithName($serviceManager, $cName, $rName, $creationCallback);
+        return function () use ($serviceManager, $delegatorFactory, $rName, $cName, $creationCallback) {
+            return $delegatorFactory instanceof DelegatorFactoryInterface
+                ? $delegatorFactory->createDelegatorWithName($serviceManager, $cName, $rName, $creationCallback)
+                : $delegatorFactory($serviceManager, $cName, $rName, $creationCallback);
         };
     }
 
@@ -1102,6 +1083,50 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         return $instance;
+    }
+
+    /**
+     * @param $canonicalName
+     * @param $requestedName
+     * @return mixed
+     * @throws Exception\ServiceNotCreatedException
+     */
+    protected function createDelegatorFromFactory($canonicalName, $requestedName)
+    {
+        $serviceManager     = $this;
+        $delegatorsCount    = count($this->delegators[$canonicalName]);
+        $creationCallback   = function () use ($serviceManager, $requestedName, $canonicalName) {
+            return $serviceManager->doCreate($requestedName, $canonicalName);
+        };
+
+        for ($i = 0; $i < $delegatorsCount; $i += 1) {
+
+            $delegatorFactory = $this->delegators[$canonicalName][$i];
+
+            if (is_string($delegatorFactory)) {
+                $delegatorFactory = !$this->has($delegatorFactory) && class_exists($delegatorFactory, true) ?
+                    new $delegatorFactory
+                    : $this->get($delegatorFactory);
+                $this->delegators[$canonicalName][$i] = $delegatorFactory;
+            }
+
+            if (!$delegatorFactory instanceof DelegatorFactoryInterface && !is_callable($delegatorFactory)) {
+                throw new Exception\ServiceNotCreatedException(sprintf(
+                    'While attempting to create %s%s an invalid factory was registered for this instance type.',
+                    $canonicalName,
+                    ($requestedName ? '(alias: ' . $requestedName . ')' : '')
+                ));
+            }
+
+            $creationCallback = $this->createDelegatorCallback(
+                $delegatorFactory,
+                $requestedName,
+                $canonicalName,
+                $creationCallback
+            );
+        }
+
+        return $creationCallback($serviceManager, $canonicalName, $requestedName, $creationCallback);
     }
 
     /**

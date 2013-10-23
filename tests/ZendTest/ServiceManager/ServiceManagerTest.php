@@ -753,6 +753,7 @@ class ServiceManagerTest extends TestCase
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::create
+     * @covers Zend\ServiceManager\ServiceManager::createDelegatorFromFactory
      * @covers Zend\ServiceManager\ServiceManager::createDelegatorCallback
      * @covers Zend\ServiceManager\ServiceManager::addDelegator
      */
@@ -783,13 +784,12 @@ class ServiceManagerTest extends TestCase
             )
             ->will($this->returnValue($delegator));
 
-        //die(var_dump($this->serviceManager));
-
         $this->assertSame($delegator, $this->serviceManager->create('foo-service'));
     }
 
     /**
      * @covers Zend\ServiceManager\ServiceManager::create
+     * @covers Zend\ServiceManager\ServiceManager::createDelegatorFromFactory
      * @covers Zend\ServiceManager\ServiceManager::createDelegatorCallback
      * @covers Zend\ServiceManager\ServiceManager::addDelegator
      */
@@ -851,5 +851,107 @@ class ServiceManagerTest extends TestCase
 
         // This should throw the exception
         $this->serviceManager->get('baz-alias');
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::createDelegatorFromFactory
+     */
+    public function testDelegatorFactoryWhenNotRegisteredAsService()
+    {
+        $delegator = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
+
+        $this->serviceManager->addDelegator('foo-service', $delegator);
+        $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
+
+        $delegator
+            ->expects($this->once())
+            ->method('createDelegatorWithName')
+            ->with(
+                $this->serviceManager,
+                'fooservice',
+                'foo-service',
+                $this->callback(function ($callback) {
+                    if (!is_callable($callback)) {
+                        return false;
+                    }
+
+                    $service = call_user_func($callback);
+
+                    return $service instanceof \stdClass;
+                })
+            )
+            ->will($this->returnValue($delegator));
+
+        $this->assertSame($delegator, $this->serviceManager->create('foo-service'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::create
+     * @covers Zend\ServiceManager\ServiceManager::createDelegatorFromFactory
+     * @covers Zend\ServiceManager\ServiceManager::createDelegatorCallback
+     * @covers Zend\ServiceManager\ServiceManager::addDelegator
+     */
+    public function testMultipleDelegatorFactoriesWhenNotRegisteredAsServices()
+    {
+        $fooDelegator = new MockSelfReturningDelegatorFactory();
+        $barDelegator = new MockSelfReturningDelegatorFactory();
+
+        $this->serviceManager->addDelegator('foo-service', $fooDelegator);
+        $this->serviceManager->addDelegator('foo-service', $barDelegator);
+        $this->serviceManager->setInvokableClass('foo-service', 'stdClass');
+
+        $this->assertSame($barDelegator, $this->serviceManager->create('foo-service'));
+        $this->assertCount(1, $barDelegator->instances);
+        $this->assertCount(1, $fooDelegator->instances);
+        $this->assertInstanceOf('stdClass', array_shift($fooDelegator->instances));
+        $this->assertSame($fooDelegator, array_shift($barDelegator->instances));
+    }
+
+    public function testInvalidDelegatorFactoryThrowsException()
+    {
+        $delegatorFactory = new \stdClass;
+        $this->serviceManager->addDelegator('foo-service', $delegatorFactory);
+
+        try {
+            $this->serviceManager->create('foo-service');
+            $this->fail('Expected exception was not raised');
+        }catch (Exception\ServiceNotCreatedException $expected) {
+            $this->assertRegExp('/invalid factory/', $expected->getMessage());
+            return;
+        }
+    }
+
+    public function testInvalidDelegatorFactoryAmongMultipleOnesThrowsException()
+    {
+        $this->serviceManager->addDelegator('foo-service', new MockSelfReturningDelegatorFactory());
+        $this->serviceManager->addDelegator('foo-service', new MockSelfReturningDelegatorFactory());
+        $this->serviceManager->addDelegator('foo-service', 'stdClass');
+
+        try {
+            $this->serviceManager->create('foo-service');
+            $this->fail('Expected exception was not raised');
+        }catch (Exception\ServiceNotCreatedException $expected) {
+            $this->assertRegExp('/invalid factory/', $expected->getMessage());
+            return;
+        }
+    }
+
+    public function testDelegatorFromCallback()
+    {
+        $realService = $this->getMock('stdClass', array(), array(), 'RealService');
+        $delegator = $this->getMock('stdClass', array(), array(), 'Delegator');
+
+        $delegatorFactoryCallback = function($serviceManager, $cName, $rName, $callback) use ($delegator) {
+            $delegator->real = call_user_func($callback);
+            return $delegator;
+        };
+
+        $this->serviceManager->setFactory('foo-service', function() use ($realService) { return $realService; } );
+        $this->serviceManager->addDelegator('foo-service', $delegatorFactoryCallback);
+
+        $service = $this->serviceManager->create('foo-service');
+
+        $this->assertSame($delegator, $service);
+        $this->assertSame($realService, $service->real);
     }
 }

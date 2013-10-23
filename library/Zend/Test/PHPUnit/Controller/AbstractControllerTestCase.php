@@ -462,7 +462,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     {
         $routeMatch           = $this->getApplication()->getMvcEvent()->getRouteMatch();
         $controllerIdentifier = $routeMatch->getParam('controller');
-        $controllerManager    = $this->getApplicationServiceLocator()->get('ControllerLoader');
+        $controllerManager    = $this->getApplicationServiceLocator()->get('ControllerManager');
         $controllerClass      = $controllerManager->get($controllerIdentifier);
         return get_class($controllerClass);
     }

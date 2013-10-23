@@ -68,6 +68,7 @@ class DispatchListenerTest extends TestCase
                 'aliases' => array(
                     'Router'                 => 'HttpRouter',
                     'Configuration'          => 'Config',
+                    'ControllerManager'      => 'ControllerLoader',
                 ),
             ))
         );

@@ -20,8 +20,8 @@ function function1()
  *
  * This is the long description for funciton two
  *
- * @param unknown_type $one
- * @param unknown_type $two
+ * @param string $one
+ * @param string $two
  * @return string
  */
 function function2($one, $two = 'two')

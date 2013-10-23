@@ -10,15 +10,26 @@
 namespace ZendTest\Mvc\Service;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Console\Request as ConsoleRequest;
 use Zend\Mvc\Service\ViewHelperManagerFactory;
 use Zend\ServiceManager\ServiceManager;
 
 class ViewHelperManagerFactoryTest extends TestCase
 {
+    /**
+     * @var ServiceManager
+     */
+    protected $services;
+
+    /**
+     * @var ViewHelperManagerFactory
+     */
+    protected $factory;
+
     public function setUp()
     {
         $this->services = new ServiceManager();
-        $this->factory  = new ViewHelperManagerFactory();
+        $this->factory = new ViewHelperManagerFactory();
     }
 
     /**
@@ -45,5 +56,19 @@ class ViewHelperManagerFactoryTest extends TestCase
         $this->assertInstanceof('Zend\View\HelperPluginManager', $manager);
         $doctype = $manager->get('doctype');
         $this->assertInstanceof('Zend\View\Helper\Doctype', $doctype);
+    }
+
+    public function testConsoleRequestsResultInSilentFailure()
+    {
+        $this->services->setService('Config', array());
+        $this->services->setService('Request', new ConsoleRequest());
+
+        $manager = $this->factory->createService($this->services);
+
+        $doctype = $manager->get('doctype');
+        $this->assertInstanceof('Zend\View\Helper\Doctype', $doctype);
+
+        $basePath = $manager->get('basepath');
+        $this->assertInstanceof('Zend\View\Helper\BasePath', $basePath);
     }
 }

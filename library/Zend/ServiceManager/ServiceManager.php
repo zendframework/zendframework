@@ -598,28 +598,33 @@ class ServiceManager implements ServiceLocatorInterface
      */
     public function doCreate($rName, $cName)
     {
-        $instance = false;
+        $instance = null;
 
         if (isset($this->factories[$cName])) {
             $instance = $this->createFromFactory($cName, $rName);
         }
 
-        if ($instance === false && isset($this->invokableClasses[$cName])) {
+        if ($instance === null && isset($this->invokableClasses[$cName])) {
             $instance = $this->createFromInvokable($cName, $rName);
         }
         $this->checkNestedContextStart($cName);
-        if ($instance === false && $this->canCreateFromAbstractFactory($cName, $rName)) {
+        if ($instance === null && $this->canCreateFromAbstractFactory($cName, $rName)) {
             $instance = $this->createFromAbstractFactory($cName, $rName);
         }
         $this->checkNestedContextStop();
 
-        if ($instance === false && $this->throwExceptionInCreate) {
+        if ($instance === null && $this->throwExceptionInCreate) {
             $this->checkNestedContextStop(true);
             throw new Exception\ServiceNotFoundException(sprintf(
                 'No valid instance was found for %s%s',
                 $cName,
                 ($rName ? '(alias: ' . $rName . ')' : '')
             ));
+        }
+
+        // Do not call initializers if we do not have an instance
+        if ($instance === null) {
+            return $instance;
         }
 
         foreach ($this->initializers as $initializer) {
@@ -1053,7 +1058,7 @@ class ServiceManager implements ServiceLocatorInterface
                 );
             }
         }
-        return false;
+        return null;
     }
 
     /**

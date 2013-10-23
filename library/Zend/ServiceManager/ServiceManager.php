@@ -617,6 +617,11 @@ class ServiceManager implements ServiceLocatorInterface
             ));
         }
 
+        // Do not call initializers if we do not have an instance
+        if ($instance === null) {
+            return $instance;
+        }
+
         foreach ($this->initializers as $initializer) {
             if ($initializer instanceof InitializerInterface) {
                 $initializer->initialize($instance, $this);

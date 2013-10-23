@@ -187,4 +187,16 @@ class FormCollectionTest extends TestCase
         $markup = $this->helper->render($collection);
         $this->assertContains('<fieldset>', $markup);
     }
+
+    public function testRenderCollectionAttributes()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setLabel('label');
+        $this->helper->setShouldWrap(true);
+        $collection->setAttribute('id', 'some-identifier');
+
+        $markup = $this->helper->render($collection);
+        $this->assertContains(' id="some-identifier"', $markup);
+    }
 }

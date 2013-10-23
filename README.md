@@ -41,6 +41,10 @@ DD MMM YYY
   default. If you wish to disable escaping, you need to either pass the label
   option `disable_html_escape` to the form element, or call the
   `setEscapeHtmlHelper(false)` method on the `formLabel()` view helper.
+- [#4962](https://github.com/zendframework/zf2/pull/4962) adds a service alias
+  from "ControllerManager" to "ControllerLoader", and updates code to reference
+  that alias ("ControllerManager"). This makes the service name match the class
+  name, and begins future-proofing the component.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

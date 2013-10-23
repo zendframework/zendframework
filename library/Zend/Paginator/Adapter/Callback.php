@@ -14,14 +14,14 @@ use Zend\Stdlib\CallbackHandler;
 class Callback implements AdapterInterface
 {
     /**
-     * Callback to be runned to get the items for a page.
+     * Callback to be executed to retrieve the items for a page.
      *
      * @var CallbackHandler
      */
     protected $itemsCallback;
 
     /**
-     * Callback to be runned to get the total number of items.
+     * Callback to be executed to retrieve the total number of items.
      *
      * @var CallbackHandler
      */
@@ -30,8 +30,8 @@ class Callback implements AdapterInterface
     /**
      * Constructs instance.
      *
-     * @param CallbackHandler|callable $itemsCallback Callback to be runned to get the items for a page.
-     * @param CallbackHandler|callable $countCallback Callback to be runned to get the total number of items.
+     * @param CallbackHandler|callable $itemsCallback Callback to be executed to retrieve the items for a page.
+     * @param CallbackHandler|callable $countCallback Callback to be executed to retrieve the total number of items.
      */
     public function __construct($itemsCallback, $countCallback)
     {
@@ -50,7 +50,7 @@ class Callback implements AdapterInterface
     /**
      * Returns an array of items for a page.
      *
-     * Runs the callback defined as first constructor's argument.
+     * Executes the {$itemsCallback}.
      *
      * @param  int $offset Page offset
      * @param  int $itemCountPerPage Number of items per page
@@ -64,7 +64,7 @@ class Callback implements AdapterInterface
     /**
      * Returns the total number of items.
      *
-     * Runs the callback defined as second constructor's argument.
+     * Executes the {$countCallback}.
      *
      * @return int
      */

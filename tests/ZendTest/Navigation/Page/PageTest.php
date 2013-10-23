@@ -67,37 +67,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $page->get('Action'));
     }
 
-    /**
-     * This functionality was removed in ZF2 to comply with new URL helper; do we need it?
-     *
-     * @group disable
-     */
-    public function testSetShouldNormalizePropertyName()
-    {
-        $page = AbstractPage::factory(array(
-            'type' => 'mvc'
-        ));
-
-        $page->setResetParams(false);
-        $page->set('reset_params', true);
-        $this->assertTrue($page->getResetParams());
-    }
-
-    /**
-     * This functionality was removed in ZF2 to comply with new URL helper; do we need it?
-     *
-     * @group disable
-     */
-    public function testGetShouldNormalizePropertyName()
-    {
-        $page = AbstractPage::factory(array(
-            'type' => 'mvc'
-        ));
-
-        $page->setResetParams(false);
-        $this->assertFalse($page->get('reset_params'));
-    }
-
     public function testShouldSetAndGetShouldMapToProperties()
     {
         $page = AbstractPage::factory(array(

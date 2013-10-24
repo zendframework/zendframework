@@ -12,7 +12,7 @@ namespace Zend\View\Exception;
 /**
  * Unexpected value exception
  */
-class UnexpectedValueException extends \UnexpectedValueException
-    implements ExceptionInterface
+class UnexpectedValueException extends \UnexpectedValueException implements 
+    ExceptionInterface
 {
 }

@@ -352,26 +352,37 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $test = $this->renderer->render('should-not-find-this');
     }
 
-    public function testRendererRaisesExceptionIfResolvedTemplateDoesNotExists()
+    public function invalidTemplateFiles()
     {
-        $this->setExpectedException('Zend\View\Exception\UnexpectedValueException', 'file include failed');
-        $resolver = new TemplateMapResolver(array(
-            'not-exists' => '/does/not/exists',
-        ));
-
-        $this->renderer->setResolver($resolver);
-        @$this->renderer->render('not-exists');
+        return array(
+            array('/does/not/exists'),
+            array('.')
+        );
     }
 
-    public function testRendererRaisesExceptionIfResolvedTemplateIsDirectory()
+    /**
+     * @dataProvider invalidTemplateFiles
+     */
+    public function testRendererRaisesExceptionIfResolvedTemplateIsInvalid($template)
     {
-        $this->setExpectedException('Zend\View\Exception\UnexpectedValueException', 'file include failed');
         $resolver = new TemplateMapResolver(array(
-            'is-directory' => '.',
+            'invalid' => $template,
         ));
 
+        set_error_handler(function ($errno, $errstr) { return true; }, E_WARNING);
+
         $this->renderer->setResolver($resolver);
-        @$this->renderer->render('is-directory');
+
+        try {
+            $this->renderer->render('invalid');
+            $caught = false;
+        } catch(\Exception $e) {
+            $caught = $e;
+        }
+
+        restore_error_handler();
+        $this->assertInstanceOf('Zend\View\Exception\UnexpectedValueException', $caught);
+        $this->assertContains('file include failed', $caught->getMessage());
     }
 
     /**

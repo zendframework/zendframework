@@ -352,6 +352,39 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $test = $this->renderer->render('should-not-find-this');
     }
 
+    public function invalidTemplateFiles()
+    {
+        return array(
+            array('/does/not/exists'),
+            array('.')
+        );
+    }
+
+    /**
+     * @dataProvider invalidTemplateFiles
+     */
+    public function testRendererRaisesExceptionIfResolvedTemplateIsInvalid($template)
+    {
+        $resolver = new TemplateMapResolver(array(
+            'invalid' => $template,
+        ));
+
+        set_error_handler(function ($errno, $errstr) { return true; }, E_WARNING);
+
+        $this->renderer->setResolver($resolver);
+
+        try {
+            $this->renderer->render('invalid');
+            $caught = false;
+        } catch(\Exception $e) {
+            $caught = $e;
+        }
+
+        restore_error_handler();
+        $this->assertInstanceOf('Zend\View\Exception\UnexpectedValueException', $caught);
+        $this->assertContains('file include failed', $caught->getMessage());
+    }
+
     /**
      * @group view-model
      */

@@ -504,11 +504,18 @@ class PhpRenderer implements Renderer, TreeRendererInterface
             }
             try {
                 ob_start();
-                include $this->__file;
+                $includeReturn = include $this->__file;
                 $this->__content = ob_get_clean();
             } catch (\Exception $ex) {
                 ob_end_clean();
                 throw $ex;
+            }
+            if ($includeReturn === false && empty($this->__content)) {
+                throw new Exception\UnexpectedValueException(sprintf(
+                    '%s: Unable to render template "%s"; file include failed',
+                    __METHOD__,
+                    $this->__file
+                ));
             }
         }
 

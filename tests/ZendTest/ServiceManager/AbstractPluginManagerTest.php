@@ -158,7 +158,7 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
             )
             ->will($this->returnValue($delegator));
 
-        $pluginManager->setFactory('foo-service', function() use ($realService) {
+        $pluginManager->setFactory('foo-service', function () use ($realService) {
             return $realService;
         });
         $pluginManager->addDelegator('foo-service', $delegatorFactory);

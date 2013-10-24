@@ -13,6 +13,13 @@ DD MMM YYYY
 
 ### UPDATES IN 2.2.5
 
+- [#5343](https://github.com/zendframework/zf2/pull/5343) removed the
+  DateTimeFormatter filter from DateTime form elements. This was done
+  due to the fact that it led to unexpected behavior when non-date inputs were
+  provided. However, since the DateTime element already incorporates a
+  DateValidator that accepts a date format, validation can still work as
+  expected.
+
 Please see [CHANGELOG.md](CHANGELOG.md).
 
 ### SYSTEM REQUIREMENTS

@@ -61,7 +61,6 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
         return $this->docBlock;
     }
 
-
     /**
      * @param  AnnotationManager $annotationManager
      * @return AnnotationCollection

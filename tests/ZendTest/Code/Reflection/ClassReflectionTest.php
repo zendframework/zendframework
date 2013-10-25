@@ -11,7 +11,6 @@ namespace ZendTest\Code\Reflection;
 
 use Zend\Code\Reflection\ClassReflection;
 use ZendTest\Code\Reflection\TestAsset\InjectableClassReflection;
-use Zend\Code\Annotation\AnnotationManager;
 
 /**
  *

@@ -335,7 +335,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * Tells if the node is considered as new (not present on the server)
      *
      * Please note, that this doesn't tell you if the node is present on the server.
-     * Use {@link exits()} to see if a node is already there.
+     * Use {@link exists()} to see if a node is already there.
      *
      * @return bool
      */

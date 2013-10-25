@@ -11,7 +11,6 @@ namespace ZendTest\Code\Reflection;
 
 use Zend\Code\Reflection\MethodReflection;
 use ZendTest\Code\Reflection\TestAsset\InjectableMethodReflection;
-
 /**
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Method

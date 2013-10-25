@@ -61,6 +61,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
         return $this->docBlock;
     }
 
+
     /**
      * @param  AnnotationManager $annotationManager
      * @return AnnotationCollection
@@ -77,7 +78,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
             return $this->annotations;
         }
 
-        $fileScanner       = new FileScanner($this->getFileName());
+        $fileScanner       = $this->createFileScanner($this->getFileName());
         $nameInformation   = $fileScanner->getClassNameInformation($this->getName());
 
         if (!$nameInformation) {
@@ -234,5 +235,20 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     public function __toString()
     {
         return parent::__toString();
+    }
+
+    /**
+     * Creates a new FileScanner instance.
+     *
+     * By having this as a seperate method it allows the method to be overridden
+     * if a different FileScanner is needed.
+     *
+     * @param  string $filename
+     *
+     * @return FileScanner
+     */
+    protected function createFileScanner($filename)
+    {
+        return new FileScanner($filename);
     }
 }

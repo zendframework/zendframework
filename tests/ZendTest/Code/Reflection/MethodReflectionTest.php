@@ -10,6 +10,7 @@
 namespace ZendTest\Code\Reflection;
 
 use Zend\Code\Reflection\MethodReflection;
+use ZendTest\Code\Reflection\TestAsset\InjectableMethodReflection;
 
 /**
  * @group      Zend_Reflection
@@ -53,5 +54,29 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
     {
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5', 'doSomething');
         $this->assertEquals("    {\n\n        return 'mixedValue';\n\n    }\n", $reflectionMethod->getContents(false));
+    }
+
+    public function testGetAnnotationsWithNoNameInformations()
+    {
+        $reflectionMethod = new InjectableMethodReflection(
+            // TestSampleClass5 has the annotations required to get to the
+            // right point in the getAnnotations method.
+            'ZendTest\Code\Reflection\TestAsset\TestSampleClass5',
+            'doSomething'
+        );
+
+        $annotationManager = new \Zend\Code\Annotation\AnnotationManager();
+
+        $fileScanner = $this->getMockBuilder('Zend\Code\Scanner\CachingFileScanner')
+                            ->disableOriginalConstructor()
+                            ->getMock();
+
+        $reflectionMethod->setFileScanner($fileScanner);
+
+        $fileScanner->expects($this->any())
+                    ->method('getClassNameInformation')
+                    ->will($this->returnValue(false));
+
+        $this->assertFalse($reflectionMethod->getAnnotations($annotationManager));
     }
 }

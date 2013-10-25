@@ -79,6 +79,7 @@ class PropertyReflection extends PhpReflectionProperty implements ReflectionInte
         $class              = $this->getDeclaringClass();
         $cachingFileScanner = new CachingFileScanner($class->getFileName());
         $nameInformation    = $cachingFileScanner->getClassNameInformation($class->getName());
+
         $this->annotations  = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
 
         return $this->annotations;

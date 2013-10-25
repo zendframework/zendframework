@@ -51,7 +51,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
             return $this->annotations;
         }
 
-        $cachingFileScanner = new CachingFileScanner($this->getFileName());
+        $cachingFileScanner = $this->createFileScanner($this->getFileName());
         $nameInformation    = $cachingFileScanner->getClassNameInformation($this->getDeclaringClass()->getName());
 
         if (!$nameInformation) {
@@ -170,5 +170,20 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     public function __toString()
     {
         return parent::__toString();
+    }
+
+    /**
+     * Creates a new FileScanner instance.
+     *
+     * By having this as a seperate method it allows the method to be overridden
+     * if a different FileScanner is needed.
+     *
+     * @param  string $filename
+     *
+     * @return FileScanner
+     */
+    protected function createFileScanner($filename)
+    {
+        return new CachingFileScanner($filename);
     }
 }

@@ -22,9 +22,16 @@ class Document
     /**#@+
      * Document types
      */
-    const DOC_XML   = 'DOC_XML';
-    const DOC_HTML  = 'DOC_HTML';
-    const DOC_XHTML = 'DOC_XHTML';
+    const DOC_HTML     = 'DOC_HTML';
+    const DOC_XHTML    = 'DOC_XHTML';
+    const DOC_XML      = 'DOC_XML';
+    /**#@-*/
+
+    /**#@+
+     * Query types
+     */
+    const QUERY_XPATH  = 'QUERY_XPATH';
+    const QUERY_CSS    = 'QUERY_CSS';
     /**#@-*/
 
     /**
@@ -65,6 +72,7 @@ class Document
 
     /**
      * Constructor
+     *
      * @param string|null  $document
      * @param string|null  $encoding
      */
@@ -75,7 +83,8 @@ class Document
     }
 
     /**
-     * Get raw document
+     * Get raw set document
+     *
      * @return null|string
      */
     public function getStringDocument()
@@ -85,10 +94,11 @@ class Document
 
     /**
      * Set raw document
-     * @param string|null  $document
-     * @param string|null  $forcedType      Type for the provided document (see constants)
-     * @param string|null  $forcedEncoding  Encoding for the provided document
-     * @return Document
+     *
+     * @param null|string  $document
+     * @param null|string  $forcedType      Type for the provided document (see constants)
+     * @param null|string  $forcedEncoding  Encoding for the provided document
+     * @return self
      */
     public function setStringDocument($document, $forcedType = null, $forcedEncoding = null)
     {
@@ -112,15 +122,27 @@ class Document
 
         $this->setType($forcedType ?: (!empty($document) ? $type : null));
         $this->setEncoding($forcedEncoding);
+        $this->setErrors(array());
 
         return $this;
     }
 
+    /**
+     * Get raw document type
+     *
+     * @return null|string
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * Set raw document type
+     *
+     * @param  string    $type
+     * @return self
+     */
     protected function setType($type)
     {
         $this->type = $type;
@@ -128,6 +150,12 @@ class Document
         return $this;
     }
 
+    /**
+     * Get DOMDocument generated from set raw document
+     *
+     * @return null|string
+     * @throws Exception\RuntimeException
+     */
     public function getDomDocument()
     {
         if (null === ($stringDocument = $this->getStringDocument())) {
@@ -135,12 +163,18 @@ class Document
         }
 
         if (null === $this->domDocument) {
-            $this->domDocument  = $this->getDomFromString($stringDocument);
+            $this->domDocument = $this->getDomDocumentFromString($stringDocument);
         }
 
         return $this->domDocument;
     }
 
+    /**
+     * Set DOMDocument
+     *
+     * @param  DOMDocument $domDocument
+     * @return self
+     */
     protected function setDomDocument(DOMDocument $domDocument)
     {
         $this->domDocument = $domDocument;
@@ -148,11 +182,22 @@ class Document
         return $this;
     }
 
+    /**
+     * Get set document encoding
+     *
+     * @return null|string
+     */
     public function getEncoding()
     {
         return $this->encoding;
     }
 
+    /**
+     * Set raw document encoding for DOMDocument generation
+     *
+     * @param  null|string $encoding
+     * @return self
+     */
     public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
@@ -160,11 +205,22 @@ class Document
         return $this->encoding;
     }
 
+    /**
+     * Get DOMDocument generation errors
+     *
+     * @return array
+     */
     public function getErrors()
     {
         return $this->errors;
     }
 
+    /**
+     * Set document errors from DOMDocument generation
+     *
+     * @param  array $errors
+     * @return self
+     */
     protected function setErrors($errors)
     {
         $this->errors = $errors;
@@ -172,7 +228,13 @@ class Document
         return $this;
     }
 
-    protected function getDomFromString($stringDocument)
+    /**
+     * Get DOMDocument from set raw document
+     *
+     * @return DOMDocument
+     * @throws Exception\RuntimeException
+     */
+    protected function getDomDocumentFromString($stringDocument)
     {
         libxml_use_internal_errors(true);
         libxml_disable_entity_loader(true);
@@ -216,31 +278,27 @@ class Document
     }
 
     /**
-     * Perform a CSS selector query
+     * Perform a query on generated DOMDocument
      *
      * @param  string $query
-     * @return NodeList
-     */
-    public function queryCss($query)
-    {
-        $xpathQuery = Css2Xpath::transform($query);
-        return $this->queryXpath($xpathQuery, $query);
-    }
-
-    /**
-     * Perform an XPath query
-     *
-     * @param  string|array $xpathQuery
-     * @param  string|null  $query      CSS selector query
+     * @param  string $queryType
      * @throws Exception\RuntimeException
      * @return NodeList
      */
-    public function queryXpath($xpathQuery, $query = null)
+    public function query($query, $queryType = self::QUERY_XPATH)
     {
-        $domDoc    = $this->getDomDocument();
+        $domDoc      = $this->getDomDocument();
+        $xpathQuery  = $query;
+        $cssQuery    = null;
+
+        if ($queryType === static::QUERY_CSS) {
+            $xpathQuery = Css2Xpath::transform($query);
+            $cssQuery   = $query;
+        }
+
         $nodeList  = $this->getNodeList($domDoc, $xpathQuery);
 
-        return new NodeList($query, $xpathQuery, $domDoc, $nodeList);
+        return new NodeList($cssQuery, $xpathQuery, $domDoc, $nodeList);
     }
 
     /**

@@ -396,4 +396,17 @@ XML;
 
         unset($results[2]);
     }
+
+    /**
+     * @group ZF-5310
+     */
+    public function testCssSelectorShouldFindNodesWhenMatchingAttributeWithDot()
+    {
+        $this->loadHtml();
+        $results = $this->query->execute('a[href="http://www.about.com"]');
+
+        $this->assertEquals(1, $results->count());
+        $this->assertEquals('About', $results[0]->nodeValue);
+        
+    }
 }

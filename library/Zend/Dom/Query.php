@@ -15,6 +15,8 @@ use Zend\Stdlib\ErrorHandler;
 
 /**
  * Query DOM structures based on CSS selectors and/or XPath
+ * @deprecated
+ * @see \Zend\Dom\Document
  */
 class Query
 {

@@ -434,6 +434,8 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
+     * Set whether the value for this cookie should be quoted
+     *
      * @param  bool $quotedValue
      * @return SetCookie
      */
@@ -501,7 +503,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * Check whether the cookie is a session cookie (has no expiry time set)
+     * Check whether the value for this cookie should be quoted
      *
      * @return bool
      */

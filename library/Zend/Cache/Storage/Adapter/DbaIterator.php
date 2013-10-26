@@ -131,7 +131,7 @@ class DbaIterator implements IteratorInterface
     public function key()
     {
         if ($this->currentInternalKey === false) {
-            throw new Exception\RuntimeException("Iterater is on an invalid state");
+            throw new Exception\RuntimeException("Iterator is on an invalid state");
         }
 
         // remove namespace prefix
@@ -147,7 +147,7 @@ class DbaIterator implements IteratorInterface
     public function next()
     {
         if ($this->currentInternalKey === false) {
-            throw new Exception\RuntimeException("Iterater is on an invalid state");
+            throw new Exception\RuntimeException("Iterator is on an invalid state");
         }
 
         $this->currentInternalKey = dba_nextkey($this->handle);

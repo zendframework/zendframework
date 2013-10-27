@@ -7,13 +7,13 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Stdlib\Hydrator\Naming;
+namespace Zend\Stdlib\Hydrator\NamingStrategy;
 
 /**
- * Class UnderscoreNaming
- * @package Zend\Stdlib\Hydrator\Naming
+ * Class UnderscoreNamingStrategy
+ * @package Zend\Stdlib\Hydrator\NamingStrategy
  */
-class UnderscoreCamelCaseNaming implements NamingInterface
+class UnderscoreNamingStrategy implements NamingStrategyInterface
 {
     /**
      * @param $name

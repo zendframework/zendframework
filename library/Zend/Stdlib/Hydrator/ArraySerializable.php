@@ -65,8 +65,9 @@ class ArraySerializable extends AbstractHydrator
     public function hydrate(array $data, $object)
     {
         $replacement = array();
-        foreach ($data as $name => $value) {
-            $replacement[$this->hydrateName($name, $data)] = $this->hydrateValue($name, $value, $data);
+        foreach ($data as $key => $value) {
+            $name = $this->hydrateName($key, $data);
+            $replacement[$name] = $this->hydrateValue($name, $value, $data);
         }
 
         if (is_callable(array($object, 'exchangeArray'))) {

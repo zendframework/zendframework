@@ -20,6 +20,7 @@ use Zend\Stdlib\Hydrator\Filter\IsFilter;
 use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
 use Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter;
 use Zend\Stdlib\Hydrator\Naming\UnderscoreCamelCaseNaming;
+use Zend\Stdlib\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 
 class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
@@ -81,10 +82,10 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
         $this->underscoreSeparatedKeys = (bool) $underscoreSeparatedKeys;
 
         if (true === $this->underscoreSeparatedKeys) {
-            $this->addNaming('*', new UnderscoreCamelCaseNaming);
+            $this->setNamingStrategy(new UnderscoreNamingStrategy);
         } else {
-            if ($this->hasNaming('*') && $this->getNaming('*') instanceof UnderscoreCamelCaseNaming) {
-                $this->removeNaming('*');
+            if ($this->getNamingStrategy() instanceof UnderscoreNamingStrategy) {
+                $this->removeNamingStrategy();
             }
         }
 

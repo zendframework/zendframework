@@ -12,15 +12,14 @@ namespace Zend\Stdlib\Hydrator;
 use ArrayObject;
 use Zend\Stdlib\Exception;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
-use Zend\Stdlib\Hydrator\Naming\NamingInterface;
-use Zend\Stdlib\Hydrator\StrategyEnabledInterface;
+use Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface;
 use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
 
 abstract class AbstractHydrator implements
     HydratorInterface,
     StrategyEnabledInterface,
     FilterEnabledInterface,
-    NamingEnabledInterface
+    NamingStrategyEnabledInterface
 {
     /**
      * The list with strategies that this hydrator has.
@@ -32,9 +31,9 @@ abstract class AbstractHydrator implements
     /**
      * The list of naming strategies that this hydrator has.
      *
-     * @var \ArrayObject
+     * @var NamingStrategyInterface
      */
-    protected $naming;
+    protected $namingStrategy;
 
     /**
      * Composite to filter the methods, that need to be hydrated
@@ -47,66 +46,8 @@ abstract class AbstractHydrator implements
      */
     public function __construct()
     {
-        $this->naming = new ArrayObject();
         $this->strategies = new ArrayObject();
         $this->filterComposite = new FilterComposite();
-    }
-
-    /**
-     * @param $name
-     *
-     * @return mixed
-     * @throws \Zend\Stdlib\Exception\InvalidArgumentException
-     */
-    public function getNaming($name)
-    {
-        if (isset($this->naming[$name])) {
-            return $this->naming[$name];
-        }
-
-        if (!isset($this->naming['*'])) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s: no naming by name of "%s", and no wildcard naming present',
-                __METHOD__,
-                $name
-            ));
-        }
-
-        return $this->naming['*'];
-    }
-
-    /**
-     * @param $name
-     *
-     * @return bool
-     */
-    public function hasNaming($name)
-    {
-        return array_key_exists($name, $this->naming)
-            || array_key_exists('*', $this->naming);
-    }
-
-    /**
-     * @param                 $name
-     * @param NamingInterface $naming
-     *
-     * @return $this
-     */
-    public function addNaming($name, NamingInterface $naming)
-    {
-        $this->naming[$name] = $naming;
-        return $this;
-    }
-
-    /**
-     * @param $name
-     *
-     * @return $this
-     */
-    public function removeNaming($name)
-    {
-        unset($this->naming[$name]);
-        return $this;
     }
 
     /**
@@ -213,9 +154,8 @@ abstract class AbstractHydrator implements
      */
     public function extractName($name, $object = null)
     {
-        if ($this->hasNaming($name)) {
-            $naming = $this->getNaming($name);
-            $name   = $naming->extract($name, $object);
+        if ($this->hasNamingStrategy()) {
+            $name = $this->getNamingStrategy()->extract($name, $object);
         }
         return $name;
     }
@@ -228,9 +168,8 @@ abstract class AbstractHydrator implements
      */
     public function hydrateName($name, $data = null)
     {
-        if ($this->hasNaming($name)) {
-            $naming = $this->getNaming($name);
-            $name   = $naming->hydrate($name, $data);
+        if ($this->hasNamingStrategy()) {
+            $name = $this->getNamingStrategy()->hydrate($name, $data);
         }
         return $name;
     }
@@ -296,5 +235,51 @@ abstract class AbstractHydrator implements
     public function removeFilter($name)
     {
         return $this->filterComposite->removeFilter($name);
+    }
+
+    /**
+     * Adds the given naming strategy
+     *
+     * @param NamingStrategyInterface $strategy The naming to register.
+     *
+     * @return NamingStrategyEnabledInterface
+     */
+    public function setNamingStrategy(NamingStrategyInterface $strategy)
+    {
+        $this->namingStrategy = $strategy;
+
+        return $this;
+    }
+
+    /**
+     * Gets the naming strategy.
+     *
+     * @return NamingStrategyInterface
+     */
+    public function getNamingStrategy()
+    {
+        return $this->namingStrategy;
+    }
+
+    /**
+     * Checks if a naming strategy exists.
+     *
+     * @return bool
+     */
+    public function hasNamingStrategy()
+    {
+        return isset($this->namingStrategy);
+    }
+
+    /**
+     * Removes the naming with the given name.
+     *
+     * @return NamingStrategyEnabledInterface
+     */
+    public function removeNamingStrategy()
+    {
+        $this->namingStrategy = null;
+
+        return $this;
     }
 }

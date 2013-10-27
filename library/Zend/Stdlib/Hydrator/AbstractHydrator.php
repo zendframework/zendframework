@@ -12,10 +12,15 @@ namespace Zend\Stdlib\Hydrator;
 use ArrayObject;
 use Zend\Stdlib\Exception;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
+use Zend\Stdlib\Hydrator\Naming\NamingInterface;
 use Zend\Stdlib\Hydrator\StrategyEnabledInterface;
 use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
 
-abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInterface, FilterEnabledInterface
+abstract class AbstractHydrator implements
+    HydratorInterface,
+    StrategyEnabledInterface,
+    FilterEnabledInterface,
+    NamingEnabledInterface
 {
     /**
      * The list with strategies that this hydrator has.
@@ -23,6 +28,13 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      * @var ArrayObject
      */
     protected $strategies;
+
+    /**
+     * The list of naming strategies that this hydrator has.
+     *
+     * @var \ArrayObject
+     */
+    protected $naming;
 
     /**
      * Composite to filter the methods, that need to be hydrated
@@ -35,14 +47,74 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      */
     public function __construct()
     {
+        $this->naming = new ArrayObject();
         $this->strategies = new ArrayObject();
         $this->filterComposite = new FilterComposite();
+    }
+
+    /**
+     * @param $name
+     *
+     * @return mixed
+     * @throws \Zend\Stdlib\Exception\InvalidArgumentException
+     */
+    public function getNaming($name)
+    {
+        if (isset($this->naming[$name])) {
+            return $this->naming[$name];
+        }
+
+        if (!isset($this->naming['*'])) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: no naming by name of "%s", and no wildcard naming present',
+                __METHOD__,
+                $name
+            ));
+        }
+
+        return $this->naming['*'];
+    }
+
+    /**
+     * @param $name
+     *
+     * @return bool
+     */
+    public function hasNaming($name)
+    {
+        return array_key_exists($name, $this->naming)
+            || array_key_exists('*', $this->naming);
+    }
+
+    /**
+     * @param                 $name
+     * @param NamingInterface $naming
+     *
+     * @return $this
+     */
+    public function addNaming($name, NamingInterface $naming)
+    {
+        $this->naming[$name] = $naming;
+        return $this;
+    }
+
+    /**
+     * @param $name
+     *
+     * @return $this
+     */
+    public function removeNaming($name)
+    {
+        unset($this->naming[$name]);
+        return $this;
     }
 
     /**
      * Gets the strategy with the given name.
      *
      * @param string $name The name of the strategy to get.
+     *
+     * @throws \Zend\Stdlib\Exception\InvalidArgumentException
      * @return StrategyInterface
      */
     public function getStrategy($name)
@@ -104,7 +176,7 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      *
      * @param  string $name  The name of the strategy to use.
      * @param  mixed  $value  The value that should be converted.
-     * @param  array  $object The object is optionally provided as context.
+     * @param  mixed  $object The object is optionally provided as context.
      * @return mixed
      */
     public function extractValue($name, $value, $object = null)
@@ -131,6 +203,36 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
             $value = $strategy->hydrate($value, $data);
         }
         return $value;
+    }
+
+    /**
+     * @param      $name
+     * @param null $object
+     *
+     * @return mixed
+     */
+    public function extractName($name, $object = null)
+    {
+        if ($this->hasNaming($name)) {
+            $naming = $this->getNaming($name);
+            $name   = $naming->extract($name, $object);
+        }
+        return $name;
+    }
+
+    /**
+     * @param $name
+     * @param $data
+     *
+     * @return mixed
+     */
+    public function hydrateName($name, $data = null)
+    {
+        if ($this->hasNaming($name)) {
+            $naming = $this->getNaming($name);
+            $name   = $naming->hydrate($name, $data);
+        }
+        return $name;
     }
 
     /**

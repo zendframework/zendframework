@@ -19,7 +19,7 @@ use DateTime;
  * function acts likes a factory for the Zend\XmlRpc\Value objects
  *
  * Using this function, users/Zend\XmlRpc\Client object can create the Zend\XmlRpc\Value objects
- * from PHP variables, XML string or by specifying the exact XML-RPC natvie type
+ * from PHP variables, XML string or by specifying the exact XML-RPC native type
  */
 abstract class AbstractValue
 {

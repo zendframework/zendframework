@@ -54,8 +54,8 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     /**
      * Get contents of function
      *
-     * @param  bool   $includeDocBlock
-     * @return string
+     * @param  bool        $includeDocBlock
+     * @return string|bool
      */
     public function getContents($includeDocBlock = true)
     {
@@ -83,13 +83,15 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
             }
         } else {
             $name = substr($this->getName(), strrpos($this->getName(), '\\')+1);
-            preg_match('#function\s+' . $name . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)?}#', $functionLine, $matches);
+            preg_match('#function\s+' . preg_quote($name) . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)?}#', $functionLine, $matches);
             if (isset($matches[0])) {
                 $content = $matches[0];
             }
         }
 
-        return $includeDocBlock && $this->getDocComment() ? $this->getDocComment() . "\n" . $content : $content;
+        $docComment = $this->getDocComment();
+
+        return $includeDocBlock && $docComment ? $docComment . "\n" . $content : $content;
     }
 
     /**
@@ -134,7 +136,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     /**
      * Get method body
      *
-     * @return string
+     * @return string|bool
      */
     public function getBody()
     {

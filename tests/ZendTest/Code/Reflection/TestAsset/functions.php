@@ -66,3 +66,5 @@ function function8() { return 'function8'; } function function9() { return 'func
 function function10() { $closure = function() { return 'function10'; }; return $closure(); } function function11() { return 'function11'; }
 
 function function12() {}
+
+eval('function function13() { return "function13"; }');

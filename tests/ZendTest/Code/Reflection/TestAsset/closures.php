@@ -43,3 +43,5 @@ $function8 = function() use ($list1) { return 'function 8'; };
  * closure doc block
  */
 $function9 = function() {};
+
+eval('$function10 = function() { return \'function10\'; };');

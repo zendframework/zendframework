@@ -114,8 +114,8 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     /**
      * Get method contents
      *
-     * @param  bool   $includeDocBlock
-     * @return string
+     * @param  bool        $includeDocBlock
+     * @return string|bool
      */
     public function getContents($includeDocBlock = true)
     {
@@ -134,21 +134,23 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         );
 
         $functionLine = implode("\n", $lines);
-        preg_match('#[(public|protected|private|abstract|final|static)\s*]+function\s+' . $this->getName() . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)?}#s', $functionLine, $matches);
+        $name         = preg_quote($this->getName());
+        preg_match('#[(public|protected|private|abstract|final|static)\s*]*function\s+' . $name . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)?}#s', $functionLine, $matches);
 
         if (!isset($matches[0])) {
             return false;
         }
 
-        $content = $matches[0];
+        $content    = $matches[0];
+        $docComment = $this->getDocComment();
 
-        return $includeDocBlock && $this->getDocComment() ? $this->getDocComment() . "\n" . $content : $content;
+        return $includeDocBlock && $docComment ? $docComment . "\n" . $content : $content;
     }
 
     /**
      * Get method body
      *
-     * @return string
+     * @return string|bool
      */
     public function getBody()
     {

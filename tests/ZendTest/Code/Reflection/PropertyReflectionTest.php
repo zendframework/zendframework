@@ -11,6 +11,7 @@ namespace ZendTest\Code\Reflection;
 
 use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Annotation\Parser\GenericAnnotationParser;
+use ZendTest\Code\Reflection\TestAsset\InjectablePropertyReflection;
 
 /**
  * @group      Zend_Reflection
@@ -46,5 +47,29 @@ class PropertyReflectionTest extends \PHPUnit_Framework_TestCase
             break;
         }
         $this->assertTrue($found);
+    }
+
+    public function testGetAnnotationsWithNoNameInformations()
+    {
+        $reflectionProperty = new InjectablePropertyReflection(
+            // TestSampleClass5 has the annotations required to get to the
+            // right point in the getAnnotations method.
+            'ZendTest\Code\Reflection\TestAsset\TestSampleClass2',
+            '_prop2'
+        );
+
+        $annotationManager = new \Zend\Code\Annotation\AnnotationManager();
+
+        $fileScanner = $this->getMockBuilder('Zend\Code\Scanner\CachingFileScanner')
+                            ->disableOriginalConstructor()
+                            ->getMock();
+
+        $reflectionProperty->setFileScanner($fileScanner);
+
+        $fileScanner->expects($this->any())
+                    ->method('getClassNameInformation')
+                    ->will($this->returnValue(false));
+
+        $this->assertFalse($reflectionProperty->getAnnotations($annotationManager));
     }
 }

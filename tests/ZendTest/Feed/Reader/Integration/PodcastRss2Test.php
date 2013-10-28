@@ -96,10 +96,12 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals('All About Everything is a show about everything.
+        $expected = 'All About Everything is a show about everything.
             Each week we dive into any subject known to man and talk
             about it as much as we can. Look for our Podcast in the
-            iTunes Store', $feed->getDescription());
+            iTunes Store';
+        $expected = str_replace("\r\n", "\n", $expected);
+        $this->assertEquals($expected, $feed->getDescription());
     }
 
     public function testGetsLanguage()
@@ -205,8 +207,10 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('A short primer on table spices
-            ', $entry->getSubtitle());
+        $expected = 'A short primer on table spices
+            ';
+        $expected = str_replace("\r\n", "\n", $expected);
+        $this->assertEquals($expected, $entry->getSubtitle());
     }
 
     public function testGetsSummary()
@@ -215,10 +219,12 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('This week we talk about salt and pepper
+        $expected = 'This week we talk about salt and pepper
                 shakers, comparing and contrasting pour rates,
                 construction materials, and overall aesthetics. Come and
-                join the party!', $entry->getSummary());
+                join the party!';
+        $expected = str_replace("\r\n", "\n", $expected);
+        $this->assertEquals($expected, $entry->getSummary());
     }
 
     public function testGetsDuration()
@@ -236,8 +242,10 @@ class PodcastRss2Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('salt, pepper, shaker, exciting
-            ', $entry->getKeywords());
+        $expected = 'salt, pepper, shaker, exciting
+            ';
+        $expected = str_replace("\r\n", "\n", $expected);
+        $this->assertEquals($expected, $entry->getKeywords());
     }
 
     public function testGetsEntryEncoding()

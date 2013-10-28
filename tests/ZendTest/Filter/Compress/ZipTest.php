@@ -22,7 +22,7 @@ class ZipTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This adapter needs the zip extension');
         }
 
-        $this->tmp = sys_get_temp_dir() . '/' . str_replace('\\', '_', __CLASS__);
+        $this->tmp = sys_get_temp_dir() . DIRECTORY_SEPARATOR . str_replace('\\', '_', __CLASS__);
 
         $files = array(
             $this->tmp . '/compressed.zip',

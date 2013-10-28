@@ -66,9 +66,9 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
         mkdir($this->_filesPath);
         mkdir($this->_newDir);
 
-        $this->_oldFile    = $this->_filesPath . '/testfile.txt';
-        $this->_newFile    = $this->_filesPath . '/newfile.xml';
-        $this->_newDirFile = $this->_newDir . '/testfile.txt';
+        $this->_oldFile    = $this->_filesPath . DIRECTORY_SEPARATOR . 'testfile.txt';
+        $this->_newFile    = $this->_filesPath . DIRECTORY_SEPARATOR . 'newfile.xml';
+        $this->_newDirFile = $this->_newDir . DIRECTORY_SEPARATOR . 'testfile.txt';
 
         touch($this->_oldFile);
     }

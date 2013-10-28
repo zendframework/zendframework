@@ -209,6 +209,21 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $this->assertXmlRpcType('string', $val);
         $this->assertSame($native, $val->getValue());
     }
+    
+    public function testFactoryAutodetectsStringAndSetsValueInArray()
+    {
+        $val = Zend_XmlRpc_Value::getXmlRpcValue('<value><array><data>'.
+            '<value><i4>8</i4></value>'.
+            '<value>a</value>'.
+            '<value>false</value>'.
+            '</data></array></value>', Zend_XmlRpc_Value::XML_STRING
+        );
+        $this->assertXmlRpcType('array', $val);
+        $a = $val->getValue();
+        $this->assertSame(8, $a[0]);
+        $this->assertSame('a', $a[1]);
+        $this->assertSame('false', $a[2]);
+    }
 
     /**
      * @dataProvider ZendTest\XmlRpc\TestProvider::provideGenerators

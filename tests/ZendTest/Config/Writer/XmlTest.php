@@ -41,7 +41,8 @@ class XmlTest extends AbstractWriterTestCase
 </zend-config>
 
 ECS;
-
+        
+        $expected = str_replace("\r\n", "\n", $expected);
         $this->assertEquals($expected, $configString);
     }
 
@@ -77,7 +78,8 @@ ECS;
 </zend-config>
 
 ECS;
-
+        
+        $expected = str_replace("\r\n", "\n", $expected);
         $this->assertEquals($expected, $configString);
     }
 }

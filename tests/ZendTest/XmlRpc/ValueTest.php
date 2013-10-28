@@ -212,11 +212,11 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     
     public function testFactoryAutodetectsStringAndSetsValueInArray()
     {
-        $val = Zend_XmlRpc_Value::getXmlRpcValue('<value><array><data>'.
+        $val = AbstractValue::getXmlRpcValue('<value><array><data>'.
             '<value><i4>8</i4></value>'.
             '<value>a</value>'.
             '<value>false</value>'.
-            '</data></array></value>', Zend_XmlRpc_Value::XML_STRING
+            '</data></array></value>', AbstractValue::XML_STRING
         );
         $this->assertXmlRpcType('array', $val);
         $a = $val->getValue();

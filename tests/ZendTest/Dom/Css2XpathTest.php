@@ -164,4 +164,16 @@ class Css2XpathTest extends \PHPUnit_Framework_TestCase
         $test = Css2Xpath::transform('*#id');
         $this->assertEquals("//*[@id='id']", $test);
     }
+
+    /**
+     * @group ZF-5310
+     */
+    public function testCanTransformWithAttributeAndDot()
+    {
+        $test = Css2Xpath::transform('a[href="http://example.com"]');
+        $this->assertEquals("//a[@href='http://example.com']", $test);
+
+        $test = Css2Xpath::transform('a[@href="http://example.com"]');
+        $this->assertEquals("//a[@href='http://example.com']", $test);
+    }
 }

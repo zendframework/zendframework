@@ -72,7 +72,7 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
 
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'doSomethingAgain');
         $body = $reflectionMethod->getBody();
-        $this->assertEquals(trim($body), "\$closure = function(\$foo) { return \$foo; };\n        return 'doSomethingAgain';");
+        $this->assertEquals(trim($body), "\$closure = function(\$foo) { return \$foo; };\n\n        return 'doSomethingAgain';");
 
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'doStaticSomething');
         $body = $reflectionMethod->getBody();
@@ -109,10 +109,12 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodContentsReturnWithoutDocBlock()
     {
-        $contents =
-              '    public function doSomething() {' . "\n"
-            . '        return \'doSomething\';' . "\n"
-            . '    }';
+        $contents = <<<CONTENTS
+    public function doSomething()
+    {
+        return 'doSomething';
+    }
+CONTENTS;
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'doSomething');
         $this->assertEquals($contents, $reflectionMethod->getContents(false));
 
@@ -120,12 +122,14 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'doSomethingElse');
         $this->assertEquals($contents, $reflectionMethod->getContents(false));
 
-        $contents =
-              '    public function doSomethingAgain()' . "\n"
-            . '    {' . "\n"
-            . '        $closure = function($foo) { return $foo; };' . "\n"
-            . '        return \'doSomethingAgain\';' . "\n"
-            . '    }';
+        $contents = <<<'CONTENTS'
+    public function doSomethingAgain()
+    {
+        $closure = function($foo) { return $foo; };
+
+        return 'doSomethingAgain';
+    }
+CONTENTS;
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'doSomethingAgain');
         $this->assertEquals($contents, $reflectionMethod->getContents(false));
 
@@ -140,27 +144,39 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $contents = ' public function inline3() { return \'inline3\'; }';
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'inline3');
         $this->assertEquals($contents, $reflectionMethod->getContents(false));
+        
+        $contents = <<<'CONTENTS'
+    public function visibility()
+    {
+        return 'visibility';
+    }
+CONTENTS;
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'visibility');
+        $this->assertEquals($contents, $reflectionMethod->getContents(false));
     }
 
     public function testFunctionContentsReturnWithDocBlock()
     {
-        $contents =
-              '/**' . "\n"
-            . '     * Doc block doSomething' . "\n"
-            . '     * @return string' . "\n"
-            . '     */' . "\n"
-            . '    public function doSomething() {' . "\n"
-            . '        return \'doSomething\';' . "\n"
-            . '    }';
+        $contents = <<<'CONTENTS'
+/**
+     * Doc block doSomething
+     * @return string
+     */
+    public function doSomething()
+    {
+        return 'doSomething';
+    }
+CONTENTS;
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'doSomething');
         $this->assertEquals($contents, $reflectionMethod->getContents(true));
         $this->assertEquals($contents, $reflectionMethod->getContents());
 
-        $contents =
-              '/**' . "\n"
-            . '     * Awesome doc block' . "\n"
-            . '     */' . "\n"
-            . '    public function emptyFunction() {}';
+                $contents = <<<'CONTENTS'
+/**
+     * Awesome doc block
+     */
+    public function emptyFunction() {}
+CONTENTS;
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'emptyFunction');
         $this->assertEquals($contents, $reflectionMethod->getContents(true));
     }

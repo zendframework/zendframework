@@ -44,4 +44,4 @@ $function8 = function() use ($list1) { return 'function 8'; };
  */
 $function9 = function() {};
 
-eval('$function10 = function() { return \'function10\'; };');
+eval("\$function10 = function() { return 'function10'; };");

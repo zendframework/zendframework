@@ -86,10 +86,6 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function12');
         $body = $function->getBody();
         $this->assertEquals("", trim($body));
-
-        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function13');
-        $body = $function->getBody();
-        $this->assertEquals('return "function13";', trim($body));
     }
 
     public function testFunctionClosureBodyReturn()
@@ -190,10 +186,6 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function12');
         $content = $function->getContents(false);
         $this->assertEquals("function function12() {}", trim($content));
-
-        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function13');
-        $content = $function->getContents(false);
-        $this->assertEquals('function function13() { return "function13"; }', trim($content));
     }
 
     public function testFunctionClosureContentsReturnWithoutDocBlock()
@@ -207,6 +199,10 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $function = new FunctionReflection($function9);
         $content = $function->getContents(false);
         $this->assertEquals("function() {}", trim($content));
+        
+        $function = new FunctionReflection($function10);
+        $content = $function->getContents(false);
+        $this->assertEquals("function() { return 'function10'; }", trim($content));
     }
 
     public function testFunctionContentsReturnWithDocBlock()

@@ -66,10 +66,19 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
             );
         }
 
+        $startLine = $this->getStartLine();
+        $endLine = $this->getEndLine();
+
+        // eval'd protect
+        if (preg_match('#\((\d+)\) : eval\(\)\'d code$#', $fileName, $matches)) {
+            $fileName = preg_replace('#\(\d+\) : eval\(\)\'d code$#', '', $fileName);
+            $startLine = $endLine = $matches[1];
+        }
+
         $lines = array_slice(
             file($fileName, FILE_IGNORE_NEW_LINES),
-            $this->getStartLine() - 1,
-            ($this->getEndLine() - ($this->getStartLine() - 1)),
+            $startLine - 1,
+            ($endLine - ($startLine - 1)),
             true
         );
 
@@ -147,10 +156,19 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
             );
         }
 
+        $startLine = $this->getStartLine();
+        $endLine = $this->getEndLine();
+
+        // eval'd protect
+        if (preg_match('#\((\d+)\) : eval\(\)\'d code$#', $fileName, $matches)) {
+            $fileName = preg_replace('#\(\d+\) : eval\(\)\'d code$#', '', $fileName);
+            $startLine = $endLine = $matches[1];
+        }
+
         $lines = array_slice(
             file($fileName, FILE_IGNORE_NEW_LINES),
-            $this->getStartLine() - 1,
-            ($this->getEndLine() - ($this->getStartLine() - 1)),
+            $startLine - 1,
+            ($endLine - ($startLine - 1)),
             true
         );
 

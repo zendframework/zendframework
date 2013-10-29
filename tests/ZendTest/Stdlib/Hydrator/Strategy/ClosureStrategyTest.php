@@ -67,7 +67,7 @@ class ClosureStrategyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \ZendTest\Stdlib\Hydrator\Strategy\ClosureStrategy::extract()
+     * @covers \Zend\Stdlib\Hydrator\Strategy\ClosureStrategy::extract()
      * @dataProvider extractDataProvider
      *
      * @param Callable $extractFunc
@@ -87,7 +87,7 @@ class ClosureStrategyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \ZendTest\Stdlib\Hydrator\Strategy\ClosureStrategy::hydrate()
+     * @covers \Zend\Stdlib\Hydrator\Strategy\ClosureStrategy::hydrate()
      * @dataProvider hydrateDataProvider
      *
      * @param Callable $hydrateFunc

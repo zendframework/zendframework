@@ -56,18 +56,22 @@ abstract class AbstractAccept implements HeaderInterface
 
 
     /**
+     * Parse a full header line or just the field value part.
      *
      * @param string $headerLine
      */
     public function parseHeaderLine($headerLine)
     {
-        $fieldName = $this->getFieldName();
-        $pos = strlen($fieldName) + 2;
-        if (strtolower(substr($headerLine, 0, $pos)) == strtolower($fieldName) . ': ') {
-            $headerLine = substr($headerLine, $pos);
+        if (strpos($headerLine, ':') !== false) {
+            list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
+            if (strtolower($name) !== strtolower($this->getFieldName())) {
+                $value = $headerLine; // This is just for preserve the BC.
+            }
+        } else {
+            $value = $headerLine;
         }
 
-        foreach ($this->getFieldValuePartsFromHeaderLine($headerLine) as $value) {
+        foreach ($this->getFieldValuePartsFromHeaderLine($value) as $value) {
             $this->addFieldValuePartToQueue($value);
         }
     }

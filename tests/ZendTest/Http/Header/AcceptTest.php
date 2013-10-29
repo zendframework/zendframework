@@ -40,6 +40,12 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('xxx', $acceptHeader->getFieldValue());
     }
 
+    public function testAcceptGetFieldValueReturnsProperValueWithAHeaderWithoutSpaces()
+    {
+        $acceptHeader = Accept::fromString('Accept:xxx');
+        $this->assertEquals('xxx', $acceptHeader->getFieldValue());
+    }
+
     public function testAcceptToStringReturnsHeaderFormattedString()
     {
         $acceptHeader = new Accept();

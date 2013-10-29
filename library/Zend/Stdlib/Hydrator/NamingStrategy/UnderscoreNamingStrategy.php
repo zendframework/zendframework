@@ -16,9 +16,10 @@ namespace Zend\Stdlib\Hydrator\NamingStrategy;
 class UnderscoreNamingStrategy implements NamingStrategyInterface
 {
     /**
-     * @param $name
+     * Remove underscores and capitalize letters
      *
-     * @return mixed
+     * @param  string $name
+     * @return string
      */
     public function hydrate($name)
     {
@@ -30,9 +31,10 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
     }
 
     /**
-     * @param $name
+     * Remove capitalized letters and prepend underscores.
      *
-     * @return mixed
+     * @param  string $name
+     * @return string
      */
     public function extract($name)
     {

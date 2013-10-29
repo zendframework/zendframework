@@ -29,7 +29,7 @@ abstract class AbstractHydrator implements
     protected $strategies;
 
     /**
-     * The list of naming strategies that this hydrator has.
+     * An instance of NamingStrategyInterface
      *
      * @var NamingStrategyInterface
      */
@@ -37,6 +37,7 @@ abstract class AbstractHydrator implements
 
     /**
      * Composite to filter the methods, that need to be hydrated
+     *
      * @var Filter\FilterComposite
      */
     protected $filterComposite;
@@ -147,9 +148,10 @@ abstract class AbstractHydrator implements
     }
 
     /**
-     * @param      $name
-     * @param null $object
+     * Convert a name for extraction. If no naming strategy exists, the plain value is returned.
      *
+     * @param string $name    The name to convert.
+     * @param null   $object  The object is optionally provided as context.
      * @return mixed
      */
     public function extractName($name, $object = null)
@@ -161,9 +163,10 @@ abstract class AbstractHydrator implements
     }
 
     /**
-     * @param $name
-     * @param $data
+     * Converts a value for hydration. If no naming strategy exists, the plain value is returned.
      *
+     * @param string $name  The name to convert.
+     * @param array  $data  The whole data is optionally provided as context.
      * @return mixed
      */
     public function hydrateName($name, $data = null)
@@ -241,8 +244,7 @@ abstract class AbstractHydrator implements
      * Adds the given naming strategy
      *
      * @param NamingStrategyInterface $strategy The naming to register.
-     *
-     * @return NamingStrategyEnabledInterface
+     * @return self
      */
     public function setNamingStrategy(NamingStrategyInterface $strategy)
     {
@@ -272,9 +274,9 @@ abstract class AbstractHydrator implements
     }
 
     /**
-     * Removes the naming with the given name.
+     * Removes the naming strategy
      *
-     * @return NamingStrategyEnabledInterface
+     * @return self
      */
     public function removeNamingStrategy()
     {

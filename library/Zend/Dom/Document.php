@@ -11,6 +11,7 @@ namespace Zend\Dom;
 
 use DOMDocument;
 use DOMXPath;
+use Zend\Dom\Document;
 use Zend\Dom\Exception;
 use Zend\Stdlib\ErrorHandler;
 
@@ -25,13 +26,6 @@ class Document
     const DOC_HTML     = 'DOC_HTML';
     const DOC_XHTML    = 'DOC_XHTML';
     const DOC_XML      = 'DOC_XML';
-    /**#@-*/
-
-    /**#@+
-     * Query types
-     */
-    const QUERY_XPATH  = 'QUERY_XPATH';
-    const QUERY_CSS    = 'QUERY_CSS';
     /**#@-*/
 
     /**
@@ -73,19 +67,19 @@ class Document
     /**
      * Constructor
      *
-     * @param string|null  $document
-     * @param string|null  $encoding
+     * @param string|null  $document  String containing the document
+     * @param string|null  $type      Force the document to be of a certain type, bypassing setStringDocument's detection
+     * @param string|null  $encoding  Encoding for the document (used for DOMDocument generation)
      */
-    public function __construct($document = null, $encoding = null)
+    public function __construct($document = null, $type = null, $encoding = null)
     {
-        $this->setStringDocument($document);
-        $this->setEncoding($encoding);
+        $this->setStringDocument($document, $type, $encoding);
     }
 
     /**
      * Get raw set document
      *
-     * @return null|string
+     * @return string|null
      */
     public function getStringDocument()
     {
@@ -95,12 +89,12 @@ class Document
     /**
      * Set raw document
      *
-     * @param null|string  $document
-     * @param null|string  $forcedType      Type for the provided document (see constants)
-     * @param null|string  $forcedEncoding  Encoding for the provided document
+     * @param string|null  $document
+     * @param string|null  $forcedType      Type for the provided document (see constants)
+     * @param string|null  $forcedEncoding  Encoding for the provided document
      * @return self
      */
-    public function setStringDocument($document, $forcedType = null, $forcedEncoding = null)
+    protected function setStringDocument($document, $forcedType = null, $forcedEncoding = null)
     {
         $type = static::DOC_HTML;
         if (strstr($document, 'DTD XHTML')) {
@@ -130,7 +124,7 @@ class Document
     /**
      * Get raw document type
      *
-     * @return null|string
+     * @return string|null
      */
     public function getType()
     {
@@ -153,7 +147,7 @@ class Document
     /**
      * Get DOMDocument generated from set raw document
      *
-     * @return null|string
+     * @return string|null
      * @throws Exception\RuntimeException
      */
     public function getDomDocument()
@@ -185,7 +179,7 @@ class Document
     /**
      * Get set document encoding
      *
-     * @return null|string
+     * @return string|null
      */
     public function getEncoding()
     {
@@ -195,7 +189,7 @@ class Document
     /**
      * Set raw document encoding for DOMDocument generation
      *
-     * @param  null|string $encoding
+     * @param  string|null $encoding
      * @return self
      */
     public function setEncoding($encoding)
@@ -280,25 +274,17 @@ class Document
     /**
      * Perform a query on generated DOMDocument
      *
-     * @param  string $query
+     * @param  Document\Query  $query
      * @param  string $queryType
      * @throws Exception\RuntimeException
      * @return NodeList
      */
-    public function query($query, $queryType = self::QUERY_XPATH)
+    public function execute(Document\Query $query)
     {
-        $domDoc      = $this->getDomDocument();
-        $xpathQuery  = $query;
-        $cssQuery    = null;
+        $domDoc    = $this->getDomDocument();
+        $nodeList  = $this->getNodeList($domDoc, $query->getContent());
 
-        if ($queryType === static::QUERY_CSS) {
-            $xpathQuery = Css2Xpath::transform($query);
-            $cssQuery   = $query;
-        }
-
-        $nodeList  = $this->getNodeList($domDoc, $xpathQuery);
-
-        return new NodeList($cssQuery, $xpathQuery, $domDoc, $nodeList);
+        return new Document\NodeList($nodeList);
     }
 
     /**

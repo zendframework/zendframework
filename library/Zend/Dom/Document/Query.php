@@ -7,29 +7,112 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Dom;
+namespace Zend\Dom\Document;
 
 /**
- * Transform CSS selectors to XPath
- * @deprecated
- * @see \Zend\Dom\Document\Query
+ * Query object executable in a Zend\Dom\Document
  */
-class Css2Xpath
+class Query
 {
+    /**#@+
+     * Query types
+     */
+    const TYPE_XPATH  = 'TYPE_XPATH';
+    const TYPE_CSS    = 'TYPE_CSS';
+    /**#@-*/
+
+    /**
+     * @var string
+     */
+    protected $type;
+
+    /**
+     * @var string
+     */
+    protected $content;
+
+    /**
+     * Constructor
+     *
+     * @param string|null  $content
+     * @param string|null  $type
+     */
+    public function __construct($content, $type = self::TYPE_XPATH)
+    {
+        if ($type === static::TYPE_CSS) {
+            $content = static::cssToXpath($content);
+        }
+        $this->setContent($content);
+        $this->setType($type);
+    }
+
+    /**
+     * Get query content
+     *
+     * @return string|null
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set query content
+     *
+     * @param  string  $content
+     * @return self
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get query type
+     *
+     * @return string|null
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set query type
+     *
+     * @param  string  $type
+     * @return self
+     */
+    public function setType($type)
+    {
+        switch ($type) {
+            case static::TYPE_CSS:
+            case static::TYPE_XPATH:
+                $this->type = $type;
+                break;
+            default:
+                break;
+        }
+
+        return $this;
+    }
+
     /**
      * Transform CSS expression to XPath
      *
      * @param  string $path
      * @return string
      */
-    public static function transform($path)
+    public static function cssToXpath($path)
     {
         $path = (string) $path;
         if (strstr($path, ',')) {
             $paths       = explode(',', $path);
             $expressions = array();
             foreach ($paths as $path) {
-                $xpath = self::transform(trim($path));
+                $xpath = static::cssToXpath(trim($path));
                 if (is_string($xpath)) {
                     $expressions[] = $xpath;
                 } elseif (is_array($xpath)) {

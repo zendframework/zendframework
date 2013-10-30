@@ -7,37 +7,24 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Dom;
+namespace Zend\Dom\Document;
 
 use ArrayAccess;
 use Countable;
-use DOMDocument;
-use DOMNodeList;
 use DOMNode;
+use DOMNodeList;
 use Iterator;
+use Zend\Dom\Exception;
 
 /**
- * Nodelist for DOM XPath query
- * @deprecated
- * @see \Zend\Dom\Document\NodeList
+ * DOMNodeList wrapper for Zend\Dom\Document\Query results
  */
 class NodeList implements Iterator, Countable, ArrayAccess
 {
     /**
-     * CSS Selector query
-     * @var string
-     */
-    protected $cssQuery;
-
-    /**
-     * @var DOMDocument
-     */
-    protected $document;
-
-    /**
      * @var DOMNodeList
      */
-    protected $nodeList;
+    protected $list;
 
     /**
      * Current iterator position
@@ -46,55 +33,13 @@ class NodeList implements Iterator, Countable, ArrayAccess
     protected $position = 0;
 
     /**
-     * XPath query
-     * @var string
-     */
-    protected $xpathQuery;
-
-    /**
      * Constructor
      *
-     * @param string       $cssQuery
-     * @param string|array $xpathQuery
-     * @param DOMDocument  $document
-     * @param DOMNodeList  $nodeList
+     * @param DOMNodeList  $list
      */
-    public function __construct($cssQuery, $xpathQuery, DOMDocument $document, DOMNodeList $nodeList)
+    public function __construct(DOMNodeList $list)
     {
-        $this->cssQuery   = $cssQuery;
-        $this->xpathQuery = $xpathQuery;
-        $this->document   = $document;
-        $this->nodeList   = $nodeList;
-    }
-
-    /**
-     * Retrieve CSS Query
-     *
-     * @return string
-     */
-    public function getCssQuery()
-    {
-        return $this->cssQuery;
-    }
-
-    /**
-     * Retrieve XPath query
-     *
-     * @return string
-     */
-    public function getXpathQuery()
-    {
-        return $this->xpathQuery;
-    }
-
-    /**
-     * Retrieve DOMDocument
-     *
-     * @return DOMDocument
-     */
-    public function getDocument()
-    {
-        return $this->document;
+        $this->list = $list;
     }
 
     /**
@@ -106,7 +51,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
     {
         $this->position = 0;
 
-        return $this->nodeList->item(0);
+        return $this->list->item(0);
     }
 
     /**
@@ -116,7 +61,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      */
     public function valid()
     {
-        if (in_array($this->position, range(0, $this->nodeList->length - 1)) && $this->nodeList->length > 0) {
+        if (in_array($this->position, range(0, $this->list->length - 1)) && $this->list->length > 0) {
             return true;
         }
 
@@ -130,7 +75,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      */
     public function current()
     {
-        return $this->nodeList->item($this->position);
+        return $this->list->item($this->position);
     }
 
     /**
@@ -152,7 +97,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
     {
         ++$this->position;
 
-        return $this->nodeList->item($this->position);
+        return $this->list->item($this->position);
     }
 
     /**
@@ -162,7 +107,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      */
     public function count()
     {
-        return $this->nodeList->length;
+        return $this->list->length;
     }
 
     /**
@@ -173,7 +118,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      */
     public function offsetExists($key)
     {
-        if (in_array($key, range(0, $this->nodeList->length - 1)) && $this->nodeList->length > 0) {
+        if (in_array($key, range(0, $this->list->length - 1)) && $this->list->length > 0) {
             return true;
         }
         return false;
@@ -187,7 +132,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      */
     public function offsetGet($key)
     {
-        return $this->nodeList->item($key);
+        return $this->list->item($key);
     }
 
     /**

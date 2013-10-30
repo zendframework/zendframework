@@ -321,7 +321,7 @@ class FormRow extends AbstractHelper
     }
 
     /**
-     * Retrive if the errors are rendered by this helper
+     * Retrieve if the errors are rendered by this helper
      *
      * @return bool
      */
@@ -343,7 +343,7 @@ class FormRow extends AbstractHelper
     }
 
     /**
-     * Retrive current partial
+     * Retrieve current partial
      *
      * @return null|string
      */

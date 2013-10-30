@@ -152,12 +152,17 @@ class Svg extends AbstractRenderer
         }
         $this->adjustPosition($height, $width);
 
-        $this->appendRootElement('rect',
-                          array('x' => $this->leftOffset,
-                                'y' => $this->topOffset,
-                                'width' => ($this->leftOffset + $barcodeWidth - 1),
-                                'height' => ($this->topOffset + $barcodeHeight - 1),
-                                'fill' => $imageBackgroundColor));
+        $rect = array('x' => $this->leftOffset,
+            'y' => $this->topOffset,
+            'width' => ($this->leftOffset + $barcodeWidth - 1),
+            'height' => ($this->topOffset + $barcodeHeight - 1),
+            'fill' => $imageBackgroundColor);
+
+        if($this->transparentBackground) {
+            $rect['fill-opacity'] = 0;
+        }
+
+        $this->appendRootElement('rect', $rect);
     }
 
     protected function readRootElement()
@@ -292,6 +297,7 @@ class Svg extends AbstractRenderer
      */
     protected function drawPolygon($points, $color, $filled = true)
     {
+        static $runOnce = array();
         $color = 'rgb(' . implode(', ', array(($color & 0xFF0000) >> 16,
                                               ($color & 0x00FF00) >> 8,
                                               ($color & 0x0000FF))) . ')';
@@ -309,6 +315,15 @@ class Svg extends AbstractRenderer
         $newPoints = implode(' ', $newPoints);
         $attributes['points'] = $newPoints;
         $attributes['fill'] = $color;
+
+        // SVG passes a rect in as the first call to drawPolygon, we'll need to intercept
+        // this and set transparency if necessary.
+        if(empty($runOnce['hasRun'])) {
+            if($this->transparentBackground) {
+                $attributes['fill-opacity'] = '0';
+            }
+            $runOnce['hasRun'] = true;
+        }
         $this->appendRootElement('polygon', $attributes);
     }
 

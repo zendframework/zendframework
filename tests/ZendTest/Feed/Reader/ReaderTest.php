@@ -264,6 +264,11 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Reader\Reader::isRegistered('JungleBooks'));
     }
 
+    /**
+     * This test is failing on windows:
+     * Failed asserting that exception of type "Zend\Feed\Reader\Exception\RuntimeException" matches expected exception "Zend\Feed\Reader\Exception\InvalidArgumentException". Message was: "DOMDocument cannot parse XML: Entity 'discloseInfo' failed to parse".
+     * @todo why is the assertEquals commented out?
+     */
     public function testXxePreventionOnFeedParsing()
     {
         $this->setExpectedException('Zend\Feed\Reader\Exception\InvalidArgumentException');

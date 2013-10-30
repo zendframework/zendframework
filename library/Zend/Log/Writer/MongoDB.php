@@ -55,7 +55,7 @@ class MongoDB extends AbstractWriter
         }
         if (is_array($mongo)) {
             parent::__construct($mongo);
-            $saveOptions = isset($mongo['save_options']) ? $mongo['save_options'] : null;
+            $saveOptions = isset($mongo['save_options']) ? $mongo['save_options'] : array();
             $collection  = isset($mongo['collection']) ? $mongo['collection'] : null;
             $database    = isset($mongo['database']) ? $mongo['database'] : null;
             $mongo       = isset($mongo['mongo']) ? $mongo['mongo'] : null;
@@ -74,10 +74,10 @@ class MongoDB extends AbstractWriter
         }
 
         if (!($mongo instanceof MongoClient || $mongo instanceof Mongo)) {
-            throw new Exception\InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Parameter of type %s is invalid; must be MongoClient or Mongo',
                 (is_object($mongo) ? get_class($mongo) : gettype($mongo))
-            );
+            ));
         }
 
         $this->mongoCollection = $mongo->selectCollection($database, $collection);

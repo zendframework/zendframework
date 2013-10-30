@@ -79,4 +79,13 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($reflectionMethod->getAnnotations($annotationManager));
     }
+
+    /**
+     * @group 5062
+     */
+    public function testGetContentsWithCoreClass()
+    {
+        $reflectionMethod = new MethodReflection('DateTime', 'format');
+        $this->assertEquals("", $reflectionMethod->getContents(false));
+    }
 }

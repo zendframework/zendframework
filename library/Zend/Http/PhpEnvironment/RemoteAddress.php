@@ -133,15 +133,21 @@ class RemoteAddress
         $ips = explode(',', $_SERVER[$header]);
         // trim, so we can compare against trusted proxies properly
         $ips = array_map('trim', $ips);
-        // remove trusted proxy IPs, should remain only one IP (the client)
-        $clientIp = array_diff($ips, $this->trustedProxies);
+        // remove trusted proxy IPs
+        $ips = array_diff($ips, $this->trustedProxies);
         
-        // The client IP is always the first in the proxies list
-        if (count($clientIp) === 1 && $clientIp[0] === $ips[0]) {
-            return $clientIp[0];
+        // Any left?
+        if (empty($ips)) {
+            return false;
         }
 
-        return false;
+        // Since we've removed any known, trusted proxy servers, the right-most
+        // address represents the first IP we do not know about -- i.e., we do
+        // not know if it is a proxy server, or a client. As such, we treat it
+        // as the originating IP.
+        // @see http://en.wikipedia.org/wiki/X-Forwarded-For
+        $ip = array_pop($ips);
+        return $ip;
     }
 
 

@@ -14,7 +14,7 @@ use Zend\Http\Headers;
 use Zend\Http\Header\GenericHeader;
 use Zend\Http\PhpEnvironment\RemoteAddress as RemoteAddr;
 
-class RemoteAddress extends TestCase
+class RemoteAddressTest extends TestCase
 {
     /**
      * Original environemnt
@@ -122,8 +122,9 @@ class RemoteAddress extends TestCase
             '192.168.0.10', '10.0.0.1', '10.0.0.2'
         ));
         $_SERVER['REMOTE_ADDR'] = '192.168.0.10';
-        // 1.1.1.1 is the fake IP
+        // 1.1.1.1 is the first IP address from the right not representing a known proxy server; as such, we 
+        // must treat it as a client IP.
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '8.8.8.8, 10.0.0.2, 1.1.1.1, 10.0.0.1';
-        $this->assertEquals('192.168.0.10', $this->remoteAddress->getIpAddress());
+        $this->assertEquals('1.1.1.1', $this->remoteAddress->getIpAddress());
     }
 }   

@@ -710,6 +710,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function dataProviderForRegisterFaultException()
     {
         return array(
+            array('Exception'),
             array('Zend\Soap\Exception\InvalidArgumentException'),
             array('InvalidArgumentException'),
             array('Zend\Server\Exception\RuntimeException'),

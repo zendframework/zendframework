@@ -42,6 +42,7 @@ class XmlTest extends AbstractWriterTestCase
 
 ECS;
 
+        $expected = str_replace("\r\n", "\n", $expected);
         $this->assertEquals($expected, $configString);
     }
 
@@ -78,6 +79,7 @@ ECS;
 
 ECS;
 
+        $expected = str_replace("\r\n", "\n", $expected);
         $this->assertEquals($expected, $configString);
     }
 }

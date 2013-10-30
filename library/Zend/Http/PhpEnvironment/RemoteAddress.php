@@ -118,8 +118,9 @@ class RemoteAddress
      */
     protected function getIpAddressFromProxy()
     {
-        if (!$this->useProxy || !in_array($_SERVER['REMOTE_ADDR'],
-            $this->trustedProxies)) {
+        if (!$this->useProxy 
+            || !in_array($_SERVER['REMOTE_ADDR'], $this->trustedProxies)
+        ) {
             return false;
         }
 

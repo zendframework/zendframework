@@ -114,7 +114,6 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         $returnType = 'mixed';
         $docBlock = $this->getDocBlock();
         if ($docBlock) {
-            /** @var Zend\Code\Reflection\DocBlock\Tag\ReturnTag $return */
             $return = $docBlock->getTag('return');
             $returnTypes = $return->getTypes();
             $returnType = count($returnTypes) > 1 ? implode('|', $returnTypes) : $returnTypes[0];
@@ -185,46 +184,71 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     /**
      * Get method contents
      *
-     * @param  bool   $includeDocBlock
-     * @return string
+     * @param  bool $includeDocBlock
+     * @return string|bool
      */
     public function getContents($includeDocBlock = true)
     {
-        $fileContents = file($this->getFileName());
-        $startNum     = $this->getStartLine($includeDocBlock);
-        $endNum       = ($this->getEndLine() - $this->getStartLine());
+        $fileName     = $this->getFileName();
+        if (false === $fileName) {
+            throw new Exception\InvalidArgumentException(
+                'Cannot determine internals methods contents'
+            );
+        }
 
-        return implode("\n", array_splice($fileContents, $startNum, $endNum, true));
+        $lines = array_slice(
+            file($fileName, FILE_IGNORE_NEW_LINES),
+            $this->getStartLine() - 1,
+            ($this->getEndLine() - ($this->getStartLine() - 1)),
+            true
+        );
+
+        $functionLine = implode("\n", $lines);
+        $name         = preg_quote($this->getName());
+        preg_match('#[(public|protected|private|abstract|final|static)\s*]*function\s+' . $name . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)?}#s', $functionLine, $matches);
+
+        if (!isset($matches[0])) {
+            return false;
+        }
+
+        $content    = $matches[0];
+        $docComment = $this->getDocComment();
+
+        return $includeDocBlock && $docComment ? $docComment . "\n" . $content : $content;
     }
 
     /**
      * Get method body
      *
-     * @return string
+     * @return string|bool
      */
     public function getBody()
     {
+        $fileName = $this->getFileName();
+        if (false === $fileName) {
+            throw new Exception\InvalidArgumentException(
+                'Cannot determine internals functions body'
+            );
+        }
+
         $lines = array_slice(
-            file($this->getDeclaringClass()->getFileName(), FILE_IGNORE_NEW_LINES),
-            $this->getStartLine(),
-            ($this->getEndLine() - $this->getStartLine()),
+            file($fileName, FILE_IGNORE_NEW_LINES),
+            $this->getStartLine() - 1,
+            ($this->getEndLine() - ($this->getStartLine() - 1)),
             true
         );
 
-        $firstLine = array_shift($lines);
+        $functionLine = implode("\n", $lines);
+        $name = preg_quote($this->getName());
+        preg_match('#[(public|protected|private|abstract|final|static)\s*]*function\s+' . $name . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)}#s', $functionLine, $matches);
 
-        if (trim($firstLine) !== '{') {
-            array_unshift($lines, $firstLine);
+        if (!isset($matches[1])) {
+            return false;
         }
 
-        $lastLine = array_pop($lines);
+        $body = $matches[1];
 
-        if (trim($lastLine) !== '}') {
-            array_push($lines, $lastLine);
-        }
-
-        // just in case we had code on the bracket lines
-        return rtrim(ltrim(implode("\n", $lines), '{'), '}');
+        return $body;
     }
 
     public function toString()

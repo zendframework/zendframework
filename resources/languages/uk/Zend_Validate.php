@@ -219,7 +219,7 @@ return array(
     "The input does not appear to be a valid URI hostname" => "Значення не є коректним URI-ім'ям хосту",
     "The input appears to be an IP address, but IP addresses are not allowed" => "Значення є IP-адресою, але IP-адреси не дозволені",
     "The input appears to be a local network name but local network names are not allowed" => "Значення є ім’ям локальної мережі, але імена локальних мереж не дозволені",
-    "The input appears to be a DNS hostname but cannot extract TLD part" => "Значення є DNS-ім’ям хосту, але не вдається визначити домен верхнього рівня",    
+    "The input appears to be a DNS hostname but cannot extract TLD part" => "Значення є DNS-ім’ям хосту, але не вдається визначити домен верхнього рівня",
     "The input appears to be a DNS hostname but cannot match TLD against known list" => "Значення є DNS-ім’ям хосту, але його не вдається співставити із значенням зі списку відомих доменів верхнього рівня",
 
     // Zend\Validator\Iban

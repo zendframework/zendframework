@@ -103,6 +103,7 @@ ADD CONSTRAINT "my_fk" FOREIGN KEY ("other_id") REFERENCES "other_table" ("id") 
 DROP CONSTRAINT "my_index"
 EOS;
 
+        $expected = str_replace("\r\n", "\n", $expected);
         $this->assertEquals($expected, $at->getSqlString());
     }
 }

@@ -66,7 +66,9 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
-        $this->assertEquals($feed->saveXml(), file_get_contents($this->feedSamplePath.'/atom_rewrittenbydom.xml'));
+        $expected = file_get_contents($this->feedSamplePath.'/atom_rewrittenbydom.xml');
+        $expected = str_replace("\r\n", "\n", $expected);
+        $this->assertEquals($expected, $feed->saveXml());
     }
 
     public function testGetsNamedExtension()

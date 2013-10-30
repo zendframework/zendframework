@@ -11,14 +11,6 @@ namespace ZendTest\Soap;
 
 require_once __DIR__ . '/TestAsset/commontypes.php';
 
-//if soap exension is not loaded, this will avoid two notices in the test runner suite
-if(!defined('SOAP_ENCODED')){
-    define ('SOAP_ENCODED', 1);
-}
-if(!defined('SOAP_DOCUMENT')){
-    define ('SOAP_DOCUMENT', 2);
-}
-
 use Zend\Soap\AutoDiscover;
 use Zend\Soap\Client;
 use Zend\Soap\Server;

@@ -491,7 +491,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
             $filter->getFile()
         );
         $fileNoExt = $this->_filesPath . 'newfile';
-        $this->assertRegExp('#' . $fileNoExt . '_.{13}\.xml#', $filter->getNewName($this->_oldFile));
+        $this->assertRegExp('#' . str_replace('\\', '\\\\', $fileNoExt) . '_.{13}\.xml#', $filter->getNewName($this->_oldFile));
     }
 
     /**
@@ -515,7 +515,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
             )),
             $filter->getFile()
         );
-        $this->assertRegExp('#' . $fileNoExt . '_.{13}#', $filter->getNewName($this->_oldFile));
+        $this->assertRegExp('#' . str_replace('\\', '\\\\', $fileNoExt) . '_.{13}#', $filter->getNewName($this->_oldFile));
     }
 
     /**

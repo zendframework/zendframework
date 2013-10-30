@@ -204,8 +204,12 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
 
         $found  = null;
         $foundDepth = -1;
-        $iterator = new RecursiveIteratorIterator($container, RecursiveIteratorIterator::CHILD_FIRST);
+        $iterator = new RecursiveIteratorIterator(
+            $container,
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
 
+        /** @var \Zend\Navigation\Page\AbstractPage $page */
         foreach ($iterator as $page) {
             $currDepth = $iterator->getDepth();
             if ($currDepth < $minDepth || !$this->accept($page)) {
@@ -388,25 +392,12 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      * Returns an HTML string containing an 'a' element for the given page
      *
      * @param  AbstractPage $page  page to generate HTML for
-     * @return string
+     * @return string              HTML string (<a href="…">Label</a>)
      */
     public function htmlify(AbstractPage $page)
     {
-        // get label and title for translating
-        $label = $page->getLabel();
-        $title = $page->getTitle();
-
-        if (null !== ($translator = $this->getTranslator())) {
-            if (null === ($textDomain = $page->getTextDomain())) {
-                $textDomain = $this->getTranslatorTextDomain();
-            }
-            if (is_string($label) && !empty($label)) {
-                $label = $translator->translate($label, $textDomain);
-            }
-            if (is_string($title) && !empty($title)) {
-                $title = $translator->translate($title, $textDomain);
-            }
-        }
+        $label = $this->translate($page->getLabel(), $page->getTextDomain());
+        $title = $this->translate($page->getTitle(), $page->getTextDomain());
 
         // get attribs for anchor element
         $attribs = array(
@@ -417,9 +408,33 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
             'target' => $page->getTarget()
         );
 
+        /** @var \Zend\View\Helper\EscapeHtml $escaper */
         $escaper = $this->view->plugin('escapeHtml');
+        $label   = $escaper($label);
 
-        return '<a' . $this->htmlAttribs($attribs) . '>' . $escaper($label) . '</a>';
+        return '<a' . $this->htmlAttribs($attribs) . '>' . $label . '</a>';
+    }
+
+    /**
+     * Translate a message (for label, title, …)
+     *
+     * @param  string $message    ID of the message to translate
+     * @param  string $textDomain Text domain (category name for the translations)
+     * @return string             Translated message
+     */
+    protected function translate($message, $textDomain = null)
+    {
+        if (is_string($message) && !empty($message)) {
+            if (null !== ($translator = $this->getTranslator())) {
+                if (null === $textDomain) {
+                    $textDomain = $this->getTranslatorTextDomain();
+                }
+
+                return $translator->translate($message, $textDomain);
+            }
+        }
+
+        return $message;
     }
 
     /**

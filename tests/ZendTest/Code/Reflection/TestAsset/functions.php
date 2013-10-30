@@ -9,9 +9,14 @@
 
 namespace ZendTest\Code\Reflection\TestAsset;
 
+/***
+ * /!\ Don't fix this file with the coding style.
+ * The class Zend\Code\Reflection\FunctionReflection must parse a lot of closure formats
+ */
+
 function function1()
 {
-    return 'foo';
+    return 'function1';
 }
 
 
@@ -37,7 +42,27 @@ function function2($one, $two = 'two')
  * @param int $two
  * @return true
  */
-function function6($one, $two = 2)
+function function3($one, $two = 2)
 {
     return true;
 }
+
+function function4($arg) {
+    return 'function4';
+}
+
+function function5() { return 'function5'; }
+
+function function6()
+{
+    $closure = function() { return 'bar'; };
+    return 'function6';
+}
+
+$foo = 'foo'; function function7() { return 'function7'; }
+
+function function8() { return 'function8'; } function function9() { return 'function9'; }
+
+function function10() { $closure = function() { return 'function10'; }; return $closure(); } function function11() { return 'function11'; }
+
+function function12() {}

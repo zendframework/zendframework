@@ -65,18 +65,52 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
      * Get contents of function
      *
      * @param  bool   $includeDocBlock
-     * @return string
+     * @return string|bool
      */
     public function getContents($includeDocBlock = true)
     {
-        return implode("\n",
-            array_splice(
-                file($this->getFileName()),
-                $this->getStartLine($includeDocBlock),
-                ($this->getEndLine() - $this->getStartLine()),
-                true
-            )
+        $fileName = $this->getFileName();
+        if (false === $fileName) {
+            throw new Exception\InvalidArgumentException(
+                'Cannot determine internals functions contents'
+            );
+        }
+
+        $startLine = $this->getStartLine();
+        $endLine = $this->getEndLine();
+
+        // eval'd protect
+        if (preg_match('#\((\d+)\) : eval\(\)\'d code$#', $fileName, $matches)) {
+            $fileName = preg_replace('#\(\d+\) : eval\(\)\'d code$#', '', $fileName);
+            $startLine = $endLine = $matches[1];
+        }
+
+        $lines = array_slice(
+            file($fileName, FILE_IGNORE_NEW_LINES),
+            $startLine - 1,
+            ($endLine - ($startLine - 1)),
+            true
         );
+
+        $functionLine = implode("\n", $lines);
+
+        $content = false;
+        if ($this->isClosure()) {
+            preg_match('#function\s*\([^\)]*\)\s*(use\s*\([^\)]+\))?\s*\{(.*\;)?\s*\}#s', $functionLine, $matches);
+            if (isset($matches[0])) {
+                $content = $matches[0];
+            }
+        } else {
+            $name = substr($this->getName(), strrpos($this->getName(), '\\')+1);
+            preg_match('#function\s+' . preg_quote($name) . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)?}#', $functionLine, $matches);
+            if (isset($matches[0])) {
+                $content = $matches[0];
+            }
+        }
+
+        $docComment = $this->getDocComment();
+
+        return $includeDocBlock && $docComment ? $docComment . "\n" . $content : $content;
     }
 
     /**
@@ -89,7 +123,6 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
         $returnType = 'mixed';
         $docBlock = $this->getDocBlock();
         if ($docBlock) {
-            /** @var Zend\Code\Reflection\DocBlock\Tag\ReturnTag $return */
             $return = $docBlock->getTag('return');
             $returnTypes = $return->getTypes();
             $returnType = count($returnTypes) > 1 ? implode('|', $returnTypes) : $returnTypes[0];
@@ -168,6 +201,55 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
         $tag    = $docBlock->getTag('return');
 
         return new DocBlockReflection('@return ' . $tag->getDescription());
+    }
+
+    /**
+     * Get method body
+     *
+     * @return string|bool
+     */
+    public function getBody()
+    {
+        $fileName = $this->getFileName();
+        if (false === $fileName) {
+            throw new Exception\InvalidArgumentException(
+                'Cannot determine internals functions body'
+            );
+        }
+
+        $startLine = $this->getStartLine();
+        $endLine = $this->getEndLine();
+
+        // eval'd protect
+        if (preg_match('#\((\d+)\) : eval\(\)\'d code$#', $fileName, $matches)) {
+            $fileName = preg_replace('#\(\d+\) : eval\(\)\'d code$#', '', $fileName);
+            $startLine = $endLine = $matches[1];
+        }
+
+        $lines = array_slice(
+            file($fileName, FILE_IGNORE_NEW_LINES),
+            $startLine - 1,
+            ($endLine - ($startLine - 1)),
+            true
+        );
+
+        $functionLine = implode("\n", $lines);
+
+        $body = false;
+        if ($this->isClosure()) {
+            preg_match('#function\s*\([^\)]*\)\s*(use\s*\([^\)]+\))?\s*\{(.*\;)\s*\}#s', $functionLine, $matches);
+            if (isset($matches[2])) {
+                $body = $matches[2];
+            }
+        } else {
+            $name = substr($this->getName(), strrpos($this->getName(), '\\')+1);
+            preg_match('#function\s+' . $name . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)}#', $functionLine, $matches);
+            if (isset($matches[1])) {
+                $body = $matches[1];
+            }
+        }
+
+        return $body;
     }
 
     public function toString()

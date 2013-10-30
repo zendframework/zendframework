@@ -62,12 +62,6 @@ class Image extends AbstractRenderer
     protected $userWidth = 0;
 
     /**
-     * The alpha value of the background
-     * @var int
-     */
-    protected $alpha = 100;
-
-    /**
      * Constructor
      *
      * @param array|\Traversable $options
@@ -154,24 +148,6 @@ class Image extends AbstractRenderer
         }
         $this->resource = $image;
         return $this;
-    }
-
-    public function setAlpha($alpha)
-    {
-        $alpha = (int) $alpha;
-        if($alpha < 0 || $alpha > 100) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid alpha valueprovided to setAlpha(), value must be between 0 (transparent) and 100 (opaque)'
-            );
-        }
-        $this->alpha = $alpha;
-
-        return $this;
-    }
-
-    public function getAlpha()
-    {
-        return $this->alpha;
     }
 
     /**

@@ -101,7 +101,7 @@ class RemoteAddress
         if ($ip) {
             return $ip;
         }
-
+        
         // direct IP address
         if (isset($_SERVER['REMOTE_ADDR'])) {
             return $_SERVER['REMOTE_ADDR'];
@@ -113,16 +113,17 @@ class RemoteAddress
     /**
      * Attempt to get the IP address for a proxied client
      *
+     * @see http://tools.ietf.org/html/draft-ietf-appsawg-http-forwarded-10#section-5.2
      * @return false|string
      */
     protected function getIpAddressFromProxy()
     {
-        if (!$this->useProxy) {
+        if (!$this->useProxy || !in_array($_SERVER['REMOTE_ADDR'],
+            $this->trustedProxies)) {
             return false;
         }
 
         $header = $this->proxyHeader;
-
         if (!isset($_SERVER[$header]) || empty($_SERVER[$header])) {
             return false;
         }
@@ -131,17 +132,15 @@ class RemoteAddress
         $ips = explode(',', $_SERVER[$header]);
         // trim, so we can compare against trusted proxies properly
         $ips = array_map('trim', $ips);
-        // remove trusted proxy IPs
-        $ips = array_diff($ips, $this->trustedProxies);
-
-        // Any left?
-        if (empty($ips)) {
-            return false;
+        // remove trusted proxy IPs, should remain only one IP (the client)
+        $clientIp = array_diff($ips, $this->trustedProxies);
+        
+        // The client IP is always the first in the proxies list
+        if (count($clientIp) === 1 && $clientIp[0] === $ips[0]) {
+            return $clientIp[0];
         }
 
-        // Return right-most
-        $ip  = array_pop($ips);
-        return $ip;
+        return false;
     }
 
 

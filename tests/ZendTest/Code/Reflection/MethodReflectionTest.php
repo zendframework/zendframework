@@ -90,7 +90,7 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'emptyFunction');
         $body = $reflectionMethod->getBody();
         $this->assertEquals(trim($body), "");
-        
+
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'visibility');
         $body = $reflectionMethod->getBody();
         $this->assertEquals(trim($body), "return 'visibility';");
@@ -141,7 +141,7 @@ CONTENTS;
         $contents = ' public function inline3() { return \'inline3\'; }';
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'inline3');
         $this->assertEquals($contents, $reflectionMethod->getContents(false));
-        
+
         $contents = <<<'CONTENTS'
     public function visibility()
     {

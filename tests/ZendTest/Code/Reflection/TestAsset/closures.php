@@ -14,8 +14,7 @@ namespace ZendTest\Code\Reflection\TestAsset;
  * The class Zend\Code\Reflection\FunctionReflection must parse a lot of closure formats
  */
 
-$function1 = function()
-{
+$function1 = function() {
     return 'function1';
 };
 
@@ -25,8 +24,7 @@ $function3 = function($arg) {
     return 'function3';
 };
 
-$function4 = function()
-{
+$function4 = function() {
     $closure = function() { return 'bar'; };
     return 'function4';
 };

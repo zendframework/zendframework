@@ -462,6 +462,36 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $server->loadFunctions($functions);
         $this->assertEquals($functions->toArray(), $server->getFunctions()->toArray());
     }
+
+    /**
+     * @group ZF-4604
+     */
+    public function testAddFunctionAndClassThatContainsConstructor()
+    {
+        $bar = new Bar('unique');
+
+        $this->server->addFunction(array($bar, 'foo'));
+
+        $request = $this->server->getRequest();
+        $request->setMethod('foo')
+            ->setParams(array(true, 'foo', 'bar'))
+            ->setId('foo');
+        ob_start();
+        $this->server->handle();
+        $buffer = ob_get_clean();
+
+        $decoded = Json\Json::decode($buffer, Json\Json::TYPE_ARRAY);
+
+        $this->assertTrue(is_array($decoded));
+        $this->assertTrue(array_key_exists('result', $decoded));
+        $this->assertTrue(array_key_exists('id', $decoded));
+        $this->assertTrue(in_array('unique', $decoded['result']));
+
+        $response = $this->server->getResponse();
+        $this->assertEquals($response->getResult(), $decoded['result']);
+        $this->assertEquals($response->getId(), $decoded['id']);
+
+    }
 }
 
 /**
@@ -480,6 +510,38 @@ class Foo
     public function bar($one, $two = 'two', $three = null)
     {
         return array($one, $two, $three);
+    }
+
+    /**
+     * Baz
+     *
+     * @return void
+     */
+    public function baz()
+    {
+        throw new \Exception('application error');
+    }
+}
+
+class Bar
+{
+    protected $val;
+
+    public function __construct($someval)
+    {
+        $this->val = $someval;
+    }
+    /**
+     * Bar
+     *
+     * @param  bool $one
+     * @param  string $two
+     * @param  mixed $three
+     * @return array
+     */
+    public function foo($one, $two = 'two', $three = null)
+    {
+        return array($one, $two, $three, $this->val);
     }
 
     /**

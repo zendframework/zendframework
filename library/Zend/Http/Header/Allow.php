@@ -54,6 +54,7 @@ class Allow implements HeaderInterface
         }
 
         $header = new static();
+        $header->disallowMethods(array_keys($header->getAllMethods()));
         $header->allowMethods(explode(',', $value));
 
         return $header;

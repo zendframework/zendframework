@@ -28,6 +28,12 @@ class AllowTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($allowHeader->isAllowedMethod('PROCREATE'));
     }
 
+    public function testAllowFromStringWithNonPostMethod()
+    {
+        $allowHeader = Allow::fromString('Allow: GET');
+        $this->assertEquals('GET', $allowHeader->getFieldValue());
+    }
+
     public function testAllowGetFieldNameReturnsHeaderName()
     {
         $allowHeader = new Allow();

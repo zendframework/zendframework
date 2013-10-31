@@ -85,6 +85,7 @@ class RemoteAddrTest extends \PHPUnit_Framework_TestCase
         $_SERVER['REMOTE_ADDR'] = '0.1.2.3';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '1.1.2.3';
         RemoteAddr::setUseProxy(true);
+        RemoteAddr::setTrustedProxies(array('0.1.2.3'));
         $validator = new RemoteAddr();
         $this->assertEquals('1.1.2.3', $validator->getData());
         $this->restore();
@@ -97,6 +98,7 @@ class RemoteAddrTest extends \PHPUnit_Framework_TestCase
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '1.1.2.3';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '2.1.2.3';
         RemoteAddr::setUseProxy(true);
+        RemoteAddr::setTrustedProxies(array('0.1.2.3'));
         $validator = new RemoteAddr();
         $this->assertEquals('2.1.2.3', $validator->getData());
         $this->restore();
@@ -108,6 +110,7 @@ class RemoteAddrTest extends \PHPUnit_Framework_TestCase
         $_SERVER['REMOTE_ADDR'] = '0.1.2.3';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '2.1.2.3, 1.1.2.3';
         RemoteAddr::setUseProxy(true);
+        RemoteAddr::setTrustedProxies(array('0.1.2.3'));
         $validator = new RemoteAddr();
         $this->assertEquals('1.1.2.3', $validator->getData());
         $this->restore();
@@ -121,14 +124,14 @@ class RemoteAddrTest extends \PHPUnit_Framework_TestCase
         $_SERVER['HTTP_CLIENT_IP'] = '0.1.2.4';
         RemoteAddr::setUseProxy(true);
         $validator = new RemoteAddr();
-        $this->assertEquals('1.1.2.3', $validator->getData());
+        $this->assertEquals('0.1.2.3', $validator->getData());
         $this->restore();
     }
 
     public function testWillOmitTrustedProxyIpsFromXForwardedForMatching()
     {
         $this->backup();
-        $_SERVER['REMOTE_ADDR'] = '0.1.2.3';
+        $_SERVER['REMOTE_ADDR'] = '1.1.2.3';
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '2.1.2.3, 1.1.2.3';
         RemoteAddr::setUseProxy(true);
         RemoteAddr::setTrustedProxies(array('1.1.2.3'));
@@ -146,7 +149,7 @@ class RemoteAddrTest extends \PHPUnit_Framework_TestCase
         RemoteAddr::setUseProxy(true);
         RemoteAddr::setProxyHeader('Client-Ip');
         $validator = new RemoteAddr();
-        $this->assertEquals('0.1.2.4', $validator->getData());
+        $this->assertEquals('0.1.2.3', $validator->getData());
         $this->restore();
     }
 }

@@ -101,7 +101,7 @@ class RemoteAddress
         if ($ip) {
             return $ip;
         }
-        
+
         // direct IP address
         if (isset($_SERVER['REMOTE_ADDR'])) {
             return $_SERVER['REMOTE_ADDR'];
@@ -118,7 +118,7 @@ class RemoteAddress
      */
     protected function getIpAddressFromProxy()
     {
-        if (!$this->useProxy 
+        if (!$this->useProxy
             || !in_array($_SERVER['REMOTE_ADDR'], $this->trustedProxies)
         ) {
             return false;
@@ -135,7 +135,7 @@ class RemoteAddress
         $ips = array_map('trim', $ips);
         // remove trusted proxy IPs
         $ips = array_diff($ips, $this->trustedProxies);
-        
+
         // Any left?
         if (empty($ips)) {
             return false;

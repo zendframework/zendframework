@@ -85,7 +85,7 @@ class Css2Xpath
 
         // arbitrary attribute strict equality
         $expression = preg_replace_callback(
-            '|\[([a-z0-9_-]+)=[\'"]([^\'"]+)[\'"]\]|i',
+            '|\[@?([a-z0-9_-]+)=[\'"]([^\'"]+)[\'"]\]|i',
             function ($matches) {
                 return '[@' . strtolower($matches[1]) . "='" . $matches[2] . "']";
             },
@@ -113,11 +113,13 @@ class Css2Xpath
         );
 
         // Classes
-        $expression = preg_replace(
-            '|\.([a-z][a-z0-9_-]*)|i',
-            "[contains(concat(' ', normalize-space(@class), ' '), ' \$1 ')]",
-            $expression
-        );
+        if(false === strpos($expression, "[@")) {
+            $expression = preg_replace(
+                '|\.([a-z][a-z0-9_-]*)|i',
+                "[contains(concat(' ', normalize-space(@class), ' '), ' \$1 ')]",
+                $expression
+            );
+        }
 
         /** ZF-9764 -- remove double asterisk */
         $expression = str_replace('**', '*', $expression);

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Di
  */
 
 namespace ZendTest\Di;
@@ -876,5 +875,36 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di->instanceManager()->addSharedInstance(new $sharedInstanceClass, $sharedInstanceClass);
         $returnedC = $di->get($retrievedInstanceClass, array('params' => array('test')));
         $this->assertInstanceOf($retrievedInstanceClass, $returnedC);
+    }
+
+    public function testGetInstanceWithParamsHasSameNameAsDependencyParam()
+    {
+        $config = new Config(array(
+            'definition' => array(
+                'class' => array(
+                    'ZendTest\Di\TestAsset\AggregateClasses\AggregateItems' => array(
+                        'addItem' => array(
+                            'item' => array('type'=>'ZendTest\Di\TestAsset\AggregateClasses\ItemInterface',
+                                            'required'=>true)
+                        )
+                    )
+                )
+            ),
+            'instance' => array(
+                'ZendTest\Di\TestAsset\AggregateClasses\AggregateItems' => array(
+                    'injections' => array(
+                        'ZendTest\Di\TestAsset\AggregateClasses\Item'
+                    )
+                ),
+                'ZendTest\Di\TestAsset\AggregatedParamClass' => array(
+                    'parameters' => array(
+                        'item' => 'ZendTest\Di\TestAsset\AggregateClasses\AggregateItems'
+                    )
+                )
+            )
+        ));
+
+        $di = new Di(null, null, $config);
+        $this->assertCount(1, $di->get('ZendTest\Di\TestAsset\AggregatedParamClass')->aggregator->items);
     }
 }

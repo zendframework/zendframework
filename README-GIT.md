@@ -89,7 +89,7 @@ can help catch code style issues before committing. Save it as
  * This pre-commit hooks will check for PHP errors (lint), and make sure the
  * code is PSR-2 compliant.
  *
- * Dependecy: PHP-CS-Fixer (https://github.com/fabpot/PHP-CS-Fixer)
+ * Dependency: PHP-CS-Fixer (https://github.com/fabpot/PHP-CS-Fixer)
  *
  * @author  Mardix  http://github.com/mardix
  * @author  Matthew Weier O'Phinney http://mwop.net/
@@ -169,7 +169,7 @@ the following:
 
 If you're tracking other branches -- for example, the "develop" branch, where
 new feature development occurs -- you'll want to do the same operations for that
-branch; simply substibute "develop" for "master".
+branch; simply substitute  "develop" for "master".
 
 ## Working on Zend Framework
 

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Cache
  */
 
 namespace ZendTest\Cache\Pattern;
@@ -24,11 +23,11 @@ class TestCallbackCache
 
     public static function bar()
     {
-        ++self::$fooCounter;
+        ++static::$fooCounter;
         $args = func_get_args();
 
-        echo   'foobar_output('.implode(', ', $args) . ') : ' . self::$fooCounter;
-        return 'foobar_return('.implode(', ', $args) . ') : ' . self::$fooCounter;
+        echo   'foobar_output('.implode(', ', $args) . ') : ' . static::$fooCounter;
+        return 'foobar_return('.implode(', ', $args) . ') : ' . static::$fooCounter;
     }
 
     public static function emptyMethod() {}
@@ -53,9 +52,6 @@ function bar()
 }
 
 /**
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
  * @group      Zend_Cache
  */
 class CallbackCacheTest extends CommonPatternTest

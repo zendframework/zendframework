@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Uri
  */
 
 namespace ZendTest\Uri;
@@ -14,9 +13,6 @@ use Zend\Uri\Mailto as MailtoUri;
 use PHPUnit_Framework_TestCase as TestCase;
 
 /**
- * @category   Zend
- * @package    Zend_Uri
- * @subpackage UnitTests
  * @group      Zend_Uri
  * @group      Zend_Uri_Http
  * @group      Zend_Http

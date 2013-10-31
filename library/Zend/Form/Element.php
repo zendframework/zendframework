@@ -110,6 +110,7 @@ class Element implements
      * Set options for an element. Accepted options are:
      * - label: label to associate with the element
      * - label_attributes: attributes to use when the label is rendered
+     * - label_options: label specific options
      *
      * @param  array|Traversable $options
      * @return Element|ElementInterface

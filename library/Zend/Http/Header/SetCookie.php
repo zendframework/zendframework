@@ -77,6 +77,13 @@ class SetCookie implements MultipleHeaderInterface
     protected $secure = null;
 
     /**
+     * If the value need to be quoted or not
+     *
+     * @var bool
+     */
+    protected $quoteFieldValue = false;
+
+    /**
      * @var bool|null
      */
     protected $httponly = null;
@@ -100,8 +107,9 @@ class SetCookie implements MultipleHeaderInterface
                 $keyValuePairs = preg_split('#;\s*#', $headerLine);
 
                 foreach ($keyValuePairs as $keyValue) {
-                    if (strpos($keyValue, '=')) {
-                        list($headerKey, $headerValue) = preg_split('#=\s*#', $keyValue, 2);
+                    if (preg_match('#^(?<headerKey>[^=]+)=\s*("?)(?<headerValue>[^"]+)\2#',$keyValue,$matches)) {
+                        $headerKey  = $matches['headerKey'];
+                        $headerValue= $matches['headerValue'];
                     } else {
                         $headerKey = $keyValue;
                         $headerValue = null;
@@ -132,8 +140,7 @@ class SetCookie implements MultipleHeaderInterface
             };
         }
 
-        list($name, $value) = explode(':', $headerLine, 2);
-        $value = ltrim($value);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // some sites return set-cookie::value, this is to get rid of the second :
         $name = (strtolower($name) =='set-cookie:') ? 'set-cookie' : $name;
@@ -205,12 +212,11 @@ class SetCookie implements MultipleHeaderInterface
             return '';
         }
 
-        $value = $this->getValue();
-        if (strpos($value, '"')!==false) {
-            $value = '"'.urlencode(str_replace('"', '', $value)).'"';
-        } else {
-            $value = urlencode($value);
+        $value = urlencode($this->getValue());
+        if ( $this->hasQuoteFieldValue() ) {
+            $value = '"'. $value . '"';
         }
+
         $fieldValue = $this->getName() . '=' . $value;
 
         $version = $this->getVersion();
@@ -428,6 +434,18 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
+     * Set whether the value for this cookie should be quoted
+     *
+     * @param  bool $quotedValue
+     * @return SetCookie
+     */
+    public function setQuoteFieldValue($quotedValue)
+    {
+        $this->quoteFieldValue = (bool) $quotedValue;
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function isSecure()
@@ -484,6 +502,16 @@ class SetCookie implements MultipleHeaderInterface
         return ($this->expires === null);
     }
 
+    /**
+     * Check whether the value for this cookie should be quoted
+     *
+     * @return bool
+     */
+    public function hasQuoteFieldValue()
+    {
+        return $this->quoteFieldValue;
+    }
+
     public function isValidForRequest($requestDomain, $path, $isSecure = false)
     {
         if ($this->getDomain() && (strrpos($requestDomain, $this->getDomain()) === false)) {
@@ -505,10 +533,11 @@ class SetCookie implements MultipleHeaderInterface
     /**
      * Checks whether the cookie should be sent or not in a specific scenario
      *
-     * @param string|Zend\Uri\Uri $uri URI to check against (secure, domain, path)
+     * @param string|\Zend\Uri\Uri $uri URI to check against (secure, domain, path)
      * @param bool $matchSessionCookies Whether to send session cookies
      * @param int $now Override the current time when checking for expiry time
      * @return bool
+     * @throws Exception\InvalidArgumentException If URI does not have HTTP or HTTPS scheme.
      */
     public function match($uri, $matchSessionCookies = true, $now = null)
     {
@@ -552,14 +581,6 @@ class SetCookie implements MultipleHeaderInterface
      */
     public static function matchCookieDomain($cookieDomain, $host)
     {
-        if (! $cookieDomain) {
-            throw new Exception\InvalidArgumentException('$cookieDomain is expected to be a cookie domain');
-        }
-
-        if (! $host) {
-            throw new Exception\InvalidArgumentException('$host is expected to be a host name');
-        }
-
         $cookieDomain = strtolower($cookieDomain);
         $host = strtolower($host);
         // Check for either exact match or suffix match
@@ -578,14 +599,6 @@ class SetCookie implements MultipleHeaderInterface
      */
     public static function matchCookiePath($cookiePath, $path)
     {
-        if (! $cookiePath) {
-            throw new Exception\InvalidArgumentException('$cookiePath is expected to be a cookie path');
-        }
-
-        if (! $path) {
-            throw new Exception\InvalidArgumentException('$path is expected to be a host name');
-        }
-
         return (strpos($path, $cookiePath) === 0);
     }
 
@@ -604,7 +617,7 @@ class SetCookie implements MultipleHeaderInterface
                     'The SetCookie multiple header implementation can only accept an array of SetCookie headers'
                 );
             }
-            $headerLine .= ', ' . $header->getFieldValue();
+            $headerLine .= "\n" . $header->toString();
         }
         return $headerLine;
     }

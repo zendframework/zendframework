@@ -187,25 +187,33 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
             return;
         }
 
+        // If there is fewer data and allowRemove is true, we reset the element count
         if (count($data) < $this->getCount()) {
             if (!$this->allowRemove) {
                 throw new Exception\DomainException(sprintf(
                     'There are fewer elements than specified in the collection (%s). Either set the allow_remove option ' .
                     'to true, or re-submit the form.',
                     get_class($this)
-                    )
-                );
+                ));
             }
 
-            // If there are less data and that allowRemove is true, we remove elements that are not presents
             $this->setCount(count($data));
-            foreach ($this->byName as $name => $elementOrFieldset) {
-                if (isset($data[$name])) {
-                    continue;
-                }
+        }
 
-                $this->remove($name);
+        // Check to see if elements have been replaced or removed
+        foreach ($this->byName as $name => $elementOrFieldset) {
+            if (isset($data[$name])) {
+                continue;
             }
+
+            if (!$this->allowRemove) {
+                throw new Exception\DomainException(sprintf(
+                    'Elements have been removed from the collection (%s) but the allow_remove option is not true.',
+                    get_class($this)
+                ));
+            }
+
+            $this->remove($name);
         }
 
         if ($this->targetElement instanceof FieldsetInterface) {
@@ -217,8 +225,10 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
             }
         } else {
             foreach ($this->byName as $name => $element) {
-                $element->setAttribute('value', $data[$name]);
-                unset($data[$name]);
+                if (isset($data[$name])) {
+                    $element->setAttribute('value', $data[$name]);
+                    unset($data[$name]);
+                }
             }
         }
 
@@ -493,7 +503,7 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
     {
 
         if ($this->object instanceof Traversable) {
-            $this->object = ArrayUtils::iteratorToArray($this->object);
+            $this->object = ArrayUtils::iteratorToArray($this->object, false);
         }
 
         if (!is_array($this->object)) {
@@ -514,6 +524,30 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
                     $fieldset = $this->get($key);
                     if ($fieldset instanceof Fieldset && $fieldset->allowObjectBinding($value)) {
                         $fieldset->setObject($value);
+                    }
+                }
+            }
+        }
+
+        // Recursively extract and populate values for nested fieldsets
+        foreach ($this->fieldsets as $fieldset) {
+            $name = $fieldset->getName();
+            if (isset($values[$name])) {
+                $object = $values[$name];
+
+                if ($fieldset->allowObjectBinding($object)) {
+                    $fieldset->setObject($object);
+                    $values[$name] = $fieldset->extract();
+                } else {
+                    foreach ($fieldset->fieldsets as $childFieldset) {
+                        $childName = $childFieldset->getName();
+                        if (isset($object[$childName])) {
+                            $childObject = $object[$childName];
+                            if ($childFieldset->allowObjectBinding($childObject)) {
+                                $fieldset->setObject($childObject);
+                                $values[$name][$childName] = $fieldset->extract();
+                            }
+                        }
                     }
                 }
             }

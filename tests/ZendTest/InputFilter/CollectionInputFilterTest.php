@@ -111,6 +111,10 @@ class CollectionInputFilterTest extends TestCase
 
     public function testInputFilterInputsAppliedToCollection()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->filter->setInputFilter($this->getBaseInputFilter());
 
         $this->assertCount(4, $this->filter->getInputs());
@@ -158,6 +162,10 @@ class CollectionInputFilterTest extends TestCase
 
     public function testCanValidateValidData()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->filter->setInputFilter($this->getBaseInputFilter());
         $this->filter->setData($this->getValidCollectionData());
         $this->assertTrue($this->filter->isValid());
@@ -165,6 +173,10 @@ class CollectionInputFilterTest extends TestCase
 
     public function testCanValidateValidDataWithNonConsecutiveKeys()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $collectionData = $this->getValidCollectionData();
         $collectionData[2] = $collectionData[0];
         unset($collectionData[0]);
@@ -175,6 +187,10 @@ class CollectionInputFilterTest extends TestCase
 
     public function testInvalidDataReturnsFalse()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $invalidCollectionData = array(
             array(
                 'foo' => ' bazbatlong ',
@@ -195,6 +211,10 @@ class CollectionInputFilterTest extends TestCase
 
     public function testDataLessThanCountIsInvalid()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $invalidCollectionData = array(
             array(
                 'foo' => ' bazbat ',
@@ -216,6 +236,10 @@ class CollectionInputFilterTest extends TestCase
 
     public function testGetValues()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $expectedData = array(
             array(
                 'foo' => 'bazbat',
@@ -253,6 +277,10 @@ class CollectionInputFilterTest extends TestCase
 
     public function testGetRawValues()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $expectedData = array(
             array(
                 'foo' => ' bazbat ',
@@ -285,6 +313,10 @@ class CollectionInputFilterTest extends TestCase
 
     public function testGetMessagesForInvalidInputs()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $invalidCollectionData = array(
             array(
                 'foo' => ' bazbattoolong ',
@@ -327,6 +359,10 @@ class CollectionInputFilterTest extends TestCase
 
     public function testSetValidationGroupUsingFormStyle()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         // forms set an array of identical validation groups for each set of data
         $formValidationGroup = array(
             array(
@@ -367,6 +403,10 @@ class CollectionInputFilterTest extends TestCase
 
     public function testEmptyCollectionIsValidByDefault()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $data = array();
 
         $this->filter->setInputFilter($this->getBaseInputFilter());
@@ -377,6 +417,10 @@ class CollectionInputFilterTest extends TestCase
 
     public function testEmptyCollectionIsNotValidIfRequired()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $data = array();
 
         $this->filter->setInputFilter($this->getBaseInputFilter());
@@ -390,5 +434,155 @@ class CollectionInputFilterTest extends TestCase
     {
         $this->filter->setIsRequired(true);
         $this->assertEquals(true,$this->filter->getIsRequired());
+    }
+
+    public function testNestedCollectionWithEmptyChild()
+    {
+        $items_inputfilter = new BaseInputFilter();
+        $items_inputfilter->add(new Input(), 'id')
+                          ->add(new Input(), 'type');
+        $items = new CollectionInputFilter();
+        $items->setInputFilter($items_inputfilter);
+
+        $groups_inputfilter = new BaseInputFilter();
+        $groups_inputfilter->add(new Input(), 'group_class')
+                           ->add($items, 'items');
+        $groups = new CollectionInputFilter();
+        $groups->setInputFilter($groups_inputfilter);
+
+        $inputFilter = new BaseInputFilter();
+        $inputFilter->add($groups, 'groups');
+
+        $preFilterdata = array(
+            'groups' => array(
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 100,
+                            'type' => 'item-1',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 200,
+                            'type' => 'item-2',
+                        ),
+                        array(
+                            'id' => 300,
+                            'type' => 'item-3',
+                        ),
+                        array(
+                            'id' => 400,
+                            'type' => 'item-4',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'biz',
+                ),
+            ),
+        );
+
+        $postFilterdata = array(
+            'groups' => array(
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 100,
+                            'type' => 'item-1',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 200,
+                            'type' => 'item-2',
+                        ),
+                        array(
+                            'id' => 300,
+                            'type' => 'item-3',
+                        ),
+                        array(
+                            'id' => 400,
+                            'type' => 'item-4',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'biz',
+                    'items' => array(),
+                ),
+            ),
+        );
+
+        $inputFilter->setData($preFilterdata);
+        $inputFilter->isValid();
+        $values = $inputFilter->getValues();
+        $this->assertEquals($postFilterdata, $values);
+    }
+
+    public function testNestedCollectionWithEmptyData()
+    {
+        $items_inputfilter = new BaseInputFilter();
+        $items_inputfilter->add(new Input(), 'id')
+                          ->add(new Input(), 'type');
+        $items = new CollectionInputFilter();
+        $items->setInputFilter($items_inputfilter);
+
+        $groups_inputfilter = new BaseInputFilter();
+        $groups_inputfilter->add(new Input(), 'group_class')
+                           ->add($items, 'items');
+        $groups = new CollectionInputFilter();
+        $groups->setInputFilter($groups_inputfilter);
+
+        $inputFilter = new BaseInputFilter();
+        $inputFilter->add($groups, 'groups');
+
+        $data = array(
+            'groups' => array(
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 100,
+                            'type' => 'item-1',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'biz',
+                    'items' => array(),
+                ),
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 200,
+                            'type' => 'item-2',
+                        ),
+                        array(
+                            'id' => 300,
+                            'type' => 'item-3',
+                        ),
+                        array(
+                            'id' => 400,
+                            'type' => 'item-4',
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $inputFilter->setData($data);
+        $inputFilter->isValid();
+        $values = $inputFilter->getValues();
+        $this->assertEquals($data, $values);
     }
 }

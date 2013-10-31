@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -13,11 +12,6 @@ namespace ZendTest\Form\View\Helper;
 use Zend\Form\Element\Radio as RadioElement;
 use Zend\Form\View\Helper\FormRadio as FormRadioHelper;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class FormRadioTest extends CommonTestCase
 {
     public function setUp()

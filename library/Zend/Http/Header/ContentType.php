@@ -28,6 +28,11 @@ class ContentType implements HeaderInterface
     protected $parameters = array();
 
     /**
+     * @var string
+     */
+    protected $value;
+
+    /**
      * Factory method: create an object from a string representation
      *
      * @param  string $headerLine
@@ -35,19 +40,16 @@ class ContentType implements HeaderInterface
      */
     public static function fromString($headerLine)
     {
-        $header = new static();
-
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-type') {
             throw new Exception\InvalidArgumentException('Invalid header line for Content-Type string: "' . $name . '"');
         }
 
-        $header->value     = $value;
         $parts             = explode(';', $value);
         $mediaType         = array_shift($parts);
-        $header->mediaType = trim($mediaType);
+        $header = new static($value, trim($mediaType));
 
         if (count($parts) > 0) {
             $parameters = array();
@@ -62,6 +64,12 @@ class ContentType implements HeaderInterface
         }
 
         return $header;
+    }
+
+    public function __construct($value = null, $mediaType = null)
+    {
+        $this->value = $value;
+        $this->mediaType = $mediaType;
     }
 
     /**

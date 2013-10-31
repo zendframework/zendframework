@@ -17,22 +17,25 @@ namespace Zend\Http\Header;
 class AcceptRanges implements HeaderInterface
 {
 
-    protected $rangeUnit = null;
+    protected $rangeUnit;
 
     public static function fromString($headerLine)
     {
-        $header = new static();
-
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'accept-ranges') {
             throw new Exception\InvalidArgumentException('Invalid header line for Accept-Ranges string');
         }
 
-        $header->rangeUnit = trim($value);
+        $header = new static($value);
 
         return $header;
+    }
+
+    public function __construct($rangeUnit = null)
+    {
+        $this->rangeUnit = $rangeUnit;
     }
 
     public function getFieldName()

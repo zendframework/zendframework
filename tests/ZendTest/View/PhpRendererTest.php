@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View;
@@ -18,9 +17,6 @@ use Zend\View\Variables;
 use Zend\Filter\FilterChain;
 
 /**
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  */
 class PhpRendererTest extends \PHPUnit_Framework_TestCase
@@ -354,6 +350,39 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $this->renderer->vars()->assign(array('foo' => '10 > 9'));
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'could not resolve');
         $test = $this->renderer->render('should-not-find-this');
+    }
+
+    public function invalidTemplateFiles()
+    {
+        return array(
+            array('/does/not/exists'),
+            array('.')
+        );
+    }
+
+    /**
+     * @dataProvider invalidTemplateFiles
+     */
+    public function testRendererRaisesExceptionIfResolvedTemplateIsInvalid($template)
+    {
+        $resolver = new TemplateMapResolver(array(
+            'invalid' => $template,
+        ));
+
+        set_error_handler(function ($errno, $errstr) { return true; }, E_WARNING);
+
+        $this->renderer->setResolver($resolver);
+
+        try {
+            $this->renderer->render('invalid');
+            $caught = false;
+        } catch(\Exception $e) {
+            $caught = $e;
+        }
+
+        restore_error_handler();
+        $this->assertInstanceOf('Zend\View\Exception\UnexpectedValueException', $caught);
+        $this->assertContains('file include failed', $caught->getMessage());
     }
 
     /**

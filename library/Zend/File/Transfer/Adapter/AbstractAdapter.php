@@ -14,7 +14,7 @@ use Zend\File\Transfer;
 use Zend\File\Transfer\Exception;
 use Zend\Filter;
 use Zend\Filter\Exception as FilterException;
-use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorInterface;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Stdlib\ErrorHandler;
 use Zend\Validator;
@@ -73,7 +73,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
     protected $messages = array();
 
     /**
-     * @var Translator
+     * @var TranslatorInterface
      */
     protected $translator;
 
@@ -1004,13 +1004,13 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
     /**
      * Sets translator to use in helper
      *
-     * @param  Translator $translator  [optional] translator.
-     *                                 Default is null, which sets no translator.
-     * @param  string     $textDomain  [optional] text domain
-     *                                 Default is null, which skips setTranslatorTextDomain
+     * @param  TranslatorInterface $translator [optional] translator.
+     *                                          Default is null, which sets no translator.
+     * @param  string     $textDomain          [optional] text domain
+     *                                          Default is null, which skips setTranslatorTextDomain
      * @return AbstractAdapter
      */
-    public function setTranslator(Translator $translator = null, $textDomain = null)
+    public function setTranslator(TranslatorInterface $translator = null, $textDomain = null)
     {
         $this->translator = $translator;
         if (null !== $textDomain) {
@@ -1022,7 +1022,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
     /**
      * Retrieve localization translator object
      *
-     * @return Translator|null
+     * @return TranslatorInterface|null
      */
     public function getTranslator()
     {

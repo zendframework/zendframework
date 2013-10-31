@@ -56,7 +56,9 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
     public function createServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
         $config  = $this->getConfig($services);
-        return new Logger($config[$requestedName]);
+        $config  = $config[$requestedName];
+        $this->processConfig($config, $services);
+        return new Logger($config);
     }
 
     /**
@@ -84,5 +86,36 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
 
         $this->config = $config[$this->configKey];
         return $this->config;
+    }
+
+    protected function processConfig(&$config, ServiceLocatorInterface $services)
+    {
+        if (!isset($config['writers'])) {
+            return;
+        }
+
+        foreach ($config['writers'] as $index => $writerConfig) {
+            if (!isset($writerConfig['name'])
+                || strtolower($writerConfig['name']) != 'db'
+            ) {
+                continue;
+            }
+            if (!isset($writerConfig['options'])
+                || !isset($writerConfig['options']['db'])
+            ) {
+                continue;
+            }
+            if (!is_string($writerConfig['options']['db'])) {
+                continue;
+            }
+            if (!$services->has($writerConfig['options']['db'])) {
+                continue;
+            }
+
+            // Retrieve the DB service from the service locator, and
+            // inject it into the configuration.
+            $db = $services->get($writerConfig['options']['db']);
+            $config['writers'][$index]['options']['db'] = $db;
+        }
     }
 }

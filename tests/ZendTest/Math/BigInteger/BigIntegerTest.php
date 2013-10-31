@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Math
  */
 
 namespace ZendTest\Math\BigInteger;
@@ -15,9 +14,6 @@ use Zend\Math\BigInteger\Adapter;
 use Zend\Math\BigInteger\Adapter\AdapterInterface;
 
 /**
- * @category   Zend
- * @package    Zend_Math_BigInteger
- * @subpackage UnitTests
  * @group      Zend_Math
  */
 class BigIntegerTest extends \PHPUnit_Framework_TestCase

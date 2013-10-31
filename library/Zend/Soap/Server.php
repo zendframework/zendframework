@@ -935,11 +935,11 @@ class Server implements ZendServerServer
     public function registerFaultException($class)
     {
         if (is_array($class)) {
-            foreach($class as $row) {
+            foreach ($class as $row) {
                 $this->registerFaultException($row);
             }
 
-        } elseif (is_string($class) && class_exists($class) && is_subclass_of($class, 'Exception')) {
+        } elseif (is_string($class) && class_exists($class) && (is_subclass_of($class, 'Exception') || 'Exception' === $class)) {
             $ref = new ReflectionClass($class);
 
             $this->faultExceptions[] = $ref->getName();

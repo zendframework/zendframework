@@ -15,12 +15,12 @@ namespace Zend\Http\Header;
  */
 class MaxForwards implements HeaderInterface
 {
+    /** @var string */
+    protected $value;
 
     public static function fromString($headerLine)
     {
-        $header = new static();
-
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'max-forwards') {
@@ -28,9 +28,14 @@ class MaxForwards implements HeaderInterface
         }
 
         // @todo implementation details
-        $header->value = $value;
+        $header = new static($value);
 
         return $header;
+    }
+
+    public function __construct($value = null)
+    {
+        $this->value = $value;
     }
 
     public function getFieldName()

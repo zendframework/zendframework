@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace ZendTest\Filter;
@@ -14,9 +13,6 @@ use Zend\I18n\Filter\Alnum as AlnumFilter;
 use Locale;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class AlnumTest extends \PHPUnit_Framework_TestCase
@@ -56,12 +52,16 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->filter = new AlnumFilter();
 
         $this->locale               = Locale::getDefault();
         $language                   = Locale::getPrimaryLanguage($this->locale);
-        self::$meansEnglishAlphabet = in_array($language, array('ja'));
-        self::$unicodeEnabled       = (@preg_match('/\pL/u', 'a')) ? true : false;
+        static::$meansEnglishAlphabet = in_array($language, array('ja'));
+        static::$unicodeEnabled       = (@preg_match('/\pL/u', 'a')) ? true : false;
     }
 
     /**
@@ -71,7 +71,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
-        if (!self::$unicodeEnabled) {
+        if (!static::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = array(
                 'abc123'  => 'abc123',
@@ -80,7 +80,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
                 'AZ@#4.3' => 'AZ43',
                 ''        => ''
             );
-        } elseif (self::$meansEnglishAlphabet) {
+        } elseif (static::$meansEnglishAlphabet) {
             // The Alphabet means english alphabet.
 
             /**
@@ -123,7 +123,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
     {
         $this->filter->setAllowWhiteSpace(true);
 
-        if (!self::$unicodeEnabled) {
+        if (!static::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $valuesExpected = array(
                 'abc123'  => 'abc123',
@@ -134,7 +134,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
                 "\n"      => "\n",
                 " \t "    => " \t "
             );
-        } elseif (self::$meansEnglishAlphabet) {
+        } elseif (static::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
             $valuesExpected = array(
                 'a B ４5' => 'a B 5',

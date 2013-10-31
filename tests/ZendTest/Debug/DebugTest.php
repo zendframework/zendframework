@@ -5,17 +5,14 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_DebugTest.php
  */
 
 namespace ZendTest;
 
 use Zend\Debug\Debug;
+use Zend\Escaper\Escaper;
 
 /**
- * @category   Zend
- * @package    Zend_Debug
- * @subpackage UnitTests
  * @group      Zend_Debug
  */
 class DebugTest extends \PHPUnit_Framework_TestCase
@@ -96,6 +93,16 @@ class DebugTest extends \PHPUnit_Framework_TestCase
         $result = Debug::dump($a, "LABEL", false);
         $this->assertContains("<pre>", $result);
         $this->assertContains("</pre>", $result);
+    }
+
+    public function testDebugHaveEscaper()
+    {
+        $escaper = new Escaper;
+        Debug::setEscaper($escaper);
+
+        $a = array("a" => "<script type=\"text/javascript\"");
+        $result = Debug::dump($a, "LABEL", false);
+        $this->assertContains("&lt;script type=&quot;text/javascript&quot;&quot;", $result);
     }
 
 }

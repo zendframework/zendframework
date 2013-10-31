@@ -144,7 +144,7 @@ class Menu extends AbstractHelper
         }
 
         $ulClass = $ulClass ? ' class="' . $ulClass . '"' : '';
-        $html = $indent . '<ul' . $ulClass . '>' . self::EOL;
+        $html = $indent . '<ul' . $ulClass . '>' . PHP_EOL;
 
         foreach ($active['page'] as $subPage) {
             if (!$this->accept($subPage)) {
@@ -163,9 +163,9 @@ class Menu extends AbstractHelper
             }
             $liClass = empty($liClasses) ? '' : ' class="' . implode(' ', $liClasses) . '"';
 
-            $html .= $indent . '    <li' . $liClass . '>' . self::EOL;
-            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels, $addClassToListItem) . self::EOL;
-            $html .= $indent . '    </li>' . self::EOL;
+            $html .= $indent . '    <li' . $liClass . '>' . PHP_EOL;
+            $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels, $addClassToListItem) . PHP_EOL;
+            $html .= $indent . '    </li>' . PHP_EOL;
         }
 
         $html .= $indent . '</ul>';
@@ -305,19 +305,19 @@ class Menu extends AbstractHelper
                 } else {
                     $ulClass = '';
                 }
-                $html .= $myIndent . '<ul' . $ulClass . '>' . self::EOL;
+                $html .= $myIndent . '<ul' . $ulClass . '>' . PHP_EOL;
             } elseif ($prevDepth > $depth) {
                 // close li/ul tags until we're at current depth
                 for ($i = $prevDepth; $i > $depth; $i--) {
                     $ind = $indent . str_repeat('        ', $i);
-                    $html .= $ind . '    </li>' . self::EOL;
-                    $html .= $ind . '</ul>' . self::EOL;
+                    $html .= $ind . '    </li>' . PHP_EOL;
+                    $html .= $ind . '</ul>' . PHP_EOL;
                 }
                 // close previous li tag
-                $html .= $myIndent . '    </li>' . self::EOL;
+                $html .= $myIndent . '    </li>' . PHP_EOL;
             } else {
                 // close previous li tag
-                $html .= $myIndent . '    </li>' . self::EOL;
+                $html .= $myIndent . '    </li>' . PHP_EOL;
             }
 
             // render li tag and page
@@ -332,8 +332,8 @@ class Menu extends AbstractHelper
             }
             $liClass = empty($liClasses) ? '' : ' class="' . implode(' ', $liClasses) . '"';
 
-            $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
-                . $myIndent . '        ' . $this->htmlify($page, $escapeLabels, $addClassToListItem) . self::EOL;
+            $html .= $myIndent . '    <li' . $liClass . '>' . PHP_EOL
+                . $myIndent . '        ' . $this->htmlify($page, $escapeLabels, $addClassToListItem) . PHP_EOL;
 
             // store as previous depth for next iteration
             $prevDepth = $depth;
@@ -343,10 +343,10 @@ class Menu extends AbstractHelper
             // done iterating container; close open ul/li tags
             for ($i = $prevDepth+1; $i > 0; $i--) {
                 $myIndent = $indent . str_repeat('        ', $i-1);
-                $html .= $myIndent . '    </li>' . self::EOL
-                    . $myIndent . '</ul>' . self::EOL;
+                $html .= $myIndent . '    </li>' . PHP_EOL
+                    . $myIndent . '</ul>' . PHP_EOL;
             }
-            $html = rtrim($html, self::EOL);
+            $html = rtrim($html, PHP_EOL);
         }
 
         return $html;
@@ -394,6 +394,9 @@ class Menu extends AbstractHelper
             'container' => $container
         );
 
+        /** @var \Zend\View\Helper\Partial $partialHelper */
+        $partialHelper = $this->view->plugin('partial');
+
         if (is_array($partial)) {
             if (count($partial) != 2) {
                 throw new Exception\InvalidArgumentException(
@@ -403,11 +406,9 @@ class Menu extends AbstractHelper
                 );
             }
 
-            $partialHelper = $this->view->plugin('partial');
-            return $partialHelper($partial[0], /*$partial[1], */$model);
+            return $partialHelper($partial[0], $model);
         }
 
-        $partialHelper = $this->view->plugin('partial');
         return $partialHelper($partial, $model);
     }
 
@@ -471,25 +472,10 @@ class Menu extends AbstractHelper
      */
     public function htmlify(AbstractPage $page, $escapeLabel = true, $addClassToListItem = false)
     {
-        // get label and title for translating
-        $label = $page->getLabel();
-        $title = $page->getTitle();
-
-        // translate label and title?
-        if (null !== ($translator = $this->getTranslator())) {
-            $textDomain = $this->getTranslatorTextDomain();
-            if (is_string($label) && !empty($label)) {
-                $label = $translator->translate($label, $textDomain);
-            }
-            if (is_string($title) && !empty($title)) {
-                $title = $translator->translate($title, $textDomain);
-            }
-        }
-
         // get attribs for element
         $attribs = array(
             'id'     => $page->getId(),
-            'title'  => $title,
+            'title'  => $this->translate($page->getTitle(), $page->getTextDomain()),
         );
 
         if ($addClassToListItem === false) {
@@ -506,8 +492,10 @@ class Menu extends AbstractHelper
             $element = 'span';
         }
 
-        $html = '<' . $element . $this->htmlAttribs($attribs) . '>';
+        $html  = '<' . $element . $this->htmlAttribs($attribs) . '>';
+        $label = $this->translate($page->getLabel(), $page->getTextDomain());
         if ($escapeLabel === true) {
+            /** @var \Zend\View\Helper\EscapeHtml $escaper */
             $escaper = $this->view->plugin('escapeHtml');
             $html .= $escaper($label);
         } else {

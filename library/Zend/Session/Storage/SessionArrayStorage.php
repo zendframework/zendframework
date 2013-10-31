@@ -9,7 +9,7 @@
 
 namespace Zend\Session\Storage;
 
-if (version_compare(PHP_VERSION, '5.3.4', 'lt')) {
+if (PHP_VERSION_ID < 50304) {
     class_alias('Zend\Session\Storage\AbstractSessionArrayStorage', 'Zend\Session\Storage\AbstractBaseSessionArrayStorage');
 } else {
     class_alias('Zend\Session\Storage\SessionArrayStorage\PhpReferenceCompatibility', 'Zend\Session\Storage\AbstractBaseSessionArrayStorage');

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace ZendTest\I18n\Translator\Loader;
@@ -22,6 +21,10 @@ class PhpArrayTest extends TestCase
 
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->originalLocale = Locale::getDefault();
         Locale::setDefault('en_EN');
 
@@ -33,9 +36,10 @@ class PhpArrayTest extends TestCase
 
     public function tearDown()
     {
-        Locale::setDefault($this->originalLocale);
-
-        set_include_path($this->originalIncludePath);
+        if (extension_loaded('intl')) {
+            Locale::setDefault($this->originalLocale);
+            set_include_path($this->originalIncludePath);
+        }
     }
 
     public function testLoaderFailsToLoadMissingFile()

@@ -31,7 +31,7 @@ class Json
       *
       * @var int
       */
-    public static $maxRecursionDepthAllowed=25;
+    public static $maxRecursionDepthAllowed = 25;
 
     /**
      * @var bool

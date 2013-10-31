@@ -21,6 +21,11 @@ class XmlTest extends AbstractReaderTestCase
         $this->reader = new Xml();
     }
 
+    public function tearDown()
+    {
+        restore_error_handler();
+    }
+
     /**
      * getTestAssetPath(): defined by AbstractReaderTestCase.
      *

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Dom
  */
 
 namespace ZendTest\Dom;
@@ -17,9 +16,6 @@ use Zend\Dom\Exception\ExceptionInterface as DOMException;
 /**
  * Test class for Zend_Dom_Query.
  *
- * @category   Zend
- * @package    Zend_Dom
- * @subpackage UnitTests
  * @group      Zend_Dom
  */
 class QueryTest extends \PHPUnit_Framework_TestCase
@@ -399,5 +395,18 @@ XML;
         $this->assertEquals(3, $results->count());
 
         unset($results[2]);
+    }
+
+    /**
+     * @group ZF-5310
+     */
+    public function testCssSelectorShouldFindNodesWhenMatchingAttributeValueWithDot()
+    {
+        $this->loadHtml();
+        $results = $this->query->execute('a[href="http://www.about.com"]');
+
+        $this->assertEquals(1, $results->count());
+        $this->assertEquals('About', $results[0]->nodeValue);
+
     }
 }

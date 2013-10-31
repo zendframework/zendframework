@@ -15,6 +15,8 @@ namespace Zend\Http\Header;
  */
 class CacheControl implements HeaderInterface
 {
+    /** @var string */
+    protected $value;
 
     /**
      * Array of Cache-Control directives
@@ -32,17 +34,20 @@ class CacheControl implements HeaderInterface
      */
     public static function fromString($headerLine)
     {
-        $header = new static();
-
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'cache-control') {
             throw new Exception\InvalidArgumentException('Invalid header line for Cache-Control string: "' . $name . '"');
         }
 
+        $directives = static::parseValue($value);
+
         // @todo implementation details
-        $header->directives = static::parseValue($value);
+        $header = new static();
+        foreach ($directives as $key => $value) {
+            $header->addDirective($key, $value);
+        }
 
         return $header;
     }

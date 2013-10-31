@@ -13,7 +13,7 @@ use RecursiveIteratorIterator;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
-use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorInterface;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Navigation;
 use Zend\Navigation\Page\AbstractPage;
@@ -101,7 +101,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     /**
      * Translator (optional)
      *
-     * @var Translator
+     * @var TranslatorInterface
      */
     protected $translator;
 
@@ -204,8 +204,12 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
 
         $found  = null;
         $foundDepth = -1;
-        $iterator = new RecursiveIteratorIterator($container, RecursiveIteratorIterator::CHILD_FIRST);
+        $iterator = new RecursiveIteratorIterator(
+            $container,
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
 
+        /** @var \Zend\Navigation\Page\AbstractPage $page */
         foreach ($iterator as $page) {
             $currDepth = $iterator->getDepth();
             if ($currDepth < $minDepth || !$this->accept($page)) {
@@ -388,23 +392,12 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
      * Returns an HTML string containing an 'a' element for the given page
      *
      * @param  AbstractPage $page  page to generate HTML for
-     * @return string
+     * @return string              HTML string (<a href="…">Label</a>)
      */
     public function htmlify(AbstractPage $page)
     {
-        // get label and title for translating
-        $label = $page->getLabel();
-        $title = $page->getTitle();
-
-        if (null !== ($translator = $this->getTranslator())) {
-            $textDomain = $this->getTranslatorTextDomain();
-            if (is_string($label) && !empty($label)) {
-                $label = $translator->translate($label, $textDomain);
-            }
-            if (is_string($title) && !empty($title)) {
-                $title = $translator->translate($title, $textDomain);
-            }
-        }
+        $label = $this->translate($page->getLabel(), $page->getTextDomain());
+        $title = $this->translate($page->getTitle(), $page->getTextDomain());
 
         // get attribs for anchor element
         $attribs = array(
@@ -415,9 +408,33 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
             'target' => $page->getTarget()
         );
 
+        /** @var \Zend\View\Helper\EscapeHtml $escaper */
         $escaper = $this->view->plugin('escapeHtml');
+        $label   = $escaper($label);
 
-        return '<a' . $this->htmlAttribs($attribs) . '>' . $escaper($label) . '</a>';
+        return '<a' . $this->htmlAttribs($attribs) . '>' . $label . '</a>';
+    }
+
+    /**
+     * Translate a message (for label, title, …)
+     *
+     * @param  string $message    ID of the message to translate
+     * @param  string $textDomain Text domain (category name for the translations)
+     * @return string             Translated message
+     */
+    protected function translate($message, $textDomain = null)
+    {
+        if (is_string($message) && !empty($message)) {
+            if (null !== ($translator = $this->getTranslator())) {
+                if (null === $textDomain) {
+                    $textDomain = $this->getTranslatorTextDomain();
+                }
+
+                return $translator->translate($message, $textDomain);
+            }
+        }
+
+        return $message;
     }
 
     /**
@@ -761,13 +778,13 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     /**
      * Sets translator to use in helper
      *
-     * @param  Translator $translator  [optional] translator.
-     *                                 Default is null, which sets no translator.
-     * @param  string     $textDomain  [optional] text domain
-     *                                 Default is null, which skips setTranslatorTextDomain
+     * @param  TranslatorInterface $translator [optional] translator.
+     *                                          Default is null, which sets no translator.
+     * @param  string              $textDomain [optional] text domain
+     *                                          Default is null, which skips setTranslatorTextDomain
      * @return AbstractHelper
      */
-    public function setTranslator(Translator $translator = null, $textDomain = null)
+    public function setTranslator(TranslatorInterface $translator = null, $textDomain = null)
     {
         $this->translator = $translator;
         if (null !== $textDomain) {
@@ -780,7 +797,7 @@ abstract class AbstractHelper extends View\Helper\AbstractHtmlElement implements
     /**
      * Returns translator used in helper
      *
-     * @return Translator|null
+     * @return TranslatorInterface|null
      */
     public function getTranslator()
     {

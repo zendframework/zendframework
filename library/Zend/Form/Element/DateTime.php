@@ -187,12 +187,6 @@ class DateTime extends Element implements InputProviderInterface
             'required' => true,
             'filters' => array(
                 array('name' => 'Zend\Filter\StringTrim'),
-                array(
-                    'name' => 'Zend\Filter\DateTimeFormatter',
-                    'options' => array(
-                        'format' => $this->getFormat(),
-                    )
-                )
             ),
             'validators' => $this->getValidators(),
         );

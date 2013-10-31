@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\Element;
@@ -17,6 +16,11 @@ class NumberTest extends TestCase
 {
     public function testProvidesInputSpecificationWithDefaultAttributes()
     {
+        if (!extension_loaded('intl')) {
+            // Required by \Zend\I18n\Validator\Float
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $element = new NumberElement();
 
         $inputSpec = $element->getInputSpecification();
@@ -42,6 +46,11 @@ class NumberTest extends TestCase
 
     public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
     {
+        if (!extension_loaded('intl')) {
+            // Required by \Zend\I18n\Validator\Float
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $element = new NumberElement();
         $element->setAttributes(array(
             'inclusive' => true,

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -14,11 +13,6 @@ use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\Form\View\Helper\FormLabel as FormLabelHelper;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- */
 class FormLabelTest extends CommonTestCase
 {
     public function setUp()
@@ -189,5 +183,22 @@ class FormLabelTest extends CommonTestCase
 
         $this->helper->setTranslatorEnabled(false);
         $this->assertFalse($this->helper->isTranslatorEnabled());
+    }
+
+    public function testLabelIsEscapedByDefault()
+    {
+        $element = new Element('foo');
+        $element->setLabel('The value <a>for</a> foo:');
+        $markup = $this->helper->__invoke($element);
+        $this->assertNotContains('<a>for</a>', $markup);
+    }
+
+    public function testCanDisableLabelHtmlEscape()
+    {
+        $element = new Element('foo');
+        $element->setLabel('The value <a>for</a> foo:');
+        $element->setLabelOptions(array('disable_html_escape' => true));
+        $markup = $this->helper->__invoke($element);
+        $this->assertContains('<a>for</a>', $markup);
     }
 }

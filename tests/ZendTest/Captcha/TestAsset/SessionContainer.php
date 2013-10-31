@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Captcha
  */
 
 namespace ZendTest\Captcha\TestAsset;
@@ -17,7 +16,7 @@ class SessionContainer
     public function __get($name)
     {
         if ('word' == $name) {
-            return self::$_word;
+            return static::$_word;
         }
 
         return null;
@@ -26,7 +25,7 @@ class SessionContainer
     public function __set($name, $value)
     {
         if ('word' == $name) {
-            self::$_word = $value;
+            static::$_word = $value;
         } else {
             $this->$name = $value;
         }
@@ -34,7 +33,7 @@ class SessionContainer
 
     public function __isset($name)
     {
-        if (('word' == $name) && (null !== self::$_word))  {
+        if (('word' == $name) && (null !== static::$_word))  {
             return true;
         }
 

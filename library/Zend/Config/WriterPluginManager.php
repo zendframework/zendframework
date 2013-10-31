@@ -14,9 +14,9 @@ use Zend\ServiceManager\AbstractPluginManager;
 class WriterPluginManager extends AbstractPluginManager
 {
     protected $invokableClasses = array(
-        'php'  => 'Zend\Config\Writer\PhpArray',
         'ini'  => 'Zend\Config\Writer\Ini',
         'json' => 'Zend\Config\Writer\Json',
+        'php'  => 'Zend\Config\Writer\PhpArray',
         'yaml' => 'Zend\Config\Writer\Yaml',
         'xml'  => 'Zend\Config\Writer\Xml',
     );

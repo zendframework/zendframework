@@ -479,7 +479,7 @@ class RedisResourceManager
     {
         if (!$this->hasResource($id)) {
             return $this->setResource($id, array(
-                'database' => (int)$database,
+                'database' => (int) $database,
             ));
         }
 
@@ -533,7 +533,7 @@ class RedisResourceManager
         }
 
         $resource = & $this->resources[$id];
-        return (int)$resource['version'];
+        return (int) $resource['version'];
     }
 
     /**

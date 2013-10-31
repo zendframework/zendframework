@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace ZendTest\I18n\View\Helper;
@@ -18,9 +17,6 @@ use Zend\I18n\View\Helper\DateFormat as DateFormatHelper;
 /**
  * Test class for Zend_View_Helper_Currency
  *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -39,6 +35,10 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->helper = new DateFormatHelper();
     }
 
@@ -55,6 +55,14 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
 
     public function dateTestsDataProvider()
     {
+        if (!extension_loaded('intl')) {
+            if (version_compare(\PHPUnit_Runner_Version::VERSION, '3.8.0-dev') === 1) {
+                $this->markTestSkipped('ext/intl not enabled');
+            } else {
+                return array(array());
+            }
+        }
+
         $date = new DateTime('2012-07-02T22:44:03Z');
 
         return array(
@@ -147,6 +155,14 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
 
     public function dateTestsDataProviderWithPattern()
     {
+        if (!extension_loaded('intl')) {
+            if (version_compare(\PHPUnit_Runner_Version::VERSION, '3.8.0-dev') === 1) {
+                $this->markTestSkipped('ext/intl not enabled');
+            } else {
+                return array(array());
+            }
+        }
+
         $date = new DateTime('2012-07-02T22:44:03Z');
 
         return array(

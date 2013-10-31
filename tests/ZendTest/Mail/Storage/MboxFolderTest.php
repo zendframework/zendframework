@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace ZendTest\Mail\Storage;
@@ -14,9 +13,6 @@ use Zend\Config;
 use Zend\Mail\Storage\Folder;
 
 /**
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
  * @group      Zend_Mail
  */
 class MboxFolderTest extends \PHPUnit_Framework_TestCase

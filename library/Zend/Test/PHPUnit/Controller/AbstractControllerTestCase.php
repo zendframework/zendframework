@@ -212,15 +212,15 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
         }
 
         if ($method == HttpRequest::METHOD_POST) {
-            if (count($params) != 0){
+            if (count($params) != 0) {
                 $post = $params;
             }
         } elseif ($method == HttpRequest::METHOD_GET) {
             $query = array_merge($query, $params);
         } elseif ($method == HttpRequest::METHOD_PUT) {
-            if (count($params) != 0){
+            if (count($params) != 0) {
                 array_walk($params,
-                    function(&$item, $key) { $item = $key . '=' . $item; }
+                    function (&$item, $key) { $item = $key . '=' . $item; }
                 );
                 $content = implode('&', $params);
                 $request->setContent($content);
@@ -462,7 +462,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     {
         $routeMatch           = $this->getApplication()->getMvcEvent()->getRouteMatch();
         $controllerIdentifier = $routeMatch->getParam('controller');
-        $controllerManager    = $this->getApplicationServiceLocator()->get('ControllerLoader');
+        $controllerManager    = $this->getApplicationServiceLocator()->get('ControllerManager');
         $controllerClass      = $controllerManager->get($controllerIdentifier);
         return get_class($controllerClass);
     }
@@ -664,5 +664,47 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             ));
         }
         $this->assertNotEquals($route, $match);
+    }
+
+    /**
+     * Assert template name
+     * Assert that a template was used somewhere in the view model tree
+     *
+     * @param  string $templateName
+     */
+    public function assertTemplateName($templateName)
+    {
+        $viewModel = $this->getApplication()->getMvcEvent()->getViewModel();
+        $this->assertTrue($this->searchTemplates($viewModel, $templateName));
+    }
+
+    /**
+     * Assert not template name
+     * Assert that a template was not used somewhere in the view model tree
+     *
+     * @param  string $templateName
+     */
+    public function assertNotTemplateName($templateName)
+    {
+        $viewModel = $this->getApplication()->getMvcEvent()->getViewModel();
+        $this->assertFalse($this->searchTemplates($viewModel, $templateName));
+    }
+
+    /**
+     * Recursively search a view model and it's children for the given templateName
+     *
+     * @param ViewModel $viewModel
+     * @param string $templateName
+     * @return boolean
+     */
+    protected function searchTemplates($viewModel, $templateName)
+    {
+        if ($viewModel->getTemplate($templateName) == $templateName){
+            return true;
+        }
+        foreach ($viewModel->getChildren() as $child){
+            return $this->searchTemplates($child, $templateName);
+        }
+        return false;
     }
 }

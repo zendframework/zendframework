@@ -17,6 +17,40 @@ DD MMM YYY
 
 ### UPDATES IN 2.3.0
 
+- [#5043](https://github.com/zendframework/zf2/pull/5043) introduced changes in
+  how DocBlock tag instances are returned via the `Zend\Code\Reflection`
+  component. These instances are rarely created manually; however, if you are
+  doing so, please note the following API changes:
+  - `Zend\Code\Generator\DocBlock\Tag\AuthorTag`: removed `set/getDatatype()` and
+    `set/getParamName()`
+  - `Zend\Code\Generator\DocBlock\Tag\AuthorTag`: `__construct` changed from
+    `($options = array())` to `($authorName = null, $authorEmail = null)`
+  - `Zend\Code\Generator\DocBlock\Tag\LicenseTag`: `__construct` changed from
+    `($options = array())` to `($url = null, $licenseName = null)`
+  - `Zend\Code\Generator\DocBlock\Tag\ReturnTag`: `__construct` changed from
+    `($options = array())` to `($types = array(), $description = null)`
+  - `Zend\Code\Generator\DocBlock\Tag\ParamTag`: `__construct` changed from
+    `($options = array())` to `($variableName = null, $types = array(),
+    $description = null)`
+  - Using `DocBlockGenerator::fromReflection()` and afterwards `getTags()` is now
+    returning the new `Tag` classes (`ReturnTag`, `AuthorTag`, `ParamTag`, ...)
+    where applicable and otherwise `GenericTag`. The deprecated class `Tag` will
+    not be returned anymore.
+- [#5101](https://github.com/zendframework/zf2/pull/5101) introduces a behavior
+  change in the FormLabel view helper: it now escapes the label content by
+  default. If you wish to disable escaping, you need to either pass the label
+  option `disable_html_escape` to the form element, or call the
+  `setEscapeHtmlHelper(false)` method on the `formLabel()` view helper.
+- [#4962](https://github.com/zendframework/zf2/pull/4962) adds a service alias
+  from "ControllerManager" to "ControllerLoader", and updates code to reference
+
+This is the sixth maintenance release for the 2.2 series.
+
+DD MMM YYYY
+
+### UPDATES IN 2.2.6
+>>>>>>> version/bump
+
 Please see [CHANGELOG.md](CHANGELOG.md).
 
 ### SYSTEM REQUIREMENTS

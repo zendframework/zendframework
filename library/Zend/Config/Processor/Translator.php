@@ -11,12 +11,12 @@ namespace Zend\Config\Processor;
 
 use Zend\Config\Config;
 use Zend\Config\Exception;
-use Zend\I18n\Translator\Translator as ZendTranslator;
+use Zend\I18n\Translator\TranslatorInterface;
 
 class Translator implements ProcessorInterface
 {
     /**
-     * @var ZendTranslator
+     * @var TranslatorInterface
      */
     protected $translator;
 
@@ -34,11 +34,11 @@ class Translator implements ProcessorInterface
      * Translator uses the supplied Zend\I18n\Translator\Translator to find
      * and translate language strings in config.
      *
-     * @param  ZendTranslator $translator
-     * @param  string $textDomain
-     * @param  string|null $locale
+     * @param  TranslatorInterface $translator
+     * @param  string              $textDomain
+     * @param  string|null         $locale
      */
-    public function __construct(ZendTranslator $translator, $textDomain = 'default', $locale = null)
+    public function __construct(TranslatorInterface $translator, $textDomain = 'default', $locale = null)
     {
         $this->setTranslator($translator);
         $this->setTextDomain($textDomain);
@@ -46,17 +46,17 @@ class Translator implements ProcessorInterface
     }
 
     /**
-     * @param  ZendTranslator $translator
+     * @param  TranslatorInterface $translator
      * @return Translator
      */
-    public function setTranslator(ZendTranslator $translator)
+    public function setTranslator(TranslatorInterface $translator)
     {
         $this->translator = $translator;
         return $this;
     }
 
     /**
-     * @return ZendTranslator
+     * @return TranslatorInterface
      */
     public function getTranslator()
     {

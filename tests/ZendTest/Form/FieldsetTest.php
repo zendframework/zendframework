@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form;
@@ -16,11 +15,6 @@ use Zend\Form\Form;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilter;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class FieldsetTest extends TestCase
 {
     public function setUp()
@@ -91,6 +85,21 @@ class FieldsetTest extends TestCase
     {
         $form = new TestAsset\FormCollection();
         $form->populateValues(array('fieldsets' => array()));
+    }
+
+    public function testExtractOnAnEmptyTraversable()
+    {
+        $form = new TestAsset\FormCollection();
+        $form->populateValues(new \ArrayObject(array('fieldsets' => new \ArrayObject())));
+    }
+
+    public function testTraversableAcceptedValueForFieldset()
+    {
+        $subValue = new \ArrayObject(array('field' => 'value'));
+        $subFieldset = new TestAsset\ValueStoringFieldset('subFieldset');
+        $this->fieldset->add($subFieldset);
+        $this->fieldset->populateValues(array('subFieldset' => $subValue));
+        $this->assertEquals($subValue, $subFieldset->getStoredValue());
     }
 
     public function testPopulateValuesWithInvalidElementRaisesException()

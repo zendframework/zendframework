@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc\View\Console;
@@ -19,11 +18,6 @@ use Zend\Mvc\View\Console\ExceptionStrategy;
 use Zend\View\Model;
 use Zend\View\Model\ConsoleModel;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage UnitTest
- */
 class ExceptionStrategyTest extends TestCase
 {
     protected $strategy;
@@ -165,7 +159,7 @@ class ExceptionStrategyTest extends TestCase
     {
         $errors = array(Application::ERROR_CONTROLLER_NOT_FOUND, Application::ERROR_CONTROLLER_INVALID, Application::ERROR_ROUTER_NO_MATCH);
 
-        foreach($errors as $error) {
+        foreach ($errors as $error) {
             $events = new EventManager();
             $events->attachAggregate($this->strategy);
 
@@ -184,7 +178,7 @@ class ExceptionStrategyTest extends TestCase
     {
         $errors = array(Application::ERROR_EXCEPTION, 'user-defined-error');
 
-        foreach($errors as $error) {
+        foreach ($errors as $error) {
             $events = new EventManager();
             $events->attachAggregate($this->strategy);
 
@@ -219,7 +213,7 @@ class ExceptionStrategyTest extends TestCase
 
         $events->trigger($event, null, array('exception'=>$exception)); //$this->strategy->prepareExceptionViewModel($event);
 
-        foreach($messages as $message) {
+        foreach ($messages as $message) {
             $this->assertContains($message, $event->getResult()->getResult(), sprintf('Not all errors are rendered'));
         }
     }

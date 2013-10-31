@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View\Strategy;
@@ -22,11 +21,6 @@ use Zend\View\Strategy\JsonStrategy;
 use Zend\View\ViewEvent;
 use Zend\Stdlib\Parameters;
 
-/**
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTest
- */
 class JsonStrategyTest extends TestCase
 {
     public function setUp()

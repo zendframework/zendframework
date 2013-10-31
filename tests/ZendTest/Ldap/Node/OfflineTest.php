@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace ZendTest\Ldap\Node;
@@ -14,9 +13,6 @@ use Zend\Ldap;
 use ZendTest\Ldap as TestLdap;
 
 /**
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
  * @group      Zend_Ldap
  * @group      Ldap\Node
  */
@@ -152,7 +148,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     {
         $node = $this->createTestNode();
         $this->assertEquals('cn=name,dc=example,dc=org', $node->toString());
-        $this->assertEquals('cn=name,dc=example,dc=org', (string)$node);
+        $this->assertEquals('cn=name,dc=example,dc=org', (string) $node);
     }
 
     public function testToArray()
@@ -387,9 +383,9 @@ class OfflineTest extends TestLdap\AbstractTestCase
     public function testDeleteUnusedAttribute()
     {
         $node = $this->createTestNode();
-        $node->deleteAttribute('nonexistant');
+        $node->deleteAttribute('nonexistent');
         $changedData = $node->getChangedData();
-        $this->assertArrayNotHasKey('nonexistant', $changedData);
+        $this->assertArrayNotHasKey('nonexistent', $changedData);
     }
 
     public function testRenameNodeString()

@@ -5,18 +5,14 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace ZendTest\Code\Reflection;
 
 use Zend\Code\Reflection\ClassReflection;
-
+use ZendTest\Code\Reflection\TestAsset\InjectableClassReflection;
 
 /**
- * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
  *
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Class
@@ -150,11 +146,32 @@ EOS;
         $this->assertEquals(5, $reflectionClass->getStartLine(true));
     }
 
-
     public function testGetDeclaringFileReturnsFilename()
     {
         $reflectionClass = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2');
         $this->assertContains('TestSampleClass2.php', $reflectionClass->getDeclaringFile()->getFileName());
     }
 
+    public function testGetAnnotationsWithNoNameInformations()
+    {
+        $reflectionClass = new InjectableClassReflection(
+            // TestSampleClass5 has the annotations required to get to the
+            // right point in the getAnnotations method.
+            'ZendTest\Code\Reflection\TestAsset\TestSampleClass5'
+        );
+
+        $annotationManager = new \Zend\Code\Annotation\AnnotationManager();
+
+        $fileScanner = $this->getMockBuilder('Zend\Code\Scanner\FileScanner')
+                            ->disableOriginalConstructor()
+                            ->getMock();
+
+        $reflectionClass->setFileScanner($fileScanner);
+
+        $fileScanner->expects($this->any())
+                    ->method('getClassNameInformation')
+                    ->will($this->returnValue(false));
+
+        $this->assertFalse($reflectionClass->getAnnotations($annotationManager));
+    }
 }

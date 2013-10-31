@@ -34,9 +34,28 @@ class GenericHeader implements HeaderInterface
      */
     public static function fromString($headerLine)
     {
-        list($fieldName, $fieldValue) = explode(': ', $headerLine, 2);
+        list($fieldName, $fieldValue) = GenericHeader::splitHeaderLine($headerLine);
         $header = new static($fieldName, $fieldValue);
         return $header;
+    }
+
+    /**
+     * Splits the header line in `name` and `value` parts.
+     *
+     * @param string $headerLine
+     * @return string[] `name` in the first index and `value` in the second.
+     * @throws Exception\InvalidArgumentException If header does not match with the format ``name:value``
+     */
+    public static function splitHeaderLine($headerLine)
+    {
+        $parts = explode(':', $headerLine, 2);
+        if (count($parts) !== 2) {
+            throw new Exception\InvalidArgumentException('Header must match with the format "name:value"');
+        }
+
+        $parts[1] = ltrim($parts[1]);
+
+        return $parts;
     }
 
     /**
@@ -61,7 +80,7 @@ class GenericHeader implements HeaderInterface
      *
      * @param  string $fieldName
      * @return GenericHeader
-     * @throws Exception\InvalidArgumentException(
+     * @throws Exception\InvalidArgumentException If the name does not match with RFC 2616 format.
      */
     public function setFieldName($fieldName)
     {
@@ -70,12 +89,19 @@ class GenericHeader implements HeaderInterface
         }
 
         // Pre-filter to normalize valid characters, change underscore to dash
-        $fieldName = str_replace(' ', '-', ucwords(str_replace(array('_', '-'), ' ', $fieldName)));
+        $fieldName = str_replace('_', '-', $fieldName);
 
-        // Validate what we have
-        if (!preg_match('/^[a-z][a-z0-9-]*$/i', $fieldName)) {
+        /*
+         * Following RFC 2616 section 4.2
+         *
+         * message-header = field-name ":" [ field-value ]
+         * field-name     = token
+         *
+         * @see http://tools.ietf.org/html/rfc2616#section-2.2 for token definition.
+         */
+        if (!preg_match('/^[!#-\'*+\-\.0-9A-Z\^-z|~]+$/', $fieldName)) {
             throw new Exception\InvalidArgumentException(
-                'Header name must start with a letter, and consist of only letters, numbers, and dashes'
+                'Header name must be a valid RFC 2616 (section 4.2) field-name.'
             );
         }
 

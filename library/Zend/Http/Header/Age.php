@@ -21,7 +21,7 @@ class Age implements HeaderInterface
      *
      * @var int
      */
-    protected $deltaSeconds = null;
+    protected $deltaSeconds;
 
     /**
      * Create Age header from string
@@ -32,18 +32,23 @@ class Age implements HeaderInterface
      */
     public static function fromString($headerLine)
     {
-        $header = new static();
-
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'age') {
             throw new Exception\InvalidArgumentException('Invalid header line for Age string: "' . $name . '"');
         }
 
-        $header->deltaSeconds = (int) $value;
+        $header = new static($value);
 
         return $header;
+    }
+
+    public function __construct($deltaSeconds = null)
+    {
+        if ($deltaSeconds) {
+            $this->setDeltaSeconds($deltaSeconds);
+        }
     }
 
     /**

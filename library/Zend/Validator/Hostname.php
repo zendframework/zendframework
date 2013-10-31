@@ -405,7 +405,7 @@ class Hostname extends AbstractValidator
      * @param  bool $useIdnCheck Set to true to validate IDN domains
      * @return Hostname
      */
-    public function useIdnCheck ($useIdnCheck)
+    public function useIdnCheck($useIdnCheck)
     {
         $this->options['useIdnCheck'] = (bool) $useIdnCheck;
         return $this;
@@ -429,7 +429,7 @@ class Hostname extends AbstractValidator
      * @param  bool $useTldCheck Set to true to validate TLD elements
      * @return Hostname
      */
-    public function useTldCheck ($useTldCheck)
+    public function useTldCheck($useTldCheck)
     {
         $this->options['useTldCheck'] = (bool) $useTldCheck;
         return $this;

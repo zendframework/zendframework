@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Tag
  */
 
 namespace ZendTest\Tag;
@@ -14,14 +13,11 @@ use Zend\Tag;
 use Zend\Tag\Exception\InvalidArgumentException;
 
 /**
- * @category   Zend
- * @package    Zend_Tag
- * @subpackage UnitTests
  * @group      Zend_Tag
  */
 class ItemTest extends \PHPUnit_Framework_TestCase
 {
-    public function testConstuctor()
+    public function testConstructor()
     {
         $tag = new Tag\Item(array(
             'title' => 'foo',

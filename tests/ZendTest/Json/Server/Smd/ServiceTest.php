@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
  */
 
 namespace ZendTest\Json\Server\Smd;
@@ -16,9 +15,6 @@ use Zend\Json\Server;
 /**
  * Test class for Zend_JSON_Server_Smd_Service
  *
- * @category   Zend
- * @package    Zend_JSON_Server
- * @subpackage UnitTests
  * @group      Zend_JSON
  * @group      Zend_JSON_Server
  */
@@ -47,16 +43,43 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $service = new Service(null);
     }
 
-    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormat()
+    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithInt()
     {
         $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
         $this->service->setName('0ab-?');
     }
 
-    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithInt()
+    public function testSettingNameShouldNotThrowExceptionWhenContainingValidFormatStartingWithUnderscore()
+    {
+        $this->service->setName('_getMyProperty');
+        $this->assertEquals('_getMyProperty', $this->service->getName());
+    }
+
+    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithRpc()
     {
         $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
-        $this->service->setName('0ab-?');
+        $this->service->setName('rpc.Foo');
+    }
+
+    public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithRpcWithoutPeriodChar()
+    {
+        $this->service->setName('rpcFoo');
+        $this->assertEquals('rpcFoo', $this->service->getName());
+    }
+
+    public function testSettingNameShouldNotThrowExceptionWhenContainingInvalidFormatStartingWithRpcInsensitiveCase()
+    {
+        $this->service->setName('RpcFoo');
+        $this->assertEquals('RpcFoo', $this->service->getName());
+    }
+
+    public function testSettingNameShouldNotThrowExceptionWhenContainingValidFormatContainingRpc()
+    {
+        $this->service->setName('_rpcFoo');
+        $this->assertEquals('_rpcFoo', $this->service->getName());
+
+        $this->service->setName('MyRpcFoo');
+        $this->assertEquals('MyRpcFoo', $this->service->getName());
     }
 
     public function testNameAccessorsShouldWorkWithNormalInput()

@@ -15,12 +15,12 @@ namespace Zend\Http\Header;
  */
 class ProxyAuthenticate implements MultipleHeaderInterface
 {
+    /** @var string */
+    protected $value;
 
     public static function fromString($headerLine)
     {
-        $header = new static();
-
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'proxy-authenticate') {
@@ -28,9 +28,14 @@ class ProxyAuthenticate implements MultipleHeaderInterface
         }
 
         // @todo implementation details
-        $header->value = $value;
+        $header = new static($value);
 
         return $header;
+    }
+
+    public function __construct($value = null)
+    {
+        $this->value = $value;
     }
 
     public function getFieldName()

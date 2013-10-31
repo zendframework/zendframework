@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc;
@@ -23,11 +22,6 @@ use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Uri\UriFactory;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage UnitTest
- */
 class DispatchListenerTest extends TestCase
 {
     /**
@@ -74,6 +68,7 @@ class DispatchListenerTest extends TestCase
                 'aliases' => array(
                     'Router'                 => 'HttpRouter',
                     'Configuration'          => 'Config',
+                    'ControllerManager'      => 'ControllerLoader',
                 ),
             ))
         );

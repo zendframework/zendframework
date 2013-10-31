@@ -7,17 +7,19 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
+namespace ZendTest\Version;
+
 use Zend\Http;
 use Zend\Version\Version;
 
 /**
- * @group      Zend_Version
+ * @group      Zend\Version
  */
-class Zend_VersionTest extends \PHPUnit_Framework_TestCase
+class VersionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Tests that version_compare() and its "proxy"
-     * Zend_Version::compareVersion() work as expected.
+     * Zend\Version::compareVersion() work as expected.
      */
     public function testVersionCompare()
     {
@@ -40,7 +42,7 @@ class Zend_VersionTest extends \PHPUnit_Framework_TestCase
                             $this->assertSame(
                                 Version::compareVersion($ver),
                                 $expect,
-                                "For version '$ver' and Zend_Version::VERSION = '"
+                                "For version '$ver' and Zend\Version::VERSION = '"
                                 . Version::VERSION . "': result=" . (Version::compareVersion($ver))
                                 . ', but expected ' . $expect);
                         }

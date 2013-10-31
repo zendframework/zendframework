@@ -571,6 +571,27 @@ class ServiceManagerTest extends TestCase
         $this->assertInstanceOf('stdClass', $service);
     }
 
+    public function testMultipleAbstractFactoriesWithOneLookingForANonExistingServiceDuringCanCreate()
+    {
+        $abstractFactory = new TestAsset\TrollAbstractFactory;
+        $anotherAbstractFactory = $this->getMock('Zend\ServiceManager\AbstractFactoryInterface');
+        $anotherAbstractFactory
+            ->expects($this->exactly(2))
+            ->method('canCreateServiceWithName')
+            ->with(
+                $this->serviceManager,
+                $this->logicalOr('somethingthatcanbecreated', 'nonexistingservice'),
+                $this->logicalOr('SomethingThatCanBeCreated', 'NonExistingService')
+            )
+            ->will($this->returnValue(false));
+
+        $this->serviceManager->addAbstractFactory($abstractFactory);
+        $this->serviceManager->addAbstractFactory($anotherAbstractFactory);
+
+        $this->assertTrue($this->serviceManager->has('SomethingThatCanBeCreated'));
+        $this->assertFalse($abstractFactory->inexistingServiceCheckResult);
+    }
+
     public function testWaitingAbstractFactory()
     {
         $abstractFactory = new TestAsset\WaitingAbstractFactory;
@@ -1100,18 +1121,5 @@ class ServiceManagerTest extends TestCase
             array(new \stdClass()),
             array(tmpfile())
         );
-    }
-
-    public function testMultipleAbstractFactoriesLookingForANonExistingServiceDuringCanCreatePhase()
-    {
-        $abstractFactory = new TestAsset\TrollAbstractFactory;
-        $anotherAbstractFactory = new TestAsset\AnotherTrollAbstractFactory;
-
-        $this->serviceManager->addAbstractFactory($abstractFactory);
-        $this->serviceManager->addAbstractFactory($anotherAbstractFactory);
-
-        $this->assertTrue($this->serviceManager->has('anothertroll'));
-        $this->assertFalse($abstractFactory->inexistingServiceCheckResult);
-        $this->assertFalse($anotherAbstractFactory->inexistingServiceCheckResult);
     }
 }

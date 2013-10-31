@@ -650,9 +650,18 @@ class ServiceManager implements ServiceLocatorInterface
     public function canCreate($name, $checkAbstractFactories = true)
     {
         if (is_array($name)) {
-            list($cName, $rName) = $name;
-        } else {
+            if (count($name) === 2) {
+                list($cName, $rName) = $name;
+            } else {
+                $rName = array_shift($name);
+            }
+        } elseif (is_string($name)) {
             $rName = $name;
+        } else {
+            return false;
+        }
+
+        if (!isset($cName) && isset($rName)) {
             $cName = $this->canonicalizeName($rName);
         }
 

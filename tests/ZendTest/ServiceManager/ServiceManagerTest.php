@@ -340,6 +340,24 @@ class ServiceManagerTest extends TestCase
         $this->assertEquals('bar', $obj->foo);
     }
 
+    public function testHasReturnsFalseOnNonStringsAndArrays()
+    {
+        $obj = new \stdClass();
+        $this->assertFalse($this->serviceManager->has($obj));
+    }
+
+    public function testHasAcceptsArrays()
+    {
+        $this->serviceManager->setInvokableClass('foobar', 'bar');
+        $this->assertTrue($this->serviceManager->has(array('foobar', 'foo_bar')));
+    }
+
+    public function testHasAcceptsAssociateArrays()
+    {
+        $this->serviceManager->setInvokableClass('foobar', 'bar');
+        $this->assertTrue($this->serviceManager->has(array('foobar' => 'foo_bar')));
+    }
+
     /**
      * @covers Zend\ServiceManager\ServiceManager::has
      */

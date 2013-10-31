@@ -5,11 +5,11 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.2.5dev*
+*Zend Framework 2.2.5*
 
 This is the fifth maintenance release for the 2.2 series.
 
-DD MMM YYYY
+31 Oct 2013
 
 ### SECURITY UPDATES IN 2.2.5
 

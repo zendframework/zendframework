@@ -223,7 +223,7 @@ class TarTest extends \PHPUnit_Framework_TestCase
         $filter->setTarget(dirname(__DIR__).'/_files/zipextracted.txt');
 
         foreach (array('GZ', 'Bz2') as $mode) {
-            $archive = dirname(__DIR__).'/_files/compressed.tar.'.strtolower($mode);
+            $archive = dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'compressed.tar.'.strtolower($mode);
             $filter->setArchive($archive);
             $filter->setMode($mode);
             $content = $filter->compress('compress me');

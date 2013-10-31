@@ -167,14 +167,14 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
 
     public function testCanLoadClassMapFromPhar()
     {
-        $map = 'phar://' . __DIR__ . '/_files/classmap.phar/test/.//../autoload_classmap.php';
+        $map = 'phar://' . str_replace('/', DIRECTORY_SEPARATOR, __DIR__ . '/_files/classmap.phar/test/.//../autoload_classmap.php');
         $this->loader->registerAutoloadMap($map);
         $loaded = $this->loader->autoload('some\loadedclass');
         $this->assertSame('some\loadedclass', $loaded);
         $this->assertTrue(class_exists('some\loadedclass', false));
 
         // will not register duplicate, even with a different relative path
-        $map = 'phar://' . __DIR__ . '/_files/classmap.phar/test/./foo/../../autoload_classmap.php';
+        $map = 'phar://' . str_replace('/', DIRECTORY_SEPARATOR, __DIR__ . '/_files/classmap.phar/test/./foo/../../autoload_classmap.php');
         $this->loader->registerAutoloadMap($map);
         $test = $this->loader->getAutoloadMap();
         $this->assertEquals(1, count($test));

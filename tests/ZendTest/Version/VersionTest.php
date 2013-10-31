@@ -19,7 +19,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Tests that version_compare() and its "proxy"
-     * Zend\Version::compareVersion() work as expected.
+     * Zend\Version\Version::compareVersion() work as expected.
      */
     public function testVersionCompare()
     {

@@ -272,19 +272,13 @@ class Document
     }
 
     /**
-     * Perform a query on generated DOMDocument
+     * Get Document's registered XPath namespaces
      *
-     * @param  Document\Query  $query
-     * @param  string $queryType
-     * @throws Exception\RuntimeException
-     * @return NodeList
+     * @return array
      */
-    public function execute(Document\Query $query)
+    public function getXpathNamespaces()
     {
-        $domDoc    = $this->getDomDocument();
-        $nodeList  = $this->getNodeList($domDoc, $query->getContent());
-
-        return new Document\NodeList($nodeList);
+        return $this->xpathNamespaces;
     }
 
     /**
@@ -298,6 +292,16 @@ class Document
         $this->xpathNamespaces = $xpathNamespaces;
     }
 
+
+    /**
+     * Get Document's registered XPath PHP Functions
+     *
+     * @return string|null
+     */
+    public function getXpathPhpFunctions()
+    {
+        return $this->xpathPhpFunctions;
+    }
     /**
      * Register PHP Functions to use in internal DOMXPath
      *
@@ -307,32 +311,5 @@ class Document
     public function registerXpathPhpFunctions($xpathPhpFunctions = true)
     {
         $this->xpathPhpFunctions = $xpathPhpFunctions;
-    }
-
-    /**
-     * Prepare node list
-     *
-     * @param  DOMDocument $document
-     * @param  string|array $xpathQuery
-     * @return array
-     */
-    protected function getNodeList($document, $xpathQuery)
-    {
-        $xpath = new DOMXPath($document);
-
-        foreach ($this->xpathNamespaces as $prefix => $namespaceUri) {
-            $xpath->registerNamespace($prefix, $namespaceUri);
-        }
-
-        if ($this->xpathPhpFunctions) {
-            $xpath->registerNamespace('php', 'http://php.net/xpath');
-            ($this->xpathPhpFunctions === true) ? $xpath->registerPhpFunctions() : $xpath->registerPhpFunctions($this->xpathPhpFunctions);
-        }
-
-        ErrorHandler::start();
-        $nodeList   = $xpath->query($xpathQuery);
-        ErrorHandler::stop(true);
-
-        return $nodeList;
     }
 }

@@ -9,6 +9,8 @@
 
 namespace Zend\Dom\Document;
 
+use Zend\Dom\Document;
+
 /**
  * Query object executable in a Zend\Dom\Document
  */
@@ -97,6 +99,19 @@ class Query
         }
 
         return $this;
+    }
+
+    /**
+     * Perform the query on Document
+     *
+     * @param  Document  $document
+     * @return NodeList
+     */
+    public function execute(Document $document)
+    {
+        $nodeList = NodeList::factory($document, $this);
+
+        return $nodeList;
     }
 
     /**

@@ -42,7 +42,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
                             $this->assertSame(
                                 Version::compareVersion($ver),
                                 $expect,
-                                "For version '$ver' and Zend\Version::VERSION = '"
+                                "For version '$ver' and Zend\Version\Version::VERSION = '"
                                 . Version::VERSION . "': result=" . (Version::compareVersion($ver))
                                 . ', but expected ' . $expect);
                         }

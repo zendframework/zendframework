@@ -227,25 +227,25 @@ class Mcrypt implements SymmetricInterface
      */
     public function setKey($key)
     {
-	$keyLen = strlen($key);
+        $keyLen = strlen($key);
 
         if (!$keyLen) {
             throw new Exception\InvalidArgumentException('The key cannot be empty');
         }
-	$keySizes = mcrypt_module_get_supported_key_sizes($this->supportedAlgos[$this->algo]);
-	$maxKey = $this->getKeySize();
+        $keySizes = mcrypt_module_get_supported_key_sizes($this->supportedAlgos[$this->algo]);
+        $maxKey = $this->getKeySize();
 
-	/*
-	 * aes has $keySizes empty, meaning it can have arbitrary key length.
-         * the others are more picky. 
-	 */
-	if (empty($keySizes) && $keyLen < $maxKey) {
+        /*
+         * aes has $keySizes empty, meaning it can have arbitrary key length.
+         * the others are more picky.
+         */
+        if (empty($keySizes) && $keyLen < $maxKey) {
 
-		if (!in_array($keyLen, $keySizes)) {
-		     throw new Exception\InvalidArgumentException(
-			"The size of the key must be one of " . implode(", ", $keySizes) . " bytes or longer");
-		}
-	}
+            if (!in_array($keyLen, $keySizes)) {
+                 throw new Exception\InvalidArgumentException(
+                "The size of the key must be one of " . implode(", ", $keySizes) . " bytes or longer");
+            }
+        }
         $this->key = $key;
 
         return $this;

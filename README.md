@@ -11,6 +11,21 @@ This is the fifth maintenance release for the 2.2 series.
 
 DD MMM YYYY
 
+### SECURITY UPDATES IN 2.2.5
+
+An issue with `Zend\Http\PhpEnvironment\RemoteAddress` was reported in
+[#5374](https://github.com/zendframework/zf2/pull/5374). Essentially, the class
+was not checking if `$_SERVER['REMOTE_ADDR']` was one of the trusted proxies
+configured, and as a result, `getIpAddressFromProxy()` could return an untrusted
+IP address. 
+
+The class was updated to check if `$_SERVER['REMOTE_ADDR']` is in the list of
+trusted proxies, and, if so, will return that value immediately before
+consulting the values in the `X-Forwarded-For` header.
+
+If you use the `RemoteAddr` `Zend\Session` validator, and are configuring
+trusted proxies, we recommend updating to 2.2.5 or later immediately.
+
 ### UPDATES IN 2.2.5
 
 - [#5343](https://github.com/zendframework/zf2/pull/5343) removed the

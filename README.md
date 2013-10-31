@@ -5,35 +5,13 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.2.5*
+*Zend Framework 2.2.6dev*
 
-This is the fifth maintenance release for the 2.2 series.
+This is the sixth maintenance release for the 2.2 series.
 
-31 Oct 2013
+DD MMM YYYY
 
-### SECURITY UPDATES IN 2.2.5
-
-An issue with `Zend\Http\PhpEnvironment\RemoteAddress` was reported in
-[#5374](https://github.com/zendframework/zf2/pull/5374). Essentially, the class
-was not checking if `$_SERVER['REMOTE_ADDR']` was one of the trusted proxies
-configured, and as a result, `getIpAddressFromProxy()` could return an untrusted
-IP address. 
-
-The class was updated to check if `$_SERVER['REMOTE_ADDR']` is in the list of
-trusted proxies, and, if so, will return that value immediately before
-consulting the values in the `X-Forwarded-For` header.
-
-If you use the `RemoteAddr` `Zend\Session` validator, and are configuring
-trusted proxies, we recommend updating to 2.2.5 or later immediately.
-
-### UPDATES IN 2.2.5
-
-- [#5343](https://github.com/zendframework/zf2/pull/5343) removed the
-  DateTimeFormatter filter from DateTime form elements. This was done
-  due to the fact that it led to unexpected behavior when non-date inputs were
-  provided. However, since the DateTime element already incorporates a
-  DateValidator that accepts a date format, validation can still work as
-  expected.
+### UPDATES IN 2.2.6
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

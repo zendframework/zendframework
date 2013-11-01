@@ -144,7 +144,7 @@ class Client implements ServerClient
 
         $this->lastResponse = $response;
 
-        // import all response data form JSON HTTP response
+        // import all response data from JSON HTTP response
         $response->loadJson($httpResponse->getBody());
 
         return $response;

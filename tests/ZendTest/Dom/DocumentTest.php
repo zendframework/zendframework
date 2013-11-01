@@ -112,8 +112,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     public function testQueryingWithoutRegisteringDocumentShouldThrowException()
     {
         $this->setExpectedException('\Zend\Dom\Exception\RuntimeException', 'no document');
-        $query = new Document\Query('.foo', Document\Query::TYPE_CSS);
-        $query->execute($this->document);
+        $result = Document\Query::execute('.foo', $this->document, Document\Query::TYPE_CSS);
     }
 
     public function testQueryingInvalidDocumentShouldThrowException()
@@ -121,8 +120,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         set_error_handler(array($this, 'handleError'));
         $this->document = new Document('some bogus string', Document::DOC_XML);
         try {
-            $query = new Document\Query('.foo', Document\Query::TYPE_CSS);
-            $query->execute($this->document);
+            $result = Document\Query::execute('.foo', $this->document, Document\Query::TYPE_CSS);
             restore_error_handler();
             $this->fail('Querying invalid document should throw exception');
         } catch (DOMException $e) {
@@ -147,25 +145,21 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     public function testQueryShouldReturnResultObject()
     {
         $this->loadHtml();
-        $query = new Document\Query('.foo', Document\Query::TYPE_CSS);
-        $test = $query->execute($this->document);
-        $this->assertTrue($test instanceof Document\NodeList);
+        $result = Document\Query::execute('.foo', $this->document, Document\Query::TYPE_CSS);
+        $this->assertTrue($result instanceof Document\NodeList);
     }
 
     public function testResultShouldIndicateNumberOfFoundNodes()
     {
         $this->loadHtml();
-        $query   = new Document\Query('.foo', Document\Query::TYPE_CSS);
-        $result  = $query->execute($this->document);
-        $message = 'Xpath: ' . $query->getContent() . "\n";
-        $this->assertEquals(3, count($result), $message);
+        $result = Document\Query::execute('.foo', $this->document, Document\Query::TYPE_CSS);
+        $this->assertEquals(3, count($result));
     }
 
     public function testResultShouldAllowIteratingOverFoundNodes()
     {
         $this->loadHtml();
-        $query  = new Document\Query('.foo', Document\Query::TYPE_CSS);
-        $result = $query->execute($this->document);
+        $result = Document\Query::execute('.foo', $this->document, Document\Query::TYPE_CSS);
         $this->assertEquals(3, count($result));
         foreach ($result as $node) {
             $this->assertTrue($node instanceof \DOMNode, var_export($result, 1));
@@ -175,49 +169,43 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     public function testQueryShouldFindNodesWithMultipleClasses()
     {
         $this->loadHtml();
-        $query  = new Document\Query('.footerblock .last', Document\Query::TYPE_CSS);
-        $result = $query->execute($this->document);
-        $this->assertEquals(1, count($result), $query->getContent());
+        $result = Document\Query::execute('.footerblock .last', $this->document, Document\Query::TYPE_CSS);
+        $this->assertEquals(1, count($result));
     }
 
     public function testQueryShouldFindNodesWithArbitraryAttributeSelectorsExactly()
     {
         $this->loadHtml();
-        $query  = new Document\Query('div[dojoType="FilteringSelect"]', Document\Query::TYPE_CSS);
-        $result = $query->execute($this->document);
-        $this->assertEquals(1, count($result),  $query->getContent());
+        $result = Document\Query::execute('div[dojoType="FilteringSelect"]', $this->document, Document\Query::TYPE_CSS);
+        $this->assertEquals(1, count($result));
     }
 
     public function testQueryShouldFindNodesWithArbitraryAttributeSelectorsAsDiscreteWords()
     {
         $this->loadHtml();
-        $query  = new Document\Query('li[dojoType~="bar"]', Document\Query::TYPE_CSS);
-        $result = $query->execute($this->document);
-        $this->assertEquals(2, count($result), $query->getContent());
+        $result = Document\Query::execute('li[dojoType~="bar"]', $this->document, Document\Query::TYPE_CSS);
+        $this->assertEquals(2, count($result));
     }
 
     public function testQueryShouldFindNodesWithArbitraryAttributeSelectorsAndAttributeValue()
     {
         $this->loadHtml();
-        $query  = new Document\Query('li[dojoType*="bar"]', Document\Query::TYPE_CSS);
-        $result = $query->execute($this->document);
-        $this->assertEquals(2, count($result), $query->getContent());
+        $result = Document\Query::execute('li[dojoType*="bar"]', $this->document, Document\Query::TYPE_CSS);
+        $this->assertEquals(2, count($result));
     }
 
     public function testQueryXpathShouldAllowQueryingArbitraryUsingXpath()
     {
         $this->loadHtml();
-        $query  = new Document\Query('//li[contains(@dojotype, "bar")]');
-        $result = $query->execute($this->document);
-        $this->assertEquals(2, count($result), $query->getContent());
+        $result = Document\Query::execute('//li[contains(@dojotype, "bar")]', $this->document);
+        $this->assertEquals(2, count($result));
     }
 
     public function testXpathPhpFunctionsShouldBeDisabledByDefault()
     {
         $this->loadHtml();
         try {
-            $query = new Document\Query('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]');
-            $query->execute($this->document);
+            $result = Document\Query::execute('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]', $this->document);
         } catch (\Exception $e) {
             return;
         }
@@ -228,12 +216,10 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     {
         $this->loadHtml();
         $this->document->registerXpathPhpFunctions();
-        $query  = new Document\Query('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]');
-        $result = $query->execute($this->document);
+        $result = Document\Query::execute('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]', $this->document);
         $this->assertEquals(
             'content-type',
-            strtolower($result->current()->getAttribute('http-equiv')),
-            $query->getContent()
+            strtolower($result->current()->getAttribute('http-equiv'))
         );
     }
 
@@ -242,8 +228,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $this->loadHtml();
         try {
             $this->document->registerXpathPhpFunctions('stripos');
-            $query = new Document\Query('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]');
-            $query->execute($this->document);
+            $result = Document\Query::execute('//meta[php:functionString("strtolower", @http-equiv) = "content-type"]', $this->document);
         } catch (\Exception $e) {
             // $e->getMessage() - Not allowed to call handler 'strtolower()
             return;
@@ -257,9 +242,8 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     public function testLoadingDocumentWithErrorsShouldNotRaisePhpErrors()
     {
         $file = file_get_contents(__DIR__ . '/_files/bad-sample.html');
-        $query = new Document\Query('p', Document\Query::TYPE_CSS);
         $this->document = new Document($file);
-        $query->execute($this->document);
+        $result = Document\Query::execute('p', $this->document, Document\Query::TYPE_CSS);
         $errors = $this->document->getErrors();
         $this->assertTrue(is_array($errors));
         $this->assertTrue(0 < count($errors));
@@ -285,15 +269,12 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 EOF;
 
         $this->document = new Document($html);
-        $query   = new Document\Query('input[type="hidden"][value="1"]', Document\Query::TYPE_CSS);
-        $results = $query->execute($this->document);
-        $this->assertEquals(2, count($results), $query->getContent());
-        $query   = new Document\Query('input[value="1"][type~="hidden"]', Document\Query::TYPE_CSS);
-        $results = $query->execute($this->document);
-        $this->assertEquals(2, count($results), $query->getContent());
-        $query   = new Document\Query('input[type="hidden"][value="0"]', Document\Query::TYPE_CSS);
-        $results = $query->execute($this->document);
-        $this->assertEquals(1, count($results));
+        $result = Document\Query::execute('input[type="hidden"][value="1"]', $this->document, Document\Query::TYPE_CSS);
+        $this->assertEquals(2, count($result));
+        $result = Document\Query::execute('input[value="1"][type~="hidden"]', $this->document, Document\Query::TYPE_CSS);
+        $this->assertEquals(2, count($result));
+        $result = Document\Query::execute('input[type="hidden"][value="0"]', $this->document, Document\Query::TYPE_CSS);
+        $this->assertEquals(1, count($result));
     }
 
     /**
@@ -329,9 +310,8 @@ EOF;
     public function testSpecifyingEncodingSetsEncodingOnDomDocument()
     {
         $this->document = new Document($this->getHtml(), null, 'utf-8');
-        $query = new Document\Query('.foo', Document\Query::TYPE_CSS);
-        $test = $query->execute($this->document);
-        $this->assertInstanceof('\\Zend\\Dom\\Document\\NodeList', $test);
+        $result = Document\Query::execute('.foo', $this->document, Document\Query::TYPE_CSS);
+        $this->assertInstanceof('\\Zend\\Dom\\Document\\NodeList', $result);
         $this->assertInstanceof('\\DOMDocument', $this->document->getDomDocument());
         $this->assertEquals('utf-8', $this->document->getEncoding());
     }
@@ -349,8 +329,8 @@ EOF;
 </html>
 EOB;
         $this->document = new Document($xhtmlWithXmlDecl, null, 'utf-8');
-        $query = new Document\Query('//p', Document\Query::TYPE_CSS);
-        $this->assertEquals(1, $query->execute($this->document)->count());
+        $result = Document\Query::execute('//p', $this->document, Document\Query::TYPE_CSS);
+        $this->assertEquals(1, $result->count());
     }
 
     /**
@@ -373,8 +353,8 @@ EOB;
 </html>
 EOB;
         $this->document = new Document($xhtmlWithXmlDecl, null, 'utf-8');
-        $query = new Document\Query('//p', Document\Query::TYPE_CSS);
-        $this->assertEquals(1, $query->execute($this->document)->count());
+        $result = Document\Query::execute('//p', $this->document, Document\Query::TYPE_CSS);
+        $this->assertEquals(1, $result->count());
     }
 
     public function testLoadingXmlContainingDoctypeShouldFailToPreventXxeAndXeeAttacks()
@@ -388,29 +368,26 @@ EOB;
 XML;
         $this->document = new Document($xml);
         $this->setExpectedException("\Zend\Dom\Exception\RuntimeException");
-        $query = new Document\Query('/');
-        $query->execute($this->document);
+        $result = Document\Query::execute('/', $this->document);
     }
 
     public function testOffsetExists()
     {
         $this->loadHtml();
-        $query   = new Document\Query('input', Document\Query::TYPE_CSS);
-        $results = $query->execute($this->document);
+        $result = Document\Query::execute('input', $this->document, Document\Query::TYPE_CSS);
 
-        $this->assertEquals(3, $results->count());
-        $this->assertFalse($results->offsetExists(3));
-        $this->assertTrue($results->offsetExists(2));
+        $this->assertEquals(3, $result->count());
+        $this->assertFalse($result->offsetExists(3));
+        $this->assertTrue($result->offsetExists(2));
     }
 
     public function testOffsetGet()
     {
         $this->loadHtml();
-        $query   = new Document\Query('input', Document\Query::TYPE_CSS);
-        $results = $query->execute($this->document);
+        $result = Document\Query::execute('input', $this->document, Document\Query::TYPE_CSS);
 
-        $this->assertEquals(3, $results->count());
-        $this->assertEquals('login', $results[2]->getAttribute('id'));
+        $this->assertEquals(3, $result->count());
+        $this->assertEquals('login', $result[2]->getAttribute('id'));
     }
 
     /**
@@ -419,11 +396,10 @@ XML;
     public function testOffsetSet()
     {
         $this->loadHtml();
-        $query   = new Document\Query('input', Document\Query::TYPE_CSS);
-        $results = $query->execute($this->document);
-        $this->assertEquals(3, $results->count());
+        $result = Document\Query::execute('input', $this->document, Document\Query::TYPE_CSS);
+        $this->assertEquals(3, $result->count());
 
-        $results[0] = '<foobar />';
+        $result[0] = '<foobar />';
     }
 
 
@@ -433,10 +409,9 @@ XML;
     public function testOffsetUnset()
     {
         $this->loadHtml();
-        $query   = new Document\Query('input', Document\Query::TYPE_CSS);
-        $results = $query->execute($this->document);
-        $this->assertEquals(3, $results->count());
+        $result = Document\Query::execute('input', $this->document, Document\Query::TYPE_CSS);
+        $this->assertEquals(3, $result->count());
 
-        unset($results[2]);
+        unset($result[2]);
     }
 }

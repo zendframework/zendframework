@@ -13,11 +13,8 @@ use ArrayAccess;
 use Countable;
 use DOMNode;
 use DOMNodeList;
-use DOMXPath;
 use Iterator;
-use Zend\Dom\Document;
 use Zend\Dom\Exception;
-use Zend\Stdlib\ErrorHandler;
 
 /**
  * DOMNodeList wrapper for Zend\Dom\Document\Query results
@@ -45,33 +42,6 @@ class NodeList implements Iterator, Countable, ArrayAccess
         $this->list = $list;
     }
 
-    /**
-     * Prepare node list
-     *
-     * @param  DOMDocument    $document
-     * @param  Document\Query $query
-     * @return array
-     */
-    public static function factory(Document $document, Document\Query $query)
-    {
-        $xpath = new DOMXPath($document->getDomDocument());
-
-        $xpathNamespaces = $document->getXpathNamespaces();
-        foreach ($xpathNamespaces as $prefix => $namespaceUri) {
-            $xpath->registerNamespace($prefix, $namespaceUri);
-        }
-
-        if ($xpathPhpfunctions = $document->getXpathPhpFunctions()) {
-            $xpath->registerNamespace('php', 'http://php.net/xpath');
-            ($xpathPhpfunctions === true) ? $xpath->registerPHPFunctions() : $xpath->registerPHPFunctions($xpathPhpfunctions);
-        }
-
-        ErrorHandler::start();
-        $nodeList = $xpath->query($query->getContent());
-        ErrorHandler::stop(true);
-
-        return new static($nodeList);
-    }
     /**
      * Iterator: rewind to first element
      *

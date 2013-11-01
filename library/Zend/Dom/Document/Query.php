@@ -9,7 +9,9 @@
 
 namespace Zend\Dom\Document;
 
+use DOMXPath;
 use Zend\Dom\Document;
+use Zend\Stdlib\ErrorHandler;
 
 /**
  * Query object executable in a Zend\Dom\Document
@@ -24,94 +26,34 @@ class Query
     /**#@-*/
 
     /**
-     * @var string
-     */
-    protected $type;
-
-    /**
-     * @var string
-     */
-    protected $content;
-
-    /**
-     * Constructor
-     *
-     * @param string|null  $content
-     * @param string|null  $type
-     */
-    public function __construct($content, $type = self::TYPE_XPATH)
-    {
-        if ($type === static::TYPE_CSS) {
-            $content = static::cssToXpath($content);
-        }
-        $this->setContent($content);
-        $this->setType($type);
-    }
-
-    /**
-     * Get query content
-     *
-     * @return string|null
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * Set query content
-     *
-     * @param  string  $content
-     * @return self
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Get query type
-     *
-     * @return string|null
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set query type
-     *
-     * @param  string  $type
-     * @return self
-     */
-    public function setType($type)
-    {
-        switch ($type) {
-            case static::TYPE_CSS:
-            case static::TYPE_XPATH:
-                $this->type = $type;
-                break;
-            default:
-                break;
-        }
-
-        return $this;
-    }
-
-    /**
      * Perform the query on Document
      *
      * @param  Document  $document
      * @return NodeList
      */
-    public function execute(Document $document)
+    public static function execute($expression, Document $document, $type = self::TYPE_XPATH)
     {
-        $nodeList = NodeList::factory($document, $this);
+        // Expression check
+        if ($type === static::TYPE_CSS) {
+            $expression = static::cssToXpath($expression);
+        }
+        $xpath = new DOMXPath($document->getDomDocument());
 
-        return $nodeList;
+        $xpathNamespaces = $document->getXpathNamespaces();
+        foreach ($xpathNamespaces as $prefix => $namespaceUri) {
+            $xpath->registerNamespace($prefix, $namespaceUri);
+        }
+
+        if ($xpathPhpfunctions = $document->getXpathPhpFunctions()) {
+            $xpath->registerNamespace('php', 'http://php.net/xpath');
+            ($xpathPhpfunctions === true) ? $xpath->registerPHPFunctions() : $xpath->registerPHPFunctions($xpathPhpfunctions);
+        }
+
+        ErrorHandler::start();
+        $nodeList = $xpath->query($expression);
+        ErrorHandler::stop(true);
+
+        return new NodeList($nodeList);
     }
 
     /**

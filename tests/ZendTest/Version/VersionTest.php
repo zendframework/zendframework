@@ -13,7 +13,7 @@ use Zend\Http;
 use Zend\Version\Version;
 
 /**
- * @group      Zend\Version
+ * @group      Zend_Version
  */
 class VersionTest extends \PHPUnit_Framework_TestCase
 {

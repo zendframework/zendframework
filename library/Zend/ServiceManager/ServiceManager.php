@@ -653,16 +653,24 @@ class ServiceManager implements ServiceLocatorInterface
             if (count($name) === 2) {
                 list($cName, $rName) = $name;
             } else {
-                $rName = array_shift($name);
+                $name = array_slice($name, 0, 1);
+                $rName = array_pop($name);
+
+                // check if key is string
+                $name  = array_pop(array_flip($name));
+                $cName = is_string($name) ? $name : $this->canonicalizeName($rName);
             }
         } elseif (is_string($name)) {
             $rName = $name;
+
+            // inlined code from ServiceManager::canonicalizeName for performance
+            if (isset($this->canonicalNames[$rName])) {
+                $cName = $this->canonicalNames[$name];
+            } else {
+                $cName = $this->canonicalizeName($name);
+            }
         } else {
             return false;
-        }
-
-        if (!isset($cName) && isset($rName)) {
-            $cName = $this->canonicalizeName($rName);
         }
 
         return (

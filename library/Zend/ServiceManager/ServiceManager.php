@@ -645,10 +645,11 @@ class ServiceManager implements ServiceLocatorInterface
      * @param  string|array $name
      * @param  bool         $checkAbstractFactories
      * @return bool
-     * @deprecated this method is being deprecated as of zendframework 2.2, and may be removed in future major versions
+     * @deprecated this method is being deprecated as of zendframework 2.3, and may be removed in future major versions
      */
     public function canCreate($name, $checkAbstractFactories = true)
     {
+        trigger_error(sprintf('%s is deprecated; please use %s::has', __METHOD__, __CLASS__), E_USER_DEPRECATED);
         return $this->has($name, $checkAbstractFactories, false);
     }
 
@@ -668,7 +669,7 @@ class ServiceManager implements ServiceLocatorInterface
 
             // inlined code from ServiceManager::canonicalizeName for performance
             if (isset($this->canonicalNames[$rName])) {
-                $cName = $this->canonicalNames[$name];
+                $cName = $this->canonicalNames[$rName];
             } else {
                 $cName = $this->canonicalizeName($name);
             }
@@ -678,8 +679,7 @@ class ServiceManager implements ServiceLocatorInterface
             return false;
         }
 
-        if (
-            isset($this->invokableClasses[$cName])
+        if (isset($this->invokableClasses[$cName])
             || isset($this->factories[$cName])
             || isset($this->aliases[$cName])
             || isset($this->instances[$cName])

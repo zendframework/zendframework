@@ -58,6 +58,8 @@ class Foo
     private $string = 'string';
     private $int = 123;
     private $array = array('test' => 2,2);
+    private $arraynew = ['test' => 2,2];
+    private $notarray = "['test' => 2,2]";
     private $status = false;
 }
 CLASS;
@@ -83,6 +85,13 @@ CLASS;
                 case "array":
                     $this->assertEquals("array('test'=>2,2)", $value);
                     $this->assertEquals('array', $valueType);
+                    break;
+                case "arraynew":
+                    $this->assertEquals("['test'=>2,2]", $value);
+                    $this->assertEquals('array', $valueType);
+                    break;
+                case "notarray":
+                    $this->assertEquals('string', $valueType);
                     break;
                 case "status":
                     $this->assertTrue("false" === $value);

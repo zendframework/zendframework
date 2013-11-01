@@ -223,7 +223,7 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $function = new FunctionReflection($function9);
         $content = $function->getContents(false);
         $this->assertEquals("function() {}", trim($content));
-
+        
         $function = new FunctionReflection($function10);
         $content = $function->getContents(false);
         $this->assertEquals("function() { return 'function10'; }", trim($content));

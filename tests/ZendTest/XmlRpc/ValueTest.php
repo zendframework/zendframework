@@ -209,7 +209,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $this->assertXmlRpcType('string', $val);
         $this->assertSame($native, $val->getValue());
     }
-    
+
     public function testFactoryAutodetectsStringAndSetsValueInArray()
     {
         $val = AbstractValue::getXmlRpcValue('<value><array><data>'.

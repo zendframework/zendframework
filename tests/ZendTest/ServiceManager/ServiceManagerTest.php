@@ -348,14 +348,8 @@ class ServiceManagerTest extends TestCase
 
     public function testHasAcceptsArrays()
     {
-        $this->serviceManager->setInvokableClass('foobar', 'bar');
+        $this->serviceManager->setInvokableClass('foobar', 'foo');
         $this->assertTrue($this->serviceManager->has(array('foobar', 'foo_bar')));
-    }
-
-    public function testHasAcceptsAssociateArrays()
-    {
-        $this->serviceManager->setInvokableClass('foobar', 'bar');
-        $this->assertTrue($this->serviceManager->has(array('foobar' => 'foo_bar')));
     }
 
     /**

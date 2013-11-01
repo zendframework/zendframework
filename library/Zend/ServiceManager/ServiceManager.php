@@ -639,42 +639,6 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
-     * Determine if we can create an instance.
-     *
-     * @param  string|array $name
-     * @param  bool         $checkAbstractFactories
-     * @return bool
-     *
-     * @deprecated this method is being deprecated as of zendframework 2.2, and may be removed in future major versions
-     */
-    public function canCreate($name, $checkAbstractFactories = true)
-    {
-        if (is_array($name)) {
-            if (count($name) === 2) {
-                list($cName, $rName) = $name;
-            } else {
-                $rName = array_shift($name);
-            }
-        } elseif (is_string($name)) {
-            $rName = $name;
-        } else {
-            return false;
-        }
-
-        if (!isset($cName) && isset($rName)) {
-            $cName = $this->canonicalizeName($rName);
-        }
-
-        return (
-            isset($this->invokableClasses[$cName])
-            || isset($this->factories[$cName])
-            || isset($this->aliases[$cName])
-            || isset($this->instances[$cName])
-            || ($checkAbstractFactories && $this->canCreateFromAbstractFactory($cName, $rName))
-        );
-    }
-
-    /**
      * @param  string|array  $name
      * @param  bool          $checkAbstractFactories
      * @param  bool          $usePeeringServiceManagers
@@ -682,7 +646,28 @@ class ServiceManager implements ServiceLocatorInterface
      */
     public function has($name, $checkAbstractFactories = true, $usePeeringServiceManagers = true)
     {
-        if ($this->canCreate($name, $checkAbstractFactories)) {
+        if (is_string($name)) {
+            $rName = $name;
+
+            // inlined code from ServiceManager::canonicalizeName for performance
+            if (isset($this->canonicalNames[$rName])) {
+                $cName = $this->canonicalNames[$name];
+            } else {
+                $cName = $this->canonicalizeName($name);
+            }
+        } elseif (is_array($name) && count($name) >= 2) {
+            list($cName, $rName) = $name;
+        } else {
+            return false;
+        }
+
+        if (
+            isset($this->invokableClasses[$cName])
+            || isset($this->factories[$cName])
+            || isset($this->aliases[$cName])
+            || isset($this->instances[$cName])
+            || ($checkAbstractFactories && $this->canCreateFromAbstractFactory($cName, $rName))
+        ) {
             return true;
         }
 

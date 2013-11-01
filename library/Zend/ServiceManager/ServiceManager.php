@@ -639,7 +639,24 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
-     * @param  string|array  $name
+     * Determine if we can create an instance.
+     * Proxies to has()
+     *
+     * @param  string|array $name
+     * @param  bool         $checkAbstractFactories
+     * @return bool
+     * @deprecated this method is being deprecated as of zendframework 2.2, and may be removed in future major versions
+     */
+    public function canCreate($name, $checkAbstractFactories = true)
+    {
+        return $this->has($name, $checkAbstractFactories, false);
+    }
+
+    /**
+     * Determine if an instance exists.
+     *
+     * @param  string|array  $name  An array argument accepts exactly two values.
+     *                              Example: array('canonicalName', 'requestName')
      * @param  bool          $checkAbstractFactories
      * @param  bool          $usePeeringServiceManagers
      * @return bool

@@ -12,7 +12,6 @@ namespace ZendTest\Code\Scanner;
 use Zend\Code\Scanner\FileScanner;
 use Zend\Code\Scanner\TokenArrayScanner;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Code\Exception;
 
 class PropertyScannerTest extends TestCase
 {

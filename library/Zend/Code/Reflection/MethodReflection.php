@@ -189,11 +189,10 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      */
     public function getContents($includeDocBlock = true)
     {
-        $fileName     = $this->getFileName();
-        if (false === $fileName) {
-            throw new Exception\InvalidArgumentException(
-                'Cannot determine internals methods contents'
-            );
+        $fileName = $this->getFileName();
+        if (class_exists($this->class) && !$fileName) {
+            // php class
+            return '';
         }
 
         $lines = array_slice(

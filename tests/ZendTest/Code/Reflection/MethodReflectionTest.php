@@ -99,9 +99,7 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
     public function testInternalMethodContentsReturn()
     {
         $reflectionMethod = new MethodReflection('DOMDocument', 'validate');
-
-        $this->setExpectedException('Zend\Code\Reflection\Exception\InvalidArgumentException');
-        $contents = $reflectionMethod->getContents();
+        $this->assertEquals('', $reflectionMethod->getContents());
     }
 
     public function testMethodContentsReturnWithoutDocBlock()
@@ -284,5 +282,14 @@ CONTENTS;
                     ->will($this->returnValue(false));
 
         $this->assertFalse($reflectionMethod->getAnnotations($annotationManager));
+    }
+
+    /**
+     * @group 5062
+     */
+    public function testGetContentsWithCoreClass()
+    {
+        $reflectionMethod = new MethodReflection('DateTime', 'format');
+        $this->assertEquals("", $reflectionMethod->getContents(false));
     }
 }

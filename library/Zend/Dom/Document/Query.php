@@ -7,29 +7,69 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Dom;
+namespace Zend\Dom\Document;
+
+use DOMXPath;
+use Zend\Dom\Document;
+use Zend\Stdlib\ErrorHandler;
 
 /**
- * Transform CSS selectors to XPath
- * @deprecated
- * @see \Zend\Dom\Document\Query
+ * Query object executable in a Zend\Dom\Document
  */
-class Css2Xpath
+class Query
 {
+    /**#@+
+     * Query types
+     */
+    const TYPE_XPATH  = 'TYPE_XPATH';
+    const TYPE_CSS    = 'TYPE_CSS';
+    /**#@-*/
+
+    /**
+     * Perform the query on Document
+     *
+     * @param  Document  $document
+     * @return NodeList
+     */
+    public static function execute($expression, Document $document, $type = self::TYPE_XPATH)
+    {
+        // Expression check
+        if ($type === static::TYPE_CSS) {
+            $expression = static::cssToXpath($expression);
+        }
+        $xpath = new DOMXPath($document->getDomDocument());
+
+        $xpathNamespaces = $document->getXpathNamespaces();
+        foreach ($xpathNamespaces as $prefix => $namespaceUri) {
+            $xpath->registerNamespace($prefix, $namespaceUri);
+        }
+
+        if ($xpathPhpfunctions = $document->getXpathPhpFunctions()) {
+            $xpath->registerNamespace('php', 'http://php.net/xpath');
+            ($xpathPhpfunctions === true) ? $xpath->registerPHPFunctions() : $xpath->registerPHPFunctions($xpathPhpfunctions);
+        }
+
+        ErrorHandler::start();
+        $nodeList = $xpath->query($expression);
+        ErrorHandler::stop(true);
+
+        return new NodeList($nodeList);
+    }
+
     /**
      * Transform CSS expression to XPath
      *
      * @param  string $path
      * @return string
      */
-    public static function transform($path)
+    public static function cssToXpath($path)
     {
         $path = (string) $path;
         if (strstr($path, ',')) {
             $paths       = explode(',', $path);
             $expressions = array();
             foreach ($paths as $path) {
-                $xpath = self::transform(trim($path));
+                $xpath = static::cssToXpath(trim($path));
                 if (is_string($xpath)) {
                     $expressions[] = $xpath;
                 } elseif (is_array($xpath)) {

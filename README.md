@@ -17,6 +17,36 @@ DD MMM YYY
 
 ### UPDATES IN 2.3.0
 
+- [#5356](https://github.com/zendframework/zf2/pull/5356) deprecates
+  `Zend\Dom\Css2Path::transform` in favor of the new
+  `Zend\Dom\Document\Query::cssToXpath`. Additionally, it properly cleans up the
+  relations between documents, queries, and nodelists, providing a workflow
+  similar to performing XPath queries in PHP:
+
+  ```php
+  use Zend\Dom\Document;
+  $document = new Document($contentOrFile);
+  $nodeList = Document\Query::execute($expression, $document, Document\Query::TYPE_CSS);
+  foreach ($nodeList as $node) {
+      // ...
+  }
+  ```
+
+  or, more succinctly:
+
+  ```php
+  use Zend\Dom\Document;
+  foreach (
+    Document\Query::execute($expression, new Document($contentOrFile, Document\Query::TYPE_CSS)
+    as $node
+  ) {
+      // ...
+  }
+  ```
+
+  This API is intended to replace `Zend\Dom\Query`; however, `Zend\Dom\Query`
+  remains in order to retain backwards compatibility.
+
 - [#5043](https://github.com/zendframework/zf2/pull/5043) introduced changes in
   how DocBlock tag instances are returned via the `Zend\Code\Reflection`
   component. These instances are rarely created manually; however, if you are
@@ -43,13 +73,6 @@ DD MMM YYY
   `setEscapeHtmlHelper(false)` method on the `formLabel()` view helper.
 - [#4962](https://github.com/zendframework/zf2/pull/4962) adds a service alias
   from "ControllerManager" to "ControllerLoader", and updates code to reference
-
-This is the sixth maintenance release for the 2.2 series.
-
-DD MMM YYYY
-
-### UPDATES IN 2.2.6
->>>>>>> version/bump
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

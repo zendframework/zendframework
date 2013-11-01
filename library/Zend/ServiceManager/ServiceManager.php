@@ -639,28 +639,14 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
-     * Determine if we can create an instance.
-     *
-     * @param  string|array $name
-     * @param  bool         $checkAbstractFactories
+     * @param  string|array  $name
+     * @param  bool          $checkAbstractFactories
+     * @param  bool          $usePeeringServiceManagers
      * @return bool
-     *
-     * @deprecated this method is being deprecated as of zendframework 2.2, and may be removed in future major versions
      */
-    public function canCreate($name, $checkAbstractFactories = true)
+    public function has($name, $checkAbstractFactories = true, $usePeeringServiceManagers = true)
     {
-        if (is_array($name)) {
-            if (count($name) === 2) {
-                list($cName, $rName) = $name;
-            } else {
-                $name = array_slice($name, 0, 1);
-                $rName = array_pop($name);
-
-                // check if key is string
-                $name  = array_pop(array_flip($name));
-                $cName = is_string($name) ? $name : $this->canonicalizeName($rName);
-            }
-        } elseif (is_string($name)) {
+        if (is_string($name)) {
             $rName = $name;
 
             // inlined code from ServiceManager::canonicalizeName for performance
@@ -669,28 +655,19 @@ class ServiceManager implements ServiceLocatorInterface
             } else {
                 $cName = $this->canonicalizeName($name);
             }
+        } elseif (is_array($name) && count($name) >= 2) {
+            list($cName, $rName) = $name;
         } else {
             return false;
         }
 
-        return (
+        if (
             isset($this->invokableClasses[$cName])
             || isset($this->factories[$cName])
             || isset($this->aliases[$cName])
             || isset($this->instances[$cName])
             || ($checkAbstractFactories && $this->canCreateFromAbstractFactory($cName, $rName))
-        );
-    }
-
-    /**
-     * @param  string|array  $name
-     * @param  bool          $checkAbstractFactories
-     * @param  bool          $usePeeringServiceManagers
-     * @return bool
-     */
-    public function has($name, $checkAbstractFactories = true, $usePeeringServiceManagers = true)
-    {
-        if ($this->canCreate($name, $checkAbstractFactories)) {
+        ) {
             return true;
         }
 

@@ -136,6 +136,9 @@ class PropertyScanner implements ScannerInterface
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function getValueType()
     {
         return $this->valueType;

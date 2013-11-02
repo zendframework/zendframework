@@ -9,26 +9,12 @@
 
 namespace Zend\Mvc\I18n;
 
-use Zend\I18n\Translator\Translator as I18nTranslator;
 use Zend\Validator\Translator\TranslatorInterface as ValidatorTranslatorInterface;
 
-class Translator implements ValidatorTranslatorInterface
+class DummyTranslator implements ValidatorTranslatorInterface
 {
-    /**
-     * @var I18nTranslator
-     */
-    protected $translator;
-
-    /**
-     * @param I18nTranslator $translator
-     */
-    public function __construct(I18nTranslator $translator)
-    {
-        $this->translator = $translator;
-    }
-
     public function translate($message, $textDomain = 'default', $locale = null)
     {
-        return $this->translator->translate($message, $textDomain, $locale);
+        return $message;
     }
 }

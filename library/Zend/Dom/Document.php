@@ -10,10 +10,6 @@
 namespace Zend\Dom;
 
 use DOMDocument;
-use DOMXPath;
-use Zend\Dom\Document;
-use Zend\Dom\Exception;
-use Zend\Stdlib\ErrorHandler;
 
 /**
  * Class used to initialize DomDocument from string, with proper verifications

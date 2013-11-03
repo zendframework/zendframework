@@ -212,7 +212,7 @@ class Query
      */
     public function execute($query)
     {
-        $xpathQuery = Css2Xpath::transform($query);
+        $xpathQuery = Document\Query::cssToXpath($query);
         return $this->queryXpath($xpathQuery, $query);
     }
 

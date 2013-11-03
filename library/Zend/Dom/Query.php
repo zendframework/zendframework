@@ -319,10 +319,8 @@ class Query
 
         ErrorHandler::start();
         $nodeList = $xpath->query($xpathQuery);
-        $error = ErrorHandler::stop();
-        if ($error) {
-            throw $error;
-        }
+        ErrorHandler::stop(true);
+
         return $nodeList;
     }
 }

@@ -239,11 +239,12 @@ class Mcrypt implements SymmetricInterface
          * aes has $keySizes empty, meaning it can have arbitrary key length.
          * the others are more picky.
          */
-        if (empty($keySizes) && $keyLen < $maxKey) {
+        if (!empty($keySizes) && $keyLen < $maxKey) {
 
             if (!in_array($keyLen, $keySizes)) {
                  throw new Exception\InvalidArgumentException(
-                "The size of the key must be one of " . implode(", ", $keySizes) . " bytes or longer");
+                    "The size of the key must be one of "
+                    . implode(", ", $keySizes) . " bytes or longer");
             }
         }
         $this->key = $key;

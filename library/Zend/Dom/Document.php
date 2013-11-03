@@ -143,8 +143,8 @@ class Document
     /**
      * Get DOMDocument generated from set raw document
      *
-     * @return string|null
-     * @throws Exception\RuntimeException
+     * @return DOMDocument
+     * @throws Exception\RuntimeException If cannot get DOMDocument; no document registered
      */
     public function getDomDocument()
     {

@@ -11,6 +11,7 @@ namespace Zend\Dom;
 
 use DOMDocument;
 use DOMXPath;
+use ErrorException;
 use Zend\Stdlib\ErrorHandler;
 
 /**
@@ -300,6 +301,7 @@ class Query
      * @param  DOMDocument $document
      * @param  string|array $xpathQuery
      * @return array
+     * @throws ErrorException If query cannot be executed
      */
     protected function getNodeList($document, $xpathQuery)
     {

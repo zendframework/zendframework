@@ -236,7 +236,7 @@ class Mcrypt implements SymmetricInterface
         $maxKey = $this->getKeySize();
 
         /*
-         * aes has $keySizes empty, meaning it can have arbitrary key length.
+         * blowfish has $keySizes empty, meaning it can have arbitrary key length.
          * the others are more picky.
          */
         if (!empty($keySizes) && $keyLen < $maxKey) {

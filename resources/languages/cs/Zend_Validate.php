@@ -98,7 +98,7 @@ return array(
     "The input exceeds the allowed length" => "Hodnota překročila povolenou délku",
 
     // Zend\Validator\Explode
-    "Invalid type given" => "Chybný typ.",
+    "Invalid type given" => "Chybný typ",
 
     // Zend\Validator\File\Count
     "Too many files, maximum '%max%' are allowed but '%count%' are given" => "Příliš mnoho souborů. Maximum je '%max%', ale bylo zadáno '%count%'",

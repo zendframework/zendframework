@@ -21,6 +21,10 @@ return array(
     "The input contains non alphabetic characters" => "Hodnota obsahuje i jiné znaky než písmena",
     "The input is an empty string" => "Hodnota je prázdný řetězec",
 
+    // Zend\I18n\Validator\DateTime
+    "Invalid type given. String expected" => "Chybný typ. Byl očekáván řetězec",
+    "The input does not appear to be a valid datetime" => "Hodnota nevypadá jako platný datum a čas",
+
     // Zend\I18n\Validator\Float
     "Invalid type given. String, integer or float expected" => "Chybný typ. Byl očekáván řetězec, celé nebo desetinné číslo",
     "The input does not appear to be a float" => "Hodnota nevypadá jako desetinné číslo",
@@ -28,6 +32,11 @@ return array(
     // Zend\I18n\Validator\Int
     "Invalid type given. String or integer expected" => "Chybný typ. Byl očekáván řetězec nebo celé číslo",
     "The input does not appear to be an integer" => "Hodnota nevypadá jako celé číslo",
+
+    // Zend\I18n\Validator\PhoneNumber
+    "The input does not match a phone number format" => "Hodnota neodpovídá formátu telefonního čísla",
+    "The country provided is currently unsupported" => "Země je v současné době nepodporována",
+    "Invalid type given. String expected" => "Chybný typ. Byl očekáván řetězec",
 
     // Zend\I18n\Validator\PostCode
     "Invalid type given. String or integer expected" => "Chybný typ. Byl očekáván řetězec nebo celé číslo",
@@ -219,8 +228,8 @@ return array(
     "The input has failed the IBAN check" => "Hodnota neprošlo kontrolou IBAN",
 
     // Zend\Validator\Identical
-    "The two given tokens do not match" => "Zadané položky nejsou shodné",
-    "No token was provided to match against" => "Nebyla zadána položka pro porovnání",
+    "The two given tokens do not match" => "Zadané hodnoty nejsou shodné",
+    "No token was provided to match against" => "Nebyla zadána hodnota pro porovnání",
 
     // Zend\Validator\InArray
     "The input was not found in the haystack" => "Hodnota nebyla nalezena v seznamu",

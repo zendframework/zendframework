@@ -123,7 +123,7 @@ class Logger implements LoggerInterface
      * @return Logger
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(array $options = null)
+    public function __construct($options = null)
     {
         $this->writers = new SplPriorityQueue();
 
@@ -154,6 +154,8 @@ class Logger implements LoggerInterface
                 static::registerErrorHandler($this);
             }
 
+        } elseif ($options) {
+            throw new Exception\InvalidArgumentException('Options must be an array or an object implementing \Traversable ');
         }
 
         $this->processors = new SplPriorityQueue();
@@ -519,9 +521,7 @@ class Logger implements LoggerInterface
 
         $errorPriorityMap = static::$errorPriorityMap;
 
-        $previous = set_error_handler(function ($level, $message, $file, $line)
-            use ($logger, $errorPriorityMap, $continueNativeHandler)
-        {
+        $previous = set_error_handler(function ($level, $message, $file, $line) use ($logger, $errorPriorityMap, $continueNativeHandler) {
             $iniLevel = error_reporting();
 
             if ($iniLevel & $level) {

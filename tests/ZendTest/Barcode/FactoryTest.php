@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Barcode
  */
 
 namespace ZendTest\Barcode;
@@ -18,9 +17,6 @@ use Zend\Config\Config;
 use ZendPdf as Pdf;
 
 /**
- * @category   Zend
- * @package    Zend_Barcode
- * @subpackage UnitTests
  * @group      Zend_Barcode
  */
 class FactoryTest extends \PHPUnit_Framework_TestCase
@@ -247,7 +243,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $barcode = Barcode\Barcode::makeBarcode('barcodeNamespaceWithoutExtendingObjectAbstract');
     }
 
-    public function testBarcodeObjectFactoryWithUnexistantBarcode()
+    public function testBarcodeObjectFactoryWithUnexistentBarcode()
     {
         $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
         $barcode = Barcode\Barcode::makeBarcode('zf123', array());
@@ -329,7 +325,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $renderer = Barcode\Barcode::makeRenderer('rendererNamespaceWithoutExtendingRendererAbstract');
     }
 
-    public function testBarcodeRendererFactoryWithUnexistantRenderer()
+    public function testBarcodeRendererFactoryWithUnexistentRenderer()
     {
         $this->setExpectedException('\Zend\ServiceManager\Exception\ServiceNotFoundException');
         $renderer = Barcode\Barcode::makeRenderer('zend', array());

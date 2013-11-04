@@ -61,11 +61,11 @@ To run tests:
   component namespace, without the `Zend\` prefix:
 
   ```sh
-  % php run-tests Mvc
+  % php run-tests.php Mvc
   ```
 
   ```sh
-  % php run-tests ModuleManager Mvc View Navigation
+  % php run-tests.php ModuleManager Mvc View Navigation
   ```
 
 You can turn on conditional tests with the TestConfiguration.php file.

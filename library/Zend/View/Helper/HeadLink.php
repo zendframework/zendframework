@@ -17,6 +17,16 @@ use Zend\View\Exception;
  * Zend_Layout_View_Helper_HeadLink
  *
  * @see http://www.w3.org/TR/xhtml1/dtds.html
+ *
+ * Creates the following virtual methods:
+ * @method HeadLink appendStylesheet($href, $media, $conditionalStylesheet, $extras)
+ * @method HeadLink offsetSetStylesheet($index, $href, $media, $conditionalStylesheet, $extras)
+ * @method HeadLink prependStylesheet($href, $media, $conditionalStylesheet, $extras)
+ * @method HeadLink setStylesheet($href, $media, $conditionalStylesheet, $extras)
+ * @method HeadLink appendAlternate($href, $type, $title, $extras)
+ * @method HeadLink offsetSetAlternate($index, $href, $type, $title, $extras)
+ * @method HeadLink prependAlternate($href, $type, $title, $extras)
+ * @method HeadLink setAlternate($href, $type, $title, $extras)
  */
 class HeadLink extends Placeholder\Container\AbstractStandalone
 {
@@ -44,6 +54,21 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         parent::__construct();
 
         $this->setSeparator(PHP_EOL);
+    }
+
+    /**
+     * Proxy to __invoke()
+     *
+     * Allows calling $helper->headLink(), but, more importantly, chaining calls
+     * like ->appendStylesheet()->headLink().
+     *
+     * @param  array  $attributes
+     * @param  string $placement
+     * @return HeadLink
+     */
+    public function headLink(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
+    {
+        return call_user_func_array(array($this, '__invoke'), func_get_args());
     }
 
     /**
@@ -79,16 +104,6 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
 
     /**
      * Overload method access
-     *
-     * Creates the following virtual methods:
-     * - appendStylesheet($href, $media, $conditionalStylesheet, $extras)
-     * - offsetSetStylesheet($index, $href, $media, $conditionalStylesheet, $extras)
-     * - prependStylesheet($href, $media, $conditionalStylesheet, $extras)
-     * - setStylesheet($href, $media, $conditionalStylesheet, $extras)
-     * - appendAlternate($href, $type, $title, $extras)
-     * - offsetSetAlternate($index, $href, $type, $title, $extras)
-     * - prependAlternate($href, $type, $title, $extras)
-     * - setAlternate($href, $type, $title, $extras)
      *
      * Items that may be added in the future:
      * - Navigation?  need to find docs on this

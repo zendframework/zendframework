@@ -5,17 +5,14 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter;
 
 use Zend\Filter\BaseName as BaseNameFilter;
+use Zend\Stdlib\ErrorHandler;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class BaseNameTest extends \PHPUnit_Framework_TestCase
@@ -38,21 +35,31 @@ class BaseNameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that an InvalidArgumentException is raised if array is used
+     * Ensures that a warning is raised if array is used
      *
      * @return void
      */
-    public function testExceptionRaisedIfArrayUsed()
+    public function testWarningIsRaisedIfArrayUsed()
     {
         $filter = new BaseNameFilter();
         $input = array('/path/to/filename', '/path/to/filename.ext');
 
-        try {
-            $filter->filter($input);
-        } catch (\Zend\Filter\Exception\InvalidArgumentException $expected) {
-            return;
-        }
+        ErrorHandler::start(E_USER_WARNING);
+        $filtered = $filter->filter($input);
+        $err = ErrorHandler::stop();
 
-        $this->fail('An expected InvalidArgumentException has not been raised.');
+        $this->assertEquals($input, $filtered);
+        $this->assertInstanceOf('ErrorException', $err);
+        $this->assertContains('cannot filter', $err->getMessage());
+    }
+
+    /**
+     * @return void
+     */
+    public function testReturnsNullIfNullIsUsed()
+    {
+        $filter   = new BaseNameFilter();
+        $filtered = $filter->filter(null);
+        $this->assertNull($filtered);
     }
 }

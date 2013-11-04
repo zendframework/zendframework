@@ -86,6 +86,7 @@ class Server extends AbstractServer
             $argv = array_slice($argv, 2);
         }
 
+        $class = null;
         if (is_string($function)) {
             $method = Reflection::reflectFunction($function, $argv, $namespace);
         } else {
@@ -106,7 +107,7 @@ class Server extends AbstractServer
             }
         }
 
-        $definition = $this->_buildSignature($method);
+        $definition = $this->_buildSignature($method, $class);
         $this->_addMethodServiceMap($definition);
 
         return $this;
@@ -482,6 +483,10 @@ class Server extends AbstractServer
     protected function _handle()
     {
         $request = $this->getRequest();
+
+        if($request->isParseError()){
+            return $this->fault('Parse error', Error::ERROR_PARSE);
+        }
 
         if (!$request->isMethodError() && (null === $request->getMethod())) {
             return $this->fault('Invalid Request', Error::ERROR_INVALID_REQUEST);

@@ -19,7 +19,7 @@ use DateTime;
  * function acts likes a factory for the Zend\XmlRpc\Value objects
  *
  * Using this function, users/Zend\XmlRpc\Client object can create the Zend\XmlRpc\Value objects
- * from PHP variables, XML string or by specifying the exact XML-RPC natvie type
+ * from PHP variables, XML string or by specifying the exact XML-RPC native type
  */
 abstract class AbstractValue
 {
@@ -445,6 +445,9 @@ abstract class AbstractValue
         // If no type was specified, the default is string
         if (!$type) {
             $type = self::XMLRPC_TYPE_STRING;
+            if (empty($value) and preg_match('#^<value>.*</value>$#', $xml->asXML())) {
+                $value = str_replace(array('<value>', '</value>'), '', $xml->asXML());
+            }
         }
     }
 

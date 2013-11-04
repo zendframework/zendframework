@@ -446,6 +446,19 @@ class Di implements DependencyInjectionInterface
             $callParameters = $this->resolveMethodParameters($class, '__construct', $params, $alias, self::METHOD_IS_CONSTRUCTOR, true);
         }
 
+        if (!class_exists($class)) {
+            if (interface_exists($class)) {
+                throw new Exception\ClassNotFoundException(sprintf(
+                    'Cannot instantiate interface "%s"',
+                    $class
+                ));
+            }
+            throw new Exception\ClassNotFoundException(sprintf(
+                'Class "%s" does not exist; cannot instantiate',
+                $class
+            ));
+        }
+
         // Hack to avoid Reflection in most common use cases
         switch (count($callParameters)) {
             case 0:
@@ -587,6 +600,17 @@ class Di implements DependencyInjectionInterface
 
         if ($requestedClass != $class && $this->instanceManager->hasConfig($requestedClass)) {
             $iConfig['requestedClass'] = $this->instanceManager->getConfig($requestedClass);
+
+            if (array_key_exists('parameters', $iConfig['requestedClass'])) {
+                $newParameters = array();
+
+                foreach($iConfig['requestedClass']['parameters'] as $name=>$parameter) {
+                    $newParameters[$requestedClass.'::'.$method.'::'.$name] = $parameter;
+                }
+
+                $iConfig['requestedClass']['parameters'] = $newParameters;
+            }
+
             if ($requestedAlias) {
                 $iConfig['requestedAlias'] = $this->instanceManager->getConfig($requestedAlias);
             }

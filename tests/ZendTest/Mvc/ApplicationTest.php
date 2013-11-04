@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc;
@@ -25,11 +24,6 @@ use Zend\ServiceManager\ServiceManager;
 use Zend\Uri\UriFactory;
 use ZendTest\Mvc\TestAsset\StubBootstrapListener;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage UnitTest
- */
 class ApplicationTest extends TestCase
 {
     /**
@@ -665,13 +659,13 @@ class ApplicationTest extends TestCase
     {
         $this->application->bootstrap(array('BootstrapListener'));
 
-        // must contains custom bootstrap listeners
+        // must contain custom bootstrap listeners
         $bootstrapListener = $this->serviceManager->get('BootstrapListener');
         $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_BOOTSTRAP);
         $bootstrapListeners = $bootstrapListener->getListeners();
         $this->assertTrue($listeners->contains($bootstrapListeners[0]));
 
-        // must contains default listeners
+        // must contain default listeners
         $listeners = $this->application->getEventManager()->getListeners(MvcEvent::EVENT_DISPATCH);
         $this->assertEquals(1, count($listeners));
 

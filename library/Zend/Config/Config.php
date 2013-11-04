@@ -38,7 +38,7 @@ class Config implements Countable, Iterator, ArrayAccess
     protected $count;
 
     /**
-     * Data withing the configuration.
+     * Data within the configuration.
      *
      * @var array
      */

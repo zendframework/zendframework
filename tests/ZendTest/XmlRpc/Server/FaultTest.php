@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_XmlRpc
  */
 
 namespace ZendTest\XmlRpc\Server;
@@ -13,9 +12,6 @@ namespace ZendTest\XmlRpc\Server;
 use Zend\XmlRpc\Server;
 
 /**
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
  * @group      Zend_XmlRpc
  */
 class FaultTest extends \PHPUnit_Framework_TestCase
@@ -229,11 +225,11 @@ class Observer
 
     public static function getInstance()
     {
-        if (!self::$_instance) {
-            self::$_instance = new self();
+        if (!static::$_instance) {
+            static::$_instance = new self();
         }
 
-        return self::$_instance;
+        return static::$_instance;
     }
 
     public static function observe(Server\Fault $fault)

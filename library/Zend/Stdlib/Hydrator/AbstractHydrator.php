@@ -149,7 +149,7 @@ abstract class AbstractHydrator implements HydratorInterface, StrategyEnabledInt
      *
      * <code>
      * $composite->addFilter("servicelocator",
-     *     function($property) {
+     *     function ($property) {
      *         list($class, $method) = explode('::', $property);
      *         if ($method === 'getServiceLocator') {
      *             return false;

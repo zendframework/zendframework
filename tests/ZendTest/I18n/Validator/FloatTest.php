@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace ZendTest\I18n\Validator;
@@ -14,9 +13,6 @@ use Zend\I18n\Validator\Float as FloatValidator;
 use Locale;
 
 /**
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
  * @group      Zend_Validator
  */
 class FloatTest extends \PHPUnit_Framework_TestCase
@@ -31,13 +27,19 @@ class FloatTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->locale    = Locale::getDefault();
         $this->validator = new FloatValidator(array('locale' => 'en'));
     }
 
     public function tearDown()
     {
-        Locale::setDefault($this->locale);
+        if (extension_loaded('intl')) {
+            Locale::setDefault($this->locale);
+        }
     }
 
     /**

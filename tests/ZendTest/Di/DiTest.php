@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Di
  */
 
 namespace ZendTest\Di;
@@ -474,6 +473,41 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($a, $d->a);
     }
 
+    public function testNewInstanceWillThrowAnClassNotFoundExceptionWhenClassIsAnInterface()
+    {
+        $definitionArray = array (
+            'ZendTest\Di\TestAsset\ConstructorInjection\D' => array(
+                'supertypes' => array(),
+                'instantiator' => '__construct',
+                'methods' => array('__construct' => 3),
+                'parameters' => array(
+                    '__construct' =>
+                    array (
+                        'ZendTest\Di\TestAsset\ConstructorInjection\D::__construct:0' => array(
+                            0 => 'd',
+                            1 => 'ZendTest\Di\TestAsset\DummyInterface',
+                            2 => true,
+                            3 => NULL,
+                        ),
+                    ),
+                ),
+            ),
+            'ZendTest\Di\TestAsset\DummyInterface' => array(
+                'supertypes' => array(),
+                'instantiator' => NULL,
+                'methods' => array(),
+                'parameters' => array(),
+            ),
+        );
+        $definitionList = new DefinitionList(array(
+            new Definition\ArrayDefinition($definitionArray)
+        ));
+        $di = new Di($definitionList);
+
+        $this->setExpectedException('Zend\Di\Exception\ClassNotFoundException', 'Cannot instantiate interface');
+        $di->get('ZendTest\Di\TestAsset\ConstructorInjection\D');
+    }
+
     public function testMatchPreferredClassWithAwareInterface()
     {
         $di = new Di();
@@ -841,5 +875,36 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di->instanceManager()->addSharedInstance(new $sharedInstanceClass, $sharedInstanceClass);
         $returnedC = $di->get($retrievedInstanceClass, array('params' => array('test')));
         $this->assertInstanceOf($retrievedInstanceClass, $returnedC);
+    }
+
+    public function testGetInstanceWithParamsHasSameNameAsDependencyParam()
+    {
+        $config = new Config(array(
+            'definition' => array(
+                'class' => array(
+                    'ZendTest\Di\TestAsset\AggregateClasses\AggregateItems' => array(
+                        'addItem' => array(
+                            'item' => array('type'=>'ZendTest\Di\TestAsset\AggregateClasses\ItemInterface',
+                                            'required'=>true)
+                        )
+                    )
+                )
+            ),
+            'instance' => array(
+                'ZendTest\Di\TestAsset\AggregateClasses\AggregateItems' => array(
+                    'injections' => array(
+                        'ZendTest\Di\TestAsset\AggregateClasses\Item'
+                    )
+                ),
+                'ZendTest\Di\TestAsset\AggregatedParamClass' => array(
+                    'parameters' => array(
+                        'item' => 'ZendTest\Di\TestAsset\AggregateClasses\AggregateItems'
+                    )
+                )
+            )
+        ));
+
+        $di = new Di(null, null, $config);
+        $this->assertCount(1, $di->get('ZendTest\Di\TestAsset\AggregatedParamClass')->aggregator->items);
     }
 }

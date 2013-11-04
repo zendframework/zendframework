@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace ZendTest\Http\Header;
@@ -32,6 +31,13 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($setCookieHeader->isHttpOnly());
         $this->assertEquals(99, $setCookieHeader->getMaxAge());
         $this->assertEquals(9, $setCookieHeader->getVersion());
+    }
+
+    public function testSetCookieFromStringWithQuotedValue()
+    {
+        $setCookieHeader = SetCookie::fromString('Set-Cookie: myname="quotedValue"');
+        $this->assertEquals('quotedValue', $setCookieHeader->getValue());
+        $this->assertEquals('myname=quotedValue', $setCookieHeader->getFieldValue());
     }
 
     public function testSetCookieFromStringCreatesValidSetCookieHeader()
@@ -150,7 +156,102 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $target = 'Set-Cookie: myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
             . ' Domain=docs.foo.com; Path=/accounts;'
             . ' Secure; HttpOnly, othername=othervalue';
+        $this->assertNotEquals($target, $headerLine);
+
+        $target = 'Set-Cookie: myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
+            . ' Domain=docs.foo.com; Path=/accounts;'
+            . ' Secure; HttpOnly';
+        $target.= "\n";
+        $target.= 'Set-Cookie: othername=othervalue';
         $this->assertEquals($target, $headerLine);
+    }
+
+    public function testSetCookieAttributesAreUnsettable()
+    {
+        $setCookieHeader = new SetCookie();
+        $setCookieHeader->setName('myname');
+        $setCookieHeader->setValue('myvalue');
+        $setCookieHeader->setExpires('Wed, 13-Jan-2021 22:23:01 GMT');
+        $setCookieHeader->setDomain('docs.foo.com');
+        $setCookieHeader->setPath('/accounts');
+        $setCookieHeader->setSecure(true);
+        $setCookieHeader->setHttponly(true);
+
+        $target = 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
+            . ' Domain=docs.foo.com; Path=/accounts;'
+            . ' Secure; HttpOnly';
+        $this->assertSame($target, $setCookieHeader->getFieldValue()); // attributes set
+
+        $setCookieHeader->setExpires(NULL);
+        $setCookieHeader->setDomain(NULL);
+        $setCookieHeader->setPath(NULL);
+        $setCookieHeader->setSecure(NULL);
+        $setCookieHeader->setHttponly(NULL);
+        $this->assertSame('myname=myvalue', $setCookieHeader->getFieldValue()); // attributes unset
+
+        $setCookieHeader->setValue(NULL);
+        $this->assertSame('myname=', $setCookieHeader->getFieldValue());
+        $this->assertNull($setCookieHeader->getValue());
+        $this->assertNull($setCookieHeader->getExpires());
+        $this->assertNull($setCookieHeader->getDomain());
+        $this->assertNull($setCookieHeader->getPath());
+        $this->assertNull($setCookieHeader->isSecure());
+        $this->assertNull($setCookieHeader->isHttponly());
+    }
+
+    public function testSetCookieFieldValueIsEmptyStringWhenNameIsUnset()
+    {
+        $setCookieHeader = new SetCookie();
+        $this->assertSame('', $setCookieHeader->getFieldValue()); // empty
+
+        $setCookieHeader->setName('myname');
+        $setCookieHeader->setValue('myvalue');
+        $setCookieHeader->setExpires('Wed, 13-Jan-2021 22:23:01 GMT');
+        $setCookieHeader->setDomain('docs.foo.com');
+        $setCookieHeader->setPath('/accounts');
+        $setCookieHeader->setSecure(true);
+        $setCookieHeader->setHttponly(true);
+
+        $target = 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
+            . ' Domain=docs.foo.com; Path=/accounts;'
+            . ' Secure; HttpOnly';
+        $this->assertSame($target, $setCookieHeader->getFieldValue()); // not empty
+
+        $setCookieHeader->setName(null);
+        $this->assertSame('', $setCookieHeader->getFieldValue()); // empty again
+        $this->assertNull($setCookieHeader->getName());
+    }
+
+    public function testSetCookieSetExpiresWithZeroTimeStamp()
+    {
+        $setCookieHeader = new SetCookie('myname', 'myvalue', 0);
+        $this->assertSame('Thu, 01-Jan-1970 00:00:00 GMT', $setCookieHeader->getExpires());
+
+        $setCookieHeader = new SetCookie('myname', 'myvalue', 1);
+        $this->assertSame('Thu, 01-Jan-1970 00:00:01 GMT', $setCookieHeader->getExpires());
+
+        $setCookieHeader->setExpires(0);
+        $this->assertSame('Thu, 01-Jan-1970 00:00:00 GMT', $setCookieHeader->getExpires());
+
+        $target = 'myname=myvalue; Expires=Thu, 01-Jan-1970 00:00:00 GMT';
+        $this->assertSame($target, $setCookieHeader->getFieldValue());
+    }
+
+    public function testSetCookieSetExpiresWithUnixEpochString()
+    {
+        $setCookieHeader = new SetCookie('myname', 'myvalue', 'Thu, 01-Jan-1970 00:00:00 GMT');
+        $this->assertSame('Thu, 01-Jan-1970 00:00:00 GMT', $setCookieHeader->getExpires());
+        $this->assertSame(0, $setCookieHeader->getExpires(true));
+
+        $setCookieHeader = new SetCookie('myname', 'myvalue', 1);
+        $this->assertSame('Thu, 01-Jan-1970 00:00:01 GMT', $setCookieHeader->getExpires());
+
+        $setCookieHeader->setExpires('Thu, 01-Jan-1970 00:00:00 GMT');
+        $this->assertSame('Thu, 01-Jan-1970 00:00:00 GMT', $setCookieHeader->getExpires());
+        $this->assertSame(0, $setCookieHeader->getExpires(true));
+
+        $target = 'myname=myvalue; Expires=Thu, 01-Jan-1970 00:00:00 GMT';
+        $this->assertSame($target, $setCookieHeader->getFieldValue());
     }
 
     public function testIsValidForRequestSubdomainMatch()
@@ -172,7 +273,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
      */
     public function testZF2_169()
     {
-        $cookie = 'Set-Cookie: leo_auth_token="example"; Version=1; Max-Age=1799; Expires=Mon, 20-Feb-2012 02:49:57 GMT; Path=/';
+        $cookie = 'Set-Cookie: leo_auth_token=example; Version=1; Max-Age=1799; Expires=Mon, 20-Feb-2012 02:49:57 GMT; Path=/';
         $setCookieHeader = SetCookie::fromString($cookie);
         $this->assertEquals($cookie, $setCookieHeader->toString());
     }
@@ -182,7 +283,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
      */
     public function testDoesNotAcceptCookieNameFromArbitraryLocationInHeaderValue()
     {
-        $cookie = 'Set-Cookie: Version=1; Max-Age=1799; Expires=Mon, 20-Feb-2012 02:49:57 GMT; Path=/; leo_auth_token="example"';
+        $cookie = 'Set-Cookie: Version=1; Max-Age=1799; Expires=Mon, 20-Feb-2012 02:49:57 GMT; Path=/; leo_auth_token=example';
         $setCookieHeader = SetCookie::fromString($cookie);
         $this->assertNotEquals('leo_auth_token', $setCookieHeader->getName());
     }
@@ -216,6 +317,47 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
             $this->fail("Failed creating a cookie object from '$cStr'");
         }
         $this->assertEquals($cookie->getFieldName() . ': ' . $expected, $cookie->toString());
+    }
+
+    public function testRfcCompatibility()
+    {
+        $name = 'myname';
+        $value = 'myvalue';
+        $formatUnquoted = '%s: %s=%s';
+        $formatQuoted = '%s: %s="%s"';
+
+        $cookie = new SetCookie( $name, $value );
+
+        // default
+        $this->assertEquals( $cookie->toString(), sprintf($formatUnquoted,$cookie->getFieldName(),$name,$value));
+
+        // rfc with quote
+        $cookie->setQuoteFieldValue(true);
+        $this->assertEquals( $cookie->toString(), sprintf($formatQuoted,$cookie->getFieldName(),$name,$value));
+
+        // rfc without quote
+        $cookie->setQuoteFieldValue(false);
+        $this->assertEquals( $cookie->toString(), sprintf($formatUnquoted,$cookie->getFieldName(),$name,$value));
+    }
+
+    public function testSetJsonValue()
+    {
+        $cookieName ="fooCookie";
+        $jsonData = json_encode(array('foo'=>'bar'));
+
+        $cookie= new SetCookie($cookieName,$jsonData);
+
+        $regExp = sprintf('#^%s=%s#',$cookieName,urlencode($jsonData));
+        $this->assertRegExp($regExp,$cookie->getFieldValue());
+
+        $cookieName ="fooCookie";
+        $jsonData = json_encode(array('foo'=>'bar'));
+
+        $cookie= new SetCookie($cookieName,$jsonData);
+        $cookie->setDomain('example.org');
+
+        $regExp = sprintf('#^%s=%s; Domain=#',$cookieName,urlencode($jsonData));
+        $this->assertRegExp($regExp,$cookie->getFieldValue());
     }
 
     /**

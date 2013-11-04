@@ -24,7 +24,7 @@ class AtomDeleted extends Renderer\AbstractRenderer implements Renderer\Renderer
      *
      * @param  Writer\Deleted $container
      */
-    public function __construct (Writer\Deleted $container)
+    public function __construct(Writer\Deleted $container)
     {
         parent::__construct($container);
     }

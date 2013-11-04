@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Crypt
  */
 
 namespace ZendTest\Crypt\Key\Derivation;
@@ -13,9 +12,6 @@ namespace ZendTest\Crypt\Key\Derivation;
 use Zend\Crypt\Key\Derivation\Scrypt;
 
 /**
- * @category   Zend
- * @package    Zend_Crypt
- * @subpackage UnitTests
  * @group      Zend_Crypt
  */
 class ScryptTest extends \PHPUnit_Framework_TestCase
@@ -53,12 +49,12 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
         }
         $salsa20 = self::getMethod($salsaAlg);
         $obj     = $this->getMockForAbstractClass('Zend\Crypt\Key\Derivation\Scrypt');
-        $input   = self::hex2bin(str_replace(array(' ',"\n"),'',$hexInput));
+        $input   = self::hex2bin(str_replace(array(' ',PHP_EOL),'',$hexInput));
         $result  = $salsa20->invokeArgs($obj, array($input));
 
         $this->assertEquals(64, strlen($input), 'Input must be a string of 64 bytes');
         $this->assertEquals(64, strlen($result), 'Output must be a string of 64 bytes');
-        $this->assertEquals(str_replace(array(' ',"\n"),'',$hexOutput), bin2hex($result));
+        $this->assertEquals(str_replace(array(' ',PHP_EOL),'',$hexOutput), bin2hex($result));
     }
     /**
      * Test vector of Scrypt BlockMix
@@ -89,10 +85,10 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
 
         $blockMix = self::getMethod('scryptBlockMix');
         $obj      = $this->getMockForAbstractClass('Zend\Crypt\Key\Derivation\Scrypt');
-        $input    = self::hex2bin(str_replace(array(' ',"\n"), '', $hexInput));
+        $input    = self::hex2bin(str_replace(array(' ',PHP_EOL), '', $hexInput));
         $result   = $blockMix->invokeArgs($obj, array($input, 1));
 
-        $this->assertEquals(str_replace(array(' ',"\n"),'',$hexOutput), bin2hex($result));
+        $this->assertEquals(str_replace(array(' ',PHP_EOL),'',$hexOutput), bin2hex($result));
     }
 
     /**
@@ -123,10 +119,10 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
 
         $roMix  = self::getMethod('scryptROMix');
         $obj    = $this->getMockForAbstractClass('Zend\Crypt\Key\Derivation\Scrypt');
-        $input  = self::hex2bin(str_replace(array(' ',"\n"), '', $hexInput));
+        $input  = self::hex2bin(str_replace(array(' ',PHP_EOL), '', $hexInput));
         $result = $roMix->invokeArgs($obj, array($input, 16, 1));
 
-        $this->assertEquals(str_replace(array(' ',"\n"),'',$hexOutput), bin2hex($result));
+        $this->assertEquals(str_replace(array(' ',PHP_EOL),'',$hexOutput), bin2hex($result));
     }
 
 
@@ -144,7 +140,7 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
 
         $result = Scrypt::calc('', '', 16, 1, 1, 64);
         $this->assertEquals(64, strlen($result));
-        $this->assertEquals(str_replace(array(' ',"\n"),'',$hexOutput), bin2hex($result));
+        $this->assertEquals(str_replace(array(' ',PHP_EOL),'',$hexOutput), bin2hex($result));
     }
 
     /**

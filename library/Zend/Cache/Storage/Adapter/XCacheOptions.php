@@ -74,7 +74,7 @@ class XCacheOptions extends AdapterOptions
      */
     public function setAdminUser($adminUser)
     {
-        $adminUser = ($adminUser === null) ? null : (string)$adminUser;
+        $adminUser = ($adminUser === null) ? null : (string) $adminUser;
         if ($this->adminUser !== $adminUser) {
             $this->triggerOptionEvent('admin_user', $adminUser);
             $this->adminUser = $adminUser;
@@ -126,7 +126,7 @@ class XCacheOptions extends AdapterOptions
      */
     public function setAdminPass($adminPass)
     {
-        $adminPass = ($adminPass === null) ? null : (string)$adminPass;
+        $adminPass = ($adminPass === null) ? null : (string) $adminPass;
         if ($this->adminPass !== $adminPass) {
             $this->triggerOptionEvent('admin_pass', $adminPass);
             $this->adminPass = $adminPass;

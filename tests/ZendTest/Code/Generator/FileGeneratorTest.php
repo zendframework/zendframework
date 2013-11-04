@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace ZendTest\Code\Generator;
@@ -16,9 +15,6 @@ use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Reflection\FileReflection;
 
 /**
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  *
@@ -131,8 +127,6 @@ namespace ZendTest\Code\Generator\TestAsset;
 
 /**
  * class docblock
- *
- * @package Zend_Reflection_TestSampleSingleClass
  *
  */
 class TestSampleSingleClass
@@ -304,5 +298,15 @@ EOS;
     {
         $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/TestAsset/OneInterface.php');
         $this->assertInstanceOf('Zend\Code\Generator\FileGenerator', $generator);
+    }
+
+    public function testGeneratedClassesHaveUses()
+    {
+        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/TestAsset/ClassWithUses.php');
+        $class = $generator->getClass();
+
+        $expectedUses = array('ZendTest\Code\Generator\TestAsset\ClassWithNamespace');
+
+        $this->assertEquals($expectedUses, $class->getUses());
     }
 }

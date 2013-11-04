@@ -386,7 +386,7 @@ class Headers implements Countable, Iterator
     public function toString()
     {
         $headers = '';
-        foreach ($this->headers as $header) {
+        foreach ($this as $header) {
             if ($str = $header->toString()) {
                 $headers .= $str . self::EOL;
             }

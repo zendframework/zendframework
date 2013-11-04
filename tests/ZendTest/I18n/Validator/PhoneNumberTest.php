@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace Zend\I18nTest\Validator;
@@ -3039,9 +3038,17 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
             foreach ($parameters['patterns']['example'] as $type => $value) {
                 $this->validator->allowedTypes(array($type));
                 $this->assertTrue($this->validator->isValid($value));
+
                 // check with country code:
-                $value = $parameters['code'] . $value;
-                $this->assertTrue($this->validator->isValid($value));
+                $countryCodePrefixed = $parameters['code'] . $value;
+                $this->assertTrue($this->validator->isValid($countryCodePrefixed));
+
+                // check fully qualified E.123/E.164 international variants
+                $fullyQualifiedDoubleO = '00' . $parameters['code'] . $value;
+                $this->assertTrue($this->validator->isValid($fullyQualifiedDoubleO));
+
+                $fullyQualifiedPlus = '+' . $parameters['code'] . $value;
+                $this->assertTrue($this->validator->isValid($fullyQualifiedPlus));
             }
         }
     }
@@ -3054,9 +3061,17 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
             foreach ($parameters['patterns']['example'] as $type => $value) {
                 $this->validator->allowedTypes(array($type));
                 $this->assertTrue($this->validator->isValid($value));
+
                 // check with country code:
-                $value = $parameters['code'] . $value;
-                $this->assertTrue($this->validator->isValid($value));
+                $countryCodePrefixed = $parameters['code'] . $value;
+                $this->assertTrue($this->validator->isValid($countryCodePrefixed));
+
+                // check fully qualified E.123/E.164 international variants
+                $fullyQualifiedDoubleO = '00'. $parameters['code'] . $value;
+                $this->assertTrue($this->validator->isValid($fullyQualifiedDoubleO), $fullyQualifiedDoubleO);
+
+                $fullyQualifiedPlus = '+'. $parameters['code'] . $value;
+                $this->assertTrue($this->validator->isValid($fullyQualifiedPlus), $fullyQualifiedPlus);
             }
         }
     }

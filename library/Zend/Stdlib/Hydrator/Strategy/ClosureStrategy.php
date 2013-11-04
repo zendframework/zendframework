@@ -13,7 +13,7 @@ class ClosureStrategy implements StrategyInterface
 {
     /**
      * Function, used in extract method, default:
-     * function($value) {
+     * function ($value) {
      *     return $value;
      * };
      * @var callable
@@ -22,7 +22,7 @@ class ClosureStrategy implements StrategyInterface
 
     /**
      * Function, used in hydrate method, default:
-     * function($value) {
+     * function ($value) {
      *     return $value;
      * };
      * @var callable
@@ -32,11 +32,11 @@ class ClosureStrategy implements StrategyInterface
     /**
      * You can describe how your values will extract and hydrate, like this:
      * $hydrator->addStrategy('category', new ClosureStrategy(
-     *     function(Category $value) {
-     *         return (int)$value->id;
+     *     function (Category $value) {
+     *         return (int) $value->id;
      *     },
-     *     function($value) {
-     *         return new Category((int)$value);
+     *     function ($value) {
+     *         return new Category((int) $value);
      *     }
      * ));
      *
@@ -54,7 +54,7 @@ class ClosureStrategy implements StrategyInterface
 
             $this->extractFunc = $extractFunc;
         } else {
-            $this->extractFunc = function($value) {
+            $this->extractFunc = function ($value) {
                 return $value;
             };
         }
@@ -66,7 +66,7 @@ class ClosureStrategy implements StrategyInterface
 
             $this->hydrateFunc = $hydrateFunc;
         } else {
-            $this->hydrateFunc = function($value) {
+            $this->hydrateFunc = function ($value) {
                 return $value;
             };
         }

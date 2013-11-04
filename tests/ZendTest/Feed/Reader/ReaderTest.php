@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\Reader;
@@ -16,9 +15,6 @@ use Zend\Http\Response as HttpResponse;
 use Zend\Feed\Reader;
 
 /**
-* @category Zend
-* @package Zend_Feed
-* @subpackage UnitTests
 * @group Zend_Feed
 * @group Zend_Feed_Reader
 */
@@ -268,6 +264,11 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Reader\Reader::isRegistered('JungleBooks'));
     }
 
+    /**
+     * This test is failing on windows:
+     * Failed asserting that exception of type "Zend\Feed\Reader\Exception\RuntimeException" matches expected exception "Zend\Feed\Reader\Exception\InvalidArgumentException". Message was: "DOMDocument cannot parse XML: Entity 'discloseInfo' failed to parse".
+     * @todo why is the assertEquals commented out?
+     */
     public function testXxePreventionOnFeedParsing()
     {
         $this->setExpectedException('Zend\Feed\Reader\Exception\InvalidArgumentException');

@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\Writer;
@@ -16,9 +15,6 @@ use Zend\Feed\Writer\Feed;
 use Zend\Feed\Writer\Version;
 
 /**
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
  */
@@ -1025,6 +1021,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
 EOT;
         $feed = str_replace('%version%', Version::VERSION, $feed);
+        $feed = str_replace("\r\n", "\n", $feed);
         $this->assertEquals($feed, $export);
     }
 
@@ -1046,6 +1043,7 @@ EOT;
 
 EOT;
         $feed = str_replace('%version%', Version::VERSION, $feed);
+        $feed = str_replace("\r\n", "\n", $feed);
         $this->assertEquals($feed, $export);
     }
 

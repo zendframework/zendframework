@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator\File;
@@ -15,9 +14,6 @@ use Zend\Validator\File;
 /**
  * IsCompressed testbed
  *
- * @category   Zend
- * @package    Zend_Validator_File
- * @subpackage UnitTests
  * @group      Zend_Validator
  */
 class IsCompressedTest extends \PHPUnit_Framework_TestCase
@@ -26,7 +22,7 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
     {
         // As of PHP >= 5.3.11 and >= 5.4.1 the magic database format has changed.
         // http://doc.php.net/downloads/pdf/split/de/File-Information.pdf (page 11)
-        if (version_compare(PHP_VERSION, '5.3.10', '<=')
+        if (version_compare(PHP_VERSION, '5.3.11', '<')
             || (version_compare(PHP_VERSION, '5.4', '>=')
                 && version_compare(PHP_VERSION, '5.4.1', '<'))
         ) {

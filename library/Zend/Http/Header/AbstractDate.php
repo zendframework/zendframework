@@ -74,7 +74,7 @@ abstract class AbstractDate implements HeaderInterface
     {
         $dateHeader = new static();
 
-        list($name, $date) = explode(': ', $headerLine, 2);
+        list($name, $date) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== strtolower($dateHeader->getFieldName())) {

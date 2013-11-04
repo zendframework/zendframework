@@ -14,6 +14,7 @@ use Zend\Filter\FilterChain;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\ValidatorInterface;
 use Zend\Validator\ValidatorChain;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Factory
 {
@@ -116,7 +117,15 @@ class Factory
     public function setInputFilterManager(InputFilterPluginManager $inputFilterManager)
     {
         $this->inputFilterManager = $inputFilterManager;
-
+        $serviceLocator = $this->inputFilterManager->getServiceLocator();
+        if ($serviceLocator && $serviceLocator instanceof ServiceLocatorInterface) {
+            if ($serviceLocator->has('ValidatorManager')) {
+                $this->getDefaultValidatorChain()->setPluginManager($serviceLocator->get('ValidatorManager'));
+            }
+            if ($serviceLocator->has('FilterManager')) {
+                $this->getDefaultFilterChain()->setPluginManager($serviceLocator->get('FilterManager'));
+            }
+        }
         return $this;
     }
 
@@ -212,6 +221,7 @@ class Factory
                     break;
                 case 'error_message':
                     $input->setErrorMessage($value);
+                    break;
                 case 'fallback_value':
                     $input->setFallbackValue($value);
                     break;
@@ -283,6 +293,7 @@ class Factory
         $inputFilter = $this->getInputFilterManager()->get($type);
 
         if ($inputFilter instanceof CollectionInputFilter) {
+            $inputFilter->setFactory($this);
             if (isset($inputFilterSpecification['input_filter'])) {
                 $inputFilter->setInputFilter($inputFilterSpecification['input_filter']);
             }

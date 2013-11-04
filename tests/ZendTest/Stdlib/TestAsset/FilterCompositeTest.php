@@ -5,7 +5,6 @@
  * @link           http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright      Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license        http://framework.zend.com/license/new-bsd New BSD License
- * @package        Zend_Service
  */
 
 namespace ZendTest\Stdlib;
@@ -25,7 +24,7 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->filterComposite->filter("foo"));
         $this->filterComposite->addFilter("has",
-            function($property) {
+            function ($property) {
                 return false;
             }
         );
@@ -35,7 +34,7 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
     public function testValidationRemove()
     {
         $this->filterComposite->addFilter("has",
-            function($property) {
+            function ($property) {
                 return false;
             }
         );
@@ -47,7 +46,7 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
     public function testValidationHas()
     {
         $this->filterComposite->addFilter("has",
-            function($property) {
+            function ($property) {
                 return false;
             }
         );
@@ -62,7 +61,7 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
         $this->filterComposite->addFilter("is", new \Zend\Stdlib\Hydrator\Filter\IsFilter());
 
         $this->filterComposite->addFilter("exclude",
-            function($property) {
+            function ($property) {
                 $method = substr($property, strpos($property, '::'));
 
                 if ($method === 'getServiceLocator') {
@@ -80,13 +79,13 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
     public function testConstructorInjection()
     {
         $andCondition = array(
-            'servicelocator' => function($property) {
+            'servicelocator' => function ($property) {
                 if ($property === 'getServiceLocator') {
                     return false;
                 }
                 return true;
             },
-            'foobar' => function($property) {
+            'foobar' => function ($property) {
                 if ($property === 'getFooBar') {
                     return false;
                 }
@@ -109,10 +108,10 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
     public function testWithOnlyAndFiltersAdded()
     {
         $filter = new FilterComposite();
-        $filter->addFilter("foobarbaz", function($property) {
+        $filter->addFilter("foobarbaz", function ($property) {
                 return true;
             }, FilterComposite::CONDITION_AND);
-        $filter->addFilter("foobar", function($property) {
+        $filter->addFilter("foobar", function ($property) {
                 return true;
             }, FilterComposite::CONDITION_AND);
         $this->assertTrue($filter->filter("foo"));
@@ -121,10 +120,10 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
     public function testWithOnlyOrFiltersAdded()
     {
         $filter = new FilterComposite();
-        $filter->addFilter("foobarbaz", function($property) {
+        $filter->addFilter("foobarbaz", function ($property) {
                 return true;
             });
-        $filter->addFilter("foobar", function($property) {
+        $filter->addFilter("foobar", function ($property) {
                 return false;
             });
         $this->assertTrue($filter->filter("foo"));
@@ -133,17 +132,17 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
     public function testWithComplexCompositeAdded()
     {
         $filter1 = new FilterComposite();
-        $filter1->addFilter("foobarbaz", function($property) {
+        $filter1->addFilter("foobarbaz", function ($property) {
                 return true;
             });
-        $filter1->addFilter("foobar", function($property) {
+        $filter1->addFilter("foobar", function ($property) {
                 return false;
             });
         $filter2 = new FilterComposite();
-        $filter2->addFilter("bar", function($property) {
+        $filter2->addFilter("bar", function ($property) {
                 return true;
             }, FilterComposite::CONDITION_AND);
-        $filter2->addFilter("barblubb", function($property) {
+        $filter2->addFilter("barblubb", function ($property) {
                 return true;
             }, FilterComposite::CONDITION_AND);
         $this->assertTrue($filter1->filter("foo"));
@@ -151,7 +150,7 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
         $filter1->addFilter("bar", $filter2);
         $this->assertTrue($filter1->filter("blubb"));
 
-        $filter1->addFilter("blubb", function($property) { return false; }, FilterComposite::CONDITION_AND);
+        $filter1->addFilter("blubb", function ($property) { return false; }, FilterComposite::CONDITION_AND);
         $this->assertFalse($filter1->filter("test"));
     }
 

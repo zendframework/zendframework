@@ -28,13 +28,13 @@ class PhoneNumber extends AbstractValidator
     protected $messageTemplates = array(
         self::NO_MATCH    => 'The input does not match a phone number format',
         self::UNSUPPORTED => 'The country provided is currently unsupported',
-        self::INVALID     => 'Invalid type given.  String expected',
+        self::INVALID     => 'Invalid type given. String expected',
     );
 
     /**
      * Phone Number Patterns
      *
-     * @link http://libphonenumber.googlecode.com/svn/trunk/resources/PhoneNumberMetaData.xml
+     * @link http://code.google.com/p/libphonenumber/source/browse/trunk/resources/PhoneNumberMetadata.xml
      * @var array
      */
     protected static $phone = array();
@@ -164,7 +164,7 @@ class PhoneNumber extends AbstractValidator
      */
     protected function loadPattern($code)
     {
-        if (!isset(self::$phone[$code])) {
+        if (!isset(static::$phone[$code])) {
             if (!preg_match('/^[A-Z]{2}$/D', $code)) {
                 return false;
             }
@@ -174,10 +174,10 @@ class PhoneNumber extends AbstractValidator
                 return false;
             }
 
-            self::$phone[$code] = include $file;
+            static::$phone[$code] = include $file;
         }
 
-        return self::$phone[$code];
+        return static::$phone[$code];
     }
 
     /**
@@ -210,8 +210,20 @@ class PhoneNumber extends AbstractValidator
             }
         }
 
-        if ($countryPattern['code'] == substr($value, 0, strlen($countryPattern['code']))) {
-            $valueNoCountry = substr($value, strlen($countryPattern['code']));
+        $codeLength = strlen($countryPattern['code']);
+
+        /*
+         * Check for existence of either:
+         *   1) E.123/E.164 international prefix
+         *   2) International double-O prefix
+         *   3) Bare country prefix
+         */
+        if (('+' . $countryPattern['code']) == substr($value, 0, $codeLength + 1)) {
+            $valueNoCountry = substr($value, $codeLength + 1);
+        } elseif (('00' . $countryPattern['code']) == substr($value, 0, $codeLength + 2)) {
+            $valueNoCountry = substr($value, $codeLength + 2);
+        } elseif ($countryPattern['code'] == substr($value, 0, $codeLength)) {
+            $valueNoCountry = substr($value, $codeLength);
         }
 
         // check against allowed types strict match:

@@ -8,7 +8,7 @@
  */
 
 /**
- * EN-Revision: 04.Apr.2013
+ * EN-Revision: 16.Jul.2013
  */
 return array(
     // Zend\I18n\Validator\Alnum
@@ -21,6 +21,10 @@ return array(
     "The input contains non alphabetic characters" => "The input contains non alphabetic characters",
     "The input is an empty string" => "The input is an empty string",
 
+    // Zend\I18n\Validator\DateTime
+    "Invalid type given. String expected" => "Invalid type given. String expected",
+    "The input does not appear to be a valid datetime" => "The input does not appear to be a valid datetime",
+
     // Zend\I18n\Validator\Float
     "Invalid type given. String, integer or float expected" => "Invalid type given. String, integer or float expected",
     "The input does not appear to be a float" => "The input does not appear to be a float",
@@ -28,6 +32,11 @@ return array(
     // Zend\I18n\Validator\Int
     "Invalid type given. String or integer expected" => "Invalid type given. String or integer expected",
     "The input does not appear to be an integer" => "The input does not appear to be an integer",
+
+    // Zend\I18n\Validator\PhoneNumber
+    "The input does not match a phone number format" => "The input does not match a phone number format",
+    "The country provided is currently unsupported" => "The country provided is currently unsupported",
+    "Invalid type given. String expected" => "Invalid type given. String expected",
 
     // Zend\I18n\Validator\PostCode
     "Invalid type given. String or integer expected" => "Invalid type given. String or integer expected",

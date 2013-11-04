@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace ZendTest\Http\Client;
@@ -26,9 +25,6 @@ use Zend\Http\Client\Adapter;
  * You can also set the proper constand in your test configuration file to
  * point to the right place.
  *
- * @category   Zend
- * @package    Zend_Http_Client
- * @subpackage UnitTests
  * @group      Zend_Http
  * @group      Zend_Http_Client
  */
@@ -346,5 +342,23 @@ class CurlTest extends CommonHttpTests
         $this->assertArrayHasKey('request_header', $curlInfo, 'Expecting request_header in curl_getinfo() return value');
 
         $this->assertContains($header, $curlInfo['request_header'], 'Expecting valid basic authorization header');
+    }
+
+    /**
+     * @group 4555
+     */
+    public function testResponseDoesNotDoubleDecodeGzippedBody()
+    {
+        $this->client->setUri($this->baseuri . 'testCurlGzipData.php');
+        $adapter = new Adapter\Curl();
+        $adapter->setOptions(array(
+            'curloptions' => array(
+                CURLOPT_ENCODING => '',
+            ),
+        ));
+        $this->client->setAdapter($adapter);
+        $this->client->setMethod('GET');
+        $this->client->send();
+        $this->assertEquals('Success', $this->client->getResponse()->getBody());
     }
 }

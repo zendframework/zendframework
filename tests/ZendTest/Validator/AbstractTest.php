@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
@@ -16,9 +15,6 @@ use Zend\Validator\EmailAddress;
 use Zend\Validator\Hostname;
 
 /**
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
  * @group      Zend_Validator
  */
 class AbstractTest extends \PHPUnit_Framework_TestCase
@@ -74,6 +70,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testErrorMessagesAreTranslatedWhenTranslatorPresent()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
             'fooMessage' => 'This is the translated message for %value%',
@@ -92,6 +92,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testCanTranslateMessagesInsteadOfKeys()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
             '%value% was passed' => 'This is the translated message for %value%',
@@ -153,6 +157,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testCanDisableTranslator()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
             '%value% was passed' => 'This is the translated message for %value%',

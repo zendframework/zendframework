@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\Annotation;
@@ -219,6 +218,16 @@ class AnnotationBuilderTest extends TestCase
         $this->assertTrue($sampleinput->allowEmpty());
     }
 
+    public function testInputNotRequiredByDefault()
+    {
+        $entity = new TestAsset\Annotation\SampleEntity();
+        $builder = new Annotation\AnnotationBuilder();
+        $form = $builder->createForm($entity);
+        $inputFilter = $form->getInputFilter();
+        $sampleinput = $inputFilter->get('anotherSampleInput');
+        $this->assertFalse($sampleinput->isRequired());
+    }
+
     public function testObjectElementAnnotation()
     {
         $entity = new TestAsset\Annotation\EntityUsingObjectProperty();
@@ -232,5 +241,22 @@ class AnnotationBuilderTest extends TestCase
         $this->assertInstanceOf('ZendTest\Form\TestAsset\Annotation\Entity',$fieldset->getObject());
         $this->assertInstanceOf("Zend\Stdlib\Hydrator\ClassMethods",$fieldset->getHydrator());
         $this->assertFalse($fieldset->getHydrator()->getUnderscoreSeparatedKeys());
+    }
+
+    public function testInputFilterInputAnnotation()
+    {
+        $entity = new TestAsset\Annotation\EntityWithInputFilterInput();
+        $builder = new Annotation\AnnotationBuilder();
+        $form = $builder->createForm($entity);
+        $inputFilter = $form->getInputFilter();
+
+        $this->assertTrue($inputFilter->has('input'));
+        foreach (
+            array('Zend\InputFilter\InputInterface', 'ZendTest\Form\TestAsset\Annotation\InputFilterInput') as
+            $expectedInstance
+        ) {
+            $this->assertInstanceOf($expectedInstance, $inputFilter->get('input'));
+        }
+
     }
 }

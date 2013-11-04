@@ -21,17 +21,21 @@ class Date implements HeaderInterface
 
     public static function fromString($headerLine)
     {
-        list($name, $value) = explode(': ', $headerLine, 2);
+        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'date') {
             throw new Exception\InvalidArgumentException('Invalid header line for Date string');
         }
 
-        $header = new static();
-        $header->value= $value;
+        $header = new static($value);
 
         return $header;
+    }
+
+    public function __construct($value)
+    {
+        $this->value = $value;
     }
 
     public function getFieldName()

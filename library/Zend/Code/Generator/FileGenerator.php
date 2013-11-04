@@ -92,9 +92,15 @@ class FileGenerator extends AbstractGenerator
 
         $body = $fileReflection->getContents();
 
+        $uses = $fileReflection->getUses();
+
         foreach ($fileReflection->getClasses() as $class) {
             $phpClass = ClassGenerator::fromReflection($class);
             $phpClass->setContainingFileGenerator($file);
+
+            foreach ($uses as $fileUse) {
+                $phpClass->addUse($fileUse['use'], $fileUse['as']);
+            }
 
             $file->setClass($phpClass);
 
@@ -126,7 +132,6 @@ class FileGenerator extends AbstractGenerator
             $file->setNamespace($namespace);
         }
 
-        $uses = $fileReflection->getUses();
         if ($uses) {
             $file->setUses($uses);
         }
@@ -305,7 +310,7 @@ class FileGenerator extends AbstractGenerator
     public function setUses(array $uses)
     {
         foreach ($uses as $use) {
-            $use = (array)$use;
+            $use = (array) $use;
             if (array_key_exists('use', $use) && array_key_exists('as', $use)) {
                 $import = $use['use'];
                 $alias  = $use['as'];

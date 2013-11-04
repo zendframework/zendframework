@@ -20,6 +20,7 @@ class ModuleEvent extends Event
     /**
      * Module events triggered by eventmanager
      */
+    CONST EVENT_MERGE_CONFIG        = 'mergeConfig';
     CONST EVENT_LOAD_MODULES        = 'loadModules';
     CONST EVENT_LOAD_MODULE_RESOLVE = 'loadModule.resolve';
     CONST EVENT_LOAD_MODULE         = 'loadModule';

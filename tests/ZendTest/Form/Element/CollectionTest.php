@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\Element;
@@ -19,6 +18,9 @@ use Zend\Form\Fieldset;
 use Zend\Form\Form;
 use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 use ZendTest\Form\TestAsset\Entity\Product;
+use Zend\Stdlib\Hydrator\ArraySerializable;
+use ZendTest\Form\TestAsset\CustomCollection;
+use ZendTest\Form\TestAsset\ArrayModel;
 
 class CollectionTest extends TestCase
 {
@@ -288,6 +290,11 @@ class CollectionTest extends TestCase
 
     public function testDoesNotCreateNewObjects()
     {
+        if (!extension_loaded('intl')) {
+            // Required by \Zend\I18n\Validator\Float
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $form = new \Zend\Form\Form();
         $form->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
         $this->productFieldset->setUseAsBaseFieldset(true);
@@ -326,6 +333,11 @@ class CollectionTest extends TestCase
 
     public function testCreatesNewObjectsIfSpecified()
     {
+        if (!extension_loaded('intl')) {
+            // Required by \Zend\I18n\Validator\Float
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->productFieldset->setUseAsBaseFieldset(true);
         $categories = $this->productFieldset->get('categories');
         $categories->setOptions(array(
@@ -488,5 +500,103 @@ class CollectionTest extends TestCase
             'obj2' => $obj2,
             'obj3' => $obj3,
         ));
+    }
+
+    public function testCanBindObjectAndPopulateAndExtractNestedFieldsets()
+    {
+
+        $productFieldset = new \ZendTest\Form\TestAsset\ProductFieldset();
+        $productFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+
+        $mainFieldset = new Fieldset('shop');
+        $mainFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+        $mainFieldset->add($productFieldset);
+
+        $form = new Form();
+        $form->setHydrator(new ObjectPropertyHydrator());
+        $form->add(array(
+            'name' => 'collection',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $mainFieldset,
+                'count' => 2
+            ),
+        ));
+        $form->get('collection')->setHydrator(new ObjectPropertyHydrator());
+
+        $market = new stdClass();
+
+        $prices = array(100, 200);
+
+        $shop1 = new stdClass();
+        $shop1->product = new Product();
+        $shop1->product->setPrice($prices[0]);
+
+        $shop2 = new stdClass();
+        $shop2->product = new Product();
+        $shop2->product->setPrice($prices[1]);
+
+        $market->collection = array($shop1, $shop2);
+        $form->bind($market);
+
+        //test for object binding
+        foreach ($form->get('collection')->getFieldsets() as $_fieldset) {
+            $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Product', $_fieldset->get('product')->getObject());
+        };
+
+        //test for correct extract and populate
+        foreach ($prices as $_k => $_price) {
+            $this->assertEquals($_price, $form->get('collection')->get($_k)->get('product')->get('price')->getValue());
+        }
+    }
+
+    public function testExtractFromTraversableImplementingToArrayThroughCollectionHydrator()
+    {
+        $collection = $this->form->get('fieldsets');
+
+        // this test is using a hydrator set on the collection
+        $collection->setHydrator(new ArraySerializable());
+
+        $this->prepareForExtractWithCustomTraversable($collection);
+
+        $expected = array(
+            array('foo' => 'foo_value_1', 'bar' => 'bar_value_1', 'foobar' => 'foobar_value_1'),
+            array('foo' => 'foo_value_2', 'bar' => 'bar_value_2', 'foobar' => 'foobar_value_2'),
+        );
+
+        $this->assertEquals($expected, $collection->extract());
+    }
+
+    public function testExtractFromTraversableImplementingToArrayThroughTargetElementHydrator()
+    {
+        $collection = $this->form->get('fieldsets');
+
+        // this test is using a hydrator set on the target element of the collection
+        $targetElement = $collection->getTargetElement();
+        $targetElement->setHydrator(new ArraySerializable());
+        $obj1 = new ArrayModel();
+        $targetElement->setObject($obj1);
+
+        $this->prepareForExtractWithCustomTraversable($collection);
+
+        $expected = array(
+            array('foo' => 'foo_value_1', 'bar' => 'bar_value_1', 'foobar' => 'foobar_value_1'),
+            array('foo' => 'foo_value_2', 'bar' => 'bar_value_2', 'foobar' => 'foobar_value_2'),
+        );
+
+        $this->assertEquals($expected, $collection->extract());
+    }
+
+    protected function prepareForExtractWithCustomTraversable($collection)
+    {
+        $obj2 = new ArrayModel();
+        $obj2->exchangeArray(array('foo' => 'foo_value_1', 'bar' => 'bar_value_1', 'foobar' => 'foobar_value_1'));
+        $obj3 = new ArrayModel();
+        $obj3->exchangeArray(array('foo' => 'foo_value_2', 'bar' => 'bar_value_2', 'foobar' => 'foobar_value_2'));
+
+        $traversable = new CustomCollection();
+        $traversable->append($obj2);
+        $traversable->append($obj3);
+        $collection->setObject($traversable);
     }
 }

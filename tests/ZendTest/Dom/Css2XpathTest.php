@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Dom
  */
 
 namespace ZendTest\Dom;
@@ -15,9 +14,6 @@ use Zend\Dom\Css2Xpath;
 /**
  * Test class for Css2Xpath.
  *
- * @category   Zend
- * @package    Zend_Dom
- * @subpackage UnitTests
  * @group      Zend_Dom
  */
 class Css2XpathTest extends \PHPUnit_Framework_TestCase
@@ -167,5 +163,17 @@ class Css2XpathTest extends \PHPUnit_Framework_TestCase
     {
         $test = Css2Xpath::transform('*#id');
         $this->assertEquals("//*[@id='id']", $test);
+    }
+
+    /**
+     * @group ZF-5310
+     */
+    public function testCanTransformWithAttributeAndDot()
+    {
+        $test = Css2Xpath::transform('a[href="http://example.com"]');
+        $this->assertEquals("//a[@href='http://example.com']", $test);
+
+        $test = Css2Xpath::transform('a[@href="http://example.com"]');
+        $this->assertEquals("//a[@href='http://example.com']", $test);
     }
 }

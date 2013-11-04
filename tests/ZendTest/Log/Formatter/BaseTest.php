@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Log
  */
 
 namespace ZendTest\Log\Formatter;
@@ -18,9 +17,6 @@ use ZendTest\Log\TestAsset\StringObject;
 use Zend\Log\Formatter\Base as BaseFormatter;
 
 /**
- * @category   Zend
- * @package    Zend_Log
- * @subpackage UnitTests
  * @group      Zend_Log
  */
 class BaseTest extends \PHPUnit_Framework_TestCase
@@ -138,14 +134,26 @@ class BaseTest extends \PHPUnit_Framework_TestCase
                 'selfRefArr' => $selfRefArr,
             ),
         );
-        $outputExpected = array(
-            'timestamp' => $datetime->format($formatter->getDateTimeFormat()),
-            'priority'  => 1,
-            'message'   => 'tottakai',
-            'extra' => array(
-                'selfRefArr' => '{"selfRefArr":{"selfRefArr":null}}',
-            ),
-        );
+
+        if (version_compare(PHP_VERSION, '5.5', 'lt')) {
+            $outputExpected = array(
+                'timestamp' => $datetime->format($formatter->getDateTimeFormat()),
+                'priority'  => 1,
+                'message'   => 'tottakai',
+                'extra' => array(
+                    'selfRefArr' => '{"selfRefArr":{"selfRefArr":null}}',
+                ),
+            );
+        } else {
+            $outputExpected = array(
+                'timestamp' => $datetime->format($formatter->getDateTimeFormat()),
+                'priority'  => 1,
+                'message'   => 'tottakai',
+                'extra' => array(
+                    'selfRefArr' => '',
+                ),
+            );
+        }
 
         $this->assertEquals($outputExpected, $formatter->format($event));
     }

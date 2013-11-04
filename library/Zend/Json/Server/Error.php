@@ -11,7 +11,7 @@ namespace Zend\Json\Server;
 
 class Error
 {
-    const ERROR_PARSE           = -32768;
+    const ERROR_PARSE           = -32700;
     const ERROR_INVALID_REQUEST = -32600;
     const ERROR_INVALID_METHOD  = -32601;
     const ERROR_INVALID_PARAMS  = -32602;

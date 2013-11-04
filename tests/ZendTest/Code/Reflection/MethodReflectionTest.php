@@ -5,17 +5,14 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace ZendTest\Code\Reflection;
 
 use Zend\Code\Reflection\MethodReflection;
+use ZendTest\Code\Reflection\TestAsset\InjectableMethodReflection;
 
 /**
- * @category   Zend
- * @package    Zend_Reflection
- * @subpackage UnitTests
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Method
  */
@@ -59,4 +56,36 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("    {\n\n        return 'mixedValue';\n\n    }\n", $reflectionMethod->getContents(false));
     }
 
+    public function testGetAnnotationsWithNoNameInformations()
+    {
+        $reflectionMethod = new InjectableMethodReflection(
+            // TestSampleClass5 has the annotations required to get to the
+            // right point in the getAnnotations method.
+            'ZendTest\Code\Reflection\TestAsset\TestSampleClass5',
+            'doSomething'
+        );
+
+        $annotationManager = new \Zend\Code\Annotation\AnnotationManager();
+
+        $fileScanner = $this->getMockBuilder('Zend\Code\Scanner\CachingFileScanner')
+                            ->disableOriginalConstructor()
+                            ->getMock();
+
+        $reflectionMethod->setFileScanner($fileScanner);
+
+        $fileScanner->expects($this->any())
+                    ->method('getClassNameInformation')
+                    ->will($this->returnValue(false));
+
+        $this->assertFalse($reflectionMethod->getAnnotations($annotationManager));
+    }
+
+    /**
+     * @group 5062
+     */
+    public function testGetContentsWithCoreClass()
+    {
+        $reflectionMethod = new MethodReflection('DateTime', 'format');
+        $this->assertEquals("", $reflectionMethod->getContents(false));
+    }
 }

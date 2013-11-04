@@ -288,7 +288,7 @@ class DateTimeSelect extends DateSelect
                 array(
                     'name'    => 'Callback',
                     'options' => array(
-                        'callback' => function($date) {
+                        'callback' => function ($date) {
                             // Convert the date to a specific format
                             if (is_array($date)) {
                                 if (!isset($date['second'])) {

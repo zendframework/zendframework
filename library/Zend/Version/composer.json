@@ -15,6 +15,9 @@
     "require": {
         "php": ">=5.3.3"
     },
+    "suggest": {
+        "zendframework/zend-json": "To check latest version hosted in GitHub"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.2-dev",

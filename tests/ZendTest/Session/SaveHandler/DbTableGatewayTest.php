@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Session
  */
 
 namespace ZendTest\Session\SaveHandler;
@@ -19,9 +18,6 @@ use Zend\Db\TableGateway\TableGateway;
  * Unit testing for DbTableGateway include all tests for
  * regular session handling
  *
- * @category   Zend
- * @package    Zend_Session
- * @subpackage UnitTests
  * @group      Zend_Session
  * @group      Zend_Db_Table
  */

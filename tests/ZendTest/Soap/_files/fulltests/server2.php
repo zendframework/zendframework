@@ -5,18 +5,12 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Soap
  */
 
 require_once "Zend/Soap/AutoDiscover.php";
 require_once "Zend/Soap/Server.php";
 require_once "Zend/Soap/Wsdl/Strategy/ArrayOfTypeComplex.php";
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_Wsdl_ComplexTypeB
 {
     /**
@@ -29,11 +23,6 @@ class Zend_Soap_Wsdl_ComplexTypeB
     public $foo;
 }
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage UnitTests
- */
 class Zend_Soap_Service_Server2
 {
     /**

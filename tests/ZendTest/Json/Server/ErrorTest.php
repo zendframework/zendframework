@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
  */
 
 namespace ZendTest\Json\Server;
@@ -16,9 +15,6 @@ use Zend\Json;
 /**
  * Test class for Zend_JSON_Server_Error
  *
- * @category   Zend
- * @package    Zend_JSON_Server
- * @subpackage UnitTests
  * @group      Zend_JSON
  * @group      Zend_JSON_Server
  */
@@ -52,8 +48,8 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
 
     public function testSetCodeShouldCastToInteger()
     {
-        $this->error->setCode('-32768');
-        $this->assertEquals(-32768, $this->error->getCode());
+        $this->error->setCode('-32700');
+        $this->assertEquals(-32700, $this->error->getCode());
     }
 
     public function testCodeShouldBeLimitedToStandardIntegers()

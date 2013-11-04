@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -13,11 +12,6 @@ namespace ZendTest\Form\View\Helper;
 use Zend\Form\Element;
 use Zend\Form\View\Helper\FormElementErrors as FormElementErrorsHelper;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class FormElementErrorsTest extends CommonTestCase
 {
     public function setUp()
@@ -134,6 +128,41 @@ class FormElementErrorsTest extends CommonTestCase
     {
         $helper = $this->helper;
         $this->assertEquals($helper(), $helper);
+    }
+
+    public function testCanTranslateContent()
+    {
+        $messages = array(array(
+            'First validator message',
+        ));
+
+        $element = new Element('foo');
+        $element->setMessages($messages);
+
+        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
+        $mockTranslator->expects($this->exactly(1))
+                       ->method('translate')
+                       ->will($this->returnValue('translated content'));
+
+        $this->helper->setTranslator($mockTranslator);
+        $this->assertTrue($this->helper->hasTranslator());
+
+        $markup = $this->helper->__invoke($element);
+        $this->assertRegexp('#<ul[^>]*>\s*<li>translated content</li>\s*</ul>#s', $markup);
+    }
+
+    public function testTranslatorMethods()
+    {
+        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
+        $this->helper->setTranslator($translatorMock, 'foo');
+
+        $this->assertEquals($translatorMock, $this->helper->getTranslator());
+        $this->assertEquals('foo', $this->helper->getTranslatorTextDomain());
+        $this->assertTrue($this->helper->hasTranslator());
+        $this->assertTrue($this->helper->isTranslatorEnabled());
+
+        $this->helper->setTranslatorEnabled(false);
+        $this->assertFalse($this->helper->isTranslatorEnabled());
     }
 
 

@@ -1,7 +1,9 @@
 #!/bin/bash
 
-libraryCS=$(php php-cs-fixer.phar fix -v --dry-run --level=psr2 ./library)
-testsCS=$(php php-cs-fixer.phar fix -v --dry-run --level=psr2 ./tests)
+FIXER_PATH="`dirname $0`/../vendor/fabpot/php-cs-fixer/php-cs-fixer"
+
+libraryCS=$(php $FIXER_PATH fix -v --dry-run --level=psr2 ./library)
+testsCS=$(php $FIXER_PATH fix -v --dry-run --level=psr2 ./tests)
 
 if [[ "$libraryCS" || "$testsCS"  ]];
 then

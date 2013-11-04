@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_InputFilter
  */
 
 namespace ZendTest\InputFilter;
@@ -16,6 +15,8 @@ use Zend\InputFilter\Factory;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator;
+use Zend\InputFilter\InputFilterPluginManager;
+use Zend\ServiceManager;
 
 class FactoryTest extends TestCase
 {
@@ -485,7 +486,7 @@ class FactoryTest extends TestCase
         // string_to_upper (1001), string_to_lower (1000), string_trim (999)
         $index = 0;
         foreach($input->getFilterChain()->getFilters() as $filter) {
-            switch($index) {
+            switch ($index) {
                 case 0:
                     $this->assertInstanceOf('Zend\Filter\StringToUpper', $filter);
                     break;
@@ -514,5 +515,56 @@ class FactoryTest extends TestCase
 
         $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter);
         $this->assertTrue($inputFilter->has('type'));
+    }
+
+    public function testCustomFactoryInCollection()
+    {
+        $factory = new TestAsset\CustomFactory();
+        $inputFilter = $factory->createInputFilter(array(
+            'type'        => 'collection',
+            'input_filter' => new InputFilter(),
+        ));
+        $this->assertInstanceOf('ZendTest\InputFilter\TestAsset\CustomFactory', $inputFilter->getFactory());
+    }
+
+    /**
+     * @group 4838
+     */
+    public function testCanSetInputErrorMessage()
+    {
+        $factory = new Factory();
+        $input   = $factory->createInput(array(
+            'name'          => 'test',
+            'type'          => 'Zend\InputFilter\Input',
+            'error_message' => 'Custom error message',
+        ));
+        $this->assertEquals('Custom error message', $input->getErrorMessage());
+    }
+
+    public function testSetInputFilterManagerWithServiceManager()
+    {
+        $inputFilterManager = new InputFilterPluginManager;
+        $serviceManager = new ServiceManager\ServiceManager;
+        $serviceManager->setService('ValidatorManager', new Validator\ValidatorPluginManager);
+        $serviceManager->setService('FilterManager', new Filter\FilterPluginManager);
+        $inputFilterManager->setServiceLocator($serviceManager);
+        $factory = new Factory();
+        $factory->setInputFilterManager($inputFilterManager);
+        $this->assertInstanceOf(
+            'Zend\Validator\ValidatorPluginManager',
+            $factory->getDefaultValidatorChain()->getPluginManager()
+        );
+        $this->assertInstanceOf(
+            'Zend\Filter\FilterPluginManager',
+            $factory->getDefaultFilterChain()->getPluginManager()
+        );
+    }
+
+    public function testSetInputFilterManagerWithoutServiceManager()
+    {
+        $inputFilterManager = new InputFilterPluginManager();
+        $factory = new Factory();
+        $factory->setInputFilterManager($inputFilterManager);
+        $this->assertSame($inputFilterManager, $factory->getInputFilterManager());
     }
 }

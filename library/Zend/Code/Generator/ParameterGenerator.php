@@ -11,8 +11,6 @@ namespace Zend\Code\Generator;
 
 use Zend\Code\Reflection\ParameterReflection;
 
-/**
- */
 class ParameterGenerator extends AbstractGenerator
 {
     /**
@@ -64,8 +62,10 @@ class ParameterGenerator extends AbstractGenerator
                 $parameterType = $typeClass->getName();
                 $currentNamespace = $reflectionParameter->getDeclaringClass()->getNamespaceName();
 
-                if (substr($parameterType, 0, strlen($currentNamespace)) == $currentNamespace) {
-                    $parameterType = substr($parameterType, strlen($currentNamespace)+1);
+                if (!empty($currentNamespace) && substr($parameterType, 0, strlen($currentNamespace)) == $currentNamespace) {
+                    $parameterType = substr($parameterType, strlen($currentNamespace) + 1);
+                } else {
+                    $parameterType = '\\' . trim($parameterType, '\\');
                 }
 
                 $param->setType($parameterType);

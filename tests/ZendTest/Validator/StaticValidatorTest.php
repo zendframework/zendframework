@@ -5,7 +5,6 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
@@ -17,9 +16,6 @@ use Zend\Validator\StaticValidator;
 use Zend\Validator\ValidatorPluginManager;
 
 /**
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
  * @group      Zend_Validator
  */
 class StaticValidatorTest extends \PHPUnit_Framework_TestCase
@@ -90,6 +86,10 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testMaximumErrorMessageLength()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->assertEquals(-1, AbstractValidator::getMessageLength());
         AbstractValidator::setMessageLength(10);
         $this->assertEquals(10, AbstractValidator::getMessageLength());

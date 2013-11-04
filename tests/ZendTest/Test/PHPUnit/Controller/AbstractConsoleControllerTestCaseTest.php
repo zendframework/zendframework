@@ -5,21 +5,17 @@
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Test
  */
 namespace ZendTest\Test\PHPUnit\Controller;
 
 use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
 
 /**
- * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
  * @group      Zend_Test
  */
 class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTestCase
 {
-    public function setUp()
+    protected function setUp()
     {
         $this->setApplicationConfig(
             include __DIR__ . '/../../_files/application.config.php'

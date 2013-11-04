@@ -173,18 +173,29 @@ class HtmlEntities extends AbstractFilter
      * Returns the string $value, converting characters to their corresponding HTML entity
      * equivalents where they exist
      *
+     * If the value provided is non-scalar, the value will remain unfiltered
+     * and an E_USER_WARNING will be raised indicating it's unfilterable.
+     *
      * @param  string $value
-     * @throws Exception\DomainException
-     * @return string
+     * @return string|mixed
+     * @throws Exception\DomainException on encoding mismatches
      */
     public function filter($value)
     {
-        if(!is_scalar($value)){
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects parameter to be scalar, "%s" given',
-                __METHOD__,
-                (is_object($value) ? get_class($value) : gettype($value))
-            ));
+        if (null === $value) {
+            return null;
+        }
+
+        if (!is_scalar($value)) {
+            trigger_error(
+                sprintf(
+                    '%s expects parameter to be scalar, "%s" given; cannot filter',
+                    __METHOD__,
+                    (is_object($value) ? get_class($value) : gettype($value))
+                ),
+                E_USER_WARNING
+            );
+            return $value;
         }
 
         $filtered = htmlentities((string) $value, $this->getQuoteStyle(), $this->getEncoding(), $this->getDoubleQuote());

@@ -9,7 +9,7 @@
 
 namespace Zend\I18n\View\Helper;
 
-use Zend\I18n\Translator\TranslatorInterface;
+use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\View\Helper\AbstractHelper;
 
@@ -19,7 +19,7 @@ abstract class AbstractTranslatorHelper extends AbstractHelper implements
     /**
      * Translator (optional)
      *
-     * @var TranslatorInterface
+     * @var Translator
      */
     protected $translator;
 
@@ -40,13 +40,13 @@ abstract class AbstractTranslatorHelper extends AbstractHelper implements
     /**
      * Sets translator to use in helper
      *
-     * @param  TranslatorInterface $translator [optional] translator.
-     *                                          Default is null, which sets no translator.
-     * @param  string              $textDomain [optional] text domain
-     *                                          Default is null, which skips setTranslatorTextDomain
+     * @param  Translator $translator  [optional] translator.
+     *                                 Default is null, which sets no translator.
+     * @param  string     $textDomain  [optional] text domain
+     *                                 Default is null, which skips setTranslatorTextDomain
      * @return AbstractTranslatorHelper
      */
-    public function setTranslator(TranslatorInterface $translator = null, $textDomain = null)
+    public function setTranslator(Translator $translator = null, $textDomain = null)
     {
         $this->translator = $translator;
         if (null !== $textDomain) {
@@ -59,7 +59,7 @@ abstract class AbstractTranslatorHelper extends AbstractHelper implements
     /**
      * Returns translator used in helper
      *
-     * @return TranslatorInterface|null
+     * @return Translator|null
      */
     public function getTranslator()
     {

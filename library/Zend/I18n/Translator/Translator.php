@@ -23,7 +23,7 @@ use Zend\Stdlib\ArrayUtils;
 /**
  * Translator.
  */
-class Translator implements TranslatorInterface
+class Translator
 {
     /**
      * Event fired when the translation for a message is missing.

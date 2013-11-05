@@ -9,7 +9,7 @@
 
 namespace Zend\View\Helper;
 
-use Zend\I18n\Translator\TranslatorInterface;
+use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\View\Exception;
 
@@ -36,7 +36,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     /**
      * Translator (optional)
      *
-     * @var TranslatorInterface
+     * @var Translator
      */
     protected $translator;
 
@@ -179,13 +179,13 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     /**
      * Sets translator to use in helper
      *
-     * @param  TranslatorInterface $translator [optional] translator.
-     *                                          Default is null, which sets no translator.
-     * @param  string              $textDomain [optional] text domain
-     *                                          Default is null, which skips setTranslatorTextDomain
+     * @param  Translator $translator  [optional] translator.
+     *                                 Default is null, which sets no translator.
+     * @param  string     $textDomain  [optional] text domain
+     *                                 Default is null, which skips setTranslatorTextDomain
      * @return HeadTitle
      */
-    public function setTranslator(TranslatorInterface $translator = null, $textDomain = null)
+    public function setTranslator(Translator $translator = null, $textDomain = null)
     {
         $this->translator = $translator;
         if (null !== $textDomain) {
@@ -197,7 +197,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     /**
      * Returns translator used in helper
      *
-     * @return TranslatorInterface|null
+     * @return Translator|null
      */
     public function getTranslator()
     {

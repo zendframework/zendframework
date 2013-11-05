@@ -90,7 +90,7 @@ abstract class AbstractIterator implements RecursiveIterator
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>
      * Returns an iterator for the current entry.
-     * @link http://php.net/manual/en/recursiveiterator.getRoles.php
+     * @link http://php.net/manual/en/recursiveiterator.getchildren.php
      * @return RecursiveIterator An iterator for the current entry.
      */
     public function getChildren()

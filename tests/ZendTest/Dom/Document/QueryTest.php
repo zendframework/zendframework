@@ -7,16 +7,16 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Dom;
+namespace ZendTest\Dom\Document;
 
 use Zend\Dom\Document\Query;
 
 /**
- * Test class for Css2Xpath.
+ * Test class for Zend\Dom\Document\Query.
  *
  * @group      Zend_Dom
  */
-class Css2XpathTest extends \PHPUnit_Framework_TestCase
+class QueryTest extends \PHPUnit_Framework_TestCase
 {
     public function testTransformShouldBeCalledStatically()
     {

@@ -28,7 +28,9 @@ class Query
     /**
      * Perform the query on Document
      *
-     * @param  Document  $document
+     * @param  string    $expression CSS selector or XPath query
+     * @param  Document  $document   Document to query
+     * @param  string    $type       The type of $expression
      * @return NodeList
      */
     public static function execute($expression, Document $document, $type = self::TYPE_XPATH)

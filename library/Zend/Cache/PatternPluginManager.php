@@ -14,7 +14,7 @@ use Zend\ServiceManager\AbstractPluginManager;
 /**
  * Plugin manager implementation for cache pattern adapters
  *
- * Enforces that adatpers retrieved are instances of
+ * Enforces that retrieved adapters are instances of
  * Pattern\PatternInterface. Additionally, it registers a number of default
  * patterns available.
  */

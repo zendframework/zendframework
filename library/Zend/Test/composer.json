@@ -15,6 +15,7 @@
     "require": {
         "php": ">=5.3.3",
         "phpunit/PHPUnit": "3.7.*",
+        "zendframework/zend-console": "self.version",
         "zendframework/zend-dom": "self.version",
         "zendframework/zend-eventmanager": "self.version",
         "zendframework/zend-http": "self.version",

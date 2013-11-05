@@ -25,7 +25,7 @@ DD MMM YYY
 
   ```php
   use Zend\Dom\Document;
-  $document = new Document($contentOrFile);
+  $document = new Document($content);
   $nodeList = Document\Query::execute($expression, $document, Document\Query::TYPE_CSS);
   foreach ($nodeList as $node) {
       // ...
@@ -37,7 +37,7 @@ DD MMM YYY
   ```php
   use Zend\Dom\Document;
   foreach (
-    Document\Query::execute($expression, new Document($contentOrFile, Document\Query::TYPE_CSS)
+    Document\Query::execute($expression, new Document($content), Document\Query::TYPE_CSS)
     as $node
   ) {
       // ...

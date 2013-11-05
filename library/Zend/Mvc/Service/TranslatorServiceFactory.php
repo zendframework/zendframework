@@ -10,7 +10,6 @@
 namespace Zend\Mvc\Service;
 
 use Zend\I18n\Translator\TranslatorServiceFactory as I18nTranslatorServiceFactory;
-use Zend\Mvc\I18n\DummyTranslator;
 use Zend\Mvc\I18n\Translator;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -23,12 +22,7 @@ class TranslatorServiceFactory extends I18nTranslatorServiceFactory
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         // Configure the translator
-        $config = $serviceLocator->get('Config');
-
-        if (!isset($config['translator'])) {
-            return new DummyTranslator();
-        }
-
+        $config     = $serviceLocator->get('Config');
         $trConfig   = isset($config['translator']) ? $config['translator'] : array();
         $translator = Translator::factory($trConfig);
         return $translator;

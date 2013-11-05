@@ -65,7 +65,7 @@ class RemoteAddressTest extends TestCase
         $this->remoteAddress->setUseProxy(false);
         $this->assertFalse($this->remoteAddress->getUseProxy());
     }
-
+    
     public function testSetGetDefaultUseProxy()
     {
         $this->remoteAddress->setUseProxy();
@@ -83,7 +83,7 @@ class RemoteAddressTest extends TestCase
     public function testGetIpAddress()
     {
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
-        $this->assertEquals('127.0.0.1', $this->remoteAddress->getIpAddress());
+        $this->assertEquals('127.0.0.1', $this->remoteAddress->getIpAddress()); 
     }
 
     public function testGetIpAddressFromProxy()
@@ -122,9 +122,27 @@ class RemoteAddressTest extends TestCase
             '192.168.0.10', '10.0.0.1', '10.0.0.2'
         ));
         $_SERVER['REMOTE_ADDR'] = '192.168.0.10';
-        // 1.1.1.1 is the first IP address from the right not representing a known proxy server; as such, we
+        // 1.1.1.1 is the first IP address from the right not representing a known proxy server; as such, we 
         // must treat it as a client IP.
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '8.8.8.8, 10.0.0.2, 1.1.1.1, 10.0.0.1';
         $this->assertEquals('1.1.1.1', $this->remoteAddress->getIpAddress());
+    }
+
+    /**
+     * Tests if an empty string is returned if the server variable
+     * REMOTE_ADDR is not set.
+     *
+     * This happens when you run a local unit test, or a PHP script with
+     * PHP from the command line.
+     */
+    public function testGetIpAddressReturnsEmptyStringOnNoRemoteAddr()
+    {
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
+        unset($_SERVER['REMOTE_ADDR']);
+
+        $this->remoteAddress->setUseProxy(true);
+        $this->assertEquals('', $this->remoteAddress->getIpAddress());
+
+        $_SERVER['REMOTE_ADDR'] = $ipAddress;
     }
 }

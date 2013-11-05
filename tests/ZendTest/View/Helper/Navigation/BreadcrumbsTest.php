@@ -216,7 +216,7 @@ class BreadcrumbsTest extends AbstractTest
     {
         $this->_helper->setPartial('bc_separator.phtml')->setSeparator(' / ');
 
-        $expected = $this->_getExpected('bc/partialwithseparator.html');
+        $expected = trim($this->_getExpected('bc/partialwithseparator.html'));
         $this->assertEquals($expected, $this->_helper->render());
     }
 

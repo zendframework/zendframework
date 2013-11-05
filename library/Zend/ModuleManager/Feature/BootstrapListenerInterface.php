@@ -12,7 +12,7 @@ namespace Zend\ModuleManager\Feature;
 use Zend\EventManager\EventInterface;
 
 /**
- * Boostrap listener provider interface
+ * Bootstrap listener provider interface
  */
 interface BootstrapListenerInterface
 {

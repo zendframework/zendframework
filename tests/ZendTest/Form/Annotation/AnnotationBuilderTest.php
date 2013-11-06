@@ -168,6 +168,22 @@ class AnnotationBuilderTest extends TestCase
         $this->assertTrue($composed->has('password'));
     }
 
+    public function testAllowsComposingMultipleChildEntities()
+    {
+        $entity  = new TestAsset\Annotation\EntityComposingMultipleEntities();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $this->assertTrue($form->has('composed'));
+        $composed = $form->get('composed');
+
+        $this->assertInstanceOf('Zend\Form\Element\Collection', $composed);
+        $target = $composed->getTargetElement();
+        $this->assertInstanceOf('Zend\Form\FieldsetInterface', $target);
+        $this->assertTrue($target->has('username'));
+        $this->assertTrue($target->has('password'));
+    }
+
     public function testCanHandleOptionsAnnotation()
     {
         $entity  = new TestAsset\Annotation\EntityUsingOptions();

@@ -34,6 +34,7 @@ class ElementTest extends TestCase
             'type'     => 'text',
             'class'    => 'text-element',
             'data-foo' => 'bar',
+            'x-autocompletetype' => 'email'
         );
         $element->setAttributes($attributes);
         $this->assertEquals($attributes, $element->getAttributes());

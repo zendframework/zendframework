@@ -127,4 +127,27 @@ class RemoteAddressTest extends TestCase
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '8.8.8.8, 10.0.0.2, 1.1.1.1, 10.0.0.1';
         $this->assertEquals('1.1.1.1', $this->remoteAddress->getIpAddress());
     }
+
+    /**
+     * Tests if an empty string is returned if the server variable
+     * REMOTE_ADDR is not set.
+     *
+     * This happens when you run a local unit test, or a PHP script with
+     * PHP from the command line.
+     */
+    public function testGetIpAddressReturnsEmptyStringOnNoRemoteAddr()
+    {
+        // Store the set IP address for later use
+        if (isset($_SERVER['REMOTE_ADDR'])) {
+            $ipAddress = $_SERVER['REMOTE_ADDR'];
+            unset($_SERVER['REMOTE_ADDR']);
+        }
+
+        $this->remoteAddress->setUseProxy(true);
+        $this->assertEquals('', $this->remoteAddress->getIpAddress());
+
+        if (isset($ipAddress)) {
+            $_SERVER['REMOTE_ADDR'] = $ipAddress;
+        }
+    }
 }

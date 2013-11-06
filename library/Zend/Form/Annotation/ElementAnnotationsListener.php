@@ -10,6 +10,7 @@
 namespace Zend\Form\Annotation;
 
 use Zend\EventManager\EventManagerInterface;
+use Zend\Stdlib\ArrayObject;
 
 /**
  * Default listeners for element annotations
@@ -136,8 +137,19 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         if (!isset($specification['type'])) {
             $specification['type'] = 'Zend\Form\Fieldset';
         }
-        $elementSpec['spec'] = $specification;
-        $elementSpec['spec']['name'] = $name;
+        if ($annotation->isCollection()) {
+            $elementSpec['spec']['type'] = 'Zend\Form\Element\Collection';
+            $elementSpec['spec']['name'] = $name;
+            $elementSpec['spec']['options'] = new ArrayObject($annotation->getOptions());
+            $elementSpec['spec']['options']['target_element'] = $specification;
+
+            if (isset($specification['hydrator'])) {
+                $elementSpec['spec']['hydrator'] = $specification['hydrator'];
+            }
+        } else {
+            $elementSpec['spec'] = $specification;
+            $elementSpec['spec']['name'] = $name;
+        }
     }
 
     /**

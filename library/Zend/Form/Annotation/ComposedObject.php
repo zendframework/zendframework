@@ -19,7 +19,7 @@ namespace Zend\Form\Annotation;
  *
  * @Annotation
  */
-class ComposedObject extends AbstractStringAnnotation
+class ComposedObject extends AbstractArrayOrStringAnnotation
 {
     /**
      * Retrieve the composed object classname
@@ -28,6 +28,29 @@ class ComposedObject extends AbstractStringAnnotation
      */
     public function getComposedObject()
     {
+        if (is_array($this->value)) {
+            return $this->value['target_object'];
+        }
         return $this->value;
+    }
+
+    /**
+     * Is this composed object a collection or not
+     *
+     * @return bool
+     */
+    public function isCollection()
+    {
+        return is_array($this->value) && isset($this->value['is_collection']) && $this->value['is_collection'];
+    }
+
+    /**
+     * Retrieve the options for the composed object
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return isset($this->value['options']) ? $this->value['options'] : array();
     }
 }

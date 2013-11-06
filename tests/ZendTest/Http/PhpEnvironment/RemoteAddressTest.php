@@ -137,12 +137,17 @@ class RemoteAddressTest extends TestCase
      */
     public function testGetIpAddressReturnsEmptyStringOnNoRemoteAddr()
     {
-        $ipAddress = $_SERVER['REMOTE_ADDR'];
-        unset($_SERVER['REMOTE_ADDR']);
+        // Store the set IP address for later use
+        if (isset($_SERVER['REMOTE_ADDR'])) {
+            $ipAddress = $_SERVER['REMOTE_ADDR'];
+            unset($_SERVER['REMOTE_ADDR']);
+        }
 
         $this->remoteAddress->setUseProxy(true);
         $this->assertEquals('', $this->remoteAddress->getIpAddress());
 
-        $_SERVER['REMOTE_ADDR'] = $ipAddress;
+        if (isset($ipAddress)) {
+            $_SERVER['REMOTE_ADDR'] = $ipAddress;
+        }
     }
 }

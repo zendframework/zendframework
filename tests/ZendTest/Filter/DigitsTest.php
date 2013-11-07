@@ -89,7 +89,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
     public function testReturnUnfiltered()
     {
         $filter = new DigitsFilter();
-    
+
         $valuesExpected = array(
             null,
             new \stdClass(),

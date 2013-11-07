@@ -24,7 +24,7 @@ class CamelCaseToSeparator extends AbstractSeparator
         if (!is_scalar($value) && !is_array($value)) {
             return $value;
         }
-        
+
         if (StringUtils::hasPcreUnicodeSupport()) {
             $pattern     = array('#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#', '#(?<=(?:\p{Ll}|\p{Nd}))(\p{Lu})#');
             $replacement = array($this->separator . '\1', $this->separator . '\1');

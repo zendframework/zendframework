@@ -22,7 +22,7 @@ class DashToSeparator extends AbstractSeparator
         if (!is_scalar($value) && !is_array($value)) {
             return $value;
         }
-        
+
         return preg_replace('#-#', $this->separator, $value);
     }
 }

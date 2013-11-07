@@ -162,14 +162,14 @@ class RenameUpload extends AbstractFilter
         if (!is_scalar($value) && !is_array($value)) {
             return $value;
         }
-        
+
         // An uploaded file? Retrieve the 'tmp_name'
         $isFileUpload = false;
         if(is_array($value)){
             if(!isset($value['tmp_name'])){
                 return $value;
             }
-        
+
             $isFileUpload = true;
             $uploadData = $value;
             $sourceFile = $value['tmp_name'];

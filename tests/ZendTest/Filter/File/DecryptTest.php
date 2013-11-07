@@ -115,7 +115,7 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
         $filter->filter(dirname(__DIR__).'/_files/nofile.txt');
     }
-    
+
 
     /**
      * @return void
@@ -124,7 +124,7 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new FileDecrypt();
         $filter->setKey('1234567890123456');
-    
+
         $valuesExpected = array(
             null,
             new \stdClass(),

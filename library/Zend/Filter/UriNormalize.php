@@ -90,7 +90,7 @@ class UriNormalize extends AbstractFilter
             return $value;
         }
         $value = (string) $value;
-        
+
         $defaultScheme = $this->defaultScheme ?: $this->enforcedScheme;
 
         // Reset default scheme if it is not a known scheme

@@ -24,7 +24,7 @@ class SeparatorToCamelCase extends AbstractSeparator
         if (!is_scalar($value) && !is_array($value)) {
             return $value;
         }
-        
+
         // a unicode safe way of converting characters to \x00\x00 notation
         $pregQuotedSeparator = preg_quote($this->separator, '#');
 

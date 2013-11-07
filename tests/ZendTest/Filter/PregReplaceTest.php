@@ -78,7 +78,7 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->filter;
         $filter->setPattern('#^controller/(?P<action>[a-z_-]+)#')->setReplacement('foo/bar');
-        
+
         $string = 'controller/action';
         $filtered = $filter($string);
         $this->assertNotEquals($string, $filtered);
@@ -89,12 +89,12 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->filter;
         $filter->setPattern('#^controller/(?P<action>[a-z_-]+)#')->setReplacement('foo/bar');
-        
+
         $input = array(
             'controller/action',
             'This should stay the same'
         );
-        
+
         $filtered = $filter($input);
         $this->assertNotEquals($input, $filtered);
         $this->assertEquals(array(
@@ -127,7 +127,7 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->filter;
         $filter->setPattern('#^controller/(?P<action>[a-z_-]+)#')->setReplacement('foo/bar');
-        
+
         $valuesExpected = array(
             null,
             new \stdClass()

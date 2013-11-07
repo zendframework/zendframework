@@ -27,7 +27,7 @@ class Int extends AbstractFilter
             return $value;
         }
         $value = (string) $value;
-        
+
         return (int) $value;
     }
 }

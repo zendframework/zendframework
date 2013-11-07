@@ -136,7 +136,7 @@ class UpperCaseTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new FileUpperCase();
         $filter->setEncoding('ISO-8859-1');
-        
+
         $valuesExpected = array(
             null,
             new \stdClass(),

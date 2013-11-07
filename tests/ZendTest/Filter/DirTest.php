@@ -33,14 +33,14 @@ class DirTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($output, $filter($input));
         }
     }
-    
+
     /**
      * @return void
      */
     public function testReturnUnfiltered()
     {
         $filter = new DirFilter();
-    
+
         $valuesExpected = array(
             null,
             new \stdClass(),

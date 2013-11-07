@@ -329,7 +329,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($firstResult, $secondResult);
     }
-    
+
 
     /**
      * @return void
@@ -340,7 +340,7 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
             'target'          => $this->_newFile,
             'randomize'       => true,
         ));
-        
+
         $valuesExpected = array(
             null,
             new \stdClass(),

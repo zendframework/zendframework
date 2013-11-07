@@ -132,7 +132,7 @@ class PregReplace extends AbstractFilter
         if(!is_scalar($value) && !is_array($value)){
             return $value;
         }
-        
+
         if ($this->options['pattern'] === null) {
             throw new Exception\RuntimeException(sprintf(
                 'Filter %s does not have a valid pattern set',

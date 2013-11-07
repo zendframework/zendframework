@@ -25,7 +25,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function testBasic()
     {
         $filter = new IntFilter();
-        
+
         $valuesExpected = array(
             'string' => 0,
             '1'      => 1,
@@ -46,7 +46,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function testReturnUnfiltered()
     {
         $filter = new IntFilter();
-        
+
         $valuesExpected = array(
             null,
             new \stdClass(),

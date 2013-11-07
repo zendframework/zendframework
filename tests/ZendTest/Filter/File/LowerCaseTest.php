@@ -127,14 +127,14 @@ class LowerCaseTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }
-    
+
     /**
      * @return void
      */
     public function testReturnUnfiltered()
     {
         $filter = new FileLowerCase();
-    
+
         $valuesExpected = array(
             null,
             new \stdClass(),

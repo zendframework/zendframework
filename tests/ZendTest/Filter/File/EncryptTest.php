@@ -22,7 +22,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
         if (! extension_loaded('mcrypt')) {
             $this->markTestSkipped('This filter needs the mcrypt extension');
         }
-        
+
         if (file_exists(dirname(__DIR__) . '/_files/newencryption.txt')) {
             unlink(dirname(__DIR__) . '/_files/newencryption.txt');
         }
@@ -44,14 +44,14 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new FileEncrypt();
         $filter->setFilename(dirname(__DIR__) . '/_files/newencryption.txt');
-        
+
         $this->assertEquals(dirname(__DIR__) . '/_files/newencryption.txt', $filter->getFilename());
-        
+
         $filter->setKey('1234567890123456');
         $this->assertEquals(dirname(__DIR__) . '/_files/newencryption.txt', $filter->filter(dirname(__DIR__) . '/_files/encryption.txt'));
-        
+
         $this->assertEquals('Encryption', file_get_contents(dirname(__DIR__) . '/_files/encryption.txt'));
-        
+
         $this->assertNotEquals('Encryption', file_get_contents(dirname(__DIR__) . '/_files/newencryption.txt'));
     }
 
@@ -61,14 +61,14 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
         $filter->setFilename(dirname(__DIR__) . '/_files/newencryption.txt');
         $filter->setKey('1234567890123456');
         $this->assertEquals(dirname(__DIR__) . '/_files/newencryption.txt', $filter->filter(dirname(__DIR__) . '/_files/encryption.txt'));
-        
+
         $this->assertNotEquals('Encryption', file_get_contents(dirname(__DIR__) . '/_files/newencryption.txt'));
-        
+
         $filter = new FileDecrypt();
         $filter->setKey('1234567890123456');
         $input = $filter->filter(dirname(__DIR__) . '/_files/newencryption.txt');
         $this->assertEquals(dirname(__DIR__) . '/_files/newencryption.txt', $input);
-        
+
         $this->assertEquals('Encryption', trim(file_get_contents(dirname(__DIR__) . '/_files/newencryption.txt')));
     }
 
@@ -80,7 +80,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new FileEncrypt();
         $filter->setKey('1234567890123456');
-        
+
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
         echo $filter->filter(dirname(__DIR__) . '/_files/nofile.txt');
     }
@@ -93,10 +93,10 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new FileEncrypt();
         $filter->setKey('1234567890123456');
-        
+
         copy(dirname(__DIR__) . '/_files/encryption.txt', dirname(__DIR__) . '/_files/newencryption.txt');
         $filter->filter(dirname(__DIR__) . '/_files/newencryption.txt');
-        
+
         $this->assertNotEquals('Encryption', trim(file_get_contents(dirname(__DIR__) . '/_files/newencryption.txt')));
     }
 
@@ -108,7 +108,7 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new FileEncrypt();
         $filter->setKey('1234567890123456');
-        
+
         $valuesExpected = array(
             null,
             new \stdClass(),

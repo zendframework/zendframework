@@ -71,31 +71,32 @@ class SeparatorToCamelCaseTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('TestŠuma', $filtered);
     }
-    
+
     /**
      * @return void
      */
-    public function testFilterSupportArray(){
+    public function testFilterSupportArray()
+    {
         $filter = new SeparatorToCamelCaseFilter();
-        
+
         $input = array(
             'camel cased words',
             'something different'
         );
-        
+
         $filtered = $filter($input);
-        
+
         $this->assertNotEquals($input, $filtered);
         $this->assertEquals(array('CamelCasedWords', 'SomethingDifferent'), $filtered);
     }
-    
+
     /**
      * @return void
      */
     public function testReturnUnfiltered()
     {
         $filter = new SeparatorToCamelCaseFilter();
-    
+
         $valuesExpected = array(
             null,
             new \stdClass()

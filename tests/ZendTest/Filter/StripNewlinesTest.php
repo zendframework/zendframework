@@ -60,7 +60,7 @@ class StripNewlinesTest extends \PHPUnit_Framework_TestCase
     public function testReturnUnfiltered()
     {
         $filter = new StripNewLinesFilter();
-        
+
         $valuesExpected = array(
             null,
             new \stdClass()

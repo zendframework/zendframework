@@ -63,14 +63,14 @@ class UriNormalizeTest extends \PHPUnit_Framework_TestCase
             array('http', '/just/a/path', '/just/a/path') // cannot be enforced, no host
         );
     }
-    
+
     /**
      * @return void
      */
     public function testReturnUnfiltered()
     {
         $filter = new UriNormalize();
-    
+
         $valuesExpected = array(
             null,
             new \stdClass(),

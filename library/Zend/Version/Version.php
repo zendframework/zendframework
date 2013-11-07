@@ -22,12 +22,12 @@ final class Version
     const VERSION = '2.2.6dev';
 
     /**
-     * Github Service Identifier for version information is retreived from
+     * Github Service Identifier for version information is retrieved from
      */
     const VERSION_SERVICE_GITHUB = 'GITHUB';
 
     /**
-     * Zend (framework.zend.com) Service Identifier for version information is retreived from
+     * Zend (framework.zend.com) Service Identifier for version information is retrieved from
      */
     const VERSION_SERVICE_ZEND = 'ZEND';
 

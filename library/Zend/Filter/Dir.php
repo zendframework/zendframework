@@ -25,7 +25,7 @@ class Dir extends AbstractFilter
             return $value;
         }
         $value = (string) $value;
-        
+
         return dirname($value);
     }
 }

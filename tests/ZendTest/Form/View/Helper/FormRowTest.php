@@ -310,7 +310,7 @@ class FormRowTest extends TestCase
     {
         $element = new  Element\Date('birth');
         $element->setFormat('Y-m-d');
-        $element->setValue('2010-13-13');
+        $element->setValue('2010.13');
 
         $validator = new \Zend\Validator\Date();
         $validator->isValid($element->getValue());

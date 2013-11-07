@@ -84,31 +84,22 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that an error is raised if array is used
-     *
      * @return void
      */
-    public function testWarningIsRaisedIfArrayUsed()
+    public function testReturnUnfiltered()
     {
         $filter = new DigitsFilter();
-        $input = array('abc123', 'abc 123');
-
-        ErrorHandler::start(E_USER_WARNING);
-        $filtered = $filter->filter($input);
-        $err = ErrorHandler::stop();
-
-        $this->assertEquals($input, $filtered);
-        $this->assertInstanceOf('ErrorException', $err);
-        $this->assertContains('cannot filter', $err->getMessage());
-    }
-
-    /**
-     * @return void
-     */
-    public function testReturnsNullIfNullIsUsed()
-    {
-        $filter   = new DigitsFilter();
-        $filtered = $filter->filter(null);
-        $this->assertNull($filtered);
+    
+        $valuesExpected = array(
+            null,
+            new \stdClass(),
+            array(
+                'abc123',
+                'abc 123'
+            )
+        );
+        foreach ($valuesExpected as $input) {
+            $this->assertEquals($input, $filter($input));
+        }
     }
 }

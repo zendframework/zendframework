@@ -115,4 +115,26 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
         $filter->filter(dirname(__DIR__).'/_files/nofile.txt');
     }
+    
+
+    /**
+     * @return void
+     */
+    public function testReturnUnfiltered()
+    {
+        $filter = new FileDecrypt();
+        $filter->setKey('1234567890123456');
+    
+        $valuesExpected = array(
+            null,
+            new \stdClass(),
+            array(
+                dirname(__DIR__).'/_files/nofile.txt',
+                dirname(__DIR__).'/_files/nofile2.txt'
+            )
+        );
+        foreach ($valuesExpected as $input) {
+            $this->assertEquals($input, $filter($input));
+        }
+    }
 }

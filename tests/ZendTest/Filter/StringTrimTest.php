@@ -9,8 +9,8 @@
 
 namespace ZendTest\Filter;
 
-use stdClass;
 use Zend\Filter\StringTrim;
+use stdClass;
 
 /**
  * @group      Zend_Filter

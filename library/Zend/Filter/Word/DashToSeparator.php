@@ -14,11 +14,15 @@ class DashToSeparator extends AbstractSeparator
     /**
      * Defined by Zend\Filter\Filter
      *
-     * @param  string $value
-     * @return string
+     * @param  string|array $value
+     * @return string|array
      */
     public function filter($value)
     {
+        if (!is_scalar($value) && !is_array($value)) {
+            return $value;
+        }
+        
         return preg_replace('#-#', $this->separator, $value);
     }
 }

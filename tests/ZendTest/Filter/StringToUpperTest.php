@@ -157,29 +157,20 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that a warning is raised if array is used
-     *
      * @return void
      */
-    public function testWarningIsRaisedIfArrayUsed()
+    public function testReturnUnfiltered()
     {
-        $input = array('abc', 'def');
-
-        ErrorHandler::start(E_USER_WARNING);
-        $filtered = $this->_filter->filter($input);
-        $err = ErrorHandler::stop();
-
-        $this->assertEquals($input, $filtered);
-        $this->assertInstanceOf('ErrorException', $err);
-        $this->assertContains('cannot filter', $err->getMessage());
-    }
-
-    /**
-     * @return void
-     */
-    public function testReturnsNullIfNullIsUsed()
-    {
-        $filtered = $this->_filter->filter(null);
-        $this->assertNull($filtered);
+        $valuesExpected = array(
+            null,
+            new \stdClass(),
+            array(
+                'lower case written',
+                'This should stay the same'
+            )
+        );
+        foreach ($valuesExpected as $input) {
+            $this->assertEquals($input, $this->_filter->filter($input));
+        }
     }
 }

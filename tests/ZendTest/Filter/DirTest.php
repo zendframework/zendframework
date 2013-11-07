@@ -33,4 +33,24 @@ class DirTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($output, $filter($input));
         }
     }
+    
+    /**
+     * @return void
+     */
+    public function testReturnUnfiltered()
+    {
+        $filter = new DirFilter();
+    
+        $valuesExpected = array(
+            null,
+            new \stdClass(),
+            array(
+                '/path/to/filename',
+                '/path/to/filename.ext'
+            )
+        );
+        foreach ($valuesExpected as $input) {
+            $this->assertEquals($input, $filter($input));
+        }
+    }
 }

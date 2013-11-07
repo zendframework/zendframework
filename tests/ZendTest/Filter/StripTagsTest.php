@@ -537,29 +537,21 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that a warning is raised if array is used
      *
      * @return void
      */
-    public function testWarningIsRaisedIfArrayUsed()
+    public function testReturnUnfiltered()
     {
-        $input = array('<li data-name="Test User" data-id="11223"></li>', '<li data-name="Test User 2" data-id="456789"></li>');
-
-        ErrorHandler::start(E_USER_WARNING);
-        $filtered = $this->_filter->filter($input);
-        $err = ErrorHandler::stop();
-
-        $this->assertEquals($input, $filtered);
-        $this->assertInstanceOf('ErrorException', $err);
-        $this->assertContains('cannot filter', $err->getMessage());
-    }
-
-    /**
-     * @return void
-     */
-    public function testReturnsNullIfNullIsUsed()
-    {
-        $filtered = $this->_filter->filter(null);
-        $this->assertNull($filtered);
+        $valuesExpected = array(
+            null,
+            new \stdClass(),
+            array(
+                '<li data-name="Test User" data-id="11223"></li>',
+                '<li data-name="Test User 2" data-id="456789"></li>'
+            )
+        );
+        foreach ($valuesExpected as $input) {
+            $this->assertEquals($input, $this->_filter->filter($input));
+        }
     }
 }

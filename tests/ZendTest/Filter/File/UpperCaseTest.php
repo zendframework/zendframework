@@ -127,4 +127,26 @@ class UpperCaseTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('mbstring is required', $e->getMessage());
         }
     }
+
+
+    /**
+     * @return void
+     */
+    public function testReturnUnfiltered()
+    {
+        $filter = new FileUpperCase();
+        $filter->setEncoding('ISO-8859-1');
+        
+        $valuesExpected = array(
+            null,
+            new \stdClass(),
+            array(
+                $this->_newFile,
+                'something invalid'
+            )
+        );
+        foreach ($valuesExpected as $input) {
+            $this->assertEquals($input, $filter($input));
+        }
+    }
 }

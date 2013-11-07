@@ -19,6 +19,8 @@ class Encrypt extends AbstractFilter
 {
     /**
      * Encryption adapter
+     * 
+     * @param Encrypt\EncryptionAlgorithmInterface
      */
     protected $adapter;
 

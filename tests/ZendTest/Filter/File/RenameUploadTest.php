@@ -329,4 +329,28 @@ class RenameUploadTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($firstResult, $secondResult);
     }
+    
+
+    /**
+     * @return void
+     */
+    public function testReturnUnfiltered()
+    {
+        $filter = new RenameUploadMock(array(
+            'target'          => $this->_newFile,
+            'randomize'       => true,
+        ));
+        
+        $valuesExpected = array(
+            null,
+            new \stdClass(),
+            array(
+                $this->_oldFile,
+                'something invalid'
+            )
+        );
+        foreach ($valuesExpected as $input) {
+            $this->assertEquals($input, $filter($input));
+        }
+    }
 }

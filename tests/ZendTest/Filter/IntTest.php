@@ -25,6 +25,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function testBasic()
     {
         $filter = new IntFilter();
+        
         $valuesExpected = array(
             'string' => 0,
             '1'      => 1,
@@ -40,31 +41,22 @@ class IntTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that a warning is raised if array is used
-     *
      * @return void
      */
-    public function testWarningIsRaisedIfArrayUsed()
+    public function testReturnUnfiltered()
     {
         $filter = new IntFilter();
-        $input = array('123 test', '456 test');
-
-        ErrorHandler::start(E_USER_WARNING);
-        $filtered = $filter->filter($input);
-        $err = ErrorHandler::stop();
-
-        $this->assertEquals($input, $filtered);
-        $this->assertInstanceOf('ErrorException', $err);
-        $this->assertContains('cannot filter', $err->getMessage());
-    }
-
-    /**
-     * @return void
-     */
-    public function testReturnsNullIfNullIsUsed()
-    {
-        $filter   = new IntFilter();
-        $filtered = $filter->filter(null);
-        $this->assertNull($filtered);
+        
+        $valuesExpected = array(
+            null,
+            new \stdClass(),
+            array(
+                '1',
+                -1
+            )
+        );
+        foreach ($valuesExpected as $input) {
+            $this->assertEquals($input, $filter($input));
+        }
     }
 }

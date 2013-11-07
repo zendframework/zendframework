@@ -42,33 +42,21 @@ class StringToUpper extends AbstractUnicode
      * Returns the string $value, converting characters to uppercase as necessary
      *
      * If the value provided is non-scalar, the value will remain unfiltered
-     * and an E_USER_WARNING will be raised indicating it's unfilterable.
      *
      * @param  string $value
      * @return string|mixed
      */
     public function filter($value)
     {
-        if (null === $value) {
-            return null;
-        }
-
         if (!is_scalar($value)) {
-            trigger_error(
-                sprintf(
-                    '%s expects parameter to be scalar, "%s" given; cannot filter',
-                    __METHOD__,
-                    (is_object($value) ? get_class($value) : gettype($value))
-                ),
-                E_USER_WARNING
-            );
             return $value;
         }
+        $value = (string) $value;
 
         if ($this->options['encoding'] !== null) {
-            return mb_strtoupper((string) $value,  $this->options['encoding']);
+            return mb_strtoupper($value,  $this->options['encoding']);
         }
 
-        return strtoupper((string) $value);
+        return strtoupper($value);
     }
 }

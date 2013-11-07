@@ -174,7 +174,6 @@ class HtmlEntities extends AbstractFilter
      * equivalents where they exist
      *
      * If the value provided is non-scalar, the value will remain unfiltered
-     * and an E_USER_WARNING will be raised indicating it's unfilterable.
      *
      * @param  string $value
      * @return string|mixed
@@ -182,29 +181,18 @@ class HtmlEntities extends AbstractFilter
      */
     public function filter($value)
     {
-        if (null === $value) {
-            return null;
-        }
-
         if (!is_scalar($value)) {
-            trigger_error(
-                sprintf(
-                    '%s expects parameter to be scalar, "%s" given; cannot filter',
-                    __METHOD__,
-                    (is_object($value) ? get_class($value) : gettype($value))
-                ),
-                E_USER_WARNING
-            );
             return $value;
         }
+        $value = (string) $value;
 
-        $filtered = htmlentities((string) $value, $this->getQuoteStyle(), $this->getEncoding(), $this->getDoubleQuote());
-        if (strlen((string) $value) && !strlen($filtered)) {
+        $filtered = htmlentities($value, $this->getQuoteStyle(), $this->getEncoding(), $this->getDoubleQuote());
+        if (strlen($value) && !strlen($filtered)) {
             if (!function_exists('iconv')) {
                 throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');
             }
             $enc      = $this->getEncoding();
-            $value    = iconv('', $this->getEncoding() . '//IGNORE', (string) $value);
+            $value    = iconv('', $this->getEncoding() . '//IGNORE', $value);
             $filtered = htmlentities($value, $this->getQuoteStyle(), $enc, $this->getDoubleQuote());
             if (!strlen($filtered)) {
                 throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');

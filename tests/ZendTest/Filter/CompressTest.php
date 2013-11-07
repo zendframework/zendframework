@@ -234,7 +234,7 @@ class CompressTest extends \PHPUnit_Framework_TestCase
     public function testReturnUnfiltered()
     {
         $filter  = new CompressFilter('bz2');
-        
+
         $valuesExpected = array(
             null,
             new \stdClass(),

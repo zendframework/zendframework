@@ -143,7 +143,7 @@ class NumberFormat extends AbstractLocale
         if(!is_scalar($value)){
             return $value;
         }
-        
+
         $formatter = $this->getFormatter();
         $type      = $this->getType();
 

@@ -137,7 +137,7 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
         $filter = new DecryptFilter();
         $filter->getUnknownMethod();
     }
-    
+
     /**
      * @return void
      */
@@ -149,7 +149,7 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
 
         $decrypt = new DecryptFilter(array('adapter' => 'BlockCipher', 'key' => 'testkey'));
         $decrypt->setVector('1234567890123456890');
-    
+
         $valuesExpected = array(
             null,
             new \stdClass(),
@@ -160,7 +160,7 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
         );
         foreach ($valuesExpected as $input) {
             $decrypted = $decrypt->filter($input);
-            
+
             $this->assertEquals($input, $decrypted);
         }
     }

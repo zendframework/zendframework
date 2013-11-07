@@ -28,16 +28,16 @@ class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
     {
         date_default_timezone_set($this->defaultTimezone);
     }
-    
+
     /**
      * Values which are skipped by the formatter
      */
     public function testReturnUnfiltered()
     {
         date_default_timezone_set('UTC');
-        
+
         $filter = new DateTimeFormatter();
-    
+
         $valuesExpected = array(
             null,
             '',

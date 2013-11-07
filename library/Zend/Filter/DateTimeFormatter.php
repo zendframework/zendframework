@@ -59,7 +59,7 @@ class DateTimeFormatter extends AbstractFilter
             // DateTime threw an exception, an invalid date string was provided
             throw new Exception\InvalidArgumentException('Invalid date string provided', $e->getCode(), $e);
         }
-        
+
         if($result === false){
             return $value;
         }
@@ -78,11 +78,11 @@ class DateTimeFormatter extends AbstractFilter
         if ($value === '' || $value === null) {
             return $value;
         }
-        
+
         if(!is_string($value) && !is_int($value) && !$value instanceof DateTime){
             return $value;
         }
-        
+
         if (is_int($value)) {
             //timestamp
             $value = new DateTime('@' . $value);

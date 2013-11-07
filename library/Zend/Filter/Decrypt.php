@@ -27,7 +27,7 @@ class Decrypt extends Encrypt
         if(!is_string($value)){
             return $value;
         }
-        
+
         return $this->adapter->decrypt($value);
     }
 }

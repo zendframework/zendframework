@@ -26,7 +26,7 @@ class Alpha extends Alnum
         if(!is_scalar($value) && !is_array($value)){
             return $value;
         }
-        
+
         $whiteSpace = $this->options['allow_white_space'] ? '\s' : '';
         $language   = Locale::getPrimaryLanguage($this->getLocale());
 

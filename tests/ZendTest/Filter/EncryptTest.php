@@ -143,7 +143,7 @@ PIDs9E7uuizAKDhRRRvho8BS
         $filter = new EncryptFilter();
         $filter->getUnknownMethod();
     }
-    
+
     /**
      * @return void
      */
@@ -152,10 +152,10 @@ PIDs9E7uuizAKDhRRRvho8BS
         if (!extension_loaded('mcrypt')) {
             $this->markTestSkipped('Mcrypt extension not installed');
         }
-    
+
         $encrypt = new EncryptFilter(array('adapter' => 'BlockCipher', 'key' => 'testkey'));
         $encrypt->setVector('1234567890123456890');
-    
+
         $valuesExpected = array(
             null,
             new \stdClass(),
@@ -166,7 +166,7 @@ PIDs9E7uuizAKDhRRRvho8BS
         );
         foreach ($valuesExpected as $input) {
             $encrypted = $encrypt->filter($input);
-                
+
             $this->assertEquals($input, $encrypted);
         }
     }

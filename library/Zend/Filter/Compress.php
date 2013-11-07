@@ -204,7 +204,7 @@ class Compress extends AbstractFilter
         if (!is_string($value)) {
             return $value;
         }
-        
+
         return $this->getAdapter()->compress($value);
     }
 }

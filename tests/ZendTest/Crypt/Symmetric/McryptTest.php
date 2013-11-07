@@ -116,7 +116,7 @@ class McryptTest extends \PHPUnit_Framework_TestCase
         foreach ($this->mcrypt->getSupportedAlgorithms() as $algo) {
             $this->mcrypt->setAlgorithm($algo);
             try {
-            $result = $this->mcrypt->setKey('short');
+            $result = $this->mcrypt->setKey('four');
             } catch (\Exception $ex) {
                 $result = $ex;
             }

@@ -40,7 +40,8 @@ class Encrypt extends AbstractFilter
 
     /**
      * Returns the name of the set adapter
-     *
+     * @todo inconsitent: get adapter should return the adapter and not the name
+     * 
      * @return string
      */
     public function getAdapter()
@@ -119,6 +120,10 @@ class Encrypt extends AbstractFilter
      */
     public function filter($value)
     {
+        if(!is_string($value)){
+            return $value;
+        }
+        
         return $this->adapter->encrypt($value);
     }
 }

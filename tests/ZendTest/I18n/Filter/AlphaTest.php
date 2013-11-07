@@ -162,4 +162,34 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($expected, $actual);
         }
     }
+    
+    public function testFilterSupportArray()
+    {
+        $filter = new AlphaFilter();
+    
+        $values = array(
+            'abc123'        => 'abc',
+            'abc 123'       => 'abc',
+            'abcxyz'        => 'abcxyz',
+            ''              => ''
+        );
+    
+        $actual = $filter->filter(array_keys($values));
+    
+        $this->assertEquals(array_values($values), $actual);
+    }
+    
+    public function testReturnUnfiltered()
+    {
+        $filter = new AlphaFilter();
+    
+        $valuesExpected = array(
+            null,
+            new \stdClass()
+        );
+        foreach ($valuesExpected as $input) {
+            $this->assertEquals($input,  $filter->filter($input));
+        }
+    }
+    
 }

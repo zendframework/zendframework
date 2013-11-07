@@ -227,4 +227,24 @@ class CompressTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\Zend\Filter\Exception\BadMethodCallException', 'Unknown method');
         $filter->invalidMethod();
     }
+
+    /**
+     * @return void
+     */
+    public function testReturnUnfiltered()
+    {
+        $filter  = new CompressFilter('bz2');
+        
+        $valuesExpected = array(
+            null,
+            new \stdClass(),
+            array(
+                'compress me',
+                'compress me too, please'
+            )
+        );
+        foreach ($valuesExpected as $input) {
+            $this->assertEquals($input, $filter($input));
+        }
+    }
 }

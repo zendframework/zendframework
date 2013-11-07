@@ -140,6 +140,10 @@ class NumberFormat extends AbstractLocale
      */
     public function filter($value)
     {
+        if(!is_scalar($value)){
+            return $value;
+        }
+        
         $formatter = $this->getFormatter();
         $type      = $this->getType();
 

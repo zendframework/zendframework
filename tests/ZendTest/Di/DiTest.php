@@ -447,6 +447,44 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di->newInstance('ZendTest\Di\TestAsset\CircularClasses\D');
     }
 
+    protected function configureNoneCircularDependencyTests()
+    {
+        $di = new Di();
+
+        $di->instanceManager()->addAlias('YA', 'ZendTest\Di\TestAsset\CircularClasses\Y');
+        $di->instanceManager()->addAlias('YB', 'ZendTest\Di\TestAsset\CircularClasses\Y', array('y' => 'YA'));
+        $di->instanceManager()->addAlias('YC', 'ZendTest\Di\TestAsset\CircularClasses\Y', array('y' => 'YB'));
+
+        return $di;
+    }
+
+    /**
+     * Test for correctly identifying no Circular Dependencies (case 1)
+     *
+     * YC -> YB, YB -> YA
+     * @group CircularDependencyCheck
+     */
+    public function testNoCircularDependencyDetectedIfWeGetIntermediaryClass()
+    {
+        $di = $this->configureNoneCircularDependencyTests();
+
+        $di->get('YB');
+        $di->get('YC');
+    }
+
+    /**
+     * Test for correctly identifying no Circular Dependencies (case 2)
+     *
+     * YC -> YB, YB -> YA
+     * @group CircularDependencyCheck
+     */
+    public function testNoCircularDependencyDetectedIfWeDontGetIntermediaryClass()
+    {
+        $di = $this->configureNoneCircularDependencyTests();
+
+        $di->get('YC');
+    }
+
     /**
      * Fix for PHP bug in is_subclass_of
      *

@@ -125,28 +125,44 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
         $elementSpec = $e->getParam('elementSpec');
         $filterSpec  = $e->getParam('filterSpec');
 
-        // Compose input filter into parent input filter
-        $inputFilter = $specification['input_filter'];
-        if (!isset($inputFilter['type'])) {
-            $inputFilter['type'] = 'Zend\InputFilter\InputFilter';
-        }
-        $e->setParam('inputSpec', $inputFilter);
-        unset($specification['input_filter']);
-
-        // Compose specification as a fieldset into parent form/fieldset
-        if (!isset($specification['type'])) {
-            $specification['type'] = 'Zend\Form\Fieldset';
-        }
         if ($annotation->isCollection()) {
+            // Compose specification as a fieldset into parent form/fieldset
+            if (!isset($specification['type'])) {
+                //use input filter provider fieldset so we can compose the input filter into the fieldset
+                //it is assumed that if someone uses a custom fieldset, they will take care of the input
+                //filtering themselves or consume the input_filter_spec option.
+                $specification['type'] = 'Zend\Form\InputFilterProviderFieldset';
+            }
+
+            $inputFilter = $specification['input_filter'];
+            if (!isset($inputFilter['type'])) {
+                $inputFilter['type'] = 'Zend\InputFilter\InputFilter';
+            }
+            unset($specification['input_filter']);
+
             $elementSpec['spec']['type'] = 'Zend\Form\Element\Collection';
             $elementSpec['spec']['name'] = $name;
             $elementSpec['spec']['options'] = new ArrayObject($annotation->getOptions());
             $elementSpec['spec']['options']['target_element'] = $specification;
+            $elementSpec['spec']['options']['target_element']['options']['input_filter_spec'] = $inputFilter;
 
             if (isset($specification['hydrator'])) {
                 $elementSpec['spec']['hydrator'] = $specification['hydrator'];
             }
         } else {
+            // Compose input filter into parent input filter
+            $inputFilter = $specification['input_filter'];
+            if (!isset($inputFilter['type'])) {
+                $inputFilter['type'] = 'Zend\InputFilter\InputFilter';
+            }
+            $e->setParam('inputSpec', $inputFilter);
+            unset($specification['input_filter']);
+
+            // Compose specification as a fieldset into parent form/fieldset
+            if (!isset($specification['type'])) {
+                $specification['type'] = 'Zend\Form\Fieldset';
+            }
+
             $elementSpec['spec'] = $specification;
             $elementSpec['spec']['name'] = $name;
         }

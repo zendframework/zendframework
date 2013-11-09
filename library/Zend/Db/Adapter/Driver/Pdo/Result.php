@@ -117,6 +117,7 @@ class Result implements Iterator, ResultInterface
         }
 
         $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
+	$this->currentComplete = true;
         return $this->currentData;
     }
 

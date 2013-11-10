@@ -441,7 +441,7 @@ class Encoder
      * Solar Framework by Paul M. Jones
      *
      * @link   http://solarphp.com/
-     * @link   http://svn.solarphp.com/core/trunk/Solar/JSON.php
+     * @link   https://github.com/solarphp/core/blob/master/Solar/Json.php
      * @param  string $value
      * @return string
      */

@@ -443,7 +443,7 @@ class Decoder
      * Solar Framework by Paul M. Jones
      *
      * @link   http://solarphp.com/
-     * @link   http://svn.solarphp.com/core/trunk/Solar/Json.php
+     * @link   https://github.com/solarphp/core/blob/master/Solar/Json.php
      * @param  string $chrs
      * @return string
      */

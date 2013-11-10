@@ -22,7 +22,7 @@ use Zend\View\Resolver\TemplatePathStack;
 use Zend\View\Variables;
 
 /**
- * Class for Zend\View to help enforce private constructs.
+ * Class for Zend\View\Strategy\PhpRendererStrategy to help enforce private constructs.
  *
  * Note: all private variables in this class are prefixed with "__". This is to
  * mark them as part of the internal implementation, and thus prevent conflict

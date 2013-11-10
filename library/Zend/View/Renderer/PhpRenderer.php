@@ -164,7 +164,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
     }
 
     /**
-     * Allow custom object initialization when extending PhpRenderer or
+     * Allow custom object initialization when extending PhpRenderer
      *
      * Triggered by {@link __construct() the constructor} as its final action.
      *

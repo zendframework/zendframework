@@ -60,7 +60,7 @@ class ConsoleRenderer implements RendererInterface, TreeRendererInterface
     }
 
     /**
-     * Allow custom object initialization when extending ConsoleRenderer or
+     * Allow custom object initialization when extending ConsoleRenderer
      *
      * Triggered by {@link __construct() the constructor} as its final action.
      *

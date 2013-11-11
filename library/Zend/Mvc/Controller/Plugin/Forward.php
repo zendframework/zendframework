@@ -176,11 +176,22 @@ class Forward extends AbstractPlugin
                 $events = $sharedEvents->getListeners($id, $eventName);
                 foreach ($events as $currentEvent) {
                     $currentCallback = $currentEvent->getCallback();
-                    if (!isset($currentCallback[0])) {
+
+                    // Testing against object callbacks
+                    if (!is_object($currentCallback) 
+                        || !is_array($currentCallback) 
+                        || !isset($currentCallback[0])
+                    ) {
                         continue;
                     }
+
+                    // If we have an array, grab the object
+                    if (is_array($currentCallback)) {
+                        $currentCallback = $currentCallback[0];
+                    }
+
                     foreach ($classArray as $class) {
-                        if (is_a($currentCallback[0], $class)) {
+                        if (is_a($currentCallback, $class)) {
                             $sharedEvents->detach($id, $currentEvent);
                             $results[$id][$eventName][] = $currentEvent;
                         }

@@ -18,17 +18,19 @@ use Traversable;
 class Date extends AbstractValidator
 {
     /**#@+
-     * Validity constant
+     * Validity constants
      * @var string
      */
     const INVALID        = 'dateInvalid';
     const INVALID_DATE   = 'dateInvalidDate';
     const FALSEFORMAT    = 'dateFalseFormat';
+    /**#@-*/
+
     /**
-     * Default format
+     * Default format constant
+     * @var string
      */
     const FORMAT_DEFAULT = 'Y-m-d';
-    /**#@-*/
 
     /**
      * Validation failure message template definitions
@@ -44,7 +46,9 @@ class Date extends AbstractValidator
     /**
      * @var array
      */
-    protected $messageVariables = array('format' => 'format');
+    protected $messageVariables = array(
+        'format' => 'format',
+    );
 
     /**
      * @var string
@@ -129,7 +133,9 @@ class Date extends AbstractValidator
 
         $type = gettype($param);
         if (!in_array($type, array('string', 'integer', 'array'))) {
-            if ($addErrors) $this->error(self::INVALID);
+            if ($addErrors) {
+                $this->error(self::INVALID);
+            }
             return false;
         }
 
@@ -163,7 +169,9 @@ class Date extends AbstractValidator
         // and still return a DateTime object.
         $errors = DateTime::getLastErrors();
         if ($errors['warning_count'] > 0) {
-            if ($addErrors) $this->error(self::FALSEFORMAT);
+            if ($addErrors) {
+                $this->error(self::FALSEFORMAT);
+            }
             return false;
         }
 

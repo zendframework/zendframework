@@ -161,8 +161,7 @@ class DateStep extends Date
     protected function convertString($value, $addErrors = true)
     {
         // Custom week format support
-        if (
-            strpos($this->format, 'Y-\WW') === 0
+        if (strpos($this->format, 'Y-\WW') === 0
             && preg_match('/^([0-9]{4})\-W([0-9]{2})/', $value, $matches)
         ) {
             $date = new DateTime;
@@ -175,7 +174,9 @@ class DateStep extends Date
         // and still return a DateTime object.
         $errors = DateTime::getLastErrors();
         if ($errors['warning_count'] > 0) {
-            if ($addErrors) $this->error(self::FALSE_FORMAT);
+            if ($addErrors) {
+                $this->error(self::FALSE_FORMAT);
+            }
             return false;
         }
 

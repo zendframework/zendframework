@@ -42,7 +42,7 @@ class Debug
 
     /**
      * Set the debug output environment.
-     * Setting a value of null causes Zend_Debug to use PHP_SAPI.
+     * Setting a value of null causes Zend\Debug\Debug to use PHP_SAPI.
      *
      * @param string $sapi
      * @return void;

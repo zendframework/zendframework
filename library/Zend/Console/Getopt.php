@@ -37,7 +37,7 @@ namespace Zend\Console;
  * - Automatic generation of a helpful usage message.
  * - Signal end of options with '--'; subsequent arguments are treated
  *   as non-option arguments, even if they begin with '-'.
- * - Raise exception Zend_Console_Getopt_Exception in several cases
+ * - Raise exception Zend\Console\Exception\* in several cases
  *   when invalid flags or parameters are given.  Usage message is
  *   returned in the exception object.
  *
@@ -213,7 +213,7 @@ class Getopt
         if (!isset($_SERVER['argv'])) {
             $errorDescription = (ini_get('register_argc_argv') == false)
                 ? "argv is not available, because ini option 'register_argc_argv' is set Off"
-                : '$_SERVER["argv"] is not set, but Zend_Console_Getopt cannot work without this information.';
+                : '$_SERVER["argv"] is not set, but Zend\Console\Getopt cannot work without this information.';
             throw new Exception\InvalidArgumentException($errorDescription);
         }
 

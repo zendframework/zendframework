@@ -230,7 +230,7 @@ class Links extends AbstractHelper
      *
      * The form of the returned array:
      * <code>
-     * // $page denotes an instance of Zend_Navigation_Page
+     * // $page denotes an instance of Zend\Navigation\Page\AbstractPage
      * $returned = array(
      *     'rel' => array(
      *         'alternate' => array($page, $page, $page),

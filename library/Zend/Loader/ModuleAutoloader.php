@@ -185,6 +185,10 @@ class ModuleAutoloader implements SplAutoloader
         foreach ($this->paths as $path) {
             $path = $path . $moduleClassPath;
 
+            if ($path == '.' || substr($path, 0, 2) == './' || substr($path, 0, 2) == '.\\') {
+                $path = realpath('.').substr($path, 1);
+            }
+
             $classLoaded = $this->loadModuleFromDir($path, $class);
             if ($classLoaded) {
                 return $classLoaded;

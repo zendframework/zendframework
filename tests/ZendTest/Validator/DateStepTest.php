@@ -115,6 +115,6 @@ class DateStepTest extends \PHPUnit_Framework_TestCase
             'step' => new DateInterval("P10D"),
         ));
 
-        $this->assertFalse($validator->isValid('2012-13-13'));
+        $this->assertFalse($validator->isValid('2012-02-23'));
     }
 }

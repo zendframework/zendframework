@@ -15,6 +15,7 @@ use Zend\Permissions\Acl\Role;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View;
 use Zend\View\Helper\Navigation;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Tests Zend_View_Helper_Navigation
@@ -553,6 +554,18 @@ class NavigationTest extends AbstractTest
         $menu    = $helper()->menu();
         $expected = spl_object_hash($menu->getContainer());
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testSetPluginManagerAndView()
+    {
+        $pluginManager = new \Zend\View\Helper\Navigation\PluginManager();
+        $view = new PhpRenderer();
+
+        $helper = new $this->_helperName;
+        $helper->setPluginManager($pluginManager);
+        $helper->setView($view);
+
+        $this->assertEquals($view, $pluginManager->getRenderer());
     }
 
     /**

@@ -178,8 +178,8 @@ class Forward extends AbstractPlugin
                     $currentCallback = $currentEvent->getCallback();
 
                     // Testing against object callbacks
-                    if (!is_object($currentCallback) 
-                        || !is_array($currentCallback) 
+                    if (!is_object($currentCallback)
+                        || !is_array($currentCallback)
                         || !isset($currentCallback[0])
                     ) {
                         continue;

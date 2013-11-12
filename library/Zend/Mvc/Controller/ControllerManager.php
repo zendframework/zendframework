@@ -80,6 +80,10 @@ class ControllerManager extends AbstractPluginManager
             }
         }
 
+        if ($controller instanceof AbstractConsoleController) {
+            $controller->setConsole($parentLocator->get('Console'));
+        }
+
         if (method_exists($controller, 'setPluginManager')) {
             $controller->setPluginManager($parentLocator->get('ControllerPluginManager'));
         }

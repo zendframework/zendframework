@@ -179,7 +179,7 @@ class Forward extends AbstractPlugin
 
                     // If we have an array, grab the object
                     if (is_array($currentCallback)) {
-                        $currentCallback = $currentCallback[0];
+                        $currentCallback = array_shift($currentCallback);
                     }
 
                     // This routine is only valid for object callbacks

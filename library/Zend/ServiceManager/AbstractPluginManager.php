@@ -142,7 +142,7 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
     /**
      * Get the main plugin manager. Useful for fetching dependencies from within factories.
      *
-     * @return mixed
+     * @return ServiceLocatorInterface
      */
     public function getServiceLocator()
     {

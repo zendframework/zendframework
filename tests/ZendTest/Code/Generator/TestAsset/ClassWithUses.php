@@ -10,6 +10,7 @@
 
 namespace ZendTest\Code\Generator\TestAsset;
 
+use ZendTest\Code\Generator\TestAsset\ClassWithNamespace;
 
 class ClassWithUses
 {

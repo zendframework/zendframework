@@ -4,6 +4,7 @@ namespace ZendTest\Code\TestAsset;
 
 include __DIR__ . '/foo/bar/baz.php';
 
+use A\B\C;
 use Foo\Bar\Baz as FooBarBaz;
 
 abstract class BarClass

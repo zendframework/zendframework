@@ -46,8 +46,10 @@ abstract class Factory
 
         $type = isset($spec['type']) ? $spec['type'] : 'sendmail';
 
-        if (isset(static::$classMap[strtolower($type)])) {
-            $type = static::$classMap[strtolower($type)];
+        $normalizedType = strtolower($type);
+
+        if (isset(static::$classMap[$normalizedType])) {
+            $type = static::$classMap[$normalizedType];
         }
 
         if (! class_exists($type)) {

@@ -10,7 +10,6 @@
 namespace ZendTest\Form\TestAsset;
 
 use Zend\Form\Form;
-use Zend\InputFilter\InputFilterProviderInterface;
 
 class FileInputFilterProviderForm extends Form
 {

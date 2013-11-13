@@ -10,7 +10,6 @@
 namespace ZendTest\ServiceManager\TestAsset;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\Exception;
 
 class FooPluginManager extends AbstractPluginManager
 {

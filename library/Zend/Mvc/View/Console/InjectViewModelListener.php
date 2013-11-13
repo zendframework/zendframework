@@ -9,7 +9,6 @@
 
 namespace Zend\Mvc\View\Console;
 
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\View\Http\InjectViewModelListener as HttpInjectViewModelListener;
 
 class InjectViewModelListener extends HttpInjectViewModelListener

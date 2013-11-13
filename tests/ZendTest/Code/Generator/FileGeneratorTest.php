@@ -9,7 +9,6 @@
 
 namespace ZendTest\Code\Generator;
 
-use Exception;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Reflection\FileReflection;

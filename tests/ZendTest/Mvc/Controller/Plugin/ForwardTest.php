@@ -23,7 +23,6 @@ use Zend\Stdlib\CallbackHandler;
 use ZendTest\Mvc\Controller\TestAsset\ForwardController;
 use ZendTest\Mvc\Controller\TestAsset\SampleController;
 use ZendTest\Mvc\Controller\TestAsset\UneventfulController;
-use ZendTest\Mvc\Controller\TestAsset\UnlocatableEventfulController;
 use ZendTest\Mvc\TestAsset\Locator;
 
 class ForwardTest extends TestCase

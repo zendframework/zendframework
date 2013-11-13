@@ -9,7 +9,6 @@
 
 namespace Zend\Stdlib;
 
-use Closure;
 use ReflectionClass;
 
 /**

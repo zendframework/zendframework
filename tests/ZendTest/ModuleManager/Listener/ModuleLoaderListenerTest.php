@@ -9,8 +9,6 @@
 
 namespace ZendTest\ModuleManager\Listener;
 
-use ArrayObject;
-use InvalidArgumentException;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\ModuleManager\Listener\ModuleResolverListener;
 use Zend\ModuleManager\Listener\ModuleLoaderListener;

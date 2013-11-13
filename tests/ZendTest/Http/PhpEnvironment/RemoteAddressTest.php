@@ -10,8 +10,6 @@
 namespace ZendTest\Http\PhpEnvironment;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Http\Headers;
-use Zend\Http\Header\GenericHeader;
 use Zend\Http\PhpEnvironment\RemoteAddress as RemoteAddr;
 
 class RemoteAddressTest extends TestCase

@@ -9,9 +9,7 @@
 
 namespace Zend\ProgressBar\Upload;
 
-use Traversable;
 use Zend\ProgressBar\Exception;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * Progress Bar Upload Handler for PHP 5.4+ Session Upload Progress handling

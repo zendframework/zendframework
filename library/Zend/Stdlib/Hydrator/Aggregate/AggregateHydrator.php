@@ -12,8 +12,6 @@ namespace Zend\Stdlib\Hydrator\Aggregate;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
-use Zend\Stdlib\Exception;
-use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**

@@ -24,7 +24,13 @@ abstract class Factory
         'smtp'      => 'Zend\Mail\Transport\Smtp',
     );
 
-    public static function create($spec)
+    /**
+     * @param array $spec
+     * @return TransportInterface
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\DomainException
+     */
+    public static function create($spec = array())
     {
         if ($spec instanceof Traversable) {
             $spec = ArrayUtils::iteratorToArray($spec);

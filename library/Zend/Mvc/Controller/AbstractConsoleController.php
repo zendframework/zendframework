@@ -36,7 +36,7 @@ class AbstractConsoleController extends AbstractActionController
     public function dispatch(RequestInterface $request, ResponseInterface $response = null)
     {
         if (! $request instanceof ConsoleRequest) {
-            throw new InvalidArgumentException('Expected an Console request');
+            throw new InvalidArgumentException('Expected a Console request');
         }
 
         return parent::dispatch($request, $response);

@@ -85,6 +85,36 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
     }
 
     /**
+     * Replace a named input
+     *
+     * @param  string $name
+     * @return InputFilterInterface
+     */
+    public function replace($input, $name)
+    {
+        if (!$input instanceof InputInterface && !$input instanceof InputFilterInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an instance of %s or %s as its first argument; received "%s"',
+                __METHOD__,
+                'Zend\InputFilter\InputInterface',
+                'Zend\InputFilter\InputFilterInterface',
+                (is_object($input) ? get_class($input) : gettype($input))
+            ));
+        }
+
+        if (!array_key_exists($name, $this->inputs)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: no input found matching "%s"',
+                __METHOD__,
+                $name
+            ));
+        }
+
+        $this->inputs[$name] = $input;
+        return $this;
+    }
+
+    /**
      * Retrieve a named input
      *
      * @param  string $name

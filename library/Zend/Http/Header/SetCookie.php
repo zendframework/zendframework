@@ -110,7 +110,7 @@ class SetCookie implements MultipleHeaderInterface
                         $headerKey  = $matches['headerKey'];
                         $headerValue= $matches['headerValue'];
                     } else {
-                        $headerKey = $keyValue;
+                        $headerKey = str_replace('=', '', $keyValue);
                         $headerValue = null;
                     }
 

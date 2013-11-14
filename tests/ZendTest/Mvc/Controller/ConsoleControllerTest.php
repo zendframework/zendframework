@@ -41,7 +41,7 @@ class ConsoleControllerTest extends TestCase
 
     public function testDispatchIncorrectRequest()
     {
-        $this->setExpectedException('\Zend\Mvc\Exception\InvalidArgumentException', 'Expected a console request');
+        $this->setExpectedException('\Zend\Mvc\Exception\InvalidArgumentException');
 
         $request = new Request();
         $this->controller->dispatch($request);

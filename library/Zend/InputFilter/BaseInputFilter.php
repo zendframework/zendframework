@@ -90,7 +90,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
      * @param  InputInterface|InputFilterInterface $input
      * @param  string                              $name Name of the input to replace
      * @throws Exception\InvalidArgumentException
-     * @return InputFilterInterface
+     * @return self
      */
     public function replace($input, $name)
     {

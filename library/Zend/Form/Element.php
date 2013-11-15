@@ -173,7 +173,7 @@ class Element implements
      *
      * @param  string $key
      * @param  mixed $value
-     * @return ElementInterface
+     * @return self
      */
     public function setOption($key, $value)
     {

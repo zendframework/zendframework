@@ -172,6 +172,14 @@ class ElementTest extends TestCase
         $this->assertEquals(array('moar' => 'foo'), $labelOptions);
     }
 
+    public function testCanSetSingleOptionForLabel()
+    {
+        $element = new Element('foo');
+        $element->setOption('label', 'foo');
+        $option = $element->getOption('label');
+        $this->assertEquals('foo', $option);
+    }
+
     public function testSetOptionsWrongInputRaisesException()
     {
         $element = new Element('foo');

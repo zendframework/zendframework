@@ -169,6 +169,19 @@ class Element implements
     }
 
     /**
+     * Set a single option for an element
+     *
+     * @param  string $key
+     * @param  mixed $value
+     * @return ElementInterface
+     */
+    public function setOption($key, $value)
+    {
+        $this->options[$key] = $value;
+        return $this;
+    }
+
+    /**
      * Set a single element attribute
      *
      * @param  string $key

@@ -14,6 +14,7 @@ use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Adapter\Platform\Sql92;
 use Zend\Db\Adapter\StatementContainerInterface;
+use Zend\Stdlib\PriorityList;
 
 /**
  *
@@ -47,9 +48,9 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     protected $emptyWhereProtection = true;
 
     /**
-     * @var array
+     * @var PriorityList
      */
-    protected $set = array();
+    protected $set;
 
     /**
      * @var string|Where
@@ -67,6 +68,8 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $this->table($table);
         }
         $this->where = new Where();
+        $this->set = new PriorityList();
+        $this->set->isLIFO(false);
     }
 
     /**
@@ -96,16 +99,15 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
 
         if ($flag == self::VALUES_SET) {
-            $this->set = array();
+            $this->set->clear();
         }
-
+        $priority = is_numeric($flag) ? $flag : 0;
         foreach ($values as $k => $v) {
             if (!is_string($k)) {
                 throw new Exception\InvalidArgumentException('set() expects a string for the value key');
             }
-            $this->set[$k] = $v;
+            $this->set->insert($k, $v, $priority);
         }
-
         return $this;
     }
 
@@ -132,7 +134,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $rawState = array(
             'emptyWhereProtection' => $this->emptyWhereProtection,
             'table' => $this->table,
-            'set' => $this->set,
+            'set' => $this->set->toArray(),
             'where' => $this->where
         );
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
@@ -170,21 +172,18 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
         }
 
-        $set = $this->set;
-        if (is_array($set)) {
-            $setSql = array();
-            foreach ($set as $column => $value) {
-                if ($value instanceof Expression) {
-                    $exprData = $this->processExpression($value, $platform, $driver);
-                    $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $exprData->getSql();
-                    $parameterContainer->merge($exprData->getParameterContainer());
-                } else {
-                    $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);
-                    $parameterContainer->offsetSet($column, $value);
-                }
+        $setSql = array();
+        foreach ($this->set as $column => $value) {
+            if ($value instanceof Expression) {
+                $exprData = $this->processExpression($value, $platform, $driver);
+                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $exprData->getSql();
+                $parameterContainer->merge($exprData->getParameterContainer());
+            } else {
+                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);
+                $parameterContainer->offsetSet($column, $value);
             }
-            $set = implode(', ', $setSql);
         }
+        $set = implode(', ', $setSql);
 
         $sql = sprintf($this->specifications[static::SPECIFICATION_UPDATE], $table, $set);
 
@@ -220,21 +219,18 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $table = $adapterPlatform->quoteIdentifier($schema) . $adapterPlatform->getIdentifierSeparator() . $table;
         }
 
-        $set = $this->set;
-        if (is_array($set)) {
-            $setSql = array();
-            foreach ($set as $column => $value) {
-                if ($value instanceof Expression) {
-                    $exprData = $this->processExpression($value, $adapterPlatform);
-                    $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $exprData->getSql();
-                } elseif ($value === null) {
-                    $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = NULL';
-                } else {
-                    $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $adapterPlatform->quoteValue($value);
-                }
+        $setSql = array();
+        foreach ($this->set as $column => $value) {
+            if ($value instanceof ExpressionInterface) {
+                $exprData = $this->processExpression($value, $adapterPlatform);
+                $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $exprData->getSql();
+            } elseif ($value === null) {
+                $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = NULL';
+            } else {
+                $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $adapterPlatform->quoteValue($value);
             }
-            $set = implode(', ', $setSql);
         }
+        $set = implode(', ', $setSql);
 
         $sql = sprintf($this->specifications[static::SPECIFICATION_UPDATE], $table, $set);
         if ($this->where->count() > 0) {
@@ -270,5 +266,6 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function __clone()
     {
         $this->where = clone $this->where;
+        $this->set = clone $this->set;
     }
 }

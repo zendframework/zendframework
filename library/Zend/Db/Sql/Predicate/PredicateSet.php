@@ -10,6 +10,7 @@
 namespace Zend\Db\Sql\Predicate;
 
 use Countable;
+use Zend\Db\Sql\Exception;
 
 class PredicateSet implements PredicateInterface, Countable
 {
@@ -57,6 +58,64 @@ class PredicateSet implements PredicateInterface, Countable
         }
 
         $this->andPredicate($predicate);
+        return $this;
+    }
+
+    public function addPredicates($predicate, $combination = self::OP_AND)
+    {
+        if ($predicate === null) {
+            throw new Exception\InvalidArgumentException('Predicate cannot be null');
+        }
+        if ($predicate instanceof PredicateInterface) {
+            $this->addPredicate($predicate, $combination);
+        } elseif ($predicate instanceof \Closure) {
+            $predicate($this);
+        } else {
+            if (is_string($predicate)) {
+                // String $predicate should be passed as an expression
+                $predicate = (strpos($predicate, Expression::PLACEHOLDER) !== false)
+                    ? new Expression($predicate) : new Literal($predicate);
+                $this->addPredicate($predicate, $combination);
+            } elseif (is_array($predicate)) {
+
+                foreach ($predicate as $pkey => $pvalue) {
+                    // loop through predicates
+
+                    if (is_string($pkey) && strpos($pkey, '?') !== false) {
+                        // First, process strings that the abstraction replacement character ?
+                        // as an Expression predicate
+                        $predicate = new Expression($pkey, $pvalue);
+
+                    } elseif (is_string($pkey)) {
+                        // Otherwise, if still a string, do something intelligent with the PHP type provided
+
+                        if ($pvalue === null) {
+                            // map PHP null to SQL IS NULL expression
+                            $predicate = new IsNull($pkey, $pvalue);
+                        } elseif (is_array($pvalue)) {
+                            // if the value is an array, assume IN() is desired
+                            $predicate = new In($pkey, $pvalue);
+                        } elseif ($pvalue instanceof PredicateInterface) {
+                            //
+                            throw new Exception\InvalidArgumentException(
+                                'Using Predicate must not use string keys'
+                            );
+                        } else {
+                            // otherwise assume that array('foo' => 'bar') means "foo" = 'bar'
+                            $predicate = new Operator($pkey, Operator::OP_EQ, $pvalue);
+                        }
+                    } elseif ($pvalue instanceof PredicateInterface) {
+                        // Predicate type is ok
+                        $predicate = $pvalue;
+                    } else {
+                        // must be an array of expressions (with int-indexed array)
+                        $predicate = (strpos($pvalue, Expression::PLACEHOLDER) !== false)
+                            ? new Expression($pvalue) : new Literal($pvalue);
+                    }
+                    $this->addPredicate($predicate, $combination);
+                }
+            }
+        }
         return $this;
     }
 

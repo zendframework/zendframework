@@ -1157,6 +1157,16 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processOffset' => array('?')
         );
 
+        // functions without table
+        $select46 = new Select;
+        $select46->columns(array(
+            new Expression('SOME_DB_FUNCTION_ONE()'),
+            'foo' => new Expression('SOME_DB_FUNCTION_TWO()'),
+        ));
+        $sqlPrep46 = 'SELECT SOME_DB_FUNCTION_ONE() AS Expression1, SOME_DB_FUNCTION_TWO() AS "foo"';
+        $sqlStr46 = 'SELECT SOME_DB_FUNCTION_ONE() AS Expression1, SOME_DB_FUNCTION_TWO() AS "foo"';
+        $params46 = array();
+        $internalTests46 = array();
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -1213,6 +1223,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select43, $sqlPrep43, array(),    $sqlStr43, $internalTests43),
             array($select44, $sqlPrep44, array(),    $sqlStr44, $internalTests44),
             array($select45, $sqlPrep45, $params45,  $sqlStr45, $internalTests45),
+            array($select46, $sqlPrep46, $params46,  $sqlStr46, $internalTests46),
         );
     }
 }

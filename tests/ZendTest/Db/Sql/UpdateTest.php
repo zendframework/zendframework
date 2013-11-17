@@ -87,7 +87,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
 
         $predicates = $this->readAttribute($where, 'predicates');
         $this->assertEquals('AND', $predicates[0][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
 
         $this->assertEquals('AND', $predicates[1][0]);
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[1][1]);

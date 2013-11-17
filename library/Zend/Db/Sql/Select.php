@@ -306,7 +306,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function having($predicate, $combination = Predicate\PredicateSet::OP_AND)
     {
-        if ($predicate instanceof Where) {
+        if ($predicate instanceof Having) {
             $this->having = $predicate;
         } else {
             $this->having->addPredicates($predicate, $combination);

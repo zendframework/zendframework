@@ -30,4 +30,8 @@ abstract class BarClass
         $y = 'this string';
     }
 
+    protected function four($one, $two = array(array(array('default'))))
+    {
+        // four
+    }
 }

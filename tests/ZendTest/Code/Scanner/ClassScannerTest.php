@@ -158,7 +158,7 @@ class ClassScannerTest extends TestCase
         $file    = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
         $class   = $file->getClass('ZendTest\Code\TestAsset\BarClass');
         $this->assertEquals(10, $class->getLineStart());
-        $this->assertEquals(33, $class->getLineEnd());
+        $this->assertEquals(37, $class->getLineEnd());
     }
 
     public function testClassScannerCanScanAnnotations()

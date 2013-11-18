@@ -180,6 +180,17 @@ class MemcachedTest extends CommonAdapterTest
         ));
     }
 
+    public function testOptionPersistentId()
+    {
+        $options = new Cache\Storage\Adapter\MemcachedOptions();
+        $resourceId      = $options->getResourceId();
+        $resourceManager = $options->getResourceManager();
+        $options->setPersistentId('testPersistentId');
+
+        $this->assertSame('testPersistentId', $resourceManager->getPersistentId($resourceId));
+        $this->assertSame('testPersistentId', $options->getPersistentId());
+    }
+
     public function tearDown()
     {
         if ($this->_storage) {

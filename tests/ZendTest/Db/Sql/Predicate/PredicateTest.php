@@ -128,6 +128,16 @@ class PredicateTest extends TestCase
         $this->assertContains(array('foo.bar', 'foo', 'bar'), $parts[0]);
     }
 
+    public function testNotInCreatesNotInPredicate()
+    {
+        $predicate = new Predicate();
+        $predicate->notIn('foo.bar', array('foo', 'bar'));
+        $parts = $predicate->getExpressionData();
+        $this->assertEquals(1, count($parts));
+        $this->assertContains('%s NOT IN (%s, %s)', $parts[0]);
+        $this->assertContains(array('foo.bar', 'foo', 'bar'), $parts[0]);
+    }
+
     public function testBetweenCreatesBetweenPredicate()
     {
         $predicate = new Predicate();

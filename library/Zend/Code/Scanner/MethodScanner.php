@@ -490,6 +490,9 @@ class MethodScanner implements ScannerInterface
                         goto SCANNER_CONTINUE_SIGNATURE;
                     case ')':
                         $parentCount--;
+                        if($parentCount > 0) {
+                            goto SCANNER_CONTINUE_SIGNATURE;
+                        }
                         if ($parentCount === 0) {
                             if ($infos) {
                                 $MACRO_INFO_ADVANCE();

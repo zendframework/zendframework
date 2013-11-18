@@ -11,7 +11,6 @@ namespace ZendTest\Mvc\Controller\Plugin;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Http\Response;
-use Zend\Route\Request;
 use Zend\Mvc\Controller\Plugin\Redirect as RedirectPlugin;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\Http\Literal as LiteralRoute;

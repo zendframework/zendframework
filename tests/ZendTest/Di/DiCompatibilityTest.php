@@ -10,10 +10,7 @@
 namespace ZendTest\Di;
 
 use Zend\Di\Config;
-use Zend\Di\Definition;
-use Zend\Di\DefinitionList;
 use Zend\Di\Di;
-use Zend\Di\InstanceManager;
 
 class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
 {

@@ -9,7 +9,6 @@
 
 namespace Zend\Db\Sql\Platform\Mysql\Ddl;
 
-use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Sql\Ddl\CreateTable;
 use Zend\Db\Sql\Platform\PlatformDecoratorInterface;

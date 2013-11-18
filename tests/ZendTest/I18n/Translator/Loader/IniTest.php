@@ -10,7 +10,6 @@
 namespace ZendTest\I18n\Translator\Loader;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Locale;
 use Zend\I18n\Translator\Loader\Ini as IniLoader;
 
 class IniTest extends TestCase

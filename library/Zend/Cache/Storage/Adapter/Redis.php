@@ -14,7 +14,6 @@ use RedisException as RedisResourceException;
 use stdClass;
 use Zend\Cache\Storage\Adapter\AbstractAdapter;
 use Zend\Cache\Exception;
-use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\Capabilities;
 use Zend\Cache\Storage\FlushableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;

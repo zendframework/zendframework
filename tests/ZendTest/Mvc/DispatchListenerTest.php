@@ -9,9 +9,7 @@
 
 namespace ZendTest\Mvc;
 
-use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
-use stdClass;
 use Zend\Config\Config;
 use Zend\Http\Request;
 use Zend\Http\PhpEnvironment\Response;

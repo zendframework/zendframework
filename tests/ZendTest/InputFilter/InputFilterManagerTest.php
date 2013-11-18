@@ -9,7 +9,6 @@
 
 namespace ZendTest\InputFilter;
 
-use Zend\ServiceManager\ServiceManager;
 use Zend\InputFilter\InputFilterPluginManager;
 
 /**

@@ -9,7 +9,6 @@
 
 namespace Zend\View\Helper;
 
-use Iterator;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\View\Exception;

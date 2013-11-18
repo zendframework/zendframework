@@ -12,7 +12,6 @@ namespace ZendTest\Form\Element;
 use DateTime;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\DateSelect as DateSelectElement;
-use Zend\Form\Factory;
 use Zend\Form\Exception;
 
 class DateSelectTest extends TestCase

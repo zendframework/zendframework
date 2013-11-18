@@ -10,7 +10,6 @@
 namespace ZendTest\View\Helper;
 
 use Zend\View\Renderer\PhpRenderer as View;
-use Zend\View\Helper\Placeholder as PlaceholderHelper;
 
 /**
  * @group      Zend_View

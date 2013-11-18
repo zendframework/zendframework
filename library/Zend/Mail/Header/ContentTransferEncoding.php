@@ -9,7 +9,6 @@
 
 namespace Zend\Mail\Header;
 
-use Zend\Mail\Headers;
 
 class ContentTransferEncoding implements HeaderInterface
 {

@@ -11,7 +11,6 @@ namespace Zend\View\Strategy;
 
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
-use Zend\Http\Request as HttpRequest;
 use Zend\View\Model;
 use Zend\View\Renderer\JsonRenderer;
 use Zend\View\ViewEvent;

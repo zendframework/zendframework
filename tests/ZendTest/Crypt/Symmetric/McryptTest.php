@@ -120,10 +120,10 @@ class McryptTest extends \PHPUnit_Framework_TestCase
             } catch (\Exception $ex) {
                 $result = $ex;
             }
-            if ($algo != 'blowfish')
+            if ($algo != 'blowfish') {
                 $this->assertInstanceOf('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
                     $result);
-            else {
+            } else {
                 $this->assertInstanceof('Zend\Crypt\Symmetric\Mcrypt', $result);
             }
         }

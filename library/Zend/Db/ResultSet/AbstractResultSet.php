@@ -10,7 +10,6 @@
 namespace Zend\Db\ResultSet;
 
 use ArrayIterator;
-use ArrayObject;
 use Countable;
 use Iterator;
 use IteratorAggregate;

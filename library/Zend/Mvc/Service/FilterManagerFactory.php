@@ -9,7 +9,6 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class FilterManagerFactory extends AbstractPluginManagerFactory

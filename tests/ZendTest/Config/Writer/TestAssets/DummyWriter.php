@@ -10,7 +10,6 @@
 namespace ZendTest\Config\Writer\TestAssets;
 
 use Zend\Config\Writer\AbstractWriter;
-use Zend\Config\Exception;
 
 class DummyWriter extends AbstractWriter
 {

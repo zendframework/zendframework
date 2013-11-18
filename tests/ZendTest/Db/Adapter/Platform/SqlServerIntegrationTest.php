@@ -10,7 +10,6 @@
 namespace ZendTest\Db\Adapter\Platform;
 
 use Zend\Db\Adapter\Platform\SqlServer;
-use Zend\Db\Adapter\Driver\Sqlsrv;
 
 /**
  * @group integration

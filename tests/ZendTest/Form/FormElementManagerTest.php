@@ -9,7 +9,6 @@
 
 namespace ZendTest\Form;
 
-use Zend\ServiceManager\ServiceManager;
 use Zend\Form\Factory;
 use Zend\Form\Form;
 use Zend\Form\FormElementManager;

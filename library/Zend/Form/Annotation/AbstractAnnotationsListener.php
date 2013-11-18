@@ -11,8 +11,6 @@ namespace Zend\Form\Annotation;
 
 use ReflectionClass;
 use Zend\EventManager\AbstractListenerAggregate;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 
 /**
  * Base annotations listener.

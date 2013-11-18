@@ -9,8 +9,6 @@
 
 namespace Zend\ProgressBar\Upload;
 
-use Traversable;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * Interface for Upload Progress Handlers

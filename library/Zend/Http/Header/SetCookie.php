@@ -9,7 +9,6 @@
 
 namespace Zend\Http\Header;
 
-use Closure;
 use Zend\Uri\UriFactory;
 
 /**

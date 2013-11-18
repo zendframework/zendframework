@@ -9,7 +9,6 @@
 
 namespace Zend\Mvc\ResponseSender;
 
-use Zend\Http\Header\MultipleHeaderInterface;
 use Zend\Http\Response\Stream;
 
 class SimpleStreamResponseSender extends AbstractResponseSender

@@ -13,9 +13,7 @@ use Traversable;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface;
-use Zend\Stdlib\ArrayUtils;
 use Zend\View\Exception;
-use Zend\Stdlib\Exception as StdlibException;
 
 /**
  * Helper for making easy links and getting urls that depend on the routes and router.

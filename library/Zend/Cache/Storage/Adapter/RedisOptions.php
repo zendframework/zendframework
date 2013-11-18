@@ -9,7 +9,6 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use Redis as RedisResource;
 use Zend\Cache\Exception;
 use Zend\Cache\Storage\Adapter\AdapterOptions;
 

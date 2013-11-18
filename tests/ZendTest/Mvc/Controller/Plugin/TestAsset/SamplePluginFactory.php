@@ -9,7 +9,6 @@
 
 namespace ZendTest\Mvc\Controller\Plugin\TestAsset;
 
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

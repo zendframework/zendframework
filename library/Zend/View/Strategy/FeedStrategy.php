@@ -12,7 +12,6 @@ namespace Zend\View\Strategy;
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Feed\Writer\Feed;
-use Zend\Http\Request as HttpRequest;
 use Zend\View\Model;
 use Zend\View\Renderer\FeedRenderer;
 use Zend\View\ViewEvent;

@@ -15,7 +15,6 @@ namespace Zend\Mvc\Router\Console;
 use Traversable;
 use Zend\Console\Request as ConsoleRequest;
 use Zend\Filter\FilterChain;
-use Zend\Mvc\Router\Exception;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Validator\ValidatorChain;
 

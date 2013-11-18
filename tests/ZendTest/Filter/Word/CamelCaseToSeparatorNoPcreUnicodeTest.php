@@ -10,7 +10,6 @@
 namespace ZendTest\Filter\Word;
 
 use ReflectionProperty;
-use Zend\Filter\Word\CamelCaseToSeparator as CamelCaseToSeparatorFilter;
 use Zend\Stdlib\StringUtils;
 
 /**

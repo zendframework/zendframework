@@ -10,7 +10,6 @@
 namespace ZendTest\Paginator\Adapter;
 
 use Zend\Paginator\Adapter\DbTableGateway;
-use Zend\Paginator\Adapter\DbSelect;
 use Zend\Db\ResultSet\ResultSet;
 
 /**

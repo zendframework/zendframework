@@ -10,7 +10,6 @@
 namespace Zend\Cache\Storage\Plugin;
 
 use stdClass;
-use Zend\Cache\Exception;
 use Zend\Cache\Storage\Capabilities;
 use Zend\Cache\Storage\Event;
 use Zend\Cache\Storage\PostEvent;

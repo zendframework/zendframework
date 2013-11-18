@@ -9,7 +9,6 @@
 
 namespace ZendTest\Stdlib\Hydrator;
 
-use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\Hydrator\HydratorPluginManager;
 
 /**

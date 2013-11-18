@@ -17,7 +17,6 @@ use Zend\Mvc\Service\DiAbstractServiceFactoryFactory;
 use Zend\Mvc\Service\DiServiceInitializerFactory;
 use Zend\ServiceManager\Config;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Mvc\Exception;
 use Zend\Form\FormElementManager;
 
 class FormElementManagerFactoryTest extends TestCase

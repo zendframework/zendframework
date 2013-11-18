@@ -9,8 +9,6 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\ServiceManager\ConfigInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 class InputFilterManagerFactory extends AbstractPluginManagerFactory
 {

@@ -600,7 +600,7 @@ class SimpleTest extends TestCase
                     'baz' => true
                 )
             ),
-            // group with group name diferent than options (short)
+            // group with group name different than options (short)
             'group-1' => array(
                 'group [-t|--test]:testgroup',
                 array('group', '-t'),
@@ -609,7 +609,7 @@ class SimpleTest extends TestCase
                     'testgroup' => true,
                 )
             ),
-            // group with group name diferent than options (long)
+            // group with group name different than options (long)
             'group-2' => array(
                 'group [-t|--test]:testgroup',
                 array('group', '--test'),

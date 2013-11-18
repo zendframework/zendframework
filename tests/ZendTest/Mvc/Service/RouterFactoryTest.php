@@ -10,7 +10,6 @@
 namespace ZendTest\Mvc\Service;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\EventManager\EventManager;
 use Zend\Mvc\Router\RoutePluginManager;
 use Zend\Mvc\Service\RouterFactory;
 use Zend\ServiceManager\ServiceManager;

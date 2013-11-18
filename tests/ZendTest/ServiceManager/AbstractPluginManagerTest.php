@@ -11,11 +11,9 @@ namespace ZendTest\ServiceManager;
 
 use ReflectionClass;
 use ReflectionObject;
-use Zend\ServiceManager\Exception;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
 
-use ZendTest\ServiceManager\TestAsset\FooCounterAbstractFactory;
 use ZendTest\ServiceManager\TestAsset\FooPluginManager;
 use ZendTest\ServiceManager\TestAsset\MockSelfReturningDelegatorFactory;
 

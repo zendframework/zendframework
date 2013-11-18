@@ -975,19 +975,19 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $obj2 = new Uri;
         $obj2->setPath('//path');
 
-        // A object with port
+        // An object with port
         $obj3 = new Uri;
         $obj3->setPort(123);
 
-        // A object with userInfo
+        // An object with userInfo
         $obj4 = new Uri;
         $obj4->setUserInfo('shahar:password');
 
-        // A object with scheme
+        // An object with scheme
         $obj5 = new Uri;
         $obj5->setScheme('https');
 
-        // A object with host
+        // An object with host
         $obj6 = new Uri;
         $obj6->setHost('example.com');
 

@@ -13,7 +13,6 @@ use Zend\Soap\Wsdl,
     Zend\Soap\Wsdl\ComplexTypeStrategy;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface;
 
-use Zend\Uri\Uri;
 
 /**
 * Zend_Soap_Server

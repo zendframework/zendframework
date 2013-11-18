@@ -113,16 +113,18 @@ class RemoteAddress
     /**
      * Attempt to get the IP address for a proxied client
      *
+     * @see http://tools.ietf.org/html/draft-ietf-appsawg-http-forwarded-10#section-5.2
      * @return false|string
      */
     protected function getIpAddressFromProxy()
     {
-        if (!$this->useProxy) {
+        if (!$this->useProxy
+            || (isset($_SERVER['REMOTE_ADDR']) && !in_array($_SERVER['REMOTE_ADDR'], $this->trustedProxies))
+        ) {
             return false;
         }
 
         $header = $this->proxyHeader;
-
         if (!isset($_SERVER[$header]) || empty($_SERVER[$header])) {
             return false;
         }
@@ -139,8 +141,12 @@ class RemoteAddress
             return false;
         }
 
-        // Return right-most
-        $ip  = array_pop($ips);
+        // Since we've removed any known, trusted proxy servers, the right-most
+        // address represents the first IP we do not know about -- i.e., we do
+        // not know if it is a proxy server, or a client. As such, we treat it
+        // as the originating IP.
+        // @see http://en.wikipedia.org/wiki/X-Forwarded-For
+        $ip = array_pop($ips);
         return $ip;
     }
 

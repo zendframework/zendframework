@@ -74,4 +74,13 @@ class MethodScannerTest extends TestCase
         $this->assertEquals($expected, $method->getBody());
     }
 
+    public function testMethodScannerMethodSignatureLatestOptionalParamHasParentheses()
+    {
+        $file       = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
+        $class      = $file->getClass('ZendTest\Code\TestAsset\BarClass');
+        $method = $class->getMethod('four');
+        $paramTwo = $method->getParameter(1);
+        $optionalValue = $paramTwo->getDefaultValue();
+        $this->assertEquals('array(array(array(\'default\')))', $optionalValue);
+    }
 }

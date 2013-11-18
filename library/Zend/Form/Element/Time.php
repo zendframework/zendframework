@@ -11,7 +11,6 @@ namespace Zend\Form\Element;
 
 use DateInterval;
 use Zend\Form\Element;
-use Zend\Validator\Date as DateValidator;
 use Zend\Validator\DateStep as DateStepValidator;
 
 class Time extends DateTime

@@ -5,20 +5,13 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.2.5dev*
+*Zend Framework 2.2.6dev*
 
-This is the fifth maintenance release for the 2.2 series.
+This is the sixth maintenance release for the 2.2 series.
 
 DD MMM YYYY
 
-### UPDATES IN 2.2.5
-
-- [#5343](https://github.com/zendframework/zf2/pull/5343) removed the
-  DateTimeFormatter filter from DateTime form elements. This was done
-  due to the fact that it led to unexpected behavior when non-date inputs were
-  provided. However, since the DateTime element already incorporates a
-  DateValidator that accepts a date format, validation can still work as
-  expected.
+### UPDATES IN 2.2.6
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 
@@ -53,6 +46,20 @@ https://github.com/zendframework/zf2/issues
 If you would like to be notified of new releases, you can subscribe to
 the fw-announce mailing list by sending a blank message to
 <fw-announce-subscribe@lists.zend.com>.
+
+## Reporting Potential Security Issues
+
+If you have encountered a potential security vulnerability in Zend Framework, please report it to us at [zf-security@zend.com](mailto:zf-security@zend.com). We will work with you to verify the vulnerability and patch it.
+
+When reporting issues, please provide the following information:
+
+- Component(s) affected
+- A description indicating how to reproduce the issue
+- A summary of the security vulnerability and impact
+
+We request that you contact us via the email address above and give the project contributors a chance to resolve the vulnerability and issue a new release prior to any public exposure; this helps protect Zend Framework users and provides them with a chance to upgrade and/or update in order to protect their applications.
+
+For sensitive email communications, please use [our PGP key](http://framework.zend.com/zf-security-pgp-key.asc).
 
 ### LICENSE
 

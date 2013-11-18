@@ -11,7 +11,6 @@ namespace ZendTest\Paginator\Adapter;
 
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Expression;
 
 /**
  * @group      Zend_Paginator

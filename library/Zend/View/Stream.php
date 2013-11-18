@@ -155,7 +155,7 @@ class Stream
         switch ($whence) {
             case SEEK_SET:
                 if ($offset < strlen($this->data) && $offset >= 0) {
-                $this->pos = $offset;
+                    $this->pos = $offset;
                     return true;
                 } else {
                     return false;

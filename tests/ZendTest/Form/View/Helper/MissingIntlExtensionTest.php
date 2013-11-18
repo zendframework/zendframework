@@ -10,7 +10,6 @@
 namespace ZendTest\Form\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Form\Element\DateSelect;
 use Zend\Form\View\Helper\FormDateSelect as FormDateSelectHelper;
 use Zend\Form\View\Helper\FormDateTimeSelect as FormDateTimeSelectHelper;
 use Zend\Form\View\Helper\FormMonthSelect as FormMonthSelectHelper;

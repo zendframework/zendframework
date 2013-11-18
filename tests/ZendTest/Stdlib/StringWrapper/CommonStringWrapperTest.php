@@ -10,9 +10,7 @@
 namespace ZendTest\Stdlib\StringWrapper;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Stdlib\ErrorHandler;
 use Zend\Stdlib\Exception;
-use Zend\Stdlib\StringWrapper\StringWrapperInterface;
 
 abstract class CommonStringWrapperTest extends TestCase
 {

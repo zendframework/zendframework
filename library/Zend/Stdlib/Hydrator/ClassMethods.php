@@ -9,7 +9,6 @@
 
 namespace Zend\Stdlib\Hydrator;
 
-use ReflectionMethod;
 use Traversable;
 use Zend\Stdlib\Exception;
 use Zend\Stdlib\ArrayUtils;

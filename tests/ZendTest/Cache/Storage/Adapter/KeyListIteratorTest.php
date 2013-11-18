@@ -10,7 +10,6 @@
 namespace ZendTest\Cache\Storage\Adapter;
 
 use Zend\Cache;
-use Zend\Cache\Storage\Adapter\Memory as MemoryStorage;
 use Zend\Cache\Storage\Adapter\KeyListIterator;
 
 /**

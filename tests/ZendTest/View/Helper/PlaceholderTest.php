@@ -11,7 +11,6 @@ namespace ZendTest\View\Helper;
 
 use Zend\View\Renderer\PhpRenderer as View;
 use Zend\View\Helper;
-use Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry;
 
 /**
  * Test class for Zend_View_Helper_Placeholder.

@@ -12,7 +12,7 @@ namespace Zend\XmlRpc\Value;
 class Struct extends AbstractCollection
 {
     /**
-     * Set the value of an struct native type
+     * Set the value of a struct native type
      *
      * @param array $value
      */

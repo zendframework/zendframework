@@ -108,7 +108,7 @@ abstract class AutoloaderFactory
     }
 
     /**
-     * Get an list of all autoloaders registered with the factory
+     * Get a list of all autoloaders registered with the factory
      *
      * Returns an array of autoloader instances.
      *

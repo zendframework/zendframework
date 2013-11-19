@@ -13,7 +13,7 @@ use ErrorException;
 
 /**
  * ErrorHandler that can be used to catch internal PHP errors
- * and convert to a ErrorException instance.
+ * and convert to an ErrorException instance.
  */
 abstract class ErrorHandler
 {

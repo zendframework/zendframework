@@ -116,7 +116,7 @@ class Apache implements PasswordInterface
     }
 
     /**
-     * Verify if a password is correct against an hash value
+     * Verify if a password is correct against a hash value
      *
      * @param  string  $password
      * @param  string  $hash

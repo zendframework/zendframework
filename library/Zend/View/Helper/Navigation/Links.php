@@ -685,7 +685,7 @@ class Links extends AbstractHelper
         } elseif ($mixed instanceof Traversable) {
             $mixed = ArrayUtils::iteratorToArray($mixed);
         } elseif (is_string($mixed)) {
-            // value is a string; make an URI page
+            // value is a string; make a URI page
             return AbstractPage::factory(array(
                 'type' => 'uri',
                 'uri'  => $mixed

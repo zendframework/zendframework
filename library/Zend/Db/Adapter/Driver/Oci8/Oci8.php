@@ -183,7 +183,7 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
                 $statement->setSql($sqlOrResource);
             } elseif ($sqlOrResource !== null) {
                 throw new Exception\InvalidArgumentException(
-                    'Oci8 only accepts an SQL string or a oci8 resource in ' . __FUNCTION__
+                    'Oci8 only accepts an SQL string or an oci8 resource in ' . __FUNCTION__
                 );
             }
             if (!$this->connection->isConnected()) {

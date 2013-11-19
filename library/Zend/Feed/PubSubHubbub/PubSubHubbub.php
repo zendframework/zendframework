@@ -95,7 +95,7 @@ class PubSubHubbub
 
     /**
      * Simple mechanism to delete the entire singleton HTTP Client instance
-     * which forces an new instantiation for subsequent requests.
+     * which forces a new instantiation for subsequent requests.
      *
      * @return void
      */

@@ -57,7 +57,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         } elseif ($connectionInfo instanceof \oci8) {
             $this->setResource($connectionInfo);
         } elseif (null !== $connectionInfo) {
-            throw new Exception\InvalidArgumentException('$connection must be an array of parameters, a oci8 resource or null');
+            throw new Exception\InvalidArgumentException('$connection must be an array of parameters, an oci8 resource or null');
         }
     }
 

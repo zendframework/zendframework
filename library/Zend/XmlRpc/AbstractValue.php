@@ -347,7 +347,7 @@ abstract class AbstractValue
             case self::XMLRPC_TYPE_STRING:
                 $xmlrpcValue = new Value\String($value);
                 break;
-            case self::XMLRPC_TYPE_DATETIME:  // The value should already be in a iso8601 format
+            case self::XMLRPC_TYPE_DATETIME:  // The value should already be in an iso8601 format
                 $xmlrpcValue = new Value\DateTime($value);
                 break;
             case self::XMLRPC_TYPE_BASE64:    // The value should already be base64 encoded

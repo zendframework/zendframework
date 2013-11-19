@@ -227,7 +227,7 @@ return array(
 
     // Zend_Validate_PostCode
     "Invalid type given, value should be string or integer" => "Недопустимый тип данных, значение должно быть строкой или целым числом",
-    "'%value%' does not appear to be an postal code" => "'%value%' не является корректным почтовым кодом",
+    "'%value%' does not appear to be a postal code" => "'%value%' не является корректным почтовым кодом",
 
     // Zend_Validate_Regex
     "Invalid type given, value should be string, integer or float" => "Недопустимый тип данных, значение должно быть числом с плавающей точкой, строкой, или целым числом",

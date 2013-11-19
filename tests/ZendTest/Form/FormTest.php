@@ -1426,7 +1426,7 @@ class FormTest extends TestCase
             'name' => 'foo'
         ));
 
-        // Add an hydrator that ignores if values does not exist in the
+        // Add a hydrator that ignores if values does not exist in the
         $fieldset->setObject(new Entity\SimplePublicProperty());
         $fieldset->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
 

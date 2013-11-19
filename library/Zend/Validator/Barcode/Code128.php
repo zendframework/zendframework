@@ -214,7 +214,7 @@ class Code128 extends AbstractAdapter
         } elseif ($char == '‰') {
             $sum = 105;
         } elseif ($usecheck == true) {
-            // no start value, unable to detect an proper checksum
+            // no start value, unable to detect a proper checksum
             return false;
         }
 
@@ -389,7 +389,7 @@ class Code128 extends AbstractAdapter
     }
 
     /**
-     * Internal Method to return the ascii value from an code128 integer
+     * Internal Method to return the ascii value from a code128 integer
      *
      * Table A
      *    ASCII       CODE128

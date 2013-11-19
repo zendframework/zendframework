@@ -3098,7 +3098,7 @@
 >0	byte		^0x80		executable
 >16	belong		>0		not stripped
 >36	belong		0xb4100001	(uses shared libs)
-# Chiasmus is a encryption standard developed by the German Federal
+# Chiasmus is an encryption standard developed by the German Federal
 # Office for Information Security (Bundesamt fuer Sicherheit in der
 # Informationstechnik).
 
@@ -13676,7 +13676,7 @@
 >4	string	>\0		label:%.10s
 
 # Sinclair QL OS dump (ThMO)
-# (NOTE: if `file' would be able to use indirect references in a endian format
+# (NOTE: if `file' would be able to use indirect references in an endian format
 #	 differing from the natural host format, this could be written more
 #	 reliably and faster...)
 #

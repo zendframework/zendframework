@@ -62,7 +62,7 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Constructor
      *
-     * Set options for an writer. Accepted options are:
+     * Set options for a writer. Accepted options are:
      * - filters: array of filters to add to this filter
      * - formatter: formatter for this writer
      *

@@ -275,7 +275,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      * Adds a new validator for this class
      *
      * @param  string|Validator\ValidatorInterface $validator           Type of validator to add
-     * @param  bool                    $breakChainOnFailure If the validation chain should stop an failure
+     * @param  bool                    $breakChainOnFailure If the validation chain should stop a failure
      * @param  string|array               $options             Options to set for the validator
      * @param  string|array               $files               Files to limit this validator to
      * @return AbstractAdapter

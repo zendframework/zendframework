@@ -155,7 +155,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test to unserialize a valid null value by an valid wddx
+     * test to unserialize a valid null value by a valid wddx
      * but with some differenzes to the null cenerated by php
      * -> the invalid check have to success for all valid wddx null
      */

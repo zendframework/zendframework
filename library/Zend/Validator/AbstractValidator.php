@@ -36,7 +36,7 @@ abstract class AbstractValidator implements
     protected static $defaultTranslatorTextDomain = 'default';
 
     /**
-     * Limits the maximum returned length of a error message
+     * Limits the maximum returned length of an error message
      *
      * @var int
      */

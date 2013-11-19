@@ -173,7 +173,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete("Fail");
         $mail = new Folder\Maildir($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
-        // we search for this folder because we can't assume a order while iterating
+        // we search for this folder because we can't assume an order while iterating
         $search_folders = array('subfolder'      => 'subfolder',
                                 'subfolder.test' => 'test',
                                 'INBOX'          => 'INBOX');
@@ -196,7 +196,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete("Fail");
         $mail = new Folder\Maildir($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
-        // we search for this folder because we can't assume a order while iterating
+        // we search for this folder because we can't assume an order while iterating
         $search_folders = array('subfolder'      => 'subfolder',
                                 'subfolder.test' => 'test',
                                 'INBOX'          => 'INBOX');
@@ -219,7 +219,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete("Fail");
         $mail = new Folder\Maildir($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders('INBOX.subfolder'), \RecursiveIteratorIterator::SELF_FIRST);
-        // we search for this folder because we can't assume a order while iterating
+        // we search for this folder because we can't assume an order while iterating
         $search_folders = array('subfolder.test' => 'test');
         $found_folders = array();
 

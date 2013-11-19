@@ -48,7 +48,7 @@ class Cache extends ServerCache
     /**
      * Retrieve a cached SMD
      *
-     * On success, returns the cached SMD (a JSON string); an failure, returns
+     * On success, returns the cached SMD (a JSON string); a failure, returns
      * boolean false.
      *
      * @param  string $filename

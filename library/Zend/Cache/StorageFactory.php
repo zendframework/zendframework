@@ -194,7 +194,7 @@ abstract class StorageFactory
     public static function pluginFactory($pluginName, $options = array())
     {
         if ($pluginName instanceof Storage\Plugin\PluginInterface) {
-            // $pluginName is already an plugin object
+            // $pluginName is already a plugin object
             $plugin = $pluginName;
         } else {
             $plugin = static::getPluginManager()->get($pluginName);

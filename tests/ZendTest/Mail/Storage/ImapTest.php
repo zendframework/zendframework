@@ -326,7 +326,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Storage\Imap($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
-        // we search for this folder because we can't assume a order while iterating
+        // we search for this folder because we can't assume an order while iterating
         $search_folders = array('subfolder'      => 'subfolder',
                                 'subfolder/test' => 'test',
                                 'INBOX'          => 'INBOX');

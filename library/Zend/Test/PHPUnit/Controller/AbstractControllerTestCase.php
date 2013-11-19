@@ -242,7 +242,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Dispatch the MVC with an URL
+     * Dispatch the MVC with a URL
      * Accept a HTTP (simulate a customer action) or console route.
      *
      * The URL provided set the request URI in the request object.

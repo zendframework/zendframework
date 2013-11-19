@@ -119,7 +119,6 @@ class Result implements Iterator, ResultInterface
 
         $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
         $this->currentComplete = true;
-
         return $this->currentData;
     }
 
@@ -133,7 +132,6 @@ class Result implements Iterator, ResultInterface
         $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
         $this->currentComplete = true;
         $this->position++;
-
         return $this->currentData;
     }
 
@@ -188,7 +186,6 @@ class Result implements Iterator, ResultInterface
         } else {
             $this->rowCount = (int) $this->resource->rowCount();
         }
-
         return $this->rowCount;
     }
 

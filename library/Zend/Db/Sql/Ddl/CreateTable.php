@@ -39,7 +39,7 @@ class CreateTable extends AbstractSql implements SqlInterface
      * @var array
      */
     protected $specifications = array(
-        self::TABLE => 'CREATE TABLE %1$s (',
+        self::TABLE => 'CREATE %1$sTABLE %2$s (',
         self::COLUMNS  => array(
             "\n    %1\$s" => array(
                 array(1 => '%1$s', 'combinedby' => ",\n    ")
@@ -156,6 +156,7 @@ class CreateTable extends AbstractSql implements SqlInterface
                 $parameters
             );
 
+
             if ($specification
                 && is_array($parameters[$name])
                 && ($parameters[$name] != array(array()))
@@ -173,6 +174,7 @@ class CreateTable extends AbstractSql implements SqlInterface
             }
         }
 
+
         // remove last ,
         if (count($sqls) > 2) {
             array_pop($sqls);
@@ -187,8 +189,11 @@ class CreateTable extends AbstractSql implements SqlInterface
     {
         $ret = array();
         if ($this->isTemporary) {
-            $ret[] = 'TEMPORARY';
+            $ret[] = 'TEMPORARY ';
+        } else {
+            $ret[] = '';
         }
+
         $ret[] = $adapterPlatform->quoteIdentifier($this->table);
         return $ret;
     }

@@ -562,4 +562,19 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $filtered = $this->_filter->filter(null);
         $this->assertNull($filtered);
     }
+
+    /**
+     *@link 
+     */
+    public function testAttributeValueofZeroIsNotRemoved()
+    {
+        $input     = '<div id="0" data-custom="0" class="bogus"></div>';
+        $expected  = '<div id="0" data-custom="0"></div>';
+
+        $this->_filter->setTagsAllowed('div');
+        $this->_filter->setAttributesAllowed(array('id','data-custom'));
+
+        $this->assertEquals($expected, $this->_filter->filter($input));
+    }
+    
 }

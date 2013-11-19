@@ -564,7 +564,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *@link 
+     *@link https://github.com/zendframework/zf2/issues/5465
      */
     public function testAttributeValueofZeroIsNotRemoved()
     {

@@ -1730,8 +1730,6 @@ class FormTest extends TestCase
 
     public function testFormElementValidatorsMergeIntoAppliedInputFilter()
     {
-        $this->form->setPreferFormInputFilter(false);
-
         $this->form->add(array(
             'name' => 'importance',
             'type'  => 'Zend\Form\Element\Select',

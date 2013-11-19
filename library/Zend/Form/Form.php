@@ -109,6 +109,13 @@ class Form extends Fieldset implements FormInterface
     protected $preferFormInputFilter = true;
 
     /**
+     * Has preferFormInputFilter been set with setPreferFormInputFilter?
+     *
+     * @var bool
+     */
+    protected $hasSetPreferFormInputFilter = false;
+
+    /**
      * Are the form elements/fieldsets wrapped by the form name ?
      *
      * @var bool
@@ -643,6 +650,13 @@ class Form extends Fieldset implements FormInterface
         $this->hasValidated                = false;
         $this->hasAddedInputFilterDefaults = false;
         $this->filter                      = $inputFilter;
+
+        // TODO: Remove the statement below and all self::$hasSetPreferFormInputFilter occurrences
+        // if self::$preferFormInputFilter default value is set to false
+        if (false === $this->hasSetPreferFormInputFilter) {
+            $this->preferFormInputFilter = false;
+        }
+
         return $this;
     }
 
@@ -712,6 +726,7 @@ class Form extends Fieldset implements FormInterface
     public function setPreferFormInputFilter($preferFormInputFilter)
     {
         $this->preferFormInputFilter = (bool) $preferFormInputFilter;
+        $this->hasSetPreferFormInputFilter = true;
         return $this;
     }
 

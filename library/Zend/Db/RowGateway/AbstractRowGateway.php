@@ -132,7 +132,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
 
             $data = $this->data;
             $where = array();
-            $arePrimaryKeysModified = false;
+            $isPkModified = false;
 
             // primary key is always an array even if its a single column
             foreach ($this->primaryKeyColumn as $pkColumn) {
@@ -140,7 +140,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
                 if ($data[$pkColumn] == $this->primaryKeyData[$pkColumn]) {
                     unset($data[$pkColumn]);
                 } else {
-                    $arePrimaryKeysModified = true;
+                    $isPkModified = true;
                 }
             }
 
@@ -150,7 +150,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
             unset($statement, $result); // cleanup
 
             // If one or more primary keys are modified, we update the where clause
-            if ($arePrimaryKeysModified) {
+            if ($isPkModified) {
                 foreach ($this->primaryKeyColumn as $pkColumn) {
                     if ($data[$pkColumn] != $this->primaryKeyData[$pkColumn]) {
                         $where[$pkColumn] = $data[$pkColumn];

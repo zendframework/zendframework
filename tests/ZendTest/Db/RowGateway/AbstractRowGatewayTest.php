@@ -200,6 +200,33 @@ class AbstractRowGatewayTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\Db\RowGateway\RowGateway::save
+     */
+    public function testSaveUpdateChangingPrimaryKey()
+    {
+        $selectMock = $this->getMock('Zend\Db\Sql\Select', array('where'));
+        $selectMock->expects($this->once())
+                   ->method('where')
+                   ->with($this->equalTo(array('id' => 7)))
+                   ->will($this->returnValue($selectMock));
+
+        $sqlMock = $this->getMock('Zend\Db\Sql\Sql', array('select'), array($this->mockAdapter));
+        $sqlMock->expects($this->any())
+                ->method('select')
+                ->will($this->returnValue($selectMock));
+
+        $this->setRowGatewayState(array('sql' => $sqlMock));
+
+        $this->mockResult->expects($this->any())
+                         ->method('current')
+                         ->will($this->returnValue(array('id' => 6, 'name' => 'foo')));
+
+        $this->rowGateway->populate(array('id' => 6, 'name' => 'foo'), true);
+        $this->rowGateway->id = 7;
+        $this->rowGateway->save();
+    }
+
+    /**
      * @covers Zend\Db\RowGateway\RowGateway::delete
      */
     public function testDelete()

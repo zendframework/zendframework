@@ -200,6 +200,37 @@ class AbstractRowGatewayTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\Db\RowGateway\RowGateway::save
+     */
+    public function testSaveUpdateChangingPrimaryKey()
+    {
+        // this mock is the select to be used to re-fresh the rowobject's data
+        $selectMock = $this->getMock('Zend\Db\Sql\Select', array('where'));
+        $selectMock->expects($this->once())
+            ->method('where')
+            ->with($this->equalTo(array('id' => 7)))
+            ->will($this->returnValue($selectMock));
+
+        $sqlMock = $this->getMock('Zend\Db\Sql\Sql', array('select'), array($this->mockAdapter));
+        $sqlMock->expects($this->any())
+            ->method('select')
+            ->will($this->returnValue($selectMock));
+
+        $this->setRowGatewayState(array('sql' => $sqlMock));
+
+        // original mock returning updated data
+        $this->mockResult->expects($this->any())
+            ->method('current')
+            ->will($this->returnValue(array('id' => 7, 'name' => 'fooUpdated')));
+
+        // populate forces an update in save(), seeds with original data (from db)
+        $this->rowGateway->populate(array('id' => 6, 'name' => 'foo'), true);
+        $this->rowGateway->id = 7;
+        $this->rowGateway->save();
+        $this->assertEquals(array('id' => 7, 'name' => 'fooUpdated'), $this->rowGateway->toArray());
+    }
+
+    /**
      * @covers Zend\Db\RowGateway\RowGateway::delete
      */
     public function testDelete()

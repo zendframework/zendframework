@@ -419,7 +419,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      * Get last generated id
      *
      * @param string $name
-     * @return int|null|false
+     * @return string|null|false
      */
     public function getLastGeneratedValue($name = null)
     {

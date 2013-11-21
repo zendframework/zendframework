@@ -162,21 +162,17 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             return null;
         };
 
-        $connection               = array();
-        $connection['database']   = $findParameterValue(array('database', 'db'));
-        $connection['username']   = $findParameterValue(array('username', 'uid', 'UID'));
-        $connection['password']   = $findParameterValue(array('password', 'pwd', 'PWD'));
-        $connection['persistent'] = $findParameterValue(array('persistent', 'PERSISTENT', 'Persistent'));
-        $connection['options']    = (isset($p['driver_options']) ? $p['driver_options'] : array());
+        $database     = $findParameterValue(array('database', 'db'));
+        $username     = $findParameterValue(array('username', 'uid', 'UID'));
+        $password     = $findParameterValue(array('password', 'pwd', 'PWD'));
+        $isPersistent = $findParameterValue(array('persistent', 'PERSISTENT', 'Persistent'));
+        $options      = (isset($p['driver_options']) ? $p['driver_options'] : array());
 
-        $db2_connect = ($connection['persistent'] ? 'db2_pconnect' : 'db2_connect');
-
-        $this->resource = $db2_connect(
-            $connection['database'],
-            $connection['username'],
-            $connection['password'],
-            $connection['options']
-        );
+        if ($isPersistent) {
+            $this->resource = db2_pconnect($database, $username, $password, $options);
+        } else {
+            $this->resource = db2_connect($database, $username, $password, $options);
+        }
 
         if ($this->resource === false) {
             throw new Exception\RuntimeException(sprintf(

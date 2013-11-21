@@ -86,7 +86,7 @@ class SocketTest extends CommonHttpTests
     }
 
     /**
-     * Test that a Zend_Config object can be used to set configuration
+     * Test that a Zend\Config object can be used to set configuration
      *
      * @link http://framework.zend.com/issues/browse/ZF-5577
      */
@@ -116,7 +116,7 @@ class SocketTest extends CommonHttpTests
     {
         $this->setExpectedException(
             'Zend\Http\Client\Adapter\Exception\InvalidArgumentException',
-            'Array or Zend_Config object expected');
+            'Array or Zend\Config object expected');
 
         $this->_adapter->setOptions($config);
     }

@@ -26,7 +26,7 @@ class Parameters extends PhpArrayObject implements ParametersInterface
         if (null === $values) {
             $values = array();
         }
-        parent::__construct($values, PhpArrayObject::ARRAY_AS_PROPS);
+        parent::__construct($values, ArrayObject::ARRAY_AS_PROPS);
     }
 
     /**

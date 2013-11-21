@@ -100,7 +100,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
         // first, produce column list without compound names (using the AS portion only)
         array_unshift($sqls, $this->createSqlFromSpecificationAndParameters(
-            array('SELECT %1$s FROM (' => reset($this->specifications[self::SELECT])),
+            array('SELECT %1$s FROM (' => current($this->specifications[self::SELECT])),
             $selectParameters
         ));
 

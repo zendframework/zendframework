@@ -19,6 +19,8 @@ use Zend\Db\ResultSet\ResultSetInterface;
 class DbSelect implements AdapterInterface
 {
 
+    const ROW_COUNT_COLUMN_NAME = 'c';
+
     /**
      * @var Sql
      */
@@ -30,6 +32,13 @@ class DbSelect implements AdapterInterface
      * @var Select
      */
     protected $select = null;
+
+    /**
+     * Database count query
+     *
+     * @var Select
+     */
+    protected $selectCount = null;
 
     /**
      * @var ResultSet
@@ -102,21 +111,50 @@ class DbSelect implements AdapterInterface
             return $this->rowCount;
         }
 
+        $select = $this->getSelectCount();
+
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $result    = $statement->execute();
+        $row       = $result->current();
+
+        $this->rowCount = (int) $row[self::ROW_COUNT_COLUMN_NAME];
+
+        return $this->rowCount;
+    }
+
+    /**
+     * Returns select query for count
+     *
+     * @return Select
+     */
+    protected function getSelectCount()
+    {
+        if ($this->selectCount !== null) {
+            return $this->selectCount;
+        }
+
         $select = clone $this->select;
         $select->reset(Select::LIMIT);
         $select->reset(Select::OFFSET);
         $select->reset(Select::ORDER);
 
         $countSelect = new Select;
-        $countSelect->columns(array('c' => new Expression('COUNT(1)')));
+        $countSelect->columns(array(self::ROW_COUNT_COLUMN_NAME => new Expression('COUNT(1)')));
         $countSelect->from(array('original_select' => $select));
 
-        $statement = $this->sql->prepareStatementForSqlObject($countSelect);
-        $result    = $statement->execute();
-        $row       = $result->current();
+        return $countSelect;
+    }
 
-        $this->rowCount = $row['c'];
+    /**
+     * Sets custom select to count all entries in db
+     *
+     * @param Select $select
+     * @return self
+     */
+    public function setSelectCount(Select $select)
+    {
+        $this->select = $select;
 
-        return $this->rowCount;
+        return $this;
     }
 }

@@ -241,7 +241,7 @@ defined('TESTS_ZEND_FORM_RECAPTCHA_PRIVATE_KEY') || define('TESTS_ZEND_FORM_RECA
  * Zend\Http\Client tests
  *
  * To enable the dynamic Zend\Http\Client tests, you will need to symbolically
- * link or copy the files in tests/Zend/Http/Client/_files to a directory
+ * link or copy the files in tests/ZendTest/Http/Client/_files to a directory
  * under your web server(s) document root and set this constant to point to the
  * URL of this directory.
  */

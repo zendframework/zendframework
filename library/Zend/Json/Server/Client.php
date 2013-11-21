@@ -104,7 +104,7 @@ class Client implements ServerClient
     }
 
     /**
-     * Perform a JSOC-RPC request and return a response.
+     * Perform a JSON-RPC request and return a response.
      *
      * @param  Request $request Request.
      * @return Response Response.

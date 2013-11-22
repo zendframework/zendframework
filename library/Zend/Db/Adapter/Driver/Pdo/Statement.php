@@ -264,7 +264,11 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 
         $parameters = $this->parameterContainer->getNamedArray();
         foreach ($parameters as $name => &$value) {
-            $type = \PDO::PARAM_STR;
+            if (is_bool($value)) {
+                $type = \PDO::PARAM_BOOL;
+            } else {
+                $type = \PDO::PARAM_STR;
+            }
             if ($this->parameterContainer->offsetHasErrata($name)) {
                 switch ($this->parameterContainer->offsetGetErrata($name)) {
                     case ParameterContainer::TYPE_INTEGER:
@@ -275,9 +279,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
                         break;
                     case ParameterContainer::TYPE_LOB:
                         $type = \PDO::PARAM_LOB;
-                        break;
-                    case (is_bool($value)):
-                        $type = \PDO::PARAM_BOOL;
                         break;
                 }
             }

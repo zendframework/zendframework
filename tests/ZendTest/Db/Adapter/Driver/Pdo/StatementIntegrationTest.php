@@ -11,7 +11,7 @@ namespace ZendTest\Db\Adapter\Driver\Pdo;
 
 use Zend\Db\Adapter\Driver\Pdo\Statement;
 
-class StatementTest extends \PHPUnit_Framework_TestCase
+class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Statement

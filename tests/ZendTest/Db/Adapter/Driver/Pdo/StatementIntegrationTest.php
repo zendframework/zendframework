@@ -51,7 +51,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase
             $this->equalTo(false),
             $this->equalTo(\PDO::PARAM_BOOL)
         );
-        $this->statement->execute(['foo' => false]);
+        $this->statement->execute(array('foo' => false));
     }
 
     public function testStatementExecuteWillUsePdoStrByDefaultWhenBinding()
@@ -61,7 +61,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase
             $this->equalTo('bar'),
             $this->equalTo(\PDO::PARAM_STR)
         );
-        $this->statement->execute(['foo' => 'bar']);
+        $this->statement->execute(array('foo' => 'bar'));
     }
 
 }

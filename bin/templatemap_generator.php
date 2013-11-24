@@ -177,7 +177,7 @@ foreach ($l as $file) {
 
     // Add in relative path to library
     $filename = $relativePathForMap . $filename;
-    $baseName =  $file->getBasename('.' . $file->getExtension());
+    $baseName = $file->getBasename('.' . pathinfo($file->getFilename(), PATHINFO_EXTENSION));
     $mapName  = str_replace(str_replace(DIRECTORY_SEPARATOR, '/', realpath($viewPath)) . '/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()) . '/' . $baseName);
     $map->{$mapName} = $filename;
 }

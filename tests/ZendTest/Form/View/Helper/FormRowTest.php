@@ -401,4 +401,14 @@ class FormRowTest extends TestCase
 
         $this->assertSame('append', $this->helper->getLabelPosition());
     }
+
+    public function testCanSetOptionToNestElementInLabel()
+    {
+        $element = new Element('foo', array('nest_in_label' => true));
+        $element->setAttribute('id', 'bar');
+        $element->setLabel('baz');
+
+        $markup = $this->helper->render($element);
+        $this->assertRegexp('#^<label><span>baz</span><input name="foo" id="bar" type="text" value=""\/?></label>$#', $markup);
+    }
 }

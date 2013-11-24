@@ -187,7 +187,9 @@ class FormRow extends AbstractHelper
                     $label,
                     $elementString);
             } else {
-                if ($element->hasAttribute('id')) {
+                // Ensure element and label will be separated if element has an `id`-attribute.
+                // If element has option `nest_in_label` it will be nested in any case.
+                if ($element->hasAttribute('id') && !$element->getOption('nest_in_label')) {
                     $labelOpen = '';
                     $labelClose = '';
                     $label = $labelHelper($element);
@@ -196,7 +198,7 @@ class FormRow extends AbstractHelper
                     $labelClose = $labelHelper->closeTag();
                 }
 
-                if ($label !== '' && !$element->hasAttribute('id')) {
+                if ($label !== '' && (!$element->hasAttribute('id')) || $element->getOption('nest_in_label')) {
                     $label = '<span>' . $label . '</span>';
                 }
 

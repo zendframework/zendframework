@@ -60,17 +60,17 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     {
         $this->insert->values(array('foo' => 'bar'));
         $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'values'));
+        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'source'));
 
         // test will merge cols and values of previously set stuff
         $this->insert->values(array('foo' => 'bax'), Insert::VALUES_MERGE);
         $this->insert->values(array('boom' => 'bam'), Insert::VALUES_MERGE);
         $this->assertEquals(array('foo', 'boom'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bax', 'bam'), $this->readAttribute($this->insert, 'values'));
+        $this->assertEquals(array('bax', 'bam'), $this->readAttribute($this->insert, 'source'));
 
         $this->insert->values(array('foo' => 'bax'));
         $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bax'), $this->readAttribute($this->insert, 'values'));
+        $this->assertEquals(array('bax'), $this->readAttribute($this->insert, 'source'));
     }
 
 
@@ -117,6 +117,30 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\Db\Sql\Insert::prepareStatement
+     */
+    public function testPrepareStatementWithSelect()
+    {
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = new \Zend\Db\Adapter\StatementContainer();
+
+        $this->insert
+                ->into('foo')
+                ->columns(array('col1'))
+                ->select(new Select('bar'))
+                ->prepareStatement($mockAdapter, $mockStatement);
+
+        $this->assertEquals(
+            'INSERT INTO "foo" ("col1") SELECT "bar".* FROM "bar"',
+            $mockStatement->getSql()
+        );
+    }
+
+    /**
      * @covers Zend\Db\Sql\Insert::getSqlString
      */
     public function testGetSqlString()
@@ -151,7 +175,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     {
         $this->insert->foo = 'bar';
         $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'values'));
+        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'source'));
     }
 
     /**
@@ -161,10 +185,10 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     {
         $this->insert->foo = 'bar';
         $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'values'));
+        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'source'));
         unset($this->insert->foo);
         $this->assertEquals(array(), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array(), $this->readAttribute($this->insert, 'values'));
+        $this->assertEquals(array(), $this->readAttribute($this->insert, 'source'));
     }
 
     /**

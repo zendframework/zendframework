@@ -1727,4 +1727,18 @@ class FormTest extends TestCase
         $filters = $form->getInputFilter()->get('fieldset')->get('foo')->getFilterChain();
         $this->assertEquals(1, $filters->count());
     }
+
+    public function testCanSetUseInputFilterDefaultsViaArray()
+    {
+        $spec = array(
+            'name' => 'test',
+            'options' => array(
+                'use_input_filter_defaults' => false
+            )
+        );
+
+        $factory = new Factory();
+        $this->form = $factory->createForm($spec);
+        $this->assertFalse($this->form->useInputFilterDefaults());
+    }
 }

@@ -219,6 +219,7 @@ class Mcrypt implements SymmetricInterface
 
     /**
      * Set the encryption key
+     * If the key is longer than maximum supported, it will be truncated by getKey().
      *
      * @param  string                             $key
      * @throws Exception\InvalidArgumentException
@@ -226,13 +227,25 @@ class Mcrypt implements SymmetricInterface
      */
     public function setKey($key)
     {
-        if (empty($key)) {
+        $keyLen = strlen($key);
+
+        if (!$keyLen) {
             throw new Exception\InvalidArgumentException('The key cannot be empty');
         }
-        if (strlen($key) < $this->getKeySize()) {
-             throw new Exception\InvalidArgumentException(
-                'The size of the key must be at least of ' . $this->getKeySize() . ' bytes'
-             );
+        $keySizes = mcrypt_module_get_supported_key_sizes($this->supportedAlgos[$this->algo]);
+        $maxKey = $this->getKeySize();
+
+        /*
+         * blowfish has $keySizes empty, meaning it can have arbitrary key length.
+         * the others are more picky.
+         */
+        if (!empty($keySizes) && $keyLen < $maxKey) {
+
+            if (!in_array($keyLen, $keySizes)) {
+                 throw new Exception\InvalidArgumentException(
+                    "The size of the key must be one of "
+                    . implode(", ", $keySizes) . " bytes or longer");
+            }
         }
         $this->key = $key;
 

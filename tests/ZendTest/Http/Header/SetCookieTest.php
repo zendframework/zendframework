@@ -486,6 +486,42 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                 array(),
                 ''
             ),
+            array(
+                'Set-Cookie: emptykey=    ; Domain=docs.foo.com;',
+                array(
+                    'name'    => 'myname',
+                    'value'   => '',
+                    'domain'  => 'docs.foo.com',
+                ),
+                'emptykey=; Domain=docs.foo.com'
+            ),
+            array(
+                'Set-Cookie: emptykey= ; Domain=docs.foo.com;',
+                array(
+                    'name'    => 'myname',
+                    'value'   => '',
+                    'domain'  => 'docs.foo.com',
+                ),
+                'emptykey=; Domain=docs.foo.com'
+            ),
+            array(
+                'Set-Cookie: emptykey=; Domain=docs.foo.com;',
+                array(
+                    'name'    => 'myname',
+                    'value'   => '',
+                    'domain'  => 'docs.foo.com',
+                ),
+                'emptykey=; Domain=docs.foo.com'
+            ),
+            array(
+                'Set-Cookie: emptykey; Domain=docs.foo.com;',
+                array(
+                    'name'    => 'myname',
+                    'value'   => '',
+                    'domain'  => 'docs.foo.com',
+                ),
+                'emptykey=; Domain=docs.foo.com'
+            ),
         );
     }
 }

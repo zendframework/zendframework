@@ -113,9 +113,20 @@ class McryptTest extends \PHPUnit_Framework_TestCase
 
     public function testSetShortKey()
     {
-        $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException');
-        $result = $this->mcrypt->setKey('short');
-        $output = $this->mcrypt->encrypt('test');
+        foreach ($this->mcrypt->getSupportedAlgorithms() as $algo) {
+            $this->mcrypt->setAlgorithm($algo);
+            try {
+                $result = $this->mcrypt->setKey('four');
+            } catch (\Exception $ex) {
+                $result = $ex;
+            }
+            if ($algo != 'blowfish') {
+                $this->assertInstanceOf('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
+                    $result);
+            } else {
+                $this->assertInstanceof('Zend\Crypt\Symmetric\Mcrypt', $result);
+            }
+        }
     }
 
     public function testSetSalt()

@@ -14,6 +14,8 @@ use Zend\Form\Element;
 use Zend\Form\ElementInterface;
 use Zend\Form\Element\Collection as CollectionElement;
 use Zend\Form\FieldsetInterface;
+use Zend\Form\LabelAwareInterface;
+use Zend\Form\LabelOptionsAwareInterface;
 use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 class FormCollection extends AbstractHelper
@@ -104,7 +106,6 @@ class FormCollection extends AbstractHelper
         $attributes       = $element->getAttributes();
         $markup           = '';
         $templateMarkup   = '';
-        $escapeHtmlHelper = $this->getEscapeHtmlHelper();
         $elementHelper    = $this->getElementHelper();
         $fieldsetHelper   = $this->getFieldsetHelper();
 
@@ -132,8 +133,6 @@ class FormCollection extends AbstractHelper
             $label = $element->getLabel();
             $legend = '';
 
-            $label = $element->getLabel();
-            $labelMarkup = '';
             if (!empty($label)) {
                 if (null !== ($translator = $this->getTranslator())) {
                     $label = $translator->translate(
@@ -142,9 +141,14 @@ class FormCollection extends AbstractHelper
                     );
                 }
 
+                if (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')) {
+                    $escapeHtmlHelper = $this->getEscapeHtmlHelper();
+                    $label = $escapeHtmlHelper($label);
+                }
+
                 $legend = sprintf(
                     $this->labelWrapper,
-                    $escapeHtmlHelper($label)
+                    $label
                 );
             }
 

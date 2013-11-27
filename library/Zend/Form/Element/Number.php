@@ -48,8 +48,8 @@ class Number extends Element implements InputProviderInterface
             'locale' => 'en_US', // HTML5 uses "100.01" format
         ));
 
-        $inclusive = false;
-        if (!empty($this->attributes['inclusive'])) {
+        $inclusive = true;
+        if (isset($this->attributes['inclusive'])) {
             $inclusive = $this->attributes['inclusive'];
         }
 

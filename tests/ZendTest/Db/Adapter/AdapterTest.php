@@ -272,6 +272,9 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
 
         $r = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
         $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $r);
+
+        $r = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE, new TemporaryResultSet());
+        $this->assertInstanceOf('ZendTest\Db\Adapter\TemporaryResultSet', $r);
     }
 
     /**
@@ -297,4 +300,8 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('InvalidArgumentException', 'Invalid magic');
         $this->adapter->foo;
     }
+}
+
+class TemporaryResultSet extends \Zend\Db\ResultSet\ResultSet
+{
 }

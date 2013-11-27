@@ -10,6 +10,7 @@
 namespace ZendTest\Log\TestAsset;
 
 use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\ResultSet\ResultSetInterface;
 
 class MockDbAdapter extends DbAdapter
 {
@@ -29,7 +30,7 @@ class MockDbAdapter extends DbAdapter
         $this->driver = new MockDbDriver;
 
     }
-    public function query($sql, $parametersOrQueryMode = DbAdapter::QUERY_MODE_PREPARE)
+    public function query($sql, $parametersOrQueryMode = DbAdapter::QUERY_MODE_PREPARE, ResultSetInterface $resultPrototype = null)
     {
         $this->calls[__FUNCTION__][] = $sql;
         return $this;

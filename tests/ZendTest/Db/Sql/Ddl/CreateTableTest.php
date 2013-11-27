@@ -126,8 +126,15 @@ class CreateTableTest extends \PHPUnit_Framework_TestCase
         $ct = new CreateTable('foo');
         $this->assertEquals("CREATE TABLE \"foo\" (\n)", $ct->getSqlString());
 
+        $ct = new CreateTable('foo', true);
+        $this->assertEquals("CREATE TEMPORARY TABLE \"foo\" (\n)", $ct->getSqlString());
+
         $ct = new CreateTable('foo');
         $ct->addColumn(new Column('bar'));
         $this->assertEquals("CREATE TABLE \"foo\" (\n    \"bar\" INTEGER NOT NULL\n)", $ct->getSqlString());
+
+        $ct = new CreateTable('foo', true);
+        $ct->addColumn(new Column('bar'));
+        $this->assertEquals("CREATE TEMPORARY TABLE \"foo\" (\n    \"bar\" INTEGER NOT NULL\n)", $ct->getSqlString());
     }
 }

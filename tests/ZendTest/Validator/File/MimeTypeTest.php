@@ -221,4 +221,22 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
         $validator = new File\MimeType($files);
         $this->assertFalse($validator->getMagicFile());
     }
+
+    public function testEmptyFileArrayShouldReturnFalseRatherThanTriggeringFinfoWarning()
+    {
+        if (! extension_loaded('fileinfo')) {
+            $this->markTestSkipped('This PHP Version has no finfo installed');
+        }
+
+        $files = array(
+            'name'      => '',
+            'size'      => 0,
+            'tmp_name'  => '',
+            'error'     => UPLOAD_ERR_NO_FILE,
+            'type'      => '',
+        );
+
+        $validator = new File\MimeType($files);
+        $this->assertFalse($validator->isValid($files));
+    }
 }

@@ -228,7 +228,11 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This PHP Version has no finfo installed');
         }
 
-        $files = array(
+        $validator = new File\MimeType();
+
+        $this->assertFalse($validator->isValid(''));
+
+        $filesArray = array(
             'name'      => '',
             'size'      => 0,
             'tmp_name'  => '',
@@ -236,7 +240,6 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             'type'      => '',
         );
 
-        $validator = new File\MimeType($files);
-        $this->assertFalse($validator->isValid($files));
+        $this->assertFalse($validator->isValid($filesArray));
     }
 }

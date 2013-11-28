@@ -183,4 +183,23 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
             $this->multipleOptionsDetected = true;
         }
     }
+
+    public function testEmptyFileArrayShouldReturnFalse()
+    {
+        $validator = new File\FilesSize(array('min' => 0, 'max' => 2));
+
+        $this->assertFalse($validator->isValid(''));
+        $this->assertArrayHasKey(File\FilesSize::NOT_READABLE, $validator->getMessages());
+
+        $filesArray = array(
+            'name'      => '',
+            'size'      => 0,
+            'tmp_name'  => '',
+            'error'     => UPLOAD_ERR_NO_FILE,
+            'type'      => '',
+        );
+
+        $this->assertFalse($validator->isValid($filesArray));
+        $this->assertArrayHasKey(File\FilesSize::NOT_READABLE, $validator->getMessages());
+    }
 }

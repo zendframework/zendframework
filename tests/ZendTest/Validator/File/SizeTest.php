@@ -203,4 +203,23 @@ class SizeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('fileSizeNotFound', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
+
+    public function testEmptyFileArrayShouldReturnFalseRatherThanTriggerError()
+    {
+        $validator = new File\Size();
+
+        $this->assertFalse($validator->isValid(''));
+        $this->assertArrayHasKey(File\Size::NOT_FOUND, $validator->getMessages());
+
+        $filesArray = array(
+            'name'      => '',
+            'size'      => 0,
+            'tmp_name'  => '',
+            'error'     => UPLOAD_ERR_NO_FILE,
+            'type'      => '',
+        );
+
+        $this->assertFalse($validator->isValid($filesArray));
+        $this->assertArrayHasKey(File\Size::NOT_FOUND, $validator->getMessages());
+    }
 }

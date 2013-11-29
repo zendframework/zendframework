@@ -370,6 +370,8 @@ class FormCollection extends AbstractHelper
     public function setTemplateWrapper($templateWrapper)
     {
         $this->templateWrapper = $templateWrapper;
+
+        return $this;
     }
 
 }

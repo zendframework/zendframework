@@ -186,7 +186,7 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
 
     public function testEmptyFileArrayShouldReturnFalse()
     {
-        $validator = new File\FilesSize(array('min' => 0, 'max' => 2));
+        $validator = new File\FilesSize(0);
 
         $this->assertFalse($validator->isValid(''));
         $this->assertArrayHasKey(File\FilesSize::NOT_READABLE, $validator->getMessages());

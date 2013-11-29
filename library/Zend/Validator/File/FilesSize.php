@@ -96,7 +96,7 @@ class FilesSize extends Size
         $size = $this->getSize();
         foreach ($value as $files) {
             // Is file readable ?
-            if (false === stream_resolve_include_path($files)) {
+            if (empty($files) || false === stream_resolve_include_path($files)) {
                 $this->throwError($file, self::NOT_READABLE);
                 continue;
             }

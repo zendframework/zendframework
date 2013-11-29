@@ -133,12 +133,12 @@ class FormCollection extends AbstractHelper
                 }
 
                 $label = sprintf(
-                    $this->getLabelWrapper(),
+                    $this->labelWrapper,
                     $escapeHtmlHelper($label)
                 );
             }
             $markup = sprintf(
-                $this->getWrapper(),
+                $this->wrapper,
                 $markup,
                 $label,
                 $templateMarkup
@@ -173,7 +173,7 @@ class FormCollection extends AbstractHelper
         }
 
         return sprintf(
-            $this->getTemplateWrapper(),
+            $this->templateWrapper,
             $escapeHtmlAttribHelper($templateMarkup)
         );
     }

@@ -186,9 +186,9 @@ class Crc32Test extends \PHPUnit_Framework_TestCase
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 
-    public function testEmptyFileArrayShouldReturnFalseRatherThanTriggeringError()
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
     {
-        $validator = new File\Crc32('12345');
+        $validator = new File\Crc32();
 
         $this->assertFalse($validator->isValid(''));
         $this->assertArrayHasKey(File\Crc32::NOT_FOUND, $validator->getMessages());

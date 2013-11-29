@@ -222,7 +222,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->getMagicFile());
     }
 
-    public function testEmptyFileArrayShouldReturnFalseRatherThanTriggeringFinfoWarning()
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
     {
         if (! extension_loaded('fileinfo')) {
             $this->markTestSkipped('This PHP Version has no finfo installed');

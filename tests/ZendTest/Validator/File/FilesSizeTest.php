@@ -184,7 +184,7 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testEmptyFileArrayShouldReturnFalse()
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
     {
         $validator = new File\FilesSize(0);
 

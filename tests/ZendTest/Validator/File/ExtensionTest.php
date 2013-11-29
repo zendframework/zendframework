@@ -165,7 +165,7 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 
-    public function testEmptyFileArrayShouldReturnFalse()
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
     {
         $validator = new File\Extension('foo');
 

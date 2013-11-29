@@ -187,9 +187,9 @@ class Sha1Test extends \PHPUnit_Framework_TestCase
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 
-    public function testEmptyFileArrayShouldReturnFalseRatherThanTriggeringError()
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
     {
-        $validator = new File\Sha1('foo');
+        $validator = new File\Sha1();
 
         $this->assertFalse($validator->isValid(''));
         $this->assertArrayHasKey(File\Sha1::NOT_FOUND, $validator->getMessages());

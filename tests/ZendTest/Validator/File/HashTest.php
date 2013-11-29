@@ -160,7 +160,7 @@ class HashTest extends \PHPUnit_Framework_TestCase
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 
-    public function testEmptyFileArrayShouldReturnFalseRatherThanTriggerError()
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
     {
         $validator = new File\Hash();
 

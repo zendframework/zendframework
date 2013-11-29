@@ -84,7 +84,7 @@ class UploadFileTest extends \PHPUnit_Framework_TestCase
         $this->assertContains("not found", current($validator->getMessages()));
     }
 
-    public function testEmptyFileArrayShouldReturnFalseRatherThanTriggerError()
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
     {
         $validator = new File\UploadFile();
 

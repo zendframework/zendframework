@@ -200,7 +200,7 @@ class Md5Test extends \PHPUnit_Framework_TestCase
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
 
-    public function testEmptyFileArrayShouldReturnFalseRatherThanTriggerError()
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
     {
         $validator = new File\Md5();
 

@@ -309,7 +309,7 @@ class FormCollection extends AbstractHelper
      *
      * @param string $wrapper
      *
-     * @return FormCollection
+     * @return self
      */
     public function setWrapper($wrapper)
     {
@@ -326,7 +326,7 @@ class FormCollection extends AbstractHelper
      *
      * @param string $labelWrapper
      *
-     * @return FormCollection
+     * @return self
      */
     public function setLabelWrapper($labelWrapper)
     {
@@ -365,7 +365,7 @@ class FormCollection extends AbstractHelper
      *
      * @param string $templateWrapper
      *
-     * @return FormCollection
+     * @return self
      */
     public function setTemplateWrapper($templateWrapper)
     {

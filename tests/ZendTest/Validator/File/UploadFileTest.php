@@ -83,4 +83,23 @@ class UploadFileTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('fileUploadFileErrorFileNotFound', $validator->getMessages()));
         $this->assertContains("not found", current($validator->getMessages()));
     }
+
+    public function testEmptyFileArrayShouldReturnFalseRatherThanTriggerError()
+    {
+        $validator = new File\UploadFile();
+
+        $this->assertFalse($validator->isValid(''));
+        $this->assertArrayHasKey(File\UploadFile::FILE_NOT_FOUND, $validator->getMessages());
+
+        $filesArray = array(
+            'name'      => '',
+            'size'      => 0,
+            'tmp_name'  => '',
+            'error'     => UPLOAD_ERR_NO_FILE,
+            'type'      => '',
+        );
+
+        $this->assertFalse($validator->isValid($filesArray));
+        $this->assertArrayHasKey(File\UploadFile::FILE_NOT_FOUND, $validator->getMessages());
+    }
 }

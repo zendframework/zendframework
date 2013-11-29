@@ -261,4 +261,46 @@ class FormCollectionTest extends TestCase
         $this->assertRegExp('/\<div class="foo">.*?<\/div>/', $markup);
 
     }
+
+    public function testCollectionRendersTemplateWithoutWrapper()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setShouldCreateTemplate(true);
+        $this->helper->setShouldWrap(false);
+        $this->helper->setTemplateWrapper('<div class="foo">%s</div>');
+
+        $markup = $this->helper->render($collection);
+
+        $this->assertNotContains('<fieldset>', $markup);
+        $this->assertRegExp('/\<div class="foo">.*?<\/div>/', $markup);
+    }
+
+    public function testCollectionRendersFieldsetCorrectly()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('fieldsets');
+        $collection->setShouldCreateTemplate(true);
+        $this->helper->setShouldWrap(true);
+        $this->helper->setWrapper('<div>%2$s%1$s%3$s</div>');
+        $this->helper->setTemplateWrapper('<div class="foo">%s</div>');
+
+        $markup = $this->helper->render($collection);
+
+        $this->assertNotContains('<fieldset>', $markup);
+        $this->assertRegExp('/\<div class="foo">.*?<\/div>/', $markup);
+    }
+
+    public function testGetterAndSetter()
+    {
+        $this->assertSame($this->helper, $this->helper->setWrapper('foo'));
+        $this->assertAttributeEquals('foo', 'wrapper', $this->helper);
+        $this->assertEquals('foo', $this->helper->getWrapper());
+        $this->assertSame($this->helper, $this->helper->setLabelWrapper('foo'));
+        $this->assertAttributeEquals('foo', 'labelWrapper', $this->helper);
+        $this->assertEquals('foo', $this->helper->getLabelWrapper());
+        $this->assertSame($this->helper, $this->helper->setTemplateWrapper('foo'));
+        $this->assertAttributeEquals('foo', 'templateWrapper', $this->helper);
+        $this->assertEquals('foo', $this->helper->getTemplateWrapper());
+    }
 }

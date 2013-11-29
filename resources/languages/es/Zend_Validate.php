@@ -221,7 +221,7 @@ return array(
     "Value is required and can't be empty" => "Se requiere un valor y éste no puede estar vací­o",
 
     // Zend_Validate_PostCode
-    "Invalid type given. The value should be a string or an integer" => "El tipo especificado es incorrecto, el valor deberí­a ser una cadena de texto",
+    "Invalid type given. The value should be a string or a integer" => "El tipo especificado es incorrecto, el valor deberí­a ser una cadena de texto",
     "'%value%' does not appear to be a postal code" => "'%value%' no parece ser un código postal",
 
     // Zend_Validate_Regex
@@ -243,7 +243,7 @@ return array(
 
     // Zend_Validate_Sitemap_Priority
     "'%value%' is not a valid sitemap priority" => "'%value%' no es una prioridad de mapa web válida",
-    "Invalid type given, the value should be an integer, a float or a numeric string" => "El tipo especificado es inválido, el valor deberí­a ser un entero, un float o una cadena de texto numérica",
+    "Invalid type given, the value should be a integer, a float or a numeric string" => "El tipo especificado es inválido, el valor deberí­a ser un entero, un float o una cadena de texto numérica",
 
     // Zend_Validate_StringLength
     "Invalid type given, value should be a string" => "El tipo especificado es incorrecto, el valor deberí­a ser una cadena de texto",

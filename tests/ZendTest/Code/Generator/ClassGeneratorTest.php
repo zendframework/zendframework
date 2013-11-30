@@ -456,4 +456,13 @@ CODE;
 
 
     }
+
+    public function testHasMethodInsensitive()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addMethod('methodOne');
+
+        $this->assertTrue($classGenerator->hasMethod('methodOne'));
+        $this->assertTrue($classGenerator->hasMethod('MethoDonE'));
+    }
 }

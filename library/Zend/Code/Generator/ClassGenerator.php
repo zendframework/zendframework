@@ -649,7 +649,12 @@ class ClassGenerator extends AbstractGenerator
      */
     public function hasMethod($methodName)
     {
-        return isset($this->methods[$methodName]);
+        foreach($this->methods as $method) {
+            if (strtolower($method->getName()) == strtolower($methodName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

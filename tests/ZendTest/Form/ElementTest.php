@@ -161,16 +161,6 @@ class ElementTest extends TestCase
         $this->assertEquals(array('bar' => 'baz'), $option);
     }
 
-    public function testLabelOptionsCanBeSetViaOptionsArray()
-    {
-        $element = new Element('foo');
-        $element->setOptions(array(
-            'label_options' => array('moar' => 'foo')
-        ));
-
-        $this->assertEquals('foo', $element->getLabelOption('moar'));
-    }
-
     public function testCanSetSingleOptionForLabel()
     {
         $element = new Element('foo');
@@ -217,6 +207,22 @@ class ElementTest extends TestCase
         $element->setMessages(null);
     }
 
+    public function testLabelOptionsAreEmptyByDefault()
+    {
+        $element = new Element();
+        $this->assertEquals(array(), $element->getLabelOptions());
+    }
+
+    public function testLabelOptionsCanBeSetViaOptionsArray()
+    {
+        $element = new Element('foo');
+        $element->setOptions(array(
+            'label_options' => array('moar' => 'foo')
+        ));
+
+        $this->assertEquals('foo', $element->getLabelOption('moar'));
+    }
+
     public function testCanAddLabelOptionSingly()
     {
         $element = new Element();
@@ -237,6 +243,15 @@ class ElementTest extends TestCase
         foreach($options as $k => $v) {
             $this->assertEquals($v, $element->getLabelOption($k));
         }
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testPassingWrongArgumentToSetLabelOptionsThrowsException()
+    {
+        $element = new Element();
+        $element->setLabelOptions(null);
     }
 
     public function testSettingLabelOptionsMerges()

@@ -218,9 +218,7 @@ class FormLabelTest extends CommonTestCase
     public function testCanSetAlwaysWrap()
     {
         $element = new Element('foo');
-        $element->setLabel('The value <a>for</a> foo:');
-        $element->setLabelOptions(array('always_wrap' => true));
-        $markup = $this->helper->__invoke($element);
-        $this->assertContains('<a>for</a>', $markup);
+        $element->setLabelOption('always_wrap', true);
+        $this->assertTrue($element->getLabelOption('always_wrap'));
     }
 }

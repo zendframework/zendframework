@@ -39,10 +39,7 @@ class Element implements
      *
      * @var array
      */
-    protected $labelOptions = array(
-        'disable_html_escape' => false,
-        'always_wrap' => false
-    );
+    protected $labelOptions = array();
 
     /**
      * @var array Validation error messages
@@ -401,6 +398,32 @@ class Element implements
     }
 
     /**
+     * Clear all label options
+     *
+     * @return Element|ElementInterface
+     */
+    public function clearLabelOptions()
+    {
+        $this->labelOptions = array();
+        return $this;
+    }
+
+    /**
+     * Remove many attributes at once
+     *
+     * @param array $keys
+     * @return ElementInterface
+     */
+    public function removeLabelOptions(array $keys)
+    {
+        foreach ($keys as $key) {
+            unset($this->labelOptions[$key]);
+        }
+
+        return $this;
+    }
+
+    /**
      * Set a single label optionn
      *
      * @param  string $key
@@ -440,17 +463,6 @@ class Element implements
     }
 
     /**
-     * Clear all label options
-     *
-     * @return Element|ElementInterface
-     */
-    public function clearLabelOptions()
-    {
-        $this->labelOptions = array();
-        return $this;
-    }
-
-    /**
      * Does the element has a specific label option ?
      *
      * @param  string $key
@@ -459,21 +471,6 @@ class Element implements
     public function hasLabelOption($key)
     {
         return array_key_exists($key, $this->labelOptions);
-    }
-
-    /**
-     * Remove many attributes at once
-     *
-     * @param array $keys
-     * @return ElementInterface
-     */
-    public function removeLabelOptions(array $keys)
-    {
-        foreach ($keys as $key) {
-            unset($this->labelOptions[$key]);
-        }
-
-        return $this;
     }
 
     /**

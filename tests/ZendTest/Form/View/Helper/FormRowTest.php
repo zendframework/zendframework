@@ -405,7 +405,7 @@ class FormRowTest extends TestCase
     public function testLabelOptionAlwaysWrapDefaultsToFalse()
     {
         $element = new Element('foo');
-        $this->assertFalse($element->getLabelOption('always_wrap'));
+        $this->assertEmpty($element->getLabelOption('always_wrap'));
     }
 
     public function testCanSetOptionToWrapElementInLabel()

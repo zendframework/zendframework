@@ -99,7 +99,7 @@ class FormButton extends FormInput
             $labelOptions = $element->getLabelOptions();
         }
 
-        if (empty($labelOptions) || $labelOptions['disable_html_escape'] == false) {
+        if (! $element->getLabelOption('disable_html_escape')) {
             $escapeHtmlHelper = $this->getEscapeHtmlHelper();
             $buttonContent = $escapeHtmlHelper($buttonContent);
         }

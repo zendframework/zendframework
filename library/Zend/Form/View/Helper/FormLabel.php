@@ -70,7 +70,7 @@ class FormLabel extends AbstractHelper
                 $labelOptions = $element->getLabelOptions();
             }
 
-            if (empty($labelOptions) || $labelOptions['disable_html_escape'] == false) {
+            if (! $element->getLabelOption('disable_html_escape')) {
                 $escapeHtmlHelper = $this->getEscapeHtmlHelper();
                 $label = $escapeHtmlHelper($label);
             }

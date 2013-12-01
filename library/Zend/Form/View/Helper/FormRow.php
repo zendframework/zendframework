@@ -170,7 +170,7 @@ class FormRow extends AbstractHelper
                 $labelAttributes = $element->getLabelAttributes();
             }
 
-            if (empty($labelOptions) || $labelOptions['disable_html_escape'] == false) {
+            if (! $element->getLabelOption('disable_html_escape')) {
                 $label = $escapeHtmlHelper($label);
             }
 
@@ -188,8 +188,8 @@ class FormRow extends AbstractHelper
                     $elementString);
             } else {
                 // Ensure element and label will be separated if element has an `id`-attribute.
-                // If element has option `nest_in_label` it will be nested in any case.
-                if ($element->hasAttribute('id') && !$element->getOption('nest_in_label')) {
+                // If element has label option `always_wrap` it will be nested in any case.
+                if ($element->hasAttribute('id') && !$element->getLabelOption('always_wrap')) {
                     $labelOpen = '';
                     $labelClose = '';
                     $label = $labelHelper($element);
@@ -198,7 +198,7 @@ class FormRow extends AbstractHelper
                     $labelClose = $labelHelper->closeTag();
                 }
 
-                if ($label !== '' && (!$element->hasAttribute('id')) || $element->getOption('nest_in_label')) {
+                if ($label !== '' && (!$element->hasAttribute('id')) || $element->getLabelOption('always_wrap')) {
                     $label = '<span>' . $label . '</span>';
                 }
 

@@ -223,7 +223,7 @@ class FormMultiCheckbox extends FormInput
                 );
             }
 
-            if (empty($labelOptions) || $labelOptions['disable_html_escape'] == false) {
+            if (! $element->getLabelOption('disable_html_escape')) {
                 $label = $escapeHtmlHelper($label);
             }
             $labelOpen = $labelHelper->openTag($labelAttributes);

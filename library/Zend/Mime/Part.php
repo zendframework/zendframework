@@ -26,6 +26,7 @@ class Part
     public $language;
     protected $content;
     protected $isStream = false;
+    protected $streamContent;
 
 
     /**
@@ -120,7 +121,10 @@ class Part
     public function getContent($EOL = Mime::LINEEND)
     {
         if ($this->isStream) {
-            return stream_get_contents($this->getEncodedStream($EOL));
+            if(!isset($this->streamContent)) {
+                $this->streamContent = stream_get_contents($this->getEncodedStream($EOL));
+            }
+            return $this->streamContent;
         }
         return Mime::encode($this->content, $this->encoding, $EOL);
     }

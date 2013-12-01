@@ -26,7 +26,7 @@ class Part
     public $language;
     protected $content;
     protected $isStream = false;
-    protected $streamContent;
+    protected $filters = array();
 
 
     /**
@@ -80,6 +80,7 @@ class Part
         //stream_filter_remove(); // ??? is that right?
         switch ($this->encoding) {
             case Mime::ENCODING_QUOTEDPRINTABLE:
+                if(array_search(Mime::ENCODING_QUOTEDPRINTABLE, $this->filters) !== FALSE) break;
                 $filter = stream_filter_append(
                     $this->content,
                     'convert.quoted-printable-encode',
@@ -89,11 +90,13 @@ class Part
                         'line-break-chars' => $EOL
                     )
                 );
+                array_push($this->filters,Mime::ENCODING_QUOTEDPRINTABLE);
                 if (!is_resource($filter)) {
                     throw new Exception\RuntimeException('Failed to append quoted-printable filter');
                 }
                 break;
             case Mime::ENCODING_BASE64:
+                if(array_search(Mime::ENCODING_BASE64, $this->filters) !== FALSE) break;
                 $filter = stream_filter_append(
                     $this->content,
                     'convert.base64-encode',
@@ -103,6 +106,7 @@ class Part
                         'line-break-chars' => $EOL
                     )
                 );
+                array_push($this->filters,Mime::ENCODING_BASE64);
                 if (!is_resource($filter)) {
                     throw new Exception\RuntimeException('Failed to append base64 filter');
                 }
@@ -121,10 +125,10 @@ class Part
     public function getContent($EOL = Mime::LINEEND)
     {
         if ($this->isStream) {
-            if(!isset($this->streamContent)) {
-                $this->streamContent = stream_get_contents($this->getEncodedStream($EOL));
-            }
-            return $this->streamContent;
+            $encodedStream = $this->getEncodedStream($EOL);
+            $encodedStreamContents =  stream_get_contents($encodedStream);
+            rewind($encodedStream);
+            return $encodedStreamContents;
         }
         return Mime::encode($this->content, $this->encoding, $EOL);
     }

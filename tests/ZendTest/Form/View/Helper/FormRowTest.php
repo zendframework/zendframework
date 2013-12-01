@@ -402,9 +402,19 @@ class FormRowTest extends TestCase
         $this->assertSame('append', $this->helper->getLabelPosition());
     }
 
-    public function testCanSetOptionToNestElementInLabel()
+    public function testLabelOptionAlwaysWrapDefaultsToFalse()
     {
-        $element = new Element('foo', array('nest_in_label' => true));
+        $element = new Element('foo');
+        $this->assertFalse($element->getLabelOption('always_wrap'));
+    }
+
+    public function testCanSetOptionToWrapElementInLabel()
+    {
+        $element = new Element('foo', array(
+            'label_options' => array(
+                'always_wrap' => true
+            )
+        ));
         $element->setAttribute('id', 'bar');
         $element->setLabel('baz');
 

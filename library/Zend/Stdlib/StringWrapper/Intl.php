@@ -66,7 +66,7 @@ class Intl extends AbstractStringWrapper
     public function substr($str, $offset = 0, $length = null)
     {
         // Due fix of PHP #62759 The third argument returns an empty string if is 0 or null.
-        if ($length) {
+        if ($length !== null) {
             return grapheme_substr($str, $offset, $length);
         }
 

@@ -154,7 +154,7 @@ class TranslatorAwareTreeRouteStack extends TreeRouteStack implements Translator
      *
      * @see    TranslatorAwareInterface::setTranslatorTextDomain()
      * @param  string $textDomain
-     * @return mixed
+     * @return self
      */
     public function setTranslatorTextDomain($textDomain = 'default')
     {

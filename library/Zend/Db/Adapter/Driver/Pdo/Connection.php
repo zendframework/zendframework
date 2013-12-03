@@ -279,6 +279,14 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                 case 'sqlite':
                     $dsn[] = $database;
                     break;
+                case 'sqlsrv':
+                    if (isset($database)) {
+                        $dsn[] = "database={$database}";
+                    }
+                    if (isset($hostname)) {
+                        $dsn[] = "server={$hostname}";
+                    }
+                    break;
                 default:
                     if (isset($database)) {
                         $dsn[] = "dbname={$database}";

@@ -466,6 +466,15 @@ CODE;
         $this->assertTrue($classGenerator->hasMethod('MethoDonE'));
     }
 
+    public function testRemoveMethodInsensitive()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addMethod('methodOne');
+
+        $classGenerator->removeMethod('METHODONe');
+        $this->assertFalse($classGenerator->hasMethod('methodOne'));
+    }
+
     public function testGenerateClassAndAddMethod()
     {
         $classGenerator = new ClassGenerator();

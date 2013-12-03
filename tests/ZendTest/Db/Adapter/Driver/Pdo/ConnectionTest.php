@@ -42,19 +42,19 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test getConnectedDsn returns a DSN string if it has been set
      *
-     * @covers Zend\Db\Adapter\Driver\Pdo\Connection::getConnectedDsn
+     * @covers Zend\Db\Adapter\Driver\Pdo\Connection::getDsn
      */
-    public function testGetConnectedDsn()
+    public function testGetDsn()
     {
-        $startString = "mysql:host=localhost;dbname=test";
+        $dsn = "sqlite::memory:";
+        $this->connection->setConnectionParameters(array('dsn' => $dsn));
+        try {
+            $this->connection->connect();
+        } catch (\Exception $e) {
 
-        $reflectPdo = new \ReflectionClass($this->connection);
-        $dsnProperty = $reflectPdo->getProperty("connectedDsn");
-        $dsnProperty->setAccessible(true);
-        $dsnProperty->setValue($this->connection, $startString);
+        }
+        $responseString = $this->connection->getDsn();
 
-        $responseString = $this->connection->getConnectedDsn();
-
-        $this->assertEquals($startString, $responseString);
+        $this->assertEquals($dsn, $responseString);
     }
 }

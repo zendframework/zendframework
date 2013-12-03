@@ -86,7 +86,7 @@ class Select extends Element implements InputProviderInterface
 
     /**
      * @param string $key
-     * @return Select
+     * @return self
      */
     public function unsetValueOption($key)
     {

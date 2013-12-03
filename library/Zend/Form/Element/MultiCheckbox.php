@@ -73,7 +73,7 @@ class MultiCheckbox extends Checkbox
 
     /**
      * @param string $key
-     * @return Select
+     * @return self
      */
     public function unsetValueOption($key)
     {

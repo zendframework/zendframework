@@ -184,17 +184,18 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $password = $findParameterValue(array('password'));
         $connectionString = $findParameterValue(array('connection_string', 'connectionstring', 'connection', 'hostname', 'instance'));
         $characterSet = $findParameterValue(array('character_set', 'charset', 'encoding'));
+        $sessionMode = $findParameterValue(array('session_mode'));
 
         // connection modifiers
         $isUnique = $findParameterValue(array('unique'));
         $isPersistent = $findParameterValue(array('persistent'));
 
         if ($isUnique == true) {
-            $this->resource = oci_new_connect($username, $password, $connectionString, $characterSet);
+            $this->resource = oci_new_connect($username, $password, $connectionString, $characterSet, $sessionMode);
         } elseif ($isPersistent == true) {
-            $this->resource = oci_pconnect($username, $password, $connectionString, $characterSet);
+            $this->resource = oci_pconnect($username, $password, $connectionString, $characterSet, $sessionMode);
         } else {
-            $this->resource = oci_connect($username, $password, $connectionString, $characterSet);
+            $this->resource = oci_connect($username, $password, $connectionString, $characterSet, $sessionMode);
         }
 
         if (!$this->resource) {

@@ -38,4 +38,23 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Db\Adapter\Exception\InvalidConnectionParametersException');
         $this->connection->getResource();
     }
+
+    /**
+     * Test getConnectedDsn returns a DSN string if it has been set
+     *
+     * @covers Zend\Db\Adapter\Driver\Pdo\Connection::getDsn
+     */
+    public function testGetDsn()
+    {
+        $dsn = "sqlite::memory:";
+        $this->connection->setConnectionParameters(array('dsn' => $dsn));
+        try {
+            $this->connection->connect();
+        } catch (\Exception $e) {
+
+        }
+        $responseString = $this->connection->getDsn();
+
+        $this->assertEquals($dsn, $responseString);
+    }
 }

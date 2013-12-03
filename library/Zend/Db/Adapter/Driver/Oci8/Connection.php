@@ -184,7 +184,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $password = $findParameterValue(array('password'));
         $connectionString = $findParameterValue(array('connection_string', 'connectionstring', 'connection', 'hostname', 'instance'));
         $characterSet = $findParameterValue(array('character_set', 'charset', 'encoding'));
-        $sessionMode = $findParameterValue(array('session_mode', 'driver_options'));
+        $sessionMode = $findParameterValue(array('session_mode'));
 
         // connection modifiers
         $isUnique = $findParameterValue(array('unique'));

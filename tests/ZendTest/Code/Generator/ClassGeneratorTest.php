@@ -465,4 +465,28 @@ CODE;
         $this->assertTrue($classGenerator->hasMethod('methodOne'));
         $this->assertTrue($classGenerator->hasMethod('MethoDonE'));
     }
+
+    public function testGenerateClassAndAddMethod()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('MyClass');
+        $classGenerator->addMethod('methodOne');
+
+        $expected = <<<CODE
+class MyClass
+{
+
+    public function methodOne()
+    {
+    }
+
+
+}
+
+CODE;
+
+        $output = $classGenerator->generate();
+        $this->assertEquals($expected, $output);
+    }
+
 }

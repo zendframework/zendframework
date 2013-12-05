@@ -22,8 +22,12 @@ class Bcrypt implements PasswordInterface
 
     /**
      * @var string
+     *
+     * Changed from 14 to 10 to prevent possibile DOS attacks
+     * due to the high computational time
+     * @see http://timoh6.github.io/2013/11/26/Aggressive-password-stretching.html
      */
-    protected $cost = '14';
+    protected $cost = '10';
 
     /**
      * @var string

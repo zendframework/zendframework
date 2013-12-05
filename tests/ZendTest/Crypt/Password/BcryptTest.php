@@ -37,7 +37,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         } else {
             $this->prefix = '$2a$';
         }
-        $this->bcryptPassword = $this->prefix . '14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';
+        $this->bcryptPassword = $this->prefix . '10$MTIzNDU2Nzg5MDEyMzQ1Nej0NmcAWSLR.oP7XOR9HD/vjUuOj100y';
     }
 
     public function testConstructByOptions()
@@ -140,7 +140,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $this->bcrypt->setSalt($this->salt);
 
         if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
-            $this->assertEquals('$2y$14$MTIzNDU2Nzg5MDEyMzQ1NexAbOIUHkG6Ra.TK9QxHOVUhDxOe4dkW',
+            $this->assertEquals('$2y$10$MTIzNDU2Nzg5MDEyMzQ1NemFdU/4JOrNpxMym09Mbp0m4hKTgfQo.',
                                 $this->bcrypt->create($password));
         } else {
             $this->setExpectedException('Zend\Crypt\Password\Exception\RuntimeException',

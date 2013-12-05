@@ -95,17 +95,9 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
         }
 
         foreach ($config['writers'] as $index => $writerConfig) {
-            if (!isset($writerConfig['name'])
-                || strtolower($writerConfig['name']) != 'db'
+            if (!isset($writerConfig['options']['db'])
+                || !is_string($writerConfig['options']['db'])
             ) {
-                continue;
-            }
-            if (!isset($writerConfig['options'])
-                || !isset($writerConfig['options']['db'])
-            ) {
-                continue;
-            }
-            if (!is_string($writerConfig['options']['db'])) {
                 continue;
             }
             if (!$services->has($writerConfig['options']['db'])) {

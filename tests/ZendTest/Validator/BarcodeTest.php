@@ -428,6 +428,10 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testCODE128()
     {
+        if (!extension_loaded('iconv')) {
+            $this->markTestSkipped('Missing ext/iconv');
+        }
+
         $barcode = new Barcode('code128');
         $this->assertTrue($barcode->isValid('ˆCODE128:Š'));
         $this->assertTrue($barcode->isValid('‡01231[Š'));

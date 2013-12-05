@@ -17,6 +17,11 @@ DD MMM YYY
 
 ### UPDATES IN 2.3.0
 
+- [#5587](https://github.com/zendframework/zf2/pull/5587) changes the default
+  cost for `Zend\Crypt\Password\Bcrypt` to 10, to keep it consistent with PHP's
+  own default, as well as potentially mitigate DoS vectors (due to high
+  computation cost).
+
 - [#5356](https://github.com/zendframework/zf2/pull/5356) deprecates
   `Zend\Dom\Css2Path::transform` in favor of the new
   `Zend\Dom\Document\Query::cssToXpath`. Additionally, it properly cleans up the

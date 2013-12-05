@@ -11,7 +11,6 @@ namespace Zend\Log\Formatter;
 
 use DateTime;
 use Traversable;
-use Zend\Stdlib\ErrorHandler;
 
 class Base implements FormatterInterface
 {

@@ -84,7 +84,6 @@ class Base implements FormatterInterface
             $jsonFlags |= defined('JSON_UNESCAPED_UNICODE') ? JSON_UNESCAPED_UNICODE : 0;
         }
 
-        ErrorHandler::start();
         if ($value instanceof DateTime) {
             $value = $value->format($this->getDateTimeFormat());
         } elseif ($value instanceof Traversable) {
@@ -98,7 +97,6 @@ class Base implements FormatterInterface
         } elseif (!is_object($value)) {
             $value = gettype($value);
         }
-        ErrorHandler::stop();
 
         return (string) $value;
     }

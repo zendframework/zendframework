@@ -387,14 +387,16 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         fclose($stream);
     }
 
+    /**
+     * @group 5383
+     */
     public function testErrorHandlerWithStreamWriter()
     {
-        $options = array(
-                         'errorhandler' => true,
-                   );
-        $logger = new Logger($options);
-        $stream = fopen('php://memory', 'w+');
+        $options      = array('errorhandler' => true);
+        $logger       = new Logger($options);
+        $stream       = fopen('php://memory', 'w+');
         $streamWriter = new StreamWriter($stream);
+
         // error handler does not like this feature so turn it off
         $streamWriter->setConvertWriteErrorsToExceptions(false);
         $logger->addWriter($streamWriter);

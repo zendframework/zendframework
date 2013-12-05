@@ -18,3 +18,6 @@ after_script:
 notifications:
   irc: "irc.freenode.org#zftalk.dev"
   email: false
+
+matrix:
+  fast_finish: true

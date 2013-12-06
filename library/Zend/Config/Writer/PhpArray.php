@@ -78,7 +78,7 @@ class PhpArray extends AbstractWriter
                 }
             } elseif (is_object($value)) {
                 $arrayString .= var_export($value, true) . ",\n";
-            } else if (is_bool($value)) {
+            } elseif (is_bool($value)) {
                 $arrayString .= ($value ? 'true' : 'false') . ",\n";
             } elseif (is_string($value)) {
                 $arrayString .= "'" . addslashes($value) . "',\n";

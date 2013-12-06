@@ -74,7 +74,7 @@ repository.
 ### Pre-Commit Hook (Optional)
 
 The ZF2 Travis-CI will confirm that code style standards are met
-by using ```php-cs-fixer``` (https://github.com/fabpot/PHP-CS-Fixer) during it's build runs.
+by using ```php-cs-fixer``` (https://github.com/fabpot/PHP-CS-Fixer) during its build runs.
 
 To reduce the number of red Travis-CI builds, the following Git pre-commit hook
 can help catch code style issues before committing. Save it as

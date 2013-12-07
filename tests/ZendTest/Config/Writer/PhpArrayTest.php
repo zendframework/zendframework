@@ -38,6 +38,7 @@ class PhpArrayTest extends AbstractWriterTestCase
             'object' => (object) array('foo' => 'bar'),
             'integer' => 123,
             'boolean' => false,
+            'null' => null,
         ));
 
         $configString = $this->writer->toString($config);
@@ -56,6 +57,7 @@ class PhpArrayTest extends AbstractWriterTestCase
         $expected .= ")),\n";
         $expected .= "    'integer' => 123,\n";
         $expected .= "    'boolean' => false,\n";
+        $expected .= "    'null' => null,\n";
         $expected .= ");\n";
 
         $this->assertEquals($expected, $configString);

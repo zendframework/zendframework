@@ -215,7 +215,7 @@ return array(
     "The input is not a valid ISBN number" => "Isian adalah ISBN number yang tidak valid",
 
     // Zend\Validator\LessThan
-    "The input is not less than '%max%'" => "Isian tidak kurang dengan '%max%'",
+    "The input is not less than '%max%'" => "Isian tidak kurang dari '%max%'",
     "The input is not less or equal than '%max%'" => "Isian tidak kurang atau sama dengan '%max%'",
 
     // Zend\Validator\NotEmpty

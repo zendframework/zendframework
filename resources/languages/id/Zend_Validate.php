@@ -89,30 +89,30 @@ return array(
     "Invalid type given" => "Tipe yang diberikan tidak valid",
 
     // Zend\Validator\File\Count
-    "Too many files, maximum '%max%' are allowed but '%count%' are given" => "Terlalu banyak file, maksimal '%max%' diperbolehkan tetapi '%count%' diberikan",
-    "Too few files, minimum '%min%' are expected but '%count%' are given" => "Terlalu sedikit file, minimal '%min%' diperbolehkan tetapi '%count%' diberikan",
+    "Too many files, maximum '%max%' are allowed but '%count%' are given" => "Terlalu banyak berkas, maksimal '%max%' diperbolehkan tetapi '%count%' diberikan",
+    "Too few files, minimum '%min%' are expected but '%count%' are given" => "Terlalu sedikit berkas, minimal '%min%' diperbolehkan tetapi '%count%' diberikan",
 
     // Zend\Validator\File\Crc32
-    "File does not match the given crc32 hashes" => "File tidak cocok dengan hash crc32 diberikan",
-    "A crc32 hash could not be evaluated for the given file" => "Sebuah hash crc32 tidak dapat dievaluasi untuk file yang diberikan",
-    "File is not readable or does not exist" => "File tidak terbaca atau tidak ada",
+    "File does not match the given crc32 hashes" => "Berkas tidak cocok dengan hash crc32 diberikan",
+    "A crc32 hash could not be evaluated for the given file" => "Sebuah hash crc32 tidak dapat dievaluasi untuk berkas yang diberikan",
+    "File is not readable or does not exist" => "Berkas tidak terbaca atau tidak ada",
 
     // Zend\Validator\File\ExcludeExtension
-    "File has an incorrect extension" => "Ekstensi file salah",
+    "File has an incorrect extension" => "Ekstensi berkas salah",
 
     // Zend\Validator\File\Exists
-    "File does not exist" => "File tidak ada",
+    "File does not exist" => "Berkas tidak ada",
 
     // Zend\Validator\File\Extension
 
     // Zend\Validator\File\FilesSize
-    "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "Semua file yang dijumlahkan harus memiliki ukuran maksimal '%max%' tapi ukuran '%size%' terdeteksi",
-    "All files in sum should have a minimum size of '%min%' but '%size%' were detected" => "Semua file yang dijumlahkan harus memiliki ukuran minimal '%min%' tapi ukuran '%size%' terdeteksi",
-    "One or more files can not be read" => "Satu atau beberapa file tidak dapat dibaca",
+    "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "Semua berkas yang dijumlahkan harus memiliki ukuran maksimal '%max%' tapi ukuran '%size%' terdeteksi",
+    "All files in sum should have a minimum size of '%min%' but '%size%' were detected" => "Semua berkas yang dijumlahkan harus memiliki ukuran minimal '%min%' tapi ukuran '%size%' terdeteksi",
+    "One or more files can not be read" => "Satu atau beberapa berkas tidak dapat dibaca",
 
     // Zend\Validator\File\Hash
-    "File does not match the given hashes" => "File tidak cocok dengan hash yang diberikan",
-    "A hash could not be evaluated for the given file" => "Sebuah hash tidak dapat dievaluasi untuk file yang diberikan",
+    "File does not match the given hashes" => "Berkas tidak cocok dengan hash yang diberikan",
+    "A hash could not be evaluated for the given file" => "Sebuah hash tidak dapat dievaluasi untuk berkas yang diberikan",
 
     // Zend\Validator\File\ImageSize
     "Maximum allowed width for image should be '%maxwidth%' but '%width%' detected" => "Lebar maksimal yang diharapkan untuk gambar seharusnya '%maxwidth%' tetapi '%width%' terdeteksi",
@@ -122,52 +122,52 @@ return array(
     "The size of image could not be detected" => "Ukuran gambar tidak dapat terdeteksi",
 
     // Zend\Validator\File\IsCompressed
-    "File is not compressed, '%type%' detected" => "Bukan file terkompresi, '%type%' terdeteksi",
-    "The mimetype could not be detected from the file" => "Mimetype tidak dapat terdeteksi dari file",
+    "File is not compressed, '%type%' detected" => "Bukan berkas terkompresi, '%type%' terdeteksi",
+    "The mimetype could not be detected from the file" => "Mimetype tidak dapat terdeteksi dari berkas",
 
     // Zend\Validator\File\IsImage
-    "File is no image, '%type%' detected" => "File bukan gambar, '%type%' terdeteksi",
+    "File is no image, '%type%' detected" => "Berkas bukan gambar, '%type%' terdeteksi",
 
     // Zend\Validator\File\Md5
-    "File does not match the given md5 hashes" => "File tidak cocok dengan hash md5 diberikan",
-    "An md5 hash could not be evaluated for the given file" => "Md5 hash tidak dapat dievaluasi dari file yang diberikan",
+    "File does not match the given md5 hashes" => "Berkas tidak cocok dengan hash md5 diberikan",
+    "An md5 hash could not be evaluated for the given file" => "Md5 hash tidak dapat dievaluasi dari berkas yang diberikan",
 
     // Zend\Validator\File\MimeType
-    "File has an incorrect mimetype of '%type%'" => "File mempunyai mimetype yang tidak cocok dengan '%type%'",
+    "File has an incorrect mimetype of '%type%'" => "Berkas mempunyai mimetype yang tidak cocok dengan '%type%'",
 
     // Zend\Validator\File\NotExists
 
     // Zend\Validator\File\Sha1
-    "File does not match the given sha1 hashes" => "File tidak cocok dengan hash sha1 diberikan",
-    "A sha1 hash could not be evaluated for the given file" => "Sebuah hash sha1 tidak dapat dievaluasi untuk file yang diberikan",
+    "File does not match the given sha1 hashes" => "Berkas tidak cocok dengan hash sha1 diberikan",
+    "A sha1 hash could not be evaluated for the given file" => "Sebuah hash sha1 tidak dapat dievaluasi untuk berkas yang diberikan",
 
     // Zend\Validator\File\Size
     "Maximum allowed size for file is '%max%' but '%size%' detected" => "Ukuran maksimal yang diharapkan adalah '%min%' tetapi '%size%' terdeteksi",
     "Minimum expected size for file is '%min%' but '%size%' detected" => "Ukuran minimal yang diharapkan adalah '%min%' tetapi '%size%' terdeteksi",
 
     // Zend\Validator\File\Upload
-    "File '%value%' exceeds the defined ini size" => "File '%value%' melebihi ukuran ini yang didefinisikan",
-    "File '%value%' exceeds the defined form size" => "File '%value%' melebihi ukuran form yang didefinisikan",
-    "File '%value%' was only partially uploaded" => "File '%value%' hanya sebagian terupload",
-    "File '%value%' was not uploaded" => "File '%value%' tidak dapat terupload",
-    "No temporary directory was found for file '%value%'" => "Tidak ada direktori sementara ditemukan file '%value%'",
-    "File '%value%' can't be written" => "File '%value%' tidak dapat ditulis",
-    "A PHP extension returned an error while uploading the file '%value%'" => "Ekstensi PHP mengembalikan error pada saat upload file '%value%'",
-    "File '%value%' was illegally uploaded. This could be a possible attack" => "File '%value%' secara ilegal diunggah. Hal ini bisa menjadi kemungkinan serangan",
-    "File '%value%' was not found" => "File '%value%' tidak ditemukan",
-    "Unknown error while uploading file '%value%'" => "Error tidak diketahui pada saat proses mengupload file '%value%'",
+    "File '%value%' exceeds the defined ini size" => "Berkas '%value%' melebihi ukuran ini yang didefinisikan",
+    "File '%value%' exceeds the defined form size" => "Berkas '%value%' melebihi ukuran form yang didefinisikan",
+    "File '%value%' was only partially uploaded" => "Berkas '%value%' hanya sebagian terupload",
+    "File '%value%' was not uploaded" => "Berkas '%value%' tidak dapat terupload",
+    "No temporary directory was found for file '%value%'" => "Tidak ada direktori sementara ditemukan berkas '%value%'",
+    "File '%value%' can't be written" => "Berkas '%value%' tidak dapat ditulis",
+    "A PHP extension returned an error while uploading the file '%value%'" => "Ekstensi PHP mengembalikan error pada saat upload berkas '%value%'",
+    "File '%value%' was illegally uploaded. This could be a possible attack" => "Berkas '%value%' secara ilegal diunggah. Hal ini bisa menjadi kemungkinan serangan",
+    "File '%value%' was not found" => "Berkas '%value%' tidak ditemukan",
+    "Unknown error while uploading file '%value%'" => "Error tidak diketahui pada saat proses mengupload berkas '%value%'",
 
     // Zend\Validator\File\UploadFile
-    "File exceeds the defined ini size" => "File melebihi ukuran ini yang didefinisikan",
-    "File exceeds the defined form size" => "File melebihi ukuran form yang didefinisikan",
-    "File was only partially uploaded" => "File hanya sebagian terupload",
-    "File was not uploaded" => "File tidak dapat terupload",
-    "No temporary directory was found for file" => "Tidak ada direktori sementara ditemukan file",
-    "File can't be written" => "File tidak dapat ditulis",
-    "A PHP extension returned an error while uploading the file" => "Ekstensi PHP mengembalikan error pada saat upload file",
-    "File was illegally uploaded. This could be a possible attack" => "File secara ilegal diunggah. Hal ini bisa menjadi kemungkinan serangan",
-    "File was not found" => "File tidak ditemukan",
-    "Unknown error while uploading file" => "Error tidak diketahui pada saat unggah file",
+    "File exceeds the defined ini size" => "Berkas melebihi ukuran ini yang didefinisikan",
+    "File exceeds the defined form size" => "Berkas melebihi ukuran form yang didefinisikan",
+    "File was only partially uploaded" => "Berkas hanya sebagian terupload",
+    "File was not uploaded" => "Berkas tidak dapat terupload",
+    "No temporary directory was found for file" => "Tidak ada direktori sementara ditemukan berkas",
+    "File can't be written" => "Berkas tidak dapat ditulis",
+    "A PHP extension returned an error while uploading the file" => "Ekstensi PHP mengembalikan error pada saat upload berkas",
+    "File was illegally uploaded. This could be a possible attack" => "Berkas secara ilegal diunggah. Hal ini bisa menjadi kemungkinan serangan",
+    "File was not found" => "Berkas tidak ditemukan",
+    "Unknown error while uploading file" => "Error tidak diketahui pada saat unggah berkas",
 
     // Zend\Validator\File\WordCount
     "Too many words, maximum '%max%' are allowed but '%count%' were counted" => "Terlalu banyak kata, maksimal '%min%' diharapkan tetapi '%count%' terdeteksi",

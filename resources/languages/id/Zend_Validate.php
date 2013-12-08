@@ -8,7 +8,7 @@
  */
 
 /**
- * EN-Revision: 16.Jul.2013
+ * ID-Revision: 08.Dec.2013
  */
 return array(
     // Zend\I18n\Validator\Alnum

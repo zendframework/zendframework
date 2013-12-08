@@ -16,7 +16,7 @@ return array(
     "Failed to validate captcha" => "Gagal memvalidasi captcha",
     "Captcha value is wrong: %value%" => "Nilai captcha salah: %value%",
 
-    // Zend\Captcha\Word
+    // Zend\Captcha\AbstractWord
     "Empty captcha value" => "Nilai captcha kosong",
     "Captcha ID field is missing" => "Bidang Captcha ID tidak ada",
     "Captcha value is wrong" => "Nilai Captcha salah",

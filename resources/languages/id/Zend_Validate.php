@@ -224,7 +224,7 @@ return array(
 
     // Zend\Validator\Regex
     "The input does not match against pattern '%pattern%'" => "Isian tidak cocok dengan pola '%pattern%'",
-    "There was an internal error while using the pattern '%pattern%'" => "Terjadi kesalahan internal saat menggunakan pola pola '%pattern%'",
+    "There was an internal error while using the pattern '%pattern%'" => "Terjadi kesalahan internal saat menggunakan pola '%pattern%'",
 
     // Zend\Validator\Sitemap\Changefreq
     "The input is not a valid sitemap changefreq" => "Isian adalah changefreq sitemap yang tidak valid",

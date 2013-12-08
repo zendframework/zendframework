@@ -366,4 +366,23 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($expectedEvent['file'], $event['extra']['file'], 'Unexpected file');
         }
     }
+
+    public function testLogExtraArrayKey()
+    {
+        $stream = fopen("php://memory", "r");
+        $options = array(
+            'writers' => array(
+                array(
+                    'name'     => 'stream',
+                    'options'  => array(
+                        'stream' => $stream
+                    ),
+                ),
+            ),
+        );
+        $logger = new Logger($options);
+
+        $this->assertInstanceOf('Zend\Log\Logger', $logger->info('Hi', array('extra' => '')));
+        fclose($stream);
+    }
 }

@@ -157,4 +157,20 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($outputExpected, $formatter->format($event));
     }
+
+    public function testFormatNonArrayExtrakey()
+    {
+        $formatter = new BaseFormatter();
+
+        $event = array(
+            'message'   => 'Hi',
+            'extra'     => '',
+        );
+        $outputExpected = array(
+            'message' => 'Hi',
+            'extra'   =>  '',
+        );
+
+        $this->assertEquals($outputExpected, $formatter->format($event));
+    }
 }

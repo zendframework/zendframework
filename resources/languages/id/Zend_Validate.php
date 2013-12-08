@@ -152,10 +152,10 @@ return array(
     "File '%value%' was not uploaded" => "Berkas '%value%' tidak dapat terupload",
     "No temporary directory was found for file '%value%'" => "Tidak ada direktori sementara ditemukan berkas '%value%'",
     "File '%value%' can't be written" => "Berkas '%value%' tidak dapat ditulis",
-    "A PHP extension returned an error while uploading the file '%value%'" => "Ekstensi PHP mengembalikan error pada saat upload berkas '%value%'",
+    "A PHP extension returned an error while uploading the file '%value%'" => "Ekstensi PHP mengembalikan galat pada saat upload berkas '%value%'",
     "File '%value%' was illegally uploaded. This could be a possible attack" => "Berkas '%value%' secara ilegal diunggah. Hal ini bisa menjadi kemungkinan serangan",
     "File '%value%' was not found" => "Berkas '%value%' tidak ditemukan",
-    "Unknown error while uploading file '%value%'" => "Error tidak diketahui pada saat proses mengupload berkas '%value%'",
+    "Unknown error while uploading file '%value%'" => "Galat tidak diketahui pada saat proses mengupload berkas '%value%'",
 
     // Zend\Validator\File\UploadFile
     "File exceeds the defined ini size" => "Berkas melebihi ukuran ini yang didefinisikan",
@@ -164,10 +164,10 @@ return array(
     "File was not uploaded" => "Berkas tidak dapat terupload",
     "No temporary directory was found for file" => "Tidak ada direktori sementara ditemukan berkas",
     "File can't be written" => "Berkas tidak dapat ditulis",
-    "A PHP extension returned an error while uploading the file" => "Ekstensi PHP mengembalikan error pada saat upload berkas",
+    "A PHP extension returned an error while uploading the file" => "Ekstensi PHP mengembalikan galat pada saat upload berkas",
     "File was illegally uploaded. This could be a possible attack" => "Berkas secara ilegal diunggah. Hal ini bisa menjadi kemungkinan serangan",
     "File was not found" => "Berkas tidak ditemukan",
-    "Unknown error while uploading file" => "Error tidak diketahui pada saat unggah berkas",
+    "Unknown error while uploading file" => "Galat tidak diketahui pada saat unggah berkas",
 
     // Zend\Validator\File\WordCount
     "Too many words, maximum '%max%' are allowed but '%count%' were counted" => "Terlalu banyak kata, maksimal '%min%' diharapkan tetapi '%count%' terdeteksi",
@@ -224,7 +224,7 @@ return array(
 
     // Zend\Validator\Regex
     "The input does not match against pattern '%pattern%'" => "Isian tidak cocok dengan pola '%pattern%'",
-    "There was an internal error while using the pattern '%pattern%'" => "Terjadi kesalahan internal saat menggunakan pola '%pattern%'",
+    "There was an internal error while using the pattern '%pattern%'" => "Terjadi galat internal saat menggunakan pola '%pattern%'",
 
     // Zend\Validator\Sitemap\Changefreq
     "The input is not a valid sitemap changefreq" => "Isian adalah changefreq sitemap yang tidak valid",

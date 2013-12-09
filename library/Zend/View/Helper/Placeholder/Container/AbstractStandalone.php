@@ -169,7 +169,6 @@ abstract class AbstractStandalone extends AbstractHelper implements
         if ($this->getView() instanceof RendererInterface
             && method_exists($this->getView(), 'getEncoding')
         ) {
-            $enc     = $this->getView()->getEncoding();
             $escaper = $this->getView()->plugin('escapeHtml');
             return $escaper((string) $string);
         }

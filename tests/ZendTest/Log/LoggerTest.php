@@ -369,7 +369,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testLogExtraArrayKeyWithNonArrayValue()
     {
-        $stream = fopen("php://memory", "r");
+        $stream = fopen("php://memory", "r+");
         $options = array(
             'writers' => array(
                 array(

@@ -17,6 +17,23 @@ DD MMM YYY
 
 ### UPDATES IN 2.3.0
 
+This release ups the minimum required PHP version from 5.3.3 to **5.3.23**.
+Making this change affords the following:
+
+- 5.3.9 and up have a fix that allows a class to implement multiple interfaces
+  that define the same method, so long as the signatures are compatible. Prior
+  to that version, doing so raised a fatal error. This change is necessary in
+  order to solve a problem with separated interface usage in the framework.
+
+- 5.3.23 contains a [PHP bug #62672](https://bugs.php.net/bug.php?id=52861).
+  Adopting this version or greater will allow us to (eventually) remove polyfill
+  support that works around the symptoms of that issue.
+
+As always, the Zend Framework project strongly recommends using the latest
+version of PHP available to ensure you have the latest security fixes.
+
+Additional updates that may affect existing applications include:
+
 - [#5587](https://github.com/zendframework/zf2/pull/5587) changes the default
   cost for `Zend\Crypt\Password\Bcrypt` to 10, to keep it consistent with PHP's
   own default, as well as potentially mitigate DoS vectors (due to high

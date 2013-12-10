@@ -92,8 +92,8 @@ class DotNetTest extends PHPUnit_Framework_TestCase
      */
     public function testDefaultSoapClientRequestIsDoneWhenNotUsingNtlmAuthentication()
     {
-        if (version_compare(phpversion(), '5.5.6', '=')) {
-            $this->markTestSkipped('This test is incompatible with PHP 5.5.6 only, causes segfault.');
+        if (version_compare(phpversion(), '5.5.6', '=') || version_compare(phpversion(), '5.5.7', '=')) {
+            $this->markTestSkipped('This test is incompatible with PHP 5.5.6-7 only, causes segfault.');
         }
 
         $soapClient = $this->getMock('Zend\Soap\Client\Common',

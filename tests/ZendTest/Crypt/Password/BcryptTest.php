@@ -32,11 +32,8 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $this->bcrypt   = new Bcrypt();
         $this->salt     = '1234567890123456';
         $this->password = 'test';
-        if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
-            $this->prefix = '$2y$';
-        } else {
-            $this->prefix = '$2a$';
-        }
+        $this->prefix = '$2y$';
+        
         $this->bcryptPassword = $this->prefix . '10$MTIzNDU2Nzg5MDEyMzQ1Nej0NmcAWSLR.oP7XOR9HD/vjUuOj100y';
     }
 
@@ -129,8 +126,6 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
                 'backwards compatibility settings.'
             );
             $this->bcrypt->verify('test', $hash);
-        } else {
-            $this->markTestSkipped('Test requires PHP which does not support $2y hashes (<5.3.7)');
         }
     }
 
@@ -139,17 +134,8 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $password = 'test' . chr(128);
         $this->bcrypt->setSalt($this->salt);
 
-        if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
-            $this->assertEquals('$2y$10$MTIzNDU2Nzg5MDEyMzQ1NemFdU/4JOrNpxMym09Mbp0m4hKTgfQo.',
+        $this->assertEquals('$2y$10$MTIzNDU2Nzg5MDEyMzQ1NemFdU/4JOrNpxMym09Mbp0m4hKTgfQo.',
                                 $this->bcrypt->create($password));
-        } else {
-            $this->setExpectedException('Zend\Crypt\Password\Exception\RuntimeException',
-                'The bcrypt implementation used by PHP can contain a security flaw ' .
-                'using password with 8-bit character. ' .
-                'We suggest to upgrade to PHP 5.3.7+ or use passwords with only 7-bit characters'
-            );
-            $output = $this->bcrypt->create($password);
-        }
     }
 
     public function testSetBackwardCompatibility()

@@ -13,7 +13,7 @@
     },
     "target-dir": "Zend/Cache",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-servicemanager": "self.version",
         "zendframework/zend-eventmanager": "self.version"

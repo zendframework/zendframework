@@ -13,7 +13,7 @@
     },
     "target-dir": "Zend/Http",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-loader": "self.version",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-uri": "self.version",

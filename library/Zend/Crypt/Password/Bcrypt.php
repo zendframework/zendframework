@@ -121,22 +121,6 @@ class Bcrypt implements PasswordInterface
         if ($result === $hash) {
             return true;
         }
-        if (strlen($result) <= 13) {
-            /* This should only happen if the algorithm that generated hash is
-             * either unsupported by this version of crypt(), or is invalid.
-             *
-             * An example of when this can happen, is if you generate
-             * non-backwards-compatible hashes on 5.3.7+, and then try to verify
-             * them on < 5.3.7.
-             *
-             * This is needed, because version comparisons are not possible due
-             * to back-ported functionality by some distributions.
-             */
-            throw new Exception\RuntimeException(
-                'The supplied password hash could not be verified. Please check ' .
-                'backwards compatibility settings.'
-            );
-        }
         return false;
     }
 

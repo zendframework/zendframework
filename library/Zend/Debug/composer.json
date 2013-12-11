@@ -13,7 +13,7 @@
     },
     "target-dir": "Zend/Debug",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.23"
     },
     "require-dev": {
         "zendframework/zend-escaper": "*"

@@ -42,6 +42,7 @@ class SessionConfig extends StandardConfig
      * @var array Valid cache limiters (per session.cache_limiter)
      */
     protected $validCacheLimiters = array(
+        '',
         'nocache',
         'public',
         'private',
@@ -65,8 +66,8 @@ class SessionConfig extends StandardConfig
     /**
      * Set storage option in backend configuration store
      *
-     * @param  string $storageName
-     * @param  mixed $storageValue
+     * @param  string                             $storageName
+     * @param  mixed                              $storageValue
      * @return SessionConfig
      * @throws Exception\InvalidArgumentException
      */
@@ -90,6 +91,7 @@ class SessionConfig extends StandardConfig
             throw new Exception\InvalidArgumentException("'" . $key .
                     "' is not a valid sessions-related ini setting.");
         }
+
         return $this;
     }
 
@@ -124,7 +126,7 @@ class SessionConfig extends StandardConfig
     /**
      * Set session.save_handler
      *
-     * @param  string $phpSaveHandler
+     * @param  string                             $phpSaveHandler
      * @return SessionConfig
      * @throws Exception\InvalidArgumentException
      */
@@ -141,13 +143,14 @@ class SessionConfig extends StandardConfig
         }
 
         $this->setOption('save_handler', $phpSaveHandler);
+
         return $this;
     }
 
     /**
      * Set session.save_path
      *
-     * @param  string $savePath
+     * @param  string                             $savePath
      * @return SessionConfig
      * @throws Exception\InvalidArgumentException on invalid path
      */
@@ -158,14 +161,14 @@ class SessionConfig extends StandardConfig
         }
         $this->savePath = $savePath;
         $this->setOption('save_path', $savePath);
+
         return $this;
     }
-
 
     /**
      * Set session.serialize_handler
      *
-     * @param  string $serializeHandler
+     * @param  string                             $serializeHandler
      * @return SessionConfig
      * @throws Exception\InvalidArgumentException
      */
@@ -181,6 +184,7 @@ class SessionConfig extends StandardConfig
         }
 
         $this->serializeHandler = (string) $serializeHandler;
+
         return $this;
     }
 
@@ -201,13 +205,14 @@ class SessionConfig extends StandardConfig
         }
         $this->setOption('cache_limiter', $cacheLimiter);
         ini_set('session.cache_limiter', $cacheLimiter);
+
         return $this;
     }
 
     /**
      * Set session.hash_function
      *
-     * @param  string|int $hashFunction
+     * @param  string|int                         $hashFunction
      * @return SessionConfig
      * @throws Exception\InvalidArgumentException
      */
@@ -221,13 +226,14 @@ class SessionConfig extends StandardConfig
 
         $this->setOption('hash_function', $hashFunction);
         ini_set('session.hash_function', $hashFunction);
+
         return $this;
     }
 
     /**
      * Set session.hash_bits_per_character
      *
-     * @param  int $hashBitsPerCharacter
+     * @param  int                                $hashBitsPerCharacter
      * @return SessionConfig
      * @throws Exception\InvalidArgumentException
      */
@@ -242,6 +248,7 @@ class SessionConfig extends StandardConfig
         $hashBitsPerCharacter = (int) $hashBitsPerCharacter;
         $this->setOption('hash_bits_per_character', $hashBitsPerCharacter);
         ini_set('session.hash_bits_per_character', $hashBitsPerCharacter);
+
         return $this;
     }
 
@@ -260,13 +267,14 @@ class SessionConfig extends StandardConfig
              */
             $this->validHashFunctions = array('0', '1') + hash_algos();
         }
+
         return $this->validHashFunctions;
     }
 
     /**
      * Handle PHP errors
      *
-     * @param  int $code
+     * @param  int    $code
      * @param  string $message
      * @return void
      */

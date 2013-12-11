@@ -9,20 +9,7 @@
 
 namespace Zend\Stdlib;
 
-/**
- * If the version is less than 5.3.4, we'll use Zend\Stdlib\ArrayObject\PhpLegacyCompatibility
- * which extends the native PHP ArrayObject implementation. For versions greater than or equal
- * to 5.3.4, we'll use Zend\Stdlib\ArrayObject\PhpReferenceCompatibility, which corrects
- * issues with how PHP handles references inside ArrayObject.
- *
- * class_alias is a global construct, so we can alias either one to Zend\Stdlib\ArrayObject,
- * and from this point forward, that alias will be used.
- */
-if (PHP_VERSION_ID < 50304) {
-    class_alias('Zend\Stdlib\ArrayObject\PhpLegacyCompatibility', 'Zend\Stdlib\AbstractArrayObject');
-} else {
-    class_alias('Zend\Stdlib\ArrayObject\PhpReferenceCompatibility', 'Zend\Stdlib\AbstractArrayObject');
-}
+class_alias('Zend\Stdlib\ArrayObject\PhpReferenceCompatibility', 'Zend\Stdlib\AbstractArrayObject');
 
 /**
  * Custom framework ArrayObject implementation

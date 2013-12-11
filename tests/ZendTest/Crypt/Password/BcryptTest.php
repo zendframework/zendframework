@@ -33,7 +33,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $this->salt     = '1234567890123456';
         $this->password = 'test';
         $this->prefix = '$2y$';
-        
+
         $this->bcryptPassword = $this->prefix . '10$MTIzNDU2Nzg5MDEyMzQ1Nej0NmcAWSLR.oP7XOR9HD/vjUuOj100y';
     }
 

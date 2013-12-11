@@ -9,7 +9,7 @@
 
 namespace Zend\Session;
 
-class_alias('Zend\Session\Container\PhpReferenceCompatibility', 'Zend\Session\AbstractBaseContainer');
+use Zend\Session\Container\PhpReferenceCompatibility;
 
 /**
  * Session storage container
@@ -19,6 +19,6 @@ class_alias('Zend\Session\Container\PhpReferenceCompatibility', 'Zend\Session\Ab
  * Additionally, expiries may be absolute TTLs or measured in "hops", which
  * are based on how many times the key or container were accessed.
  */
-class Container extends AbstractBaseContainer
+class Container extends PhpReferenceCompatibility
 {
 }

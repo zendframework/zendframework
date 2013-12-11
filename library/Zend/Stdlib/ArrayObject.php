@@ -9,13 +9,13 @@
 
 namespace Zend\Stdlib;
 
-class_alias('Zend\Stdlib\ArrayObject\PhpReferenceCompatibility', 'Zend\Stdlib\AbstractArrayObject');
+use Zend\Stdlib\ArrayObject\PhpReferenceCompatibility;
 
 /**
  * Custom framework ArrayObject implementation
  *
  * Extends version-specific "abstract" implementation.
  */
-class ArrayObject extends AbstractArrayObject
+class ArrayObject extends PhpReferenceCompatibility
 {
 }

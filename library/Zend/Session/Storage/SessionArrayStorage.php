@@ -9,11 +9,11 @@
 
 namespace Zend\Session\Storage;
 
-class_alias('Zend\Session\Storage\SessionArrayStorage\PhpReferenceCompatibility', 'Zend\Session\Storage\AbstractBaseSessionArrayStorage');
+use Zend\Session\Storage\SessionArrayStorage\PhpReferenceCompatibility;
 
 /**
  * Session storage in $_SESSION
  */
-class SessionArrayStorage extends AbstractBaseSessionArrayStorage
+class SessionArrayStorage extends PhpReferenceCompatibility
 {
 }

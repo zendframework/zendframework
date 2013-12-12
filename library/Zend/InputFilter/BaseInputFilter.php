@@ -18,7 +18,11 @@ use Zend\Stdlib\InitializableInterface;
  * @todo       How should we deal with required input when data is missing?
  *             should a message be returned? if so, what message?
  */
-class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInterface, InitializableInterface
+class BaseInputFilter implements
+    InputFilterInterface,
+    UnknownInputsCapableInterface,
+    InitializableInterface,
+    ReplaceableInputInterface
 {
     protected $data;
     protected $inputs = array();

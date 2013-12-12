@@ -18,6 +18,7 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\InputFilter\InputProviderInterface;
+use Zend\InputFilter\ReplaceableInputInterface;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
@@ -778,7 +779,7 @@ class Form extends Fieldset implements FormInterface
                     $spec  = $element->getInputSpecification();
                     $input = $inputFactory->createInput($spec);
 
-                    if ($inputFilter->has($name)) {
+                    if ($inputFilter->has($name) && $inputFilter instanceof ReplaceableInputInterface) {
                         $input->merge($inputFilter->get($name));
                         $inputFilter->replace($input, $name);
                         continue;

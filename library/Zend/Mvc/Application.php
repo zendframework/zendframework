@@ -247,10 +247,13 @@ class Application implements
     public static function init($configuration = array())
     {
         $smConfig = isset($configuration['service_manager']) ? $configuration['service_manager'] : array();
-        $listeners = isset($configuration['listeners']) ? $configuration['listeners'] : array();
         $serviceManager = new ServiceManager(new Service\ServiceManagerConfig($smConfig));
         $serviceManager->setService('ApplicationConfig', $configuration);
         $serviceManager->get('ModuleManager')->loadModules();
+
+        $config    = $this->getConfig();
+        $listeners = isset($config['listeners']) ? $config['listeners'] : array();
+
         return $serviceManager->get('Application')->bootstrap($listeners);
     }
 

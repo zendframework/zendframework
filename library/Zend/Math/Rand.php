@@ -130,13 +130,21 @@ abstract class Rand
                 'The supplied range is too great to generate'
             );
         }
-        $log    = log($range, 2);
-        $bytes  = (int) ($log / 8) + 1;
-        $bits   = (int) $log + 1;
-        $filter = (int) (1 << $bits) - 1;
+
+        // calculate number of bits required to store range on this machine
+        $r = $range;
+        $bits = 0;
+        while ($r >>= 1) {
+            $bits++;
+        }
+
+        $bits   = (int) max($bits, 1);
+        $bytes  = (int) max(ceil($bits / 8), 1);
+        $filter = (int) ((1 << $bits) - 1);
+
         do {
-            $rnd = hexdec(bin2hex(self::getBytes($bytes, $strong)));
-            $rnd = $rnd & $filter;
+            $rnd  = hexdec(bin2hex(self::getBytes($bytes, $strong)));
+            $rnd &= $filter;
         } while ($rnd > $range);
 
         return ($min + $rnd);

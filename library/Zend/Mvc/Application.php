@@ -251,7 +251,7 @@ class Application implements
         $serviceManager->setService('ApplicationConfig', $configuration);
         $serviceManager->get('ModuleManager')->loadModules();
 
-        $config    = $this->getConfig();
+        $config    = $serviceManager->get('Config');
         $listeners = isset($config['listeners']) ? $config['listeners'] : array();
 
         return $serviceManager->get('Application')->bootstrap($listeners);

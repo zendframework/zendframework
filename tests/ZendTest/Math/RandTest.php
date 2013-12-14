@@ -98,6 +98,16 @@ class RandTest extends \PHPUnit_Framework_TestCase
         $rand = Rand::getInteger(100, 0);
     }
 
+    public function testIntegerRangeOverflow()
+    {
+        $x = Rand::getInteger(0, PHP_INT_MAX);
+        for ($i = 0; $i < 5; $i++) {
+            $x ^= Rand::getInteger(0, PHP_INT_MAX);
+        }
+
+        $this->assertFalse($x === 0);
+    }
+
     public function testRandFloat()
     {
         for ($length = 1; $length < 512; $length++) {

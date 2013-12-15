@@ -359,7 +359,7 @@ class CaptureCache extends AbstractPattern
 
                 if (!$res) {
                     $oct = ($perm === false) ? '777' : decoct($perm);
-                    $err = ErrorHandler::stop();
+                    ErrorHandler::stop();
                     throw new Exception\RuntimeException(
                         "mkdir('{$path}', 0{$oct}, false) failed"
                     );
@@ -367,7 +367,7 @@ class CaptureCache extends AbstractPattern
 
                 if ($perm !== false && !chmod($path, $perm)) {
                     $oct = decoct($perm);
-                    $err = ErrorHandler::stop();
+                    ErrorHandler::stop();
                     throw new Exception\RuntimeException(
                         "chmod('{$path}', 0{$oct}) failed"
                     );

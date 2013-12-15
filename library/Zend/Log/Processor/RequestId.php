@@ -21,7 +21,7 @@ class RequestId implements ProcessorInterface
     protected $identifier;
 
     /**
-     * Adds a identifier for the request to the log.
+     * Adds an identifier for the request to the log.
      *
      * This enables to filter the log for messages belonging to a specific request
      *

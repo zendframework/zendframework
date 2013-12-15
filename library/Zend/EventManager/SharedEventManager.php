@@ -109,7 +109,7 @@ class SharedEventManager implements
     /**
      * Detach a listener aggregate
      *
-     * Listener aggregates accept an SharedEventManagerInterface instance, and call detachShared()
+     * Listener aggregates accept a SharedEventManagerInterface instance, and call detachShared()
      * of all previously attached listeners.
      *
      * @param  SharedListenerAggregateInterface $aggregate

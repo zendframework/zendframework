@@ -323,7 +323,7 @@ class Cookies
 
     /**
      * Create a new Cookies object and automatically load into it all the
-     * cookies set in an Http_Response object. If $uri is set, it will be
+     * cookies set in an \Zend\Http\Response object. If $uri is set, it will be
      * considered as the requested URI for setting default domain and path
      * of the cookie.
      *
@@ -382,7 +382,7 @@ class Cookies
 
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>
-     * Whether a offset exists
+     * Whether an offset exists
      * @link http://php.net/manual/en/arrayaccess.offsetexists.php
      * @param mixed $offset <p>
      * An offset to check for.

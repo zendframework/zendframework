@@ -176,7 +176,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test a invalid service class
+     * Test an invalid service class
      *
      * @return void
      */

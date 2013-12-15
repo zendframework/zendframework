@@ -67,7 +67,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($httpClient, $xmlrpcClient->getHttpClient());
     }
 
-    public function testSettingHttpClientViaContructor()
+    public function testSettingHttpClientViaConstructor()
     {
         $xmlrpcClient = new Client('http://foo', $this->httpClient);
         $httpClient   = $xmlrpcClient->getHttpClient();

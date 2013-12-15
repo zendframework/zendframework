@@ -163,7 +163,7 @@ class MboxFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Mbox($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
-        // we search for this folder because we can't assume a order while iterating
+        // we search for this folder because we can't assume an order while iterating
         $search_folders = array(DIRECTORY_SEPARATOR . 'subfolder'                                => 'subfolder',
                                 DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test' => 'test',
                                 DIRECTORY_SEPARATOR . 'INBOX'                                    => 'INBOX');
@@ -185,7 +185,7 @@ class MboxFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Mbox($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
-        // we search for this folder because we can't assume a order while iterating
+        // we search for this folder because we can't assume an order while iterating
         $search_folders = array(DIRECTORY_SEPARATOR . 'subfolder'                                => 'subfolder',
                                 DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test' => 'test',
                                 DIRECTORY_SEPARATOR . 'INBOX'                                    => 'INBOX');

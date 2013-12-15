@@ -194,7 +194,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
     }
 
     /**
-     * Trigger an pre event and return the event response collection
+     * Trigger a pre event and return the event response collection
      *
      * @param  string $eventName
      * @param  ArrayObject $args

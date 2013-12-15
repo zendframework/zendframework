@@ -94,7 +94,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testBasicChallenge()
     {
-        // Trying to authenticate without sending an Proxy-Authorization header
+        // Trying to authenticate without sending a Proxy-Authorization header
         // should result in a 407 reply with a Proxy-Authenticate header, and a
         // false result.
 
@@ -110,7 +110,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testDigestChallenge()
     {
-        // Trying to authenticate without sending an Proxy-Authorization header
+        // Trying to authenticate without sending a Proxy-Authorization header
         // should result in a 407 reply with a Proxy-Authenticate header, and a
         // false result.
 
@@ -123,7 +123,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testBothChallenges()
     {
-        // Trying to authenticate without sending an Proxy-Authorization header
+        // Trying to authenticate without sending a Proxy-Authorization header
         // should result in a 407 reply with at least one Proxy-Authenticate
         // header, and a false result.
 

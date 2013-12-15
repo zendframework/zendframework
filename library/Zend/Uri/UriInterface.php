@@ -10,7 +10,7 @@
 namespace Zend\Uri;
 
 /**
- * Interface defining an URI
+ * Interface defining a URI
  */
 interface UriInterface
 {

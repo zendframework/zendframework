@@ -65,7 +65,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->httpClient, $jsonClient->getHttpClient());
     }
 
-    public function testSettingHttpClientViaContructor()
+    public function testSettingHttpClientViaConstructor()
     {
         $jsonClient = new Client('http://foo', $this->httpClient);
         $httpClient   = $jsonClient->getHttpClient();

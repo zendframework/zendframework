@@ -64,7 +64,7 @@ class Size extends AbstractValidator
     /**
      * Sets validator options
      *
-     * If $options is a integer, it will be used as maximum file size
+     * If $options is an integer, it will be used as maximum file size
      * As Array is accepts the following keys:
      * 'min': Minimum file size
      * 'max': Maximum file size
@@ -131,7 +131,7 @@ class Size extends AbstractValidator
     /**
      * Sets the minimum file size
      *
-     * File size can be an integer or an byte string
+     * File size can be an integer or a byte string
      * This includes 'B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'
      * For example: 2000, 2MB, 0.2GB
      *
@@ -176,7 +176,7 @@ class Size extends AbstractValidator
     /**
      * Sets the maximum file size
      *
-     * File size can be an integer or an byte string
+     * File size can be an integer or a byte string
      * This includes 'B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'
      * For example: 2000, 2MB, 0.2GB
      *

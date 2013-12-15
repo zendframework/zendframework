@@ -156,7 +156,7 @@ class IbmDb2 implements DriverInterface, Profiler\ProfilerAwareInterface
                 $statement->setSql($sqlOrResource);
             } elseif ($sqlOrResource !== null) {
                 throw new Exception\InvalidArgumentException(
-                    __FUNCTION__ . ' only accepts an SQL string or a ibm_db2 resource'
+                    __FUNCTION__ . ' only accepts an SQL string or an ibm_db2 resource'
                 );
             }
             if (!$this->connection->isConnected()) {

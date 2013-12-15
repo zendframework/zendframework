@@ -13,7 +13,7 @@ namespace Zend\EventManager;
  * Interface for self-registering event listeners.
  *
  * Classes implementing this interface may be registered by name or instance
- * with an SharedEventManager, without an event name. The {@link attach()} method will
+ * with a SharedEventManager, without an event name. The {@link attach()} method will
  * then be called with the current SharedEventManager instance, allowing the class to
  * wire up one or more listeners.
  */

@@ -413,7 +413,7 @@ class Filesystem extends AbstractAdapter implements
                     $events->detach($handle);
                 }
             };
-            $handle = $events->attach('option', $callback);
+            $events->attach('option', $callback);
         }
 
         return $this->totalSpace;
@@ -536,7 +536,6 @@ class Filesystem extends AbstractAdapter implements
      */
     protected function internalGetItems(array & $normalizedKeys)
     {
-        $options = $this->getOptions();
         $keys    = $normalizedKeys; // Don't change argument passed by reference
         $result  = array();
         while ($keys) {
@@ -1467,7 +1466,7 @@ class Filesystem extends AbstractAdapter implements
 
                 if (!$res) {
                     $oct = ($perm === false) ? '777' : decoct($perm);
-                    $err = ErrorHandler::stop();
+                    ErrorHandler::stop();
                     throw new Exception\RuntimeException(
                         "mkdir('{$path}', 0{$oct}, false) failed"
                     );
@@ -1475,7 +1474,7 @@ class Filesystem extends AbstractAdapter implements
 
                 if ($perm !== false && !chmod($path, $perm)) {
                     $oct = decoct($perm);
-                    $err = ErrorHandler::stop();
+                    ErrorHandler::stop();
                     throw new Exception\RuntimeException(
                         "chmod('{$path}', 0{$oct}) failed"
                     );

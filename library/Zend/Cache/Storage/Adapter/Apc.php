@@ -601,7 +601,6 @@ class Apc extends AbstractAdapter implements
         $namespace   = $options->getNamespace();
         $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
-        $ttl         = $options->getTtl();
         $value       = (int) $value;
         $newValue    = apc_inc($internalKey, $value);
 

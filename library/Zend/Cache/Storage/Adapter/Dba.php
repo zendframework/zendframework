@@ -142,7 +142,7 @@ class Dba extends AbstractAdapter implements
                     $events->detach($handle);
                 }
             };
-            $handle = $events->attach('option', $callback);
+            $events->attach('option', $callback);
         }
 
         return $this->totalSpace;

@@ -105,7 +105,7 @@ class PropertyGeneratorTest extends \PHPUnit_Framework_TestCase
         'null' => null,
         'true' => true,
         'bar\'s' => 'bar\'s'
-        );
+    );
 EOS;
 
         $property = new PropertyGenerator('myFoo', $targetValue);

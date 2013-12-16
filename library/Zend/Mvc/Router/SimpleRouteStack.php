@@ -254,7 +254,7 @@ class SimpleRouteStack implements RouteStackInterface
      * Create a route from array specifications.
      *
      * @param  array|Traversable $specs
-     * @return SimpleRouteStack
+     * @return RouteInterface
      * @throws Exception\InvalidArgumentException
      */
     protected function routeFromArray($specs)

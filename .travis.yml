@@ -21,7 +21,5 @@ notifications:
 
 matrix:
   fast_finish: true
-
-matrix:
   allow_failures:
     - php: hhvm

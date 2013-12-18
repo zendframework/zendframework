@@ -22,8 +22,9 @@ class AssertionManager extends AbstractPluginManager
      * Checks that the element is an instance of AssertionInterface
      *
      * @param mixed $plugin
-     * @throws Zend\PErmissions\Acl\Exception\InvalidElementException
-     * @return void
+     *
+     * @throws InvalidArgumentException
+     * @return bool
      */
     public function validatePlugin($plugin)
     {

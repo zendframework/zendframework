@@ -37,7 +37,7 @@ class AssertionAggregate implements AssertionInterface
      * @param AssertionInterface|string $assertion
      *            if string, must match a AssertionManager declared service (checked later)
      *
-     * @return \Zend\Permissions\Acl\Assertion\AssertionAggregate
+     * @return self
      */
     public function addAssertion($assertion)
     {
@@ -58,7 +58,7 @@ class AssertionAggregate implements AssertionInterface
     /**
      * Empties assertions stack
      *
-     * @return \Zend\Permissions\Acl\Assertion\AssertionAggregate
+     * @return self
      */
     public function clearAssertions()
     {
@@ -71,7 +71,7 @@ class AssertionAggregate implements AssertionInterface
      *
      * @param AssertionManager $manager
      *
-     * @return \Zend\Permissions\Acl\Assertion\AssertionAggregate
+     * @return self
      */
     public function setAssertionManager(AssertionManager $manager)
     {
@@ -97,7 +97,7 @@ class AssertionAggregate implements AssertionInterface
      *            indicates how assertion chain result should interpreted (either 'all' or 'at_least_one')
      * @throws Exception
      *
-     * @return \Zend\Permissions\Acl\Assertion\AssertionAggregate
+     * @return self
      */
     public function setMode($mode)
     {
@@ -120,6 +120,12 @@ class AssertionAggregate implements AssertionInterface
         return $this->mode;
     }
 
+    /**
+     * @see \Zend\Permissions\Acl\Assertion\AssertionInterface::assert()
+     *
+     * @throws RuntimeException
+     * @return bool
+     */
     public function assert(Acl $acl, RoleInterface $role = null, ResourceInterface $resource = null, $privilege = null)
     {
         // check if assertions are set

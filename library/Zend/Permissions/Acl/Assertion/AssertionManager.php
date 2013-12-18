@@ -14,7 +14,7 @@ use Zend\Permissions\Acl\Exception\InvalidArgumentException;
 class AssertionManager extends AbstractPluginManager
 {
 
-    protected $sharedByDefault = false;
+    protected $sharedByDefault = true;
 
     /**
      * Validate the plugin

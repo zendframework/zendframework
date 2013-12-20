@@ -143,7 +143,7 @@ abstract class Rand
         $filter = (int) ((1 << $bits) - 1);
 
         do {
-            $rnd  = hexdec(bin2hex(self::getBytes($bytes, $strong)));
+            $rnd  = hexdec(bin2hex(static::getBytes($bytes, $strong)));
             $rnd &= $filter;
         } while ($rnd > $range);
 

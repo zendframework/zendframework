@@ -100,12 +100,13 @@ class RandTest extends \PHPUnit_Framework_TestCase
 
     public function testIntegerRangeOverflow()
     {
-        $x = Rand::getInteger(0, PHP_INT_MAX);
-        for ($i = 0; $i < 5; $i++) {
-            $x ^= Rand::getInteger(0, PHP_INT_MAX);
+        $values = array();
+        $cycles = 100;
+        for ($i = 0; $i < $cycles; $i++) {
+            $values[$i] = Rand::getInteger(0, PHP_INT_MAX);
         }
 
-        $this->assertFalse($x === 0);
+        $this->assertFalse(array_unique($values) === 1);
     }
 
     public function testRandFloat()

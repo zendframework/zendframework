@@ -180,15 +180,11 @@ class Fieldset extends Element implements FieldsetInterface
         $this->byName[$name] = $elementOrFieldset;
 
         if ($elementOrFieldset instanceof FieldsetInterface) {
-            if ($elementOrFieldset instanceof FieldsetPrepareAwareInterface) {
-                $elementOrFieldset->prepareFieldset();
-            }
-
             $this->fieldsets[$name] = $elementOrFieldset;
-            return $this;
+        } else {
+            $this->elements[$name] = $elementOrFieldset;
         }
 
-        $this->elements[$name] = $elementOrFieldset;
         return $this;
     }
 

@@ -632,4 +632,19 @@ class CollectionTest extends TestCase
         $this->assertEquals(count($collection->getFieldsets()), count($inputData));
         $this->assertEquals(count($formCollection->getFieldsets()), count($inputData));
     }
+
+    public function testCanRemoveAllElementsIfAllowRemoveIsTrue()
+    {
+        /** @var \Zend\Form\Element\Collection $collection */
+        $collection = $this->form->get('colors');
+        $collection->setAllowRemove(true);
+        $collection->setCount(0);
+
+
+        // By default, $collection contains 2 elements
+        $data = array();
+
+        $collection->populateValues($data);
+        $this->assertEquals(0, count($collection->getElements()));
+    }
 }

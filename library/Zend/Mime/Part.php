@@ -80,7 +80,9 @@ class Part
         //stream_filter_remove(); // ??? is that right?
         switch ($this->encoding) {
             case Mime::ENCODING_QUOTEDPRINTABLE:
-                if(array_search(Mime::ENCODING_QUOTEDPRINTABLE, $this->filters) !== FALSE) break;
+                if(array_search(Mime::ENCODING_QUOTEDPRINTABLE, $this->filters) !== FALSE) {
+                    break;
+                }
                 $filter = stream_filter_append(
                     $this->content,
                     'convert.quoted-printable-encode',
@@ -96,7 +98,9 @@ class Part
                 }
                 break;
             case Mime::ENCODING_BASE64:
-                if(array_search(Mime::ENCODING_BASE64, $this->filters) !== FALSE) break;
+                if(array_search(Mime::ENCODING_BASE64, $this->filters) !== FALSE) {
+                    break;
+                }
                 $filter = stream_filter_append(
                     $this->content,
                     'convert.base64-encode',

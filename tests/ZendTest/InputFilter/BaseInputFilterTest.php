@@ -860,4 +860,20 @@ class BaseInputFilterTest extends TestCase
         $this->assertTrue($filter->get('foo')->isValid(), 'Filtered value is not valid');
         $this->assertTrue($filter->isValid(), 'Input filter did return value from filter');
     }
+
+    /**
+     * @group 5638
+     */
+    public function testPopulateSupportsArrayInputEvenIfDataMissing()
+    {
+        $arrayInput = $this->getMock('Zend\InputFilter\ArrayInput');
+        $arrayInput
+            ->expects($this->once())
+            ->method('setValue')
+            ->with([]);
+
+        $filter = new InputFilter();
+        $filter->add($arrayInput, 'arrayInput');
+        $filter->setData(array('foo' => 'bar'));
+    }
 }

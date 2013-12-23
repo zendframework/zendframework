@@ -262,4 +262,63 @@ class FilePostRedirectGetTest extends TestCase
         $this->assertEquals($expects, $prgResultRoute->getHeaders()->get('Location')->getUri() , 'redirect to the same url');
         $this->assertEquals(303, $prgResultRoute->getStatusCode());
     }
+
+    public function testCollectionInputFilterIsInitializedBeforePluginRetrievesIt()
+    {
+        $fieldset = new TestAsset\InputFilterProviderFieldset();
+        $collectionSpec = array(
+            'name' => 'test_collection',
+            'type' => 'collection',
+            'options' => array(
+                'target_element' => $fieldset
+            ),
+        );
+
+        $form = new Form();
+        $form->add($collectionSpec);
+
+        $postData = array(
+            'test_collection' => array(
+                array (
+                    'test_field' => 'foo'
+                ),
+                array (
+                    'test_field' => 'bar'
+                )
+            )
+        );
+
+        // test POST
+        $request = new Request();
+        $request->setMethod('POST');
+        $request->setPost(new Parameters($postData));
+        $this->controller->dispatch($request, $this->response);
+
+        $this->controller->fileprg($form, '/someurl', true);
+
+        $data = $form->getData();
+
+        $this->assertArrayHasKey(0, $data['test_collection']);
+        $this->assertArrayHasKey(1, $data['test_collection']);
+
+        $this->assertSame('FOO', $data['test_collection'][0]['test_field']);
+        $this->assertSame('BAR', $data['test_collection'][1]['test_field']);
+
+        // now test GET with a brand new form instance
+        $form = new Form();
+        $form->add($collectionSpec);
+
+        $request = new Request();
+        $this->controller->dispatch($request, $this->response);
+
+        $this->controller->fileprg($form, '/someurl', true);
+
+        $data = $form->getData();
+
+        $this->assertArrayHasKey(0, $data['test_collection']);
+        $this->assertArrayHasKey(1, $data['test_collection']);
+
+        $this->assertSame('FOO', $data['test_collection'][0]['test_field']);
+        $this->assertSame('BAR', $data['test_collection'][1]['test_field']);
+    }
 }

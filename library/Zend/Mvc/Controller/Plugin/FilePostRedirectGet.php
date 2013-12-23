@@ -63,6 +63,13 @@ class FilePostRedirectGet extends AbstractPlugin
         $container = $this->getSessionContainer();
         $request   = $this->getController()->getRequest();
 
+        $postFiles = $request->getFiles()->toArray();
+        $postOther = $request->getPost()->toArray();
+        $post      = array_merge_recursive($postOther, $postFiles);
+
+        // Fill form with the data first, collections may alter the form/filter structure
+        $form->setData($post);
+
         // Change required flag to false for any previously uploaded files
         $inputFilter   = $form->getInputFilter();
         $previousFiles = ($container->files) ?: array();
@@ -78,12 +85,6 @@ class FilePostRedirectGet extends AbstractPlugin
         );
 
         // Run the form validations/filters and retrieve any errors
-        $postFiles = $request->getFiles()->toArray();
-        $postOther = $request->getPost()->toArray();
-        $post      = array_merge_recursive($postOther, $postFiles);
-
-        // Validate form, and capture data and errors
-        $form->setData($post);
         $isValid = $form->isValid();
         $data    = $form->getData(FormInterface::VALUES_AS_ARRAY);
         $errors  = (!$isValid) ? $form->getMessages() : null;
@@ -129,6 +130,9 @@ class FilePostRedirectGet extends AbstractPlugin
         unset($container->errors);
         unset($container->isValid);
 
+        // Fill form with the data first, collections may alter the form/filter structure
+        $form->setData($post);
+
         // Remove File Input validators and filters on previously uploaded files
         // in case $form->isValid() or $form->bindValues() is run
         $inputFilter = $form->getInputFilter();
@@ -145,8 +149,7 @@ class FilePostRedirectGet extends AbstractPlugin
             }
         );
 
-        // Fill form with previous info and state
-        $form->setData($post);
+        // set previous state
         $form->isValid(); // re-validate to bind values
         if (null !== $errors) {
             $form->setMessages($errors); // overwrite messages

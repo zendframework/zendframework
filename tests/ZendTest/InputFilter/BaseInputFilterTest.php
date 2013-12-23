@@ -870,7 +870,7 @@ class BaseInputFilterTest extends TestCase
         $arrayInput
             ->expects($this->once())
             ->method('setValue')
-            ->with([]);
+            ->with(array());
 
         $filter = new InputFilter();
         $filter->add($arrayInput, 'arrayInput');

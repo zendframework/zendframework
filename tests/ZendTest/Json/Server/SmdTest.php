@@ -381,4 +381,31 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('foo', $services));
         $this->assertTrue(array_key_exists('bar', $services));
     }
+
+    /**
+     * @group ZF2-5624
+     */
+    public function testSetOptionsShouldAccommodateToArrayOutput() {
+        $smdSource = new Smd();
+        $smdSource->setContentType('application/json');
+        $smdSource->setDescription('description');
+        $smdSource->setEnvelope(Smd::ENV_JSONRPC_1);
+        $smdSource->setId(uniqid());
+        $smdSource->setTarget('http://foo');
+        $smdSource->setTransport('POST');
+        $smdSource->setServices(array(array('name' => 'foo')));
+
+        $smdDest = new Smd();
+        // prior to fix the following resulted in:
+        // .. Zend\Json\Server\Exception\InvalidArgumentException : SMD service description requires a name; none provided
+        $smdDest->setOptions($smdSource->toArray());
+
+        $this->assertEquals($smdSource->getContentType(),$smdDest->getContentType());
+        $this->assertEquals($smdSource->getDescription(),$smdDest->getDescription());
+        $this->assertEquals($smdSource->getEnvelope(),$smdDest->getEnvelope());
+        $this->assertEquals($smdSource->getId(),$smdDest->getId());
+        $this->assertEquals($smdSource->getTarget(),$smdDest->getTarget());
+        $this->assertEquals($smdSource->getTransport(),$smdDest->getTransport());
+        $this->assertEquals($smdSource->getServices(),$smdDest->getServices());
+    }
 }

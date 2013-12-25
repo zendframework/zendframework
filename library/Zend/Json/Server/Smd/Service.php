@@ -395,12 +395,13 @@ class Service
         $transport  = $this->getTransport();
         $parameters = $this->getParams();
         $returns    = $this->getReturn();
+        $name       = $this->getName();
 
         if (empty($target)) {
-            return compact('envelope', 'transport', 'parameters', 'returns');
+            return compact('envelope', 'transport', 'name', 'parameters', 'returns');
         }
 
-        return $paramInfo = compact('envelope', 'target', 'transport', 'parameters', 'returns');
+        return $paramInfo = compact('envelope', 'target', 'transport', 'name', 'parameters', 'returns');
     }
 
     /**

@@ -385,7 +385,8 @@ class SmdTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF2-5624
      */
-    public function testSetOptionsShouldAccommodateToArrayOutput() {
+    public function testSetOptionsShouldAccommodateToArrayOutput()
+    {
         $smdSource = new Smd();
         $smdSource->setContentType('application/json');
         $smdSource->setDescription('description');

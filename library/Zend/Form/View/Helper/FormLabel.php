@@ -64,15 +64,11 @@ class FormLabel extends AbstractHelper
                 );
             }
 
-            $labelOptions = array();
-
             if ($element instanceof LabelOptionsAwareInterface) {
-                $labelOptions = $element->getLabelOptions();
-            }
-
-            if (! $element->getLabelOption('disable_html_escape')) {
-                $escapeHtmlHelper = $this->getEscapeHtmlHelper();
-                $label = $escapeHtmlHelper($label);
+                if (! $element->getLabelOption('disable_html_escape')) {
+                    $escapeHtmlHelper = $this->getEscapeHtmlHelper();
+                    $label = $escapeHtmlHelper($label);
+                }
             }
         }
 

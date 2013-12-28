@@ -93,15 +93,11 @@ class FormButton extends FormInput
             }
         }
 
-        $labelOptions = array();
-
         if ($element instanceof LabelOptionsAwareInterface) {
-            $labelOptions = $element->getLabelOptions();
-        }
-
-        if (! $element->getLabelOption('disable_html_escape')) {
-            $escapeHtmlHelper = $this->getEscapeHtmlHelper();
-            $buttonContent = $escapeHtmlHelper($buttonContent);
+            if (! $element->getLabelOption('disable_html_escape')) {
+                $escapeHtmlHelper = $this->getEscapeHtmlHelper();
+                $buttonContent = $escapeHtmlHelper($buttonContent);
+            }
         }
 
         return $openTag . $buttonContent . $this->closeTag();

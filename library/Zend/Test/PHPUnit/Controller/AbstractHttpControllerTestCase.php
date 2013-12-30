@@ -40,6 +40,16 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
     }
 
     /**
+     * Assert response has the given reason phrase
+     *
+     * @param string $phrase
+     */
+    public function assertResponseReasonPhrase($phrase)
+    {
+        $this->assertEquals($phrase, $this->getResponse()->getReasonPhrase());
+    }
+
+    /**
      * Assert response header exists
      *
      * @param  string $header

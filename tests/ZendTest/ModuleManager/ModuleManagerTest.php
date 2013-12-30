@@ -142,6 +142,9 @@ class ModuleManagerTest extends TestCase
         $config = $configListener->getMergedConfig();
         $this->assertTrue(isset($config['loaded']));
         $this->assertSame('oh, yeah baby!', $config['loaded']);
+
+        $this->assertTrue(isset($config['baz']));
+        $this->assertSame('bar', $config['baz']);
     }
 
     public function testModuleIsMarkedAsLoadedWhenLoadModuleEventIsTriggered()

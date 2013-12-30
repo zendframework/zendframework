@@ -63,6 +63,13 @@ class Menu extends AbstractHelper
     protected $ulClass = 'navigation';
 
     /**
+     * CSS class to use for the active li element
+     *
+     * @var string
+     */
+    protected $liActiveClass = 'active';
+    
+    /**
      * View helper entry point:
      * Retrieves helper and optionally sets container to operate on
      *
@@ -155,7 +162,7 @@ class Menu extends AbstractHelper
             $liClasses = array();
             // Is page active?
             if ($subPage->isActive(true)) {
-                $liClasses[] = 'active';
+                $liClasses[] = $this->liActiveClass;
             }
             // Add CSS class from page to <li>
             if ($addClassToListItem && $subPage->getClass()) {
@@ -324,7 +331,7 @@ class Menu extends AbstractHelper
             $liClasses = array();
             // Is page active?
             if ($isActive) {
-                $liClasses[] = 'active';
+                $liClasses[] = $this->liActiveClass;
             }
             // Add CSS class from page to <li>
             if ($addClassToListItem && $page->getClass()) {
@@ -705,6 +712,21 @@ class Menu extends AbstractHelper
     {
         if (is_string($ulClass)) {
             $this->ulClass = $ulClass;
+        }
+
+        return $this;
+    }
+    
+    /**
+     * Sets CSS class to use for the active 'li' element when rendering
+     *
+     * @param  string $liActiveClass CSS class to set
+     * @return Menu
+     */
+    public function setLiActiveClass($liActiveClass)
+    {
+        if (is_string($liActiveClass)) {
+            $this->liActiveClass = $liActiveClass;
         }
 
         return $this;

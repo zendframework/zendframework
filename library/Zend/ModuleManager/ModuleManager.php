@@ -140,10 +140,8 @@ class ModuleManager implements ModuleManagerInterface
             return $this->loadedModules[$moduleName];
         }
 
-        $event = ($this->loadFinished === false) ? clone $this->getEvent() : $this->getEvent();
+        $event = clone $this->getEvent();
         $event->setModuleName($moduleName);
-
-        $this->loadFinished = false;
 
         if (!is_object($module)) {
             $module = $this->loadModuleByName($event);
@@ -152,8 +150,6 @@ class ModuleManager implements ModuleManagerInterface
 
         $this->loadedModules[$moduleName] = $module;
         $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE, $this, $event);
-
-        $this->loadFinished = true;
 
         return $module;
     }

@@ -607,4 +607,13 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertEquals(true, $viewModel instanceof ViewModel);
         $this->assertEquals($viewModel->getTemplate(), 'baz/index/unittests');
     }
+
+    public function testAssertResponseReasonPhrase()
+    {
+        $this->dispatch('/tests');
+        $this->assertResponseReasonPhrase('OK');
+
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertResponseReasonPhrase('NOT OK');
+    }
 }

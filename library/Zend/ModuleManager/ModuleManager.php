@@ -140,8 +140,24 @@ class ModuleManager implements ModuleManagerInterface
             return $this->loadedModules[$moduleName];
         }
 
-        $event = clone $this->getEvent();
+        /*
+         * Keep track of nested module loading using the $loadFinished
+         * property.
+         *
+         * Increment the value for each loadModule() call and then decrement
+         * once the loading process is complete.
+         *
+         * To load a module, we clone the event if we are inside a nested
+         * loadModule() call, and use the original event otherwise.
+         */
+        if (!isset($this->loadFinished)) {
+             $this->loadFinished = 0;
+        }
+
+        $event = ($this->loadFinished > 0) ? clone $this->getEvent() : $this->getEvent();
         $event->setModuleName($moduleName);
+
+        $this->loadFinished++;
 
         if (!is_object($module)) {
             $module = $this->loadModuleByName($event);
@@ -150,6 +166,8 @@ class ModuleManager implements ModuleManagerInterface
 
         $this->loadedModules[$moduleName] = $module;
         $this->getEventManager()->trigger(ModuleEvent::EVENT_LOAD_MODULE, $this, $event);
+
+        $this->loadFinished--;
 
         return $module;
     }

@@ -401,7 +401,7 @@ class Service
             return compact('envelope', 'transport', 'name', 'parameters', 'returns');
         }
 
-        return $paramInfo = compact('envelope', 'target', 'transport', 'name', 'parameters', 'returns');
+        return compact('envelope', 'target', 'transport', 'name', 'parameters', 'returns');
     }
 
     /**

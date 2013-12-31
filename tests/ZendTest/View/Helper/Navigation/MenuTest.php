@@ -172,7 +172,7 @@ class MenuTest extends AbstractTest
     
     public function testSetLiActiveCssClass()
     {
-        $this->_helper->setLiActiveClassClass('activated');
+        $this->_helper->setLiActiveClass('activated');
         $expected = $this->_getExpected('menu/css2.html');
         $this->assertEquals($expected, $this->_helper->render($this->_nav2));
     }

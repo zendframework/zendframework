@@ -716,6 +716,16 @@ class Menu extends AbstractHelper
 
         return $this;
     }
+
+    /**
+     * Returns CSS class to use for the first 'ul' element when rendering
+     *
+     * @return string
+     */
+    public function getUlClass()
+    {
+        return $this->ulClass;
+    }
     
     /**
      * Sets CSS class to use for the active 'li' element when rendering
@@ -731,14 +741,14 @@ class Menu extends AbstractHelper
 
         return $this;
     }
-
+    
     /**
-     * Returns CSS class to use for the first 'ul' element when rendering
+     * Returns CSS class to use for the active 'li' element when rendering
      *
      * @return string
      */
-    public function getUlClass()
+    public function getLiActiveClass()
     {
-        return $this->ulClass;
+        return $this->liActiveClass;
     }
 }

@@ -97,7 +97,6 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
 
         foreach ($responseHeader as $currentHeader) {
             if ($match == $currentHeader->getFieldValue()) {
-                $this->assertEquals($match, $currentHeader->getFieldValue());
                 $headerMatched = true;
                 break;
             }

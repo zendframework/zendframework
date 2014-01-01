@@ -116,24 +116,24 @@ class Menu extends AbstractHelper
      * from {@link renderMenu()})
      *
      * @param  AbstractContainer $container          container to render
-     * @param  string            $ulClass            CSS class for first UL
-     * @param  string            $liActiveClass      CSS class for active LI
+     * @param  string            $ulClass            CSS class for first UL 
      * @param  string            $indent             initial indentation
      * @param  int|null          $minDepth           minimum depth
      * @param  int|null          $maxDepth           maximum depth
      * @param  bool              $escapeLabels       Whether or not to escape the labels
      * @param  bool              $addClassToListItem Whether or not page class applied to <li> element
+     * @param  string            $liActiveClass      CSS class for active LI
      * @return string
      */
     protected function renderDeepestMenu(
         AbstractContainer $container,
         $ulClass,
-        $liActiveClass,
         $indent,
         $minDepth,
         $maxDepth,
         $escapeLabels,
-        $addClassToListItem
+        $addClassToListItem,
+        $liActiveClass
     ) {
         if (!$active = $this->findActive($container, $minDepth - 1, $maxDepth)) {
             return '';
@@ -210,23 +210,23 @@ class Menu extends AbstractHelper
         if ($options['onlyActiveBranch'] && !$options['renderParents']) {
             $html = $this->renderDeepestMenu($container,
                 $options['ulClass'],
-                $options['liActiveClass'],
                 $options['indent'],
                 $options['minDepth'],
                 $options['maxDepth'],
                 $options['escapeLabels'],
-                $options['addClassToListItem']
+                $options['addClassToListItem'],
+                $options['liActiveClass']
             );
         } else {
             $html = $this->renderNormalMenu($container,
                 $options['ulClass'],
-                $options['liActiveClass'],
                 $options['indent'],
                 $options['minDepth'],
                 $options['maxDepth'],
                 $options['onlyActiveBranch'],
                 $options['escapeLabels'],
-                $options['addClassToListItem']
+                $options['addClassToListItem'],
+                $options['liActiveClass']
             );
         }
 
@@ -238,25 +238,25 @@ class Menu extends AbstractHelper
      *
      * @param  AbstractContainer $container          container to render
      * @param  string            $ulClass            CSS class for first UL
-     * @param  string            $liActiveClass      CSS class for active LI
      * @param  string            $indent             initial indentation
      * @param  int|null          $minDepth           minimum depth
      * @param  int|null          $maxDepth           maximum depth
      * @param  bool              $onlyActive         render only active branch?
      * @param  bool              $escapeLabels       Whether or not to escape the labels
      * @param  bool              $addClassToListItem Whether or not page class applied to <li> element
+     * @param  string            $liActiveClass      CSS class for active LI
      * @return string
      */
     protected function renderNormalMenu(
         AbstractContainer $container,
         $ulClass,
-        $liActiveClass,
         $indent,
         $minDepth,
         $maxDepth,
         $onlyActive,
         $escapeLabels,
-        $addClassToListItem
+        $addClassToListItem,
+        $liActiveClass
     ) {
         $html = '';
 
@@ -435,45 +435,46 @@ class Menu extends AbstractHelper
      *     'minDepth'         => null,
      *     'maxDepth'         => null,
      *     'onlyActiveBranch' => true,
-     *     'renderParents'    => false
+     *     'renderParents'    => false,
+     *     'liActiveClass'    => $liActiveClass      
      * ));
      * </code>
      *
-     * @param  AbstractContainer $container [optional] container to
-     *                                      render. Default is to render
-     *                                      the container registered in
-     *                                      the helper.
-     * @param  string            $ulClass   [optional] CSS class to
-     *                                      use for UL element. Default
-     *                                      is to use the value from
-     *                                      {@link getUlClass()}.
+     * @param  AbstractContainer $container     [optional] container to
+     *                                          render. Default is to render
+     *                                          the container registered in
+     *                                          the helper.
+     * @param  string            $ulClass       [optional] CSS class to
+     *                                          use for UL element. Default
+     *                                          is to use the value from
+     *                                          {@link getUlClass()}.
+     * @param  string|int        $indent        [optional] indentation as
+     *                                          a string or number of
+     *                                          spaces. Default is to use
+     *                                          the value retrieved from
+     *                                          {@link getIndent()}.
      * @param  string            $liActiveClass [optional] CSS class to
      *                                          use for UL element. Default
      *                                          is to use the value from
      *                                          {@link getUlClass()}.
-     * @param  string|int        $indent    [optional] indentation as
-     *                                      a string or number of
-     *                                      spaces. Default is to use
-     *                                      the value retrieved from
-     *                                      {@link getIndent()}.
      * @return string
      */
     public function renderSubMenu(
         AbstractContainer $container = null,
         $ulClass = null,
-        $liActiveClass = null,
-        $indent = null
+        $indent = null,
+        $liActiveClass = null
     ) {
         return $this->renderMenu($container, array(
             'indent'             => $indent,
             'ulClass'            => $ulClass,
-            'liActiveClass'      => $liActiveClass,
             'minDepth'           => null,
             'maxDepth'           => null,
             'onlyActiveBranch'   => true,
             'renderParents'      => false,
             'escapeLabels'       => true,
             'addClassToListItem' => false,
+            'liActiveClass'      => $liActiveClass
         ));
     }
 
@@ -557,12 +558,6 @@ class Menu extends AbstractHelper
             $options['ulClass'] = $this->getUlClass();
         }
         
-        if (isset($options['liActiveClass']) && $options['liActiveClass'] !== null) {
-            $options['liActiveClass'] = (string) $options['liActiveClass'];
-        } else {
-            $options['liActiveClass'] = $this->getLiActiveClass();
-        }
-
         if (array_key_exists('minDepth', $options)) {
             if (null !== $options['minDepth']) {
                 $options['minDepth'] = (int) $options['minDepth'];
@@ -597,6 +592,12 @@ class Menu extends AbstractHelper
 
         if (!isset($options['addClassToListItem'])) {
             $options['addClassToListItem'] = $this->getAddClassToListItem();
+        }
+        
+        if (isset($options['liActiveClass']) && $options['liActiveClass'] !== null) {
+            $options['liActiveClass'] = (string) $options['liActiveClass'];
+        } else {
+            $options['liActiveClass'] = $this->getLiActiveClass();
         }
 
         return $options;

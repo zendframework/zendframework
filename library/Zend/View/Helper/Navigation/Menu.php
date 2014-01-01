@@ -116,7 +116,7 @@ class Menu extends AbstractHelper
      * from {@link renderMenu()})
      *
      * @param  AbstractContainer $container          container to render
-     * @param  string            $ulClass            CSS class for first UL 
+     * @param  string            $ulClass            CSS class for first UL
      * @param  string            $indent             initial indentation
      * @param  int|null          $minDepth           minimum depth
      * @param  int|null          $maxDepth           maximum depth
@@ -557,7 +557,7 @@ class Menu extends AbstractHelper
         } else {
             $options['ulClass'] = $this->getUlClass();
         }
-        
+
         if (array_key_exists('minDepth', $options)) {
             if (null !== $options['minDepth']) {
                 $options['minDepth'] = (int) $options['minDepth'];

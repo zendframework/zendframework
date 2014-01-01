@@ -15,7 +15,10 @@ class IndexController extends AbstractActionController
 {
     public function unittestsAction()
     {
-        $this->getResponse()->getHeaders()->addHeaderLine('Content-Type: text/html');
+        $this->getResponse()
+            ->getHeaders()
+            ->addHeaderLine('Content-Type: text/html')
+            ->addHeaderLine('WWW-Authenticate: Basic realm="ZF2"');
 
         $num_get = $this->getRequest()->getQuery()->get('num_get', 0);
         $num_post = $this->getRequest()->getPost()->get('num_post', 0);

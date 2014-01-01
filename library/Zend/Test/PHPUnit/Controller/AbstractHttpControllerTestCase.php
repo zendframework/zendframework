@@ -88,15 +88,31 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $header
             ));
         }
-        if ($match != $responseHeader->getFieldValue()) {
-            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+
+        if (!$responseHeader instanceof \ArrayIterator) {
+            $responseHeader = array($responseHeader);
+        }
+
+        $headerMatched = false;
+
+        foreach ($responseHeader as $currentHeader) {
+            if ($match == $currentHeader->getFieldValue()) {
+                $this->assertEquals($match, $currentHeader->getFieldValue());
+                $headerMatched = true;
+                break;
+            }
+        }
+
+        if (!$headerMatched) {
+            throw new \PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting response header "%s" exists and contains "%s", actual content is "%s"',
                 $header,
                 $match,
-                $responseHeader->getFieldValue()
+                $currentHeader->getFieldValue()
             ));
         }
-        $this->assertEquals($match, $responseHeader->getFieldValue());
+
+        $this->assertEquals($match, $currentHeader->getFieldValue());
     }
 
     /**
@@ -114,14 +130,22 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $header
             ));
         }
-        if ($match == $responseHeader->getFieldValue()) {
-            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response header "%s" DOES NOT CONTAIN "%s"',
-                $header,
-                $match
-            ));
+
+        if (!$responseHeader instanceof \ArrayIterator) {
+            $responseHeader = array($responseHeader);
         }
-        $this->assertNotEquals($match, $responseHeader->getFieldValue());
+
+        foreach ($responseHeader as $currentHeader) {
+            if ($match == $currentHeader->getFieldValue()) {
+                throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                    'Failed asserting response header "%s" DOES NOT CONTAIN "%s"',
+                    $header,
+                    $match
+                ));
+            }
+        }
+
+        $this->assertNotEquals($match, $currentHeader->getFieldValue());
     }
 
     /**
@@ -139,15 +163,31 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $header
             ));
         }
-        if (!preg_match($pattern, $responseHeader->getFieldValue())) {
+
+        if (!$responseHeader instanceof \ArrayIterator) {
+            $responseHeader = array($responseHeader);
+        }
+
+        $headerMatched = false;
+
+        foreach ($responseHeader as $currentHeader) {
+            $headerMatched = (bool) preg_match($pattern, $currentHeader->getFieldValue());
+
+            if ($headerMatched) {
+                break;
+            }
+        }
+
+        if (!$headerMatched) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting response header "%s" exists and matches regex "%s", actual content is "%s"',
                 $header,
                 $pattern,
-                $responseHeader->getFieldValue()
+                $currentHeader->getFieldValue()
             ));
         }
-        $this->assertTrue((bool) preg_match($pattern, $responseHeader->getFieldValue()));
+
+        $this->assertTrue($headerMatched);
     }
 
     /**
@@ -165,14 +205,26 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $header
             ));
         }
-        if (preg_match($pattern, $responseHeader->getFieldValue())) {
-            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response header "%s" DOES NOT MATCH regex "%s"',
-                $header,
-                $pattern
-            ));
+
+        if (!$responseHeader instanceof \ArrayIterator) {
+            $responseHeader = array($responseHeader);
         }
-        $this->assertFalse((bool) preg_match($pattern, $responseHeader->getFieldValue()));
+
+        $headerMatched = false;
+
+        foreach ($responseHeader as $currentHeader) {
+            $headerMatched = (bool) preg_match($pattern, $currentHeader->getFieldValue());
+
+            if ($headerMatched) {
+                throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                    'Failed asserting response header "%s" DOES NOT MATCH regex "%s"',
+                    $header,
+                    $pattern
+                ));
+            }
+        }
+
+        $this->assertFalse($headerMatched);
     }
 
     /**

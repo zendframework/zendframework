@@ -200,4 +200,12 @@ class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThan(0, $this->storage->getRequestAccessTime());
     }
 
+    public function testGetArrayCopyFromContainer()
+    {
+        $container = new Container('test');
+        $container->foo = 'bar';
+        $container->baz = 'qux';
+        $this->assertSame(array('foo' => 'bar', 'baz' => 'qux'), $container->getArrayCopy());
+    }
+
 }

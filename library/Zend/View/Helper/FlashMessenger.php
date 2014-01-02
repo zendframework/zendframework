@@ -12,8 +12,6 @@ namespace Zend\View\Helper;
 use Zend\Mvc\Controller\Plugin\FlashMessenger as PluginFlashMessenger;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\View\Helper\AbstractHelper;
-use Zend\View\Helper\EscapeHtml;
 use Zend\I18n\View\Helper\AbstractTranslatorHelper;
 
 /**

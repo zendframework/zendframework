@@ -9,7 +9,6 @@
 
 namespace Zend\View\Helper;
 
-use Zend\View\Helper\HelperInterface;
 use Zend\View\Renderer\RendererInterface as Renderer;
 
 abstract class AbstractHelper implements HelperInterface

@@ -182,7 +182,7 @@ class View implements EventManagerAwareInterface
         }
 
         $event->setRenderer($renderer);
-        $results = $events->trigger(ViewEvent::EVENT_RENDERER_POST, $event);
+        $events->trigger(ViewEvent::EVENT_RENDERER_POST, $event);
 
         // If EVENT_RENDERER or EVENT_RENDERER_POST changed the model, make sure
         // we use this new model instead of the current $model

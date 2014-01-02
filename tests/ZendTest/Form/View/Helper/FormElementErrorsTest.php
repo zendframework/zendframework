@@ -129,41 +129,4 @@ class FormElementErrorsTest extends CommonTestCase
         $helper = $this->helper;
         $this->assertEquals($helper(), $helper);
     }
-
-    public function testCanTranslateContent()
-    {
-        $messages = array(array(
-            'First validator message',
-        ));
-
-        $element = new Element('foo');
-        $element->setMessages($messages);
-
-        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
-        $mockTranslator->expects($this->exactly(1))
-                       ->method('translate')
-                       ->will($this->returnValue('translated content'));
-
-        $this->helper->setTranslator($mockTranslator);
-        $this->assertTrue($this->helper->hasTranslator());
-
-        $markup = $this->helper->__invoke($element);
-        $this->assertRegexp('#<ul[^>]*>\s*<li>translated content</li>\s*</ul>#s', $markup);
-    }
-
-    public function testTranslatorMethods()
-    {
-        $translatorMock = $this->getMock('Zend\I18n\Translator\Translator');
-        $this->helper->setTranslator($translatorMock, 'foo');
-
-        $this->assertEquals($translatorMock, $this->helper->getTranslator());
-        $this->assertEquals('foo', $this->helper->getTranslatorTextDomain());
-        $this->assertTrue($this->helper->hasTranslator());
-        $this->assertTrue($this->helper->isTranslatorEnabled());
-
-        $this->helper->setTranslatorEnabled(false);
-        $this->assertFalse($this->helper->isTranslatorEnabled());
-    }
-
-
 }

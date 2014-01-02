@@ -359,14 +359,23 @@ class SetCookie implements MultipleHeaderInterface
         }
 
         if (is_string($expires)) {
-            $expires = strtotime($expires);
+            $tsExpires = strtotime($expires);
         }
 
-        if (!is_int($expires) || $expires < 0) {
+        // if $tsExpires is invalid and PHP is compiled as 32bit. Check if the fail reason is the 2038 bug
+        if (!is_int($tsExpires) && PHP_INT_SIZE === 4) {
+            $dateTime = new \DateTime($expires);
+            if ( $dateTime->format('Y') > 2037) {
+                $yearDiff = $dateTime->format('Y') - 2037;
+                $tsExpires = $dateTime->modify("-{$yearDiff} year")->getTimestamp();
+            }
+        }
+
+        if (!is_int($tsExpires) || $tsExpires < 0) {
             throw new Exception\InvalidArgumentException('Invalid expires time specified');
         }
 
-        $this->expires = $expires;
+        $this->expires = $tsExpires;
         return $this;
     }
 

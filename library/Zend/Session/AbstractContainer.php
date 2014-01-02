@@ -598,4 +598,17 @@ abstract class AbstractContainer extends ArrayObject
 
         return $this;
     }
+
+    /**
+     * Creates a copy of the specific container name
+     *
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        $storage   = $this->verifyNamespace();
+        $container = $storage[$this->getName()];
+
+        return $container->getArrayCopy();
+    }
 }

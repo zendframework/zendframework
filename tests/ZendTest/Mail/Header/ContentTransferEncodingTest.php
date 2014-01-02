@@ -43,6 +43,13 @@ class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('7bit', $contentTransferEncodingHeader->getFieldValue());
     }
 
+    public function testContentTransferEncodingHandlesCaseInsensitivity()
+    {
+        $encoding = new ContentTransferEncoding();
+        $encoding->setTransferEncoding('quOtED-printAble');
+        $this->assertEquals('quoted-printable', strtolower($encoding->getFieldValue()));
+    }
+
     public function testContentTransferEncodingToStringReturnsHeaderFormattedString()
     {
         $contentTransferEncodingHeader = new ContentTransferEncoding();

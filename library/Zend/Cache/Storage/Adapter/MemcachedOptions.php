@@ -200,7 +200,7 @@ class MemcachedOptions extends AdapterOptions
     public function setPersistentId($persistentId)
     {
         $this->triggerOptionEvent('persistent_id', $persistentId);
-        $this->getResourceManager()->setPersistentId($this->getPersistentId(), $persistentId);
+        $this->getResourceManager()->setPersistentId($this->getResourceId(), $persistentId);
         return $this;
     }
 

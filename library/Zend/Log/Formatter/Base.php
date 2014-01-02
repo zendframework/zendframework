@@ -54,7 +54,7 @@ class Base implements FormatterInterface
     {
         foreach ($event as $key => $value) {
             // Keep extra as an array
-            if ('extra' === $key) {
+            if ('extra' === $key && is_array($value)) {
                 $event[$key] = self::format($value);
             } else {
                 $event[$key] = $this->normalize($value);

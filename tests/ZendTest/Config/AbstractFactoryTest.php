@@ -1,10 +1,14 @@
 <?php
+
 /**
- * AbstractFactoryTest.php
+ * Zend Framework (http://framework.zend.com/)
  *
- * @author Chris Raidler <chris@raidler.com>
- * @copyright Copyright 2012 - 2013, raidler dot com
+ * @author    Chris Raidler <chris@raidler.com>
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace ZendTest\Config;
 
 use Zend\Config\AbstractConfigFactory;
@@ -46,9 +50,9 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
 
         $sm = $this->serviceManager = new ServiceManager\ServiceManager(
             new ServiceManagerConfig(array(
-                'abstract_factories' => array(
-                    'Zend\Config\AbstractConfigFactory',
-                )
+            'abstract_factories' => array(
+                'Zend\Config\AbstractConfigFactory',
+            )
             ))
         );
 

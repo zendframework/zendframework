@@ -468,8 +468,10 @@ class DiTest extends \PHPUnit_Framework_TestCase
     {
         $di = $this->configureNoneCircularDependencyTests();
 
-        $di->get('YB');
-        $di->get('YC');
+        $yb = $di->get('YB');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\CircularClasses\Y', $yb);
+        $yc = $di->get('YC');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\CircularClasses\Y', $yc);
     }
 
     /**
@@ -482,7 +484,30 @@ class DiTest extends \PHPUnit_Framework_TestCase
     {
         $di = $this->configureNoneCircularDependencyTests();
 
-        $di->get('YC');
+        $yc = $di->get('YC');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\CircularClasses\Y', $yc);
+    }
+
+    /**
+     * Test for correctly identifying a Circular Dependency in aliases (case 3)
+     *
+     * YA -> YB, YB -> YA
+     * @group CircularDependencyCheck
+     */
+    public function testCircularDependencyDetectedInAliases()
+    {
+        $di = new Di();
+
+        $di->instanceManager()->addAlias('YA', 'ZendTest\Di\TestAsset\CircularClasses\Y', array('y' => 'YC'));
+        $di->instanceManager()->addAlias('YB', 'ZendTest\Di\TestAsset\CircularClasses\Y', array('y' => 'YA'));
+        $di->instanceManager()->addAlias('YC', 'ZendTest\Di\TestAsset\CircularClasses\Y', array('y' => 'YB'));
+
+        $this->setExpectedException(
+            'Zend\Di\Exception\CircularDependencyException',
+            'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\Y depends on ZendTest\Di\TestAsset\CircularClasses\Y and viceversa (Aliased as YA)'
+        );
+
+        $yc = $di->get('YC');
     }
 
     /**

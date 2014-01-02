@@ -42,6 +42,13 @@ class Di implements DependencyInjectionInterface
     protected $currentDependencies = array();
 
     /**
+     * All the dependenent aliases
+     *
+     * @var array
+     */
+    protected $currentAliasDependenencies = array();
+
+    /**
      * All the class references [dependency][source]
      *
      * @var array
@@ -767,13 +774,21 @@ class Di implements DependencyInjectionInterface
                 $resolvedParams[$index] = $computedParams['value'][$fqParamPos];
             } elseif (isset($computedParams['retrieval'][$fqParamPos])) {
                 // detect circular dependencies! (they can only happen in instantiators)
-                if ($isInstantiator && in_array($computedParams['retrieval'][$fqParamPos][1], $this->currentDependencies)) {
-                    throw new Exception\CircularDependencyException(
-                        "Circular dependency detected: $class depends on {$value[1]} and viceversa"
-                    );
+                if ($isInstantiator && in_array($computedParams['retrieval'][$fqParamPos][1], $this->currentDependencies)
+                    && (!isset($alias) || in_array($iConfig['thisAlias']['parameters'][$name], $this->currentAliasDependenencies))
+                ) {
+                    $msg = "Circular dependency detected: $class depends on {$value[1]} and viceversa";
+                    if (isset($alias)) {
+                        $msg .= " (Aliased as $alias)";
+                    }
+                    throw new Exception\CircularDependencyException($msg);
                 }
 
                 array_push($this->currentDependencies, $class);
+                if(isset($alias)) {
+                    array_push($this->currentAliasDependenencies, $alias);
+                }
+
                 $dConfig = $this->instanceManager->getConfig($computedParams['retrieval'][$fqParamPos][0]);
 
                 try {
@@ -786,6 +801,9 @@ class Di implements DependencyInjectionInterface
                     if ($methodRequirementType & self::RESOLVE_STRICT) {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
+                        if(isset($alias)) {
+                            array_pop($this->currentAliasDependenencies);
+                        }
                         // if this item was marked strict,
                         // plus it cannot be resolve, and no value exist, bail out
                         throw new Exception\MissingPropertyException(sprintf(
@@ -797,6 +815,9 @@ class Di implements DependencyInjectionInterface
                     } else {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
+                        if(isset($alias)) {
+                            array_pop($this->currentAliasDependenencies);
+                        }
                         return false;
                     }
                 } catch (ServiceManagerException $e) {
@@ -804,6 +825,9 @@ class Di implements DependencyInjectionInterface
                     if ($methodRequirementType & self::RESOLVE_STRICT) {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
+                        if(isset($alias)) {
+                            array_pop($this->currentAliasDependenencies);
+                        }
                         // if this item was marked strict,
                         // plus it cannot be resolve, and no value exist, bail out
                         throw new Exception\MissingPropertyException(sprintf(
@@ -815,10 +839,16 @@ class Di implements DependencyInjectionInterface
                     } else {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
+                        if(isset($alias)) {
+                            array_pop($this->currentAliasDependenencies);
+                        }
                         return false;
                     }
                 }
                 array_pop($this->currentDependencies);
+                if(isset($alias)) {
+                    array_pop($this->currentAliasDependenencies);
+                }
             } elseif (!array_key_exists($fqParamPos, $computedParams['optional'])) {
                 if ($methodRequirementType & self::RESOLVE_STRICT) {
                     // if this item was not marked as optional,

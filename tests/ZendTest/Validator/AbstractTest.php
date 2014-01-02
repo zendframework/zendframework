@@ -76,28 +76,6 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
-            'fooMessage' => 'This is the translated message for %value%',
-        );
-        $translator = new TestAsset\Translator();
-        $translator->getPluginManager()->setService('default', $loader);
-        $translator->addTranslationFile('default', null);
-
-        $this->validator->setTranslator($translator);
-        $this->assertFalse($this->validator->isValid('bar'));
-        $messages = $this->validator->getMessages();
-        $this->assertTrue(array_key_exists('fooMessage', $messages));
-        $this->assertContains('bar', $messages['fooMessage'], var_export($messages, 1));
-        $this->assertContains('This is the translated message for ', $messages['fooMessage']);
-    }
-
-    public function testCanTranslateMessagesInsteadOfKeys()
-    {
-        if (!extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $loader = new TestAsset\ArrayTranslator();
-        $loader->translations = array(
             '%value% was passed' => 'This is the translated message for %value%',
         );
         $translator = new TestAsset\Translator();

@@ -96,7 +96,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
 
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
-            Alpha::INVALID => 'This is the translated message for %value%',
+            'Invalid type given. String expected' => 'This is the translated message for %value%',
         );
         $translator = new TestAsset\Translator();
         $translator->getPluginManager()->setService('default', $loader);
@@ -105,6 +105,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
         $this->validator->setTranslator($translator);
         $this->assertFalse($this->validator->isValid(123));
         $messages = $this->validator->getMessages();
+
         $this->assertTrue(array_key_exists(Alpha::INVALID, $messages));
         $this->assertEquals('This is...', $messages[Alpha::INVALID]);
     }

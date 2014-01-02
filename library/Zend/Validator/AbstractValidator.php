@@ -575,13 +575,6 @@ abstract class AbstractValidator implements
             return $message;
         }
 
-        $translated = $translator->translate(
-            $messageKey, $this->getTranslatorTextDomain()
-        );
-        if ($translated !== $messageKey) {
-            return $translated;
-        }
-
         return $translator->translate(
             $message, $this->getTranslatorTextDomain()
         );

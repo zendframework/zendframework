@@ -81,12 +81,10 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     {
         $this->underscoreSeparatedKeys = (bool) $underscoreSeparatedKeys;
 
-        if (true === $this->underscoreSeparatedKeys) {
+        if ($this->underscoreSeparatedKeys) {
             $this->setNamingStrategy(new UnderscoreNamingStrategy);
-        } else {
-            if ($this->getNamingStrategy() instanceof UnderscoreNamingStrategy) {
-                $this->removeNamingStrategy();
-            }
+        } elseif ($this->getNamingStrategy() instanceof UnderscoreNamingStrategy) {
+            $this->removeNamingStrategy();
         }
 
         return $this;

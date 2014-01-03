@@ -13,7 +13,8 @@
     },
     "target-dir": "Zend/Math",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-servicemanager": "self.version"
     },
     "suggest": {
         "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable"

@@ -9,12 +9,14 @@
 
 namespace Zend\Stdlib\Hydrator\NamingStrategy;
 
-/**
- * Class UnderscoreNamingStrategy
- * @package Zend\Stdlib\Hydrator\NamingStrategy
- */
+use Zend\Filter\FilterChain;
+
 class UnderscoreNamingStrategy implements NamingStrategyInterface
 {
+    protected static $camelCaseToUnderscoreFilter;
+
+    protected static $underscoreToCamelCaseFilter;
+
     /**
      * Remove underscores and capitalize letters
      *
@@ -23,11 +25,7 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
      */
     public function hydrate($name)
     {
-        return preg_replace_callback('/(_[a-z])/i', function($letters) {
-            $letter = substr(array_shift($letters), 1, 1);
-
-            return ucfirst($letter);
-        }, $name);
+        return $this->getUnderscoreToCamelCaseFilter()->filter($name);
     }
 
     /**
@@ -38,10 +36,37 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
      */
     public function extract($name)
     {
-        return preg_replace_callback('/([A-Z])/', function($letters) {
-            $letter = array_shift($letters);
+        return $this->getCamelCaseToUnderscoreFilter()->filter($name);
+    }
 
-            return '_' . strtolower($letter);
-        }, $name);
+    /**
+     * @return FilterChain
+     */
+    protected function getUnderscoreToCamelCaseFilter()
+    {
+        if (static::$underscoreToCamelCaseFilter instanceof FilterChain) {
+            return static::$underscoreToCamelCaseFilter;
+        }
+
+        $filter = new FilterChain();
+        $filter->attachByName('WordUnderscoreToCamelCase');
+        static::$underscoreToCamelCaseFilter = $filter;
+        return $filter;
+    }
+
+    /**
+     * @return FilterChain
+     */
+    protected function getCamelCaseToUnderscoreFilter()
+    {
+        if (static::$camelCaseToUnderscoreFilter instanceof FilterChain) {
+            return static::$camelCaseToUnderscoreFilter;
+        }
+
+        $filter = new FilterChain();
+        $filter->attachByName('WordCamelCaseToUnderscore');
+        $filter->attachByName('StringToLower');
+        static::$camelCaseToUnderscoreFilter = $filter;
+        return $filter;
     }
 }

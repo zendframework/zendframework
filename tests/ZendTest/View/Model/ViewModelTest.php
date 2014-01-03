@@ -306,4 +306,35 @@ class ViewModelTest extends TestCase
         $this->assertTrue(isset($variables['bar']));
         $this->assertEquals('baz', $variables['bar']);
     }
+
+    public function testGetChildrenByCaptureTo()
+    {
+        $model = new ViewModel();
+        $child = new ViewModel();
+        $model->addChild($child, 'foo');
+
+        $this->assertEquals(array($child), $model->getChildrenByCaptureTo('foo'));
+    }
+
+    public function testGetChildrenByCaptureToRecursive()
+    {
+        $model = new ViewModel();
+        $child = new ViewModel();
+        $subChild = new ViewModel();
+        $child->addChild($subChild, 'bar');
+        $model->addChild($child, 'foo');
+
+        $this->assertEquals(array($subChild), $model->getChildrenByCaptureTo('bar'));
+    }
+
+    public function testGetChildrenByCaptureToNonRecursive()
+    {
+        $model = new ViewModel();
+        $child = new ViewModel();
+        $subChild = new ViewModel();
+        $child->addChild($subChild, 'bar');
+        $model->addChild($child, 'foo');
+
+        $this->assertEmpty($model->getChildrenByCaptureTo('bar', false));
+    }
 }

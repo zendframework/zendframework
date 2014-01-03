@@ -775,7 +775,7 @@ class Di implements DependencyInjectionInterface
             } elseif (isset($computedParams['retrieval'][$fqParamPos])) {
                 // detect circular dependencies! (they can only happen in instantiators)
                 if ($isInstantiator && in_array($computedParams['retrieval'][$fqParamPos][1], $this->currentDependencies)
-                    && (!isset($alias) || in_array($iConfig['thisAlias']['parameters'][$name], $this->currentAliasDependenencies))
+                    && (!isset($alias) || in_array($computedParams['retrieval'][$fqParamPos][0], $this->currentAliasDependenencies))
                 ) {
                     $msg = "Circular dependency detected: $class depends on {$value[1]} and viceversa";
                     if (isset($alias)) {

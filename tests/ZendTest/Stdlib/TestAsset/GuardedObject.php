@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -11,12 +11,8 @@ namespace ZendTest\Stdlib\TestAsset;
 
 use Zend\Stdlib\Guard\AllGuardsTrait;
 
-/**
- * @group Zend_Stdlib_Guard
- */
 class GuardedObject
 {
-
     use AllGuardsTrait;
 
     public function setArrayOrTraversable($value)
@@ -33,5 +29,4 @@ class GuardedObject
     {
         $this->guardAgainstNull($value);
     }
-
 }

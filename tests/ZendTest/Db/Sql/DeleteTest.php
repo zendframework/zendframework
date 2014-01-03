@@ -50,6 +50,8 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\Sql\Delete::where
+     *
+     * @todo REMOVE THIS IN 3.x
      */
     public function testWhere()
     {

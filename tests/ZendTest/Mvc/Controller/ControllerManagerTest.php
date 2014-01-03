@@ -15,17 +15,20 @@ use Zend\EventManager\SharedEventManager;
 use Zend\Mvc\Controller\ControllerManager;
 use Zend\Mvc\Controller\PluginManager as ControllerPluginManager;
 use Zend\ServiceManager\ServiceManager;
+use Zend\Console\Adapter\Virtual as ConsoleAdapter;
 
 class ControllerManagerTest extends TestCase
 {
     public function setUp()
     {
         $this->events       = new EventManager();
+        $this->consoleAdapter = new ConsoleAdapter();
         $this->sharedEvents = new SharedEventManager;
         $this->events->setSharedManager($this->sharedEvents);
 
         $this->plugins  = new ControllerPluginManager();
         $this->services = new ServiceManager();
+        $this->services->setService('Console', $this->consoleAdapter);
         $this->services->setService('Zend\ServiceManager\ServiceLocatorInterface', $this->services);
         $this->services->setService('EventManager', $this->events);
         $this->services->setService('SharedEventManager', $this->sharedEvents);
@@ -49,6 +52,13 @@ class ControllerManagerTest extends TestCase
         $events = $controller->getEventManager();
         $this->assertInstanceOf('Zend\EventManager\EventManagerInterface', $events);
         $this->assertSame($this->sharedEvents, $events->getSharedManager());
+    }
+
+    public function testInjectControllerDependenciesToConsoleController()
+    {
+        $controller = new TestAsset\ConsoleController();
+        $this->controllers->injectControllerDependencies($controller, $this->controllers);
+        $this->assertInstanceOf('Zend\Console\Adapter\AdapterInterface', $controller->getConsole());
     }
 
     public function testInjectControllerDependenciesWillNotOverwriteExistingEventManager()

@@ -34,6 +34,10 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5469](https://github.com/zendframework/zf2/pull/5469) adds a new abstract
+  controller, `Zend\Mvc\Controller\AbstractConsoleController`, for simplifying
+  the creation of console controllers.
+
 - [#5364](https://github.com/zendframework/zf2/pull/5364) adds "naming
   strategies" to hydrators, allowing transformation of the data keys
   when either hydrating or extracting data sets. This is implemented via a new

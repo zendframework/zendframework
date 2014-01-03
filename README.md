@@ -34,6 +34,12 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5364](https://github.com/zendframework/zf2/pull/5364) adds "naming
+  strategies" to hydrators, allowing transformation of the data keys
+  when either hydrating or extracting data sets. This is implemented via a new
+  interface, `Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface`,
+  which is now composed by default into the `AbstractHydrator`.
+
 - [#5587](https://github.com/zendframework/zf2/pull/5587) changes the default
   cost for `Zend\Crypt\Password\Bcrypt` to 10, to keep it consistent with PHP's
   own default, as well as potentially mitigate DoS vectors (due to high

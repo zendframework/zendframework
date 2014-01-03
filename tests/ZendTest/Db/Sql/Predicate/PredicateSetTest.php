@@ -85,4 +85,50 @@ class PredicateSetTest extends TestCase
         $this->assertNotContains('OR', $parts[5]);
         $this->assertContains('AND', $parts[5]);
     }
+
+    /**
+     * @covers Zend\Db\Sql\Predicate\PredicateSet::addPredicates
+     */
+    public function testAddPredicates()
+    {
+        $predicateSet = new PredicateSet();
+
+        $predicateSet->addPredicates('x = y');
+        $predicateSet->addPredicates(array('foo > ?' => 5));
+        $predicateSet->addPredicates(array('id' => 2));
+        $predicateSet->addPredicates(array('a = b'), PredicateSet::OP_OR);
+        $predicateSet->addPredicates(array('c1' => null));
+        $predicateSet->addPredicates(array('c2' => array(1, 2, 3)));
+        $predicateSet->addPredicates(array(new \Zend\Db\Sql\Predicate\IsNotNull('c3')));
+
+        $predicates = $this->readAttribute($predicateSet, 'predicates');
+        $this->assertEquals('AND', $predicates[0][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
+
+        $this->assertEquals('AND', $predicates[1][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[1][1]);
+
+        $this->assertEquals('AND', $predicates[2][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Operator', $predicates[2][1]);
+
+        $this->assertEquals('OR', $predicates[3][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[3][1]);
+
+        $this->assertEquals('AND', $predicates[4][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\IsNull', $predicates[4][1]);
+
+        $this->assertEquals('AND', $predicates[5][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\In', $predicates[5][1]);
+
+        $this->assertEquals('AND', $predicates[6][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\IsNotNull', $predicates[6][1]);
+
+        $test = $this;
+        $predicateSet->addPredicates(function ($what) use ($test, $predicateSet) {
+            $test->assertSame($predicateSet, $what);
+        });
+
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Predicate cannot be null');
+        $predicateSet->addPredicates(null);
+    }
 }

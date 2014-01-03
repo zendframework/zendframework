@@ -28,7 +28,7 @@ trait NullGuardTrait
         $dataName = 'Argument',
         $exceptionClass = 'Zend\Stdlib\Exception\InvalidArgumentException'
     ) {
-        if (is_null($data)) {
+        if (null === $data) {
             $message = sprintf('%s cannot be null', $dataName);
             throw new $exceptionClass($message);
         }

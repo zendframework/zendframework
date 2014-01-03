@@ -9,6 +9,8 @@
 
 namespace Zend\Stdlib\Guard;
 
+use Traversable;
+
 /**
  * Static guard helper class
  *
@@ -35,7 +37,7 @@ abstract class GuardUtils
         $dataName = 'Argument',
         $exceptionClass = self::DEFAULT_EXCEPTION_CLASS
     ) {
-        if (!is_array($data) && !($data instanceof \Traversable)) {
+        if (!is_array($data) && !($data instanceof Traversable)) {
             $message = sprintf(
                 '%s must be an array or Traversable, [%s] given',
                 $dataName,
@@ -77,7 +79,7 @@ abstract class GuardUtils
         $dataName = 'Argument',
         $exceptionClass = self::DEFAULT_EXCEPTION_CLASS
     ) {
-        if (is_null($data)) {
+        if (null === $data) {
             $message = sprintf('%s cannot be null', $dataName);
             throw new $exceptionClass($message);
         }

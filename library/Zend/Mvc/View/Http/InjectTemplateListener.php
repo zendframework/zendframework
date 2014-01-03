@@ -26,6 +26,13 @@ class InjectTemplateListener extends AbstractListenerAggregate
     protected $inflector;
 
     /**
+     * Array of controller namespace -> template mappings
+     *
+     * @var array
+     */
+    protected $controllerMap = array();
+
+    /**
      * {@inheritDoc}
      */
     public function attach(Events $events)
@@ -63,32 +70,71 @@ class InjectTemplateListener extends AbstractListenerAggregate
             $controller = $routeMatch->getParam('controller', '');
         }
 
-        $module     = $this->deriveModuleNamespace($controller);
+        $template = $this->mapController($controller);
+        if (!$template) {
+            $module     = $this->deriveModuleNamespace($controller);
 
-        if ($namespace = $routeMatch->getParam(ModuleRouteListener::MODULE_NAMESPACE)) {
-            $controllerSubNs = $this->deriveControllerSubNamespace($namespace);
-            if (!empty($controllerSubNs)) {
-                if (!empty($module)) {
-                    $module .= '/' . $controllerSubNs;
-                } else {
-                    $module = $controllerSubNs;
+            if ($namespace = $routeMatch->getParam(ModuleRouteListener::MODULE_NAMESPACE)) {
+                $controllerSubNs = $this->deriveControllerSubNamespace($namespace);
+                if (!empty($controllerSubNs)) {
+                    if (!empty($module)) {
+                        $module .= '/' . $controllerSubNs;
+                    } else {
+                        $module = $controllerSubNs;
+                    }
                 }
             }
-        }
 
-        $controller = $this->deriveControllerClass($controller);
-        $template   = $this->inflectName($module);
+            $controller = $this->deriveControllerClass($controller);
+            $template   = $this->inflectName($module);
 
-        if (!empty($template)) {
-            $template .= '/';
+            if (!empty($template)) {
+                $template .= '/';
+            }
+            $template  .= $this->inflectName($controller);
         }
-        $template  .= $this->inflectName($controller);
 
         $action     = $routeMatch->getParam('action');
         if (null !== $action) {
             $template .= '/' . $this->inflectName($action);
         }
         $model->setTemplate($template);
+    }
+
+    public function setControllerMap(array $map)
+    {
+        krsort($map);
+        $this->controllerMap = $map;
+    }
+
+    public function mapController($controller)
+    {
+        foreach ($this->controllerMap as $rule => $map) {
+            if (
+                false == $map
+                || !($controller === $rule || strpos($controller, $rule . '\\') === 0)
+            ) {
+                continue;
+            }
+
+            if (is_string($map)) {
+                $map = rtrim($map, '/') . '/';
+                $controller = trim(substr($controller, strlen($rule) + 1), '\\');
+            } else {
+                $map = '';
+            }
+
+            $parts = explode('\\', $controller);
+            $parts = array_diff($parts, array('Controller'));
+            array_pop($parts);
+            $parts[] = $this->deriveControllerClass($controller);
+
+            $template = $map . implode('/', $parts);
+            $template = trim($template, '/');
+            $template =  $this->inflectName($template);
+            return $template;
+        }
+        return false;
     }
 
     /**

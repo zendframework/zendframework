@@ -21,7 +21,12 @@ class InjectTemplateListenerTest extends TestCase
 {
     public function setUp()
     {
+        $controllerMap = array(
+            'MappedNs' => true,
+            'ZendTest\MappedNs' => true,
+        );
         $this->listener   = new InjectTemplateListener();
+        $this->listener->setControllerMap($controllerMap);
         $this->event      = new MvcEvent();
         $this->routeMatch = new RouteMatch(array());
         $this->event->setRouteMatch($this->routeMatch);
@@ -123,6 +128,111 @@ class InjectTemplateListenerTest extends TestCase
         $this->listener->injectTemplate($this->event);
 
         $this->assertEquals('zend-test/controller/test-asset/sample/test', $myViewModel->getTemplate());
+    }
+
+    public function testControllerMatchedByMapIsInflected()
+    {
+        $this->routeMatch->setParam('controller', 'MappedNs\SubNs\Controller\Sample');
+        $myViewModel  = new ViewModel();
+
+        $this->event->setResult($myViewModel);
+        $this->listener->injectTemplate($this->event);
+
+        $this->assertEquals('mapped-ns/sub-ns/sample', $myViewModel->getTemplate());
+
+        $this->listener->setControllerMap(array('ZendTest' => true));
+        $myViewModel  = new ViewModel();
+        $myController = new \ZendTest\Mvc\Controller\TestAsset\SampleController();
+        $this->event->setTarget($myController);
+        $this->event->setResult($myViewModel);
+
+        $this->listener->injectTemplate($this->event);
+
+        $this->assertEquals('zend-test/mvc/test-asset/sample', $myViewModel->getTemplate());
+    }
+
+    public function testControllerNotMatchedByMapIsNotAffected()
+    {
+        $this->routeMatch->setParam('action', 'test');
+        $myViewModel  = new ViewModel();
+        $myController = new \ZendTest\Mvc\Controller\TestAsset\SampleController();
+
+        $this->event->setTarget($myController);
+        $this->event->setResult($myViewModel);
+        $this->listener->injectTemplate($this->event);
+
+        $this->assertEquals('zend-test/sample/test', $myViewModel->getTemplate());
+    }
+
+    public function testControllerMapMatchedPrefixReplacedByStringValue()
+    {
+        $this->listener->setControllerMap(array(
+            'Foo\Bar' => 'string-value',
+        ));
+        $template = $this->listener->mapController('Foo\Bar\Controller\IndexController');
+        $this->assertEquals('string-value/index', $template);
+    }
+
+
+    public function testUsingNamespaceRouteParameterGivesSameResultAsFullControllerParameter()
+    {
+        $this->routeMatch->setParam('controller', 'MappedNs\Foo\Controller\Bar\Baz\Sample');
+        $myViewModel  = new ViewModel();
+
+        $this->event->setResult($myViewModel);
+        $this->listener->injectTemplate($this->event);
+
+        $template1 = $myViewModel->getTemplate();
+
+        $this->routeMatch->setParam(ModuleRouteListener::MODULE_NAMESPACE, 'MappedNs\Foo\Controller\Bar');
+        $this->routeMatch->setParam('controller', 'Baz\Sample');
+
+        $moduleRouteListener = new ModuleRouteListener;
+        $moduleRouteListener->onRoute($this->event);
+
+        $myViewModel  = new ViewModel();
+
+        $this->event->setResult($myViewModel);
+        $this->listener->injectTemplate($this->event);
+
+        $this->assertEquals($template1, $myViewModel->getTemplate());
+    }
+
+    public function testControllerMapOnlyFullNamespaceMatches()
+    {
+        $this->listener->setControllerMap(array(
+            'Foo' => 'foo-matched',
+            'Foo\Bar' => 'foo-bar-matched',
+        ));
+        $template = $this->listener->mapController('Foo\BarBaz\Controller\IndexController');
+        $this->assertEquals('foo-matched/bar-baz/index', $template);
+    }
+
+    public function testControllerMapRuleSetToFalseIsIgnored()
+    {
+        $this->listener->setControllerMap(array(
+            'Foo' => 'foo-matched',
+            'Foo\Bar' => false,
+        ));
+        $template = $this->listener->mapController('Foo\Bar\Controller\IndexController');
+        $this->assertEquals('foo-matched/bar/index', $template);
+    }
+
+    public function testControllerMapMoreSpecificRuleMatchesFirst()
+    {
+        $this->listener->setControllerMap(array(
+            'Foo'     => true,
+            'Foo\Bar' => 'bar/baz',
+        ));
+        $template = $this->listener->mapController('Foo\Bar\Controller\IndexController');
+        $this->assertEquals('bar/baz/index', $template);
+
+        $this->listener->setControllerMap(array(
+            'Foo\Bar' => 'bar/baz',
+            'Foo'     => true,
+        ));
+        $template = $this->listener->mapController('Foo\Bar\Controller\IndexController');
+        $this->assertEquals('bar/baz/index', $template);
     }
 
     public function testAttachesListenerAtExpectedPriority()

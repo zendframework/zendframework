@@ -81,7 +81,7 @@ class HelperPluginManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testIfHelperIsTranslatorAwareAndMvcTranslatorIsAvailableItWillInjectTheMvcTranslator()
     {
-        $translator = new MvcTranslator();
+        $translator = new MvcTranslator($this->getMock('Zend\I18n\Translator\TranslatorInterface'));
         $services   = new ServiceManager();
         $services->setService('MvcTranslator', $translator);
         $this->helpers->setServiceLocator($services);

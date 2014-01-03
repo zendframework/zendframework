@@ -59,7 +59,7 @@ class FormFileTest extends CommonTestCase
     /**
      * @return void
      */
-    public function testRendersElementWithFileArrayValue()
+    public function testRendersElementWithFileIgnoresValue()
     {
         $element = new Element\File('foo');
         $element->setValue(array(
@@ -72,7 +72,7 @@ class FormFileTest extends CommonTestCase
         $markup  = $this->helper->render($element);
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="file"', $markup);
-        $this->assertContains('value="foofile"', $markup);
+        $this->assertNotContains('value="', $markup);
     }
 
     /**
@@ -108,7 +108,6 @@ class FormFileTest extends CommonTestCase
             array('size', 'assertNotContains'),
             array('src', 'assertNotContains'),
             array('step', 'assertNotContains'),
-            array('value', 'assertContains'),
             array('width', 'assertNotContains'),
         );
     }

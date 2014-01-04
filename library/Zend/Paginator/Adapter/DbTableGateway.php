@@ -11,7 +11,6 @@ namespace Zend\Paginator\Adapter;
 
 use Zend\Db\Sql\Where;
 use Zend\Db\TableGateway\TableGateway;
-use Zend\Paginator\Adapter\DbSelect;
 
 class DbTableGateway extends DbSelect
 {

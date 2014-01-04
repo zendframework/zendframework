@@ -9,7 +9,6 @@
 
 namespace Zend\ServiceManager;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 interface InitializerInterface
 {

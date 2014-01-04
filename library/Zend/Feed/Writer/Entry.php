@@ -11,7 +11,6 @@ namespace Zend\Feed\Writer;
 
 use DateTime;
 use Zend\Feed\Uri;
-use Zend\Feed\Writer\Exception;
 
 /**
 */

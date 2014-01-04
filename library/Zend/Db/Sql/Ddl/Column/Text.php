@@ -9,7 +9,6 @@
 
 namespace Zend\Db\Sql\Ddl\Column;
 
-use Zend\Db\Sql\Ddl\Column\Column;
 
 class Text extends Column
 {

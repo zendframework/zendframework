@@ -12,7 +12,7 @@ namespace ZendTest\Mvc\ResponseSender;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Mvc\ResponseSender\SimpleStreamResponseSender;
 
-class StreamResponseSenderTest extends TestCase
+class SimpleStreamResponseSenderTest extends TestCase
 {
     public function testSendResponseIgnoresInvalidResponseTypes()
     {

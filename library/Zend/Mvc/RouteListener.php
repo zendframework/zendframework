@@ -11,7 +11,6 @@ namespace Zend\Mvc;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Mvc\Application;
 
 class RouteListener implements ListenerAggregateInterface
 {

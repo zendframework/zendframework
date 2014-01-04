@@ -9,10 +9,8 @@
 
 namespace Zend\Crypt;
 
-use Zend\Crypt\Hmac;
 use Zend\Crypt\Key\Derivation\Pbkdf2;
 use Zend\Crypt\Symmetric\SymmetricInterface;
-use Zend\Crypt\Utils;
 use Zend\Math\Rand;
 
 /**

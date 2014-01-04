@@ -9,7 +9,6 @@
 
 namespace Zend\Crypt\Key\Derivation;
 
-use Zend\Crypt\Key\Derivation\Pbkdf2;
 
 /**
  * Scrypt key derivation function

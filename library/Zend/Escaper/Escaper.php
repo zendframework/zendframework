@@ -9,7 +9,6 @@
 
 namespace Zend\Escaper;
 
-use Zend\Escaper\Exception;
 
 /**
  * Context specific methods for use in secure output escaping

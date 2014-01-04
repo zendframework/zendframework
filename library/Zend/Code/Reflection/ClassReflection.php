@@ -12,7 +12,6 @@ namespace Zend\Code\Reflection;
 use ReflectionClass;
 use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
-use Zend\Code\Reflection\FileReflection;
 use Zend\Code\Scanner\AnnotationScanner;
 use Zend\Code\Scanner\FileScanner;
 

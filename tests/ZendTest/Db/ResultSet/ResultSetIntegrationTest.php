@@ -16,7 +16,7 @@ use SplStack;
 use stdClass;
 use Zend\Db\ResultSet\ResultSet;
 
-class ResultSetTest extends TestCase
+class ResultSetIntegrationTest extends TestCase
 {
     /**
      * @var ResultSet

@@ -9,7 +9,6 @@
 
 namespace Zend\View\Helper;
 
-use Zend\View\Helper\Escaper;
 
 /**
  * Helper for escaping values

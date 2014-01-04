@@ -11,7 +11,6 @@ namespace Zend\Mvc\Controller\Plugin;
 
 use Zend\Http\Header\Accept\FieldValuePart\AbstractFieldValuePart;
 use Zend\Http\Request;
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\Mvc\InjectApplicationEventInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Exception\DomainException;

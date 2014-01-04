@@ -15,7 +15,6 @@ use Zend\Code\Scanner\AggregateDirectoryScanner;
 use Zend\Code\Scanner\DerivedClassScanner;
 use Zend\Code\Scanner\DirectoryScanner;
 use Zend\Code\Scanner\FileScanner;
-use Zend\Di\Definition\Annotation;
 
 /**
  * Class definitions based on a set of directories to be scanned

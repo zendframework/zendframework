@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Navigation;
+namespace ZendTest\Navigation\Page;
 
 use Zend\Navigation\Page\AbstractPage;
 use Zend\Navigation;

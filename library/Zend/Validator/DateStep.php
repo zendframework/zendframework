@@ -14,7 +14,6 @@ use DateTime;
 use DateTimeZone;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Validator\Exception;
 
 class DateStep extends Date
 {

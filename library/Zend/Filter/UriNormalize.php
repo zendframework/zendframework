@@ -9,7 +9,6 @@
 
 namespace Zend\Filter;
 
-use Zend\Filter\AbstractFilter;
 use Zend\Uri\Exception\ExceptionInterface as UriException;
 use Zend\Uri\UriFactory;
 use Zend\Uri\Uri;

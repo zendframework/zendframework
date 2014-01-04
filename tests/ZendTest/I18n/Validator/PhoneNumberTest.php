@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\I18nTest\Validator;
+namespace ZendTest\I18n\Validator;
 
 use Zend\I18n\Validator\PhoneNumber;
 

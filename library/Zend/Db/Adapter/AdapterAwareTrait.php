@@ -9,7 +9,6 @@
 
 namespace Zend\Db\Adapter;
 
-use Zend\Db\Adapter\Adapter;
 
 trait AdapterAwareTrait
 {

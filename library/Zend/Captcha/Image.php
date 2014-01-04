@@ -10,7 +10,6 @@
 namespace Zend\Captcha;
 
 use DirectoryIterator;
-use Zend\Captcha\Exception;
 use Zend\Stdlib\ErrorHandler;
 
 /**

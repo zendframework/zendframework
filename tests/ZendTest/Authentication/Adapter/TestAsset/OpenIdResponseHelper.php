@@ -14,7 +14,7 @@ use Zend\OpenId\OpenId;
 
 OpenId::$exitOnRedirect = false;
 
-class ResponseHelper extends Response
+class OpenIdResponseHelper extends Response
 {
     private $_canSendHeaders;
 

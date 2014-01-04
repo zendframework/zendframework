@@ -10,7 +10,6 @@
 namespace Zend\Mvc\Service;
 
 use Zend\Mvc\Controller\ControllerManager;
-use Zend\Mvc\Service\DiStrictAbstractServiceFactory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 

@@ -19,7 +19,6 @@ use Zend\Stdlib\Hydrator\Filter\HasFilter;
 use Zend\Stdlib\Hydrator\Filter\IsFilter;
 use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
 use Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter;
-use Zend\Stdlib\Hydrator\Naming\UnderscoreCamelCaseNaming;
 use Zend\Stdlib\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 
 class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface

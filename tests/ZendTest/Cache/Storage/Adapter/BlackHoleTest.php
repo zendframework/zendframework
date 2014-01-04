@@ -32,7 +32,7 @@ use Zend\Cache\StorageFactory;
  * @subpackage UnitTests
  * @group      Zend_Cache
  */
-class BlackHoleAdapterTest extends \PHPUnit_Framework_TestCase
+class BlackHoleTest extends \PHPUnit_Framework_TestCase
 {
 
     /**

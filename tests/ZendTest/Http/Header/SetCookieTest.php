@@ -262,6 +262,8 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         if ( PHP_INT_SIZE === 4 ) {
             $setCookieHeader = new SetCookie('myname', 'myvalue', 'Thu, 01-Jan-2040 00:00:00 GMT');
             $this->assertSame(2147483647, $setCookieHeader->getExpires(true));
+        } else {
+            $this->markTestSkipped('Testing set cookie expiry over 2038 is only relevant on 32bit systems');
         }
     }
 

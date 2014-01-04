@@ -7,7 +7,8 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Code\Generator\DocBlock\Tag;
+namespace ZendTest\Code\Generic\Prototype;
+
 use Zend\Code\Generic\Prototype\PrototypeClassFactory;
 use ZendTest\Code\Generator\TestAsset\PrototypeClass;
 use ZendTest\Code\Generator\TestAsset\PrototypeGenericClass;

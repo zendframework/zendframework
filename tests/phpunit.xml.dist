@@ -23,6 +23,7 @@
     </listeners>
 
     <php>
+        <ini name="date.timezone" value="UTC"/>
 
         <!-- Integration Test Variables -->
         <!--<var name="ZEND_DB_ADAPTER_DRIVER_MYSQL_HOSTNAME" value="" />-->

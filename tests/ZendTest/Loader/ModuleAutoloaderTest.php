@@ -13,7 +13,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Loader\ModuleAutoloader;
 use InvalidArgumentException;
 
-class ManagerTest extends TestCase
+class ModuleAutoloaderTest extends TestCase
 {
     public function setUp()
     {

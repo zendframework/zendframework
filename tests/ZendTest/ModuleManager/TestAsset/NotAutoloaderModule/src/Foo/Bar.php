@@ -9,5 +9,5 @@
 
 namespace Foo;
 
-class Baz
+class Bar
 {}

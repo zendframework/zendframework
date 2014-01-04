@@ -14,7 +14,7 @@ use Zend\Authentication\Adapter\Http;
 /**
  * @group      Zend_Auth
  */
-class FileTest extends \PHPUnit_Framework_TestCase
+class FileResolverTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Path to test files

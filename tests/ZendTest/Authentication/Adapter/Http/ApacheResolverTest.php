@@ -15,7 +15,7 @@ use Zend\Authentication\Result as AuthResult;
 /**
  * @group      Zend_Auth
  */
-class ApacheTest extends \PHPUnit_Framework_TestCase
+class ApacheResolverTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Path to test files

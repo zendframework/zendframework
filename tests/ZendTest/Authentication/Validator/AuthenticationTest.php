@@ -17,7 +17,7 @@ use ZendTest\Authentication as AuthTest;
 /**
  * @group      Zend_Validator
  */
-class AthenticationTest extends \PHPUnit_Framework_TestCase
+class AuthenticationTest extends \PHPUnit_Framework_TestCase
 {
     protected $validator;
 

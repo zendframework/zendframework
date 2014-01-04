@@ -9,7 +9,6 @@
 
 namespace Zend\Uri;
 
-use Zend\Uri\Uri;
 
 /**
  * URI Factory Class

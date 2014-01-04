@@ -9,7 +9,6 @@
 
 namespace Zend\Log;
 
-use Zend\Log\LoggerInterface;
 
 trait LoggerAwareTrait
 {

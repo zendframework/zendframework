@@ -9,8 +9,6 @@
 
 namespace Zend\Stdlib;
 
-use Zend\Stdlib\Exception;
-use Zend\Stdlib\ErrorHandler;
 
 /**
  * Wrapper for glob with fallback if GLOB_BRACE is not available.

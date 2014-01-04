@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Filter;
+namespace ZendTest\I18n\Filter;
 
 use Zend\I18n\Filter\Alnum as AlnumFilter;
 use Locale;

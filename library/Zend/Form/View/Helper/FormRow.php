@@ -13,7 +13,6 @@ use Zend\Form\Element\Button;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\LabelOptionsAwareInterface;
-use Zend\Form\View\Helper\AbstractHelper;
 
 class FormRow extends AbstractHelper
 {

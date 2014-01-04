@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Code\Scanner\TestAsset\Proxy;
+namespace ZendTest\Code\TestAsset\Proxy;
 
 use Zend\Code\Scanner\CachingFileScanner;
 

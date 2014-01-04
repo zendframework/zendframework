@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Validator;
+namespace ZendTest\Authentication\Validator;
 
 use Zend\Authentication\Validator\Authentication as AuthenticationValidator;
 use Zend\Authentication\AuthenticationService;
@@ -17,7 +17,7 @@ use ZendTest\Authentication as AuthTest;
 /**
  * @group      Zend_Validator
  */
-class AthenticationTest extends \PHPUnit_Framework_TestCase
+class AuthenticationTest extends \PHPUnit_Framework_TestCase
 {
     protected $validator;
 

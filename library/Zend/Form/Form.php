@@ -11,7 +11,6 @@ namespace Zend\Form;
 
 use Traversable;
 use Zend\Form\Element\Collection;
-use Zend\Form\Exception;
 use Zend\InputFilter\CollectionInputFilter;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;

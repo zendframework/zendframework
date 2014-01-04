@@ -25,7 +25,7 @@ use Zend\View\Model\ViewModel;
 use Zend\View\Resolver\TemplateMapResolver;
 use Zend\View\Strategy\PhpRendererStrategy;
 
-class DefaultRenderingStrategyTest extends TestCase
+class DefaultRendereringStrategyTest extends TestCase
 {
     protected $event;
     protected $request;

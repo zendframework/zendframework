@@ -13,7 +13,7 @@ use Zend\Stdlib\Hydrator\Filter\HasFilter,
     Zend\Stdlib\Hydrator\Filter\IsFilter,
     Zend\Stdlib\Hydrator\Filter\GetFilter;
 
-class ValidationTest extends \PHPUnit_Framework_TestCase
+class FilterTest extends \PHPUnit_Framework_TestCase
 {
     public function testHasValidation()
     {

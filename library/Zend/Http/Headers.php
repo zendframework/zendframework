@@ -13,7 +13,6 @@ use ArrayIterator;
 use Countable;
 use Iterator;
 use Traversable;
-use Zend\Http\HeaderLoader;
 use Zend\Loader\PluginClassLocator;
 
 /**

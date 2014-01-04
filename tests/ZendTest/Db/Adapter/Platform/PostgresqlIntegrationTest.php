@@ -17,7 +17,7 @@ use Zend\Db\Adapter\Driver\Pdo;
  * @group integration
  * @group integration-postgres
  */
-class PostgresIntegrationTest extends \PHPUnit_Framework_TestCase
+class PostgresqlIntegrationTest extends \PHPUnit_Framework_TestCase
 {
 
     public $adapters = array();

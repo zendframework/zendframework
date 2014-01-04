@@ -9,7 +9,6 @@
 
 namespace Zend\ProgressBar;
 
-use Zend\ProgressBar\Exception;
 use Zend\Session;
 
 /**

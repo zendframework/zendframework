@@ -7,13 +7,13 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Loader\ModuleAutoloaderTest;
+namespace ZendTest\Loader;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Loader\ModuleAutoloader;
 use InvalidArgumentException;
 
-class ManagerTest extends TestCase
+class ModuleAutoloaderTest extends TestCase
 {
     public function setUp()
     {

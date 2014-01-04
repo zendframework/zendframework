@@ -11,8 +11,6 @@ namespace Zend\Validator;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
-use Zend\Validator\AbstractValidator;
-use Zend\Validator\Exception;
 
 /**
  * Validates IBAN Numbers (International Bank Account Numbers)

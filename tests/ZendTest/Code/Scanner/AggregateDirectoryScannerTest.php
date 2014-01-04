@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Code\Scanner\DerivedScanner;
+namespace ZendTest\Code\Scanner;
 
 use PHPUnit_Framework_TestCase;
 

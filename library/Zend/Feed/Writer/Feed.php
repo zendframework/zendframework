@@ -11,7 +11,6 @@ namespace Zend\Feed\Writer;
 
 use Countable;
 use Iterator;
-use Zend\Feed\Writer\Renderer;
 
 /**
 */

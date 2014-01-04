@@ -11,7 +11,7 @@ namespace ZendTest\Db\Sql;
 
 use Zend\Db\Sql\Sql;
 
-class TableGatewayTest extends \PHPUnit_Framework_TestCase
+class SqlTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $mockAdapter = null;

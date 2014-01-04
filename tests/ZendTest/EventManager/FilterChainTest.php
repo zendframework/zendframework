@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Stdlib;
+namespace ZendTest\EventManager;
 
 use Zend\EventManager\FilterChain;
 use Zend\Stdlib\CallbackHandler;

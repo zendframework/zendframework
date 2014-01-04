@@ -9,7 +9,6 @@
 
 namespace Zend\Config\Reader;
 
-use Zend\Config\Reader\ReaderInterface;
 use Zend\Config\Exception;
 
 /**

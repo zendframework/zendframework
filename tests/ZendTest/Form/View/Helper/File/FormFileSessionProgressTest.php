@@ -7,9 +7,10 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Form\View\Helper;
+namespace ZendTest\Form\View\Helper\File;
 
 use Zend\Form\View\Helper\File\FormFileSessionProgress;
+use ZendTest\Form\View\Helper\CommonTestCase;
 
 class FormFileSessionProgressTest extends CommonTestCase
 {

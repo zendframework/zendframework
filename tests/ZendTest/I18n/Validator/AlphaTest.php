@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Validator;
+namespace ZendTest\I18n\Validator;
 
 use Zend\I18n\Validator\Alpha as AlphaValidator;
 

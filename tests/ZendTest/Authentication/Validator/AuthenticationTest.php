@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Validator;
+namespace ZendTest\Authentication\Validator;
 
 use Zend\Authentication\Validator\Authentication as AuthenticationValidator;
 use Zend\Authentication\AuthenticationService;

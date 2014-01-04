@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Console\Char;
+namespace ZendTest\Console\Prompt;
 
 use Zend\Console\Prompt\Number;
 use ZendTest\Console\TestAssets\ConsoleAdapter;

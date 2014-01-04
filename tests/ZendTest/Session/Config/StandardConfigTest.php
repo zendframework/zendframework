@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Session;
+namespace ZendTest\Session\Config;
 
 use Zend\Session\Config\StandardConfig;
 

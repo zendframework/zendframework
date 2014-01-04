@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Console\Adapater;
+namespace ZendTest\Console\Adapter;
 
 use ZendTest\Console\TestAssets\ConsoleAdapter;
 

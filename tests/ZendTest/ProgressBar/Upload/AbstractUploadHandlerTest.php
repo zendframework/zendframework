@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\ProgressBar;
+namespace ZendTest\ProgressBar\Upload;
 
 use Zend\ProgressBar\ProgressBar;
 

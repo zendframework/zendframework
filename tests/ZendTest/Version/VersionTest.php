@@ -7,12 +7,14 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
+namespace ZendTest\Version;
+
 use Zend\Version\Version;
 
 /**
  * @group      Zend_Version
  */
-class Zend_VersionTest extends \PHPUnit_Framework_TestCase
+class VersionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Tests that version_compare() and its "proxy"

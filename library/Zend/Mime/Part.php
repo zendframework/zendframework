@@ -80,8 +80,8 @@ class Part
         //stream_filter_remove(); // ??? is that right?
         switch ($this->encoding) {
             case Mime::ENCODING_QUOTEDPRINTABLE:
-                if(array_search(Mime::ENCODING_QUOTEDPRINTABLE, $this->filters) !== FALSE) {
-                    break;
+                if(array_key_exists(Mime::ENCODING_QUOTEDPRINTABLE, $this->filters)) {
+                    stream_filter_remove($this->filters[Mime::ENCODING_QUOTEDPRINTABLE]);
                 }
                 $filter = stream_filter_append(
                     $this->content,
@@ -92,14 +92,14 @@ class Part
                         'line-break-chars' => $EOL
                     )
                 );
-                array_push($this->filters,Mime::ENCODING_QUOTEDPRINTABLE);
+                $this->filters[Mime::ENCODING_QUOTEDPRINTABLE] = $filter;
                 if (!is_resource($filter)) {
                     throw new Exception\RuntimeException('Failed to append quoted-printable filter');
                 }
                 break;
             case Mime::ENCODING_BASE64:
-                if(array_search(Mime::ENCODING_BASE64, $this->filters) !== FALSE) {
-                    break;
+                if(array_key_exists(Mime::ENCODING_BASE64,$this->filters)) {
+                    stream_filter_remove($this->filters[Mime::ENCODING_BASE64]);
                 }
                 $filter = stream_filter_append(
                     $this->content,
@@ -110,7 +110,7 @@ class Part
                         'line-break-chars' => $EOL
                     )
                 );
-                array_push($this->filters,Mime::ENCODING_BASE64);
+                $this->filters[Mime::ENCODING_BASE64] = $filter;
                 if (!is_resource($filter)) {
                     throw new Exception\RuntimeException('Failed to append base64 filter');
                 }

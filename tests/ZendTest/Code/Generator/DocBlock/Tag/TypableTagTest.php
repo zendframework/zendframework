@@ -15,7 +15,7 @@ use ZendTest\Code\Generator\TestAsset\TypeableTag;
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
-class TybableTagTest extends \PHPUnit_Framework_TestCase
+class TypableTagTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var TypeableTag

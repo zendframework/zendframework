@@ -3,6 +3,7 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->notName('TestSampleClass10.php')
     ->exclude('demos')
     ->exclude('resources')
+    ->exclude('Class.php')
     ->filter(function (SplFileInfo $file) {
         if (strstr($file->getPath(), 'compatibility')) {
             return false;

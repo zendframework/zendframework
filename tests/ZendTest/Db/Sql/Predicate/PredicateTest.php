@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -125,6 +125,16 @@ class PredicateTest extends TestCase
         $parts = $predicate->getExpressionData();
         $this->assertEquals(1, count($parts));
         $this->assertContains('%s IN (%s, %s)', $parts[0]);
+        $this->assertContains(array('foo.bar', 'foo', 'bar'), $parts[0]);
+    }
+
+    public function testNotInCreatesNotInPredicate()
+    {
+        $predicate = new Predicate();
+        $predicate->notIn('foo.bar', array('foo', 'bar'));
+        $parts = $predicate->getExpressionData();
+        $this->assertEquals(1, count($parts));
+        $this->assertContains('%s NOT IN (%s, %s)', $parts[0]);
         $this->assertContains(array('foo.bar', 'foo', 'bar'), $parts[0]);
     }
 

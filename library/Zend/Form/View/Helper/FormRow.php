@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -321,7 +321,7 @@ class FormRow extends AbstractHelper
     }
 
     /**
-     * Retrive if the errors are rendered by this helper
+     * Retrieve if the errors are rendered by this helper
      *
      * @return bool
      */
@@ -343,7 +343,7 @@ class FormRow extends AbstractHelper
     }
 
     /**
-     * Retrive current partial
+     * Retrieve current partial
      *
      * @return null|string
      */

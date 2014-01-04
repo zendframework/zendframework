@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -12,7 +12,7 @@ namespace Zend\View;
 use ArrayObject;
 
 /**
- * Abstract class for Zend_View to help enforce private constructs.
+ * Class for Zend\View\Renderer\PhpRenderer to help enforce private constructs.
  *
  * @todo       Allow specifying string names for manager, filter chain, variables
  * @todo       Move escaping into variables object

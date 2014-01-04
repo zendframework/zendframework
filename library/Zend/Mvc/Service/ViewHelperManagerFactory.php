@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -81,11 +81,14 @@ class ViewHelperManagerFactory extends AbstractPluginManagerFactory
             $config = $serviceLocator->has('Config') ? $serviceLocator->get('Config') : array();
             $basePathHelper = new ViewHelper\BasePath;
             if (isset($config['view_manager']) && isset($config['view_manager']['base_path'])) {
-                $basePath = $config['view_manager']['base_path'];
+                $basePathHelper->setBasePath($config['view_manager']['base_path']);
             } else {
-                $basePath = $serviceLocator->get('Request')->getBasePath();
+                $request = $serviceLocator->get('Request');
+                if (is_callable(array($request, 'getBasePath'))) {
+                    $basePathHelper->setBasePath($request->getBasePath());
+                }
             }
-            $basePathHelper->setBasePath($basePath);
+
             return $basePathHelper;
         });
 

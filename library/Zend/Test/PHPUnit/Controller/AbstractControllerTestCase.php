@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 namespace Zend\Test\PHPUnit\Controller;
@@ -242,7 +242,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Dispatch the MVC with an URL
+     * Dispatch the MVC with a URL
      * Accept a HTTP (simulate a customer action) or console route.
      *
      * The URL provided set the request URI in the request object.
@@ -462,7 +462,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     {
         $routeMatch           = $this->getApplication()->getMvcEvent()->getRouteMatch();
         $controllerIdentifier = $routeMatch->getParam('controller');
-        $controllerManager    = $this->getApplicationServiceLocator()->get('ControllerLoader');
+        $controllerManager    = $this->getApplicationServiceLocator()->get('ControllerManager');
         $controllerClass      = $controllerManager->get($controllerIdentifier);
         return get_class($controllerClass);
     }

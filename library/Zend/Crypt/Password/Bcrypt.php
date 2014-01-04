@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -22,8 +22,12 @@ class Bcrypt implements PasswordInterface
 
     /**
      * @var string
+     *
+     * Changed from 14 to 10 to prevent possibile DOS attacks
+     * due to the high computational time
+     * @see http://timoh6.github.io/2013/11/26/Aggressive-password-stretching.html
      */
-    protected $cost = '14';
+    protected $cost = '10';
 
     /**
      * @var string
@@ -104,7 +108,7 @@ class Bcrypt implements PasswordInterface
     }
 
     /**
-     * Verify if a password is correct against an hash value
+     * Verify if a password is correct against a hash value
      *
      * @param  string $password
      * @param  string $hash

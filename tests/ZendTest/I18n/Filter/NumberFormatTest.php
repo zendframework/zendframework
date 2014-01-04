@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,6 +15,13 @@ use NumberFormatter;
 
 class NumberFormatTest extends TestCase
 {
+    public function setUp()
+    {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+    }
+
     public function testConstructWithOptions()
     {
         $filter = new NumberFormatFilter(array(
@@ -63,8 +70,16 @@ class NumberFormatTest extends TestCase
         $this->assertEquals($expected, $filter->filter($value));
     }
 
-    public static function numberToFormattedProvider()
+    public function numberToFormattedProvider()
     {
+        if (!extension_loaded('intl')) {
+            if (version_compare(\PHPUnit_Runner_Version::VERSION, '3.8.0-dev') === 1) {
+                $this->markTestSkipped('ext/intl not enabled');
+            } else {
+                return array(array());
+            }
+        }
+
         return array(
             array(
                 'en_US',
@@ -90,8 +105,16 @@ class NumberFormatTest extends TestCase
         );
     }
 
-    public static function formattedToNumberProvider()
+    public function formattedToNumberProvider()
     {
+        if (!extension_loaded('intl')) {
+            if (version_compare(\PHPUnit_Runner_Version::VERSION, '3.8.0-dev') === 1) {
+                $this->markTestSkipped('ext/intl not enabled');
+            } else {
+                return array(array());
+            }
+        }
+
         return array(
             array(
                 'en_US',

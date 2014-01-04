@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -71,7 +71,7 @@ class Count extends AbstractValidator
      * Min limits the file count, when used with max=null it is the maximum file count
      * It also accepts an array with the keys 'min' and 'max'
      *
-     * If $options is a integer, it will be used as maximum file count
+     * If $options is an integer, it will be used as maximum file count
      * As Array is accepts the following keys:
      * 'min': Minimum filecount
      * 'max': Maximum filecount
@@ -192,7 +192,7 @@ class Count extends AbstractValidator
     /**
      * Returns true if and only if the file count of all checked files is at least min and
      * not bigger than max (when max is not null). Attention: When checking with set min you
-     * must give all files with the first call, otherwise you will get an false.
+     * must give all files with the first call, otherwise you will get a false.
      *
      * @param  string|array $value Filenames to check for count
      * @param  array        $file  File data from \Zend\File\Transfer\Transfer

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -53,6 +53,8 @@ class Metadata implements MetadataInterface
                 return new Source\SqliteMetadata($adapter);
             case 'PostgreSQL':
                 return new Source\PostgresqlMetadata($adapter);
+            case 'Oracle':
+                return new Source\OracleMetadata($adapter);
         }
 
         throw new \Exception('cannot create source from adapter');

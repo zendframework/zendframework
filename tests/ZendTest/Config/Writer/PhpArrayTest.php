@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -35,7 +35,10 @@ class PhpArrayTest extends AbstractWriterTestCase
             'test' => 'foo',
             'bar' => array(0 => 'baz', 1 => 'foo'),
             'emptyArray' => array(),
-            'object' => (object) array('foo' => 'bar')
+            'object' => (object) array('foo' => 'bar'),
+            'integer' => 123,
+            'boolean' => false,
+            'null' => null,
         ));
 
         $configString = $this->writer->toString($config);
@@ -52,6 +55,9 @@ class PhpArrayTest extends AbstractWriterTestCase
         $expected .= "    'object' => stdClass::__set_state(array(\n";
         $expected .= "   'foo' => 'bar',\n";
         $expected .= ")),\n";
+        $expected .= "    'integer' => 123,\n";
+        $expected .= "    'boolean' => false,\n";
+        $expected .= "    'null' => null,\n";
         $expected .= ");\n";
 
         $this->assertEquals($expected, $configString);

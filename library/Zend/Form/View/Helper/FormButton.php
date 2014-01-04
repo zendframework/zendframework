@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -11,6 +11,7 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
+use Zend\Form\LabelOptionsAwareInterface;
 
 class FormButton extends FormInput
 {
@@ -92,9 +93,18 @@ class FormButton extends FormInput
             }
         }
 
-        $escape = $this->getEscapeHtmlHelper();
+        $labelOptions = array();
 
-        return $openTag . $escape($buttonContent) . $this->closeTag();
+        if ($element instanceof LabelOptionsAwareInterface) {
+            $labelOptions = $element->getLabelOptions();
+        }
+
+        if (empty($labelOptions) || $labelOptions['disable_html_escape'] == false) {
+            $escapeHtmlHelper = $this->getEscapeHtmlHelper();
+            $buttonContent = $escapeHtmlHelper($buttonContent);
+        }
+
+        return $openTag . $buttonContent . $this->closeTag();
     }
 
     /**

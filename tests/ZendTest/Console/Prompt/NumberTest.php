@@ -3,11 +3,11 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Console\Char;
+namespace ZendTest\Console\Prompt;
 
 use Zend\Console\Prompt\Number;
 use ZendTest\Console\TestAssets\ConsoleAdapter;
@@ -48,8 +48,8 @@ class NumberTest extends \PHPUnit_Framework_TestCase
 
     public function testCanReadNumberOnMultilign()
     {
-        fwrite($this->adapter->stream, "a\n");
-        fwrite($this->adapter->stream, "123\n");
+        fwrite($this->adapter->stream, "a" . PHP_EOL);
+        fwrite($this->adapter->stream, "123" . PHP_EOL);
         rewind($this->adapter->stream);
         $this->adapter->autoRewind = false;
 
@@ -64,8 +64,8 @@ class NumberTest extends \PHPUnit_Framework_TestCase
 
     public function testCanNotReadFloatByDefault()
     {
-        fwrite($this->adapter->stream, "1.23\n");
-        fwrite($this->adapter->stream, "123\n");
+        fwrite($this->adapter->stream, "1.23" . PHP_EOL);
+        fwrite($this->adapter->stream, "123" . PHP_EOL);
         rewind($this->adapter->stream);
         $this->adapter->autoRewind = false;
 
@@ -80,8 +80,8 @@ class NumberTest extends \PHPUnit_Framework_TestCase
 
     public function testCanForceToReadFloat()
     {
-        fwrite($this->adapter->stream, "1.23\n");
-        fwrite($this->adapter->stream, "123\n");
+        fwrite($this->adapter->stream, "1.23" . PHP_EOL);
+        fwrite($this->adapter->stream, "123" . PHP_EOL);
         rewind($this->adapter->stream);
         $this->adapter->autoRewind = false;
 
@@ -96,9 +96,9 @@ class NumberTest extends \PHPUnit_Framework_TestCase
 
     public function testCanDefineAMax()
     {
-        fwrite($this->adapter->stream, "1\n");
-        fwrite($this->adapter->stream, "11\n");
-        fwrite($this->adapter->stream, "6\n");
+        fwrite($this->adapter->stream, "1" . PHP_EOL);
+        fwrite($this->adapter->stream, "11" . PHP_EOL);
+        fwrite($this->adapter->stream, "6" . PHP_EOL);
         rewind($this->adapter->stream);
         $this->adapter->autoRewind = false;
 

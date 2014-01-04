@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -19,7 +19,7 @@ use DateTime;
  * function acts likes a factory for the Zend\XmlRpc\Value objects
  *
  * Using this function, users/Zend\XmlRpc\Client object can create the Zend\XmlRpc\Value objects
- * from PHP variables, XML string or by specifying the exact XML-RPC natvie type
+ * from PHP variables, XML string or by specifying the exact XML-RPC native type
  */
 abstract class AbstractValue
 {
@@ -347,7 +347,7 @@ abstract class AbstractValue
             case self::XMLRPC_TYPE_STRING:
                 $xmlrpcValue = new Value\String($value);
                 break;
-            case self::XMLRPC_TYPE_DATETIME:  // The value should already be in a iso8601 format
+            case self::XMLRPC_TYPE_DATETIME:  // The value should already be in an iso8601 format
                 $xmlrpcValue = new Value\DateTime($value);
                 break;
             case self::XMLRPC_TYPE_BASE64:    // The value should already be base64 encoded
@@ -445,6 +445,9 @@ abstract class AbstractValue
         // If no type was specified, the default is string
         if (!$type) {
             $type = self::XMLRPC_TYPE_STRING;
+            if (empty($value) and preg_match('#^<value>.*</value>$#', $xml->asXML())) {
+                $value = str_replace(array('<value>', '</value>'), '', $xml->asXML());
+            }
         }
     }
 

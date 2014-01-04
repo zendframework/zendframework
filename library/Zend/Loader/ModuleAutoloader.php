@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -184,6 +184,10 @@ class ModuleAutoloader implements SplAutoloader
 
         foreach ($this->paths as $path) {
             $path = $path . $moduleClassPath;
+
+            if ($path == '.' || substr($path, 0, 2) == './' || substr($path, 0, 2) == '.\\') {
+                $path = realpath('.') . substr($path, 1);
+            }
 
             $classLoaded = $this->loadModuleFromDir($path, $class);
             if ($classLoaded) {

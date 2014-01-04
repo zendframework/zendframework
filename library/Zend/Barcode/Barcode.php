@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -182,7 +182,7 @@ abstract class Barcode
         }
 
         /*
-         * Verify that an barcode name has been specified.
+         * Verify that a barcode name has been specified.
          */
         if (!is_string($barcode) || empty($barcode)) {
             throw new Exception\InvalidArgumentException(
@@ -234,7 +234,7 @@ abstract class Barcode
         }
 
         /*
-         * Verify that an barcode name has been specified.
+         * Verify that a barcode name has been specified.
          */
         if (!is_string($renderer) || empty($renderer)) {
             throw new Exception\RendererCreationException(

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,6 +15,8 @@ namespace Zend\Http\Header;
  */
 class CacheControl implements HeaderInterface
 {
+    /** @var string */
+    protected $value;
 
     /**
      * Array of Cache-Control directives
@@ -32,8 +34,6 @@ class CacheControl implements HeaderInterface
      */
     public static function fromString($headerLine)
     {
-        $header = new static();
-
         list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
@@ -41,8 +41,13 @@ class CacheControl implements HeaderInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Cache-Control string: "' . $name . '"');
         }
 
+        $directives = static::parseValue($value);
+
         // @todo implementation details
-        $header->directives = static::parseValue($value);
+        $header = new static();
+        foreach ($directives as $key => $value) {
+            $header->addDirective($key, $value);
+        }
 
         return $header;
     }

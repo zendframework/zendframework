@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,6 +15,12 @@ use Zend\Code\NameInformation;
 
 class PropertyScanner implements ScannerInterface
 {
+    const T_BOOLEAN = "boolean";
+    const T_INTEGER = "int";
+    const T_STRING  = "string";
+    const T_ARRAY   = "array";
+    const T_UNKNOWN = "unknown";
+
     /**
      * @var bool
      */
@@ -81,6 +87,11 @@ class PropertyScanner implements ScannerInterface
     protected $value;
 
     /**
+     * @var string
+     */
+    protected $valueType;
+
+    /**
      * Constructor
      *
      * @param array $propertyTokens
@@ -123,6 +134,14 @@ class PropertyScanner implements ScannerInterface
     {
         $this->scan();
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValueType()
+    {
+        return $this->valueType;
     }
 
     /**
@@ -219,66 +238,79 @@ class PropertyScanner implements ScannerInterface
         /**
          * Variables & Setup
          */
-        $tokens = &$this->tokens;
+        $value            = '';
+        $concatenateValue = false;
 
+        $tokens = &$this->tokens;
         reset($tokens);
 
-        SCANNER_TOP:
+        foreach($tokens as $token) {
+            $tempValue = $token;
+            if (!is_string($token)) {
+                list($tokenType, $tokenContent, $tokenLine) = $token;
 
-        $token = current($tokens);
-
-        if (!is_string($token)) {
-            list($tokenType, $tokenContent, $tokenLine) = $token;
-
-            switch ($tokenType) {
-                case T_DOC_COMMENT:
-                    if ($this->docComment === null && $this->name === null) {
-                        $this->docComment = $tokenContent;
-                    }
-                    goto SCANNER_CONTINUE;
-
-                case T_VARIABLE:
-                    $this->name = ltrim($tokenContent, '$');
-                    goto SCANNER_CONTINUE;
-
-                case T_PUBLIC:
-                    // use defaults
-                    goto SCANNER_CONTINUE;
-
-                case T_PROTECTED:
-                    $this->isProtected = true;
-                    $this->isPublic = false;
-                    goto SCANNER_CONTINUE;
-
-                case T_PRIVATE:
-                    $this->isPrivate = true;
-                    $this->isPublic = false;
-                    goto SCANNER_CONTINUE;
-
-                case T_STATIC:
-                    $this->isStatic = true;
-                    goto SCANNER_CONTINUE;
-
-                default:
-                    if ($this->name !== null && trim($tokenContent) !== '') {
-                        $this->value .= (is_string($token)) ? $token : $tokenContent;
-                        if (substr($this->value, 0, 1) === '"' || substr($this->value, 0, 1) === "'") {
-                            $this->value = substr($this->value, 1, -1); // Remove quotes
+                switch ($tokenType) {
+                    case T_DOC_COMMENT:
+                        if ($this->docComment === null && $this->name === null) {
+                            $this->docComment = $tokenContent;
                         }
-                    }
-                    goto SCANNER_CONTINUE;
+                        break;
+
+                    case T_VARIABLE:
+                        $this->name = ltrim($tokenContent, '$');
+                        break;
+
+                    case T_PUBLIC:
+                        // use defaults
+                        break;
+
+                    case T_PROTECTED:
+                        $this->isProtected = true;
+                        $this->isPublic = false;
+                        break;
+
+                    case T_PRIVATE:
+                        $this->isPrivate = true;
+                        $this->isPublic = false;
+                        break;
+
+                    case T_STATIC:
+                        $this->isStatic = true;
+                        break;
+                    default:
+                        $tempValue = trim($tokenContent);
+                        break;
+                }
+            }
+
+            //end value concatenation
+            if(!is_array($token) && trim($token) == ";") {
+                $concatenateValue = false;
+            }
+
+            if(true === $concatenateValue) {
+                $value .= $tempValue;
+            }
+
+            //start value concatenation
+            if(!is_array($token) && trim($token) == "=") {
+                $concatenateValue = true;
             }
         }
 
-        SCANNER_CONTINUE:
-
-        if (next($this->tokens) === false) {
-            goto SCANNER_END;
+        $this->valueType = self::T_UNKNOWN;
+        if($value == "false" || $value == "true") {
+            $this->valueType = self::T_BOOLEAN;
+        } elseif(is_numeric($value)) {
+            $this->valueType = self::T_INTEGER;
+        } elseif(0 === strpos($value, 'array') || 0 === strpos($value, "[")) {
+            $this->valueType = self::T_ARRAY;
+        } elseif (substr($value, 0, 1) === '"' || substr($value, 0, 1) === "'") {
+            $value = substr($value, 1, -1); // Remove quotes
+            $this->valueType = self::T_STRING;
         }
-        goto SCANNER_TOP;
 
-        SCANNER_END:
-
+        $this->value = empty($value) ? null : $value;
         $this->isScanned = true;
     }
 }

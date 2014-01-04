@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -279,55 +279,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     {
         if ($predicate instanceof Where) {
             $this->where = $predicate;
-        } elseif ($predicate instanceof Predicate\PredicateInterface) {
-            $this->where->addPredicate($predicate, $combination);
-        } elseif ($predicate instanceof \Closure) {
-            $predicate($this->where);
         } else {
-            if (is_string($predicate)) {
-                // String $predicate should be passed as an expression
-                $predicate = (strpos($predicate, Expression::PLACEHOLDER) !== false)
-                    ? new Predicate\Expression($predicate) : new Predicate\Literal($predicate);
-                $this->where->addPredicate($predicate, $combination);
-            } elseif (is_array($predicate)) {
-
-                foreach ($predicate as $pkey => $pvalue) {
-                    // loop through predicates
-
-                    if (is_string($pkey) && strpos($pkey, '?') !== false) {
-                        // First, process strings that the abstraction replacement character ?
-                        // as an Expression predicate
-                        $predicate = new Predicate\Expression($pkey, $pvalue);
-
-                    } elseif (is_string($pkey)) {
-                        // Otherwise, if still a string, do something intelligent with the PHP type provided
-
-                        if ($pvalue === null) {
-                            // map PHP null to SQL IS NULL expression
-                            $predicate = new Predicate\IsNull($pkey, $pvalue);
-                        } elseif (is_array($pvalue)) {
-                            // if the value is an array, assume IN() is desired
-                            $predicate = new Predicate\In($pkey, $pvalue);
-                        } elseif ($pvalue instanceof Predicate\PredicateInterface) {
-                            //
-                            throw new Exception\InvalidArgumentException(
-                                'Using Predicate must not use string keys'
-                            );
-                        } else {
-                            // otherwise assume that array('foo' => 'bar') means "foo" = 'bar'
-                            $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
-                        }
-                    } elseif ($pvalue instanceof Predicate\PredicateInterface) {
-                        // Predicate type is ok
-                        $predicate = $pvalue;
-                    } else {
-                        // must be an array of expressions (with int-indexed array)
-                        $predicate = (strpos($pvalue, Expression::PLACEHOLDER) !== false)
-                            ? new Predicate\Expression($pvalue) : new Predicate\Literal($pvalue);
-                    }
-                    $this->where->addPredicate($predicate, $combination);
-                }
-            }
+            $this->where->addPredicates($predicate, $combination);
         }
         return $this;
     }
@@ -355,24 +308,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     {
         if ($predicate instanceof Having) {
             $this->having = $predicate;
-        } elseif ($predicate instanceof \Closure) {
-            $predicate($this->having);
         } else {
-            if (is_string($predicate)) {
-                $predicate = new Predicate\Expression($predicate);
-                $this->having->addPredicate($predicate, $combination);
-            } elseif (is_array($predicate)) {
-                foreach ($predicate as $pkey => $pvalue) {
-                    if (is_string($pkey) && strpos($pkey, '?') !== false) {
-                        $predicate = new Predicate\Expression($pkey, $pvalue);
-                    } elseif (is_string($pkey)) {
-                        $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
-                    } else {
-                        $predicate = new Predicate\Expression($pvalue);
-                    }
-                    $this->having->addPredicate($predicate, $combination);
-                }
-            }
+            $this->having->addPredicates($predicate, $combination);
         }
         return $this;
     }

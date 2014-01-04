@@ -3,13 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 namespace Zend\Test\PHPUnit\Controller;
 
 use PHPUnit_Framework_ExpectationFailedException;
-use Zend\Dom;
+use Zend\Dom\Document;
 
 abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
 {
@@ -49,7 +49,8 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $responseHeader = $this->getResponseHeader($header);
         if (false === $responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response header "%s" found', $header
+                'Failed asserting response header "%s" found',
+                $header
             ));
         }
         $this->assertNotEquals(false, $responseHeader);
@@ -65,7 +66,8 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $responseHeader = $this->getResponseHeader($header);
         if (false !== $responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response header "%s" WAS NOT found', $header
+                'Failed asserting response header "%s" WAS NOT found',
+                $header
             ));
         }
         $this->assertFalse($responseHeader);
@@ -82,13 +84,16 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response header, header "%s" do not exists', $header
+                'Failed asserting response header, header "%s" do not exists',
+                $header
             ));
         }
         if ($match != $responseHeader->getFieldValue()) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting response header "%s" exists and contains "%s", actual content is "%s"',
-                $header, $match, $responseHeader->getFieldValue()
+                $header,
+                $match,
+                $responseHeader->getFieldValue()
             ));
         }
         $this->assertEquals($match, $responseHeader->getFieldValue());
@@ -105,13 +110,15 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response header, header "%s" do not exists', $header
+                'Failed asserting response header, header "%s" do not exists',
+                $header
             ));
         }
         if ($match == $responseHeader->getFieldValue()) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting response header "%s" DOES NOT CONTAIN "%s"',
-                $header, $match
+                $header,
+                $match
             ));
         }
         $this->assertNotEquals($match, $responseHeader->getFieldValue());
@@ -128,13 +135,16 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response header, header "%s" do not exists', $header
+                'Failed asserting response header, header "%s" do not exists',
+                $header
             ));
         }
         if (!preg_match($pattern, $responseHeader->getFieldValue())) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting response header "%s" exists and matches regex "%s", actual content is "%s"',
-                $header, $pattern, $responseHeader->getFieldValue()
+                $header,
+                $pattern,
+                $responseHeader->getFieldValue()
             ));
         }
         $this->assertTrue((bool) preg_match($pattern, $responseHeader->getFieldValue()));
@@ -151,13 +161,15 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response header, header "%s" do not exists', $header
+                'Failed asserting response header, header "%s" do not exists',
+                $header
             ));
         }
         if (preg_match($pattern, $responseHeader->getFieldValue())) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting response header "%s" DOES NOT MATCH regex "%s"',
-                $header, $pattern
+                $header,
+                $pattern
             ));
         }
         $this->assertFalse((bool) preg_match($pattern, $responseHeader->getFieldValue()));
@@ -208,7 +220,8 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         if ($url != $responseHeader->getFieldValue()) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting response redirects to "%s", actual redirection is "%s"',
-                $url, $responseHeader->getFieldValue()
+                $url,
+                $responseHeader->getFieldValue()
             ));
         }
         $this->assertEquals($url, $responseHeader->getFieldValue());
@@ -229,7 +242,8 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         }
         if ($url == $responseHeader->getFieldValue()) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response redirects to "%s"', $url
+                'Failed asserting response redirects to "%s"',
+                $url
             ));
         }
         $this->assertNotEquals($url, $responseHeader->getFieldValue());
@@ -251,7 +265,8 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         if (!preg_match($pattern, $responseHeader->getFieldValue())) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting response redirects to URL MATCHING "%s", actual redirection is "%s"',
-                $pattern, $responseHeader->getFieldValue()
+                $pattern,
+                $responseHeader->getFieldValue()
             ));
         }
         $this->assertTrue((bool) preg_match($pattern, $responseHeader->getFieldValue()));
@@ -272,7 +287,8 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         }
         if (preg_match($pattern, $responseHeader->getFieldValue())) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response DOES NOT redirect to URL MATCHING "%s"', $pattern
+                'Failed asserting response DOES NOT redirect to URL MATCHING "%s"',
+                $pattern
             ));
         }
         $this->assertFalse((bool) preg_match($pattern, $responseHeader->getFieldValue()));
@@ -293,17 +309,20 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
      *
      * @param  string $path
      * @param  bool $useXpath
-     * @return array
+     * @return Document\NodeList
      */
     private function query($path, $useXpath = false)
     {
         $response = $this->getResponse();
-        $dom      = new Dom\Query($response->getContent());
+        $document = new Document($response->getContent());
+
         if ($useXpath) {
-            $dom->registerXpathNamespaces($this->xpathNamespaces);
-            return $dom->queryXpath($path);
+            $document->registerXpathNamespaces($this->xpathNamespaces);
         }
-        return $dom->execute($path);
+
+        $result   = Document\Query::execute($path, $document, $useXpath ? Document\Query::TYPE_XPATH : Document\Query::TYPE_CSS);
+
+        return $result;
     }
 
     /**
@@ -351,7 +370,8 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $match = $this->$method($path);
         if (!$match > 0) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node DENOTED BY %s EXISTS', $path
+                'Failed asserting node DENOTED BY %s EXISTS',
+                $path
             ));
         }
         $this->assertTrue($match > 0);
@@ -389,7 +409,8 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $match  = $this->$method($path);
         if ($match != 0) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node DENOTED BY %s DOES NOT EXIST', $path
+                'Failed asserting node DENOTED BY %s DOES NOT EXIST',
+                $path
             ));
         }
         $this->assertEquals(0, $match);
@@ -429,7 +450,9 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         if ($match != $count) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting node DENOTED BY %s OCCURS EXACTLY %d times, actually occurs %d times',
-                $path, $count, $match
+                $path,
+                $count,
+                $match
             ));
         }
         $this->assertEquals($match, $count);
@@ -471,7 +494,8 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         if ($match == $count) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting node DENOTED BY %s DOES NOT OCCUR EXACTLY %d times',
-                $path, $count
+                $path,
+                $count
             ));
         }
         $this->assertNotEquals($match, $count);
@@ -513,7 +537,9 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         if ($match < $count) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting node DENOTED BY %s OCCURS AT LEAST %d times, actually occurs %d times',
-                $path, $count, $match
+                $path,
+                $count,
+                $match
             ));
         }
         $this->assertTrue($match >= $count);
@@ -555,7 +581,9 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         if ($match > $count) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting node DENOTED BY %s OCCURS AT MOST %d times, actually occurs %d times',
-                $path, $count, $match
+                $path,
+                $count,
+                $match
             ));
         }
         $this->assertTrue($match <= $count);
@@ -595,16 +623,21 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $result = $this->query($path, $useXpath);
         if ($result->count() == 0) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node DENOTED BY %s EXISTS', $path
+                'Failed asserting node DENOTED BY %s EXISTS',
+                $path
             ));
         }
-        if ($result->current()->nodeValue != $match) {
-            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node denoted by %s CONTAINS content "%s", actual content is "%s"',
-                $path, $match, $result->current()->nodeValue
-            ));
+        foreach ($result as $node) {
+            if ($node->nodeValue == $match) {
+                $this->assertEquals($match, $node->nodeValue);
+                return;
+            }
         }
-        $this->assertEquals($result->current()->nodeValue, $match);
+        throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+            'Failed asserting node denoted by %s CONTAINS content "%s"',
+            $path,
+            $match
+        ));
     }
 
     /**
@@ -641,16 +674,21 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $result = $this->query($path, $useXpath);
         if ($result->count() == 0) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node DENOTED BY %s EXISTS', $path
+                'Failed asserting node DENOTED BY %s EXISTS',
+                $path
             ));
         }
-        if ($result->current()->nodeValue == $match) {
-            throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content "%s"',
-                $path, $match
-            ));
+        foreach ($result as $node) {
+            if ($node->nodeValue == $match) {
+                throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
+                    'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content "%s"',
+                    $path,
+                    $match
+                ));
+            }
         }
-        $this->assertNotEquals($result->current()->nodeValue, $match);
+        $currentValue = $node->nodeValue;
+        $this->assertNotEquals($currentValue, $match);
     }
 
     /**
@@ -687,13 +725,16 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $result = $this->query($path, $useXpath);
         if ($result->count() == 0) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node DENOTED BY %s EXISTS', $path
+                'Failed asserting node DENOTED BY %s EXISTS',
+                $path
             ));
         }
         if (!preg_match($pattern, $result->current()->nodeValue)) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting node denoted by %s CONTAINS content MATCHING "%s", actual content is "%s"',
-                $path, $pattern, $result->current()->nodeValue
+                $path,
+                $pattern,
+                $result->current()->nodeValue
             ));
         }
         $this->assertTrue((bool) preg_match($pattern, $result->current()->nodeValue));
@@ -733,13 +774,15 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $result = $this->query($path, $useXpath);
         if ($result->count() == 0) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting node DENOTED BY %s EXISTS', $path
+                'Failed asserting node DENOTED BY %s EXISTS',
+                $path
             ));
         }
         if (preg_match($pattern, $result->current()->nodeValue)) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
                 'Failed asserting node DENOTED BY %s DOES NOT CONTAIN content MATCHING "%s"',
-                $path, $pattern
+                $path,
+                $pattern
             ));
         }
         $this->assertFalse((bool) preg_match($pattern, $result->current()->nodeValue));

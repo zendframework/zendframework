@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -198,6 +198,14 @@ class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThan(0, $this->storage->getRequestAccessTime());
         $manager->start();
         $this->assertGreaterThan(0, $this->storage->getRequestAccessTime());
+    }
+
+    public function testGetArrayCopyFromContainer()
+    {
+        $container = new Container('test');
+        $container->foo = 'bar';
+        $container->baz = 'qux';
+        $this->assertSame(array('foo' => 'bar', 'baz' => 'qux'), $container->getArrayCopy());
     }
 
 }

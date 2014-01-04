@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -162,18 +162,17 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             return null;
         };
 
-        $connection             = array();
-        $connection['database'] = $findParameterValue(array('database', 'db'));
-        $connection['username'] = $findParameterValue(array('username', 'uid', 'UID'));
-        $connection['password'] = $findParameterValue(array('password', 'pwd', 'PWD'));
-        $connection['options']  = (isset($p['driver_options']) ? $p['driver_options'] : array());
+        $database     = $findParameterValue(array('database', 'db'));
+        $username     = $findParameterValue(array('username', 'uid', 'UID'));
+        $password     = $findParameterValue(array('password', 'pwd', 'PWD'));
+        $isPersistent = $findParameterValue(array('persistent', 'PERSISTENT', 'Persistent'));
+        $options      = (isset($p['driver_options']) ? $p['driver_options'] : array());
 
-        $this->resource = db2_connect(
-            $connection['database'],
-            $connection['username'],
-            $connection['password'],
-            $connection['options']
-        );
+        if ($isPersistent) {
+            $this->resource = db2_pconnect($database, $username, $password, $options);
+        } else {
+            $this->resource = db2_connect($database, $username, $password, $options);
+        }
 
         if ($this->resource === false) {
             throw new Exception\RuntimeException(sprintf(

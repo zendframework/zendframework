@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -12,6 +12,7 @@ namespace ZendTest\Db\Sql;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Where;
+use Zend\Db\Sql\Having;
 use Zend\Db\Sql\Predicate;
 use Zend\Db\Sql\TableIdentifier;
 use Zend\Db\Adapter\ParameterContainer;
@@ -464,6 +465,21 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select = new Select;
         $return = $select->having(array('x = ?' => 5));
         $this->assertSame($select, $return);
+
+        return $return;
+    }
+
+    /**
+     * @testdox unit test: Test having() returns same Select object (is chainable)
+     * @covers Zend\Db\Sql\Select::having
+     */
+    public function testHavingArgument1IsHavingObject()
+    {
+        $select = new Select;
+        $having = new Having();
+        $return = $select->having($having);
+        $this->assertSame($select, $return);
+        $this->assertSame($having, $select->getRawState('having'));
 
         return $return;
     }

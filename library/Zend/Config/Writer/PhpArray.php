@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -78,8 +78,14 @@ class PhpArray extends AbstractWriter
                 }
             } elseif (is_object($value)) {
                 $arrayString .= var_export($value, true) . ",\n";
-            } else {
+            } elseif (is_bool($value)) {
+                $arrayString .= ($value ? 'true' : 'false') . ",\n";
+            } elseif (is_string($value)) {
                 $arrayString .= "'" . addslashes($value) . "',\n";
+            } elseif ($value === null) {
+                $arrayString .= "null,\n";
+            } else {
+                $arrayString .= $value . ",\n";
             }
         }
 

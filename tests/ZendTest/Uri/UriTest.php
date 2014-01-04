@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -975,19 +975,19 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $obj2 = new Uri;
         $obj2->setPath('//path');
 
-        // A object with port
+        // An object with port
         $obj3 = new Uri;
         $obj3->setPort(123);
 
-        // A object with userInfo
+        // An object with userInfo
         $obj4 = new Uri;
         $obj4->setUserInfo('shahar:password');
 
-        // A object with scheme
+        // An object with scheme
         $obj5 = new Uri;
         $obj5->setScheme('https');
 
-        // A object with host
+        // An object with host
         $obj6 = new Uri;
         $obj6->setHost('example.com');
 

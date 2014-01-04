@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -150,6 +150,13 @@ abstract class AbstractPage extends AbstractContainer
      */
     protected $properties = array();
 
+    /**
+     * Static factories list for factory pages
+     *
+     * @var array
+     */
+    protected static $factories = array();
+
     // Initialization:
 
     /**
@@ -227,6 +234,14 @@ abstract class AbstractPage extends AbstractContainer
             }
         }
 
+        if (static::$factories) {
+            foreach (static::$factories as $factoryCallBack) {
+                if (($page = call_user_func($factoryCallBack, $options))) {
+                    return $page;
+                }
+            }
+        }
+
         $hasUri = isset($options['uri']);
         $hasMvc = isset($options['action']) || isset($options['controller'])
                 || isset($options['route']);
@@ -240,6 +255,16 @@ abstract class AbstractPage extends AbstractContainer
                 'Invalid argument: Unable to determine class to instantiate'
             );
         }
+    }
+
+    /**
+     * Add static factory for self::factory function
+     *
+     * @param type $callback Any callable variable
+     */
+    public static function addFactory($callback)
+    {
+        static::$factories[] = $callback;
     }
 
     /**

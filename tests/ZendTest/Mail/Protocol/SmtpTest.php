@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -55,6 +55,34 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->transport->send($message);
 
         $this->assertEquals($expectedMessage, $this->connection->getLog());
+    }
+
+    public function testSendEscapedEmail()
+    {
+        $headers = new Headers();
+        $headers->addHeaderLine('Date', 'Sun, 10 Jun 2012 20:07:24 +0200');
+        $message = new Message();
+        $message
+            ->setHeaders($headers)
+            ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
+            ->setBody("This is a test\n.")
+            ->addTo('zf-devteam@zend.com', 'ZF DevTeam')
+        ;
+        $expectedMessage = "EHLO localhost\r\n"
+            . "MAIL FROM:<ralph.schindler@zend.com>\r\n"
+            . "DATA\r\n"
+            . "Date: Sun, 10 Jun 2012 20:07:24 +0200\r\n"
+            . "Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n"
+            . "To: ZF DevTeam <zf-devteam@zend.com>\r\n"
+            . "\r\n"
+            . "This is a test\r\n"
+            . "..\r\n"
+            . ".\r\n";
+
+        $this->transport->send($message);
+
+        $this->assertEquals($expectedMessage, $this->connection->getLog());
+
     }
 
     public function testDisconnectCallsQuit()

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -131,7 +131,7 @@ class DbaIterator implements IteratorInterface
     public function key()
     {
         if ($this->currentInternalKey === false) {
-            throw new Exception\RuntimeException("Iterater is on an invalid state");
+            throw new Exception\RuntimeException("Iterator is on an invalid state");
         }
 
         // remove namespace prefix
@@ -147,7 +147,7 @@ class DbaIterator implements IteratorInterface
     public function next()
     {
         if ($this->currentInternalKey === false) {
-            throw new Exception\RuntimeException("Iterater is on an invalid state");
+            throw new Exception\RuntimeException("Iterator is on an invalid state");
         }
 
         $this->currentInternalKey = dba_nextkey($this->handle);

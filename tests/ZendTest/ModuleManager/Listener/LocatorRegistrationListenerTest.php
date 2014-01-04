@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -120,5 +120,24 @@ class LocatorRegistrationTest extends TestCase
 
         $this->assertInstanceOf('Zend\ModuleManager\ModuleManager', $sharedInstance2);
         $this->assertSame($this->moduleManager, $locator->get('Foo\Bar')->moduleManager);
+    }
+
+    public function testNoDuplicateServicesAreDefinedForModuleManager()
+    {
+        $locatorRegistrationListener = new LocatorRegistrationListener;
+        $this->moduleManager->getEventManager()->attachAggregate($locatorRegistrationListener);
+
+        $this->moduleManager->loadModules();
+        $this->application->bootstrap();
+        $registeredServices = $this->application->getServiceManager()->getRegisteredServices();
+
+        $aliases = $registeredServices['aliases'];
+        $instances = $registeredServices['instances'];
+
+        $this->assertContains('zendmodulemanagermodulemanager', $aliases);
+        $this->assertFalse(in_array('modulemanager', $aliases));
+
+        $this->assertContains('modulemanager', $instances);
+        $this->assertFalse(in_array('zendmodulemanagermodulemanager', $instances));
     }
 }

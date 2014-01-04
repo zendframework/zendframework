@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -30,7 +30,7 @@ class Reflection extends AbstractHydrator
     {
         $result = array();
         foreach (self::getReflProperties($object) as $property) {
-            $propertyName = $property->getName();
+            $propertyName = $this->extractName($property->getName(), $object);
             if (!$this->filterComposite->filter($propertyName)) {
                 continue;
             }
@@ -53,8 +53,9 @@ class Reflection extends AbstractHydrator
     {
         $reflProperties = self::getReflProperties($object);
         foreach ($data as $key => $value) {
-            if (isset($reflProperties[$key])) {
-                $reflProperties[$key]->setValue($object, $this->hydrateValue($key, $value, $data));
+            $name = $this->hydrateName($key, $data);
+            if (isset($reflProperties[$name])) {
+                $reflProperties[$name]->setValue($object, $this->hydrateValue($name, $value, $data));
             }
         }
         return $object;

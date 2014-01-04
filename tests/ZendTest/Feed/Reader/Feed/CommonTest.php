@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -66,7 +66,9 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
-        $this->assertEquals($feed->saveXml(), file_get_contents($this->feedSamplePath.'/atom_rewrittenbydom.xml'));
+        $expected = file_get_contents($this->feedSamplePath.'/atom_rewrittenbydom.xml');
+        $expected = str_replace("\r\n", "\n", $expected);
+        $this->assertEquals($expected, $feed->saveXml());
     }
 
     public function testGetsNamedExtension()

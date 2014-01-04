@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -17,7 +17,7 @@ use Zend\View\Exception;
 use Zend\View\Model;
 use Zend\View\Variables as ViewVariables;
 
-class ViewModel implements ModelInterface, ClearableModelInterface
+class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableChildrenInterface
 {
     /**
      * What variable a parent model should capture this model to
@@ -378,6 +378,30 @@ class ViewModel implements ModelInterface, ClearableModelInterface
     {
         $this->children = array();
         return $this;
+    }
+
+    /**
+     * Returns an array of Viewmodels with captureTo value $capture
+     *
+     * @param string $capture
+     * @param bool $recursive search recursive through children, default true
+     * @return array
+     */
+    public function getChildrenByCaptureTo($capture, $recursive = true)
+    {
+        $children = array();
+
+        foreach ($this->children as $child) {
+            if ($recursive === true) {
+                $children += $child->getChildrenByCaptureTo($capture);
+            }
+
+            if ($child->captureTo() === $capture) {
+                $children[] = $child;
+            }
+        }
+
+        return $children;
     }
 
     /**

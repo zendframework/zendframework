@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -428,6 +428,10 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testCODE128()
     {
+        if (!extension_loaded('iconv')) {
+            $this->markTestSkipped('Missing ext/iconv');
+        }
+
         $barcode = new Barcode('code128');
         $this->assertTrue($barcode->isValid('ˆCODE128:Š'));
         $this->assertTrue($barcode->isValid('‡01231[Š'));

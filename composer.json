@@ -30,7 +30,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.23"
     },
     "require-dev": {
         "doctrine/annotations": ">=1.0",

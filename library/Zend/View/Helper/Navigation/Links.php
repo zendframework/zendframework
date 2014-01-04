@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -230,7 +230,7 @@ class Links extends AbstractHelper
      *
      * The form of the returned array:
      * <code>
-     * // $page denotes an instance of Zend_Navigation_Page
+     * // $page denotes an instance of Zend\Navigation\Page\AbstractPage
      * $returned = array(
      *     'rel' => array(
      *         'alternate' => array($page, $page, $page),
@@ -685,7 +685,7 @@ class Links extends AbstractHelper
         } elseif ($mixed instanceof Traversable) {
             $mixed = ArrayUtils::iteratorToArray($mixed);
         } elseif (is_string($mixed)) {
-            // value is a string; make an URI page
+            // value is a string; make a URI page
             return AbstractPage::factory(array(
                 'type' => 'uri',
                 'uri'  => $mixed

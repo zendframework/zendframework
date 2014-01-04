@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -74,4 +74,13 @@ class MethodScannerTest extends TestCase
         $this->assertEquals($expected, $method->getBody());
     }
 
+    public function testMethodScannerMethodSignatureLatestOptionalParamHasParentheses()
+    {
+        $file       = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
+        $class      = $file->getClass('ZendTest\Code\TestAsset\BarClass');
+        $method = $class->getMethod('four');
+        $paramTwo = $method->getParameter(1);
+        $optionalValue = $paramTwo->getDefaultValue();
+        $this->assertEquals('array(array(array(\'default\')))', $optionalValue);
+    }
 }

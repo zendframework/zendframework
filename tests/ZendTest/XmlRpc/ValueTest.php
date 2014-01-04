@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -208,6 +208,21 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
         $this->assertXmlRpcType('string', $val);
         $this->assertSame($native, $val->getValue());
+    }
+
+    public function testFactoryAutodetectsStringAndSetsValueInArray()
+    {
+        $val = AbstractValue::getXmlRpcValue('<value><array><data>'.
+            '<value><i4>8</i4></value>'.
+            '<value>a</value>'.
+            '<value>false</value>'.
+            '</data></array></value>', AbstractValue::XML_STRING
+        );
+        $this->assertXmlRpcType('array', $val);
+        $a = $val->getValue();
+        $this->assertSame(8, $a[0]);
+        $this->assertSame('a', $a[1]);
+        $this->assertSame('false', $a[2]);
     }
 
     /**

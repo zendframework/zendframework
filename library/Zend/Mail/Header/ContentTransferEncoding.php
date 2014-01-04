@@ -3,13 +3,12 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Mail\Header;
 
-use Zend\Mail\Headers;
 
 class ContentTransferEncoding implements HeaderInterface
 {
@@ -92,9 +91,12 @@ class ContentTransferEncoding implements HeaderInterface
      */
     public function setTransferEncoding($transferEncoding)
     {
-        if (!in_array($transferEncoding, self::$allowedTransferEncodings)) {
+        // Per RFC 1521, the value of the header is not case sensitive
+        $transferEncoding = strtolower($transferEncoding);
+
+        if (!in_array($transferEncoding, static::$allowedTransferEncodings)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects one of "'. implode(', ', self::$allowedTransferEncodings) . '"; received "%s"',
+                '%s expects one of "'. implode(', ', static::$allowedTransferEncodings) . '"; received "%s"',
                 __METHOD__,
                 (string) $transferEncoding
             ));

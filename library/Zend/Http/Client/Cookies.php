@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -323,7 +323,7 @@ class Cookies
 
     /**
      * Create a new Cookies object and automatically load into it all the
-     * cookies set in an Http_Response object. If $uri is set, it will be
+     * cookies set in an \Zend\Http\Response object. If $uri is set, it will be
      * considered as the requested URI for setting default domain and path
      * of the cookie.
      *
@@ -382,7 +382,7 @@ class Cookies
 
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>
-     * Whether a offset exists
+     * Whether an offset exists
      * @link http://php.net/manual/en/arrayaccess.offsetexists.php
      * @param mixed $offset <p>
      * An offset to check for.

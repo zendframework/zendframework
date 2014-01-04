@@ -1,10 +1,10 @@
 language: php
 
 php:
-  - 5.3.3
   - 5.3
   - 5.4
   - 5.5
+  - hhvm
 
 before_install:
  - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
@@ -18,3 +18,8 @@ after_script:
 notifications:
   irc: "irc.freenode.org#zftalk.dev"
   email: false
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: hhvm

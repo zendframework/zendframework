@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -92,9 +92,15 @@ class FileGenerator extends AbstractGenerator
 
         $body = $fileReflection->getContents();
 
+        $uses = $fileReflection->getUses();
+
         foreach ($fileReflection->getClasses() as $class) {
             $phpClass = ClassGenerator::fromReflection($class);
             $phpClass->setContainingFileGenerator($file);
+
+            foreach ($uses as $fileUse) {
+                $phpClass->addUse($fileUse['use'], $fileUse['as']);
+            }
 
             $file->setClass($phpClass);
 
@@ -126,7 +132,6 @@ class FileGenerator extends AbstractGenerator
             $file->setNamespace($namespace);
         }
 
-        $uses = $fileReflection->getUses();
         if ($uses) {
             $file->setUses($uses);
         }

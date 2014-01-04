@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -80,7 +80,7 @@ class GenericHeader implements HeaderInterface
      *
      * @param  string $fieldName
      * @return GenericHeader
-     * @throws Exception\InvalidArgumentException(
+     * @throws Exception\InvalidArgumentException If the name does not match with RFC 2616 format.
      */
     public function setFieldName($fieldName)
     {
@@ -89,12 +89,19 @@ class GenericHeader implements HeaderInterface
         }
 
         // Pre-filter to normalize valid characters, change underscore to dash
-        $fieldName = str_replace(' ', '-', ucwords(str_replace(array('_', '-'), ' ', $fieldName)));
+        $fieldName = str_replace('_', '-', $fieldName);
 
-        // Validate what we have
-        if (!preg_match('/^[a-z][a-z0-9-]*$/i', $fieldName)) {
+        /*
+         * Following RFC 2616 section 4.2
+         *
+         * message-header = field-name ":" [ field-value ]
+         * field-name     = token
+         *
+         * @see http://tools.ietf.org/html/rfc2616#section-2.2 for token definition.
+         */
+        if (!preg_match('/^[!#-\'*+\-\.0-9A-Z\^-z|~]+$/', $fieldName)) {
             throw new Exception\InvalidArgumentException(
-                'Header name must start with a letter, and consist of only letters, numbers, and dashes'
+                'Header name must be a valid RFC 2616 (section 4.2) field-name.'
             );
         }
 

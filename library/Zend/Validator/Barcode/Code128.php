@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -214,7 +214,7 @@ class Code128 extends AbstractAdapter
         } elseif ($char == '‰') {
             $sum = 105;
         } elseif ($usecheck == true) {
-            // no start value, unable to detect an proper checksum
+            // no start value, unable to detect a proper checksum
             return false;
         }
 
@@ -389,7 +389,7 @@ class Code128 extends AbstractAdapter
     }
 
     /**
-     * Internal Method to return the ascii value from an code128 integer
+     * Internal Method to return the ascii value from a code128 integer
      *
      * Table A
      *    ASCII       CODE128

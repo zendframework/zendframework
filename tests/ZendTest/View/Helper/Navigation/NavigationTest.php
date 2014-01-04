@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,6 +15,7 @@ use Zend\Permissions\Acl\Role;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View;
 use Zend\View\Helper\Navigation;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Tests Zend_View_Helper_Navigation
@@ -183,6 +184,10 @@ class NavigationTest extends AbstractTest
 
     public function testInjectingTranslator()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->_helper->setTranslator($this->_getTranslator());
 
         $expected = $this->_getExpected('menu/translated.html');
@@ -549,6 +554,18 @@ class NavigationTest extends AbstractTest
         $menu    = $helper()->menu();
         $expected = spl_object_hash($menu->getContainer());
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testSetPluginManagerAndView()
+    {
+        $pluginManager = new \Zend\View\Helper\Navigation\PluginManager();
+        $view = new PhpRenderer();
+
+        $helper = new $this->_helperName;
+        $helper->setPluginManager($pluginManager);
+        $helper->setView($view);
+
+        $this->assertEquals($view, $pluginManager->getRenderer());
     }
 
     /**

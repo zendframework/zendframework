@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -110,6 +110,7 @@ class Element implements
      * Set options for an element. Accepted options are:
      * - label: label to associate with the element
      * - label_attributes: attributes to use when the label is rendered
+     * - label_options: label specific options
      *
      * @param  array|Traversable $options
      * @return Element|ElementInterface
@@ -165,6 +166,19 @@ class Element implements
         }
 
         return $this->options[$option];
+    }
+
+    /**
+     * Set a single option for an element
+     *
+     * @param  string $key
+     * @param  mixed $value
+     * @return self
+     */
+    public function setOption($key, $value)
+    {
+        $this->options[$key] = $value;
+        return $this;
     }
 
     /**

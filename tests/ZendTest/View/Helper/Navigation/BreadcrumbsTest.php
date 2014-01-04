@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -161,6 +161,10 @@ class BreadcrumbsTest extends AbstractTest
 
     public function testTranslationUsingZendTranslate()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->_helper->setTranslator($this->_getTranslator());
 
         $expected = $this->_getExpected('bc/translated.html');
@@ -179,6 +183,10 @@ class BreadcrumbsTest extends AbstractTest
 
     public function testTranslationUsingZendTranslateAdapter()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $translator = $this->_getTranslator();
         $this->_helper->setTranslator($translator);
 
@@ -201,6 +209,14 @@ class BreadcrumbsTest extends AbstractTest
         $this->_helper->setPartial('bc.phtml');
 
         $expected = $this->_getExpected('bc/partial.html');
+        $this->assertEquals($expected, $this->_helper->render());
+    }
+
+    public function testRenderingPartialWithSeparator()
+    {
+        $this->_helper->setPartial('bc_separator.phtml')->setSeparator(' / ');
+
+        $expected = trim($this->_getExpected('bc/partialwithseparator.html'));
         $this->assertEquals($expected, $this->_helper->render());
     }
 

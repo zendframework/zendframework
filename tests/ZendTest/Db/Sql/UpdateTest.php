@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -87,7 +87,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
 
         $predicates = $this->readAttribute($where, 'predicates');
         $this->assertEquals('AND', $predicates[0][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[0][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
 
         $this->assertEquals('AND', $predicates[1][0]);
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[1][1]);
@@ -96,7 +96,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Operator', $predicates[2][1]);
 
         $this->assertEquals('OR', $predicates[3][0]);
-        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Expression', $predicates[3][1]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[3][1]);
 
         $this->assertEquals('AND', $predicates[4][0]);
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\IsNull', $predicates[4][1]);

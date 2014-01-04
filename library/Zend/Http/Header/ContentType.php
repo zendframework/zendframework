@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -28,6 +28,11 @@ class ContentType implements HeaderInterface
     protected $parameters = array();
 
     /**
+     * @var string
+     */
+    protected $value;
+
+    /**
      * Factory method: create an object from a string representation
      *
      * @param  string $headerLine
@@ -35,8 +40,6 @@ class ContentType implements HeaderInterface
      */
     public static function fromString($headerLine)
     {
-        $header = new static();
-
         list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
 
         // check to ensure proper header type for this factory
@@ -44,10 +47,9 @@ class ContentType implements HeaderInterface
             throw new Exception\InvalidArgumentException('Invalid header line for Content-Type string: "' . $name . '"');
         }
 
-        $header->value     = $value;
         $parts             = explode(';', $value);
         $mediaType         = array_shift($parts);
-        $header->mediaType = trim($mediaType);
+        $header = new static($value, trim($mediaType));
 
         if (count($parts) > 0) {
             $parameters = array();
@@ -62,6 +64,12 @@ class ContentType implements HeaderInterface
         }
 
         return $header;
+    }
+
+    public function __construct($value = null, $mediaType = null)
+    {
+        $this->value = $value;
+        $this->mediaType = $mediaType;
     }
 
     /**

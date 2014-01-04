@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -104,7 +104,7 @@ class Client implements ServerClient
     }
 
     /**
-     * Perform an JSOC-RPC request and return a response.
+     * Perform a JSON-RPC request and return a response.
      *
      * @param  Request $request Request.
      * @return Response Response.
@@ -144,14 +144,14 @@ class Client implements ServerClient
 
         $this->lastResponse = $response;
 
-        // import all response data form JSON HTTP response
+        // import all response data from JSON HTTP response
         $response->loadJson($httpResponse->getBody());
 
         return $response;
     }
 
     /**
-     * Send an JSON-RPC request to the service (for a specific method).
+     * Send a JSON-RPC request to the service (for a specific method).
      *
      * @param  string $method Name of the method we want to call.
      * @param  array $params Array of parameters for the method.

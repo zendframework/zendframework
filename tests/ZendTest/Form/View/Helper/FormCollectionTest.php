@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -175,5 +175,28 @@ class FormCollectionTest extends TestCase
         $markup = $this->helper->render($collection);
 
         $this->assertContains('>translated legend<', $markup);
+    }
+
+    public function testShouldWrapWithoutLabel()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setLabel('');
+        $this->helper->setShouldWrap(true);
+
+        $markup = $this->helper->render($collection);
+        $this->assertContains('<fieldset>', $markup);
+    }
+
+    public function testRenderCollectionAttributes()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setLabel('label');
+        $this->helper->setShouldWrap(true);
+        $collection->setAttribute('id', 'some-identifier');
+
+        $markup = $this->helper->render($collection);
+        $this->assertContains(' id="some-identifier"', $markup);
     }
 }

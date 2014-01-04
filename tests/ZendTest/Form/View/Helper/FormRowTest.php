@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -304,7 +304,7 @@ class FormRowTest extends TestCase
     {
         $element = new  Element\Date('birth');
         $element->setFormat('Y-m-d');
-        $element->setValue('2010-13-13');
+        $element->setValue('2010.13');
 
         $validator = new \Zend\Validator\Date();
         $validator->isValid($element->getValue());

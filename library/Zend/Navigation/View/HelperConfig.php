@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -33,6 +33,12 @@ class HelperConfig implements ConfigInterface
         $serviceManager->setFactory('navigation', function (HelperPluginManager $pm) {
             $helper = new \Zend\View\Helper\Navigation;
             $helper->setServiceLocator($pm->getServiceLocator());
+
+            $config = $pm->getServiceLocator()->get('config');
+            if (isset($config['navigation_helpers'])) {
+                $config = new \Zend\ServiceManager\Config($config['navigation_helpers']);
+                $config->configureServiceManager($helper->getPluginManager());
+            }
             return $helper;
         });
     }

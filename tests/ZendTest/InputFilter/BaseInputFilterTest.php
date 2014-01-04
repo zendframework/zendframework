@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -187,6 +187,10 @@ class BaseInputFilterTest extends TestCase
      */
     public function testCanValidateEntireDataset($dataset, $expected)
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $filter->setData($dataset);
         $this->assertSame($expected, $filter->isValid());
@@ -194,6 +198,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanValidatePartialDataset()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $validData = array(
             'foo' => ' bazbat ',
@@ -217,6 +225,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanRetrieveInvalidInputsOnFailedValidation()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $invalidData = array(
             'foo' => ' bazbat ',
@@ -242,6 +254,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanRetrieveValidInputsOnFailedValidation()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $invalidData = array(
             'foo' => ' bazbat ',
@@ -268,6 +284,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testValuesRetrievedAreFiltered()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $validData = array(
             'foo' => ' bazbat ',
@@ -296,6 +316,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanGetRawInputValues()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $validData = array(
             'foo' => ' bazbat ',
@@ -315,6 +339,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanGetValidationMessages()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $filter->get('baz')->setRequired(true);
         $filter->get('nest')->get('baz')->setRequired(true);
@@ -621,6 +649,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanRetrieveRawValuesIndividuallyWithoutValidating()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $data = array(
             'foo' => ' bazbat ',
@@ -637,6 +669,10 @@ class BaseInputFilterTest extends TestCase
 
     public function testCanRetrieveUnvalidatedButFilteredInputValue()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $data = array(
             'foo' => ' baz 2 bat ',
@@ -669,8 +705,13 @@ class BaseInputFilterTest extends TestCase
         $this->assertArrayHasKey('foo', $messages);
         $this->assertNotEmpty($messages['foo']);
     }
+
     public function testHasUnknown()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $validData = array(
             'foo' => ' bazbat ',
@@ -691,6 +732,10 @@ class BaseInputFilterTest extends TestCase
     }
     public function testGetUknown()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $filter = $this->getInputFilter();
         $unknown = array(
             'bar' => '12345',
@@ -781,5 +826,38 @@ class BaseInputFilterTest extends TestCase
         $filter->add($foo2);
 
         $this->assertFalse($filter->get('foo')->isRequired());
+    }
+
+    /**
+     * @group 5270
+     */
+    public function testIsValidWhenValuesSetOnFilters()
+    {
+        $filter = new InputFilter();
+
+        $foo = new Input();
+        $foo->getFilterChain()->attachByName('stringtrim')
+                              ->attachByName('alpha');
+        $foo->getValidatorChain()->attach(new Validator\StringLength(15, 18));
+
+        $filter->add($foo, 'foo');
+
+        //test valid with setData
+        $filter->setData(array('foo' => 'invalid'));
+        $this->assertFalse($filter->isValid());
+
+        //test invalid with setData
+        $filter->setData(array('foo' => 'thisisavalidstring'));
+        $this->assertTrue($filter->isValid());
+
+        //test invalid when setting data on actual filter
+        $filter->get('foo')->setValue('invalid');
+        $this->assertFalse($filter->get('foo')->isValid(), 'Filtered value is valid, should be invalid');
+        $this->assertFalse($filter->isValid(), 'Input filter did not return value from filter');
+
+        //test valid when setting data on actual filter
+        $filter->get('foo')->setValue('thisisavalidstring');
+        $this->assertTrue($filter->get('foo')->isValid(), 'Filtered value is not valid');
+        $this->assertTrue($filter->isValid(), 'Input filter did return value from filter');
     }
 }

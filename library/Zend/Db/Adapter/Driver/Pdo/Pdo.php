@@ -189,7 +189,8 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
                     return 'Postgresql';
                 case 'oci':
                     return 'Oracle';
-
+                case 'sqlsrv':
+                    return 'SqlServer';
                 default:
                     return ucfirst($name);
             }
@@ -203,6 +204,8 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
                     return 'PostgreSQL';
                 case 'oci':
                     return 'Oracle';
+                case 'sqlsrv':
+                    return 'SQLServer';
                 default:
                     return ucfirst($name);
             }

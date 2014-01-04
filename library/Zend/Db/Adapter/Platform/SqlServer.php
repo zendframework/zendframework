@@ -34,7 +34,7 @@ class SqlServer implements PlatformInterface
     public function setDriver($driver)
     {
         // handle Zend\Db drivers
-        if (($driver instanceof Pdo\Pdo && in_array($driver->getDatabasePlatformName(), array('Sqlsrv', 'Dblib')))
+        if (($driver instanceof Pdo\Pdo && in_array($driver->getDatabasePlatformName(), array('SqlServer', 'Dblib')))
             || (($driver instanceof \PDO && in_array($driver->getAttribute(\PDO::ATTR_DRIVER_NAME), array('sqlsrv', 'dblib'))))
         ) {
             $this->resource = $driver;

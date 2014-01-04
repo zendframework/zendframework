@@ -9,6 +9,7 @@
 
 namespace ZendTest\Db\Adapter\Platform;
 
+use Zend\Db\Adapter\Driver\Pdo\Pdo;
 use Zend\Db\Adapter\Platform\SqlServer;
 
 class SqlServerTest extends \PHPUnit_Framework_TestCase
@@ -128,5 +129,14 @@ class SqlServerTest extends \PHPUnit_Framework_TestCase
             '([foo].[bar] = [boo].[baz]) AND ([foo].[baz] = [boo].[baz])',
             $this->platform->quoteIdentifierInFragment('(foo.bar = boo.baz) AND (foo.baz = boo.baz)', array('(', ')', '=', 'and'))
         );
+    }
+
+    /**
+     * @covers Zend\Db\Adapter\Platform\SqlServer::setDriver
+     */
+    public function testSetDriver()
+    {
+        $driver = new Pdo(array('pdodriver' => 'sqlsrv'));
+        $this->platform->setDriver($driver);
     }
 }

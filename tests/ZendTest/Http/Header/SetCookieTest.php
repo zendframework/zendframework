@@ -254,6 +254,17 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($target, $setCookieHeader->getFieldValue());
     }
 
+    /**
+     * Check that setCookie does not fail when an expiry date which is bigger then 2038 is supplied (effect only 32bit systems)
+     */
+    public function testSetCookieSetExpiresWithStringDateBiggerThen2038()
+    {
+        if ( PHP_INT_SIZE === 4 ) {
+            $setCookieHeader = new SetCookie('myname', 'myvalue', 'Thu, 01-Jan-2040 00:00:00 GMT');
+            $this->assertSame(2147483647, $setCookieHeader->getExpires(true));
+        }
+    }
+
     public function testIsValidForRequestSubdomainMatch()
     {
         $setCookieHeader = new SetCookie(

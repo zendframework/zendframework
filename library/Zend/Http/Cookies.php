@@ -11,7 +11,6 @@ namespace Zend\Http;
 
 use ArrayIterator;
 use Zend\Http\Header\SetCookie;
-use Zend\Http\Response;
 use Zend\Uri;
 
 

@@ -9,7 +9,6 @@
 
 namespace Zend\ProgressBar\Adapter;
 
-use Zend\ProgressBar\Adapter\Exception;
 use Zend\Stdlib\ErrorHandler;
 use Zend\Stdlib\StringUtils;
 

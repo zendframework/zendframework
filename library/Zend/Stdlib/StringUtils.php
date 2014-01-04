@@ -9,7 +9,6 @@
 
 namespace Zend\Stdlib;
 
-use Zend\Stdlib\ErrorHandler;
 use Zend\Stdlib\StringWrapper\StringWrapperInterface;
 
 /**

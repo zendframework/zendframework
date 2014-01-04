@@ -9,7 +9,6 @@
 
 namespace Zend\InputFilter;
 
-use Zend\InputFilter\Exception;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;

@@ -9,7 +9,6 @@
 
 namespace Zend\Code\Generator;
 
-use Zend\Code\Generator\Exception;
 
 abstract class AbstractMemberGenerator extends AbstractGenerator
 {

@@ -9,7 +9,6 @@
 
 namespace Zend\Http;
 
-use Zend\Http\Client;
 
 /**
  * Http static client

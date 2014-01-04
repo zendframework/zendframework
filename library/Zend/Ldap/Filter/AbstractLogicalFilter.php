@@ -9,7 +9,6 @@
 
 namespace Zend\Ldap\Filter;
 
-use Zend\Ldap\Filter\Exception;
 
 /**
  * Zend\Ldap\Filter\AbstractLogicalFilter provides a base implementation for a grouping filter.

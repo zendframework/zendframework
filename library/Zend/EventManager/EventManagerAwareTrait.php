@@ -9,7 +9,6 @@
 
 namespace Zend\EventManager;
 
-use \Zend\EventManager\ProvidesEvents;
 
 trait EventManagerAwareTrait
 {

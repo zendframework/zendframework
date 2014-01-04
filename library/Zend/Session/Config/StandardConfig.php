@@ -10,7 +10,6 @@
 namespace Zend\Session\Config;
 
 use Traversable;
-use Zend\Session\Config\ConfigInterface;
 use Zend\Session\Exception;
 use Zend\Validator\Hostname as HostnameValidator;
 

@@ -356,7 +356,8 @@ class BlockCipher
      */
     public function encrypt($data)
     {
-        if (empty($data)) {
+        // 0 (as integer), 0.0 (as float) & '0' (as string) will return false, though these should be allowed
+        if (empty($data) && !($data===0 || $data===0.0 || $data==='0')) {
             throw new Exception\InvalidArgumentException('The data to encrypt cannot be empty');
         }
         if (empty($this->cipher)) {

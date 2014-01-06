@@ -22,7 +22,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class TranslatorServiceFactory implements FactoryInterface
 {
     /**
-     * @param ServiceLocatorInterface $serviceLocator 
+     * @param ServiceLocatorInterface $serviceLocator
      * @return MvcTranslator
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

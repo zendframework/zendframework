@@ -10,11 +10,8 @@
 namespace Zend\Mvc\I18n;
 
 use Zend\I18n\Translator\TranslatorInterface as I18nTranslatorInterface;
-use Zend\Validator\Translator\TranslatorInterface as ValidatorTranslatorInterface;
 
-class DummyTranslator implements
-    I18nTranslatorInterface,
-    ValidatorTranslatorInterface
+class DummyTranslator implements I18nTranslatorInterface
 {
     public function translate($message, $textDomain = 'default', $locale = null)
     {

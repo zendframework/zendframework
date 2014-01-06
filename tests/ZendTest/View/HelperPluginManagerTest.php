@@ -100,4 +100,15 @@ class HelperPluginManagerTest extends \PHPUnit_Framework_TestCase
         $helper = $this->helpers->get('HeadTitle');
         $this->assertSame($translator, $helper->getTranslator());
     }
+
+    public function testIfHelperIsTranslatorAwareAndBothMvcTranslatorAndTranslatorAreUnavailableAndTranslatorInterfaceIsAvailableItWillInjectTheTranslator()
+    {
+        $translator = new Translator();
+        $services   = new ServiceManager();
+        $services->setService('Zend\I18n\Translator\TranslatorInterface', $translator);
+        $this->helpers->setServiceLocator($services);
+
+        $helper = $this->helpers->get('HeadTitle');
+        $this->assertSame($translator, $helper->getTranslator());
+    }
 }

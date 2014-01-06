@@ -34,6 +34,29 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5406](https://github.com/zendframework/zf2/pull/5406) makes the i18n
+  component optional for the MVC. It does this by introducing a new interface,
+  `Zend\I18n\Translator\TranslatorInterface` and a `DummyTranslator`
+  implementation, and altering the MvcTranslator service factory to instantiate
+  a `DummyTranslator` to inject into the `Zend\Mvc\I18n\Translator` instance.
+  This change should be mostly transparent to end-users. However, if you want
+  to define and configure a `Zend\I18n\Translator\Translator` instance to use
+  with the MVC, you will need to add service configuration such as the following
+  to your application somewhere:
+
+  ```php
+  return array(
+      'service_manager' => array(
+          'factories' => array(
+              'Zend\I18n\Translator\TranslatorInterface' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+          ),
+      ),
+  );
+  ```
+
+  and also ensure you define the translation configuration per the `translator`
+  key [as seen in the skeleton application](https://github.com/zendframework/ZendSkeletonApplication/blob/master/module/Application/config/module.config.php).
+
 - [#5469](https://github.com/zendframework/zf2/pull/5469) adds a new abstract
   controller, `Zend\Mvc\Controller\AbstractConsoleController`, for simplifying
   the creation of console controllers.

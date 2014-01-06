@@ -162,6 +162,11 @@ class HelperPluginManager extends AbstractPluginManager
             $helper->setTranslator($locator->get('Zend\I18n\Translator\TranslatorInterface'));
             return;
         }
+
+        if ($locator->has('Translator')) {
+            $helper->setTranslator($locator->get('Translator'));
+            return;
+        }
     }
 
     /**

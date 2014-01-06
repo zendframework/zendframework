@@ -9,8 +9,9 @@
 
 namespace Zend\Mvc\Service;
 
+use Zend\I18n\Translator\Translator;
 use Zend\Mvc\I18n\DummyTranslator;
-use Zend\Mvc\I18n\Translator;
+use Zend\Mvc\I18n\Translator as MvcTranslator;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -20,12 +21,23 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class TranslatorServiceFactory implements FactoryInterface
 {
+    /**
+     * @param ServiceLocatorInterface $serviceLocator 
+     * @return MvcTranslator
+     */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if (!$serviceLocator->has('Zend\I18n\Translator\TranslatorInterface')) {
-            return new DummyTranslator();
+        if ($serviceLocator->has('Zend\I18n\Translator\TranslatorInterface')) {
+            return new MvcTranslator($serviceLocator->get('Zend\I18n\Translator\TranslatorInterface'));
         }
 
-        return new Translator($serviceLocator->get('Zend\I18n\Translator\TranslatorInterface'));
+        if ($serviceLocator->has('Config')) {
+            $config = $serviceLocator->get('Config');
+            if (isset($config['translator']) && !empty($config['translator'])) {
+                return new MvcTranslator(Translator::factory($config['translator']));
+            }
+        }
+
+        return new MvcTranslator(new DummyTranslator());
     }
 }

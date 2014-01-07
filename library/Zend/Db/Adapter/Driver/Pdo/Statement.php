@@ -266,6 +266,8 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         foreach ($parameters as $name => &$value) {
             if (is_bool($value)) {
                 $type = \PDO::PARAM_BOOL;
+            } elseif (is_int($value)) {
+                $type = \PDO::PARAM_INT;
             } else {
                 $type = \PDO::PARAM_STR;
             }

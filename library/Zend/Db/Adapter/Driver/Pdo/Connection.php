@@ -171,6 +171,9 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                 break;
             case 'sqlite':
                 return 'main';
+            case 'dblib':
+            	$sql = 'SELECT SCHEMA_NAME()';
+            	break;
             case 'pgsql':
             default:
                 $sql = 'SELECT CURRENT_SCHEMA';

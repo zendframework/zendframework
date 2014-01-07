@@ -225,6 +225,9 @@ class Factory
                 case 'fallback_value':
                     $input->setFallbackValue($value);
                     break;
+                case 'break_on_failure':
+                    $input->setBreakOnFailure($value);
+                    break;
                 case 'filters':
                     if ($value instanceof FilterChain) {
                         $input->setFilterChain($value);

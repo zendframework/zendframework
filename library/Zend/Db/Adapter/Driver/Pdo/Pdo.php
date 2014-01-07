@@ -189,6 +189,7 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
                     return 'Postgresql';
                 case 'oci':
                     return 'Oracle';
+                case 'dblib':
                 case 'sqlsrv':
                     return 'SqlServer';
                 default:
@@ -204,6 +205,7 @@ class Pdo implements DriverInterface, DriverFeatureInterface, Profiler\ProfilerA
                     return 'PostgreSQL';
                 case 'oci':
                     return 'Oracle';
+                case 'dblib':
                 case 'sqlsrv':
                     return 'SQLServer';
                 default:

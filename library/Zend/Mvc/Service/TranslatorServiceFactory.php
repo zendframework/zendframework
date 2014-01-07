@@ -34,7 +34,9 @@ class TranslatorServiceFactory implements FactoryInterface
         if ($serviceLocator->has('Config')) {
             $config = $serviceLocator->get('Config');
             if (isset($config['translator']) && !empty($config['translator'])) {
-                return new MvcTranslator(Translator::factory($config['translator']));
+                $i18nTranslator = Translator::factory($config['translator']);
+                $serviceLocator->setService('Zend\I18n\Translator\TranslatorInterface', $i18nTranslator);
+                return new MvcTranslator($i18nTranslator);
             }
         }
 

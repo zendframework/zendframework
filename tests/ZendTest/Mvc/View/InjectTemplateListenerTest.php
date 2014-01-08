@@ -164,6 +164,25 @@ class InjectTemplateListenerTest extends TestCase
         $this->assertEquals('zend-test/sample/test', $myViewModel->getTemplate());
     }
 
+    public function testFullControllerNameMatchIsMapped()
+    {
+        $this->listener->setControllerMap(array(
+            'Foo\Bar\Controller\IndexController' => 'string-value',
+        ));
+        $template = $this->listener->mapController('Foo\Bar\Controller\IndexController');
+        $this->assertEquals('string-value', $template);
+    }
+
+    public function testOnlyFullNamespaceMatchIsMapped()
+    {
+        $this->listener->setControllerMap(array(
+            'Foo' => 'foo-matched',
+            'Foo\Bar' => 'foo-bar-matched',
+        ));
+        $template = $this->listener->mapController('Foo\BarBaz\Controller\IndexController');
+        $this->assertEquals('foo-matched/bar-baz/index', $template);
+    }
+
     public function testControllerMapMatchedPrefixReplacedByStringValue()
     {
         $this->listener->setControllerMap(array(
@@ -172,7 +191,6 @@ class InjectTemplateListenerTest extends TestCase
         $template = $this->listener->mapController('Foo\Bar\Controller\IndexController');
         $this->assertEquals('string-value/index', $template);
     }
-
 
     public function testUsingNamespaceRouteParameterGivesSameResultAsFullControllerParameter()
     {

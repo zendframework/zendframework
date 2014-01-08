@@ -107,32 +107,44 @@ class InjectTemplateListener extends AbstractListenerAggregate
         $this->controllerMap = $map;
     }
 
+    /**
+     * Maps controller to template if controller namespace is whitelisted or mapped
+     *
+     * @param string $controller controller FQCN
+     * @return string|false template name or false if controller was not matched
+     */
     public function mapController($controller)
     {
-        foreach ($this->controllerMap as $rule => $map) {
+        foreach ($this->controllerMap as $namespace => $replacement) {
             if (
-                false == $map
-                || !($controller === $rule || strpos($controller, $rule . '\\') === 0)
+                // Allow disabling rule by setting value to false since config
+                // merging have no feature to remove entries
+                false == $replacement
+                // Match full class or full namespace
+                || !($controller === $namespace || strpos($controller, $namespace . '\\') === 0)
             ) {
                 continue;
             }
 
-            if (is_string($map)) {
-                $map = rtrim($map, '/') . '/';
-                $controller = trim(substr($controller, strlen($rule) + 1), '\\');
-            } else {
-                $map = '';
+            $map = '';
+            // Map namespace to $replacement if its value is string
+            if (is_string($replacement)) {
+                $map = rtrim($replacement, '/') . '/';
+                $controller = substr($controller, strlen($namespace) + 1);
             }
 
+            //strip Controller namespace(s) (but not classname)
             $parts = explode('\\', $controller);
-            $parts = array_diff($parts, array('Controller'));
             array_pop($parts);
+            $parts = array_diff($parts, array('Controller'));
+            //strip trailing Controller in class name
             $parts[] = $this->deriveControllerClass($controller);
+            $controller = implode('/', $parts);
 
-            $template = $map . implode('/', $parts);
-            $template = trim($template, '/');
-            $template =  $this->inflectName($template);
-            return $template;
+            $template = trim($map . $controller, '/');
+
+            //inflect CamelCase to dash
+            return $this->inflectName($template);
         }
         return false;
     }

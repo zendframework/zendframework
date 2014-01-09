@@ -45,7 +45,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     /**
      * @var array|Select
      */
-    protected $values           = null;
+    protected $select           = null;
 
     /**
      * Constructor
@@ -79,7 +79,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function columns(array $columns)
     {
-        $this->columns = $columns;
+        $this->columns = array_flip($columns);
         return $this;
     }
 
@@ -93,48 +93,34 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function values($values, $flag = self::VALUES_SET)
     {
-        if (!is_array($values) && !$values instanceof Select) {
-            throw new Exception\InvalidArgumentException('values() expects an array of values or Zend\Db\Sql\Select instance');
-        }
-
         if ($values instanceof Select) {
-            if ($flag == self::VALUES_MERGE && (is_array($this->values) && !empty($this->values))) {
+            if ($flag == self::VALUES_MERGE) {
                 throw new Exception\InvalidArgumentException(
-                    'A Zend\Db\Sql\Select instance cannot be provided with the merge flag when values already exist.'
+                    'A Zend\Db\Sql\Select instance cannot be provided with the merge flag'
                 );
             }
-            $this->values = $values;
+            $this->select = $values;
             return $this;
         }
 
-        // determine if this is assoc or a set of values
-        $keys = array_keys($values);
-        $firstKey = current($keys);
-
-        if ($flag == self::VALUES_SET) {
-            $this->columns = array();
-            $this->values = array();
-        } elseif ($this->values instanceof Select) {
+        if (!is_array($values)) {
             throw new Exception\InvalidArgumentException(
-                'An array of values cannot be provided with the merge flag when a Zend\Db\Sql\Select'
-                . ' instance already exists as the value source.'
+                'values() expects an array of values or Zend\Db\Sql\Select instance'
+            );
+        }
+        if ($this->select && $flag == self::VALUES_MERGE) {
+            throw new Exception\InvalidArgumentException(
+                'An array of values cannot be provided with the merge flag when a Zend\Db\Sql\Select instance already exists as the value source'
             );
         }
 
-        if (is_string($firstKey)) {
-            foreach ($keys as $key) {
-                if (($index = array_search($key, $this->columns)) !== false) {
-                    $this->values[$index] = $values[$key];
-                } else {
-                    $this->columns[] = $key;
-                    $this->values[] = $values[$key];
-                }
+        if ($flag == self::VALUES_SET) {
+            $this->columns = $values;
+        } else {
+            foreach($values as $column=>$value) {
+                $this->columns[$column] = $value;
             }
-        } elseif (is_int($firstKey)) {
-            // determine if count of columns should match count of values
-            $this->values = array_merge($this->values, array_values($values));
         }
-
         return $this;
     }
 
@@ -159,8 +145,8 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     {
         $rawState = array(
             'table' => $this->table,
-            'columns' => $this->columns,
-            'values' => $this->values
+            'columns' => array_keys($this->columns),
+            'values' => array_values($this->columns)
         );
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
@@ -197,35 +183,10 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
         }
 
-        $columns = array();
-        $values  = array();
+        if ($this->select) {
+            $this->select->prepareStatement($adapter, $statementContainer);
 
-        if (is_array($this->values)) {
-            foreach ($this->columns as $cIndex => $column) {
-                $columns[$cIndex] = $platform->quoteIdentifier($column);
-                if (isset($this->values[$cIndex]) && $this->values[$cIndex] instanceof Expression) {
-                    $exprData = $this->processExpression($this->values[$cIndex], $platform, $driver);
-                    $values[$cIndex] = $exprData->getSql();
-                    $parameterContainer->merge($exprData->getParameterContainer());
-                } else {
-                    $values[$cIndex] = $driver->formatParameterName($column);
-                    if (isset($this->values[$cIndex])) {
-                        $parameterContainer->offsetSet($column, $this->values[$cIndex]);
-                    } else {
-                        $parameterContainer->offsetSet($column, null);
-                    }
-                }
-            }
-            $sql = sprintf(
-                $this->specifications[static::SPECIFICATION_INSERT],
-                $table,
-                implode(', ', $columns),
-                implode(', ', $values)
-            );
-        } elseif ($this->values instanceof Select) {
-            $this->values->prepareStatement($adapter, $statementContainer);
-
-            $columns = array_map(array($platform, 'quoteIdentifier'), $this->columns);
+            $columns = array_map(array($platform, 'quoteIdentifier'), array_keys($this->columns));
             $columns = implode(', ', $columns);
 
             $sql = sprintf(
@@ -233,6 +194,26 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 $table,
                 $columns ? "($columns)" : "",
                 $statementContainer->getSql()
+            );
+        } elseif ($this->columns) {
+            $columns = array();
+            $values  = array();
+            foreach ($this->columns as $cIndex=>$value) {
+                $columns[] = $platform->quoteIdentifier($cIndex);
+                if ($value instanceof Expression) {
+                    $exprData = $this->processExpression($value, $platform, $driver);
+                    $values[$cIndex] = $exprData->getSql();
+                    $parameterContainer->merge($exprData->getParameterContainer());
+                } else {
+                    $values[$cIndex] = $driver->formatParameterName($cIndex);
+                    $parameterContainer->offsetSet($cIndex, $value);
+                }
+            }
+            $sql = sprintf(
+                $this->specifications[static::SPECIFICATION_INSERT],
+                $table,
+                implode(', ', $columns),
+                implode(', ', $values)
             );
         } else {
             throw new Exception\InvalidArgumentException('values or select should be present');
@@ -263,41 +244,40 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $table = $adapterPlatform->quoteIdentifier($schema) . $adapterPlatform->getIdentifierSeparator() . $table;
         }
 
-        $columns = array_map(array($adapterPlatform, 'quoteIdentifier'), $this->columns);
-        $columns = implode(', ', $columns);
+        if ($this->select) {
+            $selectString = $this->select->getSqlString($adapterPlatform);
+            $columns = '';
+            if ($this->columns) {
+                $columns = array_map(array($adapterPlatform, 'quoteIdentifier'), array_keys($this->columns));
+                $columns = "(" . implode(', ', $columns) . ")";
+            }
 
-        if (is_array($this->values)) {
-            $values = array();
-            foreach ($this->values as $value) {
-                if ($value instanceof Expression) {
-                    $exprData = $this->processExpression($value, $adapterPlatform);
-                    $values[] = $exprData->getSql();
-                } elseif ($value === null) {
-                    $values[] = 'NULL';
-                } else {
-                    $values[] = $adapterPlatform->quoteValue($value);
-                }
-            }
-            return sprintf(
-                $this->specifications[static::SPECIFICATION_INSERT],
-                $table,
-                $columns,
-                implode(', ', $values)
-            );
-        } elseif ($this->values instanceof Select) {
-            $selectString = $this->values->getSqlString($adapterPlatform);
-            if ($columns) {
-                $columns = "($columns)";
-            }
             return sprintf(
                 $this->specifications[static::SPECIFICATION_SELECT],
                 $table,
                 $columns,
                 $selectString
             );
-        } else {
-            throw new Exception\InvalidArgumentException('values or select should be present');
         }
+
+        $columns = array();
+        $values = array();
+        foreach ($this->columns as $column => $value) {
+            $columns[] = $adapterPlatform->quoteIdentifier($column);
+            if ($value instanceof Expression) {
+                $exprData = $this->processExpression($value, $adapterPlatform);
+                $values[] = $exprData->getSql();
+            } elseif ($value === null) {
+                $values[] = 'NULL';
+            } else {
+                $values[] = $adapterPlatform->quoteValue($value);
+            }
+        }
+
+        $columns = implode(', ', $columns);
+        $values = implode(', ', $values);
+
+        return sprintf($this->specifications[static::SPECIFICATION_INSERT], $table, $columns, $values);
     }
 
     /**
@@ -311,8 +291,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function __set($name, $value)
     {
-        $values = array($name => $value);
-        $this->values($values, self::VALUES_MERGE);
+        $this->columns[$name] = $value;
         return $this;
     }
 
@@ -327,14 +306,11 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function __unset($name)
     {
-        if (($position = array_search($name, $this->columns)) === false) {
+        if (!isset($this->columns[$name])) {
             throw new Exception\InvalidArgumentException('The key ' . $name . ' was not found in this objects column list');
         }
 
-        unset($this->columns[$position]);
-        if (is_array($this->values)) {
-            unset($this->values[$position]);
-        }
+        unset($this->columns[$name]);
     }
 
     /**
@@ -347,7 +323,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function __isset($name)
     {
-        return in_array($name, $this->columns);
+        return isset($this->columns[$name]);
     }
 
     /**
@@ -361,12 +337,9 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function __get($name)
     {
-        if (!is_array($this->values)) {
-            return null;
-        }
-        if (($position = array_search($name, $this->columns)) === false) {
+        if (!isset($this->columns[$name])) {
             throw new Exception\InvalidArgumentException('The key ' . $name . ' was not found in this objects column list');
         }
-        return $this->values[$position];
+        return $this->columns[$name];
     }
 }

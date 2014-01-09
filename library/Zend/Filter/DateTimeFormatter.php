@@ -41,6 +41,7 @@ class DateTimeFormatter extends AbstractFilter
     public function setFormat($format)
     {
         $this->format = $format;
+
         return $this;
     }
 
@@ -60,7 +61,7 @@ class DateTimeFormatter extends AbstractFilter
             throw new Exception\InvalidArgumentException('Invalid date string provided', $e->getCode(), $e);
         }
 
-        if($result === false){
+        if ($result === false) {
             return $value;
         }
 
@@ -79,7 +80,7 @@ class DateTimeFormatter extends AbstractFilter
             return $value;
         }
 
-        if(!is_string($value) && !is_int($value) && !$value instanceof DateTime){
+        if (!is_string($value) && !is_int($value) && !$value instanceof DateTime) {
             return $value;
         }
 

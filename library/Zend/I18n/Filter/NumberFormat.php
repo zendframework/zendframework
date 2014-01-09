@@ -140,7 +140,7 @@ class NumberFormat extends AbstractLocale
      */
     public function filter($value)
     {
-        if(!is_scalar($value)){
+        if (!is_scalar($value)) {
             return $value;
         }
 

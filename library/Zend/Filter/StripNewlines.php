@@ -22,7 +22,7 @@ class StripNewlines extends AbstractFilter
      */
     public function filter($value)
     {
-        if(!is_scalar($value) && !is_array($value)){
+        if (!is_scalar($value) && !is_array($value)) {
             return $value;
         }
         return str_replace(array("\n", "\r"), '', $value);

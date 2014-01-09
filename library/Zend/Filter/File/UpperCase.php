@@ -32,8 +32,8 @@ class UpperCase extends StringToUpper
 
         // An uploaded file? Retrieve the 'tmp_name'
         $isFileUpload = false;
-        if(is_array($value)){
-            if(!isset($value['tmp_name'])){
+        if (is_array($value)) {
+            if (!isset($value['tmp_name'])) {
                 return $value;
             }
 

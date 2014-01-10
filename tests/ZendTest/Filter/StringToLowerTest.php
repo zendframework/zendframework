@@ -156,21 +156,25 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(mb_internal_encoding(), $this->_filter->getEncoding());
     }
 
-    /**
-     * @return void
-     */
-    public function testReturnUnfiltered()
-    {
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
+    public function returnUnfilteredDataProvider(){
+        return array(
+            array(null),
+            array(new \stdClass()),
             array(
-                'UPPER CASE WRITTEN',
-                'This should stay the same'
+                array(
+                    'UPPER CASE WRITTEN',
+                    'This should stay the same'
+                )
             )
         );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $this->_filter->filter($input));
-        }
+    }
+    
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $this->assertEquals($input, $this->_filter->filter($input));
     }
 }

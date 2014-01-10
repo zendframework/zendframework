@@ -104,21 +104,25 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($path, $filter($path3));
     }
 
-    /**
-     * @return void
-     */
-    public function testReturnUnfiltered()
-    {
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
+    public function returnUnfilteredDataProvider(){
+        return array(
+            array(null),
+            array(new \stdClass()),
             array(
-                $this->_filesPath . DIRECTORY_SEPARATOR . 'file.1',
-                $this->_filesPath . DIRECTORY_SEPARATOR . 'file.2'
+                array(
+                    $this->_filesPath . DIRECTORY_SEPARATOR . 'file.1',
+                    $this->_filesPath . DIRECTORY_SEPARATOR . 'file.2'
+                )
             )
         );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $this->_filter->filter($input));
-        }
+    }
+    
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $this->assertEquals($input, $this->_filter->filter($input));
     }
 }

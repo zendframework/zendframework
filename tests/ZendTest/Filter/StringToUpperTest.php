@@ -156,21 +156,24 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(mb_internal_encoding(), $this->_filter->getEncoding());
     }
 
-    /**
-     * @return void
-     */
-    public function testReturnUnfiltered()
+    public function returnUnfilteredDataProvider()
     {
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
-            array(
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
                 'lower case written',
                 'This should stay the same'
-            )
+            ))
         );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $this->_filter->filter($input));
-        }
+    }
+    
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $this->assertEquals($input, $this->_filter->filter($input));
     }
 }

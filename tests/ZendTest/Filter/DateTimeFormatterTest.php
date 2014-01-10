@@ -29,28 +29,30 @@ class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
         date_default_timezone_set($this->defaultTimezone);
     }
 
+    public function returnUnfilteredDataProvider(){
+        return array(
+            array(null),
+            array(''),
+            array(new \stdClass()),
+            array(array(
+                '1',
+                -1
+            )),
+            array(0.53)
+        );
+    }
+    
     /**
-     * Values which are skipped by the formatter
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
      */
-    public function testReturnUnfiltered()
+    public function testReturnUnfiltered($input)
     {
         date_default_timezone_set('UTC');
 
         $filter = new DateTimeFormatter();
 
-        $valuesExpected = array(
-            null,
-            '',
-            new \stdClass(),
-            array(
-                '1',
-                -1
-            ),
-            0.53
-        );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $filter($input));
-        }
+        $this->assertEquals($input, $filter($input));
     }
 
     public function testFormatterFormatsZero()

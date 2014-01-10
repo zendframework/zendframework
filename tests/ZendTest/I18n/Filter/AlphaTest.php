@@ -179,17 +179,23 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array_values($values), $actual);
     }
 
-    public function testReturnUnfiltered()
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass())
+        );
+    }
+    
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
     {
         $filter = new AlphaFilter();
 
-        $valuesExpected = array(
-            null,
-            new \stdClass()
-        );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input,  $filter->filter($input));
-        }
+        $this->assertEquals($input,  $filter->filter($input));
     }
 
 }

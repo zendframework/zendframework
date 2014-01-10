@@ -40,23 +40,25 @@ class IntTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function returnUnfilteredDataProvider(){
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                '1',
+                -1
+            ))
+        );
+    }
+    
     /**
+     * @dataProvider returnUnfilteredDataProvider
      * @return void
      */
-    public function testReturnUnfiltered()
+    public function testReturnUnfiltered($input)
     {
         $filter = new IntFilter();
 
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
-            array(
-                '1',
-                -1
-            )
-        );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $filter($input));
-        }
+        $this->assertEquals($input, $filter($input));
     }
 }

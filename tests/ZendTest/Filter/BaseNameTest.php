@@ -34,24 +34,25 @@ class BaseNameTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function returnUnfilteredDataProvider(){
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                '/path/to/filename',
+                '/path/to/filename.ext'
+            ))
+        );
+    }
+    
     /**
-     *
+     * @dataProvider returnUnfilteredDataProvider
      * @return void
      */
-    public function testReturnUnfiltered()
+    public function testReturnUnfiltered($input)
     {
         $filter = new BaseNameFilter();
 
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
-            array(
-                '/path/to/filename',
-                '/path/to/filename.ext'
-            )
-        );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $filter($input));
-        }
+        $this->assertEquals($input, $filter($input));
     }
 }

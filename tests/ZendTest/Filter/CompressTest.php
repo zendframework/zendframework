@@ -228,23 +228,25 @@ class CompressTest extends \PHPUnit_Framework_TestCase
         $filter->invalidMethod();
     }
 
+    public function returnUnfilteredDataProvider(){
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                'compress me',
+                'compress me too, please'
+            ))
+        );
+    }
+    
     /**
+     * @dataProvider returnUnfilteredDataProvider
      * @return void
      */
-    public function testReturnUnfiltered()
+    public function testReturnUnfiltered($input)
     {
         $filter  = new CompressFilter('bz2');
 
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
-            array(
-                'compress me',
-                'compress me too, please'
-            )
-        );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $filter($input));
-        }
+        $this->assertEquals($input, $filter($input));
     }
 }

@@ -119,21 +119,22 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
         $filter->setPattern('/foo/e');
     }
 
+    public function returnUnfilteredDataProvider(){
+        return array(
+            array(null),
+            array(new \stdClass())
+        );
+    }
+    
     /**
-     *
+     * @dataProvider returnUnfilteredDataProvider
      * @return void
      */
-    public function testReturnUnfiltered()
+    public function testReturnUnfiltered($input)
     {
         $filter = $this->filter;
         $filter->setPattern('#^controller/(?P<action>[a-z_-]+)#')->setReplacement('foo/bar');
 
-        $valuesExpected = array(
-            null,
-            new \stdClass()
-        );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $filter->filter($input));
-        }
+        $this->assertEquals($input, $filter->filter($input));
     }
 }

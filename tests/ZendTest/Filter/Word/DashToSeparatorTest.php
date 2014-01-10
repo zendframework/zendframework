@@ -57,20 +57,22 @@ class DashToSeparatorTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function returnUnfilteredDataProvider(){
+        return array(
+            array(null),
+            array(new \stdClass())
+        );
+    }
+    
     /**
+     * @dataProvider returnUnfilteredDataProvider
      * @return void
      */
-    public function testReturnUnfiltered()
+    public function testReturnUnfiltered($input)
     {
         $filter = new DashToSeparatorFilter();
 
-        $valuesExpected = array(
-            null,
-            new \stdClass()
-        );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $filter($input));
-        }
+        $this->assertEquals($input, $filter($input));
     }
 
 }

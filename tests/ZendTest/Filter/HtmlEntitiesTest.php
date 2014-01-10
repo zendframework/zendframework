@@ -255,22 +255,24 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    /**
-     * @return void
-     */
-    public function testReturnUnfiltered()
-    {
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
-            array(
+    public function returnUnfilteredDataProvider(){
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
                 '<',
                 '>'
-            )
+            ))
         );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $this->_filter->filter($input));
-        }
+    }
+    
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $this->assertEquals($input, $this->_filter->filter($input));
     }
 
     /**

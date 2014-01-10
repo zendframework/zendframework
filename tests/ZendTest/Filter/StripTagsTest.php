@@ -536,22 +536,24 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->_filter->filter($input));
     }
 
-    /**
-     *
-     * @return void
-     */
-    public function testReturnUnfiltered()
+    public function returnUnfilteredDataProvider()
     {
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
-            array(
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
                 '<li data-name="Test User" data-id="11223"></li>',
                 '<li data-name="Test User 2" data-id="456789"></li>'
-            )
+            ))
         );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $this->_filter->filter($input));
-        }
+    }
+    
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $this->assertEquals($input, $this->_filter->filter($input));
     }
 }

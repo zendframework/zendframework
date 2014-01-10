@@ -64,23 +64,26 @@ class UriNormalizeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                'http://www.example.com',
+                'file:///home/shahar/secret/../../otherguy/secret'
+            ))
+        );
+    }
+    
     /**
+     * @dataProvider returnUnfilteredDataProvider
      * @return void
      */
-    public function testReturnUnfiltered()
+    public function testReturnUnfiltered($input)
     {
         $filter = new UriNormalize();
 
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
-            array(
-                'http://www.example.com',
-                'file:///home/shahar/secret/../../otherguy/secret'
-            )
-        );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $filter($input));
-        }
+        $this->assertEquals($input, $filter($input));
     }
 }

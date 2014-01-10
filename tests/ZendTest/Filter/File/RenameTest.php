@@ -558,23 +558,26 @@ class RenameTest extends \PHPUnit_Framework_TestCase
         $filter = new FileRename(1234);
     }
 
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                $this->_oldFile,
+                $this->_origFile
+            ))
+        );
+    }
+
     /**
+     * @dataProvider returnUnfilteredDataProvider
      * @return void
      */
-    public function testReturnUnfiltered()
+    public function testReturnUnfiltered($input)
     {
         $filter = new FileRename($this->_newFile);
 
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
-            array(
-                $this->_oldFile,
-                $this->_origFile
-            )
-        );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $filter($input));
-        }
+        $this->assertEquals($input, $filter($input));
     }
 }

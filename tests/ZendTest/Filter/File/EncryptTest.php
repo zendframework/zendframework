@@ -100,25 +100,27 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals('Encryption', trim(file_get_contents(dirname(__DIR__) . '/_files/newencryption.txt')));
     }
 
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                dirname(__DIR__) . '/_files/nofile.txt',
+                dirname(__DIR__) . '/_files/nofile2.txt'
+            ))
+        );
+    }
+
     /**
-     *
+     * @dataProvider returnUnfilteredDataProvider
      * @return void
      */
-    public function testReturnUnfiltered()
+    public function testReturnUnfiltered($input)
     {
         $filter = new FileEncrypt();
         $filter->setKey('1234567890123456');
 
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
-            array(
-                dirname(__DIR__) . '/_files/nofile.txt',
-                dirname(__DIR__) . '/_files/nofile2.txt'
-            )
-        );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $filter($input));
-        }
+        $this->assertEquals($input, $filter($input));
     }
 }

@@ -108,23 +108,25 @@ class DecompressTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('compress me', $content2);
     }
 
+    public function returnUnfilteredDataProvider(){
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                'decompress me',
+                'decompress me too, please'
+            ))
+        );
+    }
+    
     /**
+     * @dataProvider returnUnfilteredDataProvider
      * @return void
      */
-    public function testReturnUnfiltered()
+    public function testReturnUnfiltered($input)
     {
         $filter = new DecompressFilter('bz2');
 
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
-            array(
-                'decompress me',
-                'decompress me too, please'
-            )
-        );
-        foreach ($valuesExpected as $input) {
-            $this->assertEquals($input, $filter($input));
-        }
+        $this->assertEquals($input, $filter($input));
     }
 }

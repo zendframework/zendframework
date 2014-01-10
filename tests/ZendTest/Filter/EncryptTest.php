@@ -144,10 +144,23 @@ PIDs9E7uuizAKDhRRRvho8BS
         $filter->getUnknownMethod();
     }
 
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                'encrypt me',
+                'encrypt me too, please'
+            ))
+        );
+    }
+
     /**
+     * @dataProvider returnUnfilteredDataProvider
      * @return void
      */
-    public function testReturnUnfiltered()
+    public function testReturnUnfiltered($input)
     {
         if (!extension_loaded('mcrypt')) {
             $this->markTestSkipped('Mcrypt extension not installed');
@@ -156,19 +169,8 @@ PIDs9E7uuizAKDhRRRvho8BS
         $encrypt = new EncryptFilter(array('adapter' => 'BlockCipher', 'key' => 'testkey'));
         $encrypt->setVector('1234567890123456890');
 
-        $valuesExpected = array(
-            null,
-            new \stdClass(),
-            array(
-                'encrypt me',
-                'encrypt me too, please'
-            )
-        );
-        foreach ($valuesExpected as $input) {
-            $encrypted = $encrypt->filter($input);
-
-            $this->assertEquals($input, $encrypted);
-        }
+        $encrypted = $encrypt->filter($input);
+        $this->assertEquals($input, $encrypted);
     }
 }
 

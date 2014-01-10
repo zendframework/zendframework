@@ -138,7 +138,8 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
         $filter->getUnknownMethod();
     }
 
-    public function returnUnfilteredDataProvider(){
+    public function returnUnfilteredDataProvider()
+    {
         return array(
             array(null),
             array(new \stdClass()),
@@ -148,7 +149,7 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
             ))
         );
     }
-    
+
     /**
      * @dataProvider returnUnfilteredDataProvider
      * @return void

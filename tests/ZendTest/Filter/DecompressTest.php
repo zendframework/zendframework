@@ -108,7 +108,8 @@ class DecompressTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('compress me', $content2);
     }
 
-    public function returnUnfilteredDataProvider(){
+    public function returnUnfilteredDataProvider()
+    {
         return array(
             array(null),
             array(new \stdClass()),
@@ -118,7 +119,7 @@ class DecompressTest extends \PHPUnit_Framework_TestCase
             ))
         );
     }
-    
+
     /**
      * @dataProvider returnUnfilteredDataProvider
      * @return void

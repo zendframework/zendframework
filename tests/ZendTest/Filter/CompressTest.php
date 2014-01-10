@@ -228,7 +228,8 @@ class CompressTest extends \PHPUnit_Framework_TestCase
         $filter->invalidMethod();
     }
 
-    public function returnUnfilteredDataProvider(){
+    public function returnUnfilteredDataProvider()
+    {
         return array(
             array(null),
             array(new \stdClass()),
@@ -238,7 +239,7 @@ class CompressTest extends \PHPUnit_Framework_TestCase
             ))
         );
     }
-    
+
     /**
      * @dataProvider returnUnfilteredDataProvider
      * @return void

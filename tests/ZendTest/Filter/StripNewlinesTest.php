@@ -60,7 +60,7 @@ class StripNewlinesTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass())
         );
     }
-    
+
     /**
      * @dataProvider returnUnfilteredDataProvider
      * @return void

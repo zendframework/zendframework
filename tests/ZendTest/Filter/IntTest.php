@@ -40,7 +40,8 @@ class IntTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function returnUnfilteredDataProvider(){
+    public function returnUnfilteredDataProvider()
+    {
         return array(
             array(null),
             array(new \stdClass()),
@@ -50,7 +51,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
             ))
         );
     }
-    
+
     /**
      * @dataProvider returnUnfilteredDataProvider
      * @return void

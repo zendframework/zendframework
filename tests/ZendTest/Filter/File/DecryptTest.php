@@ -116,7 +116,8 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
         $filter->filter(dirname(__DIR__).'/_files/nofile.txt');
     }
 
-    public function returnUnfilteredDataProvider(){
+    public function returnUnfilteredDataProvider()
+    {
         return array(
             array(null),
             array(new \stdClass()),
@@ -126,7 +127,7 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
             ))
         );
     }
-    
+
     /**
      * @dataProvider returnUnfilteredDataProvider
      * @return void

@@ -29,7 +29,8 @@ class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
         date_default_timezone_set($this->defaultTimezone);
     }
 
-    public function returnUnfilteredDataProvider(){
+    public function returnUnfilteredDataProvider()
+    {
         return array(
             array(null),
             array(''),
@@ -41,7 +42,7 @@ class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
             array(0.53)
         );
     }
-    
+
     /**
      * @dataProvider returnUnfilteredDataProvider
      * @return void

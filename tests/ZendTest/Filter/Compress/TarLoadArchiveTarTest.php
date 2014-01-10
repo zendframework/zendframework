@@ -15,7 +15,7 @@ use Zend\Filter\Exception\ExtensionNotLoadedException;
 /**
  * @group      Zend_Filter
  */
-class TarLoadArchveTarTest extends \PHPUnit_Framework_TestCase
+class TarLoadArchiveTarTest extends \PHPUnit_Framework_TestCase
 {
     public function testArchiveTarNotLoaded()
     {

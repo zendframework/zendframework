@@ -156,7 +156,8 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(mb_internal_encoding(), $this->_filter->getEncoding());
     }
 
-    public function returnUnfilteredDataProvider(){
+    public function returnUnfilteredDataProvider()
+    {
         return array(
             array(null),
             array(new \stdClass()),
@@ -168,7 +169,7 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
             )
         );
     }
-    
+
     /**
      * @dataProvider returnUnfilteredDataProvider
      * @return void

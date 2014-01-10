@@ -65,13 +65,14 @@ class SeparatorToSeparatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('dash?separated?words', $filtered);
     }
 
-    public function returnUnfilteredDataProvider(){
+    public function returnUnfilteredDataProvider()
+    {
         return array(
             array(null),
             array(new \stdClass())
         );
     }
-    
+
     /**
      * @dataProvider returnUnfilteredDataProvider
      * @return void

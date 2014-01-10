@@ -152,7 +152,7 @@ class NumberFormatTest extends TestCase
             ))
         );
     }
-    
+
     /**
      * @dataProvider returnUnfilteredDataProvider
      * @return void

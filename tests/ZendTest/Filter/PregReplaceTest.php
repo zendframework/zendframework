@@ -119,13 +119,14 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
         $filter->setPattern('/foo/e');
     }
 
-    public function returnUnfilteredDataProvider(){
+    public function returnUnfilteredDataProvider()
+    {
         return array(
             array(null),
             array(new \stdClass())
         );
     }
-    
+
     /**
      * @dataProvider returnUnfilteredDataProvider
      * @return void

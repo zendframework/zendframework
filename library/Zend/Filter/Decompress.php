@@ -37,7 +37,7 @@ class Decompress extends Compress
      */
     public function filter($value)
     {
-        if (!is_string($value)) {
+        if (!is_string($value) && $value !== null) {
             return $value;
         }
 

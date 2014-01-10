@@ -40,7 +40,7 @@ class Decompress extends Compress
         if (!is_string($value)) {
             return $value;
         }
-        
+
         return $this->getAdapter()->decompress($value);
     }
 }

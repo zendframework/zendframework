@@ -24,7 +24,7 @@ class Decompress extends Compress
      */
     public function __invoke($value)
     {
-        return $this->getAdapter()->decompress($value);
+        return $this->filter($value);
     }
 
     /**

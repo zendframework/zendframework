@@ -225,9 +225,9 @@ class Posix extends AbstractAdapter
     /**
      * Prepare a string that will be rendered in color.
      *
-     * @param  string   $string
-     * @param  int      $color
-     * @param  null|int $bgColor
+     * @param  string                           $string
+     * @param  int                              $color
+     * @param  null|int                         $bgColor
      * @throws Exception\BadMethodCallException
      * @return string
      */
@@ -235,6 +235,7 @@ class Posix extends AbstractAdapter
     {
         $color   = $this->getColorCode($color, 'fg');
         $bgColor = $this->getColorCode($bgColor, 'bg');
+
         return ($color !== null ? "\x1b[" . $color   . 'm' : '')
             . ($bgColor !== null ? "\x1b[" . $bgColor . 'm' : '')
             . $string
@@ -244,7 +245,7 @@ class Posix extends AbstractAdapter
     /**
      * Change current drawing color.
      *
-     * @param int $color
+     * @param  int                              $color
      * @throws Exception\BadMethodCallException
      */
     public function setColor($color)
@@ -256,7 +257,7 @@ class Posix extends AbstractAdapter
     /**
      * Change current drawing background color
      *
-     * @param int $bgColor
+     * @param  int                              $bgColor
      * @throws Exception\BadMethodCallException
      */
     public function setBgColor($bgColor)
@@ -308,13 +309,14 @@ class Posix extends AbstractAdapter
         if ($this->isUtf8()) {
             return new Charset\Utf8;
         }
+
         return new Charset\DECSG();
     }
 
     /**
      * Read a single character from the console input
      *
-     * @param  string|null $mask   A list of allowed chars
+     * @param  string|null $mask A list of allowed chars
      * @return string
      */
     public function readChar($mask = null)
@@ -328,6 +330,7 @@ class Posix extends AbstractAdapter
         fclose($stream);
 
         $this->restoreTTYMode();
+
         return $char;
     }
 
@@ -372,7 +375,8 @@ class Posix extends AbstractAdapter
     /**
      * Get the final color code and throw exception on error
      *
-     * @param  null|int|Xterm256 $color
+     * @param  null|int|Xterm256                $color
+     * @param  string                           $type  (optional) Foreground 'fg' or background 'bg'.
      * @throws Exception\BadMethodCallException
      * @return string
      */
@@ -386,6 +390,7 @@ class Posix extends AbstractAdapter
             } else {
                 $code = sprintf($code, $color::BACKGROUND);
             }
+
             return $code;
         }
 

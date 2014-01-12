@@ -185,4 +185,31 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         //just get rid of the data in ob
         ob_get_clean();
     }
+
+    /**
+     * @expectedException \Zend\Console\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Supplied X,Y coordinates are invalid.
+     */
+    public function testInvalidCoords()
+    {
+        $this->adapter->writeTextBlock('', 1, 1, -1, -9);
+    }
+
+    /**
+     * @expectedException \Zend\Console\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Invalid width supplied.
+     */
+    public function testInvalidWidth()
+    {
+        $this->adapter->writeTextBlock('', 0);
+    }
+
+    /**
+     * @expectedException \Zend\Console\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Invalid height supplied.
+     */
+    public function testInvalidHeight()
+    {
+        $this->adapter->writeTextBlock('', 80, 0, 2, 2);
+    }
 }

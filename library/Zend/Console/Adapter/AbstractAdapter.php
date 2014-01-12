@@ -280,13 +280,14 @@ abstract class AbstractAdapter implements AdapterInterface
      * In case a line of text does not fit desired width, it will be wrapped to the next line.
      * In case the whole text does not fit in desired height, it will be truncated.
      *
-     * @param string   $text    Text to write
-     * @param int      $width   Maximum block width. Negative value means distance from right edge.
-     * @param int|null $height  Maximum block height. Negative value means distance from bottom edge.
-     * @param int      $x       Block X coordinate (column)
-     * @param int      $y       Block Y coordinate (row)
-     * @param null|int $color   (optional) Text color
-     * @param null|int $bgColor (optional) Text background color
+     * @param  string                             $text    Text to write
+     * @param  int                                $width   Maximum block width. Negative value means distance from right edge.
+     * @param  int|null                           $height  Maximum block height. Negative value means distance from bottom edge.
+     * @param  int                                $x       Block X coordinate (column)
+     * @param  int                                $y       Block Y coordinate (row)
+     * @param  null|int                           $color   (optional) Text color
+     * @param  null|int                           $bgColor (optional) Text background color
+     * @throws Exception\InvalidArgumentException
      */
     public function writeTextBlock(
         $text,
@@ -297,6 +298,18 @@ abstract class AbstractAdapter implements AdapterInterface
         $color = null,
         $bgColor = null
     ) {
+        if ($x < 0 || $y < 0) {
+            throw new Exception\InvalidArgumentException('Supplied X,Y coordinates are invalid.');
+        }
+
+        if ($width < 1) {
+            throw new Exception\InvalidArgumentException('Invalid width supplied.');
+        }
+
+        if (null !== $height && $height < 1) {
+            throw new Exception\InvalidArgumentException('Invalid height supplied.');
+        }
+
         //ensure the text is not wider than the width
         if (strlen($text) > $width) {
             $text = wordwrap($text, $width, PHP_EOL, true);

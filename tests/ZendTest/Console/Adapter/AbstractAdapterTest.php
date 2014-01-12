@@ -144,4 +144,45 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $encodedText = $this->adapter->encodeText(utf8_decode($text));
         $this->assertEquals(utf8_decode($text),$encodedText);
     }
+
+    public function testWriteTextBlockSameAsWidth()
+    {
+        //set some text that's the same size as the width
+        $text = 'hello there, I am short!';
+        $width = strlen($text);
+
+        ob_start();
+        $this->adapter->writeTextBlock($text, $width);
+        $this->assertSame($text, ob_get_clean());
+    }
+
+    public function testTextBlockLongUnbreakableWord()
+    {
+        $text = 'thisisaverylongwordthatwontbreakproperlysothereyouhaveit and here is some more text';
+        $expected = array('thisisaver', 'ylongwordt', 'hatwontbre', 'akproperly'
+           , 'sothereyou', 'haveit and', 'here is', 'some more'
+           , 'text');
+
+        ob_start();
+        $this->adapter->writeTextBlock($text, 10);
+        $this->assertSame($expected, $this->adapter->writtenData);
+
+        //just get rid of the data in ob
+        ob_get_clean();
+    }
+    public function testTextBlockLongerThanHeight()
+    {
+        $text = 'thisisaverylongwordthatwontbreakproperlysothereyouhaveit and here is some more text';
+        $expected = array('thisisaver', 'ylongwordt', 'hatwontbre');
+
+        //reset tracking of written data
+        $this->adapter->writtenData = array();
+
+        ob_start();
+        $this->adapter->writeTextBlock($text, 10, 3);
+        $this->assertSame($expected, $this->adapter->writtenData);
+
+        //just get rid of the data in ob
+        ob_get_clean();
+    }
 }

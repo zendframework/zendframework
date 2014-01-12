@@ -108,16 +108,16 @@ abstract class AbstractAdapter implements AdapterInterface
      * If X or Y coordinate value is negative, it will be calculated as the distance from far right or bottom edge
      * of the console (respectively).
      *
-     * @param int      $x1           Top-left corner X coordinate (column)
-     * @param int      $y1           Top-left corner Y coordinate (row)
-     * @param int      $x2           Bottom-right corner X coordinate (column)
-     * @param int      $y2           Bottom-right corner Y coordinate (row)
-     * @param int      $lineStyle    (optional) Box border style.
-     * @param int      $fillStyle    (optional) Box fill style or a single character to fill it with.
-     * @param int      $color        (optional) Foreground color
-     * @param int      $bgColor      (optional) Background color
-     * @param null|int $fillColor    (optional) Foreground color of box fill
-     * @param null|int $fillBgColor  (optional) Background color of box fill
+     * @param  int                              $x1          Top-left corner X coordinate (column)
+     * @param  int                              $y1          Top-left corner Y coordinate (row)
+     * @param  int                              $x2          Bottom-right corner X coordinate (column)
+     * @param  int                              $y2          Bottom-right corner Y coordinate (row)
+     * @param  int                              $lineStyle   (optional) Box border style.
+     * @param  int                              $fillStyle   (optional) Box fill style or a single character to fill it with.
+     * @param  int                              $color       (optional) Foreground color
+     * @param  int                              $bgColor     (optional) Background color
+     * @param  null|int                         $fillColor   (optional) Foreground color of box fill
+     * @param  null|int                         $fillBgColor (optional) Background color of box fill
      * @throws Exception\BadMethodCallException if coordinates are invalid
      */
     public function writeBox(
@@ -244,7 +244,6 @@ abstract class AbstractAdapter implements AdapterInterface
             }
         }
 
-
         // Draw corners
         if ($lineStyle !== static::LINE_NONE) {
             if ($color !== null) {
@@ -298,6 +297,32 @@ abstract class AbstractAdapter implements AdapterInterface
         $color = null,
         $bgColor = null
     ) {
+        //ensure the text is not wider than the width
+        if (strlen($text) > $width) {
+            $text = wordwrap($text, $width, PHP_EOL, true);
+        } else {
+            //just write the line at the spec'd position
+            $this->setPos($x, $y);
+            $this->write($text, $color, $bgColor);
+
+            return;
+        }
+
+        //convert to array of lines
+        $lines = explode(PHP_EOL, $text);
+
+        //truncate if height was specified
+        if (null !== $height && count($lines) > $height) {
+            $lines = array_slice($lines, 0, $height);
+        }
+
+        //write each line
+        $curY = $y;
+        foreach ($lines as $line) {
+            $this->setPos($x, $curY);
+            $this->write($line, $color, $bgColor);
+            $curY++;//next line
+        }
     }
 
     /**
@@ -474,7 +499,7 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Read a single line from the console input
      *
-     * @param int $maxLength        Maximum response length
+     * @param  int    $maxLength Maximum response length
      * @return string
      */
     public function readLine($maxLength = 2048)
@@ -482,13 +507,14 @@ abstract class AbstractAdapter implements AdapterInterface
         $f    = fopen('php://stdin','r');
         $line = stream_get_line($f, $maxLength, PHP_EOL);
         fclose($f);
+
         return rtrim($line,"\n\r");
     }
 
     /**
      * Read a single character from the console input
      *
-     * @param string|null   $mask   A list of allowed chars
+     * @param  string|null $mask A list of allowed chars
      * @return string
      */
     public function readChar($mask = null)
@@ -498,6 +524,7 @@ abstract class AbstractAdapter implements AdapterInterface
             $char = fread($f,1);
         } while ("" === $char || ($mask !== null && false === strstr($mask, $char)));
         fclose($f);
+
         return $char;
     }
 

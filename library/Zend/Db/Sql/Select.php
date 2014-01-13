@@ -582,46 +582,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     {
         $expr = 1;
 
-        if ($this->table) {
-            $table = $this->table;
-            $schema = $alias = null;
-
-            if (is_array($table)) {
-                $alias = key($this->table);
-                $table = current($this->table);
-            }
-
-            // create quoted table name to use in columns processing
-            if ($table instanceof TableIdentifier) {
-                list($table, $schema) = $table->getTableAndSchema();
-            }
-
-            if ($table instanceof Select) {
-                $table = '(' . $this->processSubselect($table, $platform, $driver, $parameterContainer) . ')';
-            } else {
-                $table = $platform->quoteIdentifier($table);
-            }
-
-            if ($schema) {
-                $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
-            }
-
-            if ($alias) {
-                $fromTable = $platform->quoteIdentifier($alias);
-                $table = $this->renderTable($table, $fromTable);
-            } else {
-                $fromTable = $table;
-            }
-        } else {
-            $fromTable = '';
-        }
-
-        if ($this->prefixColumnsWithTable) {
-            $fromTable .= $platform->getIdentifierSeparator();
-        } else {
-            $fromTable = '';
-        }
-
+        list($table, $fromTable) = $this->resolveTable($this->table, $platform, $driver, $parameterContainer);
         // process table columns
         $columns = array();
         foreach ($this->columns as $columnIndexOrAs => $column) {
@@ -937,5 +898,35 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     {
         $this->where  = clone $this->where;
         $this->having = clone $this->having;
+    }
+
+    protected function resolveTable($table, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
+    {
+        $alias = null;
+
+        if (is_array($table)) {
+            $alias = key($table);
+            $table = current($table);
+        }
+
+        $table = parent::resolveTable($table, $platform, $driver, $parameterContainer);
+
+        if ($alias) {
+            $fromTable = $platform->quoteIdentifier($alias);
+            $table = $this->renderTable($table, $fromTable);
+        } else {
+            $fromTable = $table;
+        }
+
+        if ($this->prefixColumnsWithTable && $fromTable) {
+            $fromTable .= $platform->getIdentifierSeparator();
+        } else {
+            $fromTable = '';
+        }
+        
+        return array(
+            $table,
+            $fromTable
+        );
     }
 }

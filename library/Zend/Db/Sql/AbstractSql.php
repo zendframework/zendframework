@@ -199,6 +199,26 @@ abstract class AbstractSql
         return $sql;
     }
 
+
+    protected function resolveTable($table, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
+    {
+        $schema = null;
+        if ($table instanceof TableIdentifier) {
+            list($table, $schema) = $table->getTableAndSchema();
+        }
+
+        if ($table instanceof Select) {
+            $table = '(' . $this->processSubselect($table, $platform, $driver, $parameterContainer) . ')';
+        } elseif ($table) {
+            $table = $platform->quoteIdentifier($table);
+        }
+
+        if ($schema && $table) {
+            $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
+        }
+        return $table;
+    }
+
     protected function resolveParameterContainer($statementContainer)
     {
         $parameterContainer = $statementContainer->getParameterContainer();

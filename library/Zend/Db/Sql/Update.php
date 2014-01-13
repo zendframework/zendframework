@@ -152,20 +152,6 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $platform = $adapter->getPlatform();
         $parameterContainer = $this->resolveParameterContainer($statementContainer);
 
-        $table = $this->table;
-        $schema = null;
-
-        // create quoted table name to use in update processing
-        if ($table instanceof TableIdentifier) {
-            list($table, $schema) = $table->getTableAndSchema();
-        }
-
-        $table = $platform->quoteIdentifier($table);
-
-        if ($schema) {
-            $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
-        }
-
         $setSql = array();
         foreach ($this->set as $column => $value) {
             if ($value instanceof Expression) {
@@ -179,7 +165,11 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
         $set = implode(', ', $setSql);
 
-        $sql = sprintf($this->specifications[static::SPECIFICATION_UPDATE], $table, $set);
+        $sql = sprintf(
+            $this->specifications[static::SPECIFICATION_UPDATE],
+            $this->resolveTable($this->table, $platform, $driver, $parameterContainer),
+            $set
+        );
 
         // process where
         if ($this->where->count() > 0) {
@@ -199,19 +189,6 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
         $adapterPlatform = ($adapterPlatform) ?: new Sql92;
-        $table = $this->table;
-        $schema = null;
-
-        // create quoted table name to use in update processing
-        if ($table instanceof TableIdentifier) {
-            list($table, $schema) = $table->getTableAndSchema();
-        }
-
-        $table = $adapterPlatform->quoteIdentifier($table);
-
-        if ($schema) {
-            $table = $adapterPlatform->quoteIdentifier($schema) . $adapterPlatform->getIdentifierSeparator() . $table;
-        }
 
         $setSql = array();
         foreach ($this->set as $column => $value) {
@@ -226,7 +203,11 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
         $set = implode(', ', $setSql);
 
-        $sql = sprintf($this->specifications[static::SPECIFICATION_UPDATE], $table, $set);
+        $sql = sprintf(
+            $this->specifications[static::SPECIFICATION_UPDATE],
+            $this->resolveTable($this->table, $adapterPlatform),
+            $set
+        );
         if ($this->where->count() > 0) {
             $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
             $sql .= ' ' . sprintf($this->specifications[static::SPECIFICATION_WHERE], $whereParts->getSql());

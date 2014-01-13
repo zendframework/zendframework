@@ -121,21 +121,10 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $platform = $adapter->getPlatform();
         $parameterContainer = $this->resolveParameterContainer($statementContainer);
 
-        $table = $this->table;
-        $schema = null;
-
-        // create quoted table name to use in delete processing
-        if ($table instanceof TableIdentifier) {
-            list($table, $schema) = $table->getTableAndSchema();
-        }
-
-        $table = $platform->quoteIdentifier($table);
-
-        if ($schema) {
-            $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
-        }
-
-        $sql = sprintf($this->specifications[static::SPECIFICATION_DELETE], $table);
+        $sql = sprintf(
+            $this->specifications[static::SPECIFICATION_DELETE],
+            $this->resolveTable($this->table, $platform, $driver, $parameterContainer)
+        );
 
         // process where
         if ($this->where->count() > 0) {
@@ -157,21 +146,11 @@ class Delete extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
         $adapterPlatform = ($adapterPlatform) ?: new Sql92;
-        $table = $this->table;
-        $schema = null;
 
-        // create quoted table name to use in delete processing
-        if ($table instanceof TableIdentifier) {
-            list($table, $schema) = $table->getTableAndSchema();
-        }
-
-        $table = $adapterPlatform->quoteIdentifier($table);
-
-        if ($schema) {
-            $table = $adapterPlatform->quoteIdentifier($schema) . $adapterPlatform->getIdentifierSeparator() . $table;
-        }
-
-        $sql = sprintf($this->specifications[static::SPECIFICATION_DELETE], $table);
+        $sql = sprintf(
+            $this->specifications[static::SPECIFICATION_DELETE],
+            $this->resolveTable($this->table, $adapterPlatform)
+        );
 
         if ($this->where->count() > 0) {
             $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');

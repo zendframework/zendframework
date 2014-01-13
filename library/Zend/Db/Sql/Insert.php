@@ -163,21 +163,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $driver   = $adapter->getDriver();
         $platform = $adapter->getPlatform();
         $parameterContainer = $this->resolveParameterContainer($statementContainer);
-
-
-        $table = $this->table;
-        $schema = null;
-
-        // create quoted table name to use in insert processing
-        if ($table instanceof TableIdentifier) {
-            list($table, $schema) = $table->getTableAndSchema();
-        }
-
-        $table = $platform->quoteIdentifier($table);
-
-        if ($schema) {
-            $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
-        }
+        $table = $this->resolveTable($this->table, $platform, $driver, $parameterContainer);
 
         if ($this->select) {
             $this->select->prepareStatement($adapter, $statementContainer);
@@ -214,6 +200,7 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         } else {
             throw new Exception\InvalidArgumentException('values or select should be present');
         }
+
         $statementContainer->setSql($sql);
     }
 
@@ -226,20 +213,10 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
         $adapterPlatform = ($adapterPlatform) ?: new Sql92;
-        $table = $this->table;
-        $schema = null;
 
-        // create quoted table name to use in insert processing
-        if ($table instanceof TableIdentifier) {
-            list($table, $schema) = $table->getTableAndSchema();
-        }
+        $table = $this->resolveTable($this->table, $adapterPlatform);
 
-        $table = $adapterPlatform->quoteIdentifier($table);
-
-        if ($schema) {
-            $table = $adapterPlatform->quoteIdentifier($schema) . $adapterPlatform->getIdentifierSeparator() . $table;
-        }
-
+        $values = array();
         if ($this->select) {
             $selectString = $this->select->getSqlString($adapterPlatform);
             $columns = '';
@@ -270,10 +247,12 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
             }
         }
 
-        $columns = implode(', ', $columns);
-        $values = implode(', ', $values);
-
-        return sprintf($this->specifications[static::SPECIFICATION_INSERT], $table, $columns, $values);
+        return sprintf(
+            $this->specifications[static::SPECIFICATION_INSERT],
+            $table,
+            implode(', ', $columns),
+            implode(', ', $values)
+        );
     }
 
     /**

@@ -162,12 +162,8 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
     {
         $driver   = $adapter->getDriver();
         $platform = $adapter->getPlatform();
-        $parameterContainer = $statementContainer->getParameterContainer();
+        $parameterContainer = $this->resolveParameterContainer($statementContainer);
 
-        if (!$parameterContainer instanceof ParameterContainer) {
-            $parameterContainer = new ParameterContainer();
-            $statementContainer->setParameterContainer($parameterContainer);
-        }
 
         $table = $this->table;
         $schema = null;

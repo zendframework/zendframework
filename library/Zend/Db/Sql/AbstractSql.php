@@ -198,4 +198,14 @@ abstract class AbstractSql
         }
         return $sql;
     }
+
+    protected function resolveParameterContainer($statementContainer)
+    {
+        $parameterContainer = $statementContainer->getParameterContainer();
+        if (!$parameterContainer instanceof ParameterContainer) {
+            $parameterContainer = new ParameterContainer();
+            $statementContainer->setParameterContainer($parameterContainer);
+        }
+        return $parameterContainer;
+    }
 }

@@ -484,12 +484,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer)
     {
-        // ensure statement has a ParameterContainer
-        $parameterContainer = $statementContainer->getParameterContainer();
-        if (!$parameterContainer instanceof ParameterContainer) {
-            $parameterContainer = new ParameterContainer();
-            $statementContainer->setParameterContainer($parameterContainer);
-        }
+        $parameterContainer = $this->resolveParameterContainer($statementContainer);
 
         $sqls = array();
         $parameters = array();

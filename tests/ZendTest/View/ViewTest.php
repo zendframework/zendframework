@@ -295,7 +295,7 @@ class ViewTest extends TestCase
     {
         $this->attachTestStrategies();
         $test = (object) array('flag' => false);
-        $this->view->getEventManager()->attach('renderer.post', function ($e) use ($test) {
+        $this->view->getEventManager()->attach(ViewEvent::EVENT_RENDERER_POST, function ($e) use ($test) {
             $test->flag = true;
         });
         $variables = array(

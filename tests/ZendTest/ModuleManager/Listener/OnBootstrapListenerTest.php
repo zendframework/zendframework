@@ -17,6 +17,7 @@ use Zend\Loader\ModuleAutoloader;
 use Zend\ModuleManager\Listener\ModuleResolverListener;
 use Zend\ModuleManager\Listener\OnBootstrapListener;
 use Zend\ModuleManager\ModuleManager;
+use Zend\ModuleManager\ModuleEvent;
 use Zend\Mvc\Application;
 use ZendTest\ModuleManager\TestAsset\MockApplication;
 
@@ -43,8 +44,8 @@ class OnBootstrapListenerTest extends TestCase
         $sharedEvents = new SharedEventManager();
         $this->moduleManager = new ModuleManager(array());
         $this->moduleManager->getEventManager()->setSharedManager($sharedEvents);
-        $this->moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
-        $this->moduleManager->getEventManager()->attach('loadModule', new OnBootstrapListener, 1000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new OnBootstrapListener, 1000);
 
         $this->application = new MockApplication;
         $events            = new EventManager(array('Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application'));

@@ -68,26 +68,25 @@ abstract class AbstractSql
 
             // process values and types (the middle and last position of the expression data)
             $values = $part[1];
-            $types = (isset($part[2])) ? $part[2] : array();
+            $types = isset($part[2]) ? $part[2] : array();
             foreach ($values as $vIndex => $value) {
-                if (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_IDENTIFIER) {
-                    $values[$vIndex] = $platform->quoteIdentifierInFragment($value);
-                } elseif (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_VALUE && $value instanceof Select) {
+                if (!isset($types[$vIndex])) {
+                    continue;
+                }
+                $type = $types[$vIndex];
+                if ($value instanceof Select) {
                     // process sub-select
-                    if ($driver) {
-                        $values[$vIndex] = '(' . $this->processSubSelect($value, $platform, $driver, $parameterContainer) . ')';
-                    } else {
-                        $values[$vIndex] = '(' . $this->processSubSelect($value, $platform) . ')';
-                    }
-                } elseif (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_VALUE && $value instanceof ExpressionInterface) {
+                    $values[$vIndex] = '(' . $this->processSubSelect($value, $platform, $driver, $parameterContainer) . ')';
+                } elseif($value instanceof ExpressionInterface) {
                     // recursive call to satisfy nested expressions
                     $innerStatementContainer = $this->processExpression($value, $platform, $driver, $namedParameterPrefix . $vIndex . 'subpart');
                     $values[$vIndex] = $innerStatementContainer->getSql();
                     if ($driver) {
                         $parameterContainer->merge($innerStatementContainer->getParameterContainer());
                     }
-                } elseif (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_VALUE) {
-
+                } elseif ($type == ExpressionInterface::TYPE_IDENTIFIER) {
+                    $values[$vIndex] = $platform->quoteIdentifierInFragment($value);
+                } elseif ($type == ExpressionInterface::TYPE_VALUE) {
                     // if prepareType is set, it means that this particular value must be
                     // passed back to the statement in a way it can be used as a placeholder value
                     if ($driver) {
@@ -99,7 +98,7 @@ abstract class AbstractSql
 
                     // if not a preparable statement, simply quote the value and move on
                     $values[$vIndex] = $platform->quoteValue($value);
-                } elseif (isset($types[$vIndex]) && $types[$vIndex] == ExpressionInterface::TYPE_LITERAL) {
+                } elseif ($type == ExpressionInterface::TYPE_LITERAL) {
                     $values[$vIndex] = $value;
                 }
             }

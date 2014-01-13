@@ -631,7 +631,6 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $columns = array();
         foreach ($this->columns as $columnIndexOrAs => $column) {
 
-            $columnName = '';
             if ($column === self::SQL_STAR) {
                 $columns[] = array($fromTable . self::SQL_STAR);
                 continue;
@@ -647,9 +646,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 if ($parameterContainer) {
                     $parameterContainer->merge($columnParts->getParameterContainer());
                 }
-                $columnName .= $columnParts->getSql();
+                $columnName = $columnParts->getSql();
             } else {
-                $columnName .= $fromTable . $platform->quoteIdentifier($column);
+                $columnName = $fromTable . $platform->quoteIdentifier($column);
             }
 
             // process As portion
@@ -665,6 +664,13 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         // process join columns
         foreach ($this->joins as $join) {
+            $joinName = (is_array($join['name'])) ? key($join['name']) : $join['name'];
+            if ($joinName instanceof TableIdentifier) {
+                $joinName = $platform->quoteIdentifier($joinName->getSchema()) . $separator . $platform->quoteIdentifier($joinName->getTable());
+            } else {
+                $joinName = $platform->quoteIdentifier($joinName);
+            }
+
             foreach ($join['columns'] as $jKey => $jColumn) {
                 $jColumns = array();
                 if ($jColumn instanceof ExpressionInterface) {

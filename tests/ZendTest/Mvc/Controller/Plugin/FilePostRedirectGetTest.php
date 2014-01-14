@@ -22,6 +22,7 @@ use Zend\Mvc\Router\Http\Segment as SegmentRoute;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\SimpleRouteStack;
 use Zend\Stdlib\Parameters;
+use Zend\Validator\NotEmpty;
 use ZendTest\Mvc\Controller\TestAsset\SampleController;
 use ZendTest\Session\TestAsset\TestManager as SessionManager;
 
@@ -320,5 +321,82 @@ class FilePostRedirectGetTest extends TestCase
 
         $this->assertSame('FOO', $data['test_collection'][0]['test_field']);
         $this->assertSame('BAR', $data['test_collection'][1]['test_field']);
+    }
+
+    public function testCorrectInputDataMerging()
+    {
+        require_once __DIR__ . '/TestAsset/DisablePhpUploadChecks.php';
+        require_once __DIR__ . '/TestAsset/DisablePhpMoveUploadedFileChecks.php';
+
+        $form = new Form();
+        $form->add(array(
+            'name' => 'collection',
+            'type' => 'collection',
+            'options' => array(
+                'target_element' => new TestAsset\TestFieldset('target'),
+                'count' => 2,
+            )
+        ));
+
+        copy(__DIR__ . '/TestAsset/nullfile', __DIR__ . '/TestAsset/nullfile_copy');
+
+        $request = $this->request;
+        $request->setMethod('POST');
+        $request->setPost(new Parameters(array(
+            'collection' => array(
+                0 => array(
+                    'text' => 'testvalue1',
+                ),
+                1 => array(
+                    'text' => '',
+                )
+            )
+        )));
+        $request->setFiles(new Parameters(array(
+            'collection' => array(
+                0 => array(
+                    'file' => array(
+                        'name' => 'test.jpg',
+                        'type' => 'image/jpeg',
+                        'size' => 20480,
+                        'tmp_name' => __DIR__ . '/TestAsset/nullfile_copy',
+                        'error' => UPLOAD_ERR_OK
+                    ),
+                ),
+            )
+        )));
+
+        $this->controller->dispatch($this->request, $this->response);
+        $this->controller->fileprg($form, '/test/getPage', true);
+
+        $this->assertFalse($form->isValid());
+        $data = $form->getData();
+
+        $this->assertEquals(array(
+            'collection' => array(
+                0 => array(
+                    'text' => 'testvalue1',
+                    'file' => array(
+                        'name' => 'test.jpg',
+                        'type' => 'image/jpeg',
+                        'size' => 20480,
+                        'tmp_name' => __DIR__ . '/TestAsset/testfile.jpg',
+                        'error' => 0
+                    ),
+                ),
+                1 => array(
+                    'text' => null,
+                    'file' => null,
+                )
+            )
+        ), $data);
+
+        $this->assertFileExists($data['collection'][0]['file']['tmp_name']);
+
+        unlink($data['collection'][0]['file']['tmp_name']);
+
+        $messages = $form->getMessages();
+        $this->assertTrue(isset($messages['collection'][1]['text'][NotEmpty::IS_EMPTY]));
+        $this->assertTrue(isset($messages['collection'][1]['file'][NotEmpty::IS_EMPTY]));
     }
 }

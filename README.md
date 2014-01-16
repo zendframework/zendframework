@@ -34,6 +34,13 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5666](https://github.com/zendframework/zf2/pull/5666) removes the ability
+  to translate form validation _messages_. This should never have been enabled
+  in the first place, as validation message translation should be based on the
+  message key, not the message string itself. In most cases, this should not
+  affect existing applications, as most messages are dynamic and, as such, would
+  result in the translator being unable to lookup a matching translation key.
+
 - [#5406](https://github.com/zendframework/zf2/pull/5406) and
   [#5689](https://github.com/zendframework/zf2/pull/5689) make the i18n
   component optional for the MVC. 5406 does this by introducing a new interface,

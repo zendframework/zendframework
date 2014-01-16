@@ -41,11 +41,17 @@ Additional updates that may affect existing applications include:
   affect existing applications, as most messages are dynamic and, as such, would
   result in the translator being unable to lookup a matching translation key.
 
-- [#5664](https://github.com/zendframework/zf2/pull/5666) removes the ability
+- [#5664](https://github.com/zendframework/zf2/pull/5664) removes the ability
   to translate validator message _keys_. This should never have been enabled
   in the first place, as the keys are themselves to be used by the translator
   to find translation strings; they were not intended to be translated
   themselves.
+
+- [#5649](https://github.com/zendframework/zf2/pull/5649) adds a new method
+  to `Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase`,
+  `assertResponseReasonPhrase()`. This allows developers to write assertions
+  directly against the HTTP reason phrase they may have set in the response
+  object.
 
 - [#5406](https://github.com/zendframework/zf2/pull/5406) and
   [#5689](https://github.com/zendframework/zf2/pull/5689) make the i18n

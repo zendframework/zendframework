@@ -539,6 +539,11 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
                     continue;
                 }
 
+                if ($input instanceof ArrayInput) {
+                    $input->setValue(array());
+                    continue;
+                }
+
                 $input->setValue(null);
                 continue;
             }

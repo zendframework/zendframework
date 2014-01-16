@@ -261,7 +261,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         }
 
         $translations = array(
-            'hostnameInvalidLocalName' => 'this is the IP error message',
+            'hostnameInvalidLocalName' => 'The input does not appear to be a valid local network name',
         );
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = $translations;

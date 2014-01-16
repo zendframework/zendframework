@@ -420,7 +420,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $hostnameValidator = new Hostname();
         $translations = array(
             'hostnameIpAddressNotAllowed'   => 'hostnameIpAddressNotAllowed translation',
-            'hostnameUnknownTld'            => 'hostnameUnknownTld translation',
+            'hostnameUnknownTld'            => 'The input appears to be a DNS hostname but cannot match TLD against known list',
             'hostnameDashCharacter'         => 'hostnameDashCharacter translation',
             'hostnameInvalidHostnameSchema' => 'hostnameInvalidHostnameSchema translation',
             'hostnameUndecipherableTld'     => 'hostnameUndecipherableTld translation',

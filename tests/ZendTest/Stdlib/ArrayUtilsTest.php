@@ -195,16 +195,19 @@ class ArrayUtilsTest extends TestCase
                 array(
                     'foo' => null,
                     null  => 'rod',
-                    'cat' => 'bar'
-                ),
-                array(
-                    'foo' => 'baz',
-                    null  => 'zad'
+                    'cat' => 'bar',
+                    'god' => 'rad'
                 ),
                 array(
                     'foo' => 'baz',
                     null  => 'zad',
-                    'cat' => 'bar'
+                    'god' => null
+                ),
+                array(
+                    'foo' => 'baz',
+                    null  => 'zad',
+                    'cat' => 'bar',
+                    'god' => null
                 )
             ),
         );

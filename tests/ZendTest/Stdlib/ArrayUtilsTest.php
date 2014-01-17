@@ -191,6 +191,22 @@ class ArrayUtilsTest extends TestCase
                     'bar' => 'bat'
                 )
             ),
+            'merge-with-null' => array(
+                array(
+                    'foo' => null,
+                    null  => 'rod',
+                    'cat' => 'bar'
+                ),
+                array(
+                    'foo' => 'baz',
+                    null  => 'zad'
+                ),
+                array(
+                    'foo' => 'baz',
+                    null  => 'zad',
+                    'cat' => 'bar'
+                )
+            ),
         );
     }
 

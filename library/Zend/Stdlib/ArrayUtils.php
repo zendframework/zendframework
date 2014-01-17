@@ -254,7 +254,7 @@ abstract class ArrayUtils
      * @param  array $b
      * @return array
      */
-    public static function merge(array $a, array &$b)
+    public static function merge(array $a, array $b)
     {
         foreach ($b as $key => $value) {
             if (isset($a[$key])) {

@@ -254,10 +254,10 @@ abstract class ArrayUtils
      * @param  array $b
      * @return array
      */
-    public static function merge(array $a, array $b)
+    public static function merge(array $a, array &$b)
     {
         foreach ($b as $key => $value) {
-            if (array_key_exists($key, $a)) {
+            if (isset($a[$key])) {
                 if (is_int($key)) {
                     $a[] = $value;
                 } elseif (is_array($value) && is_array($a[$key])) {

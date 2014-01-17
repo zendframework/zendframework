@@ -145,7 +145,7 @@ Please see [CHANGELOG.md](CHANGELOG.md).
 
 ### SYSTEM REQUIREMENTS
 
-Zend Framework 2 requires PHP 5.3.3 or later; we recommend using the
+Zend Framework 2 requires PHP 5.3.23 or later; we recommend using the
 latest PHP version whenever possible.
 
 ### INSTALLATION

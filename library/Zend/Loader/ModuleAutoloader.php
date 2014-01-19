@@ -186,7 +186,11 @@ class ModuleAutoloader implements SplAutoloader
             $path = $path . $moduleClassPath;
 
             if ($path == '.' || substr($path, 0, 2) == './' || substr($path, 0, 2) == '.\\') {
-                $path = realpath('.') . substr($path, 1);
+                $basePath = realpath('.');
+                if ($basePath === false) {
+                    $basePath = getcwd();
+                }
+                $path = rtrim($basePath, '\/\\') . substr($path, 1);
             }
 
             $classLoaded = $this->loadModuleFromDir($path, $class);

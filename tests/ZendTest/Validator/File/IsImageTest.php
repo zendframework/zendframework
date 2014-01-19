@@ -28,11 +28,6 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
             return __DIR__ . '/_files/magic.lte.5.3.10.mime';
         }
 
-        // Ubuntu has backported the changes in 12.04 to PHP 5.3.10.
-        if (strpos(PHP_VERSION, 'ubuntu') !== false) {
-            return __DIR__ . '/_files/magic.lte.5.3.10.mime';
-        }
-
         return __DIR__ . '/_files/magic.mime';
     }
 

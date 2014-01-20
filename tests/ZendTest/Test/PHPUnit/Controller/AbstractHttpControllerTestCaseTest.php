@@ -607,4 +607,20 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertEquals(true, $viewModel instanceof ViewModel);
         $this->assertEquals($viewModel->getTemplate(), 'baz/index/unittests');
     }
+
+    public function testAssertXmlHttpRequestDispatch()
+    {
+        $request = $this->getRequest();
+        $this->assertFalse($request->isXmlHttpRequest());
+
+        $this->dispatch('/test', 'GET', array(), true);
+
+        $request = $this->getRequest();
+        $this->assertTrue($request->isXmlHttpRequest());
+
+        $this->reset();
+
+        $request = $this->getRequest();
+        $this->assertFalse($request->isXmlHttpRequest());
+    }
 }

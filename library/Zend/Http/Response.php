@@ -164,7 +164,7 @@ class Response extends AbstractMessage implements ResponseInterface
      * Populate object from string
      *
      * @param  string $string
-     * @return Response
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public static function fromString($string)
@@ -235,7 +235,7 @@ class Response extends AbstractMessage implements ResponseInterface
      *
      * @param  int $code
      * @throws Exception\InvalidArgumentException
-     * @return Response
+     * @return self
      */
     public function setStatusCode($code)
     {
@@ -266,7 +266,7 @@ class Response extends AbstractMessage implements ResponseInterface
      *
      * @param  int $code
      * @throws Exception\InvalidArgumentException
-     * @return Response
+     * @return self
      */
     public function setCustomStatusCode($code)
     {
@@ -285,7 +285,7 @@ class Response extends AbstractMessage implements ResponseInterface
 
     /**
      * @param string $reasonPhrase
-     * @return Response
+     * @return self
      */
     public function setReasonPhrase($reasonPhrase)
     {

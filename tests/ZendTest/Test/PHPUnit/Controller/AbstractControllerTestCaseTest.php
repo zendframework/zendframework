@@ -34,6 +34,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         foreach ($files as $file) {
             (is_dir("$dir/$file")) ? static::rmdir("$dir/$file") : unlink("$dir/$file");
         }
+
         return rmdir($dir);
     }
 

@@ -48,6 +48,16 @@ return array(
                     ),
                 ),
             ),
+            'persistence' => array(
+                'type' => 'literal',
+                'options' => array(
+                    'route'    => '/tests-persistence',
+                    'defaults' => array(
+                        'controller' => 'baz_index',
+                        'action'     => 'persistencetest',
+                    ),
+                ),
+            ),
             'exception' => array(
                 'type' => 'literal',
                 'options' => array(

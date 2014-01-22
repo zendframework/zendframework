@@ -131,7 +131,7 @@ class CompilerDefinitionTest extends TestCase
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'setSomething'));
         $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'getSomething'));
     }
-    
+
     public function testHasMethodParameters()
     {
         $definition = new CompilerDefinition();

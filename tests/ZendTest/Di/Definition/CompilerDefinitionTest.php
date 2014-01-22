@@ -131,4 +131,16 @@ class CompilerDefinitionTest extends TestCase
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'setSomething'));
         $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'getSomething'));
     }
+    
+    public function testHasMethodParameters()
+    {
+        $definition = new CompilerDefinition();
+        $definition->addDirectory(__DIR__ . '/../TestAsset/ConstructorInjection');
+        $definition->addDirectory(__DIR__ . '/../TestAsset/SetterInjection');
+        $definition->addDirectory(__DIR__ . '/../TestAsset/CompilerClasses');
+        $definition->compile();
+        $this->assertTrue($definition->hasMethodParameters('ZendTest\Di\TestAsset\ConstructorInjection\B', '__construct'));
+        $this->assertTrue($definition->hasMethodParameters('ZendTest\Di\TestAsset\SetterInjection\B', 'setA'));
+        $this->assertTrue($definition->hasMethodParameters('ZendTest\Di\TestAsset\CompilerClasses\D', 'setB'));
+    }
 }

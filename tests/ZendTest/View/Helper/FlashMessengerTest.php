@@ -443,4 +443,41 @@ class FlashMessengerTest extends TestCase
         $display = $this->helper->renderCurrent(PluginFlashMessenger::NAMESPACE_INFO);
         $this->assertEquals($displayAssertion, $display);
     }
+
+    public function testAutoEscapeDefaultsToTrue()
+    {
+        $this->assertTrue($this->helper->getAutoEscape());
+    }
+
+    public function testCanSetAutoEscape()
+    {
+        $this->helper->setAutoEscape(false);
+        $this->assertFalse($this->helper->getAutoEscape());
+
+        $this->helper->SetAutoEscape(true);
+        $this->assertTrue($this->helper->getAutoEscape());
+    }
+
+    public function testMessageIsEscapedByDefault()
+    {
+        $helper = new FlashMessenger;
+        $helper->addMessage('Foo<br />bar');
+        unset($helper);
+
+        $displayAssertion = '<ul class="default"><li>Foo&lt;br /&gt;bar</li></ul>';
+        $display = $this->helper->render(PluginFlashMessenger::NAMESPACE_DEFAULT);
+        $this->assertSame($displayAssertion, $display);
+    }
+
+    public function testMessageIsNotEscapedWhenAutoEscapeIsFalse()
+    {
+        $helper = new FlashMessenger;
+        $helper->addMessage('Foo<br />bar');
+        unset($helper);
+
+        $displayAssertion = '<ul class="default"><li>Foo<br />bar</li></ul>';
+        $display = $this->helper->setAutoEscape(false)
+                                ->render(PluginFlashMessenger::NAMESPACE_DEFAULT);
+        $this->assertSame($displayAssertion, $display);
+    }
 }

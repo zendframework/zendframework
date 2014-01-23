@@ -452,6 +452,16 @@ class FieldsetTest extends TestCase
         $this->assertEquals('bar', $option);
     }
 
+    public function testSetOptionAllowedObjectBindingClass()
+    {
+        $this->fieldset->setOptions(array(
+                                         'allowed_object_binding_class' => 'bar'
+                                    ));
+        $option = $this->fieldset->getOption('allowed_object_binding_class');
+
+        $this->assertEquals('bar', $option);
+    }
+
     /**
      * @expectedException Zend\Form\Exception\InvalidElementException
      */

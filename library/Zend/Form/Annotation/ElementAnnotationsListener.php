@@ -165,6 +165,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
             $elementSpec['spec'] = $specification;
             $elementSpec['spec']['name'] = $name;
+            $elementSpec['spec']['options'] = new ArrayObject($annotation->getOptions());
         }
     }
 

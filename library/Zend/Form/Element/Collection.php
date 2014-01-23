@@ -535,6 +535,10 @@ class Collection extends Fieldset implements FieldsetPrepareAwareInterface
             if (isset($values[$name])) {
                 $object = $values[$name];
 
+                if ($this->allowedObjectBindingClass()) {
+                    $fieldset->setAllowedObjectBindingClass($this->allowedObjectBindingClass());
+                }
+
                 if ($fieldset->allowObjectBinding($object)) {
                     $fieldset->setObject($object);
                     $values[$name] = $fieldset->extract();

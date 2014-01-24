@@ -522,7 +522,6 @@ class CollectionTest extends TestCase
                 'count' => 2
             ),
         ));
-        $form->get('collection')->setHydrator(new ObjectPropertyHydrator());
 
         $market = new stdClass();
 

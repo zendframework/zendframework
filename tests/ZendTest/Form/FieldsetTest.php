@@ -481,4 +481,23 @@ class FieldsetTest extends TestCase
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
         $this->fieldset->setObject('foo');
     }
+
+    public function testShouldValidateAllowObjectBindingByClassname()
+    {
+        $object = new \stdClass();
+        $this->fieldset->setAllowedObjectBindingClass('stdClass');
+        $allowed = $this->fieldset->allowObjectBinding($object);
+
+        $this->assertTrue($allowed);
+    }
+
+    public function testShouldValidateAllowObjectBindingByObject()
+    {
+        $object = new \stdClass();
+        $this->fieldset->setObject($object);
+        $allowed = $this->fieldset->allowObjectBinding($object);
+
+        $this->assertTrue($allowed);
+    }
+
 }

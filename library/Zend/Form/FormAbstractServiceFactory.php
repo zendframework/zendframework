@@ -35,10 +35,10 @@ class FormAbstractServiceFactory implements AbstractFactoryInterface
      *
      * @param  ServiceLocatorInterface $services
      * @param  string $name Service name (as resolved by ServiceManager)
-     * @param  string $rName Name by which service was requested
+     * @param  string $requestedName Name by which service was requested
      * @return bool
      */
-    public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $rName)
+    public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $requestedName)
     {
         $config = $this->getConfig($services);
         if (empty($config)) {

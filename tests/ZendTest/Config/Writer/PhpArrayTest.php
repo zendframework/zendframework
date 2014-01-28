@@ -84,6 +84,21 @@ class PhpArrayTest extends AbstractWriterTestCase
         $this->assertEquals($expected, $configString);
     }
 
+    public function testRenderWithQuotesInString()
+    {
+        $config = new Config(array('one' => 'Test with "double" quotes', 'two' => 'Test with \'single\' quotes'));
+
+        $configString = $this->writer->toString($config);
+
+        $expected = "<?php\n";
+        $expected .= "return array(\n";
+        $expected .= "    'one' => 'Test with \"double\" quotes',\n";
+        $expected .= "    'two' => 'Test with \\'single\\' quotes',\n";
+        $expected .= ");\n";
+
+        $this->assertEquals($expected, $configString);
+    }
+
     public function testSetUseBracketArraySyntaxReturnsFluentInterface()
     {
         $this->assertSame($this->writer, $this->writer->setUseBracketArraySyntax(true));

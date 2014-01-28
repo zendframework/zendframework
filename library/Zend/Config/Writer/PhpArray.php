@@ -76,12 +76,10 @@ class PhpArray extends AbstractWriter
                                   . $this->processIndented($value, $arraySyntax, $indentLevel)
                                   . str_repeat(self::INDENT_STRING, --$indentLevel) . $arraySyntax['close'] . ",\n";
                 }
-            } elseif (is_object($value)) {
+            } elseif (is_object($value) || is_string($value)) {
                 $arrayString .= var_export($value, true) . ",\n";
             } elseif (is_bool($value)) {
                 $arrayString .= ($value ? 'true' : 'false') . ",\n";
-            } elseif (is_string($value)) {
-                $arrayString .= "'" . addslashes($value) . "',\n";
             } elseif ($value === null) {
                 $arrayString .= "null,\n";
             } else {

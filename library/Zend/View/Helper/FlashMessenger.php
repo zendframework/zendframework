@@ -140,6 +140,57 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
 
         return $markup;
     }
+    
+    /**
+     * Render Messages
+     *
+     * @param  string $namespace
+     * @param  array  $classes
+     * @return string
+     */
+    public function renderCurrent($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $classes = array())
+    {
+        $flashMessenger = $this->getPluginFlashMessenger();
+        $messages = $flashMessenger->getCurrentMessagesFromNamespace($namespace);
+
+        // Prepare classes for opening tag
+        if (empty($classes)) {
+            if (isset($this->classMessages[$namespace])) {
+                $classes = $this->classMessages[$namespace];
+            } else {
+                $classes = $this->classMessages[PluginFlashMessenger::NAMESPACE_DEFAULT];
+            }
+            $classes = array($classes);
+        }
+
+        // Flatten message array
+        $escapeHtml      = $this->getEscapeHtmlHelper();
+        $messagesToPrint = array();
+
+        $translator = $this->getTranslator();
+        $translatorTextDomain = $this->getTranslatorTextDomain();
+
+        array_walk_recursive($messages, function ($item) use (&$messagesToPrint, $escapeHtml, $translator, $translatorTextDomain) {
+            if ($translator !== null) {
+                $item = $translator->translate(
+                    $item,
+                    $translatorTextDomain
+                );
+            }
+            $messagesToPrint[] = $escapeHtml($item);
+        });
+
+        if (empty($messagesToPrint)) {
+            return '';
+        }
+
+        // Generate markup
+        $markup  = sprintf($this->getMessageOpenFormat(), ' class="' . implode(' ', $classes) . '"');
+        $markup .= implode(sprintf($this->getMessageSeparatorString(), ' class="' . implode(' ', $classes) . '"'), $messagesToPrint);
+        $markup .= $this->getMessageCloseString();
+
+        return $markup;
+    }
 
     /**
      * Set the string used to close message representation

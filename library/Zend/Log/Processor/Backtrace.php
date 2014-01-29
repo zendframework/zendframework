@@ -60,7 +60,7 @@ class Backtrace implements ProcessorInterface
     }
 
     /**
-     * Provide backtrace as slim as posible
+     * Provide backtrace as slim as possible
      *
      * @return  array:
      */

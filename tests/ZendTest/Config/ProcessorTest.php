@@ -269,6 +269,32 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF2-5772
+     */
+    public function testTokenChangeParamsRetainsType()
+    {
+        $config = new Config(
+            array(
+                'trueBoolKey' => true,
+                'falseBoolKey' => false,
+                'intKey' => 123,
+                'floatKey' => (float) 123.456,
+                'doubleKey' => (double) 456.789,
+            ), true
+        );
+
+        $processor = new TokenProcessor();
+
+        $processor->process($config);
+
+        $this->assertSame(true, $config['trueBoolKey']);
+        $this->assertSame(false, $config['falseBoolKey']);
+        $this->assertSame(123, $config['intKey']);
+        $this->assertSame((float) 123.456, $config['floatKey']);
+        $this->assertSame((double) 456.789, $config['doubleKey']);
+    }
+
+    /**
      * @depends testTokenSurround
      */
     public function testUserConstants()

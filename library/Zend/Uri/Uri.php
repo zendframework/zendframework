@@ -1301,10 +1301,12 @@ class Uri implements UriInterface
      */
     protected static function normalizeQuery($query)
     {
+        // those characters have special meaning in urlencoded parameters
+        $subDelims = str_replace(array('&', '=', '+', ';'), '', self::CHAR_SUB_DELIMS);
         $query = self::encodeQueryFragment(
             self::decodeUrlEncodedChars(
                 $query,
-                '/[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . '%:@\/\?]/'
+                '/[' . self::CHAR_UNRESERVED . $subDelims . ':@\/\?]/'
             )
         );
 
@@ -1321,7 +1323,14 @@ class Uri implements UriInterface
      */
     protected static function normalizeFragment($fragment)
     {
-        return static::normalizeQuery($fragment);
+        $fragment = self::encodeQueryFragment(
+            self::decodeUrlEncodedChars(
+                $fragment,
+                '/[' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . '%:@\/\?]/'
+            )
+        );
+
+        return $fragment;
     }
 
     /**

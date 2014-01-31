@@ -192,6 +192,12 @@ class Token implements ProcessorInterface
                     $this->map[$this->prefix . $token . $this->suffix] = $value;
                 }
             }
+
+            foreach (array_keys($this->map) as $key) {
+                if (empty($key)) {
+                    unset($this->map[$key]);
+                }
+            }
         }
 
         return $this->map;
@@ -232,10 +238,6 @@ class Token implements ProcessorInterface
      */
     private function doProcess($value, array $replacements)
     {
-        if (is_string($value)) {
-            return strtr($value, $this->map);
-        }
-
         if ($value instanceof Config) {
             if ($value->isReadOnly()) {
                 throw new Exception\InvalidArgumentException('Cannot process config because it is read-only');

@@ -12,7 +12,6 @@ namespace Zend\Config\Processor;
 use Traversable;
 use Zend\Config\Config;
 use Zend\Config\Exception;
-use Zend\Stdlib\ArrayUtils;
 
 class Token implements ProcessorInterface
 {

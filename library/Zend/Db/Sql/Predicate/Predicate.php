@@ -216,7 +216,20 @@ class Predicate extends PredicateSet
 
         return $this;
     }
-
+    /**
+     * Create "notLike" predicate
+     *
+     * Utilizes In predicate
+     *
+     * @param  string $identifier
+     * @param  string $notLike
+     * @return Predicate
+     */
+	public function notLike( $identifier, $notLike ) {
+		$this->addPredicate( new NotLike( $identifier, $notLike ), ($this->nextPredicateCombineOperator) ? : $this->defaultCombination  );
+		$this->nextPredicateCombineOperator = null;
+		return $this;
+	}
     /**
      * Create an expression, with parameter placeholders
      *

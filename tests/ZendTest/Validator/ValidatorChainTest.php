@@ -281,4 +281,25 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($unserialized));
         $this->assertFalse($unserialized->isValid(''));
     }
+
+    /**
+     * @group zfcampus_zf-apigility-admin_89
+     */
+    public function testAttachByNameAllowsSpecifyingBreakChainOnFailureFlagViaOptions()
+    {
+        $this->validator->attachByName('GreaterThan', array(
+            'break_chain_on_failure' => true,
+            'min' => 1,
+        ));
+        $this->assertEquals(1, count($this->validator));
+        $validators = $this->validator->getValidators();
+        $spec       = array_shift($validators);
+
+        $this->assertInternalType('array', $spec);
+        $this->assertArrayHasKey('instance', $spec);
+        $validator = $spec['instance'];
+        $this->assertInstanceOf('Zend\Validator\GreaterThan', $validator);
+        $this->assertArrayHasKey('breakChainOnFailure', $spec);
+        $this->assertTrue($spec['breakChainOnFailure']);
+    }
 }

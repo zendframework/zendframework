@@ -282,13 +282,22 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($unserialized->isValid(''));
     }
 
+    public function breakChainFlags()
+    {
+        return array(
+            'underscores' => array('break_chain_on_failure'),
+            'no_underscores' => array('breakchainonfailure'),
+        );
+    }
+
     /**
      * @group zfcampus_zf-apigility-admin_89
+     * @dataProvider breakChainFlags
      */
-    public function testAttachByNameAllowsSpecifyingBreakChainOnFailureFlagViaOptions()
+    public function testAttachByNameAllowsSpecifyingBreakChainOnFailureFlagViaOptions($option)
     {
         $this->validator->attachByName('GreaterThan', array(
-            'break_chain_on_failure' => true,
+            $option => true,
             'min' => 1,
         ));
         $this->assertEquals(1, count($this->validator));

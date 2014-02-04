@@ -16,11 +16,15 @@ class CamelCaseToSeparator extends AbstractSeparator
     /**
      * Defined by Zend\Filter\Filter
      *
-     * @param  string $value
-     * @return string
+     * @param  string|array $value
+     * @return string|array
      */
     public function filter($value)
     {
+        if (!is_scalar($value) && !is_array($value)) {
+            return $value;
+        }
+
         if (StringUtils::hasPcreUnicodeSupport()) {
             $pattern     = array('#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#', '#(?<=(?:\p{Ll}|\p{Nd}))(\p{Lu})#');
             $replacement = array($this->separator . '\1', $this->separator . '\1');

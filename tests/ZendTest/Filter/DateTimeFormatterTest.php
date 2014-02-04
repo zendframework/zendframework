@@ -9,8 +9,8 @@
 
 namespace ZendTest\Filter;
 
-use DateTime;
 use Zend\Filter\DateTimeFormatter;
+use DateTime;
 
 /**
  * @group      Zend_Filter
@@ -29,20 +29,31 @@ class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
         date_default_timezone_set($this->defaultTimezone);
     }
 
-    public function testFormatterDoesNotFormatAnEmptyString()
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(''),
+            array(new \stdClass()),
+            array(array(
+                '1',
+                -1
+            )),
+            array(0.53)
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
     {
         date_default_timezone_set('UTC');
 
         $filter = new DateTimeFormatter();
-        $result = $filter->filter('');
-        $this->assertEquals('', $result);
-    }
 
-    public function testFormatterDoesNotFormatNull()
-    {
-        $filter = new DateTimeFormatter();
-        $result = $filter->filter(null);
-        $this->assertEquals(null, $result);
+        $this->assertEquals($input, $filter($input));
     }
 
     public function testFormatterFormatsZero()

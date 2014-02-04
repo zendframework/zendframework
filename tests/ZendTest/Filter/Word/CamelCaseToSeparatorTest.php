@@ -47,4 +47,41 @@ class CamelCaseToSeparatorTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('These_Are_SOME_Camel_CASED_Words', $filtered);
     }
+
+    /**
+     * @return void
+     */
+    public function testFilterSupportArray()
+    {
+        $filter = new CamelCaseToSeparatorFilter();
+
+        $input = array(
+            'CamelCasedWords',
+            'somethingDifferent'
+        );
+
+        $filtered = $filter($input);
+
+        $this->assertNotEquals($input, $filtered);
+        $this->assertEquals(array('Camel Cased Words', 'something Different'), $filtered);
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass())
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new CamelCaseToSeparatorFilter();
+
+        $this->assertEquals($input, $filter($input));
+    }
 }

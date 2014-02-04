@@ -156,30 +156,26 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(mb_internal_encoding(), $this->_filter->getEncoding());
     }
 
-    /**
-     * Ensures that a warning is raised if array is used
-     *
-     * @return void
-     */
-    public function testWarningIsRaisedIfArrayUsed()
+    public function returnUnfilteredDataProvider()
     {
-        $input = array('ABC', 'DEF');
-
-        ErrorHandler::start(E_USER_WARNING);
-        $filtered = $this->_filter->filter($input);
-        $err = ErrorHandler::stop();
-
-        $this->assertEquals($input, $filtered);
-        $this->assertInstanceOf('ErrorException', $err);
-        $this->assertContains('cannot filter', $err->getMessage());
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(
+                array(
+                    'UPPER CASE WRITTEN',
+                    'This should stay the same'
+                )
+            )
+        );
     }
 
     /**
+     * @dataProvider returnUnfilteredDataProvider
      * @return void
      */
-    public function testReturnsNullIfNullIsUsed()
+    public function testReturnUnfiltered($input)
     {
-        $filtered = $this->_filter->filter(null);
-        $this->assertNull($filtered);
+        $this->assertEquals($input, $this->_filter->filter($input));
     }
 }

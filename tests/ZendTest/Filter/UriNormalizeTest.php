@@ -63,4 +63,27 @@ class UriNormalizeTest extends \PHPUnit_Framework_TestCase
             array('http', '/just/a/path', '/just/a/path') // cannot be enforced, no host
         );
     }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                'http://www.example.com',
+                'file:///home/shahar/secret/../../otherguy/secret'
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new UriNormalize();
+
+        $this->assertEquals($input, $filter($input));
+    }
 }

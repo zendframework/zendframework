@@ -107,7 +107,8 @@ class IntegrationTestListener implements PHPUnit_Framework_TestListener
     public function addSkippedTest(PHPUnit_Framework_Test $test, Exception $e, $time) {}
     public function startTestSuite(PHPUnit_Framework_TestSuite $suite) {}
     public function endTestSuite(PHPUnit_Framework_TestSuite $suite) {}
-
+    public function addRiskyTest(PHPUnit_Framework_Test $test, Exception $e, $time) {} // Support PHPUnit 3.8+
+    
     /**
      * A test started.
      *

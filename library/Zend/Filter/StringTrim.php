@@ -73,16 +73,16 @@ class StringTrim extends AbstractFilter
      */
     public function filter($value)
     {
-        // Do not filter non-string values
         if (!is_string($value)) {
             return $value;
         }
+        $value = (string) $value;
 
         if (null === $this->options['charlist']) {
-            return $this->unicodeTrim((string) $value);
+            return $this->unicodeTrim($value);
         }
 
-        return $this->unicodeTrim((string) $value, $this->options['charlist']);
+        return $this->unicodeTrim($value, $this->options['charlist']);
     }
 
     /**

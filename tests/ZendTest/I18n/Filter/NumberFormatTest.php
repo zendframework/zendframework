@@ -139,4 +139,28 @@ class NumberFormatTest extends TestCase
             ),
         );
     }
+
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                '1.234.567,891',
+                '1.567,891'
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new NumberFormatFilter('de_AT', NumberFormatter::DEFAULT_STYLE, NumberFormatter::TYPE_DOUBLE);
+
+        $this->assertEquals($input,  $filter->filter($input));
+    }
 }

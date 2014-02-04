@@ -682,19 +682,35 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $nav1 = new Navigation\Navigation();
         $nav2 = new Navigation\Navigation();
+        $nav3 = new Navigation\Navigation();
+        $nav4 = new Navigation\Navigation();
         $nav2->addPage(array(
             'label' => 'Page 1',
             'uri' => '#'
         ));
+        $nav3->addPage(array(
+            'label' => 'Page 1',
+            'uri' => '#',
+            'visible' => true
+        ));
+        $nav4->addPage(array(
+            'label' => 'Page 1',
+            'uri' => '#',
+            'visible' => false
+        ));
 
         $expected = array(
             'empty' => false,
-            'notempty' => true
+            'notempty' => true,
+            'visible' => true,
+            'notvisible' => false
         );
 
         $actual = array(
             'empty' => $nav1->hasPages(),
-            'notempty' => $nav2->hasPages()
+            'notempty' => $nav2->hasPages(),
+            'visible' => $nav3->hasPages(false),
+            'notvisible' => $nav4->hasPages(true)
         );
 
         $this->assertEquals($expected, $actual);

@@ -258,11 +258,22 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
     /**
      * Returns true if container contains any pages
      *
+     * @param  bool $onlyVisible whether to check only visible pages
      * @return bool  whether container has any pages
      */
-    public function hasPages()
+    public function hasPages($onlyVisible = false)
     {
-        return count($this->index) > 0;
+        if ($onlyVisible) {
+            foreach ($this->pages as $page) {
+                if ($page->isVisible()) {
+                    return true;
+                }
+            }
+            // no visible pages found
+            return false;
+        } else {
+            return count($this->index) > 0;
+        }
     }
 
     /**

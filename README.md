@@ -34,6 +34,10 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5436](https://github.com/zendframework/zf2/pull/5436) brings consistency
+  to the `Zend\Filter` component, ensuring that exceptions are never thrown,
+  and that values that a given filter cannot manipulate are returned unfiltered.
+
 - [#5666](https://github.com/zendframework/zf2/pull/5666) removes the ability
   to translate form validation _messages_. This should never have been enabled
   in the first place, as validation message translation should be based on the

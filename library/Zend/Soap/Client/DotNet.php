@@ -217,7 +217,7 @@ class DotNet extends SOAPClient
     {
         $resultProperty = $this->getLastMethod() . 'Result';
         if (isset($result->$resultProperty)) {
-            return $result->resultProperty;
+            return $result->$resultProperty;
         }
         return $result;
     }

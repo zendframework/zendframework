@@ -76,7 +76,7 @@ class Server implements ZendServerServer
 
     /**
      * Informs if the soap server is in debug mode
-     * @var boolean
+     * @var bool
      */
     protected $debug = false;
 
@@ -934,7 +934,7 @@ class Server implements ZendServerServer
     /**
      * Set the debug mode.
      * In debug mode, all exceptions are send to the client.
-     * @param boolean $debug
+     * @param bool $debug
      */
     public function setDebugMode($debug = true)
     {
@@ -976,7 +976,7 @@ class Server implements ZendServerServer
      */
     public function isRegisteredAsFaultException($fault)
     {
-        if($this->debug) return true ;
+        if ($this->debug) return true;
 
         $ref        = new ReflectionClass($fault);
         $classNames = $ref->getName();

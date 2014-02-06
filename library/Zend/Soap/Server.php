@@ -75,6 +75,12 @@ class Server implements ZendServerServer
     protected $object;
 
     /**
+     * Informs if the soap server is in debug mode
+     * @var boolean
+     */
+    protected $debug = false;
+
+    /**
      * Persistence mode; should be one of the SOAP persistence constants
      * @var int
      */
@@ -926,6 +932,15 @@ class Server implements ZendServerServer
     }
 
     /**
+     * Set the debug mode.
+     * In debug mode, all exceptions are send to the client.
+     * @param boolean $debug
+     */
+    public function setDebugMode($debug = true)
+    {
+        $this->debug = $debug;
+    }
+    /**
      * Validate and register fault exception
      *
      * @param  string|array $class Exception class or array of exception classes
@@ -961,6 +976,8 @@ class Server implements ZendServerServer
      */
     public function isRegisteredAsFaultException($fault)
     {
+        if($this->debug) return true ;
+
         $ref        = new ReflectionClass($fault);
         $classNames = $ref->getName();
         return in_array($classNames, $this->faultExceptions);

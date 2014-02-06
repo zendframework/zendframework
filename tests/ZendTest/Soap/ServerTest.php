@@ -937,4 +937,15 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Invalid XML', $response->getMessage());
     }
 
+    public function testDebugMode()
+    {
+        $server = new Server();
+        $beforeDebug = $server->fault(new \Exception('test'));
+        $server->setDebugMode();
+        $afterDebug = $server->fault(new \Exception('test'));
+
+        $this->assertEquals('Unknown error', $beforeDebug->getMessage());
+        $this->assertEquals('test', $afterDebug->getMessage());
+    }
+
 }

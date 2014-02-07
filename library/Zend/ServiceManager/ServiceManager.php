@@ -730,6 +730,7 @@ class ServiceManager implements ServiceLocatorInterface
             if ($abstractFactory->canCreateServiceWithName($this, $cName, $rName)) {
                 $this->nestedContext[$cName] = $abstractFactory;
                 $result = true;
+                break;
             }
         }
         $this->checkNestedContextStop();

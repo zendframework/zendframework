@@ -185,4 +185,11 @@ EOS;
 
         $this->assertSame('', $reflectionClass->getContents());
     }
+
+    public function testGetContentsReturnsEmptyContentsOnInternalCode()
+    {
+        $reflectionClass = new ClassReflection('ReflectionClass');
+
+        $this->assertSame('', $reflectionClass->getContents());
+    }
 }

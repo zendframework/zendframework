@@ -38,8 +38,8 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
 
         eval('namespace ' . __NAMESPACE__ . '; function ' . $functionName . '(){}');
 
-        $reflectionClass = new FunctionReflection(__NAMESPACE__ . '\\' . $functionName);
+        $reflectionFunction = new FunctionReflection(__NAMESPACE__ . '\\' . $functionName);
 
-        $this->assertSame('', $reflectionClass->getContents());
+        $this->assertSame('', $reflectionFunction->getContents());
     }
 }

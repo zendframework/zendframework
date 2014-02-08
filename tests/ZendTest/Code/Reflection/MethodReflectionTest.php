@@ -88,4 +88,16 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $reflectionMethod = new MethodReflection('DateTime', 'format');
         $this->assertEquals("", $reflectionMethod->getContents(false));
     }
+
+    public function testGetContentsReturnsEmptyContentsOnEvaldCode()
+    {
+        $className = uniqid('MethodReflectionTestGenerated');
+
+        eval('namespace ' . __NAMESPACE__ . '; class ' . $className . '{function foo(){}}');
+
+        $reflectionMethod = new MethodReflection(__NAMESPACE__ . '\\' . $className, 'foo');
+
+        $this->assertSame('', $reflectionMethod->getContents());
+        $this->assertSame('', $reflectionMethod->getBody());
+    }
 }

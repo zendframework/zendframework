@@ -36,7 +36,7 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
     {
         $functionName = uniqid('generatedFunction');
 
-        eval('namespace ' . __NAMESPACE__ . '; function ' . $functionName . '(){}');
+        eval('name' . 'space ' . __NAMESPACE__ . '; ' . 'fun' . 'ction ' . $functionName . '()' . '{}');
 
         $reflectionFunction = new FunctionReflection(__NAMESPACE__ . '\\' . $functionName);
 

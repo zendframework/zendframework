@@ -93,7 +93,7 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
     {
         $className = uniqid('MethodReflectionTestGenerated');
 
-        eval('namespace ' . __NAMESPACE__ . '; class ' . $className . '{function foo(){}}');
+        eval('name' . 'space ' . __NAMESPACE__ . '; cla' . 'ss ' . $className . '{fun' . 'ction foo(){}}');
 
         $reflectionMethod = new MethodReflection(__NAMESPACE__ . '\\' . $className, 'foo');
 

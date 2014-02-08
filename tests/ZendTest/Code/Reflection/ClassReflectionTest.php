@@ -179,7 +179,7 @@ EOS;
     {
         $className = uniqid('ClassReflectionTestGenerated');
 
-        eval('namespace ' . __NAMESPACE__ . '; class ' . $className . '{}');
+        eval('name' . 'space ' . __NAMESPACE__ . '; cla' . 'ss ' . $className . '{}');
 
         $reflectionClass = new ClassReflection(__NAMESPACE__ . '\\' . $className);
 

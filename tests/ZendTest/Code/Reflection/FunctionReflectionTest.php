@@ -42,4 +42,11 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('', $reflectionFunction->getContents());
     }
+
+    public function testGetContentsReturnsEmptyContentsOnInternalCode()
+    {
+        $reflectionFunction = new FunctionReflection('max');
+
+        $this->assertSame('', $reflectionFunction->getContents());
+    }
 }

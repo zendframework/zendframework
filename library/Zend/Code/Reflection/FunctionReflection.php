@@ -59,9 +59,15 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
      */
     public function getContents($includeDocBlock = true)
     {
+        $fileName = $this->getFileName();
+
+        if (! file_exists($fileName)) {
+            return '';
+        }
+
         return implode("\n",
             array_splice(
-                file($this->getFileName()),
+                file($fileName),
                 $this->getStartLine($includeDocBlock),
                 ($this->getEndLine() - $this->getStartLine()),
                 true

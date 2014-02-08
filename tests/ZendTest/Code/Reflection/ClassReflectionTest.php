@@ -183,6 +183,6 @@ EOS;
 
         $reflectionClass = new ClassReflection(__NAMESPACE__ . '\\' . $className);
 
-        $this->assertEmpty($reflectionClass->getContents());
+        $this->assertSame('', $reflectionClass->getContents());
     }
 }

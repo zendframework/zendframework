@@ -31,4 +31,15 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function6');
         $this->assertInstanceOf('Zend\Code\Reflection\DocBlockReflection', $function->getDocBlock());
     }
+
+    public function testGetContentsReturnsEmptyContentsOnEvaldCode()
+    {
+        $functionName = uniqid('generatedFunction');
+
+        eval('namespace ' . __NAMESPACE__ . '; function ' . $functionName . '(){}');
+
+        $reflectionClass = new FunctionReflection(__NAMESPACE__ . '\\' . $functionName);
+
+        $this->assertSame('', $reflectionClass->getContents());
+    }
 }

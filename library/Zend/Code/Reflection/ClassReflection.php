@@ -113,7 +113,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     {
         $fileName = $this->getFileName();
 
-        if (! file_exists($fileName)) {
+        if (false === $fileName || ! file_exists($fileName)) {
             return '';
         }
 

@@ -976,7 +976,9 @@ class Server implements ZendServerServer
      */
     public function isRegisteredAsFaultException($fault)
     {
-        if ($this->debug) return true;
+        if ($this->debug) {
+            return true;
+        }
 
         $ref        = new ReflectionClass($fault);
         $classNames = $ref->getName();

@@ -174,4 +174,15 @@ EOS;
 
         $this->assertFalse($reflectionClass->getAnnotations($annotationManager));
     }
+
+    public function testGetContentsReturnsEmptyContentsOnEvaldCode()
+    {
+        $className = uniqid('ClassReflectionTestGenerated');
+
+        eval('namespace ' . __NAMESPACE__ . '; class ' . $className . '{}');
+
+        $reflectionClass = new ClassReflection(__NAMESPACE__ . '\\' . $className);
+
+        $this->assertEmpty($reflectionClass->getContents());
+    }
 }

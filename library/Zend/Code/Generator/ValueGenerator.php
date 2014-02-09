@@ -310,22 +310,10 @@ class ValueGenerator extends AbstractGenerator
 
         if ($type == self::TYPE_AUTO) {
             $type = $this->getAutoDeterminedType($value);
+        }
 
-            if ($type == self::TYPE_ARRAY) {
-                $rii = new \RecursiveIteratorIterator(
-                    $it = new \RecursiveArrayIterator($value),
-                    \RecursiveIteratorIterator::SELF_FIRST
-                );
-                foreach ($rii as $curKey => $curValue) {
-                    if (!$curValue instanceof ValueGenerator) {
-                        $curValue = new self($curValue, self::TYPE_AUTO, self::OUTPUT_MULTIPLE_LINE, $this->getConstants());
-                        $rii->getSubIterator()->offsetSet($curKey, $curValue);
-                    }
-                    $curValue->setArrayDepth($rii->getDepth());
-                }
-                $value = $rii->getSubIterator()->getArrayCopy();
-            }
-
+        if ($type == self::TYPE_ARRAY) {
+            $value = $this->convertArrayToValueGenerator($value);
         }
 
         $output = '';
@@ -440,5 +428,28 @@ class ValueGenerator extends AbstractGenerator
     public function __toString()
     {
         return $this->generate();
+    }
+
+    /**
+     * Replaces array values with instances of ValueGenerator wrapping around the original value
+     *
+     * @param array $value
+     * @param int   $depth
+     *
+     * @return array
+     */
+    private function convertArrayToValueGenerator(array $value, $depth = 0)
+    {
+        foreach ($value as & $curValue) {
+            if ($curValue instanceof self) {
+                continue;
+            }
+
+            $curValue = new self($curValue, self::TYPE_AUTO, self::OUTPUT_MULTIPLE_LINE, $this->getConstants());
+
+            $curValue->setArrayDepth($depth + 1);
+        }
+
+        return $value;
     }
 }

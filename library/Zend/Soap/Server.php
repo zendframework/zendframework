@@ -35,7 +35,7 @@ class Server implements ZendServerServer
 
     /**
      * Server instance
-     * @var \SoapServer
+     * @var SoapServer
      */
     protected $server = null;
     /**
@@ -813,7 +813,7 @@ class Server implements ZendServerServer
      */
     protected function _getSoap()
     {
-        if ($this->server instanceof \SoapServer) {
+        if ($this->server instanceof SoapServer) {
             return $this->server;
         }
 
@@ -845,7 +845,7 @@ class Server implements ZendServerServer
     /**
      * Proxy for _getSoap method
      * @see _getSoap
-     * @return \SoapServer the soapServer instance
+     * @return SoapServer the soapServer instance
      */
     public function getSoap()
     {

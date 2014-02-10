@@ -45,7 +45,7 @@ class FlashMessengerTest extends TestCase
         $helper->addErrorMessage('bar-error');
         unset($helper);
     }
-    
+
     public function seedCurrentMessages()
     {
         $helper = new FlashMessenger();
@@ -94,7 +94,7 @@ class FlashMessengerTest extends TestCase
         $this->assertTrue($this->plugin->hasSuccessMessages());
         $this->assertTrue($this->plugin->hasErrorMessages());
     }
-    
+
     public function testCanRetrieveCurrentMessages()
     {
         $helper = $this->helper;
@@ -131,7 +131,7 @@ class FlashMessengerTest extends TestCase
         $this->assertTrue($this->helper->hasSuccessMessages());
         $this->assertTrue($this->helper->hasErrorMessages());
     }
-    
+
     public function testCanProxyAndRetrieveCurrentMessagesFromPluginController()
     {
         $this->assertFalse($this->helper->hasCurrentMessages());
@@ -159,7 +159,7 @@ class FlashMessengerTest extends TestCase
         $displayInfo = $this->helper->render(PluginFlashMessenger::NAMESPACE_INFO);
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
-    
+
     public function testCanDisplayListOfCurrentMessages()
     {
         $displayInfoAssertion = '';
@@ -182,7 +182,7 @@ class FlashMessengerTest extends TestCase
         $displayInfo = $helper()->render();
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
-    
+
     public function testCanDisplayListOfMessagesByDefaultCurrentParameters()
     {
         $helper = $this->helper;
@@ -202,7 +202,7 @@ class FlashMessengerTest extends TestCase
         $displayInfo = $helper()->render(PluginFlashMessenger::NAMESPACE_INFO);
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
-    
+
     public function testCanDisplayListOfCurrentMessagesByInvoke()
     {
         $helper = $this->helper;
@@ -225,7 +225,7 @@ class FlashMessengerTest extends TestCase
                 ->render(PluginFlashMessenger::NAMESPACE_INFO, array('foo-baz', 'foo-bar'));
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
-    
+
     public function testCanDisplayListOfCurrentMessagesCustomised()
     {
         $this->seedCurrentMessages();
@@ -251,7 +251,7 @@ class FlashMessengerTest extends TestCase
                 ->render(PluginFlashMessenger::NAMESPACE_DEFAULT, array('foo-baz', 'foo-bar'));
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
-    
+
     public function testCanDisplayListOfCurrentMessagesCustomisedSeparator()
     {
         $this->seedCurrentMessages();
@@ -299,7 +299,7 @@ class FlashMessengerTest extends TestCase
         $displayInfo = $helper->render(PluginFlashMessenger::NAMESPACE_INFO);
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
-    
+
     public function testCanDisplayListOfCurrentMessagesCustomisedByConfig()
     {
         $this->seedCurrentMessages();
@@ -405,7 +405,6 @@ class FlashMessengerTest extends TestCase
         $this->assertEquals($displayInfoAssertion, $displayInfo);
     }
 
-
     public function testCanTranslateMessages()
     {
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
@@ -422,7 +421,7 @@ class FlashMessengerTest extends TestCase
         $display = $this->helper->render(PluginFlashMessenger::NAMESPACE_INFO);
         $this->assertEquals($displayAssertion, $display);
     }
-    
+
     public function testCanTranslateCurrentMessages()
     {
         $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');

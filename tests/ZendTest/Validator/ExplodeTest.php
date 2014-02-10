@@ -10,6 +10,7 @@
 namespace ZendTest\Validator;
 
 use Zend\Validator\Explode;
+use Zend\Validator\EmailAddress;
 
 /**
  * @group      Zend_Validator
@@ -128,5 +129,26 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Explode();
         $validator->setValidator('inarray');
+    }
+
+    /**
+     * @group ZF2-5796
+     */
+    public function testGetMessageNotChangeType()
+    {
+        $validator = new Explode(array(
+            'validator'           => new EmailAddress,
+            'valueDelimiter'      => ',',
+            'breakOnFirstFailure' => true,
+        ));
+
+        $messages = array(
+            0 => array(
+                'emailAddressInvalidFormat' => 'The input is not a valid email address. Use the basic format local-part@hostname',
+            ),
+        );
+
+        $this->assertFalse($validator->isValid('zf-devteam@zend.com,abc,defghij'));
+        $this->assertEquals($messages, $validator->getMessages());
     }
 }

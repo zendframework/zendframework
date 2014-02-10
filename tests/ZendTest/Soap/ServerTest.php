@@ -937,4 +937,13 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Invalid XML', $response->getMessage());
     }
 
+    public function testGetSoapInternalInstance()
+    {
+        $server = new Server();
+        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $internalServer = $server->getSoap();
+        $this->assertInstanceOf('\SoapServer', $internalServer);
+        $this->assertSame($internalServer, $server->getSoap());
+    }
+
 }

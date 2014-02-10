@@ -34,6 +34,11 @@ class Server implements ZendServerServer
     protected $class;
 
     /**
+     * Server instance
+     * @var \SoapServer
+     */
+    protected $server = null;
+    /**
      * Arguments to pass to {@link $class} constructor
      * @var array
      */
@@ -808,6 +813,10 @@ class Server implements ZendServerServer
      */
     protected function _getSoap()
     {
+        if ($this->server instanceof \SoapServer) {
+            return $this->server;
+        }
+
         $options = $this->getOptions();
         $server  = new SoapServer($this->wsdl, $options);
 
@@ -829,7 +838,18 @@ class Server implements ZendServerServer
             $server->setPersistence($this->persistence);
         }
 
-        return $server;
+        $this->server = $server;
+        return $this->server;
+    }
+
+    /**
+     * Proxy for _getSoap method
+     * @see _getSoap
+     * @return \SoapServer the soapServer instance
+     */
+    public function getSoap()
+    {
+        return $this->_getSoap();
     }
 
     /**

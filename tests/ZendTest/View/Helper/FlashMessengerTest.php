@@ -111,10 +111,10 @@ class FlashMessengerTest extends TestCase
         $this->assertTrue(count($helper('success')) > 0);
         $this->assertTrue(count($helper('error')) > 0);
 
-        $this->assertTrue($this->plugin->hasCurrentMessages());
-        $this->assertTrue($this->plugin->hasCurrentInfoMessages());
-        $this->assertTrue($this->plugin->hasCurrentSuccessMessages());
-        $this->assertTrue($this->plugin->hasCurrentErrorMessages());
+        $this->assertFalse($this->plugin->hasCurrentMessages());
+        $this->assertFalse($this->plugin->hasCurrentInfoMessages());
+        $this->assertFalse($this->plugin->hasCurrentSuccessMessages());
+        $this->assertFalse($this->plugin->hasCurrentErrorMessages());
     }
 
     public function testCanProxyAndRetrieveMessagesFromPluginController()

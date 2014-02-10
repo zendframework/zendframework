@@ -140,7 +140,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
 
         return $markup;
     }
-    
+
     /**
      * Render Messages
      *

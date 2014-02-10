@@ -557,4 +557,27 @@ class RenameTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid options');
         $filter = new FileRename(1234);
     }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                $this->_oldFile,
+                $this->_origFile
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new FileRename($this->_newFile);
+
+        $this->assertEquals($input, $filter($input));
+    }
 }

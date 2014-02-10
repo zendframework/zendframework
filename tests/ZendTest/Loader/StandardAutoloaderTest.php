@@ -190,4 +190,13 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals($expected, 'namespaces', $loader);
     }
 
+    public function testWillLoopThroughAllNamespacesUntilMatchIsFoundWhenAutoloading()
+    {
+        $loader = new StandardAutoloader();
+        $loader->registerNamespace('ZendTest\Loader\TestAsset\Parent', __DIR__ . '/TestAsset/Parent');
+        $loader->registerNamespace('ZendTest\Loader\TestAsset\Parent\Child', __DIR__ . '/TestAsset/Child');
+        $result = $loader->autoload('ZendTest\Loader\TestAsset\Parent\Child\Subclass');
+        $this->assertTrue($result !== false);
+        $this->assertTrue(class_exists('ZendTest\Loader\TestAsset\Parent\Child\Subclass', false));
+    }
 }

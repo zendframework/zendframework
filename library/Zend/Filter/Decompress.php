@@ -24,7 +24,7 @@ class Decompress extends Compress
      */
     public function __invoke($value)
     {
-        return $this->getAdapter()->decompress($value);
+        return $this->filter($value);
     }
 
     /**
@@ -37,6 +37,10 @@ class Decompress extends Compress
      */
     public function filter($value)
     {
+        if (!is_string($value) && $value !== null) {
+            return $value;
+        }
+
         return $this->getAdapter()->decompress($value);
     }
 }

@@ -23,13 +23,15 @@ class NumberFormat extends NumberParse
      */
     public function filter($value)
     {
+        if (!is_scalar($value)) {
+            return $value;
+        }
+
         if (!is_int($value)
-            && !is_float($value)) {
-
+            && !is_float($value)
+        ) {
             $result = parent::filter($value);
-
         } else {
-
             ErrorHandler::start();
 
             $result = $this->getFormatter()->format(
@@ -38,7 +40,6 @@ class NumberFormat extends NumberParse
             );
 
             ErrorHandler::stop();
-
         }
 
         if (false !== $result) {

@@ -158,4 +158,40 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($expected, $actual);
         }
     }
+
+    public function testFilterSupportArray()
+    {
+        $filter = new AlnumFilter();
+
+        $values = array(
+            'abc123'  => 'abc123',
+            'abc 123' => 'abc123',
+            'abcxyz'  => 'abcxyz',
+            'AZ@#4.3' => 'AZ43',
+            ''        => ''
+        );
+
+        $actual = $filter->filter(array_keys($values));
+
+        $this->assertEquals(array_values($values), $actual);
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass())
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new AlnumFilter();
+
+        $this->assertEquals($input,  $filter->filter($input));
+    }
 }

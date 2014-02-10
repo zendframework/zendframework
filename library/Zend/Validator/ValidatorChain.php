@@ -146,6 +146,14 @@ class ValidatorChain implements
      */
     public function attachByName($name, $options = array(), $breakChainOnFailure = false)
     {
+        if (isset($options['break_chain_on_failure'])) {
+            $breakChainOnFailure = (bool) $options['break_chain_on_failure'];
+        }
+
+        if (isset($options['breakchainonfailure'])) {
+            $breakChainOnFailure = (bool) $options['breakchainonfailure'];
+        }
+
         $validator = $this->plugin($name, $options);
         $this->attach($validator, $breakChainOnFailure);
         return $this;

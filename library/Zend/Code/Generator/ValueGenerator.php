@@ -313,7 +313,12 @@ class ValueGenerator extends AbstractGenerator
         }
 
         if ($type == self::TYPE_ARRAY) {
-            $value = $this->convertArrayToValueGenerator($value);
+            foreach ($value as &$curValue) {
+                if ($curValue instanceof self) {
+                    continue;
+                }
+                $curValue = new self($curValue, self::TYPE_AUTO, self::OUTPUT_MULTIPLE_LINE, $this->getConstants());
+            }
         }
 
         $output = '';
@@ -430,26 +435,4 @@ class ValueGenerator extends AbstractGenerator
         return $this->generate();
     }
 
-    /**
-     * Replaces array values with instances of ValueGenerator wrapping around the original value
-     *
-     * @param array $value
-     * @param int   $depth
-     *
-     * @return array
-     */
-    private function convertArrayToValueGenerator(array $value, $depth = 0)
-    {
-        foreach ($value as & $curValue) {
-            if ($curValue instanceof self) {
-                continue;
-            }
-
-            $curValue = new self($curValue, self::TYPE_AUTO, self::OUTPUT_MULTIPLE_LINE, $this->getConstants());
-
-            $curValue->setArrayDepth($depth + 1);
-        }
-
-        return $value;
-    }
 }

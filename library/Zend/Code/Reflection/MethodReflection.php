@@ -191,7 +191,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     {
         $fileName = $this->getFileName();
 
-        if (class_exists($this->class) && !$fileName || !file_exists($fileName)) {
+        if ((class_exists($this->class) && !$fileName) || ! file_exists($fileName)) {
             return ''; // probably from eval'd code, return empty
         }
 
@@ -223,8 +223,9 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      */
     public function getBody()
     {
-        $fileName = $this->getFileName();
-        if (false === $fileName || !file_exists($fileName)) {
+        $fileName = $this->getDeclaringClass()->getFileName();
+
+        if (false === $fileName || ! file_exists($fileName)) {
             return '';
         }
 

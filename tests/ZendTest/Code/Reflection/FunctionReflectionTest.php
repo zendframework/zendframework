@@ -212,6 +212,9 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("function function12() {}", trim($content));
     }
 
+    /**
+     * @group fail
+     */
     public function testFunctionClosureContentsReturnWithoutDocBlock()
     {
         require __DIR__ . '/TestAsset/closures.php';
@@ -265,5 +268,4 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('', $reflectionFunction->getContents());
     }
-
 }

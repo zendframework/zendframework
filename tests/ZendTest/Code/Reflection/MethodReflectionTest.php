@@ -104,7 +104,6 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
     public function testGetContentsReturnsEmptyContentsOnInternalCode()
     {
         $reflectionMethod = new MethodReflection('ReflectionClass', 'getName');
-
         $this->assertSame('', $reflectionMethod->getContents());
     }
 }

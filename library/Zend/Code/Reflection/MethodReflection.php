@@ -125,13 +125,13 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      */
     public function getContents($includeDocBlock = true)
     {
-        $filename = $this->getFileName();
-        if(class_exists($this->class) && !$filename) {
-            //php class
-            return '';
+        $fileName = $this->getFileName();
+
+        if ((class_exists($this->class) && !$fileName) || ! file_exists($fileName)) {
+            return ''; // probably from eval'd code, return empty
         }
 
-        $fileContents = file($filename);
+        $fileContents = file($fileName);
         $startNum     = $this->getStartLine($includeDocBlock);
         $endNum       = ($this->getEndLine() - $this->getStartLine());
 
@@ -145,8 +145,14 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      */
     public function getBody()
     {
+        $fileName = $this->getDeclaringClass()->getFileName();
+
+        if (false === $fileName || ! file_exists($fileName)) {
+            return '';
+        }
+
         $lines = array_slice(
-            file($this->getDeclaringClass()->getFileName(), FILE_IGNORE_NEW_LINES),
+            file($fileName, FILE_IGNORE_NEW_LINES),
             $this->getStartLine(),
             ($this->getEndLine() - $this->getStartLine()),
             true

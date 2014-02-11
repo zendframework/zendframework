@@ -43,9 +43,7 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
     public function testInternalFunctionBodyReturn()
     {
         $reflectionMethod = new MethodReflection('DOMDocument', 'validate');
-
-        $this->setExpectedException('Zend\Code\Reflection\Exception\InvalidArgumentException');
-        $body = $reflectionMethod->getBody();
+        $this->assertEmpty($reflectionMethod->getBody());
     }
 
     public function testGetBodyReturnsCorrectBody()
@@ -291,5 +289,23 @@ CONTENTS;
     {
         $reflectionMethod = new MethodReflection('DateTime', 'format');
         $this->assertEquals("", $reflectionMethod->getContents(false));
+    }
+
+    public function testGetContentsReturnsEmptyContentsOnEvaldCode()
+    {
+        $className = uniqid('MethodReflectionTestGenerated');
+
+        eval('name' . 'space ' . __NAMESPACE__ . '; cla' . 'ss ' . $className . '{fun' . 'ction foo(){}}');
+
+        $reflectionMethod = new MethodReflection(__NAMESPACE__ . '\\' . $className, 'foo');
+
+        $this->assertSame('', $reflectionMethod->getContents());
+        $this->assertSame('', $reflectionMethod->getBody());
+    }
+
+    public function testGetContentsReturnsEmptyContentsOnInternalCode()
+    {
+        $reflectionMethod = new MethodReflection('ReflectionClass', 'getName');
+        $this->assertSame('', $reflectionMethod->getContents());
     }
 }

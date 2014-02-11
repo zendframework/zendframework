@@ -190,9 +190,9 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     public function getContents($includeDocBlock = true)
     {
         $fileName = $this->getFileName();
-        if (class_exists($this->class) && !$fileName) {
-            // php class
-            return '';
+
+        if (class_exists($this->class) && !$fileName || !file_exists($fileName)) {
+            return ''; // probably from eval'd code, return empty
         }
 
         $lines = array_slice(
@@ -224,10 +224,8 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     public function getBody()
     {
         $fileName = $this->getFileName();
-        if (false === $fileName) {
-            throw new Exception\InvalidArgumentException(
-                'Cannot determine internals functions body'
-            );
+        if (false === $fileName || !file_exists($fileName)) {
+            return '';
         }
 
         $lines = array_slice(

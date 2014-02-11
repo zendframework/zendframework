@@ -134,7 +134,7 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF2-5796
      */
-    public function testGetMessageNotChangeType()
+    public function testGetMessagesMultipleInvalid()
     {
         $validator = new Explode(array(
             'validator'           => new EmailAddress,

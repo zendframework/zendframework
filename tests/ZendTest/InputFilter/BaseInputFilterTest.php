@@ -232,22 +232,17 @@ class BaseInputFilterTest extends TestCase
                 'deep-input2' => 'deep-foo2',
             )
         );
-        $this->filter->add(array(
-            'name' => 'flat'
-        ));
+        $filter = new InputFilter;
+        $filter->add(new Input, 'flat');
         $deepInputFilter = new InputFilter;
-        $deepInputFilter->add(array(
-            'name' => 'deep-input1'
-        ));
-        $deepInputFilter->add(array(
-            'name' => 'deep-input2'
-        ));
-        $this->filter->add($deepInputFilter, 'deep');
-        $this->filter->setData($data);
-        $this->filter->setValidationGroup(array('deep' => 'deep-input1'));
+        $deepInputFilter->add(new Input, 'deep-input1');
+        $deepInputFilter->add(new Input, 'deep-input2');
+        $filter->add($deepInputFilter, 'deep');
+        $filter->setData($data);
+        $filter->setValidationGroup(array('deep' => 'deep-input1'));
         // reset validation group
-        $this->filter->setValidationGroup(InputFilter::VALIDATE_ALL);
-        $this->assertEquals($data, $this->filter->getValues());
+        $filter->setValidationGroup(InputFilter::VALIDATE_ALL);
+        $this->assertEquals($data, $filter->getValues());
     }
 
     /**
@@ -255,10 +250,9 @@ class BaseInputFilterTest extends TestCase
      */
     public function testSetDeepValidationGroupToNonInputFilterThrowsException()
     {
-        $this->filter->add(array(
-            'name' => 'flat'
-        ));
-        $this->filter->setValidationGroup(array('flat' => 'foo'));
+        $filter = $this->getInputFilter();
+        $filter->add(new Input, 'flat');
+        $filter->setValidationGroup(array('flat' => 'foo'));
     }
 
     public function testCanRetrieveInvalidInputsOnFailedValidation()
@@ -897,37 +891,5 @@ class BaseInputFilterTest extends TestCase
         $filter->get('foo')->setValue('thisisavalidstring');
         $this->assertTrue($filter->get('foo')->isValid(), 'Filtered value is not valid');
         $this->assertTrue($filter->isValid(), 'Input filter did return value from filter');
-    }
-
-    public function testResetEmptyValidationGroupRecursively()
-    {
-        $data = array(
-            'flat' => 'foo',
-            'deep' => array(
-                'deep-input1' => 'deep-foo1',
-                'deep-input2' => 'deep-foo2',
-            )
-        );
-        $filter = new InputFilter;
-        $filter->add(new Input, 'flat');
-        $deepInputFilter = new InputFilter;
-        $deepInputFilter->add(new Input, 'deep-input1');
-        $deepInputFilter->add(new Input, 'deep-input2');
-        $filter->add($deepInputFilter, 'deep');
-        $filter->setData($data);
-        $filter->setValidationGroup(array('deep' => 'deep-input1'));
-        // reset validation group
-        $filter->setValidationGroup(InputFilter::VALIDATE_ALL);
-        $this->assertEquals($data, $filter->getValues());
-    }
-
-    /**
-     * @expectedException Zend\InputFilter\Exception\InvalidArgumentException
-     */
-    public function testSetDeepValidationGroupToNonInputFilterThrowsException()
-    {
-        $filter = $this->getInputFilter();
-        $filter->add(new Input, 'flat');
-        $filter->setValidationGroup(array('flat' => 'foo'));
     }
 }

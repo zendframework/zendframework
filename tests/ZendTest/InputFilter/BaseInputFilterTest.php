@@ -222,7 +222,7 @@ class BaseInputFilterTest extends TestCase
         $filter->setData($invalidData);
         $this->assertFalse($filter->isValid());
     }
-    
+
     public function testResetEmptyValidationGroupRecursively()
     {
         $data = array(
@@ -898,7 +898,7 @@ class BaseInputFilterTest extends TestCase
         $this->assertTrue($filter->get('foo')->isValid(), 'Filtered value is not valid');
         $this->assertTrue($filter->isValid(), 'Input filter did return value from filter');
     }
-    
+
     public function testResetEmptyValidationGroupRecursively()
     {
         $data = array(

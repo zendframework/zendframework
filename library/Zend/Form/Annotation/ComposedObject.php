@@ -51,6 +51,6 @@ class ComposedObject extends AbstractArrayOrStringAnnotation
      */
     public function getOptions()
     {
-        return isset($this->value['options']) ? $this->value['options'] : array();
+        return is_array($this->value) && isset($this->value['options']) ? $this->value['options'] : array();
     }
 }

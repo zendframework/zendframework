@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -65,7 +65,12 @@ class Intl extends AbstractStringWrapper
      */
     public function substr($str, $offset = 0, $length = null)
     {
-        return grapheme_substr($str, $offset, $length);
+        // Due fix of PHP #62759 The third argument returns an empty string if is 0 or null.
+        if ($length !== null) {
+            return grapheme_substr($str, $offset, $length);
+        }
+
+        return grapheme_substr($str, $offset);
     }
 
     /**

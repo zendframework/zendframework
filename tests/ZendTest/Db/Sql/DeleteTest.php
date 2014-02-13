@@ -7,9 +7,12 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Db\Sql;
+namespace ZendTest\Db\Sql;
 
+use Zend\Db\Sql\Delete;
+use Zend\Db\Sql\Predicate\IsNotNull;
 use Zend\Db\Sql\TableIdentifier;
+use Zend\Db\Sql\Where;
 
 class DeleteTest extends \PHPUnit_Framework_TestCase
 {
@@ -59,7 +62,7 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
         $this->delete->where(array('a = b'), Where::OP_OR);
         $this->delete->where(array('c1' => null));
         $this->delete->where(array('c2' => array(1, 2, 3)));
-        $this->delete->where(array(new \Zend\Db\Sql\Predicate\IsNotNull('c3')));
+        $this->delete->where(array(new IsNotNull('c3')));
         $this->delete->where(array('one' => 1, 'two' => 2));
         $where = $this->delete->where;
 

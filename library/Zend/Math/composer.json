@@ -16,7 +16,10 @@
         "php": ">=5.3.3"
     },
     "suggest": {
-        "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable"
+        "ext-bcmath": "If using the bcmath functionality",
+        "ext-gmp": "If using the gmp functionality",
+        "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable",
+        "zendframework/zend-servicemanager": ">= current version, if using the BigInteger::factory functionality"
     },
     "extra": {
         "branch-alias": {

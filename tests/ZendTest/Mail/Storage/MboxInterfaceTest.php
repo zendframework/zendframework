@@ -16,7 +16,7 @@ use Zend\Mail\Storage\Message;
 /**
  * @group      Zend_Mail
  */
-class InterfaceTest extends \PHPUnit_Framework_TestCase
+class MboxInterfaceTest extends \PHPUnit_Framework_TestCase
 {
     protected $_mboxFile;
 

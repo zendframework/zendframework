@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest;
+namespace ZendTest\Debug;
 
 use Zend\Debug\Debug;
 use Zend\Escaper\Escaper;

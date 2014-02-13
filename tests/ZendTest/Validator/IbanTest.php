@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\I18n\Validator;
+namespace ZendTest\Validator;
 
 use Zend\Validator\Iban as IbanValidator;
 

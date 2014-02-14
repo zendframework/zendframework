@@ -180,11 +180,15 @@ class Fieldset extends Element implements FieldsetInterface
         $this->byName[$name] = $elementOrFieldset;
 
         if ($elementOrFieldset instanceof FieldsetInterface) {
+            if ($elementOrFieldset instanceof FieldsetPrepareAwareInterface) {
+                $elementOrFieldset->prepareFieldset();
+            }
+
             $this->fieldsets[$name] = $elementOrFieldset;
-        } else {
-            $this->elements[$name] = $elementOrFieldset;
+            return $this;
         }
 
+        $this->elements[$name] = $elementOrFieldset;
         return $this;
     }
 
@@ -386,28 +390,19 @@ class Fieldset extends Element implements FieldsetInterface
             ));
         }
 
-        foreach ($this->byName as $name => $elementOrFieldset) {
-            $valueExists = array_key_exists($name, $data);
-
-            if ($elementOrFieldset instanceof FieldsetInterface) {
-                if ($valueExists && is_array($data[$name])) {
-                    $elementOrFieldset->populateValues($data[$name]);
-                    continue;
-                } elseif ($elementOrFieldset instanceof Element\Collection) {
-                    if ($valueExists && null !== $data[$name]) {
-                        $elementOrFieldset->populateValues($data[$name]);
-                    } else {
-                        /* This ensures that collections with allow_remove don't re-create child
-                         * elements if they all were removed */
-                        $elementOrFieldset->populateValues(array());
-                    }
-                    continue;
-                }
+        foreach ($data as $name => $value) {
+            if (!$this->has($name)) {
+                continue;
             }
 
-            if ($valueExists) {
-                $elementOrFieldset->setValue($data[$name]);
+            $element = $this->get($name);
+
+            if ($element instanceof FieldsetInterface && is_array($value)) {
+                $element->populateValues($value);
+                continue;
             }
+
+            $element->setValue($value);
         }
     }
 

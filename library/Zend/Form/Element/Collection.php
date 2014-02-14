@@ -82,7 +82,7 @@ class Collection extends Fieldset
     protected $templateElement;
 
     /**
-     * The index of the last child element or fieldset.
+     * The index of the last child element or fieldset
      *
      * @var int
      */

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -180,15 +180,11 @@ class Fieldset extends Element implements FieldsetInterface
         $this->byName[$name] = $elementOrFieldset;
 
         if ($elementOrFieldset instanceof FieldsetInterface) {
-            if ($elementOrFieldset instanceof FieldsetPrepareAwareInterface) {
-                $elementOrFieldset->prepareFieldset();
-            }
-
             $this->fieldsets[$name] = $elementOrFieldset;
-            return $this;
+        } else {
+            $this->elements[$name] = $elementOrFieldset;
         }
 
-        $this->elements[$name] = $elementOrFieldset;
         return $this;
     }
 
@@ -390,19 +386,28 @@ class Fieldset extends Element implements FieldsetInterface
             ));
         }
 
-        foreach ($data as $name => $value) {
-            if (!$this->has($name)) {
-                continue;
+        foreach ($this->byName as $name => $elementOrFieldset) {
+            $valueExists = array_key_exists($name, $data);
+
+            if ($elementOrFieldset instanceof FieldsetInterface) {
+                if ($valueExists && is_array($data[$name])) {
+                    $elementOrFieldset->populateValues($data[$name]);
+                    continue;
+                } elseif ($elementOrFieldset instanceof Element\Collection) {
+                    if ($valueExists && null !== $data[$name]) {
+                        $elementOrFieldset->populateValues($data[$name]);
+                    } else {
+                        /* This ensures that collections with allow_remove don't re-create child
+                         * elements if they all were removed */
+                        $elementOrFieldset->populateValues(array());
+                    }
+                    continue;
+                }
             }
 
-            $element = $this->get($name);
-
-            if ($element instanceof FieldsetInterface && is_array($value)) {
-                $element->populateValues($value);
-                continue;
+            if ($valueExists) {
+                $elementOrFieldset->setValue($data[$name]);
             }
-
-            $element->setValue($value);
         }
     }
 

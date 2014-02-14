@@ -89,11 +89,11 @@ class Collection extends Fieldset
     protected $lastChildIndex = -1;
 
     /**
-     * Is true if addNewTargetElementInstance() was called
+     * Should child elements must be created on self::prepareElement()?
      *
      * @var bool
      */
-    protected $hasAddedNewTargetElementInstance = false;
+    protected $shouldCreateChildrenOnPrepareElement = true;
 
     /**
      * Accepted options for Collection:
@@ -197,6 +197,7 @@ class Collection extends Fieldset
 
         // Can't do anything with empty data
         if (empty($data)) {
+            $this->shouldCreateChildrenOnPrepareElement = false;
             return;
         }
 
@@ -454,7 +455,7 @@ class Collection extends Fieldset
      */
     public function prepareElement(FormInterface $form)
     {
-        if (false === $this->hasAddedNewTargetElementInstance) {
+        if (true === $this->shouldCreateChildrenOnPrepareElement) {
             if ($this->targetElement !== null && $this->count > 0) {
                 while ($this->count > $this->lastChildIndex + 1) {
                     $this->addNewTargetElementInstance(++$this->lastChildIndex);
@@ -550,7 +551,7 @@ class Collection extends Fieldset
      */
     protected function addNewTargetElementInstance($name)
     {
-        $this->hasAddedNewTargetElementInstance = true;
+        $this->shouldCreateChildrenOnPrepareElement = false;
 
         $elementOrFieldset = $this->createNewTargetElementInstance();
         $elementOrFieldset->setName($name);

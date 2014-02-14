@@ -386,19 +386,28 @@ class Fieldset extends Element implements FieldsetInterface
             ));
         }
 
-        foreach ($data as $name => $value) {
-            if (!$this->has($name)) {
-                continue;
+        foreach ($this->byName as $name => $elementOrFieldset) {
+            $valueExists = array_key_exists($name, $data);
+
+            if ($elementOrFieldset instanceof FieldsetInterface) {
+                if ($valueExists && is_array($data[$name])) {
+                    $elementOrFieldset->populateValues($data[$name]);
+                    continue;
+                } elseif ($elementOrFieldset instanceof Element\Collection) {
+                    if ($valueExists && null !== $data[$name]) {
+                        $elementOrFieldset->populateValues($data[$name]);
+                    } else {
+                        /* This ensures that collections with allow_remove don't re-create child
+                         * elements if they all were removed */
+                        $elementOrFieldset->populateValues(array());
+                    }
+                    continue;
+                }
             }
 
-            $element = $this->get($name);
-
-            if ($element instanceof FieldsetInterface && is_array($value)) {
-                $element->populateValues($value);
-                continue;
+            if ($valueExists) {
+                $elementOrFieldset->setValue($data[$name]);
             }
-
-            $element->setValue($value);
         }
     }
 

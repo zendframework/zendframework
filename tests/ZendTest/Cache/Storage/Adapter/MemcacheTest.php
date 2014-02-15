@@ -51,9 +51,9 @@ class MemcacheTest extends CommonAdapterTest
     public function getServersDefinitions()
     {
         $expectedServers = array(
-            array('host' => '127.0.0.1', 'port' => 12345, 'weight' => 1),
-            array('host' => 'localhost', 'port' => 54321, 'weight' => 2),
-            array('host' => 'examp.com', 'port' => 11211, 'weight' => 3),
+            array('host' => '127.0.0.1', 'port' => 12345, 'weight' => 1, 'status' => true),
+            array('host' => 'localhost', 'port' => 54321, 'weight' => 2, 'status' => true),
+            array('host' => 'examp.com', 'port' => 11211, 'status' => true),
         );
 
         return array(
@@ -115,11 +115,11 @@ class MemcacheTest extends CommonAdapterTest
 
         $this->assertEquals($options->getResourceManager()->getLibOption(
             $options->getResourceId(), 'compress_threshold'
-        ), 100);
+        ), array('threshold' => 100));
 
         $memcache = new Cache\Storage\Adapter\Memcache($options);
         $this->assertEquals($memcache->getOptions()->getLibOptions(), array(
-            'compress_threshold' => 100
+            'compress_threshold' => array('threshold' => 100)
         ));
     }
 

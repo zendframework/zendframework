@@ -38,6 +38,13 @@ class MemcacheOptions extends AdapterOptions
     protected $resourceId = 'default';
 
     /**
+     * Enable compression when data is written
+     *
+     * @var bool
+     */
+    protected $compression = false;
+
+    /**
      * Set namespace.
      *
      * It can't be longer than 128 characters.
@@ -135,6 +142,32 @@ class MemcacheOptions extends AdapterOptions
         if ($this->resourceId !== $resourceId) {
             $this->triggerOptionEvent('resource_id', $resourceId);
             $this->resourceId = $resourceId;
+        }
+        return $this;
+    }
+
+    /**
+     * Is compressed writes turned on?
+     *
+     * @return boolean
+     */
+    public function getCompression()
+    {
+        return $this->compression;
+    }
+
+    /**
+     * Set whether compressed writes are turned on or not
+     *
+     * @param boolean $compression
+     * @return $this
+     */
+    public function setCompression($compression)
+    {
+        $compression = (bool) $compression;
+        if ($this->compression !== $compression) {
+            $this->triggerOptionEvent('compression', $compression);
+            $this->compression = $compression;
         }
         return $this;
     }

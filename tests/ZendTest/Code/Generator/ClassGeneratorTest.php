@@ -455,4 +455,46 @@ CODE;
 
 
     }
+
+    public function testHasMethodInsensitive()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addMethod('methodOne');
+
+        $this->assertTrue($classGenerator->hasMethod('methodOne'));
+        $this->assertTrue($classGenerator->hasMethod('MethoDonE'));
+    }
+
+    public function testRemoveMethodInsensitive()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addMethod('methodOne');
+
+        $classGenerator->removeMethod('METHODONe');
+        $this->assertFalse($classGenerator->hasMethod('methodOne'));
+    }
+
+    public function testGenerateClassAndAddMethod()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('MyClass');
+        $classGenerator->addMethod('methodOne');
+
+        $expected = <<<CODE
+class MyClass
+{
+
+    public function methodOne()
+    {
+    }
+
+
+}
+
+CODE;
+
+        $output = $classGenerator->generate();
+        $this->assertEquals($expected, $output);
+    }
+
 }

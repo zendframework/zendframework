@@ -9,8 +9,6 @@
 
 namespace Zend\Session;
 
-use Zend\Session\Container\PhpReferenceCompatibility;
-
 /**
  * Session storage container
  *
@@ -19,6 +17,24 @@ use Zend\Session\Container\PhpReferenceCompatibility;
  * Additionally, expiries may be absolute TTLs or measured in "hops", which
  * are based on how many times the key or container were accessed.
  */
-class Container extends PhpReferenceCompatibility
+class Container extends AbstractContainer
 {
+    /**
+     * Retrieve a specific key in the container
+     *
+     * @param  string $key
+     * @return mixed
+     */
+    public function &offsetGet($key)
+    {
+        $ret = null;
+        if (!$this->offsetExists($key)) {
+            return $ret;
+        }
+        $storage = $this->getStorage();
+        $name    = $this->getName();
+        $ret =& $storage[$name][$key];
+
+        return $ret;
+    }
 }

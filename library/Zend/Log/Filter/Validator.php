@@ -39,7 +39,7 @@ class Validator implements FilterInterface
         }
         if (!$validator instanceof ZendValidator) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Parameter of type %s is invalid; must implements Zend\Validator\ValidatorInterface',
+                'Parameter of type %s is invalid; must implement Zend\Validator\ValidatorInterface',
                 (is_object($validator) ? get_class($validator) : gettype($validator))
             ));
         }

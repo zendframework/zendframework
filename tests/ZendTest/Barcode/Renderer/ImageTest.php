@@ -279,38 +279,74 @@ class ImageTest extends TestCommon
     /**
      * @group 4708
      */
-    public function testImageTransparency()
+    public function testImageGifWithNoTransparency()
     {
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->renderer->setBarcode($barcode);
-        
+
+        $this->renderer->setTransparentBackground(false);
+        $this->assertFalse($this->renderer->getTransparentBackground());
+
+        //Test PNG output
+        $this->renderer->setImageType('gif');
+        $image = $this->renderer->draw();
+        $index = imagecolortransparent($image);
+        $this->assertEquals($index, -1);
+    }
+
+    /**
+     * @group 4708
+     */
+    public function testImagePngWithNoTransparency()
+    {
+        $barcode = new Object\Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
+        $this->renderer->setTransparentBackground(false);
+        $this->assertFalse($this->renderer->getTransparentBackground());
+
+        //Test PNG output
+        $this->renderer->setImageType('png');
+        $image = $this->renderer->draw();
+        $index = imagecolortransparent($image);
+        $this->assertEquals($index, -1);
+    }
+
+    /**
+     * @group 4708
+     */
+    public function testImageGifWithTransparency()
+    {
+        $barcode = new Object\Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
+        $this->renderer->setTransparentBackground(true);
+        $this->assertTrue($this->renderer->getTransparentBackground());
+
+        //Test PNG output
+        $this->renderer->setImageType('gif');
+        $image = $this->renderer->draw();
+        $index = imagecolortransparent($image);
+        $this->assertTrue($index !== -1);
+    }
+
+    /**
+     * @group 4708
+     */
+    public function testImagePngWithTransparency()
+    {
+        $barcode = new Object\Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
         $this->renderer->setTransparentBackground(true);
         $this->assertTrue($this->renderer->getTransparentBackground());
 
         //Test PNG output
         $this->renderer->setImageType('png');
         $image = $this->renderer->draw();
-        
-        ob_start();
-        imagepng($image);
-        $imageData = ob_get_contents();
-        ob_end_clean();
-
-        $this->assertEquals(md5($imageData), md5_file(__DIR__ . "/_files/transparent_barcode.png"));
-
-        //Test GIF output
-        $this->renderer->setImageType('gif');
-        $image = $this->renderer->draw();
-
-        ob_start();
-        imagegif($image);
-        $imageData = ob_get_contents();
-        ob_end_clean();
-
-        $this->assertEquals(md5($imageData), md5_file(__DIR__ . "/_files/transparent_barcode.gif"));
-    }
-
-
+        $index = imagecolortransparent($image);
+        $this->assertTrue($index !== -1);
+    }    
 
     protected function checkTTFRequirement()
     {
@@ -318,4 +354,23 @@ class ImageTest extends TestCommon
             $this->markTestSkipped('TTF (FreeType) support is required in order to run this test');
         }
     }
+
+    protected function check_transparent($im) {
+
+    $width = imagesx($im); // Get the width of the image
+    $height = imagesy($im); // Get the height of the image
+
+    // We run the image pixel by pixel and as soon as we find a transparent pixel we stop and return true.
+    for($i = 0; $i < $width; $i++) {
+        for($j = 0; $j < $height; $j++) {
+            $rgba = imagecolorat($im, $i, $j);
+            if(($rgba & 0x7F000000) >> 24) {
+                return true;
+            }
+        }
+    }
+
+    // If we dont find any pixel the function will return false.
+    return false;
+}
 }

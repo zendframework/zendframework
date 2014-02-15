@@ -277,8 +277,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             $this->profiler->profilerFinish($sql);
         }
 
-        //var_dump(pg_result_status($resultResource));
-
         // if the returnValue is something other than a pg result resource, bypass wrapping it
         if ($resultResource === false) {
             throw new Exception\InvalidQueryException(pg_errormessage());

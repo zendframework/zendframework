@@ -9,11 +9,31 @@
 
 namespace Zend\Session\Storage;
 
-use Zend\Session\Storage\SessionArrayStorage\PhpReferenceCompatibility;
-
 /**
  * Session storage in $_SESSION
  */
-class SessionArrayStorage extends PhpReferenceCompatibility
+class SessionArrayStorage extends AbstractSessionArrayStorage
 {
+    /**
+     * Get Offset
+     *
+     * @param  mixed $key
+     * @return mixed
+     */
+    public function &__get($key)
+    {
+        return $_SESSION[$key];
+    }
+
+    /**
+     * Offset Get
+     *
+     * @param  mixed $key
+     * @return mixed
+     */
+    public function &offsetGet($key)
+    {
+        return $_SESSION[$key];
+    }
 }
+

@@ -90,8 +90,7 @@ class MemcacheResourceManager
      */
     protected function addServerToResource(
         MemcacheResource $resource, array $server, array $serverDefaults, $failureCallback
-    )
-    {
+    ) {
         // Apply server defaults
         $server = array_merge($serverDefaults, $server);
 
@@ -601,7 +600,7 @@ class MemcacheResourceManager
             }
             $sTmp[$key] = $value;
         }
-        $sTmp = array_filter($sTmp, function($val) { return isset($val); });
+        $sTmp = array_filter($sTmp, function ($val) { return isset($val); });
 
         $server = $sTmp;
     }

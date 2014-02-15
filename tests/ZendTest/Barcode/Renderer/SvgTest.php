@@ -108,8 +108,10 @@ class SvgTest extends TestCommon
         $this->assertTrue($this->renderer->getTransparentBackground());
 
         //test svg return value
-        $xml = $this->renderer->draw()->saveXML();
-        $this->assertEquals(md5($xml), md5_file(__DIR__ . '/_files/svg_transparency.xml'));
+        $svgCompare = $this->renderer->draw()->saveXML();
+
+        $svgGood = file_get_contents(__DIR__ . '/_files/svg_transparency.xml');
+        $this->assertEquals($svgCompare, $svgGood);
     }
 
 

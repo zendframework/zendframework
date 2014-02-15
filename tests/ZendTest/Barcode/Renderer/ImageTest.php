@@ -346,7 +346,7 @@ class ImageTest extends TestCommon
         $image = $this->renderer->draw();
         $index = imagecolortransparent($image);
         $this->assertTrue($index !== -1);
-    }    
+    }
 
     protected function checkTTFRequirement()
     {

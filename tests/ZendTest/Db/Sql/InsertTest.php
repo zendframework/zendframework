@@ -72,6 +72,15 @@ class InsertTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('bax'), $this->readAttribute($this->insert, 'values'));
     }
 
+    /**
+     * @covers Zend\Db\Sql\Insert::values
+     * @group ZF2-4926
+     */
+    public function testEmptyArrayValues()
+    {
+        $this->insert->values(array());
+        $this->assertEquals(array(), $this->readAttribute($this->insert, 'columns'));
+    }
 
     /**
      * @covers Zend\Db\Sql\Insert::prepareStatement

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -218,13 +218,6 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidResources($resourceId, $resource, $expectedServers, $expectedLibOptions)
     {
-        // php-memcache is required to set libmemcache options
-        if (is_array($resource) && isset($resource['lib_options']) && count($resource['lib_options']) > 0) {
-            if (!class_exists('Memcache', false)) {
-                $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException', 'Unknown libmemcached option');
-            }
-        }
-
         $this->assertSame($this->resourceManager, $this->resourceManager->setResource($resourceId, $resource));
         $this->assertTrue($this->resourceManager->hasResource($resourceId));
 
@@ -237,8 +230,6 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetCompressThresholdOnExistingResource()
     {
-        $memcacheInstalled = class_exists('Memcache', false);
-
         $libOptions = array(
             'compress_threshold' => array(
                 'threshold' => 200,
@@ -247,15 +238,10 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
         );
         $resourceId = 'testResourceId';
         $resourceMock = $this->getMock('Memcache', array('setCompressThreshold'));
-
-        if (!$memcacheInstalled) {
-            $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        } else {
-            $resourceMock
-                ->expects($this->once())
-                ->method('setCompressThreshold')
-                ->with($this->isType('int'), $this->isType('float'));
-        }
+        $resourceMock
+            ->expects($this->once())
+            ->method('setCompressThreshold')
+            ->with($this->isType('int'), $this->isType('float'));
 
         $this->resourceManager->setResource($resourceId, $resourceMock);
         $this->resourceManager->setLibOptions($resourceId, $libOptions);
@@ -327,24 +313,19 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddServerOnExistingResource($resourceId, $server, $serverDefaults, $expectedParams)
     {
-        $memcacheInstalled = class_exists('Memcache', false);
         $resourceMock = $this->getMock('Memcache', array('addServer'));
-        if (!$memcacheInstalled) {
-            $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        } else {
-            $resourceMock
-                ->expects($this->once())
-                ->method('addServer')
-                ->with(
-                    $this->equalTo($expectedParams['host']),
-                    $this->equalTo($expectedParams['port']),
-                    $this->equalTo($expectedParams['persistent']),
-                    $this->equalTo($expectedParams['weight']),
-                    $this->equalTo($expectedParams['timeout']),
-                    $this->equalTo($expectedParams['retry_interval']),
-                    $this->equalTo($expectedParams['status'])
-                );
-        }
+        $resourceMock
+            ->expects($this->once())
+            ->method('addServer')
+            ->with(
+                $this->equalTo($expectedParams['host']),
+                $this->equalTo($expectedParams['port']),
+                $this->equalTo($expectedParams['persistent']),
+                $this->equalTo($expectedParams['weight']),
+                $this->equalTo($expectedParams['timeout']),
+                $this->equalTo($expectedParams['retry_interval']),
+                $this->equalTo($expectedParams['status'])
+            );
 
         $this->resourceManager->setResource($resourceId, $resourceMock, null, $serverDefaults);
         $this->resourceManager->addServer($resourceId, $server);

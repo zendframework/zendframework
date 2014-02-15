@@ -9,7 +9,6 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use Memcache as MemcacheResource;
 use Zend\Cache\Exception;
 
 /**

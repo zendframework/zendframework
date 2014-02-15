@@ -55,7 +55,7 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
     public function currencyTestsDataProvider()
     {
         if (!extension_loaded('intl')) {
-            if (version_compare(\PHPUnit_Runner_Version::VERSION, '3.8.0-dev') === 1) {
+            if (version_compare(\PHPUnit_Runner_Version::id(), '3.8.0-dev') === 1) {
                 $this->markTestSkipped('ext/intl not enabled');
             } else {
                 return array(array());

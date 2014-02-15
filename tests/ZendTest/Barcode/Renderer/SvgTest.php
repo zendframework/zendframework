@@ -94,6 +94,25 @@ class SvgTest extends TestCommon
         Barcode\Barcode::setBarcodeFont('');
     }
 
+    /**
+     * @group 4708
+     */
+    public function testSvgTransparency()
+    {
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        $barcode = new Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+        $this->assertFalse($this->renderer->getTransparentBackground());
+
+        $this->renderer->setTransparentBackground(true);
+        $this->assertTrue($this->renderer->getTransparentBackground());
+
+        //test svg return value
+        $xml = $this->renderer->draw()->saveXML();
+        $this->assertEquals(md5($xml), md5_file(__DIR__ . '/_files/svg_transparency.xml'));
+    }
+
+
     protected function getRendererWithWidth500AndHeight300()
     {
         $svg = new \DOMDocument();
@@ -105,4 +124,5 @@ class SvgTest extends TestCommon
         $svg->appendChild($rootElement);
         return $this->renderer->setResource($svg);
     }
+
 }

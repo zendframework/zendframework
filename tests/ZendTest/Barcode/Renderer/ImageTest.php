@@ -276,6 +276,42 @@ class ImageTest extends TestCommon
         parent::testTopOffsetOverrideVerticalPosition();
     }
 
+    /**
+     * @group 4708
+     */
+    public function testImageTransparency()
+    {
+        $barcode = new Object\Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+        
+        $this->renderer->setTransparentBackground(true);
+        $this->assertTrue($this->renderer->getTransparentBackground());
+
+        //Test PNG output
+        $this->renderer->setImageType('png');
+        $image = $this->renderer->draw();
+        
+        ob_start();
+        imagepng($image);
+        $imageData = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertEquals(md5($imageData), md5_file(__DIR__ . "/_files/transparent_barcode.png"));
+
+        //Test GIF output
+        $this->renderer->setImageType('gif');
+        $image = $this->renderer->draw();
+
+        ob_start();
+        imagegif($image);
+        $imageData = ob_get_contents();
+        ob_end_clean();
+
+        $this->assertEquals(md5($imageData), md5_file(__DIR__ . "/_files/transparent_barcode.gif"));
+    }
+
+
+
     protected function checkTTFRequirement()
     {
         if (!function_exists('imagettfbbox')) {

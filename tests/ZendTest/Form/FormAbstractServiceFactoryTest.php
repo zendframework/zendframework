@@ -174,7 +174,6 @@ class FormAbstractServiceFactoryTest extends TestCase
             ),
             'input_filter' => array(
                 'email' => array(
-                    'name'       => 'email',
                     'required'   => true,
                     'filters'    => array(
                         array(

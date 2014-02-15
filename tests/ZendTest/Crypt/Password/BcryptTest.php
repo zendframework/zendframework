@@ -117,16 +117,13 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
 
     public function testVerifyFailureVersion()
     {
-        $test = (substr(crypt('test', '$2y$04$012345678901234567890123456789'), 0, 3) === '$2y');
-        if (!$test) {
-            // We don't support new style hashes, test verify failure
-            $hash = '$y2$14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';
-            $this->setExpectedException('Zend\Crypt\Password\Exception\RuntimeException',
-                'The supplied password hash could not be verified. Please check ' .
-                'backwards compatibility settings.'
-            );
-            $this->bcrypt->verify('test', $hash);
-        }
+        // We don't support new style hashes, test verify failure
+        $hash = '$y2$14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';
+        $this->setExpectedException('Zend\Crypt\Password\Exception\RuntimeException',
+            'The supplied password hash could not be verified. Please check ' .
+            'backwards compatibility settings.'
+        );
+        $this->bcrypt->verify('test', $hash);
     }
 
     public function testPasswordWith8bitCharacter()

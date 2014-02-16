@@ -43,6 +43,13 @@ class Svg extends AbstractRenderer
      */
     protected $userWidth = 0;
 
+
+    /**
+     * Flag to determime if drawPolygon has been run once already
+     * @var bool
+     */
+    protected $drawPolygonExecuted = false;
+
     /**
      * Set height of the result image
      * @param null|int $value
@@ -297,7 +304,6 @@ class Svg extends AbstractRenderer
      */
     protected function drawPolygon($points, $color, $filled = true)
     {
-        static $runOnce = array();
         $color = 'rgb(' . implode(', ', array(($color & 0xFF0000) >> 16,
                                               ($color & 0x00FF00) >> 8,
                                               ($color & 0x0000FF))) . ')';
@@ -318,12 +324,14 @@ class Svg extends AbstractRenderer
 
         // SVG passes a rect in as the first call to drawPolygon, we'll need to intercept
         // this and set transparency if necessary.
-        if(empty($runOnce['hasRun'])) {
+        $objId = spl_object_hash($this);
+        if(!$this->drawPolygonExecuted) {
             if($this->transparentBackground) {
                 $attributes['fill-opacity'] = '0';
             }
-            $runOnce['hasRun'] = true;
+            $this->drawPolygonExecuted = true;
         }
+
         $this->appendRootElement('polygon', $attributes);
     }
 

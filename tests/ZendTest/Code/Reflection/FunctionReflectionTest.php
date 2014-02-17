@@ -163,8 +163,8 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
     public function testInternalFunctionContentsReturn()
     {
         $function = new FunctionReflection('array_splice');
-        $this->setExpectedException('Zend\Code\Reflection\Exception\InvalidArgumentException');
-        $content = $function->getContents();
+
+        $this->assertEmpty($function->getContents());
     }
 
     public function testFunctionContentsReturnWithoutDocBlock()
@@ -212,6 +212,9 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("function function12() {}", trim($content));
     }
 
+    /**
+     * @group fail
+     */
     public function testFunctionClosureContentsReturnWithoutDocBlock()
     {
         require __DIR__ . '/TestAsset/closures.php';
@@ -246,5 +249,23 @@ class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
         $function = new FunctionReflection($function9);
         $content = $function->getContents();
         $this->assertEquals("/**\n * closure doc block\n */\nfunction() {}", trim($content));
+    }
+
+    public function testGetContentsReturnsEmptyContentsOnEvaldCode()
+    {
+        $functionName = uniqid('generatedFunction');
+
+        eval('name' . 'space ' . __NAMESPACE__ . '; ' . 'fun' . 'ction ' . $functionName . '()' . '{}');
+
+        $reflectionFunction = new FunctionReflection(__NAMESPACE__ . '\\' . $functionName);
+
+        $this->assertSame('', $reflectionFunction->getContents());
+    }
+
+    public function testGetContentsReturnsEmptyContentsOnInternalCode()
+    {
+        $reflectionFunction = new FunctionReflection('max');
+
+        $this->assertSame('', $reflectionFunction->getContents());
     }
 }

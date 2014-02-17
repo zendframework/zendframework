@@ -208,7 +208,8 @@ class Code128 extends AbstractObject
         $currentCharset = null;
         $result = array();
 
-        for ($pos = 0; $pos < strlen($string); $pos++) {
+        $strlen = strlen($string);
+        for ($pos = 0; $pos < $strlen; $pos++) {
             $char = $string[$pos];
             $code = null;
 

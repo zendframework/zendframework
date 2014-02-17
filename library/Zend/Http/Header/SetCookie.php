@@ -260,10 +260,6 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function setName($name)
     {
-        if ($name !== null && preg_match("/[=,; \t\r\n\013\014]/", $name)) {
-            throw new Exception\InvalidArgumentException("Cookie name cannot contain these characters: =,; \\t\\r\\n\\013\\014 ({$name})");
-        }
-
         $this->name = $name;
         return $this;
     }

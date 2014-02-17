@@ -273,6 +273,77 @@ class Memcache extends AbstractAdapter implements
         return ($value !== false);
     }
 
+    /**
+     * Internal method to test multiple items.
+     *
+     * @param  array $normalizedKeys
+     * @return array Array of found keys
+     * @throws Exception\ExceptionInterface
+     */
+    protected function internalHasItems(array & $normalizedKeys)
+    {
+        $memc = $this->getMemcacheResource();
+
+        foreach ($normalizedKeys as & $normalizedKey) {
+            $normalizedKey = $this->namespacePrefix . $normalizedKey;
+        }
+
+        $result = $memc->get($normalizedKeys);
+        if ($result === false) {
+            return array();
+        }
+
+        // Convert to a single list
+        $result = array_keys($result);
+
+        // remove namespace prefix
+        if ($result && $this->namespacePrefix !== '') {
+            $nsPrefixLength = strlen($this->namespacePrefix);
+            foreach ($result as & $internalKey) {
+                $internalKey = substr($internalKey, $nsPrefixLength);
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get metadata of multiple items
+     *
+     * @param  array $normalizedKeys
+     * @return array Associative array of keys and metadata
+     * @throws Exception\ExceptionInterface
+     */
+    protected function internalGetMetadatas(array & $normalizedKeys)
+    {
+        $memc = $this->getMemcacheResource();
+
+        foreach ($normalizedKeys as & $normalizedKey) {
+            $normalizedKey = $this->namespacePrefix . $normalizedKey;
+        }
+
+        $result = $memc->get($normalizedKeys);
+        if ($result === false) {
+            return array();
+        }
+
+        // remove namespace prefix and use an empty array as metadata
+        if ($this->namespacePrefix !== '') {
+            $tmp            = array();
+            $nsPrefixLength = strlen($this->namespacePrefix);
+            foreach (array_keys($result) as $internalKey) {
+                $tmp[substr($internalKey, $nsPrefixLength)] = array();
+            }
+            $result = $tmp;
+        } else {
+            foreach ($result as & $value) {
+                $value = array();
+            }
+        }
+
+        return $result;
+    }
+
     /* writing */
 
     /**
@@ -294,28 +365,6 @@ class Memcache extends AbstractAdapter implements
         }
 
         return true;
-    }
-
-    /**
-     * Internal method to store multiple items.
-     *
-     * @param  array $normalizedKeyValuePairs
-     * @return array Array of not stored keys
-     * @throws Exception\ExceptionInterface
-     */
-    protected function internalSetItems(array & $normalizedKeyValuePairs)
-    {
-        $memc       = $this->getMemcacheResource();
-        $expiration = $this->expirationTime();
-
-        foreach ($normalizedKeyValuePairs as $normalizedKey => & $value) {
-            $flag = $this->getWriteFlag($value);
-            if (!$memc->set($this->namespacePrefix . $normalizedKey, $value, $flag, $expiration)) {
-                throw new Exception\RuntimeException('Memcache set value failed');
-            }
-        }
-
-        return array();
     }
 
     /**

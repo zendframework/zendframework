@@ -10,6 +10,7 @@
 namespace Baz\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Http\Response;
 
 class IndexController extends AbstractActionController
 {
@@ -36,5 +37,13 @@ class IndexController extends AbstractActionController
     public function exceptionAction()
     {
         throw new \RuntimeException('Foo error !');
+    }
+    
+    public function customResponseAction()
+    {
+        $response = new Response();
+        $response->setStatusCode(999);
+        
+        return $response;
     }
 }

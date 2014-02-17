@@ -23,8 +23,13 @@ class MemcacheTest extends CommonAdapterTest
             $this->markTestSkipped("Skipped by TestConfiguration (TESTS_ZEND_CACHE_MEMCACHE_ENABLED)");
         }
 
-        if (!extension_loaded('memcache')) {
-            $this->markTestSkipped("Memcache extension is not loaded");
+        if (version_compare('2.0.0', phpversion('memcache')) > 0) {
+            try {
+                new Cache\Storage\Adapter\Memcache();
+                $this->fail("Expected exception Zend\Cache\Exception\ExtensionNotLoadedException");
+            } catch (Cache\Exception\ExtensionNotLoadedException $e) {
+                $this->markTestSkipped("Missing ext/memcache version >= 2.0.0");
+            }
         }
 
         $this->_options  = new Cache\Storage\Adapter\MemcacheOptions(array(

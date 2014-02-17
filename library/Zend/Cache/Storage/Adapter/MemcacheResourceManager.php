@@ -36,7 +36,7 @@ class MemcacheResourceManager
     /**
      * Failure callback per resource
      *
-     * @var array
+     * @var callable[]
      */
     protected $failureCallbacks = array();
 

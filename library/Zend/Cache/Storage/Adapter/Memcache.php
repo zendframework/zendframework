@@ -24,13 +24,6 @@ class Memcache extends AbstractAdapter implements
     TotalSpaceCapableInterface
 {
     /**
-     * Major version of ext/memcache
-     *
-     * @var null|int
-     */
-    protected static $extMemcacheMajorVersion;
-
-    /**
      * Has this instance been initialized
      *
      * @var bool
@@ -66,13 +59,8 @@ class Memcache extends AbstractAdapter implements
      */
     public function __construct($options = null)
     {
-        if (static::$extMemcacheMajorVersion === null) {
-            $v = (string) phpversion('memcache');
-            static::$extMemcacheMajorVersion = ($v !== '') ? (int) $v[0] : 0;
-        }
-
-        if (static::$extMemcacheMajorVersion < 2) {
-            throw new Exception\ExtensionNotLoadedException('Need ext/memcache version >= 2.0.0');
+        if (version_compare('2.0.0', phpversion('memcache')) > 0) {
+            throw new Exception\ExtensionNotLoadedException("Missing ext/memcache version >= 2.0.0");
         }
 
         parent::__construct($options);
@@ -285,77 +273,6 @@ class Memcache extends AbstractAdapter implements
         return ($value !== false);
     }
 
-    /**
-     * Internal method to test multiple items.
-     *
-     * @param  array $normalizedKeys
-     * @return array Array of found keys
-     * @throws Exception\ExceptionInterface
-     */
-    protected function internalHasItems(array & $normalizedKeys)
-    {
-        $memc = $this->getMemcacheResource();
-
-        foreach ($normalizedKeys as & $normalizedKey) {
-            $normalizedKey = $this->namespacePrefix . $normalizedKey;
-        }
-
-        $result = $memc->get($normalizedKeys);
-        if ($result === false) {
-            return array();
-        }
-
-        // Convert to a single list
-        $result = array_keys($result);
-
-        // remove namespace prefix
-        if ($result && $this->namespacePrefix !== '') {
-            $nsPrefixLength = strlen($this->namespacePrefix);
-            foreach ($result as & $internalKey) {
-                $internalKey = substr($internalKey, $nsPrefixLength);
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * Get metadata of multiple items
-     *
-     * @param  array $normalizedKeys
-     * @return array Associative array of keys and metadata
-     * @throws Exception\ExceptionInterface
-     */
-    protected function internalGetMetadatas(array & $normalizedKeys)
-    {
-        $memc = $this->getMemcacheResource();
-
-        foreach ($normalizedKeys as & $normalizedKey) {
-            $normalizedKey = $this->namespacePrefix . $normalizedKey;
-        }
-
-        $result = $memc->get($normalizedKeys);
-        if ($result === false) {
-            return array();
-        }
-
-        // remove namespace prefix and use an empty array as metadata
-        if ($this->namespacePrefix !== '') {
-            $tmp            = array();
-            $nsPrefixLength = strlen($this->namespacePrefix);
-            foreach (array_keys($result) as $internalKey) {
-                $tmp[substr($internalKey, $nsPrefixLength)] = array();
-            }
-            $result = $tmp;
-        } else {
-            foreach ($result as & $value) {
-                $value = array();
-            }
-        }
-
-        return $result;
-    }
-
     /* writing */
 
     /**
@@ -465,7 +382,7 @@ class Memcache extends AbstractAdapter implements
 
         if ($newValue === false) {
             // Set initial value. Don't use compression!
-            // http://us3.php.net/manual/en/memcache.increment.php
+            // http://www.php.net/manual/memcache.increment.php
             $newValue = $value;
             if (!$memc->add($internalKey, $newValue, 0, $this->expirationTime())) {
                 throw new Exception\RuntimeException('Memcache unable to add increment value');
@@ -491,7 +408,8 @@ class Memcache extends AbstractAdapter implements
         $newValue    = $memc->decrement($internalKey, $value);
 
         if ($newValue === false) {
-            // Set initial value
+            // Set initial value. Don't use compression!
+            // http://www.php.net/manual/memcache.decrement.php
             $newValue = -$value;
             if (!$memc->add($internalKey, $newValue, 0, $this->expirationTime())) {
                 throw new Exception\RuntimeException('Memcache unable to add decrement value');

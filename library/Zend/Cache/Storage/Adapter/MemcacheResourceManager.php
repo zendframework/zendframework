@@ -70,7 +70,9 @@ class MemcacheResourceManager
         }
 
         $memc = new MemcacheResource();
-        $this->setResourceLibOptions($memc, $resource['lib_options']);
+        $this->setResourceAutoCompressThreshold(
+            $memc, $resource['auto_compress_threshold'], $resource['auto_compress_min_savings']
+        );
         foreach ($resource['servers'] as $server) {
             $this->addServerToResource(
                 $memc, $server, $this->serverDefaults[$id], $this->failureCallbacks[$id]
@@ -80,34 +82,6 @@ class MemcacheResourceManager
         // buffer and return
         $this->resources[$id] = $memc;
         return $memc;
-    }
-
-    /**
-     * @param MemcacheResource $resource
-     * @param array $server
-     * @param array $serverDefaults
-     * @param callable|null $failureCallback
-     */
-    protected function addServerToResource(
-        MemcacheResource $resource, array $server, array $serverDefaults, $failureCallback
-    ) {
-        // Apply server defaults
-        $server = array_merge($serverDefaults, $server);
-
-        // Reorder parameters
-        $params = array(
-            $server['host'],
-            $server['port'],
-            $server['persistent'],
-            $server['weight'],
-            $server['timeout'],
-            $server['retry_interval'],
-            $server['status'],
-        );
-        if (isset($failureCallback)) {
-            $params[] = $failureCallback;
-        }
-        call_user_func_array(array($resource, 'addServer'), $params);
     }
 
     /**
@@ -143,13 +117,17 @@ class MemcacheResourceManager
                 unset($resource['server_defaults']);
             }
 
-            $resource = array_merge(array(
-                'lib_options'   => array(),
-                'servers'       => array(),
-            ), $resource);
+            $resourceOptions = array(
+                'servers' => array(),
+                'auto_compress_threshold'   => null,
+                'auto_compress_min_savings' => null,
+            );
+            $resource = array_merge($resourceOptions, $resource);
 
             // normalize and validate params
-            $this->normalizeLibOptions($resource['lib_options']);
+            $this->normalizeAutoCompressThreshold(
+                $resource['auto_compress_threshold'], $resource['auto_compress_min_savings']
+            );
             $this->normalizeServers($resource['servers']);
         }
 
@@ -175,111 +153,52 @@ class MemcacheResourceManager
     }
 
     /**
-     * Set Libmemcache options
+     * Normalize compress threshold options
      *
-     * @param string $id
-     * @param array  $libOptions
-     * @return MemcacheResourceManager
+     * @param int|string|array|ArrayAccess $threshold
+     * @param float|string                 $minSavings
      */
-    public function setLibOptions($id, array $libOptions)
+    protected function normalizeAutoCompressThreshold(& $threshold, & $minSavings)
     {
-        if (!$this->hasResource($id)) {
-            return $this->setResource($id, array(
-                'lib_options' => $libOptions
-            ));
+        if (is_array($threshold) || ($threshold instanceof ArrayAccess)) {
+            $tmpThreshold = (isset($threshold['threshold'])) ? $threshold['threshold'] : null;
+            $minSavings = (isset($threshold['min_savings'])) ? $threshold['min_savings'] : $minSavings;
+            $threshold = $tmpThreshold;
         }
-
-        $this->normalizeLibOptions($libOptions);
-
-        $resource = & $this->resources[$id];
-        if ($resource instanceof MemcacheResource) {
-            $this->setResourceLibOptions($resource, $libOptions);
-        } else {
-            $resource['lib_options'] = $libOptions;
+        if (isset($threshold)) {
+            $threshold = (int) $threshold;
         }
-
-        return $this;
+        if (isset($minSavings)) {
+            $minSavings = (float) $minSavings;
+        }
     }
 
     /**
-     * Normalize libmemcache options
-     *
-     * @param array|Traversable $libOptions
-     * @throws Exception\InvalidArgumentException
-     */
-    protected function normalizeLibOptions(& $libOptions)
-    {
-        if (!is_array($libOptions) && !($libOptions instanceof Traversable)) {
-            throw new Exception\InvalidArgumentException(
-                "Lib-Options must be an array or an instance of Traversable"
-            );
-        }
-
-        $result = array();
-        foreach ($libOptions as $key => $value) {
-            switch ($key) {
-                case 'compress_threshold':
-                    $this->normalizeCompressThresholdOptions($value);
-                    break;
-            }
-            $result[$key] = $value;
-        }
-
-        $libOptions = $result;
-    }
-
-    /**
-     * Set lib options on a Memcache resource
+     * Set compress threshold on a Memcache resource
      *
      * @param MemcacheResource $resource
      * @param array $libOptions
      */
-    protected function setResourceLibOptions(MemcacheResource $resource, array $libOptions)
+    protected function setResourceAutoCompressThreshold(MemcacheResource $resource, $threshold, $minSavings)
     {
-        foreach ($libOptions as $key => $value) {
-            switch ($key) {
-                case 'compress_threshold':
-                    if (isset($value['min_savings'])) {
-                        $resource->setCompressThreshold($value['threshold'], $value['min_savings']);
-                    } else {
-                        $resource->setCompressThreshold($value['threshold']);
-                    }
-                    break;
-            }
+        if (!isset($threshold)) {
+            return;
+        }
+        if (isset($minSavings)) {
+            $resource->setCompressThreshold($threshold, $minSavings);
+        } else {
+            $resource->setCompressThreshold($threshold);
         }
     }
 
     /**
-     * Normalize compress threshold options into the following format:
-     * array('threshold' => <threshold>[, 'min_savings' => <min_savings>])
+     * Get compress threshold
      *
-     * @param array|ArrayAccess $options
-     * @throws Exception\InvalidArgumentException
+     * @param  string $id
+     * @return int|null
+     * @throws \Zend\Cache\Exception\RuntimeException
      */
-    protected function normalizeCompressThresholdOptions(& $options)
-    {
-        if (!is_array($options) && !($options instanceof ArrayAccess)) {
-            $options = array('threshold' => $options);
-        }
-        if (!isset($options['threshold'])) {
-            throw new Exception\InvalidArgumentException(
-                "Compress threshold options must contain a 'threshold' value"
-            );
-        }
-        $options['threshold'] = (int) $options['threshold'];
-        if (isset($options['min_savings'])) {
-            $options['min_savings'] = (float) $options['min_savings'];
-        }
-    }
-
-    /**
-     * Get Libmemcache options
-     *
-     * @param string $id
-     * @return array
-     * @throws Exception\RuntimeException
-     */
-    public function getLibOptions($id)
+    public function getAutoCompressThreshold($id)
     {
         if (!$this->hasResource($id)) {
             throw new Exception\RuntimeException("No resource with id '{$id}'");
@@ -288,36 +207,89 @@ class MemcacheResourceManager
         $resource = & $this->resources[$id];
         if ($resource instanceof MemcacheResource) {
             // Cannot get options from Memcache resource once created
-            throw new Exception\RuntimeException("Cannot get LibOptions once resource is created");
+            throw new Exception\RuntimeException("Cannot get compress threshold once resource is created");
         }
-        return $resource['lib_options'];
+        return $resource['auto_compress_threshold'];
     }
 
     /**
-     * Set one Libmemcache option
+     * Set compress threshold
      *
-     * @param string     $id
-     * @param string|int $key
-     * @param mixed      $value
+     * @param string                            $id
+     * @param int|string|array|ArrayAccess|null $threshold
+     * @param float|string|bool                 $minSavings
      * @return MemcacheResourceManager
      */
-    public function setLibOption($id, $key, $value)
+    public function setAutoCompressThreshold($id, $threshold, $minSavings = false)
     {
-        return $this->setLibOptions($id, array($key => $value));
+        if (!$this->hasResource($id)) {
+            return $this->setResource($id, array(
+                'auto_compress_threshold' => $threshold,
+            ));
+        }
+
+        $this->normalizeAutoCompressThreshold($threshold, $minSavings);
+
+        $resource = & $this->resources[$id];
+        if ($resource instanceof MemcacheResource) {
+            $this->setResourceAutoCompressThreshold($resource, $threshold, $minSavings);
+        } else {
+            $resource['auto_compress_threshold'] = $threshold;
+            if ($minSavings !== false) {
+                $resource['auto_compress_min_savings'] = $minSavings;
+            }
+        }
+        return $this;
     }
 
     /**
-     * Get one Libmemcache option
+     * Get compress min savings
      *
-     * @param string     $id
-     * @param string|int $key
-     * @return mixed
+     * @param  string $id
+     * @return float|null
      * @throws Exception\RuntimeException
      */
-    public function getLibOption($id, $key)
+    public function getAutoCompressMinSavings($id)
     {
-        $libOptions = $this->getLibOptions($id);
-        return isset($libOptions[$key]) ? $libOptions[$key] : null;
+        if (!$this->hasResource($id)) {
+            throw new Exception\RuntimeException("No resource with id '{$id}'");
+        }
+
+        $resource = & $this->resources[$id];
+        if ($resource instanceof MemcacheResource) {
+            // Cannot get options from Memcache resource once created
+            throw new Exception\RuntimeException("Cannot get compress min savings once resource is created");
+        }
+        return $resource['auto_compress_min_savings'];
+    }
+
+    /**
+     * Set compress min savings
+     *
+     * @param  string            $id
+     * @param  float|string|null $minSavings
+     * @return MemcacheResourceManager
+     * @throws \Zend\Cache\Exception\RuntimeException
+     */
+    public function setAutoCompressMinSavings($id, $minSavings)
+    {
+        if (!$this->hasResource($id)) {
+            return $this->setResource($id, array(
+                'auto_compress_min_savings' => $minSavings,
+            ));
+        }
+
+        $minSavings = (float) $minSavings;
+
+        $resource = & $this->resources[$id];
+        if ($resource instanceof MemcacheResource) {
+            throw new Exception\RuntimeException(
+                "Cannot set compress min savings without a threshold value once a resource is created"
+            );
+        } else {
+            $resource['auto_compress_min_savings'] = $minSavings;
+        }
+        return $this;
     }
 
     /**
@@ -327,7 +299,7 @@ class MemcacheResourceManager
      *   'timeout' => <timeout>, 'retry_interval' => <retryInterval>,
      * )
      * @param string $id
-     * @param array $serverDefaults
+     * @param array  $serverDefaults
      * @return MemcacheResourceManager
      */
     public function setServerDefaults($id, array $serverDefaults)
@@ -367,7 +339,7 @@ class MemcacheResourceManager
     {
         if (!is_array($serverDefaults) && !($serverDefaults instanceof Traversable)) {
             throw new Exception\InvalidArgumentException(
-                "Lib-Options must be an array or an instance of Traversable"
+                "Server defaults must be an array or an instance of Traversable"
             );
         }
 
@@ -496,6 +468,34 @@ class MemcacheResourceManager
     }
 
     /**
+     * @param MemcacheResource $resource
+     * @param array $server
+     * @param array $serverDefaults
+     * @param callable|null $failureCallback
+     */
+    protected function addServerToResource(
+        MemcacheResource $resource, array $server, array $serverDefaults, $failureCallback
+    ) {
+        // Apply server defaults
+        $server = array_merge($serverDefaults, $server);
+
+        // Reorder parameters
+        $params = array(
+            $server['host'],
+            $server['port'],
+            $server['persistent'],
+            $server['weight'],
+            $server['timeout'],
+            $server['retry_interval'],
+            $server['status'],
+        );
+        if (isset($failureCallback)) {
+            $params[] = $failureCallback;
+        }
+        call_user_func_array(array($resource, 'addServer'), $params);
+    }
+
+    /**
      * Normalize a list of servers into the following format:
      * array(array('host' => <host>, 'port' => <port>, 'weight' => <weight>)[, ...])
      *
@@ -530,6 +530,9 @@ class MemcacheResourceManager
      */
     protected function normalizeServer(& $server)
     {
+        // WARNING: The order of this array is important.
+        // Used for converting an ordered array to a keyed array.
+        // Append new options, do not insert or you will break BC.
         $sTmp = array(
             'host'           => null,
             'port'           => 11211,

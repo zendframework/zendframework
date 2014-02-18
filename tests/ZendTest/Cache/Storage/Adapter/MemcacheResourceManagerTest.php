@@ -40,7 +40,6 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
      * array(array(
      *     <string resource id>,
      *     <mixed input resource>,
-     *     <array normalized lib options>,
      *     <array normalized server list>
      * )[, ...])
      *
@@ -52,7 +51,6 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
             // empty resource
             array(
                 'testEmptyResource',
-                array(),
                 array(),
                 array(),
             ),
@@ -72,7 +70,6 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                     array('host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => false,
                           'persistent' => false, 'timeout' => 5,  'retry_interval' => 10),
                 ),
-                array(),
             ),
 
             // servers given as list of strings
@@ -96,7 +93,6 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                     array('host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => false,
                           'persistent' => false, 'timeout' => 5,  'retry_interval' => 10),
                 ),
-                array(),
             ),
 
             // servers given as list of arrays
@@ -120,7 +116,6 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                     array('host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => false,
                           'persistent' => false, 'timeout' => 5,  'retry_interval' => 10),
                 ),
-                array(),
             ),
 
             // servers given as list of assoc arrays
@@ -166,44 +161,7 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
                     array('host' => '10.0.0.1',  'port' => 11211, 'weight' => 1, 'status' => false,
                           'persistent' => false, 'timeout' => 5,  'retry_interval' => 10),
                 ),
-                array(),
             ),
-
-            // lib option compress threshold as int value
-            array(
-                'testCompressThresholdIntValue',
-                array(
-                    'lib_options' => array(
-                        'compress_threshold' => 100,
-                    ),
-                ),
-                array(),
-                array(
-                    'compress_threshold' => array(
-                        'threshold' => 100
-                    ),
-                ),
-            ),
-            // lib option compress threshold as array options
-            array(
-                'testCompressThresholdOptions',
-                array(
-                    'lib_options' => array(
-                        'compress_threshold' => array(
-                            'threshold' => 200,
-                            'min_savings' => 0.20,
-                        ),
-                    ),
-                ),
-                array(),
-                array(
-                    'compress_threshold' => array(
-                        'threshold' => 200,
-                        'min_savings' => 0.20,
-                    ),
-                ),
-            ),
-
         );
 
         return $data;
@@ -216,35 +174,142 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
      * @param array  $expectedServers
      * @param array  $expectedLibOptions
      */
-    public function testValidResources($resourceId, $resource, $expectedServers, $expectedLibOptions)
+    public function testValidResources($resourceId, $resource, $expectedServers)
     {
         $this->assertSame($this->resourceManager, $this->resourceManager->setResource($resourceId, $resource));
         $this->assertTrue($this->resourceManager->hasResource($resourceId));
 
         $this->assertEquals($expectedServers, $this->resourceManager->getServers($resourceId));
-        $this->assertEquals($expectedLibOptions, $this->resourceManager->getLibOptions($resourceId));
 
         $this->assertSame($this->resourceManager, $this->resourceManager->removeResource($resourceId));
         $this->assertFalse($this->resourceManager->hasResource($resourceId));
     }
 
-    public function testSetCompressThresholdOnExistingResource()
+    /**
+     * Data provider to test valid compress threshold options
+     *
+     * Returns an array of the following structure:
+     * array(array(
+     *     <string resource id>,
+     *     <array threshold options input>,
+     *     <array normalized threshold options>
+     * )[, ...])
+     *
+     * @return array
+     */
+    public function validCompressThresholdOptionsProvider()
     {
-        $libOptions = array(
-            'compress_threshold' => array(
-                'threshold' => 200,
-                'min_savings' => 0.20,
+        $data = array(
+            array(
+                'testThresholdResource',
+                array(
+                    'auto_compress_threshold' => 100,
+                ),
+                array(
+                    'auto_compress_threshold' => 100,
+                    'auto_compress_min_savings' => null,
+                ),
+            ),
+            array(
+                'testThresholdAndMinSavingsResource',
+                array(
+                    'auto_compress_threshold' => 100,
+                    'auto_compress_min_savings' => 0.2,
+                ),
+                array(
+                    'auto_compress_threshold' => 100,
+                    'auto_compress_min_savings' => 0.2,
+                ),
+            ),
+            array(
+                'testStringThresholdAndMinSavingsResource',
+                array(
+                    'auto_compress_threshold' => "100",
+                    'auto_compress_min_savings' => "0.2",
+                ),
+                array(
+                    'auto_compress_threshold' => 100,
+                    'auto_compress_min_savings' => 0.2,
+                ),
+            ),
+            array(
+                'testThresholdArrayResource',
+                array(
+                    'auto_compress_threshold' => array(
+                        'threshold' => 100,
+                        'min_savings' => 0.2,
+                    ),
+                ),
+                array(
+                    'auto_compress_threshold' => 100,
+                    'auto_compress_min_savings' => 0.2,
+                ),
             ),
         );
-        $resourceId = 'testResourceId';
+        return $data;
+    }
+
+    /**
+     * @dataProvider validCompressThresholdOptionsProvider
+     * @param string $resourceId
+     * @param array $thresholdOptions
+     * @param array $expectedOptions
+     */
+    public function testSetCompressThreshold($resourceId, $thresholdOptions, $expectedOptions)
+    {
+        // Test normalized values
+        $this->resourceManager->setResource($resourceId, $thresholdOptions);
+        $this->assertEquals(
+            $expectedOptions['auto_compress_threshold'],
+            $this->resourceManager->getAutoCompressThreshold($resourceId)
+        );
+        $this->assertEquals(
+            $expectedOptions['auto_compress_min_savings'],
+            $this->resourceManager->getAutoCompressMinSavings($resourceId)
+        );
+
+        // Test memcache set
         $resourceMock = $this->getMock('Memcache', array('setCompressThreshold'));
-        $resourceMock
-            ->expects($this->once())
-            ->method('setCompressThreshold')
-            ->with($this->isType('int'), $this->isType('float'));
+        if (isset($thresholdOptions['auto_compress_min_savings'])
+            && $thresholdOptions['auto_compress_min_savings'] !== null
+        ) {
+            $resourceMock
+                ->expects($this->once())
+                ->method('setCompressThreshold')
+                ->with(
+                    $this->equalTo($expectedOptions['auto_compress_threshold']),
+                    $this->equalTo($expectedOptions['auto_compress_min_savings'])
+                );
+        } else {
+            $resourceMock
+                ->expects($this->once())
+                ->method('setCompressThreshold')
+                ->with($this->equalTo($expectedOptions['auto_compress_threshold']));
+        }
 
         $this->resourceManager->setResource($resourceId, $resourceMock);
-        $this->resourceManager->setLibOptions($resourceId, $libOptions);
+        if (isset($thresholdOptions['auto_compress_min_savings'])) {
+            $this->resourceManager->setAutoCompressThreshold(
+                $resourceId,
+                $thresholdOptions['auto_compress_threshold'],
+                $thresholdOptions['auto_compress_min_savings']
+            );
+        } else {
+            $this->resourceManager->setAutoCompressThreshold(
+                $resourceId,
+                $thresholdOptions['auto_compress_threshold']
+            );
+        }
+
+        // After create test
+        $this->setExpectedException(
+            'Zend\Cache\Exception\RuntimeException',
+            'Cannot get compress threshold once resource is created'
+        );
+        $this->assertEquals(
+            $expectedOptions['auto_compress_threshold'],
+            $this->resourceManager->getAutoCompressThreshold($resourceId)
+        );
     }
 
     /**
@@ -260,7 +325,7 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    public function validServerProvider()
+    public function validServerAndServerDefaultsProvider()
     {
         $data = array(
             // All params, no default settings
@@ -305,11 +370,11 @@ class MemcacheResourceManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider validServerProvider
+     * @dataProvider validServerAndServerDefaultsProvider
      * @param string $resourceId
-     * @param array $server
-     * @param array $serverDefaults
-     * @param array $expectedParams
+     * @param array  $server
+     * @param array  $serverDefaults
+     * @param array  $expectedParams
      */
     public function testAddServerOnExistingResource($resourceId, $server, $serverDefaults, $expectedParams)
     {

@@ -195,29 +195,48 @@ class MemcacheOptions extends AdapterOptions
     }
 
     /**
-     * Set libmemcache options
+     * Set compress threshold
      *
-     * @param array $libOptions
+     * @param  int|string|array|ArrayAccess|null $threshold
      * @return MemcacheOptions
-     * @link http://php.net/manual/memcache.constants.php
      */
-    public function setLibOptions(array $libOptions)
+    public function setAutoCompressThreshold($threshold)
     {
-        $this->getResourceManager()->setLibOptions($this->getResourceId(), $libOptions);
+        $this->getResourceManager()->setAutoCompressThreshold($this->getResourceId(), $threshold);
         return $this;
     }
 
     /**
-     * Get libmemcache options
+     * Get compress threshold
      *
-     * @return array
-     * @link http://php.net/manual/memcache.constants.php
+     * @return int|null
      */
-    public function getLibOptions()
+    public function getAutoCompressThreshold()
     {
-        return $this->getResourceManager()->getLibOptions($this->getResourceId());
+        return $this->getResourceManager()->getAutoCompressThreshold($this->getResourceId());
     }
 
+    /**
+     * Set compress min savings option
+     *
+     * @param  float|string|null $minSavings
+     * @return MemcacheOptions
+     */
+    public function setAutoCompressMinSavings($minSavings)
+    {
+        $this->getResourceManager()->setAutoCompressMinSavings($this->getResourceId(), $minSavings);
+        return $this;
+    }
+
+    /**
+     * Get compress min savings
+     *
+     * @return Exception\RuntimeException
+     */
+    public function getAutoCompressMinSavings()
+    {
+        return $this->getResourceManager()->getAutoCompressMinSavings($this->getResourceId());
+    }
 
     /**
      * Set default server values

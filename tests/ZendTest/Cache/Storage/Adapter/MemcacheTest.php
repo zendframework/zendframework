@@ -53,6 +53,17 @@ class MemcacheTest extends CommonAdapterTest
         parent::setUp();
     }
 
+    /**
+     * Data provider to test valid server info
+     *
+     * Returns an array of the following structure:
+     * array(array(
+     *     <array|string server options>,
+     *     <array expected normalized servers>,
+     * )[, ...])
+     *
+     * @return array
+     */
     public function getServersDefinitions()
     {
         $expectedServers = array(
@@ -102,6 +113,8 @@ class MemcacheTest extends CommonAdapterTest
 
     /**
      * @dataProvider getServersDefinitions
+     * @param mixed $servers
+     * @param array $expectedServers
      */
     public function testOptionSetServers($servers, $expectedServers)
     {
@@ -110,22 +123,24 @@ class MemcacheTest extends CommonAdapterTest
         $this->assertEquals($expectedServers, $options->getServers());
     }
 
-    public function testLibOptionsSet()
+    public function testCompressThresholdOptions()
     {
+        $threshold = 100;
+        $minSavings = 0.2;
+
         $options = new Cache\Storage\Adapter\MemcacheOptions();
-
-        $options->setLibOptions(array(
-            'compress_threshold' => 100
-        ));
-
-        $this->assertEquals($options->getResourceManager()->getLibOption(
-            $options->getResourceId(), 'compress_threshold'
-        ), array('threshold' => 100));
+        $options->setAutoCompressThreshold($threshold);
+        $options->setAutoCompressMinSavings($minSavings);
+        $this->assertEquals(
+            $threshold, $options->getResourceManager()->getAutoCompressThreshold($options->getResourceId())
+        );
+        $this->assertEquals(
+            $minSavings, $options->getResourceManager()->getAutoCompressMinSavings($options->getResourceId())
+        );
 
         $memcache = new Cache\Storage\Adapter\Memcache($options);
-        $this->assertEquals($memcache->getOptions()->getLibOptions(), array(
-            'compress_threshold' => array('threshold' => 100)
-        ));
+        $this->assertEquals($memcache->getOptions()->getAutoCompressThreshold(), $threshold);
+        $this->assertEquals($memcache->getOptions()->getAutoCompressMinSavings(), $minSavings);
     }
 
     public function tearDown()

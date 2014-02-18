@@ -411,7 +411,10 @@ class Memcache extends AbstractAdapter implements
     protected function internalRemoveItem(& $normalizedKey)
     {
         $memc   = $this->getMemcacheResource();
-        return $memc->delete($this->namespacePrefix . $normalizedKey);
+        // Delete's second parameter (timeout) is deprecated and not supported.
+        // Values other than 0 may cause delete to fail.
+        // http://www.php.net/manual/memcache.delete.php
+        return $memc->delete($this->namespacePrefix . $normalizedKey, 0);
     }
 
     /**

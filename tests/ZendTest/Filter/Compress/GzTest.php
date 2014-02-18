@@ -37,10 +37,6 @@ class GzTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
-        if (version_compare(phpversion(), '5.4', '>=')) {
-            $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
-        }
-
         $filter  = new GzCompression();
 
         $content = $filter->compress('compress me');
@@ -164,10 +160,6 @@ class GzTest extends \PHPUnit_Framework_TestCase
      */
     public function testGzDeflate()
     {
-        if (version_compare(phpversion(), '5.4', '>=')) {
-            $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
-        }
-
         $filter  = new GzCompression(array('mode' => 'deflate'));
 
         $content = $filter->compress('compress me');

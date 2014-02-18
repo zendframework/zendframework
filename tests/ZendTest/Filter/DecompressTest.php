@@ -37,10 +37,6 @@ class DecompressTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicUsage()
     {
-        if (version_compare(phpversion(), '5.4', '>=')) {
-            $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
-        }
-
         $filter  = new DecompressFilter('bz2');
 
         $text       = 'compress me';

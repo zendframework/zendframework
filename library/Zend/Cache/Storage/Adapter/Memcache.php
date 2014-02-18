@@ -478,21 +478,50 @@ class Memcache extends AbstractAdapter implements
     protected function internalGetCapabilities()
     {
         if ($this->capabilities === null) {
+            if (version_compare('3.0.3', phpversion('memcache')) <= 0) {
+                // In ext/memcache v3.0.3:
+                // Scalar data types (int, bool, double) are preserved by get/set.
+                // http://pecl.php.net/package/memcache/3.0.3
+                //
+                // This effectively removes support for `boolean` types since
+                // "not found" return values are === false.
+                $supportedDatatypes = array(
+                    'NULL'     => true,
+                    'boolean'  => false,
+                    'integer'  => true,
+                    'double'   => true,
+                    'string'   => true,
+                    'array'    => true,
+                    'object'   => 'object',
+                    'resource' => false,
+                );
+            } else {
+                // In stable 2.x ext/memcache versions, scalar data types are
+                // converted to strings and must be manually cast back to original
+                // types by the user.
+                //
+                // ie. It is impossible to know if the saved value: (string)"1"
+                // was previously: (bool)true, (int)1, or (string)"1".
+                // Similarly, the saved value: (string)""
+                // might have previously been: (bool)false or (string)""
+                $supportedDatatypes = array(
+                    'NULL'     => true,
+                    'boolean'  => 'boolean',
+                    'integer'  => 'integer',
+                    'double'   => 'double',
+                    'string'   => true,
+                    'array'    => true,
+                    'object'   => 'object',
+                    'resource' => false,
+                );
+            }
+
             $this->capabilityMarker = new stdClass();
             $this->capabilities     = new Capabilities(
                 $this,
                 $this->capabilityMarker,
                 array(
-                    'supportedDatatypes' => array(
-                        'NULL'     => true,
-                        'boolean'  => 'boolean',
-                        'integer'  => 'integer',
-                        'double'   => 'double',
-                        'string'   => true,
-                        'array'    => true,
-                        'object'   => 'object',
-                        'resource' => false,
-                    ),
+                    'supportedDatatypes' => $supportedDatatypes,
                     'supportedMetadata'  => array(),
                     'minTtl'             => 1,
                     'maxTtl'             => 0,

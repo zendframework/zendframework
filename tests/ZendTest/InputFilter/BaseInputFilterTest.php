@@ -245,13 +245,16 @@ class BaseInputFilterTest extends TestCase
         $this->assertEquals($data, $filter->getValues());
     }
 
-    /**
-     * @expectedException Zend\InputFilter\Exception\InvalidArgumentException
-     */
     public function testSetDeepValidationGroupToNonInputFilterThrowsException()
     {
         $filter = $this->getInputFilter();
         $filter->add(new Input, 'flat');
+        // we expect setValidationGroup to throw an exception when flat is treated
+        // like an inputfilter which it actually isn't
+        $this->setExpectedException(
+            'Zend\InputFilter\Exception\InvalidArgumentException',
+            'Input "flat" must implement InputFilterInterface'
+        );
         $filter->setValidationGroup(array('flat' => 'foo'));
     }
 

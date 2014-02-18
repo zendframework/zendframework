@@ -335,7 +335,7 @@ class Attribute
     {
         $values = static::getAttribute($data, $attribName, $index);
         if (is_array($values)) {
-            for ($i = 0; $i < count($values); $i++) {
+            for ($i = 0, $count = count($values); $i < $count; $i++) {
                 $newVal = static::valueFromLdapDateTime($values[$i]);
                 if ($newVal !== null) {
                     $values[$i] = $newVal;

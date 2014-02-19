@@ -24,7 +24,7 @@ class ModuleLoaderListenerTest extends TestCase
         @mkdir($this->tmpdir);
 
         $this->moduleManager = new ModuleManager(array());
-        $this->moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
     }
 
     public function tearDown()

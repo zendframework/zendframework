@@ -153,7 +153,7 @@ class DefaultRendereringStrategyTest extends TestCase
         $this->event->setApplication($application);
 
         $test = (object) array('flag' => false);
-        $application->getEventManager()->attach('render.error', function ($e) use ($test) {
+        $application->getEventManager()->attach(MvcEvent::EVENT_RENDER_ERROR, function ($e) use ($test) {
             $test->flag      = true;
             $test->error     = $e->getError();
             $test->exception = $e->getParam('exception');

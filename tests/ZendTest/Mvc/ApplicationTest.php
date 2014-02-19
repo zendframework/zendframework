@@ -335,7 +335,7 @@ class ApplicationTest extends TestCase
 
         $response = $this->application->run();
         $this->assertContains('PathController', $response->getContent());
-        $this->assertContains('dispatch', $response->toString());
+        $this->assertContains(MvcEvent::EVENT_DISPATCH, $response->toString());
     }
 
     /**

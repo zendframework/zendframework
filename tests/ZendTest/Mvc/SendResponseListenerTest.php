@@ -11,6 +11,7 @@ namespace ZendTest\Mvc;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Mvc\SendResponseListener;
+use Zend\Mvc\ResponseSender\SendResponseEvent;
 
 class SendResponseListenerTest extends TestCase
 {
@@ -27,7 +28,7 @@ class SendResponseListenerTest extends TestCase
     {
         $listener = new SendResponseListener();
         $result = array();
-        $listener->getEventManager()->attach('sendResponse', function ($e) use (&$result) {
+        $listener->getEventManager()->attach(SendResponseEvent::EVENT_SEND_RESPONSE, function ($e) use (&$result) {
             $result['target'] = $e->getTarget();
             $result['response'] = $e->getResponse();
         }, 10000);

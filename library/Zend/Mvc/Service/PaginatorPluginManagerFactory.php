@@ -9,21 +9,7 @@
 
 namespace Zend\Mvc\Service;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
-
 class PaginatorPluginManagerFactory extends AbstractPluginManagerFactory
 {
     const PLUGIN_MANAGER_CLASS = 'Zend\Paginator\AdapterPluginManager';
-
-    /**
-     * Create and return the MVC controller plugin manager
-     *
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return \Zend\Paginator\AdapterPluginManager
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
-    {
-        $plugins = parent::createService($serviceLocator);
-        return $plugins;
-    }
 }

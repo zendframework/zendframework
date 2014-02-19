@@ -33,36 +33,36 @@ class FormAbstractServiceFactory implements AbstractFactoryInterface
     /**
      * Can we create the requested service?
      *
-     * @param  ServiceLocatorInterface $services
+     * @param  ServiceLocatorInterface $serviceLocator
      * @param  string $name Service name (as resolved by ServiceManager)
-     * @param  string $rName Name by which service was requested
+     * @param  string $requestedName Name by which service was requested
      * @return bool
      */
-    public function canCreateServiceWithName(ServiceLocatorInterface $services, $name, $rName)
+    public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $config = $this->getConfig($services);
+        $config = $this->getConfig($serviceLocator);
         if (empty($config)) {
             return false;
         }
 
-        return (isset($config[$rName]) && is_array($config[$rName]) && !empty($config[$rName]));
+        return (isset($config[$requestedName]) && is_array($config[$requestedName]) && !empty($config[$requestedName]));
     }
 
     /**
      * Create a form
      *
-     * @param  ServiceLocatorInterface $services
+     * @param  ServiceLocatorInterface $serviceLocator
      * @param  string $name Service name (as resolved by ServiceManager)
-     * @param  string $rName Name by which service was requested
+     * @param  string $requestedName Name by which service was requested
      * @return Form
      */
-    public function createServiceWithName(ServiceLocatorInterface $services, $name, $rName)
+    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $config  = $this->getConfig($services);
-        $config  = $config[$rName];
-        $factory = $this->getFormFactory($services);
+        $config  = $this->getConfig($serviceLocator);
+        $config  = $config[$requestedName];
+        $factory = $this->getFormFactory($serviceLocator);
 
-        $this->marshalInputFilter($config, $services, $factory);
+        $this->marshalInputFilter($config, $serviceLocator, $factory);
         return $factory->createForm($config);
     }
 

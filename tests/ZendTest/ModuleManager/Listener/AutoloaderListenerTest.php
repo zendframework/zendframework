@@ -15,6 +15,7 @@ use Zend\Loader\AutoloaderFactory;
 use Zend\ModuleManager\Listener\AutoloaderListener;
 use Zend\ModuleManager\Listener\ModuleResolverListener;
 use Zend\ModuleManager\ModuleManager;
+use Zend\ModuleManager\ModuleEvent;
 
 class AutoloaderListenerTest extends TestCase
 {
@@ -37,8 +38,8 @@ class AutoloaderListenerTest extends TestCase
         $autoloader->register();
 
         $this->moduleManager = new ModuleManager(array());
-        $this->moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
-        $this->moduleManager->getEventManager()->attach('loadModule', new AutoloaderListener, 2000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new AutoloaderListener, 2000);
     }
 
     public function tearDown()

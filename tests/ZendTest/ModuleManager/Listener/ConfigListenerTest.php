@@ -18,6 +18,7 @@ use Zend\ModuleManager\Listener\ConfigListener;
 use Zend\ModuleManager\Listener\ModuleResolverListener;
 use Zend\ModuleManager\Listener\ListenerOptions;
 use Zend\ModuleManager\ModuleManager;
+use Zend\ModuleManager\ModuleEvent;
 
 class ConfigListenerTest extends TestCase
 {
@@ -43,7 +44,7 @@ class ConfigListenerTest extends TestCase
         $autoloader->register();
 
         $this->moduleManager = new ModuleManager(array());
-        $this->moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
     }
 
     public function tearDown()
@@ -104,7 +105,7 @@ class ConfigListenerTest extends TestCase
         // Now we check to make sure it uses the config and doesn't hit
         // the module objects getConfig() method(s)
         $moduleManager = new ModuleManager(array('SomeModule', 'ListenerTestModule'));
-        $moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
         $configListener = new ConfigListener($options);
         $configListener->attach($moduleManager->getEventManager());
         $moduleManager->loadModules();
@@ -249,7 +250,7 @@ class ConfigListenerTest extends TestCase
         // This time, don't add the glob path
         $configListener = new ConfigListener($options);
         $moduleManager = new ModuleManager(array('SomeModule'));
-        $moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
 
         $moduleManager->getEventManager()->attachAggregate($configListener);
 
@@ -289,7 +290,7 @@ class ConfigListenerTest extends TestCase
         // This time, don't add the glob path
         $configListener = new ConfigListener($options);
         $moduleManager = new ModuleManager(array('SomeModule'));
-        $moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
 
         $moduleManager->getEventManager()->attachAggregate($configListener);
 

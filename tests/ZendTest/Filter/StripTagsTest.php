@@ -573,5 +573,5 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $this->_filter->setTagsAllowed('div');
         $this->_filter->setAttributesAllowed(array('id','data-custom'));
         $this->assertEquals($expected, $this->_filter->filter($input));
-    } 
+    }
 }

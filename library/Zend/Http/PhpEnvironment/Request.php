@@ -255,9 +255,8 @@ class Request extends HttpRequest
             || (!empty($this->serverParams['HTTP_X_FORWARDED_PROTO']) && $this->serverParams['HTTP_X_FORWARDED_PROTO'] == 'https')
         ) {
             $scheme = 'https';
-        }
-        else {
-	        $scheme = 'http';
+        } else {
+            $scheme = 'http';
         }
         $uri->setScheme($scheme);
 

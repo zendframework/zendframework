@@ -556,4 +556,16 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals($input, $this->_filter->filter($input));
     }
+
+    /**
+     * @link https://github.com/zendframework/zf2/issues/5465
+     */
+    public function testAttributeValueofZeroIsNotRemoved()
+    {
+        $input     = '<div id="0" data-custom="0" class="bogus"></div>';
+        $expected  = '<div id="0" data-custom="0"></div>';
+        $this->_filter->setTagsAllowed('div');
+        $this->_filter->setAttributesAllowed(array('id','data-custom'));
+        $this->assertEquals($expected, $this->_filter->filter($input));
+    }
 }

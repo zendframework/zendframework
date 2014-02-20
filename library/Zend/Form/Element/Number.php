@@ -49,7 +49,7 @@ class Number extends Element implements InputProviderInterface
         ));
 
         $inclusive = true;
-        if (!empty($this->attributes['inclusive'])) {
+        if (isset($this->attributes['inclusive'])) {
             $inclusive = $this->attributes['inclusive'];
         }
 

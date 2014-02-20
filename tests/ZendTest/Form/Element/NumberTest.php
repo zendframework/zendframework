@@ -89,4 +89,37 @@ class NumberTest extends TestCase
             }
         }
     }
+
+    public function testFalseInclusiveValidatorBasedOnAttributes()
+    {
+        $element = new NumberElement();
+        $element->setAttributes(array(
+            'inclusive' => false,
+            'min'       => 5,
+        ));
+
+        $inputSpec = $element->getInputSpecification();
+        foreach($inputSpec['validators'] as $validator) {
+            if (get_class($validator) == 'Zend\Validator\GreaterThan') {
+                $this->assertFalse($validator->getInclusive());
+                break;
+            }
+        }
+    }
+
+    public function testDefaultInclusiveTrueatValidatorWhenInclusiveIsNotSetOnAttributes()
+    {
+        $element = new NumberElement();
+        $element->setAttributes(array(
+            'min'       => 5,
+        ));
+
+        $inputSpec = $element->getInputSpecification();
+        foreach($inputSpec['validators'] as $validator) {
+            if (get_class($validator) == 'Zend\Validator\GreaterThan') {
+                $this->assertTrue($validator->getInclusive());
+                break;
+            }
+        }
+    }
 }

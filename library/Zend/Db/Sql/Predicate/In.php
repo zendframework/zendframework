@@ -95,7 +95,7 @@ class In implements PredicateInterface
                     $identifiers = $identifier;
                     $specification = ' ( ' . implode(', ', array_fill(0, count($identifiers), '%s')) . ' ) ';
                     $specification .= ' IN %s';
-                    $values = array_merge($identifiers, array($values)); 
+                    $values = array_merge($identifiers, array($values));
                     $types = array_fill(0, count($identifiers), self::TYPE_IDENTIFIER);
                     $types[] = self::TYPE_VALUE;
                     return array(array(

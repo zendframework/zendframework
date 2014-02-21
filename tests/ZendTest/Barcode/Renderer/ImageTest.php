@@ -287,7 +287,7 @@ class ImageTest extends TestCommon
         $this->renderer->setTransparentBackground(false);
         $this->assertFalse($this->renderer->getTransparentBackground());
 
-        //Test PNG output
+        //Test Gif output
         $this->renderer->setImageType('gif');
         $image = $this->renderer->draw();
         $index = imagecolortransparent($image);
@@ -323,7 +323,7 @@ class ImageTest extends TestCommon
         $this->renderer->setTransparentBackground(true);
         $this->assertTrue($this->renderer->getTransparentBackground());
 
-        //Test PNG output
+        //Test Gif output
         $this->renderer->setImageType('gif');
         $image = $this->renderer->draw();
         $index = imagecolortransparent($image);

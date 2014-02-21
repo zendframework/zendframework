@@ -226,6 +226,8 @@ class Image extends AbstractRenderer
             $backgroundColor & 0x0000FF
         );
 
+        // JPEG does not support transparency, if transparentBackground is true and 
+        // image type is JPEG, ignore transparency
         if($this->getImageType() != "jpeg" && $this->transparentBackground) {
             imagecolortransparent($this->resource, $this->imageBackgroundColor);
         }

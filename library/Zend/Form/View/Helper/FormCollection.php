@@ -305,7 +305,7 @@ class FormCollection extends AbstractHelper
      *   string
      * 3. The template span-tag. This might also be an empty string
      *
-     * The preset default is <pre><fieldset>%2$s%2$s%3$s</fieldset></pre>
+     * The preset default is <pre><fieldset>%2$s%1$s%3$s</fieldset></pre>
      *
      * @param string $wrapper
      *

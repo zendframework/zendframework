@@ -92,17 +92,17 @@ class In implements PredicateInterface
         $identifier = $this->getIdentifier();
         if ($values instanceof Select) {
             if (is_array($identifier)) {
-                    $identifiers = $identifier;
-                    $specification = ' ( ' . implode(', ', array_fill(0, count($identifiers), '%s')) . ' ) ';
-                    $specification .= ' IN %s';
-                    $values = array_merge($identifiers, array($values));
-                    $types = array_fill(0, count($identifiers), self::TYPE_IDENTIFIER);
-                    $types[] = self::TYPE_VALUE;
-                    return array(array(
-                        $specification,
-                        $values,
-                        $types,
-                    ));
+                $identifiers = $identifier;
+                $specification = ' ( ' . implode(', ', array_fill(0, count($identifiers), '%s')) . ' ) ';
+                $specification .= ' IN %s';
+                $values = array_merge($identifiers, array($values));
+                $types = array_fill(0, count($identifiers), self::TYPE_IDENTIFIER);
+                $types[] = self::TYPE_VALUE;
+                return array(array(
+                    $specification,
+                    $values,
+                    $types,
+                ));
             }
             $specification = $this->selectSpecification;
             $types = array(self::TYPE_VALUE);

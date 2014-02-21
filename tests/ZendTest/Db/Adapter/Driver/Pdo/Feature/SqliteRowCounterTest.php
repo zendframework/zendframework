@@ -7,11 +7,11 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Db\Adapter\Driver\Pdo;
+namespace ZendTest\Db\Adapter\Driver\Pdo\Feature;
 
 use PHPUnit_Framework_TestCase;
 use Zend\Db\Adapter\Driver\Pdo\Feature\SqliteRowCounter;
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\Driver\Pdo\Statement;
 
 class SqliteRowCounterTest extends PHPUnit_Framework_TestCase
 {
@@ -28,5 +28,13 @@ class SqliteRowCounterTest extends PHPUnit_Framework_TestCase
     public function testGetName()
     {
         $this->assertEquals('SqliteRowCounter', $this->rowcounter->getName());
+    }
+
+    public function testGetCountForStatement()
+    {
+        $statement = new Statement;
+        $statement->setDriver($this->getMock('Zend\Db\Adapter\Driver\Pdo\Pdo', array('prepare'), array(), '', false));
+
+        $this->rowcounter->getCountForStatement($statement);
     }
 }

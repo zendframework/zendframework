@@ -89,7 +89,21 @@ class In implements PredicateInterface
     public function getExpressionData()
     {
         $values = $this->getValueSet();
+        $identifier = $this->getIdentifier();
         if ($values instanceof Select) {
+            if (is_array($identifier)) {
+                    $identifiers = $identifier;
+                    $specification = ' ( ' . implode(', ', array_fill(0, count($identifiers), '%s')) . ' ) ';
+                    $specification .= ' IN %s';
+                    $values = array_merge($identifiers, array($values)); 
+                    $types = array_fill(0, count($identifiers), self::TYPE_IDENTIFIER);
+                    $types[] = self::TYPE_VALUE;
+                    return array(array(
+                        $specification,
+                        $values,
+                        $types,
+                    ));
+            }
             $specification = $this->selectSpecification;
             $types = array(self::TYPE_VALUE);
             $values = array($values);
@@ -98,7 +112,6 @@ class In implements PredicateInterface
             $types = array_fill(0, count($values), self::TYPE_VALUE);
         }
 
-        $identifier = $this->getIdentifier();
         array_unshift($values, $identifier);
         array_unshift($types, self::TYPE_IDENTIFIER);
 

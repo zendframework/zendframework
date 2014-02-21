@@ -25,16 +25,44 @@ class SqliteRowCounterTest extends PHPUnit_Framework_TestCase
         $this->rowcounter = new SqliteRowCounter();
     }
 
+    /**
+     * @covers SqliteRowCounter::getName
+     */
     public function testGetName()
     {
         $this->assertEquals('SqliteRowCounter', $this->rowcounter->getName());
     }
 
+    /**
+     * @covers SqliteRowCounter::getCountForStatement
+     */
     public function testGetCountForStatement()
     {
         $statement = new Statement;
         $statement->setDriver($this->getMock('Zend\Db\Adapter\Driver\Pdo\Pdo', array('prepare'), array(), '', false));
 
         $this->rowcounter->getCountForStatement($statement);
+    }
+
+    /**
+     * @covers SqliteRowCounter::getCountForSql
+     */
+    public function testGetCountForSql()
+    {
+        $this->markTestIncomplete('Need to Count Row');
+        $this->rowcounter->getCountForSql("select * from foo");
+    }
+
+    /**
+     * @covers SqliteRowCounter::getRowCountClosure
+     */
+    public function testGetRowCountClosure()
+    {
+        $this->markTestIncomplete('Need to Count Row on $context ');
+
+        $this->rowcounter->getRowCountClosure("select * from foo");
+        $statement = new Statement;
+        $statement->setDriver($this->getMock('Zend\Db\Adapter\Driver\Pdo\Pdo', array('prepare'), array(), '', false));
+        $this->rowcounter->getRowCountClosure($statement);
     }
 }

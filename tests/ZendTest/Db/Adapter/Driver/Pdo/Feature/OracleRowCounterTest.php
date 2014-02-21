@@ -10,7 +10,6 @@
 namespace ZendTest\Db\Adapter\Driver\Pdo\Feature;
 
 use PHPUnit_Framework_TestCase;
-use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\Pdo\Feature\OracleRowCounter;
 use Zend\Db\Adapter\Driver\Pdo\Statement;
 
@@ -26,16 +25,44 @@ class OracleRowCounterTest extends PHPUnit_Framework_TestCase
         $this->rowcounter = new OracleRowCounter();
     }
 
+    /**
+     * @covers OracleRowCounter::getName
+     */
     public function testGetName()
     {
         $this->assertEquals('OracleRowCounter', $this->rowcounter->getName());
     }
 
+    /**
+     * @covers OracleRowCounter::getCountForStatement
+     */
     public function testGetCountForStatement()
     {
         $statement = new Statement;
         $statement->setDriver($this->getMock('Zend\Db\Adapter\Driver\Pdo\Pdo', array('prepare'), array(), '', false));
 
         $this->rowcounter->getCountForStatement($statement);
+    }
+
+    /**
+     * @covers OracleRowCounter::getCountForSql
+     */
+    public function testGetCountForSql()
+    {
+        $this->markTestIncomplete('Need to Count Row');
+        $this->rowcounter->getCountForSql("select * from foo");
+    }
+
+    /**
+     * @covers OracleRowCounter::getRowCountClosure
+     */
+    public function testGetRowCountClosure()
+    {
+        $this->markTestIncomplete('Need to Count Row on $context ');
+
+        $this->rowcounter->getRowCountClosure("select * from foo");
+        $statement = new Statement;
+        $statement->setDriver($this->getMock('Zend\Db\Adapter\Driver\Pdo\Pdo', array('prepare'), array(), '', false));
+        $this->rowcounter->getRowCountClosure($statement);
     }
 }

@@ -48,7 +48,7 @@ class ValueGenerator extends AbstractGenerator
     /**
      * @var int
      */
-    protected $arrayDepth = 1;
+    protected $arrayDepth = 0;
 
     /**
      * @var string

@@ -11,6 +11,8 @@ namespace Zend\Code\Generator;
 
 class PropertyValueGenerator extends ValueGenerator
 {
+    protected $arrayDepth = 1;
+
     /**
      * @return string
      */

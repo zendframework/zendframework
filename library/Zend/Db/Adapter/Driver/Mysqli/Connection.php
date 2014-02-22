@@ -284,7 +284,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         if (!$this->inTransaction) {
-            throw new Exception\RuntimeException('Must call commit() before you can rollback.');
+            throw new Exception\RuntimeException('Must call beginTransaction() before you can rollback.');
         }
 
         $this->resource->rollback();

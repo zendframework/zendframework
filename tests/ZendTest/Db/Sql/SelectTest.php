@@ -1157,6 +1157,18 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processOffset' => array('?')
         );
 
+        //combine and union with order at the end
+        $select46 = new Select;
+        $select46->from('foo')->where('a = b');
+        $select46b = new Select;
+        $select46b->from('bar')->where('c = d');
+        $select46->combine($select46b, Select::COMBINE_UNION, 'ALL')->order(array('a DESC'));
+        $sqlPrep46 = // same
+        $sqlStr46 = '( SELECT "foo".* FROM "foo" WHERE a = b ) UNION ALL ( SELECT "bar".* FROM "bar" WHERE c = d ) ORDER BY "a" DESC';
+        $internalTests46 = array(
+            'processCombine' => array('UNION ALL', 'SELECT "bar".* FROM "bar" WHERE c = d')
+        );
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -1213,6 +1225,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select43, $sqlPrep43, array(),    $sqlStr43, $internalTests43),
             array($select44, $sqlPrep44, array(),    $sqlStr44, $internalTests44),
             array($select45, $sqlPrep45, $params45,  $sqlStr45, $internalTests45),
+            array($select46, $sqlPrep46, array(),  $sqlStr46, $internalTests46),
         );
     }
 }

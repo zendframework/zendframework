@@ -128,7 +128,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     protected $where = null;
 
     /**
-     * @var null|string
+     * @var array
      */
     protected $order = array();
 
@@ -499,7 +499,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 $this->offset = null;
                 break;
             case self::ORDER:
-                $this->order = null;
+                $this->order = array();
                 break;
             case self::COMBINE:
                 $this->combine = array();

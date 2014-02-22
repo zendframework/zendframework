@@ -588,7 +588,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select->order('foo asc');
         $this->assertEquals(array('foo asc'), $select->getRawState(Select::ORDER));
         $select->reset(Select::ORDER);
-        $this->assertNull($select->getRawState(Select::ORDER));
+        $this->assertEmpty($select->getRawState(Select::ORDER));
     }
 
     /**

@@ -43,6 +43,10 @@ class LazyServiceFactoryFactory implements FactoryInterface
 
         $factoryConfig = new Configuration();
 
+        if (isset($lazyServices['proxies_namespace'])) {
+            $factoryConfig->setProxiesNamespace($lazyServices['proxies_namespace']);
+        }
+
         if (isset($lazyServices['proxies_target_dir'])) {
             $factoryConfig->setProxiesTargetDir($lazyServices['proxies_target_dir']);
         }
@@ -53,10 +57,6 @@ class LazyServiceFactoryFactory implements FactoryInterface
             spl_autoload_register($factoryConfig->getProxyAutoloader());
 
             $factoryConfig->setGeneratorStrategy(new EvaluatingGeneratorStrategy());
-        }
-
-        if (isset($lazyServices['proxies_namespace'])) {
-            $factoryConfig->setProxiesNamespace($lazyServices['proxies_namespace']);
         }
 
         return new LazyServiceFactory(new LazyLoadingValueHolderFactory($factoryConfig), $lazyServices['class_map']);

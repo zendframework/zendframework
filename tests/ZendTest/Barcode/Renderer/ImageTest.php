@@ -276,6 +276,78 @@ class ImageTest extends TestCommon
         parent::testTopOffsetOverrideVerticalPosition();
     }
 
+    /**
+     * @group 4708
+     */
+    public function testImageGifWithNoTransparency()
+    {
+        $barcode = new Object\Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
+        $this->renderer->setTransparentBackground(false);
+        $this->assertFalse($this->renderer->getTransparentBackground());
+
+        //Test Gif output
+        $this->renderer->setImageType('gif');
+        $image = $this->renderer->draw();
+        $index = imagecolortransparent($image);
+        $this->assertEquals($index, -1);
+    }
+
+    /**
+     * @group 4708
+     */
+    public function testImagePngWithNoTransparency()
+    {
+        $barcode = new Object\Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
+        $this->renderer->setTransparentBackground(false);
+        $this->assertFalse($this->renderer->getTransparentBackground());
+
+        //Test PNG output
+        $this->renderer->setImageType('png');
+        $image = $this->renderer->draw();
+        $index = imagecolortransparent($image);
+        $this->assertEquals($index, -1);
+    }
+
+    /**
+     * @group 4708
+     */
+    public function testImageGifWithTransparency()
+    {
+        $barcode = new Object\Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
+        $this->renderer->setTransparentBackground(true);
+        $this->assertTrue($this->renderer->getTransparentBackground());
+
+        //Test Gif output
+        $this->renderer->setImageType('gif');
+        $image = $this->renderer->draw();
+        $index = imagecolortransparent($image);
+        $this->assertTrue($index !== -1);
+    }
+
+    /**
+     * @group 4708
+     */
+    public function testImagePngWithTransparency()
+    {
+        $barcode = new Object\Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
+        $this->renderer->setTransparentBackground(true);
+        $this->assertTrue($this->renderer->getTransparentBackground());
+
+        //Test PNG output
+        $this->renderer->setImageType('png');
+        $image = $this->renderer->draw();
+        $index = imagecolortransparent($image);
+        $this->assertTrue($index !== -1);
+    }
+
     protected function checkTTFRequirement()
     {
         if (!function_exists('imagettfbbox')) {

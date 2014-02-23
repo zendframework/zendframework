@@ -43,6 +43,13 @@ class Svg extends AbstractRenderer
      */
     protected $userWidth = 0;
 
+
+    /**
+     * Flag to determime if drawPolygon has been run once already
+     * @var bool
+     */
+    protected $drawPolygonExecuted = false;
+
     /**
      * Set height of the result image
      * @param null|int $value
@@ -152,12 +159,17 @@ class Svg extends AbstractRenderer
         }
         $this->adjustPosition($height, $width);
 
-        $this->appendRootElement('rect',
-                          array('x' => $this->leftOffset,
-                                'y' => $this->topOffset,
-                                'width' => ($this->leftOffset + $barcodeWidth - 1),
-                                'height' => ($this->topOffset + $barcodeHeight - 1),
-                                'fill' => $imageBackgroundColor));
+        $rect = array('x' => $this->leftOffset,
+            'y' => $this->topOffset,
+            'width' => ($this->leftOffset + $barcodeWidth - 1),
+            'height' => ($this->topOffset + $barcodeHeight - 1),
+            'fill' => $imageBackgroundColor);
+
+        if($this->transparentBackground) {
+            $rect['fill-opacity'] = 0;
+        }
+
+        $this->appendRootElement('rect', $rect);
     }
 
     protected function readRootElement()
@@ -309,6 +321,17 @@ class Svg extends AbstractRenderer
         $newPoints = implode(' ', $newPoints);
         $attributes['points'] = $newPoints;
         $attributes['fill'] = $color;
+
+        // SVG passes a rect in as the first call to drawPolygon, we'll need to intercept
+        // this and set transparency if necessary.
+        $objId = spl_object_hash($this);
+        if(!$this->drawPolygonExecuted) {
+            if($this->transparentBackground) {
+                $attributes['fill-opacity'] = '0';
+            }
+            $this->drawPolygonExecuted = true;
+        }
+
         $this->appendRootElement('polygon', $attributes);
     }
 

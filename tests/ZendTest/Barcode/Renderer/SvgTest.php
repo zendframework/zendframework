@@ -24,6 +24,42 @@ class SvgTest extends TestCommon
         return new Svg($options);
     }
 
+    /**
+     * @group 4708
+     *
+     * Needs to be run first due to runOnce static on drawPolygon
+     */
+    public function testSvgNoTransparency()
+    {
+        $svgCompare = file_get_contents(__DIR__ . '/_files/svg_transparency.xml');
+
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        $barcode = new Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
+        $this->assertFalse($this->renderer->getTransparentBackground());
+        $svgOutput = $this->renderer->draw()->saveXML();
+        $this->assertNotEquals($svgCompare, $svgOutput);
+    }
+
+    /**
+     * @group 4708
+     *
+     * Needs to be run first due to runOnce static on drawPolygon
+     */
+    public function testSvgTransparency()
+    {
+        $svgCompare = file_get_contents(__DIR__ . '/_files/svg_transparency.xml');
+
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        $barcode = new Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+        $this->renderer->setTransparentBackground(true);
+        $this->assertTrue($this->renderer->getTransparentBackground());
+        $svgOutput = $this->renderer->draw()->saveXML();
+        $this->assertEquals($svgCompare, $svgOutput);
+    }
+
     public function testType()
     {
         $this->assertSame('svg', $this->renderer->getType());
@@ -105,4 +141,5 @@ class SvgTest extends TestCommon
         $svg->appendChild($rootElement);
         return $this->renderer->setResource($svg);
     }
+
 }

@@ -1,7 +1,7 @@
 POST \/ HTTP\/1\.1
 Host: example\.com
 Connection: close
-Accept-encoding: gzip, deflate
+Accept-Encoding: gzip, deflate
 User-Agent: Zend_Http_Client
 Content-Type: multipart\/form-data; boundary=---ZENDHTTPCLIENT-\w+
 Content-Length: \d+

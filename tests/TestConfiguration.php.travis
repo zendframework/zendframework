@@ -38,6 +38,12 @@ defined('TESTS_ZEND_FORM_ANNOTATION_SUPPORT') || define('TESTS_ZEND_FORM_ANNOTAT
 defined('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED') || define('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED', false);
 
 /**
+ * Zend\Http
+ */
+/* Online Tests */
+defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || define('TESTS_ZEND_HTTP_CLIENT_ONLINE', true);
+
+/**
  * Zend\Cache\Storage\Adapter
  */
 defined('TESTS_ZEND_CACHE_APC_ENABLED') || define('TESTS_ZEND_CACHE_APC_ENABLED', true);

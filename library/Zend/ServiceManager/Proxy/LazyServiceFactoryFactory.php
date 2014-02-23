@@ -51,15 +51,10 @@ class LazyServiceFactoryFactory implements FactoryInterface
             $factoryConfig->setGeneratorStrategy(new EvaluatingGeneratorStrategy());
         }
 
-        if (isset($lazyServices['auto_generate_proxies'])) {
-            $factoryConfig->setAutoGenerateProxies($lazyServices['auto_generate_proxies']);
+        if (isset($lazyServices['auto_generate_proxies']) && ! $lazyServices['auto_generate_proxies']) {
+            spl_autoload_register($factoryConfig->getProxyAutoloader());
 
-            // register the proxy autoloader if the proxies already exist
-            if (!$lazyServices['auto_generate_proxies']) {
-                spl_autoload_register($factoryConfig->getProxyAutoloader());
-
-                $factoryConfig->setGeneratorStrategy(new EvaluatingGeneratorStrategy());
-            }
+            $factoryConfig->setGeneratorStrategy(new EvaluatingGeneratorStrategy());
         }
 
         //if (!isset($lazyServicesConfig['runtime_evaluate_proxies']))

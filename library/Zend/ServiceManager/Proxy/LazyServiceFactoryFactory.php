@@ -47,17 +47,13 @@ class LazyServiceFactoryFactory implements FactoryInterface
             $factoryConfig->setProxiesTargetDir($lazyServices['proxies_target_dir']);
         }
 
-        if (!isset($lazyServices['write_proxy_files']) || ! $lazyServices['write_proxy_files']) {
-            $factoryConfig->setGeneratorStrategy(new EvaluatingGeneratorStrategy());
-        }
-
-        if (isset($lazyServices['auto_generate_proxies']) && ! $lazyServices['auto_generate_proxies']) {
+        if ((!isset($lazyServices['write_proxy_files']) || ! $lazyServices['write_proxy_files'])
+            || (isset($lazyServices['auto_generate_proxies']) && ! $lazyServices['auto_generate_proxies'])
+        ) {
             spl_autoload_register($factoryConfig->getProxyAutoloader());
 
             $factoryConfig->setGeneratorStrategy(new EvaluatingGeneratorStrategy());
         }
-
-        //if (!isset($lazyServicesConfig['runtime_evaluate_proxies']))
 
         if (isset($lazyServices['proxies_namespace'])) {
             $factoryConfig->setProxiesNamespace($lazyServices['proxies_namespace']);

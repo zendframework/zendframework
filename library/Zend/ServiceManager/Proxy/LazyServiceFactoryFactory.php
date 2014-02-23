@@ -54,10 +54,10 @@ class LazyServiceFactoryFactory implements FactoryInterface
         if ((!isset($lazyServices['write_proxy_files']) || ! $lazyServices['write_proxy_files'])
             || (isset($lazyServices['auto_generate_proxies']) && ! $lazyServices['auto_generate_proxies'])
         ) {
-            spl_autoload_register($factoryConfig->getProxyAutoloader());
-
             $factoryConfig->setGeneratorStrategy(new EvaluatingGeneratorStrategy());
         }
+
+        spl_autoload_register($factoryConfig->getProxyAutoloader());
 
         return new LazyServiceFactory(new LazyLoadingValueHolderFactory($factoryConfig), $lazyServices['class_map']);
     }

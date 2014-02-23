@@ -273,4 +273,39 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($parameters['where1']);
         $this->assertEquals($parameters['where2'], 'bar');
     }
+
+    /**
+     * @cover Zend\Validator\Db\RecordExists::getSelect
+     * @group ZF2-4521
+     */
+    public function testGetSelectWithSameValidatorTwice()
+    {
+        $validator = new RecordExists(
+            array(
+                'table' => 'users',
+                'schema' => 'my'
+            ),
+            'field1',
+            array(
+                'field' => 'foo',
+                'value' => 'bar'
+            ),
+            $this->getMockHasResult()
+        );
+        $select = $validator->getSelect();
+        $this->assertInstanceOf('Zend\Db\Sql\Select', $select);
+        $this->assertEquals('SELECT "my"."users"."field1" AS "field1" FROM "my"."users" WHERE "field1" = \'\' AND "foo" != \'bar\'', $select->getSqlString(new TrustingSql92Platform()));
+
+        // same validator instance with changing properties
+        $validator->setTable('othertable');
+        $validator->setSchema('otherschema');
+        $validator->setField('fieldother');
+        $validator->setExclude(array(
+            'field' => 'fieldexclude',
+            'value' => 'fieldvalueexclude',
+        ));
+        $select = $validator->getSelect();
+        $this->assertInstanceOf('Zend\Db\Sql\Select', $select);
+        $this->assertEquals('SELECT "otherschema"."othertable"."fieldother" AS "fieldother" FROM "otherschema"."othertable" WHERE "fieldother" = \'\' AND "fieldexclude" != \'fieldvalueexclude\'', $select->getSqlString(new TrustingSql92Platform()));
+    }
 }

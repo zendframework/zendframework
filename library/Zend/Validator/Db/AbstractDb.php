@@ -280,10 +280,6 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function getSelect()
     {
-        if ($this->select instanceof Select) {
-            return $this->select;
-        }
-
         // Build select object
         $select          = new Select();
         $tableIdentifier = new TableIdentifier($this->table, $this->schema);

@@ -140,42 +140,6 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
         spl_autoload_unregister($proxyAutoloader);
     }
 
-    public function testDontAutoGenerateProxyFiles()
-    {
-        $serviceManager = new ServiceManager();
-        $namespace = 'ZendTestProxy' . uniqid();
-
-        $serviceManager->setService(
-            'Config',
-            array(
-                'lazy_services' => array(
-                    'class_map' => array('foo' => __CLASS__),
-                    'proxies_namespace' => $namespace,
-                    'write_proxy_files' => true,
-                    'auto_generate_proxies' => true,
-                ),
-            )
-        );
-        $serviceManager->setFactory('foo-delegator', 'Zend\ServiceManager\Proxy\LazyServiceFactoryFactory');
-        $serviceManager->setInvokableClass('foo', __CLASS__);
-        $serviceManager->addDelegator('foo', 'foo-delegator');
-
-        /* @var $proxy self|\ProxyManager\Proxy\ValueHolderInterface|\ProxyManager\Proxy\LazyLoadingInterface */
-        $proxy = $serviceManager->create('foo');
-        $proxyClassName = get_class($proxy);
-
-        $this->assertInstanceOf('ProxyManager\\Proxy\\LazyLoadingInterface', $proxy);
-        $this->assertInstanceOf(__CLASS__, $proxy);
-        $this->assertStringMatchesFormat(
-            $namespace . '\__PM__\ZendTest\ServiceManager\Proxy\LazyServiceFactoryFactoryTest%s',
-            $proxyClassName
-        );
-        $this->assertFileExists(sys_get_temp_dir() . '/' . str_replace('\\', '', $proxyClassName) . '.php');
-        $this->assertFalse($proxy->isProxyInitialized());
-        $this->assertEquals($this->invalidConfigProvider(), $proxy->invalidConfigProvider());
-        $this->assertTrue($proxy->isProxyInitialized());
-    }
-
     /**
      * Provides invalid configuration
      *

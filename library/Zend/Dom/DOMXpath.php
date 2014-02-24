@@ -17,6 +17,7 @@ class DOMXPath extends \DOMXPath
 {
     /**
      * A stack of ErrorExceptions created via addError()
+     *
      * @var array
      */
     protected $errors = array(null);
@@ -56,7 +57,7 @@ class DOMXPath extends \DOMXPath
      */
     public function addError($errno, $errstr = '', $errfile = '', $errline = 0)
     {
-        $last_error = $this->errors[count($this->errors) - 1];
+        $last_error = end($this->errors);
         $this->errors[] = new ErrorException(
             $errstr,
             0,

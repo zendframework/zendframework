@@ -10,9 +10,7 @@
 namespace Zend\Dom;
 
 use DOMDocument;
-use DOMXPath;
-use ErrorException;
-use Zend\Stdlib\ErrorHandler;
+use Zend\Dom\DOMXPath;
 
 /**
  * Query DOM structures based on CSS selectors and/or XPath
@@ -317,10 +315,7 @@ class Query
         }
         $xpathQuery = (string) $xpathQuery;
 
-        ErrorHandler::start();
-        $nodeList = $xpath->query($xpathQuery);
-        ErrorHandler::stop(true);
-
+        $nodeList = $xpath->queryWithErrorException($xpathQuery);
         return $nodeList;
     }
 }

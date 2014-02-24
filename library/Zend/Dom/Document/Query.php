@@ -9,9 +9,8 @@
 
 namespace Zend\Dom\Document;
 
-use DOMXPath;
+use Zend\Dom\DOMXPath;
 use Zend\Dom\Document;
-use Zend\Stdlib\ErrorHandler;
 
 /**
  * Query object executable in a Zend\Dom\Document
@@ -51,10 +50,7 @@ class Query
             ($xpathPhpfunctions === true) ? $xpath->registerPHPFunctions() : $xpath->registerPHPFunctions($xpathPhpfunctions);
         }
 
-        ErrorHandler::start();
-        $nodeList = $xpath->query($expression);
-        ErrorHandler::stop(true);
-
+        $nodeList = $xpath->queryWithErrorException($expression);
         return new NodeList($nodeList);
     }
 

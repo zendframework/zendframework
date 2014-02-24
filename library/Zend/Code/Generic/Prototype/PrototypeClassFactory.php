@@ -80,7 +80,7 @@ class PrototypeClassFactory
 
     /**
      * @param string $name
-     * @return mixed
+     * @return string
      */
     protected function normalizeName($name)
     {
@@ -98,7 +98,7 @@ class PrototypeClassFactory
     }
 
     /**
-     * @param string$prototypeName
+     * @param  string $prototypeName
      * @return PrototypeInterface
      * @throws Exception\RuntimeException
      */

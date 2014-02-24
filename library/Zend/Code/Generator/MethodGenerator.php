@@ -129,7 +129,7 @@ class MethodGenerator extends AbstractMemberGenerator
     /**
      * @param  string $name
      * @param  array $parameters
-     * @param  int|array $flags
+     * @param  int $flags
      * @param  string $body
      * @param  DocBlockGenerator|string $docBlock
      */

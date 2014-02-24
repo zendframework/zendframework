@@ -13,5 +13,8 @@ use Reflector;
 
 interface ReflectionInterface extends Reflector
 {
+    /**
+     * @return string
+     */
     public function toString();
 }

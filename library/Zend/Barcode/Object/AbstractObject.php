@@ -1024,9 +1024,9 @@ abstract class AbstractObject implements ObjectInterface
     }
 
     /**
-     * Apply   rotation on a point in X/Y dimensions
-     * @param  float $x1     x-position before rotation
-     * @param  float $y1     y-position before rotation
+     * Apply rotation on a point in X/Y dimensions
+     * @param float $x1     x-position before rotation
+     * @param float $y1     y-position before rotation
      * @return int[]    Array of two elements corresponding to the new XY point
      */
     protected function rotate($x1, $y1)

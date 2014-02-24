@@ -387,6 +387,18 @@ class RequestTest extends TestCase
                 '443',
                 '/news',
             ),
+            // Test for HTTPS requests which are forwarded over a reverse proxy/load balancer
+            array(
+                array(
+                    'SERVER_NAME' => 'test.example.com',
+                    'SERVER_PORT' => '443',
+                    'HTTP_X_FORWARDED_PROTO' => 'https',
+                    'REQUEST_URI' => 'https://test.example.com/news',
+                ),
+                'test.example.com',
+                '443',
+                '/news',
+            ),
 
             //Test when url quert contains a full http url
             array(
@@ -415,6 +427,12 @@ class RequestTest extends TestCase
 
         $host = $request->getUri()->getHost();
         $this->assertEquals($expectedHost, $host);
+
+        $uriParts = parse_url($_SERVER['REQUEST_URI']);
+        if (isset($uriParts['scheme'])) {
+            $scheme = $request->getUri()->getScheme();
+            $this->assertEquals($uriParts['scheme'], $scheme);
+        }
 
         $port = $request->getUri()->getPort();
         $this->assertEquals($expectedPort, $port);

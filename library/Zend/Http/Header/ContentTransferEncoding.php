@@ -28,7 +28,7 @@ class ContentTransferEncoding implements HeaderInterface
         }
 
         // @todo implementation details
-        $header = new static($value);
+        $header = new static(strtolower($value));
 
         return $header;
     }

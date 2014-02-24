@@ -317,6 +317,6 @@ class JsonStrategyTest extends TestCase
         $content = $this->response->getContent();
         $headers = $this->response->getHeaders();
         $this->assertTrue($headers->has('content-transfer-encoding'));
-        $this->assertEquals('BINARY', $headers->get('content-transfer-encoding')->getFieldValue());
+        $this->assertEquals('binary', $headers->get('content-transfer-encoding')->getFieldValue());
     }
 }

@@ -350,7 +350,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         }
         $this->setExpectedException(
             'Zend\Http\Client\Adapter\Exception\RuntimeException',
-            'Unable to Connect to tcp://255.255.255.255:80');
+            'Unable to connect to 255.255.255.255:80');
 
         // Try to connect to an invalid host
         $this->_client->setUri('http://255.255.255.255');

@@ -80,6 +80,12 @@ abstract class AbstractRenderer implements RendererInterface
     protected $resource;
 
     /**
+     * Show a transparent background
+     * @var Boolean
+     */
+    protected $transparentBackground = false;
+
+    /**
      * Constructor
      * @param array|Traversable $options
      */
@@ -133,6 +139,28 @@ abstract class AbstractRenderer implements RendererInterface
     public function getRendererNamespace()
     {
         return $this->rendererNamespace;
+    }
+
+    /**
+     * Set whether background should be transparent
+     * Will work for SVG and Image (png and gif only)
+     *
+     * @param $bool
+     * @return $this
+     */
+    public function setTransparentBackground($bool)
+    {
+        $this->transparentBackground = $bool;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getTransparentBackground()
+    {
+        return $this->transparentBackground;
     }
 
     /**

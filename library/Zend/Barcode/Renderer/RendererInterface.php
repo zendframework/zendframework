@@ -19,6 +19,7 @@ interface RendererInterface
     /**
      * Constructor
      * @param array|\Traversable $options
+     * @return void
      */
     public function __construct($options = null);
 
@@ -79,6 +80,7 @@ interface RendererInterface
     /**
      * Activate/Deactivate the automatic rendering of exception
      * @param  bool $value
+     * @return self
      */
     public function setAutomaticRenderError($value);
 

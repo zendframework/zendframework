@@ -367,7 +367,7 @@ class Ldap extends AbstractAdapter
      * @param  string        $canonicalName
      * @param  string        $dn
      * @param  array         $adapterOptions
-     * @return string|true
+     * @return bool|string
      */
     protected function checkGroupMembership(ZendLdap\Ldap $ldap, $canonicalName, $dn, array $adapterOptions)
     {

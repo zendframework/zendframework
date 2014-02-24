@@ -358,7 +358,7 @@ class Posix extends AbstractAdapter
      * Change TTY (Console) mode
      *
      * @link  http://en.wikipedia.org/wiki/Stty
-     * @param $mode
+     * @param string $mode
      */
     protected function setTTYMode($mode)
     {

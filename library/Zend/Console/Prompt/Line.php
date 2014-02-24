@@ -51,7 +51,7 @@ class Line extends AbstractPrompt
     /**
      * Show the prompt to user and return the answer.
      *
-     * @return mixed
+     * @return string
      */
     public function show()
     {

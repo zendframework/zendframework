@@ -64,7 +64,7 @@ class Windows extends Virtual
     /**
      * Determine and return current console height.
      *
-     * @return false|int
+     * @return int
      */
     public function getHeight()
     {

@@ -103,7 +103,7 @@ class Ean5 extends Ean13
 
         return ($checksum % 10);
     }
-    
+
     /**
      * @param int $i
      */

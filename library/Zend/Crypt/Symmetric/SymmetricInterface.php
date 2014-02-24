@@ -15,7 +15,7 @@ interface SymmetricInterface
      * @param string $data
      */
     public function encrypt($data);
-    
+
     /**
      * @param string $data
      */
@@ -25,7 +25,7 @@ interface SymmetricInterface
      * @param string $key
      */
     public function setKey($key);
-    
+
     public function getKey();
 
     public function getKeySize();
@@ -33,7 +33,7 @@ interface SymmetricInterface
     public function getAlgorithm();
 
     /**
-     * @param  string $algo 
+     * @param  string $algo
      */
     public function setAlgorithm($algo);
 
@@ -43,7 +43,7 @@ interface SymmetricInterface
      * @param string|false $salt
      */
     public function setSalt($salt);
-    
+
     public function getSalt();
 
     public function getSaltSize();

@@ -517,6 +517,7 @@ class SessionConfigTest extends \PHPUnit_Framework_TestCase
     public function cacheLimiters()
     {
         return array(
+            array(''),
             array('nocache'),
             array('public'),
             array('private'),

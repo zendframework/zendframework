@@ -126,6 +126,7 @@ class Logger implements LoggerInterface
     public function __construct($options = null)
     {
         $this->writers = new SplPriorityQueue();
+        $this->processors = new SplPriorityQueue();
 
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
@@ -145,6 +146,20 @@ class Logger implements LoggerInterface
                     $this->addWriter($writer['name'], $priority, $writerOptions);
                 }
             }
+            if (isset($options['processors']) && is_array($options['processors'])) {
+                foreach ($options['processors'] as $processor) {
+
+                    if (!isset($processor['name'])) {
+                        throw new Exception\InvalidArgumentException('Options must contain a name for the processor');
+                    }
+
+                    $priority = (isset($processor['priority'])) ? $processor['priority'] : null;
+                    $processorOptions = (isset($processor['options'])) ? $processor['options'] : null;
+
+                    $this->addProcessor($processor['name'], $priority, $processorOptions);
+                }
+            }
+
 
             if (isset($options['exceptionhandler']) && $options['exceptionhandler'] === true) {
                 static::registerExceptionHandler($this);
@@ -158,7 +173,6 @@ class Logger implements LoggerInterface
             throw new Exception\InvalidArgumentException('Options must be an array or an object implementing \Traversable ');
         }
 
-        $this->processors = new SplPriorityQueue();
     }
 
     /**

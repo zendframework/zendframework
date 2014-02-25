@@ -298,6 +298,24 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $writers[0]->getLogSeparator());
     }
 
+    public function testOptionsWithMockAndProcessor()
+    {
+        $options = array('writers' => array(
+                             'first_writer' => array(
+                                 'name'     => 'mock',
+                             )
+                        ),
+                        'processors' => array(
+                            'first_processor' => array(
+                                'name'      => 'requestid',
+                            ),
+                        ));
+        $logger = new Logger($options);
+        $processors = $logger->getProcessors()->toArray();
+        $this->assertCount(1, $processors);
+        $this->assertInstanceOf('Zend\Log\Processor\RequestId', $processors[0]);
+    }
+
     public function testAddProcessor()
     {
         $processor = new Backtrace();

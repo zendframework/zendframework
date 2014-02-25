@@ -32,6 +32,9 @@ abstract class AbstractFeature extends AbstractTableGateway
         $this->tableGateway = $tableGateway;
     }
 
+    /**
+     * @return AbstractTableGateway
+     */
     public function getTableGateway()
     {
         return $this->tableGateway;

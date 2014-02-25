@@ -15,6 +15,10 @@ use Zend\Db\Metadata\Object\ConstraintObject;
 
 class FeatureSetTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @cover FeatureSet::addFeature
+     * @group ZF2-4993
+     */
     public function testAddFeatureThatFeatureDoesnotHasTableGatewayButFeatureSetHas()
     {
        $mockMasterAdapter = $this->getMock(
@@ -54,6 +58,10 @@ class FeatureSetTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Db\TableGateway\Feature\FeatureSet', $featureSet->addFeature($feature));
     }
 
+    /**
+     * @cover FeatureSet::addFeature
+     * @group ZF2-4993
+     */
     public function testAddFeatureThatFeatureHasTableGatewayButFeatureSetDoesnotHas()
     {
         $tableGatewayMock = $this->getMockForAbstractClass('Zend\Db\TableGateway\AbstractTableGateway');

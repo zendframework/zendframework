@@ -65,8 +65,10 @@ class FeatureSet
 
     public function addFeature(AbstractFeature $feature)
     {
+        if (!$feature->getTableGateway() instanceof AbstractTableGateway && $this->tableGateway instanceof AbstractTableGateway) {
+            $feature->setTableGateway($this->tableGateway);
+        }
         $this->features[] = $feature;
-        $feature->setTableGateway($feature);
         return $this;
     }
 

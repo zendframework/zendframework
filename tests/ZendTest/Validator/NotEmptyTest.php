@@ -363,7 +363,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     public function testMultiConstantNotation()
     {
         $filter = new NotEmpty(
-            NotEmpty::ZERO + NotEmpty::STRING + NotEmpty::BOOLEAN
+            NotEmpty::ZERO | NotEmpty::STRING | NotEmpty::BOOLEAN
         );
 
         $this->assertFalse($filter->isValid(false));

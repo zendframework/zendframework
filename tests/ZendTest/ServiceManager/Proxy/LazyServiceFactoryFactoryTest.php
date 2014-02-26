@@ -124,7 +124,6 @@ class LazyServiceFactoryFactoryTest extends \PHPUnit_Framework_TestCase
                  'lazy_services' => array(
                      'class_map'             => array('foo' => __CLASS__),
                      'proxies_namespace'     => $namespace,
-                     'auto_generate_proxies' => false,
                  ),
             )
         );

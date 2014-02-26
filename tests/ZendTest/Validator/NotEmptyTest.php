@@ -67,6 +67,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
             array(array(5), true),
             array(0.0, false),
             array(1.0, true),
+            array(new stdClass(), true),
         );
     }
 
@@ -587,6 +588,25 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that the validator follows expected behavior
+     *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
+     * @return void
+     *
+     * @dataProvider multiConstantNotationProvider
+     */
+    public function testMultiConstantBooleanOrNotation($value, $valid)
+    {
+        $this->validator = new NotEmpty(
+            NotEmpty::ZERO | NotEmpty::STRING | NotEmpty::BOOLEAN
+        );
+
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
      * Provides values and their expected validity for boolean empty
      *
      * @return array
@@ -652,6 +672,37 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
             array(array('xxx'), true),
             array(null, true),
         );
+    }
+
+
+    /**
+     * Ensures that the validator follows expected behavior so if a string is specified more than once, it doesn't
+     * cause different validations to run
+     *
+     * @return void
+     */
+    public function testStringNotationWithDuplicate()
+    {
+        $filter = new NotEmpty(
+            array(
+                // Should only count as 'boolean'
+                'type' => array('boolean', 'boolean')
+            )
+        );
+
+        $this->assertFalse($filter->isValid(false));
+        $this->assertTrue($filter->isValid(true));
+        $this->assertTrue($filter->isValid(0));
+        $this->assertTrue($filter->isValid(1));
+        $this->assertTrue($filter->isValid((float) 0.0));
+        $this->assertTrue($filter->isValid((float) 1.0));
+        $this->assertTrue($filter->isValid(''));
+        $this->assertTrue($filter->isValid('abc'));
+        $this->assertTrue($filter->isValid('0'));
+        $this->assertTrue($filter->isValid('1'));
+        $this->assertTrue($filter->isValid(array()));
+        $this->assertTrue($filter->isValid(array('xxx')));
+        $this->assertTrue($filter->isValid(null));
     }
 
     /**

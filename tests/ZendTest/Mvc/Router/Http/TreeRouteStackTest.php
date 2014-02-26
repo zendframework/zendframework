@@ -427,6 +427,37 @@ class TreeRouteStackTest extends TestCase
         $this->assertEquals('/foo/bar', $stack->assemble(array(), array('name' => 'foo')));
     }
 
+    public function testChainRouteAssemblingWithChildrenAndSecureScheme()
+    {
+        $stack = new TreeRouteStack();
+
+        $uri = new \Zend\Uri\Http();
+        $uri->setHost('localhost');
+
+        $stack->setRequestUri($uri);
+        $stack->addRoute(
+            'foo',
+            array(
+                'type' => 'literal',
+                'options' => array(
+                    'route' => '/foo'
+                ),
+                'chain_routes' => array(
+                    array('type' => 'scheme', 'options' => array('scheme' => 'https'))
+                ),
+                'child_routes' => array(
+                    'baz' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/baz'
+                        ),
+                    )
+                )
+            )
+        );
+        $this->assertEquals('https://localhost/foo/baz', $stack->assemble(array(), array('name' => 'foo/baz')));
+    }
+
     public function testFactory()
     {
         $tester = new FactoryTester($this);

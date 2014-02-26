@@ -34,6 +34,10 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5865](https://github.com/zendframework/zf2/pull/5865) removes the dependency
+  on `Zend\Stdlib` in `Zend\Dom` by implementing PHP error handling directly in
+  the component. This makes the component more easily portable.
+
 - [#5840](https://github.com/zendframework/zf2/pull/5840) removes the class
   `Zend\Http\Client\Cookies`, as it was not used inside the framework itself,
   and could not be used with the HTTP client regardless.

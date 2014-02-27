@@ -9,6 +9,8 @@
 
 namespace Zend\Config\Writer;
 
+use Zend\Config\Exception;
+
 class PhpArray extends AbstractWriter
 {
     /**
@@ -49,6 +51,50 @@ class PhpArray extends AbstractWriter
     {
         $this->useBracketArraySyntax = $value;
         return $this;
+    }
+
+    /**
+     * toFile(): defined by Writer interface.
+     *
+     * @see    WriterInterface::toFile()
+     * @param  string  $filename
+     * @param  mixed   $config
+     * @param  bool $exclusiveLock
+     * @return void
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
+     */
+    public function toFile($filename, $config, $exclusiveLock = true)
+    {
+        if (empty($filename)) {
+            throw new Exception\InvalidArgumentException('No file name specified');
+        }
+
+        $flags = 0;
+        if ($exclusiveLock) {
+            $flags |= LOCK_EX;
+        }
+
+        set_error_handler(
+            function ($error, $message = '', $file = '', $line = 0) use ($filename) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Error writing to "%s": %s',
+                    $filename, $message
+                ), $error);
+            }, E_WARNING
+        );
+
+        try {
+            $string = $this->toString($config);
+            $string = str_replace("'" . dirname($filename), "__DIR__ . '", $string);
+
+            file_put_contents($filename, $string, $flags);
+        } catch (\Exception $e) {
+            restore_error_handler();
+            throw $e;
+        }
+
+        restore_error_handler();
     }
 
     /**

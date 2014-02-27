@@ -242,5 +242,8 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $filters = self::readAttribute($writer, 'filters');
         $this->assertCount(1, $filters);
         $this->assertEquals($filter, $filters[0]);
+
+        $registeredFormatter = self::readAttribute($writer, 'formatter');
+        $this->assertSame($formatter, $registeredFormatter);
     }
 }

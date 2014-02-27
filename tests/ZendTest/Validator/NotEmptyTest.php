@@ -33,12 +33,26 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
      * ZF-6708 introduces a change for validating integer 0; it is a valid
      * integer value. '0' is also valid.
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @group ZF-6708
      * @return void
+     * @dataProvider basicProvider
      */
-    public function testBasic()
+    public function testBasic($value, $valid)
     {
-        $valuesExpected = array(
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and expected validity for the basic test
+     *
+     * @return array
+     */
+    public function basicProvider()
+    {
+        return array(
             array('word', true),
             array('', false),
             array('    ', false),
@@ -51,251 +65,423 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
             array(null, false),
             array(array(), false),
             array(array(5), true),
+            array(0.0, false),
+            array(1.0, true),
         );
-        foreach ($valuesExpected as $i => $element) {
-            $this->assertEquals($element[1], $this->validator->isValid($element[0]),
-                "Failed test #$i");
-        }
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider booleanProvider
      */
-    public function testOnlyBoolean()
+    public function testOnlyBoolean($value, $valid)
     {
         $this->validator->setType(NotEmpty::BOOLEAN);
-        $this->assertFalse($this->validator->isValid(false));
-        $this->assertTrue($this->validator->isValid(true));
-        $this->assertTrue($this->validator->isValid(0));
-        $this->assertTrue($this->validator->isValid(1));
-        $this->assertTrue($this->validator->isValid(0.0));
-        $this->assertTrue($this->validator->isValid(1.0));
-        $this->assertTrue($this->validator->isValid(''));
-        $this->assertTrue($this->validator->isValid('abc'));
-        $this->assertTrue($this->validator->isValid('0'));
-        $this->assertTrue($this->validator->isValid('1'));
-        $this->assertTrue($this->validator->isValid(array()));
-        $this->assertTrue($this->validator->isValid(array('xxx')));
-        $this->assertTrue($this->validator->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function booleanProvider()
+    {
+        return array(
+            array(false, false),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', true),
+            array('abc', true),
+            array('0', true),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, true),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider integerOnlyProvider
      */
-    public function testOnlyInteger()
+    public function testOnlyInteger($value, $valid)
     {
         $this->validator->setType(NotEmpty::INTEGER);
-        $this->assertTrue($this->validator->isValid(false));
-        $this->assertTrue($this->validator->isValid(true));
-        $this->assertFalse($this->validator->isValid(0));
-        $this->assertTrue($this->validator->isValid(1));
-        $this->assertTrue($this->validator->isValid(0.0));
-        $this->assertTrue($this->validator->isValid(1.0));
-        $this->assertTrue($this->validator->isValid(''));
-        $this->assertTrue($this->validator->isValid('abc'));
-        $this->assertTrue($this->validator->isValid('0'));
-        $this->assertTrue($this->validator->isValid('1'));
-        $this->assertTrue($this->validator->isValid(array()));
-        $this->assertTrue($this->validator->isValid(array('xxx')));
-        $this->assertTrue($this->validator->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for when the validator is testing empty integer values
+     *
+     * @return array
+     */
+    public function integerOnlyProvider()
+    {
+        return array(
+            array(false, true),
+            array(true, true),
+            array(0, false),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', true),
+            array('abc', true),
+            array('0', true),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, true),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider floatOnlyProvider
      */
-    public function testOnlyFloat()
+    public function testOnlyFloat($value, $valid)
     {
         $this->validator->setType(NotEmpty::FLOAT);
-        $this->assertTrue($this->validator->isValid(false));
-        $this->assertTrue($this->validator->isValid(true));
-        $this->assertTrue($this->validator->isValid(0));
-        $this->assertTrue($this->validator->isValid(1));
-        $this->assertFalse($this->validator->isValid(0.0));
-        $this->assertTrue($this->validator->isValid(1.0));
-        $this->assertTrue($this->validator->isValid(''));
-        $this->assertTrue($this->validator->isValid('abc'));
-        $this->assertTrue($this->validator->isValid('0'));
-        $this->assertTrue($this->validator->isValid('1'));
-        $this->assertTrue($this->validator->isValid(array()));
-        $this->assertTrue($this->validator->isValid(array('xxx')));
-        $this->assertTrue($this->validator->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function floatOnlyProvider()
+    {
+        return array(
+            array(false, true),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, false),
+            array(1.0, true),
+            array('', true),
+            array('abc', true),
+            array('0', true),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, true),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider stringOnlyProvider
      */
-    public function testOnlyString()
+    public function testOnlyString($value, $valid)
     {
         $this->validator->setType(NotEmpty::STRING);
-        $this->assertTrue($this->validator->isValid(false));
-        $this->assertTrue($this->validator->isValid(true));
-        $this->assertTrue($this->validator->isValid(0));
-        $this->assertTrue($this->validator->isValid(1));
-        $this->assertTrue($this->validator->isValid(0.0));
-        $this->assertTrue($this->validator->isValid(1.0));
-        $this->assertFalse($this->validator->isValid(''));
-        $this->assertTrue($this->validator->isValid('abc'));
-        $this->assertTrue($this->validator->isValid('0'));
-        $this->assertTrue($this->validator->isValid('1'));
-        $this->assertTrue($this->validator->isValid(array()));
-        $this->assertTrue($this->validator->isValid(array('xxx')));
-        $this->assertTrue($this->validator->isValid(null));
+        $this->checkValidationValue($value, $valid);
     }
 
     /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function stringOnlyProvider()
+    {
+        return array(
+            array(false, true),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', false),
+            array('abc', true),
+            array('0', true),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, true),
+        );
+    }
+    /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider zeroOnlyProvider
      */
-    public function testOnlyZero()
+    public function testOnlyZero($value, $valid)
     {
         $this->validator->setType(NotEmpty::ZERO);
-        $this->assertTrue($this->validator->isValid(false));
-        $this->assertTrue($this->validator->isValid(true));
-        $this->assertTrue($this->validator->isValid(0));
-        $this->assertTrue($this->validator->isValid(1));
-        $this->assertTrue($this->validator->isValid(0.0));
-        $this->assertTrue($this->validator->isValid(1.0));
-        $this->assertTrue($this->validator->isValid(''));
-        $this->assertTrue($this->validator->isValid('abc'));
-        $this->assertFalse($this->validator->isValid('0'));
-        $this->assertTrue($this->validator->isValid('1'));
-        $this->assertTrue($this->validator->isValid(array()));
-        $this->assertTrue($this->validator->isValid(array('xxx')));
-        $this->assertTrue($this->validator->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function zeroOnlyProvider()
+    {
+        return array(
+            array(false, true),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', true),
+            array('abc', true),
+            array('0', false),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, true),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider arrayOnlyProvider
      */
-    public function testOnlyArray()
+    public function testOnlyArray($value, $valid)
     {
         $this->validator->setType(NotEmpty::EMPTY_ARRAY);
-        $this->assertTrue($this->validator->isValid(false));
-        $this->assertTrue($this->validator->isValid(true));
-        $this->assertTrue($this->validator->isValid(0));
-        $this->assertTrue($this->validator->isValid(1));
-        $this->assertTrue($this->validator->isValid(0.0));
-        $this->assertTrue($this->validator->isValid(1.0));
-        $this->assertTrue($this->validator->isValid(''));
-        $this->assertTrue($this->validator->isValid('abc'));
-        $this->assertTrue($this->validator->isValid('0'));
-        $this->assertTrue($this->validator->isValid('1'));
-        $this->assertFalse($this->validator->isValid(array()));
-        $this->assertTrue($this->validator->isValid(array('xxx')));
-        $this->assertTrue($this->validator->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function arrayOnlyProvider()
+    {
+        return array(
+            array(false, true),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', true),
+            array('abc', true),
+            array('0', true),
+            array('1', true),
+            array(array(), false),
+            array(array('xxx'), true),
+            array(null, true),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider nullOnlyProvider
      */
-    public function testOnlyNull()
+    public function testOnlyNull($value, $valid)
     {
         $this->validator->setType(NotEmpty::NULL);
-        $this->assertTrue($this->validator->isValid(false));
-        $this->assertTrue($this->validator->isValid(true));
-        $this->assertTrue($this->validator->isValid(0));
-        $this->assertTrue($this->validator->isValid(1));
-        $this->assertTrue($this->validator->isValid(0.0));
-        $this->assertTrue($this->validator->isValid(1.0));
-        $this->assertTrue($this->validator->isValid(''));
-        $this->assertTrue($this->validator->isValid('abc'));
-        $this->assertTrue($this->validator->isValid('0'));
-        $this->assertTrue($this->validator->isValid('1'));
-        $this->assertTrue($this->validator->isValid(array()));
-        $this->assertTrue($this->validator->isValid(array('xxx')));
-        $this->assertFalse($this->validator->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function nullOnlyProvider()
+    {
+        return array(
+            array(false, true),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', true),
+            array('abc', true),
+            array('0', true),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, false),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider phpOnlyProvider
      */
-    public function testOnlyPHP()
+    public function testOnlyPHP($value, $valid)
     {
         $this->validator->setType(NotEmpty::PHP);
-        $this->assertFalse($this->validator->isValid(false));
-        $this->assertTrue($this->validator->isValid(true));
-        $this->assertFalse($this->validator->isValid(0));
-        $this->assertTrue($this->validator->isValid(1));
-        $this->assertFalse($this->validator->isValid(0.0));
-        $this->assertTrue($this->validator->isValid(1.0));
-        $this->assertFalse($this->validator->isValid(''));
-        $this->assertTrue($this->validator->isValid('abc'));
-        $this->assertFalse($this->validator->isValid('0'));
-        $this->assertTrue($this->validator->isValid('1'));
-        $this->assertFalse($this->validator->isValid(array()));
-        $this->assertTrue($this->validator->isValid(array('xxx')));
-        $this->assertFalse($this->validator->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function phpOnlyProvider()
+    {
+        return array(
+            array(false, false),
+            array(true, true),
+            array(0, false),
+            array(1, true),
+            array(0.0, false),
+            array(1.0, true),
+            array('', false),
+            array('abc', true),
+            array('0', false),
+            array('1', true),
+            array(array(), false),
+            array(array('xxx'), true),
+            array(null, false),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider spaceOnlyProvider
      */
-    public function testOnlySpace()
+    public function testOnlySpace($value, $valid)
     {
         $this->validator->setType(NotEmpty::SPACE);
-        $this->assertTrue($this->validator->isValid(false));
-        $this->assertTrue($this->validator->isValid(true));
-        $this->assertTrue($this->validator->isValid(0));
-        $this->assertTrue($this->validator->isValid(1));
-        $this->assertTrue($this->validator->isValid(0.0));
-        $this->assertTrue($this->validator->isValid(1.0));
-        $this->assertTrue($this->validator->isValid(''));
-        $this->assertTrue($this->validator->isValid('abc'));
-        $this->assertTrue($this->validator->isValid('0'));
-        $this->assertTrue($this->validator->isValid('1'));
-        $this->assertTrue($this->validator->isValid(array()));
-        $this->assertTrue($this->validator->isValid(array('xxx')));
-        $this->assertTrue($this->validator->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function spaceOnlyProvider()
+    {
+        return array(
+            array(false, true),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', true),
+            array('abc', true),
+            array('0', true),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, true),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider onlyAllProvider
      */
-    public function testOnlyAll()
+    public function testOnlyAll($value, $valid)
     {
         $this->validator->setType(NotEmpty::ALL);
-        $this->assertFalse($this->validator->isValid(false));
-        $this->assertTrue($this->validator->isValid(true));
-        $this->assertFalse($this->validator->isValid(0));
-        $this->assertTrue($this->validator->isValid(1));
-        $this->assertFalse($this->validator->isValid(0.0));
-        $this->assertTrue($this->validator->isValid(1.0));
-        $this->assertFalse($this->validator->isValid(''));
-        $this->assertTrue($this->validator->isValid('abc'));
-        $this->assertFalse($this->validator->isValid('0'));
-        $this->assertTrue($this->validator->isValid('1'));
-        $this->assertFalse($this->validator->isValid(array()));
-        $this->assertTrue($this->validator->isValid(array('xxx')));
-        $this->assertFalse($this->validator->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function onlyAllProvider()
+    {
+        return array(
+            array(false, false),
+            array(true, true),
+            array(0, false),
+            array(1, true),
+            array(0.0, false),
+            array(1.0, true),
+            array('', false),
+            array('abc', true),
+            array('0', false),
+            array('1', true),
+            array(array(), false),
+            array(array('xxx'), true),
+            array(null, false),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider arrayConstantNotationProvider
      */
-    public function testArrayConstantNotation()
+    public function testArrayConstantNotation($value, $valid)
     {
-        $filter = new NotEmpty(
+        $this->validator = new NotEmpty(
             array(
                 'type' => array(
                     NotEmpty::ZERO,
@@ -305,29 +491,46 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertFalse($filter->isValid(false));
-        $this->assertTrue($filter->isValid(true));
-        $this->assertTrue($filter->isValid(0));
-        $this->assertTrue($filter->isValid(1));
-        $this->assertTrue($filter->isValid(0.0));
-        $this->assertTrue($filter->isValid(1.0));
-        $this->assertFalse($filter->isValid(''));
-        $this->assertTrue($filter->isValid('abc'));
-        $this->assertFalse($filter->isValid('0'));
-        $this->assertTrue($filter->isValid('1'));
-        $this->assertTrue($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
-        $this->assertTrue($filter->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function arrayConstantNotationProvider()
+    {
+        return array(
+            array(false, false),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', false),
+            array('abc', true),
+            array('0', false),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, true),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider arrayConfigNotationProvider
      */
-    public function testArrayConfigNotation()
+    public function testArrayConfigNotation($value, $valid)
     {
-        $filter = new NotEmpty(
+        $this->validator = new NotEmpty(
             array(
                 'type' => array(
                     NotEmpty::ZERO,
@@ -337,128 +540,206 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertFalse($filter->isValid(false));
-        $this->assertTrue($filter->isValid(true));
-        $this->assertTrue($filter->isValid(0));
-        $this->assertTrue($filter->isValid(1));
-        $this->assertTrue($filter->isValid(0.0));
-        $this->assertTrue($filter->isValid(1.0));
-        $this->assertFalse($filter->isValid(''));
-        $this->assertTrue($filter->isValid('abc'));
-        $this->assertFalse($filter->isValid('0'));
-        $this->assertTrue($filter->isValid('1'));
-        $this->assertTrue($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
-        $this->assertTrue($filter->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function arrayConfigNotationProvider()
+    {
+        return array(
+            array(false, false),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', false),
+            array('abc', true),
+            array('0', false),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, true),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider multiConstantNotationProvider
      */
-    public function testMultiConstantNotation()
+    public function testMultiConstantNotation($value, $valid)
     {
-        $filter = new NotEmpty(
+        $this->validator = new NotEmpty(
             NotEmpty::ZERO + NotEmpty::STRING + NotEmpty::BOOLEAN
         );
 
-        $this->assertFalse($filter->isValid(false));
-        $this->assertTrue($filter->isValid(true));
-        $this->assertTrue($filter->isValid(0));
-        $this->assertTrue($filter->isValid(1));
-        $this->assertTrue($filter->isValid(0.0));
-        $this->assertTrue($filter->isValid(1.0));
-        $this->assertFalse($filter->isValid(''));
-        $this->assertTrue($filter->isValid('abc'));
-        $this->assertFalse($filter->isValid('0'));
-        $this->assertTrue($filter->isValid('1'));
-        $this->assertTrue($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
-        $this->assertTrue($filter->isValid(null));
+        $this->checkValidationValue($value, $valid);
     }
 
     /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function multiConstantNotationProvider()
+    {
+        return array(
+            array(false, false),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', false),
+            array('abc', true),
+            array('0', false),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, true),
+        );
+    }
+    /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider stringNotationProvider
      */
-    public function testStringNotation()
+    public function testStringNotation($value, $valid)
     {
-        $filter = new NotEmpty(
+        $this->validator = new NotEmpty(
             array(
                 'type' => array('zero', 'string', 'boolean')
             )
         );
 
-        $this->assertFalse($filter->isValid(false));
-        $this->assertTrue($filter->isValid(true));
-        $this->assertTrue($filter->isValid(0));
-        $this->assertTrue($filter->isValid(1));
-        $this->assertTrue($filter->isValid(0.0));
-        $this->assertTrue($filter->isValid(1.0));
-        $this->assertFalse($filter->isValid(''));
-        $this->assertTrue($filter->isValid('abc'));
-        $this->assertFalse($filter->isValid('0'));
-        $this->assertTrue($filter->isValid('1'));
-        $this->assertTrue($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
-        $this->assertTrue($filter->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function stringNotationProvider()
+    {
+        return array(
+            array(false, false),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', false),
+            array('abc', true),
+            array('0', false),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, true),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider singleStringNotationProvider
      */
-    public function testSingleStringNotation()
+    public function testSingleStringNotation($value, $valid)
     {
-        $filter = new NotEmpty(
+        $this->validator = new NotEmpty(
             'boolean'
         );
+        $this->checkValidationValue($value, $valid);
+    }
 
-        $this->assertFalse($filter->isValid(false));
-        $this->assertTrue($filter->isValid(true));
-        $this->assertTrue($filter->isValid(0));
-        $this->assertTrue($filter->isValid(1));
-        $this->assertTrue($filter->isValid(0.0));
-        $this->assertTrue($filter->isValid(1.0));
-        $this->assertTrue($filter->isValid(''));
-        $this->assertTrue($filter->isValid('abc'));
-        $this->assertTrue($filter->isValid('0'));
-        $this->assertTrue($filter->isValid('1'));
-        $this->assertTrue($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
-        $this->assertTrue($filter->isValid(null));
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function singleStringNotationProvider()
+    {
+        return array(
+            array(false, false),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', true),
+            array('abc', true),
+            array('0', true),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, true),
+        );
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
      * @return void
+     *
+     * @dataProvider configObjectProvider
      */
-    public function testConfigObject()
+    public function testConfigObject($value, $valid)
     {
         $options = array('type' => 'all');
         $config  = new \Zend\Config\Config($options);
 
-        $filter = new NotEmpty(
+        $this->validator = new NotEmpty(
             $config
         );
 
-        $this->assertFalse($filter->isValid(false));
-        $this->assertTrue($filter->isValid(true));
-        $this->assertFalse($filter->isValid(0));
-        $this->assertTrue($filter->isValid(1));
-        $this->assertFalse($filter->isValid(0.0));
-        $this->assertTrue($filter->isValid(1.0));
-        $this->assertFalse($filter->isValid(''));
-        $this->assertTrue($filter->isValid('abc'));
-        $this->assertFalse($filter->isValid('0'));
-        $this->assertTrue($filter->isValid('1'));
-        $this->assertFalse($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
-        $this->assertFalse($filter->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function configObjectProvider()
+    {
+        return array(
+            array(false, false),
+            array(true, true),
+            array(0, false),
+            array(1, true),
+            array(0.0, false),
+            array(1.0, true),
+            array('', false),
+            array('abc', true),
+            array('0', false),
+            array('1', true),
+            array(array(), false),
+            array(array('xxx'), true),
+            array(null, false),
+        );
     }
 
     /**
@@ -544,46 +825,79 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     public function testStringObjects()
     {
         $valid = new NotEmpty(NotEmpty::STRING);
-        $object = new ClassTest2();
+
+        $object = $this->getMockBuilder('\stdClass')
+            ->setMethods(array('__toString'))
+            ->getMock();
+
+        $object->expects($this->atLeastOnce())
+            ->method('__toString')
+            ->will($this->returnValue('Test'));
 
         $this->assertFalse($valid->isValid($object));
 
         $valid = new NotEmpty(NotEmpty::OBJECT_STRING);
         $this->assertTrue($valid->isValid($object));
 
-        $object = new ClassTest3();
+        $object = $this->getMockBuilder('\stdClass')
+            ->setMethods(array('__toString'))
+            ->getMock();
+        $object->expects($this->atLeastOnce())
+            ->method('__toString')
+            ->will($this->returnValue(''));
+
         $this->assertFalse($valid->isValid($object));
     }
 
     /**
      * @group ZF-11566
+     *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
+     * @dataProvider arrayConfigNotationWithoutKeyProvider
      */
-    public function testArrayConfigNotationWithoutKey()
+    public function testArrayConfigNotationWithoutKey($value, $valid)
     {
-        $filter = new NotEmpty(
+        $this->validator = new NotEmpty(
             array('zero', 'string', 'boolean')
         );
 
-        $this->assertFalse($filter->isValid(false));
-        $this->assertTrue($filter->isValid(true));
-        $this->assertTrue($filter->isValid(0));
-        $this->assertTrue($filter->isValid(1));
-        $this->assertTrue($filter->isValid(0.0));
-        $this->assertTrue($filter->isValid(1.0));
-        $this->assertFalse($filter->isValid(''));
-        $this->assertTrue($filter->isValid('abc'));
-        $this->assertFalse($filter->isValid('0'));
-        $this->assertTrue($filter->isValid('1'));
-        $this->assertTrue($filter->isValid(array()));
-        $this->assertTrue($filter->isValid(array('xxx')));
-        $this->assertTrue($filter->isValid(null));
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
+     * Provides values and their expected validity for boolean empty
+     *
+     * @return array
+     */
+    public function arrayConfigNotationWithoutKeyProvider()
+    {
+        return array(
+            array(false, false),
+            array(true, true),
+            array(0, true),
+            array(1, true),
+            array(0.0, true),
+            array(1.0, true),
+            array('', false),
+            array('abc', true),
+            array('0', false),
+            array('1', true),
+            array(array(), true),
+            array(array('xxx'), true),
+            array(null, true),
+        );
     }
 
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+        $this->assertAttributeEquals(
+            $validator->getOption('messageTemplates'),
+            'messageTemplates',
+            $validator
+        );
     }
 
     public function testTypeAutoDetectionHasNoSideEffect()
@@ -591,20 +905,23 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
         $validator = new NotEmpty(array('translatorEnabled' => true));
         $this->assertEquals(493, $validator->getType());
     }
-}
 
-class ClassTest2
-{
-    public function __toString()
+    /**
+     * Checks that the validation value matches the expected validity
+     *
+     * @param mixed $value Value to validate
+     * @param bool  $valid Expected validity
+     *
+     * @return void
+     */
+    protected function checkValidationValue($value, $valid)
     {
-        return 'Test';
-    }
-}
+        $isValid = $this->validator->isValid($value);
 
-class ClassTest3
-{
-    public function toString()
-    {
-        return '';
+        if ($valid) {
+            $this->assertTrue($isValid);
+        } else {
+            $this->assertFalse($isValid);
+        }
     }
 }

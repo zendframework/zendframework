@@ -87,7 +87,9 @@ class Db extends AbstractWriter
             $this->separator = $separator;
         }
 
-        $this->setFormatter(new DbFormatter());
+        if (!$this->hasFormatter()) {
+            $this->setFormatter(new DbFormatter());
+        }
     }
 
     /**

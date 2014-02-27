@@ -32,14 +32,6 @@ abstract class AbstractFeature extends AbstractTableGateway
         $this->tableGateway = $tableGateway;
     }
 
-    /**
-     * @return AbstractTableGateway
-     */
-    public function getTableGateway()
-    {
-        return $this->tableGateway;
-    }
-
     public function initialize()
     {
         throw new Exception\RuntimeException('This method is not intended to be called on this object.');

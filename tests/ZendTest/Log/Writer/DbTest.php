@@ -245,5 +245,8 @@ class DbTest extends \PHPUnit_Framework_TestCase
 
         $registeredFormatter = self::readAttribute($writer, 'formatter');
         $this->assertSame($formatter, $registeredFormatter);
+
+        $registeredDb = self::readAttribute($writer, 'db');
+        $this->assertSame($this->db, $registeredDb);
     }
 }

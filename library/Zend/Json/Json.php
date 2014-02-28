@@ -12,7 +12,7 @@ namespace Zend\Json;
 use SimpleXMLElement;
 use Zend\Json\Exception\RecursionException;
 use Zend\Json\Exception\RuntimeException;
-use Zend\Xml\Security as XmlSecurity;
+use ZendXml\Security as XmlSecurity;
 
 /**
  * Class for encoding to and decoding from JSON.

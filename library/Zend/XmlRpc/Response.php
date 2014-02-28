@@ -9,7 +9,7 @@
 
 namespace Zend\XmlRpc;
 
-use Zend\Xml\Security as XmlSecurity;
+use ZendXml\Security as XmlSecurity;
 
 /**
  * XmlRpc Response
@@ -155,7 +155,7 @@ class Response
 
         try {
             $xml = XmlSecurity::scan($response);
-        } catch (\Zend\Xml\Exception\RuntimeException $e) {
+        } catch (\ZendXml\Exception\RuntimeException $e) {
             $this->fault = new Fault(651);
             $this->fault->setEncoding($this->getEncoding());
             return false;

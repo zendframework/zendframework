@@ -21,12 +21,12 @@ class TranslatorAwareTreeRouteStackTest extends TestCase
      * @var string
      */
     protected $testFilesDir;
-    
+
     /**
      * @var Translator
      */
     protected $translator;
-    
+
     /**
      * @var array
      */
@@ -39,7 +39,7 @@ class TranslatorAwareTreeRouteStackTest extends TestCase
         $this->translator = new Translator();
         $this->translator->addTranslationFile('phpArray', $this->testFilesDir . '/tokens.en.php', 'route', 'en');
         $this->translator->addTranslationFile('phpArray', $this->testFilesDir . '/tokens.de.php', 'route', 'de');
-        
+
         $this->fooRoute = array(
             'type' => 'Segment',
             'options' => array(
@@ -131,7 +131,7 @@ class TranslatorAwareTreeRouteStackTest extends TestCase
 
         $stack->assemble(array(), array('name' => 'test', 'translator' => $translator, 'uri' => $uri));
     }
-    
+
     public function testAssembleRouteWithParameterLocale()
     {
         $stack = new TranslatorAwareTreeRouteStack();

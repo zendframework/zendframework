@@ -387,7 +387,6 @@ class Posix extends AbstractAdapter
             } else {
                 $code = sprintf($code, $color::BACKGROUND);
             }
-
             return $code;
         }
 
@@ -401,6 +400,7 @@ class Posix extends AbstractAdapter
 
             return static::$ansiColorMap[$type][$color];
         }
+
         return null;
     }
 }

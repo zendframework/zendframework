@@ -85,8 +85,10 @@ class PhpArray extends AbstractWriter
         );
 
         try {
-            $string = $this->toString($config);
-            $string = str_replace("'" . dirname($filename), "__DIR__ . '", $string);
+            $dirname = str_replace('\\', '\\\\', dirname($filename));
+
+            $string  = $this->toString($config);
+            $string  = str_replace("'" . $dirname, "__DIR__ . '", $string);
 
             file_put_contents($filename, $string, $flags);
         } catch (\Exception $e) {

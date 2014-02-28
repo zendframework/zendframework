@@ -144,8 +144,7 @@ class TranslatorAwareTreeRouteStackTest extends TestCase
         $this->assertEquals('/de/hauptseite', $stack->assemble(array('locale' => 'de'), array('name' => 'foo/index')));
         $this->assertEquals('/en/homepage',   $stack->assemble(array('locale' => 'en'), array('name' => 'foo/index')));
     }
-    
-    
+
     public function testMatchRouteWithParameterLocale()
     {
         $stack = new TranslatorAwareTreeRouteStack();

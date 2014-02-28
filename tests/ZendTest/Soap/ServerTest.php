@@ -941,7 +941,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     {
         $server = new Server();
         $beforeDebug = $server->fault(new \Exception('test'));
-        $server->setDebugMode();
+        $server->setDebugMode(true);
         $afterDebug = $server->fault(new \Exception('test'));
 
         $this->assertEquals('Unknown error', $beforeDebug->getMessage());

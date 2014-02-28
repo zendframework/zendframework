@@ -936,10 +936,12 @@ class Server implements ZendServerServer
      * In debug mode, all exceptions are send to the client.
      * @param bool $debug
      */
-    public function setDebugMode($debug = true)
+    public function setDebugMode($debug)
     {
         $this->debug = $debug;
+        return $this;
     }
+
     /**
      * Validate and register fault exception
      *

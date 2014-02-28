@@ -23,8 +23,8 @@ class In implements PredicateInterface
     /**
      * Constructor
      *
-     * @param null|string $identifier
-     * @param array       $valueSet
+     * @param null|string|array $identifier
+     * @param null|array|Select $valueSet
      */
     public function __construct($identifier = null, $valueSet = null)
     {
@@ -39,7 +39,7 @@ class In implements PredicateInterface
     /**
      * Set identifier for comparison
      *
-     * @param  string $identifier
+     * @param  string|array $identifier
      * @return In
      */
     public function setIdentifier($identifier)
@@ -52,7 +52,7 @@ class In implements PredicateInterface
     /**
      * Get identifier of comparison
      *
-     * @return null|string
+     * @return null|string|array
      */
     public function getIdentifier()
     {
@@ -62,7 +62,7 @@ class In implements PredicateInterface
     /**
      * Set set of values for IN comparison
      *
-     * @param  array                              $valueSet
+     * @param  array|Select                       $valueSet
      * @throws Exception\InvalidArgumentException
      * @return In
      */
@@ -78,6 +78,11 @@ class In implements PredicateInterface
         return $this;
     }
 
+    /**
+     * Gets set of values in IN comparision
+     *
+     * @return array|Select
+     */
     public function getValueSet()
     {
         return $this->valueSet;

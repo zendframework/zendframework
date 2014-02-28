@@ -99,6 +99,23 @@ class PhpArrayTest extends AbstractWriterTestCase
         $this->assertEquals($expected, $configString);
     }
 
+    public function testWriteConvertsPathToDirWhenWritingBackToFile()
+    {
+        $filename = $this->getTestAssetFileName();
+        file_put_contents($filename, file_get_contents(__DIR__ . '/_files/array.php'));
+
+        $this->writer->toFile($filename, include $filename);
+
+        // Ensure file endings are same
+        $expected = trim(file_get_contents(__DIR__ . '/_files/array.php'));
+        $expected = preg_replace("~\r\n|\n|\r~", PHP_EOL, $expected);
+
+        $result = trim(file_get_contents($filename));
+        $result = preg_replace("~\r\n|\n|\r~", PHP_EOL, $result);
+
+        $this->assertSame($expected, $result);
+    }
+
     public function testSetUseBracketArraySyntaxReturnsFluentInterface()
     {
         $this->assertSame($this->writer, $this->writer->setUseBracketArraySyntax(true));

@@ -21,6 +21,11 @@ class Address
      */
     protected $city;
 
+    /**
+     * @var array
+     */
+    protected $phones = array();
+
 
     /**
      * @param $street
@@ -56,5 +61,23 @@ class Address
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * @param array $phones
+     * @return Address
+     */
+    public function setPhones(array $phones)
+    {
+        $this->phones = $phones;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPhones()
+    {
+        return $this->phones;
     }
 }

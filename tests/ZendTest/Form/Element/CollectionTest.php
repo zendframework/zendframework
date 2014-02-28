@@ -712,4 +712,44 @@ class CollectionTest extends TestCase
             }
         };
     }
+
+    public function testNestedCollections()
+    {
+        // @see https://github.com/zendframework/zf2/issues/5640
+        $addressesFieldeset = new \ZendTest\Form\TestAsset\AddressFieldset();
+        $addressesFieldeset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+    
+        $phonesFieldset = new \ZendTest\Form\TestAsset\PhoneFieldset();
+        $phonesFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+    
+        $form = new Form();
+        $form->setHydrator(new ObjectPropertyHydrator());
+        $form->add(array(
+            'name' => 'addresses',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $addressesFieldeset,
+                'count' => 2
+            ),
+        ));
+    
+        $phone1 = new Phone();
+        $phone1->setNumber('0000000001');
+    
+        $phone2 = new Phone();
+        $phone2->setNumber('0000000002');
+    
+        $address1 = new Address();
+        $address1->setStreet('street');
+        $address1->setPhones(array($phone1));
+    
+        $address2 = new Address();
+        $address2->setStreet('street');
+        $address2->setPhones(array($phone2));
+    
+        $customer = new stdClass();
+        $customer->addresses = array($address1, $address2);
+    
+        $form->bind($customer);
+    }
 }

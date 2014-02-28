@@ -29,6 +29,16 @@ class AddressFieldset extends Fieldset implements InputFilterProviderInterface
 
         $this->add($street);
         $this->add($city);
+
+        $phones = new \Zend\Form\Element\Collection('phones');
+        $phones->setLabel('Phone numbers')
+               ->setOptions(array(
+                    'count'          => 2,
+                    'allow_add'      => true,
+                    'allow_remove'   => true,
+                    'target_element' => new PhoneFieldset(),
+               ));
+        $this->add($phones);
     }
 
     /**

@@ -244,6 +244,7 @@ abstract class AbstractAdapter implements AdapterInterface
             }
         }
 
+
         // Draw corners
         if ($lineStyle !== static::LINE_NONE) {
             if ($color !== null) {
@@ -520,7 +521,6 @@ abstract class AbstractAdapter implements AdapterInterface
         $f    = fopen('php://stdin','r');
         $line = stream_get_line($f, $maxLength, PHP_EOL);
         fclose($f);
-
         return rtrim($line,"\n\r");
     }
 
@@ -537,7 +537,6 @@ abstract class AbstractAdapter implements AdapterInterface
             $char = fread($f,1);
         } while ("" === $char || ($mask !== null && false === strstr($mask, $char)));
         fclose($f);
-
         return $char;
     }
 

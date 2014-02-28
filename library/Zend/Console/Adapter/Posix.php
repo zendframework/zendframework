@@ -235,7 +235,6 @@ class Posix extends AbstractAdapter
     {
         $color   = $this->getColorCode($color, 'fg');
         $bgColor = $this->getColorCode($bgColor, 'bg');
-
         return ($color !== null ? "\x1b[" . $color   . 'm' : '')
             . ($bgColor !== null ? "\x1b[" . $bgColor . 'm' : '')
             . $string
@@ -309,7 +308,6 @@ class Posix extends AbstractAdapter
         if ($this->isUtf8()) {
             return new Charset\Utf8;
         }
-
         return new Charset\DECSG();
     }
 
@@ -330,7 +328,6 @@ class Posix extends AbstractAdapter
         fclose($stream);
 
         $this->restoreTTYMode();
-
         return $char;
     }
 
@@ -404,7 +401,6 @@ class Posix extends AbstractAdapter
 
             return static::$ansiColorMap[$type][$color];
         }
-
         return null;
     }
 }

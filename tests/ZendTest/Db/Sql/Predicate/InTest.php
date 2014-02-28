@@ -68,7 +68,7 @@ class InTest extends TestCase
         ));
         $this->assertEquals($expected, $in->getExpressionData());
     }
-    
+
     public function testGetExpressionDataWithSubselectAndArrayIdentifier()
     {
         $in = new In(array('foo', 'bar'), $select = new Select);

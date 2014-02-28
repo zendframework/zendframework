@@ -277,7 +277,7 @@ class Segment implements RouteInterface
 
             $translator = $options['translator'];
             $textDomain = (isset($options['text_domain']) ? $options['text_domain'] : 'default');
-            $locale     = (isset($options['locale']) ? $options['locale'] : null);
+            $locale     = (isset($options['locale']) ? $options['locale'] : (isset($mergedParams['locale']) ? $mergedParams['locale'] : null));
         }
 
         $path      = '';

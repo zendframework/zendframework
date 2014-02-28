@@ -156,6 +156,10 @@ class Part extends TreeRouteStack implements RouteInterface
                 }
             }
 
+            if (isset($options['translator']) && null !== ($locale = $match->getParam('locale', null))) {
+                $options['locale'] = $locale;
+            }
+
             foreach ($this->routes as $name => $route) {
                 if (($subMatch = $route->match($request, $nextOffset, $options)) instanceof RouteMatch) {
                     if ($match->getLength() + $subMatch->getLength() + $pathOffset === $pathLength) {
@@ -187,7 +191,6 @@ class Part extends TreeRouteStack implements RouteInterface
         $options['has_child'] = (isset($options['name']));
 
         $path   = $this->route->assemble($params, $options);
-        $params = array_diff_key($params, array_flip($this->route->getAssembledParams()));
 
         if (!isset($options['name'])) {
             if (!$this->mayTerminate) {

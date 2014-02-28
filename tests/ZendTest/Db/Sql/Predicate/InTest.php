@@ -78,5 +78,5 @@ class InTest extends TestCase
             array($in::TYPE_IDENTIFIER, $in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
         ));
         $this->assertEquals($expected, $in->getExpressionData());
-    }    
+    }
 }

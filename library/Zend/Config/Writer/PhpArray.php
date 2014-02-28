@@ -85,6 +85,7 @@ class PhpArray extends AbstractWriter
         );
 
         try {
+            // for Windows, paths are escaped.
             $dirname = str_replace('\\', '\\\\', dirname($filename));
 
             $string  = $this->toString($config);

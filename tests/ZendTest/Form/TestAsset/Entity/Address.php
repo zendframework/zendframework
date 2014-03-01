@@ -29,7 +29,7 @@ class Address
 
     /**
      * @param $street
-     * @return Address
+     * @return self
      */
     public function setStreet($street)
     {
@@ -47,7 +47,7 @@ class Address
 
     /**
      * @param City $city
-     * @return Address
+     * @return self
      */
     public function setCity(City $city)
     {
@@ -65,7 +65,7 @@ class Address
 
     /**
      * @param array $phones
-     * @return Address
+     * @return self
      */
     public function setPhones(array $phones)
     {

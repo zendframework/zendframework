@@ -151,7 +151,7 @@ class PhoneNumber extends AbstractValidator
      */
     public function setCountry($country)
     {
-        $this->country = $country;
+        $this->country = strtoupper($country);
 
         return $this;
     }

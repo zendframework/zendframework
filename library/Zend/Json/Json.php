@@ -369,10 +369,12 @@ class Json
             } else {
                 $result .= ($inLiteral ?  '' : $prefix) . $token;
 
+                //remove escaped backslash sequences causing false positives in next check
+                $token = str_replace('\\', '', $token);
                 // Count # of unescaped double-quotes in token, subtract # of
                 // escaped double-quotes and if the result is odd then we are
                 // inside a string literal
-                if ((substr_count($token, "\"")-substr_count($token, "\\\"")) % 2 != 0) {
+                if ((substr_count($token, '"')-substr_count($token, '\\"')) % 2 != 0) {
                     $inLiteral = !$inLiteral;
                 }
             }

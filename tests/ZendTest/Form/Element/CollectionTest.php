@@ -548,7 +548,8 @@ class CollectionTest extends TestCase
         $productFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
 
         $mainFieldset = new Fieldset('shop');
-        $mainFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+        $mainFieldset->setObject(new stdClass);
+        $mainFieldset->setHydrator(new ObjectPropertyHydrator());
         $mainFieldset->add($productFieldset);
 
         $form = new Form();
@@ -561,7 +562,6 @@ class CollectionTest extends TestCase
                 'count' => 2
             ),
         ));
-        $form->get('collection')->setHydrator(new ObjectPropertyHydrator());
 
         $market = new stdClass();
 

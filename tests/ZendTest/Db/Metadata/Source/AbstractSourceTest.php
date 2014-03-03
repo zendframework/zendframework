@@ -61,4 +61,3 @@ class AbstractSourceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('DOWN', $constraintKeyObj->getForeignKeyDeleteRule());
     }
 }
- 

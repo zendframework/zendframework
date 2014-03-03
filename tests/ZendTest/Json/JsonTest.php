@@ -868,6 +868,19 @@ EOB;
         $this->assertSame($expected, $pretty);
     }
 
+    public function testPrettyPrintDoublequoteFollowingEscapedBackslashShouldNotBeTreatedAsEscaped()
+    {
+        $this->assertEquals(
+            "[\n\t1,\n\t\"\\\\\",\n\t3\n]",
+            Json\Json::prettyPrint(Json\Json::encode(array(1, '\\', 3)))
+        );
+
+        $this->assertEquals(
+            "{\n\t\"a\":\"\\\\\"\n}",
+           Json\Json::prettyPrint(Json\Json::encode(array('a' => '\\')))
+        );
+    }
+
     /**
      * @group ZF-11167
      */

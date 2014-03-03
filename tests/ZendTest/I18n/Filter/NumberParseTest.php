@@ -15,6 +15,13 @@ use NumberFormatter;
 
 class NumberParseTest extends TestCase
 {
+    public function setUp()
+    {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+    }
+
     public function testConstructWithOptions()
     {
         $filter = new NumberParseFilter(array(

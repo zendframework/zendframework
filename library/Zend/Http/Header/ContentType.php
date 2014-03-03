@@ -248,7 +248,13 @@ class ContentType implements HeaderInterface
     protected function splitMediaTypesFromString($criteria)
     {
         $mediaTypes = explode(',', $criteria);
-        array_walk($mediaTypes, 'trim');
+        array_walk(
+            $mediaTypes,
+            function (&$value) {
+                $value = trim($value);
+            }
+        );
+
         return $mediaTypes;
     }
 

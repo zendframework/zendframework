@@ -68,6 +68,7 @@ class AdapterAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @param string $service
      * @dataProvider providerValidService
+     * @requires extension mysqli
      */
     public function testValidService($service)
     {

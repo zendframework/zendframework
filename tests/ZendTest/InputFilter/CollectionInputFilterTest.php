@@ -355,6 +355,9 @@ class CollectionInputFilterTest extends TestCase
         $this->assertCount(2, $messages);
         $this->assertArrayHasKey('foo', $messages[0]);
         $this->assertArrayHasKey('bar', $messages[1]);
+
+        $this->assertCount(1, $messages[0]['foo']);
+        $this->assertCount(1, $messages[1]['bar']);
     }
 
     public function testSetValidationGroupUsingFormStyle()

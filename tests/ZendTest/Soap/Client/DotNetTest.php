@@ -10,6 +10,7 @@
 namespace ZendTest\Soap\Client;
 
 use PHPUnit_Framework_TestCase;
+use Zend\Soap\Client\Common;
 use Zend\Soap\Client\DotNet as DotNetClient;
 use ZendTest\Soap\TestAsset\MockCallUserFunc;
 
@@ -92,24 +93,36 @@ class DotNetTest extends PHPUnit_Framework_TestCase
      */
     public function testDefaultSoapClientRequestIsDoneWhenNotUsingNtlmAuthentication()
     {
-        if (version_compare(phpversion(), '5.5.6', '=') || version_compare(phpversion(), '5.5.7', '=')) {
-            $this->markTestSkipped('This test is incompatible with PHP 5.5.6-7 only, causes segfault.');
-        }
+        $unitTest = $this;
+        $soapClient = new Common(
+            function(Common $client, $request, $location, $action, $version, $oneWay = null) use ($unitTest) {
+                $unitTest->assertEquals('http://unit/test#TestMethod', $action);
+                $result = '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">'
+                    . '<s:Body>';
 
-        $soapClient = $this->getMock('Zend\Soap\Client\Common',
-                                     array('_doRequest'),
-                                     array(array($this->client, '_doRequest'),
-                                           null,
-                                           array('location' => 'http://unit/test',
-                                                 'uri'      => 'http://unit/test')));
+                $result .= '<TestMethodResponse xmlns="http://unit/test">'
+                    . '<TestMethodResult>'
+                    . '<TestMethodResult><dummy></dummy></TestMethodResult>'
+                    . '</TestMethodResult>'
+                    . '</TestMethodResponse>';
 
-        MockCallUserFunc::$mock = true;
+                $result .= '</s:Body>'
+                    . '</s:Envelope>';
+
+                return $result;
+            },
+            null,
+            array(
+                'location' => 'http://unit/test',
+                'uri'      => 'http://unit/test'
+            )
+        );
+        $this->assertAttributeEquals(false, 'useNtlm', $this->client);
+        $this->client->setOptions(array('authentication' => 'ntlm',
+            'login'          => 'username',
+            'password'       => 'testpass'));
         $this->client->setSoapClient($soapClient);
-        $this->client->TestMethod();
-
-        $this->assertSame('http://unit/test#TestMethod', MockCallUserFunc::$params[3]);
-
-        MockCallUserFunc::$mock = false;
+        $this->assertInstanceOf('stdClass', $this->client->TestMethod());
     }
 
     /**

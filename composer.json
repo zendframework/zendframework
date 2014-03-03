@@ -37,7 +37,6 @@
         "ircmaxell/random-lib": "dev-master",
         "ircmaxell/security-lib": "dev-master",
         "mikey179/vfsStream": "1.2.*",
-        "ocramius/proxy-manager": "0.5.*",
         "fabpot/php-cs-fixer": "*@dev",
         "phpunit/PHPUnit": "3.7.*",
         "satooshi/php-coveralls": "dev-master",
@@ -47,7 +46,7 @@
         "ext-intl": "ext/intl for i18n features (included in default builds of PHP)",
         "doctrine/annotations": "Doctrine Annotations >=1.0 for annotation features",
         "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable",
-        "ocramius/proxy-manager": "ProxyManager to handle lazy initialization of services",
+        "ocramius/proxy-manager": "ProxyManager 0.5.* to handle lazy initialization of services",
         "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",
         "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
     },

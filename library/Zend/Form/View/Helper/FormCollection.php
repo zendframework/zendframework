@@ -126,9 +126,14 @@ class FormCollection extends AbstractHelper
                 );
             }
 
+            $attributesString = $this->createAttributesString($attributes);
+            if (!empty($attributesString)) {
+                $attributesString = ' ' . $attributesString;
+            }
+
             $markup = sprintf(
-                '<fieldset %s>%s%s</fieldset>',
-                $this->createAttributesString($attributes),
+                '<fieldset%s>%s%s</fieldset>',
+                $attributesString,
                 $legend,
                 $markup
             );

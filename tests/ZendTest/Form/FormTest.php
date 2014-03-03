@@ -1764,4 +1764,18 @@ class FormTest extends TestCase
         $this->form->setData($data);
         $this->assertTrue($this->form->isValid());
     }
+
+    public function testCanSetUseInputFilterDefaultsViaArray()
+    {
+        $spec = array(
+            'name' => 'test',
+            'options' => array(
+                'use_input_filter_defaults' => false
+            )
+        );
+
+        $factory = new Factory();
+        $this->form = $factory->createForm($spec);
+        $this->assertFalse($this->form->useInputFilterDefaults());
+    }
 }

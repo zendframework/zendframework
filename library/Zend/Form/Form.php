@@ -146,6 +146,10 @@ class Form extends Fieldset implements FormInterface
             $this->setPreferFormInputFilter($options['prefer_form_input_filter']);
         }
 
+        if (isset($options['use_input_filter_defaults'])) {
+            $this->setUseInputFilterDefaults($options['use_input_filter_defaults']);
+        }
+
         return $this;
     }
 

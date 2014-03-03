@@ -11,7 +11,6 @@ namespace Zend\Log\Formatter;
 
 use DateTime;
 use Traversable;
-use Zend\Stdlib\ErrorHandler;
 
 class Base implements FormatterInterface
 {
@@ -84,21 +83,24 @@ class Base implements FormatterInterface
             $jsonFlags |= defined('JSON_UNESCAPED_UNICODE') ? JSON_UNESCAPED_UNICODE : 0;
         }
 
-        ErrorHandler::start();
+        // Error suppression is used in several of these cases as a fix for each of
+        // #5383 and #4616. Without it, #4616 fails whenever recursion occurs during
+        // json_encode() operations; usage of a dedicated error handler callback
+        // causes #5383 to fail when the Logger is being used as an error handler.
+        // The only viable solution here is error suppression, ugly as it may be.
         if ($value instanceof DateTime) {
             $value = $value->format($this->getDateTimeFormat());
         } elseif ($value instanceof Traversable) {
-            $value = json_encode(iterator_to_array($value), $jsonFlags);
+            $value = @json_encode(iterator_to_array($value), $jsonFlags);
         } elseif (is_array($value)) {
-            $value = json_encode($value, $jsonFlags);
+            $value = @json_encode($value, $jsonFlags);
         } elseif (is_object($value) && !method_exists($value, '__toString')) {
-            $value = sprintf('object(%s) %s', get_class($value), json_encode($value));
+            $value = sprintf('object(%s) %s', get_class($value), @json_encode($value));
         } elseif (is_resource($value)) {
             $value = sprintf('resource(%s)', get_resource_type($value));
         } elseif (!is_object($value)) {
             $value = gettype($value);
         }
-        ErrorHandler::stop();
 
         return (string) $value;
     }

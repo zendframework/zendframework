@@ -91,14 +91,16 @@ class ModuleManagerTest extends TestCase
     public function testCanLoadMultipleModules()
     {
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager  = new ModuleManager(array('BarModule', 'BazModule'));
+        $moduleManager  = new ModuleManager(array('BarModule', 'BazModule', 'SubModule\Sub'));
         $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('BarModule\Module', $loadedModules['BarModule']);
         $this->assertInstanceOf('BazModule\Module', $loadedModules['BazModule']);
+        $this->assertInstanceOf('SubModule\Sub\Module', $loadedModules['SubModule\Sub']);
         $this->assertInstanceOf('BarModule\Module', $moduleManager->getModule('BarModule'));
         $this->assertInstanceOf('BazModule\Module', $moduleManager->getModule('BazModule'));
+        $this->assertInstanceOf('SubModule\Sub\Module', $moduleManager->getModule('SubModule\Sub'));
         $this->assertNull($moduleManager->getModule('NotLoaded'));
         $config = $configListener->getMergedConfig();
         $this->assertSame('foo', $config->bar);

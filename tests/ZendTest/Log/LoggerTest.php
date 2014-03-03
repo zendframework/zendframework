@@ -427,7 +427,6 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
         $self = $this;
         register_shutdown_function(function () use ($writer, $self) {
-            ini_set('display_errors', true);
             $self->assertEquals($writer->events[0]['message'], 'Call to undefined method ZendTest\Log\LoggerTest::callToNonExistingMethod()');
         });
 

@@ -131,4 +131,26 @@ class CompilerDefinitionTest extends TestCase
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'setSomething'));
         $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'getSomething'));
     }
+
+    public function testHasMethodParameters()
+    {
+        $definition = new CompilerDefinition();
+        $definition->addDirectory(__DIR__ . '/../TestAsset/ConstructorInjection');
+        $definition->addDirectory(__DIR__ . '/../TestAsset/SetterInjection');
+        $definition->addDirectory(__DIR__ . '/../TestAsset/CompilerClasses');
+        $definition->compile();
+        
+        // constructor injection
+        $this->assertTrue($definition->hasMethodParameters('ZendTest\Di\TestAsset\ConstructorInjection\B', '__construct'));
+        // setter injection
+        $this->assertTrue($definition->hasMethodParameters('ZendTest\Di\TestAsset\SetterInjection\B', 'setA'));
+        // setter injection with method from derived class
+        $this->assertTrue($definition->hasMethodParameters('ZendTest\Di\TestAsset\CompilerClasses\D', 'setB'));
+        // class does not exist
+        $this->assertFalse($definition->hasMethodParameters('ZendTest\Di\TestAsset\ConstructorInjection\BB', '__construct'));
+        // method not existing
+        $this->assertFalse($definition->hasMethodParameters('ZendTest\Di\TestAsset\SetterInjection\B', 'setB'));
+        // method exists but has no parameters
+        $this->assertFalse($definition->hasMethodParameters('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', 'setFoo'));
+    }
 }

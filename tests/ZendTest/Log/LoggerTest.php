@@ -432,7 +432,6 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         });
 
         // Temporary hide errors, because we don't want the fatal error to fail the test
-        ini_set('display_errors', false);
-        $this->callToNonExistingMethod();
+        @$this->callToNonExistingMethod();
     }
 }

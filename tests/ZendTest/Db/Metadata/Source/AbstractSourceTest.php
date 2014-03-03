@@ -1,4 +1,11 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
 
 namespace ZendTest\Db\Metadata\Source;
 
@@ -6,7 +13,9 @@ use Zend\Db\Metadata\Source\AbstractSource;
 
 class AbstractSourceTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var AbstractSource */
+    /**
+     * @var AbstractSource
+     */
     protected $abstractSourceMock = null;
 
     public function setup()
@@ -48,7 +57,9 @@ class AbstractSourceTest extends \PHPUnit_Framework_TestCase
         $constraints = $this->abstractSourceMock->getConstraintKeys('bam_constraint', 'bar_table', 'foo_schema');
         $this->assertCount(1, $constraints);
 
-        /** @var \Zend\Db\Metadata\Object\ConstraintKeyObject $constraintKeyObj */
+        /**
+         * @var \Zend\Db\Metadata\Object\ConstraintKeyObject $constraintKeyObj
+         */
         $constraintKeyObj = $constraints[0];
         $this->assertInstanceOf('Zend\Db\Metadata\Object\ConstraintKeyObject', $constraintKeyObj);
 

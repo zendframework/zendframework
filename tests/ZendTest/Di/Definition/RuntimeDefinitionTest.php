@@ -102,4 +102,17 @@ class RuntimeDefinitionTest extends TestCase
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'setSomething'));
         $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'getSomething'));
     }
+
+    /**
+     * Test to see if we can introspect explicit classes
+     */
+    public function testExplicitClassesStillGetProccessedByIntrospectionStrategy()
+    {
+        $className = 'ZendTest\Di\TestAsset\ConstructorInjection\OptionalParameters';
+        $explicitClasses = array($className => true);
+        $definition = new RuntimeDefinition(null, $explicitClasses);
+
+        $this->assertTrue($definition->hasClass($className));
+        $this->assertSame(array("__construct"=> 3), $definition->getMethods($className));
+    }
 }

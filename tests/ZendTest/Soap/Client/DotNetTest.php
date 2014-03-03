@@ -12,7 +12,6 @@ namespace ZendTest\Soap\Client;
 use PHPUnit_Framework_TestCase;
 use Zend\Soap\Client\Common;
 use Zend\Soap\Client\DotNet as DotNetClient;
-use ZendTest\Soap\TestAsset\MockCallUserFunc;
 
 require_once __DIR__ . '/../TestAsset/call_user_func.php';
 
@@ -95,7 +94,7 @@ class DotNetTest extends PHPUnit_Framework_TestCase
     {
         $unitTest = $this;
         $soapClient = new Common(
-            function(Common $client, $request, $location, $action, $version, $oneWay = null) use ($unitTest) {
+            function (Common $client, $request, $location, $action, $version, $oneWay = null) use ($unitTest) {
                 $unitTest->assertEquals('http://unit/test#TestMethod', $action);
                 $result = '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">'
                     . '<s:Body>';

@@ -143,20 +143,67 @@ class ArrayUtilsTest extends TestCase
     public static function mergeArrays()
     {
         return array(
-            'merge-integer-and-string keys' => array(
+            'merge-integer-and-string-keys' => array(
                 array(
                     'foo',
-                    3 => 'bar',
-                    'baz' => 'baz'
+                    3     => 'bar',
+                    'baz' => 'baz',
+                    4     => array(
+                        'a',
+                        1 => 'b',
+                        'c',
+                    ),
                 ),
                 array(
                     'baz',
+                    4 => array(
+                        'd' => 'd',
+                    ),
                 ),
+                false,
                 array(
                     0     => 'foo',
                     3     => 'bar',
                     'baz' => 'baz',
-                    4     => 'baz'
+                    4     => array(
+                        'a',
+                        1 => 'b',
+                        'c',
+                    ),
+                    5     => 'baz',
+                    6     => array(
+                        'd' => 'd',
+                    ),
+                )
+            ),
+            'merge-integer-and-string-keys-preserve-numeric' => array(
+                array(
+                    'foo',
+                    3     => 'bar',
+                    'baz' => 'baz',
+                    4     => array(
+                        'a',
+                        1 => 'b',
+                        'c',
+                    ),
+                ),
+                array(
+                    'baz',
+                    4 => array(
+                        'd' => 'd',
+                    ),
+                ),
+                true,
+                array(
+                    0     => 'baz',
+                    3     => 'bar',
+                    'baz' => 'baz',
+                    4 => array(
+                        'a',
+                        1 => 'b',
+                        'c',
+                        'd' => 'd',
+                    ),
                 )
             ),
             'merge-arrays-recursively' => array(
@@ -170,6 +217,7 @@ class ArrayUtilsTest extends TestCase
                         'baz'
                     )
                 ),
+                false,
                 array(
                     'foo' => array(
                         0 => 'baz',
@@ -186,6 +234,7 @@ class ArrayUtilsTest extends TestCase
                     'foo' => 'baz',
                     'bar' => 'bat'
                 ),
+                false,
                 array(
                     'foo' => 'baz',
                     'bar' => 'bat'
@@ -203,6 +252,7 @@ class ArrayUtilsTest extends TestCase
                     null  => 'zad',
                     'god' => null
                 ),
+                false,
                 array(
                     'foo' => 'baz',
                     null  => 'zad',
@@ -359,9 +409,9 @@ class ArrayUtilsTest extends TestCase
     /**
      * @dataProvider mergeArrays
      */
-    public function testMerge($a, $b, $expected)
+    public function testMerge($a, $b, $preserveNumericKeys, $expected)
     {
-        $this->assertEquals($expected, ArrayUtils::merge($a, $b));
+        $this->assertEquals($expected, ArrayUtils::merge($a, $b, $preserveNumericKeys));
     }
 
     /**

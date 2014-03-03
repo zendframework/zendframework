@@ -116,7 +116,7 @@ class Rbac extends AbstractIterator
         }
 
         throw new Exception\InvalidArgumentException(sprintf(
-            'No child with name "%s" could be found',
+            'No role with name "%s" could be found',
             is_object($objectOrName) ? $objectOrName->getName() : $objectOrName
         ));
     }

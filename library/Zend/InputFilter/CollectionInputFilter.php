@@ -159,7 +159,6 @@ class CollectionInputFilter extends InputFilter
             if ($this->isRequired) {
                 $valid = false;
             }
-            return $valid;
         }
 
         if (count($this->collectionData) < $this->getCount()) {

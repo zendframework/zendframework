@@ -509,7 +509,8 @@ class CollectionTest extends TestCase
         $productFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
 
         $mainFieldset = new Fieldset('shop');
-        $mainFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+        $mainFieldset->setObject(new stdClass);
+        $mainFieldset->setHydrator(new ObjectPropertyHydrator());
         $mainFieldset->add($productFieldset);
 
         $form = new Form();
@@ -522,7 +523,6 @@ class CollectionTest extends TestCase
                 'count' => 2
             ),
         ));
-        $form->get('collection')->setHydrator(new ObjectPropertyHydrator());
 
         $market = new stdClass();
 
@@ -598,5 +598,53 @@ class CollectionTest extends TestCase
         $traversable->append($obj2);
         $traversable->append($obj3);
         $collection->setObject($traversable);
+    }
+
+    public function testPopulateValuesWithFirstKeyGreaterThanZero()
+    {
+        $inputData = array(
+            1 => array('name' => 'black'),
+            5 => array('name' => 'white'),
+        );
+
+        // Standalone Collection element
+        $collection = new Collection('fieldsets', array(
+            'count' => 1,
+            'target_element' => new \ZendTest\Form\TestAsset\CategoryFieldset(),
+        ));
+
+        $form = new Form();
+        $form->add(array(
+            'type'    => 'Zend\Form\Element\Collection',
+            'name'    => 'collection',
+            'options' => array(
+                'count'          => 1,
+                'target_element' => new \ZendTest\Form\TestAsset\CategoryFieldset(),
+            )
+        ));
+
+        // Collection element attached to a form
+        $formCollection = $form->get('collection');
+
+        $collection->populateValues($inputData);
+        $formCollection->populateValues($inputData);
+
+        $this->assertEquals(count($collection->getFieldsets()), count($inputData));
+        $this->assertEquals(count($formCollection->getFieldsets()), count($inputData));
+    }
+
+    public function testCanRemoveAllElementsIfAllowRemoveIsTrue()
+    {
+        /** @var \Zend\Form\Element\Collection $collection */
+        $collection = $this->form->get('colors');
+        $collection->setAllowRemove(true);
+        $collection->setCount(0);
+
+
+        // By default, $collection contains 2 elements
+        $data = array();
+
+        $collection->populateValues($data);
+        $this->assertEquals(0, count($collection->getElements()));
     }
 }

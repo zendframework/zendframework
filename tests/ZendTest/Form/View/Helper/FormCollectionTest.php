@@ -176,4 +176,41 @@ class FormCollectionTest extends TestCase
 
         $this->assertContains('>translated legend<', $markup);
     }
+
+    public function testCanRenderFieldsetWithoutAttributes()
+    {
+        $form = $this->getForm();
+        $html = $this->helper->render($form);
+        $this->assertContains('<fieldset>', $html);
+    }
+
+    public function testCanRenderFieldsetWithAttributes()
+    {
+        $form = $this->getForm();
+        $form->setAttributes(array(
+            'id'    => 'foo-id',
+            'class' => 'foo',
+        ));
+        $html = $this->helper->render($form);
+        $this->assertRegexp('#<fieldset( [a-zA-Z]+\="[^"]+")+>#', $html);
+        $this->assertContains('id="foo-id"', $html);
+        $this->assertContains('class="foo"', $html);
+    }
+
+    public function testCanRenderWithoutLegend()
+    {
+        $form = $this->getForm();
+        $html = $this->helper->render($form);
+        $this->assertNotContains('<legend', $html);
+        $this->assertNotContains('</legend>', $html);
+    }
+
+    public function testRendersLabelAsLegend()
+    {
+        $form = $this->getForm();
+        $form->setLabel('Foo');
+        $html = $this->helper->render($form);
+        $this->assertRegExp('#<legend[^>]*>Foo#', $html);
+        $this->assertContains('</legend>', $html);
+    }
 }

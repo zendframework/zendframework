@@ -830,6 +830,7 @@ class BaseInputFilterTest extends TestCase
 
     /**
      * @group 5270
+     * @requires extension intl
      */
     public function testIsValidWhenValuesSetOnFilters()
     {

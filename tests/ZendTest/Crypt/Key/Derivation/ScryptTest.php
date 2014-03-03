@@ -133,12 +133,12 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testVectorScrypt()
     {
-        $hexOutput = '77 d6 57 62 38 65 7b 20 3b 19 ca 42 c1 8a 04 97
-                      f1 6b 48 44 e3 07 4a e8 df df fa 3f ed e2 14 42
-                      fc d0 06 9d ed 09 48 f8 32 6a 75 3a 0f c8 1f 17
-                      e8 d3 e0 fb 2e 0d 36 28 cf 35 e2 0c 38 d1 89 06';
+        $hexOutput = 'd3 3c 6e c1 81 8d aa f7 28 f5 5a fa df ea a5 58
+                      b3 8e fa 81 30 5b 35 21 a7 f1 2f 4b e0 97 e8 4d
+                      18 40 92 d2 a2 e9 3b f7 1f d1 ef e0 52 71 0f 66
+                      b9 56 ce 45 da 43 aa 90 99 de 74 06 d3 a0 5e 2a';
 
-        $result = Scrypt::calc('', '', 16, 1, 1, 64);
+        $result = Scrypt::calc('password', '', 16, 1, 1, 64);
         $this->assertEquals(64, strlen($result));
         $this->assertEquals(str_replace(array(' ',PHP_EOL),'',$hexOutput), bin2hex($result));
     }

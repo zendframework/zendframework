@@ -1727,4 +1727,40 @@ class FormTest extends TestCase
         $filters = $form->getInputFilter()->get('fieldset')->get('foo')->getFilterChain();
         $this->assertEquals(1, $filters->count());
     }
+
+    public function testFormElementValidatorsMergeIntoAppliedInputFilter()
+    {
+        $this->form->add(array(
+            'name' => 'importance',
+            'type'  => 'Zend\Form\Element\Select',
+            'options' => array(
+                'label' => 'Importance',
+                'empty_option' => '',
+                'value_options' => array(
+                    'normal' => 'Normal',
+                    'important' => 'Important'
+                ),
+            ),
+        ));
+
+        $inputFilter = new \Zend\InputFilter\BaseInputFilter();
+        $factory     = new \Zend\InputFilter\Factory();
+        $inputFilter->add($factory->createInput(array(
+            'name'     => 'importance',
+            'required' => false,
+        )));
+
+        $data = array(
+            'importance' => 'unimporant'
+        );
+
+        $this->form->setInputFilter($inputFilter);
+        $this->form->setData($data);
+        $this->assertFalse($this->form->isValid());
+
+        $data = array();
+
+        $this->form->setData($data);
+        $this->assertTrue($this->form->isValid());
+    }
 }

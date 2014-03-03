@@ -651,8 +651,6 @@ class Form extends Fieldset implements FormInterface
         $this->hasAddedInputFilterDefaults = false;
         $this->filter                      = $inputFilter;
 
-        // TODO: Remove the statement below and all self::$hasSetPreferFormInputFilter occurrences
-        // if self::$preferFormInputFilter default value is set to false
         if (false === $this->hasSetPreferFormInputFilter) {
             $this->preferFormInputFilter = false;
         }

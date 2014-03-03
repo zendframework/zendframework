@@ -15,6 +15,7 @@ use Zend\Form\Element;
 use Zend\Form\Factory;
 use Zend\Form\Fieldset;
 use Zend\Form\Form;
+use Zend\InputFilter\BaseInputFilter;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\Stdlib\Hydrator;
@@ -1743,8 +1744,8 @@ class FormTest extends TestCase
             ),
         ));
 
-        $inputFilter = new \Zend\InputFilter\BaseInputFilter();
-        $factory     = new \Zend\InputFilter\Factory();
+        $inputFilter = new BaseInputFilter();
+        $factory     = new InputFilterFactory();
         $inputFilter->add($factory->createInput(array(
             'name'     => 'importance',
             'required' => false,

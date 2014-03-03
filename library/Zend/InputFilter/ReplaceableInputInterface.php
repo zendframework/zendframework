@@ -9,6 +9,10 @@
 
 namespace Zend\InputFilter;
 
+/**
+ * Mark an input as able to be replaced by another when merging input filters.
+ *
+ */
 interface ReplaceableInputInterface
 {
     public function replace($input, $name);

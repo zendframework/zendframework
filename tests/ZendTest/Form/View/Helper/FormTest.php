@@ -90,7 +90,7 @@ class FormTest extends CommonTestCase
         $this->assertContains('<form', $markup);
         $this->assertContains('id="login-form"', $markup);
         $this->assertContains('<label><span>Name of the city</span>', $markup);
-        $this->assertContains('<fieldset><legend>Country</legend>', $markup);
+        $this->assertContains('<fieldset ><legend>Country</legend>', $markup);
         $this->assertContains('<input type="submit" name="send"', $markup);
         $this->assertContains('</form>', $markup);
     }

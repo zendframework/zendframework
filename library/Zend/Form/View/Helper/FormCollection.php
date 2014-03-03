@@ -80,6 +80,7 @@ class FormCollection extends AbstractHelper
             return '';
         }
 
+        $attributes       = $element->getAttributes();
         $markup           = '';
         $templateMarkup   = '';
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
@@ -106,6 +107,7 @@ class FormCollection extends AbstractHelper
         // Every collection is wrapped by a fieldset if needed
         if ($this->shouldWrap) {
             $label = $element->getLabel();
+            $legend = '';
 
             if (!empty($label)) {
 
@@ -118,12 +120,18 @@ class FormCollection extends AbstractHelper
 
                 $label = $escapeHtmlHelper($label);
 
-                $markup = sprintf(
-                    '<fieldset><legend>%s</legend>%s</fieldset>',
-                    $label,
-                    $markup
+                $legend = sprintf(
+                    '<legend>%s</legend>',
+                    $label
                 );
             }
+
+            $markup = sprintf(
+                '<fieldset %s>%s%s</fieldset>',
+                $this->createAttributesString($attributes),
+                $legend,
+                $markup
+            );
         }
 
         return $markup;

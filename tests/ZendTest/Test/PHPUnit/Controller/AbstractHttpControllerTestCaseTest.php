@@ -84,6 +84,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertResponseHeaderContains('Content-Type', 'text/json');
     }
 
+    public function testAssertResponseHeaderContainsMultipleHeaderInterface()
+    {
+        $this->dispatch('/tests');
+        $this->assertResponseHeaderContains('WWW-Authenticate', 'Basic realm="ZF2"');
+    }
+
     public function testAssertNotResponseHeaderContains()
     {
         $this->dispatch('/tests');
@@ -91,6 +97,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertNotResponseHeaderContains('Content-Type', 'text/html');
+    }
+
+    public function testAssertNotResponseHeaderContainsMultipleHeaderInterface()
+    {
+        $this->dispatch('/tests');
+        $this->assertNotResponseHeaderContains('WWW-Authenticate', 'Basic realm="ZF3"');
     }
 
     public function testAssertResponseHeaderRegex()
@@ -105,6 +117,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertResponseHeaderRegex('Content-Type', '#json#');
     }
 
+    public function testAssertResponseHeaderRegexMultipleHeaderInterface()
+    {
+        $this->dispatch('/tests');
+        $this->assertResponseHeaderRegex('WWW-Authenticate', '#"ZF2"$#');
+    }
+
     public function testAssertNotResponseHeaderRegex()
     {
         $this->dispatch('/tests');
@@ -112,6 +130,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertNotResponseHeaderRegex('Content-Type', '#html$#');
+    }
+
+    public function testAssertNotResponseHeaderRegexMultipleHeaderInterface()
+    {
+        $this->dispatch('/tests');
+        $this->assertNotResponseHeaderRegex('WWW-Authenticate', '#"ZF3"$#');
     }
 
     public function testAssertRedirect()

@@ -136,14 +136,11 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
             }
             $classes = array($classes);
         }
-
         // Flatten message array
         $escapeHtml      = $this->getEscapeHtmlHelper();
         $messagesToPrint = array();
-
         $translator = $this->getTranslator();
         $translatorTextDomain = $this->getTranslatorTextDomain();
-
         array_walk_recursive($messages, function ($item) use (&$messagesToPrint, $escapeHtml, $translator, $translatorTextDomain) {
             if ($translator !== null) {
                 $item = $translator->translate(
@@ -153,16 +150,13 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
             }
             $messagesToPrint[] = $escapeHtml($item);
         });
-
         if (empty($messagesToPrint)) {
             return '';
         }
-
         // Generate markup
         $markup  = sprintf($this->getMessageOpenFormat(), ' class="' . implode(' ', $classes) . '"');
         $markup .= implode(sprintf($this->getMessageSeparatorString(), ' class="' . implode(' ', $classes) . '"'), $messagesToPrint);
         $markup .= $this->getMessageCloseString();
-
         return $markup;
     }
 

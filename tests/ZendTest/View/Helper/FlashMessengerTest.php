@@ -303,7 +303,6 @@ class FlashMessengerTest extends TestCase
     public function testCanDisplayListOfCurrentMessagesCustomisedByConfig()
     {
         $this->seedCurrentMessages();
-
         $config = array(
             'view_helper_config' => array(
                 'flashmessenger' => array(

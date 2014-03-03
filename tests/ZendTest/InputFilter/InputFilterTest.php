@@ -11,7 +11,9 @@ namespace ZendTest\InputFilter;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Filter;
+use Zend\InputFilter\CollectionInputFilter;
 use Zend\InputFilter\Factory;
+use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 
 class InputFilterTest extends TestCase
@@ -42,5 +44,28 @@ class InputFilterTest extends TestCase
         $this->assertTrue($this->filter->has('foo'));
         $foo = $this->filter->get('foo');
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $foo);
+    }
+
+    /**
+     * @group ZF2-5648
+     */
+    public function testCountZeroValidateInternalInputWithCollectionInputFilter()
+    {
+        $collection = new CollectionInputFilter();
+        $collection->setCount(0)
+                   ->add(new Input(), 'name');
+        $this->filter->add($collection, 'people');
+
+        $data = array(
+            'people' => array(
+                array(
+                    'name' => 'Wanderson',
+                ),
+            ),
+        );
+        $this->filter->setData($data);
+
+        $this->assertTrue($this->filter->isvalid());
+        $this->assertSame($data, $this->filter->getValues());
     }
 }

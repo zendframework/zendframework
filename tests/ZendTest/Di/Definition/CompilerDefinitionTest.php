@@ -139,7 +139,7 @@ class CompilerDefinitionTest extends TestCase
         $definition->addDirectory(__DIR__ . '/../TestAsset/SetterInjection');
         $definition->addDirectory(__DIR__ . '/../TestAsset/CompilerClasses');
         $definition->compile();
-        
+
         // constructor injection
         $this->assertTrue($definition->hasMethodParameters('ZendTest\Di\TestAsset\ConstructorInjection\B', '__construct'));
         // setter injection

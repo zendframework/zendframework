@@ -273,7 +273,8 @@ class FilePostRedirectGetTest extends TestCase
         $this->assertEquals(303, $prgResultRoute->getStatusCode());
     }
 
-    public function testFieldsetAmountInFormEqualsFieldsetsInInputFilter(){
+    public function testFieldsetAmountInFormEqualsFieldsetsInInputFilter()
+    {
         // POST
         $url = '/';
         $params = array(
@@ -306,7 +307,7 @@ class FilePostRedirectGetTest extends TestCase
         $this->assertCount(count($params['links']),  $this->form->get('links')->getFieldsets());
         $this->assertCount(count($this->form->get('links')->getFieldsets()),  $this->form->getInputFilter()->get('links')->getInputs());
 
-        //GET
+        // GET
         $this->request = new Request();
         $form = new Form();
         $collection = new Collection('links',array(
@@ -323,6 +324,5 @@ class FilePostRedirectGetTest extends TestCase
         $this->assertEquals($params, $prgResult);
         $this->assertCount(count($params['links']),  $form->get('links')->getFieldsets());
         $this->assertCount(count( $form->get('links')->getFieldsets()), $form->getInputFilter()->get('links')->getInputs());
-
     }
 }

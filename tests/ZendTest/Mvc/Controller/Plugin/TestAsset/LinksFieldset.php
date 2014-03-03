@@ -6,8 +6,8 @@ namespace ZendTest\Mvc\Controller\Plugin\TestAsset;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class LinksFieldset extends Fieldset implements  InputFilterProviderInterface{
-
+class LinksFieldset extends Fieldset implements  InputFilterProviderInterface
+{
     public function __construct()
     {
         parent::__construct('link');

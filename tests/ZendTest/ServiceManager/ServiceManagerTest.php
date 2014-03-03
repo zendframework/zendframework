@@ -243,6 +243,16 @@ class ServiceManagerTest extends TestCase
     /**
      * @covers Zend\ServiceManager\ServiceManager::get
      */
+    public function testGetAbstractFactoryWithAlias()
+    {
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
+        $this->serviceManager->setAlias('foo', 'ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::get
+     */
     public function testGetWithScopedContainer()
     {
         $this->serviceManager->setService('foo', 'bar');

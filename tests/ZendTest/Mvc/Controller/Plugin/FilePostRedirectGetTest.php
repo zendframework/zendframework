@@ -11,6 +11,7 @@
 namespace ZendTest\Mvc\Controller\Plugin;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Form\Element\Collection;
 use Zend\Form\Form;
 use Zend\Http\Request;
 use Zend\Http\Response;
@@ -32,10 +33,19 @@ class FilePostRedirectGetTest extends TestCase
     public $event;
     public $request;
     public $response;
+    public $collection;
 
     public function setUp()
     {
         $this->form = new Form();
+
+        $this->collection = new Collection('links',array(
+                'count' => 1,
+                'allow_add' => true,
+                'target_element' => array(
+                    'type' => 'ZendTest\Mvc\Controller\Plugin\TestAsset\LinksFieldset',
+                ),
+        ));
 
         $router = new SimpleRouteStack;
         $router->addRoute('home', LiteralRoute::factory(array(
@@ -261,5 +271,58 @@ class FilePostRedirectGetTest extends TestCase
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
         $this->assertEquals($expects, $prgResultRoute->getHeaders()->get('Location')->getUri() , 'redirect to the same url');
         $this->assertEquals(303, $prgResultRoute->getStatusCode());
+    }
+
+    public function testFieldsetAmountInFormEqualsFieldsetsInInputFilter()
+    {
+        // POST
+        $url = '/';
+        $params = array(
+            'links' => array(
+                '0' => array(
+                    'foobar' => 'val',
+                ),
+                '1' => array(
+                    'foobar' => 'val',
+                ),
+            ),
+        );
+        $this->request->setMethod('POST');
+        $this->request->setPost(new Parameters($params));
+        $this->request->setUri($url);
+
+        $this->form->add($this->collection);
+
+        $routeMatch = $this->event->getRouter()->match($this->request);
+        $this->event->setRouteMatch($routeMatch);
+
+        $this->controller->dispatch($this->request, $this->response);
+        $prgResultUrl = $this->controller->fileprg($this->form);
+
+        $this->assertInstanceOf('Zend\Http\Response', $prgResultUrl);
+        $this->assertTrue($prgResultUrl->getHeaders()->has('Location'));
+        $this->assertEquals('/', $prgResultUrl->getHeaders()->get('Location')->getUri());
+        $this->assertEquals(303, $prgResultUrl->getStatusCode());
+
+        $this->assertCount(count($params['links']),  $this->form->get('links')->getFieldsets());
+        $this->assertCount(count($this->form->get('links')->getFieldsets()),  $this->form->getInputFilter()->get('links')->getInputs());
+
+        // GET
+        $this->request = new Request();
+        $form = new Form();
+        $collection = new Collection('links',array(
+            'count' => 1,
+            'allow_add' => true,
+            'target_element' => array(
+                'type' => 'ZendTest\Mvc\Controller\Plugin\TestAsset\LinksFieldset',
+            ),
+        ));
+        $form->add($collection);
+        $this->controller->dispatch($this->request, $this->response);
+        $prgResult = $this->controller->fileprg( $form);
+
+        $this->assertEquals($params, $prgResult);
+        $this->assertCount(count($params['links']),  $form->get('links')->getFieldsets());
+        $this->assertCount(count( $form->get('links')->getFieldsets()), $form->getInputFilter()->get('links')->getInputs());
     }
 }

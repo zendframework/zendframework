@@ -16,11 +16,13 @@ use Zend\Form\Element;
 use Zend\Form\Element\Collection as Collection;
 use Zend\Form\Fieldset;
 use Zend\Form\Form;
-use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
-use ZendTest\Form\TestAsset\Entity\Product;
 use Zend\Stdlib\Hydrator\ArraySerializable;
-use ZendTest\Form\TestAsset\CustomCollection;
+use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 use ZendTest\Form\TestAsset\ArrayModel;
+use ZendTest\Form\TestAsset\CustomCollection;
+use ZendTest\Form\TestAsset\Entity\Product;
+use ZendTest\Form\TestAsset\ProductFieldset;
 
 class CollectionTest extends TestCase
 {
@@ -674,7 +676,9 @@ class CollectionTest extends TestCase
 
     public function testCanRemoveAllElementsIfAllowRemoveIsTrue()
     {
-        /** @var \Zend\Form\Element\Collection $collection */
+        /**
+         * @var \Zend\Form\Element\Collection $collection
+         */
         $collection = $this->form->get('colors');
         $collection->setAllowRemove(true);
         $collection->setCount(0);
@@ -685,5 +689,66 @@ class CollectionTest extends TestCase
 
         $collection->populateValues($data);
         $this->assertEquals(0, count($collection->getElements()));
+    }
+
+    public function testCanBindObjectMultipleNestedFieldsets()
+    {
+        $productFieldset = new ProductFieldset();
+        $productFieldset->setHydrator(new ClassMethods());
+        $productFieldset->setObject(new Product());
+
+        $nestedFieldset = new Fieldset('nested');
+        $nestedFieldset->setHydrator(new ClassMethods());
+        $nestedFieldset->setObject(new stdClass());
+        $nestedFieldset->add(array(
+            'name' => 'products',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $productFieldset,
+                'count' => 2,
+            ),
+        ));
+
+        $mainFieldset = new Fieldset('main');
+        $mainFieldset->setUseAsBaseFieldset(true);
+        $mainFieldset->setHydrator(new ClassMethods());
+        $mainFieldset->setObject(new stdClass());
+        $mainFieldset->add(array(
+            'name' => 'nested',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $nestedFieldset,
+                'count' => 2,
+            ),
+        ));
+
+        $form = new Form();
+        $form->setHydrator(new ObjectPropertyHydrator());
+        $form->add($mainFieldset);
+
+        $market = new stdClass();
+
+        $prices = array(100, 200);
+
+        $products[0] = new Product();
+        $products[0]->setPrice($prices[0]);
+        $products[1] = new Product();
+        $products[1]->setPrice($prices[1]);
+
+        $shop[0] = new stdClass();
+        $shop[0]->products = $products;
+
+        $shop[1] = new stdClass();
+        $shop[1]->products = $products;
+
+        $market->main = $shop;
+        $form->bind($market);
+
+        //test for object binding
+        foreach ($form->get('main')->getFieldsets() as $_fieldset) {
+            foreach($_fieldset->getFieldsets() as $_nestedfieldset) {
+                $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Product', $_nestedfieldset->get('products')->getObject());
+            }
+        };
     }
 }

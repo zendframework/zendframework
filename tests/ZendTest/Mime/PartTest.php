@@ -106,6 +106,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @link https://github.com/zendframework/zf2/issues/5428
+     * @group 5428
      */
     public function testContentEncodingWithStreamReadTwiceINaRow()
     {
@@ -117,7 +118,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
         $part->encoding = Mime\Mime::ENCODING_BASE64;
         $contentEncodedFirstTime  = $part->getContent();
         $contentEncodedSecondTime = $part->getContent();
-        $this->assertEquals($contentFirstTime, $contentSecondTime);
+        $this->assertEquals($contentEncodedFirstTime, $contentEncodedSecondTime);
         fclose($fp);
 
         $fp = fopen($testfile,'rb');
@@ -125,7 +126,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
         $part->encoding = Mime\Mime::ENCODING_QUOTEDPRINTABLE;
         $contentEncodedFirstTime  = $part->getContent();
         $contentEncodedSecondTime = $part->getContent();
-        $this->assertEquals($contentFirstTime, $contentSecondTime);
+        $this->assertEquals($contentEncodedFirstTime, $contentEncodedSecondTime);
         fclose($fp);
     }
 }

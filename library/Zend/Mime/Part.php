@@ -80,7 +80,7 @@ class Part
         //stream_filter_remove(); // ??? is that right?
         switch ($this->encoding) {
             case Mime::ENCODING_QUOTEDPRINTABLE:
-                if(array_key_exists(Mime::ENCODING_QUOTEDPRINTABLE, $this->filters)) {
+                if (array_key_exists(Mime::ENCODING_QUOTEDPRINTABLE, $this->filters)) {
                     stream_filter_remove($this->filters[Mime::ENCODING_QUOTEDPRINTABLE]);
                 }
                 $filter = stream_filter_append(
@@ -98,7 +98,7 @@ class Part
                 }
                 break;
             case Mime::ENCODING_BASE64:
-                if(array_key_exists(Mime::ENCODING_BASE64,$this->filters)) {
+                if (array_key_exists(Mime::ENCODING_BASE64,$this->filters)) {
                     stream_filter_remove($this->filters[Mime::ENCODING_BASE64]);
                 }
                 $filter = stream_filter_append(
@@ -130,7 +130,7 @@ class Part
     {
         if ($this->isStream) {
             $encodedStream = $this->getEncodedStream($EOL);
-            $encodedStreamContents =  stream_get_contents($encodedStream);
+            $encodedStreamContents = stream_get_contents($encodedStream);
             rewind($encodedStream);
             return $encodedStreamContents;
         }

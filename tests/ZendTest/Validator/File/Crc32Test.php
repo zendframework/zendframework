@@ -185,4 +185,23 @@ class Crc32Test extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('fileCrc32NotFound', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
+
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
+    {
+        $validator = new File\Crc32();
+
+        $this->assertFalse($validator->isValid(''));
+        $this->assertArrayHasKey(File\Crc32::NOT_FOUND, $validator->getMessages());
+
+        $filesArray = array(
+            'name'      => '',
+            'size'      => 0,
+            'tmp_name'  => '',
+            'error'     => UPLOAD_ERR_NO_FILE,
+            'type'      => '',
+        );
+
+        $this->assertFalse($validator->isValid($filesArray));
+        $this->assertArrayHasKey(File\Crc32::NOT_FOUND, $validator->getMessages());
+    }
 }

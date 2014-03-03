@@ -15,11 +15,6 @@ use Zend\Di\Exception\UndefinedReferenceException;
 class AssertionAggregateTest extends \PHPUnit_Framework_TestCase
 {
 
-    /**
-     *
-     * @var
-     *
-     */
     protected $assertionAggregate;
 
     public function setUp()

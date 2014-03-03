@@ -148,7 +148,7 @@ class Hash extends AbstractValidator
         $this->setValue($filename);
 
         // Is file readable ?
-        if (false === stream_resolve_include_path($file)) {
+        if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_FOUND);
             return false;
         }

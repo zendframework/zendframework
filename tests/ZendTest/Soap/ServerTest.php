@@ -959,4 +959,13 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\SoapFault', $fault);
         $this->assertEquals('Unknown error', $fault->getMessage());
     }
+
+    public function testGetSoapInternalInstance()
+    {
+        $server = new Server();
+        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $internalServer = $server->getSoap();
+        $this->assertInstanceOf('\SoapServer', $internalServer);
+        $this->assertSame($internalServer, $server->getSoap());
+    }
 }

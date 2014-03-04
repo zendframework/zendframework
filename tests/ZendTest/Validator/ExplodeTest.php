@@ -10,6 +10,8 @@
 namespace ZendTest\Validator;
 
 use Zend\Validator\Explode;
+use Zend\Validator\EmailAddress;
+use Zend\Validator\Regex;
 
 /**
  * @group      Zend_Validator
@@ -128,5 +130,28 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Explode();
         $validator->setValidator('inarray');
+    }
+
+    /**
+     * @group ZF2-5796
+     */
+    public function testGetMessagesMultipleInvalid()
+    {
+        $validator = new Explode(array(
+            'validator'           => new Regex(
+                '/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'
+            ),
+            'valueDelimiter'      => ',',
+            'breakOnFirstFailure' => false,
+        ));
+
+        $messages = array(
+            0 => array(
+                'regexNotMatch' => "The input does not match against pattern '/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'",
+            ),
+        );
+
+        $this->assertFalse($validator->isValid('zf-devteam@zend.com,abc,defghij'));
+        $this->assertEquals($messages, $validator->getMessages());
     }
 }

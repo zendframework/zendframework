@@ -58,7 +58,7 @@ class Headers implements Countable, Iterator
         foreach (explode("\r\n", $string) as $line) {
 
             // check if a header name is present
-            if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $line, $matches)) {
+            if (preg_match('/^\s*(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $line, $matches)) {
                 if ($current) {
                     // a header name was present, then store the current complete line
                     $headers->headersKeys[] = static::createKey($current['name']);
@@ -69,15 +69,23 @@ class Headers implements Countable, Iterator
                     'line' => trim($line)
                 );
             } elseif (preg_match('/^\s+.*$/', $line, $matches)) {
-                // continuation: append to current line
-                $current['line'] .= trim($line);
+                if ($current) {
+                    // continuation: append to current line
+                    $current['line'] .= trim($line);
+                } else {
+                    // Line does not match header format!
+                    throw new Exception\RuntimeException(sprintf(
+                        'Line "%s" does not match header format!',
+                        $line
+                    ));
+                }
             } elseif (preg_match('/^\s*$/', $line)) {
                 // empty line indicates end of headers
                 break;
             } else {
                 // Line does not match header format!
                 throw new Exception\RuntimeException(sprintf(
-                    'Line "%s"does not match header format!',
+                    'Line "%s" does not match header format!',
                     $line
                 ));
             }

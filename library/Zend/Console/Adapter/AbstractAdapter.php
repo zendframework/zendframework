@@ -311,26 +311,25 @@ abstract class AbstractAdapter implements AdapterInterface
             throw new Exception\InvalidArgumentException('Invalid height supplied.');
         }
 
-        //ensure the text is not wider than the width
-        if (strlen($text) > $width) {
-            $text = wordwrap($text, $width, PHP_EOL, true);
-        } else {
-            //just write the line at the spec'd position
+        // ensure the text is not wider than the width
+        if (strlen($text) <= $width) {
+            // just write the line at the spec'd position
             $this->setPos($x, $y);
             $this->write($text, $color, $bgColor);
-
             return;
         }
 
-        //convert to array of lines
+        $text = wordwrap($text, $width, PHP_EOL, true);
+
+        // convert to array of lines
         $lines = explode(PHP_EOL, $text);
 
-        //truncate if height was specified
+        // truncate if height was specified
         if (null !== $height && count($lines) > $height) {
             $lines = array_slice($lines, 0, $height);
         }
 
-        //write each line
+        // write each line
         $curY = $y;
         foreach ($lines as $line) {
             $this->setPos($x, $curY);

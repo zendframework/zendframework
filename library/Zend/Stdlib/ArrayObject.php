@@ -13,7 +13,6 @@ use ArrayAccess;
 use Countable;
 use IteratorAggregate;
 use Serializable;
-use Zend\Stdlib\Exception;
 
 /**
  * Custom framework ArrayObject implementation

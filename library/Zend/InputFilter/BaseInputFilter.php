@@ -375,6 +375,11 @@ class BaseInputFilter implements
     {
         if ($name === self::VALIDATE_ALL) {
             $this->validationGroup = null;
+            foreach($this->getInputs() as $input) {
+                if($input instanceof InputFilterInterface) {
+                    $input->setValidationGroup(self::VALIDATE_ALL);
+                }
+            }
             return $this;
         }
 
@@ -386,6 +391,14 @@ class BaseInputFilter implements
                 } else {
                     $inputs[] = $key;
 
+                    if (!$this->inputs[$key] instanceof InputFilterInterface) {
+                        throw new Exception\InvalidArgumentException(
+                            sprintf(
+                                'Input "%s" must implement InputFilterInterface',
+                                $key
+                            )
+                        );
+                    }
                     // Recursively populate validation groups for sub input filters
                     $this->inputs[$key]->setValidationGroup($value);
                 }

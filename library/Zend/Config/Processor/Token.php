@@ -176,17 +176,30 @@ class Token implements ProcessorInterface
 
     /**
      * Build replacement map
+     *
+     * @return array
      */
     protected function buildMap()
     {
-        if (!$this->suffix && !$this->prefix) {
-            $this->map = $this->tokens;
-        } else {
-            $this->map = array();
-            foreach ($this->tokens as $token => $value) {
-                $this->map[$this->prefix . $token . $this->suffix] = $value;
+        if (null === $this->map) {
+            if (!$this->suffix && !$this->prefix) {
+                $this->map = $this->tokens;
+            } else {
+                $this->map = array();
+
+                foreach ($this->tokens as $token => $value) {
+                    $this->map[$this->prefix . $token . $this->suffix] = $value;
+                }
+            }
+
+            foreach (array_keys($this->map) as $key) {
+                if (empty($key)) {
+                    unset($this->map[$key]);
+                }
             }
         }
+
+        return $this->map;
     }
 
     /**
@@ -198,28 +211,7 @@ class Token implements ProcessorInterface
      */
     public function process(Config $config)
     {
-        if ($config->isReadOnly()) {
-            throw new Exception\InvalidArgumentException('Cannot process config because it is read-only');
-        }
-
-        if ($this->map === null) {
-            $this->buildMap();
-        }
-
-        /**
-         * Walk through config and replace values
-         */
-        $keys = array_keys($this->map);
-        $values = array_values($this->map);
-        foreach ($config as $key => $val) {
-            if ($val instanceof Config) {
-                $this->process($val);
-            } else {
-                $config->$key = str_replace($keys, $values, $val);
-            }
-        }
-
-        return $config;
+        return $this->doProcess($config, $this->buildMap());
     }
 
     /**
@@ -230,12 +222,53 @@ class Token implements ProcessorInterface
      */
     public function processValue($value)
     {
-        if ($this->map === null) {
-            $this->buildMap();
-        }
-        $keys = array_keys($this->map);
-        $values = array_values($this->map);
+        return $this->doProcess($value, $this->buildMap());
+    }
 
-        return str_replace($keys, $values, $value);
+    /**
+     * Applies replacement map to the given value by modifying the value itself
+     *
+     * @param mixed $value
+     * @param array $replacements
+     *
+     * @return mixed
+     *
+     * @throws Exception\InvalidArgumentException if the provided value is a read-only {@see Config}
+     */
+    private function doProcess($value, array $replacements)
+    {
+        if ($value instanceof Config) {
+            if ($value->isReadOnly()) {
+                throw new Exception\InvalidArgumentException('Cannot process config because it is read-only');
+            }
+
+            foreach ($value as $key => $val) {
+                $value->$key = $this->doProcess($val, $replacements);
+            }
+
+            return $value;
+        }
+
+        if ($value instanceof Traversable || is_array($value)) {
+            foreach ($value as & $val) {
+                $val = $this->doProcess($val, $replacements);
+            }
+
+            return $value;
+        }
+
+        if (!is_string($value) && (is_bool($value) || is_numeric($value))) {
+            $stringVal  = (string) $value;
+            $changedVal = strtr($value, $this->map);
+
+            // replace the value only if a string replacement occurred
+            if ($changedVal !== $stringVal) {
+                return $changedVal;
+            }
+
+            return $value;
+        }
+
+        return strtr((string) $value, $this->map);
     }
 }

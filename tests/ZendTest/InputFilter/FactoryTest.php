@@ -567,4 +567,18 @@ class FactoryTest extends TestCase
         $factory->setInputFilterManager($inputFilterManager);
         $this->assertSame($inputFilterManager, $factory->getInputFilterManager());
     }
+
+    /**
+     * @group 5691
+     *
+     * @covers \Zend\InputFilter\Factory::createInput
+     */
+    public function testSetsBreakChainOnFailure()
+    {
+        $factory = new Factory();
+
+        $this->assertTrue($factory->createInput(array('break_on_failure' => true))->breakOnFailure());
+
+        $this->assertFalse($factory->createInput(array('break_on_failure' => false))->breakOnFailure());
+    }
 }

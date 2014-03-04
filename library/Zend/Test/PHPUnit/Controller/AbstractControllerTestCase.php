@@ -252,7 +252,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * @param  array|null $params
      * @throws \Exception
      */
-    public function dispatch($url, $method = null, $params = array())
+    public function dispatch($url, $method = null, $params = array(), $isXmlHttpRequest = false)
     {
         if ( !isset($method) &&
              $this->getRequest() instanceof HttpRequest &&
@@ -261,6 +261,11 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             $method = $requestMethod;
         } elseif (!isset($method)) {
             $method = HttpRequest::METHOD_GET;
+        }
+
+        if ($isXmlHttpRequest) {
+            $headers = $this->getRequest()->getHeaders();
+            $headers->addHeaderLine('X_REQUESTED_WITH', 'XMLHttpRequest');
         }
 
         $this->url($url, $method, $params);

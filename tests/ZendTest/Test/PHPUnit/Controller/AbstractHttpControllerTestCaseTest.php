@@ -513,7 +513,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertEquals($request->getMethod(), 'PUT');
         $this->assertEquals('num_post=5&foo=bar', $request->getContent());
     }
-    /*
+
     public function testAssertUriWithHostname()
     {
         $this->dispatch('http://my.domain.tld:443');
@@ -545,6 +545,54 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertXpathQueryCount('//div[@class="get"]', 0);
         $this->assertQueryCount('div.post', 0);
         $this->assertXpathQueryCount('//div[@class="post"]', 0);
+    }
+
+    public function testAssertWithMultiDispatchWithoutPersistence()
+    {
+        $this->dispatch('/tests-persistence');
+
+        $controller = $this->getApplicationServiceLocator()
+                            ->get('ControllerLoader')
+                            ->get('baz_index');
+        $flashMessenger = $controller->flashMessenger();
+        $messages = $flashMessenger->getMessages();
+        $this->assertCount(0, $messages);
+
+        $this->reset(false);
+
+        $this->dispatch('/tests');
+
+        $controller = $this->getApplicationServiceLocator()
+                            ->get('ControllerLoader')
+                            ->get('baz_index');
+        $flashMessenger = $controller->flashMessenger();
+        $messages = $flashMessenger->getMessages();
+
+        $this->assertCount(0, $messages);
+    }
+
+    public function testAssertWithMultiDispatchWithPersistence()
+    {
+        $this->dispatch('/tests-persistence');
+
+        $controller = $this->getApplicationServiceLocator()
+                            ->get('ControllerLoader')
+                            ->get('baz_index');
+        $flashMessenger = $controller->flashMessenger();
+        $messages = $flashMessenger->getMessages();
+        $this->assertCount(0, $messages);
+
+        $this->reset(true);
+
+        $this->dispatch('/tests');
+
+        $controller = $this->getApplicationServiceLocator()
+                            ->get('ControllerLoader')
+                            ->get('baz_index');
+        $flashMessenger = $controller->flashMessenger();
+        $messages = $flashMessenger->getMessages();
+
+        $this->assertCount(1, $messages);
     }
 
     public function testAssertWithEventShared()

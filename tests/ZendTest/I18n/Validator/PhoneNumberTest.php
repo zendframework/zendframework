@@ -3129,6 +3129,12 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->validator->allowPossible());
     }
 
+    public function testSetCountryMethodIsCaseInsensitive()
+    {
+        $this->validator->setCountry('us');
+        $this->assertSame('US', $this->validator->getCountry());
+    }
+
     public function testInvalidTypes()
     {
         $values = array(

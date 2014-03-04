@@ -38,12 +38,12 @@ class IndexController extends AbstractActionController
     {
         throw new \RuntimeException('Foo error !');
     }
-    
+
     public function customResponseAction()
     {
         $response = new Response();
         $response->setStatusCode(999);
-        
+
         return $response;
     }
 }

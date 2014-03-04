@@ -27,12 +27,14 @@ interface LabelOptionsAwareInterface
     public function getLabelAttributes();
 
     /**
-     * Set label specific options
+     * Set many label options at once
      *
-     * @param array $labelOptions
+     * Implementation will decide if this will overwrite or merge.
+     *
+     * @param  array|Traversable $arrayOrTraversable
      * @return self
      */
-    public function setLabelOptions(array $labelOptions);
+    public function setLabelOptions($arrayOrTraversable);
 
     /**
      * Get label specific options
@@ -40,4 +42,52 @@ interface LabelOptionsAwareInterface
      * @return array
      */
     public function getLabelOptions();
+
+     /**
+     * Set a single label optionn
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @return Element|ElementInterface
+     */
+    public function setLabelOption($key, $value);
+
+    /**
+     * Retrieve a single label option
+     *
+     * @param  $key
+     * @return mixed|null
+     */
+    public function getLabelOption($key);
+
+    /**
+     * Remove a single label option
+     *
+     * @param string $key
+     * @return ElementInterface
+     */
+    public function removeLabelOption($key);
+
+    /**
+     * Does the element has a specific label option ?
+     *
+     * @param  string $key
+     * @return bool
+     */
+    public function hasLabelOption($key);
+
+    /**
+     * Remove many attributes at once
+     *
+     * @param array $keys
+     * @return ElementInterface
+     */
+    public function removeLabelOptions(array $keys);
+
+    /**
+     * Clear all label options
+     *
+     * @return Element|ElementInterface
+     */
+    public function clearLabelOptions();
 }

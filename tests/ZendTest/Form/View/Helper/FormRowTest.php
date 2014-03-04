@@ -401,4 +401,24 @@ class FormRowTest extends TestCase
 
         $this->assertSame('append', $this->helper->getLabelPosition());
     }
+
+    public function testLabelOptionAlwaysWrapDefaultsToFalse()
+    {
+        $element = new Element('foo');
+        $this->assertEmpty($element->getLabelOption('always_wrap'));
+    }
+
+    public function testCanSetOptionToWrapElementInLabel()
+    {
+        $element = new Element('foo', array(
+            'label_options' => array(
+                'always_wrap' => true
+            )
+        ));
+        $element->setAttribute('id', 'bar');
+        $element->setLabel('baz');
+
+        $markup = $this->helper->render($element);
+        $this->assertRegexp('#^<label><span>baz</span><input name="foo" id="bar" type="text" value=""\/?></label>$#', $markup);
+    }
 }

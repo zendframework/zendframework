@@ -68,13 +68,13 @@ class Menu extends AbstractHelper
      * @var string
      */
     protected $liActiveClass = 'active';
-    
+
     /**
      * View helper entry point:
      * Retrieves helper and optionally sets container to operate on
      *
      * @param  AbstractContainer $container [optional] container to operate on
-     * @return Menu
+     * @return self
      */
     public function __invoke($container = null)
     {
@@ -437,7 +437,7 @@ class Menu extends AbstractHelper
      *     'maxDepth'         => null,
      *     'onlyActiveBranch' => true,
      *     'renderParents'    => false,
-     *     'liActiveClass'    => $liActiveClass      
+     *     'liActiveClass'    => $liActiveClass
      * ));
      * </code>
      *
@@ -581,7 +581,7 @@ class Menu extends AbstractHelper
         if (!isset($options['addClassToListItem'])) {
             $options['addClassToListItem'] = $this->getAddClassToListItem();
         }
-        
+
         if (isset($options['liActiveClass']) && $options['liActiveClass'] !== null) {
             $options['liActiveClass'] = (string) $options['liActiveClass'];
         } else {
@@ -595,7 +595,7 @@ class Menu extends AbstractHelper
      * Sets a flag indicating whether labels should be escaped
      *
      * @param bool $flag [optional] escape labels
-     * @return Menu
+     * @return self
      */
     public function escapeLabels($flag = true)
     {
@@ -608,7 +608,7 @@ class Menu extends AbstractHelper
      *
      * @param  bool $flag [optional] page class applied to <li> element
      *                    Default is true.
-     * @return Menu  fluent interface, returns self
+     * @return self  fluent interface, returns self
      */
     public function setAddClassToListItem($flag = true)
     {
@@ -632,7 +632,7 @@ class Menu extends AbstractHelper
      * Sets a flag indicating whether only active branch should be rendered
      *
      * @param  bool $flag [optional] render only active branch.
-     * @return Menu
+     * @return self
      */
     public function setOnlyActiveBranch($flag = true)
     {
@@ -661,7 +661,7 @@ class Menu extends AbstractHelper
      *                               values; the partial view script to use,
      *                               and the module where the script can be
      *                               found.
-     * @return Menu
+     * @return self
      */
     public function setPartial($partial)
     {
@@ -688,7 +688,7 @@ class Menu extends AbstractHelper
      * See {@link setOnlyActiveBranch()} for more information.
      *
      * @param  bool $flag [optional] render parents when rendering active branch.
-     * @return Menu
+     * @return self
      */
     public function setRenderParents($flag = true)
     {
@@ -713,7 +713,7 @@ class Menu extends AbstractHelper
      * Sets CSS class to use for the first 'ul' element when rendering
      *
      * @param  string $ulClass CSS class to set
-     * @return Menu
+     * @return self
      */
     public function setUlClass($ulClass)
     {
@@ -733,12 +733,12 @@ class Menu extends AbstractHelper
     {
         return $this->ulClass;
     }
-    
+
     /**
      * Sets CSS class to use for the active 'li' element when rendering
      *
      * @param  string $liActiveClass CSS class to set
-     * @return Menu
+     * @return self
      */
     public function setLiActiveClass($liActiveClass)
     {
@@ -748,7 +748,7 @@ class Menu extends AbstractHelper
 
         return $this;
     }
-    
+
     /**
      * Returns CSS class to use for the active 'li' element when rendering
      *

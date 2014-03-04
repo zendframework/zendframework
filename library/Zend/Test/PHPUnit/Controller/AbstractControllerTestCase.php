@@ -291,7 +291,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             $_SESSION = array();
             $_COOKIE  = array();
         }
-        
+
         $_GET     = array();
         $_POST    = array();
 

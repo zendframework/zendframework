@@ -40,9 +40,15 @@ class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testPropertyDefaultValueCanHandleArray()
     {
+        $expectedSource = <<<EOS
+array(
+        'foo'
+    )
+EOS;
+
         $valueGenerator = new ValueGenerator();
         $valueGenerator->setValue(array('foo'));
-        $this->assertEquals('array(\'foo\')', $valueGenerator->generate());
+        $this->assertEquals($expectedSource, $valueGenerator->generate());
     }
 
     public function testPropertyDefaultValueCanHandleUnquotedString()
@@ -95,10 +101,10 @@ array(
                 'baz1',
                 'baz2',
                 'constant2' => ArrayObject::STD_PROP_LIST
-                )
-            ),
+            )
+        ),
         PHP_EOL
-        )
+    )
 EOS;
 
         $valueGenerator = new ValueGenerator();
@@ -127,7 +133,7 @@ array(
         'c',
         7 => 'd',
         3 => 'e'
-        )
+    )
 EOS;
 
         $this->assertEquals($expectedSource, $valueGenerator->generate());

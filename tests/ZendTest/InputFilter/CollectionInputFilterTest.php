@@ -458,9 +458,7 @@ class CollectionInputFilterTest extends TestCase
         $this->filter->setData($invalidCollectionData);
 
         $this->assertFalse($this->filter->isValid());
-
         $this->assertCount(2, current($this->filter->getInvalidInput()));
-
         $this->assertArrayHasKey('baz', current($this->filter->getMessages()));
     }
 }

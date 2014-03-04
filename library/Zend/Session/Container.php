@@ -9,12 +9,6 @@
 
 namespace Zend\Session;
 
-if (PHP_VERSION_ID < 50304) {
-    class_alias('Zend\Session\AbstractContainer', 'Zend\Session\AbstractBaseContainer');
-} else {
-    class_alias('Zend\Session\Container\PhpReferenceCompatibility', 'Zend\Session\AbstractBaseContainer');
-}
-
 /**
  * Session storage container
  *
@@ -23,6 +17,24 @@ if (PHP_VERSION_ID < 50304) {
  * Additionally, expiries may be absolute TTLs or measured in "hops", which
  * are based on how many times the key or container were accessed.
  */
-class Container extends AbstractBaseContainer
+class Container extends AbstractContainer
 {
+    /**
+     * Retrieve a specific key in the container
+     *
+     * @param  string $key
+     * @return mixed
+     */
+    public function &offsetGet($key)
+    {
+        $ret = null;
+        if (!$this->offsetExists($key)) {
+            return $ret;
+        }
+        $storage = $this->getStorage();
+        $name    = $this->getName();
+        $ret =& $storage[$name][$key];
+
+        return $ret;
+    }
 }

@@ -13,7 +13,7 @@
     },
     "target-dir": "Zend/Math",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.23"
     },
     "suggest": {
         "ext-bcmath": "If using the bcmath functionality",

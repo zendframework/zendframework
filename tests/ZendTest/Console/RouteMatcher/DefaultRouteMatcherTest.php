@@ -845,8 +845,45 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                     'something'   => null,
                 )
             ),
-
-
+            /**
+             * @bug ZF2-5671
+             * @link https://github.com/zendframework/zf2/issues/5671
+             */
+            'mandatory-literal-camel-case' => array(
+                'FooBar',
+                array('FooBar'),
+                array(),
+            ),
+            'mandatory-literal-camel-case-no-match' => array(
+                'FooBar',
+                array('foobar'),
+                null,
+            ),
+            'optional-literal-camel-case' => array(
+                '[FooBar]',
+                array('FooBar'),
+                array(),
+            ),
+            'optional-literal-camel-case-no-match' => array(
+                '[FooBar]',
+                array('foobar'),
+                null,
+            ),
+            'optional-literal-alternative-camel-case' => array(
+                '[ FooBar | FoozBar ]',
+                array('FooBar'),
+                array(),
+            ),
+            'required-literal-alternative-camel-case' => array(
+                '( FooBar | FoozBar )',
+                array('FooBar'),
+                array(),
+            ),
+            'required-literal-alternative-camel-case-no-match' => array(
+                '( FooBar | FoozBar )',
+                array('baz'),
+                null,
+            ),
         );
     }
 

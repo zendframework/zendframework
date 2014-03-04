@@ -11,6 +11,7 @@ namespace ZendTest\Validator;
 
 use Zend\Validator\Explode;
 use Zend\Validator\EmailAddress;
+use Zend\Validator\Regex;
 
 /**
  * @group      Zend_Validator
@@ -137,14 +138,16 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
     public function testGetMessagesMultipleInvalid()
     {
         $validator = new Explode(array(
-            'validator'           => new EmailAddress,
+            'validator'           => new Regex(
+                '/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'
+            ),
             'valueDelimiter'      => ',',
-            'breakOnFirstFailure' => true,
+            'breakOnFirstFailure' => false,
         ));
 
         $messages = array(
             0 => array(
-                'emailAddressInvalidFormat' => 'The input is not a valid email address. Use the basic format local-part@hostname',
+                'regexNotMatch' => "The input does not match against pattern '/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'",
             ),
         );
 

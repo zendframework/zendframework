@@ -170,6 +170,13 @@ class MenuTest extends AbstractTest
         $this->assertEquals($expected, $this->_helper->render($this->_nav2));
     }
 
+    public function testSetLiActiveCssClass()
+    {
+        $this->_helper->setLiActiveClass('activated');
+        $expected = $this->_getExpected('menu/css2.html');
+        $this->assertEquals(trim($expected), $this->_helper->render($this->_nav2));
+    }
+
     public function testOptionEscapeLabelsAsTrue()
     {
         $options = array(

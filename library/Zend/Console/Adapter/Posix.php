@@ -373,6 +373,7 @@ class Posix extends AbstractAdapter
      * Get the final color code and throw exception on error
      *
      * @param  null|int|Xterm256 $color
+     * @param  string            $type  (optional) Foreground 'fg' or background 'bg'.
      * @throws Exception\BadMethodCallException
      * @return string
      */

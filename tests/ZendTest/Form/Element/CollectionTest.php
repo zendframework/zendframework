@@ -714,13 +714,13 @@ class CollectionTest extends TestCase
             }
         };
     }
-    
+
     public function testNestedCollections()
     {
         // @see https://github.com/zendframework/zf2/issues/5640
         $addressesFieldeset = new \ZendTest\Form\TestAsset\AddressFieldset();
         $addressesFieldeset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
-    
+
         $form = new Form();
         $form->setHydrator(new ObjectPropertyHydrator());
         $form->add(array(
@@ -731,31 +731,31 @@ class CollectionTest extends TestCase
                 'count' => 2
             ),
         ));
-    
+
         $data = array(
             array('number' => '0000000001', 'street' => 'street1'),
             array('number' => '0000000002', 'street' => 'street2'),
         );
-    
+
         $phone1 = new Phone();
         $phone1->setNumber($data[0]['number']);
-    
+
         $phone2 = new Phone();
         $phone2->setNumber($data[1]['number']);
-    
+
         $address1 = new Address();
         $address1->setStreet($data[0]['street']);
         $address1->setPhones(array($phone1));
-    
+
         $address2 = new Address();
         $address2->setStreet($data[1]['street']);
         $address2->setPhones(array($phone2));
-    
+
         $customer = new stdClass();
         $customer->addresses = array($address1, $address2);
-    
+
         $form->bind($customer);
-    
+
         //test for object binding
         foreach ($form->get('addresses')->getFieldsets() as $_fieldset) {
             $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Address', $_fieldset->getObject());
@@ -772,7 +772,7 @@ class CollectionTest extends TestCase
                 }
             }
         }
-    
+
         //test for correct extract and populate
         $index = 0;
         foreach ($form->get('addresses') as $_addresses) {

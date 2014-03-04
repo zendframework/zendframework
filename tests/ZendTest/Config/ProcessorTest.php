@@ -269,6 +269,75 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF2-5772
+     */
+    public function testTokenChangeParamsRetainsType()
+    {
+        $config = new Config(
+            array(
+                'trueBoolKey' => true,
+                'falseBoolKey' => false,
+                'intKey' => 123,
+                'floatKey' => (float) 123.456,
+                'doubleKey' => (double) 456.789,
+            ),
+            true
+        );
+
+        $processor = new TokenProcessor();
+
+        $processor->process($config);
+
+        $this->assertSame(true, $config['trueBoolKey']);
+        $this->assertSame(false, $config['falseBoolKey']);
+        $this->assertSame(123, $config['intKey']);
+        $this->assertSame((float) 123.456, $config['floatKey']);
+        $this->assertSame((double) 456.789, $config['doubleKey']);
+    }
+
+    /**
+     * @group ZF2-5772
+     */
+    public function testTokenChangeParamsReplacesInNumerics()
+    {
+        $config = new Config(
+            array(
+                'foo' => 'bar1',
+                'trueBoolKey' => true,
+                'falseBoolKey' => false,
+                'intKey' => 123,
+                'floatKey' => (float) 123.456,
+                'doubleKey' => (double) 456.789,
+            ),
+            true
+        );
+
+        $processor = new TokenProcessor(array('1' => 'R', '9' => 'R'));
+
+        $processor->process($config);
+
+        $this->assertSame('R', $config['trueBoolKey']);
+        $this->assertSame('barR', $config['foo']);
+        $this->assertSame(false, $config['falseBoolKey']);
+        $this->assertSame('R23', $config['intKey']);
+        $this->assertSame('R23.456', $config['floatKey']);
+        $this->assertSame('456.78R', $config['doubleKey']);
+    }
+
+    /**
+     * @group ZF2-5772
+     */
+    public function testIgnoresEmptyStringReplacement()
+    {
+        $config    = new Config(array('foo' => 'bar'), true);;
+        $processor = new TokenProcessor(array('' => 'invalid'));
+
+        $processor->process($config);
+
+        $this->assertSame('bar', $config['foo']);
+    }
+
+    /**
      * @depends testTokenSurround
      */
     public function testUserConstants()

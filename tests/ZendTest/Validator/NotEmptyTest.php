@@ -67,6 +67,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
             array(array(5), true),
             array(0.0, false),
             array(1.0, true),
+            array(new stdClass(), true),
         );
     }
 
@@ -587,6 +588,25 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that the validator follows expected behavior
+     *
+     * @param mixed $value Value to test
+     * @param boolean $valid Expected validity of value
+     *
+     * @return void
+     *
+     * @dataProvider multiConstantNotationProvider
+     */
+    public function testMultiConstantBooleanOrNotation($value, $valid)
+    {
+        $this->validator = new NotEmpty(
+            NotEmpty::ZERO | NotEmpty::STRING | NotEmpty::BOOLEAN
+        );
+
+        $this->checkValidationValue($value, $valid);
+    }
+
+    /**
      * Provides values and their expected validity for boolean empty
      *
      * @return array
@@ -651,6 +671,51 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
             array(array(), true),
             array(array('xxx'), true),
             array(null, true),
+        );
+    }
+
+
+    /**
+     * Ensures that the validator follows expected behavior so if a string is specified more than once, it doesn't
+     * cause different validations to run
+     *
+     * @param string  $string   Array of string type values
+     * @param integer $expected Expected type setting value
+     *
+     * @return void
+     *
+     * @dataProvider duplicateStringSettingProvider
+     */
+    public function testStringNotationWithDuplicate($string, $expected)
+    {
+        $type = array($string, $string);
+        $this->validator->setType($type);
+
+        $this->assertEquals($expected, $this->validator->getType());
+    }
+
+    /**
+     * Data provider for testStringNotationWithDuplicate method. Provides a string which will be duplicated. The test
+     * ensures that setting a string value more than once only turns on the appropriate bit once
+     *
+     * @return array
+     */
+    public function duplicateStringSettingProvider()
+    {
+        return array(
+            array('boolean',      NotEmpty::BOOLEAN),
+            array('integer',      NotEmpty::INTEGER),
+            array('float',        NotEmpty::FLOAT),
+            array('string',       NotEmpty::STRING),
+            array('zero',         NotEmpty::ZERO),
+            array('array',        NotEmpty::EMPTY_ARRAY),
+            array('null',         NotEmpty::NULL),
+            array('php',          NotEmpty::PHP),
+            array('space',        NotEmpty::SPACE),
+            array('object',       NotEmpty::OBJECT),
+            array('objectstring', NotEmpty::OBJECT_STRING),
+            array('objectcount',  NotEmpty::OBJECT_COUNT),
+            array('all',          NotEmpty::ALL),
         );
     }
 

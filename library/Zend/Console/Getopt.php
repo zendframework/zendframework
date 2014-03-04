@@ -262,7 +262,6 @@ class Getopt
      *
      * @param  string $key
      * @param  string $value
-     * @return void
      */
     public function __set($key, $value)
     {
@@ -287,7 +286,6 @@ class Getopt
      * Unset an option.
      *
      * @param  string $key
-     * @return void
      */
     public function __unset($key)
     {
@@ -303,8 +301,8 @@ class Getopt
      * These are appended to those defined when the constructor was called.
      *
      * @param  array $argv
-     * @throws \Zend\Console\Exception\InvalidArgumentException When not given an array as parameter
-     * @return \Zend\Console\Getopt Provides a fluent interface
+     * @throws Exception\InvalidArgumentException When not given an array as parameter
+     * @return self
      */
     public function addArguments($argv)
     {
@@ -321,8 +319,8 @@ class Getopt
      * These replace any currently defined.
      *
      * @param  array $argv
-     * @throws \Zend\Console\Exception\InvalidArgumentException When not given an array as parameter
-     * @return \Zend\Console\Getopt Provides a fluent interface
+     * @throws Exception\InvalidArgumentException When not given an array as parameter
+     * @return self
      */
     public function setArguments($argv)
     {
@@ -340,7 +338,7 @@ class Getopt
      * the behavior of Zend\Console\Getopt.
      *
      * @param  array $getoptConfig
-     * @return \Zend\Console\Getopt Provides a fluent interface
+     * @return self
      */
     public function setOptions($getoptConfig)
     {
@@ -359,7 +357,7 @@ class Getopt
      *
      * @param  string $configKey
      * @param  string $configValue
-     * @return \Zend\Console\Getopt Provides a fluent interface
+     * @return self
      */
     public function setOption($configKey, $configValue)
     {
@@ -374,7 +372,7 @@ class Getopt
      * These are appended to the rules defined when the constructor was called.
      *
      * @param  array $rules
-     * @return \Zend\Console\Getopt Provides a fluent interface
+     * @return self
      */
     public function addRules($rules)
     {
@@ -586,9 +584,11 @@ class Getopt
             $lines[] = $linepart;
         }
         foreach ($lines as $linepart) {
-            $usage .= sprintf("%s %s\n",
+            $usage .= sprintf(
+                "%s %s\n",
                 str_pad($linepart['name'], $maxLen),
-                $linepart['help']);
+                $linepart['help']
+            );
         }
         return $usage;
     }
@@ -600,8 +600,8 @@ class Getopt
      * mapping option name (short or long) to an alias.
      *
      * @param  array $aliasMap
-     * @throws \Zend\Console\Exception\ExceptionInterface
-     * @return \Zend\Console\Getopt Provides a fluent interface
+     * @throws Exception\ExceptionInterface
+     * @return self
      */
     public function setAliases($aliasMap)
     {
@@ -631,7 +631,7 @@ class Getopt
      * mapping option name (short or long) to the help string.
      *
      * @param  array $helpMap
-     * @return \Zend\Console\Getopt Provides a fluent interface
+     * @return self
      */
     public function setHelp($helpMap)
     {
@@ -652,13 +652,14 @@ class Getopt
      * Also find option parameters, and remaining arguments after
      * all options have been parsed.
      *
-     * @return \Zend\Console\Getopt|null Provides a fluent interface
+     * @return self
      */
     public function parse()
     {
         if ($this->parsed === true) {
-            return;
+            return $this;
         }
+
         $argv = $this->argv;
         $this->options = array();
         $this->remainingArgs = array();
@@ -702,7 +703,7 @@ class Getopt
      *                           false then an Exception\RuntimeException will be thrown indicating that
      *                           there is a parse issue with this option.
      *
-     * @return \Zend\Console\Getopt Fluent interface.
+     * @return self
      */
     public function setOptionCallback($option, \Closure $callback)
     {
@@ -738,7 +739,6 @@ class Getopt
      * Long options may not be clustered.
      *
      * @param  mixed &$argv
-     * @return void
      */
     protected function _parseLongOption(&$argv)
     {
@@ -758,7 +758,6 @@ class Getopt
      * Short options may be clustered.
      *
      * @param  mixed &$argv
-     * @return void
      */
     protected function _parseShortOptionCluster(&$argv)
     {
@@ -773,8 +772,7 @@ class Getopt
      *
      * @param  string $flag
      * @param  mixed  $argv
-     * @throws \Zend\Console\Exception\ExceptionInterface
-     * @return void
+     * @throws Exception\ExceptionInterface
      */
     protected function _parseSingleOption($flag, &$argv)
     {
@@ -867,7 +865,6 @@ class Getopt
      *
      * @param  string $flag
      * @param  string $value
-     * @return null
      */
     protected function _setSingleOptionValue($flag, $value)
     {
@@ -898,7 +895,6 @@ class Getopt
      * In other case increase value to show count of flags' usage
      *
      * @param  string $flag
-     * @return null
      */
     protected function _setBooleanFlagValue($flag)
     {
@@ -914,7 +910,7 @@ class Getopt
      *
      * @param  string $flag
      * @param  string $param
-     * @throws \Zend\Console\Exception\ExceptionInterface
+     * @throws Exception\ExceptionInterface
      * @return bool
      */
     protected function _checkParameterType($flag, $param)
@@ -949,7 +945,6 @@ class Getopt
      * Define legal options using the gnu-style format.
      *
      * @param  string $rules
-     * @return void
      */
     protected function _addRulesModeGnu($rules)
     {
@@ -983,8 +978,7 @@ class Getopt
      * Define legal options using the Zend-style format.
      *
      * @param  array $rules
-     * @throws \Zend\Console\Exception\ExceptionInterface
-     * @return void
+     * @throws Exception\ExceptionInterface
      */
     protected function _addRulesModeZend($rules)
     {

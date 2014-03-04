@@ -95,7 +95,7 @@ class PostRedirectGet extends AbstractPlugin
     {
         $controller         = $this->getController();
         $params             = array();
-        $options            = array();
+        $options            = array('query' => $controller->params()->fromQuery());
         $reuseMatchedParams = false;
 
         if (null === $redirect) {

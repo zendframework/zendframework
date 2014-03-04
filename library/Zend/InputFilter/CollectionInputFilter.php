@@ -178,7 +178,7 @@ class CollectionInputFilter extends InputFilter
             $this->data = $data;
             $this->populate();
 
-            if ($this->validateInputs($inputs)) {
+            if ($this->validateInputs($inputs, $data)) {
                 $this->collectionValidInputs[$key] = $this->validInputs;
             } else {
                 $this->collectionInvalidInputs[$key] = $this->invalidInputs;

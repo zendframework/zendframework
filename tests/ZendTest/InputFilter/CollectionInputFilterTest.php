@@ -436,6 +436,29 @@ class CollectionInputFilterTest extends TestCase
     public function testSetRequired()
     {
         $this->filter->setIsRequired(true);
-        $this->assertEquals(true,$this->filter->getIsRequired());
+        $this->assertEquals(true, $this->filter->getIsRequired());
+    }
+
+    public function testNonRequiredFieldsAreValidated()
+    {
+        $invalidCollectionData = array(
+            array(
+                'foo' => ' bazbattoolong ',
+                'bar' => '12345',
+                'baz' => 'baztoolong',
+                'nest' => array(
+                    'foo' => ' bazbat ',
+                    'bar' => '12345',
+                    'baz' => '',
+                ),
+            )
+        );
+
+        $this->filter->setInputFilter($this->getBaseInputFilter());
+        $this->filter->setData($invalidCollectionData);
+
+        $this->assertFalse($this->filter->isValid());
+        $this->assertCount(2, current($this->filter->getInvalidInput()));
+        $this->assertArrayHasKey('baz', current($this->filter->getMessages()));
     }
 }

@@ -85,6 +85,19 @@ class Select extends Element implements InputProviderInterface
     }
 
     /**
+     * @param string $key
+     * @return self
+     */
+    public function unsetValueOption($key)
+    {
+        if (isset($this->valueOptions[$key])) {
+            unset($this->valueOptions[$key]);
+        }
+
+        return $this;
+    }
+
+    /**
      * Set options for an element. Accepted options are:
      * - label: label to associate with the element
      * - label_attributes: attributes to use when the label is rendered

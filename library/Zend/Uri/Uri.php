@@ -20,10 +20,14 @@ class Uri implements UriInterface
     /**
      * Character classes defined in RFC-3986
      */
-    const CHAR_UNRESERVED = 'a-zA-Z0-9_\-\.~';
-    const CHAR_GEN_DELIMS = ':\/\?#\[\]@';
-    const CHAR_SUB_DELIMS = '!\$&\'\(\)\*\+,;=';
-    const CHAR_RESERVED   = ':\/\?#\[\]@!\$&\'\(\)\*\+,;=';
+    const CHAR_UNRESERVED   = 'a-zA-Z0-9_\-\.~';
+    const CHAR_GEN_DELIMS   = ':\/\?#\[\]@';
+    const CHAR_SUB_DELIMS   = '!\$&\'\(\)\*\+,;=';
+    const CHAR_RESERVED     = ':\/\?#\[\]@!\$&\'\(\)\*\+,;=';
+    /**
+     * Not in the spec - those characters have special meaning in urlencoded query parameters
+     */
+    const CHAR_QUERY_DELIMS = '!\$\'\(\)\*\,';
 
     /**
      * Host part types represented as binary masks
@@ -1301,12 +1305,10 @@ class Uri implements UriInterface
      */
     protected static function normalizeQuery($query)
     {
-        // those characters have special meaning in urlencoded parameters
-        $subDelims = str_replace(array('&', '=', '+', ';'), '', self::CHAR_SUB_DELIMS);
         $query = self::encodeQueryFragment(
             self::decodeUrlEncodedChars(
                 $query,
-                '/[' . self::CHAR_UNRESERVED . $subDelims . ':@\/\?]/'
+                '/[' . self::CHAR_UNRESERVED . self::CHAR_QUERY_DELIMS . ':@\/\?]/'
             )
         );
 

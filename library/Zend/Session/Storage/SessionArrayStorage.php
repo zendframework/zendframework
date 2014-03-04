@@ -36,4 +36,3 @@ class SessionArrayStorage extends AbstractSessionArrayStorage
         return $_SESSION[$key];
     }
 }
-

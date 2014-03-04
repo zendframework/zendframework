@@ -494,4 +494,50 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($response->getId(), $decoded['id']);
 
     }
+
+    /**
+     * @group 3773
+     */
+    public function testHandleWithNamedParamsShouldSetMissingDefaults1()
+    {
+        $this->server->setClass('ZendTest\Json\TestAsset\Foo')
+                     ->setReturnResponse(true);
+        $request = $this->server->getRequest();
+        $request->setMethod('bar')
+                ->setParams( array(
+                    'two'   => 2,
+                    'one'   => 1,
+                ) )
+                ->setId( 'foo' );
+        $response = $this->server->handle();
+        $result = $response->getResult();
+
+        $this->assertTrue( is_array( $result ) );
+        $this->assertEquals( 1, $result[0] );
+        $this->assertEquals( 2, $result[1] );
+        $this->assertEquals( null, $result[2] );
+    }
+
+    /**
+     * @group 3773
+     */
+    public function testHandleWithNamedParamsShouldSetMissingDefaults2()
+    {
+        $this->server->setClass('ZendTest\Json\TestAsset\Foo')
+                     ->setReturnResponse(true);
+        $request = $this->server->getRequest();
+        $request->setMethod('bar')
+                ->setParams( array(
+                    'three' => 3,
+                    'one'   => 1,
+                ) )
+                ->setId( 'foo' );
+        $response = $this->server->handle();
+        $result = $response->getResult();
+
+        $this->assertTrue( is_array( $result ) );
+        $this->assertEquals( 1, $result[0] );
+        $this->assertEquals( 'two', $result[1] );
+        $this->assertEquals( 3, $result[2] );
+    }
 }

@@ -63,6 +63,13 @@ class Menu extends AbstractHelper
     protected $ulClass = 'navigation';
 
     /**
+     * CSS class to use for the active li element
+     *
+     * @var string
+     */
+    protected $liActiveClass = 'active';
+    
+    /**
      * View helper entry point:
      * Retrieves helper and optionally sets container to operate on
      *
@@ -115,6 +122,7 @@ class Menu extends AbstractHelper
      * @param  int|null          $maxDepth           maximum depth
      * @param  bool              $escapeLabels       Whether or not to escape the labels
      * @param  bool              $addClassToListItem Whether or not page class applied to <li> element
+     * @param  string            $liActiveClass      CSS class for active LI
      * @return string
      */
     protected function renderDeepestMenu(
@@ -124,7 +132,8 @@ class Menu extends AbstractHelper
         $minDepth,
         $maxDepth,
         $escapeLabels,
-        $addClassToListItem
+        $addClassToListItem,
+        $liActiveClass
     ) {
         if (!$active = $this->findActive($container, $minDepth - 1, $maxDepth)) {
             return '';
@@ -155,7 +164,7 @@ class Menu extends AbstractHelper
             $liClasses = array();
             // Is page active?
             if ($subPage->isActive(true)) {
-                $liClasses[] = 'active';
+                $liClasses[] = $liActiveClass;
             }
             // Add CSS class from page to <li>
             if ($addClassToListItem && $subPage->getClass()) {
@@ -205,7 +214,8 @@ class Menu extends AbstractHelper
                 $options['minDepth'],
                 $options['maxDepth'],
                 $options['escapeLabels'],
-                $options['addClassToListItem']
+                $options['addClassToListItem'],
+                $options['liActiveClass']
             );
         } else {
             $html = $this->renderNormalMenu($container,
@@ -215,7 +225,8 @@ class Menu extends AbstractHelper
                 $options['maxDepth'],
                 $options['onlyActiveBranch'],
                 $options['escapeLabels'],
-                $options['addClassToListItem']
+                $options['addClassToListItem'],
+                $options['liActiveClass']
             );
         }
 
@@ -233,6 +244,7 @@ class Menu extends AbstractHelper
      * @param  bool              $onlyActive         render only active branch?
      * @param  bool              $escapeLabels       Whether or not to escape the labels
      * @param  bool              $addClassToListItem Whether or not page class applied to <li> element
+     * @param  string            $liActiveClass      CSS class for active LI
      * @return string
      */
     protected function renderNormalMenu(
@@ -243,7 +255,8 @@ class Menu extends AbstractHelper
         $maxDepth,
         $onlyActive,
         $escapeLabels,
-        $addClassToListItem
+        $addClassToListItem,
+        $liActiveClass
     ) {
         $html = '';
 
@@ -324,7 +337,7 @@ class Menu extends AbstractHelper
             $liClasses = array();
             // Is page active?
             if ($isActive) {
-                $liClasses[] = 'active';
+                $liClasses[] = $liActiveClass;
             }
             // Add CSS class from page to <li>
             if ($addClassToListItem && $page->getClass()) {
@@ -423,29 +436,35 @@ class Menu extends AbstractHelper
      *     'minDepth'         => null,
      *     'maxDepth'         => null,
      *     'onlyActiveBranch' => true,
-     *     'renderParents'    => false
+     *     'renderParents'    => false,
+     *     'liActiveClass'    => $liActiveClass      
      * ));
      * </code>
      *
-     * @param  AbstractContainer $container [optional] container to
-     *                                      render. Default is to render
-     *                                      the container registered in
-     *                                      the helper.
-     * @param  string            $ulClass   [optional] CSS class to
-     *                                      use for UL element. Default
-     *                                      is to use the value from
-     *                                      {@link getUlClass()}.
-     * @param  string|int        $indent    [optional] indentation as
-     *                                      a string or number of
-     *                                      spaces. Default is to use
-     *                                      the value retrieved from
-     *                                      {@link getIndent()}.
+     * @param  AbstractContainer $container     [optional] container to
+     *                                          render. Default is to render
+     *                                          the container registered in
+     *                                          the helper.
+     * @param  string            $ulClass       [optional] CSS class to
+     *                                          use for UL element. Default
+     *                                          is to use the value from
+     *                                          {@link getUlClass()}.
+     * @param  string|int        $indent        [optional] indentation as
+     *                                          a string or number of
+     *                                          spaces. Default is to use
+     *                                          the value retrieved from
+     *                                          {@link getIndent()}.
+     * @param  string            $liActiveClass [optional] CSS class to
+     *                                          use for UL element. Default
+     *                                          is to use the value from
+     *                                          {@link getUlClass()}.
      * @return string
      */
     public function renderSubMenu(
         AbstractContainer $container = null,
         $ulClass = null,
-        $indent = null
+        $indent = null,
+        $liActiveClass = null
     ) {
         return $this->renderMenu($container, array(
             'indent'             => $indent,
@@ -456,6 +475,7 @@ class Menu extends AbstractHelper
             'renderParents'      => false,
             'escapeLabels'       => true,
             'addClassToListItem' => false,
+            'liActiveClass'      => $liActiveClass
         ));
     }
 
@@ -560,6 +580,12 @@ class Menu extends AbstractHelper
 
         if (!isset($options['addClassToListItem'])) {
             $options['addClassToListItem'] = $this->getAddClassToListItem();
+        }
+        
+        if (isset($options['liActiveClass']) && $options['liActiveClass'] !== null) {
+            $options['liActiveClass'] = (string) $options['liActiveClass'];
+        } else {
+            $options['liActiveClass'] = $this->getLiActiveClass();
         }
 
         return $options;
@@ -706,5 +732,30 @@ class Menu extends AbstractHelper
     public function getUlClass()
     {
         return $this->ulClass;
+    }
+    
+    /**
+     * Sets CSS class to use for the active 'li' element when rendering
+     *
+     * @param  string $liActiveClass CSS class to set
+     * @return Menu
+     */
+    public function setLiActiveClass($liActiveClass)
+    {
+        if (is_string($liActiveClass)) {
+            $this->liActiveClass = $liActiveClass;
+        }
+
+        return $this;
+    }
+    
+    /**
+     * Returns CSS class to use for the active 'li' element when rendering
+     *
+     * @return string
+     */
+    public function getLiActiveClass()
+    {
+        return $this->liActiveClass;
     }
 }

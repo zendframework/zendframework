@@ -62,6 +62,7 @@ class Server implements ZendServerServer
      * @var \Exception
      */
     protected $caughtException = null;
+
     /**
      * SOAP Server Features
      * @var int

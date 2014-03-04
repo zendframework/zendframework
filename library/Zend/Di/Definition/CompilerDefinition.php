@@ -385,7 +385,7 @@ class CompilerDefinition implements DefinitionInterface
             return false;
         }
 
-        return (array_key_exists($method, $this->classes[$class]));
+        return (array_key_exists($method, $this->classes[$class]['parameters']));
     }
 
     /**

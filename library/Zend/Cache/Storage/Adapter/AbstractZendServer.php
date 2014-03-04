@@ -39,9 +39,8 @@ abstract class AbstractZendServer extends AbstractAdapter
         $prefix      = ($namespace === '') ? '' : $namespace . self::NAMESPACE_SEPARATOR;
 
         $result = $this->zdcFetch($prefix . $normalizedKey);
-        if ($result === false) {
+        if ($result === null) {
             $success = false;
-            $result  = null;
         } else {
             $success  = true;
             $casToken = $result;

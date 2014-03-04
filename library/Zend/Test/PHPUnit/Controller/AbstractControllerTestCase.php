@@ -181,7 +181,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      */
     public function getResponse()
     {
-        return $this->getApplication()->getResponse();
+        return $this->getApplication()->getMvcEvent()->getResponse();
     }
 
     /**

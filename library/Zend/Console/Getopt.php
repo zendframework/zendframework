@@ -66,17 +66,6 @@ namespace Zend\Console;
  *
  * Example:  'abc:' means options '-a', '-b', and '-c'
  * are legal, and the latter requires a string parameter.
- *
- * @todo  Handle flags that implicitly print usage message, e.g. --help
- *
- * @todo  Enable user to specify header and footer content in the help message.
- *
- * @todo  Feature request to handle option interdependencies.
- *        e.g. if -b is specified, -a must be specified or else the
- *        usage is invalid.
- *
- * @todo  Feature request to implement callbacks.
- *        e.g. if -a is specified, run function 'handleOptionA'().
  */
 class Getopt
 {
@@ -190,6 +179,13 @@ class Getopt
      * @var bool
      */
     protected $parsed = false;
+
+    /**
+     * A list of callbacks to call when a particular option is present.
+     *
+     * @var array
+     */
+    protected $optionCallbacks = array();
 
     /**
      * The constructor takes one to three parameters.
@@ -389,7 +385,7 @@ class Getopt
                     $this->_addRulesModeZend($rules);
                     break;
                 }
-                // intentional fallthrough
+            // intentional fallthrough
             case self::MODE_GNU:
                 $this->_addRulesModeGnu($rules);
                 break;
@@ -591,8 +587,8 @@ class Getopt
         }
         foreach ($lines as $linepart) {
             $usage .= sprintf("%s %s\n",
-            str_pad($linepart['name'], $maxLen),
-            $linepart['help']);
+                str_pad($linepart['name'], $maxLen),
+                $linepart['help']);
         }
         return $usage;
     }
@@ -676,7 +672,7 @@ class Getopt
             }
             if (substr($argv[0], 0, 2) == '--') {
                 $this->_parseLongOption($argv);
-            } elseif (substr($argv[0], 0, 1) == '-' && ('-' != $argv[0] || count($argv) >1))  {
+            } elseif (substr($argv[0], 0, 1) == '-' && ('-' != $argv[0] || count($argv) >1)) {
                 $this->_parseShortOptionCluster($argv);
             } elseif ($this->getoptConfig[self::CONFIG_PARSEALL]) {
                 $this->remainingArgs[] = array_shift($argv);
@@ -690,7 +686,50 @@ class Getopt
             }
         }
         $this->parsed = true;
+
+        //go through parsed args and process callbacks
+        $this->triggerCallbacks();
+
         return $this;
+    }
+
+    /**
+     * @param string   $option   The name of the property which, if present, will call the passed
+     *                           callback with the value of this parameter.
+     * @param callable $callback The callback that will be called for this option. The first
+     *                           parameter will be the value of getOption($option), the second
+     *                           parameter will be a reference to $this object. If the callback returns
+     *                           false then an Exception\RuntimeException will be thrown indicating that
+     *                           there is a parse issue with this option.
+     *
+     * @return \Zend\Console\Getopt Fluent interface.
+     */
+    public function setOptionCallback($option, \Closure $callback)
+    {
+        $this->optionCallbacks[$option] = $callback;
+
+        return $this;
+    }
+
+    /**
+     * Triggers all the registered callbacks.
+     */
+    protected function triggerCallbacks()
+    {
+        foreach ($this->optionCallbacks as $option => $callback) {
+            if (null === $this->getOption($option)) {
+                continue;
+            }
+            //make sure we've resolved the alias, if using one
+            if (isset($this->ruleMap[$option]) && $option = $this->ruleMap[$option]) {
+                if (false === $callback($this->getOption($option), $this)) {
+                    throw new Exception\RuntimeException(
+                        "The option $option is invalid. See usage.",
+                        $this->getUsageMessage()
+                    );
+                }
+            }
+        }
     }
 
     /**
@@ -754,7 +793,7 @@ class Getopt
                 throw new Exception\RuntimeException(
                     "Option \"$flag\" is not recognized.",
                     $this->getUsageMessage()
-                    );
+                );
             }
 
             // Magic methods in future will use this mark as real flag value
@@ -777,7 +816,7 @@ class Getopt
                     throw new Exception\RuntimeException(
                         "Option \"$flag\" requires a parameter.",
                         $this->getUsageMessage()
-                        );
+                    );
                 }
                 break;
             case 'optional':
@@ -864,8 +903,8 @@ class Getopt
     protected function _setBooleanFlagValue($flag)
     {
         $this->options[$flag] = array_key_exists($flag, $this->options)
-                               ? (int) $this->options[$flag] + 1
-                               : true;
+            ? (int) $this->options[$flag] + 1
+            : true;
     }
 
     /**

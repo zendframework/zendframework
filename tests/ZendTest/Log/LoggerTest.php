@@ -301,16 +301,18 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testOptionsWithMockAndProcessor()
     {
-        $options = array('writers' => array(
-                             'first_writer' => array(
-                                 'name'     => 'mock',
-                             )
-                        ),
-                        'processors' => array(
-                            'first_processor' => array(
-                                'name'      => 'requestid',
-                            ),
-                        ));
+        $options = array(
+            'writers' => array(
+                'first_writer' => array(
+                    'name' => 'mock',
+                ),
+            ),
+            'processors' => array(
+                'first_processor' => array(
+                    'name' => 'requestid',
+                ),
+            )
+        );
         $logger = new Logger($options);
         $processors = $logger->getProcessors()->toArray();
         $this->assertCount(1, $processors);

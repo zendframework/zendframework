@@ -164,7 +164,7 @@ class Response extends AbstractMessage implements ResponseInterface
      * Populate object from string
      *
      * @param  string $string
-     * @return Response
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public static function fromString($string)
@@ -235,11 +235,12 @@ class Response extends AbstractMessage implements ResponseInterface
      *
      * @param  int $code
      * @throws Exception\InvalidArgumentException
-     * @return Response
+     * @return self
      */
     public function setStatusCode($code)
     {
-        if (!is_numeric($code)) {
+        $const = get_class($this) . '::STATUS_CODE_' . $code;
+        if (!is_numeric($code) || !defined($const)) {
             $code = is_scalar($code) ? $code : gettype($code);
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid status code provided: "%s"',
@@ -261,8 +262,30 @@ class Response extends AbstractMessage implements ResponseInterface
     }
 
     /**
+     * Set custom HTTP status code
+     *
+     * @param  int $code
+     * @throws Exception\InvalidArgumentException
+     * @return self
+     */
+    public function setCustomStatusCode($code)
+    {
+        if (!is_numeric($code)) {
+            $code = is_scalar($code) ? $code : gettype($code);
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid status code provided: "%s"',
+                $code
+            ));
+        }
+
+        $this->statusCode = (int) $code;
+        return $this;
+
+    }
+
+    /**
      * @param string $reasonPhrase
-     * @return Response
+     * @return self
      */
     public function setReasonPhrase($reasonPhrase)
     {
@@ -277,7 +300,7 @@ class Response extends AbstractMessage implements ResponseInterface
      */
     public function getReasonPhrase()
     {
-        if ($this->reasonPhrase == null) {
+        if (null == $this->reasonPhrase and isset($this->recommendedReasonPhrases[$this->statusCode])) {
             return $this->recommendedReasonPhrases[$this->statusCode];
         }
         return $this->reasonPhrase;

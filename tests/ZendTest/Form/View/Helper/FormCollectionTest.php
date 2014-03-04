@@ -236,4 +236,131 @@ class FormCollectionTest extends TestCase
         $this->assertRegExp('#<legend[^>]*>Foo#', $html);
         $this->assertContains('</legend>', $html);
     }
+
+    public function testCollectionIsWrappedByFieldsetWithoutLegend()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $this->helper->setShouldWrap(true);
+
+        $markup = $this->helper->render($collection);
+
+        $this->assertNotContains('<legend>', $markup);
+        $this->assertStringStartsWith('<fieldset>', $markup);
+        $this->assertStringEndsWith('</fieldset>', $markup);
+    }
+
+    public function testCollectionIsWrappedByFieldsetWithLabel()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setLabel('foo');
+        $this->helper->setShouldWrap(true);
+
+        $markup = $this->helper->render($collection);
+
+        $this->assertContains('<legend>foo</legend>', $markup);
+        $this->assertStringStartsWith('<fieldset>', $markup);
+        $this->assertStringEndsWith('</fieldset>', $markup);
+    }
+
+    public function testCollectionIsWrappedByCustomElement()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $this->helper->setShouldWrap(true);
+        $this->helper->setWrapper('<div>%2$s%1$s%3$s</div>');
+
+        $markup = $this->helper->render($collection);
+
+        $this->assertNotContains('<legend>', $markup);
+        $this->assertStringStartsWith('<div>', $markup);
+        $this->assertStringEndsWith('</div>', $markup);
+
+    }
+
+    public function testCollectionContainsTemplateAtPos3()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setShouldCreateTemplate(true);
+        $this->helper->setShouldWrap(true);
+        $this->helper->setWrapper('<div>%3$s%2$s%1$s</div>');
+
+        $markup = $this->helper->render($collection);
+
+        $this->assertNotContains('<legend>', $markup);
+        $this->assertStringStartsWith('<div><span', $markup);
+        $this->assertStringEndsWith('</div>', $markup);
+    }
+
+    public function testCollectionRendersLabelCorrectly()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setLabel('foo');
+        $this->helper->setShouldWrap(true);
+        $this->helper->setLabelWrapper('<h1>%s</h1>');
+
+        $markup = $this->helper->render($collection);
+
+        $this->assertContains('<h1>foo</h1>', $markup);
+        $this->assertStringStartsWith('<fieldset><h1>foo</h1>', $markup);
+    }
+
+    public function testCollectionCollectionRendersTemplateCorrectly()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setShouldCreateTemplate(true);
+        $this->helper->setTemplateWrapper('<div class="foo">%s</div>');
+
+        $markup = $this->helper->render($collection);
+
+        $this->assertNotContains('<legend>', $markup);
+        $this->assertRegExp('/\<div class="foo">.*?<\/div>/', $markup);
+
+    }
+
+    public function testCollectionRendersTemplateWithoutWrapper()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('colors');
+        $collection->setShouldCreateTemplate(true);
+        $this->helper->setShouldWrap(false);
+        $this->helper->setTemplateWrapper('<div class="foo">%s</div>');
+
+        $markup = $this->helper->render($collection);
+
+        $this->assertNotContains('<fieldset>', $markup);
+        $this->assertRegExp('/\<div class="foo">.*?<\/div>/', $markup);
+    }
+
+    public function testCollectionRendersFieldsetCorrectly()
+    {
+        $form = $this->getForm();
+        $collection = $form->get('fieldsets');
+        $collection->setShouldCreateTemplate(true);
+        $this->helper->setShouldWrap(true);
+        $this->helper->setWrapper('<div>%2$s%1$s%3$s</div>');
+        $this->helper->setTemplateWrapper('<div class="foo">%s</div>');
+
+        $markup = $this->helper->render($collection);
+
+        $this->assertNotContains('<fieldset>', $markup);
+        $this->assertRegExp('/\<div class="foo">.*?<\/div>/', $markup);
+    }
+
+    public function testGetterAndSetter()
+    {
+        $this->assertSame($this->helper, $this->helper->setWrapper('foo'));
+        $this->assertAttributeEquals('foo', 'wrapper', $this->helper);
+        $this->assertEquals('foo', $this->helper->getWrapper());
+        $this->assertSame($this->helper, $this->helper->setLabelWrapper('foo'));
+        $this->assertAttributeEquals('foo', 'labelWrapper', $this->helper);
+        $this->assertEquals('foo', $this->helper->getLabelWrapper());
+        $this->assertSame($this->helper, $this->helper->setTemplateWrapper('foo'));
+        $this->assertAttributeEquals('foo', 'templateWrapper', $this->helper);
+        $this->assertEquals('foo', $this->helper->getTemplateWrapper());
+    }
 }

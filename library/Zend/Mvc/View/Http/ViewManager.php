@@ -122,8 +122,8 @@ class ViewManager extends AbstractListenerAggregate
         $routeNotFoundStrategy   = $this->getRouteNotFoundStrategy();
         $exceptionStrategy       = $this->getExceptionStrategy();
         $mvcRenderingStrategy    = $this->getMvcRenderingStrategy();
+        $injectTemplateListener  = $this->getInjectTemplateListener();
         $createViewModelListener = new CreateViewModelListener();
-        $injectTemplateListener  = new InjectTemplateListener();
         $injectViewModelListener = new InjectViewModelListener();
 
         $this->registerMvcRenderingStrategies($events);
@@ -343,6 +343,15 @@ class ViewManager extends AbstractListenerAggregate
         $this->services->setAlias('404Strategy', 'RouteNotFoundStrategy');
 
         return $this->routeNotFoundStrategy;
+    }
+
+    public function getInjectTemplateListener()
+    {
+        $listener = new InjectTemplateListener();
+        if (isset($this->config['controller_map'])) {
+            $listener->setControllerMap($this->config['controller_map']);
+        }
+        return $listener;
     }
 
     /**

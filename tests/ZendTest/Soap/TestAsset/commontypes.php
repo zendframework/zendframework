@@ -467,7 +467,7 @@ class MockSoapServer
 class MockServer extends \Zend\Soap\Server
 {
     public $mockSoapServer = null;
-    protected function _getSoap()
+    public function getSoap()
     {
         $this->mockSoapServer = new MockSoapServer();
         return $this->mockSoapServer;

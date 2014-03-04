@@ -948,4 +948,15 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('test', $afterDebug->getMessage());
     }
 
+    public function testGetOriginalCaughtException()
+    {
+        $server = new Server();
+        $fault = $server->fault(new \Exception('test'));
+
+        $exception = $server->getException();
+        $this->assertInstanceOf('\Exception', $exception);
+        $this->assertEquals('test', $exception->getMessage());
+        $this->assertInstanceOf('\SoapFault', $fault);
+        $this->assertEquals('Unknown error', $fault->getMessage());
+    }
 }

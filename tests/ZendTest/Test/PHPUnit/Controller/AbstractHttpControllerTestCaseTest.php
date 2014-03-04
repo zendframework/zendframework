@@ -688,4 +688,20 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertResponseReasonPhrase('NOT OK');
     }
+
+    public function testAssertXmlHttpRequestDispatch()
+    {
+        $request = $this->getRequest();
+        $this->assertFalse($request->isXmlHttpRequest());
+
+        $this->dispatch('/test', 'GET', array(), true);
+
+        $request = $this->getRequest();
+        $this->assertTrue($request->isXmlHttpRequest());
+
+        $this->reset();
+
+        $request = $this->getRequest();
+        $this->assertFalse($request->isXmlHttpRequest());
+    }
 }

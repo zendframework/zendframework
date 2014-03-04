@@ -101,10 +101,17 @@ class InjectTemplateListener extends AbstractListenerAggregate
         $model->setTemplate($template);
     }
 
+    /**
+     * Set map of controller namespace -> template pairs
+     *
+     * @param  array $map
+     * @return self
+     */
     public function setControllerMap(array $map)
     {
         krsort($map);
         $this->controllerMap = $map;
+        return $this;
     }
 
     /**

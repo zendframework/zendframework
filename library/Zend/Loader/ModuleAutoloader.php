@@ -187,9 +187,11 @@ class ModuleAutoloader implements SplAutoloader
 
             if ($path == '.' || substr($path, 0, 2) == './' || substr($path, 0, 2) == '.\\') {
                 $basePath = realpath('.');
-                if ($basePath === false) {
+
+                if (false === $basePath) {
                     $basePath = getcwd();
                 }
+
                 $path = rtrim($basePath, '\/\\') . substr($path, 1);
             }
 

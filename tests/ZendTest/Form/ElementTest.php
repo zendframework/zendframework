@@ -161,6 +161,17 @@ class ElementTest extends TestCase
         $this->assertEquals(array('bar' => 'baz'), $option);
     }
 
+    public function testLabelOptionsAccessors()
+    {
+        $element = new Element('foo');
+        $element->setOptions(array(
+            'label_options' => array('moar' => 'foo')
+        ));
+
+        $labelOptions = $element->getLabelOptions();
+        $this->assertEquals(array('moar' => 'foo'), $labelOptions);
+    }
+
     public function testCanSetSingleOptionForLabel()
     {
         $element = new Element('foo');

@@ -34,6 +34,7 @@ class Module
                 'BarObject' => function ($sm) {
                     $foo      = $sm->get('FooObject');
                     $foo->bar = 'baz';
+
                     return $foo;
                 }
             ),

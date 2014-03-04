@@ -1246,9 +1246,9 @@ class UriTest extends \PHPUnit_Framework_TestCase
                 'baz' => 'waka'
             ), 'foo=bar&baz=waka'),
             array(array(
-                'some key' => 'some crazy value?!#[]',
+                'some key' => 'some crazy value?!#[]&=%+',
                 '1'        => ''
-            ), 'some%20key=some%20crazy%20value%3F%21%23%5B%5D&1='),
+            ), 'some%20key=some%20crazy%20value%3F%21%23%5B%5D%26%3D%25%2B&1='),
             array(array(
                 'array'        => array('foo', 'bar', 'baz'),
                 'otherstuff[]' => 1234
@@ -1277,6 +1277,8 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('FOO:/bar/with space?que%3fry#frag%ment#', 'foo:/bar/with%20space?que?ry#frag%25ment%23'),
             array('/path/%68%65%6c%6c%6f/world', '/path/hello/world'),
             array('/foo/bar?url=http%3A%2F%2Fwww.example.com%2Fbaz', '/foo/bar?url=http://www.example.com/baz'),
+
+            array('/urlencoded/params?chars=' . urlencode('+&=;%20#'), '/urlencoded/params?chars=%2B%26%3D%3B%2520%23'),
             array('File:///SitePages/fi%6ce%20has%20spaces', 'file:///SitePages/file%20has%20spaces'),
             array('/foo/bar/../baz?do=action#showFragment', '/foo/baz?do=action#showFragment'),
 

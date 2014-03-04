@@ -267,7 +267,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             $headers = $this->getRequest()->getHeaders();
             $headers->addHeaderLine('X_REQUESTED_WITH', 'XMLHttpRequest');
         }
-        
+
         $this->url($url, $method, $params);
         $this->getApplication()->run();
 

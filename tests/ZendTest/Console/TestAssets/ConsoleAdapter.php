@@ -24,6 +24,8 @@ class ConsoleAdapter extends AbstractAdapter
 
     public $testIsUtf8 = true;
 
+    public $writtenData = array();
+
     /**
      * Read a single line from the console input
      *
@@ -85,5 +87,17 @@ class ConsoleAdapter extends AbstractAdapter
     public function getWidth()
     {
         return $this->testWidth;
+    }
+
+    /**
+     * Tracks exactly what data has been written
+     * @param string $text
+     * @param null $color
+     * @param null $bgColor
+     */
+    public function write($text, $color = null, $bgColor = null)
+    {
+        $this->writtenData[] = $text;
+        parent::write($text, $color, $bgColor);
     }
 }

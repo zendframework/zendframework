@@ -85,6 +85,30 @@ class SocketTest extends CommonHttpTests
         $this->assertFalse($options['ssl']['allow_self_signed']);
     }
 
+
+    /**
+     * Test Certificate File Option
+     * The configuration is set to a legitimate certificate bundle file,
+     * to exclude errors from being thrown from an invalid cafile context being set.
+     */
+    public function testConnectingViaSslUsesCertificateFileContext()
+    {
+        $config = array(
+          'timeout' => 30,
+          'sslcafile' => __DIR__ . '/_files/ca-bundle.crt',
+        );
+        $this->_adapter->setOptions($config);
+        try {
+            $this->_adapter->connect('localhost', 443, true);
+        } catch (\Zend\Http\Client\Adapter\Exception\RuntimeException $e) {
+            // Test is designed to allow connect failure because we're interested
+            // only in the stream context state created within that method.
+        }
+        $context = $this->_adapter->getStreamContext();
+        $options = stream_context_get_options($context);
+        $this->assertEquals($config['sslcafile'], $options['ssl']['cafile']);
+    }
+
     /**
      * Test that a Zend\Config object can be used to set configuration
      *

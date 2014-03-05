@@ -101,8 +101,9 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Render Messages
      *
-     * @param  string $namespace
-     * @param  array  $classes
+     * @param  string    $namespace
+     * @param  array     $classes
+     * @param  null|bool $autoEscape
      * @return string
      */
     public function render($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $classes = array(), $autoEscape = null)

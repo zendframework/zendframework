@@ -652,7 +652,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     {
         $opts = new Getopt('a', array('-a'));
         $testVal = null;
-        $opts->setOptionCallback('a', function($val, $opts) use (&$testVal) {
+        $opts->setOptionCallback('a', function ($val, $opts) use (&$testVal) {
             $testVal = $val;
         });
         $opts->parse();
@@ -673,11 +673,11 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         $appleCallbackCalled = null;
         $bearCallbackCalled = null;
 
-        $opts->setOptionCallback('a', function($val) use (&$appleCallbackCalled){
+        $opts->setOptionCallback('a', function ($val) use (&$appleCallbackCalled) {
             $appleCallbackCalled = $val;
         });
 
-        $opts->setOptionCallback('bear', function($val) use (&$bearCallbackCalled){
+        $opts->setOptionCallback('bear', function ($val) use (&$bearCallbackCalled) {
             $bearCallbackCalled = $val;
         });
 
@@ -698,7 +698,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
 
         $bearCallbackCalled = null;
 
-        $opts->setOptionCallback('bear', function($val) use (&$bearCallbackCalled){
+        $opts->setOptionCallback('bear', function ($val) use (&$bearCallbackCalled) {
             $bearCallbackCalled = $val;
         });
 
@@ -714,7 +714,7 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
     public function testOptionCallbackReturnsFallsAndThrowException()
     {
         $opts = new Getopt('x', array('-x'));
-        $opts->setOptionCallback('x', function(){return false;});
+        $opts->setOptionCallback('x', function () {return false;});
         $opts->parse();
     }
 }

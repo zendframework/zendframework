@@ -190,7 +190,10 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
         $loader = new StandardAutoloader(array('autoregister_zf' => true));
         $r      = new ReflectionClass($loader);
         $file   = $r->getFileName();
-        $expected = array('Zend\\' => dirname(dirname($file)) . DIRECTORY_SEPARATOR);
+        $expected = array(
+            'Zend\\'    => dirname(dirname($file)) . DIRECTORY_SEPARATOR,
+            'ZendXml\\' => dirname(dirname(dirname($file))) . DIRECTORY_SEPARATOR . 'ZendXml' . DIRECTORY_SEPARATOR,
+        );
         $this->assertAttributeEquals($expected, 'namespaces', $loader);
     }
 

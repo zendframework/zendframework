@@ -74,6 +74,11 @@ class Csrf extends AbstractValidator
     protected $hashId;
 
     /**
+     * @var string
+     */
+    protected $format = '%s_%s';
+
+    /**
      * Constructor
      *
      * @param  array|Traversable $options
@@ -103,6 +108,9 @@ class Csrf extends AbstractValidator
                     break;
                 case 'timeout':
                     $this->setTimeout($value);
+                    break;
+                case 'format':
+                    $this->setFormat($value);
                     break;
                 default:
                     // ignore unknown options
@@ -321,7 +329,7 @@ class Csrf extends AbstractValidator
             $this->hash = md5($this->getSalt() . Rand::getBytes(32) .  $this->getName());
             static::$hashCache[$this->getSessionName()][$this->hashId] = $this->hash;
         }
-        $this->setValue(sprintf('%s_%s', $this->hashId, $this->hash));
+        $this->setValue(sprintf($this->getFormat(), $this->hashId, $this->hash));
         $this->initCsrfToken();
     }
 
@@ -330,6 +338,7 @@ class Csrf extends AbstractValidator
      *
      * Retrieve token from session, if it exists.
      *
+     * @param string $hashId
      * @return null|string
      */
     protected function getValidationToken($hashId = null)
@@ -339,5 +348,21 @@ class Csrf extends AbstractValidator
             return $session->hashList[$hashId];
         }
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+
+    /**
+     * @param string $format
+     */
+    public function setFormat($format)
+    {
+        $this->format = $format;
     }
 }

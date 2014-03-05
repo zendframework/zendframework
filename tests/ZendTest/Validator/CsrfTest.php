@@ -188,15 +188,6 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($hash, $test);
     }
 
-    public function testCanValidateWithOldBehaviour()
-    {
-        $hash = $this->validator->getHash();
-
-        $validator = new Csrf();
-
-        $this->assertTrue($validator->isValid($hash));
-    }
-
     public function testMultipleValidatorsDontConflict()
     {
         $validatorOne = new Csrf();

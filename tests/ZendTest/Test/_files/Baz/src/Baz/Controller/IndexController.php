@@ -50,7 +50,7 @@ class IndexController extends AbstractActionController
     public function customResponseAction()
     {
         $response = new Response();
-        $response->setStatusCode(999);
+        $response->setCustomStatusCode(999);
 
         return $response;
     }

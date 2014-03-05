@@ -57,7 +57,8 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $header = $headers->get('fake');
         $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
         $this->assertEquals('Fake', $header->getFieldName());
-        $this->assertEquals('foo-bar,blah-blah', $header->getFieldValue());
+        // any leading space MAY be replaced by a single space @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html
+        $this->assertEquals('foo-bar, blah-blah', $header->getFieldValue());
     }
 
     public function testHeadersFromStringFactoryCreatesSingleObjectWithContinuationLineAndLeadingWhitespaces()
@@ -68,7 +69,8 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $header = $headers->get('fake');
         $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
         $this->assertEquals('Fake', $header->getFieldName());
-        $this->assertEquals('foo-bar,blah-blah', $header->getFieldValue());
+        // any leading space MAY be replaced by a single space @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html
+        $this->assertEquals('foo-bar, blah-blah', $header->getFieldValue());
     }
 
     public function testHeadersFromStringFactoryCreatesSingleObjectWithHeaderBreakLine()
@@ -91,6 +93,17 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
         $this->assertEquals('Fake', $header->getFieldName());
         $this->assertEquals('foo-bar', $header->getFieldValue());
+    }
+
+    public function testHeadersFromStringFactoryRespectsSpecAllowedMultiLineHeaders()
+    {
+        $headers = Headers::fromString("Foo: foo-bar\r\nX-Another: another\r\n X-Actually-A-Continuation:ofSomeKindOfValue\r\nX-Another: another\r\n");
+        $this->assertEquals(3, $headers->count());
+
+        // check continued header
+        $header = $headers->get('X-Another');
+        $this->assertEquals('X-Another', $header->getFieldName());
+        $this->assertEquals('another X-Actually-A-Continuation:ofSomeKindOfValue', $header->getFieldValue());
     }
 
     public function testHeadersFromStringFactoryThrowsExceptionOnMalformedHeaderLine()

@@ -53,7 +53,7 @@ class TextDomain extends ArrayObject
     public function getPluralRule($fallbackToDefaultRule = true)
     {
         if ($this->pluralRule === null && $fallbackToDefaultRule) {
-            return self::getDefaultPluralRule();
+            return static::getDefaultPluralRule();
         }
 
         return $this->pluralRule;
@@ -76,11 +76,11 @@ class TextDomain extends ArrayObject
      */
     public static function getDefaultPluralRule()
     {
-        if (self::$defaultPluralRule === null) {
-            self::$defaultPluralRule = PluralRule::fromString('nplurals=2; plural=n != 1;');
+        if (static::$defaultPluralRule === null) {
+            static::$defaultPluralRule = PluralRule::fromString('nplurals=2; plural=n != 1;');
         }
 
-        return self::$defaultPluralRule;
+        return static::$defaultPluralRule;
     }
 
     /**

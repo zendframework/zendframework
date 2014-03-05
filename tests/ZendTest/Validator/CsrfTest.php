@@ -196,4 +196,16 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($validator->isValid($hash));
     }
+
+    public function testMultipleValidatorsDontConflict()
+    {
+        $validatorOne = new Csrf();
+        $validatorTwo = new Csrf();
+
+        $containerOne = $validatorOne->getSession();
+        $containerTwo = $validatorOne->getSession();
+
+        $this->assertSame($containerOne, $containerTwo);
+        $this->assertNotEquals($validatorOne->getHash() , $validatorTwo->getHash());
+    }
 }

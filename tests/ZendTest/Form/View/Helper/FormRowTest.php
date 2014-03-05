@@ -438,6 +438,22 @@ class FormRowTest extends TestCase
         $this->assertSame($labelPositionBeforeRender, $this->helper->getLabelPosition());
     }
 
+    /**
+     * @covers Zend\Form\View\Helper\FormRow::__invoke
+     */
+    public function testCanSetLabelPositionViaInvoke()
+    {
+        $element  = new Element('foo');
+        $element->setAttribute('id', 'bar');
+        $element->setLabel('Baz');
+
+        $markup = $this->helper->__invoke($element, 'append');
+        $this->assertRegexp('#^<input name="foo" id="bar" type="text" value=""\/?><label for="bar">Baz</label>$#', $markup);
+
+        $markup = $this->helper->__invoke($element, 'prepend');
+        $this->assertRegexp('#^<label for="bar">Baz</label><input name="foo" id="bar" type="text" value=""\/?>$#', $markup);
+    }
+
     public function testLabelOptionAlwaysWrapDefaultsToFalse()
     {
         $element = new Element('foo');
@@ -458,4 +474,3 @@ class FormRowTest extends TestCase
         $this->assertRegexp('#^<label><span>baz</span><input name="foo" id="bar" type="text" value=""\/?></label>$#', $markup);
     }
 }
-

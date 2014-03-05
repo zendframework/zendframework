@@ -141,10 +141,10 @@ class Menu extends AbstractHelper
 
         // special case if active page is one below minDepth
         if ($active['depth'] < $minDepth) {
-            if (!$active['page']->hasPages()) {
+            if (!$active['page']->hasPages(!$this->renderInvisible)) {
                 return '';
             }
-        } elseif (!$active['page']->hasPages()) {
+        } elseif (!$active['page']->hasPages(!$this->renderInvisible)) {
             // found pages has no children; render siblings
             $active['page'] = $active['page']->getParent();
         } elseif (is_int($maxDepth) && $active['depth'] +1 > $maxDepth) {
@@ -293,7 +293,7 @@ class Menu extends AbstractHelper
                         $accept = true;
                     } elseif ($foundPage->getParent()->hasPage($page)) {
                         // page is a sibling of the active page...
-                        if (!$foundPage->hasPages() ||
+                        if (!$foundPage->hasPages(!$this->renderInvisible) ||
                             is_int($maxDepth) && $foundDepth + 1 > $maxDepth) {
                             // accept if active page has no children, or the
                             // children are too deep to be rendered

@@ -102,4 +102,34 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Log\Filter\Priority', $filters[1]);
         $this->assertEquals(3, $this->readAttribute($filters[1], 'priority'));
     }
+
+    /**
+     * @covers Zend\Log\Writer\AbstractWriter::getFormatter
+     */
+    public function testFormatterDefaultsToNull()
+    {
+        $this->assertNull($this->_writer->getFormatter());
+    }
+
+    /**
+     * @covers Zend\Log\Writer\AbstractWriter::getFormatter
+     * @covers Zend\Log\Writer\AbstractWriter::setFormatter
+     */
+    public function testCanSetFormatter()
+    {
+        $formatter = new SimpleFormatter;
+        $this->_writer->setFormatter($formatter);
+        $this->assertSame($formatter, $this->_writer->getFormatter());
+    }
+
+    /**
+     * @covers Zend\Log\Writer\AbstractWriter::hasFormatter
+     */
+    public function testHasFormatter()
+    {
+        $this->assertFalse($this->_writer->hasFormatter());
+
+        $this->_writer->setFormatter(new SimpleFormatter);
+        $this->assertTrue($this->_writer->hasFormatter());
+    }
 }

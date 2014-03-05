@@ -410,7 +410,10 @@ class FormRowTest extends TestCase
         $this->assertSame('append', $this->helper->getLabelPosition());
     }
 
-    public function testCanSetLabelPositionWithRender()
+    /**
+     * @covers Zend\Form\View\Helper\FormRow::render
+     */
+    public function testCanSetLabelPositionViaRender()
     {
         $element  = new Element('foo');
         $element->setAttribute('id', 'bar');
@@ -421,6 +424,18 @@ class FormRowTest extends TestCase
 
         $markup = $this->helper->render($element, 'prepend');
         $this->assertRegexp('#^<label for="bar">Baz</label><input name="foo" id="bar" type="text" value=""\/?>$#', $markup);
+    }
+
+    public function testSetLabelPositionViaRenderIsNotCached()
+    {
+        $labelPositionBeforeRender = $this->helper->getLabelPosition();
+        $element = new Element('foo');
+
+        $this->helper->render($element, 'append');
+        $this->assertSame($labelPositionBeforeRender, $this->helper->getLabelPosition());
+
+        $this->helper->render($element, 'prepend');
+        $this->assertSame($labelPositionBeforeRender, $this->helper->getLabelPosition());
     }
 
     public function testLabelOptionAlwaysWrapDefaultsToFalse()

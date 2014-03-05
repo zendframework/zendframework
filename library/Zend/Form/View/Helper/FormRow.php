@@ -112,10 +112,11 @@ class FormRow extends AbstractHelper
      * Utility form helper that renders a label (if it exists), an element and errors
      *
      * @param  ElementInterface $element
+     * @param  null|string      $labelPosition
      * @throws \Zend\Form\Exception\DomainException
      * @return string
      */
-    public function render(ElementInterface $element)
+    public function render(ElementInterface $element, $labelPosition = null)
     {
         $escapeHtmlHelper    = $this->getEscapeHtmlHelper();
         $labelHelper         = $this->getLabelHelper();
@@ -124,6 +125,10 @@ class FormRow extends AbstractHelper
 
         $label           = $element->getLabel();
         $inputErrorClass = $this->getInputErrorClass();
+
+        if (is_null($labelPosition)) {
+            $labelPosition = $this->labelPosition;
+        }
 
         if (isset($label) && '' !== $label) {
             // Translate the label
@@ -147,7 +152,7 @@ class FormRow extends AbstractHelper
                 'element'           => $element,
                 'label'             => $label,
                 'labelAttributes'   => $this->labelAttributes,
-                'labelPosition'     => $this->labelPosition,
+                'labelPosition'     => $labelPosition,
                 'renderErrors'      => $this->renderErrors,
             );
 
@@ -213,7 +218,7 @@ class FormRow extends AbstractHelper
                     $labelOpen = $labelClose = $label = '';
                 }
 
-                switch ($this->labelPosition) {
+                switch ($labelPosition) {
                     case self::LABEL_PREPEND:
                         $markup = $labelOpen . $label . $elementString . $labelClose;
                         break;

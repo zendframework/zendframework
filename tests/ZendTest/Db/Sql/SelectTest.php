@@ -618,6 +618,18 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF2-5192
+     */
+    public function testSelectUsingTableIdentifierWithEmptyScheme()
+    {
+        $select = new Select;
+        $select->from(new TableIdentifier('foo'));
+        $select->join(new TableIdentifier('bar'), 'foo.id = bar.fooid');
+
+        $this->assertEquals('SELECT "foo".*, "bar".* FROM "foo" INNER JOIN "bar" ON "foo"."id" = "bar"."fooid"', $select->getSqlString(new TrustingSql92Platform()));
+    }
+
+    /**
      * @testdox unit test: Test getSqlString() will produce expected sql and parameters based on a variety of provided arguments [uses data provider]
      * @covers Zend\Db\Sql\Select::getSqlString
      * @dataProvider providerData

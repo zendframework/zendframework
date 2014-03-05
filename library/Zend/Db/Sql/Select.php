@@ -681,7 +681,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 } else {
                     $name = (is_array($join['name'])) ? key($join['name']) : $name = $join['name'];
                     if ($name instanceof TableIdentifier) {
-                        $name = $platform->quoteIdentifier($name->getSchema()) . $separator . $platform->quoteIdentifier($name->getTable());
+                        $name = ($name->hasSchema() ? $platform->quoteIdentifier($name->getSchema()) . $separator : '') . $platform->quoteIdentifier($name->getTable());
                     } else {
                         $name = $platform->quoteIdentifier($name);
                     }
@@ -742,7 +742,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             }
             if ($joinName instanceof TableIdentifier) {
                 $joinName = $joinName->getTableAndSchema();
-                $joinName = $platform->quoteIdentifier($joinName[1]) . $platform->getIdentifierSeparator() . $platform->quoteIdentifier($joinName[0]);
+                $joinName = ($joinName[1] ? $platform->quoteIdentifier($joinName[1]) . $platform->getIdentifierSeparator() : '') . $platform->quoteIdentifier($joinName[0]);
             } else {
                 if ($joinName instanceof Select) {
                     $joinName = '(' . $joinName->processSubSelect($joinName, $platform, $driver, $parameterContainer) . ')';

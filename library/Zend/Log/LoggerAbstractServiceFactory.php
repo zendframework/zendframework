@@ -105,6 +105,20 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
             $config['writer_plugin_manager'] = $services->get('Zend\Log\WriterPluginManager');
         }
 
+        if (isset($config['processor_plugin_manager']) 
+            && is_string($config['processor_plugin_manager'])
+            && $services->has($config['processor_plugin_manager'])
+        ) {
+            $config['processor_plugin_manager'] = $services->get($config['processor_plugin_manager']);
+        }
+
+        if ((!isset($config['processor_plugin_manager'])
+            || ! $config['processor_plugin_manager'] instanceof AbstractPluginManager)
+            && $services->has('Zend\Log\ProcessorPluginManager')
+        ) {
+            $config['processor_plugin_manager'] = $services->get('Zend\Log\ProcessorPluginManager');
+        }
+
         if (!isset($config['writers'])) {
             return;
         }

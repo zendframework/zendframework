@@ -155,6 +155,13 @@ class Logger implements LoggerInterface
             $this->setWriterPluginManager($options['writer_plugin_manager']);
         }
 
+        // Inject processor plugin manager, if available
+        if (isset($options['processor_plugin_manager']) 
+            && $options['processor_plugin_manager'] instanceof AbstractPluginManager
+        ) {
+            $this->setProcessorPluginManager($options['processor_plugin_manager']);
+        }
+
         if (isset($options['writers']) && is_array($options['writers'])) {
             foreach ($options['writers'] as $writer) {
                 if (!isset($writer['name'])) {

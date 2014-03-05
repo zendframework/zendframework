@@ -9,6 +9,7 @@
 
 namespace ZendTest\Log;
 
+use Zend\Log\ProcessorPluginManager;
 use Zend\Log\WriterPluginManager;
 use Zend\Log\Writer\Db as DbWriter;
 use Zend\Mvc\Service\ServiceManagerConfig;
@@ -153,5 +154,31 @@ class LoggerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($logWriters));
         $writer = $logWriters->current();
         $this->assertSame($mockWriter, $writer);
+    }
+
+    public function testWillInjectProcessorPluginManagerIfAvailable()
+    {
+        $processors = new ProcessorPluginManager();
+        $mockProcessor = $this->getMock('Zend\Log\Processor\ProcessorInterface');
+        $processors->setService('CustomProcessor', $mockProcessor);
+
+        $services = new ServiceManager(new ServiceManagerConfig(array(
+            'abstract_factories' => array('Zend\Log\LoggerAbstractServiceFactory'),
+        )));
+        $services->setService('Zend\Log\ProcessorPluginManager', $processors);
+        $services->setService('Config', array(
+            'log' => array(
+                'Application\Frontend' => array(
+                    'writers' => array(array('name' => 'Null')),
+                    'processors' => array(array('name' => 'CustomProcessor')),
+                ),
+            ),
+        ));
+
+        $log = $services->get('Application\Frontend');
+        $logProcessors = $log->getProcessors();
+        $this->assertEquals(1, count($logProcessors));
+        $processor = $logProcessors->current();
+        $this->assertSame($mockProcessor, $processor);
     }
 }

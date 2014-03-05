@@ -9,6 +9,9 @@
 
 namespace Zend\Authentication;
 
+/**
+ * Provides an API for authentication and identity management
+ */
 interface AuthenticationServiceInterface
 {
     /**

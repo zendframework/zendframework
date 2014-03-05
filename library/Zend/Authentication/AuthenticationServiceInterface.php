@@ -12,6 +12,8 @@ namespace Zend\Authentication;
 interface AuthenticationServiceInterface
 {
     /**
+     * Authenticates and provides an authentication result
+     *
      * @return Result
      */
     public function authenticate();

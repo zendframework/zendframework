@@ -23,8 +23,8 @@ class In implements PredicateInterface
     /**
      * Constructor
      *
-     * @param  null|string $identifier
-     * @param  array $valueSet
+     * @param null|string|array $identifier
+     * @param null|array|Select $valueSet
      */
     public function __construct($identifier = null, $valueSet = null)
     {
@@ -39,19 +39,20 @@ class In implements PredicateInterface
     /**
      * Set identifier for comparison
      *
-     * @param  string $identifier
+     * @param  string|array $identifier
      * @return In
      */
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
+
         return $this;
     }
 
     /**
      * Get identifier of comparison
      *
-     * @return null|string
+     * @return null|string|array
      */
     public function getIdentifier()
     {
@@ -61,7 +62,7 @@ class In implements PredicateInterface
     /**
      * Set set of values for IN comparison
      *
-     * @param  array $valueSet
+     * @param  array|Select                       $valueSet
      * @throws Exception\InvalidArgumentException
      * @return In
      */
@@ -73,9 +74,15 @@ class In implements PredicateInterface
             );
         }
         $this->valueSet = $valueSet;
+
         return $this;
     }
 
+    /**
+     * Gets set of values in IN comparision
+     *
+     * @return array|Select
+     */
     public function getValueSet()
     {
         return $this->valueSet;
@@ -89,7 +96,21 @@ class In implements PredicateInterface
     public function getExpressionData()
     {
         $values = $this->getValueSet();
+        $identifier = $this->getIdentifier();
         if ($values instanceof Select) {
+            if (is_array($identifier)) {
+                $identifiers = $identifier;
+                $specification = ' ( ' . implode(', ', array_fill(0, count($identifiers), '%s')) . ' ) ';
+                $specification .= ' IN %s';
+                $types = array_fill(0, count($identifiers), self::TYPE_IDENTIFIER);
+                $types[] = self::TYPE_VALUE;
+
+                return array(array(
+                    $specification,
+                    array_merge($identifiers, array($values)),
+                    $types,
+                ));
+            }
             $specification = $this->selectSpecification;
             $types = array(self::TYPE_VALUE);
             $values = array($values);
@@ -98,7 +119,6 @@ class In implements PredicateInterface
             $types = array_fill(0, count($values), self::TYPE_VALUE);
         }
 
-        $identifier = $this->getIdentifier();
         array_unshift($values, $identifier);
         array_unshift($types, self::TYPE_IDENTIFIER);
 

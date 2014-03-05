@@ -9,8 +9,23 @@
 
 namespace Zend\Form;
 
-interface LabelOptionsAwareInterface
+interface LabelAwareInterface
 {
+    /**
+     * Set the label (if any) used for this element
+     *
+     * @param  $label
+     * @return ElementInterface
+     */
+    public function setLabel($label);
+
+    /**
+     * Retrieve the label (if any) used for this element
+     *
+     * @return string
+     */
+    public function getLabel();
+
     /**
      * Set the attributes to use with the label
      *

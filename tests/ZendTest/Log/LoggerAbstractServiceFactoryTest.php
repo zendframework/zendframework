@@ -131,6 +131,9 @@ class LoggerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeSame($db, 'db', $writer);
     }
 
+    /**
+     * @group 4455
+     */
     public function testWillInjectWriterPluginManagerIfAvailable()
     {
         $writers = new WriterPluginManager();
@@ -140,7 +143,7 @@ class LoggerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $services = new ServiceManager(new ServiceManagerConfig(array(
             'abstract_factories' => array('Zend\Log\LoggerAbstractServiceFactory'),
         )));
-        $services->setService('Zend\Log\WriterPluginManager', $writers);
+        $services->setService('LogWriterManager', $writers);
         $services->setService('Config', array(
             'log' => array(
                 'Application\Frontend' => array(
@@ -156,6 +159,9 @@ class LoggerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($mockWriter, $writer);
     }
 
+    /**
+     * @group 4455
+     */
     public function testWillInjectProcessorPluginManagerIfAvailable()
     {
         $processors = new ProcessorPluginManager();
@@ -165,7 +171,7 @@ class LoggerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $services = new ServiceManager(new ServiceManagerConfig(array(
             'abstract_factories' => array('Zend\Log\LoggerAbstractServiceFactory'),
         )));
-        $services->setService('Zend\Log\ProcessorPluginManager', $processors);
+        $services->setService('LogProcessorManager', $processors);
         $services->setService('Config', array(
             'log' => array(
                 'Application\Frontend' => array(

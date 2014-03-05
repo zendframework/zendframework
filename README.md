@@ -34,6 +34,10 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5882](https://github.com/zendframework/zf2/pull/5882) adds the ability to
+  set the formatter used by a `Zend\Log\Writer\Db` instance via the
+  configuration options passed to the factory.
+
 - [#5803](https://github.com/zendframework/zf2/pull/5803) adds a new flag to
   `Zend\Navigation` containers' `hasPages()` method, `$onlyVisible`. If set to
   `true`, only pages that are visibile based on ACLs will be considered.

@@ -17,8 +17,7 @@ class In implements PredicateInterface
     protected $identifier;
     protected $valueSet;
 
-    protected $selectSpecification = '%s IN %s';
-    protected $valueSpecSpecification = '%%s IN (%s)';
+    protected $specification = '%s IN %s';
 
     /**
      * Constructor
@@ -95,36 +94,39 @@ class In implements PredicateInterface
      */
     public function getExpressionData()
     {
-        $values = $this->getValueSet();
         $identifier = $this->getIdentifier();
-        if ($values instanceof Select) {
-            if (is_array($identifier)) {
-                $identifiers = $identifier;
-                $specification = ' ( ' . implode(', ', array_fill(0, count($identifiers), '%s')) . ' ) ';
-                $specification .= ' IN %s';
-                $types = array_fill(0, count($identifiers), self::TYPE_IDENTIFIER);
-                $types[] = self::TYPE_VALUE;
+        $values = $this->getValueSet();
+        $replacements = array();
 
-                return array(array(
-                    $specification,
-                    array_merge($identifiers, array($values)),
-                    $types,
-                ));
-            }
-            $specification = $this->selectSpecification;
-            $types = array(self::TYPE_VALUE);
-            $values = array($values);
+        if (is_array($identifier)) {
+            $identifierSpecFragment = '(' . implode(', ', array_fill(0, count($identifier), '%s')) . ')';
+            $types = array_fill(0, count($identifier), self::TYPE_IDENTIFIER);
+            $replacements = $identifier;
         } else {
-            $specification = sprintf($this->valueSpecSpecification, implode(', ', array_fill(0, count($values), '%s')));
-            $types = array_fill(0, count($values), self::TYPE_VALUE);
+            $identifierSpecFragment = '%s';
+            $replacements[] = $identifier;
+            $types = array(self::TYPE_IDENTIFIER);
         }
 
-        array_unshift($values, $identifier);
-        array_unshift($types, self::TYPE_IDENTIFIER);
+        if ($values instanceof Select) {
+            $specification = vsprintf(
+                $this->specification,
+                array($identifierSpecFragment, '%s')
+            );
+            $replacements[] = $values;
+            $types[] = self::TYPE_VALUE;
+        } else {
+            $specification = vsprintf(
+                $this->specification,
+                array($identifierSpecFragment, '(' . implode(', ', array_fill(0, count($values), '%s')) . ')')
+            );
+            $replacements = array_merge($replacements, $values);
+            $types = array_merge($types, array_fill(0, count($values), self::TYPE_VALUE));
+        }
 
         return array(array(
             $specification,
-            $values,
+            $replacements,
             $types,
         ));
     }

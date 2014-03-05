@@ -25,10 +25,9 @@ class InTest extends TestCase
 
     public function testCanPassIdentifierAndValueSetToConstructor()
     {
-        $in = new In();
-        $predicate = new In('foo.bar', array(1, 2));
-        $this->assertEquals('foo.bar', $predicate->getIdentifier());
-        $this->assertEquals(array(1, 2), $predicate->getValueSet());
+        $in = new In('foo.bar', array(1, 2));
+        $this->assertEquals('foo.bar', $in->getIdentifier());
+        $this->assertEquals(array(1, 2), $in->getValueSet());
     }
 
     public function testIdentifierIsMutable()
@@ -60,7 +59,20 @@ class InTest extends TestCase
 
     public function testGetExpressionDataWithSubselect()
     {
-        $in = new In('foo', $select = new Select);
+        $select = new Select;
+        $in = new In('foo', $select);
+        $expected = array(array(
+            '%s IN %s',
+            array('foo', $select),
+            array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
+        ));
+        $this->assertEquals($expected, $in->getExpressionData());
+    }
+
+    public function testGetExpressionDataWithSubselectAndIdentifier()
+    {
+        $select = new Select;
+        $in = new In('foo', $select);
         $expected = array(array(
             '%s IN %s',
             array('foo', $select),
@@ -71,12 +83,14 @@ class InTest extends TestCase
 
     public function testGetExpressionDataWithSubselectAndArrayIdentifier()
     {
-        $in = new In(array('foo', 'bar'), $select = new Select);
+        $select = new Select;
+        $in = new In(array('foo', 'bar'), $select);
         $expected = array(array(
-            ' ( %s, %s )  IN %s',
+            '(%s, %s) IN %s',
             array('foo', 'bar', $select),
             array($in::TYPE_IDENTIFIER, $in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
         ));
         $this->assertEquals($expected, $in->getExpressionData());
     }
+
 }

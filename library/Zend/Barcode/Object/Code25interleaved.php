@@ -72,7 +72,7 @@ class Code25interleaved extends Code25
         if ($this->withBearerBars) {
             $this->withBorder = false;
         }
-        
+
         $barcodeTable = array();
 
         // Start character (0000)

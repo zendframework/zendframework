@@ -9,6 +9,7 @@
 
 namespace ZendTest\Log\Writer;
 
+use ReflectionObject;
 use ZendTest\Log\TestAsset\ConcreteWriter;
 use ZendTest\Log\TestAsset\ErrorGeneratingWriter;
 use Zend\Log\Formatter\Simple as SimpleFormatter;
@@ -108,7 +109,10 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function testFormatterDefaultsToNull()
     {
-        $this->assertNull($this->_writer->getFormatter());
+        $r = new ReflectionObject($this->_writer);
+        $m = $r->getMethod('getFormatter');
+        $m->setAccessible(true);
+        $this->assertNull($m->invoke($this->_writer));
     }
 
     /**
@@ -119,7 +123,11 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     {
         $formatter = new SimpleFormatter;
         $this->_writer->setFormatter($formatter);
-        $this->assertSame($formatter, $this->_writer->getFormatter());
+
+        $r = new ReflectionObject($this->_writer);
+        $m = $r->getMethod('getFormatter');
+        $m->setAccessible(true);
+        $this->assertSame($formatter, $m->invoke($this->_writer));
     }
 
     /**
@@ -127,9 +135,12 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasFormatter()
     {
-        $this->assertFalse($this->_writer->hasFormatter());
+        $r = new ReflectionObject($this->_writer);
+        $m = $r->getMethod('hasFormatter');
+        $m->setAccessible(true);
+        $this->assertFalse($m->invoke($this->_writer));
 
         $this->_writer->setFormatter(new SimpleFormatter);
-        $this->assertTrue($this->_writer->hasFormatter());
+        $this->assertTrue($m->invoke($this->_writer));
     }
 }

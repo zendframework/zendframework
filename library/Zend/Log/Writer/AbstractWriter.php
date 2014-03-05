@@ -311,7 +311,7 @@ abstract class AbstractWriter implements WriterInterface
      *
      * @return Formatter\FormatterInterface
      */
-    public function getFormatter()
+    protected function getFormatter()
     {
         return $this->formatter;
     }
@@ -321,7 +321,7 @@ abstract class AbstractWriter implements WriterInterface
      *
      * @return bool
      */
-    public function hasFormatter()
+    protected function hasFormatter()
     {
         return $this->formatter instanceof Formatter\FormatterInterface;
     }

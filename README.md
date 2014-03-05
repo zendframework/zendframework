@@ -34,6 +34,10 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5885](https://github.com/zendframework/zf2/pull/5885) adds the ability to
+  specify the Locale via a route match parameter, and have it apply to the
+  composed translator in the router, if any.
+
 - [#5882](https://github.com/zendframework/zf2/pull/5882) adds the ability to
   set the formatter used by a `Zend\Log\Writer\Db` instance via the
   configuration options passed to the factory.

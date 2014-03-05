@@ -38,17 +38,6 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo-bar', $header->getFieldValue());
     }
 
-    public function testHeadersFromStringFactoryCreateSingleObjectWithLeadingWhitespaces()
-    {
-        $headers = Headers::fromString("   Fake: foo-bar");
-        $this->assertEquals(1, $headers->count());
-
-        $header = $headers->get('fake');
-        $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
-        $this->assertEquals('Fake', $header->getFieldName());
-        $this->assertEquals('foo-bar', $header->getFieldValue());
-    }
-
     public function testHeadersFromStringFactoryCreatesSingleObjectWithContinuationLine()
     {
         $headers = Headers::fromString("Fake: foo-bar,\r\n      blah-blah");
@@ -57,18 +46,8 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $header = $headers->get('fake');
         $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
         $this->assertEquals('Fake', $header->getFieldName());
-        $this->assertEquals('foo-bar,blah-blah', $header->getFieldValue());
-    }
-
-    public function testHeadersFromStringFactoryCreatesSingleObjectWithContinuationLineAndLeadingWhitespaces()
-    {
-        $headers = Headers::fromString("   Fake: foo-bar,\r\n      blah-blah");
-        $this->assertEquals(1, $headers->count());
-
-        $header = $headers->get('fake');
-        $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
-        $this->assertEquals('Fake', $header->getFieldName());
-        $this->assertEquals('foo-bar,blah-blah', $header->getFieldValue());
+        // any leading space MAY be replaced by a single space @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html
+        $this->assertRegexp("#foo-bar,\r\n\s+blah-blah#", $header->getFieldValue());
     }
 
     public function testHeadersFromStringFactoryCreatesSingleObjectWithHeaderBreakLine()
@@ -82,15 +61,15 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo-bar', $header->getFieldValue());
     }
 
-    public function testHeadersFromStringFactoryCreatesSingleObjectWithHeaderBreakLineAndLeadingWhitespaces()
+    public function testHeadersFromStringFactoryRespectsSpecAllowedMultiLineHeaders()
     {
-        $headers = Headers::fromString("   Fake: foo-bar\r\n\r\n");
-        $this->assertEquals(1, $headers->count());
+        $headers = Headers::fromString("Foo: foo-bar\r\nX-Another: another\r\n X-Actually-A-Continuation:ofSomeKindOfValue\r\nX-Another: another\r\n");
+        $this->assertEquals(3, $headers->count());
 
-        $header = $headers->get('fake');
-        $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
-        $this->assertEquals('Fake', $header->getFieldName());
-        $this->assertEquals('foo-bar', $header->getFieldValue());
+        // check continued header
+        $header = $headers->get('X-Another');
+        $this->assertEquals('X-Another', $header->getFieldName());
+        $this->assertRegexp("#another\r\n\s+X-Actually-A-Continuation:ofSomeKindOfValue#", $header->getFieldValue());
     }
 
     public function testHeadersFromStringFactoryThrowsExceptionOnMalformedHeaderLine()
@@ -99,31 +78,9 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         Headers::fromString("Fake = foo-bar\r\n\r\n");
     }
 
-    public function testHeadersFromStringFactoryThrowsExceptionOnMalformedHeaderLineAndLeadingWhitespaces()
-    {
-        $this->setExpectedException('Zend\Http\Exception\RuntimeException', 'does not match');
-        Headers::fromString("   Fake = foo-bar\r\n\r\n");
-    }
-
     public function testHeadersFromStringFactoryCreatesMultipleObjects()
     {
         $headers = Headers::fromString("Fake: foo-bar\r\nAnother-Fake: boo-baz");
-        $this->assertEquals(2, $headers->count());
-
-        $header = $headers->get('fake');
-        $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
-        $this->assertEquals('Fake', $header->getFieldName());
-        $this->assertEquals('foo-bar', $header->getFieldValue());
-
-        $header = $headers->get('anotherfake');
-        $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
-        $this->assertEquals('Another-Fake', $header->getFieldName());
-        $this->assertEquals('boo-baz', $header->getFieldValue());
-    }
-
-    public function testHeadersFromStringFactoryCreatesMultipleObjectsWithLeadingWhitespaces()
-    {
-        $headers = Headers::fromString("   Fake: foo-bar\r\nAnother-Fake: boo-baz");
         $this->assertEquals(2, $headers->count());
 
         $header = $headers->get('fake');

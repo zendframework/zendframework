@@ -104,6 +104,8 @@ class Pdf extends AbstractRenderer
     protected function drawPolygon($points, $color, $filled = true)
     {
         $page = $this->resource->pages[$this->page];
+        $x = array();
+        $y = array();
         foreach ($points as $point) {
             $x[] = $point[0] * $this->moduleSize + $this->leftOffset;
             $y[] = $page->getHeight() - $point[1] * $this->moduleSize - $this->topOffset;

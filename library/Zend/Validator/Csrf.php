@@ -327,12 +327,11 @@ class Csrf extends AbstractValidator
         $session = $this->getSession();
 
         /**
-         * if no tokenId is passed we just grub the first one available.
-         * this handle validation of an old hash
+         * if no tokenId is passed we revert to the old behaviour
+         * @todo remove, here for BC
          */
-        if (! $tokenId && ! empty($session->tokenList)) {
-            $ids = array_keys($session->tokenList);
-            $tokenId = array_shift($ids);
+        if (! $tokenId && isset($session->hash)) {
+            return $session->hash;
         }
 
         if ($tokenId && isset($session->tokenList[$tokenId])) {

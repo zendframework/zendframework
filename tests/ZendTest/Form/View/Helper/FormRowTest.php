@@ -417,8 +417,10 @@ class FormRowTest extends TestCase
         $element->setLabel('Baz');
 
         $markup = $this->helper->render($element, 'append');
-        //var_dump($markup);
         $this->assertRegexp('#^<input name="foo" id="bar" type="text" value=""\/?><label for="bar">Baz</label>$#', $markup);
+
+        $markup = $this->helper->render($element, 'prepend');
+        $this->assertRegexp('#^<label for="bar">Baz</label><input name="foo" id="bar" type="text" value=""\/?>$#', $markup);
     }
 
     public function testLabelOptionAlwaysWrapDefaultsToFalse()

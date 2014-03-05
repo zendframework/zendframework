@@ -122,4 +122,19 @@ class DateTimeSelectTest extends TestCase
         $this->assertEquals('04', $element->getMinuteElement()->getValue());
         $this->assertEquals('00', $element->getSecondElement()->getValue());
     }
+
+    public function testCloningPreservesCorrectValues()
+    {
+        $element = new DateTimeSelectElement();
+        $element->setValue(new DateTime('2014-01-02 03:04:05'));
+
+        $cloned = clone $element;
+
+        $this->assertEquals('2014', $cloned->getYearElement()->getValue());
+        $this->assertEquals('01', $cloned->getMonthElement()->getValue());
+        $this->assertEquals('02', $cloned->getDayElement()->getValue());
+        $this->assertEquals('03', $cloned->getHourElement()->getValue());
+        $this->assertEquals('04', $cloned->getMinuteElement()->getValue());
+        $this->assertEquals('05', $cloned->getSecondElement()->getValue());
+    }
 }

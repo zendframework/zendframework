@@ -66,6 +66,7 @@ class Socket implements HttpAdapter, StreamInterface
         'sslcert'               => null,
         'sslpassphrase'         => null,
         'sslverifypeer'         => true,
+        'sslcafile'             => null,
         'sslcapath'             => null,
         'sslallowselfsigned'    => false,
         'sslusecontext'         => false
@@ -205,6 +206,12 @@ class Socket implements HttpAdapter, StreamInterface
                     }
                 }
 
+                if ($this->config['sslcafile']) {
+                    if (!stream_context_set_option($context, 'ssl', 'cafile', $this->config['sslcafile'])) {
+                        throw new AdapterException\RuntimeException('Unable to set sslcafile option');
+                    }
+                }
+
                 if ($this->config['sslcapath']) {
                     if (!stream_context_set_option($context, 'ssl', 'capath', $this->config['sslcapath'])) {
                         throw new AdapterException\RuntimeException('Unable to set sslcapath option');
@@ -287,7 +294,11 @@ class Socket implements HttpAdapter, StreamInterface
 
                     if ((! $errorString) && $this->config['sslverifypeer']) {
                         // There's good chance our error is due to sslcapath not being properly set
-                        if (! ($this->config['sslcapath'] && is_dir($this->config['sslcapath']))) {
+                        if (! ($this->config['sslcafile'] || $this->config['sslcapath'])) {
+                            $errorString = 'make sure the "sslcafile" or "sslcapath" option are properly set for the environment.';
+                        } elseif ($this->config['sslcafile'] && !is_file($this->config['sslcafile'])) {
+                            $errorString = 'make sure the "sslcafile" option points to a valid SSL certificate file';
+                        } elseif ($this->config['sslcapath'] && !is_dir($this->config['sslcapath'])) {
                             $errorString = 'make sure the "sslcapath" option points to a valid SSL certificate directory';
                         }
                     }

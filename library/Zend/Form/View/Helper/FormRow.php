@@ -12,7 +12,7 @@ namespace Zend\Form\View\Helper;
 use Zend\Form\Element\Button;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
-use Zend\Form\LabelOptionsAwareInterface;
+use Zend\Form\LabelAwareInterface;
 
 class FormRow extends AbstractHelper
 {
@@ -164,7 +164,7 @@ class FormRow extends AbstractHelper
             $labelOptions = array();
             $labelAttributes = array();
 
-            if ($element instanceof LabelOptionsAwareInterface) {
+            if ($element instanceof LabelAwareInterface) {
                 $labelOptions    = $element->getLabelOptions();
                 $labelAttributes = $element->getLabelAttributes();
 
@@ -189,7 +189,7 @@ class FormRow extends AbstractHelper
                 // Ensure element and label will be separated if element has an `id`-attribute.
                 // If element has label option `always_wrap` it will be nested in any case.
                 if ($element->hasAttribute('id')
-                    && ($element instanceof LabelOptionsAwareInterface && !$element->getLabelOption('always_wrap'))
+                    && ($element instanceof LabelAwareInterface && !$element->getLabelOption('always_wrap'))
                 ) {
                     $labelOpen = '';
                     $labelClose = '';
@@ -200,7 +200,7 @@ class FormRow extends AbstractHelper
                 }
 
                 if ($label !== '' && (!$element->hasAttribute('id'))
-                    || ($element instanceof LabelOptionsAwareInterface && $element->getLabelOption('always_wrap'))
+                    || ($element instanceof LabelAwareInterface && $element->getLabelOption('always_wrap'))
                 ) {
                     $label = '<span>' . $label . '</span>';
                 }

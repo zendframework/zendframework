@@ -11,7 +11,7 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
-use Zend\Form\LabelOptionsAwareInterface;
+use Zend\Form\LabelAwareInterface;
 
 class FormButton extends FormInput
 {
@@ -93,7 +93,7 @@ class FormButton extends FormInput
             }
         }
 
-        if ($element instanceof LabelOptionsAwareInterface) {
+        if ($element instanceof LabelAwareInterface) {
             if (! $element->getLabelOption('disable_html_escape')) {
                 $escapeHtmlHelper = $this->getEscapeHtmlHelper();
                 $buttonContent = $escapeHtmlHelper($buttonContent);

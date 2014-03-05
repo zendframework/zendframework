@@ -10,6 +10,7 @@
 namespace Zend\Log;
 
 use Zend\ServiceManager\AbstractFactoryInterface;
+use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
@@ -90,6 +91,20 @@ class LoggerAbstractServiceFactory implements AbstractFactoryInterface
 
     protected function processConfig(&$config, ServiceLocatorInterface $services)
     {
+        if (isset($config['writer_plugin_manager']) 
+            && is_string($config['writer_plugin_manager'])
+            && $services->has($config['writer_plugin_manager'])
+        ) {
+            $config['writer_plugin_manager'] = $services->get($config['writer_plugin_manager']);
+        }
+
+        if ((!isset($config['writer_plugin_manager'])
+            || ! $config['writer_plugin_manager'] instanceof AbstractPluginManager)
+            && $services->has('Zend\Log\WriterPluginManager')
+        ) {
+            $config['writer_plugin_manager'] = $services->get('Zend\Log\WriterPluginManager');
+        }
+
         if (!isset($config['writers'])) {
             return;
         }

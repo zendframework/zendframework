@@ -214,14 +214,6 @@ class FormRowTest extends TestCase
         $this->assertFalse($this->helper->isTranslatorEnabled());
     }
 
-    public function testInvokeSetLabelPositionToAppend()
-    {
-        $element = new Element('foo');
-        $this->helper->__invoke($element, 'append');
-
-        $this->assertSame('append', $this->helper->getLabelPosition());
-    }
-
     public function testSetLabelPositionInputNullRaisesException()
     {
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');

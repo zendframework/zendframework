@@ -34,6 +34,10 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5803](https://github.com/zendframework/zf2/pull/5803) adds a new flag to
+  `Zend\Navigation` containers' `hasPages()` method, `$onlyVisible`. If set to
+  `true`, only pages that are visibile based on ACLs will be considered.
+
 - [#5759](https://github.com/zendframework/zf2/pull/5759) adds a new method to
   the `FlashMessenger` view helper, `renderCurrent()`, which will render
   messages registered with the `FlashMessenger` during the current request (vs.

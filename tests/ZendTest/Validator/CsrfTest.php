@@ -235,4 +235,18 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validatorTwo->isValid($hashOne));
         $this->assertTrue($validatorTwo->isValid($hashTwo));
     }
+
+    public function testCannotReValidateAnExpiredHash()
+    {
+        $hash = $this->validator->getHash();
+
+        $this->assertTrue($this->validator->isValid($hash));
+
+        $this->sessionManager->getStorage()->setMetadata(
+            $this->validator->getSession()->getName(),
+            array('EXPIRE' => $_SERVER['REQUEST_TIME'] - 18600)
+        );
+
+        $this->assertFalse($this->validator->isValid($hash));
+    }
 }

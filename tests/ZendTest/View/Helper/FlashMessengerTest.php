@@ -491,7 +491,7 @@ class FlashMessengerTest extends TestCase
         unset($helper);
 
         $displayAssertion = '<ul class="default"><li>Foo<br />bar</li></ul>';
-        $display = $this->helper->render(PluginFlashMessenger::NAMESPACE_DEFAULT, array(), true);
+        $display = $this->helper->render(PluginFlashMessenger::NAMESPACE_DEFAULT, array(), false);
         $this->assertSame($displayAssertion, $display);
     }
 

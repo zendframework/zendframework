@@ -249,4 +249,15 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->validator->isValid($hash));
     }
+
+    public function testCanValidateHasheWithoutId()
+    {
+        $method = new \ReflectionMethod(get_class($this->validator), 'getTokenFromHash');
+        $method->setAccessible(true);
+
+        $hash = $this->validator->getHash();
+        $bareToken = $method->invoke($this->validator, $hash);
+
+        $this->assertTrue($this->validator->isValid($bareToken));
+    }
 }

@@ -79,24 +79,25 @@ class Memcache extends AbstractAdapter implements
      */
     protected function getMemcacheResource()
     {
-        if (!$this->initialized) {
-            $options = $this->getOptions();
-
-            // get resource manager and resource id
-            $this->resourceManager = $options->getResourceManager();
-            $this->resourceId      = $options->getResourceId();
-
-            // init namespace prefix
-            $namespace = $options->getNamespace();
-            if ($namespace !== '') {
-                $this->namespacePrefix = $namespace . $options->getNamespaceSeparator();
-            } else {
-                $this->namespacePrefix = '';
-            }
-
-            // update initialized flag
-            $this->initialized = true;
+        if ($this->initialized) {
+            return $this->resourceManager->getResource($this->resourceId);
         }
+
+        $options = $this->getOptions();
+
+        // get resource manager and resource id
+        $this->resourceManager = $options->getResourceManager();
+        $this->resourceId      = $options->getResourceId();
+
+        // init namespace prefix
+        $this->namespacePrefix = '';
+        $namespace = $options->getNamespace();
+        if ($namespace !== '') {
+            $this->namespacePrefix = $namespace . $options->getNamespaceSeparator();
+        }
+
+        // update initialized flag
+        $this->initialized = true;
 
         return $this->resourceManager->getResource($this->resourceId);
     }
@@ -328,20 +329,19 @@ class Memcache extends AbstractAdapter implements
         }
 
         // remove namespace prefix and use an empty array as metadata
-        if ($this->namespacePrefix !== '') {
-            $tmp            = array();
-            $nsPrefixLength = strlen($this->namespacePrefix);
-            foreach (array_keys($result) as $internalKey) {
-                $tmp[substr($internalKey, $nsPrefixLength)] = array();
-            }
-            $result = $tmp;
-        } else {
+        if ($this->namespacePrefix === '') {
             foreach ($result as & $value) {
                 $value = array();
             }
+            return $result;
         }
 
-        return $result;
+        $final          = array();
+        $nsPrefixLength = strlen($this->namespacePrefix);
+        foreach (array_keys($result) as $internalKey) {
+            $final[substr($internalKey, $nsPrefixLength)] = array();
+        }
+        return $final;
     }
 
     /* writing */
@@ -432,13 +432,15 @@ class Memcache extends AbstractAdapter implements
         $value       = (int) $value;
         $newValue    = $memc->increment($internalKey, $value);
 
-        if ($newValue === false) {
-            // Set initial value. Don't use compression!
-            // http://www.php.net/manual/memcache.increment.php
-            $newValue = $value;
-            if (!$memc->add($internalKey, $newValue, 0, $this->expirationTime())) {
-                throw new Exception\RuntimeException('Memcache unable to add increment value');
-            }
+        if ($newValue !== false) {
+            return $newValue;
+        }
+
+        // Set initial value. Don't use compression!
+        // http://www.php.net/manual/memcache.increment.php
+        $newValue = $value;
+        if (!$memc->add($internalKey, $newValue, 0, $this->expirationTime())) {
+            throw new Exception\RuntimeException('Memcache unable to add increment value');
         }
 
         return $newValue;
@@ -459,13 +461,15 @@ class Memcache extends AbstractAdapter implements
         $value       = (int) $value;
         $newValue    = $memc->decrement($internalKey, $value);
 
-        if ($newValue === false) {
-            // Set initial value. Don't use compression!
-            // http://www.php.net/manual/memcache.decrement.php
-            $newValue = -$value;
-            if (!$memc->add($internalKey, $newValue, 0, $this->expirationTime())) {
-                throw new Exception\RuntimeException('Memcache unable to add decrement value');
-            }
+        if ($newValue !== false) {
+            return $newValue;
+        }
+
+        // Set initial value. Don't use compression!
+        // http://www.php.net/manual/memcache.decrement.php
+        $newValue = -$value;
+        if (!$memc->add($internalKey, $newValue, 0, $this->expirationTime())) {
+            throw new Exception\RuntimeException('Memcache unable to add decrement value');
         }
 
         return $newValue;
@@ -480,63 +484,65 @@ class Memcache extends AbstractAdapter implements
      */
     protected function internalGetCapabilities()
     {
-        if ($this->capabilities === null) {
-            if (version_compare('3.0.3', phpversion('memcache')) <= 0) {
-                // In ext/memcache v3.0.3:
-                // Scalar data types (int, bool, double) are preserved by get/set.
-                // http://pecl.php.net/package/memcache/3.0.3
-                //
-                // This effectively removes support for `boolean` types since
-                // "not found" return values are === false.
-                $supportedDatatypes = array(
-                    'NULL'     => true,
-                    'boolean'  => false,
-                    'integer'  => true,
-                    'double'   => true,
-                    'string'   => true,
-                    'array'    => true,
-                    'object'   => 'object',
-                    'resource' => false,
-                );
-            } else {
-                // In stable 2.x ext/memcache versions, scalar data types are
-                // converted to strings and must be manually cast back to original
-                // types by the user.
-                //
-                // ie. It is impossible to know if the saved value: (string)"1"
-                // was previously: (bool)true, (int)1, or (string)"1".
-                // Similarly, the saved value: (string)""
-                // might have previously been: (bool)false or (string)""
-                $supportedDatatypes = array(
-                    'NULL'     => true,
-                    'boolean'  => 'boolean',
-                    'integer'  => 'integer',
-                    'double'   => 'double',
-                    'string'   => true,
-                    'array'    => true,
-                    'object'   => 'object',
-                    'resource' => false,
-                );
-            }
+        if ($this->capabilities !== null) {
+            return $this->capabilities;
+        }
 
-            $this->capabilityMarker = new stdClass();
-            $this->capabilities     = new Capabilities(
-                $this,
-                $this->capabilityMarker,
-                array(
-                    'supportedDatatypes' => $supportedDatatypes,
-                    'supportedMetadata'  => array(),
-                    'minTtl'             => 1,
-                    'maxTtl'             => 0,
-                    'staticTtl'          => true,
-                    'ttlPrecision'       => 1,
-                    'useRequestTime'     => false,
-                    'expiredRead'        => false,
-                    'maxKeyLength'       => 255,
-                    'namespaceIsPrefix'  => true,
-                )
+        if (version_compare('3.0.3', phpversion('memcache')) <= 0) {
+            // In ext/memcache v3.0.3:
+            // Scalar data types (int, bool, double) are preserved by get/set.
+            // http://pecl.php.net/package/memcache/3.0.3
+            //
+            // This effectively removes support for `boolean` types since
+            // "not found" return values are === false.
+            $supportedDatatypes = array(
+                'NULL'     => true,
+                'boolean'  => false,
+                'integer'  => true,
+                'double'   => true,
+                'string'   => true,
+                'array'    => true,
+                'object'   => 'object',
+                'resource' => false,
+            );
+        } else {
+            // In stable 2.x ext/memcache versions, scalar data types are
+            // converted to strings and must be manually cast back to original
+            // types by the user.
+            //
+            // ie. It is impossible to know if the saved value: (string)"1"
+            // was previously: (bool)true, (int)1, or (string)"1".
+            // Similarly, the saved value: (string)""
+            // might have previously been: (bool)false or (string)""
+            $supportedDatatypes = array(
+                'NULL'     => true,
+                'boolean'  => 'boolean',
+                'integer'  => 'integer',
+                'double'   => 'double',
+                'string'   => true,
+                'array'    => true,
+                'object'   => 'object',
+                'resource' => false,
             );
         }
+
+        $this->capabilityMarker = new stdClass();
+        $this->capabilities     = new Capabilities(
+            $this,
+            $this->capabilityMarker,
+            array(
+                'supportedDatatypes' => $supportedDatatypes,
+                'supportedMetadata'  => array(),
+                'minTtl'             => 1,
+                'maxTtl'             => 0,
+                'staticTtl'          => true,
+                'ttlPrecision'       => 1,
+                'useRequestTime'     => false,
+                'expiredRead'        => false,
+                'maxKeyLength'       => 255,
+                'namespaceIsPrefix'  => true,
+            )
+        );
 
         return $this->capabilities;
     }

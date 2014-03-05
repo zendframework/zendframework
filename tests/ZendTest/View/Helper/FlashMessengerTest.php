@@ -480,4 +480,42 @@ class FlashMessengerTest extends TestCase
                                 ->render(PluginFlashMessenger::NAMESPACE_DEFAULT);
         $this->assertSame($displayAssertion, $display);
     }
+
+    /**
+     * @covers Zend\View\Helper\FlashMessenger::render
+     */
+    public function testCanSetAutoEscapeOnRender()
+    {
+        $helper = new FlashMessenger;
+        $helper->addMessage('Foo<br />bar');
+        unset($helper);
+
+        $displayAssertion = '<ul class="default"><li>Foo<br />bar</li></ul>';
+        $display = $this->helper->render(PluginFlashMessenger::NAMESPACE_DEFAULT, array(), true);
+        $this->assertSame($displayAssertion, $display);
+    }
+
+    /**
+     * @covers Zend\View\Helper\FlashMessenger::render
+     */
+    public function testRenderUsesCurrentAutoEscapeByDefault()
+    {
+        $helper = new FlashMessenger;
+        $helper->addMessage('Foo<br />bar');
+        unset($helper);
+
+        $this->helper->setAutoEscape(false);
+        $displayAssertion = '<ul class="default"><li>Foo<br />bar</li></ul>';
+        $display = $this->helper->render(PluginFlashMessenger::NAMESPACE_DEFAULT);
+        $this->assertSame($displayAssertion, $display);
+
+        $helper = new FlashMessenger;
+        $helper->addMessage('Foo<br />bar');
+        unset($helper);
+
+        $this->helper->setAutoEscape(true);
+        $displayAssertion = '<ul class="default"><li>Foo&lt;br /&gt;bar</li></ul>';
+        $display = $this->helper->render(PluginFlashMessenger::NAMESPACE_DEFAULT);
+        $this->assertSame($displayAssertion, $display);
+    }
 }

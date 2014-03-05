@@ -91,10 +91,8 @@ class FormRow extends AbstractHelper
             return $this;
         }
 
-        if ($labelPosition !== null) {
-            $this->setLabelPosition($labelPosition);
-        } elseif ($this->labelPosition === null) {
-            $this->setLabelPosition(self::LABEL_PREPEND);
+        if (is_null($labelPosition)) {
+            $labelPosition = $this->getLabelPosition();
         }
 
         if ($renderErrors !== null) {
@@ -105,7 +103,7 @@ class FormRow extends AbstractHelper
             $this->setPartial($partial);
         }
 
-        return $this->render($element);
+        return $this->render($element, $labelPosition);
     }
 
     /**

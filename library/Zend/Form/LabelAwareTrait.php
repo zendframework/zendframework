@@ -9,7 +9,9 @@
 
 namespace Zend\Form;
 
-class LabelAwareTrait
+use Traversable;
+
+trait LabelAwareTrait
 {
     /**
      * Label specific html attributes

@@ -17,7 +17,7 @@ class Element implements
     ElementAttributeRemovalInterface,
     ElementInterface,
     InitializableInterface,
-    LabelOptionsAwareInterface
+    LabelAwareInterface
 {
     /**
      * @var array

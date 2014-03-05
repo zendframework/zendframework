@@ -9,7 +9,9 @@
 
 namespace Zend\Form;
 
-class LabelOptionsAwareTrait
+use Traversable;
+
+trait LabelAwareTrait
 {
     /**
      * Label specific html attributes
@@ -29,7 +31,7 @@ class LabelOptionsAwareTrait
      * Set the attributes to use with the label
      *
      * @param array $labelAttributes
-     * @return LabelOptionsAwareInterface
+     * @return LabelAwareInterface
      */
     public function setLabelAttributes(array $labelAttributes)
     {

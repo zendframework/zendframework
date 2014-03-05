@@ -149,7 +149,6 @@ class FormMultiCheckbox extends FormInput
         array $attributes)
     {
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
-        $labelOptions     = array();
         $labelHelper      = $this->getLabelHelper();
         $labelClose       = $labelHelper->closeTag();
         $labelPosition    = $this->getLabelPosition();
@@ -157,7 +156,6 @@ class FormMultiCheckbox extends FormInput
         $closingBracket   = $this->getInlineClosingBracket();
 
         if ($element instanceof LabelAwareInterface) {
-            $labelOptions = $element->getLabelOptions();
             $globalLabelAttributes = $element->getLabelAttributes();
         }
 
@@ -229,7 +227,7 @@ class FormMultiCheckbox extends FormInput
                 );
             }
 
-            if ($element instanceof LabelAwareInterface && !$element->getLabelOption('disable_html_escape')) {
+            if (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')) {
                 $label = $escapeHtmlHelper($label);
             }
 

@@ -15,7 +15,6 @@ use Zend\Form\ElementInterface;
 use Zend\Form\Element\Collection as CollectionElement;
 use Zend\Form\FieldsetInterface;
 use Zend\Form\LabelAwareInterface;
-use Zend\Form\LabelOptionsAwareInterface;
 use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 class FormCollection extends AbstractHelper
@@ -103,7 +102,6 @@ class FormCollection extends AbstractHelper
             return '';
         }
 
-        $attributes       = $element->getAttributes();
         $markup           = '';
         $templateMarkup   = '';
         $elementHelper    = $this->getElementHelper();
@@ -125,10 +123,7 @@ class FormCollection extends AbstractHelper
         if ($this->shouldWrap) {
             $attributes = $element->getAttributes();
             unset($attributes['name']);
-            $attributesString = '';
-            if (count($attributes)) {
-                $attributesString = ' ' . $this->createAttributesString($attributes);
-            }
+            $attributesString = count($attributes) ? ' ' . $this->createAttributesString($attributes) : '';
 
             $label = $element->getLabel();
             $legend = '';

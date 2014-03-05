@@ -161,16 +161,14 @@ class FormRow extends AbstractHelper
 
         if (isset($label) && '' !== $label) {
 
-            $labelOptions = array();
             $labelAttributes = array();
 
             if ($element instanceof LabelAwareInterface) {
-                $labelOptions    = $element->getLabelOptions();
                 $labelAttributes = $element->getLabelAttributes();
+            }
 
-                if (! $element->getLabelOption('disable_html_escape')) {
-                    $label = $escapeHtmlHelper($label);
-                }
+            if (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')) {
+                $label = $escapeHtmlHelper($label);
             }
 
             if (empty($labelAttributes)) {

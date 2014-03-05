@@ -206,6 +206,9 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $containerTwo = $validatorOne->getSession();
 
         $this->assertSame($containerOne, $containerTwo);
-        $this->assertNotEquals($validatorOne->getHash() , $validatorTwo->getHash());
+
+        $hashOne = $validatorOne->getHash();
+        $hashTwo = $validatorTwo->getHash();
+        $this->assertNotEquals($hashOne , $hashTwo);
     }
 }

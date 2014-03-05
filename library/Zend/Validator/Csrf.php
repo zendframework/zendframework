@@ -69,6 +69,11 @@ class Csrf extends AbstractValidator
     protected $timeout = 300;
 
     /**
+     * @var string
+     */
+    protected $hashId;
+
+    /**
      * Constructor
      *
      * @param  array|Traversable $options
@@ -117,9 +122,21 @@ class Csrf extends AbstractValidator
     {
         $this->setValue((string) $value);
 
-        $hash = $this->getValidationToken();
+        $valueArr = explode('_', $value);
 
-        if ($value !== $hash) {
+        $hashId = null;
+
+        if (count($valueArr) > 1) {
+            $hashId = $valueArr[0];
+            $hashValue = $valueArr[1];
+        } else {
+            $hashId = $this->hashId;
+            $hashValue = $value;
+        }
+
+        $hash = $this->getValidationToken($hashId);
+
+        if ($hashValue !== $hash) {
             $this->error(self::NOT_SAME);
             return false;
         }
@@ -215,9 +232,10 @@ class Csrf extends AbstractValidator
     {
         if ((null === $this->hash) || $regenerate) {
             if ($regenerate) {
+                $this->hashId = null;
                 $this->hash = null;
             } else {
-                $this->hash = $this->getValidationToken();
+                $this->hash = $this->getValidationToken($this->hashId);
             }
             if (null === $this->hash) {
                 $this->generateHash();
@@ -275,7 +293,14 @@ class Csrf extends AbstractValidator
         if (null !== $timeout) {
             $session->setExpirationSeconds($timeout);
         }
-        $session->hash = $this->getHash();
+
+        $hash = $this->getHash();
+
+        if (! $session->hashList) {
+            $session->hashList = array();
+        }
+        $session->hashList[$this->hashId] = $hash;
+        $session->hash = $hash; // @todo remove this, left for BC
     }
 
     /**
@@ -288,13 +313,15 @@ class Csrf extends AbstractValidator
      */
     protected function generateHash()
     {
-        if (isset(static::$hashCache[$this->getSessionName()])) {
-            $this->hash = static::$hashCache[$this->getSessionName()];
+        $this->hashId = md5(Rand::getBytes(32));
+
+        if (isset(static::$hashCache[$this->getSessionName()][$this->hashId])) {
+            $this->hash = static::$hashCache[$this->getSessionName()][$this->hashId];
         } else {
             $this->hash = md5($this->getSalt() . Rand::getBytes(32) .  $this->getName());
-            static::$hashCache[$this->getSessionName()] = $this->hash;
+            static::$hashCache[$this->getSessionName()][$this->hashId] = $this->hash;
         }
-        $this->setValue($this->hash);
+        $this->setValue(sprintf('%s_%s', $this->hashId, $this->hash));
         $this->initCsrfToken();
     }
 
@@ -305,11 +332,11 @@ class Csrf extends AbstractValidator
      *
      * @return null|string
      */
-    protected function getValidationToken()
+    protected function getValidationToken($hashId = null)
     {
         $session = $this->getSession();
-        if (isset($session->hash)) {
-            return $session->hash;
+        if ($hashId && isset($session->hashList[$hashId])) {
+            return $session->hashList[$hashId];
         }
         return null;
     }

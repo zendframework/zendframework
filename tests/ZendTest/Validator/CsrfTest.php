@@ -188,7 +188,7 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($hash, $test);
     }
 
-    public function testMultipleValidatorsDontConflict()
+    public function testMultipleValidatorsSharingContainerGenerateDifferentHashes()
     {
         $validatorOne = new Csrf();
         $validatorTwo = new Csrf();
@@ -214,6 +214,25 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validatorOne->isValid($hashOne));
         $this->assertTrue($validatorOne->isValid($hashTwo));
         $this->assertTrue($validatorTwo->isValid($hashOne));
+        $this->assertTrue($validatorTwo->isValid($hashTwo));
+    }
+
+    public function testCannotValidateHashesOfOtherContainers()
+    {
+        $validatorOne = new Csrf();
+        $validatorTwo = new Csrf(array('name' => 'foo'));
+
+        $containerOne = $validatorOne->getSession();
+        $containerTwo = $validatorTwo->getSession();
+
+        $this->assertNotSame($containerOne, $containerTwo);
+
+        $hashOne = $validatorOne->getHash();
+        $hashTwo = $validatorTwo->getHash();
+
+        $this->assertTrue($validatorOne->isValid($hashOne));
+        $this->assertFalse($validatorOne->isValid($hashTwo));
+        $this->assertFalse($validatorTwo->isValid($hashOne));
         $this->assertTrue($validatorTwo->isValid($hashTwo));
     }
 }

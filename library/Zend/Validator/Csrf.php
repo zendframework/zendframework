@@ -39,6 +39,7 @@ class Csrf extends AbstractValidator
 
     /**
      * Static cache of the session names to generated hashes
+     * @todo unused, left here to avoid BC breaks
      *
      * @var array
      */
@@ -218,7 +219,7 @@ class Csrf extends AbstractValidator
             if ($regenerate) {
                 $this->hash = null;
             } else {
-                $this->hash = $this->getValidationToken();
+                $this->hash = $this->getValidationToken($this->generateTokenId());
             }
             if (null === $this->hash) {
                 $this->generateHash();
@@ -297,13 +298,20 @@ class Csrf extends AbstractValidator
      */
     protected function generateHash()
     {
-        $tokenId = md5(Rand::getBytes(32));
         $token = md5($this->getSalt() . Rand::getBytes(32) .  $this->getName());
 
-        $this->hash = $this->formatHash($token, $tokenId);
+        $this->hash = $this->formatHash($token, $this->generateTokenId());
 
         $this->setValue($this->hash);
         $this->initCsrfToken();
+    }
+
+    /**
+     * @return string
+     */
+    protected function generateTokenId()
+    {
+        return md5(Rand::getBytes(32));
     }
 
     /**
@@ -311,13 +319,17 @@ class Csrf extends AbstractValidator
      *
      * Retrieve token from session, if it exists.
      *
-     * @param string $value
+     * @param string $tokenId
      * @return null|string
      */
     protected function getValidationToken($tokenId = null)
     {
         $session = $this->getSession();
 
+        /**
+         * if no tokenId is passed we just grub the first one available.
+         * this handle validation of an old hash
+         */
         if (! $tokenId && ! empty($session->tokenList)) {
             $ids = array_keys($session->tokenList);
             $tokenId = array_shift($ids);

@@ -216,14 +216,7 @@ class Csrf extends AbstractValidator
     public function getHash($regenerate = false)
     {
         if ((null === $this->hash) || $regenerate) {
-            if ($regenerate) {
-                $this->hash = null;
-            } else {
-                $this->hash = $this->getValidationToken($this->generateTokenId());
-            }
-            if (null === $this->hash) {
-                $this->generateHash();
-            }
+            $this->generateHash();
         }
         return $this->hash;
     }

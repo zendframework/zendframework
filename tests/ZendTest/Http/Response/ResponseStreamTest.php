@@ -75,8 +75,8 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(6, count($response->getHeaders()), 'Header count is expected to be 6');
 
         // Check header integrity
-        $this->assertEquals('timeout=15,max=100', $response->getHeaders()->get('keep-alive')->getFieldValue());
-        $this->assertEquals('text/html;charset=iso-8859-1', $response->getHeaders()->get('content-type')->getFieldValue());
+        $this->assertRegexp("#timeout=15,\r\n\s+max=100#", $response->getHeaders()->get('keep-alive')->getFieldValue());
+        $this->assertRegexp("#text/html;\r\n\s+charset=iso-8859-1#", $response->getHeaders()->get('content-type')->getFieldValue());
     }
 
 

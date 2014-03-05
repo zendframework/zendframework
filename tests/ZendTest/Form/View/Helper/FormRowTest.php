@@ -410,6 +410,17 @@ class FormRowTest extends TestCase
         $this->assertSame('append', $this->helper->getLabelPosition());
     }
 
+    public function testCanSetLabelPositionWithRender()
+    {
+        $element  = new Element('foo');
+        $element->setAttribute('id', 'bar');
+        $element->setLabel('Baz');
+
+        $markup = $this->helper->render($element, 'append');
+        //var_dump($markup);
+        $this->assertRegexp('#^<input name="foo" id="bar" type="text" value=""\/?><label for="bar">Baz</label>$#', $markup);
+    }
+
     public function testLabelOptionAlwaysWrapDefaultsToFalse()
     {
         $element = new Element('foo');
@@ -430,3 +441,4 @@ class FormRowTest extends TestCase
         $this->assertRegexp('#^<label><span>baz</span><input name="foo" id="bar" type="text" value=""\/?></label>$#', $markup);
     }
 }
+

@@ -203,7 +203,7 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals($hashOne , $hashTwo);
     }
 
-    public function tesCanValidateOnlyHisOwnTokenWhenPlainHashIsSupplied()
+    public function testCanValidateAnyHashWithinTheSameContainer()
     {
         $validatorOne = new Csrf();
         $validatorTwo = new Csrf();
@@ -212,28 +212,8 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $hashTwo = $validatorTwo->getHash();
 
         $this->assertTrue($validatorOne->isValid($hashOne));
-        $this->assertFalse($validatorOne->isValid($hashTwo));
-        $this->assertFalse($validatorTwo->isValid($hashOne));
+        $this->assertTrue($validatorOne->isValid($hashTwo));
+        $this->assertTrue($validatorTwo->isValid($hashOne));
         $this->assertTrue($validatorTwo->isValid($hashTwo));
-    }
-
-    public function testCanValidateAnyTokenWhenCompositeValueIsSupplied()
-    {
-        $validatorOne = new Csrf();
-        $validatorTwo = new Csrf();
-
-        $hashOne = $validatorOne->getHash();
-        $hashTwo = $validatorTwo->getHash();
-
-        $hashIdOne = $this->readAttribute($validatorOne, 'hashId');
-        $hashIdTwo = $this->readAttribute($validatorTwo, 'hashId');
-
-        $valueOne = sprintf($validatorOne->getFormat(), $hashIdOne, $hashOne);
-        $valueTwo = sprintf($validatorTwo->getFormat(), $hashIdTwo, $hashTwo);
-
-        $this->assertTrue($validatorOne->isValid($valueOne));
-        $this->assertTrue($validatorOne->isValid($valueTwo));
-        $this->assertTrue($validatorTwo->isValid($valueOne));
-        $this->assertTrue($validatorTwo->isValid($valueTwo));
     }
 }

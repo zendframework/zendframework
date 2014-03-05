@@ -187,4 +187,13 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $test        = $container->hash; // Doing this, as expiration hops are 1; have to grab on first access
         $this->assertEquals($hash, $test);
     }
+
+    public function testCanValidateWithOldBehaviour()
+    {
+        $hash = $this->validator->getHash();
+
+        $validator = new Csrf();
+
+        $this->assertTrue($validator->isValid($hash));
+    }
 }

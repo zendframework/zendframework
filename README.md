@@ -34,6 +34,11 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5759](https://github.com/zendframework/zf2/pull/5759) adds a new method to
+  the `FlashMessenger` view helper, `renderCurrent()`, which will render
+  messages registered with the `FlashMessenger` during the current request (vs.
+  a previous request).
+
 - [#5865](https://github.com/zendframework/zf2/pull/5865) removes the dependency
   on `Zend\Stdlib` in `Zend\Dom` by implementing PHP error handling directly in
   the component. This makes the component more easily portable.

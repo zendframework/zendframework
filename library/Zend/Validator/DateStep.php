@@ -174,7 +174,7 @@ class DateStep extends Date
         $errors = DateTime::getLastErrors();
         if ($errors['warning_count'] > 0) {
             if ($addErrors) {
-                $this->error(self::FALSE_FORMAT);
+                $this->error(self::FALSEFORMAT);
             }
             return false;
         }

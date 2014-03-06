@@ -219,7 +219,7 @@ class DateTimeSelect extends DateSelect
                 throw new InvalidArgumentException('Value should be a parsable string or an instance of \DateTime');
             }
         }
-        
+
         if (is_null($value)) {
             $value = new PhpDateTime();
         }

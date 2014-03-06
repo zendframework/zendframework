@@ -24,14 +24,14 @@ class Element implements
     protected $attributes = array();
 
     /**
-     * @var string
+     * @var null|string
      */
     protected $label;
 
     /**
      * @var array
      */
-    protected $labelAttributes;
+    protected $labelAttributes = array();
 
     /**
      * @var array Validation error messages
@@ -308,7 +308,7 @@ class Element implements
     /**
      * Retrieve the label used for this element
      *
-     * @return string
+     * @return null|string
      */
     public function getLabel()
     {

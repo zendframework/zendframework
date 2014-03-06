@@ -68,6 +68,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 array(1 => '%1$s', 2 => '%1$s AS %2$s', 'combinedby' => ', '),
                 null
             ),
+            'SELECT %1$s' => array(
+                array(1 => '%1$s', 2 => '%1$s AS %2$s', 'combinedby' => ', '),
+            ),
         ),
         self::JOINS  => array(
             '%1$s' => array(
@@ -584,38 +587,38 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     {
         $expr = 1;
 
-        if (!$this->table) {
-            return null;
-        }
+        if ($this->table) {
+            $table = $this->table;
+            $schema = $alias = null;
 
-        $table = $this->table;
-        $schema = $alias = null;
+            if (is_array($table)) {
+                $alias = key($this->table);
+                $table = current($this->table);
+            }
 
-        if (is_array($table)) {
-            $alias = key($this->table);
-            $table = current($this->table);
-        }
+            // create quoted table name to use in columns processing
+            if ($table instanceof TableIdentifier) {
+                list($table, $schema) = $table->getTableAndSchema();
+            }
 
-        // create quoted table name to use in columns processing
-        if ($table instanceof TableIdentifier) {
-            list($table, $schema) = $table->getTableAndSchema();
-        }
+            if ($table instanceof Select) {
+                $table = '(' . $this->processSubselect($table, $platform, $driver, $parameterContainer) . ')';
+            } else {
+                $table = $platform->quoteIdentifier($table);
+            }
 
-        if ($table instanceof Select) {
-            $table = '(' . $this->processSubselect($table, $platform, $driver, $parameterContainer) . ')';
+            if ($schema) {
+                $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
+            }
+
+            if ($alias) {
+                $fromTable = $platform->quoteIdentifier($alias);
+                $table = $this->renderTable($table, $fromTable);
+            } else {
+                $fromTable = $table;
+            }
         } else {
-            $table = $platform->quoteIdentifier($table);
-        }
-
-        if ($schema) {
-            $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
-        }
-
-        if ($alias) {
-            $fromTable = $platform->quoteIdentifier($alias);
-            $table = $this->renderTable($table, $fromTable);
-        } else {
-            $fromTable = $table;
+            $fromTable = '';
         }
 
         if ($this->prefixColumnsWithTable) {
@@ -634,7 +637,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 continue;
             }
 
-            if ($column instanceof Expression) {
+            if ($column instanceof ExpressionInterface) {
                 $columnParts = $this->processExpression(
                     $column,
                     $platform,
@@ -694,7 +697,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
 
         if ($this->quantifier) {
-            if ($this->quantifier instanceof Expression) {
+            if ($this->quantifier instanceof ExpressionInterface) {
                 $quantifierParts = $this->processExpression($this->quantifier, $platform, $driver, 'quantifier');
                 if ($parameterContainer) {
                     $parameterContainer->merge($quantifierParts->getParameterContainer());
@@ -705,7 +708,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             }
         }
 
-        if (isset($quantifier)) {
+        if (!$this->table) {
+            return array($columns);
+        } elseif (isset($quantifier)) {
             return array($quantifier, $columns, $table);
         } else {
             return array($columns, $table);

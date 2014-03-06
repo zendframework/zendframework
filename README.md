@@ -5,13 +5,23 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.1.5*
+*Zend Framework 2.1.6*
 
-This is the fifth maintenance release for the version 2.1 series.
+This is the sixth maintenance release for the version 2.1 series.
 
-17 Apr 2013
+06 Mar 2014
 
-### UPDATES IN 2.1.5
+### UPDATES IN 2.1.6
+
+**This release contains security updates.**
+
+- **ZF2014-01:** Potential XXE/XEE attacks using PHP functions:
+  `simplexml_load_*`, `DOMDocument::loadXML`, and `xml_parse`. A new component,
+  `ZendXml`, was introduced to mitigate XML eXternal Entity and XML Entity
+  Expansion vectors that are present in older versions of libxml2 and/or PHP.
+  `Zend\Json\Json::fromXml()` and `Zend\XmlRpc`'s `Response` and `Fault` classes
+  were potentially vulnerable to these attacks. If you use either of these
+  components, we recommend upgrading immediately.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

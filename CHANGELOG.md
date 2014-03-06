@@ -1,6 +1,19 @@
 # CHANGELOG
 
-## 2.1.5 (17 Apr 2017):
+## 2.1.6 (06 Mar 2014):
+
+### SECURITY UPDATES
+
+- **ZF2014-01:** Potential XXE/XEE attacks using PHP functions:
+  `simplexml_load_*`, `DOMDocument::loadXML`, and `xml_parse`. A new component,
+  `ZendXml`, was introduced to mitigate XML eXternal Entity and XML Entity
+  Expansion vectors that are present in older versions of libxml2 and/or PHP.
+  `Zend\Json\Json::fromXml()` and `Zend\XmlRpc`'s `Response` and `Fault` classes
+  were potentially vulnerable to these attacks. If you use either of these
+  components, we recommend upgrading immediately.
+
+
+## 2.1.5 (17 Apr 2013):
 
 - 2536: `Zend\Validate` translations out of date
   (https://github.com/zendframework/zf2/issues/2536)

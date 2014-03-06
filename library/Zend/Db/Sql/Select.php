@@ -708,7 +708,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             }
         }
 
-        if (!$this->table) {
+        if (!isset($table)) {
             return array($columns);
         } elseif (isset($quantifier)) {
             return array($quantifier, $columns, $table);

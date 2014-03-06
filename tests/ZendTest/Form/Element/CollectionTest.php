@@ -784,4 +784,52 @@ class CollectionTest extends TestCase
             $index++;
         }
     }
+
+    public function testSetDataOnFormPopulatesCollection()
+    {
+        $form = new Form();
+        $form->add(array(
+            'name' => 'names',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => new Element\Text(),
+            ),
+        ));
+
+        $names = array('foo', 'bar', 'baz', 'bat');
+
+        $form->setData(array(
+            'names' => $names
+        ));
+
+        $i = 0;
+        foreach($form->get('names') as $field) {
+            $this->assertEquals($names[$i], $field->getValue());
+            $i++;
+        };
+    }
+
+    public function testEmptyCollectionDataReturnsSpecifiedNumberOfElementsAfterPrepare()
+    {
+        $form = new Form();
+        $form->add(new Element\Text('input'));
+        $form->add(array(
+            'name' => 'names',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => new Element\Text(),
+                'count' => 2
+            ),
+        ));
+
+        $form->setData(array(
+            'input' => 'foo',
+        ));
+
+        $this->assertCount(0, $form->get('names'));
+
+        $form->prepare();
+
+        $this->assertCount(2, $form->get('names'));
+    }
 }

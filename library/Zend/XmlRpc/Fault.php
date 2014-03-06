@@ -10,6 +10,7 @@
 namespace Zend\XmlRpc;
 
 use SimpleXMLElement;
+use ZendXml\Security as XmlSecurity;
 
 /**
  * XMLRPC Faults
@@ -180,10 +181,10 @@ class Fault
 
         $xmlErrorsFlag = libxml_use_internal_errors(true);
         try {
-            $xml = new SimpleXMLElement($fault);
-        } catch (\Exception $e) {
-            // Not valid XML
-            throw new Exception\InvalidArgumentException('Failed to parse XML fault: ' .  $e->getMessage(), 500, $e);
+            $xml = XmlSecurity::scan($fault);
+        } catch (\ZendXml\Exception\RuntimeException $e) {
+            // Unsecure XML
+            throw new Exception\RuntimeException('Failed to parse XML fault: ' .  $e->getMessage(), 500, $e);
         }
         if (!$xml instanceof SimpleXMLElement) {
             $errors = libxml_get_errors();

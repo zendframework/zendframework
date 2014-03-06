@@ -9,7 +9,8 @@
     "homepage": "http://framework.zend.com/",
     "license": "BSD-3-Clause",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zendxml": "~1.0-dev"
     },
     "require-dev": {
         "doctrine/annotations": ">=1.0",

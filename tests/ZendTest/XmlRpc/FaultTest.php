@@ -146,7 +146,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadXmlThrowsExceptionOnInvalidInput()
     {
-        $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException', 'Failed to parse XML fault: String could not be parsed as XML');
+        $this->setExpectedException('Zend\XmlRpc\Exception\InvalidArgumentException', 'Failed to parse XML fault');
         $parsed = $this->_fault->loadXml('foo');
     }
 

@@ -802,6 +802,8 @@ class CollectionTest extends TestCase
             'names' => $names
         ));
 
+        $this->assertCount(count($names), $form->get('names'));
+
         $i = 0;
         foreach($form->get('names') as $field) {
             $this->assertEquals($names[$i], $field->getValue());
@@ -809,7 +811,7 @@ class CollectionTest extends TestCase
         };
     }
 
-    public function testEmptyCollectionDataReturnsSpecifiedNumberOfElementsAfterPrepare()
+    public function testSettingSomeDataButNoneForCollectionReturnsSpecifiedNumberOfElementsAfterPrepare()
     {
         $form = new Form();
         $form->add(new Element\Text('input'));

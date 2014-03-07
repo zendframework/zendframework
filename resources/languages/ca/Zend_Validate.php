@@ -8,7 +8,7 @@
  */
 
 /**
- * EN-Revision: 04.Apr.2013
+ * EN-Revision: 16.Jul.2013
  */
 return array(
     // Zend\I18n\Validator\Alnum
@@ -21,6 +21,10 @@ return array(
     "The input contains non alphabetic characters" => "L'entrada conté caràcters no alfabètics",
     "The input is an empty string" => "L'entrada és una cadena buida",
 
+    // Zend\I18n\Validator\DateTime
+    "Invalid type given. String expected" => "Tipus no vàlid donat. S'espera una cadena de text",
+    "The input does not appear to be a valid datetime" => "L'entrada no sembla ser un datetime vàlid",
+
     // Zend\I18n\Validator\Float
     "Invalid type given. String, integer or float expected" => "Tipus no vàlid donat. S'espera una cadena de text, un enter o un nombre de precisió simple",
     "The input does not appear to be a float" => "L'entrada no sembla ser un nombre de precisió simple",
@@ -28,6 +32,11 @@ return array(
     // Zend\I18n\Validator\Int
     "Invalid type given. String or integer expected" => "Tipus no vàlid donat. S'espera una cadena de text o un enter",
     "The input does not appear to be an integer" => "L'entrada no sembla ser un nombre enter",
+
+    // Zend\I18n\Validator\PhoneNumber
+    "The input does not match a phone number format" => "L'entrada no coincideix amb un format de número de telèfon",
+    "The country provided is currently unsupported" => "El país proporcionat no està suportat",
+    "Invalid type given. String expected" => "Tipus no vàlid donat. S'espera una cadena de text",
 
     // Zend\I18n\Validator\PostCode
     "Invalid type given. String or integer expected" => "Tipus no vàlid donat. S'espera una cadena de text o un enter",

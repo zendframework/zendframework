@@ -163,7 +163,7 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
                 $specification['type'] = 'Zend\Form\Fieldset';
             }
 
-            // Merge options of composed object with the ones of the combined object:
+            // Merge options of composed object with the ones of the target object:
             $options = (isset($elementSpec['spec']['options']) && is_array($elementSpec['spec']['options'])) ? $elementSpec['spec']['options'] : array();
             $options = array_merge($options, $annotation->getOptions());
 

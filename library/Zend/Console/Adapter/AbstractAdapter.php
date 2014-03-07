@@ -288,6 +288,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param int      $y       Block Y coordinate (row)
      * @param null|int $color   (optional) Text color
      * @param null|int $bgColor (optional) Text background color
+     * @throws Exception\InvalidArgumentException
      */
     public function writeTextBlock(
         $text,
@@ -298,6 +299,43 @@ abstract class AbstractAdapter implements AdapterInterface
         $color = null,
         $bgColor = null
     ) {
+        if ($x < 0 || $y < 0) {
+            throw new Exception\InvalidArgumentException('Supplied X,Y coordinates are invalid.');
+        }
+
+        if ($width < 1) {
+            throw new Exception\InvalidArgumentException('Invalid width supplied.');
+        }
+
+        if (null !== $height && $height < 1) {
+            throw new Exception\InvalidArgumentException('Invalid height supplied.');
+        }
+
+        // ensure the text is not wider than the width
+        if (strlen($text) <= $width) {
+            // just write the line at the spec'd position
+            $this->setPos($x, $y);
+            $this->write($text, $color, $bgColor);
+            return;
+        }
+
+        $text = wordwrap($text, $width, PHP_EOL, true);
+
+        // convert to array of lines
+        $lines = explode(PHP_EOL, $text);
+
+        // truncate if height was specified
+        if (null !== $height && count($lines) > $height) {
+            $lines = array_slice($lines, 0, $height);
+        }
+
+        // write each line
+        $curY = $y;
+        foreach ($lines as $line) {
+            $this->setPos($x, $curY);
+            $this->write($line, $color, $bgColor);
+            $curY++;//next line
+        }
     }
 
     /**

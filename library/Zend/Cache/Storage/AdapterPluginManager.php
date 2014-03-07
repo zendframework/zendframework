@@ -31,6 +31,7 @@ class AdapterPluginManager extends AbstractPluginManager
         'blackhole'      => 'Zend\Cache\Storage\Adapter\BlackHole',
         'dba'            => 'Zend\Cache\Storage\Adapter\Dba',
         'filesystem'     => 'Zend\Cache\Storage\Adapter\Filesystem',
+        'memcache'       => 'Zend\Cache\Storage\Adapter\Memcache',
         'memcached'      => 'Zend\Cache\Storage\Adapter\Memcached',
         'memory'         => 'Zend\Cache\Storage\Adapter\Memory',
         'redis'          => 'Zend\Cache\Storage\Adapter\Redis',

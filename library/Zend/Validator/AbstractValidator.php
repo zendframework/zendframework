@@ -156,7 +156,7 @@ abstract class AbstractValidator implements
      */
     public function getMessages()
     {
-        return array_unique($this->abstractOptions['messages']);
+        return array_unique($this->abstractOptions['messages'], SORT_REGULAR);
     }
 
     /**

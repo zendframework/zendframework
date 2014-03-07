@@ -252,7 +252,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * @param  array|null $params
      * @throws \Exception
      */
-    public function dispatch($url, $method = null, $params = array())
+    public function dispatch($url, $method = null, $params = array(), $isXmlHttpRequest = false)
     {
         if ( !isset($method) &&
              $this->getRequest() instanceof HttpRequest &&
@@ -261,6 +261,11 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
             $method = $requestMethod;
         } elseif (!isset($method)) {
             $method = HttpRequest::METHOD_GET;
+        }
+
+        if ($isXmlHttpRequest) {
+            $headers = $this->getRequest()->getHeaders();
+            $headers->addHeaderLine('X_REQUESTED_WITH', 'XMLHttpRequest');
         }
 
         $this->url($url, $method, $params);
@@ -281,16 +286,19 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      *
      * @return AbstractControllerTestCase
      */
-    public function reset()
+    public function reset($keepPersistence = false)
     {
         // force to re-create all components
         $this->application = null;
 
         // reset server datas
-        $_SESSION = array();
+        if (!$keepPersistence) {
+            $_SESSION = array();
+            $_COOKIE  = array();
+        }
+
         $_GET     = array();
         $_POST    = array();
-        $_COOKIE  = array();
 
         // reset singleton
         StaticEventManager::resetInstance();

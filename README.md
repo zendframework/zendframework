@@ -34,6 +34,23 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5885](https://github.com/zendframework/zf2/pull/5885) adds the ability to
+  specify the Locale via a route match parameter, and have it apply to the
+  composed translator in the router, if any.
+
+- [#5882](https://github.com/zendframework/zf2/pull/5882) adds the ability to
+  set the formatter used by a `Zend\Log\Writer\Db` instance via the
+  configuration options passed to the factory.
+
+- [#5803](https://github.com/zendframework/zf2/pull/5803) adds a new flag to
+  `Zend\Navigation` containers' `hasPages()` method, `$onlyVisible`. If set to
+  `true`, only pages that are visibile based on ACLs will be considered.
+
+- [#5759](https://github.com/zendframework/zf2/pull/5759) adds a new method to
+  the `FlashMessenger` view helper, `renderCurrent()`, which will render
+  messages registered with the `FlashMessenger` during the current request (vs.
+  a previous request).
+
 - [#5865](https://github.com/zendframework/zf2/pull/5865) removes the dependency
   on `Zend\Stdlib` in `Zend\Dom` by implementing PHP error handling directly in
   the component. This makes the component more easily portable.

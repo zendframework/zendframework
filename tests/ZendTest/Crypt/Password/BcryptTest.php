@@ -32,11 +32,8 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $this->bcrypt   = new Bcrypt();
         $this->salt     = '1234567890123456';
         $this->password = 'test';
-        if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
-            $this->prefix = '$2y$';
-        } else {
-            $this->prefix = '$2a$';
-        }
+        $this->prefix = '$2y$';
+
         $this->bcryptPassword = $this->prefix . '10$MTIzNDU2Nzg5MDEyMzQ1Nej0NmcAWSLR.oP7XOR9HD/vjUuOj100y';
     }
 
@@ -118,38 +115,13 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->bcrypt->verify(substr($this->password, -1), $this->bcryptPassword));
     }
 
-    public function testVerifyFailureVersion()
-    {
-        $test = (substr(crypt('test', '$2y$04$012345678901234567890123456789'), 0, 3) === '$2y');
-        if (!$test) {
-            // We don't support new style hashes, test verify failure
-            $hash = '$y2$14$MTIzNDU2Nzg5MDEyMzQ1NeWUUefVlefsTbFhsbqKFv/vPSZBrSFVm';
-            $this->setExpectedException('Zend\Crypt\Password\Exception\RuntimeException',
-                'The supplied password hash could not be verified. Please check ' .
-                'backwards compatibility settings.'
-            );
-            $this->bcrypt->verify('test', $hash);
-        } else {
-            $this->markTestSkipped('Test requires PHP which does not support $2y hashes (<5.3.7)');
-        }
-    }
-
     public function testPasswordWith8bitCharacter()
     {
         $password = 'test' . chr(128);
         $this->bcrypt->setSalt($this->salt);
 
-        if (version_compare(PHP_VERSION, '5.3.7') >= 0) {
-            $this->assertEquals('$2y$10$MTIzNDU2Nzg5MDEyMzQ1NemFdU/4JOrNpxMym09Mbp0m4hKTgfQo.',
+        $this->assertEquals('$2y$10$MTIzNDU2Nzg5MDEyMzQ1NemFdU/4JOrNpxMym09Mbp0m4hKTgfQo.',
                                 $this->bcrypt->create($password));
-        } else {
-            $this->setExpectedException('Zend\Crypt\Password\Exception\RuntimeException',
-                'The bcrypt implementation used by PHP can contain a security flaw ' .
-                'using password with 8-bit character. ' .
-                'We suggest to upgrade to PHP 5.3.7+ or use passwords with only 7-bit characters'
-            );
-            $output = $this->bcrypt->create($password);
-        }
     }
 
     public function testSetBackwardCompatibility()

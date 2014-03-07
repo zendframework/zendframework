@@ -11,7 +11,7 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
-use Zend\Form\LabelOptionsAwareInterface;
+use Zend\Form\LabelAwareInterface;
 
 class FormLabel extends AbstractHelper
 {
@@ -64,13 +64,7 @@ class FormLabel extends AbstractHelper
                 );
             }
 
-            $labelOptions = array();
-
-            if ($element instanceof LabelOptionsAwareInterface) {
-                $labelOptions = $element->getLabelOptions();
-            }
-
-            if (empty($labelOptions) || $labelOptions['disable_html_escape'] == false) {
+            if (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')) {
                 $escapeHtmlHelper = $this->getEscapeHtmlHelper();
                 $label = $escapeHtmlHelper($label);
             }
@@ -131,7 +125,7 @@ class FormLabel extends AbstractHelper
         }
 
         $labelAttributes = array();
-        if ($attributesOrElement instanceof LabelOptionsAwareInterface) {
+        if ($attributesOrElement instanceof LabelAwareInterface) {
             $labelAttributes = $attributesOrElement->getLabelAttributes();
         }
 

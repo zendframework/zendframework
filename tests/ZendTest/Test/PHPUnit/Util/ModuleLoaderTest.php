@@ -27,6 +27,7 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
         foreach ($files as $file) {
             (is_dir("$dir/$file")) ? static::rmdir("$dir/$file") : unlink("$dir/$file");
         }
+
         return rmdir($dir);
     }
 

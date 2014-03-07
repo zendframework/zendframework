@@ -334,7 +334,7 @@ class DateTimeSelect extends DateSelect
         $this->dayElement    = clone $this->dayElement;
         $this->monthElement  = clone $this->monthElement;
         $this->yearElement   = clone $this->yearElement;
-        $this->hourElement   = clone $this->monthElement;
+        $this->hourElement   = clone $this->hourElement;
         $this->minuteElement = clone $this->minuteElement;
         $this->secondElement = clone $this->secondElement;
     }

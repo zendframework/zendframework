@@ -13,7 +13,7 @@ use Memcached as MemcachedResource;
 use Zend\Cache\Exception;
 
 /**
- * These are options specific to the APC adapter
+ * These are options specific to the Memcached adapter
  */
 class MemcachedOptions extends AdapterOptions
 {

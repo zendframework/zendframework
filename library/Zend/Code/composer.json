@@ -13,7 +13,7 @@
     },
     "target-dir": "Zend/Code",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-eventmanager": "self.version"
     },
     "require-dev": {

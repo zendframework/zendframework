@@ -89,11 +89,6 @@ class DateFormat extends AbstractHelper
             );
         }
 
-        // DateTime support for IntlDateFormatter::format() was only added in 5.3.4
-        if ($date instanceof DateTime && (PHP_VERSION_ID < 50304)) {
-            $date = $date->getTimestamp();
-        }
-
         return $this->formatters[$formatterId]->format($date);
     }
 

@@ -108,9 +108,6 @@ class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
 
     public function testMultiDimensionalUnset()
     {
-        if (version_compare(PHP_VERSION, '5.3.4') < 0) {
-            $this->markTestSkipped('Known issue on versions of PHP less than 5.3.4');
-        }
         $this->storage['foo'] = array('bar' => array('baz' => 'boo'));
         unset($this->storage['foo']['bar']['baz']);
         $this->assertFalse(isset($this->storage['foo']['bar']['baz']));
@@ -144,10 +141,6 @@ class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
 
     public function testUndefinedSessionManipulation()
     {
-        if (version_compare(PHP_VERSION, '5.3.4') < 0) {
-            $this->markTestSkipped('Known issue on versions of PHP less than 5.3.4');
-        }
-
         $this->storage['foo'] = 'bar';
         $this->storage['bar'][] = 'bar';
         $this->storage['baz']['foo'] = 'bar';

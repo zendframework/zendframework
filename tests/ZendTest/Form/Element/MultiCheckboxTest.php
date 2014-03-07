@@ -145,4 +145,32 @@ class MultiCheckboxTest extends TestCase
         $inputSpec = $element->getInputSpecification();
         $this->assertArrayNotHasKey('validators', $inputSpec);
     }
+
+    public function testUnsetValueOption()
+    {
+        $element = new MultiCheckboxElement();
+        $element->setValueOptions(array(
+            'Option 1' => 'option1',
+            'Option 2' => 'option2',
+            'Option 3' => 'option3',
+        ));
+        $element->unsetValueOption('Option 2');
+
+        $valueOptions = $element->getValueOptions();
+        $this->assertArrayNotHasKey('Option 2', $valueOptions);
+    }
+
+    public function testUnsetUndefinedValueOption()
+    {
+        $element = new MultiCheckboxElement();
+        $element->setValueOptions(array(
+            'Option 1' => 'option1',
+            'Option 2' => 'option2',
+            'Option 3' => 'option3',
+        ));
+        $element->unsetValueOption('Option Undefined');
+
+        $valueOptions = $element->getValueOptions();
+        $this->assertArrayNotHasKey('Option Undefined', $valueOptions);
+    }
 }

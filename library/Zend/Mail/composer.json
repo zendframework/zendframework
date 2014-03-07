@@ -13,7 +13,7 @@
     },
     "target-dir": "Zend/Mail",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-crypt": "self.version",
         "zendframework/zend-loader": "self.version",
         "zendframework/zend-mime": "self.version",

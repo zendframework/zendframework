@@ -26,6 +26,13 @@ class InjectTemplateListener extends AbstractListenerAggregate
     protected $inflector;
 
     /**
+     * Array of controller namespace -> template mappings
+     *
+     * @var array
+     */
+    protected $controllerMap = array();
+
+    /**
      * {@inheritDoc}
      */
     public function attach(Events $events)
@@ -63,32 +70,90 @@ class InjectTemplateListener extends AbstractListenerAggregate
             $controller = $routeMatch->getParam('controller', '');
         }
 
-        $module     = $this->deriveModuleNamespace($controller);
+        $template = $this->mapController($controller);
+        if (!$template) {
+            $module     = $this->deriveModuleNamespace($controller);
 
-        if ($namespace = $routeMatch->getParam(ModuleRouteListener::MODULE_NAMESPACE)) {
-            $controllerSubNs = $this->deriveControllerSubNamespace($namespace);
-            if (!empty($controllerSubNs)) {
-                if (!empty($module)) {
-                    $module .= '/' . $controllerSubNs;
-                } else {
-                    $module = $controllerSubNs;
+            if ($namespace = $routeMatch->getParam(ModuleRouteListener::MODULE_NAMESPACE)) {
+                $controllerSubNs = $this->deriveControllerSubNamespace($namespace);
+                if (!empty($controllerSubNs)) {
+                    if (!empty($module)) {
+                        $module .= '/' . $controllerSubNs;
+                    } else {
+                        $module = $controllerSubNs;
+                    }
                 }
             }
-        }
 
-        $controller = $this->deriveControllerClass($controller);
-        $template   = $this->inflectName($module);
+            $controller = $this->deriveControllerClass($controller);
+            $template   = $this->inflectName($module);
 
-        if (!empty($template)) {
-            $template .= '/';
+            if (!empty($template)) {
+                $template .= '/';
+            }
+            $template  .= $this->inflectName($controller);
         }
-        $template  .= $this->inflectName($controller);
 
         $action     = $routeMatch->getParam('action');
         if (null !== $action) {
             $template .= '/' . $this->inflectName($action);
         }
         $model->setTemplate($template);
+    }
+
+    /**
+     * Set map of controller namespace -> template pairs
+     *
+     * @param  array $map
+     * @return self
+     */
+    public function setControllerMap(array $map)
+    {
+        krsort($map);
+        $this->controllerMap = $map;
+        return $this;
+    }
+
+    /**
+     * Maps controller to template if controller namespace is whitelisted or mapped
+     *
+     * @param string $controller controller FQCN
+     * @return string|false template name or false if controller was not matched
+     */
+    public function mapController($controller)
+    {
+        foreach ($this->controllerMap as $namespace => $replacement) {
+            if (
+                // Allow disabling rule by setting value to false since config
+                // merging have no feature to remove entries
+                false == $replacement
+                // Match full class or full namespace
+                || !($controller === $namespace || strpos($controller, $namespace . '\\') === 0)
+            ) {
+                continue;
+            }
+
+            $map = '';
+            // Map namespace to $replacement if its value is string
+            if (is_string($replacement)) {
+                $map = rtrim($replacement, '/') . '/';
+                $controller = substr($controller, strlen($namespace) + 1);
+            }
+
+            //strip Controller namespace(s) (but not classname)
+            $parts = explode('\\', $controller);
+            array_pop($parts);
+            $parts = array_diff($parts, array('Controller'));
+            //strip trailing Controller in class name
+            $parts[] = $this->deriveControllerClass($controller);
+            $controller = implode('/', $parts);
+
+            $template = trim($map . $controller, '/');
+
+            //inflect CamelCase to dash
+            return $this->inflectName($template);
+        }
+        return false;
     }
 
     /**

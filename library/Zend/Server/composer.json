@@ -13,7 +13,7 @@
     },
     "target-dir": "Zend/Server",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-code": "self.version"
     },

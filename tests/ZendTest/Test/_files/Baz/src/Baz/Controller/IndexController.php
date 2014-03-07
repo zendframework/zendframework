@@ -32,6 +32,11 @@ class IndexController extends AbstractActionController
         return 'foo, bar';
     }
 
+    public function persistencetestAction()
+    {
+        $this->flashMessenger()->addMessage('test');
+    }
+
     public function redirectAction()
     {
         return $this->redirect()->toUrl('http://www.zend.com');
@@ -45,7 +50,7 @@ class IndexController extends AbstractActionController
     public function customResponseAction()
     {
         $response = new Response();
-        $response->setStatusCode(999);
+        $response->setCustomStatusCode(999);
 
         return $response;
     }

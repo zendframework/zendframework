@@ -109,20 +109,6 @@ class RedirectTest extends TestCase
         $url = $this->plugin->toRoute();
     }
 
-    /**
-     * This block is required to bypass a PCRE bug in 5.3.3
-     *
-     * @todo   Remove once we no longer support 5.3.3
-     * @return void
-     */
-    public function testPluginWithRouteMatchesReturningNoMatchedRouteNameRaisesExceptionWhenNoRouteProvided()
-    {
-        $event = $this->controller->getEvent();
-        $event->setRouteMatch(new RouteMatch(array()));
-        $this->setExpectedException('Zend\Mvc\Exception\RuntimeException', 'matched');
-        $url = $this->plugin->toRoute();
-    }
-
     public function testPassingNoArgumentsWithValidRouteMatchGeneratesUrl()
     {
         $routeMatch = new RouteMatch(array());

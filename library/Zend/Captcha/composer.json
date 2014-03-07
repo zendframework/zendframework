@@ -13,7 +13,7 @@
     },
     "target-dir": "Zend/Captcha",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-math": "self.version",
         "zendframework/zend-stdlib": "self.version"
     },

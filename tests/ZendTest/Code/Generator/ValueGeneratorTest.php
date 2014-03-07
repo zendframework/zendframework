@@ -40,9 +40,15 @@ class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testPropertyDefaultValueCanHandleArray()
     {
+        $expectedSource = <<<EOS
+array(
+    'foo'
+)
+EOS;
+
         $valueGenerator = new ValueGenerator();
         $valueGenerator->setValue(array('foo'));
-        $this->assertEquals('array(\'foo\')', $valueGenerator->generate());
+        $this->assertEquals($expectedSource, $valueGenerator->generate());
     }
 
     public function testPropertyDefaultValueCanHandleUnquotedString()
@@ -83,22 +89,22 @@ class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $expectedSource = <<<EOS
 array(
-        5,
-        'one' => 1,
-        'two' => '2',
-        'constant1' => __DIR__ . '/anydir1/anydir2',
+    5,
+    'one' => 1,
+    'two' => '2',
+    'constant1' => __DIR__ . '/anydir1/anydir2',
+    array(
+        'baz' => true,
+        'foo',
+        'bar',
         array(
-            'baz' => true,
-            'foo',
-            'bar',
-            array(
-                'baz1',
-                'baz2',
-                'constant2' => ArrayObject::STD_PROP_LIST
-                )
-            ),
-        PHP_EOL
+            'baz1',
+            'baz2',
+            'constant2' => ArrayObject::STD_PROP_LIST
         )
+    ),
+    PHP_EOL
+)
 EOS;
 
         $valueGenerator = new ValueGenerator();
@@ -122,12 +128,12 @@ EOS;
         $valueGenerator->setValue($value);
 $expectedSource = <<<EOS
 array(
-        1 => 'a',
-        0 => 'b',
-        'c',
-        7 => 'd',
-        3 => 'e'
-        )
+    1 => 'a',
+    0 => 'b',
+    'c',
+    7 => 'd',
+    3 => 'e'
+)
 EOS;
 
         $this->assertEquals($expectedSource, $valueGenerator->generate());

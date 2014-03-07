@@ -307,6 +307,26 @@ abstract class AbstractWriter implements WriterInterface
     }
 
     /**
+     * Get formatter
+     *
+     * @return Formatter\FormatterInterface
+     */
+    protected function getFormatter()
+    {
+        return $this->formatter;
+    }
+
+    /**
+     * Check if the writer has a formatter
+     *
+     * @return bool
+     */
+    protected function hasFormatter()
+    {
+        return $this->formatter instanceof Formatter\FormatterInterface;
+    }
+
+    /**
      * Set convert write errors to exception flag
      *
      * @param bool $convertErrors

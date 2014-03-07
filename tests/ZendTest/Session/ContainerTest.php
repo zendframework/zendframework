@@ -537,9 +537,6 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testMultiDimensionalUnset()
     {
-        if (version_compare(PHP_VERSION, '5.3.4') < 0) {
-            $this->markTestSkipped('Known issue on versions of PHP less than 5.3.4');
-        }
         $this->container->foo = array('bar' => 'baz');
         unset($this->container['foo']['bar']);
         $this->assertSame(array(), $this->container->foo);

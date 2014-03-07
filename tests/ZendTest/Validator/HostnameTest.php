@@ -449,6 +449,49 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid('رات.si'));
     }
 
+    /**
+     * @group Issue #5894 - Add .il IDN domain checking; add new TLDs
+     */
+    public function testIDNIL()
+    {
+        $validator = new Hostname(Hostname::ALLOW_ALL);
+
+        // Check .IL TLD matching
+        $valuesExpected = array(
+            array(true, array('xn----zhcbgfhe2aacg8fb5i.org.il', 'מבחן.il', 'מבחן123.il')),
+            array(false, array('tבדיקה123.il', 'رات.il')) // Can't mix Latin and Hebrew character sets (except digits)
+        );
+        foreach ($valuesExpected as $element) {
+            foreach ($element[1] as $input) {
+                $this->assertEquals(
+                    $element[0],
+                    $validator->isValid($input),
+                    implode("\n", $validator->getMessages()) .' - '. $input
+                );
+            }
+        }
+    }
+
+    public function testAdditionalUTF8TLDs()
+    {
+        $validator = new Hostname(Hostname::ALLOW_ALL);
+
+        // Check UTF-8 TLD matching
+        $valuesExpected = array(
+            array(true, array('test123.δοκιμή', 'тест.рф', 'туршилтын.мон')),
+            array(false, array('சோதனை3.இலங்கை', 'رات.мон'))
+        );
+        foreach ($valuesExpected as $element) {
+            foreach ($element[1] as $input) {
+                $this->assertEquals(
+                    $element[0],
+                    $validator->isValid($input),
+                    implode("\n", $validator->getMessages()) .' - '. $input
+                );
+            }
+        }
+    }
+
     public function testIDNIT()
     {
         $validator = new Hostname(Hostname::ALLOW_ALL);
@@ -462,14 +505,12 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'), 'messageTemplates', $validator);
     }
 
     public function testEqualsMessageVariables()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals($validator->getOption('messageVariables'),
-                                     'messageVariables', $validator);
+        $this->assertAttributeEquals($validator->getOption('messageVariables'), 'messageVariables', $validator);
     }
 }

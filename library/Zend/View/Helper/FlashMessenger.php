@@ -102,11 +102,32 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     {
         $flashMessenger = $this->getPluginFlashMessenger();
         $messages = $flashMessenger->getMessagesFromNamespace($namespace);
+        return $this->renderMessages($namespace, $messages, $classes);
+    }
 
-        if (empty($messages)) {
-            return '';
-        }
+    /**
+     * Render Current Messages
+     *
+     * @param  string $namespace
+     * @param  array  $classes
+     * @return string
+     */
+    public function renderCurrent($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $classes = array())
+    {
+        $flashMessenger = $this->getPluginFlashMessenger();
+        $messages = $flashMessenger->getCurrentMessagesFromNamespace($namespace);
+        return $this->renderMessages($namespace, $messages, $classes);
+    }
 
+    /**
+     * Render Messages
+     *
+     * @param  array $messages
+     * @param  array $classes
+     * @return string
+     */
+    protected function renderMessages($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $messages = array(), array $classes = array())
+    {
         // Prepare classes for opening tag
         if (empty($classes)) {
             if (isset($this->classMessages[$namespace])) {
@@ -116,14 +137,11 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
             }
             $classes = array($classes);
         }
-
         // Flatten message array
         $escapeHtml      = $this->getEscapeHtmlHelper();
         $messagesToPrint = array();
-
         $translator = $this->getTranslator();
         $translatorTextDomain = $this->getTranslatorTextDomain();
-
         array_walk_recursive($messages, function ($item) use (&$messagesToPrint, $escapeHtml, $translator, $translatorTextDomain) {
             if ($translator !== null) {
                 $item = $translator->translate(
@@ -133,16 +151,13 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
             }
             $messagesToPrint[] = $escapeHtml($item);
         });
-
         if (empty($messagesToPrint)) {
             return '';
         }
-
         // Generate markup
         $markup  = sprintf($this->getMessageOpenFormat(), ' class="' . implode(' ', $classes) . '"');
         $markup .= implode(sprintf($this->getMessageSeparatorString(), ' class="' . implode(' ', $classes) . '"'), $messagesToPrint);
         $markup .= $this->getMessageCloseString();
-
         return $markup;
     }
 

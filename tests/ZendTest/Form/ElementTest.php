@@ -20,6 +20,12 @@ class ElementTest extends TestCase
         $this->assertEquals(array(), $element->getAttributes());
     }
 
+    public function testLabelAttributesAreEmptyByDefault()
+    {
+        $element = new Element();
+        $this->assertEquals(array(), $element->getLabelAttributes());
+    }
+
     public function testCanAddAttributesSingly()
     {
         $element = new Element();

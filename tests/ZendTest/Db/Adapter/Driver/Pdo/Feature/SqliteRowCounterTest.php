@@ -18,11 +18,11 @@ class SqliteRowCounterTest extends PHPUnit_Framework_TestCase
     /**
      * @var SqliteRowCounter
      */
-    protected $rowcounter;
+    protected $rowCounter;
 
     public function setUp()
     {
-        $this->rowcounter = new SqliteRowCounter();
+        $this->rowCounter = new SqliteRowCounter();
     }
 
     /**
@@ -30,7 +30,7 @@ class SqliteRowCounterTest extends PHPUnit_Framework_TestCase
      */
     public function testGetName()
     {
-        $this->assertEquals('SqliteRowCounter', $this->rowcounter->getName());
+        $this->assertEquals('SqliteRowCounter', $this->rowCounter->getName());
     }
 
     /**
@@ -38,10 +38,11 @@ class SqliteRowCounterTest extends PHPUnit_Framework_TestCase
      */
     public function testGetCountForStatement()
     {
-        $statement = new Statement;
-        $statement->setDriver($this->getMock('Zend\Db\Adapter\Driver\Pdo\Pdo', array('prepare'), array(), '', false));
+        $statement = $this->getMockStatement('SELECT XXX', 5);
+        $statement->expects($this->once())->method('prepare')->with($this->equalTo('SELECT COUNT(*) as "count" FROM (SELECT XXX)'));
 
-        $this->rowcounter->getCountForStatement($statement);
+        $count = $this->rowCounter->getCountForStatement($statement);
+        $this->assertEquals(5, $count);
     }
 
     /**
@@ -49,8 +50,9 @@ class SqliteRowCounterTest extends PHPUnit_Framework_TestCase
      */
     public function testGetCountForSql()
     {
-        $this->markTestIncomplete('Need to Count Row');
-        $this->rowcounter->getCountForSql("select * from foo");
+        $this->rowCounter->setDriver($this->getMockDriver(5));
+        $count = $this->rowCounter->getCountForSql('SELECT XXX');
+        $this->assertEquals(5, $count);
     }
 
     /**
@@ -58,11 +60,61 @@ class SqliteRowCounterTest extends PHPUnit_Framework_TestCase
      */
     public function testGetRowCountClosure()
     {
-        $this->markTestIncomplete('Need to Count Row on $context ');
+        $stmt = $this->getMockStatement('SELECT XXX', 5);
 
-        $this->rowcounter->getRowCountClosure("select * from foo");
-        $statement = new Statement;
-        $statement->setDriver($this->getMock('Zend\Db\Adapter\Driver\Pdo\Pdo', array('prepare'), array(), '', false));
-        $this->rowcounter->getRowCountClosure($statement);
+        /** @var \Closure $closure */
+        $closure = $this->rowCounter->getRowCountClosure($stmt);
+        $this->assertInstanceOf('Closure', $closure);
+        $this->assertEquals(5, $closure());
+    }
+
+    protected function getMockStatement($sql, $returnValue)
+    {
+        /** @var \Zend\Db\Adapter\Driver\Pdo\Statement|\PHPUnit_Framework_MockObject_MockObject $statement */
+        $statement = $this->getMock('Zend\Db\Adapter\Driver\Pdo\Statement', array('prepare', 'execute'), array(), '', false);
+
+        // mock PDOStatement with stdClass
+        $resource = $this->getMock('stdClass', array('fetch'));
+        $resource->expects($this->once())
+            ->method('fetch')
+            ->will($this->returnValue(array('count' => $returnValue)));
+
+        // mock the result
+        $result = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $result->expects($this->once())
+            ->method('getResource')
+            ->will($this->returnValue($resource));
+
+        $statement->setSql($sql);
+        $statement->expects($this->once())
+            ->method('execute')
+            ->will($this->returnValue($result));
+
+        return $statement;
+    }
+
+    protected function getMockDriver($returnValue)
+    {
+        $pdoStatement = $this->getMock('stdClass', array('fetch'), array(), '', false); // stdClass can be used here
+        $pdoStatement->expects($this->once())
+            ->method('fetch')
+            ->will($this->returnValue(array('count' => $returnValue)));
+
+        $pdoConnection = $this->getMock('stdClass', array('query'));
+        $pdoConnection->expects($this->once())
+            ->method('query')
+            ->will($this->returnValue($pdoStatement));
+
+        $connection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
+        $connection->expects($this->once())
+            ->method('getResource')
+            ->will($this->returnValue($pdoConnection));
+
+        $driver = $this->getMock('Zend\Db\Adapter\Driver\Pdo\Pdo', array('getConnection'), array(), '', false);
+        $driver->expects($this->once())
+            ->method('getConnection')
+            ->will($this->returnValue($connection));
+
+        return $driver;
     }
 }

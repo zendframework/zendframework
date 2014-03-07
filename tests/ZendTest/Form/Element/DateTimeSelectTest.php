@@ -137,4 +137,17 @@ class DateTimeSelectTest extends TestCase
         $this->assertEquals('04', $cloned->getMinuteElement()->getValue());
         $this->assertEquals('05', $cloned->getSecondElement()->getValue());
     }
+
+    public function testPassingNullValueToSetValueWillUseCurrentDate()
+    {
+        $now     = new DateTime;
+        $element = new DateTimeSelectElement();
+        $element->setValue(null);
+        $yearElement = $element->getYearElement();
+        $monthElement = $element->getMonthElement();
+        $dayElement = $element->getDayElement();
+        $this->assertEquals($now->format('Y'), $yearElement->getValue());
+        $this->assertEquals($now->format('m'), $monthElement->getValue());
+        $this->assertEquals($now->format('d'), $dayElement->getValue());
+    }
 }

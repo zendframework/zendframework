@@ -355,6 +355,9 @@ class CollectionInputFilterTest extends TestCase
         $this->assertCount(2, $messages);
         $this->assertArrayHasKey('foo', $messages[0]);
         $this->assertArrayHasKey('bar', $messages[1]);
+
+        $this->assertCount(1, $messages[0]['foo']);
+        $this->assertCount(1, $messages[1]['bar']);
     }
 
     public function testSetValidationGroupUsingFormStyle()
@@ -433,7 +436,30 @@ class CollectionInputFilterTest extends TestCase
     public function testSetRequired()
     {
         $this->filter->setIsRequired(true);
-        $this->assertEquals(true,$this->filter->getIsRequired());
+        $this->assertEquals(true, $this->filter->getIsRequired());
+    }
+
+    public function testNonRequiredFieldsAreValidated()
+    {
+        $invalidCollectionData = array(
+            array(
+                'foo' => ' bazbattoolong ',
+                'bar' => '12345',
+                'baz' => 'baztoolong',
+                'nest' => array(
+                    'foo' => ' bazbat ',
+                    'bar' => '12345',
+                    'baz' => '',
+                ),
+            )
+        );
+
+        $this->filter->setInputFilter($this->getBaseInputFilter());
+        $this->filter->setData($invalidCollectionData);
+
+        $this->assertFalse($this->filter->isValid());
+        $this->assertCount(2, current($this->filter->getInvalidInput()));
+        $this->assertArrayHasKey('baz', current($this->filter->getMessages()));
     }
 
     public function testNestedCollectionWithEmptyChild()

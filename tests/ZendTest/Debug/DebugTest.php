@@ -97,6 +97,8 @@ class DebugTest extends \PHPUnit_Framework_TestCase
 
     public function testDebugHaveEscaper()
     {
+        Debug::setSapi('apache');
+
         $escaper = new Escaper;
         Debug::setEscaper($escaper);
 

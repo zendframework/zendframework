@@ -447,6 +447,117 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di->newInstance('ZendTest\Di\TestAsset\CircularClasses\D');
     }
 
+    protected function configureNoneCircularDependencyTests()
+    {
+        $di = new Di();
+
+        $di->instanceManager()->addAlias('YA', 'ZendTest\Di\TestAsset\CircularClasses\Y');
+        $di->instanceManager()->addAlias('YB', 'ZendTest\Di\TestAsset\CircularClasses\Y', array('y' => 'YA'));
+        $di->instanceManager()->addAlias('YC', 'ZendTest\Di\TestAsset\CircularClasses\Y', array('y' => 'YB'));
+
+        return $di;
+    }
+
+    /**
+     * Test for correctly identifying no Circular Dependencies (case 1)
+     *
+     * YC -> YB, YB -> YA
+     * @group CircularDependencyCheck
+     */
+    public function testNoCircularDependencyDetectedIfWeGetIntermediaryClass()
+    {
+        $di = $this->configureNoneCircularDependencyTests();
+
+        $yb = $di->get('YB');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\CircularClasses\Y', $yb);
+        $yc = $di->get('YC');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\CircularClasses\Y', $yc);
+    }
+
+    /**
+     * Test for correctly identifying no Circular Dependencies (case 2)
+     *
+     * YC -> YB, YB -> YA
+     * @group CircularDependencyCheck
+     */
+    public function testNoCircularDependencyDetectedIfWeDontGetIntermediaryClass()
+    {
+        $di = $this->configureNoneCircularDependencyTests();
+
+        $yc = $di->get('YC');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\CircularClasses\Y', $yc);
+    }
+
+    /**
+     * Test for correctly identifying a Circular Dependency in aliases (case 3)
+     *
+     * YA -> YB, YB -> YA
+     * @group CircularDependencyCheck
+     */
+    public function testCircularDependencyDetectedInAliases()
+    {
+        $di = new Di();
+
+        $di->instanceManager()->addAlias('YA', 'ZendTest\Di\TestAsset\CircularClasses\Y', array('y' => 'YC'));
+        $di->instanceManager()->addAlias('YB', 'ZendTest\Di\TestAsset\CircularClasses\Y', array('y' => 'YA'));
+        $di->instanceManager()->addAlias('YC', 'ZendTest\Di\TestAsset\CircularClasses\Y', array('y' => 'YB'));
+
+        $this->setExpectedException(
+            'Zend\Di\Exception\CircularDependencyException',
+            'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\Y depends on ZendTest\Di\TestAsset\CircularClasses\Y and viceversa (Aliased as YA)'
+        );
+
+        $yc = $di->get('YC');
+    }
+
+    /**
+     * Test for correctly identifying a Circular Dependency with a self referencing alias
+     *
+     * YA -> YA
+     * @group CircularDependencyCheck
+     */
+    public function testCircularDependencyDetectedInSelfReferencingAlias()
+    {
+        $di = new Di();
+
+        $di->instanceManager()->addAlias(
+            'YA',
+            'ZendTest\Di\TestAsset\CircularClasses\Y',
+            array('y' => 'YA')
+        );
+
+        $this->setExpectedException(
+            'Zend\Di\Exception\CircularDependencyException',
+            'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\Y depends on ZendTest\Di\TestAsset\CircularClasses\Y and viceversa (Aliased as YA)'
+        );
+
+        $y = $di->get('YA');
+    }
+
+    /**
+     * Test for correctly identifying a Circular Dependency with mixture of classes and aliases
+     *
+     * Y -> YA, YA -> Y
+     * @group CircularDependencyCheck
+     */
+    public function testCircularDependencyDetectedInMixtureOfAliasesAndClasses()
+    {
+        $di = new Di();
+
+        $di->instanceManager()->addAlias(
+            'YA',
+            'ZendTest\Di\TestAsset\CircularClasses\Y',
+            array('y' => 'ZendTest\Di\TestAsset\CircularClasses\Y')
+        );
+
+        $this->setExpectedException(
+            'Zend\Di\Exception\CircularDependencyException',
+            'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\Y depends on ZendTest\Di\TestAsset\CircularClasses\Y and viceversa (Aliased as YA)'
+        );
+
+        $y = $di->get('ZendTest\Di\TestAsset\CircularClasses\Y', array('y' => 'YA'));
+    }
+
     /**
      * Fix for PHP bug in is_subclass_of
      *

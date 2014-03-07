@@ -10,7 +10,6 @@
 namespace Zend\Dom;
 
 use DOMDocument;
-use Zend\Dom\DOMXPath;
 
 /**
  * Query DOM structures based on CSS selectors and/or XPath

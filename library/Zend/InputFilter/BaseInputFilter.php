@@ -18,7 +18,11 @@ use Zend\Stdlib\InitializableInterface;
  * @todo       How should we deal with required input when data is missing?
  *             should a message be returned? if so, what message?
  */
-class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInterface, InitializableInterface
+class BaseInputFilter implements
+    InputFilterInterface,
+    UnknownInputsCapableInterface,
+    InitializableInterface,
+    ReplaceableInputInterface
 {
     protected $data;
     protected $inputs = array();
@@ -78,6 +82,38 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
             $original = $this->inputs[$name];
             $original->merge($input);
             return $this;
+        }
+
+        $this->inputs[$name] = $input;
+        return $this;
+    }
+
+    /**
+     * Replace a named input
+     *
+     * @param  InputInterface|InputFilterInterface $input
+     * @param  string                              $name Name of the input to replace
+     * @throws Exception\InvalidArgumentException
+     * @return self
+     */
+    public function replace($input, $name)
+    {
+        if (!$input instanceof InputInterface && !$input instanceof InputFilterInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an instance of %s or %s as its first argument; received "%s"',
+                __METHOD__,
+                'Zend\InputFilter\InputInterface',
+                'Zend\InputFilter\InputFilterInterface',
+                (is_object($input) ? get_class($input) : gettype($input))
+            ));
+        }
+
+        if (!array_key_exists($name, $this->inputs)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: no input found matching "%s"',
+                __METHOD__,
+                $name
+            ));
         }
 
         $this->inputs[$name] = $input;
@@ -339,6 +375,11 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
     {
         if ($name === self::VALIDATE_ALL) {
             $this->validationGroup = null;
+            foreach($this->getInputs() as $input) {
+                if ($input instanceof InputFilterInterface) {
+                    $input->setValidationGroup(self::VALIDATE_ALL);
+                }
+            }
             return $this;
         }
 
@@ -350,6 +391,14 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
                 } else {
                     $inputs[] = $key;
 
+                    if (!$this->inputs[$key] instanceof InputFilterInterface) {
+                        throw new Exception\InvalidArgumentException(
+                            sprintf(
+                                'Input "%s" must implement InputFilterInterface',
+                                $key
+                            )
+                        );
+                    }
                     // Recursively populate validation groups for sub input filters
                     $this->inputs[$key]->setValidationGroup($value);
                 }

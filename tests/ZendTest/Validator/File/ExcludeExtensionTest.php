@@ -161,4 +161,23 @@ class ExcludeExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('fileExcludeExtensionNotFound', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
     }
+
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
+    {
+        $validator = new File\ExcludeExtension('12345');
+
+        $this->assertFalse($validator->isValid(''));
+        $this->assertArrayHasKey(File\ExcludeExtension::NOT_FOUND, $validator->getMessages());
+
+        $filesArray = array(
+            'name'      => '',
+            'size'      => 0,
+            'tmp_name'  => '',
+            'error'     => UPLOAD_ERR_NO_FILE,
+            'type'      => '',
+        );
+
+        $this->assertFalse($validator->isValid($filesArray));
+        $this->assertArrayHasKey(File\ExcludeExtension::NOT_FOUND, $validator->getMessages());
+    }
 }

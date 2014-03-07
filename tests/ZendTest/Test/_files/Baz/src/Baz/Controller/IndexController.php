@@ -10,12 +10,16 @@
 namespace Baz\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Http\Response;
 
 class IndexController extends AbstractActionController
 {
     public function unittestsAction()
     {
-        $this->getResponse()->getHeaders()->addHeaderLine('Content-Type: text/html');
+        $this->getResponse()
+            ->getHeaders()
+            ->addHeaderLine('Content-Type: text/html')
+            ->addHeaderLine('WWW-Authenticate: Basic realm="ZF2"');
 
         $num_get = $this->getRequest()->getQuery()->get('num_get', 0);
         $num_post = $this->getRequest()->getPost()->get('num_post', 0);
@@ -36,5 +40,13 @@ class IndexController extends AbstractActionController
     public function exceptionAction()
     {
         throw new \RuntimeException('Foo error !');
+    }
+
+    public function customResponseAction()
+    {
+        $response = new Response();
+        $response->setStatusCode(999);
+
+        return $response;
     }
 }

@@ -502,6 +502,14 @@ class ServiceManager implements ServiceLocatorInterface
                 || $this->canCreateFromAbstractFactory($cName, $name)
             ) {
                 $instance = $this->create(array($cName, $name));
+            } elseif ($isAlias && $this->canCreateFromAbstractFactory($name, $cName)) {
+                /*
+                 * case of an alias leading to an abstract factory :
+                 * 'my-alias' => 'my-abstract-defined-service'
+                 *     $name = 'my-alias'
+                 *     $cName = 'my-abstract-defined-service'
+                 */
+                $instance = $this->create(array($name, $cName));
             } elseif ($usePeeringServiceManagers && !$this->retrieveFromPeeringManagerFirst) {
                 $instance = $this->retrieveFromPeeringManager($name);
             }
@@ -730,6 +738,7 @@ class ServiceManager implements ServiceLocatorInterface
             if ($abstractFactory->canCreateServiceWithName($this, $cName, $rName)) {
                 $this->nestedContext[$cName] = $abstractFactory;
                 $result = true;
+                break;
             }
         }
         $this->checkNestedContextStop();

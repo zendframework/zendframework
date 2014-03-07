@@ -81,6 +81,16 @@ return array(
                     ),
                 ),
             ),
+            'custom-response' => array(
+                'type' => 'literal',
+                'options' => array(
+                    'route'    => '/custom-response',
+                    'defaults' => array(
+                        'controller' => 'baz_index',
+                        'action'     => 'custom-response',
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(

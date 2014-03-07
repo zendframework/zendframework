@@ -192,7 +192,7 @@ class Gz extends AbstractCompressionAlgorithm
             $compressed = gzuncompress($content);
         }
 
-        if (!$compressed) {
+        if ($compressed === false) {
             throw new Exception\RuntimeException('Error during decompression');
         }
 

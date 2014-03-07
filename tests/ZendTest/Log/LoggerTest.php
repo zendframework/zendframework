@@ -14,6 +14,7 @@ use ErrorException;
 use Zend\Log\Logger;
 use Zend\Log\Processor\Backtrace;
 use Zend\Log\Writer\Mock as MockWriter;
+use Zend\Log\Writer\Stream as StreamWriter;
 use Zend\Log\Filter\Mock as MockFilter;
 use Zend\Stdlib\SplPriorityQueue;
 use Zend\Validator\Digits as DigitsFilter;
@@ -298,6 +299,26 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $writers[0]->getLogSeparator());
     }
 
+    public function testOptionsWithMockAndProcessor()
+    {
+        $options = array(
+            'writers' => array(
+                'first_writer' => array(
+                    'name' => 'mock',
+                ),
+            ),
+            'processors' => array(
+                'first_processor' => array(
+                    'name' => 'requestid',
+                ),
+            )
+        );
+        $logger = new Logger($options);
+        $processors = $logger->getProcessors()->toArray();
+        $this->assertCount(1, $processors);
+        $this->assertInstanceOf('Zend\Log\Processor\RequestId', $processors[0]);
+    }
+
     public function testAddProcessor()
     {
         $processor = new Backtrace();
@@ -384,5 +405,29 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Zend\Log\Logger', $logger->info('Hi', array('extra' => '')));
         fclose($stream);
+    }
+
+    /**
+     * @group 5383
+     */
+    public function testErrorHandlerWithStreamWriter()
+    {
+        $options      = array('errorhandler' => true);
+        $logger       = new Logger($options);
+        $stream       = fopen('php://memory', 'w+');
+        $streamWriter = new StreamWriter($stream);
+
+        // error handler does not like this feature so turn it off
+        $streamWriter->setConvertWriteErrorsToExceptions(false);
+        $logger->addWriter($streamWriter);
+
+        // we raise two notices - both should be logged
+        echo $test;
+        echo $second;
+
+        rewind($stream);
+        $contents = stream_get_contents($stream);
+        $this->assertContains('test', $contents);
+        $this->assertContains('second', $contents);
     }
 }

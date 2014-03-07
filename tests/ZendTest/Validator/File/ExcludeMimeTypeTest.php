@@ -130,4 +130,23 @@ class ExcludeMimeTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('image/gif,text,jpg,to,zip,ti', $validator->getMimeType());
         $this->assertEquals(array('image/gif', 'text', 'jpg', 'to', 'zip', 'ti'), $validator->getMimeType(true));
     }
+
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
+    {
+        $validator = new ExcludeMimeType();
+
+        $this->assertFalse($validator->isValid(''));
+        $this->assertArrayHasKey(ExcludeMimeType::NOT_READABLE, $validator->getMessages());
+
+        $filesArray = array(
+            'name'      => '',
+            'size'      => 0,
+            'tmp_name'  => '',
+            'error'     => UPLOAD_ERR_NO_FILE,
+            'type'      => '',
+        );
+
+        $this->assertFalse($validator->isValid($filesArray));
+        $this->assertArrayHasKey(ExcludeMimeType::NOT_READABLE, $validator->getMessages());
+    }
 }

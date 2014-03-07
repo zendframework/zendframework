@@ -16,11 +16,15 @@ use Zend\Form\Element;
 use Zend\Form\Element\Collection as Collection;
 use Zend\Form\Fieldset;
 use Zend\Form\Form;
-use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
-use ZendTest\Form\TestAsset\Entity\Product;
 use Zend\Stdlib\Hydrator\ArraySerializable;
-use ZendTest\Form\TestAsset\CustomCollection;
+use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Stdlib\Hydrator\ObjectProperty as ObjectPropertyHydrator;
 use ZendTest\Form\TestAsset\ArrayModel;
+use ZendTest\Form\TestAsset\CustomCollection;
+use ZendTest\Form\TestAsset\Entity\Product;
+use ZendTest\Form\TestAsset\ProductFieldset;
+use ZendTest\Form\TestAsset\Entity\Address;
+use ZendTest\Form\TestAsset\Entity\Phone;
 
 class CollectionTest extends TestCase
 {
@@ -548,7 +552,8 @@ class CollectionTest extends TestCase
         $productFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
 
         $mainFieldset = new Fieldset('shop');
-        $mainFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+        $mainFieldset->setObject(new stdClass);
+        $mainFieldset->setHydrator(new ObjectPropertyHydrator());
         $mainFieldset->add($productFieldset);
 
         $form = new Form();
@@ -561,7 +566,6 @@ class CollectionTest extends TestCase
                 'count' => 2
             ),
         ));
-        $form->get('collection')->setHydrator(new ObjectPropertyHydrator());
 
         $market = new stdClass();
 
@@ -637,5 +641,186 @@ class CollectionTest extends TestCase
         $traversable->append($obj2);
         $traversable->append($obj3);
         $collection->setObject($traversable);
+    }
+
+    public function testPopulateValuesWithFirstKeyGreaterThanZero()
+    {
+        $inputData = array(
+            1 => array('name' => 'black'),
+            5 => array('name' => 'white'),
+        );
+
+        // Standalone Collection element
+        $collection = new Collection('fieldsets', array(
+            'count' => 1,
+            'target_element' => new \ZendTest\Form\TestAsset\CategoryFieldset(),
+        ));
+
+        $form = new Form();
+        $form->add(array(
+            'type'    => 'Zend\Form\Element\Collection',
+            'name'    => 'collection',
+            'options' => array(
+                'count'          => 1,
+                'target_element' => new \ZendTest\Form\TestAsset\CategoryFieldset(),
+            )
+        ));
+
+        // Collection element attached to a form
+        $formCollection = $form->get('collection');
+
+        $collection->populateValues($inputData);
+        $formCollection->populateValues($inputData);
+
+        $this->assertEquals(count($collection->getFieldsets()), count($inputData));
+        $this->assertEquals(count($formCollection->getFieldsets()), count($inputData));
+    }
+
+    public function testCanRemoveAllElementsIfAllowRemoveIsTrue()
+    {
+        /**
+         * @var \Zend\Form\Element\Collection $collection
+         */
+        $collection = $this->form->get('colors');
+        $collection->setAllowRemove(true);
+        $collection->setCount(0);
+
+
+        // By default, $collection contains 2 elements
+        $data = array();
+
+        $collection->populateValues($data);
+        $this->assertEquals(0, count($collection->getElements()));
+    }
+
+    public function testCanBindObjectMultipleNestedFieldsets()
+    {
+        $productFieldset = new ProductFieldset();
+        $productFieldset->setHydrator(new ClassMethods());
+        $productFieldset->setObject(new Product());
+
+        $nestedFieldset = new Fieldset('nested');
+        $nestedFieldset->setHydrator(new ClassMethods());
+        $nestedFieldset->setObject(new stdClass());
+        $nestedFieldset->add(array(
+            'name' => 'products',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $productFieldset,
+                'count' => 2,
+            ),
+        ));
+
+        $mainFieldset = new Fieldset('main');
+        $mainFieldset->setUseAsBaseFieldset(true);
+        $mainFieldset->setHydrator(new ClassMethods());
+        $mainFieldset->setObject(new stdClass());
+        $mainFieldset->add(array(
+            'name' => 'nested',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $nestedFieldset,
+                'count' => 2,
+            ),
+        ));
+
+        $form = new Form();
+        $form->setHydrator(new ObjectPropertyHydrator());
+        $form->add($mainFieldset);
+
+        $market = new stdClass();
+
+        $prices = array(100, 200);
+
+        $products[0] = new Product();
+        $products[0]->setPrice($prices[0]);
+        $products[1] = new Product();
+        $products[1]->setPrice($prices[1]);
+
+        $shop[0] = new stdClass();
+        $shop[0]->products = $products;
+
+        $shop[1] = new stdClass();
+        $shop[1]->products = $products;
+
+        $market->main = $shop;
+        $form->bind($market);
+
+        //test for object binding
+        foreach ($form->get('main')->getFieldsets() as $_fieldset) {
+            foreach($_fieldset->getFieldsets() as $_nestedfieldset) {
+                $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Product', $_nestedfieldset->get('products')->getObject());
+            }
+        };
+    }
+
+    public function testNestedCollections()
+    {
+        // @see https://github.com/zendframework/zf2/issues/5640
+        $addressesFieldeset = new \ZendTest\Form\TestAsset\AddressFieldset();
+        $addressesFieldeset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+
+        $form = new Form();
+        $form->setHydrator(new ObjectPropertyHydrator());
+        $form->add(array(
+            'name' => 'addresses',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $addressesFieldeset,
+                'count' => 2
+            ),
+        ));
+
+        $data = array(
+            array('number' => '0000000001', 'street' => 'street1'),
+            array('number' => '0000000002', 'street' => 'street2'),
+        );
+
+        $phone1 = new Phone();
+        $phone1->setNumber($data[0]['number']);
+
+        $phone2 = new Phone();
+        $phone2->setNumber($data[1]['number']);
+
+        $address1 = new Address();
+        $address1->setStreet($data[0]['street']);
+        $address1->setPhones(array($phone1));
+
+        $address2 = new Address();
+        $address2->setStreet($data[1]['street']);
+        $address2->setPhones(array($phone2));
+
+        $customer = new stdClass();
+        $customer->addresses = array($address1, $address2);
+
+        $form->bind($customer);
+
+        //test for object binding
+        foreach ($form->get('addresses')->getFieldsets() as $_fieldset) {
+            $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Address', $_fieldset->getObject());
+            foreach ($_fieldset->getFieldsets() as $_childFieldsetName => $_childFieldset) {
+                switch ($_childFieldsetName) {
+                    case 'city':
+                        $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\City', $_childFieldset->getObject());
+                        break;
+                    case 'phones':
+                        foreach ($_childFieldset->getFieldsets() as $_phoneFieldset) {
+                            $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Phone', $_phoneFieldset->getObject());
+                        }
+                        break;
+                }
+            }
+        }
+
+        //test for correct extract and populate
+        $index = 0;
+        foreach ($form->get('addresses') as $_addresses) {
+            $this->assertEquals($data[$index]['street'], $_addresses->get('street')->getValue());
+            //assuming data has just 1 phone entry
+            foreach ($_addresses->get('phones') as $phone) {
+                $this->assertEquals($data[$index]['number'], $phone->get('number')->getValue());
+            }
+            $index++;
+        }
     }
 }

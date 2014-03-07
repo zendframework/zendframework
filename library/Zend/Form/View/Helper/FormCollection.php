@@ -80,6 +80,7 @@ class FormCollection extends AbstractHelper
             return '';
         }
 
+        $attributes       = $element->getAttributes();
         $markup           = '';
         $templateMarkup   = '';
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
@@ -113,6 +114,10 @@ class FormCollection extends AbstractHelper
             }
 
             $label = $element->getLabel();
+            $legend = '';
+
+            $label = $element->getLabel();
+            $labelMarkup = '';
             if (!empty($label)) {
                 if (null !== ($translator = $this->getTranslator())) {
                     $label = $translator->translate(
@@ -123,15 +128,16 @@ class FormCollection extends AbstractHelper
 
                 $label = $escapeHtmlHelper($label);
 
-                $labelMarkup = sprintf('<legend>%s</legend>', $label);
-            } else {
-                $labelMarkup = '';
+                $legend = sprintf(
+                    '<legend>%s</legend>',
+                    $escapeHtmlHelper($label)
+                );
             }
 
             $markup = sprintf(
                 '<fieldset%s>%s%s</fieldset>',
                 $attributesString,
-                $labelMarkup,
+                $legend,
                 $markup
             );
         }

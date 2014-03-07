@@ -223,6 +223,41 @@ class BaseInputFilterTest extends TestCase
         $this->assertFalse($filter->isValid());
     }
 
+    public function testResetEmptyValidationGroupRecursively()
+    {
+        $data = array(
+            'flat' => 'foo',
+            'deep' => array(
+                'deep-input1' => 'deep-foo1',
+                'deep-input2' => 'deep-foo2',
+            )
+        );
+        $filter = new InputFilter;
+        $filter->add(new Input, 'flat');
+        $deepInputFilter = new InputFilter;
+        $deepInputFilter->add(new Input, 'deep-input1');
+        $deepInputFilter->add(new Input, 'deep-input2');
+        $filter->add($deepInputFilter, 'deep');
+        $filter->setData($data);
+        $filter->setValidationGroup(array('deep' => 'deep-input1'));
+        // reset validation group
+        $filter->setValidationGroup(InputFilter::VALIDATE_ALL);
+        $this->assertEquals($data, $filter->getValues());
+    }
+
+    public function testSetDeepValidationGroupToNonInputFilterThrowsException()
+    {
+        $filter = $this->getInputFilter();
+        $filter->add(new Input, 'flat');
+        // we expect setValidationGroup to throw an exception when flat is treated
+        // like an inputfilter which it actually isn't
+        $this->setExpectedException(
+            'Zend\InputFilter\Exception\InvalidArgumentException',
+            'Input "flat" must implement InputFilterInterface'
+        );
+        $filter->setValidationGroup(array('flat' => 'foo'));
+    }
+
     public function testCanRetrieveInvalidInputsOnFailedValidation()
     {
         if (!extension_loaded('intl')) {
@@ -830,6 +865,7 @@ class BaseInputFilterTest extends TestCase
 
     /**
      * @group 5270
+     * @requires extension intl
      */
     public function testIsValidWhenValuesSetOnFilters()
     {

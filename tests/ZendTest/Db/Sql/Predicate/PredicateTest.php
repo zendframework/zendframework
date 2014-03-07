@@ -88,6 +88,16 @@ class PredicateTest extends TestCase
         $this->assertContains(array('foo.bar', 'bar%'), $parts[0]);
     }
 
+    public function testNotLikeCreatesLikePredicate()
+    {
+        $predicate = new Predicate();
+        $predicate->notLike('foo.bar', 'bar%');
+        $parts = $predicate->getExpressionData();
+        $this->assertEquals(1, count($parts));
+        $this->assertContains('%1$s NOT LIKE %2$s', $parts[0]);
+        $this->assertContains(array('foo.bar', 'bar%'), $parts[0]);
+    }
+
     public function testLiteralCreatesLiteralPredicate()
     {
         $predicate = new Predicate();

@@ -61,6 +61,13 @@ class Logger implements LoggerInterface
     protected static $registeredErrorHandler = false;
 
     /**
+     * Registered shutdown error handler
+     *
+     * @var bool
+     */
+    protected static $registeredFatalErrorShutdownFunction = false;
+
+    /**
      * Registered exception handler
      *
      * @var bool
@@ -172,6 +179,10 @@ class Logger implements LoggerInterface
 
         if (isset($options['errorhandler']) && $options['errorhandler'] === true) {
             static::registerErrorHandler($this);
+        }
+
+        if (isset($options['fatal_error_shutdownfunction']) && $options['fatal_error_shutdownfunction'] === true) {
+            static::registerFatalErrorShutdownFunction($this);
         }
     }
 
@@ -567,6 +578,41 @@ class Logger implements LoggerInterface
         restore_error_handler();
         static::$registeredErrorHandler = false;
     }
+
+
+    /**
+     * Register a shutdown handler to log fatal errors
+     *
+     * @link http://www.php.net/manual/function.register-shutdown-function.php
+     * @param  Logger $logger
+     * @return bool
+     */
+    public static function registerFatalErrorShutdownFunction(Logger $logger)
+    {
+        // Only register once per instance
+        if (static::$registeredFatalErrorShutdownFunction) {
+            return false;
+        }
+
+        $errorPriorityMap = static::$errorPriorityMap;
+
+        register_shutdown_function(function () use ($logger, $errorPriorityMap) {
+            $error = error_get_last();
+            if (null !== $error && $error['type'] === E_ERROR) {
+                $logger->log($errorPriorityMap[E_ERROR],
+                    $error['message'],
+                    array(
+                        'file' => $error['file'],
+                        'line' => $error['line']
+                    )
+                );
+            }
+        });
+
+        static::$registeredFatalErrorShutdownFunction = true;
+        return true;
+    }
+
 
     /**
      * Register logging system as an exception handler to log PHP exceptions

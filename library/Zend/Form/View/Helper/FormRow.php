@@ -10,6 +10,7 @@
 namespace Zend\Form\View\Helper;
 
 use Zend\Form\Element\Button;
+use Zend\Form\Element\MonthSelect;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\LabelAwareInterface;
@@ -178,7 +179,9 @@ class FormRow extends AbstractHelper
             // Multicheckbox elements have to be handled differently as the HTML standard does not allow nested
             // labels. The semantic way is to group them inside a fieldset
             $type = $element->getAttribute('type');
-            if ($type === 'multi_checkbox' || $type === 'radio') {
+            if ($type === 'multi_checkbox'
+                || $type === 'radio'
+                || $element instanceof MonthSelect) {
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',
                     $label,

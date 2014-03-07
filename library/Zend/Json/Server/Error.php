@@ -45,12 +45,14 @@ class Error
      */
     public function __construct($message = null, $code = self::ERROR_OTHER, $data = null) {
         $this->setMessage($message)
-              ->setCode($code)
-              ->setData($data);
+             ->setCode($code)
+             ->setData($data);
     }
 
     /**
-     * Set error code
+     * Set error code.
+     *
+     * If the error code is 0, it will be set to -32000 (ERROR_OTHER).
      *
      * @param  int $code
      * @return \Zend\Json\Server\Error
@@ -66,7 +68,12 @@ class Error
         }
 
         $code = (int) $code;
-        $this->code = $code;
+
+        if (0 === $code) {
+            $this->code = self::ERROR_OTHER;
+        } else {
+            $this->code = $code;
+        }
 
         return $this;
     }

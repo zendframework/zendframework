@@ -181,7 +181,8 @@ class FormRow extends AbstractHelper
             $type = $element->getAttribute('type');
             if ($type === 'multi_checkbox'
                 || $type === 'radio'
-                || $element instanceof MonthSelect) {
+                || $element instanceof MonthSelect
+            ) {
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',
                     $label,

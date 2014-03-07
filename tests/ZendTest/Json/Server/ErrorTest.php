@@ -54,7 +54,7 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
 
     public function testCodeShouldBeLimitedToStandardIntegers()
     {
-        foreach (array(true, 'foo', array(), new \stdClass, 2.0, 25) as $code) {
+        foreach (array(null, true, 'foo', array(), new \stdClass, 2.0) as $code) {
             $this->error->setCode($code);
             $this->assertEquals(Server\Error::ERROR_OTHER, $this->error->getCode());
         }
@@ -66,6 +66,24 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
             $this->error->setCode($code);
             $this->assertEquals($code, $this->error->getCode());
         }
+    }
+
+    public function arbitraryErrorCodes()
+    {
+        return array(
+            '1000'  => array(1000),
+            '404'   => array(404),
+            '-3000' => array(-3000),
+        );
+    }
+
+    /**
+     * @dataProvider arbitraryErrorCodes
+     */
+    public function testCodeShouldAllowArbitraryErrorCode($code)
+    {
+        $this->error->setCode($code);
+        $this->assertEquals($code, $this->error->getCode());
     }
 
     public function testMessageShouldBeNullByDefault()

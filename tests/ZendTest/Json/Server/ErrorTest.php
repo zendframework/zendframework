@@ -68,12 +68,22 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCodeShouldAllowArbitraryErrorCode()
+    public function arbitraryErrorCodes()
     {
-        foreach(array(1000, 404, -3000) as $code) {
-            $this->error->setCode($code);
-            $this->assertEquals($code, $this->error->getCode());
-        }
+        return array(
+            '1000'  => array(1000),
+            '404'   => array(404),
+            '-3000' => array(-3000),
+        );
+    }
+
+    /**
+     * @dataProvider arbitraryErrorCodes
+     */
+    public function testCodeShouldAllowArbitraryErrorCode($code)
+    {
+        $this->error->setCode($code);
+        $this->assertEquals($code, $this->error->getCode());
     }
 
     public function testMessageShouldBeNullByDefault()

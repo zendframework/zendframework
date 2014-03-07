@@ -60,17 +60,57 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     {
         $this->insert->values(array('foo' => 'bar'));
         $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'source'));
+        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'values'));
 
         // test will merge cols and values of previously set stuff
         $this->insert->values(array('foo' => 'bax'), Insert::VALUES_MERGE);
         $this->insert->values(array('boom' => 'bam'), Insert::VALUES_MERGE);
         $this->assertEquals(array('foo', 'boom'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bax', 'bam'), $this->readAttribute($this->insert, 'source'));
+        $this->assertEquals(array('bax', 'bam'), $this->readAttribute($this->insert, 'values'));
 
         $this->insert->values(array('foo' => 'bax'));
         $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bax'), $this->readAttribute($this->insert, 'source'));
+        $this->assertEquals(array('bax'), $this->readAttribute($this->insert, 'values'));
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Insert::values
+     */
+    public function testValuesThrowsExceptionWhenNotArrayOrSelect()
+    {
+        $this->setExpectedException(
+            'Zend\Db\Sql\Exception\InvalidArgumentException',
+            'values() expects an array of values or Zend\Db\Sql\Select instance'
+        );
+        $this->insert->values(5);
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Insert::values
+     */
+    public function testValuesThrowsExceptionWhenSelectMergeOverArray()
+    {
+        $this->insert->values(array('foo' => 'bar'));
+
+        $this->setExpectedException(
+            'Zend\Db\Sql\Exception\InvalidArgumentException',
+            'A Zend\Db\Sql\Select instance cannot be provided with the merge flag when values already exist'
+        );
+        $this->insert->values(new Select, Insert::VALUES_MERGE);
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Insert::values
+     */
+    public function testValuesThrowsExceptionWhenArrayMergeOverSelect()
+    {
+        $this->insert->values(new Select);
+
+        $this->setExpectedException(
+            'Zend\Db\Sql\Exception\InvalidArgumentException',
+            'An array of values cannot be provided with the merge flag when a Zend\Db\Sql\Select instance already exists as the value source'
+        );
+        $this->insert->values(array('foo' => 'bar'), Insert::VALUES_MERGE);
     }
 
     /**
@@ -184,7 +224,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     {
         $this->insert->foo = 'bar';
         $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'source'));
+        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'values'));
     }
 
     /**
@@ -194,10 +234,10 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     {
         $this->insert->foo = 'bar';
         $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'source'));
+        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'values'));
         unset($this->insert->foo);
         $this->assertEquals(array(), $this->readAttribute($this->insert, 'columns'));
-        $this->assertEquals(array(), $this->readAttribute($this->insert, 'source'));
+        $this->assertEquals(array(), $this->readAttribute($this->insert, 'values'));
     }
 
     /**

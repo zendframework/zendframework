@@ -81,13 +81,13 @@ class FormRowTest extends TestCase
         $markup = $this->helper->render($element);
         $this->assertRegexp('/<input name="foo" type="text"[^\/>]*\/?>/', $markup);
     }
-    
+
     public function testIgnoreLabelForHidden()
     {
         $element = new Element\Hidden('foo');
         $element->setLabel('My label');
         $markup = $this->helper->render($element);
-        $this->assertRegexp('/<input name="foo" type="hidden"[^\/>]*\/?>/', $markup);
+        $this->assertEquals('<input type="hidden" name="foo" value=""/>', $markup);
     }
 
     public function testCanHandleMultiCheckboxesCorrectly()

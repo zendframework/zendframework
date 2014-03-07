@@ -439,9 +439,9 @@ class FactoryTest extends TestCase
 
         $inputFilter = $factory->createInputFilter(array(
             'type'        => 'Zend\InputFilter\CollectionInputFilter',
-            'required' => true,
+            'required'    => true,
             'inputfilter' => new InputFilter(),
-            'count'       => 3
+            'count'       => 3,
         ));
 
         $this->assertInstanceOf('Zend\InputFilter\CollectionInputFilter', $inputFilter);

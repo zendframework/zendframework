@@ -25,7 +25,10 @@ class DateStep extends Date
      * @var array
      */
     protected $messageTemplates = array(
-        self::NOT_STEP     => "The input is not a valid step"
+        self::INVALID      => "Invalid type given. String, integer, array or DateTime expected",
+        self::INVALID_DATE => "The input does not appear to be a valid date",
+        self::FALSEFORMAT  => "The input does not fit the date format '%format%'",
+        self::NOT_STEP     => "The input is not a valid step",
     );
 
     /**
@@ -174,7 +177,7 @@ class DateStep extends Date
         $errors = DateTime::getLastErrors();
         if ($errors['warning_count'] > 0) {
             if ($addErrors) {
-                $this->error(self::FALSE_FORMAT);
+                $this->error(self::FALSEFORMAT);
             }
             return false;
         }

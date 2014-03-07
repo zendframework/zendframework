@@ -452,6 +452,16 @@ class FieldsetTest extends TestCase
         $this->assertEquals('bar', $option);
     }
 
+    public function testSetOptionAllowedObjectBindingClass()
+    {
+        $this->fieldset->setOptions(array(
+                                         'allowed_object_binding_class' => 'bar'
+                                    ));
+        $option = $this->fieldset->getOption('allowed_object_binding_class');
+
+        $this->assertEquals('bar', $option);
+    }
+
     /**
      * @expectedException Zend\Form\Exception\InvalidElementException
      */
@@ -471,4 +481,23 @@ class FieldsetTest extends TestCase
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
         $this->fieldset->setObject('foo');
     }
+
+    public function testShouldValidateAllowObjectBindingByClassname()
+    {
+        $object = new \stdClass();
+        $this->fieldset->setAllowedObjectBindingClass('stdClass');
+        $allowed = $this->fieldset->allowObjectBinding($object);
+
+        $this->assertTrue($allowed);
+    }
+
+    public function testShouldValidateAllowObjectBindingByObject()
+    {
+        $object = new \stdClass();
+        $this->fieldset->setObject($object);
+        $allowed = $this->fieldset->allowObjectBinding($object);
+
+        $this->assertTrue($allowed);
+    }
+
 }

@@ -30,7 +30,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3.23"
+        "php": ">=5.3.23",
+        "zendframework/zendxml": "~1.0-dev"
     },
     "require-dev": {
         "doctrine/annotations": ">=1.0",

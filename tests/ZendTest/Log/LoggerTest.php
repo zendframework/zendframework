@@ -430,4 +430,27 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('test', $contents);
         $this->assertContains('second', $contents);
     }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testRegisterFatalShutdownFunction()
+    {
+        $writer = new MockWriter;
+        $this->logger->addWriter($writer);
+
+        $result = Logger::registerFatalErrorShutdownFunction($this->logger);
+        $this->assertTrue($result);
+
+        // check for single error handler instance
+        $this->assertFalse(Logger::registerFatalErrorShutdownFunction($this->logger));
+
+        $self = $this;
+        register_shutdown_function(function () use ($writer, $self) {
+            $self->assertEquals($writer->events[0]['message'], 'Call to undefined method ZendTest\Log\LoggerTest::callToNonExistingMethod()');
+        });
+
+        // Temporary hide errors, because we don't want the fatal error to fail the test
+        @$this->callToNonExistingMethod();
+    }
 }

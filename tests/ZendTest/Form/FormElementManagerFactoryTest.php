@@ -106,23 +106,14 @@ class FormElementManagerFactoryTest extends TestCase
     {
         $_SESSION = array();
         $formClass = 'ZendTest\Form\TestAsset\CustomForm';
-        $ref = new \ReflectionClass('Zend\Validator\Csrf');
-        $hashPropRef = $ref->getProperty('hash');
-        $hashPropRef->setAccessible(true);
-        $hashCache = $ref->getProperty('hashCache');
-        $hashCache->setAccessible(true);
-        $hashCache->setValue(new Csrf, array());
-        //check bare born
+
         $preForm = new $formClass;
         $preForm->prepare();
         $requestHash = $preForm->get('csrf')->getValue();
-        SessionContainer::setDefaultManager(null);
-        $hashCache->setValue(new Csrf, array());
 
         $postForm = $this->manager->get($formClass);
         $postCsrf = $postForm->get('csrf')->getCsrfValidator();
-        $storedHash = $postCsrf->getHash();
 
-        $this->assertEquals($requestHash, $storedHash, 'Test csrf validation');
+        $this->assertTrue($postCsrf->isValid($requestHash), 'Test csrf validation');
     }
 }

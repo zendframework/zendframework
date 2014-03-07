@@ -197,7 +197,6 @@ class Collection extends Fieldset
 
         // Can't do anything with empty data
         if (empty($data)) {
-            $this->shouldCreateChildrenOnPrepareElement = false;
             return;
         }
 

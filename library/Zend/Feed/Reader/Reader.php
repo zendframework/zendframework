@@ -299,6 +299,9 @@ class Reader
      */
     public static function importString($string)
     {
+        if (empty(trim($string))) {
+            throw new Exception\InvalidArgumentException('Empty string supplied as input');
+        }
         $libxmlErrflag = libxml_use_internal_errors(true);
         $oldValue = libxml_disable_entity_loader(true);
         $dom = new DOMDocument;

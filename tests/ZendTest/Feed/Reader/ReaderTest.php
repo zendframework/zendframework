@@ -302,7 +302,8 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Reader\Reader::TYPE_RSS_20, $type);
     }
 
-    public function testImportStringMethodThrowProperExceptionOnEmptyString(){
+    public function testImportStringMethodThrowProperExceptionOnEmptyString()
+    {
         $this->setExpectedException('Zend\Feed\Reader\Exception\InvalidArgumentException');
         $string = ' ';
         $feed = Reader\Reader::importString($string);

@@ -80,8 +80,6 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 array(1 => '%1$s', 'combinedby' => ', ')
             )
         ),
-        'statementEnd' => '%1$s',
-        self::COMBINE => '%1$s ( %2$s )',
         self::HAVING => 'HAVING %1$s',
         self::ORDER  => array(
             'ORDER BY %1$s' => array(
@@ -90,6 +88,8 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         ),
         self::LIMIT  => 'LIMIT %1$s',
         self::OFFSET => 'OFFSET %1$s',
+        'statementEnd' => '%1$s',
+        self::COMBINE => '%1$s ( %2$s )',
     );
 
     /**

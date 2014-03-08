@@ -1164,7 +1164,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select46b->from('bar')->where('c = d');
         $select46->combine($select46b);
 
-        $select46 = (new Select)->from(['sub' => $select46])->order('id DESC');
+        $select46 = (new Select)->from(array('sub' => $select46))->order('id DESC');
         $sqlPrep46 = // same
         $sqlStr46 = 'SELECT "sub".* FROM (( SELECT "foo".* FROM "foo" WHERE a = b ) UNION ( SELECT "bar".* FROM "bar" WHERE c = d )) AS "sub" ORDER BY "id" DESC';
         $internalTests46 = array(

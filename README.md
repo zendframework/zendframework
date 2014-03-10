@@ -34,6 +34,10 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5901](https://github.com/zendframework/zf2/pull/5901) adds a new interface,
+  `Zend\Authentication\AuthenticationServiceInterface`. You can not type-hint
+  against this instead of `Zend\Authentication\AuthenticationService`.
+
 - [#5885](https://github.com/zendframework/zf2/pull/5885) adds the ability to
   specify the Locale via a route match parameter, and have it apply to the
   composed translator in the router, if any.

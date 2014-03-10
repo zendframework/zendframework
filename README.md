@@ -34,6 +34,12 @@ version of PHP available to ensure you have the latest security fixes.
 
 Additional updates that may affect existing applications include:
 
+- [#5825](https://github.com/zendframework/zf2/pull/5825) adds a new
+  `Zend\I18n\Translator` loader, `PhpMemoryArray`. This loader allows you to
+  seed translation strings directly, instead of requiring a file that returns
+  a PHP array; it's primary use case would be for seeing translations returned
+  from a caching system.
+
 - [#5901](https://github.com/zendframework/zf2/pull/5901) adds a new interface,
   `Zend\Authentication\AuthenticationServiceInterface`. You can not type-hint
   against this instead of `Zend\Authentication\AuthenticationService`.

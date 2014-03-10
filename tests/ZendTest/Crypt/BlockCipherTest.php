@@ -156,20 +156,29 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testEncryptDecryptUsingZero()
+    public function zeroValuesProvider()
     {
-        $possibleValues = array(0, 0.0, '0');
+        return array(
+            '"0"'   => array(0),
+            '"0.0"' => array(0.0),
+            '"0"'   => array('0'),
+        );
+    }
+
+    /**
+     * @dataProvider zeroValuesProvider
+     */
+    public function testEncryptDecryptUsingZero($value)
+    {
         $this->blockCipher->setKey('test');
         $this->blockCipher->setKeyIteration(1000);
         foreach ($this->blockCipher->getCipherSupportedAlgorithms() as $algo) {
             $this->blockCipher->setCipherAlgorithm($algo);
 
-            foreach($passibleValues as $plaintext) {
-                $encrypted = $this->blockCipher->encrypt($plaintext);
-                $this->assertTrue(!empty($encrypted));
-                $decrypted = $this->blockCipher->decrypt($encrypted);
-                $this->assertEquals($decrypted, $plaintext);
-            }
+            $encrypted = $this->blockCipher->encrypt($value);
+            $this->assertTrue(!empty($encrypted));
+            $decrypted = $this->blockCipher->decrypt($encrypted);
+            $this->assertEquals($value, $decrypted);
         }
     }
 

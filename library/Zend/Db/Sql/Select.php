@@ -854,7 +854,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             return null;
         }
 
-        $limit = (int) $this->limit;
+        $limit = $this->limit;
 
         if ($driver) {
             $sql = $driver->formatParameterName('limit');
@@ -872,7 +872,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             return null;
         }
 
-        $offset = (int) $this->offset;
+        $offset = $this->offset;
 
         if ($driver) {
             $parameterContainer->offsetSet('offset', $offset, ParameterContainer::TYPE_INTEGER);

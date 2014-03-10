@@ -195,11 +195,34 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
     {
         $headers = new Mail\Headers();
         $headers->addHeaders(array('Foo' => 'bar', 'Baz' => 'baz'));
-        $header = $headers->get('foo');
         $this->assertEquals(2, $headers->count());
-        $headers->removeHeader($header->getFieldName());
+        $headers->removeHeader('foo');
+        $this->assertEquals(1, $headers->count());
+        $this->assertFalse($headers->has('foo'));
+        $this->assertTrue($headers->has('baz'));
+    }
+
+    public function testRemoveHeaderWithFieldNameWillRemoveAllInstances()
+    {
+        $headers = new Mail\Headers();
+        $headers->addHeaders(array(array('Foo' => 'foo'), array('Foo' => 'bar'), 'Baz' => 'baz'));
+        $this->assertEquals(3, $headers->count());
+        $headers->removeHeader('foo');
         $this->assertEquals(1, $headers->count());
         $this->assertFalse($headers->get('foo'));
+        $this->assertTrue($headers->has('baz'));
+    }
+
+    public function testRemoveHeaderWithInstanceWillRemoveThatInstance()
+    {
+        $headers = new Mail\Headers();
+        $headers->addHeaders(array(array('Foo' => 'foo'), array('Foo' => 'bar'), 'Baz' => 'baz'));
+        $header = $headers->get('foo')->current();
+        $this->assertEquals(3, $headers->count());
+        $headers->removeHeader($header);
+        $this->assertEquals(2, $headers->count());
+        $this->assertTrue($headers->has('foo'));
+        $this->assertNotSame($header, $headers->get('foo'));
     }
 
     public function testHeadersCanClearAllHeaders()

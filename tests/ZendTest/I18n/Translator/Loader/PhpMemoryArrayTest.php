@@ -11,7 +11,7 @@ namespace ZendTest\I18n\Translator\Loader;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Locale;
-use Zend\I18n\Translator\Loader\PhpmemoryArray as PhpMemoryArrayLoader;
+use Zend\I18n\Translator\Loader\PhpMemoryArray as PhpMemoryArrayLoader;
 
 class PhpMemoryArrayTest extends TestCase
 {

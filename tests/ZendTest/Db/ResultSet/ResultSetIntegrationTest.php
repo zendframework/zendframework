@@ -186,7 +186,11 @@ class ResultSetIntegrationTest extends TestCase
         $this->assertEquals($dataSource->getArrayCopy(), $test, var_export($test, 1));
     }
 
-    public function testBufferingCallsDatasourceCurrentOnce()
+    /**
+     * @covers Zend\Db\ResultSet\AbstractResultSet::current
+     * @covers Zend\Db\ResultSet\AbstractResultSet::buffer
+     */
+    public function testCurrentWithBufferingCallsDataSourceCurrentOnce()
     {
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $mockResult->expects($this->once())->method('current')->will($this->returnValue(array('foo' => 'bar')));
@@ -199,7 +203,11 @@ class ResultSetIntegrationTest extends TestCase
         $this->resultSet->current();
     }
 
-    public function testCallingBufferAfterIterationThrowsException()
+    /**
+     * @covers Zend\Db\ResultSet\AbstractResultSet::current
+     * @covers Zend\Db\ResultSet\AbstractResultSet::buffer
+     */
+    public function testBufferCalledAfterIterationThrowsException()
     {
         $this->resultSet->initialize($this->getMock('Zend\Db\Adapter\Driver\ResultInterface'));
         $this->resultSet->current();
@@ -207,5 +215,8 @@ class ResultSetIntegrationTest extends TestCase
         $this->setExpectedException('Zend\Db\ResultSet\Exception\RuntimeException', 'Buffering must be enabled before iteration is started');
         $this->resultSet->buffer();
     }
+
+
+
 
 }

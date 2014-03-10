@@ -15,6 +15,7 @@ class Module
     public function init($moduleManager)
     {
         $moduleManager->loadModule('BarModule');
+        $moduleManager->loadModule('BazModule');
     }
 
     public function getConfig()

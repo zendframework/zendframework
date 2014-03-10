@@ -146,6 +146,21 @@ class ModuleManagerTest extends TestCase
         $this->assertSame('oh, yeah baby!', $config['loaded']);
     }
 
+    /**
+     * @group 5651
+     */
+    public function testLoadingModuleFromAnotherModuleDemonstratesAppropriateSideEffects()
+    {
+        $configListener = $this->defaultListeners->getConfigListener();
+        $moduleManager  = new ModuleManager(array('LoadOtherModule', 'BarModule'));
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
+        $moduleManager->loadModules();
+
+        $config = $configListener->getMergedConfig();
+        $this->assertTrue(isset($config['baz']));
+        $this->assertSame('bar', $config['baz']);
+    }
+
     public function testModuleIsMarkedAsLoadedWhenLoadModuleEventIsTriggered()
     {
         $test          = new stdClass;

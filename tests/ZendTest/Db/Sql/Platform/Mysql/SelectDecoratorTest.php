@@ -85,9 +85,17 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
         $expectedParams1 = array('offset' => 10);
         $expectedSql1 = 'SELECT `foo`.* FROM `foo` LIMIT 18446744073709551615 OFFSET 10';
 
+        // offset and limit are not type casted when injected into parameter container
+        $select2 = new Select;
+        $select2->from('foo')->limit('5')->offset('10');
+        $expectedPrepareSql2 = 'SELECT `foo`.* FROM `foo` LIMIT ? OFFSET ?';
+        $expectedParams2 = array('offset' => '10', 'limit' => '5');
+        $expectedSql2 = 'SELECT `foo`.* FROM `foo` LIMIT 5 OFFSET 10';
+
         return array(
             array($select0, $expectedPrepareSql0, $expectedParams0, $expectedSql0),
             array($select1, $expectedPrepareSql1, $expectedParams1, $expectedSql1),
+            array($select2, $expectedPrepareSql2, $expectedParams2, $expectedSql2),
         );
     }
 

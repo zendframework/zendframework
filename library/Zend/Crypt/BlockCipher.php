@@ -391,9 +391,19 @@ class BlockCipher
     public function encrypt($data)
     {
         // 0 (as integer), 0.0 (as float) & '0' (as string) will return false, though these should be allowed
-        if (!is_string($data) || $data === '') {
+        // Must be a string, integer, or float in order to encrypt
+        if ((is_string($data) && $data === '')
+            || is_array($data)
+            || is_object($data)
+        ) {
             throw new Exception\InvalidArgumentException('The data to encrypt cannot be empty');
         }
+
+        // Cast to string prior to encrypting
+        if (!is_string($data)) {
+            $data = (string) $data;
+        }
+
         if (empty($this->cipher)) {
             throw new Exception\InvalidArgumentException('No symmetric cipher specified');
         }

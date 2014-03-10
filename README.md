@@ -44,6 +44,17 @@ Additional updates that may affect existing applications include:
   `Zend\Authentication\AuthenticationServiceInterface`. You can not type-hint
   against this instead of `Zend\Authentication\AuthenticationService`.
 
+- [#4455](https://github.com/zendframework/zf2/pull/4455) adds two new plugin
+  managers to the default services: `LogProcessorManager` and
+  `LogWriterManager`. These use the config keys `log_processors` and
+  `log_writers`, respectively, and the module methods `getLogProcessorConfig()`
+  and `getLogWriterConfig()`. The `LoggerAbstractServiceFactory` was updated to
+  use these services when creating a `Logger` instance, and the `Logger` was
+  updated to allow passing in these managers via the `processor_plugin_manager`
+  and `writer_plugin_manager` configuration keys. This change will allow
+  defining and configuring custom log processors and writers to wire with the
+  logger abstract factory.
+
 - [#5885](https://github.com/zendframework/zf2/pull/5885) adds the ability to
   specify the Locale via a route match parameter, and have it apply to the
   composed translator in the router, if any.

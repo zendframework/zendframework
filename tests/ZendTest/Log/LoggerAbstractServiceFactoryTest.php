@@ -9,6 +9,8 @@
 
 namespace ZendTest\Log;
 
+use Zend\Log\ProcessorPluginManager;
+use Zend\Log\WriterPluginManager;
 use Zend\Log\Writer\Db as DbWriter;
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
@@ -127,5 +129,62 @@ class LoggerAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertTrue($found, 'Did not find expected DB writer');
         $this->assertAttributeSame($db, 'db', $writer);
+    }
+
+    /**
+     * @group 4455
+     */
+    public function testWillInjectWriterPluginManagerIfAvailable()
+    {
+        $writers = new WriterPluginManager();
+        $mockWriter = $this->getMock('Zend\Log\Writer\WriterInterface');
+        $writers->setService('CustomWriter', $mockWriter);
+
+        $services = new ServiceManager(new ServiceManagerConfig(array(
+            'abstract_factories' => array('Zend\Log\LoggerAbstractServiceFactory'),
+        )));
+        $services->setService('LogWriterManager', $writers);
+        $services->setService('Config', array(
+            'log' => array(
+                'Application\Frontend' => array(
+                    'writers' => array(array('name' => 'CustomWriter')),
+                ),
+            ),
+        ));
+
+        $log = $services->get('Application\Frontend');
+        $logWriters = $log->getWriters();
+        $this->assertEquals(1, count($logWriters));
+        $writer = $logWriters->current();
+        $this->assertSame($mockWriter, $writer);
+    }
+
+    /**
+     * @group 4455
+     */
+    public function testWillInjectProcessorPluginManagerIfAvailable()
+    {
+        $processors = new ProcessorPluginManager();
+        $mockProcessor = $this->getMock('Zend\Log\Processor\ProcessorInterface');
+        $processors->setService('CustomProcessor', $mockProcessor);
+
+        $services = new ServiceManager(new ServiceManagerConfig(array(
+            'abstract_factories' => array('Zend\Log\LoggerAbstractServiceFactory'),
+        )));
+        $services->setService('LogProcessorManager', $processors);
+        $services->setService('Config', array(
+            'log' => array(
+                'Application\Frontend' => array(
+                    'writers' => array(array('name' => 'Null')),
+                    'processors' => array(array('name' => 'CustomProcessor')),
+                ),
+            ),
+        ));
+
+        $log = $services->get('Application\Frontend');
+        $logProcessors = $log->getProcessors();
+        $this->assertEquals(1, count($logProcessors));
+        $processor = $logProcessors->current();
+        $this->assertSame($mockProcessor, $processor);
     }
 }

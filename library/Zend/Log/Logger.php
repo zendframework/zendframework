@@ -12,6 +12,7 @@ namespace Zend\Log;
 use DateTime;
 use ErrorException;
 use Traversable;
+use Zend\ServiceManager\AbstractPluginManager;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\SplPriorityQueue;
 
@@ -145,6 +146,20 @@ class Logger implements LoggerInterface
 
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException('Options must be an array or an object implementing \Traversable ');
+        }
+
+        // Inject writer plugin manager, if available
+        if (isset($options['writer_plugin_manager'])
+            && $options['writer_plugin_manager'] instanceof AbstractPluginManager
+        ) {
+            $this->setWriterPluginManager($options['writer_plugin_manager']);
+        }
+
+        // Inject processor plugin manager, if available
+        if (isset($options['processor_plugin_manager'])
+            && $options['processor_plugin_manager'] instanceof AbstractPluginManager
+        ) {
+            $this->setProcessorPluginManager($options['processor_plugin_manager']);
         }
 
         if (isset($options['writers']) && is_array($options['writers'])) {

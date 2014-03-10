@@ -42,6 +42,9 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         foreach (get_object_vars($this->select) as $name => $value) {
             $this->{$name} = $value;
         }
+        if ($this->limit === null && $this->offset !== null) {
+            $this->specifications[self::LIMIT] = 'LIMIT 18446744073709551615';
+        }
         parent::prepareStatement($adapter, $statementContainer);
     }
 
@@ -55,11 +58,17 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         foreach (get_object_vars($this->select) as $name => $value) {
             $this->{$name} = $value;
         }
+        if ($this->limit === null && $this->offset !== null) {
+            $this->specifications[self::LIMIT] = 'LIMIT 18446744073709551615';
+        }
         return parent::getSqlString($platform);
     }
 
     protected function processLimit(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
+        if ($this->limit === null && $this->offset !== null) {
+            return array('');
+        }
         if ($this->limit === null) {
             return null;
         }

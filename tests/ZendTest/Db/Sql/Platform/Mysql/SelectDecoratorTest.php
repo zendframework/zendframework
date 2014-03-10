@@ -78,8 +78,16 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
         $expectedParams0 = array('offset' => 10, 'limit' => 5);
         $expectedSql0 = 'SELECT `foo`.* FROM `foo` LIMIT 5 OFFSET 10';
 
+        // offset without limit
+        $select1 = new Select;
+        $select1->from('foo')->offset(10);
+        $expectedPrepareSql1 = 'SELECT `foo`.* FROM `foo` LIMIT 18446744073709551615 OFFSET ?';
+        $expectedParams1 = array('offset' => 10);
+        $expectedSql1 = 'SELECT `foo`.* FROM `foo` LIMIT 18446744073709551615 OFFSET 10';
+
         return array(
             array($select0, $expectedPrepareSql0, $expectedParams0, $expectedSql0),
+            array($select1, $expectedPrepareSql1, $expectedParams1, $expectedSql1),
         );
     }
 

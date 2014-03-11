@@ -845,6 +845,28 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
                     'something'   => null,
                 )
             ),
+            'value-optional-with-mixed-case' => array(
+                '[<mixedCaseParam>] [--bar=]',
+                array('aBc', '--bar','abc'),
+                array(
+                    'mixedCaseParam' => 'aBc',
+                    'foo'            => null,
+                    'bar'            => 'abc',
+                    'baz'            => null,
+                    'something'      => null,
+                )
+            ),
+            'value-optional-with-upper-case' => array(
+                '[<UPPERCASEPARAM>] [--bar=]',
+                array('aBc', '--bar', 'abc'),
+                array(
+                    'UPPERCASEPARAM' => 'aBc',
+                    'foo'            => null,
+                    'bar'            => 'abc',
+                    'baz'            => null,
+                    'something'      => null,
+                )
+            ),
             /**
              * @bug ZF2-5671
              * @link https://github.com/zendframework/zf2/issues/5671

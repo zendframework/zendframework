@@ -151,7 +151,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
              */
             elseif (preg_match('/\G\[ *\<(?P<name>[a-zA-Z][a-zA-Z0-9\_\-]*?)\> *\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
-                    'name'       => strtolower($m['name']),
+                    'name'       => $m['name'],
                     'literal'    => false,
                     'required'   => false,
                     'positional' => true,

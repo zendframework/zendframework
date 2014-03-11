@@ -852,7 +852,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             'mandatory-literal-camel-case' => array(
                 'FooBar',
                 array('FooBar'),
-                array(),
+                array('FooBar' => null),
             ),
             'mandatory-literal-camel-case-no-match' => array(
                 'FooBar',
@@ -862,7 +862,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             'optional-literal-camel-case' => array(
                 '[FooBar]',
                 array('FooBar'),
-                array(),
+                array('FooBar' => true),
             ),
             'optional-literal-camel-case-no-match' => array(
                 '[FooBar]',
@@ -872,14 +872,14 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
             'optional-literal-alternative-camel-case' => array(
                 '[ FooBar | FoozBar ]',
                 array('FooBar'),
-                array(),
+                array('FooBar' => true),
             ),
-            'required-literal-alternative-camel-case' => array(
+            'mandatory-literal-alternative-camel-case' => array(
                 '( FooBar | FoozBar )',
                 array('FooBar'),
-                array(),
+                array('FooBar' => true),
             ),
-            'required-literal-alternative-camel-case-no-match' => array(
+            'mandatory-literal-alternative-camel-case-no-match' => array(
                 '( FooBar | FoozBar )',
                 array('baz'),
                 null,

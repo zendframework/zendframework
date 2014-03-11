@@ -44,6 +44,10 @@ class TranslatorServiceFactoryTest extends TestCase
 
     public function testReturnsMvcTranslatorWithI18nTranslatorComposedWhenNoTranslatorInterfaceOrConfigServicesPresent()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('This test will only run if ext/intl is present');
+        }
+
         $translator = $this->factory->createService($this->services);
         $this->assertInstanceOf('Zend\Mvc\I18n\Translator', $translator);
         $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator->getTranslator());
@@ -51,6 +55,10 @@ class TranslatorServiceFactoryTest extends TestCase
 
     public function testReturnsTranslatorBasedOnConfigurationWhenNoTranslatorInterfaceServicePresent()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('This test will only run if ext/intl is present');
+        }
+
         $config = array('translator' => array(
             'locale' => 'en_US',
         ));

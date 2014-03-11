@@ -237,7 +237,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if ($this->resource instanceof \mysqli) {
             $this->resource->close();
         }
-        unset($this->resource);
+        $this->resource = null;
     }
 
     /**

@@ -21,6 +21,31 @@ use InvalidArgumentException;
 
 class ModuleManagerTest extends TestCase
 {
+    /**
+     * @var string
+     */
+    protected $tmpdir;
+
+    /**
+     * @var string
+     */
+    protected $configCache;
+
+    /**
+     * @var array
+     */
+    protected $loaders;
+
+    /**
+     * @var string
+     */
+    protected $includePath;
+
+    /**
+     * @var DefaultListenerAggregate
+     */
+    protected $defaultListeners;
+
     public function setUp()
     {
         $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'zend_module_cache_dir';

@@ -438,7 +438,7 @@ class Message
      *
      * @param  string $headerName
      * @param  string $headerClass
-     * @return \Zend\Mail\Header\HeaderInterface
+     * @return Header\HeaderInterface|\ArrayIterator header instance or collection of headers
      */
     protected function getHeaderByName($headerName, $headerClass)
     {

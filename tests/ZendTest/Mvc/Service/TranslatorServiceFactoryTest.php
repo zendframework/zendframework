@@ -31,15 +31,34 @@ class TranslatorServiceFactoryTest extends TestCase
         $this->assertSame($i18nTranslator, $translator->getTranslator());
     }
 
-    public function testReturnsMvcTranslatorWithDummyTranslatorComposedWhenNoTranslatorInterfaceOrConfigServicesPresent()
+    public function testReturnsMvcTranslatorWithDummyTranslatorComposedWhenExtIntlIsNotAvailable()
     {
+        if (extension_loaded('intl')) {
+            $this->markTestSkipped('This test will only run if ext/intl is not present');
+        }
+
         $translator = $this->factory->createService($this->services);
         $this->assertInstanceOf('Zend\Mvc\I18n\Translator', $translator);
         $this->assertInstanceOf('Zend\Mvc\I18n\DummyTranslator', $translator->getTranslator());
     }
 
+    public function testReturnsMvcTranslatorWithI18nTranslatorComposedWhenNoTranslatorInterfaceOrConfigServicesPresent()
+    {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('This test will only run if ext/intl is present');
+        }
+
+        $translator = $this->factory->createService($this->services);
+        $this->assertInstanceOf('Zend\Mvc\I18n\Translator', $translator);
+        $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator->getTranslator());
+    }
+
     public function testReturnsTranslatorBasedOnConfigurationWhenNoTranslatorInterfaceServicePresent()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('This test will only run if ext/intl is present');
+        }
+
         $config = array('translator' => array(
             'locale' => 'en_US',
         ));
@@ -79,5 +98,14 @@ class TranslatorServiceFactoryTest extends TestCase
         $translator = $this->factory->createService($this->services);
         $this->assertInstanceOf('Zend\Mvc\I18n\Translator', $translator);
         $this->assertSame($i18nTranslator, $translator->getTranslator());
+    }
+
+    public function testReturnsDummyTranslatorWhenTranslatorConfigIsBooleanFalse()
+    {
+        $config = array('translator' => false);
+        $this->services->setService('Config', $config);
+        $translator = $this->factory->createService($this->services);
+        $this->assertInstanceOf('Zend\Mvc\I18n\Translator', $translator);
+        $this->assertInstanceOf('Zend\Mvc\I18n\DummyTranslator', $translator->getTranslator());
     }
 }

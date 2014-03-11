@@ -9,6 +9,7 @@
 
 namespace Zend\Mvc\Service;
 
+use Traversable;
 use Zend\I18n\Translator\Translator;
 use Zend\Mvc\I18n\DummyTranslator;
 use Zend\Mvc\I18n\Translator as MvcTranslator;
@@ -27,19 +28,38 @@ class TranslatorServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        // Assume that if a user has registered a service for the
+        // TranslatorInterface, it must be valid
         if ($serviceLocator->has('Zend\I18n\Translator\TranslatorInterface')) {
             return new MvcTranslator($serviceLocator->get('Zend\I18n\Translator\TranslatorInterface'));
         }
 
+        // If ext/intl is not loaded, return a dummy translator
+        if (!extension_loaded('intl')) {
+            return new MvcTranslator(new DummyTranslator());
+        }
+
+        // Load a translator from configuration, if possible
         if ($serviceLocator->has('Config')) {
             $config = $serviceLocator->get('Config');
-            if (isset($config['translator']) && !empty($config['translator'])) {
+
+            // 'translator' => false
+            if (array_key_exists('translator', $config) && $config['translator'] === false) {
+                return new MvcTranslator(new DummyTranslator());
+            }
+
+            // 'translator' => array( ... translator options ... )
+            if (array_key_exists('translator', $config)
+                && ((is_array($config['translator']) && !empty($config['translator']))
+                    || $config['translator'] instanceof Traversable)
+            ) {
                 $i18nTranslator = Translator::factory($config['translator']);
                 $serviceLocator->setService('Zend\I18n\Translator\TranslatorInterface', $i18nTranslator);
                 return new MvcTranslator($i18nTranslator);
             }
         }
 
-        return new MvcTranslator(new DummyTranslator());
+        // For BC purposes (pre-2.3.0), use the I18n Translator
+        return new MvcTranslator(new Translator());
     }
 }

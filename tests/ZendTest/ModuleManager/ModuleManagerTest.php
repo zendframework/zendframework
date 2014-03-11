@@ -186,6 +186,22 @@ class ModuleManagerTest extends TestCase
         $this->assertSame('bar', $config['baz']);
     }
 
+    public function testLoadingModuleFromAnotherModuleDoesNotInfiniteLoop()
+    {
+        $configListener = $this->defaultListeners->getConfigListener();
+        $moduleManager  = new ModuleManager(array('LoadBarModule', 'LoadFooModule'));
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
+        $moduleManager->loadModules();
+
+        $config = $configListener->getMergedConfig();
+
+        $this->assertTrue(isset($config['bar']));
+        $this->assertSame('bar', $config['bar']);
+
+        $this->assertTrue(isset($config['foo']));
+        $this->assertSame('bar', $config['foo']);
+    }
+
     public function testModuleIsMarkedAsLoadedWhenLoadModuleEventIsTriggered()
     {
         $test          = new stdClass;

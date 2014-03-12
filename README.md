@@ -9,11 +9,11 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.3.0dev*
+*Zend Framework 2.3.0*
 
 This is the third minor (feature) release for the version 2 series.
 
-DD MMM YYY
+12 Mar 2014
 
 ### UPDATES IN 2.3.0
 

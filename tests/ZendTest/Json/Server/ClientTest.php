@@ -217,6 +217,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expectedUserAgent, $this->httpClient->getHeader('User-Agent'));
     }
 
+    public function testScalarServerResponseThrowsException()
+    {
+        $response = $this->makeHttpResponseFrom('false');
+        $this->httpAdapter->setResponse($response);
+        $this->setExpectedException('Zend\Json\Exception\ExceptionInterface');
+        $this->jsonClient->call('foo');
+    }
+
     // Helpers
     public function setServerResponseTo($nativeVars)
     {

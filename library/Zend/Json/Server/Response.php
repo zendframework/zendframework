@@ -79,10 +79,14 @@ class Response
      *
      * @param  string $json
      * @return void
+     * @throws Exception\RuntimeException
      */
     public function loadJson($json)
     {
         $options = Json::decode($json, Json::TYPE_ARRAY);
+        if (!is_array($options)) {
+            throw new Exception\RuntimeException('json is not a valid response; array expected');
+        }
         $this->setOptions($options);
     }
 

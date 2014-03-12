@@ -13,7 +13,7 @@ Develop:
 
 This is the fourth minor (feature) release for the version 2 series.
 
-12 Mar 2014
+DD MMM YYYY
 
 ### UPDATES IN 2.4.0
 

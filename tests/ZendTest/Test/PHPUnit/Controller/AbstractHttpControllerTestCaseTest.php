@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 namespace ZendTest\Test\PHPUnit\Controller;
@@ -513,7 +513,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertEquals($request->getMethod(), 'PUT');
         $this->assertEquals('num_post=5&foo=bar', $request->getContent());
     }
-    /*
+
     public function testAssertUriWithHostname()
     {
         $this->dispatch('http://my.domain.tld:443');
@@ -545,6 +545,54 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertXpathQueryCount('//div[@class="get"]', 0);
         $this->assertQueryCount('div.post', 0);
         $this->assertXpathQueryCount('//div[@class="post"]', 0);
+    }
+
+    public function testAssertWithMultiDispatchWithoutPersistence()
+    {
+        $this->dispatch('/tests-persistence');
+
+        $controller = $this->getApplicationServiceLocator()
+                            ->get('ControllerLoader')
+                            ->get('baz_index');
+        $flashMessenger = $controller->flashMessenger();
+        $messages = $flashMessenger->getMessages();
+        $this->assertCount(0, $messages);
+
+        $this->reset(false);
+
+        $this->dispatch('/tests');
+
+        $controller = $this->getApplicationServiceLocator()
+                            ->get('ControllerLoader')
+                            ->get('baz_index');
+        $flashMessenger = $controller->flashMessenger();
+        $messages = $flashMessenger->getMessages();
+
+        $this->assertCount(0, $messages);
+    }
+
+    public function testAssertWithMultiDispatchWithPersistence()
+    {
+        $this->dispatch('/tests-persistence');
+
+        $controller = $this->getApplicationServiceLocator()
+                            ->get('ControllerLoader')
+                            ->get('baz_index');
+        $flashMessenger = $controller->flashMessenger();
+        $messages = $flashMessenger->getMessages();
+        $this->assertCount(0, $messages);
+
+        $this->reset(true);
+
+        $this->dispatch('/tests');
+
+        $controller = $this->getApplicationServiceLocator()
+                            ->get('ControllerLoader')
+                            ->get('baz_index');
+        $flashMessenger = $controller->flashMessenger();
+        $messages = $flashMessenger->getMessages();
+
+        $this->assertCount(1, $messages);
     }
 
     public function testAssertWithEventShared()
@@ -630,5 +678,30 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $viewModel = $this->getApplication()->getMvcEvent()->getResult();
         $this->assertEquals(true, $viewModel instanceof ViewModel);
         $this->assertEquals($viewModel->getTemplate(), 'baz/index/unittests');
+    }
+
+    public function testAssertResponseReasonPhrase()
+    {
+        $this->dispatch('/tests');
+        $this->assertResponseReasonPhrase('OK');
+
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertResponseReasonPhrase('NOT OK');
+    }
+
+    public function testAssertXmlHttpRequestDispatch()
+    {
+        $request = $this->getRequest();
+        $this->assertFalse($request->isXmlHttpRequest());
+
+        $this->dispatch('/test', 'GET', array(), true);
+
+        $request = $this->getRequest();
+        $this->assertTrue($request->isXmlHttpRequest());
+
+        $this->reset();
+
+        $request = $this->getRequest();
+        $this->assertFalse($request->isXmlHttpRequest());
     }
 }

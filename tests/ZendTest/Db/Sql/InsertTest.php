@@ -3,13 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace ZendTest\Db\Sql;
 
 use Zend\Db\Sql\Insert;
+use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\TableIdentifier;
 use ZendTest\Db\TestAsset\TrustingSql92Platform;
@@ -74,6 +75,46 @@ class InsertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\Sql\Insert::values
+     */
+    public function testValuesThrowsExceptionWhenNotArrayOrSelect()
+    {
+        $this->setExpectedException(
+            'Zend\Db\Sql\Exception\InvalidArgumentException',
+            'values() expects an array of values or Zend\Db\Sql\Select instance'
+        );
+        $this->insert->values(5);
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Insert::values
+     */
+    public function testValuesThrowsExceptionWhenSelectMergeOverArray()
+    {
+        $this->insert->values(array('foo' => 'bar'));
+
+        $this->setExpectedException(
+            'Zend\Db\Sql\Exception\InvalidArgumentException',
+            'A Zend\Db\Sql\Select instance cannot be provided with the merge flag when values already exist'
+        );
+        $this->insert->values(new Select, Insert::VALUES_MERGE);
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Insert::values
+     */
+    public function testValuesThrowsExceptionWhenArrayMergeOverSelect()
+    {
+        $this->insert->values(new Select);
+
+        $this->setExpectedException(
+            'Zend\Db\Sql\Exception\InvalidArgumentException',
+            'An array of values cannot be provided with the merge flag when a Zend\Db\Sql\Select instance already exists as the value source'
+        );
+        $this->insert->values(array('foo' => 'bar'), Insert::VALUES_MERGE);
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Insert::values
      * @group ZF2-4926
      */
     public function testEmptyArrayValues()
@@ -125,6 +166,30 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Zend\Db\Sql\Insert::prepareStatement
+     */
+    public function testPrepareStatementWithSelect()
+    {
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = new \Zend\Db\Adapter\StatementContainer();
+
+        $this->insert
+                ->into('foo')
+                ->columns(array('col1'))
+                ->select(new Select('bar'))
+                ->prepareStatement($mockAdapter, $mockStatement);
+
+        $this->assertEquals(
+            'INSERT INTO "foo" ("col1") SELECT "bar".* FROM "bar"',
+            $mockStatement->getSql()
+        );
+    }
+
+    /**
      * @covers Zend\Db\Sql\Insert::getSqlString
      */
     public function testGetSqlString()
@@ -140,6 +205,16 @@ class InsertTest extends \PHPUnit_Framework_TestCase
             ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null));
 
         $this->assertEquals('INSERT INTO "sch"."foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $this->insert->getSqlString(new TrustingSql92Platform()));
+
+        // with Select
+        $this->insert = new Insert;
+        $select = new Select();
+        $this->insert->into('foo')->select($select->from('bar'));
+        $this->assertEquals('INSERT INTO "foo"  SELECT "bar".* FROM "bar"', $this->insert->getSqlString(new TrustingSql92Platform()));
+
+        // with Select and columns
+        $this->insert->columns(array('col1', 'col2'));
+        $this->assertEquals('INSERT INTO "foo" ("col1", "col2") SELECT "bar".* FROM "bar"', $this->insert->getSqlString(new TrustingSql92Platform()));
     }
 
     /**
@@ -197,4 +272,76 @@ class InsertTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * @coversNothing
+     */
+    public function testSpecificationconstantsCouldBeOverridedByExtensionInPrepareStatement()
+    {
+        $replace = new Replace();
+
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $pContainer = new \Zend\Db\Adapter\ParameterContainer(array());
+        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+        $mockStatement->expects($this->at(1))
+            ->method('setSql')
+            ->with($this->equalTo('REPLACE INTO "foo" ("bar", "boo") VALUES (?, NOW())'));
+
+        $replace->into('foo')
+            ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()')));
+
+        $replace->prepareStatement($mockAdapter, $mockStatement);
+
+        // with TableIdentifier
+        $replace = new Replace();
+
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $pContainer = new \Zend\Db\Adapter\ParameterContainer(array());
+        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+        $mockStatement->expects($this->at(1))
+            ->method('setSql')
+            ->with($this->equalTo('REPLACE INTO "sch"."foo" ("bar", "boo") VALUES (?, NOW())'));
+
+        $replace->into(new TableIdentifier('foo', 'sch'))
+            ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()')));
+
+        $replace->prepareStatement($mockAdapter, $mockStatement);
+    }
+
+    /**
+     * @coversNothing
+     */
+    public function testSpecificationconstantsCouldBeOverridedByExtensionInGetSqlString()
+    {
+        $replace = new Replace();
+        $replace->into('foo')
+            ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null));
+
+        $this->assertEquals('REPLACE INTO "foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $replace->getSqlString(new TrustingSql92Platform()));
+
+        // with TableIdentifier
+        $replace = new Replace();
+        $replace->into(new TableIdentifier('foo', 'sch'))
+            ->values(array('bar' => 'baz', 'boo' => new Expression('NOW()'), 'bam' => null));
+
+        $this->assertEquals('REPLACE INTO "sch"."foo" ("bar", "boo", "bam") VALUES (\'baz\', NOW(), NULL)', $replace->getSqlString(new TrustingSql92Platform()));
+    }
+}
+
+class Replace extends Insert
+{
+    const SPECIFICATION_INSERT = 'replace';
+
+    protected $specifications = array(
+        self::SPECIFICATION_INSERT => 'REPLACE INTO %1$s (%2$s) VALUES (%3$s)'
+    );
 }

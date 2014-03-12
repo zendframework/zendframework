@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -144,6 +144,21 @@ class ModuleManagerTest extends TestCase
         $config = $configListener->getMergedConfig();
         $this->assertTrue(isset($config['loaded']));
         $this->assertSame('oh, yeah baby!', $config['loaded']);
+    }
+
+    /**
+     * @group 5651
+     */
+    public function testLoadingModuleFromAnotherModuleDemonstratesAppropriateSideEffects()
+    {
+        $configListener = $this->defaultListeners->getConfigListener();
+        $moduleManager  = new ModuleManager(array('LoadOtherModule', 'BarModule'));
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
+        $moduleManager->loadModules();
+
+        $config = $configListener->getMergedConfig();
+        $this->assertTrue(isset($config['baz']));
+        $this->assertSame('bar', $config['baz']);
     }
 
     public function testModuleIsMarkedAsLoadedWhenLoadModuleEventIsTriggered()

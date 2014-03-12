@@ -22,7 +22,7 @@ class Xml extends AbstractWriter
      */
     public function processConfig(array $config)
     {
-        $writer = new XMLWriter('UTF-8');
+        $writer = new XMLWriter();
         $writer->openMemory();
         $writer->setIndent(true);
         $writer->setIndentString(str_repeat(' ', 4));

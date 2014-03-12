@@ -326,7 +326,8 @@ class Mcrypt implements SymmetricInterface
      */
     public function encrypt($data)
     {
-        if (empty($data)) {
+        // Cannot encrypt empty string
+        if (!is_string($data) || $data === '') {
             throw new Exception\InvalidArgumentException('The data to encrypt cannot be empty');
         }
         if (null === $this->getKey()) {

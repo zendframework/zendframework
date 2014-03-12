@@ -17,5 +17,6 @@ class SqlServer extends AbstractPlatform
     public function __construct(SelectDecorator $selectDecorator = null)
     {
         $this->setTypeDecorator('Zend\Db\Sql\Select', ($selectDecorator) ?: new SelectDecorator());
+        $this->setTypeDecorator('Zend\Db\Sql\Ddl\CreateTable', new Ddl\CreateTableDecorator());
     }
 }

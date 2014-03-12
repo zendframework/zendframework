@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   UnitTests
  */
@@ -75,6 +75,9 @@ defined('TESTS_ZEND_CACHE_ZEND_SERVER_ENABLED') || define('TESTS_ZEND_CACHE_ZEND
 defined('TESTS_ZEND_CACHE_MEMCACHED_ENABLED') || define('TESTS_ZEND_CACHE_MEMCACHED_ENABLED', false);
 defined('TESTS_ZEND_CACHE_MEMCACHED_HOST') || define('TESTS_ZEND_CACHE_MEMCACHED_HOST', '127.0.0.1');
 defined('TESTS_ZEND_CACHE_MEMCACHED_PORT') || define('TESTS_ZEND_CACHE_MEMCACHED_PORT', 11211);
+defined('TESTS_ZEND_CACHE_MEMCACHE_ENABLED') || define('TESTS_ZEND_CACHE_MEMCACHE_ENABLED', false);
+defined('TESTS_ZEND_CACHE_MEMCACHE_HOST') || define('TESTS_ZEND_CACHE_MEMCACHE_HOST', TESTS_ZEND_CACHE_MEMCACHED_HOST);
+defined('TESTS_ZEND_CACHE_MEMCACHE_PORT') || define('TESTS_ZEND_CACHE_MEMCACHE_PORT', TESTS_ZEND_CACHE_MEMCACHED_PORT);
 defined('TESTS_ZEND_CACHE_REDIS_ENABLED') || define('TESTS_ZEND_CACHE_REDIS_ENABLED', false);
 defined('TESTS_ZEND_CACHE_REDIS_HOST') || define('TESTS_ZEND_CACHE_REDIS_HOST', '127.0.0.1');
 defined('TESTS_ZEND_CACHE_REDIS_PORT') || define('TESTS_ZEND_CACHE_REDIS_PORT', 6379);

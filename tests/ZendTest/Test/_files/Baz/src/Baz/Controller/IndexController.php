@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -32,6 +32,11 @@ class IndexController extends AbstractActionController
         return 'foo, bar';
     }
 
+    public function persistencetestAction()
+    {
+        $this->flashMessenger()->addMessage('test');
+    }
+
     public function redirectAction()
     {
         return $this->redirect()->toUrl('http://www.zend.com');
@@ -45,7 +50,7 @@ class IndexController extends AbstractActionController
     public function customResponseAction()
     {
         $response = new Response();
-        $response->setStatusCode(999);
+        $response->setCustomStatusCode(999);
 
         return $response;
     }

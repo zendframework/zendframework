@@ -611,7 +611,7 @@ class Di implements DependencyInjectionInterface
             if (array_key_exists('parameters', $iConfig['requestedClass'])) {
                 $newParameters = array();
 
-                foreach($iConfig['requestedClass']['parameters'] as $name=>$parameter) {
+                foreach ($iConfig['requestedClass']['parameters'] as $name=>$parameter) {
                     $newParameters[$requestedClass.'::'.$method.'::'.$name] = $parameter;
                 }
 
@@ -900,7 +900,7 @@ class Di implements DependencyInjectionInterface
         if (is_subclass_of($className, $type)) {
             return true;
         }
-        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+        if (PHP_VERSION_ID >= 50307) {
             return false;
         }
         if (!interface_exists($type)) {

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -439,12 +439,14 @@ class FactoryTest extends TestCase
 
         $inputFilter = $factory->createInputFilter(array(
             'type'        => 'Zend\InputFilter\CollectionInputFilter',
+            'required'    => true,
             'inputfilter' => new InputFilter(),
-            'count'       => 3
+            'count'       => 3,
         ));
 
         $this->assertInstanceOf('Zend\InputFilter\CollectionInputFilter', $inputFilter);
         $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter->getInputFilter());
+        $this->assertTrue($inputFilter->getIsRequired());
         $this->assertEquals(3, $inputFilter->getCount());
     }
 
@@ -485,7 +487,7 @@ class FactoryTest extends TestCase
         // Filters should pop in the following order:
         // string_to_upper (1001), string_to_lower (1000), string_trim (999)
         $index = 0;
-        foreach($input->getFilterChain()->getFilters() as $filter) {
+        foreach ($input->getFilterChain()->getFilters() as $filter) {
             switch ($index) {
                 case 0:
                     $this->assertInstanceOf('Zend\Filter\StringToUpper', $filter);

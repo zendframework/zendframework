@@ -11,6 +11,7 @@ namespace Zend\Json;
 
 use Iterator;
 use IteratorAggregate;
+use JsonSerializable;
 use ReflectionClass;
 use Zend\Json\Exception\InvalidArgumentException;
 use Zend\Json\Exception\RecursionException;
@@ -65,6 +66,10 @@ class Encoder
     public static function encode($value, $cycleCheck = false, $options = array())
     {
         $encoder = new static(($cycleCheck) ? true : false, $options);
+
+        if ($value instanceof JsonSerializable) {
+            $value = $value->jsonSerialize();
+        }
 
         return $encoder->_encodeValue($value);
     }

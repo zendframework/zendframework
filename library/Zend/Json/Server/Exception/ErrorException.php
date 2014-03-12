@@ -12,7 +12,7 @@ namespace Zend\Json\Server\Exception;
 use Zend\Json\Exception;
 
 /**
- * Thrown by Zend\Json\Server\Client when an JSON-RPC fault response is returned.
+ * Thrown by Zend\Json\Server\Client when a JSON-RPC fault response is returned.
  */
 class ErrorException extends Exception\BadMethodCallException implements
     ExceptionInterface

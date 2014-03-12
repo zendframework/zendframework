@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -122,7 +122,7 @@ class WsdlTest extends WsdlTestHelper
     public function testAddMessage($parameters)
     {
         $messageParts = array();
-        foreach($parameters as $i => $parameter) {
+        foreach ($parameters as $i => $parameter) {
             $messageParts['parameter'.$i] = $this->wsdl->getType($parameter);
         }
 
@@ -152,7 +152,7 @@ class WsdlTest extends WsdlTestHelper
     public function testAddComplexMessage($parameters)
     {
         $messageParts = array();
-        foreach($parameters as $i => $parameter) {
+        foreach ($parameters as $i => $parameter) {
             $messageParts['parameter'.$i] = array(
                 'type'      => $this->wsdl->getType($parameter),
                 'name'      => 'parameter'.$i
@@ -837,7 +837,7 @@ class WsdlTest extends WsdlTestHelper
         $this->assertEquals('sequence', $nodes->item(0)->firstChild->localName);
 
         $n = 0;
-        foreach($element['sequence'] as $elementDefinition) {
+        foreach ($element['sequence'] as $elementDefinition) {
             $n++;
             $elementNode = $this->xpath->query('xsd:element[@name="'.$elementDefinition['name'].'"]', $nodes->item(0)->firstChild);
             $this->assertEquals($elementDefinition['type'], $elementNode->item(0)->getAttribute('type'));

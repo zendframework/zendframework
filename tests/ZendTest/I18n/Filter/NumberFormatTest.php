@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -138,5 +138,29 @@ class NumberFormatTest extends TestCase
                 1234567.891,
             ),
         );
+    }
+
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                '1.234.567,891',
+                '1.567,891'
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new NumberFormatFilter('de_AT', NumberFormatter::DEFAULT_STYLE, NumberFormatter::TYPE_DOUBLE);
+
+        $this->assertEquals($input,  $filter->filter($input));
     }
 }

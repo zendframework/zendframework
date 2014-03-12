@@ -335,6 +335,10 @@ class Factory
         $elements = $this->validateSpecification($elements, $method);
 
         foreach ($elements as $elementSpecification) {
+            if (null === $elementSpecification) {
+                continue;
+            }
+
             $flags = isset($elementSpecification['flags']) ? $elementSpecification['flags'] : array();
             $spec  = isset($elementSpecification['spec'])  ? $elementSpecification['spec']  : array();
 

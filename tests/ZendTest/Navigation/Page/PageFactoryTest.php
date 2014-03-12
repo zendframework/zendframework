@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,12 +15,31 @@ use Zend\Navigation;
 /**
  * Tests Zend_Navigation_Page::factory()
  *
-/**
  * @group      Zend_Navigation
  */
 class PageFactoryTest extends \PHPUnit_Framework_TestCase
 {
 
+    public function testDetectFactoryPage()
+    {
+        AbstractPage::addFactory(function ($page) {
+            if (isset($page['factory_uri'])) {
+                return new \Zend\Navigation\Page\Uri($page);
+            } elseif (isset($page['factory_mvc'])) {
+                return new \Zend\Navigation\Page\Mvc($page);
+            }
+        });
+
+        $this->assertInstanceOf('Zend\\Navigation\\Page\\Uri', AbstractPage::factory(array(
+            'label' => 'URI Page',
+            'factory_uri' => '#'
+        )));
+
+        $this->assertInstanceOf('Zend\\Navigation\\Page\\Mvc', AbstractPage::factory(array(
+            'label' => 'URI Page',
+            'factory_mvc' => '#'
+        )));
+    }
 
     public function testDetectMvcPage()
     {

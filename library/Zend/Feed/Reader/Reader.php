@@ -299,6 +299,11 @@ class Reader
      */
     public static function importString($string)
     {
+        $trimmed = trim($string);
+        if (!is_string($string) || empty($trimmed)) {
+            throw new Exception\InvalidArgumentException('Only non empty strings are allowed as input');
+        }
+
         $libxmlErrflag = libxml_use_internal_errors(true);
         $oldValue = libxml_disable_entity_loader(true);
         $dom = new DOMDocument;

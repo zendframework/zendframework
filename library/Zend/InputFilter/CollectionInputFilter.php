@@ -170,6 +170,12 @@ class CollectionInputFilter extends InputFilter
             $valid = false;
         }
 
+        if (empty($this->collectionData)) {
+            $this->clearValues();
+            $this->clearRawValues();
+            return $valid;
+        }
+
         $inputs = $this->validationGroup ?: array_keys($this->inputs);
         foreach ($this->collectionData as $key => $data) {
             if (!is_array($data)) {
@@ -265,6 +271,26 @@ class CollectionInputFilter extends InputFilter
     public function getRawValues()
     {
         return $this->collectionRawValues;
+    }
+
+    /**
+     * Clear collectionValues
+     *
+     * @access public
+     */
+    public function clearValues()
+    {
+        return $this->collectionValues = array();
+    }
+
+    /**
+     * Clear collectionRawValues
+     *
+     * @access public
+     */
+    public function clearRawValues()
+    {
+        return $this->collectionRawValues = array();
     }
 
     /**

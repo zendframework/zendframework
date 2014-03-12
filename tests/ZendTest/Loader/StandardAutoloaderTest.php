@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -193,4 +193,13 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals($expected, 'namespaces', $loader);
     }
 
+    public function testWillLoopThroughAllNamespacesUntilMatchIsFoundWhenAutoloading()
+    {
+        $loader = new StandardAutoloader();
+        $loader->registerNamespace('ZendTest\Loader\TestAsset\Parent', __DIR__ . '/TestAsset/Parent');
+        $loader->registerNamespace('ZendTest\Loader\TestAsset\Parent\Child', __DIR__ . '/TestAsset/Child');
+        $result = $loader->autoload('ZendTest\Loader\TestAsset\Parent\Child\Subclass');
+        $this->assertTrue($result !== false);
+        $this->assertTrue(class_exists('ZendTest\Loader\TestAsset\Parent\Child\Subclass', false));
+    }
 }

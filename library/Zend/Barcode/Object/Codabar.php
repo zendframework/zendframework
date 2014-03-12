@@ -62,6 +62,7 @@ class Codabar extends AbstractObject
     protected function prepareBarcode()
     {
         $text = str_split($this->getText());
+        $barcodeTable = array();
         foreach ($text as $char) {
             $barcodeChar = str_split($this->codingMap[$char]);
             foreach ($barcodeChar as $c) {

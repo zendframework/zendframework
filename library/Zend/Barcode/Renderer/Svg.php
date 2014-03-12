@@ -319,12 +319,12 @@ class Svg extends AbstractRenderer
             $points[3][1] + $this->topOffset - sin($orientation),
         );
         $newPoints = implode(' ', $newPoints);
+        $attributes = array();
         $attributes['points'] = $newPoints;
         $attributes['fill'] = $color;
 
         // SVG passes a rect in as the first call to drawPolygon, we'll need to intercept
         // this and set transparency if necessary.
-        $objId = spl_object_hash($this);
         if(!$this->drawPolygonExecuted) {
             if($this->transparentBackground) {
                 $attributes['fill-opacity'] = '0';
@@ -351,6 +351,7 @@ class Svg extends AbstractRenderer
         $color = 'rgb(' . implode(', ', array(($color & 0xFF0000) >> 16,
                                               ($color & 0x00FF00) >> 8,
                                               ($color & 0x0000FF))) . ')';
+        $attributes = array();
         $attributes['x'] = $position[0] + $this->leftOffset;
         $attributes['y'] = $position[1] + $this->topOffset;
         //$attributes['font-family'] = $font;

@@ -222,7 +222,7 @@ return array(
     "Value is required and can't be empty" => "Vrednost je obavezna i ne sme biti prazna",
 
     // Zend_Validate_PostCode
-    "Invalid type given. The value should be a string or a integer" => "Nevalidan tip. Vrednost treba da bude tekst ili ceo broj",
+    "Invalid type given. The value should be a string or an integer" => "Nevalidan tip. Vrednost treba da bude tekst ili ceo broj",
     "'%value%' does not appear to be a postal code" => "'%value%' nije poštanski broj",
 
     // Zend_Validate_Regex
@@ -244,7 +244,7 @@ return array(
 
     // Zend_Validate_Sitemap_Priority
     "'%value%' is not a valid sitemap priority" => "'%value%' nije validan prioritet mape sajta",
-    "Invalid type given, the value should be a integer, a float or a numeric string" => "Nevalidan tip, vrednost treba da bude broj ili numerički niz",
+    "Invalid type given, the value should be an integer, a float or a numeric string" => "Nevalidan tip, vrednost treba da bude broj ili numerički niz",
 
     // Zend_Validate_StringLength
     "Invalid type given, value should be a string" => "Nevalidan tip, vrednost treba da bude tekst",

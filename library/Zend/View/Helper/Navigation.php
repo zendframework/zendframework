@@ -14,6 +14,7 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\View\Exception;
 use Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper;
 use Zend\View\Helper\Navigation\HelperInterface as NavigationHelper;
+use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Proxy helper for retrieving navigational helpers and forwarding calls
@@ -325,5 +326,20 @@ class Navigation extends AbstractNavigationHelper
         }
 
         return $this->plugins;
+    }
+
+    /**
+     * Set the View object
+     *
+     * @param  Renderer $view
+     * @return self
+     */
+    public function setView(Renderer $view)
+    {
+        parent::setView($view);
+        if ($view && $this->plugins) {
+            $this->plugins->setRenderer($view);
+        }
+        return $this;
     }
 }

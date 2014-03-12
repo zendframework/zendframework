@@ -343,7 +343,7 @@ class Gravatar extends AbstractHtmlElement
     /**
      * Set src attrib for image.
      *
-     * You shouldn't set a own url value!
+     * You shouldn't set an own url value!
      * It sets value, uses protected method getAvatarUrl.
      *
      * If already exists, it will be overwritten.

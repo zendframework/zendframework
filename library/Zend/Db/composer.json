@@ -13,10 +13,17 @@
     },
     "target-dir": "Zend/Db",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.23"
+    },
+    "require-dev": {
+        "zendframework/zend-eventmanager": "self.version",
+        "zendframework/zend-servicemanager": "self.version",
+        "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
-        "zendframework/zend-stdlib": "self.version"
+        "zendframework/zend-eventmanager": "Zend\\EventManager component",
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
+        "zendframework/zend-stdlib": "Zend\\Stdlib component"
     },
     "extra": {
         "branch-alias": {

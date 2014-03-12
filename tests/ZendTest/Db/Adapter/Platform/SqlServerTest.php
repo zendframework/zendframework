@@ -3,12 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace ZendTest\Db\Adapter\Platform;
 
+use Zend\Db\Adapter\Driver\Pdo\Pdo;
 use Zend\Db\Adapter\Platform\SqlServer;
 
 class SqlServerTest extends \PHPUnit_Framework_TestCase
@@ -128,5 +129,14 @@ class SqlServerTest extends \PHPUnit_Framework_TestCase
             '([foo].[bar] = [boo].[baz]) AND ([foo].[baz] = [boo].[baz])',
             $this->platform->quoteIdentifierInFragment('(foo.bar = boo.baz) AND (foo.baz = boo.baz)', array('(', ')', '=', 'and'))
         );
+    }
+
+    /**
+     * @covers Zend\Db\Adapter\Platform\SqlServer::setDriver
+     */
+    public function testSetDriver()
+    {
+        $driver = new Pdo(array('pdodriver' => 'sqlsrv'));
+        $this->platform->setDriver($driver);
     }
 }

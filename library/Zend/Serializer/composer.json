@@ -13,10 +13,13 @@
     },
     "target-dir": "Zend/Serializer",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-json": "self.version",
         "zendframework/zend-math": "self.version"
+    },
+    "require-dev": {
+        "zendframework/zend-servicemanager": "self.version"
     },
     "suggest": {
         "zendframework/zend-servicemanager": "To support plugin manager support"

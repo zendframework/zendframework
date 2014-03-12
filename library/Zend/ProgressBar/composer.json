@@ -13,8 +13,12 @@
     },
     "target-dir": "Zend/ProgressBar",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version"
+    },
+    "require-dev": {
+        "zendframework/zend-json": "self.version",
+        "zendframework/zend-session": "self.version"
     },
     "suggest": {
         "zendframework/zend-json": "Zend\\Json component",

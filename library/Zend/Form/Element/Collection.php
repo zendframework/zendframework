@@ -197,7 +197,6 @@ class Collection extends Fieldset
 
         // Can't do anything with empty data
         if (empty($data)) {
-            $this->shouldCreateChildrenOnPrepareElement = false;
             return;
         }
 
@@ -208,6 +207,22 @@ class Collection extends Fieldset
                 get_class($this)
                 )
             );
+        }
+
+        // Check to see if elements have been replaced or removed
+        foreach ($this->byName as $name => $elementOrFieldset) {
+            if (isset($data[$name])) {
+                continue;
+            }
+
+            if (!$this->allowRemove) {
+                throw new Exception\DomainException(sprintf(
+                    'Elements have been removed from the collection (%s) but the allow_remove option is not true.',
+                    get_class($this)
+                ));
+            }
+
+            $this->remove($name);
         }
 
         foreach ($data as $key => $value) {

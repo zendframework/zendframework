@@ -13,11 +13,24 @@
     },
     "target-dir": "Zend/Paginator",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version"
     },
+    "require-dev": {
+        "zendframework/zend-cache": "self.version",
+        "zendframework/zend-db": "self.version",
+        "zendframework/zend-filter": "self.version",
+        "zendframework/zend-json": "self.version",
+        "zendframework/zend-servicemanager": "self.version",
+        "zendframework/zend-view": "self.version"
+    },
     "suggest": {
-        "zendframework/zend-cache":"To support cache feature"
+        "zendframework/zend-cache": "Zend\\Cache component to support cache features",
+        "zendframework/zend-db": "Zend\\Db component",
+        "zendframework/zend-filter": "Zend\\Filter component",
+        "zendframework/zend-json": "Zend\\Json component",
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
+        "zendframework/zend-view": "Zend\\View component"
     },
     "extra": {
         "branch-alias": {

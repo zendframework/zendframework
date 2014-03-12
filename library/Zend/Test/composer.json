@@ -13,7 +13,7 @@
     },
     "target-dir": "Zend/Test",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "phpunit/PHPUnit": "3.7.*",
         "zendframework/zend-console": "self.version",
         "zendframework/zend-dom": "self.version",
@@ -24,6 +24,12 @@
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-uri": "self.version",
         "zendframework/zend-view": "self.version"
+    },
+    "require-dev": {
+        "zendframework/zend-console": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-console": "Zend\\Console component"
     },
     "extra": {
         "branch-alias": {

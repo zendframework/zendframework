@@ -256,7 +256,8 @@ class Message
                         $properties['language'] = $fieldValue;
                         break;
                     default:
-                        throw new Exception\RuntimeException('Unknown header ignored for MimePart:' . $fieldName);
+                        // Ignore unknown header
+                        break;
                 }
             }
 

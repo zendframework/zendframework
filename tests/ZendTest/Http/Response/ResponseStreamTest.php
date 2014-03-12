@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -76,7 +76,7 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
 
         // Check header integrity
         $this->assertRegexp("#timeout=15,\r\n\s+max=100#", $response->getHeaders()->get('keep-alive')->getFieldValue());
-        $this->assertRegexp("#text/html;\r\n\s+charset=iso-8859-1#", $response->getHeaders()->get('content-type')->getFieldValue());
+        $this->assertRegexp("#text/html;\s+charset=iso-8859-1#s", $response->getHeaders()->get('content-type')->getFieldValue());
     }
 
 

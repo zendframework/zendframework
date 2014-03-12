@@ -303,7 +303,6 @@ class StandardAutoloader implements SplAutoloader
                 if (file_exists($filename)) {
                     return include $filename;
                 }
-                return false;
             }
         }
         return false;

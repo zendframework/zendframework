@@ -1,17 +1,29 @@
 language: php
 
 php:
-  - 5.3.3
   - 5.3
   - 5.4
   - 5.5
   - 5.6
+  - hhvm
 
-before_install:
- - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
+install:
+  - sudo apt-get install parallel
+  - composer install --dev --prefer-source
+
+before_script:
+  - mkdir -p build/coverage
+  - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
 
 script:
- - ant travis -keep-going
+  - bin/check-cs.sh
+  # Run tests for the various components in parallel
+  - ls -d tests/ZendTest/* | parallel --gnu --keep-order 'echo "Running {} tests"; ./vendor/bin/phpunit -c tests/phpunit.xml.dist --coverage-php build/coverage/coverage-{/.}.cov {};' || exit 1
+
+after_script:
+  # Merges the individual clover reports of each component into a single clover.xml
+  - php vendor/bin/phpcov.php --merge --clover build/logs/clover.xml --whitelist library build/coverage
+  - php vendor/bin/coveralls
 
 notifications:
   irc: "irc.freenode.org#zftalk.dev"
@@ -21,3 +33,4 @@ matrix:
   fast_finish: true
   allow_failures:
     - php: 5.6
+    - php: hhvm

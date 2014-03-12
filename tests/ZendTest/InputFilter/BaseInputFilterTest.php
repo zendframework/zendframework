@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -865,6 +865,7 @@ class BaseInputFilterTest extends TestCase
 
     /**
      * @group 5270
+     * @requires extension intl
      */
     public function testIsValidWhenValuesSetOnFilters()
     {
@@ -894,5 +895,21 @@ class BaseInputFilterTest extends TestCase
         $filter->get('foo')->setValue('thisisavalidstring');
         $this->assertTrue($filter->get('foo')->isValid(), 'Filtered value is not valid');
         $this->assertTrue($filter->isValid(), 'Input filter did return value from filter');
+    }
+
+    /**
+     * @group 5638
+     */
+    public function testPopulateSupportsArrayInputEvenIfDataMissing()
+    {
+        $arrayInput = $this->getMock('Zend\InputFilter\ArrayInput');
+        $arrayInput
+            ->expects($this->once())
+            ->method('setValue')
+            ->with(array());
+
+        $filter = new InputFilter();
+        $filter->add($arrayInput, 'arrayInput');
+        $filter->setData(array('foo' => 'bar'));
     }
 }

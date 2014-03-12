@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -83,6 +83,45 @@ class CollectionTest extends TestCase
         $data[] = 'orange';
         $collection->populateValues($data);
         $this->assertEquals(3, count($collection->getElements()));
+    }
+
+    public function testCanRemoveElementsIfAllowRemoveIsTrue()
+    {
+        $collection = $this->form->get('colors');
+        $collection->setAllowRemove(true);
+        $this->assertTrue($collection->allowRemove());
+
+        $data = array();
+        $data[] = 'blue';
+        $data[] = 'green';
+
+        $collection->populateValues($data);
+        $this->assertEquals(2, count($collection->getElements()));
+
+        unset($data[0]);
+
+        $collection->populateValues($data);
+        $this->assertEquals(1, count($collection->getElements()));
+    }
+
+    public function testCanReplaceElementsIfAllowAddAndAllowRemoveIsTrue()
+    {
+        $collection = $this->form->get('colors');
+        $collection->setAllowAdd(true);
+        $collection->setAllowRemove(true);
+
+        $data = array();
+        $data[] = 'blue';
+        $data[] = 'green';
+
+        $collection->populateValues($data);
+        $this->assertEquals(2, count($collection->getElements()));
+
+        unset($data[0]);
+        $data[] = 'orange';
+
+        $collection->populateValues($data);
+        $this->assertEquals(2, count($collection->getElements()));
     }
 
     public function testCanValidateFormWithCollectionWithoutTemplate()
@@ -783,5 +822,55 @@ class CollectionTest extends TestCase
             }
             $index++;
         }
+    }
+
+    public function testSetDataOnFormPopulatesCollection()
+    {
+        $form = new Form();
+        $form->add(array(
+            'name' => 'names',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => new Element\Text(),
+            ),
+        ));
+
+        $names = array('foo', 'bar', 'baz', 'bat');
+
+        $form->setData(array(
+            'names' => $names
+        ));
+
+        $this->assertCount(count($names), $form->get('names'));
+
+        $i = 0;
+        foreach($form->get('names') as $field) {
+            $this->assertEquals($names[$i], $field->getValue());
+            $i++;
+        };
+    }
+
+    public function testSettingSomeDataButNoneForCollectionReturnsSpecifiedNumberOfElementsAfterPrepare()
+    {
+        $form = new Form();
+        $form->add(new Element\Text('input'));
+        $form->add(array(
+            'name' => 'names',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => new Element\Text(),
+                'count' => 2
+            ),
+        ));
+
+        $form->setData(array(
+            'input' => 'foo',
+        ));
+
+        $this->assertCount(0, $form->get('names'));
+
+        $form->prepare();
+
+        $this->assertCount(2, $form->get('names'));
     }
 }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -89,12 +89,6 @@ class RegexTest extends \PHPUnit_Framework_TestCase
      */
     public function testSpecialCharValidation($expected, $input)
     {
-        // Locale changed due a bug with PHP versions lower than 5.3.4 (https://bugs.php.net/bug.php?id=52971)
-        //setlocale(LC_ALL, 'Spanish_Spain', 'es_ES', 'es_ES.utf-8');
-        if (version_compare(PHP_VERSION, '5.3.4', '<')) {
-            $this->markTestIncomplete( // Skipped because Travis-CI PHP 5.3.3 don't allow set the locale
-                "Test skipped because the PHP version is lower than 5.3.4 or the environment don't support quoted characters");
-        }
         $validator = new Regex('/^[[:alpha:]\']+$/iu');
         $this->assertEquals($expected, $validator->isValid($input),
                             'Reason: ' . implode('', $validator->getMessages()));

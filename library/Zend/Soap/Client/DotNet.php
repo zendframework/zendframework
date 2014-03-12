@@ -216,7 +216,10 @@ class DotNet extends SOAPClient
     protected function _preProcessResult($result)
     {
         $resultProperty = $this->getLastMethod() . 'Result';
-        return $result->$resultProperty;
+        if (property_exists($result, $resultProperty)) {
+            return $result->$resultProperty;
+        }
+        return $result;
     }
 
     /**

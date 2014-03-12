@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -31,7 +31,7 @@ class FileOptionsTest extends \PHPUnit_Framework_TestCase
         $callback = $this->options->getCallback();
         $this->assertTrue(is_callable($callback));
         $test     = call_user_func($callback, '');
-        $this->assertRegExp('#^ZendMail_\d+_\d+\.tmp$#', $test);
+        $this->assertRegExp('#^ZendMail_\d+_\d+\.eml$#', $test);
     }
 
     public function testPathIsMutable()

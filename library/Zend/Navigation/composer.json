@@ -13,12 +13,21 @@
     },
     "target-dir": "Zend/Navigation",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version"
+    },
+    "require-dev": {
+        "zendframework/zend-config": "self.version",
+        "zendframework/zend-mvc": "self.version",
+        "zendframework/zend-permissions-acl": "self.version",
+        "zendframework/zend-servicemanager": "self.version",
+        "zendframework/zend-view": "self.version"
     },
     "suggest": {
         "zendframework/zend-config": "Zend\\Config component",
         "zendframework/zend-mvc": "Zend\\Mvc component",
+        "zendframework/zend-permissions-acl": "Zend\\Permissions\\Acl component",
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
         "zendframework/zend-view": "Zend\\View component"
     },
     "extra": {

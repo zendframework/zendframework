@@ -3,12 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace ZendTest\I18n\Validator;
 
+use Locale;
 use Zend\I18n\Validator\PhoneNumber;
 
 class PhoneNumberTest extends \PHPUnit_Framework_TestCase
@@ -3031,6 +3032,48 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
         $this->validator = new PhoneNumber();
     }
 
+    /**
+     * @dataProvider constructDataProvider
+     *
+     * @param array  $args
+     * @param array  $options
+     * @param string $locale
+     */
+    public function testConstruct(array $args, array $options, $locale = null)
+    {
+        if ($locale) {
+            Locale::setDefault($locale);
+        }
+
+        $validator = new PhoneNumber($args);
+
+        $this->assertSame($options['country'], $validator->getCountry());
+    }
+
+    public function constructDataProvider()
+    {
+        return array(
+            array(
+                array(),
+                array('country' => Locale::getRegion(Locale::getDefault())),
+                null
+            ),
+            array(
+                array(),
+                array('country' => 'CN'),
+                'zh_CN'
+            ),
+            array(
+                array('country' => 'CN'),
+                array('country' => 'CN'),
+                null
+            ),
+        );
+    }
+
+    /**
+     * @TODO: use dataProvider for this in order to enforce clean context
+     */
     public function testExampleNumbers()
     {
         foreach ($this->phone as $country => $parameters) {
@@ -3056,6 +3099,9 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @TODO: use dataProvider for this in order to enforce clean context
+     */
     public function testExampleNumbersAgainstPossible()
     {
         $this->validator->allowPossible(true);

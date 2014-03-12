@@ -13,10 +13,16 @@
     },
     "target-dir": "Zend/Soap",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-server": "self.version",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-uri": "self.version"
+    },
+    "require-dev": {
+        "zendframework/zend-http": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-http": "Zend\\Http component"
     },
     "extra": {
         "branch-alias": {

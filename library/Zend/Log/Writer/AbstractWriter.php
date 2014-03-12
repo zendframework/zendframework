@@ -62,7 +62,7 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Constructor
      *
-     * Set options for an writer. Accepted options are:
+     * Set options for a writer. Accepted options are:
      * - filters: array of filters to add to this filter
      * - formatter: formatter for this writer
      *
@@ -304,6 +304,26 @@ abstract class AbstractWriter implements WriterInterface
 
         $this->formatter = $formatter;
         return $this;
+    }
+
+    /**
+     * Get formatter
+     *
+     * @return Formatter\FormatterInterface
+     */
+    protected function getFormatter()
+    {
+        return $this->formatter;
+    }
+
+    /**
+     * Check if the writer has a formatter
+     *
+     * @return bool
+     */
+    protected function hasFormatter()
+    {
+        return $this->formatter instanceof Formatter\FormatterInterface;
     }
 
     /**

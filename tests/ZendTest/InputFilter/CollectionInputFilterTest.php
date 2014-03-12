@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -460,5 +460,155 @@ class CollectionInputFilterTest extends TestCase
         $this->assertFalse($this->filter->isValid());
         $this->assertCount(2, current($this->filter->getInvalidInput()));
         $this->assertArrayHasKey('baz', current($this->filter->getMessages()));
+    }
+
+    public function testNestedCollectionWithEmptyChild()
+    {
+        $items_inputfilter = new BaseInputFilter();
+        $items_inputfilter->add(new Input(), 'id')
+                          ->add(new Input(), 'type');
+        $items = new CollectionInputFilter();
+        $items->setInputFilter($items_inputfilter);
+
+        $groups_inputfilter = new BaseInputFilter();
+        $groups_inputfilter->add(new Input(), 'group_class')
+                           ->add($items, 'items');
+        $groups = new CollectionInputFilter();
+        $groups->setInputFilter($groups_inputfilter);
+
+        $inputFilter = new BaseInputFilter();
+        $inputFilter->add($groups, 'groups');
+
+        $preFilterdata = array(
+            'groups' => array(
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 100,
+                            'type' => 'item-1',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 200,
+                            'type' => 'item-2',
+                        ),
+                        array(
+                            'id' => 300,
+                            'type' => 'item-3',
+                        ),
+                        array(
+                            'id' => 400,
+                            'type' => 'item-4',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'biz',
+                ),
+            ),
+        );
+
+        $postFilterdata = array(
+            'groups' => array(
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 100,
+                            'type' => 'item-1',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 200,
+                            'type' => 'item-2',
+                        ),
+                        array(
+                            'id' => 300,
+                            'type' => 'item-3',
+                        ),
+                        array(
+                            'id' => 400,
+                            'type' => 'item-4',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'biz',
+                    'items' => array(),
+                ),
+            ),
+        );
+
+        $inputFilter->setData($preFilterdata);
+        $inputFilter->isValid();
+        $values = $inputFilter->getValues();
+        $this->assertEquals($postFilterdata, $values);
+    }
+
+    public function testNestedCollectionWithEmptyData()
+    {
+        $items_inputfilter = new BaseInputFilter();
+        $items_inputfilter->add(new Input(), 'id')
+                          ->add(new Input(), 'type');
+        $items = new CollectionInputFilter();
+        $items->setInputFilter($items_inputfilter);
+
+        $groups_inputfilter = new BaseInputFilter();
+        $groups_inputfilter->add(new Input(), 'group_class')
+                           ->add($items, 'items');
+        $groups = new CollectionInputFilter();
+        $groups->setInputFilter($groups_inputfilter);
+
+        $inputFilter = new BaseInputFilter();
+        $inputFilter->add($groups, 'groups');
+
+        $data = array(
+            'groups' => array(
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 100,
+                            'type' => 'item-1',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'biz',
+                    'items' => array(),
+                ),
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 200,
+                            'type' => 'item-2',
+                        ),
+                        array(
+                            'id' => 300,
+                            'type' => 'item-3',
+                        ),
+                        array(
+                            'id' => 400,
+                            'type' => 'item-4',
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $inputFilter->setData($data);
+        $inputFilter->isValid();
+        $values = $inputFilter->getValues();
+        $this->assertEquals($data, $values);
     }
 }

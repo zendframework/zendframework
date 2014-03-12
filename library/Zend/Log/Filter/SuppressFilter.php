@@ -35,7 +35,7 @@ class SuppressFilter implements FilterInterface
         }
         if (!is_bool($suppress)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                    'Suppress must be an boolean; received "%s"', gettype($suppress)
+                    'Suppress must be a boolean; received "%s"', gettype($suppress)
             ));
         }
 

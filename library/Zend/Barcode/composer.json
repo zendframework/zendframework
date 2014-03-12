@@ -13,13 +13,16 @@
     },
     "target-dir": "Zend/Barcode",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {
+        "zendframework/zend-servicemanager": "self.version",
+        "zendframework/zend-validator": "self.version",
         "zendframework/zendpdf": "*"
     },
     "suggest": {
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
         "zendframework/zend-validator": "Zend\\Validator component",
         "zendframework/zendpdf": "ZendPdf component"
     },

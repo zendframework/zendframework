@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -157,5 +157,41 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
             $actual = $this->filter->filter($input);
             $this->assertEquals($expected, $actual);
         }
+    }
+
+    public function testFilterSupportArray()
+    {
+        $filter = new AlnumFilter();
+
+        $values = array(
+            'abc123'  => 'abc123',
+            'abc 123' => 'abc123',
+            'abcxyz'  => 'abcxyz',
+            'AZ@#4.3' => 'AZ43',
+            ''        => ''
+        );
+
+        $actual = $filter->filter(array_keys($values));
+
+        $this->assertEquals(array_values($values), $actual);
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass())
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new AlnumFilter();
+
+        $this->assertEquals($input,  $filter->filter($input));
     }
 }

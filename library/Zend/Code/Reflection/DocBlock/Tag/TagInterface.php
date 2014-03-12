@@ -9,13 +9,10 @@
 
 namespace Zend\Code\Reflection\DocBlock\Tag;
 
-interface TagInterface
-{
-    /**
-     * @return string
-     */
-    public function getName();
+use Zend\Code\Generic\Prototype\PrototypeInterface;
 
+interface TagInterface extends PrototypeInterface
+{
     /**
      * @param  string $content
      * @return void

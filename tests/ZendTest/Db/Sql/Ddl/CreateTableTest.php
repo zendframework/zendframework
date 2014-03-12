@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -126,8 +126,15 @@ class CreateTableTest extends \PHPUnit_Framework_TestCase
         $ct = new CreateTable('foo');
         $this->assertEquals("CREATE TABLE \"foo\" (\n)", $ct->getSqlString());
 
+        $ct = new CreateTable('foo', true);
+        $this->assertEquals("CREATE TEMPORARY TABLE \"foo\" (\n)", $ct->getSqlString());
+
         $ct = new CreateTable('foo');
         $ct->addColumn(new Column('bar'));
         $this->assertEquals("CREATE TABLE \"foo\" (\n    \"bar\" INTEGER NOT NULL\n)", $ct->getSqlString());
+
+        $ct = new CreateTable('foo', true);
+        $ct->addColumn(new Column('bar'));
+        $this->assertEquals("CREATE TEMPORARY TABLE \"foo\" (\n    \"bar\" INTEGER NOT NULL\n)", $ct->getSqlString());
     }
 }

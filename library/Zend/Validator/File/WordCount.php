@@ -65,7 +65,7 @@ class WordCount extends AbstractValidator
      * Min limits the word count, when used with max=null it is the maximum word count
      * It also accepts an array with the keys 'min' and 'max'
      *
-     * If $options is a integer, it will be used as maximum word count
+     * If $options is an integer, it will be used as maximum word count
      * As Array is accepts the following keys:
      * 'min': Minimum word count
      * 'max': Maximum word count

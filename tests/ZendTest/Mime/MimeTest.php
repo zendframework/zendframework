@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -129,6 +129,36 @@ class MimeTest extends \PHPUnit_Framework_TestCase
  =?UTF-8?B?aW1tZW4gaW4gZGVtIFNlZSwgS8O2cGZjaGVuIGluIGRhcyBXYXNzZXIsIFNj?=
  =?UTF-8?B?aHfDpG56Y2hlbiBpbiBkaWUgSMO2aCE=?="),
         );
+    }
+
+    public function testFromMessageMultiPart()
+    {
+        $message = Mime\Message::createFromMessage(
+            '--089e0141a1902f83ee04e0a07b7a'."\r\n"
+            .'Content-Type: multipart/alternative; boundary=089e0141a1902f83e904e0a07b78'."\r\n"
+            ."\r\n"
+            .'--089e0141a1902f83e904e0a07b78'."\r\n"
+            .'Content-Type: text/plain; charset=UTF-8'."\r\n"
+            ."\r\n"
+            .'Foo'."\r\n"
+            ."\r\n"
+            .'--089e0141a1902f83e904e0a07b78'."\r\n"
+            .'Content-Type: text/html; charset=UTF-8'."\r\n"
+            ."\r\n"
+            .'<p>Foo</p>'."\r\n"
+            ."\r\n"
+            .'--089e0141a1902f83e904e0a07b78--'."\r\n"
+            .'--089e0141a1902f83ee04e0a07b7a'."\r\n"
+            .'Content-Type: image/png; name="1.png"'."\r\n"
+            .'Content-Disposition: attachment; filename="1.png"'."\r\n"
+            .'Content-Transfer-Encoding: base64'."\r\n"
+            .'X-Attachment-Id: barquux'."\r\n"
+            ."\r\n"
+            .'Zm9vCg=='."\r\n"
+            .'--089e0141a1902f83ee04e0a07b7a--',
+            '089e0141a1902f83ee04e0a07b7a'
+        );
+        $this->assertSame(2, count($message->getParts()));
     }
 
     public static function dataTestFromMessageDecode()

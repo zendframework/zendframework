@@ -449,7 +449,7 @@ class PythonPickle extends AbstractAdapter
     }
 
     /**
-     * Write an object as an dictionary
+     * Write an object as a dictionary
      *
      * @param  object $value
      */
@@ -466,7 +466,7 @@ class PythonPickle extends AbstractAdapter
             $this->writeArrayDict($value->toArray());
 
         // If the object is an iterator simply iterate it
-        // and convert it to an dictionary
+        // and convert it to a dictionary
         } elseif ($value instanceof Traversable) {
             $this->writeArrayDict($value);
 

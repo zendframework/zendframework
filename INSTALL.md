@@ -8,7 +8,7 @@ and add the library directory to your PHP `include_path`.
 ## SYSTEM REQUIREMENTS
 -------------------
 
-Zend Framework 2 requires PHP 5.3.3 or later.
+Zend Framework 2 requires PHP 5.3.23 or later.
 
 ## DEVELOPMENT VERSIONS
 

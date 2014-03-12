@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -340,6 +340,28 @@ class ServiceManagerTest extends TestCase
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Bar', $this->serviceManager->get('bar'));
     }
 
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::create
+     */
+    public function testCreateTheSameServiceWithMultipleAbstractFactories()
+    {
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooFakeAbstractFactory');
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
+
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\Foo', $this->serviceManager->get('foo'));
+    }
+
+    /**
+     * @covers Zend\ServiceManager\ServiceManager::create
+     */
+    public function testCreateTheSameServiceWithMultipleAbstractFactoriesReversePriority()
+    {
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooAbstractFactory');
+        $this->serviceManager->addAbstractFactory('ZendTest\ServiceManager\TestAsset\FooFakeAbstractFactory');
+
+        $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\FooFake', $this->serviceManager->get('foo'));
+    }
+
     public function testCreateWithInitializerObject()
     {
         $this->serviceManager->addInitializer(new TestAsset\FooInitializer(array('foo' => 'bar')));
@@ -348,6 +370,18 @@ class ServiceManagerTest extends TestCase
         });
         $obj = $this->serviceManager->get('foo');
         $this->assertEquals('bar', $obj->foo);
+    }
+
+    public function testHasReturnsFalseOnNonStringsAndArrays()
+    {
+        $obj = new \stdClass();
+        $this->assertFalse($this->serviceManager->has($obj));
+    }
+
+    public function testHasAcceptsArrays()
+    {
+        $this->serviceManager->setInvokableClass('foobar', 'foo');
+        $this->assertTrue($this->serviceManager->has(array('foobar', 'foo_bar')));
     }
 
     /**
@@ -579,6 +613,82 @@ class ServiceManagerTest extends TestCase
         $this->assertSame(false, $abstractFactory->inexistingServiceCheckResult);
 
         $this->assertInstanceOf('stdClass', $service);
+    }
+
+    public function testMultipleAbstractFactoriesWithOneLookingForANonExistingServiceDuringCanCreate()
+    {
+        $abstractFactory = new TestAsset\TrollAbstractFactory;
+        $anotherAbstractFactory = $this->getMock('Zend\ServiceManager\AbstractFactoryInterface');
+        $anotherAbstractFactory
+            ->expects($this->exactly(2))
+            ->method('canCreateServiceWithName')
+            ->with(
+                $this->serviceManager,
+                $this->logicalOr('somethingthatcanbecreated', 'nonexistingservice'),
+                $this->logicalOr('SomethingThatCanBeCreated', 'NonExistingService')
+            )
+            ->will($this->returnValue(false));
+
+        $this->serviceManager->addAbstractFactory($abstractFactory);
+        $this->serviceManager->addAbstractFactory($anotherAbstractFactory);
+
+        $this->assertTrue($this->serviceManager->has('SomethingThatCanBeCreated'));
+        $this->assertFalse($abstractFactory->inexistingServiceCheckResult);
+    }
+
+    public function testWaitingAbstractFactory()
+    {
+        $abstractFactory = new TestAsset\WaitingAbstractFactory;
+        $this->serviceManager->addAbstractFactory($abstractFactory);
+
+        $abstractFactory->waitingService = null;
+        $abstractFactory->canCreateCallCount = 0;
+        $this->assertFalse($this->serviceManager->has('SomethingThatCanBeCreated'));
+        $this->assertEquals(1, $abstractFactory->canCreateCallCount);
+
+        $abstractFactory->waitingService = 'SomethingThatCanBeCreated';
+        $abstractFactory->canCreateCallCount = 0;
+        $this->assertTrue($this->serviceManager->has('SomethingThatCanBeCreated'));
+        $this->assertEquals(1, $abstractFactory->canCreateCallCount);
+
+        $abstractFactory->canCreateCallCount = 0;
+        $this->assertInstanceOf('stdClass', $this->serviceManager->get('SomethingThatCanBeCreated'));
+        $this->assertEquals(1, $abstractFactory->canCreateCallCount);
+    }
+
+    public function testWaitingAbstractFactoryNestedContextCounterWhenThrowException()
+    {
+        $abstractFactory = new TestAsset\WaitingAbstractFactory;
+        $this->serviceManager->addAbstractFactory($abstractFactory);
+
+        $contextCounter = new \ReflectionProperty($this->serviceManager, 'nestedContextCounter');
+        $contextCounter->setAccessible(true);
+        $contextCounter->getValue($this->serviceManager);
+
+        $abstractFactory->waitName = 'SomethingThatCanBeCreated';
+        $abstractFactory->createNullService = true;
+        $this->assertEquals(-1, $contextCounter->getValue($this->serviceManager));
+        try {
+            $this->serviceManager->get('SomethingThatCanBeCreated');
+            $this->fail('serviceManager shoud throw Zend\ServiceManager\Exception\ServiceNotFoundException');
+        } catch(\Exception $e) {
+            if (stripos(get_class($e), 'PHPUnit') !== false) {
+                throw $e;
+            }
+            $this->assertEquals(-1, $contextCounter->getValue($this->serviceManager));
+        }
+
+        $abstractFactory->createNullService = false;
+        $abstractFactory->throwExceptionWhenCreate = true;
+        try {
+            $this->serviceManager->get('SomethingThatCanBeCreated');
+            $this->fail('serviceManager shoud throw Zend\ServiceManager\Exception\ServiceNotCreatedException');
+        } catch(\Exception $e) {
+            if (stripos(get_class($e), 'PHPUnit') !== false) {
+                throw $e;
+            }
+            $this->assertEquals(-1, $contextCounter->getValue($this->serviceManager));
+        }
     }
 
     public function testShouldAllowAddingInitializersAsClassNames()

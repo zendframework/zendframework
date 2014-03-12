@@ -13,9 +13,15 @@
     },
     "target-dir": "Zend/Tag",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-escaper": "self.version",
         "zendframework/zend-stdlib": "self.version"
+    },
+    "require-dev": {
+        "zendframework/zend-servicemanager": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component"
     },
     "extra": {
         "branch-alias": {

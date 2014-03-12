@@ -116,6 +116,13 @@ abstract class AbstractPage extends AbstractContainer
     protected $permission;
 
     /**
+     * Text domain for Translator
+     *
+     * @var string
+     */
+    protected $textDomain;
+
+    /**
      * Whether this page should be considered active
      *
      * @var bool
@@ -142,6 +149,13 @@ abstract class AbstractPage extends AbstractContainer
      * @var array
      */
     protected $properties = array();
+
+    /**
+     * Static factories list for factory pages
+     *
+     * @var array
+     */
+    protected static $factories = array();
 
     // Initialization:
 
@@ -220,6 +234,14 @@ abstract class AbstractPage extends AbstractContainer
             }
         }
 
+        if (static::$factories) {
+            foreach (static::$factories as $factoryCallBack) {
+                if (($page = call_user_func($factoryCallBack, $options))) {
+                    return $page;
+                }
+            }
+        }
+
         $hasUri = isset($options['uri']);
         $hasMvc = isset($options['action']) || isset($options['controller'])
                 || isset($options['route']);
@@ -233,6 +255,16 @@ abstract class AbstractPage extends AbstractContainer
                 'Invalid argument: Unable to determine class to instantiate'
             );
         }
+    }
+
+    /**
+     * Add static factory for self::factory function
+     *
+     * @param type $callback Any callable variable
+     */
+    public static function addFactory($callback)
+    {
+        static::$factories[] = $callback;
     }
 
     /**
@@ -730,6 +762,33 @@ abstract class AbstractPage extends AbstractContainer
     public function getPermission()
     {
         return $this->permission;
+    }
+
+    /**
+     * Sets text domain for translation
+     *
+     * @param  string|null $textDomain  [optional] text domain to associate
+     *                                  with this page. Default is null, which
+     *                                  sets no text domain.
+     *
+     * @return AbstractPage fluent interface, returns self
+     */
+    public function setTextDomain($textDomain = null)
+    {
+        if (null !== $textDomain) {
+            $this->textDomain = $textDomain;
+        }
+        return $this;
+    }
+
+    /**
+     * Returns text domain for translation
+     *
+     * @return mixed|null  text domain or null
+     */
+    public function getTextDomain()
+    {
+        return $this->textDomain;
     }
 
     /**

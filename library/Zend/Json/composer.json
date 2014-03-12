@@ -13,10 +13,15 @@
     },
     "target-dir": "Zend/Json",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version"
     },
+    "require-dev": {
+        "zendframework/zend-http": "self.version",
+        "zendframework/zend-server": "self.version"
+    },
     "suggest": {
+        "zendframework/zend-http": "Zend\\Http component",
         "zendframework/zend-server": "Zend\\Server component"
     },
     "extra": {

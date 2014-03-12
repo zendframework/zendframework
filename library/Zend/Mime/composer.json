@@ -13,8 +13,14 @@
     },
     "target-dir": "Zend/Mime",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version"
+    },
+    "require-dev": {
+        "zendframework/zend-mail": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-mail": "Zend\\Mail component"
     },
     "extra": {
         "branch-alias": {

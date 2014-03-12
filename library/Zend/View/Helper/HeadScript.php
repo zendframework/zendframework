@@ -408,6 +408,10 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
             && !empty($item->attributes['conditional'])
             && is_string($item->attributes['conditional']))
         {
+            // inner wrap with comment end and start if !IE
+            if (str_replace(' ', '', $item->attributes['conditional']) === '!IE') {
+                $html = '<!-->' . $html . '<!--';
+            }
             $html = $indent . '<!--[if ' . $item->attributes['conditional'] . ']>' . $html . '<![endif]-->';
         } else {
             $html = $indent . $html;

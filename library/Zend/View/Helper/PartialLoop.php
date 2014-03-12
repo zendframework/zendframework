@@ -45,7 +45,7 @@ class PartialLoop extends Partial
 
         if (!is_array($values)) {
             if ($values instanceof Traversable) {
-                $values = ArrayUtils::iteratorToArray($values);
+                $values = ArrayUtils::iteratorToArray($values, false);
             } elseif (is_object($values) && method_exists($values, 'toArray')) {
                 $values = $values->toArray();
             } else {

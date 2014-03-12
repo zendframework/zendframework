@@ -13,10 +13,13 @@
     },
     "target-dir": "Zend/InputFilter",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-filter": "self.version",
         "zendframework/zend-validator": "self.version",
         "zendframework/zend-stdlib": "self.version"
+    },
+    "require-dev": {
+        "zendframework/zend-servicemanager": "self.version"
     },
     "suggest": {
         "zendframework/zend-servicemanager": "To support plugin manager support"

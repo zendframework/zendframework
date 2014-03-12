@@ -220,6 +220,10 @@ class DateTimeSelect extends DateSelect
             }
         }
 
+        if (is_null($value)) {
+            $value = new PhpDateTime();
+        }
+
         if ($value instanceof PhpDateTime) {
             $value = array(
                 'year'   => $value->format('Y'),
@@ -241,6 +245,21 @@ class DateTimeSelect extends DateSelect
         $this->hourElement->setValue($value['hour']);
         $this->minuteElement->setValue($value['minute']);
         $this->secondElement->setValue($value['second']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getValue()
+    {
+        return sprintf('%s-%s-%s %s:%s:%s',
+            $this->getYearElement()->getValue(),
+            $this->getMonthElement()->getValue(),
+            $this->getDayElement()->getValue(),
+            $this->getHourElement()->getValue(),
+            $this->getMinuteElement()->getValue(),
+            $this->getSecondElement()->getValue()
+        );
     }
 
     /**

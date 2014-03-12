@@ -13,7 +13,10 @@
     },
     "target-dir": "Zend/Memory",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.23"
+    },
+    "require-dev": {
+        "zendframework/zend-cache": "self.version"
     },
     "suggest": {
         "zendframework/zend-cache": "To support swap the memory objects"

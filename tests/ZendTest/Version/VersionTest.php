@@ -3,12 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace ZendTest\Version;
 
+use Zend\Http;
 use Zend\Version\Version;
 
 /**
@@ -18,7 +19,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Tests that version_compare() and its "proxy"
-     * Zend_Version::compareVersion() work as expected.
+     * Zend\Version\Version::compareVersion() work as expected.
      */
     public function testVersionCompare()
     {
@@ -41,7 +42,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
                             $this->assertSame(
                                 Version::compareVersion($ver),
                                 $expect,
-                                "For version '$ver' and Zend_Version::VERSION = '"
+                                "For version '$ver' and Zend\Version\Version::VERSION = '"
                                 . Version::VERSION . "': result=" . (Version::compareVersion($ver))
                                 . ', but expected ' . $expect);
                         }
@@ -52,7 +53,10 @@ class VersionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Run in separate process to avoid Version::$latestParameter caching
+     *
      * @group ZF-10363
+     * @runInSeparateProcess
      */
     public function testFetchLatestVersion()
     {
@@ -62,12 +66,18 @@ class VersionTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('openssl')) {
             $this->markTestSkipped('This test requires openssl extension to be enabled in PHP');
         }
+
         $actual = Version::getLatest();
 
         $this->assertRegExp('/^[1-2](\.[0-9]+){2}/', $actual);
     }
 
-    public function testFetchLatestZENDVersion()
+    /**
+     * Run in separate process to avoid Version::$latestParameter caching
+     *
+     * @runInSeparateProcess
+     */
+    public function testFetchLatestGithubVersion()
     {
         if (!constant('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
             $this->markTestSkipped('Version online tests are not enabled');
@@ -75,8 +85,96 @@ class VersionTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('openssl')) {
             $this->markTestSkipped('This test requires openssl extension to be enabled in PHP');
         }
-        $actual = Version::getLatest('ZEND');
+
+        $actual = Version::getLatest(Version::VERSION_SERVICE_GITHUB);
 
         $this->assertRegExp('/^[1-2](\.[0-9]+){2}/', $actual);
+    }
+
+    /**
+     * Run in separate process to avoid Version::$latestParameter caching
+     *
+     * @expectedException PHPUnit_Framework_Error_Warning
+     * @runInSeparateProcess
+     */
+    public function testFetchLatestVersionWarnsIfAllowUrlFopenIsDisabled()
+    {
+        if (!constant('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Version online tests are not enabled');
+        }
+        if (ini_get('allow_url_fopen')) {
+            $this->markTestSkipped('Test only works with allow_url_fopen disabled');
+        }
+
+        $actual = Version::getLatest(Version::VERSION_SERVICE_ZEND);
+    }
+
+    /**
+     * Run in separate process to avoid Version::$latestParameter caching
+     *
+     * @expectedException PHPUnit_Framework_Error_Warning
+     * @runInSeparateProcess
+     */
+    public function testFetchLatestVersionWarnsIfBadServiceIsPassed()
+    {
+        if (!constant('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Version online tests are not enabled');
+        }
+
+        $actual = Version::getLatest('bogus service');
+    }
+
+    /**
+     * Run in separate process to avoid Version::$latestParameter caching
+     *
+     * @runInSeparateProcess
+     */
+    public function testFetchLatestVersionUsesSuppliedZendHttpClient()
+    {
+        if (!constant('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Version online tests are not enabled');
+        }
+        if (!extension_loaded('openssl')) {
+            $this->markTestSkipped('This test requires openssl extension to be enabled in PHP');
+        }
+
+        $httpClient = new Http\Client(
+            'http://example.com',
+            array(
+                'sslverifypeer' => false,
+            )
+        );
+
+        $actual = Version::getLatest(Version::VERSION_SERVICE_GITHUB, $httpClient);
+        $this->assertRegExp('/^[1-2](\.[0-9]+){2}/', $actual);
+
+        $lastRequest = $httpClient->getRequest();
+        $this->assertContains('github.com', (string) $lastRequest->getUri());
+    }
+
+    /**
+     * Run in separate process to avoid Version::$latestParameter caching
+     *
+     * @runInSeparateProcess
+     */
+    public function testFetchLatestVersionDoesNotThrowZendHttpClientException()
+    {
+        if (!constant('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Version online tests are not enabled');
+        }
+        if (!extension_loaded('openssl')) {
+            $this->markTestSkipped('This test requires openssl extension to be enabled in PHP');
+        }
+
+        $httpClient = new Http\Client(
+            'http://example.com',
+            array(
+                'sslcapath' => '/dev/null',
+                'sslverifypeer' => true,
+            )
+        );
+
+        $actual = Version::getLatest(Version::VERSION_SERVICE_GITHUB, $httpClient);
+        $this->assertEquals('not available', $actual);
     }
 }

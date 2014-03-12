@@ -321,7 +321,7 @@ class OpenLdap extends Node\Schema
     }
 
     /**
-     * Parses an matchingRules value
+     * Parses a matchingRules value
      *
      * @param  string $value
      * @return array
@@ -361,7 +361,7 @@ class OpenLdap extends Node\Schema
     }
 
     /**
-     * Parses an matchingRuleUse value
+     * Parses a matchingRuleUse value
      *
      * @param  string $value
      * @return array
@@ -451,7 +451,7 @@ class OpenLdap extends Node\Schema
                 } else {
                     $data[$token] = Converter\Converter::fromLdap($data[$token]);
                 }
-                // create a array if the value should be multivalued but was not
+                // create an array if the value should be multivalued but was not
                 if (in_array($token, $multiValue) && !is_array($data[$token])) {
                     $data[$token] = array($data[$token]);
                 }

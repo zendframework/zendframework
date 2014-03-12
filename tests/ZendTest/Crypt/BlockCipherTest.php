@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -99,6 +99,13 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('sha1', $this->blockCipher->getHashAlgorithm());
     }
 
+    public function testSetPbkdf2HashAlgorithm()
+    {
+        $result = $this->blockCipher->setPbkdf2HashAlgorithm('sha1');
+        $this->assertEquals($result, $this->blockCipher);
+        $this->assertEquals('sha1', $this->blockCipher->getPbkdf2HashAlgorithm());
+    }
+
     public function testSetKeyIteration()
     {
         $result = $this->blockCipher->setKeyIteration(1000);
@@ -146,6 +153,32 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue(!empty($encrypted));
             $decrypted = $this->blockCipher->decrypt($encrypted);
             $this->assertEquals($decrypted, $this->plaintext);
+        }
+    }
+
+    public function zeroValuesProvider()
+    {
+        return array(
+            '"0"'   => array(0),
+            '"0.0"' => array(0.0),
+            '"0"'   => array('0'),
+        );
+    }
+
+    /**
+     * @dataProvider zeroValuesProvider
+     */
+    public function testEncryptDecryptUsingZero($value)
+    {
+        $this->blockCipher->setKey('test');
+        $this->blockCipher->setKeyIteration(1000);
+        foreach ($this->blockCipher->getCipherSupportedAlgorithms() as $algo) {
+            $this->blockCipher->setCipherAlgorithm($algo);
+
+            $encrypted = $this->blockCipher->encrypt($value);
+            $this->assertTrue(!empty($encrypted));
+            $decrypted = $this->blockCipher->decrypt($encrypted);
+            $this->assertEquals($value, $decrypted);
         }
     }
 

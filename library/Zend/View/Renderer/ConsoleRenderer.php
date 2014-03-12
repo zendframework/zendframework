@@ -14,7 +14,7 @@ use Zend\View\Model\ModelInterface;
 use Zend\View\Resolver\ResolverInterface;
 
 /**
- * Abstract class for Zend_View to help enforce private constructs.
+ * Class for Zend\View\Model\ConsoleModel to help enforce private constructs.
  *
  * Note: all private variables in this class are prefixed with "__". This is to
  * mark them as part of the internal implementation, and thus prevent conflict
@@ -60,8 +60,7 @@ class ConsoleRenderer implements RendererInterface, TreeRendererInterface
     }
 
     /**
-     * Allow custom object initialization when extending Zend_View_Abstract or
-     * Zend_View
+     * Allow custom object initialization when extending ConsoleRenderer
      *
      * Triggered by {@link __construct() the constructor} as its final action.
      *

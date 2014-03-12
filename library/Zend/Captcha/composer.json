@@ -13,16 +13,22 @@
     },
     "target-dir": "Zend/Captcha",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-math": "self.version",
         "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {
+        "zendframework/zend-session": "self.version",
+        "zendframework/zend-text": "self.version",
+        "zendframework/zend-validator": "self.version",
         "zendframework/zendservice-recaptcha": "*"
     },
     "suggest": {
-        "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha component",
-        "zendframework/zend-resources": "Translations of captcha messages"
+        "zendframework/zend-resources": "Translations of captcha messages",
+        "zendframework/zend-session": "Zend\\Session component",
+        "zendframework/zend-text": "Zend\\Text component",
+        "zendframework/zend-validator": "Zend\\Validator component",
+        "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha component"
     },
     "extra": {
         "branch-alias": {

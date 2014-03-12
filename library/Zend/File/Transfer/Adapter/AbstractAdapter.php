@@ -14,7 +14,7 @@ use Zend\File\Transfer;
 use Zend\File\Transfer\Exception;
 use Zend\Filter;
 use Zend\Filter\Exception as FilterException;
-use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorInterface as Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\Stdlib\ErrorHandler;
 use Zend\Validator;
@@ -275,7 +275,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      * Adds a new validator for this class
      *
      * @param  string|Validator\ValidatorInterface $validator           Type of validator to add
-     * @param  bool                    $breakChainOnFailure If the validation chain should stop an failure
+     * @param  bool                    $breakChainOnFailure If the validation chain should stop a failure
      * @param  string|array               $options             Options to set for the validator
      * @param  string|array               $files               Files to limit this validator to
      * @return AbstractAdapter

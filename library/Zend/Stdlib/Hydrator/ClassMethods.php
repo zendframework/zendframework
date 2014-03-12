@@ -19,6 +19,7 @@ use Zend\Stdlib\Hydrator\Filter\HasFilter;
 use Zend\Stdlib\Hydrator\Filter\IsFilter;
 use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
 use Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter;
+use Zend\Stdlib\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 
 class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
@@ -77,7 +78,13 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
      */
     public function setUnderscoreSeparatedKeys($underscoreSeparatedKeys)
     {
-        $this->underscoreSeparatedKeys = $underscoreSeparatedKeys;
+        $this->underscoreSeparatedKeys = (bool) $underscoreSeparatedKeys;
+
+        if ($this->underscoreSeparatedKeys) {
+            $this->setNamingStrategy(new UnderscoreNamingStrategy);
+        } elseif ($this->getNamingStrategy() instanceof UnderscoreNamingStrategy) {
+            $this->removeNamingStrategy();
+        }
 
         return $this;
     }
@@ -117,11 +124,6 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
             $filter = $this->filterComposite;
         }
 
-        $transform = function ($letters) {
-            $letter = array_shift($letters);
-
-            return '_' . strtolower($letter);
-        };
         $attributes = array();
         $methods = get_class_methods($object);
 
@@ -146,9 +148,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
                 }
             }
 
-            if ($this->underscoreSeparatedKeys) {
-                $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
-            }
+            $attribute = $this->extractName($attribute, $object);
             $attributes[$attribute] = $this->extractValue($attribute, $object->$method(), $object);
         }
 
@@ -173,17 +173,8 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
             ));
         }
 
-        $transform = function ($letters) {
-            $letter = substr(array_shift($letters), 1, 1);
-
-            return ucfirst($letter);
-        };
-
         foreach ($data as $property => $value) {
-            $method = 'set' . ucfirst($property);
-            if ($this->underscoreSeparatedKeys) {
-                $method = preg_replace_callback('/(_[a-z])/i', $transform, $method);
-            }
+            $method = 'set' . ucfirst($this->hydrateName($property, $data));
             if (is_callable(array($object, $method))) {
                 $value = $this->hydrateValue($property, $value, $data);
                 $object->$method($value);

@@ -245,7 +245,7 @@ class BaseInputFilter implements
                 && $input->isRequired()
                 && $input->allowEmpty()
             ) {
-                if(!($input instanceOf EmptyContextInterface && $input->continueIfEmpty())) {
+                if (!($input instanceOf EmptyContextInterface && $input->continueIfEmpty())) {
                     $this->validInputs[$name] = $input;
                     continue;
                 }
@@ -581,6 +581,15 @@ class BaseInputFilter implements
                 // No value; clear value in this input
                 if ($input instanceof InputFilterInterface) {
                     $input->setData(array());
+                    if ($input instanceof CollectionInputFilter) {
+                        $input->clearValues();
+                        $input->clearRawValues();
+                    }
+                    continue;
+                }
+
+                if ($input instanceof ArrayInput) {
+                    $input->setValue(array());
                     continue;
                 }
 

@@ -590,23 +590,19 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             if ($column === self::SQL_STAR) {
                 $columns[] = array($fromTable . self::SQL_STAR);
                 continue;
-            }
-
-            if ($column instanceof ExpressionInterface) {
-                $columnParts = $this->processExpression(
-                    $column,
+            } else {
+                $columnName = $this->resolveColumnValue(
+                    array(
+                        'column'       => $column,
+                        'fromTable'    => $fromTable,
+                        'isIdentifier' => true,
+                    ),
                     $platform,
                     $driver,
-                    $this->processInfo['paramPrefix'] . ((is_string($columnIndexOrAs)) ? $columnIndexOrAs : 'column')
+                    $this->processInfo['paramPrefix'] . ((is_string($columnIndexOrAs)) ? $columnIndexOrAs : 'column'),
+                    $parameterContainer
                 );
-                if ($parameterContainer) {
-                    $parameterContainer->merge($columnParts->getParameterContainer());
-                }
-                $columnName = $columnParts->getSql();
-            } else {
-                $columnName = $fromTable . $platform->quoteIdentifier($column);
             }
-
             // process As portion
             if (is_string($columnIndexOrAs)) {
                 $columnAs = $platform->quoteIdentifier($columnIndexOrAs);
@@ -621,34 +617,24 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         // process join columns
         foreach ($this->joins as $join) {
             $joinName = (is_array($join['name'])) ? key($join['name']) : $join['name'];
-            if ($joinName instanceof TableIdentifier) {
-                $joinName = $platform->quoteIdentifier($joinName->getSchema()) . $separator . $platform->quoteIdentifier($joinName->getTable());
-            } else {
-                $joinName = $platform->quoteIdentifier($joinName);
-            }
+            $joinName = parent::resolveTable($joinName, $platform, $driver, $parameterContainer);
 
             foreach ($join['columns'] as $jKey => $jColumn) {
                 $jColumns = array();
-                if ($jColumn instanceof ExpressionInterface) {
-                    $jColumnParts = $this->processExpression(
-                        $jColumn,
-                        $platform,
-                        $driver,
-                        $this->processInfo['paramPrefix'] . ((is_string($jKey)) ? $jKey : 'column')
-                    );
-                    if ($parameterContainer) {
-                        $parameterContainer->merge($jColumnParts->getParameterContainer());
-                    }
-                    $jColumns[] = $jColumnParts->getSql();
-                } else {
-                    $name = (is_array($join['name'])) ? key($join['name']) : $name = $join['name'];
-                    if ($name instanceof TableIdentifier) {
-                        $name = ($name->hasSchema() ? $platform->quoteIdentifier($name->getSchema()) . $separator : '') . $platform->quoteIdentifier($name->getTable());
-                    } else {
-                        $name = $platform->quoteIdentifier($name);
-                    }
-                    $jColumns[] = $name . $separator . $platform->quoteIdentifierInFragment($jColumn);
-                }
+                $jFromTable = is_scalar($jColumn)
+                            ? $joinName . $platform->getIdentifierSeparator()
+                            : '';
+                $jColumns[] = $this->resolveColumnValue(
+                    array(
+                        'column'       => $jColumn,
+                        'fromTable'    => $jFromTable,
+                        'isIdentifier' => true,
+                    ),
+                    $platform,
+                    $driver,
+                    $this->processInfo['paramPrefix'] . ((is_string($jKey)) ? $jKey : 'column'),
+                    $parameterContainer
+                );
                 if (is_string($jKey)) {
                     $jColumns[] = $platform->quoteIdentifier($jKey);
                 } elseif ($jColumn !== self::SQL_STAR) {
@@ -752,17 +738,16 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         // process table columns
         $groups = array();
         foreach ($this->group as $column) {
-            $columnSql = '';
-            if ($column instanceof Expression) {
-                $columnParts = $this->processExpression($column, $platform, $driver, $this->processInfo['paramPrefix'] . 'group');
-                if ($parameterContainer) {
-                    $parameterContainer->merge($columnParts->getParameterContainer());
-                }
-                $columnSql .= $columnParts->getSql();
-            } else {
-                $columnSql .= $platform->quoteIdentifierInFragment($column);
-            }
-            $groups[] = $columnSql;
+            $groups[] = $this->resolveColumnValue(
+                array(
+                    'column'       => $column,
+                    'isIdentifier' => true,
+                ),
+                $platform,
+                $driver,
+                $this->processInfo['paramPrefix'] . 'group',
+                $parameterContainer
+            );
         }
         return array($groups);
     }
@@ -900,6 +885,13 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         $this->having = clone $this->having;
     }
 
+    /**
+     * @param string|TableIdentifier|Select $table
+     * @param PlatformInterface $platform
+     * @param DriverInterface $driver
+     * @param ParameterContainer $parameterContainer
+     * @return string
+     */
     protected function resolveTable($table, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         $alias = null;
@@ -923,7 +915,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         } else {
             $fromTable = '';
         }
-        
+
         return array(
             $table,
             $fromTable

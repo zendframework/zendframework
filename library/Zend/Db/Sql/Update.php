@@ -154,13 +154,18 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         $setSql = array();
         foreach ($this->set as $column => $value) {
-            if ($value instanceof Expression) {
-                $exprData = $this->processExpression($value, $platform, $driver);
-                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $exprData->getSql();
-                $parameterContainer->merge($exprData->getParameterContainer());
-            } else {
-                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $driver->formatParameterName($column);
+            $prefix = $platform->quoteIdentifier($column) . ' = ';
+            if (is_scalar($value)) {
+                $setSql[] = $prefix . $driver->formatParameterName($column);
                 $parameterContainer->offsetSet($column, $value);
+            } else {
+                $setSql[] = $prefix . $this->resolveColumnValue(
+                    $value,
+                    $platform,
+                    $driver,
+                    null,
+                    $parameterContainer
+                );
             }
         }
         $set = implode(', ', $setSql);
@@ -192,14 +197,9 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         $setSql = array();
         foreach ($this->set as $column => $value) {
-            if ($value instanceof ExpressionInterface) {
-                $exprData = $this->processExpression($value, $adapterPlatform);
-                $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $exprData->getSql();
-            } elseif ($value === null) {
-                $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = NULL';
-            } else {
-                $setSql[] = $adapterPlatform->quoteIdentifier($column) . ' = ' . $adapterPlatform->quoteValue($value);
-            }
+            $setSql[] = $adapterPlatform->quoteIdentifier($column)
+                        . ' = '
+                        . $this->resolveColumnValue($value, $adapterPlatform);
         }
         $set = implode(', ', $setSql);
 

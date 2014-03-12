@@ -199,7 +199,53 @@ abstract class AbstractSql
         return $sql;
     }
 
+    /**
+     * @param null|array|ExpressionInterface|Select $column
+     * @param PlatformInterface $platform
+     * @param null|DriverInterface $driver
+     * @param null|string $namedParameterPrefix
+     * @param null|ParameterContainer $parameterContainer
+     * @return string
+     */
+    protected function resolveColumnValue($column, PlatformInterface $platform, DriverInterface $driver = null, $namedParameterPrefix = null, ParameterContainer $parameterContainer = null)
+    {
+        $isIdentifier = false;
+        $fromTable = '';
+        if (is_array($column)) {
+            if (isset($column['isIdentifier'])) {
+                $isIdentifier = (bool) $column['isIdentifier'];
+            }
+            if (isset($column['fromTable']) && $column['fromTable'] !== null) {
+                $fromTable = $column['fromTable'];
+            }
+            $column = $column['column'];
+        }
 
+        if ($column instanceof ExpressionInterface) {
+            $exprData = $this->processExpression($column, $platform, $driver, $namedParameterPrefix);
+            if ($parameterContainer) {
+                $parameterContainer->merge($exprData->getParameterContainer());
+            }
+            return $exprData->getSql();
+        }
+        if ($column instanceof Select) {
+            return '(' . $this->processSubSelect($column, $platform, $driver, $parameterContainer) . ')';
+        }
+        if ($column === null) {
+            return 'NULL';
+        }
+        return $isIdentifier
+                ? $fromTable . $platform->quoteIdentifierInFragment($column)
+                : $platform->quoteValue($column);
+    }
+
+    /**
+     * @param string|TableIdentifier|Select $table
+     * @param PlatformInterface $platform
+     * @param DriverInterface $driver
+     * @param ParameterContainer $parameterContainer
+     * @return string
+     */
     protected function resolveTable($table, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         $schema = null;
@@ -219,6 +265,10 @@ abstract class AbstractSql
         return $table;
     }
 
+    /**
+     * @param \Zend\Db\Adapter\StatementContainerInterface $statementContainer
+     * @return ParameterContainer
+     */
     protected function resolveParameterContainer($statementContainer)
     {
         $parameterContainer = $statementContainer->getParameterContainer();

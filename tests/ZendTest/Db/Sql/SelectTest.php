@@ -1155,11 +1155,11 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         );
 
         $select43 = new Select();
-        $select43->from(array('x' => 'foo'))->columns(array('bar'), false);
-        $sqlPrep43 = 'SELECT "bar" AS "bar" FROM "foo" AS "x"';
-        $sqlStr43 = 'SELECT "bar" AS "bar" FROM "foo" AS "x"';
+        $select43->from(array('x' => 'foo'))->columns(array('bar' => 'foo.bar'), false);
+        $sqlPrep43 = 'SELECT "foo"."bar" AS "bar" FROM "foo" AS "x"';
+        $sqlStr43 = 'SELECT "foo"."bar" AS "bar" FROM "foo" AS "x"';
         $internalTests43 = array(
-            'processSelect' => array(array(array('"bar"', '"bar"')), '"foo" AS "x"')
+            'processSelect' => array(array(array('"foo"."bar"', '"bar"')), '"foo" AS "x"')
         );
 
         $select44 = new Select;

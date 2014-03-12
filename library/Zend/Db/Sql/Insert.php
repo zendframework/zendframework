@@ -180,15 +180,19 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         } elseif ($this->columns) {
             $columns = array();
             $values  = array();
-            foreach ($this->columns as $cIndex=>$value) {
-                $columns[] = $platform->quoteIdentifier($cIndex);
-                if ($value instanceof Expression) {
-                    $exprData = $this->processExpression($value, $platform, $driver);
-                    $values[$cIndex] = $exprData->getSql();
-                    $parameterContainer->merge($exprData->getParameterContainer());
+            foreach ($this->columns as $column=>$value) {
+                $columns[] = $platform->quoteIdentifier($column);
+                if (is_scalar($value)) {
+                    $values[] = $driver->formatParameterName($column);
+                    $parameterContainer->offsetSet($column, $value);
                 } else {
-                    $values[$cIndex] = $driver->formatParameterName($cIndex);
-                    $parameterContainer->offsetSet($cIndex, $value);
+                    $values[] = $this->resolveColumnValue(
+                        $value,
+                        $platform,
+                        $driver,
+                        null,
+                        $parameterContainer
+                    );
                 }
             }
             $sql = sprintf(
@@ -234,17 +238,9 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
 
         $columns = array();
-        $values = array();
-        foreach ($this->columns as $column => $value) {
+        foreach ($this->columns as $column=>$value) {
             $columns[] = $adapterPlatform->quoteIdentifier($column);
-            if ($value instanceof Expression) {
-                $exprData = $this->processExpression($value, $adapterPlatform);
-                $values[] = $exprData->getSql();
-            } elseif ($value === null) {
-                $values[] = 'NULL';
-            } else {
-                $values[] = $adapterPlatform->quoteValue($value);
-            }
+            $values[] = $this->resolveColumnValue($value, $adapterPlatform);
         }
 
         return sprintf(

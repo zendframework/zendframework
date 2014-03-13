@@ -10,6 +10,8 @@
 namespace ZendTest\Mvc\Service;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Mvc\Service\RoutePluginManagerFactory;
+use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\Mvc\Service\TranslatorServiceFactory;
 use Zend\ServiceManager\ServiceManager;
 
@@ -18,7 +20,7 @@ class TranslatorServiceFactoryTest extends TestCase
     public function setUp()
     {
         $this->factory = new TranslatorServiceFactory();
-        $this->services = new ServiceManager();
+        $this->services = new ServiceManager(new ServiceManagerConfig());
     }
 
     public function testReturnsMvcTranslatorWithTranslatorInterfaceServiceComposedWhenPresent()
@@ -68,6 +70,46 @@ class TranslatorServiceFactoryTest extends TestCase
             'translator' => $translator->getTranslator(),
             'services'   => $this->services,
         );
+    }
+
+    public function testReturnsTranslatorBasedOnConfigurationWhenNoTranslatorInterfaceServicePresentWithMinimumBootstrap()
+    {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('This test will only run if ext/intl is present');
+        }
+
+        //minimum bootstrap
+        $applicationConfig = array(
+            'module_listener_options' => array(),
+            'modules' => array(),
+        );
+        $this->services->setService('ApplicationConfig', $applicationConfig);
+        $this->services->get('ModuleManager')->loadModules();
+        $this->services->get('Application')->bootstrap();
+
+        //enable to re-write Config
+        $ref = new \ReflectionObject($this->services);
+        $prop = $ref->getProperty('allowOverride');
+        $prop->setAccessible(true);
+        $prop->setValue($this->services, true);
+
+        $config = array(
+            'di' => array(),
+            'translator' => array(
+                'locale' => 'en_US',
+            ),
+        );
+
+        $this->services->setService('Config', $config);
+
+        //get any plugins with AbstractPluginManagerFactory
+        $routePluginManagerFactory = new RoutePluginManagerFactory;
+        $routePluginManager = $routePluginManagerFactory->createService($this->services);
+
+        $translator = $this->factory->createService($this->services);
+        $this->assertInstanceOf('Zend\Mvc\I18n\Translator', $translator);
+        $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator->getTranslator());
+
     }
 
     /**

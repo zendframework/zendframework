@@ -20,7 +20,7 @@ class TranslatorServiceFactoryTest extends TestCase
     public function setUp()
     {
         $this->factory = new TranslatorServiceFactory();
-        $this->services = new ServiceManager(new ServiceManagerConfig());
+        $this->services = new ServiceManager();
     }
 
     public function testReturnsMvcTranslatorWithTranslatorInterfaceServiceComposedWhenPresent()
@@ -83,15 +83,16 @@ class TranslatorServiceFactoryTest extends TestCase
             'module_listener_options' => array(),
             'modules' => array(),
         );
-        $this->services->setService('ApplicationConfig', $applicationConfig);
-        $this->services->get('ModuleManager')->loadModules();
-        $this->services->get('Application')->bootstrap();
+        $serviceLocator = new ServiceManager(new ServiceManagerConfig());
+        $serviceLocator->setService('ApplicationConfig', $applicationConfig);
+        $serviceLocator->get('ModuleManager')->loadModules();
+        $serviceLocator->get('Application')->bootstrap();
 
         //enable to re-write Config
-        $ref = new \ReflectionObject($this->services);
+        $ref = new \ReflectionObject($serviceLocator);
         $prop = $ref->getProperty('allowOverride');
         $prop->setAccessible(true);
-        $prop->setValue($this->services, true);
+        $prop->setValue($serviceLocator, true);
 
         $config = array(
             'di' => array(),
@@ -100,13 +101,14 @@ class TranslatorServiceFactoryTest extends TestCase
             ),
         );
 
-        $this->services->setService('Config', $config);
+        $serviceLocator->setService('Config', $config);
 
+        //#5959
         //get any plugins with AbstractPluginManagerFactory
         $routePluginManagerFactory = new RoutePluginManagerFactory;
-        $routePluginManager = $routePluginManagerFactory->createService($this->services);
+        $routePluginManager = $routePluginManagerFactory->createService($serviceLocator);
 
-        $translator = $this->factory->createService($this->services);
+        $translator = $this->factory->createService($serviceLocator);
         $this->assertInstanceOf('Zend\Mvc\I18n\Translator', $translator);
         $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator->getTranslator());
 

@@ -109,17 +109,6 @@ class CollectionInputFilterTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\BaseInputFilter', $this->filter->getInputFilter());
     }
 
-    public function testInputFilterInputsAppliedToCollection()
-    {
-        if (!extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->filter->setInputFilter($this->getBaseInputFilter());
-
-        $this->assertCount(4, $this->filter->getInputs());
-    }
-
     public function testGetDefaultInputFilter()
     {
         $this->assertInstanceOf('Zend\InputFilter\BaseInputFilter', $this->filter->getInputFilter());

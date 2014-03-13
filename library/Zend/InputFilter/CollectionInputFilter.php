@@ -181,7 +181,7 @@ class CollectionInputFilter extends InputFilter
                 $data = array();
             }
             $this->inputFilter->setData($data);
-            
+
             if ($this->inputFilter->isValid()) {
                 $this->collectionValidInputs[$key] = $this->inputFilter->validInputs;
             } else {
@@ -190,9 +190,9 @@ class CollectionInputFilter extends InputFilter
                 $this->collectionInvalidInputs[$key] = $this->inputFilter->invalidInputs;
             }
 
-            $this->collectionValues[$key]    = $this->inputFilter->getValues();
+            $this->collectionValues[$key] = $this->inputFilter->getValues();
             $this->collectionRawValues[$key] = $this->inputFilter->getRawValues();
-            
+
             if (!empty($messages)) {
                 $this->collectionMessages[$key] = $messages;
             }

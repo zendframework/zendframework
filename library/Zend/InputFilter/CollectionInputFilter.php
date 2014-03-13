@@ -80,7 +80,6 @@ class CollectionInputFilter extends InputFilter
         }
 
         $this->inputFilter = $inputFilter;
-        $this->inputs = $inputFilter->getInputs();
         return $this;
     }
 
@@ -181,37 +180,19 @@ class CollectionInputFilter extends InputFilter
             if (!is_array($data)) {
                 $data = array();
             }
-            $this->data = $data;
-            $this->populate();
-
-            if ($this->validateInputs($inputs, $data)) {
-                $this->collectionValidInputs[$key] = $this->validInputs;
+            $this->inputFilter->setData($data);
+            
+            if ($this->inputFilter->isValid()) {
+                $this->collectionValidInputs[$key] = $this->inputFilter->validInputs;
             } else {
-                $this->collectionInvalidInputs[$key] = $this->invalidInputs;
                 $valid = false;
+                $this->collectionMessages[$key] = $this->inputFilter->getMessages();
+                $this->collectionInvalidInputs[$key] = $this->inputFilter->invalidInputs;
             }
 
-            $values    = array();
-            $rawValues = array();
-            $messages = array();
-            foreach ($inputs as $name) {
-                $input = $this->inputs[$name];
-
-                if ($input instanceof InputFilterInterface) {
-                    $values[$name]    = $input->getValues();
-                    $rawValues[$name] = $input->getRawValues();
-                    continue;
-                }
-                $values[$name]    = $input->getValue($this->data);
-                $rawValues[$name] = $input->getRawValue();
-                $tmpMessages = $input->getMessages();
-                if (!empty($tmpMessages)) {
-                    $messages[$name] =  $tmpMessages;
-                }
-            }
-            $this->collectionValues[$key]    = $values;
-            $this->collectionRawValues[$key] = $rawValues;
-
+            $this->collectionValues[$key]    = $this->inputFilter->getValues();
+            $this->collectionRawValues[$key] = $this->inputFilter->getRawValues();
+            
             if (!empty($messages)) {
                 $this->collectionMessages[$key] = $messages;
             }

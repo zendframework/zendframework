@@ -125,8 +125,8 @@ class Rbac extends AbstractIterator
     /**
      * Determines if access is granted by checking the role and child roles for permission.
      *
-     * @param  RoleInterface|string $role
-     * @param  string $permission
+     * @param  RoleInterface|string             $role
+     * @param  string                           $permission
      * @param  AssertionInterface|Callable|null $assert
      * @throws Exception\InvalidArgumentException
      * @return bool

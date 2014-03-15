@@ -55,10 +55,6 @@ class TranslatorServiceFactoryTest extends TestCase
 
     public function testReturnsTranslatorBasedOnConfigurationWhenNoTranslatorInterfaceServicePresent()
     {
-        if (!extension_loaded('intl')) {
-            $this->markTestSkipped('This test will only run if ext/intl is present');
-        }
-
         $config = array('translator' => array(
             'locale' => 'en_US',
         ));

@@ -9,7 +9,6 @@
 
 namespace ZendTest\Mvc\Controller\Plugin\TestAsset;
 
-use Zend\Form\Element;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 

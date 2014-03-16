@@ -10,7 +10,6 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\Digits as DigitsFilter;
-use Zend\Stdlib\ErrorHandler;
 
 /**
  * @group      Zend_Filter

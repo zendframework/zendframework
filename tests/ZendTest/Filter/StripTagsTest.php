@@ -10,7 +10,6 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\StripTags as StripTagsFilter;
-use Zend\Stdlib\ErrorHandler;
 
 /**
  * @group      Zend_Filter

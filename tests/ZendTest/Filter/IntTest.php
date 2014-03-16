@@ -10,7 +10,6 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\Int as IntFilter;
-use Zend\Stdlib\ErrorHandler;
 
 /**
  * @group      Zend_Filter

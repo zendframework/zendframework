@@ -16,7 +16,7 @@ before_script:
   - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
 
 script:
-  - bin/check-cs.sh
+  - vendor/bin/php-cs-fixer fix -v --dry-run .
   # Run tests for the various components in parallel
   - ls -d tests/ZendTest/* | parallel --gnu --keep-order 'echo "Running {} tests"; ./vendor/bin/phpunit -c tests/phpunit.xml.dist --coverage-php build/coverage/coverage-{/.}.cov {};' || exit 1
 

@@ -1,17 +1,15 @@
 <?php
 $finder = Symfony\CS\Finder\DefaultFinder::create()
-    ->exclude('demos')
-    ->exclude('resources')
-    ->notPath('tests/ZendTest/Code/Reflection/FunctionReflectionTest.php')
-    ->notPath('tests/ZendTest/Code/Reflection/MethodReflectionTest.php')
-    ->notPath('tests/ZendTest/Code/Reflection/TestAsset/closures.php')
-    ->notPath('tests/ZendTest/Code/Reflection/TestAsset/functions.php')
-    ->notPath('tests/ZendTest/Code/Reflection/TestAsset/TestSampleClass10.php')
-    ->notPath('tests/ZendTest/Code/Reflection/TestAsset/TestSampleClass11.php')
-    ->notPath('tests/ZendTest/Code/TestAsset')
-    ->notPath('tests/ZendTest/Validator/_files')
-    ->notPath('tests/ZendTest/Loader/_files')
-    ->notPath('tests/ZendTest/Loader/TestAsset')
+    ->notPath('ZendTest/Code/Reflection/FunctionReflectionTest.php')
+    ->notPath('ZendTest/Code/Reflection/MethodReflectionTest.php')
+    ->notPath('ZendTest/Code/Reflection/TestAsset/closures.php')
+    ->notPath('ZendTest/Code/Reflection/TestAsset/functions.php')
+    ->notPath('ZendTest/Code/Reflection/TestAsset/TestSampleClass10.php')
+    ->notPath('ZendTest/Code/Reflection/TestAsset/TestSampleClass11.php')
+    ->notPath('ZendTest/Code/TestAsset')
+    ->notPath('ZendTest/Validator/_files')
+    ->notPath('ZendTest/Loader/_files')
+    ->notPath('ZendTest/Loader/TestAsset')
     ->filter(function (SplFileInfo $file) {
         if (strstr($file->getPath(), 'compatibility')) {
             return false;

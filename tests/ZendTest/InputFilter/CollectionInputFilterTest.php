@@ -350,7 +350,7 @@ class CollectionInputFilterTest extends TestCase
         }
 
         $messages = $this->filter->getMessages();
-        
+
         $this->assertCount(3, $messages);
         $this->assertArrayHasKey('foo', $messages[0]);
         $this->assertArrayHasKey('bar', $messages[1]);

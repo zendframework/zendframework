@@ -13,20 +13,6 @@ use Traversable;
 
 class CollectionInputFilter extends InputFilter
 {
-    /*
-     * @var array
-     */
-    protected $collectionData;
-
-    /*
-     * @var array
-     */
-    protected $collectionValidInputs;
-
-    /*
-     * @var array
-     */
-    protected $collectionInvalidInputs;
 
     /*
      * @var bool
@@ -139,7 +125,7 @@ class CollectionInputFilter extends InputFilter
     public function getCount()
     {
         if (null === $this->count) {
-            $this->count = count($this->collectionData);
+            $this->count = count($this->data);
         }
         return $this->count;
     }
@@ -149,7 +135,7 @@ class CollectionInputFilter extends InputFilter
      */
     public function setData($data)
     {
-        $this->collectionData = $data;
+        $this->data = $data;
     }
 
     /**
@@ -165,29 +151,28 @@ class CollectionInputFilter extends InputFilter
             }
         }
 
-        if (count($this->collectionData) < $this->getCount()) {
+        if (count($this->data) < $this->getCount()) {
             $valid = false;
         }
 
-        if (empty($this->collectionData)) {
+        if (empty($this->data)) {
             $this->clearValues();
             $this->clearRawValues();
             return $valid;
         }
 
-        $inputs = $this->validationGroup ?: array_keys($this->inputFilter->getInputs());
-        foreach ($this->collectionData as $key => $data) {
+        foreach ($this->data as $key => $data) {
             if (!is_array($data)) {
                 $data = array();
             }
             $this->inputFilter->setData($data);
 
             if ($this->inputFilter->isValid()) {
-                $this->collectionValidInputs[$key] = $this->inputFilter->getValidInput();
+                $this->validInputs[$key] = $this->inputFilter->getValidInput();
             } else {
                 $valid = false;
                 $this->collectionMessages[$key] = $this->inputFilter->getMessages();
-                $this->collectionInvalidInputs[$key] = $this->inputFilter->getInvalidInput();
+                $this->invalidInputs[$key] = $this->inputFilter->getInvalidInput();
             }
 
             $this->collectionValues[$key] = $this->inputFilter->getValues();
@@ -201,15 +186,15 @@ class CollectionInputFilter extends InputFilter
     /**
      * {@inheritdoc}
      */
-    public function setValidationGroup($groups)
+    public function setValidationGroup($name)
     {
-        if ($groups === self::VALIDATE_ALL) {
+        if ($name === self::VALIDATE_ALL) {
             $this->validationGroup = null;
             return $this;
         }
 
-        if (is_array($groups)) {
-            foreach($groups as $group) {
+        if (is_array($name)) {
+            foreach($name as $group) {
                 $this->inputFilter->setValidationGroup($group);
             }
         }
@@ -220,7 +205,7 @@ class CollectionInputFilter extends InputFilter
      */
     public function getInvalidInput()
     {
-        return (is_array($this->collectionInvalidInputs) ? $this->collectionInvalidInputs : array());
+        return (is_array($this->invalidInputs) ? $this->invalidInputs : array());
     }
 
     /**
@@ -228,7 +213,7 @@ class CollectionInputFilter extends InputFilter
      */
     public function getValidInput()
     {
-        return (is_array($this->collectionValidInputs) ? $this->collectionValidInputs : array());
+        return (is_array($this->validInputs) ? $this->validInputs : array());
     }
 
     /**

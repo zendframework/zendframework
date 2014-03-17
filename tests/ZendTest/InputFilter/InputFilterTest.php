@@ -53,11 +53,11 @@ class InputFilterTest extends TestCase
     {
         $inputFilter = new InputFilter();
         $inputFilter->add(new Input(), 'name');
-        
+
         $collection = new CollectionInputFilter();
         $collection->setInputFilter($inputFilter);
         $collection->setCount(0);
-                   
+
         $this->filter->add($collection, 'people');
 
         $data = array(

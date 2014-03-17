@@ -10,7 +10,6 @@
 namespace ZendTest\Permissions\Rbac;
 
 use Zend\Permissions\Rbac;
-use ZendTest\Permissions\Rbac\TestAsset;
 
 /**
  * @group      Zend_Rbac

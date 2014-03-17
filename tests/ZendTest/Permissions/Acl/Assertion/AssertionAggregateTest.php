@@ -9,7 +9,6 @@
 namespace ZendTest\Permissions\Acl\Assertion;
 
 use Zend\Permissions\Acl\Assertion\AssertionAggregate;
-use ZendTest\Permissions\Acl\TestAsset\MockAssertion;
 use Zend\Di\Exception\UndefinedReferenceException;
 
 class AssertionAggregateTest extends \PHPUnit_Framework_TestCase

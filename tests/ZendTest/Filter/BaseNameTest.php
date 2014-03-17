@@ -9,7 +9,6 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\BaseName as BaseNameFilter;
-use Zend\Stdlib\ErrorHandler;
 
 /**
  * @group Zend_Filter

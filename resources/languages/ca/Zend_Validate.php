@@ -50,8 +50,8 @@ return array(
     "Invalid type given. String expected" => "Tipus no vàlid donat. S'espera una cadena de text",
 
     // Zend\Validator\Between
-    "The input is not between '%min%' and '%max%', inclusively" => "L'entrada no és entre '% min%' i '% max%', inclusivament",
-    "The input is not strictly between '%min%' and '%max%'" => "L'entrada no és estrictament entre '% min%' i '%% max'",
+    "The input is not between '%min%' and '%max%', inclusively" => "L'entrada no és entre '%min%' i '%max%', inclusivament",
+    "The input is not strictly between '%min%' and '%max%'" => "L'entrada no és estrictament entre '%min%' i '%max%'",
 
     // Zend\Validator\Callback
     "The input is not valid" => "L'entrada no és vàlida",

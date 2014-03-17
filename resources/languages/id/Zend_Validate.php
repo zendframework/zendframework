@@ -45,7 +45,7 @@ return array(
 
     // Zend\Validator\Between
     "The input is not between '%min%' and '%max%', inclusively" => "Isian tidak berada di antara '%min%' and '%max%', inklusif",
-    "The input is not strictly between '%min%' and '%max%'" => "Isian tidak ketat berada di antara '% min%' dan '% max%'",
+    "The input is not strictly between '%min%' and '%max%'" => "Isian tidak ketat berada di antara '%min%' dan '%max%'",
 
     // Zend\Validator\Callback
     "The input is not valid" => "Isian tidak valid",

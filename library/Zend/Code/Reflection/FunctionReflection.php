@@ -10,7 +10,6 @@
 namespace Zend\Code\Reflection;
 
 use ReflectionFunction;
-use Zend\Code\Reflection\DocBlock\Tag\ReturnTag;
 
 class FunctionReflection extends ReflectionFunction implements ReflectionInterface
 {
@@ -185,7 +184,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
      * Get return type tag
      *
      * @throws Exception\InvalidArgumentException
-     * @return ReturnTag
+     * @return DocBlockReflection
      */
     public function getReturn()
     {

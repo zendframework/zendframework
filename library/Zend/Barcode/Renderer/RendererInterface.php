@@ -79,6 +79,7 @@ interface RendererInterface
     /**
      * Activate/Deactivate the automatic rendering of exception
      * @param  bool $value
+     * @return self
      */
     public function setAutomaticRenderError($value);
 

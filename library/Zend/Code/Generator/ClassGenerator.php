@@ -459,7 +459,7 @@ class ClassGenerator extends AbstractGenerator
     /**
      * Add property from PropertyGenerator
      *
-     * @param  string|PropertyGenerator           $property
+     * @param  PropertyGenerator           $property
      * @throws Exception\InvalidArgumentException
      * @return ClassGenerator
      */

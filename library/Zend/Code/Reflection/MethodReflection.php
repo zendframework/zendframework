@@ -267,7 +267,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      *
      * @param  string $filename
      *
-     * @return FileScanner
+     * @return CachingFileScanner
      */
     protected function createFileScanner($filename)
     {

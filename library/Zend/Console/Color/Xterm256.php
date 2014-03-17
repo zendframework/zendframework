@@ -40,7 +40,7 @@ class Xterm256
      * Calcluate the X11 color value of a hexadecimal color
      *
      * @param  string $hexColor
-     * @return string
+     * @return self
      */
     public static function calculate($hexColor)
     {

@@ -203,22 +203,6 @@ class CollectionInputFilter extends InputFilter
     /**
      * {@inheritdoc}
      */
-    public function getInvalidInput()
-    {
-        return (is_array($this->invalidInputs) ? $this->invalidInputs : array());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getValidInput()
-    {
-        return (is_array($this->validInputs) ? $this->validInputs : array());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getValues()
     {
         return $this->collectionValues;

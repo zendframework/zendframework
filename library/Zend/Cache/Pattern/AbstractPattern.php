@@ -9,7 +9,6 @@
 
 namespace Zend\Cache\Pattern;
 
-use Traversable;
 use Zend\Cache\Exception;
 
 abstract class AbstractPattern implements PatternInterface

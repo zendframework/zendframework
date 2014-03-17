@@ -14,7 +14,6 @@ use ArrayIterator;
 use Zend\Stdlib\Request;
 use Zend\Mvc\Router\RoutePluginManager;
 use Zend\Mvc\Router\SimpleRouteStack;
-use ZendTest\Mvc\Router\FactoryTester;
 
 class SimpleRouteStackTest extends TestCase
 {

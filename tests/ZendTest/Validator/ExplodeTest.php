@@ -10,7 +10,6 @@
 namespace ZendTest\Validator;
 
 use Zend\Validator\Explode;
-use Zend\Validator\EmailAddress;
 use Zend\Validator\Regex;
 
 /**

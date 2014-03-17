@@ -10,7 +10,6 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\StringToUpper as StringToUpperFilter;
-use Zend\Stdlib\ErrorHandler;
 
 /**
  * @group      Zend_Filter

@@ -10,7 +10,6 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\RealPath as RealPathFilter;
-use Zend\Stdlib\ErrorHandler;
 
 /**
  * @group      Zend_Filter

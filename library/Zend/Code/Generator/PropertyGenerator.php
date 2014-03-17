@@ -120,9 +120,9 @@ class PropertyGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param  string $name
+     * @param string $name
      * @param PropertyValueGenerator|string|array $defaultValue
-     * @param  int|array $flags
+     * @param int $flags
      */
     public function __construct($name = null, $defaultValue = null, $flags = self::FLAG_PUBLIC)
     {

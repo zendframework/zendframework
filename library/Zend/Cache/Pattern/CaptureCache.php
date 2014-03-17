@@ -67,7 +67,7 @@ class CaptureCache extends AbstractPattern
      * Get from cache
      *
      * @param  null|string $pageId
-     * @return bool|string
+     * @return string|null
      * @throws Exception\LogicException
      * @throws Exception\RuntimeException
      */

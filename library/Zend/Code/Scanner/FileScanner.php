@@ -37,7 +37,7 @@ class FileScanner extends TokenArrayScanner implements ScannerInterface
     }
 
     /**
-     * @return null|string
+     * @return string
      */
     public function getFile()
     {

@@ -9,7 +9,6 @@
 
 namespace Zend\Cache\Storage\Plugin;
 
-use Zend\Cache\Exception;
 use Zend\Cache\Storage\ExceptionEvent;
 use Zend\EventManager\EventManagerInterface;
 

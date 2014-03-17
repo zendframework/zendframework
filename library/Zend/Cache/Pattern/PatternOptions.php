@@ -593,7 +593,7 @@ class PatternOptions extends AbstractOptions
      * Used by:
      * - ObjectCache
      *
-     * @return mixed
+     * @return string
      */
     public function getObjectKey()
     {

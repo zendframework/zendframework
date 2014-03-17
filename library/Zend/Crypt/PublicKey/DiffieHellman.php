@@ -384,7 +384,7 @@ class DiffieHellman
     /**
      * Convert number between formats
      *
-     * @param $number
+     * @param string $number
      * @param string $inputFormat
      * @param string $outputFormat
      * @return string

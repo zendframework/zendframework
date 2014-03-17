@@ -274,7 +274,7 @@ class Svg extends AbstractRenderer
 
     /**
      * Draw the barcode in the rendering resource
-     * @return mixed
+     * @return DOMDocument
      */
     public function draw()
     {

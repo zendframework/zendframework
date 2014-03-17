@@ -211,7 +211,7 @@ class CollectionInputFilter extends InputFilter
         if (is_array($groups)) {
             foreach($groups as $group) {
                 $this->inputFilter->setValidationGroup($group);
-            } 
+            }
         }
     }
 

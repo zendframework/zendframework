@@ -106,6 +106,7 @@ class Ean5 extends Ean13
 
     /**
      * @param int $i
+     * @return string
      */
     protected function getParity($i)
     {

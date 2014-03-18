@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -147,6 +146,7 @@ class CollectionInputFilter extends InputFilter
      */
     public function isValid()
     {
+        $inputFilter = $this->getInputFilter();
         $valid = true;
 
         if ($this->getCount() < 1) {
@@ -170,22 +170,22 @@ class CollectionInputFilter extends InputFilter
             if (!is_array($data)) {
                 $data = array();
             }
-            $this->getInputFilter()->setData($data);
+            $inputFilter->setData($data);
 
             if (null !== $this->validationGroup) {
-                $this->getInputFilter()->setValidationGroup($this->validationGroup[$key]);
+                $inputFilter->setValidationGroup($this->validationGroup[$key]);
             }
 
-            if ($this->getInputFilter()->isValid()) {
-                $this->validInputs[$key] = $this->getInputFilter()->getValidInput();
+            if ($inputFilter->isValid()) {
+                $this->validInputs[$key] = $inputFilter->getValidInput();
             } else {
                 $valid = false;
-                $this->collectionMessages[$key] = $this->getInputFilter()->getMessages();
-                $this->invalidInputs[$key] = $this->getInputFilter()->getInvalidInput();
+                $this->collectionMessages[$key] = $inputFilter->getMessages();
+                $this->invalidInputs[$key] = $inputFilter->getInvalidInput();
             }
 
-            $this->collectionValues[$key] = $this->getInputFilter()->getValues();
-            $this->collectionRawValues[$key] = $this->getInputFilter()->getRawValues();
+            $this->collectionValues[$key] = $inputFilter->getValues();
+            $this->collectionRawValues[$key] = $inputFilter->getRawValues();
         }
 
         return $valid;
@@ -250,5 +250,4 @@ class CollectionInputFilter extends InputFilter
     {
         return $this->collectionMessages;
     }
-
 }

@@ -522,7 +522,7 @@ class Hostname extends AbstractValidator
             do {
                 // First check TLD
                 $matches = array();
-                if (preg_match('/([^.]{2,10})$/iu', end($domainParts), $matches)
+                if (preg_match('/([^.]{2,})$/iu', end($domainParts), $matches)
                     || (array_key_exists(end($domainParts), $this->validIdns))) {
                     reset($domainParts);
 

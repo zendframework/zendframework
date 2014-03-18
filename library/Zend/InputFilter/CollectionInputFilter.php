@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -13,7 +14,6 @@ use Traversable;
 
 class CollectionInputFilter extends InputFilter
 {
-
     /*
      * @var bool
      */
@@ -66,6 +66,7 @@ class CollectionInputFilter extends InputFilter
         }
 
         $this->inputFilter = $inputFilter;
+
         return $this;
     }
 
@@ -79,6 +80,7 @@ class CollectionInputFilter extends InputFilter
         if (null === $this->inputFilter) {
             $this->setInputFilter(new InputFilter());
         }
+
         return $this->inputFilter;
     }
 
@@ -91,6 +93,7 @@ class CollectionInputFilter extends InputFilter
     public function setIsRequired($isRequired)
     {
         $this->isRequired = $isRequired;
+
         return $this;
     }
 
@@ -104,7 +107,6 @@ class CollectionInputFilter extends InputFilter
         return $this->isRequired;
     }
 
-
     /**
      * Set the count of data to validate
      *
@@ -114,6 +116,7 @@ class CollectionInputFilter extends InputFilter
     public function setCount($count)
     {
         $this->count = $count > 0 ? $count : 0;
+
         return $this;
     }
 
@@ -127,6 +130,7 @@ class CollectionInputFilter extends InputFilter
         if (null === $this->count) {
             $this->count = count($this->data);
         }
+
         return $this->count;
     }
 
@@ -158,6 +162,7 @@ class CollectionInputFilter extends InputFilter
         if (empty($this->data)) {
             $this->clearValues();
             $this->clearRawValues();
+
             return $valid;
         }
 
@@ -165,19 +170,22 @@ class CollectionInputFilter extends InputFilter
             if (!is_array($data)) {
                 $data = array();
             }
-            $this->inputFilter->setData($data);
+            $this->getInputFilter()->setData($data);
 
-            if ($this->inputFilter->isValid()) {
-                $this->validInputs[$key] = $this->inputFilter->getValidInput();
-            } else {
-                $valid = false;
-                $this->collectionMessages[$key] = $this->inputFilter->getMessages();
-                $this->invalidInputs[$key] = $this->inputFilter->getInvalidInput();
+            if (null !== $this->validationGroup) {
+                $this->getInputFilter()->setValidationGroup($this->validationGroup[$key]);
             }
 
-            $this->collectionValues[$key] = $this->inputFilter->getValues();
-            $this->collectionRawValues[$key] = $this->inputFilter->getRawValues();
+            if ($this->getInputFilter()->isValid()) {
+                $this->validInputs[$key] = $this->getInputFilter()->getValidInput();
+            } else {
+                $valid = false;
+                $this->collectionMessages[$key] = $this->getInputFilter()->getMessages();
+                $this->invalidInputs[$key] = $this->getInputFilter()->getInvalidInput();
+            }
 
+            $this->collectionValues[$key] = $this->getInputFilter()->getValues();
+            $this->collectionRawValues[$key] = $this->getInputFilter()->getRawValues();
         }
 
         return $valid;
@@ -190,14 +198,13 @@ class CollectionInputFilter extends InputFilter
     {
         if ($name === self::VALIDATE_ALL) {
             $this->validationGroup = null;
+
             return $this;
         }
 
-        if (is_array($name)) {
-            foreach($name as $group) {
-                $this->inputFilter->setValidationGroup($group);
-            }
-        }
+        $this->validationGroup = $name;
+
+        return $this;
     }
 
     /**
@@ -243,4 +250,5 @@ class CollectionInputFilter extends InputFilter
     {
         return $this->collectionMessages;
     }
+
 }

@@ -51,6 +51,7 @@ class ValidatorPluginManager extends AbstractPluginManager
         'barcodeupce'              => 'Zend\Validator\Barcode\Upce',
         'barcode'                  => 'Zend\Validator\Barcode',
         'between'                  => 'Zend\Validator\Between',
+        'bitwise'                  => 'Zend\Validator\Bitwise',
         'callback'                 => 'Zend\Validator\Callback',
         'creditcard'               => 'Zend\Validator\CreditCard',
         'csrf'                     => 'Zend\Validator\Csrf',

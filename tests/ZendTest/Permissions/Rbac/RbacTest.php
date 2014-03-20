@@ -82,16 +82,30 @@ class RbacTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $this->rbac->isGranted('bar', 'can.baz'));
     }
 
+    /**
+     * @covers Zend\Permissions\Rbac\Rbac::hasRole()
+     */
     public function testHasRole()
     {
         $foo = new Rbac\Role('foo');
+        $snafu = new TestAsset\RoleTest('snafu');
 
         $this->rbac->addRole('bar');
         $this->rbac->addRole($foo);
+        $this->rbac->addRole('snafu');
 
-        $this->assertEquals(true, $this->rbac->hasRole($foo));
-        $this->assertEquals(true, $this->rbac->hasRole('bar'));
-        $this->assertEquals(false, $this->rbac->hasRole('baz'));
+        // check that the container has the same object $foo
+        $this->assertTrue($this->rbac->hasRole($foo));
+
+        // check that the container has the same string "bar"
+        $this->assertTrue($this->rbac->hasRole('bar'));
+
+        // check that the container do not have the string "baz"
+        $this->assertFalse($this->rbac->hasRole('baz'));
+
+        // check that we can compare two different objects with same name
+        $this->assertNotEquals($this->rbac->getRole('snafu'), $snafu);
+        $this->assertTrue($this->rbac->hasRole($snafu));
     }
 
     public function testAddRoleFromString()

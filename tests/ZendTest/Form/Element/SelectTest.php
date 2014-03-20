@@ -235,4 +235,38 @@ class SelectTest extends TestCase
         $this->assertArrayNotHasKey('Option Undefined', $valueOptions);
     }
 
+    public function testSetOptionsToSelectMultiple()
+    {
+        $element = new SelectElement(null, array(
+            'label' => 'Importance',
+            'use_hidden_element' => true,
+            'unselected_value' => 'empty',
+            'value_options' => array(
+                'foo' => 'Foo',
+                'bar' => 'Bar'
+            ),
+        ));
+        $element->setAttributes(array('multiple' => 'multiple'));
+
+        $this->assertTrue($element->isMultiple());
+        $this->assertTrue($element->useHiddenElement());
+        $this->assertEquals('empty', $element->getUnselectedValue());
+    }
+
+    public function testProvidesInputSpecificationForMultipleSelectWithUseHiddenElement()
+    {
+        $element = new SelectElement();
+        $element
+            ->setUseHiddenElement(true)
+            ->setAttributes(array(
+                'multiple' => true,
+            ));
+
+        $inputSpec = $element->getInputSpecification();
+
+        $this->assertArrayHasKey('allow_empty', $inputSpec);
+        $this->assertTrue($inputSpec['allow_empty']);
+        $this->assertArrayHasKey('continue_if_empty', $inputSpec);
+        $this->assertTrue($inputSpec['continue_if_empty']);
+    }
 }

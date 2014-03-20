@@ -1906,6 +1906,60 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->isValid());
     }
 
+    /**
+     * @dataProvider formWithSelectMultipleAndEmptyUnselectedValueDataProvider
+     */
+    public function testFormWithSelectMultipleAndEmptyUnselectedValue($isValid, array $data = array(), $unselectedValue = '', $useHiddenElement = true)
+    {
+        $this->form->add(array(
+            'name' => 'multipleSelect',
+            'type'  => 'Zend\Form\Element\Select',
+            'attributes' => array('multiple' => 'multiple'),
+            'options' => array(
+                'label' => 'Importance',
+                'use_hidden_element' => $useHiddenElement,
+                'unselected_value' => $unselectedValue,
+                'value_options' => array(
+                    'foo' => 'Foo',
+                    'bar' => 'Bar'
+                ),
+            ),
+        ));
+
+        $actual = $this->form->setData($data)->isValid();
+
+        $this->assertEquals($isValid, $actual);
+    }
+
+    /**
+     * @return array
+     */
+    public function formWithSelectMultipleAndEmptyUnselectedValueDataProvider()
+    {
+        return array(
+            array(
+                true,
+                array('multipleSelect' => ''),
+            ),
+            array(
+                true,
+                array('multipleSelect' => 'empty'),
+                'empty',
+            ),
+            array(
+                false,
+                array('multipleSelect' => ''),
+                'empty',
+            ),
+            array(
+                false,
+                array('multipleSelect' => ''),
+                '',
+                false
+            ),
+        );
+    }
+
     public function testCanSetUseInputFilterDefaultsViaArray()
     {
         $spec = array(

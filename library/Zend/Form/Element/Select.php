@@ -245,7 +245,6 @@ class Select extends Element implements InputProviderInterface
     public function setUseHiddenElement($useHiddenElement)
     {
         $this->useHiddenElement = (bool) $useHiddenElement;
-
         return $this;
     }
 
@@ -348,7 +347,9 @@ class Select extends Element implements InputProviderInterface
     }
 
     /**
-     * @return boolean
+     * Element has the multiple attribute
+     *
+     * @return bool
      */
     public function isMultiple()
     {

@@ -85,4 +85,18 @@ class RadioTest extends TestCase
             $this->assertTrue($inArrayValidator->isValid($valueToTest));
         }
     }
+
+    public function testDisableInputSpecification()
+    {
+        $element = new RadioElement();
+        $element->setValueOptions(array(
+            'Option 1' => 'option1',
+            'Option 2' => 'option2',
+            'Option 3' => 'option3',
+        ));
+        $element->setDisableInArrayValidator(true);
+
+        $inputSpec = $element->getInputSpecification();
+        $this->assertArrayNotHasKey('validators', $inputSpec);
+    }
 }

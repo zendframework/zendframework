@@ -43,7 +43,7 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
             return $this->get($requestedName, array());
         }
 
-        return $this->get($serviceName, array());
+        return $this->get($name, array());
     }
 
     /**

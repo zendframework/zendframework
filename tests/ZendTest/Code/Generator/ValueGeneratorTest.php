@@ -139,11 +139,17 @@ EOS;
         $this->assertEquals($expectedSource, $valueGenerator->generate());
     }
 
+    /**
+     * @group 6023
+     */
     public function testEscapesBackslash()
     {
         $this->assertSame('\\\\', ValueGenerator::escape('\\', false));
     }
 
+    /**
+     * @group 6023
+     */
     public function testEscapesQuotes()
     {
         $this->assertSame('\\\'', ValueGenerator::escape('\'', false));

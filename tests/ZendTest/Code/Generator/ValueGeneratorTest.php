@@ -14,6 +14,8 @@ use Zend\Code\Generator\ValueGenerator;
 /**
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
+ *
+ * @covers \Zend\Code\Generator\ValueGenerator
  */
 class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -141,17 +143,25 @@ EOS;
 
     /**
      * @group 6023
+     *
+     * @dataProvider getEscapedParameters
      */
-    public function testEscapesBackslash()
+    public function testEscaping($input, $expectedEscapedValue)
     {
-        $this->assertSame('\\\\', ValueGenerator::escape('\\', false));
+        $this->assertSame($expectedEscapedValue, ValueGenerator::escape($input, false));
     }
 
     /**
-     * @group 6023
+     * Data provider for escaping tests
+     *
+     * @return string[][]
      */
-    public function testEscapesQuotes()
+    public function getEscapedParameters()
     {
-        $this->assertSame('\\\'', ValueGenerator::escape('\'', false));
+        return array(
+            array('\\', '\\\\'),
+            array("'", "\\'"),
+            array("\\'", "\\\\\\'"),
+        );
     }
 }

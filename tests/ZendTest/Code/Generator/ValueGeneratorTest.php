@@ -138,4 +138,14 @@ EOS;
 
         $this->assertEquals($expectedSource, $valueGenerator->generate());
     }
+
+    public function testEscapesBackslash()
+    {
+        $this->assertSame('\\\\', ValueGenerator::escape('\\', false));
+    }
+
+    public function testEscapesQuotes()
+    {
+        $this->assertSame('\\\'', ValueGenerator::escape('\'', false));
+    }
 }

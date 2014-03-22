@@ -692,12 +692,7 @@ class ApplicationTest extends TestCase
             $event->stopPropagation(true);
             $event->setRouteMatch(new Router\RouteMatch(array()));
         }));
-        $dispatchMock
-            ->expects($this->once())
-            ->method('__invoke')
-            ->will($this->returnCallback(function (MvcEvent $event) use ($response) {
-                return $response;
-            }));
+        $dispatchMock->expects($this->once())->method('__invoke')->will($this->returnValue($response));
         $finishMock->expects($this->once())->method('__invoke')->will($this->returnCallback(function (MvcEvent $event) {
             $event->stopPropagation(true);
         }));
@@ -730,12 +725,7 @@ class ApplicationTest extends TestCase
             $event->setError(Application::ERROR_ROUTER_NO_MATCH);
             return $event->getApplication()->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $event)->last();
         }));
-        $dispatchMock
-            ->expects($this->once())
-            ->method('__invoke')
-            ->will($this->returnCallback(function (MvcEvent $event) use ($response) {
-                return $response;
-            }));
+        $dispatchMock->expects($this->once())->method('__invoke')->will($this->returnValue($response));
         $finishMock->expects($this->once())->method('__invoke')->will($this->returnCallback(function (MvcEvent $event) {
             $event->stopPropagation(true);
         }));

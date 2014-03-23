@@ -26,6 +26,17 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Foo Bar\r\nBar Foo", $response->getBody());
     }
 
+    public function testResponseFactoryFromEmptyStringCreatesValidResponse()
+    {
+        $stream = fopen('php://temp','rb+');
+        fwrite($stream, 'HTTP/1.0 200 OK' . "\r\n\r\n".'Foo Bar'."\r\n".'Bar Foo');
+        rewind($stream);
+
+        $response = Stream::fromStream('', $stream);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals("Foo Bar\r\nBar Foo", $response->getBody());
+    }
+
     public function testGzipResponse()
     {
         $stream = fopen(__DIR__ . '/../_files/response_gzip','rb');

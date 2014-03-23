@@ -46,6 +46,25 @@ class InputFilterTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $foo);
     }
 
+    public function testInputFilterDoesNotHandleNestedInputFilters()
+    {
+        $inputFilter = new InputFilter();
+        $inputFilter->add(new Input(), 'name');
+
+        $this->filter->add($inputFilter, 'people');
+
+        $data = array(
+            'people' => array(
+                 'name' => 'Wanderson'
+            )
+        );
+
+        $this->filter->setData($data);
+        $this->assertTrue($this->filter->isValid());
+
+        $this->assertInternalType('array', $this->filter->getValue('people'));
+    }
+
     /**
      * @group ZF2-5648
      */

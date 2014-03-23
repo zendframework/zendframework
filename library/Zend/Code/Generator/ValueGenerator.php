@@ -398,7 +398,7 @@ class ValueGenerator extends AbstractGenerator
      */
     public static function escape($input, $quote = true)
     {
-        $output = addcslashes($input, "'");
+        $output = addcslashes($input, "\\'");
 
         // adds quoting strings
         if ($quote) {

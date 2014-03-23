@@ -227,4 +227,20 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('\OtherNamespace\ParameterClass', $param->getType());
     }
+
+    /**
+     * @group 6023
+     *
+     * @coversNothing
+     */
+    public function testGeneratedParametersHaveEscapedDefaultValues()
+    {
+        $parameter = new ParameterGenerator();
+
+        $parameter->setName('foo');
+        $parameter->setDefaultValue("\\'");
+        $parameter->setType('stdClass');
+
+        $this->assertSame("stdClass \$foo = '\\\\\\''", $parameter->generate());
+    }
 }

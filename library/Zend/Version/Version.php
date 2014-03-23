@@ -24,9 +24,6 @@ final class Version
 
     /**
      * Github Service Identifier for version information is retrieved from
-
-    /**
-     * Github Service Identifier for version information is retrieved from
      */
     const VERSION_SERVICE_GITHUB = 'GITHUB';
 

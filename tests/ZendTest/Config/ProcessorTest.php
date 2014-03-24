@@ -329,7 +329,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
      */
     public function testIgnoresEmptyStringReplacement()
     {
-        $config    = new Config(array('foo' => 'bar'), true);;
+        $config    = new Config(array('foo' => 'bar'), true);
         $processor = new TokenProcessor(array('' => 'invalid'));
 
         $processor->process($config);

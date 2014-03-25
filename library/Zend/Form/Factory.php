@@ -444,7 +444,7 @@ class Factory
 
         if (!$hydrator instanceof Hydrator\HydratorInterface) {
             throw new Exception\DomainException(sprintf(
-                '%s expects a valid implementation of Zend\Form\Hydrator\HydratorInterface; received "%s"',
+                '%s expects a valid implementation of Zend\Stdlib\Hydrator\HydratorInterface; received "%s"',
                 $method,
                 $hydratorOrName
             ));

@@ -189,7 +189,7 @@ class Zip extends AbstractCompressionAlgorithm
         if (empty($archive) || !file_exists($archive)) {
             throw new Exception\RuntimeException('ZIP Archive not found');
         }
-        
+
         $zip     = new ZipArchive();
         $res     = $zip->open($archive);
 

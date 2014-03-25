@@ -297,7 +297,7 @@ class ZipTest extends \PHPUnit_Framework_TestCase
         $content = file_get_contents($this->tmp . '/_compress');
         $this->assertEquals('compress me', $content);
     }
-    
+
     public function testDecompressWhenNoArchieveInClass()
     {
         if (!constant('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED')) {

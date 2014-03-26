@@ -639,6 +639,18 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertApplicationException('RuntimeException', 'Foo error');
     }
 
+    public function testGetErrorWithTraceErrorEnabled()
+    {
+        $this->dispatch('/exception');
+        $this->assertResponseStatusCode(500);
+
+        $exception = $this->getApplication()->getMvcEvent()->getParam('exception');
+        $this->assertInstanceOf('RuntimeException', $exception);
+
+        // set to null to avoid the throwing of the exception
+        $this->getApplication()->getMvcEvent()->setParam('exception', null);
+    }
+
     /**
      * Sample tests on MvcEvent
      */

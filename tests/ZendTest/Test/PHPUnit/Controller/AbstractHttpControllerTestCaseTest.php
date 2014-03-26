@@ -26,8 +26,6 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
             include __DIR__ . '/../../_files/application.config.php'
         );
         parent::setUp();
-
-        $this->setTraceError(true);
     }
 
     public function testUseOfRouter()
@@ -627,6 +625,8 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public function testAssertExceptionInAction()
     {
+        $this->setTraceError(true);
+
         $this->dispatch('/exception');
         $this->assertResponseStatusCode(500);
         $this->assertApplicationException('RuntimeException');

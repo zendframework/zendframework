@@ -70,7 +70,7 @@ class InputFilterPluginManager extends AbstractPluginManager
      */
     public function validatePlugin($plugin)
     {
-        if ($plugin instanceof InputFilterInterface) {
+        if ($plugin instanceof InputFilterInterface || $plugin instanceof InputInterface) {
             // Hook to perform various initialization, when the inputfilter is not created through the factory
             if ($plugin instanceof InitializableInterface) {
                 $plugin->init();

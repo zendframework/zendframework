@@ -26,6 +26,8 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
             include __DIR__ . '/../../_files/application.config.php'
         );
         parent::setUp();
+
+        $this->setTraceError(true);
     }
 
     public function testUseOfRouter()

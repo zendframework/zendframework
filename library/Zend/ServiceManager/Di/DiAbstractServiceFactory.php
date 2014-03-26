@@ -10,7 +10,6 @@
 namespace Zend\ServiceManager\Di;
 
 use Zend\Di\Di;
-use Zend\Di\Exception\RuntimeException as DiException;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -52,25 +51,10 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        if ($this->instanceManager->hasSharedInstance($requestedName)
+        return $this->instanceManager->hasSharedInstance($requestedName)
             || $this->instanceManager->hasAlias($requestedName)
             || $this->instanceManager->hasConfig($requestedName)
             || $this->instanceManager->hasTypePreferences($requestedName)
-        ) {
-            return true;
-        }
-
-        if (! $this->definitions->hasClass($requestedName)) {
-            return false;
-        }
-
-        try {
-            $this->serviceLocator = $serviceLocator;
-            $this->get($requestedName);
-        } catch (DiException $e) {
-            return false;
-        }
-
-        return true;
+            || $this->definitions->hasClass($requestedName);
     }
 }

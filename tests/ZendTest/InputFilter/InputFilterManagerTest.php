@@ -38,4 +38,24 @@ class InputFilterManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\InputFilter\Exception\RuntimeException');
         $this->manager->get('test');
     }
+
+    /**
+     * @covers Zend\InputFilter\InputFilterPluginManager::validatePlugin
+     */
+    public function testAllowLoadingInstancesOfInputFilterInterface()
+    {
+        $inputFilter = $this->getMock('Zend\InputFilter\InputFilterInterface');
+
+        $this->assertNull($this->manager->validatePlugin($inputFilter));
+    }
+
+    /**
+     * @covers Zend\InputFilter\InputFilterPluginManager::validatePlugin
+     */
+    public function testAllowLoadingInstancesOfInputInterface()
+    {
+        $input = $this->getMock('Zend\InputFilter\InputInterface');
+
+        $this->assertNull($this->manager->validatePlugin($input));
+    }
 }

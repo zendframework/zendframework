@@ -6,7 +6,7 @@ use Zend\Log\Filter\Timestamp as TimestampFilter;
 
 /**
  * @group Zend_Log
- * 
+ *
  * @author Nikola Posa <posa.nikola@gmail.com>
  */
 class TimestampTest extends TestCase
@@ -19,14 +19,14 @@ class TimestampTest extends TestCase
         $filter = new TimestampFilter($dateTimeValue, null, $operator);
 
         $result = $filter->filter(array('timestamp' => $timestamp));
-        
+
         if ($expectation === true) {
             $this->assertTrue($result);
         } else {
             $this->assertFalse($result);
         }
     }
-    
+
     public function dateTimeDataProvider()
     {
         return array(
@@ -47,14 +47,14 @@ class TimestampTest extends TestCase
         $filter = new TimestampFilter($datePartVal, $datePartChar, $operator);
 
         $result = $filter->filter(array('timestamp' => $timestamp));
-        
+
         if ($expectation === true) {
             $this->assertTrue($result);
         } else {
             $this->assertFalse($result);
         }
     }
-    
+
     public function datePartDataProvider()
     {
         return array(
@@ -74,7 +74,7 @@ class TimestampTest extends TestCase
     {
         new TimestampFilter('foo');
     }
-    
+
     /**
      * @expectedException Zend\Log\Exception\InvalidArgumentException
      */
@@ -82,7 +82,7 @@ class TimestampTest extends TestCase
     {
         new TimestampFilter(3);
     }
-    
+
     public function testFilterCreatedFromArray()
     {
         $config = array(
@@ -91,7 +91,7 @@ class TimestampTest extends TestCase
             'operator' => '==',
         );
         $filter = new TimestampFilter($config);
-        
+
         $this->assertAttributeEquals($config['value'], 'value', $filter);
         $this->assertAttributeEquals($config['dateFormatChar'], 'dateFormatChar', $filter);
         $this->assertAttributeEquals($config['operator'], 'operator', $filter);

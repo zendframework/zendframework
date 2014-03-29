@@ -6,30 +6,30 @@ use DateTime;
 
 /**
  * Filters log events based on the time when they were triggered.
- * 
+ *
  * @author Nikola Posa <posa.nikola@gmail.com>
  */
 class Timestamp implements FilterInterface
 {
     /**
      * DateTime instance or desired value based on $dateFormatChar.
-     * 
+     *
      * @var int|DateTime
      */
     protected $value;
-    
+
     /**
      * PHP idate()-compliant format character.
-     * 
+     *
      * @var string|null
      */
     protected $dateFormatChar = null;
-    
+
     /**
      * @var string
      */
     protected $operator;
-    
+
     /**
      * @param int|DateTime|array|Traversable $value DateTime instance or desired value based on $dateFormatChar
      * @param string $dateFormatChar PHP idate()-compliant format character
@@ -63,7 +63,7 @@ class Timestamp implements FilterInterface
             $this->value = $value;
             $this->dateFormatChar = $dateFormatChar;
         }
-        
+
         $this->operator = ($operator) ?: '<=';
     }
 
@@ -77,15 +77,15 @@ class Timestamp implements FilterInterface
     {
         $datetime = $event['timestamp'];
         $timestamp = $datetime->getTimestamp();
-        
+
         if ($this->value instanceof DateTime) {
             return version_compare((string) $timestamp, (string) $this->value->getTimestamp(), $this->operator);
         } else {
             return version_compare(
-                idate($this->dateFormatChar, $timestamp), 
-                $this->value, 
+                idate($this->dateFormatChar, $timestamp),
+                $this->value,
                 $this->operator
             );
         }
-    }    
+    }
 }

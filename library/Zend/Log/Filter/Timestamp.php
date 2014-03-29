@@ -89,7 +89,7 @@ class Timestamp implements FilterInterface
         if ($this->value instanceof DateTime) {
             return version_compare((string) $timestamp, (string) $this->value->getTimestamp(), $this->operator);
         }
-        
+
         return version_compare(
             idate($this->dateFormatChar, $timestamp),
             $this->value,

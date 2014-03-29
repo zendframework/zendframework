@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
 namespace Zend\Log\Filter;
 
 use Zend\Log\Exception;
@@ -80,12 +88,12 @@ class Timestamp implements FilterInterface
 
         if ($this->value instanceof DateTime) {
             return version_compare((string) $timestamp, (string) $this->value->getTimestamp(), $this->operator);
-        } else {
-            return version_compare(
-                idate($this->dateFormatChar, $timestamp),
-                $this->value,
-                $this->operator
-            );
         }
+        
+        return version_compare(
+            idate($this->dateFormatChar, $timestamp),
+            $this->value,
+            $this->operator
+        );
     }
 }

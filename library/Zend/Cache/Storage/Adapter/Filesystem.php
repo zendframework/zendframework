@@ -131,7 +131,7 @@ class Filesystem extends AbstractAdapter implements
      * Remove expired items
      *
      * @return bool
-     * 
+     *
      * @triggers clearExpired.exception(ExceptionEvent)
      */
     public function clearExpired()
@@ -163,10 +163,13 @@ class Filesystem extends AbstractAdapter implements
         }
         $error = ErrorHandler::stop();
         if ($error) {
-            $e = new Exception\RuntimeException("Failed to clear expired items", 0, $error);
             $result = false;
-            $args = new \ArrayObject();
-            return $this->triggerException(__FUNCTION__, $args, $result, $e);
+            return $this->triggerException(
+                __FUNCTION__,
+                null,
+                $result,
+                new Exception\RuntimeException("Failed to clear expired items", 0, $error)
+            );
         }
 
         return true;

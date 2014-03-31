@@ -9,6 +9,8 @@
 
 namespace Zend\View\Helper;
 
+use Zend\View\Exception\InvalidArgumentException;
+
 /**
  * Helper for ordered and unordered lists
  */
@@ -25,6 +27,10 @@ class HtmlList extends AbstractHtmlElement
      */
     public function __invoke(array $items, $ordered = false, $attribs = false, $escape = true)
     {
+        if (empty($items)) {
+            throw new InvalidArgumentException("An empty items of HtmlList isn't allowed");
+        }
+
         $list = '';
 
         foreach ($items as $item) {

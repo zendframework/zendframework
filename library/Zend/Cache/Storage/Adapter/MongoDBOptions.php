@@ -14,21 +14,21 @@ class MongoDBOptions extends AdapterOptions
     /**
      * connectString
      *
-     * @var string
+     * @var null|string
      */
     protected $connectString;
 
     /**
      * collection
      *
-     * @var string
+     * @var null|string
      */
     protected $collection;
 
     /**
      * database
      *
-     * @var string
+     * @var null|string
      */
     protected $database;
 
@@ -40,7 +40,7 @@ class MongoDBOptions extends AdapterOptions
      */
     public function setConnectString($connectString)
     {
-        $this->connectString = $connectString;
+        $this->connectString = (string) $connectString;
 
         return $this;
     }
@@ -48,7 +48,7 @@ class MongoDBOptions extends AdapterOptions
     /**
      * getConnectString
      *
-     * @return string
+     * @return null|string
      */
     public function getConnectString()
     {
@@ -63,7 +63,7 @@ class MongoDBOptions extends AdapterOptions
      */
     public function setCollection($collection)
     {
-        $this->collection = $collection;
+        $this->collection = (string) $collection;
 
         return $this;
     }
@@ -71,7 +71,7 @@ class MongoDBOptions extends AdapterOptions
     /**
      * getCollection
      *
-     * @return string
+     * @return null|string
      */
     public function getCollection()
     {
@@ -86,7 +86,7 @@ class MongoDBOptions extends AdapterOptions
      */
     public function setDatabase($database)
     {
-        $this->database = $database;
+        $this->database = (string) $database;
 
         return $this;
     }
@@ -94,7 +94,7 @@ class MongoDBOptions extends AdapterOptions
     /**
      * getDatabase
      *
-     * @return string
+     * @return null|string
      */
     public function getDatabase()
     {

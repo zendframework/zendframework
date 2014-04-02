@@ -43,13 +43,18 @@ class MongoDB extends AbstractAdapter
      * getMongoDBResource
      *
      * @return \MongoCollection
+     * @throws \Zend\Cache\Exception\RuntimeException
      */
     protected function getMongoDBResource()
     {
         if (is_null($this->mongoCollection)) {
             $options = $this->getOptions();
 
-            $mongo = new MongoClient($options->getConnectString());
+            try {
+                $mongo = new MongoClient($options->getConnectString());
+            } catch (MongoException $e) {
+                throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
+            }
 
             $database = $options->getDatabase();
             $collection = $options->getCollection();
@@ -136,36 +141,38 @@ class MongoDB extends AbstractAdapter
      */
     protected function internalSetItem(& $normalizedKey, & $value)
     {
-        $success = false;
-
         $mongo = $this->getMongoDBResource();
 
         $key = $this->prefixNamespaceToKey($normalizedKey);
 
         $ttl = $this->getOptions()->getTTl();
 
+        $cacheItem = array(
+            'key' => $key,
+            'value' => $value,
+            'expires' => new MongoDate(time() + $ttl),
+        );
+
+        if ($this->internalHasItem($normalizedKey)) {
+            $this->internalRemoveItem($normalizedKey);
+        }
+
         try {
-             $cacheItem = array(
-                'key' => $key,
-                'value' => $value,
-                'expires' => new MongoDate(time() + $ttl),
-             );
-
-
-            if ($this->internalHasItem($normalizedKey)) {
-                $this->internalRemoveItem($normalizedKey);
-            }
-
             $result = $mongo->insert($cacheItem);
 
-            if ($result['ok'] == 1) {
-                $success = true;
-            }
         } catch (MongoException $e) {
             throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
-        return $success;
+        if (is_null($result)) {
+            return false;
+        }
+
+        if ($result['ok'] === 1) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -177,24 +184,27 @@ class MongoDB extends AbstractAdapter
      */
     protected function internalRemoveItem(& $normalizedKey)
     {
-        $success = false;
-
         $mongo = $this->getMongoDBResource();
 
         $key = $this->prefixNamespaceToKey($normalizedKey);
 
+        $deleteItem = array('key' => $key);
+
         try {
-            $deleteItem = array('key' => $key);
-
             $result = $mongo->remove($deleteItem);
-
-            if ($result['ok'] && $result['n'] > 0) {
-                $success = true;
-            }
         } catch (MongoException $e) {
             throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
-        return $success;
+
+        if (is_null($result)) {
+            return false;
+        }
+
+        if ($result['ok'] === 1 && $result['n'] > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

@@ -173,4 +173,19 @@ class MultiCheckboxTest extends TestCase
         $valueOptions = $element->getValueOptions();
         $this->assertArrayNotHasKey('Option Undefined', $valueOptions);
     }
+
+    public function testOptionValueinSelectedOptions()
+    {
+        $element = new MultiCheckboxElement();
+        $element->setValueOptions(array(
+            'Option 1' => 'option1',
+            'Option 2' => 'option2',
+            'Option 3' => 'option3',
+        ));
+
+        $optionValue = 'option3';
+        $selectedOptions = array('option1', 'option3');
+        $element->setValue($selectedOptions);
+        $this->assertTrue(in_array($optionValue, $element->getValue()));
+    }
 }

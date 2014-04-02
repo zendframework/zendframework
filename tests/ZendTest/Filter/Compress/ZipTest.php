@@ -297,4 +297,36 @@ class ZipTest extends \PHPUnit_Framework_TestCase
         $content = file_get_contents($this->tmp . '/_compress');
         $this->assertEquals('compress me', $content);
     }
+
+    /**
+     * @group 6026
+     *
+     * @covers \Zend\Filter\Compress\Zip::decompress
+     */
+    public function testDecompressWhenNoArchieveInClass()
+    {
+        if (!constant('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED')) {
+            $this->markTestSkipped('ZIP compression tests are currently disabled');
+        }
+
+        $filter  = new ZipCompression(
+            array(
+                'archive' => $this->tmp . '/compressed.zip',
+                'target'  => $this->tmp . '/_compress'
+            )
+        );
+
+        $content = $filter->compress('compress me');
+        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR . 'compressed.zip', $content);
+
+        $filter  = new ZipCompression(
+            array(
+                'target'  => $this->tmp . '/_compress'
+            )
+        );
+        $content = $filter->decompress($content);
+        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR, $content);
+        $content = file_get_contents($this->tmp . '/_compress');
+        $this->assertEquals('compress me', $content);
+    }
 }

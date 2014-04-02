@@ -298,6 +298,11 @@ class ZipTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('compress me', $content);
     }
 
+    /**
+     * @group 6026
+     *
+     * @covers \Zend\Filter\Compress\Zip::decompress
+     */
     public function testDecompressWhenNoArchieveInClass()
     {
         if (!constant('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED')) {

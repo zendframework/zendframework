@@ -46,6 +46,11 @@ class InputFilterTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $foo);
     }
 
+    /**
+     * @covers \Zend\InputFilter\BaseInputFilter::getValue
+     *
+     * @group 6028
+     */
     public function testGetValueReturnsArrayIfNestedInputFilters()
     {
         $inputFilter = new InputFilter();

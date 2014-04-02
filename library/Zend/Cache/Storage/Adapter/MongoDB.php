@@ -168,7 +168,7 @@ class MongoDB extends AbstractAdapter
             return false;
         }
 
-        if ($result['ok'] === 1) {
+        if ($result['ok'] === (double) 1) {
             return true;
         }
 
@@ -200,7 +200,7 @@ class MongoDB extends AbstractAdapter
             return false;
         }
 
-        if ($result['ok'] === 1 && $result['n'] > 0) {
+        if ($result['ok'] === (double) 1 && $result['n'] > 0) {
             return true;
         }
 

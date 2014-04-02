@@ -14,6 +14,9 @@ use MongoClient;
 use Zend\Cache\Storage\Adapter\MongoDB;
 use Zend\Cache\Storage\Adapter\MongoDBOptions;
 
+/**
+ * @requires extension mongo
+ */
 class MongoDBTest extends CommonAdapterTest
 {
     public function setUp()
@@ -38,6 +41,10 @@ class MongoDBTest extends CommonAdapterTest
 
     public function tearDown()
     {
+        if (!extension_loaded('mongo')) {
+            $this->markTestSkipped("Mongo extension is not loaded");
+        }
+
         $mongo = new MongoClient(TESTS_ZEND_CACHE_MONGODB_CONNECTSTRING);
 
         $database = TESTS_ZEND_CACHE_MONGODB_DATABASE;

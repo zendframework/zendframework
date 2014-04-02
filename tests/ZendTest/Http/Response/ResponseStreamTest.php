@@ -26,6 +26,11 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Foo Bar\r\nBar Foo", $response->getBody());
     }
 
+    /**
+     * @group 6027
+     *
+     * @covers \Zend\Http\Response\Stream::fromStream
+     */
     public function testResponseFactoryFromEmptyStringCreatesValidResponse()
     {
         $stream = fopen('php://temp','rb+');

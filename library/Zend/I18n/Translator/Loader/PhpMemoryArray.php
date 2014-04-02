@@ -14,7 +14,7 @@ use Zend\I18n\Translator\Plural\Rule as PluralRule;
 use Zend\I18n\Translator\TextDomain;
 
 /**
- * PHP array loader.
+ * PHP Memory array loader.
  */
 class PhpMemoryArray implements RemoteLoaderInterface
 {

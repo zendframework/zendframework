@@ -627,11 +627,14 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
     {
         $this->dispatch('/exception');
         $this->assertResponseStatusCode(500);
-        $this->assertApplicationException('RuntimeException', 'Foo error');
+        $this->assertApplicationException('RuntimeException');
+    }
 
+    public function testAssertExceptionAndMessageInAction()
+    {
         $this->dispatch('/exception');
         $this->assertResponseStatusCode(500);
-        $this->assertApplicationException('RuntimeException');
+        $this->assertApplicationException('RuntimeException', 'Foo error');
     }
 
     /**

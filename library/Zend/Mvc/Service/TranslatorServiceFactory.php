@@ -34,11 +34,6 @@ class TranslatorServiceFactory implements FactoryInterface
             return new MvcTranslator($serviceLocator->get('Zend\I18n\Translator\TranslatorInterface'));
         }
 
-        // If ext/intl is not loaded, return a dummy translator
-        if (!extension_loaded('intl')) {
-            return new MvcTranslator(new DummyTranslator());
-        }
-
         // Load a translator from configuration, if possible
         if ($serviceLocator->has('Config')) {
             $config = $serviceLocator->get('Config');
@@ -57,6 +52,11 @@ class TranslatorServiceFactory implements FactoryInterface
                 $serviceLocator->setService('Zend\I18n\Translator\TranslatorInterface', $i18nTranslator);
                 return new MvcTranslator($i18nTranslator);
             }
+        }
+
+        // If ext/intl is not loaded, return a dummy translator
+        if (!extension_loaded('intl')) {
+            return new MvcTranslator(new DummyTranslator());
         }
 
         // For BC purposes (pre-2.3.0), use the I18n Translator

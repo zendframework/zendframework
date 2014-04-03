@@ -45,7 +45,7 @@ class Timestamp implements FilterInterface
      * @return Timestamp
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($value, $dateFormatChar = null, $operator = null)
+    public function __construct($value, $dateFormatChar = null, $operator = '<=')
     {
         if ($value instanceof Traversable) {
             $value = iterator_to_array($value);
@@ -62,14 +62,25 @@ class Timestamp implements FilterInterface
                     'Value must be either DateTime instance or integer; received "%s"',
                     gettype($value)
                 ));
-            } elseif (!is_string($dateFormatChar)) {
+            }
+            if (!is_string($dateFormatChar)) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'Date format character must be supplied as string; received "%s"',
                     gettype($dateFormatChar)
                 ));
             }
+
             $this->value = $value;
             $this->dateFormatChar = $dateFormatChar;
+        }
+
+        if (!in_array(
+            $operator,
+            array('<', 'lt', '<=', 'le', '>', 'gt', '>=', 'ge', '==', '=', 'eq', '!=', '<>')
+        )) {
+            throw new Exception\InvalidArgumentException(
+                "Unsupported comparison operator: '$operator'"
+            );
         }
 
         $this->operator = ($operator) ?: '<=';

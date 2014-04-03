@@ -91,6 +91,14 @@ class TimestampTest extends TestCase
         new TimestampFilter(3);
     }
 
+    /**
+     * @expectedException Zend\Log\Exception\InvalidArgumentException
+     */
+    public function testConstructorThrowsOnUnsupportedComparisonOperator()
+    {
+        new TimestampFilter(10, 'H', 'foobar');
+    }
+
     public function testFilterCreatedFromArray()
     {
         $config = array(

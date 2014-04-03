@@ -51,10 +51,18 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        return $this->instanceManager->hasSharedInstance($requestedName)
+        if ($this->instanceManager->hasSharedInstance($requestedName)
             || $this->instanceManager->hasAlias($requestedName)
             || $this->instanceManager->hasConfig($requestedName)
             || $this->instanceManager->hasTypePreferences($requestedName)
-            || $this->definitions->hasClass($requestedName);
+        ) {
+            return true;
+        }
+
+        if (! $this->definitions->hasClass($requestedName) || interface_exists($requestedName)) {
+            return false;
+        }
+
+        return true;
     }
 }

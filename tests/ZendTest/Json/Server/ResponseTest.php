@@ -173,6 +173,27 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->response->getId(), $test['id']);
     }
 
+    /**
+     * @param string $json
+     *
+     * @group 5956
+     *
+     * @dataProvider provideScalarJSONResponses
+     */
+    public function testLoadingScalarJSONResponseShouldThrowException($json)
+    {
+        $this->setExpectedException('Zend\Json\Server\Exception\RuntimeException');
+        $this->response->loadJson($json);
+    }
+
+    /**
+     * @return string[][]
+     */
+    public function provideScalarJSONResponses()
+    {
+        return array(array(''), array('true'), array('null'), array('3'), array('"invalid"'));
+    }
+
     public function getOptions()
     {
         return array(

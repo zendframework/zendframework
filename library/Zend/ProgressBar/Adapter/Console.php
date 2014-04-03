@@ -436,8 +436,9 @@ class Console extends AbstractAdapter
                     break;
 
                 case self::ELEMENT_TEXT:
-                    $renderedElements[] = StringUtils::getWrapper($this->charset)->strPad(
-                        substr($text, 0, $this->textWidth),
+                    $wrapper = StringUtils::getWrapper($this->charset);
+                    $renderedElements[] = $wrapper->strPad(
+                        $wrapper->substr($text, 0, $this->textWidth),
                         $this->textWidth,
                         ' ',
                         STR_PAD_RIGHT

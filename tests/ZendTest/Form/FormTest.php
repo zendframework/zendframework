@@ -1907,9 +1907,20 @@ class FormTest extends TestCase
     }
 
     /**
+     * @param bool $expectedIsValid
+     * @param array $expectedFormData
+     * @param array $data
+     * @param string $unselectedValue
+     * @param bool $useHiddenElement
      * @dataProvider formWithSelectMultipleAndEmptyUnselectedValueDataProvider
      */
-    public function testFormWithSelectMultipleAndEmptyUnselectedValue($isValid, array $data = array(), $unselectedValue = '', $useHiddenElement = true)
+    public function testFormWithSelectMultipleAndEmptyUnselectedValue(
+        $expectedIsValid,
+        array $expectedFormData,
+        array $data,
+        $unselectedValue,
+        $useHiddenElement
+    )
     {
         $this->form->add(array(
             'name' => 'multipleSelect',
@@ -1926,9 +1937,11 @@ class FormTest extends TestCase
             ),
         ));
 
-        $actual = $this->form->setData($data)->isValid();
+        $actualIsValid = $this->form->setData($data)->isValid();
+        $this->assertEquals($expectedIsValid, $actualIsValid);
 
-        $this->assertEquals($isValid, $actual);
+        $formData = $this->form->getData();
+        $this->assertEquals($expectedFormData, $formData);
     }
 
     /**
@@ -1939,23 +1952,45 @@ class FormTest extends TestCase
         return array(
             array(
                 true,
-                array('multipleSelect' => ''),
+                array('multipleSelect' => array('foo')),
+                array('multipleSelect' => array('foo')),
+                '',
+                true
             ),
             array(
                 true,
+                array('multipleSelect' => array()),
+                array('multipleSelect' => ''),
+                '',
+                true
+            ),
+            array(
+                true,
+                array('multipleSelect' => array()),
                 array('multipleSelect' => 'empty'),
                 'empty',
+                true
             ),
             array(
                 false,
                 array('multipleSelect' => ''),
+                array('multipleSelect' => ''),
                 'empty',
+                true
             ),
             array(
                 false,
+                array('multipleSelect' => ''),
                 array('multipleSelect' => ''),
                 '',
                 false
+            ),
+            array(
+                true,
+                array('multipleSelect' => array()),
+                array('multipleSelect' => 'foo'),
+                'foo',
+                true
             ),
         );
     }

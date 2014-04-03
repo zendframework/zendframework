@@ -174,6 +174,10 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param string $json
+     *
+     * @group 5956
+     *
      * @dataProvider provideScalarJSONResponses
      */
     public function testLoadingScalarJSONResponseShouldThrowException($json)
@@ -182,6 +186,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->response->loadJson($json);
     }
 
+    /**
+     * @return string[][]
+     */
     public function provideScalarJSONResponses()
     {
         return array(array(''), array('true'), array('null'), array('3'), array('"invalid"'));

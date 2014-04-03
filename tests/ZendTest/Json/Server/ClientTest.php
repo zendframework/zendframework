@@ -217,6 +217,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expectedUserAgent, $this->httpClient->getHeader('User-Agent'));
     }
 
+    /**
+     * @group 5956
+     */
     public function testScalarServerResponseThrowsException()
     {
         $response = $this->makeHttpResponseFrom('false');

@@ -297,7 +297,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group Zend_6012
+     * @group 6012
      */
     public function testMultibyteTruncateFixedWidth()
     {
@@ -314,7 +314,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group Zend_6012
+     * @group 6012
      */
     public function testMultibytePadFixedWidth()
     {

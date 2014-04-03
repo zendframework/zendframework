@@ -55,8 +55,9 @@ class DiAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\ServiceManager\Di\DiAbstractServiceFactory', $instance);
     }
 
-
     /**
+     * @group 6021
+     *
      * @covers Zend\ServiceManager\Di\DiAbstractServiceFactory::createServiceWithName
      * @covers Zend\ServiceManager\Di\DiAbstractServiceFactory::get
      */

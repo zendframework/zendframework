@@ -10,7 +10,6 @@
 namespace ZendTest\ProgressBar\Adapter;
 
 use Zend\ProgressBar\Adapter;
-use ZendTest\ProgressBar\Adapter\ConsoleStub;
 use Zend\Stdlib\StringUtils;
 
 require_once 'MockupStream.php';

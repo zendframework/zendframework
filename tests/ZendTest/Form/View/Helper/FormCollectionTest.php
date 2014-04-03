@@ -78,8 +78,8 @@ class FormCollectionTest extends TestCase
         $collection = $form->get('colors');
 
         $markup = $this->helper->render($collection);
-        $this->assertContains('name="colors[0]"', $markup);
-        $this->assertContains('name="colors[1]"', $markup);
+        $this->assertContains('name="colors&#x5B;0&#x5D;"', $markup);
+        $this->assertContains('name="colors&#x5B;1&#x5D;"', $markup);
     }
 
     public function testCorrectlyIndexNestedElementsInCollection()
@@ -88,9 +88,9 @@ class FormCollectionTest extends TestCase
         $collection = $form->get('fieldsets');
 
         $markup = $this->helper->render($collection);
-        $this->assertContains('fieldsets[0][field]', $markup);
-        $this->assertContains('fieldsets[1][field]', $markup);
-        $this->assertContains('fieldsets[1][nested_fieldset][anotherField]', $markup);
+        $this->assertContains('fieldsets&#x5B;0&#x5D;&#x5B;field&#x5D;', $markup);
+        $this->assertContains('fieldsets&#x5B;1&#x5D;&#x5B;field&#x5D;', $markup);
+        $this->assertContains('fieldsets&#x5B;1&#x5D;&#x5B;nested_fieldset&#x5D;&#x5B;anotherField&#x5D;', $markup);
     }
 
     public function testRenderWithCustomHelper()

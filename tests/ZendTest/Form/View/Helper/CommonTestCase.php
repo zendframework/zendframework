@@ -19,7 +19,14 @@ use Zend\View\Renderer\PhpRenderer;
  */
 abstract class CommonTestCase extends TestCase
 {
+    /**
+     * @var \Zend\Form\View\Helper\AbstractHelper
+     */
     public $helper;
+
+    /**
+     * @var \Zend\View\Renderer\RendererInterface
+     */
     public $renderer;
 
     public function setUp()

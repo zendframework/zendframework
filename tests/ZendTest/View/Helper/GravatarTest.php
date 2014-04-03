@@ -157,7 +157,7 @@ class GravatarTest extends TestCase
     public function testHttpsSource()
     {
         $this->assertRegExp(
-            '#src="https://secure.gravatar.com/avatar/[a-z0-9]{32}.+"#',
+            '#src="https\&\#x3A\;\&\#x2F\;\&\#x2F\;secure.gravatar.com\&\#x2F\;avatar\&\#x2F\;[a-z0-9]{32}.+"#',
             $this->helper->__invoke("example@example.com", array('secure' => true))->__toString()
         );
     }
@@ -179,7 +179,7 @@ class GravatarTest extends TestCase
     public function testGravatarOptions()
     {
         $this->assertRegExp(
-            '#src="http://www.gravatar.com/avatar/[a-z0-9]{32}\?s=125&amp;d=wavatar&amp;r=pg"#',
+            '#src="http\&\#x3A\;\&\#x2F\;\&\#x2F\;www.gravatar.com\&\#x2F\;avatar\&\#x2F\;[a-z0-9]{32}&\#x3F;s&\#x3D;125&amp;d&\#x3D;wavatar&amp;r&\#x3D;pg"#',
             $this->helper->__invoke("example@example.com", array('rating' => 'pg', 'imgSize' => 125, 'defaultImg' => 'wavatar', 'secure' => false))->__toString()
         );
     }
@@ -207,7 +207,7 @@ class GravatarTest extends TestCase
         foreach ($values as $value) {
             $_SERVER['HTTPS'] = $value;
             $this->assertRegExp(
-                '#src="https://secure.gravatar.com/avatar/[a-z0-9]{32}.+"#',
+                '#src="https\&\#x3A\;\&\#x2F\;\&\#x2F\;secure.gravatar.com\&\#x2F\;avatar\&\#x2F\;[a-z0-9]{32}.+"#',
                 $this->helper->__invoke("example@example.com")->__toString()
             );
         }
@@ -221,7 +221,7 @@ class GravatarTest extends TestCase
         $_SERVER['HTTPS'] = "off";
 
         $this->assertRegExp(
-            '/src="http:\/\/www.gravatar.com\/avatar\/[a-z0-9]{32}.+"/',
+            '/src="http\&\#x3A\;\&\#x2F\;\&\#x2F\;www.gravatar.com\&\#x2F\;avatar\&\#x2F\;[a-z0-9]{32}.+"/',
             $this->helper->__invoke("example@example.com")->__toString()
         );
     }
@@ -237,7 +237,7 @@ class GravatarTest extends TestCase
         ));
 
         $this->assertRegExp(
-            '#src="http://www.gravatar.com/avatar/[a-z0-9]{32}.+"#',
+            '#src="http\&\#x3A\;\&\#x2F\;\&\#x2F\;www.gravatar.com\&\#x2F\;avatar\&\#x2F\;[a-z0-9]{32}.+"#',
             $this->helper->getImgTag()
         );
     }
@@ -245,7 +245,7 @@ class GravatarTest extends TestCase
     public function testForgottenEmailParameter()
     {
         $this->assertRegExp(
-            '#(src="http://www.gravatar.com/avatar/[a-z0-9]{32}.+")#',
+            '#(src="http\&\#x3A\;\&\#x2F\;\&\#x2F\;www.gravatar.com\&\#x2F\;avatar\&\#x2F\;[a-z0-9]{32}.+")#',
             $this->helper->getImgTag()
         );
     }

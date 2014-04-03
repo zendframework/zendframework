@@ -143,7 +143,9 @@ class Menu extends AbstractHelper
             $active['page'] = $active['page']->getParent();
         }
 
-        $ulClass = $ulClass ? ' class="' . $ulClass . '"' : '';
+        /* @var $escaper \Zend\View\Helper\EscapeHtmlAttr */
+        $escaper = $this->view->plugin('escapeHtmlAttr');
+        $ulClass = $ulClass ? ' class="' . $escaper($ulClass) . '"' : '';
         $html = $indent . '<ul' . $ulClass . '>' . self::EOL;
 
         foreach ($active['page'] as $subPage) {
@@ -161,7 +163,7 @@ class Menu extends AbstractHelper
             if ($addClassToListItem && $subPage->getClass()) {
                 $liClasses[] = $subPage->getClass();
             }
-            $liClass = empty($liClasses) ? '' : ' class="' . implode(' ', $liClasses) . '"';
+            $liClass = empty($liClasses) ? '' : ' class="' . $escaper(implode(' ', $liClasses)) . '"';
 
             $html .= $indent . '    <li' . $liClass . '>' . self::EOL;
             $html .= $indent . '        ' . $this->htmlify($subPage, $escapeLabels, $addClassToListItem) . self::EOL;
@@ -249,6 +251,9 @@ class Menu extends AbstractHelper
 
         // find deepest active
         $found = $this->findActive($container, $minDepth, $maxDepth);
+        /* @var $escaper \Zend\View\Helper\EscapeHtmlAttr */
+        $escaper = $this->view->plugin('escapeHtmlAttr');
+
         if ($found) {
             $foundPage  = $found['page'];
             $foundDepth = $found['depth'];
@@ -301,7 +306,7 @@ class Menu extends AbstractHelper
             if ($depth > $prevDepth) {
                 // start new ul tag
                 if ($ulClass && $depth ==  0) {
-                    $ulClass = ' class="' . $ulClass . '"';
+                    $ulClass = ' class="' . $escaper($ulClass) . '"';
                 } else {
                     $ulClass = '';
                 }
@@ -330,7 +335,7 @@ class Menu extends AbstractHelper
             if ($addClassToListItem && $page->getClass()) {
                 $liClasses[] = $page->getClass();
             }
-            $liClass = empty($liClasses) ? '' : ' class="' . implode(' ', $liClasses) . '"';
+            $liClass = empty($liClasses) ? '' : ' class="' . $escaper(implode(' ', $liClasses)) . '"';
 
             $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
                 . $myIndent . '        ' . $this->htmlify($page, $escapeLabels, $addClassToListItem) . self::EOL;

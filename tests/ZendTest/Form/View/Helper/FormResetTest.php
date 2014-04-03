@@ -167,6 +167,6 @@ class FormResetTest extends CommonTestCase
         $this->assertTrue($this->helper->hasTranslator());
 
         $markup = $this->helper->__invoke($element);
-        $this->assertContains('value="translated content"', $markup);
+        $this->assertContains('value="translated&#x20;content"', $markup);
     }
 }

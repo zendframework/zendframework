@@ -186,6 +186,10 @@ class ModuleManagerTest extends TestCase
         $this->assertSame('bar', $config['baz']);
     }
 
+    /**
+     * @group 5651
+     * @group 5948
+     */
     public function testLoadingModuleFromAnotherModuleDoesNotInfiniteLoop()
     {
         $configListener = $this->defaultListeners->getConfigListener();

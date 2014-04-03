@@ -56,6 +56,18 @@ class DiAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group 6021
+     *
+     * @covers Zend\ServiceManager\Di\DiAbstractServiceFactory::createServiceWithName
+     * @covers Zend\ServiceManager\Di\DiAbstractServiceFactory::get
+     */
+    public function testCreateServiceWithNameAndWithoutRequestName()
+    {
+        $foo = $this->diAbstractServiceFactory->createServiceWithName($this->mockServiceLocator, 'foo', null);
+        $this->assertEquals($this->fooInstance, $foo);
+    }
+
+    /**
      * @covers Zend\ServiceManager\Di\DiAbstractServiceFactory::createServiceWithName
      * @covers Zend\ServiceManager\Di\DiAbstractServiceFactory::get
      */

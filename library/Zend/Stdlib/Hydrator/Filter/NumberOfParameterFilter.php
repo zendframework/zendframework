@@ -44,10 +44,6 @@ class NumberOfParameterFilter implements FilterInterface
             );
         }
 
-        if ($reflectionMethod->getNumberOfParameters() !== $this->numberOfParameters) {
-            return false;
-        }
-
-        return true;
+        return $reflectionMethod->getNumberOfParameters() === $this->numberOfParameters;
     }
 }

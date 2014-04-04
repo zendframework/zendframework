@@ -26,7 +26,7 @@ class NumberOfParameterFilter implements FilterInterface
      */
     public function __construct($numberOfParameters = 0)
     {
-        $this->numberOfParameters = 0;
+        $this->numberOfParameters = (int) $numberOfParameters;
     }
 
     /**

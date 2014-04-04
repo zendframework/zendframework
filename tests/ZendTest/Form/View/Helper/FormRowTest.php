@@ -457,7 +457,7 @@ class FormRowTest extends TestCase
         $this->helper->__invoke($element, 'append');
         $this->assertSame($labelPositionBeforeRender, $this->helper->getLabelPosition());
 
-        $this->helper->_invoke($element, 'prepend');
+        $this->helper->__invoke($element, 'prepend');
         $this->assertSame($labelPositionBeforeRender, $this->helper->getLabelPosition());
     }
 

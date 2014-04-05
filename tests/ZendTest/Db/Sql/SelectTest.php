@@ -630,6 +630,18 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF2-6082
+     */
+    public function testSelectUsingExpressionOnJoin()
+    {
+        $select = new Select;
+        $select->from(new TableIdentifier('foo'));
+        $select->join(array('bar' => new Expression('psql_function_which_returns_table')), 'foo.id = bar.fooid');
+
+        $this->assertEquals('SELECT "foo".*, "bar".* FROM "foo" INNER JOIN psql_function_which_returns_table AS "bar" ON "foo"."id" = "bar"."fooid"', $select->getSqlString(new TrustingSql92Platform()));
+    }
+
+    /**
      * @testdox unit test: Test getSqlString() will produce expected sql and parameters based on a variety of provided arguments [uses data provider]
      * @covers Zend\Db\Sql\Select::getSqlString
      * @dataProvider providerData

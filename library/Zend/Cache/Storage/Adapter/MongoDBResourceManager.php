@@ -105,7 +105,11 @@ class MongoDBResourceManager
             $clientClass = (version_compare(phpversion('mongo'), '1.3.0', '<')) ? '\Mongo' : '\MongoClient';
 
             try {
-                $client = new $clientClass($resource['server'], $resource['options']);
+                if (!empty($resource['driverOptions'])) {
+                    $client = new $clientClass($resource['server'], $resource['options'], $resource['driverOptions']);
+                } else {
+                    $client = new $clientClass($resource['server'], $resource['options']);
+                }
                 $resource['resource'] = $client->selectCollection($resource['database'], $resource['collection']);
                 $resource['resource']->ensureIndex(array('key' => 1));
             } catch (MongoDBResourceException $e) {

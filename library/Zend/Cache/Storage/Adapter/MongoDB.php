@@ -9,20 +9,42 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use MongoClient;
-use MongoDate;
-use MongoException;
-use Zend\Cache\Exception\ExtensionNotLoadedException;
-use Zend\Cache\Exception\RuntimeException;
+use MongoCollection as MongoResource;
+use MongoException as MongoResourceException;
+use stdClass;
+use Zend\Cache\Exception;
+use Zend\Cache\Storage\Capabilities;
+use Zend\Cache\Storage\FlushableInterface;
 
-class MongoDB extends AbstractAdapter
+class MongoDB extends AbstractAdapter implements FlushableInterface
 {
     /**
-     * mongoCollection
+     * Has this instance be initialized
      *
-     * @var \MongoCollection
+     * @var bool
      */
-    protected $mongoCollection = null;
+    protected $initialized = false;
+
+    /**
+     * the mongodb resource manager
+     *
+     * @var null|MongoDBResourceManager
+     */
+    protected $resourceManager;
+
+    /**
+     * The mongodb resource id
+     *
+     * @var null|string
+     */
+    protected $resourceId;
+
+    /**
+     * The namespace prefix
+     *
+     * @var string
+     */
+    protected $namespacePrefix = '';
 
     /**
      * __construct
@@ -33,43 +55,49 @@ class MongoDB extends AbstractAdapter
     public function __construct($options = null)
     {
         if (!extension_loaded('mongo')) {
-            throw new ExtensionNotLoadedException('MongoDB extension not loaded');
+            throw new Exception\ExtensionNotLoadedException('MongoDB extension not loaded');
         }
 
         parent::__construct($options);
+
+        $initialized = & $this->initialized;
+        $this->getEventManager()->attach('option', function ($event) use (& $initialized) {
+            $initialized = false;
+        });
     }
 
     /**
-     * getMongoDBResource
+     * get mongodb resource
      *
-     * @return \MongoCollection
-     * @throws \Zend\Cache\Exception\RuntimeException
+     * @return MongoResource
      */
     protected function getMongoDBResource()
     {
-        if (is_null($this->mongoCollection)) {
+        if (!$this->initialized) {
             $options = $this->getOptions();
 
-            try {
-                $mongo = new MongoClient($options->getConnectString());
-            } catch (MongoException $e) {
-                throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
+            $this->resourceManager = $options->getResourceManager();
+            $this->resourceId      = $options->getResourceId();
+
+            $namespace = $options->getNamespace();
+            if ($namespace !== '') {
+                $this->namespacePrefix = $namespace . $options->getNamespaceSeparator();
+            } else {
+                $this->namespacePrefix = '';
             }
 
-            $database = $options->getDatabase();
-            $collection = $options->getCollection();
-
-            $this->mongoCollection = $mongo->selectCollection($database, $collection);
+            $this->initialized = true;
         }
 
-        return $this->mongoCollection;
+        return $this->resourceManager->getResource($this->resourceId);
     }
 
     /**
-     * setOptions
+     * Set options.
      *
-     * @param mixed $options
-     * @return $this
+     * @param  array|Traversable|MongoDBOptions $options
+     * @return MongoDB
+     * @see    getOptions()
      */
     public function setOptions($options)
     {
@@ -81,9 +109,10 @@ class MongoDB extends AbstractAdapter
     }
 
     /**
-     * getOptions
+     * Get options.
      *
-     * @return \Zend\Cache\Storage\Adapter\MongoDBOptions
+     * @return MongoDBOptions
+     * @see setOptions()
      */
     public function getOptions()
     {
@@ -97,30 +126,34 @@ class MongoDB extends AbstractAdapter
      * @param bool $success
      * @param mixed $casToken
      * @return string|null
-     * @throws \Zend\Cache\Exception\RuntimeException
+     * @throws Exception\RuntimeException
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
-        $mongo = $this->getMongoDBResource();
+        $collection = $this->getMongoDBResource();
 
         $key = $this->prefixNamespaceToKey($normalizedKey);
 
         try {
-            $result = $mongo->findOne(
+            $result = $collection->findOne(
                 array('key' => $key)
             );
-        } catch (MongoException $e) {
-            throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
+
+        } catch (MongoResourceException $e) {
+            throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
-        if (is_null($result)) {
+        // MongoCollection::findOne returns record matching search or null
+        if ($result === null) {
             $success = false;
+
             return null;
         }
 
-        if ($result['expires']->sec < time()) {
+        if ($result['expires'] !== null && $result['expires']->sec < time()) {
             $success = false;
             $this->internalRemoveItem($key);
+
             return null;
         }
 
@@ -128,6 +161,7 @@ class MongoDB extends AbstractAdapter
 
         $success = true;
         $casToken = $value;
+
         return $value;
     }
 
@@ -137,7 +171,7 @@ class MongoDB extends AbstractAdapter
      * @param  string $normalizedKey
      * @param  mixed $value
      * @return bool
-     * @throws \Zend\Cache\Exception\RuntimeException
+     * @throws Exception\RuntimeException
      */
     protected function internalSetItem(& $normalizedKey, & $value)
     {
@@ -147,24 +181,28 @@ class MongoDB extends AbstractAdapter
 
         $ttl = $this->getOptions()->getTTl();
 
+        if ($ttl > 0) {
+            $expires = $this->getOptions()->getResourceManager()->createMongoDate(time() + $ttl);
+        } else {
+            $expires = null;
+        }
+
         $cacheItem = array(
             'key' => $key,
             'value' => $value,
-            'expires' => new MongoDate(time() + $ttl),
+            'expires' => $expires,
         );
 
-        if ($this->internalHasItem($normalizedKey)) {
-            $this->internalRemoveItem($normalizedKey);
-        }
+
 
         try {
+            $mongo->remove(array('key' => $key));
             $result = $mongo->insert($cacheItem);
-
-        } catch (MongoException $e) {
-            throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
+        } catch (MongoResourceException $e) {
+            throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
-        if (is_null($result)) {
+        if ($result === null) {
             return false;
         }
 
@@ -180,7 +218,7 @@ class MongoDB extends AbstractAdapter
      *
      * @param  string $normalizedKey
      * @return bool
-     * @throws \Zend\Cache\Exception\RuntimeException
+     * @throws Exception\RuntimeException
      */
     protected function internalRemoveItem(& $normalizedKey)
     {
@@ -192,11 +230,11 @@ class MongoDB extends AbstractAdapter
 
         try {
             $result = $mongo->remove($deleteItem);
-        } catch (MongoException $e) {
-            throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
+        } catch (MongoResourceException $e) {
+            throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
-        if (is_null($result)) {
+        if ($result === false) {
             return false;
         }
 
@@ -216,7 +254,62 @@ class MongoDB extends AbstractAdapter
     protected function prefixNamespaceToKey($key)
     {
         $namespace = $this->getOptions()->getNamespace();
-        $prefix = ($namespace === '') ? '' : $namespace . '_';
+        $prefix = ($namespace === '') ? '' : $namespace . $this->namespacePrefix;
         return $prefix . $key;
+    }
+
+    /**
+     * Flush the whole storage
+     *
+     * @return bool
+     */
+    public function flush()
+    {
+        $result = $this->getMongoDBResource()->drop();
+
+        if ($result['ok'] === (double) 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Internal method to get capabilities
+     *
+     * @return void|\Zend\Cache\Storage\Capabilities
+     */
+    protected function internalGetCapabilities()
+    {
+        if ($this->capabilities === null) {
+            $this->capabilityMarker = new stdClass();
+            $this->capabilities = new Capabilities(
+                $this,
+                $this->capabilityMarker,
+                array(
+                    'supportedDatatypes' => array(
+                        'NULL'     => true,
+                        'boolean'  => true,
+                        'integer'  => true,
+                        'double'   => true,
+                        'string'   => true,
+                        'array'    => true,
+                        'object'   => false,
+                        'resource' => false,
+                    ),
+                    'supportedMetadata'  => array(),
+                    'minTtl'             => 0,
+                    'maxTtl'             => 0,
+                    'staticTtl'          => true,
+                    'ttlPrecision'       => 1,
+                    'useRequestTime'     => false,
+                    'expiredRead'        => false,
+                    'maxKeyLength'       => 255,
+                    'namespaceIsPrefix'  => true,
+                )
+            );
+        }
+
+        return $this->capabilities;
     }
 }

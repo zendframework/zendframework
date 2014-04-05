@@ -10,6 +10,7 @@
 namespace ZendTest\Cache\Storage\Adapter;
 
 use Zend\Cache\Storage\Adapter\MongoDBOptions;
+use Zend\Cache\Storage\Adapter\MongoDBResourceManager;
 
 /**
  * @group      Zend_Cache
@@ -20,72 +21,113 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!defined('TESTS_ZEND_CACHE_MONGODB_ENABLED') || !TESTS_ZEND_CACHE_MONGODB_ENABLED) {
+            $this->markTestSkipped("Skipped by TestConfiguration (TESTS_ZEND_CACHE_MONGODB_ENABLED)");
+        }
+
+        if (!extension_loaded('mongo') || !class_exists('\Mongo') || !class_exists('\MongoClient')) {
+            // Allow tests to run if Mongo extension is loaded, or we have a polyfill in place
+            $this->markTestSkipped("Mongo extension is not loaded");
+        }
+
         $this->object = new MongoDBOptions();
     }
 
-    public function testSetConnectString()
+    public function testSetNamespaceSeparator()
     {
-        $this->assertAttributeEquals(null, 'connectString', $this->object);
+        $this->assertAttributeEquals(':', 'namespaceSeparator', $this->object);
 
-        $connectString = 'foo';
+        $namespaceSeparator = '_';
 
-        $this->object->setConnectString($connectString);
+        $this->object->setNamespaceSeparator($namespaceSeparator);
 
-        $this->assertAttributeEquals($connectString, 'connectString', $this->object);
+        $this->assertAttributeEquals($namespaceSeparator, 'namespaceSeparator', $this->object);
     }
 
-    public function testGetConnectString()
+    public function testGetNamespaceSeparator()
     {
-        $this->assertNull($this->object->getConnectString());
+        $this->assertEquals(':', $this->object->getNamespaceSeparator());
 
-        $connectString = 'foo';
+        $namespaceSeparator = '_';
 
-        $this->object->setConnectString($connectString);
+        $this->object->setNamespaceSeparator($namespaceSeparator);
 
-        $this->assertEquals($connectString, $this->object->getConnectString());
+        $this->assertEquals($namespaceSeparator, $this->object->getNamespaceSeparator());
     }
 
-    public function testSetCollection()
+    public function testSetResourceManager()
     {
-        $this->assertAttributeEquals(null, 'collection', $this->object);
+        $this->assertAttributeEquals(null, 'resourceManager', $this->object);
 
-        $collection = 'foo';
+        $resourceManager = new MongoDBResourceManager();
 
-        $this->object->setCollection($collection);
+        $this->object->setResourceManager($resourceManager);
 
-        $this->assertAttributeEquals($collection, 'collection', $this->object);
+        $this->assertAttributeSame($resourceManager, 'resourceManager', $this->object);
     }
 
-    public function testGet()
+    public function testGetResourceManager()
     {
-        $this->assertNull($this->object->getCollection());
+        $this->assertInstanceOf(
+            '\Zend\Cache\Storage\Adapter\MongoDBResourceManager', $this->object->getResourceManager()
+        );
 
-        $expected = 'foo';
+        $resourceManager = new MongoDBResourceManager();
 
-        $this->object->setCollection($expected);
+        $this->object->setResourceManager($resourceManager);
 
-        $this->assertSame($expected, $this->object->getCollection());
+        $this->assertSame($resourceManager, $this->object->getResourceManager());
     }
 
-    public function testSetDatabase()
+    public function testSetResourceId()
     {
-        $this->assertAttributeEmpty('database', $this->object);
+        $this->assertAttributeEquals('default', 'resourceId', $this->object);
 
-        $expected = 'foo';
+        $resourceId = 'foo';
 
-        $this->object->setDatabase($expected);
+        $this->object->setResourceId($resourceId);
 
-        $this->assertAttributeEquals($expected, 'database', $this->object);
+        $this->assertAttributeEquals($resourceId, 'resourceId', $this->object);
     }
 
-    public function testGetDatabase()
+    public function testGetResourceId()
     {
-        $this->assertNull($this->object->getDatabase());
+        $this->assertEquals('default', $this->object->getResourceId());
 
-        $expected = 'foo';
+        $resourceId = 'foo';
 
-        $this->object->setDatabase($expected);
+        $this->object->setResourceId($resourceId);
 
-        $this->assertSame($expected, $this->object->getDatabase());
+        $this->assertEquals($resourceId, $this->object->getResourceId());
     }
+
+    public function testSetLibOptions()
+    {
+        $resourceManager = new MongoDBResourceManager();
+        $this->object->setResourceManager($resourceManager);
+
+        $this->assertAttributeEmpty('resources', $this->object->getResourceManager());
+
+        $libOptions = array('foo' => 'bar');
+
+        $this->object->setLibOptions($libOptions);
+
+        $expected = array(
+            $this->object->getResourceId() => array(
+                'collection' => 'cache',
+                'database' => 'zend',
+                'driverOptions' => array(),
+                'foo' => 'bar',
+                'initialized' => false,
+                'options' => array(
+                    'fsync' => false,
+                    'journal' => true,
+                ),
+                'server' => 'mongodb://localhost:27017',
+            )
+        );
+
+        $this->assertAttributeEquals($expected, 'resources', $this->object->getResourceManager());
+    }
+
 }

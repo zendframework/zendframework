@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -15,51 +14,55 @@ use Zend\Cache\Storage\Adapter\MongoDB;
 use Zend\Cache\Storage\Adapter\MongoDBOptions;
 
 /**
- * @requires extension mongo
+ * @group      Zend_Cache
  */
 class MongoDBTest extends CommonAdapterTest
 {
     public function setUp()
     {
-        if (!extension_loaded('mongo')) {
+        if (!defined('TESTS_ZEND_CACHE_MONGODB_ENABLED') || !TESTS_ZEND_CACHE_MONGODB_ENABLED) {
+            $this->markTestSkipped("Skipped by TestConfiguration (TESTS_ZEND_CACHE_MONGODB_ENABLED)");
+        }
+
+        if (!extension_loaded('mongo') || !class_exists('\Mongo') || !class_exists('\MongoClient')) {
+            // Allow tests to run if Mongo extension is loaded, or we have a polyfill in place
             $this->markTestSkipped("Mongo extension is not loaded");
         }
 
         $optionsArray = array(
-            'collection' => TESTS_ZEND_CACHE_MONGODB_COLLECTION,
-            'connectString' => TESTS_ZEND_CACHE_MONGODB_CONNECTSTRING,
-            'database' => TESTS_ZEND_CACHE_MONGODB_DATABASE,
+            'libOptions' => [
+                'collection' => TESTS_ZEND_CACHE_MONGODB_COLLECTION,
+                'database' => TESTS_ZEND_CACHE_MONGODB_DATABASE,
+                'server' => TESTS_ZEND_CACHE_MONGODB_CONNECTSTRING,
+            ]
         );
 
         $this->_options = new MongoDBOptions($optionsArray);
 
         $this->_storage = new MongoDB();
         $this->_storage->setOptions($this->_options);
+        $this->_storage->flush();
 
         parent::setUp();
     }
 
     public function tearDown()
     {
-        if (!extension_loaded('mongo')) {
-            $this->markTestSkipped("Mongo extension is not loaded");
+        if ($this->_storage) {
+            $this->_storage->flush();
         }
 
-        $mongo = new MongoClient(TESTS_ZEND_CACHE_MONGODB_CONNECTSTRING);
-
-        $database = TESTS_ZEND_CACHE_MONGODB_DATABASE;
-        $collection = TESTS_ZEND_CACHE_MONGODB_COLLECTION;
-
-        $collection = $mongo->selectCollection($database, $collection);
-        $collection->drop();
+        parent::tearDown();
     }
 
     public function testSetOptionsNotMongoDBOptions()
     {
         $options = array(
-            'collection' => TESTS_ZEND_CACHE_MONGODB_COLLECTION,
-            'connectString' => TESTS_ZEND_CACHE_MONGODB_CONNECTSTRING,
-            'database' => TESTS_ZEND_CACHE_MONGODB_DATABASE,
+            'libOptions' => [
+                'collection' => TESTS_ZEND_CACHE_MONGODB_COLLECTION,
+                'database' => TESTS_ZEND_CACHE_MONGODB_DATABASE,
+                'server' => TESTS_ZEND_CACHE_MONGODB_CONNECTSTRING,
+            ]
         );
 
         $this->_storage->setOptions($options);
@@ -81,5 +84,22 @@ class MongoDBTest extends CommonAdapterTest
         sleep($ttl * 2);
 
         $this->assertNull($this->_storage->getItem($key));
+    }
+
+    public function testFlush()
+    {
+        $key1 = 'foo';
+        $key2 = 'key';
+        $value1 = 'bar';
+        $value2 = 'value';
+
+        $this->assertEquals(array(), $this->_storage->setItems(array(
+            $key1 => $value1,
+            $key2 => $value2,
+        )));
+
+        $this->assertTrue($this->_storage->flush());
+
+        $this->assertEquals(array(), $this->_storage->hasItems(array($key1, $key2)));
     }
 }

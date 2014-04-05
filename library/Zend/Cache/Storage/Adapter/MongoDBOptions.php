@@ -12,92 +12,115 @@ namespace Zend\Cache\Storage\Adapter;
 class MongoDBOptions extends AdapterOptions
 {
     /**
-     * connectString
-     *
-     * @var null|string
+     * The namespace separator
+     * @var string
      */
-    protected $connectString;
+    protected $namespaceSeparator = ':';
 
     /**
-     * collection
+     * The redis resource manager
      *
-     * @var null|string
+     * @var null|RedisResourceManager
      */
-    protected $collection;
+    protected $resourceManager;
 
     /**
-     * database
+     * The resource id of the resource manager
      *
-     * @var null|string
+     * @var string
      */
-    protected $database;
+    protected $resourceId = 'default';
 
     /**
-     * setConnectString
+     * Set namespace separator
      *
-     * @param string $connectString
-     * @return $this
+     * @param  string $namespaceSeparator
+     * @return RedisOptions
      */
-    public function setConnectString($connectString)
+    public function setNamespaceSeparator($namespaceSeparator)
     {
-        $this->connectString = (string) $connectString;
-
+        $namespaceSeparator = (string) $namespaceSeparator;
+        if ($this->namespaceSeparator !== $namespaceSeparator) {
+            $this->triggerOptionEvent('namespace_separator', $namespaceSeparator);
+            $this->namespaceSeparator = $namespaceSeparator;
+        }
         return $this;
     }
 
     /**
-     * getConnectString
+     * Get namespace separator
      *
-     * @return null|string
+     * @return string
      */
-    public function getConnectString()
+    public function getNamespaceSeparator()
     {
-        return $this->connectString;
+        return $this->namespaceSeparator;
     }
 
     /**
-     * setCollection
+     * Set the mongodb resource manager to use
      *
-     * @param string $collection
-     * @return $this
+     * @param null|MongoDBResourceManager $resourceManager
+     * @return MongoDBOptions
      */
-    public function setCollection($collection)
+    public function setResourceManager(MongoDBResourceManager $resourceManager = null)
     {
-        $this->collection = (string) $collection;
-
+        if ($this->resourceManager !== $resourceManager) {
+            $this->triggerOptionEvent('resource_manager', $resourceManager);
+            $this->resourceManager = $resourceManager;
+        }
         return $this;
     }
 
     /**
-     * getCollection
+     * Get the mongodb resource manager
      *
-     * @return null|string
+     * @return MongoDBResourceManager
      */
-    public function getCollection()
+    public function getResourceManager()
     {
-        return $this->collection;
+        if (!$this->resourceManager) {
+            $this->resourceManager = new MongoDBResourceManager();
+        }
+        return $this->resourceManager;
     }
 
     /**
-     * setDatabase
+     * Get the mongodb resource id
      *
-     * @param string $database
-     * @return $this
+     * @return string
      */
-    public function setDatabase($database)
+    public function getResourceId()
     {
-        $this->database = (string) $database;
+        return $this->resourceId;
+    }
 
+    /**
+     * Set the redis resource id
+     *
+     * @param string $resourceId
+     * @return MongoDBOptions
+     */
+    public function setResourceId($resourceId)
+    {
+        $resourceId = (string) $resourceId;
+        if ($this->resourceId !== $resourceId) {
+            $this->triggerOptionEvent('resource_id', $resourceId);
+            $this->resourceId = $resourceId;
+        }
         return $this;
     }
 
     /**
-     * getDatabase
+     * set mongo options
      *
-     * @return null|string
+     * @param array $libOptions
+     * @return MongoDBOptions
      */
-    public function getDatabase()
+    public function setLibOptions(array $libOptions)
     {
-        return $this->database;
+        $this->triggerOptionEvent('lib_option', $libOptions);
+        $this->getResourceManager()->setLibOptions($this->getResourceId(), $libOptions);
+        return $this;
     }
 }

@@ -30,11 +30,11 @@ class MongoDBTest extends CommonAdapterTest
         }
 
         $optionsArray = array(
-            'libOptions' => [
+            'libOptions' => array(
                 'collection' => TESTS_ZEND_CACHE_MONGODB_COLLECTION,
                 'database' => TESTS_ZEND_CACHE_MONGODB_DATABASE,
                 'server' => TESTS_ZEND_CACHE_MONGODB_CONNECTSTRING,
-            ]
+            ),
         );
 
         $this->_options = new MongoDBOptions($optionsArray);
@@ -58,11 +58,11 @@ class MongoDBTest extends CommonAdapterTest
     public function testSetOptionsNotMongoDBOptions()
     {
         $options = array(
-            'libOptions' => [
+            'libOptions' => array(
                 'collection' => TESTS_ZEND_CACHE_MONGODB_COLLECTION,
                 'database' => TESTS_ZEND_CACHE_MONGODB_DATABASE,
                 'server' => TESTS_ZEND_CACHE_MONGODB_CONNECTSTRING,
-            ]
+            ),
         );
 
         $this->_storage->setOptions($options);

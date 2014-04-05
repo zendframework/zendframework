@@ -50,7 +50,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      * __construct
      *
      * @param mixed $options
-     * @throws \Zend\Cache\Exception\ExtensionNotLoadedException
+     * @throws Exception\ExtensionNotLoadedException
      */
     public function __construct($options = null)
     {
@@ -97,7 +97,6 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      *
      * @param  array|Traversable|MongoDBOptions $options
      * @return MongoDB
-     * @see    getOptions()
      */
     public function setOptions($options)
     {
@@ -112,7 +111,6 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      * Get options.
      *
      * @return MongoDBOptions
-     * @see setOptions()
      */
     public function getOptions()
     {
@@ -277,7 +275,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     /**
      * Internal method to get capabilities
      *
-     * @return void|\Zend\Cache\Storage\Capabilities
+     * @return void|Zend\Cache\Storage\Capabilities
      */
     protected function internalGetCapabilities()
     {

@@ -9,6 +9,7 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
+use DateTime;
 use MongoCollection as MongoDBResource;
 use MongoException as MongoDBResourceException;
 use MongoDate as MongoDBDateResource;
@@ -142,7 +143,7 @@ class MongoDBResourceManager
     {
         if ($timestamp === null) {
             $timestamp = time();
-        } elseif ($timestamp instanceof \DateTime) {
+        } elseif ($timestamp instanceof DateTime) {
             $timestamp = $timestamp->getTimestamp();
         }
 

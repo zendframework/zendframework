@@ -404,10 +404,13 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Count
      */
     public function unserialize($data)
     {
-        $ar = unserialize($data);
+        $ar                        = unserialize($data);
+        $this->protectedProperties = array_keys(get_object_vars($this));
+
         $this->setFlags($ar['flag']);
         $this->exchangeArray($ar['storage']);
         $this->setIteratorClass($ar['iteratorClass']);
+
         foreach ($ar as $k => $v) {
             switch ($k) {
                 case 'flag':

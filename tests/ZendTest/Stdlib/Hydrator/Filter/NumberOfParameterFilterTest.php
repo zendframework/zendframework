@@ -15,10 +15,12 @@ use Zend\Stdlib\Hydrator\Filter\NumberOfParameterFilter;
  * Unit tests for {@see \Zend\Stdlib\Hydrator\Filter\NumberOfParameterFilter}
  *
  * @covers \Zend\Stdlib\Hydrator\Filter\NumberOfParameterFilter
- * @group Zend_Stdlib
  */
 class NumberOfParameterFilterTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @group 6083
+     */
     public function testArityZero()
     {
         $filter = new NumberOfParameterFilter();
@@ -26,6 +28,9 @@ class NumberOfParameterFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($filter->filter(__CLASS__ . '::methodWithOptionalParameters'));
     }
 
+    /**
+     * @group 6083
+     */
     public function testArityOne()
     {
         $filter = new NumberOfParameterFilter(1);

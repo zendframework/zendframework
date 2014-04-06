@@ -36,20 +36,4 @@ class MapNamingStrategyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $namingStrategy->hydrate('foo'));
         $this->assertEquals('foo', $namingStrategy->extract('bar'));
     }
-
-    public function testMapSetters()
-    {
-        $namingStrategy = new MapNamingStrategy();
-
-        $this->assertEquals('foo', $namingStrategy->hydrate('foo'));
-        $this->assertEquals('bar', $namingStrategy->extract('bar'));
-
-        $namingStrategy->setHydrateMap(array('foo' => 'bar'));
-        $this->assertEquals('bar', $namingStrategy->hydrate('foo'));
-        $this->assertEquals('bar', $namingStrategy->extract('bar'));
-
-        $namingStrategy->setExtractMap(array('bar' => 'foo'));
-        $this->assertEquals('bar', $namingStrategy->hydrate('foo'));
-        $this->assertEquals('foo', $namingStrategy->extract('bar'));
-    }
 }

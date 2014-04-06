@@ -351,4 +351,15 @@ class ArrayObjectTest extends TestCase
         $this->assertSame($sorted, $ar->getArrayCopy());
     }
 
+    /**
+     * @group 6089
+     */
+    public function testSerializationRestoresProperties()
+    {
+        $ar        = new ArrayObject();
+        $ar->foo   = 'bar';
+        $ar['bar'] = 'foo';
+
+        $this->assertEquals($ar, unserialize(serialize($ar)));
+    }
 }

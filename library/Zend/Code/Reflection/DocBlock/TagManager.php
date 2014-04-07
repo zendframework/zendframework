@@ -10,7 +10,6 @@
 namespace Zend\Code\Reflection\DocBlock;
 
 use Zend\Code\Generic\Prototype\PrototypeClassFactory;
-use Zend\Code\Reflection\DocBlock\Tag\GenericTag;
 use Zend\Code\Reflection\DocBlock\Tag\TagInterface;
 
 class TagManager extends PrototypeClassFactory

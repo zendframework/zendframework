@@ -291,4 +291,17 @@ class FilesystemTest extends CommonAdapterTest
         $this->_storage->setItem('b_key', 'b_value');
         $this->_storage->clearByNamespace($this->_storage->getOptions()->getNamespace());
     }
+
+    public function testClearByPrefixWithUnexpectedDirectory()
+    {
+        // create cache items at 2 different directory levels
+        $this->_storage->getOptions()->setDirLevel(2);
+        $this->_storage->setItem('a_key', 'a_value');
+        $this->_storage->getOptions()->setDirLevel(1);
+        $this->_storage->setItem('b_key', 'b_value');
+        $glob = glob($this->_tmpCacheDir.'/*');
+        //contrived prefix which will collide with an existing directory
+        $prefix = substr(md5('a_key'), 2, 2);
+        $this->_storage->clearByPrefix($prefix);
+    }
 }

@@ -9,6 +9,7 @@
 namespace ZendTest\Di\Definition;
 
 use Zend\Di\Definition\ClassDefinition;
+use Zend\Di\Di;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class ClassDefinitionTest extends TestCase
@@ -76,5 +77,12 @@ class ClassDefinitionTest extends TestCase
             array('Foo::setVar:var' => array("var", null, true, 'test')),
             $definition->getMethodParameters("Foo", "setVar")
         );
+    }
+
+    public function testAddMethodSetsCorrectConstructorType()
+    {
+        $definition = new ClassDefinition('Foo');
+        $definition->addMethod('__construct');
+        $this->assertEquals(array('__construct' => Di::METHOD_IS_CONSTRUCTOR), $definition->getMethods('Foo'));
     }
 }

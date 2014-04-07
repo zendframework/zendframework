@@ -13,15 +13,7 @@ use Zend\Stdlib\Hydrator\NamingStrategy\MapNamingStrategy;
 
 class MapNamingStrategyTest extends \PHPUnit_Framework_TestCase
 {
-    public function testEmptyMap()
-    {
-        $namingStrategy = new MapNamingStrategy();
-
-        $this->assertEquals('foo', $namingStrategy->hydrate('foo'));
-        $this->assertEquals('bar', $namingStrategy->extract('bar'));
-    }
-
-    public function testFlippedMap()
+    public function testHydrateMap()
     {
         $namingStrategy = new MapNamingStrategy(array('foo' => 'bar'));
 
@@ -29,11 +21,14 @@ class MapNamingStrategyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $namingStrategy->extract('bar'));
     }
 
-    public function testSeparatedMaps()
+    public function testHydrateAndExtractMaps()
     {
-        $namingStrategy = new MapNamingStrategy(array('foo' => 'bar'), array('bar' => 'foo'));
+        $namingStrategy = new MapNamingStrategy(
+            array('foo' => 'foo-hydrated'),
+            array('bar' => 'bar-extracted')
+        );
 
-        $this->assertEquals('bar', $namingStrategy->hydrate('foo'));
-        $this->assertEquals('foo', $namingStrategy->extract('bar'));
+        $this->assertEquals('foo-hydrated', $namingStrategy->hydrate('foo'));
+        $this->assertEquals('bar-extracted', $namingStrategy->extract('bar'));
     }
 }

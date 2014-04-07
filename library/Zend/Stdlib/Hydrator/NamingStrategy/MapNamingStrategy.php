@@ -31,17 +31,10 @@ class MapNamingStrategy implements NamingStrategyInterface
      * @param array $hydrateMap Map for extract name converion.
      * @param array $extractMap Map for hydrate name converion.
      */
-    public function __construct(array $hydrateMap = null, array $extractMap = null)
+    public function __construct(array $hydrateMap, array $extractMap = null)
     {
-        if (null !== $hydrateMap) {
-            $this->hydrateMap = $hydrateMap;
-            if (null === $extractMap) {
-                $this->extractMap = array_flip($hydrateMap);
-            }
-        }
-        if (null !== $extractMap) {
-            $this->extractMap = $extractMap;
-        }
+        $this->hydrateMap = $hydrateMap;
+        $this->extractMap = (null !== $extractMap) ? $extractMap : array_flip($hydrateMap);
     }
 
     /**

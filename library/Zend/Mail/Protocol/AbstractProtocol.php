@@ -326,9 +326,6 @@ abstract class AbstractProtocol
     protected function _expect($code, $timeout = null)
     {
         $this->response = array();
-        $cmd  = '';
-        $more = '';
-        $msg  = '';
         $errMsg = '';
 
         if (!is_array($code)) {

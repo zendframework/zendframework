@@ -12,7 +12,7 @@ namespace Zend\Session\Service;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Session\Storage\Exception as SessionException;
+use Zend\Session\Exception\ExceptionInterface as SessionException;
 use Zend\Session\Storage\Factory;
 use Zend\Session\Storage\StorageInterface;
 

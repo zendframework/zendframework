@@ -60,7 +60,7 @@ class ExtensionManager implements ExtensionManagerInterface
      * Get the named extension
      *
      * @param  string $name
-     * @return Extension\AbstractEntry|Extension\AbstractFeed
+     * @return Extension\AbstractRenderer
      */
     public function get($name)
     {

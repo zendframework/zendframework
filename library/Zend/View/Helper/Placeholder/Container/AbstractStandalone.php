@@ -365,7 +365,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
     /**
      * IteratorAggregate: get Iterator
      *
-     * @return Iterator
+     * @return \Iterator
      */
     public function getIterator()
     {

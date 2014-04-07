@@ -46,7 +46,7 @@ interface LabelAwareInterface
      *
      * Implementation will decide if this will overwrite or merge.
      *
-     * @param  array|Traversable $arrayOrTraversable
+     * @param  array|\Traversable $arrayOrTraversable
      * @return self
      */
     public function setLabelOptions($arrayOrTraversable);

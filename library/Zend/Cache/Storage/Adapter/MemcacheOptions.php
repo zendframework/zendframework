@@ -197,7 +197,7 @@ class MemcacheOptions extends AdapterOptions
     /**
      * Set compress threshold
      *
-     * @param  int|string|array|ArrayAccess|null $threshold
+     * @param  int|string|array|\ArrayAccess|null $threshold
      * @return MemcacheOptions
      */
     public function setAutoCompressThreshold($threshold)

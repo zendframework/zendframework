@@ -67,7 +67,6 @@ abstract class AbstractWriter implements WriterInterface
      * - formatter: formatter for this writer
      *
      * @param  array|Traversable $options
-     * @return Logger
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)

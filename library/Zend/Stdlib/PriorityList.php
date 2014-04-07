@@ -244,7 +244,7 @@ class PriorityList implements Iterator, Countable
     /**
      * Return list as array
      *
-     * @param type $raw
+     * @param int $flag
      * @return array
      */
     public function toArray($flag = self::EXTR_DATA)

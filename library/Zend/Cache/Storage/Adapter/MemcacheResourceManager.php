@@ -9,6 +9,7 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
+use ArrayAccess;
 use Memcache as MemcacheResource;
 use Traversable;
 use Zend\Cache\Exception;

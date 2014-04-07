@@ -10,6 +10,7 @@
 namespace Zend\Filter;
 
 use Countable;
+use Traversable;
 use Zend\Stdlib\PriorityQueue;
 
 class FilterChain extends AbstractFilter implements Countable
@@ -52,7 +53,7 @@ class FilterChain extends AbstractFilter implements Countable
      */
     public function setOptions($options)
     {
-        if (!is_array($options) && !$options instanceof \Traversable) {
+        if (!is_array($options) && !$options instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Expected array or Traversable; received "%s"',
                 (is_object($options) ? get_class($options) : gettype($options))

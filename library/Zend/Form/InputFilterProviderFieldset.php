@@ -9,6 +9,7 @@
 
 namespace Zend\Form;
 
+use Traversable;
 use Zend\InputFilter\InputFilterProviderInterface;
 
 class InputFilterProviderFieldset extends Fieldset implements InputFilterProviderInterface

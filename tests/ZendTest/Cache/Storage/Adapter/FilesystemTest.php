@@ -281,7 +281,7 @@ class FilesystemTest extends CommonAdapterTest
         $expectedAtime = fileatime($meta['filespec'] . '.dat');
         $this->assertEquals($expectedAtime, $meta['atime']);
     }
-    
+
     public function testClearByNamespaceWithUnexpectedDirectory()
     {
         // create cache items at 2 different directory levels

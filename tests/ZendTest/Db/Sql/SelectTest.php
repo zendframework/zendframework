@@ -630,18 +630,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF2-6082
-     */
-    public function testSelectUsingExpressionOnJoin()
-    {
-        $select = new Select;
-        $select->from(new TableIdentifier('foo'));
-        $select->join(array('bar' => new Expression('psql_function_which_returns_table')), 'foo.id = bar.fooid');
-
-        $this->assertEquals('SELECT "foo".*, "bar".* FROM "foo" INNER JOIN psql_function_which_returns_table AS "bar" ON "foo"."id" = "bar"."fooid"', $select->getSqlString(new TrustingSql92Platform()));
-    }
-
-    /**
      * @testdox unit test: Test getSqlString() will produce expected sql and parameters based on a variety of provided arguments [uses data provider]
      * @covers Zend\Db\Sql\Select::getSqlString
      * @dataProvider providerData
@@ -1235,6 +1223,17 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processCombine' => null,
         );
 
+        //Expression as joinName
+        $select49 = new Select;
+        $select49->from(new TableIdentifier('foo'))
+                ->join(array('bar' => new Expression('psql_function_which_returns_table')), 'foo.id = bar.fooid');
+        $sqlPrep49 = // same
+        $sqlStr49 = 'SELECT "foo".*, "bar".* FROM "foo" INNER JOIN psql_function_which_returns_table AS "bar" ON "foo"."id" = "bar"."fooid"';
+        $internalTests49 = array(
+            'processSelect' => array(array(array('"foo".*'), array('"bar".*')), '"foo"'),
+            'processJoins' => array(array(array('INNER', 'psql_function_which_returns_table AS "bar"', '"foo"."id" = "bar"."fooid"')))
+        );
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -1294,6 +1293,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select46, $sqlPrep46, $params46,  $sqlStr46, $internalTests46),
             array($select47, $sqlPrep47, $params47,  $sqlStr47, $internalTests47),
             array($select48, $sqlPrep48, array(),    $sqlStr48, $internalTests48),
+            array($select49, $sqlPrep49, array(),    $sqlStr49, $internalTests49),
         );
     }
 }

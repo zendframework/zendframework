@@ -10,6 +10,8 @@
 namespace ZendTest\Cache\Storage\Adapter;
 
 use Zend\Cache;
+use Zend\Cache\Storage\Plugin\ExceptionHandler;
+use Zend\Cache\Storage\Plugin\PluginOptions;
 
 /**
  * @group      Zend_Cache
@@ -292,8 +294,8 @@ class FilesystemTest extends CommonAdapterTest
         }
         chmod($dirs[0], 0500); //make directory rx, unlink should fail
         sleep(1); //wait for the entry to expire
-        $plugin = new \Zend\Cache\Storage\Plugin\ExceptionHandler();
-        $options = new Cache\Storage\Plugin\PluginOptions(array('throw_exceptions' => true));
+        $plugin = new ExceptionHandler();
+        $options = new PluginOptions(array('throw_exceptions' => false));
         $plugin->setOptions($options);
         $this->_storage->addPlugin($plugin);
         $this->_storage->clearExpired();

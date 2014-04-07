@@ -18,14 +18,14 @@ class MapNamingStrategy implements NamingStrategyInterface
     const MAP_BOTH    = 'both';
 
     /**
-     * Map for extract name converion.
+     * Map for extract name conversion.
      *
      * @var array
      */
     protected $extractMap = array();
 
     /**
-     * Map for hydrate name converion.
+     * Map for hydrate name conversion.
      *
      * @var array
      */

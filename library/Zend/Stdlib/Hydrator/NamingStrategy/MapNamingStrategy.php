@@ -9,8 +9,14 @@
 
 namespace Zend\Stdlib\Hydrator\NamingStrategy;
 
+use Zend\Stdlib\Exception\InvalidArgumentException;
+
 class MapNamingStrategy implements NamingStrategyInterface
 {
+    const MAP_HYDRATE = 'hydrate';
+    const MAP_EXTRACT = 'extract';
+    const MAP_BOTH    = 'both';
+
     /**
      * Map for extract name converion.
      *
@@ -28,13 +34,54 @@ class MapNamingStrategy implements NamingStrategyInterface
     /**
      * Initialize.
      *
-     * @param array $hydrateMap Map for extract name converion.
-     * @param array $extractMap Map for hydrate name converion.
+     * @param array $hydrateMap
+     * @param array $extractMap
      */
     public function __construct(array $hydrateMap, array $extractMap = null)
     {
-        $this->hydrateMap = $hydrateMap;
-        $this->extractMap = (null !== $extractMap) ? $extractMap : array_flip($hydrateMap);
+        $type = (null === $extractMap) ? self::MAP_BOTH : self::MAP_HYDRATE;
+        foreach ($hydrateMap as $original => $resolved) {
+            $this->setMapping($original, $resolved, $type);
+        }
+
+        if (null !== $extractMap) {
+            foreach ($extractMap as $original => $resolved) {
+                $this->setMapping($original, $resolved, self::MAP_EXTRACT);
+            }
+        }
+    }
+
+    /**
+     * Set mapping.
+     *
+     * @param  string                   $original Original name.
+     * @param  string                   $resolved Resolved name.
+     * @param  string                   $map      Type of map.
+     * @throws InvalidArgumentException
+     */
+    protected function setMapping($original, $resolved, $map = self::MAP_BOTH)
+    {
+        if (!is_string($original) || !is_string($resolved)) {
+            throw new InvalidArgumentException('Map should contain only strings');
+        }
+
+        switch ($map) {
+            case self::MAP_HYDRATE:
+                    $this->hydrateMap[$original] = $resolved;
+                break;
+
+            case self::MAP_EXTRACT:
+                    $this->extractMap[$original] = $resolved;
+                break;
+
+            case self::MAP_BOTH:
+                    $this->extractMap[$resolved] = $original;
+                    $this->hydrateMap[$original] = $resolved;
+                break;
+
+            default:
+                throw new InvalidArgumentException("Unknown map type {$map}!");
+        }
     }
 
     /**

@@ -31,4 +31,16 @@ class MapNamingStrategyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo-hydrated', $namingStrategy->hydrate('foo'));
         $this->assertEquals('bar-extracted', $namingStrategy->extract('bar'));
     }
+
+    public function testInvalidMapValue()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        new MapNamingStrategy(array('foo' => 3.1415));
+    }
+
+    public function testInvalidMapKey()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        new MapNamingStrategy(array(3.1415 => 'bar'));
+    }
 }

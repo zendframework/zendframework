@@ -18,6 +18,9 @@
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-servicemanager": "self.version"
     },
+    "suggest": {
+        "ext-mcrypt": "Zend\\Crypt suggests to install ext-mcrypt"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.3-dev",

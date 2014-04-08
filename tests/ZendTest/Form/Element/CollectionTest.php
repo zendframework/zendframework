@@ -604,14 +604,22 @@ class CollectionTest extends TestCase
         $form->bind($market);
 
         //test for object binding
-        foreach ($form->get('collection')->getFieldsets() as $_shopFieldset) {
+        $_marketCollection = $form->get('collection');
+        $this->assertInstanceOf('Zend\Form\Element\Collection', $_marketCollection);
+
+        foreach ($_marketCollection as $_shopFieldset) {
+
+            $this->assertInstanceOf('Zend\Form\Fieldset', $_shopFieldset);
+            $this->assertInstanceOf('stdClass', $_shopFieldset->getObject());
 
             // test for collection -> fieldset
             $_productFieldset = $_shopFieldset->get('product');
             $this->assertInstanceOf('ZendTest\Form\TestAsset\ProductFieldset', $_productFieldset);
+            $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Product', $_productFieldset->getObject());
 
             // test for collection -> fieldset -> fieldset
             $this->assertInstanceOf('ZendTest\Form\TestAsset\CountryFieldset', $_productFieldset->get('made_in_country'));
+            $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Country', $_productFieldset->get('made_in_country')->getObject());
 
             // test for collection -> fieldset -> collection
             $_productCategories = $_productFieldset->get('categories');
@@ -620,10 +628,11 @@ class CollectionTest extends TestCase
             // test for collection -> fieldset -> collection -> fieldset
             foreach ($_productCategories as $_category) {
                 $this->assertInstanceOf('ZendTest\Form\TestAsset\CategoryFieldset', $_category);
+                $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Category', $_category->getObject());
             }
         };
 
-        //test for correct extract and populate
+        // test for correct extract and populate form values
         // test for collection -> fieldset -> field value
         foreach ($prices as $_k => $_price) {
             $this->assertEquals(

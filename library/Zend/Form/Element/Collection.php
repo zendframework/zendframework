@@ -528,7 +528,6 @@ class Collection extends Fieldset
                 }
             }
         }
-        
         return $values;
     }
 

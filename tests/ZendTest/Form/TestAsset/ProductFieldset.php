@@ -53,6 +53,16 @@ class ProductFieldset extends Fieldset implements InputFilterProviderInterface
                 )
             )
         ));
+
+        $this->add(array(
+            'type' => 'ZendTest\Form\TestAsset\CountryFieldset',
+            'name' => 'made_in_country',
+            'object' => 'ZendTest\Form\TestAsset\Entity\Country',
+            'hydrator' => 'Zend\Stdlib\Hydrator\ClassMethods',
+            'options' => array(
+                'label' => 'Please choose the country',
+            )
+        ));
     }
 
     /**
@@ -74,7 +84,10 @@ class ProductFieldset extends Fieldset implements InputFilterProviderInterface
                         'name' => 'Float'
                     )
                 )
-            )
+            ),
+            'made_in_country' => array(
+                'required' => false,
+            ),
         );
     }
 }

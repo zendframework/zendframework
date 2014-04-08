@@ -494,6 +494,10 @@ class Collection extends Fieldset
 
     /**
      * @return array
+     * @throws \Zend\Form\Exception\InvalidArgumentException
+     * @throws \Zend\Stdlib\Exception\InvalidArgumentException
+     * @throws \Zend\Form\Exception\DomainException
+     * @throws \Zend\Form\Exception\InvalidElementException
      */
     public function extract()
     {
@@ -525,6 +529,8 @@ class Collection extends Fieldset
             }
         }
 
+        /** @var $fieldset Fieldset */
+/*
         foreach ($values as $name => $object) {
             $fieldset = $this->addNewTargetElementInstance($name);
 
@@ -532,7 +538,7 @@ class Collection extends Fieldset
                 $fieldset->setObject($object);
                 $values[$name] = $fieldset->extract();
             } else {
-                foreach ($fieldset->fieldsets as $childFieldset) {
+                foreach ($fieldset->getFieldsets() as $childFieldset) {
                     $childName = $childFieldset->getName();
                     if (isset($object[$childName])) {
                         $childObject = $object[$childName];
@@ -544,7 +550,7 @@ class Collection extends Fieldset
                 }
             }
         }
-
+*/
         return $values;
     }
 

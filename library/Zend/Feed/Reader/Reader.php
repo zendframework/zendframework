@@ -192,7 +192,6 @@ class Reader
     {
         $cache       = self::getCache();
         $feed        = null;
-        $responseXml = '';
         $client      = self::getHttpClient();
         $client->resetParameters();
         $headers = new ZendHttp\Headers();

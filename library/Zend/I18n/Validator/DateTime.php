@@ -272,7 +272,7 @@ class DateTime extends AbstractValidator
         }
 
         $position   = 0;
-        $parsedDate = $formatter->parse($value, $position);
+        $formatter->parse($value, $position);
 
         if (intl_is_failure($formatter->getErrorCode())) {
             $this->error(self::INVALID_DATETIME);

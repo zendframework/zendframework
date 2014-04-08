@@ -73,7 +73,6 @@ class SessionConfig extends StandardConfig
      */
     public function setStorageOption($storageName, $storageValue)
     {
-        $key = false;
         switch ($storageName) {
             case 'remember_me_seconds':
                 // do nothing; not an INI option

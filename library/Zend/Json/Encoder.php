@@ -322,7 +322,6 @@ class Encoder
 
             if ('__construct' != $method->getName()) {
                 $parameters  = $method->getParameters();
-                $paramCount  = count($parameters);
                 $argsStarted = false;
 
                 $argNames = "var argNames=[";

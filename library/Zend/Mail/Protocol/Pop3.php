@@ -251,8 +251,8 @@ class Pop3
             }
         }
 
-        $result = $this->request("USER $user");
-        $result = $this->request("PASS $password");
+        $this->request("USER $user");
+        $this->request("PASS $password");
     }
 
 

@@ -12,7 +12,6 @@ namespace Zend\Mvc\Service;
 use Zend\ServiceManager\Di\DiServiceInitializer;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceManager;
 
 class DiServiceInitializerFactory implements FactoryInterface
 {

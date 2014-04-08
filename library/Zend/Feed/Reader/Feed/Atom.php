@@ -383,7 +383,6 @@ class Atom extends AbstractFeed
     {
         if ($this->getType() == Reader\Reader::TYPE_ATOM_10 ||
             $this->getType() == Reader\Reader::TYPE_ATOM_03) {
-            $entries = array();
             $entries = $this->xpath->evaluate('//atom:entry');
 
             foreach ($entries as $index => $entry) {

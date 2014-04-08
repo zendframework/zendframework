@@ -368,7 +368,6 @@ class Escaper
      */
     protected function convertEncoding($string, $to, $from)
     {
-        $result = '';
         if (function_exists('iconv')) {
             $result = iconv($from, $to, $string);
         } elseif (function_exists('mb_convert_encoding')) {

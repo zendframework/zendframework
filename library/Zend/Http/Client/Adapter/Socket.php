@@ -509,7 +509,6 @@ class Socket implements HttpAdapter, StreamInterface
             $contentLength = $contentLength->getFieldValue();
 
             $currentPos = ftell($this->socket);
-            $chunk = '';
 
             for ($readTo = $currentPos + $contentLength;
                  $readTo > $currentPos;

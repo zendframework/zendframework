@@ -487,7 +487,6 @@ class Request extends HttpRequest
      */
     protected function detectBaseUrl()
     {
-        $baseUrl        = '';
         $filename       = $this->getServer()->get('SCRIPT_FILENAME', '');
         $scriptName     = $this->getServer()->get('SCRIPT_NAME');
         $phpSelf        = $this->getServer()->get('PHP_SELF');

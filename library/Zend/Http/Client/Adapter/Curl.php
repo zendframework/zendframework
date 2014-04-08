@@ -10,10 +10,8 @@
 namespace Zend\Http\Client\Adapter;
 
 use Traversable;
-use Zend\Http\Client;
 use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
 use Zend\Http\Client\Adapter\Exception as AdapterException;
-use Zend\Http\Request;
 use Zend\Stdlib\ArrayUtils;
 
 /**

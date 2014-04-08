@@ -19,7 +19,7 @@
         "zendframework/zend-servicemanager": "self.version"
     },
     "suggest": {
-        "ext-mcrypt": "Zend\\Crypt suggests to install ext-mcrypt"
+        "ext-mcrypt": "Required for most features of Zend\\Crypt"
     },
     "extra": {
         "branch-alias": {

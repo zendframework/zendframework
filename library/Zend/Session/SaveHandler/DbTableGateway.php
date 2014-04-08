@@ -164,10 +164,9 @@ class DbTableGateway implements SaveHandlerInterface
     public function gc($maxlifetime)
     {
         $platform = $this->tableGateway->getAdapter()->getPlatform();
-        return (bool) $this->tableGateway->delete(sprintf('%s + %s < %d',
+        return (bool) $this->tableGateway->delete(sprintf('%s < %d',
             $platform->quoteIdentifier($this->options->getModifiedColumn()),
-            $platform->quoteIdentifier($this->options->getLifetimeColumn()),
-            time()
+            (time() - $this->lifetime)
         ));
     }
 }

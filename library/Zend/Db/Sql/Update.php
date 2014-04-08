@@ -115,7 +115,7 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      * @param  Where|\Closure|string|array $predicate
      * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
      * @throws Exception\InvalidArgumentException
-     * @return Select
+     * @return Update
      */
     public function where($predicate, $combination = Predicate\PredicateSet::OP_AND)
     {

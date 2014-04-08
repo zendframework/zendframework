@@ -172,7 +172,7 @@ class Collection extends Fieldset
         }
 
         $this->object = $object;
-        $this->count  = count($object);
+        $this->count = count($object);
 
         return $this;
     }
@@ -202,9 +202,9 @@ class Collection extends Fieldset
 
         if (!$this->allowRemove && count($data) < $this->count) {
             throw new Exception\DomainException(sprintf(
-                'There are fewer elements than specified in the collection (%s). Either set the allow_remove option ' .
-                'to true, or re-submit the form.',
-                get_class($this)
+                    'There are fewer elements than specified in the collection (%s). Either set the allow_remove option ' .
+                    'to true, or re-submit the form.',
+                    get_class($this)
                 )
             );
         }
@@ -350,7 +350,7 @@ class Collection extends Fieldset
      */
     public function setAllowAdd($allowAdd)
     {
-        $this->allowAdd = (bool) $allowAdd;
+        $this->allowAdd = (bool)$allowAdd;
         return $this;
     }
 
@@ -370,7 +370,7 @@ class Collection extends Fieldset
      */
     public function setAllowRemove($allowRemove)
     {
-        $this->allowRemove = (bool) $allowRemove;
+        $this->allowRemove = (bool)$allowRemove;
         return $this;
     }
 
@@ -390,7 +390,7 @@ class Collection extends Fieldset
      */
     public function setShouldCreateTemplate($shouldCreateTemplate)
     {
-        $this->shouldCreateTemplate = (bool) $shouldCreateTemplate;
+        $this->shouldCreateTemplate = (bool)$shouldCreateTemplate;
 
         return $this;
     }
@@ -436,7 +436,7 @@ class Collection extends Fieldset
      */
     public function setCreateNewObjects($createNewObjects)
     {
-        $this->createNewObjects = (bool) $createNewObjects;
+        $this->createNewObjects = (bool)$createNewObjects;
         return $this;
     }
 
@@ -528,29 +528,7 @@ class Collection extends Fieldset
                 }
             }
         }
-
-        /** @var $fieldset Fieldset */
-/*
-        foreach ($values as $name => $object) {
-            $fieldset = $this->addNewTargetElementInstance($name);
-
-            if ($fieldset->allowObjectBinding($object)) {
-                $fieldset->setObject($object);
-                $values[$name] = $fieldset->extract();
-            } else {
-                foreach ($fieldset->getFieldsets() as $childFieldset) {
-                    $childName = $childFieldset->getName();
-                    if (isset($object[$childName])) {
-                        $childObject = $object[$childName];
-                        if ($childFieldset->allowObjectBinding($childObject)) {
-                            $childFieldset->setObject($childObject);
-                            $values[$name][$childName] = $childFieldset->extract();
-                        }
-                    }
-                }
-            }
-        }
-*/
+        
         return $values;
     }
 

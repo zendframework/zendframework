@@ -378,7 +378,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that POST data with mutli-dimentional array is properly encoded as
+     * Test that POST data with multi-dimentional array is properly encoded as
      * multipart/form-data
      *
      */

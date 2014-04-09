@@ -21,6 +21,7 @@ class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
         return array(
             array('7bit'),
             array('8bit'),
+            array('binary'),
             array('quoted-printable'),
         );
     }
@@ -29,7 +30,6 @@ class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('9bit'),
-            array('binary'),
             array('x-something'),
         );
     }

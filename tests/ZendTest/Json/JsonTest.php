@@ -553,7 +553,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Regression tests for Zend_JSON_Expr and mutliple keys with the same name.
+     * Regression tests for Zend_JSON_Expr and multiple keys with the same name.
      *
      * @group ZF-4946
      */
@@ -582,7 +582,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Regression tests for Zend_JSON_Expr and mutliple keys with the same name.
+     * Regression tests for Zend\Json\Expr and multiple keys with the same name.
      *
      * @group ZF-4946
      */

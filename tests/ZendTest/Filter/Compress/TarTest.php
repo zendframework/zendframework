@@ -222,12 +222,12 @@ class TarTest extends \PHPUnit_Framework_TestCase
         $filter = new TarCompression;
         $filter->setTarget(dirname(__DIR__).'/_files/zipextracted.txt');
 
-        foreach(array('GZ', 'Bz2') as $mode) {
+        foreach (array('GZ', 'Bz2') as $mode) {
             $archive = dirname(__DIR__).'/_files/compressed.tar.'.strtolower($mode);
             $filter->setArchive($archive);
             $filter->setMode($mode);
             $content = $filter->compress('compress me');
-            $this->assertEquals($archive, $content);   
+            $this->assertEquals($archive, $content);
         }
     }
 

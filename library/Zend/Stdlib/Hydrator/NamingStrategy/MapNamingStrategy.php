@@ -13,23 +13,19 @@ use Zend\Stdlib\Exception\InvalidArgumentException;
 
 class MapNamingStrategy implements NamingStrategyInterface
 {
-    const MAP_HYDRATE = 'hydrate';
-    const MAP_EXTRACT = 'extract';
-    const MAP_BOTH    = 'both';
-
-    /**
-     * Map for extract name conversion.
-     *
-     * @var array
-     */
-    protected $extractMap = array();
-
     /**
      * Map for hydrate name conversion.
      *
      * @var array
      */
-    protected $hydrateMap = array();
+    protected $mapping = array();
+
+    /**
+     * Reversed map for extract name conversion.
+     *
+     * @var array
+     */
+    protected $reverse = array();
 
     /**
      * Initialize.
@@ -37,51 +33,27 @@ class MapNamingStrategy implements NamingStrategyInterface
      * @param array $hydrateMap
      * @param array $extractMap
      */
-    public function __construct(array $hydrateMap, array $extractMap = null)
+    public function __construct(array $mapping, array $reverse = null)
     {
-        $type = (null === $extractMap) ? self::MAP_BOTH : self::MAP_HYDRATE;
-        foreach ($hydrateMap as $original => $resolved) {
-            $this->setMapping($original, $resolved, $type);
-        }
-
-        if (null !== $extractMap) {
-            foreach ($extractMap as $original => $resolved) {
-                $this->setMapping($original, $resolved, self::MAP_EXTRACT);
-            }
-        }
+        $this->mapping = $mapping;
+        $this->reverse = $reverse ?: $this->flipMapping($mapping);
     }
 
     /**
-     * Set mapping.
+     * Safelly flip mapping array.
      *
-     * @param  string                   $original Original name.
-     * @param  string                   $resolved Resolved name.
-     * @param  string                   $map      Type of map.
+     * @param array $array Array to flip
+     * @return array Flipped array
      * @throws InvalidArgumentException
      */
-    protected function setMapping($original, $resolved, $map = self::MAP_BOTH)
+    protected function flipMapping(array $array)
     {
-        if (!is_string($original) || !is_string($resolved)) {
-            throw new InvalidArgumentException('Map should contain only strings');
-        }
-
-        switch ($map) {
-            case self::MAP_HYDRATE:
-                    $this->hydrateMap[$original] = $resolved;
-                break;
-
-            case self::MAP_EXTRACT:
-                    $this->extractMap[$original] = $resolved;
-                break;
-
-            case self::MAP_BOTH:
-                    $this->extractMap[$resolved] = $original;
-                    $this->hydrateMap[$original] = $resolved;
-                break;
-
-            default:
-                throw new InvalidArgumentException("Unknown map type {$map}!");
-        }
+        array_walk($array, function($value) {
+            if (!is_string($value) && !is_int($value)) {
+                throw new InvalidArgumentException('Mapping array can\'t be flipped because of invalid value');
+            }
+        });
+        return array_flip($array);
     }
 
     /**
@@ -92,8 +64,8 @@ class MapNamingStrategy implements NamingStrategyInterface
      */
     public function hydrate($name)
     {
-        if (isset($this->hydrateMap[$name])) {
-            $name = $this->hydrateMap[$name];
+        if (array_key_exists($name, $this->mapping)) {
+            return $this->mapping[$name];
         }
 
         return $name;
@@ -107,8 +79,8 @@ class MapNamingStrategy implements NamingStrategyInterface
      */
     public function extract($name)
     {
-        if (isset($this->extractMap[$name])) {
-            $name = $this->extractMap[$name];
+        if (array_key_exists($name, $this->reverse)) {
+            return $this->reverse[$name];
         }
 
         return $name;

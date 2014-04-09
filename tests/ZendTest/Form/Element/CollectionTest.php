@@ -422,7 +422,7 @@ class CollectionTest extends TestCase
         $this->assertNotSame($categories[1], $cat2);
     }
 
-    public function testCreateExtraCollectionFieldsetOnMultipleBind()
+    public function testDoNotCreateExtraFieldsetOnMultipleBind()
     {
         $form = new \Zend\Form\Form();
         $this->productFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());

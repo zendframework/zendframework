@@ -40,6 +40,8 @@ class ContentType implements HeaderInterface
         $header = new static();
         $header->setType($type);
 
+        $values = array_filter($values);
+
         if (count($values)) {
             foreach ($values as $keyValuePair) {
                 list($key, $value) = explode('=', $keyValuePair, 2);

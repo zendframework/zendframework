@@ -422,6 +422,30 @@ class CollectionTest extends TestCase
         $this->assertNotSame($categories[1], $cat2);
     }
 
+    public function testCreateExtraCollectionFieldsetOnMultipleBind()
+    {
+        $form = new \Zend\Form\Form();
+        $this->productFieldset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+        $form->add($this->productFieldset);
+        $form->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
+
+        $product = new Product();
+        $categories = array(new \ZendTest\Form\TestAsset\Entity\Category(), new \ZendTest\Form\TestAsset\Entity\Category());
+        $product->setCategories($categories);
+
+        $market = new \StdClass();
+        $market->product = $product;
+
+        // this will pass the test
+        $form->bind($market);
+        $this->assertSame(count($categories), iterator_count($form->get('product')->get('categories')->getIterator()));
+
+        // this won't pass, but must
+        $form->bind($market);
+        $this->assertSame(count($categories), iterator_count($form->get('product')->get('categories')->getIterator()));
+
+    }
+
     public function testExtractDefaultIsEmptyArray()
     {
         $collection = $this->form->get('fieldsets');

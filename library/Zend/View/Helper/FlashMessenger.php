@@ -145,7 +145,8 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
             }
             $classes = array($classes);
         }
-        if (is_null($autoEscape)) {
+
+        if (null === $autoEscape) {
             $autoEscape = $this->getAutoEscape();
         }
 

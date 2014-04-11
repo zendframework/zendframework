@@ -42,6 +42,13 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     protected $messageSeparatorString = '</li><li>';
 
     /**
+     * Flag whether to escape messages
+     *
+     * @var bool
+     */
+    protected $autoEscape = true;
+
+    /**
      * Html escape helper
      *
      * @var EscapeHtml
@@ -94,15 +101,16 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Render Messages
      *
-     * @param  string $namespace
-     * @param  array  $classes
+     * @param  string    $namespace
+     * @param  array     $classes
+     * @param  null|bool $autoEscape
      * @return string
      */
-    public function render($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $classes = array())
+    public function render($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $classes = array(), $autoEscape = null)
     {
         $flashMessenger = $this->getPluginFlashMessenger();
         $messages = $flashMessenger->getMessagesFromNamespace($namespace);
-        return $this->renderMessages($namespace, $messages, $classes);
+        return $this->renderMessages($namespace, $messages, $classes, $autoEscape);
     }
 
     /**
@@ -112,11 +120,11 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
      * @param  array  $classes
      * @return string
      */
-    public function renderCurrent($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $classes = array())
+    public function renderCurrent($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $classes = array(), $autoEscape = null)
     {
         $flashMessenger = $this->getPluginFlashMessenger();
         $messages = $flashMessenger->getCurrentMessagesFromNamespace($namespace);
-        return $this->renderMessages($namespace, $messages, $classes);
+        return $this->renderMessages($namespace, $messages, $classes, $autoEscape);
     }
 
     /**
@@ -126,7 +134,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
      * @param  array $classes
      * @return string
      */
-    protected function renderMessages($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $messages = array(), array $classes = array())
+    protected function renderMessages($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $messages = array(), array $classes = array(), $autoEscape = null)
     {
         // Prepare classes for opening tag
         if (empty($classes)) {
@@ -137,19 +145,28 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
             }
             $classes = array($classes);
         }
+        if (is_null($autoEscape)) {
+            $autoEscape = $this->getAutoEscape();
+        }
+
         // Flatten message array
         $escapeHtml      = $this->getEscapeHtmlHelper();
         $messagesToPrint = array();
         $translator = $this->getTranslator();
         $translatorTextDomain = $this->getTranslatorTextDomain();
-        array_walk_recursive($messages, function ($item) use (&$messagesToPrint, $escapeHtml, $translator, $translatorTextDomain) {
+        array_walk_recursive($messages, function ($item) use (&$messagesToPrint, $escapeHtml, $autoEscape, $translator, $translatorTextDomain) {
             if ($translator !== null) {
                 $item = $translator->translate(
                     $item,
                     $translatorTextDomain
                 );
             }
-            $messagesToPrint[] = $escapeHtml($item);
+
+            if ($autoEscape) {
+                $messagesToPrint[] = $escapeHtml($item);
+            } else {
+                $messagesToPrint[] = $item;
+            }
         });
         if (empty($messagesToPrint)) {
             return '';
@@ -159,6 +176,28 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
         $markup .= implode(sprintf($this->getMessageSeparatorString(), ' class="' . implode(' ', $classes) . '"'), $messagesToPrint);
         $markup .= $this->getMessageCloseString();
         return $markup;
+    }
+
+    /**
+     * Set whether or not auto escaping should be used
+     *
+     * @param  bool $autoEscape
+     * @return self
+     */
+    public function setAutoEscape($autoEscape = true)
+    {
+        $this->autoEscape = (bool) $autoEscape;
+        return $this;
+    }
+
+    /**
+     * Return whether auto escaping is enabled or disabled
+     *
+     * return bool
+     */
+    public function getAutoEscape()
+    {
+        return $this->autoEscape;
     }
 
     /**

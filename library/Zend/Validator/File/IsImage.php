@@ -13,7 +13,7 @@ use Traversable;
 use Zend\Stdlib\ArrayUtils;
 
 /**
- * Validator which checks if the file already exists in the directory
+ * Validator which checks if the file is an image
  */
 class IsImage extends MimeType
 {

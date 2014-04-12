@@ -194,7 +194,7 @@ class Image extends AbstractRenderer
         $barcodeWidth  = $this->barcode->getWidth(true);
         $barcodeHeight = $this->barcode->getHeight(true);
 
-        if (is_null($this->resource)) {
+        if (null === $this->resource) {
             $width = $barcodeWidth;
             $height = $barcodeHeight;
             if ($this->userWidth && $this->barcode->getType() != 'error') {

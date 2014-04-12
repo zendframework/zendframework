@@ -230,7 +230,7 @@ abstract class AbstractRestfulController extends AbstractController
     }
 
     /**
-     * Modify a resource collection withou completely replacing it
+     * Modify a resource collection without completely replacing it
      *
      * Not marked as abstract, as that would introduce a BC break
      * (introduced in 2.2.0); instead, raises an exception if not implemented.

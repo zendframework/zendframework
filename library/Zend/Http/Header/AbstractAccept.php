@@ -441,7 +441,9 @@ abstract class AbstractAccept implements HeaderInterface
             //@todo count number of dots in case of type==application in subtype
 
             // So far they're still the same. Longest string length may be more specific
-            if (strlen($a->raw) == strlen($b->raw)) return 0;
+            if (strlen($a->raw) == strlen($b->raw)) {
+                return 0;
+            }
             return (strlen($a->raw) > strlen($b->raw)) ? -1 : 1;
         };
 

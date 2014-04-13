@@ -37,7 +37,7 @@ class ApacheResolverTest extends \PHPUnit_Framework_TestCase
      * @var string
      */
     protected $_badPath;
-    
+
     /**
      * Sets the paths to files used in this test, and creates a shared resolver instance
      * having a valid path.

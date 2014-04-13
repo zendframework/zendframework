@@ -74,7 +74,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      * Determine system TMP directory
      *
      * @return string
-     * @throws Zend\File\Transfer\Exception if unable to determine directory
+     * @throws \Zend\File\Transfer\Exception\RuntimeException if unable to determine directory
      */
     protected function getTmpDir()
     {

@@ -69,7 +69,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Zend_XmlRpc_Server_Fault::detachFaultException() test
+     * Zend\XmlRpc\Server\Fault::detachFaultException() test
      */
     public function testDetachFaultException()
     {
@@ -106,7 +106,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Zend_XmlRpc_Server_Fault::attachObserver() test
+     * Zend\XmlRpc\Server\Fault::attachObserver() test
      */
     public function testAttachObserver()
     {

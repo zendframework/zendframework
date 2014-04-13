@@ -13,7 +13,7 @@ use Zend\View\Helper;
 use Zend\View;
 
 /**
- * Test class for Zend_View_Helper_HeadScript.
+ * Test class for Zend\View\Helper\HeadScript.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -21,7 +21,7 @@ use Zend\View;
 class HeadScriptTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HeadScript
+     * @var Helper\HeadScript
      */
     public $helper;
 

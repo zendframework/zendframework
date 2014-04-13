@@ -23,8 +23,8 @@ use Zend\XmlRpc;
 class ServerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_XmlRpc_Server object
-     * @var Zend_XmlRpc_Server
+     * Zend\XmlRpc\Server object
+     * @var Zend\XmlRpc\Server
      */
     protected $_server;
 

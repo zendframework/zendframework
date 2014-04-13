@@ -58,10 +58,10 @@ class Zend_Soap_Wsdl_ComplexTypeA
 }
 
 if (isset($_GET['wsdl'])) {
-    $server = new Zend_Soap_AutoDiscover(new Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex());
+    $server = new Zend\Soap\AutoDiscover(new Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplex());
 } else {
     $uri = "http://".$_SERVER['HTTP_HOST']."/".$_SERVER['PHP_SELF']."?wsdl";
-    $server = new Zend_Soap_Server($uri);
+    $server = new Zend\Soap\Server($uri);
 }
 $server->setClass('Zend_Soap_Service_Server1');
 $server->handle();

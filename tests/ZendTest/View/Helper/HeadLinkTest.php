@@ -14,7 +14,7 @@ use Zend\View\Renderer\PhpRenderer as View;
 use Zend\View\Exception\ExceptionInterface as ViewException;
 
 /**
- * Test class for Zend_View_Helper_HeadLink.
+ * Test class for Zend\View\Helper\HeadLink.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -22,7 +22,7 @@ use Zend\View\Exception\ExceptionInterface as ViewException;
 class HeadLinkTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HeadLink
+     * @var Helper\HeadLink
      */
     public $helper;
 

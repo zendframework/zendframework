@@ -19,7 +19,7 @@ use Zend\View\Helper\HtmlFlash;
 class HtmlFlashTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HtmlFlash
+     * @var HtmlFlash
      */
     public $helper;
 

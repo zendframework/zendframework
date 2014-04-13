@@ -19,8 +19,8 @@ use Zend\XmlRpc\Value;
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_XmlRpc_Request object
-     * @var Zend_XmlRpc_Request
+     * Zend\XmlRpc\Request object
+     * @var Zend\XmlRpc\Request
      */
     protected $_request;
 

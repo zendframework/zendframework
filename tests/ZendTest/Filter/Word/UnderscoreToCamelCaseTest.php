@@ -12,7 +12,7 @@ namespace ZendTest\Filter\Word;
 use Zend\Filter\Word\UnderscoreToCamelCase as UnderscoreToCamelCaseFilter;
 
 /**
- * Test class for Zend_Filter_Word_UnderscoreToCamelCase.
+ * Test class for Zend\Filter\Word\UnderscoreToCamelCase.
  *
  * @group      Zend_Filter
  */

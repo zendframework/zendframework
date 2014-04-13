@@ -19,7 +19,7 @@ use Zend\View;
 use Zend\View\Helper\Navigation;
 
 /**
- * Tests Zend_View_Helper_Navigation_Links
+ * Tests Zend\View\Helper\Navigation\Links
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -527,7 +527,7 @@ class LinksTest extends AbstractTest
         try {
             $this->_helper->findRelation($active, 'foo', 'bar');
             $this->fail('An invalid value was given, but a ' .
-                        'Zend_View_Exception was not thrown');
+                        'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid argument: $rel', $e->getMessage());
         }
@@ -539,7 +539,7 @@ class LinksTest extends AbstractTest
         try {
             $this->_helper->renderLink($active, 'foo', 'bar');
             $this->fail('An invalid value was given, but a ' .
-                        'Zend_View_Exception was not thrown');
+                        'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid relation attribute', $e->getMessage());
         }

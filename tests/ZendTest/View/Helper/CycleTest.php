@@ -12,7 +12,7 @@ namespace ZendTest\View\Helper;
 use Zend\View\Helper;
 
 /**
- * Test class for Zend_View_Helper_Cycle.
+ * Test class for Zend\View\Helper\Cycle.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -20,7 +20,7 @@ use Zend\View\Helper;
 class CycleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_Cycle
+     * @var Helper\Cycle
      */
     public $helper;
 

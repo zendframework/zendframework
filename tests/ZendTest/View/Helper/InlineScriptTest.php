@@ -13,7 +13,7 @@ use Zend\View\Helper;
 
 
 /**
- * Test class for Zend_View_Helper_InlineScript.
+ * Test class for Zend\View\Helper\InlineScript.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -21,7 +21,7 @@ use Zend\View\Helper;
 class InlineScriptTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_InlineScript
+     * @var Helper\InlineScript
      */
     public $helper;
 

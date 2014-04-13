@@ -14,7 +14,7 @@ use Zend\View\Helper;
 use Zend\View\Exception\ExceptionInterface as ViewException;
 
 /**
- * Test class for Zend_View_Helper_HeadMeta.
+ * Test class for Zend\View\Helper\HeadMeta.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -22,7 +22,7 @@ use Zend\View\Exception\ExceptionInterface as ViewException;
 class HeadMetaTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HeadMeta
+     * @var Helper\HeadMeta
      */
     public $helper;
 

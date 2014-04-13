@@ -13,7 +13,7 @@ use Zend\View\Renderer\PhpRenderer as View;
 use Zend\View\Helper;
 
 /**
- * Test class for Zend_View_Helper_Placeholder.
+ * Test class for Zend\View\Helper\Placeholder.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -21,7 +21,7 @@ use Zend\View\Helper;
 class PlaceholderTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_Placeholder
+     * @var Helper\Placeholder
      */
     public $placeholder;
 

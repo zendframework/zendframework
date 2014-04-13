@@ -13,7 +13,7 @@ use Zend\View\Helper;
 use Zend\View;
 
 /**
- * Test class for Zend_View_Helper_HeadStyle.
+ * Test class for Zend\View\Helper\HeadStyle.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -21,7 +21,7 @@ use Zend\View;
 class HeadStyleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HeadStyle
+     * @var Helper\HeadStyle
      */
     public $helper;
 

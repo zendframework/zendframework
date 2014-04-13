@@ -26,7 +26,7 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
     /**
      * Zend_Filter_Basename object
      *
-     * @var Zend_Filter_Basename
+     * @var RealPathFilter
      */
     protected $_filter;
 

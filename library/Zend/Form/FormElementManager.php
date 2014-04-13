@@ -66,7 +66,7 @@ class FormElementManager extends AbstractPluginManager
      * Keep track of which plugins have been intizalied
      * @var array
      */
-    protected $initializedPlugins;
+    protected $initializedPlugins = array();
 
     /**
      * Don't share form elements by default

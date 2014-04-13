@@ -12,7 +12,7 @@ namespace ZendTest\Filter\Word;
 use Zend\Filter\Word\CamelCaseToSeparator as CamelCaseToSeparatorFilter;
 
 /**
- * Test class for Zend_Filter_Word_CamelCaseToSeparator.
+ * Test class for Zend\Filter\Word\CamelCaseToSeparator.
  *
  * @group      Zend_Filter
  */

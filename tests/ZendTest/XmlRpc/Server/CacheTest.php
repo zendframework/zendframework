@@ -17,8 +17,8 @@ use Zend\XmlRpc\Server;
 class CacheTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_XmlRpc_Server object
-     * @var Zend_XmlRpc_Server
+     * Server object
+     * @var Server
      */
     protected $_server;
 

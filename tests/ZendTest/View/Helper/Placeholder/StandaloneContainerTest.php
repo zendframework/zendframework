@@ -13,7 +13,7 @@ use Zend\View\Helper\Placeholder\Container;
 use Zend\View\Renderer\PhpRenderer as View;
 
 /**
- * Test class for Zend_View_Helper_Placeholder_StandaloneContainer.
+ * Test class for Zend\View\Helper\Placeholder\Container.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper

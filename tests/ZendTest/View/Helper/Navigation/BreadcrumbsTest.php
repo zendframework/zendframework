@@ -13,7 +13,7 @@ use Zend\Navigation\Navigation;
 use Zend\View\Exception\ExceptionInterface;
 
 /**
- * Tests Zend_View_Helper_Navigation_Breadcrumbs
+ * Tests Zend\View\Helper\Navigation\Breadcrumbs
  *
  * @group      Zend_View
  * @group      Zend_View_Helper

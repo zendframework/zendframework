@@ -15,8 +15,8 @@ use Zend\Loader\StandardAutoloader;
 use Zend\ProgressBar\Adapter\JsPull;
 
 /**
- * This sample file demonstrates an advanced use case of Zend_ProgressBar with
- * Zend_Form and Zend_File_Transfer.
+ * This sample file demonstrates an advanced use case of Zend\ProgressBar with
+ * Zend\Form and Zend\File\Transfer.
  */
 
 require_once dirname(dirname(dirname(__DIR__))) . '/library/Zend/Loader/StandardAutoloader.php';

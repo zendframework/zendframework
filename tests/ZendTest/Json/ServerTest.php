@@ -17,7 +17,7 @@ use Zend\Json\Server\Response;
 require_once __DIR__ . '/TestAsset/FooFunc.php';
 
 /**
- * Test class for Zend_JSON_Server
+ * Test class for Zend\Json\Server
  *
  * @group      Zend_JSON
  * @group      Zend_JSON_Server

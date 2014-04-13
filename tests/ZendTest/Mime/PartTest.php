@@ -19,7 +19,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
     /**
      * MIME part test object
      *
-     * @var Zend_Mime_Part
+     * @var Mime\Part
      */
     protected $part = null;
     protected $testText;

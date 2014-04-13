@@ -13,7 +13,7 @@ use Zend\I18n\Translator\Translator;
 use Zend\View\Helper;
 
 /**
- * Test class for Zend_View_Helper_HeadTitle.
+ * Test class for Zend\View\Helper\HeadTitle.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -21,7 +21,7 @@ use Zend\View\Helper;
 class HeadTitleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HeadTitle
+     * @var Helper\HeadTitle
      */
     public $helper;
 

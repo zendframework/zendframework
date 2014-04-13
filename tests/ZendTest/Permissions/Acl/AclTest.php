@@ -21,7 +21,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
     /**
      * ACL object for each test method
      *
-     * @var Zend_Acl
+     * @var Acl\Acl
      */
     protected $_acl;
 

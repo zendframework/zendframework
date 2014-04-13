@@ -19,7 +19,7 @@ use Zend\Uri\Uri;
 /** PHPUnit Test Case */
 
 /**
- * Test cases for Zend_Soap_AutoDiscover
+ * Test cases for Zend\Soap\AutoDiscover
  *
  * @group      Zend_Soap
  */

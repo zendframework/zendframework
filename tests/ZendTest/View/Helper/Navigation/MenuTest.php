@@ -10,7 +10,7 @@
 namespace ZendTest\View\Helper\Navigation;
 
 /**
- * Tests Zend_View_Helper_Navigation_Menu
+ * Tests Zend\View\Helper\Navigation\Menu
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -27,7 +27,7 @@ class MenuTest extends AbstractTest
     /**
      * View helper
      *
-     * @var Zend_View_Helper_Navigation_Menu
+     * @var \Zend\View\Helper\Navigation\Menu
      */
     protected $_helper;
 
@@ -285,7 +285,7 @@ class MenuTest extends AbstractTest
 
         try {
             $this->_helper->render();
-            $this->fail('invalid $partial should throw Zend_View_Exception');
+            $this->fail('invalid $partial should throw Zend\View\Exception\InvalidArgumentException');
         } catch (\Zend\View\Exception\ExceptionInterface $e) {
         }
     }

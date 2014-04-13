@@ -16,7 +16,7 @@ use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\SimpleRouteStack as Router;
 
 /**
- * Zend_View_Helper_UrlTest
+ * Zend\View\Helper\Url Test
  *
  * Tests formText helper, including some common functionality of all form helpers
  *

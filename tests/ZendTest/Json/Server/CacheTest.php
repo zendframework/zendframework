@@ -12,7 +12,7 @@ namespace ZendTest\Json\Server;
 use Zend\Json\Server;
 
 /**
- * Test class for Zend_JSON_Server_Cache
+ * Test class for Zend\JSON\Server\Cache
  *
  * @group      Zend_JSON
  * @group      Zend_JSON_Server

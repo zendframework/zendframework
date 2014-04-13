@@ -39,13 +39,6 @@ class ApacheResolverTest extends \PHPUnit_Framework_TestCase
     protected $_badPath;
 
     /**
-     * Resolver instance
-     *
-     * @var Zend_Auth_Adapter_Http_Resolver_File
-     */
-    protected $_resolver;
-
-    /**
      * Sets the paths to files used in this test, and creates a shared resolver instance
      * having a valid path.
      *

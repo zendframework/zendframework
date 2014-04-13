@@ -53,14 +53,14 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     /**
      * View helper
      *
-     * @var Zend\View\Helper\Navigation\AbstractHelper
+     * @var \Zend\View\Helper\Navigation\AbstractHelper
      */
     protected $_helper;
 
     /**
      * The first container in the config file (files/navigation.xml)
      *
-     * @var Zend_Navigation
+     * @var Navigation
      */
     protected $_nav1;
 

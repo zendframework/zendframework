@@ -20,7 +20,7 @@ use Zend\View\Helper\HtmlObject;
 class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HtmlObject
+     * @var HtmlObject
      */
     public $helper;
 

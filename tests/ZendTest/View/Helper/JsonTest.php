@@ -15,7 +15,7 @@ use Zend\Json\Json as JsonFormatter;
 use Zend\View\Helper\Json as JsonHelper;
 
 /**
- * Test class for Zend_View_Helper_Json
+ * Test class for Zend\View\Helper\Json
  *
  * @group      Zend_View
  * @group      Zend_View_Helper

@@ -12,7 +12,7 @@ namespace ZendTest\Filter\Word;
 use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter;
 
 /**
- * Test class for Zend_Filter_Word_CamelCaseToDash.
+ * Test class for Zend\Filter\Word\CamelCaseToDash.
  *
  * @group      Zend_Filter
  */

@@ -137,7 +137,7 @@ class DummyMemoryManager extends Memory\MemoryManager
     /** @var integer */
     public $processedId;
 
-    /** @var Zend_Memory_Container_Movable */
+    /** @var Container\Movable */
     public $processedObject;
 
     /**

@@ -16,7 +16,7 @@ use Zend\Json\Server\Exception\RuntimeException;
 use Zend\Json;
 
 /**
- * Test class for Zend_JSON_Server_Smd
+ * Test class for Zend\JSON\Server\Smd
  *
  * @group      Zend_Json
  * @group      Zend_Json_Server

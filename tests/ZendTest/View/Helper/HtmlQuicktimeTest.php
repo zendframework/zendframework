@@ -19,7 +19,7 @@ use Zend\View\Helper\HtmlQuicktime;
 class HtmlQuicktimeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HtmlQuicktime
+     * @var HtmlQuicktime
      */
     public $helper;
 

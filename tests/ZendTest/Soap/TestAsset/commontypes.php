@@ -540,7 +540,7 @@ class TestLocalSoapClient extends \SoapClient
     /**
      * Server object
      *
-     * @var Zend_Soap_Server
+     * @var \Zend\Soap\Server
      */
     public $server;
 

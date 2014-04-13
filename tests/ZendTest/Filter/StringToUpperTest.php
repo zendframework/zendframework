@@ -19,7 +19,7 @@ class StringToUpperTest extends \PHPUnit_Framework_TestCase
     /**
      * Zend_Filter_StringToLower object
      *
-     * @var Zend_Filter_StringToLower
+     * @var StringToUpperFilter
      */
     protected $_filter;
 

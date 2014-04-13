@@ -83,6 +83,7 @@ class FormElementManager extends AbstractPluginManager
         parent::__construct($configuration);
 
         $this->addInitializer(array($this, 'injectFactory'));
+        $this->addInitializer(array($this, 'injectInitializable'), false);
     }
 
     /**
@@ -106,6 +107,18 @@ class FormElementManager extends AbstractPluginManager
     }
 
     /**
+     * Call init() on any element that implements InitializableInterface
+     *
+     * @param $element
+     */
+    public function injectInitializable($element)
+    {
+        if ($element instanceof InitializableInterface) {
+            $element->init();
+        }
+    }
+
+    /**
      * Validate the plugin
      *
      * Checks that the element is an instance of ElementInterface
@@ -116,20 +129,6 @@ class FormElementManager extends AbstractPluginManager
      */
     public function validatePlugin($plugin)
     {
-        // Hook to perform various initialization, when the element is not created through the factory
-        if ($plugin instanceof InitializableInterface) {
-            $pluginName = $this->canonicalizeName(get_class($plugin));
-            // If $plugin is shared, we only want to initialize it once.
-            if (array_key_exists($pluginName, $this->shared) && $this->shared[$pluginName] == true) {
-                if (!in_array($pluginName, $this->initializedPlugins)) {
-                    $plugin->init();
-                    $this->initializedPlugins[] = $pluginName;
-                }
-            } else {
-                $plugin->init();
-            }
-        }
-
         if ($plugin instanceof ElementInterface) {
             return; // we're okay
         }

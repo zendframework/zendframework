@@ -11,7 +11,7 @@ namespace ZendTest\Filter;
 use Zend\Filter\PregReplace as PregReplaceFilter;
 
 /**
- * Test class for Zend_Filter_PregReplace.
+ * Test class for Zend\Filter\PregReplace.
  *
  * @group Zend_Filter
  */

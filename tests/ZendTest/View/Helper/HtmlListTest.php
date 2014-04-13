@@ -19,7 +19,7 @@ use Zend\View\Renderer\PhpRenderer as View;
 class HtmlListTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HtmlList
+     * @var Helper\HtmlList
      */
     public $helper;
 

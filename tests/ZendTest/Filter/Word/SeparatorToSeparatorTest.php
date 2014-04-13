@@ -12,7 +12,7 @@ namespace ZendTest\Filter\Word;
 use Zend\Filter\Word\SeparatorToSeparator as SeparatorToSeparatorFilter;
 
 /**
- * Test class for Zend_Filter_Word_SeparatorToSeparator.
+ * Test class for Zend\Filter\Word\SeparatorToSeparator.
  *
  * @group      Zend_Filter
  */

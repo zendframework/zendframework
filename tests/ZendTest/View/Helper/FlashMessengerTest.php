@@ -19,7 +19,7 @@ use Zend\View\Helper\FlashMessenger;
 use ZendTest\Session\TestAsset\TestManager as SessionManager;
 
 /**
- * Test class for Zend_View_Helper_Cycle.
+ * Test class for Zend\View\Helper\Cycle.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper

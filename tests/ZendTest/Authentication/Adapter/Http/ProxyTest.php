@@ -50,14 +50,14 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
     /**
      * File resolver setup against with HTTP Basic auth file
      *
-     * @var Zend_Auth_Adapter_Http_Resolver_File
+     * @var Http\FileResolver
      */
     protected $_basicResolver;
 
     /**
      * File resolver setup against with HTTP Digest auth file
      *
-     * @var Zend_Auth_Adapter_Http_Resolver_File
+     * @var Http\FileResolver
      */
     protected $_digestResolver;
 

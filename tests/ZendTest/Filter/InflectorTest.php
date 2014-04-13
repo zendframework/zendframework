@@ -13,7 +13,7 @@ use Zend\Filter\Inflector as InflectorFilter;
 use Zend\Filter\FilterPluginManager;
 
 /**
- * Test class for Zend_Filter_Inflector.
+ * Test class for Zend\Filter\Inflector.
  *
  * @group      Zend_Filter
  */

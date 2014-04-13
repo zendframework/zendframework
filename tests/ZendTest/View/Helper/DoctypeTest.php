@@ -12,7 +12,7 @@ namespace ZendTest\View\Helper;
 use Zend\View\Helper;
 
 /**
- * Test class for Zend_View_Helper_Doctype.
+ * Test class for Zend\View\Helper\Doctype.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper

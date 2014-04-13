@@ -19,7 +19,7 @@ use Zend\View\Helper\HtmlPage;
 class HtmlPageTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HtmlPage
+     * @var HtmlPage
      */
     public $helper;
 

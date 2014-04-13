@@ -22,17 +22,17 @@ use Zend\Json\Server\Response;
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend\Http\Client\Adapter\Test
+     * @var TestAdapter
      */
     protected $httpAdapter;
 
     /**
-     * @var Zend\Http\Client
+     * @var HttpClient
      */
     protected $httpClient;
 
     /**
-     * @var Zend\Json\Server\Client
+     * @var Client
      */
     protected $jsonClient;
 

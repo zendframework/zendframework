@@ -13,7 +13,7 @@ use Zend\Json\Server;
 use Zend\Json;
 
 /**
- * Test class for Zend_JSON_Server_Response
+ * Test class for Zend\JSON\Server\Response
  *
  * @group      Zend_JSON
  * @group      Zend_JSON_Server

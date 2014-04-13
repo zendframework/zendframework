@@ -17,7 +17,7 @@ use Zend\Paginator\Adapter;
 class ArrayTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend\Paginator\Adapter\Array
+     * @var Adapter\ArrayAdapter
      */
     private $adapter;
 

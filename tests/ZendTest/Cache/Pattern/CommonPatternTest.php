@@ -18,7 +18,7 @@ class CommonPatternTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Zend\Cache\Pattern\PageCache
+     * @var \Zend\Cache\Pattern\PatternInterface
      */
     protected $_pattern;
 

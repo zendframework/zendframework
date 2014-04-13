@@ -12,7 +12,7 @@ namespace ZendTest\Filter\Word;
 use Zend\Filter\Word\SeparatorToDash as SeparatorToDashFilter;
 
 /**
- * Test class for Zend_Filter_Word_SeparatorToDash.
+ * Test class for Zend\Filter\Word\SeparatorToDash.
  *
  * @group      Zend_Filter
  */

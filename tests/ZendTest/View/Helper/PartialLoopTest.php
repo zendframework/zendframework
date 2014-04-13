@@ -16,7 +16,7 @@ use Zend\View\Helper\PartialLoop;
 use Zend\View\Renderer\PhpRenderer as View;
 
 /**
- * Test class for Zend_View_Helper_PartialLoop.
+ * Test class for Zend\View\Helper\PartialLoop.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper

@@ -169,7 +169,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Zend_XmlRpc_Fault::isFault() test
+     * Zend\XmlRpc\Fault::isFault() test
      */
     public function testIsFault()
     {

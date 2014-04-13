@@ -14,7 +14,7 @@ use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
 
 /**
- * Test class for Zend_View_Helper_Layout
+ * Test class for Zend\View\Helper\Layout
  *
  * @group      Zend_View
  * @group      Zend_View_Helper

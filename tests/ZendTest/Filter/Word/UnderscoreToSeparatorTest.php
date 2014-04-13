@@ -12,7 +12,7 @@ namespace ZendTest\Filter\Word;
 use Zend\Filter\Word\UnderscoreToSeparator as UnderscoreToSeparatorFilter;
 
 /**
- * Test class for Zend_Filter_Word_UnderscoreToSeparator.
+ * Test class for Zend\Filter\Word\UnderscoreToSeparator.
  *
  * @group      Zend_Filter
  */

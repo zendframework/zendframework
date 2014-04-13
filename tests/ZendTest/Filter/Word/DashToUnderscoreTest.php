@@ -12,7 +12,7 @@ namespace ZendTest\Filter\Word;
 use Zend\Filter\Word\DashToUnderscore as DashToUnderscoreFilter;
 
 /**
- * Test class for Zend_Filter_Word_DashToUnderscore.
+ * Test class for Zend\Filter\Word\DashToUnderscore.
  *
  * @group      Zend_Filter
  */

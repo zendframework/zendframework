@@ -11,7 +11,7 @@ namespace ZendTest\View\Helper\Placeholder;
 
 
 /**
- * Test class for Zend_View_Helper_Placeholder_Container.
+ * Test class for Zend\View\Helper\Placeholder\Container.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -19,7 +19,7 @@ namespace ZendTest\View\Helper\Placeholder;
 class ContainerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_Placeholder_Container
+     * @var \Zend\View\Helper\Placeholder\Container
      */
     public $container;
 

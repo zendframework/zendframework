@@ -15,7 +15,7 @@ use IntlDateFormatter;
 use Zend\I18n\View\Helper\DateFormat as DateFormatHelper;
 
 /**
- * Test class for Zend_View_Helper_Currency
+ * Test class for Zend\View\Helper\Currency
  *
  * @group      Zend_View
  * @group      Zend_View_Helper

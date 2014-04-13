@@ -40,7 +40,7 @@ class FileResolverTest extends \PHPUnit_Framework_TestCase
     /**
      * Resolver instance
      *
-     * @var Zend_Auth_Adapter_Http_Resolver_File
+     * @var Http\FileResolver
      */
     protected $_resolver;
 

@@ -31,7 +31,7 @@ class MongoDBTest extends \PHPUnit_Framework_TestCase
     protected $mongoCollection;
 
     /**
-     * @var Zend\Session\SaveHandler\MongoDBOptions
+     * @var MongoDBOptions
      */
     protected $options;
 

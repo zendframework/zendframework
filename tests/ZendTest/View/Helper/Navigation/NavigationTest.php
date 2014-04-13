@@ -18,7 +18,7 @@ use Zend\View\Helper\Navigation;
 use Zend\View\Renderer\PhpRenderer;
 
 /**
- * Tests Zend_View_Helper_Navigation
+ * Tests Zend\View\Helper\Navigation
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -35,7 +35,7 @@ class NavigationTest extends AbstractTest
     /**
      * View helper
      *
-     * @var Zend\View\Helper\Navigation
+     * @var \Zend\View\Helper\Navigation
      */
     protected $_helper;
 
@@ -305,7 +305,7 @@ class NavigationTest extends AbstractTest
         try {
             $this->_helper->setRole(1337);
             $this->fail('An invalid argument was given, but a ' .
-                        'Zend_View_Exception was not thrown');
+                        'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
         }
@@ -316,7 +316,7 @@ class NavigationTest extends AbstractTest
         try {
             $this->_helper->setRole(new \stdClass());
             $this->fail('An invalid argument was given, but a ' .
-                        'Zend_View_Exception was not thrown');
+                        'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
         }
@@ -357,7 +357,7 @@ class NavigationTest extends AbstractTest
         try {
             Navigation\AbstractHelper::setDefaultRole(1337);
             $this->fail('An invalid argument was given, but a ' .
-                        'Zend_View_Exception was not thrown');
+                        'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be', $e->getMessage());
         }
@@ -368,7 +368,7 @@ class NavigationTest extends AbstractTest
         try {
             Navigation\AbstractHelper::setDefaultRole(new \stdClass());
             $this->fail('An invalid argument was given, but a ' .
-                        'Zend_View_Exception was not thrown');
+                        'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be', $e->getMessage());
         }

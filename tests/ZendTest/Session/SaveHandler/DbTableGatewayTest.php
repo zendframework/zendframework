@@ -24,17 +24,17 @@ use Zend\Db\TableGateway\TableGateway;
 class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend\Db\Adapter\Adapter
+     * @var Adapter
      */
     protected $adapter;
 
     /**
-     * @var Zend\Db\TableGateway\TableGateway
+     * @var TableGateway
      */
     protected $tableGateway;
 
     /**
-     * @var Zend\Session\SaveHandler\DbTableGatewayOptions
+     * @var DbTableGatewayOptions
      */
     protected $options;
 

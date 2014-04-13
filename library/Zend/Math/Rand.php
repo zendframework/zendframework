@@ -77,7 +77,7 @@ abstract class Rand
      */
     public static function getAlternativeGenerator()
     {
-        if (!is_null(static::$generator)) {
+        if (null !== static::$generator) {
             return static::$generator;
         }
         if (!class_exists('RandomLib\\Factory')) {

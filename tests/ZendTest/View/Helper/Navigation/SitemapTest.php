@@ -32,7 +32,7 @@ class SitemapTest extends AbstractTest
     /**
      * View helper
      *
-     * @var Zend\View\Helper\Navigation\Sitemap
+     * @var \Zend\View\Helper\Navigation\Sitemap
      */
     protected $_helper;
 

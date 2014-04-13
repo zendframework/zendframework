@@ -27,7 +27,7 @@ class MenuTest extends AbstractTest
     /**
      * View helper
      *
-     * @var Zend\View\Helper\Navigation\Menu
+     * @var \Zend\View\Helper\Navigation\Menu
      */
     protected $_helper;
 

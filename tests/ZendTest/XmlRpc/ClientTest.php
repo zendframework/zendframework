@@ -23,17 +23,17 @@ use Zend\XmlRpc;
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend\Http\Client\Adapter\AdapterInterface
+     * @var \Zend\Http\Client\Adapter\AdapterInterface
      */
     protected $httpAdapter;
 
     /**
-     * @var Zend\Http\Client
+     * @var \Zend\Http\Client
      */
     protected $httpClient;
 
     /**
-     * @var Zend\XmlRpc\Client
+     * @var \Zend\XmlRpc\Client
      */
     protected $xmlrpcClient;
 

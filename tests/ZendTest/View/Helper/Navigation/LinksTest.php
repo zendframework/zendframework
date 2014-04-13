@@ -36,7 +36,7 @@ class LinksTest extends AbstractTest
     /**
      * View helper
      *
-     * @var Zend\View\Helper\Navigation\Links
+     * @var \Zend\View\Helper\Navigation\Links
      */
     protected $_helper;
 

@@ -53,7 +53,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     /**
      * View helper
      *
-     * @var Zend\View\Helper\Navigation\AbstractHelper
+     * @var \Zend\View\Helper\Navigation\AbstractHelper
      */
     protected $_helper;
 

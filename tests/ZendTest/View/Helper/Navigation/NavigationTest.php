@@ -35,7 +35,7 @@ class NavigationTest extends AbstractTest
     /**
      * View helper
      *
-     * @var Zend\View\Helper\Navigation
+     * @var \Zend\View\Helper\Navigation
      */
     protected $_helper;
 

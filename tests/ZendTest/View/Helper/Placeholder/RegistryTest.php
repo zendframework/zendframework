@@ -22,7 +22,7 @@ use Zend\View\Helper\Placeholder\Container;
 class RegistryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend\View\Helper\Placeholder\Registry
+     * @var Registry
      */
     public $registry;
 

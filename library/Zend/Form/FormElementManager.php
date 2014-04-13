@@ -116,11 +116,18 @@ class FormElementManager extends AbstractPluginManager
      */
     public function validatePlugin($plugin)
     {
-        $objectHash = spl_object_hash($plugin);
         // Hook to perform various initialization, when the element is not created through the factory
-        if ($plugin instanceof InitializableInterface && !in_array($objectHash, $this->initializedPlugins)) {
-            $plugin->init();
-            $this->initializedPlugins[] = $objectHash;
+        if ($plugin instanceof InitializableInterface) {
+            $pluginName = $this->canonicalizeName(get_class($plugin));
+            // If $plugin is shared, we only want to initialize it once.
+            if (in_array($pluginName, $this->shared) && $this->shared[$pluginName] == true) {
+                if (!in_array($pluginName, $this->initializedPlugins)) {
+                    $plugin->init();
+                    $this->initializedPlugins[] = $pluginName;
+                }
+            } else {
+                $plugin->init();
+            }
         }
 
         if ($plugin instanceof ElementInterface) {

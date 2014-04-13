@@ -18,7 +18,7 @@ abstract class Serializer
      *
      * @var null|AdapterPluginManager
      */
-    protected static $adapters = null;
+    protected static $adapters;
 
     /**
      * The default adapter.

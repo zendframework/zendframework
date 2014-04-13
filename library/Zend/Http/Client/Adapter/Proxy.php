@@ -117,7 +117,9 @@ class Proxy extends Socket
     public function write($method, $uri, $httpVer = '1.1', $headers = array(), $body = '')
     {
         // If no proxy is set, fall back to default Socket adapter
-        if (! $this->config['proxy_host']) return parent::write($method, $uri, $httpVer, $headers, $body);
+        if (! $this->config['proxy_host']) {
+            return parent::write($method, $uri, $httpVer, $headers, $body);
+        }
 
         // Make sure we're properly connected
         if (! $this->socket) {

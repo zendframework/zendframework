@@ -554,9 +554,15 @@ class SetCookie implements MultipleHeaderInterface
         }
 
         // Check that the cookie is secure (if required) and not expired
-        if ($this->secure && $uri->getScheme() != 'https') return false;
-        if ($this->isExpired($now)) return false;
-        if ($this->isSessionCookie() && ! $matchSessionCookies) return false;
+        if ($this->secure && $uri->getScheme() != 'https') {
+            return false;
+        }
+        if ($this->isExpired($now)) {
+            return false;
+        }
+        if ($this->isSessionCookie() && ! $matchSessionCookies) {
+            return false;
+        }
 
         // Check if the domain matches
         if (! self::matchCookieDomain($this->getDomain(), $uri->getHost())) {

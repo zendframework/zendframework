@@ -120,7 +120,7 @@ class FormElementManager extends AbstractPluginManager
         if ($plugin instanceof InitializableInterface) {
             $pluginName = $this->canonicalizeName(get_class($plugin));
             // If $plugin is shared, we only want to initialize it once.
-            if (in_array($pluginName, $this->shared) && $this->shared[$pluginName] == true) {
+            if (array_key_exists($pluginName, $this->shared) && $this->shared[$pluginName] == true) {
                 if (!in_array($pluginName, $this->initializedPlugins)) {
                     $plugin->init();
                     $this->initializedPlugins[] = $pluginName;

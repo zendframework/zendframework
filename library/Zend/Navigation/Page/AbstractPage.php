@@ -260,7 +260,7 @@ abstract class AbstractPage extends AbstractContainer
     /**
      * Add static factory for self::factory function
      *
-     * @param type $callback Any callable variable
+     * @param callable $callback Any callable variable
      */
     public static function addFactory($callback)
     {

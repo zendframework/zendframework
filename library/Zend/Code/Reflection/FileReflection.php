@@ -49,7 +49,7 @@ class FileReflection implements ReflectionInterface
     protected $requiredFiles = array();
 
     /**
-     * @var ReflectionClass[]
+     * @var ClassReflection[]
      */
     protected $classes = array();
 

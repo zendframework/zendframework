@@ -217,7 +217,7 @@ class Inflector extends AbstractFilter
     /**
      * Set Target Reference
      *
-     * @param  reference $target
+     * @param  string $target
      * @return self
      */
     public function setTargetReference(&$target)

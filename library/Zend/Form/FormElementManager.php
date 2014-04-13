@@ -11,6 +11,7 @@ namespace Zend\Form;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigInterface;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\InitializableInterface;
 
@@ -153,7 +154,7 @@ class FormElementManager extends AbstractPluginManager
      * @param  string $canonicalName
      * @param  string $requestedName
      * @return null|\stdClass
-     * @throws Exception\ServiceNotCreatedException If resolved class does not exist
+     * @throws ServiceNotCreatedException If resolved class does not exist
      */
     protected function createFromInvokable($canonicalName, $requestedName)
     {

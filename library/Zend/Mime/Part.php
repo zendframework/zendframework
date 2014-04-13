@@ -68,7 +68,7 @@ class Part
      * reading the content. very useful for large file attachments.
      *
      * @param string $EOL
-     * @return stream
+     * @return resource
      * @throws Exception\RuntimeException if not a stream or unable to append filter
      */
     public function getEncodedStream($EOL = Mime::LINEEND)

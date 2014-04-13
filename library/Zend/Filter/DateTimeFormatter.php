@@ -23,7 +23,7 @@ class DateTimeFormatter extends AbstractFilter
     /**
      * Sets filter options
      *
-     * @param array|Traversable $options
+     * @param array|\Traversable $options
      */
     public function __construct($options = null)
     {

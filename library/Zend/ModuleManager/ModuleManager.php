@@ -174,7 +174,7 @@ class ModuleManager implements ModuleManagerInterface
 
     /**
      * Load a module with the name
-     * @param  Zend\EventManager\EventInterface $event
+     * @param  \Zend\EventManager\EventInterface $event
      * @return mixed                            module instance
      * @throws Exception\RuntimeException
      */

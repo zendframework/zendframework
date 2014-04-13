@@ -95,7 +95,7 @@ class AssertionAggregate implements AssertionInterface
      *
      * @param string $mode
      *            indicates how assertion chain result should interpreted (either 'all' or 'at_least_one')
-     * @throws Exception
+     * @throws InvalidArgumentException
      *
      * @return self
      */

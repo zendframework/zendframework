@@ -426,7 +426,7 @@ class Maildir extends Folder\Maildir implements WritableInterface
     /**
      * append a new message to mail storage
      *
-     * @param   string|stream                              $message message as string or stream resource
+     * @param   string|resource                            $message message as string or stream resource
      * @param   null|string|\Zend\Mail\Storage\Folder      $folder  folder for new message, else current folder is taken
      * @param   null|array                                 $flags   set flags for new message, else a default set is used
      * @param   bool                                       $recent  handle this mail as if recent flag has been set,

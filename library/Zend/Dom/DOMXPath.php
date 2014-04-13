@@ -27,7 +27,7 @@ class DOMXPath extends \DOMXPath
      * raising an error
      *
      * @param string $expression The XPath expression to evaluate.
-     * @return DOMNodeList
+     * @return \DOMNodeList
      * @throws ErrorException
      */
     public function queryWithErrorException($expression)

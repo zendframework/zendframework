@@ -1599,7 +1599,7 @@ class Filesystem extends AbstractAdapter implements
      *
      * @param string $file
      * @return void
-     * @throws RuntimeException
+     * @throws Exception\RuntimeException
      */
     protected function unlink($file)
     {

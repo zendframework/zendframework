@@ -301,7 +301,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
      * Update
      *
      * @param  array $set
-     * @param  string|array|closure $where
+     * @param  string|array|\Closure $where
      * @return int
      */
     public function update($set, $where = null)

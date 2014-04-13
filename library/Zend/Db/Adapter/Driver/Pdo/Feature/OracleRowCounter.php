@@ -64,7 +64,7 @@ class OracleRowCounter extends AbstractFeature
 
     /**
      * @param $context
-     * @return closure
+     * @return \Closure
      */
     public function getRowCountClosure($context)
     {

@@ -71,6 +71,8 @@ class ExceptionHandlerTest extends CommonPluginTest
 
             'decrementItem.exception'  => 'onException',
             'decrementItems.exception' => 'onException',
+
+            'clearExpired.exception' => 'onException',
         );
         foreach ($expectedListeners as $eventName => $expectedCallbackMethod) {
             $listeners = $this->_adapter->getEventManager()->getListeners($eventName);

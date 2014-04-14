@@ -10,6 +10,8 @@
 namespace ZendTest\Cache\Storage\Adapter;
 
 use Zend\Cache;
+use Zend\Cache\Storage\Plugin\ExceptionHandler;
+use Zend\Cache\Storage\Plugin\PluginOptions;
 
 /**
  * @group      Zend_Cache
@@ -280,5 +282,23 @@ class FilesystemTest extends CommonAdapterTest
 
         $expectedAtime = fileatime($meta['filespec'] . '.dat');
         $this->assertEquals($expectedAtime, $meta['atime']);
+    }
+
+    public function testClearExpiredExceptionTriggersEvent()
+    {
+        $this->_options->setTtl(0.1);
+        $this->_storage->setItem('k', 'v');
+        $dirs = glob($this->_tmpCacheDir . '/*');
+        if (count($dirs) === 0) {
+            $this->fail('Could not find cache dir');
+        }
+        chmod($dirs[0], 0500); //make directory rx, unlink should fail
+        sleep(1); //wait for the entry to expire
+        $plugin = new ExceptionHandler();
+        $options = new PluginOptions(array('throw_exceptions' => false));
+        $plugin->setOptions($options);
+        $this->_storage->addPlugin($plugin);
+        $this->_storage->clearExpired();
+        chmod($dirs[0], 0700); //set dir back to writable for tearDown
     }
 }

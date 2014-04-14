@@ -27,6 +27,11 @@ class Product
     protected $categories;
 
     /**
+     * @var Country
+     */
+    protected $madeInCountry;
+
+    /**
      * @param array $categories
      * @return Product
      */
@@ -98,5 +103,21 @@ class Product
     public function getArrayCopy()
     {
         return get_object_vars($this);
+    }
+
+    /**
+     * @return Country
+     */
+    public function getMadeInCountry()
+    {
+        return $this->madeInCountry;
+    }
+
+    /**
+     * @param Country $country
+     */
+    public function setMadeInCountry($country)
+    {
+        $this->madeInCountry = $country;
     }
 }

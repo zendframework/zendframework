@@ -10,7 +10,7 @@
 namespace Zend\Mvc\Router\Http;
 
 use Traversable;
-use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorInterface as Translator;
 use Zend\Mvc\Router\Exception;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;

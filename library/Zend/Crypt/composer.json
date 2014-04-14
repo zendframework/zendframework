@@ -18,6 +18,9 @@
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-servicemanager": "self.version"
     },
+    "suggest": {
+        "ext-mcrypt": "Required for most features of Zend\\Crypt"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.3-dev",

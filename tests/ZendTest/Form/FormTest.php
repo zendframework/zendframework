@@ -1906,6 +1906,95 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->isValid());
     }
 
+    /**
+     * @param bool $expectedIsValid
+     * @param array $expectedFormData
+     * @param array $data
+     * @param string $unselectedValue
+     * @param bool $useHiddenElement
+     * @dataProvider formWithSelectMultipleAndEmptyUnselectedValueDataProvider
+     */
+    public function testFormWithSelectMultipleAndEmptyUnselectedValue(
+        $expectedIsValid,
+        array $expectedFormData,
+        array $data,
+        $unselectedValue,
+        $useHiddenElement
+    )
+    {
+        $this->form->add(array(
+            'name' => 'multipleSelect',
+            'type'  => 'Zend\Form\Element\Select',
+            'attributes' => array('multiple' => 'multiple'),
+            'options' => array(
+                'label' => 'Importance',
+                'use_hidden_element' => $useHiddenElement,
+                'unselected_value' => $unselectedValue,
+                'value_options' => array(
+                    'foo' => 'Foo',
+                    'bar' => 'Bar'
+                ),
+            ),
+        ));
+
+        $actualIsValid = $this->form->setData($data)->isValid();
+        $this->assertEquals($expectedIsValid, $actualIsValid);
+
+        $formData = $this->form->getData();
+        $this->assertEquals($expectedFormData, $formData);
+    }
+
+    /**
+     * @return array
+     */
+    public function formWithSelectMultipleAndEmptyUnselectedValueDataProvider()
+    {
+        return array(
+            array(
+                true,
+                array('multipleSelect' => array('foo')),
+                array('multipleSelect' => array('foo')),
+                '',
+                true
+            ),
+            array(
+                true,
+                array('multipleSelect' => array()),
+                array('multipleSelect' => ''),
+                '',
+                true
+            ),
+            array(
+                true,
+                array('multipleSelect' => array()),
+                array('multipleSelect' => 'empty'),
+                'empty',
+                true
+            ),
+            array(
+                false,
+                array('multipleSelect' => ''),
+                array('multipleSelect' => ''),
+                'empty',
+                true
+            ),
+            array(
+                false,
+                array('multipleSelect' => ''),
+                array('multipleSelect' => ''),
+                '',
+                false
+            ),
+            array(
+                true,
+                array('multipleSelect' => array()),
+                array('multipleSelect' => 'foo'),
+                'foo',
+                true
+            ),
+        );
+    }
+
     public function testCanSetUseInputFilterDefaultsViaArray()
     {
         $spec = array(

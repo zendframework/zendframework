@@ -185,7 +185,7 @@ class Xml implements FormatterInterface
                 } elseif ($key == "extra" && empty($value)) {
                     continue;
                 } elseif ($key == "extra" && (is_array($value) || $value instanceof Traversable)) {
-                    $extraElement = $dom->appendChild(new DOMElement('extra'));
+                    $extraElement = $dom->createElement('extra');
                     foreach ($value as $extraKey => $extraValue) {
                         $extraElement->appendChild(new DOMElement($extraKey, (string) $extraValue));
                     }

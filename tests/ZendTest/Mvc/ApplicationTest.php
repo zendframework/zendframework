@@ -679,6 +679,66 @@ class ApplicationTest extends TestCase
         $this->assertEquals(1, count($listeners));
     }
 
+    public function testFailedRoutingShouldBePreventable()
+    {
+        $this->application->bootstrap();
+
+        $response     = $this->getMock('Zend\Stdlib\ResponseInterface');
+        $finishMock   = $this->getMock('stdClass', array('__invoke'));
+        $routeMock    = $this->getMock('stdClass', array('__invoke'));
+        $dispatchMock = $this->getMock('stdClass', array('__invoke'));
+
+        $routeMock->expects($this->once())->method('__invoke')->will($this->returnCallback(function (MvcEvent $event) {
+            $event->stopPropagation(true);
+            $event->setRouteMatch(new Router\RouteMatch(array()));
+        }));
+        $dispatchMock->expects($this->once())->method('__invoke')->will($this->returnValue($response));
+        $finishMock->expects($this->once())->method('__invoke')->will($this->returnCallback(function (MvcEvent $event) {
+            $event->stopPropagation(true);
+        }));
+
+        $this->application->getEventManager()->attach(MvcEvent::EVENT_ROUTE, $routeMock, 100);
+        $this->application->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, $dispatchMock, 100);
+        $this->application->getEventManager()->attach(MvcEvent::EVENT_FINISH, $finishMock, 100);
+
+        $this->application->run();
+        $this->assertSame($response, $this->application->getMvcEvent()->getResponse());
+    }
+
+    public function testCanRecoverFromApplicationError()
+    {
+        $this->application->bootstrap();
+
+        $response     = $this->getMock('Zend\Stdlib\ResponseInterface');
+        $errorMock    = $this->getMock('stdClass', array('__invoke'));
+        $finishMock   = $this->getMock('stdClass', array('__invoke'));
+        $routeMock    = $this->getMock('stdClass', array('__invoke'));
+        $dispatchMock = $this->getMock('stdClass', array('__invoke'));
+
+        $errorMock->expects($this->once())->method('__invoke')->will($this->returnCallback(function (MvcEvent $event) {
+            $event->stopPropagation(true);
+            $event->setRouteMatch(new Router\RouteMatch(array()));
+            $event->setError('');
+        }));
+        $routeMock->expects($this->once())->method('__invoke')->will($this->returnCallback(function (MvcEvent $event) {
+            $event->stopPropagation(true);
+            $event->setError(Application::ERROR_ROUTER_NO_MATCH);
+            return $event->getApplication()->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $event)->last();
+        }));
+        $dispatchMock->expects($this->once())->method('__invoke')->will($this->returnValue($response));
+        $finishMock->expects($this->once())->method('__invoke')->will($this->returnCallback(function (MvcEvent $event) {
+            $event->stopPropagation(true);
+        }));
+
+        $this->application->getEventManager()->attach(MvcEvent::EVENT_DISPATCH_ERROR, $errorMock, 100);
+        $this->application->getEventManager()->attach(MvcEvent::EVENT_ROUTE, $routeMock, 100);
+        $this->application->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, $dispatchMock, 100);
+        $this->application->getEventManager()->attach(MvcEvent::EVENT_FINISH, $finishMock, 100);
+
+        $this->application->run();
+        $this->assertSame($response, $this->application->getMvcEvent()->getResponse());
+    }
+
     public function eventPropagation()
     {
         return array(

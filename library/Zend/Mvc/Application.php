@@ -306,7 +306,6 @@ class Application implements
             if ($event->getError()) {
                 return $this->completeRequest($event);
             }
-            return $this;
         }
         if ($event->getError()) {
             return $this->completeRequest($event);

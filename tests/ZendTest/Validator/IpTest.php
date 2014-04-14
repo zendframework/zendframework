@@ -283,6 +283,12 @@ class IpTest extends \PHPUnit_Framework_TestCase
             'a0.b0.c0.d0'                            => true,
             'g0.00.00.00'                            => false,
             'g0.00.00.00:80'                         => false,
+
+            // new lines should not accept
+            "00000001.00000010.00000011.00000100\n"  => false,
+            "001.002.003.004\n"                      => false,
+            "a0.b0.c0.d0\n"                          => false,
+
         );
 
         foreach ($ips as $ip => $expectedOutcome) {

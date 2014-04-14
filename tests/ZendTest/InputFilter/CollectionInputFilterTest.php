@@ -109,17 +109,6 @@ class CollectionInputFilterTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\BaseInputFilter', $this->filter->getInputFilter());
     }
 
-    public function testInputFilterInputsAppliedToCollection()
-    {
-        if (!extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $this->filter->setInputFilter($this->getBaseInputFilter());
-
-        $this->assertCount(4, $this->filter->getInputs());
-    }
-
     public function testGetDefaultInputFilter()
     {
         $this->assertInstanceOf('Zend\InputFilter\BaseInputFilter', $this->filter->getInputFilter());
@@ -338,6 +327,16 @@ class CollectionInputFilterTest extends TestCase
                     'baz' => '',
                 ),
             ),
+            array(
+                'foo' => ' bazbat ',
+                'bar' => '12345',
+                'baz' => '',
+                'nest' => array(
+                    // missing 'foo' here
+                    'bar' => '12345',
+                    'baz' => '',
+                ),
+            ),
         );
 
         $this->filter->setInputFilter($this->getBaseInputFilter());
@@ -345,19 +344,21 @@ class CollectionInputFilterTest extends TestCase
 
         $this->assertFalse($this->filter->isValid());
 
-        $this->assertCount(2, $this->filter->getInvalidInput());
+        $this->assertCount(3, $this->filter->getInvalidInput());
         foreach ($this->filter->getInvalidInput() as $invalidInputs) {
             $this->assertCount(1, $invalidInputs);
         }
 
         $messages = $this->filter->getMessages();
 
-        $this->assertCount(2, $messages);
+        $this->assertCount(3, $messages);
         $this->assertArrayHasKey('foo', $messages[0]);
         $this->assertArrayHasKey('bar', $messages[1]);
+        $this->assertArrayHasKey('nest', $messages[2]);
 
         $this->assertCount(1, $messages[0]['foo']);
         $this->assertCount(1, $messages[1]['bar']);
+        $this->assertCount(1, $messages[2]['nest']);
     }
 
     public function testSetValidationGroupUsingFormStyle()

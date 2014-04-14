@@ -22,9 +22,9 @@ class ContentTransferEncoding implements HeaderInterface
         '8bit',
         'quoted-printable',
         'base64',
+        'binary',
         /*
          * not implemented:
-         * 'binary',
          * x-token: 'X-'
          */
     );

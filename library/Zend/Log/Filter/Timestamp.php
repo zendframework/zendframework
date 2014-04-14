@@ -51,7 +51,9 @@ class Timestamp implements FilterInterface
             $value = iterator_to_array($value);
         }
         if (is_array($value)) {
-            extract($value, EXTR_IF_EXISTS);
+            $dateFormatChar = isset($value['dateFormatChar']) ? $value['dateFormatChar'] : null;
+            $operator = isset($value['operator']) ? $value['operator'] : null;
+            $value = isset($value['value']) ? $value['value'] : null;
         }
 
         if ($value instanceof DateTime) {
@@ -74,7 +76,9 @@ class Timestamp implements FilterInterface
             $this->dateFormatChar = $dateFormatChar;
         }
 
-        if (!in_array(
+        if ($operator === null) {
+            $operator = '<=';
+        } elseif (!in_array(
             $operator,
             array('<', 'lt', '<=', 'le', '>', 'gt', '>=', 'ge', '==', '=', 'eq', '!=', '<>')
         )) {
@@ -83,7 +87,7 @@ class Timestamp implements FilterInterface
             );
         }
 
-        $this->operator = ($operator) ?: '<=';
+        $this->operator = $operator;
     }
 
     /**

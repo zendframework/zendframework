@@ -40,10 +40,11 @@ class TimestampTest extends TestCase
         return array(
             array(new \DateTime('2014-03-03'), new \DateTime('2014-03-03'), '>=', true),
             array(new \DateTime('2014-10-10'), new \DateTime('2014-03-03'),'>=', true),
-            array(new \DateTime('2013-03-03'), new \DateTime('2014-03-03'), '>=', false),
+            array(new \DateTime('2014-03-03'), new \DateTime('2014-10-10'), 'gt', false),
+            array(new \DateTime('2013-03-03'), new \DateTime('2014-03-03'), 'ge', false),
             array(new \DateTime('2014-03-03'), new \DateTime('2014-03-03'), '==', true),
             array(new \DateTime('2014-02-02'), new \DateTime('2014-03-03'), '<', true),
-            array(new \DateTime('2014-03-03'), new \DateTime('2014-03-03'), '<', false)
+            array(new \DateTime('2014-03-03'), new \DateTime('2014-03-03'), 'lt', false),
         );
     }
 
@@ -67,11 +68,12 @@ class TimestampTest extends TestCase
     {
         return array(
             array(new \DateTime('2014-03-03 10:15:00'), 10, 'H', '==', true),
-            array(new \DateTime('2013-03-03 22:00:00'), 10, 'H', '==', false),
-            array(new \DateTime('2014-03-04 10:15:00'), 3, 'd', '>', true),
+            array(new \DateTime('2013-03-03 22:00:00'), 10, 'H', '=', false),
+            array(new \DateTime('2014-03-04 10:15:00'), 3, 'd', 'gt', true),
             array(new \DateTime('2014-03-04 10:15:00'), 10, 'd', '<', true),
-            array(new \DateTime('2014-03-03 10:15:00'), 1, 'm', '==', false),
-            array(new \DateTime('2014-03-03 10:15:00'), 2, 'm', '>=', true),
+            array(new \DateTime('2014-03-03 10:15:00'), 1, 'm', 'eq', false),
+            array(new \DateTime('2014-03-03 10:15:00'), 2, 'm', 'ge', true),
+            array(new \DateTime('2014-03-03 10:15:00'), 20, 'H', '!=', true),
         );
     }
 

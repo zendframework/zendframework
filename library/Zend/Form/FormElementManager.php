@@ -63,12 +63,6 @@ class FormElementManager extends AbstractPluginManager
     );
 
     /**
-     * Keep track of which plugins have been intizalied
-     * @var array
-     */
-    protected $initializedPlugins = array();
-
-    /**
      * Don't share form elements by default
      *
      * @var bool
@@ -83,7 +77,7 @@ class FormElementManager extends AbstractPluginManager
         parent::__construct($configuration);
 
         $this->addInitializer(array($this, 'injectFactory'));
-        $this->addInitializer(array($this, 'injectInitializable'), false);
+        $this->addInitializer(array($this, 'callElementInit'), false);
     }
 
     /**
@@ -109,9 +103,9 @@ class FormElementManager extends AbstractPluginManager
     /**
      * Call init() on any element that implements InitializableInterface
      *
-     * @param $element
+     * @internal param $element
      */
-    public function injectInitializable($element)
+    public function callElementInit($element)
     {
         if ($element instanceof InitializableInterface) {
             $element->init();

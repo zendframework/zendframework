@@ -104,4 +104,23 @@ class FormElementManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('element', $element->getName(), 'Invokable CNAME');
         $this->assertEquals('bar', $element->getLabel(), 'Specified options in array[options]');
     }
+
+    /**
+     * @group 6132
+     */
+    public function testSharedFormElementsAreNotInitializedMultipleTimes()
+    {
+        $element = $this->getMock('Zend\Form\Element', array('init'));
+
+        $element->expects($this->once())->method('init');
+
+        $this->manager->setFactory('sharedElement', function () use ($element) {
+            return $element;
+        });
+
+        $this->manager->setShared('sharedElement', true);
+
+        $this->manager->get('sharedElement');
+        $this->manager->get('sharedElement');
+    }
 }

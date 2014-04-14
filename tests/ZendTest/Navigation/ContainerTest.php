@@ -1080,4 +1080,31 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(null, $container->getChildren());
     }
+
+    /**
+     * @group GH-5929
+     */
+    public function testRemovePageRecursively()
+    {
+        $container = new Navigation\Navigation(array(
+            array(
+                'route' => 'foo',
+                'pages' => array(
+                    array(
+                        'route' => 'bar',
+                        'pages' => array(
+                            array(
+                                'route' => 'baz',
+                            ),
+                        ),
+                    )
+                )
+            ),
+        ));
+
+        $container->removePage($container->findOneBy('route', 'baz'), true);
+        $this->assertNull($container->findOneBy('route', 'baz'));
+        $container->removePage($container->findOneBy('route', 'bar'), true);
+        $this->assertNull($container->findOneBy('route', 'bar'));
+    }
 }

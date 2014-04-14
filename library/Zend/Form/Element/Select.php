@@ -51,6 +51,16 @@ class Select extends Element implements InputProviderInterface
     protected $valueOptions = array();
 
     /**
+     * @var bool
+     */
+    protected $useHiddenElement = false;
+
+    /**
+     * @var string
+     */
+    protected $unselectedValue = '';
+
+    /**
      * @return array
      */
     public function getValueOptions()
@@ -126,6 +136,14 @@ class Select extends Element implements InputProviderInterface
 
         if (isset($this->options['disable_inarray_validator'])) {
             $this->setDisableInArrayValidator($this->options['disable_inarray_validator']);
+        }
+
+        if (isset($options['use_hidden_element'])) {
+            $this->setUseHiddenElement($options['use_hidden_element']);
+        }
+
+        if (isset($options['unselected_value'])) {
+            $this->setUnselectedValue($options['unselected_value']);
         }
 
         return $this;
@@ -206,10 +224,7 @@ class Select extends Element implements InputProviderInterface
                 'strict'   => false
             ));
 
-            $multiple = (isset($this->attributes['multiple']))
-                      ? $this->attributes['multiple'] : null;
-
-            if (true === $multiple || 'multiple' === $multiple) {
+            if ($this->isMultiple()) {
                 $validator = new ExplodeValidator(array(
                     'validator'      => $validator,
                     'valueDelimiter' => null, // skip explode if only one value
@@ -222,9 +237,51 @@ class Select extends Element implements InputProviderInterface
     }
 
     /**
-     * Provide default input rules for this element
+     * Do we render hidden element?
      *
-     * Attaches the captcha as a validator.
+     * @param  bool $useHiddenElement
+     * @return Select
+     */
+    public function setUseHiddenElement($useHiddenElement)
+    {
+        $this->useHiddenElement = (bool) $useHiddenElement;
+        return $this;
+    }
+
+    /**
+     * Do we render hidden element?
+     *
+     * @return bool
+     */
+    public function useHiddenElement()
+    {
+        return $this->useHiddenElement;
+    }
+
+    /**
+     * Set the value if the select is not selected
+     *
+     * @param string $unselectedValue
+     * @return Select
+     */
+    public function setUnselectedValue($unselectedValue)
+    {
+        $this->unselectedValue = (string) $unselectedValue;
+        return $this;
+    }
+
+    /**
+     * Get the value when the select is not selected
+     *
+     * @return string
+     */
+    public function getUnselectedValue()
+    {
+        return $this->unselectedValue;
+    }
+
+    /**
+     * Provide default input rules for this element
      *
      * @return array
      */
@@ -234,6 +291,24 @@ class Select extends Element implements InputProviderInterface
             'name' => $this->getName(),
             'required' => true,
         );
+
+        if ($this->useHiddenElement() && $this->isMultiple()) {
+            $unselectedValue = $this->getUnselectedValue();
+
+            $spec['allow_empty'] = true;
+            $spec['continue_if_empty'] = true;
+            $spec['filters'] = array(array(
+                'name'    => 'Callback',
+                'options' => array(
+                    'callback' => function ($value) use ($unselectedValue) {
+                        if ($value === $unselectedValue) {
+                            $value = array();
+                        }
+                        return $value;
+                    }
+                )
+            ));
+        }
 
         if ($validator = $this->getValidator()) {
             $spec['validators'] = array(
@@ -269,5 +344,16 @@ class Select extends Element implements InputProviderInterface
     protected function getOptionValue($key, $optionSpec)
     {
         return is_array($optionSpec) ? $optionSpec['value'] : $key;
+    }
+
+    /**
+     * Element has the multiple attribute
+     *
+     * @return bool
+     */
+    public function isMultiple()
+    {
+        return isset($this->attributes['multiple'])
+            && ($this->attributes['multiple'] === true || $this->attributes['multiple'] === 'multiple');
     }
 }

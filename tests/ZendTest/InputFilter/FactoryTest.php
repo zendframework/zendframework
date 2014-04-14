@@ -583,4 +583,25 @@ class FactoryTest extends TestCase
 
         $this->assertFalse($factory->createInput(array('break_on_failure' => false))->breakOnFailure());
     }
+
+    public function testCanCreateInputFilterWithNullInputs()
+    {
+        $factory = new Factory();
+
+        $inputFilter = $factory->createInputFilter(array(
+            'foo' => array(
+                'name' => 'foo',
+            ),
+            'bar' => null,
+            'baz' => array(
+                'name' => 'baz',
+            ),
+        ));
+
+        $this->assertInstanceOf('Zend\InputFilter\InputFilter', $inputFilter);
+        $this->assertEquals(2, count($inputFilter));
+        $this->assertTrue($inputFilter->has('foo'));
+        $this->assertFalse($inputFilter->has('bar'));
+        $this->assertTrue($inputFilter->has('baz'));
+    }
 }

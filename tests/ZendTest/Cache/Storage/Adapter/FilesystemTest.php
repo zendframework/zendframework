@@ -289,7 +289,7 @@ class FilesystemTest extends CommonAdapterTest
         $this->_options->setTtl(0.1);
         $this->_storage->setItem('k', 'v');
         $dirs = glob($this->_tmpCacheDir . '/*');
-        if(count($dirs) === 0) {
+        if (count($dirs) === 0) {
             $this->fail('Could not find cache dir');
         }
         chmod($dirs[0], 0500); //make directory rx, unlink should fail

@@ -169,7 +169,7 @@ class Filesystem extends AbstractAdapter implements
                 __FUNCTION__,
                 new ArrayObject(),
                 $result,
-                new Exception\RuntimeException("Failed to clear expired items", 0, $error)
+                new Exception\RuntimeException('Failed to clear expired items', 0, $error)
             );
         }
 

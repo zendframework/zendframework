@@ -303,11 +303,8 @@ class Application implements
                 $this->response = $response;
                 return $this;
             }
-            if ($event->getError()) {
-                return $this->completeRequest($event);
-            }
-            return $this;
         }
+
         if ($event->getError()) {
             return $this->completeRequest($event);
         }

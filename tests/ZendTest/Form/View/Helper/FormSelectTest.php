@@ -384,6 +384,16 @@ class FormSelectTest extends CommonTestCase
         $this->assertContains('<option value="0" selected="selected">label0</option>', $markup);
     }
 
+    public function testHiddenElementWhenAttributeMultipleIsSet()
+    {
+        $element = new SelectElement('foo');
+        $element->setUseHiddenElement(true);
+        $element->setUnselectedValue('empty');
+
+        $markup = $this->helper->render($element);
+        $this->assertContains('<input type="hidden" name="foo" value="empty"><select', $markup);
+    }
+
     public function testRenderInputNotSelectElementRaisesException()
     {
         $element = new Element\Text('foo');

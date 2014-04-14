@@ -9,8 +9,8 @@
 
 namespace ZendTest\InputFilter;
 
-use \PHPUnit_Framework_TestCase as TestCase;
-use \Zend\InputFilter\InputFilter;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\InputFilter\InputFilter;
 
 /**
  * @requires PHP 5.4

@@ -172,7 +172,7 @@ class Collection extends Fieldset
         }
 
         $this->object = $object;
-        $this->count = count($object);
+        $this->count  = count($object);
 
         return $this;
     }
@@ -202,11 +202,10 @@ class Collection extends Fieldset
 
         if (!$this->allowRemove && count($data) < $this->count) {
             throw new Exception\DomainException(sprintf(
-                    'There are fewer elements than specified in the collection (%s). Either set the allow_remove option ' .
-                    'to true, or re-submit the form.',
-                    get_class($this)
-                )
-            );
+                'There are fewer elements than specified in the collection (%s). Either set the allow_remove option '
+                . 'to true, or re-submit the form.',
+                get_class($this)
+            ));
         }
 
         // Check to see if elements have been replaced or removed

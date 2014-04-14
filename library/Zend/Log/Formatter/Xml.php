@@ -177,14 +177,14 @@ class Xml implements FormatterInterface
         foreach ($dataToInsert as $key => $value) {
             if (empty($value)
                 || is_scalar($value)
-                || ((is_array($value) || $value instanceof \Traversable) && $key == "extra")
+                || ((is_array($value) || $value instanceof Traversable) && $key == "extra")
                 || (is_object($value) && method_exists($value, '__toString'))
             ) {
                 if ($key == "message") {
                     $value = $escaper->escapeHtml($value);
                 } elseif ($key == "extra" && empty($value)) {
                     continue;
-                } elseif ($key == "extra" && (is_array($value) || $value instanceof \Traversable)) {
+                } elseif ($key == "extra" && (is_array($value) || $value instanceof Traversable)) {
                     $extraElement = $dom->appendChild(new DOMElement('extra'));
                     foreach ($value as $extraKey => $extraValue) {
                         $extraElement->appendChild(new DOMElement($extraKey, (string) $extraValue));

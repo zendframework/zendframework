@@ -9,8 +9,8 @@
 
 namespace ZendTest\Log;
 
-use \PHPUnit_Framework_TestCase as TestCase;
-use \Zend\Log\Logger;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Log\Logger;
 
 /**
  * @requires PHP 5.4

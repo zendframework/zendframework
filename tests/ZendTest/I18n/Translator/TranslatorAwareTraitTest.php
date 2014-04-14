@@ -9,8 +9,8 @@
 
 namespace ZendTest\I18n\Translator;
 
-use \PHPUnit_Framework_TestCase as TestCase;
-use \Zend\I18n\Translator\Translator;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\I18n\Translator\Translator;
 
 /**
  * @requires PHP 5.4

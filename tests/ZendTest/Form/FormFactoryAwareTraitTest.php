@@ -9,8 +9,8 @@
 
 namespace ZendTest\Form;
 
-use \PHPUnit_Framework_TestCase as TestCase;
-use \Zend\Form\Factory;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Form\Factory;
 
 /**
  * @requires PHP 5.4

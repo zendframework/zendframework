@@ -9,8 +9,8 @@
 
 namespace ZendTest\ServiceManager;
 
-use \PHPUnit_Framework_TestCase as TestCase;
-use \Zend\ServiceManager\ServiceManager;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * @requires PHP 5.4

@@ -9,7 +9,7 @@
 
 namespace Zend\Http\Header;
 
-use \Zend\Uri\UriFactory;
+use Zend\Uri\UriFactory;
 
 /**
  * @throws Exception\InvalidArgumentException

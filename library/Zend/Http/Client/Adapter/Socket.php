@@ -31,7 +31,7 @@ class Socket implements HttpAdapter, StreamInterface
         'ssl'   => STREAM_CRYPTO_METHOD_SSLv23_CLIENT,
         'sslv2' => STREAM_CRYPTO_METHOD_SSLv2_CLIENT,
         'sslv3' => STREAM_CRYPTO_METHOD_SSLv3_CLIENT,
-        'tls'   => STREAM_CRYPTO_METHOD_TLS_CLIENT
+        'tls'   => STREAM_CRYPTO_METHOD_TLS_CLIENT,
     );
 
     /**
@@ -69,7 +69,7 @@ class Socket implements HttpAdapter, StreamInterface
         'sslcafile'             => null,
         'sslcapath'             => null,
         'sslallowselfsigned'    => false,
-        'sslusecontext'         => false
+        'sslusecontext'         => false,
     );
 
     /**

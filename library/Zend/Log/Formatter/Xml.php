@@ -185,11 +185,7 @@ class Xml implements FormatterInterface
                 } elseif ($key == "extra" && empty($value)) {
                     continue;
                 } elseif ($key == "extra" && (is_array($value) || $value instanceof Traversable)) {
-                    $extraElement = $dom->createElement('extra');
-                    foreach ($value as $extraKey => $extraValue) {
-                        $extraElement->appendChild(new DOMElement($extraKey, (string) $extraValue));
-                    }
-                    $elt->appendChild($extraElement);
+                    $elt->appendChild($this->_buildElementTree($dom, $dom->createElement('extra'), $value));
                     continue;
                 }
                 $elt->appendChild(new DOMElement($key, (string) $value));
@@ -197,9 +193,56 @@ class Xml implements FormatterInterface
         }
 
         $xml = $dom->saveXML();
+
         $xml = preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $xml);
 
         return $xml . PHP_EOL;
+    }
+
+    /**
+     * Recursion function to crete a xml tree structure out of array structure
+     * @param DomDocument $doc - DomDocument where the current nodes will be generated
+     * @param DomElement $domElement - Element where there
+     * @param $mixedData array|Traversable - mixedData
+     * @return DomElement with appended child nodes
+     */
+    protected function _buildElementTree(DOMDocument $doc, DOMElement $domElement, $mixedData)
+    {
+        if (is_array($mixedData) || $mixedData instanceof Traversable) {
+
+            foreach ($mixedData as $key => $value) {
+
+                // key is numeric and switch is not possible, numeric values are not valid node names
+                if (is_numeric($key) && (is_numeric($value) || empty($value))) {
+                    continue;
+                }
+
+                if (is_array($value) || $value instanceof Traversable) {
+                    // current value is an array, start recursion
+                    $domElement->appendChild($this->_buildElementTree($doc, $doc->createElement($key), $value));
+                    continue;
+                }
+
+                if (is_object($value) && !method_exists($value, '__toString')) {
+
+                    // object does not support __toString() method, manually convert the value
+                    $value = $this->getEscaper()->escapeHtml(
+                        '"Object" of type ' . get_class($value) . " does not support __toString() method"
+                    );
+                }
+
+                if (is_numeric($key)) {
+                    // xml does not allow numeric values, switch the value and the key
+                    $key = (string)$value;
+                    $value = null;
+                }
+
+                $domElement->appendChild(new DOMElement($key, (!empty($value)) ? (string) $value : null));
+
+            }
+        }
+
+        return $domElement;
     }
 
     /**

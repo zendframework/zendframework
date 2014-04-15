@@ -179,7 +179,7 @@ class FormFileTest extends CommonTestCase
         $element = new Element\File('foo');
         $element->setAttribute('multiple', true);
         $markup = $this->helper->render($element);
-        $this->assertRegexp('#<input[^>]*?(name="foo\[\]")#', $markup);
+        $this->assertRegexp('#<input[^>]*?(name="foo\&\#x5B\;\&\#x5D\;")#', $markup);
     }
 
     /**

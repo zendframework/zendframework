@@ -45,9 +45,9 @@ class HtmlPageTest extends \PHPUnit_Framework_TestCase
     {
         $htmlPage = $this->helper->__invoke('/path/to/page.html');
 
-        $objectStartElement = '<object data="/path/to/page.html"'
-                            . ' type="text/html"'
-                            . ' classid="clsid:25336920-03F9-11CF-8FD0-00AA00686F13">';
+        $objectStartElement = '<object data="&#x2F;path&#x2F;to&#x2F;page.html"'
+                            . ' type="text&#x2F;html"'
+                            . ' classid="clsid&#x3A;25336920-03F9-11CF-8FD0-00AA00686F13">';
 
         $this->assertContains($objectStartElement, $htmlPage);
         $this->assertContains('</object>', $htmlPage);

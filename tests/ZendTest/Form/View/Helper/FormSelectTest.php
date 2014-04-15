@@ -133,7 +133,7 @@ class FormSelectTest extends CommonTestCase
         $element->setValueOptions($options);
 
         $markup = $this->helper->render($element);
-        $this->assertRegexp('#optgroup[^>]*?label="This is the second label"[^>]*>\s*<option[^>]*?value="bar"[^>]*?>foo.*?</optgroup>#s', $markup);
+        $this->assertRegexp('#optgroup[^>]*?label="This\&\#x20\;is\&\#x20\;the\&\#x20\;second\&\#x20\;label"[^>]*>\s*<option[^>]*?value="bar"[^>]*?>foo.*?</optgroup>#s', $markup);
     }
 
     public function testCanDisableAnOptgroup()
@@ -150,7 +150,7 @@ class FormSelectTest extends CommonTestCase
         $element->setValueOptions($options);
 
         $markup = $this->helper->render($element);
-        $this->assertRegexp('#optgroup .*?label="This is the second label"[^>]*?disabled="disabled"[^>]*?>\s*<option[^>]*?value="bar"[^>]*?>foo.*?</optgroup>#', $markup);
+        $this->assertRegexp('#optgroup .*?label="This\&\#x20\;is\&\#x20\;the\&\#x20\;second\&\#x20\;label"[^>]*?disabled="disabled"[^>]*?>\s*<option[^>]*?value="bar"[^>]*?>foo.*?</optgroup>#', $markup);
     }
 
     /**
@@ -183,7 +183,7 @@ class FormSelectTest extends CommonTestCase
         $element->setAttribute('multiple', true);
         $element->setAttribute('value', array('value1', 'value2'));
         $markup = $this->helper->render($element);
-        $this->assertRegexp('#<select[^>]*?(name="foo\[\]")#', $markup);
+        $this->assertRegexp('#<select[^>]*?(name="foo\&\#x5B\;\&\#x5D\;")#', $markup);
     }
 
     public function getScalarOptionsDataProvider()
@@ -276,7 +276,7 @@ class FormSelectTest extends CommonTestCase
 
         $markup = $this->helper->__invoke($element);
 
-        $this->assertContains('label="translated label"', $markup);
+        $this->assertContains('label="translated&#x20;label"', $markup);
         $this->assertContains('>translated foo<', $markup);
         $this->assertContains('>translated bar<', $markup);
     }

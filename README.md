@@ -17,6 +17,16 @@ DD MMM YYYY
 
 ### UPDATES IN 2.3.1
 
+**This release contains security updates:**
+
+- **ZF2014-03:** Potential XSS vector in multiple view helpers due to
+  inappropriate HTML attribute escaping. Many view helpers were using the
+  `escapeHtml()` view helper in order to escape HTML attributes. This release
+  patches them to use the `escapeHtmlAttr()` view helper in these situations.
+  If you use form or navigation view helpers, or "HTML element" view helpers
+  (such as `gravatar()`, `htmlFlash()`, `htmlPage()`, or `htmlQuicktime()`), we
+  recommend upgrading immediately.
+
 Please see [CHANGELOG.md](CHANGELOG.md).
 
 ### SYSTEM REQUIREMENTS

@@ -24,6 +24,12 @@ use Zend\Stdlib\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
     /**
+     * Holds the hydrated method name
+     * @var array
+     */
+    private $hydratedMethodName = array();
+
+    /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
      * @var bool
      */
@@ -110,7 +116,8 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     {
         if (!is_object($object)) {
             throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)', __METHOD__
+                '%s expects the provided $object to be a PHP object)',
+                __METHOD__
             ));
         }
 
@@ -128,11 +135,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
         $methods = get_class_methods($object);
 
         foreach ($methods as $method) {
-            if (
-                !$filter->filter(
-                    get_class($object) . '::' . $method
-                )
-            ) {
+            if (!$filter->filter(get_class($object) . '::' . $method)) {
                 continue;
             }
 
@@ -169,15 +172,19 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     {
         if (!is_object($object)) {
             throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)', __METHOD__
+                '%s expects the provided $object to be a PHP object)',
+                __METHOD__
             ));
         }
 
         foreach ($data as $property => $value) {
-            $method = 'set' . ucfirst($this->hydrateName($property, $data));
-            if (is_callable(array($object, $method))) {
+            $this->hydratedMethodName[$property] = (isset($this->hydratedMethodName[$property]))
+                ? $this->hydratedMethodName[$property]
+                : 'set' . ucfirst($this->hydrateName($property, $data));
+            $method = $this->hydratedMethodName[$property];
+            if (is_callable(array($object, $this->hydratedMethodName[$property]))) {
                 $value = $this->hydrateValue($property, $value, $data);
-                $object->$method($value);
+                $object->{$this->hydratedMethodName[$property]}($value);
             }
         }
 

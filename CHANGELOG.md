@@ -1,5 +1,102 @@
 # CHANGELOG
 
+## 2.3.1 (2014-04-15)
+
+- [5392: Zend Db: Multiple nested selects - Zend Paginator with nested select bind parameters error](https://github.com/zendframework/zf2/pull/5392)
+- [5857: Fixes #4521](https://github.com/zendframework/zf2/pull/5857)
+- [5863: patch #5860 ](https://github.com/zendframework/zf2/pull/5863)
+- [5948: Circular dependency test for #5651](https://github.com/zendframework/zf2/pull/5948)
+- [5956: Prevent fatal error in JsonRpc-Client](https://github.com/zendframework/zf2/pull/5956)
+- [5957: php 5.6 compatibility](https://github.com/zendframework/zf2/pull/5957)
+- [5958: fix typo](https://github.com/zendframework/zf2/pull/5958)
+- [5959: Issue - AbstractDiServiceFactory ,MvcTranslatorFactory throws Exception](https://github.com/zendframework/zf2/pull/5959)
+- [5964: Upgrading branch aliases for components: 2.2-dev -&gt; 2.3-dev, 2.3-dev -&gt; 2.4-dev](https://github.com/zendframework/zf2/pull/5964)
+- [5968: Collection Input Filter fix messages](https://github.com/zendframework/zf2/pull/5968)
+- [5970: Adds disableInArrayValidator check to Radio](https://github.com/zendframework/zf2/pull/5970)
+- [5972: permissions : docBlock](https://github.com/zendframework/zf2/pull/5972)
+- [5973: Rbac::getRole() : check object-&gt;getName()](https://github.com/zendframework/zf2/pull/5973)
+- [5975: Update wrong DocBlock comment](https://github.com/zendframework/zf2/pull/5975)
+- [5978: ZF 2.3.0 BC break in MvcTranslator](https://github.com/zendframework/zf2/issues/5978)
+- [5979: Fix BC break in TranslatorServiceFactory](https://github.com/zendframework/zf2/pull/5979)
+- [5983: &#91;cs-fixer&#92; Centralize configuration in a single file](https://github.com/zendframework/zf2/pull/5983)
+- [5985: Corrected placeholder token '%' for some translations](https://github.com/zendframework/zf2/pull/5985)
+- [5986: InputFilter\Factory can't handle config with null input](https://github.com/zendframework/zf2/pull/5986)
+- [5988: Fix patterns for mobile (allows 7 as fisrt number)](https://github.com/zendframework/zf2/pull/5988)
+- [5989: Allow aria-labelledby and aria-describedby attributes in form elements](https://github.com/zendframework/zf2/pull/5989)
+- [5991: ---removed---](https://github.com/zendframework/zf2/issues/5991)
+- [5997: Update segment route to TranslatorInterface](https://github.com/zendframework/zf2/pull/5997)
+- [5998: Add missing bitwise validator in pluginmanager](https://github.com/zendframework/zf2/pull/5998)
+- [6000: Blackhole cache adapter : docblock corrections](https://github.com/zendframework/zf2/pull/6000)
+- [6003: typo on comment fixed](https://github.com/zendframework/zf2/pull/6003)
+- [6004: InputFilterPluginManager needs to allow InputInterface retrieval](https://github.com/zendframework/zf2/issues/6004)
+- [6007: ZendMvc depends on ZendLog by default in 2.3.0, add it to composer](https://github.com/zendframework/zf2/pull/6007)
+- [6009: Form\Element\Select multiple is always required](https://github.com/zendframework/zf2/pull/6009)
+- [6012: Zend\ProgressBar\Adapter\Console::notify should use mb&#95;substr](https://github.com/zendframework/zf2/issues/6012)
+- [6019: Fix for #6012 - Use wrapper for substr() in ProgressBar](https://github.com/zendframework/zf2/pull/6019)
+- [6021: Missed variable, renamed to one which exists.](https://github.com/zendframework/zf2/pull/6021)
+- [6022: Invalid instantiator of type &quot;NULL&quot; for &quot;Zend\I18n\Translator\TranslatorInterface&quot;](https://github.com/zendframework/zf2/issues/6022)
+- [6023: Parameter generator backslash escaping](https://github.com/zendframework/zf2/pull/6023)
+- [6024: Dispatch error should be preventable](https://github.com/zendframework/zf2/pull/6024)
+- [6026: decompress() Zend/Filter/Compress/Zip fix](https://github.com/zendframework/zf2/pull/6026)
+- [6027: Allow empty response strings in \Zend\Http\Response::fromStream](https://github.com/zendframework/zf2/pull/6027)
+- [6028: Method getValue should check the type of input inside InputFilter](https://github.com/zendframework/zf2/pull/6028)
+- [6030: Remove duplicate comment](https://github.com/zendframework/zf2/pull/6030)
+- [6031: remove double semicolon](https://github.com/zendframework/zf2/pull/6031)
+- [6032: fix comment on PhpMemoryArray loader](https://github.com/zendframework/zf2/pull/6032)
+- [6035: fix exception message. Must be Stdlib\Hydrator](https://github.com/zendframework/zf2/pull/6035)
+- [6037: Require PHP extension mcrypt in composer.json](https://github.com/zendframework/zf2/issues/6037)
+- [6041: Hotfix : Zend\Test trace error flag](https://github.com/zendframework/zf2/pull/6041)
+- [6042: Fix documentation](https://github.com/zendframework/zf2/pull/6042)
+- [6045: File Form Element don't works](https://github.com/zendframework/zf2/issues/6045)
+- [6046: Allow InputInterface retrieval from InputFilterPluginManager](https://github.com/zendframework/zf2/pull/6046)
+- [6047: Fix Zend\Test test](https://github.com/zendframework/zf2/pull/6047)
+- [6049: Fix for issue 6048](https://github.com/zendframework/zf2/pull/6049)
+- [6050: update copyright year that still using 2013 to 2014](https://github.com/zendframework/zf2/pull/6050)
+- [6051: 2.2.6 -&gt; 2.3.0 causes DI to try to instantiate `Zend\I18n\Translator\TranslatorInterface` instead of `Zend\I18n\Translator\Translator`](https://github.com/zendframework/zf2/issues/6051)
+- [6056: Fixes a typo](https://github.com/zendframework/zf2/pull/6056)
+- [6061: added missing License header](https://github.com/zendframework/zf2/pull/6061)
+- [6062: fixed typo](https://github.com/zendframework/zf2/pull/6062)
+- [6070: code-to-explain-code test in MultiCheckboxTest to check multi selected ](https://github.com/zendframework/zf2/pull/6070)
+- [6071: Re enable zip compression tests on Travis](https://github.com/zendframework/zf2/pull/6071)
+- [6077: fix for issue 6076. avoid GlobIterator globbing to directories which it ...](https://github.com/zendframework/zf2/pull/6077)
+- [6082: Using \Zend\Db\Sql\Expression as part of join name.  Object of class Zend\Db\Sql\Expression could not be converted to string](https://github.com/zendframework/zf2/issues/6082)
+- [6083: NumberOfParameterFilter correctly handles argument count greater than 0.](https://github.com/zendframework/zf2/pull/6083)
+- [6085: Fixes #5929 - Remove a page recursively](https://github.com/zendframework/zf2/pull/6085)
+- [6089: Problems with serializing Zend\Stdlib\ArrayObject](https://github.com/zendframework/zf2/issues/6089)
+- [6092: Hotfix for #6089 - ArrayObject serialization doesn't restore `protectedProperties`](https://github.com/zendframework/zf2/pull/6092)
+- [6093: Fix unused imports and local variables](https://github.com/zendframework/zf2/pull/6093)
+- [6094: Fix undefined classes, constants and methods](https://github.com/zendframework/zf2/pull/6094)
+- [6096: Prevent ArrayObject recursion in 5.6](https://github.com/zendframework/zf2/pull/6096)
+- [6100: More tests for nested form fieldsets](https://github.com/zendframework/zf2/pull/6100)
+- [6102: Zend\Filter\Compress\Tar::setMode() would not work](https://github.com/zendframework/zf2/issues/6102)
+- [6103: Zend\Filter\Compress\Tar::setMode() should work with case-insensitive](https://github.com/zendframework/zf2/pull/6103)
+- [6104: Validator\Ip should not allow newlines in any case.](https://github.com/zendframework/zf2/pull/6104)
+- [6105: add missing resource messages at en - Bitwize &amp; Datestep](https://github.com/zendframework/zf2/pull/6105)
+- [6106: suggest ext-mcrypt](https://github.com/zendframework/zf2/pull/6106)
+- [6110: Allow session garbage collection to use an index](https://github.com/zendframework/zf2/pull/6110)
+- [6116: fixed typos](https://github.com/zendframework/zf2/pull/6116)
+- [6118: Extra fieldsets are created when calling form bind multiple times](https://github.com/zendframework/zf2/pull/6118)
+- [6123: Mail: Require Zend\Validator](https://github.com/zendframework/zf2/pull/6123)
+- [6125: added missing { and } after if](https://github.com/zendframework/zf2/pull/6125)
+- [6126: Tiny typo fix in docblock](https://github.com/zendframework/zf2/pull/6126)
+- [6128: Fix class description](https://github.com/zendframework/zf2/pull/6128)
+- [6129: change is&#95;null($var) to (null === $var) for consistency](https://github.com/zendframework/zf2/pull/6129)
+- [6130: change docblocks and comments that still using &quot;Zend&#95;&quot; to &quot;Zend\&quot;](https://github.com/zendframework/zf2/pull/6130)
+- [6132: FormElementManager: Only initialize a shared element once](https://github.com/zendframework/zf2/pull/6132)
+- [6136: Fix: No need to prefix imports](https://github.com/zendframework/zf2/pull/6136)
+- [6139: Fix: Test name](https://github.com/zendframework/zf2/pull/6139)
+- [6140: Fix: Indentation in array initialization, trailing commas](https://github.com/zendframework/zf2/pull/6140)
+
+### SECURITY UPDATES
+
+- **ZF2014-03:** Potential XSS vector in multiple view helpers due to
+  inappropriate HTML attribute escaping. Many view helpers were using the
+  `escapeHtml()` view helper in order to escape HTML attributes. This release
+  patches them to use the `escapeHtmlAttr()` view helper in these situations.
+  If you use form or navigation view helpers, or "HTML element" view helpers
+  (such as `gravatar()`, `htmlFlash()`, `htmlPage()`, or `htmlQuicktime()`), we
+  recommend upgrading immediately.
+
 ## 2.3.0 (2014-03-12)
 
 - [3015: $escapeHtmlHelper is not optional, in case you want real HTML as a label](https://github.com/zendframework/zf2/issues/3015)
@@ -237,6 +334,18 @@
 - [5942: Mvc\I18n\Translator -&gt; setLocale](https://github.com/zendframework/zf2/pull/5942)
 - [5943: Fixed route matcher test](https://github.com/zendframework/zf2/pull/5943)
 - [5951: Fix console mixed case optional value params](https://github.com/zendframework/zf2/pull/5951)
+
+## 2.2.7 (2014-04-15)
+
+### SECURITY UPDATES
+
+- **ZF2014-03:** Potential XSS vector in multiple view helpers due to
+  inappropriate HTML attribute escaping. Many view helpers were using the
+  `escapeHtml()` view helper in order to escape HTML attributes. This release
+  patches them to use the `escapeHtmlAttr()` view helper in these situations.
+  If you use form or navigation view helpers, or "HTML element" view helpers
+  (such as `gravatar()`, `htmlFlash()`, `htmlPage()`, or `htmlQuicktime()`), we
+  recommend upgrading immediately.
 
 ## 2.2.6 (2014-03-06)
 

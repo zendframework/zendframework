@@ -16,9 +16,9 @@ use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager;
 
 /**
- * Class AbstractFactoryTest
+ * Class AbstractConfigFactoryTest
  */
-class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
+class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var \Zend\Mvc\Application

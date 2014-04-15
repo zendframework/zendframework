@@ -45,7 +45,7 @@ class HtmlFlashTest extends \PHPUnit_Framework_TestCase
     {
         $htmlFlash = $this->helper->__invoke('/path/to/flash.swf');
 
-        $objectStartElement = '<object data="/path/to/flash.swf" type="application/x-shockwave-flash">';
+        $objectStartElement = '<object data="&#x2F;path&#x2F;to&#x2F;flash.swf" type="application&#x2F;x-shockwave-flash">';
 
         $this->assertContains($objectStartElement, $htmlFlash);
         $this->assertContains('</object>', $htmlFlash);

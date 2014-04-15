@@ -65,8 +65,9 @@ abstract class AbstractHtmlElement extends AbstractHelper
      */
     protected function htmlAttribs($attribs)
     {
-        $xhtml   = '';
-        $escaper = $this->getView()->plugin('escapehtml');
+        $xhtml          = '';
+        $escaper        = $this->getView()->plugin('escapehtml');
+        $escapeHtmlAttr = $this->getView()->plugin('escapehtmlattr');
 
         foreach ((array) $attribs as $key => $val) {
             $key = $escaper($key);
@@ -77,17 +78,13 @@ abstract class AbstractHtmlElement extends AbstractHelper
                     // non-scalar data should be cast to JSON first
                     $val = \Zend\Json\Json::encode($val);
                 }
-                // Escape single quotes inside event attribute values.
-                // This will create html, where the attribute value has
-                // single quotes around it, and escaped single quotes or
-                // non-escaped double quotes inside of it
-                $val = str_replace('\'', '&#39;', $val);
             } else {
                 if (is_array($val)) {
                     $val = implode(' ', $val);
                 }
-                $val = $escaper($val);
             }
+
+            $val = $escapeHtmlAttr($val);
 
             if ('id' == $key) {
                 $val = $this->normalizeId($val);

@@ -208,9 +208,12 @@ abstract class AbstractHelper extends BaseAbstractHelper
     {
         $attributes = $this->prepareAttributes($attributes);
         $escape     = $this->getEscapeHtmlHelper();
+        $escapeAttr = $this->getEscapeHtmlAttrHelper();
         $strings    = array();
+
         foreach ($attributes as $key => $value) {
             $key = strtolower($key);
+
             if (!$value && isset($this->booleanAttributes[$key])) {
                 // Skip boolean attributes that expect empty string as false value
                 if ('' === $this->booleanAttributes[$key]['off']) {
@@ -221,15 +224,14 @@ abstract class AbstractHelper extends BaseAbstractHelper
             //check if attribute is translatable
             if (isset($this->translatableAttributes[$key]) && !empty($value)) {
                 if (($translator = $this->getTranslator()) !== null) {
-                    $value = $translator->translate(
-                            $value, $this->getTranslatorTextDomain()
-                    );
+                    $value = $translator->translate($value, $this->getTranslatorTextDomain());
                 }
             }
 
             //@TODO Escape event attributes like AbstractHtmlElement view helper does in htmlAttribs ??
-            $strings[] = sprintf('%s="%s"', $escape($key), $escape($value));
+            $strings[] = sprintf('%s="%s"', $escape($key), $escapeAttr($value));
         }
+
         return implode(' ', $strings);
     }
 

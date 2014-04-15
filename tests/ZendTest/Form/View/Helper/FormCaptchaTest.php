@@ -133,7 +133,7 @@ class FormCaptchaTest extends CommonTestCase
         $markup = $this->helper->render($element);
 
         $this->assertContains('<img ', $markup);
-        $this->assertContains($captcha->getImgUrl(), $markup);
+        $this->assertContains(str_replace('/', '&#x2F;', $captcha->getImgUrl()), $markup);
         $this->assertContains($captcha->getId(), $markup);
         $this->assertRegExp('#<img[^>]*(id="' . $element->getAttribute('id') . '-image")[^>]*>#', $markup);
         $this->assertRegExp('#<input[^>]*(id="' . $element->getAttribute('id') . '")[^>]*(type="text")[^>]*>#', $markup);

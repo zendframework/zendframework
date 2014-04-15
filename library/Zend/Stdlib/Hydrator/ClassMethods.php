@@ -181,7 +181,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
             $this->hydratedMethodName[$property] = (isset($this->hydratedMethodName[$property]))
                 ? $this->hydratedMethodName[$property]
                 : 'set' . ucfirst($this->hydrateName($property, $data));
-            $method = $this->hydratedMethodName[$property];
+
             if (is_callable(array($object, $this->hydratedMethodName[$property]))) {
                 $value = $this->hydrateValue($property, $value, $data);
                 $object->{$this->hydratedMethodName[$property]}($value);

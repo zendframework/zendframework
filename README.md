@@ -5,23 +5,23 @@ Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?bra
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.2.6*
+*Zend Framework 2.2.7*
 
-This is the sixth maintenance release for the 2.2 series.
+This is the seventh maintenance release for the 2.2 series.
 
-06 Mar 2014
+15 Apr 2014
 
-### UPDATES IN 2.2.6
+### UPDATES IN 2.2.7
 
 **This release contains security updates:**
 
-- **ZF2014-01:** Potential XXE/XEE attacks using PHP functions:
-  `simplexml_load_*`, `DOMDocument::loadXML`, and `xml_parse`. A new component,
-  `ZendXml`, was introduced to mitigate XML eXternal Entity and XML Entity
-  Expansion vectors that are present in older versions of libxml2 and/or PHP.
-  `Zend\Json\Json::fromXml()` and `Zend\XmlRpc`'s `Response` and `Fault` classes
-  were potentially vulnerable to these attacks. If you use either of these
-  components, we recommend upgrading immediately.
+- **ZF2014-03:** Potential XSS vector in multiple view helpers due to
+  inappropriate HTML attribute escaping. Many view helpers were using the
+  `escapeHtml()` view helper in order to escape HTML attributes. This release
+  patches them to use the `escapeHtmlAttr()` view helper in these situations.
+  If you use form or navigation view helpers, or "HTML element" view helpers
+  (such as `gravatar()`, `htmlFlash()`, `htmlPage()`, or `htmlQuicktime()`), we
+  recommend upgrading immediately.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

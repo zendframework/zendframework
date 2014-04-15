@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 2.2.7 (2014-04-015)
+
+### SECURITY UPDATES
+
+- **ZF2014-03:** Potential XSS vector in multiple view helpers due to
+  inappropriate HTML attribute escaping. Many view helpers were using the
+  `escapeHtml()` view helper in order to escape HTML attributes. This release
+  patches them to use the `escapeHtmlAttr()` view helper in these situations.
+  If you use form or navigation view helpers, or "HTML element" view helpers
+  (such as `gravatar()`, `htmlFlash()`, `htmlPage()`, or `htmlQuicktime()`), we
+  recommend upgrading immediately.
+
 ## 2.2.6 (2014-03-06)
 
 - [4490: Nonvalid literal value for the boolean type, PDO](https://github.com/zendframework/zf2/pull/4490)

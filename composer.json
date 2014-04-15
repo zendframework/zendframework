@@ -47,7 +47,6 @@
         "ext-intl": "ext/intl for i18n features (included in default builds of PHP)",
         "doctrine/annotations": "Doctrine Annotations >=1.0 for annotation features",
         "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable",
-        "mongofill/mongofill": "Alternative to ext=mongo - a pure PHP implementation designed as a drop in replacement",
         "ocramius/proxy-manager": "ProxyManager 0.5.* to handle lazy initialization of services",
         "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",
         "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"

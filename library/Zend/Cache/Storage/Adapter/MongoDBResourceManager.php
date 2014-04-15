@@ -9,10 +9,8 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use DateTime;
 use MongoCollection as MongoDBResource;
 use MongoException as MongoDBResourceException;
-use MongoDate as MongoDBDateResource;
 use Traversable;
 use Zend\Cache\Exception;
 use Zend\Stdlib\ArrayUtils;
@@ -135,22 +133,5 @@ class MongoDBResourceManager
         $resource['initialized'] = false;
 
         return $this;
-    }
-
-    /**
-     * create mongo date resource
-     *
-     * @param null|int|DateTime $timestamp
-     * @return MongoDBDateResource
-     */
-    public function createMongoDate($timestamp = null)
-    {
-        if ($timestamp === null) {
-            $timestamp = time();
-        } elseif ($timestamp instanceof DateTime) {
-            $timestamp = $timestamp->getTimestamp();
-        }
-
-        return new MongoDBDateResource($timestamp);
     }
 }

@@ -9,7 +9,6 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
-use DateTime;
 use Zend\Cache\Exception;
 use Zend\Cache\Storage\Adapter\MongoDBResourceManager;
 use Zend\Config\Config;
@@ -245,19 +244,5 @@ class MongoDBResourceManagerTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertAttributeEquals($expected, 'resources', $this->object);
-    }
-
-    public function testCreateMongoDate()
-    {
-        $this->assertInstanceOf('\MongoDate', $this->object->createMongoDate());
-    }
-
-    public function testCreateMongoDateWithDateTime()
-    {
-        $date = new DateTime();
-
-        $return = $this->object->createMongoDate($date);
-
-        $this->assertEquals($date->getTimestamp(), $return->sec);
     }
 }

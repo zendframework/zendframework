@@ -10,6 +10,7 @@
 namespace Zend\Cache\Storage\Adapter;
 
 use MongoCollection as MongoResource;
+use MongoDate;
 use MongoException as MongoResourceException;
 use stdClass;
 use Zend\Cache\Exception;
@@ -54,7 +55,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     public function __construct($options = null)
     {
-        if (!extension_loaded('mongo') || !class_exists('\Mongo') || !class_exists('\MongoClient')) {
+        if (!class_exists('\Mongo') || !class_exists('\MongoClient')) {
             throw new Exception\ExtensionNotLoadedException('MongoDB extension not loaded or Mongo polyfill not included');
         }
 
@@ -128,23 +129,10 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
-        $collection = $this->getMongoDBResource();
+        $result = $this->fetchFromCollection($normalizedKey);
 
-        $key = $this->prefixNamespaceToKey($normalizedKey);
-
-        try {
-            $result = $collection->findOne(
-                array('key' => $key)
-            );
-
-        } catch (MongoResourceException $e) {
-            throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
-        }
-
-        // MongoCollection::findOne returns record matching search or null
-        if ($result === null) {
+        if ($result == null) {
             $success = false;
-
             return null;
         }
 
@@ -153,6 +141,31 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
             $this->internalRemoveItem($key);
 
             return null;
+        }
+
+        if (isset($result['expires'])) {
+            if (!($result['expires'] instanceof MongoDate)) {
+                throw new Exception\RuntimeException(sprintf(
+                    "The found item _id '%s' for key '%s' is not a valid cache item'
+                    . ': the field 'expired' isn't an instance of MongoDate",
+                    (string) $result['_id'],
+                    $this->namespacePrefix . $normalizedKey
+                ));
+            }
+            if ($result['expires']->sec < time()) {
+                $success = false;
+                $this->internalRemoveItem($key);
+                return null;
+            }
+        }
+
+        if (!array_key_exists('value', $result)) {
+            throw new Exception\RuntimeException(sprintf(
+                "The found item _id '%s' for key '%s' is not a valid cache item'
+                . ': missing the field 'value'",
+                (string) $result['_id'],
+                $this->namespacePrefix . $normalizedKey
+            ));
         }
 
         $value = $result['value'];
@@ -175,12 +188,15 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     {
         $mongo = $this->getMongoDBResource();
 
-        $key = $this->prefixNamespaceToKey($normalizedKey);
+        $key = $this->namespacePrefix . $normalizedKey;
 
         $ttl = $this->getOptions()->getTTl();
 
         if ($ttl > 0) {
-            $expires = $this->getOptions()->getResourceManager()->createMongoDate(time() + $ttl);
+            $expiresMicro = microtime(true) + $ttl;
+            $expiresSecs = (int) $expiresMicro;
+
+            $expires = new MongoDate($expiresSecs, $expiresMicro - $expiresSecs);
         } else {
             $expires = null;
         }
@@ -188,10 +204,11 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
         $cacheItem = array(
             'key' => $key,
             'value' => $value,
-            'expires' => $expires,
         );
 
-
+        if ($expires !== null) {
+            $cacheItem['expires'] = $expires;
+        }
 
         try {
             $mongo->remove(array('key' => $key));
@@ -222,7 +239,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     {
         $mongo = $this->getMongoDBResource();
 
-        $key = $this->prefixNamespaceToKey($normalizedKey);
+        $key = $this->namespacePrefix . $normalizedKey;
 
         $deleteItem = array('key' => $key);
 
@@ -241,19 +258,6 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
         }
 
         return false;
-    }
-
-    /**
-     * Prefix namespace to key
-     *
-     * @param string $key
-     * @return void
-     */
-    protected function prefixNamespaceToKey($key)
-    {
-        $namespace = $this->getOptions()->getNamespace();
-        $prefix = ($namespace === '') ? '' : $namespace . $this->namespacePrefix;
-        return $prefix . $key;
     }
 
     /**
@@ -295,7 +299,9 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
                         'object'   => false,
                         'resource' => false,
                     ),
-                    'supportedMetadata'  => array(),
+                    'supportedMetadata'  => array(
+                        '_id',
+                    ),
                     'minTtl'             => 0,
                     'maxTtl'             => 0,
                     'staticTtl'          => true,
@@ -309,5 +315,48 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
         }
 
         return $this->capabilities;
+    }
+
+    /**
+     * Internal method to get metadata of an item.
+     *
+     * @param  string $normalizedKey
+     * @return array|bool Metadata on success, false on failure
+     * @throws Exception\ExceptionInterface
+     */
+    protected function internalGetMetadata(& $normalizedKey)
+    {
+        $result = $this->fetchFromCollection($normalizedKey);
+
+        if ($result == null) {
+            return false;
+        }
+
+        return array(
+            '_id' => $result['_id'],
+        );
+    }
+
+    /**
+     * Return raw records from MongoCollection
+     *
+     * @param string $normalizedKey
+     * @return array|null
+     * @throws Exception\RuntimeException
+     */
+    protected function fetchFromCollection(& $normalizedKey)
+    {
+        $collection = $this->getMongoDBResource();
+
+        $key = $this->namespacePrefix . $normalizedKey;
+
+        try {
+            return $collection->findOne(
+                array('key' => $key)
+            );
+
+        } catch (MongoResourceException $e) {
+            throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }

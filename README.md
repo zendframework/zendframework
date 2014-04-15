@@ -9,11 +9,11 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.3.1dev*
+*Zend Framework 2.3.1*
 
 This is the first maintenance release for the version 2.3 series.
 
-DD MMM YYYY
+15 Apr 2014
 
 ### UPDATES IN 2.3.1
 

@@ -178,6 +178,35 @@ class CollectionTest extends TestCase
         $this->assertArrayHasKey('colors', $messages);
     }
 
+    public function testCannotValidateFormWithCollectionWithBadFieldsetField()
+    {
+        $this->form->setData(array(
+            'colors' => array(
+                '#ffffff',
+                '#ffffff'
+            ),
+            'fieldsets' => array(
+                array(
+                    'field' => 'oneValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                ),
+                array(
+                    'field' => 'twoValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => null,
+                    )
+                )
+            )
+        ));
+
+        $this->assertEquals(false, $this->form->isValid());
+        $messages = $this->form->getMessages();
+        $this->assertCount(1, $messages);
+        $this->assertArrayHasKey('fieldsets', $messages);
+    }
+
     public function testCanValidateFormWithCollectionWithTemplate()
     {
         $collection = $this->form->get('colors');

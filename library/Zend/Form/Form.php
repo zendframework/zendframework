@@ -760,7 +760,7 @@ class Form extends Fieldset implements FormInterface
             $elements = $fieldset->getElements();
         }
 
-        if (!$fieldset instanceof Collection || $inputFilter instanceof CollectionInputFilter) {
+        if (!$fieldset instanceof Collection || !$fieldset->getTargetElement() instanceof FieldsetInterface || $inputFilter instanceof CollectionInputFilter) {
             foreach ($elements as $element) {
                 $name = $element->getName();
 

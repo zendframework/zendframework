@@ -113,9 +113,9 @@ class FingersCrossed extends AbstractWriter
 
         if (!$writer instanceof WriterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                    'Writer must implement %s\WriterInterface; received "%s"',
-                    __NAMESPACE__,
-                    is_object($writer) ? get_class($writer) : gettype($writer)
+                'Writer must implement %s\WriterInterface; received "%s"',
+                __NAMESPACE__,
+                is_object($writer) ? get_class($writer) : gettype($writer)
             ));
         }
 
@@ -150,9 +150,9 @@ class FingersCrossed extends AbstractWriter
         }
         if (!$plugins instanceof WriterPluginManager) {
             throw new Exception\InvalidArgumentException(sprintf(
-                    'Writer plugin manager must extend %s\WriterPluginManager; received %s',
-                    __NAMESPACE__,
-                    is_object($plugins) ? get_class($plugins) : gettype($plugins)
+                'Writer plugin manager must extend %s\WriterPluginManager; received %s',
+                __NAMESPACE__,
+                is_object($plugins) ? get_class($plugins) : gettype($plugins)
             ));
         }
 

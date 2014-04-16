@@ -22,6 +22,9 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
 
     public $cookieDateFormat = 'D, d-M-y H:i:s e';
 
+    /**
+     * @var SessionManager
+     */
     protected $manager;
 
     public function setUp()
@@ -535,4 +538,17 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($_SESSION['__ZF'], $metaData);
     }
 
+    /**
+     * @runInSeparateProcess
+     */
+    public function testSessionValidationDoesNotHaltOnNoopListener()
+    {
+        $validator = $this->getMock('stdClass', array('__invoke'));
+
+        $validator->expects($this->once())->method('__invoke');
+
+        $this->manager->getValidatorChain()->attach('session.validate', $validator);
+
+        $this->assertTrue($this->manager->isValid());
+    }
 }

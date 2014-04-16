@@ -104,6 +104,26 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $this->readAttribute($filters[1], 'priority'));
     }
 
+    public function testConstructorWithPriorityFilter()
+    {
+        // Accept an int as a PriorityFilter
+        $writer = new ConcreteWriter(array('filters' => 3));
+        $filters = $this->readAttribute($writer, 'filters');
+        $this->assertCount(1, $filters);
+        $this->assertInstanceOf('Zend\Log\Filter\Priority', $filters[0]);
+        $this->assertEquals(3, $this->readAttribute($filters[0], 'priority'));
+
+        // Accept an int in an array of filters as a PriorityFilter
+        $options = array('filters' => array(3, array('name' => 'mock')));
+
+        $writer = new ConcreteWriter($options);
+        $filters = $this->readAttribute($writer, 'filters');
+        $this->assertCount(2, $filters);
+        $this->assertInstanceOf('Zend\Log\Filter\Priority', $filters[0]);
+        $this->assertEquals(3, $this->readAttribute($filters[0], 'priority'));
+        $this->assertInstanceOf('Zend\Log\Filter\Mock', $filters[1]);
+    }
+
     /**
      * @covers Zend\Log\Writer\AbstractWriter::getFormatter
      */

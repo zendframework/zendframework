@@ -150,6 +150,32 @@ class CollectionTest extends TestCase
         $this->assertEquals(true, $this->form->isValid());
     }
 
+    public function testCannotValidateFormWithCollectionWithBadColor()
+    {
+        $this->form->setData(array(
+            'colors' => array(
+                '#ffffff',
+                '123465'
+            ),
+            'fieldsets' => array(
+                array(
+                    'field' => 'oneValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                ),
+                array(
+                    'field' => 'twoValue',
+                    'nested_fieldset' => array(
+                        'anotherField' => 'anotherValue'
+                    )
+                )
+            )
+        ));
+
+        $this->assertEquals(false, $this->form->isValid());
+    }
+
     public function testCanValidateFormWithCollectionWithTemplate()
     {
         $collection = $this->form->get('colors');

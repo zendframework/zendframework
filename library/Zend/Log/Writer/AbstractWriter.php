@@ -78,11 +78,11 @@ abstract class AbstractWriter implements WriterInterface
         if (is_array($options)) {
             if (isset($options['filters'])) {
                 $filters = $options['filters'];
-                if (is_string($filters) || $filters instanceof Filter\FilterInterface) {
+                if (is_int($filters) || is_string($filters) || $filters instanceof Filter\FilterInterface) {
                     $this->addFilter($filters);
                 } elseif (is_array($filters)) {
                     foreach ($filters as $filter) {
-                        if (is_string($filter) || $filter instanceof Filter\FilterInterface) {
+                        if (is_int($filter) || is_string($filter) || $filter instanceof Filter\FilterInterface) {
                             $this->addFilter($filter);
                         } elseif (is_array($filter)) {
                             if (!isset($filter['name'])) {

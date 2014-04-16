@@ -174,6 +174,8 @@ class CollectionTest extends TestCase
         ));
 
         $this->assertEquals(false, $this->form->isValid());
+        $messages = $this->form->getMessages();
+        $this->assertArrayHasKey('colors', $messages);
     }
 
     public function testCanValidateFormWithCollectionWithTemplate()

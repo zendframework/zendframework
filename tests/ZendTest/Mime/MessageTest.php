@@ -136,7 +136,6 @@ EOD;
         $mimeMessage->setParts(array());
 
         $mailMessage->setBody($mimeMessage);
-        $mailMessage->getBodyText();
 
         $this->assertEquals('', $mimeMessage->generateMessage());
         $this->assertEquals('', $mailMessage->getBodyText());

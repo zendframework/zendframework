@@ -10,6 +10,7 @@
 namespace ZendTest\Mime;
 
 use Zend\Mime;
+use Zend\Mail;
 
 /**
  * @group      Zend_Mime
@@ -123,5 +124,21 @@ EOD;
         $parts = $message->getParts();
         $test  = current($parts);
         $this->assertSame($part, $test);
+    }
+
+    /**
+     * @group ZF2-5962
+     */
+    public function testPassEmptyArrayIntoSetPartsShouldReturnEmptyString()
+    {
+        $mailMessage = new Mail\Message();
+        $mimeMessage = new Mime\Message();
+        $mimeMessage->setParts(array());
+
+        $mailMessage->setBody($mimeMessage);
+        $mailMessage->getBodyText();
+
+        $this->assertEquals('', $mimeMessage->generateMessage());
+        $this->assertEquals('', $mailMessage->getBodyText());
     }
 }

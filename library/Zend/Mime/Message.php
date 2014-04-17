@@ -107,8 +107,12 @@ class Message
     public function generateMessage($EOL = Mime::LINEEND)
     {
         if (!$this->isMultiPart()) {
-            $part = current($this->parts);
-            $body = $part->getContent($EOL);
+            if (!empty($this->parts)) {
+                $part = current($this->parts);
+                $body = $part->getContent($EOL);
+            } else {
+                return '';
+            }
         } else {
             $mime = $this->getMime();
 

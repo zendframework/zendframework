@@ -189,10 +189,11 @@ class BaseInputFilter implements
     /**
      * Is the data set valid?
      *
+     * @param  mixed|null $context
      * @throws Exception\RuntimeException
      * @return bool
      */
-    public function isValid()
+    public function isValid($context = null)
     {
         $data = $this->getRawValues();
         if (null === $data) {
@@ -203,17 +204,18 @@ class BaseInputFilter implements
         }
 
         $inputs = $this->validationGroup ?: array_keys($this->inputs);
-        return $this->validateInputs($inputs, $data);
+        return $this->validateInputs($inputs, $data, $context);
     }
 
     /**
      * Validate a set of inputs against the current data
      *
-     * @param  array $inputs
-     * @param  array $data
+     * @param  array      $inputs
+     * @param  array      $data
+     * @param  mixed|null $context
      * @return bool
      */
-    protected function validateInputs(array $inputs, array $data = array())
+    protected function validateInputs(array $inputs, array $data = array(), $context = null)
     {
         // backwards compatibility
         if (empty($data)) {
@@ -328,7 +330,7 @@ class BaseInputFilter implements
 
             // Validate an input filter
             if ($input instanceof InputFilterInterface) {
-                if (!$input->isValid()) {
+                if (!$input->isValid($context)) {
                     $this->invalidInputs[$name] = $input;
                     $valid = false;
                     continue;
@@ -339,7 +341,9 @@ class BaseInputFilter implements
 
             // Validate an input
             if ($input instanceof InputInterface) {
-                if (!$input->isValid($data)) {
+                $inputContext = $context ?: $data;
+
+                if (!$input->isValid($inputContext)) {
                     // Validation failure
                     $this->invalidInputs[$name] = $input;
                     $valid = false;
@@ -530,6 +534,7 @@ class BaseInputFilter implements
                 $values[$name] = $input->getRawValues();
                 continue;
             }
+
             $values[$name] = $input->getRawValue();
         }
         return $values;

@@ -18,6 +18,11 @@ use Zend\InputFilter\InputFilter;
 
 class InputFilterTest extends TestCase
 {
+    /**
+     * @var InputFilter
+     */
+    protected $filter;
+
     public function setUp()
     {
         $this->filter = new InputFilter();
@@ -95,5 +100,19 @@ class InputFilterTest extends TestCase
 
         $this->assertTrue($this->filter->isvalid());
         $this->assertSame($data, $this->filter->getValues());
+    }
+
+    public function testCanUseContextPassedToInputFilter()
+    {
+        $context = new \stdClass();
+
+        $input = $this->getMock('Zend\InputFilter\InputInterface');
+        $input->expects($this->once())->method('isValid')->with($context)->will($this->returnValue(true));
+        $input->expects($this->any())->method('getRawValue')->will($this->returnValue('Mwop'));
+
+        $this->filter->add($input, 'username');
+        $this->filter->setData(array('username' => 'Mwop'));
+
+        $this->filter->isValid($context);
     }
 }

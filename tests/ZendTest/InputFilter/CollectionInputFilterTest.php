@@ -149,6 +149,23 @@ class CollectionInputFilterTest extends TestCase
         $this->assertEquals(3, $this->filter->getCount());
     }
 
+    public function testGetCountReturnsRightCountOnConsecutiveCallsWithDifferentData()
+    {
+        $collectionData1 = array(
+            array('foo' => 'bar'),
+            array('foo' => 'baz')
+        );
+
+        $collectionData2 = array(
+            array('foo' => 'bar')
+        );
+
+        $this->filter->setData($collectionData1);
+        $this->assertEquals(2, $this->filter->getCount());
+        $this->filter->setData($collectionData2);
+        $this->assertEquals(1, $this->filter->getCount());
+    }
+
     public function testCanValidateValidData()
     {
         if (!extension_loaded('intl')) {

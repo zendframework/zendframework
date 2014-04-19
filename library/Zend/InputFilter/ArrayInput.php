@@ -18,6 +18,7 @@ class ArrayInput extends Input
 
     /**
      * @param  array $value
+     * @throws Exception\InvalidArgumentException
      * @return Input
      */
     public function setValue($value)

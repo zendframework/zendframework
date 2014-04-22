@@ -543,6 +543,7 @@ class Collection extends Fieldset
     /**
      * Add a new instance of the target element
      *
+     * @param string $name
      * @return ElementInterface
      * @throws Exception\DomainException
      */

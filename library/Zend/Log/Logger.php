@@ -594,7 +594,6 @@ class Logger implements LoggerInterface
         static::$registeredErrorHandler = false;
     }
 
-
     /**
      * Register a shutdown handler to log fatal errors
      *
@@ -627,7 +626,6 @@ class Logger implements LoggerInterface
         static::$registeredFatalErrorShutdownFunction = true;
         return true;
     }
-
 
     /**
      * Register logging system as an exception handler to log PHP exceptions

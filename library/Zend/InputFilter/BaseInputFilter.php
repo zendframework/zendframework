@@ -369,6 +369,7 @@ class BaseInputFilter implements
      * each specifying a single input.
      *
      * @param  mixed $name
+     * @throws Exception\InvalidArgumentException
      * @return InputFilterInterface
      */
     public function setValidationGroup($name)

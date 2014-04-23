@@ -47,6 +47,7 @@ class CollectionInputFilter extends InputFilter
      * Set the input filter to use when looping the data
      *
      * @param BaseInputFilter|array|Traversable $inputFilter
+     * @throws Exception\RuntimeException
      * @return CollectionInputFilter
      */
     public function setInputFilter($inputFilter)

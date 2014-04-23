@@ -449,7 +449,7 @@ class Logger implements LoggerInterface
             'priority'     => (int) $priority,
             'priorityName' => $this->priorities[$priority],
             'message'      => (string) $message,
-            'extra'        => $extra
+            'extra'        => $extra,
         );
 
         foreach ($this->processors->toArray() as $processor) {
@@ -617,7 +617,7 @@ class Logger implements LoggerInterface
                     $error['message'],
                     array(
                         'file' => $error['file'],
-                        'line' => $error['line']
+                        'line' => $error['line'],
                     )
                 );
             }

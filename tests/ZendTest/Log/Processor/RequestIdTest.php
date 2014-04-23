@@ -26,7 +26,7 @@ class RequestIdTest extends \PHPUnit_Framework_TestCase
             'priority'     => 1,
             'priorityName' => 'ALERT',
             'message'      => 'foo',
-            'extra'        => array()
+            'extra'        => array(),
         );
 
         $eventA = $processor->process($event);

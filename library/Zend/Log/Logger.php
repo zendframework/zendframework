@@ -344,9 +344,9 @@ class Logger implements LoggerInterface
         }
         if (!$plugins instanceof ProcessorPluginManager) {
             throw new Exception\InvalidArgumentException(sprintf(
-                    'processor plugin manager must extend %s\ProcessorPluginManager; received %s',
-                    __NAMESPACE__,
-                    is_object($plugins) ? get_class($plugins) : gettype($plugins)
+                'processor plugin manager must extend %s\ProcessorPluginManager; received %s',
+                __NAMESPACE__,
+                is_object($plugins) ? get_class($plugins) : gettype($plugins)
             ));
         }
 
@@ -381,8 +381,8 @@ class Logger implements LoggerInterface
             $processor = $this->processorPlugin($processor, $options);
         } elseif (!$processor instanceof Processor\ProcessorInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                    'Processor must implement Zend\Log\ProcessorInterface; received "%s"',
-                    is_object($processor) ? get_class($processor) : gettype($processor)
+                'Processor must implement Zend\Log\ProcessorInterface; received "%s"',
+                is_object($processor) ? get_class($processor) : gettype($processor)
             ));
         }
         $this->processors->insert($processor, $priority);

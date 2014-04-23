@@ -30,7 +30,6 @@ trait MutableCreationOptionsAwareTrait
         $this->creationOptions = $creationOptions;
     }
 
-
     /**
      * Get creation options
      *

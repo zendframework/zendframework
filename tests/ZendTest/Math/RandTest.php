@@ -43,6 +43,44 @@ class RandTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider dataProviderForTestRandIntegerRangeTest
+     */
+    public function testRandIntegerRangeTest($min, $max, $cycles)
+    {
+        $counter = array();
+        for ($i = $min; $i <= $max; $i++) {
+            $counter[$i] = 0;
+        }
+
+        for ($j = 0; $j < $cycles; $j++) {
+            $value = Rand::getInteger($min, $max);
+            $this->assertInternalType('integer', $value);
+            $this->assertGreaterThanOrEqual($min, $value);
+            $this->assertLessThanOrEqual($max, $value);
+            $counter[$value]++;
+        }
+
+        foreach ($counter as $value => $count) {
+            $this->assertGreaterThan(0, $count, sprintf('The bucket for value %d is empty.', $value));
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderForTestRandIntegerRangeTest()
+    {
+        return array(
+            array(0, 100, 10000),
+            array(-100, 100, 10000),
+            array(-100, 50, 10000),
+            array(0, 63, 10000),
+            array(0, 64, 10000),
+            array(0, 65, 10000),
+        );
+    }
+
+    /**
      * A Monte Carlo test that generates $cycles numbers from 0 to $tot
      * and test if the numbers are above or below the line y=x with a
      * frequency range of [$min, $max]

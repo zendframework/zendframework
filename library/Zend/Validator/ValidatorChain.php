@@ -267,7 +267,7 @@ class ValidatorChain implements
      *
      * Plugin manager (property 'plugins') cannot
      * be serialized. On wakeup the property remains unset
-     * and next invokation to getPluginManager() sets
+     * and next invocation to getPluginManager() sets
      * the default plugin manager instance (ValidatorPluginManager).
      *
      * @return array

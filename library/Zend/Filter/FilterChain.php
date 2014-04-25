@@ -241,7 +241,7 @@ class FilterChain extends AbstractFilter implements Countable
      *
      * Plugin manager (property 'plugins') cannot
      * be serialized. On wakeup the property remains unset
-     * and next invokation to getPluginManager() sets
+     * and next invocation to getPluginManager() sets
      * the default plugin manager instance (FilterPluginManager).
      */
     public function __sleep()

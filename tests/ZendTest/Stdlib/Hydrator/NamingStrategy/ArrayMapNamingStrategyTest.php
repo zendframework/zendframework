@@ -24,6 +24,6 @@ class ArrayMapNamingStrategyTest extends \PHPUnit_Framework_TestCase
     {
         $strategy = new ArrayMapNamingStrategy(array('stuff3' => 'stuff4'), array('stuff1' => 'stuff2'));
         $this->assertEquals('stuff2', $strategy->hydrate('stuff1'));
-        $this->assertEquals('stuff4', $strategy->extract('stuff3'));        
+        $this->assertEquals('stuff4', $strategy->extract('stuff3'));
     }
 }

@@ -80,7 +80,14 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
         return $this;
     }
 
-    private function findResourceInQueue($name, Renderer $renderer = null)
+    /**
+     * Loop over queue of resolvers
+     *
+     * @param string $name
+     * @param null|Renderer $renderer
+     * @return false|string
+     */
+    protected function findResourceInQueue($name, Renderer $renderer = null)
     {
         foreach ($this->queue as $resolver) {
             $resource = $resolver->resolve($name, $renderer);

@@ -7,6 +7,7 @@
         "log",
         "logging"
     ],
+    "homepage": "https://github.com/zendframework/zf2",
     "autoload": {
         "psr-0": {
             "Zend\\Log\\": ""

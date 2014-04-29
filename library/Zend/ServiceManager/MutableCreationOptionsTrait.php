@@ -10,9 +10,9 @@
 namespace Zend\ServiceManager;
 
 /**
- * Trait for MutableCreationOptionsAware Factories
+ * Trait for MutableCreationOptions Factories
  */
-trait MutableCreationOptionsAwareTrait
+trait MutableCreationOptionsTrait
 {
     /**
      * @var array

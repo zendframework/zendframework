@@ -21,6 +21,9 @@ class MutableCreationOptionsAwareTraitTest extends TestCase
 
     public function setUp()
     {
+        if (PHP_VERSION_ID < 50400) {
+            $this->markTestSkipped('Requires PHP >=5.4.0');
+        }
         $this->stub = $this->getObjectForTrait('\Zend\ServiceManager\MutableCreationOptionsAwareTrait');
     }
 

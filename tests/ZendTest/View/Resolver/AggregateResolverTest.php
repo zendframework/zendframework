@@ -10,6 +10,8 @@
 namespace ZendTest\View\Resolver;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\View\Model\ViewModel;
+use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver;
 
 class AggregateResolverTest extends TestCase
@@ -67,6 +69,57 @@ class AggregateResolverTest extends TestCase
         $test = $resolver->resolve('bar');
         $this->assertEquals('baz', $test);
         $this->assertSame($barResolver, $resolver->getLastSuccessfulResolver());
+    }
+
+    public function testReturnsResourceFromTheSameNameSpaceWithMapResolver()
+    {
+        $resolver = new Resolver\AggregateResolver();
+        $resolver->attach(new Resolver\TemplateMapResolver(array(
+            'foo/bar' => 'foo/baz',
+        )));
+        $renderer = new PhpRenderer();
+        $view = new ViewModel();
+        $view->setTemplate('foo/zaz');
+        $helper = $renderer->plugin('view_model');
+        $helper->setCurrent($view);
+
+        $test = $resolver->resolve('bar', $renderer);
+        $this->assertEquals('foo/baz', $test);
+    }
+
+    public function testReturnsResourceFromTheSameNameSpaceWithPathStack()
+    {
+        $resolver = new Resolver\AggregateResolver();
+        $pathStack = new Resolver\TemplatePathStack();
+        $pathStack->addPath(__DIR__ . '/../_templates');
+        $resolver->attach($pathStack);
+        $renderer = new PhpRenderer();
+        $view = new ViewModel();
+        $view->setTemplate('name-space/any-view');
+        $helper = $renderer->plugin('view_model');
+        $helper->setCurrent($view);
+
+        $test = $resolver->resolve('bar', $renderer);
+        $this->assertEquals(realpath(__DIR__ . '/../_templates/name-space/bar.phtml'), $test);
+    }
+
+    public function testReturnsResourceFromTopLevelIfExistsInsteadOfTheSameNameSpace()
+    {
+        $resolver = new Resolver\AggregateResolver();
+        $resolver->attach(new Resolver\TemplateMapResolver(array(
+            'foo/bar' => 'foo/baz',
+        )));
+        $resolver->attach(new Resolver\TemplateMapResolver(array(
+            'bar' => 'baz',
+        )));
+        $renderer = new PhpRenderer();
+        $view = new ViewModel();
+        $view->setTemplate('foo/zaz');
+        $helper = $renderer->plugin('view_model');
+        $helper->setCurrent($view);
+
+        $test = $resolver->resolve('bar', $renderer);
+        $this->assertEquals('baz', $test);
     }
 
     public function testReturnsFalseWhenNoResolverSucceeds()

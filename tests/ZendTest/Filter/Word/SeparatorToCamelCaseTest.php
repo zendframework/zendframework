@@ -73,6 +73,19 @@ class SeparatorToCamelCaseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group 6151
+     */
+    public function testFilterSeparatesCamelCasedNonAlphaWordsWithProvidedSeparator()
+    {
+        $string   = 'user_2_user';
+        $filter   = new SeparatorToCamelCaseFilter('_');
+        $filtered = $filter($string);
+
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('User2User', $filtered);
+    }
+
+    /**
      * @return void
      */
     public function testFilterSupportArray()

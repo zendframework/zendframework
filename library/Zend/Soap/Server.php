@@ -745,10 +745,12 @@ class Server implements ZendServerServer
             }
             $xml = trim($xml);
 
-            libxml_disable_entity_loader(true);
+            $loadEntities = libxml_disable_entity_loader(true);
 
             $dom = new DOMDocument();
             $loadStatus = $dom->loadXML($xml);
+
+            libxml_disable_entity_loader($loadEntities);
 
             // @todo check libxml errors ? validate document ?
             if (strlen($xml) == 0 || !$loadStatus) {
@@ -760,7 +762,6 @@ class Server implements ZendServerServer
                     throw new Exception\InvalidArgumentException('Invalid XML: Detected use of illegal DOCTYPE');
                 }
             }
-            libxml_disable_entity_loader(false);
         }
 
         $this->request = $xml;

@@ -968,4 +968,26 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\SoapServer', $internalServer);
         $this->assertSame($internalServer, $server->getSoap());
     }
+
+    public function testDisableEntityLoaderAfterException()
+    {
+        $server = new Server();
+        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $server->setReturnResponse(true);
+        $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
+        $loadEntities = libxml_disable_entity_loader(false);
+
+        // Doing a request that is guaranteed to cause an exception in Server::_setRequest():
+        $invalidRequest = '---';
+        $response = @$server->handle($invalidRequest);
+
+        // Sanity check; making sure that an exception has been triggered:
+        $this->assertInstanceOf('\SoapFault', $response);
+
+        // The "disable entity loader" setting should be restored to "false" after the exception is raised:
+        $this->assertFalse(libxml_disable_entity_loader());
+
+        // Cleanup; restoring original setting:
+        libxml_disable_entity_loader($loadEntities);
+    }
 }

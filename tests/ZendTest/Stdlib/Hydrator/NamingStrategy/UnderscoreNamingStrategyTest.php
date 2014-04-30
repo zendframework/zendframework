@@ -15,7 +15,6 @@ use Zend\Stdlib\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
  * Unit tests for {@see \Zend\Stdlib\Hydrator\NamingStrategy\UnderscoreNamingStrategy}
  *
  * @covers \Zend\Stdlib\Hydrator\NamingStrategy\UnderscoreNamingStrategy
- * @group Zend_Stdlib
  */
 class UnderscoreNamingStrategyTest extends \PHPUnit_Framework_TestCase
 {

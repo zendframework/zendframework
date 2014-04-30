@@ -25,7 +25,7 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
      */
     public function hydrate($name)
     {
-        return $this->getUnderscoreToCamelCaseFilter()->filter($name);
+        return lcfirst($this->getUnderscoreToCamelCaseFilter()->filter($name));
     }
 
     /**

@@ -10,7 +10,6 @@
 namespace ZendTest\Mime;
 
 use Zend\Mime;
-use Zend\Mail;
 
 /**
  * @group      Zend_Mime
@@ -131,13 +130,9 @@ EOD;
      */
     public function testPassEmptyArrayIntoSetPartsShouldReturnEmptyString()
     {
-        $mailMessage = new Mail\Message();
         $mimeMessage = new Mime\Message();
         $mimeMessage->setParts(array());
 
-        $mailMessage->setBody($mimeMessage);
-
         $this->assertEquals('', $mimeMessage->generateMessage());
-        $this->assertEquals('', $mailMessage->getBodyText());
     }
 }

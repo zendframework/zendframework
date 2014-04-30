@@ -124,4 +124,15 @@ EOD;
         $test  = current($parts);
         $this->assertSame($part, $test);
     }
+
+    /**
+     * @group ZF2-5962
+     */
+    public function testPassEmptyArrayIntoSetPartsShouldReturnEmptyString()
+    {
+        $mimeMessage = new Mime\Message();
+        $mimeMessage->setParts(array());
+
+        $this->assertEquals('', $mimeMessage->generateMessage());
+    }
 }

@@ -683,4 +683,16 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $restoredMessage = Message::fromString($serialized);
         $this->assertEquals($serialized, $restoredMessage->toString());
     }
+
+    /**
+     * @group ZF2-5962
+     */
+    public function testPassEmptyArrayIntoSetPartsOfMimeMessageShouldReturnEmptyBodyString()
+    {
+        $mimeMessage = new MimeMessage();
+        $mimeMessage->setParts(array());
+
+        $this->message->setBody($mimeMessage);
+        $this->assertEquals('', $this->message->getBodyText());
+    }
 }

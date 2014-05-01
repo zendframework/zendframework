@@ -43,7 +43,7 @@ class SaltedS2kTest extends \PHPUnit_Framework_TestCase
             return;
         }
         $this->setExpectedException('Zend\Crypt\Key\Derivation\Exception\InvalidArgumentException',
-                                    'The hash algorihtm wrong is not supported by Zend\Crypt\Key\Derivation\SaltedS2k');
+                                    'The hash algorithm wrong is not supported by Zend\Crypt\Key\Derivation\SaltedS2k');
         $password = SaltedS2k::calc('wrong', 'test', $this->salt, 32);
     }
 

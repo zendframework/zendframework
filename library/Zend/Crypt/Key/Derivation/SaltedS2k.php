@@ -53,7 +53,7 @@ class SaltedS2k
     public static function calc($hash, $password, $salt, $bytes)
     {
         if (!in_array($hash, array_keys(static::$supportedMhashAlgos))) {
-            throw new Exception\InvalidArgumentException("The hash algorihtm $hash is not supported by " . __CLASS__);
+            throw new Exception\InvalidArgumentException("The hash algorithm $hash is not supported by " . __CLASS__);
         }
         if (strlen($salt)<8) {
             throw new Exception\InvalidArgumentException('The salt size must be at least of 8 bytes');

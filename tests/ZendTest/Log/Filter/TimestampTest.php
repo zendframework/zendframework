@@ -156,7 +156,6 @@ class TimestampTest extends TestCase
             array(array()),
             array(array('hello world')),
             array(array('timestamp' => null)),
-            array(array('timestamp' => 'hello world')),
         );
     }
 }

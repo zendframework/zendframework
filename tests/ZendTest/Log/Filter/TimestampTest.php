@@ -47,6 +47,10 @@ class TimestampTest extends TestCase
             array(new DateTime('2014-03-03'), new DateTime('2014-03-03'), '==', true),
             array(new DateTime('2014-02-02'), new DateTime('2014-03-03'), '<', true),
             array(new DateTime('2014-03-03'), new DateTime('2014-03-03'), 'lt', false),
+            array(1399140540, new DateTime('2014-03-03'), 'lt', false),
+            array(1399140480, new DateTime('2014-03-03'), 'lt', true),
+            array('1399140540', new DateTime('2014-03-03'), 'lt', false),
+            array('1399140480', new DateTime('2014-03-03'), 'lt', true),
         );
     }
 

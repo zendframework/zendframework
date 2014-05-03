@@ -10,6 +10,7 @@
 namespace ZendTest\Log\Filter;
 
 use ArrayObject;
+use DateTime;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Log\Filter\Timestamp as TimestampFilter;
 
@@ -39,13 +40,13 @@ class TimestampTest extends TestCase
     public function dateTimeDataProvider()
     {
         return array(
-            array(new \DateTime('2014-03-03'), new \DateTime('2014-03-03'), '>=', true),
-            array(new \DateTime('2014-10-10'), new \DateTime('2014-03-03'),'>=', true),
-            array(new \DateTime('2014-03-03'), new \DateTime('2014-10-10'), 'gt', false),
-            array(new \DateTime('2013-03-03'), new \DateTime('2014-03-03'), 'ge', false),
-            array(new \DateTime('2014-03-03'), new \DateTime('2014-03-03'), '==', true),
-            array(new \DateTime('2014-02-02'), new \DateTime('2014-03-03'), '<', true),
-            array(new \DateTime('2014-03-03'), new \DateTime('2014-03-03'), 'lt', false),
+            array(new DateTime('2014-03-03'), new DateTime('2014-03-03'), '>=', true),
+            array(new DateTime('2014-10-10'), new DateTime('2014-03-03'),'>=', true),
+            array(new DateTime('2014-03-03'), new DateTime('2014-10-10'), 'gt', false),
+            array(new DateTime('2013-03-03'), new DateTime('2014-03-03'), 'ge', false),
+            array(new DateTime('2014-03-03'), new DateTime('2014-03-03'), '==', true),
+            array(new DateTime('2014-02-02'), new DateTime('2014-03-03'), '<', true),
+            array(new DateTime('2014-03-03'), new DateTime('2014-03-03'), 'lt', false),
         );
     }
 
@@ -63,19 +64,6 @@ class TimestampTest extends TestCase
         } else {
             $this->assertFalse($result);
         }
-    }
-
-    public function datePartDataProvider()
-    {
-        return array(
-            array(new \DateTime('2014-03-03 10:15:00'), 10, 'H', '==', true),
-            array(new \DateTime('2013-03-03 22:00:00'), 10, 'H', '=', false),
-            array(new \DateTime('2014-03-04 10:15:00'), 3, 'd', 'gt', true),
-            array(new \DateTime('2014-03-04 10:15:00'), 10, 'd', '<', true),
-            array(new \DateTime('2014-03-03 10:15:00'), 1, 'm', 'eq', false),
-            array(new \DateTime('2014-03-03 10:15:00'), 2, 'm', 'ge', true),
-            array(new \DateTime('2014-03-03 10:15:00'), 20, 'H', '!=', true),
-        );
     }
 
     /**
@@ -128,5 +116,27 @@ class TimestampTest extends TestCase
         $this->assertAttributeEquals($config['value'], 'value', $filter);
         $this->assertAttributeEquals($config['dateFormatChar'], 'dateFormatChar', $filter);
         $this->assertAttributeEquals($config['operator'], 'operator', $filter);
+    }
+
+    public function testIgnoresMessagesWithoutTimestamp()
+    {
+        $filter = new TimestampFilter(new DateTime('-10 years'));
+
+        $this->assertFalse($filter->filter(array()));
+        $this->assertFalse($filter->filter(array('timestamp' => null)));
+        $this->assertFalse($filter->filter(array('timestamp' => 'hello world')));
+    }
+
+    public function datePartDataProvider()
+    {
+        return array(
+            array(new DateTime('2014-03-03 10:15:00'), 10, 'H', '==', true),
+            array(new DateTime('2013-03-03 22:00:00'), 10, 'H', '=', false),
+            array(new DateTime('2014-03-04 10:15:00'), 3, 'd', 'gt', true),
+            array(new DateTime('2014-03-04 10:15:00'), 10, 'd', '<', true),
+            array(new DateTime('2014-03-03 10:15:00'), 1, 'm', 'eq', false),
+            array(new DateTime('2014-03-03 10:15:00'), 2, 'm', 'ge', true),
+            array(new DateTime('2014-03-03 10:15:00'), 20, 'H', '!=', true),
+        );
     }
 }

@@ -78,7 +78,7 @@ class TimestampTest extends TestCase
     }
 
     /**
-     * @expectedException Zend\Log\Exception\InvalidArgumentException
+     * @expectedException \Zend\Log\Exception\InvalidArgumentException
      */
     public function testConstructorThrowsOnInvalidValue()
     {
@@ -86,7 +86,7 @@ class TimestampTest extends TestCase
     }
 
     /**
-     * @expectedException Zend\Log\Exception\InvalidArgumentException
+     * @expectedException \Zend\Log\Exception\InvalidArgumentException
      */
     public function testConstructorThrowsWhenDateFormatCharIsMissing()
     {
@@ -94,7 +94,7 @@ class TimestampTest extends TestCase
     }
 
     /**
-     * @expectedException Zend\Log\Exception\InvalidArgumentException
+     * @expectedException \Zend\Log\Exception\InvalidArgumentException
      */
     public function testConstructorThrowsOnUnsupportedComparisonOperator()
     {

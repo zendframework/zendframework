@@ -107,11 +107,11 @@ class Timestamp implements FilterInterface
 
         $datetime = $event['timestamp'];
 
-        if (! $datetime instanceof DateTime) {
+        if (! ($datetime instanceof DateTime || is_int($datetime) || is_string($datetime))) {
             return false;
         }
 
-        $timestamp = $datetime->getTimestamp();
+        $timestamp = $datetime instanceof DateTime ? $datetime->getTimestamp() : (int) $datetime;
 
         if ($this->value instanceof DateTime) {
             return version_compare($timestamp, $this->value->getTimestamp(), $this->operator);

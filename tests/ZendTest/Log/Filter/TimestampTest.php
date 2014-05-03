@@ -15,9 +15,9 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Log\Filter\Timestamp as TimestampFilter;
 
 /**
- * @group Zend_Log
- *
  * @author Nikola Posa <posa.nikola@gmail.com>
+ *
+ * @covers \Zend\Log\Filter\Timestamp
  */
 class TimestampTest extends TestCase
 {

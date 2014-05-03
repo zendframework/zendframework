@@ -9,6 +9,7 @@
 
 namespace ZendTest\Log\Filter;
 
+use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Log\Filter\Timestamp as TimestampFilter;
 
@@ -108,6 +109,20 @@ class TimestampTest extends TestCase
             'dateFormatChar' => 'm',
             'operator' => '==',
         );
+        $filter = new TimestampFilter($config);
+
+        $this->assertAttributeEquals($config['value'], 'value', $filter);
+        $this->assertAttributeEquals($config['dateFormatChar'], 'dateFormatChar', $filter);
+        $this->assertAttributeEquals($config['operator'], 'operator', $filter);
+    }
+
+    public function testFilterCreatedFromTraversable()
+    {
+        $config = new ArrayObject(array(
+            'value' => 10,
+            'dateFormatChar' => 'm',
+            'operator' => '==',
+        ));
         $filter = new TimestampFilter($config);
 
         $this->assertAttributeEquals($config['value'], 'value', $filter);

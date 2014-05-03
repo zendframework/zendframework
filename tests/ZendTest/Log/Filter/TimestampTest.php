@@ -119,6 +119,9 @@ class TimestampTest extends TestCase
 
     public function dateTimeDataProvider()
     {
+        $march2 = new DateTime('2014-03-02');
+        $march3 = new DateTime('2014-03-03');
+
         return array(
             array(new DateTime('2014-03-03'), new DateTime('2014-03-03'), '>=', true),
             array(new DateTime('2014-10-10'), new DateTime('2014-03-03'),'>=', true),
@@ -127,10 +130,10 @@ class TimestampTest extends TestCase
             array(new DateTime('2014-03-03'), new DateTime('2014-03-03'), '==', true),
             array(new DateTime('2014-02-02'), new DateTime('2014-03-03'), '<', true),
             array(new DateTime('2014-03-03'), new DateTime('2014-03-03'), 'lt', false),
-            array(1399140540, new DateTime('2014-03-03'), 'lt', false),
-            array(1399140480, new DateTime('2014-03-03'), 'lt', true),
-            array('1399140540', new DateTime('2014-03-03'), 'lt', false),
-            array('1399140480', new DateTime('2014-03-03'), 'lt', true),
+            array($march3->getTimestamp(), new DateTime('2014-03-03'), 'lt', false),
+            array($march2->getTimestamp(), new DateTime('2014-03-03'), 'lt', true),
+            array((string) $march3->getTimestamp(), new DateTime('2014-03-03'), 'lt', false),
+            array((string) $march2->getTimestamp(), new DateTime('2014-03-03'), 'lt', true),
         );
     }
 

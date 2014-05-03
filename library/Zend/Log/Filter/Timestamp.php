@@ -33,7 +33,7 @@ class Timestamp implements FilterInterface
      *
      * @var string|null
      */
-    protected $dateFormatChar = null;
+    protected $dateFormatChar;
 
     /**
      * @var string
@@ -101,11 +101,11 @@ class Timestamp implements FilterInterface
      */
     public function filter(array $event)
     {
-        $datetime = $event['timestamp'];
+        $datetime  = $event['timestamp'];
         $timestamp = $datetime->getTimestamp();
 
         if ($this->value instanceof DateTime) {
-            return version_compare((string) $timestamp, (string) $this->value->getTimestamp(), $this->operator);
+            return version_compare($timestamp, $this->value->getTimestamp(), $this->operator);
         }
 
         return version_compare(

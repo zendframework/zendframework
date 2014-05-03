@@ -9,8 +9,9 @@
 
 namespace Zend\Log\Filter;
 
-use Zend\Log\Exception;
 use DateTime;
+use Traversable;
+use Zend\Log\Exception;
 
 /**
  * Filters log events based on the time when they were triggered.

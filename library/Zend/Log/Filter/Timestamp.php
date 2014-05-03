@@ -101,7 +101,16 @@ class Timestamp implements FilterInterface
      */
     public function filter(array $event)
     {
-        $datetime  = $event['timestamp'];
+        if (! isset($event['timestamp'])) {
+            return false;
+        }
+
+        $datetime = $event['timestamp'];
+
+        if (! $datetime instanceof DateTime) {
+            return false;
+        }
+
         $timestamp = $datetime->getTimestamp();
 
         if ($this->value instanceof DateTime) {

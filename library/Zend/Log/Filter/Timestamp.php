@@ -12,6 +12,7 @@ namespace Zend\Log\Filter;
 use DateTime;
 use Traversable;
 use Zend\Log\Exception;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Filters log events based on the time when they were triggered.
@@ -49,8 +50,9 @@ class Timestamp implements FilterInterface
     public function __construct($value, $dateFormatChar = null, $operator = '<=')
     {
         if ($value instanceof Traversable) {
-            $value = iterator_to_array($value);
+            $value = ArrayUtils::iteratorToArray($value);
         }
+
         if (is_array($value)) {
             $dateFormatChar = isset($value['dateFormatChar']) ? $value['dateFormatChar'] : null;
             $operator = isset($value['operator']) ? $value['operator'] : null;

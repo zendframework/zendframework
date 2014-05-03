@@ -118,13 +118,16 @@ class TimestampTest extends TestCase
         $this->assertAttributeEquals($config['operator'], 'operator', $filter);
     }
 
-    public function testIgnoresMessagesWithoutTimestamp()
+    /**
+     * @param array $message
+     *
+     * @dataProvider ignoredMessages
+     */
+    public function testIgnoresMessagesWithoutTimestamp(array $message)
     {
         $filter = new TimestampFilter(new DateTime('-10 years'));
 
-        $this->assertFalse($filter->filter(array()));
-        $this->assertFalse($filter->filter(array('timestamp' => null)));
-        $this->assertFalse($filter->filter(array('timestamp' => 'hello world')));
+        $this->assertFalse($filter->filter($message));
     }
 
     public function datePartDataProvider()
@@ -137,6 +140,16 @@ class TimestampTest extends TestCase
             array(new DateTime('2014-03-03 10:15:00'), 1, 'm', 'eq', false),
             array(new DateTime('2014-03-03 10:15:00'), 2, 'm', 'ge', true),
             array(new DateTime('2014-03-03 10:15:00'), 20, 'H', '!=', true),
+        );
+    }
+
+    public function ignoredMessages()
+    {
+        return array(
+            array(array()),
+            array(array('hello world')),
+            array(array('timestamp' => null)),
+            array(array('timestamp' => 'hello world')),
         );
     }
 }

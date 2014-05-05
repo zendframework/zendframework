@@ -17,7 +17,7 @@ use Zend\Stdlib\CallbackHandler;
  */
 class CallbackTest extends \PHPUnit_Framework_TestCase
 {
-    public function testMustDefineTwoCallbacksOnContructor()
+    public function testMustDefineTwoCallbacksOnConstructor()
     {
         $itemsCallback = new CallbackHandler(function () {
             return array();
@@ -31,7 +31,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeSame($countCallback, 'countCallback', $adapter);
     }
 
-    public function testShouldAcceptAnyCallableOnContructor()
+    public function testShouldAcceptAnyCallableOnConstructor()
     {
         $itemsCallback = function () {
             return range(1,  10);

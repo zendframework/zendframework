@@ -30,6 +30,7 @@ class RelativeFallbackResolver implements ResolverInterface
      *
      * Set wrapped resolver
      *
+     * @param \Zend\View\Resolver\ResolverInterface $resolver
      */
     public function __construct(Resolver $resolver)
     {

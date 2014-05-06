@@ -31,9 +31,9 @@ class RelativeFallbackResolver implements ResolverInterface
      * Set wrapped resolver
      *
      */
-    public function __construct(Resolver $relover)
+    public function __construct(Resolver $resolver)
     {
-        $this->resolver = $relover;
+        $this->resolver = $resolver;
     }
 
     /**

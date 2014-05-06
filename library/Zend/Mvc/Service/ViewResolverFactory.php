@@ -27,8 +27,8 @@ class ViewResolverFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $resolver = new ViewResolver\AggregateResolver();
-        $resolver->attach($serviceLocator->get('ViewTemplateMapResolver'));
-        $resolver->attach($serviceLocator->get('ViewTemplatePathStack'));
+        $resolver->attach(new ViewResolver\RelativeFallbackResolver($serviceLocator->get('ViewTemplateMapResolver')));
+        $resolver->attach(new ViewResolver\RelativeFallbackResolver($serviceLocator->get('ViewTemplatePathStack')));
         return $resolver;
     }
 }

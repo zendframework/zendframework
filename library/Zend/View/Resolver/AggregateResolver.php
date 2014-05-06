@@ -81,27 +81,6 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
     }
 
     /**
-     * Loop over queue of resolvers
-     *
-     * @param string $name
-     * @param null|Renderer $renderer
-     * @return false|string
-     */
-    protected function findResourceInQueue($name, Renderer $renderer = null)
-    {
-        foreach ($this->queue as $resolver) {
-            $resource = $resolver->resolve($name, $renderer);
-            if ($resource) {
-                // Resource found; return it
-                $this->lastSuccessfulResolver = $resolver;
-                return $resource;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Resolve a template/pattern name to a resource the renderer can consume
      *
      * @param  string $name
@@ -118,22 +97,12 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
             return false;
         }
 
-        $resource = $this->findResourceInQueue($name, $renderer);
-        if ($resource) {
-            return $resource;
-        }
-
-        // Here we look in the same name space (folder)
-        if ($renderer !== null) {
-            $helper = $renderer->plugin('view_model');
-            $currentTemplate = $helper->getCurrent()->getTemplate();
-            $pos = strrpos($currentTemplate, '/');
-            if ($pos > 0) {
-                $fullName = substr($currentTemplate, 0, $pos) . '/' . $name;
-                $resource = $this->findResourceInQueue($fullName, $renderer);
-                if ($resource) {
-                    return $resource;
-                }
+        foreach ($this->queue as $resolver) {
+            $resource = $resolver->resolve($name, $renderer);
+            if ($resource) {
+                // Resource found; return it
+                $this->lastSuccessfulResolver = $resolver;
+                return $resource;
             }
         }
 

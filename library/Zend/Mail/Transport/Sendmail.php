@@ -248,7 +248,7 @@ class Sendmail implements TransportInterface
 
         $sender = $message->getSender();
         if ($sender instanceof AddressInterface) {
-            $parameters .= ' -f ' . $sender->getEmail();
+            $parameters .= ' -f' . $sender->getEmail();
             return $parameters;
         }
 
@@ -256,7 +256,7 @@ class Sendmail implements TransportInterface
         if (count($from)) {
             $from->rewind();
             $sender      = $from->current();
-            $parameters .= ' -f ' . $sender->getEmail();
+            $parameters .= ' -f' . $sender->getEmail();
             return $parameters;
         }
 

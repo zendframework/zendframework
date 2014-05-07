@@ -53,7 +53,7 @@ class RouteMatchTest extends TestCase
         $this->assertEquals('bar/foo', $match->getMatchedRouteName());
     }
 
-    public function testMatchedRouteNameIsOverridenOnMerge()
+    public function testMatchedRouteNameIsOverriddenOnMerge()
     {
         $match = new RouteMatch(array());
         $match->setMatchedRouteName('foo');

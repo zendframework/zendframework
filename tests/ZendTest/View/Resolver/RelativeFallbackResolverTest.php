@@ -53,7 +53,9 @@ class RelativeFallbackResolverTest extends TestCase
             'foo/bar' => 'foo/baz',
             'bar' => 'baz',
         ));
-        $resolver = new Resolver\RelativeFallbackResolver($tplMapResolver);
+        $resolver = new Resolver\AggregateResolver();
+        $resolver->attach($tplMapResolver);
+        $resolver->attach(new Resolver\RelativeFallbackResolver($tplMapResolver));
         $renderer = new PhpRenderer();
         $view = new ViewModel();
         $view->setTemplate('foo/zaz');

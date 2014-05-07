@@ -21,7 +21,7 @@ class RelativeFallbackResolver implements ResolverInterface
     const NS_SEPARATOR = '/';
 
     /**
-     * @var Resolve
+     * @var Resolver
      */
     protected $resolver;
 
@@ -48,14 +48,13 @@ class RelativeFallbackResolver implements ResolverInterface
     {
         // It may sense only in context of view
         if ($renderer === null) {
-            return $this->resolver->resolve($name);
+            return false;
         }
 
-        $resource = $this->resolver->resolve($name, $renderer);
-        if ($resource) {
-            return $resource;
+        // There should exists view model to get template name
+        if (!is_callable(array($renderer, 'plugin'))) {
+            return false;
         }
-
         // Try to get it from the same name space (folder)
         $helper = $renderer->plugin('view_model');
         $currentTemplate = $helper->getCurrent()->getTemplate();
@@ -63,8 +62,9 @@ class RelativeFallbackResolver implements ResolverInterface
         if ($position > 0) {
             $absoluteName = substr($currentTemplate, 0, $position) . self::NS_SEPARATOR . $name;
             $resource = $this->resolver->resolve($absoluteName, $renderer);
+            return $resource;
         }
 
-        return $resource;
+        return false;
     }
 }

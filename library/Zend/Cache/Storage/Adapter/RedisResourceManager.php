@@ -153,8 +153,8 @@ class RedisResourceManager
             //there are two ways of determining if redis is already initialized
             //with connect function:
             //1) pinging server
-            //2) checking undocummented property socket which is available only
-            //after successfull connect
+            //2) checking undocumented property socket which is available only
+            //after successful connect
             $resource = array_merge($defaults, array(
                     'resource' => $resource,
                     'initialized' => isset($resource->socket),

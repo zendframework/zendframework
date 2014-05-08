@@ -15,6 +15,29 @@ use Zend\Form\Element\Date as DateElement;
 
 class DateTest extends TestCase
 {
+    /**
+     * Stores the original set timezone
+     *
+     * @var string
+     */
+    private $_originaltimezone;
+
+    /**
+     * Setup environment
+     */
+    public function setUp()
+    {
+        $this->_originaltimezone = date_default_timezone_get();
+    }
+
+    /**
+     * Tear down environment
+     */
+    public function tearDown()
+    {
+        date_default_timezone_set($this->_originaltimezone);
+    }
+
     public function testProvidesDefaultInputSpecification()
     {
         $element = new DateElement('foo');
@@ -109,6 +132,22 @@ class DateTest extends TestCase
                 case 'Zend\Validator\DateStep':
                 case 'Zend\Validator\Date':
                     $this->assertEquals('d-m-Y', $validator->getFormat());
+                    break;
+            }
+        }
+    }
+
+    public function testStepValidatorIgnoresDaylightSavings()
+    {
+        date_default_timezone_set('Europe/London');
+
+        $element   = new DateElement('foo');
+
+        $inputSpec = $element->getInputSpecification();
+        foreach ($inputSpec['validators'] as $validator) {
+            switch (get_class($validator)) {
+                case 'Zend\Validator\DateStep':
+                    $this->assertTrue($validator->isValid('2013-12-25'));
                     break;
             }
         }

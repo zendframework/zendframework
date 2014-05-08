@@ -176,6 +176,8 @@ class PriorityListTest extends TestCase
         $this->list->insert('foo', 'foo_value', null);
         $this->list->insert('bar', 'bar_value', 1);
         $this->list->insert('baz', 'baz_value', -1);
+
+        $this->assertEquals('bar', $this->list->key());
         $this->assertEquals('bar_value', $this->list->current());
     }
 

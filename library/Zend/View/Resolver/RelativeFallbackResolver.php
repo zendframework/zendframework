@@ -46,15 +46,11 @@ class RelativeFallbackResolver implements ResolverInterface
      */
     public function resolve($name, Renderer $renderer = null)
     {
-        // It may sense only in context of view
-        if ($renderer === null) {
-            return false;
-        }
-
         // There should exists view model to get template name
         if (!is_callable(array($renderer, 'plugin'))) {
             return false;
         }
+
         // Try to get it from the same name space (folder)
         $helper = $renderer->plugin('view_model');
         $currentTemplate = $helper->getCurrent()->getTemplate();

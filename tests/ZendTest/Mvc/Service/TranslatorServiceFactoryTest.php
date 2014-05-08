@@ -10,6 +10,7 @@
 namespace ZendTest\Mvc\Service;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\I18n\Translator\LoaderPluginManager;
 use Zend\Mvc\Service\RoutePluginManagerFactory;
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\Mvc\Service\TranslatorServiceFactory;
@@ -21,6 +22,7 @@ class TranslatorServiceFactoryTest extends TestCase
     {
         $this->factory = new TranslatorServiceFactory();
         $this->services = new ServiceManager();
+        $this->services->setService('TranslatorLoaderManager', new LoaderPluginManager());
     }
 
     public function testReturnsMvcTranslatorWithTranslatorInterfaceServiceComposedWhenPresent()
@@ -106,12 +108,17 @@ class TranslatorServiceFactoryTest extends TestCase
         //#5959
         //get any plugins with AbstractPluginManagerFactory
         $routePluginManagerFactory = new RoutePluginManagerFactory;
-        $routePluginManager = $routePluginManagerFactory->createService($serviceLocator);
+        $routePluginManagerFactory->createService($serviceLocator);
 
         $translator = $this->factory->createService($serviceLocator);
         $this->assertInstanceOf('Zend\Mvc\I18n\Translator', $translator);
         $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator->getTranslator());
 
+        //#6244
+        //Ensure that the LoaderPluginManager from config has been injected
+        $this->assertInstanceOf(
+            'Zend\I18n\Translator\LoaderPluginManager', $translator->getPluginManager()
+        );
     }
 
     /**

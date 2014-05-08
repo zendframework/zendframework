@@ -11,7 +11,6 @@ namespace Zend\Form\Element;
 
 use DateInterval;
 use DateTime as PhpDateTime;
-use DateTimezone;
 use Zend\Form\Element;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\Date as DateValidator;

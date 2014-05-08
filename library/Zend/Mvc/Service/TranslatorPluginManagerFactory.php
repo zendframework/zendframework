@@ -7,15 +7,10 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\ModuleManager\Feature;
+namespace Zend\Mvc\Service;
 
-interface TranslatorLoaderProviderInterface
+
+class TranslatorPluginManagerFactory extends AbstractPluginManagerFactory
 {
-    /**
-     * Expected to return \Zend\ServiceManager\Config object or array to
-     * seed such an object.
-     *
-     * @return array|\Zend\ServiceManager\Config
-     */
-    public function getTranslatorLoaderConfig();
+    const PLUGIN_MANAGER_CLASS = 'Zend\I18n\Translator\LoaderPluginManager';
 }

@@ -22,7 +22,7 @@ class TranslatorServiceFactoryTest extends TestCase
     {
         $this->factory = new TranslatorServiceFactory();
         $this->services = new ServiceManager();
-        $this->services->setService('TranslatorLoaderManager', new LoaderPluginManager());
+        $this->services->setService('TranslatorPluginManager', new LoaderPluginManager());
     }
 
     public function testReturnsMvcTranslatorWithTranslatorInterfaceServiceComposedWhenPresent()

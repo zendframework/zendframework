@@ -24,7 +24,7 @@ use Zend\Stdlib\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
     /**
-     * Holds the hydrated method name
+     * Holds the names of the methods used for hydration, indexed by property name
      *
      * @var string[]
      */
@@ -32,6 +32,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
+     *
      * @var bool
      */
     protected $underscoreSeparatedKeys = true;

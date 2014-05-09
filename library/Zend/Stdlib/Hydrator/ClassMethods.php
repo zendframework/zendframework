@@ -28,7 +28,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
      *
      * @var string[]
      */
-    private $hydratedMethodName = array();
+    private $hydrationMethodsCache = array();
 
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
@@ -180,13 +180,13 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
         }
 
         foreach ($data as $property => $value) {
-            $this->hydratedMethodName[$property] = (isset($this->hydratedMethodName[$property]))
-                ? $this->hydratedMethodName[$property]
+            $this->hydrationMethodsCache[$property] = (isset($this->hydrationMethodsCache[$property]))
+                ? $this->hydrationMethodsCache[$property]
                 : 'set' . ucfirst($this->hydrateName($property, $data));
 
-            if (is_callable(array($object, $this->hydratedMethodName[$property]))) {
+            if (is_callable(array($object, $this->hydrationMethodsCache[$property]))) {
                 $value = $this->hydrateValue($property, $value, $data);
-                $object->{$this->hydratedMethodName[$property]}($value);
+                $object->{$this->hydrationMethodsCache[$property]}($value);
             }
         }
 

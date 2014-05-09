@@ -9,10 +9,10 @@
 
 namespace Zend\Db\Sql\Ddl\Column;
 
-class Blob extends Column
+class Binary extends AbstractLengthColumn
 {
     /**
-     * @var string Change type to blob
+     * @var string
      */
-    protected $type = 'BLOB';
+    protected $type = 'BINARY';
 }

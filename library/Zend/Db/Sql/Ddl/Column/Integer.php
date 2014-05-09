@@ -12,11 +12,6 @@ namespace Zend\Db\Sql\Ddl\Column;
 class Integer extends Column
 {
     /**
-     * @var int
-     */
-    protected $length;
-
-    /**
      * @param null|string     $name
      * @param bool            $nullable
      * @param null|string|int $default

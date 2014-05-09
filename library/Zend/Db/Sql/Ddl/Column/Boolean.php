@@ -12,31 +12,17 @@ namespace Zend\Db\Sql\Ddl\Column;
 class Boolean extends Column
 {
     /**
-     * @var string specification
+     * @var string
      */
-    protected $specification = '%s TINYINT NOT NULL';
-
-    /**
-     * @param string $name
-     */
-    public function __construct($name)
-    {
-        $this->name = $name;
-    }
+    protected $type = 'TINYINT';
 
     /**
      * @return array
      */
     public function getExpressionData()
     {
-        $spec   = $this->specification;
-        $params = array($this->name);
-        $types  = array(self::TYPE_IDENTIFIER);
+        $this->isNullable = false;
 
-        return array(array(
-            $spec,
-            $params,
-            $types,
-        ));
+        return parent::getExpressionData();
     }
 }

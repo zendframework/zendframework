@@ -32,6 +32,14 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     private $hydrationMethodsCache = array();
 
     /**
+     * A map of extraction methods to property name to be used during extraction, indexed
+     * by class name and method name
+     *
+     * @var string[][]
+     */
+    private $extractionMethodsCache = array();
+
+    /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
      *
      * @var bool

@@ -24,9 +24,10 @@ use Zend\Stdlib\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
     /**
-     * Holds the names of the methods used for hydration, indexed by property name
+     * Holds the names of the methods used for hydration, indexed by class::property name,
+     * false if the hydration method is not callable/usable for hydration purposes
      *
-     * @var string[]
+     * @var string[]|bool[]
      */
     private $hydrationMethodsCache = array();
 
@@ -179,14 +180,21 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
             ));
         }
 
-        foreach ($data as $property => $value) {
-            $this->hydrationMethodsCache[$property] = (isset($this->hydrationMethodsCache[$property]))
-                ? $this->hydrationMethodsCache[$property]
-                : 'set' . ucfirst($this->hydrateName($property, $data));
+        $objectClass = get_class($object);
 
-            if (is_callable(array($object, $this->hydrationMethodsCache[$property]))) {
-                $value = $this->hydrateValue($property, $value, $data);
-                $object->{$this->hydrationMethodsCache[$property]}($value);
+        foreach ($data as $property => $value) {
+            $propertyFqn = $objectClass . '::$' . $property;
+
+            if (! isset($this->hydrationMethodsCache[$propertyFqn])) {
+                $setterName = 'set' . ucfirst($this->hydrateName($property, $data));
+
+                $this->hydrationMethodsCache[$propertyFqn] = is_callable(array($object, $setterName))
+                    ? $setterName
+                    : false;
+            }
+
+            if ($this->hydrationMethodsCache[$propertyFqn]) {
+                $object->{$this->hydrationMethodsCache[$propertyFqn]}($this->hydrateValue($property, $value, $data));
             }
         }
 

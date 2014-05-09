@@ -25,7 +25,8 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 {
     /**
      * Holds the hydrated method name
-     * @var array
+     *
+     * @var string[]
      */
     private $hydratedMethodName = array();
 

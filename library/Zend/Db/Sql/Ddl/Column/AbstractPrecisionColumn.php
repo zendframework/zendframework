@@ -21,7 +21,7 @@ abstract class AbstractPrecisionColumn extends AbstractLengthColumn
      * @param int $digits
      * @param null|int $decimal
      */
-    public function __construct($name, $digits, $decimal = null)
+    public function __construct($name, $digits = null, $decimal = null)
     {
         parent::__construct($name, $digits);
         $this->decimal = $decimal;

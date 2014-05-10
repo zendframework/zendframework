@@ -20,7 +20,7 @@ abstract class AbstractLengthColumn extends Column
      * @param null|string $name
      * @param int $length
      */
-    public function __construct($name, $length)
+    public function __construct($name, $length = null)
     {
         parent::__construct($name);
         $this->length = $length;

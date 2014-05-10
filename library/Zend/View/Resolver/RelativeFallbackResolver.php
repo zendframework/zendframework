@@ -57,8 +57,7 @@ class RelativeFallbackResolver implements ResolverInterface
         $position = strrpos($currentTemplate, self::NS_SEPARATOR);
         if ($position > 0) {
             $absoluteName = substr($currentTemplate, 0, $position) . self::NS_SEPARATOR . $name;
-            $resource = $this->resolver->resolve($absoluteName, $renderer);
-            return $resource;
+            return $this->resolver->resolve($absoluteName, $renderer);
         }
 
         return false;

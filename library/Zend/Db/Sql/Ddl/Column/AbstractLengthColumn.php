@@ -70,7 +70,7 @@ abstract class AbstractLengthColumn extends Column
         $types = array(self::TYPE_IDENTIFIER, self::TYPE_LITERAL);
 
         if (!$this->isNullable) {
-            $params[1] .= ' NOT NULL';
+            $spec .= ' NOT NULL';
         }
 
         if ($this->default !== null) {

@@ -44,9 +44,12 @@ class Column implements ColumnInterface
     /**
      * @param null|string $name
      */
-    public function __construct($name = null)
+    public function __construct($name = null, $nullable = false, $default = null, array $options = array())
     {
-        (!$name) ?: $this->setName($name);
+        $this->setName($name);
+        $this->setNullable($nullable);
+        $this->setDefault($default);
+        $this->setOptions($options);
     }
 
     /**

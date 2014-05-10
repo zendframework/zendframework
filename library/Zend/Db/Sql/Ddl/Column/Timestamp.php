@@ -9,7 +9,7 @@
 
 namespace Zend\Db\Sql\Ddl\Column;
 
-class Datetime extends Column
+class Timestamp extends Column
 {
     /**
      * @var string

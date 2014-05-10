@@ -222,4 +222,52 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 
         return $object;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addFilter($name, $filter, $condition = FilterComposite::CONDITION_OR)
+    {
+        $this->resetCaches();
+
+        return parent::addFilter($name, $filter, $condition);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeFilter($name)
+    {
+        $this->resetCaches();
+
+        return parent::removeFilter($name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setNamingStrategy(NamingStrategyInterface $strategy)
+    {
+        $this->resetCaches();
+
+        return parent::setNamingStrategy($strategy);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeNamingStrategy()
+    {
+        $this->resetCaches();
+
+        return parent::removeNamingStrategy();
+    }
+
+    /**
+     * Reset all local hydration/extraction caches
+     */
+    private function resetCaches()
+    {
+        $this->hydrationMethodsCache = $this->extractionMethodsCache = array();
+    }
 }

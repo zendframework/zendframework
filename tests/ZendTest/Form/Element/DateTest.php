@@ -13,6 +13,9 @@ use DateTime;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element\Date as DateElement;
 
+/**
+ * @covers \Zend\Form\Element\Date
+ */
 class DateTest extends TestCase
 {
     /**
@@ -23,7 +26,7 @@ class DateTest extends TestCase
     private $originaltimezone;
 
     /**
-     * Setup environment
+     * {@inheritDoc}
      */
     public function setUp()
     {
@@ -31,7 +34,7 @@ class DateTest extends TestCase
     }
 
     /**
-     * Tear down environment
+     * {@inheritDoc}
      */
     public function tearDown()
     {
@@ -137,6 +140,9 @@ class DateTest extends TestCase
         }
     }
 
+    /**
+     * @group 6245
+     */
     public function testStepValidatorIgnoresDaylightSavings()
     {
         date_default_timezone_set('Europe/London');

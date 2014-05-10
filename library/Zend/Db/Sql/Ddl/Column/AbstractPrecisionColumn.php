@@ -65,7 +65,7 @@ abstract class AbstractPrecisionColumn extends AbstractLengthColumn
     /**
      * @return string
      */
-    public function getLengthExpression()
+    protected function getLengthExpression()
     {
         $expr = $this->length;
         if ($this->decimal !== null) {

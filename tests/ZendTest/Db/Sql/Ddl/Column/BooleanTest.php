@@ -20,7 +20,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
     {
         $column = new Boolean('foo');
         $this->assertEquals(
-            array(array('%s TINYINT NOT NULL', array('foo'), array($column::TYPE_IDENTIFIER))),
+            array(array('%s %s NOT NULL', array('foo', 'TINYINT'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
             $column->getExpressionData()
         );
     }

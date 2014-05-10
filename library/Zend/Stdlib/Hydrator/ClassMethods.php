@@ -19,6 +19,7 @@ use Zend\Stdlib\Hydrator\Filter\HasFilter;
 use Zend\Stdlib\Hydrator\Filter\IsFilter;
 use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
 use Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter;
+use Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface;
 use Zend\Stdlib\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 
 class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
@@ -132,41 +133,54 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
             ));
         }
 
-        $filter = null;
+        $objectClass = get_class($object);
+
+        // reset the hydrator's hydrator's cache for this object, as the filter may be per-instance
         if ($object instanceof FilterProviderInterface) {
-            $filter = new FilterComposite(
-                array($object->getFilter()),
-                array(new MethodMatchFilter("getFilter"))
-            );
-        } else {
-            $filter = $this->filterComposite;
+            $this->extractionMethodsCache[$objectClass] = null;
         }
 
-        $attributes = array();
-        $methods = get_class_methods($object);
+        // pass 1 - finding out which properties can be extracted, with which methods
+        if (! isset($this->extractionMethodsCache[$objectClass])) {
+            $this->extractionMethodsCache[$objectClass] = array();
+            $filter                                     = $this->filterComposite;
+            $methods                                    = get_class_methods($object);
 
-        foreach ($methods as $method) {
-            if (!$filter->filter(get_class($object) . '::' . $method)) {
-                continue;
+            if ($object instanceof FilterProviderInterface) {
+                $filter = new FilterComposite(
+                    array($object->getFilter()),
+                    array(new MethodMatchFilter("getFilter"))
+                );
             }
 
-            if (!$this->callableMethodFilter->filter(get_class($object) . '::' . $method)) {
-                continue;
-            }
+            foreach ($methods as $method) {
+                $methodFqn = $objectClass . '::' . $method;
 
-            $attribute = $method;
-            if (preg_match('/^get/', $method)) {
-                $attribute = substr($method, 3);
-                if (!property_exists($object, $attribute)) {
-                    $attribute = lcfirst($attribute);
+                if (! ($filter->filter($methodFqn) && $this->callableMethodFilter->filter($methodFqn))) {
+                    continue;
                 }
-            }
 
-            $attribute = $this->extractName($attribute, $object);
-            $attributes[$attribute] = $this->extractValue($attribute, $object->$method(), $object);
+                $attribute = $method;
+
+                if (preg_match('/^get/', $method)) {
+                    $attribute = substr($method, 3);
+                    if (!property_exists($object, $attribute)) {
+                        $attribute = lcfirst($attribute);
+                    }
+                }
+
+                $this->extractionMethodsCache[$objectClass][$method] = $attribute;
+            }
         }
 
-        return $attributes;
+        $values = array();
+
+        foreach ($this->extractionMethodsCache[$objectClass] as $methodName => $attributeName) {
+            $realAttributeName          = $this->extractName($attributeName, $object);
+            $values[$realAttributeName] = $this->extractValue($realAttributeName, $object->$methodName(), $object);
+        }
+
+        return $values;
     }
 
     /**

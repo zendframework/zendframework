@@ -10,6 +10,7 @@
 namespace Zend\Form\Element;
 
 use DateInterval;
+use DateTimezone;
 use Zend\Form\Element;
 use Zend\Form\Element\DateTime as DateTimeElement;
 use Zend\Validator\DateStep as DateStepValidator;
@@ -50,6 +51,7 @@ class Date extends DateTimeElement
         return new DateStepValidator(array(
             'format'    => $format,
             'baseValue' => $baseValue,
+            'timezone'  => new DateTimezone('UTC'),
             'step'      => new DateInterval("P{$stepValue}D"),
         ));
     }

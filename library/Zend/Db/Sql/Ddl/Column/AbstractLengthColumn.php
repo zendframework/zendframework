@@ -20,10 +20,10 @@ abstract class AbstractLengthColumn extends Column
      * @param null|string $name
      * @param int $length
      */
-    public function __construct($name, $length = null)
+    public function __construct($name, $length = null, $nullable = false, $default = null, array $options = array())
     {
-        parent::__construct($name);
-        $this->length = $length;
+        $this->setLength($length);
+        parent::__construct($name, $nullable, $default, $options);
     }
 
     /**

@@ -14,26 +14,6 @@ use Zend\Db\Sql\Ddl\Column\Binary;
 class BinaryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Zend\Db\Sql\Ddl\Column\Binary::setLength
-     */
-    public function testSetLength()
-    {
-        $column = new Binary('foo', 55);
-        $this->assertEquals(55, $column->getLength());
-        $this->assertSame($column, $column->setLength(20));
-        $this->assertEquals(20, $column->getLength());
-    }
-
-    /**
-     * @covers Zend\Db\Sql\Ddl\Column\Binary::getLength
-     */
-    public function testGetLength()
-    {
-        $column = new Binary('foo', 55);
-        $this->assertEquals(55, $column->getLength());
-    }
-
-    /**
      * @covers Zend\Db\Sql\Ddl\Column\Binary::getExpressionData
      */
     public function testGetExpressionData()

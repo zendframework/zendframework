@@ -10,13 +10,15 @@
 namespace ZendTest\Stdlib\Hydrator;
 
 use Zend\Stdlib\Hydrator\ClassMethods;
+use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCaseMissing;
 use ZendTest\Stdlib\TestAsset\ClassMethodsOptionalParameters;
+use ZendTest\Stdlib\TestAsset\ClassMethodsCamelCase;
+use ZendTest\Stdlib\TestAsset\ArraySerializable;
 
 /**
  * Unit tests for {@see \Zend\Stdlib\Hydrator\ClassMethods}
  *
  * @covers \Zend\Stdlib\Hydrator\ClassMethods
- * @group Zend_Stdlib
  */
 class ClassMethodsTest extends \PHPUnit_Framework_TestCase
 {
@@ -39,5 +41,36 @@ class ClassMethodsTest extends \PHPUnit_Framework_TestCase
     public function testCanExtractFromMethodsWithOptionalParameters()
     {
         $this->assertSame(array('foo' => 'bar'), $this->hydrator->extract(new ClassMethodsOptionalParameters()));
+    }
+
+    /**
+     * Verifies that the hydrator can act on different instance types
+     */
+    public function testCanHydratedPromiscuousInstances()
+    {
+        /* @var $classMethodsCamelCase ClassMethodsCamelCase */
+        $classMethodsCamelCase = $this->hydrator->hydrate(
+            array('fooBar' => 'baz-tab'),
+            new ClassMethodsCamelCase()
+        );
+        /* @var $classMethodsCamelCaseMissing ClassMethodsCamelCaseMissing */
+        $classMethodsCamelCaseMissing = $this->hydrator->hydrate(
+            array('fooBar' => 'baz-tab'),
+            new ClassMethodsCamelCaseMissing()
+        );
+        /* @var $arraySerializable ArraySerializable */
+        $arraySerializable = $this->hydrator->hydrate(array('fooBar' => 'baz-tab'), new ArraySerializable());
+
+        $this->assertSame('baz-tab', $classMethodsCamelCase->getFooBar());
+        $this->assertSame('baz-tab', $classMethodsCamelCaseMissing->getFooBar());
+        $this->assertSame(
+            array(
+                "foo" => "bar",
+                "bar" => "foo",
+                "blubb" => "baz",
+                "quo" => "blubb"
+            ),
+            $arraySerializable->getArrayCopy()
+        );
     }
 }

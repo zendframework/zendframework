@@ -20,14 +20,14 @@ class DateTest extends TestCase
      *
      * @var string
      */
-    private $_originaltimezone;
+    private $originaltimezone;
 
     /**
      * Setup environment
      */
     public function setUp()
     {
-        $this->_originaltimezone = date_default_timezone_get();
+        $this->originaltimezone = date_default_timezone_get();
     }
 
     /**
@@ -35,7 +35,7 @@ class DateTest extends TestCase
      */
     public function tearDown()
     {
-        date_default_timezone_set($this->_originaltimezone);
+        date_default_timezone_set($this->originaltimezone);
     }
 
     public function testProvidesDefaultInputSpecification()

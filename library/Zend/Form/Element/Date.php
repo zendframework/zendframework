@@ -51,7 +51,7 @@ class Date extends DateTimeElement
         return new DateStepValidator(array(
             'format'    => $format,
             'baseValue' => $baseValue,
-            'timezone'  => new DateTimezone("UTC"),
+            'timezone'  => new DateTimezone('UTC'),
             'step'      => new DateInterval("P{$stepValue}D"),
         ));
     }

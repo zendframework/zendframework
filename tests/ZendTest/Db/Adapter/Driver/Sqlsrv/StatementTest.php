@@ -55,7 +55,6 @@ class StatementTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\Adapter\Driver\Sqlsrv\Statement::getParameterContainer
-     * @todo   Implement testGetParameterContainer().
      */
     public function testGetParameterContainer()
     {

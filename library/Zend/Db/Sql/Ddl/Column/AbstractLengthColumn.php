@@ -57,32 +57,12 @@ abstract class AbstractLengthColumn extends Column
      */
     public function getExpressionData()
     {
-        $spec = $this->specification;
-
-        $params   = array();
-        $params[] = $this->name;
-        $params[] = $this->type;
+        $data = parent::getExpressionData();
 
         if ($this->getLengthExpression()) {
-            $params[1] .= '(' . $this->getLengthExpression() . ')';
+            $data[0][1][1] .= '(' . $this->getLengthExpression() . ')';
         }
 
-        $types = array(self::TYPE_IDENTIFIER, self::TYPE_LITERAL);
-
-        if (!$this->isNullable) {
-            $spec .= ' NOT NULL';
-        }
-
-        if ($this->default !== null) {
-            $spec    .= ' DEFAULT %s';
-            $params[] = $this->default;
-            $types[]  = self::TYPE_VALUE;
-        }
-
-        return array(array(
-            $spec,
-            $params,
-            $types,
-        ));
+        return $data;
     }
 }

@@ -9,6 +9,8 @@
 
 namespace Zend\Db\Sql\Ddl\Column;
 
+use Zend\Db\Sql\Ddl\Constraint\ConstraintInterface;
+
 class Column implements ColumnInterface
 {
     /**
@@ -30,6 +32,11 @@ class Column implements ColumnInterface
      * @var array
      */
     protected $options = array();
+
+    /**
+     * @var array
+     */
+    protected $constraints = array();
 
     /**
      * @var string
@@ -136,6 +143,16 @@ class Column implements ColumnInterface
     }
 
     /**
+     * @param  Constraint\ConstraintInterface $constraint
+     * @return self
+     */
+    public function addConstraint(ConstraintInterface $constraint)
+    {
+        $this->constraints[] = $constraint;
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getExpressionData()
@@ -158,10 +175,18 @@ class Column implements ColumnInterface
             $types[]  = self::TYPE_VALUE;
         }
 
-        return array(array(
+        $data = array(array(
             $spec,
             $params,
             $types,
         ));
+
+        /** @var $constraint ConstraintInterface */
+        foreach ($this->constraints as $constraint) {
+            $data[] = ' ';
+            $data = array_merge($data, $constraint->getExpressionData());
+        }
+
+        return $data;
     }
 }

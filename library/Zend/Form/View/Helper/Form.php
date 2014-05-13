@@ -11,6 +11,7 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\FieldsetInterface;
 use Zend\Form\FormInterface;
+use Zend\View\Helper\Doctype;
 
 /**
  * View helper for rendering Form objects
@@ -83,7 +84,7 @@ class Form extends AbstractHelper
     {
         $doctype = $this->getDoctype();
 
-        if ('HTML5' !== $doctype && 'XHTML5' !== $doctype) {
+        if (Doctype::HTML5 !== $doctype && Doctype::XHTML5 !== $doctype) {
             $attributes = array(
                 'action' => '',
                 'method' => 'get',

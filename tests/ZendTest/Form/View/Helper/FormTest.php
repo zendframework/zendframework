@@ -15,6 +15,7 @@ use ZendTest\Form\TestAsset\CityFieldset;
 
 use Zend\Form\Form;
 use Zend\Form\View\Helper\Form as FormHelper;
+use Zend\View\Helper\Doctype;
 
 class FormTest extends CommonTestCase
 {
@@ -112,11 +113,11 @@ class FormTest extends CommonTestCase
     {
         $helper = new FormHelper();
 
-        $helper->setDoctype('HTML4_LOOSE');
+        $helper->setDoctype(Doctype::HTML4_LOOSE);
         $html4Markup = $helper->openTag();
-        $helper->setDoctype('HTML5');
+        $helper->setDoctype(Doctype::HTML5);
         $html5Markup = $helper->openTag();
-        $helper->setDoctype('XHTML5');
+        $helper->setDoctype(Doctype::XHTML5);
         $xhtml5Markup = $helper->openTag();
 
         $this->assertContains('action=""', $html4Markup);
@@ -128,11 +129,11 @@ class FormTest extends CommonTestCase
     {
         $helper = new FormHelper();
 
-        $helper->setDoctype('HTML4_LOOSE');
+        $helper->setDoctype(Doctype::HTML4_LOOSE);
         $html4Markup = $helper->openTag();
-        $helper->setDoctype('HTML5');
+        $helper->setDoctype(Doctype::HTML5);
         $html5Markup = $helper->openTag();
-        $helper->setDoctype('XHTML5');
+        $helper->setDoctype(Doctype::XHTML5);
         $xhtml5Markup = $helper->openTag();
 
         $this->assertContains('method="get"', $html4Markup);

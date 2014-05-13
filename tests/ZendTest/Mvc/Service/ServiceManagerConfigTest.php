@@ -12,6 +12,7 @@ namespace ZendTest\Mvc\Service;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\EventManager\EventManager;
 use Zend\Mvc\Service\ServiceManagerConfig;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 
 class ServiceManagerConfigTest extends TestCase
@@ -37,5 +38,33 @@ class ServiceManagerConfigTest extends TestCase
         $this->assertInstanceOf(__NAMESPACE__ . '\TestAsset\EventManagerAwareObject', $instance);
         $this->assertSame($events, $instance->getEventManager());
         $this->assertSame($this->services->get('SharedEventManager'), $events->getSharedManager());
+    }
+
+    public function testCanAddDelegators()
+    {
+        $config = array(
+            'invokables' => array(
+                'foo' => '\stdClass',
+            ),
+            'delegators' => array(
+                'foo' => function(ServiceLocatorInterface $serviceLocator,
+                                  $name,
+                                  $requestedName,
+                                  $callback) {
+                        $service = $callback();
+                        $service->bar = 'baz';
+
+                        return $service;
+                    },
+            ),
+        );
+
+        $config = new ServiceManagerConfig($config);
+        $sm = new ServiceManager();
+        $config->configureServiceManager($sm);
+
+        $std = $sm->get('foo');
+        $this->assertInstanceOf('StdClass', $std);
+        $this->assertInstanceOf('baz', $std->bar);
     }
 }

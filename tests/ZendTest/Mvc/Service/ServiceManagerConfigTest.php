@@ -40,6 +40,51 @@ class ServiceManagerConfigTest extends TestCase
         $this->assertSame($this->services->get('SharedEventManager'), $events->getSharedManager());
     }
 
+    public function testCanMergeCustomConfigWithDefaultConfig()
+    {
+        $custom = array(
+            'invokables' => array(
+                'foo' => '\stdClass',
+            ),
+            'factories' => array(
+                'bar' => function($sm) {
+                    return new \stdClass();
+                },
+            ),
+        );
+
+        $config = new ServiceManagerConfig($custom);
+        $sm = new ServiceManager();
+        $config->configureServiceManager($sm);
+
+        $this->assertTrue($sm->has('foo'));
+        $this->assertTrue($sm->has('bar'));
+        $this->assertTrue($sm->has('ModuleManager'));
+    }
+
+    public function testCanOverrideDefaultConfigWithCustomConfig()
+    {
+        $custom = array(
+            'invokables' => array(
+                'foo' => '\stdClass',
+            ),
+            'factories' => array(
+                'ModuleManager' => function($sm) {
+                    return new \stdClass();
+                },
+            ),
+        );
+
+        $config = new ServiceManagerConfig($custom);
+        $sm = new ServiceManager();
+        $config->configureServiceManager($sm);
+
+        $this->assertTrue($sm->has('foo'));
+        $this->assertTrue($sm->has('ModuleManager'));
+
+        $this->assertInstanceOf('stdClass', $sm->get('ModuleManager'));
+    }
+
     public function testCanAddDelegators()
     {
         $config = array(

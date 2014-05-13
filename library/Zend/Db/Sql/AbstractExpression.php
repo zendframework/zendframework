@@ -20,6 +20,14 @@ abstract class AbstractExpression implements ExpressionInterface
         self::TYPE_VALUE,
     );
 
+    /**
+     * Normalize Argument
+     *
+     * @param mixed $argument
+     * @param string $defaultType
+     * @return array
+     * @throws Exception\InvalidArgumentException
+     */
     protected function normalizeArgument($argument, $defaultType = self::TYPE_VALUE)
     {
         $argumentType = null;
@@ -62,6 +70,14 @@ abstract class AbstractExpression implements ExpressionInterface
         );
     }
 
+    /**
+     * Push variables from $source to self
+     *
+     * @param mixed $source
+     * @param array $excludeVariables
+     * @return self
+     * @throws Exception\InvalidArgumentException
+     */
     protected function localizeVariablesForDecorator($source, array $excludeVariables = array())
     {
         if (!$this instanceof PlatformDecoratorInterface) {

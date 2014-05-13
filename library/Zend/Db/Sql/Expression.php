@@ -34,14 +34,18 @@ class Expression extends AbstractExpression
     /**
      * @param string $expression
      * @param string|array $parameters
-     * @param array $types
+     * @param array $types @deprecated
      */
     public function __construct($expression = '', $parameters = null, array $types = array())
     {
         if ($expression) {
             $this->setExpression($expression);
         }
-        //BC
+        /**
+         * Backward Compatibility
+         * Pass parameter value and type to $parameters is more better way, as sample : $parameters = array(ParameterValue => ParameterType)
+         * But put parameter value to $parameters and it type to $types is allow too for backward compatibility.
+         */
         if ($types) {
             if (is_array($parameters)) {
                 foreach ($parameters as $i=>$parameter) {

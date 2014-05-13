@@ -67,29 +67,7 @@ abstract class AbstractAddressList implements HeaderInterface
 
         $addressList = $header->getAddressList();
         foreach ($values as $address) {
-            // split values into name/email
-            if (!preg_match('/^((?P<name>.*?)<(?P<namedEmail>[^>]+)>|(?P<email>.+))$/', $address, $matches)) {
-                // Should we raise an exception here?
-                continue;
-            }
-            $name = null;
-            if (isset($matches['name'])) {
-                $name  = trim($matches['name']);
-            }
-            if (empty($name)) {
-                $name = null;
-            }
-
-            if (isset($matches['namedEmail'])) {
-                $email = $matches['namedEmail'];
-            }
-            if (isset($matches['email'])) {
-                $email = $matches['email'];
-            }
-            $email = trim($email); // we may have leading whitespace
-
-            // populate address list
-            $addressList->add($email, $name);
+            $addressList->addFromString($address);
         }
         return $header;
     }

@@ -11,7 +11,6 @@ namespace ZendTest\Mail\Header;
 
 use Zend\Mail\Address;
 use Zend\Mail\AddressList;
-use Zend\Mail\Header\AbstractAddressList;
 use Zend\Mail\Header\Bcc;
 use Zend\Mail\Header\Cc;
 use Zend\Mail\Header\From;
@@ -76,7 +75,7 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
 
     public function populateAddressList(AddressList $list)
     {
-        $address = new Address('zf-devteam@zend.com', 'ZF DevTeam');
+        $address = new Address('zf-devteam@zend.com', 'ZF, DevTeam');
         $list->add($address);
         $list->add('zf-contributors@lists.zend.com');
         $list->add('fw-announce@lists.zend.com', 'ZF Announce List');
@@ -84,7 +83,7 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
 
     public function getExpectedFieldValue()
     {
-        return "ZF DevTeam <zf-devteam@zend.com>,\r\n zf-contributors@lists.zend.com,\r\n ZF Announce List <fw-announce@lists.zend.com>";
+        return "\"ZF, DevTeam\" <zf-devteam@zend.com>,\r\n zf-contributors@lists.zend.com,\r\n ZF Announce List <fw-announce@lists.zend.com>";
     }
 
     /**
@@ -123,7 +122,7 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($list->has('zf-contributors@lists.zend.com'));
         $this->assertTrue($list->has('fw-announce@lists.zend.com'));
         $address = $list->get('zf-devteam@zend.com');
-        $this->assertEquals('ZF DevTeam', $address->getName());
+        $this->assertEquals('ZF, DevTeam', $address->getName());
         $address = $list->get('zf-contributors@lists.zend.com');
         $this->assertNull($address->getName());
         $address = $list->get('fw-announce@lists.zend.com');
@@ -157,7 +156,7 @@ class AddressListHeaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($list->has('zf-contributors@lists.zend.com'));
         $this->assertTrue($list->has('fw-announce@lists.zend.com'));
         $address = $list->get('zf-devteam@zend.com');
-        $this->assertEquals('ZF DevTeam', $address->getName());
+        $this->assertEquals('ZF, DevTeam', $address->getName());
         $address = $list->get('zf-contributors@lists.zend.com');
         $this->assertNull($address->getName());
         $address = $list->get('fw-announce@lists.zend.com');

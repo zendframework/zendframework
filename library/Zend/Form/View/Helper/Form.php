@@ -81,10 +81,16 @@ class Form extends AbstractHelper
      */
     public function openTag(FormInterface $form = null)
     {
-        $attributes = array(
-            'action' => '',
-            'method' => 'get',
-        );
+        $doctype = $this->getDoctype();
+
+        if ('HTML5' !== $doctype && 'XHTML5' !== $doctype) {
+            $attributes = array(
+                'action' => '',
+                'method' => 'get',
+            );
+        } else {
+            $attributes = array();
+        }
 
         if ($form instanceof FormInterface) {
             $formAttributes = $form->getAttributes();
@@ -94,7 +100,11 @@ class Form extends AbstractHelper
             $attributes = array_merge($attributes, $formAttributes);
         }
 
-        $tag = sprintf('<form %s>', $this->createAttributesString($attributes));
+        if ($attributes) {
+            $tag = sprintf('<form %s>', $this->createAttributesString($attributes));
+        } else {
+            $tag = '<form>';
+        }
 
         return $tag;
     }

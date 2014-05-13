@@ -107,4 +107,36 @@ class FormTest extends CommonTestCase
         $this->assertContains('<form', $markup);
         $this->assertContains('</form>', $markup);
     }
+
+    public function testHtml5DoesNotAddEmptyActionAttributeToFormTag()
+    {
+        $helper = new FormHelper();
+
+        $helper->setDoctype('HTML4_LOOSE');
+        $html4Markup = $helper->openTag();
+        $helper->setDoctype('HTML5');
+        $html5Markup = $helper->openTag();
+        $helper->setDoctype('XHTML5');
+        $xhtml5Markup = $helper->openTag();
+
+        $this->assertContains('action=""', $html4Markup);
+        $this->assertNotContains('action=""', $html5Markup);
+        $this->assertNotContains('action=""', $xhtml5Markup);
+    }
+
+    public function testHtml5DoesNotSetDefaultMethodAttributeInFormTag()
+    {
+        $helper = new FormHelper();
+
+        $helper->setDoctype('HTML4_LOOSE');
+        $html4Markup = $helper->openTag();
+        $helper->setDoctype('HTML5');
+        $html5Markup = $helper->openTag();
+        $helper->setDoctype('XHTML5');
+        $xhtml5Markup = $helper->openTag();
+
+        $this->assertContains('method="get"', $html4Markup);
+        $this->assertNotContains('method="get"', $html5Markup);
+        $this->assertNotContains('method="get"', $xhtml5Markup);
+    }
 }

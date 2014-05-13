@@ -15,7 +15,7 @@ use Zend\Db\Sql\Ddl\Constraint\PrimaryKey;
 use Zend\Db\Sql\Ddl\CreateTable;
 use Zend\Db\Sql\Platform\Mysql\Ddl\CreateTableDecorator;
 
-class CreateTableTest extends \PHPUnit_Framework_TestCase
+class CreateTableDecoratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @covers Zend\Db\Sql\Platform\Mysql\Ddl\CreateTableDecorator::setSubject

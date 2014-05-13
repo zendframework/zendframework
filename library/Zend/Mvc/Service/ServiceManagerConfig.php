@@ -140,8 +140,10 @@ class ServiceManagerConfig implements ConfigInterface
             $serviceManager->setShared($name, $value);
         }
 
-        foreach ($this->delegators as $name => $value) {
-            $serviceManager->addDelegator($name, $value);
+        foreach ($this->delegators as $originalServiceName => $delegators) {
+            foreach ($delegators as $delegator) {
+                $serviceManager->addDelegator($originalServiceName, $delegator);
+            }
         }
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {

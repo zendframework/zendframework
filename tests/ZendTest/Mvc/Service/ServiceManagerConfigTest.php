@@ -47,7 +47,7 @@ class ServiceManagerConfigTest extends TestCase
                 'foo' => '\stdClass',
             ),
             'delegators' => array(
-                'foo' => function(ServiceLocatorInterface $serviceLocator,
+                'foo' => array(function(ServiceLocatorInterface $serviceLocator,
                                   $name,
                                   $requestedName,
                                   $callback) {
@@ -56,7 +56,7 @@ class ServiceManagerConfigTest extends TestCase
 
                         return $service;
                     },
-            ),
+            )),
         );
 
         $config = new ServiceManagerConfig($config);

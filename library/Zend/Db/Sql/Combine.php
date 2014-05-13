@@ -96,12 +96,25 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
         return $this->combine($select, self::COMBINE_INTERSECT, $modifier);
     }
 
+    /**
+     * Get SQL string for statement
+     *
+     * @param PlatformInterface $adapterPlatform
+     * @return string
+     */
     public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
         $adapterPlatform = ($adapterPlatform) ?: new AdapterSql92Platform;
         return $this->buildSqlString($adapterPlatform);
     }
 
+    /**
+     * Prepare statement
+     *
+     * @param AdapterInterface $adapter
+     * @param StatementContainerInterface $statementContainer
+     * @return void
+     */
     public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer = null)
     {
         $statementContainer = ($statementContainer) ?: $adapter->getDriver()->createStatement();
@@ -116,6 +129,14 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
         return $statementContainer->setSql($sql);
     }
 
+    /**
+     * Build sql string
+     *
+     * @param PlatformInterface $platform
+     * @param DriverInterface $driver
+     * @param ParameterContainer $parameterContainer
+     * @return string
+     */
     protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         if (!$this->combine) {
@@ -137,6 +158,11 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
         return trim($sql, ' ');
     }
 
+    /**
+     * Get raw state
+     *
+     * @return array
+     */
     public function getRawState()
     {
         return $this->combine;

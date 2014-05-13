@@ -157,4 +157,19 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
         $filtered = $this->_filter->filter($value);
         $this->assertSame($value, $filtered);
     }
+
+    /**
+     * Ensures expected behavior with empty character list
+     *
+     * @return void
+     */
+    public function testEmptyCharList()
+    {
+        $filter = $this->_filter;
+        $filter->setCharList('0');
+        $this->assertEquals('a0b', $filter('00a0b00'));
+        
+        $filter->setCharList('');
+        $this->assertEquals(' str ', $filter(' str '));
+    }
 }

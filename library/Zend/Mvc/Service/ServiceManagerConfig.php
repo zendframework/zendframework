@@ -66,6 +66,14 @@ class ServiceManagerConfig implements ConfigInterface
     );
 
     /**
+     *
+     * Delegators
+     *
+     * @var array
+     */
+    protected $delegators = array();
+
+    /**
      * Constructor
      *
      * Merges internal arrays with those passed via configuration
@@ -94,6 +102,9 @@ class ServiceManagerConfig implements ConfigInterface
             $this->shared = array_merge($this->shared, $configuration['shared']);
         }
 
+        if (isset($configuration['delegators'])) {
+            $this->delegators = array_merge($this->delegators, $configuration['delegators']);
+        }
     }
 
     /**
@@ -127,6 +138,10 @@ class ServiceManagerConfig implements ConfigInterface
 
         foreach ($this->shared as $name => $value) {
             $serviceManager->setShared($name, $value);
+        }
+
+        foreach ($this->delegators as $name => $value) {
+            $serviceManager->addDelegator($name, $value);
         }
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {

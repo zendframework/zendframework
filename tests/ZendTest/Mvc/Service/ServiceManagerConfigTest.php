@@ -64,7 +64,7 @@ class ServiceManagerConfigTest extends TestCase
         $config->configureServiceManager($sm);
 
         $std = $sm->get('foo');
-        $this->assertInstanceOf('StdClass', $std);
-        $this->assertInstanceOf('baz', $std->bar);
+        $this->assertInstanceOf('stdClass', $std);
+        $this->assertEquals('baz', $std->bar);
     }
 }

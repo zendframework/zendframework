@@ -8,32 +8,58 @@
     ],
     "homepage": "http://framework.zend.com/",
     "license": "BSD-3-Clause",
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "sebastianbergmann/phpcov",
+                "version": "1.1.0",
+                "dist": {
+                    "url": "https://github.com/sebastianbergmann/phpcov/archive/1.1.0.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/sebastianbergmann/phpcov.git",
+                    "type": "git",
+                    "reference": "1.1.0"
+                },
+                "bin": [
+                    "phpcov.php"
+                ]
+            }
+        }
+    ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.23",
+        "zendframework/zendxml": "~1.0-dev"
     },
     "require-dev": {
         "doctrine/annotations": ">=1.0",
         "ircmaxell/random-lib": "dev-master",
         "ircmaxell/security-lib": "dev-master",
-        "ocramius/proxy-manager": "0.3.*",
-        "phpunit/PHPUnit": "3.7.*"
+        "mikey179/vfsStream": "1.2.*",
+        "fabpot/php-cs-fixer": "dev-master",
+        "phpunit/PHPUnit": "3.7.*",
+        "satooshi/php-coveralls": "dev-master",
+        "sebastianbergmann/phpcov": "1.1.0"
     },
     "suggest": {
         "ext-intl": "ext/intl for i18n features (included in default builds of PHP)",
         "doctrine/annotations": "Doctrine Annotations >=1.0 for annotation features",
         "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable",
-        "ocramius/proxy-manager": "ProxyManager to handle lazy initialization of services",
+        "ocramius/proxy-manager": "ProxyManager 0.5.* to handle lazy initialization of services",
         "zendframework/zendpdf": "ZendPdf for creating PDF representations of barcodes",
         "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha for rendering ReCaptchas in Zend\\Captcha and/or Zend\\Form"
     },
     "autoload": {
         "psr-0": {
-            "Zend\\": "library/",
-            "ZendTest\\": "tests/"
+            "Zend\\": "library/"
         }
     },
     "bin": [
-        "bin/classmap_generator.php"
+        "bin/classmap_generator.php",
+        "bin/pluginmap_generator.php",
+        "bin/templatemap_generator.php"
     ],
     "replace": {
         "zendframework/zend-authentication": "self.version",
@@ -90,8 +116,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev",
-            "dev-develop": "2.3-dev"
+            "dev-master": "2.3-dev",
+            "dev-develop": "2.4-dev"
         }
     }
 }

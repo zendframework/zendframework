@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -16,11 +15,6 @@ use Zend\Form\View\HelperConfig;
 use Zend\Form\View\Helper\FormRow as FormRowHelper;
 use Zend\View\Renderer\PhpRenderer;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class FormRowTest extends TestCase
 {
     protected $helper;
@@ -86,6 +80,14 @@ class FormRowTest extends TestCase
         $element->setAttribute('type', 'text');
         $markup = $this->helper->render($element);
         $this->assertRegexp('/<input name="foo" type="text"[^\/>]*\/?>/', $markup);
+    }
+
+    public function testIgnoreLabelForHidden()
+    {
+        $element = new Element\Hidden('foo');
+        $element->setLabel('My label');
+        $markup = $this->helper->render($element);
+        $this->assertEquals('<input type="hidden" name="foo" value=""/>', $markup);
     }
 
     public function testCanHandleMultiCheckboxesCorrectly()
@@ -164,7 +166,7 @@ class FormRowTest extends TestCase
         $element->setAttribute('class', 'foo bar');
 
         $markup = $this->helper->setInputErrorClass('custom-error-class')->render($element);
-        $this->assertRegexp('/<input name="foo" class="foo bar custom-error-class" type="text" [^\/>]*\/?>/', $markup);
+        $this->assertRegexp('/<input name="foo" class="foo\&\#x20\;bar\&\#x20\;custom-error-class" type="text" [^\/>]*\/?>/', $markup);
     }
 
     public function testInvokeWithNoElementChainsHelper()
@@ -310,7 +312,7 @@ class FormRowTest extends TestCase
     {
         $element = new  Element\Date('birth');
         $element->setFormat('Y-m-d');
-        $element->setValue('2010-13-13');
+        $element->setValue('2010.13');
 
         $validator = new \Zend\Validator\Date();
         $validator->isValid($element->getValue());
@@ -371,5 +373,60 @@ class FormRowTest extends TestCase
 
         $markup = $this->helper->render($element);
         $this->assertRegexp('#^<button type="button" name="button" value=""\/?>foo</button>$#', $markup);
+    }
+
+    public function testAssertLabelHtmlEscapeIsOnByDefault()
+    {
+        $element = new Element('fooname');
+        $escapeHelper = $this->renderer->getHelperPluginManager()->get('escapeHtml');
+
+        $label = '<span>foo</span>';
+        $element->setLabel($label);
+
+        $markup = $this->helper->__invoke($element);
+
+        $this->assertContains($escapeHelper->__invoke($label), $markup);
+    }
+
+    public function testCanDisableLabelHtmlEscape()
+    {
+        $label = '<span>foo</span>';
+        $element = new Element('fooname');
+        $element->setLabel($label);
+        $element->setLabelOptions(array('disable_html_escape' => true));
+
+        $markup = $this->helper->__invoke($element);
+
+        $this->assertContains($label, $markup);
+    }
+
+    public function testCanSetLabelPositionBeforeInvoke()
+    {
+        $element = new Element('foo');
+
+        $this->helper->setLabelPosition('append');
+        $this->helper->__invoke($element);
+
+        $this->assertSame('append', $this->helper->getLabelPosition());
+    }
+
+    public function testLabelOptionAlwaysWrapDefaultsToFalse()
+    {
+        $element = new Element('foo');
+        $this->assertEmpty($element->getLabelOption('always_wrap'));
+    }
+
+    public function testCanSetOptionToWrapElementInLabel()
+    {
+        $element = new Element('foo', array(
+            'label_options' => array(
+                'always_wrap' => true
+            )
+        ));
+        $element->setAttribute('id', 'bar');
+        $element->setLabel('baz');
+
+        $markup = $this->helper->render($element);
+        $this->assertRegexp('#^<label><span>baz</span><input name="foo" id="bar" type="text" value=""\/?></label>$#', $markup);
     }
 }

@@ -3,13 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Form;
 
 use Traversable;
+use Zend\Code\Reflection\ClassReflection;
 use Zend\Stdlib\Hydrator;
 use Zend\Stdlib\Hydrator\HydratorAwareInterface;
 use Zend\Stdlib\Hydrator\HydratorInterface;
@@ -23,7 +24,7 @@ class Fieldset extends Element implements FieldsetInterface
     protected $factory;
 
     /**
-     * @var array
+     * @var ElementInterface[]
      */
     protected $byName    = array();
 
@@ -69,6 +70,13 @@ class Fieldset extends Element implements FieldsetInterface
     protected $useAsBaseFieldset = false;
 
     /**
+     * The class or interface of objects that can be bound to this fieldset.
+     *
+     * @var string
+     */
+    protected $allowedObjectBindingClass;
+
+    /**
      * @param  null|int|string  $name    Optional name for the element
      * @param  array            $options Optional options for the element
      */
@@ -92,6 +100,10 @@ class Fieldset extends Element implements FieldsetInterface
 
         if (isset($options['use_as_base_fieldset'])) {
             $this->setUseAsBaseFieldset($options['use_as_base_fieldset']);
+        }
+
+        if (isset($options['allowed_object_binding_class'])) {
+            $this->setAllowedObjectBindingClass($options['allowed_object_binding_class']);
         }
 
         return $this;
@@ -180,10 +192,6 @@ class Fieldset extends Element implements FieldsetInterface
         $this->byName[$name] = $elementOrFieldset;
 
         if ($elementOrFieldset instanceof FieldsetInterface) {
-            if ($elementOrFieldset instanceof FieldsetPrepareAwareInterface) {
-                $elementOrFieldset->prepareFieldset();
-            }
-
             $this->fieldsets[$name] = $elementOrFieldset;
             return $this;
         }
@@ -390,19 +398,31 @@ class Fieldset extends Element implements FieldsetInterface
             ));
         }
 
-        foreach ($data as $name => $value) {
-            if (!$this->has($name)) {
-                continue;
+        foreach ($this->byName as $name => $elementOrFieldset) {
+            $valueExists = array_key_exists($name, $data);
+
+            if ($elementOrFieldset instanceof FieldsetInterface) {
+                if ($valueExists && (is_array($data[$name]) || $data[$name] instanceof Traversable)) {
+                    $elementOrFieldset->populateValues($data[$name]);
+                    continue;
+                }
+
+                if ($elementOrFieldset instanceof Element\Collection) {
+                    if ($valueExists && null !== $data[$name]) {
+                        $elementOrFieldset->populateValues($data[$name]);
+                        continue;
+                    }
+
+                    /* This ensures that collections with allow_remove don't re-create child
+                     * elements if they all were removed */
+                    $elementOrFieldset->populateValues(array());
+                    continue;
+                }
             }
 
-            $element = $this->get($name);
-
-            if ($element instanceof FieldsetInterface && is_array($value)) {
-                $element->populateValues($value);
-                continue;
+            if ($valueExists) {
+                $elementOrFieldset->setValue($data[$name]);
             }
-
-            $element->setValue($value);
         }
     }
 
@@ -458,6 +478,26 @@ class Fieldset extends Element implements FieldsetInterface
     }
 
     /**
+     * Set the class or interface of objects that can be bound to this fieldset.
+     *
+     * @param string $allowObjectBindingClass
+     */
+    public function setAllowedObjectBindingClass($allowObjectBindingClass)
+    {
+        $this->allowedObjectBindingClass = $allowObjectBindingClass;
+    }
+
+    /**
+     * Get The class or interface of objects that can be bound to this fieldset.
+     *
+     * @return string
+     */
+    public function allowedObjectBindingClass()
+    {
+        return $this->allowedObjectBindingClass;
+    }
+
+    /**
      * Checks if the object can be set in this fieldset
      *
      * @param object $object
@@ -465,7 +505,17 @@ class Fieldset extends Element implements FieldsetInterface
      */
     public function allowObjectBinding($object)
     {
-        return ($this->object && $object instanceof $this->object);
+        $validBindingClass = false;
+        if (is_object($object) && $this->allowedObjectBindingClass()) {
+            $objectClass = ltrim($this->allowedObjectBindingClass(), '\\');
+            $reflection = new ClassReflection($object);
+            $validBindingClass = (
+                $reflection->getName() == $objectClass
+                || $reflection->isSubclassOf($this->allowedObjectBindingClass())
+            );
+        }
+
+        return ($validBindingClass || $this->object && $object instanceof $this->object);
     }
 
     /**

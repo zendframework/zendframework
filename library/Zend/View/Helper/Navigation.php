@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -14,6 +14,7 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\View\Exception;
 use Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper;
 use Zend\View\Helper\Navigation\HelperInterface as NavigationHelper;
+use Zend\View\Renderer\RendererInterface as Renderer;
 
 /**
  * Proxy helper for retrieving navigational helpers and forwarding calls
@@ -325,5 +326,20 @@ class Navigation extends AbstractNavigationHelper
         }
 
         return $this->plugins;
+    }
+
+    /**
+     * Set the View object
+     *
+     * @param  Renderer $view
+     * @return self
+     */
+    public function setView(Renderer $view)
+    {
+        parent::setView($view);
+        if ($view && $this->plugins) {
+            $this->plugins->setRenderer($view);
+        }
+        return $this;
     }
 }

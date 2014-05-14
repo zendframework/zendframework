@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Config
  */
 
 namespace ZendTest\Config\Reader;
@@ -13,16 +12,12 @@ namespace ZendTest\Config\Reader;
 use Zend\Config\Reader\Yaml as YamlReader;
 
 /**
- * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
  * @group      Zend_Config
  */
 class YamlTest extends AbstractReaderTestCase
 {
     public function setUp()
     {
-
         if (!constant('TESTS_ZEND_CONFIG_YAML_ENABLED')) {
             $this->markTestSkipped('Yaml test for Zend\Config skipped');
         }

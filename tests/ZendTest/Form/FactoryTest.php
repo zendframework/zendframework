@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form;
@@ -19,11 +18,6 @@ use Zend\InputFilter;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\Hydrator\HydratorPluginManager;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class FactoryTest extends TestCase
 {
     /**
@@ -382,6 +376,99 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\Stdlib\Hydrator\ObjectProperty', $hydrator);
     }
 
+    public function testCanCreateFormsAndSpecifyFactory()
+    {
+        $form = $this->factory->createForm(array(
+            'name'    => 'foo',
+            'factory' => 'Zend\Form\Factory',
+        ));
+        $this->assertInstanceOf('Zend\Form\FormInterface', $form);
+        $factory = $form->getFormFactory();
+        $this->assertInstanceOf('Zend\Form\Factory', $factory);
+    }
+
+    public function testCanCreateFactoryFromArray()
+    {
+        $form = $this->factory->createForm(array(
+            'name'    => 'foo',
+            'factory' => array(
+                'type' => 'Zend\Form\Factory',
+            ),
+        ));
+
+        $this->assertInstanceOf('Zend\Form\FormInterface', $form);
+        $factory = $form->getFormFactory();
+        $this->assertInstanceOf('Zend\Form\Factory', $factory);
+    }
+
+    public function testCanCreateFactoryFromConcreteClass()
+    {
+        $factory = new \Zend\Form\Factory();
+        $form = $this->factory->createForm(array(
+            'name'    => 'foo',
+            'factory' => $factory,
+        ));
+
+        $this->assertInstanceOf('Zend\Form\FormInterface', $form);
+        $test = $form->getFormFactory();
+        $this->assertSame($factory, $test);
+    }
+
+    public function testCanCreateFormFromConcreteClassAndSpecifyCustomValidatorByName()
+    {
+        $validatorManager = new \Zend\Validator\ValidatorPluginManager();
+        $validatorManager->setInvokableClass('baz', 'ZendTest\Validator\TestAsset\ConcreteValidator');
+
+        $defaultValidatorChain = new \Zend\Validator\ValidatorChain();
+        $defaultValidatorChain->setPluginManager($validatorManager);
+
+        $inputFilterFactory = new \Zend\InputFilter\Factory();
+        $inputFilterFactory->setDefaultValidatorChain($defaultValidatorChain);
+
+        $factory = new FormFactory();
+        $factory->setInputFilterFactory($inputFilterFactory);
+
+        $form = $factory->createForm(array(
+            'name'         => 'foo',
+            'factory'      => $factory,
+            'input_filter' => array(
+                'bar' => array(
+                    'name'       => 'bar',
+                    'required'   => true,
+                    'validators' => array(
+                        array(
+                            'name' => 'baz',
+                        ),
+                    ),
+                ),
+            ),
+        ));
+
+        $this->assertInstanceOf('Zend\Form\FormInterface', $form);
+
+        $inputFilter = $form->getInputFilter();
+        $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $inputFilter);
+
+        $input = $inputFilter->get('bar');
+        $this->assertInstanceOf('Zend\InputFilter\Input', $input);
+
+        $validatorChain = $input->getValidatorChain();
+        $this->assertInstanceOf('Zend\Validator\ValidatorChain', $validatorChain);
+
+        $validatorArray = $validatorChain->getValidators();
+        $found = false;
+        foreach ($validatorArray as $validator) {
+            $validatorInstance = $validator['instance'];
+            $this->assertInstanceOf('Zend\Validator\ValidatorInterface', $validatorInstance);
+
+            if ($validatorInstance instanceof \ZendTest\Validator\TestAsset\ConcreteValidator) {
+                $found = true;
+                break;
+            }
+        }
+        $this->assertTrue($found);
+    }
+
     public function testCanCreateFormWithHydratorAndInputFilterAndElementsAndFieldsets()
     {
         $form = $this->factory->createForm(array(
@@ -629,5 +716,32 @@ class FactoryTest extends TestCase
         $fieldset = $this->factory->createFieldset(array('name' => 'myFieldset'));
         $this->assertAttributeInstanceOf('Zend\Form\Factory', 'factory', $fieldset);
         $this->assertSame($fieldset->getFormFactory()->getFormElementManager(), $this->factory->getFormElementManager());
+    }
+
+    public function testCanCreateFormWithNullElements()
+    {
+        $form = $this->factory->createForm(array(
+            'name' => 'foo',
+            'elements' => array(
+                'bar' => array(
+                    'spec' => array(
+                        'name' => 'bar',
+                    ),
+                ),
+                'baz' => null,
+                'bat' => array(
+                    'spec' => array(
+                        'name' => 'bat',
+                    ),
+                ),
+            ),
+        ));
+        $this->assertInstanceOf('Zend\Form\FormInterface', $form);
+
+        $elements = $form->getElements();
+        $this->assertEquals(2, count($elements));
+        $this->assertTrue($form->has('bar'));
+        $this->assertFalse($form->has('baz'));
+        $this->assertTrue($form->has('bat'));
     }
 }

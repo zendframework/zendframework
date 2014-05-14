@@ -3,12 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Navigation\Page;
 
+use Zend\Http\Request;
 use Zend\Navigation\Exception;
 
 /**
@@ -22,6 +23,13 @@ class Uri extends AbstractPage
      * @var string|null
      */
     protected $uri = null;
+
+    /**
+     * Request object used to determine uri path
+     *
+     * @var string
+     */
+    protected $request;
 
     /**
      * Sets page URI
@@ -74,6 +82,53 @@ class Uri extends AbstractPage
         }
 
         return $uri;
+    }
+
+    /**
+     * Returns whether page should be considered active or not
+     *
+     * This method will compare the page properties against the request uri.
+     *
+     * @param bool $recursive
+     *            [optional] whether page should be considered
+     *            active if any child pages are active. Default is
+     *            false.
+     * @return bool whether page should be considered active or not
+     */
+    public function isActive($recursive = false)
+    {
+        if (!$this->active) {
+            if ($this->getRequest() instanceof Request) {
+                if ($this->getRequest()->getUri()->getPath() == $this->getUri()) {
+                    $this->active = true;
+                    return true;
+                }
+            }
+        }
+
+        return parent::isActive($recursive);
+    }
+
+    /**
+     * Get the request
+     *
+     * @return Request
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * Sets request for assembling URLs
+     *
+     * @param Request $request
+     * @return self Fluent interface, returns self
+     */
+    public function setRequest(Request $request = null)
+    {
+        $this->request = $request;
+        return $this;
     }
 
     /**

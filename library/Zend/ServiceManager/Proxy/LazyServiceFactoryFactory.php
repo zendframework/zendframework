@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -43,6 +43,10 @@ class LazyServiceFactoryFactory implements FactoryInterface
 
         $factoryConfig = new Configuration();
 
+        if (isset($lazyServices['proxies_namespace'])) {
+            $factoryConfig->setProxiesNamespace($lazyServices['proxies_namespace']);
+        }
+
         if (isset($lazyServices['proxies_target_dir'])) {
             $factoryConfig->setProxiesTargetDir($lazyServices['proxies_target_dir']);
         }
@@ -51,22 +55,7 @@ class LazyServiceFactoryFactory implements FactoryInterface
             $factoryConfig->setGeneratorStrategy(new EvaluatingGeneratorStrategy());
         }
 
-        if (isset($lazyServices['auto_generate_proxies'])) {
-            $factoryConfig->setAutoGenerateProxies($lazyServices['auto_generate_proxies']);
-
-            // register the proxy autoloader if the proxies already exist
-            if (!$lazyServices['auto_generate_proxies']) {
-                spl_autoload_register($factoryConfig->getProxyAutoloader());
-
-                $factoryConfig->setGeneratorStrategy(new EvaluatingGeneratorStrategy());
-            }
-        }
-
-        //if (!isset($lazyServicesConfig['runtime_evaluate_proxies']))
-
-        if (isset($lazyServices['proxies_namespace'])) {
-            $factoryConfig->setProxiesNamespace($lazyServices['proxies_namespace']);
-        }
+        spl_autoload_register($factoryConfig->getProxyAutoloader());
 
         return new LazyServiceFactory(new LazyLoadingValueHolderFactory($factoryConfig), $lazyServices['class_map']);
     }

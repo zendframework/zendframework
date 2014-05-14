@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc\ResponseSender;
@@ -13,12 +12,7 @@ namespace ZendTest\Mvc\ResponseSender;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Mvc\ResponseSender\SimpleStreamResponseSender;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage UnitTest
- */
-class StreamResponseSenderTest extends TestCase
+class SimpleStreamResponseSenderTest extends TestCase
 {
     public function testSendResponseIgnoresInvalidResponseTypes()
     {
@@ -33,7 +27,7 @@ class StreamResponseSenderTest extends TestCase
 
     public function testSendResponseTwoTimesPrintsResponseOnlyOnce()
     {
-        $file = fopen(__DIR__ . '/TestAsset/sample-stream-file.txt', 'r');
+        $file = fopen(__DIR__ . '/TestAsset/sample-stream-file.txt', 'rb');
         $mockResponse = $this->getMock('Zend\Http\Response\Stream');
         $mockResponse->expects($this->once())->method('getStream')->will($this->returnValue($file));
         $mockSendResponseEvent = $this->getSendResponseEventMock($mockResponse);

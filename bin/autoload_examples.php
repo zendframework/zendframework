@@ -6,7 +6,7 @@ if (!class_exists('Zend\Controller\Action')) {
     echo "Found action class!\n";
 }
 if (!class_exists('Zend\Version')) {
-    echo "Could not find version class?\n";
+    echo "Could not find version class!\n";
 } else {
     echo "Found version class!\n";
 }

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper\Captcha;
@@ -15,11 +14,6 @@ use Zend\Form\Element\Captcha as CaptchaElement;
 use Zend\Form\View\Helper\Captcha\Dumb as DumbCaptchaHelper;
 use ZendTest\Form\View\Helper\CommonTestCase;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class DumbTest extends CommonTestCase
 {
     public function setUp()
@@ -50,15 +44,17 @@ class DumbTest extends CommonTestCase
     {
         $element = $this->getElement();
         $markup  = $this->helper->render($element);
-        $this->assertRegExp('#(name="' . $element->getName() . '\[id\]").*?(type="hidden")#', $markup);
-        $this->assertRegExp('#(name="' . $element->getName() . '\[id\]").*?(value="' . $this->captcha->getId() . '")#', $markup);
+
+        $this->assertRegExp('#(name="' . $element->getName() . '\&\#x5B\;id\&\#x5D\;").*?(type="hidden")#', $markup);
+        $this->assertRegExp('#(name="' . $element->getName() . '\&\#x5B\;id\&\#x5D\;").*?(value="' . $this->captcha->getId() . '")#', $markup);
     }
 
     public function testRendersTextInputForInput()
     {
         $element = $this->getElement();
         $markup  = $this->helper->render($element);
-        $this->assertRegExp('#(name="' . $element->getName() . '\[input\]").*?(type="text")#', $markup);
+
+        $this->assertRegExp('#(name="' . $element->getName() . '\&\#x5B\;input\&\#x5D\;").*?(type="text")#', $markup);
     }
 
     public function testRendersLabelPriorToInputByDefault()
@@ -98,7 +94,8 @@ class DumbTest extends CommonTestCase
         $element = $this->getElement();
         $this->helper->setSeparator('<br />');
         $markup  = $this->helper->render($element);
-        $this->assertContains($this->captcha->getLabel() . ' <b>' . strrev($this->captcha->getWord()) . '</b>' . $this->helper->getSeparator() . '<input name="foo[id]" type="hidden"', $markup);
+
+        $this->assertContains($this->captcha->getLabel() . ' <b>' . strrev($this->captcha->getWord()) . '</b>' . $this->helper->getSeparator() . '<input name="foo&#x5B;id&#x5D;" type="hidden"', $markup);
         $this->assertNotContains($this->helper->getSeparator() . '<input name="foo[input]" type="text"', $markup);
     }
 }

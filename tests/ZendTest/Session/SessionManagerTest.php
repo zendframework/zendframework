@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Session
  */
 
 namespace ZendTest\Session;
@@ -14,9 +13,6 @@ use Zend\Session\SessionManager;
 use Zend\Session;
 
 /**
- * @category   Zend
- * @package    Zend_Session
- * @subpackage UnitTests
  * @group      Zend_Session
  * @preserveGlobalState disabled
  */
@@ -26,6 +22,9 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
 
     public $cookieDateFormat = 'D, d-M-y H:i:s e';
 
+    /**
+     * @var SessionManager
+     */
     protected $manager;
 
     public function setUp()
@@ -539,4 +538,17 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($_SESSION['__ZF'], $metaData);
     }
 
+    /**
+     * @runInSeparateProcess
+     */
+    public function testSessionValidationDoesNotHaltOnNoopListener()
+    {
+        $validator = $this->getMock('stdClass', array('__invoke'));
+
+        $validator->expects($this->once())->method('__invoke');
+
+        $this->manager->getValidatorChain()->attach('session.validate', $validator);
+
+        $this->assertTrue($this->manager->isValid());
+    }
 }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -25,6 +25,11 @@ class MultiCheckbox extends Checkbox
     protected $attributes = array(
         'type' => 'multi_checkbox',
     );
+
+    /**
+     * @var bool
+     */
+    protected $disableInArrayValidator = false;
 
     /**
      * @var bool
@@ -67,6 +72,19 @@ class MultiCheckbox extends Checkbox
     }
 
     /**
+     * @param string $key
+     * @return self
+     */
+    public function unsetValueOption($key)
+    {
+        if (isset($this->valueOptions[$key])) {
+            unset($this->valueOptions[$key]);
+        }
+
+        return $this;
+    }
+
+    /**
      * Set options for an element. Accepted options are:
      * - label: label to associate with the element
      * - label_attributes: attributes to use when the label is rendered
@@ -86,6 +104,9 @@ class MultiCheckbox extends Checkbox
         // Alias for 'value_options'
         if (isset($this->options['options'])) {
             $this->setValueOptions($this->options['options']);
+        }
+        if (isset($this->options['disable_inarray_validator'])) {
+            $this->setDisableInArrayValidator($this->options['disable_inarray_validator']);
         }
 
         return $this;
@@ -110,13 +131,35 @@ class MultiCheckbox extends Checkbox
     }
 
     /**
+     * Set the flag to allow for disabling the automatic addition of an InArray validator.
+     *
+     * @param bool $disableOption
+     * @return Select
+     */
+    public function setDisableInArrayValidator($disableOption)
+    {
+        $this->disableInArrayValidator = (bool) $disableOption;
+        return $this;
+    }
+
+    /**
+     * Get the disable in array validator flag.
+     *
+     * @return bool
+     */
+    public function disableInArrayValidator()
+    {
+        return $this->disableInArrayValidator;
+    }
+
+    /**
      * Get validator
      *
      * @return ValidatorInterface
      */
     protected function getValidator()
     {
-        if (null === $this->validator) {
+        if (null === $this->validator && !$this->disableInArrayValidator()) {
             $inArrayValidator = new InArrayValidator(array(
                 'haystack'  => $this->getValueOptionsValues(),
                 'strict'    => false,

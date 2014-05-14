@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter\Compress;
@@ -13,9 +12,6 @@ namespace ZendTest\Filter\Compress;
 use Zend\Filter\Compress\Zip as ZipCompression;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class ZipTest extends \PHPUnit_Framework_TestCase
@@ -26,7 +22,7 @@ class ZipTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This adapter needs the zip extension');
         }
 
-        $this->tmp = sys_get_temp_dir() . '/' . str_replace('\\', '_', __CLASS__);
+        $this->tmp = sys_get_temp_dir() . DIRECTORY_SEPARATOR . str_replace('\\', '_', __CLASS__);
 
         $files = array(
             $this->tmp . '/compressed.zip',
@@ -293,6 +289,38 @@ class ZipTest extends \PHPUnit_Framework_TestCase
         $filter  = new ZipCompression(
             array(
                 'archive' => $this->tmp . '/compressed.zip',
+                'target'  => $this->tmp . '/_compress'
+            )
+        );
+        $content = $filter->decompress($content);
+        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR, $content);
+        $content = file_get_contents($this->tmp . '/_compress');
+        $this->assertEquals('compress me', $content);
+    }
+
+    /**
+     * @group 6026
+     *
+     * @covers \Zend\Filter\Compress\Zip::decompress
+     */
+    public function testDecompressWhenNoArchieveInClass()
+    {
+        if (!constant('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED')) {
+            $this->markTestSkipped('ZIP compression tests are currently disabled');
+        }
+
+        $filter  = new ZipCompression(
+            array(
+                'archive' => $this->tmp . '/compressed.zip',
+                'target'  => $this->tmp . '/_compress'
+            )
+        );
+
+        $content = $filter->compress('compress me');
+        $this->assertEquals($this->tmp . DIRECTORY_SEPARATOR . 'compressed.zip', $content);
+
+        $filter  = new ZipCompression(
+            array(
                 'target'  => $this->tmp . '/_compress'
             )
         );

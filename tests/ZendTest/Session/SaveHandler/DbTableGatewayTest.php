@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Session
  */
 
 namespace ZendTest\Session\SaveHandler;
@@ -19,26 +18,23 @@ use Zend\Db\TableGateway\TableGateway;
  * Unit testing for DbTableGateway include all tests for
  * regular session handling
  *
- * @category   Zend
- * @package    Zend_Session
- * @subpackage UnitTests
  * @group      Zend_Session
  * @group      Zend_Db_Table
  */
 class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend\Db\Adapter\Adapter
+     * @var Adapter
      */
     protected $adapter;
 
     /**
-     * @var Zend\Db\TableGateway\TableGateway
+     * @var TableGateway
      */
     protected $tableGateway;
 
     /**
-     * @var Zend\Session\SaveHandler\DbTableGatewayOptions
+     * @var DbTableGatewayOptions
      */
     protected $options;
 

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Permissions
  */
 
 namespace ZendTest\Permissions\Acl;
@@ -15,9 +14,6 @@ use Zend\Permissions\Acl\Role;
 use Zend\Permissions\Acl\Resource;
 
 /**
- * @category   Zend
- * @package    Zend_Permissions
- * @subpackage UnitTests
  * @group      Zend_Acl
  */
 class AclTest extends \PHPUnit_Framework_TestCase
@@ -25,7 +21,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
     /**
      * ACL object for each test method
      *
-     * @var Zend_Acl
+     * @var Acl\Acl
      */
     protected $_acl;
 
@@ -1168,7 +1164,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $assertion->assertReturnValue = false;
         $this->assertFalse($acl->isAllowed($user, $blogPost, 'modify'), 'Assertion should return false');
 
-        // check to see if the last assertion has the proper objets
+        // check to see if the last assertion has the proper objects
         $this->assertInstanceOf('ZendTest\Permissions\Acl\TestAsset\UseCase1\User', $assertion->lastAssertRole, 'Assertion did not receive proper role object');
         $this->assertInstanceOf('ZendTest\Permissions\Acl\TestAsset\UseCase1\BlogPost', $assertion->lastAssertResource, 'Assertion did not receive proper resource object');
 
@@ -1224,13 +1220,13 @@ class AclTest extends \PHPUnit_Framework_TestCase
     public function testRoleObjectImplementsToString()
     {
         $role = new Role\GenericRole('_fooBar_');
-        $this->assertEquals('_fooBar_',(string)$role);
+        $this->assertEquals('_fooBar_',(string) $role);
     }
 
     public function testResourceObjectImplementsToString()
     {
         $resource = new Resource\GenericResource('_fooBar_');
-        $this->assertEquals('_fooBar_',(string)$resource);
+        $this->assertEquals('_fooBar_',(string) $resource);
     }
 
     /**

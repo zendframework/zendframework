@@ -3,13 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Navigation\Service;
 
 use Zend\Config;
+use Zend\Http\Request;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface as Router;
 use Zend\Navigation\Exception;
@@ -79,8 +80,14 @@ abstract class AbstractNavigationFactory implements FactoryInterface
         $application = $serviceLocator->get('Application');
         $routeMatch  = $application->getMvcEvent()->getRouteMatch();
         $router      = $application->getMvcEvent()->getRouter();
+        $request     = $application->getMvcEvent()->getRequest();
 
-        return $this->injectComponents($pages, $routeMatch, $router);
+        // HTTP request is the only one that may be injected
+        if (!$request instanceof Request) {
+            $request = null;
+        }
+
+        return $this->injectComponents($pages, $routeMatch, $router, $request);
     }
 
     /**
@@ -114,11 +121,13 @@ abstract class AbstractNavigationFactory implements FactoryInterface
      * @param array $pages
      * @param RouteMatch $routeMatch
      * @param Router $router
+     * @param null|Request $request
      * @return mixed
      */
-    protected function injectComponents(array $pages, RouteMatch $routeMatch = null, Router $router = null)
+    protected function injectComponents(array $pages, RouteMatch $routeMatch = null, Router $router = null, $request = null)
     {
         foreach ($pages as &$page) {
+            $hasUri = isset($page['uri']);
             $hasMvc = isset($page['action']) || isset($page['controller']) || isset($page['route']);
             if ($hasMvc) {
                 if (!isset($page['routeMatch']) && $routeMatch) {
@@ -127,12 +136,17 @@ abstract class AbstractNavigationFactory implements FactoryInterface
                 if (!isset($page['router'])) {
                     $page['router'] = $router;
                 }
+            } elseif ($hasUri) {
+                if (!isset($page['request'])) {
+                    $page['request'] = $request;
+                }
             }
 
             if (isset($page['pages'])) {
-                $page['pages'] = $this->injectComponents($page['pages'], $routeMatch, $router);
+                $page['pages'] = $this->injectComponents($page['pages'], $routeMatch, $router, $request);
             }
         }
         return $pages;
     }
+
 }

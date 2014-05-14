@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace ZendTest\Db\Sql\Platform\Mysql;
@@ -79,8 +78,24 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
         $expectedParams0 = array('offset' => 10, 'limit' => 5);
         $expectedSql0 = 'SELECT `foo`.* FROM `foo` LIMIT 5 OFFSET 10';
 
+        // offset without limit
+        $select1 = new Select;
+        $select1->from('foo')->offset(10);
+        $expectedPrepareSql1 = 'SELECT `foo`.* FROM `foo` LIMIT 18446744073709551615 OFFSET ?';
+        $expectedParams1 = array('offset' => 10);
+        $expectedSql1 = 'SELECT `foo`.* FROM `foo` LIMIT 18446744073709551615 OFFSET 10';
+
+        // offset and limit are not type casted when injected into parameter container
+        $select2 = new Select;
+        $select2->from('foo')->limit('5')->offset('10000000000000000000');
+        $expectedPrepareSql2 = 'SELECT `foo`.* FROM `foo` LIMIT ? OFFSET ?';
+        $expectedParams2 = array('offset' => '10000000000000000000', 'limit' => '5');
+        $expectedSql2 = 'SELECT `foo`.* FROM `foo` LIMIT 5 OFFSET 10000000000000000000';
+
         return array(
             array($select0, $expectedPrepareSql0, $expectedParams0, $expectedSql0),
+            array($select1, $expectedPrepareSql1, $expectedParams1, $expectedSql1),
+            array($select2, $expectedPrepareSql2, $expectedParams2, $expectedSql2),
         );
     }
 

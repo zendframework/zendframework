@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
@@ -17,9 +16,6 @@ use Zend\Validator\StaticValidator;
 use Zend\Validator\ValidatorPluginManager;
 
 /**
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
  * @group      Zend_Validator
  */
 class StaticValidatorTest extends \PHPUnit_Framework_TestCase
@@ -90,13 +86,17 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testMaximumErrorMessageLength()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->assertEquals(-1, AbstractValidator::getMessageLength());
         AbstractValidator::setMessageLength(10);
         $this->assertEquals(10, AbstractValidator::getMessageLength());
 
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = array(
-            Alpha::INVALID => 'This is the translated message for %value%',
+            'Invalid type given. String expected' => 'This is the translated message for %value%',
         );
         $translator = new TestAsset\Translator();
         $translator->getPluginManager()->setService('default', $loader);
@@ -105,6 +105,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
         $this->validator->setTranslator($translator);
         $this->assertFalse($this->validator->isValid(123));
         $messages = $this->validator->getMessages();
+
         $this->assertTrue(array_key_exists(Alpha::INVALID, $messages));
         $this->assertEquals('This is...', $messages[Alpha::INVALID]);
     }

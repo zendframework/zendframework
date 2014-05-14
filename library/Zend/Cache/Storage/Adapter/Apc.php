@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -601,7 +601,6 @@ class Apc extends AbstractAdapter implements
         $namespace   = $options->getNamespace();
         $prefix      = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator();
         $internalKey = $prefix . $normalizedKey;
-        $ttl         = $options->getTtl();
         $value       = (int) $value;
         $newValue    = apc_inc($internalKey, $value);
 
@@ -733,5 +732,20 @@ class Apc extends AbstractAdapter implements
             $metadata['mem_size'],
             $metadata['num_hits']
         );
+    }
+
+    /**
+     * Internal method to set an item only if token matches
+     *
+     * @param  mixed  $token
+     * @param  string $normalizedKey
+     * @param  mixed  $value
+     * @return bool
+     * @see    getItem()
+     * @see    setItem()
+     */
+    protected function internalCheckAndSetItem(& $token, & $normalizedKey, & $value)
+    {
+        return apc_cas($normalizedKey, $token, $value);
     }
 }

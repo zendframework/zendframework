@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -96,7 +96,7 @@ class FilesSize extends Size
         $size = $this->getSize();
         foreach ($value as $files) {
             // Is file readable ?
-            if (false === stream_resolve_include_path($files)) {
+            if (empty($files) || false === stream_resolve_include_path($files)) {
                 $this->throwError($file, self::NOT_READABLE);
                 continue;
             }

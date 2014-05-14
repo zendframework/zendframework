@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Session
  */
 
 namespace ZendTest\Session;
@@ -13,9 +12,6 @@ namespace ZendTest\Session;
 use Zend\Session\Storage\ArrayStorage;
 
 /**
- * @category   Zend
- * @package    Zend_Session
- * @subpackage UnitTests
  * @group      Zend_Session
  */
 class StorageTest extends \PHPUnit_Framework_TestCase
@@ -246,9 +242,6 @@ class StorageTest extends \PHPUnit_Framework_TestCase
 
     public function testUnsetMultidimensional()
     {
-        if (version_compare(PHP_VERSION, '5.3.4') < 0) {
-            $this->markTestSkipped('Known issue on versions of PHP less than 5.3.4');
-        }
         $this->storage['foo'] = array('bar' => array('baz' => 'boo'));
         unset($this->storage['foo']['bar']['baz']);
         unset($this->storage['foo']['bar']);

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Cache
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
@@ -13,9 +12,6 @@ namespace ZendTest\Cache\Storage\Adapter;
 use Zend\Cache;
 
 /**
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
  * @group      Zend_Cache
  */
 class MemcachedTest extends CommonAdapterTest
@@ -182,6 +178,17 @@ class MemcachedTest extends CommonAdapterTest
         $this->assertEquals($memcached->getOptions()->getLibOptions(), array(
                 \Memcached::OPT_COMPRESSION => false
         ));
+    }
+
+    public function testOptionPersistentId()
+    {
+        $options = new Cache\Storage\Adapter\MemcachedOptions();
+        $resourceId      = $options->getResourceId();
+        $resourceManager = $options->getResourceManager();
+        $options->setPersistentId('testPersistentId');
+
+        $this->assertSame('testPersistentId', $resourceManager->getPersistentId($resourceId));
+        $this->assertSame('testPersistentId', $options->getPersistentId());
     }
 
     public function tearDown()

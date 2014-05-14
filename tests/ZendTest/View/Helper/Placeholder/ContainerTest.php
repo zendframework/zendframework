@@ -3,27 +3,23 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper\Placeholder;
 
 
 /**
- * Test class for Zend_View_Helper_Placeholder_Container.
+ * Test class for Zend\View\Helper\Placeholder\Container.
  *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 class ContainerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_Placeholder_Container
+     * @var \Zend\View\Helper\Placeholder\Container
      */
     public $container;
 
@@ -126,10 +122,15 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     /**
      * @return void
      */
-
     public function testPrependImplementsFluentInterface()
     {
         $result = $this->container->prepend( 'test' );
+        $this->assertSame($this->container, $result);
+    }
+
+    public function testAppendImplementsFluentInterface()
+    {
+        $result = $this->container->append( 'test' );
         $this->assertSame($this->container, $result);
     }
 
@@ -141,7 +142,6 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $result = $this->container->set( 'test' );
         $this->assertSame($this->container, $result);
     }
-
 
     /**
      * @return void

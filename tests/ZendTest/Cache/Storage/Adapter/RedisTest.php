@@ -1,4 +1,11 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
 
 namespace ZendTest\Cache\Storage\Adapter;
 
@@ -144,12 +151,12 @@ class RedisTest extends CommonAdapterTest
         $redisResource = new RedisResource();
         $redisResource->connect($host, $port);
         $info = $redisResource->info();
-        $mayorVersion = (int)$info['redis_version'];
+        $majorVersion = (int) $info['redis_version'];
 
-        $this->assertEquals($mayorVersion, $this->_options->getResourceManager()->getMayorVersion($this->_options->getResourceId()));
+        $this->assertEquals($majorVersion, $this->_options->getResourceManager()->getMajorVersion($this->_options->getResourceId()));
 
         $capabilities = $this->_storage->getCapabilities();
-        if ($mayorVersion < 2) {
+        if ($majorVersion < 2) {
             $this->assertEquals(0, $capabilities->getMinTtl(), 'Redis version < 2.0.0 does not support key expiration');
         } else {
             $this->assertEquals(1, $capabilities->getMinTtl(), 'Redis version > 2.0.0 supports key expiration');

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -62,12 +62,11 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * Constructor
      *
-     * Set options for an writer. Accepted options are:
+     * Set options for a writer. Accepted options are:
      * - filters: array of filters to add to this filter
      * - formatter: formatter for this writer
      *
      * @param  array|Traversable $options
-     * @return Logger
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = null)
@@ -79,11 +78,11 @@ abstract class AbstractWriter implements WriterInterface
         if (is_array($options)) {
             if (isset($options['filters'])) {
                 $filters = $options['filters'];
-                if (is_string($filters) || $filters instanceof Filter\FilterInterface) {
+                if (is_int($filters) || is_string($filters) || $filters instanceof Filter\FilterInterface) {
                     $this->addFilter($filters);
                 } elseif (is_array($filters)) {
                     foreach ($filters as $filter) {
-                        if (is_string($filter) || $filter instanceof Filter\FilterInterface) {
+                        if (is_int($filter) || is_string($filter) || $filter instanceof Filter\FilterInterface) {
                             $this->addFilter($filter);
                         } elseif (is_array($filter)) {
                             if (!isset($filter['name'])) {
@@ -296,14 +295,34 @@ abstract class AbstractWriter implements WriterInterface
 
         if (!$formatter instanceof Formatter\FormatterInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                    'Formatter must implement %s\Formatter\FormatterInterface; received "%s"',
-                    __NAMESPACE__,
-                    is_object($formatter) ? get_class($formatter) : gettype($formatter)
+                'Formatter must implement %s\Formatter\FormatterInterface; received "%s"',
+                __NAMESPACE__,
+                is_object($formatter) ? get_class($formatter) : gettype($formatter)
             ));
         }
 
         $this->formatter = $formatter;
         return $this;
+    }
+
+    /**
+     * Get formatter
+     *
+     * @return Formatter\FormatterInterface
+     */
+    protected function getFormatter()
+    {
+        return $this->formatter;
+    }
+
+    /**
+     * Check if the writer has a formatter
+     *
+     * @return bool
+     */
+    protected function hasFormatter()
+    {
+        return $this->formatter instanceof Formatter\FormatterInterface;
     }
 
     /**

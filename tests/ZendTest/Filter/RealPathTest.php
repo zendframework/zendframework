@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter;
@@ -13,9 +12,6 @@ namespace ZendTest\Filter;
 use Zend\Filter\RealPath as RealPathFilter;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class RealPathTest extends \PHPUnit_Framework_TestCase
@@ -30,7 +26,7 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
     /**
      * Zend_Filter_Basename object
      *
-     * @var Zend_Filter_Basename
+     * @var RealPathFilter
      */
     protected $_filter;
 
@@ -105,5 +101,28 @@ class RealPathTest extends \PHPUnit_Framework_TestCase
                . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.'
                . DIRECTORY_SEPARATOR . '_files';
         $this->assertEquals($path, $filter($path3));
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(
+                array(
+                    $this->_filesPath . DIRECTORY_SEPARATOR . 'file.1',
+                    $this->_filesPath . DIRECTORY_SEPARATOR . 'file.2'
+                )
+            )
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $this->assertEquals($input, $this->_filter->filter($input));
     }
 }

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Config
  */
 
 namespace ZendTest\Config;
@@ -23,9 +22,6 @@ use Zend\Filter\StringToUpper;
 use Zend\Filter\PregReplace;
 
 /**
- * @category   Zend
- * @package    Zend_Config
- * @subpackage UnitTests
  * @group      Zend_Config
  */
 class ProcessorTest extends \PHPUnit_Framework_TestCase
@@ -273,6 +269,75 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF2-5772
+     */
+    public function testTokenChangeParamsRetainsType()
+    {
+        $config = new Config(
+            array(
+                'trueBoolKey' => true,
+                'falseBoolKey' => false,
+                'intKey' => 123,
+                'floatKey' => (float) 123.456,
+                'doubleKey' => (double) 456.789,
+            ),
+            true
+        );
+
+        $processor = new TokenProcessor();
+
+        $processor->process($config);
+
+        $this->assertSame(true, $config['trueBoolKey']);
+        $this->assertSame(false, $config['falseBoolKey']);
+        $this->assertSame(123, $config['intKey']);
+        $this->assertSame((float) 123.456, $config['floatKey']);
+        $this->assertSame((double) 456.789, $config['doubleKey']);
+    }
+
+    /**
+     * @group ZF2-5772
+     */
+    public function testTokenChangeParamsReplacesInNumerics()
+    {
+        $config = new Config(
+            array(
+                'foo' => 'bar1',
+                'trueBoolKey' => true,
+                'falseBoolKey' => false,
+                'intKey' => 123,
+                'floatKey' => (float) 123.456,
+                'doubleKey' => (double) 456.789,
+            ),
+            true
+        );
+
+        $processor = new TokenProcessor(array('1' => 'R', '9' => 'R'));
+
+        $processor->process($config);
+
+        $this->assertSame('R', $config['trueBoolKey']);
+        $this->assertSame('barR', $config['foo']);
+        $this->assertSame(false, $config['falseBoolKey']);
+        $this->assertSame('R23', $config['intKey']);
+        $this->assertSame('R23.456', $config['floatKey']);
+        $this->assertSame('456.78R', $config['doubleKey']);
+    }
+
+    /**
+     * @group ZF2-5772
+     */
+    public function testIgnoresEmptyStringReplacement()
+    {
+        $config    = new Config(array('foo' => 'bar'), true);
+        $processor = new TokenProcessor(array('' => 'invalid'));
+
+        $processor->process($config);
+
+        $this->assertSame('bar', $config['foo']);
+    }
+
+    /**
      * @depends testTokenSurround
      */
     public function testUserConstants()
@@ -333,6 +398,10 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslator()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $config     = new Config($this->translatorData, true);
         $translator = new Translator();
         $translator->addTranslationFile('phparray', $this->translatorFile);
@@ -344,6 +413,23 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ein Hund', $config->pages[0]->label);
         $this->assertEquals('twoDogs', $config->pages[1]->id);
         $this->assertEquals('zwei Hunde', $config->pages[1]->label);
+    }
+
+    public function testTranslatorWithoutIntl()
+    {
+        if (extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl enabled');
+        }
+
+        $this->setExpectedException('Zend\I18n\Exception\ExtensionNotLoadedException',
+            'Zend\I18n\Translator component requires the intl PHP extension');
+
+        $config     = new Config($this->translatorData, true);
+        $translator = new Translator();
+        $translator->addTranslationFile('phparray', $this->translatorFile);
+        $processor  = new TranslatorProcessor($translator);
+
+        $processor->process($config);
     }
 
     public function testTranslatorReadOnly()
@@ -359,6 +445,26 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorSingleValue()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
+        $translator = new Translator();
+        $translator->addTranslationFile('phparray', $this->translatorFile);
+        $processor  = new TranslatorProcessor($translator);
+
+        $this->assertEquals('ein Hund', $processor->processValue('one dog'));
+    }
+
+    public function testTranslatorSingleValueWithoutIntl()
+    {
+        if (extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl enabled');
+        }
+
+        $this->setExpectedException('Zend\I18n\Exception\ExtensionNotLoadedException',
+            'Zend\I18n\Translator component requires the intl PHP extension');
+
         $translator = new Translator();
         $translator->addTranslationFile('phparray', $this->translatorFile);
         $processor  = new TranslatorProcessor($translator);

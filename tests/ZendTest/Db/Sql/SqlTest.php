@@ -3,16 +3,15 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace ZendTest\Db\Sql;
 
 use Zend\Db\Sql\Sql;
 
-class TableGatewayTest extends \PHPUnit_Framework_TestCase
+class SqlTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $mockAdapter = null;
@@ -121,7 +120,7 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testPrepareStatementForSqlObject()
     {
-        $insert = $this->sql->insert()->columns(array('foo'));
+        $insert = $this->sql->insert()->columns(array('foo'))->values(array('foo'=>'bar'));
         $stmt = $this->sql->prepareStatementForSqlObject($insert);
         $this->assertInstanceOf('Zend\Db\Adapter\Driver\StatementInterface', $stmt);
     }

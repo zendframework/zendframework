@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -89,7 +89,7 @@ class HtmlEntities extends AbstractFilter
      * Sets the quoteStyle option
      *
      * @param  int $quoteStyle
-     * @return HtmlEntities Provides a fluent interface
+     * @return self Provides a fluent interface
      */
     public function setQuoteStyle($quoteStyle)
     {
@@ -112,7 +112,7 @@ class HtmlEntities extends AbstractFilter
      * Set encoding
      *
      * @param  string $value
-     * @return HtmlEntities
+     * @return self
      */
     public function setEncoding($value)
     {
@@ -138,7 +138,7 @@ class HtmlEntities extends AbstractFilter
      * Proxies to {@link setEncoding()}
      *
      * @param  string $charSet
-     * @return HtmlEntities Provides a fluent interface
+     * @return self Provides a fluent interface
      */
     public function setCharSet($charSet)
     {
@@ -159,7 +159,7 @@ class HtmlEntities extends AbstractFilter
      * Sets the doubleQuote option
      *
      * @param  bool $doubleQuote
-     * @return HtmlEntities Provides a fluent interface
+     * @return self Provides a fluent interface
      */
     public function setDoubleQuote($doubleQuote)
     {
@@ -173,19 +173,26 @@ class HtmlEntities extends AbstractFilter
      * Returns the string $value, converting characters to their corresponding HTML entity
      * equivalents where they exist
      *
+     * If the value provided is non-scalar, the value will remain unfiltered
+     *
      * @param  string $value
-     * @throws Exception\DomainException
-     * @return string
+     * @return string|mixed
+     * @throws Exception\DomainException on encoding mismatches
      */
     public function filter($value)
     {
-        $filtered = htmlentities((string) $value, $this->getQuoteStyle(), $this->getEncoding(), $this->getDoubleQuote());
-        if (strlen((string) $value) && !strlen($filtered)) {
+        if (!is_scalar($value)) {
+            return $value;
+        }
+        $value = (string) $value;
+
+        $filtered = htmlentities($value, $this->getQuoteStyle(), $this->getEncoding(), $this->getDoubleQuote());
+        if (strlen($value) && !strlen($filtered)) {
             if (!function_exists('iconv')) {
                 throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');
             }
             $enc      = $this->getEncoding();
-            $value    = iconv('', $this->getEncoding() . '//IGNORE', (string) $value);
+            $value    = iconv('', $this->getEncoding() . '//IGNORE', $value);
             $filtered = htmlentities($value, $this->getQuoteStyle(), $enc, $this->getDoubleQuote());
             if (!strlen($filtered)) {
                 throw new Exception\DomainException('Encoding mismatch has resulted in htmlentities errors');

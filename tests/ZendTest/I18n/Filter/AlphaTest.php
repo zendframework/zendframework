@@ -3,20 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
-namespace ZendTest\Filter;
+namespace ZendTest\I18n\Filter;
 
 use Zend\I18n\Filter\Alpha as AlphaFilter;
 use Locale;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class AlphaTest extends \PHPUnit_Framework_TestCase
@@ -56,6 +52,10 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->filter = new AlphaFilter();
 
         $this->locale               = Locale::getDefault();
@@ -162,4 +162,40 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($expected, $actual);
         }
     }
+
+    public function testFilterSupportArray()
+    {
+        $filter = new AlphaFilter();
+
+        $values = array(
+            'abc123'        => 'abc',
+            'abc 123'       => 'abc',
+            'abcxyz'        => 'abcxyz',
+            ''              => ''
+        );
+
+        $actual = $filter->filter(array_keys($values));
+
+        $this->assertEquals(array_values($values), $actual);
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass())
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new AlphaFilter();
+
+        $this->assertEquals($input,  $filter->filter($input));
+    }
+
 }

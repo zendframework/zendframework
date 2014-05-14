@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -23,17 +23,15 @@ use Zend\Session\Container;
  * <code>
  * return array(
  *     'session_containers' => array(
- *         'auth',
- *         'user',
- *         'captcha',
+ *         'SessionContainer\sample',
+ *         'my_sample_session_container',
+ *         'MySessionContainer',
  *     ),
  * );
  * </code>
  *
- * Services use the prefix "SessionContainer\\":
- *
  * <code>
- * $container = $services->get('SessionContainer\captcha');
+ * $container = $services->get('MySessionContainer');
  * </code>
  */
 class ContainerAbstractServiceFactory implements AbstractFactoryInterface
@@ -138,8 +136,6 @@ class ContainerAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * Normalize the container name in order to perform a lookup
-     *
-     * Strips off the "SessionContainer\" prefix, and lowercases the name.
      *
      * @param  string $name
      * @return string

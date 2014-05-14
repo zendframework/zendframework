@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -13,7 +13,7 @@ namespace Zend\EventManager;
  * Interface for self-registering event listeners.
  *
  * Classes implementing this interface may be registered by name or instance
- * with an SharedEventManager, without an event name. The {@link attach()} method will
+ * with a SharedEventManager, without an event name. The {@link attach()} method will
  * then be called with the current SharedEventManager instance, allowing the class to
  * wire up one or more listeners.
  */

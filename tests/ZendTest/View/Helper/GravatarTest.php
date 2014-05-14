@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper;
@@ -15,9 +14,6 @@ use Zend\View\Renderer\PhpRenderer as View;
 use Zend\View\Helper\Gravatar;
 
 /**
- * @category   Zend
- * @package    Zendview
- * @subpackage UnitTests
  * @group      Zendview
  * @group      Zendview_Helper
  */
@@ -161,7 +157,7 @@ class GravatarTest extends TestCase
     public function testHttpsSource()
     {
         $this->assertRegExp(
-            '#src="https://secure.gravatar.com/avatar/[a-z0-9]{32}.+"#',
+            '#src="https\&\#x3A\;\&\#x2F\;\&\#x2F\;secure.gravatar.com\&\#x2F\;avatar\&\#x2F\;[a-z0-9]{32}.+"#',
             $this->helper->__invoke("example@example.com", array('secure' => true))->__toString()
         );
     }
@@ -183,7 +179,7 @@ class GravatarTest extends TestCase
     public function testGravatarOptions()
     {
         $this->assertRegExp(
-            '#src="http://www.gravatar.com/avatar/[a-z0-9]{32}\?s=125&amp;d=wavatar&amp;r=pg"#',
+            '#src="http\&\#x3A\;\&\#x2F\;\&\#x2F\;www.gravatar.com\&\#x2F\;avatar\&\#x2F\;[a-z0-9]{32}&\#x3F;s&\#x3D;125&amp;d&\#x3D;wavatar&amp;r&\#x3D;pg"#',
             $this->helper->__invoke("example@example.com", array('rating' => 'pg', 'imgSize' => 125, 'defaultImg' => 'wavatar', 'secure' => false))->__toString()
         );
     }
@@ -211,7 +207,7 @@ class GravatarTest extends TestCase
         foreach ($values as $value) {
             $_SERVER['HTTPS'] = $value;
             $this->assertRegExp(
-                '#src="https://secure.gravatar.com/avatar/[a-z0-9]{32}.+"#',
+                '#src="https\&\#x3A\;\&\#x2F\;\&\#x2F\;secure.gravatar.com\&\#x2F\;avatar\&\#x2F\;[a-z0-9]{32}.+"#',
                 $this->helper->__invoke("example@example.com")->__toString()
             );
         }
@@ -225,7 +221,7 @@ class GravatarTest extends TestCase
         $_SERVER['HTTPS'] = "off";
 
         $this->assertRegExp(
-            '/src="http:\/\/www.gravatar.com\/avatar\/[a-z0-9]{32}.+"/',
+            '/src="http\&\#x3A\;\&\#x2F\;\&\#x2F\;www.gravatar.com\&\#x2F\;avatar\&\#x2F\;[a-z0-9]{32}.+"/',
             $this->helper->__invoke("example@example.com")->__toString()
         );
     }
@@ -241,7 +237,7 @@ class GravatarTest extends TestCase
         ));
 
         $this->assertRegExp(
-            '#src="http://www.gravatar.com/avatar/[a-z0-9]{32}.+"#',
+            '#src="http\&\#x3A\;\&\#x2F\;\&\#x2F\;www.gravatar.com\&\#x2F\;avatar\&\#x2F\;[a-z0-9]{32}.+"#',
             $this->helper->getImgTag()
         );
     }
@@ -249,7 +245,7 @@ class GravatarTest extends TestCase
     public function testForgottenEmailParameter()
     {
         $this->assertRegExp(
-            '#(src="http://www.gravatar.com/avatar/[a-z0-9]{32}.+")#',
+            '#(src="http\&\#x3A\;\&\#x2F\;\&\#x2F\;www.gravatar.com\&\#x2F\;avatar\&\#x2F\;[a-z0-9]{32}.+")#',
             $this->helper->getImgTag()
         );
     }
@@ -273,5 +269,12 @@ class GravatarTest extends TestCase
             'unknown' => array('val' => 1)
         );
         $this->helper->__invoke()->setOptions($options);
+    }
+
+    public function testEmailIsProperlyNormalized()
+    {
+        $this->assertEquals('example@example.com',
+            $this->helper->__invoke('Example@Example.com ')->getEmail()
+        );
     }
 }

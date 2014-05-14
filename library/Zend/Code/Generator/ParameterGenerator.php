@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -11,8 +11,6 @@ namespace Zend\Code\Generator;
 
 use Zend\Code\Reflection\ParameterReflection;
 
-/**
- */
 class ParameterGenerator extends AbstractGenerator
 {
     /**
@@ -64,8 +62,10 @@ class ParameterGenerator extends AbstractGenerator
                 $parameterType = $typeClass->getName();
                 $currentNamespace = $reflectionParameter->getDeclaringClass()->getNamespaceName();
 
-                if (substr($parameterType, 0, strlen($currentNamespace)) == $currentNamespace) {
-                    $parameterType = substr($parameterType, strlen($currentNamespace)+1);
+                if (!empty($currentNamespace) && substr($parameterType, 0, strlen($currentNamespace)) == $currentNamespace) {
+                    $parameterType = substr($parameterType, strlen($currentNamespace) + 1);
+                } else {
+                    $parameterType = '\\' . trim($parameterType, '\\');
                 }
 
                 $param->setType($parameterType);

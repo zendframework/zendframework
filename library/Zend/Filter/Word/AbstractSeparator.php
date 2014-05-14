@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -37,8 +37,8 @@ abstract class AbstractSeparator extends AbstractFilter
     /**
      * Sets a new separator
      *
-     * @param  string  $separator  Separator
-     * @return AbstractSeparator
+     * @param  string $separator Separator
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setSeparator($separator)
@@ -53,7 +53,7 @@ abstract class AbstractSeparator extends AbstractFilter
     /**
      * Returns the actual set separator
      *
-     * @return  string
+     * @return string
      */
     public function getSeparator()
     {

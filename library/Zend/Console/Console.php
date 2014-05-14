@@ -3,14 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Console;
 
 /**
- * An static, utility class for interacting with Console environment.
+ * A static, utility class for interacting with Console environment.
  * Declared abstract to prevent from instantiating.
  */
 abstract class Console
@@ -30,7 +30,7 @@ abstract class Console
     /**
      * Create and return Adapter\AdapterInterface instance.
      *
-     * @param  null|string  $forceAdapter Optional adapter class name. Ccan be absolute namespace or class name
+     * @param  null|string  $forceAdapter Optional adapter class name. Can be absolute namespace or class name
      *                                    relative to Zend\Console\Adapter\. If not provided, a best matching
      *                                    adapter will be automatically selected.
      * @param  null|string  $forceCharset optional charset name can be absolute namespace or class name relative to

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -97,7 +97,14 @@ class Mvc extends AbstractPage
      *
      * @var RouteStackInterface
      */
-    protected static $defaultRouter= null;
+    protected static $defaultRouter = null;
+
+    /**
+     * Default route name
+     *
+     * @var string
+     */
+    protected static $defaultRoute = null;
 
     // Accessors:
 
@@ -228,8 +235,8 @@ class Mvc extends AbstractPage
         }
 
         switch (true) {
-            case ($this->getRoute() !== null):
-                $name = $this->getRoute();
+            case ($this->getRoute() !== null || static::getDefaultRoute() !== null):
+                $name = ($this->getRoute() !== null) ? $this->getRoute() : static::getDefaultRoute();
                 break;
             case ($this->getRouteMatch() !== null):
                 $name = $this->getRouteMatch()->getMatchedRouteName();
@@ -359,13 +366,7 @@ class Mvc extends AbstractPage
      */
     public function setParams(array $params = null)
     {
-        if (null === $params) {
-            $this->params = array();
-        } else {
-            // TODO: do this more intelligently?
-            $this->params = $params;
-        }
-
+        $this->params = empty($params) ? array() : $params;
         $this->hrefCache = null;
         return $this;
     }
@@ -506,6 +507,27 @@ class Mvc extends AbstractPage
     public static function getDefaultRouter()
     {
         return static::$defaultRouter;
+    }
+
+    /**
+     * Set default route name
+     *
+     * @param string $route
+     * @return void
+     */
+    public static function setDefaultRoute($route)
+    {
+        static::$defaultRoute = $route;
+    }
+
+    /**
+     * Get default route name
+     *
+     * @return string
+     */
+    public static function getDefaultRoute()
+    {
+        return static::$defaultRoute;
     }
 
     // Public methods:

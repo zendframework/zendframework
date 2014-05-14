@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -16,11 +16,15 @@ class SeparatorToCamelCase extends AbstractSeparator
     /**
      * Defined by Zend\Filter\Filter
      *
-     * @param  string $value
-     * @return string
+     * @param  string|array $value
+     * @return string|array
      */
     public function filter($value)
     {
+        if (!is_scalar($value) && !is_array($value)) {
+            return $value;
+        }
+
         // a unicode safe way of converting characters to \x00\x00 notation
         $pregQuotedSeparator = preg_quote($this->separator, '#');
 

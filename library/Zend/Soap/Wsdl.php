@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -14,7 +14,6 @@ use DOMDocument;
 use DOMDocumentFragment;
 use DOMElement;
 use DOMXPath;
-use Zend\Soap\Exception\InvalidArgumentException;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
 use Zend\Uri\Uri;
 
@@ -182,7 +181,7 @@ class Wsdl
      */
     public function setUri($uri)
     {
-        if ($uri instanceof Uri){
+        if ($uri instanceof Uri) {
             $uri = $uri->toString();
         }
 
@@ -813,7 +812,7 @@ class Wsdl
      */
     protected function arrayToAttributes(\DOMNode $node, array $attributes, $withSanitizer = true)
     {
-        foreach($attributes as $attributeName => $attributeValue) {
+        foreach ($attributes as $attributeName => $attributeValue) {
             if ($withSanitizer) {
                 $this->setAttributeWithSanitization($node, $attributeName, $attributeValue);
             } else {

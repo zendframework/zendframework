@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 namespace Zend\Math\Source;
@@ -76,9 +76,8 @@ class HashTiming implements RandomLib\Source
         $msec_per_round = 400;
         $bits_per_round = 2;
         $total          = $size;
-        $bytes          = 0;
         $hash_length    = 20;
-        $rounds         = 0;
+
         while (strlen($result) < $size) {
             $bytes  = ($total > $hash_length)? $hash_length : $total;
             $total -= $bytes;

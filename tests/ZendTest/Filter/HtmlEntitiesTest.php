@@ -3,20 +3,17 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter;
 
 use Zend\Filter\HtmlEntities as HtmlEntitiesFilter;
 use Zend\Filter\Exception;
+use Zend\Stdlib\ErrorHandler;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
@@ -256,6 +253,27 @@ class HtmlEntitiesTest extends \PHPUnit_Framework_TestCase
         } catch (\Exception $e) {
             $this->assertTrue($e instanceof Exception\DomainException);
         }
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                '<',
+                '>'
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $this->assertEquals($input, $this->_filter->filter($input));
     }
 
     /**

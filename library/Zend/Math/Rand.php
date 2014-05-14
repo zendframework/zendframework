@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -34,12 +34,14 @@ abstract class Rand
      */
     public static function getBytes($length, $strong = false)
     {
+        $length = (int) $length;
+
         if ($length <= 0) {
             return false;
         }
-        $bytes = '';
+
         if (function_exists('openssl_random_pseudo_bytes')
-            && (version_compare(PHP_VERSION, '5.3.4') >= 0
+            && ((PHP_VERSION_ID >= 50304)
             || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
         ) {
             $bytes = openssl_random_pseudo_bytes($length, $usable);
@@ -48,7 +50,7 @@ abstract class Rand
             }
         }
         if (function_exists('mcrypt_create_iv')
-            && (version_compare(PHP_VERSION, '5.3.7') >= 0
+            && ((PHP_VERSION_ID >= 50307)
             || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
         ) {
             $bytes = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
@@ -75,8 +77,8 @@ abstract class Rand
      */
     public static function getAlternativeGenerator()
     {
-        if (!is_null(self::$generator)) {
-            return self::$generator;
+        if (null !== static::$generator) {
+            return static::$generator;
         }
         if (!class_exists('RandomLib\\Factory')) {
             throw new Exception\RuntimeException(
@@ -90,8 +92,8 @@ abstract class Rand
             'HashTiming',
             'Zend\Math\Source\HashTiming'
         );
-        self::$generator = $factory->getMediumStrengthGenerator();
-        return self::$generator;
+        static::$generator = $factory->getMediumStrengthGenerator();
+        return static::$generator;
     }
 
     /**
@@ -130,13 +132,22 @@ abstract class Rand
                 'The supplied range is too great to generate'
             );
         }
-        $log    = log($range, 2);
-        $bytes  = (int) ($log / 8) + 1;
-        $bits   = (int) $log + 1;
-        $filter = (int) (1 << $bits) - 1;
+
+        // calculate number of bits required to store range on this machine
+        $r = $range;
+        $bits = 0;
+        while ($r) {
+            $bits++;
+            $r >>= 1;
+        }
+
+        $bits   = (int) max($bits, 1);
+        $bytes  = (int) max(ceil($bits / 8), 1);
+        $filter = (int) ((1 << $bits) - 1);
+
         do {
-            $rnd = hexdec(bin2hex(self::getBytes($bytes, $strong)));
-            $rnd = $rnd & $filter;
+            $rnd  = hexdec(bin2hex(static::getBytes($bytes, $strong)));
+            $rnd &= $filter;
         } while ($rnd > $range);
 
         return ($min + $rnd);

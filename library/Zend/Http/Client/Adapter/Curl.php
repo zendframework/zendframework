@@ -3,17 +3,15 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Http\Client\Adapter;
 
 use Traversable;
-use Zend\Http\Client;
 use Zend\Http\Client\Adapter\AdapterInterface as HttpAdapter;
 use Zend\Http\Client\Adapter\Exception as AdapterException;
-use Zend\Http\Request;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -278,17 +276,15 @@ class Curl implements HttpAdapter, StreamInterface
                 if (isset($this->config['curloptions'][CURLOPT_INFILE])) {
                     // Now we will probably already have Content-Length set, so that we have to delete it
                     // from $headers at this point:
-                    foreach ($headers AS $k => $header) {
-                        if (preg_match('/Content-Length:\s*(\d+)/i', $header, $m)) {
-                            if (is_resource($body)) {
-                                $this->config['curloptions'][CURLOPT_INFILESIZE] = (int) $m[1];
-                            }
-                            unset($headers[$k]);
-                        }
+                    if (!isset($headers['Content-Length'])
+                        && !isset($this->config['curloptions'][CURLOPT_INFILESIZE])
+                    ) {
+                        throw new AdapterException\RuntimeException("Cannot set a file-handle for cURL option CURLOPT_INFILE without also setting its size in CURLOPT_INFILESIZE.");
                     }
 
-                    if (!isset($this->config['curloptions'][CURLOPT_INFILESIZE])) {
-                        throw new AdapterException\RuntimeException("Cannot set a file-handle for cURL option CURLOPT_INFILE without also setting its size in CURLOPT_INFILESIZE.");
+                    if (isset($headers['Content-Length'])) {
+                        $this->config['curloptions'][CURLOPT_INFILESIZE] = (int) $headers['Content-Length'];
+                        unset($headers['Content-Length']);
                     }
 
                     if (is_resource($body)) {
@@ -425,6 +421,14 @@ class Curl implements HttpAdapter, StreamInterface
         // cURL automatically decodes chunked-messages, this means we have to disallow the Zend\Http\Response to do it again
         if (stripos($this->response, "Transfer-Encoding: chunked\r\n")) {
             $this->response = str_ireplace("Transfer-Encoding: chunked\r\n", '', $this->response);
+        }
+
+        // cURL can automatically handle content encoding; prevent double-decoding from occurring
+        if (isset($this->config['curloptions'][CURLOPT_ENCODING])
+            && '' == $this->config['curloptions'][CURLOPT_ENCODING]
+            && stripos($this->response, "Content-Encoding: gzip\r\n")
+        ) {
+            $this->response = str_ireplace("Content-Encoding: gzip\r\n", '', $this->response);
         }
 
         // Eliminate multiple HTTP responses.

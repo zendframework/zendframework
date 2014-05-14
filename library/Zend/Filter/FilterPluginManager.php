@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -58,6 +58,7 @@ class FilterPluginManager extends AbstractPluginManager
         'int'                       => 'Zend\Filter\Int',
         'null'                      => 'Zend\Filter\Null',
         'numberformat'              => 'Zend\I18n\Filter\NumberFormat',
+        'numberparse'               => 'Zend\I18n\Filter\NumberParse',
         'pregreplace'               => 'Zend\Filter\PregReplace',
         'realpath'                  => 'Zend\Filter\RealPath',
         'stringtolower'             => 'Zend\Filter\StringToLower',

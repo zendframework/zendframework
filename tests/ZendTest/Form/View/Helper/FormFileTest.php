@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -13,11 +12,6 @@ namespace ZendTest\Form\View\Helper;
 use Zend\Form\Element;
 use Zend\Form\View\Helper\FormFile as FormFileHelper;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class FormFileTest extends CommonTestCase
 {
     /**
@@ -65,7 +59,7 @@ class FormFileTest extends CommonTestCase
     /**
      * @return void
      */
-    public function testRendersElementWithFileArrayValue()
+    public function testRendersElementWithFileIgnoresValue()
     {
         $element = new Element\File('foo');
         $element->setValue(array(
@@ -78,7 +72,7 @@ class FormFileTest extends CommonTestCase
         $markup  = $this->helper->render($element);
         $this->assertContains('<input ', $markup);
         $this->assertContains('type="file"', $markup);
-        $this->assertContains('value="foofile"', $markup);
+        $this->assertNotContains('value="', $markup);
     }
 
     /**
@@ -114,7 +108,6 @@ class FormFileTest extends CommonTestCase
             array('size', 'assertNotContains'),
             array('src', 'assertNotContains'),
             array('step', 'assertNotContains'),
-            array('value', 'assertContains'),
             array('width', 'assertNotContains'),
         );
     }
@@ -186,7 +179,7 @@ class FormFileTest extends CommonTestCase
         $element = new Element\File('foo');
         $element->setAttribute('multiple', true);
         $markup = $this->helper->render($element);
-        $this->assertRegexp('#<input[^>]*?(name="foo\[\]")#', $markup);
+        $this->assertRegexp('#<input[^>]*?(name="foo\&\#x5B\;\&\#x5D\;")#', $markup);
     }
 
     /**

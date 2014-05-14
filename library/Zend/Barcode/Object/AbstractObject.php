@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -800,7 +800,7 @@ abstract class AbstractObject implements ObjectInterface
      * Add a text drawing instruction in the set of instructions
      * @param string $text
      * @param float $size
-     * @param array $position
+     * @param int[] $position
      * @param string $font
      * @param int $color
      * @param string $alignment
@@ -844,6 +844,7 @@ abstract class AbstractObject implements ObjectInterface
 
     /**
      * Check if a text is really provided to barcode
+     * @param string|null $value
      * @return void
      * @throws \Zend\Barcode\Object\Exception\ExceptionInterface
      */
@@ -1026,7 +1027,7 @@ abstract class AbstractObject implements ObjectInterface
      * Apply rotation on a point in X/Y dimensions
      * @param float $x1     x-position before rotation
      * @param float $y1     y-position before rotation
-     * @return array        Array of two elements corresponding to the new XY point
+     * @return int[]    Array of two elements corresponding to the new XY point
      */
     protected function rotate($x1, $y1)
     {

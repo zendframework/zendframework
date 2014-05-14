@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Authentication
  */
 
 namespace ZendTest\Authentication\Adapter\Http;
@@ -16,9 +15,6 @@ use Zend\Http\Request;
 use Zend\Http\Response;
 
 /**
- * @category   Zend
- * @package    Zend_Auth
- * @subpackage UnitTests
  * @group      Zend_Auth
  */
 class ProxyTest extends \PHPUnit_Framework_TestCase
@@ -54,14 +50,14 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
     /**
      * File resolver setup against with HTTP Basic auth file
      *
-     * @var Zend_Auth_Adapter_Http_Resolver_File
+     * @var Http\FileResolver
      */
     protected $_basicResolver;
 
     /**
      * File resolver setup against with HTTP Digest auth file
      *
-     * @var Zend_Auth_Adapter_Http_Resolver_File
+     * @var Http\FileResolver
      */
     protected $_digestResolver;
 
@@ -98,7 +94,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testBasicChallenge()
     {
-        // Trying to authenticate without sending an Proxy-Authorization header
+        // Trying to authenticate without sending a Proxy-Authorization header
         // should result in a 407 reply with a Proxy-Authenticate header, and a
         // false result.
 
@@ -114,7 +110,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testDigestChallenge()
     {
-        // Trying to authenticate without sending an Proxy-Authorization header
+        // Trying to authenticate without sending a Proxy-Authorization header
         // should result in a 407 reply with a Proxy-Authenticate header, and a
         // false result.
 
@@ -127,7 +123,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase
 
     public function testBothChallenges()
     {
-        // Trying to authenticate without sending an Proxy-Authorization header
+        // Trying to authenticate without sending a Proxy-Authorization header
         // should result in a 407 reply with at least one Proxy-Authenticate
         // header, and a false result.
 

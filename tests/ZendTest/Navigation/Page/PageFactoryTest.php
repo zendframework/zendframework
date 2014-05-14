@@ -3,12 +3,11 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Navigation
  */
 
-namespace ZendTest\Navigation;
+namespace ZendTest\Navigation\Page;
 
 use Zend\Navigation\Page\AbstractPage;
 use Zend\Navigation;
@@ -16,15 +15,31 @@ use Zend\Navigation;
 /**
  * Tests Zend_Navigation_Page::factory()
  *
-/**
- * @category   Zend
- * @package    Zend_Navigation
- * @subpackage UnitTests
  * @group      Zend_Navigation
  */
 class PageFactoryTest extends \PHPUnit_Framework_TestCase
 {
 
+    public function testDetectFactoryPage()
+    {
+        AbstractPage::addFactory(function ($page) {
+            if (isset($page['factory_uri'])) {
+                return new \Zend\Navigation\Page\Uri($page);
+            } elseif (isset($page['factory_mvc'])) {
+                return new \Zend\Navigation\Page\Mvc($page);
+            }
+        });
+
+        $this->assertInstanceOf('Zend\\Navigation\\Page\\Uri', AbstractPage::factory(array(
+            'label' => 'URI Page',
+            'factory_uri' => '#'
+        )));
+
+        $this->assertInstanceOf('Zend\\Navigation\\Page\\Mvc', AbstractPage::factory(array(
+            'label' => 'URI Page',
+            'factory_mvc' => '#'
+        )));
+    }
 
     public function testDetectMvcPage()
     {
@@ -118,8 +133,8 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
     public function testShouldFailForNonExistantType()
     {
         $pageConfig = array(
-            'type' => 'My_NonExistant_Page',
-            'label' => 'My non-existant Page'
+            'type' => 'My_NonExistent_Page',
+            'label' => 'My non-existent Page'
         );
 
         try {
@@ -128,7 +143,7 @@ class PageFactoryTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $msg = 'An exception has not been thrown for non-existant class';
+        $msg = 'An exception has not been thrown for non-existent class';
         $this->fail($msg);
     }
 

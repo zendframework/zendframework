@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -600,7 +600,7 @@ class SimpleTest extends TestCase
                     'baz' => true
                 )
             ),
-            // group with group name diferent than options (short)
+            // group with group name different than options (short)
             'group-1' => array(
                 'group [-t|--test]:testgroup',
                 array('group', '-t'),
@@ -609,7 +609,7 @@ class SimpleTest extends TestCase
                     'testgroup' => true,
                 )
             ),
-            // group with group name diferent than options (long)
+            // group with group name different than options (long)
             'group-2' => array(
                 'group [-t|--test]:testgroup',
                 array('group', '--test'),
@@ -933,108 +933,36 @@ class SimpleTest extends TestCase
         );
     }
 
-    public static function routeDefaultsProvider()
+    public function testMatchReturnsRouteMatch()
     {
-        return array(
-            'required-literals-no-defaults' => array(
-                'create controller',
-                array(),
-                array('create', 'controller'),
-                array('create' => null, 'controller' => null),
-            ),
-            'required-literals-defaults' => array(
-                'create controller',
-                array('controller' => 'value'),
-                array('create', 'controller'),
-                array('create' => null, 'controller' => 'value'),
-            ),
-            'value-param-no-defaults' => array(
-                'create controller <controller>',
-                array(),
-                array('create', 'controller', 'foo'),
-                array('create' => null, 'controller' => 'foo'),
-            ),
-            'value-param-defaults-overridden' => array(
-                'create controller <controller>',
-                array('controller' => 'defaultValue'),
-                array('create', 'controller', 'foo'),
-                array('create' => null, 'controller' => 'foo'),
-            ),
-            'optional-value-param-defaults' => array(
-                'create controller [<controller>]',
-                array('controller' => 'defaultValue'),
-                array('create', 'controller'),
-                array('create' => null, 'controller' => 'defaultValue'),
-            ),
-            'alternative-literal-non-present' => array(
-                '(foo | bar)',
-                array('bar' => 'something'),
-                array('foo'),
-                array('foo' => true, 'bar' => false),
-            ),
-            'alternative-literal-present' => array(
-                '(foo | bar)',
-                array('bar' => 'something'),
-                array('bar'),
-                array('foo' => false, 'bar' => 'something'),
-            ),
-            'alternative-flag-non-present' => array(
-                '(--foo | --bar)',
-                array('bar' => 'something'),
-                array('--foo'),
-                array('foo' => true, 'bar' => false),
-            ),
-            'alternative-flag-present' => array(
-                '(--foo | --bar)',
-                array('bar' => 'something'),
-                array('--bar'),
-                array('foo' => false, 'bar' => 'something'),
-            ),
-            'optional-literal-non-present' => array(
-                'foo [bar]',
-                array('bar' => 'something'),
-                array('foo'),
-                array('foo' => null, 'bar' => false),
-            ),
-            'optional-literal-present' => array(
-                'foo [bar]',
-                array('bar' => 'something'),
-                array('foo', 'bar'),
-                array('foo' => null, 'bar' => 'something'),
-            ),
-        );
-    }
-
-    /**
-     * @dataProvider routeDefaultsProvider
-     * @param        string         $routeDefinition
-     * @param        array          $defaults
-     * @param        array          $arguments
-     * @param        array|null     $params
-     */
-    public function testMatchingWithDefaults(
-        $routeDefinition,
-        array $defaults = array(),
-        array $arguments = array(),
-        array $params = null
-    ) {
+        $arguments = array('--foo=bar');
         array_unshift($arguments, 'scriptname.php');
         $request = new ConsoleRequest($arguments);
-        $route = new Simple($routeDefinition, array(), $defaults);
+        $route = new Simple('--foo=');
         $match = $route->match($request);
-
-        if ($params === null) {
-            $this->assertNull($match, "The route must not match");
-        } else {
-            $this->assertInstanceOf('Zend\Mvc\Router\Console\RouteMatch', $match, "The route matches");
-
-            foreach ($params as $key => $value) {
-                $this->assertSame(
-                    $value,
-                    $match->getParam($key),
-                    $value === null ? "Param $key is not present" : "Param $key is present and is equal to '$value'"
-                );
-            }
-        }
+        $this->assertInstanceOf('Zend\Mvc\Router\Console\RouteMatch', $match, "The route matches");
+        $this->assertEquals('bar', $match->getParam('foo'));
     }
+
+    public function testCustomRouteMatcherCanBeInjectedViaConstructor()
+    {
+        $arguments = array('--foo=bar');
+        array_unshift($arguments, 'scriptname.php');
+        $request = new ConsoleRequest($arguments);
+
+        $routeMatcher = $this->getMock('Zend\Console\RouteMatcher\RouteMatcherInterface', array('match'));
+        $routeMatcher->expects($this->once())->method('match')
+            ->with(array('--foo=bar'));
+
+        $route = new Simple($routeMatcher);
+        $route->match($request);
+    }
+
+    public function testConstructorThrowsExceptionWhenFirstArgumentIsNotStringNorRouteMatcherInterface()
+    {
+        $this->setExpectedException('Zend\Mvc\Exception\InvalidArgumentException');
+
+        new Simple(new \stdClass());
+    }
+
 }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -16,7 +16,8 @@ use Zend\Stdlib\InitializableInterface;
 class Element implements
     ElementAttributeRemovalInterface,
     ElementInterface,
-    InitializableInterface
+    InitializableInterface,
+    LabelAwareInterface
 {
     /**
      * @var array
@@ -24,14 +25,21 @@ class Element implements
     protected $attributes = array();
 
     /**
-     * @var string
+     * @var null|string
      */
     protected $label;
 
     /**
      * @var array
      */
-    protected $labelAttributes;
+    protected $labelAttributes = array();
+
+    /**
+     * Label specific options
+     *
+     * @var array
+     */
+    protected $labelOptions = array();
 
     /**
      * @var array Validation error messages
@@ -100,6 +108,7 @@ class Element implements
      * Set options for an element. Accepted options are:
      * - label: label to associate with the element
      * - label_attributes: attributes to use when the label is rendered
+     * - label_options: label specific options
      *
      * @param  array|Traversable $options
      * @return Element|ElementInterface
@@ -121,6 +130,10 @@ class Element implements
 
         if (isset($options['label_attributes'])) {
             $this->setLabelAttributes($options['label_attributes']);
+        }
+
+        if (isset($options['label_options'])) {
+            $this->setLabelOptions($options['label_options']);
         }
 
         $this->options = $options;
@@ -151,6 +164,19 @@ class Element implements
         }
 
         return $this->options[$option];
+    }
+
+    /**
+     * Set a single option for an element
+     *
+     * @param  string $key
+     * @param  mixed $value
+     * @return self
+     */
+    public function setOption($key, $value)
+    {
+        $this->options[$key] = $value;
+        return $this;
     }
 
     /**
@@ -308,7 +334,7 @@ class Element implements
     /**
      * Retrieve the label used for this element
      *
-     * @return string
+     * @return null|string
      */
     public function getLabel()
     {
@@ -335,6 +361,116 @@ class Element implements
     public function getLabelAttributes()
     {
         return $this->labelAttributes;
+    }
+
+    /**
+     * Set many label options at once
+     *
+     * Implementation will decide if this will overwrite or merge.
+     *
+     * @param  array|Traversable $arrayOrTraversable
+     * @return Element|ElementInterface
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setLabelOptions($arrayOrTraversable)
+    {
+        if (!is_array($arrayOrTraversable) && !$arrayOrTraversable instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable argument; received "%s"',
+                __METHOD__,
+                (is_object($arrayOrTraversable) ? get_class($arrayOrTraversable) : gettype($arrayOrTraversable))
+            ));
+        }
+        foreach ($arrayOrTraversable as $key => $value) {
+            $this->setLabelOption($key, $value);
+        }
+        return $this;
+    }
+
+    /**
+     * Get label specific options
+     *
+     * @return array
+     */
+    public function getLabelOptions()
+    {
+        return $this->labelOptions;
+    }
+
+    /**
+     * Clear all label options
+     *
+     * @return Element|ElementInterface
+     */
+    public function clearLabelOptions()
+    {
+        $this->labelOptions = array();
+        return $this;
+    }
+
+    /**
+     * Remove many attributes at once
+     *
+     * @param array $keys
+     * @return ElementInterface
+     */
+    public function removeLabelOptions(array $keys)
+    {
+        foreach ($keys as $key) {
+            unset($this->labelOptions[$key]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set a single label optionn
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @return Element|ElementInterface
+     */
+    public function setLabelOption($key, $value)
+    {
+        $this->labelOptions[$key] = $value;
+        return $this;
+    }
+
+    /**
+     * Retrieve a single label option
+     *
+     * @param  $key
+     * @return mixed|null
+     */
+    public function getLabelOption($key)
+    {
+        if (!array_key_exists($key, $this->labelOptions)) {
+            return null;
+        }
+        return $this->labelOptions[$key];
+    }
+
+    /**
+     * Remove a single label option
+     *
+     * @param string $key
+     * @return ElementInterface
+     */
+    public function removeLabelOption($key)
+    {
+        unset($this->labelOptions[$key]);
+        return $this;
+    }
+
+    /**
+     * Does the element has a specific label option ?
+     *
+     * @param  string $key
+     * @return bool
+     */
+    public function hasLabelOption($key)
+    {
+        return array_key_exists($key, $this->labelOptions);
     }
 
     /**

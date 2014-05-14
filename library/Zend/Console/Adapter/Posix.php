@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -358,7 +358,7 @@ class Posix extends AbstractAdapter
      * Change TTY (Console) mode
      *
      * @link  http://en.wikipedia.org/wiki/Stty
-     * @param $mode
+     * @param string $mode
      */
     protected function setTTYMode($mode)
     {
@@ -373,6 +373,7 @@ class Posix extends AbstractAdapter
      * Get the final color code and throw exception on error
      *
      * @param  null|int|Xterm256 $color
+     * @param  string            $type  (optional) Foreground 'fg' or background 'bg'.
      * @throws Exception\BadMethodCallException
      * @return string
      */

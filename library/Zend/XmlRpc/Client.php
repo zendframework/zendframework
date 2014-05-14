@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -11,7 +11,6 @@ namespace Zend\XmlRpc;
 
 use Zend\Http;
 use Zend\Server\Client as ServerClient;
-use Zend\XmlRpc\AbstractValue;
 
 /**
  * An XML-RPC client implementation
@@ -198,9 +197,13 @@ class Client implements ServerClient
     {
         $this->lastRequest = $request;
 
-        iconv_set_encoding('input_encoding', 'UTF-8');
-        iconv_set_encoding('output_encoding', 'UTF-8');
-        iconv_set_encoding('internal_encoding', 'UTF-8');
+        if (PHP_VERSION_ID < 50600) {
+            iconv_set_encoding('input_encoding', 'UTF-8');
+            iconv_set_encoding('output_encoding', 'UTF-8');
+            iconv_set_encoding('internal_encoding', 'UTF-8');
+        } else {
+            ini_set('default_charset', 'UTF-8');
+        }
 
         $http        = $this->getHttpClient();
         $httpRequest = $http->getRequest();

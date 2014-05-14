@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -64,7 +64,7 @@ class Size extends AbstractValidator
     /**
      * Sets validator options
      *
-     * If $options is a integer, it will be used as maximum file size
+     * If $options is an integer, it will be used as maximum file size
      * As Array is accepts the following keys:
      * 'min': Minimum file size
      * 'max': Maximum file size
@@ -131,7 +131,7 @@ class Size extends AbstractValidator
     /**
      * Sets the minimum file size
      *
-     * File size can be an integer or an byte string
+     * File size can be an integer or a byte string
      * This includes 'B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'
      * For example: 2000, 2MB, 0.2GB
      *
@@ -176,7 +176,7 @@ class Size extends AbstractValidator
     /**
      * Sets the maximum file size
      *
-     * File size can be an integer or an byte string
+     * File size can be an integer or a byte string
      * This includes 'B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'
      * For example: 2000, 2MB, 0.2GB
      *
@@ -253,7 +253,7 @@ class Size extends AbstractValidator
         $this->setValue($filename);
 
         // Is file readable ?
-        if (false === stream_resolve_include_path($file)) {
+        if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_FOUND);
             return false;
         }

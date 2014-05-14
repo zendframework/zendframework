@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -18,7 +18,6 @@ use Zend\Mvc\Service\DiServiceInitializerFactory;
 
 use Zend\ServiceManager\Config;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Mvc\Exception;
 use Zend\Form\FormElementManager;
 use Zend\Session\Container as SessionContainer;
 use Zend\Validator\Csrf;
@@ -107,23 +106,14 @@ class FormElementManagerFactoryTest extends TestCase
     {
         $_SESSION = array();
         $formClass = 'ZendTest\Form\TestAsset\CustomForm';
-        $ref = new \ReflectionClass('Zend\Validator\Csrf');
-        $hashPropRef = $ref->getProperty('hash');
-        $hashPropRef->setAccessible(true);
-        $hashCache = $ref->getProperty('hashCache');
-        $hashCache->setAccessible(true);
-        $hashCache->setValue(new Csrf, array());
-        //check bare born
+
         $preForm = new $formClass;
         $preForm->prepare();
         $requestHash = $preForm->get('csrf')->getValue();
-        SessionContainer::setDefaultManager(null);
-        $hashCache->setValue(new Csrf, array());
 
         $postForm = $this->manager->get($formClass);
         $postCsrf = $postForm->get('csrf')->getCsrfValidator();
-        $storedHash = $postCsrf->getHash();
 
-        $this->assertEquals($requestHash, $storedHash, 'Test csrf validation');
+        $this->assertTrue($postCsrf->isValid($requestHash), 'Test csrf validation');
     }
 }

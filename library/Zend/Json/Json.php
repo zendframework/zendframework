@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -12,6 +12,7 @@ namespace Zend\Json;
 use SimpleXMLElement;
 use Zend\Json\Exception\RecursionException;
 use Zend\Json\Exception\RuntimeException;
+use ZendXml\Security as XmlSecurity;
 
 /**
  * Class for encoding to and decoding from JSON.
@@ -31,7 +32,7 @@ class Json
       *
       * @var int
       */
-    public static $maxRecursionDepthAllowed=25;
+    public static $maxRecursionDepthAllowed = 25;
 
     /**
      * @var bool
@@ -311,10 +312,10 @@ class Json
     public static function fromXml($xmlStringContents, $ignoreXmlAttributes = true)
     {
         // Load the XML formatted string into a Simple XML Element object.
-        $simpleXmlElementObject = simplexml_load_string($xmlStringContents);
+        $simpleXmlElementObject = XmlSecurity::scan($xmlStringContents);
 
         // If it is not a valid XML content, throw an exception.
-        if ($simpleXmlElementObject == null) {
+        if (!$simpleXmlElementObject) {
             throw new RuntimeException('Function fromXml was called with an invalid XML formatted string.');
         } // End of if ($simpleXmlElementObject == null)
 
@@ -369,10 +370,12 @@ class Json
             } else {
                 $result .= ($inLiteral ?  '' : $prefix) . $token;
 
+                //remove escaped backslash sequences causing false positives in next check
+                $token = str_replace('\\', '', $token);
                 // Count # of unescaped double-quotes in token, subtract # of
                 // escaped double-quotes and if the result is odd then we are
                 // inside a string literal
-                if ((substr_count($token, "\"")-substr_count($token, "\\\"")) % 2 != 0) {
+                if ((substr_count($token, '"')-substr_count($token, '\\"')) % 2 != 0) {
                     $inLiteral = !$inLiteral;
                 }
             }

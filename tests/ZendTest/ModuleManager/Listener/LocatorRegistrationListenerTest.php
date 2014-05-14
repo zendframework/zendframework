@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ModuleManager
  */
 
 namespace ZendTest\ModuleManager\Listener;
@@ -18,13 +17,14 @@ use Zend\Loader\ModuleAutoloader;
 use Zend\ModuleManager\Listener\LocatorRegistrationListener;
 use Zend\ModuleManager\Listener\ModuleResolverListener;
 use Zend\ModuleManager\ModuleManager;
+use Zend\ModuleManager\ModuleEvent;
 use Zend\Mvc\Application;
 use Zend\ServiceManager\ServiceManager;
 use ZendTest\ModuleManager\TestAsset\MockApplication;
 
 require_once dirname(__DIR__) . '/TestAsset/ListenerTestModule/src/Foo/Bar.php';
 
-class LocatorRegistrationTest extends TestCase
+class LocatorRegistrationListenerTest extends TestCase
 {
     public $module;
 
@@ -50,7 +50,7 @@ class LocatorRegistrationTest extends TestCase
 
         $this->moduleManager = new ModuleManager(array('ListenerTestModule'));
         $this->moduleManager->getEventManager()->setSharedManager($this->sharedEvents);
-        $this->moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
 
         $this->application = new MockApplication;
         $events            = new EventManager(array('Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application'));
@@ -94,7 +94,7 @@ class LocatorRegistrationTest extends TestCase
         $locatorRegistrationListener = new LocatorRegistrationListener;
         $this->moduleManager->getEventManager()->attachAggregate($locatorRegistrationListener);
         $test = $this;
-        $this->moduleManager->getEventManager()->attach('loadModule', function ($e) use ($test) {
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, function ($e) use ($test) {
             $test->module = $e->getModule();
         }, -1000);
         $this->moduleManager->loadModules();
@@ -121,5 +121,24 @@ class LocatorRegistrationTest extends TestCase
 
         $this->assertInstanceOf('Zend\ModuleManager\ModuleManager', $sharedInstance2);
         $this->assertSame($this->moduleManager, $locator->get('Foo\Bar')->moduleManager);
+    }
+
+    public function testNoDuplicateServicesAreDefinedForModuleManager()
+    {
+        $locatorRegistrationListener = new LocatorRegistrationListener;
+        $this->moduleManager->getEventManager()->attachAggregate($locatorRegistrationListener);
+
+        $this->moduleManager->loadModules();
+        $this->application->bootstrap();
+        $registeredServices = $this->application->getServiceManager()->getRegisteredServices();
+
+        $aliases = $registeredServices['aliases'];
+        $instances = $registeredServices['instances'];
+
+        $this->assertContains('zendmodulemanagermodulemanager', $aliases);
+        $this->assertFalse(in_array('modulemanager', $aliases));
+
+        $this->assertContains('modulemanager', $instances);
+        $this->assertFalse(in_array('zendmodulemanagermodulemanager', $instances));
     }
 }

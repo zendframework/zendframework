@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -42,11 +42,13 @@ class Like implements PredicateInterface
     }
 
     /**
-     * @param $identifier
+     * @param  string $identifier
+     * @return self
      */
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
+        return $this;
     }
 
     /**
@@ -58,11 +60,13 @@ class Like implements PredicateInterface
     }
 
     /**
-     * @param $like
+     * @param  string $like
+     * @return self
      */
     public function setLike($like)
     {
         $this->like = $like;
+        return $this;
     }
 
     /**
@@ -74,11 +78,13 @@ class Like implements PredicateInterface
     }
 
     /**
-     * @param $specification
+     * @param  string $specification
+     * @return self
      */
     public function setSpecification($specification)
     {
         $this->specification = $specification;
+        return $this;
     }
 
     /**

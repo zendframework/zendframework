@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_XmlRpc
  */
 
 namespace ZendTest\XmlRpc\Server;
@@ -13,16 +12,13 @@ namespace ZendTest\XmlRpc\Server;
 use Zend\XmlRpc\Server;
 
 /**
- * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage UnitTests
  * @group      Zend_XmlRpc
  */
 class CacheTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_XmlRpc_Server object
-     * @var Zend_XmlRpc_Server
+     * Server object
+     * @var Server
      */
     protected $_server;
 

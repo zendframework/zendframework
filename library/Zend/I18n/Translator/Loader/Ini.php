@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -17,7 +17,7 @@ use Zend\I18n\Translator\TextDomain;
 /**
  * PHP INI format loader.
  */
-class Ini implements FileLoaderInterface
+class Ini extends AbstractFileLoader
 {
     /**
      * load(): defined by FileLoaderInterface.
@@ -30,16 +30,18 @@ class Ini implements FileLoaderInterface
      */
     public function load($locale, $filename)
     {
-        if (!is_file($filename) || !is_readable($filename)) {
+        $resolvedIncludePath = stream_resolve_include_path($filename);
+        $fromIncludePath = ($resolvedIncludePath !== false) ? $resolvedIncludePath : $filename;
+        if (!$fromIncludePath || !is_file($fromIncludePath) || !is_readable($fromIncludePath)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Could not open file %s for reading',
+                'Could not find or open file %s for reading',
                 $filename
             ));
         }
 
         $messages           = array();
         $iniReader          = new IniReader();
-        $messagesNamespaced = $iniReader->fromFile($filename);
+        $messagesNamespaced = $iniReader->fromFile($fromIncludePath);
 
         $list = $messagesNamespaced;
         if (isset($messagesNamespaced['translation'])) {

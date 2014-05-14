@@ -3,19 +3,17 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Cache
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
 
 use Zend\Cache;
+use Zend\Cache\Storage\Plugin\ExceptionHandler;
+use Zend\Cache\Storage\Plugin\PluginOptions;
 
 /**
- * @category   Zend
- * @package    Zend_Cache
- * @subpackage UnitTests
  * @group      Zend_Cache
  */
 class FilesystemTest extends CommonAdapterTest
@@ -284,5 +282,46 @@ class FilesystemTest extends CommonAdapterTest
 
         $expectedAtime = fileatime($meta['filespec'] . '.dat');
         $this->assertEquals($expectedAtime, $meta['atime']);
+    }
+
+    public function testClearExpiredExceptionTriggersEvent()
+    {
+        $this->_options->setTtl(0.1);
+        $this->_storage->setItem('k', 'v');
+        $dirs = glob($this->_tmpCacheDir . '/*');
+        if (count($dirs) === 0) {
+            $this->fail('Could not find cache dir');
+        }
+        chmod($dirs[0], 0500); //make directory rx, unlink should fail
+        sleep(1); //wait for the entry to expire
+        $plugin = new ExceptionHandler();
+        $options = new PluginOptions(array('throw_exceptions' => false));
+        $plugin->setOptions($options);
+        $this->_storage->addPlugin($plugin);
+        $this->_storage->clearExpired();
+        chmod($dirs[0], 0700); //set dir back to writable for tearDown
+    }
+
+    public function testClearByNamespaceWithUnexpectedDirectory()
+    {
+        // create cache items at 2 different directory levels
+        $this->_storage->getOptions()->setDirLevel(2);
+        $this->_storage->setItem('a_key', 'a_value');
+        $this->_storage->getOptions()->setDirLevel(1);
+        $this->_storage->setItem('b_key', 'b_value');
+        $this->_storage->clearByNamespace($this->_storage->getOptions()->getNamespace());
+    }
+
+    public function testClearByPrefixWithUnexpectedDirectory()
+    {
+        // create cache items at 2 different directory levels
+        $this->_storage->getOptions()->setDirLevel(2);
+        $this->_storage->setItem('a_key', 'a_value');
+        $this->_storage->getOptions()->setDirLevel(1);
+        $this->_storage->setItem('b_key', 'b_value');
+        $glob = glob($this->_tmpCacheDir.'/*');
+        //contrived prefix which will collide with an existing directory
+        $prefix = substr(md5('a_key'), 2, 2);
+        $this->_storage->clearByPrefix($prefix);
     }
 }

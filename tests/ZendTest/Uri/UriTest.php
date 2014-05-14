@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Uri
  */
 
 namespace ZendTest\Uri;
@@ -13,9 +12,6 @@ namespace ZendTest\Uri;
 use Zend\Uri\Uri;
 
 /**
- * @category   Zend
- * @package    Zend_Uri
- * @subpackage UnitTests
  * @group      Zend_Uri
  */
 class UriTest extends \PHPUnit_Framework_TestCase
@@ -979,19 +975,19 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $obj2 = new Uri;
         $obj2->setPath('//path');
 
-        // A object with port
+        // An object with port
         $obj3 = new Uri;
         $obj3->setPort(123);
 
-        // A object with userInfo
+        // An object with userInfo
         $obj4 = new Uri;
         $obj4->setUserInfo('shahar:password');
 
-        // A object with scheme
+        // An object with scheme
         $obj5 = new Uri;
         $obj5->setScheme('https');
 
-        // A object with host
+        // An object with host
         $obj6 = new Uri;
         $obj6->setHost('example.com');
 
@@ -1250,9 +1246,9 @@ class UriTest extends \PHPUnit_Framework_TestCase
                 'baz' => 'waka'
             ), 'foo=bar&baz=waka'),
             array(array(
-                'some key' => 'some crazy value?!#[]',
+                'some key' => 'some crazy value?!#[]&=%+',
                 '1'        => ''
-            ), 'some%20key=some%20crazy%20value%3F%21%23%5B%5D&1='),
+            ), 'some%20key=some%20crazy%20value%3F%21%23%5B%5D%26%3D%25%2B&1='),
             array(array(
                 'array'        => array('foo', 'bar', 'baz'),
                 'otherstuff[]' => 1234
@@ -1281,6 +1277,8 @@ class UriTest extends \PHPUnit_Framework_TestCase
             array('FOO:/bar/with space?que%3fry#frag%ment#', 'foo:/bar/with%20space?que?ry#frag%25ment%23'),
             array('/path/%68%65%6c%6c%6f/world', '/path/hello/world'),
             array('/foo/bar?url=http%3A%2F%2Fwww.example.com%2Fbaz', '/foo/bar?url=http://www.example.com/baz'),
+
+            array('/urlencoded/params?chars=' . urlencode('+&=;%20#'), '/urlencoded/params?chars=%2B%26%3D%3B%2520%23'),
             array('File:///SitePages/fi%6ce%20has%20spaces', 'file:///SitePages/file%20has%20spaces'),
             array('/foo/bar/../baz?do=action#showFragment', '/foo/baz?do=action#showFragment'),
 

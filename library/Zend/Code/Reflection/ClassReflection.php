@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -12,7 +12,6 @@ namespace Zend\Code\Reflection;
 use ReflectionClass;
 use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
-use Zend\Code\Reflection\FileReflection;
 use Zend\Code\Scanner\AnnotationScanner;
 use Zend\Code\Scanner\FileScanner;
 
@@ -68,15 +67,23 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     public function getAnnotations(AnnotationManager $annotationManager)
     {
         $docComment = $this->getDocComment();
+
         if ($docComment == '') {
             return false;
         }
 
-        if (!$this->annotations) {
-            $fileScanner       = new FileScanner($this->getFileName());
-            $nameInformation   = $fileScanner->getClassNameInformation($this->getName());
-            $this->annotations = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
+        if ($this->annotations) {
+            return $this->annotations;
         }
+
+        $fileScanner       = $this->createFileScanner($this->getFileName());
+        $nameInformation   = $fileScanner->getClassNameInformation($this->getName());
+
+        if (!$nameInformation) {
+            return false;
+        }
+
+        $this->annotations = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
 
         return $this->annotations;
     }
@@ -104,8 +111,13 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
      */
     public function getContents($includeDocBlock = true)
     {
-        $filename  = $this->getFileName();
-        $filelines = file($filename);
+        $fileName = $this->getFileName();
+
+        if (false === $fileName || ! file_exists($fileName)) {
+            return '';
+        }
+
+        $filelines = file($fileName);
         $startnum  = $this->getStartLine($includeDocBlock);
         $endnum    = $this->getEndLine() - $this->getStartLine();
 
@@ -151,7 +163,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     /**
      * Get reflection objects of all methods
      *
-     * @param  string $filter
+     * @param  int $filter
      * @return MethodReflection[]
      */
     public function getMethods($filter = -1)
@@ -226,5 +238,20 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     public function __toString()
     {
         return parent::__toString();
+    }
+
+    /**
+     * Creates a new FileScanner instance.
+     *
+     * By having this as a seperate method it allows the method to be overridden
+     * if a different FileScanner is needed.
+     *
+     * @param  string $filename
+     *
+     * @return FileScanner
+     */
+    protected function createFileScanner($filename)
+    {
+        return new FileScanner($filename);
     }
 }

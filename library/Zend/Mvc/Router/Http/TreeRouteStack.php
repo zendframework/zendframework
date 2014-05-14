@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -148,6 +148,10 @@ class TreeRouteStack extends SimpleRouteStack
             $chainRoutes = array_merge(array($specs), $specs['chain_routes']);
             unset($chainRoutes[0]['chain_routes']);
 
+            if (isset($specs['child_routes'])) {
+                unset($chainRoutes[0]['child_routes']);
+            }
+
             $options = array(
                 'routes'        => $chainRoutes,
                 'route_plugins' => $this->routePluginManager,
@@ -223,7 +227,7 @@ class TreeRouteStack extends SimpleRouteStack
      * Get a prototype.
      *
      * @param  string $name
-     * @return RouterInterface|null
+     * @return RouteInterface|null
      */
     public function getPrototype($name)
     {

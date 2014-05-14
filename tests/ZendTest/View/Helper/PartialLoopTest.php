@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper;
@@ -17,11 +16,8 @@ use Zend\View\Helper\PartialLoop;
 use Zend\View\Renderer\PhpRenderer as View;
 
 /**
- * Test class for Zend_View_Helper_PartialLoop.
+ * Test class for Zend\View\Helper\PartialLoop.
  *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -296,6 +292,30 @@ class PartialLoopTest extends TestCase
 
         $this->helper->__invoke('partialLoopCouter.phtml', $data);
         $this->assertEquals(4, $this->helper->getPartialCounter());
+    }
+
+    public function testShouldNotConvertToArrayRecursivelyIfModelIsTraversable()
+    {
+        $rIterator = new RecursiveIteratorTest();
+        for ($i = 0; $i < 5; ++$i) {
+            $data = array(
+                'message' => 'foo' . $i,
+            );
+            $rIterator->addItem(new IteratorTest($data));
+        }
+
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $this->helper->setView($view);
+        $this->helper->setObjectKey('obj');
+
+        $result = $this->helper->__invoke('partialLoopShouldNotConvertToArrayRecursively.phtml', $rIterator);
+
+        foreach ($rIterator as $item) {
+            foreach ($item as $key => $value) {
+                $this->assertContains('This is an iteration: ' . $value, $result, var_export($value, 1));
+            }
+        }
     }
 }
 

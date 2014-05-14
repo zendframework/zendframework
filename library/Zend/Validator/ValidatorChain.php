@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -146,6 +146,14 @@ class ValidatorChain implements
      */
     public function attachByName($name, $options = array(), $breakChainOnFailure = false)
     {
+        if (isset($options['break_chain_on_failure'])) {
+            $breakChainOnFailure = (bool) $options['break_chain_on_failure'];
+        }
+
+        if (isset($options['breakchainonfailure'])) {
+            $breakChainOnFailure = (bool) $options['breakchainonfailure'];
+        }
+
         $validator = $this->plugin($name, $options);
         $this->attach($validator, $breakChainOnFailure);
         return $this;
@@ -259,7 +267,7 @@ class ValidatorChain implements
      *
      * Plugin manager (property 'plugins') cannot
      * be serialized. On wakeup the property remains unset
-     * and next invokation to getPluginManager() sets
+     * and next invocation to getPluginManager() sets
      * the default plugin manager instance (ValidatorPluginManager).
      *
      * @return array

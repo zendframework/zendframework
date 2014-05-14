@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter;
@@ -13,9 +12,6 @@ namespace ZendTest\Filter;
 use Zend\Filter\Digits as DigitsFilter;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class DigitsTest extends \PHPUnit_Framework_TestCase
@@ -34,8 +30,8 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if (null === self::$_unicodeEnabled) {
-            self::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
+        if (null === static::$_unicodeEnabled) {
+            static::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
         }
     }
 
@@ -48,7 +44,7 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new DigitsFilter();
 
-        if (self::$_unicodeEnabled && extension_loaded('mbstring')) {
+        if (static::$_unicodeEnabled && extension_loaded('mbstring')) {
             // Filter for the value with mbstring
             /**
              * The first element of $valuesExpected contains multibyte digit characters.
@@ -84,5 +80,28 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
                 "Expected '$input' to filter to '$output', but received '$result' instead"
                 );
         }
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                'abc123',
+                'abc 123'
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new DigitsFilter();
+
+        $this->assertEquals($input, $filter($input));
     }
 }

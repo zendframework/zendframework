@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,7 +15,6 @@ use Zend\Console\Response as ConsoleResponse;
 use Zend\Console\Request as ConsoleRequest;
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
@@ -23,7 +22,6 @@ use Zend\Mvc\Application;
 use Zend\Mvc\Exception\RuntimeException;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
-use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Stdlib\StringUtils;
 use Zend\Text\Table;
@@ -129,7 +127,7 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         $mm = null;
         try{
             $mm = $sm->get('ModuleManager');
-        } catch (ServiceNotFoundException $e) {
+        } catch (ServiceNotFoundException $exception) {
             // The application does not have or use module manager, so we cannot use it
         }
 
@@ -139,17 +137,9 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
             if (!$console instanceof ConsoleAdapter) {
                 throw new ServiceNotFoundException();
             }
-        } catch (ServiceNotFoundException $e) {
+        } catch (ServiceNotFoundException $exception) {
             // The application does not have console adapter
             throw new RuntimeException('Cannot access Console adapter - is it defined in ServiceManager?');
-        }
-
-        // Try to fetch router
-        $router = null;
-        try{
-            $router = $sm->get('Router');
-        } catch (ServiceNotFoundException $e) {
-            // The application does not have a router
         }
 
         // Retrieve the script's name (entry point)

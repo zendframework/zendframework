@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
@@ -13,9 +12,6 @@ namespace ZendTest\Validator;
 use Zend\Validator\Hostname;
 
 /**
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
  * @group      Zend_Validator
  */
 class HostnameTest extends \PHPUnit_Framework_TestCase
@@ -27,11 +23,16 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      */
     protected $validator;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $origEncoding;
+
     public function setUp()
     {
-        $this->origEncoding = iconv_get_encoding('internal_encoding');
+        $this->origEncoding = PHP_VERSION_ID < 50600
+            ? iconv_get_encoding('internal_encoding')
+            : ini_get('default_charset');
         $this->validator = new Hostname();
     }
 
@@ -40,7 +41,11 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        iconv_set_encoding('internal_encoding', $this->origEncoding);
+        if (PHP_VERSION_ID < 50600) {
+            iconv_set_encoding('internal_encoding', $this->origEncoding);
+        } else {
+            ini_set('default_charset', $this->origEncoding);
+        }
     }
 
     /**
@@ -156,10 +161,10 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensure the IDN check works on ressource files as expected
+     * Ensure the IDN check works on resource files as expected
      *
      */
-    public function testRessourceIDN()
+    public function testResourceIDN()
     {
         $validator = new Hostname();
 
@@ -260,8 +265,12 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidatorMessagesShouldBeTranslated()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $translations = array(
-            'hostnameInvalidLocalName' => 'this is the IP error message',
+            'hostnameInvalidLocalName' => 'The input does not appear to be a valid local network name',
         );
         $loader = new TestAsset\ArrayTranslator();
         $loader->translations = $translations;
@@ -345,7 +354,12 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
      */
     public function testDifferentIconvEncoding()
     {
-        iconv_set_encoding('internal_encoding', 'ISO8859-1');
+        if (PHP_VERSION_ID < 50600) {
+            iconv_set_encoding('internal_encoding', 'ISO8859-1');
+        } else {
+            ini_set('default_charset', 'ISO8859-1');
+        }
+
         $validator = new Hostname();
 
         $valuesExpected = array(
@@ -449,6 +463,49 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid('رات.si'));
     }
 
+    /**
+     * @group Issue #5894 - Add .il IDN domain checking; add new TLDs
+     */
+    public function testIDNIL()
+    {
+        $validator = new Hostname(Hostname::ALLOW_ALL);
+
+        // Check .IL TLD matching
+        $valuesExpected = array(
+            array(true, array('xn----zhcbgfhe2aacg8fb5i.org.il', 'מבחן.il', 'מבחן123.il')),
+            array(false, array('tבדיקה123.il', 'رات.il')) // Can't mix Latin and Hebrew character sets (except digits)
+        );
+        foreach ($valuesExpected as $element) {
+            foreach ($element[1] as $input) {
+                $this->assertEquals(
+                    $element[0],
+                    $validator->isValid($input),
+                    implode("\n", $validator->getMessages()) .' - '. $input
+                );
+            }
+        }
+    }
+
+    public function testAdditionalUTF8TLDs()
+    {
+        $validator = new Hostname(Hostname::ALLOW_ALL);
+
+        // Check UTF-8 TLD matching
+        $valuesExpected = array(
+            array(true, array('test123.δοκιμή', 'тест.рф', 'туршилтын.мон')),
+            array(false, array('சோதனை3.இலங்கை', 'رات.мон'))
+        );
+        foreach ($valuesExpected as $element) {
+            foreach ($element[1] as $input) {
+                $this->assertEquals(
+                    $element[0],
+                    $validator->isValid($input),
+                    implode("\n", $validator->getMessages()) .' - '. $input
+                );
+            }
+        }
+    }
+
     public function testIDNIT()
     {
         $validator = new Hostname(Hostname::ALLOW_ALL);
@@ -462,14 +519,12 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'), 'messageTemplates', $validator);
     }
 
     public function testEqualsMessageVariables()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals($validator->getOption('messageVariables'),
-                                     'messageVariables', $validator);
+        $this->assertAttributeEquals($validator->getOption('messageVariables'), 'messageVariables', $validator);
     }
 }

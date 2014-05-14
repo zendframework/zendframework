@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace ZendTest\Mail;
@@ -14,9 +13,6 @@ use Zend\Mail;
 use Zend\Mail\Header;
 
 /**
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
  * @group      Zend_Mail
  */
 class HeadersTest extends \PHPUnit_Framework_TestCase
@@ -142,7 +138,10 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
 
     public function testHeadersAddHeaderLineThrowsExceptionOnMissingFieldValue()
     {
-        $this->setExpectedException('Zend\Mail\Header\Exception\InvalidArgumentException', 'Header must match with the format "name: value"');
+        $this->setExpectedException(
+            'Zend\Mail\Header\Exception\InvalidArgumentException',
+            'Header must match with the format "name:value"'
+        );
         $headers = new Mail\Headers();
         $headers->addHeaderLine('Foo');
     }
@@ -196,11 +195,34 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
     {
         $headers = new Mail\Headers();
         $headers->addHeaders(array('Foo' => 'bar', 'Baz' => 'baz'));
-        $header = $headers->get('foo');
         $this->assertEquals(2, $headers->count());
-        $headers->removeHeader($header->getFieldName());
+        $headers->removeHeader('foo');
+        $this->assertEquals(1, $headers->count());
+        $this->assertFalse($headers->has('foo'));
+        $this->assertTrue($headers->has('baz'));
+    }
+
+    public function testRemoveHeaderWithFieldNameWillRemoveAllInstances()
+    {
+        $headers = new Mail\Headers();
+        $headers->addHeaders(array(array('Foo' => 'foo'), array('Foo' => 'bar'), 'Baz' => 'baz'));
+        $this->assertEquals(3, $headers->count());
+        $headers->removeHeader('foo');
         $this->assertEquals(1, $headers->count());
         $this->assertFalse($headers->get('foo'));
+        $this->assertTrue($headers->has('baz'));
+    }
+
+    public function testRemoveHeaderWithInstanceWillRemoveThatInstance()
+    {
+        $headers = new Mail\Headers();
+        $headers->addHeaders(array(array('Foo' => 'foo'), array('Foo' => 'bar'), 'Baz' => 'baz'));
+        $header = $headers->get('foo')->current();
+        $this->assertEquals(3, $headers->count());
+        $headers->removeHeader($header);
+        $this->assertEquals(2, $headers->count());
+        $this->assertTrue($headers->has('foo'));
+        $this->assertNotSame($header, $headers->get('foo'));
     }
 
     public function testHeadersCanClearAllHeaders()

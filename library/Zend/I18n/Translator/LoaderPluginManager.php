@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -18,6 +18,39 @@ use Zend\ServiceManager\AbstractPluginManager;
  * Enforces that loaders retrieved are either instances of
  * Loader\FileLoaderInterface or Loader\RemoteLoaderInterface. Additionally,
  * it registers a number of default loaders.
+ *
+ * If you are wanting to use the ability to load translation files from the
+ * include_path, you will need to create a factory to override the defaults
+ * defined in this class. A simple factory might look like:
+ *
+ * <code>
+ * function ($translators) {
+ *     $adapter = new Gettext();
+ *     $adapter->setUseIncludePath(true);
+ *     return $adapter;
+ * }
+ * </code>
+ *
+ * You may need to override the Translator service factory to make this happen
+ * more easily. That can be done by extending it:
+ *
+ * <code>
+ * use Zend\I18n\Translator\TranslatorServiceFactory;
+ * // or Zend\Mvc\I18n\TranslatorServiceFactory
+ * use Zend\ServiceManager\ServiceLocatorInterface;
+ *
+ * class MyTranslatorServiceFactory extends TranslatorServiceFactory
+ * {
+ *     public function createService(ServiceLocatorInterface $services)
+ *     {
+ *         $translator = parent::createService($services);
+ *         $translator->getLoaderPluginManager()->setFactory(...);
+ *         return $translator;
+ *     }
+ * }
+ * </code>
+ *
+ * You would then specify your custom factory in your service configuration.
  */
 class LoaderPluginManager extends AbstractPluginManager
 {

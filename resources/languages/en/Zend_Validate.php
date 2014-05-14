@@ -3,12 +3,12 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * EN-Revision: 04.Apr.2013
+ * EN-Revision: 16.Jul.2013
  */
 return array(
     // Zend\I18n\Validator\Alnum
@@ -21,6 +21,10 @@ return array(
     "The input contains non alphabetic characters" => "The input contains non alphabetic characters",
     "The input is an empty string" => "The input is an empty string",
 
+    // Zend\I18n\Validator\DateTime
+    "Invalid type given. String expected" => "Invalid type given. String expected",
+    "The input does not appear to be a valid datetime" => "The input does not appear to be a valid datetime",
+
     // Zend\I18n\Validator\Float
     "Invalid type given. String, integer or float expected" => "Invalid type given. String, integer or float expected",
     "The input does not appear to be a float" => "The input does not appear to be a float",
@@ -28,6 +32,11 @@ return array(
     // Zend\I18n\Validator\Int
     "Invalid type given. String or integer expected" => "Invalid type given. String or integer expected",
     "The input does not appear to be an integer" => "The input does not appear to be an integer",
+
+    // Zend\I18n\Validator\PhoneNumber
+    "The input does not match a phone number format" => "The input does not match a phone number format",
+    "The country provided is currently unsupported" => "The country provided is currently unsupported",
+    "Invalid type given. String expected" => "Invalid type given. String expected",
 
     // Zend\I18n\Validator\PostCode
     "Invalid type given. String or integer expected" => "Invalid type given. String or integer expected",
@@ -43,6 +52,11 @@ return array(
     // Zend\Validator\Between
     "The input is not between '%min%' and '%max%', inclusively" => "The input is not between '%min%' and '%max%', inclusively",
     "The input is not strictly between '%min%' and '%max%'" => "The input is not strictly between '%min%' and '%max%'",
+
+    // Zend\Validator\Bitwise
+    "The input has no common bit set with '%control%'" => "The input has no common bit set with '%control%'",
+    "The input doesn't have the same bits set as '%control%'" => "The input doesn't have the same bits set as '%control%'",
+    "The input has common bit set with '%control%'" => "The input has common bit set with '%control%'",
 
     // Zend\Validator\Callback
     "The input is not valid" => "The input is not valid",
@@ -66,6 +80,9 @@ return array(
     "The input does not fit the date format '%format%'" => "The input does not fit the date format '%format%'",
 
     // Zend\Validator\DateStep
+    "Invalid type given. String, integer, array or DateTime expected" => "Invalid type given. String, integer, array or DateTime expected",
+    "The input does not appear to be a valid date" => "The input does not appear to be a valid date",
+    "The input does not fit the date format '%format%'" => "The input does not fit the date format '%format%'",
     "The input is not a valid step" => "The input is not a valid step",
 
     // Zend\Validator\Db\AbstractDb

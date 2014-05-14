@@ -6,6 +6,7 @@
         "zf2",
         "file"
     ],
+    "homepage": "https://github.com/zendframework/zf2",
     "autoload": {
         "psr-0": {
             "Zend\\File\\": ""
@@ -13,13 +14,23 @@
     },
     "target-dir": "Zend/File",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version"
+    },
+    "require-dev": {
+        "zendframework/zend-filter": "self.version",
+        "zendframework/zend-i18n": "self.version",
+        "zendframework/zend-validator": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-filter": "Zend\\Filter component",
+        "zendframework/zend-i18n": "Zend\\I18n component",
+        "zendframework/zend-validator": "Zend\\Validator component"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev",
-            "dev-develop": "2.3-dev"
+            "dev-master": "2.3-dev",
+            "dev-develop": "2.4-dev"
         }
     }
 }

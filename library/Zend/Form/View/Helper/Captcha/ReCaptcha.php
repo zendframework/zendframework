@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -110,7 +110,7 @@ class ReCaptcha extends FormInput
 function windowOnLoad(fn)
 {
     var old = window.onload;
-    window.onload = function() {
+    window.onload = function () {
         if (old) {
             old();
         }
@@ -125,11 +125,11 @@ function zendBindEvent(el, eventName, eventHandler)
         el.attachEvent('on'+eventName, eventHandler);
     }
 }
-windowOnLoad(function() {
+windowOnLoad(function () {
     zendBindEvent(
         document.getElementById("$challengeId").form,
         'submit',
-        function(e) {
+        function (e) {
             document.getElementById("$challengeId").value = document.getElementById("recaptcha_challenge_field").value;
             document.getElementById("$responseId").value = document.getElementById("recaptcha_response_field").value;
         }

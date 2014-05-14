@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -90,7 +90,7 @@ class StripTags extends AbstractFilter
      * Sets the tagsAllowed option
      *
      * @param  array|string $tagsAllowed
-     * @return StripTags Provides a fluent interface
+     * @return self Provides a fluent interface
      */
     public function setTagsAllowed($tagsAllowed)
     {
@@ -143,7 +143,7 @@ class StripTags extends AbstractFilter
      * Sets the attributesAllowed option
      *
      * @param  array|string $attributesAllowed
-     * @return StripTags Provides a fluent interface
+     * @return self Provides a fluent interface
      */
     public function setAttributesAllowed($attributesAllowed)
     {
@@ -166,13 +166,17 @@ class StripTags extends AbstractFilter
     /**
      * Defined by Zend\Filter\FilterInterface
      *
-     * @todo improve docblock descriptions
+     * If the value provided is non-scalar, the value will remain unfiltered
      *
+     * @todo   improve docblock descriptions
      * @param  string $value
-     * @return string
+     * @return string|mixed
      */
     public function filter($value)
     {
+        if (!is_scalar($value)) {
+            return $value;
+        }
         $value = (string) $value;
 
         // Strip HTML comments first
@@ -264,7 +268,7 @@ class StripTags extends AbstractFilter
             foreach ($matches[1] as $index => $attributeName) {
                 $attributeName      = strtolower($attributeName);
                 $attributeDelimiter = empty($matches[2][$index]) ? $matches[4][$index] : $matches[2][$index];
-                $attributeValue     = empty($matches[3][$index]) ? $matches[5][$index] : $matches[3][$index];
+                $attributeValue     = (strlen($matches[3][$index]) == 0) ? $matches[5][$index] : $matches[3][$index];
 
                 // If the attribute is not allowed, then remove it entirely
                 if (!array_key_exists($attributeName, $this->tagsAllowed[$tagName])

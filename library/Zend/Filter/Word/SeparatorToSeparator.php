@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -20,8 +20,8 @@ class SeparatorToSeparator extends AbstractFilter
     /**
      * Constructor
      *
-     * @param  string  $searchSeparator      Separator to search for
-     * @param  string  $replacementSeparator Separator to replace with
+     * @param  string $searchSeparator      Separator to search for
+     * @param  string $replacementSeparator Separator to replace with
      */
     public function __construct($searchSeparator = ' ', $replacementSeparator = '-')
     {
@@ -32,8 +32,8 @@ class SeparatorToSeparator extends AbstractFilter
     /**
      * Sets a new seperator to search for
      *
-     * @param  string  $separator  Seperator to search for
-     * @return SeparatorToSeparator
+     * @param  string $separator Seperator to search for
+     * @return self
      */
     public function setSearchSeparator($separator)
     {
@@ -44,7 +44,7 @@ class SeparatorToSeparator extends AbstractFilter
     /**
      * Returns the actual set separator to search for
      *
-     * @return  string
+     * @return string
      */
     public function getSearchSeparator()
     {
@@ -54,8 +54,8 @@ class SeparatorToSeparator extends AbstractFilter
     /**
      * Sets a new separator which replaces the searched one
      *
-     * @param  string  $separator  Separator which replaces the searched one
-     * @return SeparatorToSeparator
+     * @param  string $separator Separator which replaces the searched one
+     * @return self
      */
     public function setReplacementSeparator($separator)
     {
@@ -66,7 +66,7 @@ class SeparatorToSeparator extends AbstractFilter
     /**
      * Returns the actual set separator which replaces the searched one
      *
-     * @return  string
+     * @return string
      */
     public function getReplacementSeparator()
     {
@@ -78,11 +78,15 @@ class SeparatorToSeparator extends AbstractFilter
      *
      * Returns the string $value, replacing the searched separators with the defined ones
      *
-     * @param  string $value
-     * @return string
+     * @param  string|array $value
+     * @return string|array
      */
     public function filter($value)
     {
+        if (!is_scalar($value) && !is_array($value)) {
+            return $value;
+        }
+
         if ($this->searchSeparator == null) {
             throw new Exception\RuntimeException('You must provide a search separator for this filter to work.');
         }

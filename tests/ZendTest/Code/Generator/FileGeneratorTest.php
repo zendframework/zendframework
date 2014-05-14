@@ -3,25 +3,17 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace ZendTest\Code\Generator;
 
-use Exception;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Reflection\FileReflection;
 
 /**
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  * @group Zend_Code_Generator_Php_File
@@ -131,8 +123,6 @@ namespace ZendTest\Code\Generator\TestAsset;
 
 /**
  * class docblock
- *
- * @package Zend_Reflection_TestSampleSingleClass
  *
  */
 class TestSampleSingleClass
@@ -300,58 +290,19 @@ EOS;
         $this->assertInstanceOf('Zend\Code\Generator\ClassGenerator', $class);
     }
 
-    public function testGeneratingFromAReflectedFilenameShouldRaiseExceptionIfFileDoesNotExist()
+    public function testGeneratingFromAReflectedFileName()
     {
-        $this->setExpectedException('Zend\Code\Generator\Exception\InvalidArgumentException', 'found');
-        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/does/not/exist.really');
+        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/TestAsset/OneInterface.php');
+        $this->assertInstanceOf('Zend\Code\Generator\FileGenerator', $generator);
     }
 
-    public function testGeneratingFromAReflectedFilenameShouldRaiseExceptionIfFileDoesNotExistInIncludePath()
+    public function testGeneratedClassesHaveUses()
     {
-        $this->setExpectedException('Zend\Code\Generator\Exception\InvalidArgumentException', 'found');
-        FileGenerator::fromReflectedFileName('an_empty_file.php');
-    }
+        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/TestAsset/ClassWithUses.php');
+        $class = $generator->getClass();
 
-    public function testGeneratingFromAReflectedFilenameInIncludePathWithoutIncludeFlagEnable()
-    {
-        $this->setExpectedException('Zend\Code\Reflection\Exception\RuntimeException', 'must be required');
-        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
+        $expectedUses = array('ZendTest\Code\Generator\TestAsset\ClassWithNamespace');
 
-        try {
-            FileGenerator::fromReflectedFileName('an_empty_file.php', false);
-            set_include_path($oldIncludePath);
-            $this->fail('Should throw exception');
-        } catch(Exception $e) {
-            set_include_path($oldIncludePath);
-            throw $e;
-        }
-    }
-
-    public function testGeneratingFromAReflectedFilenameIncluded()
-    {
-        include_once __DIR__ . '/TestAsset/an_empty_file.php';
-        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
-
-        try {
-            FileGenerator::fromReflectedFileName('an_empty_file.php', false);
-            set_include_path($oldIncludePath);
-        } catch(Exception $e) {
-            set_include_path($oldIncludePath);
-            throw $e;
-        }
-    }
-
-    public function testGeneratingFromAReflectedFilenameInIncludePath()
-    {
-        $this->assertFalse(in_array(realpath(__DIR__ . '/TestAsset/a_second_empty_file.php'), get_included_files()));
-        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
-
-        try {
-            FileGenerator::fromReflectedFileName('a_second_empty_file.php');
-            set_include_path($oldIncludePath);
-        } catch(Exception $e) {
-            set_include_path($oldIncludePath);
-            throw $e;
-        }
+        $this->assertEquals($expectedUses, $class->getUses());
     }
 }

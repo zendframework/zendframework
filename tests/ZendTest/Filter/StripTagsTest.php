@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter;
@@ -13,9 +12,6 @@ namespace ZendTest\Filter;
 use Zend\Filter\StripTags as StripTagsFilter;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class StripTagsTest extends \PHPUnit_Framework_TestCase
@@ -23,7 +19,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     /**
      * Zend_Filter_StripTags object
      *
-     * @var Zend_Filter_StripTags
+     * @var StripTagsFilter
      */
     protected $_filter;
 
@@ -536,6 +532,39 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $this->_filter->setTagsAllowed('li');
         $this->_filter->setAttributesAllowed(array('data-id','data-name'));
 
+        $this->assertEquals($expected, $this->_filter->filter($input));
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                '<li data-name="Test User" data-id="11223"></li>',
+                '<li data-name="Test User 2" data-id="456789"></li>'
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $this->assertEquals($input, $this->_filter->filter($input));
+    }
+
+    /**
+     * @link https://github.com/zendframework/zf2/issues/5465
+     */
+    public function testAttributeValueofZeroIsNotRemoved()
+    {
+        $input     = '<div id="0" data-custom="0" class="bogus"></div>';
+        $expected  = '<div id="0" data-custom="0"></div>';
+        $this->_filter->setTagsAllowed('div');
+        $this->_filter->setAttributesAllowed(array('id','data-custom'));
         $this->assertEquals($expected, $this->_filter->filter($input));
     }
 }

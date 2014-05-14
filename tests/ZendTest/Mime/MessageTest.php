@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mime
  */
 
 namespace ZendTest\Mime;
@@ -13,9 +12,6 @@ namespace ZendTest\Mime;
 use Zend\Mime;
 
 /**
- * @category   Zend
- * @package    Zend_Mime
- * @subpackage UnitTests
  * @group      Zend_Mime
  */
 class MessageTest extends \PHPUnit_Framework_TestCase
@@ -127,5 +123,16 @@ EOD;
         $parts = $message->getParts();
         $test  = current($parts);
         $this->assertSame($part, $test);
+    }
+
+    /**
+     * @group ZF2-5962
+     */
+    public function testPassEmptyArrayIntoSetPartsShouldReturnEmptyString()
+    {
+        $mimeMessage = new Mime\Message();
+        $mimeMessage->setParts(array());
+
+        $this->assertEquals('', $mimeMessage->generateMessage());
     }
 }

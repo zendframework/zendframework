@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -17,11 +17,7 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterfa
     public static function fromString($headerLine)
     {
         $decodedLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR, 'UTF-8');
-        $parts = explode(': ', $decodedLine, 2);
-        if (count($parts) != 2) {
-            throw new Exception\InvalidArgumentException('Header must match with the format "name: value"');
-        }
-        list($fieldName, $fieldValue) = $parts;
+        list($fieldName, $fieldValue) = GenericHeader::splitHeaderLine($decodedLine);
 
         if (strpos($fieldValue, ',')) {
             $headers = array();

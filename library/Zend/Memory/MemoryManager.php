@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -107,7 +107,7 @@ class MemoryManager
     /**
      * This function is intended to generate unique id, used by memory manager
      */
-    private function _generateMemManagerId()
+    private function generateMemManagerId()
     {
         /**
          * @todo !!!
@@ -132,7 +132,7 @@ class MemoryManager
         }
 
         $this->cache = $cache;
-        $this->_generateMemManagerId();
+        $this->generateMemManagerId();
 
         $memoryLimitStr = trim(ini_get('memory_limit'));
         if ($memoryLimitStr != '' && $memoryLimitStr != -1) {
@@ -180,7 +180,7 @@ class MemoryManager
     {
         $this->memoryLimit = $newLimit;
 
-        $this->_swapCheck();
+        $this->swapCheck();
     }
 
     /**
@@ -255,7 +255,7 @@ class MemoryManager
         }
 
         // Commit other objects modifications
-        $this->_commit();
+        $this->commit();
 
         $valueObject = new Container\Movable($this, $id, $value);
 
@@ -322,7 +322,7 @@ class MemoryManager
         $this->memorySize -= $this->sizes[$id];
 
         // Commit changes of previously modified object if necessary
-        $this->_commit();
+        $this->commit();
 
         $this->lastModified = $container;
     }
@@ -330,7 +330,7 @@ class MemoryManager
     /**
      * Commit modified object and put it back to the loaded objects list
      */
-    private function _commit()
+    private function commit()
     {
         if (($container = $this->lastModified) === null) {
             return;
@@ -350,7 +350,7 @@ class MemoryManager
 
         $container->startTrace();
 
-        $this->_swapCheck();
+        $this->swapCheck();
     }
 
     /**
@@ -358,7 +358,7 @@ class MemoryManager
      *
      * @throws Exception\RuntimeException
      */
-    private function _swapCheck()
+    private function swapCheck()
     {
         if ($this->memoryLimit < 0  ||  $this->memorySize < $this->memoryLimit) {
             // Memory limit is not reached
@@ -368,7 +368,7 @@ class MemoryManager
 
         // walk through loaded objects in access history order
         foreach ($this->unloadCandidates as $id => $container) {
-            $this->_swap($container, $id);
+            $this->swap($container, $id);
             unset($this->unloadCandidates[$id]);
 
             if ($this->memorySize < $this->memoryLimit) {
@@ -388,7 +388,7 @@ class MemoryManager
      * @param \Zend\Memory\Container\Movable $container
      * @param int $id
      */
-    private function _swap(Container\Movable $container, $id)
+    private function swap(Container\Movable $container, $id)
     {
         if ($container->isLocked()) {
             return;
@@ -418,7 +418,7 @@ class MemoryManager
         // Try to swap other objects if necessary
         // (do not include specified object into check)
         $this->memorySize += strlen($value);
-        $this->_swapCheck();
+        $this->swapCheck();
 
         // Add loaded object to the end of loaded objects list
         $container->setValue($value);

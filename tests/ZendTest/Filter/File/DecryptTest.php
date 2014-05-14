@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter\File;
@@ -14,9 +13,6 @@ use Zend\Filter\File\Decrypt as FileDecrypt;
 use Zend\Filter\File\Encrypt as FileEncrypt;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class DecryptTest extends \PHPUnit_Framework_TestCase
@@ -118,5 +114,29 @@ class DecryptTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not found');
         $filter->filter(dirname(__DIR__).'/_files/nofile.txt');
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                dirname(__DIR__).'/_files/nofile.txt',
+                dirname(__DIR__).'/_files/nofile2.txt'
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new FileDecrypt();
+        $filter->setKey('1234567890123456');
+
+        $this->assertEquals($input, $filter($input));
     }
 }

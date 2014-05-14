@@ -6,6 +6,7 @@
         "zf2",
         "http"
     ],
+    "homepage": "https://github.com/zendframework/zf2",
     "autoload": {
         "psr-0": {
             "Zend\\Http\\": ""
@@ -13,7 +14,7 @@
     },
     "target-dir": "Zend/Http",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-loader": "self.version",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-uri": "self.version",
@@ -21,8 +22,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev",
-            "dev-develop": "2.3-dev"
+            "dev-master": "2.3-dev",
+            "dev-develop": "2.4-dev"
         }
     }
 }

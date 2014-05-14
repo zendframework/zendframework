@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace ZendTest\I18n\Filter;
@@ -16,6 +15,13 @@ use NumberFormatter;
 
 class NumberFormatTest extends TestCase
 {
+    public function setUp()
+    {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+    }
+
     public function testConstructWithOptions()
     {
         $filter = new NumberFormatFilter(array(
@@ -64,8 +70,16 @@ class NumberFormatTest extends TestCase
         $this->assertEquals($expected, $filter->filter($value));
     }
 
-    public static function numberToFormattedProvider()
+    public function numberToFormattedProvider()
     {
+        if (!extension_loaded('intl')) {
+            if (version_compare(\PHPUnit_Runner_Version::id(), '3.8.0-dev') === 1) {
+                $this->markTestSkipped('ext/intl not enabled');
+            } else {
+                return array(array());
+            }
+        }
+
         return array(
             array(
                 'en_US',
@@ -91,8 +105,16 @@ class NumberFormatTest extends TestCase
         );
     }
 
-    public static function formattedToNumberProvider()
+    public function formattedToNumberProvider()
     {
+        if (!extension_loaded('intl')) {
+            if (version_compare(\PHPUnit_Runner_Version::id(), '3.8.0-dev') === 1) {
+                $this->markTestSkipped('ext/intl not enabled');
+            } else {
+                return array(array());
+            }
+        }
+
         return array(
             array(
                 'en_US',
@@ -116,5 +138,29 @@ class NumberFormatTest extends TestCase
                 1234567.891,
             ),
         );
+    }
+
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                '1.234.567,891',
+                '1.567,891'
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new NumberFormatFilter('de_AT', NumberFormatter::DEFAULT_STYLE, NumberFormatter::TYPE_DOUBLE);
+
+        $this->assertEquals($input,  $filter->filter($input));
     }
 }

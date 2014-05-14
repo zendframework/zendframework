@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -27,6 +27,12 @@ class Request
      * @var bool
      */
     protected $isMethodError = false;
+
+    /**
+     * Flag
+     * @var bool
+     */
+    protected $isParseError = false;
 
     /**
      * Requested method
@@ -179,6 +185,16 @@ class Request
     }
 
     /**
+     * Was a malformed JSON provided?
+     *
+     * @return bool
+     */
+    public function isParseError()
+    {
+        return $this->isParseError;
+    }
+
+    /**
      * Set request identifier
      *
      * @param  mixed $name
@@ -234,8 +250,12 @@ class Request
      */
     public function loadJson($json)
     {
-        $options = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
-        $this->setOptions($options);
+        try {
+            $options = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
+            $this->setOptions($options);
+        } catch(\Exception $e) {
+            $this->isParseError = true;
+        }
     }
 
     /**

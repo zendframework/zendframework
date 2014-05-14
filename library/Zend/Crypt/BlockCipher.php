@@ -3,16 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Crypt;
 
-use Zend\Crypt\Hmac;
 use Zend\Crypt\Key\Derivation\Pbkdf2;
 use Zend\Crypt\Symmetric\SymmetricInterface;
-use Zend\Crypt\Utils;
 use Zend\Math\Rand;
 
 /**
@@ -20,7 +18,12 @@ use Zend\Math\Rand;
  */
 class BlockCipher
 {
-    const KEY_DERIV_HMAC = 'sha256';
+    /**
+     * Hash algorithm for Pbkdf2
+     *
+     * @var string
+     */
+    protected $pbkdf2Hash = 'sha256';
 
     /**
      * Symmetric cipher
@@ -37,7 +40,7 @@ class BlockCipher
     protected static $symmetricPlugins = null;
 
     /**
-     * Hash algorithm fot HMAC
+     * Hash algorithm for HMAC
      *
      * @var string
      */
@@ -74,7 +77,7 @@ class BlockCipher
     /**
      * Constructor
      *
-     * @param SymmetricInterface $cipher
+     * @param  SymmetricInterface $cipher
      */
     public function __construct(SymmetricInterface $cipher)
     {
@@ -162,7 +165,7 @@ class BlockCipher
     /**
      * Set the number of iterations for Pbkdf2
      *
-     * @param  int     $num
+     * @param  int $num
      * @return BlockCipher
      */
     public function setKeyIteration($num)
@@ -185,7 +188,7 @@ class BlockCipher
     /**
      * Set the salt (IV)
      *
-     * @param  string                             $salt
+     * @param  string $salt
      * @return BlockCipher
      * @throws Exception\InvalidArgumentException
      */
@@ -224,7 +227,7 @@ class BlockCipher
     /**
      * Enable/disable the binary output
      *
-     * @param  bool        $value
+     * @param  bool $value
      * @return BlockCipher
      */
     public function setBinaryOutput($value)
@@ -274,7 +277,7 @@ class BlockCipher
     /**
      * Set algorithm of the symmetric cipher
      *
-     * @param  string                             $algo
+     * @param  string $algo
      * @return BlockCipher
      * @throws Exception\InvalidArgumentException
      */
@@ -323,7 +326,7 @@ class BlockCipher
     /**
      * Set the hash algorithm for HMAC authentication
      *
-     * @param  string                             $hash
+     * @param  string $hash
      * @return BlockCipher
      * @throws Exception\InvalidArgumentException
      */
@@ -350,17 +353,57 @@ class BlockCipher
     }
 
     /**
+     * Set the hash algorithm for the Pbkdf2
+     *
+     * @param  string $hash
+     * @return BlockCipher
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setPbkdf2HashAlgorithm($hash)
+    {
+        if (!Hash::isSupported($hash)) {
+            throw new Exception\InvalidArgumentException(
+                "The specified hash algorithm '{$hash}' is not supported by Zend\Crypt\Hash"
+            );
+        }
+        $this->pbkdf2Hash = $hash;
+
+        return $this;
+    }
+
+    /**
+     * Get the Pbkdf2 hash algorithm
+     *
+     * @return string
+     */
+    public function getPbkdf2HashAlgorithm()
+    {
+        return $this->pbkdf2Hash;
+    }
+
+    /**
      * Encrypt then authenticate using HMAC
      *
-     * @param  string                             $data
+     * @param  string $data
      * @return string
      * @throws Exception\InvalidArgumentException
      */
     public function encrypt($data)
     {
-        if (empty($data)) {
+        // 0 (as integer), 0.0 (as float) & '0' (as string) will return false, though these should be allowed
+        // Must be a string, integer, or float in order to encrypt
+        if ((is_string($data) && $data === '')
+            || is_array($data)
+            || is_object($data)
+        ) {
             throw new Exception\InvalidArgumentException('The data to encrypt cannot be empty');
         }
+
+        // Cast to string prior to encrypting
+        if (!is_string($data)) {
+            $data = (string) $data;
+        }
+
         if (empty($this->cipher)) {
             throw new Exception\InvalidArgumentException('No symmetric cipher specified');
         }
@@ -373,7 +416,7 @@ class BlockCipher
             $this->cipher->setSalt(Rand::getBytes($this->cipher->getSaltSize(), true));
         }
         // generate the encryption key and the HMAC key for the authentication
-        $hash = Pbkdf2::calc(self::KEY_DERIV_HMAC,
+        $hash = Pbkdf2::calc($this->getPbkdf2HashAlgorithm(),
                              $this->getKey(),
                              $this->getSalt(),
                              $this->keyIteration,
@@ -398,7 +441,7 @@ class BlockCipher
     /**
      * Decrypt
      *
-     * @param  string                             $data
+     * @param  string $data
      * @return string|bool
      * @throws Exception\InvalidArgumentException
      */
@@ -425,7 +468,7 @@ class BlockCipher
         $iv      = substr($ciphertext, 0, $this->cipher->getSaltSize());
         $keySize = $this->cipher->getKeySize();
         // generate the encryption key and the HMAC key for the authentication
-        $hash = Pbkdf2::calc(self::KEY_DERIV_HMAC,
+        $hash = Pbkdf2::calc($this->getPbkdf2HashAlgorithm(),
                              $this->getKey(),
                              $iv,
                              $this->keyIteration,

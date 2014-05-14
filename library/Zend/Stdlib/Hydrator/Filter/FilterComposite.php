@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link           http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright      Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright      Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license        http://framework.zend.com/license/new-bsd New BSD License
  */
 namespace Zend\Stdlib\Hydrator\Filter;
@@ -41,7 +41,7 @@ class FilterComposite implements FilterInterface
     public function __construct($orFilter = array(), $andFilter = array())
     {
         array_walk($orFilter,
-            function($value, $key) {
+            function ($value, $key) {
                 if (
                     !is_callable($value)
                     && !$value instanceof FilterInterface
@@ -55,7 +55,7 @@ class FilterComposite implements FilterInterface
         );
 
         array_walk($andFilter,
-            function($value, $key) {
+            function ($value, $key) {
                 if (
                     !is_callable($value)
                     && !$value instanceof FilterInterface
@@ -79,7 +79,7 @@ class FilterComposite implements FilterInterface
      * This example will exclude all methods from the hydration, that starts with 'getService'
      * <code>
      * $composite->addFilter('exclude',
-     *     function($method) {
+     *     function ($method) {
      *         if (preg_match('/^getService/', $method) {
      *             return false;
      *         }

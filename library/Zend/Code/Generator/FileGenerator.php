@@ -3,12 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Code\Generator;
 
+use Zend\Code\Reflection\Exception as ReflectionException;
 use Zend\Code\Reflection\FileReflection;
 
 class FileGenerator extends AbstractGenerator
@@ -66,30 +67,13 @@ class FileGenerator extends AbstractGenerator
      *
      * @param  string $filePath
      * @param  bool $includeIfNotAlreadyIncluded
-     * @throws Exception\InvalidArgumentException If file does not exists
-     * @throes Exception\RuntimeException If file exists but is not included or required
+     * @throws ReflectionException\InvalidArgumentException If file does not exists
+     * @throws ReflectionException\RuntimeException If file exists but is not included or required
      * @return FileGenerator
      */
     public static function fromReflectedFileName($filePath, $includeIfNotAlreadyIncluded = true)
     {
-        $realpath = realpath($filePath);
-
-        if ($realpath === false) {
-            $realpath = stream_resolve_include_path($filePath);
-        }
-
-        if (!$realpath) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'No file for %s was found.',
-                $filePath
-            ));
-        }
-
-        if ($includeIfNotAlreadyIncluded && !in_array($realpath, get_included_files())) {
-            include $realpath;
-        }
-
-        $fileReflector = new FileReflection($realpath);
+        $fileReflector = new FileReflection($filePath, $includeIfNotAlreadyIncluded);
         $codeGenerator = static::fromReflection($fileReflector);
 
         return $codeGenerator;
@@ -108,9 +92,15 @@ class FileGenerator extends AbstractGenerator
 
         $body = $fileReflection->getContents();
 
+        $uses = $fileReflection->getUses();
+
         foreach ($fileReflection->getClasses() as $class) {
             $phpClass = ClassGenerator::fromReflection($class);
             $phpClass->setContainingFileGenerator($file);
+
+            foreach ($uses as $fileUse) {
+                $phpClass->addUse($fileUse['use'], $fileUse['as']);
+            }
 
             $file->setClass($phpClass);
 
@@ -142,7 +132,6 @@ class FileGenerator extends AbstractGenerator
             $file->setNamespace($namespace);
         }
 
-        $uses = $fileReflection->getUses();
         if ($uses) {
             $file->setUses($uses);
         }
@@ -321,7 +310,7 @@ class FileGenerator extends AbstractGenerator
     public function setUses(array $uses)
     {
         foreach ($uses as $use) {
-            $use = (array)$use;
+            $use = (array) $use;
             if (array_key_exists('use', $use) && array_key_exists('as', $use)) {
                 $import = $use['use'];
                 $alias  = $use['as'];

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -60,7 +60,7 @@ class Zip extends AbstractCompressionAlgorithm
      * Sets the archive to use for de-/compression
      *
      * @param  string $archive Archive to use
-     * @return Zip
+     * @return self
      */
     public function setArchive($archive)
     {
@@ -85,7 +85,7 @@ class Zip extends AbstractCompressionAlgorithm
      *
      * @param  string $target
      * @throws Exception\InvalidArgumentException
-     * @return Zip
+     * @return self
      */
     public function setTarget($target)
     {
@@ -184,13 +184,12 @@ class Zip extends AbstractCompressionAlgorithm
      */
     public function decompress($content)
     {
-        $archive = $this->getArchive();
+        $archive = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, realpath($content));
 
         if (empty($archive) || !file_exists($archive)) {
             throw new Exception\RuntimeException('ZIP Archive not found');
         }
 
-        $archive = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, realpath($content));
         $zip     = new ZipArchive();
         $res     = $zip->open($archive);
 

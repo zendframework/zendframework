@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace ZendTest\Http\Header;
@@ -16,7 +15,7 @@ class LocationTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @paramstring $uri The URL to redirect to
+     * @param  string $uri The URL to redirect to
      * @dataProvider locationFromStringCreatesValidLocationHeaderProvider
      */
     public function testLocationFromStringCreatesValidLocationHeader($uri)

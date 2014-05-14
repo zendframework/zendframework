@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace ZendTest\Code\Generator;
@@ -17,10 +16,6 @@ use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Reflection\ClassReflection;
 
 /**
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage UnitTests
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
@@ -267,6 +262,18 @@ EOS;
     }
 
     /**
+     * @group 4988
+     */
+    public function testNonNamespaceClassReturnsAllMethods()
+    {
+        require_once __DIR__ . '/../TestAsset/NonNamespaceClass.php';
+
+        $reflClass = new ClassReflection('ZendTest_Code_NsTest_BarClass');
+        $classGenerator = ClassGenerator::fromReflection($reflClass);
+        $this->assertCount(1, $classGenerator->getMethods());
+    }
+
+    /**
      * @group ZF-9602
      */
     public function testSetextendedclassShouldIgnoreEmptyClassnameOnGenerate()
@@ -378,6 +385,38 @@ CODE;
         $this->assertContains('use My\Second\Use\Class as MyAlias;', $generated);
     }
 
+    /**
+     * @group 4990
+     */
+    public function testAddOneUseTwiceOnlyAddsOne()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('My\Class');
+        $classGenerator->addUse('My\First\Use\Class');
+        $classGenerator->addUse('My\First\Use\Class');
+        $generated = $classGenerator->generate();
+
+        $this->assertCount(1, $classGenerator->getUses());
+
+        $this->assertContains('use My\First\Use\Class;', $generated);
+    }
+
+    /**
+     * @group 4990
+     */
+    public function testAddOneUseWithAliasTwiceOnlyAddsOne()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('My\Class');
+        $classGenerator->addUse('My\First\Use\Class', 'MyAlias');
+        $classGenerator->addUse('My\First\Use\Class', 'MyAlias');
+        $generated = $classGenerator->generate();
+
+        $this->assertCount(1, $classGenerator->getUses());
+
+        $this->assertContains('use My\First\Use\Class as MyAlias;', $generated);
+    }
+
     public function testCreateFromArrayWithDocBlockFromArray()
     {
         $classGenerator = ClassGenerator::fromArray(array(
@@ -416,4 +455,46 @@ CODE;
 
 
     }
+
+    public function testHasMethodInsensitive()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addMethod('methodOne');
+
+        $this->assertTrue($classGenerator->hasMethod('methodOne'));
+        $this->assertTrue($classGenerator->hasMethod('MethoDonE'));
+    }
+
+    public function testRemoveMethodInsensitive()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addMethod('methodOne');
+
+        $classGenerator->removeMethod('METHODONe');
+        $this->assertFalse($classGenerator->hasMethod('methodOne'));
+    }
+
+    public function testGenerateClassAndAddMethod()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('MyClass');
+        $classGenerator->addMethod('methodOne');
+
+        $expected = <<<CODE
+class MyClass
+{
+
+    public function methodOne()
+    {
+    }
+
+
+}
+
+CODE;
+
+        $output = $classGenerator->generate();
+        $this->assertEquals($expected, $output);
+    }
+
 }

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter;
@@ -13,9 +12,6 @@ namespace ZendTest\Filter;
 use Zend\Filter\Int as IntFilter;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class IntTest extends \PHPUnit_Framework_TestCase
@@ -28,6 +24,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function testBasic()
     {
         $filter = new IntFilter();
+
         $valuesExpected = array(
             'string' => 0,
             '1'      => 1,
@@ -40,5 +37,28 @@ class IntTest extends \PHPUnit_Framework_TestCase
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $filter($input));
         }
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                '1',
+                -1
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new IntFilter();
+
+        $this->assertEquals($input, $filter($input));
     }
 }

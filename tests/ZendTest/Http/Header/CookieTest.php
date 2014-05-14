@@ -3,12 +3,11 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
-namespace ZendTest\Http;
+namespace ZendTest\Http\Header;
 
 use Zend\Http\Header\Cookie;
 use Zend\Http\Header\SetCookie;
@@ -16,9 +15,6 @@ use Zend\Http\Header\SetCookie;
 /**
  * Zend_Http_Cookie unit tests
  *
- * @category   Zend
- * @package    Zend_Http_Cookie
- * @subpackage UnitTests
  * @group      Zend_Http
  * @group      Zend_Http_Cookie
  */
@@ -156,7 +152,7 @@ class CookieTest extends \PHPUnit_Framework_TestCase
 //        // Because ';' has special meaning in the cookie, strip it out for this test.
 //        $val = str_replace(';', '', $val);
 //        $cookie = Http\Cookie::fromString('cookie=' . $val . '; domain=example.com', null, false);
-//        $this->assertEquals('cookie=' . $val . ';', (string)$cookie);
+//        $this->assertEquals('cookie=' . $val . ';', (string) $cookie);
 //    }
 //
 //    /**
@@ -170,7 +166,7 @@ class CookieTest extends \PHPUnit_Framework_TestCase
 //        // Because ';' has special meaning in the cookie, strip it out for this test.
 //        $val = str_replace(';', '', $val);
 //        $cookie = Http\Cookie::fromString('cookie=' . $val . '; domain=example.com', null, true);
-//        $this->assertEquals('cookie=' . urlencode($val) . ';', (string)$cookie);
+//        $this->assertEquals('cookie=' . urlencode($val) . ';', (string) $cookie);
 //    }
 //
 //    /**

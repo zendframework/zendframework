@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -13,11 +12,6 @@ namespace ZendTest\Form\View\Helper;
 use Zend\Form\Element;
 use Zend\Form\View\Helper\FormReset as FormResetHelper;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class FormResetTest extends CommonTestCase
 {
     public function setUp()
@@ -173,6 +167,6 @@ class FormResetTest extends CommonTestCase
         $this->assertTrue($this->helper->hasTranslator());
 
         $markup = $this->helper->__invoke($element);
-        $this->assertContains('value="translated content"', $markup);
+        $this->assertContains('value="translated&#x20;content"', $markup);
     }
 }

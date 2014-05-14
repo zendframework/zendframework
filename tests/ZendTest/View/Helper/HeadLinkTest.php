@@ -3,31 +3,26 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper;
 
-use Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry;
 use Zend\View\Helper;
 use Zend\View\Renderer\PhpRenderer as View;
 use Zend\View\Exception\ExceptionInterface as ViewException;
 
 /**
- * Test class for Zend_View_Helper_HeadLink.
+ * Test class for Zend\View\Helper\HeadLink.
  *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 class HeadLinkTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HeadLink
+     * @var Helper\HeadLink
      */
     public $helper;
 
@@ -92,16 +87,16 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         $this->helper->offsetSet(1, 'foo');
     }
 
-    public function testCreatingLinkStackViaHeadScriptCreatesAppropriateOutput()
+    public function testCreatingLinkStackViaHeadLinkCreatesAppropriateOutput()
     {
         $links = array(
             'link1' => array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => 'foo'),
             'link2' => array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => 'bar'),
             'link3' => array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => 'baz'),
         );
-        $this->helper->__invoke($links['link1'])
-                     ->__invoke($links['link2'], 'PREPEND')
-                     ->__invoke($links['link3']);
+        $this->helper->headLink($links['link1'])
+                     ->headLink($links['link2'], 'PREPEND')
+                     ->headLink($links['link3']);
 
         $string = $this->helper->toString();
         $lines  = substr_count($string, PHP_EOL);
@@ -275,6 +270,32 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('/styles.css', $string);
         $this->assertContains('<!--[if ie6]>', $string);
         $this->assertContains('<![endif]-->', $string);
+    }
+
+    public function testConditionalStylesheetCreationNoIE()
+    {
+        $this->helper->setStylesheet('/styles.css', 'screen', '!IE');
+        $item = $this->helper->getValue();
+        $this->assertObjectHasAttribute('conditionalStylesheet', $item);
+        $this->assertEquals('!IE', $item->conditionalStylesheet);
+
+        $string = $this->helper->toString();
+        $this->assertContains('/styles.css', $string);
+        $this->assertContains('<!--[if !IE]><!--><', $string);
+        $this->assertContains('<!--<![endif]-->', $string);
+    }
+
+    public function testConditionalStylesheetCreationNoIEWidthSpaces()
+    {
+        $this->helper->setStylesheet('/styles.css', 'screen', '! IE');
+        $item = $this->helper->getValue();
+        $this->assertObjectHasAttribute('conditionalStylesheet', $item);
+        $this->assertEquals('! IE', $item->conditionalStylesheet);
+
+        $string = $this->helper->toString();
+        $this->assertContains('/styles.css', $string);
+        $this->assertContains('<!--[if ! IE]><!--><', $string);
+        $this->assertContains('<!--<![endif]-->', $string);
     }
 
     public function testSettingAlternateWithTooFewArgsRaisesException()

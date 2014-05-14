@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -40,6 +40,13 @@ class Di implements DependencyInjectionInterface
      * @var array
      */
     protected $currentDependencies = array();
+
+    /**
+     * All the dependenent aliases
+     *
+     * @var array
+     */
+    protected $currentAliasDependenencies = array();
 
     /**
      * All the class references [dependency][source]
@@ -446,6 +453,19 @@ class Di implements DependencyInjectionInterface
             $callParameters = $this->resolveMethodParameters($class, '__construct', $params, $alias, self::METHOD_IS_CONSTRUCTOR, true);
         }
 
+        if (!class_exists($class)) {
+            if (interface_exists($class)) {
+                throw new Exception\ClassNotFoundException(sprintf(
+                    'Cannot instantiate interface "%s"',
+                    $class
+                ));
+            }
+            throw new Exception\ClassNotFoundException(sprintf(
+                'Class "%s" does not exist; cannot instantiate',
+                $class
+            ));
+        }
+
         // Hack to avoid Reflection in most common use cases
         switch (count($callParameters)) {
             case 0:
@@ -531,7 +551,7 @@ class Di implements DependencyInjectionInterface
      * @param  string                                $method
      * @param  array                                 $callTimeUserParams
      * @param  string                                $alias
-     * @param  int|bolean                            $methodRequirementType
+     * @param  int|bool                              $methodRequirementType
      * @param  bool                                  $isInstantiator
      * @throws Exception\MissingPropertyException
      * @throws Exception\CircularDependencyException
@@ -587,6 +607,17 @@ class Di implements DependencyInjectionInterface
 
         if ($requestedClass != $class && $this->instanceManager->hasConfig($requestedClass)) {
             $iConfig['requestedClass'] = $this->instanceManager->getConfig($requestedClass);
+
+            if (array_key_exists('parameters', $iConfig['requestedClass'])) {
+                $newParameters = array();
+
+                foreach ($iConfig['requestedClass']['parameters'] as $name=>$parameter) {
+                    $newParameters[$requestedClass.'::'.$method.'::'.$name] = $parameter;
+                }
+
+                $iConfig['requestedClass']['parameters'] = $newParameters;
+            }
+
             if ($requestedAlias) {
                 $iConfig['requestedAlias'] = $this->instanceManager->getConfig($requestedAlias);
             }
@@ -743,13 +774,21 @@ class Di implements DependencyInjectionInterface
                 $resolvedParams[$index] = $computedParams['value'][$fqParamPos];
             } elseif (isset($computedParams['retrieval'][$fqParamPos])) {
                 // detect circular dependencies! (they can only happen in instantiators)
-                if ($isInstantiator && in_array($computedParams['retrieval'][$fqParamPos][1], $this->currentDependencies)) {
-                    throw new Exception\CircularDependencyException(
-                        "Circular dependency detected: $class depends on {$value[1]} and viceversa"
-                    );
+                if ($isInstantiator && in_array($computedParams['retrieval'][$fqParamPos][1], $this->currentDependencies)
+                    && (!isset($alias) || in_array($computedParams['retrieval'][$fqParamPos][0], $this->currentAliasDependenencies))
+                ) {
+                    $msg = "Circular dependency detected: $class depends on {$value[1]} and viceversa";
+                    if (isset($alias)) {
+                        $msg .= " (Aliased as $alias)";
+                    }
+                    throw new Exception\CircularDependencyException($msg);
                 }
 
                 array_push($this->currentDependencies, $class);
+                if(isset($alias)) {
+                    array_push($this->currentAliasDependenencies, $alias);
+                }
+
                 $dConfig = $this->instanceManager->getConfig($computedParams['retrieval'][$fqParamPos][0]);
 
                 try {
@@ -762,6 +801,9 @@ class Di implements DependencyInjectionInterface
                     if ($methodRequirementType & self::RESOLVE_STRICT) {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
+                        if(isset($alias)) {
+                            array_pop($this->currentAliasDependenencies);
+                        }
                         // if this item was marked strict,
                         // plus it cannot be resolve, and no value exist, bail out
                         throw new Exception\MissingPropertyException(sprintf(
@@ -773,6 +815,9 @@ class Di implements DependencyInjectionInterface
                     } else {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
+                        if(isset($alias)) {
+                            array_pop($this->currentAliasDependenencies);
+                        }
                         return false;
                     }
                 } catch (ServiceManagerException $e) {
@@ -780,6 +825,9 @@ class Di implements DependencyInjectionInterface
                     if ($methodRequirementType & self::RESOLVE_STRICT) {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
+                        if(isset($alias)) {
+                            array_pop($this->currentAliasDependenencies);
+                        }
                         // if this item was marked strict,
                         // plus it cannot be resolve, and no value exist, bail out
                         throw new Exception\MissingPropertyException(sprintf(
@@ -791,10 +839,16 @@ class Di implements DependencyInjectionInterface
                     } else {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
+                        if(isset($alias)) {
+                            array_pop($this->currentAliasDependenencies);
+                        }
                         return false;
                     }
                 }
                 array_pop($this->currentDependencies);
+                if(isset($alias)) {
+                    array_pop($this->currentAliasDependenencies);
+                }
             } elseif (!array_key_exists($fqParamPos, $computedParams['optional'])) {
                 if ($methodRequirementType & self::RESOLVE_STRICT) {
                     // if this item was not marked as optional,
@@ -846,7 +900,7 @@ class Di implements DependencyInjectionInterface
         if (is_subclass_of($className, $type)) {
             return true;
         }
-        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+        if (PHP_VERSION_ID >= 50307) {
             return false;
         }
         if (!interface_exists($type)) {

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -17,7 +17,7 @@ use Zend\Stdlib\ErrorHandler;
 /**
  * Gettext loader.
  */
-class Gettext implements FileLoaderInterface
+class Gettext extends AbstractFileLoader
 {
     /**
      * Current file pointer.
@@ -44,9 +44,10 @@ class Gettext implements FileLoaderInterface
      */
     public function load($locale, $filename)
     {
-        if (!is_file($filename) || !is_readable($filename)) {
+        $resolvedFile = $this->resolveFile($filename);
+        if (!$resolvedFile) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Could not open file %s for reading',
+                'Could not find or open file %s for reading',
                 $filename
             ));
         }
@@ -54,7 +55,7 @@ class Gettext implements FileLoaderInterface
         $textDomain = new TextDomain();
 
         ErrorHandler::start();
-        $this->file = fopen($filename, 'rb');
+        $this->file = fopen($resolvedFile, 'rb');
         $error = ErrorHandler::stop();
         if (false === $this->file) {
             throw new Exception\InvalidArgumentException(sprintf(

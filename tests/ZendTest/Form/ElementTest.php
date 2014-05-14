@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form;
@@ -13,17 +12,18 @@ namespace ZendTest\Form;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class ElementTest extends TestCase
 {
     public function testAttributesAreEmptyByDefault()
     {
         $element = new Element();
         $this->assertEquals(array(), $element->getAttributes());
+    }
+
+    public function testLabelAttributesAreEmptyByDefault()
+    {
+        $element = new Element();
+        $this->assertEquals(array(), $element->getLabelAttributes());
     }
 
     public function testCanAddAttributesSingly()
@@ -40,6 +40,7 @@ class ElementTest extends TestCase
             'type'     => 'text',
             'class'    => 'text-element',
             'data-foo' => 'bar',
+            'x-autocompletetype' => 'email'
         );
         $element->setAttributes($attributes);
         $this->assertEquals($attributes, $element->getAttributes());
@@ -159,11 +160,30 @@ class ElementTest extends TestCase
     {
         $element = new Element('foo');
         $element->setOptions(array(
-                                  'label' => 'foo',
-                                  'label_attributes' => array('bar' => 'baz')
-                             ));
+            'label' => 'foo',
+            'label_attributes' => array('bar' => 'baz')
+        ));
         $option = $element->getOption('label_attributes');
         $this->assertEquals(array('bar' => 'baz'), $option);
+    }
+
+    public function testLabelOptionsAccessors()
+    {
+        $element = new Element('foo');
+        $element->setOptions(array(
+            'label_options' => array('moar' => 'foo')
+        ));
+
+        $labelOptions = $element->getLabelOptions();
+        $this->assertEquals(array('moar' => 'foo'), $labelOptions);
+    }
+
+    public function testCanSetSingleOptionForLabel()
+    {
+        $element = new Element('foo');
+        $element->setOption('label', 'foo');
+        $option = $element->getOption('label');
+        $this->assertEquals('foo', $option);
     }
 
     public function testSetOptionsWrongInputRaisesException()
@@ -202,5 +222,112 @@ class ElementTest extends TestCase
 
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
         $element->setMessages(null);
+    }
+
+    public function testLabelOptionsAreEmptyByDefault()
+    {
+        $element = new Element();
+        $this->assertEquals(array(), $element->getLabelOptions());
+    }
+
+    public function testLabelOptionsCanBeSetViaOptionsArray()
+    {
+        $element = new Element('foo');
+        $element->setOptions(array(
+            'label_options' => array('moar' => 'foo')
+        ));
+
+        $this->assertEquals('foo', $element->getLabelOption('moar'));
+    }
+
+    public function testCanAddLabelOptionSingly()
+    {
+        $element = new Element();
+        $element->setLabelOption('foo', 'bar');
+        $this->assertEquals('bar', $element->getLabelOption('foo'));
+    }
+
+    public function testCanAddManyLabelOptionsAtOnce()
+    {
+        $element = new Element();
+        $options = array(
+            'foo'     => 'bar',
+            'foo2'    => 'baz'
+        );
+        $element->setLabelOptions($options);
+
+        // check each expected key individually
+        foreach($options as $k => $v) {
+            $this->assertEquals($v, $element->getLabelOption($k));
+        }
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testPassingWrongArgumentToSetLabelOptionsThrowsException()
+    {
+        $element = new Element();
+        $element->setLabelOptions(null);
+    }
+
+    public function testSettingLabelOptionsMerges()
+    {
+        $element = new Element();
+        $options = array(
+            'foo'     => 'bar',
+            'foo2'    => 'baz'
+        );
+        $optionsExtra = array(
+            'foo3'    => 'bar2',
+            'foo2'    => 'baz2'
+        );
+        $element->setLabelOptions($options);
+        $element->setLabelOptions($optionsExtra);
+        $expected = array_merge($options, $optionsExtra);
+
+        // check each expected key individually
+        foreach($expected as $k => $v) {
+            $this->assertEquals($v, $element->getLabelOption($k));
+        }
+    }
+
+    public function testCanClearAllLabelOptions()
+    {
+        $element = new Element();
+        $options = array(
+            'foo'     => 'bar',
+            'foo2'    => 'baz'
+        );
+        $element->setLabelOptions($options);
+        $element->clearLabelOptions();
+        $this->assertEquals(array(), $element->getLabelOptions());
+    }
+
+    public function testCanRemoveSingleLabelOption()
+    {
+        $element = new Element();
+        $options = array(
+            'foo'     => 'bar',
+            'foo2'    => 'baz'
+        );
+        $element->setLabelOptions($options);
+        $element->removeLabelOption('foo2');
+        $this->assertFalse($element->hasLabelOption('foo2'));
+    }
+
+    public function testCanRemoveMultipleLabelOptions()
+    {
+        $element = new Element();
+        $options = array(
+            'foo'     => 'bar',
+            'foo2'    => 'baz',
+            'foo3'    => 'bar2'
+        );
+        $element->setLabelOptions($options);
+        $element->removeLabelOptions(array('foo', 'foo2'));
+        $this->assertFalse($element->hasLabelOption('foo'));
+        $this->assertFalse($element->hasLabelOption('foo2'));
+        $this->assertTrue($element->hasLabelOption('foo3'));
     }
 }

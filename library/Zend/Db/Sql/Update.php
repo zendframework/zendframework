@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -119,52 +119,10 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function where($predicate, $combination = Predicate\PredicateSet::OP_AND)
     {
-        if ($predicate === null) {
-            throw new Exception\InvalidArgumentException('Predicate cannot be null');
-        }
-
         if ($predicate instanceof Where) {
             $this->where = $predicate;
-        } elseif ($predicate instanceof \Closure) {
-            $predicate($this->where);
         } else {
-            if (is_string($predicate)) {
-                // String $predicate should be passed as an expression
-                $predicate = new Predicate\Expression($predicate);
-                $this->where->addPredicate($predicate, $combination);
-            } elseif (is_array($predicate)) {
-
-                foreach ($predicate as $pkey => $pvalue) {
-                    // loop through predicates
-
-                    if (is_string($pkey) && strpos($pkey, '?') !== false) {
-                        // First, process strings that the abstraction replacement character ?
-                        // as an Expression predicate
-                        $predicate = new Predicate\Expression($pkey, $pvalue);
-
-                    } elseif (is_string($pkey)) {
-                        // Otherwise, if still a string, do something intelligent with the PHP type provided
-
-                        if ($pvalue === null) {
-                            // map PHP null to SQL IS NULL expression
-                            $predicate = new Predicate\IsNull($pkey, $pvalue);
-                        } elseif (is_array($pvalue)) {
-                            // if the value is an array, assume IN() is desired
-                            $predicate = new Predicate\In($pkey, $pvalue);
-                        } else {
-                            // otherwise assume that array('foo' => 'bar') means "foo" = 'bar'
-                            $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
-                        }
-                    } elseif ($pvalue instanceof Predicate\PredicateInterface) {
-                        // Predicate type is ok
-                        $predicate = $pvalue;
-                    } else {
-                        // must be an array of expressions (with int-indexed array)
-                        $predicate = new Predicate\Expression($pvalue);
-                    }
-                    $this->where->addPredicate($predicate, $combination);
-                }
-            }
+            $this->where->addPredicates($predicate, $combination);
         }
         return $this;
     }
@@ -228,13 +186,13 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $set = implode(', ', $setSql);
         }
 
-        $sql = sprintf($this->specifications[self::SPECIFICATION_UPDATE], $table, $set);
+        $sql = sprintf($this->specifications[static::SPECIFICATION_UPDATE], $table, $set);
 
         // process where
         if ($this->where->count() > 0) {
             $whereParts = $this->processExpression($this->where, $platform, $driver, 'where');
             $parameterContainer->merge($whereParts->getParameterContainer());
-            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts->getSql());
+            $sql .= ' ' . sprintf($this->specifications[static::SPECIFICATION_WHERE], $whereParts->getSql());
         }
         $statementContainer->setSql($sql);
     }
@@ -278,10 +236,10 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
             $set = implode(', ', $setSql);
         }
 
-        $sql = sprintf($this->specifications[self::SPECIFICATION_UPDATE], $table, $set);
+        $sql = sprintf($this->specifications[static::SPECIFICATION_UPDATE], $table, $set);
         if ($this->where->count() > 0) {
             $whereParts = $this->processExpression($this->where, $adapterPlatform, null, 'where');
-            $sql .= ' ' . sprintf($this->specifications[self::SPECIFICATION_WHERE], $whereParts->getSql());
+            $sql .= ' ' . sprintf($this->specifications[static::SPECIFICATION_WHERE], $whereParts->getSql());
         }
         return $sql;
     }

@@ -3,77 +3,97 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Code\Generator\DocBlock\Tag;
 
-use Zend\Code\Generator\DocBlock\Tag;
-use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
+use Zend\Code\Generator\AbstractGenerator;
+use Zend\Code\Generator\DocBlock\TagManager;
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionTagInterface;
 
-class AuthorTag extends Tag
+class AuthorTag extends AbstractGenerator implements TagInterface
 {
     /**
      * @var string
      */
-    protected $datatype = null;
+    protected $authorName = null;
 
     /**
      * @var string
      */
-    protected $paramName = null;
+    protected $authorEmail = null;
 
     /**
-     * @param  ReflectionDocBlockTag $reflectionTagParam
-     * @return AuthorTag
+     * @param string $authorName
+     * @param string $authorEmail
      */
-    public static function fromReflection(ReflectionDocBlockTag $reflectionTagParam)
+    public function __construct($authorName = null, $authorEmail = null)
     {
-        $authorTag = new self();
-        $authorTag
-            ->setName('author')
-            ->setAuthorName($reflectionTagParam->getType()) // @todo rename
-            ->setAuthorEmail($reflectionTagParam->getVariableName())
-            ->setDescription($reflectionTagParam->getDescription());
+        if (!empty($authorName)) {
+            $this->setAuthorName($authorName);
+        }
 
-        return $authorTag;
+        if (!empty($authorEmail)) {
+            $this->setAuthorEmail($authorEmail);
+        }
     }
 
     /**
-     * @param  string $datatype
+     * @param ReflectionTagInterface $reflectionTag
+     * @return ReturnTag
+     * @deprecated Deprecated in 2.3. Use TagManager::createTagFromReflection() instead
+     */
+    public static function fromReflection(ReflectionTagInterface $reflectionTag)
+    {
+        $tagManager = new TagManager();
+        $tagManager->initializeDefaultTags();
+        return $tagManager->createTagFromReflection($reflectionTag);
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'author';
+    }
+
+    /**
+     * @param string $authorEmail
      * @return AuthorTag
      */
-    public function setDatatype($datatype)
+    public function setAuthorEmail($authorEmail)
     {
-        $this->datatype = (string) $datatype;
+        $this->authorEmail = $authorEmail;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getDatatype()
+    public function getAuthorEmail()
     {
-        return $this->datatype;
+        return $this->authorEmail;
     }
 
     /**
-     * @param  string $paramName
+     * @param string $authorName
      * @return AuthorTag
      */
-    public function setParamName($paramName)
+    public function setAuthorName($authorName)
     {
-        $this->paramName = (string) $paramName;
+        $this->authorName = $authorName;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getParamName()
+    public function getAuthorName()
     {
-        return $this->paramName;
+        return $this->authorName;
     }
 
     /**
@@ -81,10 +101,9 @@ class AuthorTag extends Tag
      */
     public function generate()
     {
-        $output = '@param '
-            . (($this->datatype != null) ? $this->datatype : 'unknown')
-            . (($this->paramName != null) ? ' $' . $this->paramName : '')
-            . (($this->description != null) ? ' ' . $this->description : '');
+        $output = '@author'
+            . ((!empty($this->authorName)) ? ' ' . $this->authorName : '')
+            . ((!empty($this->authorEmail)) ? ' <' . $this->authorEmail . '>' : '');
 
         return $output;
     }

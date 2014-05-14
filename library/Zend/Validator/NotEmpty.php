@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -14,19 +14,19 @@ use Zend\Stdlib\ArrayUtils;
 
 class NotEmpty extends AbstractValidator
 {
-    const BOOLEAN       = 1;
-    const INTEGER       = 2;
-    const FLOAT         = 4;
-    const STRING        = 8;
-    const ZERO          = 16;
-    const EMPTY_ARRAY   = 32;
-    const NULL          = 64;
-    const PHP           = 127;
-    const SPACE         = 128;
-    const OBJECT        = 256;
-    const OBJECT_STRING = 512;
-    const OBJECT_COUNT  = 1024;
-    const ALL           = 2047;
+    const BOOLEAN       = 0x001;
+    const INTEGER       = 0x002;
+    const FLOAT         = 0x004;
+    const STRING        = 0x008;
+    const ZERO          = 0x010;
+    const EMPTY_ARRAY   = 0x020;
+    const NULL          = 0x040;
+    const PHP           = 0x07F;
+    const SPACE         = 0x080;
+    const OBJECT        = 0x100;
+    const OBJECT_STRING = 0x200;
+    const OBJECT_COUNT  = 0x400;
+    const ALL           = 0x7FF;
 
     const INVALID  = 'notEmptyInvalid';
     const IS_EMPTY = 'isEmpty';
@@ -48,6 +48,21 @@ class NotEmpty extends AbstractValidator
     );
 
     /**
+     * Default value for types; value = 493
+     *
+     * @var array
+     */
+    protected $defaultType = array(
+        self::OBJECT,
+        self::SPACE,
+        self::NULL,
+        self::EMPTY_ARRAY,
+        self::STRING,
+        self::FLOAT,
+        self::BOOLEAN
+    );
+
+    /**
      * @var array
      */
     protected $messageTemplates = array(
@@ -60,9 +75,7 @@ class NotEmpty extends AbstractValidator
      *
      * @var array
      */
-    protected $options = array(
-        'type' => 493,  // Internal type to detect
-    );
+    protected $options = array();
 
     /**
      * Constructor
@@ -71,6 +84,8 @@ class NotEmpty extends AbstractValidator
      */
     public function __construct($options = null)
     {
+        $this->setType($this->defaultType);
+
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         }
@@ -116,21 +131,26 @@ class NotEmpty extends AbstractValidator
     }
 
     /**
-     * Set the types
-     *
-     * @param  int|array $type
-     * @throws Exception\InvalidArgumentException
-     * @return NotEmpty
+     * @return int
      */
-    public function setType($type = null)
+    public function getDefaultType()
+    {
+        return $this->calculateTypeValue($this->defaultType);
+    }
+
+    /**
+     * @param array|int|string $type
+     * @return int
+     */
+    protected function calculateTypeValue($type)
     {
         if (is_array($type)) {
             $detected = 0;
             foreach ($type as $value) {
                 if (is_int($value)) {
-                    $detected += $value;
+                    $detected |= $value;
                 } elseif (in_array($value, $this->constants)) {
-                    $detected += array_search($value, $this->constants);
+                    $detected |= array_search($value, $this->constants);
                 }
             }
 
@@ -139,11 +159,26 @@ class NotEmpty extends AbstractValidator
             $type = array_search($type, $this->constants);
         }
 
+        return $type;
+    }
+
+    /**
+     * Set the types
+     *
+     * @param  int|array $type
+     * @throws Exception\InvalidArgumentException
+     * @return NotEmpty
+     */
+    public function setType($type = null)
+    {
+        $type = $this->calculateTypeValue($type);
+
         if (!is_int($type) || ($type < 0) || ($type > self::ALL)) {
             throw new Exception\InvalidArgumentException('Unknown type');
         }
 
         $this->options['type'] = $type;
+
         return $this;
     }
 
@@ -167,8 +202,7 @@ class NotEmpty extends AbstractValidator
         $object  = false;
 
         // OBJECT_COUNT (countable object)
-        if ($type >= self::OBJECT_COUNT) {
-            $type -= self::OBJECT_COUNT;
+        if ($type & self::OBJECT_COUNT) {
             $object = true;
 
             if (is_object($value) && ($value instanceof \Countable) && (count($value) == 0)) {
@@ -178,8 +212,7 @@ class NotEmpty extends AbstractValidator
         }
 
         // OBJECT_STRING (object's toString)
-        if ($type >= self::OBJECT_STRING) {
-            $type -= self::OBJECT_STRING;
+        if ($type & self::OBJECT_STRING) {
             $object = true;
 
             if ((is_object($value) && (!method_exists($value, '__toString'))) ||
@@ -190,8 +223,7 @@ class NotEmpty extends AbstractValidator
         }
 
         // OBJECT (object)
-        if ($type >= self::OBJECT) {
-            $type -= self::OBJECT;
+        if ($type & self::OBJECT) {
             // fall trough, objects are always not empty
         } elseif ($object === false) {
             // object not allowed but object given -> return false
@@ -202,8 +234,7 @@ class NotEmpty extends AbstractValidator
         }
 
         // SPACE ('   ')
-        if ($type >= self::SPACE) {
-            $type -= self::SPACE;
+        if ($type & self::SPACE) {
             if (is_string($value) && (preg_match('/^\s+$/s', $value))) {
                 $this->error(self::IS_EMPTY);
                 return false;
@@ -211,8 +242,7 @@ class NotEmpty extends AbstractValidator
         }
 
         // NULL (null)
-        if ($type >= self::NULL) {
-            $type -= self::NULL;
+        if ($type & self::NULL) {
             if ($value === null) {
                 $this->error(self::IS_EMPTY);
                 return false;
@@ -220,8 +250,7 @@ class NotEmpty extends AbstractValidator
         }
 
         // EMPTY_ARRAY (array())
-        if ($type >= self::EMPTY_ARRAY) {
-            $type -= self::EMPTY_ARRAY;
+        if ($type & self::EMPTY_ARRAY) {
             if (is_array($value) && ($value == array())) {
                 $this->error(self::IS_EMPTY);
                 return false;
@@ -229,8 +258,7 @@ class NotEmpty extends AbstractValidator
         }
 
         // ZERO ('0')
-        if ($type >= self::ZERO) {
-            $type -= self::ZERO;
+        if ($type & self::ZERO) {
             if (is_string($value) && ($value == '0')) {
                 $this->error(self::IS_EMPTY);
                 return false;
@@ -238,8 +266,7 @@ class NotEmpty extends AbstractValidator
         }
 
         // STRING ('')
-        if ($type >= self::STRING) {
-            $type -= self::STRING;
+        if ($type & self::STRING) {
             if (is_string($value) && ($value == '')) {
                 $this->error(self::IS_EMPTY);
                 return false;
@@ -247,8 +274,7 @@ class NotEmpty extends AbstractValidator
         }
 
         // FLOAT (0.0)
-        if ($type >= self::FLOAT) {
-            $type -= self::FLOAT;
+        if ($type & self::FLOAT) {
             if (is_float($value) && ($value == 0.0)) {
                 $this->error(self::IS_EMPTY);
                 return false;
@@ -256,8 +282,7 @@ class NotEmpty extends AbstractValidator
         }
 
         // INTEGER (0)
-        if ($type >= self::INTEGER) {
-            $type -= self::INTEGER;
+        if ($type & self::INTEGER) {
             if (is_int($value) && ($value == 0)) {
                 $this->error(self::IS_EMPTY);
                 return false;
@@ -265,8 +290,7 @@ class NotEmpty extends AbstractValidator
         }
 
         // BOOLEAN (false)
-        if ($type >= self::BOOLEAN) {
-            $type -= self::BOOLEAN;
+        if ($type & self::BOOLEAN) {
             if (is_bool($value) && ($value == false)) {
                 $this->error(self::IS_EMPTY);
                 return false;

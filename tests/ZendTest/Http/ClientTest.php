@@ -3,14 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace ZendTest\Http;
 
-use ReflectionClass;
+use Zend\Uri\Http;
 use Zend\Http\Client;
 use Zend\Http\Cookies;
 use Zend\Http\Exception;
@@ -338,5 +337,41 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         // the last request should NOT contain the Authorization header,
         // because example.org is not a subdomain unter sub.example.org
         $this->assertTrue(strpos($client->getLastRawRequest(), $encoded) === false);
+    }
+
+    public function testAdapterAlwaysReachableIfSpecified()
+    {
+        $testAdapter = new Test();
+        $client = new Client('http://www.example.org/', array(
+            'adapter' => $testAdapter,
+        ));
+
+        $this->assertSame($testAdapter, $client->getAdapter());
+    }
+
+    public function testPrepareHeadersCreateRightHttpField()
+    {
+        $body = json_encode(array('foofoo'=>'barbar'));
+
+        $client = new Client();
+        $prepareHeadersReflection = new \ReflectionMethod($client, 'prepareHeaders');
+        $prepareHeadersReflection->setAccessible(true);
+
+        $request= new Request();
+        $request->getHeaders()->addHeaderLine('content-type','application/json');
+        $request->getHeaders()->addHeaderLine('content-length',strlen($body));
+        $client->setRequest($request);
+
+        $client->setEncType('application/json');
+
+        $this->assertSame($client->getRequest(),$request);
+
+        $headers = $prepareHeadersReflection->invoke($client,$body,new Http('http://localhost:5984'));
+
+        $this->assertArrayNotHasKey('content-type', $headers);
+        $this->assertArrayHasKey('Content-Type', $headers);
+
+        $this->assertArrayNotHasKey('content-length', $headers);
+        $this->assertArrayHasKey('Content-Length', $headers);
     }
 }

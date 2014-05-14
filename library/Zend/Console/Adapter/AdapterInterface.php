@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -29,6 +29,7 @@ interface AdapterInterface
      * @param string                   $text
      * @param null|int $color
      * @param null|int $bgColor
+     * @return void
      */
     public function write($text, $color = null, $bgColor = null);
 
@@ -38,6 +39,7 @@ interface AdapterInterface
      * @param string                   $text
      * @param null|int $color
      * @param null|int $bgColor
+     * @return void
      */
     public function writeText($text, $color = null, $bgColor = null);
 
@@ -48,6 +50,7 @@ interface AdapterInterface
      * @param string                   $text
      * @param null|int $color
      * @param null|int $bgColor
+     * @return void
      */
     public function writeLine($text = "", $color = null, $bgColor = null);
 
@@ -59,6 +62,7 @@ interface AdapterInterface
      * @param int                      $y        Console Y coordinate (row)
      * @param null|int $color
      * @param null|int $bgColor
+     * @return void
      */
     public function writeAt($text, $x, $y, $color = null, $bgColor = null);
 
@@ -77,6 +81,7 @@ interface AdapterInterface
      * @param int      $bgColor      (optional) Background color
      * @param null|int $fillColor    (optional) Foreground color of box fill
      * @param null|int $fillBgColor  (optional) Background color of box fill
+     * @return void
      */
     public function writeBox(
         $x1,
@@ -103,6 +108,7 @@ interface AdapterInterface
      * @param int                      $y        Block Y coordinate (row)
      * @param null|int                 $color    (optional) Text color
      * @param null|int $bgColor  (optional) Text background color
+     * @return void
      */
     public function writeTextBlock(
         $text,
@@ -148,16 +154,19 @@ interface AdapterInterface
      *
      * @param int   $x
      * @param int   $y
+     * @return void
      */
     public function setPos($x, $y);
 
     /**
      * Hide console cursor
+     * @return void
      */
     public function hideCursor();
 
     /**
      * Show console cursor
+     * @return void
      */
     public function showCursor();
 
@@ -174,6 +183,7 @@ interface AdapterInterface
      * @param string                     $string
      * @param null|int   $color    Foreground color
      * @param null|int   $bgColor  Background color
+     * @return string
      */
     public function colorize($string, $color = null, $bgColor = null);
 
@@ -181,6 +191,7 @@ interface AdapterInterface
      * Change current drawing color.
      *
      * @param int $color
+     * @return void
      */
     public function setColor($color);
 
@@ -188,11 +199,13 @@ interface AdapterInterface
      * Change current drawing background color
      *
      * @param int $color
+     * @return void
      */
     public function setBgColor($color);
 
     /**
      * Reset color to console default.
+     * @return void
      */
     public function resetColor();
 
@@ -201,6 +214,7 @@ interface AdapterInterface
      * Set Console charset to use.
      *
      * @param CharsetInterface $charset
+     * @return void
      */
     public function setCharset(CharsetInterface $charset);
 
@@ -218,16 +232,19 @@ interface AdapterInterface
 
     /**
      * Clear console screen
+     * @return void
      */
     public function clear();
 
     /**
      * Clear line at cursor position
+     * @return void
      */
     public function clearLine();
 
     /**
      * Clear console screen
+     * @return void
      */
     public function clearScreen();
 

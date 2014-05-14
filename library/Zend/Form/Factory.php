@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -254,6 +254,9 @@ class Factory
             $this->prepareAndInjectFieldsets($spec['fieldsets'], $fieldset, __METHOD__);
         }
 
+        $factory = (isset($spec['factory']) ? $spec['factory'] : $this);
+        $this->prepareAndInjectFactory($factory, $fieldset, __METHOD__);
+
         return $fieldset;
     }
 
@@ -332,6 +335,10 @@ class Factory
         $elements = $this->validateSpecification($elements, $method);
 
         foreach ($elements as $elementSpecification) {
+            if (null === $elementSpecification) {
+                continue;
+            }
+
             $flags = isset($elementSpecification['flags']) ? $elementSpecification['flags'] : array();
             $spec  = isset($elementSpecification['spec'])  ? $elementSpecification['spec']  : array();
 
@@ -437,7 +444,7 @@ class Factory
 
         if (!$hydrator instanceof Hydrator\HydratorInterface) {
             throw new Exception\DomainException(sprintf(
-                '%s expects a valid implementation of Zend\Form\Hydrator\HydratorInterface; received "%s"',
+                '%s expects a valid implementation of Zend\Stdlib\Hydrator\HydratorInterface; received "%s"',
                 $method,
                 $hydratorOrName
             ));
@@ -448,6 +455,46 @@ class Factory
         }
 
         $fieldset->setHydrator($hydrator);
+    }
+
+    /**
+     * Prepare and inject a named factory
+     *
+     * Takes a string indicating a factory class name (or a concrete instance), try first to instantiates the class
+     * by pulling it from service manager, and injects the factory instance into the fieldset.
+     *
+     * @param  string|array|Factory      $factoryOrName
+     * @param  FieldsetInterface         $fieldset
+     * @param  string                    $method
+     * @return void
+     * @throws Exception\DomainException If $factoryOrName is not a string, does not resolve to a known class, or
+     *                                   the class does not extend Form\Factory
+     */
+    protected function prepareAndInjectFactory($factoryOrName, FieldsetInterface $fieldset, $method)
+    {
+        if (is_array($factoryOrName)) {
+            if (!isset($factoryOrName['type'])) {
+                throw new Exception\DomainException(sprintf(
+                    '%s expects array specification to have a type value',
+                    $method
+                ));
+            }
+            $factoryOrName = $factoryOrName['type'];
+        }
+
+        if (is_string($factoryOrName)) {
+            $factoryOrName = $this->getFactoryFromName($factoryOrName);
+        }
+
+        if (!$factoryOrName instanceof Factory) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects a valid extention of Zend\Form\Factory; received "%s"',
+                $method,
+                $factoryOrName
+            ));
+        }
+
+        $fieldset->setFormFactory($factoryOrName);
     }
 
     /**
@@ -558,5 +605,31 @@ class Factory
 
         $hydrator = new $hydratorName;
         return $hydrator;
+    }
+
+    /**
+     * Try to pull factory from service manager, or instantiates it from its name
+     *
+     * @param  string $factoryName
+     * @return mixed
+     * @throws Exception\DomainException
+     */
+    protected function getFactoryFromName($factoryName)
+    {
+        $services = $this->getFormElementManager()->getServiceLocator();
+
+        if ($services && $services->has($factoryName)) {
+            return $services->get($factoryName);
+        }
+
+        if (!class_exists($factoryName)) {
+            throw new Exception\DomainException(sprintf(
+                'Expects string factory name to be a valid class name; received "%s"',
+                $factoryName
+            ));
+        }
+
+        $factory = new $factoryName;
+        return $factory;
     }
 }

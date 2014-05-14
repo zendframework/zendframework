@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mime
  */
 
 namespace ZendTest\Mime;
@@ -13,9 +12,6 @@ namespace ZendTest\Mime;
 use Zend\Mime;
 
 /**
- * @category   Zend
- * @package    Zend_Mime
- * @subpackage UnitTests
  * @group      Zend_Mime
  */
 class MimeTest extends \PHPUnit_Framework_TestCase
@@ -133,6 +129,63 @@ class MimeTest extends \PHPUnit_Framework_TestCase
  =?UTF-8?B?aW1tZW4gaW4gZGVtIFNlZSwgS8O2cGZjaGVuIGluIGRhcyBXYXNzZXIsIFNj?=
  =?UTF-8?B?aHfDpG56Y2hlbiBpbiBkaWUgSMO2aCE=?="),
         );
+    }
+
+    public function testFromMessageMultiPart()
+    {
+        $message = Mime\Message::createFromMessage(
+            '--089e0141a1902f83ee04e0a07b7a'."\r\n"
+            .'Content-Type: multipart/alternative; boundary=089e0141a1902f83e904e0a07b78'."\r\n"
+            ."\r\n"
+            .'--089e0141a1902f83e904e0a07b78'."\r\n"
+            .'Content-Type: text/plain; charset=UTF-8'."\r\n"
+            ."\r\n"
+            .'Foo'."\r\n"
+            ."\r\n"
+            .'--089e0141a1902f83e904e0a07b78'."\r\n"
+            .'Content-Type: text/html; charset=UTF-8'."\r\n"
+            ."\r\n"
+            .'<p>Foo</p>'."\r\n"
+            ."\r\n"
+            .'--089e0141a1902f83e904e0a07b78--'."\r\n"
+            .'--089e0141a1902f83ee04e0a07b7a'."\r\n"
+            .'Content-Type: image/png; name="1.png"'."\r\n"
+            .'Content-Disposition: attachment; filename="1.png"'."\r\n"
+            .'Content-Transfer-Encoding: base64'."\r\n"
+            .'X-Attachment-Id: barquux'."\r\n"
+            ."\r\n"
+            .'Zm9vCg=='."\r\n"
+            .'--089e0141a1902f83ee04e0a07b7a--',
+            '089e0141a1902f83ee04e0a07b7a'
+        );
+        $this->assertSame(2, count($message->getParts()));
+    }
+
+    public static function dataTestFromMessageDecode()
+    {
+        return array(
+            array('äöü', 'quoted-printable', '=C3=A4=C3=B6=C3=BC'),
+            array('Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!', 'quoted-printable', 'Alle meine Entchen schwimmen in dem See, schwimmen in dem See, K=C3=B6pfche=
+n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'),
+            array('foobar', 'base64', 'Zm9vYmFyCg=='),
+        );
+    }
+
+    /**
+     * @dataProvider dataTestFromMessageDecode
+     */
+    public function testFromMessageDecode($input, $encoding, $result)
+    {
+        $parts = Mime\Message::createFromMessage(
+            '--089e0141a1902f83ee04e0a07b7a'."\r\n"
+            .'Content-Type: text/plain; charset=UTF-8'."\r\n"
+            .'Content-Transfer-Encoding: '.$encoding."\r\n"
+            ."\r\n"
+            .$result."\r\n"
+            .'--089e0141a1902f83ee04e0a07b7a--',
+            '089e0141a1902f83ee04e0a07b7a'
+        )->getParts();
+        $this->assertSame($input."\n", $parts[0]->getRawContent());
     }
 
     /**

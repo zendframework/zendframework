@@ -6,6 +6,7 @@
         "zf2",
         "form"
     ],
+    "homepage": "https://github.com/zendframework/zf2",
     "autoload": {
         "psr-0": {
             "Zend\\Form\\": ""
@@ -13,20 +14,37 @@
     },
     "target-dir": "Zend/Form",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-inputfilter": "self.version",
         "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {
+        "zendframework/zend-captcha": "self.version",
+        "zendframework/zend-code": "self.version",
+        "zendframework/zend-eventmanager": "self.version",
+        "zendframework/zend-filter": "self.version",
+        "zendframework/zend-i18n": "self.version",
+        "zendframework/zend-servicemanager": "self.version",
+        "zendframework/zend-validator": "self.version",
+        "zendframework/zend-view": "self.version",
         "zendframework/zendservice-recaptcha": "*"
     },
     "suggest": {
+
+        "zendframework/zend-captcha": "Zend\\Captcha component",
+        "zendframework/zend-code": "Zend\\Code component",
+        "zendframework/zend-eventmanager": "Zend\\EventManager component",
+        "zendframework/zend-filter": "Zend\\Filter component",
+        "zendframework/zend-i18n": "Zend\\I18n component",
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
+        "zendframework/zend-validator": "Zend\\Validator component",
+        "zendframework/zend-view": "Zend\\View component",
         "zendframework/zendservice-recaptcha": "ZendService\\ReCaptcha component"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev",
-            "dev-develop": "2.3-dev"
+            "dev-master": "2.3-dev",
+            "dev-develop": "2.4-dev"
         }
     }
 }

@@ -3,13 +3,12 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\ProgressBar\Adapter;
 
-use Zend\ProgressBar\Adapter\Exception;
 use Zend\Stdlib\ErrorHandler;
 use Zend\Stdlib\StringUtils;
 
@@ -437,8 +436,9 @@ class Console extends AbstractAdapter
                     break;
 
                 case self::ELEMENT_TEXT:
-                    $renderedElements[] = StringUtils::getWrapper($this->charset)->strPad(
-                        substr($text, 0, $this->textWidth),
+                    $wrapper = StringUtils::getWrapper($this->charset);
+                    $renderedElements[] = $wrapper->strPad(
+                        $wrapper->substr($text, 0, $this->textWidth),
                         $this->textWidth,
                         ' ',
                         STR_PAD_RIGHT

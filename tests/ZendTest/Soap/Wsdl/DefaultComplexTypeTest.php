@@ -10,7 +10,6 @@
 namespace ZendTest\Soap\Wsdl;
 
 use Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType;
-use Zend\Soap\Wsdl;
 use ZendTest\Soap\TestAsset\PublicPrivateProtected;
 use ZendTest\Soap\WsdlTestHelper;
 

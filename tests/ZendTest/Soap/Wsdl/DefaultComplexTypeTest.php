@@ -10,15 +10,13 @@
 namespace ZendTest\Soap\Wsdl;
 
 use Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType;
-use Zend\Soap\Wsdl;
 use ZendTest\Soap\TestAsset\PublicPrivateProtected;
 use ZendTest\Soap\WsdlTestHelper;
 
 require_once __DIR__ . '/../TestAsset/commontypes.php';
 
 /**
- * @group      Zend_Soap
- * @group      Zend_Soap_Wsdl
+ * @covers \Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType
  */
 class DefaultComplexTypeTest extends WsdlTestHelper
 {
@@ -46,6 +44,17 @@ class DefaultComplexTypeTest extends WsdlTestHelper
 
         $nodes = $this->xpath->query('//xsd:element[@name="'.(PublicPrivateProtected::PRIVATE_VAR_NAME).'"]');
         $this->assertEquals(0, $nodes->length, 'Document should not contain private fields');
+
+        $this->testDocumentNodes();
+    }
+
+    public function testDoubleClassesAreDiscoveredByStrategy()
+    {
+        $this->strategy->addComplexType('ZendTest\Soap\TestAsset\WsdlTestClass');
+        $this->strategy->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
+
+        $nodes = $this->xpath->query('//xsd:complexType[@name="WsdlTestClass"]');
+        $this->assertEquals(1, $nodes->length);
 
         $this->testDocumentNodes();
     }

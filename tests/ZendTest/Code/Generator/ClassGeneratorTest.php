@@ -497,4 +497,177 @@ CODE;
         $this->assertEquals($expected, $output);
     }
 
+    /**
+     * @group 6274
+     */
+    public function testCanAddConstant()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('My\Class');
+        $classGenerator->addConstant('x', 'value');
+
+        $this->assertTrue($classGenerator->hasConstant('x'));
+        $constant = $classGenerator->getConstant('x');
+        $this->assertTrue($constant instanceof PropertyGenerator);
+        $this->assertTrue($constant->isConst());
+        $this->assertEquals($constant->getDefaultValue()->getValue(), 'value');
+
+    }
+
+    /**
+     * @group 6274
+     */
+    public function testCanAddConstantsWithArrayOfGenerators()
+    {
+        $constants = array(
+            new PropertyGenerator('x', 'value1', PropertyGenerator::FLAG_CONSTANT),
+            new PropertyGenerator('y', 'value2', PropertyGenerator::FLAG_CONSTANT)
+        );
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addConstants($constants);
+
+        $this->assertEquals(count($classGenerator->getConstants()), 2);
+        $constantX = $classGenerator->getConstant('x');
+        $constantY = $classGenerator->getConstant('y');
+
+        $this->assertEquals($constantX->getDefaultValue()->getValue(), 'value1');
+        $this->assertEquals($constantY->getDefaultValue()->getValue(), 'value2');
+    }
+
+    /**
+     * @group 6274
+     */
+    public function testCanAddConstantsWithArrayOfKeyValues()
+    {
+        $constants = array(
+            array( 'name'=> 'x', 'value' => 'value1'),
+            array('name' => 'y', 'value' => 'value2')
+        );
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addConstants($constants);
+
+        $this->assertEquals(count($classGenerator->getConstants()), 2);
+        $constantX = $classGenerator->getConstant('x');
+        $constantY = $classGenerator->getConstant('y');
+
+        $this->assertEquals($constantX->getDefaultValue()->getValue(), 'value1');
+        $this->assertEquals($constantY->getDefaultValue()->getValue(), 'value2');
+    }
+
+    /**
+     * @group 6274
+     */
+    public function testAddConstantThrowsExceptionWithInvalidName()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addConstant(array(), 'value1');
+    }
+
+    /**
+     * @group 6274
+     */
+    public function testAddConstantThrowsExceptionWithInvalidValue()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addConstant('x', null);
+    }
+
+    /**
+     * @group 6274
+     */
+    public function testAddConstantThrowsExceptionOnDuplicate()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addConstant('x', 'value1');
+        $classGenerator->addConstant('x', 'value1');
+    }
+
+    /**
+     * @group 6274
+     */
+    public function testAddPropertyIsBackwardsCompatibleWithConstants()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addProperty('x', 'value1', PropertyGenerator::FLAG_CONSTANT);
+
+        $constantX = $classGenerator->getConstant('x');
+
+        $this->assertEquals($constantX->getDefaultValue()->getValue(), 'value1');
+    }
+
+    /**
+     * @group 6274
+     */
+    public function testAddPropertiesIsBackwardsCompatibleWithConstants()
+    {
+        $constants = array(
+            new PropertyGenerator('x', 'value1', PropertyGenerator::FLAG_CONSTANT),
+            new PropertyGenerator('y', 'value2', PropertyGenerator::FLAG_CONSTANT)
+        );
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addProperties($constants);
+
+        $this->assertEquals(count($classGenerator->getConstants()), 2);
+        $constantX = $classGenerator->getConstant('x');
+        $constantY = $classGenerator->getConstant('y');
+
+        $this->assertEquals($constantX->getDefaultValue()->getValue(), 'value1');
+        $this->assertEquals($constantY->getDefaultValue()->getValue(), 'value2');
+    }
+
+    /**
+     * @group 6274
+     */
+    public function testConstantsAddedFromReflection()
+    {
+        $reflector = new ClassReflection('ZendTest\Code\Generator\TestAsset\TestClassWithManyProperties');
+        $classGenerator = ClassGenerator::fromReflection($reflector);
+
+        $constant = $classGenerator->getConstant('FOO');
+        $this->assertEquals($constant->getDefaultValue()->getValue(), 'foo');
+    }
+
+    /**
+     * @group 6274
+     */
+    public function testClassCanBeGeneratedWithConstantAndPropertyWithSameName()
+    {
+        $reflector = new ClassReflection('ZendTest\Code\Generator\TestAsset\TestSampleSingleClass');
+        $classGenerator = ClassGenerator::fromReflection($reflector);
+        $classGenerator->addProperty('fooProperty', true, PropertyGenerator::FLAG_PUBLIC);
+        $classGenerator->addConstant('fooProperty', 'duplicate');
+
+        $contents = <<<'CODE'
+namespace ZendTest\Code\Generator\TestAsset;
+
+/**
+ * class docblock
+ */
+class TestSampleSingleClass
+{
+
+    const fooProperty = 'duplicate';
+
+    public $fooProperty = true;
+
+    /**
+     * Enter description here...
+     *
+     * @return bool
+     */
+    public function someMethod()
+    {
+        /* test test */
+    }
+
+
+}
+
+CODE;
+
+        $this->assertEquals($classGenerator->generate(), $contents);
+    }
 }

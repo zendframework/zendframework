@@ -50,7 +50,8 @@ class DefaultComplexTypeTest extends WsdlTestHelper
         $this->testDocumentNodes();
     }
 
-    public function testDoubleClassesAreDiscoveredByStrategy() {
+    public function testDoubleClassesAreDiscoveredByStrategy()
+    {
         $this->strategy->addComplexType('ZendTest\Soap\TestAsset\WsdlTestClass');
         $this->strategy->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
 

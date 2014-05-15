@@ -168,7 +168,7 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
         $filter = $this->_filter;
         $filter->setCharList('0');
         $this->assertEquals('a0b', $filter('00a0b00'));
-        
+
         $filter->setCharList('');
         $this->assertEquals('str', $filter(' str '));
     }

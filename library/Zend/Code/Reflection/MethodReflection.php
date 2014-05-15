@@ -424,17 +424,19 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         $count = count($haystack);
         for($i = $position+1;$i < $count; $i++) {
             $tokenType = (is_array($haystack[$i])) ? token_name($haystack[$i][0]) : $haystack[$i];
+            $tokenValue = (is_array($haystack[$i])) ? $haystack[$i][1] : $haystack[$i];
+
             //check for occurance of ( or
-            if(is_array($haystack[$i]) && $tokenType == "T_FUNCTION") {
+            if($tokenType == "T_STRING") {
                 //check to see if function name is passed, if so validate against that
-                if(!is_null($functionName) && $haystack[$i][1] != $functionName) {
+                if(!is_null($functionName) && $tokenValue != $functionName) {
                     $isValid = false;
                     break;
                 }
 
                 $isValid = true;
                 break;
-            } elseif($haystack[$i] == "(") {
+            } elseif($tokenValue == "(") {
                 break;
             }
         }

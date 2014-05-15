@@ -535,4 +535,3 @@ CODE;
         $this->assertEquals($contents, $classGenerator->generate());
     }
 }
-

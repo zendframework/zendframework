@@ -17,8 +17,7 @@ use ZendTest\Soap\WsdlTestHelper;
 require_once __DIR__ . '/../TestAsset/commontypes.php';
 
 /**
- * @group      Zend_Soap
- * @group      Zend_Soap_Wsdl
+ * @covers \Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType
  */
 class DefaultComplexTypeTest extends WsdlTestHelper
 {

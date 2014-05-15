@@ -85,7 +85,7 @@ class Form extends AbstractHelper
         $doctype    = $this->getDoctype();
         $attributes = array();
 
-        if (Doctype::HTML5 !== $doctype && Doctype::XHTML5 !== $doctype) {
+        if (! (Doctype::HTML5 === $doctype || Doctype::XHTML5 === $doctype)) {
             $attributes = array(
                 'action' => '',
                 'method' => 'get',

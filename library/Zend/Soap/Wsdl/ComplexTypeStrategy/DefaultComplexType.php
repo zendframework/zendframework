@@ -32,7 +32,7 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
             ));
         }
 
-        $class = new ReflectionClass($type);
+        $class   = new ReflectionClass($type);
         $phpType = $class->getName();
 
         if (($soapType = $this->scanRegisteredTypes($phpType)) !== null) {

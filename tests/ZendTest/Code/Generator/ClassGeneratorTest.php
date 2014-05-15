@@ -498,7 +498,7 @@ CODE;
     }
 
     /**
-     * @group 6253     
+     * @group 6253
      */
     public function testHereDoc()
     {

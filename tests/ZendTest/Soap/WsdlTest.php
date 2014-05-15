@@ -668,7 +668,7 @@ class WsdlTest extends WsdlTestHelper
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
         $this->assertEquals(
             array(
-                '\ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:WsdlTestClass'
+                'ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:WsdlTestClass'
             ),
             $this->wsdl->getTypes()
         );
@@ -676,7 +676,7 @@ class WsdlTest extends WsdlTestHelper
         $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
         $this->assertEquals(
             array(
-                '\ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:WsdlTestClass'
+                'ZendTest\Soap\TestAsset\WsdlTestClass' => 'tns:WsdlTestClass'
             ),
             $this->wsdl->getTypes()
         );

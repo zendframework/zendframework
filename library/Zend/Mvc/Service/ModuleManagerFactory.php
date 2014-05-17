@@ -109,6 +109,18 @@ class ModuleManagerFactory implements FactoryInterface
             'Zend\ModuleManager\Feature\InputFilterProviderInterface',
             'getInputFilterConfig'
         );
+        $serviceListener->addServiceManager(
+            'LogProcessorManager',
+            'log_processors',
+            'Zend\ModuleManager\Feature\LogProcessorProviderInterface',
+            'getLogProcessorConfig'
+        );
+        $serviceListener->addServiceManager(
+            'LogWriterManager',
+            'log_writers',
+            'Zend\ModuleManager\Feature\LogWriterProviderInterface',
+            'getLogWriterConfig'
+        );
 
         $events = $serviceLocator->get('EventManager');
         $events->attach($defaultListeners);

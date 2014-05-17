@@ -38,7 +38,7 @@ class MongoDBOptions extends AbstractOptions
      * @see http://php.net/manual/en/mongocollection.save.php
      * @var string
      */
-    protected $saveOptions = array('safe' => true);
+    protected $saveOptions = array('w' => 1);
 
     /**
      * Name field

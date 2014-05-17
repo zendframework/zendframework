@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,9 +15,10 @@ use Zend\Permissions\Acl\Role;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View;
 use Zend\View\Helper\Navigation;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
- * Tests Zend_View_Helper_Navigation
+ * Tests Zend\View\Helper\Navigation
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -34,7 +35,7 @@ class NavigationTest extends AbstractTest
     /**
      * View helper
      *
-     * @var Zend\View\Helper\Navigation
+     * @var \Zend\View\Helper\Navigation
      */
     protected $_helper;
 
@@ -304,7 +305,7 @@ class NavigationTest extends AbstractTest
         try {
             $this->_helper->setRole(1337);
             $this->fail('An invalid argument was given, but a ' .
-                        'Zend_View_Exception was not thrown');
+                        'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
         }
@@ -315,7 +316,7 @@ class NavigationTest extends AbstractTest
         try {
             $this->_helper->setRole(new \stdClass());
             $this->fail('An invalid argument was given, but a ' .
-                        'Zend_View_Exception was not thrown');
+                        'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be a string', $e->getMessage());
         }
@@ -356,7 +357,7 @@ class NavigationTest extends AbstractTest
         try {
             Navigation\AbstractHelper::setDefaultRole(1337);
             $this->fail('An invalid argument was given, but a ' .
-                        'Zend_View_Exception was not thrown');
+                        'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be', $e->getMessage());
         }
@@ -367,7 +368,7 @@ class NavigationTest extends AbstractTest
         try {
             Navigation\AbstractHelper::setDefaultRole(new \stdClass());
             $this->fail('An invalid argument was given, but a ' .
-                        'Zend_View_Exception was not thrown');
+                        'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('$role must be', $e->getMessage());
         }
@@ -553,6 +554,18 @@ class NavigationTest extends AbstractTest
         $menu    = $helper()->menu();
         $expected = spl_object_hash($menu->getContainer());
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testSetPluginManagerAndView()
+    {
+        $pluginManager = new \Zend\View\Helper\Navigation\PluginManager();
+        $view = new PhpRenderer();
+
+        $helper = new $this->_helperName;
+        $helper->setPluginManager($pluginManager);
+        $helper->setView($view);
+
+        $this->assertEquals($view, $pluginManager->getRenderer());
     }
 
     /**

@@ -291,7 +291,6 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
     {
         if (preg_match('/^tag:(?P<name>.*),(?P<date>\d{4}-?\d{0,2}-?\d{0,2}):(?P<specific>.*)(.*:)*$/', $id, $matches)) {
             $dvalid = false;
-            $nvalid = false;
             $date = $matches['date'];
             $d6 = strtotime($date);
             if ((strlen($date) == 4) && $date <= date('Y')) {
@@ -353,7 +352,6 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      */
     protected function _loadXhtml($content)
     {
-        $xhtml = '';
         if (class_exists('tidy', false)) {
             $tidy = new \tidy;
             $config = array(

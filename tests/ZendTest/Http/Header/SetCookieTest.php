@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -254,6 +254,19 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($target, $setCookieHeader->getFieldValue());
     }
 
+    /**
+     * Check that setCookie does not fail when an expiry date which is bigger then 2038 is supplied (effect only 32bit systems)
+     */
+    public function testSetCookieSetExpiresWithStringDateBiggerThen2038()
+    {
+        if ( PHP_INT_SIZE !== 4 ) {
+            $this->markTestSkipped('Testing set cookie expiry which is over 2038 is only relevant on 32bit systems');
+            return;
+        }
+        $setCookieHeader = new SetCookie('myname', 'myvalue', 'Thu, 01-Jan-2040 00:00:00 GMT');
+        $this->assertSame(2147483647, $setCookieHeader->getExpires(true));
+    }
+
     public function testIsValidForRequestSubdomainMatch()
     {
         $setCookieHeader = new SetCookie(
@@ -485,6 +498,42 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
                 'Set-Cookie: ',
                 array(),
                 ''
+            ),
+            array(
+                'Set-Cookie: emptykey=    ; Domain=docs.foo.com;',
+                array(
+                    'name'    => 'myname',
+                    'value'   => '',
+                    'domain'  => 'docs.foo.com',
+                ),
+                'emptykey=; Domain=docs.foo.com'
+            ),
+            array(
+                'Set-Cookie: emptykey= ; Domain=docs.foo.com;',
+                array(
+                    'name'    => 'myname',
+                    'value'   => '',
+                    'domain'  => 'docs.foo.com',
+                ),
+                'emptykey=; Domain=docs.foo.com'
+            ),
+            array(
+                'Set-Cookie: emptykey=; Domain=docs.foo.com;',
+                array(
+                    'name'    => 'myname',
+                    'value'   => '',
+                    'domain'  => 'docs.foo.com',
+                ),
+                'emptykey=; Domain=docs.foo.com'
+            ),
+            array(
+                'Set-Cookie: emptykey; Domain=docs.foo.com;',
+                array(
+                    'name'    => 'myname',
+                    'value'   => '',
+                    'domain'  => 'docs.foo.com',
+                ),
+                'emptykey=; Domain=docs.foo.com'
             ),
         );
     }

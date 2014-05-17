@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -22,6 +22,22 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
         rewind($stream);
 
         $response = Stream::fromStream($string, $stream);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals("Foo Bar\r\nBar Foo", $response->getBody());
+    }
+
+    /**
+     * @group 6027
+     *
+     * @covers \Zend\Http\Response\Stream::fromStream
+     */
+    public function testResponseFactoryFromEmptyStringCreatesValidResponse()
+    {
+        $stream = fopen('php://temp','rb+');
+        fwrite($stream, 'HTTP/1.0 200 OK' . "\r\n\r\n".'Foo Bar'."\r\n".'Bar Foo');
+        rewind($stream);
+
+        $response = Stream::fromStream('', $stream);
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals("Foo Bar\r\nBar Foo", $response->getBody());
     }
@@ -75,8 +91,8 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(6, count($response->getHeaders()), 'Header count is expected to be 6');
 
         // Check header integrity
-        $this->assertEquals('timeout=15,max=100', $response->getHeaders()->get('keep-alive')->getFieldValue());
-        $this->assertEquals('text/html;charset=iso-8859-1', $response->getHeaders()->get('content-type')->getFieldValue());
+        $this->assertRegexp("#timeout=15,\r\n\s+max=100#", $response->getHeaders()->get('keep-alive')->getFieldValue());
+        $this->assertRegexp("#text/html;\s+charset=iso-8859-1#s", $response->getHeaders()->get('content-type')->getFieldValue());
     }
 
 

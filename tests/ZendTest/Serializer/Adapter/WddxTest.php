@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -155,7 +155,7 @@ class WddxTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test to unserialize a valid null value by an valid wddx
+     * test to unserialize a valid null value by a valid wddx
      * but with some differenzes to the null cenerated by php
      * -> the invalid check have to success for all valid wddx null
      */

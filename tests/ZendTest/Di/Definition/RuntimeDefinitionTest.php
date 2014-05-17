@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -101,5 +101,18 @@ class RuntimeDefinitionTest extends TestCase
         $definition = new RuntimeDefinition();
         $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'setSomething'));
         $this->assertFalse($definition->hasMethod('ZendTest\Di\TestAsset\AwareClasses\B', 'getSomething'));
+    }
+
+    /**
+     * Test to see if we can introspect explicit classes
+     */
+    public function testExplicitClassesStillGetProccessedByIntrospectionStrategy()
+    {
+        $className = 'ZendTest\Di\TestAsset\ConstructorInjection\OptionalParameters';
+        $explicitClasses = array($className => true);
+        $definition = new RuntimeDefinition(null, $explicitClasses);
+
+        $this->assertTrue($definition->hasClass($className));
+        $this->assertSame(array("__construct"=> 3), $definition->getMethods($className));
     }
 }

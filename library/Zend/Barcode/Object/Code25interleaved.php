@@ -73,6 +73,8 @@ class Code25interleaved extends Code25
             $this->withBorder = false;
         }
 
+        $barcodeTable = array();
+
         // Start character (0000)
         $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
         $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -106,14 +106,6 @@ class RedirectTest extends TestCase
     public function testPluginWithoutRouteMatchesInEventRaisesExceptionWhenNoRouteProvided()
     {
         $this->setExpectedException('Zend\Mvc\Exception\RuntimeException', 'RouteMatch');
-        $url = $this->plugin->toRoute();
-    }
-
-    public function testPluginWithRouteMatchesReturningNoMatchedRouteNameRaisesExceptionWhenNoRouteProvided()
-    {
-        $event = $this->controller->getEvent();
-        $event->setRouteMatch(new RouteMatch(array()));
-        $this->setExpectedException('Zend\Mvc\Exception\RuntimeException', 'matched');
         $url = $this->plugin->toRoute();
     }
 

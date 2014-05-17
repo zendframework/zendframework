@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -133,18 +133,17 @@ class CaptureCacheTest extends CommonPatternTest
     public function testGetFilenameWithoutPublicDir()
     {
         $captureCache = new Cache\Pattern\CaptureCache();
-
-        $this->assertEquals('/index.html', $captureCache->getFilename('/'));
-        $this->assertEquals('/dir1/test', $captureCache->getFilename('/dir1/test'));
-        $this->assertEquals('/dir1/test.html', $captureCache->getFilename('/dir1/test.html'));
-        $this->assertEquals('/dir1/dir2/test.html', $captureCache->getFilename('/dir1/dir2/test.html'));
+        $this->assertEquals(str_replace('/', DIRECTORY_SEPARATOR, '/index.html'), $captureCache->getFilename('/'));
+        $this->assertEquals(str_replace('/', DIRECTORY_SEPARATOR, '/dir1/test'), $captureCache->getFilename('/dir1/test'));
+        $this->assertEquals(str_replace('/', DIRECTORY_SEPARATOR, '/dir1/test.html'), $captureCache->getFilename('/dir1/test.html'));
+        $this->assertEquals(str_replace('/', DIRECTORY_SEPARATOR, '/dir1/dir2/test.html'), $captureCache->getFilename('/dir1/dir2/test.html'));
     }
 
     public function testGetFilenameWithoutPublicDirAndNoPageId()
     {
         $_SERVER['REQUEST_URI'] = '/dir1/test.html';
         $captureCache = new Cache\Pattern\CaptureCache();
-        $this->assertEquals('/dir1/test.html', $captureCache->getFilename());
+        $this->assertEquals(str_replace('/', DIRECTORY_SEPARATOR, '/dir1/test.html'), $captureCache->getFilename());
     }
 
     public function testGetFilenameWithPublicDir()
@@ -156,10 +155,10 @@ class CaptureCacheTest extends CommonPatternTest
         $captureCache = new Cache\Pattern\CaptureCache();
         $captureCache->setOptions($options);
 
-        $this->assertEquals($this->_tmpCacheDir . '/index.html', $captureCache->getFilename('/'));
-        $this->assertEquals($this->_tmpCacheDir . '/dir1/test', $captureCache->getFilename('/dir1/test'));
-        $this->assertEquals($this->_tmpCacheDir . '/dir1/test.html', $captureCache->getFilename('/dir1/test.html'));
-        $this->assertEquals($this->_tmpCacheDir . '/dir1/dir2/test.html', $captureCache->getFilename('/dir1/dir2/test.html'));
+        $this->assertEquals($this->_tmpCacheDir . str_replace('/', DIRECTORY_SEPARATOR, '/index.html'), $captureCache->getFilename('/'));
+        $this->assertEquals($this->_tmpCacheDir . str_replace('/', DIRECTORY_SEPARATOR, '/dir1/test'), $captureCache->getFilename('/dir1/test'));
+        $this->assertEquals($this->_tmpCacheDir . str_replace('/', DIRECTORY_SEPARATOR, '/dir1/test.html'), $captureCache->getFilename('/dir1/test.html'));
+        $this->assertEquals($this->_tmpCacheDir . str_replace('/', DIRECTORY_SEPARATOR, '/dir1/dir2/test.html'), $captureCache->getFilename('/dir1/dir2/test.html'));
     }
 
     public function testGetFilenameWithPublicDirAndNoPageId()
@@ -172,6 +171,6 @@ class CaptureCacheTest extends CommonPatternTest
         $captureCache = new Cache\Pattern\CaptureCache();
         $captureCache->setOptions($options);
 
-        $this->assertEquals($this->_tmpCacheDir . '/dir1/test.html', $captureCache->getFilename());
+        $this->assertEquals($this->_tmpCacheDir . str_replace('/', DIRECTORY_SEPARATOR, '/dir1/test.html'), $captureCache->getFilename());
     }
 }

@@ -8,7 +8,7 @@ and add the library directory to your PHP `include_path`.
 ## SYSTEM REQUIREMENTS
 -------------------
 
-Zend Framework 2 requires PHP 5.3.3 or later.
+Zend Framework 2 requires PHP 5.3.23 or later.
 
 ## DEVELOPMENT VERSIONS
 
@@ -55,7 +55,7 @@ http://www.php.net/manual/en/configuration.changes.php
 A great place to get up-to-speed quickly is the Zend Framework
 QuickStart:
 
-http://framework.zend.com/manual/2.0/en/user-guide/overview.html
+http://framework.zend.com/manual/2.2/en/user-guide/overview.html
 
 The QuickStart covers some of the most commonly used components of ZF.
 Since Zend Framework is designed with a use-at-will architecture and

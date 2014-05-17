@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -645,6 +645,76 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->setExpectedException('\Zend\Console\Exception\RuntimeException');
+        $opts->parse();
+    }
+
+    public function testOptionCallback()
+    {
+        $opts = new Getopt('a', array('-a'));
+        $testVal = null;
+        $opts->setOptionCallback('a', function ($val, $opts) use (&$testVal) {
+            $testVal = $val;
+        });
+        $opts->parse();
+
+        $this->assertTrue($testVal);
+    }
+
+    public function testOptionCallbackAddedByAlias()
+    {
+        $opts = new Getopt(array(
+            'a|apples|apple=s' => "APPLES",
+            'b|bears|bear=s' => "BEARS"
+        ), array(
+            '--apples=Gala',
+            '--bears=Grizzly'
+        ));
+
+        $appleCallbackCalled = null;
+        $bearCallbackCalled = null;
+
+        $opts->setOptionCallback('a', function ($val) use (&$appleCallbackCalled) {
+            $appleCallbackCalled = $val;
+        });
+
+        $opts->setOptionCallback('bear', function ($val) use (&$bearCallbackCalled) {
+            $bearCallbackCalled = $val;
+        });
+
+        $opts->parse();
+
+        $this->assertSame('Gala', $appleCallbackCalled);
+        $this->assertSame('Grizzly', $bearCallbackCalled);
+    }
+
+    public function testOptionCallbackNotCalled()
+    {
+        $opts = new Getopt(array(
+            'a|apples|apple' => "APPLES",
+            'b|bears|bear' => "BEARS"
+        ), array(
+            '--apples=Gala'
+        ));
+
+        $bearCallbackCalled = null;
+
+        $opts->setOptionCallback('bear', function ($val) use (&$bearCallbackCalled) {
+            $bearCallbackCalled = $val;
+        });
+
+        $opts->parse();
+
+        $this->assertNull($bearCallbackCalled);
+    }
+
+    /**
+     * @expectedException \Zend\Console\Exception\RuntimeException
+     * @expectedExceptionMessage The option x is invalid. See usage.
+     */
+    public function testOptionCallbackReturnsFallsAndThrowException()
+    {
+        $opts = new Getopt('x', array('-x'));
+        $opts->setOptionCallback('x', function () {return false;});
         $opts->parse();
     }
 }

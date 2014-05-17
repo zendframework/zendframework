@@ -106,7 +106,7 @@ class InjectionMethod
                     return Di::METHOD_IS_OPTIONAL;
                     break;
                 case "constructor":
-                    return Di::MEHTOD_IS_CONSTRUCTOR;
+                    return Di::METHOD_IS_CONSTRUCTOR;
                     break;
                 case "instantiator":
                     return Di::METHOD_IS_INSTANTIATOR;

@@ -245,8 +245,6 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
         $repeatCount = floor($lengthOfPadding / $padStringLength);
 
         if ($padType === STR_PAD_BOTH) {
-            $lastStringLeft  = '';
-            $lastStringRight = '';
             $repeatCountLeft = $repeatCountRight = ($repeatCount - $repeatCount % 2) / 2;
 
             $lastStringLength       = $lengthOfPadding - 2 * $repeatCountLeft * $padStringLength;

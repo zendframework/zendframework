@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -13,7 +13,7 @@ use DOMDocument;
 use Zend\View;
 
 /**
- * Tests Zend_View_Helper_Navigation_Sitemap
+ * Tests Zend\View\Helper\Navigation\Sitemap
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -32,7 +32,7 @@ class SitemapTest extends AbstractTest
     /**
      * View helper
      *
-     * @var Zend_View_Helper_Navigation_Sitemap
+     * @var \Zend\View\Helper\Navigation\Sitemap
      */
     protected $_helper;
 
@@ -185,7 +185,7 @@ class SitemapTest extends AbstractTest
             return;
         }
 
-        $this->fail('A Zend_View_Exception was not thrown on invalid <loc />');
+        $this->fail('A Zend\View\Exception\InvalidArgumentException was not thrown on invalid <loc />');
     }
 
     public function testDisablingValidators()
@@ -260,6 +260,6 @@ class SitemapTest extends AbstractTest
             return;
         }
 
-        $this->fail('A Zend_View_Exception was not thrown when using Schema validation');
+        $this->fail('A Zend\View\Exception\InvalidArgumentException was not thrown when using Schema validation');
     }
 }

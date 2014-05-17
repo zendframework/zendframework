@@ -287,7 +287,6 @@ class AbstractFeed
     {
         if (preg_match('/^tag:(?P<name>.*),(?P<date>\d{4}-?\d{0,2}-?\d{0,2}):(?P<specific>.*)(.*:)*$/', $id, $matches)) {
             $dvalid = false;
-            $nvalid = false;
             $date = $matches['date'];
             $d6 = strtotime($date);
             if ((strlen($date) == 4) && $date <= date('Y')) {

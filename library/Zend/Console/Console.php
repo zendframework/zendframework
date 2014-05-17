@@ -10,7 +10,7 @@
 namespace Zend\Console;
 
 /**
- * An static, utility class for interacting with Console environment.
+ * A static, utility class for interacting with Console environment.
  * Declared abstract to prevent from instantiating.
  */
 abstract class Console
@@ -30,7 +30,7 @@ abstract class Console
     /**
      * Create and return Adapter\AdapterInterface instance.
      *
-     * @param  null|string  $forceAdapter Optional adapter class name. Ccan be absolute namespace or class name
+     * @param  null|string  $forceAdapter Optional adapter class name. Can be absolute namespace or class name
      *                                    relative to Zend\Console\Adapter\. If not provided, a best matching
      *                                    adapter will be automatically selected.
      * @param  null|string  $forceCharset optional charset name can be absolute namespace or class name relative to

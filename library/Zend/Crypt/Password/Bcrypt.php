@@ -22,8 +22,12 @@ class Bcrypt implements PasswordInterface
 
     /**
      * @var string
+     *
+     * Changed from 14 to 10 to prevent possibile DOS attacks
+     * due to the high computational time
+     * @see http://timoh6.github.io/2013/11/26/Aggressive-password-stretching.html
      */
-    protected $cost = '14';
+    protected $cost = '10';
 
     /**
      * @var string
@@ -83,7 +87,7 @@ class Bcrypt implements PasswordInterface
          * Check for security flaw in the bcrypt implementation used by crypt()
          * @see http://php.net/security/crypt_blowfish.php
          */
-        if ((version_compare(PHP_VERSION, '5.3.7') >= 0) && !$this->backwardCompatibility) {
+        if ((PHP_VERSION_ID >= 50307) && !$this->backwardCompatibility) {
             $prefix = '$2y$';
         } else {
             $prefix = '$2a$';
@@ -104,7 +108,7 @@ class Bcrypt implements PasswordInterface
     }
 
     /**
-     * Verify if a password is correct against an hash value
+     * Verify if a password is correct against a hash value
      *
      * @param  string $password
      * @param  string $hash
@@ -116,22 +120,6 @@ class Bcrypt implements PasswordInterface
         $result = crypt($password, $hash);
         if ($result === $hash) {
             return true;
-        }
-        if (strlen($result) <= 13) {
-            /* This should only happen if the algorithm that generated hash is
-             * either unsupported by this version of crypt(), or is invalid.
-             *
-             * An example of when this can happen, is if you generate
-             * non-backwards-compatible hashes on 5.3.7+, and then try to verify
-             * them on < 5.3.7.
-             *
-             * This is needed, because version comparisons are not possible due
-             * to back-ported functionality by some distributions.
-             */
-            throw new Exception\RuntimeException(
-                'The supplied password hash could not be verified. Please check ' .
-                'backwards compatibility settings.'
-            );
         }
         return false;
     }

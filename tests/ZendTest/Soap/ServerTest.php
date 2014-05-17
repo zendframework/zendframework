@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -658,7 +658,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         if (!is_array($exception)) {
             $this->assertContains($exception, $server->getFaultExceptions());
         } else {
-            foreach($exception as $row) {
+            foreach ($exception as $row) {
                 $this->assertContains($row, $server->getFaultExceptions());
             }
         }
@@ -698,7 +698,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         if (!is_array($exception)) {
             $this->assertTrue($server->isRegisteredAsFaultException($exception));
         } else {
-            foreach($exception as $row) {
+            foreach ($exception as $row) {
                 $this->assertTrue($server->isRegisteredAsFaultException($row));
             }
         }
@@ -937,4 +937,57 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Invalid XML', $response->getMessage());
     }
 
+    public function testDebugMode()
+    {
+        $server = new Server();
+        $beforeDebug = $server->fault(new \Exception('test'));
+        $server->setDebugMode(true);
+        $afterDebug = $server->fault(new \Exception('test'));
+
+        $this->assertEquals('Unknown error', $beforeDebug->getMessage());
+        $this->assertEquals('test', $afterDebug->getMessage());
+    }
+
+    public function testGetOriginalCaughtException()
+    {
+        $server = new Server();
+        $fault = $server->fault(new \Exception('test'));
+
+        $exception = $server->getException();
+        $this->assertInstanceOf('\Exception', $exception);
+        $this->assertEquals('test', $exception->getMessage());
+        $this->assertInstanceOf('\SoapFault', $fault);
+        $this->assertEquals('Unknown error', $fault->getMessage());
+    }
+
+    public function testGetSoapInternalInstance()
+    {
+        $server = new Server();
+        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $internalServer = $server->getSoap();
+        $this->assertInstanceOf('\SoapServer', $internalServer);
+        $this->assertSame($internalServer, $server->getSoap());
+    }
+
+    public function testDisableEntityLoaderAfterException()
+    {
+        $server = new Server();
+        $server->setOptions(array('location'=>'test://', 'uri'=>'http://framework.zend.com'));
+        $server->setReturnResponse(true);
+        $server->setClass('\ZendTest\Soap\TestAsset\ServerTestClass');
+        $loadEntities = libxml_disable_entity_loader(false);
+
+        // Doing a request that is guaranteed to cause an exception in Server::_setRequest():
+        $invalidRequest = '---';
+        $response = @$server->handle($invalidRequest);
+
+        // Sanity check; making sure that an exception has been triggered:
+        $this->assertInstanceOf('\SoapFault', $response);
+
+        // The "disable entity loader" setting should be restored to "false" after the exception is raised:
+        $this->assertFalse(libxml_disable_entity_loader());
+
+        // Cleanup; restoring original setting:
+        libxml_disable_entity_loader($loadEntities);
+    }
 }

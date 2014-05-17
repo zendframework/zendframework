@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -65,37 +65,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
         $page->setAction('bar');
         $this->assertEquals('bar', $page->get('Action'));
-    }
-
-    /**
-     * This functionality was removed in ZF2 to comply with new URL helper; do we need it?
-     *
-     * @group disable
-     */
-    public function testSetShouldNormalizePropertyName()
-    {
-        $page = AbstractPage::factory(array(
-            'type' => 'mvc'
-        ));
-
-        $page->setResetParams(false);
-        $page->set('reset_params', true);
-        $this->assertTrue($page->getResetParams());
-    }
-
-    /**
-     * This functionality was removed in ZF2 to comply with new URL helper; do we need it?
-     *
-     * @group disable
-     */
-    public function testGetShouldNormalizePropertyName()
-    {
-        $page = AbstractPage::factory(array(
-            'type' => 'mvc'
-        ));
-
-        $page->setResetParams(false);
-        $this->assertFalse($page->get('reset_params'));
     }
 
     public function testShouldSetAndGetShouldMapToProperties()
@@ -720,6 +689,17 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
         $page->setVisible(array());
         $this->assertFalse($page->isVisible());
+    }
+
+    public function testSetTranslatorTextDomainString()
+    {
+        $page = AbstractPage::factory(array(
+            'type'  => 'uri',
+            'label' => 'hello'
+        ));
+
+        $page->setTextdomain('foo');
+        $this->assertEquals('foo', $page->getTextdomain());
     }
 
     public function testMagicOverLoadsShouldSetAndGetNativeProperties()

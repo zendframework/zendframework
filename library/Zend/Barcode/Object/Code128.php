@@ -208,9 +208,9 @@ class Code128 extends AbstractObject
         $currentCharset = null;
         $result = array();
 
-        for ($pos = 0; $pos < strlen($string); $pos++) {
+        $strlen = strlen($string);
+        for ($pos = 0; $pos < $strlen; $pos++) {
             $char = $string[$pos];
-            $code = null;
 
             if (static::_isDigit($string, $pos, 4) && $currentCharset != 'C'
              || static::_isDigit($string, $pos, 2) && $currentCharset == 'C') {
@@ -247,7 +247,7 @@ class Code128 extends AbstractObject
                 if ($pos == 0) {
                     $code = array_search("START A", $this->charSets['A']);
                 } else {
-                    $code =array_search("Code A", $this->charSets[$currentCharset]);
+                    $code = array_search("Code A", $this->charSets[$currentCharset]);
                 }
                 $result[] = $code;
                 $currentCharset = 'A';

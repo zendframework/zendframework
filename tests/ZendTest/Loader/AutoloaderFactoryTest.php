@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -70,9 +70,6 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testFactoryCatchesInvalidClasses()
     {
-        if (!version_compare(PHP_VERSION, '5.3.7', '>=')) {
-            $this->markTestSkipped('Cannot test invalid interface loader with versions less than 5.3.7');
-        }
         include __DIR__ . '/_files/InvalidInterfaceAutoloader.php';
         AutoloaderFactory::factory(array(
             'InvalidInterfaceAutoloader' => array()

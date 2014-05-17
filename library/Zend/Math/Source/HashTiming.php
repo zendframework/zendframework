@@ -76,9 +76,8 @@ class HashTiming implements RandomLib\Source
         $msec_per_round = 400;
         $bits_per_round = 2;
         $total          = $size;
-        $bytes          = 0;
         $hash_length    = 20;
-        $rounds         = 0;
+
         while (strlen($result) < $size) {
             $bytes  = ($total > $hash_length)? $hash_length : $total;
             $total -= $bytes;

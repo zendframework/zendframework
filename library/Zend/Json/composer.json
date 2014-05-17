@@ -6,6 +6,7 @@
         "zf2",
         "json"
     ],
+    "homepage": "https://github.com/zendframework/zf2",
     "autoload": {
         "psr-0": {
             "Zend\\Json\\": ""
@@ -13,16 +14,21 @@
     },
     "target-dir": "Zend/Json",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version"
     },
+    "require-dev": {
+        "zendframework/zend-http": "self.version",
+        "zendframework/zend-server": "self.version"
+    },
     "suggest": {
+        "zendframework/zend-http": "Zend\\Http component",
         "zendframework/zend-server": "Zend\\Server component"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev",
-            "dev-develop": "2.3-dev"
+            "dev-master": "2.3-dev",
+            "dev-develop": "2.4-dev"
         }
     }
 }

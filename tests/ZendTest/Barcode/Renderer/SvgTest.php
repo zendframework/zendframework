@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -22,6 +22,42 @@ class SvgTest extends TestCommon
     protected function getRendererObject($options = null)
     {
         return new Svg($options);
+    }
+
+    /**
+     * @group 4708
+     *
+     * Needs to be run first due to runOnce static on drawPolygon
+     */
+    public function testSvgNoTransparency()
+    {
+        $svgCompare = file_get_contents(__DIR__ . '/_files/svg_transparency.xml');
+
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        $barcode = new Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
+        $this->assertFalse($this->renderer->getTransparentBackground());
+        $svgOutput = $this->renderer->draw()->saveXML();
+        $this->assertNotEquals($svgCompare, $svgOutput);
+    }
+
+    /**
+     * @group 4708
+     *
+     * Needs to be run first due to runOnce static on drawPolygon
+     */
+    public function testSvgTransparency()
+    {
+        $svgCompare = file_get_contents(__DIR__ . '/_files/svg_transparency.xml');
+
+        Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
+        $barcode = new Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+        $this->renderer->setTransparentBackground(true);
+        $this->assertTrue($this->renderer->getTransparentBackground());
+        $svgOutput = $this->renderer->draw()->saveXML();
+        $this->assertEquals($svgCompare, $svgOutput);
     }
 
     public function testType()
@@ -105,4 +141,5 @@ class SvgTest extends TestCommon
         $svg->appendChild($rootElement);
         return $this->renderer->setResource($svg);
     }
+
 }

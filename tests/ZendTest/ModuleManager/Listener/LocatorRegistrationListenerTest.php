@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -17,6 +17,7 @@ use Zend\Loader\ModuleAutoloader;
 use Zend\ModuleManager\Listener\LocatorRegistrationListener;
 use Zend\ModuleManager\Listener\ModuleResolverListener;
 use Zend\ModuleManager\ModuleManager;
+use Zend\ModuleManager\ModuleEvent;
 use Zend\Mvc\Application;
 use Zend\ServiceManager\ServiceManager;
 use ZendTest\ModuleManager\TestAsset\MockApplication;
@@ -49,7 +50,7 @@ class LocatorRegistrationListenerTest extends TestCase
 
         $this->moduleManager = new ModuleManager(array('ListenerTestModule'));
         $this->moduleManager->getEventManager()->setSharedManager($this->sharedEvents);
-        $this->moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
 
         $this->application = new MockApplication;
         $events            = new EventManager(array('Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application'));
@@ -93,7 +94,7 @@ class LocatorRegistrationListenerTest extends TestCase
         $locatorRegistrationListener = new LocatorRegistrationListener;
         $this->moduleManager->getEventManager()->attachAggregate($locatorRegistrationListener);
         $test = $this;
-        $this->moduleManager->getEventManager()->attach('loadModule', function ($e) use ($test) {
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, function ($e) use ($test) {
             $test->module = $e->getModule();
         }, -1000);
         $this->moduleManager->loadModules();

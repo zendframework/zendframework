@@ -6,6 +6,7 @@
         "zf2",
         "version"
     ],
+    "homepage": "https://github.com/zendframework/zf2",
     "autoload": {
         "psr-0": {
             "Zend\\Version\\": ""
@@ -13,15 +14,19 @@
     },
     "target-dir": "Zend/Version",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.23",
+        "zendframework/zend-json": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-http": "Allows use of Zend\\Http\\Client to check version information"
     },
     "suggest": {
         "zendframework/zend-json": "To check latest version hosted in GitHub"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev",
-            "dev-develop": "2.3-dev"
+            "dev-master": "2.3-dev",
+            "dev-develop": "2.4-dev"
         }
     }
 }

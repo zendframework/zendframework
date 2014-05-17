@@ -163,7 +163,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
      * @throws Exception\InvalidArgumentException
      * @return Driver\StatementInterface|ResultSet\ResultSet
      */
-    public function query($sql, $parametersOrQueryMode = self::QUERY_MODE_PREPARE)
+    public function query($sql, $parametersOrQueryMode = self::QUERY_MODE_PREPARE, ResultSet\ResultSetInterface $resultPrototype = null)
     {
         if (is_string($parametersOrQueryMode) && in_array($parametersOrQueryMode, array(self::QUERY_MODE_PREPARE, self::QUERY_MODE_EXECUTE))) {
             $mode = $parametersOrQueryMode;
@@ -190,7 +190,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
         }
 
         if ($result instanceof Driver\ResultInterface && $result->isQueryResult()) {
-            $resultSet = clone $this->queryResultSetPrototype;
+            $resultSet = clone ($resultPrototype ?: $this->queryResultSetPrototype);
             $resultSet->initialize($result);
             return $resultSet;
         }

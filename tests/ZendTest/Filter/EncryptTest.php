@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -142,6 +142,35 @@ PIDs9E7uuizAKDhRRRvho8BS
         $this->setExpectedException('\Zend\Filter\Exception\BadMethodCallException', 'Unknown method');
         $filter = new EncryptFilter();
         $filter->getUnknownMethod();
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                'encrypt me',
+                'encrypt me too, please'
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        if (!extension_loaded('mcrypt')) {
+            $this->markTestSkipped('Mcrypt extension not installed');
+        }
+
+        $encrypt = new EncryptFilter(array('adapter' => 'BlockCipher', 'key' => 'testkey'));
+        $encrypt->setVector('1234567890123456890');
+
+        $encrypted = $encrypt->filter($input);
+        $this->assertEquals($input, $encrypted);
     }
 }
 

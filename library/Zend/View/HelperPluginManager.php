@@ -143,13 +143,29 @@ class HelperPluginManager extends AbstractPluginManager
      */
     public function injectTranslator($helper)
     {
-        if ($helper instanceof TranslatorAwareInterface) {
-            $locator = $this->getServiceLocator();
-            if ($locator && $locator->has('MvcTranslator')) {
-                $helper->setTranslator($locator->get('MvcTranslator'));
-            } elseif ($locator && $locator->has('translator')) {
-                $helper->setTranslator($locator->get('translator'));
-            }
+        if (!$helper instanceof TranslatorAwareInterface) {
+            return;
+        }
+
+        $locator = $this->getServiceLocator();
+
+        if (!$locator) {
+            return;
+        }
+
+        if ($locator->has('MvcTranslator')) {
+            $helper->setTranslator($locator->get('MvcTranslator'));
+            return;
+        }
+
+        if ($locator->has('Zend\I18n\Translator\TranslatorInterface')) {
+            $helper->setTranslator($locator->get('Zend\I18n\Translator\TranslatorInterface'));
+            return;
+        }
+
+        if ($locator->has('Translator')) {
+            $helper->setTranslator($locator->get('Translator'));
+            return;
         }
     }
 

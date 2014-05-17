@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -12,6 +12,7 @@ namespace ZendTest\Db\Sql;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Where;
+use Zend\Db\Sql\Having;
 use Zend\Db\Sql\Predicate;
 use Zend\Db\Sql\TableIdentifier;
 use Zend\Db\Adapter\ParameterContainer;
@@ -469,6 +470,21 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @testdox unit test: Test having() returns same Select object (is chainable)
+     * @covers Zend\Db\Sql\Select::having
+     */
+    public function testHavingArgument1IsHavingObject()
+    {
+        $select = new Select;
+        $having = new Having();
+        $return = $select->having($having);
+        $this->assertSame($select, $return);
+        $this->assertSame($having, $select->getRawState('having'));
+
+        return $return;
+    }
+
+    /**
      * @testdox unit test: Test getRawState() returns information populated via having()
      * @covers Zend\Db\Sql\Select::getRawState
      * @depends testHaving
@@ -572,7 +588,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $select->order('foo asc');
         $this->assertEquals(array('foo asc'), $select->getRawState(Select::ORDER));
         $select->reset(Select::ORDER);
-        $this->assertNull($select->getRawState(Select::ORDER));
+        $this->assertEmpty($select->getRawState(Select::ORDER));
     }
 
     /**
@@ -599,6 +615,18 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         if ($expectedParameters) {
             $this->assertEquals($expectedParameters, $parameterContainer->getNamedArray());
         }
+    }
+
+    /**
+     * @group ZF2-5192
+     */
+    public function testSelectUsingTableIdentifierWithEmptyScheme()
+    {
+        $select = new Select;
+        $select->from(new TableIdentifier('foo'));
+        $select->join(new TableIdentifier('bar'), 'foo.id = bar.fooid');
+
+        $this->assertEquals('SELECT "foo".*, "bar".* FROM "foo" INNER JOIN "bar" ON "foo"."id" = "bar"."fooid"', $select->getSqlString(new TrustingSql92Platform()));
     }
 
     /**
@@ -1157,6 +1185,55 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processOffset' => array('?')
         );
 
+        // functions without table
+        $select46 = new Select;
+        $select46->columns(array(
+            new Expression('SOME_DB_FUNCTION_ONE()'),
+            'foo' => new Expression('SOME_DB_FUNCTION_TWO()'),
+        ));
+        $sqlPrep46 = 'SELECT SOME_DB_FUNCTION_ONE() AS Expression1, SOME_DB_FUNCTION_TWO() AS "foo"';
+        $sqlStr46 = 'SELECT SOME_DB_FUNCTION_ONE() AS Expression1, SOME_DB_FUNCTION_TWO() AS "foo"';
+        $params46 = array();
+        $internalTests46 = array();
+
+        // limit with big offset and limit
+        $select47 = new Select;
+        $select47->from('foo')->limit("10000000000000000000")->offset("10000000000000000000");
+        $sqlPrep47 = 'SELECT "foo".* FROM "foo" LIMIT ? OFFSET ?';
+        $sqlStr47 = 'SELECT "foo".* FROM "foo" LIMIT \'10000000000000000000\' OFFSET \'10000000000000000000\'';
+        $params47 = array('limit' => 10000000000000000000, 'offset' => 10000000000000000000);
+        $internalTests47 = array(
+            'processSelect' => array(array(array('"foo".*')), '"foo"'),
+            'processLimit'  => array('?'),
+            'processOffset' => array('?')
+        );
+
+        //combine and union with order at the end
+        $select48 = new Select;
+        $select48->from('foo')->where('a = b');
+        $select48b = new Select;
+        $select48b->from('bar')->where('c = d');
+        $select48->combine($select48b);
+
+        $select48combined = new Select();
+        $select48 = $select48combined->from(array('sub' => $select48))->order('id DESC');
+        $sqlPrep48 = // same
+        $sqlStr48 = 'SELECT "sub".* FROM (( SELECT "foo".* FROM "foo" WHERE a = b ) UNION ( SELECT "bar".* FROM "bar" WHERE c = d )) AS "sub" ORDER BY "id" DESC';
+        $internalTests48 = array(
+            'processCombine' => null,
+        );
+
+        //Expression as joinName
+        $select49 = new Select;
+        $select49->from(new TableIdentifier('foo'))
+                ->join(array('bar' => new Expression('psql_function_which_returns_table')), 'foo.id = bar.fooid');
+        $sqlPrep49 = // same
+        $sqlStr49 = 'SELECT "foo".*, "bar".* FROM "foo" INNER JOIN psql_function_which_returns_table AS "bar" ON "foo"."id" = "bar"."fooid"';
+        $internalTests49 = array(
+            'processSelect' => array(array(array('"foo".*'), array('"bar".*')), '"foo"'),
+            'processJoins' => array(array(array('INNER', 'psql_function_which_returns_table AS "bar"', '"foo"."id" = "bar"."fooid"')))
+        );
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -1213,6 +1290,10 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select43, $sqlPrep43, array(),    $sqlStr43, $internalTests43),
             array($select44, $sqlPrep44, array(),    $sqlStr44, $internalTests44),
             array($select45, $sqlPrep45, $params45,  $sqlStr45, $internalTests45),
+            array($select46, $sqlPrep46, $params46,  $sqlStr46, $internalTests46),
+            array($select47, $sqlPrep47, $params47,  $sqlStr47, $internalTests47),
+            array($select48, $sqlPrep48, array(),    $sqlStr48, $internalTests48),
+            array($select49, $sqlPrep49, array(),    $sqlStr49, $internalTests49),
         );
     }
 }

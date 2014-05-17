@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -29,22 +29,93 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testContentTypeGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('ContentType needs to be completed');
-
-        $contentTypeHeader = new ContentType();
-        $this->assertEquals('xxx', $contentTypeHeader->getFieldValue());
+        $header = ContentType::fromString('Content-Type: application/json');
+        $this->assertEquals('application/json', $header->getFieldValue());
     }
 
     public function testContentTypeToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('ContentType needs to be completed');
+        $header = new ContentType();
+        $header->setMediaType('application/atom+xml')
+               ->setCharset('ISO-8859-1');
 
-        $contentTypeHeader = new ContentType();
-
-        // @todo set some values, then test output
-        $this->assertEmpty('Content-Type: xxx', $contentTypeHeader->toString());
+        $this->assertEquals('Content-Type: application/atom+xml; charset=ISO-8859-1', $header->toString());
     }
 
-    /** Implmentation specific tests here */
+    /** Implementation specific tests here */
 
+    public function wildcardMatches()
+    {
+        return array(
+            'wildcard' => array('*/*'),
+            'wildcard-format' => array('*/*+*'),
+            'wildcard-type-subtype-fixed-format' => array('*/*+json'),
+            'wildcard-type-partial-wildcard-subtype-fixed-format' => array('*/vnd.*+json'),
+            'wildcard-type-format-subtype' => array('*/json'),
+            'fixed-type-wildcard-subtype' => array('application/*'),
+            'fixed-type-wildcard-subtype-fixed-format' => array('application/*+json'),
+            'fixed-type-format-subtype' => array('application/json'),
+            'fixed-type-fixed-subtype-wildcard-format' => array('application/vnd.foobar+*'),
+            'fixed-type-partial-wildcard-subtype-fixed-format' => array('application/vnd.*+json'),
+            'fixed' => array('application/vnd.foobar+json'),
+            'fixed-mixed-case' => array('APPLICATION/vnd.FooBar+json'),
+        );
+    }
+
+    /**
+     * @dataProvider wildcardMatches
+     */
+    public function testMatchWildCard($matchAgainst)
+    {
+        $header = ContentType::fromString('Content-Type: application/vnd.foobar+json');
+        $result = $header->match($matchAgainst);
+        $this->assertEquals(strtolower($matchAgainst), $result);
+    }
+
+    public function invalidMatches()
+    {
+        return array(
+            'format' => array('application/vnd.foobar+xml'),
+            'wildcard-subtype' => array('application/vendor.*+json'),
+            'subtype' => array('application/vendor.foobar+json'),
+            'type' => array('text/vnd.foobar+json'),
+            'wildcard-type-format' => array('*/vnd.foobar+xml'),
+            'wildcard-type-wildcard-subtype' => array('*/vendor.*+json'),
+            'wildcard-type-subtype' => array('*/vendor.foobar+json'),
+        );
+    }
+
+    /**
+     * @dataProvider invalidMatches
+     */
+    public function testFailedMatches($matchAgainst)
+    {
+        $header = ContentType::fromString('Content-Type: application/vnd.foobar+json');
+        $result = $header->match($matchAgainst);
+        $this->assertFalse($result);
+    }
+
+    public function multipleCriteria()
+    {
+        $criteria = array(
+            'application/vnd.foobar+xml',
+            'application/vnd.*+json',
+            'application/vendor.foobar+xml',
+            '*/vnd.foobar+json',
+        );
+        return array(
+            'array' => array($criteria),
+            'string' => array(implode(',', $criteria)),
+        );
+    }
+
+    /**
+     * @dataProvider multipleCriteria
+     */
+    public function testReturnsMatchingMediaTypeOfFirstCriteriaToValidate($criteria)
+    {
+        $header = ContentType::fromString('Content-Type: application/vnd.foobar+json');
+        $result = $header->match($criteria);
+        $this->assertEquals('application/vnd.*+json', $result);
+    }
 }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -143,20 +143,67 @@ class ArrayUtilsTest extends TestCase
     public static function mergeArrays()
     {
         return array(
-            'merge-integer-and-string keys' => array(
+            'merge-integer-and-string-keys' => array(
                 array(
                     'foo',
-                    3 => 'bar',
-                    'baz' => 'baz'
+                    3     => 'bar',
+                    'baz' => 'baz',
+                    4     => array(
+                        'a',
+                        1 => 'b',
+                        'c',
+                    ),
                 ),
                 array(
                     'baz',
+                    4 => array(
+                        'd' => 'd',
+                    ),
                 ),
+                false,
                 array(
                     0     => 'foo',
                     3     => 'bar',
                     'baz' => 'baz',
-                    4     => 'baz'
+                    4     => array(
+                        'a',
+                        1 => 'b',
+                        'c',
+                    ),
+                    5     => 'baz',
+                    6     => array(
+                        'd' => 'd',
+                    ),
+                )
+            ),
+            'merge-integer-and-string-keys-preserve-numeric' => array(
+                array(
+                    'foo',
+                    3     => 'bar',
+                    'baz' => 'baz',
+                    4     => array(
+                        'a',
+                        1 => 'b',
+                        'c',
+                    ),
+                ),
+                array(
+                    'baz',
+                    4 => array(
+                        'd' => 'd',
+                    ),
+                ),
+                true,
+                array(
+                    0     => 'baz',
+                    3     => 'bar',
+                    'baz' => 'baz',
+                    4 => array(
+                        'a',
+                        1 => 'b',
+                        'c',
+                        'd' => 'd',
+                    ),
                 )
             ),
             'merge-arrays-recursively' => array(
@@ -170,6 +217,7 @@ class ArrayUtilsTest extends TestCase
                         'baz'
                     )
                 ),
+                false,
                 array(
                     'foo' => array(
                         0 => 'baz',
@@ -186,9 +234,30 @@ class ArrayUtilsTest extends TestCase
                     'foo' => 'baz',
                     'bar' => 'bat'
                 ),
+                false,
                 array(
                     'foo' => 'baz',
                     'bar' => 'bat'
+                )
+            ),
+            'merge-with-null' => array(
+                array(
+                    'foo' => null,
+                    null  => 'rod',
+                    'cat' => 'bar',
+                    'god' => 'rad'
+                ),
+                array(
+                    'foo' => 'baz',
+                    null  => 'zad',
+                    'god' => null
+                ),
+                false,
+                array(
+                    'foo' => 'baz',
+                    null  => 'zad',
+                    'cat' => 'bar',
+                    'god' => null
                 )
             ),
         );
@@ -340,9 +409,9 @@ class ArrayUtilsTest extends TestCase
     /**
      * @dataProvider mergeArrays
      */
-    public function testMerge($a, $b, $expected)
+    public function testMerge($a, $b, $preserveNumericKeys, $expected)
     {
-        $this->assertEquals($expected, ArrayUtils::merge($a, $b));
+        $this->assertEquals($expected, ArrayUtils::merge($a, $b, $preserveNumericKeys));
     }
 
     /**

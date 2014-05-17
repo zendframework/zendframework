@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -14,7 +14,6 @@ use Zend\Code\Generator\ValueGenerator;
 use Zend\Code\Reflection\ParameterReflection;
 
 /**
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
@@ -227,5 +226,21 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
         $param = ParameterGenerator::fromReflection($params[0]);
 
         $this->assertEquals('\OtherNamespace\ParameterClass', $param->getType());
+    }
+
+    /**
+     * @group 6023
+     *
+     * @coversNothing
+     */
+    public function testGeneratedParametersHaveEscapedDefaultValues()
+    {
+        $parameter = new ParameterGenerator();
+
+        $parameter->setName('foo');
+        $parameter->setDefaultValue("\\'");
+        $parameter->setType('stdClass');
+
+        $this->assertSame("stdClass \$foo = '\\\\\\''", $parameter->generate());
     }
 }

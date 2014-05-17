@@ -14,7 +14,6 @@ use DOMDocument;
 use DOMDocumentFragment;
 use DOMElement;
 use DOMXPath;
-use Zend\Soap\Exception\InvalidArgumentException;
 use Zend\Soap\Wsdl\ComplexTypeStrategy\ComplexTypeStrategyInterface as ComplexTypeStrategy;
 use Zend\Uri\Uri;
 
@@ -813,7 +812,7 @@ class Wsdl
      */
     protected function arrayToAttributes(\DOMNode $node, array $attributes, $withSanitizer = true)
     {
-        foreach($attributes as $attributeName => $attributeValue) {
+        foreach ($attributes as $attributeName => $attributeValue) {
             if ($withSanitizer) {
                 $this->setAttributeWithSanitization($node, $attributeName, $attributeValue);
             } else {

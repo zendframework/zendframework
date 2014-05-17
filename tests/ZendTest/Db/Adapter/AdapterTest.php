@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -272,6 +272,9 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
 
         $r = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE);
         $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $r);
+
+        $r = $this->adapter->query($sql, Adapter::QUERY_MODE_EXECUTE, new TemporaryResultSet());
+        $this->assertInstanceOf('ZendTest\Db\Adapter\TemporaryResultSet', $r);
     }
 
     /**
@@ -297,4 +300,8 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('InvalidArgumentException', 'Invalid magic');
         $this->adapter->foo;
     }
+}
+
+class TemporaryResultSet extends \Zend\Db\ResultSet\ResultSet
+{
 }

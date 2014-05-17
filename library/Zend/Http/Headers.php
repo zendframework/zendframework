@@ -24,7 +24,7 @@ use Zend\Loader\PluginClassLocator;
 class Headers implements Countable, Iterator
 {
     /**
-     * @var PluginClassLoader
+     * @var PluginClassLocator
      */
     protected $pluginClassLoader = null;
 
@@ -68,16 +68,16 @@ class Headers implements Countable, Iterator
                     'name' => $matches['name'],
                     'line' => trim($line)
                 );
-            } elseif (preg_match('/^\s+.*$/', $line, $matches)) {
+            } elseif (preg_match('/^(?P<ws>\s+).*$/', $line, $matches)) {
                 // continuation: append to current line
-                $current['line'] .= trim($line);
+                $current['line'] .= "\r\n" . $matches['ws'] . trim($line);
             } elseif (preg_match('/^\s*$/', $line)) {
                 // empty line indicates end of headers
                 break;
             } else {
                 // Line does not match header format!
                 throw new Exception\RuntimeException(sprintf(
-                    'Line "%s"does not match header format!',
+                    'Line "%s" does not match header format!',
                     $line
                 ));
             }

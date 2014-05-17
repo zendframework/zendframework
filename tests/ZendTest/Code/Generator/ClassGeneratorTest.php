@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -16,7 +16,6 @@ use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Reflection\ClassReflection;
 
 /**
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  */
@@ -456,4 +455,46 @@ CODE;
 
 
     }
+
+    public function testHasMethodInsensitive()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addMethod('methodOne');
+
+        $this->assertTrue($classGenerator->hasMethod('methodOne'));
+        $this->assertTrue($classGenerator->hasMethod('MethoDonE'));
+    }
+
+    public function testRemoveMethodInsensitive()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addMethod('methodOne');
+
+        $classGenerator->removeMethod('METHODONe');
+        $this->assertFalse($classGenerator->hasMethod('methodOne'));
+    }
+
+    public function testGenerateClassAndAddMethod()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('MyClass');
+        $classGenerator->addMethod('methodOne');
+
+        $expected = <<<CODE
+class MyClass
+{
+
+    public function methodOne()
+    {
+    }
+
+
+}
+
+CODE;
+
+        $output = $classGenerator->generate();
+        $this->assertEquals($expected, $output);
+    }
+
 }

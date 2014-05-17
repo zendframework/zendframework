@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -166,6 +166,22 @@ class AnnotationBuilderTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $composed);
         $this->assertTrue($composed->has('username'));
         $this->assertTrue($composed->has('password'));
+    }
+
+    public function testAllowsComposingMultipleChildEntities()
+    {
+        $entity  = new TestAsset\Annotation\EntityComposingMultipleEntities();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $this->assertTrue($form->has('composed'));
+        $composed = $form->get('composed');
+
+        $this->assertInstanceOf('Zend\Form\Element\Collection', $composed);
+        $target = $composed->getTargetElement();
+        $this->assertInstanceOf('Zend\Form\FieldsetInterface', $target);
+        $this->assertTrue($target->has('username'));
+        $this->assertTrue($target->has('password'));
     }
 
     public function testCanHandleOptionsAnnotation()

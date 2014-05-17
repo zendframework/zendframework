@@ -9,7 +9,7 @@
 
 namespace Zend\I18n\View\Helper;
 
-use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorInterface as Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\View\Helper\AbstractHelper;
 

@@ -1,23 +1,27 @@
-### Welcome to the *Zend Framework 2.2* Release!
+### Welcome to the *Zend Framework 2.3* Release!
 
-Master: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=master)](http://travis-ci.org/zendframework/zf2)
-Develop: [![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=develop)](http://travis-ci.org/zendframework/zf2)
+Master:
+[![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=master)](http://travis-ci.org/zendframework/zf2)
+[![Coverage Status](https://coveralls.io/repos/zendframework/zf2/badge.png?branch=master)](https://coveralls.io/r/zendframework/zf2)
+Develop:
+[![Build Status](https://secure.travis-ci.org/zendframework/zf2.png?branch=develop)](http://travis-ci.org/zendframework/zf2)
+[![Coverage Status](https://coveralls.io/repos/zendframework/zf2/badge.png?branch=develop)](https://coveralls.io/r/zendframework/zf2)
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.2.6dev*
+*Zend Framework 2.3.2dev*
 
-This is the sixth maintenance release for the 2.2 series.
+This is the second maintenance release for the version 2.3 series.
 
 DD MMM YYYY
 
-### UPDATES IN 2.2.6
+### UPDATES IN 2.3.2
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 
 ### SYSTEM REQUIREMENTS
 
-Zend Framework 2 requires PHP 5.3.3 or later; we recommend using the
+Zend Framework 2 requires PHP 5.3.23 or later; we recommend using the
 latest PHP version whenever possible.
 
 ### INSTALLATION

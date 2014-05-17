@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -21,10 +21,15 @@ class Address
      */
     protected $city;
 
+    /**
+     * @var array
+     */
+    protected $phones = array();
+
 
     /**
      * @param $street
-     * @return Address
+     * @return self
      */
     public function setStreet($street)
     {
@@ -42,7 +47,7 @@ class Address
 
     /**
      * @param City $city
-     * @return Address
+     * @return self
      */
     public function setCity(City $city)
     {
@@ -56,5 +61,23 @@ class Address
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * @param array $phones
+     * @return self
+     */
+    public function setPhones(array $phones)
+    {
+        $this->phones = $phones;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPhones()
+    {
+        return $this->phones;
     }
 }

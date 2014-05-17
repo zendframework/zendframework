@@ -9,11 +9,10 @@
 
 namespace Zend\I18n\Translator;
 
-
 trait TranslatorAwareTrait
 {
     /**
-     * @var Translator
+     * @var TranslatorInterface
      */
     protected $translator = null;
 
@@ -30,15 +29,15 @@ trait TranslatorAwareTrait
     /**
      * Sets translator to use in helper
      *
-     * @param Translator $translator
-     * @param string $textDomain
+     * @param TranslatorInterface $translator
+     * @param string              $textDomain
      * @return mixed
      */
-    public function setTranslator(Translator $translator = null, $textDomain = null)
+    public function setTranslator(TranslatorInterface $translator = null, $textDomain = null)
     {
         $this->translator = $translator;
 
-        if (!is_null($textDomain)) {
+        if (null !== $textDomain) {
             $this->setTranslatorTextDomain($textDomain);
         }
 
@@ -48,7 +47,7 @@ trait TranslatorAwareTrait
     /**
      * Returns translator used in object
      *
-     * @return Translator
+     * @return TranslatorInterface
      */
     public function getTranslator()
     {
@@ -62,7 +61,7 @@ trait TranslatorAwareTrait
      */
     public function hasTranslator()
     {
-        return !is_null($this->translator);
+        return (null !== $this->translator);
     }
 
     /**

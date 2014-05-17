@@ -18,6 +18,8 @@ use Iterator;
 
 /**
  * Nodelist for DOM XPath query
+ * @deprecated
+ * @see \Zend\Dom\Document\NodeList
  */
 class NodeList implements Iterator, Countable, ArrayAccess
 {
@@ -193,7 +195,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      *
      * @param  mixed $key
      * @param  mixed $value
-     * @throws Exception\BadMethodCallException when attemptingn to write to a read-only item
+     * @throws Exception\BadMethodCallException when attempting to write to a read-only item
      */
     public function offsetSet($key, $value)
     {
@@ -204,7 +206,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      * ArrayAccess: unset offset
      *
      * @param  mixed $key
-     * @throws Exception\BadMethodCallException when attemptingn to unset a read-only item
+     * @throws Exception\BadMethodCallException when attempting to unset a read-only item
      */
     public function offsetUnset($key)
     {

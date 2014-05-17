@@ -193,11 +193,12 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
     /**
      * Removes the given page from the container
      *
-     * @param  Page\AbstractPage|int $page page to remove, either a page
-     *                                     instance or a specific page order
+     * @param  Page\AbstractPage|int $page      page to remove, either a page
+     *                                          instance or a specific page order
+     * @param  bool                  $recursive [optional] whether to remove recursively
      * @return bool whether the removal was successful
      */
-    public function removePage($page)
+    public function removePage($page, $recursive = false)
     {
         if ($page instanceof Page\AbstractPage) {
             $hash = $page->hashCode();
@@ -215,6 +216,16 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
             unset($this->index[$hash]);
             $this->dirtyIndex = true;
             return true;
+        }
+
+        if ($recursive) {
+            /** @var \Zend\Navigation\Page\AbstractPage $childPage */
+            foreach ($this->pages as $childPage) {
+                if ($childPage->hasPage($page, true)) {
+                    $childPage->removePage($page, true);
+                    return true;
+                }
+            }
         }
 
         return false;
@@ -258,10 +269,20 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
     /**
      * Returns true if container contains any pages
      *
+     * @param  bool $onlyVisible whether to check only visible pages
      * @return bool  whether container has any pages
      */
-    public function hasPages()
+    public function hasPages($onlyVisible = false)
     {
+        if ($onlyVisible) {
+            foreach ($this->pages as $page) {
+                if ($page->isVisible()) {
+                    return true;
+                }
+            }
+            // no visible pages found
+            return false;
+        }
         return count($this->index) > 0;
     }
 

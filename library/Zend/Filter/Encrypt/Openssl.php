@@ -290,7 +290,7 @@ class Openssl implements EncryptionAlgorithmInterface
     }
 
     /**
-     * Sets a internal compression for values to encrypt
+     * Sets an internal compression for values to encrypt
      *
      * @param string|array $compression
      * @return self

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -74,7 +74,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      * Determine system TMP directory
      *
      * @return string
-     * @throws Zend_File_Transfer_Exception if unable to determine directory
+     * @throws \Zend\File\Transfer\Exception\RuntimeException if unable to determine directory
      */
     protected function getTmpDir()
     {

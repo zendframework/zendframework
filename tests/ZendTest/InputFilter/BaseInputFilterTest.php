@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -221,6 +221,41 @@ class BaseInputFilterTest extends TestCase
         $filter->setValidationGroup('bar', 'nest');
         $filter->setData($invalidData);
         $this->assertFalse($filter->isValid());
+    }
+
+    public function testResetEmptyValidationGroupRecursively()
+    {
+        $data = array(
+            'flat' => 'foo',
+            'deep' => array(
+                'deep-input1' => 'deep-foo1',
+                'deep-input2' => 'deep-foo2',
+            )
+        );
+        $filter = new InputFilter;
+        $filter->add(new Input, 'flat');
+        $deepInputFilter = new InputFilter;
+        $deepInputFilter->add(new Input, 'deep-input1');
+        $deepInputFilter->add(new Input, 'deep-input2');
+        $filter->add($deepInputFilter, 'deep');
+        $filter->setData($data);
+        $filter->setValidationGroup(array('deep' => 'deep-input1'));
+        // reset validation group
+        $filter->setValidationGroup(InputFilter::VALIDATE_ALL);
+        $this->assertEquals($data, $filter->getValues());
+    }
+
+    public function testSetDeepValidationGroupToNonInputFilterThrowsException()
+    {
+        $filter = $this->getInputFilter();
+        $filter->add(new Input, 'flat');
+        // we expect setValidationGroup to throw an exception when flat is treated
+        // like an inputfilter which it actually isn't
+        $this->setExpectedException(
+            'Zend\InputFilter\Exception\InvalidArgumentException',
+            'Input "flat" must implement InputFilterInterface'
+        );
+        $filter->setValidationGroup(array('flat' => 'foo'));
     }
 
     public function testCanRetrieveInvalidInputsOnFailedValidation()
@@ -830,6 +865,7 @@ class BaseInputFilterTest extends TestCase
 
     /**
      * @group 5270
+     * @requires extension intl
      */
     public function testIsValidWhenValuesSetOnFilters()
     {
@@ -859,5 +895,21 @@ class BaseInputFilterTest extends TestCase
         $filter->get('foo')->setValue('thisisavalidstring');
         $this->assertTrue($filter->get('foo')->isValid(), 'Filtered value is not valid');
         $this->assertTrue($filter->isValid(), 'Input filter did return value from filter');
+    }
+
+    /**
+     * @group 5638
+     */
+    public function testPopulateSupportsArrayInputEvenIfDataMissing()
+    {
+        $arrayInput = $this->getMock('Zend\InputFilter\ArrayInput');
+        $arrayInput
+            ->expects($this->once())
+            ->method('setValue')
+            ->with(array());
+
+        $filter = new InputFilter();
+        $filter->add($arrayInput, 'arrayInput');
+        $filter->setData(array('foo' => 'bar'));
     }
 }

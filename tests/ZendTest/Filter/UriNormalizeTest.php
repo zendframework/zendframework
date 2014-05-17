@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -62,5 +62,28 @@ class UriNormalizeTest extends \PHPUnit_Framework_TestCase
             array('ftp', 'www.example.com/path/to/file.ext', 'ftp://www.example.com/path/to/file.ext'),
             array('http', '/just/a/path', '/just/a/path') // cannot be enforced, no host
         );
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                'http://www.example.com',
+                'file:///home/shahar/secret/../../otherguy/secret'
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new UriNormalize();
+
+        $this->assertEquals($input, $filter($input));
     }
 }

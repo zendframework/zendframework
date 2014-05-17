@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -17,6 +17,45 @@ use Zend\Uri\Http as HttpUri;
 
 class TranslatorAwareTreeRouteStackTest extends TestCase
 {
+    /**
+     * @var string
+     */
+    protected $testFilesDir;
+
+    /**
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
+     * @var array
+     */
+    protected $fooRoute;
+
+    public function setUp()
+    {
+        $this->testFilesDir = __DIR__ . '/_files';
+
+        $this->translator = new Translator();
+        $this->translator->addTranslationFile('phpArray', $this->testFilesDir . '/tokens.en.php', 'route', 'en');
+        $this->translator->addTranslationFile('phpArray', $this->testFilesDir . '/tokens.de.php', 'route', 'de');
+
+        $this->fooRoute = array(
+            'type' => 'Segment',
+            'options' => array(
+                'route' => '/:locale',
+            ),
+            'child_routes' => array(
+                'index' => array(
+                    'type' => 'Segment',
+                    'options' => array(
+                        'route' => '/{homepage}',
+                    ),
+                ),
+            ),
+        );
+    }
+
     public function testTranslatorAwareInterfaceImplementation()
     {
         $stack = new TranslatorAwareTreeRouteStack();
@@ -91,5 +130,35 @@ class TranslatorAwareTreeRouteStackTest extends TestCase
         $stack->addRoute('test', $route);
 
         $stack->assemble(array(), array('name' => 'test', 'translator' => $translator, 'uri' => $uri));
+    }
+
+    public function testAssembleRouteWithParameterLocale()
+    {
+        $stack = new TranslatorAwareTreeRouteStack();
+        $stack->setTranslator($this->translator, 'route');
+        $stack->addRoute(
+            'foo',
+            $this->fooRoute
+        );
+
+        $this->assertEquals('/de/hauptseite', $stack->assemble(array('locale' => 'de'), array('name' => 'foo/index')));
+        $this->assertEquals('/en/homepage',   $stack->assemble(array('locale' => 'en'), array('name' => 'foo/index')));
+    }
+
+    public function testMatchRouteWithParameterLocale()
+    {
+        $stack = new TranslatorAwareTreeRouteStack();
+        $stack->setTranslator($this->translator, 'route');
+        $stack->addRoute(
+            'foo',
+            $this->fooRoute
+        );
+
+        $request = new Request();
+        $request->setUri('http://example.com/de/hauptseite');
+
+        $match = $stack->match($request);
+        $this->assertNotNull($match);
+        $this->assertEquals('foo/index', $match->getMatchedRouteName());
     }
 }

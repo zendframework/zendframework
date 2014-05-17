@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -85,8 +85,32 @@ class SocketTest extends CommonHttpTests
         $this->assertFalse($options['ssl']['allow_self_signed']);
     }
 
+
     /**
-     * Test that a Zend_Config object can be used to set configuration
+     * Test Certificate File Option
+     * The configuration is set to a legitimate certificate bundle file,
+     * to exclude errors from being thrown from an invalid cafile context being set.
+     */
+    public function testConnectingViaSslUsesCertificateFileContext()
+    {
+        $config = array(
+          'timeout' => 30,
+          'sslcafile' => __DIR__ . '/_files/ca-bundle.crt',
+        );
+        $this->_adapter->setOptions($config);
+        try {
+            $this->_adapter->connect('localhost', 443, true);
+        } catch (\Zend\Http\Client\Adapter\Exception\RuntimeException $e) {
+            // Test is designed to allow connect failure because we're interested
+            // only in the stream context state created within that method.
+        }
+        $context = $this->_adapter->getStreamContext();
+        $options = stream_context_get_options($context);
+        $this->assertEquals($config['sslcafile'], $options['ssl']['cafile']);
+    }
+
+    /**
+     * Test that a Zend\Config object can be used to set configuration
      *
      * @link http://framework.zend.com/issues/browse/ZF-5577
      */
@@ -116,7 +140,7 @@ class SocketTest extends CommonHttpTests
     {
         $this->setExpectedException(
             'Zend\Http\Client\Adapter\Exception\InvalidArgumentException',
-            'Array or Zend_Config object expected');
+            'Array or Zend\Config object expected');
 
         $this->_adapter->setOptions($config);
     }

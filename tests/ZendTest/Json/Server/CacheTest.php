@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -12,7 +12,7 @@ namespace ZendTest\Json\Server;
 use Zend\Json\Server;
 
 /**
- * Test class for Zend_JSON_Server_Cache
+ * Test class for Zend\JSON\Server\Cache
  *
  * @group      Zend_JSON
  * @group      Zend_JSON_Server

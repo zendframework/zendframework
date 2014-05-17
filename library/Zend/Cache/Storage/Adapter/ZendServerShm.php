@@ -72,7 +72,7 @@ class ZendServerShm extends AbstractZendServer implements
     /**
      * Get total space in bytes
      *
-     * @return int|float
+     * @return int
      */
     public function getTotalSpace()
     {
@@ -104,7 +104,7 @@ class ZendServerShm extends AbstractZendServer implements
      * Fetch a single item from Zend Data SHM Cache
      *
      * @param  string $internalKey
-     * @return mixed The stored value or FALSE if item wasn't found
+     * @return mixed The stored value or NULL if item wasn't found
      * @throws Exception\RuntimeException
      */
     protected function zdcFetch($internalKey)

@@ -3,12 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace ZendTest\Db\Adapter\Driver\Pdo;
 
+use Zend\Db\Adapter\Driver\Pdo\Connection;
 use Zend\Db\Adapter\Driver\Pdo\Statement;
 use Zend\Db\Adapter\Driver\Pdo\Pdo;
 use Zend\Db\Adapter\ParameterContainer;
@@ -66,38 +67,32 @@ class StatementTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\Adapter\Driver\Pdo\Statement::getResource
-     * @todo   Implement testGetResource().
      */
     public function testGetResource()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $pdo = new TestAsset\SqliteMemoryPdo();
+        $stmt = $pdo->prepare('SELECT 1');
+        $this->statement->setResource($stmt);
+
+        $this->assertSame($stmt, $this->statement->getResource());
     }
 
     /**
      * @covers Zend\Db\Adapter\Driver\Pdo\Statement::setSql
-     * @todo   Implement testSetSql().
      */
     public function testSetSql()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->statement->setSql('SELECT 1');
+        $this->assertEquals('SELECT 1', $this->statement->getSql());
     }
 
     /**
      * @covers Zend\Db\Adapter\Driver\Pdo\Statement::getSql
-     * @todo   Implement testGetSql().
      */
     public function testGetSql()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->statement->setSql('SELECT 1');
+        $this->assertEquals('SELECT 1', $this->statement->getSql());
     }
 
     /**
@@ -106,33 +101,29 @@ class StatementTest extends \PHPUnit_Framework_TestCase
      */
     public function testPrepare()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->statement->initialize(new TestAsset\SqliteMemoryPdo());
+        $this->assertNull($this->statement->prepare('SELECT 1'));
     }
 
     /**
      * @covers Zend\Db\Adapter\Driver\Pdo\Statement::isPrepared
-     * @todo   Implement testIsPrepared().
      */
     public function testIsPrepared()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertFalse($this->statement->isPrepared());
+        $this->statement->initialize(new TestAsset\SqliteMemoryPdo());
+        $this->statement->prepare('SELECT 1');
+        $this->assertTrue($this->statement->isPrepared());
     }
 
     /**
      * @covers Zend\Db\Adapter\Driver\Pdo\Statement::execute
-     * @todo   Implement testExecute().
      */
     public function testExecute()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->statement->setDriver(new Pdo(new Connection($pdo = new TestAsset\SqliteMemoryPdo())));
+        $this->statement->initialize($pdo);
+        $this->statement->prepare('SELECT 1');
+        $this->assertInstanceOf('Zend\Db\Adapter\Driver\Pdo\Result', $this->statement->execute());
     }
 }

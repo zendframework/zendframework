@@ -114,7 +114,7 @@ class CompilerDefinition implements DefinitionInterface
      */
     public function compile()
     {
-        /* @var $classScanner \Zend\Code\Scanner\DerivedClassScanner */
+        /* @var $classScanner DerivedClassScanner */
         foreach ($this->directoryScanner->getClassNames() as $class) {
             $this->processClass($class);
         }
@@ -385,7 +385,7 @@ class CompilerDefinition implements DefinitionInterface
             return false;
         }
 
-        return (array_key_exists($method, $this->classes[$class]));
+        return (array_key_exists($method, $this->classes[$class]['parameters']));
     }
 
     /**

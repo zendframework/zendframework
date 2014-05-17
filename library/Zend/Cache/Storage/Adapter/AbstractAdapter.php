@@ -194,7 +194,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
     }
 
     /**
-     * Trigger an pre event and return the event response collection
+     * Trigger a pre event and return the event response collection
      *
      * @param  string $eventName
      * @param  ArrayObject $args
@@ -1537,7 +1537,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
             );
         } elseif (($p = $this->getOptions()->getKeyPattern()) && !preg_match($p, $key)) {
             throw new Exception\InvalidArgumentException(
-                "The key '{$key}' doesn't match agains pattern '{$p}'"
+                "The key '{$key}' doesn't match against pattern '{$p}'"
             );
         }
     }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -13,7 +13,7 @@ use Zend\Json\Server;
 use Zend\Json;
 
 /**
- * Test class for Zend_JSON_Server_Response
+ * Test class for Zend\JSON\Server\Response
  *
  * @group      Zend_JSON
  * @group      Zend_JSON_Server
@@ -171,6 +171,27 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($test['result']);
         $this->assertEquals($this->response->getId(), $test['id']);
+    }
+
+    /**
+     * @param string $json
+     *
+     * @group 5956
+     *
+     * @dataProvider provideScalarJSONResponses
+     */
+    public function testLoadingScalarJSONResponseShouldThrowException($json)
+    {
+        $this->setExpectedException('Zend\Json\Server\Exception\RuntimeException');
+        $this->response->loadJson($json);
+    }
+
+    /**
+     * @return string[][]
+     */
+    public function provideScalarJSONResponses()
+    {
+        return array(array(''), array('true'), array('null'), array('3'), array('"invalid"'));
     }
 
     public function getOptions()

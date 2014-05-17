@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -16,7 +16,7 @@ use Zend\Json\Server\Exception\RuntimeException;
 use Zend\Json;
 
 /**
- * Test class for Zend_JSON_Server_Smd
+ * Test class for Zend\JSON\Server\Smd
  *
  * @group      Zend_Json
  * @group      Zend_Json_Server
@@ -380,5 +380,43 @@ class SmdTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($services));
         $this->assertTrue(array_key_exists('foo', $services));
         $this->assertTrue(array_key_exists('bar', $services));
+    }
+
+    /**
+     * @group ZF2-5624
+     */
+    public function testSetOptionsShouldAccommodateToArrayOutput()
+    {
+        $smdSource = new Smd();
+        $smdSource->setContentType('application/json');
+        $smdSource->setDescription('description');
+        $smdSource->setEnvelope(Smd::ENV_JSONRPC_1);
+        $smdSource->setId(uniqid());
+        $smdSource->setTarget('http://foo');
+        $smdSource->setTransport('POST');
+        $smdSource->setServices(array(
+            array('name' => 'foo')
+        ));
+
+        $smdDestination = new Smd();
+        // prior to fix the following resulted in:
+        // .. Zend\Json\Server\Exception\InvalidArgumentException
+        // ... : SMD service description requires a name; none provided
+        $smdDestination->setOptions($smdSource->toArray());
+
+        $this->assertEquals($smdSource->getContentType(),
+            $smdDestination->getContentType());
+        $this->assertEquals($smdSource->getDescription(),
+            $smdDestination->getDescription());
+        $this->assertEquals($smdSource->getEnvelope(),
+            $smdDestination->getEnvelope());
+        $this->assertEquals($smdSource->getId(),
+            $smdDestination->getId());
+        $this->assertEquals($smdSource->getTarget(),
+            $smdDestination->getTarget());
+        $this->assertEquals($smdSource->getTransport(),
+            $smdDestination->getTransport());
+        $this->assertEquals($smdSource->getServices(),
+            $smdDestination->getServices());
     }
 }

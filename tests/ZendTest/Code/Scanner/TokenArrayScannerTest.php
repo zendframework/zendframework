@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -42,6 +42,20 @@ class TokenArrayScannerTest extends TestCase
         $classes = $tokenScanner->getClassNames();
         $this->assertInternalType('array', $classes);
         $this->assertContains('ZendTest\Code\TestAsset\FooClass', $classes);
+    }
+
+    /**
+     * @group gh-4989
+     */
+    public function testScannerReturnsClassNamesForTraits()
+    {
+        if (version_compare(PHP_VERSION, '5.4', 'lt')) {
+            $this->markTestSkipped('Skipping; PHP 5.4 or greater is needed');
+        }
+        $tokenScanner = new TokenArrayScanner(token_get_all(file_get_contents((__DIR__ . '/../TestAsset/FooTrait.php'))));
+        $classes = $tokenScanner->getClassNames();
+        $this->assertInternalType('array', $classes);
+        $this->assertContains('ZendTest\Code\TestAsset\FooTrait', $classes);
     }
 
     public function testScannerReturnsFunctions()

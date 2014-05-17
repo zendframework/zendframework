@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -43,7 +43,7 @@ class SaltedS2kTest extends \PHPUnit_Framework_TestCase
             return;
         }
         $this->setExpectedException('Zend\Crypt\Key\Derivation\Exception\InvalidArgumentException',
-                                    'The hash algorihtm wrong is not supported by Zend\Crypt\Key\Derivation\SaltedS2k');
+                                    'The hash algorithm wrong is not supported by Zend\Crypt\Key\Derivation\SaltedS2k');
         $password = SaltedS2k::calc('wrong', 'test', $this->salt, 32);
     }
 

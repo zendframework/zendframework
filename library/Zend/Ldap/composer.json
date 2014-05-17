@@ -6,6 +6,7 @@
         "zf2",
         "ldap"
     ],
+    "homepage": "https://github.com/zendframework/zf2",
     "autoload": {
         "psr-0": {
             "Zend\\Ldap\\": ""
@@ -13,13 +14,19 @@
     },
     "target-dir": "Zend/Ldap",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version"
+    },
+    "require-dev": {
+        "zendframework/zend-eventmanager": "self.version"
+    },
+    "suggest": {
+        "zendframework/zend-eventmanager": "Zend\\EventManager component"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev",
-            "dev-develop": "2.3-dev"
+            "dev-master": "2.3-dev",
+            "dev-develop": "2.4-dev"
         }
     }
 }

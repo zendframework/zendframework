@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,6 +15,7 @@ use Zend\Loader\AutoloaderFactory;
 use Zend\ModuleManager\Listener\AutoloaderListener;
 use Zend\ModuleManager\Listener\ModuleResolverListener;
 use Zend\ModuleManager\ModuleManager;
+use Zend\ModuleManager\ModuleEvent;
 
 class AutoloaderListenerTest extends TestCase
 {
@@ -37,8 +38,8 @@ class AutoloaderListenerTest extends TestCase
         $autoloader->register();
 
         $this->moduleManager = new ModuleManager(array());
-        $this->moduleManager->getEventManager()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
-        $this->moduleManager->getEventManager()->attach('loadModule', new AutoloaderListener, 2000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new AutoloaderListener, 2000);
     }
 
     public function tearDown()

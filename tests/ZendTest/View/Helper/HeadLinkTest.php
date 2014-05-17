@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -14,7 +14,7 @@ use Zend\View\Renderer\PhpRenderer as View;
 use Zend\View\Exception\ExceptionInterface as ViewException;
 
 /**
- * Test class for Zend_View_Helper_HeadLink.
+ * Test class for Zend\View\Helper\HeadLink.
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -22,7 +22,7 @@ use Zend\View\Exception\ExceptionInterface as ViewException;
 class HeadLinkTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HeadLink
+     * @var Helper\HeadLink
      */
     public $helper;
 
@@ -270,6 +270,32 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('/styles.css', $string);
         $this->assertContains('<!--[if ie6]>', $string);
         $this->assertContains('<![endif]-->', $string);
+    }
+
+    public function testConditionalStylesheetCreationNoIE()
+    {
+        $this->helper->setStylesheet('/styles.css', 'screen', '!IE');
+        $item = $this->helper->getValue();
+        $this->assertObjectHasAttribute('conditionalStylesheet', $item);
+        $this->assertEquals('!IE', $item->conditionalStylesheet);
+
+        $string = $this->helper->toString();
+        $this->assertContains('/styles.css', $string);
+        $this->assertContains('<!--[if !IE]><!--><', $string);
+        $this->assertContains('<!--<![endif]-->', $string);
+    }
+
+    public function testConditionalStylesheetCreationNoIEWidthSpaces()
+    {
+        $this->helper->setStylesheet('/styles.css', 'screen', '! IE');
+        $item = $this->helper->getValue();
+        $this->assertObjectHasAttribute('conditionalStylesheet', $item);
+        $this->assertEquals('! IE', $item->conditionalStylesheet);
+
+        $string = $this->helper->toString();
+        $this->assertContains('/styles.css', $string);
+        $this->assertContains('<!--[if ! IE]><!--><', $string);
+        $this->assertContains('<!--<![endif]-->', $string);
     }
 
     public function testSettingAlternateWithTooFewArgsRaisesException()

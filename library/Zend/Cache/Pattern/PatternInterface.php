@@ -22,7 +22,7 @@ interface PatternInterface
     /**
      * Get all pattern options
      *
-     * @return array
+     * @return PatternOptions
      */
     public function getOptions();
 }

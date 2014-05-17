@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -12,9 +12,10 @@ namespace ZendTest\Code\Generator;
 use Zend\Code\Generator\ValueGenerator;
 
 /**
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
+ *
+ * @covers \Zend\Code\Generator\ValueGenerator
  */
 class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -41,9 +42,15 @@ class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testPropertyDefaultValueCanHandleArray()
     {
+        $expectedSource = <<<EOS
+array(
+    'foo'
+)
+EOS;
+
         $valueGenerator = new ValueGenerator();
         $valueGenerator->setValue(array('foo'));
-        $this->assertEquals('array(\'foo\')', $valueGenerator->generate());
+        $this->assertEquals($expectedSource, $valueGenerator->generate());
     }
 
     public function testPropertyDefaultValueCanHandleUnquotedString()
@@ -84,22 +91,22 @@ class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $expectedSource = <<<EOS
 array(
-        5,
-        'one' => 1,
-        'two' => '2',
-        'constant1' => __DIR__ . '/anydir1/anydir2',
+    5,
+    'one' => 1,
+    'two' => '2',
+    'constant1' => __DIR__ . '/anydir1/anydir2',
+    array(
+        'baz' => true,
+        'foo',
+        'bar',
         array(
-            'baz' => true,
-            'foo',
-            'bar',
-            array(
-                'baz1',
-                'baz2',
-                'constant2' => ArrayObject::STD_PROP_LIST
-                )
-            ),
-        PHP_EOL
+            'baz1',
+            'baz2',
+            'constant2' => ArrayObject::STD_PROP_LIST
         )
+    ),
+    PHP_EOL
+)
 EOS;
 
         $valueGenerator = new ValueGenerator();
@@ -123,14 +130,38 @@ EOS;
         $valueGenerator->setValue($value);
 $expectedSource = <<<EOS
 array(
-        1 => 'a',
-        0 => 'b',
-        'c',
-        7 => 'd',
-        3 => 'e'
-        )
+    1 => 'a',
+    0 => 'b',
+    'c',
+    7 => 'd',
+    3 => 'e'
+)
 EOS;
 
         $this->assertEquals($expectedSource, $valueGenerator->generate());
+    }
+
+    /**
+     * @group 6023
+     *
+     * @dataProvider getEscapedParameters
+     */
+    public function testEscaping($input, $expectedEscapedValue)
+    {
+        $this->assertSame($expectedEscapedValue, ValueGenerator::escape($input, false));
+    }
+
+    /**
+     * Data provider for escaping tests
+     *
+     * @return string[][]
+     */
+    public function getEscapedParameters()
+    {
+        return array(
+            array('\\', '\\\\'),
+            array("'", "\\'"),
+            array("\\'", "\\\\\\'"),
+        );
     }
 }

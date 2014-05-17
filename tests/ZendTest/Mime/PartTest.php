@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -19,7 +19,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
     /**
      * MIME part test object
      *
-     * @var Zend_Mime_Part
+     * @var Mime\Part
      */
     protected $part = null;
     protected $testText;
@@ -102,5 +102,31 @@ class PartTest extends \PHPUnit_Framework_TestCase
     public function testGetRawContentFromPart()
     {
         $this->assertEquals($this->testText, $this->part->getRawContent());
+    }
+
+    /**
+     * @link https://github.com/zendframework/zf2/issues/5428
+     * @group 5428
+     */
+    public function testContentEncodingWithStreamReadTwiceINaRow()
+    {
+        $testfile = realpath(__FILE__);
+        $original = file_get_contents($testfile);
+
+        $fp = fopen($testfile,'rb');
+        $part = new Mime\Part($fp);
+        $part->encoding = Mime\Mime::ENCODING_BASE64;
+        $contentEncodedFirstTime  = $part->getContent();
+        $contentEncodedSecondTime = $part->getContent();
+        $this->assertEquals($contentEncodedFirstTime, $contentEncodedSecondTime);
+        fclose($fp);
+
+        $fp = fopen($testfile,'rb');
+        $part = new Mime\Part($fp);
+        $part->encoding = Mime\Mime::ENCODING_QUOTEDPRINTABLE;
+        $contentEncodedFirstTime  = $part->getContent();
+        $contentEncodedSecondTime = $part->getContent();
+        $this->assertEquals($contentEncodedFirstTime, $contentEncodedSecondTime);
+        fclose($fp);
     }
 }

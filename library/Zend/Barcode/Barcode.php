@@ -182,7 +182,7 @@ abstract class Barcode
         }
 
         /*
-         * Verify that an barcode name has been specified.
+         * Verify that a barcode name has been specified.
          */
         if (!is_string($barcode) || empty($barcode)) {
             throw new Exception\InvalidArgumentException(
@@ -234,7 +234,7 @@ abstract class Barcode
         }
 
         /*
-         * Verify that an barcode name has been specified.
+         * Verify that a barcode name has been specified.
          */
         if (!is_string($renderer) || empty($renderer)) {
             throw new Exception\RendererCreationException(

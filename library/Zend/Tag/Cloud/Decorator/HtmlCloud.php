@@ -20,7 +20,7 @@ class HtmlCloud extends AbstractCloud
      * @var array
      */
     protected $htmlTags = array(
-        'ul' => array('class' => 'Zend\Tag\Cloud')
+        'ul' => array('class' => 'zend-tag-cloud'),
     );
 
     /**

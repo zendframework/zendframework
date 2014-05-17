@@ -80,7 +80,7 @@ class System
      * Multicall - boxcar feature of XML-RPC for calling multiple methods
      * in a single request.
      *
-     * Expects a an array of structs representing method calls, each element
+     * Expects an array of structs representing method calls, each element
      * having the keys:
      * - methodName
      * - params

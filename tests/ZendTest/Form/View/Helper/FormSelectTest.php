@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -133,7 +133,7 @@ class FormSelectTest extends CommonTestCase
         $element->setValueOptions($options);
 
         $markup = $this->helper->render($element);
-        $this->assertRegexp('#optgroup[^>]*?label="This is the second label"[^>]*>\s*<option[^>]*?value="bar"[^>]*?>foo.*?</optgroup>#s', $markup);
+        $this->assertRegexp('#optgroup[^>]*?label="This\&\#x20\;is\&\#x20\;the\&\#x20\;second\&\#x20\;label"[^>]*>\s*<option[^>]*?value="bar"[^>]*?>foo.*?</optgroup>#s', $markup);
     }
 
     public function testCanDisableAnOptgroup()
@@ -150,7 +150,7 @@ class FormSelectTest extends CommonTestCase
         $element->setValueOptions($options);
 
         $markup = $this->helper->render($element);
-        $this->assertRegexp('#optgroup .*?label="This is the second label"[^>]*?disabled="disabled"[^>]*?>\s*<option[^>]*?value="bar"[^>]*?>foo.*?</optgroup>#', $markup);
+        $this->assertRegexp('#optgroup .*?label="This\&\#x20\;is\&\#x20\;the\&\#x20\;second\&\#x20\;label"[^>]*?disabled="disabled"[^>]*?>\s*<option[^>]*?value="bar"[^>]*?>foo.*?</optgroup>#', $markup);
     }
 
     /**
@@ -183,7 +183,7 @@ class FormSelectTest extends CommonTestCase
         $element->setAttribute('multiple', true);
         $element->setAttribute('value', array('value1', 'value2'));
         $markup = $this->helper->render($element);
-        $this->assertRegexp('#<select[^>]*?(name="foo\[\]")#', $markup);
+        $this->assertRegexp('#<select[^>]*?(name="foo\&\#x5B\;\&\#x5D\;")#', $markup);
     }
 
     public function getScalarOptionsDataProvider()
@@ -276,7 +276,7 @@ class FormSelectTest extends CommonTestCase
 
         $markup = $this->helper->__invoke($element);
 
-        $this->assertContains('label="translated label"', $markup);
+        $this->assertContains('label="translated&#x20;label"', $markup);
         $this->assertContains('>translated foo<', $markup);
         $this->assertContains('>translated bar<', $markup);
     }
@@ -382,6 +382,16 @@ class FormSelectTest extends CommonTestCase
         $markup = $this->helper->render($element);
         $this->assertContains('<option value="">empty</option>', $markup);
         $this->assertContains('<option value="0" selected="selected">label0</option>', $markup);
+    }
+
+    public function testHiddenElementWhenAttributeMultipleIsSet()
+    {
+        $element = new SelectElement('foo');
+        $element->setUseHiddenElement(true);
+        $element->setUnselectedValue('empty');
+
+        $markup = $this->helper->render($element);
+        $this->assertContains('<input type="hidden" name="foo" value="empty"><select', $markup);
     }
 
     public function testRenderInputNotSelectElementRaisesException()

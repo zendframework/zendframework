@@ -10,8 +10,10 @@
 namespace Zend\Form\View\Helper;
 
 use Zend\Form\Element\Button;
+use Zend\Form\Element\MonthSelect;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
+use Zend\Form\LabelAwareInterface;
 
 class FormRow extends AbstractHelper
 {
@@ -158,9 +160,19 @@ class FormRow extends AbstractHelper
 
         $elementString = $elementHelper->render($element);
 
-        if (isset($label) && '' !== $label) {
-            $label = $escapeHtmlHelper($label);
-            $labelAttributes = $element->getLabelAttributes();
+        // hidden elements do not need a <label> -https://github.com/zendframework/zf2/issues/5607
+        $type = $element->getAttribute('type');
+        if (isset($label) && '' !== $label && $type !== 'hidden') {
+
+            $labelAttributes = array();
+
+            if ($element instanceof LabelAwareInterface) {
+                $labelAttributes = $element->getLabelAttributes();
+            }
+
+            if (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')) {
+                $label = $escapeHtmlHelper($label);
+            }
 
             if (empty($labelAttributes)) {
                 $labelAttributes = $this->labelAttributes;
@@ -168,14 +180,20 @@ class FormRow extends AbstractHelper
 
             // Multicheckbox elements have to be handled differently as the HTML standard does not allow nested
             // labels. The semantic way is to group them inside a fieldset
-            $type = $element->getAttribute('type');
-            if ($type === 'multi_checkbox' || $type === 'radio') {
+            if ($type === 'multi_checkbox'
+                || $type === 'radio'
+                || $element instanceof MonthSelect
+            ) {
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',
                     $label,
                     $elementString);
             } else {
-                if ($element->hasAttribute('id')) {
+                // Ensure element and label will be separated if element has an `id`-attribute.
+                // If element has label option `always_wrap` it will be nested in any case.
+                if ($element->hasAttribute('id')
+                    && ($element instanceof LabelAwareInterface && !$element->getLabelOption('always_wrap'))
+                ) {
                     $labelOpen = '';
                     $labelClose = '';
                     $label = $labelHelper($element);
@@ -184,7 +202,9 @@ class FormRow extends AbstractHelper
                     $labelClose = $labelHelper->closeTag();
                 }
 
-                if ($label !== '' && !$element->hasAttribute('id')) {
+                if ($label !== '' && (!$element->hasAttribute('id'))
+                    || ($element instanceof LabelAwareInterface && $element->getLabelOption('always_wrap'))
+                ) {
                     $label = '<span>' . $label . '</span>';
                 }
 

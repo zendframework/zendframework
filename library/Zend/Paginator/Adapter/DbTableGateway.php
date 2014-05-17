@@ -10,6 +10,7 @@
 namespace Zend\Paginator\Adapter;
 
 use Zend\Db\Sql\Where;
+use Zend\Db\Sql\Having;
 use Zend\Db\TableGateway\TableGateway;
 
 class DbTableGateway extends DbSelect
@@ -17,23 +18,30 @@ class DbTableGateway extends DbSelect
     /**
      * Constructs instance.
      *
-     * @param TableGateway                $tableGateway
-     * @param Where|\Closure|string|array $where
-     * @param null                        $order
+     * @param TableGateway                      $tableGateway
+     * @param null|Where|\Closure|string|array  $where
+     * @param null|string|array                 $order
+     * @param null|string|array                 $group
+     * @param null|Having|\Closure|string|array $having
      */
-    public function __construct(TableGateway $tableGateway, $where = null, $order = null)
+    public function __construct(TableGateway $tableGateway, $where = null, $order = null, $group = null, $having = null)
     {
-        $select = $tableGateway->getSql()->select();
+        $sql    = $tableGateway->getSql();
+        $select = $sql->select();
         if ($where) {
             $select->where($where);
         }
         if ($order) {
             $select->order($order);
         }
+        if ($group) {
+            $select->group($group);
+        }
+        if ($having) {
+            $select->having($having);
+        }
 
-        $dbAdapter          = $tableGateway->getAdapter();
         $resultSetPrototype = $tableGateway->getResultSetPrototype();
-
-        parent::__construct($select, $dbAdapter, $resultSetPrototype);
+        parent::__construct($select, $sql, $resultSetPrototype);
     }
 }

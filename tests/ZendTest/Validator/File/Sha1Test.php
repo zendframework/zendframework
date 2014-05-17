@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -185,5 +185,24 @@ class Sha1Test extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileSha1NotFound', $validator->getMessages()));
         $this->assertContains("does not exist", current($validator->getMessages()));
+    }
+
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
+    {
+        $validator = new File\Sha1();
+
+        $this->assertFalse($validator->isValid(''));
+        $this->assertArrayHasKey(File\Sha1::NOT_FOUND, $validator->getMessages());
+
+        $filesArray = array(
+            'name'      => '',
+            'size'      => 0,
+            'tmp_name'  => '',
+            'error'     => UPLOAD_ERR_NO_FILE,
+            'type'      => '',
+        );
+
+        $this->assertFalse($validator->isValid($filesArray));
+        $this->assertArrayHasKey(File\Sha1::NOT_FOUND, $validator->getMessages());
     }
 }

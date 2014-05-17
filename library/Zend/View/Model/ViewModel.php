@@ -17,7 +17,7 @@ use Zend\View\Exception;
 use Zend\View\Model;
 use Zend\View\Variables as ViewVariables;
 
-class ViewModel implements ModelInterface, ClearableModelInterface
+class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableChildrenInterface
 {
     /**
      * What variable a parent model should capture this model to
@@ -378,6 +378,30 @@ class ViewModel implements ModelInterface, ClearableModelInterface
     {
         $this->children = array();
         return $this;
+    }
+
+    /**
+     * Returns an array of Viewmodels with captureTo value $capture
+     *
+     * @param string $capture
+     * @param bool $recursive search recursive through children, default true
+     * @return array
+     */
+    public function getChildrenByCaptureTo($capture, $recursive = true)
+    {
+        $children = array();
+
+        foreach ($this->children as $child) {
+            if ($recursive === true) {
+                $children += $child->getChildrenByCaptureTo($capture);
+            }
+
+            if ($child->captureTo() === $capture) {
+                $children[] = $child;
+            }
+        }
+
+        return $children;
     }
 
     /**

@@ -39,8 +39,13 @@ class ObjectProperty extends AbstractHydrator
                 unset($data[$name]);
                 continue;
             }
-            // Extract data
-            $data[$name] = $this->extractValue($name, $value);
+            // Replace name if extracted differ
+            $extracted = $this->extractName($name, $object);
+            if ($extracted !== $name) {
+                unset($data[$name]);
+                $name = $extracted;
+            }
+            $data[$name] = $this->extractValue($name, $value, $object);
         }
 
         return $data;
@@ -63,7 +68,8 @@ class ObjectProperty extends AbstractHydrator
                 '%s expects the provided $object to be a PHP object)', __METHOD__
             ));
         }
-        foreach ($data as $property => $value) {
+        foreach ($data as $name => $value) {
+            $property = $this->hydrateName($name, $data);
             $object->$property = $this->hydrateValue($property, $value, $data);
         }
         return $object;

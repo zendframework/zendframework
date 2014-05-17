@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -274,6 +274,78 @@ class ImageTest extends TestCommon
         $this->checkTTFRequirement();
 
         parent::testTopOffsetOverrideVerticalPosition();
+    }
+
+    /**
+     * @group 4708
+     */
+    public function testImageGifWithNoTransparency()
+    {
+        $barcode = new Object\Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
+        $this->renderer->setTransparentBackground(false);
+        $this->assertFalse($this->renderer->getTransparentBackground());
+
+        //Test Gif output
+        $this->renderer->setImageType('gif');
+        $image = $this->renderer->draw();
+        $index = imagecolortransparent($image);
+        $this->assertEquals($index, -1);
+    }
+
+    /**
+     * @group 4708
+     */
+    public function testImagePngWithNoTransparency()
+    {
+        $barcode = new Object\Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
+        $this->renderer->setTransparentBackground(false);
+        $this->assertFalse($this->renderer->getTransparentBackground());
+
+        //Test PNG output
+        $this->renderer->setImageType('png');
+        $image = $this->renderer->draw();
+        $index = imagecolortransparent($image);
+        $this->assertEquals($index, -1);
+    }
+
+    /**
+     * @group 4708
+     */
+    public function testImageGifWithTransparency()
+    {
+        $barcode = new Object\Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
+        $this->renderer->setTransparentBackground(true);
+        $this->assertTrue($this->renderer->getTransparentBackground());
+
+        //Test Gif output
+        $this->renderer->setImageType('gif');
+        $image = $this->renderer->draw();
+        $index = imagecolortransparent($image);
+        $this->assertTrue($index !== -1);
+    }
+
+    /**
+     * @group 4708
+     */
+    public function testImagePngWithTransparency()
+    {
+        $barcode = new Object\Code39(array('text' => '0123456789'));
+        $this->renderer->setBarcode($barcode);
+
+        $this->renderer->setTransparentBackground(true);
+        $this->assertTrue($this->renderer->getTransparentBackground());
+
+        //Test PNG output
+        $this->renderer->setImageType('png');
+        $image = $this->renderer->draw();
+        $index = imagecolortransparent($image);
+        $this->assertTrue($index !== -1);
     }
 
     protected function checkTTFRequirement()

@@ -165,7 +165,9 @@ class Gz extends AbstractCompressionAlgorithm
     {
         $archive = $this->getArchive();
         $mode    = $this->getMode();
-        if (file_exists($content)) {
+
+        //check if there are null byte characters before doing a file_exists check
+        if (!strstr($content, "\0") && file_exists($content)) {
             $archive = $content;
         }
 
@@ -190,7 +192,7 @@ class Gz extends AbstractCompressionAlgorithm
             $compressed = gzuncompress($content);
         }
 
-        if (!$compressed) {
+        if ($compressed === false) {
             throw new Exception\RuntimeException('Error during decompression');
         }
 

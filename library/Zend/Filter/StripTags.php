@@ -167,7 +167,6 @@ class StripTags extends AbstractFilter
      * Defined by Zend\Filter\FilterInterface
      *
      * If the value provided is non-scalar, the value will remain unfiltered
-     * and an E_USER_WARNING will be raised indicating it's unfilterable.
      *
      * @todo   improve docblock descriptions
      * @param  string $value
@@ -175,22 +174,9 @@ class StripTags extends AbstractFilter
      */
     public function filter($value)
     {
-        if (null === $value) {
-            return null;
-        }
-
         if (!is_scalar($value)) {
-            trigger_error(
-                sprintf(
-                    '%s expects parameter to be scalar, "%s" given; cannot filter',
-                    __METHOD__,
-                    (is_object($value) ? get_class($value) : gettype($value))
-                ),
-                E_USER_WARNING
-            );
             return $value;
         }
-
         $value = (string) $value;
 
         // Strip HTML comments first
@@ -282,7 +268,7 @@ class StripTags extends AbstractFilter
             foreach ($matches[1] as $index => $attributeName) {
                 $attributeName      = strtolower($attributeName);
                 $attributeDelimiter = empty($matches[2][$index]) ? $matches[4][$index] : $matches[2][$index];
-                $attributeValue     = empty($matches[3][$index]) ? $matches[5][$index] : $matches[3][$index];
+                $attributeValue     = (strlen($matches[3][$index]) == 0) ? $matches[5][$index] : $matches[3][$index];
 
                 // If the attribute is not allowed, then remove it entirely
                 if (!array_key_exists($attributeName, $this->tagsAllowed[$tagName])

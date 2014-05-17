@@ -149,7 +149,7 @@ class ZendServerDisk extends AbstractZendServer implements
      * Fetch a single item from Zend Data Disk Cache
      *
      * @param  string $internalKey
-     * @return mixed The stored value or FALSE if item wasn't found
+     * @return mixed The stored value or NULL if item wasn't found
      * @throws Exception\RuntimeException
      */
     protected function zdcFetch($internalKey)

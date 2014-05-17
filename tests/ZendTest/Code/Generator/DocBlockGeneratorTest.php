@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -11,9 +11,9 @@ namespace ZendTest\Code\Generator;
 
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\DocBlock\Tag;
+use Zend\Code\Reflection\DocBlockReflection;
 
 /**
- *
  * @group      Zend_Code_Generator
  * @group      Zend_Code_Generator_Php
  */
@@ -24,9 +24,26 @@ class DocBlockGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     protected $docBlockGenerator;
 
+    /**
+     * @var DocBlockGenerator
+     */
+    protected $reflectionDocBlockGenerator;
+
     protected function setUp()
     {
         $this->docBlockGenerator = $this->docBlockGenerator = new DocBlockGenerator();
+        $reflectionDocBlock = new DocBlockReflection(
+            '/**
+ * Short Description
+ * Long Description
+ * @param string $foo comment
+ * @author Zend <zend@zend.com>
+ * @license http://license The License
+ * @return int
+ */'
+        );
+
+        $this->reflectionDocBlockGenerator = DocBlockGenerator::fromReflection($reflectionDocBlock);
     }
 
     public function testCanPassTagsToConstructor()
@@ -133,5 +150,56 @@ EOS;
             . ' * @var This is a very large string that will not be wrapped if it contains more than'
             . ' 80 characters'. DocBlockGenerator::LINE_FEED . ' */' . DocBlockGenerator::LINE_FEED;
         $this->assertEquals($expected, $this->docBlockGenerator->generate());
+    }
+
+    public function testDocBlockFromRefelectionLongDescription()
+    {
+        $this->assertEquals('Long Description', $this->reflectionDocBlockGenerator->getLongDescription());
+    }
+
+    public function testDocBlockFromRefelectionShortDescription()
+    {
+        $this->assertEquals('Short Description', $this->reflectionDocBlockGenerator->getShortDescription());
+    }
+
+    public function testDocBlockFromRefelectionTagsCount()
+    {
+        $this->assertCount(4, $this->reflectionDocBlockGenerator->getTags());
+    }
+
+    /**
+     * @depends testDocBlockFromRefelectionTagsCount
+     */
+    public function testDocBlockFromRefelectionParamTag()
+    {
+        $tags = $this->reflectionDocBlockGenerator->getTags();
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag\ParamTag', $tags[0]);
+    }
+
+    /**
+     * @depends testDocBlockFromRefelectionTagsCount
+     */
+    public function testDocBlockFromRefelectionAuthorTag()
+    {
+        $tags = $this->reflectionDocBlockGenerator->getTags();
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag\AuthorTag', $tags[1]);
+    }
+
+    /**
+     * @depends testDocBlockFromRefelectionTagsCount
+     */
+    public function testDocBlockFromRefelectionLicenseTag()
+    {
+        $tags = $this->reflectionDocBlockGenerator->getTags();
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag\LicenseTag', $tags[2]);
+    }
+
+    /**
+     * @depends testDocBlockFromRefelectionTagsCount
+     */
+    public function testDocBlockFromRefelectionReturnTag()
+    {
+        $tags = $this->reflectionDocBlockGenerator->getTags();
+        $this->assertInstanceOf('Zend\Code\Generator\DocBlock\Tag\ReturnTag', $tags[3]);
     }
 }

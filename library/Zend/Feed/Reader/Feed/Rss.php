@@ -675,8 +675,6 @@ class Rss extends AbstractFeed
      */
     protected function indexEntries()
     {
-        $entries = array();
-
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 && $this->getType() !== Reader\Reader::TYPE_RSS_090) {
             $entries = $this->xpath->evaluate('//item');
         } else {

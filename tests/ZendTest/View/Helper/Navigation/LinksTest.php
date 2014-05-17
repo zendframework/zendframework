@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -19,7 +19,7 @@ use Zend\View;
 use Zend\View\Helper\Navigation;
 
 /**
- * Tests Zend_View_Helper_Navigation_Links
+ * Tests Zend\View\Helper\Navigation\Links
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -36,7 +36,7 @@ class LinksTest extends AbstractTest
     /**
      * View helper
      *
-     * @var Zend\View\Helper\Navigation\Links
+     * @var \Zend\View\Helper\Navigation\Links
      */
     protected $_helper;
 
@@ -527,7 +527,7 @@ class LinksTest extends AbstractTest
         try {
             $this->_helper->findRelation($active, 'foo', 'bar');
             $this->fail('An invalid value was given, but a ' .
-                        'Zend_View_Exception was not thrown');
+                        'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid argument: $rel', $e->getMessage());
         }
@@ -539,7 +539,7 @@ class LinksTest extends AbstractTest
         try {
             $this->_helper->renderLink($active, 'foo', 'bar');
             $this->fail('An invalid value was given, but a ' .
-                        'Zend_View_Exception was not thrown');
+                        'Zend\View\Exception\InvalidArgumentException was not thrown');
         } catch (View\Exception\ExceptionInterface $e) {
             $this->assertContains('Invalid relation attribute', $e->getMessage());
         }
@@ -637,10 +637,10 @@ class LinksTest extends AbstractTest
             $this->_helper->setRenderFlag($newFlag);
             $expectedOutput = '<link '
                               . 'rel="' . $type . '" '
-                              . 'href="http://www.example.com/">' . constant($this->_helperName.'::EOL')
+                              . 'href="http&#x3A;&#x2F;&#x2F;www.example.com&#x2F;">' . constant($this->_helperName.'::EOL')
                             . '<link '
                               . 'rev="' . $type . '" '
-                              . 'href="http://www.example.com/">';
+                              . 'href="http&#x3A;&#x2F;&#x2F;www.example.com&#x2F;">';
             $actualOutput = $this->_helper->render();
 
             $expected[$type] = $expectedOutput;
@@ -663,9 +663,9 @@ class LinksTest extends AbstractTest
         $active->active = true;
 
         // test data
-        $expected = '<link rel="next" href="page2" title="Page 2">'
+        $expected = '<link rel="next" href="page2" title="Page&#x20;2">'
                   . constant($this->_helperName.'::EOL')
-                  . '<link rel="prev" href="page1" title="Page 1">';
+                  . '<link rel="prev" href="page1" title="Page&#x20;1">';
         $actual = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);
@@ -681,9 +681,9 @@ class LinksTest extends AbstractTest
         $active->active = true;
 
         // build expected and actual result
-        $expected = '  <link rel="next" href="page2" title="Page 2">'
+        $expected = '  <link rel="next" href="page2" title="Page&#x20;2">'
                   . constant($this->_helperName.'::EOL')
-                  . '  <link rel="prev" href="page1" title="Page 1">';
+                  . '  <link rel="prev" href="page1" title="Page&#x20;1">';
         $actual = $this->_helper->render();
 
         $this->assertEquals($expected, $actual);
@@ -695,7 +695,7 @@ class LinksTest extends AbstractTest
         $this->_helper->findOneByLabel('Page 2.3.3')->setActive(); // level 2
         $flag = Navigation\Links::RENDER_NEXT;
 
-        $expected = '<link rel="next" href="page2/page2_3/page2_3_1" title="Page 2.3.1">';
+        $expected = '<link rel="next" href="page2&#x2F;page2_3&#x2F;page2_3_1" title="Page&#x20;2.3.1">';
         $actual = $this->_helper->setRenderFlag($flag)->render();
 
         $this->assertEquals($expected, $actual);

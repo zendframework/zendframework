@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -682,19 +682,35 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         $nav1 = new Navigation\Navigation();
         $nav2 = new Navigation\Navigation();
+        $nav3 = new Navigation\Navigation();
+        $nav4 = new Navigation\Navigation();
         $nav2->addPage(array(
             'label' => 'Page 1',
             'uri' => '#'
         ));
+        $nav3->addPage(array(
+            'label' => 'Page 1',
+            'uri' => '#',
+            'visible' => true
+        ));
+        $nav4->addPage(array(
+            'label' => 'Page 1',
+            'uri' => '#',
+            'visible' => false
+        ));
 
         $expected = array(
             'empty' => false,
-            'notempty' => true
+            'notempty' => true,
+            'visible' => true,
+            'notvisible' => false
         );
 
         $actual = array(
             'empty' => $nav1->hasPages(),
-            'notempty' => $nav2->hasPages()
+            'notempty' => $nav2->hasPages(),
+            'visible' => $nav3->hasPages(false),
+            'notvisible' => $nav4->hasPages(true)
         );
 
         $this->assertEquals($expected, $actual);
@@ -1063,5 +1079,32 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $container = new Navigation\Navigation();
 
         $this->assertEquals(null, $container->getChildren());
+    }
+
+    /**
+     * @group GH-5929
+     */
+    public function testRemovePageRecursively()
+    {
+        $container = new Navigation\Navigation(array(
+            array(
+                'route' => 'foo',
+                'pages' => array(
+                    array(
+                        'route' => 'bar',
+                        'pages' => array(
+                            array(
+                                'route' => 'baz',
+                            ),
+                        ),
+                    )
+                )
+            ),
+        ));
+
+        $container->removePage($container->findOneBy('route', 'baz'), true);
+        $this->assertNull($container->findOneBy('route', 'baz'));
+        $container->removePage($container->findOneBy('route', 'bar'), true);
+        $this->assertNull($container->findOneBy('route', 'bar'));
     }
 }

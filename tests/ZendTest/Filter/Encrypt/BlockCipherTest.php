@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -200,10 +200,6 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncryptionWithDecryptionAndCompressionMcrypt()
     {
-        if (version_compare(phpversion(), '5.4', '>=')) {
-            $this->markTestIncomplete('Code to test is not compatible with PHP 5.4 ');
-        }
-
         if (!extension_loaded('bz2')) {
             $this->markTestSkipped('This adapter needs the bz2 extension');
         }

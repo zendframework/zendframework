@@ -84,7 +84,11 @@ class DocBlockReflection implements ReflectionInterface
      */
     public function __construct($commentOrReflector, DocBlockTagManager $tagManager = null)
     {
-        $this->tagManager = $tagManager ? : new DocBlockTagManager(DocBlockTagManager::USE_DEFAULT_PROTOTYPES);
+        if (!$tagManager) {
+            $tagManager = new DocBlockTagManager();
+            $tagManager->initializeDefaultTags();
+        }
+        $this->tagManager = $tagManager;
 
         if ($commentOrReflector instanceof Reflector) {
             $this->reflector = $commentOrReflector;

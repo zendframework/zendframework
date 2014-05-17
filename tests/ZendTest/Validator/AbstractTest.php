@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -69,28 +69,6 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testErrorMessagesAreTranslatedWhenTranslatorPresent()
-    {
-        if (!extension_loaded('intl')) {
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
-        $loader = new TestAsset\ArrayTranslator();
-        $loader->translations = array(
-            'fooMessage' => 'This is the translated message for %value%',
-        );
-        $translator = new TestAsset\Translator();
-        $translator->getPluginManager()->setService('default', $loader);
-        $translator->addTranslationFile('default', null);
-
-        $this->validator->setTranslator($translator);
-        $this->assertFalse($this->validator->isValid('bar'));
-        $messages = $this->validator->getMessages();
-        $this->assertTrue(array_key_exists('fooMessage', $messages));
-        $this->assertContains('bar', $messages['fooMessage'], var_export($messages, 1));
-        $this->assertContains('This is the translated message for ', $messages['fooMessage']);
-    }
-
-    public function testCanTranslateMessagesInsteadOfKeys()
     {
         if (!extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');

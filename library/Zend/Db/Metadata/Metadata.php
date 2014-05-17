@@ -53,6 +53,8 @@ class Metadata implements MetadataInterface
                 return new Source\SqliteMetadata($adapter);
             case 'PostgreSQL':
                 return new Source\PostgresqlMetadata($adapter);
+            case 'Oracle':
+                return new Source\OracleMetadata($adapter);
         }
 
         throw new \Exception('cannot create source from adapter');

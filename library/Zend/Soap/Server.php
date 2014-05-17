@@ -34,6 +34,11 @@ class Server implements ZendServerServer
     protected $class;
 
     /**
+     * Server instance
+     * @var SoapServer
+     */
+    protected $server = null;
+    /**
      * Arguments to pass to {@link $class} constructor
      * @var array
      */
@@ -58,6 +63,12 @@ class Server implements ZendServerServer
     protected $faultExceptions = array();
 
     /**
+     * Container for caught exception during business code execution
+     * @var \Exception
+     */
+    protected $caughtException = null;
+
+    /**
      * SOAP Server Features
      * @var int
      */
@@ -73,6 +84,12 @@ class Server implements ZendServerServer
      * Object registered with this server
      */
     protected $object;
+
+    /**
+     * Informs if the soap server is in debug mode
+     * @var bool
+     */
+    protected $debug = false;
 
     /**
      * Persistence mode; should be one of the SOAP persistence constants
@@ -703,7 +720,7 @@ class Server implements ZendServerServer
      * - stdClass; if so, calls __toString() and verifies XML
      * - string; if so, verifies XML
      *
-     * @param  DOMDocument|DOMNode|SimpleXMLElement|stdClass|string $request
+     * @param  DOMDocument|DOMNode|SimpleXMLElement|\stdClass|string $request
      * @return self
      * @throws Exception\InvalidArgumentException
      */
@@ -728,10 +745,12 @@ class Server implements ZendServerServer
             }
             $xml = trim($xml);
 
-            libxml_disable_entity_loader(true);
+            $loadEntities = libxml_disable_entity_loader(true);
 
             $dom = new DOMDocument();
             $loadStatus = $dom->loadXML($xml);
+
+            libxml_disable_entity_loader($loadEntities);
 
             // @todo check libxml errors ? validate document ?
             if (strlen($xml) == 0 || !$loadStatus) {
@@ -743,7 +762,6 @@ class Server implements ZendServerServer
                     throw new Exception\InvalidArgumentException('Invalid XML: Detected use of illegal DOCTYPE');
                 }
             }
-            libxml_disable_entity_loader(false);
         }
 
         $this->request = $xml;
@@ -806,8 +824,12 @@ class Server implements ZendServerServer
      *
      * @return SoapServer
      */
-    protected function _getSoap()
+    public function getSoap()
     {
+        if ($this->server instanceof SoapServer) {
+            return $this->server;
+        }
+
         $options = $this->getOptions();
         $server  = new SoapServer($this->wsdl, $options);
 
@@ -829,8 +851,19 @@ class Server implements ZendServerServer
             $server->setPersistence($this->persistence);
         }
 
-        return $server;
+        $this->server = $server;
+        return $this->server;
     }
+
+    /**
+     * Proxy for _getSoap method
+     * @see _getSoap
+     * @return SoapServer the soapServer instance
+    public function getSoap()
+    {
+        return $this->_getSoap();
+    }
+     */
 
     /**
      * Handle a request
@@ -848,7 +881,7 @@ class Server implements ZendServerServer
      * If no request is passed, pulls request using php:://input (for
      * cross-platform compatibility purposes).
      *
-     * @param  DOMDocument|DOMNode|SimpleXMLElement|stdClass|string $request Optional request
+     * @param  DOMDocument|DOMNode|SimpleXMLElement|\stdClass|string $request Optional request
      * @return void|string
      */
     public function handle($request = null)
@@ -867,7 +900,7 @@ class Server implements ZendServerServer
             $setRequestException = $e;
         }
 
-        $soap = $this->_getSoap();
+        $soap = $this->getSoap();
 
         $fault          = false;
         $this->response = '';
@@ -926,6 +959,17 @@ class Server implements ZendServerServer
     }
 
     /**
+     * Set the debug mode.
+     * In debug mode, all exceptions are send to the client.
+     * @param bool $debug
+     */
+    public function setDebugMode($debug)
+    {
+        $this->debug = $debug;
+        return $this;
+    }
+
+    /**
      * Validate and register fault exception
      *
      * @param  string|array $class Exception class or array of exception classes
@@ -935,7 +979,7 @@ class Server implements ZendServerServer
     public function registerFaultException($class)
     {
         if (is_array($class)) {
-            foreach($class as $row) {
+            foreach ($class as $row) {
                 $this->registerFaultException($row);
             }
 
@@ -956,11 +1000,15 @@ class Server implements ZendServerServer
     /**
      * Checks if provided fault name is registered as valid in this server.
      *
-     * @param $fault Name of a fault class
+     * @param string $fault Name of a fault class
      * @return bool
      */
     public function isRegisteredAsFaultException($fault)
     {
+        if ($this->debug) {
+            return true;
+        }
+
         $ref        = new ReflectionClass($fault);
         $classNames = $ref->getName();
         return in_array($classNames, $this->faultExceptions);
@@ -994,6 +1042,15 @@ class Server implements ZendServerServer
     }
 
     /**
+     * Return caught exception during business code execution
+     * @return null|\Exception caught exception
+     */
+    public function getException()
+    {
+        return $this->caughtException;
+    }
+
+    /**
      * Generate a server fault
      *
      * Note that the arguments are reverse to those of SoapFault.
@@ -1009,6 +1066,8 @@ class Server implements ZendServerServer
      */
     public function fault($fault = null, $code = 'Receiver')
     {
+        $this->caughtException = (is_string($fault)) ? new \Exception($fault) : $fault;
+
         if ($fault instanceof \Exception) {
             if ($this->isRegisteredAsFaultException($fault)) {
                 $message = $fault->getMessage();

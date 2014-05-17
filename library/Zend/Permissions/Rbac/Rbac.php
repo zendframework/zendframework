@@ -108,15 +108,22 @@ class Rbac extends AbstractIterator
             );
         }
 
+        if (is_object($objectOrName)) {
+            $requiredRole = $objectOrName->getName();
+        } else {
+            $requiredRole = $objectOrName;
+        }
+
         $it = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($it as $leaf) {
-            if ((is_string($objectOrName) && $leaf->getName() == $objectOrName) || $leaf == $objectOrName) {
+            /** @var RoleInterface $leaf */
+            if ($leaf->getName() == $requiredRole) {
                 return $leaf;
             }
         }
 
         throw new Exception\InvalidArgumentException(sprintf(
-            'No child with name "%s" could be found',
+            'No role with name "%s" could be found',
             is_object($objectOrName) ? $objectOrName->getName() : $objectOrName
         ));
     }
@@ -127,6 +134,7 @@ class Rbac extends AbstractIterator
      * @param  RoleInterface|string             $role
      * @param  string                           $permission
      * @param  AssertionInterface|Callable|null $assert
+     * @throws Exception\InvalidArgumentException
      * @return bool
      */
     public function isGranted($role, $permission, $assert = null)

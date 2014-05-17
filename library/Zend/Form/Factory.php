@@ -335,6 +335,10 @@ class Factory
         $elements = $this->validateSpecification($elements, $method);
 
         foreach ($elements as $elementSpecification) {
+            if (null === $elementSpecification) {
+                continue;
+            }
+
             $flags = isset($elementSpecification['flags']) ? $elementSpecification['flags'] : array();
             $spec  = isset($elementSpecification['spec'])  ? $elementSpecification['spec']  : array();
 
@@ -440,7 +444,7 @@ class Factory
 
         if (!$hydrator instanceof Hydrator\HydratorInterface) {
             throw new Exception\DomainException(sprintf(
-                '%s expects a valid implementation of Zend\Form\Hydrator\HydratorInterface; received "%s"',
+                '%s expects a valid implementation of Zend\Stdlib\Hydrator\HydratorInterface; received "%s"',
                 $method,
                 $hydratorOrName
             ));

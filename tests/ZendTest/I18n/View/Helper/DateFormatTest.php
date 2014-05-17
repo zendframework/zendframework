@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,7 +15,7 @@ use IntlDateFormatter;
 use Zend\I18n\View\Helper\DateFormat as DateFormatHelper;
 
 /**
- * Test class for Zend_View_Helper_Currency
+ * Test class for Zend\View\Helper\Currency
  *
  * @group      Zend_View
  * @group      Zend_View_Helper
@@ -56,7 +56,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
     public function dateTestsDataProvider()
     {
         if (!extension_loaded('intl')) {
-            if (version_compare(\PHPUnit_Runner_Version::VERSION, '3.8.0-dev') === 1) {
+            if (version_compare(\PHPUnit_Runner_Version::id(), '3.8.0-dev') === 1) {
                 $this->markTestSkipped('ext/intl not enabled');
             } else {
                 return array(array());
@@ -156,7 +156,7 @@ class DateFormatTest extends \PHPUnit_Framework_TestCase
     public function dateTestsDataProviderWithPattern()
     {
         if (!extension_loaded('intl')) {
-            if (version_compare(\PHPUnit_Runner_Version::VERSION, '3.8.0-dev') === 1) {
+            if (version_compare(\PHPUnit_Runner_Version::id(), '3.8.0-dev') === 1) {
                 $this->markTestSkipped('ext/intl not enabled');
             } else {
                 return array(array());

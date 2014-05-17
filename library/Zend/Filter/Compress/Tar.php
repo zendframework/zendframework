@@ -126,16 +126,16 @@ class Tar extends AbstractCompressionAlgorithm
      */
     public function setMode($mode)
     {
-        $mode = ucfirst(strtolower($mode));
-        if (($mode != 'Bz2') && ($mode != 'Gz')) {
+        $mode = strtolower($mode);
+        if (($mode != 'bz2') && ($mode != 'gz')) {
             throw new Exception\InvalidArgumentException("The mode '$mode' is unknown");
         }
 
-        if (($mode == 'Bz2') && (!extension_loaded('bz2'))) {
+        if (($mode == 'bz2') && (!extension_loaded('bz2'))) {
             throw new Exception\ExtensionNotLoadedException('This mode needs the bz2 extension');
         }
 
-        if (($mode == 'Gz') && (!extension_loaded('zlib'))) {
+        if (($mode == 'gz') && (!extension_loaded('zlib'))) {
             throw new Exception\ExtensionNotLoadedException('This mode needs the zlib extension');
         }
 

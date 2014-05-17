@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,6 +15,7 @@ use Zend\Form\Element;
 use Zend\Form\Factory;
 use Zend\Form\Fieldset;
 use Zend\Form\Form;
+use Zend\InputFilter\BaseInputFilter;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\Stdlib\Hydrator;
@@ -1426,7 +1427,7 @@ class FormTest extends TestCase
             'name' => 'foo'
         ));
 
-        // Add an hydrator that ignores if values does not exist in the
+        // Add a hydrator that ignores if values does not exist in the
         $fieldset->setObject(new Entity\SimplePublicProperty());
         $fieldset->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
 
@@ -1726,5 +1727,285 @@ class FormTest extends TestCase
         $form->add($fieldset);
         $filters = $form->getInputFilter()->get('fieldset')->get('foo')->getFilterChain();
         $this->assertEquals(1, $filters->count());
+    }
+
+    public function testFormWithNestedCollections()
+    {
+        $spec = array(
+            'name' => 'test',
+            'elements' => array(
+                array(
+                    'spec' => array(
+                        'name' => 'name',
+                        'type' => 'Zend\Form\Element\Text',
+                    ),
+                    'spec' => array(
+                        'name' => 'groups',
+                        'type' => 'Zend\Form\Element\Collection',
+                        'options' => array(
+                            'target_element' => array(
+                                'type' => 'Zend\Form\Fieldset',
+                                'name' => 'group',
+                                'elements' => array(
+                                    array(
+                                        'spec' => array(
+                                            'type' => 'Zend\Form\Element\Text',
+                                            'name' => 'group_class',
+                                        ),
+                                    ),
+                                    array(
+                                        'spec' => array(
+                                            'type' => 'Zend\Form\Element\Collection',
+                                            'name' => 'items',
+                                            'options' => array(
+                                                'target_element' => array(
+                                                    'type' => 'Zend\Form\Fieldset',
+                                                    'name' => 'item',
+                                                    'elements' => array(
+                                                        array(
+                                                            'spec' => array(
+                                                                'type' => 'Zend\Form\Element\Text',
+                                                                'name' => 'id',
+                                                            ),
+                                                        ),
+                                                        array(
+                                                            'spec' => array(
+                                                                'type' => 'Zend\Form\Element\Text',
+                                                                'name' => 'type',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    )
+                )
+            ),
+            'input_filter' => array(
+                'type' => 'Zend\InputFilter\InputFilter',
+                'name' => array(
+                    'filters' => array(
+                        array('name' => 'StringTrim'),
+                        array('name' => 'Null'),
+                    ),
+                    'validators' => array(
+                        array(
+                            'name' => 'StringLength',
+                            'options' => array(
+                                'max' => 255,
+                            ),
+                        ),
+                    ),
+                ),
+                'groups' => array(
+                    'type' => 'Zend\InputFilter\CollectionInputFilter',
+                    'input_filter' => array(
+                        'type' => 'Zend\InputFilter\InputFilter',
+                        'group_class' => array(
+                            'required' => false,
+                        ),
+                        'items' => array(
+                            'type' => 'Zend\InputFilter\CollectionInputFilter',
+                            'input_filter' => array(
+                                'type' => 'Zend\InputFilter\InputFilter',
+                                'id' => array(
+                                    'required' => false,
+                                ),
+                                'type' => array(
+                                    'required' => false,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $factory = new Factory();
+        $this->form = $factory->createForm($spec);
+
+        $data = array(
+            'name' => 'foo',
+            'groups' => array(
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 100,
+                            'type' => 'item-1',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 200,
+                            'type' => 'item-2',
+                        ),
+                        array(
+                            'id' => 300,
+                            'type' => 'item-3',
+                        ),
+                        array(
+                            'id' => 400,
+                            'type' => 'item-4',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'biz',
+                    'items' => array(),
+                ),
+            ),
+        );
+
+        $this->form->setData($data);
+
+        $isValid = $this->form->isValid();
+        $this->assertEquals($data, $this->form->getData());
+    }
+
+    public function testFormElementValidatorsMergeIntoAppliedInputFilter()
+    {
+        $this->form->add(array(
+            'name' => 'importance',
+            'type'  => 'Zend\Form\Element\Select',
+            'options' => array(
+                'label' => 'Importance',
+                'empty_option' => '',
+                'value_options' => array(
+                    'normal' => 'Normal',
+                    'important' => 'Important'
+                ),
+            ),
+        ));
+
+        $inputFilter = new BaseInputFilter();
+        $factory     = new InputFilterFactory();
+        $inputFilter->add($factory->createInput(array(
+            'name'     => 'importance',
+            'required' => false,
+        )));
+
+        $data = array(
+            'importance' => 'unimporant'
+        );
+
+        $this->form->setInputFilter($inputFilter);
+        $this->form->setData($data);
+        $this->assertFalse($this->form->isValid());
+
+        $data = array();
+
+        $this->form->setData($data);
+        $this->assertTrue($this->form->isValid());
+    }
+
+    /**
+     * @param bool $expectedIsValid
+     * @param array $expectedFormData
+     * @param array $data
+     * @param string $unselectedValue
+     * @param bool $useHiddenElement
+     * @dataProvider formWithSelectMultipleAndEmptyUnselectedValueDataProvider
+     */
+    public function testFormWithSelectMultipleAndEmptyUnselectedValue(
+        $expectedIsValid,
+        array $expectedFormData,
+        array $data,
+        $unselectedValue,
+        $useHiddenElement
+    )
+    {
+        $this->form->add(array(
+            'name' => 'multipleSelect',
+            'type'  => 'Zend\Form\Element\Select',
+            'attributes' => array('multiple' => 'multiple'),
+            'options' => array(
+                'label' => 'Importance',
+                'use_hidden_element' => $useHiddenElement,
+                'unselected_value' => $unselectedValue,
+                'value_options' => array(
+                    'foo' => 'Foo',
+                    'bar' => 'Bar'
+                ),
+            ),
+        ));
+
+        $actualIsValid = $this->form->setData($data)->isValid();
+        $this->assertEquals($expectedIsValid, $actualIsValid);
+
+        $formData = $this->form->getData();
+        $this->assertEquals($expectedFormData, $formData);
+    }
+
+    /**
+     * @return array
+     */
+    public function formWithSelectMultipleAndEmptyUnselectedValueDataProvider()
+    {
+        return array(
+            array(
+                true,
+                array('multipleSelect' => array('foo')),
+                array('multipleSelect' => array('foo')),
+                '',
+                true
+            ),
+            array(
+                true,
+                array('multipleSelect' => array()),
+                array('multipleSelect' => ''),
+                '',
+                true
+            ),
+            array(
+                true,
+                array('multipleSelect' => array()),
+                array('multipleSelect' => 'empty'),
+                'empty',
+                true
+            ),
+            array(
+                false,
+                array('multipleSelect' => ''),
+                array('multipleSelect' => ''),
+                'empty',
+                true
+            ),
+            array(
+                false,
+                array('multipleSelect' => ''),
+                array('multipleSelect' => ''),
+                '',
+                false
+            ),
+            array(
+                true,
+                array('multipleSelect' => array()),
+                array('multipleSelect' => 'foo'),
+                'foo',
+                true
+            ),
+        );
+    }
+
+    public function testCanSetUseInputFilterDefaultsViaArray()
+    {
+        $spec = array(
+            'name' => 'test',
+            'options' => array(
+                'use_input_filter_defaults' => false
+            )
+        );
+
+        $factory = new Factory();
+        $this->form = $factory->createForm($spec);
+        $this->assertFalse($this->form->useInputFilterDefaults());
     }
 }

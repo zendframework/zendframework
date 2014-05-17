@@ -88,7 +88,7 @@ class FileOptions extends AbstractOptions
     {
         if (null === $this->callback) {
             $this->setCallback(function ($transport) {
-                return 'ZendMail_' . time() . '_' . mt_rand() . '.tmp';
+                return 'ZendMail_' . time() . '_' . mt_rand() . '.eml';
             });
         }
         return $this->callback;

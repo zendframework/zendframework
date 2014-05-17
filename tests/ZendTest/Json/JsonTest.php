@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -459,7 +459,29 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('{"firstName":"John","lastName":"Doe","email":"john@doe.com"}', $result);
     }
 
-     /**
+    public function testJsonSerializableWithBuiltinImplementation()
+    {
+        if (version_compare(PHP_VERSION, '5.4.0', 'lt')) {
+            $this->markTestSkipped('JsonSerializable does not exist in PHP <5.4.0.');
+        }
+
+        $encoded = Json\Encoder::encode(
+            new TestAsset\JsonSerializableBuiltinImpl()
+        );
+
+        $this->assertEquals('["jsonSerialize"]', $encoded);
+    }
+
+    public function testJsonSerializableWithZFImplementation()
+    {
+        $encoded = Json\Encoder::encode(
+            new TestAsset\JsonSerializableZFImpl()
+        );
+
+        $this->assertEquals('["jsonSerialize"]', $encoded);
+    }
+
+    /**
      * test encoding array with Zend_JSON_Expr
      *
      * @group ZF-4946
@@ -531,7 +553,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Regression tests for Zend_JSON_Expr and mutliple keys with the same name.
+     * Regression tests for Zend\Json\Expr and multiple keys with the same name.
      *
      * @group ZF-4946
      */
@@ -560,7 +582,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Regression tests for Zend_JSON_Expr and mutliple keys with the same name.
+     * Regression tests for Zend\Json\Expr and multiple keys with the same name.
      *
      * @group ZF-4946
      */
@@ -866,6 +888,19 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 }
 EOB;
         $this->assertSame($expected, $pretty);
+    }
+
+    public function testPrettyPrintDoublequoteFollowingEscapedBackslashShouldNotBeTreatedAsEscaped()
+    {
+        $this->assertEquals(
+            "[\n\t1,\n\t\"\\\\\",\n\t3\n]",
+            Json\Json::prettyPrint(Json\Json::encode(array(1, '\\', 3)))
+        );
+
+        $this->assertEquals(
+            "{\n\t\"a\":\"\\\\\"\n}",
+           Json\Json::prettyPrint(Json\Json::encode(array('a' => '\\')))
+        );
     }
 
     /**

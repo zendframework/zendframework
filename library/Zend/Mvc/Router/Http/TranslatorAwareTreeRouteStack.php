@@ -9,8 +9,9 @@
 
 namespace Zend\Mvc\Router\Http;
 
-use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorInterface as Translator;
 use Zend\I18n\Translator\TranslatorAwareInterface;
+use Zend\Mvc\Router\Exception;
 use Zend\Stdlib\RequestInterface as Request;
 
 /**

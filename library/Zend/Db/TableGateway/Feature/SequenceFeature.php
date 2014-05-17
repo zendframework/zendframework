@@ -81,7 +81,7 @@ class SequenceFeature extends AbstractFeature
 
         switch ($platformName) {
             case 'Oracle':
-                $sql = 'SELECT ' . $platform->quoteIdentifier($this->sequenceName) . '.NEXTVAL FROM dual';
+                $sql = 'SELECT ' . $platform->quoteIdentifier($this->sequenceName) . '.NEXTVAL as "nextval" FROM dual';
                 break;
             case 'PostgreSQL':
                 $sql = 'SELECT NEXTVAL(\'' . $this->sequenceName . '\')';
@@ -109,7 +109,7 @@ class SequenceFeature extends AbstractFeature
 
         switch ($platformName) {
             case 'Oracle':
-                $sql = 'SELECT ' . $platform->quoteIdentifier($this->sequenceName) . '.CURRVAL FROM dual';
+                $sql = 'SELECT ' . $platform->quoteIdentifier($this->sequenceName) . '.CURRVAL as "currval" FROM dual';
                 break;
             case 'PostgreSQL':
                 $sql = 'SELECT CURRVAL(\'' . $this->sequenceName . '\')';

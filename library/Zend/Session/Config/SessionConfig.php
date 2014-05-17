@@ -42,6 +42,7 @@ class SessionConfig extends StandardConfig
      * @var array Valid cache limiters (per session.cache_limiter)
      */
     protected $validCacheLimiters = array(
+        '',
         'nocache',
         'public',
         'private',
@@ -72,7 +73,6 @@ class SessionConfig extends StandardConfig
      */
     public function setStorageOption($storageName, $storageValue)
     {
-        $key = false;
         switch ($storageName) {
             case 'remember_me_seconds':
                 // do nothing; not an INI option

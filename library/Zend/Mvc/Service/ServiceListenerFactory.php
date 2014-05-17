@@ -57,6 +57,8 @@ class ServiceListenerFactory implements FactoryInterface
             'HttpViewManager'                => 'Zend\Mvc\Service\HttpViewManagerFactory',
             'HydratorManager'                => 'Zend\Mvc\Service\HydratorManagerFactory',
             'InputFilterManager'             => 'Zend\Mvc\Service\InputFilterManagerFactory',
+            'LogProcessorManager'            => 'Zend\Mvc\Service\LogProcessorManagerFactory',
+            'LogWriterManager'               => 'Zend\Mvc\Service\LogWriterManagerFactory',
             'MvcTranslator'                  => 'Zend\Mvc\Service\TranslatorServiceFactory',
             'PaginatorPluginManager'         => 'Zend\Mvc\Service\PaginatorPluginManagerFactory',
             'Request'                        => 'Zend\Mvc\Service\RequestFactory',
@@ -85,6 +87,7 @@ class ServiceListenerFactory implements FactoryInterface
             'Zend\View\Resolver\TemplatePathStack'   => 'ViewTemplatePathStack',
             'Zend\View\Resolver\AggregateResolver'   => 'ViewResolver',
             'Zend\View\Resolver\ResolverInterface'   => 'ViewResolver',
+            'ControllerManager'                      => 'ControllerLoader'
         ),
         'abstract_factories' => array(
             'Zend\Form\FormAbstractServiceFactory',

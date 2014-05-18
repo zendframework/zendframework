@@ -13,7 +13,7 @@ use Zend\Filter\StringTrim;
 use stdClass;
 
 /**
- * @group      Zend_Filter
+ * @covers \Zend\Filter\StringTrim
  */
 class StringTrimTest extends \PHPUnit_Framework_TestCase
 {

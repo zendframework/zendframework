@@ -25,7 +25,7 @@ class RelativeFallbackResolver implements ResolverInterface
     const NS_SEPARATOR = '/';
 
     /**
-     * @var RendererInterface
+     * @var ResolverInterface
      */
     private $resolver;
 
@@ -66,9 +66,10 @@ class RelativeFallbackResolver implements ResolverInterface
         $position        = strrpos($currentTemplate, self::NS_SEPARATOR);
 
         if ($position > 0) {
-            $absoluteName = substr($currentTemplate, 0, $position) . self::NS_SEPARATOR . $name;
-
-            return $this->resolver->resolve($absoluteName, $renderer);
+            return $this->resolver->resolve(
+                substr($currentTemplate, 0, $position) . self::NS_SEPARATOR . $name,
+                $renderer
+            );
         }
 
         return false;

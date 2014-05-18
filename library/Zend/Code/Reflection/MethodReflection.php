@@ -389,7 +389,8 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
                     return true;
 
                 case "T_FUNCTION":
-                    //double check it's not a closure
+                    // If a function is encountered and that function is not a closure
+                    // then return true.  otherwise the function is a closure, return false
                     if($this->isValidFunction($haystack, $i)) {
                         return true;
                     }
@@ -397,14 +398,30 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
 
                 case "}":
                 case ";";
-                case "T_STRING":
-                case "T_VARIABLE":
-                case "T_IF":
+                case "T_BREAK":
+                case "T_CATCH":
+                case "T_DO":
+                case "T_ECHO":
                 case "T_ELSE":
                 case "T_ELSEIF":
+                case "T_EVAL":
+                case "T_EXIT":
+                case "T_FINALLY":
                 case "T_FOR":
                 case "T_FOREACH":
+                case "T_GOTO":
+                case "T_IF":
+                case "T_INCLUDE":
+                case "T_INCLUDE_ONCE":
+                case "T_PRINT":
+                case "T_STRING":
+                case "T_STRING_VARNAME":
+                case "T_THROW":
+                case "T_USE":
+                case "T_VARIABLE":
                 case "T_WHILE":
+                case "T_YIELD":
+
                     return false;
             }
         }
@@ -412,7 +429,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
 
     /**
      * Test to see if current position is valid function or
-     * closure.
+     * closure.  Returns true if it's a function and NOT a closure
      *
      * @param $haystack
      * @param $position

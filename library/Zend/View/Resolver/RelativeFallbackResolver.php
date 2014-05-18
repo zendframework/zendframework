@@ -44,13 +44,13 @@ class RelativeFallbackResolver implements ResolverInterface
      */
     public function resolve($name, RendererInterface $renderer = null)
     {
-        // There should exists view model to get template name
-        if (! is_callable(array($renderer, 'plugin'))) {
+        $plugin = array($renderer, 'plugin');
+
+        if (! is_callable($plugin)) {
             return false;
         }
 
-        // Try to get it from the same name space (folder)
-        $helper = $renderer->plugin('view_model');
+        $helper = call_user_func($plugin, 'view_model');
 
         if (! $helper instanceof ViewModelHelper) {
             return false;
@@ -65,13 +65,13 @@ class RelativeFallbackResolver implements ResolverInterface
         $currentTemplate = $currentModel->getTemplate();
         $position        = strrpos($currentTemplate, self::NS_SEPARATOR);
 
-        if ($position > 0) {
-            return $this->resolver->resolve(
-                substr($currentTemplate, 0, $position) . self::NS_SEPARATOR . $name,
-                $renderer
-            );
+        if (! $position) {
+            return false;
         }
 
-        return false;
+        return $this->resolver->resolve(
+            substr($currentTemplate, 0, $position) . self::NS_SEPARATOR . $name,
+            $renderer
+        );
     }
 }

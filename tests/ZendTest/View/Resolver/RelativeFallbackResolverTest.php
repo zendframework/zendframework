@@ -14,6 +14,9 @@ use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver;
 
+/**
+ * @covers \ZendTest\View\Resolver\RelativeFallbackResolver
+ */
 class RelativeFallbackResolverTest extends TestCase
 {
     public function testReturnsResourceFromTheSameNameSpaceWithMapResolver()

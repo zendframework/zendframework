@@ -69,9 +69,6 @@ class RelativeFallbackResolver implements ResolverInterface
             return false;
         }
 
-        return $this->resolver->resolve(
-            substr($currentTemplate, 0, $position) . self::NS_SEPARATOR . $name,
-            $renderer
-        );
+        return $this->resolver->resolve(substr($currentTemplate, 0, $position) . self::NS_SEPARATOR . $name, $renderer);
     }
 }

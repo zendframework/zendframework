@@ -20,7 +20,7 @@ class RelativeFallbackResolver implements ResolverInterface
     const NS_SEPARATOR = '/';
 
     /**
-     * @var Resolver
+     * @var RendererInterface
      */
     protected $resolver;
 

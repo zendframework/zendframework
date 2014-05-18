@@ -9,7 +9,8 @@
 
 namespace Zend\View\Resolver;
 
-use Zend\View\Helper\ViewModel;
+use Zend\View\Helper\ViewModel as ViewModelHelper;
+use Zend\View\Model\ModelInterface;
 use Zend\View\Renderer\RendererInterface;
 
 /**
@@ -51,11 +52,17 @@ class RelativeFallbackResolver implements ResolverInterface
         // Try to get it from the same name space (folder)
         $helper = $renderer->plugin('view_model');
 
-        if (! $helper instanceof ViewModel) {
+        if (! $helper instanceof ViewModelHelper) {
             return false;
         }
 
-        $currentTemplate = $helper->getCurrent()->getTemplate();
+        $currentModel = $helper->getCurrent();
+
+        if (! $currentModel instanceof ModelInterface) {
+            return false;
+        }
+
+        $currentTemplate = $currentModel->getTemplate();
         $position        = strrpos($currentTemplate, self::NS_SEPARATOR);
 
         if ($position > 0) {

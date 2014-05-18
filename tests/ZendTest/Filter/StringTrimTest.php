@@ -159,9 +159,9 @@ class StringTrimTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures expected behavior with empty character list
+     * Ensures expected behavior with '0' as character list
      *
-     * @return void
+     * @group 6261
      */
     public function testEmptyCharList()
     {

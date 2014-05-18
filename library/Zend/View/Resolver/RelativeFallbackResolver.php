@@ -9,8 +9,7 @@
 
 namespace Zend\View\Resolver;
 
-use Zend\View\Renderer\RendererInterface as Renderer;
-use Zend\View\Resolver\ResolverInterface as Resolver;
+use Zend\View\Renderer\RendererInterface;
 
 /**
  * Resolve addition
@@ -30,9 +29,9 @@ class RelativeFallbackResolver implements ResolverInterface
      *
      * Set wrapped resolver
      *
-     * @param \Zend\View\Resolver\ResolverInterface $resolver
+     * @param ResolverInterface $resolver
      */
-    public function __construct(Resolver $resolver)
+    public function __construct(ResolverInterface $resolver)
     {
         $this->resolver = $resolver;
     }
@@ -40,23 +39,26 @@ class RelativeFallbackResolver implements ResolverInterface
     /**
      * Resolve a template/pattern name to a resource the renderer can consume
      *
-     * @param  string $name
-     * @param  null|Renderer $renderer
+     * @param  string                 $name
+     * @param  null|RendererInterface $renderer
+     *
      * @return false|string
      */
-    public function resolve($name, Renderer $renderer = null)
+    public function resolve($name, RendererInterface $renderer = null)
     {
         // There should exists view model to get template name
-        if (!is_callable(array($renderer, 'plugin'))) {
+        if (! is_callable(array($renderer, 'plugin'))) {
             return false;
         }
 
         // Try to get it from the same name space (folder)
-        $helper = $renderer->plugin('view_model');
+        $helper          = $renderer->plugin('view_model');
         $currentTemplate = $helper->getCurrent()->getTemplate();
-        $position = strrpos($currentTemplate, self::NS_SEPARATOR);
+        $position        = strrpos($currentTemplate, self::NS_SEPARATOR);
+
         if ($position > 0) {
             $absoluteName = substr($currentTemplate, 0, $position) . self::NS_SEPARATOR . $name;
+
             return $this->resolver->resolve($absoluteName, $renderer);
         }
 

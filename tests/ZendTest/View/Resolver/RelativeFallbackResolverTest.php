@@ -12,7 +12,10 @@ namespace ZendTest\View\Resolver;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
-use Zend\View\Resolver;
+use Zend\View\Resolver\RelativeFallbackResolver;
+use Zend\View\Resolver\TemplateMapResolver;
+use Zend\View\Resolver\TemplatePathStack;
+use Zend\View\Resolver\AggregateResolver;
 
 /**
  * @covers \ZendTest\View\Resolver\RelativeFallbackResolver
@@ -21,10 +24,10 @@ class RelativeFallbackResolverTest extends TestCase
 {
     public function testReturnsResourceFromTheSameNameSpaceWithMapResolver()
     {
-        $tplMapResolver = new Resolver\TemplateMapResolver(array(
+        $tplMapResolver = new TemplateMapResolver(array(
             'foo/bar' => 'foo/baz',
         ));
-        $resolver = new Resolver\RelativeFallbackResolver($tplMapResolver);
+        $resolver = new RelativeFallbackResolver($tplMapResolver);
         $renderer = new PhpRenderer();
         $view = new ViewModel();
         $view->setTemplate('foo/zaz');
@@ -37,9 +40,9 @@ class RelativeFallbackResolverTest extends TestCase
 
     public function testReturnsResourceFromTheSameNameSpaceWithPathStack()
     {
-        $pathStack = new Resolver\TemplatePathStack();
+        $pathStack = new TemplatePathStack();
         $pathStack->addPath(__DIR__ . '/../_templates');
-        $resolver = new Resolver\RelativeFallbackResolver($pathStack);
+        $resolver = new RelativeFallbackResolver($pathStack);
         $renderer = new PhpRenderer();
         $view = new ViewModel();
         $view->setTemplate('name-space/any-view');
@@ -52,13 +55,13 @@ class RelativeFallbackResolverTest extends TestCase
 
     public function testReturnsResourceFromTopLevelIfExistsInsteadOfTheSameNameSpace()
     {
-        $tplMapResolver = new Resolver\TemplateMapResolver(array(
+        $tplMapResolver = new TemplateMapResolver(array(
             'foo/bar' => 'foo/baz',
             'bar' => 'baz',
         ));
-        $resolver = new Resolver\AggregateResolver();
+        $resolver = new AggregateResolver();
         $resolver->attach($tplMapResolver);
-        $resolver->attach(new Resolver\RelativeFallbackResolver($tplMapResolver));
+        $resolver->attach(new RelativeFallbackResolver($tplMapResolver));
         $renderer = new PhpRenderer();
         $view = new ViewModel();
         $view->setTemplate('foo/zaz');

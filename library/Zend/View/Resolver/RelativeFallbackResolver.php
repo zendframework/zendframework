@@ -27,8 +27,6 @@ class RelativeFallbackResolver implements ResolverInterface
     /**
      * Constructor
      *
-     * Set wrapped resolver
-     *
      * @param ResolverInterface $resolver
      */
     public function __construct(ResolverInterface $resolver)
@@ -37,12 +35,7 @@ class RelativeFallbackResolver implements ResolverInterface
     }
 
     /**
-     * Resolve a template/pattern name to a resource the renderer can consume
-     *
-     * @param  string                 $name
-     * @param  null|RendererInterface $renderer
-     *
-     * @return false|string
+     * {@inheritDoc}
      */
     public function resolve($name, RendererInterface $renderer = null)
     {

@@ -12,8 +12,11 @@ namespace Zend\View\Resolver;
 use Zend\View\Renderer\RendererInterface;
 
 /**
- * Resolve addition
- * Allow refering to view script
+ * Relative fallback resolver - resolves to view templates in a sub-path of the
+ * currently set view model's template (if the current renderer has the `view_model` plugin set).
+ *
+ * This allows for usage of partial template paths such as `some/partial`, resolving to
+ * `my/module/script/path/some/partial.phtml`, while rendering template `my/module/script/path/my-view`
  */
 class RelativeFallbackResolver implements ResolverInterface
 {

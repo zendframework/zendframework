@@ -11,6 +11,7 @@ namespace ZendTest\View\Resolver;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
+use Zend\View\Helper\ViewModel as ViewModelHelper;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\RelativeFallbackResolver;
@@ -33,7 +34,7 @@ class RelativeFallbackResolverTest extends TestCase
         $view = new ViewModel();
         $view->setTemplate('foo/zaz');
         $helper = $renderer->plugin('view_model');
-        /* @var $helper \Zend\View\Helper\ViewModel */
+        /* @var $helper ViewModelHelper */
         $helper->setCurrent($view);
 
         $test = $resolver->resolve('bar', $renderer);
@@ -48,7 +49,7 @@ class RelativeFallbackResolverTest extends TestCase
         $renderer = new PhpRenderer();
         $view = new ViewModel();
         $view->setTemplate('name-space/any-view');
-        /* @var $helper \Zend\View\Helper\ViewModel */
+        /* @var $helper ViewModelHelper */
         $helper = $renderer->plugin('view_model');
         $helper->setCurrent($view);
 
@@ -69,7 +70,7 @@ class RelativeFallbackResolverTest extends TestCase
         $view = new ViewModel();
         $view->setTemplate('foo/zaz');
         $helper = $renderer->plugin('view_model');
-        /* @var $helper \Zend\View\Helper\ViewModel */
+        /* @var $helper ViewModelHelper */
         $helper->setCurrent($view);
 
         $test = $resolver->resolve('bar', $renderer);
@@ -102,6 +103,24 @@ class RelativeFallbackResolverTest extends TestCase
 
         $baseResolver->expects($this->never())->method('resolve');
         $renderer->expects($this->once())->method('plugin')->will($this->returnValue(new stdClass()));
+
+        $this->assertFalse($fallback->resolve('foo/bar', $renderer));
+    }
+
+    public function testSkipsResolutionOnNonExistingCurrentViewModel()
+    {
+        /* @var $baseResolver \Zend\View\Resolver\ResolverInterface|\PHPUnit_Framework_MockObject_MockObject */
+        $baseResolver = $this->getMock('Zend\View\Resolver\ResolverInterface');
+        $fallback     = new RelativeFallbackResolver($baseResolver);
+        $viewModel    = new ViewModelHelper();
+        /* @var $renderer \Zend\View\Renderer\RendererInterface|\PHPUnit_Framework_MockObject_MockObject */
+        $renderer     = $this->getMock(
+            'Zend\View\Renderer\RendererInterface',
+            array('getEngine', 'setResolver', 'plugin', 'render')
+        );
+
+        $baseResolver->expects($this->never())->method('resolve');
+        $renderer->expects($this->once())->method('plugin')->will($this->returnValue($viewModel));
 
         $this->assertFalse($fallback->resolve('foo/bar', $renderer));
     }

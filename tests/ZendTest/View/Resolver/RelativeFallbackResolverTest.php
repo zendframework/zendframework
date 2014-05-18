@@ -20,7 +20,7 @@ use Zend\View\Resolver\TemplatePathStack;
 use Zend\View\Resolver\AggregateResolver;
 
 /**
- * @covers \ZendTest\View\Resolver\RelativeFallbackResolver
+ * @covers \Zend\View\Resolver\RelativeFallbackResolver
  */
 class RelativeFallbackResolverTest extends TestCase
 {

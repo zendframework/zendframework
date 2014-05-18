@@ -74,4 +74,17 @@ class RelativeFallbackResolverTest extends TestCase
         $test = $resolver->resolve('bar', $renderer);
         $this->assertEquals('baz', $test);
     }
+
+    public function testSkipsResolutionOnViewRendererWithoutPlugins()
+    {
+        /* @var $baseResolver \Zend\View\Resolver\ResolverInterface|\PHPUnit_Framework_MockObject_MockObject */
+        $baseResolver = $this->getMock('Zend\View\Resolver\ResolverInterface');
+        $fallback     = new RelativeFallbackResolver($baseResolver);
+        /* @var $renderer \Zend\View\Renderer\RendererInterface|\PHPUnit_Framework_MockObject_MockObject */
+        $renderer     = $this->getMock('Zend\View\Renderer\RendererInterface');
+
+        $baseResolver->expects($this->never())->method('resolve');
+
+        $this->assertFalse($fallback->resolve('foo/bar', $renderer));
+    }
 }

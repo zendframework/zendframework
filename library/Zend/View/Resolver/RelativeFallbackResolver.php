@@ -22,7 +22,7 @@ class RelativeFallbackResolver implements ResolverInterface
     /**
      * @var RendererInterface
      */
-    protected $resolver;
+    private $resolver;
 
     /**
      * Constructor

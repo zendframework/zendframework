@@ -10,6 +10,7 @@
 namespace ZendTest\View\Resolver;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use stdClass;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\RelativeFallbackResolver;
@@ -84,6 +85,23 @@ class RelativeFallbackResolverTest extends TestCase
         $renderer     = $this->getMock('Zend\View\Renderer\RendererInterface');
 
         $baseResolver->expects($this->never())->method('resolve');
+
+        $this->assertFalse($fallback->resolve('foo/bar', $renderer));
+    }
+
+    public function testSkipsResolutionOnViewRendererWithoutCorrectCurrentPlugin()
+    {
+        /* @var $baseResolver \Zend\View\Resolver\ResolverInterface|\PHPUnit_Framework_MockObject_MockObject */
+        $baseResolver = $this->getMock('Zend\View\Resolver\ResolverInterface');
+        $fallback     = new RelativeFallbackResolver($baseResolver);
+        /* @var $renderer \Zend\View\Renderer\RendererInterface|\PHPUnit_Framework_MockObject_MockObject */
+        $renderer     = $this->getMock(
+            'Zend\View\Renderer\RendererInterface',
+            array('getEngine', 'setResolver', 'plugin', 'render')
+        );
+
+        $baseResolver->expects($this->never())->method('resolve');
+        $renderer->expects($this->once())->method('plugin')->will($this->returnValue(new stdClass()));
 
         $this->assertFalse($fallback->resolve('foo/bar', $renderer));
     }

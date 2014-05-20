@@ -397,10 +397,10 @@ class Fieldset extends Element implements FieldsetInterface
                 (is_object($data) ? get_class($data) : gettype($data))
             ));
         }
-
+		
         foreach ($this->byName as $name => $elementOrFieldset) {
             $valueExists = array_key_exists($name, $data);
-
+			
             if ($elementOrFieldset instanceof FieldsetInterface) {
                 if ($valueExists && (is_array($data[$name]) || $data[$name] instanceof Traversable)) {
                     $elementOrFieldset->populateValues($data[$name]);
@@ -570,6 +570,7 @@ class Fieldset extends Element implements FieldsetInterface
      */
     public function bindValues(array $values = array())
     {
+		$objectData = $this->extract();
         $hydrator = $this->getHydrator();
         $hydratableData = array();
 
@@ -584,13 +585,18 @@ class Fieldset extends Element implements FieldsetInterface
                 $value = $element->bindValues($value);
             }
 
-            $hydratableData[$name] = $value;
-        }
+			// skip post values for disabled elements, get old value from object
+			if(!$element->hasAttribute('disabled')) {
+				$hydratableData[$name] = $value;
+			} elseif(array_key_exists($name, $objectData)) {
+				$hydratableData[$name] = $objectData[$name];
+			}
+		}
 
         if (!empty($hydratableData)) {
             $this->object = $hydrator->hydrate($hydratableData, $this->object);
         }
-
+		
         return $this->object;
     }
 

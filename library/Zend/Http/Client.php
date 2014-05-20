@@ -706,7 +706,7 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function setAuth($user, $password, $type = self::AUTH_BASIC)
     {
-        if (!defined('self::AUTH_' . strtoupper($type))) {
+        if (!defined('static::AUTH_' . strtoupper($type))) {
             throw new Exception\InvalidArgumentException("Invalid or not supported authentication type: '$type'");
         }
         if (empty($user)) {

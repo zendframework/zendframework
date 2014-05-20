@@ -140,7 +140,7 @@ class TestSampleSingleClass
 
 
 EOS;
-    //var_dump($expectedOutput);var_dump($codeGenFileFromDisk->generate());exit;
+
         $this->assertEquals($expectedOutput, $codeGenFileFromDisk->generate());
     }
 

@@ -20,7 +20,20 @@ use Zend\ServiceManager\ServiceManager;
  */
 class ServiceManagerConfigTest extends TestCase
 {
-    public function setUp()
+    /**
+     * @var ServiceManagerConfig
+     */
+    private $config;
+
+    /**
+     * @var ServiceManager
+     */
+    private $services;
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function setUp()
     {
         $this->config = new ServiceManagerConfig();
         $this->services = new ServiceManager();

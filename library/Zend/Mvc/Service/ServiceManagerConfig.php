@@ -50,7 +50,9 @@ class ServiceManagerConfig extends Config
      * @var array
      */
     protected $aliases = array(
-        'Zend\EventManager\EventManagerInterface' => 'EventManager',
+        'Zend\EventManager\EventManagerInterface'     => 'EventManager',
+        'Zend\ServiceManager\ServiceLocatorInterface' => 'ServiceManager',
+        'Zend\ServiceManager\ServiceManager'          => 'ServiceManager',
     );
 
     /**
@@ -141,7 +143,5 @@ class ServiceManagerConfig extends Config
         });
 
         $serviceManager->setService('ServiceManager', $serviceManager);
-        $serviceManager->setAlias('Zend\ServiceManager\ServiceLocatorInterface', 'ServiceManager');
-        $serviceManager->setAlias('Zend\ServiceManager\ServiceManager', 'ServiceManager');
     }
 }

@@ -688,16 +688,21 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
                 $path
             ));
         }
+        $nodeVals = array();
         foreach ($result as $node) {
             if ($node->nodeValue == $match) {
                 $this->assertEquals($match, $node->nodeValue);
                 return;
             }
+            $nodeVals[] = $node->nodeValue;
         }
+
+        $nodeValsString = implode(',', $nodeVals);
         throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-            'Failed asserting node denoted by %s CONTAINS content "%s"',
+            'Failed asserting node denoted by %s CONTAINS content "%s", Contents: [%s]',
             $path,
-            $match
+            $match,
+            $nodeValsString
         ));
     }
 

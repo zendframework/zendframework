@@ -73,6 +73,13 @@ class ServiceManagerConfig extends Config
     protected $delegators = array();
 
     /**
+     * Initializers
+     *
+     * @var array
+     */
+    protected $initializers = array();
+
+    /**
      * Constructor
      *
      * Merges internal arrays with those passed via configuration
@@ -88,6 +95,7 @@ class ServiceManagerConfig extends Config
             'aliases'            => $this->aliases,
             'shared'             => $this->shared,
             'delegators'         => $this->delegators,
+            'initializers'       => $this->initializers,
         ), $configuration);
 
         parent::__construct($configuration);

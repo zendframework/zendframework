@@ -115,6 +115,10 @@ class ServiceManagerConfig extends Config
             },
         );
 
+        $this->factories['ServiceManager'] = function (ServiceLocatorInterface $serviceLocator) {
+            return $serviceLocator;
+        };
+
         $configuration = array_replace_recursive(array(
             'invokables'         => $this->invokables,
             'factories'          => $this->factories,
@@ -126,23 +130,5 @@ class ServiceManagerConfig extends Config
         ), $configuration);
 
         parent::__construct($configuration);
-    }
-
-    /**
-     * Configure the provided service manager instance with the configuration
-     * in this class.
-     *
-     * In addition to using each of the internal properties to configure the
-     * service manager, also adds an initializer to inject ServiceManagerAware
-     * and ServiceLocatorAware classes with the service manager.
-     *
-     * @param  ServiceManager $serviceManager
-     * @return void
-     */
-    public function configureServiceManager(ServiceManager $serviceManager)
-    {
-        parent::configureServiceManager($serviceManager);
-
-        $serviceManager->setService('ServiceManager', $serviceManager);
     }
 }

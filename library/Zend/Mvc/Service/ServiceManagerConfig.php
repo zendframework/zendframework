@@ -66,7 +66,6 @@ class ServiceManagerConfig extends Config
     );
 
     /**
-     *
      * Delegators
      *
      * @var array

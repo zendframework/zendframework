@@ -13,6 +13,7 @@ use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\ServiceManager\Config;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 
@@ -91,7 +92,7 @@ class ServiceManagerConfig extends Config
     public function __construct(array $configuration = array())
     {
         $this->initializers = array(
-            'EventManagerAwareInitializer' => function ($instance, ServiceManager $serviceManager) {
+            'EventManagerAwareInitializer' => function ($instance, ServiceLocatorInterface $serviceManager) {
                 if ($instance instanceof EventManagerAwareInterface) {
                     $eventManager = $instance->getEventManager();
 
@@ -100,6 +101,11 @@ class ServiceManagerConfig extends Config
                     } else {
                         $instance->setEventManager($serviceManager->get('EventManager'));
                     }
+                }
+            },
+            'ServiceManagerAwareInitializer' => function ($instance, ServiceLocatorInterface $serviceManager) {
+                if ($serviceManager instanceof ServiceManager && $instance instanceof ServiceManagerAwareInterface) {
+                    $instance->setServiceManager($serviceManager);
                 }
             },
         );
@@ -131,12 +137,6 @@ class ServiceManagerConfig extends Config
     public function configureServiceManager(ServiceManager $serviceManager)
     {
         parent::configureServiceManager($serviceManager);
-
-        $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
-            if ($instance instanceof ServiceManagerAwareInterface) {
-                $instance->setServiceManager($serviceManager);
-            }
-        });
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
             if ($instance instanceof ServiceLocatorAwareInterface) {

@@ -15,6 +15,9 @@ use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 
+/**
+ * @covers \Zend\Mvc\Service\ServiceManagerConfig
+ */
 class ServiceManagerConfigTest extends TestCase
 {
     public function setUp()

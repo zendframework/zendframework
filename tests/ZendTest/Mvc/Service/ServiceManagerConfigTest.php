@@ -223,4 +223,28 @@ class ServiceManagerConfigTest extends TestCase
 
         $this->services->get('service-locator-aware');
     }
+
+    /**
+     * @group 6266
+     */
+    public function testServiceLocatorInitializerCanBeReplaced()
+    {
+        $instance       = $this->getMock('Zend\ServiceManager\ServiceLocatorAwareInterface');
+        $initializer    = $this->getMock('stdClass', array('__invoke'));
+        $serviceManager = new ServiceManager(new ServiceManagerConfig(array(
+            'initializers' => array(
+                'ServiceLocatorAwareInitializer' => $initializer
+            ),
+            'factories' => array(
+                'service-locator-aware' => function () use ($instance) {
+                    return $instance;
+                },
+            ),
+        )));
+
+        $initializer->expects($this->once())->method('__invoke')->with($instance, $serviceManager);
+        $instance->expects($this->never())->method('setServiceLocator');
+
+        $serviceManager->get('service-locator-aware');
+    }
 }

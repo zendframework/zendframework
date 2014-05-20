@@ -247,4 +247,29 @@ class ServiceManagerConfigTest extends TestCase
 
         $serviceManager->get('service-locator-aware');
     }
+
+    /**
+     * @group 6266
+     */
+    public function testEventManagerInitializerCanBeReplaced()
+    {
+        $instance       = $this->getMock('Zend\EventManager\EventManagerAwareInterface');
+        $initializer    = $this->getMock('stdClass', array('__invoke'));
+        $serviceManager = new ServiceManager(new ServiceManagerConfig(array(
+            'initializers' => array(
+                'EventManagerAwareInitializer' => $initializer
+            ),
+            'factories' => array(
+                'event-manager-aware' => function () use ($instance) {
+                    return $instance;
+                },
+            ),
+        )));
+
+        $initializer->expects($this->once())->method('__invoke')->with($instance, $serviceManager);
+        $instance->expects($this->never())->method('getEventManager');
+        $instance->expects($this->never())->method('setEventManager');
+
+        $serviceManager->get('event-manager-aware');
+    }
 }

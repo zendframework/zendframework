@@ -184,6 +184,30 @@ class ServiceManagerConfigTest extends TestCase
     /**
      * @group 6266
      */
+    public function testServiceManagerInitializerCanBeReplaced()
+    {
+        $instance       = $this->getMock('Zend\ServiceManager\ServiceManagerAwareInterface');
+        $initializer    = $this->getMock('stdClass', array('__invoke'));
+        $serviceManager = new ServiceManager(new ServiceManagerConfig(array(
+            'initializers' => array(
+                'ServiceManagerAwareInitializer' => $initializer
+            ),
+            'factories' => array(
+                'service-manager-aware' => function () use ($instance) {
+                    return $instance;
+                },
+            ),
+        )));
+
+        $initializer->expects($this->once())->method('__invoke')->with($instance, $serviceManager);
+        $instance->expects($this->never())->method('setServiceManager');
+
+        $serviceManager->get('service-manager-aware');
+    }
+
+    /**
+     * @group 6266
+     */
     public function testServiceLocatorInitializerIsUsedForServiceLocatorAwareObjects()
     {
         $instance = $this->getMock('Zend\ServiceManager\ServiceLocatorAwareInterface');

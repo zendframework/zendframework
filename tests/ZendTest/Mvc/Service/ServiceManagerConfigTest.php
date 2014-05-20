@@ -136,4 +136,12 @@ class ServiceManagerConfigTest extends TestCase
         $this->assertInstanceOf('stdClass', $std);
         $this->assertEquals('baz', $std->bar);
     }
+
+    /**
+     * @group 6266
+     */
+    public function testDefinesServiceManagerService()
+    {
+        $this->assertSame($this->services, $this->services->get('ServiceManager'));
+    }
 }

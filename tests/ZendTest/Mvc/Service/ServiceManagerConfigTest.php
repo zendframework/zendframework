@@ -144,4 +144,23 @@ class ServiceManagerConfigTest extends TestCase
     {
         $this->assertSame($this->services, $this->services->get('ServiceManager'));
     }
+
+    /**
+     * @group 6266
+     */
+    public function testServiceManagerInitializerIsUsedForServiceManagerAwareObjects()
+    {
+        $instance = $this->getMock('Zend\ServiceManager\ServiceManagerAwareInterface');
+
+        $instance->expects($this->once())->method('setServiceManager')->with($this->services);
+
+        $this->services->setFactory(
+            'service-manager-aware',
+            function () use ($instance) {
+                return $instance;
+            }
+        );
+
+        $this->services->get('service-manager-aware');
+    }
 }

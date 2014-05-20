@@ -148,6 +148,23 @@ class ServiceManagerConfigTest extends TestCase
     /**
      * @group 6266
      */
+    public function testCanOverrideServiceManager()
+    {
+        $test           = $this;
+        $serviceManager = new ServiceManager(new ServiceManagerConfig(array(
+            'factories' => array(
+                'ServiceManager' => function () use ($test) {
+                    return $test;
+                }
+            ),
+        )));
+
+        $this->assertSame($this, $serviceManager->get('ServiceManager'));
+    }
+
+    /**
+     * @group 6266
+     */
     public function testServiceManagerInitializerIsUsedForServiceManagerAwareObjects()
     {
         $instance = $this->getMock('Zend\ServiceManager\ServiceManagerAwareInterface');

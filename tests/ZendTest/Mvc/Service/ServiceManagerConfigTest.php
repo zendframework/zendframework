@@ -56,6 +56,9 @@ class ServiceManagerConfigTest extends TestCase
         $this->assertSame($this->services->get('SharedEventManager'), $events->getSharedManager());
     }
 
+    /**
+     * @group 6266
+     */
     public function testCanMergeCustomConfigWithDefaultConfig()
     {
         $custom = array(
@@ -78,6 +81,9 @@ class ServiceManagerConfigTest extends TestCase
         $this->assertTrue($sm->has('ModuleManager'));
     }
 
+    /**
+     * @group 6266
+     */
     public function testCanOverrideDefaultConfigWithCustomConfig()
     {
         $custom = array(
@@ -101,6 +107,9 @@ class ServiceManagerConfigTest extends TestCase
         $this->assertInstanceOf('stdClass', $sm->get('ModuleManager'));
     }
 
+    /**
+     * @group 6266
+     */
     public function testCanAddDelegators()
     {
         $config = array(

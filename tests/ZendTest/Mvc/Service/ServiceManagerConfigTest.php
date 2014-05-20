@@ -47,7 +47,7 @@ class ServiceManagerConfigTest extends TestCase
                 'foo' => '\stdClass',
             ),
             'factories' => array(
-                'bar' => function($sm) {
+                'bar' => function () {
                     return new \stdClass();
                 },
             ),
@@ -69,7 +69,7 @@ class ServiceManagerConfigTest extends TestCase
                 'foo' => '\stdClass',
             ),
             'factories' => array(
-                'ModuleManager' => function($sm) {
+                'ModuleManager' => function () {
                     return new \stdClass();
                 },
             ),
@@ -92,16 +92,15 @@ class ServiceManagerConfigTest extends TestCase
                 'foo' => '\stdClass',
             ),
             'delegators' => array(
-                'foo' => array(function(ServiceLocatorInterface $serviceLocator,
-                                  $name,
-                                  $requestedName,
-                                  $callback) {
+                'foo' => array(
+                    function (ServiceLocatorInterface $serviceLocator, $name, $requestedName, $callback) {
                         $service = $callback();
                         $service->bar = 'baz';
 
                         return $service;
                     },
-            )),
+                )
+            ),
         );
 
         $config = new ServiceManagerConfig($config);

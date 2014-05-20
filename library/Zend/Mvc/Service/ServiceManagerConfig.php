@@ -11,12 +11,14 @@ namespace Zend\Mvc\Service;
 
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
-use Zend\ServiceManager\ConfigInterface;
+use Zend\ServiceManager\Config;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
+use Zend\Stdlib\ArrayUtils;
 
-class ServiceManagerConfig implements ConfigInterface
+class ServiceManagerConfig extends Config
 {
     /**
      * Services that can be instantiated without factories
@@ -50,7 +52,9 @@ class ServiceManagerConfig implements ConfigInterface
      * @var array
      */
     protected $aliases = array(
-        'Zend\EventManager\EventManagerInterface' => 'EventManager',
+        'Zend\EventManager\EventManagerInterface'     => 'EventManager',
+        'Zend\ServiceManager\ServiceLocatorInterface' => 'ServiceManager',
+        'Zend\ServiceManager\ServiceManager'          => 'ServiceManager',
     );
 
     /**
@@ -66,6 +70,20 @@ class ServiceManagerConfig implements ConfigInterface
     );
 
     /**
+     * Delegators
+     *
+     * @var array
+     */
+    protected $delegators = array();
+
+    /**
+     * Initializers
+     *
+     * @var array
+     */
+    protected $initializers = array();
+
+    /**
      * Constructor
      *
      * Merges internal arrays with those passed via configuration
@@ -74,87 +92,45 @@ class ServiceManagerConfig implements ConfigInterface
      */
     public function __construct(array $configuration = array())
     {
-        if (isset($configuration['invokables'])) {
-            $this->invokables = array_merge($this->invokables, $configuration['invokables']);
-        }
+        $this->initializers = array(
+            'EventManagerAwareInitializer' => function ($instance, ServiceLocatorInterface $serviceLocator) {
+                if ($instance instanceof EventManagerAwareInterface) {
+                    $eventManager = $instance->getEventManager();
 
-        if (isset($configuration['factories'])) {
-            $this->factories = array_merge($this->factories, $configuration['factories']);
-        }
-
-        if (isset($configuration['abstract_factories'])) {
-            $this->abstractFactories = array_merge($this->abstractFactories, $configuration['abstract_factories']);
-        }
-
-        if (isset($configuration['aliases'])) {
-            $this->aliases = array_merge($this->aliases, $configuration['aliases']);
-        }
-
-        if (isset($configuration['shared'])) {
-            $this->shared = array_merge($this->shared, $configuration['shared']);
-        }
-
-    }
-
-    /**
-     * Configure the provided service manager instance with the configuration
-     * in this class.
-     *
-     * In addition to using each of the internal properties to configure the
-     * service manager, also adds an initializer to inject ServiceManagerAware
-     * and ServiceLocatorAware classes with the service manager.
-     *
-     * @param  ServiceManager $serviceManager
-     * @return void
-     */
-    public function configureServiceManager(ServiceManager $serviceManager)
-    {
-        foreach ($this->invokables as $name => $class) {
-            $serviceManager->setInvokableClass($name, $class);
-        }
-
-        foreach ($this->factories as $name => $factoryClass) {
-            $serviceManager->setFactory($name, $factoryClass);
-        }
-
-        foreach ($this->abstractFactories as $factoryClass) {
-            $serviceManager->addAbstractFactory($factoryClass);
-        }
-
-        foreach ($this->aliases as $name => $service) {
-            $serviceManager->setAlias($name, $service);
-        }
-
-        foreach ($this->shared as $name => $value) {
-            $serviceManager->setShared($name, $value);
-        }
-
-        $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
-            if ($instance instanceof EventManagerAwareInterface) {
-                if ($instance->getEventManager() instanceof EventManagerInterface) {
-                    $instance->getEventManager()->setSharedManager(
-                        $serviceManager->get('SharedEventManager')
-                    );
-                } else {
-                    $instance->setEventManager($serviceManager->get('EventManager'));
+                    if ($eventManager instanceof EventManagerInterface) {
+                        $eventManager->setSharedManager($serviceLocator->get('SharedEventManager'));
+                    } else {
+                        $instance->setEventManager($serviceLocator->get('EventManager'));
+                    }
                 }
-            }
-        });
+            },
+            'ServiceManagerAwareInitializer' => function ($instance, ServiceLocatorInterface $serviceLocator) {
+                if ($serviceLocator instanceof ServiceManager && $instance instanceof ServiceManagerAwareInterface) {
+                    $instance->setServiceManager($serviceLocator);
+                }
+            },
+            'ServiceLocatorAwareInitializer' => function ($instance, ServiceLocatorInterface $serviceLocator) {
+                if ($instance instanceof ServiceLocatorAwareInterface) {
+                    $instance->setServiceLocator($serviceLocator);
+                }
+            },
+        );
 
-        $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
-            if ($instance instanceof ServiceManagerAwareInterface) {
-                $instance->setServiceManager($serviceManager);
-            }
-        });
+        $this->factories['ServiceManager'] = function (ServiceLocatorInterface $serviceLocator) {
+            return $serviceLocator;
+        };
 
-        $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
-            if ($instance instanceof ServiceLocatorAwareInterface) {
-                $instance->setServiceLocator($serviceManager);
-            }
-        });
-
-        $serviceManager->setService('ServiceManager', $serviceManager);
-        $serviceManager->setAlias('Zend\ServiceManager\ServiceLocatorInterface', 'ServiceManager');
-        $serviceManager->setAlias('Zend\ServiceManager\ServiceManager', 'ServiceManager');
+        parent::__construct(ArrayUtils::merge(
+            array(
+                'invokables'         => $this->invokables,
+                'factories'          => $this->factories,
+                'abstract_factories' => $this->abstractFactories,
+                'aliases'            => $this->aliases,
+                'shared'             => $this->shared,
+                'delegators'         => $this->delegators,
+                'initializers'       => $this->initializers,
+            ),
+            $configuration
+        ));
     }
 }

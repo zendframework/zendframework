@@ -16,6 +16,7 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
+use Zend\Stdlib\ArrayUtils;
 
 class ServiceManagerConfig extends Config
 {
@@ -119,16 +120,17 @@ class ServiceManagerConfig extends Config
             return $serviceLocator;
         };
 
-        $configuration = array_replace_recursive(array(
-            'invokables'         => $this->invokables,
-            'factories'          => $this->factories,
-            'abstract_factories' => $this->abstractFactories,
-            'aliases'            => $this->aliases,
-            'shared'             => $this->shared,
-            'delegators'         => $this->delegators,
-            'initializers'       => $this->initializers,
-        ), $configuration);
-
-        parent::__construct($configuration);
+        parent::__construct(ArrayUtils::merge(
+            array(
+                'invokables'         => $this->invokables,
+                'factories'          => $this->factories,
+                'abstract_factories' => $this->abstractFactories,
+                'aliases'            => $this->aliases,
+                'shared'             => $this->shared,
+                'delegators'         => $this->delegators,
+                'initializers'       => $this->initializers,
+            ),
+            $configuration
+        ));
     }
 }

@@ -90,6 +90,20 @@ class ServiceManagerConfig extends Config
      */
     public function __construct(array $configuration = array())
     {
+        $this->initializers = array(
+            'EventManagerAwareInitializer' => function ($instance, ServiceManager $serviceManager) {
+                if ($instance instanceof EventManagerAwareInterface) {
+                    $eventManager = $instance->getEventManager();
+
+                    if ($eventManager instanceof EventManagerInterface) {
+                        $eventManager->setSharedManager($serviceManager->get('SharedEventManager'));
+                    } else {
+                        $instance->setEventManager($serviceManager->get('EventManager'));
+                    }
+                }
+            },
+        );
+
         $configuration = array_replace_recursive(array(
             'invokables'         => $this->invokables,
             'factories'          => $this->factories,
@@ -116,19 +130,7 @@ class ServiceManagerConfig extends Config
      */
     public function configureServiceManager(ServiceManager $serviceManager)
     {
-       parent::configureServiceManager($serviceManager);
-
-        $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
-            if ($instance instanceof EventManagerAwareInterface) {
-                if ($instance->getEventManager() instanceof EventManagerInterface) {
-                    $instance->getEventManager()->setSharedManager(
-                        $serviceManager->get('SharedEventManager')
-                    );
-                } else {
-                    $instance->setEventManager($serviceManager->get('EventManager'));
-                }
-            }
-        });
+        parent::configureServiceManager($serviceManager);
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
             if ($instance instanceof ServiceManagerAwareInterface) {

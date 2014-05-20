@@ -90,7 +90,9 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
             array(array(
                 'abc123',
                 'abc 123'
-            ))
+            )),
+            array(true),
+            array(false),
         );
     }
 
@@ -102,6 +104,6 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new DigitsFilter();
 
-        $this->assertEquals($input, $filter($input));
+        $this->assertSame($input, $filter($input));
     }
 }

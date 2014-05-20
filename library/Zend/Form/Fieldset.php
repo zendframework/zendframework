@@ -397,10 +397,10 @@ class Fieldset extends Element implements FieldsetInterface
                 (is_object($data) ? get_class($data) : gettype($data))
             ));
         }
-        
+
         foreach ($this->byName as $name => $elementOrFieldset) {
             $valueExists = array_key_exists($name, $data);
-            
+
             if ($elementOrFieldset instanceof FieldsetInterface) {
                 if ($valueExists && (is_array($data[$name]) || $data[$name] instanceof Traversable)) {
                     $elementOrFieldset->populateValues($data[$name]);
@@ -596,7 +596,7 @@ class Fieldset extends Element implements FieldsetInterface
         if (!empty($hydratableData)) {
             $this->object = $hydrator->hydrate($hydratableData, $this->object);
         }
-        
+
         return $this->object;
     }
 

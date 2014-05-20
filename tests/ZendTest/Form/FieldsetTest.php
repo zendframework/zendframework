@@ -481,19 +481,19 @@ class FieldsetTest extends TestCase
         $object = new \stdClass();
         $object->disabled = 'notModified';
         $object->not_disabled = 'notModified';
-        
+
         $textInput = new Element\Text('not_disabled');
         $disabledInput = new Element\Text('disabled');
         $disabledInput->setAttribute('disabled', 'disabled');
-        
+
         $form = new Form();
         $form->add($textInput);
         $form->add($disabledInput);
-        
+
         $form->setObject($object);
         $form->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
         $form->bindValues(array('not_disabled' => 'modified', 'disabled' => 'modified'));
-        
+
         $this->assertEquals('modified', $object->not_disabled);
         $this->assertEquals('notModified', $object->disabled);
     }

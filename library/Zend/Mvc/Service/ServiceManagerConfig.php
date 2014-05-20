@@ -92,20 +92,25 @@ class ServiceManagerConfig extends Config
     public function __construct(array $configuration = array())
     {
         $this->initializers = array(
-            'EventManagerAwareInitializer' => function ($instance, ServiceLocatorInterface $serviceManager) {
+            'EventManagerAwareInitializer' => function ($instance, ServiceLocatorInterface $serviceLocator) {
                 if ($instance instanceof EventManagerAwareInterface) {
                     $eventManager = $instance->getEventManager();
 
                     if ($eventManager instanceof EventManagerInterface) {
-                        $eventManager->setSharedManager($serviceManager->get('SharedEventManager'));
+                        $eventManager->setSharedManager($serviceLocator->get('SharedEventManager'));
                     } else {
-                        $instance->setEventManager($serviceManager->get('EventManager'));
+                        $instance->setEventManager($serviceLocator->get('EventManager'));
                     }
                 }
             },
-            'ServiceManagerAwareInitializer' => function ($instance, ServiceLocatorInterface $serviceManager) {
-                if ($serviceManager instanceof ServiceManager && $instance instanceof ServiceManagerAwareInterface) {
-                    $instance->setServiceManager($serviceManager);
+            'ServiceManagerAwareInitializer' => function ($instance, ServiceLocatorInterface $serviceLocator) {
+                if ($serviceLocator instanceof ServiceManager && $instance instanceof ServiceManagerAwareInterface) {
+                    $instance->setServiceManager($serviceLocator);
+                }
+            },
+            'ServiceLocatorAwareInitializer' => function ($instance, ServiceLocatorInterface $serviceLocator) {
+                if ($instance instanceof ServiceLocatorAwareInterface) {
+                    $instance->setServiceLocator($serviceLocator);
                 }
             },
         );
@@ -137,12 +142,6 @@ class ServiceManagerConfig extends Config
     public function configureServiceManager(ServiceManager $serviceManager)
     {
         parent::configureServiceManager($serviceManager);
-
-        $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
-            if ($instance instanceof ServiceLocatorAwareInterface) {
-                $instance->setServiceLocator($serviceManager);
-            }
-        });
 
         $serviceManager->setService('ServiceManager', $serviceManager);
     }

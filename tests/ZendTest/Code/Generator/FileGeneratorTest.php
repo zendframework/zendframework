@@ -392,5 +392,5 @@ $foo->bar();
 CODE;
         $actual = file_get_contents('/tmp/result_class.php');
         $this->assertEquals($expected, $actual);
-    }    
+    }
 }

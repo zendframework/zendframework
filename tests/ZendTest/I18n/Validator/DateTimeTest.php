@@ -6,24 +6,33 @@
  * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace ZendTest\I18n\Validator;
 
 use Zend\I18n\Validator\DateTime as DateTimeValidator;
 use Locale;
 
 /**
- * @group      Zend_Validator
+ * @group Zend_Validator
  */
 class DateTimeTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
+     *
      * @var DateTimeValidator
      */
     protected $validator;
 
+    /**
+     *
+     * @var \Locale
+     */
     protected $locale;
 
+    /**
+     *
+     * @var \DateTimeZone
+     */
     protected $timezone;
 
     public function setUp()
@@ -35,7 +44,10 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
         $this->locale = Locale::getDefault();
         $this->timezone = date_default_timezone_get();
 
-        $this->validator = new DateTimeValidator(array('locale' => 'en', 'timezone'=>'Europe/Amsterdam'));
+        $this->validator = new DateTimeValidator(array(
+            'locale' => 'en',
+            'timezone' => 'Europe/Amsterdam'
+        ));
     }
 
     public function tearDown()
@@ -59,10 +71,18 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
     {
         $this->validator->setOptions($options);
 
-        $this->assertEquals($expected, $this->validator->isValid($value),
-            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') .
-                sprintf(" (locale:%s, dateType: %s, timeType: %s, pattern:%s)", $this->validator->getLocale(),
-                    $this->validator->getDateType(), $this->validator->getTimeType(), $this->validator->getPattern()));
+        $this->assertEquals(
+            $expected,
+            $this->validator->isValid($value),
+            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false')
+            . sprintf(
+                " (locale:%s, dateType: %s, timeType: %s, pattern:%s)",
+                $this->validator->getLocale(),
+                $this->validator->getDateType(),
+                $this->validator->getTimeType(),
+                $this->validator->getPattern()
+            )
+        );
     }
 
     public function basicProvider()
@@ -71,24 +91,141 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
             if (version_compare(\PHPUnit_Runner_Version::id(), '3.8.0-dev') === 1) {
                 $this->markTestSkipped('ext/intl not enabled');
             } else {
-                return array(array());
+                return array(
+                    array()
+                );
             }
         }
 
         return array(
-            array('May 30, 2013',   true, array('locale'=>'en', 'dateType' => \IntlDateFormatter::MEDIUM, 'timeType' => \IntlDateFormatter::NONE)),
-            array('30.Mai.2013',   true, array('locale'=>'de', 'dateType' => \IntlDateFormatter::MEDIUM, 'timeType' => \IntlDateFormatter::NONE)),
-            array('30 Mei 2013',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::MEDIUM, 'timeType' => \IntlDateFormatter::NONE)),
+            array(
+                'May 30, 2013',
+                true,
+                array(
+                    'locale' => 'en',
+                    'dateType' => \IntlDateFormatter::MEDIUM,
+                    'timeType' => \IntlDateFormatter::NONE
+                )
+            ),
+            array(
+                '30.Mai.2013',
+                true,
+                array(
+                    'locale' => 'de',
+                    'dateType' => \IntlDateFormatter::MEDIUM,
+                    'timeType' => \IntlDateFormatter::NONE
+                )
+            ),
+            array(
+                '20 мая 2014 г.',
+                true,
+                array(
+                    'locale' => 'ru',
+                    'dateType' => \IntlDateFormatter::MEDIUM,
+                    'timeType' => \IntlDateFormatter::NONE
+                )
+            ),
+            array(
+                '2014年5月20日星期二',
+                true,
+                array(
+                    'locale' => 'zh-TW',
+                    'dateType' => \IntlDateFormatter::FULL,
+                    'timeType' => \IntlDateFormatter::NONE
+                )
+            ),
+            array(
+                '2014, മേയ് 20, ചൊവ്വാഴ്ച',
+                true,
+                array(
+                    'locale' => 'ml-IN',
+                    'dateType' => \IntlDateFormatter::FULL,
+                    'timeType' => \IntlDateFormatter::NONE
+                )
+            ),
+            array(
+                '30 Mei 2013',
+                true,
+                array(
+                    'locale' => 'nl',
+                    'dateType' => \IntlDateFormatter::MEDIUM,
+                    'timeType' => \IntlDateFormatter::NONE
+                )
+            ),
 
-            array('May 38, 2013',   false, array('locale'=>'en', 'dateType' => \IntlDateFormatter::FULL, 'timeType' => \IntlDateFormatter::NONE)),
-            array('Dienstag, 28. Mai 2013',   true, array('locale'=>'de', 'dateType' => \IntlDateFormatter::FULL, 'timeType' => \IntlDateFormatter::NONE)),
-            array('Maandag 28 Mei 2013',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::FULL, 'timeType' => \IntlDateFormatter::NONE)),
+            array(
+                'May 38, 2013',
+                false,
+                array(
+                    'locale' => 'en',
+                    'dateType' => \IntlDateFormatter::FULL,
+                    'timeType' => \IntlDateFormatter::NONE
+                )
+            ),
+            array(
+                'Dienstag, 28. Mai 2013',
+                true,
+                array(
+                    'locale' => 'de',
+                    'dateType' => \IntlDateFormatter::FULL,
+                    'timeType' => \IntlDateFormatter::NONE
+                )
+            ),
+            array(
+                'Maandag 28 Mei 2013',
+                true,
+                array(
+                    'locale' => 'nl',
+                    'dateType' => \IntlDateFormatter::FULL,
+                    'timeType' => \IntlDateFormatter::NONE
+                )
+            ),
 
-            array('0:00',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::SHORT)),
-            array('01:01',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::SHORT)),
-            array('01:01:01',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::MEDIUM)),
-            array('01:01:01 +2',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::LONG)),
-            array('03:30:42 am +2',   true, array('locale'=>'en', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::LONG)),
+            array(
+                '0:00',
+                true,
+                array(
+                    'locale' => 'nl',
+                    'dateType' => \IntlDateFormatter::NONE,
+                    'timeType' => \IntlDateFormatter::SHORT
+                )
+            ),
+            array(
+                '01:01',
+                true,
+                array(
+                    'locale' => 'nl',
+                    'dateType' => \IntlDateFormatter::NONE,
+                    'timeType' => \IntlDateFormatter::SHORT
+                )
+            ),
+            array(
+                '01:01:01',
+                true,
+                array(
+                    'locale' => 'nl',
+                    'dateType' => \IntlDateFormatter::NONE,
+                    'timeType' => \IntlDateFormatter::MEDIUM
+                )
+            ),
+            array(
+                '01:01:01 +2',
+                true,
+                array(
+                    'locale' => 'nl',
+                    'dateType' => \IntlDateFormatter::NONE,
+                    'timeType' => \IntlDateFormatter::LONG
+                )
+            ),
+            array(
+                '03:30:42 am +2',
+                true,
+                array(
+                    'locale' => 'en',
+                    'dateType' => \IntlDateFormatter::NONE,
+                    'timeType' => \IntlDateFormatter::LONG
+                )
+            )
         );
     }
 
@@ -158,5 +295,4 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->validator->isValid('02:00'));
         $this->assertEquals('hh:mm', $this->validator->getPattern());
     }
-
 }

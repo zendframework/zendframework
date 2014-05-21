@@ -117,7 +117,7 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
                 )
             ),
             array(
-                '20 мая 2014 г.',
+                '20 мая 2014 г',
                 true,
                 array(
                     'locale' => 'ru',

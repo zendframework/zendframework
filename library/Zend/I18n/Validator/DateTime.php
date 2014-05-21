@@ -17,7 +17,6 @@ use Zend\Validator\Exception as ValidatorException;
 
 class DateTime extends AbstractValidator
 {
-
     const INVALID          = 'datetimeInvalid';
     const INVALID_DATETIME = 'datetimeInvalidDateTime';
 
@@ -27,7 +26,7 @@ class DateTime extends AbstractValidator
      */
     protected $messageTemplates = array(
         self::INVALID          => "Invalid type given. String expected",
-        self::INVALID_DATETIME => "The input does not appear to be a valid datetime"
+        self::INVALID_DATETIME => "The input does not appear to be a valid datetime",
     );
 
     /**
@@ -250,7 +249,7 @@ class DateTime extends AbstractValidator
     /**
      * Returns true if and only if $value is a floating-point value
      *
-     * @param string $value
+     * @param  string                             $value
      * @return bool
      * @throws ValidatorException\InvalidArgumentException
      */

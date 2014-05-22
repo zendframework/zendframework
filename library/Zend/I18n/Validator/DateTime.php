@@ -250,7 +250,7 @@ class DateTime extends AbstractValidator
     /**
      * Returns true if and only if $value is a floating-point value
      *
-     * @param  string                             $value
+     * @param  string $value
      * @return bool
      * @throws ValidatorException\InvalidArgumentException
      */

@@ -98,62 +98,33 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
             }
         }
 
-        return array(
-            array(
-                'May 30, 2013',
-                true,
-                array(
-                    'locale' => 'en',
-                    'dateType' => \IntlDateFormatter::MEDIUM,
-                    'timeType' => \IntlDateFormatter::NONE
-                )
-            ),
-            array(
-                '30.Mai.2013',
-                true,
-                array(
-                    'locale' => 'de',
-                    'dateType' => \IntlDateFormatter::MEDIUM,
-                    'timeType' => \IntlDateFormatter::NONE
-                )
-            ),
-            array(
-                '20 мая 2014 г',
-                true,
-                array(
-                    'locale' => 'ru',
-                    'dateType' => \IntlDateFormatter::MEDIUM,
-                    'timeType' => \IntlDateFormatter::NONE
-                )
-            ),
-            array(
-                '2014年5月20日星期二',
-                true,
-                array(
-                    'locale' => 'zh-TW',
-                    'dateType' => \IntlDateFormatter::FULL,
-                    'timeType' => \IntlDateFormatter::NONE
-                )
-            ),
-            array(
-                '2014, മേയ് 20, ചൊവ്വാഴ്ച',
-                true,
-                array(
-                    'locale' => 'ml-IN',
-                    'dateType' => \IntlDateFormatter::FULL,
-                    'timeType' => \IntlDateFormatter::NONE
-                )
-            ),
-            array(
-                '30 Mei 2013',
-                true,
-                array(
-                    'locale' => 'nl',
-                    'dateType' => \IntlDateFormatter::MEDIUM,
-                    'timeType' => \IntlDateFormatter::NONE
-                )
-            ),
+        $trueArray      = array();
+        $testingDate    = new \DateTime();
+        $testingLocales = array('en', 'de', 'zh-TW', 'ja', 'ar', 'ru', 'si', 'ml-IN', 'hi');
+        $testingFormats = array(
+            \IntlDateFormatter::FULL,
+            \IntlDateFormatter::LONG,
+            \IntlDateFormatter::MEDIUM,
+            \IntlDateFormatter::SHORT,
+            \IntlDateFormatter::NONE
+        );
 
+        //Loop locales and formats for a more thorough set of "true" test data
+        foreach ($testingLocales as $locale) {
+            foreach ($testingFormats as $dateFormat) {
+                foreach ($testingFormats as $timeFormat) {
+                    if (($timeFormat !== \IntlDateFormatter::NONE) || ($dateFormat !== \IntlDateFormatter::NONE)) {
+                        $trueArray[] = array(
+                            \IntlDateFormatter::create($locale, $dateFormat, $timeFormat)->format($testingDate),
+                            true,
+                            array('locale' => $locale, 'dateType' => $dateFormat, 'timeType' => $timeFormat)
+                        );
+                    }
+                }
+            }
+        }
+
+        $falseArray = array(
             array(
                 'May 38, 2013',
                 false,
@@ -162,72 +133,10 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
                     'dateType' => \IntlDateFormatter::FULL,
                     'timeType' => \IntlDateFormatter::NONE
                 )
-            ),
-            array(
-                'Dienstag, 28. Mai 2013',
-                true,
-                array(
-                    'locale' => 'de',
-                    'dateType' => \IntlDateFormatter::FULL,
-                    'timeType' => \IntlDateFormatter::NONE
-                )
-            ),
-            array(
-                'Maandag 28 Mei 2013',
-                true,
-                array(
-                    'locale' => 'nl',
-                    'dateType' => \IntlDateFormatter::FULL,
-                    'timeType' => \IntlDateFormatter::NONE
-                )
-            ),
-
-            array(
-                '0:00',
-                true,
-                array(
-                    'locale' => 'nl',
-                    'dateType' => \IntlDateFormatter::NONE,
-                    'timeType' => \IntlDateFormatter::SHORT
-                )
-            ),
-            array(
-                '01:01',
-                true,
-                array(
-                    'locale' => 'nl',
-                    'dateType' => \IntlDateFormatter::NONE,
-                    'timeType' => \IntlDateFormatter::SHORT
-                )
-            ),
-            array(
-                '01:01:01',
-                true,
-                array(
-                    'locale' => 'nl',
-                    'dateType' => \IntlDateFormatter::NONE,
-                    'timeType' => \IntlDateFormatter::MEDIUM
-                )
-            ),
-            array(
-                '01:01:01 +2',
-                true,
-                array(
-                    'locale' => 'nl',
-                    'dateType' => \IntlDateFormatter::NONE,
-                    'timeType' => \IntlDateFormatter::LONG
-                )
-            ),
-            array(
-                '03:30:42 am +2',
-                true,
-                array(
-                    'locale' => 'en',
-                    'dateType' => \IntlDateFormatter::NONE,
-                    'timeType' => \IntlDateFormatter::LONG
-                )
             )
         );
+
+        return array_merge($trueArray, $falseArray);
     }
 
     /**

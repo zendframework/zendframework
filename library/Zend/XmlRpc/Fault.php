@@ -92,7 +92,7 @@ class Fault
         if (empty($message) && isset($this->internal[$code])) {
             $message = $this->internal[$code];
         } elseif (empty($message)) {
-            $message = 'Unknown error';
+            $message = $this->internal[404];
         }
         $this->setMessage($message);
     }
@@ -233,7 +233,7 @@ class Fault
             if (isset($this->internal[$code])) {
                 $message = $this->internal[$code];
             } else {
-                $message = 'Unknown Error';
+                $message = $this->internal[404];
             }
         }
 

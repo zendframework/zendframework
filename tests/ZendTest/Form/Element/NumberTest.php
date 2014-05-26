@@ -121,7 +121,9 @@ class NumberTest extends TestCase
         foreach($inputSpec['validators'] as $validator) {
             if (get_class($validator) == 'Zend\Validator\Regex') {
                 $this->assertFalse($validator->isValid('1,000.01'));
+                $this->assertFalse($validator->isValid('-1,000.01'));
                 $this->assertTrue($validator->isValid('1000.01'));
+                $this->assertTrue($validator->isValid('-1000.01'));
                 break;
             }
         }

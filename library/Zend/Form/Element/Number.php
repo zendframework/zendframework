@@ -48,7 +48,7 @@ class Number extends Element implements InputProviderInterface
         // thousand separator. The prior use of the i18n Float validator
         // allowed the thousand separator, which resulted in wrong numbers
         // when casting to float.
-        $validators[] = new RegexValidator('(^\d*(\.\d+)?$)');
+        $validators[] = new RegexValidator('(^-?\d*(\.\d+)?$)');
 
         $inclusive = true;
         if (isset($this->attributes['inclusive'])) {

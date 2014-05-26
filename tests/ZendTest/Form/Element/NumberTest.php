@@ -122,4 +122,18 @@ class NumberTest extends TestCase
             }
         }
     }
+
+    public function testOnlyCastableDecimalsAreAccepted()
+    {
+        $element = new NumberElement();
+
+        $inputSpec = $element->getInputSpecification();
+        foreach($inputSpec['validators'] as $validator) {
+            if (get_class($validator) == 'Zend\I18n\Validator\Float') {
+                $this->assertFalse($validator->isValid('1,000.01'));
+                $this->assertTrue($validator->isValid('1000.01'));
+                break;
+            }
+        }
+    }
 }

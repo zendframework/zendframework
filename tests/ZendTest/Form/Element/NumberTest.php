@@ -16,11 +16,6 @@ class NumberTest extends TestCase
 {
     public function testProvidesInputSpecificationWithDefaultAttributes()
     {
-        if (!extension_loaded('intl')) {
-            // Required by \Zend\I18n\Validator\Float
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         $element = new NumberElement();
 
         $inputSpec = $element->getInputSpecification();
@@ -28,7 +23,7 @@ class NumberTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\I18n\Validator\Float',
+            'Zend\Validator\Regex',
             'Zend\Validator\Step',
         );
         foreach ($inputSpec['validators'] as $validator) {
@@ -46,11 +41,6 @@ class NumberTest extends TestCase
 
     public function testProvidesInputSpecificationThatIncludesValidatorsBasedOnAttributes()
     {
-        if (!extension_loaded('intl')) {
-            // Required by \Zend\I18n\Validator\Float
-            $this->markTestSkipped('ext/intl not enabled');
-        }
-
         $element = new NumberElement();
         $element->setAttributes(array(
             'inclusive' => true,
@@ -64,9 +54,9 @@ class NumberTest extends TestCase
         $this->assertInternalType('array', $inputSpec['validators']);
 
         $expectedClasses = array(
-            'Zend\I18n\Validator\Float',
             'Zend\Validator\GreaterThan',
             'Zend\Validator\LessThan',
+            'Zend\Validator\Regex',
             'Zend\Validator\Step',
         );
         foreach ($inputSpec['validators'] as $validator) {
@@ -129,7 +119,7 @@ class NumberTest extends TestCase
 
         $inputSpec = $element->getInputSpecification();
         foreach($inputSpec['validators'] as $validator) {
-            if (get_class($validator) == 'Zend\I18n\Validator\Float') {
+            if (get_class($validator) == 'Zend\Validator\Regex') {
                 $this->assertFalse($validator->isValid('1,000.01'));
                 $this->assertTrue($validator->isValid('1000.01'));
                 break;

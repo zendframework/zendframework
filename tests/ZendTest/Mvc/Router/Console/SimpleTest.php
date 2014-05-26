@@ -873,7 +873,7 @@ class SimpleTest extends TestCase
         }
     }
 
-    public function testCanNotMatchingWithEmtpyMandatoryParam()
+    public function testCanNotMatchingWithEmptyMandatoryParam()
     {
         $arguments = array('--foo=');
         array_unshift($arguments, 'scriptname.php');

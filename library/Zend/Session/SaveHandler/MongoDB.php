@@ -63,11 +63,11 @@ class MongoDB implements SaveHandlerInterface
         }
 
         if (null === ($database = $options->getDatabase())) {
-            throw new InvalidArgumentException('The database option cannot be emtpy');
+            throw new InvalidArgumentException('The database option cannot be empty');
         }
 
         if (null === ($collection = $options->getCollection())) {
-            throw new InvalidArgumentException('The collection option cannot be emtpy');
+            throw new InvalidArgumentException('The collection option cannot be empty');
         }
 
         $this->mongoCollection = $mongo->selectCollection($database, $collection);

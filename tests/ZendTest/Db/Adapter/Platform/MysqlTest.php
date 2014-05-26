@@ -147,31 +147,4 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
             $this->platform->quoteIdentifierInFragment('(foo.bar = boo.baz) AND (foo.baz = boo.baz)', array('(', ')', '=', 'and', 'bAz'))
         );
     }
-
-    /**
-     * @deprecated will be removed if this PR will accepted
-     */
-    public function testPerf()
-    {
-        $indexTo     = 1000;
-        $identifier  = 'foo.bar';
-        $platform    = new \ZendTest\Db\TestAsset\MysqlOrig;
-        $platformNew = new Mysql;
-        //======================================================================
-        $time = microtime(true);
-        for ($index = 0; $index < $indexTo; $index++) {
-            $platform->quoteIdentifierInFragment($identifier);
-        }
-        $time = round(microtime(true) - $time, 3);
-        //======================================================================
-        $timeNew = microtime(true);
-        for ($index = 0; $index < $indexTo; $index++) {
-            $platformNew->quoteIdentifierInFragment($identifier);
-        }
-        $timeNew = round(microtime(true) - $timeNew, 3);
-        //======================================================================
-
-        $perfPercent = abs(round(($time-$timeNew)/$time, 2) * 100);
-        print PHP_EOL . "performance degradation : $perfPercent%" . PHP_EOL;
-    }
 }

@@ -52,16 +52,6 @@ class ArrayMapNamingStrategy implements NamingStrategyInterface
     }
 
     /**
-     * Gets hydrationMap
-     *
-     * @return array
-     */
-    public function getHydrationMap()
-    {
-        return $this->hydrationMap;
-    }
-
-    /**
      * Sets extractionMap
      *
      * @param  array $extractionMap
@@ -80,22 +70,12 @@ class ArrayMapNamingStrategy implements NamingStrategyInterface
     }
 
     /**
-     * Gets extractionMap
-     *
-     * @return array
-     */
-    public function getExtractionMap()
-    {
-        return $this->extractionMap;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public function hydrate($name)
     {
-        if (isset($this->getHydrationMap()[$name])) {
-            return $this->getHydrationMap()[$name];
+        if (isset($this->hydrationMap[$name])) {
+            return $this->hydrationMap[$name];
         }
 
         return $name;
@@ -106,8 +86,8 @@ class ArrayMapNamingStrategy implements NamingStrategyInterface
      */
     public function extract($name)
     {
-        if (isset($this->getExtractionMap()[$name])) {
-            return $this->getExtractionMap()[$name];
+        if (isset($this->extractionMap[$name])) {
+            return $this->extractionMap[$name];
         }
 
         return $name;

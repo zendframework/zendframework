@@ -32,18 +32,20 @@ abstract class AbstractSql
      */
     protected $instanceParameterIndex = array();
 
-    protected function processExpression(ExpressionInterface $expression, PlatformInterface $platform, DriverInterface $driver = null, $namedParameterPrefix = null)
+    protected function processExpression(ExpressionInterface $expression, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null, $namedParameterPrefix = null)
     {
         // static counter for the number of times this method was invoked across the PHP runtime
         static $runtimeExpressionPrefix = 0;
 
-        if ($driver && ((!is_string($namedParameterPrefix) || $namedParameterPrefix == ''))) {
+        if ($parameterContainer && ((!is_string($namedParameterPrefix) || $namedParameterPrefix == ''))) {
             $namedParameterPrefix = sprintf('expr%04dParam', ++$runtimeExpressionPrefix);
         }
 
         $sql = '';
         $statementContainer = new StatementContainer;
-        $parameterContainer = $statementContainer->getParameterContainer();
+        $parameterContainerInternal = $parameterContainer
+                ? $statementContainer->getParameterContainer()
+                : null;
 
         // initialize variables
         $parts = $expression->getExpressionData();
@@ -79,19 +81,19 @@ abstract class AbstractSql
                     $values[$vIndex] = '(' . $this->processSubSelect($value, $platform, $driver, $parameterContainer) . ')';
                 } elseif($value instanceof ExpressionInterface) {
                     // recursive call to satisfy nested expressions
-                    $innerStatementContainer = $this->processExpression($value, $platform, $driver, $namedParameterPrefix . $vIndex . 'subpart');
+                    $innerStatementContainer = $this->processExpression($value, $platform, $driver, $parameterContainer, $namedParameterPrefix . $vIndex . 'subpart');
                     $values[$vIndex] = $innerStatementContainer->getSql();
-                    if ($driver) {
-                        $parameterContainer->merge($innerStatementContainer->getParameterContainer());
+                    if ($parameterContainerInternal) {
+                        $parameterContainerInternal->merge($innerStatementContainer->getParameterContainer());
                     }
                 } elseif ($type == ExpressionInterface::TYPE_IDENTIFIER) {
                     $values[$vIndex] = $platform->quoteIdentifierInFragment($value);
                 } elseif ($type == ExpressionInterface::TYPE_VALUE) {
                     // if prepareType is set, it means that this particular value must be
                     // passed back to the statement in a way it can be used as a placeholder value
-                    if ($driver) {
+                    if ($parameterContainerInternal) {
                         $name = $namedParameterPrefix . $expressionParamIndex++;
-                        $parameterContainer->offsetSet($name, $value);
+                        $parameterContainerInternal->offsetSet($name, $value);
                         $values[$vIndex] = $driver->formatParameterName($name);
                         continue;
                     }
@@ -164,7 +166,7 @@ abstract class AbstractSql
 
     protected function processSubSelect(Select $subselect, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
-        if ($driver) {
+        if ($parameterContainer) {
             $stmtContainer = new StatementContainer;
 
             // Track subselect prefix and count for parameters
@@ -222,7 +224,7 @@ abstract class AbstractSql
         }
 
         if ($column instanceof ExpressionInterface) {
-            $exprData = $this->processExpression($column, $platform, $driver, $namedParameterPrefix);
+            $exprData = $this->processExpression($column, $platform, $driver, $parameterContainer, $namedParameterPrefix);
             if ($parameterContainer) {
                 $parameterContainer->merge($exprData->getParameterContainer());
             }

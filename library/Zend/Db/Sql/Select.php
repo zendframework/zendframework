@@ -646,7 +646,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         if ($this->quantifier) {
             if ($this->quantifier instanceof ExpressionInterface) {
-                $quantifierParts = $this->processExpression($this->quantifier, $platform, $driver, 'quantifier');
+                $quantifierParts = $this->processExpression($this->quantifier, $platform, $driver, $parameterContainer, 'quantifier');
                 if ($parameterContainer) {
                     $parameterContainer->merge($quantifierParts->getParameterContainer());
                 }
@@ -705,7 +705,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
             // on expression
             // note: for Expression objects, pass them to processExpression with a prefix specific to each join (used for named parameters)
             $joinSpecArgArray[$j][] = ($join['on'] instanceof ExpressionInterface)
-                ? $this->processExpression($join['on'], $platform, $driver, $this->processInfo['paramPrefix'] . 'join' . ($j+1) . 'part')
+                ? $this->processExpression($join['on'], $platform, $driver, $parameterContainer, $this->processInfo['paramPrefix'] . 'join' . ($j+1) . 'part')
                 : $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN', '<', '>')); // on
             if ($joinSpecArgArray[$j][2] instanceof StatementContainerInterface) {
                 if ($parameterContainer) {
@@ -723,7 +723,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if ($this->where->count() == 0) {
             return null;
         }
-        $whereParts = $this->processExpression($this->where, $platform, $driver, $this->processInfo['paramPrefix'] . 'where');
+        $whereParts = $this->processExpression($this->where, $platform, $driver, $parameterContainer, $this->processInfo['paramPrefix'] . 'where');
         if ($parameterContainer) {
             $parameterContainer->merge($whereParts->getParameterContainer());
         }
@@ -757,7 +757,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if ($this->having->count() == 0) {
             return null;
         }
-        $whereParts = $this->processExpression($this->having, $platform, $driver, $this->processInfo['paramPrefix'] . 'having');
+        $whereParts = $this->processExpression($this->having, $platform, $driver, $parameterContainer, $this->processInfo['paramPrefix'] . 'having');
         if ($parameterContainer) {
             $parameterContainer->merge($whereParts->getParameterContainer());
         }
@@ -773,7 +773,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         foreach ($this->order as $k => $v) {
             if ($v instanceof Expression) {
                 /** @var $orderParts \Zend\Db\Adapter\StatementContainer */
-                $orderParts = $this->processExpression($v, $platform, $driver);
+                $orderParts = $this->processExpression($v, $platform, $driver, $parameterContainer);
                 if ($parameterContainer) {
                     $parameterContainer->merge($orderParts->getParameterContainer());
                 }
@@ -805,7 +805,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         $limit = $this->limit;
 
-        if ($driver) {
+        if ($parameterContainer) {
             $sql = $driver->formatParameterName('limit');
             $parameterContainer->offsetSet('limit', $limit, ParameterContainer::TYPE_INTEGER);
         } else {
@@ -823,7 +823,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
 
         $offset = $this->offset;
 
-        if ($driver) {
+        if ($parameterContainer) {
             $parameterContainer->offsetSet('offset', $offset, ParameterContainer::TYPE_INTEGER);
             return array($driver->formatParameterName('offset'));
         }
@@ -841,15 +841,10 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         if ($this->combine['modifier']) {
             $type .= ' ' . $this->combine['modifier'];
         }
-        $type = strtoupper($type);
 
-        if ($driver) {
-            $sql = $this->processSubSelect($this->combine['select'], $platform, $driver, $parameterContainer);
-            return array($type, $sql);
-        }
         return array(
-            $type,
-            $this->processSubSelect($this->combine['select'], $platform)
+            strtoupper($type),
+            $this->processSubSelect($this->combine['select'], $platform, $driver, $parameterContainer),
         );
     }
 

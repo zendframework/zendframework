@@ -24,15 +24,23 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
      */
     protected $abstractSql = null;
 
+    protected $mockDriver = null;
+
     public function setup()
     {
         $this->abstractSql = $this->getMockForAbstractClass('Zend\Db\Sql\AbstractSql');
+
+        $this->mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $this->mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue(DriverInterface::PARAMETERIZATION_NAMED));
+        $this->mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnCallback(function ($x) {
+            return ':' . $x;
+        }));
     }
 
     /**
      * @covers Zend\Db\Sql\AbstractSql::processExpression
      */
-    public function testProcessExpressionWithoutDriver()
+    public function testProcessExpressionWithoutParameterContainer()
     {
         $expression = new Expression('? > ? AND y < ?', array('x', 5, 10), array(Expression::TYPE_IDENTIFIER));
         $sqlAndParams = $this->invokeProcessExpressionMethod($expression);
@@ -45,16 +53,11 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\Db\Sql\AbstractSql::processExpression
      */
-    public function testProcessExpressionWithDriverAndParameterizationTypeNamed()
+    public function testProcessExpressionWithParameterContainerAndParameterizationTypeNamed()
     {
-        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
-        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue(DriverInterface::PARAMETERIZATION_NAMED));
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnCallback(function ($x) {
-            return ':' . $x;
-        }));
-
+        $mockParameterContainer = $this->getMock('Zend\Db\Adapter\ParameterContainer');
         $expression = new Expression('? > ? AND y < ?', array('x', 5, 10), array(Expression::TYPE_IDENTIFIER));
-        $sqlAndParams = $this->invokeProcessExpressionMethod($expression, $mockDriver);
+        $sqlAndParams = $this->invokeProcessExpressionMethod($expression, $mockParameterContainer);
 
         $parameterContainer = $sqlAndParams->getParameterContainer();
         $parameters = $parameterContainer->getNamedArray();
@@ -72,7 +75,7 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, current($parameters));
 
         // ensure next invocation increases number by 1
-        $sqlAndParamsNext = $this->invokeProcessExpressionMethod($expression, $mockDriver);
+        $sqlAndParamsNext = $this->invokeProcessExpressionMethod($expression, $mockParameterContainer);
 
         $parameterContainer = $sqlAndParamsNext->getParameterContainer();
         $parameters = $parameterContainer->getNamedArray();
@@ -130,11 +133,11 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
      * @param \Zend\Db\Adapter\Adapter|null $adapter
      * @return \Zend\Db\Adapter\StatementContainer
      */
-    protected function invokeProcessExpressionMethod(ExpressionInterface $expression, $driver = null)
+    protected function invokeProcessExpressionMethod(ExpressionInterface $expression, $parameterContainer = null)
     {
         $method = new \ReflectionMethod($this->abstractSql, 'processExpression');
         $method->setAccessible(true);
-        return $method->invoke($this->abstractSql, $expression, new TrustingSql92Platform, $driver);
+        return $method->invoke($this->abstractSql, $expression, new TrustingSql92Platform, $this->mockDriver, $parameterContainer);
     }
 
 }

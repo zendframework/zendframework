@@ -14,8 +14,9 @@ use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Adapter\StatementContainer;
 use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
+use Zend\Db\Adapter\Platform\Sql92 as DefaultAdapterPlatform;
 
-abstract class AbstractSql
+abstract class AbstractSql implements SqlInterface
 {
     /**
      * @var array
@@ -32,6 +33,48 @@ abstract class AbstractSql
      */
     protected $instanceParameterIndex = array();
 
+    /**
+     * @param null|PlatformInterface $adapterPlatform
+     * @return string
+     */
+    public function getSqlString(PlatformInterface $adapterPlatform = null)
+    {
+        $adapterPlatform = ($adapterPlatform) ?: new DefaultAdapterPlatform;
+        return $this->buildSqlString($adapterPlatform);
+    }
+
+    /**
+     * @param PlatformInterface $platform
+     * @param null|DriverInterface $driver
+     * @param null|ParameterContainer $parameterContainer
+     * @return string
+     */
+    protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
+    {
+        $sqls       = array();
+        $parameters = array();
+        foreach ($this->specifications as $name => $specification) {
+            $parameters[$name] = $this->{'process' . $name}($platform, $driver, $parameterContainer, $sqls, $parameters);
+            if ($specification && is_array($parameters[$name])) {
+                $sqls[$name] = $this->createSqlFromSpecificationAndParameters($specification, $parameters[$name]);
+            } elseif (is_string($parameters[$name])) {
+                $sqls[$name] = $parameters[$name];
+            }
+        }
+        return rtrim(implode(' ', $sqls), "\n ,");
+    }
+
+    /**
+     *
+     * @staticvar int $runtimeExpressionPrefix
+     * @param ExpressionInterface $expression
+     * @param PlatformInterface $platform
+     * @param null|DriverInterface $driver
+     * @param null|ParameterContainer $parameterContainer
+     * @param null|string $namedParameterPrefix
+     * @return type
+     * @throws Exception\RuntimeException
+     */
     protected function processExpression(ExpressionInterface $expression, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null, $namedParameterPrefix = null)
     {
         // static counter for the number of times this method was invoked across the PHP runtime
@@ -164,6 +207,13 @@ abstract class AbstractSql
         return vsprintf($specificationString, $topParameters);
     }
 
+    /**
+     * @param Select $subselect
+     * @param PlatformInterface $platform
+     * @param null|DriverInterface $driver
+     * @param null|ParameterContainer $parameterContainer
+     * @return string
+     */
     protected function processSubSelect(Select $subselect, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         if ($parameterContainer) {
@@ -265,19 +315,5 @@ abstract class AbstractSql
             $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
         }
         return $table;
-    }
-
-    /**
-     * @param \Zend\Db\Adapter\StatementContainerInterface $statementContainer
-     * @return ParameterContainer
-     */
-    protected function resolveParameterContainer($statementContainer)
-    {
-        $parameterContainer = $statementContainer->getParameterContainer();
-        if (!$parameterContainer instanceof ParameterContainer) {
-            $parameterContainer = new ParameterContainer();
-            $statementContainer->setParameterContainer($parameterContainer);
-        }
-        return $parameterContainer;
     }
 }

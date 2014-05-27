@@ -9,18 +9,16 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
-use Zend\Db\Adapter\Platform\Sql92;
-use Zend\Db\Adapter\StatementContainerInterface;
+use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Stdlib\PriorityList;
 
 /**
  *
  * @property Where $where
  */
-class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
+class Update extends AbstractPreparableSql
 {
     /**@#++
      * @const
@@ -140,23 +138,12 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
-    /**
-     * Prepare statement
-     *
-     * @param AdapterInterface $adapter
-     * @param StatementContainerInterface $statementContainer
-     * @return void
-     */
-    public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer)
+    protected function processUpdate(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
-        $driver   = $adapter->getDriver();
-        $platform = $adapter->getPlatform();
-        $parameterContainer = $this->resolveParameterContainer($statementContainer);
-
         $setSql = array();
         foreach ($this->set as $column => $value) {
             $prefix = $platform->quoteIdentifier($column) . ' = ';
-            if (is_scalar($value)) {
+            if (is_scalar($value) && $parameterContainer) {
                 $setSql[] = $prefix . $driver->formatParameterName($column);
                 $parameterContainer->offsetSet($column, $value);
             } else {
@@ -169,51 +156,24 @@ class Update extends AbstractSql implements SqlInterface, PreparableSqlInterface
                 );
             }
         }
-        $set = implode(', ', $setSql);
 
-        $sql = sprintf(
+        return sprintf(
             $this->specifications[static::SPECIFICATION_UPDATE],
             $this->resolveTable($this->table, $platform, $driver, $parameterContainer),
-            $set
+            implode(', ', $setSql)
         );
-
-        // process where
-        if ($this->where->count() > 0) {
-            $whereParts = $this->processExpression($this->where, $platform, $driver, $parameterContainer, 'where');
-            $parameterContainer->merge($whereParts->getParameterContainer());
-            $sql .= ' ' . sprintf($this->specifications[static::SPECIFICATION_WHERE], $whereParts->getSql());
-        }
-        $statementContainer->setSql($sql);
     }
 
-    /**
-     * Get SQL string for statement
-     *
-     * @param  null|PlatformInterface $adapterPlatform If null, defaults to Sql92
-     * @return string
-     */
-    public function getSqlString(PlatformInterface $adapterPlatform = null)
+    protected function processWhere(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
-        $adapterPlatform = ($adapterPlatform) ?: new Sql92;
-
-        $setSql = array();
-        foreach ($this->set as $column => $value) {
-            $setSql[] = $adapterPlatform->quoteIdentifier($column)
-                        . ' = '
-                        . $this->resolveColumnValue($value, $adapterPlatform);
+        if ($this->where->count() == 0) {
+            return null;
         }
-        $set = implode(', ', $setSql);
-
-        $sql = sprintf(
-            $this->specifications[static::SPECIFICATION_UPDATE],
-            $this->resolveTable($this->table, $adapterPlatform),
-            $set
+        $whereParts = $this->processExpression($this->where, $platform, $driver, $parameterContainer, 'where');
+        return sprintf(
+            $this->specifications[static::SPECIFICATION_WHERE],
+            $whereParts->getSql()
         );
-        if ($this->where->count() > 0) {
-            $whereParts = $this->processExpression($this->where, $adapterPlatform, null, null, 'where');
-            $sql .= ' ' . sprintf($this->specifications[static::SPECIFICATION_WHERE], $whereParts->getSql());
-        }
-        return $sql;
     }
 
     /**

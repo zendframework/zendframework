@@ -10,7 +10,6 @@
 namespace Zend\Db\Sql\Ddl;
 
 use Zend\Db\Adapter\Platform\PlatformInterface;
-use Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform;
 use Zend\Db\Sql\AbstractSql;
 
 class CreateTable extends AbstractSql implements SqlInterface
@@ -45,11 +44,13 @@ class CreateTable extends AbstractSql implements SqlInterface
                 array(1 => '%1$s', 'combinedby' => ",\n    ")
             )
         ),
+        'combinedBy' => ",",
         self::CONSTRAINTS => array(
             "\n    %1\$s" => array(
                 array(1 => '%1$s', 'combinedby' => ",\n    ")
             )
         ),
+        'statementEnd' => '%1$s',
     );
 
     /**
@@ -130,61 +131,6 @@ class CreateTable extends AbstractSql implements SqlInterface
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
-    /**
-     * @param  PlatformInterface $adapterPlatform
-     * @return string
-     */
-    public function getSqlString(PlatformInterface $adapterPlatform = null)
-    {
-        // get platform, or create default
-        $adapterPlatform = ($adapterPlatform) ?: new AdapterSql92Platform;
-
-        $sqls       = array();
-        $parameters = array();
-
-        foreach ($this->specifications as $name => $specification) {
-            if (is_int($name)) {
-                $sqls[] = $specification;
-                continue;
-            }
-
-            $parameters[$name] = $this->{'process' . $name}(
-                $adapterPlatform,
-                null,
-                null,
-                $sqls,
-                $parameters
-            );
-
-
-            if ($specification
-                && is_array($parameters[$name])
-                && ($parameters[$name] != array(array()))
-            ) {
-                $sqls[$name] = $this->createSqlFromSpecificationAndParameters(
-                    $specification,
-                    $parameters[$name]
-                );
-            }
-
-            if (stripos($name, 'table') === false
-                && $parameters[$name] !== array(array())
-            ) {
-                $sqls[] = ",\n";
-            }
-        }
-
-
-        // remove last ,
-        if (count($sqls) > 2) {
-            array_pop($sqls);
-        }
-
-        $sql = implode('', $sqls) . "\n)";
-
-        return $sql;
-    }
-
     protected function processTable(PlatformInterface $adapterPlatform = null)
     {
         $ret = array();
@@ -200,6 +146,10 @@ class CreateTable extends AbstractSql implements SqlInterface
 
     protected function processColumns(PlatformInterface $adapterPlatform = null)
     {
+        if (!$this->columns) {
+            return null;
+        }
+
         $sqls = array();
         foreach ($this->columns as $column) {
             $sqls[] = $this->processExpression($column, $adapterPlatform)->getSql();
@@ -207,12 +157,28 @@ class CreateTable extends AbstractSql implements SqlInterface
         return array($sqls);
     }
 
+    protected function processCombinedby(PlatformInterface $adapterPlatform = null)
+    {
+        if ($this->constraints && $this->columns) {
+            return $this->specifications['combinedBy'];
+        }
+    }
+
     protected function processConstraints(PlatformInterface $adapterPlatform = null)
     {
+        if (!$this->constraints) {
+            return null;
+        }
+
         $sqls = array();
         foreach ($this->constraints as $constraint) {
             $sqls[] = $this->processExpression($constraint, $adapterPlatform)->getSql();
         }
         return array($sqls);
+    }
+
+    protected function processStatementEnd(PlatformInterface $adapterPlatform = null)
+    {
+        return array("\n)");
     }
 }

@@ -9,13 +9,11 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
-use Zend\Db\Adapter\Platform\Sql92;
-use Zend\Db\Adapter\StatementContainerInterface;
+use Zend\Db\Adapter\Driver\DriverInterface;
 
-class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
+class Insert extends AbstractPreparableSql
 {
     /**#@+
      * Constants
@@ -151,103 +149,55 @@ class Insert extends AbstractSql implements SqlInterface, PreparableSqlInterface
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
-    /**
-     * Prepare statement
-     *
-     * @param  AdapterInterface $adapter
-     * @param  StatementContainerInterface $statementContainer
-     * @return void
-     */
-    public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer)
+    protected function processInsert(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
-        $driver   = $adapter->getDriver();
-        $platform = $adapter->getPlatform();
-        $parameterContainer = $this->resolveParameterContainer($statementContainer);
-        $table = $this->resolveTable($this->table, $platform, $driver, $parameterContainer);
-
         if ($this->select) {
-            $this->select->prepareStatement($adapter, $statementContainer);
-
-            $columns = array_map(array($platform, 'quoteIdentifier'), array_keys($this->columns));
-            $columns = implode(', ', $columns);
-
-            $sql = sprintf(
-                $this->specifications[static::SPECIFICATION_SELECT],
-                $table,
-                $columns ? "($columns)" : "",
-                $statementContainer->getSql()
-            );
-        } elseif ($this->columns) {
-            $columns = array();
-            $values  = array();
-            foreach ($this->columns as $column=>$value) {
-                $columns[] = $platform->quoteIdentifier($column);
-                if (is_scalar($value)) {
-                    $values[] = $driver->formatParameterName($column);
-                    $parameterContainer->offsetSet($column, $value);
-                } else {
-                    $values[] = $this->resolveColumnValue(
-                        $value,
-                        $platform,
-                        $driver,
-                        null,
-                        $parameterContainer
-                    );
-                }
-            }
-            $sql = sprintf(
-                $this->specifications[static::SPECIFICATION_INSERT],
-                $table,
-                implode(', ', $columns),
-                implode(', ', $values)
-            );
-        } else {
+            return null;
+        }
+        if (!$this->columns) {
             throw new Exception\InvalidArgumentException('values or select should be present');
         }
 
-        $statementContainer->setSql($sql);
-    }
-
-    /**
-     * Get SQL string for this statement
-     *
-     * @param  null|PlatformInterface $adapterPlatform Defaults to Sql92 if none provided
-     * @return string
-     */
-    public function getSqlString(PlatformInterface $adapterPlatform = null)
-    {
-        $adapterPlatform = ($adapterPlatform) ?: new Sql92;
-
-        $table = $this->resolveTable($this->table, $adapterPlatform);
-
-        $values = array();
-        if ($this->select) {
-            $selectString = $this->select->getSqlString($adapterPlatform);
-            $columns = '';
-            if ($this->columns) {
-                $columns = array_map(array($adapterPlatform, 'quoteIdentifier'), array_keys($this->columns));
-                $columns = "(" . implode(', ', $columns) . ")";
-            }
-
-            return sprintf(
-                $this->specifications[static::SPECIFICATION_SELECT],
-                $table,
-                $columns,
-                $selectString
-            );
-        }
-
         $columns = array();
+        $values  = array();
         foreach ($this->columns as $column=>$value) {
-            $columns[] = $adapterPlatform->quoteIdentifier($column);
-            $values[] = $this->resolveColumnValue($value, $adapterPlatform);
+            $columns[] = $platform->quoteIdentifier($column);
+            if (is_scalar($value) && $parameterContainer) {
+                $values[] = $driver->formatParameterName($column);
+                $parameterContainer->offsetSet($column, $value);
+            } else {
+                $values[] = $this->resolveColumnValue(
+                    $value,
+                    $platform,
+                    $driver,
+                    null,
+                    $parameterContainer
+                );
+            }
         }
-
         return sprintf(
             $this->specifications[static::SPECIFICATION_INSERT],
-            $table,
+            $this->resolveTable($this->table, $platform, $driver, $parameterContainer),
             implode(', ', $columns),
             implode(', ', $values)
+        );
+    }
+
+    protected function processSelect(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
+    {
+        if (!$this->select) {
+            return null;
+        }
+        $selectSql = $this->processSubSelect($this->select, $platform, $driver, $parameterContainer);
+
+        $columns = array_map(array($platform, 'quoteIdentifier'), array_keys($this->columns));
+        $columns = implode(', ', $columns);
+
+        return sprintf(
+            $this->specifications[static::SPECIFICATION_SELECT],
+            $this->resolveTable($this->table, $platform, $driver, $parameterContainer),
+            $columns ? "($columns)" : "",
+            $selectSql
         );
     }
 

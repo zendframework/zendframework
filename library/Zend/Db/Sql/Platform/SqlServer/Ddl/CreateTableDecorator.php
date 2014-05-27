@@ -49,13 +49,10 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
      */
     protected function processTable(PlatformInterface $adapterPlatform = null)
     {
-        $ret = array('');
-        if ($this->isTemporary) {
-            $table = '#';
-        } else {
-            $table = '';
-        }
-        $ret[] = $adapterPlatform->quoteIdentifier($table . ltrim($this->table, '#'));
-        return $ret;
+        $table = ($this->isTemporary ? '#' : '') . ltrim($this->table, '#');
+        return array(
+            '',
+            $adapterPlatform->quoteIdentifier($table),
+        );
     }
 }

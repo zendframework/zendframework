@@ -133,15 +133,10 @@ class CreateTable extends AbstractSql implements SqlInterface
 
     protected function processTable(PlatformInterface $adapterPlatform = null)
     {
-        $ret = array();
-        if ($this->isTemporary) {
-            $ret[] = 'TEMPORARY ';
-        } else {
-            $ret[] = '';
-        }
-
-        $ret[] = $adapterPlatform->quoteIdentifier($this->table);
-        return $ret;
+        return array(
+            $this->isTemporary ? 'TEMPORARY ' : '',
+            $adapterPlatform->quoteIdentifier($this->table),
+        );
     }
 
     protected function processColumns(PlatformInterface $adapterPlatform = null)

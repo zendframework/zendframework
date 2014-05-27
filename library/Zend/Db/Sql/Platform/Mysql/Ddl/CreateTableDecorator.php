@@ -43,6 +43,9 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
 
     protected function processColumns(PlatformInterface $platform = null)
     {
+        if (!$this->columns) {
+            return null;
+        }
         $sqls = array();
         foreach ($this->columns as $i => $column) {
             $sql           = $this->processExpression($column, $platform);

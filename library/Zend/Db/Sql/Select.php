@@ -492,11 +492,7 @@ class Select extends AbstractPreparableSql
      */
     protected function renderTable($table, $alias = null)
     {
-        $sql = $table;
-        if ($alias) {
-            $sql .= ' AS ' . $alias;
-        }
-        return $sql;
+        return $table . ($alias ? ' AS ' . $alias : '');
     }
 
     protected function processStatementStart(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
@@ -533,19 +529,19 @@ class Select extends AbstractPreparableSql
             if ($column === self::SQL_STAR) {
                 $columns[] = array($fromTable . self::SQL_STAR);
                 continue;
-            } else {
-                $columnName = $this->resolveColumnValue(
-                    array(
-                        'column'       => $column,
-                        'fromTable'    => $fromTable,
-                        'isIdentifier' => true,
-                    ),
-                    $platform,
-                    $driver,
-                    $this->processInfo['paramPrefix'] . ((is_string($columnIndexOrAs)) ? $columnIndexOrAs : 'column'),
-                    $parameterContainer
-                );
             }
+
+            $columnName = $this->resolveColumnValue(
+                array(
+                    'column'       => $column,
+                    'fromTable'    => $fromTable,
+                    'isIdentifier' => true,
+                ),
+                $platform,
+                $driver,
+                $this->processInfo['paramPrefix'] . ((is_string($columnIndexOrAs)) ? $columnIndexOrAs : 'column'),
+                $parameterContainer
+            );
             // process As portion
             if (is_string($columnIndexOrAs)) {
                 $columnAs = $platform->quoteIdentifier($columnIndexOrAs);
@@ -554,8 +550,6 @@ class Select extends AbstractPreparableSql
             }
             $columns[] = (isset($columnAs)) ? array($columnName, $columnAs) : array($columnName);
         }
-
-        $separator = $platform->getIdentifierSeparator();
 
         // process join columns
         foreach ($this->joins as $join) {
@@ -611,12 +605,8 @@ class Select extends AbstractPreparableSql
         // process joins
         $joinSpecArgArray = array();
         foreach ($this->joins as $j => $join) {
-            $joinSpecArgArray[$j] = array();
             $joinName = null;
             $joinAs = null;
-
-            // type
-            $joinSpecArgArray[$j][] = strtoupper($join['type']);
 
             // table name
             if (is_array($join['name'])) {
@@ -630,15 +620,16 @@ class Select extends AbstractPreparableSql
             } elseif ($joinName instanceof TableIdentifier) {
                 $joinName = $joinName->getTableAndSchema();
                 $joinName = ($joinName[1] ? $platform->quoteIdentifier($joinName[1]) . $platform->getIdentifierSeparator() : '') . $platform->quoteIdentifier($joinName[0]);
+            } elseif ($joinName instanceof Select) {
+                $joinName = '(' . $this->processSubSelect($joinName, $platform, $driver, $parameterContainer) . ')';
             } else {
-                if ($joinName instanceof Select) {
-                    $joinName = '(' . $this->processSubSelect($joinName, $platform, $driver, $parameterContainer) . ')';
-                } else {
-                    $joinName = $platform->quoteIdentifier($joinName);
-                }
+                $joinName = $platform->quoteIdentifier($joinName);
             }
-            $joinSpecArgArray[$j][] = (isset($joinAs)) ? $joinName . ' AS ' . $joinAs : $joinName;
+            $joinSpecArgArray[$j] = array(
+                strtoupper($join['type']),
+                (isset($joinAs)) ? $joinName . ' AS ' . $joinAs : $joinName,
 
+            );
             // on expression
             // note: for Expression objects, pass them to processExpression with a prefix specific to each join (used for named parameters)
             $joinSpecArgArray[$j][] = ($join['on'] instanceof ExpressionInterface)
@@ -726,17 +717,11 @@ class Select extends AbstractPreparableSql
         if ($this->limit === null) {
             return null;
         }
-
-        $limit = $this->limit;
-
         if ($parameterContainer) {
-            $sql = $driver->formatParameterName('limit');
-            $parameterContainer->offsetSet('limit', $limit, ParameterContainer::TYPE_INTEGER);
-        } else {
-            $sql = $platform->quoteValue($limit);
+            $parameterContainer->offsetSet('limit', $this->limit, ParameterContainer::TYPE_INTEGER);
+            return array($driver->formatParameterName('limit'));
         }
-
-        return array($sql);
+        return array($platform->quoteValue($this->limit));
     }
 
     protected function processOffset(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
@@ -744,15 +729,12 @@ class Select extends AbstractPreparableSql
         if ($this->offset === null) {
             return null;
         }
-
-        $offset = $this->offset;
-
         if ($parameterContainer) {
-            $parameterContainer->offsetSet('offset', $offset, ParameterContainer::TYPE_INTEGER);
+            $parameterContainer->offsetSet('offset', $this->offset, ParameterContainer::TYPE_INTEGER);
             return array($driver->formatParameterName('offset'));
         }
 
-        return array($platform->quoteValue($offset));
+        return array($platform->quoteValue($this->offset));
     }
 
     protected function processCombine(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)

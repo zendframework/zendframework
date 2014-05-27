@@ -73,13 +73,11 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             return null;
         }
         if ($parameterContainer) {
-            $sql = $driver->formatParameterName('limit');
             $parameterContainer->offsetSet('limit', $this->limit, ParameterContainer::TYPE_INTEGER);
-        } else {
-            $sql = $this->limit;
+            return array($driver->formatParameterName('limit'));
         }
 
-        return array($sql);
+        return array($this->limit);
     }
 
     protected function processOffset(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)

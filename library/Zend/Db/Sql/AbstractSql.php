@@ -85,10 +85,6 @@ abstract class AbstractSql implements SqlInterface
         }
 
         $sql = '';
-        $statementContainer = new StatementContainer;
-        $parameterContainerInternal = $parameterContainer
-                ? $statementContainer->getParameterContainer()
-                : null;
 
         // initialize variables
         $parts = $expression->getExpressionData();
@@ -124,19 +120,15 @@ abstract class AbstractSql implements SqlInterface
                     $values[$vIndex] = '(' . $this->processSubSelect($value, $platform, $driver, $parameterContainer) . ')';
                 } elseif($value instanceof ExpressionInterface) {
                     // recursive call to satisfy nested expressions
-                    $innerStatementContainer = $this->processExpression($value, $platform, $driver, $parameterContainer, $namedParameterPrefix . $vIndex . 'subpart');
-                    $values[$vIndex] = $innerStatementContainer->getSql();
-                    if ($parameterContainerInternal) {
-                        $parameterContainerInternal->merge($innerStatementContainer->getParameterContainer());
-                    }
+                    $values[$vIndex] = $this->processExpression($value, $platform, $driver, $parameterContainer, $namedParameterPrefix . $vIndex . 'subpart');
                 } elseif ($type == ExpressionInterface::TYPE_IDENTIFIER) {
                     $values[$vIndex] = $platform->quoteIdentifierInFragment($value);
                 } elseif ($type == ExpressionInterface::TYPE_VALUE) {
                     // if prepareType is set, it means that this particular value must be
                     // passed back to the statement in a way it can be used as a placeholder value
-                    if ($parameterContainerInternal) {
+                    if ($parameterContainer) {
                         $name = $namedParameterPrefix . $expressionParamIndex++;
-                        $parameterContainerInternal->offsetSet($name, $value);
+                        $parameterContainer->offsetSet($name, $value);
                         $values[$vIndex] = $driver->formatParameterName($name);
                         continue;
                     }
@@ -151,9 +143,7 @@ abstract class AbstractSql implements SqlInterface
             // after looping the values, interpolate them into the sql string (they might be placeholder names, or values)
             $sql .= vsprintf($part[0], $values);
         }
-
-        $statementContainer->setSql($sql);
-        return $statementContainer;
+        return $sql;
     }
 
     /**
@@ -274,11 +264,7 @@ abstract class AbstractSql implements SqlInterface
         }
 
         if ($column instanceof ExpressionInterface) {
-            $exprData = $this->processExpression($column, $platform, $driver, $parameterContainer, $namedParameterPrefix);
-            if ($parameterContainer) {
-                $parameterContainer->merge($exprData->getParameterContainer());
-            }
-            return $exprData->getSql();
+            return $this->processExpression($column, $platform, $driver, $parameterContainer, $namedParameterPrefix);
         }
         if ($column instanceof Select) {
             return '(' . $this->processSubSelect($column, $platform, $driver, $parameterContainer) . ')';

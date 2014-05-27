@@ -15,6 +15,7 @@ use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Sql\Predicate;
 use Zend\Db\Sql\Select;
 use ZendTest\Db\TestAsset\TrustingSql92Platform;
+use Zend\Db\Adapter\ParameterContainer;
 
 class AbstractSqlTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,9 +46,7 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $expression = new Expression('? > ? AND y < ?', array('x', 5, 10), array(Expression::TYPE_IDENTIFIER));
         $sqlAndParams = $this->invokeProcessExpressionMethod($expression);
 
-        $this->assertEquals("\"x\" > '5' AND y < '10'", $sqlAndParams->getSql());
-        $this->assertInstanceOf('Zend\Db\Adapter\ParameterContainer', $sqlAndParams->getParameterContainer());
-        $this->assertEquals(0, $sqlAndParams->getParameterContainer()->count());
+        $this->assertEquals("\"x\" > '5' AND y < '10'", $sqlAndParams);
     }
 
     /**
@@ -55,14 +54,13 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
      */
     public function testProcessExpressionWithParameterContainerAndParameterizationTypeNamed()
     {
-        $mockParameterContainer = $this->getMock('Zend\Db\Adapter\ParameterContainer');
+        $parameterContainer = new ParameterContainer;
         $expression = new Expression('? > ? AND y < ?', array('x', 5, 10), array(Expression::TYPE_IDENTIFIER));
-        $sqlAndParams = $this->invokeProcessExpressionMethod($expression, $mockParameterContainer);
+        $sqlAndParams = $this->invokeProcessExpressionMethod($expression, $parameterContainer);
 
-        $parameterContainer = $sqlAndParams->getParameterContainer();
         $parameters = $parameterContainer->getNamedArray();
 
-        $this->assertRegExp('#"x" > :expr\d\d\d\dParam1 AND y < :expr\d\d\d\dParam2#', $sqlAndParams->getSql());
+        $this->assertRegExp('#"x" > :expr\d\d\d\dParam1 AND y < :expr\d\d\d\dParam2#', $sqlAndParams);
 
         // test keys and values
         preg_match('#expr(\d\d\d\d)Param1#', key($parameters), $matches);
@@ -75,9 +73,9 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, current($parameters));
 
         // ensure next invocation increases number by 1
-        $sqlAndParamsNext = $this->invokeProcessExpressionMethod($expression, $mockParameterContainer);
+        $parameterContainer = new ParameterContainer;
+        $sqlAndParamsNext = $this->invokeProcessExpressionMethod($expression, $parameterContainer);
 
-        $parameterContainer = $sqlAndParamsNext->getParameterContainer();
         $parameters = $parameterContainer->getNamedArray();
 
         preg_match('#expr(\d\d\d\d)Param1#', key($parameters), $matches);
@@ -96,8 +94,7 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $predicateSet = new Predicate\PredicateSet(array(new Predicate\PredicateSet(array($expression))));
         $sqlAndParams = $this->invokeProcessExpressionMethod($predicateSet);
 
-        $this->assertEquals("(x = '5')", $sqlAndParams->getSql());
-        $this->assertEquals(0, $sqlAndParams->getParameterContainer()->count());
+        $this->assertEquals("(x = '5')", $sqlAndParams);
     }
 
     /**
@@ -112,8 +109,7 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $predicateSet = new Predicate\PredicateSet(array(new Predicate\PredicateSet(array($expression))));
         $sqlAndParams = $this->invokeProcessExpressionMethod($predicateSet);
 
-        $this->assertEquals('("x" IN (SELECT "x".* FROM "x" WHERE "bar" LIKE \'Foo%\'))', $sqlAndParams->getSql());
-        $this->assertEquals(0, $sqlAndParams->getParameterContainer()->count());
+        $this->assertEquals('("x" IN (SELECT "x".* FROM "x" WHERE "bar" LIKE \'Foo%\'))', $sqlAndParams);
     }
 
     public function testProcessExpressionWorksWithExpressionContainingExpressionObject()
@@ -125,7 +121,7 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         );
 
         $sqlAndParams = $this->invokeProcessExpressionMethod($expression);
-        $this->assertEquals('"release_date" = FROM_UNIXTIME(\'100000000\')', $sqlAndParams->getSql());
+        $this->assertEquals('"release_date" = FROM_UNIXTIME(\'100000000\')', $sqlAndParams);
     }
 
     /**

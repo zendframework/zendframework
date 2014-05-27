@@ -120,13 +120,9 @@ class Delete extends AbstractPreparableSql
         if ($this->where->count() == 0) {
             return null;
         }
-        $whereParts = $this->processExpression($this->where, $platform, $driver, $parameterContainer, 'where');
-        if ($parameterContainer) {
-            $parameterContainer->merge($whereParts->getParameterContainer());
-        }
         return sprintf(
             $this->specifications[static::SPECIFICATION_WHERE],
-            $whereParts->getSql()
+            $this->processExpression($this->where, $platform, $driver, $parameterContainer, 'where')
         );
     }
 

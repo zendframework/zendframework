@@ -169,10 +169,9 @@ class Update extends AbstractPreparableSql
         if ($this->where->count() == 0) {
             return null;
         }
-        $whereParts = $this->processExpression($this->where, $platform, $driver, $parameterContainer, 'where');
         return sprintf(
             $this->specifications[static::SPECIFICATION_WHERE],
-            $whereParts->getSql()
+            $this->processExpression($this->where, $platform, $driver, $parameterContainer, 'where')
         );
     }
 

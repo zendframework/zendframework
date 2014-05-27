@@ -186,7 +186,7 @@ class AlterTable extends AbstractSql implements SqlInterface
     {
         $sqls = array();
         foreach ($this->addColumns as $column) {
-            $sqls[] = $this->processExpression($column, $adapterPlatform)->getSql();
+            $sqls[] = $this->processExpression($column, $adapterPlatform);
         }
 
         return array($sqls);
@@ -198,7 +198,7 @@ class AlterTable extends AbstractSql implements SqlInterface
         foreach ($this->changeColumns as $name => $column) {
             $sqls[] = array(
                 $adapterPlatform->quoteIdentifier($name),
-                $this->processExpression($column, $adapterPlatform)->getSql()
+                $this->processExpression($column, $adapterPlatform)
             );
         }
 

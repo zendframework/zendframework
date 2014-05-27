@@ -152,7 +152,7 @@ class CreateTable extends AbstractSql implements SqlInterface
 
         $sqls = array();
         foreach ($this->columns as $column) {
-            $sqls[] = $this->processExpression($column, $adapterPlatform)->getSql();
+            $sqls[] = $this->processExpression($column, $adapterPlatform);
         }
         return array($sqls);
     }
@@ -172,7 +172,7 @@ class CreateTable extends AbstractSql implements SqlInterface
 
         $sqls = array();
         foreach ($this->constraints as $constraint) {
-            $sqls[] = $this->processExpression($constraint, $adapterPlatform)->getSql();
+            $sqls[] = $this->processExpression($constraint, $adapterPlatform);
         }
         return array($sqls);
     }

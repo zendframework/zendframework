@@ -45,11 +45,8 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
     {
         $sqls = array();
         foreach ($this->columns as $i => $column) {
-            $stmtContainer = $this->processExpression($column, $platform);
-            $sql           = $stmtContainer->getSql();
-            $columnOptions = $column->getOptions();
-
-            foreach ($columnOptions as $coName => $coValue) {
+            $sql           = $this->processExpression($column, $platform);
+            foreach ($column->getOptions() as $coName => $coValue) {
                 switch (strtolower(str_replace(array('-', '_', ' '), '', $coName))) {
                     case 'identity':
                     case 'serial':
@@ -78,8 +75,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
                         break;
                 }
             }
-            $stmtContainer->setSql($sql);
-            $sqls[$i] = $stmtContainer;
+            $sqls[$i] = $sql;
         }
         return array($sqls);
     }

@@ -10,7 +10,6 @@
 namespace Zend\Db\Sql;
 
 use Zend\Db\Adapter\Driver\DriverInterface;
-use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 
@@ -589,15 +588,9 @@ class Select extends AbstractPreparableSql
         }
 
         if ($this->quantifier) {
-            if ($this->quantifier instanceof ExpressionInterface) {
-                $quantifierParts = $this->processExpression($this->quantifier, $platform, $driver, $parameterContainer, 'quantifier');
-                if ($parameterContainer) {
-                    $parameterContainer->merge($quantifierParts->getParameterContainer());
-                }
-                $quantifier = $quantifierParts->getSql();
-            } else {
-                $quantifier = $this->quantifier;
-            }
+            $quantifier = ($this->quantifier instanceof ExpressionInterface)
+                    ? $this->processExpression($this->quantifier, $platform, $driver, $parameterContainer, 'quantifier')
+                    : $this->quantifier;
         }
 
         if (!isset($table)) {
@@ -651,12 +644,6 @@ class Select extends AbstractPreparableSql
             $joinSpecArgArray[$j][] = ($join['on'] instanceof ExpressionInterface)
                 ? $this->processExpression($join['on'], $platform, $driver, $parameterContainer, $this->processInfo['paramPrefix'] . 'join' . ($j+1) . 'part')
                 : $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN', '<', '>')); // on
-            if ($joinSpecArgArray[$j][2] instanceof StatementContainerInterface) {
-                if ($parameterContainer) {
-                    $parameterContainer->merge($joinSpecArgArray[$j][2]->getParameterContainer());
-                }
-                $joinSpecArgArray[$j][2] = $joinSpecArgArray[$j][2]->getSql();
-            }
         }
 
         return array($joinSpecArgArray);
@@ -667,11 +654,9 @@ class Select extends AbstractPreparableSql
         if ($this->where->count() == 0) {
             return null;
         }
-        $whereParts = $this->processExpression($this->where, $platform, $driver, $parameterContainer, $this->processInfo['paramPrefix'] . 'where');
-        if ($parameterContainer) {
-            $parameterContainer->merge($whereParts->getParameterContainer());
-        }
-        return array($whereParts->getSql());
+        return array(
+            $this->processExpression($this->where, $platform, $driver, $parameterContainer, $this->processInfo['paramPrefix'] . 'where')
+        );
     }
 
     protected function processGroup(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
@@ -701,11 +686,9 @@ class Select extends AbstractPreparableSql
         if ($this->having->count() == 0) {
             return null;
         }
-        $whereParts = $this->processExpression($this->having, $platform, $driver, $parameterContainer, $this->processInfo['paramPrefix'] . 'having');
-        if ($parameterContainer) {
-            $parameterContainer->merge($whereParts->getParameterContainer());
-        }
-        return array($whereParts->getSql());
+        return array(
+            $this->processExpression($this->having, $platform, $driver, $parameterContainer, $this->processInfo['paramPrefix'] . 'having')
+        );
     }
 
     protected function processOrder(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
@@ -716,12 +699,9 @@ class Select extends AbstractPreparableSql
         $orders = array();
         foreach ($this->order as $k => $v) {
             if ($v instanceof Expression) {
-                /** @var $orderParts \Zend\Db\Adapter\StatementContainer */
-                $orderParts = $this->processExpression($v, $platform, $driver, $parameterContainer);
-                if ($parameterContainer) {
-                    $parameterContainer->merge($orderParts->getParameterContainer());
-                }
-                $orders[] = array($orderParts->getSql());
+                $orders[] = array(
+                    $this->processExpression($v, $platform, $driver, $parameterContainer)
+                );
                 continue;
             }
             if (is_int($k)) {

@@ -20,10 +20,23 @@ class ArrayMapNamingStrategyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('some_stuff', $strategy->extract('some_stuff'));
     }
 
-    public function testGetNameWithMap()
+    public function testSimpleMapping()
     {
         $strategy = new ArrayMapNamingStrategy(array('stuff3' => 'stuff4'), array('stuff1' => 'stuff2'));
         $this->assertEquals('stuff2', $strategy->hydrate('stuff1'));
         $this->assertEquals('stuff4', $strategy->extract('stuff3'));
+    }
+
+    public function testBidirectionalMapping()
+    {
+        $strategy = new ArrayMapNamingStrategy;
+
+        $strategy->setHydrationMap(array('foo' => 'bar'), true);
+        $this->assertEquals('bar', $strategy->hydrate('foo'));
+        $this->assertEquals('foo', $strategy->extract('bar'));
+
+        $strategy->setExtractionMap(array('foo' => 'bar'), true);
+        $this->assertEquals('bar', $strategy->extract('foo'));
+        $this->assertEquals('foo', $strategy->hydrate('bar'));
     }
 }

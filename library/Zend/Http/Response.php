@@ -197,17 +197,15 @@ class Response extends AbstractMessage implements ResponseInterface
         $isHeader = true;
         $headers = $content = array();
 
-        while ($lines) {
-            $nextLine = array_shift($lines);
-
-            if ($isHeader && $nextLine == '') {
+        foreach ($lines as $line) {
+            if ($isHeader && $line == '') {
                 $isHeader = false;
                 continue;
             }
             if ($isHeader) {
-                $headers[] = $nextLine;
+                $headers[] = $line;
             } else {
-                $content[] = $nextLine;
+                $content[] = $line;
             }
         }
 

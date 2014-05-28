@@ -297,12 +297,12 @@ class Input implements InputInterface, EmptyContextInterface
      */
     public function merge(InputInterface $input)
     {
-        $this->setAllowEmpty($input->allowEmpty());
         $this->setBreakOnFailure($input->breakOnFailure());
         $this->setContinueIfEmpty($input->continueIfEmpty());
         $this->setErrorMessage($input->getErrorMessage());
         $this->setName($input->getName());
         $this->setRequired($input->isRequired());
+        $this->setAllowEmpty($input->allowEmpty());
         $this->setValue($input->getRawValue());
 
         $filterChain = $input->getFilterChain();

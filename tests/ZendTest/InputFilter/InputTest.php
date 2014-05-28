@@ -311,4 +311,19 @@ class InputTest extends TestCase
         $input2->merge($input);
         $this->assertTrue($input2->continueIfEmpty());
     }
+
+    public function testMergeRetainsAllowEmptyFlag()
+    {
+        $input = new Input('foo');
+        $input->setRequired(true);
+        $input->setAllowEmpty(true);
+
+        $input2 = new Input('bar');
+        $input2->setRequired(true);
+        $input2->setAllowEmpty(false);
+        $input2->merge($input);
+
+        $this->assertTrue($input2->isRequired());
+        $this->assertTrue($input2->allowEmpty());
+    }
 }

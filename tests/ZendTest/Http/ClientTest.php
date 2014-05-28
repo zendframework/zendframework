@@ -18,6 +18,7 @@ use Zend\Http\Header\SetCookie;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Http\Client\Adapter\Test;
+use ZendTest\Http\TestAsset\ExtendedClient;
 
 
 class ClientTest extends \PHPUnit_Framework_TestCase
@@ -373,5 +374,16 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayNotHasKey('content-length', $headers);
         $this->assertArrayHasKey('Content-Length', $headers);
+    }
+
+    /**
+     * Test for pull request 6301
+     * Previous functionality would have thrown an exception
+     * This test serves to verify that exception is not thrown
+     */
+    public function testCanSpecifyCustomAuthMethodsInExtendingClasses()
+    {
+        $client = new ExtendedClient();
+        $client->setAuth('username', 'password', ExtendedClient::AUTH_CUSTOM);
     }
 }

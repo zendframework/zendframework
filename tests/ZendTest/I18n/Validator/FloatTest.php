@@ -11,6 +11,7 @@ namespace ZendTest\I18n\Validator;
 
 use Zend\I18n\Validator\Float as FloatValidator;
 use Locale;
+use NumberFormatter;
 
 /**
  * @group      Zend_Validator
@@ -45,29 +46,51 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @param string  $value    that will be tested
+     * @param boolean $expected expected result of assertion
+     * @param array   $options  fed into the validator before validation
+     * @param string  $dataType The different types of testing data used
      * @dataProvider basicProvider
      * @return void
      */
-    public function testBasic($value, $expected)
+    public function testBasic($value, $expected, $options, $dataType)
     {
-        $this->assertEquals($expected, $this->validator->isValid($value),
-                            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false'));
+        $this->validator->setOptions($options);
+
+        $this->assertEquals(
+            $expected,
+            $this->validator->isValid($value),
+            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false')
+            . sprintf(" (locale:%s, dataType:%s)", $this->validator->getLocale(), $dataType)
+        );
     }
 
     public function basicProvider()
     {
-        return array(
-            array(1.00,   true),
-            array(0.01,   true),
-            array(-0.1,   true),
-            array('10.1', true),
-            array('5.00', true),
-            array('10.0', true),
-            array('10.10', true),
-            array(1,      true),
-            array('10.1not a float', false),
-        );
+        $trueArray           = array();
+        $testingLocales      = array('en', 'de', 'zh-TW', 'ja', 'ar', 'ru', 'si', 'ml-IN', 'hi');
+        $testingTrueExamples = array(1.00, 0.01, -0.1, .3, 10, '10.1', '5.00', '234', '.45');
+
+        //Loop locales and examples for a more thorough set of "true" test data
+        foreach ($testingLocales as $locale) {
+            foreach ($testingTrueExamples as $example) {
+                $trueArray[] = array(
+                    NumberFormatter::create($locale, NumberFormatter::PATTERN_DECIMAL)
+                        ->format($example, NumberFormatter::TYPE_DOUBLE),
+                    true,
+                    array('locale' => $locale)
+                );
+            }
+            $falseArray[] = array(
+                '10.1not a float',
+                false,
+                array('locale' => $locale)
+            );
+        }
+
+        return array_merge($trueArray, $falseArray);
     }
+
     /**
      * Ensures that getMessages() returns expected default value
      *
@@ -85,7 +108,6 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     {
         $this->validator->setLocale('de');
         $this->assertEquals('de', $this->validator->getLocale());
-        $this->assertEquals(true, $this->validator->isValid('10,5'));
     }
 
     /**
@@ -103,105 +125,12 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     {
         Locale::setDefault('de');
         $valid = new FloatValidator();
-        $this->assertTrue($valid->isValid(123,456));
-        $this->assertTrue($valid->isValid('123,456'));
-    }
-
-    /**
-     * @ZF-7987
-     */
-    public function testLocaleDeFloatType()
-    {
-        $this->validator->setLocale('de');
-        $this->assertEquals('de', $this->validator->getLocale());
-        $this->assertEquals(true, $this->validator->isValid(10.5));
-    }
-
-    /**
-     * @ZF-7987
-     */
-    public function testPhpLocaleDeFloatType()
-    {
-        Locale::setDefault('de');
-        $valid = new FloatValidator();
-        $this->assertTrue($valid->isValid(10.5));
-    }
-
-    /**
-     * @ZF-7987
-     */
-    public function testPhpLocaleFrFloatType()
-    {
-        Locale::setDefault('fr');
-        $valid = new FloatValidator();
-        $this->assertTrue($valid->isValid(10.5));
-    }
-
-    public function deLocaleStringsProvider()
-    {
-        return array(
-            array('1,3',     true),
-            array('1000,3',  true),
-            array('1.000,3', true),
-        );
-    }
-
-    /**
-     * @ZF-8919
-     * @dataProvider deLocaleStringsProvider
-     */
-    public function testPhpLocaleDeStringType($float, $expected)
-    {
-        Locale::setDefault('de_AT');
-        $valid = new FloatValidator(array('locale' => 'de_AT'));
-        $this->assertEquals($expected, $valid->isValid($float));
-    }
-
-    public function frLocaleStringsProvider()
-    {
-        return array(
-            array('1,3',     true),
-            array('1000,3',  true),
-            array('1 000,3', true),
-            array('1.3',     false),
-            array('1000.3',  false),
-            array('1,000.3', false),
-        );
-    }
-
-    /**
-     * @ZF-8919
-     * @dataProvider frLocaleStringsProvider
-     */
-    public function testPhpLocaleFrStringType($float, $expected)
-    {
-        $valid = new FloatValidator(array('locale' => 'fr_FR'));
-        $this->assertEquals($expected, $valid->isValid($float));
-    }
-
-    public function enLocaleStringsProvider()
-    {
-        return array(
-            array('1.3',     true),
-            array('1000.3',  true),
-            array('1,000.3', true),
-        );
-    }
-
-    /**
-     * @ZF-8919
-     * @dataProvider enLocaleStringsProvider
-     */
-    public function testPhpLocaleEnStringType($float, $expected)
-    {
-        $valid = new FloatValidator(array('locale' => 'en_US'));
-        $this->assertEquals($expected, $valid->isValid($float));
+        $this->assertEquals('de', $valid->getLocale());
     }
 
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'), 'messageTemplates', $validator);
     }
 }

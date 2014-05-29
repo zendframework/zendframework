@@ -46,10 +46,9 @@ class Float extends AbstractValidator
     public function __construct($options = array())
     {
         if (!extension_loaded('intl')) {
-            throw new I18nException\ExtensionNotLoadedException(sprintf(
-                '%s component requires the intl PHP extension',
-                __NAMESPACE__
-            ));
+            throw new I18nException\ExtensionNotLoadedException(
+                sprintf('%s component requires the intl PHP extension', __NAMESPACE__)
+            );
         }
 
         if ($options instanceof Traversable) {
@@ -88,7 +87,6 @@ class Float extends AbstractValidator
         return $this;
     }
 
-
     /**
      * Returns true if and only if $value is a floating-point value
      *
@@ -110,34 +108,30 @@ class Float extends AbstractValidator
         }
 
         $locale = $this->getLocale();
-        $format = new NumberFormatter($locale, NumberFormatter::DECIMAL);
-        if (intl_is_failure($format->getErrorCode())) {
-            throw new Exception\InvalidArgumentException("Invalid locale string given");
+        $numberFormatter = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+
+        if (intl_is_failure($numberFormatter->getErrorCode())) {
+            throw new Exception\InvalidArgumentException($numberFormatter->getErrorMessage());
         }
 
-        $parsedFloat = $format->parse($value, NumberFormatter::TYPE_DOUBLE);
-        if (intl_is_failure($format->getErrorCode())) {
+        $parsedFloat = $numberFormatter->parse($value);
+var_dump(__LINE__,$parsedFloat, $value);
+        //Check if the parser returned a number or not
+        if (intl_is_failure($numberFormatter->getErrorCode()) || false === $parsedFloat) {
             $this->error(self::NOT_FLOAT);
             return false;
         }
 
-        $decimalSep  = $format->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
-        $groupingSep = $format->getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
-
-        $valueFiltered = str_replace($groupingSep, '', $value);
-        $valueFiltered = str_replace($decimalSep, '.', $valueFiltered);
-
-        while (strpos($valueFiltered, '.') !== false
-               && (substr($valueFiltered, -1) == '0' || substr($valueFiltered, -1) == '.')
-        ) {
-            $valueFiltered = substr($valueFiltered, 0, strlen($valueFiltered) - 1);
+        if (intl_is_failure($numberFormatter->getErrorCode())) {
+            throw new Exception\InvalidArgumentException($numberFormatter->getErrorMessage());
+        }
+var_dump(__LINE__,$numberFormatter->format($parsedFloat), $value);
+        // This is a valid float if we can do a parse/format roundtrip on the data
+        if ($numberFormatter->format($parsedFloat) == $value || strval($parsedFloat) == strval($value)) {
+            return true;
         }
 
-        if (strval($parsedFloat) !== $valueFiltered) {
-            $this->error(self::NOT_FLOAT);
-            return false;
-        }
-
-        return true;
+        $this->error(self::NOT_FLOAT);
+        return false;
     }
 }

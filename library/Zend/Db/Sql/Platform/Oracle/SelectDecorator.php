@@ -41,20 +41,13 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         return $table . ' ' . $alias;
     }
 
-    protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
+    protected function localizeVariables()
     {
-        // localize variables
-        foreach (get_object_vars($this->subject) as $name => $value) {
-            $this->{$name} = $value;
-        }
-
-        // set specifications
+        parent::localizeVariables();
         unset($this->specifications[self::LIMIT]);
         unset($this->specifications[self::OFFSET]);
 
         $this->specifications['LIMITOFFSET'] = null;
-
-        return parent::buildSqlString($platform, $driver, $parameterContainer);
     }
 
     /**

@@ -50,6 +50,7 @@ abstract class AbstractSql implements SqlInterface
      */
     protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
+        $this->localizeVariables();
         $sqls       = array();
         $parameters = array();
         foreach ($this->specifications as $name => $specification) {
@@ -289,5 +290,15 @@ abstract class AbstractSql implements SqlInterface
             $table = $platform->quoteIdentifier($schema) . $platform->getIdentifierSeparator() . $table;
         }
         return $table;
+    }
+
+    protected function localizeVariables()
+    {
+        if (!$this instanceof PlatformDecoratorInterface) {
+            return;
+        }
+        foreach (get_object_vars($this->subject) as $name => $value) {
+            $this->{$name} = $value;
+        }
     }
 }

@@ -12,8 +12,6 @@ namespace Zend\Db\Sql\Platform\SqlServer\Ddl;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Sql\Ddl\CreateTable;
 use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
-use Zend\Db\Adapter\Driver\DriverInterface;
-use Zend\Db\Adapter\ParameterContainer;
 
 class CreateTableDecorator extends CreateTable implements PlatformDecoratorInterface
 {
@@ -30,15 +28,6 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
     {
         $this->subject = $subject;
         return $this;
-    }
-
-    protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
-    {
-        // localize variables
-        foreach (get_object_vars($this->subject) as $name => $value) {
-            $this->{$name} = $value;
-        }
-        return parent::buildSqlString($platform, $driver, $parameterContainer);
     }
 
     /**

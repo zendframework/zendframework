@@ -30,16 +30,12 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         $this->subject = $select;
     }
 
-    protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
+    protected function localizeVariables()
     {
-        // localize variables
-        foreach (get_object_vars($this->subject) as $name => $value) {
-            $this->{$name} = $value;
-        }
+        parent::localizeVariables();
         if ($this->limit === null && $this->offset !== null) {
             $this->specifications[self::LIMIT] = 'LIMIT 18446744073709551615';
         }
-        return parent::buildSqlString($platform, $driver, $parameterContainer);
     }
 
     protected function processLimit(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)

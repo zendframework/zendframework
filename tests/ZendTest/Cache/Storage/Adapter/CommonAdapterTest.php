@@ -225,6 +225,8 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
 
+        $this->waitForFullSecond();
+
         $this->assertTrue($this->_storage->setItem('key', 'value'));
 
         // wait until the item expired
@@ -299,6 +301,8 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
+
+        $this->waitForFullSecond();
 
         $this->_storage->setItem('key', 'value');
 
@@ -543,6 +547,8 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
 
+        $this->waitForFullSecond();
+
         $this->_storage->setItem('key', 'value');
 
         // wait until expired
@@ -581,6 +587,9 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             'key2' => 'value2',
             'key3' => 'value3'
         );
+
+        $this->waitForFullSecond();
+
         $this->assertSame(array(), $this->_storage->setItems($items));
 
         // wait until expired
@@ -828,6 +837,8 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         $this->_options->setTtl(2 * $capabilities->getTtlPrecision());
 
+        $this->waitForFullSecond();
+
         $this->assertTrue($this->_storage->setItem('key', 'value'));
 
         // sleep 1 times before expire to touch the item
@@ -1000,6 +1011,8 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $ttl = $capabilities->getTtlPrecision();
         $this->_options->setTtl($ttl);
 
+        $this->waitForFullSecond();
+
         $this->assertTrue($this->_storage->setItem('key1', 'value1'));
 
         // wait until the first item expired
@@ -1089,5 +1102,15 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             $totalSpace = $this->_storage->getTotalSpace();
             $this->assertLessThanOrEqual($totalSpace, $availableSpace);
         }
+    }
+
+    /**
+     * This will wait for a full second started
+     * to reduce test failures on high load servers
+     * @see https://github.com/zendframework/zf2/issues/5144
+     */
+    protected function waitForFullSecond()
+    {
+        usleep((microtime(true)-time()) * 1000000);
     }
 }

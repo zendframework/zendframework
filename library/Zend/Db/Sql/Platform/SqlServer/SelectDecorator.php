@@ -9,12 +9,9 @@
 
 namespace Zend\Db\Sql\Platform\SqlServer;
 
-use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
-use Zend\Db\Adapter\Driver\Sqlsrv\Statement;
-use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
 use Zend\Db\Sql\Select;
 
@@ -23,24 +20,20 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
     /**
      * @var Select
      */
-    protected $select = null;
+    protected $subject = null;
 
     /**
      * @param Select $select
      */
     public function setSubject($select)
     {
-        $this->select = $select;
+        $this->subject = $select;
     }
 
-    /**
-     * @param AdapterInterface $adapter
-     * @param StatementContainerInterface $statementContainer
-     */
-    public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer)
+    protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         // localize variables
-        foreach (get_object_vars($this->select) as $name => $value) {
+        foreach (get_object_vars($this->subject) as $name => $value) {
             $this->{$name} = $value;
         }
 
@@ -49,32 +42,6 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         unset($this->specifications[self::OFFSET]);
 
         $this->specifications['LIMITOFFSET'] = null;
-        parent::prepareStatement($adapter, $statementContainer);
-
-        //set statement cursor type
-        if ($statementContainer instanceof Statement) {
-            $statementContainer->setPrepareOptions(array('Scrollable'=>\SQLSRV_CURSOR_STATIC));
-        }
-
-    }
-
-    /**
-     * @param PlatformInterface $platform
-     * @return string
-     */
-    public function getSqlString(PlatformInterface $platform = null)
-    {
-        // localize variables
-        foreach (get_object_vars($this->select) as $name => $value) {
-            $this->{$name} = $value;
-        }
-
-        // set specifications
-        unset($this->specifications[self::LIMIT]);
-        unset($this->specifications[self::OFFSET]);
-
-        $this->specifications['LIMITOFFSET'] = null;
-        return parent::getSqlString($platform);
     }
 
     /**

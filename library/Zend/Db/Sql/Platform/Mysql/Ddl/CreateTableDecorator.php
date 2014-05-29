@@ -12,33 +12,31 @@ namespace Zend\Db\Sql\Platform\Mysql\Ddl;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Sql\Ddl\CreateTable;
 use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
+use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\ParameterContainer;
 
 class CreateTableDecorator extends CreateTable implements PlatformDecoratorInterface
 {
     /**
      * @var CreateTable
      */
-    protected $createTable;
+    protected $subject;
 
     /**
      * @param CreateTable $subject
      */
     public function setSubject($subject)
     {
-        $this->createTable = $subject;
+        $this->subject = $subject;
     }
 
-    /**
-     * @param  null|PlatformInterface $platform
-     * @return string
-     */
-    public function getSqlString(PlatformInterface $platform = null)
+    protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         // localize variables
-        foreach (get_object_vars($this->createTable) as $name => $value) {
+        foreach (get_object_vars($this->subject) as $name => $value) {
             $this->{$name} = $value;
         }
-        return parent::getSqlString($platform);
+        return parent::buildSqlString($platform, $driver, $parameterContainer);
     }
 
     protected function processColumns(PlatformInterface $platform = null)

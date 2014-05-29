@@ -12,7 +12,6 @@ namespace Zend\Db\Sql;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
-use Zend\Db\Adapter\StatementContainer;
 use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
 use Zend\Db\Adapter\Platform\Sql92 as DefaultAdapterPlatform;
 
@@ -206,39 +205,28 @@ abstract class AbstractSql implements SqlInterface
      */
     protected function processSubSelect(Select $subselect, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
+        if ($this instanceof PlatformDecoratorInterface) {
+            $decorator = clone $this;
+            $decorator->setSubject($subselect);
+        } else {
+            $decorator = $subselect;
+        }
+
         if ($parameterContainer) {
-            $stmtContainer = new StatementContainer;
-
             // Track subselect prefix and count for parameters
+            $processInfoContext = ($decorator instanceof PlatformDecoratorInterface) ? $subselect : $decorator;
             $this->processInfo['subselectCount']++;
-            $subselect->processInfo['subselectCount'] = $this->processInfo['subselectCount'];
-            $subselect->processInfo['paramPrefix'] = 'subselect' . $subselect->processInfo['subselectCount'];
+            $processInfoContext->processInfo['subselectCount'] = $this->processInfo['subselectCount'];
+            $processInfoContext->processInfo['paramPrefix'] = 'subselect' . $processInfoContext->processInfo['subselectCount'];
 
-            // call subselect
-            if ($this instanceof PlatformDecoratorInterface) {
-                /** @var Select|PlatformDecoratorInterface $subselectDecorator */
-                $subselectDecorator = clone $this;
-                $subselectDecorator->setSubject($subselect);
-                $subselectDecorator->prepareStatement(new \Zend\Db\Adapter\Adapter($driver, $platform), $stmtContainer);
-            } else {
-                $subselect->prepareStatement(new \Zend\Db\Adapter\Adapter($driver, $platform), $stmtContainer);
-            }
+            $sql = $decorator->buildSqlString($platform, $driver, $parameterContainer);
 
             // copy count
-            $this->processInfo['subselectCount'] = $subselect->processInfo['subselectCount'];
-
-            $parameterContainer->merge($stmtContainer->getParameterContainer()->getNamedArray());
-            $sql = $stmtContainer->getSql();
-        } else {
-            if ($this instanceof PlatformDecoratorInterface) {
-                $subselectDecorator = clone $this;
-                $subselectDecorator->setSubject($subselect);
-                $sql = $subselectDecorator->getSqlString($platform);
-            } else {
-                $sql = $subselect->getSqlString($platform);
-            }
+            $this->processInfo['subselectCount'] = $decorator->processInfo['subselectCount'];
+            return $sql;
         }
-        return $sql;
+
+        return $decorator->buildSqlString($platform, $driver, $parameterContainer);
     }
 
     /**

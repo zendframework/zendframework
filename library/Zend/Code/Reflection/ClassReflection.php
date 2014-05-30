@@ -177,6 +177,21 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
         return $methods;
     }
 
+    public function getTraits()
+    {
+        $vals = array();
+        $traits = parent::getTraits();
+        if(!$traits) {
+            return;
+        }
+
+        foreach($traits as $trait) {
+            $vals[] = new ClassReflection($trait->getName());
+        }
+
+        return $vals;
+    }
+
     /**
      * Get parent reflection class of reflected class
      *

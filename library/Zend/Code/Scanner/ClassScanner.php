@@ -48,6 +48,11 @@ class ClassScanner implements ScannerInterface
     /**
      * @var bool
      */
+    protected $isTrait = false;
+
+    /**
+     * @var bool
+     */
     protected $isFinal = false;
 
     /**
@@ -94,6 +99,16 @@ class ClassScanner implements ScannerInterface
      * @var array
      */
     protected $infos = array();
+
+    /**
+     * @var array
+     */
+    protected $traits = array();
+
+    /**
+     * @var array
+     */
+    protected $methods = array();
 
     /**
      * @param  array $classTokens
@@ -200,6 +215,16 @@ class ClassScanner implements ScannerInterface
     {
         $this->scan();
         return $this->isFinal;
+    }
+
+    /**
+     * Verify if class is a trait
+     * @return bool
+     */
+    public function isTrait()
+    {
+        $this->scan();
+        return $this->isTrait;
     }
 
     /**
@@ -480,6 +505,142 @@ class ClassScanner implements ScannerInterface
         return false;
     }
 
+
+    public function getTraits()
+    {
+        if(empty($this->traits)) {
+            //get list of traitNames
+            $traitNames = $this->getTraitNames();
+            foreach($traitNames as $traitName) {
+                /*
+                 * @todo test if this works when trait is included or required instead of autoloaded?
+                 */
+                $fileName = str_replace("\\", "/", $traitName) .".php";
+                if(file_exists($fileName)) {
+                    $file = new FileScanner($fileName);
+                    $this->traits[] = $file->getClass($traitName);
+                } else {
+                    throw new Exception\RuntimeException('Unable to locate trait file at '. $fileName);
+                }
+            }
+        }
+
+        return $this->traits;
+    }
+
+    public function getTraitNames()
+    {
+        $return = array();
+        foreach ($this->infos as $info) {
+            if ($info['type'] != 'use') {
+                continue;
+            }
+
+            if(is_array($info['use_statements'])) {
+                foreach($info['use_statements'] as $trait) {
+                    $traitName = $trait;
+                    if($this->nameInformation instanceof NameInformation) {
+                        $traitName = $this->nameInformation->resolveName($traitName);
+                    }
+                    $return[] = $traitName;
+                }
+            }
+            break;
+        }
+
+        return $return;
+    }
+
+    public function getTraitAliases()
+    {
+        $return = array();
+        foreach ($this->infos as $info) {
+            if ($info['type'] != 'use') {
+                continue;
+            }
+
+            if(is_array($info['aliases'])) {
+                foreach($info['aliases'] as $alias) {
+                    if(is_null($alias) || (!empty($alias['type']) && $alias['type'] !== "as")) {
+                        continue;
+                    }
+
+                    // attempt to get fqcn
+                    list($trait, $method) = explode("::", $alias['original']);
+                    if($this->nameInformation instanceof NameInformation) {
+                        $trait = $this->nameInformation->resolveName($trait);
+                    }
+
+                    $return[$alias['alias']] = $trait . "::". $method;
+                }
+            }
+            break;
+        }
+
+        return $return;
+    }
+
+    protected function getVisibilityForAlias($aliasName)
+    {
+        $return = null;
+        foreach ($this->infos as $info) {
+            if ($info['type'] != 'use') {
+                continue;
+            }
+
+            if(is_array($info['aliases'])) {
+                foreach($info['aliases'] as $alias) {
+                    if(is_null($alias) && (!empty($alias['type']) && $alias['type'] !== "as")) {
+                        continue;
+                    }
+
+                    if($alias['alias'] == $aliasName) {
+                        $return = $alias['visibility'];
+                        break 2;
+                    }
+                }
+            }
+            break;
+        }
+
+        return $return;
+    }
+
+    /**
+     * Return an array of
+     * key = trait to keep
+     * value = trait::method to ignore
+     * @return array
+     */
+    protected function getBlockedTraitMethods()
+    {
+        $return = array();
+        foreach ($this->infos as $info) {
+            if ($info['type'] != 'use') {
+                continue;
+            }
+
+            if(is_array($info['aliases'])) {
+                foreach($info['aliases'] as $alias) {
+                    if(is_null($alias) || (!empty($alias['type']) && $alias['type'] !== "insteadof")) {
+                        continue;
+                    }
+
+                    // attempt to get fqcn
+                    list($trait, $method) = explode("::", $alias['original']);
+                    if($this->nameInformation instanceof NameInformation) {
+                        $trait = $this->nameInformation->resolveName($alias['alias']);
+                    }
+
+                    $return[] = $trait . "::". $method;
+                }
+            }
+            break;
+        }
+
+        return $return;
+    }
+
     /**
      * Return a list of method names
      *
@@ -489,13 +650,10 @@ class ClassScanner implements ScannerInterface
     {
         $this->scan();
 
+        $methods = $this->getMethods();
         $return = array();
-        foreach ($this->infos as $info) {
-            if ($info['type'] != 'method') {
-                continue;
-            }
-
-            $return[] = $info['name'];
+        foreach ($methods as $method) {
+            $return[] = $method->getName();
         }
 
         return $return;
@@ -510,16 +668,73 @@ class ClassScanner implements ScannerInterface
     {
         $this->scan();
 
-        $return = array();
-        foreach ($this->infos as $info) {
-            if ($info['type'] != 'method') {
-                continue;
-            }
+        if(empty($this->methods)) {
+            foreach ($this->infos as $info) {
+                if ($info['type'] != 'method' && $info['type'] != 'use') {
+                    continue;
+                }
 
-            $return[] = $this->getMethod($info['name']);
+                // Merge in trait methods
+                if($info['type'] == "use") {
+
+                    $traitMethods = array();
+                    $traits = $this->getTraits();
+                    $insteadof = $this->getBlockedTraitMethods();
+
+                    $aliases   = $this->getTraitAliases();
+                    foreach($traits as $trait) {
+                        $tempMethods = $trait->getMethods();
+                        foreach($tempMethods as $tempMethod) {
+                            $methodFullName = $trait->getName() ."::". $tempMethod->getName();
+                            $methodAlias = array_search($methodFullName, $aliases);
+
+                            if (false !== $methodAlias) {
+                                // trait::method is aliased
+                                // clone the tempMethod as we need to change
+                                // the name and possibly the visibility of the
+                                // scanned method.
+                                //
+                                // @todo setName and setVisibility were added to
+                                // MethodScanner to accomplish this, may not be the
+                                // best option, could use ReflectionClass instead?
+                                $newMethod = clone $tempMethod;
+                                $newMethod->setName($methodAlias);
+
+                                // if visibility exists, change it on the MethodScanner
+                                $visibility = $this->getVisibilityForAlias($methodAlias);
+                                if(!is_null($visibility)) {
+                                    $newMethod->setVisibility($visibility);
+                                }
+                                $traitMethods[$methodAlias] = $newMethod;
+                            } elseif (in_array($methodFullName, $insteadof)) {
+                                // ignore overridden methods
+                                continue;
+                            } else {
+                                if(array_key_exists($tempMethod->getName(), $traitMethods)) {
+                                    throw new Exception\RuntimeException(sprintf("Trait method %s has not been applied because there are collisions with other trait methods see: (insteadof OR as).", $tempMethod->getName()));
+                                }
+
+                                $traitMethods[$tempMethod->getName()] = $tempMethod;
+                            }
+                        }
+                    }
+
+                    $this->methods = array_merge($this->methods, array_values($traitMethods));
+                    continue;
+                }
+
+                $m = new MethodScanner(
+                    array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
+                    $this->nameInformation
+                );
+                $m->setClass($this->name);
+                $m->setScannerClass($this);
+
+                $this->methods[] = $m;
+            }
         }
 
-        return $return;
+        return $this->methods;
     }
 
     /**
@@ -538,31 +753,19 @@ class ClassScanner implements ScannerInterface
             if ($info['type'] != 'method') {
                 throw new Exception\InvalidArgumentException('Index of info offset is not about a method');
             }
-        } elseif (is_string($methodNameOrInfoIndex)) {
-            $methodFound = false;
-            foreach ($this->infos as $info) {
-                if ($info['type'] === 'method' && $info['name'] === $methodNameOrInfoIndex) {
-                    $methodFound = true;
-                    break;
-                }
-            }
-            if (!$methodFound) {
-                return false;
-            }
-        }
-        if (!isset($info)) {
-            // @todo find a way to test this
-            die('Massive Failure, test this');
+            $methodNameOrInfoIndex = $info['name'];
         }
 
-        $m = new MethodScanner(
-            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
-            $this->nameInformation
-        );
-        $m->setClass($this->name);
-        $m->setScannerClass($this);
+        $returnMethod = false;
+        $methods = $this->getMethods();
+        foreach($methods as $method) {
+            if($method->getName() == $methodNameOrInfoIndex) {
+                $returnMethod = $method;
+                break;
+            }
+        }
 
-        return $m;
+        return $returnMethod;
     }
 
     /**
@@ -575,13 +778,7 @@ class ClassScanner implements ScannerInterface
     {
         $this->scan();
 
-        foreach ($this->infos as $info) {
-            if ($info['type'] === 'method' && $info['name'] === $name) {
-                return true;
-            }
-        }
-
-        return false;
+        return is_object($this->getMethod($name));
     }
 
     public static function export()
@@ -684,6 +881,7 @@ class ClassScanner implements ScannerInterface
             case T_ABSTRACT:
             case T_CLASS:
             case T_INTERFACE:
+            case T_TRAIT:
 
                 // CLASS INFORMATION
 
@@ -709,6 +907,16 @@ class ClassScanner implements ScannerInterface
                         $this->isAbstract = true;
                         goto SCANNER_CLASS_INFO_CONTINUE;
                         //goto no break needed
+
+                    case T_TRAIT:
+                        $this->isTrait = true;
+                        $this->shortName = $tokens[$tokenIndex + 2][1];
+                        if ($this->nameInformation && $this->nameInformation->hasNamespace()) {
+                            $this->name = $this->nameInformation->getNamespace() . '\\' . $this->shortName;
+                        } else {
+                            $this->name = $this->shortName;
+                        }
+                        goto SCANNER_CLASS_INFO_CONTINUE;
 
                     case T_INTERFACE:
                         $this->isInterface = true;
@@ -816,6 +1024,111 @@ class ClassScanner implements ScannerInterface
                     $MACRO_INFO_ADVANCE();
                     goto SCANNER_CLASS_BODY_CONTINUE;
                     //goto no break needed
+
+                case T_USE:
+                    // ensure php backwards compatibility
+                    if(!defined('T_INSTEADOF')) {
+                        define('T_INSTEADOF', 24000);
+                    }
+
+                    $infos[$infoIndex] = array(
+                        'type'       => 'use',
+                        'tokenStart' => $tokenIndex,
+                        'tokenEnd'   => null,
+                        'lineStart'  => $tokens[$tokenIndex][2],
+                        'lineEnd'    => null,
+                        'name'  => $namespace,
+                        'use_statements' => array(0 => null),
+                        'aliases' => array(0 => null),
+                    );
+
+                    $isOriginalName = array(T_STRING, T_DOUBLE_COLON);
+                    $isAlias = array(T_STRING);
+                    $isVisibility = array(T_PRIVATE, T_PROTECTED, T_PUBLIC, T_STATIC);
+                    $isAliasType = array(T_AS, T_INSTEADOF);
+                    $isValidAlias = array_merge($isOriginalName, $isAlias, $isVisibility, $isAliasType);
+
+                    $useStatementIndex = 0;
+                    $aliasStatementIndex = 0;
+                    $useAliasContext   = false;
+                    $useAsContext      = false;
+
+                    // start processing with next token
+                    if ($MACRO_TOKEN_ADVANCE() === false) {
+                        goto SCANNER_END;
+                    }
+
+                    SCANNER_USE_TOP:
+
+                    if ($tokenType === null) {
+                        if ($tokenContent === "{") {
+                            $useStatementIndex = 0;
+                            $useAliasContext = true;
+                            $infos[$infoIndex]['aliases'][$useStatementIndex] = array('original' => null, 'alias' => null, 'visibility' => null, 'type' => 'as');
+                        } elseif ($tokenContent === "}") {
+                            $useAliasContext = false;
+                            goto SCANNER_USE_END;
+                        } elseif ($tokenContent === ';') {
+                            if($useAliasContext === true) {
+                                $useStatementIndex++;
+                                $useAsContext = false;
+                            }
+                            // only end if we aren't inside braces
+                            if(false === $useAliasContext) {
+                                goto SCANNER_USE_END;
+                            }
+                        } elseif ($tokenContent === ',') {
+                            $useStatementIndex++;
+                            $infos[$infoIndex]['use_statements'][$useStatementIndex] = '';
+                        }
+                    }
+
+                    // ANALYZE
+                    if ($tokenType !== null) {
+                        // use context
+                        if(false === $useAliasContext) {
+                            if ($tokenType == T_NS_SEPARATOR || $tokenType == T_STRING) {
+                                $infos[$infoIndex]['use_statements'][$useStatementIndex] .= $tokenContent;
+                            }
+                        } else {
+                            if(in_array($tokenType, $isValidAlias) && empty($infos[$infoIndex]['aliases'][$useStatementIndex])) {
+                                $infos[$infoIndex]['aliases'][$useStatementIndex] = array(
+                                    'original' => null,
+                                    'visibility' => null,
+                                    'alias' => null,
+                                    'type' => null
+                                );
+                            }
+
+                            if ($tokenType == T_AS || $tokenType == T_INSTEADOF ) {
+                                $useAsContext = true;
+                                $infos[$infoIndex]['aliases'][$useStatementIndex]['type'] = ($tokenType == T_INSTEADOF) ? 'insteadof' : 'as';
+                                goto SCANNER_USE_CONTINUE;
+                            }
+
+                            // in alias context
+                            if ($useAsContext === true && in_array($tokenType, $isAlias)) {
+                                $infos[$infoIndex]['aliases'][$useStatementIndex]['alias'] = $tokenContent;
+                            } elseif (in_array($tokenType, $isOriginalName)) {
+                                $infos[$infoIndex]['aliases'][$useStatementIndex]['original'] .= $tokenContent;
+                            } elseif (in_array($tokenType, $isVisibility)) {
+                                //add whitespace (will trim later)
+                                $infos[$infoIndex]['aliases'][$useStatementIndex]['visibility'] = $tokenType;
+                            }
+                        }
+                    }
+
+                    SCANNER_USE_CONTINUE:
+
+                    if ($MACRO_TOKEN_ADVANCE() === false) {
+                        goto SCANNER_END;
+                    }
+                    goto SCANNER_USE_TOP;
+
+                    SCANNER_USE_END:
+
+                    $MACRO_INFO_ADVANCE();
+                    goto SCANNER_CLASS_BODY_CONTINUE;
 
                 case T_DOC_COMMENT:
                 case T_PUBLIC:

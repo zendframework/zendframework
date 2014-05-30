@@ -531,4 +531,306 @@ CODE;
 
         $this->assertEquals($contents, $classGenerator->generate());
     }
+
+    public function testCanAddTraitWithString()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addTrait('myTrait');
+        $this->assertTrue($classGenerator->hasTrait('myTrait'));
+    }
+
+    public function testCanAddTraitWithArray()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addTrait(array('traitName' => 'myTrait'));
+        $this->assertTrue($classGenerator->hasTrait('myTrait'));
+    }
+
+    public function testCanRemoveTrait()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addTrait(array('traitName' => 'myTrait'));
+        $this->assertTrue($classGenerator->hasTrait('myTrait'));
+        $classGenerator->removeTrait('myTrait');
+        $this->assertFalse($classGenerator->hasTrait('myTrait'));
+    }
+
+    public function testCanGetTraitsMethod()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addTraits(array('myTrait', 'hisTrait'));
+
+        $traits = $classGenerator->getTraits();
+        $this->assertTrue(in_array('myTrait', $traits));
+        $this->assertTrue(in_array('hisTrait', $traits));
+    }
+
+    public function testCanAddTraitAliasWithString()
+    {
+        $classGenerator = new ClassGenerator();
+
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTraitAlias('myTrait::method', 'useMe', \ReflectionMethod::IS_PRIVATE);
+
+        $aliases = $classGenerator->getTraitAliases();
+        $this->assertTrue(array_key_exists('myTrait::method', $aliases));
+        $this->assertEquals($aliases['myTrait::method']['alias'], 'useMe');
+        $this->assertEquals($aliases['myTrait::method']['visibility'], \ReflectionMethod::IS_PRIVATE);
+    }
+
+    public function testCanAddTraitAliasWithArray()
+    {
+        $classGenerator = new ClassGenerator();
+
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTraitAlias(array('traitName' => 'myTrait', 'method' => 'method'), 'useMe', \ReflectionMethod::IS_PRIVATE);
+
+        $aliases = $classGenerator->getTraitAliases();
+        $this->assertTrue(array_key_exists('myTrait::method', $aliases));
+        $this->assertEquals($aliases['myTrait::method']['alias'], 'useMe');
+        $this->assertEquals($aliases['myTrait::method']['visibility'], \ReflectionMethod::IS_PRIVATE);
+    }
+
+    public function testAddTraitAliasExceptionInvalidMethodFormat()
+    {
+        $classGenerator = new ClassGenerator();
+
+        $this->setExpectedException(
+            'Zend\Code\Generator\Exception\InvalidArgumentException',
+            'Invalid Format: $method must be in the format of trait::method'
+        );
+
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTraitAlias('method', 'useMe');
+    }
+
+    public function testAddTraitAliasExceptionInvalidMethodTraitDoesNotExist()
+    {
+        $classGenerator = new ClassGenerator();
+
+        $this->setExpectedException(
+            'Zend\Code\Generator\Exception\InvalidArgumentException',
+            'Invalid trait: Trait does not exists on this class.'
+        );
+
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTraitAlias('unknown::method', 'useMe');
+    }
+
+    public function testAddTraitAliasExceptionMethodAlreadyExists()
+    {
+        $classGenerator = new ClassGenerator();
+
+        $this->setExpectedException(
+            'Zend\Code\Generator\Exception\InvalidArgumentException',
+            'Invalid Alias: Method name already exists on this class.'
+        );
+
+        $classGenerator->addMethod('methodOne');
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTraitAlias('myTrait::method', 'methodOne');
+    }
+
+    public function testAddTraitAliasExceptionInvalidVisibilityValue()
+    {
+        $classGenerator = new ClassGenerator();
+
+        $this->setExpectedException(
+            'Zend\Code\Generator\Exception\InvalidArgumentException',
+            'Invalid Type: $visibility must of ReflectionMethod::IS_PUBLIC, ReflectionMethod::IS_PRIVATE or ReflectionMethod::IS_PROTECTED'
+        );
+
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTraitAlias('myTrait::method', 'methodOne', 'public');
+    }
+
+    public function testAddTraitAliasExceptionInvalidAliasArgument()
+    {
+        $classGenerator = new ClassGenerator();
+
+        $this->setExpectedException(
+            'Zend\Code\Generator\Exception\InvalidArgumentException',
+            'Invalid Alias: $alias must be a string or array.'
+        );
+
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTraitAlias('myTrait::method', new ClassGenerator, 'public');
+    }
+
+    public function testCanAddTraitOverride()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addTraits(array('myTrait', 'histTrait'));
+        $classGenerator->addTraitOverride('myTrait::foo', 'hisTrait');
+
+        $overrides = $classGenerator->getTraitOverrides();
+        $this->assertEquals(count($overrides), 1);
+        $this->assertEquals(key($overrides), 'myTrait::foo');
+        $this->assertEquals($overrides['myTrait::foo'][0], 'hisTrait');
+    }
+
+    public function testCanAddMultipleTraitOverrides()
+    {
+                $classGenerator = new ClassGenerator();
+        $classGenerator->addTraits(array('myTrait', 'histTrait', 'thatTrait'));
+        $classGenerator->addTraitOverride('myTrait::foo', array('hisTrait', 'thatTrait'));$classGenerator = new ClassGenerator();
+        $classGenerator->addTraits(array('myTrait', 'histTrait', 'thatTrait'));
+        $classGenerator->addTraitOverride('myTrait::foo', array('hisTrait', 'thatTrait'));
+
+        $overrides = $classGenerator->getTraitOverrides();
+        $this->assertEquals(count($overrides['myTrait::foo']), 2);
+        $this->assertEquals($overrides['myTrait::foo'][1], 'thatTrait');
+    }
+
+    public function testAddTraitOverrideExceptionInvalidMethodFormat()
+    {
+        $classGenerator = new ClassGenerator();
+
+        $this->setExpectedException(
+            'Zend\Code\Generator\Exception\InvalidArgumentException',
+            'Invalid Format: $method must be in the format of trait::method'
+        );
+
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTraitOverride('method', 'useMe');
+    }
+
+    public function testAddTraitOverrideExceptionInvalidMethodTraitDoesNotExist()
+    {
+        $classGenerator = new ClassGenerator();
+
+        $this->setExpectedException(
+            'Zend\Code\Generator\Exception\InvalidArgumentException',
+            'Invalid trait: Trait does not exists on this class.'
+        );
+
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTraitOverride('unknown::method', 'useMe');
+    }
+
+    public function testAddTraitOverrideExceptionInvalidTraitName()
+    {
+        $classGenerator = new ClassGenerator();
+
+        $this->setExpectedException(
+            'Zend\Code\Generator\Exception\InvalidArgumentException',
+            'Missing required argument "traitName" for $method'
+        );
+
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTraitOverride(array('method' => 'foo'), 'test');
+    }
+
+    public function testAddTraitOverrideExceptionInvalidTraitToReplaceArgument()
+    {
+        $classGenerator = new ClassGenerator();
+
+        $this->setExpectedException(
+            'Zend\Code\Generator\Exception\InvalidArgumentException',
+            'Invalid Argument: $traitToReplace must be a string or array of strings.'
+        );
+
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTraitOverride('myTrait::method', array('methodOne', 4));
+    }
+
+    public function testAddTraitOverrideExceptionInvalidMethodArgInArray()
+    {
+        $classGenerator = new ClassGenerator();
+
+        $this->setExpectedException(
+            'Zend\Code\Generator\Exception\InvalidArgumentException',
+            'Missing required argument "method" for $method'
+        );
+
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTraitOverride(array('traitName' => 'myTrait'), 'test');
+    }
+
+    public function testCanRemoveTraitOverride()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addTraits(array('myTrait', 'histTrait', 'thatTrait'));
+        $classGenerator->addTraitOverride('myTrait::foo', array('hisTrait', 'thatTrait'));
+
+        $overrides = $classGenerator->getTraitOverrides();
+        $this->assertEquals(count($overrides['myTrait::foo']), 2);
+
+        $classGenerator->removeTraitOverride('myTrait::foo', 'hisTrait');
+        $overrides = $classGenerator->getTraitOverrides();
+
+        $this->assertEquals(count($overrides['myTrait::foo']), 1);
+        $this->assertEquals($overrides['myTrait::foo'][1], 'thatTrait');
+    }
+
+    public function testCanRemoveAllTraitOverrides()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->addTraits(array('myTrait', 'histTrait', 'thatTrait'));
+        $classGenerator->addTraitOverride('myTrait::foo', array('hisTrait', 'thatTrait'));
+
+        $overrides = $classGenerator->getTraitOverrides();
+        $this->assertEquals(count($overrides['myTrait::foo']), 2);
+
+        $classGenerator->removeTraitOverride('myTrait::foo');
+        $overrides = $classGenerator->getTraitOverrides();
+
+        $this->assertEquals(count($overrides), 0);
+    }
+
+    /**
+     * @group generate
+     */
+    public function testUseTraitGeneration()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('myClass');
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTrait('hisTrait');
+        $classGenerator->addTrait('thatTrait');
+
+        $output = <<<'CODE'
+class myClass
+{
+
+    use myTrait, hisTrait, thatTrait;
+
+
+}
+
+CODE;
+        $this->assertEquals($classGenerator->generate(), $output);
+    }
+
+    /**
+     * @group generate
+     */
+    public function testTraitGenerationWithAliasesAndOverrides()
+    {
+        $classGenerator = new ClassGenerator();
+        $classGenerator->setName('myClass');
+        $classGenerator->addTrait('myTrait');
+        $classGenerator->addTrait('hisTrait');
+        $classGenerator->addTrait('thatTrait');
+        $classGenerator->addTraitAlias("hisTrait::foo", "test", \ReflectionMethod::IS_PUBLIC);
+        $classGenerator->addTraitOverride('myTrait::bar', array('hisTrait', 'thatTrait'));
+
+        $output = <<<'CODE'
+class myClass
+{
+
+    use myTrait, hisTrait, thatTrait {
+        hisTrait::foo as public test;
+        myTrait::bar insteadof hisTrait;
+        myTrait::bar insteadof thatTrait;
+
+    }
+
+
+}
+
+CODE;
+        $this->assertEquals($classGenerator->generate(), $output);
+
+    }
 }

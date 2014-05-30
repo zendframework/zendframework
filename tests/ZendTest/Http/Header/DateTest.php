@@ -10,6 +10,7 @@
 namespace ZendTest\Http\Header;
 
 use Zend\Http\Header\Date;
+use Zend\Http\Header\Exception\InvalidArgumentException;
 use DateTime;
 use DateTimeZone;
 
@@ -27,6 +28,40 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $dateHeader = Date::fromString('Date: Sun, 06 Nov 1994 08:49:37 GMT');
         $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $dateHeader);
         $this->assertInstanceOf('Zend\Http\Header\Date', $dateHeader);
+    }
+
+    public function testDateFromTimeCreatesValidDateHeader()
+    {
+        // testing using a strtotime()-compatible string
+        $dateHeader = Date::fromTime('+12 hours');
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $dateHeader);
+        $this->assertInstanceOf('Zend\Http\Header\Date', $dateHeader);
+        $date     = new \DateTime(null, new \DateTimeZone('GMT'));
+        $interval = $dateHeader->date()->diff($date, true);
+        $this->assertSame('+12 hours', $interval->format('%R%H hours'));
+
+        // testing using unix time
+        $dateHeader = Date::fromTime(time() + 12 * 60 * 60);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $dateHeader);
+        $this->assertInstanceOf('Zend\Http\Header\Date', $dateHeader);
+        $date     = new \DateTime(null, new \DateTimeZone('GMT'));
+        $interval = $dateHeader->date()->diff($date, true);
+        $this->assertSame('+12 hours', $interval->format('%R%H hours'));
+    }
+
+    public function testDateFromTimeDetectsBadInput()
+    {
+        // testing using a movie title
+        try {
+            $badResult = Date::fromTime('3 Days of the Condor');
+        } catch (InvalidArgumentException $e) {
+            // nothing to do here - the exception is meant to be silently discarded
+        }
+
+        // $badResult would only be set if the exception was not properly thrown
+        if (isset($badResult)) {
+            $this->fail('Expected an exception to be thrown in Date::fromTime()');
+        }
     }
 
     public function testDateGetFieldNameReturnsHeaderName()

@@ -40,7 +40,7 @@ class IsCompressed extends MimeType
      */
     public function __construct($options = array())
     {
-        // http://de.wikipedia.org/wiki/Liste_von_Dateiendungen
+        // http://hul.harvard.edu/ois/systems/wax/wax-public-help/mimetypes.htm
         $default = array(
             'application/arj',
             'application/gnutar',

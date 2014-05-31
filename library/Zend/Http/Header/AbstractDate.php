@@ -91,7 +91,7 @@ abstract class AbstractDate implements HeaderInterface
     /**
      * Create date-based header from Unix time or strtotime()-compatible string
      *
-     * @param $time
+     * @param int|string $time
      * @return AbstractDate
      * @throws Exception\InvalidArgumentException
      */

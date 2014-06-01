@@ -151,7 +151,6 @@ class Update extends AbstractPreparableSql
                     $value,
                     $platform,
                     $driver,
-                    null,
                     $parameterContainer
                 );
             }

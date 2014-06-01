@@ -539,8 +539,8 @@ class Select extends AbstractPreparableSql
                 ),
                 $platform,
                 $driver,
-                $this->processInfo['paramPrefix'] . ((is_string($columnIndexOrAs)) ? $columnIndexOrAs : 'column'),
-                $parameterContainer
+                $parameterContainer,
+                (is_string($columnIndexOrAs) ? $columnIndexOrAs : 'column')
             );
             // process As portion
             if (is_string($columnIndexOrAs)) {
@@ -569,8 +569,8 @@ class Select extends AbstractPreparableSql
                     ),
                     $platform,
                     $driver,
-                    $this->processInfo['paramPrefix'] . ((is_string($jKey)) ? $jKey : 'column'),
-                    $parameterContainer
+                    $parameterContainer,
+                    (is_string($jKey) ? $jKey : 'column')
                 );
                 if (is_string($jKey)) {
                     $jColumns[] = $platform->quoteIdentifier($jKey);
@@ -633,7 +633,7 @@ class Select extends AbstractPreparableSql
             // on expression
             // note: for Expression objects, pass them to processExpression with a prefix specific to each join (used for named parameters)
             $joinSpecArgArray[$j][] = ($join['on'] instanceof ExpressionInterface)
-                ? $this->processExpression($join['on'], $platform, $driver, $parameterContainer, $this->processInfo['paramPrefix'] . 'join' . ($j+1) . 'part')
+                ? $this->processExpression($join['on'], $platform, $driver, $parameterContainer, 'join' . ($j+1) . 'part')
                 : $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN', '<', '>')); // on
         }
 
@@ -646,7 +646,7 @@ class Select extends AbstractPreparableSql
             return null;
         }
         return array(
-            $this->processExpression($this->where, $platform, $driver, $parameterContainer, $this->processInfo['paramPrefix'] . 'where')
+            $this->processExpression($this->where, $platform, $driver, $parameterContainer, 'where')
         );
     }
 
@@ -665,8 +665,8 @@ class Select extends AbstractPreparableSql
                 ),
                 $platform,
                 $driver,
-                $this->processInfo['paramPrefix'] . 'group',
-                $parameterContainer
+                $parameterContainer,
+                'group'
             );
         }
         return array($groups);
@@ -678,7 +678,7 @@ class Select extends AbstractPreparableSql
             return null;
         }
         return array(
-            $this->processExpression($this->having, $platform, $driver, $parameterContainer, $this->processInfo['paramPrefix'] . 'having')
+            $this->processExpression($this->having, $platform, $driver, $parameterContainer, 'having')
         );
     }
 

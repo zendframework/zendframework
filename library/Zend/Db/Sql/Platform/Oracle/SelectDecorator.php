@@ -137,7 +137,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
                 : $platform->quoteIdentifier($join['name']);
             // on expression
             $joinSpecArgArray[$j][] = ($join['on'] instanceof ExpressionInterface)
-                ? $this->processExpression($join['on'], $platform, $driver, $this->processInfo['paramPrefix'] . 'join')
+                ? $this->processExpression($join['on'], $platform, $driver, 'join')
                 : $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN')); // on
             if ($joinSpecArgArray[$j][2] instanceof StatementContainerInterface) {
                 if ($parameterContainer) {

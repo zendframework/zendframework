@@ -77,6 +77,7 @@ abstract class AbstractSql implements SqlInterface
      */
     protected function processExpression(ExpressionInterface $expression, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null, $namedParameterPrefix = null)
     {
+        $namedParameterPrefix = !$namedParameterPrefix ? $namedParameterPrefix : $this->processInfo['paramPrefix'] . $namedParameterPrefix;
         // static counter for the number of times this method was invoked across the PHP runtime
         static $runtimeExpressionPrefix = 0;
 
@@ -238,8 +239,9 @@ abstract class AbstractSql implements SqlInterface
      * @param null|ParameterContainer $parameterContainer
      * @return string
      */
-    protected function resolveColumnValue($column, PlatformInterface $platform, DriverInterface $driver = null, $namedParameterPrefix = null, ParameterContainer $parameterContainer = null)
+    protected function resolveColumnValue($column, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null, $namedParameterPrefix = null)
     {
+        $namedParameterPrefix = !$namedParameterPrefix ? $namedParameterPrefix : $this->processInfo['paramPrefix'] . $namedParameterPrefix;
         $isIdentifier = false;
         $fromTable = '';
         if (is_array($column)) {

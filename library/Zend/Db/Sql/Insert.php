@@ -170,7 +170,6 @@ class Insert extends AbstractPreparableSql
                     $value,
                     $platform,
                     $driver,
-                    null,
                     $parameterContainer
                 );
             }

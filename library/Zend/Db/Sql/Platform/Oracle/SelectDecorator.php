@@ -12,8 +12,6 @@ namespace Zend\Db\Sql\Platform\Oracle;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
-use Zend\Db\Adapter\StatementContainerInterface;
-use Zend\Db\Sql\ExpressionInterface;
 use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
 use Zend\Db\Sql\Select;
 
@@ -38,7 +36,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
      */
     protected function renderTable($table, $alias = null)
     {
-        return $table . ' ' . $alias;
+        return $table . ($alias ? ' ' . $alias : '');
     }
 
     protected function localizeVariables()
@@ -117,37 +115,4 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             $this->specifications[self::SELECT], $parameters[self::SELECT]
         );
     }
-
-
-    protected function processJoins(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
-    {
-        if (!$this->joins) {
-            return null;
-        }
-
-        // process joins
-        $joinSpecArgArray = array();
-        foreach ($this->joins as $j => $join) {
-            $joinSpecArgArray[$j] = array();
-            // type
-            $joinSpecArgArray[$j][] = strtoupper($join['type']);
-            // table name
-            $joinSpecArgArray[$j][] = (is_array($join['name']))
-                ? $platform->quoteIdentifier(current($join['name'])) . ' ' . $platform->quoteIdentifier(key($join['name']))
-                : $platform->quoteIdentifier($join['name']);
-            // on expression
-            $joinSpecArgArray[$j][] = ($join['on'] instanceof ExpressionInterface)
-                ? $this->processExpression($join['on'], $platform, $driver, 'join')
-                : $platform->quoteIdentifierInFragment($join['on'], array('=', 'AND', 'OR', '(', ')', 'BETWEEN')); // on
-            if ($joinSpecArgArray[$j][2] instanceof StatementContainerInterface) {
-                if ($parameterContainer) {
-                    $parameterContainer->merge($joinSpecArgArray[$j][2]->getParameterContainer());
-                }
-                $joinSpecArgArray[$j][2] = $joinSpecArgArray[$j][2]->getSql();
-            }
-        }
-
-        return array($joinSpecArgArray);
-    }
-
 }

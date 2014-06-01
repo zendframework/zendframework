@@ -627,8 +627,7 @@ class Select extends AbstractPreparableSql
             }
             $joinSpecArgArray[$j] = array(
                 strtoupper($join['type']),
-                (isset($joinAs)) ? $joinName . ' AS ' . $joinAs : $joinName,
-
+                $this->renderTable($joinName, $joinAs),
             );
             // on expression
             // note: for Expression objects, pass them to processExpression with a prefix specific to each join (used for named parameters)

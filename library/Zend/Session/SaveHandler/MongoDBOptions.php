@@ -142,6 +142,9 @@ class MongoDBOptions extends AbstractOptions
      */
     public function getSaveOptions()
     {
+        if ($this->saveOptions == array('w' => 1) && version_compare(phpversion('mongo'), '1.3.0', '<')) {
+            $this->saveOptions = array('safe' => true);
+        }
         return $this->saveOptions;
     }
 

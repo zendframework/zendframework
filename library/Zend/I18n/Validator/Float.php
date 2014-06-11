@@ -14,6 +14,8 @@ use NumberFormatter;
 use Traversable;
 use Zend\I18n\Exception as I18nException;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\StringUtils;
+use Zend\Stdlib\StringWrapper\StringWrapperInterface;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
 
@@ -38,6 +40,13 @@ class Float extends AbstractValidator
     protected $locale;
 
     /**
+     * UTF-8 compatable wrapper for string functions
+     *
+     * @var StringWrapperInterface
+     */
+    protected $wrapper;
+
+    /**
      * Constructor for the integer validator
      *
      * @param array|Traversable $options
@@ -50,6 +59,8 @@ class Float extends AbstractValidator
                 sprintf('%s component requires the intl PHP extension', __NAMESPACE__)
             );
         }
+
+        $this->wrapper = StringUtils::getWrapper();
 
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
@@ -88,7 +99,8 @@ class Float extends AbstractValidator
     }
 
     /**
-     * Returns true if and only if $value is a floating-point value
+     * Returns true if and only if $value is a floating-point value. Uses the formal definition of a float as described
+     * in the PHP manual: {@link http://www.php.net/float}
      *
      * @param  string $value
      * @return bool
@@ -96,42 +108,92 @@ class Float extends AbstractValidator
      */
     public function isValid($value)
     {
-        if (!is_string($value) && !is_int($value) && !is_float($value)) {
+        if (!is_scalar($value) || is_bool($value)) {
             $this->error(self::INVALID);
             return false;
         }
 
         $this->setValue($value);
 
-        if (is_float($value)) {
+        if (is_float($value) || is_int($value)) {
             return true;
         }
 
-        $locale = $this->getLocale();
-        $numberFormatter = new NumberFormatter($locale, NumberFormatter::DECIMAL);
-
-        if (intl_is_failure($numberFormatter->getErrorCode())) {
-            throw new Exception\InvalidArgumentException($numberFormatter->getErrorMessage());
+        $formatter = new NumberFormatter($this->getLocale(), NumberFormatter::DECIMAL);
+        if (intl_is_failure($formatter->getErrorCode())) {
+            throw new Exception\InvalidArgumentException($formatter->getErrorMessage());
         }
 
-        $parsedFloat = $numberFormatter->parse($value);
-var_dump(__LINE__,$parsedFloat, $value);
-        //Check if the parser returned a number or not
-        if (intl_is_failure($numberFormatter->getErrorCode()) || false === $parsedFloat) {
-            $this->error(self::NOT_FLOAT);
+        $groupSeparator = $formatter->getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
+        $decSeparator   = $formatter->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
+
+        /**
+         * @desc There are seperator "look-alikes" for decimal and group seperators that are more commonly used than the
+         *       official unicode chracter. We need to replace those with the real thing - or remove it.
+         */
+        //NO-BREAK SPACE and ARABIC THOUSANDS SEPARATOR
+        if ($groupSeparator == "\xC2\xA0") {
+            $value = str_replace(' ', $groupSeparator, $value);
+        } elseif ($groupSeparator == "\xD9\xAC") {  //NumberFormatter doesn't have grouping at all for Arabic-Indic
+            $value = str_replace(array('\'', $groupSeparator), '', $value);
+        }
+
+        //ARABIC DECIMAL SEPARATOR
+        if ($decSeparator == "\xD9\xAB") {
+            $value = str_replace(',', $decSeparator, $value);
+        }
+
+        //We have seperators, and they are flipped. i.e. 2.000,000 for en-US
+        $groupSeparatorPosition = $this->wrapper->strpos($value, $groupSeparator);
+        $decSeparatorPosition = $this->wrapper->strpos($value, $decSeparator);
+        if ($groupSeparatorPosition && $decSeparatorPosition && $groupSeparatorPosition > $decSeparatorPosition) {
             return false;
         }
 
-        if (intl_is_failure($numberFormatter->getErrorCode())) {
-            throw new Exception\InvalidArgumentException($numberFormatter->getErrorMessage());
-        }
-var_dump(__LINE__,$numberFormatter->format($parsedFloat), $value);
-        // This is a valid float if we can do a parse/format roundtrip on the data
-        if ($numberFormatter->format($parsedFloat) == $value || strval($parsedFloat) == strval($value)) {
-            return true;
+        //If we have Unicode support, we can use the real graphemes, otherwise, just the ASCII characters
+        $decimal     = '[\\' . $decSeparator . ']';
+        $posNeg      = '[+-]';
+        $exp         = '[Ee]';
+        $numberRange = '0-9';
+        $useUnicode  = '';
+
+        if (StringUtils::hasPcreUnicodeSupport()) {
+            $posNeg = '[' . $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL) .
+                $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL) . ']';
+            $exp = '[Ee' . $formatter->getSymbol(NumberFormatter::EXPONENTIAL_SYMBOL) . ']+';
+            $numberRange = '\p{N}';
+            $useUnicode = 'u';
         }
 
-        $this->error(self::NOT_FLOAT);
-        return false;
+        /**
+         * @desc Match against the formal definition of a float. The exponential number check is modified for RTL
+         *       non-Latin number systems (Arabic-Indic numbering). I'm also switching out the period for the decimal
+         *       separator. Also, the formal definition leaves out +- from the integer and decimal notations. This also
+         *       checks that a grouping sperator is not in the last GROUPING_SIZE graphemes of the string - i.e. 10,6 is
+         *       not valid for en-US.
+         * @see http://www.php.net/float
+         */
+
+        //No strrpos() in the wrappers yet.
+        $lastStringGroup = $this->wrapper->substr($value, -($formatter->getAttribute(NumberFormatter::GROUPING_SIZE)));
+
+        $lnum    = '[' . $numberRange . ']+';
+        $dnum    = '(([' . $numberRange . ']*' . $decimal . $lnum . ')|(' . $lnum . $decimal . '[' . $numberRange . ']*))';
+        $expDnum = '((' . $posNeg . '?((' . $lnum . '|' . $dnum . ')' . $exp . $posNeg . '?' . $lnum . '))|' .
+                   '(' . $posNeg . '?(' . $lnum . $posNeg . '?' . $exp . '(' . $dnum . '|' . $lnum . '))' . $posNeg . '?))';
+
+        //If the locale has suffixed indicators, add that to the pattern
+        $suffix         = ($formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX)) ? $posNeg . '?' : '';
+        $unGroupedValue = str_replace($groupSeparator, '', $value);
+
+        if ((preg_match('/^' .$posNeg . '?' . $lnum . $suffix . '$/'.$useUnicode, $unGroupedValue) ||
+            preg_match('/^' .$posNeg . '?' . $dnum . $suffix . '$/'.$useUnicode, $unGroupedValue) ||
+            preg_match('/^' . $expDnum . '$/'.$useUnicode, $unGroupedValue)) &&
+            false === $this->wrapper->strpos($lastStringGroup, $groupSeparator)) {
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -18,14 +18,14 @@ use Zend\Db\Adapter\ParameterContainer;
 
 class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
+    const COMBINE = 'combine';
     const COMBINE_UNION = 'union';
     const COMBINE_EXCEPT = 'except';
     const COMBINE_INTERSECT = 'intersect';
 
-    protected $combine = array();
-
     const SPECIFICATION_COMBINE = '%1$s (%2$s) ';
 
+    protected $combine = array();
     /**
      * Create combine clause
      *
@@ -163,8 +163,11 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
      *
      * @return array
      */
-    public function getRawState()
+    public function getRawState($key = null)
     {
-        return $this->combine;
+        $rawState = array(
+            self::COMBINE => $this->combine,
+        );
+        return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 }

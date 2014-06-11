@@ -123,11 +123,15 @@ class CombineTest extends \PHPUnit_Framework_TestCase
         $select = new Select('t1');
         $this->combine->combine($select);
         $this->assertSame(
-            array(array(
-                'select'   => $select,
-                'type'     => Combine::COMBINE_UNION,
-                'modifier' => ''
-            ),),
+            array(
+                'combine' => array(
+                    array(
+                        'select'   => $select,
+                        'type'     => Combine::COMBINE_UNION,
+                        'modifier' => ''
+                    ),
+                ),
+            ),
             $this->combine->getRawState()
         );
     }

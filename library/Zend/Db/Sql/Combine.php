@@ -23,7 +23,9 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     const COMBINE_EXCEPT = 'except';
     const COMBINE_INTERSECT = 'intersect';
 
-    const SPECIFICATION_COMBINE = '%1$s (%2$s) ';
+    protected $specifications = array(
+        self::COMBINE => '%1$s (%2$s) ',
+    );
 
     protected $combine = array();
     /**
@@ -150,7 +152,7 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
                     : strtoupper($combine['type'] . ($combine['modifier'] ? ' ' . $combine['modifier'] : ''));
             $select = $this->processSubSelect($combine['select'], $platform, $driver, $parameterContainer);
             $sql .= sprintf(
-                self::SPECIFICATION_COMBINE,
+                $this->specifications[self::COMBINE],
                 $type,
                 $select
             );

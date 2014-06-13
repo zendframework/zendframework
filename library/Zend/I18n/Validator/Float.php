@@ -127,7 +127,7 @@ class Float extends AbstractValidator
         }
 
         if (StringUtils::hasPcreUnicodeSupport()) {
-            $exponentialSymbols = '[Ee' . $formatter->getSymbol(NumberFormatter::EXPONENTIAL_SYMBOL) . ']{0,4}';
+            $exponentialSymbols = '[Ee' . $formatter->getSymbol(NumberFormatter::EXPONENTIAL_SYMBOL) . ']+';
             $search = '/' . $exponentialSymbols . '/u';
         } else {
             $exponentialSymbols = '[Ee]';
@@ -215,8 +215,10 @@ class Float extends AbstractValidator
         $value          = str_replace("\xE2\x80\x8E", '', $value);
         $unGroupedValue = str_replace($groupSeparator, '', $value);
 
-        //No strrpos() in the wrappers yet.
-        $lastStringGroup = $this->wrapper->substr($value, -($formatter->getAttribute(NumberFormatter::GROUPING_SIZE)));
+        //No strrpos() in wrappers yet. ICU 4.x doesn't have grouping size for everything. ICU 52 has 3 for ALL locales.
+        $groupSize = ($formatter->getAttribute(NumberFormatter::GROUPING_SIZE))
+            ? $formatter->getAttribute(NumberFormatter::GROUPING_SIZE) : 3;
+        $lastStringGroup = $this->wrapper->substr($value, -$groupSize);
 
         if ((preg_match($lnumSearch, $unGroupedValue) ||
             preg_match($dnumSearch, $unGroupedValue) ||

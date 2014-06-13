@@ -55,14 +55,16 @@ class FloatTest extends \PHPUnit_Framework_TestCase
      * @dataProvider floatAndIntegerProvider
      * @return void
      */
-    public function testFloatAndIntegers($value, $expected, $locale)
+    public function testFloatAndIntegers($value, $expected, $locale, $type)
     {
         $this->validator->setLocale($locale);
 
         $this->assertEquals(
             $expected,
             $this->validator->isValid($value),
-            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') . sprintf(" (locale:%s)", $locale)
+            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') .
+            sprintf(" (locale:%s, type:%s)", $locale, $type) . ', ICU Version:' . INTL_ICU_VERSION . '-' .
+            INTL_ICU_DATA_VERSION
         );
     }
 
@@ -75,20 +77,22 @@ class FloatTest extends \PHPUnit_Framework_TestCase
         //Loop locales and examples for a more thorough set of "true" test data
         foreach ($testingLocales as $locale) {
             foreach ($testingExamples as $example) {
-                $trueArray[] = array($example, true, $locale);
+                $trueArray[] = array($example, true, $locale, 'raw');
                 //Decimal Formatted
                 $trueArray[] = array(
                     NumberFormatter::create($locale, NumberFormatter::DECIMAL)
                         ->format($example, NumberFormatter::TYPE_DOUBLE),
                     true,
-                    $locale
+                    $locale,
+                    'decimal'
                 );
                 //Scientific Notation Formatted
                 $trueArray[] = array(
                     NumberFormatter::create($locale, NumberFormatter::SCIENTIFIC)
                         ->format($example, NumberFormatter::TYPE_DOUBLE),
                     true,
-                    $locale
+                    $locale,
+                    'scientific'
                 );
             }
         }

@@ -119,18 +119,32 @@ class Float extends AbstractValidator
             return true;
         }
 
-        $formatter = new NumberFormatter($this->getLocale(), NumberFormatter::DECIMAL);
+        // Need to check if this is scientific formatted string. If not, switch to decimal.
+        $formatter = new NumberFormatter($this->getLocale(), NumberFormatter::SCIENTIFIC);
+
         if (intl_is_failure($formatter->getErrorCode())) {
             throw new Exception\InvalidArgumentException($formatter->getErrorMessage());
         }
 
-        $groupSeparator = $formatter->getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
-        $decSeparator   = $formatter->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
+        if (StringUtils::hasPcreUnicodeSupport()) {
+            $exponentialSymbols = '[Ee' . $formatter->getSymbol(NumberFormatter::EXPONENTIAL_SYMBOL) . ']{0,4}';
+            $search = '/' . $exponentialSymbols . '/u';
+        } else {
+            $exponentialSymbols = '[Ee]';
+            $search = '/' . $exponentialSymbols . '/';
+        }
+
+        if (!preg_match($search, $value)) {
+            $formatter = new NumberFormatter($this->getLocale(), NumberFormatter::DECIMAL);
+        }
 
         /**
          * @desc There are seperator "look-alikes" for decimal and group seperators that are more commonly used than the
          *       official unicode chracter. We need to replace those with the real thing - or remove it.
          */
+        $groupSeparator = $formatter->getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
+        $decSeparator   = $formatter->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
+
         //NO-BREAK SPACE and ARABIC THOUSANDS SEPARATOR
         if ($groupSeparator == "\xC2\xA0") {
             $value = str_replace(' ', $groupSeparator, $value);
@@ -143,24 +157,39 @@ class Float extends AbstractValidator
             $value = str_replace(',', $decSeparator, $value);
         }
 
-        //We have seperators, and they are flipped. i.e. 2.000,000 for en-US
         $groupSeparatorPosition = $this->wrapper->strpos($value, $groupSeparator);
-        $decSeparatorPosition = $this->wrapper->strpos($value, $decSeparator);
+        $decSeparatorPosition   = $this->wrapper->strpos($value, $decSeparator);
+
+        //We have seperators, and they are flipped. i.e. 2.000,000 for en-US
         if ($groupSeparatorPosition && $decSeparatorPosition && $groupSeparatorPosition > $decSeparatorPosition) {
             return false;
         }
 
         //If we have Unicode support, we can use the real graphemes, otherwise, just the ASCII characters
-        $decimal     = '[\\' . $decSeparator . ']';
-        $posNeg      = '[+-]';
-        $exp         = '[Ee]';
+        $decimal     = '['. quotemeta($decSeparator) . ']';
+        $prefix      = '[+-]';
+        $exp         = $exponentialSymbols;
         $numberRange = '0-9';
         $useUnicode  = '';
+        $suffix      = '';
 
         if (StringUtils::hasPcreUnicodeSupport()) {
-            $posNeg = '[' . $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL) .
-                $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL) . ']';
-            $exp = '[Ee' . $formatter->getSymbol(NumberFormatter::EXPONENTIAL_SYMBOL) . ']+';
+            $prefix = '[' .
+                quotemeta(
+                    $formatter->getTextAttribute(NumberFormatter::POSITIVE_PREFIX) .
+                    $formatter->getTextAttribute(NumberFormatter::NEGATIVE_PREFIX) .
+                    $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL) .
+                    $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL)
+                ) . ']{0,3}';
+            $suffix = ($formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX))
+                ? '[' .
+                quotemeta(
+                    $formatter->getTextAttribute(NumberFormatter::POSITIVE_SUFFIX) .
+                    $formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX) .
+                    $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL) .
+                    $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL)
+                ) . ']{0,3}'
+                : '';
             $numberRange = '\p{N}';
             $useUnicode = 'u';
         }
@@ -168,27 +197,30 @@ class Float extends AbstractValidator
         /**
          * @desc Match against the formal definition of a float. The exponential number check is modified for RTL
          *       non-Latin number systems (Arabic-Indic numbering). I'm also switching out the period for the decimal
-         *       separator. Also, the formal definition leaves out +- from the integer and decimal notations. This also
-         *       checks that a grouping sperator is not in the last GROUPING_SIZE graphemes of the string - i.e. 10,6 is
-         *       not valid for en-US.
+         *       separator. The formal definition leaves out +- from the integer and decimal notations so add that.
+         *       This also checks that a grouping sperator is not in the last GROUPING_SIZE graphemes of the string -
+         *       i.e. 10,6 is not valid for en-US.
          * @see http://www.php.net/float
          */
+
+        $lnum    = '[' . $numberRange . ']+';
+        $dnum    = '(([' . $numberRange . ']*' . $decimal . $lnum . ')|(' . $lnum . $decimal . '[' . $numberRange . ']*))';
+        $expDnum = '((' . $prefix . '((' . $lnum . '|' . $dnum . ')' . $exp . $prefix . $lnum . ')'.$suffix.')|' .
+                   '(' . $suffix . '(' . $lnum . $prefix . $exp . '(' . $dnum . '|' . $lnum . '))' . $prefix . '))';
+
+        //LEFT-TO-RIGHT MARK (U+200E) is messing up everything for the handful of locales that have it
+        $lnumSearch     = str_replace("\xE2\x80\x8E", '', '/^' .$prefix . $lnum . $suffix . '$/'.$useUnicode);
+        $dnumSearch     = str_replace("\xE2\x80\x8E", '', '/^' .$prefix . $dnum . $suffix . '$/'.$useUnicode);
+        $expDnumSearch  = str_replace("\xE2\x80\x8E", '', '/^' . $expDnum . '$/'.$useUnicode);
+        $value          = str_replace("\xE2\x80\x8E", '', $value);
+        $unGroupedValue = str_replace($groupSeparator, '', $value);
 
         //No strrpos() in the wrappers yet.
         $lastStringGroup = $this->wrapper->substr($value, -($formatter->getAttribute(NumberFormatter::GROUPING_SIZE)));
 
-        $lnum    = '[' . $numberRange . ']+';
-        $dnum    = '(([' . $numberRange . ']*' . $decimal . $lnum . ')|(' . $lnum . $decimal . '[' . $numberRange . ']*))';
-        $expDnum = '((' . $posNeg . '?((' . $lnum . '|' . $dnum . ')' . $exp . $posNeg . '?' . $lnum . '))|' .
-                   '(' . $posNeg . '?(' . $lnum . $posNeg . '?' . $exp . '(' . $dnum . '|' . $lnum . '))' . $posNeg . '?))';
-
-        //If the locale has suffixed indicators, add that to the pattern
-        $suffix         = ($formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX)) ? $posNeg . '?' : '';
-        $unGroupedValue = str_replace($groupSeparator, '', $value);
-
-        if ((preg_match('/^' .$posNeg . '?' . $lnum . $suffix . '$/'.$useUnicode, $unGroupedValue) ||
-            preg_match('/^' .$posNeg . '?' . $dnum . $suffix . '$/'.$useUnicode, $unGroupedValue) ||
-            preg_match('/^' . $expDnum . '$/'.$useUnicode, $unGroupedValue)) &&
+        if ((preg_match($lnumSearch, $unGroupedValue) ||
+            preg_match($dnumSearch, $unGroupedValue) ||
+            preg_match($expDnumSearch, $unGroupedValue)) &&
             false === $this->wrapper->strpos($lastStringGroup, $groupSeparator)) {
 
             return true;

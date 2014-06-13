@@ -69,7 +69,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     public function floatAndIntegerProvider()
     {
         $trueArray       = array();
-        $testingLocales  = array('ar', 'bn', 'de', 'dz', 'en', 'fr-CH', 'ja', 'ml-IN', 'mr', 'my', 'fa', 'ru', 'zh-TW');
+        $testingLocales  = array('ar', 'bn', 'de', 'dz', 'en', 'fr-CH', 'ja', 'ks', 'ml-IN', 'mr', 'my', 'ps', 'ru');
         $testingExamples = array(1000, -2000, +398.00, 0.04, -0.5, .6, -.70, 8E10, -9.3456E-2, 10.23E6);
 
         //Loop locales and examples for a more thorough set of "true" test data
@@ -161,7 +161,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
             'ar'    => array('10.1', '66notflot.6'),
             'ru'    => array('10.1', '66notflot.6', '2,000.00', '2 00'),
             'en'    => array('10,1', '66notflot.6', '2.000,00', '2 000', '2,00'),
-            'fr-CH' => array('10,1', '66notflot.6', '2,000.00', '2 000', "2'00"),
+            'fr-CH' => array('10,1', '66notflot.6', '2,000.00', '2 000', "2'00")
         );
 
         //Loop locales and examples for a more thorough set of "true" test data

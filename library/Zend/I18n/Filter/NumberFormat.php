@@ -27,9 +27,15 @@ class NumberFormat extends NumberParse
             return $value;
         }
 
-        ErrorHandler::start();
-        $result = $this->getFormatter()->format($value, $this->getType());
-        ErrorHandler::stop();
+        if (!is_int($value) && !is_float($value)) {
+            $result = parent::filter($value);
+        } else {
+            ErrorHandler::start();
+
+            $result = $this->getFormatter()->format($value, $this->getType());
+
+            ErrorHandler::stop();
+        }
 
         if (false !== $result) {
             return $result;

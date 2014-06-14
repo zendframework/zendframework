@@ -54,7 +54,7 @@ class FirePhpBridge implements FirePhpInterface
      * Log an error message
      *
      * @param  string $line
-     * @param string $label
+     * @param  string $label
      * @return void
      */
     public function error($line, $label)
@@ -66,7 +66,7 @@ class FirePhpBridge implements FirePhpInterface
      * Log a warning
      *
      * @param  string $line
-     * @param string $label
+     * @param  string $label
      * @return void
      */
     public function warn($line, $label)
@@ -78,7 +78,7 @@ class FirePhpBridge implements FirePhpInterface
      * Log informational message
      *
      * @param  string $line
-     * @param string $label 
+     * @param  string $label 
      * @return void
      */
     public function info($line, $label)
@@ -101,7 +101,7 @@ class FirePhpBridge implements FirePhpInterface
      * Log a message
      *
      * @param  string $line
-     * @param string $label
+     * @param  string $label
      * @return void
      */
     public function log($line, $label)

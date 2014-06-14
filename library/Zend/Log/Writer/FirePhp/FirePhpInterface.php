@@ -22,22 +22,25 @@ interface FirePhpInterface
      * Log an error message
      *
      * @param string $line
+     * @param string $label
      */
-    public function error($line);
+    public function error($line, $label);
 
     /**
      * Log a warning
      *
      * @param string $line
+     * @param string $label
      */
-    public function warn($line);
+    public function warn($line, $label);
 
     /**
      * Log informational message
      *
      * @param string $line
+     * @param string $label
      */
-    public function info($line);
+    public function info($line, $label);
 
     /**
      * Log a trace
@@ -50,6 +53,7 @@ interface FirePhpInterface
      * Log a message
      *
      * @param string $line
+     * @param string $label
      */
-    public function log($line);
+    public function log($line, $label);
 }

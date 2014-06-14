@@ -22,7 +22,7 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
         $options = new MongoDBOptions();
         $this->assertNull($options->getDatabase());
         $this->assertNull($options->getCollection());
-        $defaultSaveOptions = version_compare(phpversion('mongo'), '1.3.0', '<') ? array('safe' => true) : array('w' => true);
+        $defaultSaveOptions = version_compare(phpversion('mongo'), '1.3.0', '<') ? array('safe' => true) : array('w' => 1);
         $this->assertEquals($defaultSaveOptions, $options->getSaveOptions());
         $this->assertEquals('name', $options->getNameField());
         $this->assertEquals('data', $options->getDataField());
@@ -32,11 +32,10 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
 
     public function testSetConstructor()
     {
-        $defaultSaveOptions = version_compare(phpversion('mongo'), '1.3.0', '<') ? array('safe' => 2) : array('w' => 2);
         $options = new MongoDBOptions(array(
             'database' => 'testDatabase',
             'collection' => 'testCollection',
-            'saveOptions' => $defaultSaveOptions,
+            'saveOptions' => array('w' => 2),
             'nameField' => 'testName',
             'dataField' => 'testData',
             'lifetimeField' => 'testLifetime',
@@ -45,7 +44,7 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('testDatabase', $options->getDatabase());
         $this->assertEquals('testCollection', $options->getCollection());
-        $this->assertEquals($defaultSaveOptions, $options->getSaveOptions());
+        $this->assertEquals(array('w' => 2), $options->getSaveOptions());
         $this->assertEquals('testName', $options->getNameField());
         $this->assertEquals('testData', $options->getDataField());
         $this->assertEquals('testLifetime', $options->getLifetimeField());
@@ -54,11 +53,10 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
 
     public function testSetters()
     {
-        $defaultSaveOptions = version_compare(phpversion('mongo'), '1.3.0', '<') ? array('safe' => 2) : array('w' => 2);
         $options = new MongoDBOptions();
         $options->setDatabase('testDatabase')
                 ->setCollection('testCollection')
-                ->setSaveOptions($defaultSaveOptions)
+                ->setSaveOptions(array('w' => 2))
                 ->setNameField('testName')
                 ->setDataField('testData')
                 ->setLifetimeField('testLifetime')
@@ -66,7 +64,7 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('testDatabase', $options->getDatabase());
         $this->assertEquals('testCollection', $options->getCollection());
-        $this->assertEquals($defaultSaveOptions, $options->getSaveOptions());
+        $this->assertEquals(array('w' => 2), $options->getSaveOptions());
         $this->assertEquals('testName', $options->getNameField());
         $this->assertEquals('testData', $options->getDataField());
         $this->assertEquals('testLifetime', $options->getLifetimeField());

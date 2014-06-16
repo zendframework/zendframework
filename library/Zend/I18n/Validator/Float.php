@@ -166,7 +166,7 @@ class Float extends AbstractValidator
         }
 
         //If we have Unicode support, we can use the real graphemes, otherwise, just the ASCII characters
-        $decimal     = '['. quotemeta($decSeparator) . ']';
+        $decimal     = '['. preg_quote($decSeparator) . ']';
         $prefix      = '[+-]';
         $exp         = $exponentialSymbols;
         $numberRange = '0-9';
@@ -175,7 +175,7 @@ class Float extends AbstractValidator
 
         if (StringUtils::hasPcreUnicodeSupport()) {
             $prefix = '[' .
-                quotemeta(
+                preg_quote(
                     $formatter->getTextAttribute(NumberFormatter::POSITIVE_PREFIX) .
                     $formatter->getTextAttribute(NumberFormatter::NEGATIVE_PREFIX) .
                     $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL) .
@@ -183,7 +183,7 @@ class Float extends AbstractValidator
                 ) . ']{0,3}';
             $suffix = ($formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX))
                 ? '[' .
-                quotemeta(
+                preg_quote(
                     $formatter->getTextAttribute(NumberFormatter::POSITIVE_SUFFIX) .
                     $formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX) .
                     $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL) .

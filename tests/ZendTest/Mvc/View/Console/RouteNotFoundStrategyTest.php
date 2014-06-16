@@ -32,6 +32,6 @@ class RouteNotFoundStrategyTest extends TestCase
         $reflection = new ReflectionClass('Zend\Mvc\View\Console\RouteNotFoundStrategy');
         $method = $reflection->getMethod('renderTable');
         $method->setAccessible(true);
-        $method->invokeArgs($this->strategy, array(array()), 1, 0]);
+        $method->invokeArgs($this->strategy, array(array(array()), 1, 0));
     }
 }

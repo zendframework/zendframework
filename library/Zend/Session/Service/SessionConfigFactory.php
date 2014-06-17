@@ -43,7 +43,7 @@ class SessionConfigFactory implements FactoryInterface
             if (!class_exists($config['config_class'])) {
                 throw new ServiceNotCreatedException(sprintf(
                     'Invalid configuration class "%s" specified in "config_class" session configuration; must be a valid class',
-                    $class
+                    $config['config_class']
                 ));
             }
             $class = $config['config_class'];

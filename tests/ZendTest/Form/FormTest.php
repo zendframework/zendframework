@@ -2008,4 +2008,103 @@ class FormTest extends TestCase
         $this->form = $factory->createForm($spec);
         $this->assertFalse($this->form->useInputFilterDefaults());
     }
+
+
+
+    /**
+     * Error test for https://github.com/zendframework/zf2/issues/6363 comment #1
+     */
+    public function testSetValidationGroupOnFormWithNestedCollectionsRaisesInvalidArgumentException()
+    {
+        $this->form = new TestAsset\NestedCollectionsForm;
+
+        $data = array(
+            'testFieldset' => array(
+                'groups' => array(
+                    array(
+                        'name' => 'first',
+                        'items' => array(
+                            array(
+                                'itemId' => 1,
+                            ),
+                            array(
+                                'itemId' => 2,
+                            ),
+                        ),
+                    ),
+                    array(
+                        'name' => 'second',
+                        'items' => array(
+                            array(
+                                'itemId' => 3,
+                            ),
+                        ),
+                    ),
+                    array(
+                        'name' => 'third',
+                        'items' => array(),
+                    ),
+                ),
+            ),
+        );
+
+        $this->form->setData($data);
+        $this->form->isValid();
+
+        $this->assertEquals($data, $this->form->getData());
+    }
+
+
+    /**
+     * Test for https://github.com/zendframework/zf2/issues/6363 comment #2
+     */
+    public function testSetValidationGroupOnFormWithNestedCollectionsPopulatesOnlyFirstNestedCollectionElement()
+    {
+        $this->form = new TestAsset\NestedCollectionsForm;
+
+        $data = array(
+            'testFieldset' => array(
+                'groups' => array(
+                    array(
+                        'name' => 'first',
+                        'items' => array(
+                            array(
+                                'itemId' => 1,
+                            ),
+                            array(
+                                'itemId' => 2,
+                            ),
+                        ),
+                    ),
+                    array(
+                        'name' => 'second',
+                        'items' => array(
+                            array(
+                                'itemId' => 3,
+                            ),
+                            array(
+                                'itemId' => 4,
+                            ),
+                        ),
+                    ),
+                    array(
+                        'name' => 'third',
+                        'items' => array(
+                            array(
+                                'itemId' => 5,
+                            ),
+                            array(
+                                'itemId' => 6,
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $this->form->setData($data);
+        $this->form->isValid();
+
+        $this->assertEquals($data, $this->form->getData());
+    }
 }

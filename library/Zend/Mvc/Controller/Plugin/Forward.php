@@ -94,11 +94,12 @@ class Forward extends AbstractPlugin
      * Set information on listeners that need to be detached before dispatching.
      *
      * @param  array $listeners Listener information; see getListenersToDetach() for details on format.
-     * @return void
+     * @return Forward
      */
     public function setListenersToDetach($listeners)
     {
         $this->listenersToDetach = $listeners;
+        return $this;
     }
 
     /**

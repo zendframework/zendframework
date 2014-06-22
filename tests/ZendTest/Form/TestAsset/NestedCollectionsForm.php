@@ -17,7 +17,7 @@ class NestedCollectionsForm extends Form
     public function __construct()
     {
         parent::__construct('nestedCollectionsForm');
-        
+
         $this->add(array(
             'name' => 'testFieldset',
             'type' => 'Zend\Form\Fieldset',
@@ -67,7 +67,7 @@ class NestedCollectionsForm extends Form
                 ),
             ),
         ));
-        
+
         $this->setValidationGroup(array(
             'testFieldset' => array(
                 'groups' => array(

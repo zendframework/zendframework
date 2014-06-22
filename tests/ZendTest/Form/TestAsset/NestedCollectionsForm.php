@@ -13,8 +13,7 @@ use Zend\Form\Form;
 use Zend\Form\Fieldset;
 
 class NestedCollectionsForm extends Form
-{   
-
+{
     public function __construct()
     {
         parent::__construct('nestedCollectionsForm');
@@ -69,7 +68,6 @@ class NestedCollectionsForm extends Form
             ),
         ));
         
-
         $this->setValidationGroup(array(
             'testFieldset' => array(
                 'groups' => array(
@@ -81,6 +79,4 @@ class NestedCollectionsForm extends Form
             )
         ));
     }
-
-
 }

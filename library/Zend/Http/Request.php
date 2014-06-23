@@ -43,6 +43,11 @@ class Request extends AbstractMessage implements RequestInterface
     protected $method = self::METHOD_GET;
 
     /**
+     * @var bool
+     */
+    protected $standardMethodsOnly = false;
+
+    /**
      * @var string|HttpUri
      */
     protected $uri = null;
@@ -66,22 +71,26 @@ class Request extends AbstractMessage implements RequestInterface
      * A factory that produces a Request object from a well-formed Http Request string
      *
      * @param  string $string
-     * @return Request
+     * @param  bool $standardMethodsOnly
      * @throws Exception\InvalidArgumentException
+     * @return Request
      */
-    public static function fromString($string)
+    public static function fromString($string, $standardMethodsOnly = false)
     {
+        /** @var Request $request */
         $request = new static();
 
         $lines = explode("\r\n", $string);
 
         // first line must be Method/Uri/Version string
         $matches = null;
-        $methods = implode('|', array(
-            self::METHOD_OPTIONS, self::METHOD_GET, self::METHOD_HEAD, self::METHOD_POST,
-            self::METHOD_PUT, self::METHOD_DELETE, self::METHOD_TRACE, self::METHOD_CONNECT,
-            self::METHOD_PATCH
-        ));
+
+        $standardMethods = array(
+            self::METHOD_OPTIONS, self::METHOD_GET, self::METHOD_HEAD, self::METHOD_POST, self::METHOD_PUT,
+            self::METHOD_DELETE, self::METHOD_TRACE, self::METHOD_CONNECT, self::METHOD_PATCH
+        );
+
+        $methods   = $standardMethodsOnly ? implode('|', $standardMethods) : '[\w-]+';
         $regex     = '#^(?P<method>' . $methods . ')\s(?P<uri>[^ ]*)(?:\sHTTP\/(?P<version>\d+\.\d+)){0,1}#';
         $firstLine = array_shift($lines);
         if (!preg_match($regex, $firstLine, $matches)) {
@@ -137,7 +146,7 @@ class Request extends AbstractMessage implements RequestInterface
     public function setMethod($method)
     {
         $method = strtoupper($method);
-        if (!defined('static::METHOD_' . $method)) {
+        if (!defined('static::METHOD_' . $method) && $this->isStandardMethodsOnly()) {
             throw new Exception\InvalidArgumentException('Invalid HTTP method passed');
         }
         $this->method = $method;
@@ -502,5 +511,21 @@ class Request extends AbstractMessage implements RequestInterface
         $str .= "\r\n";
         $str .= $this->getContent();
         return $str;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isStandardMethodsOnly()
+    {
+        return $this->standardMethodsOnly;
+    }
+
+    /**
+     * @param boolean $strictMethods
+     */
+    public function setStandardMethodsOnly($strictMethods)
+    {
+        $this->standardMethodsOnly = (bool) $strictMethods;
     }
 }

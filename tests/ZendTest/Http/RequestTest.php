@@ -260,4 +260,44 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         }
         return $return;
     }
+
+    public function testCustomMethods()
+    {
+        $request = new Request();
+        $this->assertFalse($request->isStandardMethodsOnly());
+        $request->setMethod('xcustom');
+
+        $this->assertEquals('XCUSTOM', $request->getMethod());
+    }
+
+    public function testStandardMethodsOnly()
+    {
+        $request = new Request();
+        $request->setStandardMethodsOnly(true);
+
+        $this->setExpectedException(
+            'Zend\Http\Exception\InvalidArgumentException',
+            'Invalid HTTP method passed'
+        );
+
+        $request->setMethod('xcustom');
+    }
+
+    public function testCustomMethodsFromString()
+    {
+        $request = Request::fromString('X-CUS_TOM someurl');
+        $this->assertFalse($request->isStandardMethodsOnly());
+
+        $this->assertEquals('X-CUS_TOM', $request->getMethod());
+    }
+
+    public function testStandardMethodsOnlyFromString()
+    {
+        $this->setExpectedException(
+            'Zend\Http\Exception\InvalidArgumentException',
+            'A valid request line was not found in the provided string'
+        );
+
+        $request = Request::fromString('X-CUS_TOM someurl', true);
+    }
 }

@@ -79,6 +79,7 @@ class Request extends AbstractMessage implements RequestInterface
     {
         /** @var Request $request */
         $request = new static();
+        $request->setStandardMethodsOnly($standardMethodsOnly);
 
         $lines = explode("\r\n", $string);
 

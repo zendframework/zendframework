@@ -45,7 +45,7 @@ class Request extends AbstractMessage implements RequestInterface
     /**
      * @var bool
      */
-    protected $standardMethodsOnly = false;
+    protected $allowCustomMethods = true;
 
     /**
      * @var string|HttpUri
@@ -71,15 +71,15 @@ class Request extends AbstractMessage implements RequestInterface
      * A factory that produces a Request object from a well-formed Http Request string
      *
      * @param  string $string
-     * @param  bool $standardMethodsOnly
+     * @param  bool $allowCustomMethods
      * @throws Exception\InvalidArgumentException
      * @return Request
      */
-    public static function fromString($string, $standardMethodsOnly = false)
+    public static function fromString($string, $allowCustomMethods = true)
     {
         /** @var Request $request */
         $request = new static();
-        $request->setStandardMethodsOnly($standardMethodsOnly);
+        $request->setAllowCustomMethods($allowCustomMethods);
 
         $lines = explode("\r\n", $string);
 
@@ -91,7 +91,7 @@ class Request extends AbstractMessage implements RequestInterface
             self::METHOD_DELETE, self::METHOD_TRACE, self::METHOD_CONNECT, self::METHOD_PATCH
         );
 
-        $methods   = $standardMethodsOnly ? implode('|', $standardMethods) : '[\w-]+';
+        $methods   = $allowCustomMethods ? '[\w-]+' : implode('|', $standardMethods);
         $regex     = '#^(?P<method>' . $methods . ')\s(?P<uri>[^ ]*)(?:\sHTTP\/(?P<version>\d+\.\d+)){0,1}#';
         $firstLine = array_shift($lines);
         if (!preg_match($regex, $firstLine, $matches)) {
@@ -147,7 +147,7 @@ class Request extends AbstractMessage implements RequestInterface
     public function setMethod($method)
     {
         $method = strtoupper($method);
-        if (!defined('static::METHOD_' . $method) && $this->isStandardMethodsOnly()) {
+        if (!defined('static::METHOD_' . $method) && ! $this->getAllowCustomMethods()) {
             throw new Exception\InvalidArgumentException('Invalid HTTP method passed');
         }
         $this->method = $method;
@@ -517,16 +517,16 @@ class Request extends AbstractMessage implements RequestInterface
     /**
      * @return boolean
      */
-    public function isStandardMethodsOnly()
+    public function getAllowCustomMethods()
     {
-        return $this->standardMethodsOnly;
+        return $this->allowCustomMethods;
     }
 
     /**
      * @param boolean $strictMethods
      */
-    public function setStandardMethodsOnly($strictMethods)
+    public function setAllowCustomMethods($strictMethods)
     {
-        $this->standardMethodsOnly = (bool) $strictMethods;
+        $this->allowCustomMethods = (bool) $strictMethods;
     }
 }

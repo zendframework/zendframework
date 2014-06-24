@@ -233,7 +233,7 @@ class Client implements Stdlib\DispatchableInterface
     {
         if (empty($this->request)) {
             $this->request = new Request();
-            $this->request->setStandardMethodsOnly(true);
+            $this->request->setAllowCustomMethods(false);
         }
         return $this->request;
     }

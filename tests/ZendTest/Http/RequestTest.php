@@ -264,16 +264,16 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testCustomMethods()
     {
         $request = new Request();
-        $this->assertFalse($request->isStandardMethodsOnly());
+        $this->assertTrue($request->getAllowCustomMethods());
         $request->setMethod('xcustom');
 
         $this->assertEquals('XCUSTOM', $request->getMethod());
     }
 
-    public function testStandardMethodsOnly()
+    public function testDisallowCustomMethods()
     {
         $request = new Request();
-        $request->setStandardMethodsOnly(true);
+        $request->setAllowCustomMethods(false);
 
         $this->setExpectedException(
             'Zend\Http\Exception\InvalidArgumentException',
@@ -286,24 +286,24 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testCustomMethodsFromString()
     {
         $request = Request::fromString('X-CUS_TOM someurl');
-        $this->assertFalse($request->isStandardMethodsOnly());
+        $this->assertTrue($request->getAllowCustomMethods());
 
         $this->assertEquals('X-CUS_TOM', $request->getMethod());
     }
 
-    public function testStandardMethodsOnlyFromString()
+    public function testDisallowCustomMethodsFromString()
     {
         $this->setExpectedException(
             'Zend\Http\Exception\InvalidArgumentException',
             'A valid request line was not found in the provided string'
         );
 
-        $request = Request::fromString('X-CUS_TOM someurl', true);
+        $request = Request::fromString('X-CUS_TOM someurl', false);
     }
 
-    public function testStandardMethodsOnlyFlagIsSetByFromString()
+    public function testAllowCustomMethodsFlagIsSetByFromString()
     {
-        $request = Request::fromString('GET someurl', true);
-        $this->assertTrue($request->isStandardMethodsOnly());
+        $request = Request::fromString('GET someurl', false);
+        $this->assertFalse($request->getAllowCustomMethods());
     }
 }

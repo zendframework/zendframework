@@ -739,4 +739,16 @@ class RequestTest extends TestCase
 
         $this->assertEquals('', $request->getBaseUrl());
     }
+
+    public function testAllowCustomMethodsFlagCanBeSetWithConstructor()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'xcustomx';
+
+        $this->setExpectedException(
+            'Zend\Http\Exception\InvalidArgumentException',
+            'Invalid HTTP method passed'
+        );
+
+        $request = new Request(false);
+    }
 }

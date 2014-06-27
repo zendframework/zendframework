@@ -15,7 +15,7 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
 {
     protected static $camelCaseToUnderscoreFilter;
 
-    protected static $underscoreToCamelCaseFilter;
+    protected static $underscoreToStudlyCaseFilter;
 
     /**
      * Remove underscores and capitalize letters
@@ -25,7 +25,7 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
      */
     public function hydrate($name)
     {
-        return lcfirst($this->getUnderscoreToCamelCaseFilter()->filter($name));
+        return $this->getUnderscoreToStudlyCaseFilter()->filter($name);
     }
 
     /**
@@ -42,15 +42,15 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
     /**
      * @return FilterChain
      */
-    protected function getUnderscoreToCamelCaseFilter()
+    protected function getUnderscoreToStudlyCaseFilter()
     {
-        if (static::$underscoreToCamelCaseFilter instanceof FilterChain) {
-            return static::$underscoreToCamelCaseFilter;
+        if (static::$underscoreToStudlyCaseFilter instanceof FilterChain) {
+            return static::$underscoreToStudlyCaseFilter;
         }
 
         $filter = new FilterChain();
-        $filter->attachByName('WordUnderscoreToCamelCase');
-        static::$underscoreToCamelCaseFilter = $filter;
+        $filter->attachByName('WordUnderscoreToStudlyCase');
+        static::$underscoreToStudlyCaseFilter = $filter;
         return $filter;
     }
 

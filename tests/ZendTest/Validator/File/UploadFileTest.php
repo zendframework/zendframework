@@ -90,6 +90,11 @@ class UploadFileTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($validator->isValid(''));
         $this->assertArrayHasKey(File\UploadFile::FILE_NOT_FOUND, $validator->getMessages());
+    }
+
+    public function testUploadErrorCodeShouldPrecedeEmptyFileCheck()
+    {
+        $validator = new File\UploadFile();
 
         $filesArray = array(
             'name'      => '',
@@ -100,6 +105,7 @@ class UploadFileTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertFalse($validator->isValid($filesArray));
-        $this->assertArrayHasKey(File\UploadFile::FILE_NOT_FOUND, $validator->getMessages());
+        $this->assertArrayHasKey(File\UploadFile::NO_FILE, $validator->getMessages());
+        $this->assertArrayNotHasKey(File\UploadFile::FILE_NOT_FOUND, $validator->getMessages());
     }
 }

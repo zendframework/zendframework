@@ -22,7 +22,7 @@ class RouteNotFoundStrategyTest extends TestCase
 
     public function setUp()
     {
-        $this->strategy   = new RouteNotFoundStrategy();
+        $this->strategy = new RouteNotFoundStrategy();
     }
 
     public function testRenderTableConcatenateAndInvalidInputDoesNotThrowException()

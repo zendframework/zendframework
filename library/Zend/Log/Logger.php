@@ -49,6 +49,9 @@ class Logger implements LoggerInterface
         E_USER_ERROR        => self::ERR,
         E_CORE_ERROR        => self::ERR,
         E_RECOVERABLE_ERROR => self::ERR,
+        E_PARSE             => self::ERR,
+        E_COMPILE_ERROR     => self::ERR,
+        E_COMPILE_WARNING   => self::ERR,
         E_STRICT            => self::DEBUG,
         E_DEPRECATED        => self::DEBUG,
         E_USER_DEPRECATED   => self::DEBUG,
@@ -609,12 +612,22 @@ class Logger implements LoggerInterface
             return false;
         }
 
+        // Fatal error list
+        $fatalErrorList = array(
+            E_ERROR,
+            E_PARSE,
+            E_CORE_ERROR,
+            E_CORE_WARNING,
+            E_COMPILE_ERROR,
+            E_COMPILE_WARNING
+        );
+
         $errorPriorityMap = static::$errorPriorityMap;
 
-        register_shutdown_function(function () use ($logger, $errorPriorityMap) {
+        register_shutdown_function(function () use ($logger, $errorPriorityMap, $fatalErrorList) {
             $error = error_get_last();
-            if (null !== $error && $error['type'] === E_ERROR) {
-                $logger->log($errorPriorityMap[E_ERROR],
+            if (null !== $error && in_array($error['type'], $fatalErrorList)) {
+                $logger->log($errorPriorityMap[$error['type']],
                     $error['message'],
                     array(
                         'file' => $error['file'],

@@ -608,7 +608,7 @@ abstract class AbstractContainer extends ArrayObject
     {
         $storage   = $this->verifyNamespace();
         $container = $storage[$this->getName()];
-        
+
         if ($container instanceof ArrayObject) {
             return $container->getArrayCopy();
         }

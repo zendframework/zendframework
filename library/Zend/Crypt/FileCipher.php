@@ -111,7 +111,7 @@ class FileCipher
         if (empty($key)) {
             throw new Exception\InvalidArgumentException('The key cannot be empty');
         }
-        $this->key = $key;
+        $this->key = (string) $key;
     }
 
     /**
@@ -172,7 +172,7 @@ class FileCipher
                 "The specified hash algorithm '{$hash}' is not supported by Zend\Crypt\Hash"
             );
         }
-        $this->hash = $hash;
+        $this->hash = (string) $hash;
     }
 
     /**
@@ -198,7 +198,7 @@ class FileCipher
                 "The specified hash algorithm '{$hash}' is not supported by Zend\Crypt\Hash"
             );
         }
-        $this->pbkdf2Hash = $hash;
+        $this->pbkdf2Hash = (string) $hash;
     }
 
     /**
@@ -221,16 +221,7 @@ class FileCipher
      */
     public function encrypt($fileIn, $fileOut)
     {
-        if (!file_exists($fileIn)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                "I cannot open the %s file", $fileIn
-            ));
-        }
-        if (file_exists($fileOut)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                "The file %s already exists", $fileOut
-            ));
-        }
+        $this->checkFileInOut($fileIn, $fileOut);
         if (empty($this->key)) {
             throw new Exception\InvalidArgumentException('No key specified for encryption');
         }
@@ -302,16 +293,7 @@ class FileCipher
      */
     public function decrypt($fileIn, $fileOut)
     {
-        if (!file_exists($fileIn)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                "I cannot open the %s file", $fileIn
-            ));
-        }
-        if (file_exists($fileOut)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                "The file %s already exists", $fileOut
-            ));
-        }
+        $this->checkFileInOut($fileIn, $fileOut);
         if (empty($this->key)) {
             throw new Exception\InvalidArgumentException('No key specified for decryption');
         }
@@ -365,5 +347,26 @@ class FileCipher
         }
 
         return true;
+    }
+
+    /**
+     * Check that input file exists and output file dont
+     *
+     * @param  string $fileIn
+     * @param  string $fileOut
+     * @throws Exception\InvalidArgumentException
+     */
+    protected function checkFileInOut($fileIn, $fileOut)
+    {
+        if (!file_exists($fileIn)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                "I cannot open the %s file", $fileIn
+            ));
+        }
+        if (file_exists($fileOut)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                "The file %s already exists", $fileOut
+            ));
+        }
     }
 }

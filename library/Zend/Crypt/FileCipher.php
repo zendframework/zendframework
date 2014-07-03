@@ -51,6 +51,13 @@ class FileCipher
     protected $key;
 
     /**
+     * Cipher 
+     *
+     * @var SymmetricInterface
+     */
+    protected $cipher;
+
+    /**
      * Constructor
      *
      * @param SymmetricInterface $cipher
@@ -73,7 +80,7 @@ class FileCipher
     /**
      * Get the cipher object
      *
-     * @return Mcrypt
+     * @return SymmetricInterface
      */
     public function getCipher()
     {
@@ -117,7 +124,7 @@ class FileCipher
     /**
      * Get the key
      *
-     * @return string
+     * @return string|null
      */
     public function getKey()
     {
@@ -128,15 +135,10 @@ class FileCipher
      * Set algorithm of the symmetric cipher
      *
      * @param  string                             $algo
-     * @throws Exception\InvalidArgumentException
      */
     public function setCipherAlgorithm($algo)
     {
-        try {
-            $this->cipher->setAlgorithm($algo);
-        } catch (Symmetric\Exception\InvalidArgumentException $e) {
-            throw new Exception\InvalidArgumentException($e->getMessage());
-        }
+        $this->cipher->setAlgorithm($algo);
     }
 
     /**

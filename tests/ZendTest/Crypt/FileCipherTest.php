@@ -97,7 +97,7 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
 
     public function testSetCipherAlgorithmFail()
     {
-        $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
+        $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
                                     'The algorithm unknown is not supported by Zend\Crypt\Symmetric\Mcrypt');
         $this->fileCipher->setCipherAlgorithm('unknown');
 

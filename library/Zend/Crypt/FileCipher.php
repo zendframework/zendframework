@@ -11,6 +11,7 @@ namespace Zend\Crypt;
 
 use Zend\Crypt\Key\Derivation\Pbkdf2;
 use Zend\Crypt\Symmetric\Mcrypt;
+use Zend\Crypt\Symmetric\SymmetricInterface;
 use Zend\Math\Rand;
 
 /**
@@ -62,9 +63,9 @@ class FileCipher
     /**
      * Set the cipher object
      *
-     * @param Mcrypt $cipher
+     * @param SymmetricInterface $cipher
      */
-    public function setCipher(Mcrypt $cipher)
+    public function setCipher(SymmetricInterface $cipher)
     {
         $this->cipher = $cipher;
     }

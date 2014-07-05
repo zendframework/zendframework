@@ -180,7 +180,7 @@ class PrefixPathStackResolver implements ResolverInterface
                 continue;
             }
 
-            $template = substr($name, strlen($prefix) + 1);
+            $template = substr($name, strlen($prefix));
 
             return $this->getTemplatePathStackResolver($prefix)->resolve($template, $renderer);
         }

@@ -9,6 +9,8 @@
 
 namespace Zend\View\Resolver;
 
+use Zend\View\Renderer\RendererInterface as Renderer;
+
 class PrefixPathStackResolver implements ResolverInterface
 {
     /**
@@ -49,6 +51,7 @@ class PrefixPathStackResolver implements ResolverInterface
     public function setLfiProtection($flag)
     {
         $this->lfiProtectionOn = (bool) $flag;
+
         return $this;
     }
 
@@ -90,8 +93,8 @@ class PrefixPathStackResolver implements ResolverInterface
                 $this->prefixes[$prefix]
             );
         } else {
-            $this->prefixes[$prefix]] = array_merge(
-                $this->prefixes[$prefix]
+            $this->prefixes[$prefix] = array_merge(
+                $this->prefixes[$prefix],
                 (array) $paths
             );
         }
@@ -119,6 +122,7 @@ class PrefixPathStackResolver implements ResolverInterface
     public function setDefaultSuffix($defaultSuffix)
     {
         $this->defaultSuffix = (string) $defaultSuffix;
+
         return $this;
     }
 
@@ -135,27 +139,27 @@ class PrefixPathStackResolver implements ResolverInterface
     /**
      * Set template path stack resolver for a prefix
      *
-     * @param  string $prefix
+     * @param  string            $prefix
      * @param  TemplatePathStack $resolver
      * @return self
      */
     public function setTemplatePathStackResolver($prefix, TemplatePathStack $resolver)
     {
         $this->templatePathStackResolvers[$prefix] = $resolver;
+
         return $this;
     }
-  
-  
+
     /**
      * Get template path stack resolver for a prefix
      *
      * @return TemplatePathStack
-     */     
+     */
     public function getTemplatePathStackResolver($prefix)
     {
         if (!isset($this->templatePathStackResolvers[$prefix])) {
             if (!isset($this->prefixes[$prefix])) {
-                
+
             }
             $this->templatePathStackResolvers[$prefix] = new TemplatePathStack;
         }

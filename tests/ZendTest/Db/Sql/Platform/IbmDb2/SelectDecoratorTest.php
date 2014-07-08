@@ -90,7 +90,7 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
         $expectedPrepareSql2 = 'SELECT z2.* FROM (SELECT DENSE_RANK() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT DISTINCT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN ? AND ?';
         $expectedParams2 = array('offset' => 10, 'limit' => 5);
         $expectedSql2 = 'SELECT z2.* FROM (SELECT DENSE_RANK() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT DISTINCT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN 10 AND 15';
- 
+
         return array(
             array($select0, $expectedPrepareSql0, $expectedParams0, $expectedSql0),
             array($select1, $expectedPrepareSql1, $expectedParams1, $expectedSql1),

@@ -36,6 +36,9 @@ class Platform extends AbstractPlatform
                 $platform = new Oracle\Oracle();
                 $this->decorators = $platform->decorators;
                 break;
+            case 'ibmdb2':
+                $platform = new IbmDb2\IbmDb2();
+                $this->decorators = $platform->decorators;
             default:
         }
     }

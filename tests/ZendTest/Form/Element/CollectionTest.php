@@ -1042,4 +1042,17 @@ class CollectionTest extends TestCase
 
         $this->assertCount(2, $form->get('names'));
     }
+
+	public function testMininumLenghtIsMaintanedWhenSettingAnSmallerCollection()
+    {
+        $arrayCollection = array(
+            new Element\Color(),
+            new Element\Color(),
+        );
+
+        $collection = $this->form->get('colors');
+        $collection->setCount(3);
+        $collection->setObject($arrayCollection);
+        $this->assertEquals(3, $collection->getCount());
+    }
 }

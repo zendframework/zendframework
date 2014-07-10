@@ -83,13 +83,13 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
         $select1->from(array('x' => 'foo'))->limit(5)->offset(10);
         $expectedPrepareSql1 = 'SELECT z2.* FROM (SELECT ROW_NUMBER() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN ? AND ?';
         $expectedParams1 = array('offset' => 10, 'limit' => 5);
-        $expectedSql1 = 'SELECT z2.* FROM (SELECT ROW_NUMBER() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN 10 AND 15';
+        $expectedSql1 = 'SELECT z2.* FROM (SELECT ROW_NUMBER() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN 11 AND 15';
 
         $select2 = new Select;
         $select2->from(array('x' => 'foo'))->limit(5)->offset(10)->quantifier(Select::QUANTIFIER_DISTINCT);
-        $expectedPrepareSql2 = 'SELECT z2.* FROM (SELECT DENSE_RANK() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT DISTINCT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN ? AND ?';
+        $expectedPrepareSql2 = 'SELECT z2.* FROM (SELECT ROW_NUMBER() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT DISTINCT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN ? AND ?';
         $expectedParams2 = array('offset' => 10, 'limit' => 5);
-        $expectedSql2 = 'SELECT z2.* FROM (SELECT DENSE_RANK() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT DISTINCT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN 10 AND 15';
+        $expectedSql2 = 'SELECT z2.* FROM (SELECT ROW_NUMBER() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT DISTINCT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN 11 AND 15';
 
         return array(
             array($select0, $expectedPrepareSql0, $expectedParams0, $expectedSql0),

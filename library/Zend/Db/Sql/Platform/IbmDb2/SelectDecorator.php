@@ -90,30 +90,20 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             $parameterContainer->offsetSet('limit', (int) $this->limit);
         }
 
-           if (isset($sqls[self::ORDER])) {
-            $orderBy = $sqls[self::ORDER];
-            unset($sqls[self::ORDER]);
-        } else {
-            $orderBy = null;
-        }
-
-        if (preg_match('/DISTINCT/i',$sqls[self::SELECT],$match)) {
-            $sqlSyntax = 'DENSE_RANK()';
-        } else {
-            $sqlSyntax = 'ROW_NUMBER()';
-        }
-
         $offset = (int) $this->offset;
         $limit  = (int) $this->limit;
 
         if (empty($offset)) {
-            $sqls[self::SELECT] .= " FETCH FIRST $limit ROW ONLY";
+            $sqls[self::SELECT] .= sprintf(
+                " FETCH FIRST %s ROW ONLY",
+                $limit
+            );
         } else {
             $sqls[self::SELECT] = sprintf(
                 "SELECT z2.* FROM " .
-                "(SELECT %s OVER(%s) AS \"ZEND_ROWNUM\", z1.* FROM (%s) z1) z2 " .
+                "(SELECT ROW_NUMBER() OVER() AS \"ZEND_ROWNUM\", z1.* FROM (%s) z1) z2 " .
                 "WHERE z2.ZEND_ROWNUM BETWEEN %d AND %d",
-                $sqlSyntax, $orderBy, $sqls[self::SELECT], $offset, $limit + $offset
+                $sqls[self::SELECT], $offset + 1, $limit + $offset
             );
         }
     }

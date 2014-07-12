@@ -87,6 +87,12 @@ class PrefixPathStackResolver implements ResolverInterface
      */
     public function add($prefix, $paths, $prepend = false)
     {
+        // to avoid merge error
+        if (!isset($this->prefixes[$prefix])) {
+            $this->set($prefix, $paths);
+            return ;
+        }
+
         if ($prepend) {
             $this->prefixes[$prefix] = array_merge(
                 (array) $paths,

@@ -43,4 +43,18 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
         $resolver->setTemplatePathStackResolver('album/', $templatePathStackResolver);
         $this->assertEquals($templatePathStackResolver, $resolver->getTemplatePathStackResolver('album/'));
     }
+
+    public function testGetDefaultTemplatePathStackResolver()
+    {
+        $resolver = new PrefixPathStackResolver;
+        $resolver->set('album/', 'view');
+        $this->assertInstanceOf('Zend\View\Resolver\TemplatePathStack', $resolver->getTemplatePathStackResolver('album/'));
+    }
+
+    public function testGetExceptionWhenPrefixIsNotSet()
+    {
+        $resolver = new PrefixPathStackResolver;
+        $this->setExpectedException('Zend\View\Exception\InvalidArgumentException');
+        $resolver->getTemplatePathStackResolver('bla-bla');
+    }
 }

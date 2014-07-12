@@ -9,6 +9,7 @@
 
 namespace Zend\View\Resolver;
 
+use Zend\View\Exception;
 use Zend\View\Renderer\RendererInterface as Renderer;
 
 class PrefixPathStackResolver implements ResolverInterface
@@ -90,6 +91,7 @@ class PrefixPathStackResolver implements ResolverInterface
         // to avoid merge error
         if (!isset($this->prefixes[$prefix])) {
             $this->set($prefix, $paths);
+
             return ;
         }
 
@@ -165,7 +167,7 @@ class PrefixPathStackResolver implements ResolverInterface
     {
         if (!isset($this->templatePathStackResolvers[$prefix])) {
             if (!isset($this->prefixes[$prefix])) {
-
+                throw new Exception\InvalidArgumentException(sprintf('Prefix %s does not exists.', $prefix));
             }
             $this->templatePathStackResolvers[$prefix] = new TemplatePathStack;
         }

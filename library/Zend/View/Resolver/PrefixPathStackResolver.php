@@ -196,7 +196,5 @@ class PrefixPathStackResolver implements ResolverInterface
 
             return $this->getTemplatePathStackResolver($prefix)->resolve($template, $renderer);
         }
-
-        return null;
     }
 }

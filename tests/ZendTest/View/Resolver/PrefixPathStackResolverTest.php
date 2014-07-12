@@ -57,4 +57,30 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\View\Exception\InvalidArgumentException');
         $resolver->getTemplatePathStackResolver('bla-bla');
     }
+
+    public function testResolve()
+    {
+        $resolver = new PrefixPathStackResolver;
+        $resolver->add('album/', 'path/to/view1');
+        $resolver->add('album/', 'path/to/view2');
+        $resolver->add('album/', 'path/to/view0', true);
+        $templatePathStackResolver = $this->getMock('Zend\View\Resolver\TemplatePathStack');
+        $resolver->setTemplatePathStackResolver('album/', $templatePathStackResolver);
+        $templatePathStackResolver->expects($this->once())
+            ->method('setPaths')
+            ->with(['path/to/view0', 'path/to/view1', 'path/to/view2']);
+        $resolver->setDefaultSuffix('php');
+        $templatePathStackResolver->expects($this->once())
+            ->method('setDefaultSuffix')
+            ->with('php');
+        $resolver->setLfiProtection(false);
+        $templatePathStackResolver->expects($this->once())
+            ->method('setLfiProtection')
+            ->with(false);
+        $templatePathStackResolver->expects($this->at(0))
+            ->method('resolve')
+            ->with('settings/add')
+            ->will($this->returnValue('path/to/view1/settings/add.php'));
+        $this->assertEquals('path/to/view1/settings/add.php', $resolver->resolve('album/settings/add'));
+    }
 }

@@ -23,7 +23,7 @@ class ViewPrefixPathStackResolverFactory implements FactoryInterface
      * ['view_manager']['prefix_template_path_stack'] and sets the default suffix with the
      * ['view_manager']['default_template_suffix']
      *
-     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface              $serviceLocator
      * @return ViewResolver\PrefixPathStackResolver
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
@@ -45,5 +45,5 @@ class ViewPrefixPathStackResolverFactory implements FactoryInterface
         }
 
         return $prefixPathStackResolver;
-    }    
+    }
 }

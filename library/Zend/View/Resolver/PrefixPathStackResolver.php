@@ -181,20 +181,18 @@ class PrefixPathStackResolver implements ResolverInterface
     public function resolve($name, Renderer $renderer = null)
     {
         foreach ($this->prefixes as $prefix => $paths) {
-            $templatePathStackResolver = $this->getTemplatePathStackResolver($prefix);
-            $templatePathStackResolver->setPaths($paths);
-            $templatePathStackResolver->setDefaultSuffix($this->getDefaultSuffix());
-            $templatePathStackResolver->setLfiProtection($this->isLfiProtectionOn());
-        }
-
-        foreach ($this->prefixes as $prefix => $paths) {
             if (strpos($name, $prefix) !== 0) {
                 continue;
             }
 
+            $templatePathStackResolver = $this->getTemplatePathStackResolver($prefix);
+            $templatePathStackResolver->setPaths($paths);
+            $templatePathStackResolver->setDefaultSuffix($this->getDefaultSuffix());
+            $templatePathStackResolver->setLfiProtection($this->isLfiProtectionOn());
+
             $template = substr($name, strlen($prefix));
 
-            return $this->getTemplatePathStackResolver($prefix)->resolve($template, $renderer);
+            return $templatePathStackResolver->resolve($template, $renderer);
         }
     }
 }

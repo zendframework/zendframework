@@ -77,7 +77,7 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
         $templatePathStackResolver->expects($this->once())
             ->method('setLfiProtection')
             ->with(false);
-        $templatePathStackResolver->expects($this->at(0))
+        $templatePathStackResolver->expects($this->once())
             ->method('resolve')
             ->with('settings/add')
             ->will($this->returnValue('path/to/view1/settings/add.php'));

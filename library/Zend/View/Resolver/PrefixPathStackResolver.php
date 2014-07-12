@@ -91,7 +91,6 @@ class PrefixPathStackResolver implements ResolverInterface
         // to avoid merge error
         if (!isset($this->prefixes[$prefix])) {
             $this->set($prefix, $paths);
-
             return ;
         }
 

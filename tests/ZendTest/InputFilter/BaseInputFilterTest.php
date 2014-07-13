@@ -912,4 +912,25 @@ class BaseInputFilterTest extends TestCase
         $filter->add($arrayInput, 'arrayInput');
         $filter->setData(array('foo' => 'bar'));
     }
+
+    public function testChainInputFilter()
+    {
+        $expectedFilters = array(
+            'foo',
+            'bar',
+            'baz'
+        );
+
+        $inputFilter = new InputFilter();
+        $chainedInputFilter = new InputFilter();
+
+        $inputFilter->add(new Input(), 'foo');
+        $inputFilter->add(new Input(), 'bar');
+
+        $chainedInputFilter->add(new Input(), 'baz');
+
+        $inputFilter->chainInputFilter($chainedInputFilter);
+
+        $this->assertEquals($expectedFilters, array_keys($inputFilter->getInputs()));
+    }
 }

@@ -495,7 +495,9 @@ class Image extends AbstractWord
             $error = ErrorHandler::stop();
             if (!$img || $error) {
                 throw new Exception\ImageNotLoadableException(
-                    "Can not load start image '{$this->startImage}'", 0, $error
+                    "Can not load start image '{$this->startImage}'",
+                    0,
+                    $error
                 );
             }
             $w = imagesx($img);

@@ -31,7 +31,6 @@ class OpenLdap extends Schema\AbstractItem implements ObjectClassInterface
      */
     protected $inheritedMay = null;
 
-
     /**
      * Gets the objectClass name
      *

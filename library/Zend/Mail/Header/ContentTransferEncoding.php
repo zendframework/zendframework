@@ -9,7 +9,6 @@
 
 namespace Zend\Mail\Header;
 
-
 class ContentTransferEncoding implements HeaderInterface
 {
     /**
@@ -28,7 +27,6 @@ class ContentTransferEncoding implements HeaderInterface
          * x-token: 'X-'
          */
     );
-
 
     /**
      * @var string

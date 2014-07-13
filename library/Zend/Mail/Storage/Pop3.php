@@ -21,7 +21,6 @@ class Pop3 extends AbstractStorage
      */
     protected $protocol;
 
-
     /**
      * Count messages all messages in current box
      *

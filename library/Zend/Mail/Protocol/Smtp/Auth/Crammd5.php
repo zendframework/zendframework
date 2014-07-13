@@ -22,12 +22,10 @@ class Crammd5 extends Smtp
      */
     protected $username;
 
-
     /**
      * @var string
      */
     protected $password;
-
 
     /**
      * Constructor.
@@ -64,7 +62,6 @@ class Crammd5 extends Smtp
         // Call parent with original arguments
         parent::__construct($host, $port, $origConfig);
     }
-
 
     /**
      * Performs CRAM-MD5 authentication with supplied credentials

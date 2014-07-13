@@ -20,7 +20,6 @@ interface PartInterface extends RecursiveIterator
      */
     public function isMultipart();
 
-
     /**
      * Body of part
      *
@@ -53,7 +52,6 @@ interface PartInterface extends RecursiveIterator
      * @return int number of sub-parts
      */
     public function countParts();
-
 
     /**
      * Get all headers
@@ -94,7 +92,6 @@ interface PartInterface extends RecursiveIterator
      * @throws Exception\ExceptionInterface
      */
     public function getHeaderField($name, $wantedPart = '0', $firstName = '0');
-
 
     /**
      * Getter for mail headers - name is matched in lowercase

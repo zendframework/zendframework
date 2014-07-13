@@ -23,14 +23,12 @@ class Smtp extends AbstractProtocol
      */
     protected $transport = 'tcp';
 
-
     /**
      * Indicates that a session is requested to be secure
      *
      * @var string
      */
     protected $secure;
-
 
     /**
      * Indicates an smtp session has been started by the HELO command
@@ -39,14 +37,12 @@ class Smtp extends AbstractProtocol
      */
     protected $sess = false;
 
-
     /**
      * Indicates an smtp AUTH has been issued and authenticated
      *
      * @var bool
      */
     protected $auth = false;
-
 
     /**
      * Indicates a MAIL command has been issued
@@ -55,7 +51,6 @@ class Smtp extends AbstractProtocol
      */
     protected $mail = false;
 
-
     /**
      * Indicates one or more RCTP commands have been issued
      *
@@ -63,14 +58,12 @@ class Smtp extends AbstractProtocol
      */
     protected $rcpt = false;
 
-
     /**
      * Indicates that DATA has been issued and sent
      *
      * @var bool
      */
     protected $data = null;
-
 
     /**
      * Constructor.
@@ -317,7 +310,6 @@ class Smtp extends AbstractProtocol
         $this->data = false;
     }
 
-
     /**
      * Issues the NOOP command end validates answer
      *
@@ -329,7 +321,6 @@ class Smtp extends AbstractProtocol
         $this->_send('NOOP');
         $this->_expect(250, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
     }
-
 
     /**
      * Issues the VRFY command end validates answer
@@ -343,7 +334,6 @@ class Smtp extends AbstractProtocol
         $this->_send('VRFY ' . $user);
         $this->_expect(array(250, 251, 252), 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
     }
-
 
     /**
      * Issues the QUIT command and clears the current session
@@ -359,7 +349,6 @@ class Smtp extends AbstractProtocol
         }
     }
 
-
     /**
      * Default authentication method
      *
@@ -373,7 +362,6 @@ class Smtp extends AbstractProtocol
             throw new Exception\RuntimeException('Already authenticated for this session');
         }
     }
-
 
     /**
      * Closes connection
@@ -402,7 +390,6 @@ class Smtp extends AbstractProtocol
     {
         $this->sess = true;
     }
-
 
     /**
      * Stop mail session

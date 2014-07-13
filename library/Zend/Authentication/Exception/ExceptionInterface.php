@@ -10,4 +10,5 @@
 namespace Zend\Authentication\Exception;
 
 interface ExceptionInterface
-{}
+{
+}

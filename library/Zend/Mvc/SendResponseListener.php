@@ -71,7 +71,6 @@ class SendResponseListener implements
         return $this->eventManager;
     }
 
-
     /**
      * Attach the aggregate to the specified event manager
      *

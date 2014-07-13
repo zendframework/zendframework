@@ -90,7 +90,6 @@ abstract class AbstractController implements
      */
     abstract public function onDispatch(MvcEvent $e);
 
-
     /**
      * Dispatch a request
      *

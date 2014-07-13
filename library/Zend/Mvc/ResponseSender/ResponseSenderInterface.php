@@ -9,7 +9,6 @@
 
 namespace Zend\Mvc\ResponseSender;
 
-
 interface ResponseSenderInterface
 {
     /**

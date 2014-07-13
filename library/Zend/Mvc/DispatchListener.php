@@ -15,7 +15,6 @@ use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\Exception\InvalidControllerException;
 use Zend\Stdlib\ArrayUtils;
 
-
 /**
  * Default dispatch listener
  *

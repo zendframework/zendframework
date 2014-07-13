@@ -115,11 +115,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      */
     public function __call($method, $args)
     {
-        if (preg_match(
-            '/^(?P<action>set|(pre|ap)pend|offsetSet)(?P<type>Name|HttpEquiv|Property|Itemprop)$/',
-            $method,
-            $matches)
-        ) {
+        if (preg_match('/^(?P<action>set|(pre|ap)pend|offsetSet)(?P<type>Name|HttpEquiv|Property|Itemprop)$/', $method, $matches)) {
             $action = $matches['action'];
             $type   = $this->normalizeType($matches['type']);
             $argc   = count($args);
@@ -265,10 +261,7 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
             $modifiersString
         );
 
-        if (isset($item->modifiers['conditional'])
-            && !empty($item->modifiers['conditional'])
-            && is_string($item->modifiers['conditional'])
-        ) {
+        if (isset($item->modifiers['conditional']) && !empty($item->modifiers['conditional']) && is_string($item->modifiers['conditional'])) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $item->modifiers['conditional']) === '!IE') {
                 $meta = '<!-->' . $meta . '<!--';

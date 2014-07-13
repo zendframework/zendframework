@@ -237,8 +237,7 @@ class Sitemap extends AbstractHelper
                 if (!$this->getUseSitemapValidators() ||
                     $priorityValidator->isValid($priority)) {
                     $urlNode->appendChild(
-                        $dom->createElementNS(self::SITEMAP_NS, 'priority',
-                            $priority)
+                        $dom->createElementNS(self::SITEMAP_NS, 'priority', $priority)
                     );
                 }
             }

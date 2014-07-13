@@ -132,7 +132,6 @@ class Value implements ArrayAccess, Countable
         }
     }
 
-
     /**
      * To string conversion
      *
@@ -142,7 +141,6 @@ class Value implements ArrayAccess, Countable
     {
         return $this->value;
     }
-
 
     /**
      * Get string value reference

@@ -68,7 +68,6 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
      */
     protected $validator;
 
-
     /**
      * Constructor. Add two selects elements
      *
@@ -281,7 +280,8 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
      */
     public function getValue()
     {
-        return sprintf('%s-%s',
+        return sprintf(
+            '%s-%s',
             $this->getYearElement()->getValue(),
             $this->getMonthElement()->getValue()
         );

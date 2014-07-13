@@ -380,10 +380,9 @@ class ValueGenerator extends AbstractGenerator
                 break;
             case self::TYPE_OTHER:
             default:
-                throw new Exception\RuntimeException(sprintf(
-                                                         'Type "%s" is unknown or cannot be used as property default value.',
-                                                         get_class($value)
-                                                     ));
+                throw new Exception\RuntimeException(
+                    sprintf('Type "%s" is unknown or cannot be used as property default value.', get_class($value))
+                );
         }
 
         return $output;
@@ -430,5 +429,4 @@ class ValueGenerator extends AbstractGenerator
     {
         return $this->generate();
     }
-
 }

@@ -180,6 +180,7 @@ class ConstantScanner implements ScannerInterface
                         $this->docComment = $tokenContent;
                     }
                     goto SCANNER_CONTINUE;
+                    // fall-through
 
                 case T_STRING:
                     $string = (is_string($token)) ? $token : $tokenContent;
@@ -201,6 +202,7 @@ class ConstantScanner implements ScannerInterface
                     }
 
                     goto SCANNER_CONTINUE;
+                    // fall-through
 
                 case T_CONSTANT_ENCAPSED_STRING:
                 case T_DNUMBER:
@@ -213,6 +215,7 @@ class ConstantScanner implements ScannerInterface
                         $this->value = $string;
                     }
                     goto SCANNER_CONTINUE;
+                    // fall-trough
 
                 default:
                     goto SCANNER_CONTINUE;

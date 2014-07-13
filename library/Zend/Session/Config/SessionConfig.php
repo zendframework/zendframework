@@ -86,9 +86,10 @@ class SessionConfig extends StandardConfig
         }
 
         $result = ini_set($key, $storageValue);
-        if (FALSE === $result) {
-            throw new Exception\InvalidArgumentException("'" . $key .
-                    "' is not a valid sessions-related ini setting.");
+        if (false === $result) {
+            throw new Exception\InvalidArgumentException(
+                "'{$key}' is not a valid sessions-related ini setting."
+            );
         }
         return $this;
     }
@@ -160,7 +161,6 @@ class SessionConfig extends StandardConfig
         $this->setOption('save_path', $savePath);
         return $this;
     }
-
 
     /**
      * Set session.serialize_handler

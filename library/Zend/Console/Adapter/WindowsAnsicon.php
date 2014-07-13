@@ -222,9 +222,9 @@ class WindowsAnsicon extends Posix
         if ($mask === null) {
             exec(
                 'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
-                    . 'while ($Host.UI.RawUI.KeyAvailable) {$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\');}'
-                    . 'write $key.VirtualKeyCode;'
-                    . '"',
+                . 'while ($Host.UI.RawUI.KeyAvailable) {$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\');}'
+                . 'write $key.VirtualKeyCode;'
+                . '"',
                 $result,
                 $return
             );
@@ -259,12 +259,12 @@ class WindowsAnsicon extends Posix
             $result = $return = null;
             exec(
                 'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
-                    . '[int[]] $mask = '.join(',', $asciiMask).';'
-                    . 'do {'
-                        . '$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;'
-                    . '} while( !($mask -contains $key) );'
-                    . 'write $key;'
-                    . '"',
+                . '[int[]] $mask = '.join(',', $asciiMask).';'
+                . 'do {'
+                . '$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;'
+                . '} while ( !($mask -contains $key) );'
+                . 'write $key;'
+                . '"',
                 $result,
                 $return
             );

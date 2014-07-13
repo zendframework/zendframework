@@ -261,9 +261,9 @@ class Windows extends Virtual
         if ($mask === null) {
             exec(
                 'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
-                    . 'while ($Host.UI.RawUI.KeyAvailable) {$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\');}'
-                    . 'write $key.VirtualKeyCode;'
-                    . '"',
+                . 'while ($Host.UI.RawUI.KeyAvailable) {$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\');}'
+                . 'write $key.VirtualKeyCode;'
+                . '"',
                 $result,
                 $return
             );
@@ -299,12 +299,12 @@ class Windows extends Virtual
 
             exec(
                 'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
-                    . '[int[]] $mask = ' . join(',', $asciiMask) . ';'
-                    . 'do {'
-                        . '$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;'
-                    . '} while( !($mask -contains $key) );'
-                    . 'write $key;'
-                    . '"',
+                . '[int[]] $mask = ' . join(',', $asciiMask) . ';'
+                . 'do {'
+                    . '$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;'
+                . '} while ( !($mask -contains $key) );'
+                . 'write $key;'
+                . '"',
                 $result,
                 $return
             );
@@ -347,8 +347,8 @@ class Windows extends Virtual
      */
     public function readLine($maxLength = 2048)
     {
-        $f    = fopen('php://stdin','r');
-        $line = rtrim(fread($f, $maxLength),"\r\n");
+        $f    = fopen('php://stdin', 'r');
+        $line = rtrim(fread($f, $maxLength), "\r\n");
         fclose($f);
 
         return $line;

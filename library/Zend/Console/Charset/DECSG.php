@@ -48,5 +48,4 @@ class DECSG implements CharsetInterface
     const LINE_BLOCK_SE    = "\x61";
     const LINE_BLOCK_SW    = "\x61";
     const LINE_BLOCK_CROSS = "\x61";
-
 }

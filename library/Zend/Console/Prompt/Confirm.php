@@ -77,7 +77,6 @@ class Confirm extends Char
         return $this->lastResponse = $response;
     }
 
-
     /**
      * @param string $noChar
      */

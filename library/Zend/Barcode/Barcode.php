@@ -95,12 +95,13 @@ abstract class Barcode
      * @return Barcode
      * @throws Exception\ExceptionInterface
      */
-    public static function factory($barcode,
-                                   $renderer = 'image',
-                                   $barcodeConfig = array(),
-                                   $rendererConfig = array(),
-                                   $automaticRenderError = true)
-    {
+    public static function factory(
+        $barcode,
+        $renderer = 'image',
+        $barcodeConfig = array(),
+        $rendererConfig = array(),
+        $automaticRenderError = true
+    ) {
         /*
          * Convert Traversable argument to plain string
          * barcode name and separate config object.
@@ -253,11 +254,12 @@ abstract class Barcode
      * @param array  | Traversable $barcodeConfig
      * @param array  | Traversable $rendererConfig
      */
-    public static function render($barcode,
-                                  $renderer,
-                                  $barcodeConfig = array(),
-                                  $rendererConfig = array())
-    {
+    public static function render(
+        $barcode,
+        $renderer,
+        $barcodeConfig = array(),
+        $rendererConfig = array()
+    ) {
         static::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->render();
     }
 
@@ -270,11 +272,12 @@ abstract class Barcode
      * @param array | Traversable $rendererConfig
      * @return mixed
      */
-    public static function draw($barcode,
-                                $renderer,
-                                $barcodeConfig = array(),
-                                $rendererConfig = array())
-    {
+    public static function draw(
+        $barcode,
+        $renderer,
+        $barcodeConfig = array(),
+        $rendererConfig = array()
+    ) {
         return static::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->draw();
     }
 

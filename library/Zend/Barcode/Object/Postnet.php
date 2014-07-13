@@ -65,7 +65,8 @@ class Postnet extends AbstractObject
      * @return void
      */
     protected function checkSpecificParams()
-    {}
+    {
+    }
 
     /**
      * Prepare array to draw barcode

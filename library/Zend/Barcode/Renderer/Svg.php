@@ -43,7 +43,6 @@ class Svg extends AbstractRenderer
      */
     protected $userWidth = 0;
 
-
     /**
      * Flag to determime if drawPolygon has been run once already
      * @var bool
@@ -149,9 +148,11 @@ class Svg extends AbstractRenderer
             $this->rootElement->setAttribute('width', $width);
             $this->rootElement->setAttribute('height', $height);
 
-            $this->appendRootElement('title',
-                                      array(),
-                                      "Barcode " . strtoupper($this->barcode->getType()) . " " . $this->barcode->getText());
+            $this->appendRootElement(
+                'title',
+                array(),
+                "Barcode " . strtoupper($this->barcode->getType()) . " " . $this->barcode->getText()
+            );
         } else {
             $this->readRootElement();
             $width = $this->rootElement->getAttribute('width');
@@ -165,7 +166,7 @@ class Svg extends AbstractRenderer
             'height' => ($this->topOffset + $barcodeHeight - 1),
             'fill' => $imageBackgroundColor);
 
-        if($this->transparentBackground) {
+        if ($this->transparentBackground) {
             $rect['fill-opacity'] = 0;
         }
 
@@ -325,8 +326,8 @@ class Svg extends AbstractRenderer
 
         // SVG passes a rect in as the first call to drawPolygon, we'll need to intercept
         // this and set transparency if necessary.
-        if(!$this->drawPolygonExecuted) {
-            if($this->transparentBackground) {
+        if (!$this->drawPolygonExecuted) {
+            if ($this->transparentBackground) {
                 $attributes['fill-opacity'] = '0';
             }
             $this->drawPolygonExecuted = true;

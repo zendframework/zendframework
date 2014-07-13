@@ -78,7 +78,8 @@ class Ean13 extends AbstractObject
      * @return void
      */
     protected function checkSpecificParams()
-    {}
+    {
+    }
 
     /**
      * Prepare array to draw barcode
@@ -174,8 +175,7 @@ class Ean13 extends AbstractObject
                     $this->fontSize * $this->factor,
                     $this->rotate(
                         $leftPosition,
-                        (int) $this->withBorder * 2
-                            + $this->factor * ($this->barHeight + $this->fontSize) + 1
+                        (int) $this->withBorder * 2 + $this->factor * ($this->barHeight + $this->fontSize) + 1
                     ),
                     $this->font,
                     $this->foreColor,

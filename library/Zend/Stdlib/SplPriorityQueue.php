@@ -42,7 +42,6 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
         parent::insert($datum, $priority);
     }
 
-
     /**
      * Serialize to an array
      *
@@ -58,7 +57,6 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
         }
         return $array;
     }
-
 
     /**
      * Serialize

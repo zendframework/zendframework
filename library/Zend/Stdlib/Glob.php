@@ -9,7 +9,6 @@
 
 namespace Zend\Stdlib;
 
-
 /**
  * Wrapper for glob with fallback if GLOB_BRACE is not available.
  */

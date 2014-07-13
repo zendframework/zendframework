@@ -109,9 +109,9 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     public function extract($object)
     {
         if (!is_object($object)) {
-            throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)', __METHOD__
-            ));
+            throw new Exception\BadMethodCallException(
+                sprintf('%s expects the provided $object to be a PHP object)', __METHOD__)
+            );
         }
 
         $filter = null;
@@ -168,9 +168,9 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     public function hydrate(array $data, $object)
     {
         if (!is_object($object)) {
-            throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)', __METHOD__
-            ));
+            throw new Exception\BadMethodCallException(
+                sprintf('%s expects the provided $object to be a PHP object)', __METHOD__)
+            );
         }
 
         foreach ($data as $property => $value) {

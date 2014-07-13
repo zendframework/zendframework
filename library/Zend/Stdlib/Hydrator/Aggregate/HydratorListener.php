@@ -9,7 +9,6 @@
 
 namespace Zend\Stdlib\Hydrator\Aggregate;
 
-
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Stdlib\Hydrator\HydratorInterface;

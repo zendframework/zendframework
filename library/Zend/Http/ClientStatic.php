@@ -9,7 +9,6 @@
 
 namespace Zend\Http;
 
-
 /**
  * Http static client
  */

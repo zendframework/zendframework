@@ -114,7 +114,7 @@ class SetCookie implements MultipleHeaderInterface
                     }
 
                     // First K=V pair is always the cookie name and value
-                    if ($header->getName() === NULL) {
+                    if ($header->getName() === null) {
                         $header->setName($headerKey);
                         $header->setValue(urldecode($headerValue));
                         continue;
@@ -122,13 +122,27 @@ class SetCookie implements MultipleHeaderInterface
 
                     // Process the remaining elements
                     switch (str_replace(array('-', '_'), '', strtolower($headerKey))) {
-                        case 'expires' : $header->setExpires($headerValue); break;
-                        case 'domain'  : $header->setDomain($headerValue); break;
-                        case 'path'    : $header->setPath($headerValue); break;
-                        case 'secure'  : $header->setSecure(true); break;
-                        case 'httponly': $header->setHttponly(true); break;
-                        case 'version' : $header->setVersion((int) $headerValue); break;
-                        case 'maxage'  : $header->setMaxAge((int) $headerValue); break;
+                        case 'expires':
+                            $header->setExpires($headerValue);
+                            break;
+                        case 'domain':
+                            $header->setDomain($headerValue);
+                            break;
+                        case 'path':
+                            $header->setPath($headerValue);
+                            break;
+                        case 'secure':
+                            $header->setSecure(true);
+                            break;
+                        case 'httponly':
+                            $header->setHttponly(true);
+                            break;
+                        case 'version':
+                            $header->setVersion((int) $headerValue);
+                            break;
+                        case 'maxage':
+                            $header->setMaxAge((int) $headerValue);
+                            break;
                         default:
                             // Intentionally omitted
                     }
@@ -210,7 +224,7 @@ class SetCookie implements MultipleHeaderInterface
         }
 
         $value = urlencode($this->getValue());
-        if ( $this->hasQuoteFieldValue() ) {
+        if ($this->hasQuoteFieldValue()) {
             $value = '"'. $value . '"';
         }
 
@@ -369,7 +383,7 @@ class SetCookie implements MultipleHeaderInterface
             // if $tsExpires is invalid and PHP is compiled as 32bit. Check if it fail reason is the 2038 bug
             if (!is_int($tsExpires) && PHP_INT_SIZE === 4) {
                 $dateTime = new DateTime($expires);
-                if ( $dateTime->format('Y') > 2038) {
+                if ($dateTime->format('Y') > 2038) {
                     $tsExpires = PHP_INT_MAX;
                 }
             }
@@ -552,7 +566,7 @@ class SetCookie implements MultipleHeaderInterface
      */
     public function match($uri, $matchSessionCookies = true, $now = null)
     {
-        if (is_string ($uri)) {
+        if (is_string($uri)) {
             $uri = UriFactory::factory($uri);
         }
 

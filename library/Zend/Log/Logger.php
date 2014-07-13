@@ -614,7 +614,8 @@ class Logger implements LoggerInterface
         register_shutdown_function(function () use ($logger, $errorPriorityMap) {
             $error = error_get_last();
             if (null !== $error && $error['type'] === E_ERROR) {
-                $logger->log($errorPriorityMap[E_ERROR],
+                $logger->log(
+                    $errorPriorityMap[E_ERROR],
                     $error['message'],
                     array(
                         'file' => $error['file'],

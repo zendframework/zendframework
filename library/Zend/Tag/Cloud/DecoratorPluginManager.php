@@ -30,7 +30,7 @@ class DecoratorPluginManager extends AbstractPluginManager
         'htmlcloud' => 'Zend\Tag\Cloud\Decorator\HtmlCloud',
         'htmltag'   => 'Zend\Tag\Cloud\Decorator\HtmlTag',
         'tag'       => 'Zend\Tag\Cloud\Decorator\HtmlTag',
-   );
+    );
 
     /**
      * Validate the plugin

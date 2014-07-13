@@ -148,7 +148,6 @@ class XCache extends AbstractAdapter implements
         return $availableSpace;
     }
 
-
     /* ClearByNamespaceInterface */
 
     /**

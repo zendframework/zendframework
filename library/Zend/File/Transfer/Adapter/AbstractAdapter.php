@@ -369,14 +369,18 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
                                 break;
                             case (1 <= $argc):
                                 $validator  = array_shift($validatorInfo);
+                                // fall-through
                             case (2 <= $argc):
                                 $breakChainOnFailure = array_shift($validatorInfo);
+                                // fall-through
                             case (3 <= $argc):
                                 $options = array_shift($validatorInfo);
+                                // fall-through
                             case (4 <= $argc):
                                 if (!empty($validatorInfo)) {
                                     $file = array_shift($validatorInfo);
                                 }
+                                // fall-through
                             default:
                                 $this->addValidator($validator, $breakChainOnFailure, $options, $file);
                                 break;
@@ -523,13 +527,13 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
             foreach ($options as $name => $value) {
                 foreach ($file as $key => $content) {
                     switch ($name) {
-                        case 'magicFile' :
+                        case 'magicFile':
                             $this->files[$key]['options'][$name] = (string) $value;
                             break;
 
-                        case 'ignoreNoFile' :
-                        case 'useByteString' :
-                        case 'detectInfos' :
+                        case 'ignoreNoFile':
+                        case 'useByteString':
+                        case 'detectInfos':
                             $this->files[$key]['options'][$name] = (bool) $value;
                             break;
 

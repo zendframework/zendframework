@@ -11,7 +11,6 @@ namespace Zend\File\Transfer\Exception;
 
 use Zend\File\Exception;
 
-class RuntimeException extends Exception\RuntimeException implements
-    ExceptionInterface
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
 {
 }

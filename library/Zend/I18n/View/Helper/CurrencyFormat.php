@@ -81,8 +81,8 @@ class CurrencyFormat extends AbstractHelper
         $number,
         $currencyCode = null,
         $showDecimals = null,
-        $locale       = null,
-        $pattern      = null
+        $locale = null,
+        $pattern = null
     ) {
         if (null === $locale) {
             $locale = $this->getLocale();
@@ -136,9 +136,7 @@ class CurrencyFormat extends AbstractHelper
             $this->formatters[$formatterId]->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
         }
 
-        return $this->formatters[$formatterId]->formatCurrency(
-            $number, $currencyCode
-        );
+        return $this->formatters[$formatterId]->formatCurrency($number, $currencyCode);
     }
 
     /**
@@ -162,7 +160,6 @@ class CurrencyFormat extends AbstractHelper
     {
         return $this->currencyCode;
     }
-
 
     /**
      * Set the currency pattern

@@ -52,10 +52,14 @@ abstract class AbstractFilter implements FilterInterface
             } elseif (array_key_exists($key, $this->options)) {
                 $this->options[$key] = $value;
             } else {
-                throw new Exception\InvalidArgumentException(sprintf(
-                    'The option "%s" does not have a matching %s setter method or options[%s] array key',
-                    $key, $setter, $key
-                ));
+                throw new Exception\InvalidArgumentException(
+                    sprintf(
+                        'The option "%s" does not have a matching %s setter method or options[%s] array key',
+                        $key,
+                        $setter,
+                        $key
+                    )
+                );
             }
         }
         return $this;

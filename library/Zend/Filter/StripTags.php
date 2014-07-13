@@ -105,9 +105,8 @@ class StripTags extends AbstractFilter
                 $tagName = strtolower($element);
                 // Store the tag as allowed with no attributes
                 $this->tagsAllowed[$tagName] = array();
-            }
-            // Otherwise, if a tag was provided with attributes
-            elseif (is_string($index) && (is_array($element) || is_string($element))) {
+            } elseif (is_string($index) && (is_array($element) || is_string($element))) {
+                // Otherwise, if a tag was provided with attributes
                 // Canonicalize the tag name
                 $tagName = strtolower($index);
                 // Canonicalize the attributes
@@ -189,7 +188,7 @@ class StripTags extends AbstractFilter
             if (!preg_match('/--\s*>/s', $value)) {
                 $value = '';
             } else {
-                $value = preg_replace('/<(?:!(?:--[\s\S]*?--\s*)?(>))/s', '',  $value);
+                $value = preg_replace('/<(?:!(?:--[\s\S]*?--\s*)?(>))/s', '', $value);
             }
 
             $value = $start . $value;

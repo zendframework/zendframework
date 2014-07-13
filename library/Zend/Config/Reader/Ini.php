@@ -73,11 +73,12 @@ class Ini implements ReaderInterface
 
         set_error_handler(
             function ($error, $message = '', $file = '', $line = 0) use ($filename) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Error reading INI file "%s": %s',
-                    $filename, $message
-                ), $error);
-            }, E_WARNING
+                throw new Exception\RuntimeException(
+                    sprintf('Error reading INI file "%s": %s', $filename, $message),
+                    $error
+                );
+            },
+            E_WARNING
         );
         $ini = parse_ini_file($filename, true);
         restore_error_handler();
@@ -101,11 +102,12 @@ class Ini implements ReaderInterface
 
         set_error_handler(
             function ($error, $message = '', $file = '', $line = 0) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Error reading INI string: %s',
-                    $message
-                ), $error);
-            }, E_WARNING
+                throw new Exception\RuntimeException(
+                    sprintf('Error reading INI string: %s', $message),
+                    $error
+                );
+            },
+            E_WARNING
         );
         $ini = parse_ini_string($string, true);
         restore_error_handler();
@@ -200,9 +202,9 @@ class Ini implements ReaderInterface
                     $config[$pieces[0]] = array();
                 }
             } elseif (!is_array($config[$pieces[0]])) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Cannot create sub-key for "%s", as key already exists', $pieces[0]
-                ));
+                throw new Exception\RuntimeException(
+                    sprintf('Cannot create sub-key for "%s", as key already exists', $pieces[0])
+                );
             }
 
             $this->processKey($pieces[1], $value, $config[$pieces[0]]);

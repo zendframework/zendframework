@@ -9,7 +9,6 @@
 
 namespace Zend\EventManager;
 
-
 /**
  * Abstract aggregate listener
  */

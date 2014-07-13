@@ -70,7 +70,7 @@ class InputFilter extends BaseInputFilter
      */
     public function chainInputFilter(BaseInputFilter $inputFilter)
     {
-        foreach ($inputFilter->getInputs() as $name=>$input) {
+        foreach ($inputFilter->getInputs() as $name => $input) {
             $this->add($input, $name);
         }
         return $this;

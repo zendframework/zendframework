@@ -416,11 +416,13 @@ class BlockCipher
             $this->cipher->setSalt(Rand::getBytes($this->cipher->getSaltSize(), true));
         }
         // generate the encryption key and the HMAC key for the authentication
-        $hash = Pbkdf2::calc($this->getPbkdf2HashAlgorithm(),
-                             $this->getKey(),
-                             $this->getSalt(),
-                             $this->keyIteration,
-                             $keySize * 2);
+        $hash = Pbkdf2::calc(
+            $this->getPbkdf2HashAlgorithm(),
+            $this->getKey(),
+            $this->getSalt(),
+            $this->keyIteration,
+            $keySize * 2
+        );
         // set the encryption key
         $this->cipher->setKey(substr($hash, 0, $keySize));
         // set the key for HMAC
@@ -428,9 +430,7 @@ class BlockCipher
         // encryption
         $ciphertext = $this->cipher->encrypt($data);
         // HMAC
-        $hmac = Hmac::compute($keyHmac,
-                              $this->hash,
-                              $this->cipher->getAlgorithm() . $ciphertext);
+        $hmac = Hmac::compute($keyHmac, $this->hash, $this->cipher->getAlgorithm() . $ciphertext);
         if (!$this->binaryOutput) {
             $ciphertext = base64_encode($ciphertext);
         }
@@ -468,18 +468,18 @@ class BlockCipher
         $iv      = substr($ciphertext, 0, $this->cipher->getSaltSize());
         $keySize = $this->cipher->getKeySize();
         // generate the encryption key and the HMAC key for the authentication
-        $hash = Pbkdf2::calc($this->getPbkdf2HashAlgorithm(),
-                             $this->getKey(),
-                             $iv,
-                             $this->keyIteration,
-                             $keySize * 2);
+        $hash = Pbkdf2::calc(
+            $this->getPbkdf2HashAlgorithm(),
+            $this->getKey(),
+            $iv,
+            $this->keyIteration,
+            $keySize * 2
+        );
         // set the decryption key
         $this->cipher->setKey(substr($hash, 0, $keySize));
         // set the key for HMAC
         $keyHmac = substr($hash, $keySize);
-        $hmacNew = Hmac::compute($keyHmac,
-                                 $this->hash,
-                                 $this->cipher->getAlgorithm() . $ciphertext);
+        $hmacNew = Hmac::compute($keyHmac, $this->hash, $this->cipher->getAlgorithm() . $ciphertext);
         if (!Utils::compareStrings($hmacNew, $hmac)) {
             return false;
         }

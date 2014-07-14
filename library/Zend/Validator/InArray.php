@@ -35,7 +35,6 @@ class InArray extends AbstractValidator
      */
     const COMPARE_NOT_STRICT = -1;
 
-
     /**
      * @var array
      */

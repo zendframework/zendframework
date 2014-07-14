@@ -68,7 +68,7 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
         $resolver->setTemplatePathStackResolver('album/', $templatePathStackResolver);
         $templatePathStackResolver->expects($this->once())
             ->method('setPaths')
-            ->with(['path/to/view0', 'path/to/view1', 'path/to/view2']);
+            ->with(array('path/to/view0', 'path/to/view1', 'path/to/view2'));
         $resolver->setDefaultSuffix('php');
         $templatePathStackResolver->expects($this->once())
             ->method('setDefaultSuffix')

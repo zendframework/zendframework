@@ -26,7 +26,6 @@ abstract class AbstractHelper extends BaseAbstractHelper
      * @var array
      */
     protected $booleanAttributes = array(
-        'autocomplete' => array('on' => 'on',        'off' => 'off'),
         'autofocus'    => array('on' => 'autofocus', 'off' => ''),
         'checked'      => array('on' => 'checked',   'off' => ''),
         'disabled'     => array('on' => 'disabled',  'off' => ''),

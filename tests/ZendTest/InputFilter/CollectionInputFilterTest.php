@@ -612,4 +612,66 @@ class CollectionInputFilterTest extends TestCase
         $values = $inputFilter->getValues();
         $this->assertEquals($data, $values);
     }
+    
+    public function testNestedCollectionWhereChildDataIsNotOverwritten()
+    {
+        $items_inputfilter = new BaseInputFilter();
+        $items_inputfilter->add(new Input(), 'id')
+                          ->add(new Input(), 'type');
+        $items = new CollectionInputFilter();
+        $items->setInputFilter($items_inputfilter);
+    
+        $groups_inputfilter = new BaseInputFilter();
+        $groups_inputfilter->add(new Input(), 'group_class')
+                           ->add($items, 'items');
+        $groups = new CollectionInputFilter();
+        $groups->setInputFilter($groups_inputfilter);
+    
+        $inputFilter = new BaseInputFilter();
+        $inputFilter->add($groups, 'groups');
+    
+        $data = array(
+            'groups' => array(
+                array(
+                    'group_class' => 'bar',
+                    'items' => array(
+                        array(
+                            'id' => 100,
+                            'type' => 'item-100',
+                        ),
+                        array(
+                            'id' => 101,
+                            'type' => 'item-101',
+                        ),
+                        array(
+                            'id' => 102,
+                            'type' => 'item-102',
+                        ),
+                        array(
+                            'id' => 103,
+                            'type' => 'item-103',
+                        ),
+                    ),
+                ),
+                array(
+                    'group_class' => 'foo',
+                    'items' => array(
+                        array(
+                            'id' => 200,
+                            'type' => 'item-200',
+                        ),
+                        array(
+                            'id' => 201,
+                            'type' => 'item-201',
+                        ),
+                    ),
+                ),
+            ),
+        );
+    
+        $inputFilter->setData($data);
+        $inputFilter->isValid();
+        $values = $inputFilter->getValues();
+        $this->assertEquals($data, $values);
+    }
 }

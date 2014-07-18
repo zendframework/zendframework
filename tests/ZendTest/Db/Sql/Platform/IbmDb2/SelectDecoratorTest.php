@@ -11,8 +11,10 @@ namespace ZendTest\Db\Sql\Platform\IbmDb2;
 
 use Zend\Db\Sql\Platform\IbmDb2\SelectDecorator;
 use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Where;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\IbmDb2 as IbmDb2Platform;
+use Zend\Db\Sql\Expression;
 
 class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,9 +25,10 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
      * @covers Zend\Db\Sql\Platform\SqlServer\SelectDecorator::processLimitOffset
      * @dataProvider dataProvider
      */
-    public function testPrepareStatement(Select $select, $notUsed, $expectedParams, $expectedSql)
+    public function testPrepareStatement(Select $select, $expectedPrepareSql, $expectedParams, $notUsed)
     {
         $driver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $driver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
 
         // test
         $adapter = $this->getMock(
@@ -39,9 +42,9 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
 
         $parameterContainer = new ParameterContainer;
         $statement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
-        $statement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($parameterContainer));
 
-        $statement->expects($this->once())->method('setSql')->with($expectedSql);
+        $statement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($parameterContainer));
+        $statement->expects($this->once())->method('setSql')->with($expectedPrepareSql);
 
         $selectDecorator = new SelectDecorator;
         $selectDecorator->setSubject($select);
@@ -63,7 +66,8 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
 
         $selectDecorator = new SelectDecorator;
         $selectDecorator->setSubject($select);
-        $this->assertEquals($expectedSql, $selectDecorator->getSqlString(new IbmDb2Platform));
+
+        $this->assertEquals($expectedSql, @$selectDecorator->getSqlString(new IbmDb2Platform));
     }
 
     /**
@@ -75,27 +79,43 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
     {
         $select0 = new Select;
         $select0->from(array('x' => 'foo'))->limit(5);
-        $expectedPrepareSql0 = 'SELECT "x".* FROM "foo" AS "x" FETCH FIRST ? ROW ONLY';
-        $expectedParams0 = array('limit' => 5);
-        $expectedSql0 = 'SELECT "x".* FROM "foo" AS "x" FETCH FIRST 5 ROW ONLY';
+        $expectedParams0 = array( 'limit' => 5, 'offset' => 0 );
+        $expectedPrepareSql0 = 'SELECT * FROM ( SELECT "x".*, ROW_NUMBER() OVER () AS ZEND_DB_ROWNUM FROM "foo" "x" ) AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN ? AND ?';
+        $expectedSql0 = 'SELECT * FROM ( SELECT "x".*, ROW_NUMBER() OVER () AS ZEND_DB_ROWNUM FROM "foo" "x" ) AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN 0 AND 5';
 
         $select1 = new Select;
         $select1->from(array('x' => 'foo'))->limit(5)->offset(10);
-        $expectedPrepareSql1 = 'SELECT z2.* FROM (SELECT ROW_NUMBER() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN ? AND ?';
-        $expectedParams1 = array('offset' => 10, 'limit' => 5);
-        $expectedSql1 = 'SELECT z2.* FROM (SELECT ROW_NUMBER() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN 11 AND 15';
+        $expectedParams1 = array( 'limit' => 15, 'offset' => 11 );
+        $expectedPrepareSql1 = 'SELECT * FROM ( SELECT "x".*, ROW_NUMBER() OVER () AS ZEND_DB_ROWNUM FROM "foo" "x" ) AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN ? AND ?';
+        $expectedSql1 = 'SELECT * FROM ( SELECT "x".*, ROW_NUMBER() OVER () AS ZEND_DB_ROWNUM FROM "foo" "x" ) AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN 11 AND 15';
 
         $select2 = new Select;
-        $select2->from(array('x' => 'foo'))->limit(5)->offset(10)->quantifier(Select::QUANTIFIER_DISTINCT);
-        $expectedPrepareSql2 = 'SELECT z2.* FROM (SELECT ROW_NUMBER() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT DISTINCT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN ? AND ?';
-        $expectedParams2 = array('offset' => 10, 'limit' => 5);
-        $expectedSql2 = 'SELECT z2.* FROM (SELECT ROW_NUMBER() OVER() AS "ZEND_ROWNUM", z1.* FROM (SELECT DISTINCT "x".* FROM "foo" AS "x") z1) z2 WHERE z2.ZEND_ROWNUM BETWEEN 11 AND 15';
+        $select2->columns(array(new Expression('DISTINCT(id) as id')))->from(array('x' => 'foo'))->limit(5)->offset(10);
+        $expectedParams2 = array( 'limit' => 15, 'offset' => 11);
+        $expectedPrepareSql2 = 'SELECT DISTINCT(id) as id FROM ( SELECT DISTINCT(id) as id, DENSE_RANK() OVER () AS ZEND_DB_ROWNUM FROM "foo" "x" ) AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN ? AND ?';
+        $expectedSql2 = 'SELECT DISTINCT(id) as id FROM ( SELECT DISTINCT(id) as id, DENSE_RANK() OVER () AS ZEND_DB_ROWNUM FROM "foo" "x" ) AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN 11 AND 15';
+
+        $select3 = new Select;
+        $where3  = new Where();
+        $where3->greaterThan('x.id', '10')->AND->lessThan('x.id', '31');
+        $select3->from(array('x' => 'foo'))->where($where3)->limit(5)->offset(10);
+        $expectedParams3 = array( 'limit' => 15, 'offset' => 11, 'where1' => '10', 'where2' => '31' );
+        $expectedPrepareSql3 = 'SELECT * FROM ( SELECT "x".*, ROW_NUMBER() OVER () AS ZEND_DB_ROWNUM FROM "foo" "x" WHERE "x"."id" > ? AND "x"."id" < ? ) AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN ? AND ?';
+        $expectedSql3 = 'SELECT * FROM ( SELECT "x".*, ROW_NUMBER() OVER () AS ZEND_DB_ROWNUM FROM "foo" "x" WHERE "x"."id" > \'10\' AND "x"."id" < \'31\' ) AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN 11 AND 15';
+
+        $select4 = new Select;
+        $where4  = $where3;
+        $select4->from(array('x' => 'foo'))->where($where4)->limit(5);
+        $expectedParams4 = array( 'limit' => 5, 'offset' => 0, 'where1' => 10, 'where2' => 31 );
+        $expectedPrepareSql4 = 'SELECT * FROM ( SELECT "x".*, ROW_NUMBER() OVER () AS ZEND_DB_ROWNUM FROM "foo" "x" WHERE "x"."id" > ? AND "x"."id" < ? ) AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN ? AND ?';
+        $expectedSql4 = 'SELECT * FROM ( SELECT "x".*, ROW_NUMBER() OVER () AS ZEND_DB_ROWNUM FROM "foo" "x" WHERE "x"."id" > \'10\' AND "x"."id" < \'31\' ) AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN 0 AND 5';
 
         return array(
             array($select0, $expectedPrepareSql0, $expectedParams0, $expectedSql0),
             array($select1, $expectedPrepareSql1, $expectedParams1, $expectedSql1),
-            array($select2, $expectedPrepareSql2, $expectedParams2, $expectedSql2)
+            array($select2, $expectedPrepareSql2, $expectedParams2, $expectedSql2),
+            array($select3, $expectedPrepareSql3, $expectedParams3, $expectedSql3),
+            array($select4, $expectedPrepareSql4, $expectedParams4, $expectedSql4),
         );
     }
-
 }

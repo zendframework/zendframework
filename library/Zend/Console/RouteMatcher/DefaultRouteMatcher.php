@@ -105,12 +105,16 @@ class DefaultRouteMatcher implements RouteMatcherInterface
         $parts  = array();
         $unnamedGroupCounter = 1;
 
+        // Masks
+        $allCaseMask   = '[a-zA-Z0-9\_\-\:]';
+        $upperCaseMask = '[A-Z0-9\_\-\:]';
+
         while ($pos < $length) {
             /**
              * Optional value param, i.e.
              *    [SOMETHING]
              */
-            if (preg_match('/\G\[(?P<name>[A-Z][A-Z0-9\_\-]*?)\](?: +|$)/s', $def, $m, 0, $pos)) {
+            if (preg_match('/\G\[(?P<name>[A-Z]'.$upperCaseMask.'*?)\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => strtolower($m['name']),
                     'literal'    => false,
@@ -123,7 +127,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
              * Mandatory value param, i.e.
              *   SOMETHING
              */
-            elseif (preg_match('/\G(?P<name>[A-Z][A-Z0-9\_\-]*?)(?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G(?P<name>[A-Z]'.$upperCaseMask.'*?)(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => strtolower($m['name']),
                     'literal'    => false,
@@ -136,7 +140,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
              * Optional literal param, i.e.
              *    [something]
              */
-            elseif (preg_match('/\G\[ *?(?P<name>[a-zA-Z][a-zA-Z0-9\_\-]*?) *?\](?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G\[ *?(?P<name>[a-zA-Z]'.$allCaseMask.'*?) *?\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'literal'    => true,
@@ -149,7 +153,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
              * Optional value param, syntax 2, i.e.
              *    [<something>]
              */
-            elseif (preg_match('/\G\[ *\<(?P<name>[a-zA-Z][a-zA-Z0-9\_\-]*?)\> *\](?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G\[ *\<(?P<name>[a-zA-Z]'.$allCaseMask.'*?)\> *\](?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'literal'    => false,
@@ -162,7 +166,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
              * Mandatory value param, i.e.
              *    <something>
              */
-            elseif (preg_match('/\G\< *(?P<name>[a-zA-Z][a-zA-Z0-9\_\-]*?) *\>(?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G\< *(?P<name>[a-zA-Z]'.$allCaseMask.'*?) *\>(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'literal'    => false,
@@ -175,7 +179,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
              * Mandatory literal param, i.e.
              *   something
              */
-            elseif (preg_match('/\G(?P<name>[a-zA-Z][a-zA-Z0-9\_\-]*?)(?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G(?P<name>[a-zA-Z]'.$allCaseMask.'*?)(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'literal'    => true,
@@ -189,7 +193,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
              *    --param=
              *    --param=whatever
              */
-            elseif (preg_match('/\G--(?P<name>[a-zA-Z0-9][a-zA-Z0-9\_\-]+)(?P<hasValue>=\S*?)?(?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match('/\G--(?P<name>[a-zA-Z0-9]'.$allCaseMask.'+)(?P<hasValue>=\S*?)?(?: +|$)/s', $def, $m, 0, $pos)) {
                 $item = array(
                     'name'       => $m['name'],
                     'short'      => false,
@@ -204,7 +208,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
              *    [--param]
              */
             elseif (preg_match(
-                '/\G\[ *?--(?P<name>[a-zA-Z0-9][a-zA-Z0-9\_\-]+) *?\](?: +|$)/s', $def, $m, 0, $pos
+                '/\G\[ *?--(?P<name>[a-zA-Z0-9]'.$allCaseMask.'+) *?\](?: +|$)/s', $def, $m, 0, $pos
             )) {
                 $item = array(
                     'name'       => $m['name'],
@@ -221,7 +225,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
              *    [--param=whatever]
              */
             elseif (preg_match(
-                '/\G\[ *?--(?P<name>[a-zA-Z0-9][a-zA-Z0-9\_\-]+)(?P<hasValue>=\S*?)? *?\](?: +|$)/s', $def, $m, 0, $pos
+                '/\G\[ *?--(?P<name>[a-zA-Z0-9]'.$allCaseMask.'+)(?P<hasValue>=\S*?)? *?\](?: +|$)/s', $def, $m, 0, $pos
             )) {
                 $item = array(
                     'name'       => $m['name'],
@@ -276,7 +280,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     (?P<options>
                         (?:
                             \ *?
-                            (?P<name>[a-zA-Z][a-zA-Z0-9_\-]*?)
+                            (?P<name>[a-zA-Z]'.$allCaseMask.'*?)
                             \ *?
                             (?:\||(?=\]))
                             \ *?
@@ -316,7 +320,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     (?P<options>
                         (?:
                             \ *?
-                            (?P<name>[a-zA-Z][a-zA-Z0-9_\-]+)
+                            (?P<name>[a-zA-Z]'.$allCaseMask.'+)
                             \ *?
                             (?:\||(?=\)))
                             \ *?
@@ -354,7 +358,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     (?P<options>
                         (?:
                             \ *?
-                            \-+(?P<name>[a-zA-Z0-9][a-zA-Z0-9_\-]*?)
+                            \-+(?P<name>[a-zA-Z0-9]'.$allCaseMask.'*?)
                             \ *?
                             (?:\||(?=\)))
                             \ *?
@@ -397,7 +401,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     (?P<options>
                         (?:
                             \ *?
-                            \-+(?P<name>[a-zA-Z0-9][a-zA-Z0-9_\-]*?)
+                            \-+(?P<name>[a-zA-Z0-9]'.$allCaseMask.'*?)
                             \ *?
                             (?:\||(?=\]))
                             \ *?

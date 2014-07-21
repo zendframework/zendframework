@@ -99,38 +99,75 @@ class ConnectionIntegrationTest extends AbstractIntegrationTest
 
     /**
      * @covers Zend\Db\Adapter\Driver\IbmDb2\Connection::beginTransaction
-     * @todo   Implement testBeginTransaction().
      */
     public function testBeginTransaction()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        if (!$this->isTransactionEnabled()) {
+            $this->markTestIncomplete(
+                'I cannot test without the DB2 transactions enabled'
+            );
+        }
+        $connection = new Connection($this->variables);
+        $connection->beginTransaction();
+        $this->assertTrue($connection->inTransaction());
+        $this->assertEquals(0, db2_autocommit($connection->getResource()));
     }
 
     /**
      * @covers Zend\Db\Adapter\Driver\IbmDb2\Connection::commit
-     * @todo   Implement testCommit().
      */
     public function testCommit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        if (!$this->isTransactionEnabled()) {
+            $this->markTestIncomplete(
+                'I cannot test without the DB2 transactions enabled'
+            );
+        }
+        $connection = new Connection($this->variables);
+        $connection->beginTransaction();
+
+        $oldValue = db2_autocommit($connection->getResource());
+        $connection->beginTransaction();
+        $this->assertTrue($connection->inTransaction());
+        $connection->commit();
+        $this->assertFalse($connection->inTransaction());
+        $this->assertEquals($oldValue, db2_autocommit($connection->getResource()));
     }
 
     /**
      * @covers Zend\Db\Adapter\Driver\IbmDb2\Connection::rollback
-     * @todo   Implement testRollback().
      */
     public function testRollback()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        if (!$this->isTransactionEnabled()) {
+            $this->markTestIncomplete(
+                'I cannot test without the DB2 transactions enabled'
+            );
+        }
+        $connection = new Connection($this->variables);
+        $connection->beginTransaction();
+
+        $oldValue = db2_autocommit($connection->getResource());
+        $connection->beginTransaction();
+        $this->assertTrue($connection->inTransaction());
+        $connection->rollback();
+        $this->assertFalse($connection->inTransaction());
+        $this->assertEquals($oldValue, db2_autocommit($connection->getResource()));
+    }
+
+    /**
+     * Return true if the transaction is enabled for DB2
+     *
+     * @return bool
+     */
+    protected function isTransactionEnabled()
+    {
+        $os =  php_uname('s') == 'OS400' ? true : false;
+        if ($os) {
+            return ini_get('ibm_db2.i5_allow_commit') == 1;
+        }
+
+        return true;
     }
 
     /**

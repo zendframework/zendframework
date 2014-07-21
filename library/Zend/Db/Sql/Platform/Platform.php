@@ -13,7 +13,6 @@ use Zend\Db\Adapter\AdapterInterface;
 
 class Platform extends AbstractPlatform
 {
-
     /**
      * @var AdapterInterface
      */
@@ -37,6 +36,7 @@ class Platform extends AbstractPlatform
                 $this->decorators = $platform->decorators;
                 break;
             case 'ibm db2':
+            case 'ibm_db2':
             case 'ibmdb2':
                 $platform = new IbmDb2\IbmDb2();
                 $this->decorators = $platform->decorators;

@@ -57,7 +57,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $message = new Message(array('file' => $this->_file));
 
-        $this->assertEquals('Peter Müller <peter-mueller@example.com>', $message->from);
+        $this->assertEquals('"Peter Müller" <peter-mueller@example.com>', $message->from);
     }
 
     public function testGetHeaderAsArray()

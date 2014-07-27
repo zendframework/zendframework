@@ -18,16 +18,13 @@ class ReferenceIdTest extends \PHPUnit_Framework_TestCase
 {
     public function testProcessMixesInReferenceId()
     {
-        $processor = new ReferenceId();
-
-        $event = array(
-            'timestamp' => '',
-            'priority' => 1,
+        $processor      = new ReferenceId();
+        $processedEvent = $processor->process(array(
+            'timestamp'    => '',
+            'priority'     => 1,
             'priorityName' => 'ALERT',
-            'message' => 'foo',
-        );
-
-        $processedEvent = $processor->process($event);
+            'message'      => 'foo',
+        ));
 
         $this->assertArrayHasKey('extra', $processedEvent);
         $this->assertInternalType('array', $processedEvent['extra']);
@@ -38,21 +35,17 @@ class ReferenceIdTest extends \PHPUnit_Framework_TestCase
 
     public function testProcessDoesNotOverwriteReferenceId()
     {
-        $processor = new ReferenceId();
-
-        $referenceId = 'bar';
-
-        $event = array(
-            'timestamp' => '',
-            'priority' => 1,
+        $processor      = new ReferenceId();
+        $referenceId    = 'bar';
+        $processedEvent = $processor->process(array(
+            'timestamp'    => '',
+            'priority'     => 1,
             'priorityName' => 'ALERT',
-            'message' => 'foo',
-            'extra' => array(
+            'message'      => 'foo',
+            'extra'        => array(
                 'referenceId' => $referenceId,
             ),
-        );
-
-        $processedEvent = $processor->process($event);
+        ));
 
         $this->assertArrayHasKey('extra', $processedEvent);
         $this->assertInternalType('array', $processedEvent['extra']);
@@ -63,8 +56,7 @@ class ReferenceIdTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetAndGetReferenceId()
     {
-        $processor = new ReferenceId();
-
+        $processor   = new ReferenceId();
         $referenceId = 'foo';
 
         $processor->setReferenceId($referenceId);
@@ -75,18 +67,16 @@ class ReferenceIdTest extends \PHPUnit_Framework_TestCase
     public function testProcessUsesSetReferenceId()
     {
         $referenceId = 'foo';
+        $processor   = new ReferenceId();
 
-        $processor = new ReferenceId();
         $processor->setReferenceId($referenceId);
 
-        $event = array(
-            'timestamp' => '',
-            'priority' => 1,
+        $processedEvent = $processor->process(array(
+            'timestamp'    => '',
+            'priority'     => 1,
             'priorityName' => 'ALERT',
-            'message' => 'foo',
-        );
-
-        $processedEvent = $processor->process($event);
+            'message'      => 'foo',
+        ));
 
         $this->assertArrayHasKey('extra', $processedEvent);
         $this->assertInternalType('array', $processedEvent['extra']);

@@ -450,7 +450,7 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
-     * @return PropertyGenerator[]
+     * @return PropertyGenerator[] indexed by constant name
      */
     public function getConstants()
     {

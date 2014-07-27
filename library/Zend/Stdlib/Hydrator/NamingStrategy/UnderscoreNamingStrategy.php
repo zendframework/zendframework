@@ -13,8 +13,14 @@ use Zend\Filter\FilterChain;
 
 class UnderscoreNamingStrategy implements NamingStrategyInterface
 {
+    /**
+     * @var FilterChain|null
+     */
     protected static $camelCaseToUnderscoreFilter;
 
+    /**
+     * @var FilterChain|null
+     */
     protected static $underscoreToStudlyCaseFilter;
 
     /**
@@ -49,9 +55,10 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
         }
 
         $filter = new FilterChain();
+
         $filter->attachByName('WordUnderscoreToStudlyCase');
-        static::$underscoreToStudlyCaseFilter = $filter;
-        return $filter;
+
+        return static::$underscoreToStudlyCaseFilter = $filter;
     }
 
     /**
@@ -64,9 +71,10 @@ class UnderscoreNamingStrategy implements NamingStrategyInterface
         }
 
         $filter = new FilterChain();
+
         $filter->attachByName('WordCamelCaseToUnderscore');
         $filter->attachByName('StringToLower');
-        static::$camelCaseToUnderscoreFilter = $filter;
-        return $filter;
+
+        return static::$camelCaseToUnderscoreFilter = $filter;
     }
 }

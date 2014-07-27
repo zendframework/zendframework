@@ -171,6 +171,26 @@ class PriorityListTest extends TestCase
         $this->assertEquals(array('bar', 'foo', 'baz'), $orders);
     }
 
+    public function testCurrent()
+    {
+        $this->list->insert('foo', 'foo_value', null);
+        $this->list->insert('bar', 'bar_value', 1);
+        $this->list->insert('baz', 'baz_value', -1);
+
+        $this->assertEquals('bar', $this->list->key());
+        $this->assertEquals('bar_value', $this->list->current());
+    }
+
+    public function testIterator()
+    {
+        $this->list->insert('foo', 'foo_value');
+        $iterator = $this->list->getIterator();
+        $this->assertEquals($iterator, $this->list);
+
+        $this->list->insert('bar', 'bar_value');
+        $this->assertNotEquals($iterator, $this->list);
+    }
+
     public function testToArray()
     {
         $this->list->insert('foo', 'foo_value', null);

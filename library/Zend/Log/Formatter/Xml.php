@@ -183,12 +183,18 @@ class Xml implements FormatterInterface
             ) {
                 if ($key == "message") {
                     $value = $escaper->escapeHtml($value);
-                } elseif ($key == "extra" && empty($value)) {
-                    continue;
-                } elseif ($key == "extra" && (is_array($value) || $value instanceof Traversable)) {
-                    $elt->appendChild($this->buildElementTree($dom, $dom->createElement('extra'), $value));
+                }
+
+                if ($key == "extra" && empty($value)) {
                     continue;
                 }
+
+                if ($key == "extra" && (is_array($value) || $value instanceof Traversable)) {
+                    $elt->appendChild($this->buildElementTree($dom, $dom->createElement('extra'), $value));
+
+                    continue;
+                }
+
                 $elt->appendChild(new DOMElement($key, (string) $value));
             }
         }

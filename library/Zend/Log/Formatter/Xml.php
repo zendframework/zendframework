@@ -199,11 +199,7 @@ class Xml implements FormatterInterface
             }
         }
 
-        $xml = $dom->saveXML();
-
-        $xml = preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $xml);
-
-        return $xml . PHP_EOL;
+        return preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $dom->saveXML()) . PHP_EOL;
     }
 
     /**

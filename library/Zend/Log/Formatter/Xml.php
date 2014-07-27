@@ -216,20 +216,19 @@ class Xml implements FormatterInterface
         }
 
         foreach ($mixedData as $key => $value) {
-
             // key is numeric and switch is not possible, numeric values are not valid node names
-            if (is_numeric($key) && (is_numeric($value) || empty($value))) {
+            if ((empty($value) || is_numeric($value)) && is_numeric($key)) {
                 continue;
             }
 
-            if (is_array($value) || $value instanceof Traversable) {
+            if ($value instanceof Traversable || is_array($value)) {
                 // current value is an array, start recursion
                 $rootElement->appendChild($this->buildElementTree($doc, $doc->createElement($key), $value));
 
                 continue;
             }
 
-            if (is_object($value) && !method_exists($value, '__toString')) {
+            if (is_object($value) && ! method_exists($value, '__toString')) {
                 // object does not support __toString() method, manually convert the value
                 $value = $this->getEscaper()->escapeHtml(
                     '"Object" of type ' . get_class($value) . " does not support __toString() method"

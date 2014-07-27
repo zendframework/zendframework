@@ -18,9 +18,9 @@ class UnderscoreToStudlyCase extends UnderscoreToCamelCase
             return $value;
         }
 
-        $value = parent::filter($value);
-
+        $value          = parent::filter($value);
         $lowerCaseFirst = 'lcfirst';
+
         if (StringUtils::hasPcreUnicodeSupport() && extension_loaded('mbstring')) {
             $lowerCaseFirst = function ($value) {
                 if (0 === mb_strlen($value)) {

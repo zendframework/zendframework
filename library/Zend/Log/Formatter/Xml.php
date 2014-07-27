@@ -225,6 +225,7 @@ class Xml implements FormatterInterface
             if (is_array($value) || $value instanceof Traversable) {
                 // current value is an array, start recursion
                 $rootElement->appendChild($this->buildElementTree($doc, $doc->createElement($key), $value));
+
                 continue;
             }
 
@@ -237,12 +238,12 @@ class Xml implements FormatterInterface
 
             if (is_numeric($key)) {
                 // xml does not allow numeric values, try to switch the value and the key
-                $key = (string)$value;
+                $key   = (string) $value;
                 $value = null;
             }
 
             try {
-                $rootElement->appendChild(new DOMElement($key, (!empty($value)) ? (string) $value : null));
+                $rootElement->appendChild(new DOMElement($key, empty($value) ? null : (string) $value));
             } catch (\DOMException $e) {
                 // the input name is not valid, go one.
                 continue;

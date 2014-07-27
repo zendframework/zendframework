@@ -57,7 +57,7 @@ class ClassGenerator extends AbstractGenerator
     protected $properties = array();
 
     /**
-     * @var PropertyGenerator[] Array of properties
+     * @var PropertyGenerator[] Array of constants
      */
     protected $constants = array();
 
@@ -79,7 +79,6 @@ class ClassGenerator extends AbstractGenerator
      */
     public static function fromReflection(ClassReflection $classReflection)
     {
-        // class generator
         $cg = new static($classReflection->getName());
 
         $cg->setSourceContent($cg->getSourceContent());
@@ -98,11 +97,12 @@ class ClassGenerator extends AbstractGenerator
 
         /* @var \Zend\Code\Reflection\ClassReflection $parentClass */
         $parentClass = $classReflection->getParentClass();
+        $interfaces  = $classReflection->getInterfaces();
+
         if ($parentClass) {
             $cg->setExtendedClass($parentClass->getName());
-            $interfaces = array_diff($classReflection->getInterfaces(), $parentClass->getInterfaces());
-        } else {
-            $interfaces = $classReflection->getInterfaces();
+
+            $interfaces = array_diff($interfaces, $parentClass->getInterfaces());
         }
 
         $interfaceNames = array();
@@ -114,26 +114,36 @@ class ClassGenerator extends AbstractGenerator
         $cg->setImplementedInterfaces($interfaceNames);
 
         $properties = array();
+
         foreach ($classReflection->getProperties() as $reflectionProperty) {
             if ($reflectionProperty->getDeclaringClass()->getName() == $classReflection->getName()) {
                 $properties[] = PropertyGenerator::fromReflection($reflectionProperty);
             }
         }
+
         $cg->addProperties($properties);
 
         $constants = array();
+
         foreach ($classReflection->getConstants() as $name => $value) {
-            $constants[] = array('name' => $name, 'value' => $value);
+            $constants[] = array(
+                'name' => $name,
+                'value' => $value
+            );
         }
+
         $cg->addConstants($constants);
 
         $methods = array();
+
         foreach ($classReflection->getMethods() as $reflectionMethod) {
-            $className = ($cg->getNamespaceName())? $cg->getNamespaceName() . "\\" . $cg->getName() : $cg->getName();
+            $className = ($cg->getNamespaceName()) ? $cg->getNamespaceName() . "\\" . $cg->getName() : $cg->getName();
+
             if ($reflectionMethod->getDeclaringClass()->getName() == $className) {
                 $methods[] = MethodGenerator::fromReflection($reflectionMethod);
             }
         }
+
         $cg->addMethods($methods);
 
         return $cg;

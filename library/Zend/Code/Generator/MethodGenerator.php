@@ -167,7 +167,7 @@ class MethodGenerator extends AbstractMemberGenerator
     }
 
     /**
-     * @param  ParameterGenerator|string $parameter
+     * @param  ParameterGenerator|array|string $parameter
      * @throws Exception\InvalidArgumentException
      * @return MethodGenerator
      */
@@ -175,7 +175,13 @@ class MethodGenerator extends AbstractMemberGenerator
     {
         if (is_string($parameter)) {
             $parameter = new ParameterGenerator($parameter);
-        } elseif (!$parameter instanceof ParameterGenerator) {
+        }
+
+        if (is_array($parameter)) {
+            $parameter = ParameterGenerator::fromArray($parameter);
+        }
+
+        if (!$parameter instanceof ParameterGenerator) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s is expecting either a string, array or an instance of %s\ParameterGenerator',
                 __METHOD__,
@@ -183,9 +189,7 @@ class MethodGenerator extends AbstractMemberGenerator
             ));
         }
 
-        $parameterName = $parameter->getName();
-
-        $this->parameters[$parameterName] = $parameter;
+        $this->parameters[$parameter->getName()] = $parameter;
 
         return $this;
     }

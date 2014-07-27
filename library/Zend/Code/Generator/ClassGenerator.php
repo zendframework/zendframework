@@ -57,6 +57,11 @@ class ClassGenerator extends AbstractGenerator
     protected $properties = array();
 
     /**
+     * @var PropertyGenerator[] Array of constants
+     */
+    protected $constants = array();
+
+    /**
      * @var MethodGenerator[] Array of methods
      */
     protected $methods = array();
@@ -74,7 +79,6 @@ class ClassGenerator extends AbstractGenerator
      */
     public static function fromReflection(ClassReflection $classReflection)
     {
-        // class generator
         $cg = new static($classReflection->getName());
 
         $cg->setSourceContent($cg->getSourceContent());
@@ -93,11 +97,12 @@ class ClassGenerator extends AbstractGenerator
 
         /* @var \Zend\Code\Reflection\ClassReflection $parentClass */
         $parentClass = $classReflection->getParentClass();
+        $interfaces  = $classReflection->getInterfaces();
+
         if ($parentClass) {
             $cg->setExtendedClass($parentClass->getName());
-            $interfaces = array_diff($classReflection->getInterfaces(), $parentClass->getInterfaces());
-        } else {
-            $interfaces = $classReflection->getInterfaces();
+
+            $interfaces = array_diff($interfaces, $parentClass->getInterfaces());
         }
 
         $interfaceNames = array();
@@ -109,20 +114,36 @@ class ClassGenerator extends AbstractGenerator
         $cg->setImplementedInterfaces($interfaceNames);
 
         $properties = array();
+
         foreach ($classReflection->getProperties() as $reflectionProperty) {
             if ($reflectionProperty->getDeclaringClass()->getName() == $classReflection->getName()) {
                 $properties[] = PropertyGenerator::fromReflection($reflectionProperty);
             }
         }
+
         $cg->addProperties($properties);
 
+        $constants = array();
+
+        foreach ($classReflection->getConstants() as $name => $value) {
+            $constants[] = array(
+                'name' => $name,
+                'value' => $value
+            );
+        }
+
+        $cg->addConstants($constants);
+
         $methods = array();
+
         foreach ($classReflection->getMethods() as $reflectionMethod) {
-            $className = ($cg->getNamespaceName())? $cg->getNamespaceName() . "\\" . $cg->getName() : $cg->getName();
+            $className = ($cg->getNamespaceName()) ? $cg->getNamespaceName() . "\\" . $cg->getName() : $cg->getName();
+
             if ($reflectionMethod->getDeclaringClass()->getName() == $className) {
                 $methods[] = MethodGenerator::fromReflection($reflectionMethod);
             }
         }
+
         $cg->addMethods($methods);
 
         return $cg;
@@ -415,6 +436,114 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
+     * @param  string $constantName
+     *
+     * @return PropertyGenerator|false
+     */
+    public function getConstant($constantName)
+    {
+        if (isset($this->constants[$constantName])) {
+            return $this->constants[$constantName];
+        }
+
+        return false;
+    }
+
+    /**
+     * @return PropertyGenerator[] indexed by constant name
+     */
+    public function getConstants()
+    {
+        return $this->constants;
+    }
+
+    /**
+     * @param  string $constantName
+     * @return bool
+     */
+    public function hasConstant($constantName)
+    {
+        return isset($this->constants[$constantName]);
+    }
+
+    /**
+     * Add constant from PropertyGenerator
+     *
+     * @param  PropertyGenerator           $constant
+     * @throws Exception\InvalidArgumentException
+     * @return ClassGenerator
+     */
+    public function addConstantFromGenerator(PropertyGenerator $constant)
+    {
+        $constantName = $constant->getName();
+
+        if (isset($this->constants[$constantName])) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'A constant by name %s already exists in this class.',
+                $constantName
+            ));
+        }
+
+        if (! $constant->isConst()) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'The value %s is not defined as a constant.',
+                $constantName
+            ));
+        }
+
+        $this->constants[$constantName] = $constant;
+
+        return $this;
+    }
+
+    /**
+     * Add Constant
+     *
+     * @param  string $name
+     * @param  string $value
+     * @throws Exception\InvalidArgumentException
+     * @return ClassGenerator
+     */
+    public function addConstant($name, $value)
+    {
+        if (!is_string($name)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects string for name',
+                __METHOD__
+            ));
+        }
+
+        if (empty($value) || !is_string($value)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects value for constant, value must be a string',
+                __METHOD__
+            ));
+        }
+
+        return $this->addConstantFromGenerator(new PropertyGenerator($name, $value, PropertyGenerator::FLAG_CONSTANT));
+    }
+
+    /**
+     * @param  PropertyGenerator[]|array[] $constants
+     *
+     * @return ClassGenerator
+     */
+    public function addConstants(array $constants)
+    {
+        foreach ($constants as $constant) {
+            if ($constant instanceof PropertyGenerator) {
+                $this->addPropertyFromGenerator($constant);
+            } else {
+                if (is_array($constant)) {
+                    call_user_func_array(array($this, 'addConstant'), $constant);
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @param  array $properties
      * @return ClassGenerator
      */
@@ -453,6 +582,12 @@ class ClassGenerator extends AbstractGenerator
             ));
         }
 
+        // backwards compatibility
+        // @todo remove this on next major version
+        if ($flags === PropertyGenerator::FLAG_CONSTANT) {
+            return $this->addConstant($name, $defaultValue);
+        }
+
         return $this->addPropertyFromGenerator(new PropertyGenerator($name, $defaultValue, $flags));
     }
 
@@ -472,6 +607,12 @@ class ClassGenerator extends AbstractGenerator
                 'A property by name %s already exists in this class.',
                 $propertyName
             ));
+        }
+
+        // backwards compatibility
+        // @todo remove this on next major version
+        if ($property->isConst()) {
+            return $this->addConstantFromGenerator($property);
         }
 
         $this->properties[$propertyName] = $property;
@@ -686,10 +827,12 @@ class ClassGenerator extends AbstractGenerator
         }
 
         $uses = $this->getUses();
+
         if (!empty($uses)) {
             foreach ($uses as $use) {
                 $output .= 'use ' . $use . ';' . self::LINE_FEED;
             }
+
             $output .= self::LINE_FEED;
         }
 
@@ -709,24 +852,29 @@ class ClassGenerator extends AbstractGenerator
         }
 
         $implemented = $this->getImplementedInterfaces();
+
         if (!empty($implemented)) {
             $output .= ' implements ' . implode(', ', $implemented);
         }
 
         $output .= self::LINE_FEED . '{' . self::LINE_FEED . self::LINE_FEED;
 
+        $constants = $this->getConstants();
+
+        foreach ($constants as $constant) {
+            $output .= $constant->generate() . self::LINE_FEED . self::LINE_FEED;
+        }
+
         $properties = $this->getProperties();
-        if (!empty($properties)) {
-            foreach ($properties as $property) {
-                $output .= $property->generate() . self::LINE_FEED . self::LINE_FEED;
-            }
+
+        foreach ($properties as $property) {
+            $output .= $property->generate() . self::LINE_FEED . self::LINE_FEED;
         }
 
         $methods = $this->getMethods();
-        if (!empty($methods)) {
-            foreach ($methods as $method) {
-                $output .= $method->generate() . self::LINE_FEED;
-            }
+
+        foreach ($methods as $method) {
+            $output .= $method->generate() . self::LINE_FEED;
         }
 
         $output .= self::LINE_FEED . '}' . self::LINE_FEED;

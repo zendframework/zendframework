@@ -437,11 +437,12 @@ class ClassGenerator extends AbstractGenerator
 
     /**
      * @param  string $constantName
+     *
      * @return PropertyGenerator|false
      */
     public function getConstant($constantName)
     {
-        if(isset($this->constants[$constantName])) {
+        if (isset($this->constants[$constantName])) {
             return $this->constants[$constantName];
         }
 

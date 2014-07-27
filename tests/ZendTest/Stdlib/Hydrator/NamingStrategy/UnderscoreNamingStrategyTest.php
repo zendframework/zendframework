@@ -29,4 +29,15 @@ class UnderscoreNamingStrategyTest extends \PHPUnit_Framework_TestCase
         $strategy = new UnderscoreNamingStrategy();
         $this->assertEquals('foo_bar_baz', $strategy->extract('fooBarBaz'));
     }
+
+    /**
+     * @group 6422
+     * @group 6420
+     */
+    public function testNameHydratesToStudlyCaps()
+    {
+        $strategy = new UnderscoreNamingStrategy();
+
+        $this->assertEquals('fooBarBaz', $strategy->hydrate('Foo_Bar_Baz'));
+    }
 }

@@ -48,7 +48,7 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
      * Trace error when exception is throwed in application
      * @var bool
      */
-    protected $traceError = false;
+    protected $traceError = true;
 
     /**
      * Reset the application for isolation

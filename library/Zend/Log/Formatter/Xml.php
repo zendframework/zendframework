@@ -208,40 +208,41 @@ class Xml implements FormatterInterface
      */
     protected function buildElementTree(DOMDocument $doc, DOMElement $rootElement, $mixedData)
     {
-        if (is_array($mixedData) || $mixedData instanceof Traversable) {
+        if (! (is_array($mixedData) || $mixedData instanceof Traversable)) {
+            return $rootElement;
+        }
 
-            foreach ($mixedData as $key => $value) {
+        foreach ($mixedData as $key => $value) {
 
-                // key is numeric and switch is not possible, numeric values are not valid node names
-                if (is_numeric($key) && (is_numeric($value) || empty($value))) {
-                    continue;
-                }
+            // key is numeric and switch is not possible, numeric values are not valid node names
+            if (is_numeric($key) && (is_numeric($value) || empty($value))) {
+                continue;
+            }
 
-                if (is_array($value) || $value instanceof Traversable) {
-                    // current value is an array, start recursion
-                    $rootElement->appendChild($this->buildElementTree($doc, $doc->createElement($key), $value));
-                    continue;
-                }
+            if (is_array($value) || $value instanceof Traversable) {
+                // current value is an array, start recursion
+                $rootElement->appendChild($this->buildElementTree($doc, $doc->createElement($key), $value));
+                continue;
+            }
 
-                if (is_object($value) && !method_exists($value, '__toString')) {
-                    // object does not support __toString() method, manually convert the value
-                    $value = $this->getEscaper()->escapeHtml(
-                        '"Object" of type ' . get_class($value) . " does not support __toString() method"
-                    );
-                }
+            if (is_object($value) && !method_exists($value, '__toString')) {
+                // object does not support __toString() method, manually convert the value
+                $value = $this->getEscaper()->escapeHtml(
+                    '"Object" of type ' . get_class($value) . " does not support __toString() method"
+                );
+            }
 
-                if (is_numeric($key)) {
-                    // xml does not allow numeric values, try to switch the value and the key
-                    $key = (string)$value;
-                    $value = null;
-                }
+            if (is_numeric($key)) {
+                // xml does not allow numeric values, try to switch the value and the key
+                $key = (string)$value;
+                $value = null;
+            }
 
-                try {
-                    $rootElement->appendChild(new DOMElement($key, (!empty($value)) ? (string) $value : null));
-                } catch (\DOMException $e) {
-                    // the input name is not valid, go one.
-                    continue;
-                }
+            try {
+                $rootElement->appendChild(new DOMElement($key, (!empty($value)) ? (string) $value : null));
+            } catch (\DOMException $e) {
+                // the input name is not valid, go one.
+                continue;
             }
         }
 

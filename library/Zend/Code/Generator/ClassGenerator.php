@@ -482,7 +482,9 @@ class ClassGenerator extends AbstractGenerator
                 'A constant by name %s already exists in this class.',
                 $constantName
             ));
-        } elseif (false === $constant->isConst()) {
+        }
+
+        if (! $constant->isConst()) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'The value %s is not defined as a constant.',
                 $constantName
@@ -490,6 +492,7 @@ class ClassGenerator extends AbstractGenerator
         }
 
         $this->constants[$constantName] = $constant;
+
         return $this;
     }
 

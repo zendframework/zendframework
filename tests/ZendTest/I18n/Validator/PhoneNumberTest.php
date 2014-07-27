@@ -932,7 +932,7 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
             'patterns' => array(
                 'example' => array(
                     'fixed' => '123456789',
-                    'mobile' => '612345678',
+                    'mobile' => array('612345678', '712345678',),
                     'tollfree' => '801234567',
                     'premium' => '891123456',
                     'shared' => '810123456',

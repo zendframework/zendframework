@@ -18,6 +18,7 @@ use Zend\Http\Header\SetCookie;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Http\Client\Adapter\Test;
+use ZendTest\Http\TestAsset\ExtendedClient;
 
 
 class ClientTest extends \PHPUnit_Framework_TestCase
@@ -373,5 +374,25 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayNotHasKey('content-length', $headers);
         $this->assertArrayHasKey('Content-Length', $headers);
+    }
+
+    /**
+     * @group 6301
+     */
+    public function testCanSpecifyCustomAuthMethodsInExtendingClasses()
+    {
+        $client = new ExtendedClient();
+
+        $client->setAuth('username', 'password', ExtendedClient::AUTH_CUSTOM);
+
+        $this->assertAttributeEquals(
+            array (
+                'user'     => 'username',
+                'password' => 'password',
+                'type'     => ExtendedClient::AUTH_CUSTOM,
+            ),
+            'auth',
+            $client
+        );
     }
 }

@@ -59,7 +59,7 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
         // The buffer size must be always the same to be able to decrypt
         $this->assertEquals(1048576, FileCipher::BUFFER_SIZE);
     }
- 
+
     public function testSetCipher()
     {
         $cipher = new Mcrypt(array(
@@ -133,7 +133,7 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
                                     'The specified hash algorithm \'unknown\' is not supported by Zend\Crypt\Hash');
         $this->fileCipher->setPbkdf2HashAlgorithm('unknown');
     }
-    
+
     public function testEncrypDecryptFile()
     {
         $this->fileCipher->setKey('test');

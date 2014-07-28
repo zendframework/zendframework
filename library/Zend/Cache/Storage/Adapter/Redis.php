@@ -371,7 +371,7 @@ class Redis extends AbstractAdapter implements
             throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
     }
-    
+
     /* ClearByPrefixInterface */
 
     /**
@@ -394,7 +394,7 @@ class Redis extends AbstractAdapter implements
         $prefix    = ($namespace === '') ? '' : $namespace . $options->getNamespaceSeparator() . $prefix;
 
         $redis->delete($redis->keys($prefix.'*'));
-        
+
         return true;
     }
 

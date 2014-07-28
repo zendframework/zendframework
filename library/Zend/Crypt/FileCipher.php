@@ -21,7 +21,7 @@ use Zend\Math\Rand;
 class FileCipher
 {
     const BUFFER_SIZE = 1048576; // 16 * 65536 bytes = 1 Mb
- 
+
     /**
      * Hash algorithm for Pbkdf2
      *
@@ -51,7 +51,7 @@ class FileCipher
     protected $key;
 
     /**
-     * Cipher 
+     * Cipher
      *
      * @var SymmetricInterface
      */

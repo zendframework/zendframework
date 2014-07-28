@@ -260,7 +260,7 @@ class MethodGenerator extends AbstractMemberGenerator
         $output .= self::LINE_FEED . $indent . '{' . self::LINE_FEED;
 
         if ($this->body) {
-            $output .= preg_replace('#^(.+?)$#m', $indent . $indent . '$1', trim($this->body))
+            $output .= preg_replace('#^((?![a-zA-Z0-9_-]+;).+?)$#m', $indent . $indent . '$1', trim($this->body))
                 . self::LINE_FEED;
         }
 

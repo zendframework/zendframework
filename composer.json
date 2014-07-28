@@ -56,6 +56,11 @@
             "Zend\\": "library/"
         }
     },
+    "autoload-dev": {
+        "psr-0": {
+            "ZendTest\\": "tests/"
+        }
+    },
     "bin": [
         "bin/classmap_generator.php",
         "bin/pluginmap_generator.php",

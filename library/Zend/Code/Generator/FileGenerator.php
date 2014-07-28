@@ -103,27 +103,6 @@ class FileGenerator extends AbstractGenerator
             }
 
             $file->setClass($phpClass);
-
-            $classStartLine = $class->getStartLine(true);
-            $classEndLine   = $class->getEndLine();
-
-            $bodyLines  = explode("\n", $body);
-            $bodyReturn = array();
-            for ($lineNum = 1, $count = count($bodyLines); $lineNum <= $count; $lineNum++) {
-                if ($lineNum == $classStartLine) {
-                    $bodyReturn[] = str_replace(
-                        '?',
-                        $class->getName(),
-                        '/* Zend_Code_Generator_Php_File-ClassMarker: {?} */'
-                    );
-
-                    $lineNum = $classEndLine;
-                } else {
-                    $bodyReturn[] = $bodyLines[$lineNum - 1]; // adjust for index -> line conversion
-                }
-            }
-            $body = implode("\n", $bodyReturn);
-            unset($bodyLines, $bodyReturn, $classStartLine, $classEndLine);
         }
 
         $namespace = $fileReflection->getNamespace();
@@ -139,26 +118,7 @@ class FileGenerator extends AbstractGenerator
         if (($fileReflection->getDocComment() != '')) {
             $docBlock = $fileReflection->getDocBlock();
             $file->setDocBlock(DocBlockGenerator::fromReflection($docBlock));
-
-            $bodyLines  = explode("\n", $body);
-            $bodyReturn = array();
-            for ($lineNum = 1, $count = count($bodyLines); $lineNum <= $count; $lineNum++) {
-                if ($lineNum == $docBlock->getStartLine()) {
-                    $bodyReturn[] = str_replace(
-                        '?',
-                        $class->getName(),
-                        '/* Zend_Code_Generator_FileGenerator-DocBlockMarker */'
-                    );
-                    $lineNum = $docBlock->getEndLine();
-                } else {
-                    $bodyReturn[] = $bodyLines[$lineNum - 1]; // adjust for index -> line conversion
-                }
-            }
-            $body = implode("\n", $bodyReturn);
-            unset($bodyLines, $bodyReturn, $classStartLine, $classEndLine);
         }
-
-        $file->setBody($body);
 
         return $file;
     }
@@ -245,19 +205,6 @@ class FileGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array $classes
-     * @return FileGenerator
-     */
-    public function setClasses(array $classes)
-    {
-        foreach ($classes as $class) {
-            $this->setClass($class);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getNamespace()
@@ -335,6 +282,19 @@ class FileGenerator extends AbstractGenerator
         if (!in_array(array($use, $as), $this->uses)) {
             $this->uses[] = array($use, $as);
         }
+        return $this;
+    }
+
+    /**
+     * @param  array $classes
+     * @return FileGenerator
+     */
+    public function setClasses(array $classes)
+    {
+        foreach ($classes as $class) {
+            $this->setClass($class);
+        }
+
         return $this;
     }
 
@@ -453,14 +413,18 @@ class FileGenerator extends AbstractGenerator
 
         $output = '';
 
-        // start with the body (if there), or open tag
+        // @note body gets populated when FileGenerator created
+        // from a file.  @see fromReflection and may also be set
+        // via FileGenerator::setBody
         $body = $this->getBody();
+
+        // start with the body (if there), or open tag
         if (preg_match('#(?:\s*)<\?php#', $body) == false) {
             $output = '<?php' . self::LINE_FEED;
         }
 
         // if there are markers, put the body into the output
-        if (preg_match('#/\* Zend_Code_Generator_FileGenerator-(.*?)Marker:#', $body)) {
+        if (preg_match('#/\* Zend_Code_Generator_Php_File-(.*?)Marker:#m', $body)) {
             $tokens = token_get_all($body);
             foreach ($tokens as $token) {
                 if (is_array($token) && in_array($token[0], array(T_OPEN_TAG, T_COMMENT, T_DOC_COMMENT, T_WHITESPACE))
@@ -475,8 +439,8 @@ class FileGenerator extends AbstractGenerator
         if (null !== ($docBlock = $this->getDocBlock())) {
             $docBlock->setIndentation('');
 
-            if (preg_match('#/* Zend_Code_Generator_FileGenerator-DocBlockMarker */#', $output)) {
-                $output = preg_replace('#/* Zend_CodeGenerator_Php_File-DocBlockMarker */#', $docBlock->generate(),
+            if (preg_match('#/\* Zend_Code_Generator_FileGenerator-DocBlockMarker \*/#m', $output)) {
+                $output = preg_replace('#/\* Zend_Code_Generator_FileGenerator-DocBlockMarker \*/#m', $docBlock->generate(),
                                        $output, 1);
             } else {
                 $output .= $docBlock->generate() . self::LINE_FEED;
@@ -489,7 +453,13 @@ class FileGenerator extends AbstractGenerator
         // namespace, if any
         $namespace = $this->getNamespace();
         if ($namespace) {
-            $output .= sprintf('namespace %s;%s', $namespace, str_repeat(self::LINE_FEED, 2));
+            $namespace = sprintf('namespace %s;%s', $namespace, str_repeat(self::LINE_FEED, 2));
+            if (preg_match('#/\* Zend_Code_Generator_FileGenerator-NamespaceMarker \*/#m', $output)) {
+                $output = preg_replace('#/\* Zend_Code_Generator_FileGenerator-NamespaceMarker \*/#m', $namespace,
+                    $output, 1);
+            } else {
+                $output .= $namespace;
+            }
         }
 
         // process required files
@@ -503,28 +473,53 @@ class FileGenerator extends AbstractGenerator
             $output .= self::LINE_FEED;
         }
 
+        $classes = $this->getClasses();
+        $classUses = array();
+        //build uses array
+        foreach ($classes as $class) {
+            //check for duplicate use statements
+            $uses = $class->getUses();
+            if(!empty($uses) && is_array($uses)) {
+                $classUses = array_merge($classUses, $uses);
+            }
+        }
+
         // process import statements
         $uses = $this->getUses();
         if (!empty($uses)) {
+            $useOutput = '';
+
             foreach ($uses as $use) {
                 list($import, $alias) = $use;
                 if (null === $alias) {
-                    $output .= sprintf('use %s;%s', $import, self::LINE_FEED);
+                    $tempOutput = sprintf('%s', $import);
                 } else {
-                    $output .= sprintf('use %s as %s;%s', $import, $alias, self::LINE_FEED);
+                    $tempOutput = sprintf('%s as %s', $import, $alias);
+                }
+
+                //don't duplicate use statements
+                if(!in_array($tempOutput, $classUses)) {
+                    $useOutput .= "use ". $tempOutput .";";
+                    $useOutput .= self::LINE_FEED;
                 }
             }
-            $output .= self::LINE_FEED;
+            $useOutput .= self::LINE_FEED;
+
+            if (preg_match('#/\* Zend_Code_Generator_FileGenerator-UseMarker \*/#m', $output)) {
+                $output = preg_replace('#/\* Zend_Code_Generator_FileGenerator-UseMarker \*/#m', $useOutput,
+                    $output, 1);
+            } else {
+                $output .= $useOutput;
+            }
+
         }
 
         // process classes
-        $classes = $this->getClasses();
         if (!empty($classes)) {
             foreach ($classes as $class) {
-                $regex = str_replace('?', $class->getName(),
-                                     '/* Zend_Code_Generator_FileGenerator-ClassMarker: {?} */');
-                $regex = preg_quote($regex, '#');
-                if (preg_match('#' . $regex . '#', $output)) {
+                $regex = str_replace('&', $class->getName(),
+                                     '/\* Zend_Code_Generator_Php_File-ClassMarker: \{[A-Za-z0-9\\\]+?&\} \*/');
+                if (preg_match('#' . $regex . '#m', $output)) {
                     $output = preg_replace('#' . $regex . '#', $class->generate(), $output, 1);
                 } else {
                     if ($namespace) {

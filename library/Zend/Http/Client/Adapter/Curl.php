@@ -390,8 +390,9 @@ class Curl implements HttpAdapter, StreamInterface
             curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
         } elseif ($method == 'PATCH') {
             curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
-        } elseif ($method == 'DELETE' && $body) {
-            // DELETE requests can also have a body
+        } elseif ($method == 'DELETE') {
+            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
+        } elseif ($method == 'OPTIONS') {
             curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
         }
 

@@ -114,7 +114,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
         $starSuffix = $platform->getIdentifierSeparator() . self::SQL_STAR;
         foreach ($selectParameters[0] as $i => $columnParameters) {
-            if ($columnParameters[0] == self::SQL_STAR 
+            if ($columnParameters[0] == self::SQL_STAR
                 || (isset($columnParameters[1]) && $columnParameters[1] == self::SQL_STAR)
                 || strpos($columnParameters[0], $starSuffix)
             ) {

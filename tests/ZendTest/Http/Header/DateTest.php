@@ -30,38 +30,36 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Http\Header\Date', $dateHeader);
     }
 
-    public function testDateFromTimeCreatesValidDateHeader()
+    public function testDateFromTimeStringCreatesValidDateHeader()
     {
-        // testing using a strtotime()-compatible string
-        $dateHeader = Date::fromTime('+12 hours');
+        $dateHeader = Date::fromTimeString('+12 hours');
         $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $dateHeader);
         $this->assertInstanceOf('Zend\Http\Header\Date', $dateHeader);
         $date     = new \DateTime(null, new \DateTimeZone('GMT'));
         $interval = $dateHeader->date()->diff($date, true);
-        $this->assertSame('+12 hours', $interval->format('%R%H hours'));
-
-        // testing using unix time
-        $dateHeader = Date::fromTime(time() + 12 * 60 * 60);
-        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $dateHeader);
-        $this->assertInstanceOf('Zend\Http\Header\Date', $dateHeader);
-        $date     = new \DateTime(null, new \DateTimeZone('GMT'));
-        $interval = $dateHeader->date()->diff($date, true);
-        $this->assertSame('+12 hours', $interval->format('%R%H hours'));
+        $this->assertSame('+12 hours 00 minutes 00 seconds', $interval->format('%R%H hours %I minutes %S seconds'));
     }
 
-    public function testDateFromTimeDetectsBadInput()
+    public function testDateFromTimestampCreatesValidDateHeader()
     {
-        // testing using a movie title
-        try {
-            $badResult = Date::fromTime('3 Days of the Condor');
-        } catch (InvalidArgumentException $e) {
-            // nothing to do here - the exception is meant to be silently discarded
-        }
+        $dateHeader = Date::fromTimestamp(time() + 12 * 60 * 60);
+        $this->assertInstanceOf('Zend\Http\Header\HeaderInterface', $dateHeader);
+        $this->assertInstanceOf('Zend\Http\Header\Date', $dateHeader);
+        $date     = new \DateTime(null, new \DateTimeZone('GMT'));
+        $interval = $dateHeader->date()->diff($date, true);
+        $this->assertSame('+12 hours 00 minutes 00 seconds', $interval->format('%R%H hours %I minutes %S seconds'));
+    }
 
-        // $badResult would only be set if the exception was not properly thrown
-        if (isset($badResult)) {
-            $this->fail('Expected an exception to be thrown in Date::fromTime()');
-        }
+    public function testDateFromTimeStringDetectsBadInput()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $badResult = Date::fromTimeString('3 Days of the Condor');
+    }
+
+    public function testDateFromTimestampDetectsBadInput()
+    {
+        $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
+        $badResult = Date::fromTimestamp('The Day of the Jackal');
     }
 
     public function testDateGetFieldNameReturnsHeaderName()

@@ -377,13 +377,22 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test for pull request 6301
-     * Previous functionality would have thrown an exception
-     * This test serves to verify that exception is not thrown
+     * @group 6301
      */
     public function testCanSpecifyCustomAuthMethodsInExtendingClasses()
     {
         $client = new ExtendedClient();
+
         $client->setAuth('username', 'password', ExtendedClient::AUTH_CUSTOM);
+
+        $this->assertAttributeEquals(
+            array (
+                'user'     => 'username',
+                'password' => 'password',
+                'type'     => ExtendedClient::AUTH_CUSTOM,
+            ),
+            'auth',
+            $client
+        );
     }
 }

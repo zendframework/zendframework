@@ -12,12 +12,12 @@ namespace Zend\Stdlib\Hydrator\NamingStrategy;
 class ArrayMapNamingStrategy implements NamingStrategyInterface
 {
     /**
-     * @var array
+     * @var string[]
      */
     protected $hydrationMap = array();
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $extractionMap = array();
 

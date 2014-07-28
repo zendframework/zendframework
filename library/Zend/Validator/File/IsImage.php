@@ -40,8 +40,7 @@ class IsImage extends MimeType
      */
     public function __construct($options = array())
     {
-        // http://de.wikipedia.org/wiki/Liste_von_Dateiendungen
-        // http://www.iana.org/assignments/media-types/image/
+        // http://www.iana.org/assignments/media-types/media-types.xhtml#image
         $default = array(
             'application/cdf',
             'application/dicom',

@@ -17,7 +17,7 @@ class NoPaddingTest extends \PHPUnit_Framework_TestCase
      * @var NoPadding
      */
     protected $padding;
-    
+
     public function setUp()
     {
         $this->padding = new NoPadding();
@@ -28,7 +28,7 @@ class NoPaddingTest extends \PHPUnit_Framework_TestCase
         $string = 'test';
         for ($size=0; $size<10; $size++) {
             $this->assertEquals($string, $this->padding->pad($string, $size));
-        }    
+        }
     }
 
     public function testStrip()

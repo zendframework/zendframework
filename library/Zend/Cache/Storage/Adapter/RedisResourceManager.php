@@ -162,10 +162,12 @@ class RedisResourceManager
      * array('host' => <host>[, 'port' => <port>[, 'timeout' => <timeout>]])
      *
      * @param string|array $server
+     * @return string|null password parsed from server URI string if any
      * @throws Exception\InvalidArgumentException
      */
     protected function normalizeServer(&$server)
     {
+        $password = null;
         $host    = null;
         $port    = null;
         $timeout = 0;
@@ -192,9 +194,10 @@ class RedisResourceManager
         } else {
             // parse server from URI host{:?port}
             $server = trim($server);
-            if (!strpos($server, '/') === 0) {
+            if (strpos($server, '/') !== 0) {
                 //non unix domain socket connection
                 $server = parse_url($server);
+                $password = isset($server['pass']) ? $server['pass'] : null;
             } else {
                 $server = array('host' => $server);
             }
@@ -216,6 +219,7 @@ class RedisResourceManager
             'port'    => $port,
             'timeout' => $timeout,
         );
+        return $password;
     }
 
     /**
@@ -288,7 +292,10 @@ class RedisResourceManager
             // normalize and validate params
             $this->normalizePersistentId($resource['persistent_id']);
             $this->normalizeLibOptions($resource['lib_options']);
-            $this->normalizeServer($resource['server']);
+            $password = $this->normalizeServer($resource['server']);
+            if (empty($resource['password']) && $password !== null){
+                $resource['password'] = $password;
+            }
         } else {
             //there are two ways of determining if redis is already initialized
             //with connect function:
@@ -543,13 +550,21 @@ class RedisResourceManager
             ));
         }
 
-        $this->normalizeServer($server);
+        $password = $this->normalizeServer($server);
 
         $resource = & $this->resources[$id];
         if ($resource['resource'] instanceof RedisResource) {
-            $this->setResource($id, array('server' => $server));
+            if (empty($resource['password']) && $password) {
+                $this->setResource($id, array('server' => $server, 'password' => $password));
+            }
+            else {
+                $this->setResource($id, array('server' => $server));
+            }
         } else {
             $resource['server'] = $server;
+            if (empty($resource['password']) && $password) {
+                $resource['password'] = $password;
+            }
         }
         return $this;
     }

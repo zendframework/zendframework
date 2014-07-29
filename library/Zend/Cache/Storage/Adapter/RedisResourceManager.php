@@ -293,7 +293,7 @@ class RedisResourceManager
             $this->normalizePersistentId($resource['persistent_id']);
             $this->normalizeLibOptions($resource['lib_options']);
             $password = $this->normalizeServer($resource['server']);
-            if (empty($resource['password']) && $password !== null){
+            if (empty($resource['password']) && $password !== null) {
                 $resource['password'] = $password;
             }
         } else {
@@ -556,8 +556,7 @@ class RedisResourceManager
         if ($resource['resource'] instanceof RedisResource) {
             if (empty($resource['password']) && $password) {
                 $this->setResource($id, array('server' => $server, 'password' => $password));
-            }
-            else {
+            } else {
                 $this->setResource($id, array('server' => $server));
             }
         } else {

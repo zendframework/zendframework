@@ -144,7 +144,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsPrependingValidators()
     {
-        $this->validator->attach($this->getValidatorTrue())
+        $this->validator->attach($this->getValidatorTrue(), false)
             ->prependValidator($this->getValidatorFalse(), true);
         $this->assertFalse($this->validator->isValid(true));
         $messages = $this->validator->getMessages();
@@ -153,11 +153,29 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
 
     public function testAllowsPrependingValidatorsByName()
     {
-        $this->validator->attach($this->getValidatorTrue())
+        $this->validator->attach($this->getValidatorTrue(), false)
             ->prependByName('NotEmpty', array(), true);
         $this->assertFalse($this->validator->isValid(''));
         $messages = $this->validator->getMessages();
         $this->assertArrayHasKey('isEmpty', $messages);
+    }
+
+    public function testValidatorsAreExecutedAccordingToPriority()
+    {
+        $this->validator->attach($this->getValidatorTrue(), false, 1000)
+                        ->attach($this->getValidatorFalse(), true, 2000);
+        $this->assertFalse($this->validator->isValid(true));
+        $messages = $this->validator->getMessages();
+        $this->assertArrayHasKey('error', $messages);
+    }
+
+    public function testPrependValidatorsAreExecutedAccordingToPriority()
+    {
+        $this->validator->attach($this->getValidatorTrue(), false, 1000)
+            ->prependValidator($this->getValidatorFalse(), true);
+        $this->assertFalse($this->validator->isValid(true));
+        $messages = $this->validator->getMessages();
+        $this->assertArrayHasKey('error', $messages);
     }
 
     public function testCountGivesCountOfAttachedValidators()

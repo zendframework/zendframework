@@ -612,4 +612,18 @@ class CollectionInputFilterTest extends TestCase
         $values = $inputFilter->getValues();
         $this->assertEquals($data, $values);
     }
+    
+    public function testInvalidCollectionIsNotValid()
+    {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
+        $data = 1;
+
+        $this->filter->setInputFilter($this->getBaseInputFilter());
+        $this->filter->setData($data);
+
+        $this->assertFalse($this->filter->isValid());
+    }
 }

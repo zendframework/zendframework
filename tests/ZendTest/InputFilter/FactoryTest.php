@@ -570,6 +570,13 @@ class FactoryTest extends TestCase
         $this->assertSame($inputFilterManager, $factory->getInputFilterManager());
     }
 
+    public function testSetInputFilterManagerOnConstruct()
+    {
+        $inputFilterManager = new InputFilterPluginManager();
+        $factory = new Factory($inputFilterManager);
+        $this->assertSame($inputFilterManager, $factory->getInputFilterManager());
+    }
+
     /**
      * @group 5691
      *

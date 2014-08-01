@@ -10,10 +10,10 @@
 namespace Zend\Form\Element;
 
 use Zend\Form\Element;
-use Zend\I18n\Validator\Float as NumberValidator;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\GreaterThan as GreaterThanValidator;
 use Zend\Validator\LessThan as LessThanValidator;
+use Zend\Validator\Regex as RegexValidator;
 use Zend\Validator\Step as StepValidator;
 
 class Number extends Element implements InputProviderInterface
@@ -44,9 +44,11 @@ class Number extends Element implements InputProviderInterface
         }
 
         $validators = array();
-        $validators[] = new NumberValidator(array(
-            'locale' => 'en_US', // HTML5 uses "100.01" format
-        ));
+        // HTML5 always transmits values in the format "1000.01", without a
+        // thousand separator. The prior use of the i18n Float validator
+        // allowed the thousand separator, which resulted in wrong numbers
+        // when casting to float.
+        $validators[] = new RegexValidator('(^-?\d*(\.\d+)?$)');
 
         $inclusive = true;
         if (isset($this->attributes['inclusive'])) {

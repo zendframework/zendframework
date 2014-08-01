@@ -497,4 +497,41 @@ CODE;
         $this->assertEquals($expected, $output);
     }
 
+    /**
+     * @group 6253
+     */
+    public function testHereDoc()
+    {
+        $reflector = new ClassReflection('ZendTest\Code\Generator\TestAsset\TestClassWithHeredoc');
+        $classGenerator = new ClassGenerator();
+        $methods = $reflector->getMethods();
+        $classGenerator->setName("OutputClass");
+
+        foreach ($methods as $method) {
+            $methodGenerator = MethodGenerator::fromReflection($method);
+
+            $classGenerator->addMethodFromGenerator($methodGenerator);
+        }
+
+        $contents = <<< 'CODE'
+class OutputClass
+{
+
+    public function someFunction()
+    {
+        $output = <<< END
+
+                Fix it, fix it!
+                Fix it, fix it!
+                Fix it, fix it!
+END;
+    }
+
+
+}
+
+CODE;
+
+        $this->assertEquals($contents, $classGenerator->generate());
+    }
 }

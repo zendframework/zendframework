@@ -15,16 +15,15 @@
     "target-dir": "Zend/Barcode",
     "require": {
         "php": ">=5.3.23",
-        "zendframework/zend-stdlib": "self.version"
+        "zendframework/zend-stdlib": "self.version",
+        "zendframework/zend-validator": "self.version"
     },
     "require-dev": {
         "zendframework/zend-servicemanager": "self.version",
-        "zendframework/zend-validator": "self.version",
         "zendframework/zendpdf": "*"
     },
     "suggest": {
-        "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
-        "zendframework/zend-validator": "Zend\\Validator component",
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component, required when using the factory methods of Zend\\Barcode.",
         "zendframework/zendpdf": "ZendPdf component"
     },
     "extra": {

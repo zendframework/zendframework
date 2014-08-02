@@ -6,7 +6,6 @@
  * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace ZendTest\Authentication\Adapter\DbTable;
 
 use Zend\Authentication;
@@ -15,11 +14,12 @@ use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\Sql\Select as DBSelect;
 
 /**
- * @group      Zend_Auth
- * @group      Zend_Db_Table
+ * @group Zend_Auth
+ * @group Zend_Db_Table
  */
 class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * IbmDb2 database connection
      *
@@ -38,16 +38,16 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
      * Database adapter configuration
      */
     protected $dbAdapterParams = array(
-        'driver'   => 'IbmDb2',
-        'dbname'   => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_DATABASE,
+        'driver' => 'IbmDb2',
+        'dbname' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_DATABASE,
         'username' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_USERNAME,
         'password' => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_PASSWORD,
         'platform_options' => array(
-            'quote_identifiers' => false,
+            'quote_identifiers' => false
         ),
         'driver_options' => array(
-            'i5_commit'  => DB2_I5_TXN_NO_COMMIT,
-        	'i5_naming'  => DB2_I5_NAMING_OFF,
+            'i5_commit' => DB2_I5_TXN_NO_COMMIT,
+            'i5_naming' => DB2_I5_NAMING_OFF
         )
     );
 
@@ -68,8 +68,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
         ) {
             $this->markTestSkipped('Tests are not enabled in TestConfiguration.php');
             return;
-        }
-        elseif (!extension_loaded('ibm_db2')) {
+        } elseif (! extension_loaded('ibm_db2')) {
             $this->markTestSkipped('ibm_db2 extension is not loaded');
             return;
         }
@@ -84,12 +83,16 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
         if ($this->db instanceof DbAdapter) {
             // BIND, REBIND or DROP operations fail when the package is in use
             // by the same application process
-            $this->db->getDriver()->getConnection()->disconnect();
+            $this->db->getDriver()
+                ->getConnection()
+                ->disconnect();
 
             $this->db = new DbAdapter($this->dbAdapterParams);
 
             $this->db->query("DROP TABLE {$this->tableName}", DbAdapter::QUERY_MODE_EXECUTE);
-            $this->db->getDriver()->getConnection()->disconnect();
+            $this->db->getDriver()
+                ->getConnection()
+                ->disconnect();
         }
         $this->db = null;
     }
@@ -120,7 +123,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
     /**
      * Ensures expected behavior for for authentication failure
      * reason: Identity not found.
-    */
+     */
     public function testAuthenticateFailureIdentityNotFound()
     {
         $this->authAdapter->setIdentity('non_existent_username');
@@ -166,22 +169,24 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
         $this->authAdapter->setCredential('my_password');
         $this->authAdapter->authenticate();
         $resultRow = $this->authAdapter->getResultRowObject();
-        // Since we did not set db2_attr_case, column name will be upper case
+        // Since we did not set db2_attr_case, column name is upper case, as expected
         $this->assertEquals($resultRow->USERNAME, 'my_username');
     }
 
     /**
      * Ensure that ResultRowObject returns only what told to be included
-    */
+     */
     public function testGetSpecificResultRow()
     {
         $this->authAdapter->setIdentity('my_username');
         $this->authAdapter->setCredential('my_password');
         $this->authAdapter->authenticate();
-        // Since we did not set db2_attr_case, column name will be upper case
-        $resultRow = $this->authAdapter->getResultRowObject(array('USERNAME', 'REAL_NAME'));
-        $this->assertEquals('O:8:"stdClass":2:{s:8:"USERNAME";s:11:"my_username";s:9:"REAL_NAME";s:12:"My Real Name";}',
-                            serialize($resultRow));
+        // Since we did not set db2_attr_case, column names will be upper case, as expected
+        $resultRow = $this->authAdapter->getResultRowObject(array(
+            'USERNAME',
+            'REAL_NAME'
+        ));
+        $this->assertEquals('O:8:"stdClass":2:{s:8:"USERNAME";s:11:"my_username";s:9:"REAL_NAME";s:12:"My Real Name";}', serialize($resultRow));
     }
 
     /**
@@ -192,9 +197,9 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
         $this->authAdapter->setIdentity('my_username');
         $this->authAdapter->setCredential('my_password');
         $this->authAdapter->authenticate();
+        // Since we did not set db2_attr_case, column names will be upper case, as expected
         $resultRow = $this->authAdapter->getResultRowObject(null, 'PASSWORD');
-        $this->assertEquals('O:8:"stdClass":3:{s:2:"ID";i:1;s:8:"USERNAME";s:11:"my_username";s:9:"REAL_NAME";s:12:"My Real Name";}',
-                            serialize($resultRow));
+        $this->assertEquals('O:8:"stdClass":3:{s:2:"ID";i:1;s:8:"USERNAME";s:11:"my_username";s:9:"REAL_NAME";s:12:"My Real Name";}', serialize($resultRow));
     }
 
     /**
@@ -230,54 +235,50 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
         $this->authAdapter->setCredential('my_password');
         $this->authAdapter->authenticate();
         $selectAfterAuth = $this->authAdapter->getDbSelect();
-        $whereParts      = $selectAfterAuth->where->getPredicates();
+        $whereParts = $selectAfterAuth->where->getPredicates();
         $this->assertEquals(1, count($whereParts));
 
-        $lastWherePart  = array_pop($whereParts);
+        $lastWherePart = array_pop($whereParts);
         $expressionData = $lastWherePart[1]->getExpressionData();
         $this->assertEquals('1 = 1', $expressionData[0][0]);
     }
 
     /**
      * Ensure that exceptions are caught
-    */
+     */
     public function testCatchExceptionNoTable()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException',
-                                    'A table must be supplied for');
+        $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException', 'A table must be supplied for');
         $adapter = new Adapter\DbTable($this->db);
         $adapter->authenticate();
     }
 
     /**
      * Ensure that exceptions are thrown
-    */
+     */
     public function testCatchExceptionNoIdentityColumn()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException',
-                                    'An identity column must be supplied for the');
+        $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException', 'An identity column must be supplied for the');
         $adapter = new Adapter\DbTable($this->db, 'users');
         $adapter->authenticate();
     }
 
     /**
      * Ensure that exceptions are thrown
-    */
+     */
     public function testCatchExceptionNoCredentialColumn()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException',
-                                    'A credential column must be supplied');
+        $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException', 'A credential column must be supplied');
         $adapter = new Adapter\DbTable($this->db, 'users', 'username');
         $adapter->authenticate();
     }
 
     /**
      * Ensure that exceptions are thrown
-    */
+     */
     public function testCatchExceptionNoIdentity()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException',
-                                    'A value for the identity was not provided prior');
+        $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException', 'A value for the identity was not provided prior');
         $this->authAdapter->authenticate();
     }
 
@@ -286,19 +287,17 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
      */
     public function testCatchExceptionNoCredential()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException',
-                                    'A credential value was not provided prior');
+        $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException', 'A credential value was not provided prior');
         $this->authAdapter->setIdentity('my_username');
         $this->authAdapter->authenticate();
     }
 
     /**
      * Ensure that exceptions are thrown
-    */
+     */
     public function testCatchExceptionBadSql()
     {
-        $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException',
-                                    'The supplied parameters to');
+        $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException', 'The supplied parameters to');
         $this->authAdapter->setTableName('bad_table_name');
         $this->authAdapter->setIdentity('value');
         $this->authAdapter->setCredential('value');
@@ -307,23 +306,22 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
 
     /**
      * Test to see same usernames with different passwords can not authenticate
-     * when flag is not set. This is the current state of
+     * when flag is not set.
+     * This is the current state of
      * Zend_Auth_Adapter_DbTable (up to ZF 1.10.6)
      *
-     * @group   ZF-7289
-    */
-   public function testEqualUsernamesDifferentPasswordShouldNotAuthenticateWhenFlagIsNotSet()
+     * @group ZF-7289
+     */
+    public function testEqualUsernamesDifferentPasswordShouldNotAuthenticateWhenFlagIsNotSet()
     {
         $sqlInsert = "INSERT INTO $this->tableName (id, username, password, real_name) "
                    . 'VALUES (2, \'my_username\', \'my_otherpass\', \'Test user 2\')';
         $this->db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
 
         // test if user 1 can authenticate
-        $this->authAdapter->setIdentity('my_username')
-                          ->setCredential('my_password');
+        $this->authAdapter->setIdentity('my_username')->setCredential('my_password');
         $result = $this->authAdapter->authenticate();
-        $this->assertTrue(in_array('More than one record matches the supplied identity.',
-                                   $result->getMessages()));
+        $this->assertTrue(in_array('More than one record matches the supplied identity.', $result->getMessages()));
         $this->assertFalse($result->isValid());
     }
 
@@ -331,7 +329,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
      * Test to see same usernames with different passwords can authenticate when
      * a flag is set
      *
-     * @group   ZF-7289
+     * @group ZF-7289
      */
     public function testEqualUsernamesDifferentPasswordShouldAuthenticateWhenFlagIsSet()
     {
@@ -341,11 +339,10 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
 
         // test if user 1 can authenticate
         $this->authAdapter->setIdentity('my_username')
-                          ->setCredential('my_password')
-                          ->setAmbiguityIdentity(true);
+            ->setCredential('my_password')
+            ->setAmbiguityIdentity(true);
         $result = $this->authAdapter->authenticate();
-        $this->assertFalse(in_array('More than one record matches the supplied identity.',
-                                    $result->getMessages()));
+        $this->assertFalse(in_array('More than one record matches the supplied identity.', $result->getMessages()));
         $this->assertTrue($result->isValid());
         $this->assertEquals('my_username', $result->getIdentity());
 
@@ -354,11 +351,10 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
 
         // test if user 2 can authenticate
         $this->authAdapter->setIdentity('my_username')
-                          ->setCredential('my_otherpass')
-                          ->setAmbiguityIdentity(true);
+            ->setCredential('my_otherpass')
+            ->setAmbiguityIdentity(true);
         $result2 = $this->authAdapter->authenticate();
-        $this->assertFalse(in_array('More than one record matches the supplied identity.',
-                                    $result->getMessages()));
+        $this->assertFalse(in_array('More than one record matches the supplied identity.', $result->getMessages()));
         $this->assertTrue($result2->isValid());
         $this->assertEquals('my_username', $result2->getIdentity());
     }
@@ -368,14 +364,14 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
         $this->createDbAdapter($optionalParams);
 
         $sqlInsert = "INSERT INTO $this->tableName (id, username, password, real_name) "
-        . 'VALUES (1, \'my_username\', \'my_password\', \'My Real Name\')';
+                   . 'VALUES (1, \'my_username\', \'my_password\', \'My Real Name\')';
 
         $this->db->query($sqlInsert, DbAdapter::QUERY_MODE_EXECUTE);
     }
 
     protected function createDbAdapter($optionalParams = array())
     {
-        if (!empty($optionalParams)) {
+        if (! empty($optionalParams)) {
             $this->dbAdapterParams['options'] = $optionalParams;
         }
 
@@ -393,12 +389,6 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
 
     protected function setupAuthAdapter()
     {
-        $this->authAdapter = new Adapter\DbTable\CredentialTreatmentAdapter(
-            $this->db,
-            $this->tableName,
-            'username',
-            'password'
-        );
+        $this->authAdapter = new Adapter\DbTable\CredentialTreatmentAdapter($this->db, $this->tableName, 'username', 'password');
     }
-
 }

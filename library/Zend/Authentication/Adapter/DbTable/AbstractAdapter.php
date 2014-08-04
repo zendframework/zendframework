@@ -324,6 +324,11 @@ abstract class AbstractAdapter extends BaseAdapter
             $resultIdentities = array();
             // iterate result, most cross platform way
             foreach ($result as $row) {
+                // ZF-6428 - account for db engines that by default return uppercase column names
+                if (isset($row['ZEND_AUTH_CREDENTIAL_MATCH'])) {
+                    $row['zend_auth_credential_match'] = $row['ZEND_AUTH_CREDENTIAL_MATCH'];
+                    unset($row['ZEND_AUTH_CREDENTIAL_MATCH']);
+                }
                 $resultIdentities[] = $row;
             }
         } catch (\Exception $e) {

@@ -28,9 +28,7 @@ class OriginTest extends \PHPUnit_Framework_TestCase
 
     public function testOriginGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('Origin needs to be completed');
-
-        $OriginHeader = new Origin();
+        $OriginHeader = Origin::fromString('Origin: http://zend.org');
         $this->assertEquals('http://zend.org', $OriginHeader->getFieldValue());
     }
 

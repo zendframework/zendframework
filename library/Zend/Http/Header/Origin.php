@@ -37,9 +37,7 @@ class Origin implements HeaderInterface
         }
 
         // @todo implementation details
-        $header = new static($value);
-
-        return $header;
+        return new static($value);        
     }
     
     public function __construct($value = null)

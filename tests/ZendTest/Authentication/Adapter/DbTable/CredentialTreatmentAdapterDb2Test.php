@@ -43,8 +43,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
         'username'         => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_USERNAME,
         'password'         => TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_PASSWORD,
         'platform_options' => array('quote_identifiers' => false),
-        'driver_options'   => array('i5_commit' => DB2_I5_TXN_NO_COMMIT,
-                                    'i5_naming' => DB2_I5_NAMING_OFF),
+        'driver_options'   => array(),
     );
 
     /**
@@ -63,11 +62,14 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
             || constant('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_DB2_ENABLED') === false
         ) {
             $this->markTestSkipped('Tests are not enabled in TestConfiguration.php');
-            return;
-        } elseif (! extension_loaded('ibm_db2')) {
-            $this->markTestSkipped('ibm_db2 extension is not loaded');
-            return;
         }
+
+        if (! extension_loaded('ibm_db2')) {
+            $this->markTestSkipped('ibm_db2 extension is not loaded');
+        }
+
+        $this->dbAdapterParams['driver_options']['i5_commit'] = constant('DB2_I5_TXN_NO_COMMIT');
+        $this->dbAdapterParams['driver_options']['i5_naming'] = constant('DB2_I5_NAMING_OFF');
 
         $this->setupDbAdapter();
         $this->setupAuthAdapter();

@@ -1,5 +1,6 @@
 <?php
 $finder = Symfony\CS\Finder\DefaultFinder::create()
+    ->notPath('Zend/View/Stream.php')
     ->notPath('ZendTest/Code/Generator/TestAsset')
     ->notPath('ZendTest/Code/Reflection/FunctionReflectionTest.php')
     ->notPath('ZendTest/Code/Reflection/MethodReflectionTest.php')
@@ -8,6 +9,8 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->notPath('ZendTest/Validator/_files')
     ->notPath('ZendTest/Loader/_files')
     ->notPath('ZendTest/Loader/TestAsset')
+    ->notPath('demos')
+    ->notPath('resources')
     ->filter(function (SplFileInfo $file) {
         if (strstr($file->getPath(), 'compatibility')) {
             return false;

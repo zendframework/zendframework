@@ -9,3 +9,5 @@ build/
 composer.lock
 nbproject
 tmp/
+
+composer.phar

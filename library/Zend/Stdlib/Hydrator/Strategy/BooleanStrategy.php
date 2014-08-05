@@ -11,6 +11,11 @@ namespace Zend\Stdlib\Hydrator\Strategy;
 
 use Zend\Stdlib\Exception\InvalidArgumentException;
 
+/**
+ * This Strategy extracts and hydrates int and string values to Boolean values
+ *
+ * @package Zend\Stdlib\Hydrator\Strategy
+ */
 class BooleanStrategy implements StrategyInterface
 {
     /**

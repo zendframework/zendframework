@@ -113,6 +113,7 @@ class InputFilterTest extends TestCase
         $this->filter->add($input, 'username');
         $this->filter->setData(array('username' => 'Mwop'));
 
+        $this->filter->isValid($context);
     }
 
 }

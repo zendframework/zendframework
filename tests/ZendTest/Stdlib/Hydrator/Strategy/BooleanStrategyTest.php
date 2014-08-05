@@ -14,28 +14,43 @@ use Zend\Stdlib\Hydrator\Strategy\BooleanStrategy;
 class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::__construct
+     */
     public function testNoExceptionOnValidInteger()
     {
         $hydrator = new BooleanStrategy(1, 0);
     }
 
+    /**
+     * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::__construct
+     */
     public function testNoExceptionOnValidStringValues()
     {
         $hydrator = new BooleanStrategy('true', 'false');
     }
 
+    /**
+     * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::__construct
+     */
     public function testExceptionOnWrongTrueValueInConstructor()
     {
         $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException', 'Expected int or string as $trueValue.');
         $hydrator = new BooleanStrategy(true, 0);
     }
 
+    /**
+     * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::__construct
+     */
     public function testExceptionOnWrongFalseValueInConstructor()
     {
         $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException', 'Expected int or string as $falseValue.');
         $hydrator = new BooleanStrategy(1, false);
     }
 
+    /**
+     * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::extract
+     */
     public function testExtractString()
     {
         $hydrator = new BooleanStrategy('true', 'false');
@@ -43,6 +58,9 @@ class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('false', $hydrator->extract(false));
     }
 
+    /**
+     * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::extract
+     */
     public function testExtractInteger()
     {
         $hydrator = new BooleanStrategy(1, 0);
@@ -50,6 +68,9 @@ class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $hydrator->extract(false));
     }
 
+    /**
+     * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::extract
+     */
     public function testExtractThrowsExceptionOnWrongParameter()
     {
         $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException', 'Unable to extract');
@@ -57,6 +78,9 @@ class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
         $hydrator->extract(5);
     }
 
+    /**
+     * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::hydrate
+     */
     public function testHydrateString()
     {
         $hydrator = new BooleanStrategy('true', 'false');
@@ -64,6 +88,9 @@ class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $hydrator->hydrate('false'));
     }
 
+    /**
+     * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::hydrate
+     */
     public function testHydrateInteger()
     {
         $hydrator = new BooleanStrategy(1, 0);
@@ -71,6 +98,9 @@ class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $hydrator->hydrate(0));
     }
 
+    /**
+     * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::hydrate
+     */
     public function testHydrateUnexpectedValueThrowsException()
     {
         $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException', 'Unexpected value');
@@ -78,6 +108,9 @@ class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
         $hydrator->hydrate(2);
     }
 
+    /**
+     * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::hydrate
+     */
     public function testHydrateInvalidArgument()
     {
         $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException', 'Unable to hydrate');

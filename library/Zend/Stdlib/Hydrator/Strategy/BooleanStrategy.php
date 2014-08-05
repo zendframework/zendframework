@@ -62,7 +62,7 @@ class BooleanStrategy implements StrategyInterface
      */
     public function extract($value)
     {
-        if (is_object($value) || !is_bool($value)) {
+        if (!is_bool($value)) {
             throw new InvalidArgumentException(sprintf(
                 'Unable to extract. Expected bool. %s was given.',
                 is_object($value) ? get_class($value) : gettype($value)

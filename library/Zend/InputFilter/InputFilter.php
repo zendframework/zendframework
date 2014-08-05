@@ -62,5 +62,4 @@ class InputFilter extends BaseInputFilter
         }
         return parent::add($input, $name);
     }
-
 }

@@ -115,5 +115,4 @@ class InputFilterTest extends TestCase
 
         $this->filter->isValid($context);
     }
-
 }

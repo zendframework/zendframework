@@ -686,16 +686,15 @@ class BaseInputFilter implements
     }
 
     /**
-     * Chain the inputs from an InputFilter into the current one
+     * Merges the inputs from an InputFilter into the current one
      *
      * @param BaseInputFilter $inputFilter
      * @return $this
      */
-    public function chainInputFilter(BaseInputFilter $inputFilter)
+    public function mergeInputFilter(BaseInputFilter $inputFilter)
     {
         foreach ($inputFilter->getInputs() as $name => $input) {
             $this->add($input, $name);
         }
-        return $this;
     }
 }

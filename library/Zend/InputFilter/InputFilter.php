@@ -60,6 +60,7 @@ class InputFilter extends BaseInputFilter
             $factory = $this->getFactory();
             $input = $factory->createInput($input);
         }
+        return parent::add($input, $name);
     }
 
 }

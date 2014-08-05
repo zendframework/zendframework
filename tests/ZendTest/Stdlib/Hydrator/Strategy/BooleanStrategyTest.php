@@ -13,6 +13,29 @@ use Zend\Stdlib\Hydrator\Strategy\BooleanStrategy;
 
 class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
 {
+
+    public function testNoExceptionOnValidInteger()
+    {
+        $hydrator = new BooleanStrategy(1, 0);
+    }
+
+    public function testNoExceptionOnValidStringValues()
+    {
+        $hydrator = new BooleanStrategy('true', 'false');
+    }
+
+    public function testExceptionOnWrongTrueValueInConstructor()
+    {
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException', 'Expected int or string as $trueValue.');
+        $hydrator = new BooleanStrategy(true, 0);
+    }
+
+    public function testExceptionOnWrongFalseValueInConstructor()
+    {
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException', 'Expected int or string as $falseValue.');
+        $hydrator = new BooleanStrategy(1, false);
+    }
+
     public function testExtractString()
     {
         $hydrator = new BooleanStrategy('true', 'false');

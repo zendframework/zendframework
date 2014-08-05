@@ -28,8 +28,27 @@ class BooleanStrategy implements StrategyInterface
      */
     protected $falseValue;
 
+    /**
+     * @param int|string $trueValue
+     * @param int|string $falseValue
+     * @throws \Zend\Stdlib\Exception\InvalidArgumentException
+     */
     public function __construct($trueValue, $falseValue)
     {
+        if (!is_int($trueValue) && !is_string($trueValue)) {
+            throw new InvalidArgumentException(sprintf(
+                'Unable to instantiate BooleanStrategy. Expected int or string as $trueValue. %s was given',
+                is_object($trueValue) ? get_class($trueValue) : gettype($trueValue)
+            ));
+        }
+
+        if (!is_int($falseValue) && !is_string($falseValue)) {
+            throw new InvalidArgumentException(sprintf(
+                'Unable to instantiate BooleanStrategy. Expected int or string as $falseValue. %s was given',
+                is_object($falseValue) ? get_class($falseValue) : gettype($falseValue)
+            ));
+        }
+
         $this->trueValue = $trueValue;
         $this->falseValue = $falseValue;
     }

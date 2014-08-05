@@ -70,10 +70,10 @@ class BooleanStrategy implements StrategyInterface
         }
 
         if ($value === true) {
-            return $this->getTrueValue();
+            return $this->trueValue;
         }
 
-        return $this->getFalseValue();
+        return $this->falseValue;
     }
 
     /**
@@ -92,35 +92,20 @@ class BooleanStrategy implements StrategyInterface
             ));
         }
 
-        if ($value === $this->getTrueValue()) {
+        if ($value === $this->trueValue) {
             return true;
         }
 
-        if ($value === $this->getFalseValue()) {
+        if ($value === $this->falseValue) {
             return false;
         }
 
         throw new InvalidArgumentException(sprintf(
             'Unexpected value %s can\'t be hydrated. Expect %s or %s as Value.',
             $value,
-        $this->getTrueValue(),
-        $this->getFalseValue()
+        $this->trueValue,
+        $this->falseValue
         ));
     }
 
-    /**
-     * @return int|string
-     */
-    public function getTrueValue()
-    {
-        return $this->trueValue;
-    }
-
-    /**
-     * @return int|string
-     */
-    public function getFalseValue()
-    {
-        return $this->falseValue;
-    }
 }

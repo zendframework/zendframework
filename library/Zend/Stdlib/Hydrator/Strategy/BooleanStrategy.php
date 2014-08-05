@@ -103,8 +103,8 @@ class BooleanStrategy implements StrategyInterface
         throw new InvalidArgumentException(sprintf(
             'Unexpected value %s can\'t be hydrated. Expect %s or %s as Value.',
             $value,
-        $this->trueValue,
-        $this->falseValue
+            $this->trueValue,
+            $this->falseValue
         ));
     }
 

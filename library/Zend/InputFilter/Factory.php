@@ -41,7 +41,7 @@ class Factory
     {
         $this->defaultFilterChain    = new FilterChain();
         $this->defaultValidatorChain = new ValidatorChain();
-        
+
         if ($inputFilterManager) {
             $this->setInputFilterManager($inputFilterManager);
         }

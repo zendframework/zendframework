@@ -128,7 +128,7 @@ class CollectionInputFilter extends InputFilter
     public function getCount()
     {
         if (null === $this->count) {
-            $this->count = count($this->data);
+            return count($this->data);
         }
 
         return $this->count;

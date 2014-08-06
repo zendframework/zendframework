@@ -161,13 +161,11 @@ class Apache implements PasswordInterface
     {
         $format = strtolower($format);
         if (!in_array($format, $this->supportedFormat)) {
-            throw new Exception\InvalidArgumentException(
-                sprintf(
-                    'The format %s specified is not valid. The supported formats are: %s',
-                    $format,
-                    implode(',', $this->supportedFormat)
-                )
-            );
+            throw new Exception\InvalidArgumentException(sprintf(
+                'The format %s specified is not valid. The supported formats are: %s',
+                $format,
+                implode(',', $this->supportedFormat)
+            ));
         }
         $this->format = $format;
 

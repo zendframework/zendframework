@@ -17,6 +17,7 @@
         "php": ">=5.3.23",
         "zendframework/zend-eventmanager": "self.version",
         "zendframework/zend-servicemanager": "self.version",
+        "zendframework/zend-form": "self.version",
         "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {
@@ -24,7 +25,6 @@
         "zendframework/zend-console": "self.version",
         "zendframework/zend-di": "self.version",
         "zendframework/zend-filter": "self.version",
-        "zendframework/zend-form": "self.version",
         "zendframework/zend-http": "self.version",
         "zendframework/zend-i18n": "self.version",
         "zendframework/zend-inputfilter": "self.version",
@@ -45,7 +45,6 @@
         "zendframework/zend-console": "Zend\\Console component",
         "zendframework/zend-di": "Zend\\Di component",
         "zendframework/zend-filter": "Zend\\Filter component",
-        "zendframework/zend-form": "Zend\\Form component",
         "zendframework/zend-http": "Zend\\Http component",
         "zendframework/zend-i18n": "Zend\\I18n component for translatable segments",
         "zendframework/zend-inputfilter": "Zend\\Inputfilter component",

@@ -178,13 +178,13 @@ class Code128 extends AbstractObject
     protected static function _isDigit($string, $pos, $length = 2)
     {
         if ($pos + $length > strlen($string)) {
-           return false;
+            return false;
         }
 
         for ($i = $pos; $i < $pos + $length; $i++) {
-              if (!is_numeric($string[$i])) {
-                  return false;
-              }
+            if (!is_numeric($string[$i])) {
+                return false;
+            }
         }
         return true;
     }

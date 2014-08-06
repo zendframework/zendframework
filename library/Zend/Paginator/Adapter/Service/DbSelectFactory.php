@@ -31,7 +31,7 @@ class DbSelectFactory implements FactoryInterface
 
     /**
      * @param ServiceLocatorInterface $serviceLocator
-     * @return \Zend\Navigation\Navigation
+     * @return \Zend\Paginator\Adapter\DbSelect
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

@@ -852,11 +852,11 @@ class CollectionTest extends TestCase
     public function testCanBindObjectMultipleNestedFieldsets()
     {
         $productFieldset = new ProductFieldset();
-        $productFieldset->setHydrator(new ClassMethods());
+        $productFieldset->setHydrator(new ArraySerializable());
         $productFieldset->setObject(new Product());
 
         $nestedFieldset = new Fieldset('nested');
-        $nestedFieldset->setHydrator(new ClassMethods());
+        $nestedFieldset->setHydrator(new ObjectPropertyHydrator());
         $nestedFieldset->setObject(new stdClass());
         $nestedFieldset->add(array(
             'name' => 'products',
@@ -869,7 +869,7 @@ class CollectionTest extends TestCase
 
         $mainFieldset = new Fieldset('main');
         $mainFieldset->setUseAsBaseFieldset(true);
-        $mainFieldset->setHydrator(new ClassMethods());
+        $mainFieldset->setHydrator(new ObjectPropertyHydrator());
         $mainFieldset->setObject(new stdClass());
         $mainFieldset->add(array(
             'name' => 'nested',
@@ -899,13 +899,26 @@ class CollectionTest extends TestCase
         $shop[1] = new stdClass();
         $shop[1]->products = $products;
 
-        $market->main = $shop;
+        $market->nested = $shop;
         $form->bind($market);
 
         //test for object binding
+
+        // Main fieldset has a collection 'nested'...
+        $this->assertCount(1, $form->get('main')->getFieldsets());
         foreach ($form->get('main')->getFieldsets() as $_fieldset) {
+            // ...which contains two stdClass objects (shops)
+            $this->assertCount(2, $_fieldset->getFieldsets());
             foreach ($_fieldset->getFieldsets() as $_nestedfieldset) {
-                $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Product', $_nestedfieldset->get('products')->getObject());
+                // Each shop is represented by a single fieldset
+                $this->assertCount(1, $_nestedfieldset->getFieldsets());
+                foreach ( $_nestedfieldset->getFieldsets() as $_productfieldset) {
+                    // Each shop fieldset contain a collection with two products in it
+                    $this->assertCount(2, $_productfieldset->getFieldsets());
+                    foreach ( $_productfieldset->getFieldsets() as $_product) {
+                        $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Product', $_product->getObject());
+                    }
+                }
             }
         };
     }

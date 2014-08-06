@@ -552,4 +552,14 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $container->baz = 'boo';
         $this->assertEquals('boo', $storage['foo']['baz']);
     }
+
+    public function testGetArrayCopyAfterExchangeArray()
+    {
+        $this->container->exchangeArray(array('foo'=>'bar'));
+
+        $contents = $this->container->getArrayCopy();
+
+        $this->assertInternalType('array', $contents);
+        $this->assertArrayHasKey('foo', $contents, "'getArrayCopy' doesn't return exchanged array");
+    }
 }

@@ -189,31 +189,11 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      */
     public function getContents($includeDocBlock = true)
     {
-        $fileName = $this->getFileName();
-
-        if ((class_exists($this->class) && !$fileName) || ! file_exists($fileName)) {
-            return ''; // probably from eval'd code, return empty
-        }
-
-        $lines = array_slice(
-            file($fileName, FILE_IGNORE_NEW_LINES),
-            $this->getStartLine() - 1,
-            ($this->getEndLine() - ($this->getStartLine() - 1)),
-            true
-        );
-
-        $functionLine = implode("\n", $lines);
-        $name         = preg_quote($this->getName());
-        preg_match('#[(public|protected|private|abstract|final|static)\s*]*function\s+' . $name . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)?}#s', $functionLine, $matches);
-
-        if (!isset($matches[0])) {
-            return false;
-        }
-
-        $content    = $matches[0];
         $docComment = $this->getDocComment();
+        $content  = ($includeDocBlock && !empty($docComment)) ? $docComment . "\n" : '';
+        $content .= $this->extractMethodContents();
 
-        return $includeDocBlock && $docComment ? $docComment . "\n" . $content : $content;
+        return $content;
     }
 
     /**
@@ -223,9 +203,20 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      */
     public function getBody()
     {
+        return $this->extractMethodContents(true);
+    }
+
+    /**
+     * Tokenize method string and return concatenated body
+     *
+     * @param bool $bodyOnly
+     * @return string
+     */
+    protected function extractMethodContents($bodyOnly=false)
+    {
         $fileName = $this->getDeclaringClass()->getFileName();
 
-        if (false === $fileName || ! file_exists($fileName)) {
+        if ((class_exists($this->class) && false === $fileName) || ! file_exists($fileName)) {
             return '';
         }
 
@@ -237,16 +228,237 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         );
 
         $functionLine = implode("\n", $lines);
-        $name = preg_quote($this->getName());
-        preg_match('#[(public|protected|private|abstract|final|static)\s*]*function\s+' . $name . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)}#s', $functionLine, $matches);
+        $tokens = token_get_all("<?php ". $functionLine);
 
-        if (!isset($matches[1])) {
-            return false;
+        //remove first entry which is php open tag
+        array_shift($tokens);
+
+        if(!count($tokens)) {
+            return '';
         }
 
-        $body = $matches[1];
+        $capture = false;
+        $firstBrace = false;
+        $body = '';
 
-        return $body;
+        foreach($tokens as $key => $token) {
+            $tokenType  = (is_array($token)) ? token_name($token[0]) : $token;
+            $tokenValue = (is_array($token)) ? $token[1] : $token;
+
+            switch($tokenType) {
+                case "T_FINAL":
+                case "T_ABSTRACT":
+                case "T_PUBLIC":
+                case "T_PROTECTED":
+                case "T_PRIVATE":
+                case "T_STATIC":
+                case "T_FUNCTION":
+                    // check to see if we have a valid function
+                    // then check if we are inside function and have a closure
+                    if($this->isValidFunction($tokens, $key, $this->getName())) {
+                        if($bodyOnly === false) {
+                            //if first instance of tokenType grab prefixed whitespace
+                            //and append to body
+                            if($capture === false) {
+                                $body .= $this->extractPrefixedWhitespace($tokens, $key);
+                            }
+                            $body .= $tokenValue;
+                        }
+
+                        $capture = true;
+                    } else {
+                        //closure test
+                        if($firstBrace && $tokenType == "T_FUNCTION") {
+                            $body .= $tokenValue;
+                            continue;
+                        }
+                        $capture = false;
+                        continue;
+                    }
+                    break;
+
+                case "{":
+                    if($capture === false) {
+                        continue;
+                    }
+
+                    if($firstBrace === false) {
+                        $firstBrace = true;
+                        if($bodyOnly === true) {
+                            continue;
+                        }
+                    }
+
+                    $body .= $tokenValue;
+                    break;
+
+                case "}":
+                    if($capture === false) {
+                        continue;
+                    }
+
+                    //check to see if this is the last brace
+                    if($this->isEndingBrace($tokens, $key)) {
+                        //capture the end brace if not bodyOnly
+                        if($bodyOnly === false) {
+                            $body .= $tokenValue;
+                        }
+
+                        break 2;
+                    }
+
+                    $body .= $tokenValue;
+                    break;
+
+                default:
+                    if($capture === false) {
+                        continue;
+                    }
+
+                    // if returning body only wait for first brace before capturing
+                    if($bodyOnly === true && $firstBrace !== true) {
+                        continue;
+                    }
+
+                    $body .= $tokenValue;
+                    break;
+            }
+        }
+
+        //remove ending whitespace and return
+        return rtrim($body);
+    }
+
+    /**
+     * Take current position and find any whitespace
+     *
+     * @param $haystack
+     * @param $position
+     * @return string
+     */
+    protected function extractPrefixedWhitespace($haystack, $position)
+    {
+        $content = '';
+        $count = count($haystack);
+        if($position+1 == $count) {
+            return $content;
+        }
+
+        for($i = $position-1;$i >= 0;$i--) {
+            $tokenType = (is_array($haystack[$i])) ? token_name($haystack[$i][0]) : $haystack[$i];
+            $tokenValue = (is_array($haystack[$i])) ? $haystack[$i][1] : $haystack[$i];
+
+            //search only for whitespace
+            if($tokenType == "T_WHITESPACE") {
+                $content .= $tokenValue;
+            } else {
+                break;
+            }
+        }
+
+        return $content;
+    }
+
+    /**
+     * Test for ending brace
+     *
+     * @param $haystack
+     * @param $position
+     * @return bool
+     */
+    protected function isEndingBrace($haystack, $position)
+    {
+        $count = count($haystack);
+
+        //advance one position
+        $position = $position+1;
+
+        if($position == $count) {
+            return true;
+        }
+
+        for($i = $position;$i < $count; $i++) {
+            $tokenType = (is_array($haystack[$i])) ? token_name($haystack[$i][0]) : $haystack[$i];
+            switch($tokenType) {
+                case "T_FINAL":
+                case "T_ABSTRACT":
+                case "T_PUBLIC":
+                case "T_PROTECTED":
+                case "T_PRIVATE":
+                case "T_STATIC":
+                    return true;
+
+                case "T_FUNCTION":
+                    // If a function is encountered and that function is not a closure
+                    // then return true.  otherwise the function is a closure, return false
+                    if($this->isValidFunction($haystack, $i)) {
+                        return true;
+                    }
+                    return false;
+
+                case "}":
+                case ";";
+                case "T_BREAK":
+                case "T_CATCH":
+                case "T_DO":
+                case "T_ECHO":
+                case "T_ELSE":
+                case "T_ELSEIF":
+                case "T_EVAL":
+                case "T_EXIT":
+                case "T_FINALLY":
+                case "T_FOR":
+                case "T_FOREACH":
+                case "T_GOTO":
+                case "T_IF":
+                case "T_INCLUDE":
+                case "T_INCLUDE_ONCE":
+                case "T_PRINT":
+                case "T_STRING":
+                case "T_STRING_VARNAME":
+                case "T_THROW":
+                case "T_USE":
+                case "T_VARIABLE":
+                case "T_WHILE":
+                case "T_YIELD":
+
+                    return false;
+            }
+        }
+    }
+
+    /**
+     * Test to see if current position is valid function or
+     * closure.  Returns true if it's a function and NOT a closure
+     *
+     * @param $haystack
+     * @param $position
+     * @return bool
+     */
+    protected function isValidFunction($haystack, $position, $functionName = null)
+    {
+        $isValid = false;
+        $count = count($haystack);
+        for($i = $position+1;$i < $count; $i++) {
+            $tokenType = (is_array($haystack[$i])) ? token_name($haystack[$i][0]) : $haystack[$i];
+            $tokenValue = (is_array($haystack[$i])) ? $haystack[$i][1] : $haystack[$i];
+
+            //check for occurance of ( or
+            if($tokenType == "T_STRING") {
+                //check to see if function name is passed, if so validate against that
+                if(!is_null($functionName) && $tokenValue != $functionName) {
+                    $isValid = false;
+                    break;
+                }
+
+                $isValid = true;
+                break;
+            } elseif($tokenValue == "(") {
+                break;
+            }
+        }
+
+        return $isValid;
     }
 
     public function toString()

@@ -52,8 +52,8 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         //we need a multi-line method body.
         $assigned = 1;
         $alsoAssigined = 2;
-        return \'mixedValue\';
-    ';
+        return \'mixedValue\';';
+
         $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6', 'doSomething');
         $this->assertEquals($body, $reflectionMethod->getBody());
 
@@ -100,6 +100,9 @@ class MethodReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', $reflectionMethod->getContents());
     }
 
+    /**
+     * @group 6275
+     */
     public function testMethodContentsReturnWithoutDocBlock()
     {
         $contents = <<<CONTENTS
@@ -307,5 +310,48 @@ CONTENTS;
     {
         $reflectionMethod = new MethodReflection('ReflectionClass', 'getName');
         $this->assertSame('', $reflectionMethod->getContents());
+    }
+
+    /**
+     * @group 6275
+     */
+    public function testCodeGetContentsDoesNotThrowExceptionOnDocBlock()
+    {
+
+        $contents = <<<'CONTENTS'
+    function getCacheKey() {
+        $args = func_get_args();
+ 
+        $cacheKey = '';
+ 
+        foreach($args as $arg) {
+            if (is_array($arg)) {
+                foreach ($arg as $argElement) {
+                    $cacheKey = hash("sha256", $cacheKey.$argElement);
+                }
+            }
+            else {
+                $cacheKey = hash("sha256", $cacheKey.$arg);
+            }
+            //blah
+        }
+ 
+        return $cacheKey;
+    }
+CONTENTS;
+
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', 'getCacheKey');
+        $this->assertEquals($contents, $reflectionMethod->getContents(false));
+    }    
+
+    /**
+     * @group 6275
+     */
+    public function testCodeGetBodyReturnsEmptyWithCommentedFunction()
+    {
+        $this->setExpectedException('ReflectionException');
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass11', '__prototype');
+        $reflectionMethod->getBody();
+
     }
 }

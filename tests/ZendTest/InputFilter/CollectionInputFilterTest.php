@@ -612,7 +612,10 @@ class CollectionInputFilterTest extends TestCase
         $values = $inputFilter->getValues();
         $this->assertEquals($data, $values);
     }
-    
+
+    /**
+     * @group 6472
+     */
     public function testNestedCollectionWhereChildDataIsNotOverwritten()
     {
         $items_inputfilter = new BaseInputFilter();

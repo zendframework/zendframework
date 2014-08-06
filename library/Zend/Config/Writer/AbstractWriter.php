@@ -39,11 +39,12 @@ abstract class AbstractWriter implements WriterInterface
 
         set_error_handler(
             function ($error, $message = '', $file = '', $line = 0) use ($filename) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Error writing to "%s": %s',
-                    $filename, $message
-                ), $error);
-            }, E_WARNING
+                throw new Exception\RuntimeException(
+                    sprintf('Error writing to "%s": %s', $filename, $message),
+                    $error
+                );
+            },
+            E_WARNING
         );
 
         try {

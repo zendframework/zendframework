@@ -13,6 +13,16 @@ use Zend\Http\Header\Origin;
 
 class OriginTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @group 6484
+     */
+    public function testOriginFieldValueIsAlwaysAString()
+    {
+        $origin = new Origin();
+
+        $this->assertInternalType('string', $origin->getFieldValue());
+    }
+
     public function testOriginFromStringCreatesValidOriginHeader()
     {
         $OriginHeader = Origin::fromString('Origin: http://zend.org');

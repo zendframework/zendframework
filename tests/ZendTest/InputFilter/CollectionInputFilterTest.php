@@ -149,6 +149,9 @@ class CollectionInputFilterTest extends TestCase
         $this->assertEquals(3, $this->filter->getCount());
     }
 
+    /**
+     * @group 6160
+     */
     public function testGetCountReturnsRightCountOnConsecutiveCallsWithDifferentData()
     {
         $collectionData1 = array(

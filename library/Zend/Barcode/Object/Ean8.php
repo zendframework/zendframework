@@ -103,8 +103,7 @@ class Ean8 extends Ean13
                     $this->fontSize * $this->factor,
                     $this->rotate(
                         $leftPosition,
-                        (int) $this->withBorder * 2
-                            + $this->factor * ($this->barHeight + $this->fontSize) + 1
+                        (int) $this->withBorder * 2 + $this->factor * ($this->barHeight + $this->fontSize) + 1
                     ),
                     $this->font,
                     $this->foreColor,

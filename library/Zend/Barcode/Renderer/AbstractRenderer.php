@@ -304,7 +304,6 @@ abstract class AbstractRenderer implements RendererInterface
         return $this;
     }
 
-
     /**
      * Set the size of a module
      * @return float
@@ -382,8 +381,7 @@ abstract class AbstractRenderer implements RendererInterface
         if ($barcodeHeight != $supportHeight && $this->topOffset == 0) {
             switch ($this->verticalPosition) {
                 case 'middle':
-                    $this->topOffset = floor(
-                            ($supportHeight - $barcodeHeight) / 2);
+                    $this->topOffset = floor(($supportHeight - $barcodeHeight) / 2);
                     break;
                 case 'bottom':
                     $this->topOffset = $supportHeight - $barcodeHeight;
@@ -398,8 +396,7 @@ abstract class AbstractRenderer implements RendererInterface
         if ($barcodeWidth != $supportWidth && $this->leftOffset == 0) {
             switch ($this->horizontalPosition) {
                 case 'center':
-                    $this->leftOffset = floor(
-                            ($supportWidth - $barcodeWidth) / 2);
+                    $this->leftOffset = floor(($supportWidth - $barcodeWidth) / 2);
                     break;
                 case 'right':
                     $this->leftOffset = $supportWidth - $barcodeWidth;

@@ -118,8 +118,7 @@ class Upca extends Ean13
                     $fontSize * $this->factor,
                     $this->rotate(
                         $leftPosition,
-                        (int) $this->withBorder * 2
-                            + $this->factor * ($this->barHeight + $fontSize) + 1
+                        (int) $this->withBorder * 2 + $this->factor * ($this->barHeight + $fontSize) + 1
                     ),
                     $this->font,
                     $this->foreColor,

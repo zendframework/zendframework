@@ -228,7 +228,7 @@ class Image extends AbstractRenderer
 
         // JPEG does not support transparency, if transparentBackground is true and
         // image type is JPEG, ignore transparency
-        if($this->getImageType() != "jpeg" && $this->transparentBackground) {
+        if ($this->getImageType() != "jpeg" && $this->transparentBackground) {
             imagecolortransparent($this->resource, $this->imageBackgroundColor);
         }
 
@@ -335,10 +335,12 @@ class Image extends AbstractRenderer
             $points[3][0] + $this->leftOffset,
             $points[3][1] + $this->topOffset,   );
 
-        $allocatedColor = imagecolorallocate($this->resource,
+        $allocatedColor = imagecolorallocate(
+            $this->resource,
             ($color & 0xFF0000) >> 16,
             ($color & 0x00FF00) >> 8,
-            $color & 0x0000FF         );
+            $color & 0x0000FF
+        );
 
         if ($filled) {
             imagefilledpolygon($this->resource, $newPoints, 4, $allocatedColor);
@@ -361,10 +363,12 @@ class Image extends AbstractRenderer
      */
     protected function drawText($text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
     {
-        $allocatedColor = imagecolorallocate($this->resource,
+        $allocatedColor = imagecolorallocate(
+            $this->resource,
             ($color & 0xFF0000) >> 16,
             ($color & 0x00FF00) >> 8,
-            $color & 0x0000FF         );
+            $color & 0x0000FF
+        );
 
         if ($font == null) {
             $font = 3;
@@ -403,7 +407,8 @@ class Image extends AbstractRenderer
 
             if (!function_exists('imagettfbbox')) {
                 throw new Exception\RuntimeException(
-                    'A font was provided, but this instance of PHP does not have TTF (FreeType) support');
+                    'A font was provided, but this instance of PHP does not have TTF (FreeType) support'
+                );
             }
 
             $box = imagettfbbox($size, 0, $font, $text);
@@ -418,14 +423,16 @@ class Image extends AbstractRenderer
                     $width = ($box[2] - $box[0]);
                     break;
             }
-            imagettftext($this->resource,
+            imagettftext(
+                $this->resource,
                 $size,
                 $orientation,
                 $position[0] - ($width * cos(pi() * $orientation / 180)),
                 $position[1] + ($width * sin(pi() * $orientation / 180)),
                 $allocatedColor,
                 $font,
-                $text);
+                $text
+            );
         }
     }
 }

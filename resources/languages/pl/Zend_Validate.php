@@ -123,7 +123,7 @@ return array(
 
     // Zend\Validator\File\ImageSize
     "Maximum allowed width for image should be '%maxwidth%' but '%width%' detected" => "Plik ma szerokość '%width%'. Maksymalna szerokość to '%maxwidth%'",
-    "Minimum expected width for image should be '%minwidth%' but '%width%' detected" => "Plik ma szerokość '%width%'. Minimalna szerokość to '%maxwidth%'",
+    "Minimum expected width for image should be '%minwidth%' but '%width%' detected" => "Plik ma szerokość '%width%'. Minimalna szerokość to '%minwidth%'",
     "Maximum allowed height for image should be '%maxheight%' but '%height%' detected" => "Plik ma wysokość '%height%'. Maksymalna wysokość to '%maxheight%'",
     "Minimum expected height for image should be '%minheight%' but '%height%' detected" => "Plik ma wysokość '%height%'. Minimalna wysokość to '%minheight%'",
     "The size of image could not be detected" => "Nie można określić rozmiaru pliku",

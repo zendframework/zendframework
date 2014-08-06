@@ -19,8 +19,8 @@ use Zend\Math\Rand;
  */
 class Apache implements PasswordInterface
 {
-    CONST BASE64  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-    CONST ALPHA64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const BASE64  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    const ALPHA64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
     /**
      * @var array
@@ -93,13 +93,13 @@ class Apache implements PasswordInterface
             );
         }
         switch ($this->format) {
-            case 'crypt' :
+            case 'crypt':
                 $hash = crypt($password, Rand::getString(2, self::ALPHA64));
                 break;
-            case 'sha1' :
+            case 'sha1':
                 $hash = '{SHA}' . base64_encode(sha1($password, true));
                 break;
-            case 'md5' :
+            case 'md5':
                 $hash = $this->apr1Md5($password);
                 break;
             case 'digest':
@@ -163,12 +163,13 @@ class Apache implements PasswordInterface
         if (!in_array($format, $this->supportedFormat)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'The format %s specified is not valid. The supported formats are: %s',
-                $format, implode(',', $this->supportedFormat)
+                $format,
+                implode(',', $this->supportedFormat)
             ));
         }
-       $this->format = $format;
+        $this->format = $format;
 
-       return $this;
+        return $this;
     }
 
     /**
@@ -288,7 +289,9 @@ class Apache implements PasswordInterface
         for ($i = 0; $i < 5; $i++) {
             $k = $i + 6;
             $j = $i + 12;
-            if ($j == 16) $j = 5;
+            if ($j == 16) {
+                $j = 5;
+            }
             $tmp = $bin[$i] . $bin[$k] . $bin[$j] . $tmp;
         }
         $tmp = chr(0) . chr(0) . $bin[11] . $tmp;

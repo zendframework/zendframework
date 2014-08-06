@@ -89,7 +89,7 @@ class ObjectCache extends CallbackCache
                 array_unshift($args, $property);
                 return parent::call(array($object, '__get'), $args);
 
-           case '__isset':
+            case '__isset':
                 $property = array_shift($args);
 
                 if (!$options->getObjectCacheMagicProperties()

@@ -9,7 +9,6 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-
 /**
  * These are options specific to the APC adapter
  */

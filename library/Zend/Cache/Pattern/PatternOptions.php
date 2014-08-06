@@ -497,9 +497,9 @@ class PatternOptions extends AbstractOptions
     public function setObject($object)
     {
         if (!is_object($object)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an object; received "%s"', __METHOD__, gettype($object)
-            ));
+            throw new Exception\InvalidArgumentException(
+                sprintf('%s expects an object; received "%s"', __METHOD__, gettype($object))
+            );
         }
         $this->object = $object;
         return $this;

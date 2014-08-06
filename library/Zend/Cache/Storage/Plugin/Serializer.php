@@ -33,17 +33,17 @@ class Serializer extends AbstractPlugin
         $postPriority = -$priority;
 
         // read
-        $this->listeners[] = $events->attach('getItem.post',  array($this, 'onReadItemPost'), $postPriority);
+        $this->listeners[] = $events->attach('getItem.post', array($this, 'onReadItemPost'), $postPriority);
         $this->listeners[] = $events->attach('getItems.post', array($this, 'onReadItemsPost'), $postPriority);
 
         // write
-        $this->listeners[] = $events->attach('setItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
+        $this->listeners[] = $events->attach('setItem.pre', array($this, 'onWriteItemPre'), $prePriority);
         $this->listeners[] = $events->attach('setItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
 
-        $this->listeners[] = $events->attach('addItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
+        $this->listeners[] = $events->attach('addItem.pre', array($this, 'onWriteItemPre'), $prePriority);
         $this->listeners[] = $events->attach('addItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
 
-        $this->listeners[] = $events->attach('replaceItem.pre',  array($this, 'onWriteItemPre'), $prePriority);
+        $this->listeners[] = $events->attach('replaceItem.pre', array($this, 'onWriteItemPre'), $prePriority);
         $this->listeners[] = $events->attach('replaceItems.pre', array($this, 'onWriteItemsPre'), $prePriority);
 
         $this->listeners[] = $events->attach('checkAndSetItem.pre', array($this, 'onWriteItemPre'), $prePriority);
@@ -56,7 +56,7 @@ class Serializer extends AbstractPlugin
         $this->listeners[] = $events->attach('decrementItems.pre', array($this, 'onDecrementItemsPre'), $prePriority);
 
         // overwrite capabilities
-        $this->listeners[] = $events->attach('getCapabilities.post',  array($this, 'onGetCapabilitiesPost'), $postPriority);
+        $this->listeners[] = $events->attach('getCapabilities.post', array($this, 'onGetCapabilitiesPost'), $postPriority);
     }
 
     /**

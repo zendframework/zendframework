@@ -20,7 +20,6 @@ use Zend\Stdlib\ArrayUtils;
  */
 class RedisResourceManager
 {
-
     /**
      * Registered resources
      *
@@ -162,15 +161,15 @@ class RedisResourceManager
      * array('host' => <host>[, 'port' => <port>[, 'timeout' => <timeout>]])
      *
      * @param string|array $server
-     * @return string|null password parsed from server URI string if any
+     *
      * @throws Exception\InvalidArgumentException
      */
     protected function normalizeServer(&$server)
     {
-        $password = null;
         $host    = null;
         $port    = null;
         $timeout = 0;
+
         // convert a single server into an array
         if ($server instanceof Traversable) {
             $server = ArrayUtils::iteratorToArray($server);
@@ -197,7 +196,6 @@ class RedisResourceManager
             if (strpos($server, '/') !== 0) {
                 //non unix domain socket connection
                 $server = parse_url($server);
-                $password = isset($server['pass']) ? $server['pass'] : null;
             } else {
                 $server = array('host' => $server);
             }
@@ -219,7 +217,37 @@ class RedisResourceManager
             'port'    => $port,
             'timeout' => $timeout,
         );
-        return $password;
+    }
+
+    /**
+     * Extract password to be used on connection
+     *
+     * @param mixed $resource
+     * @param mixed $serverUri
+     *
+     * @return string|null
+     */
+    protected function extractPassword($resource, $serverUri)
+    {
+        if (! empty($resource['password'])) {
+            return $resource['password'];
+        }
+
+        if (! is_string($serverUri)) {
+            return null;
+        }
+
+        // parse server from URI host{:?port}
+        $server = trim($serverUri);
+
+        if (strpos($server, '/') === 0) {
+            return null;
+        }
+
+        //non unix domain socket connection
+        $server = parse_url($server);
+
+        return isset($server['pass']) ? $server['pass'] : null;
     }
 
     /**
@@ -292,10 +320,12 @@ class RedisResourceManager
             // normalize and validate params
             $this->normalizePersistentId($resource['persistent_id']);
             $this->normalizeLibOptions($resource['lib_options']);
-            $password = $this->normalizeServer($resource['server']);
-            if (empty($resource['password']) && $password !== null) {
-                $resource['password'] = $password;
-            }
+
+            // #6495 note: order is important here, as `normalizeServer` applies destructive
+            // transformations on $resource['server']
+            $resource['password'] = $this->extractPassword($resource, $resource['server']);
+
+            $this->normalizeServer($resource['server']);
         } else {
             //there are two ways of determining if redis is already initialized
             //with connect function:
@@ -550,21 +580,23 @@ class RedisResourceManager
             ));
         }
 
-        $password = $this->normalizeServer($server);
+        $this->normalizeServer($server);
 
-        $resource = & $this->resources[$id];
+        $resource             = & $this->resources[$id];
+        $resource['password'] = $this->extractPassword($resource, $server);
+
         if ($resource['resource'] instanceof RedisResource) {
-            if (empty($resource['password']) && $password) {
-                $this->setResource($id, array('server' => $server, 'password' => $password));
-            } else {
-                $this->setResource($id, array('server' => $server));
+            $resourceParams = array('server' => $server);
+
+            if (! empty($resource['password'])) {
+                $resourceParams['password'] = $resource['password'];
             }
+
+            $this->setResource($id, $resourceParams);
         } else {
             $resource['server'] = $server;
-            if (empty($resource['password']) && $password) {
-                $resource['password'] = $password;
-            }
         }
+
         return $this;
     }
 

@@ -94,7 +94,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response header, header "%s" do not exists',
+                'Failed asserting response header, header "%s" doesn\'t exist',
                 $header
             ));
         }
@@ -135,7 +135,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response header, header "%s" do not exists',
+                'Failed asserting response header, header "%s" doesn\'t exist',
                 $header
             ));
         }
@@ -168,7 +168,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response header, header "%s" do not exists',
+                'Failed asserting response header, header "%s" doesn\'t exist',
                 $header
             ));
         }
@@ -210,7 +210,7 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
         $responseHeader = $this->getResponseHeader($header);
         if (!$responseHeader) {
             throw new PHPUnit_Framework_ExpectationFailedException(sprintf(
-                'Failed asserting response header, header "%s" do not exists',
+                'Failed asserting response header, header "%s" doesn\'t exist',
                 $header
             ));
         }

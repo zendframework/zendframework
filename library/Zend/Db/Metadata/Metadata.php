@@ -186,7 +186,7 @@ class Metadata implements MetadataInterface
      */
     public function getViewNames($schema = null)
     {
-        return $this->source->getTable($schema);
+        return $this->source->getViewNames($schema);
     }
 
     /**

@@ -15,4 +15,5 @@ use Zend\Authentication\Adapter\Exception\ExceptionInterface as Exception;
  * HTTP Auth Resolver Exception
  */
 interface ExceptionInterface extends Exception
-{}
+{
+}

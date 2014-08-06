@@ -88,14 +88,16 @@ class FileResolver implements ResolverInterface
         if (empty($username)) {
             throw new Exception\InvalidArgumentException('Username is required');
         } elseif (!ctype_print($username) || strpos($username, ':') !== false) {
-            throw new Exception\InvalidArgumentException('Username must consist only of printable characters, '
-                                                              . 'excluding the colon');
+            throw new Exception\InvalidArgumentException(
+                'Username must consist only of printable characters, excluding the colon'
+            );
         }
         if (empty($realm)) {
             throw new Exception\InvalidArgumentException('Realm is required');
         } elseif (!ctype_print($realm) || strpos($realm, ':') !== false) {
-            throw new Exception\InvalidArgumentException('Realm must consist only of printable characters, '
-                                                              . 'excluding the colon.');
+            throw new Exception\InvalidArgumentException(
+                'Realm must consist only of printable characters, excluding the colon.'
+            );
         }
 
         // Open file, read through looking for matching credentials

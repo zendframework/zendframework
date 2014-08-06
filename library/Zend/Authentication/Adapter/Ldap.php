@@ -168,8 +168,10 @@ class Ldap extends AbstractAdapter
     {
         $options = $this->getLdap()->getOptions();
         $name = $options['accountDomainName'];
-        if (!$name)
+        if (!$name) {
             $name = $options['accountDomainNameShort'];
+        }
+
         return $name ? $name : '';
     }
 
@@ -220,8 +222,10 @@ class Ldap extends AbstractAdapter
             $dname = '';
 
             try {
-                if ($messages[1])
+                if ($messages[1]) {
                     $messages[] = $messages[1];
+                }
+
                 $messages[1] = '';
                 $messages[] = $this->optionsToString($options);
 
@@ -341,9 +345,16 @@ class Ldap extends AbstractAdapter
                 switch ($key) {
                     case 'groupScope':
                         $value = (int) $value;
-                        if (in_array($value, array(ZendLdap\Ldap::SEARCH_SCOPE_BASE,
-                                ZendLdap\Ldap::SEARCH_SCOPE_ONE, ZendLdap\Ldap::SEARCH_SCOPE_SUB), true)) {
-                           $adapterOptions[$key] = $value;
+                        if (in_array(
+                            $value,
+                            array(
+                                ZendLdap\Ldap::SEARCH_SCOPE_BASE,
+                                ZendLdap\Ldap::SEARCH_SCOPE_ONE,
+                                ZendLdap\Ldap::SEARCH_SCOPE_SUB,
+                            ),
+                            true
+                        )) {
+                            $adapterOptions[$key] = $value;
                         }
                         break;
                     case 'memberIsDn':

@@ -33,6 +33,70 @@ class RedisResourceManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group 6495
+     */
+    public function testSetServerWithPasswordInUri()
+    {
+        $dummyResId = '1234567890';
+        $server     = 'redis://dummyuser:dummypass@testhost:1234';
+
+        $this->resourceManager->setServer($dummyResId, $server);
+
+        $server = $this->resourceManager->getServer($dummyResId);
+
+        $this->assertEquals('testhost', $server['host']);
+        $this->assertEquals(1234, $server['port']);
+        $this->assertEquals('dummypass', $this->resourceManager->getPassword($dummyResId));
+    }
+
+    /**
+     * @group 6495
+     */
+    public function testSetServerWithPasswordInParameters()
+    {
+        $server      = 'redis://dummyuser:dummypass@testhost:1234';
+        $dummyResId2 = '12345678901';
+        $resource    = array(
+            'persistent_id' => 1234,
+            'server'        => $server,
+            'password'      => 'abcd1234'
+        );
+
+        $this->resourceManager->setResource($dummyResId2, $resource);
+
+        $server = $this->resourceManager->getServer($dummyResId2);
+
+        $this->assertEquals('testhost', $server['host']);
+        $this->assertEquals(1234, $server['port']);
+        $this->assertEquals('abcd1234', $this->resourceManager->getPassword($dummyResId2));
+    }
+
+    /**
+     * @group 6495
+     */
+    public function testSetServerWithPasswordInUriShouldNotOverridePreviousResource()
+    {
+        $server      = 'redis://dummyuser:dummypass@testhost:1234';
+        $server2     = 'redis://dummyuser:dummypass@testhost2:1234';
+        $dummyResId2 = '12345678901';
+        $resource    = array(
+            'persistent_id' => 1234,
+            'server'        => $server,
+            'password'      => 'abcd1234'
+        );
+
+        $this->resourceManager->setResource($dummyResId2, $resource);
+        $this->resourceManager->setServer($dummyResId2, $server2);
+
+        $server = $this->resourceManager->getServer($dummyResId2);
+
+        $this->assertEquals('testhost2', $server['host']);
+        $this->assertEquals(1234, $server['port']);
+        // Password should not be overridden
+        $this->assertEquals('abcd1234', $this->resourceManager->getPassword($dummyResId2));
+    }
+
+    /**
      * Test with 'persistent_id'
      */
     public function testValidPersistentId()

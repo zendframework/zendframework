@@ -67,11 +67,12 @@ class Xml implements ReaderInterface
 
         set_error_handler(
             function ($error, $message = '', $file = '', $line = 0) use ($filename) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Error reading XML file "%s": %s',
-                    $filename, $message
-                ), $error);
-            }, E_WARNING
+                throw new Exception\RuntimeException(
+                    sprintf('Error reading XML file "%s": %s', $filename, $message),
+                    $error
+                );
+            },
+            E_WARNING
         );
         $return = $this->process();
         restore_error_handler();
@@ -100,11 +101,12 @@ class Xml implements ReaderInterface
 
         set_error_handler(
             function ($error, $message = '', $file = '', $line = 0) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Error reading XML string: %s',
-                    $message
-                ), $error);
-            }, E_WARNING
+                throw new Exception\RuntimeException(
+                    sprintf('Error reading XML string: %s', $message),
+                    $error
+                );
+            },
+            E_WARNING
         );
         $return = $this->process();
         restore_error_handler();

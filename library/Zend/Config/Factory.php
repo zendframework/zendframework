@@ -156,7 +156,7 @@ class Factory
     public static function toFile($filename, $config)
     {
         if (
-            (is_object($config) && !($config instanceOf Config)) ||
+            (is_object($config) && !($config instanceof Config)) ||
             (!is_object($config) && !is_array($config))
         ) {
             throw new Exception\InvalidArgumentException(
@@ -186,7 +186,7 @@ class Factory
         }
 
         $writer = static::$writerExtensions[$extension];
-        if (($writer instanceOf Writer\AbstractWriter) === false) {
+        if (($writer instanceof Writer\AbstractWriter) === false) {
             $writer = self::getWriterPluginManager()->get($writer);
             static::$writerExtensions[$extension] = $writer;
         }

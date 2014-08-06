@@ -10,4 +10,5 @@
 namespace Zend\Config\Exception;
 
 interface ExceptionInterface
-{}
+{
+}

@@ -84,14 +84,24 @@ class Request extends AbstractMessage implements RequestInterface
         $lines = explode("\r\n", $string);
 
         // first line must be Method/Uri/Version string
-        $matches = null;
+        $matches   = null;
+        $methods   = $allowCustomMethods
+            ? '[\w-]+'
+            : implode(
+                '|',
+                array(
+                    self::METHOD_OPTIONS,
+                    self::METHOD_GET,
+                    self::METHOD_HEAD,
+                    self::METHOD_POST,
+                    self::METHOD_PUT,
+                    self::METHOD_DELETE,
+                    self::METHOD_TRACE,
+                    self::METHOD_CONNECT,
+                    self::METHOD_PATCH
+                )
+            );
 
-        $standardMethods = array(
-            self::METHOD_OPTIONS, self::METHOD_GET, self::METHOD_HEAD, self::METHOD_POST, self::METHOD_PUT,
-            self::METHOD_DELETE, self::METHOD_TRACE, self::METHOD_CONNECT, self::METHOD_PATCH
-        );
-
-        $methods   = $allowCustomMethods ? '[\w-]+' : implode('|', $standardMethods);
         $regex     = '#^(?P<method>' . $methods . ')\s(?P<uri>[^ ]*)(?:\sHTTP\/(?P<version>\d+\.\d+)){0,1}#';
         $firstLine = array_shift($lines);
         if (!preg_match($regex, $firstLine, $matches)) {

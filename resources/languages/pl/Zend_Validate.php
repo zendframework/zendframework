@@ -185,8 +185,8 @@ return array(
     "File is not readable or does not exist" => "Plik nie istnieje lub nie można go odczytać",
 
     // Zend\Validator\GreaterThan
-    "The input is not greater than '%min%'" => "Podana wartość nie jest większe niż '%min%'",
-    "The input is not greater or equal than '%min%'" => "Podana wartość nie jest większe lub równa od '%min%'",
+    "The input is not greater than '%min%'" => "Podana wartość nie jest większa niż '%min%'",
+    "The input is not greater or equal than '%min%'" => "Podana wartość nie jest większa lub równa od '%min%'",
 
     // Zend\Validator\Hex
     "The input contains non-hexadecimal characters" => "Wartość nie jest wartością heksadecymalną",

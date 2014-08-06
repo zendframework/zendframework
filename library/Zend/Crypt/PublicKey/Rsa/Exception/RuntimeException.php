@@ -14,7 +14,6 @@ use Zend\Crypt\Exception;
 /**
  * Runtime argument exception
  */
-class RuntimeException
-    extends Exception\RuntimeException
-    implements ExceptionInterface
-{}
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
+{
+}

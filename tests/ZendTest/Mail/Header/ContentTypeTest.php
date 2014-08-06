@@ -44,6 +44,9 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Content-Type: foo/bar", $contentTypeHeader->toString());
     }
 
+    /**
+     * @group 6491
+     */
     public function testTrailingSemiColonFromString()
     {
         $contentTypeHeader = ContentType::fromString(

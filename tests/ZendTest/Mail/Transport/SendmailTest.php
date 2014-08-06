@@ -85,7 +85,7 @@ class SendmailTest extends \PHPUnit_Framework_TestCase
         $this->assertContains("From: zf-devteam@zend.com,\n Matthew <matthew@zend.com>\n", $this->additional_headers);
         $this->assertContains("X-Foo-Bar: Matthew\n", $this->additional_headers);
         $this->assertContains("Sender: Ralph Schindler <ralph.schindler@zend.com>\n", $this->additional_headers);
-        $this->assertEquals('-R hdrs -f ralph.schindler@zend.com', $this->additional_parameters);
+        $this->assertEquals('-R hdrs -fralph.schindler@zend.com', $this->additional_parameters);
     }
 
     public function testReceivesMailArtifactsOnWindowsSystems()

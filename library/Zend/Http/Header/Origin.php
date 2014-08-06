@@ -38,7 +38,10 @@ class Origin implements HeaderInterface
 
         return new static($value);
     }
-    
+
+    /**
+     * @param string|null $value
+     */
     public function __construct($value = null)
     {
         $this->value = (string) $value;

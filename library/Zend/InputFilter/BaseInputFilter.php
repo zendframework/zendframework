@@ -587,7 +587,7 @@ class BaseInputFilter implements
                 $input->clearValues();
                 $input->clearRawValues();
             }
-            
+
             if (!isset($this->data[$name])) {
                 // No value; clear value in this input
                 if ($input instanceof InputFilterInterface) {

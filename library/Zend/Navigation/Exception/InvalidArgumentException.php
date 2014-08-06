@@ -14,4 +14,5 @@ namespace Zend\Navigation\Exception;
  */
 class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
-{}
+{
+}

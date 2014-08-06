@@ -36,7 +36,6 @@ class Origin implements HeaderInterface
             throw new Exception\InvalidArgumentException('Invalid header value for Origin key: "' . $name . '"');
         }
 
-        // @todo implementation details
         return new static($value);
     }
     

@@ -16,7 +16,7 @@ use Zend\View\Resolver as ViewResolver;
 class ViewTemplatePathStackFactory implements FactoryInterface
 {
     /**
-     * Create the template map view resolver
+     * Create the template path stack view resolver
      *
      * Creates a Zend\View\Resolver\TemplatePathStack and populates it with the
      * ['view_manager']['template_path_stack'] and sets the default suffix with the

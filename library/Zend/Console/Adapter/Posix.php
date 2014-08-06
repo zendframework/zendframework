@@ -392,12 +392,11 @@ class Posix extends AbstractAdapter
 
         if ($color !== null) {
             if (!isset(static::$ansiColorMap[$type][$color])) {
-                throw new Exception\BadMethodCallException(
-                    sprintf(
-                        'Unknown color "%s". Please use one of the Zend\Console\ColorInterface constants or use Zend\Console\Color\Xterm256::calculate',
-                        $color
-                    )
-                );
+                throw new Exception\BadMethodCallException(sprintf(
+                    'Unknown color "%s". Please use one of the Zend\Console\ColorInterface constants '
+                    . 'or use Zend\Console\Color\Xterm256::calculate',
+                    $color
+                ));
             }
 
             return static::$ansiColorMap[$type][$color];

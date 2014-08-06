@@ -43,7 +43,7 @@ class MethodTag extends AbstractTypeableTag implements TagInterface
      */
     public function getName()
     {
-       return 'method';
+        return 'method';
     }
 
     /**

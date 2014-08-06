@@ -108,7 +108,6 @@ class DocBlockGenerator extends AbstractGenerator
         return static::$tagManager;
     }
 
-
     /**
      * @param  string $shortDescription
      * @param  string $longDescription

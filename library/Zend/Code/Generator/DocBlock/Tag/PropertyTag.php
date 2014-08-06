@@ -35,7 +35,7 @@ class PropertyTag extends AbstractTypeableTag implements TagInterface
      */
     public function getName()
     {
-       return 'property';
+        return 'property';
     }
 
     /**

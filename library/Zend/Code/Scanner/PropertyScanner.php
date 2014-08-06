@@ -244,7 +244,7 @@ class PropertyScanner implements ScannerInterface
         $tokens = &$this->tokens;
         reset($tokens);
 
-        foreach($tokens as $token) {
+        foreach ($tokens as $token) {
             $tempValue = $token;
             if (!is_string($token)) {
                 list($tokenType, $tokenContent, $tokenLine) = $token;
@@ -284,26 +284,26 @@ class PropertyScanner implements ScannerInterface
             }
 
             //end value concatenation
-            if(!is_array($token) && trim($token) == ";") {
+            if (!is_array($token) && trim($token) == ";") {
                 $concatenateValue = false;
             }
 
-            if(true === $concatenateValue) {
+            if (true === $concatenateValue) {
                 $value .= $tempValue;
             }
 
             //start value concatenation
-            if(!is_array($token) && trim($token) == "=") {
+            if (!is_array($token) && trim($token) == "=") {
                 $concatenateValue = true;
             }
         }
 
         $this->valueType = self::T_UNKNOWN;
-        if($value == "false" || $value == "true") {
+        if ($value == "false" || $value == "true") {
             $this->valueType = self::T_BOOLEAN;
-        } elseif(is_numeric($value)) {
+        } elseif (is_numeric($value)) {
             $this->valueType = self::T_INTEGER;
-        } elseif(0 === strpos($value, 'array') || 0 === strpos($value, "[")) {
+        } elseif (0 === strpos($value, 'array') || 0 === strpos($value, "[")) {
             $this->valueType = self::T_ARRAY;
         } elseif (substr($value, 0, 1) === '"' || substr($value, 0, 1) === "'") {
             $value = substr($value, 1, -1); // Remove quotes

@@ -387,8 +387,10 @@ class MethodScanner implements ScannerInterface
             if (is_string($token)) {
                 $tokenType    = null;
                 $tokenContent = $token;
-                $tokenLine    = $tokenLine + substr_count($lastTokenArray[1],
-                                                          "\n"); // adjust token line by last known newline count
+                $tokenLine    = $tokenLine + substr_count(
+                    $lastTokenArray[1],
+                    "\n"
+                ); // adjust token line by last known newline count
             } else {
                 list($tokenType, $tokenContent, $tokenLine) = $token;
             }
@@ -432,32 +434,39 @@ class MethodScanner implements ScannerInterface
                     $this->docComment = $tokenContent;
                 }
                 goto SCANNER_CONTINUE_SIGNATURE;
+                //goto (no break needed);
 
             case T_FINAL:
                 $this->isFinal = true;
                 goto SCANNER_CONTINUE_SIGNATURE;
+                //goto (no break needed);
 
             case T_ABSTRACT:
                 $this->isAbstract = true;
                 goto SCANNER_CONTINUE_SIGNATURE;
+                //goto (no break needed);
 
             case T_PUBLIC:
                 // use defaults
                 goto SCANNER_CONTINUE_SIGNATURE;
+                //goto (no break needed);
 
             case T_PROTECTED:
                 $this->isProtected = true;
                 $this->isPublic    = false;
                 goto SCANNER_CONTINUE_SIGNATURE;
+                //goto (no break needed);
 
             case T_PRIVATE:
                 $this->isPrivate = true;
                 $this->isPublic  = false;
                 goto SCANNER_CONTINUE_SIGNATURE;
+                //goto (no break needed);
 
             case T_STATIC:
                 $this->isStatic = true;
                 goto SCANNER_CONTINUE_SIGNATURE;
+                //goto (no break needed);
 
             case T_VARIABLE:
             case T_STRING:
@@ -476,6 +485,7 @@ class MethodScanner implements ScannerInterface
                 }
 
                 goto SCANNER_CONTINUE_SIGNATURE;
+                //goto (no break needed);
 
             case null:
 
@@ -485,12 +495,14 @@ class MethodScanner implements ScannerInterface
                             $MACRO_INFO_START();
                         }
                         goto SCANNER_CONTINUE_SIGNATURE;
+                        //goto (no break needed);
                     case '(':
                         $parentCount++;
                         goto SCANNER_CONTINUE_SIGNATURE;
+                        //goto (no break needed);
                     case ')':
                         $parentCount--;
-                        if($parentCount > 0) {
+                        if ($parentCount > 0) {
                             goto SCANNER_CONTINUE_SIGNATURE;
                         }
                         if ($parentCount === 0) {
@@ -500,6 +512,7 @@ class MethodScanner implements ScannerInterface
                             $context = 'body';
                         }
                         goto SCANNER_CONTINUE_BODY;
+                        //goto (no break needed);
                     case ',':
                         if ($parentCount === 1) {
                             $MACRO_INFO_ADVANCE();

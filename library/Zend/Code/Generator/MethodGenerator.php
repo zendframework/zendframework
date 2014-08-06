@@ -133,9 +133,13 @@ class MethodGenerator extends AbstractMemberGenerator
      * @param  string $body
      * @param  DocBlockGenerator|string $docBlock
      */
-    public function __construct($name = null, array $parameters = array(), $flags = self::FLAG_PUBLIC, $body = null,
-                                $docBlock = null)
-    {
+    public function __construct(
+        $name = null,
+        array $parameters = array(),
+        $flags = self::FLAG_PUBLIC,
+        $body = null,
+        $docBlock = null
+    ) {
         if ($name) {
             $this->setName($name);
         }

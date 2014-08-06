@@ -109,8 +109,8 @@ abstract class AbstractNavigationFactory implements FactoryInterface
         } elseif ($config instanceof Config\Config) {
             $config = $config->toArray();
         } elseif (!is_array($config)) {
-            throw new Exception\InvalidArgumentException('
-                Invalid input, expected array, filename, or Zend\Config object'
+            throw new Exception\InvalidArgumentException(
+                'Invalid input, expected array, filename, or Zend\Config object'
             );
         }
 
@@ -148,5 +148,4 @@ abstract class AbstractNavigationFactory implements FactoryInterface
         }
         return $pages;
     }
-
 }

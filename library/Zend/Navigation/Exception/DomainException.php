@@ -13,4 +13,5 @@ namespace Zend\Navigation\Exception;
  * Navigation domain exception
  */
 class DomainException extends \DomainException implements ExceptionInterface
-{}
+{
+}

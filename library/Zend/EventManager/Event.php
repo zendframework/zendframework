@@ -97,9 +97,9 @@ class Event implements EventInterface
     public function setParams($params)
     {
         if (!is_array($params) && !is_object($params)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Event parameters must be an array or object; received "%s"', gettype($params)
-            ));
+            throw new Exception\InvalidArgumentException(
+                sprintf('Event parameters must be an array or object; received "%s"', gettype($params))
+            );
         }
 
         $this->params = $params;

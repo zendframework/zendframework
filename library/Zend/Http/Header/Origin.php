@@ -37,12 +37,12 @@ class Origin implements HeaderInterface
         }
 
         // @todo implementation details
-        return new static($value);        
+        return new static($value);
     }
     
     public function __construct($value = null)
     {
-        $this->value = $value;
+        $this->value = (string) $value;
     }
 
     public function getFieldName()

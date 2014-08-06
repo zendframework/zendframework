@@ -11,8 +11,6 @@ namespace Zend\Authentication\Adapter\DbTable\Exception;
 
 use Zend\Authentication\Adapter\Exception;
 
-class InvalidArgumentException
-    extends Exception\InvalidArgumentException
-    implements ExceptionInterface
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
 {
 }

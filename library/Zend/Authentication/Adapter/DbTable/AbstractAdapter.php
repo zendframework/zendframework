@@ -334,8 +334,10 @@ abstract class AbstractAdapter extends BaseAdapter
         } catch (\Exception $e) {
             throw new Exception\RuntimeException(
                 'The supplied parameters to DbTable failed to '
-                    . 'produce a valid sql statement, please check table and column names '
-                    . 'for validity.', 0, $e
+                . 'produce a valid sql statement, please check table and column names '
+                . 'for validity.',
+                0,
+                $e
             );
         }
         return $resultIdentities;

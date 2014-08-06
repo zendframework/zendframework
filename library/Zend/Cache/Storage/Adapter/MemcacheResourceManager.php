@@ -72,11 +72,16 @@ class MemcacheResourceManager
 
         $memc = new MemcacheResource();
         $this->setResourceAutoCompressThreshold(
-            $memc, $resource['auto_compress_threshold'], $resource['auto_compress_min_savings']
+            $memc,
+            $resource['auto_compress_threshold'],
+            $resource['auto_compress_min_savings']
         );
         foreach ($resource['servers'] as $server) {
             $this->addServerToResource(
-                $memc, $server, $this->serverDefaults[$id], $this->failureCallbacks[$id]
+                $memc,
+                $server,
+                $this->serverDefaults[$id],
+                $this->failureCallbacks[$id]
             );
         }
 
@@ -127,7 +132,8 @@ class MemcacheResourceManager
 
             // normalize and validate params
             $this->normalizeAutoCompressThreshold(
-                $resource['auto_compress_threshold'], $resource['auto_compress_min_savings']
+                $resource['auto_compress_threshold'],
+                $resource['auto_compress_min_savings']
             );
             $this->normalizeServers($resource['servers']);
         }
@@ -442,7 +448,10 @@ class MemcacheResourceManager
         if ($resource instanceof MemcacheResource) {
             foreach ($servers as $server) {
                 $this->addServerToResource(
-                    $resource, $server, $this->serverDefaults[$id], $this->failureCallbacks[$id]
+                    $resource,
+                    $server,
+                    $this->serverDefaults[$id],
+                    $this->failureCallbacks[$id]
                 );
             }
         } else {
@@ -475,7 +484,10 @@ class MemcacheResourceManager
      * @param callable|null $failureCallback
      */
     protected function addServerToResource(
-        MemcacheResource $resource, array $server, array $serverDefaults, $failureCallback
+        MemcacheResource $resource,
+        array $server,
+        array $serverDefaults,
+        $failureCallback
     ) {
         // Apply server defaults
         $server = array_merge($serverDefaults, $server);
@@ -604,7 +616,12 @@ class MemcacheResourceManager
             }
             $sTmp[$key] = $value;
         }
-        $sTmp = array_filter($sTmp, function ($val) { return isset($val); });
+        $sTmp = array_filter(
+            $sTmp,
+            function ($val) {
+                return isset($val);
+            }
+        );
 
         $server = $sTmp;
     }

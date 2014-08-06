@@ -332,7 +332,9 @@ class RedisResourceManager
             //1) pinging server
             //2) checking undocumented property socket which is available only
             //after successful connect
-            $resource = array_merge($defaults, array(
+            $resource = array_merge(
+                $defaults,
+                array(
                     'resource' => $resource,
                     'initialized' => isset($resource->socket),
                 )

@@ -516,7 +516,9 @@ class Dba extends AbstractAdapter implements
             $err = ErrorHandler::stop();
             if (!$dba) {
                 throw new Exception\RuntimeException(
-                    "dba_open('{$pathname}', '{$mode}', '{$handler}') failed", 0, $err
+                    "dba_open('{$pathname}', '{$mode}', '{$handler}') failed",
+                    0,
+                    $err
                 );
             }
             $this->handle = $dba;

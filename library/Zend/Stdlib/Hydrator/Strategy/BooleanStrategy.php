@@ -31,7 +31,7 @@ class BooleanStrategy implements StrategyInterface
     /**
      * @param int|string $trueValue
      * @param int|string $falseValue
-     * @throws \Zend\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($trueValue, $falseValue)
     {
@@ -56,9 +56,9 @@ class BooleanStrategy implements StrategyInterface
     /**
      * Converts the given value so that it can be extracted by the hydrator.
      *
-     * @param  mixed  $value  The original value.
-     * @param  object $object (optional) The original object for context.
-     * @return mixed  Returns the value that should be extracted.
+     * @param  bool $value The original value.
+     * @throws InvalidArgumentException
+     * @return int|string Returns the value that should be extracted.
      */
     public function extract($value)
     {
@@ -79,9 +79,9 @@ class BooleanStrategy implements StrategyInterface
     /**
      * Converts the given value so that it can be hydrated by the hydrator.
      *
-     * @param  mixed $value The original value.
-     * @param  array $data  (optional) The original data for context.
-     * @return mixed Returns the value that should be hydrated.
+     * @param  int|string $value The original value.
+     * @throws InvalidArgumentException
+     * @return bool Returns the value that should be hydrated.
      */
     public function hydrate($value)
     {

@@ -50,7 +50,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
             'Content-Type: multipart/alternative; boundary="Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD";'
         );
         $params = $contentTypeHeader->getParameters();
-        $this->assertEquals($params,array('boundary' => 'Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD'));
+        $this->assertEquals($params, array('boundary' => 'Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD'));
     }
 
     public function testProvidingParametersIntroducesHeaderFolding()
@@ -70,7 +70,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
             'Content-Type: multipart/alternative; boundary="Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD"'
         );
         $params = $contentTypeHeader->getParameters();
-        $this->assertEquals($params,array('boundary' => 'Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD'));
+        $this->assertEquals($params, array('boundary' => 'Apple-Mail=_1B852F10-F9C6-463D-AADD-CD503A5428DD'));
     }
 
     /**

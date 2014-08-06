@@ -144,9 +144,13 @@ class ParameterGenerator extends AbstractGenerator
      * @param  int $position
      * @param  bool $passByReference
      */
-    public function __construct($name = null, $type = null, $defaultValue = null, $position = null,
-                                $passByReference = false)
-    {
+    public function __construct(
+        $name = null,
+        $type = null,
+        $defaultValue = null,
+        $position = null,
+        $passByReference = false
+    ) {
         if (null !== $name) {
             $this->setName($name);
         }

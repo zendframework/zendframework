@@ -440,8 +440,7 @@ class FileGenerator extends AbstractGenerator
             $docBlock->setIndentation('');
 
             if (preg_match('#/\* Zend_Code_Generator_FileGenerator-DocBlockMarker \*/#m', $output)) {
-                $output = preg_replace('#/\* Zend_Code_Generator_FileGenerator-DocBlockMarker \*/#m', $docBlock->generate(),
-                                       $output, 1);
+                $output = preg_replace('#/\* Zend_Code_Generator_FileGenerator-DocBlockMarker \*/#m', $docBlock->generate(), $output, 1);
             } else {
                 $output .= $docBlock->generate() . self::LINE_FEED;
             }
@@ -517,8 +516,7 @@ class FileGenerator extends AbstractGenerator
         // process classes
         if (!empty($classes)) {
             foreach ($classes as $class) {
-                $regex = str_replace('&', $class->getName(),
-                                     '/\* Zend_Code_Generator_Php_File-ClassMarker: \{[A-Za-z0-9\\\]+?&\} \*/');
+                $regex = str_replace('&', $class->getName(), '/\* Zend_Code_Generator_Php_File-ClassMarker: \{[A-Za-z0-9\\\]+?&\} \*/');
                 if (preg_match('#' . $regex . '#m', $output)) {
                     $output = preg_replace('#' . $regex . '#', $class->generate(), $output, 1);
                 } else {

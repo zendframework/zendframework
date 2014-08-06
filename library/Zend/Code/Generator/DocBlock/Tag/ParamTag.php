@@ -50,7 +50,7 @@ class ParamTag extends AbstractTypeableTag implements TagInterface
      */
     public function getName()
     {
-       return 'param';
+        return 'param';
     }
 
     /**

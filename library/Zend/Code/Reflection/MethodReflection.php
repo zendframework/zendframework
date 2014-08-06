@@ -168,9 +168,8 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         $phpReflections  = parent::getParameters();
         $zendReflections = array();
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
-            $instance = new ParameterReflection(array(
-                $this->getDeclaringClass()->getName(),
-                $this->getName()),
+            $instance = new ParameterReflection(
+                array($this->getDeclaringClass()->getName(), $this->getName()),
                 $phpReflection->getName()
             );
             $zendReflections[] = $instance;

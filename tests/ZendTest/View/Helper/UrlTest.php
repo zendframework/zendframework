@@ -26,6 +26,16 @@ use Zend\Mvc\Router\SimpleRouteStack as Router;
 class UrlTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var Router
+     */
+    private $router;
+
+    /**
+     * @var UrlHelper
+     */
+    private $url;
+
+    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      */
@@ -88,14 +98,14 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     public function testPluginWithoutRouteMatchesInEventRaisesExceptionWhenNoRouteProvided()
     {
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'RouteMatch');
-        $url = $this->url->__invoke();
+        $this->url->__invoke();
     }
 
     public function testPluginWithRouteMatchesReturningNoMatchedRouteNameRaisesExceptionWhenNoRouteProvided()
     {
         $this->url->setRouteMatch(new RouteMatch(array()));
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'matched');
-        $url = $this->url->__invoke();
+        $this->url->__invoke();
     }
 
     public function testPassingNoArgumentsWithValidRouteMatchGeneratesUrl()

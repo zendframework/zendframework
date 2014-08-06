@@ -48,5 +48,4 @@ class Utf8 implements CharsetInterface
     const LINE_BLOCK_SE = "█";
     const LINE_BLOCK_SW = "█";
     const LINE_BLOCK_CROSS = "█";
-
 }

@@ -24,5 +24,4 @@ class Utf8Heavy extends Utf8
     const LINE_SINGLE_SE = "┛";
     const LINE_SINGLE_SW = "┗";
     const LINE_SINGLE_CROSS = "╋";
-
 }

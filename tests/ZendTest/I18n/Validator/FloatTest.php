@@ -11,6 +11,7 @@ namespace ZendTest\I18n\Validator;
 
 use Zend\I18n\Validator\Float as FloatValidator;
 use Locale;
+use NumberFormatter;
 
 /**
  * @group      Zend_Validator
@@ -22,7 +23,9 @@ class FloatTest extends \PHPUnit_Framework_TestCase
      */
     protected $validator;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $locale;
 
     public function setUp()
@@ -43,31 +46,138 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that the validator follows expected behavior
+     * Test float and interger type variables. Includes decimal and scientific notation NumberFormatter-formatted
+     * versions. Should return true for all locales.
      *
-     * @dataProvider basicProvider
+     * @param string  $value    that will be tested
+     * @param boolean $expected expected result of assertion
+     * @param string  $locale   locale for validation
+     * @dataProvider floatAndIntegerProvider
      * @return void
      */
-    public function testBasic($value, $expected)
+    public function testFloatAndIntegers($value, $expected, $locale, $type)
     {
-        $this->assertEquals($expected, $this->validator->isValid($value),
-                            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false'));
-    }
+        $this->validator->setLocale($locale);
 
-    public function basicProvider()
-    {
-        return array(
-            array(1.00,   true),
-            array(0.01,   true),
-            array(-0.1,   true),
-            array('10.1', true),
-            array('5.00', true),
-            array('10.0', true),
-            array('10.10', true),
-            array(1,      true),
-            array('10.1not a float', false),
+        $this->assertEquals(
+            $expected,
+            $this->validator->isValid($value),
+            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') .
+            sprintf(" (locale:%s, type:%s)", $locale, $type) . ', ICU Version:' . INTL_ICU_VERSION . '-' .
+            INTL_ICU_DATA_VERSION
         );
     }
+
+    public function floatAndIntegerProvider()
+    {
+        $trueArray       = array();
+        $testingLocales  = array('ar', 'bn', 'de', 'dz', 'en', 'fr-CH', 'ja', 'ks', 'ml-IN', 'mr', 'my', 'ps', 'ru');
+        $testingExamples = array(1000, -2000, +398.00, 0.04, -0.5, .6, -.70, 8E10, -9.3456E-2, 10.23E6,
+            123.1234567890987654321);
+
+        //Loop locales and examples for a more thorough set of "true" test data
+        foreach ($testingLocales as $locale) {
+            foreach ($testingExamples as $example) {
+                $trueArray[] = array($example, true, $locale, 'raw');
+                //Decimal Formatted
+                $trueArray[] = array(
+                    NumberFormatter::create($locale, NumberFormatter::DECIMAL)
+                        ->format($example, NumberFormatter::TYPE_DOUBLE),
+                    true,
+                    $locale,
+                    'decimal'
+                );
+                //Scientific Notation Formatted
+                $trueArray[] = array(
+                    NumberFormatter::create($locale, NumberFormatter::SCIENTIFIC)
+                        ->format($example, NumberFormatter::TYPE_DOUBLE),
+                    true,
+                    $locale,
+                    'scientific'
+                );
+            }
+        }
+        return $trueArray;
+    }
+
+    /**
+     * Test manually-generated strings for specific locales. These are "look-alike" strings where graphemes such as
+     * NO-BREAK SPACE, ARABIC THOUSANDS SEPARATOR, and ARABIC DECIMAL SEPARATOR are replaced with more typical ASCII
+     * characters.
+     *
+     * @param string  $value    that will be tested
+     * @param boolean $expected expected result of assertion
+     * @param string  $locale   locale for validation
+     * @dataProvider lookAlikeProvider
+     * @return void
+     */
+    public function testlookAlikes($value, $expected, $locale)
+    {
+        $this->validator->setLocale($locale);
+
+        $this->assertEquals(
+            $expected,
+            $this->validator->isValid($value),
+            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') . sprintf(" (locale:%s)", $locale)
+        );
+    }
+
+    public function lookAlikeProvider()
+    {
+        $trueArray     = array();
+        $testingArray  = array(
+            'ar' => "\xD9\xA1'\xD9\xA1\xD9\xA1\xD9\xA1,\xD9\xA2\xD9\xA3",
+            'ru' => '2 000,00'
+        );
+
+        //Loop locales and examples for a more thorough set of "true" test data
+        foreach ($testingArray as $locale => $example) {
+            $trueArray[] = array($example, true, $locale);
+        }
+        return $trueArray;
+    }
+
+    /**
+     * Test manually-generated strings for specific locales. These are "look-alike" strings where graphemes such as
+     * NO-BREAK SPACE, ARABIC THOUSANDS SEPARATOR, and ARABIC DECIMAL SEPARATOR are replaced with more typical ASCII
+     * characters.
+     *
+     * @param string  $value    that will be tested
+     * @param boolean $expected expected result of assertion
+     * @param string  $locale   locale for validation
+     * @dataProvider validationFailureProvider
+     * @return void
+     */
+    public function testValidationFailures($value, $expected, $locale)
+    {
+        $this->validator->setLocale($locale);
+
+        $this->assertEquals(
+            $expected,
+            $this->validator->isValid($value),
+            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') . sprintf(" (locale:%s)", $locale)
+        );
+    }
+
+    public function validationFailureProvider()
+    {
+        $trueArray     = array();
+        $testingArray  = array(
+            'ar'    => array('10.1', '66notflot.6'),
+            'ru'    => array('10.1', '66notflot.6', '2,000.00', '2 00'),
+            'en'    => array('10,1', '66notflot.6', '2.000,00', '2 000', '2,00'),
+            'fr-CH' => array('10,1', '66notflot.6', '2,000.00', '2 000', "2'00")
+        );
+
+        //Loop locales and examples for a more thorough set of "true" test data
+        foreach ($testingArray as $locale => $exampleArray) {
+            foreach ($exampleArray as $example) {
+                $trueArray[] = array($example, false, $locale);
+            }
+        }
+        return $trueArray;
+    }
+
     /**
      * Ensures that getMessages() returns expected default value
      *
@@ -85,7 +195,6 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     {
         $this->validator->setLocale('de');
         $this->assertEquals('de', $this->validator->getLocale());
-        $this->assertEquals(true, $this->validator->isValid('10,5'));
     }
 
     /**
@@ -103,105 +212,12 @@ class FloatTest extends \PHPUnit_Framework_TestCase
     {
         Locale::setDefault('de');
         $valid = new FloatValidator();
-        $this->assertTrue($valid->isValid(123,456));
-        $this->assertTrue($valid->isValid('123,456'));
-    }
-
-    /**
-     * @ZF-7987
-     */
-    public function testLocaleDeFloatType()
-    {
-        $this->validator->setLocale('de');
-        $this->assertEquals('de', $this->validator->getLocale());
-        $this->assertEquals(true, $this->validator->isValid(10.5));
-    }
-
-    /**
-     * @ZF-7987
-     */
-    public function testPhpLocaleDeFloatType()
-    {
-        Locale::setDefault('de');
-        $valid = new FloatValidator();
-        $this->assertTrue($valid->isValid(10.5));
-    }
-
-    /**
-     * @ZF-7987
-     */
-    public function testPhpLocaleFrFloatType()
-    {
-        Locale::setDefault('fr');
-        $valid = new FloatValidator();
-        $this->assertTrue($valid->isValid(10.5));
-    }
-
-    public function deLocaleStringsProvider()
-    {
-        return array(
-            array('1,3',     true),
-            array('1000,3',  true),
-            array('1.000,3', true),
-        );
-    }
-
-    /**
-     * @ZF-8919
-     * @dataProvider deLocaleStringsProvider
-     */
-    public function testPhpLocaleDeStringType($float, $expected)
-    {
-        Locale::setDefault('de_AT');
-        $valid = new FloatValidator(array('locale' => 'de_AT'));
-        $this->assertEquals($expected, $valid->isValid($float));
-    }
-
-    public function frLocaleStringsProvider()
-    {
-        return array(
-            array('1,3',     true),
-            array('1000,3',  true),
-            array('1 000,3', true),
-            array('1.3',     false),
-            array('1000.3',  false),
-            array('1,000.3', false),
-        );
-    }
-
-    /**
-     * @ZF-8919
-     * @dataProvider frLocaleStringsProvider
-     */
-    public function testPhpLocaleFrStringType($float, $expected)
-    {
-        $valid = new FloatValidator(array('locale' => 'fr_FR'));
-        $this->assertEquals($expected, $valid->isValid($float));
-    }
-
-    public function enLocaleStringsProvider()
-    {
-        return array(
-            array('1.3',     true),
-            array('1000.3',  true),
-            array('1,000.3', true),
-        );
-    }
-
-    /**
-     * @ZF-8919
-     * @dataProvider enLocaleStringsProvider
-     */
-    public function testPhpLocaleEnStringType($float, $expected)
-    {
-        $valid = new FloatValidator(array('locale' => 'en_US'));
-        $this->assertEquals($expected, $valid->isValid($float));
+        $this->assertEquals('de', $valid->getLocale());
     }
 
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'), 'messageTemplates', $validator);
     }
 }

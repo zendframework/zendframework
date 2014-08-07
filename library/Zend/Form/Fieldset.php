@@ -570,6 +570,7 @@ class Fieldset extends Element implements FieldsetInterface
      */
     public function bindValues(array $values = array())
     {
+        $objectData = $this->extract();
         $hydrator = $this->getHydrator();
         $hydratableData = array();
 
@@ -584,7 +585,12 @@ class Fieldset extends Element implements FieldsetInterface
                 $value = $element->bindValues($value);
             }
 
-            $hydratableData[$name] = $value;
+            // skip post values for disabled elements, get old value from object
+            if(!$element->hasAttribute('disabled')) {
+                $hydratableData[$name] = $value;
+            } elseif(array_key_exists($name, $objectData)) {
+                $hydratableData[$name] = $objectData[$name];
+            }
         }
 
         if (!empty($hydratableData)) {

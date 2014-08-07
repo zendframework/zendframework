@@ -25,8 +25,9 @@ class RowGateway extends AbstractRowGateway
      */
     public function __construct($primaryKeyColumn, $table, $adapterOrSql = null)
     {
+
         // setup primary key
-        $this->primaryKeyColumn = (array) $primaryKeyColumn;
+        $this->primaryKeyColumn = empty($primaryKeyColumn) ? null : (array) $primaryKeyColumn;
 
         // set table
         $this->table = $table;

@@ -100,7 +100,7 @@ class NumberFormatTest extends TestCase
                 NumberFormatter::DEFAULT_STYLE,
                 NumberFormatter::TYPE_DOUBLE,
                 1234567.8912346,
-                '1 234 567,891'
+                '1 234 567,891'
             ),
         );
     }
@@ -161,6 +161,6 @@ class NumberFormatTest extends TestCase
     {
         $filter = new NumberFormatFilter('de_AT', NumberFormatter::DEFAULT_STYLE, NumberFormatter::TYPE_DOUBLE);
 
-        $this->assertEquals($input,  $filter->filter($input));
+        $this->assertEquals($input, $filter->filter($input));
     }
 }

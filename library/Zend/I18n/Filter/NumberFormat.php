@@ -27,23 +27,18 @@ class NumberFormat extends NumberParse
             return $value;
         }
 
-        if (!is_int($value)
-            && !is_float($value)
-        ) {
+        if (!is_int($value) && !is_float($value)) {
             $result = parent::filter($value);
         } else {
             ErrorHandler::start();
 
-            $result = $this->getFormatter()->format(
-                $value,
-                $this->getType()
-            );
+            $result = $this->getFormatter()->format($value, $this->getType());
 
             ErrorHandler::stop();
         }
 
         if (false !== $result) {
-            return str_replace("\xC2\xA0", ' ', $result);
+            return $result;
         }
 
         return $value;

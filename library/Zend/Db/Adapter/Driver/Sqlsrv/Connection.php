@@ -332,11 +332,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         return $result;
     }
 
-    public function inTransaction()
-    {
-        return $this->inTransaction;
-    }
-
     /**
      * Prepare
      *

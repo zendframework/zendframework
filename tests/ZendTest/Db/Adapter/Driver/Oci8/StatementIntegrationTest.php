@@ -48,7 +48,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitialize()
     {
-        $ociResource = oci_connect($this->variables['username'], $this->variables['password']);
+        $ociResource = oci_connect($this->variables['username'], $this->variables['password'], $this->variables['hostname']);
 
         $statement = new Statement;
         $this->assertSame($statement, $statement->initialize($ociResource));
@@ -60,7 +60,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetResource()
     {
-        $ociResource = oci_connect($this->variables['username'], $this->variables['password']);
+        $ociResource = oci_connect($this->variables['username'], $this->variables['password'], $this->variables['hostname']);
 
         $statement = new Statement;
         $statement->initialize($ociResource);
@@ -76,7 +76,7 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function testPrepare()
     {
-        $ociResource = oci_connect($this->variables['username'], $this->variables['password']);
+        $ociResource = oci_connect($this->variables['username'], $this->variables['password'], $this->variables['hostname']);
 
         $statement = new Statement;
         $statement->initialize($ociResource);

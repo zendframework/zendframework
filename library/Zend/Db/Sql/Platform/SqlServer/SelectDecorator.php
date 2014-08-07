@@ -13,6 +13,7 @@ use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
+use Zend\Db\Adapter\Driver\Sqlsrv\Statement;
 use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
 use Zend\Db\Sql\Select;
@@ -49,6 +50,12 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
 
         $this->specifications['LIMITOFFSET'] = null;
         parent::prepareStatement($adapter, $statementContainer);
+
+        //set statement cursor type
+        if ($statementContainer instanceof Statement) {
+            $statementContainer->setPrepareOptions(array('Scrollable'=>\SQLSRV_CURSOR_STATIC));
+        }
+
     }
 
     /**

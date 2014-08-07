@@ -9,29 +9,26 @@
 
 namespace ZendTest\I18n\Validator;
 
-use Zend\I18n\Validator\DateTime as DateTimeValidator;
+use DateTime;
+use IntlDateFormatter;
 use Locale;
+use PHPUnit_Framework_TestCase;
+use PHPUnit_Runner_Version;
+use Zend\I18n\Validator\DateTime as DateTimeValidator;
 
-/**
- * @group Zend_Validator
- */
-class DateTimeTest extends \PHPUnit_Framework_TestCase
+class DateTimeTest extends PHPUnit_Framework_TestCase
 {
-
     /**
-     *
      * @var DateTimeValidator
      */
     protected $validator;
 
     /**
-     *
-     * @var \Locale
+     * @var Locale
      */
     protected $locale;
 
     /**
-     *
      * @var \DateTimeZone
      */
     protected $timezone;
@@ -62,11 +59,10 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider basicProvider name of method that provides parameters
      * @param string  $value    that will be tested
      * @param boolean $expected expected result of assertion
      * @param array   $options  fed into the validator before validation
-     * @dataProvider basicProvider name of method that provide the above parameters
-     * @return void
      */
     public function testBasic($value, $expected, $options = array())
     {
@@ -75,21 +71,21 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $expected,
             $this->validator->isValid($value),
-            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false')
-            . sprintf(
-                " (locale:%s, dateType: %s, timeType: %s, pattern:%s)",
-                $this->validator->getLocale(),
-                $this->validator->getDateType(),
-                $this->validator->getTimeType(),
-                $this->validator->getPattern()
-            )
+            sprintf('Failed expecting %s being %s', $value, ($expected ? 'true' : 'false'))
+                . sprintf(
+                    ' (locale:%s, dateType: %s, timeType: %s, pattern:%s)',
+                    $this->validator->getLocale(),
+                    $this->validator->getDateType(),
+                    $this->validator->getTimeType(),
+                    $this->validator->getPattern()
+                )
         );
     }
 
     public function basicProvider()
     {
         if (!extension_loaded('intl')) {
-            if (version_compare(\PHPUnit_Runner_Version::id(), '3.8.0-dev') === 1) {
+            if (version_compare(PHPUnit_Runner_Version::id(), '3.8.0-dev') === 1) {
                 $this->markTestSkipped('ext/intl not enabled');
             } else {
                 return array(
@@ -99,23 +95,23 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
         }
 
         $trueArray      = array();
-        $testingDate    = new \DateTime();
+        $testingDate    = new DateTime();
         $testingLocales = array('en', 'de', 'zh-TW', 'ja', 'ar', 'ru', 'si', 'ml-IN', 'hi');
         $testingFormats = array(
-            \IntlDateFormatter::FULL,
-            \IntlDateFormatter::LONG,
-            \IntlDateFormatter::MEDIUM,
-            \IntlDateFormatter::SHORT,
-            \IntlDateFormatter::NONE
+            IntlDateFormatter::FULL,
+            IntlDateFormatter::LONG,
+            IntlDateFormatter::MEDIUM,
+            IntlDateFormatter::SHORT,
+            IntlDateFormatter::NONE
         );
 
         //Loop locales and formats for a more thorough set of "true" test data
         foreach ($testingLocales as $locale) {
             foreach ($testingFormats as $dateFormat) {
                 foreach ($testingFormats as $timeFormat) {
-                    if (($timeFormat !== \IntlDateFormatter::NONE) || ($dateFormat !== \IntlDateFormatter::NONE)) {
+                    if (($timeFormat !== IntlDateFormatter::NONE) || ($dateFormat !== IntlDateFormatter::NONE)) {
                         $trueArray[] = array(
-                            \IntlDateFormatter::create($locale, $dateFormat, $timeFormat)->format($testingDate),
+                            IntlDateFormatter::create($locale, $dateFormat, $timeFormat)->format($testingDate),
                             true,
                             array('locale' => $locale, 'dateType' => $dateFormat, 'timeType' => $timeFormat)
                         );
@@ -130,8 +126,8 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
                 false,
                 array(
                     'locale' => 'en',
-                    'dateType' => \IntlDateFormatter::FULL,
-                    'timeType' => \IntlDateFormatter::NONE
+                    'dateType' => IntlDateFormatter::FULL,
+                    'timeType' => IntlDateFormatter::NONE
                 )
             )
         );

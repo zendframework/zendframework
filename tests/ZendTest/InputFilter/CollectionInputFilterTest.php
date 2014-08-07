@@ -771,4 +771,14 @@ class CollectionInputFilterTest extends TestCase
         $mainInputFilter->setData($data);
         $this->assertSame($expectedIsValid, $mainInputFilter->isValid());
     }
+
+    public function testInvalidCollectionIsNotValid()
+    {
+        $data = 1;
+
+        $this->filter->setInputFilter($this->getBaseInputFilter());
+        $this->filter->setData($data);
+
+        $this->assertFalse($this->filter->isValid());
+    }
 }

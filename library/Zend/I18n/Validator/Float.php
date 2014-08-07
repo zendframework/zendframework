@@ -174,60 +174,69 @@ class Float extends AbstractValidator
         $suffix      = '';
 
         if (StringUtils::hasPcreUnicodeSupport()) {
-            $prefix = '[' .
-                preg_quote(
-                    $formatter->getTextAttribute(NumberFormatter::POSITIVE_PREFIX) .
-                    $formatter->getTextAttribute(NumberFormatter::NEGATIVE_PREFIX) .
-                    $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL) .
-                    $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL), '/'
-                ) . ']{0,3}';
+            $prefix = '['
+                .  preg_quote(
+                    $formatter->getTextAttribute(NumberFormatter::POSITIVE_PREFIX)
+                    .  $formatter->getTextAttribute(NumberFormatter::NEGATIVE_PREFIX)
+                    .  $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL)
+                    .  $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL),
+                    '/'
+                )
+                . ']{0,3}';
             $suffix = ($formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX))
-                ? '[' .
-                preg_quote(
-                    $formatter->getTextAttribute(NumberFormatter::POSITIVE_SUFFIX) .
-                    $formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX) .
-                    $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL) .
-                    $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL), '/'
-                ) . ']{0,3}'
+                ? '['
+                    .  preg_quote(
+                        $formatter->getTextAttribute(NumberFormatter::POSITIVE_SUFFIX)
+                        .  $formatter->getTextAttribute(NumberFormatter::NEGATIVE_SUFFIX)
+                        .  $formatter->getSymbol(NumberFormatter::PLUS_SIGN_SYMBOL)
+                        .  $formatter->getSymbol(NumberFormatter::MINUS_SIGN_SYMBOL),
+                        '/'
+                    )
+                    . ']{0,3}'
                 : '';
             $numberRange = '\p{N}';
             $useUnicode = 'u';
         }
 
         /**
-         * @desc Match against the formal definition of a float. The exponential number check is modified for RTL
-         *       non-Latin number systems (Arabic-Indic numbering). I'm also switching out the period for the decimal
-         *       separator. The formal definition leaves out +- from the integer and decimal notations so add that.
-         *       This also checks that a grouping sperator is not in the last GROUPING_SIZE graphemes of the string -
-         *       i.e. 10,6 is not valid for en-US.
+         * @desc Match against the formal definition of a float. The
+         *       exponential number check is modified for RTL non-Latin number
+         *       systems (Arabic-Indic numbering). I'm also switching out the period
+         *       for the decimal separator. The formal definition leaves out +- from
+         *       the integer and decimal notations so add that.  This also checks
+         *       that a grouping sperator is not in the last GROUPING_SIZE graphemes
+         *       of the string - i.e. 10,6 is not valid for en-US.
          * @see http://www.php.net/float
          */
 
         $lnum    = '[' . $numberRange . ']+';
         $dnum    = '(([' . $numberRange . ']*' . $decimal . $lnum . ')|(' . $lnum . $decimal . '[' . $numberRange . ']*))';
-        $expDnum = '((' . $prefix . '((' . $lnum . '|' . $dnum . ')' . $exp . $prefix . $lnum . ')'.$suffix.')|' .
-                   '(' . $suffix . '(' . $lnum . $prefix . $exp . '(' . $dnum . '|' . $lnum . '))' . $prefix . '))';
+        $expDnum = '((' . $prefix . '((' . $lnum . '|' . $dnum . ')' . $exp . $prefix . $lnum . ')' . $suffix . ')|'
+            . '(' . $suffix . '(' . $lnum . $prefix . $exp . '(' . $dnum . '|' . $lnum . '))' . $prefix . '))';
 
-        //LEFT-TO-RIGHT MARK (U+200E) is messing up everything for the handful of locales that have it
-        $lnumSearch     = str_replace("\xE2\x80\x8E", '', '/^' .$prefix . $lnum . $suffix . '$/'.$useUnicode);
-        $dnumSearch     = str_replace("\xE2\x80\x8E", '', '/^' .$prefix . $dnum . $suffix . '$/'.$useUnicode);
-        $expDnumSearch  = str_replace("\xE2\x80\x8E", '', '/^' . $expDnum . '$/'.$useUnicode);
+        // LEFT-TO-RIGHT MARK (U+200E) is messing up everything for the handful
+        // of locales that have it
+        $lnumSearch     = str_replace("\xE2\x80\x8E", '', '/^' .$prefix . $lnum . $suffix . '$/' . $useUnicode);
+        $dnumSearch     = str_replace("\xE2\x80\x8E", '', '/^' .$prefix . $dnum . $suffix . '$/' . $useUnicode);
+        $expDnumSearch  = str_replace("\xE2\x80\x8E", '', '/^' . $expDnum . '$/' . $useUnicode);
         $value          = str_replace("\xE2\x80\x8E", '', $value);
         $unGroupedValue = str_replace($groupSeparator, '', $value);
 
-        //No strrpos() in wrappers yet. ICU 4.x doesn't have grouping size for everything. ICU 52 has 3 for ALL locales.
+        // No strrpos() in wrappers yet. ICU 4.x doesn't have grouping size for
+        // everything. ICU 52 has 3 for ALL locales.
         $groupSize = ($formatter->getAttribute(NumberFormatter::GROUPING_SIZE))
-            ? $formatter->getAttribute(NumberFormatter::GROUPING_SIZE) : 3;
+            ? $formatter->getAttribute(NumberFormatter::GROUPING_SIZE)
+            : 3;
         $lastStringGroup = $this->wrapper->substr($value, -$groupSize);
 
-        if ((preg_match($lnumSearch, $unGroupedValue) ||
-            preg_match($dnumSearch, $unGroupedValue) ||
-            preg_match($expDnumSearch, $unGroupedValue)) &&
-            false === $this->wrapper->strpos($lastStringGroup, $groupSeparator)) {
-
+        if ((preg_match($lnumSearch, $unGroupedValue)
+            || preg_match($dnumSearch, $unGroupedValue)
+            || preg_match($expDnumSearch, $unGroupedValue))
+            && false === $this->wrapper->strpos($lastStringGroup, $groupSeparator)
+        ) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 }

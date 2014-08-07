@@ -644,16 +644,16 @@ class CollectionInputFilterTest extends TestCase
                           ->add(new Input(), 'type');
         $items = new CollectionInputFilter();
         $items->setInputFilter($items_inputfilter);
-    
+
         $groups_inputfilter = new BaseInputFilter();
         $groups_inputfilter->add(new Input(), 'group_class')
                            ->add($items, 'items');
         $groups = new CollectionInputFilter();
         $groups->setInputFilter($groups_inputfilter);
-    
+
         $inputFilter = new BaseInputFilter();
         $inputFilter->add($groups, 'groups');
-    
+
         $data = array(
             'groups' => array(
                 array(
@@ -692,7 +692,7 @@ class CollectionInputFilterTest extends TestCase
                 ),
             ),
         );
-    
+
         $inputFilter->setData($data);
         $inputFilter->isValid();
         $values = $inputFilter->getValues();

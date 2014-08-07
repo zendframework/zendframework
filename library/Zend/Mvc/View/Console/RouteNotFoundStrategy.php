@@ -378,6 +378,9 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
         // If there is only 1 column, just concatenate it
         if ($cols == 1) {
             foreach ($data as $row) {
+                if (! isset($row[0])) {
+                    continue;
+                }
                 $result .= $row[0] . "\n";
             }
             return $result;

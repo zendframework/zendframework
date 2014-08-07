@@ -68,7 +68,28 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     public function testSet()
     {
         $this->update->set(array('foo' => 'bar'));
-        $this->assertEquals(array('foo' => 'bar'), $this->readAttribute($this->update, 'set'));
+        $this->assertEquals(array('foo' => 'bar'), $this->update->getRawState('set'));
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Update::set
+     */
+    public function testSortableSet()
+    {
+        $this->update->set(array(
+            'two'   => 'с_two',
+            'three' => 'с_three',
+        ));
+        $this->update->set(array('one' => 'с_one'), 10);
+
+        $this->assertEquals(
+            array(
+                'one'   => 'с_one',
+                'two'   => 'с_two',
+                'three' => 'с_three',
+            ),
+            $this->update->getRawState('set')
+        );
     }
 
     /**

@@ -30,7 +30,7 @@ class Oci8IntegrationTest extends AbstractIntegrationTest
     public function testCreateStatement()
     {
         $driver = new Oci8(array());
-        $resource = oci_connect($this->variables['username'], $this->variables['password']);
+        $resource = oci_connect($this->variables['username'], $this->variables['password'], $this->variables['hostname']);
 
         $driver->getConnection()->setResource($resource);
 

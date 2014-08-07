@@ -107,7 +107,7 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
             }
         } elseif (is_string($name)) {
             // is a string:
-            $position = isset($this->data[$name]);
+            $position = array_key_exists($name, $this->data);
         } elseif ($name === null) {
             $name = (string) count($this->data);
         } else {

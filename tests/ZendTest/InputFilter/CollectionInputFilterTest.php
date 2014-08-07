@@ -13,6 +13,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\InputFilter\BaseInputFilter;
 use Zend\InputFilter\CollectionInputFilter;
 use Zend\InputFilter\Input;
+use Zend\InputFilter\InputFilter;
 use Zend\Validator;
 
 class CollectionInputFilterTest extends TestCase
@@ -643,16 +644,16 @@ class CollectionInputFilterTest extends TestCase
                           ->add(new Input(), 'type');
         $items = new CollectionInputFilter();
         $items->setInputFilter($items_inputfilter);
-    
+
         $groups_inputfilter = new BaseInputFilter();
         $groups_inputfilter->add(new Input(), 'group_class')
                            ->add($items, 'items');
         $groups = new CollectionInputFilter();
         $groups->setInputFilter($groups_inputfilter);
-    
+
         $inputFilter = new BaseInputFilter();
         $inputFilter->add($groups, 'groups');
-    
+
         $data = array(
             'groups' => array(
                 array(
@@ -691,10 +692,83 @@ class CollectionInputFilterTest extends TestCase
                 ),
             ),
         );
-    
+
         $inputFilter->setData($data);
         $inputFilter->isValid();
         $values = $inputFilter->getValues();
         $this->assertEquals($data, $values);
+    }
+
+    public function dataNestingCollection()
+    {
+        return array(
+            'count not specified' => array(
+                'count' => null,
+                'isValid' => true
+            ),
+            'count = 1' =>  array(
+                'count' => 1,
+                'isValid' => true
+            ),
+            'count = 2' => array(
+                'count' => 2,
+                'isValid' => false
+            ),
+            'count = 3' => array(
+                'count' => 3,
+                'isValid' => false
+            )
+        );
+    }
+
+    /**
+     * @dataProvider dataNestingCollection
+     */
+    public function testNestingCollectionCountCached($count, $expectedIsValid)
+    {
+        $firstInputFilter = new InputFilter();
+
+        $firstCollection = new CollectionInputFilter();
+        $firstCollection->setInputFilter($firstInputFilter);
+
+        $someInput = new Input('input');
+        $secondInputFilter = new InputFilter();
+        $secondInputFilter->add($someInput, 'input');
+
+        $secondCollection = new CollectionInputFilter();
+        $secondCollection->setInputFilter($secondInputFilter);
+        if (!is_null($count)) {
+            $secondCollection->setCount($count);
+        }
+
+        $firstInputFilter->add($secondCollection, 'second_collection');
+
+        $mainInputFilter = new InputFilter();
+        $mainInputFilter->add($firstCollection, 'first_collection');
+
+        $data = array(
+            'first_collection' => array(
+                array(
+                    'second_collection' => array(
+                        array(
+                            'input' => 'some value'
+                        ),
+                        array(
+                            'input' => 'some value'
+                        )
+                    )
+                ),
+                array(
+                    'second_collection' => array(
+                        array(
+                            'input' => 'some value'
+                        ),
+                    )
+                )
+            )
+        );
+
+        $mainInputFilter->setData($data);
+        $this->assertSame($expectedIsValid, $mainInputFilter->isValid());
     }
 }

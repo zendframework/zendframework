@@ -9,14 +9,14 @@
 
 namespace ZendTest\Db\RowGateway;
 
+use ReflectionObject;
+use PHPUnit_Framework_TestCase;
 use Zend\Db\RowGateway\RowGateway;
 
-class RowGatewayTest extends \PHPUnit_Framework_TestCase
+class RowGatewayTest extends PHPUnit_Framework_TestCase
 {
-
-    protected $mockAdapter = null;
-
-    protected $rowGateway = null;
+    protected $mockAdapter;
+    protected $rowGateway;
 
     public function setup()
     {
@@ -24,9 +24,12 @@ class RowGatewayTest extends \PHPUnit_Framework_TestCase
         $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $mockResult->expects($this->any())->method('getAffectedRows')->will($this->returnValue(1));
         $this->mockResult = $mockResult;
+
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
+
         $mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
+
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
         $mockDriver->expects($this->any())->method('getConnection')->will($this->returnValue($mockConnection));
@@ -37,23 +40,7 @@ class RowGatewayTest extends \PHPUnit_Framework_TestCase
 
     public function testEmptyPrimaryKey()
     {
-        try {
-            $this->rowGateway = new \Zend\Db\RowGateway\RowGateway('', 'foo', $this->mockAdapter);
-            
-            $this->fail('Excepcted null primary key exception not thrown');
-        } catch (\Zend\Db\RowGateway\Exception\RuntimeException $e) {
-            $this->assertEquals($e->getMessage(), 'This row object does not have a primary key column set.');
-        }
-    }
-
-
-    protected function setRowGatewayState(array $properties)
-    {
-        $refRowGateway = new \ReflectionObject($this->rowGateway);
-        foreach ($properties as $rgPropertyName => $rgPropertyValue) {
-            $refRowGatewayProp = $refRowGateway->getProperty($rgPropertyName);
-            $refRowGatewayProp->setAccessible(true);
-            $refRowGatewayProp->setValue($this->rowGateway, $rgPropertyValue);
-        }
+        $this->setExpectedException('Zend\Db\RowGateway\Exception\RuntimeException', 'This row object does not have a primary key column set.');
+        $this->rowGateway = new RowGateway('', 'foo', $this->mockAdapter);
     }
 }

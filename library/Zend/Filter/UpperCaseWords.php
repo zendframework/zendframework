@@ -15,9 +15,9 @@ class UpperCaseWords extends AbstractUnicode
      * @var array
      */
     protected $options = array(
-        'encoding' => null,
+        'encoding' => null
     );
-    
+
     /**
      * Constructor
      *
@@ -33,7 +33,7 @@ class UpperCaseWords extends AbstractUnicode
             }
         }
     }
-    
+
     /**
      * Defined by Zend\Filter\FilterInterface
      *
@@ -42,21 +42,20 @@ class UpperCaseWords extends AbstractUnicode
      * If the value provided is non-scalar, the value will remain unfiltered
      *
      * @param  string $value
-     * @return string|mixed
+     * @return string mixed
      */
     public function filter($value)
     {
         if (!is_scalar($value)) {
             return $value;
         }
-        
+
         $value = (string) $value;
 
         if ($this->options['encoding'] !== null) {
-            return mb_convert_case($value, MB_CASE_TITLE,  $this->options['encoding']);
+            return mb_convert_case($value, MB_CASE_TITLE, $this->options['encoding']);
         }
 
         return ucwords(strtolower($value));
     }
 }
-

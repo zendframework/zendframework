@@ -45,7 +45,7 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
             'aBc1@3' => 'Abc1@3',
             'A b C'  => 'A B C'
         );
-        
+
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals($output, $filter($input));
         }
@@ -65,7 +65,7 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
             '√±'      => '√±',
             '√º√±123' => '√º√±123'
         );
-        
+
         try {
             $filter->setEncoding('UTF-8');
             foreach ($valuesExpected as $input => $output) {
@@ -85,7 +85,7 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
         if (! function_exists('mb_strtolower')) {
             $this->markTestSkipped('mbstring required');
         }
-        
+
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'is not supported');
         $this->_filter->setEncoding('aaaaa');
     }
@@ -100,7 +100,7 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
             '√±'      => '√±',
             '√º√±123' => '√º√±123'
         );
-        
+
         try {
             $filter = new UpperCaseWordsFilter(array(
                 'encoding' => 'UTF-8'
@@ -124,18 +124,18 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
             '√±'      => '√±',
             '√º√±123' => '√º√±123'
         );
-        
+
         try {
             $filter->setEncoding('UTF-8');
             foreach ($valuesExpected as $input => $output) {
                 $this->assertEquals($output, $filter($input));
             }
-            
+
             $this->_filter->setEncoding('utf-8');
             foreach ($valuesExpected as $input => $output) {
                 $this->assertEquals($output, $filter($input));
             }
-            
+
             $this->_filter->setEncoding('UtF-8');
             foreach ($valuesExpected as $input => $output) {
                 $this->assertEquals($output, $filter($input));
@@ -153,7 +153,7 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
         if (! function_exists('mb_internal_encoding')) {
             $this->markTestSkipped("Function 'mb_internal_encoding' not available");
         }
-        
+
         $this->assertEquals(mb_internal_encoding(), $this->_filter->getEncoding());
     }
 
@@ -173,7 +173,7 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider returnUnfilteredDataProvider
-     * 
+     *
      * @return void
      */
     public function testReturnUnfiltered($input)

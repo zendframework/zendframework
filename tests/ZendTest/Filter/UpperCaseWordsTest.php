@@ -14,7 +14,7 @@ use Zend\Filter\UpperCaseWords as UpperCaseWordsFilter;
 /**
  * @group      Zend_Filter
  */
-class StringToLowerTest extends \PHPUnit_Framework_TestCase
+class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Zend_Filter_UpperCaseWords object
@@ -162,7 +162,7 @@ class StringToLowerTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass()),
             array(
                 array(
-                    'UPPER CASE WRITTEN',
+                    'Upper CASE and lowerCase Words WRITTEN',
                     'This Should Stay The Same'
                 )
             )

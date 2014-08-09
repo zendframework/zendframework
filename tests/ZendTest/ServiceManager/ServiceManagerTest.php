@@ -1165,4 +1165,19 @@ class ServiceManagerTest extends TestCase
             array(tmpfile())
         );
     }
+
+    /**
+     * @group ZF2-4377
+     */
+    public function testServiceManagerRespectsSharedFlagWhenRetrievingFromPeeredServiceManager()
+    {
+        $this->serviceManager->setInvokableClass('foo', 'ZendTest\ServiceManager\TestAsset\Foo');
+        $this->serviceManager->setShared('foo', false);
+
+        $childManager = new ServiceManager(new Config());
+        $childManager->addPeeringServiceManager($this->serviceManager);
+        $childManager->setRetrieveFromPeeringManagerFirst(false);
+
+        $this->assertNotSame($childManager->get('foo'), $childManager->get('foo'));
+    }
 }

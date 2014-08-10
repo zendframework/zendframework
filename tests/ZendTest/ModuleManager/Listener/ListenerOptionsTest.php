@@ -35,6 +35,36 @@ class ListenerOptionsTest extends TestCase
         $this->assertSame(array('static', 'custom_paths'), $options->getConfigStaticPaths());
     }
 
+    public function testConfigCacheFileWithEmptyCacheKey()
+    {
+        $options = new ListenerOptions(array(
+           'cache_dir'               => __DIR__,
+           'config_cache_enabled'    => true,
+           'module_paths'            => array('module','paths'),
+           'config_glob_paths'       => array('glob','paths'),
+           'config_static_paths'     => array('static','custom_paths'),
+       ));
+
+        $this->assertEquals(__DIR__ . '/module-config-cache.php', $options->getConfigCacheFile());
+        $options->setConfigCacheKey('foo');
+        $this->assertEquals(__DIR__ . '/module-config-cache.foo.php', $options->getConfigCacheFile());
+    }
+
+    public function testModuleMapCacheFileWithEmptyCacheKey()
+    {
+        $options = new ListenerOptions(array(
+           'cache_dir'                => __DIR__,
+           'module_map_cache_enabled' => true,
+           'module_paths'             => array('module','paths'),
+           'config_glob_paths'        => array('glob','paths'),
+           'config_static_paths'      => array('static','custom_paths'),
+       ));
+
+        $this->assertEquals(__DIR__ . '/module-classmap-cache.php', $options->getModuleMapCacheFile());
+        $options->setModuleMapCacheKey('foo');
+        $this->assertEquals(__DIR__ . '/module-classmap-cache.foo.php', $options->getModuleMapCacheFile());
+    }
+
     public function testCanAccessKeysAsProperties()
     {
         $options = new ListenerOptions(array(

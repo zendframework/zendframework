@@ -81,6 +81,12 @@ abstract class AbstractController implements
      * @var string
      */
     protected $eventIdentifier;
+    
+    /**
+     * 
+     * @var array
+     */
+    protected $extraIdentifiers = array();
 
     /**
      * Execute the request
@@ -159,13 +165,19 @@ abstract class AbstractController implements
      */
     public function setEventManager(EventManagerInterface $events)
     {
-        $events->setIdentifiers(array(
+         $eventManagerIdentifiers = array(
             'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
             get_class($this),
             $this->eventIdentifier,
             substr(get_class($this), 0, strpos(get_class($this), '\\'))
-        ));
+        );
+        
+        if ($this->extraIdentifiers && is_array($this->extraIdentifiers)) {            
+            $eventManagerIdentifiers = array_unique(array_merge($eventManagerIdentifiers, $this->extraIdentifiers));           
+        } 
+                
+        $events->setIdentifiers($eventManagerIdentifiers);
         $this->events = $events;
         $this->attachDefaultListeners();
 
@@ -304,7 +316,26 @@ abstract class AbstractController implements
 
         return $plugin;
     }
-
+    
+    /**
+     * Add extra identifiers to AbstractController
+     * 
+     * @param string|array $extraIdentifiers
+     * @return \Zend\Mvc\Controller\AbstractController
+     */
+    public function setExtraIdentifiers($extraIdentifiers)
+    {
+        if (is_array($extraIdentifiers)) {
+            foreach ($extraIdentifiers as $extraIdentifier) {
+                $this->extraIdentifiers[] = $extraIdentifier;
+            }
+        } else {
+            $this->extraIdentifiers[] = $extraIdentifiers;
+        }
+        
+        return $this;
+    }
+    
     /**
      * Register the default events for this controller
      *

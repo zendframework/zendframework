@@ -144,7 +144,7 @@ abstract class AbstractController implements
      */
     public function getResponse()
     {
-        if (! $this->response) {
+        if (!$this->response) {
             $this->response = new HttpResponse();
         }
 

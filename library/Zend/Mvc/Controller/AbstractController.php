@@ -133,7 +133,7 @@ abstract class AbstractController implements
         if (!$this->request) {
             $this->request = new HttpRequest();
         }
-
+        
         return $this->request;
     }
 
@@ -144,7 +144,7 @@ abstract class AbstractController implements
      */
     public function getResponse()
     {
-        if (!$this->response) {
+        if (! $this->response) {
             $this->response = new HttpResponse();
         }
 
@@ -159,18 +159,15 @@ abstract class AbstractController implements
      */
     public function setEventManager(EventManagerInterface $events)
     { 
-        $eventManagerIdentifiers = array (
-                'Zend\Stdlib\DispatchableInterface',
-                __CLASS__,
-                get_class ( $this ),
-                substr ( get_class ( $this ), 0, strpos ( get_class ( $this ), '\\' ) ) 
-        );
-        
-        $eventIdentifier = (array) $this->eventIdentifier;
-        
-        $eventManagerIdentifiers = array_unique(array_merge($eventManagerIdentifiers, $eventIdentifier));
-        
-        $events->setIdentifiers($eventManagerIdentifiers);
+        $events->setIdentifiers(array(
+            'Zend\Stdlib\DispatchableInterface',
+            __CLASS__,
+            get_class($this),
+            substr(get_class($this), 0, strpos(get_class($this), '\\'))
+        ));
+                
+        $eventIdentifiers = is_array($this->eventIdentifier) ? $this->eventIdentifier : array($this->eventIdentifier);
+        $events->addIdentifiers($eventIdentifiers);
         
         $this->events = $events;
         $this->attachDefaultListeners();

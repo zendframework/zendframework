@@ -21,7 +21,7 @@ class Origin implements HeaderInterface
      * @var string
      */
     protected $value;
-    
+
     public static function fromString($headerLine)
     {
         list($name, $value) = explode(': ', $headerLine, 2);

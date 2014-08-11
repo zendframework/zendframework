@@ -9,7 +9,6 @@
 
 namespace ZendTest\Db\RowGateway;
 
-use ReflectionObject;
 use PHPUnit_Framework_TestCase;
 use Zend\Db\RowGateway\RowGateway;
 

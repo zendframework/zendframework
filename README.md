@@ -9,13 +9,20 @@ Develop:
 
 ## RELEASE INFORMATION
 
-*Zend Framework 2.3.2dev*
+*Zend Framework 2.3.2*
 
 This is the second maintenance release for the version 2.3 series.
 
-DD MMM YYYY
+12 Aug 2014
 
 ### UPDATES IN 2.3.2
+
+Notable changes include:
+
+- [#6295](https://github.com/zendframework/zf2/pull/6295) introduces a slight change to how `Zend\Form\Fieldset` handles disabled values. Previously, they were represented in the form, and still processed on submit, which allowed the possibility of changing the value. This pull request modifies the behavior to extract the original value from any bound data if present and use that value instead, which is the correct behavior.
+- [#6423](https://github.com/zendframework/zf2/pull/6423) modifies the behavior of `Zend\Validator\File\UploadFile` to only return the `FILE_NOT_FOUND` error if upload was successful; previously, it incorrectly would report this error even if an error occurred during upload.
+
+In all, over 120 issues were resolved for this release.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

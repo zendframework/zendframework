@@ -208,7 +208,7 @@ class Element implements
         if (!isset($this->attributes[$key])) {
             return null;
         }
-        
+
         return $this->attributes[$key];
     }
 
@@ -448,7 +448,7 @@ class Element implements
         if (!isset($this->labelOptions[$key])) {
             return null;
         }
-        
+
         return $this->labelOptions[$key];
     }
 

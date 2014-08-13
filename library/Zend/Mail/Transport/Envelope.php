@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -9,63 +10,18 @@
 
 namespace Zend\Mail\Transport;
 
-use Zend\Mail\Exception;
 use Zend\Stdlib\AbstractOptions;
 
 class Envelope extends AbstractOptions
 {
     /**
-     * @var string
+     * @var string|null
      */
-    protected $from = null;
+    protected $from;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $to = null;
+    protected $to;
 
-  
-    /**
-     * Get MAIL FROM
-     *
-     * @return string
-     */
-    public function getFrom()
-    {
-        return $this->from;
-    }
-
-    /**
-     * Set MAIL FROM
-     *
-     * @param  string $from
-     * @return Envelope
-     */
-    public function setFrom($from)
-    {
-        $this->from = (string) $from;
-        return $this;
-    }
-
-    /**
-     * Get RCPT TO
-     *
-     * @return string
-     */
-    public function getTo()
-    {
-        return $this->to;
-    }
-
-    /**
-     * Set RCPT TO
-     *
-     * @param  string $to
-     * @return Envelope
-     */
-    public function setTo($to)
-    {
-        $this->to = (string) $to;
-        return $this;
-    }
 }

@@ -39,6 +39,7 @@ class ServiceListenerFactory implements FactoryInterface
             'RouteListener'        => 'Zend\Mvc\RouteListener',
             'SendResponseListener' => 'Zend\Mvc\SendResponseListener',
             'ViewJsonRenderer'     => 'Zend\View\Renderer\JsonRenderer',
+            'ViewFeedRenderer'     => 'Zend\View\Renderer\FeedRenderer',
         ),
         'factories' => array(
             'Application'                    => 'Zend\Mvc\Service\ApplicationFactory',
@@ -69,7 +70,6 @@ class ServiceListenerFactory implements FactoryInterface
             'SerializerAdapterManager'       => 'Zend\Mvc\Service\SerializerAdapterPluginManagerFactory',
             'ValidatorManager'               => 'Zend\Mvc\Service\ValidatorManagerFactory',
             'ViewHelperManager'              => 'Zend\Mvc\Service\ViewHelperManagerFactory',
-            'ViewFeedRenderer'               => 'Zend\Mvc\Service\ViewFeedRendererFactory',
             'ViewFeedStrategy'               => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
             'ViewJsonStrategy'               => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
             'ViewManager'                    => 'Zend\Mvc\Service\ViewManagerFactory',

@@ -382,6 +382,84 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($success, '$success should be false if the item cannot be retrieved');
     }
 
+    public function simpleEventHandlingMethodDefinitions()
+    {
+        return array(
+            array(
+                'name' => 'getItem',
+                'args' => array('key'),
+                'internalName' => 'internalGetItem',
+                'internalArgs' => array('key'),
+                'retVal'  => 'value',
+            )
+        );
+    }
+
+    /**
+     * @dataProvider simpleEventHandlingMethodDefinitions
+     */
+    public function testEventHandlingSimple($methodName, $methodArgs, $internalMethodName, $internalMethodArgs, $retVal)
+    {
+        $this->_storage = $this->getMockForAbstractAdapter(array($internalMethodName));
+
+        $eventList    = array();
+        $eventHandler = function ($event) use (&$eventList) {
+            $eventList[] = $event->getName();
+        };
+        $this->_storage->getEventManager()->attach($methodName . '.pre', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName . '.post', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName . '.exception', $eventHandler);
+
+        $mock = $this->_storage
+            ->expects($this->once())
+            ->method($internalMethodName);
+        $mock = call_user_func_array(array($mock, 'with'), array_map(array($this, 'equalTo'), $internalMethodArgs));
+        $mock->will($this->returnValue($retVal));
+
+        call_user_func_array(array($this->_storage, $methodName), $methodArgs);
+
+        $expectedEventList = array(
+            $methodName . '.pre',
+            $methodName . '.post'
+        );
+        $this->assertSame($expectedEventList, $eventList);
+    }
+
+    /**
+     * @dataProvider simpleEventHandlingMethodDefinitions
+     */
+    public function testEventHandlingStopInPre($methodName, $methodArgs, $internalMethodName, $internalMethodArgs, $retVal)
+    {
+        $this->_storage = $this->getMockForAbstractAdapter(array($internalMethodName));
+
+        $eventList    = array();
+        $eventHandler = function ($event) use (&$eventList) {
+            $eventList[] = $event->getName();
+        };
+        $this->_storage->getEventManager()->attach($methodName . '.pre', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName . '.post', $eventHandler);
+        $this->_storage->getEventManager()->attach($methodName . '.exception', $eventHandler);
+
+        $this->_storage->getEventManager()->attach($methodName . '.pre', function ($event) use ($retVal) {
+            $event->stopPropagation();
+            return $retVal;
+        });
+
+        // the internal method should never be called
+        $this->_storage->expects($this->never())->method($internalMethodName);
+
+        // the return vaue should be available by pre-event
+        $result = call_user_func_array(array($this->_storage, $methodName), $methodArgs);
+        $this->assertSame($retVal, $result);
+
+        // after the triggered pre-event the post-event should be triggered as well
+        $expectedEventList = array(
+            $methodName . '.pre',
+            $methodName . '.post',
+        );
+        $this->assertSame($expectedEventList, $eventList);
+    }
+
 /*
     public function testGetMetadatas()
     {

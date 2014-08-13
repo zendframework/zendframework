@@ -385,20 +385,45 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     public function simpleEventHandlingMethodDefinitions()
     {
         return array(
-            array(
-                'name' => 'getItem',
-                'args' => array('key'),
-                'internalName' => 'internalGetItem',
-                'internalArgs' => array('key'),
-                'retVal'  => 'value',
-            )
+            //    name, internalName, args, internalName, returnValue
+            array('hasItem', 'internalGetItem', array('k'), 'v'),
+            array('hasItems', 'internalHasItems', array(array('k1', 'k2')), array('v1', 'v2')),
+            
+            array('getItem', 'internalGetItem', array('k'), 'v'),
+            array('getItems', 'internalGetItems', array(array('k1', 'k2')), array('k1' => 'v1', 'k2' => 'v2')),
+
+            array('getMetadata', 'internalGetMetadata', array('k'), array()),
+            array('getMetadatas', 'internalGetMetadatas', array(array('k1', 'k2')), array('k1' => array(), 'k2' => array())),
+
+            array('setItem', 'internalSetItem', array('k', 'v'), true),
+            array('setItems', 'internalSetItems', array(array('k1' => 'v1', 'k2' => 'v2')), array()),
+
+            array('replaceItem', 'internalReplaceItem', array('k', 'v'), true),
+            array('replaceItems', 'internalReplaceItems', array(array('k1' => 'v1', 'k2' => 'v2')), array()),
+
+            array('addItem', 'internalAddItem', array('k', 'v'), true),
+            array('addItems', 'internalAddItems', array(array('k1' => 'v1', 'k2' => 'v2')), array()),
+
+            array('checkAndSetItem', 'internalCheckAndSetItem', array(123, 'k', 'v'), true),
+
+            array('touchItem', 'internalTouchItem', array('k'), true),
+            array('touchItems', 'internalTouchItems', array(array('k1', 'k2')), array()),
+
+            array('removeItem', 'internalRemoveItem', array('k'), true),
+            array('removeItems', 'internalRemoveItems', array(array('k1', 'k2')), array()),
+
+            array('incrementItem', 'internalIncrementItem', array('k', 1), true),
+            array('incrementItems', 'internalIncrementItems', array(array('k1' => 1, 'k2' => 2)), array()),
+
+            array('decrementItem', 'internalDecrementItem', array('k', 1), true),
+            array('decrementItems', 'internalDecrementItems', array(array('k1' => 1, 'k2' => 2)), array()),
         );
     }
 
     /**
      * @dataProvider simpleEventHandlingMethodDefinitions
      */
-    public function testEventHandlingSimple($methodName, $methodArgs, $internalMethodName, $internalMethodArgs, $retVal)
+    public function testEventHandlingSimple($methodName, $internalMethodName, $methodArgs, $retVal)
     {
         $this->_storage = $this->getMockForAbstractAdapter(array($internalMethodName));
 
@@ -413,7 +438,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $mock = $this->_storage
             ->expects($this->once())
             ->method($internalMethodName);
-        $mock = call_user_func_array(array($mock, 'with'), array_map(array($this, 'equalTo'), $internalMethodArgs));
+        $mock = call_user_func_array(array($mock, 'with'), array_map(array($this, 'equalTo'), $methodArgs));
         $mock->will($this->returnValue($retVal));
 
         call_user_func_array(array($this->_storage, $methodName), $methodArgs);
@@ -428,7 +453,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider simpleEventHandlingMethodDefinitions
      */
-    public function testEventHandlingStopInPre($methodName, $methodArgs, $internalMethodName, $internalMethodArgs, $retVal)
+    public function testEventHandlingStopInPre($methodName, $internalMethodName, $methodArgs, $retVal)
     {
         $this->_storage = $this->getMockForAbstractAdapter(array($internalMethodName));
 

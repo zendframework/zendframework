@@ -358,7 +358,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testGetItemReturnsNullIfFailed()
     {
-        $this->_storage = $this->getMockForAbstractAdapter(['internalGetItem']);
+        $this->_storage = $this->getMockForAbstractAdapter(array('internalGetItem'));
 
         $key    = 'key1';
 

@@ -18,9 +18,7 @@
         "zendframework/zend-json": "self.version"
     },
     "suggest": {
-        "zendframework/zend-http": "Allows use of Zend\\Http\\Client to check version information"
-    },
-    "suggest": {
+        "zendframework/zend-http": "Allows use of Zend\\Http\\Client to check version information",
         "zendframework/zend-json": "To check latest version hosted in GitHub"
     },
     "extra": {

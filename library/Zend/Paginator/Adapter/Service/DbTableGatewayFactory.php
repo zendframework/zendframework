@@ -41,10 +41,10 @@ class DbTableGatewayFactory implements
     {
         return new DbTableGateway(
             $this->creationOptions[0],
-            isset($this->creationOptions[1]) ? : null,
-            isset($this->creationOptions[2]) ? : null,
-            isset($this->creationOptions[3]) ? : null,
-            isset($this->creationOptions[4]) ? : null
+            isset($this->creationOptions[1]) ? $this->creationOptions[1] : null,
+            isset($this->creationOptions[2]) ? $this->creationOptions[2] : null,
+            isset($this->creationOptions[3]) ? $this->creationOptions[3] : null,
+            isset($this->creationOptions[4]) ? $this->creationOptions[4] : null
         );
     }
 }

@@ -42,7 +42,7 @@ class DbSelectFactory implements
         return new DbSelect(
             $this->creationOptions[0],
             $this->creationOptions[1],
-            isset($this->creationOptions[2]) ? : null
+            isset($this->creationOptions[2]) ? $this->creationOptions[2] : null
         );
     }
 }

@@ -54,7 +54,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
 
         /** @var $event EventFeature\TableGatewayEvent */
         $event = null;
-        $this->eventManager->attach('preInitialize', function ($e) use (&$closureHasRun, &$event) {
+        $this->eventManager->attach(EventFeature::EVENT_PRE_INITIALIZE, function ($e) use (&$closureHasRun, &$event) {
             $event = $e;
             $closureHasRun = true;
         });
@@ -62,7 +62,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
         $this->feature->preInitialize();
         $this->assertTrue($closureHasRun);
         $this->assertInstanceOf('Zend\Db\TableGateway\TableGateway', $event->getTarget());
-        $this->assertEquals('preInitialize', $event->getName());
+        $this->assertEquals(EventFeature::EVENT_PRE_INITIALIZE, $event->getName());
     }
 
     public function testPostInitialize()
@@ -71,7 +71,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
 
         /** @var $event EventFeature\TableGatewayEvent */
         $event = null;
-        $this->eventManager->attach('postInitialize', function ($e) use (&$closureHasRun, &$event) {
+        $this->eventManager->attach(EventFeature::EVENT_POST_INITIALIZE, function ($e) use (&$closureHasRun, &$event) {
             $event = $e;
             $closureHasRun = true;
         });
@@ -79,7 +79,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
         $this->feature->postInitialize();
         $this->assertTrue($closureHasRun);
         $this->assertInstanceOf('Zend\Db\TableGateway\TableGateway', $event->getTarget());
-        $this->assertEquals('postInitialize', $event->getName());
+        $this->assertEquals(EventFeature::EVENT_POST_INITIALIZE, $event->getName());
     }
 
     public function testPreSelect()
@@ -88,7 +88,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
 
         /** @var $event EventFeature\TableGatewayEvent */
         $event = null;
-        $this->eventManager->attach('preSelect', function ($e) use (&$closureHasRun, &$event) {
+        $this->eventManager->attach(EventFeature::EVENT_PRE_SELECT, function ($e) use (&$closureHasRun, &$event) {
             $event = $e;
             $closureHasRun = true;
         });
@@ -96,7 +96,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
         $this->feature->preSelect($select = $this->getMock('Zend\Db\Sql\Select'));
         $this->assertTrue($closureHasRun);
         $this->assertInstanceOf('Zend\Db\TableGateway\TableGateway', $event->getTarget());
-        $this->assertEquals('preSelect', $event->getName());
+        $this->assertEquals(EventFeature::EVENT_PRE_SELECT, $event->getName());
         $this->assertSame($select, $event->getParam('select'));
     }
 
@@ -106,7 +106,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
 
         /** @var $event EventFeature\TableGatewayEvent */
         $event = null;
-        $this->eventManager->attach('postSelect', function ($e) use (&$closureHasRun, &$event) {
+        $this->eventManager->attach(EventFeature::EVENT_POST_SELECT, function ($e) use (&$closureHasRun, &$event) {
             $event = $e;
             $closureHasRun = true;
         });
@@ -118,7 +118,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
         );
         $this->assertTrue($closureHasRun);
         $this->assertInstanceOf('Zend\Db\TableGateway\TableGateway', $event->getTarget());
-        $this->assertEquals('postSelect', $event->getName());
+        $this->assertEquals(EventFeature::EVENT_POST_SELECT, $event->getName());
         $this->assertSame($stmt, $event->getParam('statement'));
         $this->assertSame($result, $event->getParam('result'));
         $this->assertSame($resultset, $event->getParam('result_set'));
@@ -130,7 +130,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
 
         /** @var $event EventFeature\TableGatewayEvent */
         $event = null;
-        $this->eventManager->attach('preInsert', function ($e) use (&$closureHasRun, &$event) {
+        $this->eventManager->attach(EventFeature::EVENT_PRE_INSERT, function ($e) use (&$closureHasRun, &$event) {
             $event = $e;
             $closureHasRun = true;
         });
@@ -138,7 +138,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
         $this->feature->preInsert($insert = $this->getMock('Zend\Db\Sql\Insert'));
         $this->assertTrue($closureHasRun);
         $this->assertInstanceOf('Zend\Db\TableGateway\TableGateway', $event->getTarget());
-        $this->assertEquals('preInsert', $event->getName());
+        $this->assertEquals(EventFeature::EVENT_PRE_INSERT, $event->getName());
         $this->assertSame($insert, $event->getParam('insert'));
     }
 
@@ -148,7 +148,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
 
         /** @var $event EventFeature\TableGatewayEvent */
         $event = null;
-        $this->eventManager->attach('postInsert', function ($e) use (&$closureHasRun, &$event) {
+        $this->eventManager->attach(EventFeature::EVENT_POST_INSERT, function ($e) use (&$closureHasRun, &$event) {
             $event = $e;
             $closureHasRun = true;
         });
@@ -159,7 +159,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
         );
         $this->assertTrue($closureHasRun);
         $this->assertInstanceOf('Zend\Db\TableGateway\TableGateway', $event->getTarget());
-        $this->assertEquals('postInsert', $event->getName());
+        $this->assertEquals(EventFeature::EVENT_POST_INSERT, $event->getName());
         $this->assertSame($stmt, $event->getParam('statement'));
         $this->assertSame($result, $event->getParam('result'));
     }
@@ -170,7 +170,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
 
         /** @var $event EventFeature\TableGatewayEvent */
         $event = null;
-        $this->eventManager->attach('preUpdate', function ($e) use (&$closureHasRun, &$event) {
+        $this->eventManager->attach(EventFeature::EVENT_PRE_UPDATE, function ($e) use (&$closureHasRun, &$event) {
             $event = $e;
             $closureHasRun = true;
         });
@@ -178,7 +178,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
         $this->feature->preUpdate($update = $this->getMock('Zend\Db\Sql\Update'));
         $this->assertTrue($closureHasRun);
         $this->assertInstanceOf('Zend\Db\TableGateway\TableGateway', $event->getTarget());
-        $this->assertEquals('preUpdate', $event->getName());
+        $this->assertEquals(EventFeature::EVENT_PRE_UPDATE, $event->getName());
         $this->assertSame($update, $event->getParam('update'));
     }
 
@@ -188,7 +188,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
 
         /** @var $event EventFeature\TableGatewayEvent */
         $event = null;
-        $this->eventManager->attach('postUpdate', function ($e) use (&$closureHasRun, &$event) {
+        $this->eventManager->attach(EventFeature::EVENT_POST_UPDATE, function ($e) use (&$closureHasRun, &$event) {
             $event = $e;
             $closureHasRun = true;
         });
@@ -199,7 +199,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
         );
         $this->assertTrue($closureHasRun);
         $this->assertInstanceOf('Zend\Db\TableGateway\TableGateway', $event->getTarget());
-        $this->assertEquals('postUpdate', $event->getName());
+        $this->assertEquals(EventFeature::EVENT_POST_UPDATE, $event->getName());
         $this->assertSame($stmt, $event->getParam('statement'));
         $this->assertSame($result, $event->getParam('result'));
     }
@@ -210,7 +210,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
 
         /** @var $event EventFeature\TableGatewayEvent */
         $event = null;
-        $this->eventManager->attach('preDelete', function ($e) use (&$closureHasRun, &$event) {
+        $this->eventManager->attach(EventFeature::EVENT_PRE_DELETE, function ($e) use (&$closureHasRun, &$event) {
             $event = $e;
             $closureHasRun = true;
         });
@@ -218,7 +218,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
         $this->feature->preDelete($delete = $this->getMock('Zend\Db\Sql\Delete'));
         $this->assertTrue($closureHasRun);
         $this->assertInstanceOf('Zend\Db\TableGateway\TableGateway', $event->getTarget());
-        $this->assertEquals('preDelete', $event->getName());
+        $this->assertEquals(EventFeature::EVENT_PRE_DELETE, $event->getName());
         $this->assertSame($delete, $event->getParam('delete'));
     }
 
@@ -228,7 +228,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
 
         /** @var $event EventFeature\TableGatewayEvent */
         $event = null;
-        $this->eventManager->attach('postDelete', function ($e) use (&$closureHasRun, &$event) {
+        $this->eventManager->attach(EventFeature::EVENT_POST_DELETE, function ($e) use (&$closureHasRun, &$event) {
             $event = $e;
             $closureHasRun = true;
         });
@@ -239,7 +239,7 @@ class EventFeatureTest extends PHPUnit_Framework_TestCase
         );
         $this->assertTrue($closureHasRun);
         $this->assertInstanceOf('Zend\Db\TableGateway\TableGateway', $event->getTarget());
-        $this->assertEquals('postDelete', $event->getName());
+        $this->assertEquals(EventFeature::EVENT_POST_DELETE, $event->getName());
         $this->assertSame($stmt, $event->getParam('statement'));
         $this->assertSame($result, $event->getParam('result'));
     }

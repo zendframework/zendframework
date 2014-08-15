@@ -22,6 +22,22 @@ use Zend\EventManager\EventsCapableInterface;
 
 class EventFeature extends AbstractFeature implements EventsCapableInterface
 {
+    
+    const EVENT_PRE_INITIALIZE  = 'preInitialize';
+    const EVENT_POST_INITIALIZE = 'postInitialize';
+    
+    const EVENT_PRE_SELECT      = 'preSelect';
+    const EVENT_POST_SELECT     = 'postSelect';
+    
+    
+    const EVENT_PRE_INSERT      = 'preInsert';
+    const EVENT_POST_INSERT     = 'postInsert';
+    
+    const EVENT_PRE_DELETE      = 'preDelete';
+    const EVENT_POST_DELETE     = 'postDelete';
+    
+    const EVENT_PRE_UPDATE      = 'preUpdate';
+    const EVENT_POST_UPDATE     = 'postUpdate';
     /**
      * @var EventManagerInterface
      */
@@ -87,7 +103,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
         }
 
         $this->event->setTarget($this->tableGateway);
-        $this->event->setName(__FUNCTION__);
+        $this->event->setName(static::EVENT_PRE_INITIALIZE);
         $this->eventManager->trigger($this->event);
     }
 
@@ -98,7 +114,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      */
     public function postInitialize()
     {
-        $this->event->setName(__FUNCTION__);
+        $this->event->setName(static::EVENT_POST_INITIALIZE);
         $this->eventManager->trigger($this->event);
     }
 
@@ -113,7 +129,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      */
     public function preSelect(Select $select)
     {
-        $this->event->setName(__FUNCTION__);
+        $this->event->setName(static::EVENT_PRE_SELECT);
         $this->event->setParams(array('select' => $select));
         $this->eventManager->trigger($this->event);
     }
@@ -133,7 +149,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      */
     public function postSelect(StatementInterface $statement, ResultInterface $result, ResultSetInterface $resultSet)
     {
-        $this->event->setName(__FUNCTION__);
+        $this->event->setName(static::EVENT_POST_SELECT);
         $this->event->setParams(array(
             'statement' => $statement,
             'result' => $result,
@@ -153,7 +169,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      */
     public function preInsert(Insert $insert)
     {
-        $this->event->setName(__FUNCTION__);
+        $this->event->setName(static::EVENT_PRE_INSERT);
         $this->event->setParams(array('insert' => $insert));
         $this->eventManager->trigger($this->event);
     }
@@ -171,7 +187,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      */
     public function postInsert(StatementInterface $statement, ResultInterface $result)
     {
-        $this->event->setName(__FUNCTION__);
+        $this->event->setName(static::EVENT_POST_INSERT);
         $this->event->setParams(array(
             'statement' => $statement,
             'result' => $result,
@@ -190,7 +206,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      */
     public function preUpdate(Update $update)
     {
-        $this->event->setName(__FUNCTION__);
+        $this->event->setName(static::EVENT_PRE_UPDATE);
         $this->event->setParams(array('update' => $update));
         $this->eventManager->trigger($this->event);
     }
@@ -208,7 +224,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      */
     public function postUpdate(StatementInterface $statement, ResultInterface $result)
     {
-        $this->event->setName(__FUNCTION__);
+        $this->event->setName(static::EVENT_POST_UPDATE);
         $this->event->setParams(array(
             'statement' => $statement,
             'result' => $result,
@@ -227,7 +243,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      */
     public function preDelete(Delete $delete)
     {
-        $this->event->setName(__FUNCTION__);
+        $this->event->setName(static::EVENT_PRE_DELETE);
         $this->event->setParams(array('delete' => $delete));
         $this->eventManager->trigger($this->event);
     }
@@ -245,7 +261,7 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
      */
     public function postDelete(StatementInterface $statement, ResultInterface $result)
     {
-        $this->event->setName(__FUNCTION__);
+        $this->event->setName(static::EVENT_POST_DELETE);
         $this->event->setParams(array(
             'statement' => $statement,
             'result' => $result,

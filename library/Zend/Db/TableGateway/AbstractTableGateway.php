@@ -20,6 +20,7 @@ use Zend\Db\Sql\TableIdentifier;
 use Zend\Db\Sql\Update;
 use Zend\Db\Sql\Where;
 use Zend\Db\TableGateway\Feature\EventFeature;
+
 /**
  *
  * @property AdapterInterface $adapter

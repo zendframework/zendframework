@@ -258,7 +258,7 @@ class TreeRouteStackTest extends TestCase
             )
         );
 
-        $this->assertEquals('/this%2Fthat?foo=bar', $stack->assemble(array(), array('name' => 'index', 'query' => array('foo' => 'bar'))));
+        $this->assertEquals('/this%2Fthat?foo=bar', $stack->assemble(array(), array('name' => 'index', 'query' => array('foo' => 'bar'), 'normalize_path' => false)));
     }
 
     public function testAssembleWithScheme()

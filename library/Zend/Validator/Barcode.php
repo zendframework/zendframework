@@ -96,7 +96,10 @@ class Barcode extends AbstractValidator
         
         if (!$adapter instanceof Barcode\AdapterInterface) {
             throw new Exception\InvalidArgumentException(
-                sprintf("Adapter %s does not implement Zend\\Validator\\Barcode\\AdapterInterface", get_class($adapter))
+                sprintf(
+                    "Adapter %s does not implement Zend\\Validator\\Barcode\\AdapterInterface",
+                    (is_object($adapter) ? get_class($adapter) : gettype($adapter))
+                )
             );
         }
 

@@ -74,14 +74,10 @@ class Between extends AbstractValidator
             }
 
             $options = $temp;
-        } else {
-            if (count($options) == 2 && !array_key_exists('min', $options)) {
-                $options['min'] = $options[0];
-                $options['max'] = $options[1];
-            }
         }
 
-        if (!array_key_exists('min', $options) || !array_key_exists('max', $options)) {
+        if (count($options) !== 2
+            && (!array_key_exists('min', $options) || !array_key_exists('max', $options))) {
             throw new Exception\InvalidArgumentException("Missing option. 'min' and 'max' has to be given");
         }
 

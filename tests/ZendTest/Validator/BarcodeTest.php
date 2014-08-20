@@ -32,13 +32,13 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
         $barcode->setAdapter('ean13');
         $this->assertTrue($barcode->isValid('0075678164125'));
     }
-    
+
     public function testSetCustomAdapter()
     {
         $barcode = new Barcode(array(
             'adapter' => $this->getMock('Zend\Validator\Barcode\AdapterInterface')
         ));
-        
+
         $this->assertInstanceOf('Zend\Validator\Barcode\AdapterInterface', $barcode->getAdapter());
     }
 

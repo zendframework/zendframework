@@ -93,7 +93,7 @@ class Barcode extends AbstractValidator
 
             $adapter = new $adapter($options);
         }
-        
+
         if (!$adapter instanceof Barcode\AdapterInterface) {
             throw new Exception\InvalidArgumentException(
                 sprintf(
@@ -104,7 +104,7 @@ class Barcode extends AbstractValidator
         }
 
         $this->options['adapter'] = $adapter;
-        
+
         return $this;
     }
 

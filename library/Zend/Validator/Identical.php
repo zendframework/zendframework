@@ -9,6 +9,7 @@
 
 namespace Zend\Validator;
 
+use ArrayObject;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 
@@ -18,7 +19,7 @@ class Identical extends AbstractValidator
      * Error codes
      * @const string
      */
-    const NOT_SAME      = 'notSame';
+    const NOT_SAME = 'notSame';
     const MISSING_TOKEN = 'missingToken';
 
     /**
@@ -26,7 +27,7 @@ class Identical extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::NOT_SAME      => "The two given tokens do not match",
+        self::NOT_SAME => "The two given tokens do not match",
         self::MISSING_TOKEN => 'No token was provided to match against',
     );
 
@@ -43,7 +44,7 @@ class Identical extends AbstractValidator
      */
     protected $tokenString;
     protected $token;
-    protected $strict  = true;
+    protected $strict = true;
     protected $literal = false;
 
     /**
@@ -92,8 +93,8 @@ class Identical extends AbstractValidator
      */
     public function setToken($token)
     {
-        $this->tokenString = (is_array($token) ? var_export($token, true) : (string) $token);
-        $this->token       = $token;
+        $this->tokenString = (is_array($token) ? var_export($token, true) : (string)$token);
+        $this->token = $token;
         return $this;
     }
 
@@ -115,7 +116,7 @@ class Identical extends AbstractValidator
      */
     public function setStrict($strict)
     {
-        $this->strict = (bool) $strict;
+        $this->strict = (bool)$strict;
         return $this;
     }
 
@@ -137,7 +138,7 @@ class Identical extends AbstractValidator
      */
     public function setLiteral($literal)
     {
-        $this->literal = (bool) $literal;
+        $this->literal = (bool)$literal;
         return $this;
     }
 
@@ -146,17 +147,25 @@ class Identical extends AbstractValidator
      * matches that token.
      *
      * @param  mixed $value
-     * @param  array $context
+     * @param  array|ArrayObject $context
+     * @throws Exception\InvalidArgumentException If context is not array or ArrayObject
      * @return bool
-     * @throws Exception\RuntimeException if the token doesn't exist in the context array
      */
-    public function isValid($value, array $context = null)
+    public function isValid($value, $context = null)
     {
         $this->setValue($value);
 
         $token = $this->getToken();
 
         if (!$this->getLiteral() && $context !== null) {
+            if (!is_array($context) && !($context instanceof ArrayObject)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Context passed to %s must be array, ArrayObject or null; received "%s"',
+                    __METHOD__,
+                    (is_object($context) ? get_class($context) : gettype($context))
+                ));
+            }
+
             if (is_array($token)) {
                 while (is_array($token)) {
                     $key = key($token);
@@ -164,7 +173,7 @@ class Identical extends AbstractValidator
                         break;
                     }
                     $context = $context[$key];
-                    $token   = $token[$key];
+                    $token = $token[$key];
                 }
             }
 

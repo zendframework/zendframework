@@ -9,6 +9,8 @@
 
 namespace ZendTest\Validator;
 
+use Zend\Stdlib\Parameters;
+use Zend\Validator\Exception\InvalidArgumentException;
 use Zend\Validator\Identical;
 
 /**
@@ -115,67 +117,139 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
     public function testEqualsMessageTemplates()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+        $this->assertAttributeEquals(
+            $validator->getOption('messageTemplates'),
+            'messageTemplates',
+            $validator
+        );
     }
 
     public function testEqualsMessageVariables()
     {
         $validator = $this->validator;
-        $this->assertAttributeEquals($validator->getOption('messageVariables'),
-                                     'messageVariables', $validator);
+        $this->assertAttributeEquals(
+            $validator->getOption('messageVariables'),
+            'messageVariables',
+            $validator
+        );
     }
 
     public function testValidatingStringTokenInContext()
     {
         $this->validator->setToken('email');
 
-        $this->assertTrue($this->validator->isValid(
-            'john@doe.com',
-            array('email' => 'john@doe.com')
-        ));
+        $this->assertTrue(
+            $this->validator->isValid(
+                'john@doe.com',
+                array('email' => 'john@doe.com')
+            )
+        );
 
-        $this->assertFalse($this->validator->isValid(
-            'john@doe.com',
-            array('email' => 'harry@hoe.com')
-        ));
+        $this->assertFalse(
+            $this->validator->isValid(
+                'john@doe.com',
+                array('email' => 'harry@hoe.com')
+            )
+        );
 
-        $this->assertFalse($this->validator->isValid(
-            'harry@hoe.com',
-            array('email' => 'john@doe.com')
-        ));
+        $this->assertFalse(
+            $this->validator->isValid(
+                'harry@hoe.com',
+                array('email' => 'john@doe.com')
+            )
+        );
+
+        $this->assertTrue(
+            $this->validator->isValid(
+                'john@doe.com',
+                new Parameters(array('email' => 'john@doe.com'))
+            )
+        );
+
+        $this->assertFalse(
+            $this->validator->isValid(
+                'john@doe.com',
+                new Parameters(array('email' => 'harry@hoe.com'))
+            )
+        );
+
+        $this->assertFalse(
+            $this->validator->isValid(
+                'harry@hoe.com',
+                new Parameters(array('email' => 'john@doe.com'))
+            )
+        );
     }
 
     public function testValidatingArrayTokenInContext()
     {
         $this->validator->setToken(array('user' => 'email'));
 
-        $this->assertTrue($this->validator->isValid(
-            'john@doe.com',
-            array(
-                'user' => array(
-                    'email' => 'john@doe.com'
+        $this->assertTrue(
+            $this->validator->isValid(
+                'john@doe.com',
+                array(
+                    'user' => array(
+                        'email' => 'john@doe.com'
+                    )
                 )
             )
-        ));
+        );
 
-        $this->assertFalse($this->validator->isValid(
-            'john@doe.com',
-            array(
-                'user' => array(
-                    'email' => 'harry@hoe.com'
+        $this->assertFalse(
+            $this->validator->isValid(
+                'john@doe.com',
+                array(
+                    'user' => array(
+                        'email' => 'harry@hoe.com'
+                    )
                 )
             )
-        ));
+        );
 
-        $this->assertFalse($this->validator->isValid(
-            'harry@hoe.com',
-            array(
-                'user' => array(
-                    'email' => 'john@doe.com'
+        $this->assertFalse(
+            $this->validator->isValid(
+                'harry@hoe.com',
+                array(
+                    'user' => array(
+                        'email' => 'john@doe.com'
+                    )
                 )
             )
-        ));
+        );
+
+        $this->assertTrue(
+            $this->validator->isValid(
+                'john@doe.com',
+                new Parameters(array(
+                    'user' => array(
+                        'email' => 'john@doe.com'
+                    )
+                ))
+            )
+        );
+
+        $this->assertFalse(
+            $this->validator->isValid(
+                'john@doe.com',
+                new Parameters(array(
+                    'user' => array(
+                        'email' => 'harry@hoe.com'
+                    )
+                ))
+            )
+        );
+
+        $this->assertFalse(
+            $this->validator->isValid(
+                'harry@hoe.com',
+                new Parameters(array(
+                    'user' => array(
+                        'email' => 'john@doe.com'
+                    )
+                ))
+            )
+        );
     }
 
     public function testCanSetLiteralParameterThroughConstructor()
@@ -202,9 +276,21 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
         $this->validator->setToken(array('foo' => 'bar'));
         $this->validator->setLiteral(true);
 
-        $this->assertTrue($this->validator->isValid(
-            array('foo' => 'bar'),
-            array('foo' => 'baz') // Provide a context to make sure the literal parameter will work
-        ));
+        $this->assertTrue(
+            $this->validator->isValid(
+                array('foo' => 'bar'),
+                array('foo' => 'baz') // Provide a context to make sure the literal parameter will work
+            )
+        );
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testIsValidThrowsExceptionOnInvalidContext()
+    {
+        $this->validator->isValid('john@doe.com', false);
+        $this->validator->isValid('john@doe.com', new \stdClass());
+        $this->validator->isValid('john@doe.com', 'dummy');
     }
 }

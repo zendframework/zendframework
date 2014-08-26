@@ -122,8 +122,12 @@ class Float extends AbstractValidator
         // Need to check if this is scientific formatted string. If not, switch to decimal.
         $formatter = new NumberFormatter($this->getLocale(), NumberFormatter::SCIENTIFIC);
 
-        if (intl_is_failure($formatter->getErrorCode())) {
-            throw new Exception\InvalidArgumentException($formatter->getErrorMessage());
+        try {
+            if (intl_is_failure($formatter->getErrorCode())) {
+                throw new Exception\InvalidArgumentException($formatter->getErrorMessage());
+            }
+        } catch(\Exception $e) {
+            throw new Exception\InvalidArgumentException($e->getMessage());
         }
 
         if (StringUtils::hasPcreUnicodeSupport()) {

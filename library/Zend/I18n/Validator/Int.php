@@ -17,6 +17,7 @@ use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
 
+
 class Int extends AbstractValidator
 {
     const INVALID = 'intInvalid';
@@ -107,13 +108,22 @@ class Int extends AbstractValidator
         $this->setValue($value);
 
         $locale = $this->getLocale();
-        $format = new NumberFormatter($locale, NumberFormatter::DECIMAL);
-        if (intl_is_failure($format->getErrorCode())) {
+        try {
+            $format = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+            if (intl_is_failure($format->getErrorCode())) {
+                throw new Exception\InvalidArgumentException("Invalid locale string given");
+            }
+        } catch(\Exception $e) {
             throw new Exception\InvalidArgumentException("Invalid locale string given");
         }
 
-        $parsedInt = $format->parse($value, NumberFormatter::TYPE_INT64);
-        if (intl_is_failure($format->getErrorCode())) {
+        try {
+            $parsedInt = $format->parse($value, NumberFormatter::TYPE_INT64);
+            if (intl_is_failure($format->getErrorCode())) {
+                $this->error(self::NOT_INT);
+                return false;
+            }
+        } catch(\Exception $e) {
             $this->error(self::NOT_INT);
             return false;
         }

@@ -18,7 +18,6 @@ use Zend\Di\Di;
  */
 class RuntimeDefinition implements DefinitionInterface
 {
-
     /**
      * @var array
      */
@@ -38,6 +37,11 @@ class RuntimeDefinition implements DefinitionInterface
      * @var array
      */
     protected $injectionMethods = array();
+
+    /**
+     * @var array
+     */
+    protected $processedClass = array();
 
     /**
      * Constructor
@@ -177,21 +181,18 @@ class RuntimeDefinition implements DefinitionInterface
 
     /**
      * @param string $class
-     */
-    protected function hasProcessedClass($class)
-    {
-        return array_key_exists($class, $this->classes) && is_array($this->classes[$class]);
-    }
-
-    /**
-     * @param string $class
      * @param bool $forceLoad
      */
     protected function processClass($class, $forceLoad = false)
     {
-        if (!$forceLoad && $this->hasProcessedClass($class)) {
+        if (!isset($this->processedClass[$class]) || $this->processedClass[$class] === false) {
+            $this->processedClass[$class] = (array_key_exists($class, $this->classes) && is_array($this->classes[$class]));
+        }
+
+        if (!$forceLoad && $this->processedClass[$class]) {
             return;
         }
+
         $strategy = $this->introspectionStrategy; // localize for readability
 
         /** @var $rClass \Zend\Code\Reflection\ClassReflection */

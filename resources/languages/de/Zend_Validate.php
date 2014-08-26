@@ -12,34 +12,34 @@
  */
 return array(
     // Zend\I18n\Validator\Alnum
-    "Invalid type given. String, integer or float expected" => "Ungültiger Eingabewert eingegeben. String, Integer oder Float erwartet",
+    "Invalid type given. String, integer or float expected" => "Ungültiger Eingabewert. String, Integer oder Float erwartet",
     "The input contains characters which are non alphabetic and no digits" => "Der Eingabewert enthält nicht alphanumerische Zeichen",
     "The input is an empty string" => "Der Eingabewert ist leer",
     
     // Zend\I18n\Validator\Alpha
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     "The input contains non alphabetic characters" => "Der Eingabewert enthält nichtalphabetische Zeichen",
     "The input is an empty string" => "Der Eingabewert ist leer",
     
     // Zend\I18n\Validator\DateTime
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     "The input does not appear to be a valid datetime" => "Der Eingabewert scheint kein Datetime zu sein",
     
     // Zend\I18n\Validator\Float
-    "Invalid type given. String, integer or float expected" => "Ungültiger Eingabewert eingegeben. String, Integer oder Float erwartet",
+    "Invalid type given. String, integer or float expected" => "Ungültiger Eingabewert. String, Integer oder Float erwartet",
     "The input does not appear to be a float" => "Der Eingabewert scheint keine Gleitkommazahl zu sein",
     
     // Zend\I18n\Validator\Int
-    "Invalid type given. String or integer expected" => "Ungültiger Eingabewert eingegeben. String oder Integer erwartet",
+    "Invalid type given. String or integer expected" => "Ungültiger Eingabewert. String oder Integer erwartet",
     "The input does not appear to be an integer" => "Der Eingabewert ist keine ganze Zahl",
     
     // Zend\I18n\Validator\PhoneNumber
     "The input does not match a phone number format" => "Der Eingabewert ist nicht im Telefonnummern-Format",
     "The country provided is currently unsupported" => "Das gegebene Land wird zurzeit nicht unterstützt",
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     
     // Zend\I18n\Validator\PostCode
-    "Invalid type given. String or integer expected" => "Ungültiger Eingabewert eingegeben. String oder Integer erwartet",
+    "Invalid type given. String or integer expected" => "Ungültiger Eingabewert. String oder Integer erwartet",
     "The input does not appear to be a postal code" => "Der Eingabewert scheint keine gültige Postleitzahl zu sein",
     "An exception has been raised while validating the input" => "Ein Fehler ist während der Prüfung des Eingabewertes ausgetreten",
     
@@ -47,7 +47,7 @@ return array(
     "The input failed checksum validation" => "Der Eingabewert hat die Prüfung der Prüfsumme nicht bestanden",
     "The input contains invalid characters" => "Der Eingabewert enthält ungültige Zeichen",
     "The input should have a length of %length% characters" => "Der Eingabewert sollte %length% Zeichen lang sein",
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     
     // Zend\Validator\Between
     "The input is not between '%min%' and '%max%', inclusively" => "Der Eingabewert ist nicht zwischen '%min%' und '%max%', inklusive diesen Werten",
@@ -60,7 +60,7 @@ return array(
     // Zend\Validator\CreditCard
     "The input seems to contain an invalid checksum" => "Der Eingabewert enthält eine ungültige Prüfsumme",
     "The input must contain only digits" => "Der Eingabewert darf nur ganze Zahlen enthalten",
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     "The input contains an invalid amount of digits" => "Der Eingabewert enthält eine ungültige Anzahl an Zahlen",
     "The input is not from an allowed institute" => "Der Eingabewert ist von keinem erlaubtem Kreditinstitut",
     "The input seems to be an invalid creditcard number" => "Der Eingabewert scheint eine ungültige Kretitkartennummer zu sein",
@@ -70,12 +70,12 @@ return array(
     "The form submitted did not originate from the expected site" => "Der Ursprung des abgesendeten Formulares konnte nicht bestätigt werden",
     
     // Zend\Validator\Date
-    "Invalid type given. String, integer, array or DateTime expected" => "Ungültiger Eingabewert eingegeben. String, Integer, array oder DateTime erwartet",
+    "Invalid type given. String, integer, array or DateTime expected" => "Ungültiger Eingabewert. String, Integer, array oder DateTime erwartet",
     "The input does not appear to be a valid date" => "Der Eingabewert scheint kein gültiges Datum zu sein",
     "The input does not fit the date format '%format%'" => "Der Eingabewert entspricht nicht dem Format '%format%'",
     
     // Zend\Validator\DateStep
-    "Invalid type given. String, integer, array or DateTime expected" => "Ungültiger Eingabewert eingegeben. String, Integer, array oder DateTime erwartet",
+    "Invalid type given. String, integer, array or DateTime expected" => "Ungültiger Eingabewert. String, Integer, array oder DateTime erwartet",
     "The input does not appear to be a valid date" => "Der Eingabewert scheint kein gültiges Datum zu sein",
     "The input does not fit the date format '%format%'" => "Der Eingabewert pass nicht zum Datumformat '%format%'",
     "The input is not a valid step" => "Der Eingabewert ist kein gültiger Abschnitt",
@@ -87,10 +87,10 @@ return array(
     // Zend\Validator\Digits
     "The input must contain only digits" => "Der Eingabewert darf nur Zahlen enthalten",
     "The input is an empty string" => "Der Eingabewert ist leer",
-    "Invalid type given. String, integer or float expected" => "Ungültiger Eingabewert eingegeben. String, Integer oder Float erwartet",
+    "Invalid type given. String, integer or float expected" => "Ungültiger Eingabewert. String, Integer oder Float erwartet",
     
     // Zend\Validator\EmailAddress
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     "The input is not a valid email address. Use the basic format local-part@hostname" => "Der Eingabewert ist keine gültige E-Mail-Adresse. Benutzen Sie folgendes format: your-name@anbieter",
     "'%hostname%' is not a valid hostname for the email address" => "'%hostname%' ist kein gültiger Hostname für die Emailadresse",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' scheint keinen gültigen MX Eintrag für die Emailadresse '%value%' zu haben",
@@ -101,7 +101,7 @@ return array(
     "The input exceeds the allowed length" => "Der Eingabewert ist länger als erlaubt",
     
     // Zend\Validator\Explode
-    "Invalid type given" => "Ungültiger Eingabewert eingegeben.",
+    "Invalid type given" => "Ungültiger Eingabewert.",
     
     // Zend\Validator\File\Count
     "Too many files, maximum '%max%' are allowed but '%count%' are given" => "Zu viele Dateien. Maximal '%max%' sind erlaubt aber '%count%' wurden angegeben",
@@ -208,12 +208,12 @@ return array(
     "The input is not greater or equal than '%min%'" => "Der Eingabewert ist nicht größer oder gleich '%min%'",
     
     // Zend\Validator\Hex
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     "The input contains non-hexadecimal characters" => "Der Eingabewert enthält nicht nur hexadezimale Zeichen",
     
     // Zend\Validator\Hostname
     "The input appears to be a DNS hostname but the given punycode notation cannot be decoded" => "Der Eingabewert scheint ein DNS Hostname zu sein, aber die angegebene Punycode Schreibweise konnte nicht dekodiert werden",
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     "The input appears to be a DNS hostname but contains a dash in an invalid position" => "Der Eingabewert scheint ein DNS Hostname zu sein, enthält aber einen Bindestrich an einer ungültigen Position",
     "The input does not match the expected structure for a DNS hostname" => "Der Eingabewert passt nicht in die erwartete Struktur für einen DNS Hostname",
     "The input appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "Der Eingabewert scheint ein DNS Hostname zu sein, passt aber nicht in das Hostname Schema für die TLD '%tld%'",
@@ -238,14 +238,14 @@ return array(
     "The input was not found in the haystack" => "Der Eingabewert wurde nicht im Array gefunden",
     
     // Zend\Validator\Ip
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     "The input does not appear to be a valid IP address" => "Der Eingabewert scheint keine gültige IP-Adresse zu sein",
     
     // Zend\Validator\IsInstanceOf
     "The input is not an instance of '%className%'" => "Der Eingabewert ist keine Instanz von '%className%'",
     
     // Zend\Validator\Isbn
-    "Invalid type given. String or integer expected" => "Ungültiger Eingabewert eingegeben. String oder Integer erwartet",
+    "Invalid type given. String or integer expected" => "Ungültiger Eingabewert. String oder Integer erwartet",
     "The input is not a valid ISBN number" => "Der Eingabewert ist keine gültige ISBN",
     
     // Zend\Validator\LessThan
@@ -254,39 +254,39 @@ return array(
     
     // Zend\Validator\NotEmpty
     "Value is required and can't be empty" => "Es wird ein Eingabewert benötigt. Dieser darf nicht leer sein",
-    "Invalid type given. String, integer, float, boolean or array expected" => "Ungültiger Eingabewert eingegeben. String, Integer, Float, Boolean oder Array erwartet",
+    "Invalid type given. String, integer, float, boolean or array expected" => "Ungültiger Eingabewert. String, Integer, Float, Boolean oder Array erwartet",
     
     // Zend\Validator\Regex
-    "Invalid type given. String, integer or float expected" => "Ungültiger Eingabewert eingegeben. String, Integer oder Float erwartet",
+    "Invalid type given. String, integer or float expected" => "Ungültiger Eingabewert. String, Integer oder Float erwartet",
     "The input does not match against pattern '%pattern%'" => "Der Eingabewert entspricht nicht folgendem Muster: '%pattern%'",
     "There was an internal error while using the pattern '%pattern%'" => "Es gab einen internen Fehler bei der Verwendung des Muster: '%pattern%'",
     
     // Zend\Validator\Sitemap\Changefreq
     "The input is not a valid sitemap changefreq" => "Der Eingabewert ist keine gültige 'changefreq' für Sitemap",
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     
     // Zend\Validator\Sitemap\Lastmod
     "The input is not a valid sitemap lastmod" => "Der Eingabewert ist keine gültige 'lastmod' für Sitemap",
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     
     // Zend\Validator\Sitemap\Loc
     "The input is not a valid sitemap location" => "Der Eingabewert ist keine gültige 'location' für Sitemap",
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     
     // Zend\Validator\Sitemap\Priority
     "The input is not a valid sitemap priority" => "Der Eingabewert ist keine gültige 'priority' für Sitemap",
-    "Invalid type given. Numeric string, integer or float expected" => "Ungültiger Eingabewert eingegeben. Nummerischer String, Integer oder Float erwartet",
+    "Invalid type given. Numeric string, integer or float expected" => "Ungültiger Eingabewert. Nummerischer String, Integer oder Float erwartet",
     
     // Zend\Validator\Step
-    "Invalid value given. Scalar expected" => "Ungültiger Eingabewert eingegeben. Skalar erwartet",
+    "Invalid value given. Scalar expected" => "Ungültiger Eingabewert. Skalar erwartet",
     "The input is not a valid step" => "Der Eingabewert ist kein gültiger Abschnitt",
     
     // Zend\Validator\StringLength
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     "The input is less than %min% characters long" => "Der Eingabewert ist weniger als %min% Zeichen lang",
     "The input is more than %max% characters long" => "Der Eingabewert ist mehr als %max% Zeichen lang",
     
     // Zend\Validator\Uri
-    "Invalid type given. String expected" => "Ungültiger Eingabewert eingegeben. String erwartet",
+    "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     "The input does not appear to be a valid Uri" => "Der Eingabewert scheint keine gültige Uri zu sein",
 );

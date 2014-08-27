@@ -356,6 +356,32 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($result, $rs);
     }
 
+    public function testGetItemReturnsNullIfFailed()
+    {
+        $this->_storage = $this->getMockForAbstractAdapter(array('internalGetItem'));
+
+        $key    = 'key1';
+
+        // Do not throw exceptions outside the adapter
+        $pluginOptions = new Cache\Storage\Plugin\PluginOptions(
+            array('throw_exceptions' => false)
+        );
+        $plugin = new Cache\Storage\Plugin\ExceptionHandler();
+        $plugin->setOptions($pluginOptions);
+        $this->_storage->addPlugin($plugin);
+
+        // Simulate internalGetItem() throwing an exception
+        $this->_storage
+            ->expects($this->once())
+            ->method('internalGetItem')
+            ->with($this->equalTo($key))
+            ->will($this->throwException(new \Exception('internalGet failed')));
+
+        $result = $this->_storage->getItem($key, $success);
+        $this->assertNull($result, 'GetItem should return null the item cannot be retrieved');
+        $this->assertFalse($success, '$success should be false if the item cannot be retrieved');
+    }
+
 /*
     public function testGetMetadatas()
     {

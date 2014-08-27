@@ -370,7 +370,8 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
             }
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
-            $result = false;
+            $result = null;
+            $success = false;
             return $this->triggerException(__FUNCTION__, $args, $result, $e);
         }
     }

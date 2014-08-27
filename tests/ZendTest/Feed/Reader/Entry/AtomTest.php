@@ -111,7 +111,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath . '/datecreated/plain/fractional.xml')
         );
         $entry = $feed->current();
-        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $edate = new DateTime('2009-03-07T08:03:50.80Z');
         $this->assertEquals($edate, $entry->getDateCreated());
     }
 
@@ -144,7 +144,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath . '/datemodified/plain/fractional.xml')
         );
         $entry = $feed->current();
-        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $edate = new DateTime('2009-03-07T08:03:50.80Z');
         $this->assertEquals($edate, $entry->getDateModified());
     }
 

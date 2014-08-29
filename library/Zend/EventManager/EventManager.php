@@ -167,12 +167,10 @@ class EventManager implements EventManagerInterface
     /**
      * Trigger all listeners for a given event
      *
-     * Can emulate triggerUntil() if the last argument provided is a callback.
-     *
-     * @param  string $event
-     * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
-     * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
-     * @param  null|callable $callback
+     * @param  string            $event
+     * @param  string|object     $target   Object calling emit, or symbol describing target (such as static method name)
+     * @param  array|ArrayAccess $argv     Array of arguments; typically, should be associative
+     * @param  null|callable     $callback Trigger listeners until return value of this callback evaluate to true
      * @return ResponseCollection All listener return values
      * @throws Exception\InvalidCallbackException
      */
@@ -225,8 +223,7 @@ class EventManager implements EventManagerInterface
     public function triggerUntil($event, $target, $argv = null, $callback = null)
     {
         trigger_error(
-            'This method is deprecated and will be removed in the future. ' .
-            'Please use trigger() instead.',
+            'This method is deprecated and will be removed in the future. Please use trigger() instead.',
             E_USER_DEPRECATED
         );
         return $this->trigger($event, $target, $argv, $callback);

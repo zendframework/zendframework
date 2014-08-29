@@ -219,37 +219,17 @@ class EventManager implements EventManagerInterface
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @param  callable $callback
      * @return ResponseCollection
+     * @deprecated Please use trigger()
      * @throws Exception\InvalidCallbackException if invalid callable provided
      */
     public function triggerUntil($event, $target, $argv = null, $callback = null)
     {
-        if ($event instanceof EventInterface) {
-            $e        = $event;
-            $event    = $e->getName();
-            $callback = $target;
-        } elseif ($target instanceof EventInterface) {
-            $e = $target;
-            $e->setName($event);
-            $callback = $argv;
-        } elseif ($argv instanceof EventInterface) {
-            $e = $argv;
-            $e->setName($event);
-            $e->setTarget($target);
-        } else {
-            $e = new $this->eventClass();
-            $e->setName($event);
-            $e->setTarget($target);
-            $e->setParams($argv);
-        }
-
-        if (!is_callable($callback)) {
-            throw new Exception\InvalidCallbackException('Invalid callback provided');
-        }
-
-        // Initial value of stop propagation flag should be false
-        $e->stopPropagation(false);
-
-        return $this->triggerListeners($event, $e, $callback);
+        trigger_error(
+            'This method is deprecated and will be removed in the future. ' .
+            'Please use trigger() instead.',
+            E_USER_DEPRECATED
+        );
+        return $this->trigger($event, $target, $argv, $callback);
     }
 
     /**

@@ -162,7 +162,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
             $search = $e->getParam('search', '?');
             return strstr($string, $search);
         });
-        $responses = $this->events->triggerUntil(
+        $responses = $this->events->trigger(
             'foo.bar',
             $this,
             array('string' => 'foo', 'search' => 'f'),
@@ -205,7 +205,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->events->attach('foo.bar', function () { return 'nada'; }, 3);
         $this->events->attach('foo.bar', function () { return 'found'; }, 2);
         $this->events->attach('foo.bar', function () { return 'zero'; }, 1);
-        $responses = $this->events->triggerUntil('foo.bar', $this, array(), function ($result) {
+        $responses = $this->events->trigger('foo.bar', $this, array(), function ($result) {
             return ($result === 'found');
         });
         $this->assertTrue($responses instanceof ResponseCollection);
@@ -221,7 +221,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->events->attach('foo.bar', function () { return 'nada'; });
         $this->events->attach('foo.bar', function () { return 'zero'; });
         $this->events->attach('foo.bar', function () { return 'found'; });
-        $responses = $this->events->triggerUntil('foo.bar', $this, array(), function ($result) {
+        $responses = $this->events->trigger('foo.bar', $this, array(), function ($result) {
             return ($result === 'found');
         });
         $this->assertTrue($responses instanceof ResponseCollection);
@@ -235,7 +235,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->events->attach('foo.bar', function () { return 'nada'; }, 3);
         $this->events->attach('foo.bar', function () { return 'found'; }, 2);
         $this->events->attach('foo.bar', function () { return 'zero'; }, 1);
-        $responses = $this->events->triggerUntil('foo.bar', $this, array(), function ($result) {
+        $responses = $this->events->trigger('foo.bar', $this, array(), function ($result) {
             return ($result === 'never found');
         });
         $this->assertTrue($responses instanceof ResponseCollection);
@@ -465,7 +465,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->events->attach(__FUNCTION__, function ($e) {
             return $e;
         });
-        $responses = $this->events->triggerUntil($event, function ($r) {
+        $responses = $this->events->trigger($event, function ($r) {
             return ($r instanceof EventInterface);
         });
         $this->assertTrue($responses->stopped());
@@ -480,7 +480,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->events->attach(__FUNCTION__, function ($e) {
             return $e;
         });
-        $responses = $this->events->triggerUntil(__FUNCTION__, $event, function ($r) {
+        $responses = $this->events->trigger(__FUNCTION__, $event, function ($r) {
             return ($r instanceof EventInterface);
         });
         $this->assertTrue($responses->stopped());
@@ -495,7 +495,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->events->attach(__FUNCTION__, function ($e) {
             return $e;
         });
-        $responses = $this->events->triggerUntil(__FUNCTION__, $this, $event, function ($r) {
+        $responses = $this->events->trigger(__FUNCTION__, $this, $event, function ($r) {
             return ($r instanceof EventInterface);
         });
         $this->assertTrue($responses->stopped());
@@ -665,9 +665,22 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         };
         $event = new Event();
         $event->stopPropagation(true);
-        $this->events->triggerUntil('foo', $event, $criteria);
+        $this->events->trigger('foo', $event, $criteria);
 
         $this->assertFalse($marker->propagationIsStopped);
         $this->assertFalse($event->propagationIsStopped());
+    }
+
+    public function testTriggerUntilDeprecated()
+    {
+        $deprecated = null;
+        set_error_handler(function () use (&$deprecated) {
+            $deprecated = true;
+        }, E_USER_DEPRECATED);
+
+        $this->events->triggerUntil('foo.bar', $this, array('foo' => 'bar'), function () {});
+        restore_error_handler();
+
+        $this->assertTrue($deprecated, 'EventManager::triggerUntil not marked as E_USER_DEPRECATED');
     }
 }

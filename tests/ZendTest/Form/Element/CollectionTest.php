@@ -511,7 +511,7 @@ class CollectionTest extends TestCase
 
         $form->bind($customer);
         $form->setData($data);
-        $form->isValid();
+        $this->assertTrue($form->isValid());
     }
 
     public function testDoNotCreateExtraFieldsetOnMultipleBind()

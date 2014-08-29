@@ -869,17 +869,22 @@ class Form extends Fieldset implements FormInterface
     /**
      * Recursively extract values for elements and sub-fieldsets, and populate form values
      *
+     * @param boolean $populate
      * @return array
      */
-    protected function extract()
+    protected function extract($populate = true)
     {
         if (null !== $this->baseFieldset) {
             $name = $this->baseFieldset->getName();
             $values[$name] = $this->baseFieldset->extract();
-            $this->baseFieldset->populateValues($values[$name]);
+            if ($populate) {
+                $this->baseFieldset->populateValues($values[$name]);
+            }
         } else {
             $values = parent::extract();
-            $this->populateValues($values);
+            if ($populate) {
+                $this->populateValues($values);
+            }
         }
 
         return $values;

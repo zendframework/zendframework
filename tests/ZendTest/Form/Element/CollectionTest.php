@@ -479,6 +479,41 @@ class CollectionTest extends TestCase
         $this->assertNotSame($categories[1], $cat2);
     }
 
+    public function testAddingCollectionElementAfterBind()
+    {
+        $form = new Form();
+        $form->setHydrator(new ObjectPropertyHydrator());
+
+        $phone = new \ZendTest\Form\TestAsset\PhoneFieldset();
+
+        $form->add(array(
+            'name' => 'phones',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $phone,
+                'count' => 1,
+                'allow_add' => true
+            ),
+        ));
+
+        $data = array(
+            'phones' => array(
+                array('number' => '1234567'),
+                array('number' => '1234568'),
+            )
+        );
+
+        $phone = new Phone();
+        $phone->setNumber($data['phones'][0]['number']);
+
+        $customer = new stdClass();
+        $customer->phones = array($phone);
+
+        $form->bind($customer);
+        $form->setData($data);
+        $form->isValid();
+    }
+
     public function testDoNotCreateExtraFieldsetOnMultipleBind()
     {
         $form = new \Zend\Form\Form();

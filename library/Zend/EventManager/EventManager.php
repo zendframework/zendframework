@@ -393,7 +393,7 @@ class EventManager implements EventManagerInterface
      *
      * Use this method if you want to be able to modify arguments from within a
      * listener. It returns an ArrayObject of the arguments, which may then be
-     * passed to trigger() or triggerUntil().
+     * passed to trigger().
      *
      * @param  array $args
      * @return ArrayObject
@@ -406,8 +406,7 @@ class EventManager implements EventManagerInterface
     /**
      * Trigger listeners
      *
-     * Actual functionality for triggering listeners, to which both trigger() and triggerUntil()
-     * delegate.
+     * Actual functionality for triggering listeners, to which trigger() delegate.
      *
      * @param  string           $event Event name
      * @param  EventInterface $e

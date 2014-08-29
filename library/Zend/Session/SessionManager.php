@@ -331,7 +331,7 @@ class SessionManager extends AbstractManager
     public function isValid()
     {
         $validator = $this->getValidatorChain();
-        $responses = $validator->triggerUntil('session.validate', $this, array($this), function ($test) {
+        $responses = $validator->trigger('session.validate', $this, array($this), function ($test) {
             return false === $test;
         });
         if ($responses->stopped()) {

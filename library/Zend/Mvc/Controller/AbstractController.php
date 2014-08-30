@@ -161,7 +161,7 @@ abstract class AbstractController implements
     {
         $className = get_class($this);
 
-        $events->setIdentifiers(array_merge(
+        $identifiers = array_merge(
             array(
                 'Zend\Stdlib\DispatchableInterface',
                 __CLASS__,
@@ -169,8 +169,14 @@ abstract class AbstractController implements
                 substr($className, 0, strpos($className, '\\'))
             ),
             (array) $this->eventIdentifier
-        ));
+        );
+
+        $instanceof = class_implements($this);
+        if (is_array($instanceof)) {
+            $identifiers = array_merge($identifiers, array_values($instanceof));
+        }
         
+        $events->setIdentifiers($identifiers);
         $this->events = $events;
         $this->attachDefaultListeners();
 

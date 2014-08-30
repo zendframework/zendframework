@@ -17,11 +17,6 @@ class Phone
     protected $number;
 
     /**
-     * @var string
-     */
-    protected $type;
-
-    /**
      * @param string $number
      * @return self
      */
@@ -38,24 +33,4 @@ class Phone
     {
         return $this->number;
     }
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $type
-     * @return self
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-        return $this;
-    }
-
-
 }

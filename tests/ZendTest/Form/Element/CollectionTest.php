@@ -540,10 +540,8 @@ class CollectionTest extends TestCase
                 ))
         );
 
-        $testType = 'work';
         $phone  = new Phone();
         $phone->setNumber($data['addresses'][0]['phones'][0]['number']);
-        $phone->setType($testType);
 
         $address = new Address();
         $address->setStreet($data['addresses'][0]['street']);
@@ -557,7 +555,6 @@ class CollectionTest extends TestCase
 
         $this->assertTrue($form->isValid());
         $phones = $customer->addresses[0]->getPhones();
-        $this->assertEquals($testType, $phones[0]->getType());
         $this->assertSame($phone, $phones[0]);
     }
 

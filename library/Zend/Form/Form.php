@@ -300,7 +300,7 @@ class Form extends Fieldset implements FormInterface
 
         $this->bindAs = $flags;
         $this->setObject($object);
-        $this->extract();
+        $this->extractAndPopulate();
 
         return $this;
     }
@@ -479,7 +479,7 @@ class Form extends Fieldset implements FormInterface
         }
 
         if (!is_array($this->data)) {
-            $data = $this->extract();
+            $data = $this->extractAndPopulate();
             if (!is_array($data)) {
                 throw new Exception\DomainException(sprintf(
                     '%s is unable to validate as there is no data currently set',
@@ -869,22 +869,33 @@ class Form extends Fieldset implements FormInterface
     /**
      * Recursively extract values for elements and sub-fieldsets, and populate form values
      *
-     * @param boolean $populate
      * @return array
      */
-    protected function extract($populate = true)
+    protected function extractAndPopulate()
+    {
+        $values = $this->extract();
+        if ($this->baseFieldset !== null) {
+            $name = $this->baseFieldset->getName();
+            $this->baseFieldset->populateValues($values[$name]);
+        } else {
+            $this->populateValues($values);
+        }
+
+        return $values;
+    }
+
+    /**
+     * Recursively extract values for elements and sub-fieldsets
+     *
+     * @return array
+     */
+    protected function extract()
     {
         if (null !== $this->baseFieldset) {
             $name = $this->baseFieldset->getName();
             $values[$name] = $this->baseFieldset->extract();
-            if ($populate) {
-                $this->baseFieldset->populateValues($values[$name]);
-            }
         } else {
             $values = parent::extract();
-            if ($populate) {
-                $this->populateValues($values);
-            }
         }
 
         return $values;

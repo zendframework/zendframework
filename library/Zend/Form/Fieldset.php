@@ -570,7 +570,7 @@ class Fieldset extends Element implements FieldsetInterface
      */
     public function bindValues(array $values = array())
     {
-        $objectData = $this->extract(false);
+        $objectData = $this->extract();
         $hydrator = $this->getHydrator();
         $hydratableData = array();
 

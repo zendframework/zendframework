@@ -61,4 +61,21 @@ class ViewHelperManagerFactoryTest extends TestCase
         $basePath = $manager->get('basepath');
         $this->assertInstanceof('Zend\View\Helper\BasePath', $basePath);
     }
+
+    public function testConsoleRequestWithBasePathConsole()
+    {
+        $this->services->setService('Config',
+            array(
+                'view_manager' => array(
+                    'base_path_console' => 'http://test.com'
+                )
+            )
+        );
+        $this->services->setService('Requeset', new ConsoleRequest());
+
+        $manager = $this->factory->createService($this->services);
+
+        $basePath = $manager->get('basepath');
+        $this->assertEquals('http://test.com', $basePath());
+    }
 }

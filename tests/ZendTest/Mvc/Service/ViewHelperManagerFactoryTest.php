@@ -71,7 +71,7 @@ class ViewHelperManagerFactoryTest extends TestCase
                 )
             )
         );
-        $this->services->setService('Requeset', new ConsoleRequest());
+        $this->services->setService('Request', new ConsoleRequest());
 
         $manager = $this->factory->createService($this->services);
 

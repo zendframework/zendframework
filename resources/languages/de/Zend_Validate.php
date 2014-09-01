@@ -23,7 +23,7 @@ return array(
     
     // Zend\I18n\Validator\DateTime
     "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
-    "The input does not appear to be a valid datetime" => "Der Eingabewert scheint kein Datetime zu sein",
+    "The input does not appear to be a valid datetime" => "Der Eingabewert scheint keine gültige Datums- und Zeitangabe zu sein",
     
     // Zend\I18n\Validator\Float
     "Invalid type given. String, integer or float expected" => "Ungültiger Eingabewert. String, Integer oder Float erwartet",
@@ -34,14 +34,14 @@ return array(
     "The input does not appear to be an integer" => "Der Eingabewert ist keine ganze Zahl",
     
     // Zend\I18n\Validator\PhoneNumber
-    "The input does not match a phone number format" => "Der Eingabewert ist nicht im Telefonnummern-Format",
+    "The input does not match a phone number format" => "Der Eingabewert ist keine gültige Telefonnummer",
     "The country provided is currently unsupported" => "Das gegebene Land wird zurzeit nicht unterstützt",
     "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     
     // Zend\I18n\Validator\PostCode
     "Invalid type given. String or integer expected" => "Ungültiger Eingabewert. String oder Integer erwartet",
     "The input does not appear to be a postal code" => "Der Eingabewert scheint keine gültige Postleitzahl zu sein",
-    "An exception has been raised while validating the input" => "Ein Fehler ist während der Prüfung des Eingabewertes ausgetreten",
+    "An exception has been raised while validating the input" => "Ein Fehler ist während der Prüfung des Eingabewertes aufgetreten",
     
     // Zend\Validator\Barcode
     "The input failed checksum validation" => "Der Eingabewert hat die Prüfsumme nicht bestanden",
@@ -50,12 +50,12 @@ return array(
     "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     
     // Zend\Validator\Between
-    "The input is not between '%min%' and '%max%', inclusively" => "Der Eingabewert ist nicht zwischen '%min%' und '%max%', inklusive diesen Werten",
-    "The input is not strictly between '%min%' and '%max%'" => "Der Eingabewert ist nicht zwischen '%min%' und '%max%'",
+    "The input is not between '%min%' and '%max%', inclusively" => "Der Eingabewert ist nicht zwischen '%min%' und '%max%', inklusive",
+    "The input is not strictly between '%min%' and '%max%'" => "Der Eingabewert ist nicht genau zwischen '%min%' und '%max%'",
     
     // Zend\Validator\Callback
     "The input is not valid" => "Der Eingabewert ist ungültig",
-    "An exception has been raised within the callback" => "Ein Fehler ist während des Callbacks ausgetreten",
+    "An exception has been raised within the callback" => "Ein Fehler ist während des Callbacks aufgetreten",
     
     // Zend\Validator\CreditCard
     "The input seems to contain an invalid checksum" => "Der Eingabewert enthält eine ungültige Prüfsumme",
@@ -63,21 +63,21 @@ return array(
     "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
     "The input contains an invalid amount of digits" => "Der Eingabewert enthält eine ungültige Anzahl an Zahlen",
     "The input is not from an allowed institute" => "Der Eingabewert ist von keinem erlaubtem Kreditinstitut",
-    "The input seems to be an invalid creditcard number" => "Der Eingabewert scheint eine ungültige Kretitkartennummer zu sein",
+    "The input seems to be an invalid creditcard number" => "Der Eingabewert scheint eine ungültige Kreditkartennummer zu sein",
     "An exception has been raised while validating the input" => "Ein Fehler ist während der Prüfung des Eingabewertes aufgetreten",
     
     // Zend\Validator\Csrf
-    "The form submitted did not originate from the expected site" => "Der Ursprung des abgesendeten Formulares konnte nicht bestätigt werden",
+    "The form submitted did not originate from the expected site" => "Der Ursprung des abgesendeten Formulars konnte nicht bestätigt werden",
     
     // Zend\Validator\Date
-    "Invalid type given. String, integer, array or DateTime expected" => "Ungültiger Eingabewert. String, Integer, array oder DateTime erwartet",
+    "Invalid type given. String, integer, array or DateTime expected" => "Ungültiger Eingabewert. String, Integer, Array oder Datums- und Zeitangabe erwartet",
     "The input does not appear to be a valid date" => "Der Eingabewert scheint kein gültiges Datum zu sein",
     "The input does not fit the date format '%format%'" => "Der Eingabewert entspricht nicht dem Format '%format%'",
     
     // Zend\Validator\DateStep
-    "Invalid type given. String, integer, array or DateTime expected" => "Ungültiger Eingabewert. String, Integer, array oder DateTime erwartet",
+    "Invalid type given. String, integer, array or DateTime expected" => "Ungültiger Eingabewert. String, Integer, Array oder Datums- und Zeitangabe erwartet",
     "The input does not appear to be a valid date" => "Der Eingabewert scheint kein gültiges Datum zu sein",
-    "The input does not fit the date format '%format%'" => "Der Eingabewert pass nicht zum Datumformat '%format%'",
+    "The input does not fit the date format '%format%'" => "Der Eingabewert pass nicht zum Datumsformat '%format%'",
     "The input is not a valid step" => "Der Eingabewert ist kein gültiger Abschnitt",
     
     // Zend\Validator\Db\AbstractDb
@@ -110,18 +110,18 @@ return array(
     // Zend\Validator\File\Crc32
     "File does not match the given crc32 hashes" => "Die Datei entspricht nicht den angegebenen CRC32 Hashes",
     "A crc32 hash could not be evaluated for the given file" => "Für die angegebene Datei konnte kein CRC32 Hash evaluiert werden",
-    "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist" => "Die Datei ist nicht lesbar oder existiert nicht",
     
     // Zend\Validator\File\ExcludeExtension
     "File has an incorrect extension" => "Die Datei hat einen falschen Dateityp",
-    "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist" => "Die Datei ist nicht lesbar oder existiert nicht",
     
     // Zend\Validator\File\Exists
     "File does not exist" => "Die Datei existiert nicht",
     
     // Zend\Validator\File\Extension
     "File has an incorrect extension" => "Die Datei hat einen falschen Dateityp",
-    "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist" => "Die Datei ist nicht lesbar oder existiert nicht",
     
     // Zend\Validator\File\FilesSize
     "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "Alle Dateien sollten in Summe eine maximale Größe von '%max%' haben, aber es wurde '%size%' erkannt",
@@ -131,7 +131,7 @@ return array(
     // Zend\Validator\File\Hash
     "File does not match the given hashes" => "Die Datei entspricht nicht den angegebenen Hashes",
     "A hash could not be evaluated for the given file" => "Für die angegebene Datei konnte kein Hash evaluiert werden",
-    "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist" => "Die Datei ist nicht lesbar oder existiert nicht",
     
     // Zend\Validator\File\ImageSize
     "Maximum allowed width for image should be '%maxwidth%' but '%width%' detected" => "Die maximal erlaubte Breite für das Bild ist '%maxwidth%', aber es wurde '%width%' erkannt",
@@ -139,27 +139,27 @@ return array(
     "Maximum allowed height for image should be '%maxheight%' but '%height%' detected" => "Die maximal erlaubte Höhe für das Bild ist '%maxheight%', aber es wurde '%height%' erkannt",
     "Minimum expected height for image should be '%minheight%' but '%height%' detected" => "Die minimal erlaubte Höhe für das Bild ist '%minheight%', aber es wurde '%height%' erkannt",
     "The size of image could not be detected" => "Die Größe des Bildes konnte nicht erkannt werden",
-    "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist" => "Die Datei ist nicht lesbar oder existiert nicht",
     
     // Zend\Validator\File\IsCompressed
     "File is not compressed, '%type%' detected" => "Die Datei ist nicht komprimiert. Es wurde '%type%' erkannt",
     "The mimetype of file could not be detected" => "Der Mimetyp der Datei konnte nicht erkannt werden",
-    "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist" => "Die Datei ist nicht lesbar oder existiert nicht",
     
     // Zend\Validator\File\IsImage
     "File is no image, '%type%' detected" => "Die Datei ist kein Bild. Es wurde '%type%' erkannt",
     "The mimetype of file could not be detected" => "Der Mimetyp der Datei konnte nicht erkannt werden",
-    "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist" => "Die Datei ist nicht lesbar oder existiert nicht",
     
     // Zend\Validator\File\Md5
     "File does not match the given md5 hashes" => "Die Datei entspricht nicht den angegebenen MD5 Hashes",
     "A md5 hash could not be evaluated for the given file" => "Für die angegebene Datei konnte kein MD5 Hash evaluiert werden",
-    "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist" => "Die Datei ist nicht lesbar oder existiert nicht",
     
     // Zend\Validator\File\MimeType
     "File has a false mimetype of '%type%'" => "Die Datei hat einen falschen Mimetyp von '%type%'",
     "The mimetype could not be detected from the file" => "Der Mimetyp der Datei konnte nicht erkannt werden",
-    "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist" => "Die Datei ist nicht lesbar oder existiert nicht",
     
     // Zend\Validator\File\NotExists
     "File exists" => "Die Datei existiert bereits",
@@ -167,12 +167,12 @@ return array(
     // Zend\Validator\File\Sha1
     "File does not match the given sha1 hashes" => "Die Datei entspricht nicht den angegebenen SHA1 Hashes",
     "A sha1 hash could not be evaluated for the given file" => "Für die angegebene Datei konnte kein SHA1 Hash evaluiert werden",
-    "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist" => "Die Datei ist nicht lesbar oder existiert nicht",
     
     // Zend\Validator\File\Size
     "Maximum allowed size for file is '%max%' but '%size%' detected" => "Die maximal erlaubte Größe für die Datei ist '%max%', aber es wurde '%size%' entdeckt",
     "Minimum expected size for file is '%min%' but '%size%' detected" => "Die mindestens erwartete Größe für die Datei ist '%min%', aber es wurde '%size%' entdeckt",
-    "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist" => "Die Datei ist nicht lesbar oder existiert nicht",
     
     // Zend\Validator\File\Upload
     "File '%value%' exceeds the defined ini size" => "Die Datei '%value%' übersteigt die definierte Größe in der Konfiguration",
@@ -259,7 +259,7 @@ return array(
     // Zend\Validator\Regex
     "Invalid type given. String, integer or float expected" => "Ungültiger Eingabewert. String, Integer oder Float erwartet",
     "The input does not match against pattern '%pattern%'" => "Der Eingabewert entspricht nicht folgendem Muster: '%pattern%'",
-    "There was an internal error while using the pattern '%pattern%'" => "Es gab einen internen Fehler bei der Verwendung des Muster: '%pattern%'",
+    "There was an internal error while using the pattern '%pattern%'" => "Es gab einen internen Fehler bei der Verwendung des Musters: '%pattern%'",
     
     // Zend\Validator\Sitemap\Changefreq
     "The input is not a valid sitemap changefreq" => "Der Eingabewert ist keine gültige 'changefreq' für Sitemap",

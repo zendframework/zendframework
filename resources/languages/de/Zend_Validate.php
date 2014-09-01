@@ -44,7 +44,7 @@ return array(
     "An exception has been raised while validating the input" => "Ein Fehler ist während der Prüfung des Eingabewertes ausgetreten",
     
     // Zend\Validator\Barcode
-    "The input failed checksum validation" => "Der Eingabewert hat die Prüfung der Prüfsumme nicht bestanden",
+    "The input failed checksum validation" => "Der Eingabewert hat die Prüfsumme nicht bestanden",
     "The input contains invalid characters" => "Der Eingabewert enthält ungültige Zeichen",
     "The input should have a length of %length% characters" => "Der Eingabewert sollte %length% Zeichen lang sein",
     "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
@@ -64,7 +64,7 @@ return array(
     "The input contains an invalid amount of digits" => "Der Eingabewert enthält eine ungültige Anzahl an Zahlen",
     "The input is not from an allowed institute" => "Der Eingabewert ist von keinem erlaubtem Kreditinstitut",
     "The input seems to be an invalid creditcard number" => "Der Eingabewert scheint eine ungültige Kretitkartennummer zu sein",
-    "An exception has been raised while validating the input" => "Ein Fehler ist während der Prüfung des Eingabewertes ausgetreten",
+    "An exception has been raised while validating the input" => "Ein Fehler ist während der Prüfung des Eingabewertes aufgetreten",
     
     // Zend\Validator\Csrf
     "The form submitted did not originate from the expected site" => "Der Ursprung des abgesendeten Formulares konnte nicht bestätigt werden",
@@ -91,13 +91,13 @@ return array(
     
     // Zend\Validator\EmailAddress
     "Invalid type given. String expected" => "Ungültiger Eingabewert. String erwartet",
-    "The input is not a valid email address. Use the basic format local-part@hostname" => "Der Eingabewert ist keine gültige E-Mail-Adresse. Benutzen Sie folgendes format: your-name@anbieter",
-    "'%hostname%' is not a valid hostname for the email address" => "'%hostname%' ist kein gültiger Hostname für die Emailadresse",
-    "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' scheint keinen gültigen MX Eintrag für die Emailadresse '%value%' zu haben",
-    "'%hostname%' is not in a routable network segment. The email address  should not be resolved from public network" => "'%hostname%' ist in keinem routebaren Netzwerksegment. Die Emailadresse sollte nicht vom öffentlichen Netz aus aufgelöst werden",
+    "The input is not a valid email address. Use the basic format local-part@hostname" => "Der Eingabewert ist keine gültige E-Mail-Adresse. Benutzen Sie folgendes Format: dein-name@anbieter",
+    "'%hostname%' is not a valid hostname for the email address" => "'%hostname%' ist kein gültiger Hostname für die E-Mail-Adresse",
+    "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' scheint keinen gültigen MX Eintrag für die E-Mail-Adresse '%value%' zu haben",
+    "'%hostname%' is not in a routable network segment. The email address  should not be resolved from public network" => "'%hostname%' ist in keinem routebaren Netzwerksegment. Die E-Mail-Adresse sollte nicht vom öffentlichen Netz aus aufgelöst werden",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' passt nicht auf das dot-atom Format",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' passt nicht auf das quoted-string Format",
-    "'%localPart%' is not a valid local part for the email address" => "'%localPart%' ist kein gültiger lokaler Teil für die Emailadresse",
+    "'%localPart%' is not a valid local part for the email address" => "'%localPart%' ist kein gültiger lokaler Teil für die E-Mail-Adresse",
     "The input exceeds the allowed length" => "Der Eingabewert ist länger als erlaubt",
     
     // Zend\Validator\Explode
@@ -108,8 +108,8 @@ return array(
     "Too few files, minimum '%min%' are expected but '%count%' are given" => "Zu wenige Dateien. Minimal '%min%' wurden erwartet aber nur '%count%' wurden angegeben",
     
     // Zend\Validator\File\Crc32
-    "File does not match the given crc32 hashes" => "Die Datei entspricht nicht den angegebenen Crc32 Hashes",
-    "A crc32 hash could not be evaluated for the given file" => "Für die angegebene Datei konnte kein Crc32 Hash evaluiert werden",
+    "File does not match the given crc32 hashes" => "Die Datei entspricht nicht den angegebenen CRC32 Hashes",
+    "A crc32 hash could not be evaluated for the given file" => "Für die angegebene Datei konnte kein CRC32 Hash evaluiert werden",
     "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
     
     // Zend\Validator\File\ExcludeExtension
@@ -152,8 +152,8 @@ return array(
     "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
     
     // Zend\Validator\File\Md5
-    "File does not match the given md5 hashes" => "Die Datei entspricht nicht den angegebenen Md5 Hashes",
-    "A md5 hash could not be evaluated for the given file" => "Für die angegebene Datei konnte kein Md5 Hash evaluiert werden",
+    "File does not match the given md5 hashes" => "Die Datei entspricht nicht den angegebenen MD5 Hashes",
+    "A md5 hash could not be evaluated for the given file" => "Für die angegebene Datei konnte kein MD5 Hash evaluiert werden",
     "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
     
     // Zend\Validator\File\MimeType
@@ -165,8 +165,8 @@ return array(
     "File exists" => "Die Datei existiert bereits",
     
     // Zend\Validator\File\Sha1
-    "File does not match the given sha1 hashes" => "Die Datei entspricht nicht den angegebenen Sha1 Hashes",
-    "A sha1 hash could not be evaluated for the given file" => "Für die angegebene Datei konnte kein Sha1 Hash evaluiert werden",
+    "File does not match the given sha1 hashes" => "Die Datei entspricht nicht den angegebenen SHA1 Hashes",
+    "A sha1 hash could not be evaluated for the given file" => "Für die angegebene Datei konnte kein SHA1 Hash evaluiert werden",
     "File is not readable or does not exist" => "Die Datei konnte nicht gelesen werden oder existiert nicht",
     
     // Zend\Validator\File\Size
@@ -201,7 +201,7 @@ return array(
     // Zend\Validator\File\WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Zu viele Wörter. Maximal '%max%' sind erlaubt, aber '%count%' wurden gezählt",
     "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Zu wenige Wörter. Mindestens '%min%' wurden erwartet, aber '%count%' wurden gezählt",
-    "File is not readable or does not exist" => "Die Datei xkonnte nicht gelesen werden oder existiert nicht",
+    "File is not readable or does not exist" => "Die Datei ist nicht lesbar oder existiert nicht",
     
     // Zend\Validator\GreaterThan
     "The input is not greater than '%min%'" => "Der Eingabewert ist nicht größer als '%min%'",
@@ -221,7 +221,7 @@ return array(
     "The input does not appear to be a valid URI hostname" => "Der Eingabewert scheint kein gültiger URI Hostname zu sein",
     "The input appears to be an IP address, but IP addresses are not allowed" => "Der Eingabewert scheint eine IP-Adresse zu sein, aber IP-Adressen sind nicht erlaubt",
     "The input appears to be a local network name but local network names are not allowed" => "Der Eingabewert scheint ein lokaler Netzwerkname zu sein, aber lokale Netzwerknamen sind nicht erlaubt",
-    "The input appears to be a DNS hostname but cannot extract TLD part" => "Der Eingabewert scheint ein DNS Hostname zu sein, aber der TLD Teil konnte nicht extrahiert werden",
+    "The input appears to be a DNS hostname but cannot extract TLD part" => "Der Eingabewert scheint ein DNS Hostname zu sein, aber der TLD-Teil konnte nicht extrahiert werden",
     "The input appears to be a DNS hostname but cannot match TLD against known list" => "Der Eingabewert scheint ein DNS Hostname zu sein, aber die TLD wurde in der bekannten Liste nicht gefunden",
     
     // Zend\Validator\Iban

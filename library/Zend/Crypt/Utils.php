@@ -21,6 +21,7 @@ class Utils
      * is found in the two buffers. That makes possible of leaking
      * timing information useful to an attacker attempting to iteratively guess
      * the unknown string (e.g. password).
+     * The length will leak.
      *
      * @param  string $expected
      * @param  string $actual
@@ -30,6 +31,11 @@ class Utils
     {
         $expected     = (string) $expected;
         $actual       = (string) $actual;
+
+        if (function_exists('hash_equals')) {
+            return hash_equals($expected, $actual);
+        }
+
         $lenExpected  = strlen($expected);
         $lenActual    = strlen($actual);
         $len          = min($lenExpected, $lenActual);

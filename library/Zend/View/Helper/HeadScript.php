@@ -83,7 +83,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      *
      * @var array
      */
-    protected $optionalAttributes = array('charset', 'defer', 'language', 'src');
+    protected $optionalAttributes = array('charset', 'crossorigin', 'defer', 'language', 'src');
 
     /**
      * Required attributes for script tag

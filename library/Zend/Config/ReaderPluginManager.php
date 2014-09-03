@@ -19,11 +19,11 @@ class ReaderPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array(
-        'ini'            => 'Zend\Config\Reader\Ini',
-        'json'           => 'Zend\Config\Reader\Json',
-        'xml'            => 'Zend\Config\Reader\Xml',
-        'yaml'           => 'Zend\Config\Reader\Yaml',
-        'Javaproperties' => 'Zend\Config\Reader\JavaProperties',
+        'ini'             => 'Zend\Config\Reader\Ini',
+        'json'            => 'Zend\Config\Reader\Json',
+        'xml'             => 'Zend\Config\Reader\Xml',
+        'yaml'            => 'Zend\Config\Reader\Yaml',
+        'javaproperties'  => 'Zend\Config\Reader\JavaProperties',
     );
 
     /**

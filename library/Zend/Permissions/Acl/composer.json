@@ -16,6 +16,9 @@
     "require": {
         "php": ">=5.3.23"
     },
+    "suggest": {
+        "zendframework/zend-servicemanager": "To support Zend\\Permissions\\Acl\\Assertion\\AssertionManager plugin manager usage"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.3-dev",

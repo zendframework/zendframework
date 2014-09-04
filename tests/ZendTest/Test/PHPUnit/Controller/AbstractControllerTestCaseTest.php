@@ -305,6 +305,12 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->dispatch('/tests', 'PUT', array('a' => 1));
         $this->assertEquals('a=1', $this->getRequest()->getContent());
     }
+    
+    public function testCanHandleMultidimensionalParams()
+    {
+        $this->dispatch('/tests', 'PUT', array('a' => array('b' => 1)));
+        $this->assertEquals('a[b]=1', urldecode($this->getRequest()->getContent()));
+    }
 
     public function testAssertTemplateName()
     {

@@ -208,12 +208,12 @@ return array(
     "The input is not greater or equal than '%min%'" => "Die Eingabe ist nicht größer oder gleich '%min%'",
     
     // Zend\Validator\Hex
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     "The input contains non-hexadecimal characters" => "Die Eingabe enthält nicht nur hexadezimale Zeichen",
     
     // Zend\Validator\Hostname
     "The input appears to be a DNS hostname but the given punycode notation cannot be decoded" => "Die Eingabe scheint ein DNS Hostname zu sein, aber die angegebene Punycode Schreibweise konnte nicht dekodiert werden",
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     "The input appears to be a DNS hostname but contains a dash in an invalid position" => "Die Eingabe scheint ein DNS Hostname zu sein, enthält aber einen Bindestrich an einer ungültigen Position",
     "The input does not match the expected structure for a DNS hostname" => "Die Eingabe passt nicht in die erwartete Struktur für einen DNS Hostname",
     "The input appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "Die Eingabe scheint ein DNS Hostname zu sein, passt aber nicht in das Hostname Schema für die TLD '%tld%'",
@@ -238,14 +238,14 @@ return array(
     "The input was not found in the haystack" => "Die Eingabe wurde nicht im Array gefunden",
     
     // Zend\Validator\Ip
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     "The input does not appear to be a valid IP address" => "Die Eingabe scheint keine gültige IP-Adresse zu sein",
     
     // Zend\Validator\IsInstanceOf
     "The input is not an instance of '%className%'" => "Die Eingabe ist keine Instanz von '%className%'",
     
     // Zend\Validator\Isbn
-    "Invalid type given. String or integer expected" => "Ungültige Eingabe. String oder Integer erwartet",
+    "Invalid type given. String or integer expected" => "Ungültige Eingabe. Zeichenkette oder Integer erwartet",
     "The input is not a valid ISBN number" => "Die Eingabe ist keine gültige ISBN",
     
     // Zend\Validator\LessThan
@@ -254,39 +254,39 @@ return array(
     
     // Zend\Validator\NotEmpty
     "Value is required and can't be empty" => "Es wird eine Eingabe benötigt",
-    "Invalid type given. String, integer, float, boolean or array expected" => "Ungültige Eingabe. String, Integer, Float, Boolean oder Array erwartet",
+    "Invalid type given. String, integer, float, boolean or array expected" => "Ungültige Eingabe. Zeichenkette, Integer, Float, Boolean oder Array erwartet",
     
     // Zend\Validator\Regex
-    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. String, Integer oder Float erwartet",
+    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. Zeichenkette, Integer oder Float erwartet",
     "The input does not match against pattern '%pattern%'" => "Die Eingabe entspricht nicht folgendem Muster: '%pattern%'",
     "There was an internal error while using the pattern '%pattern%'" => "Es gab einen internen Fehler bei der Verwendung des Musters: '%pattern%'",
     
     // Zend\Validator\Sitemap\Changefreq
     "The input is not a valid sitemap changefreq" => "Die Eingabe ist keine gültige 'changefreq' für Sitemap",
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     
     // Zend\Validator\Sitemap\Lastmod
     "The input is not a valid sitemap lastmod" => "Die Eingabe ist keine gültige 'lastmod' für Sitemap",
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     
     // Zend\Validator\Sitemap\Loc
     "The input is not a valid sitemap location" => "Die Eingabe ist keine gültige 'location' für Sitemap",
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     
     // Zend\Validator\Sitemap\Priority
     "The input is not a valid sitemap priority" => "Die Eingabe ist keine gültige 'priority' für Sitemap",
-    "Invalid type given. Numeric string, integer or float expected" => "Ungültige Eingabe. Nummerischer String, Integer oder Float erwartet",
+    "Invalid type given. Numeric string, integer or float expected" => "Ungültige Eingabe. Nummerische Zeichenkette, Integer oder Float erwartet",
     
     // Zend\Validator\Step
     "Invalid value given. Scalar expected" => "Ungültige Eingabe. Skalar erwartet",
     "The input is not a valid step" => "Die Eingabe ist kein gültiger Abschnitt",
     
     // Zend\Validator\StringLength
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     "The input is less than %min% characters long" => "Die Eingabe ist weniger als %min% Zeichen lang",
     "The input is more than %max% characters long" => "Die Eingabe ist mehr als %max% Zeichen lang",
     
     // Zend\Validator\Uri
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     "The input does not appear to be a valid Uri" => "Die Eingabe scheint keine gültige Uri zu sein",
 );

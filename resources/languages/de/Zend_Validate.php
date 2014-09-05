@@ -12,34 +12,34 @@
  */
 return array(
     // Zend\I18n\Validator\Alnum
-    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. String, Integer oder Float erwartet",
+    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. Zeichenkette, Integer oder Float erwartet",
     "The input contains characters which are non alphabetic and no digits" => "Die Eingabe enthält nicht alphanumerische Zeichen",
     "The input is an empty string" => "Die Eingabe ist leer",
     
     // Zend\I18n\Validator\Alpha
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     "The input contains non alphabetic characters" => "Die Eingabe enthält nichtalphabetische Zeichen",
     "The input is an empty string" => "Die Eingabe ist leer",
     
     // Zend\I18n\Validator\DateTime
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     "The input does not appear to be a valid datetime" => "Die Eingabe scheint keine gültige Datums- und Zeitangabe zu sein",
     
     // Zend\I18n\Validator\Float
-    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. String, Integer oder Float erwartet",
+    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. Zeichenkette, Integer oder Float erwartet",
     "The input does not appear to be a float" => "Die Eingabe scheint keine Gleitkommazahl zu sein",
     
     // Zend\I18n\Validator\Int
-    "Invalid type given. String or integer expected" => "Ungültige Eingabe. String oder Integer erwartet",
+    "Invalid type given. String or integer expected" => "Ungültige Eingabe. Zeichenkette oder Integer erwartet",
     "The input does not appear to be an integer" => "Die Eingabe ist keine ganze Zahl",
     
     // Zend\I18n\Validator\PhoneNumber
     "The input does not match a phone number format" => "Die Eingabe ist keine gültige Telefonnummer",
     "The country provided is currently unsupported" => "Das gegebene Land wird zurzeit nicht unterstützt",
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     
     // Zend\I18n\Validator\PostCode
-    "Invalid type given. String or integer expected" => "Ungültige Eingabe. String oder Integer erwartet",
+    "Invalid type given. String or integer expected" => "Ungültige Eingabe. Zeichenkette oder Integer erwartet",
     "The input does not appear to be a postal code" => "Die Eingabe scheint keine gültige Postleitzahl zu sein",
     "An exception has been raised while validating the input" => "Ein Fehler ist während der Prüfung der Eingabe aufgetreten",
     
@@ -47,7 +47,7 @@ return array(
     "The input failed checksum validation" => "Die Eingabe hat die Prüfsumme nicht bestanden",
     "The input contains invalid characters" => "Die Eingabe enthält ungültige Zeichen",
     "The input should have a length of %length% characters" => "Die Eingabe sollte %length% Zeichen lang sein",
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     
     // Zend\Validator\Between
     "The input is not between '%min%' and '%max%', inclusively" => "Die Eingabe ist nicht zwischen '%min%' und '%max%', inklusive",
@@ -60,7 +60,7 @@ return array(
     // Zend\Validator\CreditCard
     "The input seems to contain an invalid checksum" => "Die Eingabe enthält eine ungültige Prüfsumme",
     "The input must contain only digits" => "Die Eingabe darf nur ganze Zahlen enthalten",
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     "The input contains an invalid amount of digits" => "Die Eingabe enthält eine ungültige Anzahl an Zahlen",
     "The input is not from an allowed institute" => "Die Eingabe ist von keinem erlaubtem Kreditinstitut",
     "The input seems to be an invalid creditcard number" => "Die Eingabe scheint eine ungültige Kreditkartennummer zu sein",
@@ -70,12 +70,12 @@ return array(
     "The form submitted did not originate from the expected site" => "Der Ursprung des abgesendeten Formulars konnte nicht bestätigt werden",
     
     // Zend\Validator\Date
-    "Invalid type given. String, integer, array or DateTime expected" => "Ungültige Eingabe. String, Integer, Array oder Datums- und Zeitangabe erwartet",
+    "Invalid type given. String, integer, array or DateTime expected" => "Ungültige Eingabe. Zeichenkette, Integer, Array oder Datums- und Zeitangabe erwartet",
     "The input does not appear to be a valid date" => "Die Eingabe scheint kein gültiges Datum zu sein",
     "The input does not fit the date format '%format%'" => "Die Eingabe entspricht nicht dem Format '%format%'",
     
     // Zend\Validator\DateStep
-    "Invalid type given. String, integer, array or DateTime expected" => "Ungültige Eingabe. String, Integer, Array oder Datums- und Zeitangabe erwartet",
+    "Invalid type given. String, integer, array or DateTime expected" => "Ungültige Eingabe. Zeichenkette, Integer, Array oder Datums- und Zeitangabe erwartet",
     "The input does not appear to be a valid date" => "Die Eingabe scheint kein gültiges Datum zu sein",
     "The input does not fit the date format '%format%'" => "Die Eingabe pass nicht zum Datumsformat '%format%'",
     "The input is not a valid step" => "Die Eingabe ist kein gültiger Abschnitt",
@@ -87,10 +87,10 @@ return array(
     // Zend\Validator\Digits
     "The input must contain only digits" => "Die Eingabe darf nur Zahlen enthalten",
     "The input is an empty string" => "Die Eingabe ist leer",
-    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. String, Integer oder Float erwartet",
+    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. Zeichenkette, Integer oder Float erwartet",
     
     // Zend\Validator\EmailAddress
-    "Invalid type given. String expected" => "Ungültige Eingabe. String erwartet",
+    "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
     "The input is not a valid email address. Use the basic format local-part@hostname" => "Die Eingabe ist keine gültige E-Mail-Adresse. Benutzen Sie folgendes Format: dein-name@anbieter",
     "'%hostname%' is not a valid hostname for the email address" => "'%hostname%' ist kein gültiger Hostname für die E-Mail-Adresse",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' scheint keinen gültigen MX Eintrag für die E-Mail-Adresse '%value%' zu haben",

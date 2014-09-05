@@ -12,7 +12,7 @@
  */
 return array(
     // Zend\I18n\Validator\Alnum
-    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. Zeichenkette, Ganzzahl oder Float erwartet",
+    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. Zeichenkette, Ganzzahl oder Gleitkommazahl erwartet",
     "The input contains characters which are non alphabetic and no digits" => "Die Eingabe enthält nicht alphanumerische Zeichen",
     "The input is an empty string" => "Die Eingabe ist leer",
     
@@ -26,7 +26,7 @@ return array(
     "The input does not appear to be a valid datetime" => "Die Eingabe scheint keine gültige Datums- und Zeitangabe zu sein",
     
     // Zend\I18n\Validator\Float
-    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. Zeichenkette, Ganzzahl oder Float erwartet",
+    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. Zeichenkette, Ganzzahl oder Gleitkommazahl erwartet",
     "The input does not appear to be a float" => "Die Eingabe scheint keine Gleitkommazahl zu sein",
     
     // Zend\I18n\Validator\Int
@@ -87,7 +87,7 @@ return array(
     // Zend\Validator\Digits
     "The input must contain only digits" => "Die Eingabe darf nur Zahlen enthalten",
     "The input is an empty string" => "Die Eingabe ist leer",
-    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. Zeichenkette, Ganzzahl oder Float erwartet",
+    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. Zeichenkette, Ganzzahl oder Gleitkommazahl erwartet",
     
     // Zend\Validator\EmailAddress
     "Invalid type given. String expected" => "Ungültige Eingabe. Zeichenkette erwartet",
@@ -254,10 +254,10 @@ return array(
     
     // Zend\Validator\NotEmpty
     "Value is required and can't be empty" => "Es wird eine Eingabe benötigt",
-    "Invalid type given. String, integer, float, boolean or array expected" => "Ungültige Eingabe. Zeichenkette, Ganzzahl, Float, Boolean oder Array erwartet",
+    "Invalid type given. String, integer, float, boolean or array expected" => "Ungültige Eingabe. Zeichenkette, Ganzzahl, Gleitkommazahl, Boolean oder Array erwartet",
     
     // Zend\Validator\Regex
-    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. Zeichenkette, Ganzzahl oder Float erwartet",
+    "Invalid type given. String, integer or float expected" => "Ungültige Eingabe. Zeichenkette, Ganzzahl oder Gleitkommazahl erwartet",
     "The input does not match against pattern '%pattern%'" => "Die Eingabe entspricht nicht folgendem Muster: '%pattern%'",
     "There was an internal error while using the pattern '%pattern%'" => "Es gab einen internen Fehler bei der Verwendung des Musters: '%pattern%'",
     
@@ -275,7 +275,7 @@ return array(
     
     // Zend\Validator\Sitemap\Priority
     "The input is not a valid sitemap priority" => "Die Eingabe ist keine gültige 'priority' für Sitemap",
-    "Invalid type given. Numeric string, integer or float expected" => "Ungültige Eingabe. Nummerische Zeichenkette, Ganzzahl oder Float erwartet",
+    "Invalid type given. Numeric string, integer or float expected" => "Ungültige Eingabe. Nummerische Zeichenkette, Ganzzahl oder Gleitkommazahl erwartet",
     
     // Zend\Validator\Step
     "Invalid value given. Scalar expected" => "Ungültige Eingabe. Skalar erwartet",

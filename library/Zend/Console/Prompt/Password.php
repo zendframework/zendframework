@@ -39,7 +39,6 @@ class Password extends AbstractPrompt
 
         $this->setPromptText($promptText);
         $this->setEcho($echo);
-        $this->password = '';
     }
 
     /**

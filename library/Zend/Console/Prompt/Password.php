@@ -57,7 +57,6 @@ class Password extends AbstractPrompt
             $char = $this->getConsole()->readChar();
 
             if (PHP_EOL == $char) {
-
                 break;
             }
 

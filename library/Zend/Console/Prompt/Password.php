@@ -43,7 +43,7 @@ class Password extends AbstractPrompt
     }
 
     /**
-     * Show the prompt to user and return a single char.
+     * Show the prompt to user and return a string.
      *
      * @return string
      */

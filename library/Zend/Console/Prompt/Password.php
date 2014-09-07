@@ -75,7 +75,7 @@ class Password extends AbstractPrompt
      */
     public function setPromptText($promptText)
     {
-        $this->promptText = $promptText;
+        $this->promptText = (string) $promptText;
     }
 
     /**

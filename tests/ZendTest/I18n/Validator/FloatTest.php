@@ -220,4 +220,26 @@ class FloatTest extends \PHPUnit_Framework_TestCase
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageTemplates'), 'messageTemplates', $validator);
     }
+
+    /**
+     * @group ZF2-6647
+     * @dataProvider notFloatProvider
+     */
+    public function testNotFloat($value)
+    {
+        $this->assertFalse($this->validator->isValid($value));
+
+        $message = $this->validator->getMessages();
+        $this->assertContains('does not appear to be a float', $message['notFloat']);
+    }
+
+    public function notFloatProvider()
+    {
+        return array(
+            array(
+                'hello',
+                2.000,000
+            ),
+        );
+    }
 }

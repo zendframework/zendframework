@@ -54,7 +54,7 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $header = $headers->get('fake');
         $this->assertInstanceOf('Zend\Mail\Header\GenericHeader', $header);
         $this->assertEquals('Fake', $header->getFieldName());
-        $this->assertEquals('foo-bar,blah-blah', $header->getFieldValue());
+        $this->assertEquals('foo-bar, blah-blah', $header->getFieldValue());
     }
 
     public function testHeadersFromStringFactoryCreatesSingleObjectWithHeaderBreakLine()

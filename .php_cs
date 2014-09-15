@@ -9,16 +9,11 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->notPath('ZendTest/Validator/_files')
     ->notPath('ZendTest/Loader/_files')
     ->notPath('ZendTest/Loader/TestAsset')
-    ->notPath('demos')
-    ->notPath('resources')
     ->filter(function (SplFileInfo $file) {
         if (strstr($file->getPath(), 'compatibility')) {
             return false;
         }
-    })
-    ->in(__DIR__ . '/library')
-    ->in(__DIR__ . '/tests')
-    ->in(__DIR__ . '/bin');
+    });
 $config = Symfony\CS\Config\Config::create();
 $config->fixers(
     array(

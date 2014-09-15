@@ -753,6 +753,17 @@ class Imap
     }
 
     /**
+     * subscribe to a folder
+     * 
+     * @param string $folder folder name
+     * @return bool success
+     */
+    public function subscribe($folder)
+    {
+        return $this->requestAndResponse('SUBSCRIBE', array($this->escapeString($folder)), true);
+    }
+    
+    /**
      * permanently remove messages
      *
      * @return bool success

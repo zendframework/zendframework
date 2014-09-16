@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 2.3.3 (YYYY-MM-DD)
+
+### SECURITY UPDATES
+
+- **ZF2014-05:** Due to an issue that existed in PHP's LDAP extension, it is
+  possible to perform an unauthenticated simple bind against a LDAP server by
+  using a null byte for the password, regardless of whether or not the user
+  normally requires a password. We have provided a patch in order to protect
+  users of unpatched PHP versions (PHP 5.5 <= 5.5.11, PHP 5.4 <= 5.4.27, all
+  versions of PHP 5.3 and below). If you use `Zend\Ldap` and are on an affected
+  version of PHP, we recommend upgrading immediately.
+- **ZF2014-06:** A potential SQL injection vector existed when using a SQL
+  Server adapter to manually quote values due to the fact that it was not
+  escaping null bytes. Code was added to ensure null bytes are escaped, and
+  thus mitigate the SQLi vector. We do not recommend manually quoting values,
+  but if you do, and use the SQL Server adapter without PDO, we recommend
+  upgrading immediately.
+
 ## 2.3.2 (2014-08-11)
 
 - [4747: Zend\Code\Generator\FileGenerator problem](https://github.com/zendframework/zf2/issues/4747)
@@ -459,6 +477,24 @@
 - [5942: Mvc\I18n\Translator -&gt; setLocale](https://github.com/zendframework/zf2/pull/5942)
 - [5943: Fixed route matcher test](https://github.com/zendframework/zf2/pull/5943)
 - [5951: Fix console mixed case optional value params](https://github.com/zendframework/zf2/pull/5951)
+
+## 2.2.8 (2014-09-17)
+
+### SECURITY UPDATES
+
+- **ZF2014-05:** Due to an issue that existed in PHP's LDAP extension, it is
+  possible to perform an unauthenticated simple bind against a LDAP server by
+  using a null byte for the password, regardless of whether or not the user
+  normally requires a password. We have provided a patch in order to protect
+  users of unpatched PHP versions (PHP 5.5 <= 5.5.11, PHP 5.4 <= 5.4.27, all
+  versions of PHP 5.3 and below). If you use `Zend\Ldap` and are on an affected
+  version of PHP, we recommend upgrading immediately.
+- **ZF2014-06:** A potential SQL injection vector existed when using a SQL
+  Server adapter to manually quote values due to the fact that it was not
+  escaping null bytes. Code was added to ensure null bytes are escaped, and
+  thus mitigate the SQLi vector. We do not recommend manually quoting values,
+  but if you do, and use the SQL Server adapter without PDO, we recommend
+  upgrading immediately.
 
 ## 2.2.7 (2014-04-15)
 

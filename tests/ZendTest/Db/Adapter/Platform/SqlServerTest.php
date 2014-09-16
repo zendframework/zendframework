@@ -129,4 +129,13 @@ class SqlServerTest extends \PHPUnit_Framework_TestCase
             $this->platform->quoteIdentifierInFragment('(foo.bar = boo.baz) AND (foo.baz = boo.baz)', array('(', ')', '=', 'and'))
         );
     }
+
+    public function testPlatformQuotesNullByteCharacter()
+    {
+        $err = set_error_handler(function () {} );
+        $string = "1\0";
+        $value = $this->platform->quoteValue($string);
+        set_error_handler($err);
+        $this->assertEquals("'1\\000'", $value);
+    }
 }

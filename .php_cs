@@ -9,6 +9,8 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->notPath('ZendTest/Validator/_files')
     ->notPath('ZendTest/Loader/_files')
     ->notPath('ZendTest/Loader/TestAsset')
+    ->notPath('demos')
+    ->notPath('resources')
     // Following are necessary when you use `parallel` or specify a path
     // from the project root.
     ->notPath('Stream.php')

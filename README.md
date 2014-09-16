@@ -26,7 +26,12 @@ DD MMM YYYY
   users of unpatched PHP versions (PHP 5.5 <= 5.5.11, PHP 5.4 <= 5.4.27, all
   versions of PHP 5.3 and below). If you use `Zend\Ldap` and are on an affected
   version of PHP, we recommend upgrading immediately.
-
+- **ZF2014-06:** A potential SQL injection vector existed when using a SQL
+  Server adapter to manually quote values due to the fact that it was not
+  escaping null bytes. Code was added to ensure null bytes are escaped, and
+  thus mitigate the SQLi vector. We do not recommend manually quoting values,
+  but if you do, and use the SQL Server adapter without PDO, we recommend
+  upgrading immediately.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

@@ -18,31 +18,11 @@ DD MMM YYY
 ### UPDATES IN 2.4.0
 
 - [#6154](https://github.com/zendframework/zf2/pull/6154) updates
-
-DD MMM YYYY
-
-### UPDATES IN 2.3.3
->>>>>>> version/bump
-
-**This release contains security updates:**
-
-- **ZF2014-05:** Due to an issue that existed in PHP's LDAP extension, it is
-  possible to perform an unauthenticated simple bind against a LDAP server by
-  using a null byte for the password, regardless of whether or not the user
-  normally requires a password. We have provided a patch in order to protect
-  users of unpatched PHP versions (PHP 5.5 <= 5.5.11, PHP 5.4 <= 5.4.27, all
-  versions of PHP 5.3 and below). If you use `Zend\Ldap` and are on an affected
-  version of PHP, we recommend upgrading immediately.
-
-
-**This release contains security updates:**
-
-- **ZF2014-06:** A potential SQL injection vector existed when using a SQL
-  Server adapter to manually quote values due to the fact that it was not
-  escaping null bytes. Code was added to ensure null bytes are escaped, and
-  thus mitigate the SQLi vector. We do not recommend manually quoting values,
-  but if you do, and use the SQL Server adapter without PDO, we recommend
-  upgrading immediately.
+  `Zend\InputFilter\BaseInputFilter::isValid()` to accept an optional `$context`
+  parameter; if used, this value will be passed to all composed inputs as
+  context, instead of the value provided to `setData()`. For classes overriding
+  the `isValid()` method of an InputFilter, you will need to add
+  `$context = null` as an argument.
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 

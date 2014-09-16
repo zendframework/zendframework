@@ -109,8 +109,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
         return array(
             array('N;', null),
             array('i:1;', 1),
-            array('O:8:"DateTime":3:{s:4:"date";s:19:"1970-01-01 00:00:00";s:13:"timezone_type";i:1;s:8:"timezone";s:6:"+00:00";}',
-                  new DateTime('@0')),
+            array(serialize(new DateTime('@0')), new DateTime('@0')),
             array('a:3:{i:0;s:4:"test";i:1;i:1;s:3:"foo";s:3:"bar";}', array('test', 1,
                                                                              'foo'=> 'bar')),
         );

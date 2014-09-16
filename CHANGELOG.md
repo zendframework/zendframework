@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.3.3 (YYYY-MM-DD)
+## 2.3.3 (2014-09-17)
 
 - [6576: Custom barcode adapter wasn't being set in options](https://github.com/zendframework/zf2/pull/6576)
 - [6664: Use is_file to check for an uploaded file](https://github.com/zendframework/zf2/pull/6664)

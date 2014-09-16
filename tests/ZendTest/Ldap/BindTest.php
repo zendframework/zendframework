@@ -267,4 +267,14 @@ class BindTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_resource($ldap->getResource()));
         $this->assertEquals(TESTS_ZEND_LDAP_USERNAME, $ldap->getBoundUser());
     }
+
+    /**
+     * @see https://net.educause.edu/ir/library/pdf/csd4875.pdf
+     */
+    public function testBindWithNullPassword()
+    {
+        $ldap = new Ldap\Ldap($this->options);
+        $this->setExpectedException('Zend\Ldap\Exception\LdapException', 'Invalid credentials');
+        $ldap->bind($this->altUsername, "\0invalidpassword");
+    }
 }

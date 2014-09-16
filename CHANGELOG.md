@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 2.3.3 (2014-09-16)
+
+- [6576: Custom barcode adapter wasn't being set in options](https://github.com/zendframework/zf2/pull/6576)
+- [6664: Use is_file to check for an uploaded file](https://github.com/zendframework/zf2/pull/6664)
+
+### SECURITY UPDATES
+
+- **ZF2014-05:** Due to an issue that existed in PHP's LDAP extension, it is
+  possible to perform an unauthenticated simple bind against a LDAP server by
+  using a null byte for the password, regardless of whether or not the user
+  normally requires a password. We have provided a patch in order to protect
+  users of unpatched PHP versions (PHP 5.5 <= 5.5.11, PHP 5.4 <= 5.4.27, all
+  versions of PHP 5.3 and below). If you use `Zend\Ldap` and are on an affected
+  version of PHP, we recommend upgrading immediately.
+
 ## 2.3.2 (2014-08-11)
 
 - [4747: Zend\Code\Generator\FileGenerator problem](https://github.com/zendframework/zf2/issues/4747)
@@ -459,6 +474,18 @@
 - [5942: Mvc\I18n\Translator -&gt; setLocale](https://github.com/zendframework/zf2/pull/5942)
 - [5943: Fixed route matcher test](https://github.com/zendframework/zf2/pull/5943)
 - [5951: Fix console mixed case optional value params](https://github.com/zendframework/zf2/pull/5951)
+
+## 2.2.8 (2014-09-16)
+
+### SECURITY UPDATES
+
+- **ZF2014-05:** Due to an issue that existed in PHP's LDAP extension, it is
+  possible to perform an unauthenticated simple bind against a LDAP server by
+  using a null byte for the password, regardless of whether or not the user
+  normally requires a password. We have provided a patch in order to protect
+  users of unpatched PHP versions (PHP 5.5 <= 5.5.11, PHP 5.4 <= 5.4.27, all
+  versions of PHP 5.3 and below). If you use `Zend\Ldap` and are on an affected
+  version of PHP, we recommend upgrading immediately.
 
 ## 2.2.7 (2014-04-15)
 

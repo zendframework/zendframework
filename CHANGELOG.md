@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.3.3 (2014-09-16)
+## 2.3.3 (YYYY-MM-DD)
 
 - [6576: Custom barcode adapter wasn't being set in options](https://github.com/zendframework/zf2/pull/6576)
 - [6664: Use is_file to check for an uploaded file](https://github.com/zendframework/zf2/pull/6664)
@@ -14,6 +14,12 @@
   users of unpatched PHP versions (PHP 5.5 <= 5.5.11, PHP 5.4 <= 5.4.27, all
   versions of PHP 5.3 and below). If you use `Zend\Ldap` and are on an affected
   version of PHP, we recommend upgrading immediately.
+- **ZF2014-06:** A potential SQL injection vector existed when using a SQL
+  Server adapter to manually quote values due to the fact that it was not
+  escaping null bytes. Code was added to ensure null bytes are escaped, and
+  thus mitigate the SQLi vector. We do not recommend manually quoting values,
+  but if you do, and use the SQL Server adapter without PDO, we recommend
+  upgrading immediately.
 
 ## 2.3.2 (2014-08-11)
 
@@ -475,7 +481,7 @@
 - [5943: Fixed route matcher test](https://github.com/zendframework/zf2/pull/5943)
 - [5951: Fix console mixed case optional value params](https://github.com/zendframework/zf2/pull/5951)
 
-## 2.2.8 (2014-09-16)
+## 2.2.8 (2014-09-17)
 
 ### SECURITY UPDATES
 
@@ -486,6 +492,12 @@
   users of unpatched PHP versions (PHP 5.5 <= 5.5.11, PHP 5.4 <= 5.4.27, all
   versions of PHP 5.3 and below). If you use `Zend\Ldap` and are on an affected
   version of PHP, we recommend upgrading immediately.
+- **ZF2014-06:** A potential SQL injection vector existed when using a SQL
+  Server adapter to manually quote values due to the fact that it was not
+  escaping null bytes. Code was added to ensure null bytes are escaped, and
+  thus mitigate the SQLi vector. We do not recommend manually quoting values,
+  but if you do, and use the SQL Server adapter without PDO, we recommend
+  upgrading immediately.
 
 ## 2.2.7 (2014-04-15)
 

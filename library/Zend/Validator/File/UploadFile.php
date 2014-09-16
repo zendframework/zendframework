@@ -74,7 +74,7 @@ class UploadFile extends AbstractValidator
 
         switch ($error) {
             case UPLOAD_ERR_OK:
-                if (empty($file) || false === stream_resolve_include_path($file)) {
+                if (empty($file) || false === is_file($file)) {
                     $this->error(self::FILE_NOT_FOUND);
                 } elseif (! is_uploaded_file($file)) {
                     $this->error(self::ATTACK);

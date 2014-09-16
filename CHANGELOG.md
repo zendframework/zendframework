@@ -1,6 +1,18 @@
 # CHANGELOG
 
-## 2.2.7 (2014-04-015)
+## 2.2.8 (2014-09-16)
+
+### SECURITY UPDATES
+
+- **ZF2014-05:** Due to an issue that existed in PHP's LDAP extension, it is
+  possible to perform an unauthenticated simple bind against a LDAP server by
+  using a null byte for the password, regardless of whether or not the user
+  normally requires a password. We have provided a patch in order to protect
+  users of unpatched PHP versions (PHP 5.5 <= 5.5.11, PHP 5.4 <= 5.4.27, all
+  versions of PHP 5.3 and below). If you use `Zend\Ldap` and are on an affected
+  version of PHP, we recommend upgrading immediately.
+
+## 2.2.7 (2014-04-15)
 
 ### SECURITY UPDATES
 

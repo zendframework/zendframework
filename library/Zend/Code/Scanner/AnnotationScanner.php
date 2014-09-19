@@ -160,7 +160,7 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
             }
             $currentChar = $stream[$streamIndex];
             $matches     = array();
-            $currentLine = (preg_match('#(.*)\n#', $stream, $matches, null, $streamIndex) === 1) ? $matches[1] : substr($stream, $streamIndex);
+            $currentLine = (preg_match('#(.*?)(?:\n|\r|\r\n)#', $stream, $matches, null, $streamIndex) === 1) ? $matches[1] : substr($stream, $streamIndex);
             if ($currentChar === ' ') {
                 $currentWord = (preg_match('#( +)#', $currentLine, $matches) === 1) ? $matches[1] : $currentLine;
             } else {
@@ -225,7 +225,19 @@ class AnnotationScanner extends AnnotationCollection implements ScannerInterface
             }
         }
 
-        if ($currentChar === "\n") {
+        // Since we don't know what line endings are used in the file, we check for all scenarios. If we find
+        // a cariage return (\r), we check the next character for a line feed (\n). If so we consume it.
+        $lineEnded = $currentChar === "\n";
+        if ($currentChar === "\r") {
+            $lineEnded = true;
+
+            $nextChar = $MACRO_STREAM_ADVANCE_CHAR();
+            if ($nextChar !== "\n") {
+                $streamIndex--;
+            }
+        }
+
+        if ($lineEnded) {
             $MACRO_TOKEN_SET_TYPE('ANNOTATION_NEWLINE');
             $MACRO_TOKEN_APPEND_CHAR();
             $MACRO_TOKEN_ADVANCE();

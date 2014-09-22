@@ -129,13 +129,13 @@ class Code128 extends AbstractAdapter
 
             switch ($char) {
                 // Function definition
-                case 'Ç' :
-                case 'ü' :
-                case 'å' :
+                case 'Ç':
+                case 'ü':
+                case 'å':
                     break;
 
                 // Switch 1 char between A and B
-                case 'é' :
+                case 'é':
                     if ($set == 'A') {
                         $read = 'B';
                     } elseif ($set == 'B') {
@@ -144,32 +144,32 @@ class Code128 extends AbstractAdapter
                     break;
 
                 // Switch to C
-                case 'â' :
+                case 'â':
                     $set = 'C';
                     $read = 'C';
                     break;
 
                 // Switch to B
-                case 'ä' :
+                case 'ä':
                     $set  = 'B';
                     $read = 'B';
                     break;
 
                 // Switch to A
-                case 'à' :
+                case 'à':
                     $set  = 'A';
                     $read = 'A';
                     break;
 
                 // Doubled start character
-                case '‡' :
-                case 'ˆ' :
-                case '‰' :
+                case '‡':
+                case 'ˆ':
+                case '‰':
                     return false;
                     break;
 
                 // Chars after the stop character
-                case 'Š' :
+                case 'Š':
                     break 2;
 
                 default:
@@ -227,15 +227,15 @@ class Code128 extends AbstractAdapter
 
             switch ($char) {
                 // Function definition
-                case 'Ç' :
-                case 'ü' :
-                case 'å' :
+                case 'Ç':
+                case 'ü':
+                case 'å':
                     $sum += ($pos * $this->ord128($char, $set));
                     break;
 
-                case 'é' :
+                case 'é':
                     $sum += ($pos * $this->ord128($char, $set));
-                     if ($set == 'A') {
+                    if ($set == 'A') {
                         $read = 'B';
                     } elseif ($set == 'B') {
                         $read = 'A';
@@ -243,29 +243,29 @@ class Code128 extends AbstractAdapter
                     break;
 
                 // Switch to C
-                case 'â' :
+                case 'â':
                     $sum += ($pos * $this->ord128($char, $set));
                     $set = 'C';
                     $read = 'C';
                     break;
 
                 // Switch to B
-                case 'ä' :
+                case 'ä':
                     $sum += ($pos * $this->ord128($char, $set));
                     $set  = 'B';
                     $read = 'B';
                     break;
 
                 // Switch to A
-                case 'à' :
+                case 'à':
                     $sum += ($pos * $this->ord128($char, $set));
                     $set  = 'A';
                     $read = 'A';
                     break;
 
-                case '‡' :
-                case 'ˆ' :
-                case '‰' :
+                case '‡':
+                case 'ˆ':
+                case '‰':
                     return false;
                     break;
 
@@ -311,13 +311,13 @@ class Code128 extends AbstractAdapter
     {
         $value = $this->getUtf8StringWrapper()->substr($value, 0, 1);
         switch ($value) {
-            case '‡' :
+            case '‡':
                 return 'A';
                 break;
-            case 'ˆ' :
+            case 'ˆ':
                 return 'B';
                 break;
-            case '‰' :
+            case '‰':
                 return 'C';
                 break;
         }

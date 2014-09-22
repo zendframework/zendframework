@@ -55,7 +55,6 @@ class Date extends AbstractValidator
      */
     protected $format = self::FORMAT_DEFAULT;
 
-
     /**
      * Sets validator options
      *

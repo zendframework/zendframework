@@ -28,12 +28,10 @@ class ServerProxy
      */
     private $namespace = '';
 
-
     /**
      * @var array of \Zend\XmlRpc\Client\ServerProxy
      */
     private $cache = array();
-
 
     /**
      * Class constructor
@@ -46,7 +44,6 @@ class ServerProxy
         $this->client    = $client;
         $this->namespace = $namespace;
     }
-
 
     /**
      * Get the next successive namespace
@@ -62,7 +59,6 @@ class ServerProxy
         }
         return $this->cache[$namespace];
     }
-
 
     /**
      * Call a method in this namespace.

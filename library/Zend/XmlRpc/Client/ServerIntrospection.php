@@ -21,7 +21,6 @@ class ServerIntrospection
      */
     private $system = null;
 
-
     /**
      * @param \Zend\XmlRpc\Client $client
      */

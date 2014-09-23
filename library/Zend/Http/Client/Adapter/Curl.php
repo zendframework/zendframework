@@ -421,18 +421,25 @@ class Curl implements HttpAdapter, StreamInterface
             throw new AdapterException\RuntimeException("Error in cURL request: " . curl_error($this->curl));
         }
 
+        // separating header from body because it is dangerous to accidentially replace strings in the body
+        $responseHeaderSize = curl_getinfo($this->curl, CURLINFO_HEADER_SIZE);
+        $responseHeaders = substr($this->response, 0, $responseHeaderSize);
+
         // cURL automatically decodes chunked-messages, this means we have to disallow the Zend\Http\Response to do it again
-        if (stripos($this->response, "Transfer-Encoding: chunked\r\n")) {
-            $this->response = str_ireplace("Transfer-Encoding: chunked\r\n", '', $this->response);
-        }
+        $responseHeaders = preg_replace("/Transfer-Encoding:\s*chunked\\r\\n/", "", $responseHeaders);
 
         // cURL can automatically handle content encoding; prevent double-decoding from occurring
         if (isset($this->config['curloptions'][CURLOPT_ENCODING])
             && '' == $this->config['curloptions'][CURLOPT_ENCODING]
-            && stripos($this->response, "Content-Encoding: gzip\r\n")
         ) {
-            $this->response = str_ireplace("Content-Encoding: gzip\r\n", '', $this->response);
+            $responseHeaders = preg_replace("/Content-Encoding:\s*gzip\\r\\n/", "", $responseHeaders);
         }
+
+        // cURL automatically handles Proxy rewrites, remove the "HTTP/1.0 200 Connection established" string:
+        $responseHeaders = preg_replace("/HTTP\/1.0\s*200\s*Connection\s*established\\r\\n\\r\\n/", "", $responseHeaders);
+
+        // replace old header with new, cleaned up, header
+        $this->response = substr_replace($this->response, $responseHeaders, 0, $responseHeaderSize);
 
         // Eliminate multiple HTTP responses.
         do {
@@ -444,11 +451,6 @@ class Curl implements HttpAdapter, StreamInterface
                 $again              = true;
             }
         } while ($again);
-
-        // cURL automatically handles Proxy rewrites, remove the "HTTP/1.0 200 Connection established" string:
-        if (stripos($this->response, "HTTP/1.0 200 Connection established\r\n\r\n") !== false) {
-            $this->response = str_ireplace("HTTP/1.0 200 Connection established\r\n\r\n", '', $this->response);
-        }
 
         return $request;
     }

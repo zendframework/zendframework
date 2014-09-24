@@ -445,7 +445,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
             //check for occurance of ( or
             if($tokenType == "T_STRING") {
                 //check to see if function name is passed, if so validate against that
-                if(!is_null($functionName) && $tokenValue != $functionName) {
+                if($functionName !== null && $tokenValue != $functionName) {
                     $isValid = false;
                     break;
                 }

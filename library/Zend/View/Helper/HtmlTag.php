@@ -10,23 +10,23 @@
 namespace Zend\View\Helper;
 
 /**
- * Renders <html> tag (both opening and closing) of a web page, to which some custom 
+ * Renders <html> tag (both opening and closing) of a web page, to which some custom
  * attributes can be added dynamically.
- * 
+ *
  * @author Nikola Posa <posa.nikola@gmail.com>
  */
 class HtmlTag extends AbstractHtmlElement
 {
     /**
      * Attributes for the <html> tag.
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $attributes = array();
-    
+
     /**
      * Retrieve object instance; optionally add attributes.
-     * 
+     *
      * @param array $attribs
      * @return \Zend\View\Helper\HtmlTag
      */
@@ -35,13 +35,13 @@ class HtmlTag extends AbstractHtmlElement
         if (!empty($attribs)) {
             $this->addAttributes($attribs);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Set new attribute.
-     * 
+     *
      * @param string $attrName
      * @param string $attrValue
      * @return \Zend\View\Helper\HtmlTag
@@ -51,10 +51,10 @@ class HtmlTag extends AbstractHtmlElement
         $this->attributes[$attrName] = $attrValue;
         return $this;
     }
-    
+
     /**
      * Add set of attributes.
-     * 
+     *
      * @param array $attribs
      * @return \Zend\View\Helper\HtmlTag
      */
@@ -65,7 +65,7 @@ class HtmlTag extends AbstractHtmlElement
         }
         return $this;
     }
-    
+
     /**
      * @return array
      */
@@ -76,17 +76,17 @@ class HtmlTag extends AbstractHtmlElement
 
     /**
      * Render opening tag.
-     * 
+     *
      * @return string
      */
     public function openTag()
     {
         return sprintf('<html%s>', $this->htmlAttribs($this->attributes));
     }
-    
+
     /**
      * Render closing tag.
-     * 
+     *
      * @return string
      */
     public function closeTag()

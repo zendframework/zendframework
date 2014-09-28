@@ -305,30 +305,7 @@ class DateTimeSelect extends DateSelect
             'name' => $this->getName(),
             'required' => false,
             'filters' => array(
-                array(
-                    'name'    => 'Callback',
-                    'options' => array(
-                        'callback' => function ($date) {
-                            // Convert the date to a specific format
-                            if (is_array($date)) {
-                                if (!isset($date['second'])) {
-                                    $date['second'] = '00';
-                                }
-                                $date = sprintf(
-                                    '%s-%s-%s %s:%s:%s',
-                                    $date['year'],
-                                    $date['month'],
-                                    $date['day'],
-                                    $date['hour'],
-                                    $date['minute'],
-                                    $date['second']
-                                );
-                            }
-
-                            return $date;
-                        }
-                    )
-                )
+                array('name' => 'DateTimeSelect')
             ),
             'validators' => array(
                 $this->getValidator(),

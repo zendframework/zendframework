@@ -28,12 +28,12 @@ class HtmlTag extends AbstractHtmlElement
      * Retrieve object instance; optionally add attributes.
      *
      * @param array $attribs
-     * @return \Zend\View\Helper\HtmlTag
+     * @return self
      */
     public function __invoke(array $attribs = array())
     {
         if (!empty($attribs)) {
-            $this->addAttributes($attribs);
+            $this->setAttributes($attribs);
         }
 
         return $this;
@@ -44,7 +44,7 @@ class HtmlTag extends AbstractHtmlElement
      *
      * @param string $attrName
      * @param string $attrValue
-     * @return \Zend\View\Helper\HtmlTag
+     * @return self
      */
     public function setAttribute($attrName, $attrValue)
     {
@@ -53,12 +53,12 @@ class HtmlTag extends AbstractHtmlElement
     }
 
     /**
-     * Add set of attributes.
+     * Add new or overwrite the existing attributes.
      *
      * @param array $attribs
-     * @return \Zend\View\Helper\HtmlTag
+     * @return self
      */
-    public function addAttributes(array $attribs)
+    public function setAttributes(array $attribs)
     {
         foreach ($attribs as $name => $value) {
             $this->setAttribute($name, $value);

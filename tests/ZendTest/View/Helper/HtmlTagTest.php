@@ -34,7 +34,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->helper);
     }
-    
+
     protected function assertAttribute($name, $value = null)
     {
         $attributes = $this->helper->getAttributes();
@@ -49,44 +49,60 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
         $this->helper->setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
         $this->assertAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
     }
-    
+
     public function testAddingMultipleAttributes()
     {
         $attribs = array(
             'xmlns' => 'http://www.w3.org/1999/xhtml',
             'prefix' => 'og: http://ogp.me/ns#',
         );
-        $this->helper->addAttributes($attribs);
-        
+        $this->helper->setAttributes($attribs);
+
         foreach ($attribs as $name => $value) {
             $this->assertAttribute($name, $value);
         }
     }
-    
+
+    public function testSettingMultipleAttributesOverwritesExisting()
+    {
+        $this->helper->setAttribute('prefix', 'foobar');
+
+        $attribs = array(
+            'xmlns' => 'http://www.w3.org/1999/xhtml',
+            'prefix' => 'og: http://ogp.me/ns#',
+        );
+        $this->helper->setAttributes($attribs);
+
+        $this->assertCount(2, $this->helper->getAttributes());
+        foreach ($attribs as $name => $value) {
+            $this->assertAttribute($name, $value);
+        }
+    }
+
     public function testRenderingOpenTagWithNoAttributes()
     {
         $this->assertEquals('<html>', $this->helper->openTag());
     }
-    
+
     public function testRenderingOpenTagWithAttributes()
     {
         $attribs = array(
             'xmlns' => 'http://www.w3.org/1999/xhtml',
             'xmlns:og' => 'http://ogp.me/ns#',
         );
-        
-        $this->helper->addAttributes($attribs);
-        
+
+        $this->helper->setAttributes($attribs);
+
         $tag = $this->helper->openTag();
-        
+
         $this->assertStringStartsWith('<html', $tag);
-        
+
         $escape = $this->view->plugin('escapehtmlattr');
         foreach ($attribs as $name => $value) {
             $this->assertContains(sprintf('%s="%s"', $name, $escape($value)), $tag);
         }
     }
-    
+
     public function testRenderingCloseTag()
     {
         $this->assertEquals('</html>', $this->helper->closeTag());

@@ -51,6 +51,8 @@ class FilterPluginManager extends AbstractPluginManager
         'compresszip'                => 'Zend\Filter\Compress\Zip',
         'dataunitformatter'          => 'Zend\Filter\DataUnitFormatter',
         'datetimeformatter'          => 'Zend\Filter\DateTimeFormatter',
+        'dateselect'                => 'Zend\Filter\DateSelect',
+        'datetimeselect'         => 'Zend\Filter\DateTimeSelect',
         'decompress'                 => 'Zend\Filter\Decompress',
         'decrypt'                    => 'Zend\Filter\Decrypt',
         'digits'                     => 'Zend\Filter\Digits',

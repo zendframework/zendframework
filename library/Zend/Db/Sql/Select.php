@@ -823,7 +823,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
         $orders = array();
         foreach ($this->order as $k => $v) {
-            if ($v instanceof Expression) {
+            if ($v instanceof ExpressionInterface) {
                 /** @var $orderParts \Zend\Db\Adapter\StatementContainer */
                 $orderParts = $this->processExpression($v, $platform, $driver);
                 if ($parameterContainer) {

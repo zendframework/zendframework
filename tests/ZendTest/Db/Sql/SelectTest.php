@@ -18,7 +18,6 @@ use Zend\Db\Sql\TableIdentifier;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\Sql92;
 use ZendTest\Db\TestAsset\TrustingSql92Platform;
-use Zend\Db\Sql;
 
 class SelectTest extends \PHPUnit_Framework_TestCase
 {

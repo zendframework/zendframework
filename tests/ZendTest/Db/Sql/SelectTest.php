@@ -364,7 +364,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
         $sr = new \ReflectionObject($select);
         $method = $sr->getMethod('processOrder');
         $method->setAccessible(true);
-        $this->assertEquals('RAND()', current($select->getRawState('order'))->getExpression());
         $this->assertEquals(
             array(array(array('RAND()'))),
             $method->invokeArgs($select, array(new TrustingSql92Platform()))

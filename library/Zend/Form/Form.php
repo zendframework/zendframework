@@ -301,7 +301,7 @@ class Form extends Fieldset implements FormInterface
         $this->bindAs = $flags;
         $this->setObject($object);
         $data = $this->extract();
-        $this->populateValues($data);
+        $this->populateValues($data, true);
 
         return $this;
     }
@@ -481,7 +481,7 @@ class Form extends Fieldset implements FormInterface
 
         if (!is_array($this->data)) {
             $data = $this->extract();
-            $this->populateValues($data);
+            $this->populateValues($data, true);
             if (!is_array($data)) {
                 throw new Exception\DomainException(sprintf(
                     '%s is unable to validate as there is no data currently set',
@@ -872,10 +872,11 @@ class Form extends Fieldset implements FormInterface
      * Recursively populate values of attached elements and fieldsets
      *
      * @param array $data
+     * @param bool $onlyBase
      * @return void
      */
-    public function populateValues($data) {
-        if ($this->baseFieldset !== null) {
+    public function populateValues($data, $onlyBase = false) {
+        if ($onlyBase && $this->baseFieldset !== null) {
             $name = $this->baseFieldset->getName();
             if (array_key_exists($name, $data)) {
                 $this->baseFieldset->populateValues($data[$name]);

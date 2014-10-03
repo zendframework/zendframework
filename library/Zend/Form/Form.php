@@ -875,7 +875,8 @@ class Form extends Fieldset implements FormInterface
      * @param bool $onlyBase
      * @return void
      */
-    public function populateValues($data, $onlyBase = false) {
+    public function populateValues($data, $onlyBase = false)
+    {
         if ($onlyBase && $this->baseFieldset !== null) {
             $name = $this->baseFieldset->getName();
             if (array_key_exists($name, $data)) {

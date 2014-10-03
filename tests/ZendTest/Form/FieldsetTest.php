@@ -14,6 +14,7 @@ use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilter;
+use Zend\Stdlib\Hydrator;
 
 class FieldsetTest extends TestCase
 {
@@ -520,5 +521,26 @@ class FieldsetTest extends TestCase
         $allowed = $this->fieldset->allowObjectBinding($object);
 
         $this->assertTrue($allowed);
+    }
+
+    public function testBindValuesPreservesNewValueAfterValidation()
+    {
+        $form = new Form();
+        $form->add(new Element('foo'));
+        $form->setHydrator(new Hydrator\ObjectProperty);
+
+        $object      = new \stdClass();
+        $object->foo = 'Initial value';
+        $form->bind($object);
+
+        $form->setData(array(
+            'foo' => 'New value'
+        ));
+
+        $this->assertSame('New value', $form->get('foo')->getValue());
+
+        $form->isValid();
+
+        $this->assertSame('New value', $form->get('foo')->getValue());
     }
 }

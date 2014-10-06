@@ -97,7 +97,6 @@ class FilesSize extends Size
         $max  = $this->getMax(true);
         $size = $this->getSize();
         foreach ($value as $files) {
-            // Is file readable ?
             if (is_array($files)) {
                 if (!isset($files['tmp_name']) || !isset($files['name'])) {
                     throw new Exception\InvalidArgumentException(
@@ -108,6 +107,7 @@ class FilesSize extends Size
                 $files = $files['tmp_name'];
             }
 
+            // Is file readable ?
             if (empty($files) || false === stream_resolve_include_path($files)) {
                 $this->throwError($file, self::NOT_READABLE);
                 continue;

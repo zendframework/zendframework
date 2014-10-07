@@ -481,14 +481,6 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         $this->sql = clone $this->sql;
         if (is_object($this->table)) {
             $this->table = clone $this->table;
-        } elseif (
-            is_array($this->table)
-            && count($this->table) == 1
-            && is_object(reset($this->table))
-        ) {
-            foreach ($this->table as $alias => &$tableObject) {
-                $tableObject = clone $tableObject;
-            }
         }
     }
 }

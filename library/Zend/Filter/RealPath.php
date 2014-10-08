@@ -73,7 +73,7 @@ class RealPath extends AbstractFilter
      */
     public function filter($value)
     {
-        if (!is_string($value)){
+        if (!is_string($value)) {
             return $value;
         }
         $path = (string) $value;

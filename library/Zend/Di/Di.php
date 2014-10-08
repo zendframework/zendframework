@@ -800,7 +800,7 @@ class Di implements DependencyInjectionInterface
                 }
 
                 array_push($this->currentDependencies, $class);
-                if(isset($alias)) {
+                if (isset($alias)) {
                     array_push($this->currentAliasDependenencies, $alias);
                 }
 
@@ -816,7 +816,7 @@ class Di implements DependencyInjectionInterface
                     if ($methodRequirementType & self::RESOLVE_STRICT) {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
-                        if(isset($alias)) {
+                        if (isset($alias)) {
                             array_pop($this->currentAliasDependenencies);
                         }
                         // if this item was marked strict,
@@ -830,7 +830,7 @@ class Di implements DependencyInjectionInterface
                     } else {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
-                        if(isset($alias)) {
+                        if (isset($alias)) {
                             array_pop($this->currentAliasDependenencies);
                         }
                         return false;
@@ -840,7 +840,7 @@ class Di implements DependencyInjectionInterface
                     if ($methodRequirementType & self::RESOLVE_STRICT) {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
-                        if(isset($alias)) {
+                        if (isset($alias)) {
                             array_pop($this->currentAliasDependenencies);
                         }
                         // if this item was marked strict,
@@ -854,14 +854,14 @@ class Di implements DependencyInjectionInterface
                     } else {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
-                        if(isset($alias)) {
+                        if (isset($alias)) {
                             array_pop($this->currentAliasDependenencies);
                         }
                         return false;
                     }
                 }
                 array_pop($this->currentDependencies);
-                if(isset($alias)) {
+                if (isset($alias)) {
                     array_pop($this->currentAliasDependenencies);
                 }
             } elseif (!array_key_exists($fqParamPos, $computedParams['optional'])) {

@@ -478,7 +478,7 @@ class FileGenerator extends AbstractGenerator
         foreach ($classes as $class) {
             //check for duplicate use statements
             $uses = $class->getUses();
-            if(!empty($uses) && is_array($uses)) {
+            if (!empty($uses) && is_array($uses)) {
                 $classUses = array_merge($classUses, $uses);
             }
         }
@@ -497,7 +497,7 @@ class FileGenerator extends AbstractGenerator
                 }
 
                 //don't duplicate use statements
-                if(!in_array($tempOutput, $classUses)) {
+                if (!in_array($tempOutput, $classUses)) {
                     $useOutput .= "use ". $tempOutput .";";
                     $useOutput .= self::LINE_FEED;
                 }

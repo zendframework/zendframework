@@ -586,9 +586,9 @@ class Fieldset extends Element implements FieldsetInterface
             }
 
             // skip post values for disabled elements, get old value from object
-            if(!$element->hasAttribute('disabled')) {
+            if (!$element->hasAttribute('disabled')) {
                 $hydratableData[$name] = $value;
-            } elseif(array_key_exists($name, $objectData)) {
+            } elseif (array_key_exists($name, $objectData)) {
                 $hydratableData[$name] = $objectData[$name];
             }
         }

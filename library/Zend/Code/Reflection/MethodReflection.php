@@ -232,7 +232,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         //remove first entry which is php open tag
         array_shift($tokens);
 
-        if(!count($tokens)) {
+        if (!count($tokens)) {
             return '';
         }
 
@@ -254,11 +254,11 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
                 case "T_FUNCTION":
                     // check to see if we have a valid function
                     // then check if we are inside function and have a closure
-                    if($this->isValidFunction($tokens, $key, $this->getName())) {
-                        if($bodyOnly === false) {
+                    if ($this->isValidFunction($tokens, $key, $this->getName())) {
+                        if ($bodyOnly === false) {
                             //if first instance of tokenType grab prefixed whitespace
                             //and append to body
-                            if($capture === false) {
+                            if ($capture === false) {
                                 $body .= $this->extractPrefixedWhitespace($tokens, $key);
                             }
                             $body .= $tokenValue;
@@ -267,7 +267,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
                         $capture = true;
                     } else {
                         //closure test
-                        if($firstBrace && $tokenType == "T_FUNCTION") {
+                        if ($firstBrace && $tokenType == "T_FUNCTION") {
                             $body .= $tokenValue;
                             continue;
                         }
@@ -277,13 +277,13 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
                     break;
 
                 case "{":
-                    if($capture === false) {
+                    if ($capture === false) {
                         continue;
                     }
 
-                    if($firstBrace === false) {
+                    if ($firstBrace === false) {
                         $firstBrace = true;
-                        if($bodyOnly === true) {
+                        if ($bodyOnly === true) {
                             continue;
                         }
                     }
@@ -292,14 +292,14 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
                     break;
 
                 case "}":
-                    if($capture === false) {
+                    if ($capture === false) {
                         continue;
                     }
 
                     //check to see if this is the last brace
-                    if($this->isEndingBrace($tokens, $key)) {
+                    if ($this->isEndingBrace($tokens, $key)) {
                         //capture the end brace if not bodyOnly
-                        if($bodyOnly === false) {
+                        if ($bodyOnly === false) {
                             $body .= $tokenValue;
                         }
 
@@ -310,12 +310,12 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
                     break;
 
                 default:
-                    if($capture === false) {
+                    if ($capture === false) {
                         continue;
                     }
 
                     // if returning body only wait for first brace before capturing
-                    if($bodyOnly === true && $firstBrace !== true) {
+                    if ($bodyOnly === true && $firstBrace !== true) {
                         continue;
                     }
 
@@ -339,7 +339,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     {
         $content = '';
         $count = count($haystack);
-        if($position+1 == $count) {
+        if ($position+1 == $count) {
             return $content;
         }
 
@@ -348,7 +348,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
             $tokenValue = (is_array($haystack[$i])) ? $haystack[$i][1] : $haystack[$i];
 
             //search only for whitespace
-            if($tokenType == "T_WHITESPACE") {
+            if ($tokenType == "T_WHITESPACE") {
                 $content .= $tokenValue;
             } else {
                 break;
@@ -372,7 +372,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         //advance one position
         $position = $position+1;
 
-        if($position == $count) {
+        if ($position == $count) {
             return true;
         }
 
@@ -390,7 +390,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
                 case "T_FUNCTION":
                     // If a function is encountered and that function is not a closure
                     // then return true.  otherwise the function is a closure, return false
-                    if($this->isValidFunction($haystack, $i)) {
+                    if ($this->isValidFunction($haystack, $i)) {
                         return true;
                     }
                     return false;
@@ -443,16 +443,16 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
             $tokenValue = (is_array($haystack[$i])) ? $haystack[$i][1] : $haystack[$i];
 
             //check for occurance of ( or
-            if($tokenType == "T_STRING") {
+            if ($tokenType == "T_STRING") {
                 //check to see if function name is passed, if so validate against that
-                if($functionName !== null && $tokenValue != $functionName) {
+                if ($functionName !== null && $tokenValue != $functionName) {
                     $isValid = false;
                     break;
                 }
 
                 $isValid = true;
                 break;
-            } elseif($tokenValue == "(") {
+            } elseif ($tokenValue == "(") {
                 break;
             }
         }

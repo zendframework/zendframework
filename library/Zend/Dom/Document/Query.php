@@ -153,7 +153,7 @@ class Query
         );
 
         // Classes
-        if(false === strpos($expression, "[@")) {
+        if (false === strpos($expression, "[@")) {
             $expression = preg_replace(
                 '|\.([a-z][a-z0-9_-]*)|i',
                 "[contains(concat(' ', normalize-space(@class), ' '), ' \$1 ')]",

@@ -171,8 +171,7 @@ abstract class AbstractController implements
             (array) $this->eventIdentifier
         );
 
-        $instanceof = class_implements($this);
-        if (is_array($instanceof)) {
+        if ($instanceof = class_implements($this)) {
             $identifiers = array_merge($identifiers, array_values($instanceof));
         }
         

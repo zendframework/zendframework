@@ -9,38 +9,16 @@
 
 namespace Zend\Db\Adapter\Driver\IbmDb2;
 
+use Zend\Db\Adapter\Driver\AbstractConnection;
 use Zend\Db\Adapter\Driver\ConnectionInterface;
 use Zend\Db\Adapter\Exception;
-use Zend\Db\Adapter\Profiler;
 
-class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
+class Connection extends AbstractConnection
 {
     /**
-     *  @var IbmDb2
+     * @var IbmDb2
      */
     protected $driver = null;
-
-    /**
-     * @var array
-     */
-    protected $connectionParameters = null;
-
-    /**
-     * @var resource
-     */
-    protected $resource = null;
-
-    /**
-     * @var Profiler\ProfilerInterface
-     */
-    protected $profiler = null;
-
-    /**
-     * In transaction
-     *
-     * @var bool
-     */
-    protected $inTransaction = false;
 
     /**
      * i5 OS
@@ -78,54 +56,19 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Set driver
      *
-     * @param  IbmDb2     $driver
-     * @return Connection
+     * @param  IbmDb2 $driver
+     * @return self
      */
     public function setDriver(IbmDb2 $driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
     /**
-     * @param  Profiler\ProfilerInterface $profiler
-     * @return Connection
-     */
-    public function setProfiler(Profiler\ProfilerInterface $profiler)
-    {
-        $this->profiler = $profiler;
-        return $this;
-    }
-
-    /**
-     * @return null|Profiler\ProfilerInterface
-     */
-    public function getProfiler()
-    {
-        return $this->profiler;
-    }
-
-    /**
-     * @param  array      $connectionParameters
-     * @return Connection
-     */
-    public function setConnectionParameters(array $connectionParameters)
-    {
-        $this->connectionParameters = $connectionParameters;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getConnectionParameters()
-    {
-        return $this->connectionParameters;
-    }
-
-    /**
-     * @param  resource   $resource DB2 resource
-     * @return Connection
+     * @param  resource $resource DB2 resource
+     * @return self
      */
     public function setResource($resource)
     {
@@ -133,6 +76,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             throw new Exception\InvalidArgumentException('The resource provided must be of type "DB2 Connection"');
         }
         $this->resource = $resource;
+
         return $this;
     }
 
@@ -148,17 +92,8 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $info = db2_server_info($this->resource);
-        return (isset($info->DB_NAME) ? $info->DB_NAME : '');
-    }
 
-    /**
-     * Get resource
-     *
-     * @return mixed
-     */
-    public function getResource()
-    {
-        return $this->resource;
+        return (isset($info->DB_NAME) ? $info->DB_NAME : '');
     }
 
     /**
@@ -233,7 +168,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Begin transaction
      *
-     * @return ConnectionInterface
+     * @return self
      */
     public function beginTransaction()
     {
@@ -250,23 +185,14 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $this->prevAutocommit = db2_autocommit($this->resource);
         db2_autocommit($this->resource, DB2_AUTOCOMMIT_OFF);
         $this->inTransaction = true;
-        return $this;
-    }
 
-    /**
-     * In transaction
-     *
-     * @return bool
-     */
-    public function inTransaction()
-    {
-        return $this->inTransaction;
+        return $this;
     }
 
     /**
      * Commit
      *
-     * @return ConnectionInterface
+     * @return self
      */
     public function commit()
     {
@@ -283,21 +209,22 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->inTransaction = false;
+
         return $this;
     }
 
     /**
      * Rollback
      *
-     * @return ConnectionInterface
+     * @return self
      */
     public function rollback()
     {
-        if (!$this->resource) {
+        if (!$this->isConnected()) {
             throw new Exception\RuntimeException('Must be connected before you can rollback.');
         }
 
-        if (!$this->inTransaction) {
+        if (!$this->inTransaction()) {
             throw new Exception\RuntimeException('Must call beginTransaction() before you can rollback.');
         }
 
@@ -310,6 +237,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->inTransaction = false;
+
         return $this;
     }
 
@@ -368,6 +296,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $this->i5 = php_uname('s') == 'OS400' ? true : false;
+
         return $this->i5;
     }
 }

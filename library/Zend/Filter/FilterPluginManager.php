@@ -69,6 +69,7 @@ class FilterPluginManager extends AbstractPluginManager
         'htmlentities'               => 'Zend\Filter\HtmlEntities',
         'inflector'                  => 'Zend\Filter\Inflector',
         'int'                        => 'Zend\Filter\Int',
+        'monthselect'                => 'Zend\Filter\MonthSelect',
         'null'                       => 'Zend\Filter\Null',
         'numberformat'               => 'Zend\I18n\Filter\NumberFormat',
         'numberparse'                => 'Zend\I18n\Filter\NumberParse',

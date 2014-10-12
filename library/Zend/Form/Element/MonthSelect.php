@@ -333,17 +333,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
             'required' => false,
             'filters' => array(
                 array(
-                    'name'    => 'Callback',
-                    'options' => array(
-                        'callback' => function ($date) {
-                            // Convert the date to a specific format
-                            if (is_array($date)) {
-                                $date = $date['year'] . '-' . $date['month'];
-                            }
-
-                            return $date;
-                        }
-                    )
+                    'name'    => 'MonthSelect',
                 )
             ),
             'validators' => array(

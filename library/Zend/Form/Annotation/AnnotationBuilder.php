@@ -333,8 +333,9 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
             ? $elementSpec['spec']['type']
             : 'Zend\Form\Element';
 
-        // Compose as a fieldset or an element, based on specification type
-        if (is_subclass_of($type, 'Zend\Form\FieldsetInterface')) {
+        // Compose as a fieldset or an element, based on specification type.
+        // If preserve defined order is true, all elements are composed as elements to keep their ordering
+        if (!$this->preserveDefinedOrder() && is_subclass_of($type, 'Zend\Form\FieldsetInterface')) {
             if (!isset($formSpec['fieldsets'])) {
                 $formSpec['fieldsets'] = array();
             }
@@ -345,6 +346,37 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
             }
             $formSpec['elements'][] = $elementSpec;
         }
+    }
+
+    /**
+     * @param array $options
+     * @return $this
+     */
+    public function setOptions(array $options)
+    {
+        if (isset($options['preserve_defined_order'])) {
+            $this->setPreserveDefinedOrder($options['preserve_defined_order']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param boolean $preserveDefinedOrder
+     * @return $this
+     */
+    public function setPreserveDefinedOrder($preserveDefinedOrder)
+    {
+        $this->preserveDefinedOrder = (bool) $preserveDefinedOrder;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function preserveDefinedOrder()
+    {
+        return $this->preserveDefinedOrder;
     }
 
     /**

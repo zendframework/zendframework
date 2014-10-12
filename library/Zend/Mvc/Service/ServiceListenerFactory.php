@@ -53,6 +53,7 @@ class ServiceListenerFactory implements FactoryInterface
             'DiStrictAbstractServiceFactory' => 'Zend\Mvc\Service\DiStrictAbstractServiceFactoryFactory',
             'FilterManager'                  => 'Zend\Mvc\Service\FilterManagerFactory',
             'FormElementManager'             => 'Zend\Mvc\Service\FormElementManagerFactory',
+            'FormAnnotationBuilder'          => 'Zend\Mvc\Service\FormAnnotationBuilderFactory',
             'HttpRouter'                     => 'Zend\Mvc\Service\RouterFactory',
             'HttpViewManager'                => 'Zend\Mvc\Service\HttpViewManagerFactory',
             'HydratorManager'                => 'Zend\Mvc\Service\HydratorManagerFactory',

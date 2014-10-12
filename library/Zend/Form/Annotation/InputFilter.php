@@ -18,7 +18,7 @@ namespace Zend\Form\Annotation;
  *
  * @Annotation
  */
-class InputFilter extends AbstractStringAnnotation
+class InputFilter extends AbstractArrayOrStringAnnotation
 {
     /**
      * Retrieve the input filter class

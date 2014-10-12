@@ -214,6 +214,8 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
 
         if (!isset($formSpec['input_filter'])) {
             $formSpec['input_filter'] = $filterSpec;
+        } elseif (is_array($formSpec['input_filter'])) {
+            $formSpec['input_filter'] = ArrayUtils::merge($filterSpec->getArrayCopy(), $formSpec['input_filter']);
         }
 
         return $formSpec;

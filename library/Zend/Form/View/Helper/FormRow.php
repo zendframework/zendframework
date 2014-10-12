@@ -213,7 +213,13 @@ class FormRow extends AbstractHelper
                     $labelOpen = $labelClose = $label = '';
                 }
 
-                switch ($this->labelPosition) {
+                $labelPosition = $this->labelPosition;
+
+                if ($element instanceof LabelAwareInterface && $element->getLabelOption('label_position')) {
+                    $labelPosition = $element->getLabelOption('label_position');
+                }
+
+                switch ($labelPosition) {
                     case self::LABEL_PREPEND:
                         $markup = $labelOpen . $label . $elementString . $labelClose;
                         break;

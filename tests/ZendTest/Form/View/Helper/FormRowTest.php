@@ -64,6 +64,19 @@ class FormRowTest extends TestCase
         $this->assertContains('</label>', $markup);
     }
 
+    public function testCanOverrideLabelPosition()
+    {
+        $element = new Element('foo');
+        $element->setOptions(array(
+            'label' => 'The value for foo:',
+            'label_options' => array('label_position' =>'prepend')
+        ));
+        $this->helper->setLabelPosition('append');
+        $markup = $this->helper->render($element);
+        $this->assertContains('<label><span>The value for foo:</span><', $markup);
+        $this->assertContains('</label>', $markup);
+    }
+
     public function testCanRenderRowLabelAttributes()
     {
         $element = new Element('foo');

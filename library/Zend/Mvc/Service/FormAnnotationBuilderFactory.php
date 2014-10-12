@@ -29,6 +29,23 @@ class FormAnnotationBuilderFactory implements FactoryInterface
         $formElementManager = $serviceLocator->get('FormElementManager');
         $formElementManager->injectFactory($annotationBuilder);
 
+        $config = $serviceLocator->get('Config');
+        if (isset($config['form_annotation_builder'])) {
+            $config = $config['form_annotation_builder'];
+
+            if (isset($config['annotations'])) {
+                foreach ($config['annotations'] as $fullyQualifiedClassName) {
+                    $annotationBuilder->registerAnnotation($fullyQualifiedClassName);
+                }
+            }
+
+            if (isset($config['listeners'])) {
+                foreach ($config['listeners'] as $listener) {
+                    $annotationBuilder->registerAnnotationListener($listener);
+                }
+            }
+        }
+
         return $annotationBuilder;
     }
 }

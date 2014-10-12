@@ -25,6 +25,7 @@ class FormAnnotationBuilderFactoryTest extends TestCase
         $serviceLocator->setService('FormElementManager', $mockElementManager);
         $serviceLocator->setService('ValidatorManager', $mockValidatorManager);
         $serviceLocator->setService('FilterManager', $mockFilterManager);
+        $serviceLocator->setService('Config', array());
 
         $sut = new FormAnnotationBuilderFactory();
 

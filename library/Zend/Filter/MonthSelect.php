@@ -9,10 +9,10 @@
 
 namespace Zend\Filter;
 
-class DateSelect extends AbstractDateDropdown
+class MonthSelect extends AbstractDateDropdown
 {
     /**
      * @var string
      */
-    protected $format = '%3$s-%2$s-%1$s';
+    protected $format = '%2$s-%1$s';
 }

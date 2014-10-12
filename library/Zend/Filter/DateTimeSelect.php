@@ -9,8 +9,10 @@
 
 namespace Zend\Filter;
 
-class DateTimeSelect extends DateSelect
+class DateTimeSelect extends AbstractDateDropdown
 {
+    protected $format = '%6$s-%4$s-%1$s %2$s:%3$s:%5$s';
+
     public function filter($value)
     {
         if (is_array($value)) {
@@ -42,10 +44,10 @@ class DateTimeSelect extends DateSelect
             if (!isset($value['second'])) {
                 $value['second'] = '00';
             }
-            $value = sprintf('%s-%s-%s %s:%s:%s',
-                $value['year'], $value['month'], $value['day'],
-                $value['hour'], $value['minute'], $value['second']
-            );
+
+            ksort($value);
+
+            $value = vsprintf($this->format, $value);
         }
 
         return $value;

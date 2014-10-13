@@ -40,13 +40,43 @@ class Encrypt extends AbstractFilter
 
     /**
      * Returns the name of the set adapter
-     * @todo inconsitent: get adapter should return the adapter and not the name
      *
      * @return string
      */
     public function getAdapter()
     {
-        return $this->adapter->toString();
+        if ($this->adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
+            return $this->adapter;
+        }
+
+        $adapter = $this->adapter;
+        $options = $this->getOptions();
+        if (!class_exists($adapter)) {
+            $adapter = 'Zend\\Filter\\Encrypt\\' . ucfirst($adapter);
+            if (!class_exists($adapter)) {
+                throw new Exception\RuntimeException(sprintf(
+                    '%s unable to load adapter; class "%s" not found',
+                    __METHOD__,
+                    $this->adapter
+                ));
+            }
+        }
+
+        $this->adapter = new $adapter($options);
+        if (!$this->adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
+            throw new Exception\InvalidArgumentException("Encryption adapter '" . $adapter . "' does not implement Zend\\Filter\\Encrypt\\EncryptionAlgorithmInterface");
+        }
+        return $this->adapter;
+    }
+
+    /**
+     * Retrieve adapter name
+     *
+     * @return string
+     */
+    public function getAdapterName()
+    {
+        return $this->getAdapter()->toString();
     }
 
     /**

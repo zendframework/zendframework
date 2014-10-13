@@ -41,7 +41,7 @@ class Encrypt extends AbstractFilter
     /**
      * Returns the name of the set adapter
      *
-     * @return string
+     * @return Encrypt\EncryptionAlgorithmInterface
      */
     public function getAdapter()
     {

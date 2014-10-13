@@ -41,6 +41,8 @@ class Encrypt extends AbstractFilter
     /**
      * Returns the name of the set adapter
      *
+     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      * @return Encrypt\EncryptionAlgorithmInterface
      */
     public function getAdapter()

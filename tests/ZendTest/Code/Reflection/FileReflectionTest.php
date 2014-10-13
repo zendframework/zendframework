@@ -117,8 +117,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         require_once 'Zend/Version/Version.php';
         $reflectionFile = new FileReflection('Zend/Version/Version.php');
 
-        // Make sure this test works on all platforms
-        $this->assertRegExp('#^.*Zend.Version.Version.php$#i', $reflectionFile->getFileName());
+        $this->assertEquals('Version.php', $reflectionFile->getFileName());
     }
 
     public function testFileGetLineNumbersWorks()

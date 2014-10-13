@@ -126,11 +126,11 @@ PIDs9E7uuizAKDhRRRvho8BS
         $filter = new EncryptFilter();
         $filter->setAdapter('Openssl');
         $this->assertEquals('Openssl', $filter->getAdapterName());
-        $this->assertInstanceOf('Zend\Filter\Encrypt\Openssl', $filter->getAdapter());
+        $this->assertInstanceOf('Zend\Filter\Encrypt\EncryptionAlgorithmInterface', $filter->getAdapter());
 
         $filter->setAdapter('BlockCipher');
         $this->assertEquals('BlockCipher', $filter->getAdapterName());
-        $this->assertInstanceOf('Zend\Filter\Encrypt\BlockCipher', $filter->getAdapter());
+        $this->assertInstanceOf('Zend\Filter\Encrypt\EncryptionAlgorithmInterface', $filter->getAdapter());
 
         $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', 'does not implement');
         $filter->setAdapter('\ZendTest\Filter\TestAdapter2');

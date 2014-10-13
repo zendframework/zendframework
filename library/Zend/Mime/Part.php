@@ -250,12 +250,16 @@ class Part
 
     /**
      * Set content
-     * @param string $content
+     * @param mixed $content  String or Stream containing the content
      * @return self
      */
     public function setContent($content)
     {
         $this->content = $content;
+        if (is_resource($content)) {
+            $this->isStream = true;
+        }
+
         return $this;
     }
 

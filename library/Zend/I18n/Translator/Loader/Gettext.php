@@ -128,7 +128,9 @@ class Gettext extends AbstractFileLoader
                     array_shift($originalString);
 
                     foreach ($originalString as $string) {
-                        $textDomain[$string] = '';
+                        if(!isset($textDomain[$string])) {
+                            $textDomain[$string] = '';
+                        }
                     }
                 } else {
                     $textDomain[$originalString[0]] = $translationString[0];

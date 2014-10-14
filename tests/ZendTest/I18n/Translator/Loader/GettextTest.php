@@ -117,9 +117,16 @@ class GettextTest extends TestCase
         $loader->setUseIncludePath(true);
         $textDomain = $loader->load('en_EN', $this->testFilesDir . '/translation_en.mo');
 
-        $this->assertEquals(
-            ['Message A (en) Plural 0', 'Message A (en) Plural 1', 'Message A (en) Plural 2'], $textDomain['Message A']);
-        $this->assertEquals(
-            ['Message B (en) Plural 0', 'Message B (en) Plural 1', 'Message B (en) Plural 2'], $textDomain['Message B']);
+        $this->assertEquals(array(
+            'Message A (en) Plural 0',
+            'Message A (en) Plural 1',
+            'Message A (en) Plural 2',
+        ), $textDomain['Message A']);
+
+        $this->assertEquals(array(
+            'Message B (en) Plural 0',
+            'Message B (en) Plural 1',
+            'Message B (en) Plural 2',
+        ), $textDomain['Message B']);
     }
 }

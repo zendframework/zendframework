@@ -181,10 +181,10 @@ return array(
     "File '%value%' was not uploaded" => "Die Datei '%value%' wurde nicht hochgeladen",
     "No temporary directory was found for file '%value%'" => "Für die Datei '%value%' wurde kein temporäres Verzeichnis gefunden",
     "File '%value%' can't be written" => "Die Datei '%value%' konnte nicht geschrieben werden",
-    "A PHP extension returned an error while uploading the file '%value%'" => "Eine PHP Erweiterung hat einen Fehler ausgegeben wärend die Datei '%value%' hochgeladen wurde",
+    "A PHP extension returned an error while uploading the file '%value%'" => "Eine PHP Erweiterung hat einen Fehler ausgegeben während die Datei '%value%' hochgeladen wurde",
     "File '%value%' was illegally uploaded. This could be a possible attack" => "Die Datei '%value%' wurde illegal hochgeladen. Dies könnte eine mögliche Attacke sein",
     "File '%value%' was not found" => "Die Datei '%value%' wurde nicht gefunden",
-    "Unknown error while uploading file '%value%'" => "Ein unbekannter Fehler ist aufgetreten wärend die Datei '%value%' hochgeladen wurde",
+    "Unknown error while uploading file '%value%'" => "Ein unbekannter Fehler ist aufgetreten während die Datei '%value%' hochgeladen wurde",
     
     // Zend\Validator\File\UploadFile
     "File exceeds the defined ini size" => "Die Datei übersteigt die definierte Größe in der Konfiguration",
@@ -193,10 +193,10 @@ return array(
     "File was not uploaded" => "Die Datei wurde nicht hochgeladen",
     "No temporary directory was found for file" => "Für die Datei wurde kein temporäres Verzeichnis gefunden",
     "File can't be written" => "Die Datei konnte nicht geschrieben werden",
-    "A PHP extension returned an error while uploading the file" => "Eine PHP Erweiterung hat einen Fehler ausgegeben wärend die Datei hochgeladen wurde",
+    "A PHP extension returned an error while uploading the file" => "Eine PHP Erweiterung hat einen Fehler ausgegeben während die Datei hochgeladen wurde",
     "File was illegally uploaded. This could be a possible attack" => "Die Datei wurde illegal hochgeladen. Dies könnte eine mögliche Attacke sein",
     "File was not found" => "Die Datei wurde nicht gefunden",
-    "Unknown error while uploading file" => "Ein unbekannter Fehler ist aufgetreten wärend die Datei hochgeladen wurde",
+    "Unknown error while uploading file" => "Ein unbekannter Fehler ist aufgetreten während die Datei hochgeladen wurde",
     
     // Zend\Validator\File\WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Zu viele Wörter. Maximal '%max%' sind erlaubt, aber '%count%' wurden gezählt",

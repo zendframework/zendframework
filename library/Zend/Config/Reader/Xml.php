@@ -111,6 +111,7 @@ class Xml implements ReaderInterface
         );
         $return = $this->process();
         restore_error_handler();
+        $this->reader->close();
 
         return $return;
     }

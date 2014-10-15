@@ -12,6 +12,7 @@ namespace Zend\I18n\Validator;
 use Locale;
 use NumberFormatter;
 use Traversable;
+use IntlException;
 use Zend\I18n\Exception as I18nException;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
@@ -113,11 +114,7 @@ class Int extends AbstractValidator
             if (intl_is_failure($format->getErrorCode())) {
                 throw new Exception\InvalidArgumentException("Invalid locale string given");
             }
-        } catch(\Exception $e) {
-            if(!$e instanceof IntlException){
-                throw $e;
-            }
-
+        } catch(IntlException $e) {
             throw new Exception\InvalidArgumentException("Invalid locale string given");
         }
 
@@ -127,11 +124,7 @@ class Int extends AbstractValidator
                 $this->error(self::NOT_INT);
                 return false;
             }
-        } catch(\Exception $e) {
-            if(!$e instanceof IntlException){
-                throw $e;
-            }
-
+        } catch(IntlException $e) {
             $this->error(self::NOT_INT);
             return false;
         }

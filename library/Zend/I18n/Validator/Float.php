@@ -12,6 +12,7 @@ namespace Zend\I18n\Validator;
 use Locale;
 use NumberFormatter;
 use Traversable;
+use IntlException;
 use Zend\I18n\Exception as I18nException;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\StringUtils;
@@ -126,11 +127,7 @@ class Float extends AbstractValidator
             if (intl_is_failure($formatter->getErrorCode())) {
                 throw new Exception\InvalidArgumentException($formatter->getErrorMessage());
             }
-        } catch(\Exception $e) {
-            if(!$e instanceof IntlException){
-                throw $e;
-            }
-
+        } catch(IntlException $e) {
             throw new Exception\InvalidArgumentException($e->getMessage());
         }
 

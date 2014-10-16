@@ -83,7 +83,7 @@ class PriorityListTest extends TestCase
         $this->list->insert('foobar', new \stdClass());
         $this->list->insert('barbaz', new \stdClass());
 
-        $order = array();
+        $orders = array();
 
         foreach ($this->list as $key => $value) {
             $orders[] = $key;
@@ -129,7 +129,7 @@ class PriorityListTest extends TestCase
         $this->list->insert('bar', new \stdClass(), 0);
         $this->list->insert('baz', new \stdClass(), 1);
 
-        $order = array();
+        $orders = array();
 
         foreach ($this->list as $key => $value) {
             $orders[] = $key;
@@ -147,7 +147,7 @@ class PriorityListTest extends TestCase
         $this->list->insert('foobar', new \stdClass());
         $this->list->insert('barbaz', new \stdClass());
 
-        $order = array();
+        $orders = array();
 
         foreach ($this->list as $key => $value) {
             $orders[] = $key;
@@ -162,7 +162,7 @@ class PriorityListTest extends TestCase
         $this->list->insert('bar', new \stdClass(), 1);
         $this->list->insert('baz', new \stdClass(), -1);
 
-        $order = array();
+        $orders = array();
 
         foreach ($this->list as $key => $value) {
             $orders[] = $key;
@@ -194,5 +194,23 @@ class PriorityListTest extends TestCase
             ),
             $this->list->toArray(PriorityList::EXTR_BOTH)
         );
+    }
+
+    /**
+     * @group ZF2-6768
+     */
+    public function testBooleanValuesAreValid()
+    {
+        $this->list->insert('foo', false, null);
+        $this->list->insert('bar', 'test', 1);
+        $this->list->insert('baz', true, -1);
+
+        $orders = array();
+
+        foreach ($this->list as $key => $value) {
+            $orders[] = $value;
+        }
+
+        $this->assertEquals(array('test', false, true), $orders);
     }
 }

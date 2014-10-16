@@ -55,6 +55,13 @@ class PriorityList implements Iterator, Countable
     protected $sorted = false;
 
     /**
+     * Holds current node, false if current() was invalid
+     *
+     * @var mixed
+     */
+    protected $currentNode = false;
+
+    /**
      * Insert a new item.
      *
      * @param  string  $name
@@ -193,6 +200,7 @@ class PriorityList implements Iterator, Countable
     public function current()
     {
         $node = current($this->items);
+        $this->currentNode = $node;
         return ($node !== false ? $node['data'] : false);
     }
 
@@ -227,7 +235,8 @@ class PriorityList implements Iterator, Countable
      */
     public function valid()
     {
-        return ($this->current() !== false);
+        $this->current();
+        return ($this->currentNode !== false);
     }
 
     /**

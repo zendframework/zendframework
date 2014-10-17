@@ -166,10 +166,10 @@ class MboxTest extends \PHPUnit_Framework_TestCase
     }
 */
 
-    public function testFetchMessageUnix()
+    public function testFetchMessageHeaderLinuxUnix()
     {
         $mail = new Storage\Mbox(array('filename' => $this->_mboxFileUnix, 'messageEOL' => "\n"));
-
+        
         $subject = $mail->getMessage(1)->subject;
         $this->assertEquals('Simple Message', $subject);
     }

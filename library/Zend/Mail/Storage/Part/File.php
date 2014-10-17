@@ -26,7 +26,7 @@ class File extends Part
      * - startPos start position of message or part in file (default: current position)
      * - endPos   end position of message or part in file (default: end of file)
      * - EOL      end of Line for messages
-     * 
+     *
      * @param   array $params  full message with or without headers
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException

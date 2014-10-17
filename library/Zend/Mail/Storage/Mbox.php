@@ -43,6 +43,10 @@ class Mbox extends AbstractStorage
      */
     protected $messageClass = '\Zend\Mail\Storage\Message\File';
 
+    /**
+     * end of Line for messages
+     * @var string
+     */
     protected $messageEOL;
 
     /**

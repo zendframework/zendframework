@@ -166,7 +166,7 @@ class MboxTest extends \PHPUnit_Framework_TestCase
     }
 */
 
-    public function testFetchMessageHeaderLinuxUnix()
+    public function testFetchMessageHeaderUnix()
     {
         $mail = new Storage\Mbox(array('filename' => $this->_mboxFileUnix, 'messageEOL' => "\n"));
         

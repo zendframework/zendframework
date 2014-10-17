@@ -19,6 +19,7 @@ class MboxTest extends \PHPUnit_Framework_TestCase
 {
     protected $_mboxOriginalFile;
     protected $_mboxFile;
+    protected $_mboxFileUnix;
     protected $_tmpdir;
 
     public function setUp()
@@ -43,16 +44,26 @@ class MboxTest extends \PHPUnit_Framework_TestCase
                 return;
             }
         }
-
-        $this->_mboxOriginalFile = __DIR__ . '/../_files/test.mbox/INBOX';
+        
+        $this->_mboxOriginalFile = __DIR__ . '/../_files/test.mbox/INBOX'; 
         $this->_mboxFile = $this->_tmpdir . 'INBOX';
 
         copy($this->_mboxOriginalFile, $this->_mboxFile);
+        
+        if (strpos($this->getName(), 'Unix')){
+            $this->_mboxOriginalFileLinux = __DIR__ . '/../_files/test.mbox/INBOX.unix';
+            $this->_mboxFileUnix = $this->_tmpdir . 'INBOX.unix';
+            copy($this->_mboxOriginalFileLinux, $this->_mboxFileUnix);
+        }
     }
 
     public function tearDown()
     {
         unlink($this->_mboxFile);
+        
+        if ($this->_mboxFileUnix){
+            unlink($this->_mboxFileUnix);
+        }
     }
 
     public function testLoadOk()
@@ -155,6 +166,14 @@ class MboxTest extends \PHPUnit_Framework_TestCase
     }
 */
 
+    public function testFetchMessageHeaderLinuxUnix()
+    {
+        $mail = new Storage\Mbox(array('filename' => $this->_mboxFileUnix, 'messageEOL' => "\n"));
+        
+        $subject = $mail->getMessage(1)->subject;
+        $this->assertEquals('Simple Message', $subject);
+    }
+    
     public function testFetchMessageHeader()
     {
         $mail = new Storage\Mbox(array('filename' => $this->_mboxFile));
@@ -169,6 +188,15 @@ class MboxTest extends \PHPUnit_Framework_TestCase
 
         $content = $mail->getMessage(3)->getContent();
         list($content) = explode("\n", $content, 2);
+        $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
+    }
+    
+    public function testFetchMessageBodyUnix()
+    {
+        $mail = new Storage\Mbox(array('filename' => $this->_mboxFileUnix, 'messageEOL' => "\n"));
+
+        $content = $mail->getMessage(3)->getContent();
+        list($content, ) = explode("\n", $content, 2);
         $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
     }
 

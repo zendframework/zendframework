@@ -30,7 +30,7 @@ class TableGateway extends AbstractTableGateway
     public function __construct($table, AdapterInterface $adapter, $features = null, ResultSetInterface $resultSetPrototype = null, Sql $sql = null)
     {
         // table
-    	if (!(is_string($table) || $table instanceof TableIdentifier || is_array($table))) {
+        if (!(is_string($table) || $table instanceof TableIdentifier || is_array($table))) {
             throw new Exception\InvalidArgumentException('Table name must be a string or an instance of Zend\Db\Sql\TableIdentifier');
         }
         $this->table = $table;

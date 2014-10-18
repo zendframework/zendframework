@@ -15,7 +15,8 @@
     "target-dir": "Zend/Json",
     "require": {
         "php": ">=5.3.23",
-        "zendframework/zend-stdlib": "self.version"
+        "zendframework/zend-stdlib": "self.version",
+        "zendframework/zendxml": "1.*"
     },
     "require-dev": {
         "zendframework/zend-http": "self.version",

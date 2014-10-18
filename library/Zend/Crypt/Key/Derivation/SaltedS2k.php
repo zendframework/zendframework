@@ -34,7 +34,7 @@ class SaltedS2k
         'haval256'   => MHASH_HAVAL256,
         'tiger'      => MHASH_TIGER,
         'tiger128'   => MHASH_TIGER128,
-        'riger160'   => MHASH_TIGER160,
+        'tiger160'   => MHASH_TIGER160,
         'whirpool'   => MHASH_WHIRLPOOL,
         'snefru256'  => MHASH_SNEFRU256,
         'gost'       => MHASH_GOST,

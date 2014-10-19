@@ -10,7 +10,6 @@
 namespace Zend\Form\Annotation;
 
 use ArrayObject;
-use ReflectionClass;
 use Zend\Code\Annotation\AnnotationCollection;
 use Zend\Code\Annotation\AnnotationManager;
 use Zend\Code\Annotation\Parser;

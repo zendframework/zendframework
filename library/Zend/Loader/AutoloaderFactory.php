@@ -9,7 +9,6 @@
 
 namespace Zend\Loader;
 
-use ReflectionClass;
 use Traversable;
 
 if (class_exists('Zend\Loader\AutoloaderFactory')) {

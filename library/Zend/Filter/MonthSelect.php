@@ -9,9 +9,15 @@
 
 namespace Zend\Filter;
 
+/**
+ * Class MonthSelect
+ * @package Zend\Filter
+ */
 class MonthSelect extends AbstractDateDropdown
 {
     /**
+     * Year-Month
+     *
      * @var string
      */
     protected $format = '%2$s-%1$s';

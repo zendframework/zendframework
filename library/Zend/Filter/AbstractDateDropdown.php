@@ -9,10 +9,31 @@
 
 namespace Zend\Filter;
 
+/**
+ * Class AbstractDateDropdown
+ * @package Zend\Filter
+ */
 abstract class AbstractDateDropdown extends AbstractFilter
 {
+    /**
+     * If true, the filter will return null if any date field is empty
+     *
+     * @var bool
+     */
     protected $nullOnEmpty = false;
+
+    /**
+     * If true, the filter will return null if all date fields are empty
+     *
+     * @var bool
+     */
     protected $nullOnAllEmpty = false;
+
+    /**
+     * Sprintf format string to use for formatting the date, fields will be used in alphabetical order.
+     *
+     * @var string
+     */
     protected $format = '';
 
     /**

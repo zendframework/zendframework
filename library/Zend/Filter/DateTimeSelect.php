@@ -9,10 +9,23 @@
 
 namespace Zend\Filter;
 
+/**
+ * Class DateTimeSelect
+ * @package Zend\Filter
+ */
 class DateTimeSelect extends AbstractDateDropdown
 {
+    /**
+     * Year-Month-Day Hour:Min:Sec
+     *
+     * @var string
+     */
     protected $format = '%6$s-%4$s-%1$s %2$s:%3$s:%5$s';
 
+    /**
+     * @param mixed $value
+     * @return array|mixed|null|string
+     */
     public function filter($value)
     {
         if (is_array($value)) {

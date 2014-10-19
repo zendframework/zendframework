@@ -57,6 +57,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         'AllowEmpty',
         'Attributes',
         'ComposedObject',
+        'ContinueIfEmpty',
         'ErrorMessage',
         'Exclude',
         'Filter',

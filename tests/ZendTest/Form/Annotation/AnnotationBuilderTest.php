@@ -234,6 +234,17 @@ class AnnotationBuilderTest extends TestCase
         $this->assertTrue($sampleinput->allowEmpty());
     }
 
+    public function testContinueIfEmptyInput()
+    {
+        $entity  = new TestAsset\Annotation\SampleEntity();
+        $builder = new Annotation\AnnotationBuilder();
+        $form    = $builder->createForm($entity);
+
+        $inputFilter = $form->getInputFilter();
+        $sampleinput = $inputFilter->get('sampleinput');
+        $this->assertTrue($sampleinput->continueIfEmpty());
+    }
+
     public function testInputNotRequiredByDefault()
     {
         $entity = new TestAsset\Annotation\SampleEntity();

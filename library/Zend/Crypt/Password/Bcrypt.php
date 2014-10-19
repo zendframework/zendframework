@@ -35,11 +35,6 @@ class Bcrypt implements PasswordInterface
     protected $salt;
 
     /**
-     * @var bool
-     */
-    protected $backwardCompatibility = false;
-
-    /**
      * Constructor
      *
      * @param array|Traversable $options
@@ -87,19 +82,7 @@ class Bcrypt implements PasswordInterface
          * Check for security flaw in the bcrypt implementation used by crypt()
          * @see http://php.net/security/crypt_blowfish.php
          */
-        if (!$this->backwardCompatibility) {
-            $prefix = '$2y$';
-        } else {
-            $prefix = '$2a$';
-            // check if the password contains 8-bit character
-            if (preg_match('/[\x80-\xFF]/', $password)) {
-                throw new Exception\RuntimeException(
-                    'The bcrypt implementation used by PHP can contain a security flaw ' .
-                    'using password with 8-bit character. ' .
-                    'We suggest to upgrade to PHP 5.3.7+ or use passwords with only 7-bit characters'
-                );
-            }
-        }
+        $prefix = '$2y$';
         $hash = crypt($password, $prefix . $this->cost . '$' . $salt64);
         if (strlen($hash) < 13) {
             throw new Exception\RuntimeException('Error during the bcrypt generation');
@@ -181,27 +164,5 @@ class Bcrypt implements PasswordInterface
     public function getSalt()
     {
         return $this->salt;
-    }
-
-    /**
-     * Set the backward compatibility $2a$ instead of $2y$ for PHP 5.3.7+
-     *
-     * @param bool $value
-     * @return Bcrypt
-     */
-    public function setBackwardCompatibility($value)
-    {
-        $this->backwardCompatibility = (bool) $value;
-        return $this;
-    }
-
-    /**
-     * Get the backward compatibility
-     *
-     * @return bool
-     */
-    public function getBackwardCompatibility()
-    {
-        return $this->backwardCompatibility;
     }
 }

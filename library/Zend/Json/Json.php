@@ -285,6 +285,7 @@ class Json
     }
 
     /**
+     * @deprecated
      * fromXml - Converts XML to JSON
      *
      * Converts a XML formatted string into a JSON formatted string.

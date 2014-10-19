@@ -15,8 +15,7 @@
     "target-dir": "Zend/Json",
     "require": {
         "php": ">=5.3.23",
-        "zendframework/zend-stdlib": "self.version",
-        "zendframework/zendxml": "1.*"
+        "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {
         "zendframework/zend-http": "self.version",
@@ -24,7 +23,8 @@
     },
     "suggest": {
         "zendframework/zend-http": "Zend\\Http component",
-        "zendframework/zend-server": "Zend\\Server component"
+        "zendframework/zend-server": "Zend\\Server component",
+        "zendframework/zendxml": "1.*"
     },
     "extra": {
         "branch-alias": {

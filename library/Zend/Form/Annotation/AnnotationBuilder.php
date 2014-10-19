@@ -362,7 +362,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
     }
 
     /**
-     * @param boolean $preserveDefinedOrder
+     * @param bool $preserveDefinedOrder
      * @return $this
      */
     public function setPreserveDefinedOrder($preserveDefinedOrder)
@@ -372,7 +372,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function preserveDefinedOrder()
     {

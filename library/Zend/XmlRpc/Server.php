@@ -597,13 +597,7 @@ class Server extends AbstractServer
         if (is_subclass_of($className, $type)) {
             return true;
         }
-        if (PHP_VERSION_ID >= 50307) {
-            return false;
-        }
-        if (!interface_exists($type)) {
-            return false;
-        }
-        $r = new ReflectionClass($className);
-        return $r->implementsInterface($type);
+
+        return false;
     }
 }

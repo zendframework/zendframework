@@ -24,7 +24,7 @@
     "suggest": {
         "zendframework/zend-http": "Zend\\Http component",
         "zendframework/zend-server": "Zend\\Server component",
-        "zendframework/zendxml": "1.*"
+        "zendframework/zendxml": "To support Zend\Json\Json::fromXml() usage"
     },
     "extra": {
         "branch-alias": {

@@ -396,7 +396,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
             $this->__pluginCache[$method] = $this->plugin($method);
         }
         if (is_callable($this->__pluginCache[$method])) {
-            return call_user_func_array($this->__pluginCache[$method], $argv);
+            return call_user_func_array($this->plugin($method), $argv);
         }
         return $this->__pluginCache[$method];
     }

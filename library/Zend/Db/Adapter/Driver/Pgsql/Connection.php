@@ -45,6 +45,13 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     protected $inTransaction = false;
 
     /**
+     * Connection string
+     *
+     * @var string
+     */
+    protected $connectionString = '';
+
+    /**
      * Constructor
      *
      * @param resource|array|null $connectionInfo
@@ -144,17 +151,12 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * Connect to the database
+     * Get Connection String
      *
-     * @return Connection
-     * @throws Exception\RuntimeException on failure
+     * @return string
      */
-    public function connect()
+    public function getConnectionString()
     {
-        if (is_resource($this->resource)) {
-            return $this;
-        }
-
         // localize
         $p = $this->connectionParameters;
 
@@ -178,7 +180,24 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 
         $connection = array_filter($connection); // remove nulls
         $connection = http_build_query($connection, null, ' '); // @link http://php.net/pg_connect
+        $connection = urldecode($connection); // @link http://php.net/manual/en/function.urldecode.php
 
+        return $connection;
+    }
+
+    /**
+     * Connect to the database
+     *
+     * @return Connection
+     * @throws Exception\RuntimeException on failure
+     */
+    public function connect()
+    {
+        if (is_resource($this->resource)) {
+            return $this;
+        }
+
+        $connection = $this->getConnectionString();
         set_error_handler(function ($number, $string) {
             throw new Exception\RuntimeException(
                 __METHOD__ . ': Unable to connect to database', null, new Exception\ErrorException($string, $number)

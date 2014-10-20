@@ -49,4 +49,32 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('pgsql extension not loaded');
         }
     }
+
+    /**
+     * @group ZF2-6760
+     */
+    public function testGetConnectionStringEncodeSpecialSymbol()
+    {
+        if (extension_loaded('pgsql')) {
+            try {
+                $connectionParameters = array(
+                    'driver'    => 'pgsql',
+                    'host' => 'localhost',
+                    'post' => '5432',
+                    'dbname' => 'test',
+                    'username'  => 'test',
+                    'password'  => 'test123!',
+                );
+
+                $this->connection->setConnectionParameters($connectionParameters);
+                $this->assertEquals('host=localhost user=test password=test123! dbname=test', $this->connection->getConnectionString());
+            } catch (AdapterException\RuntimeException $exc) {
+                // If it throws an exception it has failed to connect
+                $this->setExpectedException('Zend\Db\Adapter\Exception\RuntimeException');
+                throw $exc;
+            }
+        } else {
+            $this->markTestSkipped('pgsql extension not loaded');
+        }
+    }
 }

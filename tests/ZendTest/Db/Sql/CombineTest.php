@@ -11,6 +11,7 @@ namespace ZendTest\Db\Sql;
 
 use Zend\Db\Sql\Combine;
 use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Predicate\Expression;
 
 class CombineTest extends \PHPUnit_Framework_TestCase
 {
@@ -108,13 +109,49 @@ class CombineTest extends \PHPUnit_Framework_TestCase
             $select2
         ));
 
-        $adapter = new \Zend\Db\Adapter\Adapter(array('driver'=>'mysqli'));
+        $adapter = $this->getMockAdapter();
 
         $statement = $this->combine->prepareStatement($adapter);
         $this->assertInstanceOf('Zend\Db\Adapter\StatementContainerInterface', $statement);
         $this->assertEquals(
-            "(SELECT `t1`.* FROM `t1` WHERE `x1` = ?) UNION (SELECT `t2`.* FROM `t2` WHERE `x2` = ?)",
+            '(SELECT "t1".* FROM "t1" WHERE "x1" = ?) UNION (SELECT "t2".* FROM "t2" WHERE "x2" = ?)',
             $statement->getSql()
+        );
+    }
+
+    public function testAlignColumns()
+    {
+        $select1 = new Select('t1');
+        $select1->columns(array(
+            'c0' => 'c0',
+            'c1' => 'c1',
+        ));
+        $select2 = new Select('t2');
+        $select2->columns(array(
+            'c1' => 'c1',
+            'c2' => 'c2',
+        ));
+
+        $this->combine
+                ->union(array($select1, $select2))
+                ->alignColumns();
+
+        $this->assertEquals(
+            array(
+                'c0' => 'c0',
+                'c1' => 'c1',
+                'c2' => new Expression('NULL'),
+            ),
+            $select1->getRawState('columns')
+        );
+
+        $this->assertEquals(
+            array(
+                'c0' => new Expression('NULL'),
+                'c1' => 'c1',
+                'c2' => 'c2',
+            ),
+            $select2->getRawState('columns')
         );
     }
 
@@ -131,8 +168,39 @@ class CombineTest extends \PHPUnit_Framework_TestCase
                         'modifier' => ''
                     ),
                 ),
+                'columns' => array(
+                    '0' => '*',
+                ),
             ),
             $this->combine->getRawState()
         );
+    }
+
+    protected function getMockAdapter()
+    {
+        $parameterContainer = new \Zend\Db\Adapter\ParameterContainer();
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($parameterContainer));
+
+
+        $setgetSqlFunction = function ($sql = null) use ($mockStatement) {
+            static $sqlValue;
+            if ($sql) {
+                $sqlValue = $sql;
+                return $mockStatement;
+            }
+            return $sqlValue;
+        };
+        $mockStatement->expects($this->any())->method('setSql')->will($this->returnCallback($setgetSqlFunction));
+        $mockStatement->expects($this->any())->method('getSql')->will($this->returnCallback($setgetSqlFunction));
+
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnCallback(
+            function ($name) { return '?'; }
+        ));
+        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
+
+        return $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
     }
 }

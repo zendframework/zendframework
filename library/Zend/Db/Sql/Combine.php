@@ -18,6 +18,7 @@ use Zend\Db\Adapter\ParameterContainer;
 
 class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
+    const COLUMNS = 'columns';
     const COMBINE = 'combine';
     const COMBINE_UNION = 'union';
     const COMBINE_EXCEPT = 'except';
@@ -28,10 +29,18 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     );
 
     protected $combine = array();
+
+    public function __construct($select = null, $type = self::COMBINE_UNION, $modifier = '')
+    {
+        if ($select) {
+            $this->combine($select, $type, $modifier);
+        }
+    }
+
     /**
      * Create combine clause
      *
-     * @param Select $select
+     * @param Select|array $select
      * @param string $type
      * @param string $modifier
      * @return self
@@ -65,11 +74,11 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     /**
      * Create union clause
      *
-     * @param Select $select
+     * @param Select|array $select
      * @param string $modifier
      * @return self
      */
-    public function union(Select $select, $modifier = '')
+    public function union($select, $modifier = '')
     {
         return $this->combine($select, self::COMBINE_UNION, $modifier);
     }
@@ -77,11 +86,11 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     /**
      * Create except clause
      *
-     * @param Select $select
+     * @param Select|array $select
      * @param string $modifier
      * @return self
      */
-    public function except(Select $select, $modifier = '')
+    public function except($select, $modifier = '')
     {
         return $this->combine($select, self::COMBINE_EXCEPT, $modifier);
     }
@@ -89,11 +98,11 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     /**
      * Create intersect clause
      *
-     * @param Select $select
+     * @param Select|array $select
      * @param string $modifier
      * @return self
      */
-    public function intersect(Select $select, $modifier = '')
+    public function intersect($select, $modifier = '')
     {
         return $this->combine($select, self::COMBINE_INTERSECT, $modifier);
     }
@@ -160,6 +169,33 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
         return trim($sql, ' ');
     }
 
+    public function alignColumns()
+    {
+        if (!$this->combine) {
+            return $this;
+        }
+
+        $allColumns = array();
+        foreach($this->combine as $combine) {
+            $allColumns = array_merge(
+                $allColumns,
+                $combine['select']->getRawState(self::COLUMNS)
+            );
+        }
+
+        foreach($this->combine as $combine) {
+            $combineColumns = $combine['select']->getRawState(self::COLUMNS);
+            $aligned = array();
+            foreach($allColumns as $alias => $column) {
+                $aligned[$alias] = isset($combineColumns[$alias])
+                    ? $combineColumns[$alias]
+                    : new Predicate\Expression('NULL');
+            }
+            $combine['select']->columns($aligned, false);
+        }
+        return $this;
+    }
+
     /**
      * Get raw state
      *
@@ -169,6 +205,9 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     {
         $rawState = array(
             self::COMBINE => $this->combine,
+            self::COLUMNS => $this->combine
+                                ? $this->combine[0]['select']->getRawState(self::COLUMNS)
+                                : array(),
         );
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }

@@ -9,6 +9,8 @@
 
 namespace Zend\Db\Adapter;
 
+use Zend\Db\ResultSet;
+
 /**
  *
  * @property Driver\DriverInterface $driver
@@ -25,4 +27,16 @@ interface AdapterInterface
      * @return Platform\PlatformInterface
      */
     public function getPlatform();
+
+    /**
+     * query() is a convenience function
+     *
+     * @param string $sql
+     * @param string|array|ParameterContainer $parametersOrQueryMode
+     * @param \Zend\Db\ResultSet\ResultSetInterface $resultPrototype
+     * @throws Exception\InvalidArgumentException
+     * @return Driver\StatementInterface|ResultSet\ResultSet
+     */
+    public function query($sql, $parametersOrQueryMode = self::QUERY_MODE_PREPARE, ResultSet\ResultSetInterface $resultPrototype = null)
+
 }

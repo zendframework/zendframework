@@ -1234,6 +1234,32 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processJoins' => array(array(array('INNER', 'psql_function_which_returns_table AS "bar"', '"foo"."id" = "bar"."fooid"')))
         );
 
+        // Test raw predicate is appended with AND
+        $select50 = new Select;
+        $select50->from(new TableIdentifier('foo'))
+            ->where
+            ->nest
+                ->isNull('bar')
+                ->and
+                ->addPredicate(new Where())
+            ->unnest;
+        $sqlPrep50 = // same
+        $sqlStr50 = 'SELECT "foo".* FROM "foo" WHERE ("bar" IS NULL AND ())';
+        $internalTests50 = array();
+
+        // Test raw predicate is appended with OR
+        $select51 = new Select;
+        $select51->from(new TableIdentifier('foo'))
+            ->where
+            ->nest
+                ->isNull('bar')
+                ->or
+                ->addPredicate(new Where())
+            ->unnest;
+        $sqlPrep51 = // same
+        $sqlStr51 = 'SELECT "foo".* FROM "foo" WHERE ("bar" IS NULL OR ())';
+        $internalTests51 = array();
+
         /**
          * $select = the select object
          * $sqlPrep = the sql as a result of preparation
@@ -1294,6 +1320,8 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             array($select47, $sqlPrep47, $params47,  $sqlStr47, $internalTests47),
             array($select48, $sqlPrep48, array(),    $sqlStr48, $internalTests48),
             array($select49, $sqlPrep49, array(),    $sqlStr49, $internalTests49),
+            array($select50, $sqlPrep50, array(),    $sqlStr50, $internalTests50),
+            array($select51, $sqlPrep51, array(),    $sqlStr51, $internalTests51),
         );
     }
 }

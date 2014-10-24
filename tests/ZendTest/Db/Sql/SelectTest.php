@@ -1234,30 +1234,30 @@ class SelectTest extends \PHPUnit_Framework_TestCase
             'processJoins' => array(array(array('INNER', 'psql_function_which_returns_table AS "bar"', '"foo"."id" = "bar"."fooid"')))
         );
 
-        // Test raw predicate is appended with AND
+        // Test generic predicate is appended with AND
         $select50 = new Select;
         $select50->from(new TableIdentifier('foo'))
             ->where
             ->nest
                 ->isNull('bar')
                 ->and
-                ->addPredicate(new Where())
+                ->predicate(new Predicate\Literal('1=1'))
             ->unnest;
         $sqlPrep50 = // same
-        $sqlStr50 = 'SELECT "foo".* FROM "foo" WHERE ("bar" IS NULL AND ())';
+        $sqlStr50 = 'SELECT "foo".* FROM "foo" WHERE ("bar" IS NULL AND 1=1)';
         $internalTests50 = array();
 
-        // Test raw predicate is appended with OR
+        // Test generic predicate is appended with OR
         $select51 = new Select;
         $select51->from(new TableIdentifier('foo'))
             ->where
             ->nest
                 ->isNull('bar')
                 ->or
-                ->addPredicate(new Where())
+                ->predicate(new Predicate\Literal('1=1'))
             ->unnest;
         $sqlPrep51 = // same
-        $sqlStr51 = 'SELECT "foo".* FROM "foo" WHERE ("bar" IS NULL OR ())';
+        $sqlStr51 = 'SELECT "foo".* FROM "foo" WHERE ("bar" IS NULL OR 1=1)';
         $internalTests51 = array();
 
         /**

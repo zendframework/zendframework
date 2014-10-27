@@ -791,4 +791,28 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($outputGetCacheId, 'Zend_Paginator_1_' . $outputGetCacheInternalId);
     }
+    
+    public function testItemCountsForEmptyItemSet()
+    {
+        $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(array()));
+        $paginator->setCurrentPageNumber(1);
+        
+        $expected = new stdClass();
+        $expected->pageCount        = 0;
+        $expected->itemCountPerPage = 10;
+        $expected->first            = 1;
+        $expected->current          = 1;
+        $expected->last             = 0;
+        $expected->pagesInRange     = array(1 => 1);
+        $expected->firstPageInRange = 1;
+        $expected->lastPageInRange  = 1;
+        $expected->currentItemCount = 0;
+        $expected->totalItemCount   = 0;
+        $expected->firstItemNumber  = 0;
+        $expected->lastItemNumber   = 0;
+        
+        $actual = $paginator->getPages();
+        
+        $this->assertEquals($expected, $actual);
+    }
 }

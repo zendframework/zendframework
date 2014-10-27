@@ -918,8 +918,8 @@ class Paginator implements Countable, IteratorAggregate
             $pages->currentItemCount = $this->getCurrentItemCount();
             $pages->itemCountPerPage = $this->getItemCountPerPage();
             $pages->totalItemCount   = $this->getTotalItemCount();
-            $pages->firstItemNumber  = (($currentPageNumber - 1) * $this->getItemCountPerPage()) + 1;
-            $pages->lastItemNumber   = $pages->firstItemNumber + $pages->currentItemCount - 1;
+            $pages->firstItemNumber  = $this->getTotalItemCount() ? (($currentPageNumber - 1) * $this->getItemCountPerPage()) + 1 : 0;
+            $pages->lastItemNumber   = $this->getTotalItemCount() ? $pages->firstItemNumber + $pages->currentItemCount - 1 : 0;
         }
 
         return $pages;

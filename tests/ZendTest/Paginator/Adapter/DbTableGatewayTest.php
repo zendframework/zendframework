@@ -64,7 +64,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
              ->will($this->returnValue($mockResult));
 
         $items = $this->dbTableGateway->getItems(2, 10);
-        $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);
+        $this->assertEquals(array(), $items);
     }
 
     public function testCount()
@@ -97,7 +97,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
              ->will($this->returnValue($mockResult));
 
         $items = $this->dbTableGateway->getItems(2, 10);
-        $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);
+        $this->assertEquals(array(), $items);
     }
 
     public function testGetItemsWithWhereAndOrderAndGroup()
@@ -118,7 +118,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
              ->will($this->returnValue($mockResult));
 
         $items = $this->dbTableGateway->getItems(2, 10);
-        $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);
+        $this->assertEquals(array(), $items);
     }
 
     public function testGetItemsWithWhereAndOrderAndGroupAndHaving()
@@ -140,6 +140,6 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($mockResult));
 
         $items = $this->dbTableGateway->getItems(2, 10);
-        $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);
+        $this->assertEquals(array(), $items);
     }
 }

@@ -121,6 +121,11 @@ class Sql
         return $this->sqlPlatform->setSubject($sqlObject)->prepareStatement($this->adapter, $statement);
     }
 
+    /**
+     * @param SqlInterface $sqlObject
+     * @param PlatformInterface $platform
+     * @return string
+     */
     public function getSqlStringForSqlObject(SqlInterface $sqlObject, PlatformInterface $platform = null)
     {
         $platform = ($platform) ?: $this->adapter->getPlatform();

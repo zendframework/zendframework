@@ -232,6 +232,13 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
             ->where('x = y');
 
         $this->assertEquals('UPDATE "sch"."foo" SET "bar" = \'baz\', "boo" = NOW(), "bam" = NULL WHERE x = y', $this->update->getSqlString(new TrustingSql92Platform()));
+
+        // with boolean values
+        $this->update = new Update;
+        $this->update->table(new TableIdentifier('foo', 'sch'))
+            ->set(array('bar' => false, 'boo' => 'test', 'bam' => true))
+            ->where('x = y');
+        $this->assertEquals('UPDATE "sch"."foo" SET "bar" = \'\', "boo" = \'test\', "bam" = \'1\' WHERE x = y', $this->update->getSqlString(new TrustingSql92Platform()));
     }
 
     /**

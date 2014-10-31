@@ -223,6 +223,132 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     *
+     * @see https://github.com/zendframework/zf2/issues/3211
+     */
+    public function testHasChildrenCompatibility()
+    {
+        $nav = new Navigation\Navigation(array(
+            array(
+                'label' => 'Page 1',
+                'uri' => '#',
+                'pages' => array(
+                    array(
+                        'label' => 'Page 1.1',
+                        'uri' => '#',
+                        'pages' => array(
+                            array(
+                                'label' => 'Page 1.1.1',
+                                'uri' => '#'
+                            ),
+                            array(
+                                'label' => 'Page 1.1.2',
+                                'uri' => '#'
+                            )
+                        )
+                    ),
+                    array(
+                        'label' => 'Page 1.2',
+                        'uri' => '#'
+                    )
+                )
+            ),
+            array(
+                'label' => 'Page 2',
+                'uri' => '#',
+                'pages' => array(
+                    array(
+                        'label' => 'Page 2.1',
+                        'uri' => '#'
+                    )
+                )
+            ),
+            array(
+                'label' => 'Page 3',
+                'uri' => '#'
+            )
+        ));
+
+        $page1 = $nav->findOneBy('label', 'Page 1');
+        $this->assertTrue($page1->hasChildren(), "page1's first child has children 1.1.1 1.1.2");
+
+        $page2 = $nav->findOneBy('label', 'Page 2');
+        $this->assertFalse($page2->hasChildren(), "page2's first child doesn't have children");
+    }
+
+    public function testDetailedRecursiveIteration()
+    {
+        $nav = new Navigation\Navigation(array(
+            array(
+                'label' => 'Page 1',
+                'uri' => '#',
+                'pages' => array(
+                    array(
+                        'label' => 'Page 1.1',
+                        'uri' => '#',
+                        'pages' => array(
+                            array(
+                                'label' => 'Page 1.1.1',
+                                'uri' => '#'
+                            ),
+                            array(
+                                'label' => 'Page 1.1.2',
+                                'uri' => '#'
+                            )
+                        )
+                    ),
+                    array(
+                        'label' => 'Page 1.2',
+                        'uri' => '#'
+                    )
+                )
+            ),
+            array(
+                'label' => 'Page 2',
+                'uri' => '#',
+                'pages' => array(
+                    array(
+                        'label' => 'Page 2.1',
+                        'uri' => '#'
+                    )
+                )
+            ),
+            array(
+                'label' => 'Page 3',
+                'uri' => '#'
+            )
+        ));
+
+        $actual = array();
+        $expected = array(
+            'beginIteration',
+            'Page 1',
+            'beginChildren',
+            'Page 1.1',
+            'beginChildren',
+            'Page 1.1.1',
+            'Page 1.1.2',
+            'endChildren',
+            'Page 1.2',
+            'endChildren',
+            'Page 2',
+            'beginChildren',
+            'Page 2.1',
+            'endChildren',
+            'Page 3',
+            'endIteration',
+        );
+
+        $iterator = new \ZendTest\Navigation\TestAsset\RecursiveIteratorIterator($nav,
+            \RecursiveIteratorIterator::SELF_FIRST);
+        $logger = new \ArrayObject(array());
+        $iterator->setLogger($logger);
+        foreach ($iterator as $page) {}
+        $actual = $logger->getArrayCopy();
+        $this->assertEquals($expected, $actual);
+    }
+
     public function testSettingPageOrderShouldUpdateContainerOrder()
     {
         $nav = new Navigation\Navigation(array(

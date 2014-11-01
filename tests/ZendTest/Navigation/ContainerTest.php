@@ -342,6 +342,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $iterator = new TestAsset\RecursiveIteratorIterator($nav, \RecursiveIteratorIterator::SELF_FIRST);
         $iterator->logger = array();
         $iterator->rewind();
+        //#4517 logging with walking through RecursiveIterator
         while ($iterator->valid()) {
             $iterator->current();
             $iterator->next();

@@ -15,7 +15,7 @@ class RecursiveIteratorIterator extends \RecursiveIteratorIterator
      *
      * @var \ArrayAccess|array
      */
-    public $logger;
+    public $logger = array();
 
     public function beginIteration()
     {

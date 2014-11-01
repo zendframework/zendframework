@@ -320,7 +320,6 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $actual = array();
         $expected = array(
             'beginIteration',
             'Page 1',
@@ -340,13 +339,14 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             'endIteration',
         );
 
-        $iterator = new \ZendTest\Navigation\TestAsset\RecursiveIteratorIterator($nav,
-            \RecursiveIteratorIterator::SELF_FIRST);
-        $logger = new \ArrayObject(array());
-        $iterator->setLogger($logger);
-        foreach ($iterator as $page) {}
-        $actual = $logger->getArrayCopy();
-        $this->assertEquals($expected, $actual);
+        $iterator = new TestAsset\RecursiveIteratorIterator($nav, \RecursiveIteratorIterator::SELF_FIRST);
+        $iterator->logger = array();
+        $iterator->rewind();
+        while ($iterator->valid()) {
+            $iterator->current();
+            $iterator->next();
+        }
+        $this->assertEquals($expected, $iterator->logger);
     }
 
     public function testSettingPageOrderShouldUpdateContainerOrder()

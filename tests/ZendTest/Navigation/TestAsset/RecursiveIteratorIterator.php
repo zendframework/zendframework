@@ -13,14 +13,9 @@ class RecursiveIteratorIterator extends \RecursiveIteratorIterator
 {
     /**
      *
-     * @var \ArrayObject
+     * @var \ArrayAccess|array
      */
-    protected $logger;
-
-    public function setLogger($logger)
-    {
-        $this->logger = $logger;
-    }
+    public $logger;
 
     public function beginIteration()
     {
@@ -46,5 +41,4 @@ class RecursiveIteratorIterator extends \RecursiveIteratorIterator
     {
         $this->logger[] = parent::current()->getLabel();
     }
-
 }

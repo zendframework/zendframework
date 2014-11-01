@@ -401,6 +401,8 @@ class Translator implements TranslatorInterface
             }
 
             return ($number == 1 ? $singular : $plural);
+        } elseif (is_string($translation) === true) {
+            $translation = (array) $translation;
         }
 
         $index = $this->messages[$textDomain][$locale]

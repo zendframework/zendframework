@@ -218,18 +218,6 @@ class TranslatorTest extends TestCase
         $this->assertEquals('Message 5 (en) Plural 0', $pl0);
         $this->assertEquals('Message 5 (en) Plural 1', $pl1);
         $this->assertEquals('Message 5 (en) Plural 2', $pl2);
-        
-        $this->translator->setLocale('ja_JP');
-        $this->translator->addTranslationFile(
-            'phparray',
-            $this->testFilesDir . '/testarray/translation-ja_JP.php',
-            'default',
-            'ja_JP'
-        );
-        
-        $nopl = $this->translator->translatePlural('Message 5', 'Message 5 Plural', 1);
-        
-        $this->assertEquals('Message 5 (ja)', $nopl);
     }
 
     public function testTranslateNonExistantLocale()

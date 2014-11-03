@@ -11,6 +11,7 @@ namespace ZendTest\ServiceManager;
 
 use ReflectionClass;
 use ReflectionObject;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
 
@@ -213,7 +214,15 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
             $sm->get('bar');
         });
 
-        $pluginManager->get('foo');
+        try {
+            $pluginManager->get('foo');
+        } catch (ServiceNotCreatedException $e) {
+            $this->assertNotNull($e->getPrevious());
+            $this->assertInstanceOf('Zend\ServiceManager\Exception\ServiceLocatorUsageException', $e->getPrevious());
+            return;
+        }
+
+        $this->fail('A Zend\ServiceManager\Exception\ServiceNotCreatedException is expected');
     }
 
     public function testCanCheckInvalidServiceManagerIsUsedWithExistingClass()
@@ -225,9 +234,20 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $pluginManager = new FooPluginManager();
         $pluginManager->setServiceLocator($sm);
         $pluginManager->setFactory('foo', function($sm) {
-            $sm->get('stdClass');
+            $std = $sm->get('stdClass');
+            $std->a = 1;
+            
+            return $std;
         });
 
-        $pluginManager->get('foo');
+        try {
+            $pluginManager->get('foo');
+        } catch (ServiceNotCreatedException $e) {
+            $this->assertNotNull($e->getPrevious());
+            $this->assertInstanceOf('Zend\ServiceManager\Exception\ServiceLocatorUsageException', $e->getPrevious());
+            return;
+        }
+        
+        $this->fail('A Zend\ServiceManager\Exception\ServiceNotCreatedException is expected');
     }
 }

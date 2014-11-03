@@ -96,11 +96,34 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
     {
         // Allow specifying a class name directly; registers as an invokable class
         if (!$this->has($name) && $this->autoAddInvokableClass && class_exists($name)) {
+            $serviceLocator = $this->getServiceLocator();
+            if ($serviceLocator && $serviceLocator->has($name)) {
+                throw new Exception\ServiceLocatorUsageException(sprintf(
+                    'The service "%s" has been found in the parent service locator. ' .
+                    'You are not able to retrieve it by auto invokable class to avoid confusion. ' .
+                    'Did you forget to use $serviceLocator = $serviceLocator->getServiceLocator() in your factory?',
+                    $name
+                ));
+            }
             $this->setInvokableClass($name, $name);
         }
 
         $this->creationOptions = $options;
-        $instance = parent::get($name, $usePeeringServiceManagers);
+        
+        try {
+            $instance = parent::get($name, $usePeeringServiceManagers);
+        } catch (Exception\ServiceNotFoundException $e) {
+            $serviceLocator = $this->getServiceLocator();
+            if ($serviceLocator && $serviceLocator->has($name)) {
+                throw new Exception\ServiceLocatorUsageException(sprintf(
+                    'The unavailable service "%s" has been found in the parent service locator. ' .
+                    'Did you forget to use $serviceLocator = $serviceLocator->getServiceLocator() in your factory?',
+                    $name
+                ), 0, $e);
+            }
+            throw $e;
+        }
+
         $this->creationOptions = null;
         $this->validatePlugin($instance);
         return $instance;

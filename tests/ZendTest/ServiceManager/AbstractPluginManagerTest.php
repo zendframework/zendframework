@@ -27,7 +27,7 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $this->serviceManager = new ServiceManager;
+        $this->serviceManager = new ServiceManager();
         $this->pluginManager = new FooPluginManager(new Config(array(
             'factories' => array(
                 'Foo' => 'ZendTest\ServiceManager\TestAsset\FooFactory',
@@ -210,7 +210,7 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         /** @var \Zend\ServiceManager\AbstractPluginManager $pluginManager */
         $pluginManager = new FooPluginManager();
         $pluginManager->setServiceLocator($sm);
-        $pluginManager->setFactory('foo', function($sm) {
+        $pluginManager->setFactory('foo', function ($sm) {
             $sm->get('bar');
         });
 
@@ -219,6 +219,7 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         } catch (ServiceNotCreatedException $e) {
             $this->assertNotNull($e->getPrevious());
             $this->assertInstanceOf('Zend\ServiceManager\Exception\ServiceLocatorUsageException', $e->getPrevious());
+
             return;
         }
 
@@ -233,10 +234,10 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         /** @var \Zend\ServiceManager\AbstractPluginManager $pluginManager */
         $pluginManager = new FooPluginManager();
         $pluginManager->setServiceLocator($sm);
-        $pluginManager->setFactory('foo', function($sm) {
+        $pluginManager->setFactory('foo', function ($sm) {
             $std = $sm->get('stdClass');
             $std->a = 1;
-            
+
             return $std;
         });
 
@@ -245,9 +246,10 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         } catch (ServiceNotCreatedException $e) {
             $this->assertNotNull($e->getPrevious());
             $this->assertInstanceOf('Zend\ServiceManager\Exception\ServiceLocatorUsageException', $e->getPrevious());
+
             return;
         }
-        
+
         $this->fail('A Zend\ServiceManager\Exception\ServiceNotCreatedException is expected');
     }
 }

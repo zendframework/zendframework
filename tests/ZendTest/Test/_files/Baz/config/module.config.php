@@ -23,6 +23,16 @@ return array(
                         ),
                     ),
                 ),
+                'arguments-mandatory' => array(
+                    'type' => 'simple',
+                    'options' => array(
+                        'route'    => 'foo --bar= --baz=',
+                        'defaults' => array(
+                            'controller' => 'baz_index',
+                            'action'     => 'console',
+                        ),
+                    ),
+                )
             ),
         ),
     ),

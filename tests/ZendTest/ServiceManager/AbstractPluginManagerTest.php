@@ -200,4 +200,18 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('stdClass', array_shift($fooDelegator->instances));
         $this->assertSame($fooDelegator, array_shift($barDelegator->instances));
     }
+
+    public function testCanCheckInvalidServiceManagerIsUsed()
+    {
+        $sm = new ServiceManager();
+        $sm->setService('bar', new \stdClass());
+
+        /** @var \Zend\ServiceManager\AbstractPluginManager $pluginManager */
+        $pluginManager = new FooPluginManager();
+        $pluginManager->setFactory('foo', function($sm) {
+            $sm->get('bar');
+        });
+
+        $pluginManager->get('foo');
+    }
 }

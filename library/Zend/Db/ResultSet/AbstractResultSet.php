@@ -252,7 +252,6 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
             return $this->count;
         }
         $this->count = count($this->dataSource);
-
         return $this->count;
     }
 

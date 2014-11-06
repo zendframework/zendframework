@@ -231,7 +231,7 @@ class AbstractResultSetTest extends \PHPUnit_Framework_TestCase
         )));
         $resultSet->buffer();
 
-    $data = $resultSet->current();
+        $data = $resultSet->current();
         $this->assertEquals(1, $data['id']);
         $resultSet->next();
         $data = $resultSet->current();

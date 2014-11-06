@@ -217,4 +217,34 @@ class AbstractResultSetTest extends \PHPUnit_Framework_TestCase
             $resultSet->toArray()
         );
     }
+
+    /**
+     * Test multiple iterations with buffer
+     */
+    public function testBufferIterations()
+    {
+        $resultSet = $this->getMockForAbstractClass('Zend\Db\ResultSet\AbstractResultSet');
+        $resultSet->initialize(new \ArrayIterator(array(
+            array('id' => 1, 'name' => 'one'),
+            array('id' => 2, 'name' => 'two'),
+            array('id' => 3, 'name' => 'three'),
+        )));
+        $resultSet->buffer();
+
+    $data = $resultSet->current();
+        $this->assertEquals(1, $data['id']);
+        $resultSet->next();
+        $data = $resultSet->current();
+        $this->assertEquals(2, $data['id']);
+
+        $resultSet->rewind();
+        $data = $resultSet->current();
+        $this->assertEquals(1, $data['id']);
+        $resultSet->next();
+        $data = $resultSet->current();
+        $this->assertEquals(2, $data['id']);
+        $resultSet->next();
+        $data = $resultSet->current();
+        $this->assertEquals(3, $data['id']);
+    }
 }

@@ -29,13 +29,11 @@ class Expression extends BaseExpression implements PredicateInterface
             $this->setParameters($valueParameter);
         } else {
             $argNum = func_num_args();
-            if ($argNum > 2 || is_scalar($valueParameter)) {
-                $parameters = array();
-                for ($i = 1; $i < $argNum; $i++) {
-                    $parameters[] = func_get_arg($i);
-                }
-                $this->setParameters($parameters);
+            $parameters = array();
+            for ($i = 1; $i < $argNum; $i++) {
+                $parameters[] = func_get_arg($i);
             }
+            $this->setParameters($parameters);
         }
     }
 }

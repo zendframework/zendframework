@@ -11,7 +11,7 @@ namespace ZendTest\Db\Sql\Predicate;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Db\Sql\Predicate\Expression;
-use Zend\Db\Sql\Predicate;
+use Zend\Db\Sql\Predicate\IsNull;
 
 class ExpressionTest extends TestCase
 {
@@ -49,27 +49,27 @@ class ExpressionTest extends TestCase
 
     public function testCanPassSinglePredicateParameterToConstructor()
     {
-        $predicate = new Predicate\IsNull('foo.baz');
+        $predicate = new IsNull('foo.baz');
         $expression = new Expression('?', $predicate);
         $this->assertEquals(array($predicate), $expression->getParameters());
     }
 
     public function testCanPassMultiScalarParametersToConstructor()
     {
-        $expression = new Expression('?', 'foo', 'bar');
+        $expression = new Expression('? OR ?', 'foo', 'bar');
         $this->assertEquals(array('foo', 'bar'), $expression->getParameters());
     }
 
     public function testCanPassMultiNullParametersToConstructor()
     {
-        $expression = new Expression('?', null, null);
+        $expression = new Expression('? OR ?', null, null);
         $this->assertEquals(array(null, null), $expression->getParameters());
     }
 
     public function testCanPassMultiPredicateParametersToConstructor()
     {
-        $predicate = new Predicate\IsNull('foo.baz');
-        $expression = new Expression('?', $predicate, $predicate);
+        $predicate = new IsNull('foo.baz');
+        $expression = new Expression('? OR ?', $predicate, $predicate);
         $this->assertEquals(array($predicate, $predicate), $expression->getParameters());
     }
 
@@ -81,7 +81,7 @@ class ExpressionTest extends TestCase
 
     public function testCanPassArrayOfMultiScalarsParameterToConstructor()
     {
-        $expression = new Expression('?', array('foo', 'bar'));
+        $expression = new Expression('? OR ?', array('foo', 'bar'));
         $this->assertEquals(array('foo', 'bar'), $expression->getParameters());
     }
 
@@ -93,21 +93,21 @@ class ExpressionTest extends TestCase
 
     public function testCanPassArrayOfMultiNullsParameterToConstructor()
     {
-        $expression = new Expression('?', array(null, null));
+        $expression = new Expression('? OR ?', array(null, null));
         $this->assertEquals(array(null, null), $expression->getParameters());
     }
 
     public function testCanPassArrayOfOnePredicateParameterToConstructor()
     {
-        $predicate = new Predicate\IsNull('foo.baz');
+        $predicate = new IsNull('foo.baz');
         $expression = new Expression('?', array($predicate));
         $this->assertEquals(array($predicate), $expression->getParameters());
     }
 
     public function testCanPassArrayOfMultiPredicatesParameterToConstructor()
     {
-        $predicate = new Predicate\IsNull('foo.baz');
-        $expression = new Expression('?', array($predicate, $predicate));
+        $predicate = new IsNull('foo.baz');
+        $expression = new Expression('? OR ?', array($predicate, $predicate));
         $this->assertEquals(array($predicate, $predicate), $expression->getParameters());
     }
 

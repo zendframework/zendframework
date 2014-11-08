@@ -20,18 +20,19 @@ class FormTextarea extends AbstractHelper
      * @var array
      */
     protected $validTagAttributes = array(
-        'autofocus'   => true,
-        'cols'        => true,
-        'dirname'     => true,
-        'disabled'    => true,
-        'form'        => true,
-        'maxlength'   => true,
-        'name'        => true,
-        'placeholder' => true,
-        'readonly'    => true,
-        'required'    => true,
-        'rows'        => true,
-        'wrap'        => true,
+        'autocomplete' => true,
+        'autofocus'    => true,
+        'cols'         => true,
+        'dirname'      => true,
+        'disabled'     => true,
+        'form'         => true,
+        'maxlength'    => true,
+        'name'         => true,
+        'placeholder'  => true,
+        'readonly'     => true,
+        'required'     => true,
+        'rows'         => true,
+        'wrap'         => true,
     );
 
     /**

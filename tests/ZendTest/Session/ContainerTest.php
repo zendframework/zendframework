@@ -108,7 +108,6 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             'foo bar',
             '_foo',
             '__foo',
-            '0foo',
             '\foo',
             '\\foo'
         );

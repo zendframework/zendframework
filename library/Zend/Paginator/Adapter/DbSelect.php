@@ -35,9 +35,9 @@ class DbSelect implements AdapterInterface
     /**
      * Database count query
      *
-     * @var Select
+     * @var Select|null
      */
-    protected $selectCount;
+    protected $countSelect;
 
     /**
      * @var ResultSet
@@ -57,11 +57,18 @@ class DbSelect implements AdapterInterface
      * @param Select $select The select query
      * @param Adapter|Sql $adapterOrSqlObject DB adapter or Sql object
      * @param null|ResultSetInterface $resultSetPrototype
+     * @param null|Select $countSelect
+     *
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(Select $select, $adapterOrSqlObject, ResultSetInterface $resultSetPrototype = null)
-    {
+    public function __construct(
+        Select $select,
+        $adapterOrSqlObject,
+        ResultSetInterface $resultSetPrototype = null,
+        Select $countSelect = null
+    ) {
         $this->select = $select;
+        $this->countSelect = $countSelect;
 
         if ($adapterOrSqlObject instanceof Adapter) {
             $adapterOrSqlObject = new Sql($adapterOrSqlObject);
@@ -128,8 +135,8 @@ class DbSelect implements AdapterInterface
      */
     protected function getSelectCount()
     {
-        if ($this->selectCount !== null) {
-            return $this->selectCount;
+        if ($this->countSelect) {
+            return $this->countSelect;
         }
 
         $select = clone $this->select;
@@ -138,22 +145,10 @@ class DbSelect implements AdapterInterface
         $select->reset(Select::ORDER);
 
         $countSelect = new Select;
+
         $countSelect->columns(array(self::ROW_COUNT_COLUMN_NAME => new Expression('COUNT(1)')));
         $countSelect->from(array('original_select' => $select));
 
         return $countSelect;
-    }
-
-    /**
-     * Sets custom select to count all entries in db
-     *
-     * @param Select $select
-     * @return self
-     */
-    public function setSelectCount(Select $select)
-    {
-        $this->select = $select;
-
-        return $this;
     }
 }

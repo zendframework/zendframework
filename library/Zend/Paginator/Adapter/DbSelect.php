@@ -18,7 +18,7 @@ use Zend\Db\ResultSet\ResultSetInterface;
 
 class DbSelect implements AdapterInterface
 {
-    const ROW_COUNT_COLUMN_NAME = 'c';
+    const ROW_COUNT_COLUMN_NAME = 'C';
 
     /**
      * @var Sql

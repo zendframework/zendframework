@@ -41,7 +41,8 @@ class Expression extends AbstractExpression
         if ($expression) {
             $this->setExpression($expression);
         }
-        if ($types) { // should be deprecated since version 3.0.0
+
+        if ($types) { // should be deprecated and removed version 3.0.0
             if (is_array($parameters)) {
                 foreach ($parameters as $i=>$parameter) {
                     $parameters[$i] = array(

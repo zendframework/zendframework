@@ -296,7 +296,7 @@ class Connection extends AbstractConnection
         }
 
         if ($this->inTransaction) {
-            $this->nestedTransactionsCount --;
+            $this->nestedTransactionsCount -= 1;
         }
 
         /*

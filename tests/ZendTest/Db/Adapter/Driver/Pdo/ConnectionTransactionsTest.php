@@ -11,6 +11,12 @@ namespace ZendTest\Db\Adapter\Driver\Pdo;
 
 use ZendTest\Db\TestAsset\ConnectionWrapper;
 
+/**
+ * Tests for {@see \Zend\Db\Adapter\Driver\Pdo\Connection} transaction support
+ *
+ * @covers \Zend\Db\Adapter\Driver\Pdo\Connection
+ * @covers \Zend\Db\Adapter\Driver\AbstractConnection
+ */
 class ConnectionTransactionsTest extends \PHPUnit_Framework_TestCase
 {
     /**

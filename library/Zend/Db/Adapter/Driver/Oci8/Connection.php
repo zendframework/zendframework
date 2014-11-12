@@ -210,8 +210,6 @@ class Connection extends AbstractConnection
 
         $this->inTransaction = false;
 
-        $this->inTransaction = false;
-
         return $this;
     }
 

@@ -10,6 +10,7 @@
 namespace Zend\Db\Adapter\Driver;
 
 use Zend\Db\Adapter\Profiler;
+use Zend\Db\Adapter\Profiler\ProfilerInterface;
 
 abstract class AbstractConnection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 {
@@ -19,9 +20,9 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     protected $connectionParameters = array();
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $driverName = null;
+    protected $driverName;
 
     /**
      * @var boolean
@@ -29,19 +30,17 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     protected $inTransaction = false;
 
     /**
-     * @var Profiler\ProfilerInterface
+     * @var ProfilerInterface|null
      */
-    protected $profiler = null;
+    protected $profiler;
 
     /**
-     * @var resource
+     * @var resource|null
      */
-    protected $resource = null;
+    protected $resource;
 
     /**
-     * Disconnect
-     *
-     * @return self
+     * {@inheritDoc}
      */
     public function disconnect()
     {
@@ -73,7 +72,7 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     }
 
     /**
-     * @return null|Profiler\ProfilerInterface
+     * @return null|ProfilerInterface
      */
     public function getProfiler()
     {
@@ -81,7 +80,7 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     }
 
     /**
-     * Get resource
+     * {@inheritDoc}
      *
      * @return resource
      */
@@ -116,10 +115,11 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
     }
 
     /**
-     * @param  Profiler\ProfilerInterface $profiler
+     * {@inheritDoc}
+     *
      * @return self
      */
-    public function setProfiler(Profiler\ProfilerInterface $profiler)
+    public function setProfiler(ProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
 

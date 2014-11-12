@@ -14,7 +14,7 @@ use Zend\Db\Adapter\Driver\Pdo\Connection;
 /**
  * Test asset class used only by {@see \ZendTest\Db\Adapter\Driver\Pdo\ConnectionTransactionsTest}
  */
-class Wrapper extends Connection
+class ConnectionWrapper extends Connection
 {
     public function __construct()
     {

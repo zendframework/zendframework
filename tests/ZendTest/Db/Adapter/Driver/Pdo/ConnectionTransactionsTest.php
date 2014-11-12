@@ -9,7 +9,7 @@
 
 namespace ZendTest\Db\Adapter\Driver\Pdo;
 
-use ZendTest\Db\TestAsset\Wrapper;
+use ZendTest\Db\TestAsset\ConnectionWrapper;
 
 class ConnectionTransactionsTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,7 +23,7 @@ class ConnectionTransactionsTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->wrapper = new Wrapper();
+        $this->wrapper = new ConnectionWrapper();
     }
 
     /**

@@ -81,9 +81,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Get current schema
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getCurrentSchema()
     {
@@ -97,9 +95,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Connect
-     *
-     * @return self
+     * {@inheritDoc}
      */
     public function connect()
     {
@@ -141,9 +137,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Is connected
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function isConnected()
     {
@@ -151,9 +145,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Disconnect
-     *
-     * @return ConnectionInterface
+     * {@inheritDoc}
      */
     public function disconnect()
     {
@@ -166,9 +158,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Begin transaction
-     *
-     * @return self
+     * {@inheritDoc}
      */
     public function beginTransaction()
     {
@@ -190,9 +180,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Commit
-     *
-     * @return self
+     * {@inheritDoc}
      */
     public function commit()
     {
@@ -214,9 +202,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Rollback
-     *
-     * @return self
+     * {@inheritDoc}
      */
     public function rollback()
     {
@@ -242,10 +228,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Execute
-     *
-     * @param  string $sql
-     * @return Result
+     * {@inheritDoc}
      */
     public function execute($sql)
     {
@@ -274,10 +257,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Get last generated id
-     *
-     * @param  null $name Ignored
-     * @return int
+     * {@inheritDoc}
      */
     public function getLastGeneratedValue($name = null)
     {

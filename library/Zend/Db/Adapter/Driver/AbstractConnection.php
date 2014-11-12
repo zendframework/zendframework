@@ -9,6 +9,7 @@
 
 namespace Zend\Db\Adapter\Driver;
 
+use Zend\Db\Adapter\Profiler\ProfilerAwareInterface;
 use Zend\Db\Adapter\Profiler\ProfilerInterface;
 
 abstract class AbstractConnection implements ConnectionInterface, ProfilerAwareInterface

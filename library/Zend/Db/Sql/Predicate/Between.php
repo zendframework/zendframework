@@ -9,7 +9,9 @@
 
 namespace Zend\Db\Sql\Predicate;
 
-class Between implements PredicateInterface
+use Zend\Db\Sql\AbstractExpression;
+
+class Between extends AbstractExpression implements PredicateInterface
 {
     protected $specification = '%1$s BETWEEN %2$s AND %3$s';
     protected $identifier    = null;
@@ -131,11 +133,14 @@ class Between implements PredicateInterface
      */
     public function getExpressionData()
     {
+        list($values[], $types[]) = $this->normalizeArgument($this->identifier, self::TYPE_IDENTIFIER);
+        list($values[], $types[]) = $this->normalizeArgument($this->minValue,   self::TYPE_VALUE);
+        list($values[], $types[]) = $this->normalizeArgument($this->maxValue,   self::TYPE_VALUE);
         return array(
             array(
                 $this->getSpecification(),
-                array($this->identifier, $this->minValue, $this->maxValue),
-                array(self::TYPE_IDENTIFIER, self::TYPE_VALUE, self::TYPE_VALUE),
+                $values,
+                $types,
             ),
         );
     }

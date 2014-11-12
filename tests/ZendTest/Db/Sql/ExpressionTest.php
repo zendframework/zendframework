@@ -39,7 +39,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
     {
         $expression = new Expression();
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Supplied expression must be a string.');
-        $return = $expression->setExpression(null);
+        $expression->setExpression(null);
     }
 
     /**
@@ -70,7 +70,7 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
         $expression = new Expression('','foo');
 
         $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException', 'Expression parameters must be a scalar or array.');
-        $return = $expression->setParameters(null);
+        $expression->setParameters(null);
     }
 
     /**
@@ -124,16 +124,29 @@ class ExpressionTest extends \PHPUnit_Framework_TestCase
             )),
             $expression->getExpressionData()
         );
+        $expression = new Expression(
+            'X SAME AS ? AND Y = ? BUT LITERALLY ?',
+            array(
+                array('foo'        => Expression::TYPE_IDENTIFIER),
+                array(5            => Expression::TYPE_VALUE),
+                array('FUNC(FF%X)' => Expression::TYPE_LITERAL),
+            )
+        );
+
+        $expected = array(array(
+            'X SAME AS %s AND Y = %s BUT LITERALLY %s',
+            array('foo', 5, 'FUNC(FF%X)'),
+            array(Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE, Expression::TYPE_LITERAL)
+        ));
+
+        $this->assertEquals($expected, $expression->getExpressionData());
     }
 
     public function testGetExpressionDataWillEscapePercent()
     {
         $expression = new Expression('X LIKE "foo%"');
-        $this->assertEquals(array(array(
-                'X LIKE "foo%%"',
-                array(),
-                array()
-            )),
+        $this->assertEquals(
+            array('X LIKE "foo%%"'),
             $expression->getExpressionData()
         );
     }

@@ -18,39 +18,38 @@ use Zend\Db\ResultSet\ResultSetInterface;
 
 class DbSelect implements AdapterInterface
 {
-
     const ROW_COUNT_COLUMN_NAME = 'c';
 
     /**
      * @var Sql
      */
-    protected $sql = null;
+    protected $sql;
 
     /**
      * Database query
      *
      * @var Select
      */
-    protected $select = null;
+    protected $select;
 
     /**
      * Database count query
      *
      * @var Select
      */
-    protected $selectCount = null;
+    protected $selectCount;
 
     /**
      * @var ResultSet
      */
-    protected $resultSetPrototype = null;
+    protected $resultSetPrototype;
 
     /**
      * Total item count
      *
      * @var int
      */
-    protected $rowCount = null;
+    protected $rowCount;
 
     /**
      * Constructor.

@@ -9,24 +9,30 @@
 
 namespace ZendTest\Db\Adapter\Driver\Pdo;
 
-use \Zend\Db\Adapter\Driver\Pdo\Connection;
+use Zend\Db\Adapter\Driver\Pdo\Connection;
+use ZendTest\Db\Adapter\Driver\TestAsset\PdoMock;
 
+/**
+ * Tests for {@see \Zend\Db\Adapter\Driver\Pdo\Connection} transaction support
+ *
+ * @covers \Zend\Db\Adapter\Driver\Pdo\Connection
+ * @covers \Zend\Db\Adapter\Driver\AbstractConnection
+ */
 class ConnectionTransactionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Connection
      */
-    protected $connection = null;
+    protected $connection;
 
+    /**
+     * {@inheritDoc}
+     */
     protected function setUp()
     {
-        /**
-         * @todo Use a real mock object
-         */
-        $pdo = new \ZendTest\Db\Adapter\Driver\TestAsset\PdoMock();
-
         $this->connection = new Connection();
-        $this->connection->setResource($pdo);
+
+        $this->connection->setResource(new PdoMock());
     }
 
     /**
@@ -34,7 +40,7 @@ class ConnectionTransactionsTest extends \PHPUnit_Framework_TestCase
      */
     public function testBeginTransactionReturnsInstanceOfConnection()
     {
-        $this->assertInstanceOf('\Zend\Db\Adapter\Driver\Pdo\Connection', $this->connection->beginTransaction());
+        $this->assertInstanceOf('Zend\Db\Adapter\Driver\Pdo\Connection', $this->connection->beginTransaction());
     }
 
     /**
@@ -53,7 +59,7 @@ class ConnectionTransactionsTest extends \PHPUnit_Framework_TestCase
     public function testCommitReturnsInstanceOfConnection()
     {
         $this->connection->beginTransaction();
-        $this->assertInstanceOf('\Zend\Db\Adapter\Driver\Pdo\Connection', $this->connection->commit());
+        $this->assertInstanceOf('Zend\Db\Adapter\Driver\Pdo\Connection', $this->connection->commit());
     }
 
     /**
@@ -74,7 +80,7 @@ class ConnectionTransactionsTest extends \PHPUnit_Framework_TestCase
      */
     public function testCommitWithoutBeginReturnsInstanceOfConnection()
     {
-        $this->assertInstanceOf('\Zend\Db\Adapter\Driver\Pdo\Connection', $this->connection->commit());
+        $this->assertInstanceOf('Zend\Db\Adapter\Driver\Pdo\Connection', $this->connection->commit());
     }
 
     /**
@@ -94,7 +100,7 @@ class ConnectionTransactionsTest extends \PHPUnit_Framework_TestCase
     public function testRollbackReturnsInstanceOfConnection()
     {
         $this->connection->beginTransaction();
-        $this->assertInstanceOf('\Zend\Db\Adapter\Driver\Pdo\Connection', $this->connection->rollback());
+        $this->assertInstanceOf('Zend\Db\Adapter\Driver\Pdo\Connection', $this->connection->rollback());
     }
 
     /**

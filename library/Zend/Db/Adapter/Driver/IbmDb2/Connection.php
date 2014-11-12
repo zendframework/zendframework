@@ -201,7 +201,9 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * {@inheritDoc}
+     * Rollback
+     *
+     * @return Connection
      */
     public function rollback()
     {

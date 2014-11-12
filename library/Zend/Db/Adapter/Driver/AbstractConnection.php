@@ -9,10 +9,9 @@
 
 namespace Zend\Db\Adapter\Driver;
 
-use Zend\Db\Adapter\Profiler;
 use Zend\Db\Adapter\Profiler\ProfilerInterface;
 
-abstract class AbstractConnection implements ConnectionInterface, Profiler\ProfilerAwareInterface
+abstract class AbstractConnection implements ConnectionInterface, ProfilerAwareInterface
 {
     /**
      * @var array
@@ -28,6 +27,13 @@ abstract class AbstractConnection implements ConnectionInterface, Profiler\Profi
      * @var boolean
      */
     protected $inTransaction = false;
+
+    /**
+     * Nested transactions count.
+     *
+     * @var integer
+     */
+    protected $nestedTransactionsCount = 0;
 
     /**
      * @var ProfilerInterface|null

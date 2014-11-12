@@ -9,12 +9,11 @@
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Driver\AbstractConnection;
 use Zend\Db\Adapter\Driver\Sqlsrv\Exception\ErrorException;
 use Zend\Db\Adapter\Exception;
-use Zend\Db\Adapter\Profiler;
 
-class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
+class Connection extends AbstractConnection
 {
     /**
      * @var Sqlsrv
@@ -22,29 +21,9 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     protected $driver = null;
 
     /**
-     * @var Profiler\ProfilerInterface
-     */
-    protected $profiler = null;
-
-    /**
-     * @var array
-     */
-    protected $connectionParameters = array();
-
-    /**
-     * @var resource
-     */
-    protected $resource = null;
-
-    /**
-     * @var bool
-     */
-    protected $inTransaction = false;
-
-    /**
      * Constructor
      *
-     * @param array|resource $connectionInfo
+     * @param  array|resource                                      $connectionInfo
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      */
     public function __construct($connectionInfo)
@@ -62,58 +41,17 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      * Set driver
      *
      * @param  Sqlsrv $driver
-     * @return Connection
+     * @return self
      */
     public function setDriver(Sqlsrv $driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
-     * @return Connection
-     */
-    public function setProfiler(Profiler\ProfilerInterface $profiler)
-    {
-        $this->profiler = $profiler;
-        return $this;
-    }
-
-    /**
-     * @return null|Profiler\ProfilerInterface
-     */
-    public function getProfiler()
-    {
-        return $this->profiler;
-    }
-
-    /**
-     * Set connection parameters
-     *
-     * @param  array $connectionParameters
-     * @return Connection
-     */
-    public function setConnectionParameters(array $connectionParameters)
-    {
-        $this->connectionParameters = $connectionParameters;
-        return $this;
-    }
-
-    /**
-     * Get connection parameters
-     *
-     * @return array
-     */
-    public function getConnectionParameters()
-    {
-        return $this->connectionParameters;
-    }
-
-    /**
-     * Get current schema
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getCurrentSchema()
     {
@@ -123,15 +61,16 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
 
         $result = sqlsrv_query($this->resource, 'SELECT SCHEMA_NAME()');
         $r = sqlsrv_fetch_array($result);
+
         return $r[0];
     }
 
     /**
      * Set resource
      *
-     * @param  resource $resource
+     * @param  resource                           $resource
      * @throws Exception\InvalidArgumentException
-     * @return Connection
+     * @return self
      */
     public function setResource($resource)
     {
@@ -139,25 +78,14 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             throw new Exception\InvalidArgumentException('Resource provided was not of type SQL Server Connection');
         }
         $this->resource = $resource;
+
         return $this;
     }
 
     /**
-     * @return resource
-     */
-    public function getResource()
-    {
-        if (!$this->isConnected()) {
-            $this->connect();
-        }
-        return $this->resource;
-    }
-
-    /**
-     * Connect
+     * {@inheritDoc}
      *
      * @throws Exception\RuntimeException
-     * @return Connection
      */
     public function connect()
     {
@@ -212,8 +140,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * Is connected
-     * @return bool
+     * {@inheritDoc}
      */
     public function isConnected()
     {
@@ -221,7 +148,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * Disconnect
+     * {@inheritDoc}
      */
     public function disconnect()
     {
@@ -230,70 +157,64 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * Begin transaction
+     * {@inheritDoc}
      */
     public function beginTransaction()
     {
-        if (!$this->resource) {
+        if (!$this->isConnected()) {
             $this->connect();
         }
+
         if (sqlsrv_begin_transaction($this->resource) === false) {
             throw new Exception\RuntimeException(
-                'Begin transaction failed',
-                null,
                 new ErrorException(sqlsrv_errors())
             );
         }
 
         $this->inTransaction = true;
+
+        return $this;
     }
 
     /**
-     * In transaction
-     *
-     * @return bool
-     */
-    public function inTransaction()
-    {
-        return $this->inTransaction;
-    }
-
-    /**
-     * Commit
+     * {@inheritDoc}
      */
     public function commit()
     {
         // http://msdn.microsoft.com/en-us/library/cc296194.aspx
 
-        if (!$this->resource) {
+        if (!$this->isConnected()) {
             $this->connect();
         }
 
+        sqlsrv_commit($this->resource);
+
         $this->inTransaction = false;
 
-        return sqlsrv_commit($this->resource);
+        return $this;
     }
 
     /**
-     * Rollback
+     * {@inheritDoc}
      */
     public function rollback()
     {
         // http://msdn.microsoft.com/en-us/library/cc296176.aspx
 
-        if (!$this->resource) {
+        if (!$this->isConnected()) {
             throw new Exception\RuntimeException('Must be connected before you can rollback.');
         }
 
-        return sqlsrv_rollback($this->resource);
+        sqlsrv_rollback($this->resource);
+        $this->inTransaction = false;
+
+        return $this;
     }
 
     /**
-     * Execute
+     * {@inheritDoc}
      *
-     * @param  string $sql
      * @throws Exception\RuntimeException
-     * @return mixed
      */
     public function execute($sql)
     {
@@ -329,6 +250,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($returnValue);
+
         return $result;
     }
 
@@ -345,13 +267,13 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $statement = $this->driver->createStatement($sql);
+
         return $statement;
     }
 
     /**
-     * Get last generated id
+     * {@inheritDoc}
      *
-     * @param string $name
      * @return mixed
      */
     public function getLastGeneratedValue($name = null)
@@ -362,6 +284,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $sql = 'SELECT @@IDENTITY as Current_Identity';
         $result = sqlsrv_query($this->resource, $sql);
         $row = sqlsrv_fetch_array($result);
+
         return $row['Current_Identity'];
     }
 }

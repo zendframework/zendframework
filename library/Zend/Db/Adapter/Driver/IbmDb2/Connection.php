@@ -10,7 +10,6 @@
 namespace Zend\Db\Adapter\Driver\IbmDb2;
 
 use Zend\Db\Adapter\Driver\AbstractConnection;
-use Zend\Db\Adapter\Driver\ConnectionInterface;
 use Zend\Db\Adapter\Exception;
 
 class Connection extends AbstractConnection

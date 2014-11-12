@@ -60,10 +60,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Set connection parameters
-     *
-     * @param  array $connectionParameters
-     * @return void
+     * {@inheritDoc}
      */
     public function setConnectionParameters(array $connectionParameters)
     {
@@ -97,9 +94,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Get current schema
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getCurrentSchema()
     {
@@ -147,9 +142,8 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Connect
+     * {@inheritDoc}
      *
-     * @return self
      * @throws Exception\InvalidConnectionParametersException
      * @throws Exception\RuntimeException
      */
@@ -266,9 +260,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Is connected
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function isConnected()
     {
@@ -276,9 +268,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Begin transaction
-     *
-     * @return self
+     * {@inheritDoc}
      */
     public function beginTransaction()
     {
@@ -293,9 +283,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Commit
-     *
-     * @return self
+     * {@inheritDoc}
      */
     public function commit()
     {
@@ -310,9 +298,8 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Rollback
+     * {@inheritDoc}
      *
-     * @return self
      * @throws Exception\RuntimeException
      */
     public function rollback()
@@ -332,10 +319,8 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Execute
+     * {@inheritDoc}
      *
-     * @param $sql
-     * @return Result
      * @throws Exception\InvalidQueryException
      */
     public function execute($sql)
@@ -383,7 +368,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Get last generated id
+     * {@inheritDoc}
      *
      * @param  string            $name
      * @return string|null|false

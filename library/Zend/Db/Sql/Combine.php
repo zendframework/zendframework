@@ -27,14 +27,17 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     const COMBINE_EXCEPT = 'except';
     const COMBINE_INTERSECT = 'intersect';
 
-    protected $specifications = array(
+    /**
+     * @var string[]
+     */
+    private $specifications = array(
         self::COMBINE => '%1$s (%2$s) ',
     );
 
     /**
      * @var array[]
      */
-    protected $combine = array();
+    private $combine = array();
 
     /**
      * @param Select|array|null $select
@@ -165,7 +168,7 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
      *
      * @return string
      */
-    protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
+    private function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         if (!$this->combine) {
             return null;

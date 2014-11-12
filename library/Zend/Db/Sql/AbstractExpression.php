@@ -11,6 +11,9 @@ namespace Zend\Db\Sql;
 
 abstract class AbstractExpression implements ExpressionInterface
 {
+    /**
+     * @var string[]
+     */
     protected $allowedTypes = array(
         self::TYPE_IDENTIFIER,
         self::TYPE_LITERAL,

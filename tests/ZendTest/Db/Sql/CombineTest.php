@@ -29,12 +29,11 @@ class CombineTest extends \PHPUnit_Framework_TestCase
         $this->combine = new Combine;
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
+    public function testRejectsInvalidStatement()
     {
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException');
+
+        $this->combine->combine('foo');
     }
 
     public function testGetSqlString()

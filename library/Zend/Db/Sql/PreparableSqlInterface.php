@@ -14,10 +14,10 @@ use Zend\Db\Adapter\StatementContainerInterface;
 
 interface PreparableSqlInterface
 {
-
     /**
-     * @param AdapterInterface $adapter
+     * @param AdapterInterface            $adapter
      * @param StatementContainerInterface $statementContainer
+     *
      * @return void
      */
     public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer);

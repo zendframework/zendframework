@@ -9,6 +9,7 @@
 
 namespace ZendTest\Db\Sql;
 
+use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Sql\Combine;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Predicate\Expression;
@@ -175,15 +176,19 @@ class CombineTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Zend\Db\Adapter\Adapter
+     */
     protected function getMockAdapter()
     {
-        $parameterContainer = new \Zend\Db\Adapter\ParameterContainer();
+        $parameterContainer = new ParameterContainer();
 
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($parameterContainer));
 
 
-        $setgetSqlFunction = function ($sql = null) use ($mockStatement) {
+        $setGetSqlFunction = function ($sql = null) use ($mockStatement) {
             static $sqlValue;
             if ($sql) {
                 $sqlValue = $sql;
@@ -191,13 +196,11 @@ class CombineTest extends \PHPUnit_Framework_TestCase
             }
             return $sqlValue;
         };
-        $mockStatement->expects($this->any())->method('setSql')->will($this->returnCallback($setgetSqlFunction));
-        $mockStatement->expects($this->any())->method('getSql')->will($this->returnCallback($setgetSqlFunction));
+        $mockStatement->expects($this->any())->method('setSql')->will($this->returnCallback($setGetSqlFunction));
+        $mockStatement->expects($this->any())->method('getSql')->will($this->returnCallback($setGetSqlFunction));
 
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnCallback(
-            function ($name) { return '?'; }
-        ));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
 
         return $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));

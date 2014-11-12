@@ -78,7 +78,7 @@ abstract class AbstractExpression implements ExpressionInterface
      * @return self
      * @throws Exception\InvalidArgumentException
      */
-    private function localizeVariablesForDecorator($source, array $excludeVariables = array())
+    protected function localizeVariablesForDecorator($source, array $excludeVariables = array())
     {
         if (!$this instanceof PlatformDecoratorInterface) {
             throw new Exception\InvalidArgumentException(sprintf(

@@ -47,7 +47,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Get current schema
+     * {@inheritDoc}
      *
      * @return null|string
      */
@@ -66,9 +66,8 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Connect to the database
+     * {@inheritDoc}
      *
-     * @return self
      * @throws Exception\RuntimeException on failure
      */
     public function connect()
@@ -121,7 +120,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * @return bool
+     * {@inheritDoc}
      */
     public function isConnected()
     {
@@ -129,7 +128,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * @return void
+     * {@inheritDoc}
      */
     public function disconnect()
     {
@@ -137,9 +136,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Begin transaction
-     *
-     * @return self
+     * {@inheritDoc}
      */
     public function beginTransaction()
     {
@@ -158,9 +155,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Commit
-     *
-     * @return self
+     * {@inheritDoc}
      */
     public function commit()
     {
@@ -179,9 +174,7 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * Rollback
-     *
-     * @return self
+     * {@inheritDoc}
      */
     public function rollback()
     {
@@ -200,7 +193,8 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * @param  string                                         $sql
+     * {@inheritDoc}
+     *
      * @throws Exception\InvalidQueryException
      * @return resource|\Zend\Db\ResultSet\ResultSetInterface
      */
@@ -231,7 +225,8 @@ class Connection extends AbstractConnection
     }
 
     /**
-     * @param  null   $name Ignored
+     * {@inheritDoc}
+     *
      * @return string
      */
     public function getLastGeneratedValue($name = null)

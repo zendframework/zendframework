@@ -35,7 +35,7 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     );
 
     /**
-     * @var array[]
+     * @var Select[][]
      */
     private $combine = array();
 
@@ -156,7 +156,8 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
         }
 
         $sql = $this->buildSqlString($adapter->getPlatform(), $adapter->getDriver(), $parameterContainer);
-        return $statementContainer->setSql($sql);
+
+        $statementContainer->setSql($sql);
     }
 
     /**
@@ -221,6 +222,8 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
 
     /**
      * Get raw state
+     *
+     * @param string $key
      *
      * @return array
      */

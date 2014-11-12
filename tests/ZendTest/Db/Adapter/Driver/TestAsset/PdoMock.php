@@ -16,7 +16,6 @@ class PdoMock extends \PDO
 {
     public function __construct()
     {
-
     }
 
     public function beginTransaction()

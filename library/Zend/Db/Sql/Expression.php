@@ -34,7 +34,7 @@ class Expression extends AbstractExpression
     /**
      * @param string $expression
      * @param string|array $parameters
-     * @param array $types @deprecated since version 3.0.0
+     * @param array $types @deprecated will be dropped in version 3.0.0
      */
     public function __construct($expression = '', $parameters = null, array $types = array())
     {

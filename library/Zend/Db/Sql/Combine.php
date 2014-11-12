@@ -30,7 +30,7 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     /**
      * @var string[]
      */
-    private $specifications = array(
+    protected $specifications = array(
         self::COMBINE => '%1$s (%2$s) ',
     );
 
@@ -67,6 +67,7 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
                 if ($combine instanceof Select) {
                     $combine = array($combine);
                 }
+
                 $this->combine(
                     $combine[0],
                     isset($combine[1]) ? $combine[1] : $type,
@@ -75,9 +76,14 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
             }
             return $this;
         }
-        if (!$select instanceof Select) {
-            throw new Exception\InvalidArgumentException('$select must be a array or instance of Select.');
+
+        if (! $select instanceof Select) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '$select must be a array or instance of Select, "%s" given',
+                is_object($select) ? get_class($select) : gettype($select)
+            ));
         }
+
         $this->combine[] = array(
             'select' => $select,
             'type' => $type,
@@ -125,29 +131,19 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     }
 
     /**
-     * Get SQL string for statement
-     *
-     * @param PlatformInterface $adapterPlatform
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
-        $adapterPlatform = ($adapterPlatform) ?: new AdapterSql92Platform;
-        return $this->buildSqlString($adapterPlatform);
+        return $this->buildSqlString($adapterPlatform ?: new AdapterSql92Platform);
     }
 
     /**
-     * Prepare statement
-     *
-     * @param AdapterInterface            $adapter
-     * @param StatementContainerInterface $statementContainer
-     *
-     * @return void
+     * {@inheritDoc}
      */
     public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer = null)
     {
-        $statementContainer = ($statementContainer) ?: $adapter->getDriver()->createStatement();
+        $statementContainer = $statementContainer ?: $adapter->getDriver()->createStatement();
         $parameterContainer = $statementContainer->getParameterContainer();
 
         if (!$parameterContainer instanceof ParameterContainer) {
@@ -157,7 +153,7 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
 
         $sql = $this->buildSqlString($adapter->getPlatform(), $adapter->getDriver(), $parameterContainer);
 
-        $statementContainer->setSql($sql);
+        return $statementContainer->setSql($sql);
     }
 
     /**

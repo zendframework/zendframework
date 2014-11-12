@@ -10,16 +10,13 @@
 namespace Zend\Db\Sql;
 
 use Zend\Db\Adapter\Platform\PlatformInterface;
-use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\Adapter\Driver\DriverInterface;
-use Zend\Db\Adapter\StatementContainerInterface;
-use Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform;
 use Zend\Db\Adapter\ParameterContainer;
 
 /**
  * Combine SQL statement - allows combining multiple select statements into one
  */
-class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterface
+class Combine extends AbstractPreparableSql
 {
     const COLUMNS = 'columns';
     const COMBINE = 'combine';
@@ -131,32 +128,6 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public function getSqlString(PlatformInterface $adapterPlatform = null)
-    {
-        return $this->buildSqlString($adapterPlatform ?: new AdapterSql92Platform);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer = null)
-    {
-        $statementContainer = $statementContainer ?: $adapter->getDriver()->createStatement();
-        $parameterContainer = $statementContainer->getParameterContainer();
-
-        if (!$parameterContainer instanceof ParameterContainer) {
-            $parameterContainer = new ParameterContainer();
-            $statementContainer->setParameterContainer($parameterContainer);
-        }
-
-        $sql = $this->buildSqlString($adapter->getPlatform(), $adapter->getDriver(), $parameterContainer);
-
-        return $statementContainer->setSql($sql);
-    }
-
-    /**
      * Build sql string
      *
      * @param PlatformInterface  $platform
@@ -165,7 +136,7 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
      *
      * @return string
      */
-    private function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
+    protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         if (!$this->combine) {
             return null;

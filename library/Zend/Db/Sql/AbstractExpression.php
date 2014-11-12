@@ -9,8 +9,6 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Sql\Platform\PlatformDecoratorInterface;
-
 abstract class AbstractExpression implements ExpressionInterface
 {
     protected $allowedTypes = array(
@@ -25,73 +23,68 @@ abstract class AbstractExpression implements ExpressionInterface
      *
      * @param mixed $argument
      * @param string $defaultType
+     *
      * @return array
+     *
      * @throws Exception\InvalidArgumentException
      */
     protected function normalizeArgument($argument, $defaultType = self::TYPE_VALUE)
     {
-        $argumentType = null;
         if ($argument instanceof ExpressionInterface || $argument instanceof SqlInterface) {
-            $argumentType = self::TYPE_VALUE;
-        } elseif (is_scalar($argument) || $argument === null) {
-            $argumentType = $defaultType;
-        } elseif (is_array($argument)) {
-            $k = key($argument);
-            $v = current($argument);
-            if ($v instanceof ExpressionInterface || $v instanceof SqlInterface) {
-                $argument = $v;
-                $argumentType = self::TYPE_VALUE;
-            } elseif (is_integer($k) && !in_array($v, $this->allowedTypes)) {
-                $argument = $v;
-                $argumentType = $defaultType;
-            } else {
-                $argument = $k;
-                $argumentType = $v;
-            }
-        } else {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '$argument should be %s or %s or %s or %s or %s',
-                'null',
-                'scalar',
-                'array',
-                'Zend\Db\Sql\ExpressionInterface',
-                'Zend\Db\Sql\SqlInterface'
-            ));
+            return $this->buildNormalizedArgument($argument, self::TYPE_VALUE);
         }
-        if (!in_array($argumentType, $this->allowedTypes)) {
+
+        if (is_scalar($argument) || $argument === null) {
+            return $this->buildNormalizedArgument($argument, $defaultType);
+        }
+
+        if (is_array($argument)) {
+            $value = current($argument);
+
+            if ($value instanceof ExpressionInterface || $value instanceof SqlInterface) {
+                return $this->buildNormalizedArgument($value, self::TYPE_VALUE);
+            }
+
+            $key = key($argument);
+
+            if (is_integer($key) && ! in_array($value, $this->allowedTypes)) {
+                return $this->buildNormalizedArgument($value, $defaultType);
+            }
+
+            return $this->buildNormalizedArgument($key, $value);
+        }
+
+        throw new Exception\InvalidArgumentException(sprintf(
+            '$argument should be %s or %s or %s or %s or %s, "%s" given',
+            'null',
+            'scalar',
+            'array',
+            'Zend\Db\Sql\ExpressionInterface',
+            'Zend\Db\Sql\SqlInterface',
+            is_object($argument) ? get_class($argument) : gettype($argument)
+        ));
+    }
+
+    /**
+     * @param mixed  $argument
+     * @param string $argumentType
+     *
+     * @return array
+     *
+     * @throws Exception\InvalidArgumentException
+     */
+    private function buildNormalizedArgument($argument, $argumentType)
+    {
+        if (! in_array($argumentType, $this->allowedTypes)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Argument type should be in array(%s)',
                 implode(',', $this->allowedTypes)
             ));
         }
+
         return array(
             $argument,
             $argumentType,
         );
-    }
-
-    /**
-     * Push variables from $source to self
-     *
-     * @param mixed $source
-     * @param array $excludeVariables
-     * @return self
-     * @throws Exception\InvalidArgumentException
-     */
-    protected function localizeVariablesForDecorator($source, array $excludeVariables = array())
-    {
-        if (!$this instanceof PlatformDecoratorInterface) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'function AbstractExpression::localizeVariablesForDecorator can only be called for %s.',
-                'Zend\Db\Sql\Platform\PlatformDecoratorInterface'
-            ));
-        }
-        // localize variables
-        foreach (get_object_vars($source) as $name => $value) {
-            if (!in_array($name, $excludeVariables)) {
-                $this->{$name} = $value;
-            }
-        }
-        return $this;
     }
 }

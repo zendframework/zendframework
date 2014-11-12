@@ -9,16 +9,18 @@
 
 namespace ZendTest\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\Driver\Pdo\Connection;
-use ZendTest\Db\TestAsset\PdoStubDriver;
+use ZendTest\Db\TestAsset\Wrapper;
 
 class ConnectionTransactionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Wrapper
      */
-    protected $wrapper = null;
+    protected $wrapper;
 
+    /**
+     * {@inheritDoc}
+     */
     protected function setUp()
     {
         $this->wrapper = new Wrapper();
@@ -187,18 +189,5 @@ class ConnectionTransactionsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->wrapper->inTransaction());
         $this->assertSame(0, $this->wrapper->getNestedTransactionsCount());
-    }
-}
-
-class Wrapper extends Connection
-{
-    public function __construct()
-    {
-        $this->resource = new PdoStubDriver('foo', 'bar', 'baz');
-    }
-
-    public function getNestedTransactionsCount()
-    {
-        return $this->nestedTransactionsCount;
     }
 }

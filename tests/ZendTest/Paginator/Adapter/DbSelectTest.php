@@ -17,62 +17,53 @@ use Zend\Db\Sql\Select;
  */
 class DbSelectTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var \PHPUnit_Framework_MockObject_MockObject */
+    /** @var \PHPUnit_Framework_MockObject_MockObject|\Zend\Db\Sql\Select */
     protected $mockSelect;
 
-    /** @var PHPUnit_Framework_MockObject_MockObject */
+    /** @var PHPUnit_Framework_MockObject_MockObject|\Zend\Db\Sql\Select */
     protected $mockSelectCount;
 
-    /** @var \PHPUnit_Framework_MockObject_MockObject */
+    /** @var \PHPUnit_Framework_MockObject_MockObject|\Zend\Db\Adapter\Driver\StatementInterface */
     protected $mockStatement;
 
-    /** @var \PHPUnit_Framework_MockObject_MockObject */
+    /** @var \PHPUnit_Framework_MockObject_MockObject|\Zend\Db\Adapter\Driver\ResultInterface */
     protected $mockResult;
 
-    /** @var \PHPUnit_Framework_MockObject_MockObject */
+    /** @var \PHPUnit_Framework_MockObject_MockObject|\Zend\Db\Sql\Sql */
     protected $mockSql;
 
     /** @var DbSelect */
     protected $dbSelect;
 
-
-
     public function setup()
     {
-        $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
-        $this->mockResult = $mockResult;
-
-        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
-        $this->mockStatement = $mockStatement;
+        $this->mockResult    = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $this->mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
 
         $this->mockStatement->expects($this->any())->method('execute')->will($this->returnValue($this->mockResult));
 
-        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
-        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
-
+        $mockDriver   = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockPlatform = $this->getMock('Zend\Db\Adapter\Platform\PlatformInterface');
-        $mockPlatform->expects($this->any())->method('getName')->will($this->returnValue('platform'));
-        $mockAdapter = $this->getMockForAbstractClass(
-            'Zend\Db\Adapter\Adapter',
-            array($mockDriver, $mockPlatform)
-        );
 
-        $mockSql = $this->getMock(
+        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($this->mockStatement));
+        $mockPlatform->expects($this->any())->method('getName')->will($this->returnValue('platform'));
+
+        $this->mockSql = $this->getMock(
             'Zend\Db\Sql\Sql',
             array('prepareStatementForSqlObject', 'execute'),
-            array($mockAdapter)
+            array($this->getMockForAbstractClass('Zend\Db\Adapter\Adapter', array($mockDriver, $mockPlatform)))
         );
-        $this->mockSql = $mockSql;
-        $this->mockSql->expects($this->once())
+
+        $this
+            ->mockSql
+            ->expects($this->once())
             ->method('prepareStatementForSqlObject')
             ->with($this->isInstanceOf('Zend\Db\Sql\Select'))
             ->will($this->returnValue($this->mockStatement));
 
-
-        $this->mockSelect = $this->getMock('Zend\Db\Sql\Select');
+        $this->mockSelect      = $this->getMock('Zend\Db\Sql\Select');
         $this->mockSelectCount = $this->getMock('Zend\Db\Sql\Select');
-
-        $this->dbSelect = new DbSelect($this->mockSelect, $mockSql);
+        $this->dbSelect        = new DbSelect($this->mockSelect, $this->mockSql);
     }
 
     public function testGetItems()
@@ -95,8 +86,8 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
 
     public function testCustomCount()
     {
+        $this->dbSelect = new DbSelect($this->mockSelect, $this->mockSql, null, $this->mockSelectCount);
         $this->mockResult->expects($this->once())->method('current')->will($this->returnValue(array(DbSelect::ROW_COUNT_COLUMN_NAME => 7)));
-        $this->dbSelect->setSelectCount($this->mockSelectCount);
 
         $count = $this->dbSelect->count();
         $this->assertEquals(7, $count);

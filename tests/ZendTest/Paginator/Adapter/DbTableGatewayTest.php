@@ -12,7 +12,6 @@ namespace ZendTest\Paginator\Adapter;
 use Zend\Db\Adapter\Platform\Sql92;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Adapter\DbTableGateway;
-use Zend\Db\ResultSet\ResultSet;
 
 /**
  * @group Zend_Paginator

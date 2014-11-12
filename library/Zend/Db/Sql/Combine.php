@@ -16,6 +16,9 @@ use Zend\Db\Adapter\StatementContainerInterface;
 use Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform;
 use Zend\Db\Adapter\ParameterContainer;
 
+/**
+ * Combine SQL statement - allows combining multiple select statements into one
+ */
 class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterface
 {
     const COLUMNS = 'columns';
@@ -28,8 +31,16 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
         self::COMBINE => '%1$s (%2$s) ',
     );
 
+    /**
+     * @var array[]
+     */
     protected $combine = array();
 
+    /**
+     * @param Select|array|null $select
+     * @param string            $type
+     * @param string            $modifier
+     */
     public function __construct($select = null, $type = self::COMBINE_UNION, $modifier = '')
     {
         if ($select) {
@@ -43,6 +54,7 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
      * @param Select|array $select
      * @param string $type
      * @param string $modifier
+     *
      * @return self
      */
     public function combine($select, $type = self::COMBINE_UNION, $modifier = '')
@@ -75,7 +87,8 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
      * Create union clause
      *
      * @param Select|array $select
-     * @param string $modifier
+     * @param string       $modifier
+     *
      * @return self
      */
     public function union($select, $modifier = '')
@@ -87,7 +100,8 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
      * Create except clause
      *
      * @param Select|array $select
-     * @param string $modifier
+     * @param string       $modifier
+     *
      * @return self
      */
     public function except($select, $modifier = '')
@@ -111,6 +125,7 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
      * Get SQL string for statement
      *
      * @param PlatformInterface $adapterPlatform
+     *
      * @return string
      */
     public function getSqlString(PlatformInterface $adapterPlatform = null)
@@ -122,8 +137,9 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     /**
      * Prepare statement
      *
-     * @param AdapterInterface $adapter
+     * @param AdapterInterface            $adapter
      * @param StatementContainerInterface $statementContainer
+     *
      * @return void
      */
     public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer = null)
@@ -143,9 +159,10 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
     /**
      * Build sql string
      *
-     * @param PlatformInterface $platform
-     * @param DriverInterface $driver
+     * @param PlatformInterface  $platform
+     * @param DriverInterface    $driver
      * @param ParameterContainer $parameterContainer
+     *
      * @return string
      */
     protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
@@ -169,6 +186,9 @@ class Combine extends AbstractSql implements SqlInterface, PreparableSqlInterfac
         return trim($sql, ' ');
     }
 
+    /**
+     * @return $this
+     */
     public function alignColumns()
     {
         if (!$this->combine) {

@@ -11,7 +11,9 @@ namespace Zend\Db\Adapter\Platform;
 
 class IbmDb2 extends AbstractPlatform
 {
-
+    /**
+     * @var bool
+     */
     protected $quoteValueAllowed = false;
 
     /**
@@ -37,9 +39,7 @@ class IbmDb2 extends AbstractPlatform
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getName()
     {
@@ -47,10 +47,7 @@ class IbmDb2 extends AbstractPlatform
     }
 
     /**
-     * Quote identifier chain
-     *
-     * @param string|string[] $identifierChain
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteIdentifierChain($identifierChain)
     {
@@ -65,9 +62,7 @@ class IbmDb2 extends AbstractPlatform
     }
 
     /**
-     * Get quote value symbol
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getQuoteValueSymbol()
     {
@@ -75,10 +70,7 @@ class IbmDb2 extends AbstractPlatform
     }
 
     /**
-     * Quote value
-     *
-     * @param  string $value
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteValue($value)
     {
@@ -93,12 +85,7 @@ class IbmDb2 extends AbstractPlatform
     }
 
     /**
-     * Quote Trusted Value
-     *
-     * The ability to quote values without notices
-     *
-     * @param $value
-     * @return mixed
+     * {@inheritDoc}
      */
     public function quoteTrustedValue($value)
     {
@@ -109,9 +96,7 @@ class IbmDb2 extends AbstractPlatform
     }
 
     /**
-     * Get identifier separator
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getIdentifierSeparator()
     {

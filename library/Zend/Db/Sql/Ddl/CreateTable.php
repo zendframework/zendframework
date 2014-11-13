@@ -19,12 +19,12 @@ class CreateTable extends AbstractSql implements SqlInterface
     const TABLE       = 'table';
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $columns = array();
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $constraints = array();
 
@@ -34,8 +34,7 @@ class CreateTable extends AbstractSql implements SqlInterface
     protected $isTemporary = false;
 
     /**
-     * Specifications for Sql String generation
-     * @var array
+     * {@inheritDoc}
      */
     protected $specifications = array(
         self::TABLE => 'CREATE %1$sTABLE %2$s (',
@@ -131,6 +130,11 @@ class CreateTable extends AbstractSql implements SqlInterface
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
+    /**
+     * @param PlatformInterface $adapterPlatform
+     *
+     * @return string[]
+     */
     protected function processTable(PlatformInterface $adapterPlatform = null)
     {
         return array(
@@ -139,19 +143,31 @@ class CreateTable extends AbstractSql implements SqlInterface
         );
     }
 
+    /**
+     * @param PlatformInterface $adapterPlatform
+     *
+     * @return string[][]|null
+     */
     protected function processColumns(PlatformInterface $adapterPlatform = null)
     {
-        if (!$this->columns) {
+        if (! $this->columns) {
             return null;
         }
 
         $sqls = array();
+
         foreach ($this->columns as $column) {
             $sqls[] = $this->processExpression($column, $adapterPlatform);
         }
+
         return array($sqls);
     }
 
+    /**
+     * @param PlatformInterface $adapterPlatform
+     *
+     * @return array|string
+     */
     protected function processCombinedby(PlatformInterface $adapterPlatform = null)
     {
         if ($this->constraints && $this->columns) {
@@ -159,6 +175,11 @@ class CreateTable extends AbstractSql implements SqlInterface
         }
     }
 
+    /**
+     * @param PlatformInterface $adapterPlatform
+     *
+     * @return string[][]|null
+     */
     protected function processConstraints(PlatformInterface $adapterPlatform = null)
     {
         if (!$this->constraints) {
@@ -166,12 +187,19 @@ class CreateTable extends AbstractSql implements SqlInterface
         }
 
         $sqls = array();
+
         foreach ($this->constraints as $constraint) {
             $sqls[] = $this->processExpression($constraint, $adapterPlatform);
         }
+
         return array($sqls);
     }
 
+    /**
+     * @param PlatformInterface $adapterPlatform
+     *
+     * @return string[]
+     */
     protected function processStatementEnd(PlatformInterface $adapterPlatform = null)
     {
         return array("\n)");

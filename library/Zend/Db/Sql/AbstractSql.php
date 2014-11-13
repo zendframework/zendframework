@@ -18,7 +18,9 @@ use Zend\Db\Adapter\Platform\Sql92 as DefaultAdapterPlatform;
 abstract class AbstractSql implements SqlInterface
 {
     /**
-     * @var array
+     * Specifications for Sql String generation
+     *
+     * @var string[]|array[]
      */
     protected $specifications = array();
 

@@ -33,8 +33,7 @@ abstract class AbstractSql implements SqlInterface
     protected $instanceParameterIndex = array();
 
     /**
-     * @param null|PlatformInterface $adapterPlatform
-     * @return string
+     * {@inheritDoc}
      */
     public function getSqlString(PlatformInterface $adapterPlatform = null)
     {
@@ -46,18 +45,26 @@ abstract class AbstractSql implements SqlInterface
      * @param PlatformInterface $platform
      * @param null|DriverInterface $driver
      * @param null|ParameterContainer $parameterContainer
+     *
      * @return string
      */
     protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         $this->localizeVariables();
+
         $sqls       = array();
         $parameters = array();
+
         foreach ($this->specifications as $name => $specification) {
             $parameters[$name] = $this->{'process' . $name}($platform, $driver, $parameterContainer, $sqls, $parameters);
+
             if ($specification && is_array($parameters[$name])) {
                 $sqls[$name] = $this->createSqlFromSpecificationAndParameters($specification, $parameters[$name]);
-            } elseif (is_string($parameters[$name])) {
+
+                continue;
+            }
+
+            if (is_string($parameters[$name])) {
                 $sqls[$name] = $parameters[$name];
             }
         }
@@ -72,7 +79,9 @@ abstract class AbstractSql implements SqlInterface
      * @param null|DriverInterface $driver
      * @param null|ParameterContainer $parameterContainer
      * @param null|string $namedParameterPrefix
-     * @return type
+     *
+     * @return string
+     *
      * @throws Exception\RuntimeException
      */
     protected function processExpression(ExpressionInterface $expression, PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null, $namedParameterPrefix = null)
@@ -90,22 +99,24 @@ abstract class AbstractSql implements SqlInterface
         // initialize variables
         $parts = $expression->getExpressionData();
 
-        if (!isset($this->instanceParameterIndex[$namedParameterPrefix])) {
+        if (! isset($this->instanceParameterIndex[$namedParameterPrefix])) {
             $this->instanceParameterIndex[$namedParameterPrefix] = 1;
         }
 
         $expressionParamIndex = &$this->instanceParameterIndex[$namedParameterPrefix];
 
         foreach ($parts as $part) {
-
             // if it is a string, simply tack it onto the return sql "specification" string
             if (is_string($part)) {
                 $sql .= $part;
+
                 continue;
             }
 
-            if (!is_array($part)) {
-                throw new Exception\RuntimeException('Elements returned from getExpressionData() array must be a string or array.');
+            if (! is_array($part)) {
+                throw new Exception\RuntimeException(
+                    'Elements returned from getExpressionData() array must be a string or array.'
+                );
             }
 
             // process values and types (the middle and last position of the expression data)
@@ -144,13 +155,16 @@ abstract class AbstractSql implements SqlInterface
             // after looping the values, interpolate them into the sql string (they might be placeholder names, or values)
             $sql .= vsprintf($part[0], $values);
         }
+
         return $sql;
     }
 
     /**
-     * @param $specifications
-     * @param $parameters
+     * @param string|array $specifications
+     * @param string|array $parameters
+     *
      * @return string
+     *
      * @throws Exception\RuntimeException
      */
     protected function createSqlFromSpecificationAndParameters($specifications, $parameters)
@@ -160,10 +174,12 @@ abstract class AbstractSql implements SqlInterface
         }
 
         $parametersCount = count($parameters);
+
         foreach ($specifications as $specificationString => $paramSpecs) {
             if ($parametersCount == count($paramSpecs)) {
                 break;
             }
+
             unset($specificationString, $paramSpecs);
         }
 
@@ -294,11 +310,15 @@ abstract class AbstractSql implements SqlInterface
         return $table;
     }
 
+    /**
+     * Copy variables from the subject into the local properties
+     */
     protected function localizeVariables()
     {
-        if (!$this instanceof PlatformDecoratorInterface) {
+        if (! $this instanceof PlatformDecoratorInterface) {
             return;
         }
+
         foreach (get_object_vars($this->subject) as $name => $value) {
             $this->{$name} = $value;
         }

@@ -16,18 +16,23 @@ use Zend\Db\Adapter\Exception;
 class SqlServer extends AbstractPlatform
 {
     /**
-     * @var array
+     * {@inheritDoc}
      */
     protected $quoteIdentifier = array('[',']');
 
     /**
-     * @var string
+     * {@inheritDoc}
      */
     protected $quoteIdentifierTo = '\\';
 
-    /** @var resource|\PDO */
+    /**
+     * @var resource|\PDO
+     */
     protected $resource = null;
 
+    /**
+     * @param null|\Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv|\Zend\Db\Adapter\Driver\Pdo\Pdo||resource|\PDO $driver
+     */
     public function __construct($driver = null)
     {
         if ($driver) {
@@ -38,7 +43,8 @@ class SqlServer extends AbstractPlatform
     /**
      * @param \Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv|\Zend\Db\Adapter\Driver\Pdo\Pdo||resource|\PDO $driver
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
-     * @return $this
+     *
+     * @return self
      */
     public function setDriver($driver)
     {
@@ -54,9 +60,7 @@ class SqlServer extends AbstractPlatform
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getName()
     {
@@ -64,9 +68,7 @@ class SqlServer extends AbstractPlatform
     }
 
     /**
-     * Get quote identifier symbol
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getQuoteIdentifierSymbol()
     {
@@ -74,10 +76,7 @@ class SqlServer extends AbstractPlatform
     }
 
     /**
-     * Quote identifier chain
-     *
-     * @param string|string[] $identifierChain
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteIdentifierChain($identifierChain)
     {
@@ -88,9 +87,7 @@ class SqlServer extends AbstractPlatform
     }
 
     /**
-     * Get quote value symbol
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getQuoteValueSymbol()
     {
@@ -98,10 +95,7 @@ class SqlServer extends AbstractPlatform
     }
 
     /**
-     * Quote value
-     *
-     * @param  string $value
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteValue($value)
     {
@@ -120,12 +114,7 @@ class SqlServer extends AbstractPlatform
     }
 
     /**
-     * Quote Trusted Value
-     *
-     * The ability to quote values without notices
-     *
-     * @param $value
-     * @return mixed
+     * {@inheritDoc}
      */
     public function quoteTrustedValue($value)
     {
@@ -139,9 +128,7 @@ class SqlServer extends AbstractPlatform
     }
 
     /**
-     * Get identifier separator
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getIdentifierSeparator()
     {

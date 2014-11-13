@@ -116,6 +116,9 @@ class Hostname implements RouteInterface
 
         while ($currentPos < $length) {
             preg_match('(\G(?P<literal>[a-z0-9-.]*)(?P<token>[:{\[\]]|$))', $def, $matches, 0, $currentPos);
+            if (empty($matches)) {
+                throw new Exception\RuntimeException('Matched hostname literal contains a disallowed character');
+            }
 
             $currentPos += strlen($matches[0]);
 

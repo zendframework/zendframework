@@ -12,7 +12,7 @@ namespace Zend\Db\Adapter\Platform;
 abstract class AbstractPlatform implements PlatformInterface
 {
     /**
-     * @var array
+     * @var string[]
      */
     protected $quoteIdentifier = array('"', '"');
 

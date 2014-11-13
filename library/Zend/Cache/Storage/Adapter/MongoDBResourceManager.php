@@ -9,8 +9,8 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use MongoCollection as MongoDBResource;
-use MongoException as MongoDBResourceException;
+use MongoCollection;
+use MongoException;
 use Traversable;
 use Zend\Cache\Exception;
 use Zend\Stdlib\ArrayUtils;
@@ -20,14 +20,15 @@ class MongoDBResourceManager
     /**
      * Registered resources
      *
-     * @var array
+     * @var array[]
      */
-    protected $resources = array();
+    private $resources = array();
 
     /**
      * Check if a resource exists
      *
      * @param string $id
+     *
      * @return bool
      */
     public function hasResource($id)
@@ -39,31 +40,30 @@ class MongoDBResourceManager
      * Set a resource
      *
      * @param string $id
-     * @param array|Traversable|MongoDBResource $resource
-     * @return MongoDBResourceManager
+     * @param array|Traversable|MongoCollection $resource
+     *
+     * @return self
+     *
      * @throws Exception\RuntimeException
      */
     public function setResource($id, $resource)
     {
-        if ($resource instanceof MongoDBResource) {
+        if ($resource instanceof MongoCollection) {
             $this->resources[$id] = array(
                 'initialized' => true,
-                'resource' => $resource,
+                'resource'    => $resource,
             );
-        } else {
-            if ($resource instanceof Traversable) {
-                $resource = ArrayUtils::iteratorToArray($resource);
-            } elseif (!is_array($resource)) {
-                throw new Exception\InvalidArgumentException(
-                    'Resource must be an instance of an array or Traversable'
-                );
-            }
 
-            $defaults = array(
-                'collection' => 'cache',
-                'database' => 'zend',
-                'driverOptions' => array(),
-                'options' => array(
+            return $this;
+        }
+
+        $this->resources[$id] = array_merge(
+            array(
+                'server'            => 'mongodb://localhost:27017',
+                'collection'        => 'cache',
+                'database'          => 'zend',
+                'driverOptions'     => array(),
+                'connectionOptions' => array(
                     /**
                      * Journaling is enabled by default in 64bit builds of Mongo 2.0+
                      * As such, we should default fsync to false and journal to true
@@ -71,24 +71,23 @@ class MongoDBResourceManager
                      * http://docs.mongodb.org/manual/tutorial/manage-journaling/
                      * http://www.php.net/manual/en/mongoclient.construct.php
                      */
-                    'fsync' => false,
+                    'fsync'   => false,
                     'journal' => true,
                 ),
-                'server' => 'mongodb://localhost:27017',
-            );
-
-            $this->resources[$id] = array_merge($defaults, $resource);
-
+            ),
+            ArrayUtils::iteratorToArray($resource),
             // force initialized flag to false
-            $this->resources[$id]['initialized'] = false;
-        }
+            array('initialized' => false)
+        );
 
         return $this;
     }
 
     /**
      * @param string $id
-     * @return MongoDBResource
+     *
+     * @return MongoCollection
+     *
      * @throws Exception\RuntimeException
      */
     public function getResource($id)
@@ -97,40 +96,51 @@ class MongoDBResourceManager
             throw new Exception\RuntimeException("No resource with id '{$id}'");
         }
 
-        $resource = & $this->resources[$id];
-
-        if ($resource['initialized'] !== true) {
-            $clientClass = (version_compare(phpversion('mongo'), '1.3.0', '<')) ? '\Mongo' : '\MongoClient';
+        if (! $this->resources[$id]['initialized']) {
+            $clientClass = version_compare(phpversion('mongo'), '1.3.0', '<') ? 'Mongo' : 'MongoClient';
 
             try {
-                if (!empty($resource['driverOptions'])) {
-                    $client = new $clientClass($resource['server'], $resource['options'], $resource['driverOptions']);
-                } else {
-                    $client = new $clientClass($resource['server'], $resource['options']);
-                }
-                $resource['resource'] = $client->selectCollection($resource['database'], $resource['collection']);
-                $resource['resource']->ensureIndex(array('key' => 1));
-            } catch (MongoDBResourceException $e) {
+                /* @var $client \Mongo|\MongoClient */
+                $client = new $clientClass(
+                    $this->resources[$id]['server'],
+                    $this->resources[$id]['connectionOptions'],
+                    (array) $this->resources[$id]['driverOptions']
+                );
+
+                $collection = $client->selectCollection(
+                    $this->resources[$id]['database'],
+                    $this->resources[$id]['collection']
+                );
+
+                $collection->ensureIndex(array('key' => 1));
+
+                $this->resources[$id]['resource'] = $collection;
+            } catch (MongoException $e) {
                 throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
             }
 
-            $resource['initialized'] = true;
+            $this->resources[$id]['initialized'] = true;
         }
 
-        return $resource['resource'];
+        return $this->resources[$id]['resource'];
     }
 
+    /**
+     * @param string $id
+     * @param array  $libOptions
+     *
+     * @return self
+     */
     public function setLibOptions($id, array $libOptions)
     {
         if (!$this->hasResource($id)) {
             return $this->setResource($id, $libOptions);
         }
 
-        $resource = & $this->resources[$id];
+        unset($this->resources[$id]['resource']);
 
-        unset($resource['resource']);
-        $resource = array_merge($resource, $libOptions);
-        $resource['initialized'] = false;
+        $this->resources[$id]                = array_merge($this->resources[$id], $libOptions);
+        $this->resources[$id]['initialized'] = false;
 
         return $this;
     }

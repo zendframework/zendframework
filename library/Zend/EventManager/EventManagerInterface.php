@@ -37,7 +37,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
     public function trigger($event, $target = null, $argv = array(), $callback = null);
 
     /**
-     * Trigger an event until the given callback returns a boolean false
+     * Trigger an event until the given callback returns a boolean true
      *
      * Should allow handling the following scenarios:
      * - Passing Event object and callback only

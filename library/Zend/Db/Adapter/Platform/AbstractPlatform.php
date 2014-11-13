@@ -103,10 +103,6 @@ abstract class AbstractPlatform implements PlatformInterface
      */
     public function quoteValueList($valueList)
     {
-        if (! is_array($valueList)) {
-            return $this->quoteValue($valueList);
-        }
-
-        return implode(', ', array_map(array($this, 'quoteValue'), $valueList));
+        return implode(', ', array_map(array($this, 'quoteValue'), (array) $valueList));
     }
 }

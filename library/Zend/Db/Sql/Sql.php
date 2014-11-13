@@ -111,8 +111,9 @@ class Sql
     }
 
     /**
-     * @param PreparableSqlInterface $sqlObject
+     * @param PreparableSqlInterface  $sqlObject
      * @param StatementInterface|null $statement
+     *
      * @return StatementInterface
      */
     public function prepareStatementForSqlObject(PreparableSqlInterface $sqlObject, StatementInterface $statement = null)
@@ -122,8 +123,9 @@ class Sql
     }
 
     /**
-     * @param SqlInterface $sqlObject
-     * @param PlatformInterface $platform
+     * @param SqlInterface           $sqlObject
+     * @param PlatformInterface|null $platform
+     *
      * @return string
      */
     public function getSqlStringForSqlObject(SqlInterface $sqlObject, PlatformInterface $platform = null)

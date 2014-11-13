@@ -29,7 +29,9 @@
         "ext-apc": "APC >= 3.1.6 to use the APC storage adapter",
         "ext-dba": "DBA, to use the DBA storage adapter",
         "ext-memcached": "Memcached >= 1.0.0 to use the Memcached storage adapter",
-        "ext-wincache": "WinCache, to use the WinCache storage adapter"
+        "ext-mongo": "Mongo, to use MongoDB storage adapter",
+        "ext-wincache": "WinCache, to use the WinCache storage adapter",
+        "mongofill/mongofill": "Alternative to ext-mongo - a pure PHP implementation designed as a drop in replacement"
     },
     "extra": {
         "branch-alias": {

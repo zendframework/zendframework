@@ -68,10 +68,15 @@ class ObjectProperty extends AbstractHydrator
                 '%s expects the provided $object to be a PHP object)', __METHOD__
             ));
         }
-        if (!($object instanceof \stdClass)) {
-            $publicProps = get_object_vars($object);
-            $data = array_intersect_key($data, $publicProps);
+
+        $reflection = new ReflectionObject($object);
+        $nonPublicProperties = $reflection->getProperties(ReflectionProperty::IS_PRIVATE + ReflectionProperty::IS_PROTECTED);
+        foreach($nonPublicProperties as $nonPublicProperty) {
+            if (array_key_exists($nonPublicProperty->name, $data)) {
+                unset($data[$nonPublicProperty->name]);
+            }
         }
+
         foreach ($data as $name => $value) {
             $property = $this->hydrateName($name, $data);
             $object->$property = $this->hydrateValue($property, $value, $data);

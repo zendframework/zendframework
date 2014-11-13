@@ -133,16 +133,4 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeNotContains('quin', 'quin', $object);
     }
 
-    /**
-     * Verify that the hydrator hydrates the public property, but doesn't create new ones
-     */
-    public function testHydratorDoesNotCreatePropertiesOnClass()
-    {
-        $object = new ObjectPropertyTestAsset();
-
-        $this->hydrator->hydrate(array('foo' => 'foo', 'baz' => 'foo'), $object);
-        $this->assertObjectNotHasAttribute('baz', $object);
-        $this->assertAttributeContains('foo', 'foo', $object);
-
-    }
 }

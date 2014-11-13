@@ -106,8 +106,8 @@ class SqlServer extends AbstractPlatform
             'Attempting to quote a value in ' . __CLASS__ . ' without extension/driver support '
                 . 'can introduce security vulnerabilities in a production environment.'
         );
-        $value = addcslashes($value, "\000\032");
-        return '\'' . str_replace('\'', '\'\'', $value) . '\'';
+
+        return '\'' . str_replace('\'', '\'\'', addcslashes($value, "\000\032")) . '\'';
     }
 
     /**

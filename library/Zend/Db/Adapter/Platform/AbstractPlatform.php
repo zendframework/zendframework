@@ -27,11 +27,7 @@ abstract class AbstractPlatform implements PlatformInterface
     protected $quoteIdentifiers = true;
 
     /**
-     * Quote identifier in fragment
-     *
-     * @param  string $identifier
-     * @param  array $safeWords
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteIdentifierInFragment($identifier, array $safeWords = array())
     {
@@ -69,10 +65,7 @@ abstract class AbstractPlatform implements PlatformInterface
     }
 
     /**
-     * Quote identifier
-     *
-     * @param  string $identifier
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteIdentifier($identifier)
     {
@@ -86,9 +79,7 @@ abstract class AbstractPlatform implements PlatformInterface
     }
 
     /**
-     * Get quote indentifier symbol
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getQuoteIdentifierSymbol()
     {
@@ -96,10 +87,7 @@ abstract class AbstractPlatform implements PlatformInterface
     }
 
     /**
-     * Quote value list
-     *
-     * @param string|string[] $valueList
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteValueList($valueList)
     {

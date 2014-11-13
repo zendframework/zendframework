@@ -25,9 +25,7 @@ class Oracle extends AbstractPlatform
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getName()
     {
@@ -35,27 +33,19 @@ class Oracle extends AbstractPlatform
     }
 
     /**
-     * Quote identifier chain
-     *
-     * @param string|string[] $identifierChain
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteIdentifierChain($identifierChain)
     {
         if ($this->quoteIdentifiers === false) {
-            return (is_array($identifierChain)) ? implode('.', $identifierChain) : $identifierChain;
+            return implode('.', (array) $identifierChain);
         }
-        $identifierChain = str_replace('"', '\\"', $identifierChain);
-        if (is_array($identifierChain)) {
-            $identifierChain = implode('"."', $identifierChain);
-        }
-        return '"' . $identifierChain . '"';
+
+        return '"' . implode('"."', (array) str_replace('"', '\\"', $identifierChain)) . '"';
     }
 
     /**
-     * Get quote value symbol
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getQuoteValueSymbol()
     {
@@ -63,10 +53,7 @@ class Oracle extends AbstractPlatform
     }
 
     /**
-     * Quote value
-     *
-     * @param  string $value
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteValue($value)
     {
@@ -78,12 +65,7 @@ class Oracle extends AbstractPlatform
     }
 
     /**
-     * Quote Trusted Value
-     *
-     * The ability to quote values without notices
-     *
-     * @param $value
-     * @return mixed
+     * {@inheritDoc}
      */
     public function quoteTrustedValue($value)
     {
@@ -91,9 +73,7 @@ class Oracle extends AbstractPlatform
     }
 
     /**
-     * Get identifier separator
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getIdentifierSeparator()
     {

@@ -107,12 +107,6 @@ abstract class AbstractPlatform implements PlatformInterface
             return $this->quoteValue($valueList);
         }
 
-        $value = reset($valueList);
-
-        do {
-            $valueList[key($valueList)] = $this->quoteValue($value);
-        } while ($value = next($valueList));
-
-        return implode(', ', $valueList);
+        return implode(', ', array_map(array($this, 'quoteValue'), $valueList));
     }
 }

@@ -27,7 +27,7 @@ class Delete extends AbstractPreparableSql
     /**@#-*/
 
     /**
-     * @var array Specifications
+     * {@inheritDoc}
      */
     protected $specifications = array(
         self::SPECIFICATION_DELETE => 'DELETE FROM %1$s',
@@ -79,6 +79,11 @@ class Delete extends AbstractPreparableSql
         return $this;
     }
 
+    /**
+     * @param null $key
+     *
+     * @return mixed
+     */
     public function getRawState($key = null)
     {
         $rawState = array(
@@ -95,6 +100,7 @@ class Delete extends AbstractPreparableSql
      *
      * @param  Where|\Closure|string|array $predicate
      * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
+     *
      * @return Delete
      */
     public function where($predicate, $combination = Predicate\PredicateSet::OP_AND)
@@ -107,6 +113,13 @@ class Delete extends AbstractPreparableSql
         return $this;
     }
 
+    /**
+     * @param PlatformInterface       $platform
+     * @param DriverInterface|null    $driver
+     * @param ParameterContainer|null $parameterContainer
+     *
+     * @return string
+     */
     protected function processDelete(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         return sprintf(
@@ -115,11 +128,19 @@ class Delete extends AbstractPreparableSql
         );
     }
 
+    /**
+     * @param PlatformInterface       $platform
+     * @param DriverInterface|null    $driver
+     * @param ParameterContainer|null $parameterContainer
+     *
+     * @return null|string
+     */
     protected function processWhere(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         if ($this->where->count() == 0) {
             return null;
         }
+
         return sprintf(
             $this->specifications[static::SPECIFICATION_WHERE],
             $this->processExpression($this->where, $platform, $driver, $parameterContainer, 'where')
@@ -132,7 +153,8 @@ class Delete extends AbstractPreparableSql
      * Overloads "where" only.
      *
      * @param  string $name
-     * @return mixed
+     *
+     * @return Where|null
      */
     public function __get($name)
     {

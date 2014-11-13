@@ -17,18 +17,23 @@ use Zend\Db\Adapter\Exception;
 class Mysql extends AbstractPlatform
 {
     /**
-     * @var array
+     * {@inheritDoc}
      */
     protected $quoteIdentifier = array('`', '`');
 
     /**
-     * @var string
+     * {@inheritDoc}
      */
     protected $quoteIdentifierTo = '``';
 
-    /** @var \mysqli|\PDO */
+    /**
+     * @var \mysqli|\PDO
+     */
     protected $resource = null;
 
+    /**
+     * @param null|\Zend\Db\Adapter\Driver\Mysqli\Mysqli|\Zend\Db\Adapter\Driver\Pdo\Pdo||\mysqli|\PDO $driver
+     */
     public function __construct($driver = null)
     {
         if ($driver) {
@@ -39,7 +44,8 @@ class Mysql extends AbstractPlatform
     /**
      * @param \Zend\Db\Adapter\Driver\Mysqli\Mysqli|\Zend\Db\Adapter\Driver\Pdo\Pdo||\mysqli|\PDO $driver
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
-     * @return $this
+     *
+     * @return self
      */
     public function setDriver($driver)
     {
@@ -57,9 +63,7 @@ class Mysql extends AbstractPlatform
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getName()
     {
@@ -67,10 +71,7 @@ class Mysql extends AbstractPlatform
     }
 
     /**
-     * Quote identifier chain
-     *
-     * @param string|string[] $identifierChain
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteIdentifierChain($identifierChain)
     {
@@ -82,9 +83,7 @@ class Mysql extends AbstractPlatform
     }
 
     /**
-     * Get quote value symbol
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getQuoteValueSymbol()
     {
@@ -92,10 +91,7 @@ class Mysql extends AbstractPlatform
     }
 
     /**
-     * Quote value
-     *
-     * @param  string $value
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteValue($value)
     {
@@ -116,12 +112,7 @@ class Mysql extends AbstractPlatform
     }
 
     /**
-     * Quote Trusted Value
-     *
-     * The ability to quote values without notices
-     *
-     * @param $value
-     * @return mixed
+     * {@inheritDoc}
      */
     public function quoteTrustedValue($value)
     {
@@ -138,9 +129,7 @@ class Mysql extends AbstractPlatform
     }
 
     /**
-     * Get identifier separator
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getIdentifierSeparator()
     {

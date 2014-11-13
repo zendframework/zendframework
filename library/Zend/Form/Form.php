@@ -241,7 +241,6 @@ class Form extends Fieldset implements FormInterface
                 $elementOrFieldset->prepareElement($form);
             }
         }
-        return $this;
     }
 
     /**

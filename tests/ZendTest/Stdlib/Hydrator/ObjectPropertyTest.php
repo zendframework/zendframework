@@ -73,7 +73,8 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
             array(
                 'foo' => 'bar',
                 'bar' => 'foo',
-                'blubb' => 'baz'
+                'blubb' => 'baz',
+                'quo' => 'blubb'
             ),
             $this->hydrator->extract($object)
         );

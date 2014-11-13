@@ -70,7 +70,9 @@ class ObjectProperty extends AbstractHydrator
         }
         foreach ($data as $name => $value) {
             $property = $this->hydrateName($name, $data);
-            $object->$property = $this->hydrateValue($property, $value, $data);
+            if ($object instanceof \stdClass || property_exists($object, $property)) {
+                $object->$property = $this->hydrateValue($property, $value, $data);
+            }
         }
         return $object;
     }

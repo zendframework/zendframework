@@ -24,33 +24,32 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      *
      * @var bool
      */
-    protected $initialized = false;
+    private $initialized = false;
 
     /**
      * the mongodb resource manager
      *
      * @var null|MongoDBResourceManager
      */
-    protected $resourceManager;
+    private $resourceManager;
 
     /**
      * The mongodb resource id
      *
      * @var null|string
      */
-    protected $resourceId;
+    private $resourceId;
 
     /**
      * The namespace prefix
      *
      * @var string
      */
-    protected $namespacePrefix = '';
+    private $namespacePrefix = '';
 
     /**
-     * __construct
+     * {@inheritDoc}
      *
-     * @param mixed $options
      * @throws Exception\ExtensionNotLoadedException
      */
     public function __construct($options = null)
@@ -72,7 +71,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      *
      * @return MongoResource
      */
-    protected function getMongoDBResource()
+    private function getMongoDBResource()
     {
         if (!$this->initialized) {
             $options = $this->getOptions();
@@ -94,10 +93,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     }
 
     /**
-     * Set options.
-     *
-     * @param  array|Traversable|MongoDBOptions $options
-     * @return MongoDB
+     * {@inheritDoc}
      */
     public function setOptions($options)
     {
@@ -109,9 +105,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     }
 
     /**
-     * Get options.
-     *
-     * @return MongoDBOptions
+     * {@inheritDoc}
      */
     public function getOptions()
     {
@@ -119,12 +113,8 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     }
 
     /**
-     * Internal method to get an item.
+     * {@inheritDoc}
      *
-     * @param string $normalizedKey
-     * @param bool $success
-     * @param mixed $casToken
-     * @return string|null
      * @throws Exception\RuntimeException
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
@@ -177,11 +167,8 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     }
 
     /**
-     * Internal method to store an item.
+     * {@inheritDoc}
      *
-     * @param  string $normalizedKey
-     * @param  mixed $value
-     * @return bool
      * @throws Exception\RuntimeException
      */
     protected function internalSetItem(& $normalizedKey, & $value)
@@ -229,10 +216,8 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     }
 
     /**
-     * Internal method to remove an item.
+     * {@inheritDoc}
      *
-     * @param  string $normalizedKey
-     * @return bool
      * @throws Exception\RuntimeException
      */
     protected function internalRemoveItem(& $normalizedKey)
@@ -261,9 +246,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     }
 
     /**
-     * Flush the whole storage
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function flush()
     {
@@ -277,17 +260,14 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     }
 
     /**
-     * Internal method to get capabilities
-     *
-     * @return void|Zend\Cache\Storage\Capabilities
+     * {@inheritDoc}
      */
     protected function internalGetCapabilities()
     {
-        if ($this->capabilities === null) {
-            $this->capabilityMarker = new stdClass();
+        if (! $this->capabilities) {
             $this->capabilities = new Capabilities(
                 $this,
-                $this->capabilityMarker,
+                $this->capabilityMarker = new stdClass(),
                 array(
                     'supportedDatatypes' => array(
                         'NULL'     => true,
@@ -318,10 +298,8 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     }
 
     /**
-     * Internal method to get metadata of an item.
+     * {@inheritDoc}
      *
-     * @param  string $normalizedKey
-     * @return array|bool Metadata on success, false on failure
      * @throws Exception\ExceptionInterface
      */
     protected function internalGetMetadata(& $normalizedKey)
@@ -341,10 +319,12 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      * Return raw records from MongoCollection
      *
      * @param string $normalizedKey
+     *
      * @return array|null
+     *
      * @throws Exception\RuntimeException
      */
-    protected function fetchFromCollection(& $normalizedKey)
+    private function fetchFromCollection(& $normalizedKey)
     {
         $collection = $this->getMongoDBResource();
 

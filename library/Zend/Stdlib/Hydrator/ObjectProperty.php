@@ -69,16 +69,19 @@ class ObjectProperty extends AbstractHydrator
             ));
         }
 
-        $reflection = new ReflectionObject($object);
-        $nonPublicProperties = $reflection->getProperties(ReflectionProperty::IS_PRIVATE + ReflectionProperty::IS_PROTECTED);
-        foreach($nonPublicProperties as $nonPublicProperty) {
-            if (array_key_exists($nonPublicProperty->name, $data)) {
-                unset($data[$nonPublicProperty->name]);
-            }
-        }
-
+        $propertyList = (array)$object;
+        $privatePropertyPrefix = "\0" . get_class($object) . "\0";
+        $protectedPropertyPrefix = "\0*\0";
         foreach ($data as $name => $value) {
             $property = $this->hydrateName($name, $data);
+
+            $privateProperty = $privatePropertyPrefix . $property;
+            $protectedProperty = $protectedPropertyPrefix . $property;
+
+            if (array_key_exists($privateProperty, $propertyList) || array_key_exists($protectedProperty, $propertyList)) {
+                continue;
+            }
+
             $object->$property = $this->hydrateValue($property, $value, $data);
         }
         return $object;

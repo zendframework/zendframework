@@ -80,10 +80,7 @@ class SqlServer extends AbstractPlatform
      */
     public function quoteIdentifierChain($identifierChain)
     {
-        if (is_array($identifierChain)) {
-            $identifierChain = implode('].[', $identifierChain);
-        }
-        return '[' . $identifierChain . ']';
+        return '[' . implode('].[', (array) $identifierChain) . ']';
     }
 
     /**

@@ -93,7 +93,7 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
         $this->hydrator->hydrate(array('foo' => 'baz', 'bar' => 'baz'), $object);
 
         $this->assertEquals('baz', $object->foo);
-        $this->assertOjectHasAttribute('bar', $object);
+        $this->assertObjectHasAttribute('bar', $object);
         $this->assertAttributeContains('baz', $object, 'bar');
     }
 

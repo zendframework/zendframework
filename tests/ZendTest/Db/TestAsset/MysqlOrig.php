@@ -17,9 +17,14 @@ use Zend\Db\Adapter\Platform\PlatformInterface;
 
 class MysqlOrig implements PlatformInterface
 {
-    /** @var \mysqli|\PDO */
+    /**
+     * @var \mysqli|\PDO
+     */
     protected $resource = null;
 
+    /**
+     * @param null|\Zend\Db\Adapter\Driver\Mysqli\Mysqli|\Zend\Db\Adapter\Driver\Pdo\Pdo||\mysqli|\PDO $driver
+     */
     public function __construct($driver = null)
     {
         if ($driver) {
@@ -30,7 +35,8 @@ class MysqlOrig implements PlatformInterface
     /**
      * @param \Zend\Db\Adapter\Driver\Mysqli\Mysqli|\Zend\Db\Adapter\Driver\Pdo\Pdo||\mysqli|\PDO $driver
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
-     * @return $this
+     *
+     * @return self
      */
     public function setDriver($driver)
     {
@@ -48,9 +54,7 @@ class MysqlOrig implements PlatformInterface
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getName()
     {
@@ -58,9 +62,7 @@ class MysqlOrig implements PlatformInterface
     }
 
     /**
-     * Get quote identifier symbol
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getQuoteIdentifierSymbol()
     {
@@ -68,10 +70,7 @@ class MysqlOrig implements PlatformInterface
     }
 
     /**
-     * Quote identifier
-     *
-     * @param  string $identifier
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteIdentifier($identifier)
     {
@@ -79,10 +78,7 @@ class MysqlOrig implements PlatformInterface
     }
 
     /**
-     * Quote identifier chain
-     *
-     * @param string|string[] $identifierChain
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteIdentifierChain($identifierChain)
     {
@@ -94,9 +90,7 @@ class MysqlOrig implements PlatformInterface
     }
 
     /**
-     * Get quote value symbol
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getQuoteValueSymbol()
     {
@@ -104,10 +98,7 @@ class MysqlOrig implements PlatformInterface
     }
 
     /**
-     * Quote value
-     *
-     * @param  string $value
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteValue($value)
     {
@@ -128,12 +119,7 @@ class MysqlOrig implements PlatformInterface
     }
 
     /**
-     * Quote Trusted Value
-     *
-     * The ability to quote values without notices
-     *
-     * @param $value
-     * @return mixed
+     * {@inheritDoc}
      */
     public function quoteTrustedValue($value)
     {
@@ -150,10 +136,7 @@ class MysqlOrig implements PlatformInterface
     }
 
     /**
-     * Quote value list
-     *
-     * @param string|string[] $valueList
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteValueList($valueList)
     {
@@ -169,9 +152,7 @@ class MysqlOrig implements PlatformInterface
     }
 
     /**
-     * Get identifier separator
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getIdentifierSeparator()
     {
@@ -179,24 +160,22 @@ class MysqlOrig implements PlatformInterface
     }
 
     /**
-     * Quote identifier in fragment
-     *
-     * @param  string $identifier
-     * @param  array $safeWords
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteIdentifierInFragment($identifier, array $safeWords = array())
     {
         // regex taken from @link http://dev.mysql.com/doc/refman/5.0/en/identifiers.html
         $parts = preg_split('#([^0-9,a-z,A-Z$_])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+
         if ($safeWords) {
-            $safeWords = array_flip($safeWords);
-            $safeWords = array_change_key_case($safeWords, CASE_LOWER);
+            $safeWords = array_change_key_case(array_flip($safeWords), CASE_LOWER);
         }
-        foreach ($parts as $i => $part) {
-            if ($safeWords && isset($safeWords[strtolower($part)])) {
+
+        foreach ($parts as $key => $part) {
+            if (isset($safeWords[strtolower($part)])) {
                 continue;
             }
+
             switch ($part) {
                 case ' ':
                 case '.':
@@ -207,9 +186,10 @@ class MysqlOrig implements PlatformInterface
                 case 'as':
                     break;
                 default:
-                    $parts[$i] = '`' . str_replace('`', '``', $part) . '`';
+                    $parts[$key] = '`' . str_replace('`', '``', $part) . '`';
             }
         }
+
         return implode('', $parts);
     }
 }

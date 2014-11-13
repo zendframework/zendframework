@@ -113,8 +113,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     protected function internalGetItem(& $normalizedKey, & $success = null, & $casToken = null)
     {
-        $result = $this->fetchFromCollection($normalizedKey);
-
+        $result  = $this->fetchFromCollection($normalizedKey);
         $success = false;
 
         if (null === $result) {

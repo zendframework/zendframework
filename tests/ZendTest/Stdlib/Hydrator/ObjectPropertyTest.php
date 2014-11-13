@@ -11,6 +11,7 @@ namespace ZendTest\Stdlib\Hydrator;
 
 use Zend\Stdlib\Hydrator\ObjectProperty;
 use Zend\Stdlib\Exception\BadMethodCallException;
+use ZendTest\Stdlib\TestAsset\ObjectProperty as ObjectPropertyTestAsset;
 
 /**
  * Unit tests for {@see \Zend\Stdlib\Hydrator\ObjectProperty}
@@ -65,8 +66,15 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanExtractFromClass()
     {
-        $object = new DummyObjectForObjectPropertyTest();
-        $this->assertSame(array('foo' => 'bar'), $this->hydrator->extract($object));
+        $object = new ObjectPropertyTestAsset();
+        $this->assertSame(
+            array(
+                'foo' => 'bar',
+                'bar' => 'foo',
+                'blubb' => 'baz'
+            ),
+            $this->hydrator->extract($object)
+        );
     }
 
     /**
@@ -94,7 +102,7 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('baz', $object->foo);
         $this->assertObjectHasAttribute('bar', $object);
-        $this->assertAttributeContains('baz', $object, 'bar');
+        $this->assertAttributeContains('baz', 'bar', $object);
     }
 
     /**
@@ -102,13 +110,23 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanHydrateClassPublicProperties()
     {
-        $object = new DummyObjectForObjectPropertyTest();
+        $object = new ObjectPropertyTestAsset();
 
-        $this->hydrator->hydrate(array('foo' => 'baz', 'bar' => 'foo'), $object);
+        $this->hydrator->hydrate(
+            array(
+                'foo' => 'foo',
+                'bar' => 'bar',
+                'blubb' => 'blubb',
+                'quo' => 'quo'
+            ),
+            $object
+        );
 
-        $this->assertAttributeContains('baz', $object, 'foo');
-        $this->assertAttributeContains('baz', $object, 'bar');
-        $this->assertAttributeNotContains('foo', $object, 'bar');
+        $this->assertAttributeContains('foo', 'foo', $object);
+        $this->assertAttributeContains('bar', 'bar', $object);
+        $this->assertAttributeContains('blubb', 'blubb', $object);
+        $this->assertAttributeNotContains('quo', 'quo', $object);
+        $this->assertAttributeNotContains('blubb', 'quo', $object);
     }
 
     /**
@@ -116,18 +134,11 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
      */
     public function testHydratorDoesNotCreatePropertiesOnClass()
     {
-        $object = new DummyObjectForObjectPropertyTest();
+        $object = new ObjectPropertyTestAsset();
 
-        $this->hydrator->hydrate(array('foo' => 'baz', 'baz' => 'foo'), $object);
+        $this->hydrator->hydrate(array('foo' => 'foo', 'baz' => 'foo'), $object);
         $this->assertObjectNotHasAttribute('baz', $object);
-        $this->assertAttributeContains('baz', $object, 'foo');
+        $this->assertAttributeContains('foo', 'foo', $object);
 
     }
-}
-
-
-class DummyObjectForObjectPropertyTest
-{
-    public $foo = 'bar';
-    protected $bar = 'baz';
 }

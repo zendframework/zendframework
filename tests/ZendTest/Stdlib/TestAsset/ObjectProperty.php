@@ -17,7 +17,7 @@ class ObjectProperty
     public $foo = null;
     public $bar = null;
     public $blubb = null;
-    public $quo = null;
+    protected $quo = null;
 
     public function __construct()
     {

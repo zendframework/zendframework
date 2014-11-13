@@ -25,6 +25,7 @@ abstract class AbstractPlatform implements PlatformInterface
      * @var bool
      */
     protected $quoteIdentifiers = true;
+
     /**
      * Quote identifier in fragment
      *
@@ -34,24 +35,36 @@ abstract class AbstractPlatform implements PlatformInterface
      */
     public function quoteIdentifierInFragment($identifier, array $safeWords = array())
     {
-        if (!$this->quoteIdentifiers) {
+        if (! $this->quoteIdentifiers) {
             return $identifier;
         }
-        $safeRegex = '';
-        $safeWordsInt = array('*'=>1, ' '=>1, '.'=>1, 'as'=>1);
+
+        $safeRegex    = '';
+        $safeWordsInt = array('*' => true, ' ' => true, '.' => true, 'as' => true);
+
         foreach($safeWords as $sWord) {
-            $safeWordsInt[strtolower($sWord)] = 1;
+            $safeWordsInt[strtolower($sWord)] = true;
+
             $safeRegex .= '|' . preg_quote($sWord);
         }
 
-        $parts = preg_split('/([\.\s]' . $safeRegex . ')/i', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        $parts = preg_split(
+            '/([\.\s]' . $safeRegex . ')/i',
+            $identifier,
+            -1,
+            PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY
+        );
 
         $identifier = '';
+
         foreach ($parts as $part) {
             $identifier .= isset($safeWordsInt[strtolower($part)])
                     ? $part
-                    : $this->quoteIdentifier[0] . str_replace($this->quoteIdentifier[0], $this->quoteIdentifierTo, $part) . $this->quoteIdentifier[1];
+                    : $this->quoteIdentifier[0]
+                        . str_replace($this->quoteIdentifier[0], $this->quoteIdentifierTo, $part)
+                        . $this->quoteIdentifier[1];
         }
+
         return $identifier;
     }
 
@@ -63,10 +76,13 @@ abstract class AbstractPlatform implements PlatformInterface
      */
     public function quoteIdentifier($identifier)
     {
-        if (!$this->quoteIdentifiers) {
+        if (! $this->quoteIdentifiers) {
             return $identifier;
         }
-        return $this->quoteIdentifier[0] . str_replace($this->quoteIdentifier[0], $this->quoteIdentifierTo, $identifier) . $this->quoteIdentifier[1];
+
+        return $this->quoteIdentifier[0]
+            . str_replace($this->quoteIdentifier[0], $this->quoteIdentifierTo, $identifier)
+            . $this->quoteIdentifier[1];
     }
 
     /**
@@ -87,14 +103,16 @@ abstract class AbstractPlatform implements PlatformInterface
      */
     public function quoteValueList($valueList)
     {
-        if (!is_array($valueList)) {
+        if (! is_array($valueList)) {
             return $this->quoteValue($valueList);
         }
 
         $value = reset($valueList);
+
         do {
             $valueList[key($valueList)] = $this->quoteValue($value);
         } while ($value = next($valueList));
+
         return implode(', ', $valueList);
     }
 }

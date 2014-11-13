@@ -16,18 +16,23 @@ use Zend\Db\Adapter\Exception;
 class Sqlite extends AbstractPlatform
 {
     /**
-     * @var array
+     * {@inheritDoc}
      */
     protected $quoteIdentifier = array('"','"');
 
     /**
-     * @var string
+     * {@inheritDoc}
      */
     protected $quoteIdentifierTo = '\'';
 
-    /** @var \PDO */
+    /**
+     * @var \PDO
+     */
     protected $resource = null;
 
+    /**
+     * @param null|\Zend\Db\Adapter\Driver\Pdo\Pdo||\PDO $driver
+     */
     public function __construct($driver = null)
     {
         if ($driver) {
@@ -38,7 +43,8 @@ class Sqlite extends AbstractPlatform
     /**
      * @param \Zend\Db\Adapter\Driver\Pdo\Pdo||\PDO $driver
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
-     * @return $this
+     *
+     * @return self
      */
     public function setDriver($driver)
     {
@@ -53,9 +59,7 @@ class Sqlite extends AbstractPlatform
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getName()
     {
@@ -63,10 +67,7 @@ class Sqlite extends AbstractPlatform
     }
 
     /**
-     * Quote identifier chain
-     *
-     * @param string|string[] $identifierChain
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteIdentifierChain($identifierChain)
     {
@@ -78,9 +79,7 @@ class Sqlite extends AbstractPlatform
     }
 
     /**
-     * Get quote value symbol
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getQuoteValueSymbol()
     {
@@ -88,10 +87,7 @@ class Sqlite extends AbstractPlatform
     }
 
     /**
-     * Quote value
-     *
-     * @param  string $value
-     * @return string
+     * {@inheritDoc}
      */
     public function quoteValue($value)
     {
@@ -113,12 +109,7 @@ class Sqlite extends AbstractPlatform
     }
 
     /**
-     * Quote Trusted Value
-     *
-     * The ability to quote values without notices
-     *
-     * @param $value
-     * @return mixed
+     * {@inheritDoc}
      */
     public function quoteTrustedValue($value)
     {
@@ -136,9 +127,7 @@ class Sqlite extends AbstractPlatform
     }
 
     /**
-     * Get identifier separator
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getIdentifierSeparator()
     {

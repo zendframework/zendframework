@@ -54,16 +54,20 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     public function __construct($options = null)
     {
-        if (!class_exists('\Mongo') || !class_exists('\MongoClient')) {
+        if (!class_exists('Mongo') || !class_exists('MongoClient')) {
             throw new Exception\ExtensionNotLoadedException('MongoDB extension not loaded or Mongo polyfill not included');
         }
 
         parent::__construct($options);
 
         $initialized = & $this->initialized;
-        $this->getEventManager()->attach('option', function ($event) use (& $initialized) {
-            $initialized = false;
-        });
+
+        $this->getEventManager()->attach(
+            'option',
+            function () use (& $initialized) {
+                $initialized = false;
+            }
+        );
     }
 
     /**
@@ -73,20 +77,14 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     private function getMongoDBResource()
     {
-        if (!$this->initialized) {
+        if (! $this->initialized) {
             $options = $this->getOptions();
 
             $this->resourceManager = $options->getResourceManager();
             $this->resourceId      = $options->getResourceId();
-
-            $namespace = $options->getNamespace();
-            if ($namespace !== '') {
-                $this->namespacePrefix = $namespace . $options->getNamespaceSeparator();
-            } else {
-                $this->namespacePrefix = '';
-            }
-
-            $this->initialized = true;
+            $namespace             = $options->getNamespace();
+            $this->namespacePrefix = ($namespace === '' ? '' : $namespace . $options->getNamespaceSeparator());
+            $this->initialized     = true;
         }
 
         return $this->resourceManager->getResource($this->resourceId);
@@ -97,11 +95,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     public function setOptions($options)
     {
-        if (!$options instanceof MongoDBOptions) {
-            $options = new MongoDBOptions($options);
-        }
-
-        return parent::setOptions($options);
+        return parent::setOptions($options instanceof MongoDBOptions ? $options : new MongoDBOptions($options));
     }
 
     /**
@@ -121,49 +115,41 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     {
         $result = $this->fetchFromCollection($normalizedKey);
 
-        if ($result == null) {
-            $success = false;
-            return null;
-        }
+        $success = false;
 
-        if ($result['expires'] !== null && $result['expires']->sec < time()) {
-            $success = false;
-            $this->internalRemoveItem($key);
-
+        if (null === $result) {
             return null;
         }
 
         if (isset($result['expires'])) {
-            if (!($result['expires'] instanceof MongoDate)) {
+            if (! $result['expires'] instanceof MongoDate) {
                 throw new Exception\RuntimeException(sprintf(
-                    "The found item _id '%s' for key '%s' is not a valid cache item'
-                    . ': the field 'expired' isn't an instance of MongoDate",
+                    "The found item _id '%s' for key '%s' is not a valid cache item"
+                    . ": the field 'expired' isn't an instance of MongoDate, '%s' found instead",
                     (string) $result['_id'],
-                    $this->namespacePrefix . $normalizedKey
+                    $this->namespacePrefix . $normalizedKey,
+                    is_object($result['expires']) ? get_class($result['expires']) : gettype($result['expires'])
                 ));
             }
+
             if ($result['expires']->sec < time()) {
-                $success = false;
                 $this->internalRemoveItem($key);
+
                 return null;
             }
         }
 
-        if (!array_key_exists('value', $result)) {
+        if (! array_key_exists('value', $result)) {
             throw new Exception\RuntimeException(sprintf(
-                "The found item _id '%s' for key '%s' is not a valid cache item'
-                . ': missing the field 'value'",
+                "The found item _id '%s' for key '%s' is not a valid cache item: missing the field 'value'",
                 (string) $result['_id'],
                 $this->namespacePrefix . $normalizedKey
             ));
         }
 
-        $value = $result['value'];
-
         $success = true;
-        $casToken = $value;
 
-        return $value;
+        return $casToken = $result['value'];
     }
 
     /**
@@ -173,46 +159,30 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     protected function internalSetItem(& $normalizedKey, & $value)
     {
-        $mongo = $this->getMongoDBResource();
-
-        $key = $this->namespacePrefix . $normalizedKey;
-
-        $ttl = $this->getOptions()->getTTl();
-
-        if ($ttl > 0) {
-            $expiresMicro = microtime(true) + $ttl;
-            $expiresSecs = (int) $expiresMicro;
-
-            $expires = new MongoDate($expiresSecs, $expiresMicro - $expiresSecs);
-        } else {
-            $expires = null;
-        }
-
+        $mongo     = $this->getMongoDBResource();
+        $key       = $this->namespacePrefix . $normalizedKey;
+        $ttl       = $this->getOptions()->getTTl();
+        $expires   = null;
         $cacheItem = array(
             'key' => $key,
             'value' => $value,
         );
 
-        if ($expires !== null) {
-            $cacheItem['expires'] = $expires;
+        if ($ttl > 0) {
+            $expiresMicro         = microtime(true) + $ttl;
+            $expiresSecs          = (int) $expiresMicro;
+            $cacheItem['expires'] = new MongoDate($expiresSecs, $expiresMicro - $expiresSecs);
         }
 
         try {
             $mongo->remove(array('key' => $key));
+
             $result = $mongo->insert($cacheItem);
         } catch (MongoResourceException $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
-        if ($result === null) {
-            return false;
-        }
-
-        if ($result['ok'] === (double) 1) {
-            return true;
-        }
-
-        return false;
+        return null !== $result && ((double) 1) === $result['ok'];
     }
 
     /**
@@ -222,27 +192,15 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     protected function internalRemoveItem(& $normalizedKey)
     {
-        $mongo = $this->getMongoDBResource();
-
-        $key = $this->namespacePrefix . $normalizedKey;
-
-        $deleteItem = array('key' => $key);
-
         try {
-            $result = $mongo->remove($deleteItem);
+            $result = $this->getMongoDBResource()->remove(array('key' => $this->namespacePrefix . $normalizedKey));
         } catch (MongoResourceException $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }
 
-        if ($result === false) {
-            return false;
-        }
-
-        if ($result['ok'] === (double) 1 && $result['n'] > 0) {
-            return true;
-        }
-
-        return false;
+        return false !== $result
+            && ((double) 1) === $result['ok']
+            && $result['n'] > 0;
     }
 
     /**
@@ -252,11 +210,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     {
         $result = $this->getMongoDBResource()->drop();
 
-        if ($result['ok'] === (double) 1) {
-            return true;
-        }
-
-        return false;
+        return ((double) 1) === $result['ok'];
     }
 
     /**
@@ -264,37 +218,37 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     protected function internalGetCapabilities()
     {
-        if (! $this->capabilities) {
-            $this->capabilities = new Capabilities(
-                $this,
-                $this->capabilityMarker = new stdClass(),
-                array(
-                    'supportedDatatypes' => array(
-                        'NULL'     => true,
-                        'boolean'  => true,
-                        'integer'  => true,
-                        'double'   => true,
-                        'string'   => true,
-                        'array'    => true,
-                        'object'   => false,
-                        'resource' => false,
-                    ),
-                    'supportedMetadata'  => array(
-                        '_id',
-                    ),
-                    'minTtl'             => 0,
-                    'maxTtl'             => 0,
-                    'staticTtl'          => true,
-                    'ttlPrecision'       => 1,
-                    'useRequestTime'     => false,
-                    'expiredRead'        => false,
-                    'maxKeyLength'       => 255,
-                    'namespaceIsPrefix'  => true,
-                )
-            );
+        if ($this->capabilities) {
+            return $this->capabilities;
         }
 
-        return $this->capabilities;
+        return $this->capabilities = new Capabilities(
+            $this,
+            $this->capabilityMarker = new stdClass(),
+            array(
+                'supportedDatatypes' => array(
+                    'NULL'     => true,
+                    'boolean'  => true,
+                    'integer'  => true,
+                    'double'   => true,
+                    'string'   => true,
+                    'array'    => true,
+                    'object'   => false,
+                    'resource' => false,
+                ),
+                'supportedMetadata'  => array(
+                    '_id',
+                ),
+                'minTtl'             => 0,
+                'maxTtl'             => 0,
+                'staticTtl'          => true,
+                'ttlPrecision'       => 1,
+                'useRequestTime'     => false,
+                'expiredRead'        => false,
+                'maxKeyLength'       => 255,
+                'namespaceIsPrefix'  => true,
+            )
+        );
     }
 
     /**
@@ -306,13 +260,7 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
     {
         $result = $this->fetchFromCollection($normalizedKey);
 
-        if ($result == null) {
-            return false;
-        }
-
-        return array(
-            '_id' => $result['_id'],
-        );
+        return null !== $result ? array('_id' => $result['_id']) : false;
     }
 
     /**
@@ -326,15 +274,8 @@ class MongoDB extends AbstractAdapter implements FlushableInterface
      */
     private function fetchFromCollection(& $normalizedKey)
     {
-        $collection = $this->getMongoDBResource();
-
-        $key = $this->namespacePrefix . $normalizedKey;
-
         try {
-            return $collection->findOne(
-                array('key' => $key)
-            );
-
+            return $this->getMongoDBResource()->findOne(array('key' => $this->namespacePrefix . $normalizedKey));
         } catch (MongoResourceException $e) {
             throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
         }

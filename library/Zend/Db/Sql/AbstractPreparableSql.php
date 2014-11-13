@@ -16,21 +16,24 @@ use Zend\Db\Adapter\ParameterContainer;
 abstract class AbstractPreparableSql extends AbstractSql implements PreparableSqlInterface
 {
     /**
-     * @param AdapterInterface $adapter
-     * @param StatementContainerInterface $statementContainer
+     * {@inheritDoc}
+     *
      * @return StatementContainerInterface
      */
     public function prepareStatement(AdapterInterface $adapter, StatementContainerInterface $statementContainer)
     {
         $parameterContainer = $statementContainer->getParameterContainer();
-        if (!$parameterContainer instanceof ParameterContainer) {
+
+        if (! $parameterContainer instanceof ParameterContainer) {
             $parameterContainer = new ParameterContainer();
+
             $statementContainer->setParameterContainer($parameterContainer);
         }
 
-        $sql = $this->buildSqlString($adapter->getPlatform(), $adapter->getDriver(), $parameterContainer);
+        $statementContainer->setSql(
+            $this->buildSqlString($adapter->getPlatform(), $adapter->getDriver(), $parameterContainer)
+        );
 
-        $statementContainer->setSql($sql);
         return $statementContainer;
     }
 }

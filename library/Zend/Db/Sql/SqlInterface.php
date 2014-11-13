@@ -16,7 +16,7 @@ interface SqlInterface
     /**
      * Get SQL string for statement
      *
-     * @param PlatformInterface $adapterPlatform
+     * @param null|PlatformInterface $adapterPlatform
      *
      * @return string
      */

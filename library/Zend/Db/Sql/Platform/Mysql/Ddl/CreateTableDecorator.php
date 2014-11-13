@@ -18,38 +18,25 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
     /**
      * @var CreateTable
      */
-    protected $createTable;
+    protected $subject;
 
     /**
      * @param CreateTable $subject
      */
     public function setSubject($subject)
     {
-        $this->createTable = $subject;
-    }
-
-    /**
-     * @param  null|PlatformInterface $platform
-     * @return string
-     */
-    public function getSqlString(PlatformInterface $platform = null)
-    {
-        // localize variables
-        foreach (get_object_vars($this->createTable) as $name => $value) {
-            $this->{$name} = $value;
-        }
-        return parent::getSqlString($platform);
+        $this->subject = $subject;
     }
 
     protected function processColumns(PlatformInterface $platform = null)
     {
+        if (!$this->columns) {
+            return null;
+        }
         $sqls = array();
         foreach ($this->columns as $i => $column) {
-            $stmtContainer = $this->processExpression($column, $platform);
-            $sql           = $stmtContainer->getSql();
-            $columnOptions = $column->getOptions();
-
-            foreach ($columnOptions as $coName => $coValue) {
+            $sql           = $this->processExpression($column, $platform);
+            foreach ($column->getOptions() as $coName => $coValue) {
                 switch (strtolower(str_replace(array('-', '_', ' '), '', $coName))) {
                     case 'identity':
                     case 'serial':
@@ -78,8 +65,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
                         break;
                 }
             }
-            $stmtContainer->setSql($sql);
-            $sqls[$i] = $stmtContainer;
+            $sqls[$i] = $sql;
         }
         return array($sqls);
     }

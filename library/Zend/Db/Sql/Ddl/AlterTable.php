@@ -10,7 +10,6 @@
 namespace Zend\Db\Sql\Ddl;
 
 use Zend\Db\Adapter\Platform\PlatformInterface;
-use Zend\Db\Adapter\Platform\Sql92 as AdapterSql92Platform;
 use Zend\Db\Sql\AbstractSql;
 
 class AlterTable extends AbstractSql implements SqlInterface
@@ -55,27 +54,27 @@ class AlterTable extends AbstractSql implements SqlInterface
         self::TABLE => "ALTER TABLE %1\$s\n",
         self::ADD_COLUMNS  => array(
             "%1\$s" => array(
-                array(1 => 'ADD COLUMN %1$s', 'combinedby' => ",\n")
+                array(1 => "ADD COLUMN %1\$s,\n", 'combinedby' => "")
             )
         ),
         self::CHANGE_COLUMNS  => array(
             "%1\$s" => array(
-                array(2 => 'CHANGE COLUMN %1$s %2$s', 'combinedby' => ",\n"),
+                array(2 => "CHANGE COLUMN %1\$s %2\$s,\n", 'combinedby' => ""),
             )
         ),
         self::DROP_COLUMNS  => array(
             "%1\$s" => array(
-                array(1 => 'DROP COLUMN %1$s', 'combinedby' => ",\n"),
+                array(1 => "DROP COLUMN %1\$s,\n", 'combinedby' => ""),
             )
         ),
         self::ADD_CONSTRAINTS  => array(
             "%1\$s" => array(
-                array(1 => 'ADD %1$s', 'combinedby' => ",\n"),
+                array(1 => "ADD %1\$s,\n", 'combinedby' => ""),
             )
         ),
         self::DROP_CONSTRAINTS  => array(
             "%1\$s" => array(
-                array(1 => 'DROP CONSTRAINT %1$s', 'combinedby' => ",\n"),
+                array(1 => "DROP CONSTRAINT %1\$s,\n", 'combinedby' => ""),
             )
         )
     );
@@ -178,36 +177,6 @@ class AlterTable extends AbstractSql implements SqlInterface
         return (isset($key) && array_key_exists($key, $rawState)) ? $rawState[$key] : $rawState;
     }
 
-    /**
-     * @param  PlatformInterface $adapterPlatform
-     * @return string
-     */
-    public function getSqlString(PlatformInterface $adapterPlatform = null)
-    {
-        // get platform, or create default
-        $adapterPlatform = ($adapterPlatform) ?: new AdapterSql92Platform;
-
-        $sqls = array();
-        $parameters = array();
-
-        foreach ($this->specifications as $name => $specification) {
-            $parameters[$name] = $this->{'process' . $name}($adapterPlatform, null, null, $sqls, $parameters);
-            if ($specification && is_array($parameters[$name]) && ($parameters[$name] != array(array()))) {
-                $sqls[$name] = $this->createSqlFromSpecificationAndParameters($specification, $parameters[$name]);
-            }
-            if (stripos($name, 'table') === false && $parameters[$name] !== array(array())) {
-                $sqls[] = ",\n";
-            }
-        }
-
-        // remove last ,\n
-        array_pop($sqls);
-
-        $sql = implode('', $sqls);
-
-        return $sql;
-    }
-
     protected function processTable(PlatformInterface $adapterPlatform = null)
     {
         return array($adapterPlatform->quoteIdentifier($this->table));
@@ -217,7 +186,7 @@ class AlterTable extends AbstractSql implements SqlInterface
     {
         $sqls = array();
         foreach ($this->addColumns as $column) {
-            $sqls[] = $this->processExpression($column, $adapterPlatform)->getSql();
+            $sqls[] = $this->processExpression($column, $adapterPlatform);
         }
 
         return array($sqls);
@@ -229,7 +198,7 @@ class AlterTable extends AbstractSql implements SqlInterface
         foreach ($this->changeColumns as $name => $column) {
             $sqls[] = array(
                 $adapterPlatform->quoteIdentifier($name),
-                $this->processExpression($column, $adapterPlatform)->getSql()
+                $this->processExpression($column, $adapterPlatform)
             );
         }
 

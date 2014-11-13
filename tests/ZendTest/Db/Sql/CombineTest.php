@@ -13,6 +13,7 @@ use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Sql\Combine;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Predicate\Expression;
+use Zend\Db\Adapter\StatementContainer;
 
 class CombineTest extends \PHPUnit_Framework_TestCase
 {
@@ -111,7 +112,7 @@ class CombineTest extends \PHPUnit_Framework_TestCase
 
         $adapter = $this->getMockAdapter();
 
-        $statement = $this->combine->prepareStatement($adapter);
+        $statement = $this->combine->prepareStatement($adapter, new StatementContainer);
         $this->assertInstanceOf('Zend\Db\Adapter\StatementContainerInterface', $statement);
         $this->assertEquals(
             '(SELECT "t1".* FROM "t1" WHERE "x1" = ?) UNION (SELECT "t2".* FROM "t2" WHERE "x2" = ?)',

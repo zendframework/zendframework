@@ -15,6 +15,7 @@ use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Sql\Predicate;
 use Zend\Db\Sql\Select;
 use ZendTest\Db\TestAsset\TrustingSql92Platform;
+use Zend\Db\Adapter\ParameterContainer;
 
 class AbstractSqlTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,42 +25,42 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
      */
     protected $abstractSql = null;
 
+    protected $mockDriver = null;
+
     public function setup()
     {
         $this->abstractSql = $this->getMockForAbstractClass('Zend\Db\Sql\AbstractSql');
+
+        $this->mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $this->mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue(DriverInterface::PARAMETERIZATION_NAMED));
+        $this->mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnCallback(function ($x) {
+            return ':' . $x;
+        }));
     }
 
     /**
      * @covers Zend\Db\Sql\AbstractSql::processExpression
      */
-    public function testProcessExpressionWithoutDriver()
+    public function testProcessExpressionWithoutParameterContainer()
     {
         $expression = new Expression('? > ? AND y < ?', array('x', 5, 10), array(Expression::TYPE_IDENTIFIER));
         $sqlAndParams = $this->invokeProcessExpressionMethod($expression);
 
-        $this->assertEquals("\"x\" > '5' AND y < '10'", $sqlAndParams->getSql());
-        $this->assertInstanceOf('Zend\Db\Adapter\ParameterContainer', $sqlAndParams->getParameterContainer());
-        $this->assertEquals(0, $sqlAndParams->getParameterContainer()->count());
+        $this->assertEquals("\"x\" > '5' AND y < '10'", $sqlAndParams);
     }
 
     /**
      * @covers Zend\Db\Sql\AbstractSql::processExpression
      */
-    public function testProcessExpressionWithDriverAndParameterizationTypeNamed()
+    public function testProcessExpressionWithParameterContainerAndParameterizationTypeNamed()
     {
-        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
-        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue(DriverInterface::PARAMETERIZATION_NAMED));
-        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnCallback(function ($x) {
-            return ':' . $x;
-        }));
-
+        $parameterContainer = new ParameterContainer;
         $expression = new Expression('? > ? AND y < ?', array('x', 5, 10), array(Expression::TYPE_IDENTIFIER));
-        $sqlAndParams = $this->invokeProcessExpressionMethod($expression, $mockDriver);
+        $sqlAndParams = $this->invokeProcessExpressionMethod($expression, $parameterContainer);
 
-        $parameterContainer = $sqlAndParams->getParameterContainer();
         $parameters = $parameterContainer->getNamedArray();
 
-        $this->assertRegExp('#"x" > :expr\d\d\d\dParam1 AND y < :expr\d\d\d\dParam2#', $sqlAndParams->getSql());
+        $this->assertRegExp('#"x" > :expr\d\d\d\dParam1 AND y < :expr\d\d\d\dParam2#', $sqlAndParams);
 
         // test keys and values
         preg_match('#expr(\d\d\d\d)Param1#', key($parameters), $matches);
@@ -72,9 +73,9 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, current($parameters));
 
         // ensure next invocation increases number by 1
-        $sqlAndParamsNext = $this->invokeProcessExpressionMethod($expression, $mockDriver);
+        $parameterContainer = new ParameterContainer;
+        $sqlAndParamsNext = $this->invokeProcessExpressionMethod($expression, $parameterContainer);
 
-        $parameterContainer = $sqlAndParamsNext->getParameterContainer();
         $parameters = $parameterContainer->getNamedArray();
 
         preg_match('#expr(\d\d\d\d)Param1#', key($parameters), $matches);
@@ -93,8 +94,7 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $predicateSet = new Predicate\PredicateSet(array(new Predicate\PredicateSet(array($expression))));
         $sqlAndParams = $this->invokeProcessExpressionMethod($predicateSet);
 
-        $this->assertEquals("(x = '5')", $sqlAndParams->getSql());
-        $this->assertEquals(0, $sqlAndParams->getParameterContainer()->count());
+        $this->assertEquals("(x = '5')", $sqlAndParams);
     }
 
     /**
@@ -109,8 +109,7 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $predicateSet = new Predicate\PredicateSet(array(new Predicate\PredicateSet(array($expression))));
         $sqlAndParams = $this->invokeProcessExpressionMethod($predicateSet);
 
-        $this->assertEquals('("x" IN (SELECT "x".* FROM "x" WHERE "bar" LIKE \'Foo%\'))', $sqlAndParams->getSql());
-        $this->assertEquals(0, $sqlAndParams->getParameterContainer()->count());
+        $this->assertEquals('("x" IN (SELECT "x".* FROM "x" WHERE "bar" LIKE \'Foo%\'))', $sqlAndParams);
     }
 
     public function testProcessExpressionWorksWithExpressionContainingExpressionObject()
@@ -122,7 +121,7 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         );
 
         $sqlAndParams = $this->invokeProcessExpressionMethod($expression);
-        $this->assertEquals('"release_date" = FROM_UNIXTIME(\'100000000\')', $sqlAndParams->getSql());
+        $this->assertEquals('"release_date" = FROM_UNIXTIME(\'100000000\')', $sqlAndParams);
     }
 
     /**
@@ -130,11 +129,11 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
      * @param \Zend\Db\Adapter\Adapter|null $adapter
      * @return \Zend\Db\Adapter\StatementContainer
      */
-    protected function invokeProcessExpressionMethod(ExpressionInterface $expression, $driver = null)
+    protected function invokeProcessExpressionMethod(ExpressionInterface $expression, $parameterContainer = null)
     {
         $method = new \ReflectionMethod($this->abstractSql, 'processExpression');
         $method->setAccessible(true);
-        return $method->invoke($this->abstractSql, $expression, new TrustingSql92Platform, $driver);
+        return $method->invoke($this->abstractSql, $expression, new TrustingSql92Platform, $this->mockDriver, $parameterContainer);
     }
 
 }

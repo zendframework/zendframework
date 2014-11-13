@@ -222,4 +222,9 @@ class DeleteIgnore extends Delete
         self::SPECIFICATION_DELETE => 'DELETE IGNORE FROM %1$s',
         self::SPECIFICATION_WHERE  => 'WHERE %1$s',
     );
+
+    protected function processdeleteIgnore(\Zend\Db\Adapter\Platform\PlatformInterface $platform, \Zend\Db\Adapter\Driver\DriverInterface $driver = null, \Zend\Db\Adapter\ParameterContainer $parameterContainer = null)
+    {
+        return parent::processDelete($platform, $driver, $parameterContainer);
+    }
 }

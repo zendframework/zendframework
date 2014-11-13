@@ -7,18 +7,17 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Db\Sql;
+namespace ZendTest\Db\TestAsset;
 
-use Zend\Db\Adapter\Platform\PlatformInterface;
+use Zend\Db\Sql;
 
-interface SqlInterface
+class InsertDecorator extends Sql\Insert implements Sql\Platform\PlatformDecoratorInterface
 {
-    /**
-     * Get SQL string for statement
-     *
-     * @param null|PlatformInterface $adapterPlatform
-     *
-     * @return string
-     */
-    public function getSqlString(PlatformInterface $adapterPlatform = null);
+    protected $subject = null;
+
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
+        return $this;
+    }
 }

@@ -63,11 +63,7 @@ class Postgresql extends AbstractPlatform
      */
     public function quoteIdentifierChain($identifierChain)
     {
-        $identifierChain = str_replace('"', '\\"', $identifierChain);
-        if (is_array($identifierChain)) {
-            $identifierChain = implode('"."', $identifierChain);
-        }
-        return '"' . $identifierChain . '"';
+        return '"' . implode('"."', (array) str_replace('"', '\\"', $identifierChain)) . '"';
     }
 
     /**

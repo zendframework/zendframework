@@ -17,7 +17,8 @@ class ObjectProperty
     public $foo = null;
     public $bar = null;
     public $blubb = null;
-    protected $quo = null;
+    public $quo = null;
+    protected $quin = null;
 
     public function __construct()
     {
@@ -25,6 +26,7 @@ class ObjectProperty
         $this->bar = "foo";
         $this->blubb = "baz";
         $this->quo = "blubb";
+        $this->quin = 'five';
     }
 
 }

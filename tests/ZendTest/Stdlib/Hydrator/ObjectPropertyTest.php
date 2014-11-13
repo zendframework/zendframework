@@ -35,18 +35,20 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException BadMethodCallException
+     * Verify that we get an exception when trying to extract on a non-object
      */
     public function testHydratorExtractException()
     {
+        $this->setExpectedException('BadMethodCallException');
         $this->hydrator->extract('thisIsNotAnObject');
     }
 
     /**
-     * @expectedException BadMethodCallException
+     * Verify that we get an exception when trying to hydrate a non-object
      */
     public function testHydratorHydrateException()
     {
+        $this->setExpectedException('BadMethodCallException');
         $this->hydrator->hydrate(array('some' => 'data'), 'thisIsNotAnObject');
     }
 
@@ -117,7 +119,8 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
                 'foo' => 'foo',
                 'bar' => 'bar',
                 'blubb' => 'blubb',
-                'quo' => 'quo'
+                'quo' => 'quo',
+                'quin' => 'quin'
             ),
             $object
         );
@@ -125,8 +128,8 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeContains('foo', 'foo', $object);
         $this->assertAttributeContains('bar', 'bar', $object);
         $this->assertAttributeContains('blubb', 'blubb', $object);
-        $this->assertAttributeNotContains('quo', 'quo', $object);
-        $this->assertAttributeNotContains('blubb', 'quo', $object);
+        $this->assertAttributeContains('quo', 'quo', $object);
+        $this->assertAttributeNotContains('quin', 'quin', $object);
     }
 
     /**

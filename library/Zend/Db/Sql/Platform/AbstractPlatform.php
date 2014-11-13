@@ -30,16 +30,21 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
 
     /**
      * @param $subject
+     *
+     * @return self
      */
     public function setSubject($subject)
     {
         $this->subject = $subject;
+
         return $this;
     }
 
     /**
-     * @param $type
+     * @param string                     $type
      * @param PlatformDecoratorInterface $decorator
+     *
+     * @return void
      */
     public function setTypeDecorator($type, PlatformDecoratorInterface $decorator)
     {

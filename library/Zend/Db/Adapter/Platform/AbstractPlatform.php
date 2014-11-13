@@ -59,10 +59,10 @@ abstract class AbstractPlatform implements PlatformInterface
 
         foreach ($parts as $part) {
             $identifier .= isset($safeWordsInt[strtolower($part)])
-                    ? $part
-                    : $this->quoteIdentifier[0]
-                        . str_replace($this->quoteIdentifier[0], $this->quoteIdentifierTo, $part)
-                        . $this->quoteIdentifier[1];
+                ? $part
+                : $this->quoteIdentifier[0]
+                . str_replace($this->quoteIdentifier[0], $this->quoteIdentifierTo, $part)
+                . $this->quoteIdentifier[1];
         }
 
         return $identifier;

@@ -3,17 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace ZendTest\Di;
 
 use Zend\Di\Config;
-use Zend\Di\Definition;
-use Zend\Di\DefinitionList;
 use Zend\Di\Di;
-use Zend\Di\InstanceManager;
 
 class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
 {
@@ -105,8 +102,8 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
     {
         $serviceManager = new \Zend\ServiceManager\ServiceManager;
         $serviceManager->setService('EventManager', new \Zend\EventManager\EventManager);
-        $serviceManager->setService('Request', new \StdClass);
-        $serviceManager->setService('Response', new \StdClass);
+        $serviceManager->setService('Request', new \stdClass);
+        $serviceManager->setService('Response', new \stdClass);
 
         return array(
             array('Zend\Config\Config', array('array' => array())),

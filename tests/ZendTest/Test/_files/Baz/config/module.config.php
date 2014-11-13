@@ -48,6 +48,16 @@ return array(
                     ),
                 ),
             ),
+            'persistence' => array(
+                'type' => 'literal',
+                'options' => array(
+                    'route'    => '/tests-persistence',
+                    'defaults' => array(
+                        'controller' => 'baz_index',
+                        'action'     => 'persistencetest',
+                    ),
+                ),
+            ),
             'exception' => array(
                 'type' => 'literal',
                 'options' => array(
@@ -78,6 +88,16 @@ return array(
                     'defaults' => array(
                         'controller' => 'baz_index',
                         'action'     => 'unittests',
+                    ),
+                ),
+            ),
+            'custom-response' => array(
+                'type' => 'literal',
+                'options' => array(
+                    'route'    => '/custom-response',
+                    'defaults' => array(
+                        'controller' => 'baz_index',
+                        'action'     => 'custom-response',
                     ),
                 ),
             ),

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -91,14 +91,19 @@ class Barcode extends AbstractValidator
                 throw new Exception\InvalidArgumentException('Barcode adapter matching "' . $adapter . '" not found');
             }
 
-            $this->options['adapter'] = new $adapter($options);
+            $adapter = new $adapter($options);
         }
 
-        if (!$this->options['adapter'] instanceof Barcode\AdapterInterface) {
+        if (!$adapter instanceof Barcode\AdapterInterface) {
             throw new Exception\InvalidArgumentException(
-                "Adapter $adapter does not implement Zend\\Validate\\Barcode\\AdapterInterface"
+                sprintf(
+                    "Adapter %s does not implement Zend\\Validator\\Barcode\\AdapterInterface",
+                    (is_object($adapter) ? get_class($adapter) : gettype($adapter))
+                )
             );
         }
+
+        $this->options['adapter'] = $adapter;
 
         return $this;
     }

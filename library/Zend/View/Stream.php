@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -155,7 +155,7 @@ class Stream
         switch ($whence) {
             case SEEK_SET:
                 if ($offset < strlen($this->data) && $offset >= 0) {
-                $this->pos = $offset;
+                    $this->pos = $offset;
                     return true;
                 } else {
                     return false;

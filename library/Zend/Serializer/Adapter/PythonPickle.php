@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -449,7 +449,7 @@ class PythonPickle extends AbstractAdapter
     }
 
     /**
-     * Write an object as an dictionary
+     * Write an object as a dictionary
      *
      * @param  object $value
      */
@@ -466,7 +466,7 @@ class PythonPickle extends AbstractAdapter
             $this->writeArrayDict($value->toArray());
 
         // If the object is an iterator simply iterate it
-        // and convert it to an dictionary
+        // and convert it to a dictionary
         } elseif ($value instanceof Traversable) {
             $this->writeArrayDict($value);
 

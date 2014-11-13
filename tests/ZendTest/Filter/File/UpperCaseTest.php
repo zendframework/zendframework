@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter\File;
@@ -13,9 +12,6 @@ namespace ZendTest\Filter\File;
 use Zend\Filter\File\UpperCase as FileUpperCase;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class UpperCaseTest extends \PHPUnit_Framework_TestCase
@@ -130,5 +126,29 @@ class UpperCaseTest extends \PHPUnit_Framework_TestCase
         } catch (\Zend\Filter\Exception\ExtensionNotLoadedException $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                $this->_newFile,
+                'something invalid'
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new FileUpperCase();
+        $filter->setEncoding('ISO-8859-1');
+
+        $this->assertEquals($input, $filter($input));
     }
 }

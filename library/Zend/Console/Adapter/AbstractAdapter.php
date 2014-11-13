@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -53,6 +53,9 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function write($text, $color = null, $bgColor = null)
     {
+        //Encode text to match console encoding
+        $text = $this->encodeText($text);
+
         if ($color !== null || $bgColor !== null) {
             echo $this->colorize($text, $color, $bgColor);
         } else {
@@ -241,7 +244,6 @@ abstract class AbstractAdapter implements AdapterInterface
             }
         }
 
-
         // Draw corners
         if ($lineStyle !== static::LINE_NONE) {
             if ($color !== null) {
@@ -285,6 +287,7 @@ abstract class AbstractAdapter implements AdapterInterface
      * @param int      $y       Block Y coordinate (row)
      * @param null|int $color   (optional) Text color
      * @param null|int $bgColor (optional) Text background color
+     * @throws Exception\InvalidArgumentException
      */
     public function writeTextBlock(
         $text,
@@ -295,6 +298,43 @@ abstract class AbstractAdapter implements AdapterInterface
         $color = null,
         $bgColor = null
     ) {
+        if ($x < 0 || $y < 0) {
+            throw new Exception\InvalidArgumentException('Supplied X,Y coordinates are invalid.');
+        }
+
+        if ($width < 1) {
+            throw new Exception\InvalidArgumentException('Invalid width supplied.');
+        }
+
+        if (null !== $height && $height < 1) {
+            throw new Exception\InvalidArgumentException('Invalid height supplied.');
+        }
+
+        // ensure the text is not wider than the width
+        if (strlen($text) <= $width) {
+            // just write the line at the spec'd position
+            $this->setPos($x, $y);
+            $this->write($text, $color, $bgColor);
+            return;
+        }
+
+        $text = wordwrap($text, $width, PHP_EOL, true);
+
+        // convert to array of lines
+        $lines = explode(PHP_EOL, $text);
+
+        // truncate if height was specified
+        if (null !== $height && count($lines) > $height) {
+            $lines = array_slice($lines, 0, $height);
+        }
+
+        // write each line
+        $curY = $y;
+        foreach ($lines as $line) {
+            $this->setPos($x, $curY);
+            $this->write($line, $color, $bgColor);
+            $curY++;//next line
+        }
     }
 
     /**
@@ -320,7 +360,7 @@ abstract class AbstractAdapter implements AdapterInterface
     /**
      * Determine and return current console width and height.
      *
-     * @return array array($width, $height)
+     * @return int[] array($width, $height)
      */
     public function getSize()
     {
@@ -476,10 +516,10 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function readLine($maxLength = 2048)
     {
-        $f    = fopen('php://stdin','r');
+        $f    = fopen('php://stdin', 'r');
         $line = stream_get_line($f, $maxLength, PHP_EOL);
         fclose($f);
-        return rtrim($line,"\n\r");
+        return rtrim($line, "\n\r");
     }
 
     /**
@@ -490,11 +530,34 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     public function readChar($mask = null)
     {
-        $f = fopen('php://stdin','r');
+        $f = fopen('php://stdin', 'r');
         do {
-            $char = fread($f,1);
+            $char = fread($f, 1);
         } while ("" === $char || ($mask !== null && false === strstr($mask, $char)));
         fclose($f);
         return $char;
+    }
+
+    /**
+     * Encode a text to match console encoding
+     *
+     * @param  string $text
+     * @return string the encoding text
+     */
+    public function encodeText($text)
+    {
+        if ($this->isUtf8()) {
+            if (StringUtils::isValidUtf8($text)) {
+                return $text;
+            }
+
+            return utf8_encode($text);
+        }
+
+        if (StringUtils::isValidUtf8($text)) {
+            return utf8_decode($text);
+        }
+
+        return $text;
     }
 }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -67,11 +67,12 @@ class Xml implements ReaderInterface
 
         set_error_handler(
             function ($error, $message = '', $file = '', $line = 0) use ($filename) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Error reading XML file "%s": %s',
-                    $filename, $message
-                ), $error);
-            }, E_WARNING
+                throw new Exception\RuntimeException(
+                    sprintf('Error reading XML file "%s": %s', $filename, $message),
+                    $error
+                );
+            },
+            E_WARNING
         );
         $return = $this->process();
         restore_error_handler();
@@ -100,11 +101,12 @@ class Xml implements ReaderInterface
 
         set_error_handler(
             function ($error, $message = '', $file = '', $line = 0) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Error reading XML string: %s',
-                    $message
-                ), $error);
-            }, E_WARNING
+                throw new Exception\RuntimeException(
+                    sprintf('Error reading XML string: %s', $message),
+                    $error
+                );
+            },
+            E_WARNING
         );
         $return = $this->process();
         restore_error_handler();

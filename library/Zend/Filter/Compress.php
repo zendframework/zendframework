@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -51,7 +51,7 @@ class Compress extends AbstractFilter
      *
      * @param  array $options
      * @throws Exception\InvalidArgumentException if options is not an array or Traversable
-     * @return Compress
+     * @return self
      */
     public function setOptions($options)
     {
@@ -122,7 +122,7 @@ class Compress extends AbstractFilter
      * Sets compression adapter
      *
      * @param  string|Compress\CompressionAlgorithmInterface $adapter Adapter to use
-     * @return Compress
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setAdapter($adapter)
@@ -153,7 +153,7 @@ class Compress extends AbstractFilter
      * Set adapter options
      *
      * @param  array $options
-     * @return Compress
+     * @return self
      */
     public function setAdapterOptions(array $options)
     {
@@ -201,6 +201,10 @@ class Compress extends AbstractFilter
      */
     public function filter($value)
     {
+        if (!is_string($value)) {
+            return $value;
+        }
+
         return $this->getAdapter()->compress($value);
     }
 }

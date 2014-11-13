@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
  */
 
 namespace ZendTest\Json\Server;
@@ -18,25 +17,22 @@ use Zend\Json\Server\Request;
 use Zend\Json\Server\Response;
 
 /**
- * @category   Zend
- * @package    Zend_Json
- * @subpackage UnitTests
  * @group      Zend_XmlRpc
  */
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend\Http\Client\Adapter\Test
+     * @var TestAdapter
      */
     protected $httpAdapter;
 
     /**
-     * @var Zend\Http\Client
+     * @var HttpClient
      */
     protected $httpClient;
 
     /**
-     * @var Zend\Json\Server\Client
+     * @var Client
      */
     protected $jsonClient;
 
@@ -69,7 +65,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->httpClient, $jsonClient->getHttpClient());
     }
 
-    public function testSettingHttpClientViaContructor()
+    public function testSettingHttpClientViaConstructor()
     {
         $jsonClient = new Client('http://foo', $this->httpClient);
         $httpClient   = $jsonClient->getHttpClient();
@@ -219,6 +215,17 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->setServerResponseTo(null);
         $this->assertNull($this->jsonClient->call('method'));
         $this->assertSame($expectedUserAgent, $this->httpClient->getHeader('User-Agent'));
+    }
+
+    /**
+     * @group 5956
+     */
+    public function testScalarServerResponseThrowsException()
+    {
+        $response = $this->makeHttpResponseFrom('false');
+        $this->httpAdapter->setResponse($response);
+        $this->setExpectedException('Zend\Json\Exception\ExceptionInterface');
+        $this->jsonClient->call('foo');
     }
 
     // Helpers

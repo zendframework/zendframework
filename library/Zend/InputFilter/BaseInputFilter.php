@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -18,7 +18,11 @@ use Zend\Stdlib\InitializableInterface;
  * @todo       How should we deal with required input when data is missing?
  *             should a message be returned? if so, what message?
  */
-class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInterface, InitializableInterface
+class BaseInputFilter implements
+    InputFilterInterface,
+    UnknownInputsCapableInterface,
+    InitializableInterface,
+    ReplaceableInputInterface
 {
     protected $data;
     protected $inputs = array();
@@ -73,9 +77,43 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
         }
 
         if (isset($this->inputs[$name]) && $this->inputs[$name] instanceof InputInterface) {
-            // The element already exists, so merge the config. Please note that the order is important (already existing
-            // input is merged with the parameter given)
-            $input->merge($this->inputs[$name]);
+            // The element already exists, so merge the config. Please note
+            // that this merges the new input into the original.
+            $original = $this->inputs[$name];
+            $original->merge($input);
+            return $this;
+        }
+
+        $this->inputs[$name] = $input;
+        return $this;
+    }
+
+    /**
+     * Replace a named input
+     *
+     * @param  InputInterface|InputFilterInterface $input
+     * @param  string                              $name Name of the input to replace
+     * @throws Exception\InvalidArgumentException
+     * @return self
+     */
+    public function replace($input, $name)
+    {
+        if (!$input instanceof InputInterface && !$input instanceof InputFilterInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an instance of %s or %s as its first argument; received "%s"',
+                __METHOD__,
+                'Zend\InputFilter\InputInterface',
+                'Zend\InputFilter\InputFilterInterface',
+                (is_object($input) ? get_class($input) : gettype($input))
+            ));
+        }
+
+        if (!array_key_exists($name, $this->inputs)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: no input found matching "%s"',
+                __METHOD__,
+                $name
+            ));
         }
 
         $this->inputs[$name] = $input;
@@ -156,7 +194,8 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
      */
     public function isValid()
     {
-        if (null === $this->data) {
+        $data = $this->getRawValues();
+        if (null === $data) {
             throw new Exception\RuntimeException(sprintf(
                 '%s: no data present to validate!',
                 __METHOD__
@@ -164,24 +203,30 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
         }
 
         $inputs = $this->validationGroup ?: array_keys($this->inputs);
-        return $this->validateInputs($inputs);
+        return $this->validateInputs($inputs, $data);
     }
 
     /**
      * Validate a set of inputs against the current data
      *
-     * @param array $inputs
+     * @param  array $inputs
+     * @param  array $data
      * @return bool
      */
-    protected function validateInputs(array $inputs)
+    protected function validateInputs(array $inputs, array $data = array())
     {
+        // backwards compatibility
+        if (empty($data)) {
+            $data = $this->getRawValues();
+        }
+
         $this->validInputs   = array();
         $this->invalidInputs = array();
         $valid               = true;
 
         foreach ($inputs as $name) {
             $input      = $this->inputs[$name];
-            $dataExists = array_key_exists($name, $this->data);
+            $dataExists = array_key_exists($name, $data);
 
             // key doesn't exist, but input is not required; valid
             if (!$dataExists
@@ -200,7 +245,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
                 && $input->isRequired()
                 && $input->allowEmpty()
             ) {
-                if(!($input instanceOf EmptyContextInterface && $input->continueIfEmpty())) {
+                if (!($input instanceOf EmptyContextInterface && $input->continueIfEmpty())) {
                     $this->validInputs[$name] = $input;
                     continue;
                 }
@@ -208,7 +253,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
 
             // key exists, is null, input is not required; valid
             if ($dataExists
-                && null === $this->data[$name]
+                && null === $data[$name]
                 && $input instanceof InputInterface
                 && !$input->isRequired()
             ) {
@@ -220,7 +265,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
             // continueIfEmpty is false or input doesn't implement
             // that interface; otherwise validation chain continues
             if ($dataExists
-                && null === $this->data[$name]
+                && null === $data[$name]
                 && $input instanceof InputInterface
                 && $input->isRequired()
                 && $input->allowEmpty()
@@ -233,9 +278,10 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
 
             // key exists, empty string, input is not required, allows empty; valid
             if ($dataExists
-                && '' === $this->data[$name]
+                && '' === $data[$name]
                 && $input instanceof InputInterface
                 && !$input->isRequired()
+                && $input->allowEmpty()
             ) {
                 $this->validInputs[$name] = $input;
                 continue;
@@ -244,7 +290,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
             // key exists, empty string, input is required, allows empty; valid
             // if continueIfEmpty is false, otherwise validation continues
             if ($dataExists
-                && '' === $this->data[$name]
+                && '' === $data[$name]
                 && $input instanceof InputInterface
                 && $input->isRequired()
                 && $input->allowEmpty()
@@ -258,15 +304,15 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
             // key exists, is array representing file, no file present, input not
             // required or allows empty; valid
             if ($dataExists
-                && is_array($this->data[$name])
+                && is_array($data[$name])
                 && (
-                    (isset($this->data[$name]['error'])
-                        && $this->data[$name]['error'] === UPLOAD_ERR_NO_FILE)
-                    || (count($this->data[$name]) === 1
-                        && isset($this->data[$name][0])
-                        && is_array($this->data[$name][0])
-                        && isset($this->data[$name][0]['error'])
-                        && $this->data[$name][0]['error'] === UPLOAD_ERR_NO_FILE)
+                    (isset($data[$name]['error'])
+                        && $data[$name]['error'] === UPLOAD_ERR_NO_FILE)
+                    || (count($data[$name]) === 1
+                        && isset($data[$name][0])
+                        && is_array($data[$name][0])
+                        && isset($data[$name][0]['error'])
+                        && $data[$name][0]['error'] === UPLOAD_ERR_NO_FILE)
                 )
                 && $input instanceof InputInterface
                 && (!$input->isRequired() || $input->allowEmpty())
@@ -277,7 +323,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
 
             // make sure we have a value (empty) for validation
             if (!$dataExists) {
-                $this->data[$name] = null;
+                $data[$name] = null;
             }
 
             // Validate an input filter
@@ -293,7 +339,7 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
 
             // Validate an input
             if ($input instanceof InputInterface) {
-                if (!$input->isValid($this->data)) {
+                if (!$input->isValid($data)) {
                     // Validation failure
                     $this->invalidInputs[$name] = $input;
                     $valid = false;
@@ -323,12 +369,18 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
      * each specifying a single input.
      *
      * @param  mixed $name
+     * @throws Exception\InvalidArgumentException
      * @return InputFilterInterface
      */
     public function setValidationGroup($name)
     {
         if ($name === self::VALIDATE_ALL) {
             $this->validationGroup = null;
+            foreach($this->getInputs() as $input) {
+                if ($input instanceof InputFilterInterface) {
+                    $input->setValidationGroup(self::VALIDATE_ALL);
+                }
+            }
             return $this;
         }
 
@@ -340,6 +392,14 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
                 } else {
                     $inputs[] = $key;
 
+                    if (!$this->inputs[$key] instanceof InputFilterInterface) {
+                        throw new Exception\InvalidArgumentException(
+                            sprintf(
+                                'Input "%s" must implement InputFilterInterface',
+                                $key
+                            )
+                        );
+                    }
                     // Recursively populate validation groups for sub input filters
                     $this->inputs[$key]->setValidationGroup($value);
                 }
@@ -403,6 +463,11 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
             ));
         }
         $input = $this->inputs[$name];
+
+        if ($input instanceof InputFilterInterface) {
+            return $input->getValues();
+        }
+
         return $input->getValue();
     }
 
@@ -518,10 +583,20 @@ class BaseInputFilter implements InputFilterInterface, UnknownInputsCapableInter
         foreach (array_keys($this->inputs) as $name) {
             $input = $this->inputs[$name];
 
+            if ($input instanceof CollectionInputFilter) {
+                $input->clearValues();
+                $input->clearRawValues();
+            }
+
             if (!isset($this->data[$name])) {
                 // No value; clear value in this input
                 if ($input instanceof InputFilterInterface) {
                     $input->setData(array());
+                    continue;
+                }
+
+                if ($input instanceof ArrayInput) {
+                    $input->setValue(array());
                     continue;
                 }
 

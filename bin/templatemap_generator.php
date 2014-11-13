@@ -4,7 +4,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -177,8 +177,8 @@ foreach ($l as $file) {
 
     // Add in relative path to library
     $filename = $relativePathForMap . $filename;
-    $baseName =  $file->getBasename('.' . $file->getExtension());
-    $mapName  = str_replace($libraryPath . '/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()) . '/' . $baseName);
+    $baseName = $file->getBasename('.' . pathinfo($file->getFilename(), PATHINFO_EXTENSION));
+    $mapName  = str_replace(str_replace(DIRECTORY_SEPARATOR, '/', realpath($viewPath)) . '/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()) . '/' . $baseName);
     $map->{$mapName} = $filename;
 }
 

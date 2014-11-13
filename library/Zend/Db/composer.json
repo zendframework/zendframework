@@ -6,6 +6,7 @@
         "zf2",
         "db"
     ],
+    "homepage": "https://github.com/zendframework/zf2",
     "autoload": {
         "psr-0": {
             "Zend\\Db\\": ""
@@ -13,15 +14,22 @@
     },
     "target-dir": "Zend/Db",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.23"
+    },
+    "require-dev": {
+        "zendframework/zend-eventmanager": "self.version",
+        "zendframework/zend-servicemanager": "self.version",
+        "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
-        "zendframework/zend-stdlib": "self.version"
+        "zendframework/zend-eventmanager": "Zend\\EventManager component",
+        "zendframework/zend-servicemanager": "Zend\\ServiceManager component",
+        "zendframework/zend-stdlib": "Zend\\Stdlib component"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev",
-            "dev-develop": "2.3-dev"
+            "dev-master": "2.3-dev",
+            "dev-develop": "2.4-dev"
         }
     }
 }

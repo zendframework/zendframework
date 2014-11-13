@@ -3,20 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter;
 
-use DateTime;
 use Zend\Filter\DateTimeFormatter;
+use DateTime;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
@@ -33,20 +29,31 @@ class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
         date_default_timezone_set($this->defaultTimezone);
     }
 
-    public function testFormatterDoesNotFormatAnEmptyString()
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(''),
+            array(new \stdClass()),
+            array(array(
+                '1',
+                -1
+            )),
+            array(0.53)
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
     {
         date_default_timezone_set('UTC');
 
         $filter = new DateTimeFormatter();
-        $result = $filter->filter('');
-        $this->assertEquals('', $result);
-    }
 
-    public function testFormatterDoesNotFormatNull()
-    {
-        $filter = new DateTimeFormatter();
-        $result = $filter->filter(null);
-        $this->assertEquals(null, $result);
+        $this->assertEquals($input, $filter($input));
     }
 
     public function testFormatterFormatsZero()

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper;
@@ -17,18 +16,25 @@ use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\SimpleRouteStack as Router;
 
 /**
- * Zend_View_Helper_UrlTest
+ * Zend\View\Helper\Url Test
  *
  * Tests formText helper, including some common functionality of all form helpers
  *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 class UrlTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Router
+     */
+    private $router;
+
+    /**
+     * @var UrlHelper
+     */
+    private $url;
+
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -92,14 +98,14 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     public function testPluginWithoutRouteMatchesInEventRaisesExceptionWhenNoRouteProvided()
     {
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'RouteMatch');
-        $url = $this->url->__invoke();
+        $this->url->__invoke();
     }
 
     public function testPluginWithRouteMatchesReturningNoMatchedRouteNameRaisesExceptionWhenNoRouteProvided()
     {
         $this->url->setRouteMatch(new RouteMatch(array()));
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'matched');
-        $url = $this->url->__invoke();
+        $this->url->__invoke();
     }
 
     public function testPassingNoArgumentsWithValidRouteMatchGeneratesUrl()

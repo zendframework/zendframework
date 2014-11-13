@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -51,7 +51,7 @@ class RenameUpload extends AbstractFilter
 
     /**
      * @param  string $target Target file path or directory
-     * @return RenameUpload
+     * @return self
      */
     public function setTarget($target)
     {
@@ -76,7 +76,7 @@ class RenameUpload extends AbstractFilter
      * @param  bool $flag When true, this filter will use the $_FILES['name']
      *                       as the target filename.
      *                       Otherwise, it uses the default 'target' rules.
-     * @return RenameUpload
+     * @return self
      */
     public function setUseUploadName($flag = true)
     {
@@ -95,7 +95,7 @@ class RenameUpload extends AbstractFilter
     /**
      * @param  bool $flag When true, this filter will use the original file
      *                    extension for the target filename
-     * @return RenameUpload
+     * @return self
      */
     public function setUseUploadExtension($flag = true)
     {
@@ -113,7 +113,7 @@ class RenameUpload extends AbstractFilter
 
     /**
      * @param  bool $flag Shall existing files be overwritten?
-     * @return RenameUpload
+     * @return self
      */
     public function setOverwrite($flag = true)
     {
@@ -131,7 +131,7 @@ class RenameUpload extends AbstractFilter
 
     /**
      * @param  bool $flag Shall target files have a random postfix attached?
-     * @return RenameUpload
+     * @return self
      */
     public function setRandomize($flag = true)
     {
@@ -159,12 +159,21 @@ class RenameUpload extends AbstractFilter
      */
     public function filter($value)
     {
+        if (!is_scalar($value) && !is_array($value)) {
+            return $value;
+        }
+
         // An uploaded file? Retrieve the 'tmp_name'
-        $isFileUpload = (is_array($value) && isset($value['tmp_name']));
-        if ($isFileUpload) {
+        $isFileUpload = false;
+        if (is_array($value)) {
+            if (!isset($value['tmp_name'])) {
+                return $value;
+            }
+
+            $isFileUpload = true;
             $uploadData = $value;
             $sourceFile = $value['tmp_name'];
-        } else {
+        } else{
             $uploadData = array(
                 'tmp_name' => $value,
                 'name'     => $value,
@@ -198,7 +207,7 @@ class RenameUpload extends AbstractFilter
     /**
      * @param  string $sourceFile Source file path
      * @param  string $targetFile Target file path
-     * @throws \Zend\Filter\Exception\RuntimeException
+     * @throws Exception\RuntimeException
      * @return bool
      */
     protected function moveUploadedFile($sourceFile, $targetFile)
@@ -218,7 +227,7 @@ class RenameUpload extends AbstractFilter
 
     /**
      * @param  string $targetFile Target file path
-     * @throws \Zend\Filter\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     protected function checkFileExists($targetFile)
     {
@@ -281,6 +290,7 @@ class RenameUpload extends AbstractFilter
     }
 
     /**
+     * @param  string $source
      * @param  string $filename
      * @return string
      */

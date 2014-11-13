@@ -3,26 +3,23 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
-
 namespace ZendTest\Filter;
 
 use Zend\Filter\PregReplace as PregReplaceFilter;
 
 /**
- * Test class for Zend_Filter_PregReplace.
+ * Test class for Zend\Filter\PregReplace.
  *
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
- * @group      Zend_Filter
+ * @group Zend_Filter
  */
 class PregReplaceTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
+     *
      * @var PregReplaceFilter
      */
     protected $filter;
@@ -41,14 +38,14 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
     public function testPassingPatternToConstructorSetsPattern()
     {
         $pattern = '#^controller/(?P<action>[a-z_-]+)#';
-        $filter  = new PregReplaceFilter($pattern);
+        $filter = new PregReplaceFilter($pattern);
         $this->assertEquals($pattern, $filter->getPattern());
     }
 
     public function testPassingReplacementToConstructorSetsReplacement()
     {
         $replace = 'foo/bar';
-        $filter  = new PregReplaceFilter(null, $replace);
+        $filter = new PregReplaceFilter(null, $replace);
         $this->assertEquals($replace, $filter->getReplacement());
     }
 
@@ -80,12 +77,30 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
     public function testFilterPerformsRegexReplacement()
     {
         $filter = $this->filter;
+        $filter->setPattern('#^controller/(?P<action>[a-z_-]+)#')->setReplacement('foo/bar');
+
         $string = 'controller/action';
-        $filter->setPattern('#^controller/(?P<action>[a-z_-]+)#')
-               ->setReplacement('foo/bar');
         $filtered = $filter($string);
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('foo/bar', $filtered);
+    }
+
+    public function testFilterPerformsRegexReplacementWithArray()
+    {
+        $filter = $this->filter;
+        $filter->setPattern('#^controller/(?P<action>[a-z_-]+)#')->setReplacement('foo/bar');
+
+        $input = array(
+            'controller/action',
+            'This should stay the same'
+        );
+
+        $filtered = $filter($input);
+        $this->assertNotEquals($input, $filtered);
+        $this->assertEquals(array(
+            'foo/bar',
+            'This should stay the same'
+        ), $filtered);
     }
 
     public function testFilterThrowsExceptionWhenNoMatchPatternPresent()
@@ -93,8 +108,7 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
         $filter = $this->filter;
         $string = 'controller/action';
         $filter->setReplacement('foo/bar');
-        $this->setExpectedException('Zend\Filter\Exception\RuntimeException',
-                                    'does not have a valid pattern set');
+        $this->setExpectedException('Zend\Filter\Exception\RuntimeException', 'does not have a valid pattern set');
         $filtered = $filter($string);
     }
 
@@ -103,5 +117,25 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
         $filter = new PregReplaceFilter();
         $this->setExpectedException('Zend\Filter\Exception\InvalidArgumentException', '"e" pattern modifier');
         $filter->setPattern('/foo/e');
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass())
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = $this->filter;
+        $filter->setPattern('#^controller/(?P<action>[a-z_-]+)#')->setReplacement('foo/bar');
+
+        $this->assertEquals($input, $filter->filter($input));
     }
 }

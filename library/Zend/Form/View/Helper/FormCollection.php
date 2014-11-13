@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -14,6 +14,7 @@ use Zend\Form\Element;
 use Zend\Form\ElementInterface;
 use Zend\Form\Element\Collection as CollectionElement;
 use Zend\Form\FieldsetInterface;
+use Zend\Form\LabelAwareInterface;
 use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 class FormCollection extends AbstractHelper
@@ -24,6 +25,27 @@ class FormCollection extends AbstractHelper
      * @var bool
      */
     protected $shouldWrap = true;
+
+    /**
+     * This is the default wrapper that the collection is wrapped into
+     *
+     * @var string
+     */
+    protected $wrapper = '<fieldset%4$s>%2$s%1$s%3$s</fieldset>';
+
+    /**
+     * This is the default label-wrapper
+     *
+     * @var string
+     */
+    protected $labelWrapper = '<legend>%s</legend>';
+
+    /**
+     * Where shall the template-data be inserted into
+     *
+     * @var string
+     */
+    protected $templateWrapper = '<span data-template="%s"></span>';
 
     /**
      * The name of the default view helper that is used to render sub elements.
@@ -82,7 +104,6 @@ class FormCollection extends AbstractHelper
 
         $markup           = '';
         $templateMarkup   = '';
-        $escapeHtmlHelper = $this->getEscapeHtmlHelper();
         $elementHelper    = $this->getElementHelper();
         $fieldsetHelper   = $this->getFieldsetHelper();
 
@@ -98,31 +119,43 @@ class FormCollection extends AbstractHelper
             }
         }
 
-        // If $templateMarkup is not empty, use it for simplify adding new element in JavaScript
-        if (!empty($templateMarkup)) {
-            $markup .= $templateMarkup;
-        }
-
         // Every collection is wrapped by a fieldset if needed
         if ($this->shouldWrap) {
+            $attributes = $element->getAttributes();
+            unset($attributes['name']);
+            $attributesString = count($attributes) ? ' ' . $this->createAttributesString($attributes) : '';
+
             $label = $element->getLabel();
+            $legend = '';
 
             if (!empty($label)) {
-
                 if (null !== ($translator = $this->getTranslator())) {
                     $label = $translator->translate(
-                            $label, $this->getTranslatorTextDomain()
+                        $label,
+                        $this->getTranslatorTextDomain()
                     );
                 }
 
-                $label = $escapeHtmlHelper($label);
+                if (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')) {
+                    $escapeHtmlHelper = $this->getEscapeHtmlHelper();
+                    $label = $escapeHtmlHelper($label);
+                }
 
-                $markup = sprintf(
-                    '<fieldset><legend>%s</legend>%s</fieldset>',
-                    $label,
-                    $markup
+                $legend = sprintf(
+                    $this->labelWrapper,
+                    $label
                 );
             }
+
+            $markup = sprintf(
+                $this->wrapper,
+                $markup,
+                $legend,
+                $templateMarkup,
+                $attributesString
+            );
+        } else {
+            $markup .= $templateMarkup;
         }
 
         return $markup;
@@ -138,18 +171,20 @@ class FormCollection extends AbstractHelper
     {
         $elementHelper          = $this->getElementHelper();
         $escapeHtmlAttribHelper = $this->getEscapeHtmlAttrHelper();
+        $fieldsetHelper         = $this->getFieldsetHelper();
+
         $templateMarkup         = '';
 
         $elementOrFieldset = $collection->getTemplateElement();
 
         if ($elementOrFieldset instanceof FieldsetInterface) {
-            $templateMarkup .= $this->render($elementOrFieldset);
+            $templateMarkup .= $fieldsetHelper($elementOrFieldset);
         } elseif ($elementOrFieldset instanceof ElementInterface) {
             $templateMarkup .= $elementHelper($elementOrFieldset);
         }
 
         return sprintf(
-            '<span data-template="%s"></span>',
+            $this->templateWrapper,
             $escapeHtmlAttribHelper($templateMarkup)
         );
     }
@@ -256,6 +291,96 @@ class FormCollection extends AbstractHelper
         if ($this->fieldsetHelper) {
             return $this->fieldsetHelper;
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the wrapper for the collection
+     *
+     * @return string
+     */
+    public function getWrapper()
+    {
+        return $this->wrapper;
+    }
+
+    /**
+     * Set the wrapper for this collection
+     *
+     * The string given will be passed through sprintf with the following three
+     * replacements:
+     *
+     * 1. The content of the collection
+     * 2. The label of the collection. If no label is given this will be an empty
+     *   string
+     * 3. The template span-tag. This might also be an empty string
+     *
+     * The preset default is <pre><fieldset>%2$s%1$s%3$s</fieldset></pre>
+     *
+     * @param string $wrapper
+     *
+     * @return self
+     */
+    public function setWrapper($wrapper)
+    {
+        $this->wrapper = $wrapper;
+
+        return $this;
+    }
+
+    /**
+     * Set the label-wrapper
+     * The string will be passed through sprintf with the label as single
+     * parameter
+     * This defaults to '<legend>%s</legend>'
+     *
+     * @param string $labelWrapper
+     *
+     * @return self
+     */
+    public function setLabelWrapper($labelWrapper)
+    {
+        $this->labelWrapper = $labelWrapper;
+
+        return $this;
+    }
+
+    /**
+     * Get the wrapper for the label
+     *
+     * @return string
+     */
+    public function getLabelWrapper()
+    {
+        return $this->labelWrapper;
+    }
+
+    /**
+     * Ge the wrapper for the template
+     *
+     * @return string
+     */
+    public function getTemplateWrapper()
+    {
+        return $this->templateWrapper;
+    }
+
+    /**
+     * Set the string where the template will be inserted into
+     *
+     * This string will be passed through sprintf and has the template as single
+     * parameter
+     *
+     * THis defaults to '<span data-template="%s"></span>'
+     *
+     * @param string $templateWrapper
+     *
+     * @return self
+     */
+    public function setTemplateWrapper($templateWrapper)
+    {
+        $this->templateWrapper = $templateWrapper;
 
         return $this;
     }

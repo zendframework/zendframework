@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter\File;
@@ -13,9 +12,6 @@ namespace ZendTest\Filter\File;
 use Zend\Filter\File\LowerCase as FileLowerCase;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class LowerCaseTest extends \PHPUnit_Framework_TestCase
@@ -130,5 +126,28 @@ class LowerCaseTest extends \PHPUnit_Framework_TestCase
         } catch (\Zend\Filter\Exception\ExtensionNotLoadedException $e) {
             $this->assertContains('mbstring is required', $e->getMessage());
         }
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                dirname(__DIR__).'/_files/nofile.txt',
+                dirname(__DIR__).'/_files/nofile2.txt'
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new FileLowerCase();
+
+        $this->assertEquals($input, $filter($input));
     }
 }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -12,11 +12,25 @@ namespace Zend\Validator;
 use DateTime;
 use Traversable;
 
+/**
+ * Validates that a given value is a DateTime instance or can be converted into one.
+ */
 class Date extends AbstractValidator
 {
+    /**#@+
+     * Validity constants
+     * @var string
+     */
     const INVALID        = 'dateInvalid';
     const INVALID_DATE   = 'dateInvalidDate';
     const FALSEFORMAT    = 'dateFalseFormat';
+    /**#@-*/
+
+    /**
+     * Default format constant
+     * @var string
+     */
+    const FORMAT_DEFAULT = 'Y-m-d';
 
     /**
      * Validation failure message template definitions
@@ -24,24 +38,23 @@ class Date extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::INVALID        => "Invalid type given. String, integer, array or DateTime expected",
-        self::INVALID_DATE   => "The input does not appear to be a valid date",
-        self::FALSEFORMAT    => "The input does not fit the date format '%format%'",
+        self::INVALID      => "Invalid type given. String, integer, array or DateTime expected",
+        self::INVALID_DATE => "The input does not appear to be a valid date",
+        self::FALSEFORMAT  => "The input does not fit the date format '%format%'",
     );
 
     /**
      * @var array
      */
     protected $messageVariables = array(
-        'format'  => 'format'
+        'format' => 'format',
     );
 
     /**
-     * Optional format
-     *
-     * @var string|null
+     * @var string
      */
-    protected $format;
+    protected $format = self::FORMAT_DEFAULT;
+
 
     /**
      * Sets validator options
@@ -56,10 +69,6 @@ class Date extends AbstractValidator
             $options = func_get_args();
             $temp['format'] = array_shift($options);
             $options = $temp;
-        }
-
-        if (array_key_exists('format', $options)) {
-            $this->setFormat($options['format']);
         }
 
         parent::__construct($options);
@@ -78,79 +87,107 @@ class Date extends AbstractValidator
     /**
      * Sets the format option
      *
+     * Format cannot be null.  It will always default to 'Y-m-d', even
+     * if null is provided.
+     *
      * @param  string $format
      * @return Date provides a fluent interface
+     * @todo   validate the format
      */
-    public function setFormat($format = null)
+    public function setFormat($format = self::FORMAT_DEFAULT)
     {
-        $this->format = $format;
+        $this->format = (empty($format)) ? self::FORMAT_DEFAULT : $format;
         return $this;
     }
 
     /**
-     * Returns true if $value is a valid date of the format YYYY-MM-DD
-     * If optional $format is set the date format is checked
-     * according to DateTime
+     * Returns true if $value is a DateTime instance or can be converted into one.
      *
      * @param  string|array|int|DateTime $value
      * @return bool
      */
     public function isValid($value)
     {
-        if (!is_string($value)
-            && !is_array($value)
-            && !is_int($value)
-            && !($value instanceof DateTime)
-        ) {
-            $this->error(self::INVALID);
+        $this->setValue($value);
+
+        if (!$this->convertToDateTime($value)) {
+            $this->error(self::INVALID_DATE);
             return false;
         }
 
-        $this->setValue($value);
+        return true;
+    }
 
-        $format = $this->getFormat();
-
-        if ($value instanceof DateTime) {
-            return true;
-        } elseif (is_int($value)
-            || (is_string($value) && null !== $format)
-        ) {
-            $date = (is_int($value))
-                    ? date_create("@$value") // from timestamp
-                    : DateTime::createFromFormat($format, $value);
-
-            // Invalid dates can show up as warnings (ie. "2007-02-99")
-            // and still return a DateTime object
-            $errors = DateTime::getLastErrors();
-
-            if ($errors['warning_count'] > 0) {
-                $this->error(self::INVALID_DATE);
-                return false;
-            }
-            if ($date === false) {
-                $this->error(self::INVALID_DATE);
-                return false;
-            }
-        } else {
-            if (is_array($value)) {
-                $value = implode('-', $value);
-            }
-
-            if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
-                $this->format = 'Y-m-d';
-                $this->error(self::FALSEFORMAT);
-                $this->format = null;
-                return false;
-            }
-
-            list($year, $month, $day) = sscanf($value, '%d-%d-%d');
-
-            if (!checkdate($month, $day, $year)) {
-                $this->error(self::INVALID_DATE);
-                return false;
-            }
+    /**
+     * Attempts to convert an int, string, or array to a DateTime object
+     *
+     * @param  string|int|array $param
+     * @param  bool             $addErrors
+     * @return bool|DateTime
+     */
+    protected function convertToDateTime($param, $addErrors = true)
+    {
+        if ($param instanceof DateTime) {
+            return $param;
         }
 
-        return true;
+        $type = gettype($param);
+        if (!in_array($type, array('string', 'integer', 'array'))) {
+            if ($addErrors) {
+                $this->error(self::INVALID);
+            }
+            return false;
+        }
+
+        $convertMethod = 'convert' . ucfirst($type);
+        return $this->{$convertMethod}($param, $addErrors);
+    }
+
+    /**
+     * Attempts to convert an integer into a DateTime object
+     *
+     * @param  integer $value
+     * @return bool|DateTime
+     */
+    protected function convertInteger($value)
+    {
+        return date_create("@$value");
+    }
+
+    /**
+     * Attempts to convert a string into a DateTime object
+     *
+     * @param  string $value
+     * @param  bool   $addErrors
+     * @return bool|DateTime
+     */
+    protected function convertString($value, $addErrors = true)
+    {
+        $date = DateTime::createFromFormat($this->format, $value);
+
+        // Invalid dates can show up as warnings (ie. "2007-02-99")
+        // and still return a DateTime object.
+        $errors = DateTime::getLastErrors();
+        if ($errors['warning_count'] > 0) {
+            if ($addErrors) {
+                $this->error(self::FALSEFORMAT);
+            }
+            return false;
+        }
+
+        return $date;
+    }
+
+    /**
+     * Implodes the array into a string and proxies to {@link convertString()}.
+     *
+     * @param  array $value
+     * @param  bool  $addErrors
+     * @return bool|DateTime
+     * @todo   enhance the implosion
+     */
+    protected function convertArray(array $value, $addErrors = true)
+    {
+        return $this->convertString(implode('-', $value), $addErrors);
     }
 }

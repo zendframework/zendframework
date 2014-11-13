@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -107,6 +107,9 @@ class Message
     public function generateMessage($EOL = Mime::LINEEND)
     {
         if (!$this->isMultiPart()) {
+            if (empty($this->parts)) {
+                return '';
+            }
             $part = current($this->parts);
             $body = $part->getContent($EOL);
         } else {
@@ -222,8 +225,9 @@ class Message
 
         $res = new static();
         foreach ($parts as $part) {
+
             // now we build a new MimePart for the current Message Part:
-            $newPart = new Part($part['body']);
+            $properties = array();
             foreach ($part['header'] as $header) {
                 /** @var \Zend\Mail\Header\HeaderInterface $header */
                 /**
@@ -234,29 +238,48 @@ class Message
                 $fieldValue = $header->getFieldValue();
                 switch (strtolower($fieldName)) {
                     case 'content-type':
-                        $newPart->type = $fieldValue;
+                        $properties['type'] = $fieldValue;
                         break;
                     case 'content-transfer-encoding':
-                        $newPart->encoding = $fieldValue;
+                        $properties['encoding'] = $fieldValue;
                         break;
                     case 'content-id':
-                        $newPart->id = trim($fieldValue,'<>');
+                        $properties['id'] = trim($fieldValue,'<>');
                         break;
                     case 'content-disposition':
-                        $newPart->disposition = $fieldValue;
+                        $properties['disposition'] = $fieldValue;
                         break;
                     case 'content-description':
-                        $newPart->description = $fieldValue;
+                        $properties['description'] = $fieldValue;
                         break;
                     case 'content-location':
-                        $newPart->location = $fieldValue;
+                        $properties['location'] = $fieldValue;
                         break;
                     case 'content-language':
-                        $newPart->language = $fieldValue;
+                        $properties['language'] = $fieldValue;
                         break;
                     default:
-                        throw new Exception\RuntimeException('Unknown header ignored for MimePart:' . $fieldName);
+                        // Ignore unknown header
+                        break;
                 }
+            }
+
+            $body = $part['body'];
+
+            if (isset($properties['encoding'])) {
+                switch ($properties['encoding']) {
+                    case 'quoted-printable':
+                        $body = quoted_printable_decode($body);
+                        break;
+                    case 'base64':
+                        $body = base64_decode($body);
+                        break;
+                }
+            }
+
+            $newPart = new Part($body);
+            foreach ($properties as $key => $value) {
+                $newPart->$key = $value;
             }
             $res->addPart($newPart);
         }

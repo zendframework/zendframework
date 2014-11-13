@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -111,9 +111,16 @@ abstract class AbstractPage extends AbstractContainer
     /**
      * Permission associated with this page
      *
-     * @var string|null
+     * @var mixed|null
      */
     protected $permission;
+
+    /**
+     * Text domain for Translator
+     *
+     * @var string
+     */
+    protected $textDomain;
 
     /**
      * Whether this page should be considered active
@@ -142,6 +149,13 @@ abstract class AbstractPage extends AbstractContainer
      * @var array
      */
     protected $properties = array();
+
+    /**
+     * Static factories list for factory pages
+     *
+     * @var array
+     */
+    protected static $factories = array();
 
     // Initialization:
 
@@ -220,6 +234,14 @@ abstract class AbstractPage extends AbstractContainer
             }
         }
 
+        if (static::$factories) {
+            foreach (static::$factories as $factoryCallBack) {
+                if (($page = call_user_func($factoryCallBack, $options))) {
+                    return $page;
+                }
+            }
+        }
+
         $hasUri = isset($options['uri']);
         $hasMvc = isset($options['action']) || isset($options['controller'])
                 || isset($options['route']);
@@ -233,6 +255,16 @@ abstract class AbstractPage extends AbstractContainer
                 'Invalid argument: Unable to determine class to instantiate'
             );
         }
+    }
+
+    /**
+     * Add static factory for self::factory function
+     *
+     * @param callable $callback Any callable variable
+     */
+    public static function addFactory($callback)
+    {
+        static::$factories[] = $callback;
     }
 
     /**
@@ -710,7 +742,7 @@ abstract class AbstractPage extends AbstractContainer
     /**
      * Sets permission associated with this page
      *
-     * @param  string|null $permission  [optional] permission to associate
+     * @param  mixed|null $permission  [optional] permission to associate
      *                                  with this page. Default is null, which
      *                                  sets no permission.
      *
@@ -718,18 +750,45 @@ abstract class AbstractPage extends AbstractContainer
      */
     public function setPermission($permission = null)
     {
-        $this->permission = is_string($permission) ? $permission : null;
+        $this->permission = $permission;
         return $this;
     }
 
     /**
      * Returns permission associated with this page
      *
-     * @return string|null  permission or null
+     * @return mixed|null  permission or null
      */
     public function getPermission()
     {
         return $this->permission;
+    }
+
+    /**
+     * Sets text domain for translation
+     *
+     * @param  string|null $textDomain  [optional] text domain to associate
+     *                                  with this page. Default is null, which
+     *                                  sets no text domain.
+     *
+     * @return AbstractPage fluent interface, returns self
+     */
+    public function setTextDomain($textDomain = null)
+    {
+        if (null !== $textDomain) {
+            $this->textDomain = $textDomain;
+        }
+        return $this;
+    }
+
+    /**
+     * Returns text domain for translation
+     *
+     * @return mixed|null  text domain or null
+     */
+    public function getTextDomain()
+    {
+        return $this->textDomain;
     }
 
     /**

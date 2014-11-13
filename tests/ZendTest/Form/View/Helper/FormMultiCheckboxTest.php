@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -14,11 +13,6 @@ use Zend\Form\Element;
 use Zend\Form\Element\MultiCheckbox as MultiCheckboxElement;
 use Zend\Form\View\Helper\FormMultiCheckbox as FormMultiCheckboxHelper;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class FormMultiCheckboxTest extends CommonTestCase
 {
     public function setUp()
@@ -201,7 +195,7 @@ class FormMultiCheckboxTest extends CommonTestCase
     {
         $element = $this->getElement();
         $markup  = $this->helper->render($element);
-        $this->assertContains('foo[]', $markup);
+        $this->assertContains('foo&#x5B;&#x5D;', $markup);
     }
 
     public function testInvokeWithNoElementChainsHelper()
@@ -407,5 +401,21 @@ class FormMultiCheckboxTest extends CommonTestCase
         $markup  = $this->helper->render($element);
         $this->assertRegexp('#value="value1" checked="checked"#', $markup);
 
+    }
+
+    public function testDisableEscapeHtmlHelper()
+    {
+        $element = new MultiCheckboxElement('foo');
+        $element->setLabelOptions(array(
+            'disable_html_escape' => true,
+        ));
+        $element->setValueOptions(array(
+            array(
+                'label' => '<span>label1</span>',
+                'value' => 'value1',
+            ),
+        ));
+        $markup  = $this->helper->render($element);
+        $this->assertRegexp('#<span>label1</span>#', $markup);
     }
 }

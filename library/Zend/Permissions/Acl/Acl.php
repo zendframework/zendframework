@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -93,7 +93,7 @@ class Acl implements AclInterface
      * will have the least priority, and the last parent added will have the
      * highest priority.
      *
-     * @param  Role\RoleInterface              $role
+     * @param  Role\RoleInterface|string       $role
      * @param  Role\RoleInterface|string|array $parents
      * @throws Exception\InvalidArgumentException
      * @return Acl Provides a fluent interface

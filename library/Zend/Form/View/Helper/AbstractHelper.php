@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -42,7 +42,8 @@ abstract class AbstractHelper extends BaseAbstractHelper
      * @var array
      */
     protected $translatableAttributes = array(
-        'placeholder' => true
+        'placeholder' => true,
+        'title' => true,
     );
 
     /**
@@ -129,6 +130,9 @@ abstract class AbstractHelper extends BaseAbstractHelper
         'ontimeupdate'       => true,
         'onvolumechange'     => true,
         'onwaiting'          => true,
+        'role'               => true,
+        'aria-labelled-by'   => true,
+        'aria-described-by'  => true,
         'spellcheck'         => true,
         'style'              => true,
         'tabindex'           => true,
@@ -204,9 +208,12 @@ abstract class AbstractHelper extends BaseAbstractHelper
     {
         $attributes = $this->prepareAttributes($attributes);
         $escape     = $this->getEscapeHtmlHelper();
+        $escapeAttr = $this->getEscapeHtmlAttrHelper();
         $strings    = array();
+
         foreach ($attributes as $key => $value) {
             $key = strtolower($key);
+
             if (!$value && isset($this->booleanAttributes[$key])) {
                 // Skip boolean attributes that expect empty string as false value
                 if ('' === $this->booleanAttributes[$key]['off']) {
@@ -217,15 +224,14 @@ abstract class AbstractHelper extends BaseAbstractHelper
             //check if attribute is translatable
             if (isset($this->translatableAttributes[$key]) && !empty($value)) {
                 if (($translator = $this->getTranslator()) !== null) {
-                    $value = $translator->translate(
-                            $value, $this->getTranslatorTextDomain()
-                    );
+                    $value = $translator->translate($value, $this->getTranslatorTextDomain());
                 }
             }
 
             //@TODO Escape event attributes like AbstractHtmlElement view helper does in htmlAttribs ??
-            $strings[] = sprintf('%s="%s"', $escape($key), $escape($value));
+            $strings[] = sprintf('%s="%s"', $escape($key), $escapeAttr($value));
         }
+
         return implode(' ', $strings);
     }
 
@@ -349,6 +355,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
             if (!isset($this->validGlobalAttributes[$attribute])
                 && !isset($this->validTagAttributes[$attribute])
                 && 'data-' != substr($attribute, 0, 5)
+                && 'x-' != substr($attribute, 0, 2)
             ) {
                 // Invalid attribute for the current tag
                 unset($attributes[$key]);

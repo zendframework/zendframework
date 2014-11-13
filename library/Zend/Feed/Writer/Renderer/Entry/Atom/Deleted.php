@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -12,17 +12,17 @@ namespace Zend\Feed\Writer\Renderer\Entry\Atom;
 use DateTime;
 use DOMDocument;
 use DOMElement;
+use Zend\Feed\Writer;
+use Zend\Feed\Writer\Renderer;
 
-class Deleted
-    extends \Zend\Feed\Writer\Renderer\AbstractRenderer
-    implements \Zend\Feed\Writer\Renderer\RendererInterface
+class Deleted extends Renderer\AbstractRenderer implements Renderer\RendererInterface
 {
     /**
      * Constructor
      *
-     * @param  \Zend\Feed\Writer\Deleted $container
+     * @param  Writer\Deleted $container
      */
-    public function __construct (\Zend\Feed\Writer\Deleted $container)
+    public function __construct(Writer\Deleted $container)
     {
         parent::__construct($container);
     }
@@ -30,7 +30,7 @@ class Deleted
     /**
      * Render atom entry
      *
-     * @return \Zend\Feed\Writer\Renderer\Entry\Atom
+     * @return Writer\Renderer\Entry\Atom
      */
     public function render()
     {

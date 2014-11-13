@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link           http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright      Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright      Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license        http://framework.zend.com/license/new-bsd New BSD License
- * @package        Zend_Service
  */
 
 namespace ZendTest\Stdlib;
@@ -14,7 +13,7 @@ use Zend\Stdlib\Hydrator\Filter\HasFilter,
     Zend\Stdlib\Hydrator\Filter\IsFilter,
     Zend\Stdlib\Hydrator\Filter\GetFilter;
 
-class ValidationTest extends \PHPUnit_Framework_TestCase
+class FilterTest extends \PHPUnit_Framework_TestCase
 {
     public function testHasValidation()
     {

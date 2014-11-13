@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -13,7 +13,6 @@ use Zend\Db\Adapter\AdapterInterface;
 
 class Platform extends AbstractPlatform
 {
-
     /**
      * @var AdapterInterface
      */
@@ -36,6 +35,11 @@ class Platform extends AbstractPlatform
                 $platform = new Oracle\Oracle();
                 $this->decorators = $platform->decorators;
                 break;
+            case 'ibm db2':
+            case 'ibm_db2':
+            case 'ibmdb2':
+                $platform = new IbmDb2\IbmDb2();
+                $this->decorators = $platform->decorators;
             default:
         }
     }

@@ -1,18 +1,9 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,6 +21,10 @@ return array(
     "The input contains non alphabetic characters" => "L'input contiene caratteri non alfabetici",
     "The input is an empty string" => "L'input è una stringa vuota",
 
+    // Zend\I18n\Validator\DateTime
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
+    "The input does not appear to be a valid datetime" => "L'input non sembra essere una combinazione valida di data e orario",
+
     // Zend\I18n\Validator\Float
     "Invalid type given. String, integer or float expected" => "Tipo di dato non valido. Era atteso un dato di tipo string, float o integer",
     "The input does not appear to be a float" => "L'input non sembra essere un dato di tipo float",
@@ -37,6 +32,11 @@ return array(
     // Zend\I18n\Validator\Int
     "Invalid type given. String or integer expected" => "Tipo di dato non valido. Era atteso un dato di tipo string o integer",
     "The input does not appear to be an integer" => "L'input non sembra essere un intero",
+
+    // Zend\I18n\Validator\PhoneNumber
+    "The input does not match a phone number format" => "L'input non corrisponde ad un formato di numero telefonico",
+    "The country provided is currently unsupported" => "La nazionalità fornita non è correntemente supportata",
+    "Invalid type given. String expected" => "Tipo di dato non valido. Era attesto un dato di tipo string",
 
     // Zend\I18n\Validator\PostCode
     "Invalid type given. String or integer expected" => "Tipo di dato non valido. Era atteso un dato di tipo string o integer",

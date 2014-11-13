@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link           http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright      Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright      Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license        http://framework.zend.com/license/new-bsd New BSD License
  */
 namespace Zend\Stdlib\Hydrator\Filter;
@@ -25,15 +25,15 @@ class OptionalParametersFilter implements FilterInterface
      *
      * @var bool[]
      */
-    private static $propertiesCache = array();
+    protected static $propertiesCache = array();
 
     /**
      * {@inheritDoc}
      */
     public function filter($property)
     {
-        if (isset(self::$propertiesCache[$property])) {
-            return self::$propertiesCache[$property];
+        if (isset(static::$propertiesCache[$property])) {
+            return static::$propertiesCache[$property];
         }
 
         try {
@@ -49,6 +49,6 @@ class OptionalParametersFilter implements FilterInterface
             }
         );
 
-        return self::$propertiesCache[$property] = empty($mandatoryParameters);
+        return static::$propertiesCache[$property] = empty($mandatoryParameters);
     }
 }

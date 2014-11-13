@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -72,6 +72,8 @@ class Code25interleaved extends Code25
         if ($this->withBearerBars) {
             $this->withBorder = false;
         }
+
+        $barcodeTable = array();
 
         // Start character (0000)
         $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);

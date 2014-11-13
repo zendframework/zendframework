@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper\Navigation;
@@ -25,9 +24,6 @@ use ZendTest\View\Helper\TestAsset;
 /**
  * Base class for navigation view helper tests
  *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -57,14 +53,14 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     /**
      * View helper
      *
-     * @var Zend\View\Helper\Navigation\AbstractHelper
+     * @var \Zend\View\Helper\Navigation\AbstractHelper
      */
     protected $_helper;
 
     /**
      * The first container in the config file (files/navigation.xml)
      *
-     * @var Zend_Navigation
+     * @var Navigation
      */
     protected $_nav1;
 
@@ -74,6 +70,13 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
      * @var Navigation\Navigation
      */
     protected $_nav2;
+
+    /**
+     * The third container in the config file (files/navigation.xml)
+     *
+     * @var Navigation\Navigation
+     */
+    protected $_nav3;
 
     private $_oldControllerDir;
 
@@ -92,6 +95,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         // setup containers from config
         $this->_nav1 = new Navigation($config->get('nav_test1'));
         $this->_nav2 = new Navigation($config->get('nav_test2'));
+        $this->_nav3 = new Navigation($config->get('nav_test3'));
 
         // setup view
         $view = new PhpRenderer();
@@ -202,6 +206,41 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         $translator = new Translator();
         $translator->getPluginManager()->setService('default', $loader);
         $translator->addTranslationFile('default', null);
+        return $translator;
+    }
+
+    /**
+     * Returns translator with text domain
+     *
+     * @return Translator
+     */
+    protected function _getTranslatorWithTextDomain()
+    {
+        $loader1 = new TestAsset\ArrayTranslator();
+        $loader1->translations = array(
+            'Page 1'       => 'TextDomain1 1',
+            'Page 1.1'     => 'TextDomain1 1.1',
+            'Page 2'       => 'TextDomain1 2',
+            'Page 2.3'     => 'TextDomain1 2.3',
+            'Page 2.3.3'   => 'TextDomain1 2.3.3',
+            'Page 2.3.3.1' => 'TextDomain1 2.3.3.1',
+        );
+
+        $loader2 = new TestAsset\ArrayTranslator();
+        $loader2->translations = array(
+            'Page 1'       => 'TextDomain2 1',
+            'Page 1.1'     => 'TextDomain2 1.1',
+            'Page 2'       => 'TextDomain2 2',
+            'Page 2.3'     => 'TextDomain2 2.3',
+            'Page 2.3.3'   => 'TextDomain2 2.3.3',
+            'Page 2.3.3.1' => 'TextDomain2 2.3.3.1',
+        );
+
+        $translator = new Translator();
+        $translator->getPluginManager()->setService('default1', $loader1);
+        $translator->getPluginManager()->setService('default2', $loader2);
+        $translator->addTranslationFile('default1', null, 'ZendTest_1');
+        $translator->addTranslationFile('default2', null, 'ZendTest_2');
         return $translator;
     }
 }

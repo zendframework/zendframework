@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -183,7 +183,7 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
                 $statement->setSql($sqlOrResource);
             } elseif ($sqlOrResource !== null) {
                 throw new Exception\InvalidArgumentException(
-                    'Oci8 only accepts an SQL string or a oci8 resource in ' . __FUNCTION__
+                    'Oci8 only accepts an SQL string or an oci8 resource in ' . __FUNCTION__
                 );
             }
             if (!$this->connection->isConnected()) {

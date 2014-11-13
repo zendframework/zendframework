@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -26,6 +26,13 @@ class TextDomain extends ArrayObject
     protected $pluralRule;
 
     /**
+     * Default plural rule shared between instances.
+     *
+     * @var PluralRule
+     */
+    protected static $defaultPluralRule;
+
+    /**
      * Set the plural rule
      *
      * @param  PluralRule $rule
@@ -40,17 +47,40 @@ class TextDomain extends ArrayObject
     /**
      * Get the plural rule.
      *
-     * Lazy loads a default rule if none already registered
-     *
-     * @return PluralRule
+     * @param  bool $fallbackToDefaultRule
+     * @return PluralRule|null
      */
-    public function getPluralRule()
+    public function getPluralRule($fallbackToDefaultRule = true)
     {
-        if ($this->pluralRule === null) {
-            $this->setPluralRule(PluralRule::fromString('nplurals=2; plural=n != 1;'));
+        if ($this->pluralRule === null && $fallbackToDefaultRule) {
+            return static::getDefaultPluralRule();
         }
 
         return $this->pluralRule;
+    }
+
+    /**
+     * Checks whether the text domain has a plural rule.
+     *
+     * @return bool
+     */
+    public function hasPluralRule()
+    {
+        return ($this->pluralRule !== null);
+    }
+
+    /**
+     * Returns a shared default plural rule.
+     *
+     * @return PluralRule
+     */
+    public static function getDefaultPluralRule()
+    {
+        if (static::$defaultPluralRule === null) {
+            static::$defaultPluralRule = PluralRule::fromString('nplurals=2; plural=n != 1;');
+        }
+
+        return static::$defaultPluralRule;
     }
 
     /**
@@ -66,8 +96,12 @@ class TextDomain extends ArrayObject
      */
     public function merge(TextDomain $textDomain)
     {
-        if ($this->getPluralRule()->getNumPlurals() !== $textDomain->getPluralRule()->getNumPlurals()) {
-            throw new Exception\RuntimeException('Plural rule of merging text domain is not compatible with the current one');
+        if ($this->hasPluralRule() && $textDomain->hasPluralRule()) {
+            if ($this->getPluralRule()->getNumPlurals() !== $textDomain->getPluralRule()->getNumPlurals()) {
+                throw new Exception\RuntimeException('Plural rule of merging text domain is not compatible with the current one');
+            }
+        } elseif ($textDomain->hasPluralRule()) {
+            $this->setPluralRule($textDomain->getPluralRule());
         }
 
         $this->exchangeArray(

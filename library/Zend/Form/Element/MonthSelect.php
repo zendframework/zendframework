@@ -3,13 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Form\Element;
 
-use DateTime;
+use DateTime as PhpDateTime;
 use Zend\Form\Element;
 use Zend\Form\ElementPrepareAwareInterface;
 use Zend\Form\FormInterface;
@@ -265,7 +265,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
      */
     public function setValue($value)
     {
-        if ($value instanceof DateTime) {
+        if ($value instanceof PhpDateTime) {
             $value = array(
                 'year'  => $value->format('Y'),
                 'month' => $value->format('m')
@@ -274,6 +274,17 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
 
         $this->yearElement->setValue($value['year']);
         $this->monthElement->setValue($value['month']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getValue()
+    {
+        return sprintf('%s-%s',
+            $this->getYearElement()->getValue(),
+            $this->getMonthElement()->getValue()
+        );
     }
 
     /**
@@ -314,7 +325,7 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
                 array(
                     'name'    => 'Callback',
                     'options' => array(
-                        'callback' => function($date) {
+                        'callback' => function ($date) {
                             // Convert the date to a specific format
                             if (is_array($date)) {
                                 $date = $date['year'] . '-' . $date['month'];

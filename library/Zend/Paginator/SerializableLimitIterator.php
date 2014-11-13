@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -39,7 +39,7 @@ class SerializableLimitIterator extends LimitIterator implements Serializable, A
      * @param int $count Maximum number of elements to show or -1 for all
      * @see LimitIterator::__construct
      */
-    public function __construct (Iterator $it, $offset=0, $count=-1)
+    public function __construct(Iterator $it, $offset=0, $count=-1)
     {
         parent::__construct($it, $offset, $count);
         $this->offset = $offset;

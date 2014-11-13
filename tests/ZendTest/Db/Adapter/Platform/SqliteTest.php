@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace ZendTest\Db\Adapter\Platform;
@@ -131,5 +130,35 @@ class SqliteTest extends \PHPUnit_Framework_TestCase
             '("foo"."bar" = "boo"."baz") AND ("foo"."baz" = "boo"."baz")',
             $this->platform->quoteIdentifierInFragment('(foo.bar = boo.baz) AND (foo.baz = boo.baz)', array('(', ')', '=', 'and'))
         );
+    }
+
+    /**
+     * @covers Zend\Db\Adapter\Platform\Sqlite::quoteValue
+     * @covers Zend\Db\Adapter\Platform\Sqlite::quoteTrustedValue
+     */
+    public function testCanCloseConnectionAfterQuoteValue()
+    {
+        // Creating the SQLite database file
+        $filePath = realpath(__DIR__) . "/_files/sqlite.db";
+        if (!file_exists($filePath)) {
+            touch($filePath);
+        }
+
+        $driver = new \Zend\Db\Adapter\Driver\Pdo\Pdo(array(
+            'driver' => 'Pdo_Sqlite',
+            'database' => $filePath
+        ));
+
+        $this->platform->setDriver($driver);
+
+        $this->platform->quoteValue("some; random]/ value");
+        $this->platform->quoteTrustedValue("some; random]/ value");
+
+        // Closing the connection so we can delete the file
+        $driver->getConnection()->disconnect();
+
+        @unlink($filePath);
+
+        $this->assertFalse(file_exists($filePath));
     }
 }

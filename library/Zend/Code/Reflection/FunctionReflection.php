@@ -3,17 +3,26 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Code\Reflection;
 
 use ReflectionFunction;
-use Zend\Code\Reflection\DocBlock\Tag\ReturnTag;
 
 class FunctionReflection extends ReflectionFunction implements ReflectionInterface
 {
+    /**
+     * Constant use in @MethodReflection to display prototype as an array
+     */
+    const PROTOTYPE_AS_ARRAY = 'prototype_as_array';
+
+    /**
+     * Constant use in @MethodReflection to display prototype as a string
+     */
+    const PROTOTYPE_AS_STRING = 'prototype_as_string';
+
     /**
      * Get function DocBlock
      *
@@ -54,19 +63,102 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
     /**
      * Get contents of function
      *
-     * @param  bool $includeDocBlock
+     * @param  bool   $includeDocBlock
      * @return string
      */
     public function getContents($includeDocBlock = true)
     {
-        return implode("\n",
-            array_splice(
-                file($this->getFileName()),
-                $this->getStartLine($includeDocBlock),
-                ($this->getEndLine() - $this->getStartLine()),
-                true
-            )
+        $fileName = $this->getFileName();
+        if (false === $fileName) {
+            return '';
+        }
+
+        $startLine = $this->getStartLine();
+        $endLine = $this->getEndLine();
+
+        // eval'd protect
+        if (preg_match('#\((\d+)\) : eval\(\)\'d code$#', $fileName, $matches)) {
+            $fileName = preg_replace('#\(\d+\) : eval\(\)\'d code$#', '', $fileName);
+            $startLine = $endLine = $matches[1];
+        }
+
+        $lines = array_slice(
+            file($fileName, FILE_IGNORE_NEW_LINES),
+            $startLine - 1,
+            ($endLine - ($startLine - 1)),
+            true
         );
+
+        $functionLine = implode("\n", $lines);
+
+        $content = '';
+        if ($this->isClosure()) {
+            preg_match('#function\s*\([^\)]*\)\s*(use\s*\([^\)]+\))?\s*\{(.*\;)?\s*\}#s', $functionLine, $matches);
+            if (isset($matches[0])) {
+                $content = $matches[0];
+            }
+        } else {
+            $name = substr($this->getName(), strrpos($this->getName(), '\\')+1);
+            preg_match('#function\s+' . preg_quote($name) . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)?}#', $functionLine, $matches);
+            if (isset($matches[0])) {
+                $content = $matches[0];
+            }
+        }
+
+        $docComment = $this->getDocComment();
+
+        return $includeDocBlock && $docComment ? $docComment . "\n" . $content : $content;
+    }
+
+    /**
+     * Get method prototype
+     *
+     * @return array
+     */
+    public function getPrototype($format = FunctionReflection::PROTOTYPE_AS_ARRAY)
+    {
+        $returnType = 'mixed';
+        $docBlock = $this->getDocBlock();
+        if ($docBlock) {
+            $return = $docBlock->getTag('return');
+            $returnTypes = $return->getTypes();
+            $returnType = count($returnTypes) > 1 ? implode('|', $returnTypes) : $returnTypes[0];
+        }
+
+        $prototype = array(
+            'namespace' => $this->getNamespaceName(),
+            'name'      => substr($this->getName(), strlen($this->getNamespaceName()) + 1),
+            'return'    => $returnType,
+            'arguments' => array(),
+        );
+
+        $parameters = $this->getParameters();
+        foreach ($parameters as $parameter) {
+            $prototype['arguments'][$parameter->getName()] = array(
+                'type'     => $parameter->getType(),
+                'required' => !$parameter->isOptional(),
+                'by_ref'   => $parameter->isPassedByReference(),
+                'default'  => $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null,
+            );
+        }
+
+        if ($format == FunctionReflection::PROTOTYPE_AS_STRING) {
+            $line = $prototype['return'] . ' ' . $prototype['name'] . '(';
+            $args = array();
+            foreach ($prototype['arguments'] as $name => $argument) {
+                $argsLine = ($argument['type'] ? $argument['type'] . ' ' : '') . ($argument['by_ref'] ? '&' : '') . '$' . $name;
+                if (!$argument['required']) {
+                    $argsLine .= ' = ' . var_export($argument['default'], true);
+                }
+                $args[] = $argsLine;
+            }
+            $line .= implode(', ', $args);
+            $line .= ')';
+
+            return $line;
+        }
+
+        return $prototype;
     }
 
     /**
@@ -92,7 +184,7 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
      * Get return type tag
      *
      * @throws Exception\InvalidArgumentException
-     * @return ReturnTag
+     * @return DocBlockReflection
      */
     public function getReturn()
     {
@@ -104,7 +196,57 @@ class FunctionReflection extends ReflectionFunction implements ReflectionInterfa
         }
 
         $tag    = $docBlock->getTag('return');
+
         return new DocBlockReflection('@return ' . $tag->getDescription());
+    }
+
+    /**
+     * Get method body
+     *
+     * @return string|bool
+     */
+    public function getBody()
+    {
+        $fileName = $this->getFileName();
+        if (false === $fileName) {
+            throw new Exception\InvalidArgumentException(
+                'Cannot determine internals functions body'
+            );
+        }
+
+        $startLine = $this->getStartLine();
+        $endLine = $this->getEndLine();
+
+        // eval'd protect
+        if (preg_match('#\((\d+)\) : eval\(\)\'d code$#', $fileName, $matches)) {
+            $fileName = preg_replace('#\(\d+\) : eval\(\)\'d code$#', '', $fileName);
+            $startLine = $endLine = $matches[1];
+        }
+
+        $lines = array_slice(
+            file($fileName, FILE_IGNORE_NEW_LINES),
+            $startLine - 1,
+            ($endLine - ($startLine - 1)),
+            true
+        );
+
+        $functionLine = implode("\n", $lines);
+
+        $body = false;
+        if ($this->isClosure()) {
+            preg_match('#function\s*\([^\)]*\)\s*(use\s*\([^\)]+\))?\s*\{(.*\;)\s*\}#s', $functionLine, $matches);
+            if (isset($matches[2])) {
+                $body = $matches[2];
+            }
+        } else {
+            $name = substr($this->getName(), strrpos($this->getName(), '\\')+1);
+            preg_match('#function\s+' . $name . '\s*\([^\)]*\)\s*{([^{}]+({[^}]+})*[^}]+)}#', $functionLine, $matches);
+            if (isset($matches[1])) {
+                $body = $matches[1];
+            }
+        }
+
+        return $body;
     }
 
     public function toString()

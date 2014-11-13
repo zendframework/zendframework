@@ -6,6 +6,7 @@
         "zf2",
         "math"
     ],
+    "homepage": "https://github.com/zendframework/zf2",
     "autoload": {
         "psr-0": {
             "Zend\\Math\\": ""
@@ -13,15 +14,18 @@
     },
     "target-dir": "Zend/Math",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.23"
     },
     "suggest": {
-        "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable"
+        "ext-bcmath": "If using the bcmath functionality",
+        "ext-gmp": "If using the gmp functionality",
+        "ircmaxell/random-lib": "Fallback random byte generator for Zend\\Math\\Rand if OpenSSL/Mcrypt extensions are unavailable",
+        "zendframework/zend-servicemanager": ">= current version, if using the BigInteger::factory functionality"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev",
-            "dev-develop": "2.3-dev"
+            "dev-master": "2.3-dev",
+            "dev-develop": "2.4-dev"
         }
     }
 }

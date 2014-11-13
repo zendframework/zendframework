@@ -3,12 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Test
  */
 namespace ZendTest\Test\PHPUnit\Controller;
 
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Zend\Console\Console;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
@@ -17,16 +18,14 @@ use Zend\Stdlib\ResponseInterface;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 /**
- * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
  * @group      Zend_Test
  */
 class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 {
     public function tearDownCacheDir()
     {
-        $cacheDir = sys_get_temp_dir() . '/zf2-module-test';
+        vfsStreamWrapper::register();
+        $cacheDir = vfsStream::url('zf2-module-test');
         if (is_dir($cacheDir)) {
             static::rmdir($cacheDir);
         }
@@ -38,10 +37,11 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         foreach ($files as $file) {
             (is_dir("$dir/$file")) ? static::rmdir("$dir/$file") : unlink("$dir/$file");
         }
+
         return rmdir($dir);
     }
 
-    public function setUp()
+    protected function setUp()
     {
         $this->tearDownCacheDir();
         Console::overrideIsConsole(null);
@@ -51,7 +51,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         parent::setUp();
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         $this->tearDownCacheDir();
         parent::tearDown();
@@ -304,5 +304,26 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->getRequest()->setContent('my content');
         $this->dispatch('/tests', 'PUT', array('a' => 1));
         $this->assertEquals('a=1', $this->getRequest()->getContent());
+    }
+
+    public function testAssertTemplateName()
+    {
+        $this->dispatch('/tests');
+
+        $this->assertTemplateName('layout/layout');
+        $this->assertTemplateName('baz/index/unittests');
+    }
+
+    public function testAssertNotTemplateName()
+    {
+        $this->dispatch('/tests');
+
+        $this->assertNotTemplateName('template/does/not/exist');
+    }
+
+    public function testCustomResponseObject()
+    {
+        $this->dispatch('/custom-response');
+        $this->assertResponseStatusCode(999);
     }
 }

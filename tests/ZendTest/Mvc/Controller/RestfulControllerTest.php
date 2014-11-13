@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc\Controller;
@@ -21,6 +20,7 @@ use Zend\Mvc\Router\RouteMatch;
 class RestfulControllerTest extends TestCase
 {
     public $controller;
+    public $emptyController;
     public $request;
     public $response;
     public $routeMatch;
@@ -28,13 +28,15 @@ class RestfulControllerTest extends TestCase
 
     public function setUp()
     {
-        $this->controller = new TestAsset\RestfulTestController();
-        $this->request    = new TestAsset\Request();
-        $this->response   = new Response();
-        $this->routeMatch = new RouteMatch(array('controller' => 'controller-restful'));
-        $this->event      = new MvcEvent;
+        $this->controller      = new TestAsset\RestfulTestController();
+        $this->emptyController = new TestAsset\RestfulMethodNotAllowedTestController();
+        $this->request         = new TestAsset\Request();
+        $this->response        = new Response();
+        $this->routeMatch      = new RouteMatch(array('controller' => 'controller-restful'));
+        $this->event           = new MvcEvent;
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
+        $this->emptyController->setEvent($this->event);
     }
 
     public function testDispatchInvokesListWhenNoActionPresentAndNoIdentifierOnGet()
@@ -388,21 +390,6 @@ class RestfulControllerTest extends TestCase
         $this->assertFalse($this->controller->requestHasContentType($this->request, TestAsset\RestfulTestController::CONTENT_TYPE_JSON));
     }
 
-    public function testDispatchViaPatchWithoutIdentifierReturns405ResponseIfPatchListThrowsException()
-    {
-        $entity = new stdClass;
-        $entity->name = 'foo';
-        $entity->type = 'standard';
-        $this->controller->entity = $entity;
-        $entity = array('name' => __FUNCTION__);
-        $string = http_build_query($entity);
-        $this->request->setMethod('PATCH')
-                      ->setContent($string);
-        $result = $this->controller->dispatch($this->request, $this->response);
-        $this->assertInstanceOf('Zend\Http\Response', $result);
-        $this->assertEquals(405, $result->getStatusCode());
-    }
-
     public function testDispatchWithUnrecognizedMethodReturns405Response()
     {
         $this->request->setMethod('PROPFIND');
@@ -449,5 +436,52 @@ class RestfulControllerTest extends TestCase
         $this->request->getQuery()->set('name', 'bar');
         $result = $getIdentifier->invoke($this->controller, $this->routeMatch, $this->request);
         $this->assertEquals('bar', $result);
+    }
+
+    /**
+     * @dataProvider testNotImplementedMethodSets504HttpCodeProvider
+     */
+    public function testNotImplementedMethodSets504HttpCode($method, $content, array $routeParams)
+    {
+        $this->request->setMethod($method);
+
+        if ($content) {
+            $this->request->setContent($content);
+        }
+
+        foreach ($routeParams as $name => $value) {
+            $this->routeMatch->setParam($name, $value);
+        }
+
+        $result   = $this->emptyController->dispatch($this->request, $this->response);
+        $response = $this->emptyController->getResponse();
+
+        $this->assertEquals(405, $response->getStatusCode());
+        $this->assertEquals('Method Not Allowed', $this->response->getReasonPhrase());
+    }
+
+    public function testNotImplementedMethodSets504HttpCodeProvider()
+    {
+        return array(
+            array('DELETE',  array(),                             array('id' => 1)), // AbstractRestfulController::delete()
+            array('DELETE',  array(),                             array()),          // AbstractRestfulController::deleteList()
+            array('GET',     array(),                             array('id' => 1)), // AbstractRestfulController::get()
+            array('GET',     array(),                             array()),          // AbstractRestfulController::getList()
+            array('HEAD',    array(),                             array('id' => 1)), // AbstractRestfulController::head()
+            array('HEAD',    array(),                             array()),          // AbstractRestfulController::head()
+            array('OPTIONS', array(),                             array()),          // AbstractRestfulController::options()
+            array('PATCH',   http_build_query(array('foo' => 1)), array('id' => 1)), // AbstractRestfulController::patch()
+            array('PATCH',   json_encode(array('foo' => 1)),      array('id' => 1)), // AbstractRestfulController::patch()
+            array('PATCH',   http_build_query(array('foo' => 1)), array()),          // AbstractRestfulController::patchList()
+            array('PATCH',   json_encode(array('foo' => 1)),      array()),          // AbstractRestfulController::patchList()
+            array('POST',    http_build_query(array('foo' => 1)), array('id' => 1)), // AbstractRestfulController::update()
+            array('POST',    json_encode(array('foo' => 1)),      array('id' => 1)), // AbstractRestfulController::update()
+            array('POST',    http_build_query(array('foo' => 1)), array()),          // AbstractRestfulController::create()
+            array('POST',    json_encode(array('foo' => 1)),      array()),          // AbstractRestfulController::create()
+            array('PUT',     http_build_query(array('foo' => 1)), array('id' => 1)), // AbstractRestfulController::update()
+            array('PUT',     json_encode(array('foo' => 1)),      array('id' => 1)), // AbstractRestfulController::update()
+            array('PUT',     http_build_query(array('foo' => 1)), array()),          // AbstractRestfulController::replaceList()
+            array('PUT',     json_encode(array('foo' => 1)),      array()),          // AbstractRestfulController::replaceList()
+        );
     }
 }

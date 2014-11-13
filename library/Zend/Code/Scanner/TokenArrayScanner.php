@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -299,6 +299,13 @@ class TokenArrayScanner implements ScannerInterface
         }
 
         /**
+         * Define PHP 5.4 'trait' token constant.
+         */
+        if (!defined('T_TRAIT')) {
+            define('T_TRAIT', 42001);
+        }
+
+        /**
          * Variables & Setup
          */
 
@@ -390,6 +397,7 @@ class TokenArrayScanner implements ScannerInterface
 
                 $MACRO_DOC_COMMENT_START();
                 goto SCANNER_CONTINUE;
+                //goto no break needed
 
             case T_NAMESPACE:
 
@@ -434,6 +442,7 @@ class TokenArrayScanner implements ScannerInterface
 
                 $MACRO_INFO_ADVANCE();
                 goto SCANNER_CONTINUE;
+                //goto no break needed
 
             case T_USE:
 
@@ -498,6 +507,7 @@ class TokenArrayScanner implements ScannerInterface
 
                 $MACRO_INFO_ADVANCE();
                 goto SCANNER_CONTINUE;
+                //goto no break needed
 
             case T_INCLUDE:
             case T_INCLUDE_ONCE:
@@ -546,12 +556,14 @@ class TokenArrayScanner implements ScannerInterface
 
                 $MACRO_INFO_ADVANCE();
                 goto SCANNER_CONTINUE;
+                //goto no break needed
 
             case T_FUNCTION:
             case T_FINAL:
             case T_ABSTRACT:
             case T_CLASS:
             case T_INTERFACE:
+            case T_TRAIT:
 
                 $infos[$infoIndex] = array(
                     'type'        => ($tokenType === T_FUNCTION) ? 'function' : 'class',
@@ -573,7 +585,7 @@ class TokenArrayScanner implements ScannerInterface
 
                 // process the name
                 if ($infos[$infoIndex]['shortName'] == ''
-                    && (($tokenType === T_CLASS || $tokenType === T_INTERFACE) && $infos[$infoIndex]['type'] === 'class'
+                    && (($tokenType === T_CLASS || $tokenType === T_INTERFACE || $tokenType === T_TRAIT) && $infos[$infoIndex]['type'] === 'class'
                         || ($tokenType === T_FUNCTION && $infos[$infoIndex]['type'] === 'function'))
                 ) {
                     $infos[$infoIndex]['shortName'] = $tokens[$tokenIndex + 2][1];

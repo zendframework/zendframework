@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
  */
 
 namespace ZendTest\Ldap\Dn;
@@ -14,9 +13,6 @@ use Zend\Ldap;
 use Zend\Ldap\Exception;
 
 /**
- * @category   Zend
- * @package    Zend_Ldap
- * @subpackage UnitTests
  * @group      Zend_Ldap
  * @group      Zend_Ldap_Dn
  */
@@ -116,35 +112,35 @@ class CreationTest extends \PHPUnit_Framework_TestCase
         $dnString3 = 'cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
 
         $dn = Ldap\Dn::fromString($dnString1, null);
-        $this->assertEquals($dnString1, (string)$dn);
+        $this->assertEquals($dnString1, (string) $dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $this->assertEquals($dnString2, (string)$dn);
+        $this->assertEquals($dnString2, (string) $dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_LOWER);
-        $this->assertEquals($dnString3, (string)$dn);
+        $this->assertEquals($dnString3, (string) $dn);
 
         $dn = Ldap\Dn::fromString($dnString1, Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $this->assertEquals($dnString2, (string)$dn);
+        $this->assertEquals($dnString2, (string) $dn);
         $dn->setCaseFold(null);
-        $this->assertEquals($dnString1, (string)$dn);
+        $this->assertEquals($dnString1, (string) $dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_LOWER);
-        $this->assertEquals($dnString3, (string)$dn);
+        $this->assertEquals($dnString3, (string) $dn);
 
         $dn = Ldap\Dn::fromString($dnString1, Ldap\Dn::ATTR_CASEFOLD_LOWER);
-        $this->assertEquals($dnString3, (string)$dn);
+        $this->assertEquals($dnString3, (string) $dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $this->assertEquals($dnString2, (string)$dn);
+        $this->assertEquals($dnString2, (string) $dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_LOWER);
-        $this->assertEquals($dnString3, (string)$dn);
+        $this->assertEquals($dnString3, (string) $dn);
         $dn->setCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
-        $this->assertEquals($dnString2, (string)$dn);
+        $this->assertEquals($dnString2, (string) $dn);
 
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_UPPER);
         $dn = Ldap\Dn::fromString($dnString1, null);
-        $this->assertEquals($dnString2, (string)$dn);
+        $this->assertEquals($dnString2, (string) $dn);
 
         Ldap\Dn::setDefaultCaseFold(null);
         $dn = Ldap\Dn::fromString($dnString1, null);
-        $this->assertEquals($dnString1, (string)$dn);
+        $this->assertEquals($dnString1, (string) $dn);
 
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
     }

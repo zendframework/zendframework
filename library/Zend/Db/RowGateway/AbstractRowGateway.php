@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -132,12 +132,15 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
 
             $data = $this->data;
             $where = array();
+            $isPkModified = false;
 
             // primary key is always an array even if its a single column
             foreach ($this->primaryKeyColumn as $pkColumn) {
                 $where[$pkColumn] = $this->primaryKeyData[$pkColumn];
                 if ($data[$pkColumn] == $this->primaryKeyData[$pkColumn]) {
                     unset($data[$pkColumn]);
+                } else {
+                    $isPkModified = true;
                 }
             }
 
@@ -146,6 +149,14 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
             $rowsAffected = $result->getAffectedRows();
             unset($statement, $result); // cleanup
 
+            // If one or more primary keys are modified, we update the where clause
+            if ($isPkModified) {
+                foreach ($this->primaryKeyColumn as $pkColumn) {
+                    if ($data[$pkColumn] != $this->primaryKeyData[$pkColumn]) {
+                        $where[$pkColumn] = $data[$pkColumn];
+                    }
+                }
+            }
         } else {
 
             // INSERT
@@ -283,6 +294,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
      * __get
      *
      * @param  string $name
+     * @throws Exception\InvalidArgumentException
      * @return mixed
      */
     public function __get($name)
@@ -290,7 +302,7 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
         if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
         } else {
-            throw new \InvalidArgumentException('Not a valid column in this row: ' . $name);
+            throw new Exception\InvalidArgumentException('Not a valid column in this row: ' . $name);
         }
     }
 

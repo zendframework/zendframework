@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -39,8 +39,13 @@ class ObjectProperty extends AbstractHydrator
                 unset($data[$name]);
                 continue;
             }
-            // Extract data
-            $data[$name] = $this->extractValue($name, $value);
+            // Replace name if extracted differ
+            $extracted = $this->extractName($name, $object);
+            if ($extracted !== $name) {
+                unset($data[$name]);
+                $name = $extracted;
+            }
+            $data[$name] = $this->extractValue($name, $value, $object);
         }
 
         return $data;
@@ -63,7 +68,8 @@ class ObjectProperty extends AbstractHydrator
                 '%s expects the provided $object to be a PHP object)', __METHOD__
             ));
         }
-        foreach ($data as $property => $value) {
+        foreach ($data as $name => $value) {
+            $property = $this->hydrateName($name, $data);
             $object->$property = $this->hydrateValue($property, $value, $data);
         }
         return $object;

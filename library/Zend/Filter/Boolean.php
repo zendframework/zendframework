@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -90,7 +90,7 @@ class Boolean extends AbstractFilter
      *
      * @param  int|array $type
      * @throws Exception\InvalidArgumentException
-     * @return bool
+     * @return self
      */
     public function setType($type = null)
     {
@@ -137,7 +137,7 @@ class Boolean extends AbstractFilter
      * @param  bool $flag When true this filter works like cast
      *                       When false it recognises only true and false
      *                       and all other values are returned as is
-     * @return bool
+     * @return self
      */
     public function setCasting($flag = true)
     {
@@ -158,7 +158,7 @@ class Boolean extends AbstractFilter
     /**
      * @param  array|Traversable $translations
      * @throws Exception\InvalidArgumentException
-     * @return bool
+     * @return self
      */
     public function setTranslations($translations)
     {

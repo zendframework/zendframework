@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -25,16 +25,16 @@ class Request extends AbstractMessage implements RequestInterface
     /**#@+
      * @const string METHOD constant names
      */
-    const METHOD_OPTIONS = 'OPTIONS';
-    const METHOD_GET     = 'GET';
-    const METHOD_HEAD    = 'HEAD';
-    const METHOD_POST    = 'POST';
-    const METHOD_PUT     = 'PUT';
-    const METHOD_DELETE  = 'DELETE';
-    const METHOD_TRACE   = 'TRACE';
-    const METHOD_CONNECT = 'CONNECT';
-    const METHOD_PATCH   = 'PATCH';
-    const METHOD_PROPFIND= 'PROPFIND';
+    const METHOD_OPTIONS  = 'OPTIONS';
+    const METHOD_GET      = 'GET';
+    const METHOD_HEAD     = 'HEAD';
+    const METHOD_POST     = 'POST';
+    const METHOD_PUT      = 'PUT';
+    const METHOD_DELETE   = 'DELETE';
+    const METHOD_TRACE    = 'TRACE';
+    const METHOD_CONNECT  = 'CONNECT';
+    const METHOD_PATCH    = 'PATCH';
+    const METHOD_PROPFIND = 'PROPFIND';
     /**#@-*/
 
     /**
@@ -93,7 +93,7 @@ class Request extends AbstractMessage implements RequestInterface
         $request->setMethod($matches['method']);
         $request->setUri($matches['uri']);
 
-        if ($matches['version']) {
+        if (isset($matches['version'])) {
             $request->setVersion($matches['version']);
         }
 

@@ -1,22 +1,13 @@
 #!/usr/bin/env php
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
  * @category   Zend
  * @package    Zend_Loader
  * @subpackage Exception
- * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -131,11 +122,20 @@ $l = new \Zend\File\ClassFileLocator($path);
 // Iterate over each element in the path, and create a map of pluginname => classname
 $map    = new \stdClass;
 foreach ($l as $file) {
+    $namespaces = $file->getNamespaces();
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
-    $plugin    = strtolower($file->classname);
-    $class     = $namespace . $file->classname;
 
-    $map->{$plugin} = $class;
+    foreach ($file->getClasses() as $classname) {
+        $plugin = $classname;
+        foreach ($namespaces as $namespace) {
+            $namespace .= '\\';
+            if (0 === strpos($plugin, $namespace)) {
+                $plugin = str_replace($namespace, '', $plugin);
+            }
+        }
+        $plugin = strtolower($plugin);
+        $map->{$plugin} = $classname;
+    }
 }
 
 if ($appending) {

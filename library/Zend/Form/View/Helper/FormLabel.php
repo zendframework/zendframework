@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -11,6 +11,7 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
+use Zend\Form\LabelAwareInterface;
 
 class FormLabel extends AbstractHelper
 {
@@ -61,6 +62,11 @@ class FormLabel extends AbstractHelper
                 $label = $translator->translate(
                     $label, $this->getTranslatorTextDomain()
                 );
+            }
+
+            if (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')) {
+                $escapeHtmlHelper = $this->getEscapeHtmlHelper();
+                $label = $escapeHtmlHelper($label);
             }
         }
 
@@ -118,7 +124,11 @@ class FormLabel extends AbstractHelper
             ));
         }
 
-        $labelAttributes = $attributesOrElement->getLabelAttributes();
+        $labelAttributes = array();
+        if ($attributesOrElement instanceof LabelAwareInterface) {
+            $labelAttributes = $attributesOrElement->getLabelAttributes();
+        }
+
         $attributes = array('for' => $id);
 
         if (!empty($labelAttributes)) {

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -271,7 +271,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
     /**
      * Get the inner priority queue instance
      *
-     * @throws \DomainException
+     * @throws Exception\DomainException
      * @return SplPriorityQueue
      */
     protected function getQueue()
@@ -279,7 +279,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
         if (null === $this->queue) {
             $this->queue = new $this->queueClass();
             if (!$this->queue instanceof \SplPriorityQueue) {
-                throw new \DomainException(sprintf(
+                throw new Exception\DomainException(sprintf(
                     'PriorityQueue expects an internal queue of type SplPriorityQueue; received "%s"',
                     get_class($this->queue)
                 ));

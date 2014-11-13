@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -36,14 +36,14 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
     /**
      * {@inheritDoc}
      */
-    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $serviceName, $requestedName)
+    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
         $this->serviceLocator = $serviceLocator;
         if ($requestedName) {
             return $this->get($requestedName, array());
         }
 
-        return $this->get($serviceName, array());
+        return $this->get($name, array());
     }
 
     /**
@@ -51,10 +51,18 @@ class DiAbstractServiceFactory extends DiServiceFactory implements AbstractFacto
      */
     public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        return $this->instanceManager->hasSharedInstance($requestedName)
+        if ($this->instanceManager->hasSharedInstance($requestedName)
             || $this->instanceManager->hasAlias($requestedName)
             || $this->instanceManager->hasConfig($requestedName)
             || $this->instanceManager->hasTypePreferences($requestedName)
-            || $this->definitions->hasClass($requestedName);
+        ) {
+            return true;
+        }
+
+        if (! $this->definitions->hasClass($requestedName) || interface_exists($requestedName)) {
+            return false;
+        }
+
+        return true;
     }
 }

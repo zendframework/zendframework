@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -39,6 +39,7 @@ class Csrf extends AbstractValidator
 
     /**
      * Static cache of the session names to generated hashes
+     * @todo unused, left here to avoid BC breaks
      *
      * @var array
      */
@@ -117,9 +118,10 @@ class Csrf extends AbstractValidator
     {
         $this->setValue((string) $value);
 
-        $hash = $this->getValidationToken();
+        $tokenId = $this->getTokenIdFromHash($value);
+        $hash = $this->getValidationToken($tokenId);
 
-        if ($value !== $hash) {
+        if ($this->getTokenFromHash($value) !== $this->getTokenFromHash($hash)) {
             $this->error(self::NOT_SAME);
             return false;
         }
@@ -214,14 +216,7 @@ class Csrf extends AbstractValidator
     public function getHash($regenerate = false)
     {
         if ((null === $this->hash) || $regenerate) {
-            if ($regenerate) {
-                $this->hash = null;
-            } else {
-                $this->hash = $this->getValidationToken();
-            }
-            if (null === $this->hash) {
-                $this->generateHash();
-            }
+            $this->generateHash();
         }
         return $this->hash;
     }
@@ -270,12 +265,20 @@ class Csrf extends AbstractValidator
     protected function initCsrfToken()
     {
         $session = $this->getSession();
-        //$session->setExpirationHops(1, null);
         $timeout = $this->getTimeout();
         if (null !== $timeout) {
             $session->setExpirationSeconds($timeout);
         }
-        $session->hash = $this->getHash();
+
+        $hash = $this->getHash();
+        $token = $this->getTokenFromHash($hash);
+        $tokenId = $this->getTokenIdFromHash($hash);
+
+        if (! $session->tokenList) {
+            $session->tokenList = array();
+        }
+        $session->tokenList[$tokenId] = $token;
+        $session->hash = $hash; // @todo remove this, left for BC
     }
 
     /**
@@ -288,14 +291,20 @@ class Csrf extends AbstractValidator
      */
     protected function generateHash()
     {
-        if (isset(static::$hashCache[$this->getSessionName()])) {
-            $this->hash = static::$hashCache[$this->getSessionName()];
-        } else {
-            $this->hash = md5($this->getSalt() . Rand::getBytes(32) .  $this->getName());
-            static::$hashCache[$this->getSessionName()] = $this->hash;
-        }
+        $token = md5($this->getSalt() . Rand::getBytes(32) .  $this->getName());
+
+        $this->hash = $this->formatHash($token, $this->generateTokenId());
+
         $this->setValue($this->hash);
         $this->initCsrfToken();
+    }
+
+    /**
+     * @return string
+     */
+    protected function generateTokenId()
+    {
+        return md5(Rand::getBytes(32));
     }
 
     /**
@@ -303,14 +312,60 @@ class Csrf extends AbstractValidator
      *
      * Retrieve token from session, if it exists.
      *
+     * @param string $tokenId
      * @return null|string
      */
-    protected function getValidationToken()
+    protected function getValidationToken($tokenId = null)
     {
         $session = $this->getSession();
-        if (isset($session->hash)) {
+
+        /**
+         * if no tokenId is passed we revert to the old behaviour
+         * @todo remove, here for BC
+         */
+        if (! $tokenId && isset($session->hash)) {
             return $session->hash;
         }
+
+        if ($tokenId && isset($session->tokenList[$tokenId])) {
+            return $this->formatHash($session->tokenList[$tokenId], $tokenId);
+        }
+
         return null;
+    }
+
+    /**
+     * @param $token
+     * @param $tokenId
+     * @return string
+     */
+    protected function formatHash($token, $tokenId)
+    {
+        return sprintf('%s-%s', $token, $tokenId);
+    }
+
+    /**
+     * @param $hash
+     * @return string
+     */
+    protected function getTokenFromHash($hash)
+    {
+        $data = explode('-', $hash);
+        return $data[0] ?: null;
+    }
+
+    /**
+     * @param $hash
+     * @return string
+     */
+    protected function getTokenIdFromHash($hash)
+    {
+        $data = explode('-', $hash);
+
+        if (! isset($data[1])) {
+            return null;
+        }
+
+        return $data[1];
     }
 }

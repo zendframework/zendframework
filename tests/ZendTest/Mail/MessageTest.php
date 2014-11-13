@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace ZendTest\Mail;
@@ -21,9 +20,6 @@ use Zend\Mime\Mime;
 use Zend\Mime\Part as MimePart;
 
 /**
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
  * @group      Zend_Mail
  */
 class MessageTest extends \PHPUnit_Framework_TestCase
@@ -544,6 +540,27 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('text/html', $header->getFieldValue());
     }
 
+    public function testSettingUtf8MailBodyFromSinglePartMimeUtf8MessageSetsAppropriateHeaders()
+    {
+        $mime = new Mime('foo-bar');
+        $part = new MimePart('UTF-8 TestString: AaÜüÄäÖöß');
+        $part->type = Mime::TYPE_TEXT;
+        $part->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
+        $part->charset = 'utf-8';
+        $body = new MimeMessage();
+        $body->setMime($mime);
+        $body->addPart($part);
+
+        $this->message->setEncoding('UTF-8');
+        $this->message->setBody($body);
+
+        $this->assertContains(
+            'Content-Type: text/plain;' . Headers::FOLDING . 'charset="utf-8"' . Headers::EOL
+            . 'Content-Transfer-Encoding: quoted-printable' . Headers::EOL,
+            $this->message->getHeaders()->toString()
+        );
+    }
+
     public function testSettingBodyFromMultiPartMimeMessageSetsAppropriateHeaders()
     {
         $mime = new Mime('foo-bar');
@@ -665,5 +682,17 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $serialized      = $this->message->toString();
         $restoredMessage = Message::fromString($serialized);
         $this->assertEquals($serialized, $restoredMessage->toString());
+    }
+
+    /**
+     * @group ZF2-5962
+     */
+    public function testPassEmptyArrayIntoSetPartsOfMimeMessageShouldReturnEmptyBodyString()
+    {
+        $mimeMessage = new MimeMessage();
+        $mimeMessage->setParts(array());
+
+        $this->message->setBody($mimeMessage);
+        $this->assertEquals('', $this->message->getBodyText());
     }
 }

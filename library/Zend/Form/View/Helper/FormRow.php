@@ -3,16 +3,17 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Form\View\Helper;
 
 use Zend\Form\Element\Button;
+use Zend\Form\Element\MonthSelect;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
-use Zend\Form\View\Helper\AbstractHelper;
+use Zend\Form\LabelAwareInterface;
 
 class FormRow extends AbstractHelper
 {
@@ -92,7 +93,7 @@ class FormRow extends AbstractHelper
 
         if ($labelPosition !== null) {
             $this->setLabelPosition($labelPosition);
-        } else {
+        } elseif ($this->labelPosition === null) {
             $this->setLabelPosition(self::LABEL_PREPEND);
         }
 
@@ -159,9 +160,19 @@ class FormRow extends AbstractHelper
 
         $elementString = $elementHelper->render($element);
 
-        if (isset($label) && '' !== $label) {
-            $label = $escapeHtmlHelper($label);
-            $labelAttributes = $element->getLabelAttributes();
+        // hidden elements do not need a <label> -https://github.com/zendframework/zf2/issues/5607
+        $type = $element->getAttribute('type');
+        if (isset($label) && '' !== $label && $type !== 'hidden') {
+
+            $labelAttributes = array();
+
+            if ($element instanceof LabelAwareInterface) {
+                $labelAttributes = $element->getLabelAttributes();
+            }
+
+            if (! $element instanceof LabelAwareInterface || ! $element->getLabelOption('disable_html_escape')) {
+                $label = $escapeHtmlHelper($label);
+            }
 
             if (empty($labelAttributes)) {
                 $labelAttributes = $this->labelAttributes;
@@ -169,14 +180,20 @@ class FormRow extends AbstractHelper
 
             // Multicheckbox elements have to be handled differently as the HTML standard does not allow nested
             // labels. The semantic way is to group them inside a fieldset
-            $type = $element->getAttribute('type');
-            if ($type === 'multi_checkbox' || $type === 'radio') {
+            if ($type === 'multi_checkbox'
+                || $type === 'radio'
+                || $element instanceof MonthSelect
+            ) {
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',
                     $label,
                     $elementString);
             } else {
-                if ($element->hasAttribute('id')) {
+                // Ensure element and label will be separated if element has an `id`-attribute.
+                // If element has label option `always_wrap` it will be nested in any case.
+                if ($element->hasAttribute('id')
+                    && ($element instanceof LabelAwareInterface && !$element->getLabelOption('always_wrap'))
+                ) {
                     $labelOpen = '';
                     $labelClose = '';
                     $label = $labelHelper($element);
@@ -185,7 +202,9 @@ class FormRow extends AbstractHelper
                     $labelClose = $labelHelper->closeTag();
                 }
 
-                if ($label !== '' && !$element->hasAttribute('id')) {
+                if ($label !== '' && (!$element->hasAttribute('id'))
+                    || ($element instanceof LabelAwareInterface && $element->getLabelOption('always_wrap'))
+                ) {
                     $label = '<span>' . $label . '</span>';
                 }
 
@@ -310,7 +329,7 @@ class FormRow extends AbstractHelper
     }
 
     /**
-     * Retrive if the errors are rendered by this helper
+     * Retrieve if the errors are rendered by this helper
      *
      * @return bool
      */
@@ -332,7 +351,7 @@ class FormRow extends AbstractHelper
     }
 
     /**
-     * Retrive current partial
+     * Retrieve current partial
      *
      * @return null|string
      */

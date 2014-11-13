@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -80,6 +80,12 @@ abstract class AbstractRenderer implements RendererInterface
     protected $resource;
 
     /**
+     * Show a transparent background
+     * @var Boolean
+     */
+    protected $transparentBackground = false;
+
+    /**
      * Constructor
      * @param array|Traversable $options
      */
@@ -133,6 +139,28 @@ abstract class AbstractRenderer implements RendererInterface
     public function getRendererNamespace()
     {
         return $this->rendererNamespace;
+    }
+
+    /**
+     * Set whether background should be transparent
+     * Will work for SVG and Image (png and gif only)
+     *
+     * @param $bool
+     * @return $this
+     */
+    public function setTransparentBackground($bool)
+    {
+        $this->transparentBackground = $bool;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getTransparentBackground()
+    {
+        return $this->transparentBackground;
     }
 
     /**
@@ -276,7 +304,6 @@ abstract class AbstractRenderer implements RendererInterface
         return $this;
     }
 
-
     /**
      * Set the size of a module
      * @return float
@@ -354,8 +381,7 @@ abstract class AbstractRenderer implements RendererInterface
         if ($barcodeHeight != $supportHeight && $this->topOffset == 0) {
             switch ($this->verticalPosition) {
                 case 'middle':
-                    $this->topOffset = floor(
-                            ($supportHeight - $barcodeHeight) / 2);
+                    $this->topOffset = floor(($supportHeight - $barcodeHeight) / 2);
                     break;
                 case 'bottom':
                     $this->topOffset = $supportHeight - $barcodeHeight;
@@ -370,8 +396,7 @@ abstract class AbstractRenderer implements RendererInterface
         if ($barcodeWidth != $supportWidth && $this->leftOffset == 0) {
             switch ($this->horizontalPosition) {
                 case 'center':
-                    $this->leftOffset = floor(
-                            ($supportWidth - $barcodeWidth) / 2);
+                    $this->leftOffset = floor(($supportWidth - $barcodeWidth) / 2);
                     break;
                 case 'right':
                     $this->leftOffset = $supportWidth - $barcodeWidth;

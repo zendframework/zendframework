@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -19,7 +19,7 @@ namespace Zend\Form\Annotation;
  *
  * @Annotation
  */
-class ComposedObject extends AbstractStringAnnotation
+class ComposedObject extends AbstractArrayOrStringAnnotation
 {
     /**
      * Retrieve the composed object classname
@@ -28,6 +28,29 @@ class ComposedObject extends AbstractStringAnnotation
      */
     public function getComposedObject()
     {
+        if (is_array($this->value)) {
+            return $this->value['target_object'];
+        }
         return $this->value;
+    }
+
+    /**
+     * Is this composed object a collection or not
+     *
+     * @return bool
+     */
+    public function isCollection()
+    {
+        return is_array($this->value) && isset($this->value['is_collection']) && $this->value['is_collection'];
+    }
+
+    /**
+     * Retrieve the options for the composed object
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return is_array($this->value) && isset($this->value['options']) ? $this->value['options'] : array();
     }
 }

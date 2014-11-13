@@ -3,21 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Math
  */
 
 namespace ZendTest\Math;
 
 use Zend\Math;
 use Zend\Math\Rand;
-use RandomLib;
 
 /**
- * @category   Zend
- * @package    Zend_Math
- * @subpackage UnitTests
  * @group      Zend_Math
  */
 class RandTest extends \PHPUnit_Framework_TestCase
@@ -45,6 +40,44 @@ class RandTest extends \PHPUnit_Framework_TestCase
             $rand = Rand::getBoolean();
             $this->assertTrue(is_bool($rand));
         }
+    }
+
+    /**
+     * @dataProvider dataProviderForTestRandIntegerRangeTest
+     */
+    public function testRandIntegerRangeTest($min, $max, $cycles)
+    {
+        $counter = array();
+        for ($i = $min; $i <= $max; $i++) {
+            $counter[$i] = 0;
+        }
+
+        for ($j = 0; $j < $cycles; $j++) {
+            $value = Rand::getInteger($min, $max);
+            $this->assertInternalType('integer', $value);
+            $this->assertGreaterThanOrEqual($min, $value);
+            $this->assertLessThanOrEqual($max, $value);
+            $counter[$value]++;
+        }
+
+        foreach ($counter as $value => $count) {
+            $this->assertGreaterThan(0, $count, sprintf('The bucket for value %d is empty.', $value));
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderForTestRandIntegerRangeTest()
+    {
+        return array(
+            array(0, 100, 10000),
+            array(-100, 100, 10000),
+            array(-100, 50, 10000),
+            array(0, 63, 10000),
+            array(0, 64, 10000),
+            array(0, 65, 10000),
+        );
     }
 
     /**
@@ -101,6 +134,17 @@ class RandTest extends \PHPUnit_Framework_TestCase
             'min parameter must be lower than max parameter'
         );
         $rand = Rand::getInteger(100, 0);
+    }
+
+    public function testIntegerRangeOverflow()
+    {
+        $values = 0;
+        $cycles = 100;
+        for ($i = 0; $i < $cycles; $i++) {
+            $values += Rand::getInteger(0, PHP_INT_MAX);
+        }
+
+        $this->assertFalse($values === 0);
     }
 
     public function testRandFloat()

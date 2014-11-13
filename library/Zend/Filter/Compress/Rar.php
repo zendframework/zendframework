@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -62,7 +62,7 @@ class Rar extends AbstractCompressionAlgorithm
      * Sets the callback to use
      *
      * @param  string $callback
-     * @return Rar
+     * @return self
      * @throws Exception\InvalidArgumentException if invalid callback provided
      */
     public function setCallback($callback)
@@ -89,7 +89,7 @@ class Rar extends AbstractCompressionAlgorithm
      * Sets the archive to use for de-/compression
      *
      * @param  string $archive Archive to use
-     * @return Rar
+     * @return self
      */
     public function setArchive($archive)
     {
@@ -113,7 +113,7 @@ class Rar extends AbstractCompressionAlgorithm
      * Sets the password to use
      *
      * @param  string $password
-     * @return Rar
+     * @return self
      */
     public function setPassword($password)
     {
@@ -135,7 +135,7 @@ class Rar extends AbstractCompressionAlgorithm
      * Sets the targetpath to use
      *
      * @param  string $target
-     * @return Rar
+     * @return self
      * @throws Exception\InvalidArgumentException if specified target directory does not exist
      */
     public function setTarget($target)

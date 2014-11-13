@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -13,11 +12,6 @@ namespace ZendTest\Form\View\Helper;
 use Zend\Form\Element;
 use Zend\Form\View\Helper\FormInput as FormInputHelper;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class FormInputTest extends CommonTestCase
 {
     public function setUp()
@@ -97,6 +91,9 @@ class FormInputTest extends CommonTestCase
         $this->$assertion($expected, $markup);
     }
 
+    /**
+     * @return array
+     */
     public function validAttributes()
     {
         return array(
@@ -183,6 +180,7 @@ class FormInputTest extends CommonTestCase
             array('ontimeupdate', 'assertContains'),
             array('onvolumechange', 'assertContains'),
             array('onwaiting', 'assertContains'),
+            array('role', 'assertContains'),
         );
     }
 
@@ -210,6 +208,7 @@ class FormInputTest extends CommonTestCase
             array('optgroup', 'assertNotContains'),
             array('arbitrary', 'assertNotContains'),
             array('meta', 'assertNotContains'),
+            array('role', 'assertContains'),
         );
     }
 
@@ -321,6 +320,7 @@ class FormInputTest extends CommonTestCase
             'optgroup'           => 'value',
             'arbitrary'          => 'value',
             'meta'               => 'value',
+            'role'               => 'value',
         ));
         $element->setValue('value');
         return $element;
@@ -328,29 +328,9 @@ class FormInputTest extends CommonTestCase
 
     /**
      * @dataProvider validAttributes
+     * @return       void
      */
     public function testAllValidFormMarkupAttributesPresentInElementAreRendered($attribute, $assertion)
-    {
-        $element = $this->getCompleteElement();
-        $markup  = $this->helper->render($element);
-        switch ($attribute) {
-            case 'value':
-                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
-                break;
-            default:
-                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
-                break;
-        }
-        $this->$assertion($expect, $markup);
-    }
-
-    /**
-     * Split into 2 as 5.3.3 was segfaulting, and the segfault appears to be due
-     * to number of items in the data provider.
-     *
-     * @dataProvider validAttributes2
-     */
-    public function testAllValidFormMarkupAttributesPresentInElementAreRendered2($attribute, $assertion)
     {
         $element = $this->getCompleteElement();
         $markup  = $this->helper->render($element);
@@ -496,6 +476,27 @@ class FormInputTest extends CommonTestCase
 
         $markup = $this->helper->__invoke($element);
 
-        $this->assertContains('placeholder="translated string"', $markup);
+        $this->assertContains('placeholder="translated&#x20;string"', $markup);
+    }
+
+    public function testCanTranslateTitle()
+    {
+        $element = new Element('test');
+        $element->setAttribute('title', 'test');
+
+        $mockTranslator = $this->getMock('Zend\I18n\Translator\Translator');
+
+        $mockTranslator->expects($this->exactly(1))
+                ->method('translate')
+                ->with($this->equalTo('test'))
+                ->will($this->returnValue('translated string'));
+
+        $this->helper->setTranslator($mockTranslator);
+
+        $this->assertTrue($this->helper->hasTranslator());
+
+        $markup = $this->helper->__invoke($element);
+
+        $this->assertContains('title="translated&#x20;string"', $markup);
     }
 }

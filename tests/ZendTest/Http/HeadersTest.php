@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Http
  */
 
 namespace ZendTest\Http;
@@ -47,7 +46,8 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $header = $headers->get('fake');
         $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
         $this->assertEquals('Fake', $header->getFieldName());
-        $this->assertEquals('foo-bar,blah-blah', $header->getFieldValue());
+        // any leading space MAY be replaced by a single space @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html
+        $this->assertRegexp("#foo-bar,\r\n\s+blah-blah#", $header->getFieldValue());
     }
 
     public function testHeadersFromStringFactoryCreatesSingleObjectWithHeaderBreakLine()
@@ -59,6 +59,17 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Http\Header\GenericHeader', $header);
         $this->assertEquals('Fake', $header->getFieldName());
         $this->assertEquals('foo-bar', $header->getFieldValue());
+    }
+
+    public function testHeadersFromStringFactoryRespectsSpecAllowedMultiLineHeaders()
+    {
+        $headers = Headers::fromString("Foo: foo-bar\r\nX-Another: another\r\n X-Actually-A-Continuation:ofSomeKindOfValue\r\nX-Another: another\r\n");
+        $this->assertEquals(3, $headers->count());
+
+        // check continued header
+        $header = $headers->get('X-Another');
+        $this->assertEquals('X-Another', $header->getFieldName());
+        $this->assertRegexp("#another\r\n\s+X-Actually-A-Continuation:ofSomeKindOfValue#", $header->getFieldValue());
     }
 
     public function testHeadersFromStringFactoryThrowsExceptionOnMalformedHeaderLine()

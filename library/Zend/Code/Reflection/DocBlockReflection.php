@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -84,7 +84,11 @@ class DocBlockReflection implements ReflectionInterface
      */
     public function __construct($commentOrReflector, DocBlockTagManager $tagManager = null)
     {
-        $this->tagManager = $tagManager ? : new DocBlockTagManager(DocBlockTagManager::USE_DEFAULT_PROTOTYPES);
+        if (!$tagManager) {
+            $tagManager = new DocBlockTagManager();
+            $tagManager->initializeDefaultTags();
+        }
+        $this->tagManager = $tagManager;
 
         if ($commentOrReflector instanceof Reflector) {
             $this->reflector = $commentOrReflector;
@@ -249,8 +253,7 @@ class DocBlockReflection implements ReflectionInterface
 
         // create a clean docComment
         $this->cleanDocComment = preg_replace("#[ \t]*(?:/\*\*|\*/|\*)[ ]{0,1}(.*)?#", '$1', $docComment);
-        $this->cleanDocComment = ltrim($this->cleanDocComment,
-                                       "\r\n"); // @todo should be changed to remove first and last empty line
+        $this->cleanDocComment = ltrim($this->cleanDocComment, "\r\n"); // @todo should be changed to remove first and last empty line
 
         $scanner                = new DocBlockScanner($docComment);
         $this->shortDescription = ltrim($scanner->getShortDescription());
@@ -268,7 +271,7 @@ class DocBlockReflection implements ReflectionInterface
         $str = "DocBlock [ /* DocBlock */ ] {" . PHP_EOL . PHP_EOL;
         $str .= "  - Tags [" . count($this->tags) . "] {" . PHP_EOL;
 
-        foreach ($this->tags AS $tag) {
+        foreach ($this->tags as $tag) {
             $str .= "    " . $tag;
         }
 

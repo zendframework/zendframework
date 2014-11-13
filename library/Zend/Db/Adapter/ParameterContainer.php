@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -116,8 +116,7 @@ class ParameterContainer implements Iterator, ArrayAccess, Countable
             }
         } elseif (is_string($name)) {
             // is a string:
-            $currentNames = array_keys($this->data);
-            $position = array_search($name, $currentNames, true);
+            $position = array_key_exists($name, $this->data);
         } elseif ($name === null) {
             $name = (string) count($this->data);
         } else {

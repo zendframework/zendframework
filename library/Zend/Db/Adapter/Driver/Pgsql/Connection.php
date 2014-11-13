@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -231,6 +231,16 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
+     * In transaction
+     *
+     * @return bool
+     */
+    public function inTransaction()
+    {
+        return $this->inTransaction;
+    }
+
+    /**
      * @return void
      */
     public function commit()
@@ -276,8 +286,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if ($this->profiler) {
             $this->profiler->profilerFinish($sql);
         }
-
-        //var_dump(pg_result_status($resultResource));
 
         // if the returnValue is something other than a pg result resource, bypass wrapping it
         if ($resultResource === false) {

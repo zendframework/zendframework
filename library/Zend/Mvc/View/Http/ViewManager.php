@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,7 +15,6 @@ use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\View\SendResponseListener;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View\HelperPluginManager as ViewHelperManager;
 use Zend\View\Renderer\PhpRenderer as ViewPhpRenderer;
@@ -123,8 +122,8 @@ class ViewManager extends AbstractListenerAggregate
         $routeNotFoundStrategy   = $this->getRouteNotFoundStrategy();
         $exceptionStrategy       = $this->getExceptionStrategy();
         $mvcRenderingStrategy    = $this->getMvcRenderingStrategy();
+        $injectTemplateListener  = $this->getInjectTemplateListener();
         $createViewModelListener = new CreateViewModelListener();
-        $injectTemplateListener  = new InjectTemplateListener();
         $injectViewModelListener = new InjectViewModelListener();
 
         $this->registerMvcRenderingStrategies($events);
@@ -146,7 +145,7 @@ class ViewManager extends AbstractListenerAggregate
     /**
      * Instantiates and configures the renderer's helper manager
      *
-     * @return \Zend\View\HelperPluginManager
+     * @return ViewHelperManager
      */
     public function getHelperManager()
     {
@@ -344,6 +343,15 @@ class ViewManager extends AbstractListenerAggregate
         $this->services->setAlias('404Strategy', 'RouteNotFoundStrategy');
 
         return $this->routeNotFoundStrategy;
+    }
+
+    public function getInjectTemplateListener()
+    {
+        $listener = new InjectTemplateListener();
+        if (isset($this->config['controller_map'])) {
+            $listener->setControllerMap($this->config['controller_map']);
+        }
+        return $listener;
     }
 
     /**

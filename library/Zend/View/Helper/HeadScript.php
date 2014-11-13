@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,6 +15,16 @@ use Zend\View\Exception;
 
 /**
  * Helper for setting and retrieving script elements for HTML head section
+ *
+ * Allows the following method calls:
+ * @method HeadScript appendFile($src, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript offsetSetFile($index, $src, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript prependFile($src, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript setFile($src, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript appendScript($script, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript offsetSetScript($index, $src, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript prependScript($script, $type = 'text/javascript', $attrs = array())
+ * @method HeadScript setScript($script, $type = 'text/javascript', $attrs = array())
  */
 class HeadScript extends Placeholder\Container\AbstractStandalone
 {
@@ -115,7 +125,7 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * @param  string $type      Script type and/or array of script attributes
      * @return HeadScript
      */
-    public function __invoke($mode = HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
+    public function __invoke($mode = self::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
     {
         if ((null !== $spec) && is_string($spec)) {
             $action    = ucfirst(strtolower($mode));
@@ -138,16 +148,6 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
 
     /**
      * Overload method access
-     *
-     * Allows the following method calls:
-     * - appendFile($src, $type = 'text/javascript', $attrs = array())
-     * - offsetSetFile($index, $src, $type = 'text/javascript', $attrs = array())
-     * - prependFile($src, $type = 'text/javascript', $attrs = array())
-     * - setFile($src, $type = 'text/javascript', $attrs = array())
-     * - appendScript($script, $type = 'text/javascript', $attrs = array())
-     * - offsetSetScript($index, $src, $type = 'text/javascript', $attrs = array())
-     * - prependScript($script, $type = 'text/javascript', $attrs = array())
-     * - setScript($script, $type = 'text/javascript', $attrs = array())
      *
      * @param  string $method Method to call
      * @param  array  $args   Arguments of method
@@ -408,6 +408,10 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
             && !empty($item->attributes['conditional'])
             && is_string($item->attributes['conditional']))
         {
+            // inner wrap with comment end and start if !IE
+            if (str_replace(' ', '', $item->attributes['conditional']) === '!IE') {
+                $html = '<!-->' . $html . '<!--';
+            }
             $html = $indent . '<!--[if ' . $item->attributes['conditional'] . ']>' . $html . '<![endif]-->';
         } else {
             $html = $indent . $html;

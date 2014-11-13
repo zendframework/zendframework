@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -11,6 +11,7 @@ namespace Zend\Form;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigInterface;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\InitializableInterface;
 
@@ -76,6 +77,7 @@ class FormElementManager extends AbstractPluginManager
         parent::__construct($configuration);
 
         $this->addInitializer(array($this, 'injectFactory'));
+        $this->addInitializer(array($this, 'callElementInit'), false);
     }
 
     /**
@@ -99,6 +101,18 @@ class FormElementManager extends AbstractPluginManager
     }
 
     /**
+     * Call init() on any element that implements InitializableInterface
+     *
+     * @internal param $element
+     */
+    public function callElementInit($element)
+    {
+        if ($element instanceof InitializableInterface) {
+            $element->init();
+        }
+    }
+
+    /**
      * Validate the plugin
      *
      * Checks that the element is an instance of ElementInterface
@@ -109,11 +123,6 @@ class FormElementManager extends AbstractPluginManager
      */
     public function validatePlugin($plugin)
     {
-        // Hook to perform various initialization, when the element is not created through the factory
-        if ($plugin instanceof InitializableInterface) {
-            $plugin->init();
-        }
-
         if ($plugin instanceof ElementInterface) {
             return; // we're okay
         }
@@ -122,5 +131,63 @@ class FormElementManager extends AbstractPluginManager
             'Plugin of type %s is invalid; must implement Zend\Form\ElementInterface',
             (is_object($plugin) ? get_class($plugin) : gettype($plugin))
         ));
+    }
+
+    /**
+     * Retrieve a service from the manager by name
+     *
+     * Allows passing an array of options to use when creating the instance.
+     * createFromInvokable() will use these and pass them to the instance
+     * constructor if not null and a non-empty array.
+     *
+     * @param  string $name
+     * @param  string|array $options
+     * @param  bool $usePeeringServiceManagers
+     * @return object
+     */
+    public function get($name, $options = array(), $usePeeringServiceManagers = true)
+    {
+        if (is_string($options)) {
+            $options = array('name' => $options);
+        }
+        return parent::get($name, $options, $usePeeringServiceManagers);
+    }
+
+    /**
+     * Attempt to create an instance via an invokable class
+     *
+     * Overrides parent implementation by passing $creationOptions to the
+     * constructor, if non-null.
+     *
+     * @param  string $canonicalName
+     * @param  string $requestedName
+     * @return null|\stdClass
+     * @throws ServiceNotCreatedException If resolved class does not exist
+     */
+    protected function createFromInvokable($canonicalName, $requestedName)
+    {
+        $invokable = $this->invokableClasses[$canonicalName];
+
+        if (null === $this->creationOptions
+            || (is_array($this->creationOptions) && empty($this->creationOptions))
+        ) {
+            $instance = new $invokable();
+        } else {
+            if (isset($this->creationOptions['name'])) {
+                $name = $this->creationOptions['name'];
+            } else {
+                $name = $requestedName;
+            }
+
+            if (isset($this->creationOptions['options'])) {
+                $options = $this->creationOptions['options'];
+            } else {
+                $options = $this->creationOptions;
+            }
+
+            $instance = new $invokable($name, $options);
+        }
+
+        return $instance;
     }
 }

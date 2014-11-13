@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Navigation
  */
 
 namespace ZendTest\Navigation\Page;
@@ -25,9 +24,6 @@ use ZendTest\Navigation\TestAsset;
 /**
  * Tests the class Zend_Navigation_Page_Mvc
  *
- * @category   Zend
- * @package    Zend_Navigation
- * @subpackage UnitTests
  * @group      Zend_Navigation
  */
 class MvcTest extends TestCase
@@ -51,6 +47,21 @@ class MvcTest extends TestCase
 
     protected function tearDown()
     {
+    }
+
+    public function testHrefGeneratedByRouterWithDefaultRoute()
+    {
+        $page = new Page\Mvc(array(
+            'label'      => 'foo',
+            'action'     => 'index',
+            'controller' => 'index'
+        ));
+        Page\Mvc::setDefaultRoute('default');
+        $page->setRouter($this->router);
+        $page->setAction('view');
+        $page->setController('news');
+
+        $this->assertEquals('/news/view', $page->getHref());
     }
 
     public function testHrefGeneratedByRouterRequiresNoRoute()

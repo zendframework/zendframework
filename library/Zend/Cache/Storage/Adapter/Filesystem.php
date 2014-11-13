@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -25,6 +25,7 @@ use Zend\Cache\Storage\OptimizableInterface;
 use Zend\Cache\Storage\TaggableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
 use Zend\Stdlib\ErrorHandler;
+use ArrayObject;
 
 class Filesystem extends AbstractAdapter implements
     AvailableSpaceCapableInterface,
@@ -131,6 +132,8 @@ class Filesystem extends AbstractAdapter implements
      * Remove expired items
      *
      * @return bool
+     *
+     * @triggers clearExpired.exception(ExceptionEvent)
      */
     public function clearExpired()
     {
@@ -161,7 +164,13 @@ class Filesystem extends AbstractAdapter implements
         }
         $error = ErrorHandler::stop();
         if ($error) {
-            throw new Exception\RuntimeException("Failed to clear expired items", 0, $error);
+            $result = false;
+            return $this->triggerException(
+                __FUNCTION__,
+                new ArrayObject(),
+                $result,
+                new Exception\RuntimeException('Failed to clear expired items', 0, $error)
+            );
         }
 
         return true;
@@ -189,7 +198,7 @@ class Filesystem extends AbstractAdapter implements
         $flags = GlobIterator::SKIP_DOTS | GlobIterator::CURRENT_AS_PATHNAME;
         $path = $options->getCacheDir()
             . str_repeat(DIRECTORY_SEPARATOR . $prefix . '*', $options->getDirLevel())
-            . DIRECTORY_SEPARATOR . $prefix . '*';
+            . DIRECTORY_SEPARATOR . $prefix . '*.*';
         $glob = new GlobIterator($path, $flags);
 
         ErrorHandler::start();
@@ -227,7 +236,7 @@ class Filesystem extends AbstractAdapter implements
         $flags = GlobIterator::SKIP_DOTS | GlobIterator::CURRENT_AS_PATHNAME;
         $path = $options->getCacheDir()
             . str_repeat(DIRECTORY_SEPARATOR . $nsPrefix . '*', $options->getDirLevel())
-            . DIRECTORY_SEPARATOR . $nsPrefix . $prefix . '*';
+            . DIRECTORY_SEPARATOR . $nsPrefix . $prefix . '*.*';
         $glob = new GlobIterator($path, $flags);
 
         ErrorHandler::start();
@@ -413,7 +422,7 @@ class Filesystem extends AbstractAdapter implements
                     $events->detach($handle);
                 }
             };
-            $handle = $events->attach('option', $callback);
+            $events->attach('option', $callback);
         }
 
         return $this->totalSpace;
@@ -536,7 +545,6 @@ class Filesystem extends AbstractAdapter implements
      */
     protected function internalGetItems(array & $normalizedKeys)
     {
-        $options = $this->getOptions();
         $keys    = $normalizedKeys; // Don't change argument passed by reference
         $result  = array();
         while ($keys) {
@@ -632,9 +640,7 @@ class Filesystem extends AbstractAdapter implements
             $mtime = filemtime($file);
             $error = ErrorHandler::stop();
             if (!$mtime) {
-                throw new Exception\RuntimeException(
-                    "Error getting mtime of file '{$file}'", 0, $error
-                );
+                throw new Exception\RuntimeException("Error getting mtime of file '{$file}'", 0, $error);
             }
 
             if (time() >= ($mtime + $ttl)) {
@@ -1056,9 +1062,7 @@ class Filesystem extends AbstractAdapter implements
         $touch = touch($filespec . '.dat');
         $error = ErrorHandler::stop();
         if (!$touch) {
-            throw new Exception\RuntimeException(
-                "Error touching file '{$filespec}.dat'", 0, $error
-            );
+            throw new Exception\RuntimeException("Error touching file '{$filespec}.dat'", 0, $error);
         }
 
         return true;
@@ -1298,9 +1302,7 @@ class Filesystem extends AbstractAdapter implements
         $ifo = unserialize($content);
         $err = ErrorHandler::stop();
         if (!is_array($ifo)) {
-            throw new Exception\RuntimeException(
-                "Corrupted info file '{$file}'", 0, $err
-            );
+            throw new Exception\RuntimeException("Corrupted info file '{$file}'", 0, $err);
         }
 
         return $ifo;
@@ -1327,9 +1329,7 @@ class Filesystem extends AbstractAdapter implements
             $fp = fopen($file, 'rb');
             if ($fp === false) {
                 $err = ErrorHandler::stop();
-                throw new Exception\RuntimeException(
-                    "Error opening file '{$file}'", 0, $err
-                );
+                throw new Exception\RuntimeException("Error opening file '{$file}'", 0, $err);
             }
 
             if ($nonBlocking) {
@@ -1346,9 +1346,7 @@ class Filesystem extends AbstractAdapter implements
             if (!$lock) {
                 fclose($fp);
                 $err = ErrorHandler::stop();
-                throw new Exception\RuntimeException(
-                    "Error locking file '{$file}'", 0, $err
-                );
+                throw new Exception\RuntimeException("Error locking file '{$file}'", 0, $err);
             }
 
             $res = stream_get_contents($fp);
@@ -1356,9 +1354,7 @@ class Filesystem extends AbstractAdapter implements
                 flock($fp, LOCK_UN);
                 fclose($fp);
                 $err = ErrorHandler::stop();
-                throw new Exception\RuntimeException(
-                    'Error getting stream contents', 0, $err
-                );
+                throw new Exception\RuntimeException('Error getting stream contents', 0, $err);
             }
 
             flock($fp, LOCK_UN);
@@ -1369,9 +1365,7 @@ class Filesystem extends AbstractAdapter implements
             $res = file_get_contents($file, false);
             if ($res === false) {
                 $err = ErrorHandler::stop();
-                throw new Exception\RuntimeException(
-                    "Error getting file contents for file '{$file}'", 0, $err
-                );
+                throw new Exception\RuntimeException("Error getting file contents for file '{$file}'", 0, $err);
             }
         }
 
@@ -1424,17 +1418,13 @@ class Filesystem extends AbstractAdapter implements
             if (!$res) {
                 $oct = ($perm === false) ? '777' : decoct($perm);
                 $err = ErrorHandler::stop();
-                throw new Exception\RuntimeException(
-                    "mkdir('{$pathname}', 0{$oct}, true) failed", 0, $err
-                );
+                throw new Exception\RuntimeException("mkdir('{$pathname}', 0{$oct}, true) failed", 0, $err);
             }
 
             if ($perm !== false && !chmod($pathname, $perm)) {
                 $oct = decoct($perm);
                 $err = ErrorHandler::stop();
-                throw new Exception\RuntimeException(
-                    "chmod('{$pathname}', 0{$oct}) failed", 0, $err
-                );
+                throw new Exception\RuntimeException("chmod('{$pathname}', 0{$oct}) failed", 0, $err);
             }
 
         } else {
@@ -1467,7 +1457,7 @@ class Filesystem extends AbstractAdapter implements
 
                 if (!$res) {
                     $oct = ($perm === false) ? '777' : decoct($perm);
-                    $err = ErrorHandler::stop();
+                    ErrorHandler::stop();
                     throw new Exception\RuntimeException(
                         "mkdir('{$path}', 0{$oct}, false) failed"
                     );
@@ -1475,7 +1465,7 @@ class Filesystem extends AbstractAdapter implements
 
                 if ($perm !== false && !chmod($path, $perm)) {
                     $oct = decoct($perm);
-                    $err = ErrorHandler::stop();
+                    ErrorHandler::stop();
                     throw new Exception\RuntimeException(
                         "chmod('{$path}', 0{$oct}) failed"
                     );
@@ -1524,9 +1514,7 @@ class Filesystem extends AbstractAdapter implements
 
             if (!$fp) {
                 $err = ErrorHandler::stop();
-                throw new Exception\RuntimeException(
-                    "Error opening file '{$file}'", 0, $err
-                );
+                throw new Exception\RuntimeException("Error opening file '{$file}'", 0, $err);
             }
 
             if ($perm !== false && !chmod($file, $perm)) {
@@ -1580,9 +1568,7 @@ class Filesystem extends AbstractAdapter implements
 
             if ($rs === false) {
                 $err = ErrorHandler::stop();
-                throw new Exception\RuntimeException(
-                    "Error writing file '{$file}'", 0, $err
-                );
+                throw new Exception\RuntimeException("Error writing file '{$file}'", 0, $err);
             }
 
             if ($perm !== false && !chmod($file, $perm)) {
@@ -1600,7 +1586,7 @@ class Filesystem extends AbstractAdapter implements
      *
      * @param string $file
      * @return void
-     * @throws RuntimeException
+     * @throws Exception\RuntimeException
      */
     protected function unlink($file)
     {
@@ -1611,7 +1597,9 @@ class Filesystem extends AbstractAdapter implements
         // only throw exception if file still exists after deleting
         if (!$res && file_exists($file)) {
             throw new Exception\RuntimeException(
-                "Error unlinking file '{$file}'; file still exists", 0, $err
+                "Error unlinking file '{$file}'; file still exists",
+                0,
+                $err
             );
         }
     }

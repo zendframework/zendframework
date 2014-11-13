@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -19,6 +19,8 @@ class Encrypt extends AbstractFilter
 {
     /**
      * Encryption adapter
+     *
+     * @param Encrypt\EncryptionAlgorithmInterface
      */
     protected $adapter;
 
@@ -38,6 +40,7 @@ class Encrypt extends AbstractFilter
 
     /**
      * Returns the name of the set adapter
+     * @todo inconsitent: get adapter should return the adapter and not the name
      *
      * @return string
      */
@@ -50,7 +53,7 @@ class Encrypt extends AbstractFilter
      * Sets new encryption options
      *
      * @param  string|array $options (Optional) Encryption options
-     * @return Encrypt
+     * @return self
      * @throws Exception\DomainException
      * @throws Exception\InvalidArgumentException
      */
@@ -117,6 +120,10 @@ class Encrypt extends AbstractFilter
      */
     public function filter($value)
     {
+        if (!is_string($value)) {
+            return $value;
+        }
+
         return $this->adapter->encrypt($value);
     }
 }

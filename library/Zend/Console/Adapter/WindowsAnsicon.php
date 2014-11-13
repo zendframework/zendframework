@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -222,9 +222,9 @@ class WindowsAnsicon extends Posix
         if ($mask === null) {
             exec(
                 'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
-                    . 'while ($Host.UI.RawUI.KeyAvailable) {$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\');}'
-                    . 'write $key.VirtualKeyCode;'
-                    . '"',
+                . 'while ($Host.UI.RawUI.KeyAvailable) {$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\');}'
+                . 'write $key.VirtualKeyCode;'
+                . '"',
                 $result,
                 $return
             );
@@ -259,12 +259,12 @@ class WindowsAnsicon extends Posix
             $result = $return = null;
             exec(
                 'powershell -NonInteractive -NoProfile -NoLogo -OutputFormat Text -Command "'
-                    . '[int[]] $mask = '.join(',', $asciiMask).';'
-                    . 'do {'
-                        . '$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;'
-                    . '} while( !($mask -contains $key) );'
-                    . 'write $key;'
-                    . '"',
+                . '[int[]] $mask = '.join(',', $asciiMask).';'
+                . 'do {'
+                . '$key = $Host.UI.RawUI.ReadKey(\'NoEcho,IncludeKeyDown\').VirtualKeyCode;'
+                . '} while ( !($mask -contains $key) );'
+                . 'write $key;'
+                . '"',
                 $result,
                 $return
             );

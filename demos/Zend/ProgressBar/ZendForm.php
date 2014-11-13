@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -15,8 +15,8 @@ use Zend\Loader\StandardAutoloader;
 use Zend\ProgressBar\Adapter\JsPull;
 
 /**
- * This sample file demonstrates an advanced use case of Zend_ProgressBar with
- * Zend_Form and Zend_File_Transfer.
+ * This sample file demonstrates an advanced use case of Zend\ProgressBar with
+ * Zend\Form and Zend\File\Transfer.
  */
 
 require_once dirname(dirname(dirname(__DIR__))) . '/library/Zend/Loader/StandardAutoloader.php';

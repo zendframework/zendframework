@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -182,7 +182,7 @@ class View implements EventManagerAwareInterface
         }
 
         $event->setRenderer($renderer);
-        $results = $events->trigger(ViewEvent::EVENT_RENDERER_POST, $event);
+        $events->trigger(ViewEvent::EVENT_RENDERER_POST, $event);
 
         // If EVENT_RENDERER or EVENT_RENDERER_POST changed the model, make sure
         // we use this new model instead of the current $model

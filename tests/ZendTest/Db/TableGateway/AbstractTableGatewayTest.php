@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace ZendTest\Db\TableGateway;
@@ -162,6 +161,50 @@ class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
             ->with($this->equalTo('foo'));
 
         $this->table->select('foo');
+    }
+
+    /**
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::select
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::selectWith
+     * @covers Zend\Db\TableGateway\AbstractTableGateway::executeSelect
+     *
+     * This is a test for the case when a valid $select is built using an aliased table name, then used
+     * with AbstractTableGateway::selectWith (or AbstractTableGateway::select).
+     *
+     * $myTable = new MyTable(...);
+     * $sql = new \Zend\Db\Sql\Sql(...);
+     * $select = $sql->select()->from(array('t' => 'mytable'));
+     *
+     * // Following fails, with Fatal error: Uncaught exception 'RuntimeException' with message
+     * 'The table name of the provided select object must match that of the table' unless fix is provided.
+     * $myTable->selectWith($select);
+     *
+     */
+    public function testSelectWithArrayTable()
+    {
+        // Case 1
+
+        $select1 = $this->getMock('Zend\Db\Sql\Select', array('getRawState'));
+        $select1->expects($this->once())
+            ->method('getRawState')
+            ->will($this->returnValue(array(
+                'table' => 'foo',               // Standard table name format, valid according to Select::from()
+                'columns' => null,
+            )));
+        $return = $this->table->selectWith($select1);
+        $this->assertNotNull($return);
+
+        // Case 2
+
+        $select1 = $this->getMock('Zend\Db\Sql\Select', array('getRawState'));
+        $select1->expects($this->once())
+            ->method('getRawState')
+            ->will($this->returnValue(array(
+                'table' => array('f' => 'foo'), // Alias table name format, valid according to Select::from()
+                'columns' => null,
+            )));
+        $return = $this->table->selectWith($select1);
+        $this->assertNotNull($return);
     }
 
     /**

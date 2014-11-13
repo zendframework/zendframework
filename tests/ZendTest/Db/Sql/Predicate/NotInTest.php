@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Db
  */
 
 namespace ZendTest\Db\Sql\Predicate;
@@ -16,6 +15,7 @@ use Zend\Db\Sql\Predicate\NotIn;
 
 class NotInTest extends TestCase
 {
+
 
     public function testRetrievingWherePartsReturnsSpecificationArrayOfIdentifierAndValuesAndArrayOfTypes()
     {
@@ -32,11 +32,36 @@ class NotInTest extends TestCase
 
     public function testGetExpressionDataWithSubselect()
     {
-        $in = new NotIn('foo', $select = new Select);
+        $select = new Select;
+        $in = new NotIn('foo', $select);
         $expected = array(array(
             '%s NOT IN %s',
             array('foo', $select),
             array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
+        ));
+        $this->assertEquals($expected, $in->getExpressionData());
+    }
+
+    public function testGetExpressionDataWithSubselectAndIdentifier()
+    {
+        $select = new Select;
+        $in = new NotIn('foo', $select);
+        $expected = array(array(
+            '%s NOT IN %s',
+            array('foo', $select),
+            array($in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
+        ));
+        $this->assertEquals($expected, $in->getExpressionData());
+    }
+
+    public function testGetExpressionDataWithSubselectAndArrayIdentifier()
+    {
+        $select = new Select;
+        $in = new NotIn(array('foo', 'bar'), $select);
+        $expected = array(array(
+            '(%s, %s) NOT IN %s',
+            array('foo', 'bar', $select),
+            array($in::TYPE_IDENTIFIER, $in::TYPE_IDENTIFIER, $in::TYPE_VALUE)
         ));
         $this->assertEquals($expected, $in->getExpressionData());
     }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -44,6 +44,11 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      * @var bool
      */
     protected $inTransaction = false;
+
+    /**
+     * @var string
+     */
+    protected $dsn = null;
 
     /**
      * Constructor
@@ -136,6 +141,20 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
+     * Get the dsn string for this connection
+     * @throws \Zend\Db\Adapter\Exception\RunTimeException
+     * @return string
+     */
+    public function getDsn()
+    {
+        if (!$this->dsn) {
+            throw new Exception\RunTimeException("The DSN has not been set or constructed from parameters in connect() for this Connection");
+        }
+
+        return $this->dsn;
+    }
+
+    /**
      * Get current schema
      *
      * @return string
@@ -152,6 +171,10 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                 break;
             case 'sqlite':
                 return 'main';
+            case 'sqlsrv':
+            case 'dblib':
+                $sql = 'SELECT SCHEMA_NAME()';
+                break;
             case 'pgsql':
             default:
                 $sql = 'SELECT CURRENT_SCHEMA';
@@ -240,6 +263,9 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                 case 'dbname':
                     $database = (string) $value;
                     break;
+                case 'charset':
+                    $charset    = (string) $value;
+                    break;
                 case 'driver_options':
                 case 'options':
                     $value = (array) $value;
@@ -257,6 +283,14 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                 case 'sqlite':
                     $dsn[] = $database;
                     break;
+                case 'sqlsrv':
+                    if (isset($database)) {
+                        $dsn[] = "database={$database}";
+                    }
+                    if (isset($hostname)) {
+                        $dsn[] = "server={$hostname}";
+                    }
+                    break;
                 default:
                     if (isset($database)) {
                         $dsn[] = "dbname={$database}";
@@ -266,6 +300,9 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                     }
                     if (isset($port)) {
                         $dsn[] = "port={$port}";
+                    }
+                    if (isset($charset) && $pdoDriver != 'pgsql') {
+                        $dsn[] = "charset={$charset}";
                     }
                     break;
             }
@@ -277,9 +314,14 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             );
         }
 
+        $this->dsn = $dsn;
+
         try {
             $this->resource = new \PDO($dsn, $username, $password, $options);
             $this->resource->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            if (isset($charset) && $pdoDriver == 'pgsql') {
+                $this->resource->exec('SET NAMES ' . $this->resource->quote($charset));
+            }
             $this->driverName = strtolower($this->resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
         } catch (\PDOException $e) {
             $code = $e->getCode();
@@ -328,6 +370,16 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $this->resource->beginTransaction();
         $this->inTransaction = true;
         return $this;
+    }
+
+    /**
+     * In transaction
+     *
+     * @return bool
+     */
+    public function inTransaction()
+    {
+        return $this->inTransaction;
     }
 
     /**
@@ -419,7 +471,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      * Get last generated id
      *
      * @param string $name
-     * @return int|null|false
+     * @return string|null|false
      */
     public function getLastGeneratedValue($name = null)
     {
@@ -434,4 +486,5 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
         return false;
     }
+
 }

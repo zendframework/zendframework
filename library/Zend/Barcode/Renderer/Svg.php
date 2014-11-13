@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -42,6 +42,12 @@ class Svg extends AbstractRenderer
      * @var int
      */
     protected $userWidth = 0;
+
+    /**
+     * Flag to determime if drawPolygon has been run once already
+     * @var bool
+     */
+    protected $drawPolygonExecuted = false;
 
     /**
      * Set height of the result image
@@ -142,9 +148,11 @@ class Svg extends AbstractRenderer
             $this->rootElement->setAttribute('width', $width);
             $this->rootElement->setAttribute('height', $height);
 
-            $this->appendRootElement('title',
-                                      array(),
-                                      "Barcode " . strtoupper($this->barcode->getType()) . " " . $this->barcode->getText());
+            $this->appendRootElement(
+                'title',
+                array(),
+                "Barcode " . strtoupper($this->barcode->getType()) . " " . $this->barcode->getText()
+            );
         } else {
             $this->readRootElement();
             $width = $this->rootElement->getAttribute('width');
@@ -152,12 +160,17 @@ class Svg extends AbstractRenderer
         }
         $this->adjustPosition($height, $width);
 
-        $this->appendRootElement('rect',
-                          array('x' => $this->leftOffset,
-                                'y' => $this->topOffset,
-                                'width' => ($this->leftOffset + $barcodeWidth - 1),
-                                'height' => ($this->topOffset + $barcodeHeight - 1),
-                                'fill' => $imageBackgroundColor));
+        $rect = array('x' => $this->leftOffset,
+            'y' => $this->topOffset,
+            'width' => ($this->leftOffset + $barcodeWidth - 1),
+            'height' => ($this->topOffset + $barcodeHeight - 1),
+            'fill' => $imageBackgroundColor);
+
+        if ($this->transparentBackground) {
+            $rect['fill-opacity'] = 0;
+        }
+
+        $this->appendRootElement('rect', $rect);
     }
 
     protected function readRootElement()
@@ -262,7 +275,7 @@ class Svg extends AbstractRenderer
 
     /**
      * Draw the barcode in the rendering resource
-     * @return mixed
+     * @return DOMDocument
      */
     public function draw()
     {
@@ -307,8 +320,19 @@ class Svg extends AbstractRenderer
             $points[3][1] + $this->topOffset - sin($orientation),
         );
         $newPoints = implode(' ', $newPoints);
+        $attributes = array();
         $attributes['points'] = $newPoints;
         $attributes['fill'] = $color;
+
+        // SVG passes a rect in as the first call to drawPolygon, we'll need to intercept
+        // this and set transparency if necessary.
+        if (!$this->drawPolygonExecuted) {
+            if ($this->transparentBackground) {
+                $attributes['fill-opacity'] = '0';
+            }
+            $this->drawPolygonExecuted = true;
+        }
+
         $this->appendRootElement('polygon', $attributes);
     }
 
@@ -328,6 +352,7 @@ class Svg extends AbstractRenderer
         $color = 'rgb(' . implode(', ', array(($color & 0xFF0000) >> 16,
                                               ($color & 0x00FF00) >> 8,
                                               ($color & 0x0000FF))) . ')';
+        $attributes = array();
         $attributes['x'] = $position[0] + $this->leftOffset;
         $attributes['y'] = $position[1] + $this->topOffset;
         //$attributes['font-family'] = $font;

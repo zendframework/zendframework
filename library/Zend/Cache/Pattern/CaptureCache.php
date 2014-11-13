@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -67,7 +67,7 @@ class CaptureCache extends AbstractPattern
      * Get from cache
      *
      * @param  null|string $pageId
-     * @return bool|string
+     * @return string|null
      * @throws Exception\LogicException
      * @throws Exception\RuntimeException
      */
@@ -91,9 +91,7 @@ class CaptureCache extends AbstractPattern
             $content = file_get_contents($file);
             $error   = ErrorHandler::stop();
             if ($content === false) {
-                throw new Exception\RuntimeException(
-                    "Failed to read cached pageId '{$pageId}'", 0, $error
-                );
+                throw new Exception\RuntimeException("Failed to read cached pageId '{$pageId}'", 0, $error);
             }
             return $content;
         }
@@ -152,9 +150,7 @@ class CaptureCache extends AbstractPattern
             $res = unlink($file);
             $err = ErrorHandler::stop();
             if (!$res) {
-                throw new Exception\RuntimeException(
-                    "Failed to remove cached pageId '{$pageId}'", 0, $err
-                );
+                throw new Exception\RuntimeException("Failed to remove cached pageId '{$pageId}'", 0, $err);
             }
             return true;
         }
@@ -266,9 +262,7 @@ class CaptureCache extends AbstractPattern
 
         if ($rs === false) {
             $err = ErrorHandler::stop();
-            throw new Exception\RuntimeException(
-                "Error writing file '{$file}'", 0, $err
-            );
+            throw new Exception\RuntimeException("Error writing file '{$file}'", 0, $err);
         }
 
         if ($perm !== false && !chmod($file, $perm)) {
@@ -316,17 +310,13 @@ class CaptureCache extends AbstractPattern
             if (!$res) {
                 $oct = ($perm === false) ? '777' : decoct($perm);
                 $err = ErrorHandler::stop();
-                throw new Exception\RuntimeException(
-                    "mkdir('{$pathname}', 0{$oct}, true) failed", 0, $err
-                );
+                throw new Exception\RuntimeException("mkdir('{$pathname}', 0{$oct}, true) failed", 0, $err);
             }
 
             if ($perm !== false && !chmod($pathname, $perm)) {
                 $oct = decoct($perm);
                 $err = ErrorHandler::stop();
-                throw new Exception\RuntimeException(
-                    "chmod('{$pathname}', 0{$oct}) failed", 0, $err
-                );
+                throw new Exception\RuntimeException("chmod('{$pathname}', 0{$oct}) failed", 0, $err);
             }
 
         } else {
@@ -359,7 +349,7 @@ class CaptureCache extends AbstractPattern
 
                 if (!$res) {
                     $oct = ($perm === false) ? '777' : decoct($perm);
-                    $err = ErrorHandler::stop();
+                    ErrorHandler::stop();
                     throw new Exception\RuntimeException(
                         "mkdir('{$path}', 0{$oct}, false) failed"
                     );
@@ -367,7 +357,7 @@ class CaptureCache extends AbstractPattern
 
                 if ($perm !== false && !chmod($path, $perm)) {
                     $oct = decoct($perm);
-                    $err = ErrorHandler::stop();
+                    ErrorHandler::stop();
                     throw new Exception\RuntimeException(
                         "chmod('{$path}', 0{$oct}) failed"
                     );

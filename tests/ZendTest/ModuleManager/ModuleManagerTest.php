@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ModuleManager
  */
 
 namespace ZendTest\ModuleManager;
@@ -22,6 +21,31 @@ use InvalidArgumentException;
 
 class ModuleManagerTest extends TestCase
 {
+    /**
+     * @var string
+     */
+    protected $tmpdir;
+
+    /**
+     * @var string
+     */
+    protected $configCache;
+
+    /**
+     * @var array
+     */
+    protected $loaders;
+
+    /**
+     * @var string
+     */
+    protected $includePath;
+
+    /**
+     * @var DefaultListenerAggregate
+     */
+    protected $defaultListeners;
+
     public function setUp()
     {
         $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'zend_module_cache_dir';
@@ -92,14 +116,16 @@ class ModuleManagerTest extends TestCase
     public function testCanLoadMultipleModules()
     {
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager  = new ModuleManager(array('BarModule', 'BazModule'));
+        $moduleManager  = new ModuleManager(array('BarModule', 'BazModule', 'SubModule\Sub'));
         $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('BarModule\Module', $loadedModules['BarModule']);
         $this->assertInstanceOf('BazModule\Module', $loadedModules['BazModule']);
+        $this->assertInstanceOf('SubModule\Sub\Module', $loadedModules['SubModule\Sub']);
         $this->assertInstanceOf('BarModule\Module', $moduleManager->getModule('BarModule'));
         $this->assertInstanceOf('BazModule\Module', $moduleManager->getModule('BazModule'));
+        $this->assertInstanceOf('SubModule\Sub\Module', $moduleManager->getModule('SubModule\Sub'));
         $this->assertNull($moduleManager->getModule('NotLoaded'));
         $config = $configListener->getMergedConfig();
         $this->assertSame('foo', $config->bar);
@@ -143,6 +169,41 @@ class ModuleManagerTest extends TestCase
         $config = $configListener->getMergedConfig();
         $this->assertTrue(isset($config['loaded']));
         $this->assertSame('oh, yeah baby!', $config['loaded']);
+    }
+
+    /**
+     * @group 5651
+     */
+    public function testLoadingModuleFromAnotherModuleDemonstratesAppropriateSideEffects()
+    {
+        $configListener = $this->defaultListeners->getConfigListener();
+        $moduleManager  = new ModuleManager(array('LoadOtherModule', 'BarModule'));
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
+        $moduleManager->loadModules();
+
+        $config = $configListener->getMergedConfig();
+        $this->assertTrue(isset($config['baz']));
+        $this->assertSame('bar', $config['baz']);
+    }
+
+    /**
+     * @group 5651
+     * @group 5948
+     */
+    public function testLoadingModuleFromAnotherModuleDoesNotInfiniteLoop()
+    {
+        $configListener = $this->defaultListeners->getConfigListener();
+        $moduleManager  = new ModuleManager(array('LoadBarModule', 'LoadFooModule'));
+        $moduleManager->getEventManager()->attachAggregate($this->defaultListeners);
+        $moduleManager->loadModules();
+
+        $config = $configListener->getMergedConfig();
+
+        $this->assertTrue(isset($config['bar']));
+        $this->assertSame('bar', $config['bar']);
+
+        $this->assertTrue(isset($config['foo']));
+        $this->assertSame('bar', $config['foo']);
     }
 
     public function testModuleIsMarkedAsLoadedWhenLoadModuleEventIsTriggered()

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -36,7 +36,7 @@ abstract class AbstractValidator implements
     protected static $defaultTranslatorTextDomain = 'default';
 
     /**
-     * Limits the maximum returned length of a error message
+     * Limits the maximum returned length of an error message
      *
      * @var int
      */
@@ -156,7 +156,7 @@ abstract class AbstractValidator implements
      */
     public function getMessages()
     {
-        return array_unique($this->abstractOptions['messages']);
+        return array_unique($this->abstractOptions['messages'], SORT_REGULAR);
     }
 
     /**
@@ -573,13 +573,6 @@ abstract class AbstractValidator implements
         $translator = $this->getTranslator();
         if (!$translator) {
             return $message;
-        }
-
-        $translated = $translator->translate(
-            $messageKey, $this->getTranslatorTextDomain()
-        );
-        if ($translated !== $messageKey) {
-            return $translated;
         }
 
         return $translator->translate(

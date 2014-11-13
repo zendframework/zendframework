@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -242,7 +242,11 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             if ($this->profiler) {
                 $this->profiler->profilerFinish();
             }
-            throw new Exception\InvalidQueryException('Statement could not be executed', null, $e);
+            throw new Exception\InvalidQueryException(
+                'Statement could not be executed (' . implode(' - ', $this->resource->errorInfo()) . ')',
+                null,
+                $e
+            );
         }
 
         if ($this->profiler) {
@@ -264,7 +268,13 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 
         $parameters = $this->parameterContainer->getNamedArray();
         foreach ($parameters as $name => &$value) {
-            $type = \PDO::PARAM_STR;
+            if (is_bool($value)) {
+                $type = \PDO::PARAM_BOOL;
+            } elseif (is_int($value)) {
+                $type = \PDO::PARAM_INT;
+            } else {
+                $type = \PDO::PARAM_STR;
+            }
             if ($this->parameterContainer->offsetHasErrata($name)) {
                 switch ($this->parameterContainer->offsetGetErrata($name)) {
                     case ParameterContainer::TYPE_INTEGER:
@@ -275,9 +285,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
                         break;
                     case ParameterContainer::TYPE_LOB:
                         $type = \PDO::PARAM_LOB;
-                        break;
-                    case (is_bool($value)):
-                        $type = \PDO::PARAM_BOOL;
                         break;
                 }
             }

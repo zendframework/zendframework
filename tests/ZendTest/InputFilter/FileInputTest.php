@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_InputFilter
  */
 
 namespace ZendTest\InputFilter;
@@ -339,5 +338,10 @@ class FileInputTest extends InputTest
 
         $filters = $filterChain->getFilters()->toArray();
         $this->assertInstanceOf('Zend\Filter\StringTrim', $filters[0]);
+    }
+
+    public function testFallbackValue($fallbackValue = null)
+    {
+        $this->markTestSkipped('Not use fallback value');
     }
 }

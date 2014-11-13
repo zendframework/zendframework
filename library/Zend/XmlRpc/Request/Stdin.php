@@ -3,14 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\XmlRpc\Request;
 
 use Zend\XmlRpc\Request as XmlRpcRequest;
-use Zend\XmlRpc\Server\Exception as ServerException;
+use Zend\XmlRpc\Fault;
 
 /**
  * XmlRpc Request object -- Request via STDIN
@@ -39,7 +39,7 @@ class Stdin extends XmlRpcRequest
     {
         $fh = fopen('php://stdin', 'r');
         if (!$fh) {
-            $this->fault = new ServerException(630);
+            $this->fault = new Fault(630);
             return;
         }
 

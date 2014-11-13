@@ -3,17 +3,17 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Form\Element;
 
 use Zend\Form\Element;
-use Zend\I18n\Validator\Float as NumberValidator;
 use Zend\InputFilter\InputProviderInterface;
 use Zend\Validator\GreaterThan as GreaterThanValidator;
 use Zend\Validator\LessThan as LessThanValidator;
+use Zend\Validator\Regex as RegexValidator;
 use Zend\Validator\Step as StepValidator;
 
 class Number extends Element implements InputProviderInterface
@@ -44,12 +44,14 @@ class Number extends Element implements InputProviderInterface
         }
 
         $validators = array();
-        $validators[] = new NumberValidator(array(
-            'locale' => 'en_US', // HTML5 uses "100.01" format
-        ));
+        // HTML5 always transmits values in the format "1000.01", without a
+        // thousand separator. The prior use of the i18n Float validator
+        // allowed the thousand separator, which resulted in wrong numbers
+        // when casting to float.
+        $validators[] = new RegexValidator('(^-?\d*(\.\d+)?$)');
 
         $inclusive = true;
-        if (!empty($this->attributes['inclusive'])) {
+        if (isset($this->attributes['inclusive'])) {
             $inclusive = $this->attributes['inclusive'];
         }
 

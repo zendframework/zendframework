@@ -3,21 +3,16 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Mvc\SendResponseListener;
+use Zend\Mvc\ResponseSender\SendResponseEvent;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage UnitTest
- */
 class SendResponseListenerTest extends TestCase
 {
 
@@ -33,7 +28,7 @@ class SendResponseListenerTest extends TestCase
     {
         $listener = new SendResponseListener();
         $result = array();
-        $listener->getEventManager()->attach('sendResponse', function($e) use (&$result) {
+        $listener->getEventManager()->attach(SendResponseEvent::EVENT_SEND_RESPONSE, function ($e) use (&$result) {
             $result['target'] = $e->getTarget();
             $result['response'] = $e->getResponse();
         }, 10000);

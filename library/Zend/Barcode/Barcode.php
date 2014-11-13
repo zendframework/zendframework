@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -95,12 +95,13 @@ abstract class Barcode
      * @return Barcode
      * @throws Exception\ExceptionInterface
      */
-    public static function factory($barcode,
-                                   $renderer = 'image',
-                                   $barcodeConfig = array(),
-                                   $rendererConfig = array(),
-                                   $automaticRenderError = true)
-    {
+    public static function factory(
+        $barcode,
+        $renderer = 'image',
+        $barcodeConfig = array(),
+        $rendererConfig = array(),
+        $automaticRenderError = true
+    ) {
         /*
          * Convert Traversable argument to plain string
          * barcode name and separate config object.
@@ -182,7 +183,7 @@ abstract class Barcode
         }
 
         /*
-         * Verify that an barcode name has been specified.
+         * Verify that a barcode name has been specified.
          */
         if (!is_string($barcode) || empty($barcode)) {
             throw new Exception\InvalidArgumentException(
@@ -234,7 +235,7 @@ abstract class Barcode
         }
 
         /*
-         * Verify that an barcode name has been specified.
+         * Verify that a barcode name has been specified.
          */
         if (!is_string($renderer) || empty($renderer)) {
             throw new Exception\RendererCreationException(
@@ -253,11 +254,12 @@ abstract class Barcode
      * @param array  | Traversable $barcodeConfig
      * @param array  | Traversable $rendererConfig
      */
-    public static function render($barcode,
-                                  $renderer,
-                                  $barcodeConfig = array(),
-                                  $rendererConfig = array())
-    {
+    public static function render(
+        $barcode,
+        $renderer,
+        $barcodeConfig = array(),
+        $rendererConfig = array()
+    ) {
         static::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->render();
     }
 
@@ -270,11 +272,12 @@ abstract class Barcode
      * @param array | Traversable $rendererConfig
      * @return mixed
      */
-    public static function draw($barcode,
-                                $renderer,
-                                $barcodeConfig = array(),
-                                $rendererConfig = array())
-    {
+    public static function draw(
+        $barcode,
+        $renderer,
+        $barcodeConfig = array(),
+        $rendererConfig = array()
+    ) {
         return static::factory($barcode, $renderer, $barcodeConfig, $rendererConfig)->draw();
     }
 

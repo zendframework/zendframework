@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace ZendTest\I18n\View\Helper;
@@ -15,11 +14,8 @@ use NumberFormatter;
 use Zend\I18n\View\Helper\NumberFormat as NumberFormatHelper;
 
 /**
- * Test class for Zend_View_Helper_Currency
+ * Test class for Zend\View\Helper\Currency
  *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -38,6 +34,10 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->helper = new NumberFormatHelper();
     }
 
@@ -54,6 +54,14 @@ class NumberFormatTest extends \PHPUnit_Framework_TestCase
 
     public function currencyTestsDataProvider()
     {
+        if (!extension_loaded('intl')) {
+            if (version_compare(\PHPUnit_Runner_Version::id(), '3.8.0-dev') === 1) {
+                $this->markTestSkipped('ext/intl not enabled');
+            } else {
+                return array(array());
+            }
+        }
+
         return array(
             array(
                 'de_DE',

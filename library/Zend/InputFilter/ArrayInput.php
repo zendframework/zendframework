@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -18,6 +18,7 @@ class ArrayInput extends Input
 
     /**
      * @param  array $value
+     * @throws Exception\InvalidArgumentException
      * @return Input
      */
     public function setValue($value)
@@ -56,8 +57,8 @@ class ArrayInput extends Input
         foreach ($values as $value) {
             $result = $validator->isValid($value, $context);
             if (!$result) {
-                if ($fallbackValue = $this->getFallbackValue()) {
-                    $this->setValue($fallbackValue);
+                if ($this->hasFallback()) {
+                    $this->setValue($this->getFallbackValue());
                     $result = true;
                 }
                 break;

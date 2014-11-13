@@ -3,16 +3,17 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Code\Generator\DocBlock\Tag;
 
-use Zend\Code\Generator\DocBlock\Tag;
-use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
+use Zend\Code\Generator\AbstractGenerator;
+use Zend\Code\Generator\DocBlock\TagManager;
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionTagInterface;
 
-class LicenseTag extends Tag
+class LicenseTag extends AbstractGenerator implements TagInterface
 {
     /**
      * @var string
@@ -25,38 +26,42 @@ class LicenseTag extends Tag
     protected $licenseName = null;
 
     /**
-     * @param  array $options
+     * @param string $url
+     * @param string $licenseName
      */
-    public function __construct(array $options = array())
+    public function __construct($url = null, $licenseName = null)
     {
-        parent::__construct($options);
-
-        if (isset($options['url'])) {
-            $this->setUrl($options['url']);
+        if (!empty($url)) {
+            $this->setUrl($url);
         }
 
-        if (empty($this->name)) {
-            $this->setName('license');
+        if (!empty($licenseName)) {
+            $this->setLicenseName($licenseName);
         }
     }
 
     /**
-     * @param  ReflectionDocBlockTag $reflectionTagLicense
-     * @return LicenseTag
+     * @param ReflectionTagInterface $reflectionTag
+     * @return ReturnTag
+     * @deprecated Deprecated in 2.3. Use TagManager::createTagFromReflection() instead
      */
-    public static function fromReflection(ReflectionDocBlockTag $reflectionTagLicense)
+    public static function fromReflection(ReflectionTagInterface $reflectionTag)
     {
-        $licenseTag = new static();
-        $licenseTag
-            ->setName('license')
-            ->setUrl($reflectionTagLicense->getUrl())
-            ->setLicenseName($reflectionTagLicense->getDescription());
-
-        return $licenseTag;
+        $tagManager = new TagManager();
+        $tagManager->initializeDefaultTags();
+        return $tagManager->createTagFromReflection($reflectionTag);
     }
 
     /**
-     * @param  string $url
+     * @return string
+     */
+    public function getName()
+    {
+        return 'license';
+    }
+
+    /**
+     * @param string $url
      * @return LicenseTag
      */
     public function setUrl($url)
@@ -96,10 +101,9 @@ class LicenseTag extends Tag
      */
     public function generate()
     {
-        $output = '@license '
-            . (($this->url != null) ? $this->url : 'unknown')
-            . (($this->licenseName != null) ? ' ' . $this->licenseName : '')
-            . (($this->description != null) ? ' ' . $this->description : '');
+        $output = '@license'
+            . ((!empty($this->url)) ? ' ' . $this->url : '')
+            . ((!empty($this->licenseName)) ? ' ' . $this->licenseName : '');
 
         return $output;
     }

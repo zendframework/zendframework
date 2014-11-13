@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -12,7 +12,7 @@ namespace Zend\Config\Reader;
 use Zend\Config\Exception;
 
 /**
- * XML config reader.
+ * INI config reader.
  */
 class Ini implements ReaderInterface
 {
@@ -73,11 +73,12 @@ class Ini implements ReaderInterface
 
         set_error_handler(
             function ($error, $message = '', $file = '', $line = 0) use ($filename) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Error reading INI file "%s": %s',
-                    $filename, $message
-                ), $error);
-            }, E_WARNING
+                throw new Exception\RuntimeException(
+                    sprintf('Error reading INI file "%s": %s', $filename, $message),
+                    $error
+                );
+            },
+            E_WARNING
         );
         $ini = parse_ini_file($filename, true);
         restore_error_handler();
@@ -101,11 +102,12 @@ class Ini implements ReaderInterface
 
         set_error_handler(
             function ($error, $message = '', $file = '', $line = 0) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Error reading INI string: %s',
-                    $message
-                ), $error);
-            }, E_WARNING
+                throw new Exception\RuntimeException(
+                    sprintf('Error reading INI string: %s', $message),
+                    $error
+                );
+            },
+            E_WARNING
         );
         $ini = parse_ini_string($string, true);
         restore_error_handler();
@@ -200,9 +202,9 @@ class Ini implements ReaderInterface
                     $config[$pieces[0]] = array();
                 }
             } elseif (!is_array($config[$pieces[0]])) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Cannot create sub-key for "%s", as key already exists', $pieces[0]
-                ));
+                throw new Exception\RuntimeException(
+                    sprintf('Cannot create sub-key for "%s", as key already exists', $pieces[0])
+                );
             }
 
             $this->processKey($pieces[1], $value, $config[$pieces[0]]);

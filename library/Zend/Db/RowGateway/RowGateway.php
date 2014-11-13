@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -25,8 +25,9 @@ class RowGateway extends AbstractRowGateway
      */
     public function __construct($primaryKeyColumn, $table, $adapterOrSql = null)
     {
+
         // setup primary key
-        $this->primaryKeyColumn = (array) $primaryKeyColumn;
+        $this->primaryKeyColumn = empty($primaryKeyColumn) ? null : (array) $primaryKeyColumn;
 
         // set table
         $this->table = $table;

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
@@ -17,9 +16,6 @@ use Zend\Validator\Csrf;
 /**
  * Zend\Csrf
  *
- * @category   Zend
- * @package    Zend
- * @subpackage UnitTests
  * @group      Zend_Validator
  */
 class CsrfTest extends \PHPUnit_Framework_TestCase
@@ -190,5 +186,78 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
         $this->validator->setSession($container);
         $test        = $container->hash; // Doing this, as expiration hops are 1; have to grab on first access
         $this->assertEquals($hash, $test);
+    }
+
+    public function testMultipleValidatorsSharingContainerGenerateDifferentHashes()
+    {
+        $validatorOne = new Csrf();
+        $validatorTwo = new Csrf();
+
+        $containerOne = $validatorOne->getSession();
+        $containerTwo = $validatorOne->getSession();
+
+        $this->assertSame($containerOne, $containerTwo);
+
+        $hashOne = $validatorOne->getHash();
+        $hashTwo = $validatorTwo->getHash();
+        $this->assertNotEquals($hashOne , $hashTwo);
+    }
+
+    public function testCanValidateAnyHashWithinTheSameContainer()
+    {
+        $validatorOne = new Csrf();
+        $validatorTwo = new Csrf();
+
+        $hashOne = $validatorOne->getHash();
+        $hashTwo = $validatorTwo->getHash();
+
+        $this->assertTrue($validatorOne->isValid($hashOne));
+        $this->assertTrue($validatorOne->isValid($hashTwo));
+        $this->assertTrue($validatorTwo->isValid($hashOne));
+        $this->assertTrue($validatorTwo->isValid($hashTwo));
+    }
+
+    public function testCannotValidateHashesOfOtherContainers()
+    {
+        $validatorOne = new Csrf();
+        $validatorTwo = new Csrf(array('name' => 'foo'));
+
+        $containerOne = $validatorOne->getSession();
+        $containerTwo = $validatorTwo->getSession();
+
+        $this->assertNotSame($containerOne, $containerTwo);
+
+        $hashOne = $validatorOne->getHash();
+        $hashTwo = $validatorTwo->getHash();
+
+        $this->assertTrue($validatorOne->isValid($hashOne));
+        $this->assertFalse($validatorOne->isValid($hashTwo));
+        $this->assertFalse($validatorTwo->isValid($hashOne));
+        $this->assertTrue($validatorTwo->isValid($hashTwo));
+    }
+
+    public function testCannotReValidateAnExpiredHash()
+    {
+        $hash = $this->validator->getHash();
+
+        $this->assertTrue($this->validator->isValid($hash));
+
+        $this->sessionManager->getStorage()->setMetadata(
+            $this->validator->getSession()->getName(),
+            array('EXPIRE' => $_SERVER['REQUEST_TIME'] - 18600)
+        );
+
+        $this->assertFalse($this->validator->isValid($hash));
+    }
+
+    public function testCanValidateHasheWithoutId()
+    {
+        $method = new \ReflectionMethod(get_class($this->validator), 'getTokenFromHash');
+        $method->setAccessible(true);
+
+        $hash = $this->validator->getHash();
+        $bareToken = $method->invoke($this->validator, $hash);
+
+        $this->assertTrue($this->validator->isValid($bareToken));
     }
 }

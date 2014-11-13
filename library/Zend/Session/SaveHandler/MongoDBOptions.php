@@ -4,7 +4,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -38,7 +38,7 @@ class MongoDBOptions extends AbstractOptions
      * @see http://php.net/manual/en/mongocollection.save.php
      * @var string
      */
-    protected $saveOptions = array('safe' => true);
+    protected $saveOptions = array('w' => 1);
 
     /**
      * Name field
@@ -67,6 +67,19 @@ class MongoDBOptions extends AbstractOptions
      * @var string
      */
     protected $modifiedField = 'modified';
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct($options = null)
+    {
+        parent::__construct($options);
+
+        if ($this->saveOptions === array('w' => 1) && version_compare(phpversion('mongo'), '1.3.0', '<')) {
+            $this->saveOptions = array('safe' => true);
+        }
+    }
 
     /**
      * Set database name

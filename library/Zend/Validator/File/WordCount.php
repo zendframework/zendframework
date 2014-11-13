@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -65,7 +65,7 @@ class WordCount extends AbstractValidator
      * Min limits the word count, when used with max=null it is the maximum word count
      * It also accepts an array with the keys 'min' and 'max'
      *
-     * If $options is a integer, it will be used as maximum word count
+     * If $options is an integer, it will be used as maximum word count
      * As Array is accepts the following keys:
      * 'min': Minimum word count
      * 'max': Maximum word count
@@ -191,7 +191,7 @@ class WordCount extends AbstractValidator
         $this->setValue($filename);
 
         // Is file readable ?
-        if (false === stream_resolve_include_path($file)) {
+        if (empty($file) || false === stream_resolve_include_path($file)) {
             $this->error(self::NOT_FOUND);
             return false;
         }

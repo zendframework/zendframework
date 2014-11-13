@@ -3,22 +3,19 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Navigation
  */
 
 namespace ZendTest\Navigation\Page;
 
 use Zend\Navigation\Page;
 use Zend\Navigation;
+use Zend\Http\Request;
 
 /**
  * Tests the class Zend_Navigation_Page_Uri
  *
- * @category   Zend
- * @package    Zend_Navigation
- * @subpackage UnitTests
  * @group      Zend_Navigation
  */
 class UriTest extends \PHPUnit_Framework_TestCase
@@ -88,6 +85,40 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $page->setUri($uri);
 
         $this->assertEquals($uri, $page->getHref());
+    }
+
+    public function testIsActiveReturnsTrueWhenHasMatchingRequestUri()
+    {
+        $page = new Page\Uri(array(
+            'label' => 'foo',
+            'uri' => '/bar'
+        ));
+
+        $request = new Request();
+        $request->setUri('/bar');
+        $request->setMethod('GET');
+
+        $page->setRequest($request);
+
+        $this->assertInstanceOf('Zend\Http\Request', $page->getRequest());
+
+        $this->assertTrue($page->isActive());
+    }
+
+    public function testIsActiveReturnsFalseOnNonMatchingRequestUri()
+    {
+        $page = new Page\Uri(array(
+            'label' => 'foo',
+            'uri' => '/bar'
+        ));
+
+        $request = new Request();
+        $request->setUri('/baz');
+        $request->setMethod('GET');
+
+        $page->setRequest($request);
+
+        $this->assertFalse($page->isActive());
     }
 
     /**

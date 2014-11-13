@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -117,7 +117,9 @@ class Proxy extends Socket
     public function write($method, $uri, $httpVer = '1.1', $headers = array(), $body = '')
     {
         // If no proxy is set, fall back to default Socket adapter
-        if (! $this->config['proxy_host']) return parent::write($method, $uri, $httpVer, $headers, $body);
+        if (! $this->config['proxy_host']) {
+            return parent::write($method, $uri, $httpVer, $headers, $body);
+        }
 
         // Make sure we're properly connected
         if (! $this->socket) {

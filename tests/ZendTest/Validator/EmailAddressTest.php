@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator;
@@ -14,9 +13,6 @@ use Zend\Validator\EmailAddress;
 use Zend\Validator\Hostname;
 
 /**
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
  * @group      Zend_Validator
  */
 class EmailAddressTest extends \PHPUnit_Framework_TestCase
@@ -157,6 +153,19 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
     public function testQuotedString()
     {
         $emailAddresses = array(
+            '""@domain.com', // Optional
+            '" "@domain.com', // x20
+            '"!"@domain.com', // x21
+            '"\""@domain.com', // \" (escaped x22)
+            '"#"@domain.com', // x23
+            '"$"@domain.com', // x24
+            '"Z"@domain.com', // x5A
+            '"["@domain.com', // x5B
+            '"\\\"@domain.com', // \\ (escaped x5C)
+            '"]"@domain.com', // x5D
+            '"^"@domain.com', // x5E
+            '"}"@domain.com', // x7D
+            '"~"@domain.com', // x7E
             '"username"@example.com',
             '"bob%jones"@domain.com',
             '"bob jones"@domain.com',
@@ -166,6 +175,28 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             );
         foreach ($emailAddresses as $input) {
             $this->assertTrue($this->validator->isValid($input), "$input failed to pass validation:\n"
+                            . implode("\n", $this->validator->getMessages()));
+        }
+    }
+
+    /**
+     * Ensures that quoted-string local part is considered invalid
+     *
+     * @return void
+     */
+    public function testInvalidQuotedString()
+    {
+        $emailAddresses = array(
+            "\"\x00\"@example.com",
+            "\"\x01\"@example.com",
+            "\"\x1E\"@example.com",
+            "\"\x1F\"@example.com",
+            '"""@example.com', // x22 (not escaped)
+            '"\"@example.com', // x5C (not escaped)
+            "\"\x7F\"@example.com",
+            );
+        foreach ($emailAddresses as $input) {
+            $this->assertFalse($this->validator->isValid($input), "$input failed to pass validation:\n"
                             . implode("\n", $this->validator->getMessages()));
         }
     }
@@ -382,10 +413,14 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testHostnameValidatorMessagesShouldBeTranslated()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $hostnameValidator = new Hostname();
         $translations = array(
             'hostnameIpAddressNotAllowed'   => 'hostnameIpAddressNotAllowed translation',
-            'hostnameUnknownTld'            => 'hostnameUnknownTld translation',
+            'hostnameUnknownTld'            => 'The input appears to be a DNS hostname but cannot match TLD against known list',
             'hostnameDashCharacter'         => 'hostnameDashCharacter translation',
             'hostnameInvalidHostnameSchema' => 'hostnameInvalidHostnameSchema translation',
             'hostnameUndecipherableTld'     => 'hostnameUndecipherableTld translation',

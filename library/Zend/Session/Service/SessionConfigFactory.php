@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -43,7 +43,7 @@ class SessionConfigFactory implements FactoryInterface
             if (!class_exists($config['config_class'])) {
                 throw new ServiceNotCreatedException(sprintf(
                     'Invalid configuration class "%s" specified in "config_class" session configuration; must be a valid class',
-                    $class
+                    $config['config_class']
                 ));
             }
             $class = $config['config_class'];

@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Validator
  */
 
 namespace ZendTest\Validator\File;
@@ -16,9 +15,6 @@ use Zend\Validator;
 /**
  * MimeType testbed
  *
- * @category   Zend
- * @package    Zend_Validator_File
- * @subpackage UnitTests
  * @group      Zend_Validator
  */
 class MimeTypeTest extends \PHPUnit_Framework_TestCase
@@ -224,5 +220,26 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
 
         $validator = new File\MimeType($files);
         $this->assertFalse($validator->getMagicFile());
+    }
+
+    public function testEmptyFileShouldReturnFalseAndDisplayNotFoundMessage()
+    {
+        if (! extension_loaded('fileinfo')) {
+            $this->markTestSkipped('This PHP Version has no finfo installed');
+        }
+
+        $validator = new File\MimeType();
+
+        $this->assertFalse($validator->isValid(''));
+
+        $filesArray = array(
+            'name'      => '',
+            'size'      => 0,
+            'tmp_name'  => '',
+            'error'     => UPLOAD_ERR_NO_FILE,
+            'type'      => '',
+        );
+
+        $this->assertFalse($validator->isValid($filesArray));
     }
 }

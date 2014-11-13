@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -45,7 +45,9 @@ class Gmp implements AdapterInterface
             }
         }
 
+        set_error_handler(function () { /* Do nothing */}, \E_WARNING);
         $res = gmp_init($sign . $operand, $base);
+        restore_error_handler();
         if ($res === false) {
             return false;
         }

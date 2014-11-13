@@ -3,19 +3,15 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper\Navigation;
 
 /**
- * Tests Zend_View_Helper_Navigation_Menu
+ * Tests Zend\View\Helper\Navigation\Menu
  *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
@@ -31,7 +27,7 @@ class MenuTest extends AbstractTest
     /**
      * View helper
      *
-     * @var Zend_View_Helper_Navigation_Menu
+     * @var \Zend\View\Helper\Navigation\Menu
      */
     protected $_helper;
 
@@ -174,6 +170,13 @@ class MenuTest extends AbstractTest
         $this->assertEquals($expected, $this->_helper->render($this->_nav2));
     }
 
+    public function testSetLiActiveCssClass()
+    {
+        $this->_helper->setLiActiveClass('activated');
+        $expected = $this->_getExpected('menu/css2.html');
+        $this->assertEquals(trim($expected), $this->_helper->render($this->_nav2));
+    }
+
     public function testOptionEscapeLabelsAsTrue()
     {
         $options = array(
@@ -212,6 +215,10 @@ class MenuTest extends AbstractTest
 
     public function testTranslationUsingZendTranslate()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $translator = $this->_getTranslator();
         $this->_helper->setTranslator($translator);
 
@@ -219,8 +226,22 @@ class MenuTest extends AbstractTest
         $this->assertEquals($expected, $this->_helper->render());
     }
 
+    public function testTranslationUsingZendTranslateWithTextDomain()
+    {
+        $translator = $this->_getTranslatorWithTextDomain();
+        $this->_helper->setTranslator($translator);
+
+        $expected = $this->_getExpected('menu/textdomain.html');
+        $test     = $this->_helper->render($this->_nav3);
+        $this->assertEquals(trim($expected), trim($test));
+    }
+
     public function testTranslationUsingZendTranslateAdapter()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $translator = $this->_getTranslator();
         $this->_helper->setTranslator($translator);
 
@@ -264,7 +285,7 @@ class MenuTest extends AbstractTest
 
         try {
             $this->_helper->render();
-            $this->fail('invalid $partial should throw Zend_View_Exception');
+            $this->fail('invalid $partial should throw Zend\View\Exception\InvalidArgumentException');
         } catch (\Zend\View\Exception\ExceptionInterface $e) {
         }
     }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  * @package   UnitTests
  */
@@ -33,9 +33,10 @@ defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED') || define('TESTS_Z
 defined('TESTS_ZEND_FORM_ANNOTATION_SUPPORT') || define('TESTS_ZEND_FORM_ANNOTATION_SUPPORT', true);
 
 /**
- * Zend\Filter
+ * Zend\Http
  */
-defined('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED') || define('TESTS_ZEND_FILTER_COMPRESS_ZIP_ENABLED', false);
+/* Online Tests */
+defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || define('TESTS_ZEND_HTTP_CLIENT_ONLINE', true);
 
 /**
  * Zend\Cache\Storage\Adapter

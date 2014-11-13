@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Test
  */
 namespace ZendTest\Test\PHPUnit\Controller;
 
@@ -17,9 +16,6 @@ use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use Zend\View\Model\ViewModel;
 
 /**
- * @category   Zend
- * @package    Zend_Test
- * @subpackage UnitTests
  * @group      Zend_Test
  */
 class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
@@ -88,6 +84,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertResponseHeaderContains('Content-Type', 'text/json');
     }
 
+    public function testAssertResponseHeaderContainsMultipleHeaderInterface()
+    {
+        $this->dispatch('/tests');
+        $this->assertResponseHeaderContains('WWW-Authenticate', 'Basic realm="ZF2"');
+    }
+
     public function testAssertNotResponseHeaderContains()
     {
         $this->dispatch('/tests');
@@ -95,6 +97,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertNotResponseHeaderContains('Content-Type', 'text/html');
+    }
+
+    public function testAssertNotResponseHeaderContainsMultipleHeaderInterface()
+    {
+        $this->dispatch('/tests');
+        $this->assertNotResponseHeaderContains('WWW-Authenticate', 'Basic realm="ZF3"');
     }
 
     public function testAssertResponseHeaderRegex()
@@ -109,6 +117,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertResponseHeaderRegex('Content-Type', '#json#');
     }
 
+    public function testAssertResponseHeaderRegexMultipleHeaderInterface()
+    {
+        $this->dispatch('/tests');
+        $this->assertResponseHeaderRegex('WWW-Authenticate', '#"ZF2"$#');
+    }
+
     public function testAssertNotResponseHeaderRegex()
     {
         $this->dispatch('/tests');
@@ -116,6 +130,12 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
         $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
         $this->assertNotResponseHeaderRegex('Content-Type', '#html$#');
+    }
+
+    public function testAssertNotResponseHeaderRegexMultipleHeaderInterface()
+    {
+        $this->dispatch('/tests');
+        $this->assertNotResponseHeaderRegex('WWW-Authenticate', '#"ZF3"$#');
     }
 
     public function testAssertRedirect()
@@ -337,22 +357,31 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertQueryContentContains('div#content', 'foo');
 
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
-            'actual content is "foo"' // check actual content is display
+            'PHPUnit_Framework_ExpectationFailedException'
         );
         $this->assertQueryContentContains('div#content', 'bar');
+    }
+
+    public function testAssertQueryContentContainsWithSecondElement()
+    {
+        $this->dispatch('/tests');
+        $this->assertQueryContentContains('div#content', 'foo');
+
+        $this->setExpectedException(
+            'PHPUnit_Framework_ExpectationFailedException'
+        );
+        $this->assertQueryContentContains('div.top', 'bar');
     }
 
     public function testAssertXpathQueryContentContains()
     {
         $this->dispatch('/tests');
-        $this->assertXpathQueryContentContains('//div[@id="content"]', 'foo');
+        $this->assertXpathQueryContentContains('//div[@class="top"]', 'foo');
 
         $this->setExpectedException(
-            'PHPUnit_Framework_ExpectationFailedException',
-            'actual content is "foo"' // check actual content is display
+            'PHPUnit_Framework_ExpectationFailedException'
         );
-        $this->assertXpathQueryContentContains('//div[@id="content"]', 'bar');
+        $this->assertXpathQueryContentContains('//div[@class="top"]', 'bar');
     }
 
     public function testAssertNotQueryContentContains()
@@ -484,7 +513,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertEquals($request->getMethod(), 'PUT');
         $this->assertEquals('num_post=5&foo=bar', $request->getContent());
     }
-    /*
+
     public function testAssertUriWithHostname()
     {
         $this->dispatch('http://my.domain.tld:443');
@@ -518,6 +547,54 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $this->assertXpathQueryCount('//div[@class="post"]', 0);
     }
 
+    public function testAssertWithMultiDispatchWithoutPersistence()
+    {
+        $this->dispatch('/tests-persistence');
+
+        $controller = $this->getApplicationServiceLocator()
+                            ->get('ControllerLoader')
+                            ->get('baz_index');
+        $flashMessenger = $controller->flashMessenger();
+        $messages = $flashMessenger->getMessages();
+        $this->assertCount(0, $messages);
+
+        $this->reset(false);
+
+        $this->dispatch('/tests');
+
+        $controller = $this->getApplicationServiceLocator()
+                            ->get('ControllerLoader')
+                            ->get('baz_index');
+        $flashMessenger = $controller->flashMessenger();
+        $messages = $flashMessenger->getMessages();
+
+        $this->assertCount(0, $messages);
+    }
+
+    public function testAssertWithMultiDispatchWithPersistence()
+    {
+        $this->dispatch('/tests-persistence');
+
+        $controller = $this->getApplicationServiceLocator()
+                            ->get('ControllerLoader')
+                            ->get('baz_index');
+        $flashMessenger = $controller->flashMessenger();
+        $messages = $flashMessenger->getMessages();
+        $this->assertCount(0, $messages);
+
+        $this->reset(true);
+
+        $this->dispatch('/tests');
+
+        $controller = $this->getApplicationServiceLocator()
+                            ->get('ControllerLoader')
+                            ->get('baz_index');
+        $flashMessenger = $controller->flashMessenger();
+        $messages = $flashMessenger->getMessages();
+
+        $this->assertCount(1, $messages);
+    }
+
     public function testAssertWithEventShared()
     {
         $this->setApplicationConfig(
@@ -548,13 +625,30 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public function testAssertExceptionInAction()
     {
-        $this->dispatch('/exception');
-        $this->assertResponseStatusCode(500);
-        $this->assertApplicationException('RuntimeException', 'Foo error');
+        $this->setTraceError(true);
 
         $this->dispatch('/exception');
         $this->assertResponseStatusCode(500);
         $this->assertApplicationException('RuntimeException');
+    }
+
+    public function testAssertExceptionAndMessageInAction()
+    {
+        $this->dispatch('/exception');
+        $this->assertResponseStatusCode(500);
+        $this->assertApplicationException('RuntimeException', 'Foo error');
+    }
+
+    public function testGetErrorWithTraceErrorEnabled()
+    {
+        $this->dispatch('/exception');
+        $this->assertResponseStatusCode(500);
+
+        $exception = $this->getApplication()->getMvcEvent()->getParam('exception');
+        $this->assertInstanceOf('RuntimeException', $exception);
+
+        // set to null to avoid the throwing of the exception
+        $this->getApplication()->getMvcEvent()->setParam('exception', null);
     }
 
     /**
@@ -601,5 +695,30 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         $viewModel = $this->getApplication()->getMvcEvent()->getResult();
         $this->assertEquals(true, $viewModel instanceof ViewModel);
         $this->assertEquals($viewModel->getTemplate(), 'baz/index/unittests');
+    }
+
+    public function testAssertResponseReasonPhrase()
+    {
+        $this->dispatch('/tests');
+        $this->assertResponseReasonPhrase('OK');
+
+        $this->setExpectedException('PHPUnit_Framework_ExpectationFailedException');
+        $this->assertResponseReasonPhrase('NOT OK');
+    }
+
+    public function testAssertXmlHttpRequestDispatch()
+    {
+        $request = $this->getRequest();
+        $this->assertFalse($request->isXmlHttpRequest());
+
+        $this->dispatch('/test', 'GET', array(), true);
+
+        $request = $this->getRequest();
+        $this->assertTrue($request->isXmlHttpRequest());
+
+        $this->reset();
+
+        $request = $this->getRequest();
+        $this->assertFalse($request->isXmlHttpRequest());
     }
 }

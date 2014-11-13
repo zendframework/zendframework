@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\Writer;
@@ -16,9 +15,6 @@ use Zend\Feed\Writer\Feed;
 use Zend\Feed\Writer\Version;
 
 /**
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
  */
@@ -246,13 +242,13 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetDateCreatedReturnsNullIfDateNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getDateCreated()));
+        $this->assertTrue(null === $writer->getDateCreated());
     }
 
     public function testGetDateModifiedReturnsNullIfDateNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getDateModified()));
+        $this->assertTrue(null === $writer->getDateModified());
     }
 
     public function testSetLastBuildDateDefaultsToCurrentTime()
@@ -314,13 +310,13 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetLastBuildDateReturnsNullIfDateNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getLastBuildDate()));
+        $this->assertTrue(null === $writer->getLastBuildDate());
     }
 
     public function testGetCopyrightReturnsNullIfDateNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getCopyright()));
+        $this->assertTrue(null === $writer->getCopyright());
     }
 
     public function testSetsDescription()
@@ -343,7 +339,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetDescriptionReturnsNullIfDateNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getDescription()));
+        $this->assertTrue(null === $writer->getDescription());
     }
 
     public function testSetsId()
@@ -398,7 +394,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetIdReturnsNullIfDateNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getId()));
+        $this->assertTrue(null === $writer->getId());
     }
 
     public function testSetsLanguage()
@@ -421,7 +417,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetLanguageReturnsNullIfDateNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getLanguage()));
+        $this->assertTrue(null === $writer->getLanguage());
     }
 
     public function testSetsLink()
@@ -454,7 +450,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetLinkReturnsNullIfDateNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getLink()));
+        $this->assertTrue(null === $writer->getLink());
     }
 
     public function testSetsEncoding()
@@ -500,7 +496,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetTitleReturnsNullIfDateNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getTitle()));
+        $this->assertTrue(null === $writer->getTitle());
     }
 
     public function testSetsGeneratorName()
@@ -636,7 +632,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetGeneratorReturnsNullIfDateNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getGenerator()));
+        $this->assertTrue(null === $writer->getGenerator());
     }
 
     public function testSetsFeedLink()
@@ -669,7 +665,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetFeedLinksReturnsNullIfNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getFeedLinks()));
+        $this->assertTrue(null === $writer->getFeedLinks());
     }
 
     public function testSetsBaseUrl()
@@ -692,7 +688,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetBaseUrlReturnsNullIfNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getBaseUrl()));
+        $this->assertTrue(null === $writer->getBaseUrl());
     }
 
     public function testAddsHubUrl()
@@ -722,7 +718,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testAddingHubUrlReturnsNullIfNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getHubs()));
+        $this->assertTrue(null === $writer->getHubs());
     }
 
     public function testCreatesNewEntryDataContainer()
@@ -880,7 +876,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testGetCategoriesReturnsNullIfNotSet()
     {
         $writer = new Writer\Feed;
-        $this->assertTrue(is_null($writer->getCategories()));
+        $this->assertTrue(null === $writer->getCategories());
     }
 
     public function testAddsAndOrdersEntriesByDateIfRequested()
@@ -1025,6 +1021,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
 EOT;
         $feed = str_replace('%version%', Version::VERSION, $feed);
+        $feed = str_replace("\r\n", "\n", $feed);
         $this->assertEquals($feed, $export);
     }
 
@@ -1046,6 +1043,7 @@ EOT;
 
 EOT;
         $feed = str_replace('%version%', Version::VERSION, $feed);
+        $feed = str_replace("\r\n", "\n", $feed);
         $this->assertEquals($feed, $export);
     }
 

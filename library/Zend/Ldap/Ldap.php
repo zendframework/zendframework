@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -757,6 +757,10 @@ class Ldap
     public function bind($username = null, $password = null)
     {
         $moreCreds = true;
+
+        // Security check: remove null bytes in password
+        // @see https://net.educause.edu/ir/library/pdf/csd4875.pdf
+        $password = str_replace("\0", '', $password);
 
         if ($username === null) {
             $username  = $this->getUsername();

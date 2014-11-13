@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -68,11 +68,15 @@ class Alnum extends AbstractLocale
      *
      * Returns $value as string with all non-alphanumeric characters removed
      *
-     * @param  mixed $value
-     * @return string
+     * @param  string|array $value
+     * @return string|array
      */
     public function filter($value)
     {
+        if (!is_scalar($value) && !is_array($value)) {
+            return $value;
+        }
+
         $whiteSpace = $this->options['allow_white_space'] ? '\s' : '';
         $language   = Locale::getPrimaryLanguage($this->getLocale());
 
@@ -87,6 +91,6 @@ class Alnum extends AbstractLocale
             $pattern = '/[^\p{L}\p{N}' . $whiteSpace . ']/u';
         }
 
-        return preg_replace($pattern, '', (string) $value);
+        return preg_replace($pattern, '', $value);
     }
 }

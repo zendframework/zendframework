@@ -4,9 +4,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Session
  */
 
 namespace ZendTest\Session\SaveHandler;
@@ -14,9 +13,6 @@ namespace ZendTest\Session\SaveHandler;
 use Zend\Session\SaveHandler\MongoDBOptions;
 
 /**
- * @category   Zend
- * @package    Zend_Session
- * @subpackage UnitTests
  * @group      Zend_Session
  */
 class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
@@ -26,7 +22,8 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
         $options = new MongoDBOptions();
         $this->assertNull($options->getDatabase());
         $this->assertNull($options->getCollection());
-        $this->assertEquals(array('safe' => true), $options->getSaveOptions());
+        $defaultSaveOptions = version_compare(phpversion('mongo'), '1.3.0', '<') ? array('safe' => true) : array('w' => 1);
+        $this->assertEquals($defaultSaveOptions, $options->getSaveOptions());
         $this->assertEquals('name', $options->getNameField());
         $this->assertEquals('data', $options->getDataField());
         $this->assertEquals('lifetime', $options->getLifetimeField());
@@ -38,7 +35,7 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
         $options = new MongoDBOptions(array(
             'database' => 'testDatabase',
             'collection' => 'testCollection',
-            'saveOptions' => array('safe' => 2),
+            'saveOptions' => array('w' => 2),
             'nameField' => 'testName',
             'dataField' => 'testData',
             'lifetimeField' => 'testLifetime',
@@ -47,7 +44,7 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('testDatabase', $options->getDatabase());
         $this->assertEquals('testCollection', $options->getCollection());
-        $this->assertEquals(array('safe' => 2), $options->getSaveOptions());
+        $this->assertEquals(array('w' => 2), $options->getSaveOptions());
         $this->assertEquals('testName', $options->getNameField());
         $this->assertEquals('testData', $options->getDataField());
         $this->assertEquals('testLifetime', $options->getLifetimeField());
@@ -59,7 +56,7 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
         $options = new MongoDBOptions();
         $options->setDatabase('testDatabase')
                 ->setCollection('testCollection')
-                ->setSaveOptions(array('safe' => 2))
+                ->setSaveOptions(array('w' => 2))
                 ->setNameField('testName')
                 ->setDataField('testData')
                 ->setLifetimeField('testLifetime')
@@ -67,7 +64,7 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('testDatabase', $options->getDatabase());
         $this->assertEquals('testCollection', $options->getCollection());
-        $this->assertEquals(array('safe' => 2), $options->getSaveOptions());
+        $this->assertEquals(array('w' => 2), $options->getSaveOptions());
         $this->assertEquals('testName', $options->getNameField());
         $this->assertEquals('testData', $options->getDataField());
         $this->assertEquals('testLifetime', $options->getLifetimeField());

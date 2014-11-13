@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter\File;
@@ -13,9 +12,6 @@ namespace ZendTest\Filter\File;
 use Zend\Filter\File\Rename as FileRename;
 
 /**
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class RenameTest extends \PHPUnit_Framework_TestCase
@@ -495,7 +491,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
             $filter->getFile()
         );
         $fileNoExt = $this->_filesPath . 'newfile';
-        $this->assertRegExp('#' . $fileNoExt . '_.{13}\.xml#', $filter->getNewName($this->_oldFile));
+        $this->assertRegExp('#' . str_replace('\\', '\\\\', $fileNoExt) . '_.{13}\.xml#', $filter->getNewName($this->_oldFile));
     }
 
     /**
@@ -519,7 +515,7 @@ class RenameTest extends \PHPUnit_Framework_TestCase
             )),
             $filter->getFile()
         );
-        $this->assertRegExp('#' . $fileNoExt . '_.{13}#', $filter->getNewName($this->_oldFile));
+        $this->assertRegExp('#' . str_replace('\\', '\\\\', $fileNoExt) . '_.{13}#', $filter->getNewName($this->_oldFile));
     }
 
     /**
@@ -560,5 +556,28 @@ class RenameTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'Invalid options');
         $filter = new FileRename(1234);
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass()),
+            array(array(
+                $this->_oldFile,
+                $this->_origFile
+            ))
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new FileRename($this->_newFile);
+
+        $this->assertEquals($input, $filter($input));
     }
 }

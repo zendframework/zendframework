@@ -3,13 +3,14 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Cache;
 
 use Traversable;
+use Zend\EventManager\EventsCapableInterface;
 use Zend\Stdlib\ArrayUtils;
 
 abstract class StorageFactory
@@ -71,6 +72,14 @@ abstract class StorageFactory
 
         // add plugins
         if (isset($cfg['plugins'])) {
+            if (!$adapter instanceof EventsCapableInterface) {
+                throw new Exception\RuntimeException(sprintf(
+                    "The adapter '%s' doesn't implement '%s' and therefore can't handle plugins",
+                    get_class($adapter),
+                    'Zend\EventManager\EventsCapableInterface'
+                ));
+            }
+
             if (!is_array($cfg['plugins'])) {
                 throw new Exception\InvalidArgumentException(
                     'Plugins needs to be an array'
@@ -185,7 +194,7 @@ abstract class StorageFactory
     public static function pluginFactory($pluginName, $options = array())
     {
         if ($pluginName instanceof Storage\Plugin\PluginInterface) {
-            // $pluginName is already an plugin object
+            // $pluginName is already a plugin object
             $plugin = $pluginName;
         } else {
             $plugin = static::getPluginManager()->get($pluginName);

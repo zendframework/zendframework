@@ -3,14 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Mvc\Service;
 
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\Di\DiAbstractServiceFactory;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -24,12 +23,12 @@ abstract class AbstractPluginManagerFactory implements FactoryInterface
      * the PLUGIN_MANGER_CLASS constant.
      *
      * @param  ServiceLocatorInterface $serviceLocator
-     * @return \Zend\ServiceManager\AbstractPluginManager
+     * @return AbstractPluginManager
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $pluginManagerClass = static::PLUGIN_MANAGER_CLASS;
-        /* @var $plugins \Zend\ServiceManager\AbstractPluginManager */
+        /* @var $plugins AbstractPluginManager */
         $plugins = new $pluginManagerClass;
         $plugins->setServiceLocator($serviceLocator);
         $configuration = $serviceLocator->get('Config');

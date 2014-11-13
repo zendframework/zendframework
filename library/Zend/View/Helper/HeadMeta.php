@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -17,6 +17,20 @@ use Zend\View\Exception;
  * Zend\View\Helper\HeadMeta
  *
  * @see http://www.w3.org/TR/xhtml1/dtds.html
+ *
+ * Allows the following 'virtual' methods:
+ * @method HeadMeta appendName($keyValue, $content, $modifiers = array())
+ * @method HeadMeta offsetGetName($index, $keyValue, $content, $modifiers = array())
+ * @method HeadMeta prependName($keyValue, $content, $modifiers = array())
+ * @method HeadMeta setName($keyValue, $content, $modifiers = array())
+ * @method HeadMeta appendHttpEquiv($keyValue, $content, $modifiers = array())
+ * @method HeadMeta offsetGetHttpEquiv($index, $keyValue, $content, $modifiers = array())
+ * @method HeadMeta prependHttpEquiv($keyValue, $content, $modifiers = array())
+ * @method HeadMeta setHttpEquiv($keyValue, $content, $modifiers = array())
+ * @method HeadMeta appendProperty($keyValue, $content, $modifiers = array())
+ * @method HeadMeta offsetGetProperty($index, $keyValue, $content, $modifiers = array())
+ * @method HeadMeta prependProperty($keyValue, $content, $modifiers = array())
+ * @method HeadMeta setProperty($keyValue, $content, $modifiers = array())
  */
 class HeadMeta extends Placeholder\Container\AbstractStandalone
 {
@@ -93,20 +107,6 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
 
     /**
      * Overload method access
-     *
-     * Allows the following 'virtual' methods:
-     * - appendName($keyValue, $content, $modifiers = array())
-     * - offsetGetName($index, $keyValue, $content, $modifiers = array())
-     * - prependName($keyValue, $content, $modifiers = array())
-     * - setName($keyValue, $content, $modifiers = array())
-     * - appendHttpEquiv($keyValue, $content, $modifiers = array())
-     * - offsetGetHttpEquiv($index, $keyValue, $content, $modifiers = array())
-     * - prependHttpEquiv($keyValue, $content, $modifiers = array())
-     * - setHttpEquiv($keyValue, $content, $modifiers = array())
-     * - appendProperty($keyValue, $content, $modifiers = array())
-     * - offsetGetProperty($index, $keyValue, $content, $modifiers = array())
-     * - prependProperty($keyValue, $content, $modifiers = array())
-     * - setProperty($keyValue, $content, $modifiers = array())
      *
      * @param  string $method
      * @param  array  $args
@@ -269,6 +269,10 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
             && !empty($item->modifiers['conditional'])
             && is_string($item->modifiers['conditional']))
         {
+            // inner wrap with comment end and start if !IE
+            if (str_replace(' ', '', $item->modifiers['conditional']) === '!IE') {
+                $meta = '<!-->' . $meta . '<!--';
+            }
             $meta = '<!--[if ' . $this->escape($item->modifiers['conditional']) . ']>' . $meta . '<![endif]-->';
         }
 

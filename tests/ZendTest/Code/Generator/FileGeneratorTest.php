@@ -3,25 +3,17 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Code
  */
 
 namespace ZendTest\Code\Generator;
 
-use Exception;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Reflection\FileReflection;
 
 /**
- * @category   Zend
- * @package    Zend_Code_Generator
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- *
  * @group Zend_Code_Generator
  * @group Zend_Code_Generator_Php
  * @group Zend_Code_Generator_Php_File
@@ -105,8 +97,6 @@ EOS;
 
     public function testFromFileReflection()
     {
-        $this->markTestIncomplete('Some scanning capabilities are incomplete, including file DocBlock comment retrieval and method scanning');
-
         $file = __DIR__ . '/TestAsset/TestSampleSingleClass.php';
         require_once $file;
 
@@ -123,17 +113,10 @@ EOS;
  */
 
 
-
-/* Zend_Code_Generator_FileGenerator-ClassMarker: {ZendTest\Code\Generator\TestAsset\TestSampleSingleClass} */
-
-
 namespace ZendTest\Code\Generator\TestAsset;
 
 /**
  * class docblock
- *
- * @package Zend_Reflection_TestSampleSingleClass
- *
  */
 class TestSampleSingleClass
 {
@@ -142,7 +125,6 @@ class TestSampleSingleClass
      * Enter description here...
      *
      * @return bool
-     *
      */
     public function someMethod()
     {
@@ -158,9 +140,13 @@ class TestSampleSingleClass
 
 
 EOS;
+
         $this->assertEquals($expectedOutput, $codeGenFileFromDisk->generate());
     }
 
+    /**
+     * @group test
+     */
     public function testFileLineEndingsAreAlwaysLineFeed()
     {
         $codeGenFile = FileGenerator::fromArray(array(
@@ -300,58 +286,111 @@ EOS;
         $this->assertInstanceOf('Zend\Code\Generator\ClassGenerator', $class);
     }
 
-    public function testGeneratingFromAReflectedFilenameShouldRaiseExceptionIfFileDoesNotExist()
+    public function testGeneratingFromAReflectedFileName()
     {
-        $this->setExpectedException('Zend\Code\Generator\Exception\InvalidArgumentException', 'found');
-        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/does/not/exist.really');
+        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/TestAsset/OneInterface.php');
+        $this->assertInstanceOf('Zend\Code\Generator\FileGenerator', $generator);
     }
 
-    public function testGeneratingFromAReflectedFilenameShouldRaiseExceptionIfFileDoesNotExistInIncludePath()
+    public function testGeneratedClassesHaveUses()
     {
-        $this->setExpectedException('Zend\Code\Generator\Exception\InvalidArgumentException', 'found');
-        FileGenerator::fromReflectedFileName('an_empty_file.php');
+        $generator = FileGenerator::fromReflectedFileName(__DIR__ . '/TestAsset/ClassWithUses.php');
+        $class = $generator->getClass();
+
+        $expectedUses = array('ZendTest\Code\Generator\TestAsset\ClassWithNamespace');
+
+        $this->assertEquals($expectedUses, $class->getUses());
     }
 
-    public function testGeneratingFromAReflectedFilenameInIncludePathWithoutIncludeFlagEnable()
+    /**
+     * @group 4747
+     */
+    public function testIssue4747FileGenerationWithAddedMethodIsCorrectlyFormatted()
     {
-        $this->setExpectedException('Zend\Code\Reflection\Exception\RuntimeException', 'must be required');
-        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
+        $g = new \Zend\Code\Generator\FileGenerator();
+        $g = $g->fromReflectedFileName(__DIR__ . '/TestAsset/ClassWithUses.php');
+        $g->setFilename('/tmp/result_class.php');
+        $g->getClass()->addMethod('added');
+        $g->write();
 
-        try {
-            FileGenerator::fromReflectedFileName('an_empty_file.php', false);
-            set_include_path($oldIncludePath);
-            $this->fail('Should throw exception');
-        } catch(Exception $e) {
-            set_include_path($oldIncludePath);
-            throw $e;
-        }
+        $expected = <<<'CODE'
+<?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source
+ * repository
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc.
+ * (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
+
+namespace ZendTest\Code\Generator\TestAsset;
+
+
+use ZendTest\Code\Generator\TestAsset\ClassWithNamespace;
+
+class ClassWithUses
+{
+
+    public function added()
+    {
     }
 
-    public function testGeneratingFromAReflectedFilenameIncluded()
-    {
-        include_once __DIR__ . '/TestAsset/an_empty_file.php';
-        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
 
-        try {
-            FileGenerator::fromReflectedFileName('an_empty_file.php', false);
-            set_include_path($oldIncludePath);
-        } catch(Exception $e) {
-            set_include_path($oldIncludePath);
-            throw $e;
-        }
+}
+
+
+CODE;
+        $actual = file_get_contents('/tmp/result_class.php');
+        $this->assertEquals($expected, $actual);
     }
 
-    public function testGeneratingFromAReflectedFilenameInIncludePath()
+    /**
+     * @group 4747
+     */
+    public function testCanAppendToBodyOfReflectedFile()
     {
-        $this->assertFalse(in_array(realpath(__DIR__ . '/TestAsset/a_second_empty_file.php'), get_included_files()));
-        $oldIncludePath = set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/TestAsset/');
+        $g = new \Zend\Code\Generator\FileGenerator();
+        $g = $g->fromReflectedFileName(__DIR__ . '/TestAsset/ClassWithUses.php');
+        $g->setFilename('/tmp/result_class.php');
+        $g->getClass()->addMethod('added');
+        $g->setBody("\$foo->bar();");
+        $g->write();
 
-        try {
-            FileGenerator::fromReflectedFileName('a_second_empty_file.php');
-            set_include_path($oldIncludePath);
-        } catch(Exception $e) {
-            set_include_path($oldIncludePath);
-            throw $e;
-        }
+        $expected = <<<'CODE'
+<?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source
+ * repository
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc.
+ * (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
+
+namespace ZendTest\Code\Generator\TestAsset;
+
+
+use ZendTest\Code\Generator\TestAsset\ClassWithNamespace;
+
+class ClassWithUses
+{
+
+    public function added()
+    {
+    }
+
+
+}
+
+
+$foo->bar();
+CODE;
+        $actual = file_get_contents('/tmp/result_class.php');
+        $this->assertEquals($expected, $actual);
     }
 }

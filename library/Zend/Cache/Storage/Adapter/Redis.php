@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -12,9 +12,8 @@ namespace Zend\Cache\Storage\Adapter;
 use Redis as RedisResource;
 use RedisException as RedisResourceException;
 use stdClass;
-use Zend\Cache\Storage\Adapter\AbstractAdapter;
+use Traversable;
 use Zend\Cache\Exception;
-use Zend\Cache\Storage\AvailableSpaceCapableInterface;
 use Zend\Cache\Storage\Capabilities;
 use Zend\Cache\Storage\FlushableInterface;
 use Zend\Cache\Storage\TotalSpaceCapableInterface;
@@ -186,7 +185,7 @@ class Redis extends AbstractAdapter implements
         //combine the key => value pairs and remove all missing values
         return array_filter(
             array_combine($normalizedKeys, $results),
-            function($value) {
+            function ($value) {
                 return $value !== false;
             }
         );
@@ -226,7 +225,7 @@ class Redis extends AbstractAdapter implements
 
         try {
             if ($ttl) {
-                if ($this->resourceManager->getMayorVersion($this->resourceId) < 2) {
+                if ($this->resourceManager->getMajorVersion($this->resourceId) < 2) {
                     throw new Exception\UnsupportedMethodCallException("To use ttl you need version >= 2.0.0");
                 }
                 $success = $redis->setex($this->namespacePrefix . $normalizedKey, $ttl, $value);
@@ -260,7 +259,7 @@ class Redis extends AbstractAdapter implements
         try {
             if ($ttl > 0) {
                 //check if ttl is supported
-                if ($this->resourceManager->getMayorVersion($this->resourceId) < 2) {
+                if ($this->resourceManager->getMajorVersion($this->resourceId) < 2) {
                     throw new Exception\UnsupportedMethodCallException("To use ttl you need version >= 2.0.0");
                 }
                 //mSet does not allow ttl, so use transaction
@@ -402,7 +401,7 @@ class Redis extends AbstractAdapter implements
     {
         if ($this->capabilities === null) {
             $this->capabilityMarker = new stdClass();
-            $minTtl = $this->resourceManager->getMayorVersion($this->resourceId) < 2 ? 0 : 1;
+            $minTtl = $this->resourceManager->getMajorVersion($this->resourceId) < 2 ? 0 : 1;
             //without serialization redis supports only strings for simple
             //get/set methods
             $this->capabilities     = new Capabilities(

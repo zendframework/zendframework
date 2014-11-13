@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -48,7 +48,7 @@ class ValueGenerator extends AbstractGenerator
     /**
      * @var int
      */
-    protected $arrayDepth = 1;
+    protected $arrayDepth = 0;
 
     /**
      * @var string
@@ -310,22 +310,15 @@ class ValueGenerator extends AbstractGenerator
 
         if ($type == self::TYPE_AUTO) {
             $type = $this->getAutoDeterminedType($value);
+        }
 
-            if ($type == self::TYPE_ARRAY) {
-                $rii = new \RecursiveIteratorIterator(
-                    $it = new \RecursiveArrayIterator($value),
-                    \RecursiveIteratorIterator::SELF_FIRST
-                );
-                foreach ($rii as $curKey => $curValue) {
-                    if (!$curValue instanceof ValueGenerator) {
-                        $curValue = new self($curValue, self::TYPE_AUTO, self::OUTPUT_MULTIPLE_LINE, $this->getConstants());
-                        $rii->getSubIterator()->offsetSet($curKey, $curValue);
-                    }
-                    $curValue->setArrayDepth($rii->getDepth());
+        if ($type == self::TYPE_ARRAY) {
+            foreach ($value as &$curValue) {
+                if ($curValue instanceof self) {
+                    continue;
                 }
-                $value = $rii->getSubIterator()->getArrayCopy();
+                $curValue = new self($curValue, self::TYPE_AUTO, self::OUTPUT_MULTIPLE_LINE, $this->getConstants());
             }
-
         }
 
         $output = '';
@@ -351,12 +344,8 @@ class ValueGenerator extends AbstractGenerator
                 break;
             case self::TYPE_ARRAY:
                 $output .= 'array(';
-                $curArrayMultiblock = false;
-                if (count($value) > 1) {
-                    $curArrayMultiblock = true;
-                    if ($this->outputMode == self::OUTPUT_MULTIPLE_LINE) {
-                        $output .= self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth + 1);
-                    }
+                if ($this->outputMode == self::OUTPUT_MULTIPLE_LINE) {
+                    $output .= self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth + 1);
                 }
                 $outputParts = array();
                 $noKeyIndex  = 0;
@@ -384,17 +373,16 @@ class ValueGenerator extends AbstractGenerator
                     ? self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth + 1)
                     : ' ';
                 $output .= implode(',' . $padding, $outputParts);
-                if ($curArrayMultiblock == true && $this->outputMode == self::OUTPUT_MULTIPLE_LINE) {
-                    $output .= self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth + 1);
+                if ($this->outputMode == self::OUTPUT_MULTIPLE_LINE) {
+                    $output .= self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth);
                 }
                 $output .= ')';
                 break;
             case self::TYPE_OTHER:
             default:
-                throw new Exception\RuntimeException(sprintf(
-                                                         'Type "%s" is unknown or cannot be used as property default value.',
-                                                         get_class($value)
-                                                     ));
+                throw new Exception\RuntimeException(
+                    sprintf('Type "%s" is unknown or cannot be used as property default value.', get_class($value))
+                );
         }
 
         return $output;
@@ -409,7 +397,7 @@ class ValueGenerator extends AbstractGenerator
      */
     public static function escape($input, $quote = true)
     {
-        $output = addcslashes($input, "'");
+        $output = addcslashes($input, "\\'");
 
         // adds quoting strings
         if ($quote) {

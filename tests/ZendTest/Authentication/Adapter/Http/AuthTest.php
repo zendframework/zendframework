@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Authentication
  */
 
 namespace ZendTest\Authentication\Adapter\Http;
@@ -16,9 +15,6 @@ use Zend\Http\Request;
 use Zend\Http\Response;
 
 /**
- * @category   Zend
- * @package    Zend_Auth
- * @subpackage UnitTests
  * @group      Zend_Auth
  */
 class AuthTest extends \PHPUnit_Framework_TestCase
@@ -61,7 +57,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
     /**
      * File resolver setup against with HTTP Digest auth file
      *
-     * @var Zend_Auth_Adapter_Http_Resolver_File
+     * @var Http\FileResolver
      */
     protected $_digestResolver;
 
@@ -186,7 +182,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
     public function testBasicAuthBadUser()
     {
-        // Attempt Basic Authentication with a nonexistant username and
+        // Attempt Basic Authentication with a nonexistent username and
         // password
 
         // The expected Basic Www-Authenticate header value

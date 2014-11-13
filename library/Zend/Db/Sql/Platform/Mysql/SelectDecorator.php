@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -42,6 +42,9 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         foreach (get_object_vars($this->select) as $name => $value) {
             $this->{$name} = $value;
         }
+        if ($this->limit === null && $this->offset !== null) {
+            $this->specifications[self::LIMIT] = 'LIMIT 18446744073709551615';
+        }
         parent::prepareStatement($adapter, $statementContainer);
     }
 
@@ -55,17 +58,23 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         foreach (get_object_vars($this->select) as $name => $value) {
             $this->{$name} = $value;
         }
+        if ($this->limit === null && $this->offset !== null) {
+            $this->specifications[self::LIMIT] = 'LIMIT 18446744073709551615';
+        }
         return parent::getSqlString($platform);
     }
 
     protected function processLimit(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
+        if ($this->limit === null && $this->offset !== null) {
+            return array('');
+        }
         if ($this->limit === null) {
             return null;
         }
         if ($driver) {
             $sql = $driver->formatParameterName('limit');
-            $parameterContainer->offsetSet('limit', (int) $this->limit, ParameterContainer::TYPE_INTEGER);
+            $parameterContainer->offsetSet('limit', $this->limit, ParameterContainer::TYPE_INTEGER);
         } else {
             $sql = $this->limit;
         }
@@ -79,7 +88,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             return null;
         }
         if ($driver) {
-            $parameterContainer->offsetSet('offset', (int) $this->offset, ParameterContainer::TYPE_INTEGER);
+            $parameterContainer->offsetSet('offset', $this->offset, ParameterContainer::TYPE_INTEGER);
             return array($driver->formatParameterName('offset'));
         }
 

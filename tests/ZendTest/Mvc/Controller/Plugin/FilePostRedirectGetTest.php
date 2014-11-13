@@ -4,32 +4,29 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mvc
  */
 
 namespace ZendTest\Mvc\Controller\Plugin;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Form\Element\Collection;
 use Zend\Form\Form;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\InputFilter\InputFilter;
+use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\Http\Literal as LiteralRoute;
 use Zend\Mvc\Router\Http\Segment as SegmentRoute;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\SimpleRouteStack;
 use Zend\Stdlib\Parameters;
+use Zend\Validator\NotEmpty;
 use ZendTest\Mvc\Controller\TestAsset\SampleController;
 use ZendTest\Session\TestAsset\TestManager as SessionManager;
 
-/**
- * @category   Zend
- * @package    Zend_Mvc
- * @subpackage UnitTests
- */
 class FilePostRedirectGetTest extends TestCase
 {
     public $form;
@@ -37,10 +34,19 @@ class FilePostRedirectGetTest extends TestCase
     public $event;
     public $request;
     public $response;
+    public $collection;
 
     public function setUp()
     {
         $this->form = new Form();
+
+        $this->collection = new Collection('links',array(
+                'count' => 1,
+                'allow_add' => true,
+                'target_element' => array(
+                    'type' => 'ZendTest\Mvc\Controller\Plugin\TestAsset\LinksFieldset',
+                ),
+        ));
 
         $router = new SimpleRouteStack;
         $router->addRoute('home', LiteralRoute::factory(array(
@@ -54,6 +60,13 @@ class FilePostRedirectGetTest extends TestCase
             'route' => '/foo/:param',
             'defaults' => array(
                 'param' => 1
+            )
+        )));
+
+        $router->addRoute('ctl', SegmentRoute::factory(array(
+            'route' => '/ctl/:controller',
+            'defaults' => array(
+                '__NAMESPACE__' => 'ZendTest\Mvc\Controller\TestAsset',
             )
         )));
 
@@ -235,5 +248,218 @@ class FilePostRedirectGetTest extends TestCase
 
         $this->assertEquals($params, $prgResult);
         $this->assertNotEmpty($messages['postval1']['isEmpty']);
+    }
+
+    public function testReuseMatchedParametersWithSegmentController()
+    {
+        $expects = '/ctl/sample';
+        $this->request->setMethod('POST');
+        $this->request->setUri($expects);
+        $this->request->setPost(new Parameters(array(
+            'postval1' => 'value1'
+        )));
+
+        $routeMatch = $this->event->getRouter()->match($this->request);
+        $this->event->setRouteMatch($routeMatch);
+
+        $moduleRouteListener = new ModuleRouteListener;
+        $moduleRouteListener->onRoute($this->event);
+
+        $this->controller->dispatch($this->request, $this->response);
+        $prgResultRoute = $this->controller->fileprg($this->form);
+
+        $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
+        $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
+        $this->assertEquals($expects, $prgResultRoute->getHeaders()->get('Location')->getUri() , 'redirect to the same url');
+        $this->assertEquals(303, $prgResultRoute->getStatusCode());
+    }
+
+    public function testFieldsetAmountInFormEqualsFieldsetsInInputFilter()
+    {
+        // POST
+        $url = '/';
+        $params = array(
+            'links' => array(
+                '0' => array(
+                    'foobar' => 'val',
+                ),
+                '1' => array(
+                    'foobar' => 'val',
+                ),
+            ),
+        );
+        $this->request->setMethod('POST');
+        $this->request->setPost(new Parameters($params));
+        $this->request->setUri($url);
+
+        $this->form->add($this->collection);
+
+        $routeMatch = $this->event->getRouter()->match($this->request);
+        $this->event->setRouteMatch($routeMatch);
+
+        $this->controller->dispatch($this->request, $this->response);
+        $prgResultUrl = $this->controller->fileprg($this->form);
+
+        $this->assertInstanceOf('Zend\Http\Response', $prgResultUrl);
+        $this->assertTrue($prgResultUrl->getHeaders()->has('Location'));
+        $this->assertEquals('/', $prgResultUrl->getHeaders()->get('Location')->getUri());
+        $this->assertEquals(303, $prgResultUrl->getStatusCode());
+
+        $this->assertCount(count($params['links']),  $this->form->get('links')->getFieldsets());
+        $this->assertCount(count($this->form->get('links')->getFieldsets()),  $this->form->getInputFilter()->get('links')->getInputs());
+
+        // GET
+        $this->request = new Request();
+        $form = new Form();
+        $collection = new Collection('links',array(
+            'count' => 1,
+            'allow_add' => true,
+            'target_element' => array(
+                'type' => 'ZendTest\Mvc\Controller\Plugin\TestAsset\LinksFieldset',
+            ),
+        ));
+        $form->add($collection);
+        $this->controller->dispatch($this->request, $this->response);
+        $prgResult = $this->controller->fileprg( $form);
+
+        $this->assertEquals($params, $prgResult);
+        $this->assertCount(count($params['links']),  $form->get('links')->getFieldsets());
+        $this->assertCount(count( $form->get('links')->getFieldsets()), $form->getInputFilter()->get('links')->getInputs());
+    }
+
+    public function testCollectionInputFilterIsInitializedBeforePluginRetrievesIt()
+    {
+        $fieldset = new TestAsset\InputFilterProviderFieldset();
+        $collectionSpec = array(
+            'name' => 'test_collection',
+            'type' => 'collection',
+            'options' => array(
+                'target_element' => $fieldset
+            ),
+        );
+
+        $form = new Form();
+        $form->add($collectionSpec);
+
+        $postData = array(
+            'test_collection' => array(
+                array (
+                    'test_field' => 'foo'
+                ),
+                array (
+                    'test_field' => 'bar'
+                )
+            )
+        );
+
+        // test POST
+        $request = new Request();
+        $request->setMethod('POST');
+        $request->setPost(new Parameters($postData));
+        $this->controller->dispatch($request, $this->response);
+
+        $this->controller->fileprg($form, '/someurl', true);
+
+        $data = $form->getData();
+
+        $this->assertArrayHasKey(0, $data['test_collection']);
+        $this->assertArrayHasKey(1, $data['test_collection']);
+
+        $this->assertSame('FOO', $data['test_collection'][0]['test_field']);
+        $this->assertSame('BAR', $data['test_collection'][1]['test_field']);
+
+        // now test GET with a brand new form instance
+        $form = new Form();
+        $form->add($collectionSpec);
+
+        $request = new Request();
+        $this->controller->dispatch($request, $this->response);
+
+        $this->controller->fileprg($form, '/someurl', true);
+
+        $data = $form->getData();
+
+        $this->assertArrayHasKey(0, $data['test_collection']);
+        $this->assertArrayHasKey(1, $data['test_collection']);
+
+        $this->assertSame('FOO', $data['test_collection'][0]['test_field']);
+        $this->assertSame('BAR', $data['test_collection'][1]['test_field']);
+    }
+
+    public function testCorrectInputDataMerging()
+    {
+        require_once __DIR__ . '/TestAsset/DisablePhpUploadChecks.php';
+        require_once __DIR__ . '/TestAsset/DisablePhpMoveUploadedFileChecks.php';
+
+        $form = new Form();
+        $form->add(array(
+            'name' => 'collection',
+            'type' => 'collection',
+            'options' => array(
+                'target_element' => new TestAsset\TestFieldset('target'),
+                'count' => 2,
+            )
+        ));
+
+        copy(__DIR__ . '/TestAsset/nullfile', __DIR__ . '/TestAsset/nullfile_copy');
+
+        $request = $this->request;
+        $request->setMethod('POST');
+        $request->setPost(new Parameters(array(
+            'collection' => array(
+                0 => array(
+                    'text' => 'testvalue1',
+                ),
+                1 => array(
+                    'text' => '',
+                )
+            )
+        )));
+        $request->setFiles(new Parameters(array(
+            'collection' => array(
+                0 => array(
+                    'file' => array(
+                        'name' => 'test.jpg',
+                        'type' => 'image/jpeg',
+                        'size' => 20480,
+                        'tmp_name' => __DIR__ . '/TestAsset/nullfile_copy',
+                        'error' => UPLOAD_ERR_OK
+                    ),
+                ),
+            )
+        )));
+
+        $this->controller->dispatch($this->request, $this->response);
+        $this->controller->fileprg($form, '/test/getPage', true);
+
+        $this->assertFalse($form->isValid());
+        $data = $form->getData();
+
+        $this->assertEquals(array(
+            'collection' => array(
+                0 => array(
+                    'text' => 'testvalue1',
+                    'file' => array(
+                        'name' => 'test.jpg',
+                        'type' => 'image/jpeg',
+                        'size' => 20480,
+                        'tmp_name' => __DIR__ . '/TestAsset/testfile.jpg',
+                        'error' => 0
+                    ),
+                ),
+                1 => array(
+                    'text' => null,
+                    'file' => null,
+                )
+            )
+        ), $data);
+
+        $this->assertFileExists($data['collection'][0]['file']['tmp_name']);
+
+        unlink($data['collection'][0]['file']['tmp_name']);
+
+        $messages = $form->getMessages();
+        $this->assertTrue(isset($messages['collection'][1]['text'][NotEmpty::IS_EMPTY]));
+        $this->assertTrue(isset($messages['collection'][1]['file'][NotEmpty::IS_EMPTY]));
     }
 }

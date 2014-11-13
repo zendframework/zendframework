@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -69,10 +69,12 @@ class LocatorRegistrationListener extends AbstractListener implements
         // Shared instance for module manager
         $events->attach('Zend\Mvc\Application', MvcEvent::EVENT_BOOTSTRAP, function ($e) use ($moduleManager) {
             $moduleClassName = get_class($moduleManager);
+            $moduleClassNameArray = explode('\\', $moduleClassName);
+            $moduleClassNameAlias = end($moduleClassNameArray);
             $application     = $e->getApplication();
             $services        = $application->getServiceManager();
             if (!$services->has($moduleClassName)) {
-                $services->setService($moduleClassName, $moduleManager);
+                $services->setAlias($moduleClassName, $moduleClassNameAlias);
             }
         }, 1000);
 

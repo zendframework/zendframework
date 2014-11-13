@@ -3,18 +3,19 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\View\Helper\Placeholder\Container;
 
+use ArrayObject;
 use Zend\View\Exception;
 
 /**
  * Abstract class representing container for placeholder values
  */
-abstract class AbstractContainer extends \ArrayObject
+abstract class AbstractContainer extends ArrayObject
 {
     /**
      * Whether or not to override all contents of placeholder
@@ -259,7 +260,7 @@ abstract class AbstractContainer extends \ArrayObject
      * Prepend a value to the top of the container
      *
      * @param  mixed $value
-     * @return void
+     * @return self
      */
     public function prepend($value)
     {
@@ -267,6 +268,18 @@ abstract class AbstractContainer extends \ArrayObject
         array_unshift($values, $value);
         $this->exchangeArray($values);
 
+        return $this;
+    }
+
+    /**
+     * Append a value to the end of the container
+     *
+     * @param  mixed $value
+     * @return self
+     */
+    public function append($value)
+    {
+        parent::append($value);
         return $this;
     }
 
@@ -290,7 +303,7 @@ abstract class AbstractContainer extends \ArrayObject
      * optionally, if a number is passed, it will be the number of spaces
      *
      * @param  string|int $indent
-     * @return AbstractContainer
+     * @return self
      */
     public function setIndent($indent)
     {
@@ -312,7 +325,7 @@ abstract class AbstractContainer extends \ArrayObject
      * Set postfix for __toString() serialization
      *
      * @param  string $postfix
-     * @return AbstractContainer
+     * @return self
      */
     public function setPostfix($postfix)
     {
@@ -334,7 +347,7 @@ abstract class AbstractContainer extends \ArrayObject
      * Set prefix for __toString() serialization
      *
      * @param  string $prefix
-     * @return AbstractContainer
+     * @return self
      */
     public function setPrefix($prefix)
     {
@@ -358,7 +371,7 @@ abstract class AbstractContainer extends \ArrayObject
      * Used to implode elements in container
      *
      * @param  string $separator
-     * @return AbstractContainer
+     * @return self
      */
     public function setSeparator($separator)
     {

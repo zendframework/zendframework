@@ -3,83 +3,136 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_I18n
  */
 
 namespace ZendTest\I18n\Validator;
 
-use Zend\I18n\Validator\DateTime as DateTimeValidator;
+use DateTime;
+use IntlDateFormatter;
 use Locale;
+use PHPUnit_Framework_TestCase;
+use PHPUnit_Runner_Version;
+use Zend\I18n\Validator\DateTime as DateTimeValidator;
 
-/**
- * @category   Zend
- * @package    Zend_Validator
- * @subpackage UnitTests
- * @group      Zend_Validator
- */
-class DateTimeTest extends \PHPUnit_Framework_TestCase
+class DateTimeTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var DateTimeValidator
      */
     protected $validator;
 
+    /**
+     * @var Locale
+     */
     protected $locale;
 
+    /**
+     * @var \DateTimeZone
+     */
     protected $timezone;
 
     public function setUp()
     {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
         $this->locale = Locale::getDefault();
         $this->timezone = date_default_timezone_get();
 
-        $this->validator = new DateTimeValidator(array('locale' => 'en', 'timezone'=>'Europe/Amsterdam'));
+        $this->validator = new DateTimeValidator(array(
+            'locale' => 'en',
+            'timezone' => 'Europe/Amsterdam'
+        ));
     }
 
     public function tearDown()
     {
-        Locale::setDefault($this->locale);
+        if (extension_loaded('intl')) {
+            Locale::setDefault($this->locale);
+        }
         date_default_timezone_set($this->timezone);
     }
 
     /**
      * Ensures that the validator follows expected behavior
      *
+     * @dataProvider basicProvider name of method that provides parameters
      * @param string  $value    that will be tested
      * @param boolean $expected expected result of assertion
      * @param array   $options  fed into the validator before validation
-     * @dataProvider basicProvider name of method that provide the above parameters
-     * @return void
      */
     public function testBasic($value, $expected, $options = array())
     {
         $this->validator->setOptions($options);
 
-        $this->assertEquals($expected, $this->validator->isValid($value),
-            'Failed expecting ' . $value . ' being ' . ($expected ? 'true' : 'false') .
-                sprintf(" (locale:%s, dateType: %s, timeType: %s, pattern:%s)", $this->validator->getLocale(),
-                    $this->validator->getDateType(), $this->validator->getTimeType(), $this->validator->getPattern()));
+        $this->assertEquals(
+            $expected,
+            $this->validator->isValid($value),
+            sprintf('Failed expecting %s being %s', $value, ($expected ? 'true' : 'false'))
+                . sprintf(
+                    ' (locale:%s, dateType: %s, timeType: %s, pattern:%s)',
+                    $this->validator->getLocale(),
+                    $this->validator->getDateType(),
+                    $this->validator->getTimeType(),
+                    $this->validator->getPattern()
+                )
+        );
     }
 
     public function basicProvider()
     {
-        return array(
-            array('May 30, 2013',   true, array('locale'=>'en', 'dateType' => \IntlDateFormatter::MEDIUM, 'timeType' => \IntlDateFormatter::NONE)),
-            array('30.Mai.2013',   true, array('locale'=>'de', 'dateType' => \IntlDateFormatter::MEDIUM, 'timeType' => \IntlDateFormatter::NONE)),
-            array('30 Mei 2013',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::MEDIUM, 'timeType' => \IntlDateFormatter::NONE)),
+        if (!extension_loaded('intl')) {
+            if (version_compare(PHPUnit_Runner_Version::id(), '3.8.0-dev') === 1) {
+                $this->markTestSkipped('ext/intl not enabled');
+            } else {
+                return array(
+                    array()
+                );
+            }
+        }
 
-            array('May 38, 2013',   false, array('locale'=>'en', 'dateType' => \IntlDateFormatter::FULL, 'timeType' => \IntlDateFormatter::NONE)),
-            array('Dienstag, 28. Mai 2013',   true, array('locale'=>'de', 'dateType' => \IntlDateFormatter::FULL, 'timeType' => \IntlDateFormatter::NONE)),
-            array('Maandag 28 Mei 2013',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::FULL, 'timeType' => \IntlDateFormatter::NONE)),
-
-            array('0:00',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::SHORT)),
-            array('01:01',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::SHORT)),
-            array('01:01:01',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::MEDIUM)),
-            array('01:01:01 +2',   true, array('locale'=>'nl', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::LONG)),
-            array('03:30:42 am +2',   true, array('locale'=>'en', 'dateType' => \IntlDateFormatter::NONE, 'timeType' => \IntlDateFormatter::LONG)),
+        $trueArray      = array();
+        $testingDate    = new DateTime();
+        $testingLocales = array('en', 'de', 'zh-TW', 'ja', 'ar', 'ru', 'si', 'ml-IN', 'hi');
+        $testingFormats = array(
+            IntlDateFormatter::FULL,
+            IntlDateFormatter::LONG,
+            IntlDateFormatter::MEDIUM,
+            IntlDateFormatter::SHORT,
+            IntlDateFormatter::NONE
         );
+
+        //Loop locales and formats for a more thorough set of "true" test data
+        foreach ($testingLocales as $locale) {
+            foreach ($testingFormats as $dateFormat) {
+                foreach ($testingFormats as $timeFormat) {
+                    if (($timeFormat !== IntlDateFormatter::NONE) || ($dateFormat !== IntlDateFormatter::NONE)) {
+                        $trueArray[] = array(
+                            IntlDateFormatter::create($locale, $dateFormat, $timeFormat)->format($testingDate),
+                            true,
+                            array('locale' => $locale, 'dateType' => $dateFormat, 'timeType' => $timeFormat)
+                        );
+                    }
+                }
+            }
+        }
+
+        $falseArray = array(
+            array(
+                'May 38, 2013',
+                false,
+                array(
+                    'locale' => 'en',
+                    'dateType' => IntlDateFormatter::FULL,
+                    'timeType' => IntlDateFormatter::NONE
+                )
+            )
+        );
+
+        return array_merge($trueArray, $falseArray);
     }
 
     /**
@@ -148,5 +201,4 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->validator->isValid('02:00'));
         $this->assertEquals('hh:mm', $this->validator->getPattern());
     }
-
 }

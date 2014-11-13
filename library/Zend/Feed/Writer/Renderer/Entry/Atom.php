@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -24,7 +24,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      *
      * @param  Writer\Entry $container
      */
-    public function __construct (Writer\Entry $container)
+    public function __construct(Writer\Entry $container)
     {
         parent::__construct($container);
     }
@@ -291,7 +291,6 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
     {
         if (preg_match('/^tag:(?P<name>.*),(?P<date>\d{4}-?\d{0,2}-?\d{0,2}):(?P<specific>.*)(.*:)*$/', $id, $matches)) {
             $dvalid = false;
-            $nvalid = false;
             $date = $matches['date'];
             $d6 = strtotime($date);
             if ((strlen($date) == 4) && $date <= date('Y')) {
@@ -353,7 +352,6 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      */
     protected function _loadXhtml($content)
     {
-        $xhtml = '';
         if (class_exists('tidy', false)) {
             $tidy = new \tidy;
             $config = array(

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -104,6 +104,8 @@ class Pdf extends AbstractRenderer
     protected function drawPolygon($points, $color, $filled = true)
     {
         $page = $this->resource->pages[$this->page];
+        $x = array();
+        $y = array();
         foreach ($points as $point) {
             $x[] = $point[0] * $this->moduleSize + $this->leftOffset;
             $y[] = $page->getHeight() - $point[1] * $this->moduleSize - $this->topOffset;

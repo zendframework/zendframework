@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -108,6 +108,18 @@ class ModuleManagerFactory implements FactoryInterface
             'input_filters',
             'Zend\ModuleManager\Feature\InputFilterProviderInterface',
             'getInputFilterConfig'
+        );
+        $serviceListener->addServiceManager(
+            'LogProcessorManager',
+            'log_processors',
+            'Zend\ModuleManager\Feature\LogProcessorProviderInterface',
+            'getLogProcessorConfig'
+        );
+        $serviceListener->addServiceManager(
+            'LogWriterManager',
+            'log_writers',
+            'Zend\ModuleManager\Feature\LogWriterProviderInterface',
+            'getLogWriterConfig'
         );
 
         $events = $serviceLocator->get('EventManager');

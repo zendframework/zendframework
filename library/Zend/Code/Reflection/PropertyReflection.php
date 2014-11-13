@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -77,8 +77,13 @@ class PropertyReflection extends PhpReflectionProperty implements ReflectionInte
         }
 
         $class              = $this->getDeclaringClass();
-        $cachingFileScanner = new CachingFileScanner($class->getFileName());
+        $cachingFileScanner = $this->createFileScanner($class->getFileName());
         $nameInformation    = $cachingFileScanner->getClassNameInformation($class->getName());
+
+        if (!$nameInformation) {
+            return false;
+        }
+
         $this->annotations  = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
 
         return $this->annotations;
@@ -87,5 +92,20 @@ class PropertyReflection extends PhpReflectionProperty implements ReflectionInte
     public function toString()
     {
         return $this->__toString();
+    }
+
+    /**
+     * Creates a new FileScanner instance.
+     *
+     * By having this as a seperate method it allows the method to be overridden
+     * if a different FileScanner is needed.
+     *
+     * @param  string $filename
+     *
+     * @return CachingFileScanner
+     */
+    protected function createFileScanner($filename)
+    {
+        return new CachingFileScanner($filename);
     }
 }

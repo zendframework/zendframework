@@ -3,14 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Db\ResultSet;
 
 use ArrayIterator;
-use ArrayObject;
 use Countable;
 use Iterator;
 use IteratorAggregate;
@@ -268,7 +267,7 @@ abstract class AbstractResultSet implements Iterator, ResultSetInterface
                 $return[] = $row;
             } elseif (method_exists($row, 'toArray')) {
                 $return[] = $row->toArray();
-            } elseif ($row instanceof ArrayObject) {
+            } elseif (method_exists($row, 'getArrayCopy')) {
                 $return[] = $row->getArrayCopy();
             } else {
                 throw new Exception\RuntimeException(

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -290,6 +290,12 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
                         break;
                     case ParameterContainer::TYPE_BINARY:
                         $type = SQLT_BIN;
+                        break;
+                    case ParameterContainer::TYPE_LOB:
+                        $type = OCI_B_CLOB;
+                        $clob = oci_new_descriptor($this->driver->getConnection()->getResource(), OCI_DTYPE_LOB);
+                        $clob->writetemporary($value, OCI_TEMP_CLOB);
+                        $value = $clob;
                         break;
                     case ParameterContainer::TYPE_STRING:
                     default:

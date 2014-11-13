@@ -3,30 +3,25 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_View
  */
 
 namespace ZendTest\View\Helper;
 
-use Zend\View\Helper\Placeholder\Registry;
 use Zend\View\Helper;
 use Zend\View;
 
 /**
- * Test class for Zend_View_Helper_HeadStyle.
+ * Test class for Zend\View\Helper\HeadStyle.
  *
- * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
 class HeadStyleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_HeadStyle
+     * @var Helper\HeadStyle
      */
     public $helper;
 
@@ -360,6 +355,28 @@ a {
 }', array('media' => 'screen,projection', 'conditional' => 'lt IE 7'));
         $test = $this->helper->toString();
         $this->assertContains('<!--[if lt IE 7]>', $test);
+    }
+
+    public function testConditionalScriptNoIE()
+    {
+        $this->helper->appendStyle('
+a {
+    display: none;
+}', array('media' => 'screen,projection', 'conditional' => '!IE'));
+        $test = $this->helper->toString();
+        $this->assertContains('<!--[if !IE]><!--><', $test);
+        $this->assertContains('<!--<![endif]-->', $test);
+    }
+
+    public function testConditionalScriptNoIEWidthSpace()
+    {
+        $this->helper->appendStyle('
+a {
+    display: none;
+}', array('media' => 'screen,projection', 'conditional' => '! IE'));
+        $test = $this->helper->toString();
+        $this->assertContains('<!--[if ! IE]><!--><', $test);
+        $this->assertContains('<!--<![endif]-->', $test);
     }
 
     /**

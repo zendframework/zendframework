@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -89,11 +89,6 @@ class DateFormat extends AbstractHelper
             );
         }
 
-        // DateTime support for IntlDateFormatter::format() was only added in 5.3.4
-        if ($date instanceof DateTime && version_compare(PHP_VERSION, '5.3.4', '<')) {
-            $date = $date->getTimestamp();
-        }
-
         return $this->formatters[$formatterId]->format($date);
     }
 
@@ -133,8 +128,11 @@ class DateFormat extends AbstractHelper
     {
         $this->timezone = (string) $timezone;
 
+        // The method setTimeZoneId is deprecated as of PHP 5.5.0
+        $setTimeZoneMethodName = (PHP_VERSION_ID < 50500) ? 'setTimeZoneId' : 'setTimeZone';
+
         foreach ($this->formatters as $formatter) {
-            $formatter->setTimeZoneId($this->timezone);
+            $formatter->$setTimeZoneMethodName($this->timezone);
         }
 
         return $this;

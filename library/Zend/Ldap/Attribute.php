@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -37,13 +37,13 @@ class Attribute
         $valArray   = array();
         if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v) {
-                $v = static::valueToLdap($v);
+                $v = self::valueToLdap($v);
                 if ($v !== null) {
                     $valArray[] = $v;
                 }
             }
         } elseif ($value !== null) {
-            $value = static::valueToLdap($value);
+            $value = self::valueToLdap($value);
             if ($value !== null) {
                 $valArray[] = $value;
             }
@@ -76,14 +76,14 @@ class Attribute
             }
             $retArray = array();
             foreach ($data[$attribName] as $v) {
-                $retArray[] = static::valueFromLdap($v);
+                $retArray[] = self::valueFromLdap($v);
             }
             return $retArray;
         } elseif (is_int($index)) {
             if (!isset($data[$attribName])) {
                 return null;
             } elseif ($index >= 0 && $index < count($data[$attribName])) {
-                return static::valueFromLdap($data[$attribName][$index]);
+                return self::valueFromLdap($data[$attribName][$index]);
             } else {
                 return null;
             }
@@ -295,13 +295,13 @@ class Attribute
         $convertedValues = array();
         if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v) {
-                $v = static::valueToLdapDateTime($v, $utc);
+                $v = self::valueToLdapDateTime($v, $utc);
                 if ($v !== null) {
                     $convertedValues[] = $v;
                 }
             }
         } elseif ($value !== null) {
-            $value = static::valueToLdapDateTime($value, $utc);
+            $value = self::valueToLdapDateTime($value, $utc);
             if ($value !== null) {
                 $convertedValues[] = $value;
             }
@@ -335,14 +335,14 @@ class Attribute
     {
         $values = static::getAttribute($data, $attribName, $index);
         if (is_array($values)) {
-            for ($i = 0; $i < count($values); $i++) {
-                $newVal = static::valueFromLdapDateTime($values[$i]);
+            for ($i = 0, $count = count($values); $i < $count; $i++) {
+                $newVal = self::valueFromLdapDateTime($values[$i]);
                 if ($newVal !== null) {
                     $values[$i] = $newVal;
                 }
             }
         } else {
-            $newVal = static::valueFromLdapDateTime($values);
+            $newVal = self::valueFromLdapDateTime($values);
             if ($newVal !== null) {
                 $values = $newVal;
             }

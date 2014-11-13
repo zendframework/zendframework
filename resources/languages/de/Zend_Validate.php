@@ -1,16 +1,9 @@
 <?php
 /**
- * Zend Framework
- * LICENSE
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
+ * Zend Framework (http://framework.zend.com/)
  *
- * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -116,7 +109,7 @@ return array(
     "File '%value%' is not readable or does not exist"                                                                          => "Die Datei '%value%' konnte nicht gelesen werden oder existiert nicht",
 
     // Zend_Validator_File_Exists
-    "File '%value%' does not exist"                                                                                             => "File '%value%' does not exist",
+    "File '%value%' does not exist"                                                                                             => "Die Datei '%value%' existiert nicht",
 
     // Zend_Validator_File_Extension
     "File '%value%' has a false extension"                                                                                      => "Die Datei '%value%' hat einen falschen Dateityp",

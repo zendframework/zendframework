@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Filter
  */
 
 namespace ZendTest\Filter\Word;
@@ -13,11 +12,8 @@ namespace ZendTest\Filter\Word;
 use Zend\Filter\Word\CamelCaseToSeparator as CamelCaseToSeparatorFilter;
 
 /**
- * Test class for Zend_Filter_Word_CamelCaseToSeparator.
+ * Test class for Zend\Filter\Word\CamelCaseToSeparator.
  *
- * @category   Zend
- * @package    Zend_Filter
- * @subpackage UnitTests
  * @group      Zend_Filter
  */
 class CamelCaseToSeparatorTest extends \PHPUnit_Framework_TestCase
@@ -40,5 +36,52 @@ class CamelCaseToSeparatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Camel:-#Cased:-#Words', $filtered);
+    }
+
+    public function testFilterSeperatesMultipleUppercasedLettersAndUnderscores()
+    {
+        $string   = 'TheseAre_SOME_CamelCASEDWords';
+        $filter   = new CamelCaseToSeparatorFilter('_');
+        $filtered = $filter($string);
+
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('These_Are_SOME_Camel_CASED_Words', $filtered);
+    }
+
+    /**
+     * @return void
+     */
+    public function testFilterSupportArray()
+    {
+        $filter = new CamelCaseToSeparatorFilter();
+
+        $input = array(
+            'CamelCasedWords',
+            'somethingDifferent'
+        );
+
+        $filtered = $filter($input);
+
+        $this->assertNotEquals($input, $filtered);
+        $this->assertEquals(array('Camel Cased Words', 'something Different'), $filtered);
+    }
+
+    public function returnUnfilteredDataProvider()
+    {
+        return array(
+            array(null),
+            array(new \stdClass())
+        );
+    }
+
+    /**
+     * @dataProvider returnUnfilteredDataProvider
+     * @return void
+     */
+    public function testReturnUnfiltered($input)
+    {
+        $filter = new CamelCaseToSeparatorFilter();
+
+        $this->assertEquals($input, $filter($input));
     }
 }

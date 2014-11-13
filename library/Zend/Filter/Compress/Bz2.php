@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -59,7 +59,7 @@ class Bz2 extends AbstractCompressionAlgorithm
      *
      * @param  int $blocksize
      * @throws Exception\InvalidArgumentException
-     * @return Bz2
+     * @return self
      */
     public function setBlocksize($blocksize)
     {
@@ -85,7 +85,7 @@ class Bz2 extends AbstractCompressionAlgorithm
      * Sets the archive to use for de-/compression
      *
      * @param  string $archive Archive to use
-     * @return Bz2
+     * @return self
      */
     public function setArchive($archive)
     {
@@ -133,7 +133,9 @@ class Bz2 extends AbstractCompressionAlgorithm
     public function decompress($content)
     {
         $archive = $this->getArchive();
-        if (file_exists($content)) {
+
+        //check if there are null byte characters before doing a file_exists check
+        if (!strstr($content, "\0") && file_exists($content)) {
             $archive = $content;
         }
 

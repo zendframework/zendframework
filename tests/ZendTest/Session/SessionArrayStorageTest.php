@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Session
  */
 
 namespace ZendTest\Session;
@@ -15,9 +14,6 @@ use Zend\Session\SessionManager;
 use Zend\Session\Container;
 
 /**
- * @category   Zend
- * @package    Zend_Session
- * @subpackage UnitTests
  * @group      Zend_Session
  */
 class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
@@ -112,9 +108,6 @@ class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
 
     public function testMultiDimensionalUnset()
     {
-        if (version_compare(PHP_VERSION, '5.3.4') < 0) {
-            $this->markTestSkipped('Known issue on versions of PHP less than 5.3.4');
-        }
         $this->storage['foo'] = array('bar' => array('baz' => 'boo'));
         unset($this->storage['foo']['bar']['baz']);
         $this->assertFalse(isset($this->storage['foo']['bar']['baz']));
@@ -148,10 +141,6 @@ class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
 
     public function testUndefinedSessionManipulation()
     {
-        if (version_compare(PHP_VERSION, '5.3.4') < 0) {
-            $this->markTestSkipped('Known issue on versions of PHP less than 5.3.4');
-        }
-
         $this->storage['foo'] = 'bar';
         $this->storage['bar'][] = 'bar';
         $this->storage['baz']['foo'] = 'bar';
@@ -202,6 +191,14 @@ class SessionArrayStorageTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThan(0, $this->storage->getRequestAccessTime());
         $manager->start();
         $this->assertGreaterThan(0, $this->storage->getRequestAccessTime());
+    }
+
+    public function testGetArrayCopyFromContainer()
+    {
+        $container = new Container('test');
+        $container->foo = 'bar';
+        $container->baz = 'qux';
+        $this->assertSame(array('foo' => 'bar', 'baz' => 'qux'), $container->getArrayCopy());
     }
 
 }

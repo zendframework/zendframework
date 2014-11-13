@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -53,7 +53,8 @@ class Codabar extends AbstractObject
      * @return void
      */
     protected function checkSpecificParams()
-    {}
+    {
+    }
 
     /**
      * Prepare array to draw barcode
@@ -62,6 +63,7 @@ class Codabar extends AbstractObject
     protected function prepareBarcode()
     {
         $text = str_split($this->getText());
+        $barcodeTable = array();
         foreach ($text as $char) {
             $barcodeChar = str_split($this->codingMap[$char]);
             foreach ($barcodeChar as $c) {

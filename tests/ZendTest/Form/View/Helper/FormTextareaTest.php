@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Form
  */
 
 namespace ZendTest\Form\View\Helper;
@@ -13,11 +12,6 @@ namespace ZendTest\Form\View\Helper;
 use Zend\Form\Element;
 use Zend\Form\View\Helper\FormTextarea as FormTextareaHelper;
 
-/**
- * @category   Zend
- * @package    Zend_Form
- * @subpackage UnitTest
- */
 class FormTextareaTest extends CommonTestCase
 {
     public function setUp()
@@ -131,6 +125,7 @@ class FormTextareaTest extends CommonTestCase
             array('optgroup', 'assertNotContains'),
             array('arbitrary', 'assertNotContains'),
             array('meta', 'assertNotContains'),
+            array('role', 'assertContains'),
         );
     }
 
@@ -226,6 +221,7 @@ class FormTextareaTest extends CommonTestCase
             'optgroup'           => 'value',
             'arbitrary'          => 'value',
             'meta'               => 'value',
+            'role'               => 'value',
         ));
         return $element;
     }

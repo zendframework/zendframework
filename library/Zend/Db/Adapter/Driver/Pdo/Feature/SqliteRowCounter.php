@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -51,12 +51,12 @@ class SqliteRowCounter extends AbstractFeature
      */
     public function getCountForSql($sql)
     {
-        if (!stripos($sql, 'select')) {
+        if (stripos($sql, 'select') === false) {
             return null;
         }
         $countSql = 'SELECT COUNT(*) as count FROM (' . $sql . ')';
         /** @var $pdo \PDO */
-        $pdo = $this->pdoDriver->getConnection()->getResource();
+        $pdo = $this->driver->getConnection()->getResource();
         $result = $pdo->query($countSql);
         $countRow = $result->fetch(\PDO::FETCH_ASSOC);
         return $countRow['count'];
@@ -64,7 +64,7 @@ class SqliteRowCounter extends AbstractFeature
 
     /**
      * @param $context
-     * @return closure
+     * @return \Closure
      */
     public function getRowCountClosure($context)
     {

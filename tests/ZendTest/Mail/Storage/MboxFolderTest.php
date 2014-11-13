@@ -3,9 +3,8 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mail
  */
 
 namespace ZendTest\Mail\Storage;
@@ -14,9 +13,6 @@ use Zend\Config;
 use Zend\Mail\Storage\Folder;
 
 /**
- * @category   Zend
- * @package    Zend_Mail
- * @subpackage UnitTests
  * @group      Zend_Mail
  */
 class MboxFolderTest extends \PHPUnit_Framework_TestCase
@@ -167,7 +163,7 @@ class MboxFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Mbox($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
-        // we search for this folder because we can't assume a order while iterating
+        // we search for this folder because we can't assume an order while iterating
         $search_folders = array(DIRECTORY_SEPARATOR . 'subfolder'                                => 'subfolder',
                                 DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test' => 'test',
                                 DIRECTORY_SEPARATOR . 'INBOX'                                    => 'INBOX');
@@ -189,7 +185,7 @@ class MboxFolderTest extends \PHPUnit_Framework_TestCase
     {
         $mail = new Folder\Mbox($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
-        // we search for this folder because we can't assume a order while iterating
+        // we search for this folder because we can't assume an order while iterating
         $search_folders = array(DIRECTORY_SEPARATOR . 'subfolder'                                => 'subfolder',
                                 DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test' => 'test',
                                 DIRECTORY_SEPARATOR . 'INBOX'                                    => 'INBOX');

@@ -60,8 +60,7 @@ class Upce extends Ean13
     {
         $text = parent::getText();
         if ($text{0} != 1) {
-            $text{0}
-            = 0;
+            $text{0} = 0;
         }
         return $text;
     }
@@ -193,8 +192,7 @@ class Upce extends Ean13
     {
         $text = $this->addLeadingZeros($text, true);
         if ($text{0} != 1) {
-            $text{0}
-            = 0;
+            $text{0} = 0;
         }
         return parent::getChecksum($text);
     }

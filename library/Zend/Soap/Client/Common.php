@@ -11,11 +11,13 @@ namespace Zend\Soap\Client;
 
 use SoapClient;
 
-if (extension_loaded('soap')) {
+if (! extension_loaded('soap')) {
+    return;
+}
 
 class Common extends SoapClient
 {
-        /**
+    /**
      * doRequest() pre-processing method
      *
      * @var callable
@@ -56,6 +58,4 @@ class Common extends SoapClient
 
         return call_user_func($this->doRequestCallback, $this, ltrim($request), $location, $action, $version, $oneWay);
     }
-}
-
 }

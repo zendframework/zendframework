@@ -15,4 +15,5 @@ use Zend\Http\Client\Exception;
  */
 class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
-{}
+{
+}

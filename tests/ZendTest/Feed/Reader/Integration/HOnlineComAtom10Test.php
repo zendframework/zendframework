@@ -17,7 +17,6 @@ use Zend\Feed\Reader;
 */
 class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 {
-
     protected $feedSamplePath = null;
 
     public function setup()
@@ -195,5 +194,4 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals('UTF-8', $entry->getEncoding());
     }
-
 }

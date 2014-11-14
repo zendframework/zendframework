@@ -13,7 +13,6 @@ use Zend\Crypt\Key\Derivation\Pbkdf2;
 
 class Pbkdf2Test extends \PHPUnit_Framework_TestCase
 {
-
     /** @var string */
     public $salt;
 

@@ -16,7 +16,6 @@ use Zend\Db\Adapter\Exception;
 
 class Result implements Iterator, ResultInterface
 {
-
     const STATEMENT_MODE_SCROLLABLE = 'scrollable';
     const STATEMENT_MODE_FORWARD    = 'forward';
 

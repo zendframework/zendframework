@@ -136,8 +136,8 @@ class Fault extends \Zend\XmlRpc\Fault
     {
         if (!is_string($class)
             || !class_exists($class)
-            || !is_callable(array($class, 'observe')))
-        {
+            || !is_callable(array($class, 'observe'))
+        ) {
             return false;
         }
 

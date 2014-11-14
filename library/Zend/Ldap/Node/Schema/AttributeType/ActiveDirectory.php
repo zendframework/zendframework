@@ -34,7 +34,6 @@ class ActiveDirectory extends Schema\AbstractItem implements AttributeTypeInterf
      */
     public function getOid()
     {
-
     }
 
     /**
@@ -44,7 +43,6 @@ class ActiveDirectory extends Schema\AbstractItem implements AttributeTypeInterf
      */
     public function getSyntax()
     {
-
     }
 
     /**
@@ -54,7 +52,6 @@ class ActiveDirectory extends Schema\AbstractItem implements AttributeTypeInterf
      */
     public function getMaxLength()
     {
-
     }
 
     /**
@@ -64,7 +61,6 @@ class ActiveDirectory extends Schema\AbstractItem implements AttributeTypeInterf
      */
     public function isSingleValued()
     {
-
     }
 
     /**
@@ -74,6 +70,5 @@ class ActiveDirectory extends Schema\AbstractItem implements AttributeTypeInterf
      */
     public function getDescription()
     {
-
     }
 }

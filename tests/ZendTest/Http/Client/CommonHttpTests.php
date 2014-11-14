@@ -75,9 +75,10 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     {
         if (defined('TESTS_ZEND_HTTP_CLIENT_BASEURI')
             && (TESTS_ZEND_HTTP_CLIENT_BASEURI != false)) {
-
             $this->baseuri = TESTS_ZEND_HTTP_CLIENT_BASEURI;
-            if (substr($this->baseuri, -1) != '/') $this->baseuri .= '/';
+            if (substr($this->baseuri, -1) != '/') {
+                $this->baseuri .= '/';
+            }
 
             $name = $this->getName();
             if (($pos = strpos($name, ' ')) !== false) {
@@ -89,7 +90,6 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             $this->_adapter = new $this->config['adapter'];
             $this->client = new HTTPClient($uri, $this->config);
             $this->client->setAdapter($this->_adapter);
-
         } else {
             // Skip tests
             $this->markTestSkipped("Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php");
@@ -275,7 +275,6 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             "returned body contains GET or POST parameters (it shouldn't!)");
         $headerXFoo= $this->client->getHeader("X-Foo");
         $this->assertTrue(empty($headerXFoo), "Header not preserved by reset");
-
     }
 
     /**
@@ -337,8 +336,9 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         $body = strtolower($res->getBody());
 
-        foreach ($headers as $key => $val)
+        foreach ($headers as $key => $val) {
             $this->assertContains(strtolower("$key: $val"), $body);
+        }
     }
 
     /**
@@ -373,7 +373,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
                 $this->assertContains(strtolower($val), $body);
             }
         }
-     }
+    }
 
      /**
       * Test we can set a set of values for one header
@@ -382,7 +382,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      public function testMultipleHeader()
      {
          $this->client->setUri($this->baseuri . 'testHeaders.php');
-        $headers = array(
+         $headers = array(
             'Accept-encoding' => 'gzip,deflate',
             'X-baz' => 'Foo',
             'X-powered-by' => array(
@@ -396,21 +396,22 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->client->setHeaders($headers);
-        $this->client->setMethod('TRACE');
+         $this->client->setHeaders($headers);
+         $this->client->setMethod('TRACE');
 
-        $res = $this->client->send();
-        if ($res->getStatusCode() == 405 || $res->getStatusCode() == 501) {
-            $this->markTestSkipped("Server does not allow the TRACE method");
-        }
-        $body = strtolower($res->getBody());
+         $res = $this->client->send();
+         if ($res->getStatusCode() == 405 || $res->getStatusCode() == 501) {
+             $this->markTestSkipped("Server does not allow the TRACE method");
+         }
+         $body = strtolower($res->getBody());
 
-        foreach ($headers as $key => $val) {
-            if (is_array($val))
-                $val = implode(', ', $val);
+         foreach ($headers as $key => $val) {
+             if (is_array($val)) {
+                 $val = implode(', ', $val);
+             }
 
-            $this->assertContains(strtolower("$key: $val"), $body);
-        }
+             $this->assertContains(strtolower("$key: $val"), $body);
+         }
      }
 
      /**
@@ -445,34 +446,34 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      * @link  http://framework.zend.com/issues/browse/ZF2-122
      */
     public function testRedirectPersistsCookies()
-        {
-            $this->client->setUri($this->baseuri . 'testRedirections.php');
+    {
+        $this->client->setUri($this->baseuri . 'testRedirections.php');
 
             // Set some parameters
             $this->client->setParameterGet(array('swallow' => 'african'));
-            $this->client->setParameterPost(array('Camelot' => 'A silly place'));
+        $this->client->setParameterPost(array('Camelot' => 'A silly place'));
 
             // Send POST request
             $this->client->setMethod('POST');
-            $res = $this->client->send();
+        $res = $this->client->send();
 
-            $this->assertEquals(3, $this->client->getRedirectionsCount(), 'Redirection counter is not as expected');
+        $this->assertEquals(3, $this->client->getRedirectionsCount(), 'Redirection counter is not as expected');
 
             // Make sure the body does *not* contain the set parameters
             $this->assertNotContains('swallow', $res->getBody());
-            $this->assertNotContains('Camelot', $res->getBody());
+        $this->assertNotContains('Camelot', $res->getBody());
 
             // Check that we have received and persisted expected cookies
             $cookies = $this->client->getCookies();
-            $this->assertInternalType('array', $cookies, 'Client is not sending cookies on redirect');
-            $this->assertArrayHasKey('zf2testSessionCookie', $cookies, 'Client is not sending cookies on redirect');
-            $this->assertArrayHasKey('zf2testLongLivedCookie', $cookies, 'Client is not sending cookies on redirect');
-            $this->assertEquals('positive', $cookies['zf2testSessionCookie']->getValue());
-            $this->assertEquals('positive', $cookies['zf2testLongLivedCookie']->getValue());
+        $this->assertInternalType('array', $cookies, 'Client is not sending cookies on redirect');
+        $this->assertArrayHasKey('zf2testSessionCookie', $cookies, 'Client is not sending cookies on redirect');
+        $this->assertArrayHasKey('zf2testLongLivedCookie', $cookies, 'Client is not sending cookies on redirect');
+        $this->assertEquals('positive', $cookies['zf2testSessionCookie']->getValue());
+        $this->assertEquals('positive', $cookies['zf2testLongLivedCookie']->getValue());
 
             // Check that expired cookies are not passed on
             $this->assertArrayNotHasKey('zf2testExpiredCookie', $cookies, 'Expired cookies are not removed.');
-        }
+    }
 
     /**
      * Make sure the client properly redirects in strict mode
@@ -751,8 +752,9 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $detect = null;
         if (function_exists('finfo_file')) {
             $f = @finfo_open(FILEINFO_MIME);
-            if ($f) $detect = 'finfo';
-
+            if ($f) {
+                $detect = 'finfo';
+            }
         } elseif (function_exists('mime_content_type')) {
             if (mime_content_type(__FILE__)) {
                 $detect = 'mime_magic';
@@ -850,8 +852,8 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     public function testStreamResponse()
     {
         if (!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
-              $this->markTestSkipped('Current adapter does not support streaming');
-              return;
+            $this->markTestSkipped('Current adapter does not support streaming');
+            return;
         }
         $this->client->setUri($this->baseuri . 'staticFile.jpg');
         $this->client->setStream();
@@ -877,8 +879,8 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->markTestSkipped('To check with the new ZF2 implementation');
 
         if (!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
-              $this->markTestSkipped('Current adapter does not support streaming');
-              return;
+            $this->markTestSkipped('Current adapter does not support streaming');
+            return;
         }
         $this->client->setUri($this->baseuri . 'staticFile.jpg');
         $this->client->setStream();
@@ -897,8 +899,8 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     public function testStreamResponseNamed()
     {
         if (!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
-              $this->markTestSkipped('Current adapter does not support streaming');
-              return;
+            $this->markTestSkipped('Current adapter does not support streaming');
+            return;
         }
         $this->client->setUri($this->baseuri . 'staticFile.jpg');
         $outfile = tempnam(sys_get_temp_dir(), "outstream");
@@ -923,8 +925,8 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     public function testStreamRequest()
     {
         if (!($this->client->getAdapter() instanceof Adapter\StreamInterface)) {
-              $this->markTestSkipped('Current adapter does not support streaming');
-              return;
+            $this->markTestSkipped('Current adapter does not support streaming');
+            return;
         }
         $data = fopen(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'staticFile.jpg', "r");
         $this->client->setRawBody($data);

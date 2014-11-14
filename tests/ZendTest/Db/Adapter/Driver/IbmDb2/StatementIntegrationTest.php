@@ -18,7 +18,6 @@ use Zend\Db\Adapter\Driver\IbmDb2\Statement;
  */
 class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $variables = array(
         'database' => 'ZEND_DB_ADAPTER_DRIVER_IBMDB2_DATABASE',
         'username' => 'ZEND_DB_ADAPTER_DRIVER_IBMDB2_USERNAME',

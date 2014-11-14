@@ -16,7 +16,6 @@ use Serializable;
 
 class SerializableLimitIterator extends LimitIterator implements Serializable, ArrayAccess
 {
-
     /**
      * Offset to first element
      *

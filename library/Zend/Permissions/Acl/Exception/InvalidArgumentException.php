@@ -11,4 +11,5 @@ namespace Zend\Permissions\Acl\Exception;
 
 class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
-{}
+{
+}

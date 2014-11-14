@@ -303,11 +303,13 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->setAlternate('foo');
             $this->fail('Setting alternate with fewer than 3 args should raise exception');
-        } catch (ViewException $e) { }
+        } catch (ViewException $e) {
+        }
         try {
             $this->helper->setAlternate('foo', 'bar');
             $this->fail('Setting alternate with fewer than 3 args should raise exception');
-        } catch (ViewException $e) { }
+        } catch (ViewException $e) {
+        }
     }
 
     public function testIndentationIsHonored()

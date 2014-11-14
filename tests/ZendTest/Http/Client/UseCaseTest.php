@@ -88,7 +88,7 @@ class UseCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testStaticHttpGet()
     {
-//        $response= HTTPClient::get($this->baseuri);
+        //        $response= HTTPClient::get($this->baseuri);
 //        $this->assertTrue($response->isSuccess());
     }
 
@@ -101,5 +101,4 @@ class UseCaseTest extends \PHPUnit_Framework_TestCase
         $response= $client->send($request);
         $this->assertTrue($response->isSuccess());
     }
-
 }

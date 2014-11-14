@@ -18,7 +18,6 @@ use Zend\Console\Request as ConsoleRequest;
 use Zend\Console\RouteMatcher\RouteMatcherInterface;
 use Zend\Filter\FilterChain;
 use Zend\Mvc\Exception\InvalidArgumentException;
-use Zend\Mvc\Router\Exception;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Validator\ValidatorChain;
@@ -32,7 +31,6 @@ use Zend\Validator\ValidatorChain;
  */
 class Simple implements RouteInterface
 {
-
     /**
      * List of assembled parameters.
      *

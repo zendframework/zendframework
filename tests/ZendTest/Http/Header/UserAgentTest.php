@@ -13,7 +13,6 @@ use Zend\Http\Header\UserAgent;
 
 class UserAgentTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testUserAgentFromStringCreatesValidUserAgentHeader()
     {
         $userAgentHeader = UserAgent::fromString('User-Agent: xxx');
@@ -46,5 +45,4 @@ class UserAgentTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

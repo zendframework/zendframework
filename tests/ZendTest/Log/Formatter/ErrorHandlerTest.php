@@ -78,6 +78,4 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
         $output = $formatter->format($event);
         $this->assertEquals($stringObject->__toString() .' %extra[context][object2]% test1 %extra[context][array]% test2', $output);
     }
-
-
 }

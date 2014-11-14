@@ -37,8 +37,8 @@ class Cache
     public static function save($filename, Server $server)
     {
         if (!is_string($filename)
-            || (!file_exists($filename) && !is_writable(dirname($filename))))
-        {
+            || (!file_exists($filename) && !is_writable(dirname($filename)))
+        ) {
             return false;
         }
 
@@ -100,8 +100,7 @@ class Cache
     {
         if (!is_string($filename)
             || !file_exists($filename)
-            || !is_readable($filename))
-        {
+            || !is_readable($filename)) {
             return false;
         }
 

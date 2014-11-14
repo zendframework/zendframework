@@ -19,7 +19,6 @@ use Zend\ModuleManager\ModuleEvent;
 
 class InitTriggerTest extends TestCase
 {
-
     public function setUp()
     {
         $this->loaders = spl_autoload_functions();

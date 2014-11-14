@@ -211,7 +211,8 @@ class Logger implements LoggerInterface
         foreach ($this->writers as $writer) {
             try {
                 $writer->shutdown();
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+            }
         }
     }
 

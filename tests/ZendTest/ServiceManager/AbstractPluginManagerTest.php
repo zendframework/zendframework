@@ -19,7 +19,6 @@ use ZendTest\ServiceManager\TestAsset\MockSelfReturningDelegatorFactory;
 
 class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var ServiceManager
      */
@@ -188,6 +187,5 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $fooDelegator->instances);
         $this->assertInstanceOf('stdClass', array_shift($fooDelegator->instances));
         $this->assertSame($fooDelegator, array_shift($barDelegator->instances));
-
     }
 }

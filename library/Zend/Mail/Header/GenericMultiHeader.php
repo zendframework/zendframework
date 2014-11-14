@@ -25,7 +25,6 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeadersInterfa
             foreach (explode(',', $fieldValue) as $multiValue) {
                 $header = new static($fieldName, $multiValue);
                 $headers[] = $header->setEncoding($encoding);
-
             }
             return $headers;
         } else {

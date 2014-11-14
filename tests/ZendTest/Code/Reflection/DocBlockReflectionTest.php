@@ -33,7 +33,6 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertEquals($expectedOutput, $classReflection->getDocBlock()->getLongDescription());
-
     }
 
     public function testDocBlockTags()
@@ -58,8 +57,6 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
         $returnTag = $classReflection->getMethod('doSomething')->getDocBlock()->getTag('return');
         $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag\TagInterface', $returnTag);
         $this->assertEquals('mixed', $returnTag->getType());
-
-
     }
 
     public function testTabbedDocBlockTags()
@@ -96,7 +93,6 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(5, $classDocBlock->getStartLine());
         $this->assertEquals(17, $classDocBlock->getEndLine());
-
     }
 
     public function testDocBlockContents()
@@ -121,7 +117,6 @@ now.
 EOS;
 
         $this->assertEquals($expectedContents, $classDocBlock->getContents());
-
     }
 
     public function testToString()

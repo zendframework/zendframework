@@ -17,7 +17,6 @@ use Zend\Feed\Uri;
 */
 class FeedSet extends ArrayObject
 {
-
     public $rss = null;
 
     public $rdf = null;

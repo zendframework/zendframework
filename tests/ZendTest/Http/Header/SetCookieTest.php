@@ -93,14 +93,12 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/accounts', $setCookieHeader->getPath());
         $this->assertTrue($setCookieHeader->isSecure());
         $this->assertTrue($setCookieHeader->isHttponly());
-
     }
 
     public function testSetCookieGetFieldNameReturnsHeaderName()
     {
         $setCookieHeader = new SetCookie();
         $this->assertEquals('Set-Cookie', $setCookieHeader->getFieldName());
-
     }
 
     public function testSetCookieGetFieldValueReturnsProperValue()

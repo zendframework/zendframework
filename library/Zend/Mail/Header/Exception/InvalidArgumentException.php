@@ -13,4 +13,5 @@ use Zend\Mail\Exception;
 
 class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
-{}
+{
+}

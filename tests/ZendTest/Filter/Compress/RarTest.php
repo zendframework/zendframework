@@ -197,7 +197,6 @@ class RarTest extends \PHPUnit_Framework_TestCase
         $callback = array(__CLASS__, 'rarCompress');
         $filter->setCallback($callback);
         $this->assertEquals($callback, $filter->getCallback());
-
     }
 
     public function testSettingCallbackThrowsExceptionOnMissingCallback()

@@ -65,15 +65,15 @@ class Maildir extends AbstractStorage
         }
 
         $flags = array_flip($flags);
-           foreach ($this->files as $file) {
-               foreach ($flags as $flag => $v) {
-                   if (!isset($file['flaglookup'][$flag])) {
-                       continue 2;
-                   }
-               }
-               ++$count;
-           }
-           return $count;
+        foreach ($this->files as $file) {
+            foreach ($flags as $flag => $v) {
+                if (!isset($file['flaglookup'][$flag])) {
+                    continue 2;
+                }
+            }
+            ++$count;
+        }
+        return $count;
     }
 
     /**

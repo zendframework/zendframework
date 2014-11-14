@@ -13,7 +13,6 @@ use Zend\Http\Header\Pragma;
 
 class PragmaTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testPragmaFromStringCreatesValidPragmaHeader()
     {
         $pragmaHeader = Pragma::fromString('Pragma: xxx');
@@ -46,5 +45,4 @@ class PragmaTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

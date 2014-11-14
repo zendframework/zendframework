@@ -65,19 +65,23 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->append('foo');
             $this->fail('Append should throw exception with invalid item');
-        } catch (View\Exception\ExceptionInterface $e) { }
+        } catch (View\Exception\ExceptionInterface $e) {
+        }
         try {
             $this->helper->offsetSet(1, 'foo');
             $this->fail('OffsetSet should throw exception with invalid item');
-        } catch (View\Exception\ExceptionInterface $e) { }
+        } catch (View\Exception\ExceptionInterface $e) {
+        }
         try {
             $this->helper->prepend('foo');
             $this->fail('Prepend should throw exception with invalid item');
-        } catch (View\Exception\ExceptionInterface $e) { }
+        } catch (View\Exception\ExceptionInterface $e) {
+        }
         try {
             $this->helper->set('foo');
             $this->fail('Set should throw exception with invalid item');
-        } catch (View\Exception\ExceptionInterface $e) { }
+        } catch (View\Exception\ExceptionInterface $e) {
+        }
     }
 
     protected function _inflectAction($type)
@@ -403,7 +407,6 @@ document.write(bar.strlen());');
      */
     public function testContainerMaintainsCorrectOrderOfItems()
     {
-
         $this->helper->offsetSetFile(1, 'test1.js');
         $this->helper->offsetSetFile(20, 'test2.js');
         $this->helper->offsetSetFile(10, 'test3.js');
@@ -455,5 +458,4 @@ document.write(bar.strlen());');
         $this->assertNotContains('//<!--', $test);
         $this->assertNotContains('//-->', $test);
     }
-
 }

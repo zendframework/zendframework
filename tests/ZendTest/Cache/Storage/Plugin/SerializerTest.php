@@ -20,7 +20,6 @@ use ArrayObject;
  */
 class SerializerTest extends CommonPluginTest
 {
-
     /**
      * The storage adapter
      *

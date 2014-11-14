@@ -951,7 +951,6 @@ EOB;
         $this->assertTrue(isset($object->_empty_));
         $this->assertEquals('test', $object->_empty_);
     }
-
 }
 
 /**

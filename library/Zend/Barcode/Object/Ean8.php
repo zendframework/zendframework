@@ -16,7 +16,6 @@ use Zend\Validator\Barcode as BarcodeValidator;
  */
 class Ean8 extends Ean13
 {
-
     /**
      * Default options for Postnet barcode
      * @return void

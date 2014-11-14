@@ -24,7 +24,6 @@ require_once __DIR__ . '/TestAsset/FooFunc.php';
  */
 class ServerTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -492,7 +491,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $response = $this->server->getResponse();
         $this->assertEquals($response->getResult(), $decoded['result']);
         $this->assertEquals($response->getId(), $decoded['id']);
-
     }
 
     /**

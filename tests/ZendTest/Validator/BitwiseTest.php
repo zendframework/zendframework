@@ -59,7 +59,6 @@ class BitwiseTest extends \PHPUnit_Framework_TestCase
                 array('control' => 0x1, 'operator' => Bitwise::OP_AND, 'strict' => true),
             ),
         );
-
     }
 
     /**

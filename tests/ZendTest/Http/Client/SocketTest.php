@@ -116,7 +116,6 @@ class SocketTest extends CommonHttpTests
      */
     public function testConfigSetAsZendConfig()
     {
-
         $config = new \Zend\Config\Config(array(
             'timeout'  => 400,
             'nested'   => array(

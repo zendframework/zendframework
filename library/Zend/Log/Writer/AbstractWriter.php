@@ -341,7 +341,8 @@ abstract class AbstractWriter implements WriterInterface
      * @return void
      */
     public function shutdown()
-    {}
+    {
+    }
 
     /**
      * Write a message to the log

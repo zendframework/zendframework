@@ -13,7 +13,6 @@ use Zend\Http\Header\ProxyAuthorization;
 
 class ProxyAuthorizationTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testProxyAuthorizationFromStringCreatesValidProxyAuthorizationHeader()
     {
         $proxyAuthorizationHeader = ProxyAuthorization::fromString('Proxy-Authorization: xxx');
@@ -46,5 +45,4 @@ class ProxyAuthorizationTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

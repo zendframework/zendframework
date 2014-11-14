@@ -19,7 +19,6 @@ use Zend\Stdlib\StringWrapper\StringWrapperInterface;
  */
 abstract class StringUtils
 {
-
     /**
      * Ordered list of registered string wrapper instances
      *

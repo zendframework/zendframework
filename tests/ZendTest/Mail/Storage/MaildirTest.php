@@ -253,7 +253,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($id, $should_ids[$num]);
 
             if ($mail->getNumberByUniqueId($id) != $num) {
-                    $this->fail('reverse lookup failed');
+                $this->fail('reverse lookup failed');
             }
         }
     }
@@ -287,7 +287,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
         }
 
         if (!$check) {
-           $this->fail('no exception while loading invalid dir with ' . $dir . ' as file');
+            $this->fail('no exception while loading invalid dir with ' . $dir . ' as file');
         }
     }
 
@@ -322,7 +322,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
         chmod($this->_maildir . '/' . $dir, $stat['mode']);
 
         if (!$check) {
-           $this->fail('no exception while loading invalid dir with ' . $dir . ' not readable');
+            $this->fail('no exception while loading invalid dir with ' . $dir . ' not readable');
         }
     }
 
@@ -379,5 +379,4 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
         $size = $mail->getSize(2);
         $this->assertEquals(456, $size);
     }
-
 }

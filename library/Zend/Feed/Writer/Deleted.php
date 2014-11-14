@@ -16,7 +16,6 @@ use Zend\Feed\Uri;
 */
 class Deleted
 {
-
     /**
      * Internal array containing all data associated with this entry or item.
      *

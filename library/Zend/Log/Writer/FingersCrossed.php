@@ -24,7 +24,6 @@ use Zend\Log\WriterPluginManager;
  */
 class FingersCrossed extends AbstractWriter
 {
-
     /**
      * The wrapped writer
      *

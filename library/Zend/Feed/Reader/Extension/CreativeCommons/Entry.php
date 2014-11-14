@@ -9,7 +9,6 @@
 
 namespace Zend\Feed\Reader\Extension\CreativeCommons;
 
-use Zend\Feed\Reader;
 use Zend\Feed\Reader\Extension;
 
 class Entry extends Extension\AbstractEntry
@@ -48,7 +47,7 @@ class Entry extends Extension\AbstractEntry
 
         if ($list->length) {
             foreach ($list as $license) {
-                    $licenses[] = $license->nodeValue;
+                $licenses[] = $license->nodeValue;
             }
 
             $licenses = array_unique($licenses);

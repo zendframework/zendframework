@@ -156,12 +156,12 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $mName = $mCall->appendChild($dom->createElement('methodName', 'do.Something'));
         $params = $mCall->appendChild($dom->createElement('params'));
         $param1 = $params->appendChild($dom->createElement('param'));
-            $value1 = $param1->appendChild($dom->createElement('value'));
-            $value1->appendChild($dom->createElement('string', 'string1'));
+        $value1 = $param1->appendChild($dom->createElement('value'));
+        $value1->appendChild($dom->createElement('string', 'string1'));
 
         $param2 = $params->appendChild($dom->createElement('param'));
-            $value2 = $param2->appendChild($dom->createElement('value'));
-            $value2->appendChild($dom->createElement('boolean', 1));
+        $value2 = $param2->appendChild($dom->createElement('value'));
+        $value2->appendChild($dom->createElement('boolean', 1));
 
 
         $xml = $dom->saveXml();

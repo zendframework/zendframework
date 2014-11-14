@@ -310,8 +310,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $caught = false;
         try {
             $this->container->captureStart('SET');
-                $this->container->captureStart('SET');
-                $this->container->captureEnd();
+            $this->container->captureStart('SET');
+            $this->container->captureEnd();
             $this->container->captureEnd();
         } catch (\Exception $e) {
             $this->container->captureEnd();

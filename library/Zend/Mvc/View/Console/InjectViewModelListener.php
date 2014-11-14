@@ -12,4 +12,5 @@ namespace Zend\Mvc\View\Console;
 use Zend\Mvc\View\Http\InjectViewModelListener as HttpInjectViewModelListener;
 
 class InjectViewModelListener extends HttpInjectViewModelListener
-{}
+{
+}

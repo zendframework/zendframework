@@ -14,4 +14,5 @@ use Zend\Text\Exception;
 class OutOfBoundsException
     extends Exception\OutOfBoundsException
     implements ExceptionInterface
-{}
+{
+}

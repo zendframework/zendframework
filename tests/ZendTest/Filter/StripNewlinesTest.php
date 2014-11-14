@@ -15,7 +15,6 @@ use Zend\Filter\StripNewlines as StripNewlinesFilter;
  */
 class StripNewlinesTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * Ensures that the filter follows expected behavior
      *

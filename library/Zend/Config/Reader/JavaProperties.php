@@ -106,7 +106,7 @@ class JavaProperties implements ReaderInterface
         $key = "";
         $isWaitingOtherLine = false;
         foreach ($lines as $i => $line) {
-           // Ignore empty lines and commented lines
+            // Ignore empty lines and commented lines
             if (empty($line)
                || (!$isWaitingOtherLine && strpos($line, "#") === 0)
                || (!$isWaitingOtherLine && strpos($line, "!") === 0)) {

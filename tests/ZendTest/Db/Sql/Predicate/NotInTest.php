@@ -15,8 +15,6 @@ use Zend\Db\Sql\Predicate\NotIn;
 
 class NotInTest extends TestCase
 {
-
-
     public function testRetrievingWherePartsReturnsSpecificationArrayOfIdentifierAndValuesAndArrayOfTypes()
     {
         $in = new NotIn();

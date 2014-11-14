@@ -126,5 +126,4 @@ class BetweenTest extends TestCase
         ));
         $this->assertEquals($expected, $this->between->getExpressionData());
     }
-
 }

@@ -162,7 +162,9 @@ class Proxy extends Socket
 
         // Add all headers to the request string
         foreach ($headers as $k => $v) {
-            if (is_string($k)) $v = "$k: $v";
+            if (is_string($k)) {
+                $v = "$k: $v";
+            }
             $request .= "$v\r\n";
         }
 
@@ -234,7 +236,9 @@ class Proxy extends Socket
             $gotStatus = $gotStatus || (strpos($line, 'HTTP') !== false);
             if ($gotStatus) {
                 $response .= $line;
-                if (!rtrim($line)) break;
+                if (!rtrim($line)) {
+                    break;
+                }
             }
         }
         ErrorHandler::stop();
@@ -256,11 +260,13 @@ class Proxy extends Socket
         $success = false;
         foreach ($modes as $mode) {
             $success = stream_socket_enable_crypto($this->socket, true, $mode);
-            if ($success) break;
+            if ($success) {
+                break;
+            }
         }
 
         if (! $success) {
-                throw new AdapterException\RuntimeException("Unable to connect to" .
+            throw new AdapterException\RuntimeException("Unable to connect to" .
                     " HTTPS server through proxy: could not negotiate secure connection.");
         }
     }
@@ -281,6 +287,8 @@ class Proxy extends Socket
      */
     public function __destruct()
     {
-        if ($this->socket) $this->close();
+        if ($this->socket) {
+            $this->close();
+        }
     }
 }

@@ -389,7 +389,6 @@ class Imap
         $result = array();
         foreach ($list as $v) {
             if (!is_array($v)) {
-//              $result[] = $this->escapeString($v);
                 $result[] = $v;
                 continue;
             }

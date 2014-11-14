@@ -137,7 +137,6 @@ bK22CwD/l7SMBOz4M9XH0Jb0OhNxLza4XMDu0ANMIpnkn1KOcmQ4gB8fmAbBt';
 
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not valid');
         $filter->setPublicKey(123);
-
     }
 
     /**
@@ -170,7 +169,6 @@ d/fxzPfuO/bLpADozTAnYT9Hu3wPrQVLeAfCp0ojqH7DYg==
 
         $this->setExpectedException('\Zend\Filter\Exception\InvalidArgumentException', 'not valid');
         $filter->setPrivateKey(123);
-
     }
 
     /**

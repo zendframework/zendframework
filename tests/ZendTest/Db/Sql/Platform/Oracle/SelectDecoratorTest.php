@@ -16,7 +16,6 @@ use Zend\Db\Adapter\Platform\Oracle as OraclePlatform;
 
 class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @testdox integration test: Testing SelectDecorator will use Select to produce properly Oracle dialect prepared sql
      * @covers Zend\Db\Sql\Platform\SqlServer\SelectDecorator::prepareStatement
@@ -90,5 +89,4 @@ class SelectDecoratorTest extends \PHPUnit_Framework_TestCase
             array($select1, $expectedSql1, array(), $expectedSql1, $expectedFormatParamCount1),
         );
     }
-
 }

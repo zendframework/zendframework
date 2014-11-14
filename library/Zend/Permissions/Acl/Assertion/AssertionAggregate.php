@@ -16,7 +16,6 @@ use Zend\Permissions\Acl\Exception\RuntimeException;
 
 class AssertionAggregate implements AssertionInterface
 {
-
     const MODE_ALL = 'all';
 
     const MODE_AT_LEAST_ONE = 'at_least_one';
@@ -134,7 +133,6 @@ class AssertionAggregate implements AssertionInterface
         }
 
         foreach ($this->assertions as $assertion) {
-
             // jit assertion mloading
             if (! $assertion instanceof AssertionInterface) {
                 if (class_exists($assertion)) {

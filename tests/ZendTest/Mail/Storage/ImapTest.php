@@ -113,7 +113,6 @@ class ImapTest extends \PHPUnit_Framework_TestCase
 
         $this->_params['ssl'] = 'SSL';
         new Storage\Imap($this->_params);
-
     }
 
     public function testConnectTLS()
@@ -424,7 +423,7 @@ class ImapTest extends \PHPUnit_Framework_TestCase
             }
 
             if ($mail->getNumberByUniqueId($id) != $num) {
-                    $this->fail('reverse lookup failed');
+                $this->fail('reverse lookup failed');
             }
         }
     }

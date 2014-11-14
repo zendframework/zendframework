@@ -14,7 +14,6 @@ use Zend\Db\RowGateway\Exception;
 
 abstract class AbstractFeature extends AbstractRowGateway
 {
-
     /**
      * @var AbstractRowGateway
      */

@@ -11,7 +11,6 @@ namespace Zend\XmlRpc\Value;
 
 class Double extends AbstractScalar
 {
-
     /**
      * Set the value of a double native type
      *

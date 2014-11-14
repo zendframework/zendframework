@@ -75,5 +75,4 @@ class DashToSeparatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($input, $filter($input));
     }
-
 }

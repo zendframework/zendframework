@@ -16,7 +16,6 @@ namespace Zend\Console\Charset;
  */
 class Utf8 implements CharsetInterface
 {
-
     const ACTIVATE          = "";
     const DEACTIVATE        = "";
 

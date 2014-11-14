@@ -649,7 +649,6 @@ class Di implements DependencyInjectionInterface
 
             // PRIORITY 1 - consult user provided parameters
             if (isset($callTimeUserParams[$fqParamPos]) || isset($callTimeUserParams[$name])) {
-
                 if (isset($callTimeUserParams[$fqParamPos])) {
                     $callTimeCurValue =& $callTimeUserParams[$fqParamPos];
                 } elseif (isset($callTimeUserParams[$fqParamName])) {
@@ -693,7 +692,6 @@ class Di implements DependencyInjectionInterface
                 if (isset($iConfig[$thisIndex]['parameters'][$fqParamPos])
                     || isset($iConfig[$thisIndex]['parameters'][$fqParamName])
                     || isset($iConfig[$thisIndex]['parameters'][$name])) {
-
                     if (isset($iConfig[$thisIndex]['parameters'][$fqParamPos])) {
                         $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$fqParamPos];
                     } elseif (isset($iConfig[$thisIndex]['parameters'][$fqParamName])) {
@@ -727,7 +725,6 @@ class Di implements DependencyInjectionInterface
                     unset($iConfigCurValue);
                     continue 2;
                 }
-
             }
 
             // PRIORITY 6 - globally preferred implementations
@@ -777,7 +774,6 @@ class Di implements DependencyInjectionInterface
             if ($type && $isRequired && ($methodRequirementType & self::RESOLVE_EAGER)) {
                 $computedParams['retrieval'][$fqParamPos] = array($type, $type);
             }
-
         }
 
         $index = 0;

@@ -13,7 +13,6 @@ use Zend\Http\Header\AcceptCharset;
 
 class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testAcceptCharsetFromStringCreatesValidAcceptCharsetHeader()
     {
         $acceptCharsetHeader = AcceptCharset::fromString('Accept-Charset: xxx');
@@ -35,7 +34,6 @@ class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
 
     public function testAcceptCharsetToStringReturnsHeaderFormattedString()
     {
-
         $acceptCharsetHeader = new AcceptCharset();
         $acceptCharsetHeader->addCharset('iso-8859-5', 0.8)
                             ->addCharset('unicode-1-1', 1);

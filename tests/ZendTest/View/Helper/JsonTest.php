@@ -22,7 +22,6 @@ use Zend\View\Helper\Json as JsonHelper;
  */
 class JsonTest extends TestCase
 {
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.

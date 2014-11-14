@@ -18,7 +18,6 @@ use Zend\Math\Exception\RuntimeException as MathException;
  */
 class DiffieHellmanTest extends \PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         try {

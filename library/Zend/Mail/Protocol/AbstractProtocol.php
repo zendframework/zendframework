@@ -288,7 +288,7 @@ abstract class AbstractProtocol
 
         // Adapters may wish to supply per-commend timeouts according to appropriate RFC
         if ($timeout !== null) {
-           stream_set_timeout($this->socket, $timeout);
+            stream_set_timeout($this->socket, $timeout);
         }
 
         // Retrieve response
@@ -341,7 +341,6 @@ abstract class AbstractProtocol
             } elseif ($cmd === null || !in_array($cmd, $code)) {
                 $errMsg =  $msg;
             }
-
         } while (strpos($more, '-') === 0); // The '-' message prefix indicates an information string instead of a response string.
 
         if ($errMsg !== '') {

@@ -40,7 +40,7 @@ class SuppressFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->filter->filter(array()));
     }
 
-     public function testConstructorThrowsOnInvalidSuppressValue()
+    public function testConstructorThrowsOnInvalidSuppressValue()
     {
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'Suppress must be a boolean');
         new SuppressFilter('foo');

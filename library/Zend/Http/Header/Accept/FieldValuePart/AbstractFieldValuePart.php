@@ -17,7 +17,6 @@ namespace Zend\Http\Header\Accept\FieldValuePart;
  */
 abstract class AbstractFieldValuePart
 {
-
     /**
      * Internal object used for value retrieval
      * @var object

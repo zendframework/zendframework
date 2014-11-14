@@ -37,5 +37,4 @@ class SeparatorToDashTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('dash-separated-words', $filtered);
     }
-
 }

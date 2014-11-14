@@ -194,7 +194,6 @@ abstract class AbstractAdapter implements AdapterInterface
         // Draw vertical lines and fill
         if (is_numeric($fillStyle)
             && $fillStyle !== static::FILL_NONE) {
-
             switch ($fillStyle) {
                 case static::FILL_SHADE_LIGHT:
                     $fillChar = $charset::SHADE_LIGHT;
@@ -210,7 +209,6 @@ abstract class AbstractAdapter implements AdapterInterface
                     $fillChar = $charset::BLOCK;
                     break;
             }
-
         } elseif ($fillStyle) {
             $fillChar = StringUtils::getWrapper()->substr($fillStyle, 0, 1);
         } else {

@@ -15,4 +15,5 @@ use Zend\Math\Exception;
  * Invalid argument exception
  */
 interface ExceptionInterface extends Exception\ExceptionInterface
-{}
+{
+}

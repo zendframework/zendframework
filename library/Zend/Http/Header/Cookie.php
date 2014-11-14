@@ -17,7 +17,6 @@ use ArrayObject;
  */
 class Cookie extends ArrayObject implements HeaderInterface
 {
-
     protected $encodeValue = true;
 
     public static function fromSetCookieArray(array $setCookies)
@@ -112,6 +111,4 @@ class Cookie extends ArrayObject implements HeaderInterface
     {
         return $this->toString();
     }
-
-
 }

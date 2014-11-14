@@ -269,7 +269,6 @@ class InsertTest extends \PHPUnit_Framework_TestCase
             ->values(array('qux' => 100), Insert::VALUES_MERGE);
 
         $this->assertEquals('INSERT INTO "foo" ("bar", "boo", "bam", "qux") VALUES (\'baz\', NOW(), NULL, \'100\')', $this->insert->getSqlString(new TrustingSql92Platform()));
-
     }
 
     /**

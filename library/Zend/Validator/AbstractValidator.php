@@ -470,8 +470,7 @@ abstract class AbstractValidator implements
      */
     public static function setDefaultTranslator(
         Translator\TranslatorInterface $translator = null, $textDomain = null
-    )
-    {
+    ) {
         static::$defaultTranslator = $translator;
         if (null !== $textDomain) {
             self::setDefaultTranslatorTextDomain($textDomain);

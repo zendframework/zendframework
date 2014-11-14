@@ -15,7 +15,6 @@ namespace Zend\Http;
  */
 class ClientStatic
 {
-
     protected static $client;
 
     /**

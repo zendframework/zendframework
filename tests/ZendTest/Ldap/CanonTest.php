@@ -397,7 +397,6 @@ class CanonTest extends \PHPUnit_Framework_TestCase
                 Ldap\Ldap::ACCTNAME_FORM_USERNAME
             )
         );
-
     }
 
     /**

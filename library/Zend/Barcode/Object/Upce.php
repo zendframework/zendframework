@@ -16,7 +16,6 @@ use Zend\Validator\Barcode as BarcodeValidator;
  */
 class Upce extends Ean13
 {
-
     protected $parities = array(
         0 => array(
             0 => array('B','B','B','A','A','A'),

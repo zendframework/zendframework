@@ -18,7 +18,6 @@ use Zend\File\ClassFileLocator;
  */
 class ClassFileLocatorTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testConstructorThrowsInvalidArgumentExceptionForInvalidStringDirectory()
     {
         $this->setExpectedException('Zend\File\Exception\InvalidArgumentException');

@@ -1920,8 +1920,7 @@ class FormTest extends TestCase
         array $data,
         $unselectedValue,
         $useHiddenElement
-    )
-    {
+    ) {
         $this->form->add(array(
             'name' => 'multipleSelect',
             'type'  => 'Zend\Form\Element\Select',

@@ -333,7 +333,6 @@ class Http extends AbstractAdapter
 
         if (!empty($id)) {
             if (static::isApcAvailable()) {
-
                 $call = call_user_func(static::$callbackApc, ini_get('apc.rfc1867_prefix') . $id);
                 if (is_array($call)) {
                     $status = $call + $status;

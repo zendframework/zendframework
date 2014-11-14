@@ -21,7 +21,7 @@ class FeatureSetTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddFeatureThatFeatureDoesnotHasTableGatewayButFeatureSetHas()
     {
-       $mockMasterAdapter = $this->getMock(
+        $mockMasterAdapter = $this->getMock(
             'Zend\Db\Adapter\AdapterInterface',
             array('getDriver', 'getPlatform')
         );

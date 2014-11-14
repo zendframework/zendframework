@@ -14,7 +14,6 @@ use Zend\Code\Scanner\AggregateDirectoryScanner;
 
 class DerivedClassScannerTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testCreatesClass()
     {
         $ds = new DirectoryScanner();
@@ -24,6 +23,4 @@ class DerivedClassScannerTest extends \PHPUnit_Framework_TestCase
         $c = $ads->getClass('ZendTest\Code\Scanner\TestAsset\MapperExample\RepositoryB');
         $this->assertEquals('ZendTest\Code\Scanner\TestAsset\MapperExample\RepositoryB', $c->getName());
     }
-
-
 }

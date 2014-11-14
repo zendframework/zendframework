@@ -213,8 +213,7 @@ class Attribute
     public static function setPassword(
         array &$data, $password, $hashType = self::PASSWORD_HASH_MD5,
         $attribName = null
-    )
-    {
+    ) {
         if ($attribName === null) {
             if ($hashType === self::PASSWORD_UNICODEPWD) {
                 $attribName = 'unicodePwd';
@@ -290,8 +289,7 @@ class Attribute
     public static function setDateTimeAttribute(
         array &$data, $attribName, $value, $utc = false,
         $append = false
-    )
-    {
+    ) {
         $convertedValues = array();
         if (is_array($value) || ($value instanceof \Traversable)) {
             foreach ($value as $v) {

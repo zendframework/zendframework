@@ -17,7 +17,6 @@ use Zend\Di\InstanceManager;
 
 class DiTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testDiHasBuiltInImplementations()
     {
         $di = new Di();

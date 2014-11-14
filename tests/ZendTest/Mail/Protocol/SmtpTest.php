@@ -82,7 +82,6 @@ class SmtpTest extends \PHPUnit_Framework_TestCase
         $this->transport->send($message);
 
         $this->assertEquals($expectedMessage, $this->connection->getLog());
-
     }
 
     public function testDisconnectCallsQuit()

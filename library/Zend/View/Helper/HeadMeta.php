@@ -267,8 +267,8 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
 
         if (isset($item->modifiers['conditional'])
             && !empty($item->modifiers['conditional'])
-            && is_string($item->modifiers['conditional']))
-        {
+            && is_string($item->modifiers['conditional'])
+        ) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $item->modifiers['conditional']) === '!IE') {
                 $meta = '<!-->' . $meta . '<!--';

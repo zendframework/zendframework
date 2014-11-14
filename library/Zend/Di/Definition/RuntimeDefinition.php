@@ -18,7 +18,6 @@ use Zend\Di\Di;
  */
 class RuntimeDefinition implements DefinitionInterface
 {
-
     /**
      * @var array
      */
@@ -244,7 +243,6 @@ class RuntimeDefinition implements DefinitionInterface
         }
 
         foreach ($rClass->getMethods(Reflection\MethodReflection::IS_PUBLIC) as $rMethod) {
-
             $methodName = $rMethod->getName();
 
             if ($rMethod->getName() === '__construct' || $rMethod->isStatic()) {
@@ -256,7 +254,6 @@ class RuntimeDefinition implements DefinitionInterface
 
                 if (($annotations instanceof AnnotationCollection)
                     && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Inject')) {
-
                     // use '@inject' and search for parameters
                     $def['methods'][$methodName] = Di::METHOD_IS_EAGER;
                     $this->processParams($def, $rClass, $rMethod);
@@ -280,7 +277,6 @@ class RuntimeDefinition implements DefinitionInterface
             // by annotation
             // by setter pattern,
             // by interface
-
         }
 
         $interfaceInjectorPatterns = $this->introspectionStrategy->getInterfaceInjectionInclusionPatterns();
@@ -324,7 +320,6 @@ class RuntimeDefinition implements DefinitionInterface
         $def['parameters'][$methodName] = array();
 
         foreach ($rMethod->getParameters() as $p) {
-
             /** @var $p \ReflectionParameter  */
             $actualParamName = $p->getName();
 
@@ -338,6 +333,5 @@ class RuntimeDefinition implements DefinitionInterface
             $def['parameters'][$methodName][$fqName][] = !($optional = $p->isOptional() && $p->isDefaultValueAvailable());
             $def['parameters'][$methodName][$fqName][] = $optional ? $p->getDefaultValue() : null;
         }
-
     }
 }

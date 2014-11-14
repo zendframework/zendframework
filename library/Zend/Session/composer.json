@@ -15,12 +15,12 @@
     "target-dir": "Zend/Session",
     "require": {
         "php": ">=5.3.23",
+        "zendframework/zend-eventmanager": "self.version",
         "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {
         "zendframework/zend-cache": "self.version",
         "zendframework/zend-db": "self.version",
-        "zendframework/zend-eventmanager": "self.version",
         "zendframework/zend-http": "self.version",
         "zendframework/zend-servicemanager": "self.version",
         "zendframework/zend-validator": "self.version"

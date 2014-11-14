@@ -11,7 +11,6 @@ namespace Zend\Feed\Reader\Collection;
 
 class Category extends AbstractCollection
 {
-
     /**
      * Return a simple array of the most relevant slice of
      * the collection values. For example, feed categories contain

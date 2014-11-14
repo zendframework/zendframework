@@ -81,5 +81,4 @@ class CachingFileScannerTest extends \PHPUnit_Framework_TestCase
         $fileScannerPropTwo->setAccessible(true);
         $this->assertNotSame($fileScannerPropOne->getValue($one), $fileScannerPropTwo->getValue($two));
     }
-
 }

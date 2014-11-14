@@ -16,7 +16,6 @@ use Zend\Feed\Writer\Renderer;
 
 class Source extends AbstractAtom implements Renderer\RendererInterface
 {
-
     /**
      * Constructor
      *

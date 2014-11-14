@@ -11,4 +11,5 @@ namespace Zend\Permissions\Rbac\Exception;
 
 class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
-{}
+{
+}

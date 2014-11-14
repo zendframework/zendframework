@@ -13,7 +13,6 @@ use Zend\Stdlib\Parameters;
 
 class ParametersTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testParametersConstructionAndClassStructure()
     {
         $parameters = new Parameters();
@@ -46,7 +45,6 @@ class ParametersTest extends \PHPUnit_Framework_TestCase
         $parameters->set('foof', 'barf');
         $this->assertEquals('barf', $parameters->get('foof'));
         $this->assertEquals('barf', $parameters->foof);
-
     }
 
     public function testParametersOffsetgetReturnsNullIfNonexistentKeyIsProvided()
@@ -61,5 +59,4 @@ class ParametersTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(5, $parameters->get('nonExistentProp', 5));
     }
-
 }

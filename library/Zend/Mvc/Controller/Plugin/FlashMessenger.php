@@ -190,7 +190,6 @@ class FlashMessenger extends AbstractPlugin implements IteratorAggregate, Counta
         $this->addMessage($message, self::NAMESPACE_INFO);
 
         return $this;
-
     }
 
     /**

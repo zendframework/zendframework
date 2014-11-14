@@ -59,7 +59,6 @@ class ArrayDefinitionTest extends TestCase
         foreach ($list as $class) {
             $this->assertContains($class, $classes);
         }
-
     }
 
     public function testArrayDefinitionCanGetClassSupertypes()

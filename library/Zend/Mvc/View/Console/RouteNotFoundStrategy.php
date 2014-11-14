@@ -125,14 +125,14 @@ class RouteNotFoundStrategy extends AbstractListenerAggregate
 
         // Try to fetch module manager
         $mm = null;
-        try{
+        try {
             $mm = $sm->get('ModuleManager');
         } catch (ServiceNotFoundException $exception) {
             // The application does not have or use module manager, so we cannot use it
         }
 
         // Try to fetch current console adapter
-        try{
+        try {
             $console = $sm->get('console');
             if (!$console instanceof ConsoleAdapter) {
                 throw new ServiceNotFoundException();

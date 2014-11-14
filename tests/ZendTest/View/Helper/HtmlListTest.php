@@ -185,7 +185,6 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
         foreach ($items[1] as $item) {
             $this->assertRegexp('#<ul[^>]*?class="foo"[^>]*>.*?(<li>' . $item . ')#s', $list);
         }
-
     }
 
     /**

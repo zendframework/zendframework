@@ -13,7 +13,6 @@ use ReflectionClass;
 
 class ServiceManager implements ServiceLocatorInterface
 {
-
     /**@#+
      * Constants
      */
@@ -1130,7 +1129,6 @@ class ServiceManager implements ServiceLocatorInterface
         };
 
         for ($i = 0; $i < $delegatorsCount; $i += 1) {
-
             $delegatorFactory = $this->delegators[$canonicalName][$i];
 
             if (is_string($delegatorFactory)) {

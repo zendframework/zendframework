@@ -525,7 +525,6 @@ class Select extends AbstractPreparableSql
         // process table columns
         $columns = array();
         foreach ($this->columns as $columnIndexOrAs => $column) {
-
             if ($column === self::SQL_STAR) {
                 $columns[] = array($fromTable . self::SQL_STAR);
                 continue;

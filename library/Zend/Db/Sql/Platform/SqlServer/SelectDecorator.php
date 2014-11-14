@@ -106,6 +106,5 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             $this->specifications[self::SELECT],
             $parameters[self::SELECT]
         );
-
     }
 }

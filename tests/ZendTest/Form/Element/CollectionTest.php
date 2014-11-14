@@ -500,7 +500,6 @@ class CollectionTest extends TestCase
         // this won't pass, but must
         $form->bind($market);
         $this->assertSame(count($categories), iterator_count($form->get('product')->get('categories')->getIterator()));
-
     }
 
     public function testExtractDefaultIsEmptyArray()
@@ -689,7 +688,6 @@ class CollectionTest extends TestCase
         $this->assertInstanceOf('Zend\Form\Element\Collection', $_marketCollection);
 
         foreach ($_marketCollection as $_shopFieldset) {
-
             $this->assertInstanceOf('Zend\Form\Fieldset', $_shopFieldset);
             $this->assertInstanceOf('stdClass', $_shopFieldset->getObject());
 

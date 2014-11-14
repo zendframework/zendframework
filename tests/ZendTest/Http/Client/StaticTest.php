@@ -204,7 +204,6 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testConfigSetAsArray()
     {
-
         $config = array(
             'timeout'    => 500,
             'someoption' => 'hasvalue'
@@ -226,7 +225,6 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testConfigSetAsZendConfig()
     {
-
         $config = new \Zend\Config\Config(array(
             'timeout'  => 400,
             'nested'   => array(
@@ -263,7 +261,6 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testConfigPassToAdapterZF4557()
     {
-
         $adapter = new MockAdapter();
 
         // test that config passes when we set the adapter
@@ -413,7 +410,6 @@ class StaticTest extends \PHPUnit_Framework_TestCase
 
         while (($expected = array_shift($expectedLines)) &&
                ($got = array_shift($gotLines))) {
-
             $expected = trim($expected);
             $got = trim($got);
             $this->assertRegExp("/^$expected$/", $got);

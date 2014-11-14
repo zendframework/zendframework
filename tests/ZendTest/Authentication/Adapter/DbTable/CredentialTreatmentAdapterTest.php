@@ -364,5 +364,4 @@ class CredentialTreatmentAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->_adapter = new Adapter\DbTable\CredentialTreatmentAdapter($this->_db, 'users', 'username', 'password');
     }
-
 }

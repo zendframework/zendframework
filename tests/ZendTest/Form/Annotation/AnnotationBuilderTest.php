@@ -276,6 +276,5 @@ class AnnotationBuilderTest extends TestCase
         ) {
             $this->assertInstanceOf($expectedInstance, $inputFilter->get('input'));
         }
-
     }
 }

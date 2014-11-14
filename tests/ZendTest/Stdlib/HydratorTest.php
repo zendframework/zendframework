@@ -35,7 +35,6 @@ use Zend\Stdlib\Hydrator\Strategy\SerializableStrategy;
  */
 class HydratorTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var ClassMethodsCamelCase
      */

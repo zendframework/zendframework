@@ -181,13 +181,10 @@ class InArray extends AbstractValidator
             $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($haystack));
             foreach ($iterator as $element) {
                 if (self::COMPARE_STRICT == $this->strict) {
-
                     if ($element === $value) {
                         return true;
                     }
-
                 } else {
-
                     // add protection to prevent string to int vuln's
                     $el = $element;
                     if (self::COMPARE_NOT_STRICT_AND_PREVENT_STR_TO_INT_VULNERABILITY == $this->strict
@@ -199,11 +196,9 @@ class InArray extends AbstractValidator
                     if ($el == $value) {
                         return true;
                     }
-
                 }
             }
         } else {
-
             /**
              * If the check is not strict, then, to prevent "asdf" being converted to 0
              * and returning a false positive if 0 is in haystack, we type cast

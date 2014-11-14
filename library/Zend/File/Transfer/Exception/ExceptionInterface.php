@@ -18,5 +18,4 @@ use Zend\File\Exception\ExceptionInterface as FileException;
 interface ExceptionInterface
     extends FileException
 {
-
 }

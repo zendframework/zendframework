@@ -287,5 +287,4 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $headers = Headers::fromString('Fake: 0');
         $this->assertSame('0', $headers->get('Fake')->getFieldValue());
     }
-
 }

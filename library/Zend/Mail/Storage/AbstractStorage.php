@@ -197,7 +197,7 @@ abstract class AbstractStorage implements
      */
      public function count()
      {
-        return $this->countMessages();
+         return $this->countMessages();
      }
 
 
@@ -209,13 +209,14 @@ abstract class AbstractStorage implements
       */
      public function offsetExists($id)
      {
-        try {
-            if ($this->getMessage($id)) {
-                return true;
-            }
-        } catch (Exception\ExceptionInterface $e) {}
+         try {
+             if ($this->getMessage($id)) {
+                 return true;
+             }
+         } catch (Exception\ExceptionInterface $e) {
+         }
 
-        return false;
+         return false;
      }
 
 
@@ -227,7 +228,7 @@ abstract class AbstractStorage implements
       */
      public function offsetGet($id)
      {
-        return $this->getMessage($id);
+         return $this->getMessage($id);
      }
 
 
@@ -240,7 +241,7 @@ abstract class AbstractStorage implements
      */
      public function offsetSet($id, $value)
      {
-        throw new Exception\RuntimeException('cannot write mail messages via array access');
+         throw new Exception\RuntimeException('cannot write mail messages via array access');
      }
 
 
@@ -252,7 +253,7 @@ abstract class AbstractStorage implements
       */
      public function offsetUnset($id)
      {
-        return $this->removeMessage($id);
+         return $this->removeMessage($id);
      }
 
 
@@ -265,8 +266,8 @@ abstract class AbstractStorage implements
       */
      public function rewind()
      {
-        $this->iterationMax = $this->countMessages();
-        $this->iterationPos = 1;
+         $this->iterationMax = $this->countMessages();
+         $this->iterationPos = 1;
      }
 
 
@@ -277,7 +278,7 @@ abstract class AbstractStorage implements
       */
      public function current()
      {
-        return $this->getMessage($this->iterationPos);
+         return $this->getMessage($this->iterationPos);
      }
 
 
@@ -288,7 +289,7 @@ abstract class AbstractStorage implements
       */
      public function key()
      {
-        return $this->iterationPos;
+         return $this->iterationPos;
      }
 
 
@@ -297,7 +298,7 @@ abstract class AbstractStorage implements
       */
      public function next()
      {
-        ++$this->iterationPos;
+         ++$this->iterationPos;
      }
 
 
@@ -308,10 +309,10 @@ abstract class AbstractStorage implements
       */
      public function valid()
      {
-        if ($this->iterationMax === null) {
-          $this->iterationMax = $this->countMessages();
-        }
-        return $this->iterationPos && $this->iterationPos <= $this->iterationMax;
+         if ($this->iterationMax === null) {
+             $this->iterationMax = $this->countMessages();
+         }
+         return $this->iterationPos && $this->iterationPos <= $this->iterationMax;
      }
 
 
@@ -323,13 +324,13 @@ abstract class AbstractStorage implements
       */
      public function seek($pos)
      {
-        if ($this->iterationMax === null) {
-          $this->iterationMax = $this->countMessages();
-        }
+         if ($this->iterationMax === null) {
+             $this->iterationMax = $this->countMessages();
+         }
 
-        if ($pos > $this->iterationMax) {
-            throw new Exception\OutOfBoundsException('this position does not exist');
-        }
-        $this->iterationPos = $pos;
+         if ($pos > $this->iterationMax) {
+             throw new Exception\OutOfBoundsException('this position does not exist');
+         }
+         $this->iterationPos = $pos;
      }
 }

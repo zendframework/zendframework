@@ -175,5 +175,4 @@ class PythonPickleSerializeProtocol0Test extends \PHPUnit_Framework_TestCase
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
-
 }

@@ -20,7 +20,6 @@ use Zend\Console\RouteMatcher\DefaultRouteMatcher;
  */
 class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
 {
-
     public static function routeProvider()
     {
         return array(
@@ -1233,8 +1232,7 @@ class DefaultRouteMatcherTest extends \PHPUnit_Framework_TestCase
         array $aliases = array(),
         array $arguments = array(),
         array $params = null
-    )
-    {
+    ) {
         $route = new DefaultRouteMatcher($routeDefinition, array(), array(), $aliases);
         $match = $route->match($arguments);
 

@@ -28,7 +28,6 @@ use Zend\Db\Sql\Where;
  */
 abstract class AbstractTableGateway implements TableGatewayInterface
 {
-
     /**
      * @var bool
      */
@@ -484,5 +483,4 @@ abstract class AbstractTableGateway implements TableGatewayInterface
             $this->table = clone $this->table;
         }
     }
-
 }

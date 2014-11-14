@@ -23,7 +23,6 @@ use Zend\Stdlib\ResponseInterface as Response;
 class SendResponseListener extends AbstractListenerAggregate implements
     EventManagerAwareInterface
 {
-
     /**
      * @var SendResponseEvent
      */

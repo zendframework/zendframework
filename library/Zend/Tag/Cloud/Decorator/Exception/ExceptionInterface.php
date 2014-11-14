@@ -15,4 +15,5 @@ use Zend\Tag\Exception\ExceptionInterface as Exception;
  * Exception class for Zend\Tag\Cloud\Decorator
  */
 interface ExceptionInterface extends Exception
-{}
+{
+}

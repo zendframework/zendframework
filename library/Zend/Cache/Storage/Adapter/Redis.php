@@ -24,7 +24,6 @@ class Redis extends AbstractAdapter implements
     FlushableInterface,
     TotalSpaceCapableInterface
 {
-
     /**
      * Has this instance be initialized
      *
@@ -273,7 +272,6 @@ class Redis extends AbstractAdapter implements
             } else {
                 $success = $redis->mSet($namespacedKeyValuePairs);
             }
-
         } catch (RedisResourceException $e) {
             throw new Exception\RuntimeException($redis->getLastError(), $e->getCode(), $e);
         }
@@ -415,7 +413,6 @@ class Redis extends AbstractAdapter implements
         }
 
         return $info['used_memory'];
-
     }
 
     /* status */

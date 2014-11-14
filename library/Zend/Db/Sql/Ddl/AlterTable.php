@@ -209,7 +209,7 @@ class AlterTable extends AbstractSql implements SqlInterface
     {
         $sqls = array();
         foreach ($this->dropColumns as $column) {
-             $sqls[] = $adapterPlatform->quoteIdentifier($column);
+            $sqls[] = $adapterPlatform->quoteIdentifier($column);
         }
 
         return array($sqls);

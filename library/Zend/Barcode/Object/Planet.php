@@ -14,7 +14,6 @@ namespace Zend\Barcode\Object;
  */
 class Planet extends Postnet
 {
-
     /**
      * Coding map
      * - 0 = half bar

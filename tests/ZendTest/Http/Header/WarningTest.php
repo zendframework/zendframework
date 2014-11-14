@@ -13,7 +13,6 @@ use Zend\Http\Header\Warning;
 
 class WarningTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testWarningFromStringCreatesValidWarningHeader()
     {
         $warningHeader = Warning::fromString('Warning: xxx');
@@ -46,5 +45,4 @@ class WarningTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

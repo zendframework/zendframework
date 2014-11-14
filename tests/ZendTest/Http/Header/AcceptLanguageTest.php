@@ -13,7 +13,6 @@ use Zend\Http\Header\AcceptLanguage;
 
 class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testAcceptLanguageFromStringCreatesValidAcceptLanguageHeader()
     {
         $acceptLanguageHeader = AcceptLanguage::fromString('Accept-Language: xxx');

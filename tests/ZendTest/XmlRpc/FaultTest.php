@@ -76,14 +76,14 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         $struct = $value->appendChild($dom->createElement('struct'));
 
         $member1 = $struct->appendChild($dom->createElement('member'));
-            $member1->appendChild($dom->createElement('name', 'faultCode'));
-            $value1 = $member1->appendChild($dom->createElement('value'));
-            $value1->appendChild($dom->createElement('int', 1000));
+        $member1->appendChild($dom->createElement('name', 'faultCode'));
+        $value1 = $member1->appendChild($dom->createElement('value'));
+        $value1->appendChild($dom->createElement('int', 1000));
 
         $member2 = $struct->appendChild($dom->createElement('member'));
-            $member2->appendChild($dom->createElement('name', 'faultString'));
-            $value2 = $member2->appendChild($dom->createElement('value'));
-            $value2->appendChild($dom->createElement('string', 'Error string'));
+        $member2->appendChild($dom->createElement('name', 'faultString'));
+        $value2 = $member2->appendChild($dom->createElement('value'));
+        $value2->appendChild($dom->createElement('string', 'Error string'));
 
         return $dom->saveXml();
     }
@@ -97,13 +97,13 @@ class FaultTest extends \PHPUnit_Framework_TestCase
         $struct = $value->appendChild($dom->createElement('struct'));
 
         $member1 = $struct->appendChild($dom->createElement('member'));
-            $member1->appendChild($dom->createElement('name', 'faultCode'));
-            $value1 = $member1->appendChild($dom->createElement('value'));
-            $value1->appendChild($dom->createElement('int', 1000));
+        $member1->appendChild($dom->createElement('name', 'faultCode'));
+        $value1 = $member1->appendChild($dom->createElement('value'));
+        $value1->appendChild($dom->createElement('int', 1000));
 
         $member2 = $struct->appendChild($dom->createElement('member'));
-            $member2->appendChild($dom->createElement('name', 'faultString'));
-            $value2 = $member2->appendChild($dom->createElement('value', 'Error string'));
+        $member2->appendChild($dom->createElement('name', 'faultString'));
+        $value2 = $member2->appendChild($dom->createElement('value', 'Error string'));
 
         return $dom->saveXml();
     }

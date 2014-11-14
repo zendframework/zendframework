@@ -13,7 +13,6 @@ use Zend\Http\Response\Stream;
 
 class ResponseStreamTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testResponseFactoryFromStringCreatesValidResponse()
     {
         $string = 'HTTP/1.0 200 OK' . "\r\n\r\n".'Foo Bar'."\r\n";
@@ -104,7 +103,6 @@ class ResponseStreamTest extends \PHPUnit_Framework_TestCase
      */
     protected function readResponse($response)
     {
-
         $stream = fopen(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . $response, 'rb');
 
         $data = '';

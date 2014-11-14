@@ -13,7 +13,6 @@ use Zend\Http\Header\LastModified;
 
 class LastModifiedTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testExpiresFromStringCreatesValidLastModifiedHeader()
     {
         $lastModifiedHeader = LastModified::fromString('Last-Modified: Sun, 06 Nov 1994 08:49:37 GMT');
@@ -45,5 +44,4 @@ class LastModifiedTest extends \PHPUnit_Framework_TestCase
      * Implementation specific tests are covered by DateTest
      * @see ZendTest\Http\Header\DateTest
      */
-
 }

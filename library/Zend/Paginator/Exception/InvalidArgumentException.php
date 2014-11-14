@@ -12,4 +12,5 @@ namespace Zend\Paginator\Exception;
 class InvalidArgumentException
     extends \InvalidArgumentException
     implements ExceptionInterface
-{}
+{
+}

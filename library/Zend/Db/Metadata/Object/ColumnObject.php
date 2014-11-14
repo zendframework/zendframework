@@ -11,7 +11,6 @@ namespace Zend\Db\Metadata\Object;
 
 class ColumnObject
 {
-
     /**
      *
      * @var string

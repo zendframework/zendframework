@@ -25,7 +25,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
 
     public function testUseOfRouter()
     {
-       $this->assertEquals(true, $this->useConsoleRequest);
+        $this->assertEquals(true, $this->useConsoleRequest);
     }
 
     public function testAssertResponseStatusCode()

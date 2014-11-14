@@ -62,7 +62,6 @@ class Select extends Char
         if ($echo !== null) {
             $this->setEcho($echo);
         }
-
     }
 
     /**

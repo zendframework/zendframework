@@ -72,7 +72,7 @@ class Yaml extends AbstractWriter
     public function processConfig(array $config)
     {
         if (null === $this->getYamlEncoder()) {
-             throw new Exception\RuntimeException("You didn't specify a Yaml callback encoder");
+            throw new Exception\RuntimeException("You didn't specify a Yaml callback encoder");
         }
 
         $config = call_user_func($this->getYamlEncoder(), $config);

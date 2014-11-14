@@ -242,7 +242,6 @@ class IpTest extends \PHPUnit_Framework_TestCase
                 $this->assertFalse($this->validator->isValid($ip), $ip . ' failed validation (expects false)');
             }
         }
-
     }
 
     /**

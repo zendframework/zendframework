@@ -32,5 +32,4 @@ interface MetadataInterface
     public function getTriggerNames($schema = null);
     public function getTriggers($schema = null);
     public function getTrigger($triggerName, $schema = null);
-
 }

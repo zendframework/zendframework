@@ -17,7 +17,6 @@ use Zend\Cache\Storage\Adapter\KeyListIterator;
  */
 class KeyListIteratorTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testCount()
     {
         $keys = array('key1', 'key2', 'key3');

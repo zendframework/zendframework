@@ -13,7 +13,6 @@ use Zend\Db\Adapter\Exception;
 
 class ErrorException extends Exception\ErrorException implements ExceptionInterface
 {
-
     /**
      * Errors
      *

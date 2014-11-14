@@ -87,5 +87,4 @@ class LocTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('String expected', current($messages));
         }
     }
-
 }

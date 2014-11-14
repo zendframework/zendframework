@@ -15,7 +15,6 @@ use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\ErrorHandler;
-use Zend\View;
 use Zend\View\Exception;
 
 /**

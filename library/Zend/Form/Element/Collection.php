@@ -500,7 +500,6 @@ class Collection extends Fieldset
      */
     public function extract()
     {
-
         if ($this->object instanceof Traversable) {
             $this->object = ArrayUtils::iteratorToArray($this->object, false);
         }

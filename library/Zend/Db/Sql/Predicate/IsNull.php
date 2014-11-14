@@ -13,7 +13,6 @@ use Zend\Db\Sql\AbstractExpression;
 
 class IsNull extends AbstractExpression implements PredicateInterface
 {
-
     /**
      * @var string
      */

@@ -75,7 +75,6 @@ class Code128 extends AbstractAdapter
             96 => '96', 97 => '97', 98 => '98', 99 => '99',100 => 'ä', 101 => 'à', 102 => 'å', 103 => '‡',
            104 => 'ˆ', 105 => '‰', 106 => 'Š')));
         $this->setChecksum('code128');
-
     }
 
     public function setUtf8StringWrapper(StringWrapperInterface $utf8StringWrapper)

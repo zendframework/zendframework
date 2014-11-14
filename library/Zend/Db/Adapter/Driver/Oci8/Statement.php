@@ -16,7 +16,6 @@ use Zend\Db\Adapter\Profiler;
 
 class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 {
-
     /**
      * @var resource
      */
@@ -309,5 +308,4 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             oci_bind_by_name($this->resource, $name, $value, -1, $type);
         }
     }
-
 }

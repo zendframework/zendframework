@@ -19,7 +19,6 @@ use Zend\Db\Adapter\ParameterContainer;
 
 class AbstractSqlTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
@@ -135,5 +134,4 @@ class AbstractSqlTest extends \PHPUnit_Framework_TestCase
         $method->setAccessible(true);
         return $method->invoke($this->abstractSql, $expression, new TrustingSql92Platform, $this->mockDriver, $parameterContainer);
     }
-
 }

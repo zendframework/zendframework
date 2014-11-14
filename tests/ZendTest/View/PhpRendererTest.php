@@ -376,7 +376,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         try {
             $this->renderer->render('invalid');
             $caught = false;
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $caught = $e;
         }
 

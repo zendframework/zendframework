@@ -54,7 +54,6 @@ class BlockCipherTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSetVector()
     {
-
         $filter = new BlockCipherEncryption(array('key' => 'testkey'));
         $filter->setVector('1234567890123456');
         $this->assertEquals('1234567890123456', $filter->getVector());

@@ -21,7 +21,6 @@ use ZendTest\Db\TestAsset\TrustingSql92Platform;
 
 class SelectTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers Zend\Db\Sql\Select::__construct
      */
@@ -248,7 +247,7 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     public function testWhereArgument1IsAssociativeArrayIsPredicate()
     {
         $select = new Select;
-            $where = array(
+        $where = array(
             'name' => new Predicate\Literal("name = 'Ralph'"),
             'age' => new Predicate\Expression('age = ?', 33),
         );

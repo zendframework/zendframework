@@ -257,7 +257,7 @@ class ElementTest extends TestCase
         $element->setLabelOptions($options);
 
         // check each expected key individually
-        foreach($options as $k => $v) {
+        foreach ($options as $k => $v) {
             $this->assertEquals($v, $element->getLabelOption($k));
         }
     }
@@ -287,7 +287,7 @@ class ElementTest extends TestCase
         $expected = array_merge($options, $optionsExtra);
 
         // check each expected key individually
-        foreach($expected as $k => $v) {
+        foreach ($expected as $k => $v) {
             $this->assertEquals($v, $element->getLabelOption($k));
         }
     }

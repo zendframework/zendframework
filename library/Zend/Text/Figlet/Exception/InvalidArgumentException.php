@@ -17,4 +17,5 @@ use Zend\Text\Exception;
 class InvalidArgumentException
     extends Exception\InvalidArgumentException
     implements ExceptionInterface
-{}
+{
+}

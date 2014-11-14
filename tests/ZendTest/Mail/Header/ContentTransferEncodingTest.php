@@ -88,4 +88,13 @@ class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
         $contentTransferEncodingHeader->setTransferEncoding($encoding);
         $this->assertEquals("Content-Transfer-Encoding: ".$encoding, $contentTransferEncodingHeader->toString());
     }
+
+    public function testProvidingParametersIntroducesHeaderFolding()
+    {
+        $header = new ContentTransferEncoding();
+        $header->setTransferEncoding('quoted-printable');
+        $string = $header->toString();
+
+        $this->assertContains("Content-Transfer-Encoding: quoted-printable", $string);
+    }
 }

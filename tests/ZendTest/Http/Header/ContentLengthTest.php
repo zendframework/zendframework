@@ -13,7 +13,6 @@ use Zend\Http\Header\ContentLength;
 
 class ContentLengthTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testContentLengthFromStringCreatesValidContentLengthHeader()
     {
         $contentLengthHeader = ContentLength::fromString('Content-Length: xxx');
@@ -46,5 +45,4 @@ class ContentLengthTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

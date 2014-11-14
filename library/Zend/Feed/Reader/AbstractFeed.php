@@ -168,7 +168,7 @@ abstract class AbstractFeed implements Feed\FeedInterface
      */
     public function saveXml()
     {
-          return $this->getDomDocument()->saveXml();
+        return $this->getDomDocument()->saveXml();
     }
 
     /**
@@ -178,7 +178,7 @@ abstract class AbstractFeed implements Feed\FeedInterface
      */
     public function getElement()
     {
-          return $this->getDomDocument()->documentElement;
+        return $this->getDomDocument()->documentElement;
     }
 
     /**
@@ -188,7 +188,7 @@ abstract class AbstractFeed implements Feed\FeedInterface
      */
     public function getXpath()
     {
-          return $this->xpath;
+        return $this->xpath;
     }
 
     /**

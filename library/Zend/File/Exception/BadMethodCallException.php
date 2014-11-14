@@ -11,4 +11,5 @@ namespace Zend\File\Exception;
 
 class BadMethodCallException extends \BadMethodCallException implements
     ExceptionInterface
-{}
+{
+}

@@ -50,7 +50,7 @@ class PropertyScannerTest extends TestCase
      */
     public function testPropertyScannerReturnsProperValue()
     {
-$class = <<<'CLASS'
+        $class = <<<'CLASS'
 <?php
 class Foo
 {
@@ -69,7 +69,7 @@ CLASS;
         foreach ($fooClass->getProperties() as $property) {
             $value = $property->getValue();
             $valueType = $property->getValueType();
-            switch($property->getName()) {
+            switch ($property->getName()) {
                 case "empty":
                     $this->assertNull($value);
                     $this->assertEquals('unknown', $valueType);

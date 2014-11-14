@@ -18,7 +18,6 @@ use Zend\Feed\Reader;
 */
 class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $feedSamplePath = null;
 
     protected $expectedCats = array();
@@ -267,5 +266,4 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->expectedCats, (array) $entry->getCategories());
         $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
     }
-
 }

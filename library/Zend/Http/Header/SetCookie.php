@@ -18,7 +18,6 @@ use Zend\Uri\UriFactory;
  */
 class SetCookie implements MultipleHeaderInterface
 {
-
     /**
      * Cookie name
      *
@@ -530,7 +529,6 @@ class SetCookie implements MultipleHeaderInterface
         }
 
         return true;
-
     }
 
     /**
@@ -630,6 +628,4 @@ class SetCookie implements MultipleHeaderInterface
         }
         return $headerLine;
     }
-
-
 }

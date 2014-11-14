@@ -246,5 +246,4 @@ class ConstraintKeyObject
     {
         return $this->foreignKeyDeleteRule;
     }
-
 }

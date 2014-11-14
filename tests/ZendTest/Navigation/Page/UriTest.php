@@ -47,7 +47,6 @@ class UriTest extends \PHPUnit_Framework_TestCase
             $this->fail('An invalid \'uri\' was given, but ' .
                         'a Zend\Navigation\Exception\InvalidArgumentException was not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
-
         }
     }
 
@@ -61,7 +60,6 @@ class UriTest extends \PHPUnit_Framework_TestCase
             $this->fail('An invalid \'uri\' was given, but ' .
                         'a Zend\Navigation\Exception\InvalidArgumentException was not thrown');
         } catch (Navigation\Exception\InvalidArgumentException $e) {
-
         }
     }
 

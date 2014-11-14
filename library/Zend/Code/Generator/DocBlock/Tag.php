@@ -17,7 +17,6 @@ use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionTagInterface;
  */
 class Tag extends GenericTag
 {
-
     /**
      * @param  ReflectionTagInterface $reflectionTag
      * @return Tag

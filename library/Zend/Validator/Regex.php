@@ -98,7 +98,7 @@ class Regex extends AbstractValidator
         $error         = ErrorHandler::stop();
 
         if (false === $status) {
-             throw new Exception\InvalidArgumentException("Internal error parsing the pattern '{$this->pattern}'", 0, $error);
+            throw new Exception\InvalidArgumentException("Internal error parsing the pattern '{$this->pattern}'", 0, $error);
         }
 
         return $this;

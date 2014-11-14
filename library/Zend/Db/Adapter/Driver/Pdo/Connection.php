@@ -363,7 +363,6 @@ class Connection extends AbstractConnection
         $result = $this->driver->createResult($resultResource, $sql);
 
         return $result;
-
     }
 
     /**
@@ -403,5 +402,4 @@ class Connection extends AbstractConnection
 
         return false;
     }
-
 }

@@ -10,4 +10,5 @@
 namespace Zend\Log\Exception;
 
 interface ExceptionInterface
-{}
+{
+}

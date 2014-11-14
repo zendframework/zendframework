@@ -99,5 +99,4 @@ class MasterSlaveFeatureTest extends \PHPUnit_Framework_TestCase
         // test that the sql object is restored
         $this->assertSame($masterSql, $table->getSql());
     }
-
 }

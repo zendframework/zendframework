@@ -83,7 +83,6 @@ abstract class AbstractSource implements MetadataInterface
             }
         }
         return $tableNames;
-
     }
 
     /**

@@ -633,15 +633,15 @@ class Acl implements AclInterface
                             }
 
                             if (isset($rules['allPrivileges']['type']) &&
-                                $type === $rules['allPrivileges']['type'])
-                            {
+                                $type === $rules['allPrivileges']['type']
+                            ) {
                                 unset($rules['allPrivileges']);
                             }
                         } else {
                             foreach ($privileges as $privilege) {
                                 if (isset($rules['byPrivilegeId'][$privilege]) &&
-                                    $type === $rules['byPrivilegeId'][$privilege]['type'])
-                                {
+                                    $type === $rules['byPrivilegeId'][$privilege]['type']
+                                ) {
                                     unset($rules['byPrivilegeId'][$privilege]);
                                 }
                             }
@@ -756,7 +756,6 @@ class Acl implements AclInterface
 
                 // try next Resource
                 $resource = $this->resources[$resource->getResourceId()]['parent'];
-
             } while (true); // loop terminates at 'allResources' pseudo-parent
         } else {
             $this->isAllowedPrivilege = $privilege;
@@ -779,7 +778,6 @@ class Acl implements AclInterface
 
                 // try next Resource
                 $resource = $this->resources[$resource->getResourceId()]['parent'];
-
             } while (true); // loop terminates at 'allResources' pseudo-parent
         }
     }

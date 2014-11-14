@@ -19,7 +19,6 @@ use Zend\Db\Sql\Sql;
  */
 class TableGatewayTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $mockAdapter = null;
 
     public function setup()
@@ -74,5 +73,4 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
             $this->mockAdapter
         );
     }
-
 }

@@ -21,7 +21,6 @@ use Zend\Http\Client;
  */
 class StaticClientTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * Uri for test
      *
@@ -36,10 +35,10 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
     {
         if (defined('TESTS_ZEND_HTTP_CLIENT_BASEURI')
             && (TESTS_ZEND_HTTP_CLIENT_BASEURI != false)) {
-
             $this->baseuri = TESTS_ZEND_HTTP_CLIENT_BASEURI;
-            if (substr($this->baseuri, -1) != '/') $this->baseuri .= '/';
-
+            if (substr($this->baseuri, -1) != '/') {
+                $this->baseuri .= '/';
+            }
         } else {
             // Skip tests
             $this->markTestSkipped("Zend_Http_Client dynamic tests are not enabled in TestConfiguration.php");

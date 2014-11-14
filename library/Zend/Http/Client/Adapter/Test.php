@@ -56,7 +56,8 @@ class Test implements AdapterInterface
      * Adapter constructor, currently empty. Config is set using setOptions()
      */
     public function __construct()
-    { }
+    {
+    }
 
     /**
      * Set the nextRequestWillFail flag
@@ -124,17 +125,21 @@ class Test implements AdapterInterface
     public function write($method, $uri, $httpVer = '1.1', $headers = array(), $body = '')
     {
         $host = $uri->getHost();
-            $host = (strtolower($uri->getScheme()) == 'https' ? 'sslv2://' . $host : $host);
+        $host = (strtolower($uri->getScheme()) == 'https' ? 'sslv2://' . $host : $host);
 
         // Build request headers
         $path = $uri->getPath();
         if (empty($path)) {
             $path = '/';
         }
-        if ($uri->getQuery()) $path .= '?' . $uri->getQuery();
+        if ($uri->getQuery()) {
+            $path .= '?' . $uri->getQuery();
+        }
         $request = "{$method} {$path} HTTP/{$httpVer}\r\n";
         foreach ($headers as $k => $v) {
-            if (is_string($k)) $v = ucfirst($k) . ": $v";
+            if (is_string($k)) {
+                $v = ucfirst($k) . ": $v";
+            }
             $request .= "$v\r\n";
         }
 
@@ -164,7 +169,8 @@ class Test implements AdapterInterface
      *
      */
     public function close()
-    { }
+    {
+    }
 
     /**
      * Set the HTTP response(s) to be returned by this adapter
@@ -188,9 +194,9 @@ class Test implements AdapterInterface
      */
     public function addResponse($response)
     {
-         if ($response instanceof Response) {
+        if ($response instanceof Response) {
             $response = $response->toString();
-         }
+        }
 
         $this->responses[] = $response;
     }

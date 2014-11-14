@@ -13,7 +13,6 @@ use Zend\Db\Sql\Expression as BaseExpression;
 
 class Expression extends BaseExpression implements PredicateInterface
 {
-
     /**
      * Constructor
      *

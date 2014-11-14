@@ -12,4 +12,5 @@ namespace Zend\Tag\Exception;
 use DomainException;
 
 class InvalidAttributeNameException extends DomainException implements ExceptionInterface
-{}
+{
+}

@@ -15,7 +15,7 @@ if (extension_loaded('soap')) {
 
 class Common extends SoapClient
 {
-    /**
+        /**
      * doRequest() pre-processing method
      *
      * @var callable
@@ -58,4 +58,4 @@ class Common extends SoapClient
     }
 }
 
-} // end if (extension_loaded('soap')
+}

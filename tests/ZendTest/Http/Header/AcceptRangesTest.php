@@ -13,7 +13,6 @@ use Zend\Http\Header\AcceptRanges;
 
 class AcceptRangesTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testAcceptRangesFromStringCreatesValidAcceptRangesHeader()
     {
         $acceptRangesHeader = AcceptRanges::fromString('Accept-Ranges: bytes');
@@ -44,5 +43,4 @@ class AcceptRangesTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

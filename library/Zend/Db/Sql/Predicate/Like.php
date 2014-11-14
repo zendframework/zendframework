@@ -13,7 +13,6 @@ use Zend\Db\Sql\AbstractExpression;
 
 class Like extends AbstractExpression implements PredicateInterface
 {
-
     /**
      * @var string
      */

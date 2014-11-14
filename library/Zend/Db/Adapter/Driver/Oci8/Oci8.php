@@ -15,7 +15,6 @@ use Zend\Db\Adapter\Profiler;
 
 class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
 {
-
     /**
      * @var Connection
      */
@@ -231,5 +230,4 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         return $this->getConnection()->getLastGeneratedValue();
     }
-
 }

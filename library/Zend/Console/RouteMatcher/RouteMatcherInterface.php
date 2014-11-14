@@ -11,7 +11,6 @@ namespace Zend\Console\RouteMatcher;
 
 interface RouteMatcherInterface
 {
-
     /**
      * Match parameters against route passed to constructor
      *
@@ -19,5 +18,4 @@ interface RouteMatcherInterface
      * @return array|null
      */
     public function match($params);
-
 }

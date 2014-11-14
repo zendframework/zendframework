@@ -85,7 +85,6 @@ class NameInformation
             } elseif (is_string($use)) {
                 $this->addUse($use, $as);
             }
-
         }
 
         return $this;

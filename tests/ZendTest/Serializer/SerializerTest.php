@@ -121,5 +121,4 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
         $expected = $adapter->unserialize($value);
         $this->assertEquals($expected, Serializer::unserialize($value, $adapter));
     }
-
 }

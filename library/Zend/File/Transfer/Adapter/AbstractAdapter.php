@@ -596,7 +596,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
                 }
 
                 $checkit .= DIRECTORY_SEPARATOR . $content['name'];
-                    $validator->addFile($checkit);
+                $validator->addFile($checkit);
             }
         }
 

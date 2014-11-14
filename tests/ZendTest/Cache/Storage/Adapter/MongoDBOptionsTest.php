@@ -129,5 +129,4 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
 
         $this->assertAttributeEquals($expected, 'resources', $this->object->getResourceManager());
     }
-
 }

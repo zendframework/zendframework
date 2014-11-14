@@ -100,7 +100,6 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Crypt\Symmetric\Exception\InvalidArgumentException',
                                     'The algorithm unknown is not supported by Zend\Crypt\Symmetric\Mcrypt');
         $this->fileCipher->setCipherAlgorithm('unknown');
-
     }
 
     public function testGetCipherSupportedAlgorithms()
@@ -116,9 +115,9 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
 
     public function testSetWrongHashAlgorithm()
     {
-         $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
+        $this->setExpectedException('Zend\Crypt\Exception\InvalidArgumentException',
                                      'The specified hash algorithm \'unknown\' is not supported by Zend\Crypt\Hash');
-         $this->fileCipher->setHashAlgorithm('unknown');
+        $this->fileCipher->setHashAlgorithm('unknown');
     }
 
     public function testSetPbkdf2HashAlgorithm()

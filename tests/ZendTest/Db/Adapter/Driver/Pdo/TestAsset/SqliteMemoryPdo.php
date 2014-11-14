@@ -17,5 +17,4 @@ class SqliteMemoryPdo extends \Pdo
     {
         parent::__construct('sqlite::memory:');
     }
-
 }

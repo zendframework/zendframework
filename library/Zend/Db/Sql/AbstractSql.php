@@ -132,7 +132,7 @@ abstract class AbstractSql implements SqlInterface
                 if ($value instanceof Select) {
                     // process sub-select
                     $values[$vIndex] = '(' . $this->processSubSelect($value, $platform, $driver, $parameterContainer) . ')';
-                } elseif($value instanceof ExpressionInterface) {
+                } elseif ($value instanceof ExpressionInterface) {
                     // recursive call to satisfy nested expressions
                     $values[$vIndex] = $this->processExpression($value, $platform, $driver, $parameterContainer, $namedParameterPrefix . $vIndex . 'subpart');
                 } elseif ($type == ExpressionInterface::TYPE_IDENTIFIER) {

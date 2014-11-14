@@ -252,5 +252,4 @@ class XmlTest extends \PHPUnit_Framework_TestCase
         $expected .= PHP_EOL . PHP_EOL;
         $this->assertEquals($expected, $formatter->format($event));
     }
-
 }

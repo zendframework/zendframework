@@ -60,7 +60,7 @@ class Combine extends AbstractPreparableSql
     public function combine($select, $type = self::COMBINE_UNION, $modifier = '')
     {
         if (is_array($select)) {
-            foreach($select as $combine) {
+            foreach ($select as $combine) {
                 if ($combine instanceof Select) {
                     $combine = array($combine);
                 }
@@ -167,17 +167,17 @@ class Combine extends AbstractPreparableSql
         }
 
         $allColumns = array();
-        foreach($this->combine as $combine) {
+        foreach ($this->combine as $combine) {
             $allColumns = array_merge(
                 $allColumns,
                 $combine['select']->getRawState(self::COLUMNS)
             );
         }
 
-        foreach($this->combine as $combine) {
+        foreach ($this->combine as $combine) {
             $combineColumns = $combine['select']->getRawState(self::COLUMNS);
             $aligned = array();
-            foreach($allColumns as $alias => $column) {
+            foreach ($allColumns as $alias => $column) {
                 $aligned[$alias] = isset($combineColumns[$alias])
                     ? $combineColumns[$alias]
                     : new Predicate\Expression('NULL');

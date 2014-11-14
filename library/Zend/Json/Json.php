@@ -285,7 +285,7 @@ class Json
     }
 
     /**
-     * @deprecated
+     * @deprecated see https://github.com/zendframework/zf2/pull/6778
      * fromXml - Converts XML to JSON
      *
      * Converts a XML formatted string into a JSON formatted string.

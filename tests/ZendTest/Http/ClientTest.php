@@ -395,4 +395,36 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             $client
         );
     }
+
+    /**
+     * @group 6231
+     */
+    public function testHttpQueryParametersCastToString()
+    {
+        $client = new Client();
+
+        /* @var $adapter \PHPUnit_Framework_MockObject_MockObject|\Zend\Http\Client\Adapter\AdapterInterface */
+        $adapter = $this->getMock('Zend\Http\Client\Adapter\AdapterInterface');
+
+        $client->setAdapter($adapter);
+
+        $request = new Request();
+
+        $request->setUri('http://example.com/');
+        $request->getQuery()->set('foo', 'bar');
+
+        $response = new Response();
+
+        $adapter
+            ->expects($this->once())
+            ->method('write')
+            ->with(Request::METHOD_GET, 'http://example.com/?foo=bar');
+
+        $adapter
+            ->expects($this->any())
+            ->method('read')
+            ->will($this->returnValue($response->toString()));
+
+        $client->send($request);
+    }
 }

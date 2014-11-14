@@ -832,7 +832,7 @@ class Client implements Stdlib\DispatchableInterface
 
                 if (!empty($queryArray)) {
                     $newUri = $uri->toString();
-                    $queryString = http_build_query($query, null, $this->getArgSeparator());
+                    $queryString = http_build_query($queryArray, null, $this->getArgSeparator());
 
                     if ($this->config['rfc3986strict']) {
                         $queryString = str_replace('+', '%20', $queryString);

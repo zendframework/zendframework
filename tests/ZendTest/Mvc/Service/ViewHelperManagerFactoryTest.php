@@ -62,6 +62,9 @@ class ViewHelperManagerFactoryTest extends TestCase
         $this->assertInstanceof('Zend\View\Helper\BasePath', $basePath);
     }
 
+    /**
+     * @group 6247
+     */
     public function testConsoleRequestWithBasePathConsole()
     {
         $this->services->setService('Config',

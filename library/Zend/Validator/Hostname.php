@@ -515,7 +515,8 @@ class Hostname extends AbstractValidator
         // Check input against DNS hostname schema
         if ((count($domainParts) > 1)
             && ($utf8StrWrapper->strlen($value) >= 4)
-            && ($utf8StrWrapper->strlen($value) <= 254)) {
+            && ($utf8StrWrapper->strlen($value) <= 254)
+        ) {
             $status = false;
 
             do {

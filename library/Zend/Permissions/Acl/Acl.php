@@ -633,13 +633,15 @@ class Acl implements AclInterface
                             }
 
                             if (isset($rules['allPrivileges']['type']) &&
-                                $type === $rules['allPrivileges']['type']) {
+                                $type === $rules['allPrivileges']['type']
+                            ) {
                                 unset($rules['allPrivileges']);
                             }
                         } else {
                             foreach ($privileges as $privilege) {
                                 if (isset($rules['byPrivilegeId'][$privilege]) &&
-                                    $type === $rules['byPrivilegeId'][$privilege]['type']) {
+                                    $type === $rules['byPrivilegeId'][$privilege]['type']
+                                ) {
                                     unset($rules['byPrivilegeId'][$privilege]);
                                 }
                             }

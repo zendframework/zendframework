@@ -69,7 +69,8 @@ class Boolean extends AbstractFilter
             if (is_array($typeOrOptions)) {
                 if (isset($typeOrOptions['type'])
                     || isset($typeOrOptions['casting'])
-                    || isset($typeOrOptions['translations'])) {
+                    || isset($typeOrOptions['translations'])
+                ) {
                     $this->setOptions($typeOrOptions);
                 } else {
                     $this->setType($typeOrOptions);

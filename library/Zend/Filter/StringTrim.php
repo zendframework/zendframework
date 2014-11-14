@@ -29,7 +29,8 @@ class StringTrim extends AbstractFilter
     {
         if ($charlistOrOptions !== null) {
             if (!is_array($charlistOrOptions)
-                && !$charlistOrOptions  instanceof Traversable) {
+                && !$charlistOrOptions  instanceof Traversable
+            ) {
                 $this->setCharList($charlistOrOptions);
             } else {
                 $this->setOptions($charlistOrOptions);

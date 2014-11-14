@@ -330,7 +330,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
         foreach ($this->getContainer() as $item) {
             if (($item->source === null)
                 && array_key_exists('src', $item->attributes)
-                && ($file == $item->attributes['src'])) {
+                && ($file == $item->attributes['src'])
+            ) {
                 return true;
             }
         }
@@ -348,7 +349,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     {
         if ((!$value instanceof stdClass)
             || !isset($value->type)
-            || (!isset($value->source) && !isset($value->attributes))) {
+            || (!isset($value->source) && !isset($value->attributes))
+        ) {
             return false;
         }
 
@@ -370,7 +372,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
         if (!empty($item->attributes)) {
             foreach ($item->attributes as $key => $value) {
                 if ((!$this->arbitraryAttributesAllowed() && !in_array($key, $this->optionalAttributes))
-                    || in_array($key, array('conditional', 'noescape'))) {
+                    || in_array($key, array('conditional', 'noescape'))
+                ) {
                     continue;
                 }
                 if ('defer' == $key) {
@@ -403,7 +406,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
 
         if (isset($item->attributes['conditional'])
             && !empty($item->attributes['conditional'])
-            && is_string($item->attributes['conditional'])) {
+            && is_string($item->attributes['conditional'])
+        ) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $item->attributes['conditional']) === '!IE') {
                 $html = '<!-->' . $html . '<!--';

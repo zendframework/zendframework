@@ -434,8 +434,8 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
         );
 
         $res = array();
-        foreach($data as $index => $test) {
-            foreach($test['expected'] as $platform => $expected) {
+        foreach ($data as $index => $test) {
+            foreach ($test['expected'] as $platform => $expected) {
                 $res[$index . '->' . $platform] = array(
                     'sqlObject' => $test['sqlObject'],
                     'platform'  => $platform,
@@ -457,7 +457,7 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
         $sql = new Sql\Sql($this->resolveAdapter($platform));
 
         if (is_array($expected) && isset($expected['decorators'])) {
-            foreach($expected['decorators'] as $type=>$decorator) {
+            foreach ($expected['decorators'] as $type=>$decorator) {
                 $sql->getSqlPlatform()->setTypeDecorator($type, $this->resolveDecorator($decorator));
             }
         }
@@ -492,7 +492,7 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
 
     protected function resolveAdapter($platform)
     {
-        switch($platform) {
+        switch ($platform) {
             case 'sql92'     : $platform  = new TestAsset\TrustingSql92Platform();     break;
             case 'MySql'     : $platform  = new TestAsset\TrustingMysqlPlatform();     break;
             case 'Oracle'    : $platform  = new TestAsset\TrustingOraclePlatform();    break;

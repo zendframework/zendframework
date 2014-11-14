@@ -38,7 +38,7 @@ abstract class AbstractPlatform implements PlatformInterface
         $safeRegex    = '';
         $safeWordsInt = array('*' => true, ' ' => true, '.' => true, 'as' => true);
 
-        foreach($safeWords as $sWord) {
+        foreach ($safeWords as $sWord) {
             $safeWordsInt[strtolower($sWord)] = true;
 
             $safeRegex .= '|' . preg_quote($sWord);

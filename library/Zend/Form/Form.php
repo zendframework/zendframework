@@ -762,7 +762,6 @@ class Form extends Fieldset implements FormInterface
 
         if (!$fieldset instanceof Collection || !$fieldset->getTargetElement() instanceof FieldsetInterface || $inputFilter instanceof CollectionInputFilter) {
             foreach ($elements as $name => $element) {
-
                 if ($this->preferFormInputFilter && $inputFilter->has($name)) {
                     continue;
                 }
@@ -798,7 +797,6 @@ class Form extends Fieldset implements FormInterface
         }
 
         foreach ($fieldset->getFieldsets() as $name => $childFieldset) {
-
             if (!$childFieldset instanceof InputFilterProviderInterface) {
                 if (!$inputFilter->has($name)) {
                     // Add a new empty input filter if it does not exist (or the fieldset's object input filter),

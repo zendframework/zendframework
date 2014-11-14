@@ -38,7 +38,6 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
         unset($this->specifications[self::OFFSET]);
 
         $this->specifications['LIMITOFFSET'] = null;
-
     }
 
     /**

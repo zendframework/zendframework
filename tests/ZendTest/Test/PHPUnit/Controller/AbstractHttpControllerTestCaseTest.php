@@ -647,7 +647,7 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
         try {
             // force exception throwing
             parent::tearDown();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->getApplication()->getMvcEvent()->setParam('exception', null);
             $this->setExpectedException('RuntimeException', 'Foo error');
             throw $e;

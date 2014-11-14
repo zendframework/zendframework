@@ -115,7 +115,7 @@ class Insert extends AbstractPreparableSql
         if ($flag == self::VALUES_SET) {
             $this->columns = $values;
         } else {
-            foreach($values as $column=>$value) {
+            foreach ($values as $column=>$value) {
                 $this->columns[$column] = $value;
             }
         }

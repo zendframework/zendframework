@@ -1549,6 +1549,7 @@ class FormTest extends TestCase
         $this->assertTrue($this->form->has('file_resource'));
         $this->assertNotEquals($form, $this->form);
 
+        $form->add($file)->remove('file_resource');
         $this->form->remove('file_resource');
         $this->assertEquals($form, $this->form);
     }

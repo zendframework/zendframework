@@ -89,6 +89,44 @@ abstract class AbstractDate implements HeaderInterface
     }
 
     /**
+     * Create date-based header from strtotime()-compatible string
+     *
+     * @param int|string $time
+     *
+     * @return self
+     *
+     * @throws Exception\InvalidArgumentException
+     */
+    public static function fromTimeString($time)
+    {
+        return static::fromTimestamp(strtotime($time));
+    }
+
+    /**
+     * Create date-based header from Unix timestamp
+     *
+     * @param int $time
+     *
+     * @return self
+     *
+     * @throws Exception\InvalidArgumentException
+     */
+    public static function fromTimestamp($time)
+    {
+        $dateHeader = new static();
+
+        if (! $time || ! is_numeric($time)) {
+            throw new Exception\InvalidArgumentException(
+                'Invalid time for "' . $dateHeader->getFieldName() . '" header string'
+            );
+        }
+
+        $dateHeader->setDate(new DateTime('@' . $time));
+
+        return $dateHeader;
+    }
+
+    /**
      * Set date output format
      *
      * @param int $format

@@ -24,7 +24,6 @@ class SendResponseListener implements
     EventManagerAwareInterface,
     ListenerAggregateInterface
 {
-
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
      */

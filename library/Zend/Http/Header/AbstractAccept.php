@@ -38,7 +38,6 @@ use stdClass;
  */
 abstract class AbstractAccept implements HeaderInterface
 {
-
     /**
      *
      * @var stdClass[]
@@ -316,8 +315,7 @@ abstract class AbstractAccept implements HeaderInterface
                     if ((($left->subtype == $right->subtype ||
                             ($right->subtype == '*' || $left->subtype == '*')) &&
                             ($left->format == $right->format ||
-                                    $right->format == '*' || $left->format == '*')))
-                    {
+                                    $right->format == '*' || $left->format == '*'))) {
                         if ($this->matchAcceptParams($left, $right)) {
                             $left->setMatchedAgainst($right);
 
@@ -325,8 +323,6 @@ abstract class AbstractAccept implements HeaderInterface
                         }
                     }
                 }
-
-
             }
         }
 
@@ -375,7 +371,6 @@ abstract class AbstractAccept implements HeaderInterface
                     return false;
                 }
             }
-
         }
 
         return $match1;

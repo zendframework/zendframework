@@ -10,4 +10,5 @@
 namespace Zend\Permissions\Acl\Exception;
 
 interface ExceptionInterface
-{}
+{
+}

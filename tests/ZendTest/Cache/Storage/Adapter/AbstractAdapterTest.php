@@ -17,7 +17,6 @@ use Zend\Cache\Exception;
  */
 class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * Mock of the abstract storage adapter
      *

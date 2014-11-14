@@ -128,5 +128,4 @@ class ImageTest extends CommonTestCase
         $markup  = $this->helper->render($element);
         $this->assertRegexp('#<input[^>]+><img#', $markup);
     }
-
 }

@@ -510,7 +510,6 @@ class FileGenerator extends AbstractGenerator
             } else {
                 $output .= $useOutput;
             }
-
         }
 
         // process classes

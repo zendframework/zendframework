@@ -189,7 +189,6 @@ class Dba extends AbstractAdapter implements
         }
 
         if (file_exists($pathname)) {
-
             // close the dba file before delete
             // and reopen (create) on next use
             $this->_close();

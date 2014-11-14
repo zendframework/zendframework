@@ -151,7 +151,7 @@ class ModuleManager implements ModuleManagerInterface
          * loadModule() call, and use the original event otherwise.
          */
         if (!isset($this->loadFinished)) {
-             $this->loadFinished = 0;
+            $this->loadFinished = 0;
         }
 
         $event = ($this->loadFinished > 0) ? clone $this->getEvent() : $this->getEvent();

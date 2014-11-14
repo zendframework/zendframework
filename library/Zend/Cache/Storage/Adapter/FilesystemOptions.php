@@ -17,7 +17,6 @@ use Zend\Cache\Exception;
  */
 class FilesystemOptions extends AdapterOptions
 {
-
     /**
      * Directory to store cache files
      *

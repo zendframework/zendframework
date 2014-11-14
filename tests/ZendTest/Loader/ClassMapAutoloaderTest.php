@@ -179,5 +179,4 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
         $test = $this->loader->getAutoloadMap();
         $this->assertEquals(1, count($test));
     }
-
 }

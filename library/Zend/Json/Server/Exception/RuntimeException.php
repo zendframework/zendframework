@@ -13,4 +13,5 @@ use Zend\Json\Exception;
 
 class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface
-{}
+{
+}

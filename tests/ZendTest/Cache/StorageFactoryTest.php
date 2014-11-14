@@ -16,7 +16,6 @@ use Zend\Cache;
  */
 class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         Cache\StorageFactory::resetAdapterPluginManager();
@@ -182,7 +181,6 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 
         // test plugin structure
         foreach ($storage->getPluginRegistry() as $plugin) {
-
             // test plugin options
             $pluginClass = get_class($plugin);
             switch ($pluginClass) {
@@ -203,7 +201,6 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
                 default:
                     $this->fail("Unexpected plugin class '{$pluginClass}'");
             }
-
         }
     }
 }

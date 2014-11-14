@@ -12,4 +12,5 @@ namespace Zend\Paginator\Adapter\Exception;
 use Zend\Paginator\Exception\ExceptionInterface as Exception;
 
 interface ExceptionInterface extends Exception
-{}
+{
+}

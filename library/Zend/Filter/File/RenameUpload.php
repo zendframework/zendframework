@@ -173,7 +173,7 @@ class RenameUpload extends AbstractFilter
             $isFileUpload = true;
             $uploadData = $value;
             $sourceFile = $value['tmp_name'];
-        } else{
+        } else {
             $uploadData = array(
                 'tmp_name' => $value,
                 'name'     => $value,

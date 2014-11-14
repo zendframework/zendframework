@@ -16,4 +16,5 @@ use Zend\ProgressBar\Exception;
  */
 class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
-{}
+{
+}

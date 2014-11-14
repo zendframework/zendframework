@@ -11,7 +11,6 @@ namespace Zend\Authentication\Adapter;
 
 abstract class AbstractAdapter implements ValidatableAdapterInterface
 {
-
     /**
      * @var mixed
      */

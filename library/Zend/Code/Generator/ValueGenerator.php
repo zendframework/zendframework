@@ -87,7 +87,6 @@ class ValueGenerator extends AbstractGenerator
         } else {
             $this->constants = new ArrayObject();
         }
-
     }
 
     /**

@@ -19,7 +19,6 @@ use Zend\Feed\Reader;
  */
 class AtomTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $validWriter = null;
 
     public function setUp()
@@ -408,5 +407,4 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($expected, $feed->getImage());
     }
-
 }

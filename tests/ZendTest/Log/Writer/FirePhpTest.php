@@ -26,7 +26,6 @@ class FirePhpTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->firephp = new MockFirePhp();
-
     }
     /**
      * Test get FirePhp

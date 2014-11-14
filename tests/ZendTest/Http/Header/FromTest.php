@@ -13,7 +13,6 @@ use Zend\Http\Header\From;
 
 class FromTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testFromFromStringCreatesValidFromHeader()
     {
         $fromHeader = From::fromString('From: xxx');
@@ -46,5 +45,4 @@ class FromTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

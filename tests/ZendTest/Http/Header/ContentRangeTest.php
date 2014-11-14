@@ -13,7 +13,6 @@ use Zend\Http\Header\ContentRange;
 
 class ContentRangeTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testContentRangeFromStringCreatesValidContentRangeHeader()
     {
         $contentRangeHeader = ContentRange::fromString('Content-Range: xxx');
@@ -46,5 +45,4 @@ class ContentRangeTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

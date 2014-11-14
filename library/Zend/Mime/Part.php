@@ -60,7 +60,7 @@ class Part
      */
     public function isStream()
     {
-      return $this->isStream;
+        return $this->isStream;
     }
 
     /**

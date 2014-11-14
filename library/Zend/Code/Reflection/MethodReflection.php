@@ -240,11 +240,11 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
         $firstBrace = false;
         $body = '';
 
-        foreach($tokens as $key => $token) {
+        foreach ($tokens as $key => $token) {
             $tokenType  = (is_array($token)) ? token_name($token[0]) : $token;
             $tokenValue = (is_array($token)) ? $token[1] : $token;
 
-            switch($tokenType) {
+            switch ($tokenType) {
                 case "T_FINAL":
                 case "T_ABSTRACT":
                 case "T_PUBLIC":
@@ -343,7 +343,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
             return $content;
         }
 
-        for($i = $position-1;$i >= 0;$i--) {
+        for ($i = $position-1;$i >= 0;$i--) {
             $tokenType = (is_array($haystack[$i])) ? token_name($haystack[$i][0]) : $haystack[$i];
             $tokenValue = (is_array($haystack[$i])) ? $haystack[$i][1] : $haystack[$i];
 
@@ -376,9 +376,9 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
             return true;
         }
 
-        for($i = $position;$i < $count; $i++) {
+        for ($i = $position;$i < $count; $i++) {
             $tokenType = (is_array($haystack[$i])) ? token_name($haystack[$i][0]) : $haystack[$i];
-            switch($tokenType) {
+            switch ($tokenType) {
                 case "T_FINAL":
                 case "T_ABSTRACT":
                 case "T_PUBLIC":
@@ -438,7 +438,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     {
         $isValid = false;
         $count = count($haystack);
-        for($i = $position+1;$i < $count; $i++) {
+        for ($i = $position+1;$i < $count; $i++) {
             $tokenType = (is_array($haystack[$i])) ? token_name($haystack[$i][0]) : $haystack[$i];
             $tokenValue = (is_array($haystack[$i])) ? $haystack[$i][1] : $haystack[$i];
 

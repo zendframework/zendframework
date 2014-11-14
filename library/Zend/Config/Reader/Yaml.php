@@ -92,7 +92,7 @@ class Yaml implements ReaderInterface
         }
 
         if (null === $this->getYamlDecoder()) {
-             throw new Exception\RuntimeException("You didn't specify a Yaml callback decoder");
+            throw new Exception\RuntimeException("You didn't specify a Yaml callback decoder");
         }
 
         $this->directory = dirname($filename);
@@ -116,7 +116,7 @@ class Yaml implements ReaderInterface
     public function fromString($string)
     {
         if (null === $this->getYamlDecoder()) {
-             throw new Exception\RuntimeException("You didn't specify a Yaml callback decoder");
+            throw new Exception\RuntimeException("You didn't specify a Yaml callback decoder");
         }
         if (empty($string)) {
             return array();

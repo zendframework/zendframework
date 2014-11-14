@@ -770,10 +770,10 @@ class Client implements Stdlib\DispatchableInterface
                 if (empty($digest['qop']) || strtolower($digest['qop']) == 'auth') {
                     $ha2 = md5($this->getMethod() . ':' . $this->getUri()->getPath());
                 } elseif (strtolower($digest['qop']) == 'auth-int') {
-                     if (empty($entityBody)) {
+                    if (empty($entityBody)) {
                         throw new Exception\InvalidArgumentException("I cannot use the auth-int digest authentication without the entity body");
-                     }
-                     $ha2 = md5($this->getMethod() . ':' . $this->getUri()->getPath() . ':' . md5($entityBody));
+                    }
+                    $ha2 = md5($this->getMethod() . ':' . $this->getUri()->getPath() . ':' . md5($entityBody));
                 }
                 if (empty($digest['qop'])) {
                     $response = md5($ha1 . ':' . $digest['nonce'] . ':' . $ha2);
@@ -916,7 +916,6 @@ class Client implements Stdlib\DispatchableInterface
 
             // If we got redirected, look for the Location header
             if ($response->isRedirect() && ($response->getHeaders()->has('Location'))) {
-
                 // Avoid problems with buggy servers that add whitespace at the
                 // end of some headers
                 $location = trim($response->getHeaders()->get('Location')->getFieldValue());
@@ -926,7 +925,6 @@ class Client implements Stdlib\DispatchableInterface
                 if ($response->getStatusCode() == 303 ||
                    ((! $this->config['strictredirects']) && ($response->getStatusCode() == 302 ||
                        $response->getStatusCode() == 301))) {
-
                     $this->resetParameters(false, false);
                     $this->setMethod(Request::METHOD_GET);
                 }
@@ -938,7 +936,6 @@ class Client implements Stdlib\DispatchableInterface
                     // setURI() clears parameters if host changed, see #4215
                     $this->setUri($location);
                 } else {
-
                     // Split into path and query and set the query
                     if (strpos($location, '?') !== false) {
                         list($location, $query) = explode('?', $location, 2);
@@ -959,12 +956,10 @@ class Client implements Stdlib\DispatchableInterface
                     }
                 }
                 ++$this->redirectCounter;
-
             } else {
                 // If we didn't get any location, stop redirecting
                 break;
             }
-
         } while ($this->redirectCounter <= $this->config['maxredirects']);
 
         $this->response = $response;
@@ -978,11 +973,11 @@ class Client implements Stdlib\DispatchableInterface
      */
     public function reset()
     {
-       $this->resetParameters();
-       $this->clearAuth();
-       $this->clearCookies();
+        $this->resetParameters();
+        $this->clearAuth();
+        $this->clearCookies();
 
-       return $this;
+        return $this;
     }
 
     /**
@@ -1253,7 +1248,6 @@ class Client implements Stdlib\DispatchableInterface
             if (static::$fileInfoDb) {
                 $type = finfo_file(static::$fileInfoDb, $file);
             }
-
         } elseif (function_exists('mime_content_type')) {
             $type = mime_content_type($file);
         }
@@ -1331,7 +1325,6 @@ class Client implements Stdlib\DispatchableInterface
 
             if (is_array($value)) {
                 $parameters = array_merge($parameters, $this->flattenParametersArray($value, $key));
-
             } else {
                 $parameters[] = array($key, $value);
             }

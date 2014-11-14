@@ -187,7 +187,7 @@ EOT;
                 } elseif ($this->displayExceptions && $exception instanceof \Exception) {
                     $previous = '';
                     $previousException = $exception->getPrevious();
-                    while($previousException) {
+                    while ($previousException) {
                         $previous .= str_replace(
                             array(
                                 ':className',

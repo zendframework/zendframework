@@ -17,7 +17,6 @@ use Zend\Feed\Reader;
 */
 class CommonTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $feedSamplePath = null;
 
     public function setup()
@@ -108,6 +107,4 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals('UTF-8', $feed->getEncoding());
     }
-
-
 }

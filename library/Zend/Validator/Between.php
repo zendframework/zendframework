@@ -77,7 +77,7 @@ class Between extends AbstractValidator
         }
 
         if (!array_key_exists('min', $options) || !array_key_exists('max', $options)) {
-//            throw new Exception\InvalidArgumentException("Missing option. 'min' and 'max' has to be given");
+            //            throw new Exception\InvalidArgumentException("Missing option. 'min' and 'max' has to be given");
         }
 
         parent::__construct($options);

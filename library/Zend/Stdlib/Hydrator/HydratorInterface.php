@@ -13,5 +13,4 @@ use Zend\Stdlib\Extractor\ExtractionInterface;
 
 interface HydratorInterface extends HydrationInterface, ExtractionInterface
 {
-
 }

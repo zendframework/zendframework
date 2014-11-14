@@ -521,5 +521,4 @@ class FieldsetTest extends TestCase
 
         $this->assertTrue($allowed);
     }
-
 }

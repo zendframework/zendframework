@@ -14,7 +14,6 @@ use Zend\Db\Sql\Predicate\Expression;
 
 class ExpressionTest extends TestCase
 {
-
     public function testEmptyConstructorYieldsEmptyLiteralAndParameter()
     {
         $expression = new Expression();

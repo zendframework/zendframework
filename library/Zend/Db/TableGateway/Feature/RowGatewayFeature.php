@@ -16,7 +16,6 @@ use Zend\Db\TableGateway\Exception;
 
 class RowGatewayFeature extends AbstractFeature
 {
-
     /**
      * @var array
      */

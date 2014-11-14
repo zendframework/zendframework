@@ -31,7 +31,6 @@ use Zend\Stdlib\ErrorHandler;
  */
 abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * The storage adapter
      *
@@ -751,9 +750,9 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testIncrementItem()
     {
-       $this->assertTrue($this->_storage->setItem('counter', 10));
-       $this->assertEquals(15, $this->_storage->incrementItem('counter', 5));
-       $this->assertEquals(15, $this->_storage->getItem('counter'));
+        $this->assertTrue($this->_storage->setItem('counter', 10));
+        $this->assertEquals(15, $this->_storage->incrementItem('counter', 5));
+        $this->assertEquals(15, $this->_storage->getItem('counter'));
     }
 
     public function testIncrementItemInitialValue()
@@ -798,9 +797,9 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testDecrementItem()
     {
-       $this->assertTrue($this->_storage->setItem('counter', 30));
-       $this->assertEquals(25, $this->_storage->decrementItem('counter', 5));
-       $this->assertEquals(25, $this->_storage->getItem('counter'));
+        $this->assertTrue($this->_storage->setItem('counter', 30));
+        $this->assertEquals(25, $this->_storage->decrementItem('counter', 5));
+        $this->assertEquals(25, $this->_storage->getItem('counter'));
     }
 
     public function testDecrementItemInitialValue()

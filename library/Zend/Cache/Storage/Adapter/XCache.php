@@ -28,7 +28,6 @@ class XCache extends AbstractAdapter implements
     IterableInterface,
     TotalSpaceCapableInterface
 {
-
     /**
      * Backup HTTP authentication properties of $_SERVER array
      *
@@ -221,7 +220,6 @@ class XCache extends AbstractAdapter implements
      */
     public function getIterator()
     {
-
         $options   = $this->getOptions();
         $namespace = $options->getNamespace();
         $keys      = array();
@@ -237,7 +235,6 @@ class XCache extends AbstractAdapter implements
                 }
             }
         } else {
-
             $prefix  = $namespace . $options->getNamespaceSeparator();
             $prefixL = strlen($prefix);
 
@@ -313,7 +310,6 @@ class XCache extends AbstractAdapter implements
         $internalKey = $prefix . $normalizedKey;
 
         if (xcache_isset($internalKey)) {
-
             $this->initAdminAuth();
             $cnt = xcache_count(XC_TYPE_VAR);
             for ($i=0; $i < $cnt; $i++) {

@@ -13,7 +13,6 @@ use Zend\Http\Header\Authorization;
 
 class AuthorizationTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testAuthorizationFromStringCreatesValidAuthorizationHeader()
     {
         $authorizationHeader = Authorization::fromString('Authorization: xxx');
@@ -46,5 +45,4 @@ class AuthorizationTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

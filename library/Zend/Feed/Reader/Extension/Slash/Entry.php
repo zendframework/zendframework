@@ -54,8 +54,9 @@ class Entry extends Extension\AbstractEntry
         if (!empty($stringParade)) {
             $stringParade = explode(',', $stringParade);
 
-            foreach ($stringParade as $hit)
-                $hitParade[] = $hit + 0; //cast to integer
+            foreach ($stringParade as $hit) {
+                $hitParade[] = $hit + 0;
+            } //cast to integer
         }
 
         $this->data[$name] = $hitParade;

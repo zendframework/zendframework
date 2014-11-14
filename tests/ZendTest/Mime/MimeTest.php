@@ -50,7 +50,6 @@ class MimeTest extends \PHPUnit_Framework_TestCase
         $myBoundary = 'mySpecificBoundary';
         $m3         = new Mime\Mime($myBoundary);
         $this->assertEquals($m3->boundary(), $myBoundary);
-
     }
 
     public function testIsPrintable_notPrintable()

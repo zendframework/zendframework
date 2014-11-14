@@ -89,7 +89,7 @@ class NumberTest extends TestCase
         ));
 
         $inputSpec = $element->getInputSpecification();
-        foreach($inputSpec['validators'] as $validator) {
+        foreach ($inputSpec['validators'] as $validator) {
             if (get_class($validator) == 'Zend\Validator\GreaterThan') {
                 $this->assertFalse($validator->getInclusive());
                 break;
@@ -105,7 +105,7 @@ class NumberTest extends TestCase
         ));
 
         $inputSpec = $element->getInputSpecification();
-        foreach($inputSpec['validators'] as $validator) {
+        foreach ($inputSpec['validators'] as $validator) {
             if (get_class($validator) == 'Zend\Validator\GreaterThan') {
                 $this->assertTrue($validator->getInclusive());
                 break;
@@ -118,7 +118,7 @@ class NumberTest extends TestCase
         $element = new NumberElement();
 
         $inputSpec = $element->getInputSpecification();
-        foreach($inputSpec['validators'] as $validator) {
+        foreach ($inputSpec['validators'] as $validator) {
             if (get_class($validator) == 'Zend\Validator\Regex') {
                 $this->assertFalse($validator->isValid('1,000.01'));
                 $this->assertFalse($validator->isValid('-1,000.01'));

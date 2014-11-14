@@ -15,7 +15,6 @@ use Zend\Db\Adapter\Exception;
 
 class SqlServer implements PlatformInterface
 {
-
     /** @var resource|\PDO */
     protected $resource = null;
 
@@ -201,5 +200,4 @@ class SqlServer implements PlatformInterface
         }
         return implode('', $parts);
     }
-
 }

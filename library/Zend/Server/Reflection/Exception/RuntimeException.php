@@ -14,4 +14,5 @@ use Zend\Server\Exception;
 class RuntimeException
     extends Exception\RuntimeException
     implements ExceptionInterface
-{}
+{
+}

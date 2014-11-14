@@ -14,7 +14,6 @@ namespace Zend\Barcode\Object;
  */
 class Upca extends Ean13
 {
-
     /**
      * Default options for Postnet barcode
      * @return void

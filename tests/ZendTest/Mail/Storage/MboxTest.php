@@ -263,7 +263,7 @@ class MboxTest extends \PHPUnit_Framework_TestCase
                 $this->markTestSkipped('Can\t test if you\'re root and we therefore cannot test the error handling');
             }
             $this->fail('no exception while waking with non readable file');
-         }
+        }
     }
 
     public function testUniqueId()
@@ -278,7 +278,7 @@ class MboxTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($num, $id);
 
             if ($mail->getNumberByUniqueId($id) != $num) {
-                    $this->fail('reverse lookup failed');
+                $this->fail('reverse lookup failed');
             }
         }
     }
@@ -295,5 +295,4 @@ class MboxTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($mail->getMessage(2)->subject, 'test2');
         $this->assertEquals($mail->getMessage(2)->getContent(), '');
     }
-
 }

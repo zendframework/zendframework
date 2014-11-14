@@ -10,4 +10,5 @@
 namespace Zend\Loader\Exception;
 
 interface ExceptionInterface
-{}
+{
+}

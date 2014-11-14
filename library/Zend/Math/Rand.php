@@ -16,7 +16,6 @@ use RandomLib;
  */
 abstract class Rand
 {
-
     /**
      * Alternative random byte generator using RandomLib
      *

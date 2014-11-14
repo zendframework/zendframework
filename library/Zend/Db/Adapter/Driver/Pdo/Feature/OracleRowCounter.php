@@ -17,7 +17,6 @@ use Zend\Db\Adapter\Driver\Pdo;
  */
 class OracleRowCounter extends AbstractFeature
 {
-
     /**
      * @return string
      */
@@ -76,5 +75,4 @@ class OracleRowCounter extends AbstractFeature
                 : $oracleRowCounter->getCountForSql($context);
         };
     }
-
 }

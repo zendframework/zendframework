@@ -17,7 +17,6 @@ use Zend\Feed\Writer\Extension;
 */
 class Entry extends Extension\AbstractRenderer
 {
-
     /**
      * Set to TRUE if a rendering method actually renders something. This
      * is used to prevent premature appending of a XML namespace declaration

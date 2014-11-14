@@ -134,7 +134,6 @@ class OpenLdap extends Node\Schema
             $val                                   = $this->parseAttributeType($value);
             $val                                   = new AttributeType\OpenLdap($val);
             $this->attributeTypes[$val->getName()] = $val;
-
         }
         foreach ($this->attributeTypes as $val) {
             if (count($val->sup) > 0) {

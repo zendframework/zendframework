@@ -14,7 +14,6 @@ use Zend\Cache\Storage\IteratorInterface;
 
 class ApcIterator implements IteratorInterface
 {
-
     /**
      * The apc storage instance
      *

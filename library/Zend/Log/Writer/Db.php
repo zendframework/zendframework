@@ -125,7 +125,6 @@ class Db extends AbstractWriter
 
         $statement = $this->db->query($this->prepareInsert($this->db, $this->tableName, $dataToInsert));
         $statement->execute($dataToInsert);
-
     }
 
     /**

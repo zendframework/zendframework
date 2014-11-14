@@ -266,8 +266,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
     {
         if ((!$value instanceof stdClass)
             || !isset($value->content)
-            || !isset($value->attributes))
-        {
+            || !isset($value->attributes)) {
             return false;
         }
 

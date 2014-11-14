@@ -16,7 +16,6 @@ use Zend\Barcode;
  */
 class Code128Test extends TestCommon
 {
-
     protected function getBarcodeObject($options = null)
     {
         return new Barcode\Object\Code128($options);

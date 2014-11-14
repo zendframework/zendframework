@@ -27,6 +27,5 @@ class SqlServerIntegrationTest extends \PHPUnit_Framework_TestCase
         $sqlite = new SqlServer($this->adapters['pdo_sqlsrv']);
         $value = $sqlite->quoteValue('value');
         $this->assertEquals('\'value\'', $value);
-
     }
 }

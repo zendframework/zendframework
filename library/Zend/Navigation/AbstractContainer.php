@@ -379,7 +379,6 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
             ), 0, $error);
         }
         return $this->{$match[1]}($match[2], $arguments[0]);
-
     }
 
     /**

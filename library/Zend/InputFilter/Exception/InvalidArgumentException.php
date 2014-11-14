@@ -11,4 +11,5 @@ namespace Zend\InputFilter\Exception;
 
 class InvalidArgumentException extends \InvalidArgumentException implements
     ExceptionInterface
-{}
+{
+}

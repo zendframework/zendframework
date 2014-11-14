@@ -302,8 +302,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
 
         if (isset($attributes['conditionalStylesheet'])
             && !empty($attributes['conditionalStylesheet'])
-            && is_string($attributes['conditionalStylesheet']))
-        {
+            && is_string($attributes['conditionalStylesheet'])) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $attributes['conditionalStylesheet']) === '!IE') {
                 $link = '<!-->' . $link . '<!--';

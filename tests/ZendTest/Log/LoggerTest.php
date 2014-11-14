@@ -115,7 +115,6 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($writer instanceof \Zend\Log\Writer\Null);
         $writer = $writers->extract();
         $this->assertTrue($writer instanceof \Zend\Log\Writer\Mock);
-
     }
 
     public function testAddWithSamePriority()

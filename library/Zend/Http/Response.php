@@ -278,7 +278,6 @@ class Response extends AbstractMessage implements ResponseInterface
 
         $this->statusCode = (int) $code;
         return $this;
-
     }
 
     /**
@@ -328,7 +327,7 @@ class Response extends AbstractMessage implements ResponseInterface
             if ($contentEncoding =='gzip') {
                 $body = $this->decodeGzip($body);
             } elseif ($contentEncoding == 'deflate') {
-                 $body = $this->decodeDeflate($body);
+                $body = $this->decodeDeflate($body);
             }
         }
 

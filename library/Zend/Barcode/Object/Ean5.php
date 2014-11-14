@@ -14,7 +14,6 @@ namespace Zend\Barcode\Object;
  */
 class Ean5 extends Ean13
 {
-
     protected $parities = array(
         0 => array('B','B','A','A','A'),
         1 => array('B','A','B','A','A'),

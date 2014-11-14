@@ -19,4 +19,5 @@ use Zend\Feed\Exception;
 class InvalidArgumentException
     extends Exception\InvalidArgumentException
     implements ExceptionInterface
-{}
+{
+}

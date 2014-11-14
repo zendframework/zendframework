@@ -179,5 +179,4 @@ class ConnectionIntegrationTest extends \PHPUnit_Framework_TestCase
         unset($connection);
         unset($resource);
     }
-
 }

@@ -16,7 +16,6 @@ use Zend\Cache;
  */
 class MemcacheTest extends CommonAdapterTest
 {
-
     public function setUp()
     {
         if (!defined('TESTS_ZEND_CACHE_MEMCACHE_ENABLED') || !TESTS_ZEND_CACHE_MEMCACHE_ENABLED) {

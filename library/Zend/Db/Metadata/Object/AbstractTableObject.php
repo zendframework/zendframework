@@ -11,7 +11,6 @@ namespace Zend\Db\Metadata\Object;
 
 abstract class AbstractTableObject
 {
-
     /*
     protected $catalogName = null;
     protected $schemaName = null;

@@ -169,8 +169,7 @@ class Node
             if (null === $value) {
                 $endPoints[] = $this;
             } elseif ((null !== $value)
-                && $child->hasChildren())
-            {
+                && $child->hasChildren()) {
                 $childEndPoints = $child->getEndPoints();
                 if (!empty($childEndPoints)) {
                     $endPoints = array_merge($endPoints, $childEndPoints);

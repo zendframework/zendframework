@@ -376,7 +376,7 @@ class BaseInputFilter implements
     {
         if ($name === self::VALIDATE_ALL) {
             $this->validationGroup = null;
-            foreach($this->getInputs() as $input) {
+            foreach ($this->getInputs() as $input) {
                 if ($input instanceof InputFilterInterface) {
                     $input->setValidationGroup(self::VALIDATE_ALL);
                 }

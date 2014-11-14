@@ -19,7 +19,6 @@ use Zend\Db\Adapter\Driver\Pdo;
  */
 class PostgresqlIntegrationTest extends \PHPUnit_Framework_TestCase
 {
-
     public $adapters = array();
 
     public function testQuoteValueWithPgsql()
@@ -34,7 +33,6 @@ class PostgresqlIntegrationTest extends \PHPUnit_Framework_TestCase
         $pgsql = new Postgresql(new Pgsql\Pgsql(new Pgsql\Connection($this->adapters['pgsql'])));
         $value = $pgsql->quoteValue('value');
         $this->assertEquals('\'value\'', $value);
-
     }
 
     public function testQuoteValueWithPdoPgsql()
@@ -50,5 +48,4 @@ class PostgresqlIntegrationTest extends \PHPUnit_Framework_TestCase
         $value = $pgsql->quoteValue('value');
         $this->assertEquals('\'value\'', $value);
     }
-
 }

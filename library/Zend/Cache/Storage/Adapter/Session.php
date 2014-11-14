@@ -22,7 +22,6 @@ class Session extends AbstractAdapter implements
     FlushableInterface,
     IterableInterface
 {
-
     /**
      * Set options.
      *

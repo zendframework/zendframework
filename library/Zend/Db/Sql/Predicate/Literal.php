@@ -13,5 +13,4 @@ use Zend\Db\Sql\Literal as BaseLiteral;
 
 class Literal extends BaseLiteral implements PredicateInterface
 {
-
 }

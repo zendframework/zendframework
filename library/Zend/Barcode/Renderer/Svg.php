@@ -18,7 +18,6 @@ use DOMText;
  */
 class Svg extends AbstractRenderer
 {
-
     /**
      * Resource for the image
      * @var DOMDocument

@@ -17,7 +17,6 @@ use Zend\View\Renderer\PhpRenderer as View;
  */
 class RenderToPlaceholderTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $_view = null;
 
     public function setUp()
@@ -32,5 +31,4 @@ class RenderToPlaceholderTest extends \PHPUnit_Framework_TestCase
         $placeholder = $this->_view->plugin('placeholder');
         $this->assertEquals("Foo Bar" . "\n", $placeholder->__invoke('fooPlaceholder')->getValue());
     }
-
 }

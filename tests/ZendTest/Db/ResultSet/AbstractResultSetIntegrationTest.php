@@ -53,6 +53,4 @@ class AbstractResultSetIntegrationTest extends \PHPUnit_Framework_TestCase
         $this->resultSet->current();
         $this->assertEquals($value1, $value2);
     }
-
-
 }

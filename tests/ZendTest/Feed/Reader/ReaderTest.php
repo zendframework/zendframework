@@ -20,7 +20,6 @@ use Zend\Feed\Reader;
 */
 class ReaderTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $feedSamplePath = null;
 
     public function setup()
@@ -352,5 +351,4 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     {
         return (is_readable($dir) && is_writable($dir));
     }
-
 }

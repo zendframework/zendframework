@@ -16,4 +16,5 @@ use Zend\ProgressBar\Exception;
  */
 class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface
-{}
+{
+}

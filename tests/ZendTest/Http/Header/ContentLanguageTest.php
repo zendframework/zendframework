@@ -13,7 +13,6 @@ use Zend\Http\Header\ContentLanguage;
 
 class ContentLanguageTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testContentLanguageFromStringCreatesValidContentLanguageHeader()
     {
         $contentLanguageHeader = ContentLanguage::fromString('Content-Language: xxx');
@@ -46,5 +45,4 @@ class ContentLanguageTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

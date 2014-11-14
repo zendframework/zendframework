@@ -18,7 +18,6 @@ use Zend\Cache\Storage\Plugin\PluginOptions;
  */
 class FilesystemTest extends CommonAdapterTest
 {
-
     protected $_tmpCacheDir;
     protected $_umask;
 
@@ -130,7 +129,9 @@ class FilesystemTest extends CommonAdapterTest
 
         // create a not writable temporaty directory
         $testDir = tempnam(sys_get_temp_dir(), 'ZendTest');
-        unlink($testDir); mkdir($testDir); chmod($testDir, 0557);
+        unlink($testDir);
+        mkdir($testDir);
+        chmod($testDir, 0557);
 
         try {
             $this->_options->setCacheDir($testDir);
@@ -157,7 +158,9 @@ class FilesystemTest extends CommonAdapterTest
 
         // create a not readable temporaty directory
         $testDir = tempnam(sys_get_temp_dir(), 'ZendTest');
-        unlink($testDir); mkdir($testDir); chmod($testDir, 0337);
+        unlink($testDir);
+        mkdir($testDir);
+        chmod($testDir, 0337);
 
         try {
             $this->_options->setCacheDir($testDir);

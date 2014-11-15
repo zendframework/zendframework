@@ -48,20 +48,6 @@ class Http extends Uri
     protected $password;
 
     /**
-     * Check if the URI is a valid HTTP URI
-     *
-     * This applies additional HTTP specific validation rules beyond the ones
-     * required by the generic URI syntax
-     *
-     * @return bool
-     * @see    Uri::isValid()
-     */
-    public function isValid()
-    {
-        return parent::isValid();
-    }
-
-    /**
      * Get the username part (before the ':') of the userInfo URI part
      *
      * @return string|null

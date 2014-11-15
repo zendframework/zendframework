@@ -96,4 +96,29 @@ ECS;
         $this->assertEquals('2', $config['six']['seven'][1]['nine']);
         $this->assertEquals('3', $config['six']['seven'][2]['nine']);
     }
+
+    /**
+     * @group zf6279
+     */
+    public function testElementWithBothAttributesAndAStringValueIsProcessedCorrectly()
+    {
+        $this->reader = new Xml();
+        $arrayXml = $this->reader->fromFile($this->getTestAssetPath('attributes'));
+        $this->assertArrayHasKey('one', $arrayXml);
+        $this->assertInternalType('array', $arrayXml['one']);
+        
+        // No attribute + text value == string
+        $this->assertArrayHasKey(0, $arrayXml['one']);
+        $this->assertEquals('bazbat', $arrayXml['one'][0]);
+        
+        // Attribute(s) + text value == array
+        $this->assertArrayHasKey(1, $arrayXml['one']);
+        $this->assertInternalType('array', $arrayXml['one'][1]);
+        // Attributes stored in named array keys
+        $this->assertArrayHasKey('foo', $arrayXml['one'][1]);
+        $this->assertEquals('bar', $arrayXml['one'][1]['foo']);
+        // Element value stored in special key '_'
+        $this->assertArrayHasKey('_', $arrayXml['one'][1]);
+        $this->assertEquals('bazbat', $arrayXml['one'][1]['_']);
+    }
 }

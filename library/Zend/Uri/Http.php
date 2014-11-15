@@ -64,30 +64,20 @@ class Http extends Uri
     /**
      * Get the username part (before the ':') of the userInfo URI part
      *
-     * @return null|string
+     * @return string|null
      */
     public function getUser()
     {
-        if (null !== $this->user) {
-            return $this->user;
-        }
-
-        $this->parseUserInfo();
         return $this->user;
     }
 
     /**
      * Get the password part (after the ':') of the userInfo URI part
      *
-     * @return string
+     * @return string|null
      */
     public function getPassword()
     {
-        if (null !== $this->password) {
-            return $this->password;
-        }
-
-        $this->parseUserInfo();
         return $this->password;
     }
 

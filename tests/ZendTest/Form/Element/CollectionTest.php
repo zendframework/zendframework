@@ -1053,4 +1053,33 @@ class CollectionTest extends TestCase
         $collection->setObject($arrayCollection);
         $this->assertEquals(3, $collection->getCount());
     }
+    
+    /**
+     * @group zf6263
+     * @group zf6518
+     */
+    public function testCollectionProperlyHandlesAddingObjectsOfTypeElementInterface()
+    {
+        $form = new Form('test');
+        $text = new Element\Text('text');
+        $form->add(array(
+            'name' => 'text',
+            'type' => 'Zend\Form\Element\Collection',
+            'options' => array(
+                'target_element' => $text, 'count' => 2,
+            ),
+        ));
+        $object = new \ArrayObject(array('text' => array('Foo', 'Bar')));
+        $form->bind($object);
+        $this->assertTrue($form->isValid());
+        
+        $result = $form->getData();
+        $this->assertInstanceOf('ArrayAccess', $result);
+        $this->assertArrayHasKey('text', $result);
+        $this->assertInternalType('array', $result['text']);
+        $this->assertArrayHasKey(0, $result['text']);
+        $this->assertEquals('Foo', $result['text'][0]);
+        $this->assertArrayHasKey(1, $result['text']);
+        $this->assertEquals('Bar', $result['text'][1]);
+    }
 }

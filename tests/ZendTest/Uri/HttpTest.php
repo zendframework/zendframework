@@ -252,4 +252,40 @@ class HttpTest extends TestCase
         $uri = new HttpUri('http://zf2_app.local');
         $this->assertTrue($uri->isValid());
     }
+    
+    public function testCanSetUserAndPasswordWithUserInfo()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+        $uri->setUserInfo('user:pass');
+        
+        $this->assertEquals('user', $uri->getUser());
+        $this->assertEquals('pass', $uri->getPassword());
+    }
+    
+    public function testCanSetUserWithUserInfo()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+        $uri->setUserInfo('user');
+        
+        $this->assertEquals('user', $uri->getUser());
+        $this->assertNull($uri->getPassword());
+    }
+    
+    public function testCanSetUserInfoWithUserAndPassword()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+        $uri->setUser('user');
+        $uri->setPassword('pass');
+        
+        $this->assertEquals('user', $uri->getUser());
+        $this->assertEquals('pass', $uri->getPassword());
+        $this->assertEquals('user:pass', $uri->getUserInfo());
+    }
+    
+    public function testCanSetUserInfoWithUser()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+        $uri->setUser('user');
+        $this->assertEquals('user', $uri->getUserInfo());
+    }
 }

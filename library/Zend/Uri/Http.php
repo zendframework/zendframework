@@ -66,6 +66,16 @@ class Http extends Uri
     {
         return $this->password;
     }
+    
+    /**
+     * Get the User-info (usually user:password) part
+     *
+     * @return string|null
+     */
+    public function getUserInfo()
+    {
+        return $this->userInfo;
+    }
 
     /**
      * Set the username part (before the ':') of the userInfo URI part
@@ -76,6 +86,7 @@ class Http extends Uri
     public function setUser($user)
     {
         $this->user = $user;
+        $this->buildUserInfo();
         return $this;
     }
 
@@ -88,6 +99,22 @@ class Http extends Uri
     public function setPassword($password)
     {
         $this->password = $password;
+        $this->buildUserInfo();
+        return $this;
+    }
+    
+    /**
+     * Set the URI User-info part (usually user:password)
+     *
+     * @param  string $userInfo
+     * @return Uri
+     * @throws Exception\InvalidUriPartException If the schema definition
+     * does not have this part
+     */
+    public function setUserInfo($userInfo)
+    {
+        $this->userInfo = $userInfo;
+        $this->parseUserInfo();
         return $this;
     }
 
@@ -129,8 +156,26 @@ class Http extends Uri
 
         // Split on the ':', and set both user and password
         list($user, $password) = explode(':', $this->userInfo, 2);
-        $this->setUser($user);
-        $this->setPassword($password);
+        $this->user = $user;
+        $this->password = $password;
+    }
+    
+    /**
+     * Build the user info based on user and password
+     * 
+     * Builds the user info based on the given user and password values
+     * 
+     * @return void
+     */
+    protected function buildUserInfo()
+    {
+        $userInfo = $this->user;
+        
+        if (null !== $this->password) {
+            $userInfo .= ':' . $this->password;
+        }
+        
+        $this->userInfo = $userInfo;
     }
 
     /**

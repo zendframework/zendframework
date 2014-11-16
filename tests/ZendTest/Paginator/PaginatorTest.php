@@ -422,6 +422,42 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($page1, $expected);
         $this->assertEquals($page1, $this->paginator->getItemsByPage(1));
     }
+    
+    /**
+     * @group ZF2-6817
+     */
+    public function testGetsItemsByPageHandleDbSelectAdapter()
+    {
+        $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
+        $mockPlatform = $this->getMock('Zend\Db\Adapter\Platform\PlatformInterface');
+        $mockPlatform->expects($this->any())->method('getName')->will($this->returnValue('platform'));
+        $mockAdapter = $this->getMockForAbstractClass(
+            'Zend\Db\Adapter\Adapter',
+            array($mockDriver, $mockPlatform)
+        );
+        $mockSql = $this->getMock(
+            'Zend\Db\Sql\Sql',
+            array('prepareStatementForSqlObject', 'execute'),
+            array($mockAdapter)
+        );
+        $mockSql->expects($this->any())
+            ->method('prepareStatementForSqlObject')
+            ->with($this->isInstanceOf('Zend\Db\Sql\Select'))
+            ->will($this->returnValue($mockStatement));
+        $mockSelect = $this->getMock('Zend\Db\Sql\Select');
+
+        $dbSelect = new Paginator\Adapter\DbSelect($mockSelect, $mockSql);
+        $paginator = new Paginator\Paginator(new Paginator\Adapter\DbSelect($mockSelect, $mockSql));
+        $page1 = $paginator->getItemsByPage(1);
+        
+        $expected = new \ArrayIterator(array());
+        $this->assertEquals($page1, $expected);
+        $this->assertEquals($page1, $paginator->getItemsByPage(1));
+    }
 
     public function testGetsItemCount()
     {

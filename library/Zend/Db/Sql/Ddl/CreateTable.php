@@ -19,7 +19,7 @@ class CreateTable extends AbstractSql implements SqlInterface
     const TABLE       = 'table';
 
     /**
-     * @var string[]
+     * @var Column\ColumnInterface[]
      */
     protected $columns = array();
 

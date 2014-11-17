@@ -625,6 +625,8 @@ class AbstractHttpControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public function testAssertExceptionInAction()
     {
+        $this->setTraceError(true);
+
         $this->dispatch('/exception');
         $this->assertResponseStatusCode(500);
         $this->assertApplicationException('RuntimeException');

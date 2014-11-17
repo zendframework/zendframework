@@ -24,4 +24,20 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
             $column->getExpressionData()
         );
     }
+
+    /**
+     * @covers Zend\Db\Sql\Ddl\Column\Boolean
+     *
+     * @group 6257
+     */
+    public function testIsAlwaysNotNullable()
+    {
+        $column = new Boolean('foo', true);
+
+        $this->assertFalse($column->isNullable());
+
+        $column->setNullable(true);
+
+        $this->assertFalse($column->isNullable());
+    }
 }

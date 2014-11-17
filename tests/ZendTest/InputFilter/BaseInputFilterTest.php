@@ -913,24 +913,28 @@ class BaseInputFilterTest extends TestCase
         $filter->setData(array('foo' => 'bar'));
     }
 
+    /**
+     * @group 6431
+     */
     public function testMerge()
     {
-        $expectedFilters = array(
-            'foo',
-            'bar',
-            'baz'
-        );
-
-        $inputFilter = new InputFilter();
-        $chainedInputFilter = new InputFilter();
+        $inputFilter       = new InputFilter();
+        $originInputFilter = new InputFilter();
 
         $inputFilter->add(new Input(), 'foo');
         $inputFilter->add(new Input(), 'bar');
 
-        $chainedInputFilter->add(new Input(), 'baz');
+        $originInputFilter->add(new Input(), 'baz');
 
-        $inputFilter->merge($chainedInputFilter);
+        $inputFilter->merge($originInputFilter);
 
-        $this->assertEquals($expectedFilters, array_keys($inputFilter->getInputs()));
+        $this->assertEquals(
+            array(
+                'foo',
+                'bar',
+                'baz'
+            ),
+            array_keys($inputFilter->getInputs())
+        );
     }
 }

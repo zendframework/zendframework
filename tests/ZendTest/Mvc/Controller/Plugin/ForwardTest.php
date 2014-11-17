@@ -193,4 +193,12 @@ class ForwardTest extends TestCase
         $this->assertTrue(isset($result['params']));
         $this->assertEquals(array(), $result['params']);
     }
+
+    /**
+     * @group 6398
+     */
+    public function testSetListenersToDetachIsFluent()
+    {
+        $this->assertSame($this->plugin, $this->plugin->setListenersToDetach(array()));
+    }
 }

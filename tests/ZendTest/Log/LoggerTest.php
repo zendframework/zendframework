@@ -24,6 +24,14 @@ use Zend\Validator\Digits as DigitsFilter;
  */
 class LoggerTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Logger
+     */
+    private $logger;
+
+    /**
+     * {@inheritDoc}
+     */
     public function setUp()
     {
         $this->logger = new Logger;

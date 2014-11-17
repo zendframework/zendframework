@@ -17,7 +17,7 @@ class Check extends AbstractConstraint
     protected $expression;
 
     /**
-     * @var string
+     * {@inheritDoc}
      */
     protected $specification = 'CHECK (%s)';
 
@@ -32,24 +32,23 @@ class Check extends AbstractConstraint
     }
 
     /**
-     * @return array
+     * {@inheritDoc}
      */
     public function getExpressionData()
     {
         $newSpecTypes = array(self::TYPE_LITERAL);
-        $values = array($this->expression);
-        $newSpec = '';
+        $values       = array($this->expression);
+        $newSpec      = '';
 
         if ($this->name) {
             $newSpec .= $this->namedSpecification;
+
             array_unshift($values, $this->name);
             array_unshift($newSpecTypes, self::TYPE_IDENTIFIER);
         }
 
-        $newSpec .= $this->specification;
-
         return array(array(
-            $newSpec,
+            $newSpec . $this->specification,
             $values,
             $newSpecTypes,
         ));

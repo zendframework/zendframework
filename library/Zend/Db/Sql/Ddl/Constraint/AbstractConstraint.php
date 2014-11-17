@@ -92,7 +92,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * @return array
+     * {@inheritDoc}
      */
     public function getColumns()
     {
@@ -100,7 +100,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     }
 
     /**
-     * @return array
+     * {@inheritDoc}
      */
     public function getExpressionData()
     {

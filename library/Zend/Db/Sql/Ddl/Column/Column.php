@@ -16,7 +16,7 @@ class Column implements ColumnInterface
     /**
      * @var null|string|int
      */
-    protected $default = null;
+    protected $default;
 
     /**
      * @var bool
@@ -26,7 +26,7 @@ class Column implements ColumnInterface
     /**
      * @var string
      */
-    protected $name = null;
+    protected $name = '';
 
     /**
      * @var array
@@ -34,7 +34,7 @@ class Column implements ColumnInterface
     protected $options = array();
 
     /**
-     * @var array
+     * @var ConstraintInterface[]
      */
     protected $constraints = array();
 
@@ -50,6 +50,9 @@ class Column implements ColumnInterface
 
     /**
      * @param null|string $name
+     * @param bool        $nullable
+     * @param mixed|null  $default
+     * @param mixed[]     $options
      */
     public function __construct($name = null, $nullable = false, $default = null, array $options = array())
     {
@@ -65,7 +68,7 @@ class Column implements ColumnInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = (string) $name;
         return $this;
     }
 
@@ -143,12 +146,14 @@ class Column implements ColumnInterface
     }
 
     /**
-     * @param  Constraint\ConstraintInterface $constraint
+     * @param ConstraintInterface $constraint
+     *
      * @return self
      */
     public function addConstraint(ConstraintInterface $constraint)
     {
         $this->constraints[] = $constraint;
+
         return $this;
     }
 
@@ -181,7 +186,6 @@ class Column implements ColumnInterface
             $types,
         ));
 
-        /** @var $constraint ConstraintInterface */
         foreach ($this->constraints as $constraint) {
             $data[] = ' ';
             $data = array_merge($data, $constraint->getExpressionData());

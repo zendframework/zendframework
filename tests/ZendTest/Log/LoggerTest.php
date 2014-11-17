@@ -452,4 +452,33 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         // Temporary hide errors, because we don't want the fatal error to fail the test
         @$this->callToNonExistingMethod();
     }
+
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @group 6424
+     */
+    public function testRegisterFatalErrorShutdownFunctionHandlesCompileTimeErrors()
+    {
+        $writer = new MockWriter;
+        $this->logger->addWriter($writer);
+
+        $result = Logger::registerFatalErrorShutdownFunction($this->logger);
+        $this->assertTrue($result);
+
+        // check for single error handler instance
+        $this->assertFalse(Logger::registerFatalErrorShutdownFunction($this->logger));
+
+        $self = $this;
+        register_shutdown_function(function () use ($writer, $self) {
+            $self->assertEquals(
+                $writer->events[0]['message'],
+                'syntax error, unexpected \'::\' (T_PAAMAYIM_NEKUDOTAYIM)'
+            );
+        });
+
+        // Temporary hide errors, because we don't want the fatal error to fail the test
+        @eval('this::code::is::invalid {}');
+    }
 }

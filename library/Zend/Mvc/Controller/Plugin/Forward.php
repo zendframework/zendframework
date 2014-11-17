@@ -39,7 +39,7 @@ class Forward extends AbstractPlugin
     protected $numNestedForwards = 0;
 
     /**
-     * @var array
+     * @var array[]|null
      */
     protected $listenersToDetach = null;
 

@@ -20,6 +20,9 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
      */
     protected $subject;
 
+    /**
+     * @var int[]
+     */
     protected $columnOptionSortOrder = array(
         'unsigned'      => 0,
         'zerofill'      => 1,
@@ -34,43 +37,29 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
 
     /**
      * @param CreateTable $subject
+     *
      * @return self
      */
     public function setSubject($subject)
     {
         $this->subject = $subject;
+
         return $this;
     }
 
     /**
      * @param  null|PlatformInterface $platform
+     *
      * @return string
      */
     public function getSqlString(PlatformInterface $platform = null)
     {
         // localize variables
-        foreach (get_object_vars($this->createTable) as $name => $value) {
+        foreach (get_object_vars($this->subject) as $name => $value) {
             $this->{$name} = $value;
         }
+
         return parent::getSqlString($platform);
-    }
-
-    protected function normalizeColumnOption($name)
-    {
-        return strtolower(str_replace(array('-', '_', ' '), '', $name));
-    }
-
-    protected function compareColumnOptions($a, $b)
-    {
-        $a = $this->normalizeColumnOption($a);
-        $a = isset($this->columnOptionSortOrder[$a])
-            ? $this->columnOptionSortOrder[$a] : count($this->columnOptionSortOrder);
-
-        $b = $this->normalizeColumnOption($b);
-        $b = isset($this->columnOptionSortOrder[$b])
-            ? $this->columnOptionSortOrder[$b] : count($this->columnOptionSortOrder);
-
-        return $a - $b;
     }
 
     /**
@@ -79,7 +68,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
      */
     protected function getSqlInsertOffsets($sql)
     {
-        $sqlLength = strlen($sql);
+        $sqlLength   = strlen($sql);
         $insertStart = array();
 
         foreach (array('NOT NULL', 'NULL', 'DEFAULT', 'UNIQUE', 'PRIMARY', 'REFERENCES') as $needle) {
@@ -100,28 +89,35 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
             }
         }
 
-        for ($i = 0; $i < 3; ++$i) {
-            if (!isset($insertStart[$i])) {
-                $insertStart[$i] = $sqlLength;
-            }
+        foreach (range(0, 3) as $i) {
+            $insertStart[$i] = isset($insertStart[$i]) ? $insertStart[$i] : $sqlLength;
         }
 
         return $insertStart;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function processColumns(PlatformInterface $platform = null)
     {
-        if (!$this->columns) {
+        if (! $this->columns) {
             return null;
         }
-        $sqls = array();
-        foreach ($this->columns as $i => $column) {
-            $sql         = $this->processExpression($column, $platform);
-            $insertStart = $this->getSqlInsertOffsets($sql);
 
-            foreach ($column->getOptions() as $coName => $coValue) {
+        $sqls = array();
+
+        foreach ($this->columns as $i => $column) {
+            $sql           = $this->processExpression($column, $platform);
+            $insertStart   = $this->getSqlInsertOffsets($sql);
+            $columnOptions = $column->getOptions();
+
+            uksort($columnOptions, array($this, 'compareColumnOptions'));
+
+            foreach ($columnOptions as $coName => $coValue) {
                 $insert = '';
-                if (!$coValue) {
+
+                if (! $coValue) {
                     continue;
                 }
 
@@ -166,6 +162,38 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
 
             $sqls[$i] = $sql;
         }
+
         return array($sqls);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
+    private function normalizeColumnOption($name)
+    {
+        return strtolower(str_replace(array('-', '_', ' '), '', $name));
+    }
+
+    /**
+     * @internal @private this method is only public for PHP 5.3 compatibility purposes.
+     *
+     * @param string $columnA
+     * @param string $columnB
+     *
+     * @return int
+     */
+    public function compareColumnOptions($columnA, $columnB)
+    {
+        $columnA = $this->normalizeColumnOption($columnA);
+        $columnA = isset($this->columnOptionSortOrder[$columnA])
+            ? $this->columnOptionSortOrder[$columnA] : count($this->columnOptionSortOrder);
+
+        $columnB = $this->normalizeColumnOption($columnB);
+        $columnB = isset($this->columnOptionSortOrder[$columnB])
+            ? $this->columnOptionSortOrder[$columnB] : count($this->columnOptionSortOrder);
+
+        return $columnA - $columnB;
     }
 }

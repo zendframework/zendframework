@@ -13,7 +13,7 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\Metadata\Source\SqliteMetadata;
 
 /**
- * @requires extension sqlite
+ * @requires extension pdo_sqlite
  */
 class SqliteMetadataTest extends \PHPUnit_Framework_TestCase
 {

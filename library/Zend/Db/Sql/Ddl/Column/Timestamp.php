@@ -9,10 +9,10 @@
 
 namespace Zend\Db\Sql\Ddl\Column;
 
-class Float extends AbstractPrecisionColumn
+class Timestamp extends Column
 {
     /**
      * @var string
      */
-    protected $type = 'FLOAT';
+    protected $type = 'TIMESTAMP';
 }

@@ -29,7 +29,7 @@ class BigIntegerTest extends \PHPUnit_Framework_TestCase
     {
         $column = new BigInteger('foo');
         $this->assertEquals(
-            array(array('%s %s', array('foo', 'BIGINT NOT NULL'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
+            array(array('%s %s NOT NULL', array('foo', 'BIGINT'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
             $column->getExpressionData()
         );
     }

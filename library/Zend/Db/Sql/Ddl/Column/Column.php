@@ -9,12 +9,14 @@
 
 namespace Zend\Db\Sql\Ddl\Column;
 
+use Zend\Db\Sql\Ddl\Constraint\ConstraintInterface;
+
 class Column implements ColumnInterface
 {
     /**
      * @var null|string|int
      */
-    protected $default = null;
+    protected $default;
 
     /**
      * @var bool
@@ -24,12 +26,17 @@ class Column implements ColumnInterface
     /**
      * @var string
      */
-    protected $name = null;
+    protected $name = '';
 
     /**
      * @var array
      */
     protected $options = array();
+
+    /**
+     * @var ConstraintInterface[]
+     */
+    protected $constraints = array();
 
     /**
      * @var string
@@ -43,10 +50,16 @@ class Column implements ColumnInterface
 
     /**
      * @param null|string $name
+     * @param bool        $nullable
+     * @param mixed|null  $default
+     * @param mixed[]     $options
      */
-    public function __construct($name = null)
+    public function __construct($name = null, $nullable = false, $default = null, array $options = array())
     {
-        (!$name) ?: $this->setName($name);
+        $this->setName($name);
+        $this->setNullable($nullable);
+        $this->setDefault($default);
+        $this->setOptions($options);
     }
 
     /**
@@ -55,7 +68,7 @@ class Column implements ColumnInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = (string) $name;
         return $this;
     }
 
@@ -133,6 +146,18 @@ class Column implements ColumnInterface
     }
 
     /**
+     * @param ConstraintInterface $constraint
+     *
+     * @return self
+     */
+    public function addConstraint(ConstraintInterface $constraint)
+    {
+        $this->constraints[] = $constraint;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getExpressionData()
@@ -146,7 +171,7 @@ class Column implements ColumnInterface
         $types = array(self::TYPE_IDENTIFIER, self::TYPE_LITERAL);
 
         if (!$this->isNullable) {
-            $params[1] .= ' NOT NULL';
+            $spec .= ' NOT NULL';
         }
 
         if ($this->default !== null) {
@@ -155,10 +180,17 @@ class Column implements ColumnInterface
             $types[]  = self::TYPE_VALUE;
         }
 
-        return array(array(
+        $data = array(array(
             $spec,
             $params,
             $types,
         ));
+
+        foreach ($this->constraints as $constraint) {
+            $data[] = ' ';
+            $data = array_merge($data, $constraint->getExpressionData());
+        }
+
+        return $data;
     }
 }

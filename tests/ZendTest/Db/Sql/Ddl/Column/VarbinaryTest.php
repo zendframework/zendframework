@@ -9,18 +9,18 @@
 
 namespace ZendTest\Db\Sql\Ddl\Column;
 
-use Zend\Db\Sql\Ddl\Column\Date;
+use Zend\Db\Sql\Ddl\Column\Varbinary;
 
-class DateTest extends \PHPUnit_Framework_TestCase
+class VarbinaryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Zend\Db\Sql\Ddl\Column\Date::getExpressionData
+     * @covers Zend\Db\Sql\Ddl\Column\Varbinary::getExpressionData
      */
     public function testGetExpressionData()
     {
-        $column = new Date('foo');
+        $column = new Varbinary('foo', 20);
         $this->assertEquals(
-            array(array('%s %s NOT NULL', array('foo', 'DATE'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
+            array(array('%s %s NOT NULL', array('foo', 'VARBINARY(20)'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
             $column->getExpressionData()
         );
     }

@@ -9,18 +9,18 @@
 
 namespace ZendTest\Db\Sql\Ddl\Column;
 
-use Zend\Db\Sql\Ddl\Column\Date;
+use Zend\Db\Sql\Ddl\Column\Timestamp;
 
-class DateTest extends \PHPUnit_Framework_TestCase
+class TimestampTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Zend\Db\Sql\Ddl\Column\Date::getExpressionData
+     * @covers Zend\Db\Sql\Ddl\Column\Timestamp::getExpressionData
      */
     public function testGetExpressionData()
     {
-        $column = new Date('foo');
+        $column = new Timestamp('foo');
         $this->assertEquals(
-            array(array('%s %s NOT NULL', array('foo', 'DATE'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
+            array(array('%s %s NOT NULL', array('foo', 'TIMESTAMP'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
             $column->getExpressionData()
         );
     }

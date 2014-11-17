@@ -9,19 +9,20 @@
 
 namespace ZendTest\Db\Sql\Ddl\Column;
 
-use Zend\Db\Sql\Ddl\Column\Date;
+use Zend\Db\Sql\Ddl\Column\Binary;
 
-class DateTest extends \PHPUnit_Framework_TestCase
+class BinaryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Zend\Db\Sql\Ddl\Column\Date::getExpressionData
+     * @covers Zend\Db\Sql\Ddl\Column\Binary::getExpressionData
      */
     public function testGetExpressionData()
     {
-        $column = new Date('foo');
+        $column = new Binary('foo', 10000000);
         $this->assertEquals(
-            array(array('%s %s NOT NULL', array('foo', 'DATE'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
+            array(array('%s %s NOT NULL', array('foo', 'BINARY(10000000)'), array($column::TYPE_IDENTIFIER, $column::TYPE_LITERAL))),
             $column->getExpressionData()
         );
     }
+
 }

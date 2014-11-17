@@ -9,10 +9,10 @@
 
 namespace Zend\Db\Sql\Ddl\Column;
 
-class Float extends AbstractPrecisionColumn
+class Varbinary extends AbstractLengthColumn
 {
     /**
      * @var string
      */
-    protected $type = 'FLOAT';
+    protected $type = 'VARBINARY';
 }

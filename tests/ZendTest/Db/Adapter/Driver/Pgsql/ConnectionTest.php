@@ -32,21 +32,18 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
      * Test getResource method if it tries to connect to the database.
      *
      * @covers Zend\Db\Adapter\Driver\Pgsql\Connection::getResource
+     * @requires extension pgsql
      */
     public function testResource()
     {
-        if (extension_loaded('pgsql')) {
-            try {
-                $resource = $this->connection->getResource();
-                // connected with empty string
-                $this->assertTrue(is_resource($resource));
-            } catch (AdapterException\RuntimeException $exc) {
-                // If it throws an exception it has failed to connect
-                $this->setExpectedException('Zend\Db\Adapter\Exception\RuntimeException');
-                throw $exc;
-            }
-        } else {
-            $this->markTestSkipped('pgsql extension not loaded');
+        try {
+            $resource = $this->connection->getResource();
+            // connected with empty string
+            $this->assertTrue(is_resource($resource));
+        } catch (AdapterException\RuntimeException $exc) {
+            // If it throws an exception it has failed to connect
+            $this->setExpectedException('Zend\Db\Adapter\Exception\RuntimeException');
+            throw $exc;
         }
     }
 }

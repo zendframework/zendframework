@@ -689,7 +689,8 @@ class BaseInputFilter implements
      * Merges the inputs from an InputFilter into the current one
      *
      * @param BaseInputFilter $inputFilter
-     * @return $this
+     *
+     * @return self
      */
     public function merge(BaseInputFilter $inputFilter)
     {

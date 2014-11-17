@@ -17,22 +17,26 @@ abstract class AbstractLengthColumn extends Column
     protected $length;
 
     /**
-     * @param null|string $name
+     * {@inheritDoc}
+     *
      * @param int $length
      */
     public function __construct($name, $length = null, $nullable = false, $default = null, array $options = array())
     {
         $this->setLength($length);
+
         parent::__construct($name, $nullable, $default, $options);
     }
 
     /**
      * @param  int $length
+     *
      * @return self
      */
     public function setLength($length)
     {
-        $this->length = $length;
+        $this->length = (int) $length;
+
         return $this;
     }
 

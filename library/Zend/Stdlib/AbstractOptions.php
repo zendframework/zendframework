@@ -94,15 +94,18 @@ abstract class AbstractOptions implements ParameterObjectInterface
     public function __set($key, $value)
     {
         $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-        if ($this->__strictMode__ && !method_exists($this, $setter)) {
-            throw new Exception\BadMethodCallException(
-                'The option "' . $key . '" does not '
-                . 'have a matching ' . $setter . ' setter method '
-                . 'which must be defined'
-            );
-        } elseif (!$this->__strictMode__ && !method_exists($this, $setter)) {
-            return;
+        if (!is_callable(array($this, $setter))) {
+            if ($this->__strictMode__) {
+                throw new Exception\BadMethodCallException(
+                    'The option "' . $key . '" does not '
+                    . 'have a callable "' . $setter . '" setter method '
+                    . 'which must be defined'
+                );
+            } else {
+                return;
+            }
         }
+        // else: Setter method is callable
         $this->{$setter}($value);
     }
 
@@ -117,14 +120,14 @@ abstract class AbstractOptions implements ParameterObjectInterface
     public function __get($key)
     {
         $getter = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-        if (!method_exists($this, $getter)) {
+        if (!is_callable(array($this, $getter))) {
             throw new Exception\BadMethodCallException(
                 'The option "' . $key . '" does not '
-                . 'have a matching ' . $getter . ' getter method '
+                . 'have a callable "' . $getter . '" getter method '
                 . 'which must be defined'
             );
         }
-
+        // else: Getter method is callable
         return $this->{$getter}();
     }
 

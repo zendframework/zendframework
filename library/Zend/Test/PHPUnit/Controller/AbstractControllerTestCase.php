@@ -65,15 +65,6 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         Console::overrideIsConsole($this->usedConsoleBackup);
-
-        if (true !== $this->traceError) {
-            return;
-        }
-
-        $exception = $this->getApplication()->getMvcEvent()->getParam('exception');
-        if ($exception instanceof \Exception) {
-            throw $exception;
-        }
     }
 
     /**
@@ -286,6 +277,15 @@ abstract class AbstractControllerTestCase extends PHPUnit_Framework_TestCase
 
         $this->url($url, $method, $params);
         $this->getApplication()->run();
+
+        if (true !== $this->traceError) {
+            return;
+        }
+
+        $exception = $this->getApplication()->getMvcEvent()->getParam('exception');
+        if ($exception instanceof \Exception) {
+            throw $exception;
+        }
     }
 
     /**

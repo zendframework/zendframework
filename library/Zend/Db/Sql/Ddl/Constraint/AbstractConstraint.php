@@ -73,11 +73,8 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     public function setColumns($columns)
     {
-        if (!is_array($columns)) {
-            $columns = array($columns);
-        }
+        $this->columns = (array) $columns;
 
-        $this->columns = $columns;
         return $this;
     }
 

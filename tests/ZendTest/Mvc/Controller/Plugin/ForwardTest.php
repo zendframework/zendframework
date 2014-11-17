@@ -27,6 +27,26 @@ use ZendTest\Mvc\TestAsset\Locator;
 
 class ForwardTest extends TestCase
 {
+    /**
+     * @var PluginManager
+     */
+    private $plugins;
+
+    /**
+     * @var ControllerManager
+     */
+    private $controllers;
+
+    /**
+     * @var SampleController
+     */
+    private $controller;
+
+    /**
+     * @var \Zend\Mvc\Controller\Plugin\Forward
+     */
+    private $plugin;
+
     public function setUp()
     {
         StaticEventManager::resetInstance();

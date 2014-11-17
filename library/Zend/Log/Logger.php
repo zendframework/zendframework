@@ -612,32 +612,39 @@ class Logger implements LoggerInterface
             return false;
         }
 
-        // Fatal error list
-        $fatalErrorList = array(
-            E_ERROR,
-            E_PARSE,
-            E_CORE_ERROR,
-            E_CORE_WARNING,
-            E_COMPILE_ERROR,
-            E_COMPILE_WARNING
-        );
-
         $errorPriorityMap = static::$errorPriorityMap;
 
-        register_shutdown_function(function () use ($logger, $errorPriorityMap, $fatalErrorList) {
+        register_shutdown_function(function () use ($logger, $errorPriorityMap) {
             $error = error_get_last();
-            if (null !== $error && in_array($error['type'], $fatalErrorList)) {
-                $logger->log($errorPriorityMap[$error['type']],
-                    $error['message'],
+
+            if (null === $error
+                || ! in_array(
+                    $error['type'],
                     array(
-                        'file' => $error['file'],
-                        'line' => $error['line'],
-                    )
-                );
+                        E_ERROR,
+                        E_PARSE,
+                        E_CORE_ERROR,
+                        E_CORE_WARNING,
+                        E_COMPILE_ERROR,
+                        E_COMPILE_WARNING
+                    ),
+                    true
+                )
+            ) {
+                return;
             }
+
+            $logger->log($errorPriorityMap[$error['type']],
+                $error['message'],
+                array(
+                    'file' => $error['file'],
+                    'line' => $error['line'],
+                )
+            );
         });
 
         static::$registeredFatalErrorShutdownFunction = true;
+
         return true;
     }
 

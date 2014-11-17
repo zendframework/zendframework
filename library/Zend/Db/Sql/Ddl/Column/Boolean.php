@@ -17,12 +17,15 @@ class Boolean extends Column
     protected $type = 'TINYINT';
 
     /**
-     * @return array
+     * {@inheritDoc}
      */
-    public function getExpressionData()
-    {
-        $this->isNullable = false;
+    protected $isNullable = false;
 
-        return parent::getExpressionData();
+    /**
+     * {@inheritDoc}
+     */
+    public function setNullable($nullable)
+    {
+        return parent::setNullable(false);
     }
 }

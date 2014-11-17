@@ -47,7 +47,7 @@ class CreateTableDecoratorTest extends \PHPUnit_Framework_TestCase
         $ct->addColumn($col);
 
         $this->assertEquals(
-            "CREATE TABLE `foo` ( \n    `bar` INTEGER ZEROFILL UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COLUMN_FORMAT FIXED STORAGE MEMORY COMMENT 'baz' \n)",
+            "CREATE TABLE `foo` ( \n    `bar` INTEGER UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'baz' COLUMN_FORMAT FIXED STORAGE MEMORY \n)",
             @$ctd->getSqlString(new Mysql())
         );
     }

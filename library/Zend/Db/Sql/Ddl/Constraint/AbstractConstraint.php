@@ -29,7 +29,7 @@ abstract class AbstractConstraint implements ConstraintInterface
     /**
      * @var string
      */
-    protected $name;
+    protected $name = '';
 
     /**
      * @var array
@@ -42,7 +42,10 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     public function __construct($columns = null, $name = null)
     {
-        (!$columns) ?: $this->setColumns($columns);
+        if ($columns) {
+            $this->setColumns($columns);
+        }
+
         $this->setName($name);
     }
 
@@ -52,7 +55,7 @@ abstract class AbstractConstraint implements ConstraintInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = (string) $name;
         return $this;
     }
 

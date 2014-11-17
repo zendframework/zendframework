@@ -12,23 +12,26 @@ namespace Zend\Db\Sql\Ddl\Column;
 abstract class AbstractPrecisionColumn extends AbstractLengthColumn
 {
     /**
-     * @var int
+     * @var int|null
      */
     protected $decimal;
 
     /**
-     * @param null|string $name
-     * @param int $digits
-     * @param null|int $decimal
+     * {@inheritDoc}
+     *
+     * @param int|null $decimal
+     * @param int      $digits
      */
     public function __construct($name, $digits = null, $decimal = null, $nullable = false, $default = null, array $options = array())
     {
         $this->setDecimal($decimal);
+
         parent::__construct($name, $digits, $nullable, $default, $options);
     }
 
     /**
      * @param  int $digits
+     *
      * @return self
      */
     public function setDigits($digits)
@@ -45,17 +48,18 @@ abstract class AbstractPrecisionColumn extends AbstractLengthColumn
     }
 
     /**
-     * @param int $decimal
+     * @param int|null $decimal
      * @return self
      */
     public function setDecimal($decimal)
     {
-        $this->decimal = $decimal;
+        $this->decimal = null === $decimal ? null : (int) $decimal;
+
         return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getDecimal()
     {
@@ -63,14 +67,14 @@ abstract class AbstractPrecisionColumn extends AbstractLengthColumn
     }
 
     /**
-     * @return string
+     * {@inheritDoc}
      */
     protected function getLengthExpression()
     {
-        $expr = $this->length;
         if ($this->decimal !== null) {
-            $expr .= ',' . $this->decimal;
+            return $this->length . ',' . $this->decimal;
         }
-        return $expr;
+
+        return $this->length;
     }
 }

@@ -691,7 +691,7 @@ class BaseInputFilter implements
      * @param BaseInputFilter $inputFilter
      * @return $this
      */
-    public function mergeInputFilter(BaseInputFilter $inputFilter)
+    public function merge(BaseInputFilter $inputFilter)
     {
         foreach ($inputFilter->getInputs() as $name => $input) {
             $this->add($input, $name);

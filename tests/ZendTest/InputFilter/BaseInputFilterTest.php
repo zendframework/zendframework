@@ -913,7 +913,7 @@ class BaseInputFilterTest extends TestCase
         $filter->setData(array('foo' => 'bar'));
     }
 
-    public function testMergeInputFilter()
+    public function testMerge()
     {
         $expectedFilters = array(
             'foo',
@@ -929,7 +929,7 @@ class BaseInputFilterTest extends TestCase
 
         $chainedInputFilter->add(new Input(), 'baz');
 
-        $inputFilter->mergeInputFilter($chainedInputFilter);
+        $inputFilter->merge($chainedInputFilter);
 
         $this->assertEquals($expectedFilters, array_keys($inputFilter->getInputs()));
     }

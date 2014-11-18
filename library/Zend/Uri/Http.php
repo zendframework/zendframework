@@ -80,13 +80,13 @@ class Http extends Uri
     /**
      * Set the username part (before the ':') of the userInfo URI part
      *
-     * @param  string $user
+     * @param string|null $user
      *
      * @return self
      */
     public function setUser($user)
     {
-        $this->user = (string) $user;
+        $this->user = null === $user ? null : (string) $user;
 
         $this->buildUserInfo();
 
@@ -102,7 +102,7 @@ class Http extends Uri
      */
     public function setPassword($password)
     {
-        $this->password = (string) $password;
+        $this->password = null === $password ? null : (string) $password;
 
         $this->buildUserInfo();
 
@@ -112,7 +112,7 @@ class Http extends Uri
     /**
      * Set the URI User-info part (usually user:password)
      *
-     * @param  string $userInfo
+     * @param  string|null $userInfo
      *
      * @return self
      *
@@ -120,7 +120,7 @@ class Http extends Uri
      */
     public function setUserInfo($userInfo)
     {
-        $this->userInfo = (string) $userInfo;
+        $this->userInfo = null === $userInfo ? null : (string) $userInfo;
 
         $this->parseUserInfo();
 
@@ -154,12 +154,16 @@ class Http extends Uri
     {
         // No user information? we're done
         if (null === $this->userInfo) {
+            $this->setUser(null);
+            $this->setPassword(null);
+
             return;
         }
 
         // If no ':' separator, we only have a username
         if (false === strpos($this->userInfo, ':')) {
             $this->setUser($this->userInfo);
+            $this->setPassword(null);
             return;
         }
 

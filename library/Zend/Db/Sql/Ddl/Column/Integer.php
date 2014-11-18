@@ -11,5 +11,4 @@ namespace Zend\Db\Sql\Ddl\Column;
 
 class Integer extends Column
 {
-
 }

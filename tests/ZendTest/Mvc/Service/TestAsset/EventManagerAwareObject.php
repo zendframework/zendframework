@@ -9,7 +9,6 @@
 
 namespace ZendTest\Mvc\Service\TestAsset;
 
-use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 

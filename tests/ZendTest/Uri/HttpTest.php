@@ -330,4 +330,19 @@ class HttpTest extends TestCase
         $this->assertNull($uri->getPassword());
         $this->assertSame('user', $uri->getUserInfo());
     }
+
+    /**
+     * @group 6886
+     */
+    public function testCanSetNullUserInfo()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+
+        $uri->setUserInfo('user:password');
+        $uri->setUserInfo(null);
+
+        $this->assertNull($uri->getUser());
+        $this->assertNull($uri->getPassword());
+        $this->assertNull($uri->getUserInfo());
+    }
 }

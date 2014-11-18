@@ -252,7 +252,10 @@ class HttpTest extends TestCase
         $uri = new HttpUri('http://zf2_app.local');
         $this->assertTrue($uri->isValid());
     }
-    
+
+    /**
+     * @group 6886
+     */
     public function testCanSetUserAndPasswordWithUserInfo()
     {
         $uri = new HttpUri('http://www.example.com/');
@@ -261,7 +264,10 @@ class HttpTest extends TestCase
         $this->assertEquals('user', $uri->getUser());
         $this->assertEquals('pass', $uri->getPassword());
     }
-    
+
+    /**
+     * @group 6886
+     */
     public function testCanSetUserWithUserInfo()
     {
         $uri = new HttpUri('http://www.example.com/');
@@ -270,7 +276,10 @@ class HttpTest extends TestCase
         $this->assertEquals('user', $uri->getUser());
         $this->assertNull($uri->getPassword());
     }
-    
+
+    /**
+     * @group 6886
+     */
     public function testCanSetUserInfoWithUserAndPassword()
     {
         $uri = new HttpUri('http://www.example.com/');
@@ -281,7 +290,10 @@ class HttpTest extends TestCase
         $this->assertEquals('pass', $uri->getPassword());
         $this->assertEquals('user:pass', $uri->getUserInfo());
     }
-    
+
+    /**
+     * @group 6886
+     */
     public function testCanSetUserInfoWithUser()
     {
         $uri = new HttpUri('http://www.example.com/');

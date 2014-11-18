@@ -259,10 +259,11 @@ class HttpTest extends TestCase
     public function testCanSetUserAndPasswordWithUserInfo()
     {
         $uri = new HttpUri('http://www.example.com/');
+
         $uri->setUserInfo('user:pass');
         
-        $this->assertEquals('user', $uri->getUser());
-        $this->assertEquals('pass', $uri->getPassword());
+        $this->assertSame('user', $uri->getUser());
+        $this->assertSame('pass', $uri->getPassword());
     }
 
     /**
@@ -273,7 +274,7 @@ class HttpTest extends TestCase
         $uri = new HttpUri('http://www.example.com/');
         $uri->setUserInfo('user');
         
-        $this->assertEquals('user', $uri->getUser());
+        $this->assertSame('user', $uri->getUser());
         $this->assertNull($uri->getPassword());
     }
 
@@ -286,9 +287,9 @@ class HttpTest extends TestCase
         $uri->setUser('user');
         $uri->setPassword('pass');
         
-        $this->assertEquals('user', $uri->getUser());
-        $this->assertEquals('pass', $uri->getPassword());
-        $this->assertEquals('user:pass', $uri->getUserInfo());
+        $this->assertSame('user', $uri->getUser());
+        $this->assertSame('pass', $uri->getPassword());
+        $this->assertSame('user:pass', $uri->getUserInfo());
     }
 
     /**
@@ -298,6 +299,6 @@ class HttpTest extends TestCase
     {
         $uri = new HttpUri('http://www.example.com/');
         $uri->setUser('user');
-        $this->assertEquals('user', $uri->getUserInfo());
+        $this->assertSame('user', $uri->getUserInfo());
     }
 }

@@ -81,12 +81,15 @@ class Http extends Uri
      * Set the username part (before the ':') of the userInfo URI part
      *
      * @param  string $user
-     * @return Http
+     *
+     * @return self
      */
     public function setUser($user)
     {
-        $this->user = $user;
+        $this->user = (string) $user;
+
         $this->buildUserInfo();
+
         return $this;
     }
 
@@ -94,12 +97,15 @@ class Http extends Uri
      * Set the password part (after the ':') of the userInfo URI part
      *
      * @param  string $password
-     * @return Http
+     *
+     * @return self
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        $this->password = (string) $password;
+
         $this->buildUserInfo();
+
         return $this;
     }
 
@@ -107,14 +113,17 @@ class Http extends Uri
      * Set the URI User-info part (usually user:password)
      *
      * @param  string $userInfo
-     * @return Uri
-     * @throws Exception\InvalidUriPartException If the schema definition
-     * does not have this part
+     *
+     * @return self
+     *
+     * @throws Exception\InvalidUriPartException If the schema definition does not have this part
      */
     public function setUserInfo($userInfo)
     {
-        $this->userInfo = $userInfo;
+        $this->userInfo = (string) $userInfo;
+
         $this->parseUserInfo();
+
         return $this;
     }
 
@@ -155,9 +164,7 @@ class Http extends Uri
         }
 
         // Split on the ':', and set both user and password
-        list($user, $password) = explode(':', $this->userInfo, 2);
-        $this->user = $user;
-        $this->password = $password;
+        list($this->user, $this->password) = explode(':', $this->userInfo, 2);
     }
 
     /**
@@ -169,13 +176,11 @@ class Http extends Uri
      */
     protected function buildUserInfo()
     {
-        $userInfo = $this->user;
-
         if (null !== $this->password) {
-            $userInfo .= ':' . $this->password;
+            $this->userInfo = $this->user . ':' . $this->password;
+        } else {
+            $this->user = $this->user;
         }
-
-        $this->userInfo = $userInfo;
     }
 
     /**

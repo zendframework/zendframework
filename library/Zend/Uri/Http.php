@@ -66,7 +66,7 @@ class Http extends Uri
     {
         return $this->password;
     }
-    
+
     /**
      * Get the User-info (usually user:password) part
      *
@@ -102,7 +102,7 @@ class Http extends Uri
         $this->buildUserInfo();
         return $this;
     }
-    
+
     /**
      * Set the URI User-info part (usually user:password)
      *
@@ -159,22 +159,22 @@ class Http extends Uri
         $this->user = $user;
         $this->password = $password;
     }
-    
+
     /**
      * Build the user info based on user and password
-     * 
+     *
      * Builds the user info based on the given user and password values
-     * 
+     *
      * @return void
      */
     protected function buildUserInfo()
     {
         $userInfo = $this->user;
-        
+
         if (null !== $this->password) {
             $userInfo .= ':' . $this->password;
         }
-        
+
         $this->userInfo = $userInfo;
     }
 

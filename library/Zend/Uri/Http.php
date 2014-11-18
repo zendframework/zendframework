@@ -179,7 +179,7 @@ class Http extends Uri
         if (null !== $this->password) {
             $this->userInfo = $this->user . ':' . $this->password;
         } else {
-            $this->user = $this->user;
+            $this->userInfo = $this->user;
         }
     }
 

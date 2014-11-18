@@ -62,7 +62,7 @@ class Backtrace implements ProcessorInterface
     /**
      * Provide backtrace as slim as possible
      *
-     * @return array
+     * @return array[]
      */
     protected function getBacktrace()
     {

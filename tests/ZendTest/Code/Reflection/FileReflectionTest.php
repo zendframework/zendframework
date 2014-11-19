@@ -92,7 +92,6 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ZendTest\Code\Reflection\TestAsset\TestSampleClass', $reflectionFile->getClass()->getName());
     }
 
-
     public function testFileGetClassThrowsExceptionOnNonExistentClassName()
     {
         $fileToReflect = __DIR__ . '/TestAsset/TestSampleClass.php';

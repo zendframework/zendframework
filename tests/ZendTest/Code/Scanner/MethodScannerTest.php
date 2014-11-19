@@ -83,4 +83,17 @@ class MethodScannerTest extends TestCase
         $optionalValue = $paramTwo->getDefaultValue();
         $this->assertEquals('array(array(array(\'default\')))', $optionalValue);
     }
+
+    /**
+     * @group issue-6893
+     */
+    public function testMethodScannerWorksWithSingleAbstractFunction()
+    {
+        $file = new FileScanner(__DIR__ . '/../TestAsset/AbstractClass.php');
+
+        $class = $file->getClass('ZendTest\Code\TestAsset\AbstractClass');
+        $method = $class->getMethod('helloWorld');
+
+        $this->assertTrue($method->isAbstract());
+    }
 }

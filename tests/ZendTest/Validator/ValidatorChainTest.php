@@ -160,6 +160,32 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('isEmpty', $messages);
     }
 
+    /**
+     * @group 6386
+     * @group 6496
+     */
+    public function testValidatorsAreExecutedAccordingToPriority()
+    {
+        $this->validator->attach($this->getValidatorTrue(), false, 1000)
+                        ->attach($this->getValidatorFalse(), true, 2000);
+        $this->assertFalse($this->validator->isValid(true));
+        $messages = $this->validator->getMessages();
+        $this->assertArrayHasKey('error', $messages);
+    }
+
+    /**
+     * @group 6386
+     * @group 6496
+     */
+    public function testPrependValidatorsAreExecutedAccordingToPriority()
+    {
+        $this->validator->attach($this->getValidatorTrue(), false, 1000)
+            ->prependValidator($this->getValidatorFalse(), true);
+        $this->assertFalse($this->validator->isValid(true));
+        $messages = $this->validator->getMessages();
+        $this->assertArrayHasKey('error', $messages);
+    }
+
     public function testCountGivesCountOfAttachedValidators()
     {
         $this->populateValidatorChain();

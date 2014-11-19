@@ -129,14 +129,14 @@ class Part
     public function getContent($EOL = Mime::LINEEND)
     {
         if ($this->isStream) {
-            $encodedStream = $this->getEncodedStream($EOL);
+            $encodedStream         = $this->getEncodedStream($EOL);
             $encodedStreamContents = stream_get_contents($encodedStream);
-            $streamMetaData = stream_get_meta_data($encodedStream);
-            if (isset($streamMetaData['seekable'])) {
-                if ($streamMetaData['seekable']) {
-                    rewind($encodedStream);
-                }
+            $streamMetaData        = stream_get_meta_data($encodedStream);
+
+            if (isset($streamMetaData['seekable']) && $streamMetaData['seekable']) {
+                rewind($encodedStream);
             }
+
             return $encodedStreamContents;
         }
         return Mime::encode($this->content, $this->encoding, $EOL);

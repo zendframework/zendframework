@@ -260,6 +260,20 @@ class ArrayUtilsTest extends TestCase
                     'god' => null
                 )
             ),
+            'remove-key' => array(
+                array(
+                    'foo' => 'bar',
+                    'bar' => 'bat'
+                ),
+                array(
+                    'foo' => new \Zend\Stdlib\ArrayUtilsRemoveKey(),
+                    'baz' => new \Zend\Stdlib\ArrayUtilsRemoveKey(),
+                ),
+                false,
+                array(
+                    'bar' => 'bat'
+                )
+            ),
         );
     }
 

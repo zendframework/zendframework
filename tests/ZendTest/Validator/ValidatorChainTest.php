@@ -91,6 +91,20 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group 6386
+     * @group 6496
+     */
+    public function testRejectsNonCallableValidator()
+    {
+        $this->setExpectedException(
+            'Zend\Validator\Exception\InvalidArgumentException',
+            'Expected a valid PHP callable or Zend\Validator\ValidatorInterface; "string" received'
+        );
+
+        $this->validator->attach(uniqid('nonExisting'));
+    }
+
+    /**
      * Ensures that a validator may break the chain
      *
      * @return void

@@ -9,11 +9,6 @@
 
 namespace Zend\Stdlib;
 
-/**
- * ArrayUtilsRemoveKey
- *
- * @author Witold Wasiczko <witold.wasiczko@rst.com.pl>
- */
 class ArrayUtilsRemoveKey
 {
 

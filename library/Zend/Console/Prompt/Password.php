@@ -14,7 +14,7 @@ class Password extends AbstractPrompt
     /**
      * @var string
      */
-    protected $promptText = 'Password : ';
+    protected $promptText = 'Password: ';
 
     /**
      * @var bool
@@ -33,7 +33,7 @@ class Password extends AbstractPrompt
      * @param bool   $echo         Display the selection after user presses key
      */
     public function __construct(
-        $promptText = 'Password : ',
+        $promptText = 'Password: ',
         $echo = true
     ) {
 

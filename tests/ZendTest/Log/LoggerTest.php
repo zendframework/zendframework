@@ -454,7 +454,10 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
         $self = $this;
         register_shutdown_function(function () use ($writer, $self) {
-            $self->assertEquals($writer->events[0]['message'], 'Call to undefined method ZendTest\Log\LoggerTest::callToNonExistingMethod()');
+            $self->assertEquals(
+                'Call to undefined method ZendTest\Log\LoggerTest::callToNonExistingMethod()',
+                $writer->events[0]['message']
+            );
         });
 
         // Temporary hide errors, because we don't want the fatal error to fail the test
@@ -480,9 +483,9 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
         $self = $this;
         register_shutdown_function(function () use ($writer, $self) {
-            $self->assertEquals(
-                $writer->events[0]['message'],
-                'syntax error, unexpected \'::\' (T_PAAMAYIM_NEKUDOTAYIM)'
+            $self->assertStringMatchesFormat(
+                'syntax error%A',
+                $writer->events[0]['message']
             );
         });
 

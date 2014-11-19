@@ -27,26 +27,26 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         $this->serviceManager = new ServiceManager;
-        $this->pluginManager = new FooPluginManager(new Config(array(
-            'factories' => array(
+        $this->pluginManager = new FooPluginManager(new Config([
+            'factories' => [
                 'Foo' => 'ZendTest\ServiceManager\TestAsset\FooFactory',
-            ),
-            'shared' => array(
+            ],
+            'shared' => [
                 'Foo' => false,
-            ),
-        )));
+            ],
+        ]));
     }
 
     public function testSetMultipleCreationOptions()
     {
-        $pluginManager = new FooPluginManager(new Config(array(
-            'factories' => array(
+        $pluginManager = new FooPluginManager(new Config([
+            'factories' => [
                 'Foo' => 'ZendTest\ServiceManager\TestAsset\FooFactory'
-            ),
-            'shared' => array(
+            ],
+            'shared' => [
                 'Foo' => false
-            )
-        )));
+            ]
+        ]));
 
         $refl         = new ReflectionClass($pluginManager);
         $reflProperty = $refl->getProperty('factories');
@@ -55,24 +55,36 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $value = $reflProperty->getValue($pluginManager);
         $this->assertInternalType('string', $value['foo']);
 
-        $pluginManager->get('Foo', array('key1' => 'value1'));
+        $pluginManager->get('Foo', ['key1' => 'value1']);
 
         $value = $reflProperty->getValue($pluginManager);
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\FooFactory', $value['foo']);
-        $this->assertEquals(array('key1' => 'value1'), $value['foo']->getCreationOptions());
+        $this->assertEquals(['key1' => 'value1'], $value['foo']->getCreationOptions());
 
-        $pluginManager->get('Foo', array('key2' => 'value2'));
+        $pluginManager->get('Foo', ['key2' => 'value2']);
 
         $value = $reflProperty->getValue($pluginManager);
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\FooFactory', $value['foo']);
-        $this->assertEquals(array('key2' => 'value2'), $value['foo']->getCreationOptions());
+        $this->assertEquals(['key2' => 'value2'], $value['foo']->getCreationOptions());
+    }
+
+    /**
+     * @group issue-4208
+     */
+    public function testGetFaultyRegisteredInvokableThrowsException()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
+
+        $pluginManager = new FooPluginManager();
+        $pluginManager->setInvokableClass('helloWorld', 'IDoNotExist');
+        $pluginManager->get('helloWorld');
     }
 
     public function testAbstractFactoryWithMutableCreationOptions()
     {
-        $creationOptions = array('key1' => 'value1');
+        $creationOptions = ['key1' => 'value1'];
         $mock = 'ZendTest\ServiceManager\TestAsset\AbstractFactoryWithMutableCreationOptions';
-        $abstractFactory = $this->getMock($mock, array('setCreationOptions'));
+        $abstractFactory = $this->getMock($mock, ['setCreationOptions']);
         $abstractFactory->expects($this->once())
             ->method('setCreationOptions')
             ->with($creationOptions);
@@ -85,7 +97,7 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
     public function testMutableMethodNeverCalledWithoutCreationOptions()
     {
         $mock = 'ZendTest\ServiceManager\TestAsset\CallableWithMutableCreationOptions';
-        $callable = $this->getMock($mock, array('setCreationOptions'));
+        $callable = $this->getMock($mock, ['setCreationOptions']);
         $callable->expects($this->never())
             ->method('setCreationOptions');
 
@@ -98,9 +110,9 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testCallableObjectWithMutableCreationOptions()
     {
-        $creationOptions = array('key1' => 'value1');
+        $creationOptions = ['key1' => 'value1'];
         $mock = 'ZendTest\ServiceManager\TestAsset\CallableWithMutableCreationOptions';
-        $callable = $this->getMock($mock, array('setCreationOptions'));
+        $callable = $this->getMock($mock, ['setCreationOptions']);
         $callable->expects($this->once())
             ->method('setCreationOptions')
             ->with($creationOptions);
@@ -135,8 +147,8 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
     {
         $delegatorFactory = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
         $pluginManager = $this->getMockForAbstractClass('Zend\ServiceManager\AbstractPluginManager');
-        $realService = $this->getMock('stdClass', array(), array(), 'RealService');
-        $delegator = $this->getMock('stdClass', array(), array(), 'Delegator');
+        $realService = $this->getMock('stdClass', [], [], 'RealService');
+        $delegator = $this->getMock('stdClass', [], [], 'Delegator');
 
         $delegatorFactory
             ->expects($this->once())

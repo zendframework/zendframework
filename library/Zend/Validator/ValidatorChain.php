@@ -195,8 +195,8 @@ class ValidatorChain implements
             $breakChainOnFailure = (bool) $options['breakchainonfailure'];
         }
 
-        $validator = $this->plugin($name, $options);
-        $this->attach($validator, $breakChainOnFailure, $priority);
+        $this->attach($this->plugin($name, $options), $breakChainOnFailure, $priority);
+
         return $this;
     }
 

@@ -202,6 +202,7 @@ class PriorityListTest extends TestCase
     public function testBooleanValuesAreValid()
     {
         $this->list->insert('foo', false, null);
+        $this->list->insert('foo', null, null);
         $this->list->insert('bar', 'test', 1);
         $this->list->insert('baz', true, -1);
 

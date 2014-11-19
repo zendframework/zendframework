@@ -212,6 +212,46 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test we can properly send DELETE parameters with
+     * application/x-www-form-urlencoded content type
+     *
+     * @dataProvider parameterArrayProvider
+     */
+    public function testDeleteData($params)
+    {
+        $client = $this->client;
+        $client->setUri($this->baseuri . 'testDeleteData.php');
+
+        $client->setRawBody(serialize($params));
+
+        $client->setMethod('DELETE');
+        $this->assertEquals($client::ENC_URLENCODED, $this->client->getEncType());
+        $this->assertTrue($client->getRequest()->isDelete());
+        $res = $this->client->send();
+        $this->assertEquals(serialize($params), $res->getBody(), "DELETE data integrity test failed");
+    }
+
+    /**
+     * Test we can properly send OPTIONS parameters with
+     * application/x-www-form-urlencoded content type
+     *
+     * @dataProvider parameterArrayProvider
+     */
+    public function testOptionsData($params)
+    {
+        $client = $this->client;
+        $client->setUri($this->baseuri . 'testOptionsData.php');
+
+        $client->setRawBody(serialize($params));
+
+        $client->setMethod('OPTIONS');
+        $this->assertEquals($client::ENC_URLENCODED, $this->client->getEncType());
+        $this->assertTrue($client->getRequest()->isOptions());
+        $res = $this->client->send();
+        $this->assertEquals(serialize($params), $res->getBody(), "OPTIONS data integrity test failed");
+    }
+
+    /**
      * Test we can properly send POST parameters with
      * multipart/form-data content type
      *

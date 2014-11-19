@@ -348,9 +348,19 @@ class Client implements Stdlib\DispatchableInterface
     {
         $method = $this->getRequest()->setMethod($method)->getMethod();
 
-        if (($method == Request::METHOD_POST || $method == Request::METHOD_PUT ||
-             $method == Request::METHOD_DELETE || $method == Request::METHOD_PATCH)
-             && empty($this->encType)) {
+        if (empty($this->encType)
+            && in_array(
+                $method,
+                array(
+                    Request::METHOD_POST,
+                    Request::METHOD_PUT,
+                    Request::METHOD_DELETE,
+                    Request::METHOD_PATCH,
+                    Request::METHOD_OPTIONS,
+                ),
+                true
+            )
+        ) {
             $this->setEncType(self::ENC_URLENCODED);
         }
 

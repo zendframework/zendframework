@@ -7,8 +7,8 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Stdlib;
+namespace Zend\Stdlib\ArrayUtils;
 
-final class ArrayUtilsRemoveKey
+final class MergeRemoveKey
 {
 }

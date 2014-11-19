@@ -266,8 +266,8 @@ class ArrayUtilsTest extends TestCase
                     'bar' => 'bat'
                 ),
                 array(
-                    'foo' => new \Zend\Stdlib\ArrayUtilsRemoveKey(),
-                    'baz' => new \Zend\Stdlib\ArrayUtilsRemoveKey(),
+                    'foo' => new \Zend\Stdlib\ArrayUtils\MergeRemoveKey(),
+                    'baz' => new \Zend\Stdlib\ArrayUtils\MergeRemoveKey(),
                 ),
                 false,
                 array(

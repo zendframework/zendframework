@@ -261,6 +261,31 @@ class ArrayUtilsTest extends TestCase
                     'god' => null
                 )
             ),
+            'replace-key' => array(
+                array(
+                    'car' => array(
+                        'boo' => 'foo',
+                        'doo' => 'moo',
+                    ),
+                ),
+                array(
+                    'car' => new \Zend\Stdlib\ArrayUtilsReplaceKey(array(
+                        'met' => 'bet',
+                    )),
+                    'new' => new \Zend\Stdlib\ArrayUtilsReplaceKey(array(
+                        'foo' => 'get',
+                    )),
+                ),
+                false,
+                array(
+                    'car' => array(
+                        'met' => 'bet',
+                    ),
+                    'new' => array(
+                        'foo' => 'get',
+                    ),
+                )
+            ),
         );
     }
 

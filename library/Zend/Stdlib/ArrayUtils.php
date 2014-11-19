@@ -259,7 +259,9 @@ abstract class ArrayUtils
     {
         foreach ($b as $key => $value) {
             if (isset($a[$key]) || array_key_exists($key, $a)) {
-                if ($value instanceof MergeRemoveKey) {
+                if ($value instanceof ArrayUtilsReplaceKey) {
+                    $a[$key] = $value->getData();
+                } elseif ($value instanceof MergeRemoveKey) {
                     unset($a[$key]);
                 } elseif (!$preserveNumericKeys && is_int($key)) {
                     $a[] = $value;

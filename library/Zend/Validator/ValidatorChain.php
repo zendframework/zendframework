@@ -102,22 +102,22 @@ class ValidatorChain implements
      * If $breakChainOnFailure is true, then if the validator fails, the next validator in the chain,
      * if one exists, will not be executed.
      *
-     * @param  callable|ValidatorInterface      $callback A Validator implementation or valid PHP callback
-     * @param  bool                 $breakChainOnFailure
-     * @param  int $priority Priority at which to enqueue validator; defaults to 1000 (higher executes earlier)
+     * @param  callable|ValidatorInterface $callback A Validator implementation or valid PHP callback
+     * @param  bool                        $breakChainOnFailure
+     * @param  int                         $priority            Priority at which to enqueue validator; defaults to
+     *                                                          1 (higher executes earlier)
+     *
      * @throws Exception\InvalidArgumentException
+     *
      * @return self
      */
     public function attach($callback, $breakChainOnFailure = false, $priority = self::DEFAULT_PRIORITY)
     {
-        if (!is_callable($callback)) {
-            if (!$callback instanceof ValidatorInterface || !is_array($callback)) {
-                throw new Exception\InvalidArgumentException(sprintf(
-                    'Expected a valid PHP callback; received "%s"',
-                    (is_object($callback) ? get_class($callback) : gettype($callback))
-                ));
-            }
-            $callback = array($callback, 'validator');
+        if (! ($callback instanceof ValidatorInterface || is_callable($callback))) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected a valid PHP callable or Zend\Validator\ValidatorInterface; "%s" received',
+                is_object($callback) ? get_class($callback) : gettype($callback)
+            ));
         }
 
         $this->validators->insert(
@@ -127,6 +127,7 @@ class ValidatorChain implements
             ),
             $priority
         );
+
         return $this;
     }
 

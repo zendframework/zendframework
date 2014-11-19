@@ -398,7 +398,6 @@ class FormInputTest extends CommonTestCase
     public function booleanAttributeTypes()
     {
         return array(
-            array('autocomplete', 'on', 'off'),
             array('autofocus', 'autofocus', ''),
             array('disabled', 'disabled', ''),
             array('multiple', 'multiple', ''),

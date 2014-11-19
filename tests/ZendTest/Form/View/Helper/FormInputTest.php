@@ -336,10 +336,10 @@ class FormInputTest extends CommonTestCase
         $markup  = $this->helper->render($element);
         switch ($attribute) {
             case 'value':
-                $expect  = sprintf('%s="%s"', $attribute, $element->getValue());
+                $expect  = sprintf(' %s="%s"', $attribute, $element->getValue());
                 break;
             default:
-                $expect  = sprintf('%s="%s"', $attribute, $element->getAttribute($attribute));
+                $expect  = sprintf(' %s="%s"', $attribute, $element->getAttribute($attribute));
                 break;
         }
         $this->$assertion($expect, $markup);
@@ -390,6 +390,11 @@ class FormInputTest extends CommonTestCase
         $this->assertContains('/>', $markup);
     }
 
+    /**
+     * Data provider
+     *
+     * @return string[][]
+     */
     public function booleanAttributeTypes()
     {
         return array(

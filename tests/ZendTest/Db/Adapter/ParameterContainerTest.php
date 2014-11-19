@@ -64,13 +64,14 @@ class ParameterContainerTest extends \PHPUnit_Framework_TestCase
         $this->parameterContainer->offsetSet('boo', 'baz');
         $this->assertEquals('baz', $this->parameterContainer->offsetGet('boo'));
 
-        $this->parameterContainer->offsetSet('1', 'book', ParameterContainer::TYPE_STRING);
+        $this->parameterContainer->offsetSet('1', 'book', ParameterContainer::TYPE_STRING, 4);
         $this->assertEquals(
             array('foo' => 'bar', 'boo' => 'baz', '1' => 'book'),
             $this->parameterContainer->getNamedArray()
         );
 
         $this->assertEquals('string', $this->parameterContainer->offsetGetErrata('1'));
+        $this->assertEquals(4, $this->parameterContainer->offsetGetMaxLength('1'));
 
         // test that setting an index applies to correct named parameter
         $this->parameterContainer[0] = 'Zero';

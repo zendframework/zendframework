@@ -68,6 +68,18 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('key2' => 'value2'), $value['foo']->getCreationOptions());
     }
 
+    /**
+     * @group issue-4208
+     */
+    public function testGetFaultyRegisteredInvokableThrowsException()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
+
+        $pluginManager = new FooPluginManager();
+        $pluginManager->setInvokableClass('helloWorld', 'IDoNotExist');
+        $pluginManager->get('helloWorld');
+    }
+
     public function testAbstractFactoryWithMutableCreationOptions()
     {
         $creationOptions = array('key1' => 'value1');

@@ -164,6 +164,16 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
     {
         $invokable = $this->invokableClasses[$canonicalName];
 
+        if (!class_exists($invokable)) {
+            throw new Exception\ServiceNotFoundException(sprintf(
+                '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
+                get_class($this) . '::' . __FUNCTION__,
+                $canonicalName,
+                ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
+                $invokable
+            ));
+        }
+
         if (null === $this->creationOptions
             || (is_array($this->creationOptions) && empty($this->creationOptions))
         ) {

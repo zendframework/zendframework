@@ -219,7 +219,7 @@ class FormInputTest extends CommonTestCase
             'accept'             => 'value',
             'accesskey'          => 'value',
             'alt'                => 'value',
-            'autocomplete'       => 'on',
+            'autocomplete'       => 'postal-code',
             'autofocus'          => 'autofocus',
             'checked'            => 'checked',
             'class'              => 'value',

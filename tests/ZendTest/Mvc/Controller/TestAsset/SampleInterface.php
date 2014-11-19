@@ -10,4 +10,5 @@
 namespace ZendTest\Mvc\Controller\TestAsset;
 
 interface SampleInterface
-{}
+{
+}

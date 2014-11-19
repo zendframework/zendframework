@@ -9,7 +9,6 @@
 
 namespace Zend\Stdlib;
 
-class ArrayUtilsRemoveKey
+final class ArrayUtilsRemoveKey
 {
-
 }

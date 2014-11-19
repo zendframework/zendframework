@@ -1053,4 +1053,74 @@ class CollectionTest extends TestCase
         $collection->setObject($arrayCollection);
         $this->assertEquals(3, $collection->getCount());
     }
+    
+    /**
+     * @group zf6263
+     * @group zf6518
+     */
+    public function testCollectionProperlyHandlesAddingObjectsOfTypeElementInterface()
+    {
+        $form = new Form('test');
+        $text = new Element\Text('text');
+        $form->add(array(
+            'name' => 'text',
+            'type' => 'Zend\Form\Element\Collection',
+            'options' => array(
+                'target_element' => $text, 'count' => 2,
+            ),
+        ));
+        $object = new \ArrayObject(array('text' => array('Foo', 'Bar')));
+        $form->bind($object);
+        $this->assertTrue($form->isValid());
+        
+        $result = $form->getData();
+        $this->assertInstanceOf('ArrayAccess', $result);
+        $this->assertArrayHasKey('text', $result);
+        $this->assertInternalType('array', $result['text']);
+        $this->assertArrayHasKey(0, $result['text']);
+        $this->assertEquals('Foo', $result['text'][0]);
+        $this->assertArrayHasKey(1, $result['text']);
+        $this->assertEquals('Bar', $result['text'][1]);
+    }
+    
+    /**
+     * Unit test to ensure behavior of extract() method is unaffected by refactor
+     *
+     * @group zf6263
+     * @group zf6518
+     */
+    public function testCollectionShouldSilentlyIgnorePopulatingFieldsetWithDisallowedObject()
+    {
+        $mainFieldset = new Fieldset();
+        $mainFieldset->add(new Element\Text('test'));
+        $mainFieldset->setObject(new \ArrayObject());
+        $mainFieldset->setHydrator(new ObjectPropertyHydrator());
+
+        $form = new Form();
+        $form->setObject(new \stdClass());
+        $form->setHydrator(new ObjectPropertyHydrator());
+        $form->add(array(
+            'name' => 'collection',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $mainFieldset,
+                'count' => 2
+            ),
+        ));
+        
+        $model = new \stdClass();
+        $model->collection = array(new \ArrayObject(array('test' => 'bar')), new \stdClass());
+        
+        $form->bind($model);
+        $this->assertTrue($form->isValid());
+        
+        $result = $form->getData();
+        $this->assertInstanceOf('stdClass', $result);
+        $this->assertObjectHasAttribute('collection', $result);
+        $this->assertInternalType('array', $result->collection);
+        $this->assertCount(1, $result->collection);
+        $this->assertInstanceOf('ArrayObject', $result->collection[0]);
+        $this->assertArrayHasKey('test', $result->collection[0]);
+        $this->assertEquals('bar', $result->collection[0]['test']);
+    }
 }

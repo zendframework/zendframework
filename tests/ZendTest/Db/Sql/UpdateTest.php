@@ -235,6 +235,19 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group 6768
+     * @group 6773
+     */
+    public function testGetSqlStringForFalseUpdateValueParameter()
+    {
+        $this->update = new Update;
+        $this->update->table(new TableIdentifier('foo', 'sch'))
+            ->set(array('bar' => false, 'boo' => 'test', 'bam' => true))
+            ->where('x = y');
+        $this->assertEquals('UPDATE "sch"."foo" SET "bar" = \'\', "boo" = \'test\', "bam" = \'1\' WHERE x = y', $this->update->getSqlString(new TrustingSql92Platform()));
+    }
+
+    /**
      * @covers Zend\Db\Sql\Update::__get
      */
     public function testGetUpdate()

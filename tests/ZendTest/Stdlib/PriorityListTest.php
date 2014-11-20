@@ -197,7 +197,8 @@ class PriorityListTest extends TestCase
     }
 
     /**
-     * @group ZF2-6768
+     * @group 6768
+     * @group 6773
      */
     public function testBooleanValuesAreValid()
     {

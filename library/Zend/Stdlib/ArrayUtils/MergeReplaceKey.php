@@ -7,9 +7,9 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Stdlib;
+namespace Zend\Stdlib\ArrayUtils;
 
-class ArrayUtilsReplaceKey
+class MergeReplaceKey
 {
     /**
      * @var mixed

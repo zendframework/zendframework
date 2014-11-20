@@ -258,10 +258,10 @@ abstract class ArrayUtils
     public static function merge(array $a, array $b, $preserveNumericKeys = false)
     {
         foreach ($b as $key => $value) {
-            if (isset($a[$key]) || array_key_exists($key, $a)) {
-                if ($value instanceof ArrayUtilsReplaceKey) {
-                    $a[$key] = $value->getData();
-                } elseif ($value instanceof MergeRemoveKey) {
+            if ($value instanceof ArrayUtils\MergeReplaceKey) {
+                $a[$key] = $value->getData();
+            } elseif (isset($a[$key]) || array_key_exists($key, $a)) {
+                if ($value instanceof MergeRemoveKey) {
                     unset($a[$key]);
                 } elseif (!$preserveNumericKeys && is_int($key)) {
                     $a[] = $value;

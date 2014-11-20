@@ -55,13 +55,6 @@ class PriorityList implements Iterator, Countable
     protected $sorted = false;
 
     /**
-     * Holds current node, false if current() was invalid
-     *
-     * @var mixed
-     */
-    protected $currentNode = false;
-
-    /**
      * Insert a new item.
      *
      * @param  string  $name

@@ -247,10 +247,10 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
-                    'HTTP_CUSTOM_COUNT'     => '0',
+                    'HTTP_CUSTOM_COUNT'     => 0,
                 ),
                 'Custom-Count',
-                '0'
+                0
             ),
             array(
                 array(
@@ -268,10 +268,10 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
-                    'CONTENT_LENGTH'     => 12,
+                    'CONTENT_LENGTH'     => 0,
                 ),
                 'Content-Length',
-                12
+                0
             ),
             array(
                 array(

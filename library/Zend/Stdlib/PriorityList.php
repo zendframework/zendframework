@@ -227,7 +227,7 @@ class PriorityList implements Iterator, Countable
      */
     public function valid()
     {
-        return $this->current() !== false;
+        return current($this->items) !== false;
     }
 
     /**

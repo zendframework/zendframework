@@ -437,15 +437,7 @@ class ServiceManager implements ServiceLocatorInterface
     {
         $cName = $this->canonicalizeName($name);
 
-        if (!isset($this->shared[$cName])) {
-            return $this->shareByDefault();
-        }
-
-        if (
-            !isset($this->invokableClasses[$cName])
-            && !isset($this->factories[$cName])
-            && !$this->canCreateFromAbstractFactory($cName, $name)
-        ) {
+        if ( ! $this->has($name) ) {
             throw new Exception\ServiceNotFoundException(sprintf(
                 '%s: A service by the name "%s" was not found',
                 get_class($this) . '::' . __FUNCTION__,
@@ -453,6 +445,10 @@ class ServiceManager implements ServiceLocatorInterface
             ));
         }
 
+        if (!isset($this->shared[$cName])) {
+            return $this->shareByDefault();
+        }
+        
         return $this->shared[$cName];
     }
 

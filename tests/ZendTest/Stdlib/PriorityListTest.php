@@ -202,17 +202,27 @@ class PriorityListTest extends TestCase
      */
     public function testBooleanValuesAreValid()
     {
-        $this->list->insert('foo', false, null);
-        $this->list->insert('foo', null, null);
-        $this->list->insert('bar', 'test', 1);
-        $this->list->insert('baz', true, -1);
+        $this->list->insert('null', null, null);
+        $this->list->insert('false', false, null);
+        $this->list->insert('string', 'test', 1);
+        $this->list->insert('true', true, -1);
 
-        $orders = array();
+        $orders1 = array();
+        $orders2 = array();
 
         foreach ($this->list as $key => $value) {
-            $orders[] = $value;
+            $orders1[$this->list->key()] = $this->list->current();
+            $orders2[$key] = $value;
         }
-
-        $this->assertEquals(array('test', false, true), $orders);
+        $this->assertEquals($orders1, $orders2);
+        $this->assertEquals(
+            array(
+                'null'   => null,
+                'false'  => false,
+                'string' => 'test',
+                'true'   => true,
+            ),
+            $orders2
+        );
     }
 }

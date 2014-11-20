@@ -371,6 +371,8 @@ class Part implements RecursiveIterator, Part\PartInterface
      *
      * This method is short syntax for Part::hasHeader($name);
      *
+     * @see Part::hasHeader
+     * 
      * @param  string
      * @return bool
      */

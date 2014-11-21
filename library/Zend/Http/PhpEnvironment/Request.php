@@ -216,8 +216,7 @@ class Request extends HttpRequest
         $headers = array();
 
         foreach ($server as $key => $value) {
-            if ((is_array($value) && $value) || (strlen($value)))
-            {
+            if ((is_array($value) && $value) || (!is_array($value) && strlen($value))) {
                 if (strpos($key, 'HTTP_') === 0) {
                     if (strpos($key, 'HTTP_COOKIE') === 0) {
                         // Cookies are handled using the $_COOKIE superglobal

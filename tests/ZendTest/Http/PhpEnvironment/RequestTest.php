@@ -268,6 +268,13 @@ class RequestTest extends TestCase
             ),
             array(
                 array(
+                    'CONTENT_LENGTH'     => 12,
+                ),
+                'Content-Length',
+                12
+            ),
+            array(
+                array(
                     'CONTENT_MD5'     => md5('a'),
                 ),
                 'Content-MD5',

@@ -9,6 +9,8 @@
 
 namespace ZendTest\Validator;
 
+use Zend\Stdlib\Parameters;
+use Zend\Validator\Exception\InvalidArgumentException;
 use Zend\Validator\Identical;
 
 /**
@@ -144,6 +146,21 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
             'harry@hoe.com',
             array('email' => 'john@doe.com')
         ));
+
+        $this->assertTrue($this->validator->isValid(
+            'john@doe.com',
+            new Parameters(array('email' => 'john@doe.com'))
+        ));
+
+        $this->assertFalse($this->validator->isValid(
+            'john@doe.com',
+            new Parameters(array('email' => 'harry@hoe.com'))
+        ));
+
+        $this->assertFalse($this->validator->isValid(
+            'harry@hoe.com',
+            new Parameters(array('email' => 'john@doe.com'))
+        ));
     }
 
     public function testValidatingArrayTokenInContext()
@@ -176,6 +193,33 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
                 )
             )
         ));
+
+        $this->assertTrue($this->validator->isValid(
+            'john@doe.com',
+            new Parameters(array(
+                'user' => array(
+                    'email' => 'john@doe.com'
+                )
+            ))
+        ));
+
+        $this->assertFalse($this->validator->isValid(
+            'john@doe.com',
+            new Parameters(array(
+                'user' => array(
+                    'email' => 'harry@hoe.com'
+                )
+            ))
+        ));
+
+        $this->assertFalse($this->validator->isValid(
+            'harry@hoe.com',
+            new Parameters(array(
+                'user' => array(
+                    'email' => 'john@doe.com'
+                )
+            ))
+        ));
     }
 
     public function testCanSetLiteralParameterThroughConstructor()
@@ -206,5 +250,29 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
             array('foo' => 'bar'),
             array('foo' => 'baz') // Provide a context to make sure the literal parameter will work
         ));
+    }
+
+    /**
+     * @dataProvider invalidContextProvider
+     *
+     * @param mixed $context
+     */
+    public function testIsValidThrowsExceptionOnInvalidContext($context)
+    {
+        $this->setExpectedException('Zend\\Validator\\Exception\\InvalidArgumentException');
+
+        $this->validator->isValid('john@doe.com', $context);
+    }
+
+    /**
+     * @return mixed[][]
+     */
+    public function invalidContextProvider()
+    {
+        return array(
+            array(false),
+            array(new \stdClass()),
+            array('dummy'),
+        );
     }
 }

@@ -38,7 +38,10 @@ class AbstractControllerTest extends TestCase
         /* @var $eventManager \Zend\EventManager\EventManagerInterface|\PHPUnit_Framework_MockObject_MockObject */
         $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
 
-        $eventManager->expects($this->once())->method('setIdentifiers')->with($this->countOf(4));
+        $eventManager
+            ->expects($this->once())
+            ->method('setIdentifiers')
+            ->with($this->logicalNot($this->contains('customEventIdentifier')));
 
         $this->controller->setEventManager($eventManager);
     }
@@ -51,10 +54,7 @@ class AbstractControllerTest extends TestCase
         /* @var $eventManager \Zend\EventManager\EventManagerInterface|\PHPUnit_Framework_MockObject_MockObject */
         $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
 
-        $eventManager->expects($this->once())->method('setIdentifiers')->with($this->logicalAnd(
-                $this->countOf(5),
-                $this->contains('customEventIdentifier')
-            ));
+        $eventManager->expects($this->once())->method('setIdentifiers')->with($this->contains('customEventIdentifier'));
 
         $reflection = new ReflectionProperty($this->controller, 'eventIdentifier');
 
@@ -73,7 +73,6 @@ class AbstractControllerTest extends TestCase
         $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
 
         $eventManager->expects($this->once())->method('setIdentifiers')->with($this->logicalAnd(
-            $this->countOf(6),
             $this->contains('customEventIdentifier1'),
             $this->contains('customEventIdentifier2')
         ));

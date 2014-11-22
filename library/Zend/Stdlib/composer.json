@@ -24,7 +24,8 @@
     "suggest": {
         "zendframework/zend-eventmanager": "To support aggregate hydrator usage",
         "zendframework/zend-serializer": "Zend\\Serializer component",
-        "zendframework/zend-servicemanager": "To support hydrator plugin manager usage"
+        "zendframework/zend-servicemanager": "To support hydrator plugin manager usage",
+        "zendframework/zend-filter": "To support hydrator ClassMethods"
     },
     "extra": {
         "branch-alias": {

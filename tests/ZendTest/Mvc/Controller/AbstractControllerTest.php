@@ -11,7 +11,6 @@ namespace ZendTest\Mvc\Controller;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use ReflectionProperty;
-use Zend\Http\Response;
 
 /**
  * @covers \Zend\Mvc\Controller\AbstractController

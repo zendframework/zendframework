@@ -262,7 +262,7 @@ class ValidatorChain implements
     public function merge(ValidatorChain $validatorChain)
     {
         foreach ($validatorChain->validators->toArray(PriorityQueue::EXTR_BOTH) as $item) {
-            $this->attach($item['data'], $item['priority']);
+            $this->attach($item['data']['instance'], $item['data']['breakChainOnFailure'], $item['priority']);
         }
 
         return $this;
@@ -297,6 +297,14 @@ class ValidatorChain implements
     public function __invoke($value)
     {
         return $this->isValid($value);
+    }
+
+    /**
+     * Deep clone handling
+     */
+    public function __clone()
+    {
+        $this->validators = clone $this->validators;
     }
 
     /**

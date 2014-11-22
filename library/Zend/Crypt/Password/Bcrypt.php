@@ -33,7 +33,12 @@ class Bcrypt implements PasswordInterface
      * @var string
      */
     protected $salt;
-
+    
+    /**
+     * @var bool
+     */
+    protected $backwardCompatibility = false;
+    
     /**
      * Constructor
      *
@@ -164,5 +169,29 @@ class Bcrypt implements PasswordInterface
     public function getSalt()
     {
         return $this->salt;
+    }
+    
+    /**
+     * Set the backward compatibility $2a$ instead of $2y$ for PHP 5.3.7+
+     *
+     * @deprecated since zf 2.3 requires PHP >= 5.3.23
+     * @param bool $value
+     * @return Bcrypt
+     */
+    public function setBackwardCompatibility($value)
+    {
+        $this->backwardCompatibility = (bool) $value;
+        return $this;
+    }
+
+    /**
+     * Get the backward compatibility
+     *
+     * @deprecated since zf 2.3 requires PHP >= 5.3.23
+     * @return bool
+     */
+    public function getBackwardCompatibility()
+    {
+        return $this->backwardCompatibility;
     }
 }

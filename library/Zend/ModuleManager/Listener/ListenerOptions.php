@@ -250,7 +250,11 @@ class ListenerOptions extends AbstractOptions
      */
     public function getConfigCacheFile()
     {
-        return $this->getCacheDir() . '/module-config-cache.' . $this->getConfigCacheKey().'.php';
+        if ($this->getConfigCacheKey()) {
+            return $this->getCacheDir() . '/module-config-cache.' . $this->getConfigCacheKey().'.php';
+        }
+
+        return $this->getCacheDir() . '/module-config-cache.php';
     }
 
     /**
@@ -330,7 +334,11 @@ class ListenerOptions extends AbstractOptions
      */
     public function getModuleMapCacheFile()
     {
-        return $this->getCacheDir() . '/module-classmap-cache.'.$this->getModuleMapCacheKey().'.php';
+        if ($this->getModuleMapCacheKey()) {
+            return $this->getCacheDir() . '/module-classmap-cache.' . $this->getModuleMapCacheKey() . '.php';
+        }
+
+        return $this->getCacheDir() . '/module-classmap-cache.php';
     }
 
     /**

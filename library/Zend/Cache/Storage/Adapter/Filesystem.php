@@ -1460,7 +1460,6 @@ class Filesystem extends AbstractAdapter implements
                 }
 
                 if (!$res) {
-
                     // Issue 6435:
                     // mkdir could fail because of a race condition it was already created by another process
                     // after the first file_exists above ... go to the next path part.

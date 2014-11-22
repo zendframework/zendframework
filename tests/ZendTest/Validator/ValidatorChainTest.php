@@ -186,6 +186,22 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('error', $messages);
     }
 
+    /**
+     * @group 6386
+     * @group 6496
+     */
+    public function testMergeValidatorChains()
+    {
+        $mergedValidatorChain = new ValidatorChain();
+
+        $mergedValidatorChain->attach($this->getValidatorTrue());
+        $this->validator->attach($this->getValidatorTrue());
+
+        $this->validator->merge($mergedValidatorChain);
+
+        $this->assertCount(2, $this->validator->getValidators());
+    }
+
     public function testCountGivesCountOfAttachedValidators()
     {
         $this->populateValidatorChain();

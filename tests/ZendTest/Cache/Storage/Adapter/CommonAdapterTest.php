@@ -1093,6 +1093,9 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_storage->hasItem('key3'));
     }
 
+    /**
+     * @group 6878
+     */
     public function testTaggableFunctionsOnEmptyStorage()
     {
         if (!($this->_storage instanceof TaggableInterface)) {

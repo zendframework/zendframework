@@ -63,10 +63,10 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 
         $this->callableMethodFilter = new OptionalParametersFilter();
 
-        $this->filterComposite->addFilter("is", new IsFilter());
-        $this->filterComposite->addFilter("has", new HasFilter());
-        $this->filterComposite->addFilter("get", new GetFilter());
-        $this->filterComposite->addFilter("parameter", new OptionalParametersFilter(), FilterComposite::CONDITION_AND);
+        $this->filterComposite->addFilter('is', new IsFilter());
+        $this->filterComposite->addFilter('has', new HasFilter());
+        $this->filterComposite->addFilter('get', new GetFilter());
+        $this->filterComposite->addFilter('parameter', new OptionalParametersFilter(), FilterComposite::CONDITION_AND);
     }
 
     /**
@@ -149,7 +149,7 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
             if ($object instanceof FilterProviderInterface) {
                 $filter = new FilterComposite(
                     array($object->getFilter()),
-                    array(new MethodMatchFilter("getFilter"))
+                    array(new MethodMatchFilter('getFilter'))
                 );
             }
 

@@ -429,6 +429,30 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * @param  string $name
+     * @return bool
+     * @throws Exception\ServiceNotFoundException
+     */
+    public function isShared($name)
+    {
+        $cName = $this->canonicalizeName($name);
+
+        if (!$this->has($name)) {
+            throw new Exception\ServiceNotFoundException(sprintf(
+                '%s: A service by the name "%s" was not found',
+                get_class($this) . '::' . __FUNCTION__,
+                $name
+            ));
+        }
+
+        if (!isset($this->shared[$cName])) {
+            return $this->shareByDefault();
+        }
+        
+        return $this->shared[$cName];
+    }
+
+    /**
      * Resolve the alias for the given canonical name
      *
      * @param  string $cName The canonical name to resolve
@@ -967,6 +991,7 @@ class ServiceManager implements ServiceLocatorInterface
     {
         foreach ($this->peeringServiceManagers as $peeringServiceManager) {
             if ($peeringServiceManager->has($name)) {
+                $this->shared[$name] = $peeringServiceManager->isShared($name);
                 return $peeringServiceManager->get($name);
             }
         }
@@ -981,6 +1006,7 @@ class ServiceManager implements ServiceLocatorInterface
 
         foreach ($this->peeringServiceManagers as $peeringServiceManager) {
             if ($peeringServiceManager->has($name)) {
+                $this->shared[$name] = $peeringServiceManager->isShared($name);
                 return $peeringServiceManager->get($name);
             }
         }

@@ -185,15 +185,6 @@ class Curl implements HttpAdapter, StreamInterface
             $this->close();
         }
 
-        // If we are connected to a different server or port, disconnect first
-        if ($this->curl
-            && is_array($this->connectedTo)
-            && ($this->connectedTo[0] != $host
-            || $this->connectedTo[1] != $port)
-        ) {
-            $this->close();
-        }
-
         // Do the actual connection
         $this->curl = curl_init();
         if ($port != 80) {

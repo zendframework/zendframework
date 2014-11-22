@@ -37,11 +37,7 @@ class ArrayMapNamingStrategy implements NamingStrategyInterface
      */
     public function hydrate($name)
     {
-        if (isset($this->hydrationMap[$name])) {
-            return $this->hydrationMap[$name];
-        }
-
-        return $name;
+        return isset($this->hydrationMap[$name]) ? $this->hydrationMap[$name] : $name;
     }
 
     /**
@@ -49,10 +45,6 @@ class ArrayMapNamingStrategy implements NamingStrategyInterface
      */
     public function extract($name)
     {
-        if (isset($this->extractionMap[$name])) {
-            return $this->extractionMap[$name];
-        }
-
-        return $name;
+        return isset($this->extractionMap[$name]) ? $this->extractionMap[$name] : $name;
     }
 }

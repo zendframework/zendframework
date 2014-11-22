@@ -15,28 +15,20 @@ class ArrayMapNamingStrategyTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetSameNameWithEmptyMap()
     {
-        $strategy = new ArrayMapNamingStrategy();
+        $strategy = new ArrayMapNamingStrategy([]);
         $this->assertEquals('some_stuff', $strategy->hydrate('some_stuff'));
         $this->assertEquals('some_stuff', $strategy->extract('some_stuff'));
     }
 
-    public function testSimpleMapping()
+    public function testExtract()
     {
-        $strategy = new ArrayMapNamingStrategy(array('stuff3' => 'stuff4'), array('stuff1' => 'stuff2'));
-        $this->assertEquals('stuff2', $strategy->hydrate('stuff1'));
+        $strategy = new ArrayMapNamingStrategy(array('stuff3' => 'stuff4'));
         $this->assertEquals('stuff4', $strategy->extract('stuff3'));
     }
 
-    public function testBidirectionalMapping()
+    public function testHydrate()
     {
-        $strategy = new ArrayMapNamingStrategy;
-
-        $strategy->setHydrationMap(array('foo' => 'bar'), true);
-        $this->assertEquals('bar', $strategy->hydrate('foo'));
-        $this->assertEquals('foo', $strategy->extract('bar'));
-
-        $strategy->setExtractionMap(array('foo' => 'bar'), true);
-        $this->assertEquals('bar', $strategy->extract('foo'));
+        $strategy = new ArrayMapNamingStrategy(array('foo' => 'bar'));
         $this->assertEquals('foo', $strategy->hydrate('bar'));
     }
 }

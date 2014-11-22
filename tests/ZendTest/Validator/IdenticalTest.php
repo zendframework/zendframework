@@ -253,7 +253,7 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @dataProvider invalidContextProvider
      *
      * @param mixed $context
      */

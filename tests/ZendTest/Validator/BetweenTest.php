@@ -111,7 +111,10 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
      */
     public function testMissingMinOrMax(array $args)
     {
-        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', "Missing option. 'min' and 'max' has to be given");
+        $this->setExpectedException(
+            'Zend\Validator\Exception\InvalidArgumentException',
+            "Missing option. 'min' and 'max' have to be given"
+        );
 
         new Between($args);
     }

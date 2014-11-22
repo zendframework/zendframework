@@ -84,4 +84,25 @@ class AbstractControllerTest extends TestCase
 
         $this->controller->setEventManager($eventManager);
     }
+
+    /**
+     * @group 6615
+     */
+    public function testSetEventManagerWithDefaultIdentifiersIncludesImplementedInterfaces()
+    {
+        /* @var $eventManager \Zend\EventManager\EventManagerInterface|\PHPUnit_Framework_MockObject_MockObject */
+        $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
+
+        $eventManager
+            ->expects($this->once())
+            ->method('setIdentifiers')
+            ->with($this->logicalAnd(
+                $this->contains('Zend\\EventManager\\EventManagerAwareInterface'),
+                $this->contains('Zend\\Stdlib\\DispatchableInterface'),
+                $this->contains('Zend\\Mvc\\InjectApplicationEventInterface'),
+                $this->contains('Zend\\ServiceManager\\ServiceLocatorAwareInterface')
+            ));
+
+        $this->controller->setEventManager($eventManager);
+    }
 }

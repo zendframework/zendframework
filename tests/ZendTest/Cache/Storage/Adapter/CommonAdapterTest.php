@@ -619,12 +619,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             $rs = $this->_storage->getItems(array_keys($items));
             ksort($rs); // make comparable
             $this->assertEquals($items, $rs);
-
         } elseif ($capabilities->getUseRequestTime()) {
             // if the request time will be used as current time all items will
             // be available as expiration doesn't work within the same process
             $this->assertEquals($items, $rs);
-
         } else {
             $this->assertEquals($itemsHigh, $rs);
         }

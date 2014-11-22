@@ -443,7 +443,7 @@ class FilePostRedirectGetTest extends TestCase
                         'name' => 'test.jpg',
                         'type' => 'image/jpeg',
                         'size' => 20480,
-                        'tmp_name' => __DIR__ . '/TestAsset/testfile.jpg',
+                        'tmp_name' => __DIR__ . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'testfile.jpg',
                         'error' => 0
                     ),
                 ),

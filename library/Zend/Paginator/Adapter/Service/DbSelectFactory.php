@@ -34,7 +34,8 @@ class DbSelectFactory implements
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
+     * {@inheritDoc}
+     *
      * @return \Zend\Paginator\Adapter\DbSelect
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

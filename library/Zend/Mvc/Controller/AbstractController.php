@@ -78,7 +78,7 @@ abstract class AbstractController implements
     protected $serviceLocator;
 
     /**
-     * @var string
+     * @var null|string|string[]
      */
     protected $eventIdentifier;
 
@@ -133,7 +133,7 @@ abstract class AbstractController implements
         if (!$this->request) {
             $this->request = new HttpRequest();
         }
-        
+
         return $this->request;
     }
 
@@ -158,16 +158,18 @@ abstract class AbstractController implements
      * @return AbstractController
      */
     public function setEventManager(EventManagerInterface $events)
-    { 
-        $events->setIdentifiers(array(
-            'Zend\Stdlib\DispatchableInterface',
-            __CLASS__,
-            get_class($this),
-            substr(get_class($this), 0, strpos(get_class($this), '\\'))
+    {
+        $className = get_class($this);
+
+        $events->setIdentifiers(array_merge(
+            array(
+                'Zend\Stdlib\DispatchableInterface',
+                __CLASS__,
+                $className,
+                substr($className, 0, strpos($className, '\\'))
+            ),
+            (array) $this->eventIdentifier
         ));
-                
-        $eventIdentifiers = is_array($this->eventIdentifier) ? $this->eventIdentifier : array($this->eventIdentifier);
-        $events->addIdentifiers($eventIdentifiers);
         
         $this->events = $events;
         $this->attachDefaultListeners();

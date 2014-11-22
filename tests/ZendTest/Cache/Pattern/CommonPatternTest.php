@@ -14,7 +14,7 @@ use Zend\Cache;
 /**
  * @group      Zend_Cache
  */
-class CommonPatternTest extends \PHPUnit_Framework_TestCase
+abstract class CommonPatternTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var \Zend\Cache\Pattern\PatternInterface

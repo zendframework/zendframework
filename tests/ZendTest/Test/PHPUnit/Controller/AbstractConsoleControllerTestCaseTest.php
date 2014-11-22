@@ -100,6 +100,9 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->assertEquals("custom text", $routeMatch->getParam('text'));
     }
 
+    /**
+     * @group 6837
+     */
     public function testAssertMatchedArgumentsWithMandatoryValue()
     {
         $this->dispatch("foo --bar='FOO' --baz='ARE'");

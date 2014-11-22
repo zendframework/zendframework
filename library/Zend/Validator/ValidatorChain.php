@@ -262,7 +262,7 @@ class ValidatorChain implements
     public function merge(ValidatorChain $validatorChain)
     {
         foreach ($validatorChain->validators->toArray(PriorityQueue::EXTR_BOTH) as $item) {
-            $this->attach($item['data'], $item['priority']);
+            $this->attach($item['data']['instance'], $item['data']['breakChainOnFailure'], $item['priority']);
         }
 
         return $this;

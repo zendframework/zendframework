@@ -94,7 +94,6 @@ class VersionTest extends \PHPUnit_Framework_TestCase
     /**
      * Run in separate process to avoid Version::$latestParameter caching
      *
-     * @expectedException PHPUnit_Framework_Error_Warning
      * @runInSeparateProcess
      */
     public function testFetchLatestVersionWarnsIfAllowUrlFopenIsDisabled()
@@ -106,13 +105,14 @@ class VersionTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Test only works with allow_url_fopen disabled');
         }
 
-        $actual = Version::getLatest(Version::VERSION_SERVICE_ZEND);
+        $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+
+        Version::getLatest(Version::VERSION_SERVICE_ZEND);
     }
 
     /**
      * Run in separate process to avoid Version::$latestParameter caching
      *
-     * @expectedException PHPUnit_Framework_Error_Warning
      * @runInSeparateProcess
      */
     public function testFetchLatestVersionWarnsIfBadServiceIsPassed()
@@ -121,7 +121,9 @@ class VersionTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Version online tests are not enabled');
         }
 
-        $actual = Version::getLatest('bogus service');
+        $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+
+        Version::getLatest('bogus service');
     }
 
     /**

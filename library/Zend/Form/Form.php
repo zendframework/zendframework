@@ -135,7 +135,7 @@ class Form extends Fieldset implements FormInterface
      * - prefer_form_input_filter: is form input filter is preferred?
      *
      * @param  array|Traversable $options
-     * @return Element|ElementInterface
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setOptions($options)
@@ -164,7 +164,7 @@ class Form extends Fieldset implements FormInterface
      *
      * @param  array|Traversable|ElementInterface $elementOrFieldset
      * @param  array                              $flags
-     * @return \Zend\Form\Fieldset|\Zend\Form\FieldsetInterface|\Zend\Form\FormInterface
+     * @return self
      */
     public function add($elementOrFieldset, array $flags = array())
     {
@@ -193,7 +193,7 @@ class Form extends Fieldset implements FormInterface
      * available, and prepares any elements and/or fieldsets that require
      * preparation.
      *
-     * @return Form
+     * @return self
      */
     public function prepare()
     {
@@ -249,7 +249,7 @@ class Form extends Fieldset implements FormInterface
      * Typically, also passes data on to the composed input filter.
      *
      * @param  array|\ArrayAccess|Traversable $data
-     * @return Form|FormInterface
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setData($data)
@@ -279,7 +279,7 @@ class Form extends Fieldset implements FormInterface
      *
      * @param  object $object
      * @param  int $flags
-     * @return mixed|void
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function bind($object, $flags = FormInterface::VALUES_NORMALIZED)
@@ -393,7 +393,7 @@ class Form extends Fieldset implements FormInterface
      * Set flag indicating whether or not to bind values on successful validation
      *
      * @param  int $bindOnValidateFlag
-     * @return void|Form
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setBindOnValidate($bindOnValidateFlag)
@@ -426,7 +426,7 @@ class Form extends Fieldset implements FormInterface
      * Set the base fieldset to use when hydrating
      *
      * @param  FieldsetInterface $baseFieldset
-     * @return Form
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setBaseFieldset(FieldsetInterface $baseFieldset)
@@ -558,7 +558,7 @@ class Form extends Fieldset implements FormInterface
      * Typically, proxies to the composed input filter
      *
      * @throws Exception\InvalidArgumentException
-     * @return Form|FormInterface
+     * @return self
      */
     public function setValidationGroup()
     {
@@ -647,7 +647,7 @@ class Form extends Fieldset implements FormInterface
      * Set the input filter used by this form
      *
      * @param  InputFilterInterface $inputFilter
-     * @return FormInterface
+     * @return self
      */
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
@@ -701,7 +701,7 @@ class Form extends Fieldset implements FormInterface
      * Set flag indicating whether or not to scan elements and fieldsets for defaults
      *
      * @param  bool $useInputFilterDefaults
-     * @return Form
+     * @return self
      */
     public function setUseInputFilterDefaults($useInputFilterDefaults)
     {
@@ -723,7 +723,7 @@ class Form extends Fieldset implements FormInterface
      * Set flag indicating whether or not to prefer the form input filter over element and fieldset defaults
      *
      * @param  bool $preferFormInputFilter
-     * @return Form
+     * @return self
      */
     public function setPreferFormInputFilter($preferFormInputFilter)
     {
@@ -848,7 +848,7 @@ class Form extends Fieldset implements FormInterface
      * Are the form elements/fieldsets names wrapped by the form name ?
      *
      * @param  bool $wrapElements
-     * @return Form
+     * @return self
      */
     public function setWrapElements($wrapElements)
     {

@@ -174,7 +174,7 @@ class Redis extends AbstractAdapter implements
         $redis = $this->getRedisResource();
 
         $namespacedKeys = array();
-        foreach ($normalizedKeys as & $normalizedKey) {
+        foreach ($normalizedKeys as $normalizedKey) {
             $namespacedKeys[] = $this->namespacePrefix . $normalizedKey;
         }
 
@@ -254,8 +254,8 @@ class Redis extends AbstractAdapter implements
         $ttl   = $this->getOptions()->getTtl();
 
         $namespacedKeyValuePairs = array();
-        foreach ($normalizedKeyValuePairs as $normalizedKey => & $value) {
-            $namespacedKeyValuePairs[$this->namespacePrefix . $normalizedKey] = & $value;
+        foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
+            $namespacedKeyValuePairs[$this->namespacePrefix . $normalizedKey] = $value;
         }
         try {
             if ($ttl > 0) {

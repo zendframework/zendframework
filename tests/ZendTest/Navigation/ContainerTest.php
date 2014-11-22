@@ -224,8 +224,11 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group 6825
+     * @group 4517
+     * @group 3211
      *
-     * @see https://github.com/zendframework/zf2/issues/3211
+     * @link https://github.com/zendframework/zf2/issues/3211
      */
     public function testHasChildrenCompatibility()
     {
@@ -277,6 +280,11 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($page2->hasChildren(), "page2's first child doesn't have children");
     }
 
+    /**
+     * @group 6825
+     * @group 4517
+     * @group 3211
+     */
     public function testDetailedRecursiveIteration()
     {
         $nav = new Navigation\Navigation(array(

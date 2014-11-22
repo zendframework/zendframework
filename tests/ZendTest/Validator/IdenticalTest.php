@@ -254,11 +254,25 @@ class IdenticalTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException InvalidArgumentException
+     *
+     * @param mixed $context
      */
-    public function testIsValidThrowsExceptionOnInvalidContext()
+    public function testIsValidThrowsExceptionOnInvalidContext($context)
     {
-        $this->validator->isValid('john@doe.com', false);
-        $this->validator->isValid('john@doe.com', new \stdClass());
-        $this->validator->isValid('john@doe.com', 'dummy');
+        $this->setExpectedException('Zend\\Validator\\Exception\\InvalidArgumentException');
+
+        $this->validator->isValid('john@doe.com', $context);
+    }
+
+    /**
+     * @return mixed[][]
+     */
+    public function invalidContextProvider()
+    {
+        return array(
+            array(false),
+            array(new \stdClass()),
+            array('dummy'),
+        );
     }
 }

@@ -104,7 +104,7 @@ class DbSelect implements AdapterInterface
         $resultSet->initialize($result);
         
         $items = array();
-        foreach($resultSet as $key => $value) {
+        foreach ($resultSet as $key => $value) {
             $items[$key] = $value;
         }
 

@@ -1061,6 +1061,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped("Storage doesn't implement TaggableInterface");
         }
 
+        // store 3 items and register the current default namespace
         $this->assertSame(array(), $this->_storage->setItems(array(
             'key1' => 'value1',
             'key2' => 'value2',
@@ -1095,6 +1096,20 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_storage->hasItem('key1'));
         $this->assertFalse($this->_storage->hasItem('key2'));
         $this->assertFalse($this->_storage->hasItem('key3'));
+    }
+
+    /**
+     * @group 6878
+     */
+    public function testTaggableFunctionsOnEmptyStorage()
+    {
+        if (!($this->_storage instanceof TaggableInterface)) {
+            $this->markTestSkipped("Storage doesn't implement TaggableInterface");
+        }
+
+        $this->assertFalse($this->_storage->setTags('unknown', array('no')));
+        $this->assertFalse($this->_storage->getTags('unknown'));
+        $this->assertTrue($this->_storage->clearByTags(array('unknown')));
     }
 
     public function testGetTotalSpace()

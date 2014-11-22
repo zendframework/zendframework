@@ -71,7 +71,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
         $this->mockSelect->expects($this->once())->method('limit')->with($this->equalTo(10));
         $this->mockSelect->expects($this->once())->method('offset')->with($this->equalTo(2));
         $items = $this->dbSelect->getItems(2, 10);
-        $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $items);
+        $this->assertEquals(array(), $items);
     }
 
     public function testCount()

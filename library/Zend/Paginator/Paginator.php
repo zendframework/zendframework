@@ -609,16 +609,6 @@ class Paginator implements Countable, IteratorAggregate
             $items = $filter->filter($items);
         }
 
-        if ($items instanceof AbstractResultSet) {
-            $temp = array();
-            foreach ($items as $key => $value) {
-                $temp[$key] = $value;
-            }
-
-            $items = $temp;
-            unset($temp);
-        }
-
         if (!$items instanceof Traversable) {
             $items = new ArrayIterator($items);
         }

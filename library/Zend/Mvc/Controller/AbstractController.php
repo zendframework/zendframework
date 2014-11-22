@@ -78,7 +78,7 @@ abstract class AbstractController implements
     protected $serviceLocator;
 
     /**
-     * @var string
+     * @var null|string|string[]
      */
     protected $eventIdentifier;
 
@@ -159,13 +159,18 @@ abstract class AbstractController implements
      */
     public function setEventManager(EventManagerInterface $events)
     {
-        $events->setIdentifiers(array(
-            'Zend\Stdlib\DispatchableInterface',
-            __CLASS__,
-            get_class($this),
-            $this->eventIdentifier,
-            substr(get_class($this), 0, strpos(get_class($this), '\\'))
+        $className = get_class($this);
+
+        $events->setIdentifiers(array_merge(
+            array(
+                'Zend\Stdlib\DispatchableInterface',
+                __CLASS__,
+                $className,
+                substr($className, 0, strpos($className, '\\'))
+            ),
+            (array) $this->eventIdentifier
         ));
+        
         $this->events = $events;
         $this->attachDefaultListeners();
 

@@ -24,7 +24,7 @@ script:
 
 after_script:
   # Merges the individual clover reports of each component into a single clover.xml
-  - php vendor/bin/phpcov.php --merge --clover build/logs/clover.xml --whitelist library build/coverage
+  - php vendor/bin/phpcov --merge --clover build/logs/clover.xml --whitelist library build/coverage
   - php vendor/bin/coveralls
 
 notifications:

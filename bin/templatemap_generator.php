@@ -182,7 +182,6 @@ foreach ($l as $file) {
     $map->{$mapName} = $filename;
 }
 
-
 if ($appending) {
     $content = var_export((array) $map, true) . ';';
 
@@ -230,7 +229,9 @@ foreach ($matches as $match) {
     $maxWidth = max($maxWidth, strlen($match[1]));
 }
 
-$content = preg_replace('(\n\s+([^=]+)=>)e', "'\n    \\1' . str_repeat(' ', " . $maxWidth . " - strlen('\\1')) . '=>'", $content);
+$content = preg_replace_callback('(\n\s+([^=]+)=>)', function ($matches) use ($maxWidth) {
+    return PHP_EOL . '    ' . $matches[1] . str_repeat(' ', $maxWidth - strlen($matches[1])) . '=>';
+}, $content);
 
 // Make the file end by EOL
 $content = rtrim($content, "\n") . "\n";

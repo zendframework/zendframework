@@ -25,8 +25,7 @@ class DbTableGatewayFactory implements
     protected $creationOptions;
 
     /**
-     * Set creationOptions
-     * @param array $creationOptions
+     * {@inheritDoc}
      */
     public function setCreationOptions(array $creationOptions)
     {
@@ -34,7 +33,8 @@ class DbTableGatewayFactory implements
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
+     * {@inheritDoc}
+     *
      * @return DbTableGateway
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

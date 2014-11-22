@@ -25,8 +25,7 @@ class CallbackFactory implements
     protected $creationOptions;
 
     /**
-     * Set creationOptions
-     * @param array $creationOptions
+     * {@inheritDoc}
      */
     public function setCreationOptions(array $creationOptions)
     {
@@ -34,7 +33,8 @@ class CallbackFactory implements
     }
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
+     * {@inheritDoc}
+     *
      * @return Callback
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

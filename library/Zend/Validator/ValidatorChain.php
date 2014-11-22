@@ -300,6 +300,14 @@ class ValidatorChain implements
     }
 
     /**
+     * Deep clone handling
+     */
+    public function __clone()
+    {
+        $this->validators = clone $this->validators;
+    }
+
+    /**
      * Prepare validator chain for serialization
      *
      * Plugin manager (property 'plugins') cannot

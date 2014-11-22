@@ -35,6 +35,9 @@ class ListenerOptionsTest extends TestCase
         $this->assertSame(array('static', 'custom_paths'), $options->getConfigStaticPaths());
     }
 
+    /**
+     * @group 6552
+     */
     public function testConfigCacheFileWithEmptyCacheKey()
     {
         $options = new ListenerOptions(array(
@@ -50,6 +53,9 @@ class ListenerOptionsTest extends TestCase
         $this->assertEquals(__DIR__ . '/module-config-cache.foo.php', $options->getConfigCacheFile());
     }
 
+    /**
+     * @group 6552
+     */
     public function testModuleMapCacheFileWithEmptyCacheKey()
     {
         $options = new ListenerOptions(array(

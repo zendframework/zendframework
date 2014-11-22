@@ -47,7 +47,7 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
     public function populateValidatorChain()
     {
         $this->validator->attach(new NotEmpty());
-        $this->validator->attach(new Between());
+        $this->validator->attach(new Between(1, 5));
     }
 
     public function testValidatorChainIsEmptyByDefault()

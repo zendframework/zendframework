@@ -94,14 +94,40 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
     public function testEqualsMessageTemplates()
     {
         $validator = new Between(array('min' => 1, 'max' => 10));
-        $this->assertAttributeEquals($validator->getOption('messageTemplates'),
-                                     'messageTemplates', $validator);
+        $this->assertAttributeEquals($validator->getOption('messageTemplates'), 'messageTemplates', $validator);
     }
 
     public function testEqualsMessageVariables()
     {
         $validator = new Between(array('min' => 1, 'max' => 10));
-        $this->assertAttributeEquals($validator->getOption('messageVariables'),
-                                     'messageVariables', $validator);
+        $this->assertAttributeEquals($validator->getOption('messageVariables'), 'messageVariables', $validator);
+    }
+
+    /**
+     * @covers Zend\Validator\Between::__construct()
+     * @dataProvider constructBetweenValidatorInvalidDataProvider
+     *
+     * @param array $args
+     */
+    public function testMissingMinOrMax(array $args)
+    {
+        $this->setExpectedException(
+            'Zend\Validator\Exception\InvalidArgumentException',
+            "Missing option. 'min' and 'max' have to be given"
+        );
+
+        new Between($args);
+    }
+
+    public function constructBetweenValidatorInvalidDataProvider()
+    {
+        return array(
+            array(
+                array('min' => 1),
+            ),
+            array(
+                array('max' => 5),
+            ),
+        );
     }
 }

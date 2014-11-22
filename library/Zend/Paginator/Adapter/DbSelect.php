@@ -89,7 +89,7 @@ class DbSelect implements AdapterInterface
      *
      * @param  int $offset           Page offset
      * @param  int $itemCountPerPage Number of items per page
-     * @return ResultSetInterface
+     * @return array
      */
     public function getItems($offset, $itemCountPerPage)
     {

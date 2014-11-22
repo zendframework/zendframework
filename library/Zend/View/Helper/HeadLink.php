@@ -144,10 +144,9 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
             }
 
             if (1 > $argc) {
-                throw new Exception\BadMethodCallException(sprintf(
-                    '%s requires at least one argument',
-                    $method
-                 ));
+                throw new Exception\BadMethodCallException(
+                    sprintf('%s requires at least one argument', $method)
+                );
             }
 
             if (is_array($args[0])) {
@@ -266,7 +265,6 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         return $this->getContainer()->set($value);
     }
 
-
     /**
      * Create HTML link element from data item
      *
@@ -300,10 +298,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
             return '';
         }
 
-        if (isset($attributes['conditionalStylesheet'])
-            && !empty($attributes['conditionalStylesheet'])
-            && is_string($attributes['conditionalStylesheet'])
-        ) {
+        if (isset($attributes['conditionalStylesheet']) && !empty($attributes['conditionalStylesheet']) && is_string($attributes['conditionalStylesheet'])) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $attributes['conditionalStylesheet']) === '!IE') {
                 $link = '<!-->' . $link . '<!--';

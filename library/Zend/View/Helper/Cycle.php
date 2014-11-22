@@ -88,7 +88,7 @@ class Cycle extends AbstractHelper implements Iterator
      * @param  string $name
      * @return Cycle
      */
-    public function assign(Array $data , $name = self::DEFAULT_NAME)
+    public function assign(array $data, $name = self::DEFAULT_NAME)
     {
         $this->setName($name);
         $this->data[$name] = $data;
@@ -126,7 +126,6 @@ class Cycle extends AbstractHelper implements Iterator
     {
         return $this->name;
     }
-
 
     /**
      * Return all elements

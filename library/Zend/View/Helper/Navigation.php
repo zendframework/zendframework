@@ -201,7 +201,8 @@ class Navigation extends AbstractNavigationHelper
 
         if ($this->getInjectTranslator() && !$helper->hasTranslator()) {
             $helper->setTranslator(
-                $this->getTranslator(), $this->getTranslatorTextDomain()
+                $this->getTranslator(),
+                $this->getTranslatorTextDomain()
             );
         }
     }

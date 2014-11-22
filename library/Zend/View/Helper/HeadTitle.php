@@ -111,9 +111,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
 
         if (null !== ($translator = $this->getTranslator())) {
             foreach ($this as $item) {
-                $items[] = $translator->translate(
-                    $item, $this->getTranslatorTextDomain()
-                );
+                $items[] = $translator->translate($item, $this->getTranslatorTextDomain());
             }
         } else {
             foreach ($this as $item) {

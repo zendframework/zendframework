@@ -264,10 +264,7 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
      */
     protected function isValid($value)
     {
-        if ((!$value instanceof stdClass)
-            || !isset($value->content)
-            || !isset($value->attributes)
-        ) {
+        if ((!$value instanceof stdClass) || !isset($value->content) || !isset($value->attributes)) {
             return false;
         }
 

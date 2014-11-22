@@ -20,13 +20,13 @@ class DbSelectFactory implements
 {
     /**
      * Adapter options
+     *
      * @var array
      */
     protected $creationOptions;
 
     /**
-     * Set creationOptions
-     * @param array $creationOptions
+     * {@inheritDoc}
      */
     public function setCreationOptions(array $creationOptions)
     {

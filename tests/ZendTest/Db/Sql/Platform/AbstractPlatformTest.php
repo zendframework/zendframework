@@ -33,4 +33,17 @@ class AbstractPlatformTest extends \PHPUnit_Framework_TestCase
 
         $reflectionMethod->invoke($platform);
     }
+
+    /**
+     * @group 6890
+     */
+    public function testAbstractPlatformCrashesGracefullyOnMissingDefaultPlatformWithGetDecorators()
+    {
+        /* @var $platform \Zend\Db\Sql\Platform\AbstractPlatform */
+        $platform = $this->getMockForAbstractClass('Zend\Db\Sql\Platform\AbstractPlatform');
+
+        $this->setExpectedException('Zend\Db\Sql\Exception\RuntimeException', '$this->defaultPlatform was not set');
+
+        $platform->getDecorators();
+    }
 }

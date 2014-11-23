@@ -176,6 +176,7 @@ class RuntimeDefinition implements DefinitionInterface
 
     /**
      * @param string $class
+     * @return bool
      */
     protected function hasProcessedClass($class)
     {

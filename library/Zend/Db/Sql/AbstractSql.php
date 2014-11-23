@@ -9,6 +9,7 @@
 
 namespace Zend\Db\Sql;
 
+use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
@@ -176,9 +177,9 @@ abstract class AbstractSql
                 /** @var Select|PlatformDecoratorInterface $subselectDecorator */
                 $subselectDecorator = clone $this;
                 $subselectDecorator->setSubject($subselect);
-                $subselectDecorator->prepareStatement(new \Zend\Db\Adapter\Adapter($driver, $platform), $stmtContainer);
+                $subselectDecorator->prepareStatement(new Adapter($driver, $platform), $stmtContainer);
             } else {
-                $subselect->prepareStatement(new \Zend\Db\Adapter\Adapter($driver, $platform), $stmtContainer);
+                $subselect->prepareStatement(new Adapter($driver, $platform), $stmtContainer);
             }
 
             // copy count

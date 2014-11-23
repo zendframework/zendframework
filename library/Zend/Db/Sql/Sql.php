@@ -135,11 +135,9 @@ class Sql
 
         if ($this->sqlPlatform) {
             $this->sqlPlatform->setSubject($sqlObject);
-            $sqlString = $this->sqlPlatform->getSqlString($platform);
-        } else {
-            $sqlString = $sqlObject->getSqlString($platform);
+            return $this->sqlPlatform->getSqlString($platform);
         }
 
-        return $sqlString;
+        return $sqlObject->getSqlString($platform);
     }
 }

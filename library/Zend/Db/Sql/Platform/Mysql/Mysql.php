@@ -10,11 +10,14 @@
 namespace Zend\Db\Sql\Platform\Mysql;
 
 use Zend\Db\Sql\Platform\AbstractPlatform;
+use Zend\Db\Adapter\Platform\Mysql as MysqlPlatform;
 
 class Mysql extends AbstractPlatform
 {
     public function __construct()
     {
+        $this->defaultPlatform = new MysqlPlatform();
+
         $this->setTypeDecorator('Zend\Db\Sql\Select', new SelectDecorator());
         $this->setTypeDecorator('Zend\Db\Sql\Ddl\CreateTable', new Ddl\CreateTableDecorator());
     }

@@ -20,27 +20,17 @@ class Platform extends AbstractPlatform
 
     public function __construct(AdapterInterface $adapter)
     {
-        $this->adapter = $adapter;
-        $platform = $adapter->getPlatform();
-        switch (strtolower($platform->getName())) {
-            case 'mysql':
-                $platform = new Mysql\Mysql();
-                $this->decorators = $platform->decorators;
-                break;
-            case 'sqlserver':
-                $platform = new SqlServer\SqlServer();
-                $this->decorators = $platform->decorators;
-                break;
-            case 'oracle':
-                $platform = new Oracle\Oracle();
-                $this->decorators = $platform->decorators;
-                break;
-            case 'ibm db2':
-            case 'ibm_db2':
-            case 'ibmdb2':
-                $platform = new IbmDb2\IbmDb2();
-                $this->decorators = $platform->decorators;
-            default:
-        }
+        $this->defaultPlatform = $adapter->getPlatform();
+
+        $mySqlPlatform     = new Mysql\Mysql();
+        $sqlServerPlatform = new SqlServer\SqlServer();
+        $oraclePlatform    = new Oracle\Oracle();
+        $ibmDb2Platform    = new IbmDb2\IbmDb2();
+
+        $this->decorators['mysql']     = $mySqlPlatform->getDecorators();
+        $this->decorators['sqlserver'] = $sqlServerPlatform->getDecorators();
+        $this->decorators['oracle']    = $oraclePlatform->getDecorators();
+        $this->decorators['ibm db2']   = $ibmDb2Platform->getDecorators();
+        $this->decorators['ibmdb2']    = $this->decorators['ibm db2'];
     }
 }

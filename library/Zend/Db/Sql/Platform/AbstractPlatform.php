@@ -117,12 +117,19 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
 
     /**
      * @param null|PlatformInterface|AdapterInterface $adapterOrPlatform
+     *
      * @return PlatformInterface
+     *
      * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     protected function resolvePlatform($adapterOrPlatform)
     {
-        if (null === $adapterOrPlatform) {
+        if (! $adapterOrPlatform) {
+            if (! $this->defaultPlatform) {
+                throw new Exception\RuntimeException('$this->defaultPlatform was not set');
+            }
+
             return $this->defaultPlatform;
         }
 

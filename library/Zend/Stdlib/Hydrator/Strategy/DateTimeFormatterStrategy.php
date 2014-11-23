@@ -51,7 +51,7 @@ class DateTimeFormatterStrategy implements StrategyInterface
      * Converts to date time string
      *
      * @param DateTime|string|null
-     * @param string|null
+     * @return string|null
      */
     public function extract($value)
     {

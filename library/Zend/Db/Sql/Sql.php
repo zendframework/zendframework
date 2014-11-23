@@ -35,7 +35,7 @@ class Sql
         if ($table) {
             $this->setTable($table);
         }
-        $this->sqlPlatform = ($sqlPlatform) ?: new Platform\Platform($adapter);
+        $this->sqlPlatform = $sqlPlatform ?: new Platform\Platform($adapter);
     }
 
     /**
@@ -116,16 +116,17 @@ class Sql
     }
 
     /**
-     *
      * @param PreparableSqlInterface $sqlObject
      * @param StatementInterface     $statement
      * @param AdapterInterface       $adapter
+     *
      * @return StatementInterface
      */
     public function prepareStatementForSqlObject(PreparableSqlInterface $sqlObject, StatementInterface $statement = null, AdapterInterface $adapter = null)
     {
-        $adapter = $adapter ?: $this->adapter;
+        $adapter   = $adapter ?: $this->adapter;
         $statement = $statement ?: $adapter->getDriver()->createStatement();
+
         return $this->sqlPlatform->setSubject($sqlObject)->prepareStatement($adapter, $statement);
     }
 
@@ -136,6 +137,7 @@ class Sql
      * @param PlatformInterface|null $platform
      *
      * @return string
+     *
      * @deprecated Deprecated in 2.4. Use buildSqlString() instead
      */
     public function getSqlStringForSqlObject(SqlInterface $sqlObject, PlatformInterface $platform = null)
@@ -147,12 +149,16 @@ class Sql
     /**
      * @param SqlInterface     $sqlObject
      * @param AdapterInterface $adapter
+     *
      * @return string
+     *
      * @throws Exception\InvalidArgumentException
      */
     public function buildSqlString(SqlInterface $sqlObject, AdapterInterface $adapter = null)
     {
-        $platform = ($adapter) ? $adapter->getPlatform() : $this->adapter->getPlatform();
-        return $this->sqlPlatform->setSubject($sqlObject)->getSqlString($platform);
+        return $this
+            ->sqlPlatform
+            ->setSubject($sqlObject)
+            ->getSqlString($adapter ? $adapter->getPlatform() : $this->adapter->getPlatform());
     }
 }

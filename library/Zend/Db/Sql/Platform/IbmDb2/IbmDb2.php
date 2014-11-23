@@ -10,7 +10,7 @@
 namespace Zend\Db\Sql\Platform\IbmDb2;
 
 use Zend\Db\Sql\Platform\AbstractPlatform;
-use Zend\Db\Adapter\Platform\IbmDb2 as DefaultPlatform;
+use Zend\Db\Adapter\Platform\IbmDb2 as IbmDb2Platform;
 
 class IbmDb2 extends AbstractPlatform
 {
@@ -19,7 +19,8 @@ class IbmDb2 extends AbstractPlatform
      */
     public function __construct(SelectDecorator $selectDecorator = null)
     {
-        $this->defaultPlatform = new DefaultPlatform;
+        $this->defaultPlatform = new IbmDb2Platform();
+
         $this->setTypeDecorator('Zend\Db\Sql\Select', ($selectDecorator) ?: new SelectDecorator());
     }
 }

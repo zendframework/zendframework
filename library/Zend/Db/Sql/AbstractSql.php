@@ -9,7 +9,6 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\DriverInterface;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;

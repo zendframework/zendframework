@@ -131,9 +131,11 @@ class Sql
 
     /**
      * Get sql string using platform or sql object
-     * @param SqlInterface $sqlObject
+     *
+     * @param SqlInterface      $sqlObject
      * @param PlatformInterface $platform
-     * @return mixed
+     *
+     * @return string
      */
     public function getSqlStringForSqlObject(SqlInterface $sqlObject, PlatformInterface $platform = null)
     {

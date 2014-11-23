@@ -124,6 +124,9 @@ class SqlTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Db\Adapter\Driver\StatementInterface', $stmt);
     }
 
+    /**
+     * @group 6890
+     */
     public function testForDifferentAdapters()
     {
         $adapterSql92     = $this->getAdapterForPlatform('sql92');
@@ -179,6 +182,13 @@ class SqlTest extends \PHPUnit_Framework_TestCase
         $this->sql->prepareStatementForSqlObject($select, null, $adapterSqlServer);
     }
 
+    /**
+     * Data provider
+     *
+     * @param string $platform
+     *
+     * @return Adapter
+     */
     protected function getAdapterForPlatform($platform)
     {
         switch ($platform) {

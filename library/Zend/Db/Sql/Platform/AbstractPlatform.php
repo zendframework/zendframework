@@ -122,7 +122,7 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
      */
     protected function resolvePlatform($adapterOrPlatform)
     {
-        if ($adapterOrPlatform == null) {
+        if (null === $adapterOrPlatform) {
             return $this->defaultPlatform;
         }
 

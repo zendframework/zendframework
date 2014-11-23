@@ -29,9 +29,9 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
     protected $decorators = array();
 
     /**
-     * @var PlatformInterface
+     * @var PlatformInterface|null
      */
-    protected $defaultPlatform = null;
+    protected $defaultPlatform;
 
     /**
      * {@inheritDoc}
@@ -62,6 +62,7 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
     public function getTypeDecorator($subject, $adapterOrPlatform = null)
     {
         $platformName = strtolower($this->resolvePlatform($adapterOrPlatform)->getName());
+
         if (isset($this->decorators[$platformName])) {
             foreach ($this->decorators[$platformName] as $type => $decorator) {
                 if ($subject instanceof $type && is_a($decorator, $type, true)) {
@@ -108,7 +109,9 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
         if (! $this->subject instanceof SqlInterface) {
             throw new Exception\RuntimeException('The subject does not appear to implement Zend\Db\Sql\SqlInterface, thus calling prepareStatement() has no effect');
         }
+
         $adapterPlatform = $this->resolvePlatform($adapterPlatform);
+
         return $this->getTypeDecorator($this->subject, $adapterPlatform)->getSqlString($adapterPlatform);
     }
 
@@ -122,12 +125,15 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
         if ($adapterOrPlatform == null) {
             return $this->defaultPlatform;
         }
+
         if ($adapterOrPlatform instanceof AdapterInterface) {
             return $adapterOrPlatform->getPlatform();
         }
+
         if ($adapterOrPlatform instanceof PlatformInterface) {
             return $adapterOrPlatform;
         }
+
         throw new Exception\InvalidArgumentException(sprintf(
             '$adapterOrPlatform should be null, %s, or %s',
             'Zend\Db\Adapter\AdapterInterface',

@@ -80,7 +80,7 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
      */
     public function getDecorators()
     {
-        return $this->decorators[strtolower($this->defaultPlatform->getName())];
+        return $this->decorators[strtolower($this->getDefaultPlatform()->getName())];
     }
 
     /**
@@ -121,16 +121,11 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
      * @return PlatformInterface
      *
      * @throws Exception\InvalidArgumentException
-     * @throws Exception\RuntimeException
      */
     protected function resolvePlatform($adapterOrPlatform)
     {
         if (! $adapterOrPlatform) {
-            if (! $this->defaultPlatform) {
-                throw new Exception\RuntimeException('$this->defaultPlatform was not set');
-            }
-
-            return $this->defaultPlatform;
+            return $this->getDefaultPlatform();
         }
 
         if ($adapterOrPlatform instanceof AdapterInterface) {
@@ -146,5 +141,19 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
             'Zend\Db\Adapter\AdapterInterface',
             'Zend\Db\Adapter\Platform\PlatformInterface'
         ));
+    }
+
+    /**
+     * @return PlatformInterface
+     *
+     * @throws Exception\RuntimeException
+     */
+    protected function getDefaultPlatform()
+    {
+        if (! $this->defaultPlatform) {
+            throw new Exception\RuntimeException('$this->defaultPlatform was not set');
+        }
+
+        return $this->defaultPlatform;
     }
 }

@@ -9,78 +9,64 @@
 
 namespace ZendTest\Stdlib\TestAsset;
 
-use Zend\Stdlib\AbstractOptions;
-
 /**
- * Dummy TestOptions used to test Stdlib\Options
+ * Dummy derived TestOptions used to test Stdlib\Options
  */
-class TestOptions extends AbstractOptions
+class TestOptionsDerived extends TestOptions
 {
-    protected $testField;
+    private $derivedPrivate;
 
-    private $parentPrivate;
+    protected $derivedProtected;
 
-    protected $parentProtected;
+    protected $derivedPublic;
 
-    protected $parentPublic;
-
-    public function setTestField($value)
+    /**
+     * Needed to test accessibility of getters / setters within deriving classes
+     */
+    private function setDerivedPrivate($derivedPrivate)
     {
-        $this->testField = $value;
-    }
-
-    public function getTestField()
-    {
-        return $this->testField;
+        $this->derivedPrivate = $derivedPrivate;
     }
 
     /**
      * Needed to test accessibility of getters / setters within deriving classes
      */
-    private function setParentPrivate($parentPrivate)
+    private function getDerivedPrivate()
     {
-        $this->parentPrivate = $parentPrivate;
+        return $this->derivedPrivate;
     }
 
     /**
      * Needed to test accessibility of getters / setters within deriving classes
      */
-    private function getParentPrivate()
+    protected function setDerivedProtected($derivedProtected)
     {
-        return $this->parentPrivate;
-    }
-
-    /**
-     * Needed to test accessibility of getters / setters within deriving classes
-     */
-    protected function setParentProtected($parentProtected)
-    {
-        $this->parentProtected = $parentProtected;
+        $this->derivedProtected = $derivedProtected;
     }
 
 
     /**
      * Needed to test accessibility of getters / setters within deriving classes
      */
-    protected function getParentProtected()
+    protected function getDerivedProtected()
     {
-        return $this->parentProtected;
+        return $this->derivedProtected;
     }
 
     /**
      * Needed to test accessibility of getters / setters within deriving classes
      */
-    public function setParentPublic($parentPublic)
+    public function setDerivedPublic($derivedPublic)
     {
-        $this->parentPublic = $parentPublic;
+        $this->derivedPublic = $derivedPublic;
     }
 
 
     /**
      * Needed to test accessibility of getters / setters within deriving classes
      */
-    public function getParentPublic()
+    public function getDerivedPublic()
     {
-        return $this->parentPublic;
+        return $this->derivedPublic;
     }
 }

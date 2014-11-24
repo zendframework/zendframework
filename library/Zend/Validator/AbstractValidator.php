@@ -248,21 +248,17 @@ abstract class AbstractValidator implements
         if (array_key_exists($property, $this->abstractOptions['messageVariables'])) {
             $result = $this->abstractOptions['messageVariables'][$property];
             if (is_array($result)) {
-                $result = $this->{key($result)}[current($result)];
-            } else {
-                $result = $this->{$result};
+                return $this->{key($result)}[current($result)];
             }
-            return $result;
+            return $this->{$result};
         }
 
         if (isset($this->messageVariables) && array_key_exists($property, $this->messageVariables)) {
             $result = $this->{$this->messageVariables[$property]};
             if (is_array($result)) {
-                $result = $this->{key($result)}[current($result)];
-            } else {
-                $result = $this->{$result};
+                return $this->{key($result)}[current($result)];
             }
-            return $result;
+            return $this->{$result};
         }
 
         throw new Exception\InvalidArgumentException("No property exists by the name '$property'");

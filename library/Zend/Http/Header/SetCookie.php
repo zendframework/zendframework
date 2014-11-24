@@ -342,7 +342,7 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * Sets expire information for the cookie
+     * Set Expires
      * @param  int|string|\DateTime $expires
      * @throws Exception\InvalidArgumentException
      * @return SetCookie

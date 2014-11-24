@@ -342,7 +342,8 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * @param  int|string $expires
+     * Sets expire information for the cookie
+     * @param  int|string|\DateTime $expires
      * @throws Exception\InvalidArgumentException
      * @return SetCookie
      */
@@ -353,7 +354,12 @@ class SetCookie implements MultipleHeaderInterface
             return $this;
         }
 
+        if ($expires instanceof \DateTime) {
+            $expires = $expires->format(\DateTime::COOKIE);
+        }
+
         $tsExpires = $expires;
+
         if (is_string($expires)) {
             $tsExpires = strtotime($expires);
 

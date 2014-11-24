@@ -204,9 +204,6 @@ abstract class AutoloaderFactory
      */
     protected static function isSubclassOf($className, $type)
     {
-        if (is_subclass_of($className, $type)) {
-            return true;
-        }
-        return false;
+        return is_subclass_of($className, $type);
     }
 }

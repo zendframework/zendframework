@@ -240,7 +240,7 @@ class DispatchListener implements ListenerAggregateInterface
         $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $event);
         $return  = $results->last();
         if (! $return) {
-            $return = $event->getResult();
+            return $event->getResult();
         }
 
         return $return;

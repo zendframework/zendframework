@@ -230,11 +230,11 @@ class ViewManager extends AbstractListenerAggregate
      */
     public function getLayoutTemplate()
     {
-        $layout = 'layout/layout';
         if (isset($this->config['layout'])) {
-            $layout = $this->config['layout'];
+            return $this->config['layout'];
         }
-        return $layout;
+
+        return 'layout/layout';
     }
 
     /**

@@ -9,6 +9,7 @@
 
 namespace Zend\Http\Header;
 
+use DateTime;
 use Zend\Uri\UriFactory;
 
 /**
@@ -167,7 +168,7 @@ class SetCookie implements MultipleHeaderInterface
      *
      * @param   string      $name
      * @param   string      $value
-     * @param   int|string|DateTime  $expires
+     * @param   int|string|DateTime $expires
      * @param   string      $path
      * @param   string      $domain
      * @param   bool        $secure
@@ -354,8 +355,8 @@ class SetCookie implements MultipleHeaderInterface
             return $this;
         }
 
-        if ($expires instanceof \DateTime) {
-            $expires = $expires->format(\DateTime::COOKIE);
+        if ($expires instanceof DateTime) {
+            $expires = $expires->format(DateTime::COOKIE);
         }
 
         $tsExpires = $expires;
@@ -365,7 +366,7 @@ class SetCookie implements MultipleHeaderInterface
 
             // if $tsExpires is invalid and PHP is compiled as 32bit. Check if it fail reason is the 2038 bug
             if (!is_int($tsExpires) && PHP_INT_SIZE === 4) {
-                $dateTime = new \DateTime($expires);
+                $dateTime = new DateTime($expires);
                 if ( $dateTime->format('Y') > 2038) {
                     $tsExpires = PHP_INT_MAX;
                 }

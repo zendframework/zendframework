@@ -119,6 +119,10 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($target, $setCookieHeader->getFieldValue());
     }
 
+    /**
+     * @group 6673
+     * @group 6923
+     */
     public function testSetCookieWithDateTimeFieldValueReturnsProperValue()
     {
         $setCookieHeader = new SetCookie();

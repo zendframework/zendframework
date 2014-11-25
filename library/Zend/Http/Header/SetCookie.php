@@ -9,6 +9,7 @@
 
 namespace Zend\Http\Header;
 
+use DateTime;
 use Zend\Uri\UriFactory;
 
 /**
@@ -165,16 +166,15 @@ class SetCookie implements MultipleHeaderInterface
      *
      * @todo Add validation of each one of the parameters (legal domain, etc.)
      *
-     * @param   string      $name
-     * @param   string      $value
-     * @param   int|string  $expires
-     * @param   string      $path
-     * @param   string      $domain
-     * @param   bool        $secure
-     * @param   bool        $httponly
-     * @param   string      $maxAge
-     * @param   int         $version
-     * @return  SetCookie
+     * @param   string              $name
+     * @param   string              $value
+     * @param   int|string|DateTime $expires
+     * @param   string              $path
+     * @param   string              $domain
+     * @param   bool                $secure
+     * @param   bool                $httponly
+     * @param   string              $maxAge
+     * @param   int                 $version
      */
     public function __construct($name = null, $value = null, $expires = null, $path = null, $domain = null, $secure = false, $httponly = false, $maxAge = null, $version = null)
     {
@@ -342,9 +342,13 @@ class SetCookie implements MultipleHeaderInterface
     }
 
     /**
-     * @param  int|string $expires
+     * Set Expires
+     *
+     * @param int|string|DateTime $expires
+     *
+     * @return self
+     *
      * @throws Exception\InvalidArgumentException
-     * @return SetCookie
      */
     public function setExpires($expires)
     {
@@ -353,13 +357,18 @@ class SetCookie implements MultipleHeaderInterface
             return $this;
         }
 
+        if ($expires instanceof DateTime) {
+            $expires = $expires->format(DateTime::COOKIE);
+        }
+
         $tsExpires = $expires;
+
         if (is_string($expires)) {
             $tsExpires = strtotime($expires);
 
             // if $tsExpires is invalid and PHP is compiled as 32bit. Check if it fail reason is the 2038 bug
             if (!is_int($tsExpires) && PHP_INT_SIZE === 4) {
-                $dateTime = new \DateTime($expires);
+                $dateTime = new DateTime($expires);
                 if ( $dateTime->format('Y') > 2038) {
                     $tsExpires = PHP_INT_MAX;
                 }
@@ -371,6 +380,7 @@ class SetCookie implements MultipleHeaderInterface
         }
 
         $this->expires = $tsExpires;
+
         return $this;
     }
 

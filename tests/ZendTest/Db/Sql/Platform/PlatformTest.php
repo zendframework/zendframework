@@ -16,7 +16,6 @@ use Zend\Db\Adapter\Adapter;
 
 class PlatformTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testResolveDefaultPlatform()
     {
         $adapter = $this->resolveAdapter('sql92');
@@ -68,7 +67,6 @@ class PlatformTest extends \PHPUnit_Framework_TestCase
      */
     public function testAbstractPlatformCrashesGracefullyOnMissingDefaultPlatformWithGetDecorators()
     {
-
         $adapter = $this->resolveAdapter('sql92');
         $reflectionProperty = new \ReflectionProperty($adapter, 'platform');
         $reflectionProperty->setAccessible(true);

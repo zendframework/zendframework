@@ -73,7 +73,6 @@ class PlatformTest extends \PHPUnit_Framework_TestCase
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($adapter, null);
 
-        /* @var $platform \Zend\Db\Sql\Platform\AbstractPlatform */
         $platform = new Platform($adapter);
         $reflectionMethod = new ReflectionMethod($platform, 'resolvePlatform');
 
@@ -84,9 +83,16 @@ class PlatformTest extends \PHPUnit_Framework_TestCase
         $platform->getDecorators();
     }
 
-    protected function resolveAdapter($platform)
+    /**
+     * @param string $platformName
+     *
+     * @return Adapter
+     */
+    protected function resolveAdapter($platformName)
     {
-        switch ($platform) {
+        $platform = null;
+
+        switch ($platformName) {
             case 'sql92' :
                 $platform = new TestAsset\TrustingSql92Platform();
                 break;
@@ -99,8 +105,6 @@ class PlatformTest extends \PHPUnit_Framework_TestCase
             case 'SqlServer' :
                 $platform = new TestAsset\TrustingSqlServerPlatform();
                 break;
-            default :
-                $platform = null;
         }
 
         /* @var $mockDriver \Zend\Db\Adapter\Driver\DriverInterface|\PHPUnit_Framework_MockObject_MockObject */

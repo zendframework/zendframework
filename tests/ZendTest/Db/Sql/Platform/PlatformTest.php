@@ -14,11 +14,6 @@ use ZendTest\Db\TestAsset;
 use Zend\Db\Sql\Platform\Platform;
 use Zend\Db\Adapter\Adapter;
 
-/**
- * Tests for {@see \ZendTest\Db\Sql\Platform\AbstractPlatform}
- *
- * @covers \ZendTest\Db\Sql\Platform\AbstractPlatform
- */
 class PlatformTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -93,11 +88,20 @@ class PlatformTest extends \PHPUnit_Framework_TestCase
     protected function resolveAdapter($platform)
     {
         switch ($platform) {
-            case 'sql92'     : $platform  = new TestAsset\TrustingSql92Platform();     break;
-            case 'MySql'     : $platform  = new TestAsset\TrustingMysqlPlatform();     break;
-            case 'Oracle'    : $platform  = new TestAsset\TrustingOraclePlatform();    break;
-            case 'SqlServer' : $platform  = new TestAsset\TrustingSqlServerPlatform(); break;
-            default : $platform = null;
+            case 'sql92' :
+                $platform = new TestAsset\TrustingSql92Platform();
+                break;
+            case 'MySql' :
+                $platform = new TestAsset\TrustingMysqlPlatform();
+                break;
+            case 'Oracle' :
+                $platform = new TestAsset\TrustingOraclePlatform();
+                break;
+            case 'SqlServer' :
+                $platform = new TestAsset\TrustingSqlServerPlatform();
+                break;
+            default :
+                $platform = null;
         }
 
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');

@@ -167,7 +167,7 @@ class SetCookie implements MultipleHeaderInterface
      *
      * @param   string      $name
      * @param   string      $value
-     * @param   int|string|\DateTime  $expires
+     * @param   int|string|DateTime  $expires
      * @param   string      $path
      * @param   string      $domain
      * @param   bool        $secure
@@ -343,7 +343,7 @@ class SetCookie implements MultipleHeaderInterface
 
     /**
      * Set Expires
-     * @param  int|string|\DateTime $expires
+     * @param  int|string|DateTime $expires
      * @throws Exception\InvalidArgumentException
      * @return SetCookie
      */

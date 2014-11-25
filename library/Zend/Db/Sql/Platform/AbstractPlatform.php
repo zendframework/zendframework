@@ -56,7 +56,7 @@ class AbstractPlatform implements PlatformDecoratorInterface, PreparableSqlInter
     public function getTypeDecorator($subject)
     {
         foreach ($this->decorators as $type => $decorator) {
-            if ($subject instanceof $type && is_a($decorator, $type, true)) {
+            if ($subject instanceof $type) {
                 $decorator->setSubject($subject);
 
                 return $decorator;

@@ -10,6 +10,7 @@
 namespace ZendTest\Db\Sql\Platform;
 
 use ReflectionMethod;
+use Zend\Db\Adapter\StatementContainer;
 use ZendTest\Db\TestAsset;
 use Zend\Db\Sql\Platform\Platform;
 use Zend\Db\Adapter\Adapter;
@@ -102,9 +103,13 @@ class PlatformTest extends \PHPUnit_Framework_TestCase
                 $platform = null;
         }
 
+        /* @var $mockDriver \Zend\Db\Adapter\Driver\DriverInterface|\PHPUnit_Framework_MockObject_MockObject */
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
-        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnCallback(function () {return new Adapter\StatementContainer;}));
+        $mockDriver->expects($this->any())->method('createStatement')->will($this->returnCallback(function () {
+            return new StatementContainer();
+        }));
 
         return new Adapter($mockDriver, $platform);
     }

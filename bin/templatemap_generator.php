@@ -18,6 +18,10 @@ use Zend\Loader\StandardAutoloader;
  * --help|-h                    Get usage message
  * --library|-l [ <string> ]    Library to parse; if none provided, assumes
  *                              current directory
+ * --view|-v [ <string> ]       View path to parse; if none provided, assumes
+ *                              view as template directory
+ * --extensions|-e [ <string> ] List of accepted file extensions (regex alternation
+ *                              without parenthesis); default: *
  * --output|-o [ <string> ]     Where to write map file; if not provided,
  *                              assumes "template_map.php" in library directory
  * --append|-a                  Append to map file if it exists
@@ -47,12 +51,13 @@ $loader = new StandardAutoloader(array('autoregister_zf' => true));
 $loader->register();
 
 $rules = array(
-    'help|h'      => 'Get usage message',
-    'library|l-s' => 'Library to parse; if none provided, assumes current directory',
-    'view|v-s'    => 'View path to parse; if none provided, assumes view as template directory',
-    'output|o-s'  => 'Where to write map file; if not provided, assumes "template_map.php" in library directory',
-    'append|a'    => 'Append to map file if it exists',
-    'overwrite|w' => 'Whether or not to overwrite existing map file',
+    'help|h'            => 'Get usage message',
+    'library|l-s'       => 'Library to parse; if none provided, assumes current directory',
+    'view|v-s'          => 'View path to parse; if none provided, assumes view as template directory',
+    'extensions|e-s'    => 'List of accepted file extensions (regex alternation without parenthesis); default: *',
+    'output|o-s'        => 'Where to write map file; if not provided, assumes "template_map.php" in library directory',
+    'append|a'          => 'Append to map file if it exists',
+    'overwrite|w'       => 'Whether or not to overwrite existing map file',
 );
 
 try {
@@ -67,6 +72,18 @@ if ($opts->getOption('h')) {
     echo $opts->getUsageMessage();
     exit(0);
 }
+
+$fileExtensions = '*';
+if (isset($opts->e) && $opts->e != '*') {
+    if (!preg_match('/^([[:alnum:]]\*?+\|?)+$/', $opts->e)) {
+        echo 'Invalid extensions list specified' . PHP_EOL
+            . PHP_EOL;
+        echo $opts->getUsageMessage();
+        exit(2);
+    }
+    $fileExtensions = '(' . $opts->e . ')';
+}
+$fileExtensions = str_replace('*', '.*', $fileExtensions);
 
 $relativePathForMap = '';
 if (isset($opts->l)) {
@@ -170,7 +187,8 @@ $l = new RecursiveIteratorIterator($dirOrIterator);
 // template name => filename, where the filename is relative to the view path
 $map = new stdClass;
 foreach ($l as $file) {
-    if (!$file->isFile()) {
+    /* @var $file SplFileInfo */
+    if (!$file->isFile() || !preg_match('/^' . $fileExtensions . '$/', $file->getExtension())) {
         continue;
     }
     $filename  = str_replace($libraryPath . '/', '', str_replace(DIRECTORY_SEPARATOR, '/', $file->getPath()) . '/' . $file->getFilename());

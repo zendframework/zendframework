@@ -44,6 +44,10 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
     const JOIN_OUTER = 'outer';
     const JOIN_LEFT = 'left';
     const JOIN_RIGHT = 'right';
+    const JOIN_RIGHT_OUTER = 'outer right';
+    const JOIN_LEFT_OUTER  = 'outer left';
+    const JOIN_RIGHT_INNER = 'inner right';
+    const JOIN_LEFT_INNER = 'inner left';
     const SQL_STAR = '*';
     const ORDER_ASCENDING = 'ASC';
     const ORDER_DESCENDING = 'DESC';

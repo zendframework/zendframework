@@ -334,7 +334,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
             : 'Zend\Form\Element';
 
         // Compose as a fieldset or an element, based on specification type
-        if (static::isSubclassOf($type, 'Zend\Form\FieldsetInterface')) {
+        if (is_subclass_of($type, 'Zend\Form\FieldsetInterface')) {
             if (!isset($formSpec['fieldsets'])) {
                 $formSpec['fieldsets'] = array();
             }
@@ -386,6 +386,8 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
      *
      * @see https://bugs.php.net/bug.php?id=53727
      * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @deprecated since zf 2.3 requires PHP >= 5.3.23
      *
      * @param string $className
      * @param string $type

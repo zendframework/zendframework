@@ -76,7 +76,7 @@ if ($opts->getOption('h')) {
 $fileExtensions = '*';
 if (isset($opts->e) && $opts->e != '*') {
     if (!preg_match('/^([[:alnum:]]\*?+\|?)+$/', $opts->e)) {
-        echo 'Invalid extensions list specified' . PHP_EOL
+        echo 'Invalid extensions list specified. Expecting wildcard or alternation: *, phtml|html' . PHP_EOL
             . PHP_EOL;
         echo $opts->getUsageMessage();
         exit(2);

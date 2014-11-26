@@ -175,6 +175,37 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $validator->isValid($input));
     }
 
+    public static function jcbValues()
+    {
+        return array(
+            array('3566003566003566', true),
+            array('3528000000000007', true),
+            array('3528000000000007', true),
+            array('3528000000000007', true),
+            array('3088185545477406', false),
+            array('3158854390756173', false),
+            array('3088936920428541', false),
+            array('213193692042852', true),
+            array('180012362524156', true),
+        );
+    }
+
+    /**
+     * Test JCB number validity
+     *
+     * @dataProvider jcbValues
+     */
+    public function testJcbCard($input, $expected)
+    {
+        $validator = new CreditCard(
+            array(
+                'type' => CreditCard::JCB
+            )
+        );
+
+        $this->assertEquals($expected, $validator->isValid($input));
+    }
+
     /**
      * Test an invalid service class
      *

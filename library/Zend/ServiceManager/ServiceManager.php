@@ -1187,6 +1187,8 @@ class ServiceManager implements ServiceLocatorInterface
      * @see https://bugs.php.net/bug.php?id=53727
      * @see https://github.com/zendframework/zf2/pull/1807
      *
+     * @deprecated since zf 2.3 requires PHP >= 5.3.23
+     *
      * @param string $className
      * @param string $type
      * @return bool

@@ -194,6 +194,7 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
      * Test JCB number validity
      *
      * @dataProvider jcbValues
+     * @group issue-6278
      */
     public function testJcbCard($input, $expected)
     {

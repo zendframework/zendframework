@@ -35,11 +35,6 @@ class Bcrypt implements PasswordInterface
     protected $salt;
 
     /**
-     * @var bool
-     */
-    protected $backwardCompatibility = false;
-
-    /**
      * Constructor
      *
      * @param array|Traversable $options
@@ -180,7 +175,6 @@ class Bcrypt implements PasswordInterface
      */
     public function setBackwardCompatibility($value)
     {
-        $this->backwardCompatibility = (bool) $value;
         return $this;
     }
 
@@ -192,6 +186,6 @@ class Bcrypt implements PasswordInterface
      */
     public function getBackwardCompatibility()
     {
-        return $this->backwardCompatibility;
+        return false;
     }
 }

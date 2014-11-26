@@ -54,7 +54,7 @@ $rules = array(
     'help|h'            => 'Get usage message',
     'library|l-s'       => 'Library to parse; if none provided, assumes current directory',
     'view|v-s'          => 'View path to parse; if none provided, assumes view as template directory',
-    'extensions|e-s'    => 'List of accepted file extensions (regex alternation without parenthesis); default: *',
+    'extensions|e-s'    => 'List of accepted file extensions (regex alternation: *html, phtml|tpl); default: *',
     'output|o-s'        => 'Where to write map file; if not provided, assumes "template_map.php" in library directory',
     'append|a'          => 'Append to map file if it exists',
     'overwrite|w'       => 'Whether or not to overwrite existing map file',
@@ -75,8 +75,8 @@ if ($opts->getOption('h')) {
 
 $fileExtensions = '*';
 if (isset($opts->e) && $opts->e != '*') {
-    if (!preg_match('/^([[:alnum:]]\*?+\|?)+$/', $opts->e)) {
-        echo 'Invalid extensions list specified. Expecting wildcard or alternation: *, phtml|html' . PHP_EOL
+    if (!preg_match('/^(\*?[[:alnum:]]\*?+\|?)+$/', $opts->e)) {
+        echo 'Invalid extensions list specified. Expecting wildcard or alternation: *, *html, phtml|tpl' . PHP_EOL
             . PHP_EOL;
         echo $opts->getUsageMessage();
         exit(2);

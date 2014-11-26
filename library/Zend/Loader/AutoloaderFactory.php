@@ -86,7 +86,7 @@ abstract class AutoloaderFactory
                     );
                 }
 
-                if (!static::isSubclassOf($class, 'Zend\Loader\SplAutoloader')) {
+                if (!is_subclass_of($class, 'Zend\Loader\SplAutoloader')) {
                     require_once 'Exception/InvalidArgumentException.php';
                     throw new Exception\InvalidArgumentException(
                         sprintf('Autoloader class %s must implement Zend\\Loader\\SplAutoloader', $class)
@@ -197,6 +197,8 @@ abstract class AutoloaderFactory
      *
      * @see https://bugs.php.net/bug.php?id=53727
      * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @deprecated since zf 2.3 requires PHP >= 5.3.23
      *
      * @param  string $className
      * @param  string $type

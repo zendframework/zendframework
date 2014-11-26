@@ -426,7 +426,7 @@ class Di implements DependencyInjectionInterface
                                         if ($methodParams) {
                                             foreach ($methodParams as $methodParam) {
                                                 $objectToInjectClass = $this->getClass($objectToInject);
-                                                if ($objectToInjectClass == $methodParam[1] || self::isSubclassOf($objectToInjectClass, $methodParam[1])) {
+                                                if ($objectToInjectClass == $methodParam[1] || is_subclass_of($objectToInjectClass, $methodParam[1])) {
                                                     if ($this->resolveAndCallInjectionMethodForInstance($instance, $typeInjectionMethod, array($methodParam[0] => $objectToInject), $instanceAlias, self::METHOD_IS_REQUIRED, $type)) {
                                                         $calledMethods[$typeInjectionMethod] = true;
                                                     }
@@ -743,7 +743,7 @@ class Di implements DependencyInjectionInterface
                         }
                         $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                              $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                        if ($pInstanceClass === $type || self::isSubclassOf($pInstanceClass, $type)) {
+                        if ($pInstanceClass === $type || is_subclass_of($pInstanceClass, $type)) {
                             $computedParams['retrieval'][$fqParamPos] = array($pInstance, $pInstanceClass);
                             continue 2;
                         }
@@ -760,7 +760,7 @@ class Di implements DependencyInjectionInterface
                         }
                         $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                              $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                        if ($pInstanceClass === $type || self::isSubclassOf($pInstanceClass, $type)) {
+                        if ($pInstanceClass === $type || is_subclass_of($pInstanceClass, $type)) {
                             $computedParams['retrieval'][$fqParamPos] = array($pInstance, $pInstanceClass);
                             continue 2;
                         }
@@ -886,6 +886,8 @@ class Di implements DependencyInjectionInterface
      *
      * @see https://bugs.php.net/bug.php?id=53727
      * @see https://github.com/zendframework/zf2/pull/1807
+     *
+     * @deprecated since zf 2.3 requires PHP >= 5.3.23
      *
      * @param string $className
      * @param $type

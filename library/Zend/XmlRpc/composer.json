@@ -21,6 +21,9 @@
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zendxml": "1.*"
     },
+    "suggest": {
+        "zendframework/zend-cache": "To support Zend\\XmlRpc\\Server\\Cache usage"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.3-dev",

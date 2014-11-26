@@ -63,6 +63,9 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('iso-8859-1', $feed->getEncoding());
     }
 
+    /**
+     * @group 6358
+     */
     public function testDateModifiedHasTheCorrectFormat()
     {
         $date = new \DateTime();

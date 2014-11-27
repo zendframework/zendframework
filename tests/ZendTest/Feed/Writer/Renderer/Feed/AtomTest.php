@@ -65,6 +65,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @group 6358
+     * @group 6935
      */
     public function testDateModifiedHasTheCorrectFormat()
     {

@@ -223,6 +223,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @group 6647
+     * @group 6648
      */
     public function testNotFloat()
     {

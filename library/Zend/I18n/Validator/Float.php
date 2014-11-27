@@ -163,6 +163,7 @@ class Float extends AbstractValidator
         //We have seperators, and they are flipped. i.e. 2.000,000 for en-US
         if ($groupSeparatorPosition && $decSeparatorPosition && $groupSeparatorPosition > $decSeparatorPosition) {
             $this->error(self::NOT_FLOAT);
+
             return false;
         }
 
@@ -239,6 +240,7 @@ class Float extends AbstractValidator
         }
 
         $this->error(self::NOT_FLOAT);
+
         return false;
     }
 }

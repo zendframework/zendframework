@@ -123,20 +123,4 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('$2y$10$MTIzNDU2Nzg5MDEyMzQ1NemFdU/4JOrNpxMym09Mbp0m4hKTgfQo.',
                                 $this->bcrypt->create($password));
     }
-
-    public function testSetBackwardCompatibility()
-    {
-        $result = $this->bcrypt->setBackwardCompatibility(true);
-        $this->assertTrue($result instanceof Bcrypt);
-        $this->assertTrue($this->bcrypt->getBackwardCompatibility());
-    }
-
-    public function testBackwardCompatibility()
-    {
-        $this->bcrypt->setSalt($this->salt);
-        $this->bcrypt->setBackwardCompatibility(true);
-        $password = $this->bcrypt->create($this->password);
-        $this->assertEquals('$2a$', substr($password, 0, 4));
-        $this->assertEquals(substr($password, 4), substr($this->bcryptPassword, 4));
-    }
 }

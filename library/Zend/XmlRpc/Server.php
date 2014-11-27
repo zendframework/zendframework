@@ -433,7 +433,7 @@ class Server extends AbstractServer
      */
     public function setResponseClass($class)
     {
-        if (!class_exists($class) || !static::isSubclassOf($class, 'Zend\XmlRpc\Response')) {
+        if (!class_exists($class) || !is_subclass_of($class, 'Zend\XmlRpc\Response')) {
             throw new Server\Exception\InvalidArgumentException('Invalid response class');
         }
         $this->responseClass = $class;
@@ -588,22 +588,14 @@ class Server extends AbstractServer
      * @see https://bugs.php.net/bug.php?id=53727
      * @see https://github.com/zendframework/zf2/pull/1807
      *
+     * @deprecated since zf 2.3 requires PHP >= 5.3.23
+     *
      * @param string $className
      * @param string $type
      * @return bool
      */
     protected static function isSubclassOf($className, $type)
     {
-        if (is_subclass_of($className, $type)) {
-            return true;
-        }
-        if (PHP_VERSION_ID >= 50307) {
-            return false;
-        }
-        if (!interface_exists($type)) {
-            return false;
-        }
-        $r = new ReflectionClass($className);
-        return $r->implementsInterface($type);
+        return is_subclass_of($className, $type);
     }
 }

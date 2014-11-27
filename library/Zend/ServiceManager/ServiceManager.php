@@ -9,8 +9,6 @@
 
 namespace Zend\ServiceManager;
 
-use ReflectionClass;
-
 class ServiceManager implements ServiceLocatorInterface
 {
     /**@#+
@@ -1189,6 +1187,8 @@ class ServiceManager implements ServiceLocatorInterface
      * @see https://bugs.php.net/bug.php?id=53727
      * @see https://github.com/zendframework/zf2/pull/1807
      *
+     * @deprecated since zf 2.3 requires PHP >= 5.3.23
+     *
      * @param string $className
      * @param string $type
      * @return bool
@@ -1197,17 +1197,7 @@ class ServiceManager implements ServiceLocatorInterface
      */
     protected static function isSubclassOf($className, $type)
     {
-        if (is_subclass_of($className, $type)) {
-            return true;
-        }
-        if (PHP_VERSION_ID >= 50307) {
-            return false;
-        }
-        if (!interface_exists($type)) {
-            return false;
-        }
-        $r = new ReflectionClass($className);
-        return $r->implementsInterface($type);
+        return is_subclass_of($className, $type);
     }
 
     /**

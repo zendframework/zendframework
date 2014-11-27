@@ -200,16 +200,15 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider jcbValues
      *
+     * @param string $input
+     * @param bool   $expected
+     *
      * @group 6278
      * @group 6927
      */
     public function testJcbCard($input, $expected)
     {
-        $validator = new CreditCard(
-            array(
-                'type' => CreditCard::JCB
-            )
-        );
+        $validator = new CreditCard(array('type' => CreditCard::JCB));
 
         $this->assertEquals($expected, $validator->isValid($input));
     }

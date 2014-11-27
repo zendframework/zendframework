@@ -10,9 +10,19 @@
 namespace Zend\Stdlib\Hydrator;
 
 use Zend\Stdlib\Exception;
+use ReflectionObject;
+use ReflectionProperty;
 
 class ObjectProperty extends AbstractHydrator
 {
+
+    /**
+     * @var array
+     */
+    protected $propertyFilterCache = array(
+        'stdClass' => array()
+    );
+
     /**
      * Extract values from an object
      *

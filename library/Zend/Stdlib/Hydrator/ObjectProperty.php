@@ -69,20 +69,22 @@ class ObjectProperty extends AbstractHydrator
             ));
         }
 
-        $className = get_class($object);
-        if (!isset($this->propertyFilterCache[$className])) {
-            $this->propertyFilterCache[$className] = array_fill_keys(
-                array_filter(array_map(
-                    function($property) {return trim(strrchr($property,  "\0")); },
-                    array_keys((array) $object)
-                )),
-                true);
+        $prop = &$this->propertyFilterCache[get_class($object)];
+
+        if (!isset($prop)) {
+            $prop = array_fill_keys(
+                array_map(
+                    function($property) { return $property->name; },
+                    (new ReflectionObject($object))->getProperties(ReflectionProperty::IS_PRIVATE + ReflectionProperty::IS_PROTECTED + ReflectionProperty::IS_STATIC)
+                ),
+                true
+            );
         }
 
         foreach ($data as $name => $value) {
             $property = $this->hydrateName($name, $data);
 
-            if (isset($this->propertyFilterCache[$className][$property])) {
+            if (isset($prop[$property])) {
                 continue;
             }
 

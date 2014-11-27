@@ -220,4 +220,16 @@ class FloatTest extends \PHPUnit_Framework_TestCase
         $validator = $this->validator;
         $this->assertAttributeEquals($validator->getOption('messageTemplates'), 'messageTemplates', $validator);
     }
+
+    /**
+     * @group 6647
+     * @group 6648
+     */
+    public function testNotFloat()
+    {
+        $this->assertFalse($this->validator->isValid('2.000.000,00'));
+
+        $message = $this->validator->getMessages();
+        $this->assertContains('does not appear to be a float', $message['notFloat']);
+    }
 }

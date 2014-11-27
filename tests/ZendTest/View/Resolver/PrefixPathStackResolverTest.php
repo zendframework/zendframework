@@ -10,16 +10,14 @@
 namespace ZendTest\View\Resolver;
 
 use Zend\View\Resolver\PrefixPathStackResolver;
-use Zend\View\Resolver\TemplatePathStack;
 
 class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSetLfiProtection()
+    public function testConstructor()
     {
-        $resolver = new PrefixPathStackResolver;
-        $resolver->setLfiProtection(true);
+        $resolver = new PrefixPathStackResolver([], true);
         $this->assertTrue($resolver->isLfiProtectionOn());
-        $resolver->setLfiProtection(false);
+        $resolver = new PrefixPathStackResolver([], false);
         $this->assertFalse($resolver->isLfiProtectionOn());
     }
 
@@ -60,7 +58,7 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
 
     public function testResolve()
     {
-        $resolver = new PrefixPathStackResolver;
+        $resolver = new PrefixPathStackResolver([], false);
         $resolver->add('album/', 'path/to/view1');
         $resolver->add('album/', 'path/to/view2');
         $resolver->add('album/', 'path/to/view0', true);
@@ -73,7 +71,6 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
         $templatePathStackResolver->expects($this->once())
             ->method('setDefaultSuffix')
             ->with('php');
-        $resolver->setLfiProtection(false);
         $templatePathStackResolver->expects($this->once())
             ->method('setLfiProtection')
             ->with(false);

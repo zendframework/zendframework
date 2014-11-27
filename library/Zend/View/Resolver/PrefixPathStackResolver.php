@@ -44,16 +44,17 @@ class PrefixPathStackResolver implements ResolverInterface
     protected $templatePathStackResolvers;
 
     /**
-     * Set LFI protection flag
+     * Constructor
      *
-     * @param  bool $flag
-     * @return self
+     * @param array $prefixes           Set of prefix and their directories
+     * @param bool $lfiProjectionFlag   LFI protection flag
      */
-    public function setLfiProtection($flag)
+    public function __construct(array $prefixes = array(), $lfiProjectionFlag = true)
     {
-        $this->lfiProtectionOn = (bool) $flag;
-
-        return $this;
+        foreach ($prefixes as $prefix => $paths) {
+            $this->set($prefix, $paths);
+        }
+        $this->lfiProtectionOn = (bool) $lfiProjectionFlag;
     }
 
     /**
@@ -104,19 +105,6 @@ class PrefixPathStackResolver implements ResolverInterface
                 $this->prefixes[$prefix],
                 (array) $paths
             );
-        }
-    }
-
-    /**
-     * Registers a set of prefix and their directories
-     *
-     * @param  array $prefixes
-     * @return void
-     */
-    public function setPrefixes(array $prefixes)
-    {
-        foreach ($prefixes as $prefix => $paths) {
-            $this->set($prefix, $paths);
         }
     }
 

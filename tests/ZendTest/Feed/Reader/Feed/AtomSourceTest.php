@@ -131,7 +131,7 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
         );
         $source = $feed->current()->getSource();
 
-        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $source->getDateCreated());
     }
 
@@ -146,7 +146,7 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
         );
         $source = $feed->current()->getSource();
 
-        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $source->getDateModified());
     }
 

@@ -11,7 +11,7 @@ namespace Zend\Mvc\Service;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\View\Resolver as ViewResolver;
+use Zend\View\Resolver\PrefixPathStackResolver;
 
 class ViewPrefixPathStackResolverFactory implements FactoryInterface
 {
@@ -22,27 +22,25 @@ class ViewPrefixPathStackResolverFactory implements FactoryInterface
      * ['view_manager']['prefix_template_path_stack'] and sets the default suffix with the
      * ['view_manager']['default_template_suffix']
      *
-     * @param  ServiceLocatorInterface              $serviceLocator
-     * @return ViewResolver\PrefixPathStackResolver
+     * @param  ServiceLocatorInterface $serviceLocator
+     * @return PrefixPathStackResolver
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $config = $serviceLocator->get('Config');
 
-        $prefixPathStackResolver = new ViewResolver\PrefixPathStackResolver();
-
-        if (is_array($config) && isset($config['view_manager'])) {
-            $config = $config['view_manager'];
-            if (is_array($config)) {
-                if (isset($config['prefix_template_path_stack'])) {
-                    $prefixPathStackResolver->setPrefixes($config['prefix_template_path_stack']);
-                }
-                if (isset($config['default_template_suffix'])) {
-                    $prefixPathStackResolver->setDefaultSuffix($config['default_template_suffix']);
-                }
-            }
+        if (isset($config['view_manager']['prefix_template_path_stack'])) {
+            $prefixes = $config['view_manager']['prefix_template_path_stack'];
+        } else {
+            $prefixes = array();
         }
 
-        return $prefixPathStackResolver;
+        $resolver = new PrefixPathStackResolver($prefixes);
+
+        if (isset($config['view_manager']['default_template_suffix'])) {
+            $resolver->setDefaultSuffix($config['view_manager']['default_template_suffix']);
+        }
+
+        return $resolver;
     }
 }

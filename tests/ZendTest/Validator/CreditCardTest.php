@@ -175,6 +175,11 @@ class CreditCardTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $validator->isValid($input));
     }
 
+    /**
+     * Data provider
+     *
+     * @return string[][]|bool[][]
+     */
     public function jcbValues()
     {
         return array(

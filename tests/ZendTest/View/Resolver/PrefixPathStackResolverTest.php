@@ -15,9 +15,9 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructor()
     {
-        $resolver = new PrefixPathStackResolver([], true);
+        $resolver = new PrefixPathStackResolver(array(), true);
         $this->assertTrue($resolver->isLfiProtectionOn());
-        $resolver = new PrefixPathStackResolver([], false);
+        $resolver = new PrefixPathStackResolver(array(), false);
         $this->assertFalse($resolver->isLfiProtectionOn());
     }
 
@@ -58,7 +58,7 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
 
     public function testResolve()
     {
-        $resolver = new PrefixPathStackResolver([], false);
+        $resolver = new PrefixPathStackResolver(array(), false);
         $resolver->add('album/', 'path/to/view1');
         $resolver->add('album/', 'path/to/view2');
         $resolver->add('album/', 'path/to/view0', true);

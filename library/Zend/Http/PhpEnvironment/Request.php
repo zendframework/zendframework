@@ -216,23 +216,19 @@ class Request extends HttpRequest
         $headers = array();
 
         foreach ($server as $key => $value) {
-            if ((is_array($value) && $value) || (!is_array($value) && strlen($value))) {
+            if ($value || (!is_array($value) && strlen($value))) {
                 if (strpos($key, 'HTTP_') === 0) {
                     if (strpos($key, 'HTTP_COOKIE') === 0) {
                         // Cookies are handled using the $_COOKIE superglobal
                         continue;
                     }
-                    $name = strtr(substr($key, 5), '_', ' ');
-                    $name = strtr(ucwords(strtolower($name)), ' ', '-');
-                } elseif (strpos($key, 'CONTENT_') === 0) {
-                    $name = substr($key, 8); // Content-
-                    $name = 'Content-' . (($name == 'MD5') ? $name : ucfirst(strtolower($name)));
-                } else {
-                    continue;
-                }
-                $headers[$name] = $value;
-            }
 
+                    $headers[strtr(ucwords(strtolower(strtr(substr($key, 5), '_', ' '))), ' ', '-')] = $value;
+                } elseif (strpos($key, 'CONTENT_') === 0) {
+                    $name = substr($key, 8); // Remove "Content-"
+                    $headers['Content-' . (($name == 'MD5') ? $name : ucfirst(strtolower($name)))] = $value;
+                }
+            }
         }
 
         $this->getHeaders()->addHeaders($headers);

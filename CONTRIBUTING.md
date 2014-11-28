@@ -15,8 +15,7 @@ read/subscribe to the following resources:
     #zftalk.dev on Freenode.net
 
 If you are working on new features, or refactoring an existing
-component, please create a proposal. You can do this in on the RFC's
-page, http://framework.zend.com/wiki/display/ZFDEV2/RFC%27s.
+component, please [create a proposal](https://github.com/zendframework/zf2/issues/new).
 
 ## Reporting Potential Security Issues
 

@@ -5,12 +5,9 @@
 If you wish to contribute to Zend Framework, please be sure to
 read/subscribe to the following resources:
 
- -  Coding Standards:
-    http://framework.zend.com/wiki/display/ZFDEV2/Coding+Standards
- -  ZF Git Guide:
-    [README-GIT.md](README-GIT.md)
- -  Contributor's Guide:
-    http://framework.zend.com/participate/contributor-guide
+ -  [Coding Standards](http://framework.zend.com/wiki/display/ZFDEV2/Coding+Standards)
+ -  [ZF Git Guide](README-GIT.md)
+ -  [Contributor's Guide](http://framework.zend.com/participate/contributor-guide)
  -  ZF Contributor's mailing list:
     Archives: http://zend-framework-community.634137.n4.nabble.com/ZF-Contributor-f680267.html
     Subscribe: zf-contributors-subscribe@lists.zend.com
@@ -18,12 +15,13 @@ read/subscribe to the following resources:
     #zftalk.dev on Freenode.net
 
 If you are working on new features, or refactoring an existing
-component, please create a proposal. You can do this in on the RFC's
-page, http://framework.zend.com/wiki/display/ZFDEV2/RFC%27s.
+component, please [create a proposal](https://github.com/zendframework/zf2/issues/new).
 
 ## Reporting Potential Security Issues
 
-If you have encountered a potential security vulnerability in Zend Framework, please report it to us at [zf-security@zend.com](mailto:zf-security@zend.com). We will work with you to verify the vulnerability and patch it.
+If you have encountered a potential security vulnerability in Zend Framework, please **DO NOT** report it on the public
+issue tracker: send it to us at [zf-security@zend.com](mailto:zf-security@zend.com) instead.
+We will work with you to verify the vulnerability and patch it as soon as possible.
 
 When reporting issues, please provide the following information:
 
@@ -39,32 +37,32 @@ For sensitive email communications, please use [our PGP key](http://framework.ze
 
 To run tests:
 
-- Make sure you have a recent version of PHPUnit installed; 3.7.0
-  minimally.
-- Enter the `tests/` subdirectory.
-- Execute PHPUnit, providing a path to a component directory for which
-  you wish to run tests, or a specific test class file.
+- Clone the zf2 repository (or download it, if you do not have GIT installed):
 
   ```sh
-  % phpunit ZendTest/Http
-  % phpunit ZendTest/Http/Header/EtagTest.php
+  % git clone git@github.com:zendframework/zf2.git
+  % cd
   ```
 
-- You may also provide the `--group` switch; in such cases, provide the
-  top-level component name:
+- Install dependencies via composer:
 
   ```sh
-  % phpunit --group Zend_Http
+  % curl -sS https://getcomposer.org/installer | php --
+  % ./composer.phar install
   ```
 
-  This will likely lead to errors, so it's usually best to specify a
-  specific component in which to run test:
+  If you don't have `curl` installed, you can also download `composer.phar` from https://getcomposer.org/
+
+- Run the tests via `phpunit` and the provided PHPUnit config, like in this example:
 
   ```sh
-  % phpunit --group ZF-XYZ Zend/Http
+  % ./../vendor/bin/phpunit -c tests/phpunit.xml.dist tests/ZendTest/Http
+  % ./../vendor/bin/phpunit -c tests/phpunit.xml.dist tests/ZendTest/Http/Header/EtagTest.php
   ```
-- Alternately, use the `run-tests.php` script. This can be executed with no
-  arguments to run all tests:
+
+  Note that the entire test suite is not designed to be run in a single pass.
+  Run tests for the single components instead. You can do it by using the `run-tests.php` utility provided
+  with the repository:
 
   ```sh
   % php run-tests.php

@@ -118,7 +118,10 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
 
     public function testParentPrivateProperty()
     {
-        $this->setExpectedException('Zend\Stdlib\Exception\BadMethodCallException');
+        $this->setExpectedException(
+            'Zend\Stdlib\Exception\BadMethodCallException',
+            'The option "parent_private" does not have a callable "setParentPrivate" setter method which must be defined'
+        );
         $options = new TestOptionsDerived(array('parent_private' => 1));
     }
 
@@ -138,8 +141,10 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
 
     public function testDerivedPrivateProperty()
     {
+        $this->setExpectedException(
+            'Zend\Stdlib\Exception\BadMethodCallException',
+            'The option "derived_private" does not have a callable "setDerivedPrivate" setter method which must be defined'
+        );
         $options = new TestOptionsDerived(array('derived_private' => 1));
-
-        $this->assertEquals(1, $options->derived_private);
     }
 }

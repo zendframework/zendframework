@@ -9,26 +9,7 @@
 
 namespace Zend\Stdlib\ArrayUtils;
 
-class MergeReplaceKey implements MergeReplaceKeyInterface
+interface MergeReplaceKeyInterface
 {
-    /**
-     * @var mixed
-     */
-    protected $data;
-
-    /**
-     * @param mixed $data
-     */
-    public function __construct($data)
-    {
-        $this->data = $data;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
+    public function getData();
 }

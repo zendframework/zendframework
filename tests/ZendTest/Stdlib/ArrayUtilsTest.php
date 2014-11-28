@@ -288,6 +288,7 @@ class ArrayUtilsTest extends TestCase
                 'foo' => 'get',
             )),
         );
+        $this->assertInstanceOf('Zend\Stdlib\ArrayUtils\MergeReplaceKeyInterface', $b['car']);
         $this->assertEquals($expected, ArrayUtils::merge($a, $b));
     }
 

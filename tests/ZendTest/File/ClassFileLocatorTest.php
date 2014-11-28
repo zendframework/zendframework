@@ -132,4 +132,19 @@ class ClassFileLocatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($foundThird);
         $this->assertTrue($foundFourth);
     }
+
+    public function testIterationShouldNotCountFQCNScalarResolutionConstantAsClass()
+    {
+        if (version_compare(PHP_VERSION, "5.5", "<")) {
+            $this->markTestSkipped('Only applies to PHP >=5.5');
+        }
+
+        $locator = new ClassFileLocator(__DIR__ .'/TestAsset');
+        foreach ($locator as $file) {
+            if (! preg_match('/ClassNameResolutionCompatibility\.php$/', $file->getFilename())) {
+                continue;
+            }
+            $this->assertCount(1, $file->getClasses());
+        }
+    }
 }

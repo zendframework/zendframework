@@ -19,7 +19,9 @@ component, please [create a proposal](https://github.com/zendframework/zf2/issue
 
 ## Reporting Potential Security Issues
 
-If you have encountered a potential security vulnerability in Zend Framework, please report it to us at [zf-security@zend.com](mailto:zf-security@zend.com). We will work with you to verify the vulnerability and patch it.
+If you have encountered a potential security vulnerability in Zend Framework, please **DO NOT** report it on the public
+issue tracker: send it to us at [zf-security@zend.com](mailto:zf-security@zend.com) instead.
+We will work with you to verify the vulnerability and patch it as soon as possible.
 
 When reporting issues, please provide the following information:
 

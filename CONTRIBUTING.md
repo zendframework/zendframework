@@ -35,32 +35,32 @@ For sensitive email communications, please use [our PGP key](http://framework.ze
 
 To run tests:
 
-- Make sure you have a recent version of PHPUnit installed; 4.0.0
-  minimally.
-- Enter the `tests/` subdirectory.
-- Execute PHPUnit, providing a path to a component directory for which
-  you wish to run tests, or a specific test class file.
+- Clone the zf2 repository (or download it, if you do not have GIT installed):
 
   ```sh
-  % phpunit ZendTest/Http
-  % phpunit ZendTest/Http/Header/EtagTest.php
+  % git clone git@github.com:zendframework/zf2.git
+  % cd
   ```
 
-- You may also provide the `--group` switch; in such cases, provide the
-  top-level component name:
+- Install dependencies via composer:
 
   ```sh
-  % phpunit --group Zend_Http
+  % curl -sS https://getcomposer.org/installer | php --
+  % ./composer.phar install
   ```
 
-  This will likely lead to errors, so it's usually best to specify a
-  specific component in which to run test:
+  If you don't have `curl` installed, you can also download `composer.phar` from http://getcomposer.org/
+
+- Run the tests via `phpunit` and the provided PHPUnit config, like in this example:
 
   ```sh
-  % phpunit --group ZF-XYZ Zend/Http
+  % ./../vendor/bin/phpunit -c tests/phpunit.xml.dist tests/ZendTest/Http
+  % ./../vendor/bin/phpunit -c tests/phpunit.xml.dist tests/ZendTest/Http/Header/EtagTest.php
   ```
-- Alternately, use the `run-tests.php` script. This can be executed with no
-  arguments to run all tests:
+
+  Note that the entire test suite is not designed to be run in a single pass.
+  Run tests for the single components instead. You can do it by using the `run-tests.php` utility provided
+  with the repository:
 
   ```sh
   % php run-tests.php

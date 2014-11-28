@@ -272,7 +272,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-   /**
+    /**
      * Ensures that the validator follows expected behavior for valid email addresses with complex local parts
      *
      * @return void
@@ -300,9 +300,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testMXRecords()
     {
-        if (!defined('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED')) {
-            $this->markTestSkipped('Testing MX records has been disabled');
-        }
+        $this->skipIfOnlineTestsDisabled();
 
         $validator = new EmailAddress(Hostname::ALLOW_DNS, true);
 
@@ -342,9 +340,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testNoMxRecordARecordFallback()
     {
-        if (!defined('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED')) {
-            $this->markTestSkipped('Testing MX records has been disabled');
-        }
+        $this->skipIfOnlineTestsDisabled();
 
         $validator = new EmailAddress(Hostname::ALLOW_DNS, true);
 
@@ -645,9 +641,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMXRecord()
     {
-        if (!defined('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED')) {
-            $this->markTestSkipped('Testing MX records has been disabled');
-        }
+        $this->skipIfOnlineTestsDisabled();
 
         $validator = new EmailAddress(array('useMxCheck' => true, 'allow' => Hostname::ALLOW_ALL));
         $validator = new EmailAddress(array('useMxCheck' => true, 'allow' => Hostname::ALLOW_ALL));
@@ -680,9 +674,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testUseMxCheckBasicValid()
     {
-        if (!defined('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED')) {
-            $this->markTestSkipped('Testing MX records has been disabled');
-        }
+        $this->skipIfOnlineTestsDisabled();
 
         $validator = new EmailAddress(array(
             'useMxCheck'        => true,
@@ -808,5 +800,17 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         // 223.255.255.0/24
         $this->assertFalse($validator->isReserved('223.255.255.0'));
         $this->assertFalse($validator->isReserved('223.255.255.255'));
+    }
+
+    /**
+     * @throws \PHPUnit_Framework_SkippedTestError
+     *
+     * @return void
+     */
+    private function skipIfOnlineTestsDisabled()
+    {
+        if (! (defined('TESTS_ZEND_VALIDATOR_ONLINE_ENABLED') && \TESTS_ZEND_VALIDATOR_ONLINE_ENABLED)) {
+            $this->markTestSkipped('Testing MX records has been disabled');
+        }
     }
 }

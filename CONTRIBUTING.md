@@ -49,7 +49,7 @@ To run tests:
   % ./composer.phar install
   ```
 
-  If you don't have `curl` installed, you can also download `composer.phar` from http://getcomposer.org/
+  If you don't have `curl` installed, you can also download `composer.phar` from https://getcomposer.org/
 
 - Run the tests via `phpunit` and the provided PHPUnit config, like in this example:
 

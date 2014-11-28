@@ -39,7 +39,7 @@ For sensitive email communications, please use [our PGP key](http://framework.ze
 
 To run tests:
 
-- Make sure you have a recent version of PHPUnit installed; 3.7.0
+- Make sure you have a recent version of PHPUnit installed; 4.0.0
   minimally.
 - Enter the `tests/` subdirectory.
 - Execute PHPUnit, providing a path to a component directory for which

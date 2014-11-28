@@ -5,12 +5,9 @@
 If you wish to contribute to Zend Framework, please be sure to
 read/subscribe to the following resources:
 
- -  Coding Standards:
-    http://framework.zend.com/wiki/display/ZFDEV2/Coding+Standards
- -  ZF Git Guide:
-    [README-GIT.md](README-GIT.md)
- -  Contributor's Guide:
-    http://framework.zend.com/participate/contributor-guide
+ -  [Coding Standards](http://framework.zend.com/wiki/display/ZFDEV2/Coding+Standards)
+ -  [ZF Git Guide](README-GIT.md)
+ -  [Contributor's Guide](http://framework.zend.com/participate/contributor-guide)
  -  ZF Contributor's mailing list:
     Archives: http://zend-framework-community.634137.n4.nabble.com/ZF-Contributor-f680267.html
     Subscribe: zf-contributors-subscribe@lists.zend.com

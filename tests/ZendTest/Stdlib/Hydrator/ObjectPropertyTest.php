@@ -24,12 +24,12 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
     /**
      * @var ObjectProperty
      */
-    protected $hydrator;
+    private $hydrator;
 
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp()
     {
         $this->hydrator = new ObjectProperty();
     }

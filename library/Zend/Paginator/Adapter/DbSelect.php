@@ -15,6 +15,7 @@ use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\ResultSet\ResultSetInterface;
+use Zend\Stdlib\ArrayUtils;
 
 class DbSelect implements AdapterInterface
 {
@@ -103,12 +104,7 @@ class DbSelect implements AdapterInterface
         $resultSet = clone $this->resultSetPrototype;
         $resultSet->initialize($result);
         
-        $items = array();
-        foreach ($resultSet as $key => $value) {
-            $items[$key] = $value;
-        }
-
-        return $items;
+        return ArrayUtils::iteratorToArray($resultSet);
     }
 
     /**

@@ -129,4 +129,14 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeSame('quo', 'quo', $object);
         $this->assertAttributeNotSame('quin', 'quin', $object);
     }
+
+    /**
+     * Verify that it can hydrate new properties on generic classes
+     */
+    public function testCanHydrateGenericClassNonExistingProperties()
+    {
+        $object = $this->hydrator->hydrate(array('newProperty' => 'newPropertyValue'), new ObjectPropertyTestAsset());
+
+        $this->assertAttributeSame('newPropertyValue', 'newProperty', $object);
+    }
 }

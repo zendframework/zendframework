@@ -11,6 +11,7 @@ namespace ZendTest\Stdlib\Hydrator;
 
 use Zend\Stdlib\Hydrator\ObjectProperty;
 use Zend\Stdlib\Exception\BadMethodCallException;
+use ZendTest\Stdlib\TestAsset\ClassWithPublicStaticProperties;
 use ZendTest\Stdlib\TestAsset\ObjectProperty as ObjectPropertyTestAsset;
 
 /**
@@ -138,5 +139,20 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
         $object = $this->hydrator->hydrate(array('newProperty' => 'newPropertyValue'), new ObjectPropertyTestAsset());
 
         $this->assertAttributeSame('newPropertyValue', 'newProperty', $object);
+    }
+
+    /**
+     * Verify that hydration is skipped for class properties (it is an object hydrator after all)
+     */
+    public function testSkipsPublicStaticClassPropertiesHydration()
+    {
+        $this->hydrator->hydrate(
+            array('foo' => '1', 'bar' => '2', 'baz' => '3'),
+            new ClassWithPublicStaticProperties()
+        );
+
+        $this->assertSame('foo', ClassWithPublicStaticProperties::$foo);
+        $this->assertSame('bar', ClassWithPublicStaticProperties::$bar);
+        $this->assertSame('baz', ClassWithPublicStaticProperties::$baz);
     }
 }

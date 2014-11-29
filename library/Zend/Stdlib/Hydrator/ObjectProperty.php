@@ -19,9 +19,7 @@ class ObjectProperty extends AbstractHydrator
     /**
      * @var array
      */
-    protected $propertyFilterCache = array(
-        'stdClass' => array()
-    );
+    private $propertyFilterCache = array();
 
     /**
      * Extract values from an object

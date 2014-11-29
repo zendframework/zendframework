@@ -440,21 +440,21 @@ class Factory
 
         if (is_string($hydratorOrName)) {
             $hydrator = $this->getHydratorFromName($hydratorOrName);
-
-            if (!$hydrator instanceof Hydrator\HydratorInterface) {
-                throw new Exception\DomainException(sprintf(
-                    '%s expects a valid implementation of Zend\Stdlib\Hydrator\HydratorInterface; received "%s"',
-                    $method,
-                    $hydratorOrName
-                ));
-            }
-
-            if (!empty($hydratorOptions) && $hydrator instanceof Hydrator\HydratorOptionsInterface) {
-                $hydrator->setOptions($hydratorOptions);
-            }
-
-            $fieldset->setHydrator($hydrator);
         }
+
+        if (!isset($hydrator) || !$hydrator instanceof Hydrator\HydratorInterface) {
+            throw new Exception\DomainException(sprintf(
+                '%s expects a valid implementation of Zend\Stdlib\Hydrator\HydratorInterface; received "%s"',
+                $method,
+                $hydratorOrName
+            ));
+        }
+
+        if (!empty($hydratorOptions) && $hydrator instanceof Hydrator\HydratorOptionsInterface) {
+            $hydrator->setOptions($hydratorOptions);
+        }
+
+        $fieldset->setHydrator($hydrator);
     }
 
     /**

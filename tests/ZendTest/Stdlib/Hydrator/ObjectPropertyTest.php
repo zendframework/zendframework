@@ -155,4 +155,12 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('bar', ClassWithPublicStaticProperties::$bar);
         $this->assertSame('baz', ClassWithPublicStaticProperties::$baz);
     }
+
+    /**
+     * Verify that extraction is skipped for class properties (it is an object hydrator after all)
+     */
+    public function testSkipsPublicStaticClassPropertiesExtraction()
+    {
+        $this->assertEmpty($this->hydrator->extract(new ClassWithPublicStaticProperties()));
+    }
 }

@@ -16,9 +16,9 @@ use ReflectionProperty;
 class ObjectProperty extends AbstractHydrator
 {
     /**
-     * @var array
+     * @var array[] indexed by class name and then property name
      */
-    private $propertyFilterCache = array();
+    private static $propertyFilterCache = array();
 
     /**
      * Extract values from an object
@@ -79,7 +79,7 @@ class ObjectProperty extends AbstractHydrator
             ));
         }
 
-        $properties = & $this->propertyFilterCache[get_class($object)];
+        $properties = & self::$propertyFilterCache[get_class($object)];
 
         if (! isset($properties)) {
             $reflection = new ReflectionClass($object);

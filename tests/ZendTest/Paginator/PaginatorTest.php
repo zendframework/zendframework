@@ -425,6 +425,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @group ZF2-6817
+     * @group ZF2-6812
      */
     public function testGetsItemsByPageHandleDbSelectAdapter()
     {

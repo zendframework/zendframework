@@ -21,12 +21,10 @@ class ObjectProperty extends AbstractHydrator
     private static $skippedPropertiesCache = array();
 
     /**
-     * Extract values from an object
+     * {@inheritDoc}
      *
      * Extracts the accessible non-static properties of the given $object.
      *
-     * @param  object $object
-     * @return array
      * @throws Exception\BadMethodCallException for a non-object $object
      */
     public function extract($object)
@@ -62,13 +60,12 @@ class ObjectProperty extends AbstractHydrator
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Hydrate an object by populating public properties
      *
      * Hydrates an object by setting public properties of the object.
      *
-     * @param  array $data
-     * @param  object $object
-     * @return object
      * @throws Exception\BadMethodCallException for a non-object $object
      */
     public function hydrate(array $data, $object)

@@ -18,7 +18,7 @@ class ObjectProperty extends AbstractHydrator
     /**
      * @var array[] indexed by class name and then property name
      */
-    private static $propertyFilterCache = array();
+    private static $skippedPropertiesCache = array();
 
     /**
      * Extract values from an object
@@ -79,7 +79,7 @@ class ObjectProperty extends AbstractHydrator
             ));
         }
 
-        $properties = & self::$propertyFilterCache[get_class($object)];
+        $properties = & self::$skippedPropertiesCache[get_class($object)];
 
         if (! isset($properties)) {
             $reflection = new ReflectionClass($object);

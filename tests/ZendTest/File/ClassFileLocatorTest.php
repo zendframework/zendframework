@@ -133,6 +133,10 @@ class ClassFileLocatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($foundFourth);
     }
 
+    /**
+     * @group 6946
+     * @group 6814
+     */
     public function testIterationShouldNotCountFQCNScalarResolutionConstantAsClass()
     {
         if (PHP_VERSION_ID < 50500) {

@@ -10,7 +10,7 @@
 namespace Zend\Stdlib\Hydrator;
 
 use Zend\Stdlib\Exception;
-use ReflectionObject;
+use ReflectionClass;
 use ReflectionProperty;
 
 class ObjectProperty extends AbstractHydrator
@@ -80,7 +80,7 @@ class ObjectProperty extends AbstractHydrator
         $prop = &$this->propertyFilterCache[get_class($object)];
 
         if (!isset($prop)) {
-            $reflectionObject = new ReflectionObject($object);
+            $reflectionObject = new ReflectionClass($object);
             $prop = array_fill_keys(
                 array_map(
                     function ($property) {

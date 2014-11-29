@@ -37,7 +37,7 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
     /**
      * Verify that we get an exception when trying to extract on a non-object
      */
-    public function testHydratorExtractException()
+    public function testHydratorExtractThrowsExceptionOnNonObjectParameter()
     {
         $this->setExpectedException('BadMethodCallException');
         $this->hydrator->extract('thisIsNotAnObject');
@@ -46,7 +46,7 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
     /**
      * Verify that we get an exception when trying to hydrate a non-object
      */
-    public function testHydratorHydrateException()
+    public function testHydratorHydrateThrowsExceptionOnNonObjectParameter()
     {
         $this->setExpectedException('BadMethodCallException');
         $this->hydrator->hydrate(array('some' => 'data'), 'thisIsNotAnObject');
@@ -66,9 +66,8 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
     /**
      * Verifies that the extraction process works on classes that aren't stdClass
      */
-    public function testCanExtractFromClass()
+    public function testCanExtractFromGenericClass()
     {
-        $object = new ObjectPropertyTestAsset();
         $this->assertSame(
             array(
                 'foo' => 'bar',
@@ -76,46 +75,44 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
                 'blubb' => 'baz',
                 'quo' => 'blubb'
             ),
-            $this->hydrator->extract($object)
+            $this->hydrator->extract(new ObjectPropertyTestAsset())
         );
     }
 
     /**
-     * Verify hydration of stdClass
+     * Verify hydration of {@see \stdClass}
      */
     public function testCanHydrateStdClass()
     {
         $object = new \stdClass();
         $object->foo = 'bar';
 
-        $this->hydrator->hydrate(array('foo' => 'baz'), $object);
+        $object = $this->hydrator->hydrate(array('foo' => 'baz'), $object);
 
         $this->assertEquals('baz', $object->foo);
     }
 
     /**
-     * Verify new properties are created if the object is stdClass
+     * Verify that new properties are created if the object is stdClass
      */
-    public function testCanHydrateExtrasToStdClass()
+    public function testCanHydrateAdditionalPropertiesToStdClass()
     {
         $object = new \stdClass();
         $object->foo = 'bar';
 
-        $this->hydrator->hydrate(array('foo' => 'baz', 'bar' => 'baz'), $object);
+        $object = $this->hydrator->hydrate(array('foo' => 'baz', 'bar' => 'baz'), $object);
 
         $this->assertEquals('baz', $object->foo);
         $this->assertObjectHasAttribute('bar', $object);
-        $this->assertAttributeContains('baz', 'bar', $object);
+        $this->assertAttributeSame('baz', 'bar', $object);
     }
 
     /**
-     * Verify that can hydrate our class public properties
+     * Verify that it can hydrate our class public properties
      */
-    public function testCanHydrateClassPublicProperties()
+    public function testCanHydrateGenericClassPublicProperties()
     {
-        $object = new ObjectPropertyTestAsset();
-
-        $this->hydrator->hydrate(
+        $object = $this->hydrator->hydrate(
             array(
                 'foo' => 'foo',
                 'bar' => 'bar',
@@ -123,14 +120,13 @@ class ObjectPropertyTest extends \PHPUnit_Framework_TestCase
                 'quo' => 'quo',
                 'quin' => 'quin'
             ),
-            $object
+            new ObjectPropertyTestAsset()
         );
 
-        $this->assertAttributeContains('foo', 'foo', $object);
-        $this->assertAttributeContains('bar', 'bar', $object);
-        $this->assertAttributeContains('blubb', 'blubb', $object);
-        $this->assertAttributeContains('quo', 'quo', $object);
-        $this->assertAttributeNotContains('quin', 'quin', $object);
+        $this->assertAttributeSame('foo', 'foo', $object);
+        $this->assertAttributeSame('bar', 'bar', $object);
+        $this->assertAttributeSame('blubb', 'blubb', $object);
+        $this->assertAttributeSame('quo', 'quo', $object);
+        $this->assertAttributeNotSame('quin', 'quin', $object);
     }
-
 }

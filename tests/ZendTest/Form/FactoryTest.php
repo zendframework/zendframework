@@ -718,6 +718,17 @@ class FactoryTest extends TestCase
         $this->assertSame($fieldset->getFormFactory()->getFormElementManager(), $this->factory->getFormElementManager());
     }
 
+    /**
+     * @group 6949
+     */
+    public function testPrepareAndInjectWillThrowAndException()
+    {
+        $fieldset = $this->factory->createFieldset(array('name' => 'myFieldset'));
+
+        $this->setExpectedException('Zend\Form\Exception\DomainException');
+        $this->factory->configureFieldset($fieldset, array('hydrator' => 0));
+    }
+
     public function testCanCreateFormWithNullElements()
     {
         $form = $this->factory->createForm(array(

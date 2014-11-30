@@ -718,6 +718,9 @@ class FactoryTest extends TestCase
         $this->assertSame($fieldset->getFormFactory()->getFormElementManager(), $this->factory->getFormElementManager());
     }
 
+    /**
+     * @group 6949
+     */
     public function testPrepareAndInjectWillThrowAndException()
     {
         $fieldset = $this->factory->createFieldset(array('name' => 'myFieldset'));

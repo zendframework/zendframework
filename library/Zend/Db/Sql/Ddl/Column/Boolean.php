@@ -14,7 +14,7 @@ class Boolean extends Column
     /**
      * @var string
      */
-    protected $type = 'TINYINT';
+    protected $type = 'BOOLEAN';
 
     /**
      * {@inheritDoc}

@@ -869,11 +869,9 @@ class Form extends Fieldset implements FormInterface
     }
 
     /**
-     * Recursively populate values of attached elements and fieldsets
+     * {@inheritDoc}
      *
-     * @param array $data
      * @param bool $onlyBase
-     * @return void
      */
     public function populateValues($data, $onlyBase = false)
     {

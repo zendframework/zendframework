@@ -9,7 +9,7 @@
 
 namespace Zend\Db\Sql\Ddl\Column;
 
-class BigInteger extends Integer
+class BigInteger extends Column
 {
     /**
      * @var string

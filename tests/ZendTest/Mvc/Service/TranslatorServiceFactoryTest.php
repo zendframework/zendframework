@@ -108,7 +108,8 @@ class TranslatorServiceFactoryTest extends TestCase
         //#5959
         //get any plugins with AbstractPluginManagerFactory
         $routePluginManagerFactory = new RoutePluginManagerFactory;
-        $routePluginManagerFactory->createService($serviceLocator);
+        $routePluginManager = $routePluginManagerFactory->createService($serviceLocator);
+        $this->assertInstanceOf('Zend\Mvc\Service\AbstractPluginManager', $routePluginManager);
 
         $translator = $this->factory->createService($serviceLocator);
         $this->assertInstanceOf('Zend\Mvc\I18n\Translator', $translator);

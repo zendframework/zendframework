@@ -74,6 +74,46 @@ class TranslatorServiceFactoryTest extends TestCase
         );
     }
 
+    public function testSetsPluginManagerBasedOnConfiguration(){
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('This test will only run if ext/intl is present');
+        }
+
+        //minimum bootstrap
+        $applicationConfig = array(
+            'module_listener_options' => array(),
+            'modules' => array(),
+        );
+        $serviceLocator = new ServiceManager(new ServiceManagerConfig());
+        $serviceLocator->setService('ApplicationConfig', $applicationConfig);
+        $serviceLocator->get('ModuleManager')->loadModules();
+        $serviceLocator->get('Application')->bootstrap();
+
+        //enable to re-write Config
+        $ref = new \ReflectionObject($serviceLocator);
+        $prop = $ref->getProperty('allowOverride');
+        $prop->setAccessible(true);
+        $prop->setValue($serviceLocator, true);
+
+        $config = array(
+            'di' => array(),
+            'translator' => array(
+                'locale' => 'en_US',
+            ),
+        );
+
+        $serviceLocator->setService('Config', $config);
+
+        $translator = $this->factory->createService($serviceLocator);
+
+        /** @group 6244 */
+        //Ensure that the LoaderPluginManager from config has been injected
+        $this->assertInstanceOf(
+            'Zend\I18n\Translator\LoaderPluginManager',
+            $translator->getPluginManager()
+        );
+    }
+
     public function testReturnsTranslatorBasedOnConfigurationWhenNoTranslatorInterfaceServicePresentWithMinimumBootstrap()
     {
         if (!extension_loaded('intl')) {
@@ -117,13 +157,6 @@ class TranslatorServiceFactoryTest extends TestCase
         $translator = $this->factory->createService($serviceLocator);
         $this->assertInstanceOf('Zend\Mvc\I18n\Translator', $translator);
         $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator->getTranslator());
-
-        //#6244
-        //Ensure that the LoaderPluginManager from config has been injected
-        $this->assertInstanceOf(
-            'Zend\I18n\Translator\LoaderPluginManager',
-            $translator->getPluginManager()
-        );
     }
 
     /**

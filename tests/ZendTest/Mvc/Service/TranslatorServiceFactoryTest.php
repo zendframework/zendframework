@@ -74,7 +74,8 @@ class TranslatorServiceFactoryTest extends TestCase
         );
     }
 
-    public function testSetsPluginManagerBasedOnConfiguration(){
+    public function testSetsPluginManagerBasedOnConfiguration()
+    {
         if (!extension_loaded('intl')) {
             $this->markTestSkipped('This test will only run if ext/intl is present');
         }

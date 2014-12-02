@@ -11,6 +11,7 @@ namespace ZendTest\Mvc\View\Console;
 
 use PHPUnit_Framework_TestCase as TestCase;
 
+use Zend\Console\Response as ConsoleResponse;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\SharedEventManager;
 use Zend\Mvc\Application;
@@ -20,7 +21,6 @@ use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\Mvc\View\Console\ViewManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Console\Request as ConsoleRequest;
-use ZendTest\Mvc\View\Console\TestAsset\MockResponse;
 
 class ViewManagerTest extends TestCase {
 
@@ -133,7 +133,7 @@ class ViewManagerTest extends TestCase {
         $this->services->setService('Config', $config);
         $this->services->setService('Request', new ConsoleRequest());
         $this->services->setService('EventManager',$eventManager);
-        $this->services->setService('Response', new MockResponse());
+        $this->services->setService('Response', new ConsoleResponse());
 
         /** @var $manager ViewManager */
         $manager = $this->factory->createService($this->services);
@@ -159,7 +159,7 @@ class ViewManagerTest extends TestCase {
         $this->services->setService('Config', array());
         $this->services->setService('Request', new ConsoleRequest());
         $this->services->setService('EventManager',$eventManager);
-        $this->services->setService('Response', new MockResponse());
+        $this->services->setService('Response', new ConsoleResponse());
 
         /** @var $manager ViewManager */
         $manager = $this->factory->createService($this->services);

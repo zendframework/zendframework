@@ -10,7 +10,6 @@
 namespace ZendTest\Mvc\View\Console;
 
 use PHPUnit_Framework_TestCase as TestCase;
-
 use Zend\Console\Response as ConsoleResponse;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\SharedEventManager;
@@ -22,7 +21,8 @@ use Zend\Mvc\View\Console\ViewManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Console\Request as ConsoleRequest;
 
-class ViewManagerTest extends TestCase {
+class ViewManagerTest extends TestCase
+{
 
     /**
      * @var ViewManager
@@ -39,7 +39,17 @@ class ViewManagerTest extends TestCase {
      */
     protected $config;
 
+    public function setUp()
+    {
+        $this->config = new ServiceManagerConfig();
+        $this->services = new ServiceManager();
+        $this->view_manager = new ViewManager();
+        $this->factory = new ConsoleViewManagerFactory();
+    }
 
+    /**
+     * @return array
+     */
     public function viewManagerConfiguration()
     {
         return array(
@@ -109,16 +119,6 @@ class ViewManagerTest extends TestCase {
             )
         );
     }
-
-
-    public function setUp()
-    {
-        $this->config = new ServiceManagerConfig();
-        $this->services = new ServiceManager();
-        $this->view_manager = new ViewManager();
-        $this->factory = new ConsoleViewManagerFactory();
-    }
-
 
     /**
      * @dataProvider viewManagerConfiguration

@@ -42,72 +42,72 @@ class ViewManagerTest extends TestCase {
 
     public function viewManagerConfiguration()
     {
-        return [
-            'standard' => [
-                [
-                    'view_manager' => [
+        return array(
+            'standard' => array(
+                array(
+                    'view_manager' => array(
                         'display_exceptions' => false,
                         'display_not_found_reason' => false,
-                    ],
-                ]
-            ],
-            'with-console' => [
-                [
-                    'view_manager' => [
+                    ),
+                )
+            ),
+            'with-console' => array(
+                array(
+                    'view_manager' => array(
                         'display_exceptions' => true,
                         'display_not_found_reason' => true
-                    ],
-                    'console' => [
-                        'view_manager' => [
+                    ),
+                    'console' => array(
+                        'view_manager' => array(
                             'display_exceptions' => false,
                             'display_not_found_reason' => false,
-                        ]
-                    ]
-                ]
-            ],
-            'without-console' => [
-                [
-                    'view_manager' => [
+                        )
+                    )
+                )
+            ),
+            'without-console' => array(
+                array(
+                    'view_manager' => array(
                         'display_exceptions' => false,
                         'display_not_found_reason' => false
-                    ],
-                ]
-            ],
-            'console-only' => [
-                [
-                    'console' => [
-                        'view_manager' => [
+                    ),
+                )
+            ),
+            'console-only' => array(
+                array(
+                    'console' => array(
+                        'view_manager' => array(
                             'display_exceptions' => false,
                             'display_not_found_reason' => false
-                        ]
-                    ],
-                ]
-            ],
-            'mixed' => [
-                [
-                    'view_manager' => [
+                        )
+                    ),
+                )
+            ),
+            'mixed' => array(
+                array(
+                    'view_manager' => array(
                         'display_exceptions' => false,
-                    ],
-                    'console' => [
-                        'view_manager' => [
+                    ),
+                    'console' => array(
+                        'view_manager' => array(
                             'display_not_found_reason' => false
-                        ]
-                    ]
-                ]
-            ],
-            'mixed-opposite-order' => [
-                [
-                    'view_manager' => [
+                        )
+                    )
+                )
+            ),
+            'mixed-opposite-order' => array(
+                array(
+                    'view_manager' => array(
                         'display_not_found_reason' => false,
-                    ],
-                    'console' => [
-                        'view_manager' => [
+                    ),
+                    'console' => array(
+                        'view_manager' => array(
                             'display_exceptions' => false
-                        ]
-                    ]
-                ]
-            ]
-        ];
+                        )
+                    )
+                )
+            )
+        );
     }
 
 

@@ -36,9 +36,17 @@ class ViewManager extends BaseViewManager
         $events       = $application->getEventManager();
         $sharedEvents = $events->getSharedManager();
 
-        $this->config   = isset($config['view_manager']) && (is_array($config['view_manager']) || $config['view_manager'] instanceof ArrayAccess)
-                        ? $config['view_manager']
-                        : array();
+
+        if ( !(isset($config['console']['view_manager']) && (is_array($config['console']['view_manager']) || $config['console']['view_manager'] instanceof ArrayAccess))) {
+            $config['console']['view_manager'] = array();
+        }
+
+        if ( !(isset($config['view_manager']) && (is_array($config['view_manager']) || $config['view_manager'] instanceof ArrayAccess))) {
+            $config['view_manager'] = array();
+        }
+
+        $this->config = array_merge($config['view_manager'], $config['console']['view_manager']);
+
         $this->services = $services;
         $this->event    = $event;
 

@@ -11,4 +11,5 @@ namespace Zend\Stdlib;
 
 interface ResponseInterface extends MessageInterface
 {
+    public function setStatusCode($int);
 }

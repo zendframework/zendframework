@@ -72,9 +72,9 @@ abstract class UriFactory
     {
         if (isset(static::$schemeClasses[$scheme])) {
             return static::$schemeClasses[$scheme];
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**

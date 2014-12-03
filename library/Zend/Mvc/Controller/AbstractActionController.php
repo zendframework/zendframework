@@ -85,4 +85,14 @@ abstract class AbstractActionController extends AbstractController
 
         return $actionResponse;
     }
+
+    protected function CreateHttpNotFoundModel(HttpResponse $response)
+    {
+        return $this->__call('createHttpNotFoundModel', array($response));
+    }
+
+    protected function CreateConsoleNotFoundModel($response)
+    {
+        return $this->__call('createConsoleNotFoundModel', array($response));
+    }
 }

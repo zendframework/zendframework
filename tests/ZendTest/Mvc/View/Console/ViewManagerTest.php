@@ -17,7 +17,7 @@ use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Service\ConsoleViewManagerFactory;
 use Zend\Mvc\Service\ServiceManagerConfig;
-use Zend\Mvc\View\Console\ViewManager;
+use Zend\Mvc\View\Console\ViewManager as ConsoleViewManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Console\Request as ConsoleRequest;
 
@@ -25,7 +25,7 @@ class ViewManagerTest extends TestCase
 {
 
     /**
-     * @var ViewManager
+     * @var ConsoleViewManager
      */
     protected $view_manager;
 
@@ -43,7 +43,7 @@ class ViewManagerTest extends TestCase
     {
         $this->config = new ServiceManagerConfig();
         $this->services = new ServiceManager();
-        $this->view_manager = new ViewManager();
+        $this->view_manager = new ConsoleViewManager();
         $this->factory = new ConsoleViewManagerFactory();
     }
 
@@ -93,30 +93,6 @@ class ViewManagerTest extends TestCase
                     ),
                 )
             ),
-            'mixed' => array(
-                array(
-                    'view_manager' => array(
-                        'display_exceptions' => false,
-                    ),
-                    'console' => array(
-                        'view_manager' => array(
-                            'display_not_found_reason' => false
-                        )
-                    )
-                )
-            ),
-            'mixed-opposite-order' => array(
-                array(
-                    'view_manager' => array(
-                        'display_not_found_reason' => false,
-                    ),
-                    'console' => array(
-                        'view_manager' => array(
-                            'display_exceptions' => false
-                        )
-                    )
-                )
-            )
         );
     }
 

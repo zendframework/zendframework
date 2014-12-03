@@ -18,8 +18,10 @@ class CreateHttpNotFoundModel extends AbstractPlugin
     {
         $response->setStatusCode(404);
 
-        return new ViewModel([
-            'content' => 'Page not found',
-        ]);
+        return new ViewModel(
+            [
+                'content' => 'Page not found',
+            ]
+        );
     }
-} 
+}

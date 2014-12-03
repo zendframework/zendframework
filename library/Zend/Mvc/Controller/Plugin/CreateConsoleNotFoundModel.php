@@ -3,21 +3,23 @@
 namespace Zend\Mvc\Controller\Plugin;
 
 use Zend\View\Model\ConsoleModel;
+use Zend\Feed\Reader\Http\ResponseInterface;
 
 /**
  * Create a console view model representing a "not found" action
  */
- class CreateConsoleNotFoundModel extends AbstractPlugin
+class CreateConsoleNotFoundModel extends AbstractPlugin
 {
-     /**
-      * @param  \Zend\Stdlib\ResponseInterface $response
-      * @return ConsoleModel
-      */
-     public function __invoke($response)
-     {
-         $viewModel = new ConsoleModel();
-         $viewModel->setErrorLevel(1);
-         $viewModel->setResult('Page not found');
-         return $viewModel;
-     }
-} 
+    /**
+     * @param  ResponseInterface $response
+     * @return ConsoleModel
+     */
+    public function __invoke($response)
+    {
+        $viewModel = new ConsoleModel();
+        $viewModel->setErrorLevel(1);
+        $viewModel->setResult('Page not found');
+
+        return $viewModel;
+    }
+}

@@ -13,6 +13,8 @@ use Zend\Http\Response as HttpResponse;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
+use Zend\View\Model\ConsoleModel;
+use Zend\Stdlib\ResponseInterface;
 
 /**
  * Basic action controller
@@ -31,9 +33,9 @@ abstract class AbstractActionController extends AbstractController
      */
     public function indexAction()
     {
-        return new ViewModel(array(
+        return new ViewModel([
             'content' => 'Placeholder page'
-        ));
+        ]);
     }
 
     /**
@@ -86,13 +88,25 @@ abstract class AbstractActionController extends AbstractController
         return $actionResponse;
     }
 
+    /**
+     * Create an HTTP view model representing a "not found" page
+     *
+     * @param  HttpResponse $response
+     * @return ViewModel
+     */
     protected function CreateHttpNotFoundModel(HttpResponse $response)
     {
-        return $this->__call('createHttpNotFoundModel', array($response));
+        return $this->__call('createHttpNotFoundModel', [$response]);
     }
 
+    /**
+     * Create a console view model representing a "not found" action
+     *
+     * @param  ResponseInterface $response
+     * @return ConsoleModel
+     */
     protected function CreateConsoleNotFoundModel($response)
     {
-        return $this->__call('createConsoleNotFoundModel', array($response));
+        return $this->__call('createConsoleNotFoundModel', [$response]);
     }
 }

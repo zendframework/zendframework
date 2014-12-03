@@ -33,9 +33,9 @@ abstract class AbstractActionController extends AbstractController
      */
     public function indexAction()
     {
-        return new ViewModel([
+        return new ViewModel(array(
             'content' => 'Placeholder page'
-        ]);
+        ));
     }
 
     /**
@@ -96,7 +96,7 @@ abstract class AbstractActionController extends AbstractController
      */
     protected function createHttpNotFoundModel(HttpResponse $response)
     {
-        return $this->__call('createHttpNotFoundModel', [$response]);
+        return $this->__call('createHttpNotFoundModel', array($response));
     }
 
     /**
@@ -107,6 +107,6 @@ abstract class AbstractActionController extends AbstractController
      */
     protected function createConsoleNotFoundModel($response)
     {
-        return $this->__call('createConsoleNotFoundModel', [$response]);
+        return $this->__call('createConsoleNotFoundModel', array($response));
     }
 }

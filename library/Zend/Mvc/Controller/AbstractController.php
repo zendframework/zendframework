@@ -22,6 +22,8 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\DispatchableInterface as Dispatchable;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;
+use Zend\View\Model\ConsoleModel;
+use Zend\View\Model\ViewModel;
 
 /**
  * Abstract controller
@@ -336,5 +338,33 @@ abstract class AbstractController implements
         $method .= 'Action';
 
         return $method;
+    }
+
+    /**
+     * Create an HTTP view model representing a "not found" page
+     *
+     * @param  HttpResponse $response
+     * @return ViewModel
+     */
+    protected function createHttpNotFoundModel(HttpResponse $response)
+    {
+        $response->setStatusCode(404);
+        return new ViewModel(array(
+            'content' => 'Page not found',
+        ));
+    }
+
+    /**
+     * Create a console view model representing a "not found" action
+     *
+     * @param  \Zend\Stdlib\ResponseInterface $response
+     * @return ConsoleModel
+     */
+    protected function createConsoleNotFoundModel($response)
+    {
+        $viewModel = new ConsoleModel();
+        $viewModel->setErrorLevel(1);
+        $viewModel->setResult('Page not found');
+        return $viewModel;
     }
 }

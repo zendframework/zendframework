@@ -116,7 +116,7 @@ class TranslatorServiceFactoryTest extends TestCase
 
 
         $serviceLocator->setService('Config', $config);
-        $serviceLocator->setService('TranslatorPluginManager',$translatorPluginManger);
+        $serviceLocator->setService('TranslatorPluginManager', $translatorPluginManger);
 
         $translator = $this->factory->createService($serviceLocator);
 

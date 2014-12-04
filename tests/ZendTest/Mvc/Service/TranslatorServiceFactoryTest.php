@@ -114,7 +114,6 @@ class TranslatorServiceFactoryTest extends TestCase
 
         $translatorPluginManger = $this->getMock('Zend\I18n\Translator\LoaderPluginManager');
 
-
         $serviceLocator->setService('Config', $config);
         $serviceLocator->setService('TranslatorPluginManager', $translatorPluginManger);
 

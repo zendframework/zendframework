@@ -35,4 +35,4 @@ class CreateConsoleNotFoundModelTest extends TestCase
         $this->assertSame("Page not found", $model->getResult());
         $this->assertSame(1, $model->getErrorLevel());
     }
-} 
+}

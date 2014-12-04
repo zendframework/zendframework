@@ -35,4 +35,4 @@ class CreateHttpNotFoundModelTest extends TestCase
         $this->assertSame("Page not found", $model->getVariable('content'));
         $this->assertSame(404, $response->getStatusCode());
     }
-} 
+}

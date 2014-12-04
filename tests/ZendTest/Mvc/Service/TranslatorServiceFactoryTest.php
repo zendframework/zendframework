@@ -164,6 +164,7 @@ class TranslatorServiceFactoryTest extends TestCase
         $translator = $this->factory->createService($serviceLocator);
         $this->assertInstanceOf('Zend\Mvc\I18n\Translator', $translator);
         $this->assertInstanceOf('Zend\I18n\Translator\Translator', $translator->getTranslator());
+
     }
 
     /**

@@ -9,10 +9,13 @@
 
 namespace ZendTest\Paginator;
 
+use ArrayIterator;
+use ArrayObject;
 use ReflectionMethod;
 use stdClass;
 use Zend\Cache\StorageFactory as CacheFactory;
 use Zend\Config;
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Adapter as DbAdapter;
 use Zend\Db\Sql;
 use Zend\Filter;
@@ -429,9 +432,18 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsItemsByPageHandleDbSelectAdapter()
     {
-        $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $resultSet = new ResultSet;
+        $result = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $resultSet->initialize(array(
+            new ArrayObject(array('foo' => 'bar')),
+            new ArrayObject(array('foo' => 'bar')),
+            new ArrayObject(array('foo' => 'bar')),
+        ));
+        $result->expects($this->once())->method('current')->will($this->returnValue(array('c' => 3)));
+        $result->expects($this->once())->method('current')->will($this->returnValue($resultSet->getDataSource()));
+
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
-        $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
+        $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($result));
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
         $mockPlatform = $this->getMock('Zend\Db\Adapter\Platform\PlatformInterface');
@@ -452,12 +464,16 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $mockSelect = $this->getMock('Zend\Db\Sql\Select');
 
         $dbSelect = new Paginator\Adapter\DbSelect($mockSelect, $mockSql);
-        $paginator = new Paginator\Paginator(new Paginator\Adapter\DbSelect($mockSelect, $mockSql));
-        $page1 = $paginator->getItemsByPage(1);
+        $this->assertInstanceOf('ArrayIterator', $resultSet->getDataSource());
+
+        $paginator = new Paginator\Paginator($dbSelect);
+        $this->assertInstanceOf('ArrayIterator', $paginator->getItemsByPage(1));
         
-        $expected = new \ArrayIterator(array());
-        $this->assertEquals($page1, $expected);
-        $this->assertEquals($page1, $paginator->getItemsByPage(1));
+        $paginator = new Paginator\Paginator(new Paginator\Adapter\Iterator($resultSet->getDataSource()));
+
+        foreach($paginator as $item) {
+            $this->assertInstanceOf('ArrayObject', $item);
+        }
     }
 
     public function testGetsItemCount()

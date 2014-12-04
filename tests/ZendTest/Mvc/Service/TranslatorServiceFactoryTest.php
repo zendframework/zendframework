@@ -74,6 +74,15 @@ class TranslatorServiceFactoryTest extends TestCase
         );
     }
 
+    /**
+     * In this test, we inject a mock LoaderPluginManager into the service
+     * manger then check to make sure that the TranslatorServiceFactory
+     * correctly passes the LoaderPluginManager into the new Translator. This
+     * functionality is required so modules can add their own translation
+     * loaders via config.
+     *
+     * @group 6244
+     */
     public function testSetsPluginManagerFromServiceLocatorBasedOnConfiguration()
     {
         if (!extension_loaded('intl')) {
@@ -103,19 +112,14 @@ class TranslatorServiceFactoryTest extends TestCase
             ),
         );
 
-        $serviceLocator->setService('Config', $config);
-
-        /**
-         * Inject a mock plugin manager so we can see if the factory pushing it
-         * into the translator from the service locator
-         */
         $translatorPluginManger = $this->getMock('Zend\I18n\Translator\LoaderPluginManager');
+
+
+        $serviceLocator->setService('Config', $config);
         $serviceLocator->setService('TranslatorPluginManager',$translatorPluginManger);
 
         $translator = $this->factory->createService($serviceLocator);
 
-        /** @group 6244 */
-        //Ensure that the LoaderPluginManager from config has been injected
         $this->assertEquals(
             $translatorPluginManger,
             $translator->getPluginManager()

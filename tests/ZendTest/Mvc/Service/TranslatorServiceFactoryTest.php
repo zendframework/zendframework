@@ -74,7 +74,7 @@ class TranslatorServiceFactoryTest extends TestCase
         );
     }
 
-    public function testSetsPluginManagerBasedOnConfiguration()
+    public function testSetsPluginManagerFromServiceLocatorBasedOnConfiguration()
     {
         if (!extension_loaded('intl')) {
             $this->markTestSkipped('This test will only run if ext/intl is present');
@@ -105,12 +105,19 @@ class TranslatorServiceFactoryTest extends TestCase
 
         $serviceLocator->setService('Config', $config);
 
+        /**
+         * Inject a mock plugin manager so we can see if the factory pushing it
+         * into the translator from the service locator
+         */
+        $translatorPluginManger = $this->getMock('Zend\I18n\Translator\LoaderPluginManager');
+        $serviceLocator->setService('TranslatorPluginManager',$translatorPluginManger);
+
         $translator = $this->factory->createService($serviceLocator);
 
         /** @group 6244 */
         //Ensure that the LoaderPluginManager from config has been injected
-        $this->assertInstanceOf(
-            'Zend\I18n\Translator\LoaderPluginManager',
+        $this->assertEquals(
+            $translatorPluginManger,
             $translator->getPluginManager()
         );
     }
@@ -150,10 +157,6 @@ class TranslatorServiceFactoryTest extends TestCase
         //get any plugins with AbstractPluginManagerFactory
         $routePluginManagerFactory = new RoutePluginManagerFactory;
         $routePluginManager = $routePluginManagerFactory->createService($serviceLocator);
-        $this->assertInstanceOf(
-            'Zend\Mvc\Router\RoutePluginManager',
-            $routePluginManager
-        );
 
         $translator = $this->factory->createService($serviceLocator);
         $this->assertInstanceOf('Zend\Mvc\I18n\Translator', $translator);

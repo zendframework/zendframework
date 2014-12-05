@@ -13,7 +13,6 @@ use Zend\Http\Response as HttpResponse;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
-use Zend\Stdlib\ResponseInterface;
 
 /**
  * Basic action controller

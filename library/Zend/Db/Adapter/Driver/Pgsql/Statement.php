@@ -168,7 +168,7 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 
         $pCount = 1;
         $sql = preg_replace_callback(
-            '#\$\##', function ($foo) use (&$pCount) {
+            '#\$\##', function () use (&$pCount) {
                 return '$' . $pCount++;
             },
             $sql

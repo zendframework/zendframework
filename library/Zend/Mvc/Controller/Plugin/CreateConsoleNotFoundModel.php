@@ -12,9 +12,6 @@ namespace Zend\Mvc\Controller\Plugin;
 use Zend\View\Model\ConsoleModel;
 use Zend\Stdlib\ResponseInterface;
 
-/**
- * Create a console view model representing a "not found" action
- */
 class CreateConsoleNotFoundModel extends AbstractPlugin
 {
     /**

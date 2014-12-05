@@ -300,7 +300,9 @@ class Form extends Fieldset implements FormInterface
 
         $this->bindAs = $flags;
         $this->setObject($object);
+
         $data = $this->extract();
+
         $this->populateValues($data, true);
 
         return $this;

@@ -1049,8 +1049,6 @@ abstract class AbstractObject implements ObjectInterface
     {
         $barcodeTable = $this->prepareBarcode();
 
-        $this->preDrawBarcode();
-
         $xpos = (int) $this->withBorder;
         $ypos = (int) $this->withBorder;
 

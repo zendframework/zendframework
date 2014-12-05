@@ -426,7 +426,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($page1, $expected);
         $this->assertEquals($page1, $this->paginator->getItemsByPage(1));
     }
-    
+
     /**
      * @group ZF2-6817
      * @group ZF2-6812

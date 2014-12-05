@@ -77,31 +77,6 @@ class Timezone extends AbstractValidator
     }
 
     /**
-     * @param array|int|string $type
-     * @return int
-     */
-    protected function calculateTypeValue($type)
-    {
-        if (is_array($type)) {
-            $detected = 0;
-            foreach ($type as $value) {
-                if (is_int($value)) {
-                    $detected |= $value;
-                } elseif (in_array($value, $this->constants)) {
-                    $detected |= array_search($value, $this->constants);
-                }
-            }
-            return $detected;
-        }
-
-        if (is_string($type) && in_array($type, $this->constants)) {
-            return array_search($type, $this->constants);
-        }
-
-        return $type;
-    }
-
-    /**
      * Set the types
      *
      * @param  int|array $type
@@ -169,5 +144,33 @@ class Timezone extends AbstractValidator
         }
 
         return true;
+    }
+
+    /**
+     * @param array|int|string $type
+     *
+     * @return int
+     */
+    protected function calculateTypeValue($type)
+    {
+        if (is_array($type)) {
+            $detected = 0;
+
+            foreach ($type as $value) {
+                if (is_int($value)) {
+                    $detected |= $value;
+                } elseif (in_array($value, $this->constants)) {
+                    $detected |= array_search($value, $this->constants);
+                }
+            }
+
+            return $detected;
+        }
+
+        if (is_string($type) && in_array($type, $this->constants)) {
+            return array_search($type, $this->constants);
+        }
+
+        return $type;
     }
 }

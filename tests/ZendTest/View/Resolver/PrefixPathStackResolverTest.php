@@ -69,14 +69,9 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
     {
         $mockResolver = $this->getMock('Zend\View\Resolver\ResolverInterface');
 
-        $resolver = new PrefixPathStackResolver(
-            array(
-                'foo' => 'somepath',
-            ),
-            array(
-                'foo' => $mockResolver,
-            ) // @todo collapse into paths config?
-        );
+        $resolver = new PrefixPathStackResolver(array(
+            'foo' => $mockResolver,
+        ));
 
         $mockResolver->expects($this->at(0))->method('resolve')->with('/bar')->will($this->returnValue('1111'));
         $mockResolver->expects($this->at(1))->method('resolve')->with('/baz')->will($this->returnValue('2222'));

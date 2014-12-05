@@ -88,7 +88,10 @@ class Timezone extends AbstractValidator
         $type = $this->calculateTypeValue($type);
 
         if (!is_int($type) || ($type < 1) || ($type > self::ALL)) {
-            throw new Exception\InvalidArgumentException('Unknown type');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Unknown type "%s" provided',
+                is_string($type) ? $type : (is_object($type) ? get_class($type) : gettype($type))
+            ));
         }
 
         $this->options['type'] = $type;

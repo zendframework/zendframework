@@ -12,14 +12,14 @@ namespace Zend\View\Resolver;
 use Zend\View\Exception;
 use Zend\View\Renderer\RendererInterface as Renderer;
 
-class PrefixPathStackResolver implements ResolverInterface
+final class PrefixPathStackResolver implements ResolverInterface
 {
     /**
      * Array containing prefix as key and "template path stack array" as value
      *
      * @var string[]|string[][]|ResolverInterface[]
      */
-    protected $prefixes = array();
+    private $prefixes = array();
 
     /**
      * Constructor

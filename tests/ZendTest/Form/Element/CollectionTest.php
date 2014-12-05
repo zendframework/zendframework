@@ -479,6 +479,93 @@ class CollectionTest extends TestCase
         $this->assertNotSame($categories[1], $cat2);
     }
 
+    /**
+     * @group 6585
+     * @group 6614
+     */
+    public function testAddingCollectionElementAfterBind()
+    {
+        $form = new Form();
+        $form->setHydrator(new ObjectPropertyHydrator());
+
+        $phone = new \ZendTest\Form\TestAsset\PhoneFieldset();
+
+        $form->add(array(
+            'name' => 'phones',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $phone,
+                'count' => 1,
+                'allow_add' => true
+            ),
+        ));
+
+        $data = array(
+            'phones' => array(
+                array('number' => '1234567'),
+                array('number' => '1234568'),
+            )
+        );
+
+        $phone = new Phone();
+        $phone->setNumber($data['phones'][0]['number']);
+
+        $customer = new stdClass();
+        $customer->phones = array($phone);
+
+        $form->bind($customer);
+        $form->setData($data);
+        $this->assertTrue($form->isValid());
+    }
+
+    /**
+     * @group 6585
+     * @group 6614
+     */
+    public function testDoesNotCreateNewObjectsWhenUsingNestedCollections()
+    {
+        $addressesFieldeset = new \ZendTest\Form\TestAsset\AddressFieldset();
+        $addressesFieldeset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+        $addressesFieldeset->remove('city');
+
+        $form = new Form();
+        $form->setHydrator(new ObjectPropertyHydrator());
+        $form->add(array(
+            'name' => 'addresses',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $addressesFieldeset,
+                'count' => 1
+            ),
+        ));
+
+        $data = array(
+            'addresses' =>
+                array(array(
+                    'street' => 'street1',
+                    'phones' =>
+                        array(array('number' => '1234567')),
+                ))
+        );
+
+        $phone  = new Phone();
+        $phone->setNumber($data['addresses'][0]['phones'][0]['number']);
+
+        $address = new Address();
+        $address->setStreet($data['addresses'][0]['street']);
+        $address->setPhones(array($phone));
+
+        $customer = new stdClass();
+        $customer->addresses = array($address);
+
+        $form->bind($customer);
+        $form->setData($data);
+
+        $this->assertTrue($form->isValid());
+        $phones = $customer->addresses[0]->getPhones();
+        $this->assertSame($phone, $phones[0]);
+    }
+
     public function testDoNotCreateExtraFieldsetOnMultipleBind()
     {
         $form = new \Zend\Form\Form();

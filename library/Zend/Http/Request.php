@@ -279,7 +279,7 @@ class Request extends AbstractMessage implements RequestInterface
      * Return the Cookie header, this is the same as calling $request->getHeaders()->get('Cookie');
      *
      * @convenience $request->getHeaders()->get('Cookie');
-     * @return Header\Cookie
+     * @return Header\Cookie|bool
      */
     public function getCookie()
     {

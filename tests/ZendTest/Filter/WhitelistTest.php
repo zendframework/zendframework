@@ -9,6 +9,7 @@
 
 namespace ZendTest\Filter;
 
+use Zend\Filter\FilterPluginManager;
 use Zend\Filter\Whitelist as WhitelistFilter;
 
 /**
@@ -33,6 +34,14 @@ class WhitelistTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(WhitelistFilter::TYPE_WHITELIST, $filter->getType());
         $this->assertEquals($filter->getList(), array());
+    }
+
+    public function testWithPluginManager()
+    {
+        $pluginManager = new FilterPluginManager();
+        $filter = $pluginManager->get('whitelist');
+
+        $this->assertInstanceOf('Zend\Filter\Whitelist', $filter);
     }
 
     /**

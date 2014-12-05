@@ -17,30 +17,22 @@ class PrefixPathStackResolver implements ResolverInterface
     /**
      * Array containing prefix as key and "template path stack array" as value
      *
-     * @var array
+     * @var string[]|string[][]|ResolverInterface[]
      */
     protected $prefixes = array();
 
     /**
-     * Array containing prefix as key and TemplatePathStack as value
-     *
-     * @var ResolverInterface[]
-     */
-    protected $resolversByPrefix;
-
-    /**
      * Constructor
      *
-     * @param array               $prefixes          Set of prefix and their directories
-     * @param ResolverInterface[] $resolvers         Resolvers to use for particular prefixes, indexed by prefix
+     * @param string[]|string[][]|ResolverInterface[] $prefixes Set of path prefixes to be matched (array keys), with
+     *                                                          either a path or an array of paths to use for matching
+     *                                                          as in the {@see \Zend\View\Resolver\TemplatePathStack},
+     *                                                          or a {@see \Zend\View\Resolver\ResolverInterface}
+     *                                                          to use for view path starting with that prefix
      */
-    public function __construct(
-        array $prefixes = array(),
-        array $resolvers = array()
-    ) {
+    public function __construct(array $prefixes = array())
+    {
         $this->prefixes = $prefixes;
-
-        $this->resolversByPrefix = $resolvers;
     }
 
     /**
@@ -48,22 +40,18 @@ class PrefixPathStackResolver implements ResolverInterface
      */
     public function resolve($name, Renderer $renderer = null)
     {
-        foreach ($this->prefixes as $prefix => $paths) {
+        foreach ($this->prefixes as $prefix => & $resolver) {
             if (strpos($name, $prefix) !== 0) {
                 continue;
             }
 
-            if (! isset($this->resolversByPrefix[$prefix])) {
-                $resolver = new TemplatePathStack();
-
-                $resolver->setPaths(
-                    is_string($this->prefixes[$prefix]) ? (array) $this->prefixes[$prefix] : $this->prefixes[$prefix]
-                );
-
-                $this->resolversByPrefix[$prefix] = $resolver;
+            if (! $resolver instanceof ResolverInterface) {
+                $resolver = new TemplatePathStack(array(
+                    'script_paths' => (array) $resolver,
+                ));
             }
 
-            if ($result = $this->resolversByPrefix[$prefix]->resolve(substr($name, strlen($prefix)), $renderer)) {
+            if ($result = $resolver->resolve(substr($name, strlen($prefix)), $renderer)) {
                 return $result;
             }
         }

@@ -21,6 +21,7 @@ use Zend\Db\Sql;
 use Zend\Filter;
 use Zend\Paginator;
 use Zend\Paginator\Adapter;
+use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Exception;
 use Zend\View;
 use Zend\View\Helper;
@@ -439,7 +440,11 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
             new ArrayObject(array('foo' => 'bar')),
             new ArrayObject(array('foo' => 'bar')),
         ));
-        $result->expects($this->once())->method('current')->will($this->returnValue(array('c' => 3)));
+
+        $result
+            ->expects($this->once())
+            ->method('current')
+            ->will($this->returnValue(array(DbSelect::ROW_COUNT_COLUMN_NAME => 3)));
         $result->expects($this->once())->method('current')->will($this->returnValue($resultSet->getDataSource()));
 
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
@@ -463,7 +468,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($mockStatement));
         $mockSelect = $this->getMock('Zend\Db\Sql\Select');
 
-        $dbSelect = new Paginator\Adapter\DbSelect($mockSelect, $mockSql);
+        $dbSelect = new DbSelect($mockSelect, $mockSql);
         $this->assertInstanceOf('ArrayIterator', $resultSet->getDataSource());
 
         $paginator = new Paginator\Paginator($dbSelect);

@@ -23,7 +23,12 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @var ServiceManager
      */
-    protected $serviceManager = null;
+    protected $serviceManager;
+
+    /**
+     * @var FooPluginManager
+     */
+    protected $pluginManager;
 
     public function setup()
     {
@@ -147,6 +152,7 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
     public function testSingleDelegatorUsage()
     {
         $delegatorFactory = $this->getMock('Zend\\ServiceManager\\DelegatorFactoryInterface');
+        /* @var $pluginManager \Zend\ServiceManager\AbstractPluginManager|\PHPUnit_Framework_MockObject_MockObject */
         $pluginManager = $this->getMockForAbstractClass('Zend\ServiceManager\AbstractPluginManager');
         $realService = $this->getMock('stdClass', array(), array(), 'RealService');
         $delegator = $this->getMock('stdClass', array(), array(), 'Delegator');
@@ -182,6 +188,7 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testMultipleDelegatorsUsage()
     {
+        /* @var $pluginManager \Zend\ServiceManager\AbstractPluginManager|\PHPUnit_Framework_MockObject_MockObject */
         $pluginManager = $this->getMockForAbstractClass('Zend\ServiceManager\AbstractPluginManager');
 
         $fooDelegator = new MockSelfReturningDelegatorFactory();

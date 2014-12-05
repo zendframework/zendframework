@@ -69,7 +69,7 @@ class FormSelect extends AbstractHelper
     );
 
     /**
-     * @var FromHidden|null
+     * @var FormHidden|null
      */
     protected $formHiddenHelper;
 

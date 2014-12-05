@@ -115,8 +115,7 @@ class FileReflection implements ReflectionInterface
      */
     public function getFileName()
     {
-        // @todo get file name from path
-        return $this->filePath;
+        return basename($this->filePath);
     }
 
     /**

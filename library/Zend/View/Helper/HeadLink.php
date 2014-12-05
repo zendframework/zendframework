@@ -33,7 +33,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
     /**
      * Allowed attributes
      *
-     * @var array
+     * @var string[]
      */
     protected $itemKeys = array(
         'charset',

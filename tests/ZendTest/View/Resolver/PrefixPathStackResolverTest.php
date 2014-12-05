@@ -41,7 +41,7 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($resolver->resolve('path/to/bar'));
     }
 
-    public function testResolveWithDefaultSuffix()
+    public function testResolve()
     {
         $resolver = new PrefixPathStackResolver(array(
             'base1'  => $this->basePath,
@@ -52,22 +52,6 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(realpath($this->basePath . '/bar.phtml'), $resolver->resolve('base1/bar'));
         $this->assertEmpty($resolver->resolve('base2/tab'));
         $this->assertSame(realpath($this->basePath . '/baz/taz.phtml'), $resolver->resolve('base2/taz'));
-    }
-
-    public function testResolveWithNonDefaultSuffix()
-    {
-        $resolver = new PrefixPathStackResolver(
-            array(
-                'base1' => $this->basePath,
-                'base2' => $this->basePath . '/baz'
-            ),
-            '.php'
-        );
-
-        $this->assertEmpty($resolver->resolve('base1/bar'));
-        $this->assertSame(realpath($this->basePath . '/foo.php'), $resolver->resolve('base1/foo'));
-        $this->assertEmpty($resolver->resolve('base2/taz'));
-        $this->assertSame(realpath($this->basePath . '/baz/tab.php'), $resolver->resolve('base2/tab'));
     }
 
     public function testResolveWithCongruentPrefix()
@@ -89,7 +73,6 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
             array(
                 'foo' => 'somepath',
             ),
-            PrefixPathStackResolver::DEFAULT_SUFFIX,
             array(
                 'foo' => $mockResolver,
             ) // @todo collapse into paths config?

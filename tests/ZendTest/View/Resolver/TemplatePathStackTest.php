@@ -195,6 +195,9 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $this->stack->setOptions($options);
     }
 
+    /**
+     * @return mixed[][]
+     */
     public function validOptions()
     {
         $options = array(
@@ -209,13 +212,13 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param array $options
+     * @param array|\ArrayObject $options
      *
      * @dataProvider validOptions
      */
     public function testAllowsSettingOptions($options)
     {
-        $arg['script_paths'] = $this->paths;
+        $options['script_paths'] = $this->paths;
         $this->stack->setOptions($options);
         $this->assertFalse($this->stack->isLfiProtectionOn());
 

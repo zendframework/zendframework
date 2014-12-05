@@ -6,6 +6,11 @@ use PHPUnit_framework_TestCase as TestCase;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\Plugin\CreateHttpNotFoundModel;
 
+/**
+ * Tests for {@see \Zend\Mvc\Controller\Plugin\CreateHttpNotFoundModel}
+ *
+ * @covers \Zend\Mvc\Controller\Plugin\CreateHttpNotFoundModel
+ */
 class CreateHttpNotFoundModelTest extends TestCase
 {
     public function testBuildsModelWithErrorMessageAndSetsResponseStatusCode()

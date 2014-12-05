@@ -33,12 +33,6 @@ class PrefixPathStackResolver implements ResolverInterface
     protected $defaultSuffix = 'phtml';
 
     /**
-     * Flag indicating whether or not LFI protection for rendering view scripts is enabled
-     * @var bool
-     */
-    protected $lfiProtectionOn = true;
-
-    /**
      * Array containing prefix as key and TemplatePathStack as value
      *
      * @var ResolverInterface[]
@@ -49,13 +43,11 @@ class PrefixPathStackResolver implements ResolverInterface
      * Constructor
      *
      * @param array               $prefixes          Set of prefix and their directories
-     * @param bool                $lfiProjectionFlag LFI protection flag
      * @param string              $defaultSuffix     Default file suffix to use when looking up view scripts
      * @param ResolverInterface[] $resolvers         Resolvers to use for particular prefixes, indexed by prefix
      */
     public function __construct(
         array $prefixes = array(),
-        $lfiProjectionFlag = true,
         $defaultSuffix = self::DEFAULT_SUFFIX,
         array $resolvers = array()
     ) {
@@ -63,19 +55,8 @@ class PrefixPathStackResolver implements ResolverInterface
             $this->set($prefix, $paths);
         }
 
-        $this->lfiProtectionOn = (bool) $lfiProjectionFlag;
         $this->defaultSuffix   = (string) $defaultSuffix;
         $this->templatePathStackResolvers = $resolvers;
-    }
-
-    /**
-     * Return status of LFI protection flag
-     *
-     * @return bool
-     */
-    public function isLfiProtectionOn()
-    {
-        return $this->lfiProtectionOn;
     }
 
     /**
@@ -167,7 +148,6 @@ class PrefixPathStackResolver implements ResolverInterface
 
                 $resolver->setPaths($paths);
                 $resolver->setDefaultSuffix($this->defaultSuffix);
-                $resolver->setLfiProtection($this->isLfiProtectionOn());
             }
 
             if ($result = $resolver->resolve(substr($name, strlen($prefix)), $renderer)) {

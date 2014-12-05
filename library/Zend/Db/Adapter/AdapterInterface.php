@@ -9,8 +9,6 @@
 
 namespace Zend\Db\Adapter;
 
-use Zend\Db\ResultSet;
-
 /**
  *
  * @property Driver\DriverInterface $driver

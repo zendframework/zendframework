@@ -5,6 +5,11 @@ namespace ZendTest\Mvc\Controller\Plugin;
 use PHPUnit_framework_TestCase as TestCase;
 use Zend\Mvc\Controller\Plugin\CreateConsoleNotFoundModel;
 
+/**
+ * Tests for {@see \Zend\Mvc\Controller\Plugin\CreateConsoleNotFoundModel}
+ *
+ * @covers \Zend\Mvc\Controller\Plugin\CreateConsoleNotFoundModel
+ */
 class CreateConsoleNotFoundModelTest extends TestCase
 {
     public function testCanReturnModelWithErrorMessageAndErrorLevel()

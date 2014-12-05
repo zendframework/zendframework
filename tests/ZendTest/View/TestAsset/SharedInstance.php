@@ -23,6 +23,7 @@ class SharedInstance extends Helper
     public function __invoke()
     {
         $this->count++;
+
         return $this->count;
     }
 }

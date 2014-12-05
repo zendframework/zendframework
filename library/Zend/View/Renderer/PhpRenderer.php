@@ -388,6 +388,7 @@ class PhpRenderer implements Renderer, TreeRendererInterface
     public function __call($method, $argv)
     {
         $plugin = $this->plugin($method);
+
         if (is_callable($plugin)) {
             return call_user_func_array($plugin, $argv);
         }

@@ -46,9 +46,7 @@ class PrefixPathStackResolver implements ResolverInterface
             }
 
             if (! $resolver instanceof ResolverInterface) {
-                $resolver = new TemplatePathStack(array(
-                    'script_paths' => (array) $resolver,
-                ));
+                $resolver = new TemplatePathStack(array('script_paths' => (array) $resolver));
             }
 
             if ($result = $resolver->resolve(substr($name, strlen($prefix)), $renderer)) {

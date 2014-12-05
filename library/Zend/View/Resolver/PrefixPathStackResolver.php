@@ -24,15 +24,6 @@ class PrefixPathStackResolver implements ResolverInterface
     protected $prefixes = array();
 
     /**
-     * Default suffix to use
-     *
-     * Appends this suffix if the template requested does not use it.
-     *
-     * @var string
-     */
-    protected $defaultSuffix = 'phtml';
-
-    /**
      * Array containing prefix as key and TemplatePathStack as value
      *
      * @var ResolverInterface[]
@@ -43,19 +34,16 @@ class PrefixPathStackResolver implements ResolverInterface
      * Constructor
      *
      * @param array               $prefixes          Set of prefix and their directories
-     * @param string              $defaultSuffix     Default file suffix to use when looking up view scripts
      * @param ResolverInterface[] $resolvers         Resolvers to use for particular prefixes, indexed by prefix
      */
     public function __construct(
         array $prefixes = array(),
-        $defaultSuffix = self::DEFAULT_SUFFIX,
         array $resolvers = array()
     ) {
         foreach ($prefixes as $prefix => $paths) {
             $this->set($prefix, $paths);
         }
 
-        $this->defaultSuffix   = (string) $defaultSuffix;
         $this->templatePathStackResolvers = $resolvers;
     }
 
@@ -147,7 +135,6 @@ class PrefixPathStackResolver implements ResolverInterface
                 $resolver = $this->getTemplatePathStackResolver($prefix);
 
                 $resolver->setPaths($paths);
-                $resolver->setDefaultSuffix($this->defaultSuffix);
             }
 
             if ($result = $resolver->resolve(substr($name, strlen($prefix)), $renderer)) {

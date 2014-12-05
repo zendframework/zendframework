@@ -791,7 +791,11 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($outputGetCacheId, 'Zend_Paginator_1_' . $outputGetCacheInternalId);
     }
-    
+
+    /**
+     * @group 6808
+     * @group 6809
+     */
     public function testItemCountsForEmptyItemSet()
     {
         $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(array()));

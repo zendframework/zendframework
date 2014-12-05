@@ -12,7 +12,9 @@ namespace ZendTest\Validator;
 use Zend\Validator\Timezone;
 
 /**
- * @group      Zend_Validator
+ * Tests for {@see \Zend\Validator\Timezone}
+ *
+ * @covers \Zend\Validator\Timezone
  */
 class TimezoneTest extends \PHPUnit_Framework_TestCase
 {

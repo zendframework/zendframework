@@ -13,7 +13,6 @@ use Zend\Http\Response as HttpResponse;
 use Zend\Mvc\Exception;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
-use Zend\View\Model\ConsoleModel;
 use Zend\Stdlib\ResponseInterface;
 
 /**
@@ -92,10 +91,7 @@ abstract class AbstractActionController extends AbstractController
      * @deprecated please use the {@see \Zend\Mvc\Controller\Plugin\CreateHttpNotFoundModel} plugin instead: this
      *             method will be removed in release 2.5 or later.
      *
-     * Create an HTTP view model representing a "not found" page
-     *
-     * @param  HttpResponse $response
-     * @return ViewModel
+     * {@inheritDoc}
      */
     protected function createHttpNotFoundModel(HttpResponse $response)
     {
@@ -106,10 +102,7 @@ abstract class AbstractActionController extends AbstractController
      * @deprecated please use the {@see \Zend\Mvc\Controller\Plugin\CreateConsoleNotFoundModel} plugin instead: this
      *             method will be removed in release 2.5 or later.
      *
-     * Create a console view model representing a "not found" action
-     *
-     * @param  ResponseInterface $response
-     * @return ConsoleModel
+     * {@inheritDoc}
      */
     protected function createConsoleNotFoundModel($response)
     {

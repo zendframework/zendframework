@@ -269,6 +269,18 @@ class TimezoneTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param mixed $invalidType
+     *
+     * @dataProvider getInvalidTypes
+     */
+    public function testRejectsInvalidIntType($invalidType)
+    {
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException');
+
+        new Timezone(array('type' => $invalidType));
+    }
+
+    /**
      * Checks that the validation value matches the expected validity
      *
      * @param mixed $value Value to validate
@@ -298,5 +310,21 @@ class TimezoneTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('\Zend\Validator\Exception\InvalidArgumentException');
         $this->validator->setType($value);
+    }
+
+    /**
+     * Data provider
+     *
+     * @return mixed[][]
+     */
+    public function getInvalidTypes()
+    {
+        return array(
+            array(new \stdClass()),
+            array(array()),
+            array(0),
+            array(10),
+            array('foo'),
+        );
     }
 }

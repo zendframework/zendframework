@@ -471,7 +471,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         
         $paginator = new Paginator\Paginator(new Paginator\Adapter\Iterator($resultSet->getDataSource()));
 
-        foreach($paginator as $item) {
+        foreach ($paginator as $item) {
             $this->assertInstanceOf('ArrayObject', $item);
         }
     }

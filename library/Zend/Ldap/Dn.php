@@ -445,10 +445,8 @@ class Dn implements ArrayAccess
             case self::ATTR_CASEFOLD_UPPER:
             case self::ATTR_CASEFOLD_LOWER:
                 return $caseFold;
-                break;
             default:
                 return $default;
-                break;
         }
     }
 

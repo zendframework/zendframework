@@ -1396,8 +1396,7 @@ class Client implements Stdlib\DispatchableInterface
                     throw new Client\Exception\InvalidArgumentException("The user name cannot contain ':' in 'Basic' HTTP authentication");
                 }
 
-                $authHeader = 'Basic ' . base64_encode($user . ':' . $password);
-                break;
+                return 'Basic ' . base64_encode($user . ':' . $password);
 
             //case self::AUTH_DIGEST:
                 /**
@@ -1409,6 +1408,5 @@ class Client implements Stdlib\DispatchableInterface
                 throw new Client\Exception\InvalidArgumentException("Not a supported HTTP authentication type: '$type'");
 
         }
-        return $authHeader;
     }
 }

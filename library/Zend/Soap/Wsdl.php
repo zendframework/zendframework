@@ -795,11 +795,9 @@ class Wsdl
             case 'soapaction':
             case 'location':
                 return $this->sanitizeUri($value);
-                break;
 
             default:
                 return $value;
-                break;
         }
     }
 

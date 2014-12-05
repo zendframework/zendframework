@@ -86,10 +86,8 @@ class Converter
             switch ($type) {
                 case self::BOOLEAN:
                     return static::toldapBoolean($value);
-                    break;
                 case self::GENERALIZED_TIME:
                     return static::toLdapDatetime($value);
-                    break;
                 default:
                     if (is_string($value)) {
                         return $value;
@@ -107,10 +105,9 @@ class Converter
                         return static::toLdapSerialize($value);
                     } elseif (is_resource($value) && get_resource_type($value) === 'stream') {
                         return stream_get_contents($value);
-                    } else {
-                        return null;
                     }
-                    break;
+
+                    return null;
             }
         } catch (\Exception $e) {
             throw new Exception\ConverterException($e->getMessage(), $e->getCode(), $e);
@@ -203,10 +200,8 @@ class Converter
         switch ($type) {
             case self::BOOLEAN:
                 return static::fromldapBoolean($value);
-                break;
             case self::GENERALIZED_TIME:
                 return static::fromLdapDateTime($value);
-                break;
             default:
                 if (is_numeric($value)) {
                     // prevent numeric values to be treated as date/time

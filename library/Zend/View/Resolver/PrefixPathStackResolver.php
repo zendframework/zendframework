@@ -55,5 +55,7 @@ class PrefixPathStackResolver implements ResolverInterface
                 return $result;
             }
         }
+
+        return null;
     }
 }

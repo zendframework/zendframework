@@ -68,7 +68,7 @@ class Timezone extends AbstractValidator
             if (array_key_exists('type', $options)) {
                 $opts['type'] = $options['type'];
             }
-        } elseif (is_integer($options)) {
+        } elseif (! empty($options)) {
             $opts['type'] = $options;
         }
 
@@ -105,8 +105,8 @@ class Timezone extends AbstractValidator
      * Set the types
      *
      * @param  int|array $type
+     *
      * @throws Exception\InvalidArgumentException
-     * @return Timezone
      */
     public function setType($type = null)
     {
@@ -117,8 +117,6 @@ class Timezone extends AbstractValidator
         }
 
         $this->options['type'] = $type;
-
-        return $this;
     }
 
     /**

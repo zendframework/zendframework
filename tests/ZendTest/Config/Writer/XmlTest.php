@@ -81,7 +81,10 @@ ECS;
         $expected = str_replace("\r\n", "\n", $expected);
         $this->assertEquals($expected, $configString);
     }
-    
+
+    /**
+     * @group 6797
+     */
     public function testAddBranchProperyConstructsSubBranchesOfTypeNumeric()
     {
         $config = new Config(array(), true);
@@ -98,7 +101,6 @@ ECS;
 
 ECS;
         
-        $expected = str_replace("\r\n", "\n", $expected);
         $this->assertEquals($expected, $configString);
     }
 }

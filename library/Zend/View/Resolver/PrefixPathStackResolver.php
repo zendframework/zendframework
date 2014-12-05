@@ -14,8 +14,6 @@ use Zend\View\Renderer\RendererInterface as Renderer;
 
 class PrefixPathStackResolver implements ResolverInterface
 {
-    const DEFAULT_SUFFIX = 'phtml';
-
     /**
      * Array containing prefix as key and "template path stack array" as value
      *

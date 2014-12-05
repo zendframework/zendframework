@@ -15,7 +15,9 @@ class ViewPrefixPathStackResolverFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateService()
     {
+        /* @var $serviceLocator \Zend\ServiceManager\ServiceLocatorInterface|\PHPUnit_Framework_MockObject_MockObject */
         $serviceLocator = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');
+
         $serviceLocator->expects($this->once())
             ->method('get')
             ->with('Config')
@@ -28,8 +30,9 @@ class ViewPrefixPathStackResolverFactoryTest extends \PHPUnit_Framework_TestCase
                 ),
             )));
 
-        $factory = new ViewPrefixPathStackResolverFactory();
+        $factory  = new ViewPrefixPathStackResolverFactory();
         $resolver = $factory->createService($serviceLocator);
+
         $this->assertInstanceOf('Zend\View\Resolver\PrefixPathStackResolver', $resolver);
         $this->assertEquals('php', $resolver->getDefaultSuffix());
     }

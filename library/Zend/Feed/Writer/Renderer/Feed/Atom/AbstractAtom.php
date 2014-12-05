@@ -313,7 +313,6 @@ class AbstractAtom extends Feed\Writer\Renderer\AbstractRenderer
         $img->appendChild($text);
     }
 
-
     /**
      * Set date feed was created
      *

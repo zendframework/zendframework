@@ -10,7 +10,6 @@
 namespace ZendTest\Paginator\Adapter;
 
 use Zend\Paginator\Adapter\DbSelect;
-use Zend\Db\Sql\Select;
 
 /**
  * @group      Zend_Paginator
@@ -20,7 +19,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
     /** @var \PHPUnit_Framework_MockObject_MockObject|\Zend\Db\Sql\Select */
     protected $mockSelect;
 
-    /** @var PHPUnit_Framework_MockObject_MockObject|\Zend\Db\Sql\Select */
+    /** @var \PHPUnit_Framework_MockObject_MockObject|\Zend\Db\Sql\Select */
     protected $mockSelectCount;
 
     /** @var \PHPUnit_Framework_MockObject_MockObject|\Zend\Db\Adapter\Driver\StatementInterface */
@@ -35,7 +34,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
     /** @var DbSelect */
     protected $dbSelect;
 
-    public function setup()
+    public function setUp()
     {
         $this->mockResult    = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
         $this->mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
@@ -56,7 +55,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
 
         $this
             ->mockSql
-            ->expects($this->once())
+            ->expects($this->any())
             ->method('prepareStatementForSqlObject')
             ->with($this->isInstanceOf('Zend\Db\Sql\Select'))
             ->will($this->returnValue($this->mockStatement));
@@ -91,5 +90,14 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
 
         $count = $this->dbSelect->count();
         $this->assertEquals(7, $count);
+    }
+
+    /**
+     * @group 6817
+     * @group 6812
+     */
+    public function testReturnValueIsArray()
+    {
+        $this->assertInternalType('array', $this->dbSelect->getItems(0, 10));
     }
 }

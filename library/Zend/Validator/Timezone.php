@@ -68,11 +68,8 @@ class Timezone extends AbstractValidator
             if (array_key_exists('type', $options)) {
                 $opts['type'] = $options['type'];
             }
-        } else {
-            $options = func_get_args();
-            if (!empty($options)) {
-                $opts['type'] = array_shift($options);
-            }
+        } elseif (is_integer($options)) {
+            $opts['type'] = $options;
         }
 
         // setType called by parent constructor then setOptions method

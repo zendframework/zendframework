@@ -61,7 +61,6 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
                 'base1' => $this->basePath,
                 'base2' => $this->basePath . '/baz'
             ),
-            true,
             '.php'
         );
 
@@ -90,7 +89,6 @@ class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
             array(
                 'foo' => 'somepath',
             ),
-            true,
             PrefixPathStackResolver::DEFAULT_SUFFIX,
             array(
                 'foo' => $mockResolver,

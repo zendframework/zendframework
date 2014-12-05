@@ -103,7 +103,7 @@ class DbSelect implements AdapterInterface
         $resultSet = clone $this->resultSetPrototype;
         $resultSet->initialize($result);
 
-        return $resultSet;
+        return iterator_to_array($resultSet);
     }
 
     /**

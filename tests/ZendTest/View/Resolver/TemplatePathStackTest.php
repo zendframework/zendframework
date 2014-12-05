@@ -127,7 +127,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $this->stack->addPath($this->baseDir . '/_templates');
 
         $this->setExpectedException('Zend\View\Exception\ExceptionInterface', 'parent directory traversal');
-        $test = $this->stack->resolve('../_stubs/scripts/LfiProtectionCheck.phtml');
+        $this->stack->resolve('../_stubs/scripts/LfiProtectionCheck.phtml');
     }
 
     public function testDisablingLfiProtectionAllowsParentDirectoryTraversal()
@@ -185,12 +185,14 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param mixed $options
+     *
      * @dataProvider invalidOptions
      */
-    public function testSettingOptionsWithInvalidArgumentRaisesException($arg)
+    public function testSettingOptionsWithInvalidArgumentRaisesException($options)
     {
         $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
-        $this->stack->setOptions($arg);
+        $this->stack->setOptions($options);
     }
 
     public function validOptions()
@@ -207,29 +209,33 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param array $options
+     *
      * @dataProvider validOptions
      */
-    public function testAllowsSettingOptions($arg)
+    public function testAllowsSettingOptions($options)
     {
         $arg['script_paths'] = $this->paths;
-        $this->stack->setOptions($arg);
+        $this->stack->setOptions($options);
         $this->assertFalse($this->stack->isLfiProtectionOn());
 
         $expected = (bool) ini_get('short_open_tag');
         $this->assertSame($expected, $this->stack->useStreamWrapper());
 
-        $this->assertSame($arg['default_suffix'], $this->stack->getDefaultSuffix());
+        $this->assertSame($options['default_suffix'], $this->stack->getDefaultSuffix());
 
         $this->assertEquals(array_reverse($this->paths), $this->stack->getPaths()->toArray());
     }
 
     /**
+     * @param array $options
+     *
      * @dataProvider validOptions
      */
-    public function testAllowsPassingOptionsToConstructor($arg)
+    public function testAllowsPassingOptionsToConstructor($options)
     {
-        $arg['script_paths'] = $this->paths;
-        $stack = new TemplatePathStack($arg);
+        $options['script_paths'] = $this->paths;
+        $stack = new TemplatePathStack($options);
         $this->assertFalse($stack->isLfiProtectionOn());
 
         $expected = (bool) ini_get('short_open_tag');

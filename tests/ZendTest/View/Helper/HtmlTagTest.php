@@ -107,4 +107,30 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('</html>', $this->helper->closeTag());
     }
+
+    public function testDoctypeAttributesSetter()
+    {
+        $this->helper->setAddDoctypeAttributes(true);
+        $this->assertTrue($this->helper->getAddDoctypeAttributes());
+    }
+
+    public function testAppropriateDoctypeAttributesArePresetIfFlagIsOn()
+    {
+        $this->view->plugin('doctype')->setDoctype('xhtml');
+
+        $attribs = array(
+            'prefix' => 'og: http://ogp.me/ns#',
+        );
+
+        $this->helper->setAddDoctypeAttributes(true)->setAttributes($attribs);
+
+        $tag = $this->helper->openTag();
+
+        $escape = $this->view->plugin('escapehtmlattr');
+
+        $this->assertContains(sprintf('%s="%s"', 'xmlns', $escape('http://www.w3.org/1999/xhtml')), $tag);
+        foreach ($attribs as $name => $value) {
+            $this->assertContains(sprintf('%s="%s"', $name, $escape($value)), $tag);
+        }
+    }
 }

@@ -25,6 +25,18 @@ class HtmlTag extends AbstractHtmlElement
     protected $attributes = array();
 
     /**
+     * Whether to add appropriate attributes in accordance with currently set DOCTYPE.
+     *
+     * @var bool
+     */
+    protected $addDoctypeAttributes = false;
+
+    /**
+     * @var bool
+     */
+    private $doctypeAttribsAdded = false;
+
+    /**
      * Retrieve object instance; optionally add attributes.
      *
      * @param array $attribs
@@ -75,13 +87,52 @@ class HtmlTag extends AbstractHtmlElement
     }
 
     /**
+     * @param bool $addDoctypeAttributes
+     * @return self
+     */
+    public function setAddDoctypeAttributes($addDoctypeAttributes)
+    {
+        $this->addDoctypeAttributes = (bool) $addDoctypeAttributes;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAddDoctypeAttributes()
+    {
+        return $this->addDoctypeAttributes;
+    }
+
+    /**
      * Render opening tag.
      *
      * @return string
      */
     public function openTag()
     {
+        $this->handleDoctypeAttributes();
+        
         return sprintf('<html%s>', $this->htmlAttribs($this->attributes));
+    }
+
+    protected function handleDoctypeAttributes()
+    {
+        if ($this->addDoctypeAttributes && !$this->doctypeAttribsAdded) {
+            if (method_exists($this->view, 'plugin')) {
+                $doctypeAttributes = array();
+
+                if ($this->view->plugin('doctype')->isXhtml()) {
+                    $doctypeAttributes = array('xmlns' => 'http://www.w3.org/1999/xhtml');
+                }
+
+                if (!empty($doctypeAttributes)) {
+                    $this->attributes = array_merge($doctypeAttributes, $this->attributes);
+                }
+            }
+
+            $this->doctypeAttribsAdded = true;
+        }
     }
 
     /**

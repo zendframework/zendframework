@@ -23,7 +23,7 @@ class FeatureSetTest extends \PHPUnit_Framework_TestCase
     {
         $mockMasterAdapter = $this->getMock(
             'Zend\Db\Adapter\AdapterInterface',
-            array('getDriver', 'getPlatform')
+            array('getDriver', 'getPlatform', 'query')
         );
 
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
@@ -36,7 +36,7 @@ class FeatureSetTest extends \PHPUnit_Framework_TestCase
 
         $mockSlaveAdapter = $this->getMock(
             'Zend\Db\Adapter\AdapterInterface',
-            array('getDriver', 'getPlatform')
+            array('getDriver', 'getPlatform', 'query')
         );
 
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');

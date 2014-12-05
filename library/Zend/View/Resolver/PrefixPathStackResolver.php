@@ -14,6 +14,8 @@ use Zend\View\Renderer\RendererInterface as Renderer;
 
 class PrefixPathStackResolver implements ResolverInterface
 {
+    const DEFAULT_SUFFIX = 'phtml';
+
     /**
      * Array containing prefix as key and "template path stack array" as value
      *
@@ -39,22 +41,31 @@ class PrefixPathStackResolver implements ResolverInterface
     /**
      * Array containing prefix as key and TemplatePathStack as value
      *
-     * @var array
+     * @var ResolverInterface[]
      */
     protected $templatePathStackResolvers;
 
     /**
      * Constructor
      *
-     * @param array $prefixes           Set of prefix and their directories
-     * @param bool $lfiProjectionFlag   LFI protection flag
+     * @param array               $prefixes          Set of prefix and their directories
+     * @param bool                $lfiProjectionFlag LFI protection flag
+     * @param string              $defaultSuffix     Default file suffix to use when looking up view scripts
+     * @param ResolverInterface[] $resolvers         Resolvers to use for particular prefixes, indexed by prefix
      */
-    public function __construct(array $prefixes = array(), $lfiProjectionFlag = true)
-    {
+    public function __construct(
+        array $prefixes = array(),
+        $lfiProjectionFlag = true,
+        $defaultSuffix = self::DEFAULT_SUFFIX,
+        array $resolvers = array()
+    ) {
         foreach ($prefixes as $prefix => $paths) {
             $this->set($prefix, $paths);
         }
+
         $this->lfiProtectionOn = (bool) $lfiProjectionFlag;
+        $this->defaultSuffix   = (string) $defaultSuffix;
+        $this->templatePathStackResolvers = $resolvers;
     }
 
     /**
@@ -109,29 +120,6 @@ class PrefixPathStackResolver implements ResolverInterface
     }
 
     /**
-     * Set default file suffix
-     *
-     * @param  string $defaultSuffix
-     * @return self
-     */
-    public function setDefaultSuffix($defaultSuffix)
-    {
-        $this->defaultSuffix = (string) $defaultSuffix;
-
-        return $this;
-    }
-
-    /**
-     * Get default file suffix
-     *
-     * @return string
-     */
-    public function getDefaultSuffix()
-    {
-        return $this->defaultSuffix;
-    }
-
-    /**
      * Set template path stack resolver for a prefix
      *
      * @param  string            $prefix
@@ -172,14 +160,19 @@ class PrefixPathStackResolver implements ResolverInterface
                 continue;
             }
 
-            $templatePathStackResolver = $this->getTemplatePathStackResolver($prefix);
-            $templatePathStackResolver->setPaths($paths);
-            $templatePathStackResolver->setDefaultSuffix($this->getDefaultSuffix());
-            $templatePathStackResolver->setLfiProtection($this->isLfiProtectionOn());
+            $resolver = & $this->templatePathStackResolvers[$prefix];
 
-            $template = substr($name, strlen($prefix));
+            if (! isset($resolver)) {
+                $resolver = $this->getTemplatePathStackResolver($prefix);
 
-            return $templatePathStackResolver->resolve($template, $renderer);
+                $resolver->setPaths($paths);
+                $resolver->setDefaultSuffix($this->defaultSuffix);
+                $resolver->setLfiProtection($this->isLfiProtectionOn());
+            }
+
+            if ($result = $resolver->resolve(substr($name, strlen($prefix)), $renderer)) {
+                return $result;
+            }
         }
     }
 }

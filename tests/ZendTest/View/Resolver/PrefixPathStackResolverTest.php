@@ -11,6 +11,11 @@ namespace ZendTest\View\Resolver;
 
 use Zend\View\Resolver\PrefixPathStackResolver;
 
+/**
+ * Tests for {@see \Zend\View\Resolver\PrefixPathStackResolver}
+ *
+ * @covers \Zend\View\Resolver\PrefixPathStackResolver
+ */
 class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructor()

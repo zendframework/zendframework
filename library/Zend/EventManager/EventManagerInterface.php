@@ -25,8 +25,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * - Passing event name and Event object only
      * - Passing event name, target, and Event object
      * - Passing event name, target, and array|ArrayAccess of arguments
-     *
-     * Can emulate triggerUntil() if the last argument provided is a callback.
+     * - Passing event name, target, array|ArrayAccess of arguments, and callback
      *
      * @param  string $event
      * @param  object|string $target
@@ -50,6 +49,7 @@ interface EventManagerInterface extends SharedEventManagerAwareInterface
      * @param  array|object $argv
      * @param  callable $callback
      * @return ResponseCollection
+     * @deprecated Please use trigger()
      */
     public function triggerUntil($event, $target, $argv = null, $callback = null);
 

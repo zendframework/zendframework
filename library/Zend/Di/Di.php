@@ -244,7 +244,6 @@ class Di implements DependencyInjectionInterface
             return $im->getSharedInstance($name, $callParameters);
         }
 
-
         $config   = $im->getConfig($name);
         $instance = $this->newInstance($name, $params, $config['shared']);
         array_pop($this->instanceContext);
@@ -412,7 +411,7 @@ class Di implements DependencyInjectionInterface
                         } elseif (is_int($injectName) && is_array($injectValue)) {
                             throw new Exception\RuntimeException(
                                 'An injection was provided with a keyed index and an array of data, try using'
-                                    . ' the name of a particular method as a key for your injection data.'
+                                . ' the name of a particular method as a key for your injection data.'
                             );
                         }
                     }
@@ -441,7 +440,7 @@ class Di implements DependencyInjectionInterface
                     }
                     if ($methodsToCall) {
                         foreach ($methodsToCall as $methodInfo) {
-                            $this->resolveAndCallInjectionMethodForInstance($instance, $methodInfo['method'], $methodInfo['args'], $instanceAlias,  self::METHOD_IS_REQUIRED, $instanceClass);
+                            $this->resolveAndCallInjectionMethodForInstance($instance, $methodInfo['method'], $methodInfo['args'], $instanceAlias, self::METHOD_IS_REQUIRED, $instanceClass);
                         }
                     }
                 }
@@ -626,7 +625,7 @@ class Di implements DependencyInjectionInterface
             if (array_key_exists('parameters', $iConfig['requestedClass'])) {
                 $newParameters = array();
 
-                foreach ($iConfig['requestedClass']['parameters'] as $name=>$parameter) {
+                foreach ($iConfig['requestedClass']['parameters'] as $name => $parameter) {
                     $newParameters[$requestedClass.'::'.$method.'::'.$name] = $parameter;
                 }
 
@@ -817,12 +816,14 @@ class Di implements DependencyInjectionInterface
                         }
                         // if this item was marked strict,
                         // plus it cannot be resolve, and no value exist, bail out
-                        throw new Exception\MissingPropertyException(sprintf(
-                            'Missing %s for parameter ' . $name . ' for ' . $class . '::' . $method,
-                            (($value[0] === null) ? 'value' : 'instance/object' )
-                        ),
-                        $e->getCode(),
-                        $e);
+                        throw new Exception\MissingPropertyException(
+                            sprintf(
+                                'Missing %s for parameter ' . $name . ' for ' . $class . '::' . $method,
+                                (($value[0] === null) ? 'value' : 'instance/object')
+                            ),
+                            $e->getCode(),
+                            $e
+                        );
                     } else {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
@@ -841,12 +842,14 @@ class Di implements DependencyInjectionInterface
                         }
                         // if this item was marked strict,
                         // plus it cannot be resolve, and no value exist, bail out
-                        throw new Exception\MissingPropertyException(sprintf(
-                            'Missing %s for parameter ' . $name . ' for ' . $class . '::' . $method,
-                            (($value[0] === null) ? 'value' : 'instance/object' )
-                        ),
-                        $e->getCode(),
-                        $e);
+                        throw new Exception\MissingPropertyException(
+                            sprintf(
+                                'Missing %s for parameter ' . $name . ' for ' . $class . '::' . $method,
+                                (($value[0] === null) ? 'value' : 'instance/object')
+                            ),
+                            $e->getCode(),
+                            $e
+                        );
                     } else {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);

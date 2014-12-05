@@ -90,7 +90,9 @@ class Timezone extends AbstractValidator
         if (!is_int($type) || ($type < 1) || ($type > self::ALL)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Unknown type "%s" provided',
-                is_string($type) ? $type : (is_object($type) ? get_class($type) : gettype($type))
+                (is_string($type) || is_int($type))
+                    ? $type
+                    : (is_object($type) ? get_class($type) : gettype($type))
             ));
         }
 

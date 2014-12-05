@@ -108,13 +108,13 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('</html>', $this->helper->closeTag());
     }
 
-    public function testDoctypeAttributesSetter()
+    public function testUseNamespacesSetter()
     {
-        $this->helper->setAddDoctypeAttributes(true);
-        $this->assertTrue($this->helper->getAddDoctypeAttributes());
+        $this->helper->setUseNamespaces(true);
+        $this->assertTrue($this->helper->getUseNamespaces());
     }
 
-    public function testAppropriateDoctypeAttributesArePresetIfFlagIsOn()
+    public function testAppropriateNamespaceAttributesAreSetIfFlagIsOn()
     {
         $this->view->plugin('doctype')->setDoctype('xhtml');
 
@@ -122,7 +122,7 @@ class HtmlTagTest extends \PHPUnit_Framework_TestCase
             'prefix' => 'og: http://ogp.me/ns#',
         );
 
-        $this->helper->setAddDoctypeAttributes(true)->setAttributes($attribs);
+        $this->helper->setUseNamespaces(true)->setAttributes($attribs);
 
         $tag = $this->helper->openTag();
 

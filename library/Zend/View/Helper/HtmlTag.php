@@ -25,16 +25,17 @@ class HtmlTag extends AbstractHtmlElement
     protected $attributes = array();
 
     /**
-     * Whether to add appropriate attributes in accordance with currently set DOCTYPE.
+     * Whether to pre-set appropriate attributes in accordance
+     * with the currently set DOCTYPE.
      *
      * @var bool
      */
-    protected $addDoctypeAttributes = false;
+    protected $useNamespaces = false;
 
     /**
      * @var bool
      */
-    private $doctypeAttribsAdded = false;
+    private $handledNamespaces = false;
 
     /**
      * Retrieve object instance; optionally add attributes.
@@ -87,21 +88,21 @@ class HtmlTag extends AbstractHtmlElement
     }
 
     /**
-     * @param bool $addDoctypeAttributes
+     * @param bool $useNamespaces
      * @return self
      */
-    public function setAddDoctypeAttributes($addDoctypeAttributes)
+    public function setUseNamespaces($useNamespaces)
     {
-        $this->addDoctypeAttributes = (bool) $addDoctypeAttributes;
+        $this->useNamespaces = (bool) $useNamespaces;
         return $this;
     }
 
     /**
      * @return bool
      */
-    public function getAddDoctypeAttributes()
+    public function getUseNamespaces()
     {
-        return $this->addDoctypeAttributes;
+        return $this->useNamespaces;
     }
 
     /**
@@ -111,14 +112,14 @@ class HtmlTag extends AbstractHtmlElement
      */
     public function openTag()
     {
-        $this->handleDoctypeAttributes();
-        
+        $this->handleNamespaceAttributes();
+
         return sprintf('<html%s>', $this->htmlAttribs($this->attributes));
     }
 
-    protected function handleDoctypeAttributes()
+    protected function handleNamespaceAttributes()
     {
-        if ($this->addDoctypeAttributes && !$this->doctypeAttribsAdded) {
+        if ($this->useNamespaces && !$this->handledNamespaces) {
             if (method_exists($this->view, 'plugin')) {
                 $doctypeAttributes = array();
 
@@ -131,7 +132,7 @@ class HtmlTag extends AbstractHtmlElement
                 }
             }
 
-            $this->doctypeAttribsAdded = true;
+            $this->handledNamespaces = true;
         }
     }
 

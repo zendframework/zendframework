@@ -9,7 +9,7 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Http\PhpEnvironment\Response;
+use Zend\Http\Response;
 use Zend\View\Model\ViewModel;
 
 class CreateHttpNotFoundModel extends AbstractPlugin

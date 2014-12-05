@@ -479,6 +479,10 @@ class CollectionTest extends TestCase
         $this->assertNotSame($categories[1], $cat2);
     }
 
+    /**
+     * @group 6585
+     * @group 6614
+     */
     public function testAddingCollectionElementAfterBind()
     {
         $form = new Form();
@@ -514,6 +518,10 @@ class CollectionTest extends TestCase
         $this->assertTrue($form->isValid());
     }
 
+    /**
+     * @group 6585
+     * @group 6614
+     */
     public function testDoesNotCreateNewObjectsWhenUsingNestedCollections()
     {
         $addressesFieldeset = new \ZendTest\Form\TestAsset\AddressFieldset();

@@ -523,6 +523,10 @@ class FieldsetTest extends TestCase
         $this->assertTrue($allowed);
     }
 
+    /**
+     * @group 6585
+     * @group 6614
+     */
     public function testBindValuesPreservesNewValueAfterValidation()
     {
         $form = new Form();

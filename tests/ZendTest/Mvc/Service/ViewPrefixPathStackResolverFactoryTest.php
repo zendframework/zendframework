@@ -26,7 +26,6 @@ class ViewPrefixPathStackResolverFactoryTest extends \PHPUnit_Framework_TestCase
                     'prefix_template_path_stack' => array(
                         'album/' => array(),
                     ),
-                    'default_template_suffix' => 'php',
                 ),
             )));
 
@@ -34,6 +33,5 @@ class ViewPrefixPathStackResolverFactoryTest extends \PHPUnit_Framework_TestCase
         $resolver = $factory->createService($serviceLocator);
 
         $this->assertInstanceOf('Zend\View\Resolver\PrefixPathStackResolver', $resolver);
-        $this->assertEquals('php', $resolver->getDefaultSuffix());
     }
 }

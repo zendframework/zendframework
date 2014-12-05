@@ -19,8 +19,7 @@ class ViewPrefixPathStackResolverFactory implements FactoryInterface
      * Create the template prefix view resolver
      *
      * Creates a Zend\View\Resolver\PrefixPathStackResolver and populates it with the
-     * ['view_manager']['prefix_template_path_stack'] and sets the default suffix with the
-     * ['view_manager']['default_template_suffix']
+     * ['view_manager']['prefix_template_path_stack']
      *
      * @param  ServiceLocatorInterface $serviceLocator
      * @return PrefixPathStackResolver
@@ -34,12 +33,6 @@ class ViewPrefixPathStackResolverFactory implements FactoryInterface
             $prefixes = $config['view_manager']['prefix_template_path_stack'];
         }
 
-        $resolver = new PrefixPathStackResolver($prefixes);
-
-        if (isset($config['view_manager']['default_template_suffix'])) {
-            $resolver->setDefaultSuffix($config['view_manager']['default_template_suffix']);
-        }
-
-        return $resolver;
+        return new PrefixPathStackResolver($prefixes);
     }
 }

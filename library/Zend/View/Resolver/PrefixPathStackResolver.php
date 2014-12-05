@@ -26,7 +26,7 @@ class PrefixPathStackResolver implements ResolverInterface
      *
      * @var ResolverInterface[]
      */
-    protected $templatePathStackResolvers;
+    protected $resolversByPrefix;
 
     /**
      * Constructor
@@ -42,7 +42,7 @@ class PrefixPathStackResolver implements ResolverInterface
             $this->set($prefix, $paths);
         }
 
-        $this->templatePathStackResolvers = $resolvers;
+        $this->resolversByPrefix = $resolvers;
     }
 
     /**
@@ -95,7 +95,7 @@ class PrefixPathStackResolver implements ResolverInterface
      */
     public function setTemplatePathStackResolver($prefix, TemplatePathStack $resolver)
     {
-        $this->templatePathStackResolvers[$prefix] = $resolver;
+        $this->resolversByPrefix[$prefix] = $resolver;
 
         return $this;
     }
@@ -107,14 +107,14 @@ class PrefixPathStackResolver implements ResolverInterface
      */
     public function getTemplatePathStackResolver($prefix)
     {
-        if (!isset($this->templatePathStackResolvers[$prefix])) {
+        if (!isset($this->resolversByPrefix[$prefix])) {
             if (!isset($this->prefixes[$prefix])) {
                 throw new Exception\InvalidArgumentException(sprintf('Prefix %s does not exists.', $prefix));
             }
-            $this->templatePathStackResolvers[$prefix] = new TemplatePathStack;
+            $this->resolversByPrefix[$prefix] = new TemplatePathStack;
         }
 
-        return $this->templatePathStackResolvers[$prefix];
+        return $this->resolversByPrefix[$prefix];
     }
 
     /**
@@ -127,7 +127,7 @@ class PrefixPathStackResolver implements ResolverInterface
                 continue;
             }
 
-            $resolver = & $this->templatePathStackResolvers[$prefix];
+            $resolver = & $this->resolversByPrefix[$prefix];
 
             if (! isset($resolver)) {
                 $resolver = $this->getTemplatePathStackResolver($prefix);

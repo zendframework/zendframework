@@ -42,7 +42,6 @@ class XmlTest extends AbstractWriterTestCase
 
 ECS;
 
-        $expected = str_replace("\r\n", "\n", $expected);
         $this->assertEquals($expected, $configString);
     }
 
@@ -80,6 +79,28 @@ ECS;
 ECS;
 
         $expected = str_replace("\r\n", "\n", $expected);
+        $this->assertEquals($expected, $configString);
+    }
+
+    /**
+     * @group 6797
+     */
+    public function testAddBranchProperyConstructsSubBranchesOfTypeNumeric()
+    {
+        $config = new Config(array(), true);
+        $config->production = array(array('foo'), array('bar'));
+        
+        $configString = $this->writer->toString($config);
+
+        $expected = <<<ECS
+<?xml version="1.0" encoding="UTF-8"?>
+<zend-config>
+    <production>foo</production>
+    <production>bar</production>
+</zend-config>
+
+ECS;
+        
         $this->assertEquals($expected, $configString);
     }
 }

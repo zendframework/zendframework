@@ -27,15 +27,4 @@ interface AdapterInterface
      * @return Platform\PlatformInterface
      */
     public function getPlatform();
-
-    /**
-     * query() is a convenience function
-     *
-     * @param string $sql
-     * @param string|array|ParameterContainer $parametersOrQueryMode
-     * @param \Zend\Db\ResultSet\ResultSetInterface $resultPrototype
-     * @throws Exception\InvalidArgumentException
-     * @return Driver\StatementInterface|ResultSet\ResultSet
-     */
-    public function query($sql, $parametersOrQueryMode, ResultSet\ResultSetInterface $resultPrototype = null);
 }

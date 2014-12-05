@@ -592,8 +592,6 @@ class Dn implements ArrayAccess
          * to state 1. If a backslash (\) is encountered, state 3 is used to collect the
          * following character without engaging the logic of other states.
          */
-        $key   = null;
-        $value = null;
         $slen  = strlen($dn);
         $state = 1;
         $ko    = $vo = 0;

@@ -359,7 +359,6 @@ class Encoder
         $properties = $cls->getProperties();
         $propValues = get_class_vars($cls->getName());
         $result = "variables:{";
-        $cnt = 0;
 
         $tmpArray = array();
         foreach ($properties as $prop) {

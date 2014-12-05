@@ -109,8 +109,6 @@ class Rss extends AbstractEntry implements EntryInterface
         if ($list->length) {
             foreach ($list as $author) {
                 $string = trim($author->nodeValue);
-                $email = null;
-                $name = null;
                 $data = array();
                 // Pretty rough parsing - but it's a catchall
                 if (preg_match("/^.*@[^ ]*/", $string, $matches)) {
@@ -188,7 +186,6 @@ class Rss extends AbstractEntry implements EntryInterface
             return $this->data['datemodified'];
         }
 
-        $dateModified = null;
         $date = null;
 
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10

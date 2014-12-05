@@ -190,7 +190,6 @@ class Reader
     public static function import($uri, $etag = null, $lastModified = null)
     {
         $cache       = self::getCache();
-        $feed        = null;
         $client      = self::getHttpClient();
         $client->resetParameters();
         $headers = new ZendHttp\Headers();

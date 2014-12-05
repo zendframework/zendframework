@@ -187,7 +187,6 @@ class Result implements
      */
     protected function loadDataFromMysqliStatement()
     {
-        $data = null;
         // build the default reference based bind structure, if it does not already exist
         if ($this->statementBindValues['keys'] === null) {
             $this->statementBindValues['keys'] = array();

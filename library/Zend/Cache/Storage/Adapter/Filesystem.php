@@ -915,8 +915,6 @@ class Filesystem extends AbstractAdapter implements
      */
     protected function internalSetItems(array & $normalizedKeyValuePairs)
     {
-        $oldUmask    = null;
-
         // create an associated array of files and contents to write
         $contents = array();
         foreach ($normalizedKeyValuePairs as $key => & $value) {

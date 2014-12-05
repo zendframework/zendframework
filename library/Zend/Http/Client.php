@@ -824,7 +824,6 @@ class Client implements Stdlib\DispatchableInterface
         }
 
         $this->redirectCounter = 0;
-        $response = null;
 
         $adapter = $this->getAdapter();
 
@@ -1387,8 +1386,6 @@ class Client implements Stdlib\DispatchableInterface
      */
     public static function encodeAuthHeader($user, $password, $type = self::AUTH_BASIC)
     {
-        $authHeader = null;
-
         switch ($type) {
             case self::AUTH_BASIC:
                 // In basic authentication, the user name cannot contain ":"

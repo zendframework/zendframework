@@ -1345,7 +1345,6 @@ class Hostname extends AbstractValidator
             }
         } elseif ($this->getAllow() & self::ALLOW_DNS) {
             $this->error(self::INVALID_HOSTNAME);
-            $status = false;
         }
 
         // Check for URI Syntax (RFC3986)

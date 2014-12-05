@@ -330,9 +330,6 @@ class Converter
         }
 
         // Raw-Data is present, so lets create a DateTime-Object from it.
-        $offset     = $time['offdir']
-                      . str_pad($time['offsethours'], 2, '0', STR_PAD_LEFT)
-                      . str_pad($time['offsetminutes'], 2, '0', STR_PAD_LEFT);
         $timestring = $time['year'] . '-'
                       . str_pad($time['month'], 2, '0', STR_PAD_LEFT) . '-'
                       . str_pad($time['day'], 2, '0', STR_PAD_LEFT) . ' '

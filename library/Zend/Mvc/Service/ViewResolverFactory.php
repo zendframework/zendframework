@@ -28,8 +28,11 @@ class ViewResolverFactory implements FactoryInterface
     {
         $resolver = new ViewResolver\AggregateResolver();
 
-        $mapResolver = $serviceLocator->get('ViewTemplateMapResolver');
-        $pathResolver = $serviceLocator->get('ViewTemplatePathStack');
+        /* @var $mapResolver \Zend\View\Resolver\ResolverInterface */
+        $mapResolver             = $serviceLocator->get('ViewTemplateMapResolver');
+        /* @var $pathResolver \Zend\View\Resolver\ResolverInterface */
+        $pathResolver            = $serviceLocator->get('ViewTemplatePathStack');
+        /* @var $prefixPathStackResolver \Zend\View\Resolver\ResolverInterface */
         $prefixPathStackResolver = $serviceLocator->get('ViewPrefixPathStackResolver');
 
         $resolver

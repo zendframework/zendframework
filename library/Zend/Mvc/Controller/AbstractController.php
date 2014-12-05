@@ -40,6 +40,8 @@ use Zend\Stdlib\ResponseInterface as Response;
  * @method \Zend\Http\Response|array postRedirectGet(string $redirect = null, bool $redirectToUrl = false)
  * @method \Zend\Mvc\Controller\Plugin\Redirect redirect()
  * @method \Zend\Mvc\Controller\Plugin\Url url()
+ * @method \Zend\View\Model\ConsoleModel createConsoleNotFoundModel()
+ * @method \Zend\View\Model\ViewModel createHttpNotFoundModel()
  */
 abstract class AbstractController implements
     Dispatchable,
@@ -89,7 +91,6 @@ abstract class AbstractController implements
      * @return mixed
      */
     abstract public function onDispatch(MvcEvent $e);
-
 
     /**
      * Dispatch a request

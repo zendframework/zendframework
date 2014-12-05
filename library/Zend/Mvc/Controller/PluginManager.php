@@ -45,6 +45,8 @@ class PluginManager extends AbstractPluginManager
         'postredirectget'             => 'Zend\Mvc\Controller\Plugin\PostRedirectGet',
         'redirect'                    => 'Zend\Mvc\Controller\Plugin\Redirect',
         'url'                         => 'Zend\Mvc\Controller\Plugin\Url',
+        'createhttpnotfoundmodel'     => 'Zend\Mvc\Controller\Plugin\CreateHttpNotFoundModel',
+        'createconsolenotfoundmodel'  => 'Zend\Mvc\Controller\Plugin\CreateConsoleNotFoundModel',
     );
 
     /**

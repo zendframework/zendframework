@@ -38,9 +38,7 @@ class PrefixPathStackResolver implements ResolverInterface
         array $prefixes = array(),
         array $resolvers = array()
     ) {
-        foreach ($prefixes as $prefix => $paths) {
-            $this->set($prefix, $paths);
-        }
+        $this->prefixes = $prefixes;
 
         $this->resolversByPrefix = $resolvers;
     }
@@ -55,15 +53,17 @@ class PrefixPathStackResolver implements ResolverInterface
                 continue;
             }
 
-            $resolver = & $this->resolversByPrefix[$prefix];
+            if (! isset($this->resolversByPrefix[$prefix])) {
+                $resolver = new TemplatePathStack();
 
-            if (! isset($resolver)) {
-                $resolver = $this->getTemplatePathStackResolver($prefix);
+                $resolver->setPaths(
+                    is_string($this->prefixes[$prefix]) ? (array) $this->prefixes[$prefix] : $this->prefixes[$prefix]
+                );
 
-                $resolver->setPaths($paths);
+                $this->resolversByPrefix[$prefix] = $resolver;
             }
 
-            if ($result = $resolver->resolve(substr($name, strlen($prefix)), $renderer)) {
+            if ($result = $this->resolversByPrefix[$prefix]->resolve(substr($name, strlen($prefix)), $renderer)) {
                 return $result;
             }
         }

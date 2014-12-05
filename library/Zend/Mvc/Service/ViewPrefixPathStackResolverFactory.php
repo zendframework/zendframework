@@ -27,12 +27,11 @@ class ViewPrefixPathStackResolverFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $config = $serviceLocator->get('Config');
+        $config   = $serviceLocator->get('Config');
+        $prefixes = array();
 
         if (isset($config['view_manager']['prefix_template_path_stack'])) {
             $prefixes = $config['view_manager']['prefix_template_path_stack'];
-        } else {
-            $prefixes = array();
         }
 
         $resolver = new PrefixPathStackResolver($prefixes);

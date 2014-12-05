@@ -18,71 +18,91 @@ use Zend\View\Resolver\PrefixPathStackResolver;
  */
 class PrefixPathStackResolverTest extends \PHPUnit_Framework_TestCase
 {
-    public function testConstructor()
+    /**
+     * @var string
+     */
+    private $basePath;
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function setUp()
     {
-        $resolver = new PrefixPathStackResolver(array(), true);
-        $this->assertTrue($resolver->isLfiProtectionOn());
-        $resolver = new PrefixPathStackResolver(array(), false);
-        $this->assertFalse($resolver->isLfiProtectionOn());
+        $this->basePath = realpath(__DIR__ . '/../_templates/prefix-path-stack-resolver');
     }
 
-    public function testSetDefaultSuffix()
+    public function testResolveWithoutPathPrefixes()
     {
-        $resolver = new PrefixPathStackResolver;
-        $resolver->setDefaultSuffix('php');
-        $this->assertEquals('php', $resolver->getDefaultSuffix());
+        $resolver = new PrefixPathStackResolver();
+
+        $this->assertNull($resolver->resolve(__DIR__));
+        $this->assertNull($resolver->resolve(__FILE__));
+        $this->assertNull($resolver->resolve('path/to/foo'));
+        $this->assertNull($resolver->resolve('path/to/bar'));
     }
 
-    public function testGetDefaultSuffix()
+    public function testResolveWithDefaultSuffix()
     {
-        $resolver = new PrefixPathStackResolver;
-        $this->assertEquals('phtml', $resolver->getDefaultSuffix());
+        $resolver = new PrefixPathStackResolver(array(
+            'base1'  => $this->basePath,
+            'base2' => $this->basePath . '/baz'
+        ));
+
+        $this->assertEmpty($resolver->resolve('base1/foo'));
+        $this->assertSame(realpath($this->basePath . '/bar.phtml'), $resolver->resolve('base1/bar'));
+        $this->assertEmpty($resolver->resolve('base2/tab'));
+        $this->assertSame(realpath($this->basePath . '/baz/taz.phtml'), $resolver->resolve('base2/taz'));
     }
 
-    public function testSetTemplatePathStackResolver()
+    public function testResolveWithNonDefaultSuffix()
     {
-        $templatePathStackResolver = $this->getMock('Zend\View\Resolver\TemplatePathStack');
-        $resolver = new PrefixPathStackResolver;
-        $resolver->setTemplatePathStackResolver('album/', $templatePathStackResolver);
-        $this->assertEquals($templatePathStackResolver, $resolver->getTemplatePathStackResolver('album/'));
+        $resolver = new PrefixPathStackResolver(
+            array(
+                'base1' => $this->basePath,
+                'base2' => $this->basePath . '/baz'
+            ),
+            true,
+            '.php'
+        );
+
+        $this->assertEmpty($resolver->resolve('base1/bar'));
+        $this->assertSame(realpath($this->basePath . '/foo.php'), $resolver->resolve('base1/foo'));
+        $this->assertEmpty($resolver->resolve('base2/taz'));
+        $this->assertSame(realpath($this->basePath . '/baz/tab.php'), $resolver->resolve('base2/tab'));
     }
 
-    public function testGetDefaultTemplatePathStackResolver()
+    public function testResolveWithCongruentPrefix()
     {
-        $resolver = new PrefixPathStackResolver;
-        $resolver->set('album/', 'view');
-        $this->assertInstanceOf('Zend\View\Resolver\TemplatePathStack', $resolver->getTemplatePathStackResolver('album/'));
+        $resolver = new PrefixPathStackResolver(array(
+            'foo'    => $this->basePath,
+            'foobar' => $this->basePath . '/baz'
+        ));
+
+        $this->assertSame(realpath($this->basePath . '/bar.phtml'), $resolver->resolve('foo/bar'));
+        $this->assertSame(realpath($this->basePath . '/baz/taz.phtml'), $resolver->resolve('foobar/taz'));
     }
 
-    public function testGetExceptionWhenPrefixIsNotSet()
+    public function testSetCustomPathStackResolver()
     {
-        $resolver = new PrefixPathStackResolver;
-        $this->setExpectedException('Zend\View\Exception\InvalidArgumentException');
-        $resolver->getTemplatePathStackResolver('bla-bla');
-    }
+        $mockResolver = $this->getMock('Zend\View\Resolver\ResolverInterface');
 
-    public function testResolve()
-    {
-        $resolver = new PrefixPathStackResolver(array(), false);
-        $resolver->add('album/', 'path/to/view1');
-        $resolver->add('album/', 'path/to/view2');
-        $resolver->add('album/', 'path/to/view0', true);
-        $templatePathStackResolver = $this->getMock('Zend\View\Resolver\TemplatePathStack');
-        $resolver->setTemplatePathStackResolver('album/', $templatePathStackResolver);
-        $templatePathStackResolver->expects($this->once())
-            ->method('setPaths')
-            ->with(array('path/to/view0', 'path/to/view1', 'path/to/view2'));
-        $resolver->setDefaultSuffix('php');
-        $templatePathStackResolver->expects($this->once())
-            ->method('setDefaultSuffix')
-            ->with('php');
-        $templatePathStackResolver->expects($this->once())
-            ->method('setLfiProtection')
-            ->with(false);
-        $templatePathStackResolver->expects($this->once())
-            ->method('resolve')
-            ->with('settings/add')
-            ->will($this->returnValue('path/to/view1/settings/add.php'));
-        $this->assertEquals('path/to/view1/settings/add.php', $resolver->resolve('album/settings/add'));
+        $resolver = new PrefixPathStackResolver(
+            array(
+                'foo' => 'somepath',
+            ),
+            true,
+            PrefixPathStackResolver::DEFAULT_SUFFIX,
+            array(
+                'foo' => $mockResolver,
+            ) // @todo collapse into paths config?
+        );
+
+        $mockResolver->expects($this->at(0))->method('resolve')->with('/bar')->will($this->returnValue('1111'));
+        $mockResolver->expects($this->at(1))->method('resolve')->with('/baz')->will($this->returnValue('2222'));
+        $mockResolver->expects($this->at(2))->method('resolve')->with('/tab')->will($this->returnValue(false));
+
+        $this->assertSame('1111', $resolver->resolve('foo/bar'));
+        $this->assertSame('2222', $resolver->resolve('foo/baz'));
+        $this->assertNull($resolver->resolve('foo/tab'));
     }
 }

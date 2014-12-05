@@ -436,4 +436,13 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
         $this->helper->appendStylesheet(array('href' => '/bar/baz', 'id' => 'foo'));
         $this->assertContains('id="foo"', $this->helper->toString());
     }
+
+    /**
+     * @group 6635
+     */
+    public function testSizesAttributeIsSupported()
+    {
+        $this->helper->appendStylesheet(array('rel' => 'icon', 'href' => '/bar/baz', 'sizes' => '123x456'));
+        $this->assertContains('sizes="123x456"', $this->helper->toString());
+    }
 }

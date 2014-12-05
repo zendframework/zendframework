@@ -33,9 +33,21 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
     /**
      * Allowed attributes
      *
-     * @var array
+     * @var string[]
      */
-    protected $itemKeys = array('charset', 'href', 'hreflang', 'id', 'media', 'rel', 'rev', 'type', 'title', 'extras');
+    protected $itemKeys = array(
+        'charset',
+        'href',
+        'hreflang',
+        'id',
+        'media',
+        'rel',
+        'rev',
+        'sizes',
+        'type',
+        'title',
+        'extras'
+    );
 
     /**
      * Registry key for placeholder

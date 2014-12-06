@@ -11,6 +11,7 @@ namespace Zend\Stdlib;
 
 use Traversable;
 use Zend\Stdlib\ArrayUtils\MergeRemoveKey;
+use Zend\Stdlib\ArrayUtils\MergeReplaceKeyInterface;
 
 /**
  * Utility class for testing and manipulation of PHP arrays.
@@ -258,7 +259,7 @@ abstract class ArrayUtils
     public static function merge(array $a, array $b, $preserveNumericKeys = false)
     {
         foreach ($b as $key => $value) {
-            if ($value instanceof ArrayUtils\MergeReplaceKeyInterface) {
+            if ($value instanceof MergeReplaceKeyInterface) {
                 $a[$key] = $value->getData();
             } elseif (isset($a[$key]) || array_key_exists($key, $a)) {
                 if ($value instanceof MergeRemoveKey) {

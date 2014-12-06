@@ -94,17 +94,12 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
      */
     public function get($name, $options = array(), $usePeeringServiceManagers = true)
     {
+        $isAutoInvokable = false;
+
         // Allow specifying a class name directly; registers as an invokable class
         if (!$this->has($name) && $this->autoAddInvokableClass && class_exists($name)) {
-            $serviceLocator = $this->getServiceLocator();
-            if ($serviceLocator && $serviceLocator->has($name)) {
-                throw new Exception\ServiceLocatorUsageException(sprintf(
-                    'The service "%s" has been found in the parent service locator. '.
-                    'You are not able to retrieve it by auto invokable class to avoid confusion. '.
-                    'Did you forget to use $serviceLocator = $serviceLocator->getServiceLocator() in your factory?',
-                    $name
-                ));
-            }
+            $isAutoInvokable = true;
+
             $this->setInvokableClass($name, $name);
         }
 
@@ -112,20 +107,19 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
 
         try {
             $instance = parent::get($name, $usePeeringServiceManagers);
-        } catch (Exception\ServiceNotFoundException $e) {
-            $serviceLocator = $this->getServiceLocator();
-            if ($serviceLocator && $serviceLocator->has($name)) {
-                throw new Exception\ServiceLocatorUsageException(sprintf(
-                    'The unavailable service "%s" has been found in the parent service locator. '.
-                    'Did you forget to use $serviceLocator = $serviceLocator->getServiceLocator() in your factory?',
-                    $name
-                ), 0, $e);
-            }
-            throw $e;
+        } catch (Exception\ServiceNotFoundException $exception) {
+            $this->tryThrowingServiceLocatorUsageException($name, $isAutoInvokable, $exception);
+        } catch (Exception\ServiceNotCreatedException $exception) {
+            $this->tryThrowingServiceLocatorUsageException($name, $isAutoInvokable, $exception);
         }
 
         $this->creationOptions = null;
-        $this->validatePlugin($instance);
+
+        try {
+            $this->validatePlugin($instance);
+        } catch (Exception\RuntimeException $exception) {
+            $this->tryThrowingServiceLocatorUsageException($name, $isAutoInvokable, $exception);
+        }
 
         return $instance;
     }
@@ -279,5 +273,40 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
         }
 
         return parent::createServiceViaCallback($callable, $cName, $rName);
+    }
+
+    /**
+     * @param string $serviceName
+     * @param bool   $isAutoInvokable
+     * @param \Exception $exception
+     *
+     * @throws \Exception
+     * @throws Exception\ServiceLocatorUsageException
+     */
+    private function tryThrowingServiceLocatorUsageException(
+        $serviceName,
+        $isAutoInvokable,
+        \Exception $exception
+    ) {
+
+        if ($isAutoInvokable) {
+            $this->unregisterService($serviceName);
+        }
+
+        $serviceLocator = $this->getServiceLocator();
+
+        if ($serviceLocator && $serviceLocator->has($serviceName)) {
+            throw new Exception\ServiceLocatorUsageException(
+                sprintf(
+                    'The unavailable service "%s" has been found in the parent service locator. '.
+                    'Did you forget to use $serviceLocator = $serviceLocator->getServiceLocator() in your factory?',
+                    $serviceName
+                ),
+                0,
+                $exception
+            );
+        }
+
+        throw $exception;
     }
 }

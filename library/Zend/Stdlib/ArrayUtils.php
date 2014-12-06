@@ -258,10 +258,8 @@ abstract class ArrayUtils
     public static function merge(array $a, array $b, $preserveNumericKeys = false)
     {
         foreach ($b as $key => $value) {
-            $isRemove = $value instanceof MergeRemoveKey;
-
             if (isset($a[$key]) || array_key_exists($key, $a)) {
-                if ($isRemove) {
+                if ($value instanceof MergeRemoveKey) {
                     unset($a[$key]);
                 } elseif (!$preserveNumericKeys && is_int($key)) {
                     $a[] = $value;
@@ -271,7 +269,7 @@ abstract class ArrayUtils
                     $a[$key] = $value;
                 }
             } else {
-                if (!$isRemove) {
+                if (!$value instanceof MergeRemoveKey) {
                     $a[$key] = $value;
                 }
             }

@@ -265,6 +265,37 @@ class ArrayUtilsTest extends TestCase
     }
 
     /**
+     * @group 6903
+     */
+    public function testMergeReplaceKey()
+    {
+        $expected = array(
+            'car' => array(
+                'met' => 'bet',
+            ),
+            'new' => array(
+                'foo' => 'get',
+            ),
+        );
+        $a = array(
+            'car' => array(
+                'boo' => 'foo',
+                'doo' => 'moo',
+            ),
+        );
+        $b = array(
+            'car' => new \Zend\Stdlib\ArrayUtils\MergeReplaceKey(array(
+                'met' => 'bet',
+            )),
+            'new' => new \Zend\Stdlib\ArrayUtils\MergeReplaceKey(array(
+                'foo' => 'get',
+            )),
+        );
+        $this->assertInstanceOf('Zend\Stdlib\ArrayUtils\MergeReplaceKeyInterface', $b['car']);
+        $this->assertEquals($expected, ArrayUtils::merge($a, $b));
+    }
+
+    /**
      * @group 6899
      */
     public function testAllowsRemovingKeys()

@@ -264,6 +264,9 @@ class ArrayUtilsTest extends TestCase
         );
     }
 
+    /**
+     * @group 6903
+     */
     public function testMergeReplaceKey()
     {
         $expected = array(

@@ -11,12 +11,9 @@ namespace ZendTest\ServiceManager;
 
 use ReflectionClass;
 use ReflectionObject;
-use Zend\ServiceManager\Exception\RuntimeException;
-use Zend\ServiceManager\Exception\ServiceNotCreatedException;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
-
+use Zend\ServiceManager\Exception\RuntimeException;
+use Zend\ServiceManager\ServiceManager;
 use ZendTest\ServiceManager\TestAsset\FooPluginManager;
 use ZendTest\ServiceManager\TestAsset\MockSelfReturningDelegatorFactory;
 

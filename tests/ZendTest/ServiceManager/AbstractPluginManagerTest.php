@@ -248,4 +248,33 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
 
         $pluginManager->get('stdClass');
     }
+
+    public function testWillResetAutoInvokableServiceIfNotValid()
+    {
+        /** @var \Zend\ServiceManager\AbstractPluginManager|\PHPUnit_Framework_MockObject_MockObject $pluginManager */
+        $pluginManager = $this->getMockForAbstractClass('Zend\ServiceManager\AbstractPluginManager');
+
+        $pluginManager
+            ->expects($this->any())
+            ->method('validatePlugin')
+            ->will($this->throwException(new RuntimeException()));
+
+        $pluginManager->setInvokableClass(__CLASS__, __CLASS__);
+
+        try {
+            $pluginManager->get('stdClass');
+
+            $this->fail('Expected the plugin manager to throw a RuntimeException, none thrown');
+        } catch (RuntimeException $exception) {
+            $this->assertFalse($pluginManager->has('stdClass'));
+        }
+
+        try {
+            $pluginManager->get(__CLASS__);
+
+            $this->fail('Expected the plugin manager to throw a RuntimeException, none thrown');
+        } catch (RuntimeException $exception) {
+            $this->assertTrue($pluginManager->has(__CLASS__));
+        }
+    }
 }

@@ -297,7 +297,7 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
     ) {
 
         if ($isAutoInvokable) {
-            $this->unregisterService($serviceName);
+            $this->unregisterService($this->canonicalizeName($serviceName));
         }
 
         $serviceLocator = $this->getServiceLocator();

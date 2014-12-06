@@ -95,17 +95,17 @@ abstract class AbstractOptions implements ParameterObjectInterface
     {
         $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
         if (!is_callable(array($this, $setter))) {
-            if ($this->__strictMode__) {
-                throw new Exception\BadMethodCallException(
-                    'The option "' . $key . '" does not '
-                    . 'have a callable "' . $setter . '" setter method '
-                    . 'which must be defined'
-                );
-            } else {
+            if (! $this->__strictMode__) {
                 return;
             }
+
+            throw new Exception\BadMethodCallException(
+                'The option "' . $key . '" does not '
+                . 'have a callable "' . $setter . '" setter method '
+                . 'which must be defined'
+            );
         }
-        // else: Setter method is callable
+
         $this->{$setter}($value);
     }
 

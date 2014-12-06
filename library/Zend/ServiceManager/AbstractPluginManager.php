@@ -92,7 +92,12 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
      * @param  string $name
      * @param  array  $options
      * @param  bool   $usePeeringServiceManagers
+     *
      * @return object
+     *
+     * @throws Exception\ServiceNotFoundException
+     * @throws Exception\ServiceNotCreatedException
+     * @throws Exception\RuntimeException
      */
     public function get($name, $options = array(), $usePeeringServiceManagers = true)
     {

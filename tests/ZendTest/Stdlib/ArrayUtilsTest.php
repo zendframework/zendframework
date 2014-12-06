@@ -9,11 +9,12 @@
 
 namespace ZendTest\Stdlib;
 
+use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
-use ArrayObject;
-use Zend\Stdlib\ArrayUtils;
 use Zend\Config\Config;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Stdlib\ArrayUtils\MergeRemoveKey;
 
 class ArrayUtilsTest extends TestCase
 {
@@ -273,8 +274,8 @@ class ArrayUtilsTest extends TestCase
             'bar' => 'bat'
         );
         $b = array(
-            'foo' => new \Zend\Stdlib\ArrayUtils\MergeRemoveKey(),
-            'baz' => new \Zend\Stdlib\ArrayUtils\MergeRemoveKey(),
+            'foo' => new MergeRemoveKey(),
+            'baz' => new MergeRemoveKey(),
         );
         $expected = array(
             'bar' => 'bat'

@@ -11,7 +11,9 @@ namespace ZendTest\ServiceManager;
 
 use ReflectionClass;
 use ReflectionObject;
+use Zend\ServiceManager\Exception\RuntimeException;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Config;
 
@@ -217,46 +219,33 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         /** @var \Zend\ServiceManager\AbstractPluginManager $pluginManager */
         $pluginManager = new FooPluginManager();
         $pluginManager->setServiceLocator($sm);
-        $pluginManager->setFactory('foo', function ($sm) {
-            $sm->get('bar');
-        });
 
-        try {
-            $pluginManager->get('foo');
-        } catch (ServiceNotCreatedException $e) {
-            $this->assertNotNull($e->getPrevious());
-            $this->assertInstanceOf('Zend\ServiceManager\Exception\ServiceLocatorUsageException', $e->getPrevious());
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceLocatorUsageException');
 
-            return;
-        }
+        $pluginManager->get('bar');
 
         $this->fail('A Zend\ServiceManager\Exception\ServiceNotCreatedException is expected');
     }
 
-    public function testCanCheckInvalidServiceManagerIsUsedWithExistingClass()
+    public function testWillRethrowOnNonValidatedPlugin()
     {
         $sm = new ServiceManager();
-        $sm->setService('stdClass', new \stdClass());
 
-        /** @var \Zend\ServiceManager\AbstractPluginManager $pluginManager */
-        $pluginManager = new FooPluginManager();
+        $sm->setInvokableClass('stdClass', 'stdClass');
+
+        /** @var \Zend\ServiceManager\AbstractPluginManager|\PHPUnit_Framework_MockObject_MockObject $pluginManager */
+        $pluginManager = $this->getMockForAbstractClass('Zend\ServiceManager\AbstractPluginManager');
+
+        $pluginManager
+            ->expects($this->once())
+            ->method('validatePlugin')
+            ->with($this->isInstanceOf('stdClass'))
+            ->will($this->throwException(new RuntimeException()));
+
         $pluginManager->setServiceLocator($sm);
-        $pluginManager->setFactory('foo', function ($sm) {
-            $std = $sm->get('stdClass');
-            $std->a = 1;
 
-            return $std;
-        });
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceLocatorUsageException');
 
-        try {
-            $pluginManager->get('foo');
-        } catch (ServiceNotCreatedException $e) {
-            $this->assertNotNull($e->getPrevious());
-            $this->assertInstanceOf('Zend\ServiceManager\Exception\ServiceLocatorUsageException', $e->getPrevious());
-
-            return;
-        }
-
-        $this->fail('A Zend\ServiceManager\Exception\ServiceNotCreatedException is expected');
+        $pluginManager->get('stdClass');
     }
 }

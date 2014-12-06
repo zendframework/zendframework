@@ -211,6 +211,9 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($fooDelegator, array_shift($barDelegator->instances));
     }
 
+    /**
+     * @group 6833
+     */
     public function testCanCheckInvalidServiceManagerIsUsed()
     {
         $sm = new ServiceManager();
@@ -227,6 +230,9 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->fail('A Zend\ServiceManager\Exception\ServiceNotCreatedException is expected');
     }
 
+    /**
+     * @group 6833
+     */
     public function testWillRethrowOnNonValidatedPlugin()
     {
         $sm = new ServiceManager();
@@ -249,6 +255,9 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $pluginManager->get('stdClass');
     }
 
+    /**
+     * @group 6833
+     */
     public function testWillResetAutoInvokableServiceIfNotValid()
     {
         /** @var \Zend\ServiceManager\AbstractPluginManager|\PHPUnit_Framework_MockObject_MockObject $pluginManager */

@@ -263,6 +263,9 @@ class ArrayUtilsTest extends TestCase
         );
     }
 
+    /**
+     * @group 6899
+     */
     public function testAllowsRemovingKeys()
     {
         $a = array(

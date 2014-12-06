@@ -298,13 +298,10 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
         $serviceLocator = $this->getServiceLocator();
 
         if ($serviceLocator && $serviceLocator->has($serviceName)) {
-            throw new Exception\ServiceLocatorUsageException(
-                sprintf(
-                    'The unavailable service "%s" has been found in the parent service locator. '.
-                    'Did you forget to use $serviceLocator = $serviceLocator->getServiceLocator() in your factory?',
-                    $serviceName
-                ),
-                0,
+            throw Exception\ServiceLocatorUsageException::fromInvalidPluginManagerRequestedServiceName(
+                $this,
+                $serviceLocator,
+                $serviceName,
                 $exception
             );
         }

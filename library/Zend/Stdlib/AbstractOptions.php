@@ -94,7 +94,8 @@ abstract class AbstractOptions implements ParameterObjectInterface
     public function __set($key, $value)
     {
         $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-        if (!is_callable(array($this, $setter))) {
+
+        if (! is_callable(array($this, $setter))) {
             if (! $this->__strictMode__) {
                 return;
             }
@@ -120,14 +121,15 @@ abstract class AbstractOptions implements ParameterObjectInterface
     public function __get($key)
     {
         $getter = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-        if (!is_callable(array($this, $getter))) {
+
+        if (! is_callable(array($this, $getter))) {
             throw new Exception\BadMethodCallException(
                 'The option "' . $key . '" does not '
                 . 'have a callable "' . $getter . '" getter method '
                 . 'which must be defined'
             );
         }
-        // else: Getter method is callable
+
         return $this->{$getter}();
     }
 

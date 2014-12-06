@@ -244,7 +244,9 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
             $instance = $this->createServiceViaCallback($factory, $canonicalName, $requestedName);
         } else {
             throw new Exception\ServiceNotCreatedException(sprintf(
-                'While attempting to create %s%s an invalid factory was registered for this instance type.', $canonicalName, ($requestedName ? '(alias: '.$requestedName.')' : '')
+                'While attempting to create %s%s an invalid factory was registered for this instance type.',
+                $canonicalName,
+                ($requestedName ? '(alias: ' . $requestedName . ')' : '')
             ));
         }
 
@@ -295,7 +297,6 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
         $isAutoInvokable,
         BaseException $exception
     ) {
-
         if ($isAutoInvokable) {
             $this->unregisterService($this->canonicalizeName($serviceName));
         }

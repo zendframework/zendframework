@@ -9,7 +9,7 @@
 
 namespace Zend\Stdlib\ArrayUtils;
 
-class MergeReplaceKey implements MergeReplaceKeyInterface
+final class MergeReplaceKey implements MergeReplaceKeyInterface
 {
     /**
      * @var mixed
@@ -25,7 +25,7 @@ class MergeReplaceKey implements MergeReplaceKeyInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritDoc}
      */
     public function getData()
     {

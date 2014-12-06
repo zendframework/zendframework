@@ -13,6 +13,11 @@ use Exception;
 use PHPUnit_Framework_TestCase;
 use Zend\ServiceManager\Exception\ServiceLocatorUsageException;
 
+/**
+ * Tests for {@see \Zend\ServiceManager\Exception\ServiceLocatorUsageException}
+ *
+ * @covers \Zend\ServiceManager\Exception\ServiceLocatorUsageException
+ */
 class ServiceLocatorUsageExceptionTest extends PHPUnit_Framework_TestCase
 {
     public function testFromInvalidPluginManagerRequestedServiceName()

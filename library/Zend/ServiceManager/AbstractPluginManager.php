@@ -9,6 +9,8 @@
 
 namespace Zend\ServiceManager;
 
+use Exception as BaseException;
+
 /**
  * ServiceManager implementation for managing plugins
  *
@@ -276,17 +278,17 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
     }
 
     /**
-     * @param string $serviceName
-     * @param bool   $isAutoInvokable
-     * @param \Exception $exception
+     * @param string        $serviceName
+     * @param bool          $isAutoInvokable
+     * @param BaseException $exception
      *
-     * @throws \Exception
+     * @throws BaseException
      * @throws Exception\ServiceLocatorUsageException
      */
     private function tryThrowingServiceLocatorUsageException(
         $serviceName,
         $isAutoInvokable,
-        \Exception $exception
+        BaseException $exception
     ) {
 
         if ($isAutoInvokable) {

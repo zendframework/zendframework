@@ -134,7 +134,8 @@ class Variables extends ArrayObject
         if (!$this->offsetExists($key)) {
             if ($this->isStrict()) {
                 trigger_error(sprintf(
-                    'View variable "%s" does not exist', $key
+                    'View variable "%s" does not exist',
+                    $key
                 ), E_USER_NOTICE);
             }
             return null;

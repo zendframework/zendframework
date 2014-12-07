@@ -125,8 +125,13 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * @param  string $type      Script type and/or array of script attributes
      * @return HeadScript
      */
-    public function __invoke($mode = self::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
-    {
+    public function __invoke(
+        $mode = self::FILE,
+        $spec = null,
+        $placement = 'APPEND',
+        array $attrs = array(),
+        $type = 'text/javascript'
+    ) {
         if ((null !== $spec) && is_string($spec)) {
             $action    = ucfirst(strtolower($mode));
             $placement = strtolower($placement);
@@ -260,8 +265,11 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      * @throws Exception\RuntimeException
      * @return void
      */
-    public function captureStart($captureType = Placeholder\Container\AbstractContainer::APPEND, $type = 'text/javascript', $attrs = array())
-    {
+    public function captureStart(
+        $captureType = Placeholder\Container\AbstractContainer::APPEND,
+        $type = 'text/javascript',
+        $attrs = array()
+    ) {
         if ($this->captureLock) {
             throw new Exception\RuntimeException('Cannot nest headScript captures');
         }
@@ -328,7 +336,10 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     protected function isDuplicate($file)
     {
         foreach ($this->getContainer() as $item) {
-            if (($item->source === null) && array_key_exists('src', $item->attributes) && ($file == $item->attributes['src'])) {
+            if (($item->source === null)
+                && array_key_exists('src', $item->attributes)
+                && ($file == $item->attributes['src'])
+            ) {
                 return true;
             }
         }
@@ -344,7 +355,11 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
      */
     protected function isValid($value)
     {
-        if ((!$value instanceof stdClass) || !isset($value->type) || (!isset($value->source) && !isset($value->attributes))) {
+        if ((!$value instanceof stdClass)
+            || !isset($value->type)
+            || (!isset($value->source)
+                && !isset($value->attributes))
+        ) {
             return false;
         }
 
@@ -376,10 +391,11 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
             }
         }
 
-        $addScriptEscape = !(isset($item->attributes['noescape']) && filter_var($item->attributes['noescape'], FILTER_VALIDATE_BOOLEAN));
+        $addScriptEscape = !(isset($item->attributes['noescape'])
+            && filter_var($item->attributes['noescape'], FILTER_VALIDATE_BOOLEAN));
 
         $type = ($this->autoEscape) ? $this->escape($item->type) : $item->type;
-        $html  = '<script type="' . $type . '"' . $attrString . '>';
+        $html = '<script type="' . $type . '"' . $attrString . '>';
         if (!empty($item->source)) {
             $html .= PHP_EOL;
 
@@ -397,7 +413,10 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
         }
         $html .= '</script>';
 
-        if (isset($item->attributes['conditional']) && !empty($item->attributes['conditional']) && is_string($item->attributes['conditional'])) {
+        if (isset($item->attributes['conditional'])
+            && !empty($item->attributes['conditional'])
+            && is_string($item->attributes['conditional'])
+        ) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $item->attributes['conditional']) === '!IE') {
                 $html = '<!-->' . $html . '<!--';
@@ -421,7 +440,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     {
         if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
-                'Invalid argument passed to append(); please use one of the helper methods, appendScript() or appendFile()'
+                'Invalid argument passed to append(); '
+                . 'please use one of the helper methods, appendScript() or appendFile()'
             );
         }
 
@@ -439,7 +459,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     {
         if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
-                'Invalid argument passed to prepend(); please use one of the helper methods, prependScript() or prependFile()'
+                'Invalid argument passed to prepend(); '
+                . 'please use one of the helper methods, prependScript() or prependFile()'
             );
         }
 
@@ -476,7 +497,8 @@ class HeadScript extends Placeholder\Container\AbstractStandalone
     {
         if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
-                'Invalid argument passed to offsetSet(); please use one of the helper methods, offsetSetScript() or offsetSetFile()'
+                'Invalid argument passed to offsetSet(); '
+                . 'please use one of the helper methods, offsetSetScript() or offsetSetFile()'
             );
         }
 

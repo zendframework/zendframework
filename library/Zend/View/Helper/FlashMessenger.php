@@ -130,12 +130,18 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
     /**
      * Render Messages
      *
-     * @param  array $messages
-     * @param  array $classes
+     * @param string    $namespace
+     * @param array     $messages
+     * @param array     $classes
+     * @param bool|null $autoEscape
      * @return string
      */
-    protected function renderMessages($namespace = PluginFlashMessenger::NAMESPACE_DEFAULT, array $messages = array(), array $classes = array(), $autoEscape = null)
-    {
+    protected function renderMessages(
+        $namespace = PluginFlashMessenger::NAMESPACE_DEFAULT,
+        array $messages = array(),
+        array $classes = array(),
+        $autoEscape = null
+    ) {
         // Prepare classes for opening tag
         if (empty($classes)) {
             if (isset($this->classMessages[$namespace])) {
@@ -155,27 +161,35 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
         $messagesToPrint = array();
         $translator = $this->getTranslator();
         $translatorTextDomain = $this->getTranslatorTextDomain();
-        array_walk_recursive($messages, function ($item) use (&$messagesToPrint, $escapeHtml, $autoEscape, $translator, $translatorTextDomain) {
-            if ($translator !== null) {
-                $item = $translator->translate(
-                    $item,
-                    $translatorTextDomain
-                );
+        array_walk_recursive(
+            $messages, 
+            function ($item) use (& $messagesToPrint, $escapeHtml, $autoEscape, $translator, $translatorTextDomain) {
+                if ($translator !== null) {
+                    $item = $translator->translate(
+                        $item,
+                        $translatorTextDomain
+                    );
+                }
+    
+                if ($autoEscape) {
+                    $messagesToPrint[] = $escapeHtml($item);
+                    return;
+                }
+    
+                $messagesToPrint[] = $item;
             }
+        );
 
-            if ($autoEscape) {
-                $messagesToPrint[] = $escapeHtml($item);
-                return;
-            }
-
-            $messagesToPrint[] = $item;
-        });
         if (empty($messagesToPrint)) {
             return '';
         }
+
         // Generate markup
         $markup  = sprintf($this->getMessageOpenFormat(), ' class="' . implode(' ', $classes) . '"');
-        $markup .= implode(sprintf($this->getMessageSeparatorString(), ' class="' . implode(' ', $classes) . '"'), $messagesToPrint);
+        $markup .= implode(
+            sprintf($this->getMessageSeparatorString(), ' class="' . implode(' ', $classes) . '"'),
+            $messagesToPrint
+        );
         $markup .= $this->getMessageCloseString();
         return $markup;
     }

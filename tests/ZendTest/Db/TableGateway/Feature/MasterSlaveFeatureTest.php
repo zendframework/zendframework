@@ -21,10 +21,10 @@ class MasterSlaveFeatureTest extends \PHPUnit_Framework_TestCase
     /**
      * @var MasterSlaveFeature
      */
-    protected $feature = null;
+    protected $feature;
 
     /** @var \Zend\Db\TableGateway\TableGateway */
-    protected $table = null;
+    protected $table;
 
     public function setup()
     {

@@ -85,8 +85,13 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * @param  string $placement
      * @return HeadMeta
      */
-    public function __invoke($content = null, $keyValue = null, $keyType = 'name', $modifiers = array(), $placement = Placeholder\Container\AbstractContainer::APPEND)
-    {
+    public function __invoke(
+        $content = null,
+        $keyValue = null,
+        $keyType = 'name',
+        $modifiers = array(),
+        $placement = Placeholder\Container\AbstractContainer::APPEND
+    ) {
         if ((null !== $content) && (null !== $keyValue)) {
             $item   = $this->createData($keyType, $keyValue, $content, $modifiers);
             $action = strtolower($placement);
@@ -261,7 +266,10 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
             $modifiersString
         );
 
-        if (isset($item->modifiers['conditional']) && !empty($item->modifiers['conditional']) && is_string($item->modifiers['conditional'])) {
+        if (isset($item->modifiers['conditional'])
+            && !empty($item->modifiers['conditional'])
+            && is_string($item->modifiers['conditional'])
+        ) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $item->modifiers['conditional']) === '!IE') {
                 $meta = '<!-->' . $meta . '<!--';

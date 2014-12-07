@@ -158,8 +158,7 @@ class Sitemap extends AbstractHelper
         $dom->appendChild($urlSet);
 
         // create iterator
-        $iterator = new RecursiveIteratorIterator($container,
-            RecursiveIteratorIterator::SELF_FIRST);
+        $iterator = new RecursiveIteratorIterator($container, RecursiveIteratorIterator::SELF_FIRST);
 
         $maxDepth = $this->getMaxDepth();
         if (is_int($maxDepth)) {
@@ -198,8 +197,7 @@ class Sitemap extends AbstractHelper
             }
 
             // put url in 'loc' element
-            $urlNode->appendChild($dom->createElementNS(self::SITEMAP_NS,
-                'loc', $url));
+            $urlNode->appendChild($dom->createElementNS(self::SITEMAP_NS, 'loc', $url));
 
             // add 'lastmod' element if a valid lastmod is set in page
             if (isset($page->lastmod)) {
@@ -213,8 +211,7 @@ class Sitemap extends AbstractHelper
                 if (!$this->getUseSitemapValidators() ||
                     $lastmodValidator->isValid($lastmod)) {
                     $urlNode->appendChild(
-                        $dom->createElementNS(self::SITEMAP_NS, 'lastmod',
-                            $lastmod)
+                        $dom->createElementNS(self::SITEMAP_NS, 'lastmod', $lastmod)
                     );
                 }
             }
@@ -225,8 +222,7 @@ class Sitemap extends AbstractHelper
                 if (!$this->getUseSitemapValidators() ||
                     $changefreqValidator->isValid($changefreq)) {
                     $urlNode->appendChild(
-                        $dom->createElementNS(self::SITEMAP_NS, 'changefreq',
-                            $changefreq)
+                        $dom->createElementNS(self::SITEMAP_NS, 'changefreq', $changefreq)
                     );
                 }
             }

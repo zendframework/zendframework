@@ -209,7 +209,8 @@ class Menu extends AbstractHelper
         $options = $this->normalizeOptions($options);
 
         if ($options['onlyActiveBranch'] && !$options['renderParents']) {
-            $html = $this->renderDeepestMenu($container,
+            $html = $this->renderDeepestMenu(
+                $container,
                 $options['ulClass'],
                 $options['indent'],
                 $options['minDepth'],
@@ -219,7 +220,8 @@ class Menu extends AbstractHelper
                 $options['liActiveClass']
             );
         } else {
-            $html = $this->renderNormalMenu($container,
+            $html = $this->renderNormalMenu(
+                $container,
                 $options['ulClass'],
                 $options['indent'],
                 $options['minDepth'],
@@ -274,8 +276,10 @@ class Menu extends AbstractHelper
         }
 
         // create iterator
-        $iterator = new RecursiveIteratorIterator($container,
-            RecursiveIteratorIterator::SELF_FIRST);
+        $iterator = new RecursiveIteratorIterator(
+            $container,
+            RecursiveIteratorIterator::SELF_FIRST
+        );
         if (is_int($maxDepth)) {
             $iterator->setMaxDepth($maxDepth);
         }
@@ -418,8 +422,8 @@ class Menu extends AbstractHelper
             if (count($partial) != 2) {
                 throw new Exception\InvalidArgumentException(
                     'Unable to render menu: A view partial supplied as '
-                        .  'an array must contain two values: partial view '
-                        .  'script and module where script can be found'
+                    .  'an array must contain two values: partial view '
+                    .  'script and module where script can be found'
                 );
             }
 

@@ -295,7 +295,11 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
                         $link .= sprintf(' %s="%s"', $key, ($this->autoEscape) ? $this->escape($value) : $value);
                     }
                 } else {
-                    $link .= sprintf(' %s="%s"', $itemKey, ($this->autoEscape) ? $this->escape($attributes[$itemKey]) : $attributes[$itemKey]);
+                    $link .= sprintf(
+                        ' %s="%s"',
+                        $itemKey,
+                        ($this->autoEscape) ? $this->escape($attributes[$itemKey]) : $attributes[$itemKey]
+                    );
                 }
             }
         }
@@ -310,7 +314,10 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
             return '';
         }
 
-        if (isset($attributes['conditionalStylesheet']) && !empty($attributes['conditionalStylesheet']) && is_string($attributes['conditionalStylesheet'])) {
+        if (isset($attributes['conditionalStylesheet'])
+            && !empty($attributes['conditionalStylesheet'])
+            && is_string($attributes['conditionalStylesheet'])
+        ) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $attributes['conditionalStylesheet']) === '!IE') {
                 $link = '<!-->' . $link . '<!--';

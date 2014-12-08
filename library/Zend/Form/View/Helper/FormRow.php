@@ -128,9 +128,7 @@ class FormRow extends AbstractHelper
         if (isset($label) && '' !== $label) {
             // Translate the label
             if (null !== ($translator = $this->getTranslator())) {
-                $label = $translator->translate(
-                    $label, $this->getTranslatorTextDomain()
-                );
+                $label = $translator->translate($label, $this->getTranslatorTextDomain());
             }
         }
 
@@ -186,7 +184,8 @@ class FormRow extends AbstractHelper
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',
                     $label,
-                    $elementString);
+                    $elementString
+                );
             } else {
                 // Ensure element and label will be separated if element has an `id`-attribute.
                 // If element has label option `always_wrap` it will be nested in any case.

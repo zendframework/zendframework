@@ -79,16 +79,19 @@ class FormButton extends FormInput
         if (null === $buttonContent) {
             $buttonContent = $element->getLabel();
             if (null === $buttonContent) {
-                throw new Exception\DomainException(sprintf(
-                    '%s expects either button content as the second argument, ' .
+                throw new Exception\DomainException(
+                    sprintf(
+                        '%s expects either button content as the second argument, ' .
                         'or that the element provided has a label value; neither found',
-                    __METHOD__
-                ));
+                        __METHOD__
+                    )
+                );
             }
 
             if (null !== ($translator = $this->getTranslator())) {
                 $buttonContent = $translator->translate(
-                    $buttonContent, $this->getTranslatorTextDomain()
+                    $buttonContent,
+                    $this->getTranslatorTextDomain()
                 );
             }
         }

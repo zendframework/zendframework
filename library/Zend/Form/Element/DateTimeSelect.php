@@ -252,7 +252,8 @@ class DateTimeSelect extends DateSelect
      */
     public function getValue()
     {
-        return sprintf('%s-%s-%s %s:%s:%s',
+        return sprintf(
+            '%s-%s-%s %s:%s:%s',
             $this->getYearElement()->getValue(),
             $this->getMonthElement()->getValue(),
             $this->getDayElement()->getValue(),
@@ -313,9 +314,14 @@ class DateTimeSelect extends DateSelect
                                 if (!isset($date['second'])) {
                                     $date['second'] = '00';
                                 }
-                                $date = sprintf('%s-%s-%s %s:%s:%s',
-                                    $date['year'], $date['month'], $date['day'],
-                                    $date['hour'], $date['minute'], $date['second']
+                                $date = sprintf(
+                                    '%s-%s-%s %s:%s:%s',
+                                    $date['year'],
+                                    $date['month'],
+                                    $date['day'],
+                                    $date['hour'],
+                                    $date['minute'],
+                                    $date['second']
                                 );
                             }
 

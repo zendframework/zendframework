@@ -145,8 +145,7 @@ class FormMultiCheckbox extends FormInput
      * @param  array                $attributes
      * @return string
      */
-    protected function renderOptions(MultiCheckboxElement $element, array $options, array $selectedOptions,
-        array $attributes)
+    protected function renderOptions(MultiCheckboxElement $element, array $options, array $selectedOptions, array $attributes)
     {
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
         $labelHelper      = $this->getLabelHelper();
@@ -223,7 +222,8 @@ class FormMultiCheckbox extends FormInput
 
             if (null !== ($translator = $this->getTranslator())) {
                 $label = $translator->translate(
-                    $label, $this->getTranslatorTextDomain()
+                    $label,
+                    $this->getTranslatorTextDomain()
                 );
             }
 

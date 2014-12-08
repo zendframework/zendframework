@@ -306,6 +306,18 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         $this->_checkBadRequest($data);
     }
 
+    public function testBadDigestResponse()
+    {
+        $bad = $this->_digestReply('Bryce', 'ThisIsNotMyPassword');
+        $bad = preg_replace(
+            '/response="([^"]+)"/',  // cut out the realm
+            'response="foobar"', $bad
+        );
+
+        $data = $this->_doAuth($bad, 'both');
+        $this->_checkBadRequest($data);
+    }
+
     /**
      * Acts like a client sending the given Authenticate header value.
      *

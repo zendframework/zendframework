@@ -78,7 +78,6 @@ class SqliteMetadata extends AbstractSource
         $this->prepareDataHierarchy('columns', $schema, $table);
         $this->prepareDataHierarchy('sqlite_columns', $schema, $table);
 
-        $this->adapter->getPlatform();
         $results = $this->fetchPragma('table_info', $table, $schema);
 
         $columns = array();

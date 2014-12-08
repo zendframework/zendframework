@@ -13,7 +13,6 @@ use ArrayIterator;
 use Zend\Http\Header\SetCookie;
 use Zend\Uri;
 
-
 /**
  * A Zend\Http\Cookies object is designed to contain and maintain HTTP cookies, and should
  * be used along with Zend\Http\Client in order to manage cookies across HTTP requests and
@@ -161,9 +160,12 @@ class Cookies extends Headers
      * @throws Exception\InvalidArgumentException if invalid URI specified
      * @return array|string
      */
-    public function getMatchingCookies($uri, $matchSessionCookies = true,
-        $retAs = self::COOKIE_OBJECT, $now = null)
-    {
+    public function getMatchingCookies(
+        $uri,
+        $matchSessionCookies = true,
+        $retAs = self::COOKIE_OBJECT,
+        $now = null
+    ) {
         if (is_string($uri)) {
             $uri = Uri\UriFactory::factory($uri, 'http');
         } elseif (!$uri instanceof Uri\Uri) {

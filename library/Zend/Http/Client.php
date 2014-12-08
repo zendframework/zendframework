@@ -263,7 +263,6 @@ class Client implements Stdlib\DispatchableInterface
         return $this->response;
     }
 
-
     /**
      * Get the last request (as a string)
      *
@@ -939,7 +938,6 @@ class Client implements Stdlib\DispatchableInterface
                     $this->resetParameters(false, false);
                     $this->setMethod(Request::METHOD_GET);
                 }
-
 
                 // If we got a well formed absolute URI
                 if (($scheme = substr($location, 0, 6)) &&

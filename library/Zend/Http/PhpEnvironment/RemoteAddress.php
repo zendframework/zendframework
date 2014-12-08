@@ -150,7 +150,6 @@ class RemoteAddress
         return $ip;
     }
 
-
     /**
      * Normalize a header string
      *

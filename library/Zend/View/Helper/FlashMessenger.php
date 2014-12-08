@@ -162,7 +162,7 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
         $translator = $this->getTranslator();
         $translatorTextDomain = $this->getTranslatorTextDomain();
         array_walk_recursive(
-            $messages, 
+            $messages,
             function ($item) use (& $messagesToPrint, $escapeHtml, $autoEscape, $translator, $translatorTextDomain) {
                 if ($translator !== null) {
                     $item = $translator->translate(
@@ -170,12 +170,12 @@ class FlashMessenger extends AbstractTranslatorHelper implements ServiceLocatorA
                         $translatorTextDomain
                     );
                 }
-    
+
                 if ($autoEscape) {
                     $messagesToPrint[] = $escapeHtml($item);
                     return;
                 }
-    
+
                 $messagesToPrint[] = $item;
             }
         );

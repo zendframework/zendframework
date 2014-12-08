@@ -9,7 +9,6 @@
 
 namespace Zend\I18n\Exception;
 
-class OutOfBoundsException extends \OutOfBoundsException implements
-    ExceptionInterface
+class OutOfBoundsException extends \OutOfBoundsException implements ExceptionInterface
 {
 }

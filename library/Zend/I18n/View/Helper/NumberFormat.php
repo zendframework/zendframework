@@ -80,9 +80,9 @@ class NumberFormat extends AbstractHelper
     public function __invoke(
         $number,
         $formatStyle = null,
-        $formatType  = null,
-        $locale      = null,
-        $decimals    = null
+        $formatType = null,
+        $locale = null,
+        $decimals = null
     ) {
         if (null === $locale) {
             $locale = $this->getLocale();

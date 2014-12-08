@@ -11,7 +11,6 @@ namespace Zend\I18n\Exception;
 
 use DomainException;
 
-class ExtensionNotLoadedException extends DomainException implements
-    ExceptionInterface
+class ExtensionNotLoadedException extends DomainException implements ExceptionInterface
 {
 }

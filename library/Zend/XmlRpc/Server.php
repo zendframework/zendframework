@@ -330,7 +330,10 @@ class Server extends AbstractServer
             } else {
                 $type = gettype($definition);
             }
-            throw new Server\Exception\InvalidArgumentException('Unable to load server definition; must be an array or Zend\Server\Definition, received ' . $type, 612);
+            throw new Server\Exception\InvalidArgumentException(
+                'Unable to load server definition; must be an array or Zend\Server\Definition, received ' . $type,
+                612
+            );
         }
 
         $this->table->clearMethods();

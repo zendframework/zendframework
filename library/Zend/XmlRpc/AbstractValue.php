@@ -371,7 +371,11 @@ abstract class AbstractValue
                 }
 
                 if (null === $data) {
-                    throw new Exception\ValueException('Invalid XML for XML-RPC native '. self::XMLRPC_TYPE_ARRAY .' type: ARRAY tag must contain DATA tag');
+                    throw new Exception\ValueException(
+                        'Invalid XML for XML-RPC native '
+                        . self::XMLRPC_TYPE_ARRAY
+                        . ' type: ARRAY tag must contain DATA tag'
+                    );
                 }
                 $values = array();
                 // Parse all the elements of the array from the XML string
@@ -397,7 +401,9 @@ abstract class AbstractValue
                 $xmlrpcValue = new Value\Struct($values);
                 break;
             default:
-                throw new Exception\ValueException('Value type \''. $type .'\' parsed from the XML string is not a known XML-RPC native type');
+                throw new Exception\ValueException(
+                    'Value type \'' . $type . '\' parsed from the XML string is not a known XML-RPC native type'
+                );
                 break;
         }
         $xmlrpcValue->_setXML($xml->asXML());
@@ -415,7 +421,11 @@ abstract class AbstractValue
             $xml = new \SimpleXMLElement($xml);
         } catch (\Exception $e) {
             // The given string is not a valid XML
-            throw new Exception\ValueException('Failed to create XML-RPC value from XML string: ' . $e->getMessage(), $e->getCode(), $e);
+            throw new Exception\ValueException(
+                'Failed to create XML-RPC value from XML string: ' . $e->getMessage(),
+                $e->getCode(),
+                $e
+            );
         }
     }
 

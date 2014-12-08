@@ -121,7 +121,7 @@ class Client implements ServerClient
         return $this->introspector;
     }
 
-   /**
+    /**
      * The request of the last method call
      *
      * @return \Zend\XmlRpc\Request

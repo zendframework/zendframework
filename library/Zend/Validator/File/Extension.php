@@ -13,6 +13,7 @@ use Traversable;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
+
 /**
  * Validator for the file extension of a file
  */

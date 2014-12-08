@@ -1405,5 +1405,7 @@ class Client implements Stdlib\DispatchableInterface
                 throw new Client\Exception\InvalidArgumentException("Not a supported HTTP authentication type: '$type'");
 
         }
+
+        return null;
     }
 }

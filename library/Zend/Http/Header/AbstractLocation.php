@@ -13,7 +13,6 @@ use Zend\Uri\Exception as UriException;
 use Zend\Uri\UriFactory;
 use Zend\Uri\UriInterface;
 
-
 /**
  * Abstract Location Header
  * Supports headers that have URI as value
@@ -74,9 +73,9 @@ abstract class AbstractLocation implements HeaderInterface
                 $uri = UriFactory::factory($uri);
             } catch (UriException\InvalidUriPartException $e) {
                 throw new Exception\InvalidArgumentException(
-                        sprintf('Invalid URI passed as string (%s)', (string) $uri),
-                        $e->getCode(),
-                        $e
+                    sprintf('Invalid URI passed as string (%s)', (string) $uri),
+                    $e->getCode(),
+                    $e
                 );
             }
         } elseif (!($uri instanceof UriInterface)) {

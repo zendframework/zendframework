@@ -47,7 +47,6 @@ class Connection implements HeaderInterface
         return $header;
     }
 
-
     /**
      * Set Connection header to define persistent connection
      *
@@ -86,7 +85,6 @@ class Connection implements HeaderInterface
         $this->value = strtolower($value);
         return $this;
     }
-
 
     /**
      * Connection header name

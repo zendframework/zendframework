@@ -235,8 +235,8 @@ class DateStep extends Date
             if (in_array($intervalUnit, array('years', 'months', 'days'))) {
                 switch ($intervalUnit) {
                     case 'years':
-                        if (   0 == $diffParts['months']  && 0 == $diffParts['days']
-                            && 0 == $diffParts['hours']   && 0 == $diffParts['minutes']
+                        if (0 == $diffParts['months'] && 0 == $diffParts['days']
+                            && 0 == $diffParts['hours'] && 0 == $diffParts['minutes']
                             && 0 == $diffParts['seconds']
                         ) {
                             if (($diffParts['years'] % $stepValue) === 0) {
@@ -245,7 +245,7 @@ class DateStep extends Date
                         }
                         break;
                     case 'months':
-                        if (   0 == $diffParts['days']    && 0 == $diffParts['hours']
+                        if (0 == $diffParts['days'] && 0 == $diffParts['hours']
                             && 0 == $diffParts['minutes'] && 0 == $diffParts['seconds']
                         ) {
                             $months = ($diffParts['years'] * 12) + $diffParts['months'];
@@ -255,7 +255,7 @@ class DateStep extends Date
                         }
                         break;
                     case 'days':
-                        if (   0 == $diffParts['hours'] && 0 == $diffParts['minutes']
+                        if (0 == $diffParts['hours'] && 0 == $diffParts['minutes']
                             && 0 == $diffParts['seconds']
                         ) {
                             $days = $timeDiff->format('%a'); // Total days

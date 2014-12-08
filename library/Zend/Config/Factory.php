@@ -34,10 +34,11 @@ class Factory
      * @var array
      */
     protected static $extensions = array(
-        'ini'  => 'ini',
-        'json' => 'json',
-        'xml'  => 'xml',
-        'yaml' => 'yaml',
+        'ini'         => 'ini',
+        'json'        => 'json',
+        'xml'         => 'xml',
+        'yaml'        => 'yaml',
+        'properties'  => 'javaproperties',
     );
 
     /**

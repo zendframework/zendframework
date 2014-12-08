@@ -1291,7 +1291,8 @@ class Hostname extends AbstractValidator
                         // Check dash (-) does not start, end or appear in 3rd and 4th positions
                         if (($utf8StrWrapper->strpos($domainPart, '-') === 0)
                             || (($utf8StrWrapper->strlen($domainPart) > 2) && ($utf8StrWrapper->strpos($domainPart, '-', 2) == 2) && ($utf8StrWrapper->strpos($domainPart, '-', 3) == 3))
-                            || ($utf8StrWrapper->strpos($domainPart, '-') === ($utf8StrWrapper->strlen($domainPart) - 1))) {
+                            || ($utf8StrWrapper->strpos($domainPart, '-') === ($utf8StrWrapper->strlen($domainPart) - 1))
+                        ) {
                             $this->error(self::INVALID_DASH);
                             $status = false;
                             break 2;

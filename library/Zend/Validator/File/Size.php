@@ -149,7 +149,7 @@ class Size extends AbstractValidator
         $max = $this->getMax(true);
         if (($max !== null) && ($min > $max)) {
             throw new Exception\InvalidArgumentException(
-                "The minimum must be less than or equal to the maximum file size, but {$min} > {$max}"
+                "The minimum must be less than or equal to the maximum file size, but $min > $max"
             );
         }
 
@@ -194,7 +194,7 @@ class Size extends AbstractValidator
         $min = $this->getMin(true);
         if (($min !== null) && ($max < $min)) {
             throw new Exception\InvalidArgumentException(
-                "The maximum must be greater than or equal to the minimum file size, but {$max} < {$min}"
+                "The maximum must be greater than or equal to the minimum file size, but $max < $min"
             );
         }
 

@@ -55,7 +55,6 @@ class Range extends NumberElement
             'inclusive' => $inclusive
         ));
 
-
         if (!isset($this->attributes['step'])
             || 'any' !== $this->attributes['step']
         ) {

@@ -334,23 +334,16 @@ class Decoder
         return $result;
     }
 
-
     /**
      * Removes whitespace characters from the source input
      */
     protected function _eatWhitespace()
     {
-        if (preg_match(
-                '/([\t\b\f\n\r ])*/s',
-                $this->source,
-                $matches,
-                PREG_OFFSET_CAPTURE,
-                $this->offset)
+        if (preg_match('/([\t\b\f\n\r ])*/s', $this->source, $matches, PREG_OFFSET_CAPTURE, $this->offset)
             && $matches[0][1] == $this->offset) {
             $this->offset += strlen($matches[0][0]);
         }
     }
-
 
     /**
      * Retrieves the next token from the source stream
@@ -375,8 +368,8 @@ class Decoder
 
         switch ($str{$i}) {
             case '{':
-               $this->token = self::LBRACE;
-               break;
+                $this->token = self::LBRACE;
+                break;
             case '}':
                 $this->token = self::RBRACE;
                 break;
@@ -392,7 +385,7 @@ class Decoder
             case ':':
                 $this->token = self::COLON;
                 break;
-            case  '"':
+            case '"':
                 $result = '';
                 do {
                     $i++;
@@ -409,31 +402,31 @@ class Decoder
                         }
                         $chr = $str{$i};
                         switch ($chr) {
-                            case '"' :
+                            case '"':
                                 $result .= '"';
                                 break;
                             case '\\':
                                 $result .= '\\';
                                 break;
-                            case '/' :
+                            case '/':
                                 $result .= '/';
                                 break;
-                            case 'b' :
+                            case 'b':
                                 $result .= "\x08";
                                 break;
-                            case 'f' :
+                            case 'f':
                                 $result .= "\x0c";
                                 break;
-                            case 'n' :
+                            case 'n':
                                 $result .= "\x0a";
                                 break;
-                            case 'r' :
+                            case 'r':
                                 $result .= "\x0d";
                                 break;
-                            case 't' :
+                            case 't':
                                 $result .= "\x09";
                                 break;
-                            case '\'' :
+                            case '\'':
                                 $result .= '\'';
                                 break;
                             default:
@@ -468,7 +461,7 @@ class Decoder
                 if (($i+ 3) < $strLength && substr($str, $start, 4) == "null") {
                     $this->token = self::DATUM;
                 }
-                $this->tokenValue = NULL;
+                $this->tokenValue = null;
                 $i += 3;
                 break;
         }
@@ -480,8 +473,7 @@ class Decoder
 
         $chr = $str{$i};
         if ($chr == '-' || $chr == '.' || ($chr >= '0' && $chr <= '9')) {
-            if (preg_match('/-?([0-9])*(\.[0-9]*)?((e|E)((-|\+)?)[0-9]+)?/s',
-                $str, $matches, PREG_OFFSET_CAPTURE, $start) && $matches[0][1] == $start) {
+            if (preg_match('/-?([0-9])*(\.[0-9]*)?((e|E)((-|\+)?)[0-9]+)?/s', $str, $matches, PREG_OFFSET_CAPTURE, $start) && $matches[0][1] == $start) {
                 $datum = $matches[0][0];
 
                 if (is_numeric($datum)) {

@@ -160,7 +160,9 @@ class Json
      * @return mixed
      */
     protected static function _recursiveJsonExprFinder(
-        &$value, array &$javascriptExpressions, $currentKey = null
+        &$value,
+        array &$javascriptExpressions,
+        $currentKey = null
     ) {
         if ($value instanceof Expr) {
             // TODO: Optimize with ascii keys, if performance is bad

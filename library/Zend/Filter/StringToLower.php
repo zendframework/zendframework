@@ -54,7 +54,7 @@ class StringToLower extends AbstractUnicode
         $value = (string) $value;
 
         if ($this->options['encoding'] !== null) {
-            return mb_strtolower($value,  $this->options['encoding']);
+            return mb_strtolower($value, $this->options['encoding']);
         }
 
         return strtolower($value);

@@ -225,15 +225,15 @@ class Rename extends Filter\AbstractFilter
                     $files['source'] = (string) $value;
                     break;
 
-                case 'target' :
+                case 'target':
                     $files['target'] = (string) $value;
                     break;
 
-                case 'overwrite' :
+                case 'overwrite':
                     $files['overwrite'] = (bool) $value;
                     break;
 
-                case 'randomize' :
+                case 'randomize':
                     $files['randomize'] = (bool) $value;
                     break;
 

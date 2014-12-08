@@ -97,7 +97,6 @@ class HtmlEntities extends AbstractFilter
         return $this;
     }
 
-
     /**
      * Get encoding
      *

@@ -54,7 +54,7 @@ class StringToUpper extends AbstractUnicode
         $value = (string) $value;
 
         if ($this->options['encoding'] !== null) {
-            return mb_strtoupper($value,  $this->options['encoding']);
+            return mb_strtoupper($value, $this->options['encoding']);
         }
 
         return strtoupper($value);

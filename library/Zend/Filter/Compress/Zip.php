@@ -228,76 +228,76 @@ class Zip extends AbstractCompressionAlgorithm
     public function errorString($error)
     {
         switch ($error) {
-            case ZipArchive::ER_MULTIDISK :
+            case ZipArchive::ER_MULTIDISK:
                 return 'Multidisk ZIP Archives not supported';
 
-            case ZipArchive::ER_RENAME :
+            case ZipArchive::ER_RENAME:
                 return 'Failed to rename the temporary file for ZIP';
 
-            case ZipArchive::ER_CLOSE :
+            case ZipArchive::ER_CLOSE:
                 return 'Failed to close the ZIP Archive';
 
-            case ZipArchive::ER_SEEK :
+            case ZipArchive::ER_SEEK:
                 return 'Failure while seeking the ZIP Archive';
 
-            case ZipArchive::ER_READ :
+            case ZipArchive::ER_READ:
                 return 'Failure while reading the ZIP Archive';
 
-            case ZipArchive::ER_WRITE :
+            case ZipArchive::ER_WRITE:
                 return 'Failure while writing the ZIP Archive';
 
-            case ZipArchive::ER_CRC :
+            case ZipArchive::ER_CRC:
                 return 'CRC failure within the ZIP Archive';
 
-            case ZipArchive::ER_ZIPCLOSED :
+            case ZipArchive::ER_ZIPCLOSED:
                 return 'ZIP Archive already closed';
 
-            case ZipArchive::ER_NOENT :
+            case ZipArchive::ER_NOENT:
                 return 'No such file within the ZIP Archive';
 
-            case ZipArchive::ER_EXISTS :
+            case ZipArchive::ER_EXISTS:
                 return 'ZIP Archive already exists';
 
-            case ZipArchive::ER_OPEN :
+            case ZipArchive::ER_OPEN:
                 return 'Can not open ZIP Archive';
 
-            case ZipArchive::ER_TMPOPEN :
+            case ZipArchive::ER_TMPOPEN:
                 return 'Failure creating temporary ZIP Archive';
 
-            case ZipArchive::ER_ZLIB :
+            case ZipArchive::ER_ZLIB:
                 return 'ZLib Problem';
 
-            case ZipArchive::ER_MEMORY :
+            case ZipArchive::ER_MEMORY:
                 return 'Memory allocation problem while working on a ZIP Archive';
 
-            case ZipArchive::ER_CHANGED :
+            case ZipArchive::ER_CHANGED:
                 return 'ZIP Entry has been changed';
 
-            case ZipArchive::ER_COMPNOTSUPP :
+            case ZipArchive::ER_COMPNOTSUPP:
                 return 'Compression method not supported within ZLib';
 
-            case ZipArchive::ER_EOF :
+            case ZipArchive::ER_EOF:
                 return 'Premature EOF within ZIP Archive';
 
-            case ZipArchive::ER_INVAL :
+            case ZipArchive::ER_INVAL:
                 return 'Invalid argument for ZLIB';
 
-            case ZipArchive::ER_NOZIP :
+            case ZipArchive::ER_NOZIP:
                 return 'Given file is no zip archive';
 
-            case ZipArchive::ER_INTERNAL :
+            case ZipArchive::ER_INTERNAL:
                 return 'Internal error while working on a ZIP Archive';
 
-            case ZipArchive::ER_INCONS :
+            case ZipArchive::ER_INCONS:
                 return 'Inconsistent ZIP archive';
 
-            case ZipArchive::ER_REMOVE :
+            case ZipArchive::ER_REMOVE:
                 return 'Can not remove ZIP Archive';
 
-            case ZipArchive::ER_DELETED :
+            case ZipArchive::ER_DELETED:
                 return 'ZIP Entry has been deleted';
 
-            default :
+            default:
                 return 'Unknown error within ZIP Archive';
         }
     }

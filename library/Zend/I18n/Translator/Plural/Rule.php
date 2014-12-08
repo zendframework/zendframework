@@ -62,10 +62,9 @@ class Rule
         $result = $this->evaluateAstPart($this->ast, abs((int) $number));
 
         if ($result < 0 || $result >= $this->numPlurals) {
-            throw new Exception\RangeException(sprintf(
-                'Calculated result %s is between 0 and %d',
-                $result, ($this->numPlurals - 1)
-            ));
+            throw new Exception\RangeException(
+                sprintf('Calculated result %s is between 0 and %d', $result, ($this->numPlurals - 1))
+            );
         }
 
         return $result;

@@ -408,9 +408,9 @@ class Translator implements TranslatorInterface
                       ->evaluate($number);
 
         if (!isset($translation[$index])) {
-            throw new Exception\OutOfBoundsException(sprintf(
-                'Provided index %d does not exist in plural array', $index
-            ));
+            throw new Exception\OutOfBoundsException(
+                sprintf('Provided index %d does not exist in plural array', $index)
+            );
         }
 
         return $translation[$index];

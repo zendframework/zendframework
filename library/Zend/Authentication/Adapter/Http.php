@@ -811,7 +811,6 @@ class Http implements AdapterInterface
         }
 
         $data['nc'] = $temp[1];
-        $temp = null;
 
         return $data;
     }

@@ -123,7 +123,6 @@ class ElementAnnotationsListener extends AbstractAnnotationsListener
 
         $name        = $e->getParam('name');
         $elementSpec = $e->getParam('elementSpec');
-        $filterSpec  = $e->getParam('filterSpec');
 
         if ($annotation->isCollection()) {
             // Compose specification as a fieldset into parent form/fieldset

@@ -179,11 +179,9 @@ class CacheControl implements HeaderInterface
             case 0:
                 $directive = $lastMatch;
                 goto state_value;
-                break;
 
             default:
                 throw new Exception\InvalidArgumentException('expected DIRECTIVE');
-                break;
         }
 
         state_value:
@@ -191,32 +189,26 @@ class CacheControl implements HeaderInterface
             case 0:
                 $directives[$directive] = substr($lastMatch, 2, -1);
                 goto state_separator;
-                break;
 
             case 1:
                 $directives[$directive] = rtrim(substr($lastMatch, 1));
                 goto state_separator;
-                break;
 
             default:
                 $directives[$directive] = true;
                 goto state_separator;
-                break;
         }
 
         state_separator:
         switch (static::match(array('\s*,\s*', '$'), $value, $lastMatch)) {
             case 0:
                 goto state_directive;
-                break;
 
             case 1:
                 return $directives;
-                break;
 
             default:
                 throw new Exception\InvalidArgumentException('expected SEPARATOR or END');
-                break;
 
         }
     }

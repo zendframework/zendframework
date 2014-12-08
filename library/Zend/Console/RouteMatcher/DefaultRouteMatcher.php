@@ -372,7 +372,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                 array_unique($options);
 
                 // remove prefix
-                array_walk($options, function (&$val, $key) {
+                array_walk($options, function (&$val) {
                     $val = ltrim($val, '-');
                 });
 
@@ -415,7 +415,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                 array_unique($options);
 
                 // remove prefix
-                array_walk($options, function (&$val, $key) {
+                array_walk($options, function (&$val) {
                     $val = ltrim($val, '-');
                 });
 

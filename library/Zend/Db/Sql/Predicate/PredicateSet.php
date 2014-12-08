@@ -91,7 +91,7 @@ class PredicateSet implements PredicateInterface, Countable
                         $predicates = new Expression($pkey, $pvalue);
                     } elseif ($pvalue === null) { // Otherwise, if still a string, do something intelligent with the PHP type provided
                         // map PHP null to SQL IS NULL expression
-                        $predicates = new IsNull($pkey, $pvalue);
+                        $predicates = new IsNull($pkey);
                     } elseif (is_array($pvalue)) {
                         // if the value is an array, assume IN() is desired
                         $predicates = new In($pkey, $pvalue);

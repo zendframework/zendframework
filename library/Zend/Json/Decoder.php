@@ -220,16 +220,12 @@ class Decoder
                 $result  = $this->tokenValue;
                 $this->_getNextToken();
                 return($result);
-                break;
             case self::LBRACE:
                 return($this->_decodeObject());
-                break;
             case self::LBRACKET:
                 return($this->_decodeArray());
-                break;
             default:
                 return null;
-                break;
         }
     }
 
@@ -265,7 +261,7 @@ class Decoder
                 throw new RuntimeException('Missing ":" in object encoding: ' . $this->source);
             }
 
-            $tok = $this->_getNextToken();
+            $this->_getNextToken();
             $members[$key] = $this->_decodeValue();
             $tok = $this->token;
 

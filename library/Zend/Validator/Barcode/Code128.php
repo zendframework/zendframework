@@ -166,7 +166,6 @@ class Code128 extends AbstractAdapter
                 case 'ˆ':
                 case '‰':
                     return false;
-                    break;
 
                 // Chars after the stop character
                 case 'Š':

@@ -159,7 +159,6 @@ abstract class AbstractAdapter implements AdapterInterface
         // Determine charset and dimensions
         $charset = $this->getCharset();
         $width   = $x2 - $x1 + 1;
-        $height  = $y2 - $y1 + 1;
 
         if ($width <= 2) {
             $lineStyle = static::LINE_NONE;

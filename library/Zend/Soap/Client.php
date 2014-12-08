@@ -277,7 +277,6 @@ class Client implements ServerClient
 
                 default:
                     throw new Exception\InvalidArgumentException('Unknown SOAP client option');
-                    break;
             }
         }
 

@@ -76,7 +76,7 @@ class PhpArray extends AbstractWriter
         }
 
         set_error_handler(
-            function ($error, $message = '', $file = '', $line = 0) use ($filename) {
+            function ($error, $message = '') use ($filename) {
                 throw new Exception\RuntimeException(
                     sprintf('Error writing to "%s": %s', $filename, $message),
                     $error

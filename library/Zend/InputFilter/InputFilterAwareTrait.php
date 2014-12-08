@@ -9,7 +9,6 @@
 
 namespace Zend\InputFilter;
 
-
 trait InputFilterAwareTrait
 {
     /**

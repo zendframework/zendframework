@@ -247,7 +247,7 @@ class BaseInputFilter implements
                 && $input->isRequired()
                 && $input->allowEmpty()
             ) {
-                if (!($input instanceOf EmptyContextInterface && $input->continueIfEmpty())) {
+                if (!($input instanceof EmptyContextInterface && $input->continueIfEmpty())) {
                     $this->validInputs[$name] = $input;
                     continue;
                 }

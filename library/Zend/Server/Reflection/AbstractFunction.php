@@ -282,8 +282,9 @@ abstract class AbstractFunction
             }
         } elseif ($nParamTypesTmp != $paramCount) {
             throw new Exception\RuntimeException(
-               'Variable number of arguments is not supported for services (except optional parameters). '
-             . 'Number of function arguments must correspond to actual number of arguments described in a docblock.');
+                'Variable number of arguments is not supported for services (except optional parameters). '
+                . 'Number of function arguments must correspond to actual number of arguments described in a docblock.'
+            );
         }
 
         $paramTypes = array();
@@ -296,7 +297,6 @@ abstract class AbstractFunction
 
         $this->buildSignatures($return, $returnDesc, $paramTypes, $paramDesc);
     }
-
 
     /**
      * Proxy reflection calls

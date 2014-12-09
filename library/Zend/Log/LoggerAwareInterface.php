@@ -9,7 +9,6 @@
 
 namespace Zend\Log;
 
-
 /**
  * Logger aware interface
  */

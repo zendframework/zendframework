@@ -1048,9 +1048,9 @@ class PythonPickle extends AbstractAdapter
                        . chr(0x80 | $uniCode >> 6 & 0x3F)
                        . chr(0x80 | $uniCode & 0x3F);
         } else {
-            throw new Exception\RuntimeException(sprintf(
-                'Unsupported unicode character found "%s"', dechex($uniCode)
-            ));
+            throw new Exception\RuntimeException(
+                sprintf('Unsupported unicode character found "%s"', dechex($uniCode))
+            );
         }
 
         return $utf8Char;

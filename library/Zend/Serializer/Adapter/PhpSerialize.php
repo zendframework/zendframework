@@ -48,9 +48,7 @@ class PhpSerialize extends AbstractAdapter
         $ret = serialize($value);
         $err = ErrorHandler::stop();
         if ($err) {
-            throw new Exception\RuntimeException(
-                'Serialization failed', 0, $err
-            );
+            throw new Exception\RuntimeException('Serialization failed', 0, $err);
         }
 
         return $ret;

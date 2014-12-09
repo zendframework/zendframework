@@ -9,7 +9,6 @@
 
 namespace Zend\Serializer\Adapter;
 
-
 class WddxOptions extends AdapterOptions
 {
     /**

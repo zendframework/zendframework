@@ -46,7 +46,6 @@ class FirePhp extends AbstractWriter
             throw new Exception\InvalidArgumentException('You must pass a valid FirePhp\FirePhpInterface');
         }
 
-
         $this->firephp   = $instance;
         $this->formatter = new FirePhpFormatter();
     }

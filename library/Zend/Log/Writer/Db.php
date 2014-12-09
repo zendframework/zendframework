@@ -139,8 +139,8 @@ class Db extends AbstractWriter
     {
         $keys = array_keys($fields);
         $sql = 'INSERT INTO ' . $db->platform->quoteIdentifier($tableName) . ' (' .
-            implode(",",array_map(array($db->platform, 'quoteIdentifier'), $keys)) . ') VALUES (' .
-            implode(",",array_map(array($db->driver, 'formatParameterName'), $keys)) . ')';
+            implode(",", array_map(array($db->platform, 'quoteIdentifier'), $keys)) . ') VALUES (' .
+            implode(",", array_map(array($db->driver, 'formatParameterName'), $keys)) . ')';
 
         return $sql;
     }

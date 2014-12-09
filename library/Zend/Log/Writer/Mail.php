@@ -192,10 +192,11 @@ class Mail extends AbstractWriter
         } catch (TransportException\ExceptionInterface $e) {
             trigger_error(
                 "unable to send log entries via email; " .
-                    "message = {$e->getMessage()}; " .
-                    "code = {$e->getCode()}; " .
-                        "exception class = " . get_class($e),
-                E_USER_WARNING);
+                "message = {$e->getMessage()}; " .
+                "code = {$e->getCode()}; " .
+                "exception class = " . get_class($e),
+                E_USER_WARNING
+            );
         }
     }
 

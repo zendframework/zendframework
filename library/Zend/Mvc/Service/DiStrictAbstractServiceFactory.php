@@ -87,7 +87,6 @@ class DiStrictAbstractServiceFactory extends Di implements AbstractFactoryInterf
             throw new Exception\InvalidServiceNameException('Service "' . $requestedName . '" is not whitelisted');
         }
 
-
         if ($serviceLocator instanceof AbstractPluginManager) {
             /* @var $serviceLocator AbstractPluginManager */
             $this->serviceLocator = $serviceLocator->getServiceLocator();

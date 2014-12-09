@@ -66,7 +66,6 @@ class Converter
         return $string;
     }
 
-
     /**
      * Convert any value to an LDAP-compatible value.
      *

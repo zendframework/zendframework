@@ -88,7 +88,6 @@ class StandardConfig implements ConfigInterface
      */
     protected $options = array();
 
-
     /**
      * Set many options at once
      *
@@ -250,8 +249,6 @@ class StandardConfig implements ConfigInterface
         }
         return $this->savePath;
     }
-
-
 
     /**
      * Set session.name

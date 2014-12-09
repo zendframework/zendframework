@@ -25,9 +25,9 @@ class ArraySerializable extends AbstractHydrator
     public function extract($object)
     {
         if (!is_callable(array($object, 'getArrayCopy'))) {
-            throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided object to implement getArrayCopy()', __METHOD__
-            ));
+            throw new Exception\BadMethodCallException(
+                sprintf('%s expects the provided object to implement getArrayCopy()', __METHOD__)
+            );
         }
 
         $data = $object->getArrayCopy();
@@ -74,9 +74,9 @@ class ArraySerializable extends AbstractHydrator
         } elseif (is_callable(array($object, 'populate'))) {
             $object->populate($replacement);
         } else {
-            throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided object to implement exchangeArray() or populate()', __METHOD__
-            ));
+            throw new Exception\BadMethodCallException(
+                sprintf('%s expects the provided object to implement exchangeArray() or populate()', __METHOD__)
+            );
         }
         return $object;
     }

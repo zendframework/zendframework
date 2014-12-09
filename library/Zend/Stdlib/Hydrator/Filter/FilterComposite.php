@@ -40,12 +40,10 @@ class FilterComposite implements FilterInterface
      */
     public function __construct($orFilter = array(), $andFilter = array())
     {
-        array_walk($orFilter,
+        array_walk(
+            $orFilter,
             function ($value, $key) {
-                if (
-                    !is_callable($value)
-                    && !$value instanceof FilterInterface
-                ) {
+                if (!is_callable($value) && !$value instanceof FilterInterface) {
                     throw new InvalidArgumentException(
                         'The value of ' . $key . ' should be either a callable or ' .
                         'an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'
@@ -54,12 +52,10 @@ class FilterComposite implements FilterInterface
             }
         );
 
-        array_walk($andFilter,
+        array_walk(
+            $andFilter,
             function ($value, $key) {
-                if (
-                    !is_callable($value)
-                    && !$value instanceof FilterInterface
-                ) {
+                if (!is_callable($value) && !$value instanceof FilterInterface) {
                     throw new InvalidArgumentException(
                         'The value of ' . $key . '  should be either a callable or ' .
                         'an instance of Zend\Stdlib\Hydrator\Filter\FilterInterface'

@@ -8,6 +8,7 @@
  */
 
 namespace ZendTest\Form\View\Helper;
+use Zend\Escaper\Escaper;
 
 /**
  * Tests for {@see \Zend\Form\View\Helper\AbstractHelper}
@@ -33,4 +34,29 @@ class AbstractHelperTest extends CommonTestCase
             $this->helper->createAttributesString(array('data-value' => 'breaking your HTML like a boss! \\'))
         );
     }
+
+    public function testWillEncodeValueAttributeValuesCorrectly()
+    {
+
+        $string = (new Escaper('iso-8859-1'))->escapeHtmlAttr('Título');
+
+        $this->helper->setEncoding('iso-8859-1');
+
+        $this->assertSame(
+            'data-value="' . $string . '"',
+            $this->helper->createAttributesString(array('data-value' => 'Título'))
+        );
+    }
+
+    public function testWillNotEncodeValueAttributeValuesCorrectly()
+    {
+
+        $string = (new Escaper('iso-8859-1'))->escapeHtmlAttr('Título');
+
+        $this->assertNotSame(
+            'data-value="' . $string . '"',
+            $this->helper->createAttributesString(array('data-value' => 'Título'))
+        );
+    }
+
 }

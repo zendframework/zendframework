@@ -54,7 +54,6 @@ class Mbox extends AbstractStorage
         return count($this->positions);
     }
 
-
     /**
      * Get a list of messages with number and size
      *
@@ -76,7 +75,6 @@ class Mbox extends AbstractStorage
         return $result;
     }
 
-
     /**
      * Get positions for mail message or throw exception if id is invalid
      *
@@ -92,7 +90,6 @@ class Mbox extends AbstractStorage
 
         return $this->positions[$id - 1];
     }
-
 
     /**
      * Fetch a message

@@ -70,7 +70,6 @@ abstract class AbstractStorage implements
         throw new Exception\InvalidArgumentException($var . ' not found');
     }
 
-
     /**
      * Get a full list of features supported by the specific mail lib and the server
      *
@@ -81,7 +80,6 @@ abstract class AbstractStorage implements
         return $this->has;
     }
 
-
     /**
      * Count messages messages in current box/folder
      *
@@ -89,7 +87,6 @@ abstract class AbstractStorage implements
      * @throws Exception\ExceptionInterface
      */
     abstract public function countMessages();
-
 
     /**
      * Get a list of messages with number and size
@@ -99,7 +96,6 @@ abstract class AbstractStorage implements
      */
     abstract public function getSize($id = 0);
 
-
     /**
      * Get a message with headers and body
      *
@@ -107,7 +103,6 @@ abstract class AbstractStorage implements
      * @return Message
      */
     abstract public function getMessage($id);
-
 
     /**
      * Get raw header of message or part
@@ -136,7 +131,6 @@ abstract class AbstractStorage implements
      */
     abstract public function __construct($params);
 
-
     /**
      * Destructor calls close() and therefore closes the resource.
      */
@@ -145,13 +139,11 @@ abstract class AbstractStorage implements
         $this->close();
     }
 
-
     /**
      * Close resource for mail lib. If you need to control, when the resource
      * is closed. Otherwise the destructor would call this.
      */
     abstract public function close();
-
 
     /**
      * Keep the resource alive.
@@ -195,42 +187,39 @@ abstract class AbstractStorage implements
      *
      * @return   int
      */
-     public function count()
-     {
-         return $this->countMessages();
-     }
+    public function count()
+    {
+        return $this->countMessages();
+    }
 
+    /**
+     * ArrayAccess::offsetExists()
+     *
+     * @param  int  $id
+     * @return bool
+     */
+    public function offsetExists($id)
+    {
+        try {
+            if ($this->getMessage($id)) {
+                return true;
+            }
+        } catch (Exception\ExceptionInterface $e) {
+        }
 
-     /**
-      * ArrayAccess::offsetExists()
-      *
-      * @param    int     $id
-      * @return   bool
-      */
-     public function offsetExists($id)
-     {
-         try {
-             if ($this->getMessage($id)) {
-                 return true;
-             }
-         } catch (Exception\ExceptionInterface $e) {
-         }
+        return false;
+    }
 
-         return false;
-     }
-
-
-     /**
-      * ArrayAccess::offsetGet()
-      *
-      * @param    int $id
-      * @return   \Zend\Mail\Storage\Message message object
-      */
-     public function offsetGet($id)
-     {
-         return $this->getMessage($id);
-     }
-
+    /**
+     * ArrayAccess::offsetGet()
+     *
+     * @param    int $id
+     * @return   \Zend\Mail\Storage\Message message object
+     */
+    public function offsetGet($id)
+    {
+        return $this->getMessage($id);
+    }
 
     /**
      * ArrayAccess::offsetSet()
@@ -239,98 +228,91 @@ abstract class AbstractStorage implements
      * @param mixed $value
      * @throws Exception\RuntimeException
      */
-     public function offsetSet($id, $value)
-     {
-         throw new Exception\RuntimeException('cannot write mail messages via array access');
-     }
+    public function offsetSet($id, $value)
+    {
+        throw new Exception\RuntimeException('cannot write mail messages via array access');
+    }
 
+    /**
+     * ArrayAccess::offsetUnset()
+     *
+     * @param    int   $id
+     * @return   bool success
+     */
+    public function offsetUnset($id)
+    {
+        return $this->removeMessage($id);
+    }
 
-     /**
-      * ArrayAccess::offsetUnset()
-      *
-      * @param    int   $id
-      * @return   bool success
-      */
-     public function offsetUnset($id)
-     {
-         return $this->removeMessage($id);
-     }
+    /**
+     * Iterator::rewind()
+     *
+     * Rewind always gets the new count from the storage. Thus if you use
+     * the interfaces and your scripts take long you should use reset()
+     * from time to time.
+     */
+    public function rewind()
+    {
+        $this->iterationMax = $this->countMessages();
+        $this->iterationPos = 1;
+    }
 
+    /**
+     * Iterator::current()
+     *
+     * @return   Message current message
+     */
+    public function current()
+    {
+        return $this->getMessage($this->iterationPos);
+    }
 
-     /**
-      * Iterator::rewind()
-      *
-      * Rewind always gets the new count from the storage. Thus if you use
-      * the interfaces and your scripts take long you should use reset()
-      * from time to time.
-      */
-     public function rewind()
-     {
-         $this->iterationMax = $this->countMessages();
-         $this->iterationPos = 1;
-     }
+    /**
+     * Iterator::key()
+     *
+     * @return   int id of current position
+     */
+    public function key()
+    {
+        return $this->iterationPos;
+    }
 
+    /**
+     * Iterator::next()
+     */
+    public function next()
+    {
+        ++$this->iterationPos;
+    }
 
-     /**
-      * Iterator::current()
-      *
-      * @return   Message current message
-      */
-     public function current()
-     {
-         return $this->getMessage($this->iterationPos);
-     }
+    /**
+     * Iterator::valid()
+     *
+     * @return bool
+     */
+    public function valid()
+    {
+        if ($this->iterationMax === null) {
+            $this->iterationMax = $this->countMessages();
+        }
+        return $this->iterationPos && $this->iterationPos <= $this->iterationMax;
+    }
 
+    /**
+     * SeekableIterator::seek()
+     *
+     * @param  int $pos
+     * @throws Exception\OutOfBoundsException
+     */
+    public function seek($pos)
+    {
+        if ($this->iterationMax === null) {
+            $this->iterationMax = $this->countMessages();
+        }
 
-     /**
-      * Iterator::key()
-      *
-      * @return   int id of current position
-      */
-     public function key()
-     {
-         return $this->iterationPos;
-     }
-
-
-     /**
-      * Iterator::next()
-      */
-     public function next()
-     {
-         ++$this->iterationPos;
-     }
-
-
-     /**
-      * Iterator::valid()
-      *
-      * @return bool
-      */
-     public function valid()
-     {
-         if ($this->iterationMax === null) {
-             $this->iterationMax = $this->countMessages();
-         }
-         return $this->iterationPos && $this->iterationPos <= $this->iterationMax;
-     }
-
-
-     /**
-      * SeekableIterator::seek()
-      *
-      * @param  int $pos
-      * @throws Exception\OutOfBoundsException
-      */
-     public function seek($pos)
-     {
-         if ($this->iterationMax === null) {
-             $this->iterationMax = $this->countMessages();
-         }
-
-         if ($pos > $this->iterationMax) {
-             throw new Exception\OutOfBoundsException('this position does not exist');
-         }
-         $this->iterationPos = $pos;
-     }
+        if ($pos > $this->iterationMax) {
+            throw new Exception\OutOfBoundsException('this position does not exist');
+        }
+        $this->iterationPos = $pos;
+    }
 }

@@ -9,14 +9,12 @@
 
 namespace Zend\Mail\Header;
 
-
 class MessageId implements HeaderInterface
 {
     /**
      * @var string
      */
     protected $messageId;
-
 
     public static function fromString($headerLine)
     {

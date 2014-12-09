@@ -14,7 +14,6 @@ use Zend\Mail\Storage\Exception;
 /**
  * Exception for Zend\Mail component.
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements
-    ExceptionInterface
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
 {
 }

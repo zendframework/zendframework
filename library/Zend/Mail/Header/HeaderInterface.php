@@ -25,7 +25,6 @@ interface HeaderInterface
      */
     const FORMAT_RAW     = false;
 
-
     /**
      * Factory to generate a header object from a string
      *

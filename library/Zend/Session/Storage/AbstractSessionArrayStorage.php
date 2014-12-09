@@ -35,7 +35,6 @@ abstract class AbstractSessionArrayStorage implements
         $this->init($input);
     }
 
-
     /**
      * Initialize Storage
      *
@@ -351,9 +350,9 @@ abstract class AbstractSessionArrayStorage implements
     public function setMetadata($key, $value, $overwriteArray = false)
     {
         if ($this->isImmutable()) {
-            throw new Exception\RuntimeException(sprintf(
-                'Cannot set key "%s" as storage is marked isImmutable', $key
-            ));
+            throw new Exception\RuntimeException(
+                sprintf('Cannot set key "%s" as storage is marked isImmutable', $key)
+            );
         }
 
         if (!isset($_SESSION['__ZF'])) {

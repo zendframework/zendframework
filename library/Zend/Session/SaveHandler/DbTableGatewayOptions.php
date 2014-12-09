@@ -47,7 +47,6 @@ class DbTableGatewayOptions extends AbstractOptions
      */
     protected $modifiedColumn = 'modified';
 
-
     /**
      * Set Id Column
      *

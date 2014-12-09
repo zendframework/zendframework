@@ -356,8 +356,8 @@ class SessionManager extends AbstractManager
             return;
         }
         setcookie(
-            $this->getName(),                 // session name
-            '',                               // value
+            $this->getName(), // session name
+            '', // value
             $_SERVER['REQUEST_TIME'] - 42000, // TTL for cookie
             $config->getCookiePath(),
             $config->getCookieDomain(),

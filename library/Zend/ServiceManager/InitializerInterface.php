@@ -9,7 +9,6 @@
 
 namespace Zend\ServiceManager;
 
-
 interface InitializerInterface
 {
     /**

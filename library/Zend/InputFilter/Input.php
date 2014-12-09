@@ -372,7 +372,14 @@ class Input implements InputInterface, EmptyContextInterface
             }
         }
 
-        $chain->prependByName('NotEmpty', array(), true);
         $this->notEmptyValidator = true;
+
+        if (class_exists('Zend\ServiceManager\AbstractPluginManager')) {
+            $chain->prependByName('NotEmpty', array(), true);
+
+            return;
+        }
+
+        $chain->prependValidator(new NotEmpty(), true);
     }
 }

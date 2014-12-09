@@ -29,6 +29,7 @@ class FilterPluginManager extends AbstractPluginManager
         'alnum'                      => 'Zend\I18n\Filter\Alnum',
         'alpha'                      => 'Zend\I18n\Filter\Alpha',
         'basename'                   => 'Zend\Filter\BaseName',
+        'blacklist'                 => 'Zend\Filter\Blacklist',
         'boolean'                    => 'Zend\Filter\Boolean',
         'callback'                   => 'Zend\Filter\Callback',
         'compress'                   => 'Zend\Filter\Compress',

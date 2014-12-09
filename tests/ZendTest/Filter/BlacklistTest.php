@@ -10,16 +10,16 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\FilterPluginManager;
-use Zend\Filter\Whitelist as WhitelistFilter;
+use Zend\Filter\Blacklist as BlacklistFilter;
 
 /**
  * @group      Zend_Filter
  */
-class WhitelistTest extends \PHPUnit_Framework_TestCase
+class BlacklistTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructorOptions()
     {
-        $filter = new WhitelistFilter(array(
+        $filter = new BlacklistFilter(array(
             'list'    => array('test', 1),
             'strict'  => true,
         ));
@@ -30,7 +30,7 @@ class WhitelistTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorDefaults()
     {
-        $filter = new WhitelistFilter();
+        $filter = new BlacklistFilter();
 
         $this->assertEquals(null, $filter->getStrict());
         $this->assertEquals(array(), $filter->getList());
@@ -39,9 +39,9 @@ class WhitelistTest extends \PHPUnit_Framework_TestCase
     public function testWithPluginManager()
     {
         $pluginManager = new FilterPluginManager();
-        $filter = $pluginManager->get('whitelist');
+        $filter = $pluginManager->get('blacklist');
 
-        $this->assertInstanceOf('Zend\Filter\Whitelist', $filter);
+        $this->assertInstanceOf('Zend\Filter\Blacklist', $filter);
     }
 
     /**
@@ -51,7 +51,7 @@ class WhitelistTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefault($value, $expected)
     {
-        $filter = new WhitelistFilter();
+        $filter = new BlacklistFilter();
         $this->assertSame($expected, $filter->filter($value));
     }
 
@@ -62,7 +62,7 @@ class WhitelistTest extends \PHPUnit_Framework_TestCase
      */
     public function testList($strict, $list, $testData)
     {
-        $filter = new WhitelistFilter(array(
+        $filter = new BlacklistFilter(array(
             'strict' => $strict,
             'list'   => $list,
         ));
@@ -82,10 +82,10 @@ class WhitelistTest extends \PHPUnit_Framework_TestCase
     public static function defaultTestProvider()
     {
         return array(
-            array('test',   null),
-            array(0,        null),
-            array(0.1,      null),
-            array(array(),  null),
+            array('test',   'test'),
+            array(0,        0),
+            array(0.1,      0.1),
+            array(array(),  array()),
             array(null,     null),
         );
     }
@@ -97,25 +97,25 @@ class WhitelistTest extends \PHPUnit_Framework_TestCase
                 true, //strict
                 array('test', 0),
                 array(
-                    array('test',   'test'),
-                    array(0,        0),
+                    array('test',   null),
+                    array(0,        null),
                     array(null,     null),
-                    array(false,    null),
-                    array(0.0,      null),
-                    array(array(),  null),
+                    array(false,    false),
+                    array(0.0,      0.0),
+                    array(array(),  array()),
                 ),
             ),
             array(
                 false, //not strict
                 array('test', 0),
                 array(
-                    array('test',   'test'),
-                    array(0,        0),
+                    array('test',   null),
+                    array(0,        null),
                     array(null,     null),
-                    array(false,    false),
-                    array(0.0,      0.0),
-                    array(0.1,      null),
-                    array(array(),  null),
+                    array(false,    null),
+                    array(0.0,      null),
+                    array(0.1,      0.1),
+                    array(array(),  array()),
                 ),
             ),
         );

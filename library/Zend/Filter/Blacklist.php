@@ -12,7 +12,7 @@ namespace Zend\Filter;
 use Traversable;
 use Zend\Stdlib\ArrayUtils;
 
-class Whitelist extends AbstractFilter
+class Blacklist extends AbstractFilter
 {
     /**
      * @var array
@@ -35,12 +35,13 @@ class Whitelist extends AbstractFilter
     /**
      * Determine whether the in_array() call should be "strict" or not. See in_array docs.
      *
-     * @param bool $strict
+     * @param  bool $strict
      * @return self
      */
     public function setStrict($strict = true)
     {
         $this->options['strict'] = $strict;
+
         return $this;
     }
 
@@ -55,9 +56,9 @@ class Whitelist extends AbstractFilter
     }
 
     /**
-     * Set the list of items to white-list.
+     * Set the list of items to black-list.
      *
-     * @param array|Traversable $list
+     * @param  array|Traversable $list
      * @return $this
      */
     public function setList($list = array())
@@ -78,12 +79,12 @@ class Whitelist extends AbstractFilter
         }
 
         $this->options['list'] = $list;
+
         return $this;
     }
 
-
     /**
-     * Get the list of items to white-list
+     * Get the list of items to black-list
      *
      * @return array|Traversable
      */
@@ -93,9 +94,9 @@ class Whitelist extends AbstractFilter
     }
 
     /**
-     * Will return $value if its present in the white-list.
+     * Will return null if $value is present in the black-list.
      *
-     * If $value is rejected then it will return null.
+     * If $value is NOT present then it will return $value.
      *
      * @param  mixed $value
      * @return mixed
@@ -104,6 +105,7 @@ class Whitelist extends AbstractFilter
     {
         $list = $this->getList();
         $strict = $this->getStrict();
-        return in_array($value, $list, $strict) ? $value : null;
+
+        return in_array($value, $list, $strict) ? null : $value;
     }
 }

@@ -11,7 +11,6 @@ namespace Zend\Mail\Header\Exception;
 
 use Zend\Mail\Exception;
 
-class RuntimeException extends Exception\RuntimeException implements
-    ExceptionInterface
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
 {
 }

@@ -164,7 +164,6 @@ class Smtp implements TransportInterface
         $this->connection = $connection;
     }
 
-
     /**
      * Gets the connection protocol instance
      *
@@ -215,11 +214,13 @@ class Smtp implements TransportInterface
         $body       = $this->prepareBody($message);
 
         if ((count($recipients) == 0) && (!empty($headers) || !empty($body))) {
-            throw new Exception\RuntimeException(  // Per RFC 2821 3.3 (page 18)
+            // Per RFC 2821 3.3 (page 18)
+            throw new Exception\RuntimeException(
                 sprintf(
                     '%s transport expects at least one recipient if the message has at least one header or body',
                     __CLASS__
-                ));
+                )
+            );
         }
 
         // Set sender email address

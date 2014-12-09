@@ -302,6 +302,7 @@ class Headers implements Countable, Iterator
                 } else {
                     return $results[0];
                 }
+                //fall-trough
             default:
                 return new ArrayIterator($results);
         }

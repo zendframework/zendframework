@@ -122,8 +122,6 @@ class Maildir extends AbstractStorage
         return $result;
     }
 
-
-
     /**
      * Fetch a message
      *
@@ -330,7 +328,6 @@ class Maildir extends AbstractStorage
         }
     }
 
-
     /**
      * Close resource for mail lib. If you need to control, when the resource
      * is closed. Otherwise the destructor would call this.
@@ -341,7 +338,6 @@ class Maildir extends AbstractStorage
         $this->files = array();
     }
 
-
     /**
      * Waste some CPU cycles doing nothing.
      *
@@ -351,7 +347,6 @@ class Maildir extends AbstractStorage
     {
         return true;
     }
-
 
     /**
      * stub for not supported message deletion

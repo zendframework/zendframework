@@ -14,7 +14,6 @@ use Zend\Mail\Exception;
 /**
  * Exception for Zend\Mail component.
  */
-class RuntimeException extends Exception\RuntimeException implements
-    ExceptionInterface
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
 {
 }

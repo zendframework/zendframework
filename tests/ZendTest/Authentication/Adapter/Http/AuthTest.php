@@ -306,6 +306,9 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         $this->_checkBadRequest($data);
     }
 
+    /**
+     * check if response is validated
+     */
     public function testBadDigestResponse()
     {
         $bad = $this->_digestReply('Bryce', 'ThisIsNotMyPassword');

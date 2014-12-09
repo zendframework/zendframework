@@ -808,6 +808,11 @@ class Http implements AdapterInterface
         return $data;
     }
 
+    /**
+     * validates if $value is a valid Md5 hash
+     * @param string $value
+     * @return bool
+     */
     private function isValidMd5Hash($value)
     {
         return 32 == strlen($value) && ctype_xdigit($value);

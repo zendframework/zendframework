@@ -109,7 +109,7 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         $header = Accept::fromString('Accept: text/*;q=0.3, text/html;q=0.7, text/html;level=1,'
                                      .'text/html;level=2;q=0.4, */*;q=0.5');
 
-        $expected = array (
+        $expected = array(
             'text/html;level=1',
             'text/html;q=0.7',
             '*/*;q=0.5',

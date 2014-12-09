@@ -250,8 +250,8 @@ class Headers implements Countable, Iterator
 
         if (!empty($indexes)) {
             foreach ($indexes as $index) {
-                unset ($this->headersKeys[$index]);
-                unset ($this->headers[$index]);
+                unset($this->headersKeys[$index]);
+                unset($this->headers[$index]);
             }
             return true;
         }

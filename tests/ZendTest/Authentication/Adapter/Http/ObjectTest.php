@@ -93,7 +93,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testValidConfigs()
     {
-        $configs = array (
+        $configs = array(
             $this->_basicConfig,
             $this->_digestConfig,
             $this->_bothConfig,

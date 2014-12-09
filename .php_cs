@@ -36,6 +36,7 @@ $config->fixers(
         'visibility',
         'php_closing_tag',
         'braces',
+        'function_call_space',
         'function_declaration',
         'psr0',
         'elseif',

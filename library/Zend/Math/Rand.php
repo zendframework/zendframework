@@ -54,7 +54,7 @@ abstract class Rand
         $checkAlternatives = (file_exists('/dev/urandom') && is_readable('/dev/urandom'))
             || class_exists('\\COM', false);
         if (true === $strong && false === $checkAlternatives) {
-            throw new Exception\RuntimeException (
+            throw new Exception\RuntimeException(
                 'This PHP environment doesn\'t support secure random number generation. ' .
                 'Please consider installing the OpenSSL and/or Mcrypt extensions'
             );

@@ -343,10 +343,10 @@ class FilePostRedirectGetTest extends TestCase
 
         $postData = array(
             'test_collection' => array(
-                array (
+                array(
                     'test_field' => 'foo'
                 ),
-                array (
+                array(
                     'test_field' => 'bar'
                 )
             )

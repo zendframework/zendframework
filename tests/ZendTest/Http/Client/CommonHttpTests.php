@@ -325,12 +325,12 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     {
         $this->client->setUri($this->baseuri . 'testResetParameters.php');
 
-        $gparams = array (
+        $gparams = array(
             'cheese' => 'camambert',
             'beer'   => 'jever pilnsen',
         );
 
-        $pparams = array (
+        $pparams = array(
             'from' => 'bob',
             'to'   => 'alice'
         );
@@ -338,7 +338,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->client->setParameterGet($gparams)->setParameterPost($pparams);
 
         // Remove some parameters
-        $this->client->setParameterGet(array ('cheese' => null))
+        $this->client->setParameterGet(array('cheese' => null))
                      ->setParameterPost(array('to' => null));
         $this->client->setMethod('POST');
         $res = $this->client->send();

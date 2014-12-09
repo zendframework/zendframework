@@ -28,7 +28,7 @@ class ErrorHandlerTest extends \PHPUnit_Framework_TestCase
             'message'      => 'test',
             'priority'     => 1,
             'priorityName' => 'CRIT',
-            'extra' => array (
+            'extra' => array(
                 'errno' => 1,
                 'file'  => 'test.php',
                 'line'  => 1,

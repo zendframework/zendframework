@@ -386,7 +386,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->setAuth('username', 'password', ExtendedClient::AUTH_CUSTOM);
 
         $this->assertAttributeEquals(
-            array (
+            array(
                 'user'     => 'username',
                 'password' => 'password',
                 'type'     => ExtendedClient::AUTH_CUSTOM,

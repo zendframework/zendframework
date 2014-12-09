@@ -394,7 +394,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         // Define some values we'll be using
         $poem = array(
-            'poem' => array (
+            'poem' => array(
                 'line 1' => 'Roses are red, bacon is also red,',
                 'line 2' => 'Poems are hard,',
                 'line 3' => 'Bacon.',

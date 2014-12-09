@@ -724,7 +724,7 @@ class Client implements Stdlib\DispatchableInterface
             throw new Exception\InvalidArgumentException("The username cannot be empty");
         }
 
-        $this->auth = array (
+        $this->auth = array(
             'user'     => $user,
             'password' => $password,
             'type'     => $type

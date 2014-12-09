@@ -30,9 +30,9 @@ class ObjectProperty extends AbstractHydrator
     public function extract($object)
     {
         if (!is_object($object)) {
-            throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)', __METHOD__
-            ));
+            throw new Exception\BadMethodCallException(
+                sprintf('%s expects the provided $object to be a PHP object)', __METHOD__)
+            );
         }
 
         $data   = get_object_vars($object);
@@ -70,10 +70,10 @@ class ObjectProperty extends AbstractHydrator
      */
     public function hydrate(array $data, $object)
     {
-        if (! is_object($object)) {
-            throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)', __METHOD__
-            ));
+        if (!is_object($object)) {
+            throw new Exception\BadMethodCallException(
+                sprintf('%s expects the provided $object to be a PHP object)', __METHOD__)
+            );
         }
 
         $properties = & self::$skippedPropertiesCache[get_class($object)];

@@ -98,17 +98,17 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     public function __set($key, $value)
     {
-        $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-        if ($this->__strictMode__ && !method_exists($this, $setter)) {
+        $setter = 'set' . str_replace('_', '', $key);
+        if (method_exists($this, $setter)) {
+            $this->{$setter}($value);
+        } elseif ($this->__strictMode__) {
+            $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
             throw new Exception\BadMethodCallException(
                 'The option "' . $key . '" does not '
                 . 'have a matching ' . $setter . ' setter method '
                 . 'which must be defined'
             );
-        } elseif (!$this->__strictMode__ && !method_exists($this, $setter)) {
-            return;
         }
-        $this->{$setter}($value);
     }
 
     /**
@@ -121,16 +121,17 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     public function __get($key)
     {
-        $getter = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-        if (!method_exists($this, $getter)) {
-            throw new Exception\BadMethodCallException(
-                'The option "' . $key . '" does not '
-                . 'have a matching ' . $getter . ' getter method '
-                . 'which must be defined'
-            );
+        $getter = 'get' . str_replace('_', '', $key);
+        if (method_exists($this, $getter)) {
+            return $this->{$getter}();
         }
 
-        return $this->{$getter}();
+        $getter = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+        throw new Exception\BadMethodCallException(
+            'The option "' . $key . '" does not '
+            . 'have a matching ' . $getter . ' getter method '
+            . 'which must be defined'
+        );
     }
 
     /**

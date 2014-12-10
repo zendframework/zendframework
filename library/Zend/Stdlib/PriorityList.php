@@ -253,7 +253,7 @@ class PriorityList implements Iterator, Countable
 
         return array_map(
             function ($item) use ($flag) {
-                return ($flag == self::EXTR_PRIORITY) ? $item['priority'] : $item['data'];
+                return ($flag == PriorityList::EXTR_PRIORITY) ? $item['priority'] : $item['data'];
             },
             $this->items
         );

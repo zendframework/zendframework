@@ -33,7 +33,7 @@ class BlacklistTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new BlacklistFilter();
 
-        $this->assertEquals(null, $filter->getStrict());
+        $this->assertEquals(false, $filter->getStrict());
         $this->assertEquals(array(), $filter->getList());
     }
 
@@ -61,6 +61,14 @@ class BlacklistTest extends \PHPUnit_Framework_TestCase
             'list' => $obj,
         ));
         $this->assertEquals($array, $filter->getList());
+    }
+
+    public function testSetStrictShouldCastToBoolean()
+    {
+        $filter = new BlacklistFilter(array(
+            'strict' => 1
+        ));
+        $this->assertSame(true, $filter->getStrict());
     }
 
     /**

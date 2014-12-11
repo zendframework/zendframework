@@ -33,7 +33,7 @@ class WhitelistTest extends \PHPUnit_Framework_TestCase
     {
         $filter = new WhitelistFilter();
 
-        $this->assertEquals(null, $filter->getStrict());
+        $this->assertEquals(false, $filter->getStrict());
         $this->assertEquals(array(), $filter->getList());
     }
 
@@ -61,6 +61,14 @@ class WhitelistTest extends \PHPUnit_Framework_TestCase
             'list' => $obj,
         ));
         $this->assertEquals($array, $filter->getList());
+    }
+
+    public function testSetStrictShouldCastToBoolean()
+    {
+        $filter = new WhitelistFilter(array(
+            'strict' => 1
+        ));
+        $this->assertSame(true, $filter->getStrict());
     }
 
     /**

@@ -14,11 +14,10 @@ use Zend\Stdlib\ArrayUtils;
 
 class Blacklist extends AbstractFilter
 {
-
     /**
-     * @var null
+     * @var bool
      */
-    protected $strict = null;
+    protected $strict = false;
 
     /**
      * @var array
@@ -30,7 +29,7 @@ class Blacklist extends AbstractFilter
      */
     public function __construct($options = null)
     {
-        if (!is_null($options)) {
+        if (null !== $options) {
             $this->setOptions($options);
         }
     }
@@ -39,13 +38,10 @@ class Blacklist extends AbstractFilter
      * Determine whether the in_array() call should be "strict" or not. See in_array docs.
      *
      * @param  bool $strict
-     * @return self
      */
     public function setStrict($strict = true)
     {
-        $this->strict = $strict;
-
-        return $this;
+        $this->strict = (bool) $strict;
     }
 
     /**
@@ -62,7 +58,6 @@ class Blacklist extends AbstractFilter
      * Set the list of items to black-list.
      *
      * @param  array|Traversable $list
-     * @return $this
      */
     public function setList($list = array())
     {
@@ -71,14 +66,12 @@ class Blacklist extends AbstractFilter
         }
 
         $this->list = $list;
-
-        return $this;
     }
 
     /**
      * Get the list of items to black-list
      *
-     * @return array|Traversable
+     * @return array
      */
     public function getList()
     {
@@ -86,18 +79,12 @@ class Blacklist extends AbstractFilter
     }
 
     /**
-     * Will return null if $value is present in the black-list.
+     * {@inheritDoc}
      *
-     * If $value is NOT present then it will return $value.
-     *
-     * @param  mixed $value
-     * @return mixed
+     * Will return null if $value is present in the black-list. If $value is NOT present then it will return $value.
      */
     public function filter($value)
     {
-        $list = $this->getList();
-        $strict = $this->getStrict();
-
-        return in_array($value, $list, $strict) ? null : $value;
+        return in_array($value, $this->getList(), $this->getStrict()) ? null : $value;
     }
 }

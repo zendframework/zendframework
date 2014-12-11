@@ -14,6 +14,10 @@ use Zend\Stdlib\ArrayUtils;
 
 class Whitelist extends AbstractFilter
 {
+    /**
+     * @var bool
+     */
+    protected $strict = false;
 
     /**
      * @var array
@@ -21,16 +25,11 @@ class Whitelist extends AbstractFilter
     protected $list = array();
 
     /**
-     * @var null
-     */
-    protected $strict = null;
-
-    /**
      * @param null|array|Traversable $options
      */
     public function __construct($options = null)
     {
-        if (!is_null($options)) {
+        if (null !== $options) {
             $this->setOptions($options);
         }
     }
@@ -39,12 +38,10 @@ class Whitelist extends AbstractFilter
      * Determine whether the in_array() call should be "strict" or not. See in_array docs.
      *
      * @param bool $strict
-     * @return self
      */
     public function setStrict($strict = true)
     {
-        $this->strict = $strict;
-        return $this;
+        $this->strict = (bool) $strict;
     }
 
     /**
@@ -61,7 +58,6 @@ class Whitelist extends AbstractFilter
      * Set the list of items to white-list.
      *
      * @param array|Traversable $list
-     * @return $this
      */
     public function setList($list = array())
     {
@@ -70,14 +66,13 @@ class Whitelist extends AbstractFilter
         }
 
         $this->list = $list;
-        return $this;
     }
 
 
     /**
      * Get the list of items to white-list
      *
-     * @return array|Traversable
+     * @return array
      */
     public function getList()
     {
@@ -85,17 +80,12 @@ class Whitelist extends AbstractFilter
     }
 
     /**
-     * Will return $value if its present in the white-list.
+     * {@inheritDoc}
      *
-     * If $value is rejected then it will return null.
-     *
-     * @param  mixed $value
-     * @return mixed
+     * Will return $value if its present in the white-list. If $value is rejected then it will return null.
      */
     public function filter($value)
     {
-        $list = $this->getList();
-        $strict = $this->getStrict();
-        return in_array($value, $list, $strict) ? $value : null;
+        return in_array($value, $this->getList(), $this->getStrict()) ? $value : null;
     }
 }

@@ -131,11 +131,11 @@ abstract class AbstractOptions implements ParameterObjectInterface
             return $this->{$getter}();
         }
 
-        throw new Exception\BadMethodCallException(
-            'The option "' . $key . '" does not '
-            . 'have a matching ' . 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
-            . ' getter method which must be defined'
-        );
+        throw new Exception\BadMethodCallException(sprintf(
+            'The option "%s" does not have a matching "%s" getter method which must be defined',
+            $key,
+            'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
+        ));
     }
 
     /**

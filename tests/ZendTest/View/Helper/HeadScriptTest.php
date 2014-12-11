@@ -459,6 +459,9 @@ document.write(bar.strlen());');
         $this->assertNotContains('//-->', $test);
     }
 
+    /**
+     * @group 6634
+     */
     public function testSupportsCrossOriginAttribute()
     {
         $this->helper->__invoke()->appendScript(

@@ -270,7 +270,7 @@ abstract class AbstractFeed implements FeedInterface
         if (array_key_exists($name . '\\Feed', $this->extensions)) {
             return $this->extensions[$name . '\\Feed'];
         }
-        return null;
+        return;
     }
 
     protected function loadExtensions()

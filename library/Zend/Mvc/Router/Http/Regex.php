@@ -104,7 +104,7 @@ class Regex implements RouteInterface
     public function match(Request $request, $pathOffset = null)
     {
         if (!method_exists($request, 'getUri')) {
-            return null;
+            return;
         }
 
         $uri  = $request->getUri();
@@ -117,7 +117,7 @@ class Regex implements RouteInterface
         }
 
         if (!$result) {
-            return null;
+            return;
         }
 
         $matchedLength = strlen($matches[0]);

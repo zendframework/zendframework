@@ -39,7 +39,7 @@ class Identity extends AbstractHelper
         }
 
         if (!$this->authenticationService->hasIdentity()) {
-            return null;
+            return;
         }
 
         return $this->authenticationService->getIdentity();

@@ -69,7 +69,7 @@ class Rss extends AbstractFeed
             return $authors[$index];
         }
 
-        return null;
+        return;
     }
 
     /**

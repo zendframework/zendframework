@@ -34,7 +34,7 @@ class Entry extends Extension\AbstractEntry
             return $authors[$index];
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -329,7 +329,7 @@ class Entry extends Extension\AbstractEntry
             return $this->data['links'][$index];
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -588,7 +588,7 @@ class Entry extends Extension\AbstractEntry
         }
 
         if (empty($author)) {
-            return null;
+            return;
         }
         return $author;
     }

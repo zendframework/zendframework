@@ -487,7 +487,7 @@ class SqlFunctionalTest extends \PHPUnit_Framework_TestCase
         if ($decorator instanceof Sql\Platform\PlatformDecoratorInterface) {
             return $decorator;
         }
-        return null;
+        return;
     }
 
     protected function resolveAdapter($platform)

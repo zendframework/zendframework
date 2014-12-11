@@ -155,7 +155,7 @@ class Encoder
             return $value->toLdif($this->options);
         }
 
-        return null;
+        return;
     }
 
     /**

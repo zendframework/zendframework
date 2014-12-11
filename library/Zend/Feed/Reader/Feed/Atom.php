@@ -58,7 +58,7 @@ class Atom extends AbstractFeed
             return $authors[$index];
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -152,7 +152,7 @@ class Atom extends AbstractFeed
      */
     public function getLastBuildDate()
     {
-        return null;
+        return;
     }
 
     /**

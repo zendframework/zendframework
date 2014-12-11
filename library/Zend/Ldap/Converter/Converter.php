@@ -106,7 +106,7 @@ class Converter
                         return stream_get_contents($value);
                     }
 
-                    return null;
+                    return;
             }
         } catch (\Exception $e) {
             throw new Exception\ConverterException($e->getMessage(), $e->getCode(), $e);

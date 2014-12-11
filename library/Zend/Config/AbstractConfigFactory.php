@@ -167,6 +167,6 @@ class AbstractConfigFactory implements ServiceManager\AbstractFactoryInterface
                 return $matches[1];
             }
         }
-        return null;
+        return;
     }
 }

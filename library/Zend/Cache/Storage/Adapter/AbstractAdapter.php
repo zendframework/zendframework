@@ -335,7 +335,7 @@ abstract class AbstractAdapter implements StorageInterface, EventsCapableInterfa
     {
         if (!$this->getOptions()->getReadable()) {
             $success = false;
-            return null;
+            return;
         }
 
         $this->normalizeKey($key);

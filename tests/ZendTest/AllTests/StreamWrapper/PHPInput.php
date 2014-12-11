@@ -72,7 +72,7 @@ class PHPInput
             return static::$_arguments[$methodName];
         }
 
-        return null;
+        return;
     }
 
     public function stream_open()

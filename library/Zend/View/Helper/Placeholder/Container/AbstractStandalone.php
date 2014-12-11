@@ -109,7 +109,7 @@ abstract class AbstractStandalone extends AbstractHelper implements
             return $container[$key];
         }
 
-        return null;
+        return;
     }
 
     /**

@@ -1009,7 +1009,7 @@ class ServiceManager implements ServiceLocatorInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -1101,7 +1101,7 @@ class ServiceManager implements ServiceLocatorInterface
                 );
             }
         }
-        return null;
+        return;
     }
 
     /**

@@ -216,7 +216,7 @@ class ContentType implements HeaderInterface
         if (isset($this->parameters['charset'])) {
             return $this->parameters['charset'];
         }
-        return null;
+        return;
     }
 
     /**

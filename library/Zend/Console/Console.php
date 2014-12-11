@@ -170,7 +170,7 @@ abstract class Console
     {
         // Check if we are in a console environment
         if (!static::isConsole()) {
-            return null;
+            return;
         }
 
         // Check if we're on windows

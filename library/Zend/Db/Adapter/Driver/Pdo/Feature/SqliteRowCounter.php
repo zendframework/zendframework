@@ -34,7 +34,7 @@ class SqliteRowCounter extends AbstractFeature
         $countStmt = clone $statement;
         $sql = $statement->getSql();
         if ($sql == '' || stripos($sql, 'select') === false) {
-            return null;
+            return;
         }
         $countSql = 'SELECT COUNT(*) as "count" FROM (' . $sql . ')';
         $countStmt->prepare($countSql);
@@ -51,7 +51,7 @@ class SqliteRowCounter extends AbstractFeature
     public function getCountForSql($sql)
     {
         if (stripos($sql, 'select') === false) {
-            return null;
+            return;
         }
         $countSql = 'SELECT COUNT(*) as count FROM (' . $sql . ')';
         /** @var $pdo \PDO */

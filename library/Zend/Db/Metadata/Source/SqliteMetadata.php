@@ -271,7 +271,7 @@ class SqliteMetadata extends AbstractSource
         }
 
         if (!preg_match($re, $sql, $matches)) {
-            return null;
+            return;
         }
         return array(
             'view_definition' => $matches['view_definition'],
@@ -306,7 +306,7 @@ class SqliteMetadata extends AbstractSource
         }
 
         if (!preg_match($re, $sql, $matches)) {
-            return null;
+            return;
         }
         $data = array();
 

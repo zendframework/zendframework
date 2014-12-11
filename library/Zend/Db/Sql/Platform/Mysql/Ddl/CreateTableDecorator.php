@@ -102,7 +102,7 @@ class CreateTableDecorator extends CreateTable implements PlatformDecoratorInter
     protected function processColumns(PlatformInterface $platform = null)
     {
         if (! $this->columns) {
-            return null;
+            return;
         }
 
         $sqls = array();

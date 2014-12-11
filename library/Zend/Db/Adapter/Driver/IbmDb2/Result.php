@@ -119,7 +119,7 @@ class Result implements ResultInterface
      */
     public function buffer()
     {
-        return null;
+        return;
     }
 
     /**
@@ -187,6 +187,6 @@ class Result implements ResultInterface
      */
     public function count()
     {
-        return null;
+        return;
     }
 }

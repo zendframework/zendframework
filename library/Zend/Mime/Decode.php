@@ -73,7 +73,7 @@ class Decode
     {
         $parts = static::splitMime($message, $boundary);
         if (count($parts) <= 0) {
-            return null;
+            return;
         }
         $result = array();
         $headers = null; // "Declare" variable before the first usage "for reading"
@@ -188,7 +188,7 @@ class Decode
                 }
                 return substr($matches[2][$key], 1, -1);
             }
-            return null;
+            return;
         }
 
         $split = array();

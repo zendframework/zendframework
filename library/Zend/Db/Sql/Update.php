@@ -166,7 +166,7 @@ class Update extends AbstractPreparableSql
     protected function processWhere(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         if ($this->where->count() == 0) {
-            return null;
+            return;
         }
         return sprintf(
             $this->specifications[static::SPECIFICATION_WHERE],

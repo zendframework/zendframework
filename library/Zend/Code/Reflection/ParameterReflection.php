@@ -41,7 +41,7 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
     {
         $phpReflection = parent::getClass();
         if ($phpReflection == null) {
-            return null;
+            return;
         }
 
         $zendReflection = new ClassReflection($phpReflection->getName());
@@ -87,7 +87,7 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
 
         $docBlock = $this->getDeclaringFunction()->getDocBlock();
         if (!$docBlock instanceof DocBlockReflection) {
-            return null;
+            return;
         }
 
         $params = $docBlock->getTags('param');
@@ -95,7 +95,7 @@ class ParameterReflection extends ReflectionParameter implements ReflectionInter
             return $params[$this->getPosition()]->getType();
         }
 
-        return null;
+        return;
     }
 
     public function toString()

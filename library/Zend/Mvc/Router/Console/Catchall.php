@@ -98,7 +98,7 @@ class Catchall implements RouteInterface
     public function match(Request $request)
     {
         if (!$request instanceof ConsoleRequest) {
-            return null;
+            return;
         }
 
         return new RouteMatch($this->defaults);

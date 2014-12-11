@@ -152,7 +152,7 @@ class Insert extends AbstractPreparableSql
     protected function processInsert(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         if ($this->select) {
-            return null;
+            return;
         }
         if (!$this->columns) {
             throw new Exception\InvalidArgumentException('values or select should be present');
@@ -185,7 +185,7 @@ class Insert extends AbstractPreparableSql
     protected function processSelect(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         if (!$this->select) {
-            return null;
+            return;
         }
         $selectSql = $this->processSubSelect($this->select, $platform, $driver, $parameterContainer);
 

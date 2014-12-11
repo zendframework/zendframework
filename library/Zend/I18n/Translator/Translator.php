@@ -461,7 +461,7 @@ class Translator implements TranslatorInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**

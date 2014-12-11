@@ -331,7 +331,7 @@ class Csrf extends AbstractValidator
             return $this->formatHash($session->tokenList[$tokenId], $tokenId);
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -363,7 +363,7 @@ class Csrf extends AbstractValidator
         $data = explode('-', $hash);
 
         if (! isset($data[1])) {
-            return null;
+            return;
         }
 
         return $data[1];

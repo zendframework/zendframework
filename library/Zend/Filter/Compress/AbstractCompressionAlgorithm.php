@@ -51,7 +51,7 @@ abstract class AbstractCompressionAlgorithm implements CompressionAlgorithmInter
         }
 
         if (!array_key_exists($option, $this->options)) {
-            return null;
+            return;
         }
 
         return $this->options[$option];

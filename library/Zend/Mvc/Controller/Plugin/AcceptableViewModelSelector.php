@@ -134,7 +134,7 @@ class AcceptableViewModelSelector extends AbstractPlugin
         $headers        = $request->getHeaders();
 
         if ((!$matchAgainst && !$this->defaultMatchAgainst) || !$headers->has('accept')) {
-            return null;
+            return;
         }
 
         if (!$matchAgainst) {
@@ -151,7 +151,7 @@ class AcceptableViewModelSelector extends AbstractPlugin
         /** @var $accept \Zend\Http\Header\Accept */
         $accept = $headers->get('Accept');
         if (($res = $accept->match($matchAgainstString)) === false) {
-            return null;
+            return;
         }
 
         return $res;

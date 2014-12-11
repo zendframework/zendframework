@@ -169,7 +169,7 @@ class Part extends TreeRouteStack implements RouteInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**

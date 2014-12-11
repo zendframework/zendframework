@@ -258,7 +258,7 @@ class Mcrypt implements SymmetricInterface
     public function getKey()
     {
         if (empty($this->key)) {
-            return null;
+            return;
         }
         return substr($this->key, 0, $this->getKeySize());
     }
@@ -433,7 +433,7 @@ class Mcrypt implements SymmetricInterface
     public function getSalt()
     {
         if (empty($this->iv)) {
-            return null;
+            return;
         }
         if (strlen($this->iv) < $this->getSaltSize()) {
             throw new Exception\RuntimeException(

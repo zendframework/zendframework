@@ -139,7 +139,7 @@ class Combine extends AbstractPreparableSql
     protected function buildSqlString(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null)
     {
         if (!$this->combine) {
-            return null;
+            return;
         }
 
         $sql = '';

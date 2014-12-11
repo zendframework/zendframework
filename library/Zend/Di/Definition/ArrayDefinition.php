@@ -80,7 +80,7 @@ class ArrayDefinition implements DefinitionInterface
     public function getInstantiator($class)
     {
         if (!isset($this->dataArray[$class])) {
-            return null;
+            return;
         }
 
         if (!isset($this->dataArray[$class]['instantiator'])) {

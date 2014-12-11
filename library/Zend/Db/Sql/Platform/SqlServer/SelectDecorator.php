@@ -51,7 +51,7 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
     protected function processLimitOffset(PlatformInterface $platform, DriverInterface $driver = null, ParameterContainer $parameterContainer = null, &$sqls, &$parameters)
     {
         if ($this->limit === null && $this->offset === null) {
-            return null;
+            return;
         }
 
         $selectParameters = $parameters[self::SELECT];

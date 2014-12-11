@@ -113,7 +113,7 @@ class Result implements ResultInterface
      */
     public function buffer()
     {
-        return null;
+        return;
     }
 
     /**

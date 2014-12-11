@@ -1001,7 +1001,7 @@ abstract class AbstractPage extends AbstractContainer
             return $this->properties[$property];
         }
 
-        return null;
+        return;
     }
 
     // Magic overloads:

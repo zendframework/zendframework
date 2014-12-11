@@ -52,7 +52,7 @@ class Identity extends AbstractPlugin
             throw new Exception\RuntimeException('No AuthenticationServiceInterface instance provided');
         }
         if (!$this->authenticationService->hasIdentity()) {
-            return null;
+            return;
         }
         return $this->authenticationService->getIdentity();
     }

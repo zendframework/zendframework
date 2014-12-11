@@ -425,7 +425,7 @@ abstract class AbstractContainer extends ArrayObject
     public function offsetGet($key)
     {
         if (!$this->offsetExists($key)) {
-            return null;
+            return;
         }
         $storage = $this->getStorage();
         $name = $this->getName();

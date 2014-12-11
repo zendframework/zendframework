@@ -160,7 +160,7 @@ class Element implements
     public function getOption($option)
     {
         if (!isset($this->options[$option])) {
-            return null;
+            return;
         }
 
         return $this->options[$option];
@@ -206,7 +206,7 @@ class Element implements
     public function getAttribute($key)
     {
         if (!isset($this->attributes[$key])) {
-            return null;
+            return;
         }
 
         return $this->attributes[$key];
@@ -446,7 +446,7 @@ class Element implements
     public function getLabelOption($key)
     {
         if (!isset($this->labelOptions[$key])) {
-            return null;
+            return;
         }
 
         return $this->labelOptions[$key];

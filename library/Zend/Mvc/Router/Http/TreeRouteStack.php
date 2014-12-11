@@ -235,7 +235,7 @@ class TreeRouteStack extends SimpleRouteStack
             return $this->prototypes[$name];
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -250,7 +250,7 @@ class TreeRouteStack extends SimpleRouteStack
     public function match(Request $request, $pathOffset = null, array $options = array())
     {
         if (!method_exists($request, 'getUri')) {
-            return null;
+            return;
         }
 
         if ($this->baseUrl === null && method_exists($request, 'getBaseUrl')) {
@@ -291,7 +291,7 @@ class TreeRouteStack extends SimpleRouteStack
             }
         }
 
-        return null;
+        return;
     }
 
     /**

@@ -54,6 +54,6 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
             $soapTypes = $this->getContext()->getTypes();
             return $soapTypes[$phpType];
         }
-        return null;
+        return;
     }
 }

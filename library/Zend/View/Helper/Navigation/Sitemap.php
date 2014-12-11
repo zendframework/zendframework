@@ -289,7 +289,7 @@ class Sitemap extends AbstractHelper
             return $this->xmlEscape($url);
         }
 
-        return null;
+        return;
     }
 
     /**

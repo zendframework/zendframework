@@ -59,7 +59,7 @@ class Connection extends AbstractConnection
 
         $result = pg_query($this->resource, 'SELECT CURRENT_SCHEMA AS "currentschema"');
         if ($result == false) {
-            return null;
+            return;
         }
 
         return pg_fetch_result($result, 0, 'currentschema');
@@ -87,7 +87,7 @@ class Connection extends AbstractConnection
                 }
             }
 
-            return null;
+            return;
         };
 
         $connection             = array();
@@ -232,7 +232,7 @@ class Connection extends AbstractConnection
     public function getLastGeneratedValue($name = null)
     {
         if ($name == null) {
-            return null;
+            return;
         }
         $result = pg_query($this->resource, 'SELECT CURRVAL(\'' . str_replace('\'', '\\\'', $name) . '\') as "currval"');
 

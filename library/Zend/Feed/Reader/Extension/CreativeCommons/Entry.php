@@ -27,7 +27,7 @@ class Entry extends Extension\AbstractEntry
             return $licenses[$index];
         }
 
-        return null;
+        return;
     }
 
     /**

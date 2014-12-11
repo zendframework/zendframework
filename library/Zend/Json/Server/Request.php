@@ -135,7 +135,7 @@ class Request
             return $this->params[$index];
         }
 
-        return null;
+        return;
     }
 
     /**

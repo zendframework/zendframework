@@ -1083,7 +1083,7 @@ class Ldap
             }
         }
 
-        return null;
+        return;
     }
 
     /**

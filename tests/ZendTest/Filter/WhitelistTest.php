@@ -11,6 +11,7 @@ namespace ZendTest\Filter;
 
 use Zend\Filter\FilterPluginManager;
 use Zend\Filter\Whitelist as WhitelistFilter;
+use Zend\Stdlib\ArrayObject;
 
 /**
  * @group      Zend_Filter
@@ -42,6 +43,24 @@ class WhitelistTest extends \PHPUnit_Framework_TestCase
         $filter = $pluginManager->get('whitelist');
 
         $this->assertInstanceOf('Zend\Filter\Whitelist', $filter);
+    }
+
+    public function testNullListShouldThrowException()
+    {
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException');
+        $filter = new WhitelistFilter(array(
+            'list' => null,
+        ));
+    }
+
+    public function testTraversableConvertsToArray()
+    {
+        $array = array('test', 1);
+        $obj = new ArrayObject(array('test', 1));
+        $filter = new WhitelistFilter(array(
+            'list' => $obj,
+        ));
+        $this->assertEquals($array, $filter->getList());
     }
 
     /**

@@ -14,13 +14,16 @@ use Zend\Stdlib\ArrayUtils;
 
 class Blacklist extends AbstractFilter
 {
+
+    /**
+     * @var null
+     */
+    protected $strict = null;
+
     /**
      * @var array
      */
-    protected $options = array(
-        'list' => array(),
-        'strict' => null,
-    );
+    protected $list = array();
 
     /**
      * @param null|array|Traversable $options
@@ -40,7 +43,7 @@ class Blacklist extends AbstractFilter
      */
     public function setStrict($strict = true)
     {
-        $this->options['strict'] = $strict;
+        $this->strict = $strict;
 
         return $this;
     }
@@ -52,7 +55,7 @@ class Blacklist extends AbstractFilter
      */
     public function getStrict()
     {
-        return $this->options['strict'];
+        return $this->strict;
     }
 
     /**
@@ -63,22 +66,11 @@ class Blacklist extends AbstractFilter
      */
     public function setList($list = array())
     {
-        if ($list instanceof Traversable) {
+        if (!is_array($list)) {
             $list = ArrayUtils::iteratorToArray($list);
         }
 
-        if (is_null($list)) {
-            $list = array();
-        }
-
-        if (!is_array($list)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'List must be an array or an instance of Traversable (received "%s")',
-                gettype($list)
-            ));
-        }
-
-        $this->options['list'] = $list;
+        $this->list = $list;
 
         return $this;
     }
@@ -90,7 +82,7 @@ class Blacklist extends AbstractFilter
      */
     public function getList()
     {
-        return $this->options['list'];
+        return $this->list;
     }
 
     /**

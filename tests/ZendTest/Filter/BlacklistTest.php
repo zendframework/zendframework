@@ -11,6 +11,7 @@ namespace ZendTest\Filter;
 
 use Zend\Filter\FilterPluginManager;
 use Zend\Filter\Blacklist as BlacklistFilter;
+use Zend\Stdlib\ArrayObject;
 
 /**
  * @group      Zend_Filter
@@ -42,6 +43,24 @@ class BlacklistTest extends \PHPUnit_Framework_TestCase
         $filter = $pluginManager->get('blacklist');
 
         $this->assertInstanceOf('Zend\Filter\Blacklist', $filter);
+    }
+
+    public function testNullListShouldThrowException()
+    {
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException');
+        $filter = new BlacklistFilter(array(
+            'list' => null,
+        ));
+    }
+
+    public function testTraversableConvertsToArray()
+    {
+        $array = array('test', 1);
+        $obj = new ArrayObject(array('test', 1));
+        $filter = new BlacklistFilter(array(
+            'list' => $obj,
+        ));
+        $this->assertEquals($array, $filter->getList());
     }
 
     /**

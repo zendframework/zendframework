@@ -197,7 +197,7 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public static function realPharPath($path)
     {
-        if (!preg_match('|^phar:(/{2,3})|',$path, $match)) {
+        if (!preg_match('|^phar:(/{2,3})|', $path, $match)) {
             return;
         }
 

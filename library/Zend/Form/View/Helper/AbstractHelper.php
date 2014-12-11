@@ -182,6 +182,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
     public function setEncoding($encoding)
     {
         $this->getEscapeHtmlHelper()->setEncoding($encoding);
+        $this->getEscapeHtmlAttrHelper()->setEncoding($encoding);
         return $this;
     }
 

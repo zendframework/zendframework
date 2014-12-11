@@ -98,17 +98,21 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     public function __set($key, $value)
     {
-        $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-        if ($this->__strictMode__ && !method_exists($this, $setter)) {
-            throw new Exception\BadMethodCallException(
-                'The option "' . $key . '" does not '
-                . 'have a matching ' . $setter . ' setter method '
-                . 'which must be defined'
-            );
-        } elseif (!$this->__strictMode__ && !method_exists($this, $setter)) {
+        $setter = 'set' . str_replace('_', '', $key);
+
+        if (method_exists($this, $setter)) {
+            $this->{$setter}($value);
+
             return;
         }
-        $this->{$setter}($value);
+
+        if ($this->__strictMode__) {
+            throw new Exception\BadMethodCallException(sprintf(
+                'The option "%s" does not have a matching "%s" setter method which must be defined',
+                $key,
+                'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
+            ));
+        }
     }
 
     /**
@@ -121,16 +125,17 @@ abstract class AbstractOptions implements ParameterObjectInterface
      */
     public function __get($key)
     {
-        $getter = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-        if (!method_exists($this, $getter)) {
-            throw new Exception\BadMethodCallException(
-                'The option "' . $key . '" does not '
-                . 'have a matching ' . $getter . ' getter method '
-                . 'which must be defined'
-            );
+        $getter = 'get' . str_replace('_', '', $key);
+
+        if (method_exists($this, $getter)) {
+            return $this->{$getter}();
         }
 
-        return $this->{$getter}();
+        throw new Exception\BadMethodCallException(sprintf(
+            'The option "%s" does not have a matching "%s" getter method which must be defined',
+            $key,
+            'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
+        ));
     }
 
     /**

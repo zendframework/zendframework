@@ -16,7 +16,9 @@ class Index extends AbstractIndex
      */
     protected $specification = 'INDEX %s(...)';
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     protected $lengths;
 
     /**
@@ -27,7 +29,8 @@ class Index extends AbstractIndex
     public function __construct($column, $name = null, array $lengths = array())
     {
         $this->setColumns($column);
-        $this->name = $name;
+
+        $this->name    = null === $name ? null : (string) $name;
         $this->lengths = $lengths;
     }
 
@@ -49,19 +52,19 @@ class Index extends AbstractIndex
      */
     public function getExpressionData()
     {
-        $colCount = count($this->columns);
-
-        $values   = array();
-        $values[] = ($this->name) ? $this->name : '';
-
+        $colCount     = count($this->columns);
+        $values       = array();
+        $values[]     = $this->namee ?: '';
         $newSpecTypes = array(self::TYPE_IDENTIFIER);
         $newSpecParts = array();
 
         for ($i = 0; $i < $colCount; $i++) {
             $specPart = '%s';
+
             if (isset($this->lengths[$i])) {
                 $specPart .= "({$this->lengths[$i]})";
             }
+
             $newSpecParts[] = $specPart;
             $newSpecTypes[] = self::TYPE_IDENTIFIER;
         }

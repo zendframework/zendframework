@@ -28,7 +28,6 @@ class Part
     protected $isStream = false;
     protected $filters = array();
 
-
     /**
      * create a new Mime Part.
      * The (unencoded) content of the Part as passed

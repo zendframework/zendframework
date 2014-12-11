@@ -126,15 +126,15 @@ abstract class AbstractOptions implements ParameterObjectInterface
     public function __get($key)
     {
         $getter = 'get' . str_replace('_', '', $key);
+
         if (method_exists($this, $getter)) {
             return $this->{$getter}();
         }
 
-        $getter = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
         throw new Exception\BadMethodCallException(
             'The option "' . $key . '" does not '
-            . 'have a matching ' . $getter . ' getter method '
-            . 'which must be defined'
+            . 'have a matching ' . 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
+            . ' getter method which must be defined'
         );
     }
 

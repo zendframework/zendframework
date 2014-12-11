@@ -108,7 +108,6 @@ class Acl implements AclInterface
             );
         }
 
-
         $this->getRoleRegistry()->add($role, $parents);
 
         return $this;
@@ -522,8 +521,13 @@ class Acl implements AclInterface
      * @throws Exception\InvalidArgumentException
      * @return Acl Provides a fluent interface
      */
-    public function setRule($operation, $type, $roles = null, $resources = null,
-                            $privileges = null, Assertion\AssertionInterface $assert = null
+    public function setRule(
+        $operation,
+        $type,
+        $roles = null,
+        $resources = null,
+        $privileges = null,
+        Assertion\AssertionInterface $assert = null
     ) {
         // ensure that the rule type is valid; normalize input to uppercase
         $type = strtoupper($type);
@@ -632,16 +636,12 @@ class Acl implements AclInterface
                                 continue;
                             }
 
-                            if (isset($rules['allPrivileges']['type']) &&
-                                $type === $rules['allPrivileges']['type']
-                            ) {
+                            if (isset($rules['allPrivileges']['type']) && $type === $rules['allPrivileges']['type']) {
                                 unset($rules['allPrivileges']);
                             }
                         } else {
                             foreach ($privileges as $privilege) {
-                                if (isset($rules['byPrivilegeId'][$privilege]) &&
-                                    $type === $rules['byPrivilegeId'][$privilege]['type']
-                                ) {
+                                if (isset($rules['byPrivilegeId'][$privilege]) && $type === $rules['byPrivilegeId'][$privilege]['type']) {
                                     unset($rules['byPrivilegeId'][$privilege]);
                                 }
                             }
@@ -926,8 +926,11 @@ class Acl implements AclInterface
      * @return bool|null
      * @throws Exception\RuntimeException
      */
-    protected function roleDFSVisitOnePrivilege(Role\RoleInterface $role, Resource\ResourceInterface $resource = null,
-                                                $privilege = null, &$dfs = null
+    protected function roleDFSVisitOnePrivilege(
+        Role\RoleInterface $role,
+        Resource\ResourceInterface $resource = null,
+        $privilege = null,
+        &$dfs = null
     ) {
         if (null === $privilege) {
             /**
@@ -1054,7 +1057,6 @@ class Acl implements AclInterface
             }
             $visitor =& $this->rules['byResourceId'][$resourceId];
         } while (false);
-
 
         // follow $role
         if (null === $role) {

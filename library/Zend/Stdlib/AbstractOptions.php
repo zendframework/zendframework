@@ -108,7 +108,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
 
         if ($this->__strictMode__) {
             throw new Exception\BadMethodCallException(sprintf(
-                'The option "%s" does not have a matching "%s" setter method which must be defined',
+                'The option "%s" does not have a callable "%s" setter method which must be defined',
                 $key,
                 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
             ));
@@ -132,7 +132,7 @@ abstract class AbstractOptions implements ParameterObjectInterface
         }
 
         throw new Exception\BadMethodCallException(sprintf(
-            'The option "%s" does not have a matching "%s" getter method which must be defined',
+            'The option "%s" does not have a callable "%s" getter method which must be defined',
             $key,
             'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
         ));

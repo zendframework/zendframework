@@ -99,14 +99,18 @@ abstract class AbstractOptions implements ParameterObjectInterface
     public function __set($key, $value)
     {
         $setter = 'set' . str_replace('_', '', $key);
+
         if (method_exists($this, $setter)) {
             $this->{$setter}($value);
-        } elseif ($this->__strictMode__) {
-            $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+
+            return;
+        }
+
+        if ($this->__strictMode__) {
             throw new Exception\BadMethodCallException(
                 'The option "' . $key . '" does not '
-                . 'have a matching ' . $setter . ' setter method '
-                . 'which must be defined'
+                . 'have a matching ' .  'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)))
+                . ' setter method which must be defined'
             );
         }
     }

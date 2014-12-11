@@ -29,19 +29,19 @@ $config = Symfony\CS\Config\Config::create();
 $config->level(null);
 $config->fixers(
     array(
-        'indentation',
-        'linefeed',
-        'trailing_spaces',
-        'short_tag',
-        'visibility',
-        'php_closing_tag',
         'braces',
-        'function_call_space',
-        'function_declaration',
-        'psr0',
         'elseif',
         'eof_ending',
+        'function_call_space',
+        'function_declaration',
+        'indentation',
+        'linefeed',
+        'php_closing_tag',
+        'psr0',
+        'short_tag',
+        'trailing_spaces',
         'unused_use',
+        'visibility',
     )
 );
 $config->finder($finder);

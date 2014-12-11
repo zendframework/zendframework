@@ -69,7 +69,6 @@ class ArrayOfTypeComplex extends DefaultComplexType
         // Process singular type using DefaultComplexType strategy
         parent::addComplexType($singularType);
 
-
         // Add array type structure to WSDL document
         $dom = $this->getContext()->toDomDocument();
 

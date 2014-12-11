@@ -104,7 +104,6 @@ class ArrayOfTypeSequence extends DefaultComplexType
         // Register type here to avoid recursion
         $this->getContext()->addType($phpArrayType, $arrayType);
 
-
         $dom = $this->getContext()->toDomDocument();
 
         $arrayTypeName = substr($arrayType, strpos($arrayType, ':') + 1);

@@ -42,6 +42,7 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
     public function setSubject($subject)
     {
         $this->subject = $subject;
+
         return $this;
     }
 
@@ -55,6 +56,7 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
         foreach (get_object_vars($this->subject) as $name => $value) {
             $this->{$name} = $value;
         }
+
         return parent::getSqlString($platform);
     }
 
@@ -99,6 +101,7 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
     protected function processAddColumns(PlatformInterface $adapterPlatform = null)
     {
         $sqls = array();
+
         foreach ($this->addColumns as $i => $column) {
             $sql           = $this->processExpression($column, $adapterPlatform);
             $insertStart   = $this->getSqlInsertOffsets($sql);

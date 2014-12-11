@@ -458,4 +458,14 @@ document.write(bar.strlen());');
         $this->assertNotContains('//<!--', $test);
         $this->assertNotContains('//-->', $test);
     }
+
+    public function testSupportsCrossOriginAttribute()
+    {
+        $this->helper->__invoke()->appendScript(
+            '// some script' . PHP_EOL, 'text/javascript', array('crossorigin' => true)
+        );
+        $test = $this->helper->__invoke()->toString();
+
+        $this->assertContains('crossorigin="', $test);
+    }
 }

@@ -9,7 +9,7 @@
 
 namespace Zend\Db\Sql\Ddl\Column;
 
-class Blob extends Column
+class Blob extends AbstractLengthColumn
 {
     /**
      * @var string Change type to blob

@@ -9,8 +9,7 @@
 
 namespace Zend\Db\Sql\Ddl\Column;
 
-
-class Text extends Column
+class Text extends AbstractLengthColumn
 {
     /**
      * @var string

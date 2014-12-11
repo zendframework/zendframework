@@ -7,12 +7,10 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\Db\Sql\Ddl\Column;
+namespace Zend\Db\Sql\Ddl\Index;
 
-class Timestamp extends AbstractTimestampColumn
+use Zend\Db\Sql\Ddl\Constraint\AbstractConstraint;
+
+abstract class AbstractIndex extends AbstractConstraint
 {
-    /**
-     * @var string
-     */
-    protected $type = 'TIMESTAMP';
 }

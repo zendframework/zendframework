@@ -137,9 +137,7 @@ abstract class AbstractUploadHandler implements UploadHandlerInterface
         $adapter = $this->getProgressAdapter();
         if (isset($adapter)) {
             if ($adapter instanceof AbstractProgressAdapter) {
-                $adapter = new ProgressBar(
-                    $adapter, 0, $status['total'], $this->getSessionNamespace()
-                );
+                $adapter = new ProgressBar($adapter, 0, $status['total'], $this->getSessionNamespace());
                 $this->setProgressAdapter($adapter);
             }
 

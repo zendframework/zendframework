@@ -207,7 +207,6 @@ class AutoDiscover
         return $this->serviceName;
     }
 
-
     /**
      * Set the location at which the WSDL file will be available.
      *

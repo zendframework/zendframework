@@ -16,7 +16,6 @@ namespace Zend\Db\Sql\Ddl\Column;
  */
 abstract class AbstractTimestampColumn extends Column
 {
-
     /**
      * @return array
      */

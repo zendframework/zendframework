@@ -13,5 +13,4 @@ use Zend\Db\Sql\Ddl\Constraint\AbstractConstraint;
 
 abstract class AbstractIndex extends AbstractConstraint
 {
-
 }

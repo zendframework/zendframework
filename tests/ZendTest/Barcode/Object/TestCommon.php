@@ -23,7 +23,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     protected function loadInstructionsFile($fileName)
     {
-        return include_once (__DIR__ . "/TestAsset/$fileName.php");
+        return include_once(__DIR__ . "/TestAsset/$fileName.php");
     }
 
     public function setUp()

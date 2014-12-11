@@ -624,7 +624,7 @@ class Form extends Fieldset implements FormInterface
 
             if ($fieldset instanceof Collection) {
                 if (!isset($data[$key]) && $fieldset->getCount() == 0) {
-                    unset ($validationGroup[$key]);
+                    unset($validationGroup[$key]);
                     continue;
                 }
 

@@ -169,8 +169,8 @@ class CurlTest extends CommonHttpTests
         $this->client->setUri($this->baseuri . 'testRedirections.php');
 
         //  Set some parameters
-        $this->client->setParameterGet(array ('swallow' => 'african'));
-        $this->client->setParameterPost(array ('Camelot' => 'A silly place'));
+        $this->client->setParameterGet(array('swallow' => 'african'));
+        $this->client->setParameterPost(array('Camelot' => 'A silly place'));
         $this->client->setMethod('POST');
         $this->setExpectedException(
             'Zend\Http\Client\Adapter\Exception\RuntimeException',

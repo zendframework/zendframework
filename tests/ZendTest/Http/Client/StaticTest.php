@@ -459,7 +459,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
         }
         $url = 'http://www.example.com/';
-        $config = array (
+        $config = array(
             'outputstream' => realpath(__DIR__ . '/_files/zend_http_client_stream.file'),
         );
         $client = new HTTPClient($url, $config);
@@ -486,7 +486,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             'Could not open temp file /path/to/bogus/file.ext');
 
         $url = 'http://www.example.com';
-        $config = array (
+        $config = array(
             'outputstream' => '/path/to/bogus/file.ext',
         );
         $client = new HTTPClient($url, $config);

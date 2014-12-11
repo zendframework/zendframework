@@ -158,9 +158,9 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals(filesize($fileIn), filesize($decryptFile));
             $this->assertEquals(file_get_contents($fileIn), file_get_contents($decryptFile));
 
-            unlink ($fileIn);
-            unlink ($fileOut);
-            unlink ($decryptFile);
+            unlink($fileIn);
+            unlink($fileOut);
+            unlink($decryptFile);
         }
     }
 
@@ -174,7 +174,7 @@ class FileCipherTest extends \PHPUnit_Framework_TestCase
 
         $fileOut2 = $this->fileIn . '.dec';
         $this->assertTrue($this->fileCipher->decrypt($this->fileOut, $fileOut2, false));
-        unlink ($fileOut2);
+        unlink($fileOut2);
 
         // Tampering of the encrypted file
         $ciphertext = file_get_contents($this->fileOut);

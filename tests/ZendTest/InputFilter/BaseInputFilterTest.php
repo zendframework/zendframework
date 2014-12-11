@@ -661,7 +661,7 @@ class BaseInputFilterTest extends TestCase
     {
         $filter = new InputFilter();
 
-        $data = array (
+        $data = array(
             'allowEmpty' => $allowEmpty,
             'blankIsValid' => $blankIsValid,
         );

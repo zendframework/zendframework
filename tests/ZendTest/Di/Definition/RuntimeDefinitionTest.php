@@ -73,13 +73,13 @@ class RuntimeDefinitionTest extends TestCase
                     true,
                     null,
                 ),
-                'RecursiveIteratorIterator::__construct:1' => Array (
+                'RecursiveIteratorIterator::__construct:1' => Array(
                     'mode',
                     null,
                     true,
                     null,
                 ),
-                'RecursiveIteratorIterator::__construct:2' => Array (
+                'RecursiveIteratorIterator::__construct:2' => Array(
                     'flags',
                     null,
                     true,

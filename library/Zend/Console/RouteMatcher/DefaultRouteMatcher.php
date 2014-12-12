@@ -510,7 +510,7 @@ class DefaultRouteMatcher implements RouteMatcherInterface
                     $alternativeAliases[] = '(?:' . implode('|', $this->getAliases($alternative)) . ')';
                 }
 
-                $regex .= join('|', $alternativeAliases);
+                $regex .= implode('|', $alternativeAliases);
 
                 if ($part['hasValue']) {
                     $regex .= ')(?:\=(?P<value>.*?)$)?$/';

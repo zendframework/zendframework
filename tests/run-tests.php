@@ -79,7 +79,7 @@ if ($argc == 1) {
 
 $result = 0;
 if ($run_as == 'groups') {
-    $groups = join(',', $components);
+    $groups = implode(',', $components);
     echo "$groups:\n";
     system("$phpunit_bin $phpunit_opts $phpunit_coverage --group " . $groups, $result);
     echo "\n\n";

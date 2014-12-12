@@ -385,9 +385,9 @@ class SegmentTest extends TestCase
     public function testEncodeCache()
     {
         $params1 = array('p1' => 6.123, 'p2' => 7);
-        $uri1 = 'example.com/'.join('/', $params1);
+        $uri1 = 'example.com/'.implode('/', $params1);
         $params2 = array('p1' => 6, 'p2' => 'test');
-        $uri2 = 'example.com/'.join('/', $params2);
+        $uri2 = 'example.com/'.implode('/', $params2);
 
         $route = new Segment('example.com/:p1/:p2');
         $request = new Request();

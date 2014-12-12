@@ -506,7 +506,7 @@ class EventManager implements EventManagerInterface
      * Used to inject shared listeners and wildcard listeners.
      *
      * @param  PriorityQueue $masterListeners
-     * @param  PriorityQueue $listeners
+     * @param  \Traversable|array $listeners
      * @return void
      */
     protected function insertListeners($masterListeners, $listeners)

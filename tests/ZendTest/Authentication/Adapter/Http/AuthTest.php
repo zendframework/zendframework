@@ -308,6 +308,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
     /**
      * check if response is validated
+     * @group PR6983
      */
     public function testBadDigestResponse()
     {

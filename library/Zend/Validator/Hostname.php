@@ -1195,15 +1195,14 @@ class Hostname extends AbstractValidator
 
         $this->setValue($value);
         // Check input against IP address schema
-        if (preg_match('/^[0-9a-f:.]*$/i', $value) && $this->getIpValidator()
-            ->setTranslator($this->getTranslator())
-            ->isValid($value)) {
+        if (preg_match('/^[0-9a-f:.]*$/i', $value)
+            && $this->getIpValidator()->setTranslator($this->getTranslator())->isValid($value)
+        ) {
             if (!($this->getAllow() & self::ALLOW_IP)) {
                 $this->error(self::IP_ADDRESS_NOT_ALLOWED);
                 return false;
-            } else {
-                return true;
             }
+            return true;
         }
 
         // Local hostnames are allowed to be partial (ending '.')
@@ -1221,18 +1220,18 @@ class Hostname extends AbstractValidator
         $domainParts = explode('.', $value);
 
         // Prevent partial IP V4 addresses (ending '.')
-        if ((count($domainParts) == 4) && preg_match('/^[0-9.a-e:.]*$/i', $value) && $this->getIpValidator()
-            ->setTranslator($this->getTranslator())
-            ->isValid($value)) {
+        if (count($domainParts) == 4 && preg_match('/^[0-9.a-e:.]*$/i', $value)
+            && $this->getIpValidator()->setTranslator($this->getTranslator())->isValid($value)
+        ) {
             $this->error(self::INVALID_LOCAL_NAME);
         }
 
         $utf8StrWrapper = StringUtils::getWrapper('UTF-8');
 
         // Check input against DNS hostname schema
-        if ((count($domainParts) > 1)
-            && ($utf8StrWrapper->strlen($value) >= 4)
-            && ($utf8StrWrapper->strlen($value) <= 254)
+        if (count($domainParts) > 1
+            && $utf8StrWrapper->strlen($value) >= 4
+            && $utf8StrWrapper->strlen($value) <= 254
         ) {
             $status = false;
 
@@ -1240,7 +1239,8 @@ class Hostname extends AbstractValidator
                 // First check TLD
                 $matches = array();
                 if (preg_match('/([^.]{2,63})$/iu', end($domainParts), $matches)
-                    || (array_key_exists(end($domainParts), $this->validIdns))) {
+                    || (array_key_exists(end($domainParts), $this->validIdns))
+                ) {
                     reset($domainParts);
 
                     // Hostname characters are: *(label dot)(label dot label); max 254 chars
@@ -1289,8 +1289,8 @@ class Hostname extends AbstractValidator
                         }
 
                         // Check dash (-) does not start, end or appear in 3rd and 4th positions
-                        if (($utf8StrWrapper->strpos($domainPart, '-') === 0)
-                            || (($utf8StrWrapper->strlen($domainPart) > 2) && ($utf8StrWrapper->strpos($domainPart, '-', 2) == 2) && ($utf8StrWrapper->strpos($domainPart, '-', 3) == 3))
+                        if ($utf8StrWrapper->strpos($domainPart, '-') === 0
+                            || ($utf8StrWrapper->strlen($domainPart) > 2 && $utf8StrWrapper->strpos($domainPart, '-', 2) == 2 && $utf8StrWrapper->strpos($domainPart, '-', 3) == 3)
                             || ($utf8StrWrapper->strpos($domainPart, '-') === ($utf8StrWrapper->strlen($domainPart) - 1))
                         ) {
                             $this->error(self::INVALID_DASH);
@@ -1301,13 +1301,12 @@ class Hostname extends AbstractValidator
                         // Check each domain part
                         $checked = false;
                         foreach ($regexChars as $regexKey => $regexChar) {
-                            ErrorHandler::start();
                             $status = preg_match($regexChar, $domainPart);
-                            ErrorHandler::stop();
                             if ($status > 0) {
                                 $length = 63;
                                 if (array_key_exists($this->tld, $this->idnLength)
-                                    && (array_key_exists($regexKey, $this->idnLength[$this->tld]))) {
+                                    && array_key_exists($regexKey, $this->idnLength[$this->tld])
+                                ) {
                                     $length = $this->idnLength[$this->tld];
                                 }
 
@@ -1352,16 +1351,13 @@ class Hostname extends AbstractValidator
         if ($this->getAllow() & self::ALLOW_URI) {
             if (preg_match("/^([a-zA-Z0-9-._~!$&\'()*+,;=]|%[[:xdigit:]]{2}){1,254}$/i", $value)) {
                 return true;
-            } else {
-                $this->error(self::INVALID_URI);
             }
+            $this->error(self::INVALID_URI);
         }
 
         // Check input against local network name schema; last chance to pass validation
-        ErrorHandler::start();
         $regexLocal = '/^(([a-zA-Z0-9\x2d]{1,63}\x2e)*[a-zA-Z0-9\x2d]{1,63}[\x2e]{0,1}){1,254}$/';
         $status = preg_match($regexLocal, $value);
-        ErrorHandler::stop();
 
         // If the input passes as a local network name, and local network names are allowed, then the
         // hostname passes validation

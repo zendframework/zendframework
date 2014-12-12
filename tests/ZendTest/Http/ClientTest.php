@@ -406,4 +406,15 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $client->send($request);
     }
+
+    public function testClientRequestMethod()
+    {
+        $request = new Request;
+        $request->setMethod(Request::METHOD_POST);
+        $request->getPost()->set('data', 'random');
+
+        $client = new Client;
+        $client->setAdapter('Zend\Http\Client\Adapter\Test');
+        $client->send($request);
+    }
 }

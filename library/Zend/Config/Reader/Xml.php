@@ -154,7 +154,7 @@ class Xml implements ReaderInterface
                         $child = array('_' => $child);
                     }
 
-                    if (! is_array($child) ) {
+                    if (! is_array($child)) {
                         $child = array();
                     }
 

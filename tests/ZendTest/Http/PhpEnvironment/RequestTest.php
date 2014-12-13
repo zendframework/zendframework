@@ -736,7 +736,7 @@ class RequestTest extends TestCase
         $this->assertSame('bar', $request->getEnv('foo'));
 
         $headers = new Headers();
-        $h = new GenericHeader('foo','bar');
+        $h = new GenericHeader('foo', 'bar');
         $headers->addHeader($h);
 
         $request->setHeaders($headers);

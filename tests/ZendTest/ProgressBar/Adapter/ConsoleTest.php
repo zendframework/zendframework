@@ -275,7 +275,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Console();
 
-        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException','Character may not be empty');
+        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException', 'Character may not be empty');
         $adapter->setBarLeftChar(null);
     }
 
@@ -283,7 +283,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Console();
 
-        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException','Character may not be empty');
+        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException', 'Character may not be empty');
         $adapter->setBarRightChar(null);
     }
 
@@ -291,7 +291,7 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Console();
 
-        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException','Invalid finish action specified');
+        $this->setExpectedException('Zend\ProgressBar\Adapter\Exception\InvalidArgumentException', 'Invalid finish action specified');
         $adapter->setFinishAction('CUSTOM_FINISH_ACTION');
     }
 

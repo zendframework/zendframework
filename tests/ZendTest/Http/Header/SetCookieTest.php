@@ -362,15 +362,15 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $cookie = new SetCookie($name, $value);
 
         // default
-        $this->assertEquals($cookie->toString(), sprintf($formatUnquoted,$cookie->getFieldName(),$name,$value));
+        $this->assertEquals( $cookie->toString(), sprintf($formatUnquoted, $cookie->getFieldName(), $name, $value));
 
         // rfc with quote
         $cookie->setQuoteFieldValue(true);
-        $this->assertEquals($cookie->toString(), sprintf($formatQuoted,$cookie->getFieldName(),$name,$value));
+        $this->assertEquals( $cookie->toString(), sprintf($formatQuoted, $cookie->getFieldName(), $name, $value));
 
         // rfc without quote
         $cookie->setQuoteFieldValue(false);
-        $this->assertEquals($cookie->toString(), sprintf($formatUnquoted,$cookie->getFieldName(),$name,$value));
+        $this->assertEquals( $cookie->toString(), sprintf($formatUnquoted, $cookie->getFieldName(), $name, $value));
     }
 
     public function testSetJsonValue()
@@ -378,19 +378,19 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $cookieName ="fooCookie";
         $jsonData = json_encode(array('foo'=>'bar'));
 
-        $cookie= new SetCookie($cookieName,$jsonData);
+        $cookie= new SetCookie($cookieName, $jsonData);
 
-        $regExp = sprintf('#^%s=%s#',$cookieName,urlencode($jsonData));
-        $this->assertRegExp($regExp,$cookie->getFieldValue());
+        $regExp = sprintf('#^%s=%s#', $cookieName, urlencode($jsonData));
+        $this->assertRegExp($regExp, $cookie->getFieldValue());
 
         $cookieName ="fooCookie";
         $jsonData = json_encode(array('foo'=>'bar'));
 
-        $cookie= new SetCookie($cookieName,$jsonData);
+        $cookie= new SetCookie($cookieName, $jsonData);
         $cookie->setDomain('example.org');
 
-        $regExp = sprintf('#^%s=%s; Domain=#',$cookieName,urlencode($jsonData));
-        $this->assertRegExp($regExp,$cookie->getFieldValue());
+        $regExp = sprintf('#^%s=%s; Domain=#', $cookieName, urlencode($jsonData));
+        $this->assertRegExp($regExp, $cookie->getFieldValue());
     }
 
     /**

@@ -59,7 +59,7 @@ class SqlServerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('[identifier]', $this->platform->quoteIdentifierChain('identifier'));
         $this->assertEquals('[identifier]', $this->platform->quoteIdentifierChain(array('identifier')));
-        $this->assertEquals('[schema].[identifier]', $this->platform->quoteIdentifierChain(array('schema','identifier')));
+        $this->assertEquals('[schema].[identifier]', $this->platform->quoteIdentifierChain(array('schema', 'identifier')));
     }
 
     /**

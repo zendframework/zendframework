@@ -61,12 +61,12 @@ class OracleTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('"identifier"', $this->platform->quoteIdentifierChain('identifier'));
         $this->assertEquals('"identifier"', $this->platform->quoteIdentifierChain(array('identifier')));
-        $this->assertEquals('"schema"."identifier"', $this->platform->quoteIdentifierChain(array('schema','identifier')));
+        $this->assertEquals('"schema"."identifier"', $this->platform->quoteIdentifierChain(array('schema', 'identifier')));
 
         $platform = new Oracle(array('quote_identifiers' => false));
         $this->assertEquals('identifier', $platform->quoteIdentifierChain('identifier'));
         $this->assertEquals('identifier', $platform->quoteIdentifierChain(array('identifier')));
-        $this->assertEquals('schema.identifier', $platform->quoteIdentifierChain(array('schema','identifier')));
+        $this->assertEquals('schema.identifier', $platform->quoteIdentifierChain(array('schema', 'identifier')));
     }
 
     /**

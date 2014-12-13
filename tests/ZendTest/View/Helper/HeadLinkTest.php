@@ -373,7 +373,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAlternateWithExtras()
     {
-        $this->helper->setAlternate('/mydocument.pdf', 'application/pdf', 'foo', array('media' => array('print','screen')));
+        $this->helper->setAlternate('/mydocument.pdf', 'application/pdf', 'foo', array('media' => array('print', 'screen')));
         $test = $this->helper->toString();
         $this->assertContains('media="print,screen"', $test);
     }
@@ -387,7 +387,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testSetStylesheetWithMediaAsArray()
     {
-        $this->helper->appendStylesheet('/bar/baz', array('screen','print'));
+        $this->helper->appendStylesheet('/bar/baz', array('screen', 'print'));
         $test = $this->helper->toString();
         $this->assertContains(' media="screen,print"', $test);
     }
@@ -413,10 +413,10 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
      */
     public function testContainerMaintainsCorrectOrderOfItems()
     {
-        $this->helper->__invoke()->offsetSetStylesheet(1,'/test1.css');
-        $this->helper->__invoke()->offsetSetStylesheet(10,'/test2.css');
-        $this->helper->__invoke()->offsetSetStylesheet(20,'/test3.css');
-        $this->helper->__invoke()->offsetSetStylesheet(5,'/test4.css');
+        $this->helper->__invoke()->offsetSetStylesheet(1, '/test1.css');
+        $this->helper->__invoke()->offsetSetStylesheet(10, '/test2.css');
+        $this->helper->__invoke()->offsetSetStylesheet(20, '/test3.css');
+        $this->helper->__invoke()->offsetSetStylesheet(5, '/test4.css');
 
         $test = $this->helper->toString();
 

@@ -84,7 +84,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testGoodHorizontalPosition()
     {
-        foreach (array('left' , 'center' , 'right') as $position) {
+        foreach (array('left', 'center', 'right') as $position) {
             $this->renderer->setHorizontalPosition($position);
             $this->assertSame($position,
                     $this->renderer->getHorizontalPosition());
@@ -99,7 +99,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testGoodVerticalPosition()
     {
-        foreach (array('top' , 'middle' , 'bottom') as $position) {
+        foreach (array('top', 'middle', 'bottom') as $position) {
             $this->renderer->setVerticalPosition($position);
             $this->assertSame($position,
                     $this->renderer->getVerticalPosition());
@@ -145,7 +145,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testConstructorWithArray()
     {
         $renderer = $this->getRendererObject(
-                array('automaticRenderError' => true ,
+                array('automaticRenderError' => true,
                         'unkownProperty' => 'aValue'));
         $this->assertEquals(true, $renderer->getAutomaticRenderError());
     }
@@ -153,7 +153,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testConstructorWithZendConfig()
     {
         $config = new Config\Config(
-                array('automaticRenderError' => true ,
+                array('automaticRenderError' => true,
                         'unkownProperty' => 'aValue'));
         $renderer = $this->getRendererObject($config);
         $this->assertEquals(true, $renderer->getAutomaticRenderError());
@@ -163,7 +163,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(false, $this->renderer->getAutomaticRenderError());
         $this->renderer->setOptions(
-                array('automaticRenderError' => true ,
+                array('automaticRenderError' => true,
                         'unkownProperty' => 'aValue'));
         $this->assertEquals(true, $this->renderer->getAutomaticRenderError());
     }

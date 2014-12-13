@@ -23,7 +23,7 @@ class ModuleLoaderTest extends PHPUnit_Framework_TestCase
 
     public static function rmdir($dir)
     {
-        $files = array_diff(scandir($dir), array('.','..'));
+        $files = array_diff(scandir($dir), array('.', '..'));
         foreach ($files as $file) {
             (is_dir("$dir/$file")) ? static::rmdir("$dir/$file") : unlink("$dir/$file");
         }

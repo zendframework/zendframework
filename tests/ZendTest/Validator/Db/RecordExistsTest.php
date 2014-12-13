@@ -236,7 +236,7 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
                                       'field1', null, $this->getMockHasResult());
         $table = $validator->getSelect()->getRawState('table');
         $this->assertInstanceOf('Zend\Db\Sql\TableIdentifier', $table);
-        $this->assertEquals(array('users','my'), $table->getTableAndSchema());
+        $this->assertEquals(array('users', 'my'), $table->getTableAndSchema());
     }
 
     public function testEqualsMessageTemplates()

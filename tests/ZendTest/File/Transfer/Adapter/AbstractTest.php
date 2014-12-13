@@ -653,14 +653,12 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
             'foo' => array(
                 'ignoreNoFile' => false,
                 'useByteString' => true,
-                'detectInfos' => true))
-            , $this->adapter->getOptions('foo'));
+                'detectInfos' => true)), $this->adapter->getOptions('foo'));
         $this->adapter->setOptions(array('detectInfos' => false));
         $this->assertEquals(array(
             'foo' => array(
                 'ignoreNoFile' => false,
                 'useByteString' => true,
-                'detectInfos' => false))
-            , $this->adapter->getOptions('foo'));
+                'detectInfos' => false)), $this->adapter->getOptions('foo'));
     }
 }

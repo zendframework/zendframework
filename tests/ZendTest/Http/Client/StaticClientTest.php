@@ -69,7 +69,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testHttpMultiGetWithParam()
     {
-        $response= HTTPClient::get($this->baseuri . 'testGetData.php',array('foo' => 'bar'));
+        $response= HTTPClient::get($this->baseuri . 'testGetData.php', array('foo' => 'bar'));
         $this->assertTrue($response->isSuccess());
         $this->assertContains('foo', $response->getBody());
         $this->assertContains('bar', $response->getBody());
@@ -98,7 +98,7 @@ class StaticClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testHttpSimplePost()
     {
-        $response= HTTPClient::post($this->baseuri . 'testPostData.php',array('foo' => 'bar'));
+        $response= HTTPClient::post($this->baseuri . 'testPostData.php', array('foo' => 'bar'));
         $this->assertTrue($response->isSuccess());
         $this->assertContains('foo', $response->getBody());
         $this->assertContains('bar', $response->getBody());

@@ -172,7 +172,7 @@ class ApacheTest extends \PHPUnit_Framework_TestCase
      */
     public function testApr1Md5WrongSaltFormat()
     {
-        $this->apache->verify('myPassword','$apr1$z0Hhe5Lq3$6YdJKbkrJg77Dvw2gpuSA1');
-        $this->apache->verify('myPassword','$apr1$z0Hhe5L&$6YdJKbkrJg77Dvw2gpuSA1');
+        $this->apache->verify('myPassword', '$apr1$z0Hhe5Lq3$6YdJKbkrJg77Dvw2gpuSA1');
+        $this->apache->verify('myPassword', '$apr1$z0Hhe5L&$6YdJKbkrJg77Dvw2gpuSA1');
     }
 }

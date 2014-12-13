@@ -713,7 +713,7 @@ class Wsdl
             return $this->classMap[$type];
         }
 
-        $type = trim($type,'\\');
+        $type = trim($type, '\\');
 
         // remove namespace,
         $pos = strrpos($type, '\\');

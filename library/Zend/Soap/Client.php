@@ -984,7 +984,7 @@ class Client implements ServerClient
      * @param  int    $oneWay
      * @return mixed
      */
-    public function _doRequest(Client\Common $client, $request, $location,$action, $version, $oneWay = null)
+    public function _doRequest(Client\Common $client, $request, $location, $action, $version, $oneWay = null)
     {
         // Perform request as is
         if ($oneWay === null) {

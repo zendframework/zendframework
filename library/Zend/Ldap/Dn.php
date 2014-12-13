@@ -472,7 +472,7 @@ class Dn implements ArrayAccess
         foreach ($values as $key => $val) {
             // Escaping of filter meta characters
             $val = str_replace(
-                array('\\', ',', '+', '"', '<', '>', ';', '#', '=',),
+                array('\\', ',', '+', '"', '<', '>', ';', '#', '=', ),
                 array('\\\\', '\,', '\+', '\"', '\<', '\>', '\;', '\#', '\='), $val
             );
             $val = Converter\Converter::ascToHex32($val);
@@ -516,7 +516,7 @@ class Dn implements ArrayAccess
             // strip slashes from special chars
             $val          = str_replace(
                 array('\\\\', '\,', '\+', '\"', '\<', '\>', '\;', '\#', '\='),
-                array('\\', ',', '+', '"', '<', '>', ';', '#', '=',), $val
+                array('\\', ',', '+', '"', '<', '>', ';', '#', '=', ), $val
             );
             $values[$key] = Converter\Converter::hex32ToAsc($val);
         }

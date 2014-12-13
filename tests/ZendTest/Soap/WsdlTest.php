@@ -9,7 +9,6 @@
 
 namespace ZendTest\Soap;
 use Zend\Soap\Wsdl;
-
 use Zend\Uri\Uri;
 
 /**

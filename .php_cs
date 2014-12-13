@@ -40,6 +40,7 @@ $config->fixers(
         'multiple_use',
         'php_closing_tag',
         'psr0',
+        'remove_lines_between_uses',
         'short_tag',
         'trailing_spaces',
         'unused_use',

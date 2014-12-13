@@ -11,6 +11,7 @@ namespace ZendTest\Form\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
+use Zend\Captcha\Factory as Captcha;
 use Zend\Form\View\HelperConfig;
 use Zend\Form\View\Helper\FormRow as FormRowHelper;
 use Zend\View\Renderer\PhpRenderer;
@@ -428,5 +429,23 @@ class FormRowTest extends TestCase
 
         $markup = $this->helper->render($element);
         $this->assertRegexp('#^<label><span>baz</span><input name="foo" id="bar" type="text" value=""\/?></label>$#', $markup);
+    }
+
+    public function testWrapFieldsetAroundCaptchaWithLabel()
+    {
+        $captcha = Captcha::factory(array(
+            'class' => 'dumb'
+            ));
+
+        $label = 'baz';
+
+        $element = new Element\Captcha('captcha', array(
+          'captcha' => $captcha,
+          'label' => $label
+            ));
+
+        $markup = $this->helper->render($element);
+
+        $this->assertRegexp('#^<fieldset><legend>' . $label . '</legend>Please type this word backwards <b>[a-z0-9]{8}</b><input name="captcha&\#x5B;id&\#x5D;" type="hidden" value="[a-z0-9]{32}"><input name="captcha&\#x5B;input&\#x5D;" type="text"></fieldset>$#', $markup);
     }
 }

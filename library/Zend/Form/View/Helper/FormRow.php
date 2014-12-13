@@ -11,6 +11,7 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\Element\Button;
 use Zend\Form\Element\MonthSelect;
+use Zend\Form\Element\Captcha;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\LabelAwareInterface;
@@ -180,6 +181,7 @@ class FormRow extends AbstractHelper
             if ($type === 'multi_checkbox'
                 || $type === 'radio'
                 || $element instanceof MonthSelect
+                || $element instanceof Captcha
             ) {
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',

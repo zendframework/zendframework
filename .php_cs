@@ -39,6 +39,7 @@ $config->fixers(
         'join_function',
         'line_after_namespace',
         'linefeed',
+        'parenthesis',
         'multiple_use',
         'php_closing_tag',
         'psr0',

@@ -377,7 +377,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testGetMetadatas()
     {
-        $capabilities = $this->_storage->getCapabilities();
+        $capabilities       = $this->_storage->getCapabilities();
         $supportedMetadatas = $capabilities->getSupportedMetadata();
 
         $items = array(
@@ -395,6 +395,12 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
                 $this->assertArrayHasKey($supportedMetadata, $metadata);
             }
         }
+    }
+
+    public function testGetMetadatasWithEmptyNamespace()
+    {
+        $this->_options->setNamespace('');
+        $this->testGetMetadatas();
     }
 
     public function testGetMetadatasReturnsEmptyArrayIfNonReadable()

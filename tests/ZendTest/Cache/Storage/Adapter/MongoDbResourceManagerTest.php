@@ -10,13 +10,13 @@
 namespace ZendTest\Cache\Storage\Adapter;
 
 use Zend\Cache\Exception;
-use Zend\Cache\Storage\Adapter\MongoDBResourceManager;
+use Zend\Cache\Storage\Adapter\MongoDbResourceManager;
 use Zend\Config\Config;
 
 /**
  * @group      Zend_Cache
  */
-class MongoDBResourceManagerTest extends \PHPUnit_Framework_TestCase
+class MongoDbResourceManagerTest extends \PHPUnit_Framework_TestCase
 {
     protected $object;
 
@@ -31,7 +31,7 @@ class MongoDBResourceManagerTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped("Mongo extension is not loaded");
         }
 
-        $this->object = new MongoDBResourceManager();
+        $this->object = new MongoDbResourceManager();
     }
 
     public function testSetResourceAlreadyCreated()

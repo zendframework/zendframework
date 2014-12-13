@@ -9,13 +9,13 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
-use Zend\Cache\Storage\Adapter\MongoDBOptions;
-use Zend\Cache\Storage\Adapter\MongoDBResourceManager;
+use Zend\Cache\Storage\Adapter\MongoDbOptions;
+use Zend\Cache\Storage\Adapter\MongoDbResourceManager;
 
 /**
  * @group      Zend_Cache
  */
-class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
+class MongoDbOptionsTest extends \PHPUnit_Framework_TestCase
 {
     protected $object;
 
@@ -30,7 +30,7 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped("Mongo extension is not loaded");
         }
 
-        $this->object = new MongoDBOptions();
+        $this->object = new MongoDbOptions();
     }
 
     public function testSetNamespaceSeparator()
@@ -59,7 +59,7 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertAttributeEquals(null, 'resourceManager', $this->object);
 
-        $resourceManager = new MongoDBResourceManager();
+        $resourceManager = new MongoDbResourceManager();
 
         $this->object->setResourceManager($resourceManager);
 
@@ -69,10 +69,10 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
     public function testGetResourceManager()
     {
         $this->assertInstanceOf(
-            '\Zend\Cache\Storage\Adapter\MongoDBResourceManager', $this->object->getResourceManager()
+            '\Zend\Cache\Storage\Adapter\MongoDbResourceManager', $this->object->getResourceManager()
         );
 
-        $resourceManager = new MongoDBResourceManager();
+        $resourceManager = new MongoDbResourceManager();
 
         $this->object->setResourceManager($resourceManager);
 
@@ -103,7 +103,7 @@ class MongoDBOptionsTest extends \PHPUnit_Framework_TestCase
 
     public function testSetLibOptions()
     {
-        $resourceManager = new MongoDBResourceManager();
+        $resourceManager = new MongoDbResourceManager();
         $this->object->setResourceManager($resourceManager);
 
         $this->assertAttributeEmpty('resources', $this->object->getResourceManager());

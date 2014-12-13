@@ -10,13 +10,13 @@
 namespace ZendTest\Cache\Storage\Adapter;
 
 use MongoClient;
-use Zend\Cache\Storage\Adapter\MongoDB;
-use Zend\Cache\Storage\Adapter\MongoDBOptions;
+use Zend\Cache\Storage\Adapter\MongoDb;
+use Zend\Cache\Storage\Adapter\MongoDbOptions;
 
 /**
  * @group      Zend_Cache
  */
-class MongoDBTest extends CommonAdapterTest
+class MongoDbTest extends CommonAdapterTest
 {
     public function setUp()
     {
@@ -37,9 +37,9 @@ class MongoDBTest extends CommonAdapterTest
             ),
         );
 
-        $this->_options = new MongoDBOptions($optionsArray);
+        $this->_options = new MongoDbOptions($optionsArray);
 
-        $this->_storage = new MongoDB();
+        $this->_storage = new MongoDb();
         $this->_storage->setOptions($this->_options);
         $this->_storage->flush();
 
@@ -55,7 +55,7 @@ class MongoDBTest extends CommonAdapterTest
         parent::tearDown();
     }
 
-    public function testSetOptionsNotMongoDBOptions()
+    public function testSetOptionsNotMongoDbOptions()
     {
         $options = array(
             'libOptions' => array(
@@ -67,7 +67,7 @@ class MongoDBTest extends CommonAdapterTest
 
         $this->_storage->setOptions($options);
 
-        $this->assertInstanceOf('\Zend\Cache\Storage\Adapter\MongoDBOptions', $this->_storage->getOptions());
+        $this->assertInstanceOf('\Zend\Cache\Storage\Adapter\MongoDbOptions', $this->_storage->getOptions());
     }
 
     public function testCachedItemsExpire()

@@ -9,7 +9,6 @@
 
 namespace ZendTest\View\Helper\Placeholder;
 
-
 /**
  * Test class for Zend\View\Helper\Placeholder\Container.
  *

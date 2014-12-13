@@ -997,10 +997,10 @@ class CollectionTest extends TestCase
             foreach ($_fieldset->getFieldsets() as $_nestedfieldset) {
                 // Each shop is represented by a single fieldset
                 $this->assertCount(1, $_nestedfieldset->getFieldsets());
-                foreach ( $_nestedfieldset->getFieldsets() as $_productfieldset) {
+                foreach ($_nestedfieldset->getFieldsets() as $_productfieldset) {
                     // Each shop fieldset contain a collection with two products in it
                     $this->assertCount(2, $_productfieldset->getFieldsets());
-                    foreach ( $_productfieldset->getFieldsets() as $_product) {
+                    foreach ($_productfieldset->getFieldsets() as $_product) {
                         $this->assertInstanceOf('ZendTest\Form\TestAsset\Entity\Product', $_product->getObject());
                     }
                 }

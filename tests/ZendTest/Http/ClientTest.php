@@ -26,7 +26,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testIfCookiesAreSticky()
     {
         $initialCookies = array(
-            new SetCookie('foo', 'far', null, '/', 'www.domain.com' ),
+            new SetCookie('foo', 'far', null, '/', 'www.domain.com'),
             new SetCookie('bar', 'biz', null, '/', 'www.domain.com')
         );
 
@@ -44,7 +44,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $cookies->addCookiesFromResponse($client->getResponse(), $client->getUri());
 
-        $client->addCookie( $cookies->getMatchingCookies($client->getUri()) );
+        $client->addCookie($cookies->getMatchingCookies($client->getUri()));
 
         $this->assertEquals(4, count($client->getCookies()));
     }

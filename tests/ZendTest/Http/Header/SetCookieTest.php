@@ -279,7 +279,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetCookieSetExpiresWithStringDateBiggerThen2038()
     {
-        if ( PHP_INT_SIZE !== 4 ) {
+        if (PHP_INT_SIZE !== 4) {
             $this->markTestSkipped('Testing set cookie expiry which is over 2038 is only relevant on 32bit systems');
             return;
         }
@@ -359,18 +359,18 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $formatUnquoted = '%s: %s=%s';
         $formatQuoted = '%s: %s="%s"';
 
-        $cookie = new SetCookie( $name, $value );
+        $cookie = new SetCookie($name, $value);
 
         // default
-        $this->assertEquals( $cookie->toString(), sprintf($formatUnquoted,$cookie->getFieldName(),$name,$value));
+        $this->assertEquals($cookie->toString(), sprintf($formatUnquoted,$cookie->getFieldName(),$name,$value));
 
         // rfc with quote
         $cookie->setQuoteFieldValue(true);
-        $this->assertEquals( $cookie->toString(), sprintf($formatQuoted,$cookie->getFieldName(),$name,$value));
+        $this->assertEquals($cookie->toString(), sprintf($formatQuoted,$cookie->getFieldName(),$name,$value));
 
         // rfc without quote
         $cookie->setQuoteFieldValue(false);
-        $this->assertEquals( $cookie->toString(), sprintf($formatUnquoted,$cookie->getFieldName(),$name,$value));
+        $this->assertEquals($cookie->toString(), sprintf($formatUnquoted,$cookie->getFieldName(),$name,$value));
     }
 
     public function testSetJsonValue()

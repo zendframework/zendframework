@@ -17,7 +17,7 @@ class DbaIterator implements IteratorInterface
     /**
      * The apc storage instance
      *
-     * @var Apc
+     * @var Dba
      */
     protected $storage;
 

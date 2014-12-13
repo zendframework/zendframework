@@ -39,6 +39,7 @@ $config->fixers(
         'php_closing_tag',
         'psr0',
         'short_tag',
+        'standardize_not_equal',
         'trailing_spaces',
         'unused_use',
         'visibility',

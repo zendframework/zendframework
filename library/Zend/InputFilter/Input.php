@@ -322,14 +322,14 @@ class Input implements InputInterface, EmptyContextInterface
         $value     = $this->getValue();
         $empty     = ($value === null || $value === '');
 
-        if ($empty && $this->allowEmpty()) {
+        if ($empty && $this->allowEmpty() && !$this->continueIfEmpty()) {
             return true;
         }
 
         // Empty value needs further validation if continueIfEmpty is set
         // so don't inject NotEmpty validator which would always
         // mark that as false
-        if (!$this->continueIfEmpty()) {
+        if (!$this->continueIfEmpty() && !$this->allowEmpty()) {
             $this->injectNotEmptyValidator();
         }
         $validator = $this->getValidatorChain();

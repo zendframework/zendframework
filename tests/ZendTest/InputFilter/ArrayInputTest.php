@@ -219,4 +219,36 @@ class ArrayInputTest extends InputTest
         $this->assertEmpty($this->input->getMessages());
         $this->assertSame($fallbackValue, $this->input->getValue());
     }
+
+    public function emptyValuesProvider()
+    {
+        // Dummy provider - tests are inherited but skipped
+        return array(array(null));
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testValidatorSkippedIfValueIsEmptyAndAllowedAndNotContinue($emptyValue)
+    {
+        $this->markTestSkipped('allow_empty ignored by ArrayInput');
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testValidatorInvokedIfValueIsEmptyAndAllowedAndContinue($emptyValue)
+    {
+        $this->markTestSkipped('allow_empty ignored by ArrayInput');
+    }
+
+    public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()
+    {
+        $this->markTestSkipped('allow_empty ignored by ArrayInput');
+    }
+
+    public function testNotAllowEmptyWithFilterConvertsEmptyToNonEmptyIsValid()
+    {
+        $this->markTestSkipped('allow_empty ignored by ArrayInput');
+    }
 }

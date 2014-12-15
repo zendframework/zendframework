@@ -227,6 +227,60 @@ class InputTest extends TestCase
         $this->assertEquals($notEmptyMock, $validators[0]['instance']);
     }
 
+    public function emptyValuesProvider()
+    {
+        return array(
+            array(null),
+            array(''),
+        );
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testValidatorSkippedIfValueIsEmptyAndAllowedAndNotContinue($emptyValue)
+    {
+        $this->input->setAllowEmpty(true)
+                    ->setContinueIfEmpty(false)
+                    ->setValue($emptyValue)
+                    ->getValidatorChain()->attach(new Validator\Callback(function() {
+                        return false;
+                    }));
+        $this->assertTrue($this->input->isValid());
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testValidatorInvokedIfValueIsEmptyAndAllowedAndContinue($emptyValue)
+    {
+        $this->input->setAllowEmpty(true)
+                    ->setContinueIfEmpty(true)
+                    ->setValue($emptyValue)
+                    ->getValidatorChain()->attach(new Validator\Callback(function($value) {
+                        return false;
+                    }));
+        $this->assertFalse($this->input->isValid());
+    }
+
+    public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()
+    {
+        $this->input->setValue('nonempty')
+                    ->getFilterChain()->attach(new Filter\Callback(function() {
+                        return '';
+                    }));
+        $this->assertFalse($this->input->isValid());
+    }
+
+    public function testNotAllowEmptyWithFilterConvertsEmptyToNonEmptyIsValid()
+    {
+        $this->input->setValue('')
+                    ->getFilterChain()->attach(new Filter\Callback(function() {
+                        return 'nonempty';
+                    }));
+        $this->assertTrue($this->input->isValid());
+    }
+
     public function testMerge()
     {
         $input = new Input('foo');

@@ -301,9 +301,15 @@ class FileInputTest extends InputTest
         $this->assertEquals($uploadMock, $validators[0]['instance']);
     }
 
+    public function testAllowEmptyOption()
+    {
+        $this->input->setAllowEmpty(true);
+        $this->assertTrue($this->input->isValid(''));
+    }
+
     public function testNotEmptyValidatorAddedWhenIsValidIsCalled()
     {
-        $this->markTestSkipped('Test is not enabled in FileInputTest');
+        $this->assertFalse($this->input->isValid(''));
     }
 
     public function testRequiredNotEmptyValidatorNotAddedWhenOneExists()
@@ -343,5 +349,71 @@ class FileInputTest extends InputTest
     public function testFallbackValue($fallbackValue = null)
     {
         $this->markTestSkipped('Not use fallback value');
+    }
+
+    public function testIsEmptyFileNotArray()
+    {
+        $rawValue = 'file';
+        $this->assertTrue($this->input->isEmptyFile($rawValue));
+    }
+
+    public function testIsEmptyFileUploadNoFile()
+    {
+        $rawValue = array(
+            'tmp_name' => '',
+            'error' => \UPLOAD_ERR_NO_FILE,
+        );
+        $this->assertTrue($this->input->isEmptyFile($rawValue));
+    }
+
+    public function testIsEmptyFileOk()
+    {
+        $rawValue = array(
+            'tmp_name' => 'name',
+            'error' => \UPLOAD_ERR_OK,
+        );
+        $this->assertFalse($this->input->isEmptyFile($rawValue));
+    }
+
+    public function testIsEmptyMultiFileUploadNoFile()
+    {
+        $rawValue = array(array(
+            'tmp_name' => 'foo',
+            'error'    => \UPLOAD_ERR_NO_FILE
+        ));
+        $this->assertTrue($this->input->isEmptyFile($rawValue));
+    }
+
+    public function testIsEmptyFileMultiFileOk()
+    {
+        $rawValue = array(
+            array(
+                'tmp_name' => 'foo',
+                'error'    => \UPLOAD_ERR_OK
+            ),
+            array(
+                'tmp_name' => 'bar',
+                'error'    => \UPLOAD_ERR_OK
+            ),
+        );
+        $this->assertFalse($this->input->isEmptyFile($rawValue));
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testValidatorInvokedIfValueIsEmptyAndAllowedAndContinue($emptyValue)
+    {
+        $this->markTestSkipped('continue_if_empty not implemented for FileInput');
+    }
+
+    public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()
+    {
+        $this->markTestSkipped('does not apply to FileInput');
+    }
+
+    public function testNotAllowEmptyWithFilterConvertsEmptyToNonEmptyIsValid()
+    {
+        $this->markTestSkipped('does not apply to FileInput');
     }
 }

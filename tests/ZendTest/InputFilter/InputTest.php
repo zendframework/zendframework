@@ -232,6 +232,7 @@ class InputTest extends TestCase
         return array(
             array(null),
             array(''),
+            array(array()),
         );
     }
 

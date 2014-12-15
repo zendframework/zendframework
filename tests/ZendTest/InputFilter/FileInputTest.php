@@ -357,6 +357,12 @@ class FileInputTest extends InputTest
         $this->assertTrue($this->input->isEmptyFile($rawValue));
     }
 
+    public function testIsEmptyFileEmptyArray()
+    {
+        $rawValue = array();
+        $this->assertTrue($this->input->isEmptyFile($rawValue));
+    }
+
     public function testIsEmptyFileUploadNoFile()
     {
         $rawValue = array(

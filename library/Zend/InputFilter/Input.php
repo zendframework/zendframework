@@ -320,7 +320,7 @@ class Input implements InputInterface, EmptyContextInterface
     public function isValid($context = null)
     {
         $value     = $this->getValue();
-        $empty     = ($value === null || $value === '');
+        $empty     = ($value === null || $value === '' || $value === array());
 
         if ($empty && $this->allowEmpty() && !$this->continueIfEmpty()) {
             return true;

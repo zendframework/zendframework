@@ -319,6 +319,13 @@ class Input implements InputInterface, EmptyContextInterface
      */
     public function isValid($context = null)
     {
+        $value     = $this->getValue();
+        $empty     = ($value === null || $value === '');
+
+        if ($empty && $this->allowEmpty()) {
+            return true;
+        }
+
         // Empty value needs further validation if continueIfEmpty is set
         // so don't inject NotEmpty validator which would always
         // mark that as false
@@ -326,7 +333,7 @@ class Input implements InputInterface, EmptyContextInterface
             $this->injectNotEmptyValidator();
         }
         $validator = $this->getValidatorChain();
-        $value     = $this->getValue();
+
         $result    = $validator->isValid($value, $context);
         if (!$result && $this->hasFallback()) {
             $this->setValue($this->getFallbackValue());

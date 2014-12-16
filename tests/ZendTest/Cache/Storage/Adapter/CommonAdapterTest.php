@@ -397,6 +397,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @group 7031
+     * @group 7032
+     */
     public function testGetMetadatasWithEmptyNamespace()
     {
         $this->_options->setNamespace('');

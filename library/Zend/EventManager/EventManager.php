@@ -167,7 +167,7 @@ class EventManager implements EventManagerInterface
     /**
      * Trigger all listeners for a given event
      *
-     * @param  string            $event
+     * @param  string|EventInterface $event
      * @param  string|object     $target   Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv     Array of arguments; typically, should be associative
      * @param  null|callable     $callback Trigger listeners until return value of this callback evaluate to true
@@ -212,7 +212,7 @@ class EventManager implements EventManagerInterface
      * Triggers listeners until the provided callback evaluates the return
      * value of one as true, or until all listeners have been executed.
      *
-     * @param  string $event
+     * @param  string|EventInterface $event
      * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @param  callable $callback
@@ -506,7 +506,7 @@ class EventManager implements EventManagerInterface
      * Used to inject shared listeners and wildcard listeners.
      *
      * @param  PriorityQueue $masterListeners
-     * @param  PriorityQueue $listeners
+     * @param  \Traversable|array $listeners
      * @return void
      */
     protected function insertListeners($masterListeners, $listeners)

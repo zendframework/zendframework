@@ -588,7 +588,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testZF6995_toArrayDoesNotDisturbInternalIterator()
     {
-        $config = new Config(range(1,10));
+        $config = new Config(range(1, 10));
         $config->rewind();
         $this->assertEquals(1, $config->current());
 

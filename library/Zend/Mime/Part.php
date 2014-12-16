@@ -97,7 +97,7 @@ class Part
                 }
                 break;
             case Mime::ENCODING_BASE64:
-                if (array_key_exists(Mime::ENCODING_BASE64,$this->filters)) {
+                if (array_key_exists(Mime::ENCODING_BASE64, $this->filters)) {
                     stream_filter_remove($this->filters[Mime::ENCODING_BASE64]);
                 }
                 $filter = stream_filter_append(

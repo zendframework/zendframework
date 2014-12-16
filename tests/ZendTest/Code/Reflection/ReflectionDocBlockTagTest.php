@@ -82,7 +82,7 @@ class ReflectionDocBlockTagTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($paramTag->getType(), 'int', 'Second Match Failed');
         $this->assertEquals($paramTag->getVariableName(), '$var', 'Third Match Failed');
-        $this->assertEquals($paramTag->getDescription(),'Description of $var', 'Final Match Failed');
+        $this->assertEquals($paramTag->getDescription(), 'Description of $var', 'Final Match Failed');
     }
 
 

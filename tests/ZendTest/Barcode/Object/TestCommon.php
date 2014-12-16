@@ -59,7 +59,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testConstructorWithArray()
     {
         $object = $this->getBarcodeObject(
-                array('barHeight' => 150 ,
+                array('barHeight' => 150,
                         'unkownProperty' => 'aValue'));
         $this->assertEquals(150, $object->getBarHeight());
     }
@@ -67,7 +67,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testConstructorWithZendConfig()
     {
         $config = new Config\Config(
-                array('barHeight' => 150 ,
+                array('barHeight' => 150,
                         'unkownProperty' => 'aValue'));
         $object = $this->getBarcodeObject($config);
         $this->assertEquals(150, $object->getBarHeight());
@@ -76,7 +76,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     public function testSetOptions()
     {
         $this->object->setOptions(
-                array('barHeight' => 150 ,
+                array('barHeight' => 150,
                         'unkownProperty' => 'aValue'));
         $this->assertEquals(150, $this->object->getBarHeight());
     }

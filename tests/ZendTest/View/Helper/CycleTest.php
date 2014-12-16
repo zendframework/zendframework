@@ -113,7 +113,7 @@ class CycleTest extends \PHPUnit_Framework_TestCase
     {
         $this->helper->assign(array(5, 8, 3));
         $this->assertEquals(5, (string) $this->helper->next());
-        $this->assertEquals(2, (string) $this->helper->__invoke(array(2,38,1),'cycle2')->next());
+        $this->assertEquals(2, (string) $this->helper->__invoke(array(2, 38, 1), 'cycle2')->next());
         $this->assertEquals(8, (string) $this->helper->__invoke()->next());
         $this->assertEquals(38, (string) $this->helper->setName('cycle2')->next());
     }
@@ -124,7 +124,7 @@ class CycleTest extends \PHPUnit_Framework_TestCase
         $expected2 = array(7,34,8,6);
         for ($i=0;$i<4;$i++) {
             $this->assertEquals($expected[$i], (string) $this->helper->__invoke($expected)->next());
-            $this->assertEquals($expected2[$i], (string) $this->helper->__invoke($expected2,'cycle2')->next());
+            $this->assertEquals($expected2[$i], (string) $this->helper->__invoke($expected2, 'cycle2')->next());
         }
     }
 }

@@ -315,7 +315,7 @@ abstract class Scrypt
         if (PHP_INT_SIZE === 8) {
             $v = 'V';
         }
-        list(,$n) = unpack($v, substr($b, -64));
+        list(, $n) = unpack($v, substr($b, -64));
         return $n;
     }
 

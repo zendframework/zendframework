@@ -113,9 +113,9 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     public function testAddWriterWithPriority()
     {
         $writer1 = $this->logger->writerPlugin('mock');
-        $this->logger->addWriter($writer1,1);
+        $this->logger->addWriter($writer1, 1);
         $writer2 = $this->logger->writerPlugin('null');
-        $this->logger->addWriter($writer2,2);
+        $this->logger->addWriter($writer2, 2);
         $writers = $this->logger->getWriters();
 
         $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);
@@ -128,9 +128,9 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     public function testAddWithSamePriority()
     {
         $writer1 = $this->logger->writerPlugin('mock');
-        $this->logger->addWriter($writer1,1);
+        $this->logger->addWriter($writer1, 1);
         $writer2 = $this->logger->writerPlugin('null');
-        $this->logger->addWriter($writer2,1);
+        $this->logger->addWriter($writer2, 1);
         $writers = $this->logger->getWriters();
 
         $this->assertInstanceOf('Zend\Stdlib\SplPriorityQueue', $writers);

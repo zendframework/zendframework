@@ -200,7 +200,7 @@ class CsrfTest extends \PHPUnit_Framework_TestCase
 
         $hashOne = $validatorOne->getHash();
         $hashTwo = $validatorTwo->getHash();
-        $this->assertNotEquals($hashOne , $hashTwo);
+        $this->assertNotEquals($hashOne, $hashTwo);
     }
 
     public function testCanValidateAnyHashWithinTheSameContainer()

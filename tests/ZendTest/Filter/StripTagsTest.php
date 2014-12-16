@@ -487,7 +487,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultiParamArray()
     {
-        $filter = new StripTagsFilter(array("a","b","hr"),array(),true);
+        $filter = new StripTagsFilter(array("a", "b", "hr"), array(), true);
 
         $input    = 'test <a /> test <div>div-content</div>';
         $expected = 'test <a /> test div-content';
@@ -530,7 +530,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $expected  = '<li data-name="Test User" data-id="11223"></li>';
 
         $this->_filter->setTagsAllowed('li');
-        $this->_filter->setAttributesAllowed(array('data-id','data-name'));
+        $this->_filter->setAttributesAllowed(array('data-id', 'data-name'));
 
         $this->assertEquals($expected, $this->_filter->filter($input));
     }
@@ -564,7 +564,7 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
         $input     = '<div id="0" data-custom="0" class="bogus"></div>';
         $expected  = '<div id="0" data-custom="0"></div>';
         $this->_filter->setTagsAllowed('div');
-        $this->_filter->setAttributesAllowed(array('id','data-custom'));
+        $this->_filter->setAttributesAllowed(array('id', 'data-custom'));
         $this->assertEquals($expected, $this->_filter->filter($input));
     }
 }

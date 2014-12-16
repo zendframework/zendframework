@@ -430,13 +430,13 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $helpers = $this->renderer->getHelperPluginManager();
         $helpers->setInvokableClass('sharedinstance', 'ZendTest\View\TestAsset\SharedInstance');
 
-        $helpers->setShared('sharedinstance',false);
+        $helpers->setShared('sharedinstance', false);
         // new instance always created when shared = false
         $this->assertEquals(1, $this->renderer->sharedinstance());
         $this->assertEquals(1, $this->renderer->sharedinstance());
         $this->assertEquals(1, $this->renderer->sharedinstance());
 
-        $helpers->setShared('sharedinstance',true);
+        $helpers->setShared('sharedinstance', true);
         // use shared instance when shared = true
         $this->assertEquals(1, $this->renderer->sharedinstance());
         $this->assertEquals(2, $this->renderer->sharedinstance());

@@ -291,7 +291,7 @@ class SqliteMetadata extends AbstractSource
                 'TRIGGER',
                 array('IF', 'NOT', 'EXISTS'),
                 $identifierChain,
-                array('(?<action_timing>BEFORE|AFTER|INSTEAD\\s+OF)',),
+                array('(?<action_timing>BEFORE|AFTER|INSTEAD\\s+OF)', ),
                 '(?<event_manipulation>DELETE|INSERT|UPDATE)',
                 array('OF', '(?<column_usage>' . $identifierList . ')'),
                 'ON',

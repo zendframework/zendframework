@@ -125,7 +125,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testWriteUsesOptionalCustomColumnNames()
     {
         $this->writer = new DbWriter($this->db, $this->tableName, array(
-            'message' => 'new-message-field' ,
+            'message' => 'new-message-field',
             'priority' => 'new-priority-field'
         ));
 
@@ -152,7 +152,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testWriteUsesParamsWithArray()
     {
         $this->writer = new DbWriter($this->db, $this->tableName, array(
-            'message' => 'new-message-field' ,
+            'message' => 'new-message-field',
             'priority' => 'new-priority-field',
             'events' => array(
                 'line' => 'new-line',

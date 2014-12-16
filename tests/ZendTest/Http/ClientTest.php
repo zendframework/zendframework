@@ -359,15 +359,15 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $prepareHeadersReflection->setAccessible(true);
 
         $request= new Request();
-        $request->getHeaders()->addHeaderLine('content-type','application/json');
-        $request->getHeaders()->addHeaderLine('content-length',strlen($body));
+        $request->getHeaders()->addHeaderLine('content-type', 'application/json');
+        $request->getHeaders()->addHeaderLine('content-length', strlen($body));
         $client->setRequest($request);
 
         $client->setEncType('application/json');
 
-        $this->assertSame($client->getRequest(),$request);
+        $this->assertSame($client->getRequest(), $request);
 
-        $headers = $prepareHeadersReflection->invoke($client,$body,new Http('http://localhost:5984'));
+        $headers = $prepareHeadersReflection->invoke($client, $body, new Http('http://localhost:5984'));
 
         $this->assertArrayNotHasKey('content-type', $headers);
         $this->assertArrayHasKey('Content-Type', $headers);

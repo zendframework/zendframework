@@ -113,14 +113,14 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
     public function testAddsByEmailFromArray()
     {
         $entry = new Writer\Deleted;
-        $entry->setBy(array('name'=>'Joe','email'=>'joe@example.com'));
+        $entry->setBy(array('name'=>'Joe', 'email'=>'joe@example.com'));
         $this->assertEquals(array('name'=>'Joe', 'email' => 'joe@example.com'), $entry->getBy());
     }
 
     public function testAddsByUriFromArray()
     {
         $entry = new Writer\Deleted;
-        $entry->setBy(array('name'=>'Joe','uri'=>'http://www.example.com'));
+        $entry->setBy(array('name'=>'Joe', 'uri'=>'http://www.example.com'));
         $this->assertEquals(array('name'=>'Joe', 'uri' => 'http://www.example.com'), $entry->getBy());
     }
 
@@ -138,7 +138,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Deleted;
         try {
-            $entry->setBy(array('name'=>'Joe','email'=>''));
+            $entry->setBy(array('name'=>'Joe', 'email'=>''));
             $this->fail();
         } catch (Writer\Exception\ExceptionInterface $e) {
         }
@@ -149,7 +149,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Deleted;
         try {
-            $entry->setBy(array('name'=>'Joe','uri'=>'notauri'));
+            $entry->setBy(array('name'=>'Joe', 'uri'=>'notauri'));
             $this->fail();
         } catch (Writer\Exception\ExceptionInterface $e) {
         }
@@ -175,7 +175,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         $by = $entry->getBy();
         $this->assertNull($by);
 
-        $entry->setBy(array('name'=>'Joe','email'=>'joe@example.com'));
+        $entry->setBy(array('name'=>'Joe', 'email'=>'joe@example.com'));
         $this->assertEquals(array('name'=>'Joe', 'email' => 'joe@example.com'), $entry->getBy());
     }
 
@@ -186,7 +186,7 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('Zend\Feed\Writer\Exception\InvalidArgumentException',
             'Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
-        $entry->setBy(array('name' => 'joe','email'=>'joe@example.com', 'uri'=> ''));
+        $entry->setBy(array('name' => 'joe', 'email'=>'joe@example.com', 'uri'=> ''));
     }
 
     /**

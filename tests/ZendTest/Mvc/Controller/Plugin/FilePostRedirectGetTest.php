@@ -40,7 +40,7 @@ class FilePostRedirectGetTest extends TestCase
     {
         $this->form = new Form();
 
-        $this->collection = new Collection('links',array(
+        $this->collection = new Collection('links', array(
                 'count' => 1,
                 'allow_add' => true,
                 'target_element' => array(
@@ -270,7 +270,7 @@ class FilePostRedirectGetTest extends TestCase
 
         $this->assertInstanceOf('Zend\Http\Response', $prgResultRoute);
         $this->assertTrue($prgResultRoute->getHeaders()->has('Location'));
-        $this->assertEquals($expects, $prgResultRoute->getHeaders()->get('Location')->getUri() , 'redirect to the same url');
+        $this->assertEquals($expects, $prgResultRoute->getHeaders()->get('Location')->getUri(), 'redirect to the same url');
         $this->assertEquals(303, $prgResultRoute->getStatusCode());
     }
 
@@ -311,7 +311,7 @@ class FilePostRedirectGetTest extends TestCase
         // GET
         $this->request = new Request();
         $form = new Form();
-        $collection = new Collection('links',array(
+        $collection = new Collection('links', array(
             'count' => 1,
             'allow_add' => true,
             'target_element' => array(

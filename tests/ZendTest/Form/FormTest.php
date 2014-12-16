@@ -1400,7 +1400,7 @@ class FormTest extends TestCase
     public function testResetPasswordValueIfFormIsNotValid()
     {
         $this->form->add(array(
-            'type' => 'Zend\Form\Element\Password' ,
+            'type' => 'Zend\Form\Element\Password',
             'name' => 'password'
         ));
 

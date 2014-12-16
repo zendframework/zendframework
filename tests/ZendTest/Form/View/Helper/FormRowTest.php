@@ -12,7 +12,6 @@ namespace ZendTest\Form\View\Helper;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
 use Zend\Form\Element\Captcha;
-use Zend\Captcha\Factory as CaptchaFactory;
 use Zend\Form\View\HelperConfig;
 use Zend\Form\View\Helper\FormRow as FormRowHelper;
 use Zend\View\Renderer\PhpRenderer;
@@ -448,9 +447,7 @@ class FormRowTest extends TestCase
             . '<input name="captcha&\#x5B;input&\#x5D;" type="text"\/?>'
             . '<\/fieldset>$#',
             $this->helper->render(new Captcha('captcha', array(
-                'captcha' => CaptchaFactory::factory(array(
-                    'class' => 'dumb'
-                )),
+                'captcha' => array('class' => 'dumb'),
                 'label' => 'baz'
             )))
         );

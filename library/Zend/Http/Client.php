@@ -863,6 +863,9 @@ class Client implements Stdlib\DispatchableInterface
             // method
             $method = $this->getRequest()->getMethod();
 
+            // this is so the correct Encoding Type is set
+            $this->setMethod($method);
+
             // body
             $body = $this->prepareBody();
 

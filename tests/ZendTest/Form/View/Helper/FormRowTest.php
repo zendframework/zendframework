@@ -11,7 +11,8 @@ namespace ZendTest\Form\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Form\Element;
-use Zend\Captcha\Factory as Captcha;
+use Zend\Form\Element\Captcha;
+use Zend\Captcha\Factory as CaptchaFactory;
 use Zend\Form\View\HelperConfig;
 use Zend\Form\View\Helper\FormRow as FormRowHelper;
 use Zend\View\Renderer\PhpRenderer;
@@ -433,13 +434,13 @@ class FormRowTest extends TestCase
 
     public function testWrapFieldsetAroundCaptchaWithLabel()
     {
-        $captcha = Captcha::factory(array(
+        $captcha = CaptchaFactory::factory(array(
             'class' => 'dumb'
         ));
 
         $label = 'baz';
 
-        $element = new Element\Captcha('captcha', array(
+        $element = new Captcha('captcha', array(
           'captcha' => $captcha,
           'label' => $label
         ));

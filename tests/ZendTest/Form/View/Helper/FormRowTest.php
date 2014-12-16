@@ -438,6 +438,9 @@ class FormRowTest extends TestCase
         $this->assertRegexp('#^<label><span>baz</span><input name="foo" id="bar" type="text" value=""\/?></label>$#', $markup);
     }
 
+    /**
+     * @group 7030
+     */
     public function testWrapFieldsetAroundCaptchaWithLabel()
     {
         $this->assertRegexp(

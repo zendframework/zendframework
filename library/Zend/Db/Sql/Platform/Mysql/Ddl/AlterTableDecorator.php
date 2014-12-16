@@ -47,20 +47,6 @@ class AlterTableDecorator extends AlterTable implements PlatformDecoratorInterfa
     }
 
     /**
-     * @param  null|PlatformInterface $platform
-     * @return string
-     */
-    public function getSqlString(PlatformInterface $platform = null)
-    {
-        // localize variables
-        foreach (get_object_vars($this->subject) as $name => $value) {
-            $this->{$name} = $value;
-        }
-
-        return parent::getSqlString($platform);
-    }
-
-    /**
      * @param string $sql
      * @return array
      */

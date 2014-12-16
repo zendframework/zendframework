@@ -155,6 +155,7 @@ class Factory
         if ($inputSpecification instanceof InputProviderInterface) {
             $inputSpecification = $inputSpecification->getInputSpecification();
         }
+
         if (!is_array($inputSpecification) && !$inputSpecification instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array or Traversable; received "%s"',
@@ -282,6 +283,7 @@ class Factory
         if ($inputFilterSpecification instanceof InputFilterProviderInterface) {
             $inputFilterSpecification = $inputFilterSpecification->getInputFilterSpecification();
         }
+
         if (!is_array($inputFilterSpecification) && !$inputFilterSpecification instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array or Traversable; received "%s"',

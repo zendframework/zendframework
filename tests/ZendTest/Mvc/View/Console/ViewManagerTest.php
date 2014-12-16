@@ -28,21 +28,20 @@ use Zend\Console\Request as ConsoleRequest;
  */
 class ViewManagerTest extends TestCase
 {
-
     /**
      * @var ConsoleViewManager
      */
-    protected $view_manager;
+    private $view_manager;
 
     /**
      * @var ServiceManager
      */
-    protected $services;
+    private $services;
 
     /**
      * @var ServiceManagerConfig
      */
-    protected $config;
+    private $config;
 
     /**
      * @var ConsoleViewManagerFactory

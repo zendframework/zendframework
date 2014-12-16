@@ -516,7 +516,7 @@ class Collection extends Fieldset
                 $values[$key] = $this->hydrator->extract($value);
                 continue;
             }
-            
+
             // If the target element is a fieldset that can accept the provided value
             // we should clone it, inject the value and extract the data
             if ($this->targetElement instanceof FieldsetInterface) {
@@ -531,7 +531,7 @@ class Collection extends Fieldset
                 }
                 continue;
             }
-            
+
             // If the target element is a non-fieldset element, just use the value
             if ($this->targetElement instanceof ElementInterface) {
                 $values[$key] = $value;

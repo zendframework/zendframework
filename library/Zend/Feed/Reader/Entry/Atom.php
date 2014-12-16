@@ -62,7 +62,7 @@ class Atom extends AbstractEntry implements EntryInterface
             return $authors[$index];
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -207,7 +207,7 @@ class Atom extends AbstractEntry implements EntryInterface
             return $this->data['links'][$index];
         }
 
-        return null;
+        return;
     }
 
     /**

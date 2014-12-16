@@ -184,7 +184,7 @@ abstract class AbstractEntry
         if (array_key_exists($name . '\\Entry', $this->extensions)) {
             return $this->extensions[$name . '\\Entry'];
         }
-        return null;
+        return;
     }
 
     /**

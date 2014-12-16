@@ -590,7 +590,7 @@ class Collection extends Fieldset
     protected function createTemplateElement()
     {
         if (!$this->shouldCreateTemplate) {
-            return null;
+            return;
         }
 
         if ($this->templateElement) {

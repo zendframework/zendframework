@@ -151,7 +151,7 @@ class CreateTable extends AbstractSql implements SqlInterface
     protected function processColumns(PlatformInterface $adapterPlatform = null)
     {
         if (! $this->columns) {
-            return null;
+            return;
         }
 
         $sqls = array();
@@ -183,7 +183,7 @@ class CreateTable extends AbstractSql implements SqlInterface
     protected function processConstraints(PlatformInterface $adapterPlatform = null)
     {
         if (!$this->constraints) {
-            return null;
+            return;
         }
 
         $sqls = array();

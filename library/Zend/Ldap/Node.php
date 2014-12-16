@@ -268,7 +268,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
         }
         $data = $ldap->getEntry($dn, array('*', '+'), true);
         if ($data === null) {
-            return null;
+            return;
         }
         $entry = new static($dn, $data, true, $ldap);
 

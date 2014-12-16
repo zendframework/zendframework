@@ -514,7 +514,7 @@ class Getopt
                 return $this->options[$flag];
             }
         }
-        return null;
+        return;
     }
 
     /**

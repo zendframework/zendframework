@@ -30,7 +30,7 @@ class Feed extends Extension\AbstractFeed
             return $authors[$index];
         }
 
-        return null;
+        return;
     }
 
     /**

@@ -330,7 +330,7 @@ abstract class AbstractFunction
             return $this->config[$key];
         }
 
-        return null;
+        return;
     }
 
     /**

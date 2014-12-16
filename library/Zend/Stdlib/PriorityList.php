@@ -129,7 +129,7 @@ class PriorityList implements Iterator, Countable
     public function get($name)
     {
         if (!isset($this->items[$name])) {
-            return null;
+            return;
         }
 
         return $this->items[$name]['data'];

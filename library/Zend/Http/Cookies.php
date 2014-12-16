@@ -277,7 +277,7 @@ class Cookies extends Headers
             }
         }
 
-        return null;
+        return;
     }
 
     /**

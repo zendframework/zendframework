@@ -424,7 +424,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
     public function getValidator($name)
     {
         if (false === ($identifier = $this->getValidatorIdentifier($name))) {
-            return null;
+            return;
         }
         return $this->validators[$identifier];
     }
@@ -800,7 +800,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
     public function getFilter($name)
     {
         if (false === ($identifier = $this->getFilterIdentifier($name))) {
-            return null;
+            return;
         }
 
         return $this->filters[$identifier];
@@ -1027,7 +1027,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
     public function getTranslator()
     {
         if ($this->isTranslatorEnabled()) {
-            return null;
+            return;
         }
 
         return $this->translator;
@@ -1165,7 +1165,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
         } elseif (file_exists($value['tmp_name'])) {
             $filename = $value['tmp_name'];
         } else {
-            return null;
+            return;
         }
 
         ErrorHandler::start();
@@ -1220,7 +1220,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
         } elseif (file_exists($value['tmp_name'])) {
             $file = $value['tmp_name'];
         } else {
-            return null;
+            return;
         }
 
         if (class_exists('finfo', false)) {

@@ -100,7 +100,7 @@ class Connection extends AbstractConnection
                 }
             }
 
-            return null;
+            return;
         };
 
         // http://www.php.net/manual/en/function.oci-connect.php
@@ -254,6 +254,6 @@ class Connection extends AbstractConnection
     public function getLastGeneratedValue($name = null)
     {
         // @todo Get Last Generated Value in Connection (this might not apply)
-        return null;
+        return;
     }
 }

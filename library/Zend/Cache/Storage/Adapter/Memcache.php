@@ -220,7 +220,7 @@ class Memcache extends AbstractAdapter implements
         $result = $memc->get($internalKey);
         $success = ($result !== false);
         if ($result === false) {
-            return null;
+            return;
         }
 
         $casToken = $result;

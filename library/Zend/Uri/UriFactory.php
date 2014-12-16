@@ -74,7 +74,7 @@ abstract class UriFactory
             return static::$schemeClasses[$scheme];
         }
 
-        return null;
+        return;
     }
 
     /**

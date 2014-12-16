@@ -162,7 +162,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     public function getInstantiator($class)
     {
         if ($this->class !== $class) {
-            return null;
+            return;
         }
         return $this->instantiator;
     }
@@ -192,14 +192,14 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     public function hasMethod($class, $method)
     {
         if ($this->class !== $class) {
-            return null;
+            return;
         }
 
         if (is_array($this->methods)) {
             return array_key_exists($method, $this->methods);
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -219,13 +219,13 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
     public function getMethodParameters($class, $method)
     {
         if ($this->class !== $class) {
-            return null;
+            return;
         }
 
         if (array_key_exists($method, $this->methodParameters)) {
             return $this->methodParameters[$method];
         }
 
-        return null;
+        return;
     }
 }

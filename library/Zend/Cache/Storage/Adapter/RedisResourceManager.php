@@ -233,14 +233,14 @@ class RedisResourceManager
         }
 
         if (! is_string($serverUri)) {
-            return null;
+            return;
         }
 
         // parse server from URI host{:?port}
         $server = trim($serverUri);
 
         if (strpos($server, '/') === 0) {
-            return null;
+            return;
         }
 
         //non unix domain socket connection

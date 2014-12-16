@@ -127,7 +127,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
             return $this->current()->getChildren();
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -143,7 +143,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
             return $this->data[$rdn];
         }
 
-        return null;
+        return;
     }
 
     /**

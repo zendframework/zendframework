@@ -372,7 +372,7 @@ class ColumnObject
         if (array_key_exists($errataName, $this->errata)) {
             return $this->errata[$errataName];
         }
-        return null;
+        return;
     }
 
     /**

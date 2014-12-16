@@ -1072,7 +1072,7 @@ class Uri implements UriInterface
             return $match[1];
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -1264,7 +1264,7 @@ class Uri implements UriInterface
             && isset(static::$defaultPorts[$scheme])
             && ($port == static::$defaultPorts[$scheme])
         ) {
-            return null;
+            return;
         }
 
         return $port;

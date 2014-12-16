@@ -128,7 +128,7 @@ class Null extends AbstractFilter
         if ($type >= self::TYPE_FLOAT) {
             $type -= self::TYPE_FLOAT;
             if (is_float($value) && ($value == 0.0)) {
-                return null;
+                return;
             }
         }
 
@@ -136,7 +136,7 @@ class Null extends AbstractFilter
         if ($type >= self::TYPE_ZERO_STRING) {
             $type -= self::TYPE_ZERO_STRING;
             if (is_string($value) && ($value == '0')) {
-                return null;
+                return;
             }
         }
 
@@ -144,7 +144,7 @@ class Null extends AbstractFilter
         if ($type >= self::TYPE_STRING) {
             $type -= self::TYPE_STRING;
             if (is_string($value) && ($value == '')) {
-                return null;
+                return;
             }
         }
 
@@ -152,7 +152,7 @@ class Null extends AbstractFilter
         if ($type >= self::TYPE_EMPTY_ARRAY) {
             $type -= self::TYPE_EMPTY_ARRAY;
             if (is_array($value) && ($value == array())) {
-                return null;
+                return;
             }
         }
 
@@ -160,7 +160,7 @@ class Null extends AbstractFilter
         if ($type >= self::TYPE_INTEGER) {
             $type -= self::TYPE_INTEGER;
             if (is_int($value) && ($value == 0)) {
-                return null;
+                return;
             }
         }
 
@@ -168,7 +168,7 @@ class Null extends AbstractFilter
         if ($type >= self::TYPE_BOOLEAN) {
             $type -= self::TYPE_BOOLEAN;
             if (is_bool($value) && ($value == false)) {
-                return null;
+                return;
             }
         }
 

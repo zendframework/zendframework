@@ -80,7 +80,7 @@ class Isbn extends AbstractValidator
             }
         }
 
-        return null;
+        return;
     }
 
     /**

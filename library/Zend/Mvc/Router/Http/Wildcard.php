@@ -103,7 +103,7 @@ class Wildcard implements RouteInterface
     public function match(Request $request, $pathOffset = null)
     {
         if (!method_exists($request, 'getUri')) {
-            return null;
+            return;
         }
 
         $uri  = $request->getUri();
@@ -121,7 +121,7 @@ class Wildcard implements RouteInterface
         $params  = explode($this->paramDelimiter, $path);
 
         if (count($params) > 1 && ($params[0] !== '' || end($params) === '')) {
-            return null;
+            return;
         }
 
         if ($this->keyValueDelimiter === $this->paramDelimiter) {

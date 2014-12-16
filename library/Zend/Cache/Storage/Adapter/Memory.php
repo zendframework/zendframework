@@ -307,7 +307,7 @@ class Memory extends AbstractAdapter implements
         }
 
         if (!$success) {
-            return null;
+            return;
         }
 
         $casToken = $data[0];

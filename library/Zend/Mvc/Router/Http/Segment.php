@@ -344,7 +344,7 @@ class Segment implements RouteInterface
     public function match(Request $request, $pathOffset = null, array $options = array())
     {
         if (!method_exists($request, 'getUri')) {
-            return null;
+            return;
         }
 
         $uri  = $request->getUri();
@@ -373,7 +373,7 @@ class Segment implements RouteInterface
         }
 
         if (!$result) {
-            return null;
+            return;
         }
 
         $matchedLength = strlen($matches[0]);

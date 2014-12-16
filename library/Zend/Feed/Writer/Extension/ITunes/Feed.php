@@ -355,7 +355,7 @@ class Feed
             );
         }
         if (!array_key_exists($point, $this->data) || empty($this->data[$point])) {
-            return null;
+            return;
         }
         return $this->data[$point];
     }

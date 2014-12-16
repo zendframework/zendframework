@@ -268,7 +268,7 @@ class Hostname implements RouteInterface
     public function match(Request $request)
     {
         if (!method_exists($request, 'getUri')) {
-            return null;
+            return;
         }
 
         $uri  = $request->getUri();
@@ -277,7 +277,7 @@ class Hostname implements RouteInterface
         $result = preg_match('(^' . $this->regex . '$)', $host, $matches);
 
         if (!$result) {
-            return null;
+            return;
         }
 
         $params = array();

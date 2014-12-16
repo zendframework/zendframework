@@ -27,7 +27,7 @@ class Feed extends Extension\AbstractFeed
             return $licenses[$index];
         }
 
-        return null;
+        return;
     }
 
     /**

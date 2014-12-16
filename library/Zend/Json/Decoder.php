@@ -225,7 +225,7 @@ class Decoder
             case self::LBRACKET:
                 return($this->_decodeArray());
             default:
-                return null;
+                return;
         }
     }
 

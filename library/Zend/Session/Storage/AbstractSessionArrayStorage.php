@@ -133,7 +133,7 @@ abstract class AbstractSessionArrayStorage implements
             return $_SESSION[$key];
         }
 
-        return null;
+        return;
     }
 
     /**

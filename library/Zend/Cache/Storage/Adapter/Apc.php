@@ -221,7 +221,7 @@ class Apc extends AbstractAdapter implements
         $result      = apc_fetch($internalKey, $success);
 
         if (!$success) {
-            return null;
+            return;
         }
 
         $casToken = $result;

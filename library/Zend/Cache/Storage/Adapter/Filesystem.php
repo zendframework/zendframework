@@ -515,7 +515,7 @@ class Filesystem extends AbstractAdapter implements
     {
         if (!$this->internalHasItem($normalizedKey)) {
             $success = false;
-            return null;
+            return;
         }
 
         try {

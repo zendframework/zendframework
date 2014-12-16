@@ -200,7 +200,7 @@ class HeadTitle extends Placeholder\Container\AbstractStandalone implements
     public function getTranslator()
     {
         if (! $this->isTranslatorEnabled()) {
-            return null;
+            return;
         }
 
         return $this->translator;

@@ -279,7 +279,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
                         return $items[$k];
                     } else {
                         $success = false;
-                        return null;
+                        return;
                     }
                 }));
         }

@@ -74,7 +74,7 @@ class ServiceLocator implements ServiceLocatorInterface
     {
         if (!isset($this->services[$name])) {
             if (!isset($this->map[$name])) {
-                return null;
+                return;
             }
             $method = $this->map[$name];
 

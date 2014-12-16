@@ -304,7 +304,7 @@ class Server extends AbstractServer
                 }
             }
         }
-        return null;
+        return;
     }
 
     /**

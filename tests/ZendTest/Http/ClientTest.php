@@ -415,6 +415,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $client = new Client;
         $client->setAdapter('Zend\Http\Client\Adapter\Test');
-        $client->send($request);
+        $this->assertInstanceOf('Zend\Http\Response', $client->send($request));
     }
 }

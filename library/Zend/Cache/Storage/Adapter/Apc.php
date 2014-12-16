@@ -361,14 +361,16 @@ class Apc extends AbstractAdapter implements
 
         $options   = $this->getOptions();
         $namespace = $options->getNamespace();
+        $prefixL   = 0;
+
         if ($namespace === '') {
-            $prefixL = 0;
             $pattern = '/^(' . implode('|', $keysRegExp) . ')' . '$/';
         } else {
             $prefix  = $namespace . $options->getNamespaceSeparator();
             $prefixL = strlen($prefix);
             $pattern = '/^' . preg_quote($prefix, '/') . '(' . implode('|', $keysRegExp) . ')' . '$/';
         }
+
         $format  = APC_ITER_ALL ^ APC_ITER_VALUE ^ APC_ITER_TYPE ^ APC_ITER_REFCOUNT;
         $it      = new BaseApcIterator('user', $pattern, $format, 100, APC_LIST_ACTIVE);
         $result  = array();

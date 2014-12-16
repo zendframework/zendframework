@@ -616,13 +616,16 @@ class FactoryTest extends TestCase
      */
     public function testCanCreateInputFromProvider()
     {
+        /* @group $provider \Zend\InputFilter\InputProviderInterface|\PHPUnit_Framework_MockObject_MockObject */
         $provider = $this->getMock('Zend\InputFilter\InputProviderInterface', array('getInputSpecification'));
-        $provider->expects($this->any())->method('getInputSpecification')->will($this->returnValue(array(
-            'name' => 'foo',
-        )));
+
+        $provider
+            ->expects($this->any())
+            ->method('getInputSpecification')
+            ->will($this->returnValue(array('name' => 'foo')));
 
         $factory = new Factory();
-        $input = $factory->createInput($provider);
+        $input   = $factory->createInput($provider);
 
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
     }
@@ -632,22 +635,26 @@ class FactoryTest extends TestCase
      */
     public function testCanCreateInputFilterFromProvider()
     {
+        /* @group $provider \Zend\InputFilter\InputFilterProviderInterface|\PHPUnit_Framework_MockObject_MockObject */
         $provider = $this->getMock(
             'Zend\InputFilter\InputFilterProviderInterface',
             array('getInputFilterSpecification')
         );
-        $provider->expects($this->any())->method('getInputFilterSpecification')->will($this->returnValue(array(
-            'foo' => array(
-                'name'       => 'foo',
-                'required'   => false,
-            ),
-            'baz' => array(
-                'name'       => 'baz',
-                'required'   => true,
-            ),
-        )));
+        $provider
+            ->expects($this->any())
+            ->method('getInputFilterSpecification')
+            ->will($this->returnValue(array(
+                'foo' => array(
+                    'name'       => 'foo',
+                    'required'   => false,
+                ),
+                'baz' => array(
+                    'name'       => 'baz',
+                    'required'   => true,
+                ),
+            )));
 
-        $factory = new Factory();
+        $factory     = new Factory();
         $inputFilter = $factory->createInputFilter($provider);
 
         $this->assertInstanceOf('Zend\InputFilter\InputFilterInterface', $inputFilter);

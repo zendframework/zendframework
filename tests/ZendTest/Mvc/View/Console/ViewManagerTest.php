@@ -17,7 +17,6 @@ use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Service\ConsoleViewManagerFactory;
 use Zend\Mvc\Service\ServiceManagerConfig;
-use Zend\Mvc\View\Console\ViewManager as ConsoleViewManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Console\Request as ConsoleRequest;
 
@@ -28,11 +27,6 @@ use Zend\Console\Request as ConsoleRequest;
  */
 class ViewManagerTest extends TestCase
 {
-    /**
-     * @var ConsoleViewManager
-     */
-    private $viewManager;
-
     /**
      * @var ServiceManager
      */
@@ -52,7 +46,6 @@ class ViewManagerTest extends TestCase
     {
         $this->config = new ServiceManagerConfig();
         $this->services = new ServiceManager();
-        $this->viewManager = new ConsoleViewManager();
         $this->factory = new ConsoleViewManagerFactory();
     }
 
@@ -107,7 +100,9 @@ class ViewManagerTest extends TestCase
 
     /**
      * @dataProvider viewManagerConfiguration
+     *
      * @param array $config
+     *
      * @group 6866
      */
     public function testConsoleKeyWillOverrideDisplayExceptionAndDisplayNotFoundReason($config)

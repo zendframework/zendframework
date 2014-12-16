@@ -37,24 +37,22 @@ class AbstractHelperTest extends CommonTestCase
 
     public function testWillEncodeValueAttributeValuesCorrectly()
     {
-
-        $string = (new Escaper('iso-8859-1'))->escapeHtmlAttr('Título');
+        $escaper = new Escaper('iso-8859-1');
 
         $this->helper->setEncoding('iso-8859-1');
 
         $this->assertSame(
-            'data-value="' . $string . '"',
+            'data-value="' . $escaper->escapeHtmlAttr('Título') . '"',
             $this->helper->createAttributesString(array('data-value' => 'Título'))
         );
     }
 
     public function testWillNotEncodeValueAttributeValuesCorrectly()
     {
-
-        $string = (new Escaper('iso-8859-1'))->escapeHtmlAttr('Título');
+        $escaper = new Escaper('iso-8859-1');
 
         $this->assertNotSame(
-            'data-value="' . $string . '"',
+            'data-value="' . $escaper->escapeHtmlAttr('Título') . '"',
             $this->helper->createAttributesString(array('data-value' => 'Título'))
         );
     }

@@ -9,7 +9,6 @@
 
 namespace ZendTest\Stdlib\Hydrator\Aggregate;
 
-
 use ArrayObject;
 use PHPUnit_Framework_TestCase;
 use Zend\Stdlib\Hydrator\Aggregate\AggregateHydrator;

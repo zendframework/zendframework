@@ -9,7 +9,6 @@
 
 namespace ZendTest\View\Helper\Navigation;
 
-
 class AbstractHelperTest extends AbstractTest
 {
     /**

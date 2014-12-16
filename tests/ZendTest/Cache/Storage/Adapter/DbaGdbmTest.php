@@ -9,7 +9,6 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
-
 /**
  * @group      Zend_Cache
  */

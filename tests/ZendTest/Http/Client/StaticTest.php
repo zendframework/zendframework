@@ -322,7 +322,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidPostContentType()
     {
-        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+        if (!defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || !constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
             $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
         }
         $this->setExpectedException(
@@ -342,7 +342,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testSocketErrorException()
     {
-        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+        if (!defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || !constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
             $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
         }
         $this->setExpectedException(
@@ -381,7 +381,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testFormDataEncodingWithMultiArrayZF7038()
     {
-        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+        if (!defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || !constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
             $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
         }
         $this->_client->setAdapter('Zend\Http\Client\Adapter\Test');
@@ -427,7 +427,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultibyteRawPostDataZF2098()
     {
-        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+        if (!defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || !constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
             $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
         }
         $this->_client->setAdapter('Zend\Http\Client\Adapter\Test');
@@ -455,7 +455,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testOpenTempStreamWithValidFileDoesntThrowsException()
     {
-        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+        if (!defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || !constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
             $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
         }
         $url = 'http://www.example.com/';
@@ -478,7 +478,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testOpenTempStreamWithBogusFileClosesTheConnection()
     {
-        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+        if (!defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || !constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
             $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
         }
         $this->setExpectedException(
@@ -501,7 +501,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodedCookiesInRequestHeaders()
     {
-        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+        if (!defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || !constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
             $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
         }
         $this->_client->addCookie('foo', 'bar=baz');
@@ -518,7 +518,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testRawCookiesInRequestHeaders()
     {
-        if (!constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
+        if (!defined('TESTS_ZEND_HTTP_CLIENT_ONLINE') || !constant('TESTS_ZEND_HTTP_CLIENT_ONLINE')) {
             $this->markTestSkipped('Zend\Http\Client online tests are not enabled');
         }
         $this->_client->setOptions(array('encodecookies' => false));

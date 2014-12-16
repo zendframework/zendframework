@@ -13,16 +13,15 @@ use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
 use ReflectionObject;
 use stdClass;
-use Zend\Config\Config;
-use Zend\Http\Request;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router;
 use Zend\Mvc\Service\ServiceManagerConfig;
+use Zend\Mvc\Service\ServiceListenerFactory;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Uri\UriFactory;
-use ZendTest\Mvc\TestAsset\StubBootstrapListener;
+use Zend\Stdlib\ArrayUtils;
+
 
 class ApplicationTest extends TestCase
 {
@@ -38,58 +37,35 @@ class ApplicationTest extends TestCase
 
     public function setUp()
     {
-        $appConfig = array(
-            'modules' => array(),
-            'module_listener_options' => array(
-                'config_cache_enabled' => false,
-                'cache_dir'            => 'data/cache',
-                'module_paths'         => array(),
-            ),
-        );
-        $config = function ($s) {
-            return new Config(array(
-                /*
-                'controller' => array(
-                    'classes' => array(
-                        'bad'    => 'ZendTest\Mvc\Controller\TestAsset\BadController',
-                        'path'   => 'ZendTest\Mvc\TestAsset\PathController',
-                        'sample' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',
-                    ),
-                ),
-                 */
-            ));
-        };
-        $sm = $this->serviceManager = new ServiceManager(
-            new ServiceManagerConfig(array(
+        $serviceConfig = ArrayUtils::merge(
+            $this->readAttribute(new ServiceListenerFactory, 'defaultServiceConfig'),
+            array(
+                'allow_override' => true,
                 'invokables' => array(
-                    'DispatchListener' => 'Zend\Mvc\DispatchListener',
-                    'Request'          => 'Zend\Http\PhpEnvironment\Request',
-                    'Response'         => 'Zend\Http\PhpEnvironment\Response',
-                    'RouteListener'    => 'Zend\Mvc\RouteListener',
-                    'ViewManager'      => 'ZendTest\Mvc\TestAsset\MockViewManager',
+                    'Request'              => 'Zend\Http\PhpEnvironment\Request',
+                    'Response'             => 'Zend\Http\PhpEnvironment\Response',
+                    'ViewManager'          => 'ZendTest\Mvc\TestAsset\MockViewManager',
                     'SendResponseListener' => 'ZendTest\Mvc\TestAsset\MockSendResponseListener',
-                    'BootstrapListener' => 'ZendTest\Mvc\TestAsset\StubBootstrapListener',
-                ),
-                'factories' => array(
-                    'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
-                    'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
-                    'RoutePluginManager'      => 'Zend\Mvc\Service\RoutePluginManagerFactory',
-                    'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
-                    'HttpRouter'              => 'Zend\Mvc\Service\RouterFactory',
-                    'Config'                  => $config,
+                    'BootstrapListener'    => 'ZendTest\Mvc\TestAsset\StubBootstrapListener',
                 ),
                 'aliases' => array(
                     'Router'                 => 'HttpRouter',
-                    'Configuration'          => 'Config',
-                    'ControllerManager'      => 'ControllerLoader',
                 ),
-            ))
+                'services' => array(
+                    'Config' => array(),
+                    'ApplicationConfig' => array(
+                        'modules' => array(),
+                        'module_listener_options' => array(
+                            'config_cache_enabled' => false,
+                            'cache_dir'            => 'data/cache',
+                            'module_paths'         => array(),
+                        ),
+                    ),
+                ),
+            )
         );
-        $sm->setService('ApplicationConfig', $appConfig);
-        $sm->setFactory('ServiceListener', 'Zend\Mvc\Service\ServiceListenerFactory');
-        $sm->setAllowOverride(true);
-
-        $this->application = $sm->get('Application');
+        $this->serviceManager = new ServiceManager(new ServiceManagerConfig($serviceConfig));
+        $this->application = $this->serviceManager->get('Application');
     }
 
     public function getConfigListener()
@@ -231,8 +207,7 @@ class ApplicationTest extends TestCase
     public function setupPathController($addService = true)
     {
         $request = $this->serviceManager->get('Request');
-        $uri     = UriFactory::factory('http://example.local/path');
-        $request->setUri($uri);
+        $request->setUri('http://example.local/path');
 
         $router = $this->serviceManager->get('HttpRouter');
         $route  = Router\Http\Literal::factory(array(
@@ -254,8 +229,7 @@ class ApplicationTest extends TestCase
     public function setupActionController()
     {
         $request = $this->serviceManager->get('Request');
-        $uri     = UriFactory::factory('http://example.local/sample');
-        $request->setUri($uri);
+        $request->setUri('http://example.local/sample');
 
         $router = $this->serviceManager->get('HttpRouter');
         $route  = Router\Http\Literal::factory(array(
@@ -277,8 +251,7 @@ class ApplicationTest extends TestCase
     public function setupBadController($addService = true)
     {
         $request = $this->serviceManager->get('Request');
-        $uri     = UriFactory::factory('http://example.local/bad');
-        $request->setUri($uri);
+        $request->setUri('http://example.local/bad');
 
         $router = $this->serviceManager->get('HttpRouter');
         $route  = Router\Http\Literal::factory(array(

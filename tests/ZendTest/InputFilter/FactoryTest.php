@@ -611,9 +611,12 @@ class FactoryTest extends TestCase
         $this->assertTrue($inputFilter->has('baz'));
     }
 
+    /**
+     * @group 7010
+     */
     public function testCanCreateInputFromProvider()
     {
-        $provider = $this->getMock('\Zend\InputFilter\InputProviderInterface', array('getInputSpecification'));
+        $provider = $this->getMock('Zend\InputFilter\InputProviderInterface', array('getInputSpecification'));
         $provider->expects($this->any())->method('getInputSpecification')->will($this->returnValue(array(
             'name' => 'foo',
         )));
@@ -624,9 +627,15 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf('Zend\InputFilter\InputInterface', $input);
     }
 
+    /**
+     * @group 7010
+     */
     public function testCanCreateInputFilterFromProvider()
     {
-        $provider = $this->getMock('\Zend\InputFilter\InputFilterProviderInterface', array('getInputFilterSpecification'));
+        $provider = $this->getMock(
+            'Zend\InputFilter\InputFilterProviderInterface',
+            array('getInputFilterSpecification')
+        );
         $provider->expects($this->any())->method('getInputFilterSpecification')->will($this->returnValue(array(
             'foo' => array(
                 'name'       => 'foo',

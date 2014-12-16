@@ -760,4 +760,16 @@ class RequestTest extends TestCase
 
         $this->assertEquals('', $request->getBaseUrl());
     }
+
+    /**
+     * @group 6896
+     */
+    public function testHandlesUppercaseHttpsFlags()
+    {
+        $_SERVER['HTTPS'] = 'OFF';
+
+        $request = new Request();
+
+        $this->assertSame('http', $request->getUri()->getScheme());
+    }
 }

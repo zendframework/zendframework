@@ -196,7 +196,8 @@ EOT;
                                 ':file',
                                 ':line',
                                 ':stack',
-                            ), array(
+                            ),
+                            array(
                                 get_class($previousException),
                                 $previousException->getMessage(),
                                 $previousException->getCode(),

@@ -434,23 +434,18 @@ class FormRowTest extends TestCase
 
     public function testWrapFieldsetAroundCaptchaWithLabel()
     {
-        $captcha = CaptchaFactory::factory(array(
-            'class' => 'dumb'
-        ));
-
-        $label = 'baz';
-
-        $element = new Captcha('captcha', array(
-          'captcha' => $captcha,
-          'label' => $label
-        ));
-
-        $markup = $this->helper->render($element);
-
-        $this->assertRegexp('#^<fieldset><legend>' . $label . '<\/legend>'
-                            . 'Please type this word backwards <b>[a-z0-9]{8}<\/b>'
-                            . '<input name="captcha&\#x5B;id&\#x5D;" type="hidden" value="[a-z0-9]{32}"\/?>'
-                            . '<input name="captcha&\#x5B;input&\#x5D;" type="text"\/?>'
-                            . '<\/fieldset>$#', $markup);
+        $this->assertRegexp(
+            '#^<fieldset><legend>baz<\/legend>'
+            . 'Please type this word backwards <b>[a-z0-9]{8}<\/b>'
+            . '<input name="captcha&\#x5B;id&\#x5D;" type="hidden" value="[a-z0-9]{32}"\/?>'
+            . '<input name="captcha&\#x5B;input&\#x5D;" type="text"\/?>'
+            . '<\/fieldset>$#',
+            $this->helper->render(new Captcha('captcha', array(
+                'captcha' => CaptchaFactory::factory(array(
+                    'class' => 'dumb'
+                )),
+                'label' => 'baz'
+            )))
+        );
     }
 }

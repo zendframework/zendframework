@@ -407,6 +407,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->send($request);
     }
 
+    /**
+     * @group 6959
+     */
     public function testClientRequestMethod()
     {
         $request = new Request;

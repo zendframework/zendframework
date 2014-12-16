@@ -21,6 +21,11 @@ use Zend\Mvc\View\Console\ViewManager as ConsoleViewManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Console\Request as ConsoleRequest;
 
+/**
+ * Tests for {@see \Zend\Mvc\View\Console\ViewManager}
+ *
+ * @covers \Zend\Mvc\View\Console\ViewManager
+ */
 class ViewManagerTest extends TestCase
 {
 

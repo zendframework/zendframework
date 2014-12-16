@@ -80,6 +80,10 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @group 6726
+     * @group 6740
+     */
     public function testTableAsString()
     {
         $ti = 'fooTable.barSchema';
@@ -92,6 +96,10 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($ti, $table->getTable());
     }
 
+    /**
+     * @group 6726
+     * @group 6740
+     */
     public function testTableAsTableIdentifierObject()
     {
         $ti = new TableIdentifier('fooTable', 'barSchema');
@@ -104,6 +112,10 @@ class TableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($ti, $table->getTable());
     }
 
+    /**
+     * @group 6726
+     * @group 6740
+     */
     public function testTableAsAliasedTableIdentifierObject()
     {
         $aliasedTI = array('foo' => new TableIdentifier('fooTable', 'barSchema'));

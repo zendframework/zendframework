@@ -35,11 +35,12 @@ class ServiceListenerFactory implements FactoryInterface
      */
     protected $defaultServiceConfig = array(
         'invokables' => array(
-            'DispatchListener'     => 'Zend\Mvc\DispatchListener',
-            'RouteListener'        => 'Zend\Mvc\RouteListener',
-            'SendResponseListener' => 'Zend\Mvc\SendResponseListener',
-            'ViewJsonRenderer'     => 'Zend\View\Renderer\JsonRenderer',
-            'ViewFeedRenderer'     => 'Zend\View\Renderer\FeedRenderer',
+            'DispatchListener'       => 'Zend\Mvc\DispatchListener',
+            'RouteListener'          => 'Zend\Mvc\RouteListener',
+            'SendResponseListener'   => 'Zend\Mvc\SendResponseListener',
+            'InjectTemplateListener' => 'Zend\Mvc\View\Http\InjectTemplateListener',
+            'ViewJsonRenderer'       => 'Zend\View\Renderer\JsonRenderer',
+            'ViewFeedRenderer'       => 'Zend\View\Renderer\FeedRenderer',
         ),
         'factories' => array(
             'Application'                    => 'Zend\Mvc\Service\ApplicationFactory',
@@ -79,16 +80,17 @@ class ServiceListenerFactory implements FactoryInterface
             'ViewPrefixPathStackResolver'    => 'Zend\Mvc\Service\ViewPrefixPathStackResolverFactory',
         ),
         'aliases' => array(
-            'Configuration'                          => 'Config',
-            'Console'                                => 'ConsoleAdapter',
-            'Di'                                     => 'DependencyInjector',
-            'Zend\Di\LocatorInterface'               => 'DependencyInjector',
-            'Zend\Mvc\Controller\PluginManager'      => 'ControllerPluginManager',
-            'Zend\View\Resolver\TemplateMapResolver' => 'ViewTemplateMapResolver',
-            'Zend\View\Resolver\TemplatePathStack'   => 'ViewTemplatePathStack',
-            'Zend\View\Resolver\AggregateResolver'   => 'ViewResolver',
-            'Zend\View\Resolver\ResolverInterface'   => 'ViewResolver',
-            'ControllerManager'                      => 'ControllerLoader'
+            'Configuration'                             => 'Config',
+            'Console'                                   => 'ConsoleAdapter',
+            'Di'                                        => 'DependencyInjector',
+            'Zend\Di\LocatorInterface'                  => 'DependencyInjector',
+            'Zend\Mvc\Controller\PluginManager'         => 'ControllerPluginManager',
+            'Zend\Mvc\View\Http\InjectTemplateListener' => 'InjectTemplateListener',
+            'Zend\View\Resolver\TemplateMapResolver'    => 'ViewTemplateMapResolver',
+            'Zend\View\Resolver\TemplatePathStack'      => 'ViewTemplatePathStack',
+            'Zend\View\Resolver\AggregateResolver'      => 'ViewResolver',
+            'Zend\View\Resolver\ResolverInterface'      => 'ViewResolver',
+            'ControllerManager'                         => 'ControllerLoader',
         ),
         'abstract_factories' => array(
             'Zend\Form\FormAbstractServiceFactory',

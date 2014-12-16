@@ -332,8 +332,8 @@ class ViewManager extends AbstractListenerAggregate
 
     public function getInjectTemplateListener()
     {
-        $listener = new InjectTemplateListener();
-        if (isset($this->config['controller_map'])) {
+        $listener = $this->services->get('InjectTemplateListener');
+        if (isset($this->config['controller_map']) && method_exists($listener, 'setControllerMap')) {
             $listener->setControllerMap($this->config['controller_map']);
         }
         return $listener;

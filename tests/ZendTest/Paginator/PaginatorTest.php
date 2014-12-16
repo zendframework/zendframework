@@ -473,7 +473,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
         $paginator = new Paginator\Paginator($dbSelect);
         $this->assertInstanceOf('ArrayIterator', $paginator->getItemsByPage(1));
-        
+
         $paginator = new Paginator\Paginator(new Paginator\Adapter\Iterator($resultSet->getDataSource()));
 
         foreach ($paginator as $item) {
@@ -858,7 +858,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     {
         $paginator = new Paginator\Paginator(new Adapter\ArrayAdapter(array()));
         $paginator->setCurrentPageNumber(1);
-        
+
         $expected = new stdClass();
         $expected->pageCount        = 0;
         $expected->itemCountPerPage = 10;
@@ -872,9 +872,9 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $expected->totalItemCount   = 0;
         $expected->firstItemNumber  = 0;
         $expected->lastItemNumber   = 0;
-        
+
         $actual = $paginator->getPages();
-        
+
         $this->assertEquals($expected, $actual);
     }
 }

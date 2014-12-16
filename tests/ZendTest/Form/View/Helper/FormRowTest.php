@@ -19,7 +19,14 @@ use Zend\View\Renderer\PhpRenderer;
 
 class FormRowTest extends TestCase
 {
+    /**
+     * @var FormRowHelper
+     */
     protected $helper;
+
+    /**
+     * @var PhpRenderer
+     */
     protected $renderer;
 
     public function setUp()

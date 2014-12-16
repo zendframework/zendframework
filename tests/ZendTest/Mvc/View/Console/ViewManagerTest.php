@@ -44,6 +44,11 @@ class ViewManagerTest extends TestCase
      */
     protected $config;
 
+    /**
+     * @var ConsoleViewManagerFactory
+     */
+    private $factory;
+
     public function setUp()
     {
         $this->config = new ServiceManagerConfig();
@@ -116,7 +121,6 @@ class ViewManagerTest extends TestCase
         $this->services->setService('EventManager', $eventManager);
         $this->services->setService('Response', new ConsoleResponse());
 
-        /** @var $manager ViewManager */
         $manager = $this->factory->createService($this->services);
 
         $application = new Application($config, $this->services);
@@ -142,7 +146,6 @@ class ViewManagerTest extends TestCase
         $this->services->setService('EventManager', $eventManager);
         $this->services->setService('Response', new ConsoleResponse());
 
-        /** @var $manager ViewManager */
         $manager = $this->factory->createService($this->services);
 
         $application = new Application(array(), $this->services);

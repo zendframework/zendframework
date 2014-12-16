@@ -145,13 +145,17 @@ class Factory
     /**
      * Factory for input objects
      *
-     * @param  array|Traversable $inputSpecification
+     * @param  array|Traversable|InputProviderInterface $inputSpecification
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      * @return InputInterface|InputFilterInterface
      */
     public function createInput($inputSpecification)
     {
+        if ($inputSpecification instanceof InputProviderInterface) {
+            $inputSpecification = $inputSpecification->getInputSpecification();
+        }
+
         if (!is_array($inputSpecification) && !$inputSpecification instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array or Traversable; received "%s"',
@@ -269,13 +273,17 @@ class Factory
     /**
      * Factory for input filters
      *
-     * @param  array|Traversable $inputFilterSpecification
+     * @param  array|Traversable|InputFilterProviderInterface $inputFilterSpecification
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      * @return InputFilterInterface
      */
     public function createInputFilter($inputFilterSpecification)
     {
+        if ($inputFilterSpecification instanceof InputFilterProviderInterface) {
+            $inputFilterSpecification = $inputFilterSpecification->getInputFilterSpecification();
+        }
+
         if (!is_array($inputFilterSpecification) && !$inputFilterSpecification instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array or Traversable; received "%s"',

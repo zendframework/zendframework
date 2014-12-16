@@ -25,15 +25,6 @@ class Expression extends BaseExpression implements PredicateInterface
             $this->setExpression($expression);
         }
 
-        if (is_array($valueParameter)) {
-            $this->setParameters($valueParameter);
-        } else {
-            $argNum = func_num_args();
-            $parameters = array();
-            for ($i = 1; $i < $argNum; $i++) {
-                $parameters[] = func_get_arg($i);
-            }
-            $this->setParameters($parameters);
-        }
+        $this->setParameters(is_array($valueParameter) ? $valueParameter : array_slice(func_get_args(), 1));
     }
 }

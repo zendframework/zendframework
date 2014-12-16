@@ -869,7 +869,7 @@ class Di implements DependencyInjectionInterface
                     // plus it cannot be resolve, and no value exist, bail out
                     throw new Exception\MissingPropertyException(sprintf(
                         'Missing %s for parameter ' . $name . ' for ' . $class . '::' . $method,
-                        (($value[0] === null) ? 'value' : 'instance/object' )
+                        (($value[0] === null) ? 'value' : 'instance/object')
                     ));
                 } else {
                     return false;

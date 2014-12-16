@@ -34,7 +34,7 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 
         $date = DateTime::createFromISO8601($time);
 
-        $this->assertEquals( \DateTime::createFromFormat(\DateTime::ISO8601, $time), $date);
+        $this->assertEquals(\DateTime::createFromFormat(\DateTime::ISO8601, $time), $date);
     }
 
     public function testCreatesIS08601WithFractionalSeconds()
@@ -45,6 +45,6 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
 
         $standard = \DateTime::createFromFormat('Y-m-d\TH:i:s.uO', $time);
 
-        $this->assertEquals( $standard, $date);
+        $this->assertEquals($standard, $date);
     }
 }

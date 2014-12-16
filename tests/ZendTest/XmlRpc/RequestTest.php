@@ -258,14 +258,14 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         $result = $sx->xpath('//methodName');
         $count = 0;
-        while (list( , $node) = each($result)) {
+        while (list(, $node) = each($result)) {
             ++$count;
         }
         $this->assertEquals(1, $count, $xml);
 
         $result = $sx->xpath('//params');
         $count = 0;
-        while (list( , $node) = each($result)) {
+        while (list(, $node) = each($result)) {
             ++$count;
         }
         $this->assertEquals(1, $count, $xml);

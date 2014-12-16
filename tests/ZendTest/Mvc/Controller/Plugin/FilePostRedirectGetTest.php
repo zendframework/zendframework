@@ -320,11 +320,11 @@ class FilePostRedirectGetTest extends TestCase
         ));
         $form->add($collection);
         $this->controller->dispatch($this->request, $this->response);
-        $prgResult = $this->controller->fileprg( $form);
+        $prgResult = $this->controller->fileprg($form);
 
         $this->assertEquals($params, $prgResult);
         $this->assertCount(count($params['links']),  $form->get('links')->getFieldsets());
-        $this->assertCount(count( $form->get('links')->getFieldsets()), $form->getInputFilter()->get('links')->getInputs());
+        $this->assertCount(count($form->get('links')->getFieldsets()), $form->getInputFilter()->get('links')->getInputs());
     }
 
     public function testCollectionInputFilterIsInitializedBeforePluginRetrievesIt()

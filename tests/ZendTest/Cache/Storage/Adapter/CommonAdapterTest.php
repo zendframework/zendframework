@@ -476,20 +476,20 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     {
         // write "key" to default namespace
         $this->_options->setNamespace('defaultns1');
-        $this->assertTrue( $this->_storage->setItem('key', 'defaultns1') );
+        $this->assertTrue($this->_storage->setItem('key', 'defaultns1'));
 
         // write "key" to an other default namespace
         $this->_options->setNamespace('defaultns2');
-        $this->assertTrue( $this->_storage->setItem('key', 'defaultns2') );
+        $this->assertTrue($this->_storage->setItem('key', 'defaultns2'));
 
         // test value of defaultns2
         $this->assertTrue($this->_storage->hasItem('key'));
-        $this->assertEquals('defaultns2', $this->_storage->getItem('key') );
+        $this->assertEquals('defaultns2', $this->_storage->getItem('key'));
 
         // test value of defaultns1
         $this->_options->setNamespace('defaultns1');
         $this->assertTrue($this->_storage->hasItem('key'));
-        $this->assertEquals('defaultns1', $this->_storage->getItem('key') );
+        $this->assertEquals('defaultns1', $this->_storage->getItem('key'));
 
         // remove item of defaultns1
         $this->_options->setNamespace('defaultns1');

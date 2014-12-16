@@ -31,7 +31,7 @@ class ViewManagerTest extends TestCase
     /**
      * @var ConsoleViewManager
      */
-    private $view_manager;
+    private $viewManager;
 
     /**
      * @var ServiceManager
@@ -52,7 +52,7 @@ class ViewManagerTest extends TestCase
     {
         $this->config = new ServiceManagerConfig();
         $this->services = new ServiceManager();
-        $this->view_manager = new ConsoleViewManager();
+        $this->viewManager = new ConsoleViewManager();
         $this->factory = new ConsoleViewManagerFactory();
     }
 

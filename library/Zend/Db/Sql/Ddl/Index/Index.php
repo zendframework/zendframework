@@ -54,7 +54,7 @@ class Index extends AbstractIndex
     {
         $colCount     = count($this->columns);
         $values       = array();
-        $values[]     = $this->namee ?: '';
+        $values[]     = $this->name ?: '';
         $newSpecTypes = array(self::TYPE_IDENTIFIER);
         $newSpecParts = array();
 

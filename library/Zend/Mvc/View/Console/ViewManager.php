@@ -25,25 +25,16 @@ class ViewManager extends BaseViewManager
      * algorithms, as well as to ensure we pick up the Console variants
      * of several listeners and strategies.
      *
-     * @param  $event
+     * @param  \Zend\Mvc\MvcEvent $event
      * @return void
      */
     public function onBootstrap($event)
     {
-        $application  = $event->getApplication();
-        $services     = $application->getServiceManager();
-        $config       = $services->get('Config');
-        $events       = $application->getEventManager();
-        $sharedEvents = $events->getSharedManager();
-
-        if (isset($config['console']['view_manager']) && (is_array($config['console']['view_manager']) || $config['console']['view_manager'] instanceof ArrayAccess)) {
-            $this->config =  $config['console']['view_manager']; /** override with the context, otherwise use the standard definition */
-        } else if (isset($config['view_manager']) && (is_array($config['view_manager']) || $config['view_manager'] instanceof ArrayAccess)) {
-            $this->config = $config['view_manager'];
-        } else {
-            $this->config = array();
-        }
-
+        $application    = $event->getApplication();
+        $services       = $application->getServiceManager();
+        $events         = $application->getEventManager();
+        $sharedEvents   = $events->getSharedManager();
+        $this->config   = $this->loadConfig($services->get('Config'));
         $this->services = $services;
         $this->event    = $event;
 
@@ -152,5 +143,28 @@ class ViewManager extends BaseViewManager
         $this->services->setAlias('404Strategy', 'RouteNotFoundStrategy');
 
         return $this->routeNotFoundStrategy;
+    }
+
+    /**
+     * Extract view manager configuration from the application's configuration
+     *
+     * @param array|ArrayAccess $configService
+     *
+     * @return array
+     */
+    private function loadConfig($configService)
+    {
+        $config = array();
+
+        // override when console config is provided, otherwise use the standard definition
+        if (isset($configService['console']['view_manager'])) {
+            $config = $configService['console']['view_manager'];
+        } elseif (isset($configService['view_manager'])) {
+            $config = $configService['view_manager'];
+        }
+
+        return ($config instanceof ArrayAccess || is_array($config))
+            ? $config
+            : array();
     }
 }

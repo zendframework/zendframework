@@ -100,7 +100,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
             throw new Exception\RuntimeException('This table does not have an Adapter setup');
         }
 
-        if (!is_string($this->table) && !$this->table instanceof TableIdentifier) {
+        if (!is_string($this->table) && !$this->table instanceof TableIdentifier && !is_array($this->table)) {
             throw new Exception\RuntimeException('This table object does not have a valid table set.');
         }
 
@@ -481,6 +481,14 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         $this->sql = clone $this->sql;
         if (is_object($this->table)) {
             $this->table = clone $this->table;
+        } elseif (
+            is_array($this->table)
+            && count($this->table) == 1
+            && is_object(reset($this->table))
+        ) {
+            foreach ($this->table as $alias => &$tableObject) {
+                $tableObject = clone $tableObject;
+            }
         }
     }
 }

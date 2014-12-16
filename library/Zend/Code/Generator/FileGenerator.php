@@ -454,8 +454,12 @@ class FileGenerator extends AbstractGenerator
         if ($namespace) {
             $namespace = sprintf('namespace %s;%s', $namespace, str_repeat(self::LINE_FEED, 2));
             if (preg_match('#/\* Zend_Code_Generator_FileGenerator-NamespaceMarker \*/#m', $output)) {
-                $output = preg_replace('#/\* Zend_Code_Generator_FileGenerator-NamespaceMarker \*/#m', $namespace,
-                    $output, 1);
+                $output = preg_replace(
+                    '#/\* Zend_Code_Generator_FileGenerator-NamespaceMarker \*/#m',
+                    $namespace,
+                    $output,
+                    1
+                );
             } else {
                 $output .= $namespace;
             }
@@ -505,8 +509,12 @@ class FileGenerator extends AbstractGenerator
             $useOutput .= self::LINE_FEED;
 
             if (preg_match('#/\* Zend_Code_Generator_FileGenerator-UseMarker \*/#m', $output)) {
-                $output = preg_replace('#/\* Zend_Code_Generator_FileGenerator-UseMarker \*/#m', $useOutput,
-                    $output, 1);
+                $output = preg_replace(
+                    '#/\* Zend_Code_Generator_FileGenerator-UseMarker \*/#m',
+                    $useOutput,
+                    $output,
+                    1
+                );
             } else {
                 $output .= $useOutput;
             }

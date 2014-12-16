@@ -33,7 +33,7 @@ class MutableCreationOptionsTraitTest extends TestCase
 
     public function testCreationOptionsInitiallyIsArray()
     {
-        $this->assertAttributeEquals(Array(), 'creationOptions', $this->stub);
+        $this->assertAttributeEquals(array(), 'creationOptions', $this->stub);
     }
 
     public function testTraitProvidesSetter()

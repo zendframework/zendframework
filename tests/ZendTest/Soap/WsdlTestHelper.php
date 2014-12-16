@@ -52,7 +52,7 @@ class WsdlTestHelper extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (empty($this->strategy) OR !($this->strategy instanceof ComplexTypeStrategyInterface)) {
+        if (empty($this->strategy) or !($this->strategy instanceof ComplexTypeStrategyInterface)) {
             $this->strategy = new Wsdl\ComplexTypeStrategy\DefaultComplexType();
         }
 

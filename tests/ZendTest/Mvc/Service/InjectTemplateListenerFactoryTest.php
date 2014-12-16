@@ -13,6 +13,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Mvc\View\Http\InjectTemplateListener;
 use Zend\Mvc\Service\InjectTemplateListenerFactory;
+use ArrayObject;
 
 class InjectTemplateListenerFactoryTest extends TestCase
 {
@@ -39,6 +40,24 @@ class InjectTemplateListenerFactoryTest extends TestCase
                 ),
             ),
         ));
+
+        $listener = $this->factory->createService($this->services);
+
+        $this->assertEquals('some/module', $listener->mapController("SomeModule"));
+    }
+
+    public function testFactoryCanSetControllerMapViaArrayAccessVM()
+    {
+        $config = array(
+            'view_manager' => new ArrayObject(array(
+                'controller_map' => array(
+                    // must be an array due to type hinting on setControllerMap()
+                    'SomeModule' => 'some/module',
+                ),
+            ))
+        );
+
+        $this->services->setService('Config', $config);
 
         $listener = $this->factory->createService($this->services);
 

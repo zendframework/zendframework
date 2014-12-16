@@ -32,6 +32,7 @@ $config->fixers(
         'braces',
         'elseif',
         'empty_return',
+        'encoding',
         'eof_ending',
         'function_call_space',
         'function_declaration',

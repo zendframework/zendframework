@@ -261,7 +261,7 @@ class HttpTest extends TestCase
         $uri = new HttpUri('http://www.example.com/');
 
         $uri->setUserInfo('user:pass');
-        
+
         $this->assertSame('user', $uri->getUser());
         $this->assertSame('pass', $uri->getPassword());
     }
@@ -273,7 +273,7 @@ class HttpTest extends TestCase
     {
         $uri = new HttpUri('http://www.example.com/');
         $uri->setUserInfo('user');
-        
+
         $this->assertSame('user', $uri->getUser());
         $this->assertNull($uri->getPassword());
     }
@@ -286,7 +286,7 @@ class HttpTest extends TestCase
         $uri = new HttpUri('http://www.example.com/');
         $uri->setUser('user');
         $uri->setPassword('pass');
-        
+
         $this->assertSame('user', $uri->getUser());
         $this->assertSame('pass', $uri->getPassword());
         $this->assertSame('user:pass', $uri->getUserInfo());

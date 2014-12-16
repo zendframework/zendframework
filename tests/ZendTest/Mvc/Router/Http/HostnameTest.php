@@ -240,7 +240,7 @@ class HostnameTest extends TestCase
             )
         );
     }
-    
+
     /**
      * @group zf5656
      */

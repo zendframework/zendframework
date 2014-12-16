@@ -446,7 +446,7 @@ class ServiceManager implements ServiceLocatorInterface
         if (!isset($this->shared[$cName])) {
             return $this->shareByDefault();
         }
-        
+
         return $this->shared[$cName];
     }
 

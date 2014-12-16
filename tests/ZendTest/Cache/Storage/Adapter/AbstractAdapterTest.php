@@ -387,7 +387,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
             //    name, internalName, args, internalName, returnValue
             array('hasItem', 'internalGetItem', array('k'), 'v'),
             array('hasItems', 'internalHasItems', array(array('k1', 'k2')), array('v1', 'v2')),
-            
+
             array('getItem', 'internalGetItem', array('k'), 'v'),
             array('getItems', 'internalGetItems', array(array('k1', 'k2')), array('k1' => 'v1', 'k2' => 'v2')),
 

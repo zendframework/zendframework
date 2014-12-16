@@ -1140,7 +1140,7 @@ class CollectionTest extends TestCase
         $collection->setObject($arrayCollection);
         $this->assertEquals(3, $collection->getCount());
     }
-    
+
     /**
      * @group zf6263
      * @group zf6518
@@ -1159,7 +1159,7 @@ class CollectionTest extends TestCase
         $object = new \ArrayObject(array('text' => array('Foo', 'Bar')));
         $form->bind($object);
         $this->assertTrue($form->isValid());
-        
+
         $result = $form->getData();
         $this->assertInstanceOf('ArrayAccess', $result);
         $this->assertArrayHasKey('text', $result);
@@ -1169,7 +1169,7 @@ class CollectionTest extends TestCase
         $this->assertArrayHasKey(1, $result['text']);
         $this->assertEquals('Bar', $result['text'][1]);
     }
-    
+
     /**
      * Unit test to ensure behavior of extract() method is unaffected by refactor
      *
@@ -1194,13 +1194,13 @@ class CollectionTest extends TestCase
                 'count' => 2
             ),
         ));
-        
+
         $model = new \stdClass();
         $model->collection = array(new \ArrayObject(array('test' => 'bar')), new \stdClass());
-        
+
         $form->bind($model);
         $this->assertTrue($form->isValid());
-        
+
         $result = $form->getData();
         $this->assertInstanceOf('stdClass', $result);
         $this->assertObjectHasAttribute('collection', $result);

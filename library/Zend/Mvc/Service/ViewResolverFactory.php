@@ -42,7 +42,7 @@ class ViewResolverFactory implements FactoryInterface
             ->attach(new ViewResolver\RelativeFallbackResolver($mapResolver))
             ->attach(new ViewResolver\RelativeFallbackResolver($pathResolver))
             ->attach(new ViewResolver\RelativeFallbackResolver($prefixPathStackResolver));
-        
+
         return $resolver;
     }
 }

@@ -50,6 +50,7 @@ $config->fixers(
         'trailing_spaces',
         'unused_use',
         'visibility',
+        'whitespacy_lines',
     )
 );
 $config->finder($finder);

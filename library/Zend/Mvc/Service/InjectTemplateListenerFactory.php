@@ -24,10 +24,10 @@ class InjectTemplateListenerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $config = $serviceLocator->get('Config');
-        if (isset($config['view_manager'])
-            && (is_array($config['view_manager']) || $config['view_manager'] instanceof ArrayAccess)) {
-            $config = $config['view_manager'];
+        $slConfig = $serviceLocator->get('Config');
+        if (isset($slConfig['view_manager'])
+            && (is_array($slConfig['view_manager']) || $slConfig['view_manager'] instanceof ArrayAccess)) {
+            $config = $slConfig['view_manager'];
         } else {
             $config = array();
         }

@@ -396,7 +396,7 @@ class Predicate extends PredicateSet
     {
         $this->addPredicate(
             $predicate,
-            ($this->nextPredicateCombineOperator) ?: $this->defaultCombination
+            $this->nextPredicateCombineOperator ?: $this->defaultCombination
         );
         $this->nextPredicateCombineOperator = null;
 

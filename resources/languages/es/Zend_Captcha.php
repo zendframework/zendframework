@@ -12,12 +12,12 @@
  */
 return array(
     // Zend\Captcha\ReCaptcha
-    "Missing captcha fields" => "Faltan campos de captcha",
-    "Failed to validate captcha" => "La validación de captcha falló",
-    "Captcha value is wrong: %value%" => "El valor de captcha es erróneo: %value%",
+    "Missing captcha fields" => "Faltan campos del captcha",
+    "Failed to validate captcha" => "La validación del captcha falló",
+    "Captcha value is wrong: %value%" => "El valor del captcha es erróneo: %value%",
 
     // Zend\Captcha\Word
-    "Empty captcha value" => "Valor de captcha vacío",
-    "Captcha ID field is missing" => "Falta el campo ID de captcha",
-    "Captcha value is wrong" => "El valor de captcha es erróneo",
+    "Empty captcha value" => "Valor del captcha vacío",
+    "Captcha ID field is missing" => "Falta ell campo ID de captcha",
+    "Captcha value is wrong" => "El valor del captcha es erróneo",
 );

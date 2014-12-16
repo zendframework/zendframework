@@ -34,7 +34,7 @@ class InjectTemplateListenerFactory implements FactoryInterface
 
         $listener = new InjectTemplateListener();
 
-        if (isset($config['controller_map']) && method_exists($listener, 'setControllerMap')) {
+        if (isset($config['controller_map'])) {
             $listener->setControllerMap($config['controller_map']);
         }
 

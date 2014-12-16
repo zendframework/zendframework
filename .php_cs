@@ -43,6 +43,7 @@ $config->fixers(
         'psr0',
         'remove_lines_between_uses',
         'short_tag',
+        'standardize_not_equal',
         'trailing_spaces',
         'unused_use',
         'visibility',

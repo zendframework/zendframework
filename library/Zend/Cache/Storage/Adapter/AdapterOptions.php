@@ -25,7 +25,7 @@ class AdapterOptions extends AbstractOptions
     /**
      * The adapter using these options
      *
-     * @var null|Filesystem
+     * @var null|StorageInterface
      */
     protected $adapter;
 

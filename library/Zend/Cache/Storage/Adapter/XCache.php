@@ -45,7 +45,7 @@ class XCache extends AbstractAdapter implements
     /**
      * Constructor
      *
-     * @param  null|array|Traversable|ApcOptions $options
+     * @param  null|array|Traversable|XCacheOptions $options
      * @throws Exception\ExceptionInterface
      */
     public function __construct($options = null)
@@ -74,7 +74,7 @@ class XCache extends AbstractAdapter implements
     /**
      * Set options.
      *
-     * @param  array|Traversable|ApcOptions $options
+     * @param  array|Traversable|XCacheOptions $options
      * @return XCache
      * @see    getOptions()
      */

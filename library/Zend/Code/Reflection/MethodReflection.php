@@ -211,7 +211,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      * @param bool $bodyOnly
      * @return string
      */
-    protected function extractMethodContents($bodyOnly=false)
+    protected function extractMethodContents($bodyOnly = false)
     {
         $fileName = $this->getDeclaringClass()->getFileName();
 
@@ -438,7 +438,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     {
         $isValid = false;
         $count = count($haystack);
-        for ($i = $position+1;$i < $count; $i++) {
+        for ($i = $position+1; $i < $count; $i++) {
             $tokenType = (is_array($haystack[$i])) ? token_name($haystack[$i][0]) : $haystack[$i];
             $tokenValue = (is_array($haystack[$i])) ? $haystack[$i][1] : $haystack[$i];
 

@@ -66,13 +66,28 @@ class SelectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox unit test: Test getRawState() returns information populated via from()
+     * @testdox unit test: Test getRawState() returns information populated via quantifier()
      * @covers Zend\Db\Sql\Select::getRawState
      * @depends testQuantifier
      */
     public function testGetRawStateViaQuantifier(Select $select)
     {
         $this->assertEquals(Select::QUANTIFIER_DISTINCT, $select->getRawState('quantifier'));
+    }
+
+    /**
+     * @testdox unit test: Test quantifier() accepts expression
+     * @covers Zend\Db\Sql\Select::quantifier
+     */
+    public function testQuantifierParameterExpressionInterface()
+    {
+        $expr = $this->getMock('Zend\Db\Sql\ExpressionInterface');
+        $select = new Select;
+        $select->quantifier($expr);
+        $this->assertSame(
+            $expr,
+            $select->getRawState(Select::QUANTIFIER)
+        );
     }
 
     /**
@@ -361,7 +376,25 @@ class SelectTest extends \PHPUnit_Framework_TestCase
 
         $select = new Select;
         $select->order(new Expression('RAND()'));
-        $this->assertEquals('RAND()', current($select->getRawState('order'))->getExpression());
+        $sr = new \ReflectionObject($select);
+        $method = $sr->getMethod('processOrder');
+        $method->setAccessible(true);
+        $this->assertEquals(
+            array(array(array('RAND()'))),
+            $method->invokeArgs($select, array(new TrustingSql92Platform()))
+        );
+
+        $select = new Select;
+        $select->order(
+            $this->getMock('Zend\Db\Sql\Predicate\Operator', null, array('rating', '<', '10'))
+        );
+        $sr = new \ReflectionObject($select);
+        $method = $sr->getMethod('processOrder');
+        $method->setAccessible(true);
+        $this->assertEquals(
+            array(array(array('"rating" < \'10\''))),
+            $method->invokeArgs($select, array(new TrustingSql92Platform()))
+        );
     }
 
     /**

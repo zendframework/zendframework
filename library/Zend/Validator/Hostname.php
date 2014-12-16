@@ -1202,6 +1202,7 @@ class Hostname extends AbstractValidator
                 $this->error(self::IP_ADDRESS_NOT_ALLOWED);
                 return false;
             }
+
             return true;
         }
 
@@ -1290,7 +1291,10 @@ class Hostname extends AbstractValidator
 
                         // Check dash (-) does not start, end or appear in 3rd and 4th positions
                         if ($utf8StrWrapper->strpos($domainPart, '-') === 0
-                            || ($utf8StrWrapper->strlen($domainPart) > 2 && $utf8StrWrapper->strpos($domainPart, '-', 2) == 2 && $utf8StrWrapper->strpos($domainPart, '-', 3) == 3)
+                            || ($utf8StrWrapper->strlen($domainPart) > 2
+                                && $utf8StrWrapper->strpos($domainPart, '-', 2) == 2
+                                && $utf8StrWrapper->strpos($domainPart, '-', 3) == 3
+                            )
                             || ($utf8StrWrapper->strpos($domainPart, '-') === ($utf8StrWrapper->strlen($domainPart) - 1))
                         ) {
                             $this->error(self::INVALID_DASH);
@@ -1352,6 +1356,7 @@ class Hostname extends AbstractValidator
             if (preg_match("/^([a-zA-Z0-9-._~!$&\'()*+,;=]|%[[:xdigit:]]{2}){1,254}$/i", $value)) {
                 return true;
             }
+
             $this->error(self::INVALID_URI);
         }
 

@@ -222,33 +222,28 @@ class ArrayInputTest extends InputTest
 
     public function emptyValuesProvider()
     {
-        // Dummy provider - tests are inherited but skipped
-        return array(array(null));
-    }
-
-    /**
-     * @dataProvider emptyValuesProvider
-     */
-    public function testValidatorSkippedIfValueIsEmptyAndAllowedAndNotContinue($emptyValue)
-    {
-        $this->markTestSkipped('allow_empty ignored by ArrayInput');
-    }
-
-    /**
-     * @dataProvider emptyValuesProvider
-     */
-    public function testValidatorInvokedIfValueIsEmptyAndAllowedAndContinue($emptyValue)
-    {
-        $this->markTestSkipped('allow_empty ignored by ArrayInput');
+        return array(
+            array(array(null)),
+            array(array('')),
+            array(array(array())),
+        );
     }
 
     public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()
     {
-        $this->markTestSkipped('allow_empty ignored by ArrayInput');
+        $this->input->setValue(array('nonempty'))
+                    ->getFilterChain()->attach(new Filter\Callback(function() {
+                        return '';
+                    }));
+        $this->assertFalse($this->input->isValid());
     }
 
     public function testNotAllowEmptyWithFilterConvertsEmptyToNonEmptyIsValid()
     {
-        $this->markTestSkipped('allow_empty ignored by ArrayInput');
+        $this->input->setValue(array(''))
+                    ->getFilterChain()->attach(new Filter\Callback(function() {
+                        return 'nonempty';
+                    }));
+        $this->assertTrue($this->input->isValid());
     }
 }

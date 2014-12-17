@@ -55,6 +55,11 @@ class ArrayInput extends Input
         $values    = $this->getValue();
         $result    = true;
         foreach ($values as $value) {
+            $empty = ($value === null || $value === '' || $value === array());
+            if ($empty && $this->allowEmpty() && !$this->continueIfEmpty()) {
+                $result = true;
+                continue;
+            }
             $result = $validator->isValid($value, $context);
             if (!$result) {
                 if ($this->hasFallback()) {

@@ -405,6 +405,23 @@ class FileInputTest extends InputTest
         $this->assertFalse($this->input->isEmptyFile($rawValue));
     }
 
+    public function emptyValuesProvider()
+    {
+        // Provide empty values specific for file input
+        return array(
+            array('file'),
+            array(array()),
+            array(array(
+                'tmp_name' => '',
+                'error' => \UPLOAD_ERR_NO_FILE,
+            )),
+            array(array(array(
+                'tmp_name' => 'foo',
+                'error'    => \UPLOAD_ERR_NO_FILE
+            ))),
+        );
+    }
+
     /**
      * @dataProvider emptyValuesProvider
      */

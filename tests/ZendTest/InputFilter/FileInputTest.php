@@ -422,14 +422,6 @@ class FileInputTest extends InputTest
         );
     }
 
-    /**
-     * @dataProvider emptyValuesProvider
-     */
-    public function testValidatorInvokedIfValueIsEmptyAndAllowedAndContinue($emptyValue)
-    {
-        $this->markTestSkipped('continue_if_empty not implemented for FileInput');
-    }
-
     public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()
     {
         $this->markTestSkipped('does not apply to FileInput');

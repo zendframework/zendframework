@@ -50,7 +50,9 @@ class ArrayInput extends Input
      */
     public function isValid($context = null)
     {
-        $this->injectNotEmptyValidator();
+        if (!$this->continueIfEmpty() && !$this->allowEmpty()) {
+            $this->injectNotEmptyValidator();
+        }
         $validator = $this->getValidatorChain();
         $values    = $this->getValue();
         $result    = true;

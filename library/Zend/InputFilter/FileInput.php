@@ -91,7 +91,7 @@ class FileInput extends Input
      */
     public function isEmptyFile($rawValue)
     {
-        if (!is_array($rawValue) || $rawValue == array()) {
+        if (!is_array($rawValue)) {
             return true;
         }
 

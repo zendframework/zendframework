@@ -305,11 +305,13 @@ class FileInputTest extends InputTest
     {
         $this->input->setAllowEmpty(true);
         $this->assertTrue($this->input->isValid(''));
+        $this->input->setAllowEmpty(false);
+        $this->assertFalse($this->input->isValid(''));
     }
 
     public function testNotEmptyValidatorAddedWhenIsValidIsCalled()
     {
-        $this->assertFalse($this->input->isValid(''));
+        $this->markTestSkipped('Test is not enabled in FileInputTest');
     }
 
     public function testRequiredNotEmptyValidatorNotAddedWhenOneExists()

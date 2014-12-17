@@ -255,13 +255,19 @@ class InputTest extends TestCase
      */
     public function testValidatorInvokedIfValueIsEmptyAndAllowedAndContinue($emptyValue)
     {
+        $message = 'failure by explicit validator';
+        $validator = new Validator\Callback(function($value) {
+            return false;
+        });
+        $validator->setMessage($message);
         $this->input->setAllowEmpty(true)
                     ->setContinueIfEmpty(true)
                     ->setValue($emptyValue)
-                    ->getValidatorChain()->attach(new Validator\Callback(function($value) {
-                        return false;
-                    }));
+                    ->getValidatorChain()->attach($validator);
         $this->assertFalse($this->input->isValid());
+        // Test reason for validation failure; ensures that failure was not
+        // caused by accidentally injected NotEmpty validator
+        $this->assertEquals(array('callbackValue' => $message), $this->input->getMessages());
     }
 
     public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()

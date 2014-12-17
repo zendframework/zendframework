@@ -301,14 +301,6 @@ class FileInputTest extends InputTest
         $this->assertEquals($uploadMock, $validators[0]['instance']);
     }
 
-    public function testAllowEmptyOption()
-    {
-        $this->input->setAllowEmpty(true);
-        $this->assertTrue($this->input->isValid(''));
-        $this->input->setAllowEmpty(false);
-        $this->assertFalse($this->input->isValid(''));
-    }
-
     public function testNotEmptyValidatorAddedWhenIsValidIsCalled()
     {
         $this->markTestSkipped('Test is not enabled in FileInputTest');
@@ -415,6 +407,35 @@ class FileInputTest extends InputTest
                 'error'    => \UPLOAD_ERR_NO_FILE
             ))),
         );
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testAllowEmptyOptionSet($emptyValue)
+    {
+        // UploadFile validator is disabled, pretend one
+        $validator = new Validator\Callback(function() {
+            return false; // This should never be called
+        });
+        $this->input->getValidatorChain()->attach($validator);
+        parent::testAllowEmptyOptionSet($emptyValue);
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testAllowEmptyOptionNotSet($emptyValue)
+    {
+        // UploadFile validator is disabled, pretend one
+        $message = 'pretend failing UploadFile validator';
+        $validator = new Validator\Callback(function() {
+            return false;
+        });
+        $validator->setMessage($message);
+        $this->input->getValidatorChain()->attach($validator);
+        parent::testAllowEmptyOptionNotSet($emptyValue);
+        $this->assertEquals(array('callbackValue' => $message), $this->input->getMessages());
     }
 
     public function testNotAllowEmptyWithFilterConvertsNonemptyToEmptyIsNotValid()

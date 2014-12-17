@@ -253,6 +253,26 @@ class InputTest extends TestCase
     /**
      * @dataProvider emptyValuesProvider
      */
+    public function testAllowEmptyOptionSet($emptyValue)
+    {
+        $this->input->setAllowEmpty(true);
+        $this->input->setValue($emptyValue);
+        $this->assertTrue($this->input->isValid());
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
+    public function testAllowEmptyOptionNotSet($emptyValue)
+    {
+        $this->input->setAllowEmpty(false);
+        $this->input->setValue($emptyValue);
+        $this->assertFalse($this->input->isValid());
+    }
+
+    /**
+     * @dataProvider emptyValuesProvider
+     */
     public function testValidatorInvokedIfValueIsEmptyAndAllowedAndContinue($emptyValue)
     {
         $message = 'failure by explicit validator';

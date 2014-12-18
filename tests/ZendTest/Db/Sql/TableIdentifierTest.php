@@ -41,9 +41,9 @@ class TableIdentifierTest extends \PHPUnit_Framework_TestCase
 
     public function testGetTableFromObjectStringCast()
     {
-        $table = $this->getMock('stdClass', '__invoke');
+        $table = $this->getMock('stdClass', array('__toString'));
 
-        $table->expects($this->once())->method('__invoke')->will($this->returnValue('castResult'));
+        $table->expects($this->once())->method('__toString')->will($this->returnValue('castResult'));
 
         $tableIdentifier = new TableIdentifier($table);
 

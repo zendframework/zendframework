@@ -50,4 +50,16 @@ class TableIdentifierTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('castResult', $tableIdentifier->getTable());
         $this->assertSame('castResult', $tableIdentifier->getTable());
     }
+
+    public function testGetSchemaFromObjectStringCast()
+    {
+        $schema = $this->getMock('stdClass', array('__toString'));
+
+        $schema->expects($this->once())->method('__toString')->will($this->returnValue('castResult'));
+
+        $tableIdentifier = new TableIdentifier('foo', $schema);
+
+        $this->assertSame('castResult', $tableIdentifier->getSchema());
+        $this->assertSame('castResult', $tableIdentifier->getSchema());
+    }
 }

@@ -77,7 +77,7 @@ class TableIdentifierTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider invalidTableProvider
+     * @dataProvider invalidSchemaProvider
      *
      * @param mixed $invalidSchema
      */

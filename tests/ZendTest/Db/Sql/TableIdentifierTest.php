@@ -18,10 +18,24 @@ use Zend\Db\Sql\TableIdentifier;
  */
 class TableIdentifierTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetTableName()
+    public function testGetTable()
     {
         $tableIdentifier = new TableIdentifier('foo');
 
         $this->assertSame('foo', $tableIdentifier->getTable());
+    }
+
+    public function testGetDefaultSchema()
+    {
+        $tableIdentifier = new TableIdentifier('foo');
+
+        $this->assertNull($tableIdentifier->getSchema());
+    }
+
+    public function testGetSchema()
+    {
+        $tableIdentifier = new TableIdentifier('foo', 'bar');
+
+        $this->assertSame('bar', $tableIdentifier->getSchema());
     }
 }

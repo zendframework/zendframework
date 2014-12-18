@@ -53,12 +53,12 @@ class TableIdentifier
             }
 
             $this->schema = (string) $schema;
-        }
 
-        if ('' === $this->schema) {
-            throw new Exception\InvalidArgumentException(
-                '$schema must be a valid schema name or null, empty string given'
-            );
+            if ('' === $this->schema) {
+                throw new Exception\InvalidArgumentException(
+                    '$schema must be a valid schema name or null, empty string given'
+                );
+            }
         }
     }
 

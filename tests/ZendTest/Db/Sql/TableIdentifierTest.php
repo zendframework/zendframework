@@ -77,6 +77,18 @@ class TableIdentifierTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider invalidTableProvider
+     *
+     * @param mixed $invalidSchema
+     */
+    public function testRejectsInvalidSchema($invalidSchema)
+    {
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException');
+
+        new TableIdentifier('foo', $invalidSchema);
+    }
+
+    /**
      * Data provider
      *
      * @return mixed[][]
@@ -85,6 +97,20 @@ class TableIdentifierTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null),
+            array(''),
+            array(new stdClass()),
+            array(array()),
+        );
+    }
+
+    /**
+     * Data provider
+     *
+     * @return mixed[][]
+     */
+    public function invalidSchemaProvider()
+    {
+        return array(
             array(''),
             array(new stdClass()),
             array(array()),

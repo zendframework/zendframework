@@ -19,13 +19,13 @@ class TableIdentifier
     protected $table;
 
     /**
-     * @var string
+     * @var null|string
      */
     protected $schema;
 
     /**
-     * @param string $table
-     * @param string $schema
+     * @param string      $table
+     * @param null|string $schema
      */
     public function __construct($table, $schema = null)
     {

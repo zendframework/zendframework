@@ -9,6 +9,7 @@
 
 namespace ZendTest\Db\Sql;
 
+use stdClass;
 use Zend\Db\Sql\TableIdentifier;
 
 /**
@@ -61,5 +62,32 @@ class TableIdentifierTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('castResult', $tableIdentifier->getSchema());
         $this->assertSame('castResult', $tableIdentifier->getSchema());
+    }
+
+    /**
+     * @dataProvider invalidTableProvider
+     *
+     * @param mixed $invalidTable
+     */
+    public function testRejectsInvalidTable($invalidTable)
+    {
+        $this->setExpectedException('Zend\Db\Sql\Exception\InvalidArgumentException');
+
+        new TableIdentifier($invalidTable);
+    }
+
+    /**
+     * Data provider
+     *
+     * @return mixed[][]
+     */
+    public function invalidTableProvider()
+    {
+        return array(
+            array(null),
+            array(''),
+            array(new stdClass()),
+            array(array()),
+        );
     }
 }

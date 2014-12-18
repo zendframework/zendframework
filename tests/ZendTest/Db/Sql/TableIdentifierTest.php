@@ -38,4 +38,15 @@ class TableIdentifierTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('bar', $tableIdentifier->getSchema());
     }
+
+    public function testGetTableFromObjectStringCast()
+    {
+        $identifier = $this->getMock('stdClass', '__invoke');
+
+        $identifier->expects($this->once())->method('__invoke')->will($this->returnValue('castResult'));
+
+        $tableIdentifier = new TableIdentifier($identifier);
+
+        $this->assertSame('castResult', $tableIdentifier->getTable());
+    }
 }

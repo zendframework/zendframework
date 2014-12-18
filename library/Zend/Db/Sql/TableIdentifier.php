@@ -38,6 +38,10 @@ class TableIdentifier
 
         $this->table = (string) $table;
 
+        if ('' === $this->table) {
+            throw new Exception\InvalidArgumentException('$table must be a valid table name, empty string given');
+        }
+
         if (null === $schema) {
             $this->schema = null;
         } else {
@@ -49,6 +53,12 @@ class TableIdentifier
             }
 
             $this->schema = (string) $schema;
+        }
+
+        if ('' === $this->schema) {
+            throw new Exception\InvalidArgumentException(
+                '$schema must be a valid schema name or null, empty string given'
+            );
         }
     }
 

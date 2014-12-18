@@ -64,6 +64,8 @@ class TableIdentifier
 
     /**
      * @param string $table
+     *
+     * @deprecated please use the constructor and build a new {@see TableIdentifier} instead
      */
     public function setTable($table)
     {
@@ -88,6 +90,8 @@ class TableIdentifier
 
     /**
      * @param $schema
+     *
+     * @deprecated please use the constructor and build a new {@see TableIdentifier} instead
      */
     public function setSchema($schema)
     {

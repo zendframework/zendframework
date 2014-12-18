@@ -9,11 +9,7 @@
 
 namespace ZendTest\Db\Sql;
 
-use Zend\Db\Sql\Update;
-use Zend\Db\Sql\Where;
-use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\TableIdentifier;
-use ZendTest\Db\TestAsset\TrustingSql92Platform;
 
 /**
  * Tests for {@see \Zend\Db\Sql\TableIdentifier}

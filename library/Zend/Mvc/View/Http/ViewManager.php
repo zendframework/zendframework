@@ -107,7 +107,7 @@ class ViewManager extends AbstractListenerAggregate
         $routeNotFoundStrategy   = $this->getRouteNotFoundStrategy();
         $exceptionStrategy       = $this->getExceptionStrategy();
         $mvcRenderingStrategy    = $this->getMvcRenderingStrategy();
-        $injectTemplateListener  = $this->services->get('Zend\Mvc\View\Http\InjectTemplateListener');
+        $injectTemplateListener  = $this->getInjectTemplateListener();
         $createViewModelListener = new CreateViewModelListener();
         $injectViewModelListener = new InjectViewModelListener();
 
@@ -328,6 +328,11 @@ class ViewManager extends AbstractListenerAggregate
         $this->services->setAlias('404Strategy', 'RouteNotFoundStrategy');
 
         return $this->routeNotFoundStrategy;
+    }
+
+    public function getInjectTemplateListener()
+    {
+        return $this->services->get('Zend\Mvc\View\Http\InjectTemplateListener');
     }
 
     /**

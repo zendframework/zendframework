@@ -14,7 +14,7 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\ModuleManager\Feature\LocatorRegisteredInterface;
 use Zend\ModuleManager\ModuleEvent;
-use Zend\Mvc\MvcEvent;
+use Zend\ModuleManager\ModuleManager;
 
 /**
  * Locator registration listener
@@ -67,7 +67,7 @@ class LocatorRegistrationListener extends AbstractListener implements
         }
 
         // Shared instance for module manager
-        $events->attach('Zend\Mvc\Application', MvcEvent::EVENT_BOOTSTRAP, function ($e) use ($moduleManager) {
+        $events->attach('Zend\Mvc\Application', ModuleManager::EVENT_BOOTSTRAP, function ($e) use ($moduleManager) {
             $moduleClassName = get_class($moduleManager);
             $moduleClassNameArray = explode('\\', $moduleClassName);
             $moduleClassNameAlias = end($moduleClassNameArray);
@@ -83,7 +83,7 @@ class LocatorRegistrationListener extends AbstractListener implements
         }
 
         // Attach to the bootstrap event if there are modules we need to process
-        $events->attach('Zend\Mvc\Application', MvcEvent::EVENT_BOOTSTRAP, array($this, 'onBootstrap'), 1000);
+        $events->attach('Zend\Mvc\Application', ModuleManager::EVENT_BOOTSTRAP, array($this, 'onBootstrap'), 1000);
     }
 
     /**

@@ -12,6 +12,7 @@ namespace Zend\Crypt\Password;
 use Traversable;
 use Zend\Math\Rand;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Crypt\Utils;
 
 /**
  * Bcrypt algorithm using crypt() function of PHP
@@ -101,10 +102,7 @@ class Bcrypt implements PasswordInterface
     public function verify($password, $hash)
     {
         $result = crypt($password, $hash);
-        if ($result === $hash) {
-            return true;
-        }
-        return false;
+        return Utils::compareStrings($hash, $result);
     }
 
     /**

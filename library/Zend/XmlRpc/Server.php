@@ -9,7 +9,6 @@
 
 namespace Zend\XmlRpc;
 
-use ReflectionClass;
 use Zend\Server\AbstractServer;
 use Zend\Server\Definition;
 use Zend\Server\Reflection;

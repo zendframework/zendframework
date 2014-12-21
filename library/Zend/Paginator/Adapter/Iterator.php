@@ -16,7 +16,7 @@ class Iterator implements AdapterInterface
     /**
      * Iterator which implements Countable
      *
-     * @var Iterator
+     * @var \Iterator
      */
     protected $iterator = null;
 

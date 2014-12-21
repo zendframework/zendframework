@@ -297,7 +297,7 @@ class Query
      *
      * @param  DOMDocument $document
      * @param  string|array $xpathQuery
-     * @return array
+     * @return \DOMNodeList
      * @throws \ErrorException If query cannot be executed
      */
     protected function getNodeList($document, $xpathQuery)

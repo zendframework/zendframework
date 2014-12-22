@@ -31,7 +31,7 @@ class SqlServer extends AbstractPlatform
     protected $resource = null;
 
     /**
-     * @param null|\Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv|\Zend\Db\Adapter\Driver\Pdo\Pdo||resource|\PDO $driver
+     * @param null|\Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv|\Zend\Db\Adapter\Driver\Pdo\Pdo|resource|\PDO $driver
      */
     public function __construct($driver = null)
     {
@@ -41,7 +41,7 @@ class SqlServer extends AbstractPlatform
     }
 
     /**
-     * @param \Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv|\Zend\Db\Adapter\Driver\Pdo\Pdo||resource|\PDO $driver
+     * @param \Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv|\Zend\Db\Adapter\Driver\Pdo\Pdo|resource|\PDO $driver
      * @throws \Zend\Db\Adapter\Exception\InvalidArgumentException
      *
      * @return self

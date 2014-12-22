@@ -9,6 +9,7 @@
 
 namespace ZendTest\Config\Reader;
 
+use XMLReader;
 use Zend\Config\Reader\Xml;
 
 /**
@@ -120,5 +121,55 @@ ECS;
         // Element value stored in special key '_'
         $this->assertArrayHasKey('_', $arrayXml['one'][1]);
         $this->assertEquals('bazbat', $arrayXml['one'][1]['_']);
+    }
+
+    /**
+     * @group 6761
+     * @group 6730
+     */
+    public function testCloseWhenCallFromFileReaderGetInvalid()
+    {
+        $configReader = new Xml();
+        $configReader->getReader()->open($this->getTestAssetPath('attributes'));
+        $configReader->getReader()->setParserProperty(XMLReader::VALIDATE, true);
+        $this->assertTrue($configReader->getReader()->isValid());
+
+        $configReader->fromFile($this->getTestAssetPath('attributes'));
+        $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+        $configReader->getReader()->setParserProperty(XMLReader::VALIDATE, true);
+    }
+
+    /**
+     * @group 6761
+     * @group 6730
+     */
+    public function testCloseWhenCallFromStringReaderGetInvalid()
+    {
+        $xml = <<<ECS
+<?xml version="1.0" encoding="UTF-8"?>
+<zend-config>
+    <test>foo</test>
+    <bar>baz</bar>
+    <bar>foo</bar>
+</zend-config>
+
+ECS;
+
+        $configReader = new Xml();
+        $configReader->getReader()->xml($xml, null, LIBXML_XINCLUDE);
+        $configReader->getReader()->setParserProperty(XMLReader::VALIDATE, true);
+        $this->assertTrue($configReader->getReader()->isValid());
+         $xml = <<<ECS
+<?xml version="1.0" encoding="UTF-8"?>
+<zend-config>
+    <test>foo</test>
+    <bar>baz</bar>
+    <bar>foo</bar>
+</zend-config>
+
+ECS;
+        $configReader->fromString($xml);
+        $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+        $configReader->getReader()->setParserProperty(XMLReader::VALIDATE, true);
     }
 }

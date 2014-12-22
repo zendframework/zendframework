@@ -39,13 +39,13 @@ class Encrypt extends AbstractFilter
     }
 
     /**
-     * Returns the name of the set adapter
+     * Returns the adapter instance
      *
      * @throws Exception\RuntimeException
      * @throws Exception\InvalidArgumentException
      * @return Encrypt\EncryptionAlgorithmInterface
      */
-    public function getAdapter()
+    public function getAdapterInstance()
     {
         if ($this->adapter instanceof Encrypt\EncryptionAlgorithmInterface) {
             return $this->adapter;
@@ -72,13 +72,13 @@ class Encrypt extends AbstractFilter
     }
 
     /**
-     * Retrieve adapter name
+     * Returns the name of the set adapter
      *
      * @return string
      */
-    public function getAdapterName()
+    public function getAdapter()
     {
-        return $this->getAdapter()->toString();
+        return $this->adapter->toString();
     }
 
     /**

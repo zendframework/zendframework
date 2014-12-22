@@ -121,7 +121,7 @@ class Json
 
             $encodeOptions = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
 
-            if (defined(JSON_PRETTY_PRINT) && $prettyPrint) {
+            if ($prettyPrint && defined('JSON_PRETTY_PRINT')) {
                 $encodeOptions |= JSON_PRETTY_PRINT;
                 $prettyPrint = false;
             }

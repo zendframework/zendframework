@@ -8,10 +8,15 @@ php:
   - hhvm
 
 install:
-  - sudo apt-get install parallel
-  - composer install --dev --prefer-source
+  - IS_HHVM=`echo $TRAVIS_PHP_VERSION | grep "hhvm" | wc -l`
+  - sudo apt-get install parallel libpcre3-dev
+  - test $IS_HHVM == "1" || echo "" | pecl install apcu-beta
+  - test $IS_HHVM == "1" || phpenv config-add tests/travis.php.ini
+  - composer install --no-interaction --dev --prefer-source
 
 before_script:
+  - sudo /etc/init.d/memcached start
+  - sudo start redis-server
   - mkdir -p build/coverage
   - cp tests/TestConfiguration.php.travis tests/TestConfiguration.php
 

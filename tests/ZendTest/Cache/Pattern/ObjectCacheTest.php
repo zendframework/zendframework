@@ -134,6 +134,21 @@ class ObjectCacheTest extends CommonPatternTest
         $this->assertFalse(isset($this->_pattern->property));
     }
 
+    /**
+     * @group 7039
+     */
+    public function testEmptyObjectKeys()
+    {
+        $this->_options->setObjectKey('0');
+        $this->assertSame('0', $this->_options->getObjectKey(), "Can't set string '0' as object key");
+
+        $this->_options->setObjectKey('');
+        $this->assertSame('', $this->_options->getObjectKey(), "Can't set an empty string as object key");
+
+        $this->_options->setObjectKey(null);
+        $this->assertSame(get_class($this->_options->getObject()), $this->_options->getObjectKey());
+    }
+
     protected function _testCall($method, array $args)
     {
         $returnSpec = 'foobar_return(' . implode(', ', $args) . ') : ';

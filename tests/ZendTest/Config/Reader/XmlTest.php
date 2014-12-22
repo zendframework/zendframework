@@ -159,15 +159,7 @@ ECS;
         $configReader->getReader()->xml($xml, null, LIBXML_XINCLUDE);
         $configReader->getReader()->setParserProperty(XMLReader::VALIDATE, true);
         $this->assertTrue($configReader->getReader()->isValid());
-         $xml = <<<ECS
-<?xml version="1.0" encoding="UTF-8"?>
-<zend-config>
-    <test>foo</test>
-    <bar>baz</bar>
-    <bar>foo</bar>
-</zend-config>
 
-ECS;
         $configReader->fromString($xml);
         $this->setExpectedException('PHPUnit_Framework_Error_Warning');
         $configReader->getReader()->setParserProperty(XMLReader::VALIDATE, true);

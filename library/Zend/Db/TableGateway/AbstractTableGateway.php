@@ -39,7 +39,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
     protected $adapter = null;
 
     /**
-     * @var string
+     * @var string|array|TableIdentifier
      */
     protected $table = null;
 

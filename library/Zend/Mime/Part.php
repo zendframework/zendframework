@@ -260,6 +260,7 @@ class Part
     /**
      * Set content
      * @param mixed $content  String or Stream containing the content
+     * @throws InvalidArgumentException
      * @return self
      */
     public function setContent($content)

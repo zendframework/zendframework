@@ -9,7 +9,7 @@
 
 namespace Zend\Mime;
 
-use InvalidArgumentException;
+use Zend\Mime\Exception;
 
 /**
  * Class representing a MIME part.
@@ -41,7 +41,7 @@ class Part
     public function __construct($content = '')
     {
         if (!is_string($content) && !is_resource($content)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 "'{$content}' must be string or resource"
             );
         }
@@ -266,7 +266,7 @@ class Part
     public function setContent($content)
     {
         if (!is_string($content) && !is_resource($content)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 "'{$content}' must be string or resource"
             );
         }

@@ -164,13 +164,13 @@ class PartTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructGetInvalidArgumentException()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->setExpectedException('Zend\Mime\Exception\InvalidArgumentException');
         $part = new Mime\Part(1);
     }
 
     public function testSetContentGetInvalidArgumentException()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->setExpectedException('Zend\Mime\Exception\InvalidArgumentException');
         $part = new Mime\Part();
         $part->setContent(1);
     }

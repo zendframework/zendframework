@@ -11,7 +11,6 @@ namespace Zend\File\Transfer\Exception;
 
 use Zend\File\Exception;
 
-class BadMethodCallException extends Exception\BadMethodCallException implements
-    ExceptionInterface
+class BadMethodCallException extends Exception\BadMethodCallException implements ExceptionInterface
 {
 }

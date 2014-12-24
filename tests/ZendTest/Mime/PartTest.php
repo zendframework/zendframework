@@ -132,10 +132,8 @@ class PartTest extends \PHPUnit_Framework_TestCase
 
     public function testSettersGetters()
     {
-        $testText = 'safdsafsa�lg ��gd�� sd�jg�sdjg�ld�gksd�gj�sdfg�dsj�gjsd�gj�dfsjg�dsfj�djs�g kjhdkj '
-                       . 'fgaskjfdh gksjhgjkdh gjhfsdghdhgksdjhg';
         $part = new Mime\Part();
-        $part->setContent($testText)
+        $part->setContent($this->testText)
              ->setEncoding(Mime\Mime::ENCODING_8BIT)
              ->setType('text/plain')
              ->setFilename('test.txt')
@@ -149,7 +147,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
              ->setFilters(array('foo'))
              ->setDescription('foobar');
 
-        $this->assertEquals($testText, $part->getContent());
+        $this->assertEquals($this->testText, $part->getContent());
         $this->assertEquals(Mime\Mime::ENCODING_8BIT, $part->getEncoding());
         $this->assertEquals('text/plain', $part->getType());
         $this->assertEquals('test.txt', $part->getFileName());

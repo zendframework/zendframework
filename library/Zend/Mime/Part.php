@@ -9,6 +9,8 @@
 
 namespace Zend\Mime;
 
+use InvalidArgumentException;
+
 /**
  * Class representing a MIME part.
  */
@@ -34,9 +36,16 @@ class Part
      * as a string or stream
      *
      * @param mixed $content  String or Stream containing the content
+     * @throws InvalidArgumentException
      */
     public function __construct($content = '')
     {
+        if (!is_string($content) && !is_resource($content)) {
+            throw new InvalidArgumentException(
+                "'{$content}' must be string or resource"
+            );
+        }
+
         $this->content = $content;
         if (is_resource($content)) {
             $this->isStream = true;
@@ -255,6 +264,11 @@ class Part
      */
     public function setContent($content)
     {
+        if (!is_string($content) && !is_resource($content)) {
+            throw new InvalidArgumentException(
+                "'{$content}' must be string or resource"
+            );
+        }
         $this->content = $content;
         if (is_resource($content)) {
             $this->isStream = true;

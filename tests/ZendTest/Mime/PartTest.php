@@ -161,4 +161,17 @@ class PartTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('foo'), $part->getFilters());
         $this->assertEquals('foobar', $part->getDescription());
     }
+
+    public function testConstructGetInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $part = new Mime\Part(1);
+    }
+
+    public function testSetContentGetInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $part = new Mime\Part();
+        $part->setContent(1);
+    }
 }

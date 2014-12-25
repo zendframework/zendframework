@@ -85,21 +85,6 @@ class ViewManager extends AbstractListenerAggregate
     }
 
     /**
-     * Detach aggregate listeners from the specified event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
-        }
-    }
-
-    /**
      * Prepares the view layer
      *
      * @param  $event
@@ -245,11 +230,11 @@ class ViewManager extends AbstractListenerAggregate
      */
     public function getLayoutTemplate()
     {
-        $layout = 'layout/layout';
         if (isset($this->config['layout'])) {
-            $layout = $this->config['layout'];
+            return $this->config['layout'];
         }
-        return $layout;
+
+        return 'layout/layout';
     }
 
     /**
@@ -379,6 +364,9 @@ class ViewManager extends AbstractListenerAggregate
      * is a ListenerAggregate, attach it to the view, at priority 100. This
      * latter allows each to trigger before the default mvc rendering strategy,
      * and for them to trigger in the order they are registered.
+     *
+     * @param EventManagerInterface $events
+     * @return void
      */
     protected function registerMvcRenderingStrategies(EventManagerInterface $events)
     {

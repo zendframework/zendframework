@@ -59,7 +59,6 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     {
         $update = new Update('foo');
         $this->assertEquals('foo', $this->readAttribute($update, 'table'));
-
     }
 
     /**
@@ -233,6 +232,19 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
             ->where('x = y');
 
         $this->assertEquals('UPDATE "sch"."foo" SET "bar" = \'baz\', "boo" = NOW(), "bam" = NULL WHERE x = y', $this->update->getSqlString(new TrustingSql92Platform()));
+    }
+
+    /**
+     * @group 6768
+     * @group 6773
+     */
+    public function testGetSqlStringForFalseUpdateValueParameter()
+    {
+        $this->update = new Update;
+        $this->update->table(new TableIdentifier('foo', 'sch'))
+            ->set(array('bar' => false, 'boo' => 'test', 'bam' => true))
+            ->where('x = y');
+        $this->assertEquals('UPDATE "sch"."foo" SET "bar" = \'\', "boo" = \'test\', "bam" = \'1\' WHERE x = y', $this->update->getSqlString(new TrustingSql92Platform()));
     }
 
     /**

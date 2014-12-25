@@ -74,7 +74,7 @@ abstract class Barcode
      * Factory for Zend\Barcode classes.
      *
      * First argument may be a string containing the base of the adapter class
-     * name, e.g. 'int25' corresponds to class Object\Int25.  This
+     * name, e.g. 'code25' corresponds to class Object\Code25.  This
      * is case-insensitive.
      *
      * First argument may alternatively be an object of type Traversable.

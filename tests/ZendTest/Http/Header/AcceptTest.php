@@ -14,7 +14,6 @@ use Zend\Http\Header\Accept;
 
 class AcceptTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testInvalidHeaderLine()
     {
         $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
@@ -60,7 +59,6 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('Zend\Http\Header\Exception\InvalidArgumentException');
         $acceptHeader->addMediaType('\\', 0.9);
-
     }
 
 
@@ -265,7 +263,6 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         foreach ($expected as $key => $value) {
             $this->assertEquals($value, $res->$key);
         }
-
     }
 
     public function testWildcardWithDifferentParamsAndRanges()
@@ -403,7 +400,6 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         foreach ($expected as $key => $value) {
             $this->assertEquals($value, $res->$key);
         }
-
     }
 
     public function testPrioritizing_2()
@@ -459,5 +455,4 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $acceptHdr->match('image'));
         //  $this->assertEquals($expected, $this->_handler->match('text'));
     }
-
 }

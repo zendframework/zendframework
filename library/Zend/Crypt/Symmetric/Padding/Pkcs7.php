@@ -14,7 +14,6 @@ namespace Zend\Crypt\Symmetric\Padding;
  */
 class Pkcs7 implements PaddingInterface
 {
-
     /**
      * Pad the string to the specified size
      *

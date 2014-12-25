@@ -619,18 +619,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                  array('parameters' => array('array'))
              )));
 
-          $expectedResult = 'array';
-          $this->setServerResponseTo($expectedResult);
+        $expectedResult = 'array';
+        $this->setServerResponseTo($expectedResult);
 
-          $this->assertSame(
+        $this->assertSame(
               $expectedResult,
               $this->xmlrpcClient->call('get', array(array(1)))
           );
 
-          $expectedResult = 'integer';
-          $this->setServerResponseTo($expectedResult);
+        $expectedResult = 'integer';
+        $this->setServerResponseTo($expectedResult);
 
-          $this->assertSame(
+        $this->assertSame(
               $expectedResult,
               $this->xmlrpcClient->call('get', array(1))
           );

@@ -16,7 +16,6 @@ use Zend\Feed\Exception;
  *
  * Class to represent exceptions that occur during Feed operations.
  */
-class InvalidArgumentException
-    extends Exception\InvalidArgumentException
-    implements ExceptionInterface
-{}
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
+{
+}

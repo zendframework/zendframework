@@ -16,7 +16,6 @@ use Zend\Db\Adapter\Profiler;
 
 class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
 {
-
     /**
      * @var \PDO
      */
@@ -293,7 +292,6 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
             $parameter = is_int($name) ? ($name + 1) : $name;
             $this->resource->bindParam($parameter, $value, $type);
         }
-
     }
 
     /**
@@ -308,6 +306,5 @@ class Statement implements StatementInterface, Profiler\ProfilerAwareInterface
         if ($this->parameterContainer) {
             $this->parameterContainer = clone $this->parameterContainer;
         }
-
     }
 }

@@ -19,7 +19,6 @@ use Zend\Feed\Reader;
  */
 class AtomTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $validWriter = null;
 
     public function setUp()
@@ -62,6 +61,21 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $atomFeed->render();
         $feed = Reader\Reader::importString($atomFeed->saveXml());
         $this->assertEquals('iso-8859-1', $feed->getEncoding());
+    }
+
+    /**
+     * @group 6358
+     * @group 6935
+     */
+    public function testDateModifiedHasTheCorrectFormat()
+    {
+        $date = new \DateTime();
+        $date->setTimestamp(1071336602);
+        $date->setTimezone(new \DateTimeZone('GMT'));
+        $this->validWriter->setDateModified($date);
+        $atomFeed = new Renderer\Feed\Atom($this->validWriter);
+        $atomFeed->render();
+        $this->assertEquals('2003-12-13T17:30:02+00:00', $atomFeed->getDomDocument()->getElementsByTagName('updated')->item(0)->textContent);
     }
 
     public function testFeedEncodingDefaultIsUsedIfEncodingNotSetByHand()
@@ -408,5 +422,4 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($expected, $feed->getImage());
     }
-
 }

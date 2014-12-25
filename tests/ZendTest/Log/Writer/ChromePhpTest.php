@@ -26,7 +26,6 @@ class ChromePhpTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->chromephp = new MockChromePhp();
-
     }
 
     public function testGetChromePhp()

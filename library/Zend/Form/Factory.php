@@ -442,7 +442,7 @@ class Factory
             $hydrator = $this->getHydratorFromName($hydratorOrName);
         }
 
-        if (!$hydrator instanceof Hydrator\HydratorInterface) {
+        if (! isset($hydrator) || !$hydrator instanceof Hydrator\HydratorInterface) {
             throw new Exception\DomainException(sprintf(
                 '%s expects a valid implementation of Zend\Stdlib\Hydrator\HydratorInterface; received "%s"',
                 $method,

@@ -253,7 +253,7 @@ class Request
         try {
             $options = Json\Json::decode($json, Json\Json::TYPE_ARRAY);
             $this->setOptions($options);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->isParseError = true;
         }
     }

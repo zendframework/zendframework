@@ -11,7 +11,6 @@ namespace Zend\Feed\Reader\Collection;
 
 class Author extends AbstractCollection
 {
-
     /**
      * Return a simple array of the most relevant slice of
      * the author values, i.e. all author names.

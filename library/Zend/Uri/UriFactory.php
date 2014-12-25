@@ -73,9 +73,9 @@ abstract class UriFactory
     {
         if (isset(static::$schemeClasses[$scheme])) {
             return static::$schemeClasses[$scheme];
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -103,9 +103,9 @@ abstract class UriFactory
 
         if ($scheme && ! isset(static::$schemeClasses[$scheme])) {
             throw new Exception\InvalidArgumentException(sprintf(
-                    'no class registered for scheme "%s"',
-                    $scheme
-                ));
+                'no class registered for scheme "%s"',
+                $scheme
+            ));
         }
         if ($scheme && isset(static::$schemeClasses[$scheme])) {
             $class = static::$schemeClasses[$scheme];

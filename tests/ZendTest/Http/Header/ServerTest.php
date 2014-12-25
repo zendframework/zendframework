@@ -13,7 +13,6 @@ use Zend\Http\Header\Server;
 
 class ServerTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testServerFromStringCreatesValidServerHeader()
     {
         $serverHeader = Server::fromString('Server: xxx');
@@ -46,5 +45,4 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

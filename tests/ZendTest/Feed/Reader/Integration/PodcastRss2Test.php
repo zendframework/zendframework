@@ -17,7 +17,6 @@ use Zend\Feed\Reader;
 */
 class PodcastRss2Test extends \PHPUnit_Framework_TestCase
 {
-
     protected $feedSamplePath = null;
 
     public function setup()

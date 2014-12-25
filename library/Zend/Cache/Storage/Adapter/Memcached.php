@@ -222,7 +222,7 @@ class Memcached extends AbstractAdapter implements
         }
 
         $success = true;
-        if ($result === false || $result === null) {
+        if ($result === false) {
             $rsCode = $memc->getResultCode();
             if ($rsCode == MemcachedResource::RES_NOTFOUND) {
                 $result = null;
@@ -280,7 +280,7 @@ class Memcached extends AbstractAdapter implements
     {
         $memc  = $this->getMemcachedResource();
         $value = $memc->get($this->namespacePrefix . $normalizedKey);
-        if ($value === false || $value === null) {
+        if ($value === false) {
             $rsCode = $memc->getResultCode();
             if ($rsCode == MemcachedResource::RES_SUCCESS) {
                 return true;

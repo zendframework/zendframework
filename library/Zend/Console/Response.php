@@ -14,7 +14,6 @@ use Zend\Stdlib\ResponseInterface;
 
 class Response extends Message implements ResponseInterface
 {
-
     /**
      * @var bool
      */

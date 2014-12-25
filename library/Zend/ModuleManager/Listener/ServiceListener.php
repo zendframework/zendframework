@@ -144,7 +144,6 @@ class ServiceListener implements ServiceListenerInterface
         $module = $e->getModule();
 
         foreach ($this->serviceManagers as $key => $sm) {
-
             if (!$module instanceof $sm['module_class_interface']
                 && !method_exists($module, $sm['module_class_method'])
             ) {

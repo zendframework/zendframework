@@ -115,7 +115,7 @@ class Upload extends AbstractValidator
             $this->options['files'] = $files;
         }
 
-        if ($this->options['files'] === NULL) {
+        if ($this->options['files'] === null) {
             $this->options['files'] = array();
         }
 

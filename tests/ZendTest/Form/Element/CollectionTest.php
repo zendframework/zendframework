@@ -479,6 +479,93 @@ class CollectionTest extends TestCase
         $this->assertNotSame($categories[1], $cat2);
     }
 
+    /**
+     * @group 6585
+     * @group 6614
+     */
+    public function testAddingCollectionElementAfterBind()
+    {
+        $form = new Form();
+        $form->setHydrator(new ObjectPropertyHydrator());
+
+        $phone = new \ZendTest\Form\TestAsset\PhoneFieldset();
+
+        $form->add(array(
+            'name' => 'phones',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $phone,
+                'count' => 1,
+                'allow_add' => true
+            ),
+        ));
+
+        $data = array(
+            'phones' => array(
+                array('number' => '1234567'),
+                array('number' => '1234568'),
+            )
+        );
+
+        $phone = new Phone();
+        $phone->setNumber($data['phones'][0]['number']);
+
+        $customer = new stdClass();
+        $customer->phones = array($phone);
+
+        $form->bind($customer);
+        $form->setData($data);
+        $this->assertTrue($form->isValid());
+    }
+
+    /**
+     * @group 6585
+     * @group 6614
+     */
+    public function testDoesNotCreateNewObjectsWhenUsingNestedCollections()
+    {
+        $addressesFieldeset = new \ZendTest\Form\TestAsset\AddressFieldset();
+        $addressesFieldeset->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods());
+        $addressesFieldeset->remove('city');
+
+        $form = new Form();
+        $form->setHydrator(new ObjectPropertyHydrator());
+        $form->add(array(
+            'name' => 'addresses',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $addressesFieldeset,
+                'count' => 1
+            ),
+        ));
+
+        $data = array(
+            'addresses' =>
+                array(array(
+                    'street' => 'street1',
+                    'phones' =>
+                        array(array('number' => '1234567')),
+                ))
+        );
+
+        $phone  = new Phone();
+        $phone->setNumber($data['addresses'][0]['phones'][0]['number']);
+
+        $address = new Address();
+        $address->setStreet($data['addresses'][0]['street']);
+        $address->setPhones(array($phone));
+
+        $customer = new stdClass();
+        $customer->addresses = array($address);
+
+        $form->bind($customer);
+        $form->setData($data);
+
+        $this->assertTrue($form->isValid());
+        $phones = $customer->addresses[0]->getPhones();
+        $this->assertSame($phone, $phones[0]);
+    }
+
     public function testDoNotCreateExtraFieldsetOnMultipleBind()
     {
         $form = new \Zend\Form\Form();
@@ -500,7 +587,6 @@ class CollectionTest extends TestCase
         // this won't pass, but must
         $form->bind($market);
         $this->assertSame(count($categories), iterator_count($form->get('product')->get('categories')->getIterator()));
-
     }
 
     public function testExtractDefaultIsEmptyArray()
@@ -689,7 +775,6 @@ class CollectionTest extends TestCase
         $this->assertInstanceOf('Zend\Form\Element\Collection', $_marketCollection);
 
         foreach ($_marketCollection as $_shopFieldset) {
-
             $this->assertInstanceOf('Zend\Form\Fieldset', $_shopFieldset);
             $this->assertInstanceOf('stdClass', $_shopFieldset->getObject());
 
@@ -1054,5 +1139,75 @@ class CollectionTest extends TestCase
         $collection->setCount(3);
         $collection->setObject($arrayCollection);
         $this->assertEquals(3, $collection->getCount());
+    }
+    
+    /**
+     * @group zf6263
+     * @group zf6518
+     */
+    public function testCollectionProperlyHandlesAddingObjectsOfTypeElementInterface()
+    {
+        $form = new Form('test');
+        $text = new Element\Text('text');
+        $form->add(array(
+            'name' => 'text',
+            'type' => 'Zend\Form\Element\Collection',
+            'options' => array(
+                'target_element' => $text, 'count' => 2,
+            ),
+        ));
+        $object = new \ArrayObject(array('text' => array('Foo', 'Bar')));
+        $form->bind($object);
+        $this->assertTrue($form->isValid());
+        
+        $result = $form->getData();
+        $this->assertInstanceOf('ArrayAccess', $result);
+        $this->assertArrayHasKey('text', $result);
+        $this->assertInternalType('array', $result['text']);
+        $this->assertArrayHasKey(0, $result['text']);
+        $this->assertEquals('Foo', $result['text'][0]);
+        $this->assertArrayHasKey(1, $result['text']);
+        $this->assertEquals('Bar', $result['text'][1]);
+    }
+    
+    /**
+     * Unit test to ensure behavior of extract() method is unaffected by refactor
+     *
+     * @group zf6263
+     * @group zf6518
+     */
+    public function testCollectionShouldSilentlyIgnorePopulatingFieldsetWithDisallowedObject()
+    {
+        $mainFieldset = new Fieldset();
+        $mainFieldset->add(new Element\Text('test'));
+        $mainFieldset->setObject(new \ArrayObject());
+        $mainFieldset->setHydrator(new ObjectPropertyHydrator());
+
+        $form = new Form();
+        $form->setObject(new \stdClass());
+        $form->setHydrator(new ObjectPropertyHydrator());
+        $form->add(array(
+            'name' => 'collection',
+            'type' => 'Collection',
+            'options' => array(
+                'target_element' => $mainFieldset,
+                'count' => 2
+            ),
+        ));
+        
+        $model = new \stdClass();
+        $model->collection = array(new \ArrayObject(array('test' => 'bar')), new \stdClass());
+        
+        $form->bind($model);
+        $this->assertTrue($form->isValid());
+        
+        $result = $form->getData();
+        $this->assertInstanceOf('stdClass', $result);
+        $this->assertObjectHasAttribute('collection', $result);
+        $this->assertInternalType('array', $result->collection);
+        $this->assertCount(1, $result->collection);
+        $this->assertInstanceOf('ArrayObject', $result->collection[0]);
+        $this->assertArrayHasKey('test', $result->collection[0]);
+        $this->assertEquals('bar', $result->collection[0]['test']);
     }
 }

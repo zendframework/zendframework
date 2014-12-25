@@ -110,7 +110,6 @@ class Entry extends Extension\AbstractEntry
         return $this->data['categories'];
     }
 
-
     /**
      * Get the entry content
      *

@@ -52,7 +52,7 @@ class PostRedirectGet extends AbstractPlugin
             $container->post = $request->getPost()->toArray();
             return $this->redirect($redirect, $redirectToUrl);
         } else {
-            if ($container->post !== null) {
+            if (null !== $container->post) {
                 $post = $container->post;
                 unset($container->post);
                 return $post;
@@ -114,14 +114,14 @@ class PostRedirectGet extends AbstractPlugin
              * If the user wants to redirect to a route, the redirector has to come
              * from the plugin manager -- otherwise no router will be injected
              */
-            if ($redirectToUrl === false) {
+            if (false === $redirectToUrl) {
                 throw new RuntimeException('Could not redirect to a route without a router');
             }
 
             $redirector = new Redirect();
         }
 
-        if ($redirectToUrl === false) {
+        if (false === $redirectToUrl) {
             $response = $redirector->toRoute($redirect, $params, $options, $reuseMatchedParams);
             $response->setStatusCode(303);
             return $response;

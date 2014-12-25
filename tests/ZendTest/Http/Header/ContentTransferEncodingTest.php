@@ -13,7 +13,6 @@ use Zend\Http\Header\ContentTransferEncoding;
 
 class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testContentTransferEncodingFromStringCreatesValidContentTransferEncodingHeader()
     {
         $contentTransferEncodingHeader = ContentTransferEncoding::fromString('Content-Transfer-Encoding: xxx');
@@ -46,5 +45,4 @@ class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

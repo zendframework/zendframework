@@ -16,7 +16,6 @@ use Zend\Db\Metadata\Object\TableObject;
 
 class MetadataFeature extends AbstractFeature
 {
-
     /**
      * @var MetadataInterface
      */
@@ -83,6 +82,4 @@ class MetadataFeature extends AbstractFeature
 
         $this->sharedData['metadata']['primaryKey'] = $primaryKey;
     }
-
-
 }

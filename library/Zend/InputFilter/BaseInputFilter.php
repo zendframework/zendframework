@@ -245,7 +245,7 @@ class BaseInputFilter implements
                 && $input->isRequired()
                 && $input->allowEmpty()
             ) {
-                if (!($input instanceOf EmptyContextInterface && $input->continueIfEmpty())) {
+                if (!($input instanceof EmptyContextInterface && $input->continueIfEmpty())) {
                     $this->validInputs[$name] = $input;
                     continue;
                 }
@@ -376,7 +376,7 @@ class BaseInputFilter implements
     {
         if ($name === self::VALIDATE_ALL) {
             $this->validationGroup = null;
-            foreach($this->getInputs() as $input) {
+            foreach ($this->getInputs() as $input) {
                 if ($input instanceof InputFilterInterface) {
                     $input->setValidationGroup(self::VALIDATE_ALL);
                 }

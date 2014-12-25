@@ -222,7 +222,7 @@ class MemoryManager
      */
     public function create($value = '')
     {
-        return $this->_create($value,  false);
+        return $this->_create($value, false);
     }
 
     /**

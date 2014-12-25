@@ -310,7 +310,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         chmod($this->_params['dirname'] . '.subfolder', $stat['mode']);
 
         if (!$check) {
-           $this->fail('no exception while loading invalid dir with subfolder not readable');
+            $this->fail('no exception while loading invalid dir with subfolder not readable');
         }
     }
 
@@ -337,7 +337,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         chmod($this->_params['dirname'], $stat['mode']);
 
         if (!$check) {
-           $this->fail('no exception while loading not readable maildir');
+            $this->fail('no exception while loading not readable maildir');
         }
     }
 

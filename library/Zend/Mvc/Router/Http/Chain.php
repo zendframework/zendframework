@@ -149,7 +149,7 @@ class Chain extends TreeRouteStack implements RouteInterface
      */
     public function assemble(array $params = array(), array $options = array())
     {
-       if ($this->chainRoutes !== null) {
+        if ($this->chainRoutes !== null) {
             $this->addRoutes($this->chainRoutes);
             $this->chainRoutes = null;
         }

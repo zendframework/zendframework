@@ -25,7 +25,6 @@ use Zend\View;
 
 class Paginator implements Countable, IteratorAggregate
 {
-
     /**
      * The cache tag prefix used to namespace Paginator results in the cache
      *
@@ -524,8 +523,9 @@ class Paginator implements Countable, IteratorAggregate
         $itemNumber = $this->normalizeItemNumber($itemNumber);
 
         if ($itemNumber > $itemCount) {
-            throw new Exception\InvalidArgumentException('Page ' . $pageNumber . ' does not'
-                                             . ' contain item number ' . $itemNumber);
+            throw new Exception\InvalidArgumentException(
+                "Page {$pageNumber} does not contain item number {$itemNumber}"
+            );
         }
 
         return $page[$itemNumber - 1];

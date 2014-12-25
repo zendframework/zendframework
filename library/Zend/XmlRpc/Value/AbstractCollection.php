@@ -13,7 +13,6 @@ use Zend\XmlRpc\AbstractValue;
 
 abstract class AbstractCollection extends AbstractValue
 {
-
     /**
      * Set the value of a collection type (array and struct) native types
      *

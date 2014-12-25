@@ -17,7 +17,6 @@ class Result implements
     Iterator,
     ResultInterface
 {
-
     /**
      * @var \mysqli|\mysqli_result|\mysqli_stmt
      */

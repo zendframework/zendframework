@@ -14,7 +14,6 @@ use Zend\Cache\Storage\IteratorInterface;
 
 class FilesystemIterator implements IteratorInterface
 {
-
     /**
      * The Filesystem storage instance
      *

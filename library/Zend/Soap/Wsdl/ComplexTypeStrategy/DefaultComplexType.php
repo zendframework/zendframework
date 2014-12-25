@@ -55,7 +55,6 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
 
         foreach ($class->getProperties() as $property) {
             if ($property->isPublic() && preg_match_all('/@var\s+([^\s]+)/m', $property->getDocComment(), $matches)) {
-
                 /**
                  * @todo check if 'xsd:element' must be used here (it may not be
                  * compatible with using 'complexType' node for describing other

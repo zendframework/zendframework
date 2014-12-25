@@ -16,7 +16,6 @@ use Zend\Cache;
  */
 class CaptureCacheTest extends CommonPatternTest
 {
-
     protected $_tmpCacheDir;
     protected $_umask;
     protected $_bufferedServerSuperGlobal;

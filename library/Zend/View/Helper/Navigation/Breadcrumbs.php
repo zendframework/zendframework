@@ -203,8 +203,8 @@ class Breadcrumbs extends AbstractHelper
             if (count($partial) != 2) {
                 throw new Exception\InvalidArgumentException(
                     'Unable to render menu: A view partial supplied as '
-                        .  'an array must contain two values: partial view '
-                        .  'script and module where script can be found'
+                    .  'an array must contain two values: partial view '
+                    .  'script and module where script can be found'
                 );
             }
 

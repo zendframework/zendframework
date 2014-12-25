@@ -87,14 +87,14 @@ class ArrayStorage extends ArrayObject implements StorageInterface
     public function offsetSet($key, $value)
     {
         if ($this->isImmutable()) {
-            throw new Exception\RuntimeException(sprintf(
-                'Cannot set key "%s" as storage is marked isImmutable', $key
-            ));
+            throw new Exception\RuntimeException(
+                sprintf('Cannot set key "%s" as storage is marked isImmutable', $key)
+            );
         }
         if ($this->isLocked($key)) {
-            throw new Exception\RuntimeException(sprintf(
-                'Cannot set key "%s" due to locking', $key
-            ));
+            throw new Exception\RuntimeException(
+                sprintf('Cannot set key "%s" due to locking', $key)
+            );
         }
 
         parent::offsetSet($key, $value);
@@ -232,9 +232,9 @@ class ArrayStorage extends ArrayObject implements StorageInterface
     public function setMetadata($key, $value, $overwriteArray = false)
     {
         if ($this->isImmutable) {
-            throw new Exception\RuntimeException(sprintf(
-                'Cannot set key "%s" as storage is marked isImmutable', $key
-            ));
+            throw new Exception\RuntimeException(
+                sprintf('Cannot set key "%s" as storage is marked isImmutable', $key)
+            );
         }
 
         if (!isset($this['__ZF'])) {

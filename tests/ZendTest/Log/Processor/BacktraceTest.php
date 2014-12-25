@@ -16,7 +16,6 @@ use Zend\Log\Processor\Backtrace;
  */
 class BacktraceTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testProcess()
     {
         $processor = new Backtrace();

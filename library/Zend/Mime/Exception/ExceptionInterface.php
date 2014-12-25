@@ -10,4 +10,5 @@
 namespace Zend\Mime\Exception;
 
 interface ExceptionInterface
-{}
+{
+}

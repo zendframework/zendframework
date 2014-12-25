@@ -45,7 +45,7 @@ class Ini extends AbstractFileLoader
 
         $list = $messagesNamespaced;
         if (isset($messagesNamespaced['translation'])) {
-           $list = $messagesNamespaced['translation'];
+            $list = $messagesNamespaced['translation'];
         }
 
         foreach ($list as $message) {

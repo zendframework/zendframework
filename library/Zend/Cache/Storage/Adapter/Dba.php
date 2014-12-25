@@ -189,7 +189,6 @@ class Dba extends AbstractAdapter implements
         }
 
         if (file_exists($pathname)) {
-
             // close the dba file before delete
             // and reopen (create) on next use
             $this->_close();
@@ -226,7 +225,8 @@ class Dba extends AbstractAdapter implements
 
         $this->_open();
 
-        do { // Workaround for PHP-Bug #62491 & #62492
+        do {
+            // Workaround for PHP-Bug #62491 & #62492
             $recheck     = false;
             $internalKey = dba_firstkey($this->handle);
             while ($internalKey !== false && $internalKey !== null) {

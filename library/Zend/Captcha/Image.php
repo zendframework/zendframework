@@ -495,7 +495,9 @@ class Image extends AbstractWord
             $error = ErrorHandler::stop();
             if (!$img || $error) {
                 throw new Exception\ImageNotLoadableException(
-                    "Can not load start image '{$this->startImage}'", 0, $error
+                    "Can not load start image '{$this->startImage}'",
+                    0,
+                    $error
                 );
             }
             $w = imagesx($img);
@@ -512,10 +514,10 @@ class Image extends AbstractWord
 
         // generate noise
         for ($i=0; $i < $this->dotNoiseLevel; $i++) {
-           imagefilledellipse($img, mt_rand(0, $w), mt_rand(0, $h), 2, 2, $textColor);
+            imagefilledellipse($img, mt_rand(0, $w), mt_rand(0, $h), 2, 2, $textColor);
         }
         for ($i=0; $i < $this->lineNoiseLevel; $i++) {
-           imageline($img, mt_rand(0, $w), mt_rand(0, $h), mt_rand(0, $w), mt_rand(0, $h), $textColor);
+            imageline($img, mt_rand(0, $w), mt_rand(0, $h), mt_rand(0, $w), mt_rand(0, $h), $textColor);
         }
 
         // transformed image
@@ -580,7 +582,7 @@ class Image extends AbstractWord
         }
 
         for ($i=0; $i<$this->lineNoiseLevel; $i++) {
-           imageline($img2, mt_rand(0, $w), mt_rand(0, $h), mt_rand(0, $w), mt_rand(0, $h), $textColor);
+            imageline($img2, mt_rand(0, $w), mt_rand(0, $h), mt_rand(0, $w), mt_rand(0, $h), $textColor);
         }
 
         imagepng($img2, $imgFile);

@@ -67,7 +67,6 @@ abstract class AbstractStringWrapper implements StringWrapperInterface
             );
         }
 
-
         if ($convertEncoding !== null) {
             $convertEncodingUpper = strtoupper($convertEncoding);
             if (!in_array($convertEncodingUpper, $supportedEncodings)) {

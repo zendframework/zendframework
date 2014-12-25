@@ -13,7 +13,6 @@ use Zend\Http\Header\Range;
 
 class RangeTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testRangeFromStringCreatesValidRangeHeader()
     {
         $rangeHeader = Range::fromString('Range: xxx');
@@ -46,5 +45,4 @@ class RangeTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

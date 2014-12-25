@@ -29,7 +29,6 @@ interface FolderInterface
      */
     public function selectFolder($globalName);
 
-
     /**
      * get Zend\Mail\Storage\Folder instance for current folder
      *

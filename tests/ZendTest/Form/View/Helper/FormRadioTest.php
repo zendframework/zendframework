@@ -94,7 +94,6 @@ class FormRadioTest extends CommonTestCase
             sprintf('>%s</label>', 'This is the third label'), $markup
         );
         $this->assertContains(sprintf('value="%s"', 'value3'), $markup);
-
     }
 
     public function testGenerateRadioOptionsAndHiddenElement()

@@ -13,7 +13,6 @@ use Zend\Db\Sql\Ddl\Column\Integer;
 
 class IntegerTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers Zend\Db\Sql\Ddl\Column\Integer::__construct
      */

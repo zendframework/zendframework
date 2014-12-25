@@ -137,7 +137,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
         $updated = $dom->createElement('updated');
         $root->appendChild($updated);
         $text = $dom->createTextNode(
-            $this->getDataContainer()->getDateModified()->format(DateTime::ISO8601)
+            $this->getDataContainer()->getDateModified()->format(DateTime::ATOM)
         );
         $updated->appendChild($text);
     }
@@ -157,7 +157,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
         $el = $dom->createElement('published');
         $root->appendChild($el);
         $text = $dom->createTextNode(
-            $this->getDataContainer()->getDateCreated()->format(DateTime::ISO8601)
+            $this->getDataContainer()->getDateCreated()->format(DateTime::ATOM)
         );
         $el->appendChild($text);
     }
@@ -307,7 +307,6 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
                 $nvalid = $validator->isValid('info@' . $matches['name']);
             }
             return $dvalid && $nvalid;
-
         }
         return false;
     }

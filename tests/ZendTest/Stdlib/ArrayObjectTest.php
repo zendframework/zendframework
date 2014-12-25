@@ -14,7 +14,6 @@ use Zend\Stdlib\ArrayObject;
 
 class ArrayObjectTest extends TestCase
 {
-
     public function testConstructorDefaults()
     {
         $ar = new ArrayObject();

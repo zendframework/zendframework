@@ -18,7 +18,6 @@ use Zend\Barcode\Object\Code39;
  */
 class SvgTest extends TestCommon
 {
-
     protected function getRendererObject($options = null)
     {
         return new Svg($options);
@@ -141,5 +140,4 @@ class SvgTest extends TestCommon
         $svg->appendChild($rootElement);
         return $this->renderer->setResource($svg);
     }
-
 }

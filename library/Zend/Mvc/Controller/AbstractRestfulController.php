@@ -20,7 +20,6 @@ use Zend\Stdlib\ResponseInterface as Response;
  */
 abstract class AbstractRestfulController extends AbstractController
 {
-
     const CONTENT_TYPE_JSON = 'json';
 
     /**
@@ -201,6 +200,7 @@ abstract class AbstractRestfulController extends AbstractController
      *
      * @param  $id
      * @param  $data
+     * @return array
      */
     public function patch($id, $data)
     {

@@ -23,7 +23,6 @@ class Locked extends AbstractContainer
      */
     public $value;
 
-
     /**
      * Object constructor
      *

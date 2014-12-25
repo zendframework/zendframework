@@ -15,7 +15,6 @@ use Iterator;
 
 class ParameterContainer implements Iterator, ArrayAccess, Countable
 {
-
     const TYPE_AUTO    = 'auto';
     const TYPE_NULL    = 'null';
     const TYPE_DOUBLE  = 'double';

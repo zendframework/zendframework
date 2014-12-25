@@ -58,7 +58,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             array(Hostname::ALLOW_IP, true, array('1.2.3.4', '10.0.0.1', '255.255.255.255')),
             array(Hostname::ALLOW_IP, false, array('1.2.3.4.5', '0.0.0.256')),
-            array(Hostname::ALLOW_DNS, true, array('example.com', 'example.museum', 'd.hatena.ne.jp')),
+            array(Hostname::ALLOW_DNS, true, array('example.com', 'example.museum', 'd.hatena.ne.jp', 'example.photography')),
             array(Hostname::ALLOW_DNS, false, array('localhost', 'localhost.localdomain', '1.2.3.4', 'domain.invalid')),
             array(Hostname::ALLOW_LOCAL, true, array('localhost', 'localhost.localdomain', 'example.com')),
             array(Hostname::ALLOW_ALL, true, array('localhost', 'example.com', '1.2.3.4')),

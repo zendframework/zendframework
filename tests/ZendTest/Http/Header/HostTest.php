@@ -13,7 +13,6 @@ use Zend\Http\Header\Host;
 
 class HostTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testHostFromStringCreatesValidHostHeader()
     {
         $hostHeader = Host::fromString('Host: xxx');
@@ -46,5 +45,4 @@ class HostTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

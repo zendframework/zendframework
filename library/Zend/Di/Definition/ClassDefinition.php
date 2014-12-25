@@ -79,7 +79,7 @@ class ClassDefinition implements DefinitionInterface, PartialMarker
      */
     public function addMethod($method, $isRequired = null)
     {
-       if ($isRequired === null) {
+        if ($isRequired === null) {
             if ($method === '__construct') {
                 $methodRequirementType = Di::METHOD_IS_CONSTRUCTOR;
             } else {

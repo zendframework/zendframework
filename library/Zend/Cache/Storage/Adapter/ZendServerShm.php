@@ -19,7 +19,6 @@ class ZendServerShm extends AbstractZendServer implements
     FlushableInterface,
     TotalSpaceCapableInterface
 {
-
     /**
      * Constructor
      *

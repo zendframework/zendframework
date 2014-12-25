@@ -52,5 +52,4 @@ class ContentTransferEncoding implements HeaderInterface
     {
         return 'Content-Transfer-Encoding: ' . $this->getFieldValue();
     }
-
 }

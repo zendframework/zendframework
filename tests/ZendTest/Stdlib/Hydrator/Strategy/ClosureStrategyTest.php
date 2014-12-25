@@ -80,7 +80,7 @@ class ClosureStrategyTest extends \PHPUnit_Framework_TestCase
 
         $actual = array();
         foreach ($data as $k => $value) {
-           $actual[$k] = $strategy->extract($value, $data);
+            $actual[$k] = $strategy->extract($value, $data);
         }
 
         $this->assertSame($actual, $expected);
@@ -100,7 +100,7 @@ class ClosureStrategyTest extends \PHPUnit_Framework_TestCase
 
         $actual = array();
         foreach ($data as $k => $value) {
-           $actual[$k] = $strategy->hydrate($value, $data);
+            $actual[$k] = $strategy->hydrate($value, $data);
         }
 
         $this->assertSame($actual, $expected);

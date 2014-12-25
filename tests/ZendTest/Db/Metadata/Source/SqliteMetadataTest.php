@@ -17,7 +17,6 @@ use Zend\Db\Metadata\Source\SqliteMetadata;
  */
 class SqliteMetadataTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var SqliteMetadata
      */
@@ -42,7 +41,6 @@ class SqliteMetadataTest extends \PHPUnit_Framework_TestCase
             'dsn' => 'sqlite::memory:'
         ));
         $this->metadata = new SqliteMetadata($this->adapter);
-
     }
 
     public function testGetSchemas()

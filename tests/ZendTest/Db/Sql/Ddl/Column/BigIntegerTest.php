@@ -13,7 +13,6 @@ use Zend\Db\Sql\Ddl\Column\BigInteger;
 
 class BigIntegerTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @covers Zend\Db\Sql\Ddl\Column\BigInteger::__construct
      */

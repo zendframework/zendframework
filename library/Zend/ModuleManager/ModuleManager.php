@@ -151,7 +151,7 @@ class ModuleManager implements ModuleManagerInterface
          * loadModule() call, and use the original event otherwise.
          */
         if (!isset($this->loadFinished)) {
-             $this->loadFinished = 0;
+            $this->loadFinished = 0;
         }
 
         $event = ($this->loadFinished > 0) ? clone $this->getEvent() : $this->getEvent();
@@ -246,10 +246,13 @@ class ModuleManager implements ModuleManagerInterface
         if (is_array($modules) || $modules instanceof Traversable) {
             $this->modules = $modules;
         } else {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Parameter to %s\'s %s method must be an array or implement the Traversable interface',
-                __CLASS__, __METHOD__
-            ));
+            throw new Exception\InvalidArgumentException(
+                sprintf(
+                    'Parameter to %s\'s %s method must be an array or implement the Traversable interface',
+                    __CLASS__,
+                    __METHOD__
+                )
+            );
         }
         return $this;
     }

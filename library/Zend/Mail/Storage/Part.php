@@ -349,7 +349,6 @@ class Part implements RecursiveIterator, Part\PartInterface
         return Mime\Decode::splitHeaderField(current($this->getHeader($name, 'array')), $wantedPart, $firstName);
     }
 
-
     /**
      * Getter for mail headers - name is matched in lowercase
      *

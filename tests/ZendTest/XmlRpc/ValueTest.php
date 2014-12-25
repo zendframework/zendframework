@@ -655,7 +655,6 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('dateTime.iso8601', $val->getType());
         $this->assertSame($dateString, $val->getValue());
         $this->assertEquals(trim($xml), trim($val->saveXml()));
-
     }
 
     /**

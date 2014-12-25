@@ -215,17 +215,18 @@ abstract class AbstractWriter implements WriterInterface
             $plugins = new $plugins;
         }
         if (!$plugins instanceof FormatterPluginManager) {
-            throw new Exception\InvalidArgumentException(sprintf(
+            throw new Exception\InvalidArgumentException(
+                sprintf(
                     'Writer plugin manager must extend %s\FormatterPluginManager; received %s',
                     __NAMESPACE__,
                     is_object($plugins) ? get_class($plugins) : gettype($plugins)
-            ));
+                )
+            );
         }
 
         $this->formatterPlugins = $plugins;
         return $this;
     }
-
 
     /**
      * Get formatter instance
@@ -341,7 +342,8 @@ abstract class AbstractWriter implements WriterInterface
      * @return void
      */
     public function shutdown()
-    {}
+    {
+    }
 
     /**
      * Write a message to the log

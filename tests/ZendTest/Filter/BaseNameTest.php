@@ -15,7 +15,6 @@ use Zend\Filter\BaseName as BaseNameFilter;
  */
 class BaseNameTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * Ensures that the filter follows expected behavior
      *

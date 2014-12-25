@@ -66,5 +66,4 @@ interface TranslatorAwareInterface
      * @return string
      */
     public function getTranslatorTextDomain();
-
 }

@@ -16,7 +16,6 @@ use Zend\Db\Sql\TableIdentifier;
 
 abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayInterface
 {
-
     /**
      * @var bool
      */
@@ -127,7 +126,6 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
         $this->initialize();
 
         if ($this->rowExistsInDatabase()) {
-
             // UPDATE
 
             $data = $this->data;
@@ -158,7 +156,6 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
                 }
             }
         } else {
-
             // INSERT
             $insert = $this->sql->insert();
             $insert->values($this->data);
@@ -180,7 +177,6 @@ abstract class AbstractRowGateway implements ArrayAccess, Countable, RowGatewayI
             foreach ($this->primaryKeyColumn as $pkColumn) {
                 $where[$pkColumn] = $this->primaryKeyData[$pkColumn];
             }
-
         }
 
         // refresh data

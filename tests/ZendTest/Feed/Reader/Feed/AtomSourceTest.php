@@ -18,7 +18,6 @@ use Zend\Feed\Reader;
 */
 class AtomSourceTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $feedSamplePath = null;
 
     protected $options = array();
@@ -132,7 +131,7 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
         );
         $source = $feed->current()->getSource();
 
-        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $source->getDateCreated());
     }
 
@@ -147,7 +146,7 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
         );
         $source = $feed->current()->getSource();
 
-        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $source->getDateModified());
     }
 
@@ -269,5 +268,4 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->expectedCats, (array) $source->getCategories());
         $this->assertEquals(array('topic1','Cat & Dog'), array_values($source->getCategories()->getValues()));
     }
-
 }

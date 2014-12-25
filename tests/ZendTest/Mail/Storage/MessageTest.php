@@ -163,7 +163,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->fail('no exception raised while using invalid mail handler');
-
     }
 
     public function testMissingId()
@@ -177,7 +176,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->fail('no exception raised while mail handler without id');
-
     }
 
     public function testIterator()

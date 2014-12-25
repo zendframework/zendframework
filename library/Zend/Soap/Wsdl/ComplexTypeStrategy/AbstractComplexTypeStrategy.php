@@ -50,7 +50,6 @@ abstract class AbstractComplexTypeStrategy implements ComplexTypeStrategyInterfa
      */
     public function scanRegisteredTypes($phpType)
     {
-
         if (array_key_exists($phpType, $this->getContext()->getTypes())) {
             $soapTypes = $this->getContext()->getTypes();
             return $soapTypes[$phpType];

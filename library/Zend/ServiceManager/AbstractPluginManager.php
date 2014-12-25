@@ -164,6 +164,16 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
     {
         $invokable = $this->invokableClasses[$canonicalName];
 
+        if (!class_exists($invokable)) {
+            throw new Exception\ServiceNotFoundException(sprintf(
+                '%s: failed retrieving "%s%s" via invokable class "%s"; class does not exist',
+                get_class($this) . '::' . __FUNCTION__,
+                $canonicalName,
+                ($requestedName ? '(alias: ' . $requestedName . ')' : ''),
+                $invokable
+            ));
+        }
+
         if (null === $this->creationOptions
             || (is_array($this->creationOptions) && empty($this->creationOptions))
         ) {
@@ -206,9 +216,13 @@ abstract class AbstractPluginManager extends ServiceManager implements ServiceLo
         } elseif (is_callable($factory)) {
             $instance = $this->createServiceViaCallback($factory, $canonicalName, $requestedName);
         } else {
-            throw new Exception\ServiceNotCreatedException(sprintf(
-                'While attempting to create %s%s an invalid factory was registered for this instance type.', $canonicalName, ($requestedName ? '(alias: ' . $requestedName . ')' : '')
-            ));
+            throw new Exception\ServiceNotCreatedException(
+                sprintf(
+                    'While attempting to create %s%s an invalid factory was registered for this instance type.',
+                    $canonicalName,
+                    ($requestedName ? '(alias: ' . $requestedName . ')' : '')
+                )
+            );
         }
 
         return $instance;

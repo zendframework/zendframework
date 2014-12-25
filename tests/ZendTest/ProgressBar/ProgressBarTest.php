@@ -14,7 +14,6 @@ namespace ZendTest\ProgressBar;
  */
 class ProgressBarTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testGreaterMin()
     {
         $this->setExpectedException('Zend\ProgressBar\Exception\OutOfRangeException', '$max must be greater than $min');
@@ -150,7 +149,6 @@ class MockUp extends \Zend\ProgressBar\Adapter\AbstractAdapter
 
     public function finish()
     {
-
     }
 
     public function getCurrent()

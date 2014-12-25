@@ -91,7 +91,6 @@ class Maildir extends Storage\Maildir implements FolderInterface
         $dirs = array();
 
         while (($entry = readdir($dh)) !== false) {
-
             // maildir++ defines folders must start with .
             if ($entry[0] != '.' || $entry == '.' || $entry == '..') {
                 continue;
@@ -194,8 +193,11 @@ class Maildir extends Storage\Maildir implements FolderInterface
             }
             // seems like file has vanished; rebuilding folder tree - but it's still an exception
             $this->_buildFolderTree();
-            throw new Exception\RuntimeException('seems like the maildir has vanished, I\'ve rebuild the ' .
-                                                         'folder tree, search for an other folder and try again', 0, $e);
+            throw new Exception\RuntimeException(
+                'seems like the maildir has vanished, I\'ve rebuild the folder tree, search for an other folder and try again',
+                0,
+                $e
+            );
         }
     }
 

@@ -25,7 +25,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!extension_loaded('soap')) {
-           $this->markTestSkipped('SOAP Extension is not loaded');
+            $this->markTestSkipped('SOAP Extension is not loaded');
         }
     }
 
@@ -690,7 +690,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsRegisteredAsFaultException($exception)
     {
-
         $server = new Server();
         $server->registerFaultException($exception);
 

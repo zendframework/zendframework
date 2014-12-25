@@ -28,7 +28,8 @@ class MsgPackTest extends \PHPUnit_Framework_TestCase
             try {
                 new Serializer\Adapter\MsgPack();
                 $this->fail("Zend\\Serializer\\Adapter\\MsgPack needs missing ext/msgpack but did't throw exception");
-            } catch (ExtensionNotLoadedException $e) {}
+            } catch (ExtensionNotLoadedException $e) {
+            }
             $this->markTestSkipped('Zend\\Serializer\\Adapter\\MsgPack needs ext/msgpack');
         }
         $this->adapter = new Serializer\Adapter\MsgPack();

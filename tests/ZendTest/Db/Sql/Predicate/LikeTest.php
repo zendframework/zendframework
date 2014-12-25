@@ -13,7 +13,6 @@ use Zend\Db\Sql\Predicate\Like;
 
 class LikeTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testConstructEmptyArgs()
     {
         $like = new Like();
@@ -57,5 +56,4 @@ class LikeTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Like', $like->setSpecification('%1$s LIKE %2$s'));
         $this->assertInstanceOf('Zend\Db\Sql\Predicate\Like', $like->setLike('foo%'));
     }
-
 }

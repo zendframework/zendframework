@@ -13,7 +13,6 @@ use Zend\Stdlib\StringWrapper\Native;
 
 class NativeTest extends CommonStringWrapperTest
 {
-
     protected function getWrapper($encoding = null, $convertEncoding = null)
     {
         if ($encoding === null) {

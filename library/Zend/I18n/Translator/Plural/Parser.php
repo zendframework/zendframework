@@ -264,10 +264,9 @@ class Parser
     public function advance($id = null)
     {
         if ($id !== null && $this->currentToken->id !== $id) {
-            throw new Exception\ParseException(sprintf(
-                'Expected token with id %s but received %s',
-                $id, $this->currentToken->id
-            ));
+            throw new Exception\ParseException(
+                sprintf('Expected token with id %s but received %s', $id, $this->currentToken->id)
+            );
         }
 
         $this->currentToken = $this->getNextToken();

@@ -9,7 +9,6 @@
 
 namespace Zend\Feed\Reader\Extension\CreativeCommons;
 
-use Zend\Feed\Reader;
 use Zend\Feed\Reader\Extension;
 
 class Feed extends Extension\AbstractFeed

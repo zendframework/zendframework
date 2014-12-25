@@ -135,7 +135,8 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
                 "\n"       => "\n",
                 " \t "     => " \t "
             );
-        } if (self::$meansEnglishAlphabet) {
+        }
+        if (self::$meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
             $valuesExpected = array(
                 'a B'    => 'a B',
@@ -197,5 +198,4 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($input,  $filter->filter($input));
     }
-
 }

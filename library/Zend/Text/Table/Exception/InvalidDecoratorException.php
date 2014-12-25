@@ -12,4 +12,5 @@ namespace Zend\Text\Table\Exception;
 use DomainException;
 
 class InvalidDecoratorException extends DomainException implements ExceptionInterface
-{}
+{
+}

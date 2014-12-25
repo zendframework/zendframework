@@ -71,6 +71,17 @@ abstract class CommonTestCase extends TestCase
         $this->assertEquals('iso-8859-1', $escape->getEncoding());
     }
 
+    public function testInjectingEncodingProxiesToAttrEscapeHelper()
+    {
+        if (!extension_loaded('intl')) {
+            $this->markTestSkipped('ext/intl not enabled');
+        }
+
+        $escape = $this->renderer->plugin('escapehtmlattr');
+        $this->helper->setEncoding('iso-8859-1');
+        $this->assertEquals('iso-8859-1', $escape->getEncoding());
+    }
+
     public function testAssumesHtml4LooseDoctypeByDefault()
     {
         if (!extension_loaded('intl')) {

@@ -15,7 +15,6 @@ use Zend\View\Helper\EscapeCss as EscapeHelper;
 
 class EscapeCssTest extends TestCase
 {
-
     protected $supportedEncodings = array(
         'iso-8859-1',   'iso8859-1',    'iso-8859-5',   'iso8859-5',
         'iso-8859-15',  'iso8859-15',   'utf-8',        'cp866',

@@ -17,10 +17,10 @@
         "php": ">=5.3.23",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zend-servicemanager": "self.version",
+        "zendframework/zend-serializer": "self.version",
         "zendframework/zend-eventmanager": "self.version"
     },
     "require-dev": {
-        "zendframework/zend-serializer": "self.version",
         "zendframework/zend-session": "self.version"
     },
     "suggest": {

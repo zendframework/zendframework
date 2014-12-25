@@ -21,7 +21,6 @@ use Zend\Feed\Reader;
  */
 class RssTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $validWriter = null;
 
     public function setUp()
@@ -589,6 +588,4 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $myDate = new DateTime('@' . 1234567890);
         $this->assertEquals($myDate, $feed->getDateCreated());
     }
-
-
 }

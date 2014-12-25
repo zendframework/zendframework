@@ -163,7 +163,9 @@ class AbstractResultSetTest extends \PHPUnit_Framework_TestCase
             array('id' => 3, 'name' => 'three'),
         )));
         $this->assertTrue($resultSet->valid());
-        $resultSet->next(); $resultSet->next(); $resultSet->next();
+        $resultSet->next();
+        $resultSet->next();
+        $resultSet->next();
         $this->assertFalse($resultSet->valid());
     }
 

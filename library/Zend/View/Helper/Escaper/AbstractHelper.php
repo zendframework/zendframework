@@ -39,9 +39,11 @@ abstract class AbstractHelper extends Helper\AbstractHelper
      * Invoke this helper: escape a value
      *
      * @param  mixed $value
-     * @param  int   $recurse Expects one of the recursion constants; used to decide whether or not to recurse the given value when escaping
+     * @param  int   $recurse Expects one of the recursion constants;
+     *                        used to decide whether or not to recurse the given value when escaping
      * @throws Exception\InvalidArgumentException
-     * @return mixed Given a scalar, a scalar value is returned. Given an object, with the $recurse flag not allowing object recursion, returns a string. Otherwise, returns an array.
+     * @return mixed Given a scalar, a scalar value is returned. Given an object, with the $recurse flag not
+     *               allowing object recursion, returns a string. Otherwise, returns an array.
      */
     public function __invoke($value, $recurse = self::RECURSE_NONE)
     {
@@ -100,7 +102,7 @@ abstract class AbstractHelper extends Helper\AbstractHelper
         if (null !== $this->escaper) {
             throw new Exception\InvalidArgumentException(
                 'Character encoding settings cannot be changed once the Helper has been used or '
-                    . ' if a Zend\Escaper\Escaper object (with preset encoding option) is set.'
+                . ' if a Zend\Escaper\Escaper object (with preset encoding option) is set.'
             );
         }
 

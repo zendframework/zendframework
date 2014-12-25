@@ -17,7 +17,6 @@ use Zend\ServiceManager\ServiceManager;
  */
 class DiAbstractServiceFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var DiAbstractServiceFactory
      */

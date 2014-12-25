@@ -62,5 +62,4 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('page1', $pages[1]['uri']);
         $this->assertEquals('page2', $pages[2]['uri']);
     }
-
 }

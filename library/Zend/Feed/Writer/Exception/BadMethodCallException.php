@@ -16,7 +16,6 @@ use Zend\Feed\Exception;
  *
  * Class to represent exceptions that occur during Feed operations.
  */
-class BadMethodCallException
-    extends Exception\BadMethodCallException
-    implements ExceptionInterface
-{}
+class BadMethodCallException extends Exception\BadMethodCallException implements ExceptionInterface
+{
+}

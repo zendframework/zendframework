@@ -11,7 +11,6 @@ namespace Zend\XmlRpc\Value;
 
 class Nil extends AbstractScalar
 {
-
     /**
      * Set the value of a nil native type
      *

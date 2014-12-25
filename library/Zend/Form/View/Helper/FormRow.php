@@ -11,6 +11,7 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\Element\Button;
 use Zend\Form\Element\MonthSelect;
+use Zend\Form\Element\Captcha;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\LabelAwareInterface;
@@ -128,9 +129,7 @@ class FormRow extends AbstractHelper
         if (isset($label) && '' !== $label) {
             // Translate the label
             if (null !== ($translator = $this->getTranslator())) {
-                $label = $translator->translate(
-                    $label, $this->getTranslatorTextDomain()
-                );
+                $label = $translator->translate($label, $this->getTranslatorTextDomain());
             }
         }
 
@@ -163,7 +162,6 @@ class FormRow extends AbstractHelper
         // hidden elements do not need a <label> -https://github.com/zendframework/zf2/issues/5607
         $type = $element->getAttribute('type');
         if (isset($label) && '' !== $label && $type !== 'hidden') {
-
             $labelAttributes = array();
 
             if ($element instanceof LabelAwareInterface) {
@@ -183,11 +181,13 @@ class FormRow extends AbstractHelper
             if ($type === 'multi_checkbox'
                 || $type === 'radio'
                 || $element instanceof MonthSelect
+                || $element instanceof Captcha
             ) {
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',
                     $label,
-                    $elementString);
+                    $elementString
+                );
             } else {
                 // Ensure element and label will be separated if element has an `id`-attribute.
                 // If element has label option `always_wrap` it will be nested in any case.

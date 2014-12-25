@@ -19,7 +19,6 @@ use Zend\Feed\Reader;
  */
 class AtomTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $validWriter = null;
     protected $validEntry = null;
 
@@ -305,5 +304,4 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         //$this->assertEquals('http://www.example.com/rss/id/1', $entry->getCommentFeedLink('rss'));
         $this->assertEquals('http://www.example.com/atom/id/1', $entry->getCommentFeedLink('atom'));
     }
-
 }

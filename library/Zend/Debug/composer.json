@@ -17,7 +17,7 @@
         "php": ">=5.3.23"
     },
     "require-dev": {
-        "zendframework/zend-escaper": "*"
+        "zendframework/zend-escaper": "2.*"
     },
     "suggest": {
         "ext/xdebug": "XDebug, for better backtrace output",

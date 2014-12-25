@@ -185,8 +185,6 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
             $values = array($value);
         }
 
-        $retval    = true;
-        $messages  = array();
         $validator = $this->getValidator();
 
         if (!$validator) {
@@ -198,17 +196,14 @@ class Explode extends AbstractValidator implements ValidatorPluginManagerAwareIn
 
         foreach ($values as $value) {
             if (!$validator->isValid($value)) {
-                $messages[] = $validator->getMessages();
-                $retval = false;
+                $this->abstractOptions['messages'][] = $validator->getMessages();
 
                 if ($this->isBreakOnFirstFailure()) {
-                    break;
+                    return false;
                 }
             }
         }
 
-        $this->abstractOptions['messages'] = $messages;
-
-        return $retval;
+        return count($this->abstractOptions['messages']) == 0;
     }
 }

@@ -35,7 +35,7 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
     }
 
     public function testSerializeNull()
-   {
+    {
         $value    = null;
         $expected = 'N.';
 
@@ -121,5 +121,4 @@ class PythonPickleSerializeProtocol1Test extends \PHPUnit_Framework_TestCase
         $data = $this->adapter->serialize($value);
         $this->assertEquals($expected, $data);
     }
-
 }

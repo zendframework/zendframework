@@ -156,10 +156,12 @@ class Registry
     {
         if (!class_exists($name)) {
             throw new Exception\DomainException(
-                sprintf('%s expects a valid registry class name; received "%s", which did not resolve',
-                        __METHOD__,
-                        $name
-                ));
+                sprintf(
+                    '%s expects a valid registry class name; received "%s", which did not resolve',
+                    __METHOD__,
+                    $name
+                )
+            );
         }
 
         if (!in_array('Zend\View\Helper\Placeholder\Container\AbstractContainer', class_parents($name))) {

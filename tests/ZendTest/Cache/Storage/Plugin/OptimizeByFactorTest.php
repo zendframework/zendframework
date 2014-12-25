@@ -16,7 +16,6 @@ use ArrayObject;
 
 class OptimizeByFactorTest extends CommonPluginTest
 {
-
     /**
      * The storage adapter
      *

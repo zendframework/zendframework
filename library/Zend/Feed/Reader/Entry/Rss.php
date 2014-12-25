@@ -17,7 +17,6 @@ use Zend\Feed\Reader\Exception;
 
 class Rss extends AbstractEntry implements EntryInterface
 {
-
     /**
      * XPath query for RDF
      *

@@ -41,5 +41,4 @@ interface MessageInterface
      * @return mixed
      */
     public function getContent();
-
 }

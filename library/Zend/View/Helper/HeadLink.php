@@ -33,9 +33,21 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
     /**
      * Allowed attributes
      *
-     * @var array
+     * @var string[]
      */
-    protected $itemKeys = array('charset', 'href', 'hreflang', 'id', 'media', 'rel', 'rev', 'type', 'title', 'extras');
+    protected $itemKeys = array(
+        'charset',
+        'href',
+        'hreflang',
+        'id',
+        'media',
+        'rel',
+        'rev',
+        'sizes',
+        'type',
+        'title',
+        'extras'
+    );
 
     /**
      * Registry key for placeholder
@@ -144,10 +156,9 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
             }
 
             if (1 > $argc) {
-                throw new Exception\BadMethodCallException(sprintf(
-                    '%s requires at least one argument',
-                    $method
-                 ));
+                throw new Exception\BadMethodCallException(
+                    sprintf('%s requires at least one argument', $method)
+                );
             }
 
             if (is_array($args[0])) {
@@ -266,7 +277,6 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         return $this->getContainer()->set($value);
     }
 
-
     /**
      * Create HTML link element from data item
      *
@@ -285,7 +295,11 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
                         $link .= sprintf(' %s="%s"', $key, ($this->autoEscape) ? $this->escape($value) : $value);
                     }
                 } else {
-                    $link .= sprintf(' %s="%s"', $itemKey, ($this->autoEscape) ? $this->escape($attributes[$itemKey]) : $attributes[$itemKey]);
+                    $link .= sprintf(
+                        ' %s="%s"',
+                        $itemKey,
+                        ($this->autoEscape) ? $this->escape($attributes[$itemKey]) : $attributes[$itemKey]
+                    );
                 }
             }
         }
@@ -302,8 +316,8 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
 
         if (isset($attributes['conditionalStylesheet'])
             && !empty($attributes['conditionalStylesheet'])
-            && is_string($attributes['conditionalStylesheet']))
-        {
+            && is_string($attributes['conditionalStylesheet'])
+        ) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $attributes['conditionalStylesheet']) === '!IE') {
                 $link = '<!-->' . $link . '<!--';

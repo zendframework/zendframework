@@ -64,6 +64,5 @@ class YamlTest extends AbstractWriterTestCase
         $config = $this->reader->fromFile($this->getTestAssetFileName());
 
         $this->assertEquals('multi', $config['all']['one']['two']['three']);
-
     }
 }

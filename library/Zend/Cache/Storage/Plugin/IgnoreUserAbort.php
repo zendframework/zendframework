@@ -85,7 +85,7 @@ class IgnoreUserAbort extends AbstractPlugin
     public function onBefore(Event $event)
     {
         if ($this->activatedTarget === null && !ignore_user_abort(true)) {
-            $this->activatedTarget = $event->getTarget();
+            $this->activatedTarget = $event->getStorage();
         }
     }
 
@@ -101,7 +101,7 @@ class IgnoreUserAbort extends AbstractPlugin
      */
     public function onAfter(Event $event)
     {
-        if ($this->activatedTarget === $event->getTarget()) {
+        if ($this->activatedTarget === $event->getStorage()) {
             // exit if connection aborted
             if ($this->getOptions()->getExitOnAbort() && connection_aborted()) {
                 exit;

@@ -381,7 +381,11 @@ abstract class AbstractHttpControllerTestCase extends AbstractControllerTestCase
             $document->registerXpathNamespaces($this->xpathNamespaces);
         }
 
-        $result   = Document\Query::execute($path, $document, $useXpath ? Document\Query::TYPE_XPATH : Document\Query::TYPE_CSS);
+        $result = Document\Query::execute(
+            $path,
+            $document,
+            $useXpath ? Document\Query::TYPE_XPATH : Document\Query::TYPE_CSS
+        );
 
         return $result;
     }

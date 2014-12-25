@@ -19,7 +19,6 @@ use ZendTest\Code\Generator\TestAsset\PrototypeGenericClass;
  */
 class PrototypeClassFactoryTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var PrototypeClassFactory
      */

@@ -30,8 +30,9 @@ class TestCallbackCache
         return 'foobar_return('.implode(', ', $args) . ') : ' . static::$fooCounter;
     }
 
-    public static function emptyMethod() {}
-
+    public static function emptyMethod()
+    {
+    }
 }
 
 class FailableCallback
@@ -56,7 +57,6 @@ function bar()
  */
 class CallbackCacheTest extends CommonPatternTest
 {
-
     /**
      * @var \Zend\Cache\Storage\StorageInterface
      */

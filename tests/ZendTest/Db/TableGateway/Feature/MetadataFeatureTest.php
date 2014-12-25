@@ -15,8 +15,6 @@ use Zend\Db\Metadata\Object\ConstraintObject;
 
 class MetadataFeatureTest extends PHPUnit_Framework_TestCase
 {
-
-
     /**
      * @group integration-test
      */
@@ -39,5 +37,4 @@ class MetadataFeatureTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(array('id', 'name'), $tableGatewayMock->getColumns());
     }
-
 }

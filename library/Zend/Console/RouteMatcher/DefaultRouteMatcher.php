@@ -728,7 +728,6 @@ class DefaultRouteMatcher implements RouteMatcherInterface
              * Advance to next argument
              */
             $argPos++;
-
         }
 
         /*

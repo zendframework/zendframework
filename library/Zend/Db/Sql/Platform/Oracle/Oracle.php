@@ -13,10 +13,8 @@ use Zend\Db\Sql\Platform\AbstractPlatform;
 
 class Oracle extends AbstractPlatform
 {
-
     public function __construct(SelectDecorator $selectDecorator = null)
     {
         $this->setTypeDecorator('Zend\Db\Sql\Select', ($selectDecorator) ?: new SelectDecorator());
     }
-
 }

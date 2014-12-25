@@ -9,7 +9,6 @@
 
 namespace Zend\Form;
 
-
 trait FormFactoryAwareTrait
 {
     /**

@@ -379,7 +379,6 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
             ), 0, $error);
         }
         return $this->{$match[1]}($match[2], $arguments[0]);
-
     }
 
     /**
@@ -485,7 +484,7 @@ abstract class AbstractContainer implements Countable, RecursiveIterator
      */
     public function hasChildren()
     {
-        return $this->hasPages();
+        return $this->valid() && $this->current()->hasPages();
     }
 
     /**

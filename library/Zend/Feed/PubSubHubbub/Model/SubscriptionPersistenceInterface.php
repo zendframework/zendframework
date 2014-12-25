@@ -11,7 +11,6 @@ namespace Zend\Feed\PubSubHubbub\Model;
 
 interface SubscriptionPersistenceInterface
 {
-
     /**
      * Save subscription to RDMBS
      *
@@ -43,5 +42,4 @@ interface SubscriptionPersistenceInterface
      * @return bool
      */
     public function deleteSubscription($key);
-
 }

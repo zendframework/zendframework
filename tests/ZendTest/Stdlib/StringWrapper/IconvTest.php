@@ -14,7 +14,6 @@ use Zend\Stdlib\StringWrapper\Iconv;
 
 class IconvTest extends CommonStringWrapperTest
 {
-
     public function setUp()
     {
         if (!extension_loaded('iconv')) {

@@ -68,15 +68,15 @@ class ConsoleTest extends \PHPUnit_Framework_TestCase
 
     public function testCanForceInstance()
     {
-       $console = Console::getInstance('Posix');
-       $this->assertTrue($console instanceof Adapter\AdapterInterface);
-       $this->assertTrue($console instanceof Adapter\Posix);
+        $console = Console::getInstance('Posix');
+        $this->assertTrue($console instanceof Adapter\AdapterInterface);
+        $this->assertTrue($console instanceof Adapter\Posix);
 
-       Console::overrideIsConsole(null);
-       Console::resetInstance();
+        Console::overrideIsConsole(null);
+        Console::resetInstance();
 
-       $console = Console::getInstance('Windows');
-       $this->assertTrue($console instanceof Adapter\AdapterInterface);
-       $this->assertTrue($console instanceof Adapter\Windows);
+        $console = Console::getInstance('Windows');
+        $this->assertTrue($console instanceof Adapter\AdapterInterface);
+        $this->assertTrue($console instanceof Adapter\Windows);
     }
 }

@@ -9,7 +9,6 @@
 
 namespace Zend\ProgressBar\Upload;
 
-
 /**
  * Interface for Upload Progress Handlers
  */

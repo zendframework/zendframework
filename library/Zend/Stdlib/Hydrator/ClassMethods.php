@@ -45,10 +45,10 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
 
         $this->callableMethodFilter = new OptionalParametersFilter();
 
-        $this->filterComposite->addFilter("is", new IsFilter());
-        $this->filterComposite->addFilter("has", new HasFilter());
-        $this->filterComposite->addFilter("get", new GetFilter());
-        $this->filterComposite->addFilter("parameter", new OptionalParametersFilter(), FilterComposite::CONDITION_AND);
+        $this->filterComposite->addFilter('is', new IsFilter());
+        $this->filterComposite->addFilter('has', new HasFilter());
+        $this->filterComposite->addFilter('get', new GetFilter());
+        $this->filterComposite->addFilter('parameter', new OptionalParametersFilter(), FilterComposite::CONDITION_AND);
     }
 
     /**
@@ -109,16 +109,16 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     public function extract($object)
     {
         if (!is_object($object)) {
-            throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)', __METHOD__
-            ));
+            throw new Exception\BadMethodCallException(
+                sprintf('%s expects the provided $object to be a PHP object)', __METHOD__)
+            );
         }
 
         $filter = null;
         if ($object instanceof FilterProviderInterface) {
             $filter = new FilterComposite(
                 array($object->getFilter()),
-                array(new MethodMatchFilter("getFilter"))
+                array(new MethodMatchFilter('getFilter'))
             );
         } else {
             $filter = $this->filterComposite;
@@ -168,9 +168,9 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     public function hydrate(array $data, $object)
     {
         if (!is_object($object)) {
-            throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)', __METHOD__
-            ));
+            throw new Exception\BadMethodCallException(
+                sprintf('%s expects the provided $object to be a PHP object)', __METHOD__)
+            );
         }
 
         foreach ($data as $property => $value) {

@@ -101,9 +101,7 @@ class File extends Part
             }
         }
         $this->countParts = count($this->partPos);
-
     }
-
 
     /**
      * Body of part

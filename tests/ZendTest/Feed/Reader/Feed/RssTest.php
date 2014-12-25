@@ -18,7 +18,6 @@ use Zend\Feed\Reader;
 */
 class RssTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $feedSamplePath = null;
 
     protected $expectedCats = array();
@@ -2692,5 +2691,4 @@ class RssTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(null, $feed->getImage());
     }
-
 }

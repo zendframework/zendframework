@@ -29,7 +29,6 @@ class ResultSetIntegrationTest extends TestCase
      */
     protected function setUp()
     {
-
         $this->resultSet = new ResultSet;
     }
 
@@ -215,8 +214,4 @@ class ResultSetIntegrationTest extends TestCase
         $this->setExpectedException('Zend\Db\ResultSet\Exception\RuntimeException', 'Buffering must be enabled before iteration is started');
         $this->resultSet->buffer();
     }
-
-
-
-
 }

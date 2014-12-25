@@ -15,7 +15,6 @@ use Zend\Mvc\ResponseSender\SendResponseEvent;
 
 class SendResponseListenerTest extends TestCase
 {
-
     public function testEventManagerIdentifiers()
     {
         $listener = new SendResponseListener();

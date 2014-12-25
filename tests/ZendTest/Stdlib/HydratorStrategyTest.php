@@ -163,5 +163,4 @@ class HydratorStrategyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($data, $strategy->data);
     }
-
 }

@@ -73,7 +73,6 @@ class DocBlockReflection implements ReflectionInterface
      */
     public static function export()
     {
-
     }
 
     /**
@@ -102,7 +101,6 @@ class DocBlockReflection implements ReflectionInterface
             $lineCount       = substr_count($this->docComment, "\n");
             $this->startLine = $this->reflector->getStartLine() - $lineCount - 1;
             $this->endLine   = $this->reflector->getStartLine() - 1;
-
         } elseif (is_string($commentOrReflector)) {
             $this->docComment = $commentOrReflector;
         } else {

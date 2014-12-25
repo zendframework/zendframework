@@ -12,8 +12,6 @@ namespace Zend\Mime\Exception;
 /**
  * Exception for Zend\Mime component.
  */
-class RuntimeException
-    extends \RuntimeException
-    implements ExceptionInterface
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 }

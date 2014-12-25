@@ -16,7 +16,6 @@ use Zend\Mail\Header\ContentType;
  */
 class ContentTypeTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testContentTypeFromStringCreatesValidContentTypeHeader()
     {
         $contentTypeHeader = ContentType::fromString('Content-Type: xxx/yyy');

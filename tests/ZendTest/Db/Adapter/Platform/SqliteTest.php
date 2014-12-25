@@ -140,7 +140,7 @@ class SqliteTest extends \PHPUnit_Framework_TestCase
     {
         // Creating the SQLite database file
         $filePath = realpath(__DIR__) . "/_files/sqlite.db";
-        if(!file_exists($filePath)) {
+        if (!file_exists($filePath)) {
             touch($filePath);
         }
 

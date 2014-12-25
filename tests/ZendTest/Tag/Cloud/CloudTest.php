@@ -21,7 +21,6 @@ use Zend\Tag\Exception\InvalidArgumentException;
  */
 class CloudTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testGetAndSetItemList()
     {
         $cloud = $this->_getCloud();

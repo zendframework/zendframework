@@ -13,4 +13,5 @@ use Zend\Json\Exception;
 
 class InvalidArgumentException extends Exception\InvalidArgumentException implements
     ExceptionInterface
-{}
+{
+}

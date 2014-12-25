@@ -77,7 +77,7 @@ class AbstractControllerTestCaseTest extends AbstractHttpControllerTestCase
 
     public function testUseOfRouter()
     {
-       // default value
+        // default value
        $this->assertEquals(false, $this->useConsoleRequest);
     }
 

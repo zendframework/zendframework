@@ -14,5 +14,4 @@ namespace Zend\Navigation\Exception;
  */
 interface ExceptionInterface
 {
-
 }

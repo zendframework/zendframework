@@ -23,14 +23,12 @@ class Login extends Smtp
      */
     protected $username;
 
-
     /**
      * LOGIN password
      *
      * @var string
      */
     protected $password;
-
 
     /**
      * Constructor.
@@ -64,7 +62,6 @@ class Login extends Smtp
         // Call parent with original arguments
         parent::__construct($host, $port, $origConfig);
     }
-
 
     /**
      * Perform LOGIN authentication with supplied credentials

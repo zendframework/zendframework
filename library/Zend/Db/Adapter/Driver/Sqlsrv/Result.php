@@ -14,7 +14,6 @@ use Zend\Db\Adapter\Driver\ResultInterface;
 
 class Result implements Iterator, ResultInterface
 {
-
     /**
      * @var resource
      */

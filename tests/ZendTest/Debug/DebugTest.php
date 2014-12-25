@@ -17,7 +17,6 @@ use Zend\Escaper\Escaper;
  */
 class DebugTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testDebugDefaultSapi()
     {
         $sapi = php_sapi_name();
@@ -106,5 +105,4 @@ class DebugTest extends \PHPUnit_Framework_TestCase
         $result = Debug::dump($a, "LABEL", false);
         $this->assertContains("&lt;script type=&quot;text/javascript&quot;&quot;", $result);
     }
-
 }

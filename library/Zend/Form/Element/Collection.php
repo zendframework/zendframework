@@ -500,7 +500,6 @@ class Collection extends Fieldset
      */
     public function extract()
     {
-
         if ($this->object instanceof Traversable) {
             $this->object = ArrayUtils::iteratorToArray($this->object, false);
         }
@@ -512,21 +511,37 @@ class Collection extends Fieldset
         $values = array();
 
         foreach ($this->object as $key => $value) {
+            // If a hydrator is provided, our work here is done
             if ($this->hydrator) {
                 $values[$key] = $this->hydrator->extract($value);
-            } elseif ($value instanceof $this->targetElement->object) {
-                // @see https://github.com/zendframework/zf2/pull/2848
+                continue;
+            }
+            
+            // If the target element is a fieldset that can accept the provided value
+            // we should clone it, inject the value and extract the data
+            if ( $this->targetElement instanceof FieldsetInterface ) {
+                if ( ! $this->targetElement->allowObjectBinding($value) ) {
+                    continue;
+                }
                 $targetElement = clone $this->targetElement;
-                $targetElement->object = $value;
+                $targetElement->setObject($value);
                 $values[$key] = $targetElement->extract();
                 if (!$this->createNewObjects() && $this->has($key)) {
-                    $fieldset = $this->get($key);
-                    if ($fieldset instanceof Fieldset && $fieldset->allowObjectBinding($value)) {
-                        $fieldset->setObject($value);
-                    }
+                    $this->get($key)->setObject($value);
                 }
+                continue;
+            }
+            
+            // If the target element is a non-fieldset element, just use the value
+            if ( $this->targetElement instanceof ElementInterface ) {
+                $values[$key] = $value;
+                if (!$this->createNewObjects() && $this->has($key)) {
+                    $this->get($key)->setValue($value);
+                }
+                continue;
             }
         }
+
         return $values;
     }
 

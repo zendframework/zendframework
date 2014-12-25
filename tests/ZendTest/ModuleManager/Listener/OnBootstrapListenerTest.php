@@ -23,7 +23,6 @@ use ZendTest\ModuleManager\TestAsset\MockApplication;
 
 class OnBootstrapListenerTest extends TestCase
 {
-
     public function setUp()
     {
         $this->loaders = spl_autoload_functions();

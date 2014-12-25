@@ -207,9 +207,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function quantifier($quantifier)
     {
-        if (!is_string($quantifier) && !$quantifier instanceof Expression) {
+        if (!is_string($quantifier) && !$quantifier instanceof ExpressionInterface) {
             throw new Exception\InvalidArgumentException(
-                'Quantifier must be one of DISTINCT, ALL, or some platform specific Expression object'
+                'Quantifier must be one of DISTINCT, ALL, or some platform specific object implementing ExpressionInterface'
             );
         }
         $this->quantifier = $quantifier;
@@ -630,7 +630,6 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         // process table columns
         $columns = array();
         foreach ($this->columns as $columnIndexOrAs => $column) {
-
             $columnName = '';
             if ($column === self::SQL_STAR) {
                 $columns[] = array($fromTable . self::SQL_STAR);
@@ -824,7 +823,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
         $orders = array();
         foreach ($this->order as $k => $v) {
-            if ($v instanceof Expression) {
+            if ($v instanceof ExpressionInterface) {
                 /** @var $orderParts \Zend\Db\Adapter\StatementContainer */
                 $orderParts = $this->processExpression($v, $platform, $driver);
                 if ($parameterContainer) {

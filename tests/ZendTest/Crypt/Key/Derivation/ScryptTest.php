@@ -16,7 +16,6 @@ use Zend\Crypt\Key\Derivation\Scrypt;
  */
 class ScryptTest extends \PHPUnit_Framework_TestCase
 {
-
     protected static function getMethod($name)
     {
         $class = new \ReflectionClass('Zend\Crypt\Key\Derivation\Scrypt');
@@ -157,7 +156,7 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
      */
     public function testScryptWrongR()
     {
-         $result = Scrypt::calc('test', 'salt', PHP_INT_MAX / 128, 4, 1, 64);
+        $result = Scrypt::calc('test', 'salt', PHP_INT_MAX / 128, 4, 1, 64);
     }
 
     /**

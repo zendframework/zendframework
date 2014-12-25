@@ -40,23 +40,20 @@ class PhpMemoryArray implements RemoteLoaderInterface
     public function load($locale, $textDomain)
     {
         if (!is_array($this->messages)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected an array, but received %s',
-                gettype($this->messages)
-            ));
+            throw new Exception\InvalidArgumentException(
+                sprintf('Expected an array, but received %s', gettype($this->messages))
+            );
         }
 
         if (!isset($this->messages[$textDomain])) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected textdomain "%s" to be an array, but it is not set',
-                $textDomain)
+            throw new Exception\InvalidArgumentException(
+                sprintf('Expected textdomain "%s" to be an array, but it is not set', $textDomain)
             );
         }
 
         if (!isset($this->messages[$textDomain][$locale])) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected locale "%s" to be an array, but it is not set',
-                $locale)
+            throw new Exception\InvalidArgumentException(
+                sprintf('Expected locale "%s" to be an array, but it is not set', $locale)
             );
         }
 

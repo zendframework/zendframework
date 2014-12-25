@@ -23,14 +23,12 @@ class Plain extends Smtp
      */
     protected $username;
 
-
     /**
      * PLAIN password
      *
      * @var string
      */
     protected $password;
-
 
     /**
      * Constructor.
@@ -64,7 +62,6 @@ class Plain extends Smtp
         // Call parent with original arguments
         parent::__construct($host, $port, $origConfig);
     }
-
 
     /**
      * Perform PLAIN authentication with supplied credentials

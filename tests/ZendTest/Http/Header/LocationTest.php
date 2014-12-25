@@ -13,7 +13,6 @@ use Zend\Http\Header\Location;
 
 class LocationTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @param  string $uri The URL to redirect to
      * @dataProvider locationFromStringCreatesValidLocationHeaderProvider
@@ -60,11 +59,10 @@ class LocationTest extends \PHPUnit_Framework_TestCase
      */
     public function testLocationCanSetDifferentSchemeUriObjects($uri, $expectedClass)
     {
-            $uri = \Zend\Uri\UriFactory::factory($uri);
+        $uri = \Zend\Uri\UriFactory::factory($uri);
         $locationHeader = new Location;
         $locationHeader->setUri($uri);
         $this->assertAttributeInstanceof($expectedClass, 'uri', $locationHeader);
-
     }
 
     /**
@@ -119,5 +117,4 @@ class LocationTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($uri->isAbsolute());
         $this->assertEquals('/path/to', $locationHeader->getUri());
     }
-
 }

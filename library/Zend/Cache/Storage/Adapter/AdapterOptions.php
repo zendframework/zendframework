@@ -22,11 +22,10 @@ use Zend\Stdlib\ErrorHandler;
  */
 class AdapterOptions extends AbstractOptions
 {
-
     /**
      * The adapter using these options
      *
-     * @var null|Filesystem
+     * @var null|StorageInterface
      */
     protected $adapter;
 
@@ -259,7 +258,7 @@ class AdapterOptions extends AbstractOptions
         }
 
         if ($ttl < 0) {
-             throw new Exception\InvalidArgumentException("TTL can't be negative");
+            throw new Exception\InvalidArgumentException("TTL can't be negative");
         }
     }
 }

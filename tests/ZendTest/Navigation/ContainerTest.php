@@ -26,7 +26,6 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-
     }
 
     /**
@@ -35,7 +34,6 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
     }
 
     public function testConstructWithArray()
@@ -223,6 +221,141 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             $actual[] = $page->getLabel();
         }
         $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @group 6825
+     * @group 4517
+     * @group 3211
+     *
+     * @link https://github.com/zendframework/zf2/issues/3211
+     */
+    public function testHasChildrenCompatibility()
+    {
+        $nav = new Navigation\Navigation(array(
+            array(
+                'label' => 'Page 1',
+                'uri' => '#',
+                'pages' => array(
+                    array(
+                        'label' => 'Page 1.1',
+                        'uri' => '#',
+                        'pages' => array(
+                            array(
+                                'label' => 'Page 1.1.1',
+                                'uri' => '#'
+                            ),
+                            array(
+                                'label' => 'Page 1.1.2',
+                                'uri' => '#'
+                            )
+                        )
+                    ),
+                    array(
+                        'label' => 'Page 1.2',
+                        'uri' => '#'
+                    )
+                )
+            ),
+            array(
+                'label' => 'Page 2',
+                'uri' => '#',
+                'pages' => array(
+                    array(
+                        'label' => 'Page 2.1',
+                        'uri' => '#'
+                    )
+                )
+            ),
+            array(
+                'label' => 'Page 3',
+                'uri' => '#'
+            )
+        ));
+
+        $page1 = $nav->findOneBy('label', 'Page 1');
+        $this->assertTrue($page1->hasChildren(), "page1's first child has children 1.1.1 1.1.2");
+
+        $page2 = $nav->findOneBy('label', 'Page 2');
+        $this->assertFalse($page2->hasChildren(), "page2's first child doesn't have children");
+    }
+
+    /**
+     * @group 6825
+     * @group 4517
+     * @group 3211
+     */
+    public function testDetailedRecursiveIteration()
+    {
+        $nav = new Navigation\Navigation(array(
+            array(
+                'label' => 'Page 1',
+                'uri' => '#',
+                'pages' => array(
+                    array(
+                        'label' => 'Page 1.1',
+                        'uri' => '#',
+                        'pages' => array(
+                            array(
+                                'label' => 'Page 1.1.1',
+                                'uri' => '#'
+                            ),
+                            array(
+                                'label' => 'Page 1.1.2',
+                                'uri' => '#'
+                            )
+                        )
+                    ),
+                    array(
+                        'label' => 'Page 1.2',
+                        'uri' => '#'
+                    )
+                )
+            ),
+            array(
+                'label' => 'Page 2',
+                'uri' => '#',
+                'pages' => array(
+                    array(
+                        'label' => 'Page 2.1',
+                        'uri' => '#'
+                    )
+                )
+            ),
+            array(
+                'label' => 'Page 3',
+                'uri' => '#'
+            )
+        ));
+
+        $expected = array(
+            'beginIteration',
+            'Page 1',
+            'beginChildren',
+            'Page 1.1',
+            'beginChildren',
+            'Page 1.1.1',
+            'Page 1.1.2',
+            'endChildren',
+            'Page 1.2',
+            'endChildren',
+            'Page 2',
+            'beginChildren',
+            'Page 2.1',
+            'endChildren',
+            'Page 3',
+            'endIteration',
+        );
+
+        $iterator = new TestAsset\RecursiveIteratorIterator($nav, \RecursiveIteratorIterator::SELF_FIRST);
+        $iterator->logger = array();
+        $iterator->rewind();
+        //#4517 logging with walking through RecursiveIterator
+        while ($iterator->valid()) {
+            $iterator->current();
+            $iterator->next();
+        }
+        $this->assertEquals($expected, $iterator->logger);
     }
 
     public function testSettingPageOrderShouldUpdateContainerOrder()

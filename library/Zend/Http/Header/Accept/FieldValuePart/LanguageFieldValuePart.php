@@ -17,7 +17,6 @@ namespace Zend\Http\Header\Accept\FieldValuePart;
  */
 class LanguageFieldValuePart extends AbstractFieldValuePart
 {
-
     public function getLanguage()
     {
         return $this->getInternalValues()->typeString;

@@ -42,5 +42,4 @@ class LiteralTest extends \PHPUnit_Framework_TestCase
             $expression->getExpressionData()
         );
     }
-
 }

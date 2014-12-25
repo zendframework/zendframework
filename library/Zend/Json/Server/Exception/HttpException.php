@@ -14,4 +14,5 @@ namespace Zend\Json\Server\Exception;
  * JSON-RPC method call.
  */
 class HttpException extends RuntimeException
-{}
+{
+}

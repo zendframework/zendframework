@@ -17,12 +17,12 @@ class UniqueKey extends AbstractConstraint
     protected $specification = 'CONSTRAINT UNIQUE KEY %s(...)';
 
     /**
-     * @param  string $column
+     * @param  array $columns
      * @param  null|string $name
      */
-    public function __construct($column, $name = null)
+    public function __construct($columns, $name = null)
     {
-        $this->setColumns($column);
+        $this->setColumns($columns);
         $this->name = $name;
     }
 

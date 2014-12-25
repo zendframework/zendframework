@@ -13,7 +13,6 @@ use Zend\Db\Adapter\Driver\Pdo\Connection;
 
 class ConnectionTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Connection
      */
@@ -51,7 +50,6 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         try {
             $this->connection->connect();
         } catch (\Exception $e) {
-
         }
         $responseString = $this->connection->getDsn();
 

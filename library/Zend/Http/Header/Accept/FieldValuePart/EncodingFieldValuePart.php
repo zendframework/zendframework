@@ -17,7 +17,6 @@ namespace Zend\Http\Header\Accept\FieldValuePart;
  */
 class EncodingFieldValuePart extends AbstractFieldValuePart
 {
-
     /**
      *
      * @return string

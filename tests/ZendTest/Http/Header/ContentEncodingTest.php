@@ -13,7 +13,6 @@ use Zend\Http\Header\ContentEncoding;
 
 class ContentEncodingTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testContentEncodingFromStringCreatesValidContentEncodingHeader()
     {
         $contentEncodingHeader = ContentEncoding::fromString('Content-Encoding: xxx');
@@ -46,5 +45,4 @@ class ContentEncodingTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

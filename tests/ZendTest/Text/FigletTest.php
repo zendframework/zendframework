@@ -17,7 +17,6 @@ use Zend\Text\Figlet;
  */
 class FigletTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testStandardAlignLeft()
     {
         $figlet = new Figlet\Figlet();
@@ -103,7 +102,6 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Zend\Text\Figlet\Exception\RuntimeException', 'not found');
         $figlet = new Figlet\Figlet(array('font' => __DIR__ . '/Figlet/NonExistentFont.flf'));
-
     }
 
     public function testInvalidFont()

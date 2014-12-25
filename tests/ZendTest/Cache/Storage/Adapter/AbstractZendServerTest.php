@@ -17,7 +17,6 @@ use Zend\Cache\Storage\Adapter\AbstractZendServer;
  */
 class AbstractZendServerTest extends \PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         $this->_options = new AdapterOptions();

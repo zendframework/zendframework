@@ -20,7 +20,6 @@ use Zend\Http\Header\SetCookie;
  */
 class CookieTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testCookieFromStringCreatesValidCookieHeader()
     {
         $cookieHeader = Cookie::fromString('Cookie: name=value');

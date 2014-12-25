@@ -160,6 +160,7 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
      *
      * @param string $sql
      * @param string|array|ParameterContainer $parametersOrQueryMode
+     * @param \Zend\Db\ResultSet\ResultSetInterface $resultPrototype
      * @throws Exception\InvalidArgumentException
      * @return Driver\StatementInterface|ResultSet\ResultSet
      */
@@ -247,7 +248,6 @@ class Adapter implements AdapterInterface, Profiler\ProfilerAwareInterface
             default:
                 throw new Exception\InvalidArgumentException('Invalid magic property on adapter');
         }
-
     }
 
     /**

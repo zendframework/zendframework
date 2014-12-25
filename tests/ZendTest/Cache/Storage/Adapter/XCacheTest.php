@@ -16,7 +16,6 @@ use Zend\Cache;
  */
 class XCacheTest extends CommonAdapterTest
 {
-
     protected $backupServerArray;
 
     public function setUp()

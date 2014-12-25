@@ -10,4 +10,5 @@
 namespace Zend\I18n\Exception;
 
 class ParseException extends RuntimeException implements ExceptionInterface
-{}
+{
+}

@@ -79,11 +79,11 @@ class ExceptionHandler implements FormatterInterface
     protected function getType($type)
     {
         switch ($type) {
-            case "::" :
+            case "::":
                 return "static";
-            case "->" :
+            case "->":
                 return "method";
-            default :
+            default:
                 return $type;
         }
     }

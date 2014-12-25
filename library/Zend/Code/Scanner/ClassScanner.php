@@ -554,6 +554,7 @@ class ClassScanner implements ScannerInterface
             // @todo find a way to test this
             die('Massive Failure, test this');
         }
+
         $m = new MethodScanner(
             array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
             $this->nameInformation
@@ -768,7 +769,6 @@ class ClassScanner implements ScannerInterface
         }
 
         if ($tokenType === null && $tokenContent === '{' && $braceCount === 0) {
-
             $braceCount++;
             if ($MACRO_TOKEN_ADVANCE() === false) {
                 goto SCANNER_END;
@@ -849,6 +849,10 @@ class ClassScanner implements ScannerInterface
                                 //goto no break needed
                             case '}':
                                 $braceCount--;
+                                goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
+
+                            case ';':
+                                $infos[$infoIndex]['tokenEnd'] = $tokenIndex;
                                 goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
                         }
                     }
@@ -931,7 +935,6 @@ class ClassScanner implements ScannerInterface
             SCANNER_CLASS_BODY_END:
 
             goto SCANNER_CONTINUE;
-
         }
 
         SCANNER_CONTINUE:

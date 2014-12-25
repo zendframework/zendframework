@@ -164,8 +164,7 @@ class Table
 
         foreach ($columnWidths as $columnNum => $columnWidth) {
             if (is_int($columnWidth) === false or $columnWidth < 1) {
-                throw new Exception\InvalidArgumentException('Column ' . $columnNum . ' has an invalid'
-                                                    . ' column width');
+                throw new Exception\InvalidArgumentException('Column ' . $columnNum . ' has an invalid column width');
             }
         }
 
@@ -375,8 +374,7 @@ class Table
                 $result .= $this->decorator->getTopLeft();
 
                 foreach ($columnWidths as $columnNum => $columnWidth) {
-                    $result .= str_repeat($this->decorator->getHorizontal(),
-                                          $columnWidth);
+                    $result .= str_repeat($this->decorator->getHorizontal(), $columnWidth);
 
                     if (($columnNum + 1) === $numColumns) {
                         $result .= $this->decorator->getTopRight();
@@ -412,8 +410,7 @@ class Table
                     // Loop through all column widths
                     foreach ($this->columnWidths as $columnNum => $columnWidth) {
                         // Add the horizontal line
-                        $result .= str_repeat($this->decorator->getHorizontal(),
-                                              $columnWidth);
+                        $result .= str_repeat($this->decorator->getHorizontal(), $columnWidth);
 
                         // If this is the last line, break out
                         if (($columnNum + 1) === $totalNumColumns) {
@@ -476,8 +473,7 @@ class Table
                 $result .= $this->decorator->getBottomLeft();
 
                 foreach ($columnWidths as $columnNum => $columnWidth) {
-                    $result .= str_repeat($this->decorator->getHorizontal(),
-                                          $columnWidth);
+                    $result .= str_repeat($this->decorator->getHorizontal(), $columnWidth);
 
                     if (($columnNum + 1) === $numColumns) {
                         $result .= $this->decorator->getBottomRight();
@@ -505,6 +501,5 @@ class Table
         } catch (\Exception $e) {
             trigger_error($e->getMessage(), E_USER_ERROR);
         }
-
     }
 }

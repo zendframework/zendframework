@@ -16,7 +16,6 @@ use Zend\Ldap\Exception\LdapException;
 
 class Ldap extends AbstractAdapter
 {
-
     /**
      * The Zend\Ldap\Ldap context.
      *
@@ -214,7 +213,6 @@ class Ldap extends AbstractAdapter
          * credentials against it.
          */
         foreach ($this->options as $options) {
-
             if (!is_array($options)) {
                 throw new Exception\InvalidArgumentException('Adapter options array not an array');
             }
@@ -277,7 +275,6 @@ class Ldap extends AbstractAdapter
                     $failedAuthorities[$dname] = $groupResult;
                 }
             } catch (LdapException $zle) {
-
                 /* LDAP based authentication is notoriously difficult to diagnose. Therefore
                  * we bend over backwards to capture and record every possible bit of
                  * information when something goes wrong.

@@ -190,7 +190,7 @@ class Wsdl
         $oldUri = $this->uri;
         $this->uri = $uri;
 
-        if ($this->dom instanceof DOMDocument ) {
+        if ($this->dom instanceof DOMDocument) {
             // namespace declarations are NOT true attributes so one must explicitly set on root element
             //                                                                  xmlns:tns = $uri
             $this->dom->documentElement->setAttributeNS(self::XML_NS_URI, self::XML_NS . ':' . self::TYPES_NS, $uri);
@@ -549,7 +549,7 @@ class Wsdl
         if ($types instanceof DOMDocument) {
             $dom = $this->dom->importNode($types->documentElement);
             $this->wsdl->appendChild($dom);
-        } elseif ($types instanceof DOMNode || $types instanceof DOMElement || $types instanceof DOMDocumentFragment ) {
+        } elseif ($types instanceof DOMNode || $types instanceof DOMElement || $types instanceof DOMDocumentFragment) {
             $dom = $this->dom->importNode($types);
             $this->wsdl->appendChild($dom);
         }
@@ -859,7 +859,7 @@ class Wsdl
      */
     protected function getSoapNamespaceUriByVersion($soapVersion)
     {
-        if ($soapVersion != SOAP_1_1 AND $soapVersion != SOAP_1_2) {
+        if ($soapVersion != SOAP_1_1 and $soapVersion != SOAP_1_2) {
             throw new Exception\InvalidArgumentException('Invalid SOAP version, use constants: SOAP_1_1 or SOAP_1_2');
         }
 

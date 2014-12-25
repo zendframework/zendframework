@@ -30,8 +30,9 @@ class TestClassCache
         return 'foobar_return('.implode(', ', $args) . ') : ' . static::$fooCounter;
     }
 
-    public static function emptyMethod() {}
-
+    public static function emptyMethod()
+    {
+    }
 }
 
 /**
@@ -39,7 +40,6 @@ class TestClassCache
  */
 class ClassCacheTest extends CommonPatternTest
 {
-
     /**
      * @var \Zend\Cache\Storage\StorageInterface
      */

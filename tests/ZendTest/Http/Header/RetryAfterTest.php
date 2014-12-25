@@ -13,7 +13,6 @@ use Zend\Http\Header\RetryAfter;
 
 class RetryAfterTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testRetryAfterFromStringCreatesValidRetryAfterHeader()
     {
         $retryAfterHeader = RetryAfter::fromString('Retry-After: 10');
@@ -52,6 +51,5 @@ class RetryAfterTest extends \PHPUnit_Framework_TestCase
 
         $retryAfterHeader->setDate('Sun, 06 Nov 1994 08:49:37 GMT');
         $this->assertEquals('Retry-After: Sun, 06 Nov 1994 08:49:37 GMT', $retryAfterHeader->toString());
-
     }
 }

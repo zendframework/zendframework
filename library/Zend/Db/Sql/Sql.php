@@ -129,17 +129,23 @@ class Sql
         return $statement;
     }
 
+    /**
+     * Get sql string using platform or sql object
+     *
+     * @param SqlInterface      $sqlObject
+     * @param PlatformInterface $platform
+     *
+     * @return string
+     */
     public function getSqlStringForSqlObject(SqlInterface $sqlObject, PlatformInterface $platform = null)
     {
         $platform = ($platform) ?: $this->adapter->getPlatform();
 
         if ($this->sqlPlatform) {
             $this->sqlPlatform->setSubject($sqlObject);
-            $sqlString = $this->sqlPlatform->getSqlString($platform);
-        } else {
-            $sqlString = $sqlObject->getSqlString($platform);
+            return $this->sqlPlatform->getSqlString($platform);
         }
 
-        return $sqlString;
+        return $sqlObject->getSqlString($platform);
     }
 }

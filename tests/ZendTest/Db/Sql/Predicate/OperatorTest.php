@@ -14,7 +14,6 @@ use Zend\Db\Sql\Predicate\Operator;
 
 class OperatorTest extends TestCase
 {
-
     public function testEmptyConstructorYieldsNullLeftAndRightValues()
     {
         $operator = new Operator();

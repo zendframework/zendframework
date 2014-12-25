@@ -54,7 +54,7 @@ class Cycle extends AbstractHelper implements Iterator
     public function __invoke(array $data = array(), $name = self::DEFAULT_NAME)
     {
         if (!empty($data)) {
-           $this->data[$name] = $data;
+            $this->data[$name] = $data;
         }
 
         $this->setName($name);
@@ -88,7 +88,7 @@ class Cycle extends AbstractHelper implements Iterator
      * @param  string $name
      * @return Cycle
      */
-    public function assign(Array $data , $name = self::DEFAULT_NAME)
+    public function assign(array $data, $name = self::DEFAULT_NAME)
     {
         $this->setName($name);
         $this->data[$name] = $data;
@@ -104,17 +104,17 @@ class Cycle extends AbstractHelper implements Iterator
      */
     public function setName($name = self::DEFAULT_NAME)
     {
-       $this->name = $name;
+        $this->name = $name;
 
-       if (!isset($this->data[$this->name])) {
-           $this->data[$this->name] = array();
-       }
+        if (!isset($this->data[$this->name])) {
+            $this->data[$this->name] = array();
+        }
 
-       if (!isset($this->pointers[$this->name])) {
-           $this->rewind();
-       }
+        if (!isset($this->pointers[$this->name])) {
+            $this->rewind();
+        }
 
-       return $this;
+        return $this;
     }
 
     /**
@@ -126,7 +126,6 @@ class Cycle extends AbstractHelper implements Iterator
     {
         return $this->name;
     }
-
 
     /**
      * Return all elements

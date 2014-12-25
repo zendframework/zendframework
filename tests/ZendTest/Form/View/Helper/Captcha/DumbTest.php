@@ -76,7 +76,6 @@ class DumbTest extends CommonTestCase
     {
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
         $this->helper->setCaptchaPosition(null);
-
     }
 
     public function testSetSeparator()

@@ -83,7 +83,6 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
         $this->assertEquals('tns:'.$definedTypeName, $return);
 
         foreach ($nestedTypeNames as $nestedTypeName => $typeName) {
-
             $nodes = $this->xpath->query('//wsdl:types/xsd:schema/xsd:complexType[@name="'.$nestedTypeName.'"]');
             $this->assertEquals(1, $nodes->length, 'Invalid first level of nested element definition');
 
@@ -221,25 +220,24 @@ class ArrayOfTypeSequenceStrategyTest extends WsdlTestHelper
             'ArrayOfComplexTypeB'       =>      'ComplexTypeB',
             'ArrayOfComplexTypeA'       =>      'ComplexTypeA'
                 ) as $arrayTypeName => $typeName) {
-
-                    $nodes = $this->xpath->query(
+            $nodes = $this->xpath->query(
                         '//wsdl:types/xsd:schema/xsd:complexType[@name="'.$arrayTypeName.'"]'
                     );
-                    $this->assertEquals(1, $nodes->length, 'Missing complex type definition.');
+            $this->assertEquals(1, $nodes->length, 'Missing complex type definition.');
 
-                    $nodes = $this->xpath->query('xsd:sequence/xsd:element', $nodes->item(0));
-                    $this->assertEquals(1, $nodes->length, 'Missing complex type element declaration');
+            $nodes = $this->xpath->query('xsd:sequence/xsd:element', $nodes->item(0));
+            $this->assertEquals(1, $nodes->length, 'Missing complex type element declaration');
 
-                    $this->assertEquals('item',                 $nodes->item(0)->getAttribute('name'),
+            $this->assertEquals('item',                 $nodes->item(0)->getAttribute('name'),
                         'Wrong complex type element name attribute'
                     );
-                    $this->assertEquals('tns:'.$typeName,       $nodes->item(0)->getAttribute('type'),
+            $this->assertEquals('tns:'.$typeName,       $nodes->item(0)->getAttribute('type'),
                         'Wrong complex type type attribute value'
                     );
-                    $this->assertEquals('0',                    $nodes->item(0)->getAttribute('minOccurs'),
+            $this->assertEquals('0',                    $nodes->item(0)->getAttribute('minOccurs'),
                         'Wrong complex type minOccurs attribute value'
                     );
-                    $this->assertEquals('unbounded',            $nodes->item(0)->getAttribute('maxOccurs'),
+            $this->assertEquals('unbounded',            $nodes->item(0)->getAttribute('maxOccurs'),
                         'Wrong complex type maxOccurs attribute value'
                     );
         }

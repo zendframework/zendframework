@@ -173,7 +173,7 @@ class RenameUpload extends AbstractFilter
             $isFileUpload = true;
             $uploadData = $value;
             $sourceFile = $value['tmp_name'];
-        } else{
+        } else {
             $uploadData = array(
                 'tmp_name' => $value,
                 'name'     => $value,
@@ -218,7 +218,8 @@ class RenameUpload extends AbstractFilter
         if (!$result || null !== $warningException) {
             throw new Exception\RuntimeException(
                 sprintf("File '%s' could not be renamed. An error occurred while processing the file.", $sourceFile),
-                0, $warningException
+                0,
+                $warningException
             );
         }
 

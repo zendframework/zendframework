@@ -26,7 +26,6 @@ use ZendTest\ServiceManager\TestAsset\MockSelfReturningDelegatorFactory;
  */
 class ServiceManagerTest extends TestCase
 {
-
     /**
      * @var ServiceManager
      */
@@ -671,7 +670,7 @@ class ServiceManagerTest extends TestCase
         try {
             $this->serviceManager->get('SomethingThatCanBeCreated');
             $this->fail('serviceManager shoud throw Zend\ServiceManager\Exception\ServiceNotFoundException');
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             if (stripos(get_class($e), 'PHPUnit') !== false) {
                 throw $e;
             }
@@ -683,7 +682,7 @@ class ServiceManagerTest extends TestCase
         try {
             $this->serviceManager->get('SomethingThatCanBeCreated');
             $this->fail('serviceManager shoud throw Zend\ServiceManager\Exception\ServiceNotCreatedException');
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             if (stripos(get_class($e), 'PHPUnit') !== false) {
                 throw $e;
             }
@@ -1036,7 +1035,7 @@ class ServiceManagerTest extends TestCase
         try {
             $this->serviceManager->create('foo-service');
             $this->fail('Expected exception was not raised');
-        }catch (Exception\ServiceNotCreatedException $expected) {
+        } catch (Exception\ServiceNotCreatedException $expected) {
             $this->assertRegExp('/invalid factory/', $expected->getMessage());
             return;
         }
@@ -1051,7 +1050,7 @@ class ServiceManagerTest extends TestCase
         try {
             $this->serviceManager->create('foo-service');
             $this->fail('Expected exception was not raised');
-        }catch (Exception\ServiceNotCreatedException $expected) {
+        } catch (Exception\ServiceNotCreatedException $expected) {
             $this->assertRegExp('/invalid factory/', $expected->getMessage());
             return;
         }
@@ -1101,7 +1100,7 @@ class ServiceManagerTest extends TestCase
             try {
                 $this->serviceManager->get('something');
                 $this->fail('ServiceManager::get() successfully returned null');
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertInstanceOf('Zend\ServiceManager\Exception\ServiceNotCreatedException', $e);
             }
         } else {
@@ -1124,7 +1123,7 @@ class ServiceManagerTest extends TestCase
             try {
                 $this->serviceManager->get('something');
                 $this->fail('ServiceManager::get() successfully returned null');
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertInstanceOf('Zend\ServiceManager\Exception\ServiceNotCreatedException', $e);
             }
         } else {
@@ -1144,7 +1143,7 @@ class ServiceManagerTest extends TestCase
             try {
                 $this->serviceManager->get('something');
                 $this->fail('ServiceManager::get() successfully returned null');
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 $this->assertInstanceOf('Zend\ServiceManager\Exception\ServiceNotFoundException', $e);
             }
         } else {
@@ -1165,5 +1164,29 @@ class ServiceManagerTest extends TestCase
             array(new \stdClass()),
             array(tmpfile())
         );
+    }
+
+    /**
+     * @group ZF2-4377
+     */
+    public function testServiceManagerRespectsSharedFlagWhenRetrievingFromPeeredServiceManager()
+    {
+        $this->serviceManager->setInvokableClass('foo', 'ZendTest\ServiceManager\TestAsset\Foo');
+        $this->serviceManager->setShared('foo', false);
+
+        $childManager = new ServiceManager(new Config());
+        $childManager->addPeeringServiceManager($this->serviceManager);
+        $childManager->setRetrieveFromPeeringManagerFirst(false);
+
+        $this->assertNotSame($childManager->get('foo'), $childManager->get('foo'));
+    }
+
+    /**
+     * @group ZF2-4377
+     */
+    public function testIsSharedThrowsExceptionWhenPassedNameWhichDoesNotExistAnywhere()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
+        $this->serviceManager->isShared('foobarbazbat');
     }
 }

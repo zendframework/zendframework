@@ -19,7 +19,6 @@ use ZendTest\ServiceManager\TestAsset\MockSelfReturningDelegatorFactory;
 
 class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var ServiceManager
      */
@@ -67,6 +66,18 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $value = $reflProperty->getValue($pluginManager);
         $this->assertInstanceOf('ZendTest\ServiceManager\TestAsset\FooFactory', $value['foo']);
         $this->assertEquals(array('key2' => 'value2'), $value['foo']->getCreationOptions());
+    }
+
+    /**
+     * @group issue-4208
+     */
+    public function testGetFaultyRegisteredInvokableThrowsException()
+    {
+        $this->setExpectedException('Zend\ServiceManager\Exception\ServiceNotFoundException');
+
+        $pluginManager = new FooPluginManager();
+        $pluginManager->setInvokableClass('helloWorld', 'IDoNotExist');
+        $pluginManager->get('helloWorld');
     }
 
     public function testAbstractFactoryWithMutableCreationOptions()
@@ -188,6 +199,5 @@ class AbstractPluginManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $fooDelegator->instances);
         $this->assertInstanceOf('stdClass', array_shift($fooDelegator->instances));
         $this->assertSame($fooDelegator, array_shift($barDelegator->instances));
-
     }
 }

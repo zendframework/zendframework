@@ -16,7 +16,6 @@ use ArrayObject;
 
 class ExceptionHandlerTest extends CommonPluginTest
 {
-
     /**
      * The storage adapter
      *

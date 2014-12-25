@@ -11,5 +11,4 @@ namespace Zend\Db\Sql;
 
 class Having extends Predicate\Predicate
 {
-
 }

@@ -13,5 +13,4 @@ use ArrayObject;
 
 class Collection extends ArrayObject
 {
-
 }

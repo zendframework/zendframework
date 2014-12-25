@@ -150,7 +150,6 @@ interface ModelInterface extends Countable, IteratorAggregate
      */
     public function terminate();
 
-
     /**
      * Set flag indicating whether or not append to child  with the same capture
      *

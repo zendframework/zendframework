@@ -26,6 +26,7 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
         }
     });
 $config = Symfony\CS\Config\Config::create();
+$config->level(null);
 $config->fixers(
     array(
         'indentation',

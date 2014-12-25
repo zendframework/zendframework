@@ -50,5 +50,4 @@ class SqlSrvIntegrationTest extends AbstractIntegrationTest
         $this->setExpectedException('Zend\Db\Adapter\Exception\InvalidArgumentException', 'only accepts an SQL string or a Sqlsrv resource');
         $driver->createStatement(new \stdClass);
     }
-
 }

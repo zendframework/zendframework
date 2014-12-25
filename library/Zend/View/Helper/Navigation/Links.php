@@ -15,7 +15,6 @@ use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Stdlib\ErrorHandler;
-use Zend\View;
 use Zend\View\Exception;
 
 /**
@@ -126,9 +125,7 @@ class Links extends AbstractHelper
         $result = preg_match('/find(Rel|Rev)(.+)/', $method, $match);
         ErrorHandler::stop();
         if ($result) {
-            return $this->findRelation($arguments[0],
-                                       strtolower($match[1]),
-                                       strtolower($match[2]));
+            return $this->findRelation($arguments[0], strtolower($match[1]), strtolower($match[2]));
         }
 
         return parent::__call($method, $arguments);
@@ -410,8 +407,7 @@ class Links extends AbstractHelper
     {
         $found = null;
         $break = false;
-        $iterator = new RecursiveIteratorIterator($this->findRoot($page),
-                RecursiveIteratorIterator::SELF_FIRST);
+        $iterator = new RecursiveIteratorIterator($this->findRoot($page), RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $intermediate) {
             if ($intermediate === $page) {
                 // current page; break at next accepted page
@@ -444,8 +440,9 @@ class Links extends AbstractHelper
         $found = null;
         $prev = null;
         $iterator = new RecursiveIteratorIterator(
-                $this->findRoot($page),
-                RecursiveIteratorIterator::SELF_FIRST);
+            $this->findRoot($page),
+            RecursiveIteratorIterator::SELF_FIRST
+        );
         foreach ($iterator as $intermediate) {
             if (!$this->accept($intermediate)) {
                 continue;

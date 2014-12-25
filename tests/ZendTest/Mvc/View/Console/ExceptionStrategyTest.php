@@ -206,7 +206,7 @@ class ExceptionStrategyTest extends TestCase
         do {
             $exception = new \Exception($messages[$i], null, $exception);
             $i++;
-        } while($i < count($messages));
+        } while ($i < count($messages));
 
         $event = new MvcEvent(MvcEvent::EVENT_DISPATCH_ERROR, null, array('exception'=>$exception));
         $event->setError('user-defined-error');

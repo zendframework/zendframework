@@ -93,14 +93,12 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/accounts', $setCookieHeader->getPath());
         $this->assertTrue($setCookieHeader->isSecure());
         $this->assertTrue($setCookieHeader->isHttponly());
-
     }
 
     public function testSetCookieGetFieldNameReturnsHeaderName()
     {
         $setCookieHeader = new SetCookie();
         $this->assertEquals('Set-Cookie', $setCookieHeader->getFieldName());
-
     }
 
     public function testSetCookieGetFieldValueReturnsProperValue()
@@ -109,6 +107,28 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $setCookieHeader->setName('myname');
         $setCookieHeader->setValue('myvalue');
         $setCookieHeader->setExpires('Wed, 13-Jan-2021 22:23:01 GMT');
+        $setCookieHeader->setDomain('docs.foo.com');
+        $setCookieHeader->setPath('/accounts');
+        $setCookieHeader->setSecure(true);
+        $setCookieHeader->setHttponly(true);
+
+        $target = 'myname=myvalue; Expires=Wed, 13-Jan-2021 22:23:01 GMT;'
+            . ' Domain=docs.foo.com; Path=/accounts;'
+            . ' Secure; HttpOnly';
+
+        $this->assertEquals($target, $setCookieHeader->getFieldValue());
+    }
+
+    /**
+     * @group 6673
+     * @group 6923
+     */
+    public function testSetCookieWithDateTimeFieldValueReturnsProperValue()
+    {
+        $setCookieHeader = new SetCookie();
+        $setCookieHeader->setName('myname');
+        $setCookieHeader->setValue('myvalue');
+        $setCookieHeader->setExpires(new \DateTime('Wed, 13-Jan-2021 22:23:01 GMT'));
         $setCookieHeader->setDomain('docs.foo.com');
         $setCookieHeader->setPath('/accounts');
         $setCookieHeader->setSecure(true);

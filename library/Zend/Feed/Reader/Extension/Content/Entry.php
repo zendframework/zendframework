@@ -14,7 +14,6 @@ use Zend\Feed\Reader\Extension;
 
 class Entry extends Extension\AbstractEntry
 {
-
     public function getContent()
     {
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10

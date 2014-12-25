@@ -16,7 +16,6 @@ use Zend\Feed\Reader;
 */
 class Atom extends AbstractFeed
 {
-
     /**
      * Constructor
      *

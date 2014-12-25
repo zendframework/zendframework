@@ -13,7 +13,6 @@ use Zend\Http\Header\Upgrade;
 
 class UpgradeTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testUpgradeFromStringCreatesValidUpgradeHeader()
     {
         $upgradeHeader = Upgrade::fromString('Upgrade: xxx');
@@ -46,5 +45,4 @@ class UpgradeTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

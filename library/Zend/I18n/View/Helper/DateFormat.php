@@ -68,8 +68,8 @@ class DateFormat extends AbstractHelper
         $date,
         $dateType = IntlDateFormatter::NONE,
         $timeType = IntlDateFormatter::NONE,
-        $locale   = null,
-        $pattern  = null
+        $locale = null,
+        $pattern = null
     ) {
         if ($locale === null) {
             $locale = $this->getLocale();

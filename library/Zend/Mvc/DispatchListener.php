@@ -15,7 +15,6 @@ use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\Exception\InvalidControllerException;
 use Zend\Stdlib\ArrayUtils;
 
-
 /**
  * Default dispatch listener
  *
@@ -240,7 +239,7 @@ class DispatchListener implements ListenerAggregateInterface
         $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $event);
         $return  = $results->last();
         if (! $return) {
-            $return = $event->getResult();
+            return $event->getResult();
         }
 
         return $return;

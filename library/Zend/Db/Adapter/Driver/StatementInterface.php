@@ -13,7 +13,6 @@ use Zend\Db\Adapter\StatementContainerInterface;
 
 interface StatementInterface extends StatementContainerInterface
 {
-
     /**
      * Get resource
      *
@@ -42,5 +41,4 @@ interface StatementInterface extends StatementContainerInterface
      * @return ResultInterface
      */
     public function execute($parameters = null);
-
 }

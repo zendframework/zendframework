@@ -16,7 +16,7 @@ class Reflection extends AbstractHydrator
 {
     /**
      * Simple in-memory array cache of ReflectionProperties used.
-     * @var array
+     * @var \ReflectionProperty[]
      */
     protected static $reflProperties = array();
 
@@ -67,7 +67,7 @@ class Reflection extends AbstractHydrator
      *
      * @param  string|object $input
      * @throws Exception\InvalidArgumentException
-     * @return array
+     * @return \ReflectionProperty[]
      */
     protected static function getReflProperties($input)
     {

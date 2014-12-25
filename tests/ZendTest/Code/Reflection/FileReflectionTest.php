@@ -69,7 +69,7 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         try {
             new FileReflection('a_second_empty_file.php', true);
             set_include_path($oldIncludePath);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             set_include_path($oldIncludePath);
             throw $e;
         }
@@ -91,7 +91,6 @@ class FileReflectionTest extends \PHPUnit_Framework_TestCase
         $reflectionFile = new FileReflection($fileToReflect);
         $this->assertEquals('ZendTest\Code\Reflection\TestAsset\TestSampleClass', $reflectionFile->getClass()->getName());
     }
-
 
     public function testFileGetClassThrowsExceptionOnNonExistentClassName()
     {

@@ -14,7 +14,6 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class InstanceManagerTest extends TestCase
 {
-
     public function testInstanceManagerCanPersistInstances()
     {
         $im = new InstanceManager();
@@ -82,5 +81,4 @@ class InstanceManagerTest extends TestCase
 
         $this->assertEquals($config, $im->getConfig('foo-alias'));
     }
-
 }

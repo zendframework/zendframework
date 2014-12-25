@@ -14,7 +14,6 @@ use Zend\Db\Adapter\Exception as AdapterException;
 
 class ConnectionTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Connection
      */

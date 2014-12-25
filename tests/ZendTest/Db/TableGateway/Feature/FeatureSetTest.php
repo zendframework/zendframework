@@ -21,10 +21,7 @@ class FeatureSetTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddFeatureThatFeatureDoesnotHasTableGatewayButFeatureSetHas()
     {
-       $mockMasterAdapter = $this->getMock(
-            'Zend\Db\Adapter\AdapterInterface',
-            array('getDriver', 'getPlatform')
-        );
+        $mockMasterAdapter = $this->getMock('Zend\Db\Adapter\AdapterInterface');
 
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
@@ -34,10 +31,7 @@ class FeatureSetTest extends \PHPUnit_Framework_TestCase
         $mockMasterAdapter->expects($this->any())->method('getDriver')->will($this->returnValue($mockDriver));
         $mockMasterAdapter->expects($this->any())->method('getPlatform')->will($this->returnValue(new \Zend\Db\Adapter\Platform\Sql92()));
 
-        $mockSlaveAdapter = $this->getMock(
-            'Zend\Db\Adapter\AdapterInterface',
-            array('getDriver', 'getPlatform')
-        );
+        $mockSlaveAdapter = $this->getMock('Zend\Db\Adapter\AdapterInterface');
 
         $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');

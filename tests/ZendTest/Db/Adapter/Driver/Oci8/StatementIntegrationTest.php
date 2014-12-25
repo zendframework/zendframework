@@ -18,7 +18,6 @@ use Zend\Db\Adapter\Driver\Oci8\Statement;
  */
 class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $variables = array(
         'hostname' => 'ZEND_DB_ADAPTER_DRIVER_OCI8_HOSTNAME',
         'username' => 'ZEND_DB_ADAPTER_DRIVER_OCI8_USERNAME',

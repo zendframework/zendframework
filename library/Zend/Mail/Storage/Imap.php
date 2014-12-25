@@ -289,7 +289,6 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
         throw new Exception\InvalidArgumentException('unique id not found');
     }
 
-
     /**
      * get root folder or given folder
      *
@@ -361,7 +360,6 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
             throw new Exception\RuntimeException('cannot change folder, maybe it does not exist');
         }
     }
-
 
     /**
      * get \Zend\Mail\Storage\Folder instance for current folder
@@ -444,7 +442,6 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      * @param  null|array                            $flags   set flags for new message, else a default set is used
      * @throws Exception\RuntimeException
      */
-     // not yet * @param string|\Zend\Mail\Message|\Zend\Mime\Message $message message as string or instance of message class
     public function appendMessage($message, $folder = null, $flags = null)
     {
         if ($folder === null) {

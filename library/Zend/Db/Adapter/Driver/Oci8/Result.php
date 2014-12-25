@@ -15,7 +15,6 @@ use Zend\Db\Adapter\Exception;
 
 class Result implements Iterator, ResultInterface
 {
-
     /**
      * @var resource
      */
@@ -222,5 +221,4 @@ class Result implements Iterator, ResultInterface
         // @todo OCI8 generated value in Driver Result
         return null;
     }
-
 }

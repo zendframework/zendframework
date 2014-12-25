@@ -1053,7 +1053,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_acl->isAllowed('marketing', 'latest', 'publish'));
         $this->assertTrue($this->_acl->isAllowed('marketing', 'latest', 'edit'));
         $this->assertTrue($this->_acl->isAllowed('marketing', 'latest'));
-
     }
 
     /**
@@ -1137,7 +1136,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($acl->isAllowed($user, $blogPost, 'modify'));
 
         $this->assertEquals('publisher', $assertion->lastAssertRole->getRoleId());
-
     }
 
     /**
@@ -1167,7 +1165,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
         // check to see if the last assertion has the proper objects
         $this->assertInstanceOf('ZendTest\Permissions\Acl\TestAsset\UseCase1\User', $assertion->lastAssertRole, 'Assertion did not receive proper role object');
         $this->assertInstanceOf('ZendTest\Permissions\Acl\TestAsset\UseCase1\BlogPost', $assertion->lastAssertResource, 'Assertion did not receive proper resource object');
-
     }
 
     /**

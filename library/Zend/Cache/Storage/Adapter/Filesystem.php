@@ -38,7 +38,6 @@ class Filesystem extends AbstractAdapter implements
     TaggableInterface,
     TotalSpaceCapableInterface
 {
-
     /**
      * Buffered total space in bytes
      *
@@ -529,7 +528,6 @@ class Filesystem extends AbstractAdapter implements
             }
             $success  = true;
             return $data;
-
         } catch (BaseException $e) {
             $success = false;
             throw $e;
@@ -548,7 +546,6 @@ class Filesystem extends AbstractAdapter implements
         $keys    = $normalizedKeys; // Don't change argument passed by reference
         $result  = array();
         while ($keys) {
-
             // LOCK_NB if more than one items have to read
             $nonBlocking = count($keys) > 1;
             $wouldblock  = null;
@@ -1416,8 +1413,16 @@ class Filesystem extends AbstractAdapter implements
             }
 
             if (!$res) {
-                $oct = ($perm === false) ? '777' : decoct($perm);
                 $err = ErrorHandler::stop();
+
+                // Issue 6435:
+                // mkdir could fail because of a race condition it was already created by another process
+                // after the first file_exists above
+                if (file_exists($pathname)) {
+                    return;
+                }
+
+                $oct = ($perm === false) ? '777' : decoct($perm);
                 throw new Exception\RuntimeException("mkdir('{$pathname}', 0{$oct}, true) failed", 0, $err);
             }
 
@@ -1426,7 +1431,6 @@ class Filesystem extends AbstractAdapter implements
                 $err = ErrorHandler::stop();
                 throw new Exception\RuntimeException("chmod('{$pathname}', 0{$oct}) failed", 0, $err);
             }
-
         } else {
             // build-in mkdir function sets permission together with current umask
             // which doesn't work well on multo threaded webservers
@@ -1456,6 +1460,13 @@ class Filesystem extends AbstractAdapter implements
                 }
 
                 if (!$res) {
+                    // Issue 6435:
+                    // mkdir could fail because of a race condition it was already created by another process
+                    // after the first file_exists above ... go to the next path part.
+                    if (file_exists($path)) {
+                        continue;
+                    }
+
                     $oct = ($perm === false) ? '777' : decoct($perm);
                     ErrorHandler::stop();
                     throw new Exception\RuntimeException(
@@ -1503,7 +1514,6 @@ class Filesystem extends AbstractAdapter implements
 
         // if locking and non blocking is enabled -> file_put_contents can't used
         if ($locking && $nonBlocking) {
-
             $umask = ($umask !== false) ? umask($umask) : false;
 
             $fp = fopen($file, 'cb');

@@ -28,7 +28,6 @@ class Part
     protected $isStream = false;
     protected $filters = array();
 
-
     /**
      * create a new Mime Part.
      * The (unencoded) content of the Part as passed
@@ -60,7 +59,7 @@ class Part
      */
     public function isStream()
     {
-      return $this->isStream;
+        return $this->isStream;
     }
 
     /**
@@ -129,9 +128,14 @@ class Part
     public function getContent($EOL = Mime::LINEEND)
     {
         if ($this->isStream) {
-            $encodedStream = $this->getEncodedStream($EOL);
+            $encodedStream         = $this->getEncodedStream($EOL);
             $encodedStreamContents = stream_get_contents($encodedStream);
-            rewind($encodedStream);
+            $streamMetaData        = stream_get_meta_data($encodedStream);
+
+            if (isset($streamMetaData['seekable']) && $streamMetaData['seekable']) {
+                rewind($encodedStream);
+            }
+
             return $encodedStreamContents;
         }
         return Mime::encode($this->content, $this->encoding, $EOL);

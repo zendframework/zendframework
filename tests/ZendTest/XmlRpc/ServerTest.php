@@ -77,7 +77,6 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddFunction()
     {
-
         $this->_server->addFunction('ZendTest\\XmlRpc\\testFunction', 'zsr');
 
         $methods = $this->_server->listMethods();

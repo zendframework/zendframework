@@ -18,7 +18,6 @@ use Zend\Db\ResultSet\ResultSet;
  */
 class AbstractTableGatewayTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var \PHPUnit_Framework_MockObject_Generator
      */

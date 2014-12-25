@@ -142,7 +142,6 @@ class SelectDecorator extends Select implements PlatformDecoratorInterface
             // create bottom part of query, with offset and limit using row_number
             $limitParamName        = $driver->formatParameterName('limit');
             $offsetParamName       = $driver->formatParameterName('offset');
-            $offsetForSumParamName = $driver->formatParameterName('offsetForSum');
 
             array_push($sqls, sprintf(
                 ") AS ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION WHERE ZEND_IBMDB2_SERVER_LIMIT_OFFSET_EMULATION.ZEND_DB_ROWNUM BETWEEN %s AND %s",

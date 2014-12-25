@@ -28,7 +28,8 @@ class WddxTest extends \PHPUnit_Framework_TestCase
             try {
                 new Serializer\Adapter\Wddx();
                 $this->fail("Zend\\Serializer\\Adapter\\Wddx needs missing ext/wddx but did't throw exception");
-            } catch (ExtensionNotLoadedException $e) {}
+            } catch (ExtensionNotLoadedException $e) {
+            }
             $this->markTestSkipped('Zend\\Serializer\\Adapter\\Wddx needs ext/wddx');
         }
         $this->adapter = new Serializer\Adapter\Wddx();

@@ -163,7 +163,6 @@ class ConfigListener extends AbstractListener implements
      */
     public function onLoadModules(ModuleEvent $e)
     {
-
         // Trigger MERGE_CONFIG event. This is a hook to allow the merged application config to be
         // modified before it is cached (In particular, allows the removal of config keys)
         $e->getTarget()->getEventManager()->trigger(ModuleEvent::EVENT_MERGE_CONFIG, $e->getTarget(), $e);
@@ -287,10 +286,14 @@ class ConfigListener extends AbstractListener implements
 
         if (!is_array($paths)) {
             throw new Exception\InvalidArgumentException(
-                sprintf('Argument passed to %::%s() must be an array, '
-                . 'implement the Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.',
-                __CLASS__, __METHOD__, gettype($paths))
+                sprintf(
+                    'Argument passed to %::%s() must be an array, '
+                    . 'implement the Traversable interface, or be an '
+                    . 'instance of Zend\Config\Config. %s given.',
+                    __CLASS__,
+                    __METHOD__,
+                    gettype($paths)
+                )
             );
         }
 
@@ -311,8 +314,12 @@ class ConfigListener extends AbstractListener implements
     {
         if (!is_string($path)) {
             throw new Exception\InvalidArgumentException(
-                sprintf('Parameter to %s::%s() must be a string; %s given.',
-                __CLASS__, __METHOD__, gettype($path))
+                sprintf(
+                    'Parameter to %s::%s() must be a string; %s given.',
+                    __CLASS__,
+                    __METHOD__,
+                    gettype($path)
+                )
             );
         }
         $this->paths[] = array('type' => $type, 'path' => $path);
@@ -333,9 +340,12 @@ class ConfigListener extends AbstractListener implements
 
         if (!is_array($config)) {
             throw new Exception\InvalidArgumentException(
-                sprintf('Config being merged must be an array, '
-                . 'implement the Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.', gettype($config))
+                sprintf(
+                    'Config being merged must be an array, '
+                    . 'implement the Traversable interface, or be an '
+                    . 'instance of Zend\Config\Config. %s given.',
+                    gettype($config)
+                )
             );
         }
 

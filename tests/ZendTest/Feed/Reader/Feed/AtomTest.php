@@ -18,7 +18,6 @@ use Zend\Feed\Reader;
 */
 class AtomTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $feedSamplePath = null;
 
     protected $options = array();
@@ -150,7 +149,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/datecreated/plain/atom03.xml')
         );
-        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $feed->getDateCreated());
     }
 
@@ -159,7 +158,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/datecreated/plain/atom10.xml')
         );
-        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $feed->getDateCreated());
     }
 
@@ -171,7 +170,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/datemodified/plain/atom03.xml')
         );
-        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $feed->getDateModified());
     }
 
@@ -180,7 +179,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/datemodified/plain/atom10.xml')
         );
-        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $feed->getDateModified());
     }
 

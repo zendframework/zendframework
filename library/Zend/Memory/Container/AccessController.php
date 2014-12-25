@@ -30,7 +30,6 @@ class AccessController implements ContainerInterface
      */
     private $memContainer;
 
-
     /**
      * Object constructor
      *
@@ -48,7 +47,6 @@ class AccessController implements ContainerInterface
     {
         $this->memContainer->destroy();
     }
-
 
     /**
      * Get string value reference
@@ -80,7 +78,6 @@ class AccessController implements ContainerInterface
     {
         $this->memContainer->lock();
     }
-
 
     /**
      * Unlock object

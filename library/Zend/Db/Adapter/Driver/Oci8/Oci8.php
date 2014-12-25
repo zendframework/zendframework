@@ -15,7 +15,6 @@ use Zend\Db\Adapter\Profiler;
 
 class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
 {
-
     /**
      * @var Connection
      */
@@ -37,25 +36,15 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
     protected $profiler = null;
 
     /**
-     * @var array
-     */
-    protected $options = array(
-
-    );
-
-    /**
      * @param array|Connection|\oci8 $connection
      * @param null|Statement $statementPrototype
      * @param null|Result $resultPrototype
-     * @param array $options
      */
-    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null, array $options = array())
+    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null)
     {
         if (!$connection instanceof Connection) {
             $connection = new Connection($connection);
         }
-
-        $options = array_intersect_key(array_merge($this->options, $options), $this->options);
 
         $this->registerConnection($connection);
         $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
@@ -231,5 +220,4 @@ class Oci8 implements DriverInterface, Profiler\ProfilerAwareInterface
     {
         return $this->getConnection()->getLastGeneratedValue();
     }
-
 }

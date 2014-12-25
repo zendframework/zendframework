@@ -9,7 +9,6 @@
 
 namespace Zend\Form\Element;
 
-use Zend\Form\Element;
 use Zend\Validator\DateStep as DateStepValidator;
 use Zend\Validator\Regex as RegexValidator;
 

@@ -25,7 +25,7 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
 
     public function testUseOfRouter()
     {
-       $this->assertEquals(true, $this->useConsoleRequest);
+        $this->assertEquals(true, $this->useConsoleRequest);
     }
 
     public function testAssertResponseStatusCode()
@@ -98,6 +98,26 @@ class AbstractConsoleControllerTestCaseTest extends AbstractConsoleControllerTes
         $this->assertEquals("2013-03-07 00:00:00", $routeMatch->getParam('date'));
         $this->assertEquals("10", $routeMatch->getParam('id'));
         $this->assertEquals("custom text", $routeMatch->getParam('text'));
+    }
+
+    /**
+     * @group 6837
+     */
+    public function testAssertMatchedArgumentsWithMandatoryValue()
+    {
+        $this->dispatch("foo --bar='FOO' --baz='ARE'");
+        /** @var \Zend\Mvc\Router\Console\RouteMatch $routeMatch */
+        $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        $this->assertNotNull($routeMatch);
+        $this->assertEquals('arguments-mandatory', $routeMatch->getMatchedRouteName());
+
+        $this->reset();
+
+        $this->dispatch('foo --bar="FOO" --baz="ARE"');
+        /** @var \Zend\Mvc\Router\Console\RouteMatch $routeMatch */
+        $routeMatch = $this->getApplication()->getMvcEvent()->getRouteMatch();
+        $this->assertNotNull($routeMatch);
+        $this->assertEquals('arguments-mandatory', $routeMatch->getMatchedRouteName());
     }
 
     public function testAssertMatchedArgumentsWithValueWithoutEqualsSign()

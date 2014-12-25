@@ -14,7 +14,6 @@ use Zend\Db\TableGateway\Feature\SequenceFeature;
 
 class SequenceFeatureTest extends PHPUnit_Framework_TestCase
 {
-
     /** @var SequenceFeature */
     protected $feature = null;
 

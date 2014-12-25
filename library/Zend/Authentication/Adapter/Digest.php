@@ -180,17 +180,14 @@ class Digest extends AbstractAdapter
             }
             if (substr($line, 0, $idLength) === $id) {
                 if (CryptUtils::compareStrings(substr($line, -32), md5("$this->identity:$this->realm:$this->credential"))) {
-                    $result['code'] = AuthenticationResult::SUCCESS;
-                } else {
-                    $result['code'] = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
-                    $result['messages'][] = 'Password incorrect';
+                    return new AuthenticationResult(AuthenticationResult::SUCCESS, $result['identity'], $result['messages']);
                 }
-                return new AuthenticationResult($result['code'], $result['identity'], $result['messages']);
+                $result['messages'][] = 'Password incorrect';
+                return new AuthenticationResult(AuthenticationResult::FAILURE_CREDENTIAL_INVALID, $result['identity'], $result['messages']);
             }
         }
 
-        $result['code'] = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
         $result['messages'][] = "Username '$this->identity' and realm '$this->realm' combination not found";
-        return new AuthenticationResult($result['code'], $result['identity'], $result['messages']);
+        return new AuthenticationResult(AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND, $result['identity'], $result['messages']);
     }
 }

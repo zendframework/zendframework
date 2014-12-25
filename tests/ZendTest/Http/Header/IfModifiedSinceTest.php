@@ -13,7 +13,6 @@ use Zend\Http\Header\IfModifiedSince;
 
 class IfModifiedSinceTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testIfModifiedSinceFromStringCreatesValidIfModifiedSinceHeader()
     {
         $ifModifiedSinceHeader = IfModifiedSince::fromString('If-Modified-Since: Sun, 06 Nov 1994 08:49:37 GMT');
@@ -45,5 +44,4 @@ class IfModifiedSinceTest extends \PHPUnit_Framework_TestCase
      * Implementation specific tests are covered by DateTest
      * @see ZendTest\Http\Header\DateTest
      */
-
 }

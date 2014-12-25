@@ -12,7 +12,6 @@ use Zend\Permissions\Acl\Assertion\AssertionManager;
 
 class AssertionManagerTest extends \PHPUnit_Framework_TestCase
 {
-
     protected $manager;
 
     public function setUp()

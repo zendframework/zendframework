@@ -55,7 +55,7 @@ class AbstractResponseSenderTest extends TestCase
         }
 
         $expected = array();
-        if (version_compare(phpversion('xdebug'), '2.2.0', '>='))  {
+        if (version_compare(phpversion('xdebug'), '2.2.0', '>=')) {
             $expected = xdebug_get_headers();
         }
 

@@ -16,7 +16,6 @@ use Zend\Mail\Header\ContentTransferEncoding;
  */
 class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testContentTransferEncodingFromStringCreatesValidContentTransferEncodingHeader()
     {
         $contentTransferEncodingHeader = ContentTransferEncoding::fromString('Content-Transfer-Encoding: 7bit');
@@ -65,5 +64,4 @@ class ContentTransferEncodingTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains("Content-Transfer-Encoding: quoted-printable", $string);
     }
-
 }

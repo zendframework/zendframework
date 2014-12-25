@@ -15,7 +15,6 @@ use Zend\Http\Header\GenericHeader;
 
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testRequestFromStringFactoryCreatesValidRequest()
     {
         $string = "GET /foo HTTP/1.1\r\n\r\nSome Content";

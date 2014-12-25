@@ -15,8 +15,6 @@ use Zend\File\Exception\ExceptionInterface as FileException;
  * Exception class for Zend\File\Transfer
  *
  */
-interface ExceptionInterface
-    extends FileException
+interface ExceptionInterface extends FileException
 {
-
 }

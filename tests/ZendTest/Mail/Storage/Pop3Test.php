@@ -89,7 +89,7 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
 
     public function testConnectConfig()
     {
-         new Storage\Pop3(new Config\Config($this->_params));
+        new Storage\Pop3(new Config\Config($this->_params));
     }
 
 
@@ -311,7 +311,7 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
             }
 
             if ($mail->getNumberByUniqueId($id) != $num) {
-                    $this->fail('reverse lookup failed');
+                $this->fail('reverse lookup failed');
             }
         }
     }

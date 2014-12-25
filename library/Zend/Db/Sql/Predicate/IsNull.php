@@ -11,7 +11,6 @@ namespace Zend\Db\Sql\Predicate;
 
 class IsNull implements PredicateInterface
 {
-
     /**
      * @var string
      */

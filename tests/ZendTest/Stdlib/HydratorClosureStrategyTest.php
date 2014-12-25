@@ -17,7 +17,6 @@ use Zend\Stdlib\Hydrator\Strategy\ClosureStrategy;
  */
 class HydratorClosureStrategyTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * The hydrator that is used during testing.
      *
@@ -118,5 +117,4 @@ class HydratorClosureStrategyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('ZendTest\Stdlib\TestAsset\HydratorClosureStrategyEntity', $entity->field3);
     }
-
 }

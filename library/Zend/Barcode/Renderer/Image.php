@@ -404,7 +404,6 @@ class Image extends AbstractRenderer
             }
             imagestring($this->resource, $font, $positionX, $positionY, $text, $color);
         } else {
-
             if (!function_exists('imagettfbbox')) {
                 throw new Exception\RuntimeException(
                     'A font was provided, but this instance of PHP does not have TTF (FreeType) support'

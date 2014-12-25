@@ -207,7 +207,6 @@ class AutoDiscover
         return $this->serviceName;
     }
 
-
     /**
      * Set the location at which the WSDL file will be available.
      *
@@ -365,7 +364,6 @@ class AutoDiscover
                     'Argument to Zend\Soap\AutoDiscover::addFunction should be a valid function name.'
                 );
             }
-
         } else {
             throw new Exception\InvalidArgumentException(
                 'Argument to Zend\Soap\AutoDiscover::addFunction should be string or array of strings.'
@@ -483,7 +481,6 @@ class AutoDiscover
 
             // Add the wrapper element part, which must be named 'parameters'
             $args['parameters'] = array('element' => $wsdl->addElement($element));
-
         } else {
             // RPC style: add each parameter as a typed part
             foreach ($prototype->getParameters() as $param) {
@@ -516,7 +513,6 @@ class AutoDiscover
 
                 // Add the wrapper element part, which must be named 'parameters'
                 $args['parameters'] = array('element' => $wsdl->addElement($element));
-
             } elseif ($prototype->getReturnType() != "void") {
                 // RPC style: add the return value as a typed part
                 $args['return'] = array(

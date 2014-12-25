@@ -63,5 +63,4 @@ class StatementIntegrationTest extends \PHPUnit_Framework_TestCase
         );
         $this->statement->execute(array('foo' => 'bar'));
     }
-
 }

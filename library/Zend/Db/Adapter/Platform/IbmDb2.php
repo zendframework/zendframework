@@ -11,7 +11,6 @@ namespace Zend\Db\Adapter\Platform;
 
 class IbmDb2 implements PlatformInterface
 {
-
     protected $quoteValueAllowed = false;
 
     /**
@@ -205,5 +204,4 @@ class IbmDb2 implements PlatformInterface
 
         return implode('', $parts);
     }
-
 }

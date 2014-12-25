@@ -32,9 +32,7 @@ class PregReplace extends AbstractFilter
             $options = iterator_to_array($options);
         }
 
-        if (!is_array($options)
-            || (!isset($options['pattern']) && !isset($options['replacement'])))
-        {
+        if (!is_array($options) || (!isset($options['pattern']) && !isset($options['replacement']))) {
             $args = func_get_args();
             if (isset($args[0])) {
                 $this->setPattern($args[0]);

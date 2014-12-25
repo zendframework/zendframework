@@ -18,5 +18,6 @@ class Null extends AbstractWriter
      * @return void
      */
     protected function doWrite(array $event)
-    {}
+    {
+    }
 }

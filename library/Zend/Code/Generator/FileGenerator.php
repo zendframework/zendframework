@@ -454,8 +454,12 @@ class FileGenerator extends AbstractGenerator
         if ($namespace) {
             $namespace = sprintf('namespace %s;%s', $namespace, str_repeat(self::LINE_FEED, 2));
             if (preg_match('#/\* Zend_Code_Generator_FileGenerator-NamespaceMarker \*/#m', $output)) {
-                $output = preg_replace('#/\* Zend_Code_Generator_FileGenerator-NamespaceMarker \*/#m', $namespace,
-                    $output, 1);
+                $output = preg_replace(
+                    '#/\* Zend_Code_Generator_FileGenerator-NamespaceMarker \*/#m',
+                    $namespace,
+                    $output,
+                    1
+                );
             } else {
                 $output .= $namespace;
             }
@@ -478,7 +482,7 @@ class FileGenerator extends AbstractGenerator
         foreach ($classes as $class) {
             //check for duplicate use statements
             $uses = $class->getUses();
-            if(!empty($uses) && is_array($uses)) {
+            if (!empty($uses) && is_array($uses)) {
                 $classUses = array_merge($classUses, $uses);
             }
         }
@@ -497,7 +501,7 @@ class FileGenerator extends AbstractGenerator
                 }
 
                 //don't duplicate use statements
-                if(!in_array($tempOutput, $classUses)) {
+                if (!in_array($tempOutput, $classUses)) {
                     $useOutput .= "use ". $tempOutput .";";
                     $useOutput .= self::LINE_FEED;
                 }
@@ -505,12 +509,15 @@ class FileGenerator extends AbstractGenerator
             $useOutput .= self::LINE_FEED;
 
             if (preg_match('#/\* Zend_Code_Generator_FileGenerator-UseMarker \*/#m', $output)) {
-                $output = preg_replace('#/\* Zend_Code_Generator_FileGenerator-UseMarker \*/#m', $useOutput,
-                    $output, 1);
+                $output = preg_replace(
+                    '#/\* Zend_Code_Generator_FileGenerator-UseMarker \*/#m',
+                    $useOutput,
+                    $output,
+                    1
+                );
             } else {
                 $output .= $useOutput;
             }
-
         }
 
         // process classes

@@ -130,8 +130,10 @@ class ImageSize extends AbstractValidator
     public function setMinWidth($minWidth)
     {
         if (($this->getMaxWidth() !== null) && ($minWidth > $this->getMaxWidth())) {
-            throw new Exception\InvalidArgumentException("The minimum image width must be less than or equal to the "
-                . " maximum image width, but {$minWidth} > {$this->getMaxWidth()}");
+            throw new Exception\InvalidArgumentException(
+                "The minimum image width must be less than or equal to the "
+                . " maximum image width, but {$minWidth} > {$this->getMaxWidth()}"
+            );
         }
 
         $this->options['minWidth']  = (int) $minWidth;
@@ -158,8 +160,10 @@ class ImageSize extends AbstractValidator
     public function setMaxWidth($maxWidth)
     {
         if (($this->getMinWidth() !== null) && ($maxWidth < $this->getMinWidth())) {
-            throw new Exception\InvalidArgumentException("The maximum image width must be greater than or equal to the "
-                . "minimum image width, but {$maxWidth} < {$this->getMinWidth()}");
+            throw new Exception\InvalidArgumentException(
+                "The maximum image width must be greater than or equal to the "
+                . "minimum image width, but {$maxWidth} < {$this->getMinWidth()}"
+            );
         }
 
         $this->options['maxWidth']  = (int) $maxWidth;
@@ -186,8 +190,10 @@ class ImageSize extends AbstractValidator
     public function setMinHeight($minHeight)
     {
         if (($this->getMaxHeight() !== null) && ($minHeight > $this->getMaxHeight())) {
-            throw new Exception\InvalidArgumentException("The minimum image height must be less than or equal to the "
-                . " maximum image height, but {$minHeight} > {$this->getMaxHeight()}");
+            throw new Exception\InvalidArgumentException(
+                "The minimum image height must be less than or equal to the "
+                . " maximum image height, but {$minHeight} > {$this->getMaxHeight()}"
+            );
         }
 
         $this->options['minHeight']  = (int) $minHeight;
@@ -214,8 +220,10 @@ class ImageSize extends AbstractValidator
     public function setMaxHeight($maxHeight)
     {
         if (($this->getMinHeight() !== null) && ($maxHeight < $this->getMinHeight())) {
-            throw new Exception\InvalidArgumentException("The maximum image height must be greater than or equal to the "
-                . "minimum image height, but {$maxHeight} < {$this->getMinHeight()}");
+            throw new Exception\InvalidArgumentException(
+                "The maximum image height must be greater than or equal to the "
+                . "minimum image height, but {$maxHeight} < {$this->getMinHeight()}"
+            );
         }
 
         $this->options['maxHeight']  = (int) $maxHeight;

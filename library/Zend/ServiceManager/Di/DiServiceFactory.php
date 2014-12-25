@@ -100,12 +100,9 @@ class DiServiceFactory extends Di implements FactoryInterface
         }
 
         try {
-
             $service = parent::get($name, $params);
             return $service;
-
         } catch (DiClassNotFoundException $e) {
-
             // allow this di service to get dependencies from the service locator AFTER trying di
             if ($this->useServiceLocator == self::USE_SL_AFTER_DI && $this->serviceLocator->has($name)) {
                 return $this->serviceLocator->get($name);
@@ -117,6 +114,5 @@ class DiServiceFactory extends Di implements FactoryInterface
                 );
             }
         }
-
     }
 }

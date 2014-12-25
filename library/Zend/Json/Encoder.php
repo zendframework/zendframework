@@ -95,7 +95,6 @@ class Encoder
         return $this->_encodeDatum($value);
     }
 
-
     /**
      * Encode an object to JSON by encoding each of the public properties
      *
@@ -112,12 +111,9 @@ class Encoder
     {
         if ($this->cycleCheck) {
             if ($this->_wasVisited($value)) {
-
                 if (isset($this->options['silenceCyclicalExceptions'])
                     && $this->options['silenceCyclicalExceptions']===true) {
-
                     return '"* RECURSION (' . str_replace('\\', '\\\\', get_class($value)) . ') *"';
-
                 } else {
                     throw new RecursionException(
                         'Cycles not supported in JSON encoding, cycle introduced by '
@@ -132,7 +128,7 @@ class Encoder
         $props = '';
 
         if (method_exists($value, 'toJson')) {
-            $props =',' . preg_replace("/^\{(.*)\}$/","\\1", $value->toJson());
+            $props = ',' . preg_replace("/^\{(.*)\}$/", "\\1", $value->toJson());
         } else {
             if ($value instanceof IteratorAggregate) {
                 $propCollection = $value->getIterator();
@@ -158,7 +154,6 @@ class Encoder
             . $props . '}';
     }
 
-
     /**
      * Determine if an object has been serialized already
      *
@@ -173,7 +168,6 @@ class Encoder
 
         return false;
     }
-
 
     /**
      * JSON encode an array value
@@ -218,7 +212,6 @@ class Encoder
         return $result;
     }
 
-
     /**
      * JSON encode a basic data type (string, number, boolean, null)
      *
@@ -244,7 +237,6 @@ class Encoder
         return $result;
     }
 
-
     /**
      * JSON encode a string value by escaping characters as necessary
      *
@@ -267,7 +259,6 @@ class Encoder
 
         return '"' . $string . '"';
     }
-
 
     /**
      * Encode the constants associated with the ReflectionClass
@@ -292,7 +283,6 @@ class Encoder
 
         return $result . "}";
     }
-
 
     /**
      * Encode the public methods of the ReflectionClass in the
@@ -356,7 +346,6 @@ class Encoder
         return $result . "}";
     }
 
-
     /**
      * Encode the public properties of the ReflectionClass in the class2
      * format.
@@ -412,7 +401,6 @@ class Encoder
                 . self::_encodeMethods($cls)      .","
                 . self::_encodeVariables($cls)    .'});';
     }
-
 
     /**
      * Encode several classes at once
@@ -474,9 +462,12 @@ class Encoder
                 case (($ordVarC & 0xF0) == 0xE0):
                     // characters U-00000800 - U-0000FFFF, mask 1110XXXX
                     // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
-                    $char = pack('C*', $ordVarC,
-                                 ord($value[$i + 1]),
-                                 ord($value[$i + 2]));
+                    $char = pack(
+                        'C*',
+                        $ordVarC,
+                        ord($value[$i + 1]),
+                        ord($value[$i + 2])
+                    );
                     $i += 2;
                     $utf16 = self::_utf82utf16($char);
                     $ascii .= sprintf('\u%04s', bin2hex($utf16));
@@ -485,10 +476,13 @@ class Encoder
                 case (($ordVarC & 0xF8) == 0xF0):
                     // characters U-00010000 - U-001FFFFF, mask 11110XXX
                     // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
-                    $char = pack('C*', $ordVarC,
-                                 ord($value[$i + 1]),
-                                 ord($value[$i + 2]),
-                                 ord($value[$i + 3]));
+                    $char = pack(
+                        'C*',
+                        $ordVarC,
+                        ord($value[$i + 1]),
+                        ord($value[$i + 2]),
+                        ord($value[$i + 3])
+                    );
                     $i += 3;
                     $utf16 = self::_utf82utf16($char);
                     $ascii .= sprintf('\u%04s', bin2hex($utf16));
@@ -497,11 +491,14 @@ class Encoder
                 case (($ordVarC & 0xFC) == 0xF8):
                     // characters U-00200000 - U-03FFFFFF, mask 111110XX
                     // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
-                    $char = pack('C*', $ordVarC,
-                                 ord($value[$i + 1]),
-                                 ord($value[$i + 2]),
-                                 ord($value[$i + 3]),
-                                 ord($value[$i + 4]));
+                    $char = pack(
+                        'C*',
+                        $ordVarC,
+                        ord($value[$i + 1]),
+                        ord($value[$i + 2]),
+                        ord($value[$i + 3]),
+                        ord($value[$i + 4])
+                    );
                     $i += 4;
                     $utf16 = self::_utf82utf16($char);
                     $ascii .= sprintf('\u%04s', bin2hex($utf16));
@@ -510,12 +507,15 @@ class Encoder
                 case (($ordVarC & 0xFE) == 0xFC):
                     // characters U-04000000 - U-7FFFFFFF, mask 1111110X
                     // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
-                    $char = pack('C*', $ordVarC,
-                                 ord($value[$i + 1]),
-                                 ord($value[$i + 2]),
-                                 ord($value[$i + 3]),
-                                 ord($value[$i + 4]),
-                                 ord($value[$i + 5]));
+                    $char = pack(
+                        'C*',
+                        $ordVarC,
+                        ord($value[$i + 1]),
+                        ord($value[$i + 2]),
+                        ord($value[$i + 3]),
+                        ord($value[$i + 4]),
+                        ord($value[$i + 5])
+                    );
                     $i += 5;
                     $utf16 = self::_utf82utf16($char);
                     $ascii .= sprintf('\u%04s', bin2hex($utf16));
@@ -524,7 +524,7 @@ class Encoder
         }
 
         return $ascii;
-     }
+    }
 
     /**
      * Convert a string from one UTF-8 char to one UTF-16 char.
@@ -555,17 +555,12 @@ class Encoder
             case 2:
                 // return a UTF-16 character from a 2-byte UTF-8 char
                 // see: http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
-                return chr(0x07 & (ord($utf8{0}) >> 2))
-                     . chr((0xC0 & (ord($utf8{0}) << 6))
-                         | (0x3F & ord($utf8{1})));
+                return chr(0x07 & (ord($utf8{0}) >> 2)) . chr((0xC0 & (ord($utf8{0}) << 6)) | (0x3F & ord($utf8{1})));
 
             case 3:
                 // return a UTF-16 character from a 3-byte UTF-8 char
                 // see: http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
-                return chr((0xF0 & (ord($utf8{0}) << 4))
-                         | (0x0F & (ord($utf8{1}) >> 2)))
-                     . chr((0xC0 & (ord($utf8{1}) << 6))
-                         | (0x7F & ord($utf8{2})));
+                return chr((0xF0 & (ord($utf8{0}) << 4)) | (0x0F & (ord($utf8{1}) >> 2))) . chr((0xC0 & (ord($utf8{1}) << 6)) | (0x7F & ord($utf8{2})));
         }
 
         // ignoring UTF-32 for now, sorry

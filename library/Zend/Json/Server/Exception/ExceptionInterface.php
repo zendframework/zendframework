@@ -12,4 +12,5 @@ namespace Zend\Json\Server\Exception;
 use Zend\Json\Exception\ExceptionInterface as Exception;
 
 interface ExceptionInterface extends Exception
-{}
+{
+}

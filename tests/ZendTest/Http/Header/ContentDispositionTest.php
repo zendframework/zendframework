@@ -13,7 +13,6 @@ use Zend\Http\Header\ContentDisposition;
 
 class ContentDispositionTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testContentDispositionFromStringCreatesValidContentDispositionHeader()
     {
         $contentDispositionHeader = ContentDisposition::fromString('Content-Disposition: xxx');
@@ -46,5 +45,4 @@ class ContentDispositionTest extends \PHPUnit_Framework_TestCase
     }
 
     /** Implmentation specific tests here */
-
 }

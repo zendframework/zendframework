@@ -80,7 +80,6 @@ class CurlTest extends CommonHttpTests
      */
     public function testConfigSetAsZendConfig()
     {
-
         $config = new Config(array(
             'timeout'  => 400,
             'nested'   => array(

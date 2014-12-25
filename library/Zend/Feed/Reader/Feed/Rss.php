@@ -19,7 +19,6 @@ use Zend\Feed\Reader\Exception;
 */
 class Rss extends AbstractFeed
 {
-
     /**
      * Constructor
      *

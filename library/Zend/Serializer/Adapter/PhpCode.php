@@ -44,7 +44,6 @@ class PhpCode extends AbstractAdapter
         $err  = ErrorHandler::stop();
 
         if ($eval === false || $err) {
-
             $msg = 'eval failed';
 
             // Error handler doesn't catch syntax errors

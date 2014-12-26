@@ -141,13 +141,9 @@ class Rbac extends AbstractIterator
     {
         if ($assert) {
             if ($assert instanceof AssertionInterface) {
-                if (!$assert->assert($this)) {
-                    return false;
-                }
+                return (bool) $assert->assert($this);
             } elseif (is_callable($assert)) {
-                if (!$assert($this)) {
-                    return false;
-                }
+                return (bool) $assert($this);
             } else {
                 throw new Exception\InvalidArgumentException(
                     'Assertions must be a Callable or an instance of Zend\Permissions\Rbac\AssertionInterface'

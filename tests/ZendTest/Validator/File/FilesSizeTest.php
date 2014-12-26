@@ -226,6 +226,20 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
         )));
     }
 
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testIllegalFilesFormat()
+    {
+        $validator = new File\FilesSize(array('min' => 0, 'max' => 2000));
+
+        $validator->isValid(array(
+            array(
+                'error' => 0
+            ),
+        ));
+    }
+
     private function createFileInfo($file)
     {
         return array(

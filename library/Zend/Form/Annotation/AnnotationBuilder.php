@@ -73,6 +73,11 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
     );
 
     /**
+     * @var bool
+     */
+    protected $preserveDefinedOrder = false;
+
+    /**
      * Set form factory to use when building form from annotations
      *
      * @param  Factory $formFactory
@@ -346,19 +351,6 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
             }
             $formSpec['elements'][] = $elementSpec;
         }
-    }
-
-    /**
-     * @param array $options
-     * @return $this
-     */
-    public function setOptions(array $options)
-    {
-        if (isset($options['preserve_defined_order'])) {
-            $this->setPreserveDefinedOrder($options['preserve_defined_order']);
-        }
-
-        return $this;
     }
 
     /**

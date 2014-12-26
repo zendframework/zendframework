@@ -125,7 +125,7 @@ class AnnotationBuilderTest extends TestCase
     {
         $entity  = new TestAsset\Annotation\FieldsetOrderEntity();
         $builder = new Annotation\AnnotationBuilder();
-        $builder->setOptions(array('preserve_defined_order' => true));
+        $builder->setPreserveDefinedOrder(true);
         $form    = $builder->createForm($entity);
 
         $fieldset = $form->get('fieldset');

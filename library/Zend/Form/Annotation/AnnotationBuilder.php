@@ -80,18 +80,6 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
     );
 
     /**
-     * Register a new form annotation class
-     *
-     * @param $fullyQualifiedClassName
-     * @return $this
-     */
-    public function registerAnnotation($fullyQualifiedClassName)
-    {
-        $this->getAnnotationParser()->registerAnnotation($fullyQualifiedClassName);
-        return $this;
-    }
-
-    /**
      * Set form factory to use when building form from annotations
      *
      * @param  Factory $formFactory
@@ -403,7 +391,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
     /**
      * @return \Zend\Code\Annotation\Parser\DoctrineAnnotationParser
      */
-    protected function getAnnotationParser()
+    public function getAnnotationParser()
     {
         if (null === $this->annotationParser) {
             $this->annotationParser = new Parser\DoctrineAnnotationParser();

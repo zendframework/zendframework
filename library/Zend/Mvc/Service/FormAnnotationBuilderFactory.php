@@ -21,6 +21,7 @@ class FormAnnotationBuilderFactory implements FactoryInterface
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
+     * @throws \Zend\ServiceManager\Exception\RuntimeException
      * @return mixed
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
@@ -35,8 +36,8 @@ class FormAnnotationBuilderFactory implements FactoryInterface
             $config = $config['form_annotation_builder'];
 
             if (isset($config['annotations'])) {
-                foreach ($config['annotations'] as $fullyQualifiedClassName) {
-                    $annotationBuilder->registerAnnotation($fullyQualifiedClassName);
+                foreach ((array) $config['annotations'] as $fullyQualifiedClassName) {
+                    $annotationBuilder->getAnnotationParser()->registerAnnotation($fullyQualifiedClassName);
                 }
             }
 

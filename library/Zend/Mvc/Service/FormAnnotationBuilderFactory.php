@@ -9,10 +9,11 @@
 
 namespace Zend\Mvc\Service;
 
+use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Form\Annotation\AnnotationBuilder;
+use Zend\ServiceManager\Exception\RuntimeException;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Form\Factory;
 
 class FormAnnotationBuilderFactory implements FactoryInterface
 {
@@ -40,8 +41,12 @@ class FormAnnotationBuilderFactory implements FactoryInterface
             }
 
             if (isset($config['listeners'])) {
-                foreach ($config['listeners'] as $listener) {
-                    $annotationBuilder->registerAnnotationListener($listener);
+                foreach ((array) $config['listeners'] as $listenerName) {
+                    $listener = $serviceLocator->get($listenerName);
+                    if (!($listener instanceof ListenerAggregateInterface)) {
+                        throw new RuntimeException(sprintf('Invalid event listener (%s) provided', $listenerName));
+                    }
+                    $listener->attach($annotationBuilder->getEventManager());
                 }
             }
         }

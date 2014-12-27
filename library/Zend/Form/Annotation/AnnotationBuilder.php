@@ -92,16 +92,6 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
     }
 
     /**
-     * @param ListenerAggregateInterface $listener
-     * @return $this
-     */
-    public function registerAnnotationListener(ListenerAggregateInterface $listener)
-    {
-        $this->getEventManager()->attach($listener);
-        return $this;
-    }
-
-    /**
      * Set form factory to use when building form from annotations
      *
      * @param  Factory $formFactory

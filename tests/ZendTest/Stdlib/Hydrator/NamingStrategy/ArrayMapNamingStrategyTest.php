@@ -20,7 +20,7 @@ class ArrayMapNamingStrategyTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetSameNameWithEmptyMap()
     {
-        $strategy = new ArrayMapNamingStrategy([]);
+        $strategy = new ArrayMapNamingStrategy(array());
         $this->assertEquals('some_stuff', $strategy->hydrate('some_stuff'));
         $this->assertEquals('some_stuff', $strategy->extract('some_stuff'));
     }

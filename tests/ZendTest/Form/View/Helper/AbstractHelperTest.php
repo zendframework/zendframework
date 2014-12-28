@@ -57,5 +57,4 @@ class AbstractHelperTest extends CommonTestCase
             $this->helper->createAttributesString(array('data-value' => 'Título'))
         );
     }
-
 }

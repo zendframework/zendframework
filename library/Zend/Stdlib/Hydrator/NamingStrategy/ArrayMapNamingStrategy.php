@@ -9,7 +9,7 @@
 
 namespace Zend\Stdlib\Hydrator\NamingStrategy;
 
-class ArrayMapNamingStrategy implements NamingStrategyInterface
+final class ArrayMapNamingStrategy implements NamingStrategyInterface
 {
     /**
      * @var string[]

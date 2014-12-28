@@ -9,7 +9,6 @@
 
 namespace Zend\View\Resolver;
 
-use Zend\View\Exception;
 use Zend\View\Renderer\RendererInterface as Renderer;
 
 final class PrefixPathStackResolver implements ResolverInterface
@@ -54,6 +53,6 @@ final class PrefixPathStackResolver implements ResolverInterface
             }
         }
 
-        return null;
+        return;
     }
 }

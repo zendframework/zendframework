@@ -1,5 +1,6 @@
 <?php
 $finder = Symfony\CS\Finder\DefaultFinder::create()
+    ->notPath('Zend/Db/Sql/Select.php')
     ->notPath('Zend/View/Stream.php')
     ->notPath('ZendTest/Code/Generator/TestAsset')
     ->notPath('ZendTest/Code/Reflection/FunctionReflectionTest.php')

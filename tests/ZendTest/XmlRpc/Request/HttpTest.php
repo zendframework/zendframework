@@ -125,7 +125,7 @@ EOT;
     {
         $this->assertNull(PHPInput::argumentsPassedTo('stream_open'));
         $request = new Request\Http();
-        list($path, $mode,) = PHPInput::argumentsPassedTo('stream_open');
+        list($path, $mode, ) = PHPInput::argumentsPassedTo('stream_open');
         $this->assertSame('php://input', $path);
         $this->assertSame('rb', $mode);
         $this->assertSame($this->xml, $request->getRawRequest());

@@ -45,6 +45,12 @@ class DateTimeFormatterStrategyTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('stdClass', $date);
     }
 
+    public function testCanHydrateWithInvalidDateTime()
+    {
+        $strategy = new DateTimeFormatterStrategy('d/m/Y');
+        $this->assertSame('foo bar baz', $strategy->hydrate('foo bar baz'));
+    }
+
     public function testAcceptsStringCastableDateTimeFormat()
     {
         $format = $this->getMock('stdClass', array('__toString'));

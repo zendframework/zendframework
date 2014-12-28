@@ -556,6 +556,19 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @runInSeparateProcess
      */
+    public function testProducedSessionManagerWillNotReplaceSessionSuperGlobalValues()
+    {
+        $_SESSION['foo'] = 'bar';
+
+        $this->manager->start();
+
+        $this->assertArrayHasKey('foo', $_SESSION);
+        $this->assertSame('bar', $_SESSION['foo']);
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
     public function testValidatorChainSessionMetadataIsPreserved()
     {
         $this

@@ -11,6 +11,7 @@ namespace ZendTest\Session;
 
 use Zend\Session\SessionManager;
 use Zend\Session;
+use Zend\Session\Validator\RemoteAddr;
 
 /**
  * @group      Zend_Session
@@ -550,5 +551,27 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->getValidatorChain()->attach('session.validate', $validator);
 
         $this->assertTrue($this->manager->isValid());
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testValidatorChainSessionMetadataIsPreserved()
+    {
+        $this
+            ->manager
+            ->getValidatorChain()
+            ->attach('session.validate', array(new RemoteAddr(), 'isValid'));
+
+        $this->assertFalse($this->manager->sessionExists());
+
+        $this->manager->start();
+
+        $this->assertSame(
+            array(
+                'Zend\Session\Validator\RemoteAddr' => '',
+            ),
+            $_SESSION['__ZF']['_VALID']
+        );
     }
 }

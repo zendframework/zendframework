@@ -1210,4 +1210,24 @@ class CollectionTest extends TestCase
         $this->assertArrayHasKey('test', $result->collection[0]);
         $this->assertEquals('bar', $result->collection[0]['test']);
     }
+
+    /**
+     * @group 6263
+     * @group 6298
+     */
+    public function testCanHydrateObject()
+    {
+        $form = $this->form;
+        $data = array(
+            'colors' => array(
+                '#ffffff',
+            ),
+        );
+        $form->setData($data);
+        $object = new \ArrayObject();
+        $form->bind($object);
+        $this->assertTrue($form->isValid());
+        $this->assertTrue(is_array($object['colors']));
+        $this->assertCount(1, $object['colors']);
+    }
 }

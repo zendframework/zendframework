@@ -69,10 +69,12 @@ final class DateTimeFormatterStrategy implements StrategyInterface
             return null;
         }
 
-        if ($this->timezone instanceof DateTimeZone) {
-            return DateTime::createFromFormat($this->format, $value, $this->timezone);
+        if ($this->timezone) {
+            $hydrated = DateTime::createFromFormat($this->format, $value, $this->timezone);
+        } else {
+            $hydrated = DateTime::createFromFormat($this->format, $value);
         }
 
-        return DateTime::createFromFormat($this->format, $value);
+        return $hydrated ?: $value;
     }
 }

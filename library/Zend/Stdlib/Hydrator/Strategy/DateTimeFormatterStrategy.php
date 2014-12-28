@@ -17,12 +17,12 @@ final class DateTimeFormatterStrategy implements StrategyInterface
     /**
      * @var string
      */
-    protected $format;
+    private $format;
 
     /**
      * @var DateTimeZone|null
      */
-    protected $timezone;
+    private $timezone;
 
     /**
      * Constructor

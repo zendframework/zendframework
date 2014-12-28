@@ -32,7 +32,7 @@ class DateTimeFormatterStrategy implements StrategyInterface
      */
     public function __construct($format = DateTime::RFC3339, DateTimeZone $timezone = null)
     {
-        $this->format   = $format;
+        $this->format   = (string) $format;
         $this->timezone = $timezone;
     }
 

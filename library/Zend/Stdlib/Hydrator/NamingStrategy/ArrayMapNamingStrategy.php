@@ -24,7 +24,8 @@ final class ArrayMapNamingStrategy implements NamingStrategyInterface
     /**
      * Constructor
      *
-     * @param array $extractionMap
+     * @param array $extractionMap A map of string keys and values for symmetric translation of hydrated
+     *                             and extracted field names
      */
     public function __construct(array $extractionMap)
     {

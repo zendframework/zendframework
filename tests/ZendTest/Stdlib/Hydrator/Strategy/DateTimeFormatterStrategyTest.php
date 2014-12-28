@@ -42,4 +42,16 @@ class DateTimeFormatterStrategyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('stdClass', $date);
     }
+
+    public function testAcceptsStringCastableDateTimeFormat()
+    {
+        $format = $this->getMock('stdClass', array('__toString'));
+
+        $format->expects($this->once())->method('__toString')->will($this->returnValue('d/m/Y'));
+
+        $strategy = new DateTimeFormatterStrategy($format);
+
+        $this->assertEquals('26/04/2014', $strategy->extract(new \DateTime('2014-04-26')));
+        $this->assertEquals('26/04/2015', $strategy->extract(new \DateTime('2015-04-26')));
+    }
 }

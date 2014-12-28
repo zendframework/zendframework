@@ -9,7 +9,6 @@
 
 namespace Zend\Validator;
 
-use Zend\Stdlib\ErrorHandler;
 use Zend\Stdlib\StringUtils;
 
 /**

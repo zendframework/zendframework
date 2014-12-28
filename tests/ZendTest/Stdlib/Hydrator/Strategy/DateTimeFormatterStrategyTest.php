@@ -11,6 +11,11 @@ namespace ZendTest\Stdlib\Hydrator\Strategy;
 
 use Zend\Stdlib\Hydrator\Strategy\DateTimeFormatterStrategy;
 
+/**
+ * Tests for {@see \Zend\Stdlib\Hydrator\Strategy\DateTimeFormatterStrategy}
+ *
+ * @covers \Zend\Stdlib\Hydrator\Strategy\DateTimeFormatterStrategy
+ */
 class DateTimeFormatterStrategyTest extends \PHPUnit_Framework_TestCase
 {
     public function testHydrate()

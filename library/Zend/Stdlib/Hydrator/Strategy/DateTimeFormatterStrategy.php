@@ -37,17 +37,6 @@ class DateTimeFormatterStrategy implements StrategyInterface
     }
 
     /**
-     * Sets timezone
-     *
-     * @param  DateTimeZone $timezone
-     * @return void
-     */
-    public function setTimezone(DateTimeZone $timezone)
-    {
-        $this->timezone = $timezone;
-    }
-
-    /**
      * {@inheritDoc}
      *
      * Converts to date time string

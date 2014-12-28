@@ -48,10 +48,13 @@ class DateTimeFormatterStrategy implements StrategyInterface
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Converts to date time string
      *
-     * @param DateTime|string|null
-     * @return string|null
+     * @param mixed|DateTime $value
+     *
+     * @return mixed|string
      */
     public function extract($value)
     {
@@ -65,8 +68,11 @@ class DateTimeFormatterStrategy implements StrategyInterface
     /**
      * Converts date time string to DateTime instance for injecting to object
      *
-     * @param  string|null $value
-     * @return DateTime|null
+     * {@inheritDoc}
+     *
+     * @param mixed|string $value
+     *
+     * @return mixed|DateTime
      */
     public function hydrate($value)
     {

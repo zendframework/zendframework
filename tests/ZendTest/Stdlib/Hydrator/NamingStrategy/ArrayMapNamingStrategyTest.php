@@ -11,6 +11,11 @@ namespace ZendTest\Stdlib\Hydrator\NamingStrategy;
 
 use Zend\Stdlib\Hydrator\NamingStrategy\ArrayMapNamingStrategy;
 
+/**
+ * Tests for {@see \Zend\Stdlib\Hydrator\NamingStrategy\ArrayMapNamingStrategy}
+ *
+ * @covers \Zend\Stdlib\Hydrator\NamingStrategy\ArrayMapNamingStrategy
+ */
 class ArrayMapNamingStrategyTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetSameNameWithEmptyMap()

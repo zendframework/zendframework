@@ -230,7 +230,7 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
         $mail = new Storage\Pop3($this->_params);
 
         $content = $mail->getMessage(3)->getContent();
-        list($content, ) = explode("\n", $content, 2);
+        list($content) = explode("\n", $content, 2);
         $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
     }
 

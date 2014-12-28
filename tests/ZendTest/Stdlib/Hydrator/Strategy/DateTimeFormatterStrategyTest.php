@@ -17,7 +17,9 @@ class DateTimeFormatterStrategyTest extends \PHPUnit_Framework_TestCase
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
         $this->assertEquals('2014-04-26', $strategy->hydrate('2014-04-26')->format('Y-m-d'));
-        $strategy->setTimezone(new \DateTimeZone('Asia/Kathmandu'));
+
+        $strategy = new DateTimeFormatterStrategy('Y-m-d', new \DateTimeZone('Asia/Kathmandu'));
+
         $date = $strategy->hydrate('2014-04-26');
         $this->assertEquals('Asia/Kathmandu', $date->getTimezone()->getName());
     }

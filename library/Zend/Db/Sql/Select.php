@@ -248,7 +248,7 @@ class Select extends AbstractPreparableSql
      * @throws Exception\InvalidArgumentException
      * @return Select
      */
-    public function implode($name, $on, $columns = self::SQL_STAR, $type = self::JOIN_INNER)
+    public function join($name, $on, $columns = self::SQL_STAR, $type = self::JOIN_INNER)
     {
         if (is_array($name) && (!is_string(key($name)) || count($name) !== 1)) {
             throw new Exception\InvalidArgumentException(

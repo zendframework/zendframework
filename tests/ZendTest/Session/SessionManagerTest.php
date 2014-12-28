@@ -587,4 +587,19 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->manager->isValid());
     }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testRemoteAddressValidationWillFailWithInvalidPreSetData()
+    {
+        $_SESSION = array(
+            '__ZF' => array(
+                '_VALID' => array('Zend\Session\Validator\RemoteAddr' => '123.123.123.123'),
+            ),
+        );
+
+        $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'Session validation failed');
+        $this->manager->start();
+    }
 }

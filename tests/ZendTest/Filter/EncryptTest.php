@@ -38,7 +38,11 @@ class EncryptTest extends \PHPUnit_Framework_TestCase
         $valuesExpected = array(
             'STRING' => 'STRING',
             'ABC1@3' => 'ABC1@3',
-            'A b C'  => 'A B C'
+            'A b C'  => 'A B C',
+            1        => 1,
+            -1       => -1,
+            1.0      => 1.0,
+            -1.0     => -1.0,
         );
 
         $enc = $filter->getEncryption();

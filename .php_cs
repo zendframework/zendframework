@@ -37,7 +37,6 @@ $config->fixers(
         'function_call_space',
         'function_declaration',
         'indentation',
-        'join_function',
         'line_after_namespace',
         'linefeed',
         'parenthesis',

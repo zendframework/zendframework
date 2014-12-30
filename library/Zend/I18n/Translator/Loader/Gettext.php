@@ -128,7 +128,7 @@ class Gettext extends AbstractFileLoader
                     array_shift($originalString);
 
                     foreach ($originalString as $string) {
-                        if(!isset($textDomain[$string])) {
+                        if (! isset($textDomain[$string])) {
                             $textDomain[$string] = '';
                         }
                     }

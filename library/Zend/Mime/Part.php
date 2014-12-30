@@ -36,7 +36,7 @@ class Part
      * as a string or stream
      *
      * @param mixed $content  String or Stream containing the content
-     * @throws InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($content = '')
     {
@@ -260,7 +260,7 @@ class Part
     /**
      * Set content
      * @param mixed $content  String or Stream containing the content
-     * @throws InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return self
      */
     public function setContent($content)

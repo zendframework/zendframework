@@ -24,19 +24,19 @@ class EventFeature extends AbstractFeature implements EventsCapableInterface
 {
     const EVENT_PRE_INITIALIZE  = 'preInitialize';
     const EVENT_POST_INITIALIZE = 'postInitialize';
-    
+
     const EVENT_PRE_SELECT      = 'preSelect';
     const EVENT_POST_SELECT     = 'postSelect';
-    
-    
+
     const EVENT_PRE_INSERT      = 'preInsert';
     const EVENT_POST_INSERT     = 'postInsert';
-    
+
     const EVENT_PRE_DELETE      = 'preDelete';
     const EVENT_POST_DELETE     = 'postDelete';
-    
+
     const EVENT_PRE_UPDATE      = 'preUpdate';
     const EVENT_POST_UPDATE     = 'postUpdate';
+
     /**
      * @var EventManagerInterface
      */

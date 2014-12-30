@@ -46,6 +46,9 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo-bar', $header->getFieldValue());
     }
 
+    /**
+     * @group 6657
+     */
     public function testHeadersFromStringFactoryCreatesSingleObjectWithContinuationLine()
     {
         $headers = Mail\Headers::fromString("Fake: foo-bar,\r\n      blah-blah");

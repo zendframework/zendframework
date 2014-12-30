@@ -407,4 +407,11 @@ class FormMultiCheckboxTest extends CommonTestCase
         $markup  = $this->helper->render($element);
         $this->assertRegexp('#<span>label1</span>#', $markup);
     }
+
+    public function testRenderWithoutValueOptions()
+    {
+        $element = new MultiCheckboxElement('foo');
+
+        $this->assertEmpty($this->helper->render($element));
+    }
 }

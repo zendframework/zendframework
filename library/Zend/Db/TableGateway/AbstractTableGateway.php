@@ -19,6 +19,7 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\TableIdentifier;
 use Zend\Db\Sql\Update;
 use Zend\Db\Sql\Where;
+use Zend\Db\TableGateway\Feature\EventFeature;
 
 /**
  *
@@ -94,7 +95,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
 
         $this->featureSet->setTableGateway($this);
-        $this->featureSet->apply('preInitialize', array());
+        $this->featureSet->apply(EventFeature::EVENT_PRE_INITIALIZE, array());
 
         if (!$this->adapter instanceof AdapterInterface) {
             throw new Exception\RuntimeException('This table does not have an Adapter setup');
@@ -112,7 +113,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
             $this->sql = new Sql($this->adapter, $this->table);
         }
 
-        $this->featureSet->apply('postInitialize', array());
+        $this->featureSet->apply(EventFeature::EVENT_POST_INITIALIZE, array());
 
         $this->isInitialized = true;
     }
@@ -225,7 +226,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
 
         // apply preSelect features
-        $this->featureSet->apply('preSelect', array($select));
+        $this->featureSet->apply(EventFeature::EVENT_PRE_SELECT, array($select));
 
         // prepare and execute
         $statement = $this->sql->prepareStatementForSqlObject($select);
@@ -236,7 +237,7 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         $resultSet->initialize($result);
 
         // apply postSelect features
-        $this->featureSet->apply('postSelect', array($statement, $result, $resultSet));
+        $this->featureSet->apply(EventFeature::EVENT_POST_SELECT, array($statement, $result, $resultSet));
 
         return $resultSet;
     }
@@ -284,14 +285,14 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
 
         // apply preInsert features
-        $this->featureSet->apply('preInsert', array($insert));
+        $this->featureSet->apply(EventFeature::EVENT_PRE_INSERT, array($insert));
 
         $statement = $this->sql->prepareStatementForSqlObject($insert);
         $result = $statement->execute();
         $this->lastInsertValue = $this->adapter->getDriver()->getConnection()->getLastGeneratedValue();
 
         // apply postInsert features
-        $this->featureSet->apply('postInsert', array($statement, $result));
+        $this->featureSet->apply(EventFeature::EVENT_POST_INSERT, array($statement, $result));
 
         return $result->getAffectedRows();
     }
@@ -344,13 +345,13 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
 
         // apply preUpdate features
-        $this->featureSet->apply('preUpdate', array($update));
+        $this->featureSet->apply(EventFeature::EVENT_PRE_UPDATE, array($update));
 
         $statement = $this->sql->prepareStatementForSqlObject($update);
         $result = $statement->execute();
 
         // apply postUpdate features
-        $this->featureSet->apply('postUpdate', array($statement, $result));
+        $this->featureSet->apply(EventFeature::EVENT_POST_UPDATE, array($statement, $result));
 
         return $result->getAffectedRows();
     }
@@ -400,13 +401,13 @@ abstract class AbstractTableGateway implements TableGatewayInterface
         }
 
         // pre delete update
-        $this->featureSet->apply('preDelete', array($delete));
+        $this->featureSet->apply(EventFeature::EVENT_PRE_DELETE, array($delete));
 
         $statement = $this->sql->prepareStatementForSqlObject($delete);
         $result = $statement->execute();
 
         // apply postDelete features
-        $this->featureSet->apply('postDelete', array($statement, $result));
+        $this->featureSet->apply(EventFeature::EVENT_POST_DELETE, array($statement, $result));
 
         return $result->getAffectedRows();
     }

@@ -9,8 +9,6 @@
 
 namespace Zend\Mime;
 
-use Zend\Mime\Exception;
-
 /**
  * Class representing a MIME part.
  */

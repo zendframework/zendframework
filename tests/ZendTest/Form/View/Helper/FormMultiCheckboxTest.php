@@ -275,14 +275,6 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->helper->render($element);
     }
 
-    public function testRenderElementWithNoValueOptionsRaisesException()
-    {
-        $element = new MultiCheckboxElement('foo');
-
-        $this->setExpectedException('Zend\Form\Exception\DomainException');
-        $this->helper->render($element);
-    }
-
     public function testCanMarkSingleOptionAsSelected()
     {
         $element = new MultiCheckboxElement('foo');
@@ -414,5 +406,16 @@ class FormMultiCheckboxTest extends CommonTestCase
         ));
         $markup  = $this->helper->render($element);
         $this->assertRegexp('#<span>label1</span>#', $markup);
+    }
+
+    /**
+     * @group 6649
+     * @group 6655
+     */
+    public function testRenderWithoutValueOptions()
+    {
+        $element = new MultiCheckboxElement('foo');
+
+        $this->assertEmpty($this->helper->render($element));
     }
 }

@@ -374,8 +374,8 @@ abstract class AbstractRestfulController extends AbstractController
                     $id = null;
                 }
                 $action = 'head';
-                $this->head($id);
-                $response = $e->getResponse();
+                $headResult = $this->head($id);
+                $response = ($headResult instanceof Response) ? clone $headResult : $e->getResponse();
                 $response->setContent('');
                 $return = $response;
                 break;

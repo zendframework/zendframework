@@ -15,6 +15,7 @@ class RestfulTestController extends AbstractRestfulController
 {
     public $entities = array();
     public $entity   = array();
+    public $headResponse = null;
 
     /**
      * Create a new resource
@@ -82,6 +83,10 @@ class RestfulTestController extends AbstractRestfulController
     {
         if ($id) {
             $this->getResponse()->getHeaders()->addHeaderLine('X-ZF2-Id', $id);
+        }
+
+        if ($this->headResponse !== null) {
+            return $this->headResponse;
         }
     }
 

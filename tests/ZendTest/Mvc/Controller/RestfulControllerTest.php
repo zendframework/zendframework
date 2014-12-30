@@ -184,6 +184,21 @@ class RestfulControllerTest extends TestCase
         $this->assertEquals('patch', $this->routeMatch->getParam('action'));
     }
 
+    public function testOnDispatchHonorsStatusCodeWithHeadMethod()
+    {
+        $this->controller->headResponse = new Response();
+        $this->controller->headResponse->setStatusCode(418);
+        $this->controller->headResponse->getHeaders()->addHeaderLine('Custom-Header', 'Header Value');
+        $this->routeMatch->setParam('id', 1);
+        $this->request->setMethod('HEAD');
+        $result = $this->controller->dispatch($this->request, $this->response);
+
+        $this->assertEquals(418, $result->getStatusCode());
+        $this->assertEquals('', $result->getContent());
+        $this->assertEquals('head', $this->routeMatch->getParam('action'));
+        $this->assertEquals('Header Value', $result->getHeaders()->get('Custom-Header')->getFieldValue());
+    }
+
     public function testDispatchInvokesHeadMethodWhenNoActionPresentAndHeadInvokedWithoutIdentifier()
     {
         $entities = array(

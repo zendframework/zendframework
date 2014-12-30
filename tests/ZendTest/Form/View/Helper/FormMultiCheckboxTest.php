@@ -408,6 +408,10 @@ class FormMultiCheckboxTest extends CommonTestCase
         $this->assertRegexp('#<span>label1</span>#', $markup);
     }
 
+    /**
+     * @group 6649
+     * @group 6655
+     */
     public function testRenderWithoutValueOptions()
     {
         $element = new MultiCheckboxElement('foo');

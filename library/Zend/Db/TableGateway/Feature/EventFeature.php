@@ -22,7 +22,6 @@ use Zend\EventManager\EventsCapableInterface;
 
 class EventFeature extends AbstractFeature implements EventsCapableInterface
 {
-    
     const EVENT_PRE_INITIALIZE  = 'preInitialize';
     const EVENT_POST_INITIALIZE = 'postInitialize';
     

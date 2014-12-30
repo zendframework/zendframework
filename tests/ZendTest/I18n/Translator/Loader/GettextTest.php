@@ -111,6 +111,10 @@ class GettextTest extends TestCase
         $this->assertEquals('Message 4 (en)', $textDomain['Message 4']);
     }
 
+    /**
+     * @group 6762
+     * @group 6765
+     */
     public function testLoaderLoadsPlural()
     {
         $loader = new GettextLoader();

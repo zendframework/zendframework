@@ -66,7 +66,7 @@ final class DateTimeFormatterStrategy implements StrategyInterface
     public function hydrate($value)
     {
         if ($value === '' || $value === null) {
-            return null;
+            return;
         }
 
         if ($this->timezone) {

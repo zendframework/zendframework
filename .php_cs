@@ -1,6 +1,5 @@
 <?php
 $finder = Symfony\CS\Finder\DefaultFinder::create()
-    ->notPath('Zend/Db/Sql/Select.php')
     ->notPath('Zend/View/Stream.php')
     ->notPath('ZendTest/Code/Generator/TestAsset')
     ->notPath('ZendTest/Code/Reflection/FunctionReflectionTest.php')
@@ -38,7 +37,6 @@ $config->fixers(
         'function_call_space',
         'function_declaration',
         'indentation',
-        'join_function',
         'line_after_namespace',
         'linefeed',
         'parenthesis',

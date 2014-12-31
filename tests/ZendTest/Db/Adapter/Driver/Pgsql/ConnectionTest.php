@@ -52,7 +52,8 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF2-6760
+     * @group 6760
+     * @group 6787
      */
     public function testGetConnectionStringEncodeSpecialSymbol()
     {

@@ -56,31 +56,31 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetConnectionStringEncodeSpecialSymbol()
     {
-        if (extension_loaded('pgsql')) {
-            $connectionParameters = array(
-                'driver'    => 'pgsql',
-                'host' => 'localhost',
-                'post' => '5432',
-                'dbname' => 'test',
-                'username'  => 'test',
-                'password'  => 'test123!',
-            );
-
-            $this->connection->setConnectionParameters($connectionParameters);
-
-            $getConnectionString = new ReflectionMethod(
-                'Zend\Db\Adapter\Driver\Pgsql\Connection',
-                'getConnectionString'
-            );
-
-            $getConnectionString->setAccessible(true);
-
-            $this->assertEquals(
-                'host=localhost user=test password=test123! dbname=test',
-                $getConnectionString->invoke($this->connection)
-            );
-        } else {
+        if (! extension_loaded('pgsql')) {
             $this->markTestSkipped('pgsql extension not loaded');
         }
+
+        $connectionParameters = array(
+            'driver'    => 'pgsql',
+            'host' => 'localhost',
+            'post' => '5432',
+            'dbname' => 'test',
+            'username'  => 'test',
+            'password'  => 'test123!',
+        );
+
+        $this->connection->setConnectionParameters($connectionParameters);
+
+        $getConnectionString = new ReflectionMethod(
+            'Zend\Db\Adapter\Driver\Pgsql\Connection',
+            'getConnectionString'
+        );
+
+        $getConnectionString->setAccessible(true);
+
+        $this->assertEquals(
+            'host=localhost user=test password=test123! dbname=test',
+            $getConnectionString->invoke($this->connection)
+        );
     }
 }

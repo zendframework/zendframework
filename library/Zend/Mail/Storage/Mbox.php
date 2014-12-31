@@ -199,7 +199,7 @@ class Mbox extends AbstractStorage
         }
 
         if (isset($params->messageEOL)) {
-            $this->messageEOL = $params->messageEOL;
+            $this->messageEOL = (string) $params->messageEOL;
         }
 
         $this->openMboxFile($params->filename);

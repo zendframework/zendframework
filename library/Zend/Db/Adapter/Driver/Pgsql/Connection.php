@@ -321,10 +321,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         $connection['port']     = (isset($p['port'])) ? (int) $p['port'] : null;
         $connection['socket']   = (isset($p['socket'])) ? $p['socket'] : null;
 
-        $connection = array_filter($connection); // remove nulls
-        $connection = http_build_query($connection, null, ' '); // @link http://php.net/pg_connect
-        $connection = urldecode($connection); // @link http://php.net/manual/en/function.urldecode.php
-
-        return $connection;
+        return urldecode(http_build_query(array_filter($connection), null, ' '));
     }
 }

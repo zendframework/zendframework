@@ -9,6 +9,7 @@
 
 namespace ZendTest\Db\Adapter\Driver\Pgsql;
 
+use ReflectionMethod;
 use Zend\Db\Adapter\Driver\Pgsql\Connection;
 use Zend\Db\Adapter\Exception as AdapterException;
 
@@ -67,7 +68,18 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
                 );
 
                 $this->connection->setConnectionParameters($connectionParameters);
-                $this->assertEquals('host=localhost user=test password=test123! dbname=test', $this->connection->getConnectionString());
+
+                $getConnectionString = new ReflectionMethod(
+                    'Zend\Db\Adapter\Driver\Pgsql\Connection',
+                    'getConnectionString'
+                );
+
+                $getConnectionString->setAccessible(true);
+
+                $this->assertEquals(
+                    'host=localhost user=test password=test123! dbname=test',
+                    $getConnectionString->invoke($this->connection)
+                );
             } catch (AdapterException\RuntimeException $exc) {
                 // If it throws an exception it has failed to connect
                 $this->setExpectedException('Zend\Db\Adapter\Exception\RuntimeException');

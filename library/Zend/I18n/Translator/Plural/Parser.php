@@ -222,7 +222,7 @@ class Parser
      * Parse a string.
      *
      * @param  string $string
-     * @return array
+     * @return Symbol
      */
     public function parse($string)
     {

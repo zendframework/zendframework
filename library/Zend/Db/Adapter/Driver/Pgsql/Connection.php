@@ -76,31 +76,7 @@ class Connection extends AbstractConnection
             return $this;
         }
 
-        // localize
-        $p = $this->connectionParameters;
-
-        // given a list of key names, test for existence in $p
-        $findParameterValue = function (array $names) use ($p) {
-            foreach ($names as $name) {
-                if (isset($p[$name])) {
-                    return $p[$name];
-                }
-            }
-
-            return;
-        };
-
-        $connection             = array();
-        $connection['host']     = $findParameterValue(array('hostname', 'host'));
-        $connection['user']     = $findParameterValue(array('username', 'user'));
-        $connection['password'] = $findParameterValue(array('password', 'passwd', 'pw'));
-        $connection['dbname']   = $findParameterValue(array('database', 'dbname', 'db', 'schema'));
-        $connection['port']     = (isset($p['port'])) ? (int) $p['port'] : null;
-        $connection['socket']   = (isset($p['socket'])) ? $p['socket'] : null;
-
-        $connection = array_filter($connection); // remove nulls
-        $connection = http_build_query($connection, null, ' '); // @link http://php.net/pg_connect
-
+        $connection = $this->getConnectionString();
         set_error_handler(function ($number, $string) {
             throw new Exception\RuntimeException(
                 __METHOD__ . ': Unable to connect to database', null, new Exception\ErrorException($string, $number)
@@ -237,5 +213,37 @@ class Connection extends AbstractConnection
         $result = pg_query($this->resource, 'SELECT CURRVAL(\'' . str_replace('\'', '\\\'', $name) . '\') as "currval"');
 
         return pg_fetch_result($result, 0, 'currval');
+    }
+
+    /**
+     * Get Connection String
+     *
+     * @return string
+     */
+    private function getConnectionString()
+    {
+        // localize
+        $p = $this->connectionParameters;
+
+        // given a list of key names, test for existence in $p
+        $findParameterValue = function (array $names) use ($p) {
+            foreach ($names as $name) {
+                if (isset($p[$name])) {
+                    return $p[$name];
+                }
+            }
+            return;
+        };
+
+        $connectionParameters = array(
+            'host'     => $findParameterValue(array('hostname', 'host')),
+            'user'     => $findParameterValue(array('username', 'user')),
+            'password' => $findParameterValue(array('password', 'passwd', 'pw')),
+            'dbname'   => $findParameterValue(array('database', 'dbname', 'db', 'schema')),
+            'port'     => isset($p['port']) ? (int) $p['port'] : null,
+            'socket'   => isset($p['socket']) ? $p['socket'] : null,
+        );
+
+        return urldecode(http_build_query(array_filter($connectionParameters), null, ' '));
     }
 }

@@ -157,8 +157,11 @@ ECS;
         $configReader = new Xml();
 
         $configReader->fromFile($this->getTestAssetPath('attributes'));
+
+        $xmlReader = $this->getInternalXmlReader($configReader);
+
         $this->setExpectedException('PHPUnit_Framework_Error_Warning');
-        $configReader->getReader()->setParserProperty(XMLReader::VALIDATE, true);
+        $xmlReader->setParserProperty(XMLReader::VALIDATE, true);
     }
 
     /**
@@ -184,7 +187,6 @@ ECS;
         $xmlReader = $this->getInternalXmlReader($configReader);
 
         $this->setExpectedException('PHPUnit_Framework_Error_Warning');
-
         $xmlReader->setParserProperty(XMLReader::VALIDATE, true);
     }
 

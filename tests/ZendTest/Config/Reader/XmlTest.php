@@ -9,10 +9,14 @@
 
 namespace ZendTest\Config\Reader;
 
+use ReflectionProperty;
+use XMLReader;
 use Zend\Config\Reader\Xml;
 
 /**
  * @group      Zend_Config
+ *
+ * @covers \Zend\Config\Reader\Xml
  */
 class XmlTest extends AbstractReaderTestCase
 {
@@ -72,7 +76,7 @@ ECS;
 
 ECS;
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
-        $arrayXml = $this->reader->fromString($xml);
+        $this->reader->fromString($xml);
     }
 
     public function testZF300_MultipleKeysOfTheSameName()
@@ -120,5 +124,84 @@ ECS;
         // Element value stored in special key '_'
         $this->assertArrayHasKey('_', $arrayXml['one'][1]);
         $this->assertEquals('bazbat', $arrayXml['one'][1]['_']);
+    }
+
+    /**
+     * @group 6761
+     * @group 6730
+     */
+    public function testReadNonExistingFilesWillFailWithException()
+    {
+        $configReader = new Xml();
+
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+
+        $configReader->fromFile(sys_get_temp_dir() . '/path/that/does/not/exist');
+    }
+
+    /**
+     * @group 6761
+     * @group 6730
+     */
+    public function testCloseWhenCallFromFileReaderGetInvalid()
+    {
+        $configReader = new Xml();
+
+        $configReader->fromFile($this->getTestAssetPath('attributes'));
+
+        $xmlReader = $this->getInternalXmlReader($configReader);
+
+        $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+
+        // following operation should fail because the internal reader is closed (and expected to be closed)
+        $xmlReader->setParserProperty(XMLReader::VALIDATE, true);
+    }
+
+    /**
+     * @group 6761
+     * @group 6730
+     */
+    public function testCloseWhenCallFromStringReaderGetInvalid()
+    {
+        $xml = <<<ECS
+<?xml version="1.0" encoding="UTF-8"?>
+<zend-config>
+    <test>foo</test>
+    <bar>baz</bar>
+    <bar>foo</bar>
+</zend-config>
+
+ECS;
+
+        $configReader = new Xml();
+
+        $configReader->fromString($xml);
+
+        $xmlReader = $this->getInternalXmlReader($configReader);
+
+        $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+
+        // following operation should fail because the internal reader is closed (and expected to be closed)
+        $xmlReader->setParserProperty(XMLReader::VALIDATE, true);
+    }
+
+    /**
+     * Reads the internal XML reader from a given Xml config reader
+     *
+     * @param Xml $xml
+     *
+     * @return XMLReader
+     */
+    private function getInternalXmlReader(Xml $xml)
+    {
+        $reflectionReader = new ReflectionProperty('Zend\Config\Reader\Xml', 'reader');
+
+        $reflectionReader->setAccessible(true);
+
+        $xmlReader = $reflectionReader->getValue($xml);
+
+        $this->assertInstanceOf('XMLReader', $xmlReader);
+
+        return $xmlReader;
     }
 }

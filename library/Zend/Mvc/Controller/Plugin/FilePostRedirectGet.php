@@ -126,7 +126,6 @@ class FilePostRedirectGet extends AbstractPlugin
         $post          = $container->post;
         $errors        = $container->errors;
         $isValid       = $container->isValid;
-        $previousFiles = ($container->files) ?: array();
         unset($container->post);
         unset($container->errors);
         unset($container->isValid);

@@ -90,8 +90,6 @@ class FileGenerator extends AbstractGenerator
         $file->setSourceContent($fileReflection->getContents());
         $file->setSourceDirty(false);
 
-        $body = $fileReflection->getContents();
-
         $uses = $fileReflection->getUses();
 
         foreach ($fileReflection->getClasses() as $class) {

@@ -401,7 +401,7 @@ class ClassScanner implements ScannerInterface
     /**
      * Return a list of properties
      *
-     * @return PropertyScanner
+     * @return PropertyScanner[]
      */
     public function getProperties()
     {

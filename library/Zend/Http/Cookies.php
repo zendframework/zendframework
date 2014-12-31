@@ -59,7 +59,7 @@ class Cookies extends Headers
     const COOKIE_STRING_CONCAT_STRICT = 3;
 
     /**
-     * @var \Zend\Http\Cookies
+     * @var array
      */
     protected $cookies = array();
 

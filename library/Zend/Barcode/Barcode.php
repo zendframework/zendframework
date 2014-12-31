@@ -146,7 +146,7 @@ abstract class Barcode
      * @param mixed $barcode        String name of barcode class, or Traversable object, or barcode object.
      * @param mixed $barcodeConfig  OPTIONAL; an array or Traversable object with barcode parameters.
      * @throws Exception\InvalidArgumentException
-     * @return Object
+     * @return Object\ObjectInterface
      */
     public static function makeBarcode($barcode, $barcodeConfig = array())
     {

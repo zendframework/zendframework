@@ -151,41 +151,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * Get Connection String
-     *
-     * @return string
-     */
-    public function getConnectionString()
-    {
-        // localize
-        $p = $this->connectionParameters;
-
-        // given a list of key names, test for existence in $p
-        $findParameterValue = function (array $names) use ($p) {
-            foreach ($names as $name) {
-                if (isset($p[$name])) {
-                    return $p[$name];
-                }
-            }
-            return null;
-        };
-
-        $connection             = array();
-        $connection['host']     = $findParameterValue(array('hostname', 'host'));
-        $connection['user']     = $findParameterValue(array('username', 'user'));
-        $connection['password'] = $findParameterValue(array('password', 'passwd', 'pw'));
-        $connection['dbname']   = $findParameterValue(array('database', 'dbname', 'db', 'schema'));
-        $connection['port']     = (isset($p['port'])) ? (int) $p['port'] : null;
-        $connection['socket']   = (isset($p['socket'])) ? $p['socket'] : null;
-
-        $connection = array_filter($connection); // remove nulls
-        $connection = http_build_query($connection, null, ' '); // @link http://php.net/pg_connect
-        $connection = urldecode($connection); // @link http://php.net/manual/en/function.urldecode.php
-
-        return $connection;
-    }
-
-    /**
      * Connect to the database
      *
      * @return Connection
@@ -326,5 +291,40 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
         $result = pg_query($this->resource, 'SELECT CURRVAL(\'' . str_replace('\'', '\\\'', $name) . '\') as "currval"');
         return pg_fetch_result($result, 0, 'currval');
+    }
+
+    /**
+     * Get Connection String
+     *
+     * @return string
+     */
+    private function getConnectionString()
+    {
+        // localize
+        $p = $this->connectionParameters;
+
+        // given a list of key names, test for existence in $p
+        $findParameterValue = function (array $names) use ($p) {
+            foreach ($names as $name) {
+                if (isset($p[$name])) {
+                    return $p[$name];
+                }
+            }
+            return null;
+        };
+
+        $connection             = array();
+        $connection['host']     = $findParameterValue(array('hostname', 'host'));
+        $connection['user']     = $findParameterValue(array('username', 'user'));
+        $connection['password'] = $findParameterValue(array('password', 'passwd', 'pw'));
+        $connection['dbname']   = $findParameterValue(array('database', 'dbname', 'db', 'schema'));
+        $connection['port']     = (isset($p['port'])) ? (int) $p['port'] : null;
+        $connection['socket']   = (isset($p['socket'])) ? $p['socket'] : null;
+
+        $connection = array_filter($connection); // remove nulls
+        $connection = http_build_query($connection, null, ' '); // @link http://php.net/pg_connect
+        $connection = urldecode($connection); // @link http://php.net/manual/en/function.urldecode.php
+
+        return $connection;
     }
 }

@@ -18,6 +18,12 @@ use Zend\EventManager\EventManagerInterface;
  */
 class ModuleManager implements ModuleManagerInterface
 {
+    /**#@+
+     * Reference to Zend\Mvc\MvcEvent::EVENT_BOOTSTRAP
+     */
+    const EVENT_BOOTSTRAP = 'bootstrap';
+    /**#@-*/
+
     /**
      * @var array An array of Module classes of loaded modules
      */

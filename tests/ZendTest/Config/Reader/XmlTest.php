@@ -14,6 +14,8 @@ use Zend\Config\Reader\Xml;
 
 /**
  * @group      Zend_Config
+ *
+ * @covers \Zend\Config\Reader\Xml
  */
 class XmlTest extends AbstractReaderTestCase
 {
@@ -121,6 +123,28 @@ ECS;
         // Element value stored in special key '_'
         $this->assertArrayHasKey('_', $arrayXml['one'][1]);
         $this->assertEquals('bazbat', $arrayXml['one'][1]['_']);
+    }
+
+    /**
+     * @group 6761
+     * @group 6730
+     */
+    public function testReadRemovedFilesWillFailWithException()
+    {
+        $configReader = new Xml();
+
+        $asset        = $this->getTestAssetPath('attributes');
+        $tmpAssetPath = tempnam(sys_get_temp_dir(), 'attributesTestAsset');
+
+        copy($asset, $tmpAssetPath);
+
+        $configReader->fromFile($tmpAssetPath);
+
+        unlink($tmpAssetPath);
+
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+
+        $configReader->fromFile($tmpAssetPath);
     }
 
     /**

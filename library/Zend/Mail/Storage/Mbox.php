@@ -45,7 +45,8 @@ class Mbox extends AbstractStorage
 
     /**
      * end of Line for messages
-     * @var string
+     *
+     * @var string|null
      */
     protected $messageEOL;
 

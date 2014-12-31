@@ -57,10 +57,6 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetConnectionStringEncodeSpecialSymbol()
     {
-        if (! extension_loaded('pgsql')) {
-            $this->markTestSkipped('pgsql extension not loaded');
-        }
-
         $connectionParameters = array(
             'driver'    => 'pgsql',
             'host' => 'localhost',

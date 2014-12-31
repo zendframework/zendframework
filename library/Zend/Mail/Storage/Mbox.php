@@ -119,7 +119,7 @@ class Mbox extends AbstractStorage
                 'endPos' => $messagePos['end']
             );
 
-            if ($this->messageEOL) {
+            if (isset($this->messageEOL)) {
                 $messageClassParams['EOL'] = $this->messageEOL;
             }
 

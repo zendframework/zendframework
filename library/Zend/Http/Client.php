@@ -54,7 +54,7 @@ class Client implements Stdlib\DispatchableInterface
     protected $request;
 
     /**
-     * @var Client/Adapter
+     * @var Client\Adapter\AdapterInterface
      */
     protected $adapter;
 
@@ -1370,8 +1370,13 @@ class Client implements Stdlib\DispatchableInterface
             }
         }
         // HTTP connection
-        $this->lastRawRequest = $this->adapter->write($method,
-            $uri, $this->config['httpversion'], $headers, $body);
+        $this->lastRawRequest = $this->adapter->write(
+            $method,
+            $uri,
+            $this->config['httpversion'],
+            $headers,
+            $body
+        );
 
         return $this->adapter->read();
     }

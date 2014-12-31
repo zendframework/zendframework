@@ -9,6 +9,7 @@
 
 namespace ZendTest\Config\Reader;
 
+use ReflectionProperty;
 use XMLReader;
 use Zend\Config\Reader\Xml;
 
@@ -154,9 +155,6 @@ ECS;
     public function testCloseWhenCallFromFileReaderGetInvalid()
     {
         $configReader = new Xml();
-        $configReader->getReader()->open($this->getTestAssetPath('attributes'));
-        $configReader->getReader()->setParserProperty(XMLReader::VALIDATE, true);
-        $this->assertTrue($configReader->getReader()->isValid());
 
         $configReader->fromFile($this->getTestAssetPath('attributes'));
         $this->setExpectedException('PHPUnit_Framework_Error_Warning');
@@ -180,12 +178,33 @@ ECS;
 ECS;
 
         $configReader = new Xml();
-        $configReader->getReader()->xml($xml, null, LIBXML_XINCLUDE);
-        $configReader->getReader()->setParserProperty(XMLReader::VALIDATE, true);
-        $this->assertTrue($configReader->getReader()->isValid());
 
         $configReader->fromString($xml);
+
+        $xmlReader = $this->getInternalXmlReader($configReader);
+
         $this->setExpectedException('PHPUnit_Framework_Error_Warning');
-        $configReader->getReader()->setParserProperty(XMLReader::VALIDATE, true);
+
+        $xmlReader->setParserProperty(XMLReader::VALIDATE, true);
+    }
+
+    /**
+     * Reads the internal XML reader from a given Xml config reader
+     *
+     * @param Xml $xml
+     *
+     * @return XMLReader
+     */
+    private function getInternalXmlReader(Xml $xml)
+    {
+        $reflectionReader = new ReflectionProperty('Zend\Config\Reader\Xml', 'reader');
+
+        $reflectionReader->setAccessible(true);
+
+        $xmlReader = $reflectionReader->getValue($xml);
+
+        $this->assertInstanceOf('XMLReader', $xmlReader);
+
+        return $xmlReader;
     }
 }

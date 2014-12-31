@@ -160,6 +160,9 @@ class MboxTest extends \PHPUnit_Framework_TestCase
     }
 */
 
+    /**
+     * @group 6775
+     */
     public function testFetchMessageHeaderUnix()
     {
         $mail = new Storage\Mbox(array('filename' => $this->getUnixMboxFile(), 'messageEOL' => "\n"));
@@ -185,6 +188,9 @@ class MboxTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Fair river! in thy bright, clear flow', trim($content));
     }
 
+    /**
+     * @group 6775
+     */
     public function testFetchMessageBodyUnix()
     {
         $mail = new Storage\Mbox(array('filename' => $this->getUnixMboxFile(), 'messageEOL' => "\n"));

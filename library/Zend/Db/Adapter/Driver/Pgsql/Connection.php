@@ -45,13 +45,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     protected $inTransaction = false;
 
     /**
-     * Connection string
-     *
-     * @var string
-     */
-    protected $connectionString = '';
-
-    /**
      * Constructor
      *
      * @param resource|array|null $connectionInfo

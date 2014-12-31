@@ -76,7 +76,7 @@ ECS;
 
 ECS;
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
-        $arrayXml = $this->reader->fromString($xml);
+        $this->reader->fromString($xml);
     }
 
     public function testZF300_MultipleKeysOfTheSameName()

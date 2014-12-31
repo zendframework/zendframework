@@ -36,18 +36,18 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testResource()
     {
-        if (extension_loaded('pgsql')) {
-            try {
-                $resource = $this->connection->getResource();
-                // connected with empty string
-                $this->assertTrue(is_resource($resource));
-            } catch (AdapterException\RuntimeException $exc) {
-                // If it throws an exception it has failed to connect
-                $this->setExpectedException('Zend\Db\Adapter\Exception\RuntimeException');
-                throw $exc;
-            }
-        } else {
+        if (! extension_loaded('pgsql')) {
             $this->markTestSkipped('pgsql extension not loaded');
+        }
+
+        try {
+            $resource = $this->connection->getResource();
+            // connected with empty string
+            $this->assertTrue(is_resource($resource));
+        } catch (AdapterException\RuntimeException $exc) {
+            // If it throws an exception it has failed to connect
+            $this->setExpectedException('Zend\Db\Adapter\Exception\RuntimeException');
+            throw $exc;
         }
     }
 

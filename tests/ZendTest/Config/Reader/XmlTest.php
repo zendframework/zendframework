@@ -152,6 +152,8 @@ ECS;
         $xmlReader = $this->getInternalXmlReader($configReader);
 
         $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+
+        // following operation should fail because the internal reader is closed (and expected to be closed)
         $xmlReader->setParserProperty(XMLReader::VALIDATE, true);
     }
 
@@ -178,6 +180,8 @@ ECS;
         $xmlReader = $this->getInternalXmlReader($configReader);
 
         $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+
+        // following operation should fail because the internal reader is closed (and expected to be closed)
         $xmlReader->setParserProperty(XMLReader::VALIDATE, true);
     }
 

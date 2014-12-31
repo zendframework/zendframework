@@ -56,7 +56,7 @@ class File extends Part
 
         if (isset($params['EOL'])) {
             $this->headers = Headers::fromString($header, $params['EOL']);
-        }else {
+        } else {
             $this->headers = Headers::fromString($header);
         }
 

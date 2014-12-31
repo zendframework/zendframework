@@ -49,12 +49,6 @@ class MboxTest extends \PHPUnit_Framework_TestCase
         $this->_mboxFile = $this->_tmpdir . 'INBOX';
 
         copy($this->_mboxOriginalFile, $this->_mboxFile);
-
-        if (strpos($this->getName(), 'Unix')) {
-            $this->_mboxOriginalFileLinux = __DIR__ . '/../_files/test.mbox/INBOX.unix';
-            $this->_mboxFileUnix = $this->_tmpdir . 'INBOX.unix';
-            copy($this->_mboxOriginalFileLinux, $this->_mboxFileUnix);
-        }
     }
 
     public function tearDown()
@@ -168,7 +162,7 @@ class MboxTest extends \PHPUnit_Framework_TestCase
 
     public function testFetchMessageHeaderUnix()
     {
-        $mail = new Storage\Mbox(array('filename' => $this->_mboxFileUnix, 'messageEOL' => "\n"));
+        $mail = new Storage\Mbox(array('filename' => $this->getUnixMboxFile(), 'messageEOL' => "\n"));
 
         $subject = $mail->getMessage(1)->subject;
         $this->assertEquals('Simple Message', $subject);
@@ -193,7 +187,7 @@ class MboxTest extends \PHPUnit_Framework_TestCase
 
     public function testFetchMessageBodyUnix()
     {
-        $mail = new Storage\Mbox(array('filename' => $this->_mboxFileUnix, 'messageEOL' => "\n"));
+        $mail = new Storage\Mbox(array('filename' => $this->getUnixMboxFile(), 'messageEOL' => "\n"));
 
         $content = $mail->getMessage(3)->getContent();
         list($content, ) = explode("\n", $content, 2);
@@ -322,5 +316,17 @@ class MboxTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($mail->getMessage(1)->getContent(), '');
         $this->assertEquals($mail->getMessage(2)->subject, 'test2');
         $this->assertEquals($mail->getMessage(2)->getContent(), '');
+    }
+
+    /**
+     * @return string
+     */
+    private function getUnixMboxFile()
+    {
+        $this->_mboxFileUnix = $this->_tmpdir . 'INBOX.unix';
+
+        copy(__DIR__ . '/../_files/test.mbox/INBOX.unix', $this->_mboxFileUnix);
+
+        return $this->_mboxFileUnix;
     }
 }

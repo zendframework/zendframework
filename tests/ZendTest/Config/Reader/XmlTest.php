@@ -130,22 +130,13 @@ ECS;
      * @group 6761
      * @group 6730
      */
-    public function testReadRemovedFilesWillFailWithException()
+    public function testReadNonExistingFilesWillFailWithException()
     {
         $configReader = new Xml();
 
-        $asset        = $this->getTestAssetPath('attributes');
-        $tmpAssetPath = tempnam(sys_get_temp_dir(), 'attributesTestAsset');
-
-        copy($asset, $tmpAssetPath);
-
-        $configReader->fromFile($tmpAssetPath);
-
-        unlink($tmpAssetPath);
-
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
 
-        $configReader->fromFile($tmpAssetPath);
+        $configReader->fromFile(sys_get_temp_dir() . '/path/that/does/not/exist');
     }
 
     /**

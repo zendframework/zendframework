@@ -22,6 +22,16 @@ use ArrayObject;
  */
 class InjectTemplateListenerFactoryTest extends TestCase
 {
+    /**
+     * @var ServiceManager
+     */
+    private $services;
+
+    /**
+     * @var InjectTemplateListenerFactory
+     */
+    private $factory;
+
     public function setUp()
     {
         $this->services = new ServiceManager();

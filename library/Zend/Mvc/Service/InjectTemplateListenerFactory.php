@@ -9,9 +9,8 @@
 
 namespace Zend\Mvc\Service;
 
-use ArrayAccess;
-use Zend\ServiceManager\FactoryInterface;
 use Zend\Mvc\View\Http\InjectTemplateListener;
+use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class InjectTemplateListenerFactory implements FactoryInterface

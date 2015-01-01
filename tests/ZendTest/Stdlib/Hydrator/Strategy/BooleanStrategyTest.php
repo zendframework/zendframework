@@ -13,13 +13,9 @@ use Zend\Stdlib\Hydrator\Strategy\BooleanStrategy;
 
 class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
 {
-
-    /**
-     * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::__construct
-     */
-    public function testNoExceptionOnValidInteger()
+    public function testConstructorWithValidInteger()
     {
-        $hydrator = new BooleanStrategy(1, 0);
+        $this->assertInstanceOf('Zend\Stdlib\Hydrator\Strategy\BooleanStrategy', new BooleanStrategy(1, 0));
     }
 
     /**

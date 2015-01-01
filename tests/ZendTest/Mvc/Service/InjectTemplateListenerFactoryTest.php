@@ -33,34 +33,32 @@ class InjectTemplateListenerFactoryTest extends TestCase
 
     public function testFactoryCanCreateInjectTemplateListener()
     {
-        $listener = $this->factory->createService($this->buildServiceLocatorWithConfig(array()));
-
-        $this->assertInstanceOf('Zend\Mvc\View\Http\InjectTemplateListener', $listener);
+        $this->buildInjectTemplateListenerWithConfig(array());
     }
 
     public function testFactoryCanSetControllerMap()
     {
-        $listener = $this->factory->createService($this->buildServiceLocatorWithConfig(array(
+        $listener = $this->buildInjectTemplateListenerWithConfig(array(
             'view_manager' => array(
                 'controller_map' => array(
                     'SomeModule' => 'some/module',
                 ),
             ),
-        )));
+        ));
 
         $this->assertEquals('some/module', $listener->mapController("SomeModule"));
     }
 
     public function testFactoryCanSetControllerMapViaArrayAccessVM()
     {
-        $listener = $this->factory->createService($this->buildServiceLocatorWithConfig(array(
+        $listener = $this->buildInjectTemplateListenerWithConfig(array(
             'view_manager' => new ArrayObject(array(
                 'controller_map' => array(
                     // must be an array due to type hinting on setControllerMap()
                     'SomeModule' => 'some/module',
                 ),
             ))
-        )));
+        ));
 
         $this->assertEquals('some/module', $listener->mapController("SomeModule"));
     }
@@ -70,12 +68,18 @@ class InjectTemplateListenerFactoryTest extends TestCase
      *
      * @return \PHPUnit_Framework_MockObject_MockObject|\Zend\ServiceManager\ServiceLocatorInterface
      */
-    private function buildServiceLocatorWithConfig($config)
+    private function buildInjectTemplateListenerWithConfig($config)
     {
+        /* @var $serviceLocator \Zend\ServiceManager\ServiceLocatorInterface|\PHPUnit_Framework_MockObject_MockObject */
         $serviceLocator = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');
 
         $serviceLocator->expects($this->any())->method('get')->with('Config')->will($this->returnValue($config));
 
-        return $serviceLocator;
+        $factory  = new InjectTemplateListenerFactory();
+        $listener = $factory->createService($serviceLocator);
+
+        $this->assertInstanceOf('Zend\Mvc\View\Http\InjectTemplateListener', $listener);
+
+        return $listener;
     }
 }

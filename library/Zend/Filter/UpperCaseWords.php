@@ -39,14 +39,14 @@ final class UpperCaseWords extends AbstractUnicode
      *
      * Returns the string $value, converting words to have an uppercase first character as necessary
      *
-     * If the value provided is non-scalar, the value will remain unfiltered
+     * If the value provided is not a string, the value will remain unfiltered
      *
      * @param  string|mixed $value
      * @return string|mixed
      */
     public function filter($value)
     {
-        if (!is_scalar($value)) {
+        if (! is_string($value)) {
             return $value;
         }
 

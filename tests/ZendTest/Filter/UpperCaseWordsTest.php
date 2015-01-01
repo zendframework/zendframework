@@ -182,6 +182,6 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnUnfiltered($input)
     {
-        $this->assertEquals($input, $this->_filter->filter($input));
+        $this->assertSame($input, $this->_filter->filter($input));
     }
 }

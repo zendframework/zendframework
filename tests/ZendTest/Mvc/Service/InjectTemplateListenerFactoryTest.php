@@ -21,16 +21,6 @@ use Zend\ServiceManager\ServiceManager;
  */
 class InjectTemplateListenerFactoryTest extends TestCase
 {
-    /**
-     * @var InjectTemplateListenerFactory
-     */
-    private $factory;
-
-    public function setUp()
-    {
-        $this->factory  = new InjectTemplateListenerFactory();
-    }
-
     public function testFactoryCanCreateInjectTemplateListener()
     {
         $this->buildInjectTemplateListenerWithConfig(array());
@@ -66,7 +56,7 @@ class InjectTemplateListenerFactoryTest extends TestCase
     /**
      * @param mixed $config
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Zend\ServiceManager\ServiceLocatorInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Zend\Mvc\View\Http\InjectTemplateListener
      */
     private function buildInjectTemplateListenerWithConfig($config)
     {

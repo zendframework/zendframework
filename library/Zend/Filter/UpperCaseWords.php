@@ -12,7 +12,7 @@ namespace Zend\Filter;
 final class UpperCaseWords extends AbstractUnicode
 {
     /**
-     * @var array
+     * {@inheritDoc}
      */
     protected $options = array(
         'encoding' => null

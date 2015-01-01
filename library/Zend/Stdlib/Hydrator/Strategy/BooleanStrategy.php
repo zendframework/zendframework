@@ -21,12 +21,12 @@ class BooleanStrategy implements StrategyInterface
     /**
      * @var int|string
      */
-    protected $trueValue;
+    private $trueValue;
 
     /**
      * @var int|string
      */
-    protected $falseValue;
+    private $falseValue;
 
     /**
      * @param int|string $trueValue
@@ -49,7 +49,7 @@ class BooleanStrategy implements StrategyInterface
             ));
         }
 
-        $this->trueValue = $trueValue;
+        $this->trueValue  = $trueValue;
         $this->falseValue = $falseValue;
     }
 
@@ -69,11 +69,7 @@ class BooleanStrategy implements StrategyInterface
             ));
         }
 
-        if ($value === true) {
-            return $this->trueValue;
-        }
-
-        return $this->falseValue;
+        return $value === true ? $this->trueValue : $this->falseValue;
     }
 
     /**
@@ -107,5 +103,4 @@ class BooleanStrategy implements StrategyInterface
             $this->falseValue
         ));
     }
-
 }

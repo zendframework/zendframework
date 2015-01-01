@@ -16,7 +16,7 @@ use Zend\Stdlib\Exception\InvalidArgumentException;
  *
  * @package Zend\Stdlib\Hydrator\Strategy
  */
-class BooleanStrategy implements StrategyInterface
+final class BooleanStrategy implements StrategyInterface
 {
     /**
      * @var int|string

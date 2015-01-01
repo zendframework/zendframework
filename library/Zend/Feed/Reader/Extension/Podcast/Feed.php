@@ -63,7 +63,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get the entry category
      *
-     * @return string
+     * @return array|null
      */
     public function getItunesCategories()
     {

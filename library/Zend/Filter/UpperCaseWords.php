@@ -26,10 +26,10 @@ class UpperCaseWords extends AbstractUnicode
     public function __construct($encodingOrOptions = null)
     {
         if ($encodingOrOptions !== null) {
-            if (!static::isOptions($encodingOrOptions)) {
-                $this->setEncoding($encodingOrOptions);
-            } else {
+            if (static::isOptions($encodingOrOptions)) {
                 $this->setOptions($encodingOrOptions);
+            } else {
+                $this->setEncoding($encodingOrOptions);
             }
         }
     }

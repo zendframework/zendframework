@@ -176,7 +176,7 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider returnUnfilteredDataProvider
      *
-     * @return void
+     * @param mixed $input
      */
     public function testReturnUnfiltered($input)
     {

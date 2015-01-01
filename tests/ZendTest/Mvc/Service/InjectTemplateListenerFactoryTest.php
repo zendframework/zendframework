@@ -41,7 +41,7 @@ class InjectTemplateListenerFactoryTest extends TestCase
     {
         $this->services->setService('Config', array());
 
-        $listener = $this->factory->createService($this->services);
+        $listener = $this->factory->createService($this->buildServiceLocatorWithConfig(array()));
         $this->assertInstanceOf('Zend\Mvc\View\Http\InjectTemplateListener', $listener);
     }
 
@@ -55,7 +55,13 @@ class InjectTemplateListenerFactoryTest extends TestCase
             ),
         ));
 
-        $listener = $this->factory->createService($this->services);
+        $listener = $this->factory->createService($this->buildServiceLocatorWithConfig(array(
+            'view_manager' => array(
+                'controller_map' => array(
+                    'SomeModule' => 'some/module',
+                ),
+            ),
+        )));
 
         $this->assertEquals('some/module', $listener->mapController("SomeModule"));
     }
@@ -71,10 +77,29 @@ class InjectTemplateListenerFactoryTest extends TestCase
             ))
         );
 
-        $this->services->setService('Config', $config);
-
-        $listener = $this->factory->createService($this->services);
+        $listener = $this->factory->createService($this->buildServiceLocatorWithConfig(array(
+            'view_manager' => new ArrayObject(array(
+                'controller_map' => array(
+                    // must be an array due to type hinting on setControllerMap()
+                    'SomeModule' => 'some/module',
+                ),
+            ))
+        )));
 
         $this->assertEquals('some/module', $listener->mapController("SomeModule"));
+    }
+
+    /**
+     * @param mixed $config
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Zend\ServiceManager\ServiceLocatorInterface
+     */
+    private function buildServiceLocatorWithConfig($config)
+    {
+        $serviceLocator = $this->getMock('Zend\ServiceManager\ServiceLocatorInterface');
+
+        $serviceLocator->expects($this->any())->method('get')->with('Config')->will($this->returnValue($config));
+
+        return $serviceLocator;
     }
 }

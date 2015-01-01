@@ -35,14 +35,14 @@ class UpperCaseWords extends AbstractUnicode
     }
 
     /**
-     * Defined by Zend\Filter\FilterInterface
+     * {@inheritDoc}
      *
      * Returns the string $value, converting words to have an uppercase first character as necessary
      *
      * If the value provided is non-scalar, the value will remain unfiltered
      *
-     * @param  string $value
-     * @return string mixed
+     * @param  string|mixed $value
+     * @return string|mixed
      */
     public function filter($value)
     {

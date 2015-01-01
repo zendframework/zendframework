@@ -17,9 +17,10 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class InjectTemplateListenerFactory implements FactoryInterface
 {
     /**
+     * {@inheritDoc}
+     *
      * Create and return an InjectTemplateListener instance.
      *
-     * @param  ServiceLocatorInterface $serviceLocator
      * @return InjectTemplateListener
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

@@ -21,7 +21,7 @@ class UpperCaseWords extends AbstractUnicode
     /**
      * Constructor
      *
-     * @param string|array|Traversable $encodingOrOptions OPTIONAL
+     * @param string|array|\Traversable $encodingOrOptions OPTIONAL
      */
     public function __construct($encodingOrOptions = null)
     {

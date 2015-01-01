@@ -14,6 +14,7 @@ use ZendTest\Console\TestAssets\ConsoleAdapter;
 
 /**
  * @group      Zend_Console
+ * @covers \Zend\Console\Prompt\Checkbox
  */
 class CheckboxTest extends \PHPUnit_Framework_TestCase
 {

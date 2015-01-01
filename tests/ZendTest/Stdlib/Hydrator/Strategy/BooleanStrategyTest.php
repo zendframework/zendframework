@@ -30,14 +30,22 @@ class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function testExceptionOnWrongTrueValueInConstructor()
     {
-        $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException', 'Expected int or string as $trueValue.');
-        $hydrator = new BooleanStrategy(true, 0);
+        $this->setExpectedException(
+            'Zend\Stdlib\Exception\InvalidArgumentException',
+            'Expected int or string as $trueValue.'
+        );
+
+        new BooleanStrategy(true, 0);
     }
 
     public function testExceptionOnWrongFalseValueInConstructor()
     {
-        $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException', 'Expected int or string as $falseValue.');
-        $hydrator = new BooleanStrategy(1, false);
+        $this->setExpectedException(
+            'Zend\Stdlib\Exception\InvalidArgumentException',
+            'Expected int or string as $falseValue.'
+        );
+
+        new BooleanStrategy(1, false);
     }
 
     public function testExtractString()
@@ -50,14 +58,17 @@ class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
     public function testExtractInteger()
     {
         $hydrator = new BooleanStrategy(1, 0);
+
         $this->assertEquals(1, $hydrator->extract(true));
         $this->assertEquals(0, $hydrator->extract(false));
     }
 
     public function testExtractThrowsExceptionOnWrongParameter()
     {
-        $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException', 'Unable to extract');
         $hydrator = new BooleanStrategy(1, 0);
+
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException', 'Unable to extract');
+
         $hydrator->extract(5);
     }
 

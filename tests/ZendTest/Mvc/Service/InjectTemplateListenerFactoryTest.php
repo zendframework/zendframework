@@ -15,6 +15,11 @@ use Zend\Mvc\View\Http\InjectTemplateListener;
 use Zend\Mvc\Service\InjectTemplateListenerFactory;
 use ArrayObject;
 
+/**
+ * Tests for {@see \Zend\Mvc\Service\InjectTemplateListenerFactory}
+ *
+ * @covers \Zend\Mvc\Service\InjectTemplateListenerFactory
+ */
 class InjectTemplateListenerFactoryTest extends TestCase
 {
     public function setUp()

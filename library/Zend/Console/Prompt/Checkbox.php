@@ -29,6 +29,12 @@ class Checkbox extends Char
     protected $options = array();
 
     /**
+     * Checked options
+     * @var array
+     */
+    protected $checkedOptions = array();
+
+    /**
      * Ask the user to select any number of pre-defined options
      *
      * @param string    $promptText     The prompt text to display in console
@@ -41,10 +47,6 @@ class Checkbox extends Char
     {
         if ($promptText !== null) {
             $this->setPromptText($promptText);
-        }
-
-        if (! count($options)) {
-            throw new Exception\BadMethodCallException('Cannot construct a "checkbox" prompt without any options');
         }
 
         $this->setOptions($options);
@@ -66,53 +68,77 @@ class Checkbox extends Char
     public function show()
     {
         $console = $this->getConsole();
-        $checked = array();
+        $this->checkedOptions = array();
         do {
-            // Show prompt text and available options
-            $console->writeLine($this->promptText);
-            foreach ($this->options as $k => $v) {
-                $console->writeLine('  ' . $k . ') ' . (in_array($v, $checked) ? '[X] ' : '[ ] ') . $v);
-            }
+            $this->showAvailableOptions();
 
             // Prepare mask
             $mask = implode("", array_keys($this->options));
             $mask .= "\r\n";
 
-            // Prepare other params for parent class
-            $this->setAllowedChars($mask);
-            $oldPrompt = $this->promptText;
-            $oldEcho = $this->echo;
-            $this->echo = false;
-            $this->promptText = null;
-
             // Retrieve a single character
-            $response = parent::show();
-
-            // Restore old params
-            $this->promptText = $oldPrompt;
-            $this->echo = $oldEcho;
+            $response = $this->readOption($mask);
 
             // Display selected option if echo is enabled
             if ($this->echo) {
-                if (isset($this->options[$response])) {
-                    $console->writeLine($this->options[$response]);
-                } else {
-                    $console->writeLine();
-                }
+                $this->showResponse();
             }
 
-            if ($response != "\r" && $response != "\n" && isset($this->options[$response])) {
-                $pos = array_search($this->options[$response], $checked);
-                if ($pos === false) {
-                    $checked[] = $this->options[$response];
-                } else {
-                    array_splice($checked, $pos, 1);
-                }
-            }
+            $this->checkOrUncheckOption($response);
         } while ($response != "\r" && $response != "\n");
 
-        $this->lastResponse = $checked;
-        return $checked;
+        $this->lastResponse = $this->checkedOptions;
+        return $this->checkedOptions;
+    }
+
+    private function showResponse($response)
+    {
+        $console = $this->getConsole();
+        if (isset($this->options[$response])) {
+            $console->writeLine($this->options[$response]);
+        } else {
+            $console->writeLine();
+        }
+    }
+
+    private function checkOrUncheckOption($response)
+    {
+        if ($response != "\r" && $response != "\n" && isset($this->options[$response])) {
+            $pos = array_search($this->options[$response], $this->checkedOptions);
+            if ($pos === false) {
+                $this->checkedOptions[] = $this->options[$response];
+            } else {
+                array_splice($this->checkedOptions, $pos, 1);
+            }
+        }
+    }
+
+    private function readOption($mask)
+    {
+        // Prepare other params for parent class
+        $this->setAllowedChars($mask);
+        $oldPrompt = $this->promptText;
+        $oldEcho = $this->echo;
+        $this->echo = false;
+        $this->promptText = null;
+
+        // Retrieve a single character
+        $response = parent::show();
+
+        // Restore old params
+        $this->promptText = $oldPrompt;
+        $this->echo = $oldEcho;
+
+        return $response;
+    }
+
+    private function showAvailableOptions()
+    {
+        $console = $this->getConsole();
+        $console->writeLine($this->promptText);
+        foreach ($this->options as $k => $v) {
+            $console->writeLine('  ' . $k . ') ' . (in_array($v, $this->checkedOptions) ? '[X] ' : '[ ] ') . $v);
+        }
     }
 
     /**
@@ -121,7 +147,7 @@ class Checkbox extends Char
      * @param array|\Traversable $options
      * @throws Exception\BadMethodCallException
      */
-    public function setOptions($options)
+    private function setOptions($options)
     {
         if (! is_array($options) && ! $options instanceof \Traversable) {
             throw new Exception\BadMethodCallException('Please specify an array or Traversable object as options');
@@ -133,6 +159,11 @@ class Checkbox extends Char
                 $this->options[$k] = $v;
             }
         } else {
+
+            if (empty($options)) {
+                throw new Exception\BadMethodCallException('Cannot construct a "checkbox" prompt without any options');
+            }
+
             $this->options = $options;
         }
     }
@@ -140,7 +171,7 @@ class Checkbox extends Char
     /**
      * @return array
      */
-    public function getOptions()
+    private function getOptions()
     {
         return $this->options;
     }

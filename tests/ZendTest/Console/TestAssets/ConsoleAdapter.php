@@ -33,7 +33,7 @@ class ConsoleAdapter extends AbstractAdapter
      */
     public function __construct($autoRewind = true)
     {
-        $this->autoRewind = $autoRewind;
+        $this->autoRewind = (bool) $autoRewind;
     }
 
     /**

@@ -11,7 +11,9 @@ namespace ZendTest\Filter;
 use Zend\Filter\UpperCaseWords as UpperCaseWordsFilter;
 
 /**
- * @group Zend_Filter
+ * Tests for {@see \Zend\Filter\UpperCaseWords}
+ *
+ * @covers \Zend\Filter\UpperCaseWords
  */
 class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
 {

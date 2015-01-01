@@ -11,6 +11,11 @@ namespace ZendTest\Stdlib\Hydrator\Strategy;
 
 use Zend\Stdlib\Hydrator\Strategy\BooleanStrategy;
 
+/**
+ * Tests for {@see \Zend\Stdlib\Hydrator\Strategy\BooleanStrategy}
+ *
+ * @covers \Zend\Stdlib\Hydrator\Strategy\BooleanStrategy
+ */
 class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructorWithValidInteger()

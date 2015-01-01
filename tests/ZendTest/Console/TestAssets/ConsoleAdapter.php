@@ -27,6 +27,16 @@ class ConsoleAdapter extends AbstractAdapter
     public $writtenData = array();
 
     /**
+     * Construct.
+     *
+     * @param bool $autoRewind If rewinds the stream before read the next char/line
+     */
+    public function __construct($autoRewind = true)
+    {
+        $this->autoRewind = $autoRewind;
+    }
+
+    /**
      * Read a single line from the console input
      *
      * @param int $maxLength        Maximum response length

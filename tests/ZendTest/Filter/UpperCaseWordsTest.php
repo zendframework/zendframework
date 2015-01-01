@@ -162,6 +162,7 @@ class UpperCaseWordsTest extends \PHPUnit_Framework_TestCase
         return array(
             array(null),
             array(new \stdClass()),
+            array(123),
             array(
                 array(
                     'Upper CASE and lowerCase Words WRITTEN',

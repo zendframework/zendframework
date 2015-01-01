@@ -9,7 +9,7 @@
 
 namespace Zend\Filter;
 
-class UpperCaseWords extends AbstractUnicode
+final class UpperCaseWords extends AbstractUnicode
 {
     /**
      * @var array

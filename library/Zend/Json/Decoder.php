@@ -265,8 +265,9 @@ class Decoder
                 throw new RuntimeException('Missing ":" in object encoding: ' . $this->source);
             }
 
-            $tok = $this->_getNextToken();
+            $this->_getNextToken();
             $members[$key] = $this->_decodeValue();
+            $tok = $this->token;
 
             if ($tok == self::RBRACE) {
                 break;

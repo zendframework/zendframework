@@ -25,8 +25,8 @@ class InjectTemplateListenerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $listener = new InjectTemplateListener();
+        $config   = $serviceLocator->get('Config');
 
-        $config = $serviceLocator->get('Config');
         if (isset($config['view_manager']['controller_map'])
             && (is_array($config['view_manager']['controller_map']))
         ) {

@@ -22,39 +22,24 @@ use Zend\ServiceManager\ServiceManager;
 class InjectTemplateListenerFactoryTest extends TestCase
 {
     /**
-     * @var ServiceManager
-     */
-    private $services;
-
-    /**
      * @var InjectTemplateListenerFactory
      */
     private $factory;
 
     public function setUp()
     {
-        $this->services = new ServiceManager();
         $this->factory  = new InjectTemplateListenerFactory();
     }
 
     public function testFactoryCanCreateInjectTemplateListener()
     {
-        $this->services->setService('Config', array());
-
         $listener = $this->factory->createService($this->buildServiceLocatorWithConfig(array()));
+
         $this->assertInstanceOf('Zend\Mvc\View\Http\InjectTemplateListener', $listener);
     }
 
     public function testFactoryCanSetControllerMap()
     {
-        $this->services->setService('Config', array(
-            'view_manager' => array(
-                'controller_map' => array(
-                    'SomeModule' => 'some/module',
-                ),
-            ),
-        ));
-
         $listener = $this->factory->createService($this->buildServiceLocatorWithConfig(array(
             'view_manager' => array(
                 'controller_map' => array(
@@ -68,15 +53,6 @@ class InjectTemplateListenerFactoryTest extends TestCase
 
     public function testFactoryCanSetControllerMapViaArrayAccessVM()
     {
-        $config = array(
-            'view_manager' => new ArrayObject(array(
-                'controller_map' => array(
-                    // must be an array due to type hinting on setControllerMap()
-                    'SomeModule' => 'some/module',
-                ),
-            ))
-        );
-
         $listener = $this->factory->createService($this->buildServiceLocatorWithConfig(array(
             'view_manager' => new ArrayObject(array(
                 'controller_map' => array(

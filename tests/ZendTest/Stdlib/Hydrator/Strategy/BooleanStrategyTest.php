@@ -63,7 +63,7 @@ class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $hydrator->extract(false));
     }
 
-    public function testExtractThrowsExceptionOnWrongParameter()
+    public function testExtractThrowsExceptionOnUnknownValue()
     {
         $hydrator = new BooleanStrategy(1, 0);
 

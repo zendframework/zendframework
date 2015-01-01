@@ -263,6 +263,7 @@ class Decoder
 
             $this->_getNextToken();
             $members[$key] = $this->_decodeValue();
+            $tok = $this->token;
 
             if ($tok == self::RBRACE) {
                 break;

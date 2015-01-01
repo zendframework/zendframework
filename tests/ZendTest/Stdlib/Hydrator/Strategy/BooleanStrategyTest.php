@@ -21,9 +21,9 @@ class BooleanStrategyTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Zend\Stdlib\Hydrator\Strategy\BooleanStrategy::__construct
      */
-    public function testNoExceptionOnValidStringValues()
+    public function testConstructorWithValidString()
     {
-        $hydrator = new BooleanStrategy('true', 'false');
+        $this->assertInstanceOf('Zend\Stdlib\Hydrator\Strategy\BooleanStrategy', new BooleanStrategy('true', 'false'));
     }
 
     /**

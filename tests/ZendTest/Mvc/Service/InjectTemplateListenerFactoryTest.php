@@ -9,11 +9,10 @@
 
 namespace ZendTest\Mvc\Service;
 
-use PHPUnit_Framework_TestCase as TestCase;
-use Zend\ServiceManager\ServiceManager;
-use Zend\Mvc\View\Http\InjectTemplateListener;
-use Zend\Mvc\Service\InjectTemplateListenerFactory;
 use ArrayObject;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Mvc\Service\InjectTemplateListenerFactory;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Tests for {@see \Zend\Mvc\Service\InjectTemplateListenerFactory}

@@ -12,7 +12,6 @@ namespace ZendTest\Mvc\Service;
 use ArrayObject;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Mvc\Service\InjectTemplateListenerFactory;
-use Zend\ServiceManager\ServiceManager;
 
 /**
  * Tests for {@see \Zend\Mvc\Service\InjectTemplateListenerFactory}

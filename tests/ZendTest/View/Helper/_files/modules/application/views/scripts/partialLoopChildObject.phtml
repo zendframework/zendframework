@@ -1,4 +1,7 @@
-<?php if (empty($this->vars())): ?>
+<?php
+	$vars = $this->vars();
+	if (empty($vars)) :
+?>
 No object model passed
 <?php else:
 	$objKey = current($this->vars())->helper->getObjectKey();

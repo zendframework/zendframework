@@ -98,7 +98,8 @@ class PartialLoop extends Partial
     /**
      * Set object key in this loop and any child loop
      *
-     * @param string $key
+     * {@inheritDoc}
+     * @return PartialLoop
      */
     public function setObjectKey($key)
     {

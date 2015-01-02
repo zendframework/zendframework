@@ -11,35 +11,34 @@ namespace Zend\Console\Prompt;
 use Zend\Console\Exception;
 use Zend\Stdlib\ArrayUtils;
 
-class Checkbox extends AbstractPrompt
+final class Checkbox extends AbstractPrompt
 {
-
     /**
      * @var string
      */
-    protected $promptText = 'Please select an option (Enter to finish) ';
+    private $promptText = 'Please select an option (Enter to finish) ';
 
     /**
      * @var bool
      */
-    protected $ignoreCase = true;
+    private $ignoreCase = true;
 
     /**
      * @var array|Transversable
      */
-    protected $options = array();
+    private $options = array();
 
     /**
      * Checked options
      * @var array
      */
-    protected $checkedOptions = array();
+    private $checkedOptions = array();
 
     /**
      * If the response should be echoed to the console or not
      * @var bool
      */
-    protected $echo = false;
+    private $echo = false;
 
     /**
      * Ask the user to select any number of pre-defined options
@@ -50,13 +49,13 @@ class Checkbox extends AbstractPrompt
      */
     public function __construct($promptText = 'Please select one option (Enter to finish) ', $options = array(), $ignoreCase = true, $echo = false)
     {
-        $this->setPromptText($promptText);
+        $this->promptText = (string)$promptText;
 
         $this->setOptions($options);
 
-        $this->setEcho($echo);
+        $this->echo = (bool)$echo;
 
-        $this->setIgnoreCase($ignoreCase);
+        $this->ignoreCase = (bool)$ignoreCase;
     }
 
     /**
@@ -80,7 +79,6 @@ class Checkbox extends AbstractPrompt
             }
 
             $this->checkOrUncheckOption($response);
-
         } while ($response != "\r" && $response != "\n");
 
         $this->lastResponse = $this->checkedOptions;
@@ -168,61 +166,6 @@ class Checkbox extends AbstractPrompt
         foreach ($this->options as $k => $v) {
             $console->writeLine('  ' . $k . ') ' . (in_array($v, $this->checkedOptions) ? '[X] ' : '[ ] ') . $v);
         }
-    }
-
-    /**
-     * @return string
-     */
-    private function getPromptText()
-    {
-        return $this->promptText;
-    }
-
-    /**
-     * Sets the prompt text
-     * @param string $promptText
-     * @return \Zend\Console\Prompt\Checkbox
-     */
-    private function setPromptText($promptText)
-    {
-        $this->promptText = (string) $promptText;
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    private function getIgnoreCase()
-    {
-        return $this->ignoreCase;
-    }
-
-    /**
-     * @param bool $ignoreCase
-     * @return \Zend\Console\Prompt\Checkbox
-     */
-    private function setIgnoreCase($ignoreCase)
-    {
-        $this->ignoreCase = (bool) $ignoreCase;
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    private function getEcho()
-    {
-        return $this->echo;
-    }
-
-    /**
-     * @param bool $echo
-     * @return \Zend\Console\Prompt\Checkbox
-     */
-    private function setEcho($echo)
-    {
-        $this->echo = (bool)$echo;
-        return $this;
     }
 
     /**

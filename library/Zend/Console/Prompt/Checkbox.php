@@ -162,7 +162,7 @@ final class Checkbox extends AbstractPrompt
     private function showAvailableOptions()
     {
         $console = $this->getConsole();
-        $console->writeLine($this->getPromptText());
+        $console->writeLine($this->promptText);
         foreach ($this->options as $k => $v) {
             $console->writeLine('  ' . $k . ') ' . (in_array($v, $this->checkedOptions) ? '[X] ' : '[ ] ') . $v);
         }

@@ -1,0 +1,7 @@
+<?php if (empty($this->vars())): ?>
+No object model passed
+<?php else:
+	$objKey = current($this->vars())->helper->getObjectKey();
+    echo 'This is an iteration with objectKey: ' . $objKey;
+endif;
+

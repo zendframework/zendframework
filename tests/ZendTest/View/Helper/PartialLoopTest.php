@@ -317,6 +317,33 @@ class PartialLoopTest extends TestCase
             }
         }
     }
+
+    public function testNestedCallsShouldNotOverrideObjectKey()
+    {
+        $data = array();
+        for ($i = 0; $i < 3; $i++) {
+            $obj = new \stdClass();
+            $obj->helper = $this->helper;
+            $obj->objectKey = "foo" . $i;
+            $obj->message = "bar";
+            $obj->data = array(
+                $obj
+            );
+            $data[] = $obj;
+        }
+
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $this->helper->setView($view);
+
+        $this->helper->setObjectKey('obj');
+        $result = $this->helper->__invoke('partialLoopParentObject.phtml', $data);
+
+        foreach ($data as $item) {
+            $string = 'This is an iteration with objectKey: ' . $item->objectKey;
+            $this->assertContains($string, $result, $result);
+        }
+    }
 }
 
 class IteratorTest implements Iterator

@@ -43,19 +43,19 @@ final class Checkbox extends AbstractPrompt
     /**
      * Ask the user to select any number of pre-defined options
      *
-     * @param string                $promptText     The prompt text to display in console
-     * @param array|Transversable   $options        Allowed options
-     * @param bool                  $echo           True to display selected option?
+     * @param string              $promptText The prompt text to display in console
+     * @param array|Transversable $options    Allowed options
+     * @param bool                $echo       True to display selected option?
      */
     public function __construct($promptText = 'Please select one option (Enter to finish) ', $options = array(), $ignoreCase = true, $echo = false)
     {
-        $this->promptText = (string)$promptText;
+        $this->promptText = (string) $promptText;
 
         $this->setOptions($options);
 
-        $this->echo = (bool)$echo;
+        $this->echo = (bool) $echo;
 
-        $this->ignoreCase = (bool)$ignoreCase;
+        $this->ignoreCase = (bool) $ignoreCase;
     }
 
     /**
@@ -82,6 +82,7 @@ final class Checkbox extends AbstractPrompt
         } while ($response != "\r" && $response != "\n");
 
         $this->lastResponse = $this->checkedOptions;
+
         return $this->checkedOptions;
     }
 
@@ -140,7 +141,7 @@ final class Checkbox extends AbstractPrompt
     /**
      * Reads a char from console.
      *
-     * @param string $mask
+     * @param  string $mask
      * @return string
      */
     private function readOption($mask)
@@ -148,6 +149,7 @@ final class Checkbox extends AbstractPrompt
         /**
          * Read char from console
          */
+
         return $this->getConsole()->readChar($mask);
     }
 
@@ -166,7 +168,7 @@ final class Checkbox extends AbstractPrompt
     /**
      * Set allowed options
      *
-     * @param array|\Traversable $options
+     * @param  array|\Traversable                 $options
      * @throws Exception\InvalidArgumentException
      */
     private function setOptions($options)

@@ -16,17 +16,17 @@ final class Checkbox extends AbstractPrompt
     /**
      * @var string
      */
-    private $promptText = 'Please select an option (Enter to finish) ';
+    private $promptText;
 
     /**
      * @var bool
      */
-    private $ignoreCase = true;
+    private $ignoreCase;
 
     /**
      * @var array|Transversable
      */
-    private $options = array();
+    private $options;
 
     /**
      * Checked options
@@ -38,7 +38,7 @@ final class Checkbox extends AbstractPrompt
      * If the response should be echoed to the console or not
      * @var bool
      */
-    private $echo = false;
+    private $echo;
 
     /**
      * Ask the user to select any number of pre-defined options
@@ -123,19 +123,16 @@ final class Checkbox extends AbstractPrompt
      */
     private function prepareMask()
     {
-        $mask = implode("", array_keys($this->options));
-        $mask .= "\r\n";
+        $mask = implode("", array_keys($this->options)) . "\r\n";
 
         /**
          * Normalize the mask if case is irrelevant
          */
-        if ($this->ignoreCase) {
-            $mask = strtolower($mask); // lowercase all
-            $mask .= strtoupper($mask); // uppercase and append
-            $mask = str_split($mask); // convert to array
-            $mask = array_unique($mask); // remove duplicates
-            $mask = implode("", $mask); // convert back to string
+        if (!$this->ignoreCase) {
+            return $mask;
         }
+
+        $mask = implode("", array_unique(str_split(strtolower($mask) . strtoupper($mask))));
 
         return $mask;
     }
@@ -151,9 +148,7 @@ final class Checkbox extends AbstractPrompt
         /**
          * Read char from console
          */
-        $char = $this->getConsole()->readChar($mask);
-
-        return $char;
+        return $this->getConsole()->readChar($mask);
     }
 
     /**
@@ -185,11 +180,4 @@ final class Checkbox extends AbstractPrompt
         $this->options = $options;
     }
 
-    /**
-     * @return array
-     */
-    private function getOptions()
-    {
-        return $this->options;
-    }
 }

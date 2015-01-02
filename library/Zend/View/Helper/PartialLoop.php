@@ -27,6 +27,22 @@ class PartialLoop extends Partial
     protected $partialCounter = 0;
 
     /**
+     * The current nesting level
+     *
+     * @var int
+     */
+    protected $nestedLevel = 0;
+
+    /**
+     * Stack with object keys for each nested level
+     *
+     * @var array
+     */
+    protected $objectKeyStack = array(
+        0 => null,
+    );
+
+    /**
      * Renders a template fragment within a variable scope distinct from the
      * calling View object.
      *
@@ -58,8 +74,12 @@ class PartialLoop extends Partial
         $content = '';
 
         foreach ($values as $item) {
+            $this->nestObjectKey();
+
             $this->partialCounter++;
             $content .= parent::__invoke($name, $item);
+
+            $this->unnestObjectKey();
         }
 
         return $content;
@@ -73,5 +93,52 @@ class PartialLoop extends Partial
     public function getPartialCounter()
     {
         return $this->partialCounter;
+    }
+
+    /**
+     * Set object key in this loop and any child loop
+     *
+     * @param string $key
+     */
+    public function setObjectKey($key)
+    {
+        if (null === $key) {
+            unset($this->objectKeyStack[$this->nestedLevel]);
+            $this->objectKey = null;
+
+            return $this;
+        }
+
+        $this->objectKeyStack[$this->nestedLevel] = (string) $key;
+        $this->objectKey = (string) $key;
+
+        return $this;
+    }
+
+    /**
+     * Increment nestedLevel and default objectKey to parent's value
+     *
+     * @return self
+     */
+    protected function nestObjectKey()
+    {
+        $this->nestedLevel++;
+        $this->setObjectKey($this->getObjectKey());
+
+        return $this;
+    }
+
+    /**
+     * Decrement nestedLevel and restore objectKey to parent's value
+     *
+     * @return self
+     */
+    protected function unnestObjectKey()
+    {
+        $this->setObjectKey(null);
+        $this->nestedLevel--;
+        $this->objectKey = $this->objectKeyStack[$this->nestedLevel];
+
+        return $this;
     }
 }

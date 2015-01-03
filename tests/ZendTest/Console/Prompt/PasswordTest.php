@@ -37,8 +37,7 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
     {
         fwrite($this->adapter->stream, 'secret');
 
-        $char = new Password();
-        $char->setEcho(false);
+        $char = new Password('Password: ', false);
         $char->setConsole($this->adapter);
         ob_start();
         $response = $char->show();
@@ -51,8 +50,7 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
     {
         fwrite($this->adapter->stream, 'sh its a secret');
 
-        $char = new Password("What is the secret?");
-        $char->setEcho(false);
+        $char = new Password("What is the secret?", false);
         $char->setConsole($this->adapter);
         ob_start();
         $response = $char->show();

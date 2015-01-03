@@ -58,10 +58,10 @@ final class ExplodeStrategy implements StrategyInterface
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Split a string by delimiter
      *
-     * @param  string|null                        $value The original value.
-     * @return array                              Returns the value that should be hydrated.
      * @throws Exception\InvalidArgumentException
      */
     public function hydrate($value)
@@ -70,7 +70,7 @@ final class ExplodeStrategy implements StrategyInterface
             return array();
         }
 
-        if (!is_scalar($value)) {
+        if (!is_string($value)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects argument 1 to be string, %s provided instead',
                 __METHOD__,

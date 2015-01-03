@@ -109,6 +109,6 @@ final class ExplodeStrategy implements StrategyInterface
             ));
         }
 
-        return implode($this->valueDelimiter, $value);
+        return empty($value) ? null : implode($this->valueDelimiter, $value);
     }
 }

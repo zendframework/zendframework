@@ -17,6 +17,11 @@ class RestfulTestController extends AbstractRestfulController
     public $entity   = array();
 
     /**
+     * @var \Zend\Stdlib\ResponseInterface|null
+     */
+    public $headResponse;
+
+    /**
      * Create a new resource
      *
      * @param  mixed $data
@@ -82,6 +87,10 @@ class RestfulTestController extends AbstractRestfulController
     {
         if ($id) {
             $this->getResponse()->getHeaders()->addHeaderLine('X-ZF2-Id', $id);
+        }
+
+        if ($this->headResponse) {
+            return $this->headResponse;
         }
     }
 

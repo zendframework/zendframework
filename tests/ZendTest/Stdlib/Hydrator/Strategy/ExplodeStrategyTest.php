@@ -13,15 +13,6 @@ use Zend\Stdlib\Hydrator\Strategy\ExplodeStrategy;
 
 class ExplodeStrategyTest extends \PHPUnit_Framework_TestCase
 {
-    public function getExpectedData()
-    {
-        return array(
-            array('foo,bar,dev,null', ',', array('foo', 'bar', 'dev', 'null')),
-            array('foo;bar;dev;null', ';', array('foo', 'bar', 'dev', 'null')),
-            array('', ',', array('')),
-        );
-    }
-
     /**
      * @dataProvider getValidHydratedValues
      *

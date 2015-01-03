@@ -10,7 +10,6 @@
 namespace ZendTest\Console\Prompt;
 
 use Zend\Console\Prompt\Password;
-use ZendTest\Console\TestAssets\ConsoleAdapter;
 
 /**
  * Tests for {@see \Zend\Console\Prompt\Password}

@@ -13,7 +13,9 @@ use Zend\Console\Prompt\Password;
 use ZendTest\Console\TestAssets\ConsoleAdapter;
 
 /**
- * @group      Zend_Console
+ * Tests for {@see \Zend\Console\Prompt\Password}
+ *
+ * @covers \Zend\Console\Prompt\Password
  */
 class PasswordTest extends \PHPUnit_Framework_TestCase
 {

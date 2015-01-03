@@ -35,9 +35,12 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
     {
         $this->adapter->expects($this->at(0))->method('writeLine')->with('Password: ');
         $this->adapter->expects($this->at(1))->method('readChar')->will($this->returnValue('f'));
-        $this->adapter->expects($this->at(2))->method('readChar')->will($this->returnValue('o'));
+        $this->adapter->expects($this->at(2))->method('clearLine');
         $this->adapter->expects($this->at(3))->method('readChar')->will($this->returnValue('o'));
-        $this->adapter->expects($this->at(4))->method('readChar')->will($this->returnValue(PHP_EOL));
+        $this->adapter->expects($this->at(4))->method('clearLine');
+        $this->adapter->expects($this->at(5))->method('readChar')->will($this->returnValue('o'));
+        $this->adapter->expects($this->at(6))->method('clearLine');
+        $this->adapter->expects($this->at(7))->method('readChar')->will($this->returnValue(PHP_EOL));
 
         $char = new Password('Password: ', false);
 
@@ -50,14 +53,20 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
     {
         $this->adapter->expects($this->at(0))->method('writeLine')->with('New password? ');
         $this->adapter->expects($this->at(1))->method('readChar')->will($this->returnValue('b'));
-        $this->adapter->expects($this->at(2))->method('readChar')->will($this->returnValue('a'));
-        $this->adapter->expects($this->at(3))->method('readChar')->will($this->returnValue('r'));
-        $this->adapter->expects($this->at(4))->method('readChar')->will($this->returnValue(PHP_EOL));
-        $this->adapter->expects($this->at(5))->method('writeLine')->with('New password? ');
-        $this->adapter->expects($this->at(6))->method('readChar')->will($this->returnValue('b'));
-        $this->adapter->expects($this->at(7))->method('readChar')->will($this->returnValue('a'));
-        $this->adapter->expects($this->at(8))->method('readChar')->will($this->returnValue('z'));
-        $this->adapter->expects($this->at(9))->method('readChar')->will($this->returnValue(PHP_EOL));
+        $this->adapter->expects($this->at(2))->method('clearLine');
+        $this->adapter->expects($this->at(3))->method('readChar')->will($this->returnValue('a'));
+        $this->adapter->expects($this->at(4))->method('clearLine');
+        $this->adapter->expects($this->at(5))->method('readChar')->will($this->returnValue('r'));
+        $this->adapter->expects($this->at(6))->method('clearLine');
+        $this->adapter->expects($this->at(7))->method('readChar')->will($this->returnValue(PHP_EOL));
+        $this->adapter->expects($this->at(8))->method('writeLine')->with('New password? ');
+        $this->adapter->expects($this->at(9))->method('readChar')->will($this->returnValue('b'));
+        $this->adapter->expects($this->at(10))->method('clearLine');
+        $this->adapter->expects($this->at(11))->method('readChar')->will($this->returnValue('a'));
+        $this->adapter->expects($this->at(12))->method('clearLine');
+        $this->adapter->expects($this->at(13))->method('readChar')->will($this->returnValue('z'));
+        $this->adapter->expects($this->at(14))->method('clearLine');
+        $this->adapter->expects($this->at(15))->method('readChar')->will($this->returnValue(PHP_EOL));
 
         $char = new Password('New password? ', false);
 
@@ -81,6 +90,6 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
 
         $char->setConsole($this->adapter);
 
-        $char->show();
+        $this->assertSame('tab', $char->show());
     }
 }

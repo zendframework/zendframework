@@ -10,6 +10,7 @@
 namespace ZendTest\Stdlib\Hydrator\NamingStrategy;
 
 use Zend\Stdlib\Hydrator\NamingStrategy\CompositeNamingStrategy;
+use Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface;
 
 class CompositeNamingStrategyTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,6 +26,7 @@ class CompositeNamingStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function testUseDefaultNamingStrategy()
     {
+        /* @var $defaultNamingStrategy NamingStrategyInterface|\PHPUnit_Framework_MockObject_MockObject*/
         $defaultNamingStrategy = $this->getMock('Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface');
         $defaultNamingStrategy->expects($this->at(0))
             ->method('hydrate')

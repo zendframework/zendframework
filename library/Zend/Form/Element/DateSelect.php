@@ -65,6 +65,16 @@ class DateSelect extends MonthSelect
     }
 
     /**
+     * Get both the year and month elements
+     *
+     * @return array
+     */
+    public function getElements()
+    {
+        return array_merge(array($this->dayElement), parent::getElements());
+    }
+
+    /**
      * Set the day attributes
      *
      * @param  array $dayAttributes

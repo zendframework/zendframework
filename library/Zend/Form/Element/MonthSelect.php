@@ -143,6 +143,16 @@ class MonthSelect extends Element implements InputProviderInterface, ElementPrep
     }
 
     /**
+     * Get both the year and month elements
+     *
+     * @return array
+     */
+    public function getElements()
+    {
+        return array($this->monthElement, $this->yearElement);
+    }
+
+    /**
      * Set the month attributes
      *
      * @param  array $monthAttributes

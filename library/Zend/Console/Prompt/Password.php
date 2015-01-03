@@ -22,11 +22,6 @@ final class Password extends AbstractPrompt
     private $echo;
 
     /**
-     * @var string
-     */
-    private $password = '';
-
-    /**
      * Ask the user for a password
      *
      * @param string $promptText   The prompt text to display in console
@@ -51,6 +46,8 @@ final class Password extends AbstractPrompt
 
         $console->write($this->promptText);
 
+        $password = '';
+
         /**
          * Read characters from console
          */
@@ -65,9 +62,9 @@ final class Password extends AbstractPrompt
                 echo "*";
             }
 
-            $this->password .= $char;
+            $password .= $char;
         }
 
-        return $this->password;
+        return $password;
     }
 }

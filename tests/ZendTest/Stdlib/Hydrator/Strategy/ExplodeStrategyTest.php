@@ -23,11 +23,16 @@ class ExplodeStrategyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getExpectedData
+     * @dataProvider getValidHydratedValues
+     *
+     * @param string   $expected
+     * @param string   $delimiter
+     * @param string[] $extractValue
      */
     public function testExtract($expected, $delimiter, $extractValue)
     {
         $strategy = new ExplodeStrategy($delimiter);
+
         $this->assertEquals($expected, $strategy->extract($extractValue));
     }
 

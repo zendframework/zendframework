@@ -31,36 +31,34 @@ class ExplodeStrategyTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetExceptionWithInvalidArgumentOnHydration()
-    {
-        $strategy = new ExplodeStrategy();
-        $this->setExpectedException('Zend\Stdlib\Hydrator\Strategy\Exception\InvalidArgumentException');
-        $strategy->hydrate(array());
-    }
-
     public function testGetExceptionWithInvalidArgumentOnExtraction()
     {
         $strategy = new ExplodeStrategy();
+
         $this->setExpectedException('Zend\Stdlib\Hydrator\Strategy\Exception\InvalidArgumentException');
+
         $strategy->extract('');
     }
 
     public function testGetEmptyArrayWhenHydratingNullValue()
     {
         $strategy = new ExplodeStrategy();
+
         $this->assertSame(array(), $strategy->hydrate(null));
     }
 
     public function testGetExceptionWithEmptyDelimiter()
     {
         $this->setExpectedException('Zend\Stdlib\Hydrator\Strategy\Exception\InvalidArgumentException');
-        $strategy = new ExplodeStrategy('');
+
+        new ExplodeStrategy('');
     }
 
     public function testGetExceptionWithInvalidDelimiter()
     {
         $this->setExpectedException('Zend\Stdlib\Hydrator\Strategy\Exception\InvalidArgumentException');
-        $strategy = new ExplodeStrategy(array());
+
+        new ExplodeStrategy(array());
     }
 
     public function testHydrateWithExplodeLimit()

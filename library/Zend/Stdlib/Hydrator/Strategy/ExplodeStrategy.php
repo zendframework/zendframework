@@ -66,7 +66,7 @@ final class ExplodeStrategy implements StrategyInterface
      */
     public function hydrate($value)
     {
-        if ($value === null) {
+        if (null === $value) {
             return array();
         }
 

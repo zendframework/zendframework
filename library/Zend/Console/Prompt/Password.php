@@ -44,7 +44,7 @@ final class Password extends AbstractPrompt
     {
         $console = $this->getConsole();
 
-        $console->write($this->promptText);
+        $console->writeLine($this->promptText);
 
         $password = '';
 
@@ -54,15 +54,17 @@ final class Password extends AbstractPrompt
         while (true) {
             $char = $console->readChar();
 
+            $console->clearLine();
+
             if (PHP_EOL == $char) {
                 break;
             }
 
-            if ($this->echo) {
-                echo "*";
-            }
-
             $password .= $char;
+
+            if ($this->echo) {
+                $console->write(str_repeat('*', strlen($password)));
+            }
         }
 
         return $password;

@@ -106,4 +106,30 @@ class ExplodeStrategyTest extends \PHPUnit_Framework_TestCase
 
         $strategy->hydrate(new \stdClass());
     }
+
+    /**
+     * @dataProvider getValidHydratedValues
+     *
+     * @param mixed    $value
+     * @param string   $delimiter
+     * @param string[] $expected
+     */
+    public function testHydration($value, $delimiter, array $expected)
+    {
+        $strategy = new ExplodeStrategy($delimiter);
+
+        $this->assertSame($expected, $strategy->hydrate($value));
+    }
+
+    /**
+     * Data provider
+     *
+     * @return mixed[][]
+     */
+    public function getValidHydratedValues()
+    {
+        return array(
+            array('', ',', array('')),
+        );
+    }
 }

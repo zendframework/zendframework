@@ -153,6 +153,9 @@ class PartialLoop extends Partial
             return $values->toArray();
         }
 
-        throw new Exception\InvalidArgumentException('PartialLoop helper requires iterable data');
+        throw new Exception\InvalidArgumentException(sprintf(
+            'PartialLoop helper requires iterable data, %s given',
+            is_object($values) ? get_class($values) : gettype($values)
+        ));
     }
 }

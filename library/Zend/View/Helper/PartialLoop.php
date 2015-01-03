@@ -59,21 +59,11 @@ class PartialLoop extends Partial
             return $this;
         }
 
-        if (!is_array($values)) {
-            if ($values instanceof Traversable) {
-                $values = ArrayUtils::iteratorToArray($values, false);
-            } elseif (is_object($values) && method_exists($values, 'toArray')) {
-                $values = $values->toArray();
-            } else {
-                throw new Exception\InvalidArgumentException('PartialLoop helper requires iterable data');
-            }
-        }
-
         // reset the counter if it's called again
         $this->partialCounter = 0;
         $content = '';
 
-        foreach ($values as $item) {
+        foreach ($this->extractViewVariables($values) as $item) {
             $this->nestObjectKey();
 
             $this->partialCounter++;
@@ -142,5 +132,27 @@ class PartialLoop extends Partial
         $this->objectKey = $this->objectKeyStack[$this->nestingLevel];
 
         return $this;
+    }
+
+    /**
+     * @param mixed $values
+     *
+     * @return array Variables to populate in the view
+     */
+    private function extractViewVariables($values)
+    {
+        if ($values instanceof Traversable) {
+            return ArrayUtils::iteratorToArray($values, false);
+        }
+
+        if (is_array($values)) {
+            return $values;
+        }
+
+        if (is_object($values) && method_exists($values, 'toArray')) {
+            return $values->toArray();
+        }
+
+        throw new Exception\InvalidArgumentException('PartialLoop helper requires iterable data');
     }
 }

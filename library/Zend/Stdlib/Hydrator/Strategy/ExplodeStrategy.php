@@ -14,7 +14,7 @@ final class ExplodeStrategy implements StrategyInterface
     /**
      * @var string
      */
-    private $valueDelimiter = ',';
+    private $valueDelimiter;
 
     /**
      * @var int|null
@@ -24,14 +24,13 @@ final class ExplodeStrategy implements StrategyInterface
     /**
      * Constructor
      *
-     * @param string|null $delimiter    String that the values will be split upon
+     * @param string      $delimiter    String that the values will be split upon
      * @param string|null $explodeLimit Explode limit
      */
-    public function __construct($delimiter = null, $explodeLimit = null)
+    public function __construct($delimiter = ',', $explodeLimit = null)
     {
-        if ($delimiter !== null) {
-            $this->setValueDelimiter($delimiter);
-        }
+        $this->setValueDelimiter($delimiter);
+
         if ($explodeLimit !== null) {
             $this->explodeLimit = (int) $explodeLimit;
         }

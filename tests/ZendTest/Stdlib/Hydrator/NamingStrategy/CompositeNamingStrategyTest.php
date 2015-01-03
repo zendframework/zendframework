@@ -15,9 +15,9 @@ class CompositeNamingStrategyTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetSameNameWhenNoNamingStrategyExistsForTheName()
     {
-        $compositeNamingStrategy = new CompositeNamingStrategy([
-            'foo' => $this->getMock('Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface'),
-        ]);
+        $compositeNamingStrategy = new CompositeNamingStrategy(array(
+            'foo' => $this->getMock('Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface')
+        ));
 
         $this->assertEquals('bar', $compositeNamingStrategy->hydrate('bar'));
         $this->assertEquals('bar', $compositeNamingStrategy->extract('bar'));
@@ -36,7 +36,7 @@ class CompositeNamingStrategyTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue('foo'));
 
         $compositeNamingStrategy = new CompositeNamingStrategy(
-            ['bar' => $this->getMock('Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface')],
+            array('bar' => $this->getMock('Zend\Stdlib\Hydrator\NamingStrategy\NamingStrategyInterface')),
             $defaultNamingStrategy
         );
         $this->assertEquals('Foo', $compositeNamingStrategy->hydrate('foo'));
@@ -50,7 +50,7 @@ class CompositeNamingStrategyTest extends \PHPUnit_Framework_TestCase
             ->method('hydrate')
             ->with('foo')
             ->will($this->returnValue('FOO'));
-        $compositeNamingStrategy = new CompositeNamingStrategy(['foo' => $fooNamingStrategy]);
+        $compositeNamingStrategy = new CompositeNamingStrategy(array('foo' => $fooNamingStrategy));
         $this->assertEquals('FOO', $compositeNamingStrategy->hydrate('foo'));
     }
 
@@ -61,7 +61,7 @@ class CompositeNamingStrategyTest extends \PHPUnit_Framework_TestCase
             ->method('extract')
             ->with('FOO')
             ->will($this->returnValue('foo'));
-        $compositeNamingStrategy = new CompositeNamingStrategy(['FOO' => $fooNamingStrategy]);
+        $compositeNamingStrategy = new CompositeNamingStrategy(array('FOO' => $fooNamingStrategy));
         $this->assertEquals('foo', $compositeNamingStrategy->extract('FOO'));
     }
 }

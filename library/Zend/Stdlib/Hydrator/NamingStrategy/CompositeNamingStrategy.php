@@ -41,18 +41,6 @@ final class CompositeNamingStrategy implements NamingStrategyInterface
     }
 
     /**
-     * Adds the given naming strategy under the given name.
-     *
-     * @param  string                  $name     The name of the naming strategy to register.
-     * @param  NamingStrategyInterface $strategy The naming strategy to register.
-     * @return void
-     */
-    private function add($name, NamingStrategyInterface $strategy)
-    {
-        $this->namingStrategies[$name] = $strategy;
-    }
-
-    /**
      * Checks if the naming strategy with the given name exists.
      *
      * @param  string $name The name of the naming strategy to check for.

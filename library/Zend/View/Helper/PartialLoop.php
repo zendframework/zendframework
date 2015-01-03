@@ -120,7 +120,7 @@ class PartialLoop extends Partial
      *
      * @return self
      */
-    protected function nestObjectKey()
+    private function nestObjectKey()
     {
         $this->nestingLevel += 1;
 
@@ -134,7 +134,7 @@ class PartialLoop extends Partial
      *
      * @return self
      */
-    protected function unNestObjectKey()
+    private function unNestObjectKey()
     {
         $this->setObjectKey(null);
 

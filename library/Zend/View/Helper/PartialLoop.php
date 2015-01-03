@@ -31,14 +31,14 @@ class PartialLoop extends Partial
      *
      * @var int
      */
-    protected $nestingLevel = 0;
+    private $nestingLevel = 0;
 
     /**
      * Stack with object keys for each nested level
      *
-     * @var array
+     * @var array indexed by nesting level
      */
-    protected $objectKeyStack = array(
+    private $objectKeyStack = array(
         0 => null,
     );
 

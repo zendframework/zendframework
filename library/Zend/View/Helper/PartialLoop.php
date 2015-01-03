@@ -102,21 +102,19 @@ class PartialLoop extends Partial
      *
      * @param string|null $key
      *
-     * @return PartialLoop
+     * @return self
      */
     public function setObjectKey($key)
     {
         if (null === $key) {
             unset($this->objectKeyStack[$this->nestingLevel]);
-            $this->objectKey = null;
 
-            return $this;
+            return parent::setObjectKey($key);
         }
 
         $this->objectKeyStack[$this->nestingLevel] = (string) $key;
-        $this->objectKey = (string) $key;
 
-        return $this;
+        return parent::setObjectKey($key);
     }
 
     /**

@@ -130,6 +130,14 @@ class ExplodeStrategyTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('', ',', array('')),
+            array('foo', ',', array('foo')),
+            array('foo,bar', ',', array('foo', 'bar')),
+            array('foo.bar', '.', array('foo', 'bar')),
+            array('foo.bar', ',', array('foo,bar')),
+            array(123, ',', array('123')),
+            array(123, '2', array('1', '3')),
+            array(123.456, ',', array('123.456')),
+            array(123.456, '.', array('123', '456')),
         );
     }
 }

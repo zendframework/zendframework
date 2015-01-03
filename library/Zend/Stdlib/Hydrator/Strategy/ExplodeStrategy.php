@@ -70,7 +70,7 @@ final class ExplodeStrategy implements StrategyInterface
             return array();
         }
 
-        if (!is_string($value)) {
+        if (!(is_string($value) || is_numeric($value))) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects argument 1 to be string, %s provided instead',
                 __METHOD__,

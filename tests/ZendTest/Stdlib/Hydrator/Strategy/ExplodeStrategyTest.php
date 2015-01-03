@@ -11,6 +11,11 @@ namespace ZendTest\Stdlib\Hydrator\Strategy;
 
 use Zend\Stdlib\Hydrator\Strategy\ExplodeStrategy;
 
+/**
+ * Tests for {@see \Zend\Stdlib\Hydrator\Strategy\ExplodeStrategy}
+ *
+ * @covers \Zend\Stdlib\Hydrator\Strategy\ExplodeStrategy
+ */
 class ExplodeStrategyTest extends \PHPUnit_Framework_TestCase
 {
     /**

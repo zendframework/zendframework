@@ -93,4 +93,17 @@ class ExplodeStrategyTest extends \PHPUnit_Framework_TestCase
 
         $strategy->hydrate(array());
     }
+
+    public function testHydrateWithInvalidObjectType()
+    {
+        $strategy = new ExplodeStrategy();
+
+        $this->setExpectedException(
+            'Zend\Stdlib\Hydrator\Strategy\Exception\InvalidArgumentException',
+            'Zend\Stdlib\Hydrator\Strategy\ExplodeStrategy::hydrate expects argument 1 to be string,'
+            . ' stdClass provided instead'
+        );
+
+        $strategy->hydrate(new \stdClass());
+    }
 }

@@ -317,6 +317,56 @@ class PartialLoopTest extends TestCase
             }
         }
     }
+
+    /**
+     * @group 7093
+     */
+    public function testNestedCallsShouldNotOverrideObjectKey()
+    {
+        $data = array();
+        for ($i = 0; $i < 3; $i++) {
+            $obj = new \stdClass();
+            $obj->helper = $this->helper;
+            $obj->objectKey = "foo" . $i;
+            $obj->message = "bar";
+            $obj->data = array(
+                $obj
+            );
+            $data[] = $obj;
+        }
+
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $this->helper->setView($view);
+
+        $this->helper->setObjectKey('obj');
+        $result = $this->helper->__invoke('partialLoopParentObject.phtml', $data);
+
+        foreach ($data as $item) {
+            $string = 'This is an iteration with objectKey: ' . $item->objectKey;
+            $this->assertContains($string, $result, $result);
+        }
+    }
+
+    public function testPartialLoopWithInvalidValuesWillRaiseException()
+    {
+        $this->setExpectedException(
+            'Zend\View\Exception\InvalidArgumentException',
+            'PartialLoop helper requires iterable data, string given'
+        );
+
+        $this->helper->__invoke('partialLoopParentObject.phtml', 'foo');
+    }
+
+    public function testPartialLoopWithInvalidObjectValuesWillRaiseException()
+    {
+        $this->setExpectedException(
+            'Zend\View\Exception\InvalidArgumentException',
+            'PartialLoop helper requires iterable data, stdClass given'
+        );
+
+        $this->helper->__invoke('partialLoopParentObject.phtml', new \stdClass());
+    }
 }
 
 class IteratorTest implements Iterator

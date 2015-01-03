@@ -18,36 +18,33 @@ use ZendTest\Console\TestAssets\ConsoleAdapter;
 class PasswordTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ConsoleAdapter
+     * @var \Zend\Console\Adapter\AbstractAdapter|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $adapter;
 
     public function setUp()
     {
-        $this->adapter = new ConsoleAdapter();
-        $this->adapter->stream = fopen('php://memory', 'w+');
-    }
-
-    public function tearDown()
-    {
-        fclose($this->adapter->stream);
+        $this->adapter = $this->getMock('Zend\Console\Adapter\AbstractAdapter', array('write', 'readChar'));
     }
 
     public function testCanPromptPassword()
     {
-        fwrite($this->adapter->stream, 'secret');
+        $this->adapter->expects($this->at(0))->method('write')->with('Password: ');
+        $this->adapter->expects($this->at(1))->method('readChar')->will($this->returnValue('f'));
+        $this->adapter->expects($this->at(2))->method('readChar')->will($this->returnValue('o'));
+        $this->adapter->expects($this->at(3))->method('readChar')->will($this->returnValue('o'));
+        $this->adapter->expects($this->at(4))->method('readChar')->will($this->returnValue(PHP_EOL));
 
         $char = new Password('Password: ', false);
+
         $char->setConsole($this->adapter);
-        ob_start();
-        $response = $char->show();
-        $text = ob_get_clean();
-        $this->assertEquals($text, "Password : \n");
-        $this->assertEquals('secret', $response);
+
+        $this->assertEquals('foo', $char->show());
     }
 
     public function testCanPromptPasswordWithNewQuestion()
     {
+        $this->markTestIncomplete();
         fwrite($this->adapter->stream, 'sh its a secret');
 
         $char = new Password("What is the secret?", false);

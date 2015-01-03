@@ -66,11 +66,7 @@ final class ExplodeStrategy implements StrategyInterface
      */
     public function hydrate($value)
     {
-        if (null === $value) {
-            return array();
-        }
-
-        if (!(is_string($value) || is_numeric($value))) {
+        if (!(null === $value || is_string($value) || is_numeric($value))) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects argument 1 to be string, %s provided instead',
                 __METHOD__,

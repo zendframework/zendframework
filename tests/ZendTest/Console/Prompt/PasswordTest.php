@@ -25,12 +25,15 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->adapter = $this->getMock('Zend\Console\Adapter\AbstractAdapter', array('write', 'readChar'));
+        $this->adapter = $this->getMock(
+            'Zend\Console\Adapter\AbstractAdapter',
+            array('write', 'writeLine', 'readChar')
+        );
     }
 
     public function testCanPromptPassword()
     {
-        $this->adapter->expects($this->at(0))->method('write')->with('Password: ');
+        $this->adapter->expects($this->at(0))->method('writeLine')->with('Password: ');
         $this->adapter->expects($this->at(1))->method('readChar')->will($this->returnValue('f'));
         $this->adapter->expects($this->at(2))->method('readChar')->will($this->returnValue('o'));
         $this->adapter->expects($this->at(3))->method('readChar')->will($this->returnValue('o'));
@@ -45,12 +48,12 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
 
     public function testCanPromptPasswordRepeatedly()
     {
-        $this->adapter->expects($this->at(0))->method('write')->with('New password? ');
+        $this->adapter->expects($this->at(0))->method('writeLine')->with('New password? ');
         $this->adapter->expects($this->at(1))->method('readChar')->will($this->returnValue('b'));
         $this->adapter->expects($this->at(2))->method('readChar')->will($this->returnValue('a'));
         $this->adapter->expects($this->at(3))->method('readChar')->will($this->returnValue('r'));
         $this->adapter->expects($this->at(4))->method('readChar')->will($this->returnValue(PHP_EOL));
-        $this->adapter->expects($this->at(5))->method('write')->with('New password? ');
+        $this->adapter->expects($this->at(5))->method('writeLine')->with('New password? ');
         $this->adapter->expects($this->at(6))->method('readChar')->will($this->returnValue('b'));
         $this->adapter->expects($this->at(7))->method('readChar')->will($this->returnValue('a'));
         $this->adapter->expects($this->at(8))->method('readChar')->will($this->returnValue('z'));
@@ -67,18 +70,17 @@ class PasswordTest extends \PHPUnit_Framework_TestCase
     public function testProducesStarSymbolOnInput()
     {
         $this->adapter->expects($this->at(1))->method('readChar')->will($this->returnValue('t'));
-        $this->adapter->expects($this->at(2))->method('readChar')->will($this->returnValue('a'));
-        $this->adapter->expects($this->at(3))->method('readChar')->will($this->returnValue('b'));
-        $this->adapter->expects($this->at(4))->method('readChar')->will($this->returnValue(PHP_EOL));
+        $this->adapter->expects($this->at(2))->method('write')->with('*');
+        $this->adapter->expects($this->at(3))->method('readChar')->will($this->returnValue('a'));
+        $this->adapter->expects($this->at(4))->method('write')->with('**');
+        $this->adapter->expects($this->at(5))->method('readChar')->will($this->returnValue('b'));
+        $this->adapter->expects($this->at(6))->method('write')->with('***');
+        $this->adapter->expects($this->at(7))->method('readChar')->will($this->returnValue(PHP_EOL));
 
         $char = new Password('New password? ', true);
 
         $char->setConsole($this->adapter);
 
-        ob_start();
         $char->show();
-        $output = ob_get_clean();
-
-        $this->assertSame('***', $output);
     }
 }

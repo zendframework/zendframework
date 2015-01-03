@@ -14,12 +14,12 @@ final class Password extends AbstractPrompt
     /**
      * @var string
      */
-    private $promptText = 'Password: ';
+    private $promptText;
 
     /**
      * @var bool
      */
-    private $echo = true;
+    private $echo;
 
     /**
      * @var string
@@ -36,9 +36,8 @@ final class Password extends AbstractPrompt
         $promptText = 'Password: ',
         $echo = true
     ) {
-
-        $this->setPromptText($promptText);
-        $this->setEcho($echo);
+        $this->promptText = (string) $promptText;
+        $this->echo       = (bool) $echo;
     }
 
     /**
@@ -63,41 +62,10 @@ final class Password extends AbstractPrompt
             if ($this->echo) {
                 echo "*";
             }
+
             $this->password .= $char;
         }
 
         return $this->password;
-    }
-
-    /**
-     * @param string $promptText
-     */
-    public function setPromptText($promptText)
-    {
-        $this->promptText = (string) $promptText;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPromptText()
-    {
-        return $this->promptText;
-    }
-
-    /**
-     * @param bool $echo
-     */
-    public function setEcho($echo)
-    {
-        $this->echo = (bool) $echo;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getEcho()
-    {
-        return $this->echo;
     }
 }

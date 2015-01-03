@@ -184,6 +184,9 @@ class RestfulControllerTest extends TestCase
         $this->assertEquals('patch', $this->routeMatch->getParam('action'));
     }
 
+    /**
+     * @group 7086
+     */
     public function testOnDispatchHonorsStatusCodeWithHeadMethod()
     {
         $this->controller->headResponse = new Response();
